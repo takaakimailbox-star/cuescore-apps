@@ -173,15 +173,16 @@ h1 { font-size: 23px; margin: 0; letter-spacing: .3px; text-align:center; }
   font-size: 20px; padding: 14px 0 10px;
   border-bottom: 2px solid rgba(255,255,255,.7);
 }
-.logWrap { margin-top: 8px; }
+.logWrap { margin-top: 8px; display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; }
 .logHeader {
   display: grid; grid-template-columns: 58px 1fr 1fr;
   color: rgba(255,255,255,.8); font-size: 14px;
   text-align: center; margin-bottom: 4px;
 }
 .turnLog {
-  min-height: 170px; max-height: 230px; overflow-y: auto;
+  min-height: 220px; max-height: none; overflow-y: auto;
   border-bottom: 2px solid rgba(255,255,255,.7);
+  flex: 1 1 auto;
 }
 
 .rackDivider {
@@ -217,10 +218,16 @@ h1 { font-size: 23px; margin: 0; letter-spacing: .3px; text-align:center; }
 .sym.s { color: #dfffe7; }
 .sym.f { color: #ffd6d6; }
 .playArea { position: relative; }
-.balls { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 12px 0 18px; }
+.balls {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  width: min(100%, 430px);
+  margin: 10px auto 12px;
+}
 .ball {
   aspect-ratio: 1; border-radius: 50%; border: 2px solid rgba(0,0,0,.25);
-  color: #111; font-size: 31px; font-weight: 900; background: #eee;
+  color: #111; font-size: 28px; font-weight: 900; background: #eee;
   position: relative; overflow: hidden; padding: 0;
 }
 .ball::before { content:""; position:absolute; inset: 29% 10%; background: rgba(255,255,255,.96); border-radius: 999px; z-index: 0; }
@@ -256,7 +263,12 @@ h1 { font-size: 23px; margin: 0; letter-spacing: .3px; text-align:center; }
 
 
 /* v6 free version polish */
-.game { padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+.game {
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100dvh - 82px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+}
 .topbar { position: sticky; top: 0; z-index: 20; background: rgba(6,61,40,.96); backdrop-filter: blur(10px); }
 .summary {
   position: fixed; inset: 0; z-index: 100;
@@ -310,25 +322,30 @@ h1 { font-size: 23px; margin: 0; letter-spacing: .3px; text-align:center; }
 
 @media (max-width: 430px) {
   .app { max-width: 100%; padding-left: 10px; padding-right: 10px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+  .game { min-height: calc(100dvh - 74px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
   h1 { font-size: 19px; }
   .smallBtn { padding: 7px 10px; }
-  .playerPanel { padding: 8px 4px; }
-  .name { font-size: 19px; }
-  .score { font-size: 56px; margin: 7px 0; }
-  .stats { font-size: 13px; }
-  .status { font-size: 17px; padding: 9px 0 7px; }
-  .logHeader { grid-template-columns: 46px 1fr 1fr; font-size: 12px; }
-  .logRow { grid-template-columns: 46px 1fr 1fr; min-height: 32px; }
-  .turnLabel { font-size: 16px; }
-  .turnLog { min-height: 120px; max-height: 180px; }
-  .miniBall { width: 22px; height: 22px; font-size: 13px; }
-  .sym { font-size: 21px; }
-  .balls { gap: 9px; margin: 9px 0 12px; }
-  .ball { font-size: 29px; }
-  .actions { gap: 7px; grid-template-columns: .9fr .9fr 1.35fr .95fr; }
-  .action { min-height: 62px; border-radius: 15px; font-size: 19px; }
-  .action small { font-size: 10px; }
-  .switch { min-height: 72px; font-size: 22px; }
+  .scoreboard { gap: 6px; }
+  .playerPanel { padding: 7px 4px; border-radius: 7px; }
+  .name { font-size: 18px; }
+  .score { font-size: 52px; margin: 6px 0; }
+  .stats { font-size: 12px; }
+  .status { font-size: 16px; padding: 8px 0 6px; }
+  .logWrap { margin-top: 6px; }
+  .logHeader { grid-template-columns: 44px 1fr 1fr; font-size: 11px; margin-bottom: 2px; }
+  .logRow { grid-template-columns: 44px 1fr 1fr; min-height: 30px; }
+  .turnLabel { font-size: 15px; }
+  .turnLog { min-height: 300px; }
+  .miniBall { width: 21px; height: 21px; font-size: 12px; }
+  .miniBall::before { inset: 5px 3px; }
+  .miniBall.solid::before { inset: 4px; }
+  .sym { font-size: 20px; }
+  .balls { width: min(92vw, 360px); gap: 7px; margin: 7px auto 7px; }
+  .ball { font-size: 24px; border-width: 1px; }
+  .actions { gap: 6px; grid-template-columns: .92fr .92fr 1.35fr .95fr; }
+  .action { min-height: 56px; border-radius: 14px; font-size: 17px; }
+  .action small { font-size: 9px; }
+  .switch { min-height: 62px; font-size: 20px; }
   .setup { padding-top: 6px; }
   .setup h2 { font-size: 25px; margin-bottom: 16px; }
   .playerSetup { margin: 14px 0 28px; }
@@ -344,12 +361,31 @@ h1 { font-size: 23px; margin: 0; letter-spacing: .3px; text-align:center; }
 }
 
 @media (max-height: 760px) {
-  .turnLog { max-height: 145px; min-height: 105px; }
-  .score { font-size: 52px; margin: 6px 0; }
-  .status { padding: 7px 0 6px; }
-  .balls { gap: 8px; margin: 8px 0 10px; }
-  .action { min-height: 58px; }
-  .switch { min-height: 68px; }
+  .game { min-height: calc(100dvh - 70px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
+  .score { font-size: 48px; margin: 5px 0; }
+  .stats { font-size: 11px; }
+  .status { padding: 6px 0 5px; font-size: 15px; }
+  .turnLog { min-height: 270px; }
+  .balls { width: min(90vw, 345px); gap: 6px; margin: 6px auto 6px; }
+  .ball { font-size: 23px; }
+  .action { min-height: 54px; }
+  .switch { min-height: 60px; }
+}
+
+  
+/* v6.5 label polish */
+.action { white-space: nowrap; }
+.actionMain { line-height: 1.15; }
+@media (max-width: 430px) {
+  .actions { grid-template-columns: 1fr 1fr 1.55fr .9fr; }
+  .action { font-size: 15px; padding: 4px 3px; }
+  .switch { font-size: 15px; }
+}
+
+/* v6.6: Start game icon removed */
+.startBtn {
+  display: block !important;
+  text-align: center;
 }
 
   </style>
@@ -397,19 +433,9 @@ h1 { font-size: 23px; margin: 0; letter-spacing: .3px; text-align:center; }
         </div>
       </section>
 
-      <button id="startBtn" class="startBtn"><span class="rackIcon" aria-hidden="true">
-          <span class="rackDot" style="grid-column:3;grid-row:1;background:#f5d54a"><span>1</span></span>
-          <span class="rackDot" style="grid-column:2;grid-row:2;background:#2b62d9"><span>2</span></span>
-          <span class="rackDot" style="grid-column:4;grid-row:2;background:#c7322d"><span>3</span></span>
-          <span class="rackDot" style="grid-column:1;grid-row:3;background:#d67ab1"><span>4</span></span>
-          <span class="rackDot" style="grid-column:3;grid-row:3;background:#f5d54a"><span>9</span></span>
-          <span class="rackDot" style="grid-column:5;grid-row:3;background:#f08b2f"><span>5</span></span>
-          <span class="rackDot" style="grid-column:2;grid-row:4;background:#3a9b4b"><span>6</span></span>
-          <span class="rackDot" style="grid-column:4;grid-row:4;background:#8a4b20"><span>7</span></span>
-          <span class="rackDot" style="grid-column:3;grid-row:5;background:#111;color:#fff"><span>8</span></span>
-        </span><span>Start game!</span></button>
+      <button id="startBtn" class="startBtn">Start game!</button>
       <div class="setupNote">Score はそれぞれの持ち点です</div>
-      <div class="versionText">Free version 6.2</div>
+      <div class="versionText">Free version 6.6</div>
     </section>
 
     <section id="game" class="game hidden">
@@ -452,10 +478,10 @@ h1 { font-size: 23px; margin: 0; letter-spacing: .3px; text-align:center; }
       </section>
 
       <section class="actions">
-        <button id="safetyBtn" class="action safety"><span class="actionMain">S</span><small>セーフティ</small></button>
-        <button id="foulBtn" class="action foul"><span class="actionMain">F</span><small>ファウル</small></button>
-        <button id="switchBtn" class="action switch"><span class="actionMain">Switch</span><small>交代</small></button>
-        <button id="undoBtn" class="action undo"><span class="actionMain">Undo</span><small>戻す</small></button>
+        <button id="safetyBtn" class="action safety"><span class="actionMain">セーフティ</span></button>
+        <button id="foulBtn" class="action foul"><span class="actionMain">ファール</span></button>
+        <button id="switchBtn" class="action switch"><span class="actionMain">プレーヤー交代</span></button>
+        <button id="undoBtn" class="action undo"><span class="actionMain">戻す</span></button>
       </section>
 
       <section id="summary" class="summary hidden"></section>
@@ -547,7 +573,8 @@ function ballHtml(n) {
 
 function symbolHtml(s) {
   const cls = s === "S" ? "s" : "f";
-  return `<span class="event sym ${cls}">${s}</span>`;
+  const label = s === "S" ? "s" : s;
+  return `<span class="event sym ${cls}">${label}</span>`;
 }
 
 function renderLog() {
