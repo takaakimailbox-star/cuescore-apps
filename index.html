@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Rotation Scoreboard</title>
+  <style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  background: #063d28;
+  color: #fff;
+}
+.app {
+  max-width: 520px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: env(safe-area-inset-top) 12px 18px;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0 12px;
+}
+h1 { font-size: 23px; margin: 0; letter-spacing: .3px; text-align:center; }
+.smallBtn {
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+.hidden { display: none !important; }
+.setup {
+  background: transparent;
+  border-radius: 0;
+  padding: 14px 4px 6px;
+  margin-top: 10px;
+}
+.setup h2 {
+  margin: 6px 0 22px;
+  font-size: 28px;
+  text-align: center;
+}
+.playerSetup {
+  margin: 18px 0 36px;
+}
+.playerSetup h3 {
+  margin: 0 0 16px;
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 900;
+}
+.setupRow {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  align-items: center;
+  gap: 12px;
+  margin: 13px 0;
+}
+.setupRow label {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+}
+.setup input {
+  width: 100%; font-size: 22px; border-radius: 9px;
+  border: 2px solid rgba(255,255,255,.72);
+  background: rgba(255,255,255,.16); color: #fff;
+  padding: 10px 12px; margin: 0;
+}
+.setup input::placeholder { color: rgba(255,255,255,.62); }
+.startBtn {
+  width: min(92%, 390px); display: block; margin: 26px auto 0; padding: 20px 16px;
+  border: 3px solid rgba(255,255,255,.9); border-radius: 16px;
+  color: #fff; background: rgba(20,128,74,.75);
+  font-size: 27px; font-weight: 900;
+}
+.setupNote {
+  text-align: center;
+  margin-top: 14px;
+  opacity: .78;
+  font-size: 13px;
+}
+
+.firstPlayerBox {
+  margin: 18px auto 10px;
+  width: min(94%, 410px);
+}
+.firstPlayerTitle {
+  font-size: 21px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.firstPlayerButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.firstPlayerBtn {
+  border: 2px solid rgba(255,255,255,.35);
+  border-radius: 16px;
+  background: rgba(255,255,255,.14);
+  color: #fff;
+  padding: 14px 8px;
+  font-size: 19px;
+  font-weight: 900;
+}
+.firstPlayerBtn.selected {
+  border-color: #ffd54a;
+  box-shadow: 0 0 14px rgba(255,213,74,.28);
+  background: rgba(255,213,74,.16);
+}
+.startBtn {
+  display: grid !important;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+}
+.rackIcon {
+  width: 76px;
+  height: 86px;
+  display: grid;
+  grid-template-columns: repeat(5, 15px);
+  grid-template-rows: repeat(5, 15px);
+  gap: 1px;
+  align-items: center;
+  justify-content: center;
+}
+.rackDot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+  font-weight: 900;
+  color: #111;
+  border: 1px solid rgba(0,0,0,.28);
+  position: relative;
+  overflow: hidden;
+}
+.rackDot::before { content:""; position:absolute; inset: 3px; border-radius: 50%; background: rgba(255,255,255,.88); }
+.rackDot span { position: relative; z-index: 1; }
+.action { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
+.actionIcon {
+  width: 34px;
+  height: 34px;
+  display: block;
+  margin-bottom: 1px;
+  color: rgba(255,255,255,.95);
+}
+.actionMain { line-height: 1; }
+.switch .actionIcon { width: 40px; height: 40px; }
+.undo .actionIcon { width: 46px; height: 46px; }
+
+.scoreboard { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.playerPanel {
+  background: rgba(255,255,255,.15); border-radius: 8px;
+  padding: 12px 6px; text-align: center; border: 3px solid transparent;
+}
+.playerPanel.active { border-color: #ffd54a; box-shadow: 0 0 14px rgba(255,213,74,.35); }
+.name { font-size: 25px; opacity: .95; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.score { font-size: 76px; font-weight: 800; line-height: 1; margin: 12px 0; }
+.stats { font-size: 18px; opacity: .9; }
+.status {
+  display: grid; grid-template-columns: repeat(3, 1fr); text-align: center;
+  font-size: 20px; padding: 14px 0 10px;
+  border-bottom: 2px solid rgba(255,255,255,.7);
+}
+.logWrap { margin-top: 8px; }
+.logHeader {
+  display: grid; grid-template-columns: 58px 1fr 1fr;
+  color: rgba(255,255,255,.8); font-size: 14px;
+  text-align: center; margin-bottom: 4px;
+}
+.turnLog {
+  min-height: 170px; max-height: 230px; overflow-y: auto;
+  border-bottom: 2px solid rgba(255,255,255,.7);
+}
+
+.rackDivider {
+  margin: 6px 0 2px;
+  padding: 4px 10px;
+  background: rgba(255,213,74,.18);
+  border-left: 4px solid #ffd54a;
+  color: #fff7c7;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: .3px;
+}
+.logRow {
+  display: grid; grid-template-columns: 58px 1fr 1fr;
+  align-items: center; min-height: 38px;
+  border-top: 1px solid rgba(255,255,255,.35); font-size: 18px;
+}
+.logRow.activeRow { background: rgba(255,255,255,.08); }
+.turnLabel { text-align: center; opacity: .9; font-size: 18px; }
+.logCell { min-height: 36px; display: flex; align-items: center; flex-wrap: wrap; gap: 3px; padding: 3px 5px; }
+.logCell.p1 { justify-content: flex-start; }
+.logCell.p2 { justify-content: flex-start; }
+.event { display: inline-flex; align-items: center; justify-content: center; }
+.miniBall {
+  width: 25px; height: 25px; border-radius: 50%; position: relative;
+  color: #111; font-size: 15px; font-weight: 900; overflow: hidden;
+  border: 1px solid rgba(0,0,0,.22);
+}
+.miniBall::before { content:""; position:absolute; inset: 6px 3px; background: rgba(255,255,255,.95); border-radius: 999px; z-index:0; }
+.miniBall.solid::before { inset: 4px; }
+.miniBall span { position: relative; z-index: 1; }
+.sym { font-weight: 900; font-size: 23px; padding: 0 4px; }
+.sym.s { color: #dfffe7; }
+.sym.f { color: #ffd6d6; }
+.playArea { position: relative; }
+.balls { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 12px 0 18px; }
+.ball {
+  aspect-ratio: 1; border-radius: 50%; border: 2px solid rgba(0,0,0,.25);
+  color: #111; font-size: 31px; font-weight: 900; background: #eee;
+  position: relative; overflow: hidden; padding: 0;
+}
+.ball::before { content:""; position:absolute; inset: 29% 10%; background: rgba(255,255,255,.96); border-radius: 999px; z-index: 0; }
+.ball.solid::before { inset: 22%; }
+.ball span { position: relative; z-index: 1; }
+.ball.eight span, .miniBall.eight span { color: #111; }
+.ball.used { opacity: .18; }
+.ball:disabled { cursor: not-allowed; }
+.balls.rackEnded .ball { opacity: .16; }
+.balls.locked .ball:not(.used) { opacity: .38; }
+.nextRackBox {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: min(92%, 390px); background: rgba(0,0,0,.66);
+  border: 2px solid rgba(255,255,255,.35); border-radius: 22px;
+  padding: 16px; text-align: center; z-index: 10;
+}
+.rackResult { font-size: 20px; font-weight: 900; line-height: 1.55; margin-bottom: 12px; }
+.rackResult small { font-size: 15px; opacity: .9; }
+.nextRackBtn {
+  width: 100%; border: 0; border-radius: 18px; padding: 17px 12px;
+  color: #fff; background: #b05238; font-size: 25px; font-weight: 900;
+}
+.nextRackHint { font-size: 13px; opacity: .88; margin-top: 10px; line-height: 1.35; }
+.actions { display: grid; grid-template-columns: 1fr 1fr 1.45fr 1fr; gap: 8px; align-items: stretch; }
+.action { min-height: 72px; border: 0; border-radius: 18px; color: #fff; font-size: 22px; font-weight: 900; }
+.action small { font-size: 11px; font-weight: 700; }
+.safety { background: #2b7bba; }
+.foul { background: #b23a30; }
+.switch { background: #32744f; min-height: 86px; font-size: 26px; box-shadow: 0 0 14px rgba(255,255,255,.16); }
+.undo { background: #777; }
+.action:disabled { opacity: .35; }
+.summary { margin-top: 16px; background: rgba(0,0,0,.28); border-radius: 16px; padding: 14px; font-size: 18px; }
+
+
+/* v6 free version polish */
+.game { padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+.topbar { position: sticky; top: 0; z-index: 20; background: rgba(6,61,40,.96); backdrop-filter: blur(10px); }
+.summary {
+  position: fixed; inset: 0; z-index: 100;
+  margin: 0; padding: 22px;
+  background: rgba(0,0,0,.55);
+  display: flex; align-items: center; justify-content: center;
+}
+.summaryCard {
+  width: min(92vw, 430px);
+  background: #0a5636;
+  border: 2px solid rgba(255,255,255,.38);
+  border-radius: 26px;
+  padding: 24px 18px 20px;
+  text-align: center;
+  box-shadow: 0 22px 60px rgba(0,0,0,.35);
+}
+.gameSetTitle { font-size: 34px; font-weight: 950; margin-bottom: 6px; }
+.winnerName { font-size: 30px; font-weight: 950; color: #ffd54a; margin-bottom: 18px; }
+.finalScores { display: grid; gap: 8px; margin: 12px 0 14px; text-align: left; }
+.finalLine { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; background: rgba(255,255,255,.10); border-radius: 14px; padding: 10px 12px; font-size: 18px; font-weight: 850; }
+.finalMeta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
+.finalMeta div { background: rgba(0,0,0,.18); border-radius: 12px; padding: 9px 6px; font-size: 16px; font-weight: 800; }
+.modalBtnPrimary, .modalBtnSecondary {
+  border: 0; border-radius: 16px; padding: 14px 16px;
+  color: #fff; font-size: 18px; font-weight: 900;
+}
+.modalBtnPrimary { background: #b05238; width: 100%; margin-top: 8px; }
+.modalBtnSecondary { background: rgba(255,255,255,.20); }
+.confirmOverlay {
+  position: fixed; inset: 0; z-index: 120;
+  background: rgba(0,0,0,.52);
+  display: flex; align-items: center; justify-content: center;
+  padding: 18px;
+}
+.confirmCard {
+  width: min(92vw, 390px);
+  background: #0a5636;
+  border: 2px solid rgba(255,255,255,.35);
+  border-radius: 24px;
+  padding: 22px 18px 18px;
+  text-align: center;
+  box-shadow: 0 22px 60px rgba(0,0,0,.36);
+}
+.confirmTitle { font-size: 24px; font-weight: 950; margin-bottom: 8px; }
+.confirmText { font-size: 17px; line-height: 1.55; opacity: .92; margin-bottom: 18px; }
+.confirmActions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.confirmDanger { background: #b23a30; }
+.confirmCancel { background: #777; }
+.versionText { text-align: right; margin-top: 28px; opacity: .75; font-size: 14px; }
+.actions { position: sticky; bottom: env(safe-area-inset-bottom); z-index: 25; padding-top: 6px; background: linear-gradient(to top, rgba(6,61,40,1) 72%, rgba(6,61,40,0)); }
+
+@media (max-width: 430px) {
+  .app { max-width: 100%; padding-left: 10px; padding-right: 10px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+  h1 { font-size: 19px; }
+  .smallBtn { padding: 7px 10px; }
+  .playerPanel { padding: 8px 4px; }
+  .name { font-size: 19px; }
+  .score { font-size: 56px; margin: 7px 0; }
+  .stats { font-size: 13px; }
+  .status { font-size: 17px; padding: 9px 0 7px; }
+  .logHeader { grid-template-columns: 46px 1fr 1fr; font-size: 12px; }
+  .logRow { grid-template-columns: 46px 1fr 1fr; min-height: 32px; }
+  .turnLabel { font-size: 16px; }
+  .turnLog { min-height: 120px; max-height: 180px; }
+  .miniBall { width: 22px; height: 22px; font-size: 13px; }
+  .sym { font-size: 21px; }
+  .balls { gap: 9px; margin: 9px 0 12px; }
+  .ball { font-size: 29px; }
+  .actions { gap: 7px; grid-template-columns: .9fr .9fr 1.35fr .95fr; }
+  .action { min-height: 62px; border-radius: 15px; font-size: 19px; }
+  .action small { font-size: 10px; }
+  .switch { min-height: 72px; font-size: 22px; }
+  .setup { padding-top: 6px; }
+  .setup h2 { font-size: 25px; margin-bottom: 16px; }
+  .playerSetup { margin: 14px 0 28px; }
+  .playerSetup h3 { font-size: 34px; }
+  .setupRow { grid-template-columns: 82px 1fr; gap: 10px; }
+  .setupRow label { font-size: 20px; }
+  .setup input { font-size: 20px; padding: 9px 11px; }
+  .startBtn { margin-top: 18px; padding: 15px 14px; font-size: 24px; gap: 14px; }
+  .rackIcon { width: 66px; height: 74px; grid-template-columns: repeat(5, 13px); grid-template-rows: repeat(5, 13px); }
+  .rackDot { width: 13px; height: 13px; font-size: 6px; }
+  .firstPlayerTitle { font-size: 19px; }
+  .firstPlayerBtn { font-size: 17px; padding: 12px 8px; }
+}
+
+@media (max-height: 760px) {
+  .turnLog { max-height: 145px; min-height: 105px; }
+  .score { font-size: 52px; margin: 6px 0; }
+  .status { padding: 7px 0 6px; }
+  .balls { gap: 8px; margin: 8px 0 10px; }
+  .action { min-height: 58px; }
+  .switch { min-height: 68px; }
+}
+
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <button id="newGameBtn" class="smallBtn">New</button>
+      <h1>Rotation Scoreboard</h1>
+      <button id="settingsBtn" class="smallBtn">設定</button>
+    </header>
+
+    <section id="setup" class="setup">
+      <h2>Player info</h2>
+
+      <div class="playerSetup">
+        <h3>Player 1</h3>
+        <div class="setupRow">
+          <label for="p1Input">Name:</label>
+          <input id="p1Input" value="貴章" placeholder="プレーヤー1">
+        </div>
+        <div class="setupRow">
+          <label for="p1GoalInput">Score:</label>
+          <input id="p1GoalInput" type="number" value="150" inputmode="numeric">
+        </div>
+      </div>
+
+      <div class="playerSetup">
+        <h3>Player 2</h3>
+        <div class="setupRow">
+          <label for="p2Input">Name:</label>
+          <input id="p2Input" value="相手" placeholder="プレーヤー2">
+        </div>
+        <div class="setupRow">
+          <label for="p2GoalInput">Score:</label>
+          <input id="p2GoalInput" type="number" value="120" inputmode="numeric">
+        </div>
+      </div>
+
+      <section class="firstPlayerBox">
+        <div class="firstPlayerTitle">先攻プレーヤーを選択</div>
+        <div class="firstPlayerButtons">
+          <button id="firstPlayer1Btn" class="firstPlayerBtn selected" type="button">Player 1</button>
+          <button id="firstPlayer2Btn" class="firstPlayerBtn" type="button">Player 2</button>
+        </div>
+      </section>
+
+      <button id="startBtn" class="startBtn"><span class="rackIcon" aria-hidden="true">
+          <span class="rackDot" style="grid-column:3;grid-row:1;background:#f5d54a"><span>1</span></span>
+          <span class="rackDot" style="grid-column:2;grid-row:2;background:#2b62d9"><span>2</span></span>
+          <span class="rackDot" style="grid-column:4;grid-row:2;background:#c7322d"><span>3</span></span>
+          <span class="rackDot" style="grid-column:1;grid-row:3;background:#d67ab1"><span>4</span></span>
+          <span class="rackDot" style="grid-column:3;grid-row:3;background:#f5d54a"><span>9</span></span>
+          <span class="rackDot" style="grid-column:5;grid-row:3;background:#f08b2f"><span>5</span></span>
+          <span class="rackDot" style="grid-column:2;grid-row:4;background:#3a9b4b"><span>6</span></span>
+          <span class="rackDot" style="grid-column:4;grid-row:4;background:#8a4b20"><span>7</span></span>
+          <span class="rackDot" style="grid-column:3;grid-row:5;background:#111;color:#fff"><span>8</span></span>
+        </span><span>Start game!</span></button>
+      <div class="setupNote">Score はそれぞれの持ち点です</div>
+      <div class="versionText">Free version 6.2</div>
+    </section>
+
+    <section id="game" class="game hidden">
+      <section class="scoreboard">
+        <div class="playerPanel active" id="p1Panel">
+          <div class="name" id="p1Name">貴章</div>
+          <div class="score" id="p1Score">0</div>
+          <div class="stats">Goal:<span id="p1GoalView">150</span>　S:<span id="p1Safety">0</span>　F:<span id="p1Foul">0</span></div>
+        </div>
+        <div class="playerPanel" id="p2Panel">
+          <div class="name" id="p2Name">相手</div>
+          <div class="score" id="p2Score">0</div>
+          <div class="stats">Goal:<span id="p2GoalView">120</span>　S:<span id="p2Safety">0</span>　F:<span id="p2Foul">0</span></div>
+        </div>
+      </section>
+
+      <section class="status">
+        <div>Rack: <span id="rack">1</span></div>
+        <div>Inning: <span id="inning">1</span></div>
+        <div>Goal: <span id="goalView">150 / 120</span></div>
+      </section>
+
+      <section class="logWrap">
+        <div class="logHeader">
+          <span>Turn</span>
+          <span id="p1LogName">貴章</span>
+          <span id="p2LogName">相手</span>
+        </div>
+        <div id="turnLog" class="turnLog"></div>
+      </section>
+
+
+      <section class="playArea">
+        <section class="balls" id="balls"></section>
+        <section id="nextRackBox" class="nextRackBox hidden">
+          <div id="rackResult" class="rackResult"></div>
+          <button id="nextRackBtn" class="nextRackBtn">次のラックへ</button>
+          <div class="nextRackHint">15個入りました。押すと次の入力は1段下に表示されます。</div>
+        </section>
+      </section>
+
+      <section class="actions">
+        <button id="safetyBtn" class="action safety"><span class="actionMain">S</span><small>セーフティ</small></button>
+        <button id="foulBtn" class="action foul"><span class="actionMain">F</span><small>ファウル</small></button>
+        <button id="switchBtn" class="action switch"><span class="actionMain">Switch</span><small>交代</small></button>
+        <button id="undoBtn" class="action undo"><span class="actionMain">Undo</span><small>戻す</small></button>
+      </section>
+
+      <section id="summary" class="summary hidden"></section>
+    </section>
+
+
+    <section id="confirmNewGame" class="confirmOverlay hidden">
+      <div class="confirmCard">
+        <div class="confirmTitle">New Game?</div>
+        <div class="confirmText">現在の試合を終了して<br>新しい試合を始めますか？</div>
+        <div class="confirmActions">
+          <button id="cancelNewGameBtn" class="modalBtnSecondary confirmCancel">キャンセル</button>
+          <button id="confirmNewGameBtn" class="modalBtnPrimary confirmDanger">New Game</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+let current = 1;
+let startingPlayer = 1;
+let goals = {1:150, 2:120};
+let rack = 1;
+let inning = 1;
+let scores = {1:0, 2:0};
+let rackScores = {1:0, 2:0};
+let safety = {1:0, 2:0};
+let fouls = {1:0, 2:0};
+let usedBalls = new Set();
+let rows = [];
+let history = [];
+let rackEnded = false;
+let foulLocked = false;
+let forceNewRow = false;
+let gameEnded = false;
+
+const colors = {
+  1:"#f5d54a",2:"#2b62d9",3:"#c7322d",4:"#8b4bc1",5:"#f08b2f",
+  6:"#3a9b4b",7:"#8a4b20",8:"#111",9:"#f5d54a",10:"#2b62d9",
+  11:"#c7322d",12:"#8b4bc1",13:"#f08b2f",14:"#3a9b4b",15:"#8a4b20"
+};
+
+function $(id){ return document.getElementById(id); }
+
+function snapshot() {
+  return {
+    current, startingPlayer, goals:{...goals}, rack, inning,
+    scores:{...scores}, rackScores:{...rackScores}, safety:{...safety}, fouls:{...fouls},
+    usedBalls:[...usedBalls],
+    rows: JSON.parse(JSON.stringify(rows)),
+    rackEnded, foulLocked, forceNewRow, gameEnded
+  };
+}
+
+function restore(s) {
+  current=s.current; startingPlayer=s.startingPlayer || 1; goals={...s.goals}; rack=s.rack; inning=s.inning;
+  scores={...s.scores}; rackScores={...s.rackScores}; safety={...s.safety}; fouls={...s.fouls};
+  usedBalls=new Set(s.usedBalls);
+  rows=JSON.parse(JSON.stringify(s.rows));
+  rackEnded=s.rackEnded; foulLocked=s.foulLocked; forceNewRow=s.forceNewRow; gameEnded=!!s.gameEnded;
+}
+
+function playerName(n) { return n===1 ? $("p1Name").textContent : $("p2Name").textContent; }
+
+function currentTurnLabel() {
+  if (rows.length === 0) return "Break";
+  return String(inning);
+}
+
+function ensureCurrentRow() {
+  let last = rows[rows.length - 1];
+  if (forceNewRow || !last || last.inning !== inning || last.rack !== rack) {
+    last = { rack, inning, label: currentTurnLabel(), p1: [], p2: [] };
+    rows.push(last);
+    forceNewRow = false;
+  }
+  return last;
+}
+
+function addItemToCurrent(item) {
+  const row = ensureCurrentRow();
+  row[current === 1 ? "p1" : "p2"].push(item);
+}
+
+function ballHtml(n) {
+  const cls = (n <= 8 ? "solid" : "stripe") + (n === 8 ? " eight" : "");
+  return `<span class="event miniBall ${cls}" style="background:${colors[n]};"><span>${n}</span></span>`;
+}
+
+function symbolHtml(s) {
+  const cls = s === "S" ? "s" : "f";
+  return `<span class="event sym ${cls}">${s}</span>`;
+}
+
+function renderLog() {
+  const el = $("turnLog");
+  el.innerHTML = "";
+  let lastRack = null;
+  rows.forEach((r, index) => {
+    if (r.rack !== lastRack) {
+      const divider = document.createElement("div");
+      divider.className = "rackDivider";
+      divider.textContent = `Rack ${r.rack}`;
+      el.appendChild(divider);
+      lastRack = r.rack;
+    }
+
+    const row = document.createElement("div");
+    row.className = "logRow" + (index === rows.length - 1 ? " activeRow" : "");
+    const p1Items = r.p1.map(item => typeof item === "number" ? ballHtml(item) : symbolHtml(item)).join("");
+    const p2Items = r.p2.map(item => typeof item === "number" ? ballHtml(item) : symbolHtml(item)).join("");
+    row.innerHTML = `
+      <div class="turnLabel">${r.label}</div>
+      <div class="logCell p1">${p1Items}</div>
+      <div class="logCell p2">${p2Items}</div>
+    `;
+    el.appendChild(row);
+  });
+  el.scrollTop = el.scrollHeight;
+}
+
+function renderBalls() {
+  const el = $("balls");
+  el.innerHTML = "";
+  el.classList.toggle("rackEnded", rackEnded);
+  el.classList.toggle("locked", foulLocked);
+  for (let i=1;i<=15;i++) {
+    const btn = document.createElement("button");
+    btn.className = "ball " + (i <= 8 ? "solid" : "stripe") + (i === 8 ? " eight" : "");
+    if (usedBalls.has(i)) btn.classList.add("used");
+    btn.style.background = colors[i];
+    btn.innerHTML = `<span>${i}</span>`;
+    btn.disabled = usedBalls.has(i) || rackEnded || foulLocked || gameEnded;
+    btn.onclick = () => pocketBall(i);
+    el.appendChild(btn);
+  }
+}
+
+function renderRackResult() {
+  const el = $("rackResult");
+  el.innerHTML = `
+    Rack ${rack} 終了<br>
+    ${playerName(1)}：+${rackScores[1]}点　${playerName(2)}：+${rackScores[2]}点<br>
+    <small>合計 ${playerName(1)}：${scores[1]}点 / ${playerName(2)}：${scores[2]}点</small>
+  `;
+}
+
+function updateButtons() {
+  $("safetyBtn").disabled = rackEnded || foulLocked || gameEnded;
+  $("foulBtn").disabled = rackEnded || foulLocked || gameEnded;
+  $("switchBtn").disabled = rackEnded || gameEnded;
+  $("undoBtn").disabled = history.length === 0;
+  $("nextRackBox").classList.toggle("hidden", !rackEnded);
+  if (rackEnded) renderRackResult();
+}
+
+function update() {
+  $("p1Score").textContent = scores[1];
+  $("p2Score").textContent = scores[2];
+  $("p1Safety").textContent = safety[1];
+  $("p2Safety").textContent = safety[2];
+  $("p1Foul").textContent = fouls[1];
+  $("p2Foul").textContent = fouls[2];
+  $("rack").textContent = rack;
+  $("inning").textContent = inning;
+  $("p1GoalView").textContent = goals[1];
+  $("p2GoalView").textContent = goals[2];
+  $("goalView").textContent = `${goals[1]} / ${goals[2]}`;
+  $("p1Panel").classList.toggle("active", current===1);
+  $("p2Panel").classList.toggle("active", current===2);
+  renderLog();
+  renderBalls();
+  checkWinner();
+  updateButtons();
+}
+
+function saveAndDo(fn) {
+  history.push(snapshot());
+  fn();
+  update();
+}
+
+function pocketBall(n) {
+  if (gameEnded || rackEnded || foulLocked || usedBalls.has(n)) return;
+  saveAndDo(() => {
+    scores[current] += n;
+    rackScores[current] += n;
+    usedBalls.add(n);
+    addItemToCurrent(n);
+    if (usedBalls.size === 15) {
+      rackEnded = true;
+      foulLocked = false;
+    }
+  });
+}
+
+function switchPlayer() {
+  if (gameEnded || rackEnded) return;
+  saveAndDo(() => {
+    // 交代だけでも、そのイニング行を空欄で残す
+    ensureCurrentRow();
+    current = current === 1 ? 2 : 1;
+    foulLocked = false;
+    if (current === 1) {
+      inning++;
+      forceNewRow = true;
+    }
+  });
+}
+
+function safetyEvent() {
+  if (gameEnded || rackEnded || foulLocked) return;
+  saveAndDo(() => {
+    safety[current]++;
+    addItemToCurrent("S");
+    foulLocked = true;
+  });
+}
+
+function foulEvent() {
+  if (gameEnded || rackEnded || foulLocked) return;
+  saveAndDo(() => {
+    fouls[current]++;
+    addItemToCurrent("F");
+    foulLocked = true;
+  });
+}
+
+function nextRack() {
+  if (gameEnded || !rackEnded) return;
+  saveAndDo(() => {
+    rack++;
+    usedBalls = new Set();
+    rackScores = {1:0, 2:0};
+    rackEnded = false;
+    foulLocked = false;
+    forceNewRow = true;
+  });
+}
+
+function undo() {
+  const s = history.pop();
+  if (!s) return;
+  restore(s);
+  update();
+}
+
+function startGame() {
+  $("p1Name").textContent = $("p1Input").value || "Player 1";
+  $("p2Name").textContent = $("p2Input").value || "Player 2";
+  $("p1LogName").textContent = $("p1Name").textContent;
+  $("p2LogName").textContent = $("p2Name").textContent;
+  goals = {
+    1: Number($("p1GoalInput").value || 150),
+    2: Number($("p2GoalInput").value || 120)
+  };
+  current=startingPlayer; rack=1; inning=1;
+  scores={1:0,2:0}; rackScores={1:0,2:0}; safety={1:0,2:0}; fouls={1:0,2:0};
+  usedBalls = new Set(); rows=[]; history=[];
+  rackEnded=false; foulLocked=false; forceNewRow=false; gameEnded=false;
+  $("setup").classList.add("hidden");
+  $("game").classList.remove("hidden");
+  $("summary").classList.add("hidden");
+  update();
+}
+
+function newGame() {
+  gameEnded = false;
+  rackEnded = false;
+  foulLocked = false;
+  $("summary").classList.add("hidden");
+  $("confirmNewGame").classList.add("hidden");
+  $("setup").classList.remove("hidden");
+  $("game").classList.add("hidden");
+}
+
+function hasActiveGame() {
+  return !$("game").classList.contains("hidden") && (history.length > 0 || rows.length > 0 || scores[1] > 0 || scores[2] > 0);
+}
+
+function requestNewGame() {
+  if (hasActiveGame()) {
+    $("confirmNewGame").classList.remove("hidden");
+  } else {
+    newGame();
+  }
+}
+
+function setStartingPlayer(n) {
+  startingPlayer = n;
+  $("firstPlayer1Btn").classList.toggle("selected", n === 1);
+  $("firstPlayer2Btn").classList.toggle("selected", n === 2);
+}
+
+function syncFirstPlayerLabels() {
+  $("firstPlayer1Btn").textContent = $("p1Input").value || "Player 1";
+  $("firstPlayer2Btn").textContent = $("p2Input").value || "Player 2";
+}
+
+function checkWinner() {
+  const winner = scores[1] >= goals[1] ? 1 : scores[2] >= goals[2] ? 2 : null;
+  const box = $("summary");
+  if (!winner) {
+    gameEnded = false;
+    box.classList.add("hidden");
+    return;
+  }
+  gameEnded = true;
+  box.classList.remove("hidden");
+  const loser = winner === 1 ? 2 : 1;
+  box.innerHTML = `
+    <div class="summaryCard">
+      <div class="gameSetTitle">Game Set!</div>
+      <div class="winnerName">${playerName(winner)} Win!</div>
+      <div class="finalScores">
+        <div class="finalLine"><span>${playerName(winner)}</span><span>${scores[winner]} / ${goals[winner]}</span></div>
+        <div class="finalLine"><span>${playerName(loser)}</span><span>${scores[loser]} / ${goals[loser]}</span></div>
+      </div>
+      <div class="finalMeta">
+        <div>Rack: ${rack}</div>
+        <div>Inning: ${inning}</div>
+        <div>${playerName(1)}<br>S:${safety[1]} F:${fouls[1]}</div>
+        <div>${playerName(2)}<br>S:${safety[2]} F:${fouls[2]}</div>
+      </div>
+      <button class="modalBtnPrimary" onclick="requestNewGame()">New Game</button>
+    </div>
+  `;
+}
+
+$("startBtn").onclick = startGame;
+$("newGameBtn").onclick = requestNewGame;
+$("settingsBtn").onclick = requestNewGame;
+$("switchBtn").onclick = switchPlayer;
+$("safetyBtn").onclick = safetyEvent;
+$("foulBtn").onclick = foulEvent;
+$("undoBtn").onclick = undo;
+$("nextRackBtn").onclick = nextRack;
+$("cancelNewGameBtn").onclick = () => $("confirmNewGame").classList.add("hidden");
+$("confirmNewGameBtn").onclick = newGame;
+$("firstPlayer1Btn").onclick = () => setStartingPlayer(1);
+$("firstPlayer2Btn").onclick = () => setStartingPlayer(2);
+$("p1Input").addEventListener("input", syncFirstPlayerLabels);
+$("p2Input").addEventListener("input", syncFirstPlayerLabels);
+syncFirstPlayerLabels();
+
+  </script>
+</body>
+</html>
