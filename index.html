@@ -3,6 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#063d28">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Rotation Scoreboard">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
   <title>Rotation Scoreboard</title>
   <style>
 * { box-sizing: border-box; }
@@ -665,7 +671,7 @@ button, input, select, textarea {
 
       <button id="startBtn" class="startBtn">Start game!</button>
       <div class="setupNote">Score はそれぞれの持ち点です</div>
-      <div class="versionText">Free version 6.8</div>
+      <div class="versionText">Free version 7.0 Free PWA</div>
     </section>
 
     <section id="game" class="game hidden">
@@ -1080,6 +1086,13 @@ try {
     __lastTouchEnd = now;
   }, { passive: false });
 } catch (e) {}
+
+
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
 
 </script>
 </body>
