@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rotation-scoreboard-v7-free-pwa';
+const CACHE_NAME = 'rotation-scoreboard-v7-1-fixed-screen-pwa';
 const ASSETS = [
   './',
   './index.html',

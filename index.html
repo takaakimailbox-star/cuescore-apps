@@ -624,6 +624,61 @@ button, input, select, textarea {
   }
 }
 
+
+
+/* v7.1: iPhone fixed screen / no whole-page drag */
+html,
+body {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden !important;
+  overscroll-behavior: none;
+  background: #063d28;
+}
+body {
+  touch-action: none;
+}
+.app {
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden !important;
+}
+.app.gameMode {
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden !important;
+}
+.app.gameMode .game {
+  height: calc(100dvh - env(safe-area-inset-top));
+  max-height: calc(100dvh - env(safe-area-inset-top));
+  overflow: hidden !important;
+}
+.app.gameMode .topbar,
+.app.gameMode .topFixed,
+.app.gameMode .bottomDock,
+.app.gameMode .playArea,
+.app.gameMode .balls,
+.app.gameMode .actions {
+  touch-action: manipulation;
+}
+.app.gameMode .logWrap,
+.app.gameMode .turnLog {
+  touch-action: pan-y;
+}
+.app.gameMode .turnLog {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.app.gameMode .bottomDock {
+  bottom: 0;
+}
+input,
+button {
+  touch-action: manipulation;
+}
+
 </style>
 </head>
 <body>
@@ -671,7 +726,7 @@ button, input, select, textarea {
 
       <button id="startBtn" class="startBtn">Start game!</button>
       <div class="setupNote">Score はそれぞれの持ち点です</div>
-      <div class="versionText">Free version 7.0 Free PWA</div>
+      <div class="versionText">Free version 7.1</div>
     </section>
 
     <section id="game" class="game hidden">
@@ -1093,6 +1148,43 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
   });
 }
+
+
+// v7.1: prevent iPhone page drag/bounce, allow only history area scroll
+(function () {
+  const isAllowedScroll = (target) => {
+    return target && target.closest && target.closest('#turnLog');
+  };
+
+  document.addEventListener('touchmove', function (e) {
+    if (!document.querySelector('.app')?.classList.contains('gameMode')) return;
+
+    if (!isAllowedScroll(e.target)) {
+      e.preventDefault();
+      return;
+    }
+
+    const scroller = document.getElementById('turnLog');
+    if (!scroller) {
+      e.preventDefault();
+      return;
+    }
+
+    const atTop = scroller.scrollTop <= 0;
+    const atBottom = Math.ceil(scroller.scrollTop + scroller.clientHeight) >= scroller.scrollHeight;
+
+    if ((atTop && e.touches[0].clientY > (window.__lastTouchY || e.touches[0].clientY)) ||
+        (atBottom && e.touches[0].clientY < (window.__lastTouchY || e.touches[0].clientY))) {
+      e.preventDefault();
+    }
+
+    window.__lastTouchY = e.touches[0].clientY;
+  }, { passive: false });
+
+  document.addEventListener('touchstart', function (e) {
+    window.__lastTouchY = e.touches && e.touches[0] ? e.touches[0].clientY : 0;
+  }, { passive: true });
+})();
 
 </script>
 </body>
