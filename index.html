@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <title>Rotation Scoreboard</title>
   <style>
 * { box-sizing: border-box; }
@@ -490,6 +490,134 @@ body {
   }
 }
 
+
+
+/* v6.8: fixed score/top + fixed ball/actions + center history scroll only */
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+button, input, select, textarea {
+  touch-action: manipulation;
+  font-size: 16px;
+}
+.app.gameMode {
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+}
+.app.gameMode .topbar {
+  position: static;
+  flex: 0 0 auto;
+}
+.app.gameMode .game {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+  overflow: hidden;
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  padding-bottom: 0;
+}
+.app.gameMode .topFixed {
+  position: static;
+  flex-shrink: 0;
+}
+.app.gameMode .logWrap {
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.app.gameMode .turnLog {
+  min-height: 0 !important;
+  max-height: none !important;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.app.gameMode .bottomDock {
+  position: static;
+  flex-shrink: 0;
+  padding-bottom: calc(8px + env(safe-area-inset-bottom));
+}
+.app.gameMode .actions {
+  position: static;
+  padding-top: 0;
+  background: transparent;
+}
+.app.gameMode .playArea {
+  flex-shrink: 0;
+}
+.app.gameMode .balls {
+  flex-shrink: 0;
+}
+
+@media (max-width: 430px) {
+  .app.gameMode .topbar {
+    min-height: 54px;
+    padding-top: 6px;
+    padding-bottom: 8px;
+  }
+  .app.gameMode .playerPanel {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+  .app.gameMode .score {
+    font-size: 50px;
+    margin: 4px 0;
+  }
+  .app.gameMode .status {
+    padding: 7px 0 5px;
+  }
+  .app.gameMode .bottomDock .balls {
+    width: min(91vw, 342px);
+    gap: 6px;
+    margin: 5px auto 6px;
+  }
+  .app.gameMode .bottomDock .action {
+    min-height: 54px;
+  }
+  .app.gameMode .bottomDock .switch {
+    min-height: 58px;
+  }
+}
+
+@media (max-height: 760px) {
+  .app.gameMode .topbar {
+    min-height: 50px;
+    padding-top: 5px;
+    padding-bottom: 6px;
+  }
+  .app.gameMode .score {
+    font-size: 46px;
+    margin: 3px 0;
+  }
+  .app.gameMode .playerPanel {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .app.gameMode .status {
+    padding: 5px 0 4px;
+  }
+  .app.gameMode .bottomDock .balls {
+    width: min(90vw, 332px);
+    gap: 5px;
+    margin: 4px auto 5px;
+  }
+  .app.gameMode .bottomDock .action {
+    min-height: 50px;
+  }
+  .app.gameMode .bottomDock .switch {
+    min-height: 54px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -537,7 +665,7 @@ body {
 
       <button id="startBtn" class="startBtn">Start game!</button>
       <div class="setupNote">Score はそれぞれの持ち点です</div>
-      <div class="versionText">Free version 6.7</div>
+      <div class="versionText">Free version 6.8</div>
     </section>
 
     <section id="game" class="game hidden">
@@ -936,6 +1064,23 @@ $("p1Input").addEventListener("input", syncFirstPlayerLabels);
 $("p2Input").addEventListener("input", syncFirstPlayerLabels);
 syncFirstPlayerLabels();
 
-  </script>
+  
+// v6.8: iPhone Safari zoom guard
+try {
+  document.addEventListener('gesturestart', function(e) {
+    e.preventDefault();
+  }, { passive: false });
+
+  let __lastTouchEnd = 0;
+  document.addEventListener('touchend', function(e) {
+    const now = Date.now();
+    if (now - __lastTouchEnd <= 300) {
+      e.preventDefault();
+    }
+    __lastTouchEnd = now;
+  }, { passive: false });
+} catch (e) {}
+
+</script>
 </body>
 </html>
