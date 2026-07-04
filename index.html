@@ -679,6 +679,79 @@ button {
   touch-action: manipulation;
 }
 
+
+/* v7.2 free polish: help + first guide */
+.guideOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 180;
+  background: rgba(0,0,0,.54);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+.guideCard {
+  width: min(92vw, 430px);
+  background: #0a5636;
+  border: 2px solid rgba(255,255,255,.38);
+  border-radius: 26px;
+  padding: 24px 18px 20px;
+  box-shadow: 0 24px 70px rgba(0,0,0,.42);
+}
+.guideCardWide { width: min(94vw, 480px); }
+.guideTitle {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 950;
+  margin-bottom: 14px;
+}
+.guideText {
+  font-size: 17px;
+  line-height: 1.55;
+  color: rgba(255,255,255,.92);
+}
+.guideText p { margin: 9px 0; }
+.guideText hr {
+  border: 0;
+  border-top: 1px solid rgba(255,255,255,.24);
+  margin: 14px 0;
+}
+.guideSmall { font-size: 14px; opacity: .82; }
+.guideActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 18px;
+}
+.guideMainBtn,
+.guideSubBtn {
+  border: 0;
+  border-radius: 16px;
+  padding: 14px 12px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 900;
+}
+.guideMainBtn { background: #137d4b; }
+.guideSubBtn { background: rgba(255,255,255,.20); }
+.guideMainBtn.full {
+  width: 100%;
+  margin-top: 18px;
+}
+.helpList b { color: #fff; }
+
+@media (max-width: 430px) {
+  .guideCard {
+    padding: 22px 16px 18px;
+    border-radius: 24px;
+  }
+  .guideTitle { font-size: 28px; }
+  .guideText { font-size: 16px; }
+  .guideActions { grid-template-columns: 1fr; }
+  .guideMainBtn, .guideSubBtn { font-size: 16px; }
+}
+
 </style>
 </head>
 <body>
@@ -686,7 +759,7 @@ button {
     <header class="topbar">
       <button id="newGameBtn" class="smallBtn">New</button>
       <h1>Rotation Scoreboard</h1>
-      <button id="settingsBtn" class="smallBtn">設定</button>
+      <button id="helpBtn" class="smallBtn">使い方</button>
     </header>
 
     <section id="setup" class="setup">
@@ -726,7 +799,7 @@ button {
 
       <button id="startBtn" class="startBtn">Start game!</button>
       <div class="setupNote">Score はそれぞれの持ち点です</div>
-      <div class="versionText">Free version 7.1</div>
+      <div class="versionText">Free version 7.2</div>
     </section>
 
     <section id="game" class="game hidden">
@@ -782,6 +855,39 @@ button {
       <section id="summary" class="summary hidden"></section>
     </section>
 
+
+    <section id="welcomeGuide" class="guideOverlay hidden">
+      <div class="guideCard">
+        <div class="guideTitle">ようこそ</div>
+        <div class="guideText">
+          <p><b>Rotation Scoreboard</b> はローテーション専用の無料スコアボードです。</p>
+          <p>上は得点、真ん中は履歴、下はボール入力と操作ボタンです。</p>
+          <p>画面は固定され、履歴エリアだけスクロールできます。</p>
+        </div>
+        <div class="guideActions">
+          <button id="welcomeDontShowBtn" class="guideSubBtn">次回から表示しない</button>
+          <button id="welcomeStartBtn" class="guideMainBtn">はじめる</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="helpGuide" class="guideOverlay hidden">
+      <div class="guideCard guideCardWide">
+        <div class="guideTitle">使い方</div>
+        <div class="guideText helpList">
+          <p><b>1.</b> プレーヤー名と持ち点を入力します。</p>
+          <p><b>2.</b> 先攻プレーヤーを選びます。</p>
+          <p><b>3.</b> <b>Start game!</b> で開始します。</p>
+          <p><b>4.</b> 入ったボール番号をタップします。</p>
+          <p><b>5.</b> 必要に応じて <b>セーフティ / ファール / プレーヤー交代 / 戻す</b> を使います。</p>
+          <p><b>6.</b> 履歴は真ん中のエリアで確認します。</p>
+          <p><b>7.</b> <b>New</b> で新しい試合を始めます。</p>
+          <hr>
+          <p class="guideSmall">履歴保存・勝率・平均得点などは、将来の有料版機能として検討中です。</p>
+        </div>
+        <button id="helpCloseBtn" class="guideMainBtn full">閉じる</button>
+      </div>
+    </section>
 
     <section id="confirmNewGame" class="confirmOverlay hidden">
       <div class="confirmCard">
@@ -1111,7 +1217,7 @@ function checkWinner() {
 
 $("startBtn").onclick = startGame;
 $("newGameBtn").onclick = requestNewGame;
-$("settingsBtn").onclick = requestNewGame;
+$("helpBtn").onclick = openHelp;
 $("switchBtn").onclick = switchPlayer;
 $("safetyBtn").onclick = safetyEvent;
 $("foulBtn").onclick = foulEvent;
@@ -1185,6 +1291,33 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     window.__lastTouchY = e.touches && e.touches[0] ? e.touches[0].clientY : 0;
   }, { passive: true });
 })();
+
+
+// v7.2: help page and first guide
+function openHelp() {
+  $("helpGuide").classList.remove("hidden");
+}
+function closeHelp() {
+  $("helpGuide").classList.add("hidden");
+}
+function closeWelcomeGuide(neverAgain=false) {
+  $("welcomeGuide").classList.add("hidden");
+  if (neverAgain) {
+    try { localStorage.setItem("rotationScoreboardWelcomeHidden", "1"); } catch(e) {}
+  }
+}
+function showWelcomeGuideIfNeeded() {
+  try {
+    if (localStorage.getItem("rotationScoreboardWelcomeHidden") === "1") return;
+  } catch(e) {}
+  $("welcomeGuide").classList.remove("hidden");
+}
+$("helpCloseBtn").onclick = closeHelp;
+$("welcomeStartBtn").onclick = () => closeWelcomeGuide(false);
+$("welcomeDontShowBtn").onclick = () => closeWelcomeGuide(true);
+window.addEventListener("load", () => {
+  setTimeout(showWelcomeGuideIfNeeded, 350);
+});
 
 </script>
 </body>
