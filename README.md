@@ -37,3 +37,15 @@ iPhoneやAndroidのブラウザで使えて、ホーム画面に追加すると�
 ## アプリURL
 
 https://takaakimailbox-star.github.io/rotation-scoreboard/
+
+## 実戦テスト項目
+
+- ボール入力
+- セーフティ
+- ファール
+- プレーヤー交代
+- 戻す
+- ラック終了
+- 試合終了
+- iPhone画面固定
+- ホーム画面追加
