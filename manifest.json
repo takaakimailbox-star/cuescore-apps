@@ -1,7 +1,7 @@
 {
   "name": "Rotation Scoreboard",
   "short_name": "Rotation",
-  "description": "Rotation billiards scoreboard free version.",
+  "description": "Rotation billiards scoreboard free version 1.0.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
