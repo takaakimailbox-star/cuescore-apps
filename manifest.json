@@ -1,7 +1,7 @@
 {
-  "name": "Rotation Scoreboard",
-  "short_name": "Rotation",
-  "description": "Rotation billiards scoreboard free version 1.0.",
+  "name": "Rotation Scoreboard Pro",
+  "short_name": "RS Pro",
+  "description": "Rotation billiards scoreboard Pro prototype with separate history page.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
