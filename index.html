@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Rotation Scoreboard" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Rotation Scoreboard iPhone Ver.5.5.5</title>
+  <title>Rotation Scoreboard iPhone Ver.6.1.0</title>
   <style>
     :root {
       --bg: #16472d;
@@ -6413,7 +6413,7 @@ button {
   }
 }
 
-/* Ver.5.5.5: iPhone statistics filter header and date-field fit */
+/* Ver.6.0.1: iPhone statistics filter header and date-field fit */
 @media (max-width: 430px) {
   .statistics-filter-header {
     grid-template-columns: 72px minmax(0, 1fr) 58px !important;
@@ -6462,7 +6462,7 @@ button {
 }
 
 
-/* Ver.5.5.5: iPhone date input frame containment */
+/* Ver.6.0.1: iPhone date input frame containment */
 @media (max-width: 430px) {
   .statistics-filter-card:first-child .statistics-filter-grid {
     display: grid !important;
@@ -6501,6 +6501,94 @@ button {
     text-align: left !important;
   }
 }
+/* Ver.6.0.1: analysis event foundation (no additional match controls) */
+
+/* Ver.6.0.1: show the home dashboard only on the title screen */
+.app[class*="-mode"] > .home-dashboard {
+  display: none !important;
+}
+
+
+/* Rotation Scoreboard Ver.6.1.0: one-tap break analysis */
+.break-result-overlay-v61 {
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(18px + env(safe-area-inset-top)) 18px calc(18px + env(safe-area-inset-bottom));
+  background: rgba(3, 22, 13, .74);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+.break-result-overlay-v61.hidden { display: none !important; }
+.break-result-card-v61 {
+  width: min(100%, 410px);
+  border: 1px solid rgba(255,255,255,.32);
+  border-radius: 20px;
+  padding: 20px 16px 14px;
+  background: linear-gradient(180deg, rgba(29,91,59,.98), rgba(11,57,35,.99));
+  box-shadow: 0 18px 50px rgba(0,0,0,.48);
+  text-align: center;
+}
+.break-result-rack-v61 {
+  font-size: 14px;
+  font-weight: 850;
+  color: rgba(255,255,255,.76);
+  margin-bottom: 4px;
+}
+.break-result-title-v61 {
+  font-size: 24px;
+  font-weight: 950;
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+.break-result-player-v61 {
+  font-size: 16px;
+  font-weight: 850;
+  color: #ffe27a;
+  margin-bottom: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.break-result-grid-v61 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+.break-result-btn-v61 {
+  min-height: 54px;
+  border: 2px solid rgba(255,255,255,.38);
+  border-radius: 13px;
+  background: rgba(255,255,255,.10);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 900;
+  cursor: pointer;
+}
+.break-result-btn-v61:active { transform: scale(.98); }
+.break-result-btn-v61[data-break-result="scratch"],
+.break-result-btn-v61[data-break-result="illegal"] {
+  background: rgba(170,65,52,.34);
+}
+.break-result-skip-v61 {
+  width: 100%;
+  min-height: 38px;
+  margin-top: 10px;
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,.72);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+@media (max-width: 370px) {
+  .break-result-card-v61 { padding: 17px 13px 12px; }
+  .break-result-title-v61 { font-size: 21px; }
+  .break-result-btn-v61 { min-height: 50px; font-size: 15px; }
+}
 </style>
 </head>
 <body>
@@ -6513,7 +6601,7 @@ button {
 
   <main class="app" aria-label="Rotation Scoreboard">
     <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
-    <div class="sub-title">version 5.5.5</div>
+    <div class="sub-title">version 6.1.0</div>
 
     <section class="home-dashboard" id="homeDashboard" aria-label="ダッシュボード">
       <div class="home-dashboard-head">
@@ -6620,7 +6708,7 @@ button {
         </button>
       </div>
 
-      <div class="player-version">version 5.5.5</div>
+      <div class="player-version">version 6.0.1</div>
     </section>
 
     <section class="pro-game-screen hidden" id="proGameScreen" aria-label="Rotation game">
@@ -6699,6 +6787,23 @@ button {
       </div>
 
       <section id="proSummary" class="pro-summary hidden"></section>
+
+      <section id="breakResultOverlayV61" class="break-result-overlay-v61 hidden" aria-modal="true" role="dialog" aria-labelledby="breakResultTitleV61">
+        <div class="break-result-card-v61">
+          <div class="break-result-rack-v61">Rack <span id="breakResultRackV61">1</span></div>
+          <div id="breakResultTitleV61" class="break-result-title-v61">ブレイク結果</div>
+          <div id="breakResultPlayerV61" class="break-result-player-v61">Player 1</div>
+          <div class="break-result-grid-v61">
+            <button class="break-result-btn-v61" type="button" data-break-result="dry">無得点</button>
+            <button class="break-result-btn-v61" type="button" data-break-result="one">1個</button>
+            <button class="break-result-btn-v61" type="button" data-break-result="two_plus">2個以上</button>
+            <button class="break-result-btn-v61" type="button" data-break-result="scratch">スクラッチ</button>
+            <button class="break-result-btn-v61" type="button" data-break-result="illegal">イリーガル</button>
+          </div>
+          <button id="breakResultSkipV61" class="break-result-skip-v61" type="button">今回は記録しない</button>
+        </div>
+      </section>
+
     </section>
 
 
@@ -6904,7 +7009,7 @@ button {
       <header class="settings-header">
         <button class="settings-back" id="settingsBackBtn" type="button">‹ 戻る</button>
         <div class="settings-title">設定</div>
-        <div class="settings-version">Ver.5.5.5</div>
+        <div class="settings-version">Ver.6.0.1</div>
       </header>
       <div class="settings-content">
         <section class="settings-card">
@@ -8197,6 +8302,96 @@ button {
   let currentGameRecordSaved = false;
   let currentGameMemo = "";
   let currentGameTags = [];
+
+  // Ver.6.0: 分析用イベント基盤。画面操作は増やさず、既存操作を時系列で保存する。
+  let analysisEventsV60 = [];
+  let analysisEventSequenceV60 = 0;
+  const ANALYSIS_SCHEMA_VERSION_V60 = 1;
+
+  // Ver.6.1: ラック開始時に1タップで記録するブレイク結果。
+  let pendingBreakPlayerV61 = null;
+  let pendingBreakRackV61 = null;
+  const BREAK_RESULT_LABELS_V61 = {
+    dry: "無得点",
+    one: "1個",
+    two_plus: "2個以上",
+    scratch: "スクラッチ",
+    illegal: "イリーガル",
+    skipped: "記録なし"
+  };
+
+  function closeBreakResultPromptV61() {
+    const overlay = el("breakResultOverlayV61");
+    if (overlay) overlay.classList.add("hidden");
+    pendingBreakPlayerV61 = null;
+    pendingBreakRackV61 = null;
+  }
+
+  function showBreakResultPromptV61(player, rackNumber) {
+    if (gameEnded || reviewMode) return;
+    const overlay = el("breakResultOverlayV61");
+    if (!overlay) return;
+    pendingBreakPlayerV61 = Number(player) === 2 ? 2 : 1;
+    pendingBreakRackV61 = Number(rackNumber) || Number(rack) || 1;
+    el("breakResultRackV61").textContent = pendingBreakRackV61;
+    el("breakResultPlayerV61").textContent = `${playerName(pendingBreakPlayerV61)} のブレイク`;
+    overlay.classList.remove("hidden");
+  }
+
+  function saveBreakResultV61(resultCode) {
+    const player = pendingBreakPlayerV61;
+    const rackNumber = pendingBreakRackV61;
+    if (!player || !rackNumber) return closeBreakResultPromptV61();
+    const normalized = Object.prototype.hasOwnProperty.call(BREAK_RESULT_LABELS_V61, resultCode)
+      ? resultCode : "skipped";
+    if (normalized !== "skipped") {
+      recordAnalysisEventV60("break_result", {
+        player,
+        breakPlayer: player,
+        rack: rackNumber,
+        result: normalized,
+        resultLabel: BREAK_RESULT_LABELS_V61[normalized],
+        pocketedGroup: normalized === "one" ? 1 : (normalized === "two_plus" ? "2+" : 0),
+        scratch: normalized === "scratch",
+        illegal: normalized === "illegal"
+      });
+    }
+    closeBreakResultPromptV61();
+  }
+
+  function analysisScoreStateV60() {
+    return {
+      total: {1:Number(scores[1])||0, 2:Number(scores[2])||0},
+      rack: {1:Number(rackScores[1])||0, 2:Number(rackScores[2])||0}
+    };
+  }
+
+  function recordAnalysisEventV60(type, details = {}) {
+    analysisEventSequenceV60 += 1;
+    analysisEventsV60.push({
+      id: `e${analysisEventSequenceV60}`,
+      sequence: analysisEventSequenceV60,
+      type,
+      occurredAt: new Date().toISOString(),
+      rack: Number(rack)||1,
+      inning: Number(inning)||1,
+      player: Number(details.player ?? current) === 2 ? 2 : 1,
+      scores: analysisScoreStateV60(),
+      ...details
+    });
+  }
+
+  function analysisSummaryV60() {
+    const byType = {};
+    analysisEventsV60.forEach(event => { byType[event.type] = (byType[event.type] || 0) + 1; });
+    return {
+      schemaVersion: ANALYSIS_SCHEMA_VERSION_V60,
+      eventCount: analysisEventsV60.length,
+      byType,
+      generatedAt: new Date().toISOString()
+    };
+  }
+
   let currentMatchCategoryV38 = "Free";
   let currentMatchSeasonV38 = "";
   const GAME_MEMO_TAGS_V32 = ["ブレイク", "セーフティー", "フォーム", "メンタル", "集中力", "キュー切れ", "取り切り", "その他"];
@@ -8244,7 +8439,9 @@ button {
       usedBalls:[...usedBalls],
       rows:JSON.parse(JSON.stringify(rows)),
       rackEnded, foulLocked, forceNewRow, gameEnded, gameSetDismissed,
-      reviewMode, nextBreakPlayer
+      reviewMode, nextBreakPlayer,
+      analysisEventsV60: JSON.parse(JSON.stringify(analysisEventsV60)),
+      analysisEventSequenceV60, pendingBreakPlayerV61, pendingBreakRackV61
     };
   }
 
@@ -8271,6 +8468,13 @@ button {
     gameSetDismissed = state.gameSetDismissed;
     reviewMode = Boolean(state.reviewMode);
     nextBreakPlayer = state.nextBreakPlayer ?? current;
+    analysisEventsV60 = Array.isArray(state.analysisEventsV60)
+      ? JSON.parse(JSON.stringify(state.analysisEventsV60))
+      : [];
+    analysisEventSequenceV60 = Number(state.analysisEventSequenceV60) || analysisEventsV60.length;
+    pendingBreakPlayerV61 = state.pendingBreakPlayerV61 ?? null;
+    pendingBreakRackV61 = state.pendingBreakRackV61 ?? null;
+    closeBreakResultPromptV61();
   }
 
   function playerName(player) {
@@ -8383,6 +8587,14 @@ button {
       // startingPlayer は試合開始時の先攻を保持する。
       // ラックごとのブレイク担当に上書きしないことで、
       // 「先攻→後攻」の2人1組を1 Inningとして数える。
+      const completedRackV60 = rack;
+      recordAnalysisEventV60("rack_completed", {
+        player: fifteenBallPlayer,
+        completedRack: completedRackV60,
+        nextBreakPlayer: player,
+        rackFinalScores: {1:Number(rackScores[1])||0, 2:Number(rackScores[2])||0}
+      });
+
       current = player;
       nextBreakPlayer = player;
       breakCount[player]++;
@@ -8395,8 +8607,14 @@ button {
       // ラックが変わるため表示行は分けるが、同じ選手が続ける場合は
       // Inning番号とハイランを継続する。
       forceNewRow = true;
+      recordAnalysisEventV60("rack_started", {
+        player,
+        breakPlayer: player,
+        source: "next_rack_selection"
+      });
       el("proNextRackBox").classList.add("hidden");
     });
+    setTimeout(() => showBreakResultPromptV61(player, rack), 0);
   }
 
   function updateButtons() {
@@ -8464,6 +8682,13 @@ button {
       if (currentRun[current] > maxRun[current]) maxRun[current] = currentRun[current];
       usedBalls.add(number);
       addItemToCurrent(number);
+      recordAnalysisEventV60("ball_pocketed", {
+        player: current,
+        ball: number,
+        points: number,
+        rackPocketCount: usedBalls.size,
+        runAfter: currentRun[current]
+      });
 
       if (usedBalls.size === 15) {
         rackEnded = true;
@@ -8486,8 +8711,17 @@ button {
       ensureCurrentRow();
       // 手動の「プレーヤー交代」＝シュートミス1回。
       misses[current]++;
+      const fromPlayerV60 = current;
+      const toPlayerV60 = current === 1 ? 2 : 1;
+      recordAnalysisEventV60("player_switch", {
+        player: fromPlayerV60,
+        fromPlayer: fromPlayerV60,
+        toPlayer: toPlayerV60,
+        reason: "miss",
+        runBeforeEnd: currentRun[fromPlayerV60]
+      });
       endCurrentRun(current);
-      current = current === 1 ? 2 : 1;
+      current = toPlayerV60;
       foulLocked = false;
 
       if (current === startingPlayer) {
@@ -8502,6 +8736,11 @@ button {
     saveAndDo(() => {
       safety[current]++;
       addItemToCurrent("S");
+      recordAnalysisEventV60("safety", {
+        player: current,
+        result: "unclassified",
+        runBeforeEnd: currentRun[current]
+      });
       endCurrentRun(current);
       foulLocked = true;
     });
@@ -8512,6 +8751,12 @@ button {
     saveAndDo(() => {
       fouls[current]++;
       addItemToCurrent("F");
+      recordAnalysisEventV60("foul", {
+        player: current,
+        foulType: "unspecified",
+        phase: usedBalls.size === 0 ? "break_or_opening" : "rack_play",
+        runBeforeEnd: currentRun[current]
+      });
       endCurrentRun(current);
       foulLocked = true;
     });
@@ -8907,6 +9152,23 @@ button {
     currentGameRecordSaved = false;
     currentGameMemo = "";
     currentGameTags = [];
+    analysisEventsV60 = [];
+    analysisEventSequenceV60 = 0;
+    pendingBreakPlayerV61 = null;
+    pendingBreakRackV61 = null;
+    closeBreakResultPromptV61();
+    recordAnalysisEventV60("match_started", {
+      player: startingPlayer,
+      startingPlayer,
+      goals: {1:p1Goal, 2:p2Goal},
+      category: currentMatchCategoryV38,
+      season: currentMatchSeasonV38
+    });
+    recordAnalysisEventV60("rack_started", {
+      player: startingPlayer,
+      breakPlayer: startingPlayer,
+      source: "match_start"
+    });
 
     el("proP1Name").textContent = p1Name;
     el("proP2Name").textContent = p2Name;
@@ -8921,6 +9183,7 @@ button {
     el("proSummary").classList.add("hidden");
 
     updateGame();
+    setTimeout(() => showBreakResultPromptV61(startingPlayer, 1), 0);
   }
 
 
@@ -9363,6 +9626,10 @@ button {
   el("proUndoBtn")?.addEventListener("click", undo);
   el("proRackP1Card")?.addEventListener("click", () => startNextRackWith(1));
   el("proRackP2Card")?.addEventListener("click", () => startNextRackWith(2));
+  document.querySelectorAll("[data-break-result]").forEach(button => {
+    button.addEventListener("click", () => saveBreakResultV61(button.dataset.breakResult));
+  });
+  el("breakResultSkipV61")?.addEventListener("click", () => saveBreakResultV61("skipped"));
   
 
   // Rebuild v1.43: compact list, result word in score column, and reusable historical result view
@@ -9787,6 +10054,11 @@ button {
       season: currentMatchSeasonV38,
       memo: currentGameMemo,
       tags: [...currentGameTags],
+      analysis: {
+        schemaVersion: ANALYSIS_SCHEMA_VERSION_V60,
+        events: JSON.parse(JSON.stringify(analysisEventsV60)),
+        summary: analysisSummaryV60()
+      },
       progress:{p1:[...progress.p1],p2:[...progress.p2]},
       players:{
         1:{name:playerName(1),registeredPlayerId:selectedRegisteredPlayer[1]||null,goal:goals[1],score:scores[1],safety:safety[1],fouls:fouls[1],breaks:breakCount[1],maxRun:stats.maxRun[1],share:stats.share[1],misses:misses[1],pocketCount:stats.pocketCount[1],shotRate:stats.shotRate[1]},
