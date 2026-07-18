@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Rotation Scoreboard" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Rotation Scoreboard iPhone Ver.5.5.4</title>
+  <title>Rotation Scoreboard iPhone Ver.5.5.5</title>
   <style>
     :root {
       --bg: #16472d;
@@ -6413,7 +6413,7 @@ button {
   }
 }
 
-/* Ver.5.5.4: iPhone statistics filter header and date-field fit */
+/* Ver.5.5.5: iPhone statistics filter header and date-field fit */
 @media (max-width: 430px) {
   .statistics-filter-header {
     grid-template-columns: 72px minmax(0, 1fr) 58px !important;
@@ -6460,6 +6460,47 @@ button {
     box-sizing: border-box !important;
   }
 }
+
+
+/* Ver.5.5.5: iPhone date input frame containment */
+@media (max-width: 430px) {
+  .statistics-filter-card:first-child .statistics-filter-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 14px !important;
+    width: 100% !important;
+  }
+
+  .statistics-filter-card:first-child .statistics-filter-field {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  #statisticsFromDate,
+  #statisticsToDate {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: 48px !important;
+    padding: 0 12px !important;
+    margin: 0 !important;
+    border: 1px solid rgba(255,255,255,.55) !important;
+    border-radius: 8px !important;
+    box-sizing: border-box !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+  }
+
+  #statisticsFromDate::-webkit-date-and-time-value,
+  #statisticsToDate::-webkit-date-and-time-value {
+    min-width: 0 !important;
+    text-align: left !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -6472,7 +6513,7 @@ button {
 
   <main class="app" aria-label="Rotation Scoreboard">
     <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
-    <div class="sub-title">version 5.5.4</div>
+    <div class="sub-title">version 5.5.5</div>
 
     <section class="home-dashboard" id="homeDashboard" aria-label="ダッシュボード">
       <div class="home-dashboard-head">
@@ -6579,7 +6620,7 @@ button {
         </button>
       </div>
 
-      <div class="player-version">version 5.5.4</div>
+      <div class="player-version">version 5.5.5</div>
     </section>
 
     <section class="pro-game-screen hidden" id="proGameScreen" aria-label="Rotation game">
@@ -6863,7 +6904,7 @@ button {
       <header class="settings-header">
         <button class="settings-back" id="settingsBackBtn" type="button">‹ 戻る</button>
         <div class="settings-title">設定</div>
-        <div class="settings-version">Ver.5.5.4</div>
+        <div class="settings-version">Ver.5.5.5</div>
       </header>
       <div class="settings-content">
         <section class="settings-card">
