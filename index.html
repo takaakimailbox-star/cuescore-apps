@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Rotation Scoreboard" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Rotation Scoreboard Ver.8.7.3</title>
+  <title>Rotation Scoreboard Ver.8.7.4</title>
   <style>
     :root {
       --bg: #16472d;
@@ -8257,6 +8257,48 @@ button {
 }
 </style>
 
+
+<!-- Rotation Design System v1.0 / Remove duplicated Rack-Inning status / Ver.8.7.4 -->
+<style id="rotation-design-system-v874">
+/* Rack and Inning are already represented in the history. Remove the duplicate row
+   below the scores and return the recovered space to the match history. */
+.pro-status.pro-status-two {
+  display: none !important;
+}
+
+/* The score card remains a single, complete card after the status row is removed. */
+.pro-top-fixed {
+  border-radius: var(--rotation-radius-lg) !important;
+}
+.pro-scoreboard {
+  border-radius: inherit !important;
+  overflow: hidden !important;
+}
+
+/* Use the recovered status-row height for a larger readable history window. */
+.pro-log-wrap {
+  flex-basis: 212px !important;
+  min-height: 212px !important;
+  max-height: 212px !important;
+}
+
+@media (max-height: 760px) {
+  .pro-log-wrap {
+    flex-basis: 178px !important;
+    min-height: 178px !important;
+    max-height: 178px !important;
+  }
+}
+
+@media (max-height: 680px) {
+  .pro-log-wrap {
+    flex-basis: 160px !important;
+    min-height: 160px !important;
+    max-height: 160px !important;
+  }
+}
+</style>
+
 </head>
 <body>
   <div class="toast" id="toast">
@@ -8268,7 +8310,7 @@ button {
 
   <main class="app" aria-label="Rotation Scoreboard">
     <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
-    <div class="sub-title">version 8.7.3</div>
+    <div class="sub-title">version 8.7.4</div>
 
     <section class="home-dashboard" id="homeDashboard" aria-label="ダッシュボード">
       <div class="home-dashboard-head">
@@ -15265,12 +15307,12 @@ button {
     }, true);
 
     window.addEventListener("error", event => {
-      console.error("[Rotation Scoreboard 8.7.3] runtime error", event.error || event.message);
+      console.error("[Rotation Scoreboard 8.7.4] runtime error", event.error || event.message);
       if (typeof showToast === "function") showToast("処理を完了できませんでした", "一度前の画面へ戻って、もう一度お試しください。");
     });
 
     window.addEventListener("unhandledrejection", event => {
-      console.error("[Rotation Scoreboard 8.7.3] unhandled promise rejection", event.reason);
+      console.error("[Rotation Scoreboard 8.7.4] unhandled promise rejection", event.reason);
       if (typeof showToast === "function") showToast("通信または保存を完了できませんでした", "接続状態を確認して、もう一度お試しください。");
     });
   })();
