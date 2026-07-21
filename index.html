@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Rotation Scoreboard" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Rotation Scoreboard Ver.8.8.0</title>
+  <title>Rotation Scoreboard Ver.8.8.1</title>
   <style>
     :root {
       --bg: #16472d;
@@ -8636,6 +8636,189 @@ button {
 }
 </style>
 
+
+
+<!-- Rotation Design System v1.0 / Player Info one-screen refinement / Ver.8.8.1 -->
+<style id="player-info-one-screen-v881">
+/* One-screen setup: all essential controls and Start button remain visible on iPhone. */
+.app.player-info-mode,
+.player-info-screen {
+  height: 100svh !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+.player-info-screen {
+  padding-bottom: env(safe-area-inset-bottom) !important;
+}
+.player-info-header {
+  position: relative !important;
+  height: calc(54px + env(safe-area-inset-top)) !important;
+  min-height: calc(54px + env(safe-area-inset-top)) !important;
+  grid-template-columns: 64px 1fr 64px !important;
+  padding: env(safe-area-inset-top) 12px 0 !important;
+}
+.player-info-title {
+  font-size: clamp(22px, 5.2vw, 28px) !important;
+}
+.back-button {
+  width: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+}
+.back-button::before { font-size: 48px !important; }
+.player-info-content {
+  height: calc(100svh - 54px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
+  min-height: 0 !important;
+  padding: 9px 12px 10px !important;
+  gap: 8px !important;
+  overflow: hidden !important;
+  justify-content: flex-start !important;
+}
+.player-block {
+  padding: 10px 12px !important;
+  border-radius: 17px !important;
+  box-shadow: 0 7px 16px rgba(0,0,0,.12) !important;
+}
+.player-block:first-child { border-top-width: 3px !important; }
+.player-heading-row {
+  margin-bottom: 7px !important;
+  min-height: 36px !important;
+}
+.player-block h2 {
+  font-size: clamp(22px, 5.4vw, 28px) !important;
+}
+.starter-choice {
+  min-width: 72px !important;
+  min-height: 38px !important;
+  padding: 6px 12px !important;
+  font-size: 14px !important;
+}
+.form-row,
+.form-row.race-control-row {
+  grid-template-columns: 50px minmax(0,1fr) 42px !important;
+  gap: 8px !important;
+  margin-bottom: 7px !important;
+}
+.form-row.race-control-row {
+  grid-template-columns: 50px 78px minmax(0,1fr) !important;
+  margin-bottom: 0 !important;
+}
+.form-row label { font-size: 14px !important; }
+.form-row input[type="text"],
+.form-row input[type="number"] {
+  min-height: 40px !important;
+  border-radius: 12px !important;
+  padding: 5px 10px !important;
+  font-size: 18px !important;
+}
+.search-button {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 12px !important;
+}
+.search-button::before {
+  width: 18px !important; height: 18px !important; left: 8px !important; top: 7px !important;
+}
+.search-button::after { right: 7px !important; bottom: 8px !important; }
+.skill-range::-webkit-slider-thumb { width: 23px !important; height: 23px !important; }
+.player-name-limit-note {
+  margin: -1px 3px 0 !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+}
+.season-setting-v38,
+.recording-setting-v698 {
+  padding: 10px 12px !important;
+  border-radius: 17px !important;
+  box-shadow: 0 6px 14px rgba(0,0,0,.10) !important;
+}
+.season-setting-title-v38,
+.recording-setting-title-v698 {
+  margin-bottom: 8px !important;
+  font-size: 17px !important;
+}
+.season-setting-title-v38::after {
+  display: none !important;
+}
+.season-setting-grid-v381 {
+  grid-template-columns: 68px minmax(0,1fr) !important;
+  gap: 7px 8px !important;
+}
+.season-setting-grid-v381 > label { font-size: 13px !important; }
+.season-select-row-v381 {
+  grid-template-columns: minmax(0,1fr) 40px !important;
+  gap: 7px !important;
+}
+.season-setting-v38 select {
+  min-height: 40px !important;
+  border-radius: 12px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  font-size: 15px !important;
+}
+.season-manage-btn-v381 {
+  width: 40px !important; height: 40px !important; min-width: 40px !important;
+  border-radius: 12px !important; font-size: 23px !important;
+}
+.recording-setting-options-v698 { gap: 8px !important; }
+.recording-choice-v698 {
+  min-height: 59px !important;
+  padding: 8px 10px !important;
+  border-radius: 13px !important;
+}
+.recording-choice-name-v698 {
+  margin-bottom: 2px !important;
+  font-size: 15px !important;
+}
+.recording-choice-desc-v698 {
+  font-size: 10.5px !important;
+  line-height: 1.2 !important;
+}
+.start-game-button {
+  position: static !important;
+  left: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  width: 100% !important;
+  min-height: 58px !important;
+  margin: 0 !important;
+  padding: 8px 18px !important;
+  border-radius: 17px !important;
+  font-size: 21px !important;
+  flex: 0 0 auto !important;
+}
+.start-game-button:active { transform: scale(.985) !important; }
+.player-version {
+  position: absolute !important;
+  right: 16px !important;
+  bottom: calc(3px + env(safe-area-inset-bottom)) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 10px !important;
+  pointer-events: none !important;
+}
+/* iPhone SE / short landscape-like preview: preserve one-screen priority. */
+@media (max-height: 760px) {
+  .player-info-header {
+    height: calc(48px + env(safe-area-inset-top)) !important;
+    min-height: calc(48px + env(safe-area-inset-top)) !important;
+  }
+  .player-info-content {
+    height: calc(100svh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
+    padding-top: 6px !important;
+    gap: 6px !important;
+  }
+  .player-block, .season-setting-v38, .recording-setting-v698 { padding: 8px 10px !important; }
+  .player-heading-row { margin-bottom: 5px !important; min-height: 32px !important; }
+  .form-row, .form-row.race-control-row { margin-bottom: 5px !important; }
+  .form-row input[type="text"], .form-row input[type="number"], .season-setting-v38 select { min-height: 36px !important; }
+  .search-button, .season-manage-btn-v381 { width: 36px !important; height: 36px !important; min-width: 36px !important; }
+  .recording-choice-v698 { min-height: 52px !important; padding: 6px 8px !important; }
+  .start-game-button { min-height: 52px !important; font-size: 19px !important; }
+  .player-name-limit-note { display: none !important; }
+}
+</style>
+
 </head>
 <body>
   <div class="toast" id="toast">
@@ -8647,7 +8830,7 @@ button {
 
   <main class="app" aria-label="Rotation Scoreboard">
     <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
-    <div class="sub-title">version 8.7.4</div>
+    <div class="sub-title">version 8.8.1</div>
 
     <section class="home-dashboard" id="homeDashboard" aria-label="ダッシュボード">
       <div class="home-dashboard-head">
@@ -8768,7 +8951,7 @@ button {
         </button>
       </div>
 
-      <div class="player-version">version 8.8.0</div>
+      <div class="player-version">version 8.8.1</div>
     </section>
 
     <section id="startConfirmOverlayV698" class="start-confirm-overlay-v698 hidden" aria-label="試合開始確認">
