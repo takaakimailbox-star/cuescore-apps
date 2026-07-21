@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Rotation Scoreboard" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Rotation Scoreboard Ver.8.7.0</title>
+  <title>Rotation Scoreboard Ver.8.7.1</title>
   <style>
     :root {
       --bg: #16472d;
@@ -7961,6 +7961,103 @@ button {
 }
 </style>
 
+
+
+<!-- Rotation Design System v1.0 / Game Screen refinement / Ver.8.7.1 -->
+<style id="rotation-design-system-v871">
+/* Refinement order: hierarchy -> touch targets -> visual state. Background remains unchanged. */
+.pro-game-title {
+  font-size: clamp(19px,5vw,25px) !important;
+  font-weight: 850 !important;
+}
+
+/* Active player must be recognizable without relying only on the PLAY label. */
+.pro-player-panel.active {
+  background: rgba(69,209,139,.19) !important;
+  box-shadow: inset 0 4px 0 var(--rotation-accent), inset 4px 0 0 rgba(69,209,139,.72) !important;
+}
+.pro-player-panel.active .pro-player-name {
+  font-weight: 850 !important;
+}
+.pro-player-panel:not(.active) {
+  background: rgba(255,255,255,.018) !important;
+}
+
+/* Inning log is secondary information: preserve it while returning space to input. */
+.pro-log-wrap {
+  flex: 0 0 clamp(92px,11svh,122px) !important;
+  min-height: 92px !important;
+  max-height: 122px !important;
+  margin-top: 2px !important;
+}
+.pro-log-header {
+  flex: 0 0 30px !important;
+  min-height: 30px !important;
+}
+.pro-turn-log {
+  min-height: 54px !important;
+}
+.pro-log-row {
+  min-height: 25px !important;
+}
+
+/* Slightly larger scoring targets, retaining five-column layout. */
+.pro-play-area {
+  padding: 13px 8px 12px !important;
+}
+.pro-balls {
+  max-width: 410px !important;
+  gap: clamp(6px,1.9vw,10px) !important;
+}
+.pro-ball {
+  width: clamp(52px,14.35vw,68px) !important;
+  height: clamp(52px,14.35vw,68px) !important;
+}
+
+/* Keep switch as the primary action without making the other controls feel undersized. */
+.pro-actions {
+  gap: 9px !important;
+}
+.pro-action {
+  min-height: 56px !important;
+  padding: 9px 5px !important;
+  font-size: clamp(12px,3.15vw,15px) !important;
+}
+.pro-switch {
+  font-weight: 900 !important;
+  box-shadow: 0 5px 14px rgba(69,209,139,.16) !important;
+}
+.pro-undo:disabled {
+  opacity: .25 !important;
+}
+
+@media (max-height: 760px) {
+  .pro-log-wrap {
+    flex-basis: 82px !important;
+    min-height: 82px !important;
+    max-height: 92px !important;
+  }
+  .pro-log-header { flex-basis: 27px !important; min-height: 27px !important; }
+  .pro-turn-log { min-height: 45px !important; }
+  .pro-ball {
+    width: clamp(47px,12.8vw,58px) !important;
+    height: clamp(47px,12.8vw,58px) !important;
+  }
+  .pro-action { min-height: 50px !important; }
+}
+
+@media (max-width: 390px) {
+  .pro-game-header { grid-template-columns: 48px minmax(0,1fr) 94px !important; }
+  .pro-balls { gap: 6px !important; }
+  .pro-ball {
+    width: clamp(49px,14vw,55px) !important;
+    height: clamp(49px,14vw,55px) !important;
+  }
+  .pro-actions { gap: 7px !important; }
+  .pro-action { font-size: 12px !important; }
+}
+</style>
+
 </head>
 <body>
   <div class="toast" id="toast">
@@ -7972,7 +8069,7 @@ button {
 
   <main class="app" aria-label="Rotation Scoreboard">
     <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
-    <div class="sub-title">version 8.6.1</div>
+    <div class="sub-title">version 8.7.1</div>
 
     <section class="home-dashboard" id="homeDashboard" aria-label="ダッシュボード">
       <div class="home-dashboard-head">
@@ -8126,7 +8223,7 @@ button {
     <section class="pro-game-screen hidden" id="proGameScreen" aria-label="Rotation game">
       <header class="pro-game-header">
         <button id="proGameBackBtn" class="pro-back-btn" type="button" aria-label="戻る">‹</button>
-        <div class="pro-game-title">Rotation match!</div>
+        <div class="pro-game-title">Rotation Match</div>
         <div class="pro-start-time" id="proStartTime">開始時刻 --:--</div>
       </header>
 
@@ -14961,12 +15058,12 @@ button {
     }, true);
 
     window.addEventListener("error", event => {
-      console.error("[Rotation Scoreboard 8.7.0] runtime error", event.error || event.message);
+      console.error("[Rotation Scoreboard 8.7.1] runtime error", event.error || event.message);
       if (typeof showToast === "function") showToast("処理を完了できませんでした", "一度前の画面へ戻って、もう一度お試しください。");
     });
 
     window.addEventListener("unhandledrejection", event => {
-      console.error("[Rotation Scoreboard 8.7.0] unhandled promise rejection", event.reason);
+      console.error("[Rotation Scoreboard 8.7.1] unhandled promise rejection", event.reason);
       if (typeof showToast === "function") showToast("通信または保存を完了できませんでした", "接続状態を確認して、もう一度お試しください。");
     });
   })();
