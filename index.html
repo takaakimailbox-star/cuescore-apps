@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Rotation Scoreboard" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Rotation Scoreboard Ver.8.7.1</title>
+  <title>Rotation Scoreboard Ver.8.7.2</title>
   <style>
     :root {
       --bg: #16472d;
@@ -7963,7 +7963,7 @@ button {
 
 
 
-<!-- Rotation Design System v1.0 / Game Screen refinement / Ver.8.7.1 -->
+<!-- Rotation Design System v1.0 / Game Screen refinement / Ver.8.7.2 -->
 <style id="rotation-design-system-v871">
 /* Refinement order: hierarchy -> touch targets -> visual state. Background remains unchanged. */
 .pro-game-title {
@@ -8058,6 +8058,74 @@ button {
 }
 </style>
 
+
+<style>
+/* Ver.8.7.2: inning history readability refinement */
+.app.pro-game-mode .pro-score-subrow,
+.app.game-mode .score-meta-row,
+.pro-rack-inning-row {
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:12px !important;
+  min-height:38px !important;
+}
+.pro-rack-inning-row .separator,
+.pro-score-subrow .separator {
+  color:#49d79a !important;
+  font-weight:900 !important;
+}
+/* Restore enough height for 4-5 innings without dominating the screen */
+.pro-score-history,
+.pro-inning-history,
+.pro-sheet,
+.score-sheet {
+  min-height:150px !important;
+  max-height:178px !important;
+  overflow-y:auto !important;
+  -webkit-overflow-scrolling:touch !important;
+}
+.pro-score-history .sheet-row,
+.pro-inning-history .sheet-row,
+.pro-sheet .sheet-row,
+.score-sheet .sheet-row {
+  min-height:38px !important;
+  height:38px !important;
+  line-height:1.15 !important;
+}
+@media (max-width:520px){
+  .pro-score-history,
+  .pro-inning-history,
+  .pro-sheet,
+  .score-sheet {
+    min-height:154px !important;
+    max-height:174px !important;
+  }
+  .pro-score-history .sheet-row,
+  .pro-inning-history .sheet-row,
+  .pro-sheet .sheet-row,
+  .score-sheet .sheet-row {
+    min-height:39px !important;
+    height:39px !important;
+  }
+}
+@media (max-height:760px){
+  .pro-score-history,
+  .pro-inning-history,
+  .pro-sheet,
+  .score-sheet {
+    min-height:132px !important;
+    max-height:150px !important;
+  }
+  .pro-score-history .sheet-row,
+  .pro-inning-history .sheet-row,
+  .pro-sheet .sheet-row,
+  .score-sheet .sheet-row {
+    min-height:34px !important;
+    height:34px !important;
+  }
+}
+</style>
 </head>
 <body>
   <div class="toast" id="toast">
@@ -8069,7 +8137,7 @@ button {
 
   <main class="app" aria-label="Rotation Scoreboard">
     <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
-    <div class="sub-title">version 8.7.1</div>
+    <div class="sub-title">version 8.7.2</div>
 
     <section class="home-dashboard" id="homeDashboard" aria-label="ダッシュボード">
       <div class="home-dashboard-head">
@@ -15058,12 +15126,12 @@ button {
     }, true);
 
     window.addEventListener("error", event => {
-      console.error("[Rotation Scoreboard 8.7.1] runtime error", event.error || event.message);
+      console.error("[Rotation Scoreboard 8.7.2] runtime error", event.error || event.message);
       if (typeof showToast === "function") showToast("処理を完了できませんでした", "一度前の画面へ戻って、もう一度お試しください。");
     });
 
     window.addEventListener("unhandledrejection", event => {
-      console.error("[Rotation Scoreboard 8.7.1] unhandled promise rejection", event.reason);
+      console.error("[Rotation Scoreboard 8.7.2] unhandled promise rejection", event.reason);
       if (typeof showToast === "function") showToast("通信または保存を完了できませんでした", "接続状態を確認して、もう一度お試しください。");
     });
   })();
