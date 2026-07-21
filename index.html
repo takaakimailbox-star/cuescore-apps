@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Rotation Scoreboard" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Rotation Scoreboard Ver.8.7.4</title>
+  <title>Rotation Scoreboard Ver.8.8.0</title>
   <style>
     :root {
       --bg: #16472d;
@@ -7662,6 +7662,343 @@ button {
 .player-reflection-focus-list-v850{display:grid;gap:7px}.player-reflection-focus-v850{padding:9px 10px;border-left:3px solid rgba(92,220,190,.7);border-radius:8px;background:rgba(255,255,255,.04);font-size:12px;line-height:1.55}.player-reflection-focus-date-v850{display:block;font-size:10px;color:rgba(255,255,255,.56);margin-bottom:2px}
 .player-reflection-wait-v850{padding:13px;border-radius:12px;background:rgba(255,255,255,.045);font-size:13px;line-height:1.65;color:rgba(255,255,255,.72)}
 @media(max-width:430px){.player-reflection-grid-v850{gap:6px}.player-reflection-card-v850{padding:9px 4px}.player-reflection-card-value-v850{font-size:16px}.player-reflection-mental-row-v850{grid-template-columns:minmax(86px,1.15fr) .65fr .75fr .65fr;font-size:10px;gap:4px;padding:8px 6px}}
+
+
+/* =========================================================
+   Ver.8.8.0 — Player Info / Setup Screen
+   Rotation Design System v1.0 application
+   ========================================================= */
+.app.player-info-mode {
+  background: #082b1e !important;
+}
+.player-info-screen {
+  background:
+    radial-gradient(circle at 50% 18%, rgba(35, 112, 78, .20), transparent 35%),
+    linear-gradient(180deg, #082b1e 0%, #0a3425 100%) !important;
+  color: #f7fbf9 !important;
+  padding-bottom: calc(118px + env(safe-area-inset-bottom)) !important;
+}
+.player-info-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 30 !important;
+  height: calc(62px + env(safe-area-inset-top)) !important;
+  min-height: calc(62px + env(safe-area-inset-top)) !important;
+  grid-template-columns: 92px 1fr 92px !important;
+  padding: env(safe-area-inset-top) 18px 0 !important;
+  background: rgba(3, 30, 21, .94) !important;
+  border-bottom: 1px solid rgba(153, 220, 190, .18) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+.player-info-title {
+  font-size: clamp(23px, 5.4vw, 30px) !important;
+  font-weight: 850 !important;
+  letter-spacing: .01em !important;
+}
+.back-button {
+  font-size: 0 !important;
+  width: 56px !important;
+  min-width: 56px !important;
+  min-height: 52px !important;
+  border-radius: 14px !important;
+}
+.back-button::before {
+  content: "‹" !important;
+  font-size: 54px !important;
+  line-height: 1 !important;
+  transform: translateY(-1px) !important;
+  margin: 0 !important;
+}
+.player-info-content {
+  width: 100% !important;
+  max-width: 520px !important;
+  margin: 0 auto !important;
+  padding: 20px 16px 22px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+.player-block {
+  position: relative !important;
+  margin: 0 !important;
+  padding: 17px 16px 16px !important;
+  border-radius: 22px !important;
+  border: 1px solid rgba(131, 202, 171, .25) !important;
+  background: linear-gradient(180deg, rgba(25, 83, 60, .92), rgba(15, 63, 46, .92)) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .16) !important;
+}
+.player-block:first-child {
+  border-top: 4px solid #4ad59a !important;
+}
+.player2-block {
+  margin-top: 0 !important;
+}
+.player-heading-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin-bottom: 14px !important;
+}
+.player-block h2 {
+  margin: 0 !important;
+  font-size: clamp(25px, 6vw, 34px) !important;
+  line-height: 1.1 !important;
+  font-weight: 900 !important;
+  letter-spacing: .01em !important;
+}
+.starter-choice {
+  min-width: 84px !important;
+  min-height: 44px !important;
+  padding: 8px 14px !important;
+  border: 1px solid rgba(255,255,255,.20) !important;
+  border-radius: 999px !important;
+  background: rgba(3, 31, 22, .55) !important;
+  color: rgba(255,255,255,.72) !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+}
+.starter-choice.selected {
+  background: #49d49a !important;
+  border-color: #49d49a !important;
+  color: #06281c !important;
+  box-shadow: 0 5px 14px rgba(73, 212, 154, .20) !important;
+}
+.form-row,
+.form-row.race-control-row {
+  display: grid !important;
+  grid-template-columns: 62px minmax(0,1fr) 46px !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 0 0 12px !important;
+}
+.form-row.race-control-row {
+  grid-template-columns: 62px 92px minmax(0,1fr) !important;
+  margin-bottom: 0 !important;
+}
+.form-row label {
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  color: rgba(232, 247, 240, .78) !important;
+}
+.form-row input[type="text"],
+.form-row input[type="number"] {
+  min-height: 50px !important;
+  border: 1px solid rgba(162, 220, 195, .30) !important;
+  border-radius: 14px !important;
+  background: rgba(2, 31, 21, .55) !important;
+  color: #fff !important;
+  padding: 8px 13px !important;
+  font-size: 20px !important;
+  font-weight: 750 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+.form-row input:focus,
+.season-setting-v38 select:focus {
+  border-color: #55dca3 !important;
+  box-shadow: 0 0 0 3px rgba(85, 220, 163, .18) !important;
+}
+.search-button {
+  width: 46px !important;
+  height: 46px !important;
+  border-radius: 14px !important;
+  background: rgba(255,255,255,.08) !important;
+}
+.search-button::before {
+  width: 20px !important;
+  height: 20px !important;
+  left: 10px !important;
+  top: 8px !important;
+  border-width: 3px !important;
+}
+.search-button::after {
+  width: 12px !important;
+  height: 3px !important;
+  right: 8px !important;
+  bottom: 9px !important;
+}
+.skill-range {
+  height: 6px !important;
+  background: rgba(255,255,255,.18) !important;
+}
+.skill-range::-webkit-slider-thumb {
+  width: 26px !important;
+  height: 26px !important;
+  border: 2px solid #d6eee3 !important;
+}
+.player-name-limit-note {
+  margin: -4px 4px 0 !important;
+  text-align: right !important;
+  color: rgba(224, 242, 234, .56) !important;
+  font-size: 13px !important;
+}
+.season-setting-v38,
+.recording-setting-v698 {
+  margin: 0 !important;
+  padding: 17px 16px !important;
+  border-radius: 22px !important;
+  border: 1px solid rgba(131, 202, 171, .22) !important;
+  background: rgba(13, 61, 44, .90) !important;
+  box-shadow: 0 10px 24px rgba(0,0,0,.12) !important;
+}
+.season-setting-title-v38,
+.recording-setting-title-v698 {
+  margin: 0 0 14px !important;
+  font-size: 19px !important;
+  line-height: 1.2 !important;
+  font-weight: 900 !important;
+  color: #f4fbf8 !important;
+}
+.season-setting-title-v38::after {
+  content: "試合区分とシーズン" !important;
+  display: block !important;
+  margin-top: 4px !important;
+  font-size: 13px !important;
+  font-weight: 650 !important;
+  color: rgba(224,242,234,.58) !important;
+}
+.season-setting-grid-v381 {
+  display: grid !important;
+  grid-template-columns: 82px minmax(0,1fr) !important;
+  gap: 12px 10px !important;
+  align-items: center !important;
+}
+.season-setting-grid-v381 > label {
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  color: rgba(232,247,240,.74) !important;
+}
+.season-select-row-v381 {
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) 46px !important;
+  gap: 9px !important;
+}
+.season-setting-v38 select {
+  width: 100% !important;
+  min-height: 48px !important;
+  border: 1px solid rgba(162,220,195,.28) !important;
+  border-radius: 14px !important;
+  background: rgba(2,31,21,.55) !important;
+  color: #fff !important;
+  padding: 7px 34px 7px 12px !important;
+  font-size: 17px !important;
+  font-weight: 750 !important;
+}
+.season-manage-btn-v381 {
+  width: 46px !important;
+  height: 46px !important;
+  min-width: 46px !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(162,220,195,.22) !important;
+  background: rgba(255,255,255,.08) !important;
+  color: #eaf8f2 !important;
+  font-size: 26px !important;
+  font-weight: 500 !important;
+}
+.recording-setting-options-v698 {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 10px !important;
+}
+.recording-choice-v698 {
+  min-height: 84px !important;
+  padding: 13px 12px !important;
+  border: 1px solid rgba(162,220,195,.22) !important;
+  border-radius: 16px !important;
+  background: rgba(2,31,21,.50) !important;
+  color: rgba(244,251,248,.78) !important;
+  text-align: left !important;
+}
+.recording-choice-v698.selected-v698 {
+  border-color: #55dca3 !important;
+  background: rgba(46, 132, 94, .55) !important;
+  box-shadow: inset 0 0 0 2px rgba(85,220,163,.22) !important;
+  color: #fff !important;
+}
+.recording-choice-name-v698 {
+  display: block !important;
+  margin-bottom: 5px !important;
+  font-size: 17px !important;
+  font-weight: 900 !important;
+}
+.recording-choice-desc-v698 {
+  display: block !important;
+  font-size: 12px !important;
+  line-height: 1.35 !important;
+  color: inherit !important;
+  opacity: .72 !important;
+}
+.start-game-button {
+  position: fixed !important;
+  z-index: 35 !important;
+  left: 50% !important;
+  bottom: calc(14px + env(safe-area-inset-bottom)) !important;
+  transform: translateX(-50%) !important;
+  width: min(calc(100vw - 32px), 488px) !important;
+  min-height: 72px !important;
+  margin: 0 !important;
+  padding: 12px 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  border: 1px solid rgba(134, 245, 194, .60) !important;
+  border-radius: 20px !important;
+  background: linear-gradient(180deg, #52dda4 0%, #38c98e 100%) !important;
+  color: #05281b !important;
+  font-size: 23px !important;
+  font-weight: 950 !important;
+  box-shadow: 0 14px 30px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.34) !important;
+}
+.start-game-button:active {
+  transform: translateX(-50%) scale(.985) !important;
+}
+.ball-rack {
+  display: none !important;
+}
+.player-version {
+  position: static !important;
+  align-self: center !important;
+  margin: 4px 0 0 !important;
+  padding: 0 0 8px !important;
+  font-size: 12px !important;
+  color: rgba(220,239,230,.42) !important;
+}
+.player-vs-divider-v880 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: -2px 4px;
+  color: rgba(224,242,234,.52);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .18em;
+}
+.player-vs-divider-v880::before,
+.player-vs-divider-v880::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: rgba(151,213,186,.18);
+}
+@media (max-height: 760px) {
+  .player-info-content { padding-top: 14px !important; gap: 10px !important; }
+  .player-block, .season-setting-v38, .recording-setting-v698 { padding: 13px 14px !important; border-radius: 18px !important; }
+  .player-heading-row { margin-bottom: 10px !important; }
+  .form-row { margin-bottom: 9px !important; }
+  .form-row input[type="text"], .form-row input[type="number"] { min-height: 44px !important; }
+  .recording-choice-v698 { min-height: 70px !important; padding: 10px !important; }
+}
+@media (max-width: 370px) {
+  .player-info-content { padding-left: 12px !important; padding-right: 12px !important; }
+  .form-row, .form-row.race-control-row { grid-template-columns: 54px minmax(0,1fr) 42px !important; }
+  .form-row.race-control-row { grid-template-columns: 54px 80px minmax(0,1fr) !important; }
+  .recording-choice-name-v698 { font-size: 15px !important; }
+  .recording-choice-desc-v698 { font-size: 11px !important; }
+}
+
 </style>
 
 
@@ -8341,38 +8678,38 @@ button {
     <section class="player-info-screen hidden" id="playerInfoScreen" aria-label="Player info">
       <header class="player-info-header">
         <button class="back-button" id="backToTitleBtn" type="button" aria-label="戻る">戻る</button>
-        <div class="player-info-title">Player info</div>
+        <div class="player-info-title">試合開始</div>
         <div class="header-spacer"></div>
       </header>
 
       <div class="player-info-content">
         <section class="player-block">
-          <div class="player-heading-row"><h2>Player1</h2><button class="starter-choice selected" id="p1StarterBtn" type="button">先攻</button></div>
+          <div class="player-heading-row"><h2>プレーヤー1</h2><button class="starter-choice selected" id="p1StarterBtn" type="button">先攻</button></div>
 
           <div class="form-row">
-            <label for="p1Name">Name:</label>
+            <label for="p1Name">名前</label>
             <input id="p1Name" type="text" value="プレイヤー 1" maxlength="10" aria-describedby="playerNameLimitNote" />
             <button class="search-button" id="p1PlayerSearchBtn" type="button" aria-label="Player1 登録プレーヤー検索"></button>
           </div>
 
           <div class="form-row race-control-row">
-            <label for="p1Race">Race to:</label>
+            <label for="p1Race">Race</label>
             <input id="p1Race" type="number" value="120" inputmode="numeric" aria-label="Player1 Race to" />
             <input id="p1Skill" class="skill-range p1" type="range" min="1" max="6" step="1" value="2" aria-label="Player1 Race to 数字選択バー" />
           </div>
         </section>
 
         <section class="player-block player2-block">
-          <div class="player-heading-row"><h2>Player2</h2><button class="starter-choice" id="p2StarterBtn" type="button">後攻</button></div>
+          <div class="player-heading-row"><h2>プレーヤー2</h2><button class="starter-choice" id="p2StarterBtn" type="button">後攻</button></div>
 
           <div class="form-row">
-            <label for="p2Name">Name:</label>
+            <label for="p2Name">名前</label>
             <input id="p2Name" type="text" value="プレイヤー 2" maxlength="10" aria-describedby="playerNameLimitNote" />
             <button class="search-button" id="p2PlayerSearchBtn" type="button" aria-label="Player2 登録プレーヤー検索"></button>
           </div>
 
           <div class="form-row race-control-row">
-            <label for="p2Race">Race to:</label>
+            <label for="p2Race">Race</label>
             <input id="p2Race" type="number" value="120" inputmode="numeric" aria-label="Player2 Race to" />
             <input id="p2Skill" class="skill-range p2" type="range" min="1" max="6" step="1" value="2" aria-label="Player2 Race to 数字選択バー" />
           </div>
@@ -8427,11 +8764,11 @@ button {
             <span class="rack-ball b7">7</span>
             <span class="rack-ball b8">8</span>
           </span>
-          <span>Start game!</span>
+          <span>試合を開始</span>
         </button>
       </div>
 
-      <div class="player-version">version 8.2.0</div>
+      <div class="player-version">version 8.8.0</div>
     </section>
 
     <section id="startConfirmOverlayV698" class="start-confirm-overlay-v698 hidden" aria-label="試合開始確認">
@@ -15316,6 +15653,42 @@ button {
       if (typeof showToast === "function") showToast("通信または保存を完了できませんでした", "接続状態を確認して、もう一度お試しください。");
     });
   })();
+
+
+/* Ver.8.8.0: Player Info Design System behavior */
+(() => {
+  const setup = () => {
+    const p1 = document.querySelector('#playerInfoScreen .player-block');
+    const p2 = document.querySelector('#playerInfoScreen .player2-block');
+    if (p1 && p2 && !document.querySelector('.player-vs-divider-v880')) {
+      const vs = document.createElement('div');
+      vs.className = 'player-vs-divider-v880';
+      vs.textContent = 'VS';
+      p1.insertAdjacentElement('afterend', vs);
+    }
+
+    const start = document.getElementById('startGameBtn');
+    if (start) {
+      start.setAttribute('aria-label', '設定を確認して試合を開始');
+    }
+
+    const updateStarterLabels = () => {
+      const p1Btn = document.getElementById('p1StarterBtn');
+      const p2Btn = document.getElementById('p2StarterBtn');
+      if (p1Btn) p1Btn.textContent = p1Btn.classList.contains('selected') ? 'ブレイク' : '後攻';
+      if (p2Btn) p2Btn.textContent = p2Btn.classList.contains('selected') ? 'ブレイク' : '後攻';
+    };
+    updateStarterLabels();
+    document.getElementById('p1StarterBtn')?.addEventListener('click', () => requestAnimationFrame(updateStarterLabels));
+    document.getElementById('p2StarterBtn')?.addEventListener('click', () => requestAnimationFrame(updateStarterLabels));
+
+    const title = document.querySelector('.player-info-title');
+    if (title) title.textContent = '試合開始';
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup, {once:true});
+  else setup();
+})();
+
 </script>
 
 </body>
