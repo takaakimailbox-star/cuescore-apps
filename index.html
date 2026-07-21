@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Rotation Scoreboard" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Rotation Scoreboard Ver.8.6.1</title>
+  <title>Rotation Scoreboard Ver.8.7.0</title>
   <style>
     :root {
       --bg: #16472d;
@@ -7647,7 +7647,7 @@ button {
 
 
 
-/* Rotation Scoreboard Ver.8.6.1: 安定化・総点検版 */
+/* Rotation Scoreboard Ver.8.7.0: 安定化・総点検版 */
 .player-reflection-analysis-v850{margin:14px 0;padding:14px;border:1px solid rgba(255,255,255,.16);border-radius:16px;background:rgba(255,255,255,.045)}
 .player-reflection-analysis-head-v850{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
 .player-reflection-analysis-title-v850{font-size:17px;font-weight:900}.player-reflection-analysis-count-v850{font-size:12px;color:rgba(255,255,255,.68);white-space:nowrap}
@@ -7663,6 +7663,304 @@ button {
 .player-reflection-wait-v850{padding:13px;border-radius:12px;background:rgba(255,255,255,.045);font-size:13px;line-height:1.65;color:rgba(255,255,255,.72)}
 @media(max-width:430px){.player-reflection-grid-v850{gap:6px}.player-reflection-card-v850{padding:9px 4px}.player-reflection-card-value-v850{font-size:16px}.player-reflection-mental-row-v850{grid-template-columns:minmax(86px,1.15fr) .65fr .75fr .65fr;font-size:10px;gap:4px;padding:8px 6px}}
 </style>
+
+
+<!-- Rotation Design System v1.0 / Game Screen application / Ver.8.7.0 -->
+<style id="rotation-design-system-v870">
+:root {
+  --rotation-bg-canvas: #071f17;
+  --rotation-bg-surface: #0d3326;
+  --rotation-bg-elevated: #154534;
+  --rotation-line-subtle: rgba(255,255,255,.12);
+  --rotation-line-strong: rgba(255,255,255,.24);
+  --rotation-text-primary: #f7fbf8;
+  --rotation-text-secondary: rgba(247,251,248,.72);
+  --rotation-text-muted: rgba(247,251,248,.52);
+  --rotation-accent: #45d18b;
+  --rotation-accent-soft: rgba(69,209,139,.16);
+  --rotation-danger: #ff746d;
+  --rotation-warning: #f5c768;
+  --rotation-control: rgba(255,255,255,.09);
+  --rotation-radius-sm: 10px;
+  --rotation-radius-md: 16px;
+  --rotation-radius-lg: 22px;
+  --rotation-shadow-card: 0 10px 28px rgba(0,0,0,.22);
+  --rotation-touch-min: 52px;
+}
+
+/* Screen Template: Match / in-play */
+.app.pro-game-mode,
+.pro-game-screen {
+  background: var(--rotation-bg-canvas) !important;
+}
+
+.pro-game-screen {
+  color: var(--rotation-text-primary) !important;
+}
+
+.pro-game-header {
+  height: calc(54px + env(safe-area-inset-top)) !important;
+  min-height: calc(54px + env(safe-area-inset-top)) !important;
+  padding: env(safe-area-inset-top) 12px 0 !important;
+  grid-template-columns: 52px minmax(0,1fr) 104px !important;
+  background: rgba(7,31,23,.94) !important;
+  border-bottom: 1px solid var(--rotation-line-subtle) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.pro-back-btn {
+  width: var(--rotation-touch-min) !important;
+  height: var(--rotation-touch-min) !important;
+  border-radius: 14px !important;
+  color: var(--rotation-text-primary) !important;
+  font-size: 42px !important;
+  line-height: 1 !important;
+}
+.pro-back-btn:active { background: var(--rotation-control) !important; }
+
+.pro-game-title {
+  font-size: clamp(18px,4.8vw,24px) !important;
+  font-weight: 800 !important;
+  letter-spacing: .01em !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pro-start-time {
+  font-size: clamp(11px,2.8vw,14px) !important;
+  color: var(--rotation-text-muted) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.pro-game-body {
+  gap: 10px !important;
+  padding: 10px 10px calc(10px + env(safe-area-inset-bottom)) !important;
+}
+
+/* Primary information card */
+.pro-top-fixed {
+  border-radius: var(--rotation-radius-lg) !important;
+  overflow: hidden !important;
+  background: var(--rotation-bg-surface) !important;
+  border: 1px solid var(--rotation-line-subtle) !important;
+  box-shadow: var(--rotation-shadow-card) !important;
+}
+
+.pro-scoreboard {
+  background: transparent !important;
+  min-height: 146px !important;
+  gap: 1px !important;
+}
+
+.pro-player-panel {
+  min-width: 0 !important;
+  padding: 14px 12px 10px !important;
+  background: rgba(255,255,255,.025) !important;
+  border: 0 !important;
+  position: relative;
+  transition: background-color .18s ease, box-shadow .18s ease;
+}
+.pro-player-panel + .pro-player-panel {
+  border-left: 1px solid var(--rotation-line-subtle) !important;
+}
+.pro-player-panel.active {
+  background: var(--rotation-accent-soft) !important;
+  box-shadow: inset 0 4px 0 var(--rotation-accent) !important;
+}
+.pro-player-panel.active::after {
+  content: "PLAY";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: var(--rotation-accent);
+  color: #062016;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.pro-player-name {
+  max-width: calc(100% - 42px) !important;
+  font-size: clamp(18px,5vw,25px) !important;
+  line-height: 1.15 !important;
+  font-weight: 750 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.pro-score {
+  margin: 7px 0 3px !important;
+  font-size: clamp(58px,16vw,84px) !important;
+  line-height: .92 !important;
+  font-weight: 650 !important;
+  letter-spacing: -.04em !important;
+  font-variant-numeric: tabular-nums;
+  color: var(--rotation-text-primary) !important;
+}
+
+.pro-stats {
+  font-size: clamp(13px,3.5vw,17px) !important;
+  color: var(--rotation-text-secondary) !important;
+}
+
+.pro-status {
+  min-height: 38px !important;
+  padding: 0 14px !important;
+  background: rgba(0,0,0,.14) !important;
+  border-top: 1px solid var(--rotation-line-subtle) !important;
+  font-size: clamp(14px,3.6vw,17px) !important;
+  font-weight: 700 !important;
+  color: var(--rotation-text-secondary) !important;
+}
+.pro-status span { color: var(--rotation-text-primary) !important; }
+
+/* Secondary information: inning log */
+.pro-log-wrap {
+  border-radius: var(--rotation-radius-md) !important;
+  overflow: hidden !important;
+  background: var(--rotation-bg-surface) !important;
+  border: 1px solid var(--rotation-line-subtle) !important;
+  box-shadow: none !important;
+}
+.pro-log-header {
+  min-height: 31px !important;
+  background: rgba(255,255,255,.045) !important;
+  color: var(--rotation-text-secondary) !important;
+  font-size: clamp(12px,3.1vw,15px) !important;
+  font-weight: 750 !important;
+  border-bottom: 1px solid var(--rotation-line-subtle) !important;
+}
+.pro-turn-log { color: var(--rotation-text-primary) !important; }
+
+/* Input area */
+.pro-bottom-dock {
+  gap: 10px !important;
+  background: transparent !important;
+}
+.pro-play-area {
+  border-radius: var(--rotation-radius-lg) !important;
+  background: var(--rotation-bg-surface) !important;
+  border: 1px solid var(--rotation-line-subtle) !important;
+  padding: 12px 10px !important;
+}
+
+.pro-balls {
+  width: 100% !important;
+  max-width: 390px !important;
+  gap: clamp(7px,2.2vw,11px) !important;
+  padding: 0 !important;
+}
+.pro-ball {
+  width: clamp(49px,13.7vw,64px) !important;
+  height: clamp(49px,13.7vw,64px) !important;
+  border: 2px solid rgba(255,255,255,.38) !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,.25), inset -7px -8px 12px rgba(0,0,0,.20) !important;
+  transition: transform .08s ease, opacity .16s ease, box-shadow .16s ease !important;
+  touch-action: manipulation;
+}
+.pro-ball:active:not(.used) {
+  transform: scale(.93) !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,.26), inset -5px -6px 10px rgba(0,0,0,.22) !important;
+}
+.pro-ball.used { opacity: .16 !important; filter: grayscale(.45); }
+
+/* Action hierarchy: switch is primary, undo is quiet, foul is destructive */
+.pro-actions {
+  width: 100% !important;
+  max-width: none !important;
+  grid-template-columns: repeat(4,minmax(0,1fr)) !important;
+  gap: 8px !important;
+  padding: 0 !important;
+}
+.pro-action {
+  min-width: 0 !important;
+  min-height: var(--rotation-touch-min) !important;
+  padding: 8px 5px !important;
+  border-radius: var(--rotation-radius-sm) !important;
+  border: 1px solid var(--rotation-line-subtle) !important;
+  background: var(--rotation-control) !important;
+  color: var(--rotation-text-primary) !important;
+  font-size: clamp(12px,3.1vw,15px) !important;
+  line-height: 1.12 !important;
+  font-weight: 800 !important;
+  box-shadow: none !important;
+  touch-action: manipulation;
+}
+.pro-action:active:not(:disabled) { transform: scale(.97) !important; }
+.pro-switch {
+  background: var(--rotation-accent) !important;
+  color: #062016 !important;
+  border-color: transparent !important;
+}
+.pro-foul {
+  color: #ffd7d4 !important;
+  border-color: rgba(255,116,109,.30) !important;
+  background: rgba(255,116,109,.10) !important;
+}
+.pro-undo {
+  color: var(--rotation-text-secondary) !important;
+  background: transparent !important;
+}
+.pro-pushout {
+  grid-column: 1 / -1 !important;
+  background: rgba(245,199,104,.14) !important;
+  border-color: rgba(245,199,104,.34) !important;
+  color: #ffe6ad !important;
+}
+.pro-action:disabled {
+  opacity: .34 !important;
+  filter: grayscale(.4);
+}
+
+.pro-next-rack-box {
+  border-radius: var(--rotation-radius-md) !important;
+  border: 1px solid var(--rotation-line-strong) !important;
+  background: var(--rotation-bg-elevated) !important;
+  box-shadow: none !important;
+}
+.pro-rack-player-card {
+  min-height: 60px !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--rotation-line-strong) !important;
+  background: var(--rotation-control) !important;
+}
+
+/* Keyboard and accessibility */
+.pro-back-btn:focus-visible,
+.pro-ball:focus-visible,
+.pro-action:focus-visible,
+.pro-rack-player-card:focus-visible {
+  outline: 3px solid #fff !important;
+  outline-offset: 2px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pro-player-panel,
+  .pro-ball,
+  .pro-action { transition: none !important; }
+}
+
+@media (max-height: 720px) {
+  .pro-game-body { gap: 7px !important; padding-top: 7px !important; }
+  .pro-scoreboard { min-height: 118px !important; }
+  .pro-player-panel { padding-top: 10px !important; }
+  .pro-score { font-size: clamp(48px,13vw,66px) !important; margin-top: 3px !important; }
+  .pro-status { min-height: 32px !important; }
+  .pro-play-area { padding: 8px !important; }
+  .pro-ball { width: clamp(43px,11.8vw,54px) !important; height: clamp(43px,11.8vw,54px) !important; }
+  .pro-action { min-height: 46px !important; padding-top: 6px !important; padding-bottom: 6px !important; }
+}
+</style>
+
 </head>
 <body>
   <div class="toast" id="toast">
@@ -14663,12 +14961,12 @@ button {
     }, true);
 
     window.addEventListener("error", event => {
-      console.error("[Rotation Scoreboard 8.6.1] runtime error", event.error || event.message);
+      console.error("[Rotation Scoreboard 8.7.0] runtime error", event.error || event.message);
       if (typeof showToast === "function") showToast("処理を完了できませんでした", "一度前の画面へ戻って、もう一度お試しください。");
     });
 
     window.addEventListener("unhandledrejection", event => {
-      console.error("[Rotation Scoreboard 8.6.1] unhandled promise rejection", event.reason);
+      console.error("[Rotation Scoreboard 8.7.0] unhandled promise rejection", event.reason);
       if (typeof showToast === "function") showToast("通信または保存を完了できませんでした", "接続状態を確認して、もう一度お試しください。");
     });
   })();
