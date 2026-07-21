@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Rotation Scoreboard" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Rotation Scoreboard Ver.8.6.0</title>
+  <title>Rotation Scoreboard Ver.8.6.1</title>
   <style>
     :root {
       --bg: #16472d;
@@ -6790,6 +6790,7 @@ button {
 .analysis-log-item-v65.success { border-left-color: #64df88; }
 .analysis-log-item-v65.failed { border-left-color: #ff7d89; }
 .analysis-log-item-v65.pending { border-left-color: #ffd36a; }
+.analysis-log-item-v65.not-applicable { border-left-color: #aab2bd; }
 .analysis-log-number-v65 { font-weight: 950; margin-right: 5px; }
 .analysis-log-result-v65 { font-weight: 950; }
 .analysis-log-meta-v65 { opacity: .76; font-size: 11px; margin-top: 2px; }
@@ -7287,6 +7288,7 @@ button {
 .history-renew-page-v67 .analysis-log-item-v65.success { border-left-color: #35c76f !important; }
 .history-renew-page-v67 .analysis-log-item-v65.failed { border-left-color: #ff6377 !important; }
 .history-renew-page-v67 .analysis-log-item-v65.pending { border-left-color: #e5b93d !important; }
+.history-renew-page-v67 .analysis-log-item-v65.not-applicable { border-left-color: #9aa3ad !important; }
 .history-renew-page-v67 .ai-analysis-line-v64,
 .history-renew-page-v67 .analysis-log-summary-v65,
 .history-renew-page-v67 .analysis-log-item-v65 {
@@ -7645,7 +7647,7 @@ button {
 
 
 
-/* Rotation Scoreboard Ver.8.6.0: 安定化・総点検版 */
+/* Rotation Scoreboard Ver.8.6.1: 安定化・総点検版 */
 .player-reflection-analysis-v850{margin:14px 0;padding:14px;border:1px solid rgba(255,255,255,.16);border-radius:16px;background:rgba(255,255,255,.045)}
 .player-reflection-analysis-head-v850{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
 .player-reflection-analysis-title-v850{font-size:17px;font-weight:900}.player-reflection-analysis-count-v850{font-size:12px;color:rgba(255,255,255,.68);white-space:nowrap}
@@ -7672,7 +7674,7 @@ button {
 
   <main class="app" aria-label="Rotation Scoreboard">
     <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
-    <div class="sub-title">version 8.6.0</div>
+    <div class="sub-title">version 8.6.1</div>
 
     <section class="home-dashboard" id="homeDashboard" aria-label="ダッシュボード">
       <div class="home-dashboard-head">
@@ -8395,7 +8397,7 @@ button {
   const MATCH_RECORDS_KEY = "rotationScoreboard.matchRecords.v1";
 
   // Rotation Scoreboard Ver.6.8.0: future multi-game data foundation
-  const ROTATION_APP_VERSION = "8.6.0";
+  const ROTATION_APP_VERSION = "8.6.1";
   const ROTATION_GAME_TYPE = "rotation";
   const ROTATION_RECORD_SCHEMA_VERSION = 3;
 
@@ -12602,6 +12604,7 @@ button {
 
   function buildAnalysisLogV65(record, playerNumber) {
     const events = Array.isArray(record?.analysis?.events) ? record.analysis.events : [];
+    const isDetailMode = record?.analysis?.report?.recordingMode === "detail";
     const p = Number(playerNumber) === 2 ? 2 : 1;
     const playerNameText = record?.players?.[p]?.name || `Player${p}`;
     const esc = escapeRecordText;
@@ -12628,12 +12631,15 @@ button {
       const result = safetyResults.find(r => Number(r.sourceRack) === Number(start.rack) && Number(r.sourceInning) === Number(start.inning) && Number(r.sequence) > Number(start.sequence))
         || safetyResults[index];
       if (!result) {
-        rows.push({ kind:"pending", title:`セーフティー → 未判定`, meta:`ラック${start.rack}・第${start.inning}イニング` });
+        rows.push(isDetailMode
+          ? { kind:"pending", countAsTarget:true, title:`セーフティー → 未判定`, meta:`ラック${start.rack}・第${start.inning}イニング` }
+          : { kind:"not-applicable", countAsTarget:false, title:`セーフティー → 判定対象外（シンプル版）`, meta:`ラック${start.rack}・第${start.inning}イニング` });
         return;
       }
       const success = result.outcome === "success";
       rows.push({
         kind: success ? "success" : "failed",
+        countAsTarget: true,
         title: `セーフティー → ${causeLabels[result.causedBy] || result.causedBy || "次の結果"}：${success ? "成功" : "失敗"}`,
         meta:`ラック${result.sourceRack || start.rack}・第${result.sourceInning || start.inning}イニング`
       });
@@ -12647,12 +12653,15 @@ button {
       const phase = phaseLabels[start.phase] || "局面不明";
       const situation = situationLabels[start.situation] || "状況不明";
       if (!result) {
-        rows.push({ kind:"pending", title:`ファール（${phase}・${situation}）→ 未判定`, meta:`ラック${start.rack}・第${start.inning}イニング` });
+        rows.push(isDetailMode
+          ? { kind:"pending", countAsTarget:true, title:`ファール（${phase}・${situation}）→ 未判定`, meta:`ラック${start.rack}・第${start.inning}イニング` }
+          : { kind:"not-applicable", countAsTarget:false, title:`ファール（${phase}・${situation}）→ 判定対象外（シンプル版）`, meta:`ラック${start.rack}・第${start.inning}イニング` });
         return;
       }
       const punished = result.outcome === "opponent_scored";
       rows.push({
         kind: punished ? "failed" : "success",
+        countAsTarget: true,
         title:`ファール（${phase}・${situation}）→ ${punished ? `相手が得点${Number(result.pointsAllowed)||""}` : "相手は無得点"}`,
         meta:`ラック${result.sourceRack || start.rack}・第${result.sourceInning || start.inning}イニング`
       });
@@ -12661,6 +12670,7 @@ button {
     events.filter(e => e.type === "break_result" && Number(e.player) === p).forEach(e => {
       rows.push({
         kind: (e.scratch || e.breakFailed) ? "failed" : "success",
+        countAsTarget: true,
         title:`ブレイク → ${e.resultLabel || e.result || "記録"}`,
         meta:`ラック${e.rack}`
       });
@@ -12675,7 +12685,8 @@ button {
     const p1 = buildAnalysisLogV65(record, 1);
     const p2 = buildAnalysisLogV65(record, 2);
     const allRows = [...p1.rows, ...p2.rows];
-    const pending = allRows.filter(row => row.kind === "pending").length;
+    const targetRows = allRows.filter(row => row.countAsTarget !== false);
+    const pending = targetRows.filter(row => row.kind === "pending").length;
     const mode = record?.analysis?.report?.recordingMode === "detail" ? "分析用詳細版" : "シンプル版／旧データ";
     const playerBlock = data => `
       <div class="analysis-log-player-v65">${esc(data.playerNameText)}</div>
@@ -12690,7 +12701,7 @@ button {
         <div class="analysis-log-heading-v65">分析判定ログ</div>
         <div class="analysis-log-summary-v65">
           記録方式：${esc(mode)}<br>
-          判定対象：${allRows.length}件<br>
+          判定対象：${targetRows.length}件<br>
           表示件数：${allRows.length}件<br>
           <span class="${pending ? "analysis-log-warn-v65" : "analysis-log-ok-v65"}">
             ${pending ? `未判定が${pending}件あります` : "すべての判定が完了しています"}
@@ -14626,7 +14637,8 @@ button {
 
 
 
-  // Ver.8.6.0: critical-action double activation guard and runtime error reporting.
+  // Ver.8.6.1: シンプル版・旧データの結果未記録イベントを「判定対象外」として表示し、未判定件数から除外。
+  // Ver.8.6.1: critical-action double activation guard and runtime error reporting.
   (() => {
     const guardedIds = new Set([
       "startGameBtn", "startConfirmGoV698", "recordModeSimpleV611", "recordModeDetailV611",
@@ -14651,12 +14663,12 @@ button {
     }, true);
 
     window.addEventListener("error", event => {
-      console.error("[Rotation Scoreboard 8.6.0] runtime error", event.error || event.message);
+      console.error("[Rotation Scoreboard 8.6.1] runtime error", event.error || event.message);
       if (typeof showToast === "function") showToast("処理を完了できませんでした", "一度前の画面へ戻って、もう一度お試しください。");
     });
 
     window.addEventListener("unhandledrejection", event => {
-      console.error("[Rotation Scoreboard 8.6.0] unhandled promise rejection", event.reason);
+      console.error("[Rotation Scoreboard 8.6.1] unhandled promise rejection", event.reason);
       if (typeof showToast === "function") showToast("通信または保存を完了できませんでした", "接続状態を確認して、もう一度お試しください。");
     });
   })();
