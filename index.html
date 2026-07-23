@@ -8432,7 +8432,7 @@ button {
   const MATCH_RECORDS_KEY = "rotationScoreboard.matchRecords.v1";
 
   // Rotation Scoreboard Ver.6.8.0: future multi-game data foundation
-  const ROTATION_APP_VERSION = "8.6.1";
+  const ROTATION_APP_VERSION = "1.0.0-rc21";
   const ROTATION_GAME_TYPE = "rotation";
   const ROTATION_RECORD_SCHEMA_VERSION = 3;
 
@@ -12081,6 +12081,20 @@ button {
       });
     }
     return {pocketCount, nineBall};
+  }
+
+  // CueScore RC21: consistency-audit accessors.
+  // RC12 referenced these names before defining them, which blocked match saving.
+  // Keep the audit API small and derive values from the same Undo-aware event log
+  // used by calculateResultStats().
+  function countPocketedBallsFromEventsV112(player) {
+    const target = Number(player) === 2 ? 2 : 1;
+    return Number(calculatePocketStatsFromEventsV112().pocketCount[target] || 0);
+  }
+
+  function countManualMissesFromEventsV107(player) {
+    const target = Number(player) === 2 ? 2 : 1;
+    return Number(calculateManualMissesV107()[target] || 0);
   }
 
   function calculateResultStats() {
