@@ -7700,7 +7700,7 @@ button {
 
   <main class="app" aria-label="Rotation Scoreboard">
     <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
-    <div class="sub-title">version 8.6.1</div>
+    <div class="sub-title">version 1.0 RC20</div>
 
     <section class="home-dashboard" id="homeDashboard" aria-label="ダッシュボード">
       <div class="home-dashboard-head">
@@ -12671,9 +12671,32 @@ button {
     el("resultDot3")?.addEventListener("click", () => goResultPageV780(3));
     bindTrainingMenuV800(winner, stats);
     el("resultMemoBtn")?.addEventListener("click", openGameMemoDialog);
-    el("resultOkBtn")?.addEventListener("click", () => {
-      saveCurrentMatchRecord(winner, stats);
-      backToTitle();
+    el("resultOkBtn")?.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      const button = el("resultOkBtn");
+      if (button?.dataset.saving === "1") return;
+      if (button) {
+        button.dataset.saving = "1";
+        button.disabled = true;
+        button.textContent = "保存中…";
+      }
+      try {
+        const savedId = saveCurrentMatchRecord(winner, stats);
+        if (!savedId) throw new Error("試合履歴の保存IDを確認できませんでした。");
+        // 結果画面を先に閉じ、付随処理の成否に関係なくタイトルへ戻す。
+        el("proSummary")?.classList.add("hidden");
+        backToTitle();
+        showToast("保存完了", navigator.onLine ? "対戦履歴を端末へ保存しました" : "オフラインのため端末へ保存しました");
+      } catch (error) {
+        console.error("CueScore result OK save failed", error);
+        if (button) {
+          button.dataset.saving = "0";
+          button.disabled = false;
+          button.textContent = "OK";
+        }
+        alert(`試合結果を保存できませんでした。\n\n${error?.message || error}\n\n対戦結果画面は保持しています。`);
+      }
     });
     el("resultCancelBtn")?.addEventListener("click", event => {
       event.preventDefault();
@@ -13468,13 +13491,28 @@ button {
       record.analysis.events
     );
     existingRecords.push(record);
+    // ここまでを保存の必須処理とし、失敗時は呼び出し元へ通知する。
     writeMatchRecords(existingRecords);
     currentGameRecordSaved=true;
     currentGameRecordIdV100=record.id;
-    window.renderHomeDashboardV50?.();
+
+    // ダッシュボード再集計やクラウド自動保存は付随処理。
+    // ここで例外が起きても、端末保存済みのOK操作と画面遷移を中断しない。
+    try {
+      window.renderHomeDashboardV50?.();
+    } catch (error) {
+      console.error("CueScore post-save dashboard refresh failed", error);
+    }
     setTimeout(() => {
-      if (typeof window.rotationCloudAutoSaveAfterMatch === "function") {
-        window.rotationCloudAutoSaveAfterMatch();
+      try {
+        if (typeof window.rotationCloudAutoSaveAfterMatch === "function") {
+          const task = window.rotationCloudAutoSaveAfterMatch();
+          if (task && typeof task.catch === "function") {
+            task.catch(error => console.error("CueScore post-save cloud autosave failed", error));
+          }
+        }
+      } catch (error) {
+        console.error("CueScore post-save cloud autosave setup failed", error);
       }
     }, 250);
     return record.id;
@@ -15346,3 +15384,4 @@ button {
 <!-- CueScore RC17: PWA update handoff, resilient install and recovery -->
 <!-- CueScore RC18: cloud resume reconciliation and deferred autosave retry -->
 <!-- CueScore RC19: visible pending cloud-save recovery and manual conflict resolution -->
+<!-- CueScore RC20: result OK local-save isolation and guaranteed completion -->
