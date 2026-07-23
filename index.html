@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Rotation Scoreboard" />
   <meta name="format-detection" content="telephone=no" />
-  <title>Rotation Scoreboard Ver.8.8.2</title>
+  <title>CueScore Rotation Scoreboard v1.0 RC3</title>
   <style>
     :root {
       --bg: #16472d;
@@ -7647,7 +7647,7 @@ button {
 
 
 
-/* Rotation Scoreboard Ver.8.7.0: 安定化・総点検版 */
+/* CueScore Rotation Scoreboard v1.0 RC3: 安定化・総点検版 */
 .player-reflection-analysis-v850{margin:14px 0;padding:14px;border:1px solid rgba(255,255,255,.16);border-radius:16px;background:rgba(255,255,255,.045)}
 .player-reflection-analysis-head-v850{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
 .player-reflection-analysis-title-v850{font-size:17px;font-weight:900}.player-reflection-analysis-count-v850{font-size:12px;color:rgba(255,255,255,.68);white-space:nowrap}
@@ -7662,1245 +7662,7 @@ button {
 .player-reflection-focus-list-v850{display:grid;gap:7px}.player-reflection-focus-v850{padding:9px 10px;border-left:3px solid rgba(92,220,190,.7);border-radius:8px;background:rgba(255,255,255,.04);font-size:12px;line-height:1.55}.player-reflection-focus-date-v850{display:block;font-size:10px;color:rgba(255,255,255,.56);margin-bottom:2px}
 .player-reflection-wait-v850{padding:13px;border-radius:12px;background:rgba(255,255,255,.045);font-size:13px;line-height:1.65;color:rgba(255,255,255,.72)}
 @media(max-width:430px){.player-reflection-grid-v850{gap:6px}.player-reflection-card-v850{padding:9px 4px}.player-reflection-card-value-v850{font-size:16px}.player-reflection-mental-row-v850{grid-template-columns:minmax(86px,1.15fr) .65fr .75fr .65fr;font-size:10px;gap:4px;padding:8px 6px}}
-
-
-/* =========================================================
-   Ver.8.8.0 — Player Info / Setup Screen
-   Rotation Design System v1.0 application
-   ========================================================= */
-.app.player-info-mode {
-  background: #082b1e !important;
-}
-.player-info-screen {
-  background:
-    radial-gradient(circle at 50% 18%, rgba(35, 112, 78, .20), transparent 35%),
-    linear-gradient(180deg, #082b1e 0%, #0a3425 100%) !important;
-  color: #f7fbf9 !important;
-  padding-bottom: calc(118px + env(safe-area-inset-bottom)) !important;
-}
-.player-info-header {
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 30 !important;
-  height: calc(62px + env(safe-area-inset-top)) !important;
-  min-height: calc(62px + env(safe-area-inset-top)) !important;
-  grid-template-columns: 92px 1fr 92px !important;
-  padding: env(safe-area-inset-top) 18px 0 !important;
-  background: rgba(3, 30, 21, .94) !important;
-  border-bottom: 1px solid rgba(153, 220, 190, .18) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-}
-.player-info-title {
-  font-size: clamp(23px, 5.4vw, 30px) !important;
-  font-weight: 850 !important;
-  letter-spacing: .01em !important;
-}
-.back-button {
-  font-size: 0 !important;
-  width: 56px !important;
-  min-width: 56px !important;
-  min-height: 52px !important;
-  border-radius: 14px !important;
-}
-.back-button::before {
-  content: "‹" !important;
-  font-size: 54px !important;
-  line-height: 1 !important;
-  transform: translateY(-1px) !important;
-  margin: 0 !important;
-}
-.player-info-content {
-  width: 100% !important;
-  max-width: 520px !important;
-  margin: 0 auto !important;
-  padding: 20px 16px 22px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 14px !important;
-}
-.player-block {
-  position: relative !important;
-  margin: 0 !important;
-  padding: 17px 16px 16px !important;
-  border-radius: 22px !important;
-  border: 1px solid rgba(131, 202, 171, .25) !important;
-  background: linear-gradient(180deg, rgba(25, 83, 60, .92), rgba(15, 63, 46, .92)) !important;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, .16) !important;
-}
-.player-block:first-child {
-  border-top: 4px solid #4ad59a !important;
-}
-.player2-block {
-  margin-top: 0 !important;
-}
-.player-heading-row {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 12px !important;
-  margin-bottom: 14px !important;
-}
-.player-block h2 {
-  margin: 0 !important;
-  font-size: clamp(25px, 6vw, 34px) !important;
-  line-height: 1.1 !important;
-  font-weight: 900 !important;
-  letter-spacing: .01em !important;
-}
-.starter-choice {
-  min-width: 84px !important;
-  min-height: 44px !important;
-  padding: 8px 14px !important;
-  border: 1px solid rgba(255,255,255,.20) !important;
-  border-radius: 999px !important;
-  background: rgba(3, 31, 22, .55) !important;
-  color: rgba(255,255,255,.72) !important;
-  font-size: 16px !important;
-  font-weight: 800 !important;
-}
-.starter-choice.selected {
-  background: #49d49a !important;
-  border-color: #49d49a !important;
-  color: #06281c !important;
-  box-shadow: 0 5px 14px rgba(73, 212, 154, .20) !important;
-}
-.form-row,
-.form-row.race-control-row {
-  display: grid !important;
-  grid-template-columns: 62px minmax(0,1fr) 46px !important;
-  align-items: center !important;
-  gap: 10px !important;
-  margin: 0 0 12px !important;
-}
-.form-row.race-control-row {
-  grid-template-columns: 62px 92px minmax(0,1fr) !important;
-  margin-bottom: 0 !important;
-}
-.form-row label {
-  font-size: 16px !important;
-  font-weight: 800 !important;
-  color: rgba(232, 247, 240, .78) !important;
-}
-.form-row input[type="text"],
-.form-row input[type="number"] {
-  min-height: 50px !important;
-  border: 1px solid rgba(162, 220, 195, .30) !important;
-  border-radius: 14px !important;
-  background: rgba(2, 31, 21, .55) !important;
-  color: #fff !important;
-  padding: 8px 13px !important;
-  font-size: 20px !important;
-  font-weight: 750 !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.04) !important;
-}
-.form-row input:focus,
-.season-setting-v38 select:focus {
-  border-color: #55dca3 !important;
-  box-shadow: 0 0 0 3px rgba(85, 220, 163, .18) !important;
-}
-.search-button {
-  width: 46px !important;
-  height: 46px !important;
-  border-radius: 14px !important;
-  background: rgba(255,255,255,.08) !important;
-}
-.search-button::before {
-  width: 20px !important;
-  height: 20px !important;
-  left: 10px !important;
-  top: 8px !important;
-  border-width: 3px !important;
-}
-.search-button::after {
-  width: 12px !important;
-  height: 3px !important;
-  right: 8px !important;
-  bottom: 9px !important;
-}
-.skill-range {
-  height: 6px !important;
-  background: rgba(255,255,255,.18) !important;
-}
-.skill-range::-webkit-slider-thumb {
-  width: 26px !important;
-  height: 26px !important;
-  border: 2px solid #d6eee3 !important;
-}
-.player-name-limit-note {
-  margin: -4px 4px 0 !important;
-  text-align: right !important;
-  color: rgba(224, 242, 234, .56) !important;
-  font-size: 13px !important;
-}
-.season-setting-v38,
-.recording-setting-v698 {
-  margin: 0 !important;
-  padding: 17px 16px !important;
-  border-radius: 22px !important;
-  border: 1px solid rgba(131, 202, 171, .22) !important;
-  background: rgba(13, 61, 44, .90) !important;
-  box-shadow: 0 10px 24px rgba(0,0,0,.12) !important;
-}
-.season-setting-title-v38,
-.recording-setting-title-v698 {
-  margin: 0 0 14px !important;
-  font-size: 19px !important;
-  line-height: 1.2 !important;
-  font-weight: 900 !important;
-  color: #f4fbf8 !important;
-}
-.season-setting-title-v38::after {
-  content: "試合区分とシーズン" !important;
-  display: block !important;
-  margin-top: 4px !important;
-  font-size: 13px !important;
-  font-weight: 650 !important;
-  color: rgba(224,242,234,.58) !important;
-}
-.season-setting-grid-v381 {
-  display: grid !important;
-  grid-template-columns: 82px minmax(0,1fr) !important;
-  gap: 12px 10px !important;
-  align-items: center !important;
-}
-.season-setting-grid-v381 > label {
-  font-size: 15px !important;
-  font-weight: 800 !important;
-  color: rgba(232,247,240,.74) !important;
-}
-.season-select-row-v381 {
-  display: grid !important;
-  grid-template-columns: minmax(0,1fr) 46px !important;
-  gap: 9px !important;
-}
-.season-setting-v38 select {
-  width: 100% !important;
-  min-height: 48px !important;
-  border: 1px solid rgba(162,220,195,.28) !important;
-  border-radius: 14px !important;
-  background: rgba(2,31,21,.55) !important;
-  color: #fff !important;
-  padding: 7px 34px 7px 12px !important;
-  font-size: 17px !important;
-  font-weight: 750 !important;
-}
-.season-manage-btn-v381 {
-  width: 46px !important;
-  height: 46px !important;
-  min-width: 46px !important;
-  border-radius: 14px !important;
-  border: 1px solid rgba(162,220,195,.22) !important;
-  background: rgba(255,255,255,.08) !important;
-  color: #eaf8f2 !important;
-  font-size: 26px !important;
-  font-weight: 500 !important;
-}
-.recording-setting-options-v698 {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 10px !important;
-}
-.recording-choice-v698 {
-  min-height: 84px !important;
-  padding: 13px 12px !important;
-  border: 1px solid rgba(162,220,195,.22) !important;
-  border-radius: 16px !important;
-  background: rgba(2,31,21,.50) !important;
-  color: rgba(244,251,248,.78) !important;
-  text-align: left !important;
-}
-.recording-choice-v698.selected-v698 {
-  border-color: #55dca3 !important;
-  background: rgba(46, 132, 94, .55) !important;
-  box-shadow: inset 0 0 0 2px rgba(85,220,163,.22) !important;
-  color: #fff !important;
-}
-.recording-choice-name-v698 {
-  display: block !important;
-  margin-bottom: 5px !important;
-  font-size: 17px !important;
-  font-weight: 900 !important;
-}
-.recording-choice-desc-v698 {
-  display: block !important;
-  font-size: 12px !important;
-  line-height: 1.35 !important;
-  color: inherit !important;
-  opacity: .72 !important;
-}
-.start-game-button {
-  position: fixed !important;
-  z-index: 35 !important;
-  left: 50% !important;
-  bottom: calc(14px + env(safe-area-inset-bottom)) !important;
-  transform: translateX(-50%) !important;
-  width: min(calc(100vw - 32px), 488px) !important;
-  min-height: 72px !important;
-  margin: 0 !important;
-  padding: 12px 24px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 12px !important;
-  border: 1px solid rgba(134, 245, 194, .60) !important;
-  border-radius: 20px !important;
-  background: linear-gradient(180deg, #52dda4 0%, #38c98e 100%) !important;
-  color: #05281b !important;
-  font-size: 23px !important;
-  font-weight: 950 !important;
-  box-shadow: 0 14px 30px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.34) !important;
-}
-.start-game-button:active {
-  transform: translateX(-50%) scale(.985) !important;
-}
-.ball-rack {
-  display: none !important;
-}
-.player-version {
-  position: static !important;
-  align-self: center !important;
-  margin: 4px 0 0 !important;
-  padding: 0 0 8px !important;
-  font-size: 12px !important;
-  color: rgba(220,239,230,.42) !important;
-}
-.player-vs-divider-v880 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin: -2px 4px;
-  color: rgba(224,242,234,.52);
-  font-size: 13px;
-  font-weight: 900;
-  letter-spacing: .18em;
-}
-.player-vs-divider-v880::before,
-.player-vs-divider-v880::after {
-  content: "";
-  height: 1px;
-  flex: 1;
-  background: rgba(151,213,186,.18);
-}
-@media (max-height: 760px) {
-  .player-info-content { padding-top: 14px !important; gap: 10px !important; }
-  .player-block, .season-setting-v38, .recording-setting-v698 { padding: 13px 14px !important; border-radius: 18px !important; }
-  .player-heading-row { margin-bottom: 10px !important; }
-  .form-row { margin-bottom: 9px !important; }
-  .form-row input[type="text"], .form-row input[type="number"] { min-height: 44px !important; }
-  .recording-choice-v698 { min-height: 70px !important; padding: 10px !important; }
-}
-@media (max-width: 370px) {
-  .player-info-content { padding-left: 12px !important; padding-right: 12px !important; }
-  .form-row, .form-row.race-control-row { grid-template-columns: 54px minmax(0,1fr) 42px !important; }
-  .form-row.race-control-row { grid-template-columns: 54px 80px minmax(0,1fr) !important; }
-  .recording-choice-name-v698 { font-size: 15px !important; }
-  .recording-choice-desc-v698 { font-size: 11px !important; }
-}
-
 </style>
-
-
-<!-- Rotation Design System v1.0 / Game Screen application / Ver.8.7.0 -->
-<style id="rotation-design-system-v870">
-:root {
-  --rotation-bg-canvas: #071f17;
-  --rotation-bg-surface: #0d3326;
-  --rotation-bg-elevated: #154534;
-  --rotation-line-subtle: rgba(255,255,255,.12);
-  --rotation-line-strong: rgba(255,255,255,.24);
-  --rotation-text-primary: #f7fbf8;
-  --rotation-text-secondary: rgba(247,251,248,.72);
-  --rotation-text-muted: rgba(247,251,248,.52);
-  --rotation-accent: #45d18b;
-  --rotation-accent-soft: rgba(69,209,139,.16);
-  --rotation-danger: #ff746d;
-  --rotation-warning: #f5c768;
-  --rotation-control: rgba(255,255,255,.09);
-  --rotation-radius-sm: 10px;
-  --rotation-radius-md: 16px;
-  --rotation-radius-lg: 22px;
-  --rotation-shadow-card: 0 10px 28px rgba(0,0,0,.22);
-  --rotation-touch-min: 52px;
-}
-
-/* Screen Template: Match / in-play */
-.app.pro-game-mode,
-.pro-game-screen {
-  background: var(--rotation-bg-canvas) !important;
-}
-
-.pro-game-screen {
-  color: var(--rotation-text-primary) !important;
-}
-
-.pro-game-header {
-  height: calc(54px + env(safe-area-inset-top)) !important;
-  min-height: calc(54px + env(safe-area-inset-top)) !important;
-  padding: env(safe-area-inset-top) 12px 0 !important;
-  grid-template-columns: 52px minmax(0,1fr) 104px !important;
-  background: rgba(7,31,23,.94) !important;
-  border-bottom: 1px solid var(--rotation-line-subtle) !important;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  position: sticky;
-  top: 0;
-  z-index: 20;
-}
-
-.pro-back-btn {
-  width: var(--rotation-touch-min) !important;
-  height: var(--rotation-touch-min) !important;
-  border-radius: 14px !important;
-  color: var(--rotation-text-primary) !important;
-  font-size: 42px !important;
-  line-height: 1 !important;
-}
-.pro-back-btn:active { background: var(--rotation-control) !important; }
-
-.pro-game-title {
-  font-size: clamp(18px,4.8vw,24px) !important;
-  font-weight: 800 !important;
-  letter-spacing: .01em !important;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.pro-start-time {
-  font-size: clamp(11px,2.8vw,14px) !important;
-  color: var(--rotation-text-muted) !important;
-  font-variant-numeric: tabular-nums;
-}
-
-.pro-game-body {
-  gap: 10px !important;
-  padding: 10px 10px calc(10px + env(safe-area-inset-bottom)) !important;
-}
-
-/* Primary information card */
-.pro-top-fixed {
-  border-radius: var(--rotation-radius-lg) !important;
-  overflow: hidden !important;
-  background: var(--rotation-bg-surface) !important;
-  border: 1px solid var(--rotation-line-subtle) !important;
-  box-shadow: var(--rotation-shadow-card) !important;
-}
-
-.pro-scoreboard {
-  background: transparent !important;
-  min-height: 146px !important;
-  gap: 1px !important;
-}
-
-.pro-player-panel {
-  min-width: 0 !important;
-  padding: 14px 12px 10px !important;
-  background: rgba(255,255,255,.025) !important;
-  border: 0 !important;
-  position: relative;
-  transition: background-color .18s ease, box-shadow .18s ease;
-}
-.pro-player-panel + .pro-player-panel {
-  border-left: 1px solid var(--rotation-line-subtle) !important;
-}
-.pro-player-panel.active {
-  background: var(--rotation-accent-soft) !important;
-  box-shadow: inset 0 4px 0 var(--rotation-accent) !important;
-}
-.pro-player-panel.active::after {
-  content: "PLAY";
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 3px 7px;
-  border-radius: 999px;
-  background: var(--rotation-accent);
-  color: #062016;
-  font-size: 10px;
-  line-height: 1;
-  font-weight: 900;
-  letter-spacing: .08em;
-}
-
-.pro-player-name {
-  max-width: calc(100% - 42px) !important;
-  font-size: clamp(18px,5vw,25px) !important;
-  line-height: 1.15 !important;
-  font-weight: 750 !important;
-  white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-}
-
-.pro-score {
-  margin: 7px 0 3px !important;
-  font-size: clamp(58px,16vw,84px) !important;
-  line-height: .92 !important;
-  font-weight: 650 !important;
-  letter-spacing: -.04em !important;
-  font-variant-numeric: tabular-nums;
-  color: var(--rotation-text-primary) !important;
-}
-
-.pro-stats {
-  font-size: clamp(13px,3.5vw,17px) !important;
-  color: var(--rotation-text-secondary) !important;
-}
-
-.pro-status {
-  min-height: 38px !important;
-  padding: 0 14px !important;
-  background: rgba(0,0,0,.14) !important;
-  border-top: 1px solid var(--rotation-line-subtle) !important;
-  font-size: clamp(14px,3.6vw,17px) !important;
-  font-weight: 700 !important;
-  color: var(--rotation-text-secondary) !important;
-}
-.pro-status span { color: var(--rotation-text-primary) !important; }
-
-/* Secondary information: inning log */
-.pro-log-wrap {
-  border-radius: var(--rotation-radius-md) !important;
-  overflow: hidden !important;
-  background: var(--rotation-bg-surface) !important;
-  border: 1px solid var(--rotation-line-subtle) !important;
-  box-shadow: none !important;
-}
-.pro-log-header {
-  min-height: 31px !important;
-  background: rgba(255,255,255,.045) !important;
-  color: var(--rotation-text-secondary) !important;
-  font-size: clamp(12px,3.1vw,15px) !important;
-  font-weight: 750 !important;
-  border-bottom: 1px solid var(--rotation-line-subtle) !important;
-}
-.pro-turn-log { color: var(--rotation-text-primary) !important; }
-
-/* Input area */
-.pro-bottom-dock {
-  gap: 10px !important;
-  background: transparent !important;
-}
-.pro-play-area {
-  border-radius: var(--rotation-radius-lg) !important;
-  background: var(--rotation-bg-surface) !important;
-  border: 1px solid var(--rotation-line-subtle) !important;
-  padding: 12px 10px !important;
-}
-
-.pro-balls {
-  width: 100% !important;
-  max-width: 390px !important;
-  gap: clamp(7px,2.2vw,11px) !important;
-  padding: 0 !important;
-}
-.pro-ball {
-  width: clamp(49px,13.7vw,64px) !important;
-  height: clamp(49px,13.7vw,64px) !important;
-  border: 2px solid rgba(255,255,255,.38) !important;
-  box-shadow: 0 4px 10px rgba(0,0,0,.25), inset -7px -8px 12px rgba(0,0,0,.20) !important;
-  transition: transform .08s ease, opacity .16s ease, box-shadow .16s ease !important;
-  touch-action: manipulation;
-}
-.pro-ball:active:not(.used) {
-  transform: scale(.93) !important;
-  box-shadow: 0 1px 4px rgba(0,0,0,.26), inset -5px -6px 10px rgba(0,0,0,.22) !important;
-}
-.pro-ball.used { opacity: .16 !important; filter: grayscale(.45); }
-
-/* Action hierarchy: switch is primary, undo is quiet, foul is destructive */
-.pro-actions {
-  width: 100% !important;
-  max-width: none !important;
-  grid-template-columns: repeat(4,minmax(0,1fr)) !important;
-  gap: 8px !important;
-  padding: 0 !important;
-}
-.pro-action {
-  min-width: 0 !important;
-  min-height: var(--rotation-touch-min) !important;
-  padding: 8px 5px !important;
-  border-radius: var(--rotation-radius-sm) !important;
-  border: 1px solid var(--rotation-line-subtle) !important;
-  background: var(--rotation-control) !important;
-  color: var(--rotation-text-primary) !important;
-  font-size: clamp(12px,3.1vw,15px) !important;
-  line-height: 1.12 !important;
-  font-weight: 800 !important;
-  box-shadow: none !important;
-  touch-action: manipulation;
-}
-.pro-action:active:not(:disabled) { transform: scale(.97) !important; }
-.pro-switch {
-  background: var(--rotation-accent) !important;
-  color: #062016 !important;
-  border-color: transparent !important;
-}
-.pro-foul {
-  color: #ffd7d4 !important;
-  border-color: rgba(255,116,109,.30) !important;
-  background: rgba(255,116,109,.10) !important;
-}
-.pro-undo {
-  color: var(--rotation-text-secondary) !important;
-  background: transparent !important;
-}
-.pro-pushout {
-  grid-column: 1 / -1 !important;
-  background: rgba(245,199,104,.14) !important;
-  border-color: rgba(245,199,104,.34) !important;
-  color: #ffe6ad !important;
-}
-.pro-action:disabled {
-  opacity: .34 !important;
-  filter: grayscale(.4);
-}
-
-.pro-next-rack-box {
-  border-radius: var(--rotation-radius-md) !important;
-  border: 1px solid var(--rotation-line-strong) !important;
-  background: var(--rotation-bg-elevated) !important;
-  box-shadow: none !important;
-}
-.pro-rack-player-card {
-  min-height: 60px !important;
-  border-radius: 12px !important;
-  border: 1px solid var(--rotation-line-strong) !important;
-  background: var(--rotation-control) !important;
-}
-
-/* Keyboard and accessibility */
-.pro-back-btn:focus-visible,
-.pro-ball:focus-visible,
-.pro-action:focus-visible,
-.pro-rack-player-card:focus-visible {
-  outline: 3px solid #fff !important;
-  outline-offset: 2px !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pro-player-panel,
-  .pro-ball,
-  .pro-action { transition: none !important; }
-}
-
-@media (max-height: 720px) {
-  .pro-game-body { gap: 7px !important; padding-top: 7px !important; }
-  .pro-scoreboard { min-height: 118px !important; }
-  .pro-player-panel { padding-top: 10px !important; }
-  .pro-score { font-size: clamp(48px,13vw,66px) !important; margin-top: 3px !important; }
-  .pro-status { min-height: 32px !important; }
-  .pro-play-area { padding: 8px !important; }
-  .pro-ball { width: clamp(43px,11.8vw,54px) !important; height: clamp(43px,11.8vw,54px) !important; }
-  .pro-action { min-height: 46px !important; padding-top: 6px !important; padding-bottom: 6px !important; }
-}
-</style>
-
-
-
-<!-- Rotation Design System v1.0 / Game Screen refinement / Ver.8.7.2 -->
-<style id="rotation-design-system-v871">
-/* Refinement order: hierarchy -> touch targets -> visual state. Background remains unchanged. */
-.pro-game-title {
-  font-size: clamp(19px,5vw,25px) !important;
-  font-weight: 850 !important;
-}
-
-/* Active player must be recognizable without relying only on the PLAY label. */
-.pro-player-panel.active {
-  background: rgba(69,209,139,.19) !important;
-  box-shadow: inset 0 4px 0 var(--rotation-accent), inset 4px 0 0 rgba(69,209,139,.72) !important;
-}
-.pro-player-panel.active .pro-player-name {
-  font-weight: 850 !important;
-}
-.pro-player-panel:not(.active) {
-  background: rgba(255,255,255,.018) !important;
-}
-
-/* Inning log is secondary information: preserve it while returning space to input. */
-.pro-log-wrap {
-  flex: 0 0 clamp(92px,11svh,122px) !important;
-  min-height: 92px !important;
-  max-height: 122px !important;
-  margin-top: 2px !important;
-}
-.pro-log-header {
-  flex: 0 0 30px !important;
-  min-height: 30px !important;
-}
-.pro-turn-log {
-  min-height: 54px !important;
-}
-.pro-log-row {
-  min-height: 25px !important;
-}
-
-/* Slightly larger scoring targets, retaining five-column layout. */
-.pro-play-area {
-  padding: 13px 8px 12px !important;
-}
-.pro-balls {
-  max-width: 410px !important;
-  gap: clamp(6px,1.9vw,10px) !important;
-}
-.pro-ball {
-  width: clamp(52px,14.35vw,68px) !important;
-  height: clamp(52px,14.35vw,68px) !important;
-}
-
-/* Keep switch as the primary action without making the other controls feel undersized. */
-.pro-actions {
-  gap: 9px !important;
-}
-.pro-action {
-  min-height: 56px !important;
-  padding: 9px 5px !important;
-  font-size: clamp(12px,3.15vw,15px) !important;
-}
-.pro-switch {
-  font-weight: 900 !important;
-  box-shadow: 0 5px 14px rgba(69,209,139,.16) !important;
-}
-.pro-undo:disabled {
-  opacity: .25 !important;
-}
-
-@media (max-height: 760px) {
-  .pro-log-wrap {
-    flex-basis: 82px !important;
-    min-height: 82px !important;
-    max-height: 92px !important;
-  }
-  .pro-log-header { flex-basis: 27px !important; min-height: 27px !important; }
-  .pro-turn-log { min-height: 45px !important; }
-  .pro-ball {
-    width: clamp(47px,12.8vw,58px) !important;
-    height: clamp(47px,12.8vw,58px) !important;
-  }
-  .pro-action { min-height: 50px !important; }
-}
-
-@media (max-width: 390px) {
-  .pro-game-header { grid-template-columns: 48px minmax(0,1fr) 94px !important; }
-  .pro-balls { gap: 6px !important; }
-  .pro-ball {
-    width: clamp(49px,14vw,55px) !important;
-    height: clamp(49px,14vw,55px) !important;
-  }
-  .pro-actions { gap: 7px !important; }
-  .pro-action { font-size: 12px !important; }
-}
-</style>
-
-
-<style>
-/* Ver.8.7.2: inning history readability refinement */
-.app.pro-game-mode .pro-score-subrow,
-.app.game-mode .score-meta-row,
-.pro-rack-inning-row {
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  gap:12px !important;
-  min-height:38px !important;
-}
-.pro-rack-inning-row .separator,
-.pro-score-subrow .separator {
-  color:#49d79a !important;
-  font-weight:900 !important;
-}
-/* Restore enough height for 4-5 innings without dominating the screen */
-.pro-score-history,
-.pro-inning-history,
-.pro-sheet,
-.score-sheet {
-  min-height:150px !important;
-  max-height:178px !important;
-  overflow-y:auto !important;
-  -webkit-overflow-scrolling:touch !important;
-}
-.pro-score-history .sheet-row,
-.pro-inning-history .sheet-row,
-.pro-sheet .sheet-row,
-.score-sheet .sheet-row {
-  min-height:38px !important;
-  height:38px !important;
-  line-height:1.15 !important;
-}
-@media (max-width:520px){
-  .pro-score-history,
-  .pro-inning-history,
-  .pro-sheet,
-  .score-sheet {
-    min-height:154px !important;
-    max-height:174px !important;
-  }
-  .pro-score-history .sheet-row,
-  .pro-inning-history .sheet-row,
-  .pro-sheet .sheet-row,
-  .score-sheet .sheet-row {
-    min-height:39px !important;
-    height:39px !important;
-  }
-}
-@media (max-height:760px){
-  .pro-score-history,
-  .pro-inning-history,
-  .pro-sheet,
-  .score-sheet {
-    min-height:132px !important;
-    max-height:150px !important;
-  }
-  .pro-score-history .sheet-row,
-  .pro-inning-history .sheet-row,
-  .pro-sheet .sheet-row,
-  .score-sheet .sheet-row {
-    min-height:34px !important;
-    height:34px !important;
-  }
-}
-</style>
-
-
-<!-- Rotation Design System v1.0 / Inning history readability / Ver.8.7.3 -->
-<style id="rotation-design-system-v873">
-/* Show a complete, readable three-inning window. Older rows remain scrollable. */
-.pro-log-wrap {
-  flex: 0 0 172px !important;
-  min-height: 172px !important;
-  max-height: 172px !important;
-  border: 1px solid rgba(143,211,181,.26) !important;
-  border-radius: 16px !important;
-  overflow: hidden !important;
-  background: rgba(7,53,38,.72) !important;
-}
-.pro-log-header {
-  flex: 0 0 34px !important;
-  min-height: 34px !important;
-  grid-template-columns: 54px 1fr 1fr !important;
-  padding: 0 6px !important;
-  border-bottom: 1px solid rgba(143,211,181,.28) !important;
-  font-size: clamp(12px,3.2vw,15px) !important;
-  font-weight: 800 !important;
-  background: rgba(255,255,255,.035) !important;
-}
-.pro-turn-log {
-  min-height: 0 !important;
-  overflow-y: auto !important;
-  scroll-behavior: smooth;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(143,211,181,.34) transparent;
-}
-.pro-rack-divider {
-  min-height: 22px !important;
-  height: 22px !important;
-  margin: 0 !important;
-  padding: 0 10px !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  background: rgba(255,213,74,.10) !important;
-  border-left: 3px solid #ffd54a !important;
-  color: #fff3b0 !important;
-  font-size: 12px !important;
-  line-height: 1 !important;
-}
-.pro-rack-divider::after {
-  content: "";
-  height: 1px;
-  flex: 1;
-  background: rgba(255,213,74,.26);
-}
-.pro-log-row {
-  grid-template-columns: 54px 1fr 1fr !important;
-  min-height: 39px !important;
-  height: auto !important;
-  border-top: 1px solid rgba(143,211,181,.22) !important;
-  background: transparent !important;
-}
-.pro-log-row.active-row {
-  background: rgba(143,211,181,.12) !important;
-  box-shadow: inset 3px 0 0 #49d79a !important;
-}
-.pro-turn-label {
-  align-self: stretch !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border-right: 1px solid rgba(143,211,181,.20) !important;
-  font-size: 13px !important;
-  font-weight: 850 !important;
-  opacity: 1 !important;
-}
-.pro-turn-label > span {
-  width: 25px;
-  height: 25px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255,255,255,.08);
-  color: rgba(255,255,255,.92);
-}
-.pro-log-row.active-row .pro-turn-label > span {
-  background: #49d79a;
-  color: #062b1e;
-}
-.pro-log-cell {
-  min-height: 39px !important;
-  padding: 4px 7px !important;
-  gap: 4px !important;
-  flex-wrap: nowrap !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  scrollbar-width: none;
-}
-.pro-log-cell::-webkit-scrollbar { display: none; }
-.pro-mini-ball {
-  flex: 0 0 24px !important;
-  width: 24px !important;
-  height: 24px !important;
-  font-size: 10px !important;
-}
-.pro-symbol {
-  min-width: 24px !important;
-  font-size: 19px !important;
-  line-height: 1 !important;
-  text-align: center !important;
-}
-.pro-log-empty {
-  color: rgba(255,255,255,.34);
-  font-size: 15px;
-}
-@media (max-height: 760px) {
-  .pro-log-wrap {
-    flex-basis: 146px !important;
-    min-height: 146px !important;
-    max-height: 146px !important;
-  }
-  .pro-log-header { flex-basis: 30px !important; min-height: 30px !important; }
-  .pro-log-row { min-height: 35px !important; }
-  .pro-log-cell { min-height: 35px !important; padding-top: 3px !important; padding-bottom: 3px !important; }
-  .pro-rack-divider { min-height: 20px !important; height: 20px !important; }
-}
-@media (max-width: 390px) {
-  .pro-log-header,
-  .pro-log-row { grid-template-columns: 46px 1fr 1fr !important; }
-  .pro-log-cell { padding-left: 5px !important; padding-right: 5px !important; gap: 3px !important; }
-  .pro-mini-ball { flex-basis: 22px !important; width: 22px !important; height: 22px !important; font-size: 9px !important; }
-}
-</style>
-
-
-<!-- Rotation Design System v1.0 / Remove duplicated Rack-Inning status / Ver.8.7.4 -->
-<style id="rotation-design-system-v874">
-/* Rack and Inning are already represented in the history. Remove the duplicate row
-   below the scores and return the recovered space to the match history. */
-.pro-status.pro-status-two {
-  display: none !important;
-}
-
-/* The score card remains a single, complete card after the status row is removed. */
-.pro-top-fixed {
-  border-radius: var(--rotation-radius-lg) !important;
-}
-.pro-scoreboard {
-  border-radius: inherit !important;
-  overflow: hidden !important;
-}
-
-/* Use the recovered status-row height for a larger readable history window. */
-.pro-log-wrap {
-  flex-basis: 212px !important;
-  min-height: 212px !important;
-  max-height: 212px !important;
-}
-
-@media (max-height: 760px) {
-  .pro-log-wrap {
-    flex-basis: 178px !important;
-    min-height: 178px !important;
-    max-height: 178px !important;
-  }
-}
-
-@media (max-height: 680px) {
-  .pro-log-wrap {
-    flex-basis: 160px !important;
-    min-height: 160px !important;
-    max-height: 160px !important;
-  }
-}
-</style>
-
-
-
-<!-- Rotation Design System v1.0 / Player Info one-screen refinement / Ver.8.8.2 -->
-<style id="player-info-one-screen-v882">
-/* One-screen setup: all essential controls and Start button remain visible on iPhone. */
-.app.player-info-mode,
-.player-info-screen {
-  height: 100svh !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-}
-.player-info-screen {
-  padding-bottom: env(safe-area-inset-bottom) !important;
-}
-.player-info-header {
-  position: relative !important;
-  height: calc(54px + env(safe-area-inset-top)) !important;
-  min-height: calc(54px + env(safe-area-inset-top)) !important;
-  grid-template-columns: 64px 1fr 64px !important;
-  padding: env(safe-area-inset-top) 12px 0 !important;
-}
-.player-info-title {
-  font-size: clamp(22px, 5.2vw, 28px) !important;
-}
-.back-button {
-  width: 48px !important;
-  min-width: 48px !important;
-  min-height: 48px !important;
-}
-.back-button::before { font-size: 48px !important; }
-.player-info-content {
-  height: calc(100svh - 54px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
-  min-height: 0 !important;
-  padding: 9px 12px 10px !important;
-  gap: 8px !important;
-  overflow: hidden !important;
-  justify-content: flex-start !important;
-}
-.player-block {
-  padding: 10px 12px !important;
-  border-radius: 17px !important;
-  box-shadow: 0 7px 16px rgba(0,0,0,.12) !important;
-}
-.player-block:first-child { border-top-width: 3px !important; }
-.player-heading-row {
-  margin-bottom: 7px !important;
-  min-height: 36px !important;
-}
-.player-block h2 {
-  font-size: clamp(22px, 5.4vw, 28px) !important;
-}
-.starter-choice {
-  min-width: 72px !important;
-  min-height: 38px !important;
-  padding: 6px 12px !important;
-  font-size: 14px !important;
-}
-.form-row,
-.form-row.race-control-row {
-  grid-template-columns: 50px minmax(0,1fr) 42px !important;
-  gap: 8px !important;
-  margin-bottom: 7px !important;
-}
-.form-row.race-control-row {
-  grid-template-columns: 50px 78px minmax(0,1fr) !important;
-  margin-bottom: 0 !important;
-}
-.form-row label { font-size: 14px !important; }
-.form-row input[type="text"],
-.form-row input[type="number"] {
-  min-height: 40px !important;
-  border-radius: 12px !important;
-  padding: 5px 10px !important;
-  font-size: 18px !important;
-}
-.search-button {
-  width: 40px !important;
-  height: 40px !important;
-  border-radius: 12px !important;
-}
-.search-button::before {
-  width: 18px !important; height: 18px !important; left: 8px !important; top: 7px !important;
-}
-.search-button::after { right: 7px !important; bottom: 8px !important; }
-.skill-range::-webkit-slider-thumb { width: 23px !important; height: 23px !important; }
-.player-name-limit-note {
-  margin: -1px 3px 0 !important;
-  font-size: 11px !important;
-  line-height: 1 !important;
-}
-.season-setting-v38,
-.recording-setting-v698 {
-  padding: 10px 12px !important;
-  border-radius: 17px !important;
-  box-shadow: 0 6px 14px rgba(0,0,0,.10) !important;
-}
-.season-setting-title-v38,
-.recording-setting-title-v698 {
-  margin-bottom: 8px !important;
-  font-size: 17px !important;
-}
-.season-setting-title-v38::after {
-  display: none !important;
-}
-.season-setting-grid-v381 {
-  grid-template-columns: 68px minmax(0,1fr) !important;
-  gap: 7px 8px !important;
-}
-.season-setting-grid-v381 > label { font-size: 13px !important; }
-.season-select-row-v381 {
-  grid-template-columns: minmax(0,1fr) 40px !important;
-  gap: 7px !important;
-}
-.season-setting-v38 select {
-  min-height: 40px !important;
-  border-radius: 12px !important;
-  padding-top: 5px !important;
-  padding-bottom: 5px !important;
-  font-size: 15px !important;
-}
-.season-manage-btn-v381 {
-  width: 40px !important; height: 40px !important; min-width: 40px !important;
-  border-radius: 12px !important; font-size: 23px !important;
-}
-.recording-setting-options-v698 { gap: 8px !important; }
-.recording-choice-v698 {
-  min-height: 59px !important;
-  padding: 8px 10px !important;
-  border-radius: 13px !important;
-}
-.recording-choice-name-v698 {
-  margin-bottom: 2px !important;
-  font-size: 15px !important;
-}
-.recording-choice-desc-v698 {
-  font-size: 10.5px !important;
-  line-height: 1.2 !important;
-}
-.start-game-button {
-  position: static !important;
-  left: auto !important;
-  bottom: auto !important;
-  transform: none !important;
-  width: 100% !important;
-  min-height: 58px !important;
-  margin: 0 !important;
-  padding: 8px 18px !important;
-  border-radius: 17px !important;
-  font-size: 21px !important;
-  flex: 0 0 auto !important;
-}
-.start-game-button:active { transform: scale(.985) !important; }
-.player-version {
-  position: absolute !important;
-  right: 16px !important;
-  bottom: calc(3px + env(safe-area-inset-bottom)) !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  font-size: 10px !important;
-  pointer-events: none !important;
-}
-/* iPhone SE / short landscape-like preview: preserve one-screen priority. */
-@media (max-height: 760px) {
-  .player-info-header {
-    height: calc(48px + env(safe-area-inset-top)) !important;
-    min-height: calc(48px + env(safe-area-inset-top)) !important;
-  }
-  .player-info-content {
-    height: calc(100svh - 48px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
-    padding-top: 6px !important;
-    gap: 6px !important;
-  }
-  .player-block, .season-setting-v38, .recording-setting-v698 { padding: 8px 10px !important; }
-  .player-heading-row { margin-bottom: 5px !important; min-height: 32px !important; }
-  .form-row, .form-row.race-control-row { margin-bottom: 5px !important; }
-  .form-row input[type="text"], .form-row input[type="number"], .season-setting-v38 select { min-height: 36px !important; }
-  .search-button, .season-manage-btn-v381 { width: 36px !important; height: 36px !important; min-width: 36px !important; }
-  .recording-choice-v698 { min-height: 52px !important; padding: 6px 8px !important; }
-  .start-game-button { min-height: 52px !important; font-size: 19px !important; }
-  .player-name-limit-note { display: none !important; }
-}
-</style>
-
-
-<!-- Rotation Design System v1.0 / iPhone true one-screen fit / Ver.8.8.2 -->
-<style id="player-info-true-one-screen-v882">
-@media (max-width: 520px) and (max-height: 920px) {
-  .app.player-info-mode,
-  .player-info-screen { height: 100svh !important; min-height: 0 !important; overflow: hidden !important; }
-  .player-info-screen { position: relative !important; padding-bottom: 0 !important; }
-  .player-info-header {
-    height: calc(46px + env(safe-area-inset-top)) !important;
-    min-height: calc(46px + env(safe-area-inset-top)) !important;
-    grid-template-columns: 52px 1fr 52px !important;
-    padding: env(safe-area-inset-top) 8px 0 !important;
-  }
-  .player-info-title { font-size: 22px !important; }
-  .back-button { width: 42px !important; min-width: 42px !important; min-height: 42px !important; }
-  .back-button::before { font-size: 42px !important; }
-  .player-info-content {
-    height: calc(100svh - 46px - env(safe-area-inset-top)) !important;
-    padding: 6px 10px calc(62px + env(safe-area-inset-bottom)) !important;
-    gap: 5px !important;
-    overflow: hidden !important;
-  }
-  .player-block { padding: 7px 10px !important; border-radius: 15px !important; }
-  .player-heading-row { min-height: 28px !important; margin-bottom: 4px !important; }
-  .player-block h2 { font-size: 21px !important; }
-  .starter-choice { min-width: 68px !important; min-height: 32px !important; padding: 4px 10px !important; font-size: 13px !important; }
-  .form-row,
-  .form-row.race-control-row { grid-template-columns: 46px minmax(0,1fr) 36px !important; gap: 6px !important; margin-bottom: 4px !important; }
-  .form-row.race-control-row { grid-template-columns: 46px 72px minmax(0,1fr) !important; margin-bottom: 0 !important; }
-  .form-row label { font-size: 13px !important; }
-  .form-row input[type="text"],
-  .form-row input[type="number"] { min-height: 34px !important; padding: 3px 9px !important; border-radius: 10px !important; font-size: 17px !important; }
-  .search-button,
-  .season-manage-btn-v381 { width: 34px !important; height: 34px !important; min-width: 34px !important; border-radius: 10px !important; }
-  .search-button::before { width: 16px !important; height: 16px !important; left: 7px !important; top: 6px !important; }
-  .search-button::after { right: 6px !important; bottom: 7px !important; }
-  .skill-range::-webkit-slider-thumb { width: 21px !important; height: 21px !important; }
-  .player-name-limit-note { display: none !important; }
-  .player2-block { margin-top: 0 !important; }
-  .player-vs-divider-v880 { min-height: 14px !important; height: 14px !important; font-size: 12px !important; line-height: 14px !important; margin: 0 !important; }
-  .season-setting-v38,
-  .recording-setting-v698 { padding: 7px 10px !important; border-radius: 15px !important; }
-  .season-setting-title-v38,
-  .recording-setting-title-v698 { margin-bottom: 5px !important; font-size: 16px !important; }
-  .season-setting-title-v38::after { display: none !important; }
-  .season-setting-grid-v381 { grid-template-columns: 62px minmax(0,1fr) !important; gap: 4px 6px !important; }
-  .season-setting-grid-v381 > label { font-size: 12px !important; }
-  .season-select-row-v381 { grid-template-columns: minmax(0,1fr) 34px !important; gap: 5px !important; }
-  .season-setting-v38 select { min-height: 34px !important; padding: 3px 8px !important; border-radius: 10px !important; font-size: 14px !important; }
-  .season-manage-btn-v381 { font-size: 21px !important; }
-  .recording-setting-options-v698 { gap: 6px !important; }
-  .recording-choice-v698 { min-height: 47px !important; padding: 5px 7px !important; border-radius: 11px !important; }
-  .recording-choice-name-v698 { margin-bottom: 1px !important; font-size: 14px !important; }
-  .recording-choice-desc-v698 { font-size: 9.5px !important; line-height: 1.1 !important; }
-  .start-game-button {
-    position: absolute !important;
-    z-index: 40 !important;
-    left: 10px !important;
-    right: 10px !important;
-    bottom: calc(6px + env(safe-area-inset-bottom)) !important;
-    width: auto !important;
-    min-height: 50px !important;
-    margin: 0 !important;
-    padding: 6px 14px !important;
-    border-radius: 15px !important;
-    transform: none !important;
-    font-size: 19px !important;
-  }
-  .start-game-button:active { transform: scale(.985) !important; }
-  .start-game-button .ball-rack { display: none !important; }
-  .player-version { display: none !important; }
-}
-@media (max-width: 520px) and (max-height: 760px) {
-  .player-info-header { height: calc(42px + env(safe-area-inset-top)) !important; min-height: calc(42px + env(safe-area-inset-top)) !important; }
-  .player-info-content { height: calc(100svh - 42px - env(safe-area-inset-top)) !important; padding-top: 4px !important; gap: 3px !important; }
-  .player-block, .season-setting-v38, .recording-setting-v698 { padding-top: 5px !important; padding-bottom: 5px !important; }
-  .player-heading-row { min-height: 25px !important; margin-bottom: 2px !important; }
-  .form-row, .form-row.race-control-row { margin-bottom: 2px !important; }
-  .recording-choice-v698 { min-height: 42px !important; }
-}
-</style>
-
 </head>
 <body>
   <div class="toast" id="toast">
@@ -8912,7 +7674,7 @@ button {
 
   <main class="app" aria-label="Rotation Scoreboard">
     <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
-    <div class="sub-title">version 8.8.2</div>
+    <div class="sub-title">version 8.6.1</div>
 
     <section class="home-dashboard" id="homeDashboard" aria-label="ダッシュボード">
       <div class="home-dashboard-head">
@@ -8943,38 +7705,38 @@ button {
     <section class="player-info-screen hidden" id="playerInfoScreen" aria-label="Player info">
       <header class="player-info-header">
         <button class="back-button" id="backToTitleBtn" type="button" aria-label="戻る">戻る</button>
-        <div class="player-info-title">試合開始</div>
+        <div class="player-info-title">Player info</div>
         <div class="header-spacer"></div>
       </header>
 
       <div class="player-info-content">
         <section class="player-block">
-          <div class="player-heading-row"><h2>プレーヤー1</h2><button class="starter-choice selected" id="p1StarterBtn" type="button">先攻</button></div>
+          <div class="player-heading-row"><h2>Player1</h2><button class="starter-choice selected" id="p1StarterBtn" type="button">先攻</button></div>
 
           <div class="form-row">
-            <label for="p1Name">名前</label>
+            <label for="p1Name">Name:</label>
             <input id="p1Name" type="text" value="プレイヤー 1" maxlength="10" aria-describedby="playerNameLimitNote" />
             <button class="search-button" id="p1PlayerSearchBtn" type="button" aria-label="Player1 登録プレーヤー検索"></button>
           </div>
 
           <div class="form-row race-control-row">
-            <label for="p1Race">Race</label>
+            <label for="p1Race">Race to:</label>
             <input id="p1Race" type="number" value="120" inputmode="numeric" aria-label="Player1 Race to" />
             <input id="p1Skill" class="skill-range p1" type="range" min="1" max="6" step="1" value="2" aria-label="Player1 Race to 数字選択バー" />
           </div>
         </section>
 
         <section class="player-block player2-block">
-          <div class="player-heading-row"><h2>プレーヤー2</h2><button class="starter-choice" id="p2StarterBtn" type="button">後攻</button></div>
+          <div class="player-heading-row"><h2>Player2</h2><button class="starter-choice" id="p2StarterBtn" type="button">後攻</button></div>
 
           <div class="form-row">
-            <label for="p2Name">名前</label>
+            <label for="p2Name">Name:</label>
             <input id="p2Name" type="text" value="プレイヤー 2" maxlength="10" aria-describedby="playerNameLimitNote" />
             <button class="search-button" id="p2PlayerSearchBtn" type="button" aria-label="Player2 登録プレーヤー検索"></button>
           </div>
 
           <div class="form-row race-control-row">
-            <label for="p2Race">Race</label>
+            <label for="p2Race">Race to:</label>
             <input id="p2Race" type="number" value="120" inputmode="numeric" aria-label="Player2 Race to" />
             <input id="p2Skill" class="skill-range p2" type="range" min="1" max="6" step="1" value="2" aria-label="Player2 Race to 数字選択バー" />
           </div>
@@ -9029,11 +7791,11 @@ button {
             <span class="rack-ball b7">7</span>
             <span class="rack-ball b8">8</span>
           </span>
-          <span>試合を開始</span>
+          <span>Start game!</span>
         </button>
       </div>
 
-      <div class="player-version">version 8.8.2</div>
+      <div class="player-version">version 8.2.0</div>
     </section>
 
     <section id="startConfirmOverlayV698" class="start-confirm-overlay-v698 hidden" aria-label="試合開始確認">
@@ -9066,7 +7828,7 @@ button {
     <section class="pro-game-screen hidden" id="proGameScreen" aria-label="Rotation game">
       <header class="pro-game-header">
         <button id="proGameBackBtn" class="pro-back-btn" type="button" aria-label="戻る">‹</button>
-        <div class="pro-game-title">Rotation Match</div>
+        <div class="pro-game-title">Rotation match!</div>
         <div class="pro-start-time" id="proStartTime">開始時刻 --:--</div>
       </header>
 
@@ -9213,12 +7975,12 @@ button {
             <span>合計 <strong id="breakPocketPointsV696">0点</strong></span>
           </div>
           <button id="breakNoInToggleV702" class="break-no-in-btn-v702" type="button" aria-pressed="false">ノーイン</button>
-          <div class="break-result-section-title-v695">特殊結果（複数選択可）</div>
+          <div class="break-result-section-title-v695">特殊結果</div>
           <div class="break-special-grid-v696">
             <button id="breakScratchToggleV696" class="break-special-btn-v696 trouble-v696" type="button">スクラッチ</button>
             <button id="breakPushOutToggleV695" class="break-special-btn-v696" type="button">シュートアウト</button>
           </div>
-          <div class="break-result-note-v695">選択したボールは得点と残り球へ反映します。スクラッチはファールとして記録し、交代待ちになります。マス割りはラック終了時に自動判定します。</div>
+          <div class="break-result-note-v695">選択したボールは得点と残り球へ反映します。スクラッチとシュートアウトは同時に選べません。シュートアウトを選ぶと、ブレイク確定後に専用入力へ進みます。</div>
           <button id="breakResultSaveV695" class="break-result-save-v695" type="button">ゲームを進める</button>
         </div>
       </section>
@@ -9708,11 +8470,30 @@ button {
     };
   }
 
-  function readMatchRecords() {
+  // CueScore v1.0 RC1: corrupted local data must never be silently overwritten.
+  function preserveCorruptedLocalDataV100(key, rawValue, error) {
+    if (!rawValue) return;
     try {
-      const parsed = JSON.parse(localStorage.getItem(MATCH_RECORDS_KEY) || "[]");
-      return Array.isArray(parsed) ? parsed.filter(r => r && r.id && r.players).map(normalizeMatchRecordV680) : [];
-    } catch (_) {
+      const recoveryKey = `${key}.corruptBackup.${new Date().toISOString()}`;
+      localStorage.setItem(recoveryKey, rawValue);
+      console.error(`[CueScore RC3] Corrupted local data preserved: ${key}`, error);
+      if (typeof showToast === "function") {
+        showToast("保存データの異常を検出しました", "安全のため復旧用コピーを保存しました。データ管理からバックアップしてください。");
+      }
+    } catch (backupError) {
+      console.error(`[CueScore RC3] Failed to preserve corrupted local data: ${key}`, backupError);
+    }
+  }
+
+  function readMatchRecords() {
+    const rawValue = localStorage.getItem(MATCH_RECORDS_KEY);
+    if (!rawValue) return [];
+    try {
+      const parsed = JSON.parse(rawValue);
+      if (!Array.isArray(parsed)) throw new TypeError("Match records must be an array.");
+      return parsed.filter(r => r && r.id && r.players).map(normalizeMatchRecordV680);
+    } catch (error) {
+      preserveCorruptedLocalDataV100(MATCH_RECORDS_KEY, rawValue, error);
       return [];
     }
   }
@@ -9866,10 +8647,14 @@ button {
   let selectedRegisteredPlayer = {1:null, 2:null};
 
   function readPlayerLibrary() {
+    const rawValue = localStorage.getItem(PLAYER_LIBRARY_KEY);
+    if (!rawValue) return [];
     try {
-      const parsed = JSON.parse(localStorage.getItem(PLAYER_LIBRARY_KEY) || "[]");
-      return Array.isArray(parsed) ? parsed.filter(p => p && p.id && p.name) : [];
-    } catch (_) {
+      const parsed = JSON.parse(rawValue);
+      if (!Array.isArray(parsed)) throw new TypeError("Player library must be an array.");
+      return parsed.filter(p => p && p.id && p.name);
+    } catch (error) {
+      preserveCorruptedLocalDataV100(PLAYER_LIBRARY_KEY, rawValue, error);
       return [];
     }
   }
@@ -11213,6 +9998,9 @@ button {
   let nextBreakPlayer = 1;
   let currentGameStartedAt = null;
   let currentGameRecordSaved = false;
+  let currentGameRecordIdV100 = null;
+  // RC4: one stable identifier per match. Re-confirming the same match can never create a duplicate record.
+  let currentGameSessionIdV104 = null;
   let currentGameMemo = "";
   let currentGameTags = [];
   let currentGameReflectionV840 = { mood:"", mental:[], technicalNote:"", nextFocus:"", freeMemo:"" }; // legacy compatibility
@@ -11752,17 +10540,34 @@ button {
       el("breakNoInToggleV702")?.classList.remove("active-v696");
       el("breakNoInToggleV702")?.setAttribute("aria-pressed", "false");
     }
-    if (kind === "scratch") pendingBreakScratchV696 = !pendingBreakScratchV696;
-    if (kind === "illegal") pendingBreakIllegalV696 = !pendingBreakIllegalV696;
-    if (kind === "push_out") pendingBreakPushOutV695 = !pendingBreakPushOutV695;
-    const map = {
+
+    // Push Out is available only after a legal break. Scratch/illegal break and
+    // Push Out cannot be selected at the same time.
+    if (kind === "scratch") {
+      pendingBreakScratchV696 = !pendingBreakScratchV696;
+      if (pendingBreakScratchV696) pendingBreakPushOutV695 = false;
+    }
+    if (kind === "illegal") {
+      pendingBreakIllegalV696 = !pendingBreakIllegalV696;
+      if (pendingBreakIllegalV696) pendingBreakPushOutV695 = false;
+    }
+    if (kind === "push_out") {
+      pendingBreakPushOutV695 = !pendingBreakPushOutV695;
+      if (pendingBreakPushOutV695) {
+        pendingBreakScratchV696 = false;
+        pendingBreakIllegalV696 = false;
+      }
+    }
+
+    const states = {
       scratch:["breakScratchToggleV696",pendingBreakScratchV696],
       illegal:["breakIllegalToggleV696",pendingBreakIllegalV696],
       push_out:["breakPushOutToggleV695",pendingBreakPushOutV695]
     };
-    const [id, active] = map[kind] || [];
-    el(id)?.classList.toggle("active-v696", Boolean(active));
-    el(id)?.setAttribute("aria-pressed", active ? "true" : "false");
+    Object.values(states).forEach(([id, active]) => {
+      el(id)?.classList.toggle("active-v696", Boolean(active));
+      el(id)?.setAttribute("aria-pressed", active ? "true" : "false");
+    });
   }
 
   function saveBreakResultV61() {
@@ -11770,6 +10575,7 @@ button {
     const rackNumber = pendingBreakRackV61;
     if (!player || !rackNumber) return closeBreakResultPromptV61();
 
+    const requestedPushOutV100 = Boolean(pendingBreakPushOutV695);
     const decision = buildBreakDecisionV700({
       player,
       rackNumber,
@@ -11784,7 +10590,7 @@ button {
       noIn: pendingBreakNoInV702,
       scratch: decision.scratch,
       illegalBreak: decision.illegalBreak,
-      pushOut: false
+      pushOut: requestedPushOutV100
     };
 
     closeBreakResultPromptV61();
@@ -11867,6 +10673,14 @@ button {
       }
     });
     breakUndoRestoreV697 = { undoDepth: undoHistory.length, payload: undoPromptPayloadV697 };
+
+    // A Push Out selected on the break-result screen must continue into the
+    // dedicated Push Out input flow. It is ignored when the break was not legal.
+    if (requestedPushOutV100 && decision.legalBreak && !decision.foul) {
+      setTimeout(() => {
+        if (isPushOutAvailableV730()) openPushOutV730();
+      }, 0);
+    }
   }
 
   function finalizeBreakRunOutV695(completedRack, finisher) {
@@ -12101,13 +10915,13 @@ button {
       usedBalls:[...usedBalls],
       rows:JSON.parse(JSON.stringify(rows)),
       rackEnded, foulLocked, forceNewRow, gameEnded, gameSetDismissed,
-      reviewMode, nextBreakPlayer,
+      reviewMode, nextBreakPlayer, currentGameRecordSaved, currentGameRecordIdV100, currentGameSessionIdV104,
       analysisEventsV60: JSON.parse(JSON.stringify(analysisEventsV60)),
       analysisEventSequenceV60,
       commonEventsV7: JSON.parse(JSON.stringify(commonEventsV7)),
       commonEventSequenceV7,
       pendingBreakPlayerV61, pendingBreakRackV61, pendingBreakResultV695, pendingBreakPushOutV695,
-      pendingBreakBallsV696:[...pendingBreakBallsV696], pendingBreakScratchV696, pendingBreakIllegalV696,
+      pendingBreakBallsV696:[...pendingBreakBallsV696], pendingBreakNoInV702, pendingBreakScratchV696, pendingBreakIllegalV696,
       pendingSafetyV62: pendingSafetyV62 ? {...pendingSafetyV62} : null,
       pendingFoulV63: pendingFoulV63 ? {...pendingFoulV63} : null,
       turnLockReasonV62,
@@ -12139,6 +10953,9 @@ button {
     gameSetDismissed = state.gameSetDismissed;
     reviewMode = Boolean(state.reviewMode);
     nextBreakPlayer = state.nextBreakPlayer ?? current;
+    currentGameRecordSaved = Boolean(state.currentGameRecordSaved);
+    currentGameRecordIdV100 = state.currentGameRecordIdV100 || null;
+    currentGameSessionIdV104 = state.currentGameSessionIdV104 || currentGameSessionIdV104 || null;
     analysisEventsV60 = Array.isArray(state.analysisEventsV60)
       ? JSON.parse(JSON.stringify(state.analysisEventsV60))
       : [];
@@ -12152,6 +10969,7 @@ button {
     pendingBreakResultV695 = state.pendingBreakResultV695 ?? null;
     pendingBreakPushOutV695 = Boolean(state.pendingBreakPushOutV695);
     pendingBreakBallsV696 = new Set(state.pendingBreakBallsV696 || []);
+    pendingBreakNoInV702 = Boolean(state.pendingBreakNoInV702);
     pendingBreakScratchV696 = Boolean(state.pendingBreakScratchV696);
     pendingBreakIllegalV696 = Boolean(state.pendingBreakIllegalV696);
     pendingBreakRackV61 = state.pendingBreakRackV61 ?? null;
@@ -12203,38 +11021,30 @@ button {
     const log = el("proTurnLog");
     log.innerHTML = "";
     let lastRack = null;
-    const renderedRows = [];
 
     rows.forEach((rowData, index) => {
       if (rowData.rack !== lastRack) {
         const divider = document.createElement("div");
         divider.className = "pro-rack-divider";
-        divider.innerHTML = `<span>Rack ${rowData.rack}</span>`;
+        divider.textContent = `Rack ${rowData.rack}`;
         log.appendChild(divider);
         lastRack = rowData.rack;
       }
 
       const row = document.createElement("div");
       row.className = "pro-log-row" + (index === rows.length - 1 ? " active-row" : "");
-      row.dataset.rowIndex = String(index);
       const p1Items = rowData.p1.map(item => typeof item === "number" ? ballHtml(item) : symbolHtml(item)).join("");
       const p2Items = rowData.p2.map(item => typeof item === "number" ? ballHtml(item) : symbolHtml(item)).join("");
 
       row.innerHTML = `
-        <div class="pro-turn-label"><span>${rowData.label}</span></div>
-        <div class="pro-log-cell">${p1Items || '<span class="pro-log-empty">—</span>'}</div>
-        <div class="pro-log-cell">${p2Items || '<span class="pro-log-empty">—</span>'}</div>
+        <div class="pro-turn-label">${rowData.label}</div>
+        <div class="pro-log-cell">${p1Items}</div>
+        <div class="pro-log-cell">${p2Items}</div>
       `;
       log.appendChild(row);
-      renderedRows.push(row);
     });
 
-    // 最新3イニングを行の途中で切らずに表示する。古い履歴は上へスクロールして確認できる。
-    requestAnimationFrame(() => {
-      const firstVisible = renderedRows[Math.max(0, renderedRows.length - 3)];
-      if (firstVisible) log.scrollTop = Math.max(0, firstVisible.offsetTop - 1);
-      else log.scrollTop = 0;
-    });
+    log.scrollTop = log.scrollHeight;
   }
 
   function renderBalls() {
@@ -12375,9 +11185,18 @@ button {
   }
 
   function saveAndDo(action) {
-    undoHistory.push(snapshot());
-    action();
-    updateGame();
+    const beforeStateV100 = snapshot();
+    undoHistory.push(beforeStateV100);
+    try {
+      action();
+      updateGame();
+    } catch (error) {
+      undoHistory.pop();
+      restore(beforeStateV100);
+      updateGame();
+      console.error("CueScore action rollback", error);
+      showToast("操作を取り消しました", "処理中に問題が発生したため、直前の状態へ戻しました");
+    }
   }
 
   function pocketBall(number) {
@@ -12568,6 +11387,22 @@ button {
     el("pushOutDecisionOverlayV730")?.classList.add("hidden");
   }
 
+  function removeSavedMatchRecordV100(recordId) {
+    if (!recordId) return false;
+    const records = readMatchRecords();
+    const filtered = records.filter(record => record?.id !== recordId);
+    if (filtered.length === records.length) return false;
+    writeMatchRecords(filtered);
+    window.renderHomeDashboardV50?.();
+    // RC4: an Undo that cancels a saved result must also propagate the deletion to cloud backup.
+    setTimeout(() => {
+      if (typeof window.rotationCloudAutoSaveAfterMatch === "function") {
+        window.rotationCloudAutoSaveAfterMatch();
+      }
+    }, 250);
+    return true;
+  }
+
   function undo() {
     const shouldRestoreBreakPromptV697 = Boolean(breakUndoRestoreV697 && breakUndoRestoreV697.undoDepth === undoHistory.length);
     const breakPromptPayloadV697 = shouldRestoreBreakPromptV697 ? breakUndoRestoreV697.payload : null;
@@ -12576,8 +11411,12 @@ button {
 
     // Ver.7.2.0: 復元前後の有効イベント差分を監査ジャーナルへ記録する。
     const eventsBeforeUndoV720 = JSON.parse(JSON.stringify(commonEventsV7));
+    const savedRecordIdBeforeUndoV100 = currentGameRecordIdV100;
     const wasReviewMode = reviewMode;
     restore(state);
+    if (savedRecordIdBeforeUndoV100 && savedRecordIdBeforeUndoV100 !== currentGameRecordIdV100) {
+      removeSavedMatchRecordV100(savedRecordIdBeforeUndoV100);
+    }
     registerUndoInEventJournalV720(eventsBeforeUndoV720, commonEventsV7);
 
     if (wasReviewMode) {
@@ -12965,6 +11804,10 @@ button {
     nextBreakPlayer = startingPlayer;
     currentGameStartedAt = new Date().toISOString();
     currentGameRecordSaved = false;
+    currentGameRecordIdV100 = null;
+    currentGameSessionIdV104 = (window.crypto && crypto.randomUUID)
+      ? crypto.randomUUID()
+      : `match_${Date.now()}_${Math.random().toString(36).slice(2,10)}`;
     currentGameMemo = "";
     currentGameTags = [];
     currentGameReflectionV840 = { mood:"", mental:[], technicalNote:"", nextFocus:"", freeMemo:"" };
@@ -12983,6 +11826,7 @@ button {
     turnLockReasonV62 = null;
     pendingBreakPlayerV61 = null;
     pendingBreakRackV61 = null;
+    breakUndoRestoreV697 = null;
     closeBreakResultPromptV61();
     closeRecordModePromptV611();
     closeStartConfirmV698();
@@ -13163,6 +12007,7 @@ button {
     records.push(record);
     writeMatchRecords(records);
     currentGameRecordSaved = true;
+    currentGameRecordIdV100 = record.id;
   }
 
   // Ver.7.8.0: one positive observation, one gentle point, and one practice suggestion.
@@ -14284,11 +13129,19 @@ button {
   }
 
   function saveCurrentMatchRecord(winner, stats) {
-    if (currentGameRecordSaved) return;
+    const stableRecordId = currentGameSessionIdV104 || currentGameRecordIdV100 ||
+      ((window.crypto&&crypto.randomUUID)?crypto.randomUUID():`g_${Date.now()}_${Math.random().toString(36).slice(2,8)}`);
+    currentGameSessionIdV104 = stableRecordId;
+    const existingRecords = readMatchRecords();
+    if (currentGameRecordSaved || existingRecords.some(item => String(item?.id) === String(stableRecordId))) {
+      currentGameRecordSaved = true;
+      currentGameRecordIdV100 = stableRecordId;
+      return stableRecordId;
+    }
     const endedAt = new Date().toISOString();
     const progress = buildScoreProgress();
     const record = {
-      id:(window.crypto&&crypto.randomUUID)?crypto.randomUUID():`g_${Date.now()}_${Math.random().toString(36).slice(2,8)}`,
+      id:stableRecordId,
       gameType: ROTATION_GAME_TYPE,
       recordSchemaVersion: ROTATION_RECORD_SCHEMA_VERSION,
       createdByAppVersion: ROTATION_APP_VERSION,
@@ -14336,13 +13189,17 @@ button {
       recordingModeV611,
       record.analysis.events
     );
-    const records=readMatchRecords(); records.push(record); writeMatchRecords(records); currentGameRecordSaved=true;
+    existingRecords.push(record);
+    writeMatchRecords(existingRecords);
+    currentGameRecordSaved=true;
+    currentGameRecordIdV100=record.id;
     window.renderHomeDashboardV50?.();
     setTimeout(() => {
       if (typeof window.rotationCloudAutoSaveAfterMatch === "function") {
         window.rotationCloudAutoSaveAfterMatch();
       }
     }, 250);
+    return record.id;
   }
 
 
@@ -15909,51 +14766,15 @@ button {
     }, true);
 
     window.addEventListener("error", event => {
-      console.error("[Rotation Scoreboard 8.7.4] runtime error", event.error || event.message);
+      console.error("[Rotation Scoreboard 8.6.1] runtime error", event.error || event.message);
       if (typeof showToast === "function") showToast("処理を完了できませんでした", "一度前の画面へ戻って、もう一度お試しください。");
     });
 
     window.addEventListener("unhandledrejection", event => {
-      console.error("[Rotation Scoreboard 8.7.4] unhandled promise rejection", event.reason);
+      console.error("[Rotation Scoreboard 8.6.1] unhandled promise rejection", event.reason);
       if (typeof showToast === "function") showToast("通信または保存を完了できませんでした", "接続状態を確認して、もう一度お試しください。");
     });
   })();
-
-
-/* Ver.8.8.0: Player Info Design System behavior */
-(() => {
-  const setup = () => {
-    const p1 = document.querySelector('#playerInfoScreen .player-block');
-    const p2 = document.querySelector('#playerInfoScreen .player2-block');
-    if (p1 && p2 && !document.querySelector('.player-vs-divider-v880')) {
-      const vs = document.createElement('div');
-      vs.className = 'player-vs-divider-v880';
-      vs.textContent = 'VS';
-      p1.insertAdjacentElement('afterend', vs);
-    }
-
-    const start = document.getElementById('startGameBtn');
-    if (start) {
-      start.setAttribute('aria-label', '設定を確認して試合を開始');
-    }
-
-    const updateStarterLabels = () => {
-      const p1Btn = document.getElementById('p1StarterBtn');
-      const p2Btn = document.getElementById('p2StarterBtn');
-      if (p1Btn) p1Btn.textContent = p1Btn.classList.contains('selected') ? 'ブレイク' : '後攻';
-      if (p2Btn) p2Btn.textContent = p2Btn.classList.contains('selected') ? 'ブレイク' : '後攻';
-    };
-    updateStarterLabels();
-    document.getElementById('p1StarterBtn')?.addEventListener('click', () => requestAnimationFrame(updateStarterLabels));
-    document.getElementById('p2StarterBtn')?.addEventListener('click', () => requestAnimationFrame(updateStarterLabels));
-
-    const title = document.querySelector('.player-info-title');
-    if (title) title.textContent = '試合開始';
-  };
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup, {once:true});
-  else setup();
-})();
-
 </script>
 
 </body>
