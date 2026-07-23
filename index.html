@@ -8,7 +8,10 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Rotation Scoreboard" />
   <meta name="format-detection" content="telephone=no" />
-  <title>CueScore Rotation Scoreboard v1.0 RC3</title>
+  <meta name="description" content="CueScore Rotation Scoreboard — ローテーション競技用スコアボード" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="./icons/icon-180.png" />
+  <title>CueScore Rotation Scoreboard v1.0 RC19</title>
   <style>
     :root {
       --bg: #16472d;
@@ -6054,6 +6057,29 @@ button {
 @media(max-width:390px){.cloud-auth-actions,.cloud-sync-actions,.cloud-safety-actions{grid-template-columns:1fr;}}
 
 
+
+/* CueScore RC19: pending cloud-save recovery panel */
+.cloud-pending-panel {
+  margin-top: 12px;
+  padding: 13px;
+  border-radius: 11px;
+  border: 1px solid rgba(255,218,92,.62);
+  background: rgba(93,67,0,.28);
+}
+.cloud-pending-panel.hidden { display: none !important; }
+.cloud-pending-title { font-size: 17px; font-weight: 950; color: #fff2a8; }
+.cloud-pending-detail { margin-top: 5px; font-size: 13px; line-height: 1.55; color: rgba(255,255,255,.84); }
+.cloud-pending-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 11px; }
+.cloud-pending-actions button {
+  min-height: 42px; border: 1px solid rgba(255,255,255,.5); border-radius: 9px;
+  color: #fff; font-size: 14px; font-weight: 900; cursor: pointer; padding: 7px 8px;
+}
+.cloud-pending-check { background: #2d779f; }
+.cloud-pending-resolve { background: #176a40; }
+.cloud-pending-discard { grid-column: 1 / -1; background: rgba(151,46,46,.55); color: #ffd9d9 !important; }
+.cloud-pending-actions button:disabled { opacity: .45; cursor: wait; }
+@media(max-width:390px){ .cloud-pending-actions { grid-template-columns: 1fr; } .cloud-pending-discard { grid-column: auto; } }
+
 /* Rotation Scoreboard Ver.4.8.0: statistics graphs */
 @media (max-width: 390px) {
   .player-chart-switch button { font-size: 10.5px; padding-left: 1px; padding-right: 1px; }
@@ -8142,6 +8168,15 @@ button {
           <div class="cloud-auto-detail" id="cloudAutoSaveStatus">自動保存：ON（接続設定とDevice IDがある端末で動作します）</div>
           <div class="cloud-meta" id="cloudMeta">Device IDを保存するとクラウド情報を確認できます。</div>
           <div class="cloud-sync-state" id="cloudSyncState">同期状態を確認中です。</div>
+          <div class="cloud-pending-panel hidden" id="cloudPendingSavePanel" role="status" aria-live="polite">
+            <div class="cloud-pending-title">クラウド保存が保留されています</div>
+            <div class="cloud-pending-detail" id="cloudPendingSaveDetail"></div>
+            <div class="cloud-pending-actions">
+              <button class="cloud-pending-check" id="cloudPendingCheckBtn" type="button">同期状態を再確認</button>
+              <button class="cloud-pending-resolve" id="cloudPendingResolveBtn" type="button">保存方法を選ぶ</button>
+              <button class="cloud-pending-discard" id="cloudPendingDiscardBtn" type="button">保留表示だけ解除</button>
+            </div>
+          </div>
           <div class="cloud-status" id="cloudSyncStatus" role="status" aria-live="polite"></div>
           <p class="cloud-note">※ 保存時はクラウドのRevisionを再確認し、他端末の更新があれば自動上書きを停止します。競合時は「クラウドから読込・強制上書き・キャンセル」を選べます。クラウド読込前には現在の端末データを自動退避します。</p>
 
@@ -8800,6 +8835,33 @@ button {
     </svg>`;
   }
 
+  // CueScore RC13: one canonical reader for saved per-player match metrics.
+  // RC14: rankings and VS analysis use the shared saved-record metrics reader.
+  function savedPlayerMetricsV113(record, side) {
+    const own = record?.players?.[side] || {};
+    const pocketCount = Math.max(0, Number(own.pocketCount) || 0);
+    const misses = Math.max(0, Number(own.misses) || 0);
+    const storedShotRate = Number(own.shotRate);
+    const shotRate = Number.isFinite(storedShotRate)
+      ? Math.max(0, Math.min(100, storedShotRate))
+      : (pocketCount + misses > 0 ? (pocketCount / (pocketCount + misses)) * 100 : null);
+    const ownInnings = Number(own.innings);
+    const recordInnings = Number(record?.inning);
+    const innings = Number.isFinite(ownInnings) && ownInnings > 0
+      ? ownInnings
+      : (Number.isFinite(recordInnings) && recordInnings > 0 ? recordInnings : null);
+    return {
+      score: Math.max(0, Number(own.score) || 0),
+      pocketCount,
+      misses,
+      shotRate,
+      innings,
+      maxRun: Math.max(0, Number(own.maxRun) || 0),
+      fouls: Math.max(0, Number(own.fouls) || 0),
+      share: Number.isFinite(Number(own.share)) ? Number(own.share) : null
+    };
+  }
+
   let playerStatsActiveFilterV28 = "all";
   let playerStatsActiveChartV33 = "points";
 
@@ -9226,14 +9288,10 @@ button {
         });
       }
 
-      const storedShotRate = Number(own.shotRate);
-      const pocketCount = Number(own.pocketCount);
-      const missCount = Number(own.misses);
-      const shotRateValue = Number.isFinite(storedShotRate)
-        ? Math.max(0, Math.min(100, storedShotRate))
-        : (Number.isFinite(pocketCount) && Number.isFinite(missCount) && (pocketCount + missCount) > 0)
-          ? Math.round((pocketCount / (pocketCount + missCount)) * 100)
-          : null;
+      const savedMetricsV113 = savedPlayerMetricsV113(record, side);
+      const shotRateValue = Number.isFinite(savedMetricsV113.shotRate)
+        ? Math.round(savedMetricsV113.shotRate)
+        : null;
 
       if (Number.isFinite(shotRateValue)) {
         shotRateTrendPoints.push({
@@ -9315,13 +9373,13 @@ button {
         if (won) monthStatsV34.wins += 1;
         else monthStatsV34.losses += 1;
 
-        const monthShotRateV34 = Number(own.shotRate);
+        const monthShotRateV34 = savedMetricsV113.shotRate;
         if (Number.isFinite(monthShotRateV34)) {
           monthStatsV34.shotRateTotal += monthShotRateV34;
           monthStatsV34.shotRateCount += 1;
         }
 
-        const monthInningsV34 = Number(own.innings);
+        const monthInningsV34 = savedMetricsV113.innings;
         if (Number.isFinite(monthInningsV34) && monthInningsV34 > 0) {
           monthStatsV34.inningTotal += monthInningsV34;
           monthStatsV34.inningCount += 1;
@@ -10203,6 +10261,7 @@ button {
     const scoredBalls = breakRule.pocketedBallsScore === false ? [] : [...pocketedBalls];
     const scoreAdded = scoredBalls.reduce((sum, number) => sum + number, 0);
     const changesTurn = foul && Boolean(breakRule.scratchChangesTurn);
+    const pushOutRequested = Boolean(input.pushOutRequested && rule.pushOut?.enabled && !foul);
     return {
       player,
       rack: Number(input.rackNumber) || Number(rack) || 1,
@@ -10216,7 +10275,8 @@ button {
       ballsRemainDown: breakRule.pocketedBallsRemainDown !== false,
       changesTurn,
       nextPlayer: changesTurn ? (player === 1 ? 2 : 1) : player,
-      postBreakAction: changesTurn ? "opponent_play" : "normal_play",
+      pushOutRequested,
+      postBreakAction: changesTurn ? "opponent_play" : pushOutRequested ? "push_out_available" : "normal_play",
       result: scratch ? "scratch" : illegalBreak ? "illegal" : pocketedBalls.length ? "scored" : "dry"
     };
   }
@@ -10237,6 +10297,7 @@ button {
       ballsRemainDown: decision.ballsRemainDown,
       changesTurn: decision.changesTurn,
       nextPlayer: decision.nextPlayer,
+      pushOutRequested: Boolean(decision.pushOutRequested),
       postBreakAction: decision.postBreakAction,
       rulesApplied: {
         pocketedBallsRemainDown: getActiveRuleV699().break.pocketedBallsRemainDown,
@@ -10402,17 +10463,26 @@ button {
     el("startConfirmOverlayV698")?.classList.add("hidden");
   }
 
+  function normalizeRaceGoalV109(value, fallback = 120) {
+    const parsed = Number(value);
+    if (!Number.isFinite(parsed) || parsed <= 0) return null;
+    const integerGoal = Math.trunc(parsed);
+    return integerGoal >= 1 ? integerGoal : null;
+  }
+
   function showStartConfirmV698() {
     closeBreakResultPromptV61();
     closeRecordModePromptV611();
     const p1Name = limitPlayerName(el("p1Name")?.value.trim()) || "Player 1";
     const p2Name = limitPlayerName(el("p2Name")?.value.trim()) || "Player 2";
-    const p1Goal = Number(el("p1Race")?.value || 120);
-    const p2Goal = Number(el("p2Race")?.value || 120);
-    if (!Number.isFinite(p1Goal) || p1Goal <= 0 || !Number.isFinite(p2Goal) || p2Goal <= 0) {
-      showToast("Goal", "正しいGoalを設定してください");
+    const p1Goal = normalizeRaceGoalV109(el("p1Race")?.value, 120);
+    const p2Goal = normalizeRaceGoalV109(el("p2Race")?.value, 120);
+    if (!p1Goal || !p2Goal) {
+      showToast("Race to", "1以上の整数を設定してください");
       return;
     }
+    if (el("p1Race")) el("p1Race").value = String(p1Goal);
+    if (el("p2Race")) el("p2Race").value = String(p2Goal);
     if (el("p1Name")) el("p1Name").value = p1Name;
     if (el("p2Name")) el("p2Name").value = p2Name;
     el("startConfirmP1NameV698").textContent = p1Name;
@@ -10484,7 +10554,8 @@ button {
     if (!overlay) return;
     pendingBreakPlayerV61 = Number(payload.player) === 2 ? 2 : 1;
     pendingBreakRackV61 = Number(payload.rackNumber) || Number(rack) || 1;
-    pendingBreakBallsV696 = new Set((payload.pocketedBalls || []).map(Number).filter(n => n >= 1 && n <= 15));
+    const activeBallCountV111 = Number(getActiveRuleV699().ballCount || 15);
+    pendingBreakBallsV696 = new Set((payload.pocketedBalls || []).map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= activeBallCountV111));
     pendingBreakNoInV702 = Boolean(payload.noIn) || (pendingBreakBallsV696.size === 0 && !payload.scratch && !payload.illegalBreak && !payload.pushOut);
     pendingBreakScratchV696 = Boolean(payload.scratch);
     pendingBreakIllegalV696 = false;
@@ -10581,7 +10652,8 @@ button {
       rackNumber,
       pocketedBalls: [...pendingBreakBallsV696].filter(ball => !usedBalls.has(ball)),
       scratch: pendingBreakScratchV696,
-      illegalBreak: pendingBreakIllegalV696
+      illegalBreak: pendingBreakIllegalV696,
+      pushOutRequested: requestedPushOutV100
     });
     const undoPromptPayloadV697 = {
       player,
@@ -10633,7 +10705,7 @@ button {
         breakFailed: false,
         breakFoul: decision.foul,
         illegalBreak: decision.illegalBreak,
-        pushOut: false,
+        pushOut: Boolean(decision.pushOutRequested),
         postBreakAction: decision.postBreakAction,
         nextPlayer: decision.nextPlayer,
         breakRunOut: false,
@@ -10676,7 +10748,7 @@ button {
 
     // A Push Out selected on the break-result screen must continue into the
     // dedicated Push Out input flow. It is ignored when the break was not legal.
-    if (requestedPushOutV100 && decision.legalBreak && !decision.foul) {
+    if (decision.pushOutRequested && decision.legalBreak && !decision.foul) {
       setTimeout(() => {
         if (isPushOutAvailableV730()) openPushOutV730();
       }, 0);
@@ -10897,10 +10969,23 @@ button {
 
   function el(id) { return document.getElementById(id); }
 
+  // RC9: resolve a winner deterministically, even if imported/corrupt state
+  // makes both players appear to have reached their targets.
   function goalReachedPlayer() {
-    if (scores[1] >= goals[1]) return 1;
-    if (scores[2] >= goals[2]) return 2;
-    return null;
+    const p1Reached = Number(scores[1]) >= Number(goals[1]);
+    const p2Reached = Number(scores[2]) >= Number(goals[2]);
+    if (p1Reached && !p2Reached) return 1;
+    if (p2Reached && !p1Reached) return 2;
+    if (!p1Reached && !p2Reached) return null;
+
+    const latestScoringEvent = [...commonEventsV7].reverse().find(event =>
+      event?.type === "Shot" && Number(event?.player) >= 1
+    );
+    if (latestScoringEvent) return Number(latestScoringEvent.player) === 2 ? 2 : 1;
+
+    const p1Ratio = Number(goals[1]) > 0 ? Number(scores[1]) / Number(goals[1]) : 0;
+    const p2Ratio = Number(goals[2]) > 0 ? Number(scores[2]) / Number(goals[2]) : 0;
+    return p2Ratio > p1Ratio ? 2 : 1;
   }
 
   function isReviewLocked() {
@@ -11047,13 +11132,15 @@ button {
     log.scrollTop = log.scrollHeight;
   }
 
+  // CueScore RC5: Game Engine ball-count invariants use the active rule instead of hard-coded 15.
   function renderBalls() {
     const balls = el("proBalls");
     balls.innerHTML = "";
     balls.classList.toggle("rack-ended", rackEnded);
     balls.classList.toggle("locked", foulLocked);
 
-    for (let number = 1; number <= 15; number++) {
+    const activeBallCountV105 = Math.max(1, Number(getActiveRuleV699().ballCount || 15));
+    for (let number = 1; number <= activeBallCountV105; number++) {
       const button = document.createElement("button");
       button.className = "pro-ball " + (number <= 8 ? "solid" : "stripe");
       if (usedBalls.has(number)) button.classList.add("used");
@@ -11074,34 +11161,44 @@ button {
   }
 
 
+  // CueScore RC6: preserve completed-rack Inning and make run continuity explicit.
   function startNextRackWith(player) {
     if (gameEnded || !rackEnded || isReviewLocked()) return;
 
     saveAndDo(() => {
       const fifteenBallPlayer = nextBreakPlayer;
       const changesPlayer = player !== fifteenBallPlayer;
+      const completedRackV60 = rack;
+      const completedInningV106 = inning;
+      const completedRunV106 = Number(currentRun[fifteenBallPlayer]) || 0;
+      const breakRunOutV695 = finalizeBreakRunOutV695(completedRackV60, fifteenBallPlayer);
 
-      // 15番を入れた人と次ラックのブレイク担当が違う場合だけ、
-      // 次のブレイクから新しいInningに進む。
+      // RackEnd belongs to the Inning in which the rack actually finished.
+      // Explicitly override the event's inning before advancing to the next break.
+      recordAnalysisEventV60("rack_completed", {
+        player: fifteenBallPlayer,
+        rack: completedRackV60,
+        inning: completedInningV106,
+        completedRack: completedRackV60,
+        completedInning: completedInningV106,
+        nextBreakPlayer: player,
+        rackFinalScores: {1:Number(rackScores[1])||0, 2:Number(rackScores[2])||0},
+        runAtRackEnd: completedRunV106,
+        runContinuesToNextRack: !changesPlayer,
+        breakRunOut: breakRunOutV695
+      });
+
+      // Only a change from the 15-ball scorer to the other breaker closes the
+      // scoring run and advances the Inning. The same player may continue a
+      // high run across the rack boundary.
       if (changesPlayer) {
         endCurrentRun(fifteenBallPlayer);
         currentRun[player] = 0;
         inning++;
       }
 
-      // startingPlayer は試合開始時の先攻を保持する。
-      // ラックごとのブレイク担当に上書きしないことで、
-      // 「先攻→後攻」の2人1組を1 Inningとして数える。
-      const completedRackV60 = rack;
-      const breakRunOutV695 = finalizeBreakRunOutV695(completedRackV60, fifteenBallPlayer);
-      recordAnalysisEventV60("rack_completed", {
-        player: fifteenBallPlayer,
-        completedRack: completedRackV60,
-        nextBreakPlayer: player,
-        rackFinalScores: {1:Number(rackScores[1])||0, 2:Number(rackScores[2])||0},
-        breakRunOut: breakRunOutV695
-      });
-
+      // startingPlayer remains the match's opening player. It is not replaced
+      // by each rack's breaker, preserving the P1→P2 pair as one Inning.
       clearPushOutWindowV730();
       current = player;
       nextBreakPlayer = player;
@@ -11111,13 +11208,19 @@ button {
       usedBalls = new Set();
       rackEnded = false;
       foulLocked = false;
+      turnLockReasonV62 = null;
 
-      // ラックが変わるため表示行は分けるが、同じ選手が続ける場合は
-      // Inning番号とハイランを継続する。
+      // A rack boundary always starts a new log row. The Inning and currentRun
+      // continue only when the same player takes the next break.
       forceNewRow = true;
       recordAnalysisEventV60("rack_started", {
         player,
         breakPlayer: player,
+        rack,
+        inning,
+        previousRack: completedRackV60,
+        previousInning: completedInningV106,
+        continuedRun: !changesPlayer ? Number(currentRun[player]) || 0 : 0,
         source: "next_rack_selection"
       });
       el("proNextRackBox").classList.add("hidden");
@@ -11184,15 +11287,25 @@ button {
     updateButtons();
   }
 
+  // CueScore RC10: failed actions must roll back both state and event audit data.
+  const MAX_UNDO_DEPTH_V111 = 300;
+
   function saveAndDo(action) {
     const beforeStateV100 = snapshot();
     undoHistory.push(beforeStateV100);
+    if (undoHistory.length > MAX_UNDO_DEPTH_V111) {
+      undoHistory.splice(0, undoHistory.length - MAX_UNDO_DEPTH_V111);
+    }
     try {
       action();
       updateGame();
     } catch (error) {
+      const failedEventsV110 = JSON.parse(JSON.stringify(commonEventsV7));
       undoHistory.pop();
       restore(beforeStateV100);
+      // Mark any events emitted by the failed action as invalidated so they do
+      // not remain as active "ghost" events in exported analysis data.
+      registerUndoInEventJournalV720(failedEventsV110, commonEventsV7);
       updateGame();
       console.error("CueScore action rollback", error);
       showToast("操作を取り消しました", "処理中に問題が発生したため、直前の状態へ戻しました");
@@ -11200,6 +11313,10 @@ button {
   }
 
   function pocketBall(number) {
+    const activeBallCountV105 = Math.max(1, Number(getActiveRuleV699().ballCount || 15));
+    const ballNumberV105 = Number(number);
+    if (!Number.isInteger(ballNumberV105) || ballNumberV105 < 1 || ballNumberV105 > activeBallCountV105) return;
+    number = ballNumberV105;
     if (gameEnded || rackEnded || foulLocked || isReviewLocked() || usedBalls.has(number)) return;
     if (pushOutStateV730?.stage === "available") clearPushOutWindowV730();
     saveAndDo(() => {
@@ -11223,7 +11340,7 @@ button {
         runAfter: currentRun[current]
       });
 
-      if (usedBalls.size === 15) {
+      if (usedBalls.size >= activeBallCountV105) {
         rackEnded = true;
         foulLocked = false;
         nextBreakPlayer = current;
@@ -11259,6 +11376,9 @@ button {
         fromPlayer: fromPlayerV60,
         toPlayer: toPlayerV60,
         reason: switchReasonV62,
+        countsAsMiss: switchReasonV62 === "miss",
+        inningBefore: inning,
+        inningAfter: inning + (toPlayerV60 === startingPlayer ? 1 : 0),
         runBeforeEnd: currentRun[fromPlayerV60]
       });
       endCurrentRun(current);
@@ -11318,7 +11438,7 @@ button {
         phase: foulPhaseV63(),
         scoreSituation: scoreSituationV63(current),
         ballsPocketedInRack: usedBalls.size,
-        ballsRemainingInRack: Math.max(0, 15 - usedBalls.size),
+        ballsRemainingInRack: Math.max(0, Number(getActiveRuleV699().ballCount || 15) - usedBalls.size),
         runBeforeEnd: currentRun[current]
       });
       beginPendingFoulV63(current);
@@ -11358,16 +11478,47 @@ button {
   function confirmPushOutV730() {
     if (!isPushOutAvailableV730()) return clearPushOutWindowV730();
     const executor = current, chooser = executor===1?2:1, rule=getActiveRuleV699(), cfg=rule.pushOut || {};
-    const balls=[...pushOutInputBallsV730].sort((a,b)=>a-b);
+    const maxBall = Math.max(1, Number(rule.ballCount || 15));
+    const balls=[...pushOutInputBallsV730]
+      .map(Number)
+      .filter(ball => Number.isInteger(ball) && ball >= 1 && ball <= maxBall && !usedBalls.has(ball))
+      .sort((a,b)=>a-b);
+    const scratchFoul = Boolean(pushOutInputScratchV730 && cfg.scratchIsFoul !== false);
     saveAndDo(()=>{
       if (cfg.pocketedBallsRemainDown !== false) balls.forEach(ball=>usedBalls.add(ball));
-      if (pushOutInputScratchV730 && cfg.scratchIsFoul !== false) { fouls[executor]++; addItemToCurrent("F"); }
-      appendCommonEventV700("PushOut","push_out",{player:executor,executor,chooser,pocketedBalls:balls,scratch:pushOutInputScratchV730,scoreAdded:0,opponentDecisionRequired:cfg.opponentDecisionRequired!==false,sourceBreakEventId:pushOutStateV730?.sourceBreakEventId||null});
-      recordAnalysisEventV60("push_out",{player:executor,executor,chooser,pocketedBalls:balls,scratch:pushOutInputScratchV730,result:"awaiting_opponent_decision"},{skipCommon:true});
-      pushOutStateV730={...pushOutStateV730,stage:"decision",executor,chooser,pocketedBalls:balls,scratch:pushOutInputScratchV730};
-      endCurrentRun(executor); foulLocked=true; turnLockReasonV62="push_out_decision";
+      if (scratchFoul) {
+        fouls[executor]++;
+        addItemToCurrent("F");
+        recordAnalysisEventV60("foul", {
+          player: executor,
+          foulType: "push_out_scratch",
+          phase: foulPhaseV63(),
+          scoreSituation: scoreSituationV63(executor),
+          ballsPocketedInRack: usedBalls.size,
+          ballsRemainingInRack: Math.max(0, maxBall - usedBalls.size),
+          runBeforeEnd: currentRun[executor],
+          source: "push_out"
+        });
+        beginPendingFoulV63(executor);
+      }
+      appendCommonEventV700("PushOut","push_out",{player:executor,executor,chooser,pocketedBalls:balls,scratch:scratchFoul,scoreAdded:0,opponentDecisionRequired:!scratchFoul && cfg.opponentDecisionRequired!==false,sourceBreakEventId:pushOutStateV730?.sourceBreakEventId||null});
+      recordAnalysisEventV60("push_out",{player:executor,executor,chooser,pocketedBalls:balls,scratch:scratchFoul,result:scratchFoul?"foul_waiting_turn_change":"awaiting_opponent_decision"},{skipCommon:true});
+      endCurrentRun(executor);
+      foulLocked=true;
+      if (scratchFoul) {
+        turnLockReasonV62="push_out_foul";
+        pushOutStateV730=null;
+      } else {
+        turnLockReasonV62="push_out_decision";
+        pushOutStateV730={...pushOutStateV730,stage:"decision",executor,chooser,pocketedBalls:balls,scratch:false};
+      }
     });
     el("pushOutInputOverlayV730")?.classList.add("hidden");
+    if (scratchFoul) {
+      el("pushOutDecisionOverlayV730")?.classList.add("hidden");
+      showToast("プッシュアウトでファール", `${playerName(chooser)}へ交代してください`);
+      return;
+    }
     el("pushOutDecisionPlayerV730").textContent=`${playerName(chooser)} が選択`;
     el("pushOutDecisionOverlayV730")?.classList.remove("hidden");
   }
@@ -11826,7 +11977,14 @@ button {
     turnLockReasonV62 = null;
     pendingBreakPlayerV61 = null;
     pendingBreakRackV61 = null;
+    pendingBreakResultV695 = null;
+    pendingBreakPushOutV695 = false;
+    pendingBreakBallsV696 = new Set();
+    pendingBreakNoInV702 = false;
+    pendingBreakScratchV696 = false;
+    pendingBreakIllegalV696 = false;
     breakUndoRestoreV697 = null;
+    clearPushOutWindowV730();
     closeBreakResultPromptV61();
     closeRecordModePromptV611();
     closeStartConfirmV698();
@@ -11858,23 +12016,81 @@ button {
 
     updateGame();
     if (recordingModeV611 === "detail") {
-      setTimeout(() => showBreakResultPromptV61(startingPlayer, 1), 0);
+      const promptSessionIdV111 = currentGameSessionIdV104;
+      setTimeout(() => {
+        if (currentGameSessionIdV104 !== promptSessionIdV111) return;
+        if (!app.classList.contains("pro-game-mode") || gameEnded) return;
+        showBreakResultPromptV61(startingPlayer, 1);
+      }, 0);
     }
   }
 
 
-  function calculateResultStats() {
-    const nineBall = {1:0, 2:0};
-    const turnCount = {1:0, 2:0};
+  // RC7: derive manual misses from the active event log at result time.
+  // This makes shot rate resilient to Undo and guarantees that Safety/Foul
+  // turn changes are never counted as misses.
+  function calculateManualMissesV107() {
+    const derived = {1:0, 2:0};
+    commonEventsV7.forEach(event => {
+      if (event?.type !== "TurnChange" || event?.sourceType !== "player_switch") return;
+      const data = event?.data || {};
+      if (String(data.reason || "") !== "miss") return;
+      const player = Number(data.fromPlayer ?? event.player) === 2 ? 2 : 1;
+      derived[player] += 1;
+    });
+    return derived;
+  }
+
+  // CueScore RC12: final statistics are rebuilt from the active event log.
+  // rows is a presentation model and may be reformatted independently; commonEventsV7
+  // is the authoritative Undo-aware gameplay history used for saved records.
+  function calculatePocketStatsFromEventsV112() {
     const pocketCount = {1:0, 2:0};
+    const nineBall = {1:0, 2:0};
+    let scoringEventCount = 0;
+
+    commonEventsV7.forEach(event => {
+      const player = Number(event?.player) === 2 ? 2 : 1;
+      if (event?.type === "Shot" && event?.sourceType === "ball_pocketed") {
+        const ball = Number(event?.data?.ball);
+        if (!Number.isInteger(ball) || ball < 1) return;
+        pocketCount[player] += 1;
+        if (ball === 9) nineBall[player] += 1;
+        scoringEventCount += 1;
+        return;
+      }
+      if (event?.type === "Break" && event?.sourceType === "break_result") {
+        const balls = Array.isArray(event?.data?.scoredBalls)
+          ? event.data.scoredBalls.map(Number).filter(ball => Number.isInteger(ball) && ball > 0)
+          : [];
+        pocketCount[player] += balls.length;
+        nineBall[player] += balls.filter(ball => ball === 9).length;
+        scoringEventCount += balls.length;
+      }
+    });
+
+    // Backward-compatible fallback for records created before the common event log.
+    if (scoringEventCount === 0) {
+      rows.forEach(row => {
+        [1,2].forEach(player => {
+          const items = row[player === 1 ? "p1" : "p2"] || [];
+          const balls = items.filter(item => typeof item === "number");
+          pocketCount[player] += balls.length;
+          nineBall[player] += balls.filter(ball => ball === 9).length;
+        });
+      });
+    }
+    return {pocketCount, nineBall};
+  }
+
+  function calculateResultStats() {
+    const turnCount = {1:0, 2:0};
+    const {pocketCount, nineBall} = calculatePocketStatsFromEventsV112();
 
     rows.forEach(row => {
       [1,2].forEach(player => {
         const items = row[player === 1 ? "p1" : "p2"] || [];
-        const balls = items.filter(item => typeof item === "number");
-        if (balls.length > 0 || items.length > 0) turnCount[player]++;
-        pocketCount[player] += balls.length;
-        if (balls.includes(9)) nineBall[player]++;
+        if (items.length > 0) turnCount[player]++;
       });
     });
 
@@ -11884,12 +12100,13 @@ button {
       2: totalPocket ? Math.round((pocketCount[2] / totalPocket) * 100) : 0
     };
 
+    const manualMissesV107 = calculateManualMissesV107();
     const shotRate = {
-      1: (pocketCount[1] + misses[1]) > 0
-        ? Math.round((pocketCount[1] / (pocketCount[1] + misses[1])) * 100)
+      1: (pocketCount[1] + manualMissesV107[1]) > 0
+        ? Math.round((pocketCount[1] / (pocketCount[1] + manualMissesV107[1])) * 100)
         : 0,
-      2: (pocketCount[2] + misses[2]) > 0
-        ? Math.round((pocketCount[2] / (pocketCount[2] + misses[2])) * 100)
+      2: (pocketCount[2] + manualMissesV107[2]) > 0
+        ? Math.round((pocketCount[2] / (pocketCount[2] + manualMissesV107[2])) * 100)
         : 0
     };
 
@@ -11898,7 +12115,7 @@ button {
       2: Math.max(maxRun[2], currentRun[2])
     };
 
-    return {nineBall, maxRun: effectiveMaxRun, turnCount, pocketCount, share, shotRate};
+    return {nineBall, maxRun: effectiveMaxRun, turnCount, pocketCount, share, shotRate, manualMisses: manualMissesV107};
   }
 
   function buildScoreProgress() {
@@ -11906,21 +12123,37 @@ button {
     const p2 = [0];
     let s1 = 0;
     let s2 = 0;
+    let foundScoringEventV112 = false;
 
-    rows.forEach(row => {
-      (row.p1 || []).forEach(item => {
-        if (typeof item === "number") s1 += item;
-      });
-      (row.p2 || []).forEach(item => {
-        if (typeof item === "number") s2 += item;
-      });
+    commonEventsV7.forEach(event => {
+      const player = Number(event?.player) === 2 ? 2 : 1;
+      let points = 0;
+      if (event?.type === "Shot" && event?.sourceType === "ball_pocketed") {
+        points = Math.max(0, Number(event?.data?.points ?? event?.data?.ball) || 0);
+      } else if (event?.type === "Break" && event?.sourceType === "break_result") {
+        points = Math.max(0, Number(event?.data?.scoreAdded) || 0);
+      }
+      if (!points) return;
+      foundScoringEventV112 = true;
+      if (player === 1) s1 += points;
+      else s2 += points;
       p1.push(s1);
       p2.push(s2);
     });
 
+    // Legacy fallback where no standard scoring events exist.
+    if (!foundScoringEventV112) {
+      rows.forEach(row => {
+        (row.p1 || []).forEach(item => { if (typeof item === "number") s1 += item; });
+        (row.p2 || []).forEach(item => { if (typeof item === "number") s2 += item; });
+        p1.push(s1);
+        p2.push(s2);
+      });
+    }
+
     if (p1.length === 1) {
-      p1.push(scores[1]);
-      p2.push(scores[2]);
+      p1.push(Number(scores[1]) || 0);
+      p2.push(Number(scores[2]) || 0);
     }
 
     return {p1, p2};
@@ -11999,8 +12232,8 @@ button {
       inning,
       rack,
       players: {
-        1: {name:playerName(1), registeredPlayerId:selectedRegisteredPlayer[1] || null, goal:goals[1], score:scores[1], safety:safety[1], fouls:fouls[1], breaks:breakCount[1], maxRun:stats.maxRun[1], share:stats.share[1], misses:misses[1], pocketCount:stats.pocketCount[1], shotRate:stats.shotRate[1]},
-        2: {name:playerName(2), registeredPlayerId:selectedRegisteredPlayer[2] || null, goal:goals[2], score:scores[2], safety:safety[2], fouls:fouls[2], breaks:breakCount[2], maxRun:stats.maxRun[2], share:stats.share[2], misses:misses[2], pocketCount:stats.pocketCount[2], shotRate:stats.shotRate[2]}
+        1: {name:playerName(1), registeredPlayerId:selectedRegisteredPlayer[1] || null, goal:goals[1], score:scores[1], safety:safety[1], fouls:fouls[1], breaks:breakCount[1], maxRun:stats.maxRun[1], share:stats.share[1], misses:stats.manualMisses[1], pocketCount:stats.pocketCount[1], shotRate:stats.shotRate[1]},
+        2: {name:playerName(2), registeredPlayerId:selectedRegisteredPlayer[2] || null, goal:goals[2], score:scores[2], safety:safety[2], fouls:fouls[2], breaks:breakCount[2], maxRun:stats.maxRun[2], share:stats.share[2], misses:stats.manualMisses[2], pocketCount:stats.pocketCount[2], shotRate:stats.shotRate[2]}
       }
     };
     const records = readMatchRecords();
@@ -12192,7 +12425,7 @@ button {
   }
 
   function checkWinner() {
-    const winner = scores[1] >= goals[1] ? 1 : scores[2] >= goals[2] ? 2 : null;
+    const winner = goalReachedPlayer();
     const summary = el("proSummary");
 
     if (!winner) {
@@ -12209,9 +12442,27 @@ button {
       return;
     }
 
+    const wasGameEndedV109 = gameEnded;
+    const hasRecordedGameEndV110 = commonEventsV7.some(event =>
+      event?.type === "GameEnd" &&
+      String(event?.data?.gameSessionId || "") === String(currentGameSessionIdV104 || "")
+    );
     gameEnded = true;
     const loser = winner === 1 ? 2 : 1;
     const stats = calculateResultStats();
+    if (!wasGameEndedV109 && !hasRecordedGameEndV110) {
+      recordAnalysisEventV60("game_end", {
+        player: winner,
+        winner,
+        loser,
+        gameSessionId: currentGameSessionIdV104,
+        scores: {1:Number(scores[1])||0, 2:Number(scores[2])||0},
+        goals: {1:Number(goals[1])||0, 2:Number(goals[2])||0},
+        rack,
+        inning,
+        reason: "race_target_reached"
+      });
+    }
     const progress = buildScoreProgress();
     const now = new Date();
     const dateText = `${now.getFullYear()}/${String(now.getMonth()+1).padStart(2,"0")}/${String(now.getDate()).padStart(2,"0")}`;
@@ -12458,6 +12709,24 @@ button {
   function requestBackToPlayerInfo() {
     // Game Setをcancelした後も、戻るボタンだけは使用できる。
     if (!confirm("現在の試合を終了してPlayer infoへ戻りますか？")) return;
+    // RC11: invalidate delayed callbacks and close all transient game overlays.
+    currentGameSessionIdV104 = null;
+    breakUndoRestoreV697 = null;
+    pendingBreakPlayerV61 = null;
+    pendingBreakRackV61 = null;
+    pendingBreakResultV695 = null;
+    pendingBreakPushOutV695 = false;
+    pendingBreakBallsV696 = new Set();
+    pendingBreakNoInV702 = false;
+    pendingBreakScratchV696 = false;
+    pendingBreakIllegalV696 = false;
+    pendingSafetyV62 = null;
+    pendingFoulV63 = null;
+    turnLockReasonV62 = null;
+    clearPushOutWindowV730();
+    closeBreakResultPromptV61();
+    el("proSummary")?.classList.add("hidden");
+    el("proNextRackBox")?.classList.add("hidden");
     app.classList.remove("pro-game-mode");
     app.classList.add("player-info-mode");
     proGameScreen.classList.add("hidden");
@@ -13177,9 +13446,18 @@ button {
         summary: analysisSummaryV60()
       },
       progress:{p1:[...progress.p1],p2:[...progress.p2]},
+      consistencyAudit: {
+        schemaVersion: 1,
+        source: "active_common_event_log",
+        checkedAt: endedAt,
+        scoreMatchesProgress: Number(progress.p1.at(-1) || 0) === Number(scores[1] || 0) && Number(progress.p2.at(-1) || 0) === Number(scores[2] || 0),
+        activeEventCount: commonEventsV7.length,
+        pocketCountsMatchEvents: Number(stats.pocketCount[1] || 0) === countPocketedBallsFromEventsV112(1) && Number(stats.pocketCount[2] || 0) === countPocketedBallsFromEventsV112(2),
+        manualMissesMatchEvents: Number(stats.manualMisses[1] || 0) === countManualMissesFromEventsV107(1) && Number(stats.manualMisses[2] || 0) === countManualMissesFromEventsV107(2)
+      },
       players:{
-        1:{name:playerName(1),registeredPlayerId:selectedRegisteredPlayer[1]||null,goal:goals[1],score:scores[1],safety:safety[1],fouls:fouls[1],breaks:breakCount[1],maxRun:stats.maxRun[1],share:stats.share[1],misses:misses[1],pocketCount:stats.pocketCount[1],shotRate:stats.shotRate[1]},
-        2:{name:playerName(2),registeredPlayerId:selectedRegisteredPlayer[2]||null,goal:goals[2],score:scores[2],safety:safety[2],fouls:fouls[2],breaks:breakCount[2],maxRun:stats.maxRun[2],share:stats.share[2],misses:misses[2],pocketCount:stats.pocketCount[2],shotRate:stats.shotRate[2]}
+        1:{name:playerName(1),registeredPlayerId:selectedRegisteredPlayer[1]||null,goal:goals[1],score:scores[1],safety:safety[1],fouls:fouls[1],breaks:breakCount[1],maxRun:stats.maxRun[1],share:stats.share[1],misses:stats.manualMisses[1],pocketCount:stats.pocketCount[1],shotRate:stats.shotRate[1]},
+        2:{name:playerName(2),registeredPlayerId:selectedRegisteredPlayer[2]||null,goal:goals[2],score:scores[2],safety:safety[2],fouls:fouls[2],breaks:breakCount[2],maxRun:stats.maxRun[2],share:stats.share[2],misses:stats.manualMisses[2],pocketCount:stats.pocketCount[2],shotRate:stats.shotRate[2]}
       }
     };
     record.analysis.report = buildMatchAnalysisV64(
@@ -13415,7 +13693,7 @@ button {
         const url = URL.createObjectURL(blob);
         const anchor = document.createElement("a");
         anchor.href = url;
-        anchor.download = `Rotation_Scoreboard_Ver6_8_0_Backup_${dateStamp()}.json`;
+        anchor.download = `CueScore_Rotation_Scoreboard_v1.0_Backup_${dateStamp()}.json`;
         document.body.appendChild(anchor);
         anchor.click();
         anchor.remove();
@@ -13523,9 +13801,16 @@ button {
           };
 
           [[1, p1, p2], [2, p2, p1]].forEach(([side, self, opponent]) => {
-            const selfScore = Number(self.score) || 0;
-            const opponentScore = Number(opponent.score) || 0;
-            const pointsPerInning = inning > 0 ? Math.round((selfScore / inning) * 100) / 100 : "";
+            const selfMetrics = typeof savedPlayerMetricsV113 === "function"
+              ? savedPlayerMetricsV113(record, side)
+              : self;
+            const opponentMetrics = typeof savedPlayerMetricsV113 === "function"
+              ? savedPlayerMetricsV113(record, side === 1 ? 2 : 1)
+              : opponent;
+            const selfScore = Number(selfMetrics.score ?? self.score) || 0;
+            const opponentScore = Number(opponentMetrics.score ?? opponent.score) || 0;
+            const playerInning = Number(selfMetrics.inning ?? record.inning) || inning;
+            const pointsPerInning = playerInning > 0 ? Math.round((selfScore / playerInning) * 100) / 100 : "";
             rows.push([
               common.matchId,
               common.dateParts.date,
@@ -13546,14 +13831,14 @@ button {
               selfScore,
               opponentScore,
               selfScore - opponentScore,
-              common.inning,
+              playerInning,
               pointsPerInning,
-              Number(self.maxRun) || 0,
-              Number.isFinite(Number(self.shotRate)) ? Number(self.shotRate) : "",
-              Number(self.pocketCount) || 0,
-              Number(self.misses) || 0,
-              Number(self.safety) || 0,
-              Number(self.fouls) || 0,
+              Number(selfMetrics.maxRun ?? self.maxRun) || 0,
+              Number.isFinite(Number(selfMetrics.shotRate)) ? Number(selfMetrics.shotRate) : "",
+              Number(selfMetrics.pocketCount ?? self.pocketCount) || 0,
+              Number(selfMetrics.misses ?? self.misses) || 0,
+              Number(selfMetrics.safety ?? self.safety) || 0,
+              Number(selfMetrics.fouls ?? self.fouls) || 0,
               common.rack,
               common.filter
             ].map(csvCell).join(","));
@@ -13583,10 +13868,22 @@ button {
       if (!value || typeof value !== "object") return false;
       if (value.format !== BACKUP_FORMAT) return false;
       if (!Array.isArray(value.players) || !Array.isArray(value.matchRecords)) return false;
+      if (value.schemaVersion != null && (!Number.isInteger(Number(value.schemaVersion)) || Number(value.schemaVersion) < 1)) return false;
 
       // Schema Version 1（Ver.3.9）は区分・シーズンを持たないため許可する。
       if (value.matchCategories != null && !Array.isArray(value.matchCategories)) return false;
       if (value.matchSeasons != null && !Array.isArray(value.matchSeasons)) return false;
+
+      const validPlayer = player => player && typeof player === "object" && !Array.isArray(player);
+      const validRecord = record => {
+        if (!record || typeof record !== "object" || Array.isArray(record)) return false;
+        const players = record.players;
+        return players && typeof players === "object" && players[1] && players[2];
+      };
+      if (!value.players.every(validPlayer) || !value.matchRecords.every(validRecord)) return false;
+
+      const ids = value.matchRecords.map(record => String(record.id || record.matchId || "").trim()).filter(Boolean);
+      if (new Set(ids).size !== ids.length) return false;
       return true;
     }
 
@@ -13617,10 +13914,28 @@ button {
         );
         if (!proceed) return;
 
-        localStorage.setItem(DATA_PLAYER_KEY, JSON.stringify(backup.players));
-        localStorage.setItem(DATA_RECORD_KEY, JSON.stringify(backup.matchRecords));
-        if (hasCategoryData) localStorage.setItem(DATA_CATEGORY_KEY, JSON.stringify(categories));
-        if (hasSeasonData) localStorage.setItem(DATA_SEASON_KEY, JSON.stringify(seasons));
+        const restoreSnapshotKey = `rotationScoreboard.beforeLocalRestore.${Date.now()}`;
+        const restoreSnapshot = {
+          createdAt: new Date().toISOString(),
+          players: safelyReadArray(DATA_PLAYER_KEY),
+          matchRecords: safelyReadArray(DATA_RECORD_KEY),
+          matchCategories: safelyReadArray(DATA_CATEGORY_KEY),
+          matchSeasons: safelyReadArray(DATA_SEASON_KEY)
+        };
+        localStorage.setItem(restoreSnapshotKey, JSON.stringify(restoreSnapshot));
+
+        try {
+          localStorage.setItem(DATA_PLAYER_KEY, JSON.stringify(backup.players));
+          localStorage.setItem(DATA_RECORD_KEY, JSON.stringify(backup.matchRecords));
+          if (hasCategoryData) localStorage.setItem(DATA_CATEGORY_KEY, JSON.stringify(categories));
+          if (hasSeasonData) localStorage.setItem(DATA_SEASON_KEY, JSON.stringify(seasons));
+        } catch (writeError) {
+          localStorage.setItem(DATA_PLAYER_KEY, JSON.stringify(restoreSnapshot.players));
+          localStorage.setItem(DATA_RECORD_KEY, JSON.stringify(restoreSnapshot.matchRecords));
+          localStorage.setItem(DATA_CATEGORY_KEY, JSON.stringify(restoreSnapshot.matchCategories));
+          localStorage.setItem(DATA_SEASON_KEY, JSON.stringify(restoreSnapshot.matchSeasons));
+          throw writeError;
+        }
         alert(
           `復元しました。\n登録プレーヤー ${playerCount}人\n対戦履歴 ${recordCount}試合\n` +
           `試合区分 ${categoryCount}件\nシーズン ${seasonCount}件`
@@ -13678,6 +13993,7 @@ button {
     const CLOUD_SYNC_STATE_KEY = "rotationScoreboard.cloudSyncState.v1";
     const CLOUD_AUTO_SAVE_KEY = "rotationScoreboard.cloudAutoSave.v1";
     const CLOUD_GENERATION_COUNT_KEY = "rotationScoreboard.cloudGenerationCount.v1";
+    const CLOUD_PENDING_SAVE_KEY = "rotationScoreboard.cloudPendingSave.v1";
     function getGenerationRetentionCount(){ const n=Number(localStorage.getItem(CLOUD_GENERATION_COUNT_KEY)||10); return Math.min(30,Math.max(1,Number.isFinite(n)?Math.round(n):10)); }
     const DEFAULT_PROJECT_URL = "https://autdoouekkqpvskyurch.supabase.co";
     const DATA_PLAYER_KEY = "rotationScoreboard.players.v1";
@@ -13695,6 +14011,32 @@ button {
     function readSyncState() { const value = readJson(CLOUD_SYNC_STATE_KEY, {}); return value && typeof value === "object" ? value : {}; }
     function readDeviceId() { return (localStorage.getItem(DEVICE_ID_KEY) || "").trim(); }
     function isAutoSaveEnabled() { return localStorage.getItem(CLOUD_AUTO_SAVE_KEY) !== "false"; }
+    function readPendingSaveV119() {
+      const value = readJson(CLOUD_PENDING_SAVE_KEY);
+      return value && typeof value === "object" ? value : null;
+    }
+    function clearPendingSaveV119() {
+      localStorage.removeItem(CLOUD_PENDING_SAVE_KEY);
+      renderPendingSaveUiV119();
+    }
+    function formatPendingReasonV119(reason) {
+      if (reason === "match-finish") return "試合終了後の自動保存";
+      if (reason === "network-error") return "通信エラー後の再保存";
+      if (reason === "cloud-conflict") return "他端末との競合確認";
+      return "クラウド保存";
+    }
+    function renderPendingSaveUiV119() {
+      const panel = byId("cloudPendingSavePanel");
+      const detail = byId("cloudPendingSaveDetail");
+      if (!panel || !detail) return;
+      const pending = readPendingSaveV119();
+      panel.classList.toggle("hidden", !pending);
+      if (!pending) { detail.textContent = ""; return; }
+      const requested = pending.requestedAt ? formatDate(pending.requestedAt) : "日時不明";
+      const game = pending.gameSessionId ? ` / 試合ID：${String(pending.gameSessionId).slice(0,18)}` : "";
+      const summary = pending.summary ? ` / ${pending.summary}` : "";
+      detail.textContent = `${formatPendingReasonV119(pending.reason)}を保留中です。保留日時：${requested}${game}${summary}。端末内データは失われていません。`;
+    }
     function updateAutoSaveUi(message = "") {
       const toggle = byId("cloudAutoSaveToggle");
       const status = byId("cloudAutoSaveStatus");
@@ -14137,6 +14479,7 @@ button {
       renderCloudMetaRow(savedRow);
       setSyncStateUi("✅ 端末とクラウドは同じ内容です。", "synced");
       await refreshCloudMeta({ revision: savedRevision, payloadHash: savedPayloadHash });
+      clearPendingSaveV119();
       return { savedRevision, savedPayloadHash };
     }
 
@@ -14206,12 +14549,24 @@ button {
         updateAutoSaveUi("自動保存保留：接続設定またはDevice IDが未設定です。端末には保存済みです。");
         return;
       }
+      const payload = buildPayload();
+      const pendingPayloadHash = await payloadFingerprint(payload).catch(() => "");
+      localStorage.setItem(CLOUD_PENDING_SAVE_KEY, JSON.stringify({
+        requestedAt: new Date().toISOString(),
+        reason: "match-finish",
+        gameSessionId: String(window.currentGameSessionIdV104 || ""),
+        payloadHash: pendingPayloadHash,
+        summary: payloadSummary(payload)
+      }));
+      renderPendingSaveUiV119();
       updateAutoSaveUi("自動保存中…（他端末のRevisionを確認しています）");
       try {
         const existing = await fetchCloudRow();
-        const payload = buildPayload();
         const stateInfo = await evaluateSyncState(existing);
         if (stateInfo.state === "cloud-newer" || stateInfo.state === "conflict") {
+          const pending = readPendingSaveV119() || {};
+          localStorage.setItem(CLOUD_PENDING_SAVE_KEY, JSON.stringify({ ...pending, reason: "cloud-conflict", lastCheckedAt: new Date().toISOString() }));
+          renderPendingSaveUiV119();
           updateAutoSaveUi("⚠️ 自動保存を保留しました。他の端末でクラウドが更新されています。");
           setSyncStatus("⚠️ 競合を検出：『クラウドから読込』または手動の『クラウドへ保存』で確認してください。", "error");
           return;
@@ -14225,6 +14580,9 @@ button {
             const latest = error.latestRow || await fetchCloudRow().catch(() => null);
             if (latest) renderCloudMetaRow(latest);
             setSyncStateUi("⚠️ 保存直前に他の端末が更新しました。自動保存を停止しました。", "conflict");
+            const pending = readPendingSaveV119() || {};
+            localStorage.setItem(CLOUD_PENDING_SAVE_KEY, JSON.stringify({ ...pending, reason: "cloud-conflict", lastCheckedAt: new Date().toISOString() }));
+            renderPendingSaveUiV119();
             updateAutoSaveUi("⚠️ 自動保存を保留しました。保存直前に他端末の更新を検出しました。");
             setSyncStatus("⚠️ 競合を検出したため、端末データは残したままクラウド保存を中止しました。", "error");
             return;
@@ -14237,6 +14595,9 @@ button {
         setSyncStatus("✅ 試合終了後に競合確認を行い、クラウドへ自動保存しました。", "ok");
       } catch (error) {
         console.error(error);
+        const pending = readPendingSaveV119() || {};
+        localStorage.setItem(CLOUD_PENDING_SAVE_KEY, JSON.stringify({ ...pending, reason: navigator.onLine ? (pending.reason || "network-error") : "network-error", lastError: String(error?.message || error), lastCheckedAt: new Date().toISOString() }));
+        renderPendingSaveUiV119();
         updateAutoSaveUi(`⚠️ 自動保存できませんでした。端末には保存済みです：${error.message}`);
         setSyncStatus("⚠️ クラウド自動保存に失敗しました。端末データは保存されています。", "error");
       }
@@ -14257,6 +14618,7 @@ button {
         localStorage.setItem(DATA_CATEGORY_KEY, JSON.stringify(payload.matchCategories));
         localStorage.setItem(DATA_SEASON_KEY, JSON.stringify(payload.matchSeasons));
         localStorage.setItem(CLOUD_SYNC_STATE_KEY, JSON.stringify({ revision:Number(row.revision || 1), payloadHash:await payloadFingerprint(payload), syncedAt:new Date().toISOString() }));
+        clearPendingSaveV119();
         alert(`クラウドから復元しました。\n${payloadSummary(payload)}`); window.location.reload();
       } catch (error) { console.error(error); setSyncStatus(`❌ 読み込めません：${error.message}`, "error"); }
       finally { updateDeviceUi(); }
@@ -14274,6 +14636,46 @@ button {
       alert("読込前の端末データへ戻しました。"); window.location.reload();
     }
 
+    let cloudReconcileInFlightV118 = null;
+    async function reconcileCloudAfterResumeV118({ retryPending = true } = {}) {
+      if (cloudReconcileInFlightV118) return cloudReconcileInFlightV118;
+      cloudReconcileInFlightV118 = (async () => {
+        if (!navigator.onLine) return { state: "offline" };
+        try {
+          getValidConfig();
+          getValidDeviceId();
+        } catch (_) {
+          return { state: "not-configured" };
+        }
+        try {
+          const row = await fetchCloudRow();
+          const stateInfo = await evaluateSyncState(row);
+          if (row) renderCloudMetaRow(row);
+          const hasPending = Boolean(localStorage.getItem(CLOUD_PENDING_SAVE_KEY));
+          renderPendingSaveUiV119();
+          if (retryPending && hasPending && (stateInfo.state === "local-newer" || stateInfo.state === "synced")) {
+            await cloudAutoSaveAfterMatch();
+            return { ...stateInfo, retried: true };
+          }
+          if (hasPending && (stateInfo.state === "cloud-newer" || stateInfo.state === "conflict")) {
+            updateAutoSaveUi("⚠️ 保留中の自動保存がありますが、クラウド更新を検出したため再試行していません。");
+          }
+          return stateInfo;
+        } catch (error) {
+          console.warn("[CueScore RC19] cloud resume reconciliation failed", error);
+          return { state: "error", error };
+        } finally {
+          updateDeviceUi();
+        }
+      })();
+      try {
+        return await cloudReconcileInFlightV118;
+      } finally {
+        cloudReconcileInFlightV118 = null;
+      }
+    }
+    window.cueScoreCloudReconcileV118 = reconcileCloudAfterResumeV118;
+
     byId("supabaseConnectBtn")?.addEventListener("click", saveAndTestConnection);
     byId("generateDeviceIdBtn")?.addEventListener("click", generateDeviceId);
     byId("saveDeviceIdBtn")?.addEventListener("click", saveDeviceId);
@@ -14282,15 +14684,39 @@ button {
     byId("cloudSaveBtn")?.addEventListener("click", cloudSave);
     byId("cloudLoadBtn")?.addEventListener("click", cloudLoad);
     byId("cloudHistoryRefreshBtn")?.addEventListener("click", refreshCloudHistory);
+    byId("cloudPendingCheckBtn")?.addEventListener("click", async event => {
+      const button = event.currentTarget; button.disabled = true;
+      setSyncStatus("保留中のクラウド保存状態を確認しています…");
+      try {
+        const result = await reconcileCloudAfterResumeV118({ retryPending: false });
+        if (result?.state === "local-newer" || result?.state === "synced") {
+          setSyncStatus("✅ 自動保存を安全に再試行できます。『保存方法を選ぶ』から確認してください。", "ok");
+        } else if (result?.state === "cloud-newer" || result?.state === "conflict") {
+          setSyncStatus("⚠️ クラウド側の更新があります。『保存方法を選ぶ』で読込または保存を選択してください。", "error");
+        }
+      } finally { button.disabled = false; renderPendingSaveUiV119(); }
+    });
+    byId("cloudPendingResolveBtn")?.addEventListener("click", async event => {
+      const button = event.currentTarget; button.disabled = true;
+      try { await cloudSave(); } finally { button.disabled = false; renderPendingSaveUiV119(); }
+    });
+    byId("cloudPendingDiscardBtn")?.addEventListener("click", () => {
+      if (!confirm("保留表示だけを解除します。端末内データは削除されません。クラウドへ未保存の変更が残る可能性があります。続けますか？")) return;
+      clearPendingSaveV119();
+      updateAutoSaveUi("保留表示を解除しました。必要に応じて手動でクラウド保存してください。");
+      setSyncStatus("保留マーカーを解除しました。端末データは保持されています。", "ok");
+    });
     byId("cloudAutoSaveToggle")?.addEventListener("change", event => {
       localStorage.setItem(CLOUD_AUTO_SAVE_KEY, event.target.checked ? "true" : "false");
       updateAutoSaveUi();
     });
     updateAutoSaveUi();
+    renderPendingSaveUiV119();
     loadSavedConfig();
   })();
 
 
+  // CueScore v1.0 RC15: history/filter/CSV/backup integrity hardening
   // Rotation Scoreboard Ver.8.3.1: enhanced common statistics filter engine
   (() => {
     const KEY="rotationScoreboard.statisticsFilter.v53";
@@ -14298,7 +14724,12 @@ button {
     const ids={from:"statisticsFromDate",to:"statisticsToDate",category:"statisticsCategory",season:"statisticsSeason",player:"statisticsPlayer",opponent:"statisticsOpponent",recordingMode:"statisticsRecordingMode",outcome:"statisticsOutcome",tag:"statisticsTag"};
     const defaults={period:"all",from:"",to:"",category:"",season:"",player:"",opponent:"",recordingMode:"",outcome:"",tag:""};
     const el=id=>document.getElementById(id);
-    const rawRecords=()=>{try{const v=JSON.parse(localStorage.getItem("rotationScoreboard.matchRecords.v1")||"[]");return Array.isArray(v)?v.filter(r=>r&&r.players):[]}catch(_){return[]}};
+    const rawRecords=()=>{
+      const records = typeof readMatchRecords === "function"
+        ? readMatchRecords()
+        : (()=>{try{const v=JSON.parse(localStorage.getItem("rotationScoreboard.matchRecords.v1")||"[]");return Array.isArray(v)?v:[]}catch(_){return[]}})();
+      return records.filter(r=>r&&r.players?.[1]&&r.players?.[2]);
+    };
     const read=()=>{try{return {...defaults,...JSON.parse(localStorage.getItem(KEY)||"{}")}}catch(_){return {...defaults}}};
     const save=f=>localStorage.setItem(KEY,JSON.stringify({...defaults,...f}));
     const day=v=>{if(!v)return null;const d=new Date(v+"T00:00:00");return Number.isNaN(d.getTime())?null:d};
@@ -14360,10 +14791,8 @@ button {
     if (!select || !grid) return;
 
     const safePlayers = () => {
-      try {
-        const parsed = JSON.parse(localStorage.getItem("rotationScoreboard.players.v1") || "[]");
-        return Array.isArray(parsed) ? parsed.filter(player => player && player.id && player.name) : [];
-      } catch (_) { return []; }
+      const players = typeof readPlayerLibrary === "function" ? readPlayerLibrary() : [];
+      return Array.isArray(players) ? players.filter(player => player && player.id && player.name) : [];
     };
 
     const safeRecords = () => window.getFilteredRecordsV53 ? window.getFilteredRecordsV53() : [];
@@ -14456,8 +14885,7 @@ button {
     const safeRecords = () => window.getFilteredRecordsV53 ? window.getFilteredRecordsV53() : [];
     const safePlayers = () => {
       try {
-        const value = JSON.parse(localStorage.getItem("rotationScoreboard.players.v1") || "[]");
-        return Array.isArray(value) ? value : [];
+        return typeof readPlayerLibrary === "function" ? readPlayerLibrary() : [];
       } catch (_) { return []; }
     };
     const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
@@ -14468,6 +14896,7 @@ button {
       safeRecords().forEach(record => {
         [1,2].forEach(side => {
           const player = record.players?.[side] || {};
+          const metricsV114 = savedPlayerMetricsV113(record, side);
           const id = player.registeredPlayerId ? String(player.registeredPlayerId) : "";
           const name = String(player.name || "").trim();
           if (!id && !name) return;
@@ -14476,14 +14905,15 @@ button {
           const item = map.get(key);
           item.games += 1;
           if (Number(record.winner) === side) item.wins += 1;
-          item.highRun = Math.max(item.highRun, Number(player.maxRun) || 0);
-          const pockets = Number(player.pocketCount);
-          const misses = Number(player.misses);
+          item.highRun = Math.max(item.highRun, Number(metricsV114.maxRun) || 0);
+          const pockets = Number(metricsV114.pocketCount);
+          const misses = Number(metricsV114.misses);
           if (Number.isFinite(pockets) && Number.isFinite(misses) && pockets + misses > 0) {
-            item.pockets += pockets; item.misses += misses;
-          } else {
-            const rate = Number(player.shotRate);
-            if (Number.isFinite(rate)) { item.shotRateSum += rate; item.shotRateCount += 1; }
+            item.pockets += pockets;
+            item.misses += misses;
+          } else if (Number.isFinite(metricsV114.shotRate)) {
+            item.shotRateSum += Number(metricsV114.shotRate);
+            item.shotRateCount += 1;
           }
         });
       });
@@ -14553,7 +14983,7 @@ button {
     const VS_SELECTION_KEY = "rotationScoreboard.vsSelection.v1";
     const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
     const safeRecords = () => window.getFilteredRecordsV53 ? window.getFilteredRecordsV53() : [];
-    const safePlayers = () => { try { const v=JSON.parse(localStorage.getItem("rotationScoreboard.players.v1")||"[]"); return Array.isArray(v)?v:[]; } catch(_){return [];} };
+    const safePlayers = () => { try { return typeof readPlayerLibrary === "function" ? readPlayerLibrary() : []; } catch(_){ return []; } };
     const recordTime = record => new Date(record.endedAt || record.playedAt || record.startedAt || 0).getTime() || 0;
     function choices(){
       const map=new Map();
@@ -14616,7 +15046,7 @@ button {
     function metrics(records, side){
       const games=records.length,wins=records.filter(r=>Number(r.winner)===side(r)).length;
       let score=0,innings=0,inningCount=0,highRun=0,pockets=0,misses=0,rateSum=0,rateCount=0,fouls=0,safeties=0,safetySuccess=0,safetySuccessCount=0;
-      records.forEach(r=>{const s=side(r),p=r.players?.[s]||{};score+=Number(p.score)||0;const inn=Number(r.inning);if(Number.isFinite(inn)&&inn>0){innings+=inn;inningCount++;}highRun=Math.max(highRun,Number(p.maxRun)||0);fouls+=Math.max(0,Number(p.fouls)||0);safeties+=Math.max(0,Number(p.safety)||0);const po=Number(p.pocketCount),mi=Number(p.misses);if(Number.isFinite(po)&&Number.isFinite(mi)&&po+mi>0){pockets+=po;misses+=mi;}else{const rt=Number(p.shotRate);if(Number.isFinite(rt)){rateSum+=rt;rateCount++;}}const summary=r.analysisSummary?.players?.[s]?.safety||r.analysis?.players?.[s]?.safety||{};const sr=Number(summary.successRate);if(Number.isFinite(sr)){safetySuccess+=sr;safetySuccessCount++;}});
+      records.forEach(r=>{const s=side(r),p=r.players?.[s]||{},m=savedPlayerMetricsV113(r,s);score+=Number(m.score)||0;const inn=Number(m.innings);if(Number.isFinite(inn)&&inn>0){innings+=inn;inningCount++;}highRun=Math.max(highRun,Number(m.maxRun)||0);fouls+=Math.max(0,Number(m.fouls)||0);safeties+=Math.max(0,Number(m.safety)||0);const po=Number(m.pocketCount),mi=Number(m.misses);if(Number.isFinite(po)&&Number.isFinite(mi)&&po+mi>0){pockets+=po;misses+=mi;}else if(Number.isFinite(m.shotRate)){rateSum+=Number(m.shotRate);rateCount++;}const summary=r.analysisSummary?.players?.[s]?.safety||r.analysis?.players?.[s]?.safety||{};const sr=Number(summary.successRate);if(Number.isFinite(sr)){safetySuccess+=sr;safetySuccessCount++;}});
       return {games,wins,winRate:games?wins/games*100:0,avgScore:games?score/games:0,avgInning:inningCount?innings/inningCount:0,highRun,shotRate:pockets+misses>0?pockets/(pockets+misses)*100:(rateCount?rateSum/rateCount:0),avgFouls:games?fouls/games:0,avgSafeties:games?safeties/games:0,safetySuccessRate:safetySuccessCount?safetySuccess/safetySuccessCount:null};
     }
     function rivalInsight(allMatches,recentMatches,a,b,sideA,sideB,ma,mb){
@@ -14775,7 +15205,144 @@ button {
       if (typeof showToast === "function") showToast("通信または保存を完了できませんでした", "接続状態を確認して、もう一度お試しください。");
     });
   })();
+
+  // CueScore RC19: PWA lifecycle, visible pending-sync recovery and conflict resolution.
+  (() => {
+    const PWA_VERSION = "1.0-RC19";
+    const canUseServiceWorker =
+      "serviceWorker" in navigator &&
+      window.isSecureContext &&
+      (location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1");
+
+    const announce = (title, detail = "") => {
+      if (typeof showToast === "function") showToast(title, detail);
+      else console.info(`[CueScore ${PWA_VERSION}] ${title}`, detail);
+    };
+
+    const updateNetworkState = () => {
+      document.documentElement.dataset.network = navigator.onLine ? "online" : "offline";
+    };
+
+    updateNetworkState();
+    window.addEventListener("offline", () => {
+      updateNetworkState();
+      announce("オフラインになりました", "端末内の試合記録は引き続き利用できます。クラウド同期は接続回復後に行ってください。");
+    });
+    window.addEventListener("online", () => {
+      updateNetworkState();
+      announce("オンラインへ復帰しました", "クラウド状態を確認しています。");
+      window.setTimeout(() => window.cueScoreCloudReconcileV118?.({ retryPending: true }), 250);
+    });
+
+    window.addEventListener("pageshow", event => {
+      if (event.persisted) {
+        window.renderHomeDashboardV50?.();
+        window.renderPlayerRankingsV51?.();
+        window.renderVsAnalysisV52?.();
+        window.dispatchEvent(new Event("resize"));
+      }
+      if (navigator.onLine) window.setTimeout(() => window.cueScoreCloudReconcileV118?.({ retryPending: true }), 300);
+    });
+
+    let visibilityReconcileTimerV118 = 0;
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState !== "visible" || !navigator.onLine) return;
+      window.clearTimeout(visibilityReconcileTimerV118);
+      visibilityReconcileTimerV118 = window.setTimeout(() => {
+        window.cueScoreCloudReconcileV118?.({ retryPending: true });
+      }, 500);
+    });
+
+    let persistenceRequested = false;
+    document.addEventListener("click", async () => {
+      if (persistenceRequested || !navigator.storage?.persist) return;
+      persistenceRequested = true;
+      try {
+        const persisted = await navigator.storage.persisted?.();
+        if (!persisted) await navigator.storage.persist();
+      } catch (error) {
+        console.warn("[CueScore RC19] storage persistence request failed", error);
+      }
+    }, { once: true, capture: true });
+
+    const showUpdateBanner = registration => {
+      if (document.getElementById("cueScoreUpdateBanner")) return;
+      const banner = document.createElement("div");
+      banner.id = "cueScoreUpdateBanner";
+      banner.setAttribute("role", "status");
+      banner.style.cssText = [
+        "position:fixed","left:50%","bottom:max(14px,env(safe-area-inset-bottom))",
+        "transform:translateX(-50%)","z-index:20000","width:min(92vw,420px)",
+        "padding:12px","border-radius:14px","background:#f7fff9","color:#123f28",
+        "box-shadow:0 12px 32px rgba(0,0,0,.35)","display:grid",
+        "grid-template-columns:1fr auto","align-items:center","gap:10px",
+        "font-size:14px","font-weight:800"
+      ].join(";");
+      banner.innerHTML = `<span>新しいバージョンを利用できます。</span><button type="button" style="min-height:40px;border:0;border-radius:10px;padding:8px 13px;background:#176a40;color:#fff;font-weight:900">更新</button>`;
+      banner.querySelector("button")?.addEventListener("click", event => {
+        const button = event.currentTarget;
+        if (button instanceof HTMLButtonElement) {
+          button.disabled = true;
+          button.textContent = "更新中…";
+        }
+        const waiting = registration.waiting;
+        if (!waiting) {
+          registration.update().catch(error => console.warn("[CueScore RC19] update check failed", error));
+          announce("更新を確認しています", "新しいバージョンの準備後に、もう一度更新してください。");
+          button && (button.disabled = false);
+          button && (button.textContent = "更新");
+          return;
+        }
+        waiting.postMessage({ type: "SKIP_WAITING" });
+        // controllerchangeで新しいWorkerへ切り替わった後にだけ再読込する。
+        window.setTimeout(() => {
+          if (!refreshing) {
+            console.warn("[CueScore RC19] controllerchange timeout; reloading as fallback");
+            location.reload();
+          }
+        }, 5000);
+      });
+      document.body.appendChild(banner);
+    };
+
+    if (!canUseServiceWorker) {
+      console.info(`[CueScore ${PWA_VERSION}] Service Worker skipped for ${location.protocol}`);
+      return;
+    }
+
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (refreshing) return;
+      refreshing = true;
+      location.reload();
+    });
+
+    window.addEventListener("load", async () => {
+      try {
+        const registration = await navigator.serviceWorker.register("./sw.js", { scope: "./", updateViaCache: "none" });
+        await registration.update().catch(error => console.warn("[CueScore RC19] initial update check failed", error));
+        if (registration.waiting && navigator.serviceWorker.controller) showUpdateBanner(registration);
+        registration.addEventListener("updatefound", () => {
+          const worker = registration.installing;
+          if (!worker) return;
+          worker.addEventListener("statechange", () => {
+            if (worker.state === "installed" && navigator.serviceWorker.controller) showUpdateBanner(registration);
+          });
+        });
+      } catch (error) {
+        console.error("[CueScore RC19] Service Worker registration failed", error);
+      }
+    });
+  })();
+
 </script>
 
 </body>
 </html>
+
+<!-- CueScore RC11: Undo boundary and consecutive-match state isolation audit -->
+
+<!-- CueScore RC16: PWA and iPhone lifecycle hardening -->
+<!-- CueScore RC17: PWA update handoff, resilient install and recovery -->
+<!-- CueScore RC18: cloud resume reconciliation and deferred autosave retry -->
+<!-- CueScore RC19: visible pending cloud-save recovery and manual conflict resolution -->
