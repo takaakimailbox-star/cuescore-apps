@@ -11,7 +11,7 @@
   <meta name="description" content="CueScore Rotation Scoreboard — ローテーション競技用スコアボード" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="apple-touch-icon" href="./icons/icon-180.png" />
-  <title>CueScore Rotation Scoreboard v1.0 RC60</title>
+  <title>CueScore Rotation Scoreboard v1.0 RC62</title>
   <style>
     :root {
       --bg: #16472d;
@@ -7832,7 +7832,7 @@ body.cue-modal-visible > .app :is(.pro-summary, .record-detail-overlay, .player-
 .cloud-resolution-history-empty { padding:12px 2px; color:rgba(255,255,255,.58); font-size:12px; }
 
 </style>
-<!-- CueScore Rotation Scoreboard v1.0 RC60 -->
+<!-- CueScore Rotation Scoreboard v1.0 RC62 -->
 </head>
 <body>
   <div class="toast" id="toast">
@@ -7844,7 +7844,7 @@ body.cue-modal-visible > .app :is(.pro-summary, .record-detail-overlay, .player-
 
   <main class="app" aria-label="Rotation Scoreboard">
     <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
-    <div class="sub-title">version 1.0 RC42</div>
+    <div class="sub-title">version 1.0 RC62</div>
 
     <section class="home-dashboard" id="homeDashboard" aria-label="ダッシュボード">
       <div class="home-dashboard-head">
@@ -8382,7 +8382,7 @@ body.cue-modal-visible > .app :is(.pro-summary, .record-detail-overlay, .player-
       <header class="settings-header">
         <button class="settings-back" id="settingsBackBtn" type="button">‹ 戻る</button>
         <div class="settings-title">設定</div>
-        <div class="settings-version">RC42</div>
+        <div class="settings-version">RC62</div>
       </header>
       <div class="settings-content">
         <section class="settings-card">
@@ -8622,7 +8622,7 @@ body.cue-modal-visible > .app :is(.pro-summary, .record-detail-overlay, .player-
   const MATCH_RECORDS_KEY = "rotationScoreboard.matchRecords.v1";
 
   // Rotation Scoreboard Ver.6.8.0: future multi-game data foundation
-  const ROTATION_APP_VERSION = "1.0.0-rc35";
+  const ROTATION_APP_VERSION = "1.0-RC62";
   const ROTATION_GAME_TYPE = "rotation";
   const ROTATION_RECORD_SCHEMA_VERSION = 3;
 
@@ -8805,7 +8805,7 @@ let matchRecordsRawCacheV152 = null;
     }
   }
 
-  function writeMatchRecords(records) {
+  function persistMatchRecordsOnlyV161(records) {
     const normalized = Array.isArray(records) ? records : [];
     const serialized = JSON.stringify(normalized);
     if (localStorage.getItem(MATCH_RECORDS_KEY) !== serialized) {
@@ -8813,6 +8813,11 @@ let matchRecordsRawCacheV152 = null;
     }
     matchRecordsRawCacheV152 = serialized;
     matchRecordsParsedCacheV152 = normalized.map(normalizeMatchRecordV680);
+    return true;
+  }
+
+  function writeMatchRecords(records) {
+    persistMatchRecordsOnlyV161(records);
     refreshDerivedViewsV131("match-records");
     return true;
   }
@@ -13125,10 +13130,18 @@ let matchRecordsRawCacheV152 = null;
       try {
         const savedId = saveCurrentMatchRecord(winner, stats);
         if (!savedId) throw new Error("試合履歴の保存IDを確認できませんでした。");
-        // 結果画面を先に閉じ、付随処理の成否に関係なくタイトルへ戻す。
-        el("proSummary")?.classList.add("hidden");
+
+        // RC61: complete the user transaction immediately after verified local persistence.
+        const summary = el("proSummary");
+        if (summary) {
+          summary.classList.add("hidden");
+          summary.style.display = "none";
+          summary.style.pointerEvents = "none";
+        }
         backToTitle();
-        showToast("保存完了", navigator.onLine ? "対戦履歴を端末へ保存しました" : "オフラインのため端末へ保存しました");
+        requestAnimationFrame(() => {
+          showToast("保存完了", navigator.onLine ? "対戦履歴を端末へ保存しました" : "オフラインのため端末へ保存しました");
+        });
       } catch (error) {
         console.error("CueScore result OK save failed", error);
         if (button) {
@@ -13989,19 +14002,30 @@ let matchRecordsRawCacheV152 = null;
     );
     existingRecords.push(record);
     // ここまでを保存の必須処理とし、失敗時は呼び出し元へ通知する。
-    writeMatchRecords(existingRecords);
+    // RC61: the result OK path must complete using local persistence only.
+    // Derived rendering and cloud work are deliberately deferred until after navigation.
+    persistMatchRecordsOnlyV161(existingRecords);
     currentGameRecordSaved=true;
     currentGameRecordIdV100=record.id;
 
     // ダッシュボード再集計やクラウド自動保存は付随処理。
     // ここで例外が起きても、端末保存済みのOK操作と画面遷移を中断しない。
-    try {
-      window.renderHomeDashboardV50?.();
-    } catch (error) {
-      console.error("CueScore post-save dashboard refresh failed", error);
-    }
     setTimeout(() => {
       try {
+        refreshDerivedViewsV131("match-records");
+        window.renderHomeDashboardV50?.();
+      } catch (error) {
+        console.error("CueScore post-save derived refresh failed", error);
+      }
+
+      try {
+        if (!navigator.onLine) {
+          // Offline completion is a successful local save. Mark cloud work as pending
+          // without attempting any network request from the result OK transaction.
+          Promise.resolve(window.cueScoreMarkCloudDirtyV133?.("offline-match-save"))
+            .catch(error => console.error("CueScore offline pending marker failed", error));
+          return;
+        }
         if (typeof window.rotationCloudAutoSaveAfterMatch === "function") {
           const task = window.rotationCloudAutoSaveAfterMatch();
           if (task && typeof task.catch === "function") {
@@ -14011,7 +14035,7 @@ let matchRecordsRawCacheV152 = null;
       } catch (error) {
         console.error("CueScore post-save cloud autosave setup failed", error);
       }
-    }, 250);
+    }, 0);
     return record.id;
   }
 
@@ -16776,7 +16800,7 @@ let matchRecordsRawCacheV152 = null;
   })();
 
 
-// CueScore Rotation Scoreboard v1.0 RC60
+// CueScore Rotation Scoreboard v1.0 RC62
 // RC42: cloud history list concurrency, restore lock, metadata display, immediate retention enforcement.
 </script>
 
@@ -17303,7 +17327,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{margin:0;padding:6px;opaci
   if (window.cueScoreRuntimeDiagnosticsV148) return;
   const startedAt = Date.now();
   window.cueScoreRuntimeDiagnosticsV148 = () => ({
-    version: '1.0-RC60',
+    version: '1.0-RC62',
     uptimeMs: Date.now() - startedAt,
     visibility: document.visibilityState,
     online: navigator.onLine,
@@ -17384,7 +17408,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{margin:0;padding:6px;opaci
       console.warn('[CueScore RC59] Storage estimate failed', error);
     }
     return {
-      version: '1.0-RC60',
+      version: '1.0-RC62',
       localStorage: local,
       originStorage: origin ? {
         usageBytes: Number(origin.usage) || 0,
@@ -17520,7 +17544,7 @@ window.cueScorePerformanceDiagnosticsV152 = function(){
   else setTimeout(prewarm, 250);
 
   window.cueScoreLargeHistoryDiagnosticsV153 = () => ({
-    version: '1.0-RC60',
+    version: '1.0-RC62',
     cacheHits: state.hits,
     cacheMisses: state.misses,
     invalidations: state.invalidations,
@@ -17538,7 +17562,7 @@ window.cueScorePerformanceDiagnosticsV152 = function(){
 window.cueScoreHistoryDomDiagnosticsV154 = function(){
   const list=document.getElementById("recordsList");
   return {
-    version:"1.0-RC60",
+    version:"1.0-RC62",
     renderedRecordCards:list?list.querySelectorAll("[data-record-id]").length:0,
     renderLimit:recordsRenderLimitV154,
     delegatedClickInstalled:recordsDelegatedClickInstalledV154,
@@ -17774,7 +17798,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
     state.performanceObserver?.disconnect?.();
   }, { once: true });
   window.cueScoreRenderDiagnosticsV157 = () => ({
-    version: '1.0-RC60',
+    version: '1.0-RC62',
     uptimeSeconds: Math.round((performance.now() - state.startedAt) / 1000),
     visibleScreen: currentScreen(),
     domNodeCount: document.getElementsByTagName('*').length,
@@ -17797,7 +17821,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   const previous = window.cueScoreRenderDiagnosticsV157;
   window.cueScoreRenderDiagnosticsV158 = () => ({
     ...(typeof previous === 'function' ? previous() : {}),
-    version: '1.0-RC60',
+    version: '1.0-RC62',
     gameLogNodes: document.getElementById('proTurnLog')?.childElementCount || 0,
     ballButtonCount: document.querySelectorAll('#proBalls button[data-ball-number]').length,
     ballGridDelegated: Boolean(window.ballGridDelegationInstalledV158 || document.getElementById('proBalls')),
@@ -17815,7 +17839,7 @@ window.addEventListener("pagehide", event => {
   cleanupHistoricalRecordV159();
 }, {once:true});
 window.cueScoreModalDiagnosticsV159 = () => ({
-  version:"1.0-RC60",
+  version:"1.0-RC62",
   playerStatsDelegated:Boolean(playerStatsDelegatedControllerV159),
   activePlayerStatsId:window.__cueScoreActivePlayerStatsIdV159 || null,
   historicalDetailListenersActive:Boolean(historicalDetailControllerV159),
@@ -17825,7 +17849,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
 </script>
 
 <script>
-/* CueScore RC60: integrated release-readiness diagnostics and stale UI recovery. */
+/* CueScore RC62: integrated release-readiness diagnostics and stale UI recovery. */
 (() => {
   if (window.__cueScoreReleaseGuardV160) return;
   window.__cueScoreReleaseGuardV160 = true;
@@ -17900,7 +17924,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
       .slice(0, 20);
 
     return {
-      version: '1.0-RC60',
+      version: '1.0-RC62',
       generatedAt: new Date().toISOString(),
       online: navigator.onLine,
       visibilityState: document.visibilityState,
@@ -17939,6 +17963,32 @@ window.cueScoreModalDiagnosticsV159 = () => ({
 })();
 </script>
 
+<!-- CueScore RC62: offline result save transaction isolation -->
+
+<script>
+/* CueScore RC62: single-source version synchronization. */
+(() => {
+  const RELEASE_LABEL = 'RC62';
+  const DISPLAY_VERSION = `version 1.0 ${RELEASE_LABEL}`;
+
+  function syncCueScoreVersionV162(){
+    document.querySelectorAll('.sub-title').forEach((el) => {
+      if (/^version\s+/i.test((el.textContent || '').trim())) el.textContent = DISPLAY_VERSION;
+    });
+    document.querySelectorAll('.settings-version').forEach((el) => {
+      el.textContent = RELEASE_LABEL;
+    });
+    document.documentElement.dataset.cuescoreVersion = RELEASE_LABEL;
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncCueScoreVersionV162, { once: true });
+  } else {
+    syncCueScoreVersionV162();
+  }
+  window.syncCueScoreVersionV162 = syncCueScoreVersionV162;
+})();
+</script>
 </body>
 </html>
 
