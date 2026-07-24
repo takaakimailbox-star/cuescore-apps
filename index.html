@@ -11,7 +11,7 @@
   <meta name="description" content="CueScore Rotation Scoreboard — ローテーション競技用スコアボード" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="apple-touch-icon" href="./icons/icon-180.png" />
-  <title>CueScore Rotation Scoreboard v1.0 RC76</title>
+  <title>CueScore Rotation Scoreboard v1.0</title>
   <style>
     :root {
       --bg: #16472d;
@@ -7822,7 +7822,7 @@ body.cue-modal-visible { overscroll-behavior: none; }
 .cloud-resolution-history-empty { padding:12px 2px; color:rgba(255,255,255,.58); font-size:12px; }
 
 </style>
-<!-- CueScore Rotation Scoreboard v1.0 RC76 -->
+<!-- CueScore Rotation Scoreboard v1.0 Official Release -->
 </head>
 <body>
   <div class="toast" id="toast">
@@ -7834,7 +7834,7 @@ body.cue-modal-visible { overscroll-behavior: none; }
 
   <main class="app" aria-label="Rotation Scoreboard">
     <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
-    <div class="sub-title">version 1.0 RC76</div>
+    <div class="sub-title">version 1.0</div>
 
     <section class="home-dashboard" id="homeDashboard" aria-label="ダッシュボード">
       <div class="home-dashboard-head">
@@ -8372,7 +8372,7 @@ body.cue-modal-visible { overscroll-behavior: none; }
       <header class="settings-header">
         <button class="settings-back" id="settingsBackBtn" type="button">‹ 戻る</button>
         <div class="settings-title">設定</div>
-        <div class="settings-version">RC76</div>
+        <div class="settings-version">Version 1.0</div>
       </header>
       <div class="settings-content">
         <section class="settings-card">
@@ -8612,7 +8612,7 @@ body.cue-modal-visible { overscroll-behavior: none; }
   const MATCH_RECORDS_KEY = "rotationScoreboard.matchRecords.v1";
 
   // Rotation Scoreboard Ver.6.8.0: future multi-game data foundation
-  const ROTATION_APP_VERSION = "1.0-RC76";
+  const ROTATION_APP_VERSION = "1.0";
   const ROTATION_GAME_TYPE = "rotation";
   const ROTATION_RECORD_SCHEMA_VERSION = 3;
 
@@ -11705,7 +11705,7 @@ let matchRecordsRawCacheV152 = null;
   }
 
   window.cueScoreRenderDiagnosticsV155 = () => ({
-    version: "1.0-RC59",
+    version: "1.0",
     domNodeCount: document.getElementsByTagName("*").length,
     gameRenders: gameRenderCacheV155.renders,
     gameLogRenders: gameRenderCacheV155.logRenders,
@@ -14739,7 +14739,7 @@ let matchRecordsRawCacheV152 = null;
       const documentData = {
         kind: "cuescore-cloud-resolution-history-recovery-set",
         schemaVersion: 2,
-        appVersion: "1.0-RC59",
+        appVersion: "1.0",
         updatedAt: new Date().toISOString(),
         generations: normalized
       };
@@ -14969,7 +14969,7 @@ let matchRecordsRawCacheV152 = null;
       const documentData = {
         kind: "cuescore-cloud-resolution-history",
         schemaVersion: 1,
-        appVersion: "1.0-RC59",
+        appVersion: "1.0",
         exportedAt: new Date().toISOString(),
         history
       };
@@ -15285,7 +15285,7 @@ let matchRecordsRawCacheV152 = null;
         device_id_hash: hash,
         payload,
         schema_version: 2,
-        app_version: "1.0-RC59",
+        app_version: "1.0",
         revision: normalizedRevision,
         created_at: savedAt
       };
@@ -15732,7 +15732,7 @@ let matchRecordsRawCacheV152 = null;
         device_id_hash: hash,
         payload,
         schema_version: 2,
-        app_version: "1.0-RC59",
+        app_version: "1.0",
         revision: expectedRevision + 1,
         updated_at: new Date().toISOString()
       };
@@ -16599,12 +16599,12 @@ let matchRecordsRawCacheV152 = null;
     }, true);
 
     window.addEventListener("error", event => {
-      console.error("[Rotation Scoreboard 8.6.1] runtime error", event.error || event.message);
+      console.error("[CueScore v1.0] runtime error", event.error || event.message);
       if (typeof showToast === "function") showToast("処理を完了できませんでした", "一度前の画面へ戻って、もう一度お試しください。");
     });
 
     window.addEventListener("unhandledrejection", event => {
-      console.error("[Rotation Scoreboard 8.6.1] unhandled promise rejection", event.reason);
+      console.error("[CueScore v1.0] unhandled promise rejection", event.reason);
       if (typeof showToast === "function") showToast("通信または保存を完了できませんでした", "接続状態を確認して、もう一度お試しください。");
     });
   })();
@@ -16613,7 +16613,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-RC59";
+    const PWA_VERSION = "1.0";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -16635,7 +16635,6 @@ let matchRecordsRawCacheV152 = null;
 
     const announce = (title, detail = "") => {
       if (typeof showToast === "function") showToast(title, detail);
-      else console.info(`[CueScore ${PWA_VERSION}] ${title}`, detail);
     };
 
     const updateNetworkState = () => {
@@ -16745,7 +16744,6 @@ let matchRecordsRawCacheV152 = null;
     };
 
     if (!canUseServiceWorker) {
-      console.info(`[CueScore ${PWA_VERSION}] Service Worker skipped for ${location.protocol}`);
       return;
     }
 
@@ -16804,7 +16802,7 @@ let matchRecordsRawCacheV152 = null;
   })();
 
 
-// CueScore Rotation Scoreboard v1.0 RC76
+// CueScore Rotation Scoreboard v1.0 Official Release
 // RC42: cloud history list concurrency, restore lock, metadata display, immediate retention enforcement.
 </script>
 
@@ -17331,7 +17329,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{margin:0;padding:6px;opaci
   if (window.cueScoreRuntimeDiagnosticsV148) return;
   const startedAt = Date.now();
   window.cueScoreRuntimeDiagnosticsV148 = () => ({
-    version: '1.0-RC76',
+    version: '1.0',
     uptimeMs: Date.now() - startedAt,
     visibility: document.visibilityState,
     online: navigator.onLine,
@@ -17412,7 +17410,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{margin:0;padding:6px;opaci
       console.warn('[CueScore RC59] Storage estimate failed', error);
     }
     return {
-      version: '1.0-RC76',
+      version: '1.0',
       localStorage: local,
       originStorage: origin ? {
         usageBytes: Number(origin.usage) || 0,
@@ -17443,7 +17441,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{margin:0;padding:6px;opaci
 window.cueScorePerformanceDiagnosticsV152 = function(){
   const raw = localStorage.getItem("rotationScoreboard.matchRecords.v1") || "";
   return {
-    appVersion: "1.0-RC59",
+    appVersion: "1.0",
     matchRecordBytes: new Blob([raw]).size,
     cachedRecordCount: Array.isArray(matchRecordsParsedCacheV152) ? matchRecordsParsedCacheV152.length : 0,
     recordCacheHitReady: raw === matchRecordsRawCacheV152,
@@ -17548,7 +17546,7 @@ window.cueScorePerformanceDiagnosticsV152 = function(){
   else setTimeout(prewarm, 250);
 
   window.cueScoreLargeHistoryDiagnosticsV153 = () => ({
-    version: '1.0-RC76',
+    version: '1.0',
     cacheHits: state.hits,
     cacheMisses: state.misses,
     invalidations: state.invalidations,
@@ -17566,7 +17564,7 @@ window.cueScorePerformanceDiagnosticsV152 = function(){
 window.cueScoreHistoryDomDiagnosticsV154 = function(){
   const list=document.getElementById("recordsList");
   return {
-    version:"1.0-RC76",
+    version:"1.0",
     renderedRecordCards:list?list.querySelectorAll("[data-record-id]").length:0,
     renderLimit:recordsRenderLimitV154,
     delegatedClickInstalled:recordsDelegatedClickInstalledV154,
@@ -17678,7 +17676,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   setTimeout(installWrappers, 0);
 
   window.cueScoreRenderDiagnosticsV156 = () => ({
-    version: "1.0-RC59",
+    version: "1.0",
     uptimeSeconds: Math.round((performance.now() - state.startedAt) / 1000),
     visibleScreen: currentVisibleScreen(),
     domNodeCount: document.getElementsByTagName("*").length,
@@ -17803,7 +17801,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
     state.performanceObserver?.disconnect?.();
   }, { once: true });
   window.cueScoreRenderDiagnosticsV157 = () => ({
-    version: '1.0-RC76',
+    version: '1.0',
     uptimeSeconds: Math.round((performance.now() - state.startedAt) / 1000),
     visibleScreen: currentScreen(),
     domNodeCount: document.getElementsByTagName('*').length,
@@ -17826,7 +17824,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   const previous = window.cueScoreRenderDiagnosticsV157;
   window.cueScoreRenderDiagnosticsV158 = () => ({
     ...(typeof previous === 'function' ? previous() : {}),
-    version: '1.0-RC76',
+    version: '1.0',
     gameLogNodes: document.getElementById('proTurnLog')?.childElementCount || 0,
     ballButtonCount: document.querySelectorAll('#proBalls button[data-ball-number]').length,
     ballGridDelegated: Boolean(window.ballGridDelegationInstalledV158 || document.getElementById('proBalls')),
@@ -17844,7 +17842,7 @@ window.addEventListener("pagehide", event => {
   cleanupHistoricalRecordV159();
 }, {once:true});
 window.cueScoreModalDiagnosticsV159 = () => ({
-  version:"1.0-RC76",
+  version:"1.0",
   playerStatsDelegated:Boolean(playerStatsDelegatedControllerV159),
   activePlayerStatsId:window.__cueScoreActivePlayerStatsIdV159 || null,
   historicalDetailListenersActive:Boolean(historicalDetailControllerV159),
@@ -17929,7 +17927,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
       .slice(0, 20);
 
     return {
-      version: '1.0-RC76',
+      version: '1.0',
       generatedAt: new Date().toISOString(),
       online: navigator.onLine,
       visibilityState: document.visibilityState,
@@ -17973,8 +17971,8 @@ window.cueScoreModalDiagnosticsV159 = () => ({
 <script>
 /* CueScore RC72: single-source version synchronization. */
 (() => {
-  const RELEASE_LABEL = 'RC76';
-  const DISPLAY_VERSION = `version 1.0 ${RELEASE_LABEL}`;
+  const RELEASE_LABEL = 'Version 1.0';
+  const DISPLAY_VERSION = 'version 1.0';
 
   function syncCueScoreVersionV162(){
     document.querySelectorAll('.sub-title').forEach((el) => {
@@ -17983,7 +17981,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
     document.querySelectorAll('.settings-version').forEach((el) => {
       el.textContent = RELEASE_LABEL;
     });
-    document.documentElement.dataset.cuescoreVersion = RELEASE_LABEL;
+    document.documentElement.dataset.cuescoreVersion = "1.0";
   }
 
   if (document.readyState === 'loading') {

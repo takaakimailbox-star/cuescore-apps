@@ -1,51 +1,39 @@
-# Rotation Scoreboard
+# CueScore Rotation Scoreboard v1.0 Official Release
 
-ローテーションビリヤード専用の無料スコアボードアプリです。
+CueScore Rotation Scoreboardは、ローテーション競技用のスコアボードPWAです。
 
-iPhoneやAndroidのブラウザで使えて、ホーム画面に追加するとアプリのように起動できます。
+## 正式版
 
-## できること
+- Version: 1.0
+- Release base: RC76
+- Release date: 2026-07-24
+- Primary target: iPhone portrait / Safari / Home Screen PWA
 
-- プレーヤー名入力
-- プレーヤー別Goal設定
-- 先攻プレーヤー選択
-- ボール入力
-- セーフティ記録
-- ファール記録
-- プレーヤー交代
-- 戻す
-- ラック管理
-- 試合中の履歴表示
-- ホーム画面追加対応
+## 構成
 
-## 無料版について
+- `index.html` — 正式Release HTML
+- `manifest.webmanifest` — PWA manifest
+- `sw.js` — Service Worker
+- `icons/icon-180.png` — Apple touch icon
+- `icons/icon-192.png` — PWA icon
+- `icons/icon-512.png` — PWA icon
 
-この無料版では、試合中のスコア入力と履歴表示ができます。
+## 公開方法
 
-試合履歴保存、勝率、平均得点、対戦相手別成績などは、将来のPro版機能として検討しています。
+GitHubリポジトリのルートへ、このフォルダ内のファイルを同じ構成で配置してください。
+GitHub Pagesでは `index.html` が起点になります。
 
-## 使い方
+## Release QA
 
-1. プレーヤー名とGoalを入力します。
-2. 先攻プレーヤーを選びます。
-3. Start Gameで試合を開始します。
-4. 入ったボール番号をタップします。
-5. 必要に応じて、セーフティ・ファール・プレーヤー交代・戻すを使います。
-6. 履歴は中央エリアで確認できます。
-7. Newで新しい試合を始められます。
+- 通常試合: 合格
+- オフライン: 合格
+- 中断復帰: 合格
+- 連続試合: 合格
+- PWA: 合格
+- Safari: 合格
+- iPhone: 合格
 
-## アプリURL
+## PWA更新
 
-https://takaakimailbox-star.github.io/rotation-scoreboard/
-
-## 実戦テスト項目
-
-- ボール入力
-- セーフティ
-- ファール
-- プレーヤー交代
-- 戻す
-- ラック終了
-- 試合終了
-- iPhone画面固定
-- ホーム画面追加
+Service Workerのアプリ版は `1.0`、キャッシュ名は `cuescore-rotation-v1.0` です。
+次版公開時はHTML側の `PWA_VERSION` と `sw.js` の `APP_VERSION` を同じ値へ更新してください。
