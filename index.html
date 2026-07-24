@@ -11,7 +11,7 @@
   <meta name="description" content="CueScore Rotation Scoreboard — ローテーション競技用スコアボード" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="apple-touch-icon" href="./icons/icon-180.png" />
-  <title>CueScore Rotation Scoreboard v1.0 RC62</title>
+  <title>CueScore Rotation Scoreboard v1.0 RC76</title>
   <style>
     :root {
       --bg: #16472d;
@@ -7789,16 +7789,6 @@ body.cue-modal-visible { overscroll-behavior: none; }
 @media (max-width: 600px), (hover: none) and (pointer: coarse) {
   :where(button:not(.result-dot), [role="button"]) { min-height: 44px; }
 }
-body.cue-modal-visible > .app {
-  pointer-events: none;
-  user-select: none;
-  -webkit-user-select: none;
-}
-body.cue-modal-visible > .app :is(.pro-summary, .record-detail-overlay, .player-library-overlay, .player-stats-overlay, .break-result-overlay-v61, .pushout-overlay-v730, .record-mode-overlay-v611, .start-confirm-overlay-v698) {
-  pointer-events: auto;
-  user-select: auto;
-  -webkit-user-select: auto;
-}
 
 /* CueScore RC42: cloud generation history clarity and restore safety */
 .cloud-history-item.is-latest { border-color:rgba(255,226,120,.72); background:rgba(96,72,0,.20); }
@@ -7832,7 +7822,7 @@ body.cue-modal-visible > .app :is(.pro-summary, .record-detail-overlay, .player-
 .cloud-resolution-history-empty { padding:12px 2px; color:rgba(255,255,255,.58); font-size:12px; }
 
 </style>
-<!-- CueScore Rotation Scoreboard v1.0 RC62 -->
+<!-- CueScore Rotation Scoreboard v1.0 RC76 -->
 </head>
 <body>
   <div class="toast" id="toast">
@@ -7844,7 +7834,7 @@ body.cue-modal-visible > .app :is(.pro-summary, .record-detail-overlay, .player-
 
   <main class="app" aria-label="Rotation Scoreboard">
     <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
-    <div class="sub-title">version 1.0 RC62</div>
+    <div class="sub-title">version 1.0 RC76</div>
 
     <section class="home-dashboard" id="homeDashboard" aria-label="ダッシュボード">
       <div class="home-dashboard-head">
@@ -7968,7 +7958,7 @@ body.cue-modal-visible > .app :is(.pro-summary, .record-detail-overlay, .player-
       <div class="player-version">version 8.2.0</div>
     </section>
 
-    <section id="startConfirmOverlayV698" class="start-confirm-overlay-v698 hidden" aria-label="試合開始確認">
+    <section id="startConfirmOverlayV698" class="start-confirm-overlay-v698 hidden" aria-hidden="true" aria-label="試合開始確認">
       <div class="start-confirm-card-v698">
         <div class="start-confirm-title-v698">試合開始確認</div>
         <div class="start-confirm-lead-v698">設定を確認してから試合を始めます</div>
@@ -8382,7 +8372,7 @@ body.cue-modal-visible > .app :is(.pro-summary, .record-detail-overlay, .player-
       <header class="settings-header">
         <button class="settings-back" id="settingsBackBtn" type="button">‹ 戻る</button>
         <div class="settings-title">設定</div>
-        <div class="settings-version">RC62</div>
+        <div class="settings-version">RC76</div>
       </header>
       <div class="settings-content">
         <section class="settings-card">
@@ -8622,7 +8612,7 @@ body.cue-modal-visible > .app :is(.pro-summary, .record-detail-overlay, .player-
   const MATCH_RECORDS_KEY = "rotationScoreboard.matchRecords.v1";
 
   // Rotation Scoreboard Ver.6.8.0: future multi-game data foundation
-  const ROTATION_APP_VERSION = "1.0-RC62";
+  const ROTATION_APP_VERSION = "1.0-RC76";
   const ROTATION_GAME_TYPE = "rotation";
   const ROTATION_RECORD_SCHEMA_VERSION = 3;
 
@@ -10774,7 +10764,10 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function closeStartConfirmV698() {
-    el("startConfirmOverlayV698")?.classList.add("hidden");
+    const overlay = el("startConfirmOverlayV698");
+    if (!overlay) return;
+    overlay.classList.add("hidden");
+    overlay.setAttribute("aria-hidden", "true");
   }
 
   function normalizeRaceGoalV109(value, fallback = 120) {
@@ -10810,7 +10803,11 @@ let matchRecordsRawCacheV152 = null;
       if (el(`startConfirmP${player}BreakerV698`)) el(`startConfirmP${player}BreakerV698`).textContent = selectedStarter === player ? "ブレイク" : "";
     });
     if (el("startConfirmGoV698")) el("startConfirmGoV698").textContent = recordingModeV611 === "detail" ? "ブレイク" : "ゲーム開始";
-    el("startConfirmOverlayV698")?.classList.remove("hidden");
+    const overlay = el("startConfirmOverlayV698");
+    if (!overlay) return;
+    overlay.classList.remove("hidden");
+    overlay.setAttribute("aria-hidden", "false");
+    requestAnimationFrame(() => el("startConfirmGoV698")?.focus({ preventScroll: true }));
   }
 
   function chooseRecordModeAndStartV611(mode) {
@@ -10842,7 +10839,10 @@ let matchRecordsRawCacheV152 = null;
 
   function closeBreakResultPromptV61() {
     const overlay = el("breakResultOverlayV61");
-    if (overlay) overlay.classList.add("hidden");
+    if (overlay) {
+      overlay.classList.add("hidden");
+      overlay.setAttribute("aria-hidden", "true");
+    }
     pendingBreakPlayerV61 = null;
     pendingBreakRackV61 = null;
     resetBreakPromptSelectionV695();
@@ -10859,6 +10859,7 @@ let matchRecordsRawCacheV152 = null;
     el("breakResultPlayerV61").textContent = `${playerName(pendingBreakPlayerV61)} のブレイク`;
     const pushOutButtonV699 = el("breakPushOutToggleV695");
     if (pushOutButtonV699) pushOutButtonV699.hidden = !getActiveRuleV699().pushOut.enabled;
+    overlay.setAttribute("aria-hidden", "false");
     overlay.classList.remove("hidden");
   }
 
@@ -10884,6 +10885,7 @@ let matchRecordsRawCacheV152 = null;
       el(id)?.setAttribute("aria-pressed", active ? "true" : "false");
     });
     updateBreakPromptSummaryV696();
+    overlay.setAttribute("aria-hidden", "false");
     overlay.classList.remove("hidden");
   }
 
@@ -11045,8 +11047,10 @@ let matchRecordsRawCacheV152 = null;
         foulLocked = true;
         turnLockReasonV62 = decision.scratch ? "break_scratch" : "illegal_break";
       } else if (decision.pocketedBalls.length === 0) {
-        // Ver.7.0.2: ノーインブレイク後は相手へプレー権を渡すまで入力をロックする。
-        // ボール・セーフティー・ファールを無効化し、「プレーヤー交代」だけを有効にする。
+        // RC76: A dry break counts as one miss, but does not change the player automatically.
+        // Keep the breaker active and lock scoring controls until the user explicitly taps
+        // "プレーヤー交代". Undo remains available through the normal lock-state rules.
+        misses[player]++;
         endCurrentRun(player);
         foulLocked = true;
         turnLockReasonV62 = "dry_break";
@@ -11602,6 +11606,7 @@ let matchRecordsRawCacheV152 = null;
     if (rackEnded && !reviewLocked) renderRackResult();
   }
 
+  // CueScore RC76: immediate turn-log update after each pocketed ball.
   // CueScore RC59: partial Game-screen rendering.
   // Only changed text, panel state, log, or ball-grid content is updated.
   const gameRenderCacheV155 = {
@@ -11631,19 +11636,17 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function gameLogSignatureV155() {
-    const rowsLength = Array.isArray(rows) ? rows.length : 0;
-    const last = rowsLength ? rows[rowsLength - 1] : null;
-    return JSON.stringify([
-      rowsLength,
-      last?.id ?? "",
-      last?.player ?? "",
-      last?.score ?? "",
-      last?.inning ?? "",
-      last?.rack ?? "",
-      current,
-      inning,
-      rack
-    ]);
+    // RC76: include the actual contents of every visible log row.
+    const normalizedRowsV174 = Array.isArray(rows)
+      ? rows.map(row => [
+          Number(row?.rack) || 0,
+          Number(row?.inning) || 0,
+          String(row?.label ?? ""),
+          Array.isArray(row?.p1) ? row.p1.slice() : [],
+          Array.isArray(row?.p2) ? row.p2.slice() : []
+        ])
+      : [];
+    return JSON.stringify([normalizedRowsV174, current, inning, rack]);
   }
 
   function gameBallSignatureV155() {
@@ -12458,7 +12461,7 @@ let matchRecordsRawCacheV152 = null;
   }
 
 
-  // RC7: derive manual misses from the active event log at result time.
+  // RC76: derive misses from the active event log at result time, including dry breaks.
   // This makes shot rate resilient to Undo and guarantees that Safety/Foul
   // turn changes are never counted as misses.
   function calculateManualMissesV107() {
@@ -12466,7 +12469,8 @@ let matchRecordsRawCacheV152 = null;
     commonEventsV7.forEach(event => {
       if (event?.type !== "TurnChange" || event?.sourceType !== "player_switch") return;
       const data = event?.data || {};
-      if (String(data.reason || "") !== "miss") return;
+      const reason = String(data.reason || "");
+      if (reason !== "miss" && reason !== "dry_break") return;
       const player = Number(data.fromPlayer ?? event.player) === 2 ? 2 : 1;
       derived[player] += 1;
     });
@@ -16800,7 +16804,7 @@ let matchRecordsRawCacheV152 = null;
   })();
 
 
-// CueScore Rotation Scoreboard v1.0 RC62
+// CueScore Rotation Scoreboard v1.0 RC76
 // RC42: cloud history list concurrency, restore lock, metadata display, immediate retention enforcement.
 </script>
 
@@ -16843,7 +16847,7 @@ let matchRecordsRawCacheV152 = null;
 
   const visible = element => {
     if (!(element instanceof HTMLElement)) return false;
-    if (element.classList.contains('hidden') || element.getAttribute('aria-hidden') === 'true') return false;
+    if (element.classList.contains('hidden')) return false;
     const style = getComputedStyle(element);
     return style.display !== 'none' && style.visibility !== 'hidden';
   };
@@ -17023,7 +17027,7 @@ let matchRecordsRawCacheV152 = null;
 
   const isVisible = el => {
     if (!(el instanceof HTMLElement)) return false;
-    if (el.classList.contains('hidden') || el.getAttribute('aria-hidden') === 'true') return false;
+    if (el.classList.contains('hidden')) return false;
     const style = getComputedStyle(el);
     return style.display !== 'none' && style.visibility !== 'hidden';
   };
@@ -17327,7 +17331,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{margin:0;padding:6px;opaci
   if (window.cueScoreRuntimeDiagnosticsV148) return;
   const startedAt = Date.now();
   window.cueScoreRuntimeDiagnosticsV148 = () => ({
-    version: '1.0-RC62',
+    version: '1.0-RC76',
     uptimeMs: Date.now() - startedAt,
     visibility: document.visibilityState,
     online: navigator.onLine,
@@ -17408,7 +17412,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{margin:0;padding:6px;opaci
       console.warn('[CueScore RC59] Storage estimate failed', error);
     }
     return {
-      version: '1.0-RC62',
+      version: '1.0-RC76',
       localStorage: local,
       originStorage: origin ? {
         usageBytes: Number(origin.usage) || 0,
@@ -17544,7 +17548,7 @@ window.cueScorePerformanceDiagnosticsV152 = function(){
   else setTimeout(prewarm, 250);
 
   window.cueScoreLargeHistoryDiagnosticsV153 = () => ({
-    version: '1.0-RC62',
+    version: '1.0-RC76',
     cacheHits: state.hits,
     cacheMisses: state.misses,
     invalidations: state.invalidations,
@@ -17562,7 +17566,7 @@ window.cueScorePerformanceDiagnosticsV152 = function(){
 window.cueScoreHistoryDomDiagnosticsV154 = function(){
   const list=document.getElementById("recordsList");
   return {
-    version:"1.0-RC62",
+    version:"1.0-RC76",
     renderedRecordCards:list?list.querySelectorAll("[data-record-id]").length:0,
     renderLimit:recordsRenderLimitV154,
     delegatedClickInstalled:recordsDelegatedClickInstalledV154,
@@ -17733,6 +17737,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
     scroll-behavior: auto;
   }
 }
+
 </style>
 <script>
 // RC59: screen-transition and large-view paint diagnostics.
@@ -17798,7 +17803,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
     state.performanceObserver?.disconnect?.();
   }, { once: true });
   window.cueScoreRenderDiagnosticsV157 = () => ({
-    version: '1.0-RC62',
+    version: '1.0-RC76',
     uptimeSeconds: Math.round((performance.now() - state.startedAt) / 1000),
     visibleScreen: currentScreen(),
     domNodeCount: document.getElementsByTagName('*').length,
@@ -17821,7 +17826,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   const previous = window.cueScoreRenderDiagnosticsV157;
   window.cueScoreRenderDiagnosticsV158 = () => ({
     ...(typeof previous === 'function' ? previous() : {}),
-    version: '1.0-RC62',
+    version: '1.0-RC76',
     gameLogNodes: document.getElementById('proTurnLog')?.childElementCount || 0,
     ballButtonCount: document.querySelectorAll('#proBalls button[data-ball-number]').length,
     ballGridDelegated: Boolean(window.ballGridDelegationInstalledV158 || document.getElementById('proBalls')),
@@ -17839,7 +17844,7 @@ window.addEventListener("pagehide", event => {
   cleanupHistoricalRecordV159();
 }, {once:true});
 window.cueScoreModalDiagnosticsV159 = () => ({
-  version:"1.0-RC62",
+  version:"1.0-RC76",
   playerStatsDelegated:Boolean(playerStatsDelegatedControllerV159),
   activePlayerStatsId:window.__cueScoreActivePlayerStatsIdV159 || null,
   historicalDetailListenersActive:Boolean(historicalDetailControllerV159),
@@ -17849,7 +17854,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
 </script>
 
 <script>
-/* CueScore RC62: integrated release-readiness diagnostics and stale UI recovery. */
+/* CueScore RC72: integrated release-readiness diagnostics and stale UI recovery. */
 (() => {
   if (window.__cueScoreReleaseGuardV160) return;
   window.__cueScoreReleaseGuardV160 = true;
@@ -17872,7 +17877,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
 
   const visibleV160 = element => {
     if (!(element instanceof HTMLElement)) return false;
-    if (element.hidden || element.classList.contains('hidden') || element.getAttribute('aria-hidden') === 'true') return false;
+    if (element.hidden || element.classList.contains('hidden')) return false;
     const style = getComputedStyle(element);
     return style.display !== 'none' && style.visibility !== 'hidden';
   };
@@ -17924,7 +17929,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
       .slice(0, 20);
 
     return {
-      version: '1.0-RC62',
+      version: '1.0-RC76',
       generatedAt: new Date().toISOString(),
       online: navigator.onLine,
       visibilityState: document.visibilityState,
@@ -17963,12 +17968,12 @@ window.cueScoreModalDiagnosticsV159 = () => ({
 })();
 </script>
 
-<!-- CueScore RC62: offline result save transaction isolation -->
+<!-- CueScore RC72: offline result save transaction isolation -->
 
 <script>
-/* CueScore RC62: single-source version synchronization. */
+/* CueScore RC72: single-source version synchronization. */
 (() => {
-  const RELEASE_LABEL = 'RC62';
+  const RELEASE_LABEL = 'RC76';
   const DISPLAY_VERSION = `version 1.0 ${RELEASE_LABEL}`;
 
   function syncCueScoreVersionV162(){
@@ -17989,6 +17994,13 @@ window.cueScoreModalDiagnosticsV159 = () => ({
   window.syncCueScoreVersionV162 = syncCueScoreVersionV162;
 })();
 </script>
+
+
+<!-- CueScore RC73 Clean: start-confirmation path normalized to one click listener per button;
+     global ancestor pointer lock and late capture-handler fail-safe removed. -->
+
+<!-- CueScore RC73 Clean: break-result modal state repair.
+     Visible state is derived from DOM/CSS; aria-hidden is synchronized output, preventing Safari modal self-lock. -->
 </body>
 </html>
 
