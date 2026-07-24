@@ -11,7 +11,7 @@
   <meta name="description" content="CueScore Rotation Scoreboard — ローテーション競技用スコアボード" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="apple-touch-icon" href="./icons/icon-180.png" />
-  <title>CueScore Rotation Scoreboard v1.0 RC19</title>
+  <title>CueScore Rotation Scoreboard v1.0 RC60</title>
   <style>
     :root {
       --bg: #16472d;
@@ -6040,11 +6040,14 @@ button {
 .cloud-history-header h3 { margin:0; font-size:20px; }
 .cloud-history-refresh { border:1px solid rgba(255,255,255,.65); border-radius:8px; background:rgba(255,255,255,.10); color:#fff; padding:8px 11px; font-weight:850; cursor:pointer; }
 .cloud-history-list { display:flex; flex-direction:column; gap:8px; }
+.cloud-history-summary { margin:0 0 8px; padding:9px 11px; border-radius:8px; background:rgba(255,255,255,.08); font-size:13px; font-weight:800; line-height:1.45; }
 .cloud-history-empty { padding:12px; border-radius:8px; background:rgba(0,0,0,.15); font-size:14px; line-height:1.5; }
 .cloud-history-item { display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center; padding:11px 12px; border:1px solid rgba(255,255,255,.22); border-radius:9px; background:rgba(0,0,0,.13); }
-.cloud-history-meta { min-width:0; font-size:13px; line-height:1.5; }
+.cloud-history-item.is-restoring { opacity:.65; pointer-events:none; }
+.cloud-history-meta { min-width:0; font-size:13px; line-height:1.5; overflow-wrap:anywhere; }
 .cloud-history-meta strong { color:#fff2a8; }
-.cloud-history-restore { border:0; border-radius:8px; background:#6ca8ed; color:#0b2942; padding:9px 12px; font-weight:950; cursor:pointer; white-space:nowrap; }
+.cloud-history-submeta { display:block; margin-top:2px; color:rgba(255,255,255,.74); font-size:12px; }
+.cloud-history-restore { min-width:64px; min-height:44px; border:0; border-radius:8px; background:#6ca8ed; color:#0b2942; padding:9px 12px; font-weight:950; cursor:pointer; white-space:nowrap; }
 .cloud-history-restore:disabled, .cloud-history-refresh:disabled { opacity:.45; cursor:default; }
 
 .cloud-auto-row { margin-top:12px; padding:12px; border-radius:10px; background:rgba(255,255,255,.09); display:flex; align-items:center; justify-content:space-between; gap:12px; }
@@ -7688,7 +7691,148 @@ button {
 .player-reflection-focus-list-v850{display:grid;gap:7px}.player-reflection-focus-v850{padding:9px 10px;border-left:3px solid rgba(92,220,190,.7);border-radius:8px;background:rgba(255,255,255,.04);font-size:12px;line-height:1.55}.player-reflection-focus-date-v850{display:block;font-size:10px;color:rgba(255,255,255,.56);margin-bottom:2px}
 .player-reflection-wait-v850{padding:13px;border-radius:12px;background:rgba(255,255,255,.045);font-size:13px;line-height:1.65;color:rgba(255,255,255,.72)}
 @media(max-width:430px){.player-reflection-grid-v850{gap:6px}.player-reflection-card-v850{padding:9px 4px}.player-reflection-card-value-v850{font-size:16px}.player-reflection-mental-row-v850{grid-template-columns:minmax(86px,1.15fr) .65fr .75fr .65fr;font-size:10px;gap:4px;padding:8px 6px}}
+
+
+/* RC22: cloud screen header / safe-area hardening */
+.data-management-screen {
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  overflow-y: auto !important;
+  scroll-padding-top: calc(76px + env(safe-area-inset-top)) !important;
+}
+.data-management-header {
+  box-sizing: border-box !important;
+  height: calc(68px + env(safe-area-inset-top)) !important;
+  min-height: calc(68px + env(safe-area-inset-top)) !important;
+  padding: env(safe-area-inset-top) max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left)) !important;
+  grid-template-columns: 96px minmax(0, 1fr) 96px !important;
+  background: #082f20 !important;
+  z-index: 80 !important;
+}
+.data-management-back {
+  font-size: clamp(18px, 4.8vw, 24px) !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  align-self: center !important;
+}
+.data-management-title {
+  font-size: clamp(23px, 5.8vw, 31px) !important;
+  line-height: 1.1 !important;
+  white-space: nowrap !important;
+  align-self: center !important;
+}
+.data-management-content {
+  padding-top: 20px !important;
+}
+@media (max-width: 390px) {
+  .data-management-header {
+    grid-template-columns: 82px minmax(0, 1fr) 82px !important;
+  }
+  .data-management-title { font-size: 22px !important; }
+  .data-management-back { font-size: 18px !important; }
+}
+
+
+/* RC23: data-management single-scroll layout */
+.data-management-screen {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  overflow: hidden !important;
+}
+.data-management-screen.hidden { display: none !important; }
+.data-management-header {
+  position: relative !important;
+  top: auto !important;
+  flex: 0 0 calc(68px + env(safe-area-inset-top)) !important;
+}
+.data-management-content {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior: contain !important;
+  scroll-padding-top: 20px !important;
+}
+
+
+
+/* CueScore RC25: visual viewport and modal recovery hardening */
+:root { --cue-visual-height: 100dvh; }
+@media (max-width: 600px), (hover: none) and (pointer: coarse) {
+  .app,
+  .player-info-screen,
+  .pro-game-screen,
+  .records-screen,
+  .rankings-screen,
+  .vs-analysis-screen,
+  .player-library-panel,
+  .player-stats-panel,
+  .data-management-screen {
+    max-height: var(--cue-visual-height, 100dvh);
+  }
+  input:focus,
+  textarea:focus,
+  select:focus { scroll-margin-top: calc(78px + env(safe-area-inset-top)); }
+}
+body.cue-modal-visible { overscroll-behavior: none; }
+
+/* CueScore RC29: focus visibility and touch-target hardening */
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid #ffd54a !important;
+  outline-offset: 3px !important;
+}
+:where(button, [role="button"]) {
+  touch-action: manipulation;
+}
+@media (max-width: 600px), (hover: none) and (pointer: coarse) {
+  :where(button:not(.result-dot), [role="button"]) { min-height: 44px; }
+}
+body.cue-modal-visible > .app {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+body.cue-modal-visible > .app :is(.pro-summary, .record-detail-overlay, .player-library-overlay, .player-stats-overlay, .break-result-overlay-v61, .pushout-overlay-v730, .record-mode-overlay-v611, .start-confirm-overlay-v698) {
+  pointer-events: auto;
+  user-select: auto;
+  -webkit-user-select: auto;
+}
+
+/* CueScore RC42: cloud generation history clarity and restore safety */
+.cloud-history-item.is-latest { border-color:rgba(255,226,120,.72); background:rgba(96,72,0,.20); }
+.cloud-history-item.is-invalid { border-color:rgba(255,122,137,.58); background:rgba(92,20,31,.24); }
+.cloud-history-badges { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:6px; }
+.cloud-history-badge { display:inline-flex; align-items:center; min-height:24px; padding:2px 7px; border-radius:999px; font-size:11px; line-height:1; font-weight:950; background:rgba(255,255,255,.13); color:rgba(255,255,255,.9); }
+.cloud-history-badge.latest { background:#ffe07a; color:#4a3500; }
+.cloud-history-badge.invalid { background:#ff8798; color:#4a0b15; }
+.cloud-history-item .cloud-history-restore { min-height:44px; min-width:82px; }
+@media(max-width:390px){ .cloud-history-item{grid-template-columns:1fr;} .cloud-history-item .cloud-history-restore{width:100%;} }
+/* CueScore RC42: generation actions and deletion safety */
+.cloud-history-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+.cloud-history-delete{min-height:44px;min-width:72px;border:1px solid rgba(255,122,137,.58);background:rgba(92,20,31,.30);color:#ffd7dd;border-radius:10px;font-weight:900;padding:8px 12px;}
+.cloud-history-delete:hover{background:rgba(122,28,43,.45);}
+.cloud-history-item.is-deleting{opacity:.62;pointer-events:none;}
+@media(max-width:390px){.cloud-history-actions{display:grid;grid-template-columns:1fr;justify-content:stretch}.cloud-history-actions button{width:100%;}}
+
+/* CueScore RC42: deterministic generation ordering status */
+.cloud-history-summary[data-order-verified="true"]::after{content:" ／ 並び順確認済み";color:rgba(170,255,205,.9);}
+
+
+/* CueScore RC42: explicit cloud resolution history */
+.cloud-last-resolution { margin-top:10px; padding:10px 12px; border-radius:10px; background:rgba(255,255,255,.07); color:rgba(255,255,255,.82); font-size:12px; line-height:1.5; }
+.cloud-last-resolution:empty { display:none; }
+.cloud-resolution-history-panel { margin-top:10px; border:1px solid rgba(255,255,255,.10); border-radius:12px; overflow:hidden; background:rgba(255,255,255,.035); }
+.cloud-resolution-history-toolbar { display:flex; gap:8px; justify-content:flex-end; flex-wrap:wrap; padding:10px; border-bottom:1px solid rgba(255,255,255,.08); }
+.cloud-resolution-history-toolbar button { min-height:44px; padding:8px 12px; border-radius:10px; }
+.cloud-resolution-history-list { max-height:220px; overflow:auto; padding:8px 10px 10px; }
+.cloud-resolution-history-item { padding:9px 2px; border-bottom:1px solid rgba(255,255,255,.07); color:rgba(255,255,255,.78); font-size:12px; line-height:1.45; }
+.cloud-resolution-history-item:last-child { border-bottom:0; }
+.cloud-resolution-history-empty { padding:12px 2px; color:rgba(255,255,255,.58); font-size:12px; }
+
 </style>
+<!-- CueScore Rotation Scoreboard v1.0 RC60 -->
 </head>
 <body>
   <div class="toast" id="toast">
@@ -7700,7 +7844,7 @@ button {
 
   <main class="app" aria-label="Rotation Scoreboard">
     <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
-    <div class="sub-title">version 1.0 RC20</div>
+    <div class="sub-title">version 1.0 RC42</div>
 
     <section class="home-dashboard" id="homeDashboard" aria-label="ダッシュボード">
       <div class="home-dashboard-head">
@@ -8177,6 +8321,19 @@ button {
               <button class="cloud-pending-discard" id="cloudPendingDiscardBtn" type="button">保留表示だけ解除</button>
             </div>
           </div>
+          <div class="cloud-last-resolution" id="cloudLastResolutionStatus" role="status" aria-live="polite"></div>
+          <div class="cloud-resolution-history-panel" aria-label="同期解決履歴">
+            <div class="cloud-resolution-history-toolbar">
+              <button id="cloudResolutionHistoryExportBtn" type="button">履歴を書き出す</button>
+              <button id="cloudResolutionHistoryImportBtn" type="button">履歴を読み込む</button>
+              <button id="cloudResolutionHistoryRestoreBtn" type="button">直前の変更を戻す</button>
+              <button id="cloudResolutionHistoryRecoveryManageBtn" type="button">復旧世代を管理</button>
+              <button id="cloudResolutionHistoryClearBtn" type="button">履歴を消去</button>
+              <input id="cloudResolutionHistoryFileInput" type="file" accept=".json,application/json" hidden />
+            </div>
+            <div class="cloud-resolution-history-list" id="cloudResolutionHistoryList"></div>
+            <p class="cloud-note">※ 読み込み対象は同期解決履歴だけです。プレーヤー・対戦履歴・クラウド本体は変更しません。</p>
+          </div>
           <div class="cloud-status" id="cloudSyncStatus" role="status" aria-live="polite"></div>
           <p class="cloud-note">※ 保存時はクラウドのRevisionを再確認し、他端末の更新があれば自動上書きを停止します。競合時は「クラウドから読込・強制上書き・キャンセル」を選べます。クラウド読込前には現在の端末データを自動退避します。</p>
 
@@ -8225,7 +8382,7 @@ button {
       <header class="settings-header">
         <button class="settings-back" id="settingsBackBtn" type="button">‹ 戻る</button>
         <div class="settings-title">設定</div>
-        <div class="settings-version">Ver.6.0.1</div>
+        <div class="settings-version">RC42</div>
       </header>
       <div class="settings-content">
         <section class="settings-card">
@@ -8239,7 +8396,7 @@ button {
         <section class="settings-card">
           <h2>世代バックアップ</h2>
           <div class="settings-row"><label class="settings-label" for="settingsGenerationCount">保持件数</label><input class="settings-number" id="settingsGenerationCount" type="number" min="1" max="30" step="1" value="10"></div>
-          <p>クラウド保存時に保持する世代数です。1〜30件で設定できます。次回のクラウド保存から反映されます。</p>
+          <p>クラウド保存時に保持する世代数です。1〜30件で設定できます。保存時にクラウド履歴へ即時反映されます。</p>
           <button class="settings-button primary full" id="settingsSaveGenerationBtn" type="button">保持件数を保存</button>
         </section>
         <section class="settings-card">
@@ -8363,6 +8520,31 @@ button {
   const proGameScreen = document.getElementById("proGameScreen");
   const recordsScreen = document.getElementById("recordsScreen");
 
+  // CueScore RC27: primary-screen navigation is reconciled through one mode reset.
+  const PRIMARY_MODE_CLASSES_V127 = [
+    "player-info-mode", "pro-game-mode", "records-mode", "rankings-mode",
+    "vs-analysis-mode", "statistics-filter-mode", "settings-mode"
+  ];
+
+  function clearPrimaryModesV127() {
+    app.classList.remove(...PRIMARY_MODE_CLASSES_V127);
+  }
+
+  function closeNavigationOverlaysV127() {
+    [
+      "startConfirmOverlayV698", "recordModeOverlayV611", "pushOutInputOverlayV730",
+      "pushOutDecisionOverlayV730", "breakResultOverlayV61", "recordDetailOverlay",
+      "playerStatsOverlay", "playerLibraryOverlay"
+    ].forEach(id => {
+      const node = document.getElementById(id);
+      if (!node) return;
+      node.classList.add("hidden");
+      node.setAttribute("aria-hidden", "true");
+    });
+    document.getElementById("dataManagementScreen")?.classList.add("hidden");
+    document.getElementById("dataManagementScreen")?.setAttribute("aria-hidden", "true");
+  }
+
   function showToast(title, message) {
     const old = document.querySelector(".toast");
     if (old) old.remove();
@@ -8378,20 +8560,28 @@ button {
   }
 
   function openPlayerInfo() {
-    app.classList.remove("pro-game-mode", "rankings-mode", "vs-analysis-mode");
+    clearPrimaryModesV127();
+    closeNavigationOverlaysV127();
     app.classList.add("player-info-mode");
     playerInfoScreen.classList.remove("hidden");
     proGameScreen.classList.add("hidden");
+    recordsScreen?.classList.add("hidden");
+    document.getElementById("rankingsScreen")?.classList.add("hidden");
+    document.getElementById("vsAnalysisScreen")?.classList.add("hidden");
     window.scrollTo(0, 0);
   }
 
   function backToTitle() {
-    app.classList.remove("player-info-mode", "pro-game-mode", "records-mode", "rankings-mode", "vs-analysis-mode");
+    clearPrimaryModesV127();
+    closeNavigationOverlaysV127();
     playerInfoScreen.classList.add("hidden");
     proGameScreen.classList.add("hidden");
     recordsScreen?.classList.add("hidden");
     document.getElementById("rankingsScreen")?.classList.add("hidden");
     document.getElementById("vsAnalysisScreen")?.classList.add("hidden");
+    document.getElementById("statisticsFilterScreen")?.classList.add("hidden");
+    document.getElementById("settingsScreen")?.classList.add("hidden");
+    document.body.style.overflow = "";
     window.scrollTo(0, 0);
   }
 
@@ -8432,7 +8622,7 @@ button {
   const MATCH_RECORDS_KEY = "rotationScoreboard.matchRecords.v1";
 
   // Rotation Scoreboard Ver.6.8.0: future multi-game data foundation
-  const ROTATION_APP_VERSION = "1.0.0-rc21";
+  const ROTATION_APP_VERSION = "1.0.0-rc35";
   const ROTATION_GAME_TYPE = "rotation";
   const ROTATION_RECORD_SCHEMA_VERSION = 3;
 
@@ -8520,21 +8710,111 @@ button {
     }
   }
 
+  
+  // RC32: verify persistent writes and refresh only the derived views that are currently visible.
+  function verifiedLocalStorageWriteV131(key, value) {
+    const serialized = JSON.stringify(value);
+    try {
+      localStorage.setItem(key, serialized);
+      if (localStorage.getItem(key) !== serialized) {
+        throw new Error("保存内容の照合に失敗しました。");
+      }
+      return true;
+    } catch (error) {
+      console.error("[CueScore] LocalStorage write failed", { key, error });
+      const wrapped = new Error("端末への保存に失敗しました。空き容量とブラウザ設定を確認してください。");
+      wrapped.cause = error;
+      throw wrapped;
+    }
+  }
+
+  let derivedViewRefreshQueuedV131 = false;
+  function isViewVisibleV152(id) {
+    const node = el(id);
+    return !!node && !node.classList.contains("hidden") && node.getClientRects().length > 0;
+  }
+  function refreshDerivedViewsV131(source = "data-change") {
+    if (derivedViewRefreshQueuedV131) return;
+    derivedViewRefreshQueuedV131 = true;
+    requestAnimationFrame(() => {
+      derivedViewRefreshQueuedV131 = false;
+      try {
+        if (typeof renderDashboard === "function" && !document.hidden) renderDashboard();
+        if (typeof renderMatchRecords === "function" && isViewVisibleV152("recordsScreen")) renderMatchRecords();
+        if (typeof renderPlayerLibrary === "function" && isViewVisibleV152("playerLibraryOverlay")) renderPlayerLibrary();
+        if (typeof window.renderRankingV51 === "function" && isViewVisibleV152("rankingScreen")) window.renderRankingV51();
+        if (typeof window.renderRivalAnalysisV832 === "function" && isViewVisibleV152("rivalAnalysisScreen")) window.renderRivalAnalysisV832();
+        document.dispatchEvent(new CustomEvent("cuescore:data-updated", { detail:{ source, at:Date.now() } }));
+      } catch (error) {
+        console.warn("[CueScore] Derived view refresh skipped", source, error);
+      }
+    });
+  }
+
+
+  // RC32: keep a recoverable snapshot before destructive local operations.
+  function createDestructiveBackupV132(reason, extra = {}) {
+    const snapshot = {
+      schemaVersion: "1.0-RC59",
+      reason: String(reason || "destructive-operation"),
+      createdAt: new Date().toISOString(),
+      players: readPlayerLibrary(),
+      matchRecords: readMatchRecords(),
+      matchCategories: (() => { try { return JSON.parse(localStorage.getItem(DATA_CATEGORY_KEY) || "[]"); } catch (_) { return []; } })(),
+      matchSeasons: (() => { try { return JSON.parse(localStorage.getItem(DATA_SEASON_KEY) || "[]"); } catch (_) { return []; } })(),
+      ...extra
+    };
+    const key = `rotationScoreboard.beforeDelete.${Date.now()}`;
+    verifiedLocalStorageWriteV131(key, snapshot);
+    return key;
+  }
+
+  function refreshAfterDestructiveChangeV132(source) {
+    refreshDerivedViewsV131(source);
+    try { window.renderHomeDashboardV50?.(); } catch (_) {}
+    try { window.renderPlayerRankingsV51?.(); } catch (_) {}
+    try { window.renderVsAnalysisV52?.(); } catch (_) {}
+    try { window.renderRivalAnalysisV832?.(); } catch (_) {}
+    // RC34: destructive local changes must be visible to cloud sync, but must not auto-overwrite cloud.
+    Promise.resolve(window.cueScoreMarkCloudDirtyV133?.(source || "local-destructive-change")).catch(error => {
+      console.warn("[CueScore RC42] Failed to mark cloud state dirty", error);
+    });
+  }
+
+let matchRecordsRawCacheV152 = null;
+  let matchRecordsParsedCacheV152 = [];
   function readMatchRecords() {
     const rawValue = localStorage.getItem(MATCH_RECORDS_KEY);
-    if (!rawValue) return [];
+    if (!rawValue) {
+      matchRecordsRawCacheV152 = null;
+      matchRecordsParsedCacheV152 = [];
+      return [];
+    }
+    if (rawValue === matchRecordsRawCacheV152) return matchRecordsParsedCacheV152.slice();
     try {
       const parsed = JSON.parse(rawValue);
       if (!Array.isArray(parsed)) throw new TypeError("Match records must be an array.");
-      return parsed.filter(r => r && r.id && r.players).map(normalizeMatchRecordV680);
+      matchRecordsRawCacheV152 = rawValue;
+      matchRecordsParsedCacheV152 = parsed.filter(r => r && r.id && r.players).map(normalizeMatchRecordV680);
+      return matchRecordsParsedCacheV152.slice();
     } catch (error) {
+      matchRecordsRawCacheV152 = null;
+      matchRecordsParsedCacheV152 = [];
       preserveCorruptedLocalDataV100(MATCH_RECORDS_KEY, rawValue, error);
       return [];
     }
   }
 
   function writeMatchRecords(records) {
-    localStorage.setItem(MATCH_RECORDS_KEY, JSON.stringify(records));
+    const normalized = Array.isArray(records) ? records : [];
+    const serialized = JSON.stringify(normalized);
+    if (localStorage.getItem(MATCH_RECORDS_KEY) !== serialized) {
+      verifiedLocalStorageWriteV131(MATCH_RECORDS_KEY, normalized);
+    }
+    matchRecordsRawCacheV152 = serialized;
+    matchRecordsParsedCacheV152 = normalized.map(normalizeMatchRecordV680);
+    refreshDerivedViewsV131("match-records");
+    return true;
   }
 
   function escapeRecordText(value) {
@@ -8593,7 +8873,8 @@ button {
     window.recordsSpecificMonthV34 = null;
     const recordsSearchInput = el("recordsSearchInput");
     if (recordsSearchInput) recordsSearchInput.value = "";
-    app.classList.remove("player-info-mode", "pro-game-mode", "rankings-mode");
+    clearPrimaryModesV127();
+    closeNavigationOverlaysV127();
     app.classList.add("records-mode");
     playerInfoScreen.classList.add("hidden");
     proGameScreen.classList.add("hidden");
@@ -8695,7 +8976,13 @@ button {
   }
 
   function writePlayerLibrary(players) {
-    localStorage.setItem(PLAYER_LIBRARY_KEY, JSON.stringify(players));
+    const normalized = Array.isArray(players) ? players : [];
+    const serialized = JSON.stringify(normalized);
+    if (localStorage.getItem(PLAYER_LIBRARY_KEY) !== serialized) {
+      verifiedLocalStorageWriteV131(PLAYER_LIBRARY_KEY, normalized);
+    }
+    refreshDerivedViewsV131("player-library");
+    return true;
   }
 
   function makePlayerId() {
@@ -9244,9 +9531,46 @@ button {
     return `<section class="player-reflection-analysis-v850"><div class="player-reflection-analysis-head-v850"><div><div class="player-reflection-analysis-title-v850">振り返り傾向</div></div><div class="player-reflection-analysis-count-v850">振り返り ${analysis.reflectionGames}/${analysis.totalGames}試合</div></div><div class="player-reflection-analysis-lead-v850">選択した期間内のプレーヤー別振り返りと試合成績を比較します。</div><div class="player-reflection-summary-v850">${esc(analysis.insight)}</div><div class="player-reflection-subtitle-v850">調子別の勝率</div><div class="player-reflection-grid-v850">${moodCards}</div><div class="player-reflection-subtitle-v850">メンタル別の傾向 <span style="font-weight:400;color:rgba(255,255,255,.58)">（試合数／勝率／シュート率）</span></div><div class="player-reflection-mental-list-v850">${mentalRows}</div>${focuses}<div class="rion-coach-note-v760">少ない記録では偶然の影響が大きいため、傾向は参考として表示しています。</div></section>`;
   }
 
+  // RC59: one delegated Player Stats handler; rerenders do not add listeners.
+  let playerStatsDelegatedControllerV159 = null;
+  function ensurePlayerStatsDelegationV159(){
+    const body = el("playerStatsBody");
+    if(!body || playerStatsDelegatedControllerV159) return;
+    playerStatsDelegatedControllerV159 = new AbortController();
+    body.addEventListener("click", event => {
+      const recordButton = event.target.closest("[data-player-record-id]");
+      if(recordButton && body.contains(recordButton)){ openHistoricalRecord(recordButton.dataset.playerRecordId); return; }
+      const rivalButton = event.target.closest("[data-open-player-rival-v832]");
+      if(rivalButton && body.contains(rivalButton)){ window.openRivalAnalysisForPlayerV832?.(String(rivalButton.dataset.openPlayerRivalV832 || "")); return; }
+      const filterButton = event.target.closest("[data-player-stats-filter]");
+      if(filterButton && body.contains(filterButton)){
+        const nextFilter = filterButton.dataset.playerStatsFilter;
+        if(nextFilter !== playerStatsActiveFilterV28 && window.__cueScoreActivePlayerStatsIdV159) openPlayerStats(window.__cueScoreActivePlayerStatsIdV159, nextFilter);
+        return;
+      }
+      const chartButton = event.target.closest("[data-player-chart]");
+      if(chartButton && body.contains(chartButton)){
+        const nextChart = chartButton.dataset.playerChart || "points";
+        if(nextChart !== playerStatsActiveChartV33 && window.__cueScoreActivePlayerStatsIdV159){ playerStatsActiveChartV33 = nextChart; openPlayerStats(window.__cueScoreActivePlayerStatsIdV159, playerStatsActiveFilterV28); }
+        return;
+      }
+      const monthButton = event.target.closest("[data-player-month]");
+      if(monthButton && body.contains(monthButton)){
+        const monthKey = monthButton.dataset.playerMonth || "";
+        if(!monthKey) return;
+        const [year, month] = monthKey.split("-").map(Number);
+        window.recordsSpecificMonthV34 = {year, month}; recordsActiveFilterV31 = "month"; recordsSearchQueryV31 = ""; recordsActiveTagV32 = "";
+        const searchInput = el("recordsSearchInput"); if(searchInput) searchInput.value = "";
+        app.classList.remove("player-stats-mode"); el("playerStatsScreen")?.classList.add("hidden"); el("recordsScreen")?.classList.remove("hidden"); renderMatchRecords();
+      }
+    }, {signal: playerStatsDelegatedControllerV159.signal});
+  }
+
   function openPlayerStats(playerId, requestedFilter = playerStatsActiveFilterV28) {
     const player = readPlayerLibrary().find(item => item.id === playerId);
     if (!player) return;
+    window.__cueScoreActivePlayerStatsIdV159 = String(playerId);
+    ensurePlayerStatsDelegationV159();
 
     const validFilters = new Set(["all", "month", "recent10"]);
     playerStatsActiveFilterV28 = validFilters.has(requestedFilter) ? requestedFilter : "all";
@@ -9776,58 +10100,14 @@ button {
     overlay.classList.remove("hidden");
     overlay.setAttribute("aria-hidden", "false");
     el("playerStatsBody").scrollTop = 0;
-    el("playerStatsBody").querySelectorAll("[data-player-record-id]").forEach(button => {
-      button.addEventListener("click", () => openHistoricalRecord(button.dataset.playerRecordId));
-    });
-
-    el("playerStatsBody").querySelector("[data-open-player-rival-v832]")?.addEventListener("click", () => {
-      window.openRivalAnalysisForPlayerV832?.(String(playerId));
-    });
-
-    el("playerStatsBody").querySelectorAll("[data-player-stats-filter]").forEach(button => {
-      button.addEventListener("click", () => {
-        const nextFilter = button.dataset.playerStatsFilter;
-        if (nextFilter === playerStatsActiveFilterV28) return;
-        openPlayerStats(playerId, nextFilter);
-      });
-    });
-
-    el("playerStatsBody").querySelectorAll("[data-player-chart]").forEach(button => {
-      button.addEventListener("click", () => {
-        const nextChart = button.dataset.playerChart || "points";
-        if (nextChart === playerStatsActiveChartV33) return;
-        playerStatsActiveChartV33 = nextChart;
-        openPlayerStats(playerId, playerStatsActiveFilterV28);
-      });
-    });
-
-    el("playerStatsBody").querySelectorAll("[data-player-month]").forEach(button => {
-      button.addEventListener("click", () => {
-        const monthKey = button.dataset.playerMonth || "";
-        if (!monthKey) return;
-
-        const [year, month] = monthKey.split("-").map(Number);
-        window.recordsSpecificMonthV34 = { year, month };
-        recordsActiveFilterV31 = "month";
-        recordsSearchQueryV31 = "";
-        recordsActiveTagV32 = "";
-
-        const searchInput = el("recordsSearchInput");
-        if (searchInput) searchInput.value = "";
-
-        app.classList.remove("player-stats-mode");
-        el("playerStatsScreen")?.classList.add("hidden");
-        el("recordsScreen")?.classList.remove("hidden");
-        renderMatchRecords();
-      });
-    });
   }
 
   function closePlayerStats() {
     const overlay = el("playerStatsOverlay");
     overlay.classList.add("hidden");
     overlay.setAttribute("aria-hidden", "true");
-    el("playerStatsBody").innerHTML = "";
+    el("playerStatsBody").replaceChildren();
+    window.__cueScoreActivePlayerStatsIdV159 = "";
 
     if (playerStatsReturnToManagementV147) {
       playerStatsReturnToManagementV147 = false;
@@ -9919,7 +10199,13 @@ button {
   function savePlayerEditor() {
     const rawName = el("playerEditorName").value.trim();
     const name = limitPlayerName(rawName);
-    const race = Number(el("playerEditorRace").value);
+    const raceRaw = Number(el("playerEditorRace").value);
+    const allowedRaceValues = new Set(Object.values(skillGoals).map(Number));
+    const race = allowedRaceValues.has(raceRaw) ? raceRaw : 120;
+    if (raceRaw !== race) {
+      el("playerEditorRace").value = String(race);
+      el("playerEditorRange").value = String(raceValueToStep(race));
+    }
     if (Array.from(rawName).length > PLAYER_NAME_MAX_LENGTH) {
       showToast("入力確認", "プレーヤー名は10文字以内で入力してください");
       el("playerEditorName").value = name;
@@ -9943,6 +10229,18 @@ button {
       players.push({id:makePlayerId(), name, race, createdAt:now, updatedAt:now, lastUsed:null});
     }
     writePlayerLibrary(players);
+    const savedPlayerV131 = players.find(p => p.id === (editingPlayerId || players[players.length - 1]?.id));
+    if (savedPlayerV131) {
+      [1, 2].forEach(slot => {
+        if (selectedRegisteredPlayer[slot] !== savedPlayerV131.id) return;
+        const nameInput = el(slot === 1 ? "p1Name" : "p2Name");
+        const raceInput = el(slot === 1 ? "p1Race" : "p2Race");
+        const rangeInput = el(slot === 1 ? "p1Skill" : "p2Skill");
+        if (nameInput) nameInput.value = limitPlayerName(savedPlayerV131.name);
+        if (raceInput) raceInput.value = String(savedPlayerV131.race);
+        if (rangeInput) rangeInput.value = String(raceValueToStep(savedPlayerV131.race));
+      });
+    }
     showPlayerLibraryMain();
     requestAnimationFrame(() => {
       const add = el("playerLibraryAddBtn");
@@ -9961,10 +10259,21 @@ button {
     if (!editingPlayerId) return;
     const player = readPlayerLibrary().find(p => p.id === editingPlayerId);
     if (!player || !confirm(`「${player.name}」を削除しますか？`)) return;
+    createDestructiveBackupV132("delete-player", { deletedPlayerId: editingPlayerId, deletedPlayerName: player.name });
     writePlayerLibrary(readPlayerLibrary().filter(p => p.id !== editingPlayerId));
-    if (selectedRegisteredPlayer[1] === editingPlayerId) selectedRegisteredPlayer[1] = null;
-    if (selectedRegisteredPlayer[2] === editingPlayerId) selectedRegisteredPlayer[2] = null;
+    [1, 2].forEach(slot => {
+      if (selectedRegisteredPlayer[slot] !== editingPlayerId) return;
+      selectedRegisteredPlayer[slot] = null;
+      const nameInput = el(slot === 1 ? "p1Name" : "p2Name");
+      const raceInput = el(slot === 1 ? "p1Race" : "p2Race");
+      const rangeInput = el(slot === 1 ? "p1Skill" : "p2Skill");
+      if (nameInput) nameInput.value = "";
+      if (raceInput) raceInput.value = "120";
+      if (rangeInput) rangeInput.value = String(raceValueToStep(120));
+    });
     showPlayerLibraryMain();
+    refreshAfterDestructiveChangeV132("player-deleted");
+    showToast("プレーヤーを削除しました", "削除前バックアップを保存し、関連画面へ反映しました");
   }
 
   function selectRegisteredPlayer(id) {
@@ -11102,9 +11411,11 @@ button {
     return `<span class="pro-symbol ${cls}">${displaySymbol}</span>`;
   }
 
+  // CueScore RC59: build large game DOM updates off-document, then commit once.
   function renderLog() {
     const log = el("proTurnLog");
-    log.innerHTML = "";
+    if (!log) return;
+    const fragment = document.createDocumentFragment();
     let lastRack = null;
 
     rows.forEach((rowData, index) => {
@@ -11112,7 +11423,7 @@ button {
         const divider = document.createElement("div");
         divider.className = "pro-rack-divider";
         divider.textContent = `Rack ${rowData.rack}`;
-        log.appendChild(divider);
+        fragment.appendChild(divider);
         lastRack = rowData.rack;
       }
 
@@ -11120,36 +11431,57 @@ button {
       row.className = "pro-log-row" + (index === rows.length - 1 ? " active-row" : "");
       const p1Items = rowData.p1.map(item => typeof item === "number" ? ballHtml(item) : symbolHtml(item)).join("");
       const p2Items = rowData.p2.map(item => typeof item === "number" ? ballHtml(item) : symbolHtml(item)).join("");
-
       row.innerHTML = `
         <div class="pro-turn-label">${rowData.label}</div>
         <div class="pro-log-cell">${p1Items}</div>
         <div class="pro-log-cell">${p2Items}</div>
       `;
-      log.appendChild(row);
+      fragment.appendChild(row);
     });
 
-    log.scrollTop = log.scrollHeight;
+    log.replaceChildren(fragment);
+    requestAnimationFrame(() => { log.scrollTop = log.scrollHeight; });
+  }
+
+  // CueScore RC59: one delegated ball handler replaces per-ball listeners.
+  let ballGridDelegationInstalledV158 = false;
+  function ensureBallGridDelegationV158() {
+    if (ballGridDelegationInstalledV158) return;
+    const balls = el("proBalls");
+    if (!balls) return;
+    balls.addEventListener("click", event => {
+      const button = event.target.closest("button[data-ball-number]");
+      if (!button || button.disabled || !balls.contains(button)) return;
+      pocketBall(Number(button.dataset.ballNumber));
+    });
+    ballGridDelegationInstalledV158 = true;
   }
 
   // CueScore RC5: Game Engine ball-count invariants use the active rule instead of hard-coded 15.
   function renderBalls() {
     const balls = el("proBalls");
-    balls.innerHTML = "";
+    if (!balls) return;
+    ensureBallGridDelegationV158();
     balls.classList.toggle("rack-ended", rackEnded);
     balls.classList.toggle("locked", foulLocked);
 
+    const fragment = document.createDocumentFragment();
     const activeBallCountV105 = Math.max(1, Number(getActiveRuleV699().ballCount || 15));
+    const disabledByState = rackEnded || foulLocked || gameEnded || isReviewLocked();
     for (let number = 1; number <= activeBallCountV105; number++) {
       const button = document.createElement("button");
+      button.type = "button";
+      button.dataset.ballNumber = String(number);
       button.className = "pro-ball " + (number <= 8 ? "solid" : "stripe");
-      if (usedBalls.has(number)) button.classList.add("used");
+      const used = usedBalls.has(number);
+      if (used) button.classList.add("used");
       button.style.background = colors[number];
       button.innerHTML = `<span>${number}</span>`;
-      button.disabled = usedBalls.has(number) || rackEnded || foulLocked || gameEnded || isReviewLocked();
-      button.addEventListener("click", () => pocketBall(number));
-      balls.appendChild(button);
+      button.disabled = used || disabledByState;
+      button.setAttribute("aria-label", `${number}番ボール${used ? "（入球済み）" : ""}`);
+      fragment.appendChild(button);
     }
+    balls.replaceChildren(fragment);
   }
 
   function renderRackResult() {
@@ -11265,27 +11597,122 @@ button {
     if (rackEnded && !reviewLocked) renderRackResult();
   }
 
-  function updateGame() {
-    el("proP1Score").textContent = scores[1];
-    el("proP2Score").textContent = scores[2];
-    el("proP1Safety").textContent = safety[1];
-    el("proP2Safety").textContent = safety[2];
-    el("proP1Foul").textContent = fouls[1];
-    el("proP2Foul").textContent = fouls[2];
-    el("proRack").textContent = rack;
-    el("proInning").textContent = inning;
-    el("proP1Goal").textContent = goals[1];
-    el("proP2Goal").textContent = goals[2];
-    el("proGoalView").textContent = `${goals[1]} / ${goals[2]}`;
-    el("proP1Panel").classList.toggle("active", current === 1);
-    el("proP2Panel").classList.toggle("active", current === 2);
-    el("proGameScreen")?.classList.toggle("review-locked", isReviewLocked());
+  // CueScore RC59: partial Game-screen rendering.
+  // Only changed text, panel state, log, or ball-grid content is updated.
+  const gameRenderCacheV155 = {
+    text: Object.create(null),
+    activePlayer: null,
+    reviewLocked: null,
+    logSignature: "",
+    ballSignature: "",
+    renders: 0,
+    logRenders: 0,
+    ballRenders: 0,
+    skippedTextWrites: 0,
+    lastDurationMs: 0,
+    maxDurationMs: 0
+  };
 
-    renderLog();
-    renderBalls();
+  function setGameTextV155(id, value) {
+    const next = String(value ?? "");
+    if (gameRenderCacheV155.text[id] === next) {
+      gameRenderCacheV155.skippedTextWrites += 1;
+      return;
+    }
+    const node = el(id);
+    if (!node) return;
+    node.textContent = next;
+    gameRenderCacheV155.text[id] = next;
+  }
+
+  function gameLogSignatureV155() {
+    const rowsLength = Array.isArray(rows) ? rows.length : 0;
+    const last = rowsLength ? rows[rowsLength - 1] : null;
+    return JSON.stringify([
+      rowsLength,
+      last?.id ?? "",
+      last?.player ?? "",
+      last?.score ?? "",
+      last?.inning ?? "",
+      last?.rack ?? "",
+      current,
+      inning,
+      rack
+    ]);
+  }
+
+  function gameBallSignatureV155() {
+    const activeBallCount = Math.max(1, Number(getActiveRuleV699().ballCount || 15));
+    return `${activeBallCount}|${[...usedBalls].sort((a,b)=>a-b).join(",")}|${rackEnded ? 1 : 0}|${gameEnded ? 1 : 0}`;
+  }
+
+  function updateGame() {
+    const started = performance.now();
+    gameRenderCacheV155.renders += 1;
+
+    setGameTextV155("proP1Score", scores[1]);
+    setGameTextV155("proP2Score", scores[2]);
+    setGameTextV155("proP1Safety", safety[1]);
+    setGameTextV155("proP2Safety", safety[2]);
+    setGameTextV155("proP1Foul", fouls[1]);
+    setGameTextV155("proP2Foul", fouls[2]);
+    setGameTextV155("proRack", rack);
+    setGameTextV155("proInning", inning);
+    setGameTextV155("proP1Goal", goals[1]);
+    setGameTextV155("proP2Goal", goals[2]);
+    setGameTextV155("proGoalView", `${goals[1]} / ${goals[2]}`);
+
+    if (gameRenderCacheV155.activePlayer !== current) {
+      el("proP1Panel")?.classList.toggle("active", current === 1);
+      el("proP2Panel")?.classList.toggle("active", current === 2);
+      gameRenderCacheV155.activePlayer = current;
+    }
+
+    const reviewLockedV155 = isReviewLocked();
+    if (gameRenderCacheV155.reviewLocked !== reviewLockedV155) {
+      el("proGameScreen")?.classList.toggle("review-locked", reviewLockedV155);
+      gameRenderCacheV155.reviewLocked = reviewLockedV155;
+    }
+
+    const nextLogSignature = gameLogSignatureV155();
+    if (gameRenderCacheV155.logSignature !== nextLogSignature) {
+      renderLog();
+      gameRenderCacheV155.logSignature = nextLogSignature;
+      gameRenderCacheV155.logRenders += 1;
+    }
+
+    const nextBallSignature = gameBallSignatureV155();
+    if (gameRenderCacheV155.ballSignature !== nextBallSignature) {
+      renderBalls();
+      gameRenderCacheV155.ballSignature = nextBallSignature;
+      gameRenderCacheV155.ballRenders += 1;
+    }
+
     checkWinner();
     updateButtons();
+
+    const duration = performance.now() - started;
+    gameRenderCacheV155.lastDurationMs = Number(duration.toFixed(2));
+    gameRenderCacheV155.maxDurationMs = Math.max(gameRenderCacheV155.maxDurationMs, duration);
   }
+
+  window.cueScoreRenderDiagnosticsV155 = () => ({
+    version: "1.0-RC59",
+    domNodeCount: document.getElementsByTagName("*").length,
+    gameRenders: gameRenderCacheV155.renders,
+    gameLogRenders: gameRenderCacheV155.logRenders,
+    gameBallRenders: gameRenderCacheV155.ballRenders,
+    skippedTextWrites: gameRenderCacheV155.skippedTextWrites,
+    lastGameRenderMs: gameRenderCacheV155.lastDurationMs,
+    maxGameRenderMs: Number(gameRenderCacheV155.maxDurationMs.toFixed(2)),
+    historyCardsInDom: document.querySelectorAll("#matchRecordsList .record-card, #matchRecordsList [data-record-id]").length,
+    uptimeSeconds: Math.round(performance.now() / 1000),
+    heap: performance.memory ? {
+      usedJSHeapSize: performance.memory.usedJSHeapSize,
+      totalJSHeapSize: performance.memory.totalJSHeapSize,
+      jsHeapSizeLimit: performance.memory.jsHeapSizeLimit
+    } : null
+  });
 
   // CueScore RC10: failed actions must roll back both state and event audit data.
   const MAX_UNDO_DEPTH_V111 = 300;
@@ -12965,6 +13392,7 @@ button {
         closeHistoricalEditDialogV35();
         renderMatchRecords();
         openHistoricalRecord(recordId);
+        showToast("履歴を更新しました", "メモとタグを端末へ保存しました");
       });
 
     dialog.addEventListener("click", event => {
@@ -12985,6 +13413,7 @@ button {
     );
     if (!confirmed) return;
 
+    createDestructiveBackupV132("delete-match-record", { deletedRecordId: String(recordId) });
     writeMatchRecords(
       records.filter(item => String(item.id) !== String(recordId))
     );
@@ -12996,6 +13425,8 @@ button {
     }
 
     renderMatchRecords();
+    refreshAfterDestructiveChangeV132("match-record-deleted");
+    showToast("履歴を削除しました", "削除前バックアップを保存し、集計画面へ反映しました");
   }
 
 
@@ -13150,10 +13581,21 @@ button {
     return `<div class="analysis-dashboard-v66"><div class="analysis-dashboard-title-v66">分析ダッシュボード</div>${playerCard(1)}${playerCard(2)}<div class="analysis-dashboard-note-v66">記録方式：${esc(mode)}<br>数値はこの試合で記録された操作から自動集計しています。</div></div>`;
   }
 
+  // RC59: abort all history-detail listeners and drop generated nodes on close.
+  let historicalDetailControllerV159 = null;
+  function cleanupHistoricalRecordV159(){
+    historicalDetailControllerV159?.abort(); historicalDetailControllerV159 = null;
+    const overlay = el("recordDetailOverlay"); if(!overlay) return;
+    overlay.classList.add("hidden"); overlay.classList.remove("history-renew-overlay-v67"); overlay.replaceChildren();
+  }
+
   function openHistoricalRecord(recordId) {
     const record = readMatchRecords().find(item => String(item.id) === String(recordId));
     if (!record) return;
+    cleanupHistoricalRecordV159();
     const overlay = el("recordDetailOverlay");
+    historicalDetailControllerV159 = new AbortController();
+    const historicalSignalV159 = historicalDetailControllerV159.signal;
     const p1 = record.players?.[1] || {};
     const p2 = record.players?.[2] || {};
     const winner = Number(record.winner) === 2 ? 2 : 1;
@@ -13240,29 +13682,29 @@ button {
       setHistoricalResultPage(historicalPageV67);
     };
     overlay.querySelectorAll("[data-history-tab-v67]").forEach(button => {
-      button.addEventListener("click", () => goHistoricalPageV67(Number(button.dataset.historyTabV67)));
+      button.addEventListener("click", () => goHistoricalPageV67(Number(button.dataset.historyTabV67)), {signal: historicalSignalV159});
       button.addEventListener("keydown", event => {
         if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
         event.preventDefault();
         goHistoricalPageV67(historicalPageV67 + (event.key === "ArrowRight" ? 1 : -1));
         overlay.querySelector(`[data-history-tab-v67="${historicalPageV67}"]`)?.focus();
-      });
+      }, {signal: historicalSignalV159});
     });
     const body = overlay.querySelector(".history-renew-body-v67");
     body?.addEventListener("touchstart", event => {
       touchStartX = event.touches[0].clientX;
       touchStartY = event.touches[0].clientY;
-    }, {passive:true});
+    }, {passive:true, signal: historicalSignalV159});
     body?.addEventListener("touchend", event => {
       const dx = event.changedTouches[0].clientX - touchStartX;
       const dy = event.changedTouches[0].clientY - touchStartY;
       if (Math.abs(dx) >= 55 && Math.abs(dx) > Math.abs(dy) * 1.35) {
         goHistoricalPageV67(historicalPageV67 + (dx < 0 ? 1 : -1));
       }
-    }, {passive:true});
-    el("recordDetailBackBtn")?.addEventListener("click",()=>{ overlay.classList.add("hidden"); overlay.classList.remove("history-renew-overlay-v67"); overlay.innerHTML=""; });
-    el("recordDetailEditBtnV35")?.addEventListener("click",()=>openHistoricalEditDialogV35(recordId));
-    el("recordDetailDeleteBtnV35")?.addEventListener("click",()=>deleteHistoricalRecordV35(recordId));
+    }, {passive:true, signal: historicalSignalV159});
+    el("recordDetailBackBtn")?.addEventListener("click", cleanupHistoricalRecordV159, {signal: historicalSignalV159});
+    el("recordDetailEditBtnV35")?.addEventListener("click",()=>openHistoricalEditDialogV35(recordId), {signal: historicalSignalV159});
+    el("recordDetailDeleteBtnV35")?.addEventListener("click",()=>deleteHistoricalRecordV35(recordId), {signal: historicalSignalV159});
     goHistoricalPageV67(0);
   }
 
@@ -13358,6 +13800,38 @@ button {
       : `${label}${tagText}：${shown}件`;
   }
 
+  // RC59: render large history lists incrementally and use one delegated click handler.
+  const RECORD_RENDER_BATCH_V154 = 100;
+  let recordsRenderLimitV154 = RECORD_RENDER_BATCH_V154;
+  let recordsRenderSignatureV154 = "";
+  let recordsDelegatedClickInstalledV154 = false;
+
+  function recordsRenderSignatureNowV154(recordsLength){
+    return JSON.stringify([
+      recordsActiveFilterV31, recordsSearchQueryV31, recordsActiveTagV32,
+      recordsCategoryFilterV38, recordsSeasonFilterV38, window.recordsSpecificMonthV34 || "",
+      Number(recordsLength)||0
+    ]);
+  }
+
+  function installRecordsDelegatedClickV154(){
+    if(recordsDelegatedClickInstalledV154) return;
+    const list = el("recordsList");
+    if(!list) return;
+    list.addEventListener("click", event => {
+      const more = event.target.closest("[data-records-load-more-v154]");
+      if(more){
+        event.preventDefault();
+        recordsRenderLimitV154 += RECORD_RENDER_BATCH_V154;
+        renderMatchRecords();
+        return;
+      }
+      const recordButton = event.target.closest("[data-record-id]");
+      if(recordButton && list.contains(recordButton)) openHistoricalRecord(recordButton.dataset.recordId);
+    });
+    recordsDelegatedClickInstalledV154 = true;
+  }
+
   function renderMatchRecords() {
     const list = el("recordsList");
     const count = el("recordsCount");
@@ -13408,7 +13882,14 @@ button {
         : `<div class="record-empty">まだ対戦履歴はありません。<br>Game Set画面でOKを押すと保存されます。</div>`;
       return;
     }
-    list.innerHTML = records.map(record=>{
+    const signatureV154 = recordsRenderSignatureNowV154(records.length);
+    if(signatureV154 !== recordsRenderSignatureV154){
+      recordsRenderSignatureV154 = signatureV154;
+      recordsRenderLimitV154 = RECORD_RENDER_BATCH_V154;
+    }
+    const visibleRecordsV154 = records.slice(0, recordsRenderLimitV154);
+    const remainingV154 = Math.max(0, records.length - visibleRecordsV154.length);
+    const cardsHtmlV154 = visibleRecordsV154.map(record=>{
       const p1=record.players?.[1]||{}, p2=record.players?.[2]||{};
       const p1Won=Number(record.winner)!==2;
       const p1Score=Number(p1.score)||0, p2Score=Number(p2.score)||0;
@@ -13431,7 +13912,9 @@ button {
           </span>` : ""}
       </button>`;
     }).join("");
-    list.querySelectorAll("[data-record-id]").forEach(button=>button.addEventListener("click",()=>openHistoricalRecord(button.dataset.recordId)));
+    list.innerHTML = `<span class="records-render-summary-v154">${visibleRecordsV154.length}／${records.length}件を表示</span>` + cardsHtmlV154 +
+      (remainingV154 ? `<div class="records-load-more-v154"><button type="button" data-records-load-more-v154>さらに${Math.min(RECORD_RENDER_BATCH_V154, remainingV154)}件表示</button></div>` : "");
+    installRecordsDelegatedClickV154();
   }
 
   function saveCurrentMatchRecord(winner, stats) {
@@ -13709,6 +14192,14 @@ button {
       setDataMessage("");
       screen.classList.remove("hidden");
       screen.setAttribute("aria-hidden", "false");
+      // ヘッダーは固定し、本文だけを独立スクロールさせる。
+      const content = screen.querySelector(".data-management-content");
+      screen.scrollTop = 0;
+      if (content) content.scrollTop = 0;
+      requestAnimationFrame(() => {
+        screen.scrollTop = 0;
+        if (content) content.scrollTop = 0;
+      });
     }
 
     function closeDataManagement() {
@@ -13749,7 +14240,7 @@ button {
         document.body.appendChild(anchor);
         anchor.click();
         anchor.remove();
-        window.setTimeout(() => URL.revokeObjectURL(url), 1500);
+        window.__cueScoreObjectUrlLifecycleV149?.scheduleRelease(url, 1500);
         setDataMessage(
           `書き出しました：プレーヤー${payload.players.length}人／履歴${payload.matchRecords.length}試合／` +
           `試合区分${payload.matchCategories.length}件／シーズン${payload.matchSeasons.length}件`
@@ -13907,7 +14398,7 @@ button {
         document.body.appendChild(anchor);
         anchor.click();
         anchor.remove();
-        window.setTimeout(() => URL.revokeObjectURL(url), 1500);
+        window.__cueScoreObjectUrlLifecycleV149?.scheduleRelease(url, 1500);
 
         setDataMessage(`CSVを書き出しました：${records.length}試合／${rows.length}行（絞り込み条件を反映）`);
       } catch (error) {
@@ -13977,10 +14468,10 @@ button {
         localStorage.setItem(restoreSnapshotKey, JSON.stringify(restoreSnapshot));
 
         try {
-          localStorage.setItem(DATA_PLAYER_KEY, JSON.stringify(backup.players));
-          localStorage.setItem(DATA_RECORD_KEY, JSON.stringify(backup.matchRecords));
-          if (hasCategoryData) localStorage.setItem(DATA_CATEGORY_KEY, JSON.stringify(categories));
-          if (hasSeasonData) localStorage.setItem(DATA_SEASON_KEY, JSON.stringify(seasons));
+          verifiedLocalStorageWriteV131(DATA_PLAYER_KEY, backup.players);
+          verifiedLocalStorageWriteV131(DATA_RECORD_KEY, backup.matchRecords);
+          if (hasCategoryData) verifiedLocalStorageWriteV131(DATA_CATEGORY_KEY, categories);
+          if (hasSeasonData) verifiedLocalStorageWriteV131(DATA_SEASON_KEY, seasons);
         } catch (writeError) {
           localStorage.setItem(DATA_PLAYER_KEY, JSON.stringify(restoreSnapshot.players));
           localStorage.setItem(DATA_RECORD_KEY, JSON.stringify(restoreSnapshot.matchRecords));
@@ -13988,9 +14479,12 @@ button {
           localStorage.setItem(DATA_SEASON_KEY, JSON.stringify(restoreSnapshot.matchSeasons));
           throw writeError;
         }
+        await window.cueScoreMarkCloudDirtyV133?.("local-backup-restored", {
+          playerCount, recordCount, categoryCount, seasonCount
+        });
         alert(
           `復元しました。\n登録プレーヤー ${playerCount}人\n対戦履歴 ${recordCount}試合\n` +
-          `試合区分 ${categoryCount}件\nシーズン ${seasonCount}件`
+          `試合区分 ${categoryCount}件\nシーズン ${seasonCount}件\n\nクラウドは自動上書きせず、保存方法の確認待ちにしました。`
         );
         window.location.reload();
       } catch (error) {
@@ -14010,12 +14504,18 @@ button {
       );
       if (!second) return;
 
+      createDestructiveBackupV132("delete-all-local-data");
       localStorage.removeItem(DATA_PLAYER_KEY);
       localStorage.removeItem(DATA_RECORD_KEY);
       localStorage.removeItem(DATA_CATEGORY_KEY);
       localStorage.removeItem(DATA_SEASON_KEY);
+      // 削除確認。残っていれば失敗として扱い、ユーザーへ明示する。
+      const remaining = [DATA_PLAYER_KEY, DATA_RECORD_KEY, DATA_CATEGORY_KEY, DATA_SEASON_KEY]
+        .filter(key => localStorage.getItem(key) !== null);
+      if (remaining.length) throw new Error("一部の端末データを削除できませんでした。");
       updateDataSummary();
-      setDataMessage("登録プレーヤーと対戦履歴を削除しました。");
+      refreshAfterDestructiveChangeV132("all-local-data-deleted");
+      setDataMessage("全データを削除しました。削除前バックアップは端末内に保存されています。");
       alert("全データを削除しました。");
     }
 
@@ -14046,6 +14546,10 @@ button {
     const CLOUD_AUTO_SAVE_KEY = "rotationScoreboard.cloudAutoSave.v1";
     const CLOUD_GENERATION_COUNT_KEY = "rotationScoreboard.cloudGenerationCount.v1";
     const CLOUD_PENDING_SAVE_KEY = "rotationScoreboard.cloudPendingSave.v1";
+    const CLOUD_LAST_SUCCESS_KEY = "rotationScoreboard.cloudLastSuccessfulSave.v1";
+    const CLOUD_LAST_RESOLUTION_KEY = "rotationScoreboard.cloudLastResolution.v1";
+    const CLOUD_RESOLUTION_HISTORY_KEY = "rotationScoreboard.cloudResolutionHistory.v1";
+    const CLOUD_RESOLUTION_HISTORY_RECOVERY_KEY = "rotationScoreboard.cloudResolutionHistoryRecovery.v1";
     function getGenerationRetentionCount(){ const n=Number(localStorage.getItem(CLOUD_GENERATION_COUNT_KEY)||10); return Math.min(30,Math.max(1,Number.isFinite(n)?Math.round(n):10)); }
     const DEFAULT_PROJECT_URL = "https://autdoouekkqpvskyurch.supabase.co";
     const DATA_PLAYER_KEY = "rotationScoreboard.players.v1";
@@ -14075,7 +14579,13 @@ button {
       if (reason === "match-finish") return "試合終了後の自動保存";
       if (reason === "network-error") return "通信エラー後の再保存";
       if (reason === "cloud-conflict") return "他端末との競合確認";
-      return "クラウド保存";
+      if (reason === "player-deleted") return "プレーヤー削除後の同期確認";
+      if (reason === "match-record-deleted") return "履歴削除後の同期確認";
+      if (reason === "all-local-data-deleted") return "全データ削除後の同期確認";
+      if (reason === "local-backup-restored") return "バックアップ復元後の同期確認";
+      if (reason === "before-cloud-restored") return "読込前データ復元後の同期確認";
+      if (reason === "generation-backup-restored") return "世代バックアップ復元後の同期確認";
+      return "端末変更後のクラウド確認";
     }
     function renderPendingSaveUiV119() {
       const panel = byId("cloudPendingSavePanel");
@@ -14087,8 +14597,444 @@ button {
       const requested = pending.requestedAt ? formatDate(pending.requestedAt) : "日時不明";
       const game = pending.gameSessionId ? ` / 試合ID：${String(pending.gameSessionId).slice(0,18)}` : "";
       const summary = pending.summary ? ` / ${pending.summary}` : "";
-      detail.textContent = `${formatPendingReasonV119(pending.reason)}を保留中です。保留日時：${requested}${game}${summary}。端末内データは失われていません。`;
+      const generation = pending.generationId
+        ? ` / 復元世代ID：${Number(pending.generationId)} / 世代Revision：${Number(pending.generationRevision || 0)}`
+        : "";
+      const cloudBase = pending.cloudMainRevisionAtRestore
+        ? ` / 復元時クラウドRevision：${Number(pending.cloudMainRevisionAtRestore)}`
+        : "";
+      detail.textContent = `${formatPendingReasonV119(pending.reason)}を保留中です。保留日時：${requested}${game}${summary}${generation}${cloudBase}。端末内データは失われていません。`;
     }
+    function recordCloudResolutionV139(action, details = {}) {
+      const record = {
+        action: String(action || "unknown"),
+        resolvedAt: new Date().toISOString(),
+        revision: Number(details.revision || 0),
+        payloadHash: String(details.payloadHash || ""),
+        pendingReason: String(details.pendingReason || ""),
+        source: String(details.source || "manual-resolution")
+      };
+      const history = readJson(CLOUD_RESOLUTION_HISTORY_KEY, []);
+      const safeHistory = Array.isArray(history) ? history : [];
+      const previous = safeHistory[0] || null;
+      const isDuplicate = Boolean(previous) &&
+        previous.action === record.action &&
+        Number(previous.revision || 0) === record.revision &&
+        String(previous.payloadHash || "") === record.payloadHash &&
+        String(previous.pendingReason || "") === record.pendingReason;
+      const nextHistory = isDuplicate ? [record, ...safeHistory.slice(1)] : [record, ...safeHistory];
+      verifiedLocalStorageWriteV131(CLOUD_LAST_RESOLUTION_KEY, record);
+      verifiedLocalStorageWriteV131(CLOUD_RESOLUTION_HISTORY_KEY, nextHistory.slice(0, 20));
+      renderLastCloudResolutionV139();
+      return record;
+    }
+
+    async function verifyResolvedSyncV140(expectedRevision, expectedPayloadHash) {
+      const row = await fetchCloudRow();
+      if (!row?.payload) throw new Error("同期解決後のクラウドデータを確認できません。");
+      const cloudRevision = Number(row.revision || 0);
+      const cloudHash = await payloadFingerprint(row.payload);
+      const localHash = await payloadFingerprint(buildPayload());
+      if (cloudRevision < Number(expectedRevision || 0)) throw new Error("同期解決後のRevisionが期待値に達していません。");
+      if (expectedPayloadHash && cloudHash !== expectedPayloadHash) throw new Error("同期解決後のクラウド内容が一致しません。");
+      if (localHash !== cloudHash) throw new Error("同期解決後も端末とクラウドの内容が一致しません。");
+      const syncRecord = { revision: cloudRevision, payloadHash: cloudHash, syncedAt: new Date().toISOString() };
+      verifiedLocalStorageWriteV131(CLOUD_SYNC_STATE_KEY, syncRecord);
+      verifiedLocalStorageWriteV131(CLOUD_LAST_SUCCESS_KEY, { revision: cloudRevision, payloadHash: cloudHash, savedAt: row.updated_at || new Date().toISOString(), source: "resolution-verified" });
+      clearPendingSaveV119();
+      renderCloudMetaRow(row);
+      setSyncStateUi("✅ 端末とクラウドは同じ内容です。", "synced");
+      return { row, revision: cloudRevision, payloadHash: cloudHash };
+    }
+    function renderLastCloudResolutionV139() {
+      const node = byId("cloudLastResolutionStatus");
+      if (!node) return;
+      const item = readJson(CLOUD_LAST_RESOLUTION_KEY);
+      if (!item || typeof item !== "object") { node.textContent = ""; return; }
+      const label = item.action === "local-to-cloud"
+        ? "端末データをクラウドへ保存"
+        : item.action === "cloud-to-local"
+          ? "クラウドデータを端末へ読込"
+          : item.action === "pending-dismissed"
+            ? "保留表示のみ解除"
+            : "同期方法を確定";
+      const rev = Number(item.revision || 0) ? ` / Revision ${Number(item.revision)}` : "";
+      const history = readJson(CLOUD_RESOLUTION_HISTORY_KEY, []);
+      const count = Array.isArray(history) ? history.length : 0;
+      node.textContent = `前回の同期解決：${label} / ${formatDate(item.resolvedAt)}${rev}${count ? ` / 解決履歴 ${count}件` : ""}`;
+      renderCloudResolutionHistoryV141();
+    }
+    function cloudResolutionLabelV141(action) {
+      if (action === "local-to-cloud") return "端末→クラウド";
+      if (action === "cloud-to-local") return "クラウド→端末";
+      if (action === "pending-dismissed") return "保留表示のみ解除";
+      return "同期方法を確定";
+    }
+    function normalizeCloudResolutionHistoryListV144(history) {
+      if (!Array.isArray(history)) return [];
+      const unique = new Map();
+      history.forEach(item => {
+        const normalized = normalizeCloudResolutionHistoryItemV142(item);
+        if (normalized) unique.set(resolutionHistoryIdentityV142(normalized), normalized);
+      });
+      return [...unique.values()]
+        .sort((a,b) => String(b.resolvedAt).localeCompare(String(a.resolvedAt)))
+        .slice(0,20);
+    }
+    function normalizeCloudResolutionHistoryRecoveryV145(value) {
+      if (!value || typeof value !== "object") return [];
+      const source = value.kind === "cuescore-cloud-resolution-history-recovery-set" && Array.isArray(value.generations)
+        ? value.generations
+        : value.kind === "cuescore-cloud-resolution-history-recovery"
+          ? [value]
+          : [];
+      const unique = new Map();
+      source.forEach(item => {
+        if (!item || typeof item !== "object" || !item.savedAt || Number.isNaN(Date.parse(item.savedAt)) || !Array.isArray(item.history)) return;
+        const history = normalizeCloudResolutionHistoryListV144(item.history);
+        if (item.history.length && !history.length) return;
+        const normalized = {
+          id: String(item.id || `recovery-${Date.parse(item.savedAt)}-${history.length}`).slice(0,120),
+          savedAt: new Date(item.savedAt).toISOString(),
+          reason: String(item.reason || "before-change").slice(0,80),
+          history
+        };
+        unique.set(normalized.id, normalized);
+      });
+      const MAX_RECOVERY_GENERATIONS_V146 = 5;
+      return [...unique.values()]
+        .sort((a,b) => String(b.savedAt).localeCompare(String(a.savedAt)) || String(b.id).localeCompare(String(a.id)))
+        .slice(0,MAX_RECOVERY_GENERATIONS_V146);
+    }
+    function writeCloudResolutionHistoryRecoveriesV145(generations) {
+      const normalized = normalizeCloudResolutionHistoryRecoveryV145({ kind:"cuescore-cloud-resolution-history-recovery-set", generations });
+      const documentData = {
+        kind: "cuescore-cloud-resolution-history-recovery-set",
+        schemaVersion: 2,
+        appVersion: "1.0-RC59",
+        updatedAt: new Date().toISOString(),
+        generations: normalized
+      };
+      localStorage.setItem(CLOUD_RESOLUTION_HISTORY_RECOVERY_KEY, JSON.stringify(documentData));
+      const verify = readJson(CLOUD_RESOLUTION_HISTORY_RECOVERY_KEY);
+      const verified = normalizeCloudResolutionHistoryRecoveryV145(verify);
+      if (!verify || verify.kind !== documentData.kind || JSON.stringify(verified) !== JSON.stringify(normalized)) {
+        throw new Error("同期解決履歴の復旧用データを保存できませんでした。");
+      }
+      return verified;
+    }
+    function saveCloudResolutionHistoryRecoveryV144(reason, history) {
+      const normalized = normalizeCloudResolutionHistoryListV144(history);
+      const current = normalizeCloudResolutionHistoryRecoveryV145(readJson(CLOUD_RESOLUTION_HISTORY_RECOVERY_KEY));
+      const savedAt = new Date().toISOString();
+      const snapshot = {
+        id: `recovery-${Date.now()}-${Math.random().toString(36).slice(2,8)}`,
+        savedAt,
+        reason: String(reason || "before-change").slice(0,80),
+        history: normalized
+      };
+      const latest = current[0];
+      if (latest && JSON.stringify(latest.history) === JSON.stringify(snapshot.history) && latest.reason === snapshot.reason) {
+        renderCloudResolutionHistoryRecoveryV144();
+        return latest;
+      }
+      const generations = writeCloudResolutionHistoryRecoveriesV145([snapshot, ...current]);
+      renderCloudResolutionHistoryRecoveryV144();
+      return generations[0] || snapshot;
+    }
+    function readCloudResolutionHistoryRecoveriesV145() {
+      return normalizeCloudResolutionHistoryRecoveryV145(readJson(CLOUD_RESOLUTION_HISTORY_RECOVERY_KEY));
+    }
+    function readCloudResolutionHistoryRecoveryV144() {
+      return readCloudResolutionHistoryRecoveriesV145()[0] || null;
+    }
+    let cloudResolutionRecoveryBusyV147 = false;
+    function recoveryGenerationLabelV147(index) {
+      return index === 0 ? "最新" : `${index + 1}世代前`;
+    }
+    function setRecoveryControlsBusyV147(busy, message="") {
+      cloudResolutionRecoveryBusyV147 = !!busy;
+      const restoreBtn = byId("cloudResolutionHistoryRestoreBtn");
+      const manageBtn = byId("cloudResolutionHistoryRecoveryManageBtn");
+      if (restoreBtn) {
+        restoreBtn.disabled = busy || !readCloudResolutionHistoryRecoveriesV145().length;
+        if (busy) restoreBtn.textContent = message || "処理中…";
+      }
+      if (manageBtn) {
+        manageBtn.disabled = busy || !readCloudResolutionHistoryRecoveriesV145().length;
+        if (busy) manageBtn.textContent = "処理中…";
+        else manageBtn.textContent = "復旧世代を管理";
+      }
+      if (!busy) renderCloudResolutionHistoryRecoveryV144();
+    }
+    function renderCloudResolutionHistoryRecoveryV144() {
+      const button = byId("cloudResolutionHistoryRestoreBtn");
+      if (!button) return;
+      const recoveries = readCloudResolutionHistoryRecoveriesV145();
+      const recovery = recoveries[0] || null;
+      button.disabled = cloudResolutionRecoveryBusyV147 || !recovery;
+      button.textContent = cloudResolutionRecoveryBusyV147
+        ? "処理中…"
+        : recovery ? `直前の変更を戻す (${recoveries.length})` : "直前の変更を戻す";
+      button.title = recovery
+        ? `${recoveryGenerationLabelV147(0)} / ${formatDate(recovery.savedAt)} / ${recovery.history.length}件 / ${recovery.reason} / 復旧世代 ${recoveries.length}件`
+        : "復旧できる同期解決履歴はありません";
+      const manageButton = byId("cloudResolutionHistoryRecoveryManageBtn");
+      if (manageButton) {
+        manageButton.disabled = cloudResolutionRecoveryBusyV147 || !recoveries.length;
+        manageButton.textContent = cloudResolutionRecoveryBusyV147 ? "処理中…" : `復旧世代を管理 (${recoveries.length})`;
+      }
+    }
+    function manageCloudResolutionHistoryRecoveriesV146() {
+      if (cloudResolutionRecoveryBusyV147) return;
+      const recoveries = readCloudResolutionHistoryRecoveriesV145();
+      if (!recoveries.length) { setSyncStatus("管理できる復旧世代はありません。"); return; }
+      const choices = recoveries.map((item,index) => `${index+1}：${recoveryGenerationLabelV147(index)} / ${formatDate(item.savedAt)} / ${item.history.length}件 / ${item.reason}`).join("\n");
+      const answer = prompt(`削除する復旧世代を選んでください。\n\n${choices}\n\n番号を入力（0ですべて削除／キャンセルで中止）`, "");
+      if (answer === null || String(answer).trim() === "") return;
+      const numeric = Number(answer);
+      if (!Number.isInteger(numeric) || numeric < 0 || numeric > recoveries.length) {
+        setSyncStatus("削除する復旧世代番号が正しくありません。");
+        return;
+      }
+      if (numeric === 0) {
+        if (!confirm(`復旧世代${recoveries.length}件をすべて削除しますか？\n\n同期解決履歴・プレーヤー・対戦履歴・クラウド本体は変更されません。`)) return;
+        setRecoveryControlsBusyV147(true, "削除中…");
+        try {
+          const verified = writeCloudResolutionHistoryRecoveriesV145([]);
+          if (verified.length) throw new Error("復旧世代をすべて削除できませんでした。");
+          setSyncStatus("✅ 復旧世代をすべて削除しました。", "ok");
+        } finally {
+          setRecoveryControlsBusyV147(false);
+        }
+        return;
+      }
+      const selected = recoveries[numeric - 1];
+      if (!confirm(`この復旧世代を削除しますか？\n\n${formatDate(selected.savedAt)} / ${selected.history.length}件 / ${selected.reason}`)) return;
+      const remaining = recoveries.filter(item => item.id !== selected.id);
+      setRecoveryControlsBusyV147(true, "削除中…");
+      try {
+        const verified = writeCloudResolutionHistoryRecoveriesV145(remaining);
+        if (verified.some(item => item.id === selected.id)) throw new Error("選択した復旧世代を削除できませんでした。");
+        if (verified.length !== remaining.length) throw new Error("削除後の復旧世代件数が一致しません。");
+        setSyncStatus(`✅ ${recoveryGenerationLabelV147(numeric - 1)}を削除しました。残り${verified.length}件`, "ok");
+      } finally {
+        setRecoveryControlsBusyV147(false);
+      }
+    }
+
+    function restoreCloudResolutionHistoryRecoveryV144() {
+      if (cloudResolutionRecoveryBusyV147) return;
+      const recoveries = readCloudResolutionHistoryRecoveriesV145();
+      if (!recoveries.length) { setSyncStatus("復旧できる同期解決履歴はありません。"); return; }
+      let selected = recoveries[0];
+      if (recoveries.length > 1) {
+        const choices = recoveries.map((item,index) => `${index+1}：${recoveryGenerationLabelV147(index)} / ${formatDate(item.savedAt)} / ${item.history.length}件 / ${item.reason}`).join("\n");
+        const answer = prompt(`復旧する世代を選んでください。\n\n${choices}\n\n番号を入力（キャンセルで中止）`, "1");
+        if (answer === null) return;
+        const index = Number(answer) - 1;
+        if (!Number.isInteger(index) || index < 0 || index >= recoveries.length) {
+          setSyncStatus("復旧する世代番号が正しくありません。");
+          return;
+        }
+        selected = recoveries[index];
+      }
+      const current = readCloudResolutionHistoryV141();
+      if (JSON.stringify(current) === JSON.stringify(selected.history)) {
+        setSyncStatus("選択した復旧世代は現在の履歴と同じ内容です。", "ok");
+        return;
+      }
+      if (!confirm(`同期解決履歴を選択した状態へ戻しますか？\n\n現在：${current.length}件\n復旧先：${selected.history.length}件\n保存日時：${formatDate(selected.savedAt)}\n理由：${selected.reason}\n\nプレーヤー・対戦履歴・クラウド本体は変更されません。`)) return;
+      setRecoveryControlsBusyV147(true, "復旧中…");
+      try {
+        saveCloudResolutionHistoryRecoveryV144("before-recovery-restore", current);
+        saveCloudResolutionHistoryVerifiedV142(selected.history, { skipRecovery:true });
+        const verifiedHistory = readCloudResolutionHistoryV141();
+        if (JSON.stringify(verifiedHistory) !== JSON.stringify(normalizeCloudResolutionHistoryListV144(selected.history))) {
+          throw new Error("復旧後の同期解決履歴が選択した世代と一致しません。");
+        }
+        renderLastCloudResolutionV139();
+        renderCloudResolutionHistoryV141();
+        setSyncStatus(`✅ ${recoveryGenerationLabelV147(recoveries.indexOf(selected))}へ復旧しました（${selected.history.length}件）。`, "ok");
+      } finally {
+        setRecoveryControlsBusyV147(false);
+      }
+    }
+    function readCloudResolutionHistoryV141() {
+      const raw = readJson(CLOUD_RESOLUTION_HISTORY_KEY, []);
+      if (!Array.isArray(raw)) {
+        try { saveCloudResolutionHistoryRecoveryV144("invalid-storage-format", []); } catch (_) {}
+        return [];
+      }
+      const repaired = normalizeCloudResolutionHistoryListV144(raw);
+      const rawComparable = raw.map(normalizeCloudResolutionHistoryItemV142).filter(Boolean)
+        .sort((a,b) => String(b.resolvedAt).localeCompare(String(a.resolvedAt)))
+        .slice(0,20);
+      if (JSON.stringify(rawComparable) !== JSON.stringify(repaired) || raw.length !== repaired.length) {
+        try {
+          saveCloudResolutionHistoryRecoveryV144("automatic-repair", raw);
+          localStorage.setItem(CLOUD_RESOLUTION_HISTORY_KEY, JSON.stringify(repaired));
+          if (repaired[0]) localStorage.setItem(CLOUD_LAST_RESOLUTION_KEY, JSON.stringify(repaired[0]));
+          else localStorage.removeItem(CLOUD_LAST_RESOLUTION_KEY);
+        } catch (error) {
+          console.warn("同期解決履歴の自動修復を保存できませんでした。", error);
+        }
+      }
+      return repaired;
+    }
+    function renderCloudResolutionHistoryV141() {
+      const list = byId("cloudResolutionHistoryList");
+      if (!list) return;
+      const history = readCloudResolutionHistoryV141();
+      if (!history.length) { list.innerHTML = '<div class="cloud-resolution-history-empty">同期解決履歴はまだありません。</div>'; return; }
+      list.innerHTML = history.map((item,index) => {
+        const rev = Number(item.revision || 0) ? `Revision ${Number(item.revision)}` : "Revisionなし";
+        const reason = item.pendingReason ? ` / ${formatPendingReasonV119(item.pendingReason)}` : "";
+        return `<div class="cloud-resolution-history-item"><strong>${index+1}. ${cloudResolutionLabelV141(item.action)}</strong><br>${formatDate(item.resolvedAt)} / ${rev}${reason}</div>`;
+      }).join("");
+    }
+    function normalizeCloudResolutionHistoryItemV142(item) {
+      if (!item || typeof item !== "object" || Array.isArray(item)) return null;
+      const allowedActions = new Set(["local-to-cloud", "cloud-to-local", "pending-dismissed"]);
+      const action = String(item.action || "");
+      const resolvedAt = String(item.resolvedAt || "");
+      if (!allowedActions.has(action) || !resolvedAt || Number.isNaN(Date.parse(resolvedAt))) return null;
+      const revisionRaw = Number(item.revision || 0);
+      const revision = Number.isFinite(revisionRaw) && revisionRaw >= 0 ? Math.floor(revisionRaw) : 0;
+      const payloadHash = String(item.payloadHash || "").slice(0, 256);
+      const pendingReason = String(item.pendingReason || "").slice(0, 120);
+      return { action, resolvedAt: new Date(resolvedAt).toISOString(), revision, payloadHash, pendingReason };
+    }
+    function resolutionHistoryIdentityV142(item) {
+      return [item.action, item.resolvedAt, item.revision, item.payloadHash, item.pendingReason].join("|");
+    }
+    function validateCloudResolutionHistoryImportV142(payload) {
+      if (!payload || typeof payload !== "object" || Array.isArray(payload)) throw new Error("履歴ファイルの形式が正しくありません。");
+      const isCurrent = payload.kind === "cuescore-cloud-resolution-history";
+      const isLegacy = !payload.kind && Array.isArray(payload.history) && typeof payload.appVersion === "string";
+      if (!isCurrent && !isLegacy) throw new Error("CueScoreの同期解決履歴ファイルではありません。");
+      if (!Array.isArray(payload.history)) throw new Error("履歴配列がありません。");
+      if (payload.history.length > 100) throw new Error("履歴件数が多すぎます（上限100件）。");
+      const normalized = payload.history.map(normalizeCloudResolutionHistoryItemV142).filter(Boolean);
+      if (payload.history.length && !normalized.length) throw new Error("読み込める同期解決履歴がありません。");
+      if (normalized.length !== payload.history.length) throw new Error("壊れた履歴項目が含まれています。");
+      return normalized;
+    }
+    function saveCloudResolutionHistoryVerifiedV142(history, options = {}) {
+      const normalized = normalizeCloudResolutionHistoryListV144(history);
+      const current = readCloudResolutionHistoryV141();
+      if (!options.skipRecovery && JSON.stringify(current) !== JSON.stringify(normalized)) {
+        saveCloudResolutionHistoryRecoveryV144(options.reason || "before-history-change", current);
+      }
+      localStorage.setItem(CLOUD_RESOLUTION_HISTORY_KEY, JSON.stringify(normalized));
+      const stored = readJson(CLOUD_RESOLUTION_HISTORY_KEY, null);
+      const verify = normalizeCloudResolutionHistoryListV144(stored);
+      if (!Array.isArray(stored) || JSON.stringify(verify) !== JSON.stringify(normalized)) throw new Error("同期解決履歴を端末へ保存できませんでした。");
+      if (normalized[0]) localStorage.setItem(CLOUD_LAST_RESOLUTION_KEY, JSON.stringify(normalized[0]));
+      else localStorage.removeItem(CLOUD_LAST_RESOLUTION_KEY);
+      renderCloudResolutionHistoryRecoveryV144();
+      return normalized;
+    }
+    function exportCloudResolutionHistoryV141() {
+      const history = readCloudResolutionHistoryV141();
+      if (!history.length) { setSyncStatus("書き出す同期解決履歴がありません。"); return; }
+      const documentData = {
+        kind: "cuescore-cloud-resolution-history",
+        schemaVersion: 1,
+        appVersion: "1.0-RC59",
+        exportedAt: new Date().toISOString(),
+        history
+      };
+      const blob = new Blob([JSON.stringify(documentData, null, 2)], {type:"application/json"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = `CueScore_Cloud_Resolution_History_${new Date().toISOString().replace(/[:.]/g,"-")}.json`;
+      document.body.appendChild(a); a.click(); a.remove(); window.__cueScoreObjectUrlLifecycleV149?.scheduleRelease(url, 1500);
+      setSyncStatus("✅ 同期解決履歴を書き出しました。", "ok");
+    }
+    async function importCloudResolutionHistoryFileV142(file) {
+      if (!file) return;
+      if (file.size > 1024 * 1024) throw new Error("履歴ファイルが大きすぎます（上限1MB）。");
+      let payload;
+      try { payload = JSON.parse(await file.text()); }
+      catch (_) { throw new Error("JSONファイルを読み込めませんでした。"); }
+      const imported = validateCloudResolutionHistoryImportV142(payload);
+      const current = readCloudResolutionHistoryV141();
+      const mergedMap = new Map();
+      [...current, ...imported].forEach(item => {
+        const normalized = normalizeCloudResolutionHistoryItemV142(item);
+        if (normalized) mergedMap.set(resolutionHistoryIdentityV142(normalized), normalized);
+      });
+      const merged = [...mergedMap.values()].sort((a,b) => String(b.resolvedAt).localeCompare(String(a.resolvedAt))).slice(0,20);
+      const added = Math.max(0, merged.length - current.length);
+      if (!confirm(`同期解決履歴を読み込みます。\n\n現在：${current.length}件\nファイル：${imported.length}件\n統合後：${merged.length}件\n\nプレーヤー・対戦履歴・クラウド本体は変更されません。`)) return;
+      saveCloudResolutionHistoryVerifiedV142(merged, { reason:"before-history-import" });
+      renderLastCloudResolutionV139();
+      renderCloudResolutionHistoryV141();
+      setSyncStatus(`✅ 同期解決履歴を読み込みました（追加 ${added}件／合計 ${merged.length}件）。`, "ok");
+    }
+    function clearCloudResolutionHistoryV141() {
+      const history = readCloudResolutionHistoryV141();
+      if (!history.length) { setSyncStatus("消去する同期解決履歴がありません。"); return; }
+      if (!confirm(`同期解決履歴 ${history.length}件を消去しますか？\nクラウド本体と端末データは削除されません。\n消去後は「直前の変更を戻す」で復旧できます。`)) return;
+      saveCloudResolutionHistoryRecoveryV144("before-history-clear", history);
+      localStorage.removeItem(CLOUD_RESOLUTION_HISTORY_KEY);
+      localStorage.removeItem(CLOUD_LAST_RESOLUTION_KEY);
+      const stored = readJson(CLOUD_RESOLUTION_HISTORY_KEY, null);
+      if (stored !== null || readCloudResolutionHistoryV141().length) throw new Error("同期解決履歴を消去できませんでした。");
+      renderLastCloudResolutionV139();
+      renderCloudResolutionHistoryV141();
+      renderCloudResolutionHistoryRecoveryV144();
+      setSyncStatus("✅ 同期解決履歴だけを消去しました。直前の状態へ復旧できます。", "ok");
+    }
+    async function choosePendingResolutionV139() {
+      const pending = readPendingSaveV119();
+      if (!pending) {
+        setSyncStatus("解決が必要な保留データはありません。", "ok");
+        return;
+      }
+      let row = await fetchCloudRow();
+      const local = buildPayload();
+      const stateInfo = await evaluateSyncState(row);
+      const answer = prompt(
+        `保留中の変更をどの方法で解決しますか？\n\n` +
+        `1：この端末のデータをクラウドへ保存\n` +
+        `2：クラウドのデータをこの端末へ読込\n` +
+        `3：キャンセル\n\n` +
+        `保留理由：${formatPendingReasonV119(pending.reason)}\n` +
+        `端末：${payloadSummary(local)}\n` +
+        `クラウド：${row?.payload ? payloadSummary(row.payload) : "保存データなし"}\n` +
+        `状態：${stateInfo.state}`,
+        "3"
+      );
+      if (answer === "1") {
+        let savedRow;
+        const force = Boolean(row && ["cloud-newer", "conflict"].includes(stateInfo.state));
+        if (force && !confirm("この端末のデータでクラウドを上書きします。他端末の未読込変更が失われる可能性があります。本当に続けますか？")) return;
+        try {
+          savedRow = await writeCloudPayload(local, row, { force });
+        } catch (error) {
+          if (error?.code !== "CLOUD_CONFLICT") throw error;
+          row = error.latestRow || await fetchCloudRow();
+          if (!confirm("保存直前にクラウドが更新されました。この端末のデータで強制上書きしますか？")) return;
+          savedRow = await writeCloudPayload(local, row, { force:true });
+        }
+        const result = await finishCloudSave(local, savedRow);
+        const verified = await verifyResolvedSyncV140(result.savedRevision, result.savedPayloadHash);
+        recordCloudResolutionV139("local-to-cloud", {
+          revision: verified.revision, payloadHash: verified.payloadHash,
+          pendingReason: pending.reason
+        });
+        setSyncStatus("✅ 端末データをクラウドへ保存し、再照合まで完了しました。", "ok");
+        return;
+      }
+      if (answer === "2") {
+        await cloudLoad({ resolutionSource:"pending-choice", pendingReason:pending.reason });
+        return;
+      }
+      setSyncStatus("同期方法の選択をキャンセルしました。");
+    }
+
     function updateAutoSaveUi(message = "") {
       const toggle = byId("cloudAutoSaveToggle");
       const status = byId("cloudAutoSaveStatus");
@@ -14163,6 +15109,26 @@ button {
     function payloadSummary(payload) {
       return `プレーヤー ${payload?.players?.length || 0}人／対戦履歴 ${payload?.matchRecords?.length || 0}試合／試合区分 ${payload?.matchCategories?.length || 0}件／シーズン ${payload?.matchSeasons?.length || 0}件`;
     }
+
+    // RC34: mark destructive/restored local data as pending without automatically overwriting cloud.
+    async function markLocalCloudDirtyV133(reason = "local-data-changed", meta = {}) {
+      const payload = buildPayload();
+      const payloadHash = await payloadFingerprint(payload).catch(() => "");
+      const pending = {
+        requestedAt: new Date().toISOString(),
+        reason: String(reason || "local-data-changed"),
+        payloadHash,
+        summary: payloadSummary(payload),
+        requiresManualResolution: true,
+        ...meta
+      };
+      verifiedLocalStorageWriteV131(CLOUD_PENDING_SAVE_KEY, pending);
+      renderPendingSaveUiV119();
+      updateAutoSaveUi("⚠️ 端末データが変更されました。クラウドは自動上書きせず、保存方法の確認待ちです。");
+      setSyncStateUi("端末側に未同期の変更があります。保存方法を確認してください。", "local");
+      return pending;
+    }
+    window.cueScoreMarkCloudDirtyV133 = markLocalCloudDirtyV133;
     function formatDate(value) {
       if (!value) return "なし";
       const date = new Date(value); return Number.isNaN(date.getTime()) ? "不明" : date.toLocaleString("ja-JP");
@@ -14273,64 +15239,253 @@ button {
     }
     async function createGenerationBackup(payload, revision, savedAt = new Date().toISOString()) {
       const hash = await sha256(getValidDeviceId());
+      const payloadHash = await payloadFingerprint(payload);
+      const normalizedRevision = Math.max(1, Math.trunc(Number(revision || 1)));
+
+      // RC34: do not create duplicate generations when the latest cloud history
+      // already represents the exact same payload and revision.
+      const latestRows = await restRequest(`scoreboard_backup_versions?select=id,payload,revision,created_at&device_id_hash=eq.${hash}&order=created_at.desc,id.desc&limit=1`);
+      const latest = Array.isArray(latestRows) ? latestRows[0] : null;
+      if (latest) {
+        const latestHash = await payloadFingerprint(latest.payload || {});
+        if (latestHash === payloadHash && Number(latest.revision || 0) === normalizedRevision) {
+          return { created:false, duplicate:true, id:Number(latest.id), payloadHash };
+        }
+      }
+
       const historyRow = {
         device_id_hash: hash,
         payload,
         schema_version: 2,
-        app_version: "5.3.0",
-        revision: Number(revision || 1),
+        app_version: "1.0-RC59",
+        revision: normalizedRevision,
         created_at: savedAt
       };
-      await restRequest("scoreboard_backup_versions", {
+      const insertedRows = await restRequest("scoreboard_backup_versions?select=id,payload,revision,created_at", {
         method: "POST",
-        headers: { Prefer: "return=minimal" },
+        headers: { Prefer: "return=representation" },
         body: JSON.stringify(historyRow)
       });
-      const oldRows = await restRequest(`scoreboard_backup_versions?select=id&device_id_hash=eq.${hash}&order=created_at.desc&offset=${getGenerationRetentionCount()}`);
-      const oldIds = (Array.isArray(oldRows) ? oldRows : []).map(item => Number(item.id)).filter(Number.isFinite);
-      if (oldIds.length) {
-        await restRequest(`scoreboard_backup_versions?id=in.(${oldIds.join(",")})`, { method: "DELETE", headers: { Prefer: "return=minimal" } });
+      const inserted = Array.isArray(insertedRows) ? insertedRows[0] : null;
+      if (!inserted || !Number.isFinite(Number(inserted.id))) {
+        throw new Error("世代バックアップの作成結果を確認できませんでした。");
       }
+      const insertedHash = await payloadFingerprint(inserted.payload || {});
+      if (insertedHash !== payloadHash || Number(inserted.revision || 0) !== normalizedRevision) {
+        // A mismatched generation is unsafe to offer as a restore point.
+        await restRequest(`scoreboard_backup_versions?id=eq.${Number(inserted.id)}`, {
+          method:"DELETE",
+          headers:{ Prefer:"return=minimal" }
+        }).catch(() => {});
+        throw new Error("世代バックアップの作成後照合に失敗しました。");
+      }
+
+      const retention = getGenerationRetentionCount();
+      const oldRows = await restRequest(`scoreboard_backup_versions?select=id&device_id_hash=eq.${hash}&order=created_at.desc,id.desc&offset=${retention}`);
+      const oldIds = (Array.isArray(oldRows) ? oldRows : [])
+        .map(item => Number(item.id))
+        .filter(id => Number.isFinite(id) && id !== Number(inserted.id));
+      if (oldIds.length) {
+        await restRequest(`scoreboard_backup_versions?id=in.(${oldIds.join(",")})`, {
+          method: "DELETE",
+          headers: { Prefer: "return=minimal" }
+        });
+      }
+      return { created:true, duplicate:false, id:Number(inserted.id), payloadHash };
     }
     async function fetchCloudHistory() {
       const hash = await sha256(getValidDeviceId());
-      const rows = await restRequest(`scoreboard_backup_versions?select=id,payload,schema_version,app_version,revision,created_at&device_id_hash=eq.${hash}&order=created_at.desc&limit=${getGenerationRetentionCount()}`);
+      const rows = await restRequest(`scoreboard_backup_versions?select=id,payload,schema_version,app_version,revision,created_at&device_id_hash=eq.${hash}&order=created_at.desc,id.desc&limit=${getGenerationRetentionCount()}`);
       return Array.isArray(rows) ? rows : [];
     }
+    async function applyGenerationRetentionV135() {
+      const hash = await sha256(getValidDeviceId());
+      const retention = getGenerationRetentionCount();
+      const oldRows = await restRequest(`scoreboard_backup_versions?select=id&device_id_hash=eq.${hash}&order=created_at.desc,id.desc&offset=${retention}`);
+      const ids = (Array.isArray(oldRows) ? oldRows : [])
+        .map(row => Number(row.id))
+        .filter(Number.isFinite);
+      if (ids.length) {
+        await restRequest(`scoreboard_backup_versions?id=in.(${ids.join(",")})`, {
+          method:"DELETE",
+          headers:{ Prefer:"return=minimal" }
+        });
+      }
+      const verifyRows = await restRequest(`scoreboard_backup_versions?select=id,created_at&device_id_hash=eq.${hash}&order=created_at.desc,id.desc&limit=31`);
+      const remainingList = Array.isArray(verifyRows) ? verifyRows : [];
+      const remaining = remainingList.length;
+      if (remaining > retention) throw new Error(`保持件数の反映後も${remaining}件残っています。`);
+      const deletedStillPresent = remainingList.some(row => ids.includes(Number(row.id)));
+      if (deletedStillPresent) throw new Error("保持件数で削除した世代がクラウドに残っています。");
+      await verifyGenerationOrderV137();
+      return { retention, deletedCount:ids.length, remainingCount:remaining, latestId:Number(remainingList[0]?.id || 0) || null };
+    }
+    window.cueScoreApplyGenerationRetentionV135 = applyGenerationRetentionV135;
+
+    // RC42: use a deterministic cloud order and resolve the true latest generation
+    // independently from the currently displayed retention-limited list.
+    async function fetchLatestGenerationMetaV137() {
+      const hash = await sha256(getValidDeviceId());
+      const rows = await restRequest(`scoreboard_backup_versions?select=id,revision,created_at&device_id_hash=eq.${hash}&order=created_at.desc,id.desc&limit=1`);
+      return Array.isArray(rows) ? rows[0] || null : null;
+    }
+    async function verifyGenerationOrderV137() {
+      const hash = await sha256(getValidDeviceId());
+      const rows = await restRequest(`scoreboard_backup_versions?select=id,created_at&device_id_hash=eq.${hash}&order=created_at.desc,id.desc&limit=31`);
+      const list = Array.isArray(rows) ? rows : [];
+      for (let i = 1; i < list.length; i += 1) {
+        const prevTime = Date.parse(list[i - 1]?.created_at || 0);
+        const currTime = Date.parse(list[i]?.created_at || 0);
+        const sameTimeWrongId = prevTime === currTime && Number(list[i - 1]?.id) < Number(list[i]?.id);
+        if (prevTime < currTime || sameTimeWrongId) throw new Error("世代バックアップの並び順を確認できませんでした。");
+      }
+      return list;
+    }
+
+    let cloudHistoryDeleteInFlightV136 = false;
+    async function deleteGenerationBackupV136(id, sourceButton = null, generationLabel = "選択世代") {
+      if (cloudHistoryDeleteInFlightV136 || cloudHistoryRestoreInFlightV135) return;
+      const numericId = Number(id);
+      if (!Number.isFinite(numericId)) return;
+      const list = byId("cloudHistoryList");
+      const hash = await sha256(getValidDeviceId());
+      const targetRows = await restRequest(`scoreboard_backup_versions?select=id,payload,schema_version,app_version,revision,created_at&device_id_hash=eq.${hash}&id=eq.${numericId}&limit=1`);
+      const target = Array.isArray(targetRows) ? targetRows[0] || null : null;
+      if (!target) {
+        setSyncStatus("⚠️ 削除対象の世代が見つかりません。履歴を更新してください。", "error");
+        await refreshCloudHistory();
+        return;
+      }
+      const latest = await fetchLatestGenerationMetaV137();
+      if (latest && Number(latest.id) === numericId) {
+        alert("最新世代は安全のため削除できません。次回のクラウド保存後に古い世代として削除できます。");
+        await refreshCloudHistory();
+        return;
+      }
+      const summary = target?.payload ? payloadSummary(target.payload) : "内容不明";
+      if (!confirm(`${generationLabel}をクラウドから削除します。\n\n保存日時：${formatDate(target.created_at)}\nRevision：${Number(target.revision || 1)}\n${summary}\n\nこの操作は元に戻せません。削除しますか？`)) return;
+      cloudHistoryDeleteInFlightV136 = true;
+      const rowNode = list?.querySelector(`[data-history-row-id="${numericId}"]`);
+      const originalLabel = sourceButton?.textContent || "削除";
+      rowNode?.classList.add("is-deleting");
+      if (sourceButton) { sourceButton.disabled = true; sourceButton.textContent = "削除中…"; }
+      try {
+        await restRequest(`scoreboard_backup_versions?device_id_hash=eq.${hash}&id=eq.${numericId}`, {
+          method:"DELETE",
+          headers:{ Prefer:"return=minimal" }
+        });
+        const verify = await restRequest(`scoreboard_backup_versions?select=id&device_id_hash=eq.${hash}&id=eq.${numericId}&limit=1`);
+        if (Array.isArray(verify) && verify.length) throw new Error("削除後の照合に失敗しました。");
+        await verifyGenerationOrderV137();
+        const latestAfterDelete = await fetchLatestGenerationMetaV137();
+        setSyncStatus(`✅ ${generationLabel}を削除しました。${latestAfterDelete ? ` 最新世代：Revision ${Number(latestAfterDelete.revision || 1)}` : " 世代バックアップは0件です。"}`, "ok");
+        await refreshCloudHistory();
+      } catch (error) {
+        console.error(error);
+        setSyncStatus(`❌ 世代バックアップを削除できません：${error.message}`, "error");
+      } finally {
+        cloudHistoryDeleteInFlightV136 = false;
+        rowNode?.classList.remove("is-deleting");
+        if (sourceButton?.isConnected) { sourceButton.disabled = false; sourceButton.textContent = originalLabel; }
+      }
+    }
+    let cloudHistoryRequestTokenV135 = 0;
+    let cloudHistoryRestoreInFlightV135 = false;
     function renderCloudHistory(rows) {
       const list = byId("cloudHistoryList");
       if (!list) return;
+      const retention = getGenerationRetentionCount();
       if (!rows.length) {
-        list.innerHTML = '<div class="cloud-history-empty">世代バックアップはまだありません。次回のクラウド保存から自動で作成されます。</div>';
+        list.innerHTML = `<div class="cloud-history-summary" data-order-verified="true">保持設定：最大 ${retention}件</div><div class="cloud-history-empty">世代バックアップはまだありません。次回のクラウド保存から自動で作成されます。</div>`;
         return;
       }
-      list.innerHTML = rows.map(row => `
-        <div class="cloud-history-item">
+      list.innerHTML = `<div class="cloud-history-summary" data-order-verified="true">表示 ${rows.length}件／保持設定 最大 ${retention}件</div>` + rows.map((row, index) => {
+        const payloadValid = row?.payload
+          && Array.isArray(row.payload.players)
+          && Array.isArray(row.payload.matchRecords)
+          && Array.isArray(row.payload.matchCategories)
+          && Array.isArray(row.payload.matchSeasons);
+        const schema = Number(row.schema_version || 0) || "不明";
+        const appVersion = String(row.app_version || "不明");
+        const isLatest = index === 0;
+        const ageLabel = isLatest ? "最新" : `${index + 1}世代前`;
+        return `
+        <div class="cloud-history-item ${isLatest ? "is-latest" : ""} ${payloadValid ? "" : "is-invalid"}" data-history-row-id="${Number(row.id)}">
           <div class="cloud-history-meta">
+            <div class="cloud-history-badges">
+              <span class="cloud-history-badge ${isLatest ? "latest" : ""}">${ageLabel}</span>
+              ${payloadValid ? "" : '<span class="cloud-history-badge invalid">復元不可</span>'}
+            </div>
             <strong>${formatDate(row.created_at)}</strong><br>
-            Revision ${Number(row.revision || 1)}／${payloadSummary(row.payload)}
+            Revision ${Number(row.revision || 1)}／${payloadValid ? payloadSummary(row.payload) : "⚠️ 復元できない形式"}
+            <span class="cloud-history-submeta">App ${appVersion}／Schema ${schema}／ID ${Number(row.id)}</span>
           </div>
-          <button class="cloud-history-restore" type="button" data-history-id="${Number(row.id)}">復元</button>
-        </div>`).join("");
+          <div class="cloud-history-actions">
+            <button class="cloud-history-restore" type="button" data-history-id="${Number(row.id)}" data-generation-label="${ageLabel}" ${payloadValid ? "" : "disabled"}>${isLatest ? "最新を復元" : "復元"}</button>
+            ${isLatest ? "" : `<button class="cloud-history-delete" type="button" data-delete-history-id="${Number(row.id)}" data-generation-label="${ageLabel}">削除</button>`}
+          </div>
+        </div>`;
+      }).join("");
       list.querySelectorAll("[data-history-id]").forEach(button => {
-        button.addEventListener("click", () => restoreGenerationBackup(Number(button.dataset.historyId)));
+        button.addEventListener("click", () => restoreGenerationBackup(Number(button.dataset.historyId), button, button.dataset.generationLabel || "選択世代"));
+      });
+      list.querySelectorAll("[data-delete-history-id]").forEach(button => {
+        button.addEventListener("click", () => deleteGenerationBackupV136(Number(button.dataset.deleteHistoryId), button, button.dataset.generationLabel || "選択世代"));
       });
     }
     async function refreshCloudHistory() {
+      const requestToken = ++cloudHistoryRequestTokenV135;
       const button = byId("cloudHistoryRefreshBtn");
-      if (button) button.disabled = true;
+      const list = byId("cloudHistoryList");
+      if (button) { button.disabled = true; button.textContent = "更新中…"; }
+      if (list) list.setAttribute("aria-busy", "true");
       try {
         const rows = await fetchCloudHistory();
+        if (requestToken !== cloudHistoryRequestTokenV135) return;
         renderCloudHistory(rows);
       } catch (error) {
         console.error(error);
-        const list = byId("cloudHistoryList");
+        if (requestToken !== cloudHistoryRequestTokenV135) return;
         if (list) list.innerHTML = `<div class="cloud-history-empty">世代バックアップを取得できません：${error.message}</div>`;
       } finally {
-        if (button) button.disabled = readDeviceId().length < 12;
+        if (requestToken === cloudHistoryRequestTokenV135) {
+          if (list) list.removeAttribute("aria-busy");
+          if (button) { button.disabled = readDeviceId().length < 12; button.textContent = "更新"; }
+        }
       }
     }
-    async function restoreGenerationBackup(id) {
+    async function prepareGenerationRestoreSyncBaselineV138(row, payload) {
+      // RC42: preserve the current cloud-main baseline before replacing local data
+      // with an older generation. This makes the restored local dataset an explicit
+      // local change rather than an ambiguous cloud conflict after reload.
+      let cloudMain = null;
+      try { cloudMain = await fetchCloudRow(); } catch (error) {
+        console.warn("[CueScore RC42] cloud baseline fetch before generation restore failed", error);
+      }
+      const cloudRevision = Number(cloudMain?.revision || 0);
+      const cloudPayloadHash = cloudMain?.payload ? await payloadFingerprint(cloudMain.payload) : "";
+      const restoredPayloadHash = await payloadFingerprint(payload);
+      const baseline = {
+        revision: cloudRevision,
+        payloadHash: cloudPayloadHash,
+        syncedAt: new Date().toISOString(),
+        source: "before-generation-restore",
+        restoredGenerationId: Number(row?.id || 0),
+        restoredGenerationRevision: Number(row?.revision || 0),
+        restoredGenerationCreatedAt: row?.created_at || null,
+        restoredPayloadHash
+      };
+      verifiedLocalStorageWriteV131(CLOUD_SYNC_STATE_KEY, baseline);
+      return baseline;
+    }
+
+    async function restoreGenerationBackup(id, sourceButton = null, generationLabel = "選択世代") {
+      if (cloudHistoryRestoreInFlightV135) return;
+      cloudHistoryRestoreInFlightV135 = true;
+      const rowNode = byId("cloudHistoryList")?.querySelector(`[data-history-row-id="${Number(id)}"]`);
+      const originalLabel = sourceButton?.textContent || "復元";
+      if (sourceButton) { sourceButton.disabled = true; sourceButton.textContent = "確認中…"; }
+      rowNode?.classList.add("is-restoring");
       try {
         const hash = await sha256(getValidDeviceId());
         const rows = await restRequest(`scoreboard_backup_versions?select=id,payload,revision,created_at&device_id_hash=eq.${hash}&id=eq.${id}&limit=1`);
@@ -14338,19 +15493,65 @@ button {
         const payload = row?.payload;
         if (!payload || !Array.isArray(payload.players) || !Array.isArray(payload.matchRecords) || !Array.isArray(payload.matchCategories) || !Array.isArray(payload.matchSeasons)) throw new Error("世代バックアップの形式が正しくありません。");
         const current = buildPayload();
-        const message = `この世代を端末へ復元します。\n\n保存日時：${formatDate(row.created_at)}\nRevision：${row.revision || 1}\n${payloadSummary(payload)}\n\n現在の端末データは自動退避されます。クラウド本体は上書きしません。続けますか？`;
+        const [currentHash, restoreHash] = await Promise.all([
+          payloadFingerprint(current),
+          payloadFingerprint(payload)
+        ]);
+        if (currentHash === restoreHash) {
+          alert(`${generationLabel}は現在の端末データと同じ内容です。復元は不要です。`);
+          return;
+        }
+        const message = `${generationLabel}を端末へ復元します。\n\n保存日時：${formatDate(row.created_at)}\nRevision：${row.revision || 1}\n${payloadSummary(payload)}\n\n現在の端末データは自動退避されます。クラウド本体は上書きしません。\n\nこの操作を続けますか？`;
         if (!confirm(message)) return;
-        localStorage.setItem(BEFORE_CLOUD_RESTORE_KEY, JSON.stringify({ ...current, backedUpAt:new Date().toISOString(), source:"before-generation-restore" }));
-        localStorage.setItem(DATA_PLAYER_KEY, JSON.stringify(payload.players));
-        localStorage.setItem(DATA_RECORD_KEY, JSON.stringify(payload.matchRecords));
-        localStorage.setItem(DATA_CATEGORY_KEY, JSON.stringify(payload.matchCategories));
-        localStorage.setItem(DATA_SEASON_KEY, JSON.stringify(payload.matchSeasons));
-        localStorage.removeItem(CLOUD_SYNC_STATE_KEY);
+        const recoverySnapshot = { ...current, backedUpAt:new Date().toISOString(), source:"before-generation-restore" };
+        localStorage.setItem(BEFORE_CLOUD_RESTORE_KEY, JSON.stringify(recoverySnapshot));
+        try {
+          verifiedLocalStorageWriteV131(DATA_PLAYER_KEY, payload.players);
+          verifiedLocalStorageWriteV131(DATA_RECORD_KEY, payload.matchRecords);
+          verifiedLocalStorageWriteV131(DATA_CATEGORY_KEY, payload.matchCategories);
+          verifiedLocalStorageWriteV131(DATA_SEASON_KEY, payload.matchSeasons);
+        } catch (writeError) {
+          // RC34: restore the original local dataset if any one of the four writes fails.
+          verifiedLocalStorageWriteV131(DATA_PLAYER_KEY, current.players);
+          verifiedLocalStorageWriteV131(DATA_RECORD_KEY, current.matchRecords);
+          verifiedLocalStorageWriteV131(DATA_CATEGORY_KEY, current.matchCategories);
+          verifiedLocalStorageWriteV131(DATA_SEASON_KEY, current.matchSeasons);
+          throw new Error(`端末への復元書込みに失敗したため、元のデータへ戻しました：${writeError.message}`);
+        }
+        const restored = buildPayload();
+        const [expectedHash, restoredHash] = await Promise.all([
+          payloadFingerprint(payload),
+          payloadFingerprint(restored)
+        ]);
+        if (expectedHash !== restoredHash) {
+          verifiedLocalStorageWriteV131(DATA_PLAYER_KEY, current.players);
+          verifiedLocalStorageWriteV131(DATA_RECORD_KEY, current.matchRecords);
+          verifiedLocalStorageWriteV131(DATA_CATEGORY_KEY, current.matchCategories);
+          verifiedLocalStorageWriteV131(DATA_SEASON_KEY, current.matchSeasons);
+          throw new Error("復元後のデータ照合に失敗したため、元のデータへ戻しました。");
+        }
+        const restoreBaselineV138 = await prepareGenerationRestoreSyncBaselineV138(row, payload);
+        await window.cueScoreMarkCloudDirtyV133?.("generation-backup-restored", {
+          generationId:Number(row.id),
+          generationRevision:Number(row.revision || 1),
+          generationCreatedAt:row.created_at || null,
+          cloudMainRevisionAtRestore:Number(restoreBaselineV138.revision || 0),
+          cloudMainPayloadHashAtRestore:String(restoreBaselineV138.payloadHash || ""),
+          restoredPayloadHash:String(restoreBaselineV138.restoredPayloadHash || ""),
+          requiresManualResolution:true
+        });
         alert(`世代バックアップを端末へ復元しました。\n${payloadSummary(payload)}\n\n必要なら内容確認後に「クラウドへ保存」を押してください。`);
         window.location.reload();
       } catch (error) {
         console.error(error);
         setSyncStatus(`❌ 世代バックアップを復元できません：${error.message}`, "error");
+      } finally {
+        cloudHistoryRestoreInFlightV135 = false;
+        rowNode?.classList.remove("is-restoring");
+        if (sourceButton?.isConnected) {
+          sourceButton.disabled = false;
+          sourceButton.textContent = originalLabel;
+        }
       }
     }
 
@@ -14358,19 +15559,65 @@ button {
       const local = buildPayload();
       const localHash = await payloadFingerprint(local);
       const syncState = readSyncState();
+      const lastSuccess = readJson(CLOUD_LAST_SUCCESS_KEY, {});
       if (!row) {
         setSyncStateUi("端末のデータだけがあります。最初に『クラウドへ保存』してください。", "local-newer");
         return { local, localHash, state:"local-only" };
       }
       const cloudHash = await payloadFingerprint(row.payload);
       const sameNow = localHash === cloudHash;
-      const cloudChanged = Number(row.revision || 0) > Number(syncState.revision || 0);
+      const rowRevision = Number(row.revision || 0);
+      const syncRevision = Number(syncState.revision || 0);
+      const lastSuccessRevision = Number(lastSuccess.revision || 0);
+      const lastSuccessHash = String(lastSuccess.payloadHash || "");
+
+      // 自端末が直前に成功させた保存を、他端末更新として誤判定しない。
+      const cloudMatchesLastSuccess = Boolean(lastSuccessHash)
+        && rowRevision === lastSuccessRevision
+        && cloudHash === lastSuccessHash;
+      const cloudChanged = rowRevision > syncRevision && !cloudMatchesLastSuccess;
       const localChanged = Boolean(syncState.payloadHash) && localHash !== syncState.payloadHash;
-      if (sameNow) setSyncStateUi("✅ 端末とクラウドは同じ内容です。", "synced");
-      else if (cloudChanged && localChanged) setSyncStateUi("⚠️ 端末とクラウドの両方が前回同期後に変わっています。保存・読込を慎重に選んでください。", "conflict");
-      else if (cloudChanged) setSyncStateUi("☁️ クラウドの方が新しい可能性があります。『クラウドから読込』を確認してください。", "cloud-newer");
-      else setSyncStateUi("📱 この端末の方が新しい可能性があります。『クラウドへ保存』を確認してください。", "local-newer");
-      return { local, localHash, cloudHash, cloudChanged, localChanged, sameNow, state: sameNow ? "synced" : cloudChanged && localChanged ? "conflict" : cloudChanged ? "cloud-newer" : "local-newer" };
+
+      let state;
+      if (sameNow) {
+        state = "synced";
+        // 同一内容を確認できた時点で基準を自己修復する。
+        localStorage.setItem(CLOUD_SYNC_STATE_KEY, JSON.stringify({
+          revision: rowRevision,
+          payloadHash: cloudHash,
+          syncedAt: new Date().toISOString()
+        }));
+        setSyncStateUi("✅ 端末とクラウドは同じ内容です。", "synced");
+      } else if (cloudMatchesLastSuccess) {
+        // クラウド更新は自分の保存。保存後に端末側だけ追加変更があれば競合ではなく端末が新しい。
+        state = "local-newer";
+        setSyncStateUi("📱 クラウド保存後に端末データが更新されています。必要なときに『クラウドへ保存』してください。", "local-newer");
+      } else if (cloudChanged && localChanged) {
+        state = "conflict";
+        setSyncStateUi("⚠️ 端末とクラウドの両方が前回同期後に変わっています。保存・読込を慎重に選んでください。", "conflict");
+      } else if (cloudChanged) {
+        state = "cloud-newer";
+        setSyncStateUi("☁️ クラウドの方が新しい可能性があります。『クラウドから読込』を確認してください。", "cloud-newer");
+      } else {
+        state = "local-newer";
+        setSyncStateUi("📱 この端末の方が新しい可能性があります。『クラウドへ保存』を確認してください。", "local-newer");
+      }
+
+      // RC23: 保留時点の内容がすでにクラウドへ到達している場合、
+      // 古い保留マーカーだけを自動解除する。現在の端末データは変更しない。
+      const pending = readPendingSaveV119();
+      const pendingHash = String(pending?.payloadHash || "");
+      const pendingReachedCloud = Boolean(pending) && (
+        (pendingHash && pendingHash === cloudHash) ||
+        (!pendingHash && state === "synced")
+      );
+      if (pendingReachedCloud) {
+        clearPendingSaveV119();
+        updateAutoSaveUi(state === "synced"
+          ? "✅ 保留していたクラウド保存は完了しています。"
+          : "✅ 保留していた内容はクラウドへ保存済みです。端末側に新しい変更があります。");
+      }
+      return { local, localHash, cloudHash, cloudChanged, localChanged, sameNow, cloudMatchesLastSuccess, pendingReachedCloud, state };
     }
     function renderCloudMetaRow(row) {
       if (!row) {
@@ -14457,7 +15704,7 @@ button {
         device_id_hash: hash,
         payload,
         schema_version: 2,
-        app_version: "5.3.0",
+        app_version: "1.0-RC59",
         revision: expectedRevision + 1,
         updated_at: new Date().toISOString()
       };
@@ -14521,20 +15768,36 @@ button {
     async function finishCloudSave(payload, savedRow) {
       const savedRevision = Number(savedRow?.revision || 1);
       const savedPayloadHash = await payloadFingerprint(payload);
-      localStorage.setItem(CLOUD_SYNC_STATE_KEY, JSON.stringify({
+      const savedAt = savedRow?.updated_at || new Date().toISOString();
+      const syncRecord = {
         revision: savedRevision,
         payloadHash: savedPayloadHash,
         syncedAt: new Date().toISOString()
+      };
+
+      // クラウド本体の保存成功を、世代バックアップ等の付随処理より先に確定する。
+      localStorage.setItem(CLOUD_SYNC_STATE_KEY, JSON.stringify(syncRecord));
+      localStorage.setItem(CLOUD_LAST_SUCCESS_KEY, JSON.stringify({
+        revision: savedRevision,
+        payloadHash: savedPayloadHash,
+        savedAt
       }));
-      await createGenerationBackup(payload, savedRevision, savedRow?.updated_at || new Date().toISOString());
-      await refreshCloudHistory();
       renderCloudMetaRow(savedRow);
       setSyncStateUi("✅ 端末とクラウドは同じ内容です。", "synced");
-      await refreshCloudMeta({ revision: savedRevision, payloadHash: savedPayloadHash });
       clearPendingSaveV119();
+
+      // 世代バックアップ失敗はクラウド本体保存を失敗扱いにしない。
+      try {
+        await createGenerationBackup(payload, savedRevision, savedAt);
+        await refreshCloudHistory();
+      } catch (backupError) {
+        console.error("Generation backup failed after cloud save", backupError);
+        setSyncStatus("⚠️ クラウド本体は保存済みですが、世代バックアップの作成に失敗しました。", "error");
+      }
+
+      await refreshCloudMeta({ revision: savedRevision, payloadHash: savedPayloadHash });
       return { savedRevision, savedPayloadHash };
     }
-
     async function cloudSave() {
       const button = byId("cloudSaveBtn");
       button.disabled = true;
@@ -14656,7 +15919,7 @@ button {
     }
     window.rotationCloudAutoSaveAfterMatch = cloudAutoSaveAfterMatch;
 
-    async function cloudLoad() {
+    async function cloudLoad(options = {}) {
       const button = byId("cloudLoadBtn"); button.disabled = true; setSyncStatus("クラウドデータを確認中…");
       try {
         const row = await fetchCloudRow(); if (!row?.payload) throw new Error("クラウド保存データがありません。");
@@ -14665,12 +15928,21 @@ button {
         const stateInfo = await evaluateSyncState(row);
         if (!confirm(safetyMessage("load", local, row, stateInfo) + "\n\n現在の端末データは自動退避されます。")) return setSyncStatus("読込をキャンセルしました。");
         localStorage.setItem(BEFORE_CLOUD_RESTORE_KEY, JSON.stringify({ ...local, backedUpAt:new Date().toISOString(), source:"before-cloud-restore" }));
-        localStorage.setItem(DATA_PLAYER_KEY, JSON.stringify(payload.players));
-        localStorage.setItem(DATA_RECORD_KEY, JSON.stringify(payload.matchRecords));
-        localStorage.setItem(DATA_CATEGORY_KEY, JSON.stringify(payload.matchCategories));
-        localStorage.setItem(DATA_SEASON_KEY, JSON.stringify(payload.matchSeasons));
-        localStorage.setItem(CLOUD_SYNC_STATE_KEY, JSON.stringify({ revision:Number(row.revision || 1), payloadHash:await payloadFingerprint(payload), syncedAt:new Date().toISOString() }));
+        verifiedLocalStorageWriteV131(DATA_PLAYER_KEY, payload.players);
+        verifiedLocalStorageWriteV131(DATA_RECORD_KEY, payload.matchRecords);
+        verifiedLocalStorageWriteV131(DATA_CATEGORY_KEY, payload.matchCategories);
+        verifiedLocalStorageWriteV131(DATA_SEASON_KEY, payload.matchSeasons);
+        const loadedHashV139 = await payloadFingerprint(payload);
+        const loadedLocalHashV140 = await payloadFingerprint(buildPayload());
+        if (loadedLocalHashV140 !== loadedHashV139) throw new Error("クラウド読込後の端末データ照合に失敗しました。");
+        const loadedRevisionV139 = Number(row.revision || 1);
+        verifiedLocalStorageWriteV131(CLOUD_SYNC_STATE_KEY, { revision:loadedRevisionV139, payloadHash:loadedHashV139, syncedAt:new Date().toISOString() });
+        verifiedLocalStorageWriteV131(CLOUD_LAST_SUCCESS_KEY, { revision:loadedRevisionV139, payloadHash:loadedHashV139, savedAt:row.updated_at || new Date().toISOString(), source:"cloud-load" });
         clearPendingSaveV119();
+        recordCloudResolutionV139("cloud-to-local", {
+          revision: loadedRevisionV139, payloadHash: loadedHashV139,
+          pendingReason: options.pendingReason || "", source: options.resolutionSource || "manual-load"
+        });
         alert(`クラウドから復元しました。\n${payloadSummary(payload)}`); window.location.reload();
       } catch (error) { console.error(error); setSyncStatus(`❌ 読み込めません：${error.message}`, "error"); }
       finally { updateDeviceUi(); }
@@ -14685,7 +15957,8 @@ button {
       localStorage.setItem(DATA_CATEGORY_KEY, JSON.stringify(backup.matchCategories));
       localStorage.setItem(DATA_SEASON_KEY, JSON.stringify(backup.matchSeasons));
       localStorage.removeItem(CLOUD_SYNC_STATE_KEY);
-      alert("読込前の端末データへ戻しました。"); window.location.reload();
+      await markLocalCloudDirtyV133("before-cloud-restored", { backedUpAt: backup.backedUpAt || null });
+      alert("読込前の端末データへ戻しました。クラウドは自動上書きせず、保存方法の確認待ちにしました。"); window.location.reload();
     }
 
     let cloudReconcileInFlightV118 = null;
@@ -14703,18 +15976,26 @@ button {
           const row = await fetchCloudRow();
           const stateInfo = await evaluateSyncState(row);
           if (row) renderCloudMetaRow(row);
-          const hasPending = Boolean(localStorage.getItem(CLOUD_PENDING_SAVE_KEY));
+          const pending = readPendingSaveV119();
+          const hasPending = Boolean(pending);
+          const canAutoRetryPendingV133 = Boolean(
+            pending && !pending.requiresManualResolution &&
+            ["match-finish", "network-error"].includes(String(pending.reason || ""))
+          );
           renderPendingSaveUiV119();
-          if (retryPending && hasPending && (stateInfo.state === "local-newer" || stateInfo.state === "synced")) {
+          if (retryPending && hasPending && canAutoRetryPendingV133 && (stateInfo.state === "local-newer" || stateInfo.state === "synced")) {
             await cloudAutoSaveAfterMatch();
             return { ...stateInfo, retried: true };
+          }
+          if (hasPending && !canAutoRetryPendingV133 && (stateInfo.state === "local-newer" || stateInfo.state === "synced")) {
+            updateAutoSaveUi("⚠️ 削除・復元後の変更があります。自動上書きせず、保存方法の確認を待っています。");
           }
           if (hasPending && (stateInfo.state === "cloud-newer" || stateInfo.state === "conflict")) {
             updateAutoSaveUi("⚠️ 保留中の自動保存がありますが、クラウド更新を検出したため再試行していません。");
           }
           return stateInfo;
         } catch (error) {
-          console.warn("[CueScore RC19] cloud resume reconciliation failed", error);
+          console.warn("[CueScore RC42] cloud resume reconciliation failed", error);
           return { state: "error", error };
         } finally {
           updateDeviceUi();
@@ -14750,11 +16031,15 @@ button {
     });
     byId("cloudPendingResolveBtn")?.addEventListener("click", async event => {
       const button = event.currentTarget; button.disabled = true;
-      try { await cloudSave(); } finally { button.disabled = false; renderPendingSaveUiV119(); }
+      try { await choosePendingResolutionV139(); }
+      catch (error) { console.error(error); setSyncStatus(`❌ 同期方法を確定できません：${error.message}`, "error"); }
+      finally { button.disabled = false; renderPendingSaveUiV119(); renderLastCloudResolutionV139(); }
     });
     byId("cloudPendingDiscardBtn")?.addEventListener("click", () => {
       if (!confirm("保留表示だけを解除します。端末内データは削除されません。クラウドへ未保存の変更が残る可能性があります。続けますか？")) return;
+      const pendingReasonV139 = readPendingSaveV119()?.reason || "";
       clearPendingSaveV119();
+      recordCloudResolutionV139("pending-dismissed", { pendingReason: pendingReasonV139 });
       updateAutoSaveUi("保留表示を解除しました。必要に応じて手動でクラウド保存してください。");
       setSyncStatus("保留マーカーを解除しました。端末データは保持されています。", "ok");
     });
@@ -14764,10 +16049,34 @@ button {
     });
     updateAutoSaveUi();
     renderPendingSaveUiV119();
+    byId("cloudResolutionHistoryExportBtn")?.addEventListener("click", exportCloudResolutionHistoryV141);
+    byId("cloudResolutionHistoryImportBtn")?.addEventListener("click", () => {
+      const input = byId("cloudResolutionHistoryFileInput");
+      if (!input) return;
+      input.value = "";
+      input.click();
+    });
+    byId("cloudResolutionHistoryFileInput")?.addEventListener("change", async event => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      try { await importCloudResolutionHistoryFileV142(file); }
+      catch (error) { console.error(error); setSyncStatus(`❌ 同期解決履歴を読み込めません：${error.message}`, "error"); }
+      finally { event.target.value = ""; }
+    });
+    byId("cloudResolutionHistoryRestoreBtn")?.addEventListener("click", restoreCloudResolutionHistoryRecoveryV144);
+    byId("cloudResolutionHistoryRecoveryManageBtn")?.addEventListener("click", () => {
+      try { manageCloudResolutionHistoryRecoveriesV146(); }
+      catch (error) { console.error(error); setSyncStatus(`復旧世代を管理できませんでした：${error?.message || error}`, "error"); }
+    });
+    byId("cloudResolutionHistoryClearBtn")?.addEventListener("click", clearCloudResolutionHistoryV141);
+    renderLastCloudResolutionV139();
+    renderCloudResolutionHistoryV141();
+    renderCloudResolutionHistoryRecoveryV144();
     loadSavedConfig();
   })();
 
 
+  // CueScore v1.0 RC59: sync-resolution recovery selection, locking and verification
   // CueScore v1.0 RC15: history/filter/CSV/backup integrity hardening
   // Rotation Scoreboard Ver.8.3.1: enhanced common statistics filter engine
   (() => {
@@ -14889,7 +16198,10 @@ button {
       select.innerHTML = choices.map((choice,index) => `<option value="${index}">${escapeRecordText(choice.name)}</option>`).join("");
       select.value = String(selectedIndex);
       const choice = choices[selectedIndex];
-      localStorage.setItem(DASHBOARD_PLAYER_KEY, `${choice.id}::${choice.name}`);
+      const dashboardChoiceKeyV152 = `${choice.id}::${choice.name}`;
+      if (localStorage.getItem(DASHBOARD_PLAYER_KEY) !== dashboardChoiceKeyV152) {
+        localStorage.setItem(DASHBOARD_PLAYER_KEY, dashboardChoiceKeyV152);
+      }
 
       const playerRecords = records.map(record => ({ record, side: playerSide(record, choice.id, choice.name) })).filter(item => item.side);
       const games = playerRecords.length;
@@ -15177,18 +16489,7 @@ button {
     window.renderVsAnalysisV52=()=>{if(!screen.classList.contains('hidden'))render();};
   })();
 
-  // iPhone Ver.2.1: reflect the visual viewport height while the software keyboard is open.
-  (() => {
-    const root = document.documentElement;
-    const updateVisualViewport = () => {
-      const height = window.visualViewport?.height || window.innerHeight;
-      root.style.setProperty("--visual-viewport-height", `${Math.round(height)}px`);
-    };
-    updateVisualViewport();
-    window.visualViewport?.addEventListener("resize", updateVisualViewport);
-    window.visualViewport?.addEventListener("scroll", updateVisualViewport);
-    window.addEventListener("orientationchange", () => setTimeout(updateVisualViewport, 150));
-  })();
+  // RC59: Visual Viewport監視は下部の統合ライフサイクル管理へ一本化。
 
 
   // Rotation Scoreboard Ver.5.5.3: Settings screen
@@ -15206,15 +16507,37 @@ button {
     function maskedDeviceId(){const id=(localStorage.getItem(DEVICE_ID_KEY)||'').trim();if(!id)return '未設定';if(id.length<=8)return '••••••••';return `${id.slice(0,4)}••••••••${id.slice(-4)}`}
     function retention(){const n=Number(localStorage.getItem(GEN_KEY)||10);return Math.min(30,Math.max(1,Number.isFinite(n)?Math.round(n):10))}
     function refresh(){el('settingsDeviceIdValue').textContent=maskedDeviceId();el('settingsAutoSaveToggle').checked=localStorage.getItem(AUTO_KEY)!=='false';const st=safeJson(SYNC_KEY,{});el('settingsRevisionValue').textContent=Number(st.revision)>0?String(Number(st.revision)):'未確認';el('settingsGenerationCount').value=retention()}
-    function open(){APP.className='app settings-mode';screen.classList.remove('hidden');screen.setAttribute('aria-hidden','false');refresh();window.scrollTo(0,0)}
-    function close(){APP.className='app';screen.classList.add('hidden');screen.setAttribute('aria-hidden','true');window.renderHomeDashboardV50?.()}
+    function open(){
+      // RC32: 設定画面以外の状態クラスだけを解除し、PWA/ネットワーク等の補助クラスは保持する。
+      if (typeof clearScreenModeClassesV127 === 'function') clearScreenModeClassesV127();
+      else APP.classList.remove('player-info-mode','pro-game-mode','records-mode','rankings-mode','vs-analysis-mode','statistics-filter-mode');
+      APP.classList.add('settings-mode');
+      screen.classList.remove('hidden');
+      screen.setAttribute('aria-hidden','false');
+      refresh();
+      const content=screen.querySelector('.settings-content');
+      screen.scrollTop=0;
+      if(content) content.scrollTop=0;
+      requestAnimationFrame(()=>{screen.scrollTop=0;if(content)content.scrollTop=0;});
+    }
+    function close(){
+      APP.classList.remove('settings-mode');
+      screen.classList.add('hidden');
+      screen.setAttribute('aria-hidden','true');
+      const content=screen.querySelector('.settings-content');
+      if(content) content.scrollTop=0;
+      window.renderHomeDashboardV50?.();
+      window.renderPlayerRankingsV51?.();
+      window.renderVsAnalysisV52?.();
+      window.scrollTo(0,0);
+    }
     let cloudDetailsReturnToSettings=false;
     el('settingsBtn')?.addEventListener('click',open);el('settingsBackBtn')?.addEventListener('click',close);
     el('settingsCopyDeviceIdBtn')?.addEventListener('click',async()=>{const id=(localStorage.getItem(DEVICE_ID_KEY)||'').trim();const st=el('settingsCloudStatus');if(!id){st.textContent='Device IDが未設定です。';st.classList.add('error');return}try{await navigator.clipboard.writeText(id);st.textContent='Device IDをコピーしました。';st.classList.remove('error')}catch(_){st.textContent='コピーできませんでした。クラウド詳細からコピーしてください。';st.classList.add('error')}});
     el('settingsOpenCloudBtn')?.addEventListener('click',()=>{cloudDetailsReturnToSettings=true;close();document.getElementById('dataManagementBtn')?.click();setTimeout(()=>document.querySelector('.cloud-settings-card')?.scrollIntoView({behavior:'smooth',block:'start'}),80)});
     el('dataManagementBackBtn')?.addEventListener('click',event=>{if(!cloudDetailsReturnToSettings)return;event.preventDefault();event.stopImmediatePropagation();const dataScreen=el('dataManagementScreen');dataScreen?.classList.add('hidden');dataScreen?.setAttribute('aria-hidden','true');cloudDetailsReturnToSettings=false;open();},true);
     el('settingsAutoSaveToggle')?.addEventListener('change',e=>{localStorage.setItem(AUTO_KEY,e.target.checked?'true':'false');const main=document.getElementById('cloudAutoSaveToggle');if(main)main.checked=e.target.checked;el('settingsCloudStatus').textContent=e.target.checked?'自動クラウド保存をONにしました。':'自動クラウド保存をOFFにしました。'});
-    el('settingsSaveGenerationBtn')?.addEventListener('click',()=>{const n=Math.round(Number(el('settingsGenerationCount').value));const st=el('settingsCloudStatus');if(!Number.isFinite(n)||n<1||n>30){st.textContent='保持件数は1〜30で入力してください。';st.classList.add('error');return}localStorage.setItem(GEN_KEY,String(n));st.textContent=`世代バックアップの保持件数を${n}件に設定しました。`;st.classList.remove('error')});
+    el('settingsSaveGenerationBtn')?.addEventListener('click',async event=>{const button=event.currentTarget;const input=el('settingsGenerationCount');const n=Math.round(Number(input.value));const st=el('settingsCloudStatus');if(!Number.isFinite(n)||n<1||n>30){st.textContent='保持件数は1〜30の整数で入力してください。';st.classList.add('error');input.focus();return}input.value=String(n);localStorage.setItem(GEN_KEY,String(n));input.blur();button.disabled=true;button.textContent='反映中…';st.textContent=`保持件数を${n}件に設定しました。クラウド履歴へ反映しています…`;st.classList.remove('error');try{if((localStorage.getItem(DEVICE_ID_KEY)||'').trim().length>=12&&typeof window.cueScoreApplyGenerationRetentionV135==='function'){const result=await window.cueScoreApplyGenerationRetentionV135();await document.getElementById('cloudHistoryRefreshBtn')?.click();st.textContent=`保持件数を${n}件に設定し、古い世代を${result.deletedCount||0}件整理しました。`}else{st.textContent=`保持件数を${n}件に設定しました。Device ID設定後の次回クラウド保存から反映されます。`}}catch(error){console.error(error);st.textContent=`保持件数は${n}件に保存しましたが、クラウド履歴の整理に失敗しました：${error.message}`;st.classList.add('error')}finally{button.disabled=false;button.textContent='保持件数を保存'}});
     el('settingsResetFilterBtn')?.addEventListener('click',()=>{localStorage.setItem(FILTER_KEY,JSON.stringify({period:'all',from:'',to:'',category:'',season:'',player:'',opponent:'',recordingMode:'',outcome:'',tag:''}));window.renderHomeDashboardV50?.();window.renderPlayerRankingsV51?.();window.renderVsAnalysisV52?.();el('settingsGeneralStatus').textContent='統計フィルターを全解除しました。'});
     el('settingsResetPreferencesBtn')?.addEventListener('click',()=>{if(!confirm(`端末内の表示・選択設定を初期状態へ戻します。\n\n登録プレーヤー、対戦履歴、Device ID、クラウド接続設定は削除しません。\n続けますか？`))return;prefKeys.forEach(k=>localStorage.removeItem(k));localStorage.setItem(GEN_KEY,'10');refresh();window.renderHomeDashboardV50?.();window.renderPlayerRankingsV51?.();window.renderVsAnalysisV52?.();el('settingsGeneralStatus').textContent='端末内設定を初期状態へ戻しました。'});
     window.openSettingsV55=open;
@@ -15258,9 +16581,25 @@ button {
     });
   })();
 
-  // CueScore RC19: PWA lifecycle, visible pending-sync recovery and conflict resolution.
+  // CueScore RC59: PWA lifecycle, cache-version verification and recovery.
   (() => {
-    const PWA_VERSION = "1.0-RC19";
+    if (window.__cueScorePwaLifecycleV150) return;
+    window.__cueScorePwaLifecycleV150 = true;
+    const PWA_VERSION = "1.0-RC59";
+    const managedTimersV150 = new Set();
+    const setManagedTimeoutV150 = (callback, delay) => {
+      const id = window.setTimeout(() => {
+        managedTimersV150.delete(id);
+        callback();
+      }, delay);
+      managedTimersV150.add(id);
+      return id;
+    };
+    const clearManagedTimeoutV150 = id => {
+      if (!id) return;
+      window.clearTimeout(id);
+      managedTimersV150.delete(id);
+    };
     const canUseServiceWorker =
       "serviceWorker" in navigator &&
       window.isSecureContext &&
@@ -15283,7 +16622,7 @@ button {
     window.addEventListener("online", () => {
       updateNetworkState();
       announce("オンラインへ復帰しました", "クラウド状態を確認しています。");
-      window.setTimeout(() => window.cueScoreCloudReconcileV118?.({ retryPending: true }), 250);
+      setManagedTimeoutV150(() => window.cueScoreCloudReconcileV118?.({ retryPending: true }), 250);
     });
 
     window.addEventListener("pageshow", event => {
@@ -15293,14 +16632,14 @@ button {
         window.renderVsAnalysisV52?.();
         window.dispatchEvent(new Event("resize"));
       }
-      if (navigator.onLine) window.setTimeout(() => window.cueScoreCloudReconcileV118?.({ retryPending: true }), 300);
+      if (navigator.onLine) setManagedTimeoutV150(() => window.cueScoreCloudReconcileV118?.({ retryPending: true }), 300);
     });
 
     let visibilityReconcileTimerV118 = 0;
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState !== "visible" || !navigator.onLine) return;
-      window.clearTimeout(visibilityReconcileTimerV118);
-      visibilityReconcileTimerV118 = window.setTimeout(() => {
+      clearManagedTimeoutV150(visibilityReconcileTimerV118);
+      visibilityReconcileTimerV118 = setManagedTimeoutV150(() => {
         window.cueScoreCloudReconcileV118?.({ retryPending: true });
       }, 500);
     });
@@ -15313,9 +16652,28 @@ button {
         const persisted = await navigator.storage.persisted?.();
         if (!persisted) await navigator.storage.persist();
       } catch (error) {
-        console.warn("[CueScore RC19] storage persistence request failed", error);
+        console.warn("[CueScore RC42] storage persistence request failed", error);
       }
     }, { once: true, capture: true });
+
+    const queryWorkerVersionV124 = async registration => {
+      const worker = registration.active || navigator.serviceWorker.controller;
+      if (!worker) return null;
+      return new Promise(resolve => {
+        const channel = new MessageChannel();
+        const timeout = setManagedTimeoutV150(() => resolve(null), 1500);
+        channel.port1.onmessage = event => {
+          clearManagedTimeoutV150(timeout);
+          resolve(event.data?.version || null);
+        };
+        try {
+          worker.postMessage({ type: "GET_VERSION" }, [channel.port2]);
+        } catch (_) {
+          clearManagedTimeoutV150(timeout);
+          resolve(null);
+        }
+      });
+    };
 
     const showUpdateBanner = registration => {
       if (document.getElementById("cueScoreUpdateBanner")) return;
@@ -15339,7 +16697,7 @@ button {
         }
         const waiting = registration.waiting;
         if (!waiting) {
-          registration.update().catch(error => console.warn("[CueScore RC19] update check failed", error));
+          registration.update().catch(error => console.warn("[CueScore RC29] update check failed", error));
           announce("更新を確認しています", "新しいバージョンの準備後に、もう一度更新してください。");
           button && (button.disabled = false);
           button && (button.textContent = "更新");
@@ -15347,9 +16705,10 @@ button {
         }
         waiting.postMessage({ type: "SKIP_WAITING" });
         // controllerchangeで新しいWorkerへ切り替わった後にだけ再読込する。
-        window.setTimeout(() => {
+        clearManagedTimeoutV150(updateFallbackTimerV150);
+        updateFallbackTimerV150 = setManagedTimeoutV150(() => {
           if (!refreshing) {
-            console.warn("[CueScore RC19] controllerchange timeout; reloading as fallback");
+            console.warn("[CueScore RC59] controllerchange timeout; reloading as fallback");
             location.reload();
           }
         }, 5000);
@@ -15363,17 +16722,38 @@ button {
     }
 
     let refreshing = false;
+    let updateFallbackTimerV150 = 0;
     navigator.serviceWorker.addEventListener("controllerchange", () => {
       if (refreshing) return;
       refreshing = true;
+      clearManagedTimeoutV150(updateFallbackTimerV150);
+      updateFallbackTimerV150 = 0;
       location.reload();
+    });
+
+    navigator.serviceWorker.addEventListener("message", event => {
+      if (event.data?.type !== "CUESCORE_VERSION_READY") return;
+      if (event.data.version && event.data.version !== PWA_VERSION) {
+        navigator.serviceWorker.getRegistration("./").then(registration => {
+          if (registration) showUpdateBanner(registration);
+        });
+      }
     });
 
     window.addEventListener("load", async () => {
       try {
         const registration = await navigator.serviceWorker.register("./sw.js", { scope: "./", updateViaCache: "none" });
-        await registration.update().catch(error => console.warn("[CueScore RC19] initial update check failed", error));
-        if (registration.waiting && navigator.serviceWorker.controller) showUpdateBanner(registration);
+        await registration.update().catch(error => console.warn("[CueScore RC29] initial update check failed", error));
+        if (registration.waiting && navigator.serviceWorker.controller) {
+          showUpdateBanner(registration);
+        } else {
+          const workerVersion = await queryWorkerVersionV124(registration);
+          if (workerVersion && workerVersion !== PWA_VERSION) {
+            console.warn(`[CueScore ${PWA_VERSION}] Service Worker version mismatch: ${workerVersion}`);
+            await registration.update().catch(() => {});
+            if (registration.waiting) showUpdateBanner(registration);
+          }
+        }
         registration.addEventListener("updatefound", () => {
           const worker = registration.installing;
           if (!worker) return;
@@ -15382,11 +16762,1181 @@ button {
           });
         });
       } catch (error) {
-        console.error("[CueScore RC19] Service Worker registration failed", error);
+        console.error("[CueScore RC29] Service Worker registration failed", error);
       }
     });
+
+    window.addEventListener("pagehide", event => {
+      if (event.persisted) return;
+      clearManagedTimeoutV150(visibilityReconcileTimerV118);
+      clearManagedTimeoutV150(updateFallbackTimerV150);
+      managedTimersV150.forEach(id => window.clearTimeout(id));
+      managedTimersV150.clear();
+    }, { once: true });
   })();
 
+
+// CueScore Rotation Scoreboard v1.0 RC60
+// RC42: cloud history list concurrency, restore lock, metadata display, immediate retention enforcement.
+</script>
+
+<!-- RC22: cloud conflict reconciliation and data-management header fix -->
+<!-- RC24: PWA cache version verification and canonical offline entry -->
+
+<script>
+/* CueScore RC59: iPhone resume, keyboard, modal and interrupted-action recovery */
+(() => {
+  if (window.__cueScoreResumeLifecycleV148) return;
+  window.__cueScoreResumeLifecycleV148 = true;
+  const lifecycleAbortV150 = new AbortController();
+  const lifecycleSignalV150 = lifecycleAbortV150.signal;
+  const lifecycleTimersV150 = new Set();
+  const setLifecycleTimeoutV150 = (callback, delay) => {
+    const id = window.setTimeout(() => {
+      lifecycleTimersV150.delete(id);
+      callback();
+    }, delay);
+    lifecycleTimersV150.add(id);
+    return id;
+  };
+  const clearLifecycleTimersV150 = () => {
+    lifecycleTimersV150.forEach(id => window.clearTimeout(id));
+    lifecycleTimersV150.clear();
+  };
+  const scrollPositions = new WeakMap();
+  const scrollSelectors = [
+    '.player-info-screen','.records-list','.rankings-screen','.vs-analysis-screen',
+    '.player-library-list','.player-editor','.player-stats-body','.data-management-content',
+    '.result-page','.pro-turn-log'
+  ];
+  const modalSelectors = [
+    '#proSummary','.record-detail-overlay','.player-library-overlay','.player-stats-overlay',
+    '#gameMemoDialog','.historical-edit-dialog-v35','.classification-manager-v381',
+    '.break-result-overlay-v61','.pushout-overlay-v730','.record-mode-overlay-v611',
+    '.start-confirm-overlay-v698'
+  ];
+  let hiddenAt = 0;
+
+  const visible = element => {
+    if (!(element instanceof HTMLElement)) return false;
+    if (element.classList.contains('hidden') || element.getAttribute('aria-hidden') === 'true') return false;
+    const style = getComputedStyle(element);
+    return style.display !== 'none' && style.visibility !== 'hidden';
+  };
+
+  const syncVisualHeight = () => {
+    const height = Math.max(320, Math.round(window.visualViewport?.height || window.innerHeight || document.documentElement.clientHeight));
+    document.documentElement.style.setProperty('--cue-visual-height', `${height}px`);
+    document.documentElement.style.setProperty('--app-vh', `${height}px`);
+    document.documentElement.classList.toggle('cue-short-viewport', height < 700);
+  };
+
+  const rememberScroll = () => {
+    scrollSelectors.forEach(selector => {
+      document.querySelectorAll(selector).forEach(element => {
+        if (element instanceof HTMLElement) scrollPositions.set(element, { top: element.scrollTop, left: element.scrollLeft });
+      });
+    });
+  };
+
+  const restoreScroll = () => {
+    requestAnimationFrame(() => {
+      scrollSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(element => {
+          const point = scrollPositions.get(element);
+          if (point && element instanceof HTMLElement) element.scrollTo(point.left, point.top);
+        });
+      });
+    });
+  };
+
+  const syncModalAccessibility = () => {
+    let hasVisibleModal = false;
+    modalSelectors.forEach(selector => {
+      document.querySelectorAll(selector).forEach(element => {
+        if (!(element instanceof HTMLElement)) return;
+        const isVisible = visible(element);
+        element.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
+        if (isVisible) {
+          hasVisibleModal = true;
+          element.setAttribute('role', 'dialog');
+          element.setAttribute('aria-modal', 'true');
+        } else {
+          element.removeAttribute('aria-modal');
+        }
+      });
+    });
+    document.body.classList.toggle('cue-modal-visible', hasVisibleModal);
+  };
+
+  const recoverInterruptedResultAction = () => {
+    const button = document.getElementById('resultOkBtn');
+    if (!(button instanceof HTMLButtonElement) || button.dataset.saving !== '1') return;
+    // A synchronous local save normally completes immediately. If the app was backgrounded
+    // while still marked as saving, unlock only after a conservative delay.
+    if (hiddenAt && Date.now() - hiddenAt < 1500) return;
+    button.dataset.saving = '0';
+    button.disabled = false;
+    button.textContent = 'OK';
+    console.warn('[CueScore RC59] recovered interrupted result action');
+  };
+
+  const reconcileVisibleState = () => {
+    syncVisualHeight();
+    syncModalAccessibility();
+    recoverInterruptedResultAction();
+    restoreScroll();
+  };
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      hiddenAt = Date.now();
+      rememberScroll();
+      return;
+    }
+    setLifecycleTimeoutV150(reconcileVisibleState, 80);
+  }, { signal: lifecycleSignalV150 });
+
+  window.addEventListener('pagehide', rememberScroll, { signal: lifecycleSignalV150 });
+  window.addEventListener('pageshow', event => {
+    setLifecycleTimeoutV150(reconcileVisibleState, event.persisted ? 120 : 40);
+  }, { signal: lifecycleSignalV150 });
+  window.addEventListener('orientationchange', () => setLifecycleTimeoutV150(reconcileVisibleState, 180), { signal: lifecycleSignalV150 });
+  window.visualViewport?.addEventListener('resize', syncVisualHeight, { passive: true, signal: lifecycleSignalV150 });
+  window.visualViewport?.addEventListener('scroll', syncVisualHeight, { passive: true, signal: lifecycleSignalV150 });
+
+  document.addEventListener('focusin', event => {
+    const target = event.target;
+    if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement)) return;
+    setLifecycleTimeoutV150(() => {
+      syncVisualHeight();
+      target.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'smooth' });
+    }, 280);
+  }, { signal: lifecycleSignalV150 });
+
+  document.addEventListener('focusout', () => setLifecycleTimeoutV150(reconcileVisibleState, 180), { signal: lifecycleSignalV150 });
+
+  let modalSyncFrameV148 = 0;
+  const scheduleModalSyncV148 = () => {
+    if (modalSyncFrameV148) return;
+    modalSyncFrameV148 = requestAnimationFrame(() => {
+      modalSyncFrameV148 = 0;
+      syncModalAccessibility();
+    });
+  };
+  const observer = new MutationObserver(scheduleModalSyncV148);
+  observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class','aria-hidden','style'] });
+  window.addEventListener('pagehide', event => {
+    if (event.persisted) return;
+    observer.disconnect();
+    if (modalSyncFrameV148) cancelAnimationFrame(modalSyncFrameV148);
+    modalSyncFrameV148 = 0;
+    clearLifecycleTimersV150();
+    lifecycleAbortV150.abort();
+  }, { once: true });
+  reconcileVisibleState();
+})();
+</script>
+
+<script>
+/* CueScore RC29: deterministic back navigation and dialog semantics */
+(() => {
+  const bindPrimaryBack = (id, handler) => {
+    const button = document.getElementById(id);
+    if (!button) return;
+    button.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      handler();
+    }, true);
+  };
+
+  bindPrimaryBack("recordsBackBtn", backToTitle);
+  bindPrimaryBack("rankingsBackBtn", backToTitle);
+
+  document.querySelectorAll(
+    ".player-library-overlay, .player-stats-overlay, .record-detail-overlay, .game-memo-dialog, " +
+    ".historical-edit-dialog-v35, .classification-manager-v381, .pro-summary"
+  ).forEach(node => {
+    node.setAttribute("role", "dialog");
+    node.setAttribute("aria-modal", "true");
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key !== "Escape") return;
+    const visibleDialog = Array.from(document.querySelectorAll('[role="dialog"]'))
+      .reverse()
+      .find(node => !node.classList.contains("hidden") && node.getAttribute("aria-hidden") !== "true");
+    if (!visibleDialog) return;
+
+    const closeButton = visibleDialog.querySelector(
+      '[data-dialog-close], .player-library-back, .player-stats-back, .record-detail-back, ' +
+      '#gameMemoCancelBtn, #historicalEditCancelV35, .result-cancel'
+    );
+    if (closeButton instanceof HTMLElement) {
+      event.preventDefault();
+      closeButton.click();
+    }
+  });
+})();
+
+/* CueScore RC59: modal focus management and keyboard/tap accessibility */
+(() => {
+  if (window.__cueScoreModalFocusLifecycleV148) return;
+  window.__cueScoreModalFocusLifecycleV148 = true;
+  const modalSelectors = [
+    '#proSummary','.record-detail-overlay','.player-library-overlay','.player-stats-overlay',
+    '#gameMemoDialog','.historical-edit-dialog-v35','.classification-manager-v381',
+    '.break-result-overlay-v61','.pushout-overlay-v730','.record-mode-overlay-v611',
+    '.start-confirm-overlay-v698'
+  ];
+  const focusableSelector = [
+    'button:not([disabled])','a[href]','input:not([disabled]):not([type="hidden"])',
+    'select:not([disabled])','textarea:not([disabled])','[tabindex]:not([tabindex="-1"])'
+  ].join(',');
+  let activeModal = null;
+  let returnFocus = null;
+
+  const isVisible = el => {
+    if (!(el instanceof HTMLElement)) return false;
+    if (el.classList.contains('hidden') || el.getAttribute('aria-hidden') === 'true') return false;
+    const style = getComputedStyle(el);
+    return style.display !== 'none' && style.visibility !== 'hidden';
+  };
+
+  const visibleModals = () => modalSelectors.flatMap(selector => Array.from(document.querySelectorAll(selector))).filter(isVisible);
+  const focusables = modal => Array.from(modal.querySelectorAll(focusableSelector)).filter(el => isVisible(el));
+
+  const activateModal = modal => {
+    if (activeModal === modal) return;
+    if (document.activeElement instanceof HTMLElement && !modal.contains(document.activeElement)) returnFocus = document.activeElement;
+    activeModal = modal;
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    if (!modal.hasAttribute('tabindex')) modal.setAttribute('tabindex', '-1');
+    requestAnimationFrame(() => {
+      const preferred = modal.querySelector('[autofocus], input:not([type="hidden"]), textarea, select, button:not([disabled])');
+      (preferred instanceof HTMLElement ? preferred : modal).focus({ preventScroll: true });
+    });
+  };
+
+  const deactivateModal = () => {
+    const previous = returnFocus;
+    activeModal = null;
+    returnFocus = null;
+    if (previous?.isConnected) requestAnimationFrame(() => previous.focus({ preventScroll: true }));
+  };
+
+  const reconcile = () => {
+    const modals = visibleModals();
+    const top = modals.at(-1) || null;
+    if (top) activateModal(top);
+    else if (activeModal) deactivateModal();
+    modals.forEach((modal, index) => {
+      modal.setAttribute('aria-hidden', index === modals.length - 1 ? 'false' : 'true');
+    });
+  };
+
+  document.addEventListener('keydown', event => {
+    if (!activeModal || !isVisible(activeModal)) return;
+    if (event.key === 'Tab') {
+      const items = focusables(activeModal);
+      if (!items.length) { event.preventDefault(); activeModal.focus(); return; }
+      const first = items[0], last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
+  }, true);
+
+  document.addEventListener('click', event => {
+    const target = event.target instanceof Element ? event.target.closest('button,[role="button"]') : null;
+    if (!target) return;
+    if (!target.hasAttribute('aria-label') && !String(target.textContent || '').trim()) {
+      console.warn('[CueScore RC29] unlabeled interactive control', target);
+    }
+  }, true);
+
+  let reconcileFrameV148 = 0;
+  const scheduleReconcileV148 = () => {
+    if (reconcileFrameV148) return;
+    reconcileFrameV148 = requestAnimationFrame(() => {
+      reconcileFrameV148 = 0;
+      reconcile();
+    });
+  };
+  const observer = new MutationObserver(scheduleReconcileV148);
+  observer.observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['class','aria-hidden','style'] });
+  window.addEventListener('pageshow', scheduleReconcileV148);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') scheduleReconcileV148(); });
+  window.addEventListener('pagehide', event => {
+    if (event.persisted) return;
+    observer.disconnect();
+    if (reconcileFrameV148) cancelAnimationFrame(reconcileFrameV148);
+    reconcileFrameV148 = 0;
+  }, { once: true });
+  reconcile();
+})();
+</script>
+
+
+<style>
+/* CueScore RC29: iPhone portrait density, clipping and one-screen stability */
+:root { --cue-content-max: 520px; }
+
+/* Keep the title screen usable on every supported iPhone height without reducing tap targets. */
+@media (max-width: 600px), (hover: none) and (pointer: coarse) {
+  .app:not([class*="-mode"]) {
+    min-height: var(--cue-visual-height, 100dvh) !important;
+    height: var(--cue-visual-height, 100dvh) !important;
+    display: grid !important;
+    grid-template-rows: auto auto minmax(54px, auto) auto 1fr auto !important;
+    align-content: start !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .app:not([class*="-mode"]) .screen-title {
+    margin-top: clamp(12px, 2.4dvh, 28px) !important;
+    font-size: clamp(32px, 9.2vw, 46px) !important;
+  }
+
+  .app:not([class*="-mode"]) .sub-title {
+    margin-top: 4px !important;
+    font-size: clamp(16px, 4.4vw, 22px) !important;
+  }
+
+  .app:not([class*="-mode"]) .home-dashboard {
+    width: min(94vw, 430px) !important;
+    margin: 8px auto 5px !important;
+    padding: 8px !important;
+  }
+
+  .app:not([class*="-mode"]) .home-dashboard-head {
+    grid-template-columns: auto minmax(0,1fr) !important;
+    gap: 7px !important;
+    margin-bottom: 7px !important;
+  }
+
+  .app:not([class*="-mode"]) .home-dashboard-actions {
+    grid-column: 1 / -1 !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+    width: 100% !important;
+    gap: 5px !important;
+  }
+
+  .app:not([class*="-mode"]) .home-ranking-button,
+  .app:not([class*="-mode"]) .home-vs-button,
+  .app:not([class*="-mode"]) .home-filter-button {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 34px !important;
+    padding: 0 4px !important;
+    font-size: clamp(10px, 2.9vw, 12px) !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .app:not([class*="-mode"]) .milk-wrap {
+    min-height: 58px !important;
+    padding: 2px 0 !important;
+  }
+
+  .app:not([class*="-mode"]) .milk {
+    width: min(20vw, 88px) !important;
+  }
+
+  .app:not([class*="-mode"]) .menu {
+    gap: 7px !important;
+    margin: 5px 0 max(20px, env(safe-area-inset-bottom)) !important;
+  }
+
+  .app:not([class*="-mode"]) .main-button {
+    width: min(90vw, 360px) !important;
+    min-height: 50px !important;
+    font-size: clamp(21px, 5.8vw, 29px) !important;
+  }
+
+  /* Player info must never lose the start button or version label below the viewport. */
+  .player-info-screen {
+    min-height: var(--cue-visual-height, 100dvh) !important;
+    height: var(--cue-visual-height, 100dvh) !important;
+  }
+  .player-info-content {
+    padding-bottom: calc(96px + env(safe-area-inset-bottom)) !important;
+  }
+  .start-game-button {
+    margin-bottom: 8px !important;
+  }
+  .player-version {
+    position: relative !important;
+    margin: 8px 18px 0 auto !important;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+  }
+
+  /* Lists: prevent names, dates and scores from colliding on narrow screens. */
+  .records-list .record-card {
+    grid-template-columns: minmax(0,1fr) auto !important;
+    grid-template-areas: "matchup score" "date score" !important;
+    min-height: 78px !important;
+    padding: 12px 5px !important;
+  }
+  .records-list .record-matchup { font-size: clamp(15px, 4.2vw, 20px) !important; }
+  .records-list .record-final-score { min-width: 74px !important; font-size: clamp(18px, 5vw, 24px) !important; }
+
+  /* Dialog cards stay inside the visual viewport even while the keyboard is present. */
+  [role="dialog"] > * {
+    max-height: calc(var(--cue-visual-height, 100dvh) - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 18px) !important;
+  }
+  .game-memo-card,
+  .historical-edit-card-v35,
+  .pro-summary-card,
+  .record-detail-overlay > * {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+}
+
+@media (max-width: 390px) and (max-height: 700px) {
+  .app:not([class*="-mode"]) .home-dashboard-grid { grid-template-columns: repeat(5, minmax(0,1fr)) !important; gap: 3px !important; }
+  .app:not([class*="-mode"]) .home-dashboard-card { padding: 4px 1px !important; }
+  .app:not([class*="-mode"]) .home-dashboard-label { min-height: 18px !important; font-size: 8.5px !important; }
+  .app:not([class*="-mode"]) .home-dashboard-value { font-size: 16px !important; }
+  .app:not([class*="-mode"]) .main-button { min-height: 46px !important; font-size: 20px !important; }
+}
+
+
+/* CueScore RC29: iPhone form/date/button layout hardening */
+:root{--cs-control-h:44px;--cs-form-gap:10px}
+input,select,textarea,button{box-sizing:border-box;max-width:100%}
+input[type="date"],input[type="text"],input[type="number"],select{
+  min-width:0;width:100%;min-height:var(--cs-control-h);font-size:16px;
+}
+input[type="date"]{-webkit-appearance:none;appearance:none;padding:0 10px;line-height:normal}
+input[type="date"]::-webkit-date-and-time-value{text-align:left;min-width:0}
+input[type="date"]::-webkit-calendar-picker-indicator{margin:0;padding:6px;opacity:.9}
+.form-row,.statistics-filter-field{min-width:0}
+.form-row>* ,.statistics-filter-field>*{min-width:0}
+.statistics-filter-grid{align-items:end}
+.statistics-filter-field input,.statistics-filter-field select{max-width:100%;overflow:hidden}
+.statistics-filter-actions{position:sticky;bottom:0;z-index:2;padding:10px 0 calc(8px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(6,66,43,0),rgba(6,66,43,.96) 28%)}
+.statistics-filter-actions button{min-width:0;padding:10px 8px;line-height:1.2}
+.records-filter-panel input[type="date"],.records-filter-panel select{width:100%;min-width:0}
+.records-filter-buttons{align-items:stretch}
+.records-filter-buttons button{min-width:0;white-space:normal;line-height:1.2;padding:8px 6px}
+@media(max-width:430px){
+  .statistics-filter-header{grid-template-columns:72px minmax(0,1fr) 72px;padding-left:10px;padding-right:10px}
+  .statistics-filter-title{font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .statistics-filter-count{font-size:12px;white-space:nowrap}
+  .statistics-filter-content{padding:12px 10px calc(26px + env(safe-area-inset-bottom))}
+  .statistics-filter-card{padding:12px 10px}
+  .statistics-filter-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+  .statistics-filter-field label{font-size:12px}
+  .statistics-filter-field input,.statistics-filter-field select{padding-left:8px;padding-right:8px}
+  .statistics-filter-periods{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .statistics-filter-periods button{min-width:0;white-space:normal;padding:7px 5px}
+  .statistics-filter-actions{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+  .player-info-content .form-row{display:grid;grid-template-columns:minmax(88px,34%) minmax(0,1fr);gap:8px;align-items:center}
+  .player-info-content .form-row label{min-width:0;overflow-wrap:anywhere}
+}
+@media(max-width:360px){
+  .statistics-filter-grid{grid-template-columns:1fr}
+  .statistics-filter-field.full{grid-column:auto}
+  .player-info-content .form-row{grid-template-columns:1fr;gap:5px;align-items:stretch}
+  .statistics-filter-actions button{font-size:15px}
+}
+@supports(height:100dvh){.statistics-filter-screen{height:100dvh}}
+
+/* CueScore RC32: Settings / data / player form consistency */
+.settings-screen{overflow:hidden !important;min-height:var(--app-vh,100dvh);}
+.settings-header{position:sticky;top:0;z-index:20;padding-top:max(10px,env(safe-area-inset-top));grid-template-columns:minmax(72px,auto) 1fr minmax(72px,auto);}
+.settings-content{overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0;max-height:calc(var(--app-vh,100dvh) - 64px - env(safe-area-inset-top));}
+.settings-actions .settings-button{white-space:normal;line-height:1.25;padding:8px 6px;}
+.player-editor-save,.player-editor-delete{min-height:44px;}
+@media(max-width:360px){.settings-actions{grid-template-columns:1fr}.settings-version{font-size:12px}.settings-card{padding:13px}.settings-row{align-items:flex-start;flex-wrap:wrap}.settings-value{width:100%;text-align:left}}
+
+  /* RC59: large history incremental rendering */
+  .records-load-more-v154{display:flex;justify-content:center;padding:14px 12px calc(18px + env(safe-area-inset-bottom));}
+  .records-load-more-v154 button{min-height:44px;min-width:180px;border:1px solid rgba(20,80,60,.22);border-radius:14px;background:#fff;color:#145b42;font-weight:900;padding:10px 18px;box-shadow:0 4px 14px rgba(20,80,60,.08);}
+  .records-render-summary-v154{display:block;text-align:center;font-size:12px;color:#65736d;padding:8px 12px 2px;}
+</style>
+
+<!-- CueScore RC59: short-viewport classification is handled by the primary lifecycle controller. -->
+
+<!-- CueScore RC59: recovery generation retention, stable ordering and safe deletion -->
+<!-- CueScore RC59: recovery generation selection, busy locking and post-operation verification -->
+
+<script>
+/* CueScore RC59: temporary Object URL lifecycle manager. */
+(() => {
+  if (window.__cueScoreObjectUrlLifecycleV149) return;
+  const activeUrls = new Set();
+  const releaseTimers = new Map();
+
+  const release = url => {
+    if (!url || !activeUrls.has(url)) return;
+    const timer = releaseTimers.get(url);
+    if (timer) clearTimeout(timer);
+    releaseTimers.delete(url);
+    activeUrls.delete(url);
+    try { URL.revokeObjectURL(url); } catch (error) { console.warn('[CueScore RC59] Object URL release failed', error); }
+  };
+
+  const scheduleRelease = (url, delay = 1500) => {
+    if (!url) return url;
+    activeUrls.add(url);
+    const oldTimer = releaseTimers.get(url);
+    if (oldTimer) clearTimeout(oldTimer);
+    releaseTimers.set(url, setTimeout(() => release(url), Math.max(0, Number(delay) || 0)));
+    return url;
+  };
+
+  const releaseAll = () => Array.from(activeUrls).forEach(release);
+  window.__cueScoreObjectUrlLifecycleV149 = { activeUrls, scheduleRelease, release, releaseAll };
+  window.addEventListener('pagehide', event => { if (!event.persisted) releaseAll(); }, { once: true });
+})();
+</script>
+
+<script>
+/* CueScore RC59: runtime lifecycle diagnostics (read-only). */
+(() => {
+  if (window.cueScoreRuntimeDiagnosticsV148) return;
+  const startedAt = Date.now();
+  window.cueScoreRuntimeDiagnosticsV148 = () => ({
+    version: '1.0-RC60',
+    uptimeMs: Date.now() - startedAt,
+    visibility: document.visibilityState,
+    online: navigator.onLine,
+    undoDepth: Array.isArray(window.undoStack) ? window.undoStack.length : null,
+    objectUrlsTracked: window.__cueScoreObjectUrlLifecycleV149?.activeUrls?.size || 0,
+    resumeLifecycleInstalled: Boolean(window.__cueScoreResumeLifecycleV148),
+    modalFocusLifecycleInstalled: Boolean(window.__cueScoreModalFocusLifecycleV148)
+  });
+})();
+</script>
+
+<script>
+/* CueScore RC59: LocalStorage capacity audit and bounded transient recovery retention. */
+(() => {
+  if (window.__cueScoreStorageLifecycleV151) return;
+
+  const APP_PREFIX = 'rotationScoreboard.';
+  const MAX_TRANSIENT_GENERATIONS = 5;
+  const HIGH_USAGE_BYTES = 4 * 1024 * 1024;
+
+  const keyBytes = (key, value) => 2 * (String(key).length + String(value ?? '').length);
+  const snapshot = () => {
+    const entries = [];
+    let totalBytes = 0;
+    for (let i = 0; i < localStorage.length; i += 1) {
+      const key = localStorage.key(i);
+      if (!key || !key.startsWith(APP_PREFIX)) continue;
+      const value = localStorage.getItem(key) || '';
+      const bytes = keyBytes(key, value);
+      totalBytes += bytes;
+      entries.push({ key, bytes, characters: value.length });
+    }
+    entries.sort((a, b) => b.bytes - a.bytes || a.key.localeCompare(b.key));
+    return { totalBytes, totalKiB: Math.round(totalBytes / 102.4) / 10, keyCount: entries.length, entries };
+  };
+
+  const keyTimestamp = key => {
+    const iso = key.match(/\.corruptBackup\.(.+)$/)?.[1];
+    if (iso) {
+      const parsed = Date.parse(iso);
+      if (Number.isFinite(parsed)) return parsed;
+    }
+    const numeric = Number(key.match(/beforeLocalRestore\.(\d+)$/)?.[1]);
+    return Number.isFinite(numeric) ? numeric : 0;
+  };
+
+  const pruneGroup = (predicate, keep = MAX_TRANSIENT_GENERATIONS) => {
+    const keys = [];
+    for (let i = 0; i < localStorage.length; i += 1) {
+      const key = localStorage.key(i);
+      if (key && predicate(key)) keys.push(key);
+    }
+    keys.sort((a, b) => keyTimestamp(b) - keyTimestamp(a) || b.localeCompare(a));
+    const removed = [];
+    keys.slice(Math.max(0, keep)).forEach(key => {
+      try { localStorage.removeItem(key); removed.push(key); }
+      catch (error) { console.warn('[CueScore RC59] transient storage cleanup failed', key, error); }
+    });
+    return { found: keys.length, kept: Math.min(keys.length, keep), removed };
+  };
+
+  const prune = () => {
+    const corruptBackups = pruneGroup(key => key.includes('.corruptBackup.'));
+    const localRestoreSnapshots = pruneGroup(key => key.startsWith('rotationScoreboard.beforeLocalRestore.'));
+    const after = snapshot();
+    if (after.totalBytes >= HIGH_USAGE_BYTES) {
+      console.warn(`[CueScore RC59] LocalStorage usage is high: ${after.totalKiB} KiB`, after.entries.slice(0, 10));
+    }
+    return { corruptBackups, localRestoreSnapshots, after };
+  };
+
+  const diagnostics = async () => {
+    const local = snapshot();
+    let origin = null;
+    try {
+      if (navigator.storage?.estimate) origin = await navigator.storage.estimate();
+    } catch (error) {
+      console.warn('[CueScore RC59] Storage estimate failed', error);
+    }
+    return {
+      version: '1.0-RC60',
+      localStorage: local,
+      originStorage: origin ? {
+        usageBytes: Number(origin.usage) || 0,
+        quotaBytes: Number(origin.quota) || 0,
+        usagePercent: origin.quota ? Math.round((origin.usage / origin.quota) * 10000) / 100 : null
+      } : null,
+      transientRetention: MAX_TRANSIENT_GENERATIONS
+    };
+  };
+
+  window.__cueScoreStorageLifecycleV151 = { snapshot, prune, diagnostics };
+  window.cueScoreStorageDiagnosticsV151 = diagnostics;
+  window.cueScorePruneTransientStorageV151 = prune;
+
+  const schedule = () => {
+    const run = () => { try { prune(); } catch (error) { console.warn('[CueScore RC59] Storage audit failed', error); } };
+    if ('requestIdleCallback' in window) window.requestIdleCallback(run, { timeout: 2500 });
+    else setTimeout(run, 600);
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', schedule, { once: true });
+  else schedule();
+})();
+</script>
+
+
+<script>
+// RC59 performance diagnostics: parsed-record cache and render/write coalescing.
+window.cueScorePerformanceDiagnosticsV152 = function(){
+  const raw = localStorage.getItem("rotationScoreboard.matchRecords.v1") || "";
+  return {
+    appVersion: "1.0-RC59",
+    matchRecordBytes: new Blob([raw]).size,
+    cachedRecordCount: Array.isArray(matchRecordsParsedCacheV152) ? matchRecordsParsedCacheV152.length : 0,
+    recordCacheHitReady: raw === matchRecordsRawCacheV152,
+    derivedRefreshQueued: !!derivedViewRefreshQueuedV131,
+    documentHidden: document.hidden,
+    measuredAt: new Date().toISOString()
+  };
+};
+</script>
+
+<script>
+// RC59: Large-history query memoization and render coalescing.
+(() => {
+  'use strict';
+  const HISTORY_KEY = 'rotationScoreboard.matchRecords.v1';
+  const FILTER_KEY = 'rotationScoreboard.statisticsFilter.v53';
+  const state = {
+    signature: '',
+    filtered: null,
+    hits: 0,
+    misses: 0,
+    invalidations: 0,
+    scheduledFrames: 0,
+    pendingRenderNames: new Set(),
+    renderFrame: 0
+  };
+
+  const signature = () => `${localStorage.getItem(HISTORY_KEY) || '[]'}\u0000${localStorage.getItem(FILTER_KEY) || '{}'}`;
+  const originalFiltered = window.getFilteredRecordsV53;
+  if (typeof originalFiltered === 'function' && !originalFiltered.__cueScoreMemoizedV153) {
+    const memoized = function(...args) {
+      // Explicit record arguments may be temporary test data; never cache them.
+      if (args.length) return originalFiltered.apply(this, args);
+      const nextSignature = signature();
+      if (state.filtered && state.signature === nextSignature) {
+        state.hits += 1;
+        return state.filtered.slice();
+      }
+      const result = originalFiltered.apply(this, args);
+      state.signature = nextSignature;
+      state.filtered = Array.isArray(result) ? result.slice() : [];
+      state.misses += 1;
+      return state.filtered.slice();
+    };
+    memoized.__cueScoreMemoizedV153 = true;
+    memoized.__original = originalFiltered;
+    window.getFilteredRecordsV53 = memoized;
+  }
+
+  function invalidate() {
+    state.signature = '';
+    state.filtered = null;
+    state.invalidations += 1;
+  }
+
+  window.addEventListener('storage', event => {
+    if (event.key === HISTORY_KEY || event.key === FILTER_KEY) invalidate();
+  });
+
+  // Coalesce repeated derived-view refreshes into one animation frame.
+  const renderTargets = ['renderHomeDashboardV50', 'renderPlayerRankingsV51', 'renderVsAnalysisV52'];
+  const originals = new Map();
+  function installRenderCoalescing() {
+    for (const name of renderTargets) {
+      const fn = window[name];
+      if (typeof fn !== 'function' || fn.__cueScoreCoalescedV153) continue;
+      originals.set(name, fn);
+      const wrapped = function(...args) {
+        state.pendingRenderNames.add(name);
+        wrapped.__lastThis = this;
+        wrapped.__lastArgs = args;
+        if (!state.renderFrame) {
+          state.renderFrame = requestAnimationFrame(() => {
+            state.renderFrame = 0;
+            state.scheduledFrames += 1;
+            const names = Array.from(state.pendingRenderNames);
+            state.pendingRenderNames.clear();
+            for (const target of names) {
+              const targetFn = window[target];
+              const original = originals.get(target);
+              if (!original) continue;
+              try { original.apply(targetFn?.__lastThis || window, targetFn?.__lastArgs || []); }
+              catch (error) { console.error(`[CueScore RC59] ${target} render failed`, error); }
+            }
+          });
+        }
+      };
+      wrapped.__cueScoreCoalescedV153 = true;
+      wrapped.__lastThis = window;
+      wrapped.__lastArgs = [];
+      window[name] = wrapped;
+    }
+  }
+  installRenderCoalescing();
+  queueMicrotask(installRenderCoalescing);
+
+  // Prewarm filtered history only while the browser is idle.
+  const prewarm = () => {
+    try { window.getFilteredRecordsV53?.(); } catch (_) {}
+  };
+  if ('requestIdleCallback' in window) requestIdleCallback(prewarm, { timeout: 1500 });
+  else setTimeout(prewarm, 250);
+
+  window.cueScoreLargeHistoryDiagnosticsV153 = () => ({
+    version: '1.0-RC60',
+    cacheHits: state.hits,
+    cacheMisses: state.misses,
+    invalidations: state.invalidations,
+    cachedRecordCount: state.filtered?.length || 0,
+    cacheActive: Boolean(state.filtered && state.signature === signature()),
+    coalescedRenderFrames: state.scheduledFrames,
+    pendingDerivedViews: Array.from(state.pendingRenderNames),
+    historyBytes: new Blob([localStorage.getItem(HISTORY_KEY) || '']).size,
+    filterBytes: new Blob([localStorage.getItem(FILTER_KEY) || '']).size
+  });
+})();
+</script>
+
+<script>
+window.cueScoreHistoryDomDiagnosticsV154 = function(){
+  const list=document.getElementById("recordsList");
+  return {
+    version:"1.0-RC60",
+    renderedRecordCards:list?list.querySelectorAll("[data-record-id]").length:0,
+    renderLimit:recordsRenderLimitV154,
+    delegatedClickInstalled:recordsDelegatedClickInstalledV154,
+    totalRecords:typeof readMatchRecords==="function"?readMatchRecords().length:null
+  };
+};
+</script>
+
+<script>
+// CueScore v1.0 RC59: screen-render memoization and transition diagnostics.
+(() => {
+  if (window.__cueScoreRc56Installed) return;
+  window.__cueScoreRc56Installed = true;
+
+  const state = {
+    startedAt: performance.now(),
+    renderCalls: Object.create(null),
+    renderSkips: Object.create(null),
+    renderDurations: Object.create(null),
+    transitions: [],
+    lastVisibleScreen: ""
+  };
+
+  const safeStorage = key => {
+    try { return localStorage.getItem(key) || ""; } catch (_) { return ""; }
+  };
+  const signature = extra => [
+    safeStorage("rotationScoreboard.matchRecords.v1"),
+    safeStorage("rotationScoreboard.playerLibrary.v1"),
+    safeStorage("rotationScoreboard.statisticsFilter.v53"),
+    extra || ""
+  ].join("|");
+
+  function visible(id) {
+    const node = document.getElementById(id);
+    return Boolean(node && !node.classList.contains("hidden") && node.getAttribute("aria-hidden") !== "true");
+  }
+
+  function wrapRender(name, screenId, extraSignature) {
+    const original = window[name];
+    if (typeof original !== "function" || original.__cueScoreRc56Wrapped) return;
+    let lastSignature = "";
+    const wrapped = function(...args) {
+      state.renderCalls[name] = (state.renderCalls[name] || 0) + 1;
+      const currentSignature = signature(typeof extraSignature === "function" ? extraSignature() : "");
+      const screen = document.getElementById(screenId);
+      const hasContent = Boolean(screen?.querySelector(".ranking-list, .vs-summary, .vs-rival-overview, .records-list, [data-record-id]"));
+      if (visible(screenId) && hasContent && currentSignature === lastSignature) {
+        state.renderSkips[name] = (state.renderSkips[name] || 0) + 1;
+        return;
+      }
+      const started = performance.now();
+      const result = original.apply(this, args);
+      const duration = performance.now() - started;
+      const item = state.renderDurations[name] || { count: 0, totalMs: 0, maxMs: 0, lastMs: 0 };
+      item.count += 1;
+      item.totalMs += duration;
+      item.lastMs = duration;
+      item.maxMs = Math.max(item.maxMs, duration);
+      state.renderDurations[name] = item;
+      lastSignature = currentSignature;
+      return result;
+    };
+    wrapped.__cueScoreRc56Wrapped = true;
+    wrapped.__cueScoreRc56Original = original;
+    window[name] = wrapped;
+  }
+
+  function installWrappers() {
+    wrapRender("renderPlayerRankingsV51", "rankingsScreen");
+    wrapRender("renderVsAnalysisV52", "vsAnalysisScreen", () => {
+      const a = document.getElementById("vsPlayer1Select")?.value || "";
+      const b = document.getElementById("vsPlayer2Select")?.value || "";
+      return `${a}|${b}`;
+    });
+  }
+
+  function currentVisibleScreen() {
+    const ids = ["titleScreen","playerInfoScreen","proGameScreen","recordsScreen","rankingsScreen","vsAnalysisScreen","settingsScreen","dataManagementScreen","statisticsFilterScreen"];
+    return ids.find(visible) || "unknown";
+  }
+
+  let transitionFrame = 0;
+  const app = document.querySelector(".app");
+  const observer = new MutationObserver(() => {
+    if (transitionFrame) return;
+    transitionFrame = requestAnimationFrame(() => {
+      transitionFrame = 0;
+      const next = currentVisibleScreen();
+      if (next === state.lastVisibleScreen) return;
+      const now = performance.now();
+      state.transitions.push({
+        from: state.lastVisibleScreen || null,
+        to: next,
+        atMs: Number(now.toFixed(2)),
+        domNodes: document.getElementsByTagName("*").length
+      });
+      if (state.transitions.length > 50) state.transitions.splice(0, state.transitions.length - 50);
+      state.lastVisibleScreen = next;
+    });
+  });
+
+  if (app) observer.observe(app, { attributes: true, attributeFilter: ["class"], subtree: true });
+  document.querySelectorAll('[id$="Screen"]').forEach(node => observer.observe(node, { attributes: true, attributeFilter: ["class","aria-hidden"] }));
+  state.lastVisibleScreen = currentVisibleScreen();
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", installWrappers, { once: true });
+  else installWrappers();
+  setTimeout(installWrappers, 0);
+
+  window.cueScoreRenderDiagnosticsV156 = () => ({
+    version: "1.0-RC59",
+    uptimeSeconds: Math.round((performance.now() - state.startedAt) / 1000),
+    visibleScreen: currentVisibleScreen(),
+    domNodeCount: document.getElementsByTagName("*").length,
+    renderCalls: { ...state.renderCalls },
+    renderSkips: { ...state.renderSkips },
+    renderDurations: Object.fromEntries(Object.entries(state.renderDurations).map(([name, item]) => [name, {
+      count: item.count,
+      lastMs: Number(item.lastMs.toFixed(2)),
+      averageMs: Number((item.totalMs / Math.max(1, item.count)).toFixed(2)),
+      maxMs: Number(item.maxMs.toFixed(2))
+    }])),
+    recentTransitions: state.transitions.slice(-20),
+    rankingNodes: document.querySelectorAll("#rankingsScreen .ranking-row, #rankingsScreen [data-player-id]").length,
+    vsNodes: document.querySelectorAll("#vsAnalysisScreen .vs-comparison-row, #vsAnalysisScreen .vs-recent-row").length,
+    historyNodes: document.querySelectorAll("#matchRecordsList [data-record-id], #matchRecordsList .record-card").length
+  });
+
+  window.addEventListener("pagehide", event => {
+    if (event.persisted) return;
+    observer.disconnect();
+    if (transitionFrame) cancelAnimationFrame(transitionFrame);
+  }, { once: true });
+})();
+</script>
+
+
+<style id="cueScoreRc57Containment">
+/* RC59: isolate large derived views from the game screen and defer off-screen card painting. */
+#recordsList,
+#playerStatsBody,
+#rankingsScreen,
+#vsAnalysisScreen,
+#playerLibraryList {
+  contain: layout style paint;
+}
+#recordsList .record-card,
+#playerStatsBody [data-player-record-id],
+#rankingsScreen .ranking-row,
+#rankingsScreen [data-player-id],
+#vsAnalysisScreen .vs-recent-row,
+#vsAnalysisScreen .vs-comparison-row,
+#playerLibraryList .player-library-item {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 88px;
+}
+.app > .hidden,
+[id$="Overlay"].hidden,
+[id$="Screen"].hidden {
+  content-visibility: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  #recordsList .record-card,
+  #playerStatsBody [data-player-record-id],
+  #rankingsScreen .ranking-row,
+  #vsAnalysisScreen .vs-recent-row {
+    scroll-behavior: auto;
+  }
+}
+</style>
+<script>
+// RC59: screen-transition and large-view paint diagnostics.
+(() => {
+  if (window.__cueScoreRc57Installed) return;
+  window.__cueScoreRc57Installed = true;
+  const state = {
+    startedAt: performance.now(),
+    transitions: [],
+    longTasks: [],
+    observer: null,
+    frame: 0,
+    lastScreen: ""
+  };
+  const visible = node => Boolean(node && !node.classList.contains('hidden') && node.getAttribute('aria-hidden') !== 'true');
+  const screenIds = ['titleScreen','playerInfoScreen','proGameScreen','recordsScreen','rankingsScreen','vsAnalysisScreen','settingsScreen','dataManagementScreen','statisticsFilterScreen'];
+  const currentScreen = () => screenIds.find(id => visible(document.getElementById(id))) || 'unknown';
+  const countNodes = id => document.getElementById(id)?.getElementsByTagName('*').length || 0;
+  const recordTransition = () => {
+    const next = currentScreen();
+    if (next === state.lastScreen) return;
+    const started = performance.now();
+    requestAnimationFrame(() => {
+      const duration = performance.now() - started;
+      state.transitions.push({
+        from: state.lastScreen || null,
+        to: next,
+        durationMs: Number(duration.toFixed(2)),
+        domNodes: document.getElementsByTagName('*').length,
+        targetNodes: countNodes(next),
+        at: new Date().toISOString()
+      });
+      if (state.transitions.length > 30) state.transitions.splice(0, state.transitions.length - 30);
+      state.lastScreen = next;
+    });
+  };
+  const root = document.querySelector('.app') || document.body;
+  state.lastScreen = currentScreen();
+  state.observer = new MutationObserver(() => {
+    if (state.frame) return;
+    state.frame = requestAnimationFrame(() => {
+      state.frame = 0;
+      recordTransition();
+    });
+  });
+  state.observer.observe(root, { subtree: true, attributes: true, attributeFilter: ['class','aria-hidden'] });
+  if ('PerformanceObserver' in window) {
+    try {
+      const po = new PerformanceObserver(list => {
+        for (const entry of list.getEntries()) {
+          state.longTasks.push({ durationMs: Number(entry.duration.toFixed(2)), startMs: Number(entry.startTime.toFixed(2)) });
+        }
+        if (state.longTasks.length > 20) state.longTasks.splice(0, state.longTasks.length - 20);
+      });
+      po.observe({ type: 'longtask', buffered: true });
+      state.performanceObserver = po;
+    } catch (_) {}
+  }
+  window.addEventListener('pagehide', event => {
+    if (event.persisted) return;
+    if (state.frame) cancelAnimationFrame(state.frame);
+    state.observer?.disconnect();
+    state.performanceObserver?.disconnect?.();
+  }, { once: true });
+  window.cueScoreRenderDiagnosticsV157 = () => ({
+    version: '1.0-RC60',
+    uptimeSeconds: Math.round((performance.now() - state.startedAt) / 1000),
+    visibleScreen: currentScreen(),
+    domNodeCount: document.getElementsByTagName('*').length,
+    historyCardCount: document.querySelectorAll('#recordsList [data-record-id]').length,
+    playerStatsNodeCount: countNodes('playerStatsBody'),
+    rankingNodeCount: countNodes('rankingsScreen'),
+    vsAnalysisNodeCount: countNodes('vsAnalysisScreen'),
+    recentTransitions: state.transitions.slice(-20),
+    recentLongTasks: state.longTasks.slice(-10),
+    contentVisibilitySupported: CSS.supports?.('content-visibility', 'auto') || false,
+    containmentSupported: CSS.supports?.('contain', 'layout style paint') || false
+  });
+})();
+</script>
+
+
+<script>
+// RC59: delegated game-DOM diagnostics.
+(() => {
+  const previous = window.cueScoreRenderDiagnosticsV157;
+  window.cueScoreRenderDiagnosticsV158 = () => ({
+    ...(typeof previous === 'function' ? previous() : {}),
+    version: '1.0-RC60',
+    gameLogNodes: document.getElementById('proTurnLog')?.childElementCount || 0,
+    ballButtonCount: document.querySelectorAll('#proBalls button[data-ball-number]').length,
+    ballGridDelegated: Boolean(window.ballGridDelegationInstalledV158 || document.getElementById('proBalls')),
+    documentFragmentsSupported: typeof DocumentFragment !== 'undefined'
+  });
+})();
+</script>
+
+
+<script>
+// RC59 modal lifecycle diagnostics.
+window.addEventListener("pagehide", event => {
+  if(event.persisted) return;
+  playerStatsDelegatedControllerV159?.abort(); playerStatsDelegatedControllerV159 = null;
+  cleanupHistoricalRecordV159();
+}, {once:true});
+window.cueScoreModalDiagnosticsV159 = () => ({
+  version:"1.0-RC60",
+  playerStatsDelegated:Boolean(playerStatsDelegatedControllerV159),
+  activePlayerStatsId:window.__cueScoreActivePlayerStatsIdV159 || null,
+  historicalDetailListenersActive:Boolean(historicalDetailControllerV159),
+  historicalDetailNodeCount:document.getElementById("recordDetailOverlay")?.querySelectorAll("*").length || 0,
+  playerStatsNodeCount:document.getElementById("playerStatsBody")?.querySelectorAll("*").length || 0
+});
+</script>
+
+<script>
+/* CueScore RC60: integrated release-readiness diagnostics and stale UI recovery. */
+(() => {
+  if (window.__cueScoreReleaseGuardV160) return;
+  window.__cueScoreReleaseGuardV160 = true;
+
+  const runtimeIssuesV160 = [];
+  const MAX_ISSUES_V160 = 30;
+  const recordIssueV160 = (kind, detail) => {
+    runtimeIssuesV160.push({
+      at: new Date().toISOString(),
+      kind,
+      detail: String(detail || '').slice(0, 1000)
+    });
+    if (runtimeIssuesV160.length > MAX_ISSUES_V160) runtimeIssuesV160.splice(0, runtimeIssuesV160.length - MAX_ISSUES_V160);
+  };
+
+  const onErrorV160 = event => recordIssueV160('error', event?.error?.stack || event?.message || 'Unknown error');
+  const onRejectionV160 = event => recordIssueV160('unhandledrejection', event?.reason?.stack || event?.reason || 'Unknown rejection');
+  window.addEventListener('error', onErrorV160);
+  window.addEventListener('unhandledrejection', onRejectionV160);
+
+  const visibleV160 = element => {
+    if (!(element instanceof HTMLElement)) return false;
+    if (element.hidden || element.classList.contains('hidden') || element.getAttribute('aria-hidden') === 'true') return false;
+    const style = getComputedStyle(element);
+    return style.display !== 'none' && style.visibility !== 'hidden';
+  };
+
+  const recoverStaleControlsV160 = () => {
+    const summary = document.getElementById('proSummary');
+    if (!visibleV160(summary)) return 0;
+    let recovered = 0;
+    summary.querySelectorAll('button:disabled').forEach(button => {
+      const label = (button.textContent || '').trim();
+      if (/保存中|更新中|確認中/.test(label)) {
+        button.disabled = false;
+        button.removeAttribute('aria-busy');
+        if (/保存中/.test(label)) button.textContent = 'OK';
+        recovered += 1;
+      }
+    });
+    if (recovered) recordIssueV160('stale-control-recovered', `${recovered} control(s)`);
+    return recovered;
+  };
+
+  const duplicateIdsV160 = () => {
+    const seen = new Set();
+    const duplicates = new Set();
+    document.querySelectorAll('[id]').forEach(node => {
+      if (seen.has(node.id)) duplicates.add(node.id);
+      else seen.add(node.id);
+    });
+    return [...duplicates];
+  };
+
+  const diagnosticsV160 = async () => {
+    let serviceWorker = { supported: 'serviceWorker' in navigator, controller: false, version: null };
+    if ('serviceWorker' in navigator) {
+      serviceWorker.controller = Boolean(navigator.serviceWorker.controller);
+      try {
+        const registration = await navigator.serviceWorker.getRegistration('./');
+        serviceWorker.registration = Boolean(registration);
+        serviceWorker.waiting = Boolean(registration?.waiting);
+        serviceWorker.installing = Boolean(registration?.installing);
+      } catch (error) {
+        serviceWorker.error = String(error);
+      }
+    }
+
+    const visibleDialogs = [...document.querySelectorAll('[role="dialog"], dialog, .overlay, [class*="overlay"]')]
+      .filter(visibleV160)
+      .map(node => node.id || node.className || node.tagName)
+      .slice(0, 20);
+
+    return {
+      version: '1.0-RC60',
+      generatedAt: new Date().toISOString(),
+      online: navigator.onLine,
+      visibilityState: document.visibilityState,
+      uptimeMs: Math.round(performance.now()),
+      domNodeCount: document.getElementsByTagName('*').length,
+      duplicateIds: duplicateIdsV160(),
+      visibleDialogs,
+      disabledVisibleButtons: [...document.querySelectorAll('button:disabled')].filter(visibleV160).map(button => (button.textContent || '').trim()).slice(0, 20),
+      runtimeIssues: runtimeIssuesV160.slice(),
+      serviceWorker,
+      storage: typeof window.cueScoreStorageDiagnosticsV151 === 'function'
+        ? await window.cueScoreStorageDiagnosticsV151().catch(error => ({ error: String(error) }))
+        : null,
+      render: typeof window.cueScoreRenderDiagnosticsV159 === 'function'
+        ? window.cueScoreRenderDiagnosticsV159()
+        : (typeof window.cueScoreRenderDiagnosticsV158 === 'function' ? window.cueScoreRenderDiagnosticsV158() : null),
+      modal: typeof window.cueScoreModalDiagnosticsV159 === 'function' ? window.cueScoreModalDiagnosticsV159() : null
+    };
+  };
+
+  window.cueScoreReleaseDiagnosticsV160 = diagnosticsV160;
+  window.cueScoreRecoverStaleControlsV160 = recoverStaleControlsV160;
+
+  const onPageShowV160 = () => window.setTimeout(recoverStaleControlsV160, 80);
+  window.addEventListener('pageshow', onPageShowV160);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') window.setTimeout(recoverStaleControlsV160, 80);
+  });
+
+  window.addEventListener('pagehide', event => {
+    if (event.persisted) return;
+    window.removeEventListener('error', onErrorV160);
+    window.removeEventListener('unhandledrejection', onRejectionV160);
+    window.removeEventListener('pageshow', onPageShowV160);
+  }, { once: true });
+})();
 </script>
 
 </body>
@@ -15398,4 +17948,5 @@ button {
 <!-- CueScore RC17: PWA update handoff, resilient install and recovery -->
 <!-- CueScore RC18: cloud resume reconciliation and deferred autosave retry -->
 <!-- CueScore RC19: visible pending cloud-save recovery and manual conflict resolution -->
+<!-- CueScore RC43: verified manual resolution history with automatic repair and rollback snapshots -->
 <!-- CueScore RC20: result OK local-save isolation and guaranteed completion -->
