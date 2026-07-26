@@ -7871,7 +7871,7 @@ body.cue-modal-visible { overscroll-behavior: none; }
 
       <div class="player-info-content">
         <div class="new-match-player-grid-v1" aria-label="プレーヤーとRace toの設定">
-          <section class="player-block new-match-player-card-v1 player-a-v1" id="newMatchPlayerCard1V1">
+          <section class="player-block new-match-player-card-v1 player-a-v1" id="newMatchPlayerCard1V1" data-player-label="A">
             <div class="player-heading-row"><h2>PLAYER A <span>（先攻・ブレイク）</span></h2><button class="starter-choice selected" id="p1StarterBtn" type="button">先攻</button></div>
             <button class="new-match-player-select-v1" id="p1PlayerSearchBtn" type="button" aria-label="Player Aを選択">
               <span class="new-match-avatar-v1" aria-hidden="true">●</span>
@@ -7890,7 +7890,7 @@ body.cue-modal-visible { overscroll-behavior: none; }
             <span aria-hidden="true">⇄</span><small>先攻・後攻<br>入れ替え</small>
           </button>
 
-          <section class="player-block new-match-player-card-v1 player-b-v1" id="newMatchPlayerCard2V1">
+          <section class="player-block new-match-player-card-v1 player-b-v1" id="newMatchPlayerCard2V1" data-player-label="B">
             <div class="player-heading-row"><h2>PLAYER B <span>（後攻）</span></h2><button class="starter-choice" id="p2StarterBtn" type="button">後攻</button></div>
             <button class="new-match-player-select-v1" id="p2PlayerSearchBtn" type="button" aria-label="Player Bを選択">
               <span class="new-match-avatar-v1" aria-hidden="true">●</span>
@@ -8581,10 +8581,41 @@ body.cue-modal-visible { overscroll-behavior: none; }
       p2.classList.toggle("selected", player === 2);
       p2.textContent = player === 2 ? "先攻" : "後攻";
     }
-    const h1=document.querySelector("#newMatchPlayerCard1V1 .player-heading-row h2");
-    const h2=document.querySelector("#newMatchPlayerCard2V1 .player-heading-row h2");
-    if(h1) h1.innerHTML = `PLAYER A <span>（${player===1?"先攻・ブレイク":"後攻"}）</span>`;
-    if(h2) h2.innerHTML = `PLAYER B <span>（${player===2?"先攻・ブレイク":"後攻"}）</span>`;
+    const card1=document.getElementById("newMatchPlayerCard1V1");
+    const card2=document.getElementById("newMatchPlayerCard2V1");
+    const h1=card1?.querySelector(".player-heading-row h2");
+    const h2=card2?.querySelector(".player-heading-row h2");
+    const label1=card1?.dataset.playerLabel || "A";
+    const label2=card2?.dataset.playerLabel || "B";
+    if(h1) h1.innerHTML = `PLAYER ${label1} <span>（${player===1?"先攻・ブレイク":"後攻"}）</span>`;
+    if(h2) h2.innerHTML = `PLAYER ${label2} <span>（${player===2?"先攻・ブレイク":"後攻"}）</span>`;
+  }
+
+  function swapNewMatchPlayerCardsV1() {
+    const card1 = document.getElementById("newMatchPlayerCard1V1");
+    const card2 = document.getElementById("newMatchPlayerCard2V1");
+    const p1Name = document.getElementById("p1Name");
+    const p2Name = document.getElementById("p2Name");
+    const p1Race = document.getElementById("p1Race");
+    const p2Race = document.getElementById("p2Race");
+    const p1Skill = document.getElementById("p1Skill");
+    const p2Skill = document.getElementById("p2Skill");
+    if (!card1 || !card2 || !p1Name || !p2Name || !p1Race || !p2Race) return;
+
+    [p1Name.value, p2Name.value] = [p2Name.value, p1Name.value];
+    [p1Race.value, p2Race.value] = [p2Race.value, p1Race.value];
+    if (p1Skill && p2Skill) [p1Skill.value, p2Skill.value] = [p2Skill.value, p1Skill.value];
+    [selectedRegisteredPlayer[1], selectedRegisteredPlayer[2]] = [selectedRegisteredPlayer[2], selectedRegisteredPlayer[1]];
+
+    const label1 = card1.dataset.playerLabel || "A";
+    card1.dataset.playerLabel = card2.dataset.playerLabel || "B";
+    card2.dataset.playerLabel = label1;
+    card1.classList.toggle("player-b-v1");
+    card2.classList.toggle("player-b-v1");
+
+    syncNewMatchNameV1("p1Name", "p1NameDisplayV1");
+    syncNewMatchNameV1("p2Name", "p2NameDisplayV1");
+    setSelectedStarter(1);
   }
 
   const skillGoals = {
@@ -8939,7 +8970,7 @@ let matchRecordsRawCacheV152 = null;
   document.getElementById("backToTitleBtn")?.addEventListener("click", backToTitle);
   document.getElementById("p1StarterBtn")?.addEventListener("click", () => setSelectedStarter(1));
   document.getElementById("p2StarterBtn")?.addEventListener("click", () => setSelectedStarter(2));
-  document.getElementById("starterSwapBtnV1")?.addEventListener("click", () => setSelectedStarter(selectedStarter === 1 ? 2 : 1));
+  document.getElementById("starterSwapBtnV1")?.addEventListener("click", swapNewMatchPlayerCardsV1);
   document.getElementById("newMatchPlayerCard1V1")?.addEventListener("click", event => { if (!event.target.closest("input,button")) setSelectedStarter(1); });
   document.getElementById("newMatchPlayerCard2V1")?.addEventListener("click", event => { if (!event.target.closest("input,button")) setSelectedStarter(2); });
   document.getElementById("newMatchHelpBtnV1")?.addEventListener("click", () => alert("プレーヤーとRace to、記録方法を設定して試合を開始します。中央の⇄で先攻・後攻を入れ替えられます。"));
@@ -17940,6 +17971,12 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
 .new-match-play-v1{font-size:23px}.player-version{display:none!important}
 @media(max-width:390px){.new-match-player-grid-v1{grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);gap:5px}.new-match-swap-v1{width:42px;height:68px}.new-match-player-card-v1{padding:12px 9px!important}.new-match-player-name-v1{font-size:16px}.new-match-avatar-v1{width:36px;height:36px}.new-match-player-select-v1{grid-template-columns:36px minmax(0,1fr) 10px;gap:5px}.new-match-race-wrap-v1 input[type=number]{height:50px!important;font-size:26px!important}}
 @media(max-height:760px){.player-info-content{padding-top:12px!important}.new-match-player-card-v1{padding-top:10px!important;padding-bottom:10px!important}.new-match-player-select-v1{padding-top:5px;padding-bottom:8px}.new-match-race-label-v1{margin-top:8px}.season-setting-v38,.recording-setting-v698{margin-top:8px!important;padding:9px!important}.new-match-start-v1{min-height:62px!important;margin-top:9px!important}.recording-choice-v698{min-height:50px!important}}
+/* New Match final tune: only approved refinements */
+.new-match-header-v1{height:calc(82px + env(safe-area-inset-top))!important;padding-top:calc(env(safe-area-inset-top) + 2px)!important;padding-bottom:2px!important}
+.new-match-player-card-v1{box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 14px 30px rgba(0,35,112,.17)!important}
+.new-match-player-card-v1.player-b-v1{box-shadow:inset 0 1px 0 rgba(255,255,255,.11),0 14px 30px rgba(62,0,108,.153)!important}
+.new-match-swap-v1{border-color:rgba(145,183,255,.28)!important;background:linear-gradient(180deg,rgba(17,43,88,.72),rgba(5,17,43,.82))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 10px 24px rgba(0,35,112,.16)!important;backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+@media(max-height:760px){.new-match-header-v1{height:calc(68px + env(safe-area-inset-top))!important}}
 </style>
 <script>
 // RC59: screen-transition and large-view paint diagnostics.
