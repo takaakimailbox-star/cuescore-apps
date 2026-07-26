@@ -7823,232 +7823,6 @@ body.cue-modal-visible { overscroll-behavior: none; }
 
 </style>
 <!-- CueScore Rotation Scoreboard v1.0 Official Release -->
-
-<style id="cuescore-game-golden-refresh-v100">
-/* CueScore Rotation Scoreboard v1.0 — Game Golden Screen Visual Refresh
-   Home Golden Screen is the visual master. Layout/logic remains unchanged. */
-:root {
-  --cs-bg-deep: #020915;
-  --cs-bg-mid: #07172b;
-  --cs-glass: rgba(10, 31, 58, .72);
-  --cs-glass-soft: rgba(18, 43, 75, .58);
-  --cs-glass-border: rgba(168, 210, 255, .24);
-  --cs-gold: #e4c878;
-  --cs-gold-soft: rgba(228, 200, 120, .30);
-  --cs-blue-glow: rgba(46, 136, 255, .26);
-  --cs-text: #f7fbff;
-  --cs-muted: rgba(231, 241, 255, .76);
-}
-
-.pro-game-screen {
-  background:
-    radial-gradient(110% 62% at 78% -8%, rgba(39, 128, 255, .26) 0%, rgba(12, 46, 88, .12) 44%, transparent 72%),
-    linear-gradient(180deg, var(--cs-bg-mid) 0%, var(--cs-bg-deep) 56%, #02070f 100%) !important;
-  color: var(--cs-text) !important;
-}
-
-.pro-game-header {
-  background: linear-gradient(180deg, rgba(10, 32, 58, .94), rgba(5, 19, 36, .86)) !important;
-  border-bottom: 1px solid rgba(164, 209, 255, .14);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, .24);
-}
-
-.pro-game-title { color: #fff; letter-spacing: .01em; }
-.pro-start-time { color: var(--cs-muted); }
-
-.pro-scoreboard { gap: 8px !important; }
-.pro-player-panel {
-  background: linear-gradient(145deg, rgba(19, 48, 82, .76), rgba(7, 24, 44, .72)) !important;
-  border: 1px solid var(--cs-glass-border) !important;
-  border-radius: 16px !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.07),
-    0 10px 28px rgba(0,0,0,.22) !important;
-  backdrop-filter: blur(18px) saturate(120%);
-  -webkit-backdrop-filter: blur(18px) saturate(120%);
-}
-.pro-player-panel.active {
-  border: 2px solid var(--cs-gold) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 0 0 1px rgba(228,200,120,.10),
-    0 0 24px var(--cs-gold-soft),
-    0 12px 34px rgba(0,0,0,.28) !important;
-}
-.pro-score { color: #fff; font-weight: 760 !important; }
-.pro-stats { color: var(--cs-muted); letter-spacing: .01em; }
-
-/* Rack / Inning are represented in the history card; remove duplicated status strip. */
-.pro-status { display: none !important; }
-
-/* One unified history card, no vertical separators. */
-.pro-log-wrap {
-  margin-top: 10px !important;
-  border: 1px solid var(--cs-glass-border) !important;
-  border-radius: 16px !important;
-  background: linear-gradient(155deg, rgba(11, 35, 63, .70), rgba(4, 18, 34, .70)) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.05),
-    0 12px 34px rgba(0,0,0,.22) !important;
-  overflow: hidden !important;
-  backdrop-filter: blur(16px) saturate(116%);
-  -webkit-backdrop-filter: blur(16px) saturate(116%);
-}
-.pro-log-header { display: none !important; }
-.pro-turn-log { padding: 3px 8px 5px; }
-
-.pro-rack-divider {
-  display: grid !important;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 10px;
-  min-height: 18px !important;
-  margin: 5px 0 2px !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border: 0 !important;
-  color: var(--cs-gold) !important;
-  font-size: 12px !important;
-  font-weight: 800 !important;
-  letter-spacing: .04em;
-  text-align: center;
-}
-.pro-rack-divider::before,
-.pro-rack-divider::after {
-  content: "";
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(228,200,120,.64));
-}
-.pro-rack-divider::after {
-  background: linear-gradient(90deg, rgba(228,200,120,.64), transparent);
-}
-
-.pro-log-row {
-  grid-template-columns: minmax(0,1fr) 52px minmax(0,1fr) !important;
-  min-height: 31px !important;
-  border-top: 1px solid rgba(170, 210, 255, .12) !important;
-  align-items: center;
-}
-.pro-log-row.active-row { background: rgba(75, 145, 225, .08) !important; }
-.pro-turn-label {
-  grid-column: 2;
-  text-align: center !important;
-  color: rgba(239,246,255,.88);
-  font-size: 13px !important;
-  font-weight: 750;
-}
-.pro-log-cell {
-  min-width: 0;
-  min-height: 30px !important;
-  justify-content: flex-start !important;
-  align-content: center;
-  gap: 3px !important;
-  padding: 3px 5px !important;
-  text-align: left !important;
-}
-.pro-log-cell-left { grid-column: 1; }
-.pro-log-cell-right { grid-column: 3; }
-.pro-mini-ball {
-  flex: 0 0 22px;
-  width: 22px !important;
-  height: 22px !important;
-  font-size: 11px !important;
-}
-.pro-symbol {
-  display: inline-flex;
-  width: 22px;
-  height: 22px;
-  padding: 0 !important;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px !important;
-  line-height: 1;
-}
-.pro-symbol.s { font-size: 17px !important; }
-
-/* Fixed 5 x 3 input grid. Visible balls remain large; hit area is expanded by the grid cell. */
-.pro-bottom-dock { padding-top: 7px !important; }
-.pro-balls {
-  grid-template-columns: repeat(5, 64px) !important;
-  grid-auto-rows: 64px !important;
-  justify-content: center !important;
-  align-items: center !important;
-  width: auto !important;
-  max-width: none !important;
-  column-gap: 7px !important;
-  row-gap: 7px !important;
-  margin: 5px auto 7px !important;
-}
-.pro-ball {
-  width: 60px !important;
-  height: 60px !important;
-  min-width: 60px !important;
-  min-height: 60px !important;
-  aspect-ratio: 1 !important;
-  justify-self: center;
-  align-self: center;
-  font-size: 22px !important;
-  border-width: 1px !important;
-  box-shadow:
-    inset -8px -9px 14px rgba(0,0,0,.22),
-    inset 6px 7px 12px rgba(255,255,255,.10),
-    0 3px 8px rgba(0,0,0,.32) !important;
-  transition: transform .09s ease, box-shadow .12s ease, filter .12s ease;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
-.pro-ball:active {
-  transform: scale(.95);
-  filter: brightness(1.08);
-  box-shadow:
-    inset -7px -8px 12px rgba(0,0,0,.20),
-    0 0 0 3px rgba(228,200,120,.62),
-    0 0 16px rgba(228,200,120,.32) !important;
-}
-
-.pro-actions {
-  grid-template-columns: 1fr 1fr 1.45fr 1fr !important;
-  gap: 7px !important;
-  width: min(94vw, 380px) !important;
-  max-width: 380px !important;
-}
-.pro-action {
-  min-height: 50px !important;
-  border-radius: 15px !important;
-  border: 1px solid rgba(255,255,255,.10) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.09), 0 7px 18px rgba(0,0,0,.18);
-  transition: transform .09s ease, filter .12s ease, box-shadow .12s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-.pro-action:active { transform: scale(.97); filter: brightness(1.08); }
-.pro-safety { background: linear-gradient(180deg, #2879c2, #18578f) !important; }
-.pro-foul { background: linear-gradient(180deg, #b94b50, #833037) !important; }
-.pro-switch { background: linear-gradient(180deg, #3f9070, #29654e) !important; }
-.pro-undo { background: linear-gradient(180deg, #687383, #4d5664) !important; }
-
-@media (max-width: 390px) {
-  .pro-game-body { padding-left: 8px !important; padding-right: 8px !important; }
-  .pro-balls {
-    grid-template-columns: repeat(5, 58px) !important;
-    grid-auto-rows: 58px !important;
-    column-gap: 5px !important;
-    row-gap: 5px !important;
-  }
-  .pro-ball {
-    width: 55px !important;
-    height: 55px !important;
-    min-width: 55px !important;
-    min-height: 55px !important;
-    font-size: 20px !important;
-  }
-  .pro-log-row { grid-template-columns: minmax(0,1fr) 46px minmax(0,1fr) !important; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pro-ball, .pro-action { transition: none !important; }
-}
-</style>
-
 </head>
 <body>
   <div class="toast" id="toast">
@@ -8241,19 +8015,16 @@ body.cue-modal-visible { overscroll-behavior: none; }
             </div>
           </section>
 
-          <section class="pro-status pro-status-two">
-            <div>Rack: <span id="proRack">1</span></div>
-            <div>Inning: <span id="proInning">1</span></div>
+          <section class="pro-status pro-status-two" aria-hidden="true">
+            <span id="proRack">1</span>
+            <span id="proInning">1</span>
             <span id="proGoalView" hidden>120 / 120</span>
           </section>
         </section>
 
-        <section class="pro-log-wrap">
-          <div class="pro-log-header" aria-hidden="true">
-            <span></span>
-            <span id="proP1LogName"></span>
-            <span id="proP2LogName"></span>
-          </div>
+        <section class="pro-log-wrap" aria-label="試合履歴">
+          <span id="proP1LogName" hidden>Player 1</span>
+          <span id="proP2LogName" hidden>Player 2</span>
           <div id="proTurnLog" class="pro-turn-log"></div>
         </section>
 
@@ -11642,7 +11413,7 @@ let matchRecordsRawCacheV152 = null;
 
   function symbolHtml(symbol) {
     const cls = symbol === "S" ? "s" : "f";
-    const displaySymbol = symbol === "S" ? "s" : symbol;
+    const displaySymbol = symbol;
     return `<span class="pro-symbol ${cls}">${displaySymbol}</span>`;
   }
 
@@ -11667,9 +11438,9 @@ let matchRecordsRawCacheV152 = null;
       const p1Items = rowData.p1.map(item => typeof item === "number" ? ballHtml(item) : symbolHtml(item)).join("");
       const p2Items = rowData.p2.map(item => typeof item === "number" ? ballHtml(item) : symbolHtml(item)).join("");
       row.innerHTML = `
-        <div class="pro-log-cell pro-log-cell-left">${p1Items}</div>
+        <div class="pro-log-cell pro-log-cell-p1">${p1Items}</div>
         <div class="pro-turn-label">${rowData.label}</div>
-        <div class="pro-log-cell pro-log-cell-right">${p2Items}</div>
+        <div class="pro-log-cell pro-log-cell-p2">${p2Items}</div>
       `;
       fragment.appendChild(row);
     });
@@ -11687,9 +11458,7 @@ let matchRecordsRawCacheV152 = null;
     balls.addEventListener("click", event => {
       const button = event.target.closest("button[data-ball-number]");
       if (!button || button.disabled || !balls.contains(button)) return;
-      if (typeof navigator !== "undefined" && typeof navigator.vibrate === "function") {
-        navigator.vibrate(8);
-      }
+      try { if (navigator.vibrate) navigator.vibrate(8); } catch (_) {}
       pocketBall(Number(button.dataset.ballNumber));
     });
     ballGridDelegationInstalledV158 = true;
@@ -17965,6 +17734,132 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   }
 }
 
+
+/* CueScore Game Golden Screen — implemented visual refresh 2026-07-26 */
+:root{
+  --cs-bg-0:#06101f;
+  --cs-bg-1:#081a32;
+  --cs-glass:rgba(10,29,52,.76);
+  --cs-glass-strong:rgba(12,34,60,.90);
+  --cs-gold:#d4af57;
+  --cs-gold-bright:#f1d27a;
+  --cs-line:rgba(215,231,255,.24);
+  --cs-text:#f7f9ff;
+  --cs-muted:#aab6c8;
+  --cs-blue:#3b82f6;
+}
+.pro-game-screen{
+  background:
+    radial-gradient(900px 420px at 82% -8%,rgba(55,127,255,.22),transparent 58%),
+    linear-gradient(180deg,var(--cs-bg-1) 0%,var(--cs-bg-0) 48%,#040b14 100%) !important;
+  color:var(--cs-text) !important;
+}
+.pro-game-header{
+  background:linear-gradient(180deg,rgba(7,21,39,.96),rgba(7,21,39,.76)) !important;
+  border-bottom:1px solid rgba(130,175,235,.16);
+  backdrop-filter:blur(18px) saturate(125%);
+  -webkit-backdrop-filter:blur(18px) saturate(125%);
+}
+.pro-game-title{font-weight:750;letter-spacing:-.02em;}
+.pro-start-time{color:#f4f7ff;opacity:.94;}
+.pro-game-body{gap:10px !important;}
+.pro-scoreboard{gap:10px !important;}
+.pro-player-panel{
+  padding:10px 7px !important;
+  background:linear-gradient(145deg,rgba(22,52,80,.78),rgba(10,27,48,.84)) !important;
+  border:1px solid rgba(205,225,255,.30) !important;
+  border-radius:18px !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 28px rgba(0,0,0,.22);
+  backdrop-filter:blur(18px) saturate(125%);
+  -webkit-backdrop-filter:blur(18px) saturate(125%);
+}
+.pro-player-panel.active{
+  border:2px solid var(--cs-gold-bright) !important;
+  box-shadow:0 0 0 1px rgba(212,175,87,.18),0 0 22px rgba(212,175,87,.25),inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+.pro-score{font-variant-numeric:tabular-nums;letter-spacing:-.045em;}
+.pro-stats{color:#eef3fb;opacity:.92 !important;}
+.pro-status{display:none !important;}
+.pro-log-wrap{
+  margin-top:0 !important;
+  padding:6px 10px 8px;
+  border:1px solid rgba(212,175,87,.58) !important;
+  border-radius:18px;
+  background:linear-gradient(155deg,rgba(11,31,54,.74),rgba(6,20,37,.86));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 14px 30px rgba(0,0,0,.20);
+  backdrop-filter:blur(16px) saturate(120%);
+  -webkit-backdrop-filter:blur(16px) saturate(120%);
+}
+.pro-turn-log{padding:0 2px 2px;}
+.pro-rack-divider{
+  display:flex;align-items:center;gap:10px;
+  min-height:24px !important;margin:2px 0 0 !important;padding:2px 2px !important;
+  background:transparent !important;border:0 !important;color:var(--cs-gold-bright) !important;
+  font-size:14px !important;font-weight:850 !important;text-align:center;white-space:nowrap;
+}
+.pro-rack-divider::before,.pro-rack-divider::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,rgba(212,175,87,.88));}
+.pro-rack-divider::after{background:linear-gradient(90deg,rgba(212,175,87,.88),transparent);}
+.pro-log-row{
+  grid-template-columns:minmax(0,1fr) 54px minmax(0,1fr) !important;
+  min-height:34px !important;border-top:1px solid rgba(214,231,255,.13) !important;
+}
+.pro-log-row.active-row{background:rgba(72,132,208,.055) !important;}
+.pro-turn-label{grid-column:2;text-align:center !important;color:var(--cs-gold-bright);font-weight:800;font-size:15px !important;}
+.pro-log-cell{min-width:0;min-height:32px !important;padding:3px 5px !important;gap:4px !important;justify-content:flex-start !important;text-align:left !important;}
+.pro-log-cell-p1{grid-column:1;grid-row:1;}
+.pro-log-cell-p2{grid-column:3;grid-row:1;}
+.pro-mini-ball{width:22px !important;height:22px !important;flex:0 0 22px;font-size:12px !important;}
+.pro-symbol{width:22px;height:22px;padding:0 !important;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.19);font-size:14px !important;line-height:1;}
+.pro-symbol.s,.pro-symbol.f{color:#fff !important;font-size:14px !important;}
+.pro-bottom-dock{position:relative;padding-top:8px !important;}
+.pro-bottom-dock::before{content:"";position:absolute;top:-1px;left:50%;width:0;height:0;transform:translateX(-50%);border-left:8px solid transparent;border-right:8px solid transparent;border-top:10px solid var(--cs-gold-bright);filter:drop-shadow(0 0 6px rgba(212,175,87,.45));}
+.pro-play-area{
+  padding:8px 10px 6px;border:1px solid rgba(212,175,87,.45);border-radius:18px;
+  background:linear-gradient(155deg,rgba(10,29,51,.70),rgba(5,18,33,.82));
+  backdrop-filter:blur(14px) saturate(115%);-webkit-backdrop-filter:blur(14px) saturate(115%);
+}
+.pro-balls{
+  --ball-size:clamp(54px,15.1vw,66px);
+  grid-template-columns:repeat(5,var(--ball-size)) !important;
+  grid-auto-rows:var(--ball-size) !important;
+  justify-content:center !important;
+  column-gap:clamp(7px,2.1vw,10px) !important;
+  row-gap:clamp(7px,2.1vw,10px) !important;
+  width:auto !important;max-width:none !important;margin:2px auto 4px !important;
+}
+.pro-ball{
+  width:var(--ball-size) !important;height:var(--ball-size) !important;min-width:var(--ball-size) !important;min-height:var(--ball-size) !important;
+  aspect-ratio:auto !important;transition:transform .09s ease,filter .12s ease,box-shadow .12s ease;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+}
+.pro-ball:active{transform:scale(.94);filter:brightness(1.12);box-shadow:0 0 0 3px rgba(241,210,122,.65),inset -7px -8px 13px rgba(0,0,0,.2);}
+.pro-actions{grid-template-columns:1fr 1fr 1.55fr 1fr !important;gap:7px !important;width:100% !important;max-width:none !important;margin:8px auto 0 !important;}
+.pro-action{min-height:52px !important;border-radius:14px !important;border:1px solid rgba(255,255,255,.14) !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 8px 20px rgba(0,0,0,.20);transition:transform .09s ease,filter .12s ease;}
+.pro-action:active{transform:scale(.97);filter:brightness(1.12);}
+.pro-safety{background:linear-gradient(180deg,#174c86,#0b315d) !important;}
+.pro-foul{background:linear-gradient(180deg,#a22b2f,#66151c) !important;}
+.pro-switch{background:linear-gradient(180deg,#17623a,#0c3d27) !important;}
+.pro-undo{background:linear-gradient(180deg,#404652,#252a33) !important;}
+@media(max-width:390px){
+  .pro-game-body{padding:7px 7px max(7px,env(safe-area-inset-bottom)) !important;gap:7px !important;}
+  .pro-scoreboard{gap:7px !important;}
+  .pro-player-panel{border-radius:15px !important;padding:7px 4px !important;}
+  .pro-log-wrap,.pro-play-area{border-radius:15px;}
+  .pro-log-row{grid-template-columns:minmax(0,1fr) 46px minmax(0,1fr) !important;}
+  .pro-balls{--ball-size:clamp(52px,14.6vw,58px);column-gap:7px !important;row-gap:7px !important;}
+  .pro-action{font-size:12px !important;padding:4px 1px !important;}
+}
+@media(max-height:740px){
+  .pro-game-body{gap:5px !important;}
+  .pro-player-panel{padding:5px 4px !important;}
+  .pro-log-wrap{padding-top:3px;padding-bottom:4px;}
+  .pro-rack-divider{min-height:20px !important;}
+  .pro-log-row{min-height:29px !important;}
+  .pro-log-cell{min-height:28px !important;padding-top:2px !important;padding-bottom:2px !important;}
+  .pro-play-area{padding-top:5px;padding-bottom:4px;}
+  .pro-balls{--ball-size:clamp(46px,12.9vw,54px);column-gap:6px !important;row-gap:5px !important;}
+  .pro-action{min-height:44px !important;}
+}
 </style>
 <script>
 // RC59: screen-transition and large-view paint diagnostics.
@@ -18228,6 +18123,15 @@ window.cueScoreModalDiagnosticsV159 = () => ({
 
 <!-- CueScore RC73 Clean: break-result modal state repair.
      Visible state is derived from DOM/CSS; aria-hidden is synchronized output, preventing Safari modal self-lock. -->
+
+<script>
+(() => {
+  const ids=["proSafetyBtn","proFoulBtn","proSwitchBtn","proUndoBtn"];
+  ids.forEach(id=>document.getElementById(id)?.addEventListener("click",()=>{
+    try{ if(navigator.vibrate) navigator.vibrate(8); }catch(_){}
+  },{passive:true}));
+})();
+</script>
 </body>
 </html>
 
