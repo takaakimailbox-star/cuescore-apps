@@ -7863,44 +7863,48 @@ body.cue-modal-visible { overscroll-behavior: none; }
     <div class="credit">Created by Rion</div>
 
     <section class="player-info-screen hidden" id="playerInfoScreen" aria-label="Player info">
-      <header class="player-info-header">
-        <button class="back-button" id="backToTitleBtn" type="button" aria-label="戻る">戻る</button>
-        <div class="player-info-title">Player info</div>
-        <div class="header-spacer"></div>
+      <header class="player-info-header new-match-header-v1">
+        <button class="back-button" id="backToTitleBtn" type="button" aria-label="キャンセル">キャンセル</button>
+        <div class="player-info-title">New Match<span class="new-match-subtitle-v1">試合の設定をして開始します</span></div>
+        <button class="new-match-help-v1" id="newMatchHelpBtnV1" type="button" aria-label="New Matchの説明">?</button>
       </header>
 
       <div class="player-info-content">
-        <section class="player-block">
-          <div class="player-heading-row"><h2>Player1</h2><button class="starter-choice selected" id="p1StarterBtn" type="button">先攻</button></div>
+        <div class="new-match-player-grid-v1" aria-label="プレーヤーとRace toの設定">
+          <section class="player-block new-match-player-card-v1 player-a-v1" id="newMatchPlayerCard1V1">
+            <div class="player-heading-row"><h2>PLAYER A <span>（先攻・ブレイク）</span></h2><button class="starter-choice selected" id="p1StarterBtn" type="button">先攻</button></div>
+            <button class="new-match-player-select-v1" id="p1PlayerSearchBtn" type="button" aria-label="Player Aを選択">
+              <span class="new-match-avatar-v1" aria-hidden="true">●</span>
+              <span class="new-match-player-name-v1" id="p1NameDisplayV1">プレイヤー 1</span>
+              <span class="new-match-chevron-v1" aria-hidden="true">›</span>
+            </button>
+            <input id="p1Name" class="new-match-hidden-name-v1" type="text" value="プレイヤー 1" maxlength="10" aria-describedby="playerNameLimitNote" />
+            <div class="new-match-race-label-v1">Race to</div>
+            <div class="new-match-race-wrap-v1">
+              <input id="p1Race" type="number" value="120" inputmode="numeric" aria-label="Player1 Race to" />
+              <input id="p1Skill" class="skill-range p1" type="range" min="1" max="6" step="1" value="2" aria-label="Player1 Race to 数字選択バー" />
+            </div>
+          </section>
 
-          <div class="form-row">
-            <label for="p1Name">Name:</label>
-            <input id="p1Name" type="text" value="プレイヤー 1" maxlength="10" aria-describedby="playerNameLimitNote" />
-            <button class="search-button" id="p1PlayerSearchBtn" type="button" aria-label="Player1 登録プレーヤー検索"></button>
-          </div>
+          <button class="new-match-swap-v1" id="starterSwapBtnV1" type="button" aria-label="先攻と後攻を入れ替える">
+            <span aria-hidden="true">⇄</span><small>先攻・後攻<br>入れ替え</small>
+          </button>
 
-          <div class="form-row race-control-row">
-            <label for="p1Race">Race to:</label>
-            <input id="p1Race" type="number" value="120" inputmode="numeric" aria-label="Player1 Race to" />
-            <input id="p1Skill" class="skill-range p1" type="range" min="1" max="6" step="1" value="2" aria-label="Player1 Race to 数字選択バー" />
-          </div>
-        </section>
-
-        <section class="player-block player2-block">
-          <div class="player-heading-row"><h2>Player2</h2><button class="starter-choice" id="p2StarterBtn" type="button">後攻</button></div>
-
-          <div class="form-row">
-            <label for="p2Name">Name:</label>
-            <input id="p2Name" type="text" value="プレイヤー 2" maxlength="10" aria-describedby="playerNameLimitNote" />
-            <button class="search-button" id="p2PlayerSearchBtn" type="button" aria-label="Player2 登録プレーヤー検索"></button>
-          </div>
-
-          <div class="form-row race-control-row">
-            <label for="p2Race">Race to:</label>
-            <input id="p2Race" type="number" value="120" inputmode="numeric" aria-label="Player2 Race to" />
-            <input id="p2Skill" class="skill-range p2" type="range" min="1" max="6" step="1" value="2" aria-label="Player2 Race to 数字選択バー" />
-          </div>
-        </section>
+          <section class="player-block new-match-player-card-v1 player-b-v1" id="newMatchPlayerCard2V1">
+            <div class="player-heading-row"><h2>PLAYER B <span>（後攻）</span></h2><button class="starter-choice" id="p2StarterBtn" type="button">後攻</button></div>
+            <button class="new-match-player-select-v1" id="p2PlayerSearchBtn" type="button" aria-label="Player Bを選択">
+              <span class="new-match-avatar-v1" aria-hidden="true">●</span>
+              <span class="new-match-player-name-v1" id="p2NameDisplayV1">プレイヤー 2</span>
+              <span class="new-match-chevron-v1" aria-hidden="true">›</span>
+            </button>
+            <input id="p2Name" class="new-match-hidden-name-v1" type="text" value="プレイヤー 2" maxlength="10" aria-describedby="playerNameLimitNote" />
+            <div class="new-match-race-label-v1">Race to</div>
+            <div class="new-match-race-wrap-v1">
+              <input id="p2Race" type="number" value="120" inputmode="numeric" aria-label="Player2 Race to" />
+              <input id="p2Skill" class="skill-range p2" type="range" min="1" max="6" step="1" value="2" aria-label="Player2 Race to 数字選択バー" />
+            </div>
+          </section>
+        </div>
 
         <div class="player-name-limit-note" id="playerNameLimitNote">プレーヤー名は10文字まで</div>
 
@@ -7939,19 +7943,9 @@ body.cue-modal-visible { overscroll-behavior: none; }
           </div>
         </section>
 
-        <button class="start-game-button" id="startGameBtn" type="button">
-          <span class="ball-rack" aria-hidden="true">
-            <span class="rack-ball b1">1</span>
-            <span class="rack-ball b2">2</span>
-            <span class="rack-ball b3">3</span>
-            <span class="rack-ball b4">4</span>
-            <span class="rack-ball b9">9</span>
-            <span class="rack-ball b5">5</span>
-            <span class="rack-ball b6">6</span>
-            <span class="rack-ball b7">7</span>
-            <span class="rack-ball b8">8</span>
-          </span>
-          <span>Start game!</span>
+        <button class="start-game-button new-match-start-v1" id="startGameBtn" type="button">
+          <span class="new-match-play-v1" aria-hidden="true">▶</span>
+          <span>試合開始</span>
         </button>
       </div>
 
@@ -8587,6 +8581,10 @@ body.cue-modal-visible { overscroll-behavior: none; }
       p2.classList.toggle("selected", player === 2);
       p2.textContent = player === 2 ? "先攻" : "後攻";
     }
+    const h1=document.querySelector("#newMatchPlayerCard1V1 .player-heading-row h2");
+    const h2=document.querySelector("#newMatchPlayerCard2V1 .player-heading-row h2");
+    if(h1) h1.innerHTML = `PLAYER A <span>（${player===1?"先攻・ブレイク":"後攻"}）</span>`;
+    if(h2) h2.innerHTML = `PLAYER B <span>（${player===2?"先攻・ブレイク":"後攻"}）</span>`;
   }
 
   const skillGoals = {
@@ -8941,6 +8939,15 @@ let matchRecordsRawCacheV152 = null;
   document.getElementById("backToTitleBtn")?.addEventListener("click", backToTitle);
   document.getElementById("p1StarterBtn")?.addEventListener("click", () => setSelectedStarter(1));
   document.getElementById("p2StarterBtn")?.addEventListener("click", () => setSelectedStarter(2));
+  document.getElementById("starterSwapBtnV1")?.addEventListener("click", () => setSelectedStarter(selectedStarter === 1 ? 2 : 1));
+  document.getElementById("newMatchPlayerCard1V1")?.addEventListener("click", event => { if (!event.target.closest("input,button")) setSelectedStarter(1); });
+  document.getElementById("newMatchPlayerCard2V1")?.addEventListener("click", event => { if (!event.target.closest("input,button")) setSelectedStarter(2); });
+  document.getElementById("newMatchHelpBtnV1")?.addEventListener("click", () => alert("プレーヤーとRace to、記録方法を設定して試合を開始します。中央の⇄で先攻・後攻を入れ替えられます。"));
+  const syncNewMatchNameV1 = (inputId, displayId) => { const input=document.getElementById(inputId); const display=document.getElementById(displayId); if(input&&display) display.textContent=(input.value||"").trim()||"未設定"; };
+  document.getElementById("p1Name")?.addEventListener("input", () => syncNewMatchNameV1("p1Name","p1NameDisplayV1"));
+  document.getElementById("p2Name")?.addEventListener("input", () => syncNewMatchNameV1("p2Name","p2NameDisplayV1"));
+  syncNewMatchNameV1("p1Name","p1NameDisplayV1");
+  syncNewMatchNameV1("p2Name","p2NameDisplayV1");
   document.getElementById("p1Skill")?.addEventListener("input", () => syncSkillGoal("p1Skill", "p1Race"));
   document.getElementById("p2Skill")?.addEventListener("input", () => syncSkillGoal("p2Skill", "p2Race"));
   setSelectedStarter(1);
@@ -17873,6 +17880,66 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   .pro-balls{--ball-size:clamp(46px,12.9vw,54px);column-gap:4px !important;row-gap:5px !important;}
   .pro-action{min-height:44px !important;}
 }
+
+
+/* CueScore New Match Golden Screen v1.0 — approved layout + Home visual master */
+.app.player-info-mode{width:min(100vw,520px)!important;background:#020b1f!important}
+.player-info-screen{
+  background:
+    radial-gradient(80% 44% at 88% 4%,rgba(28,104,255,.32),transparent 66%),
+    radial-gradient(56% 38% at 14% 32%,rgba(74,49,211,.13),transparent 74%),
+    linear-gradient(180deg,#061532 0%,#020b20 64%,#010716 100%)!important;
+  color:#f7f9ff!important;
+}
+.new-match-header-v1{
+  background:linear-gradient(180deg,rgba(5,18,44,.92),rgba(3,13,34,.74))!important;
+  border-bottom:1px solid rgba(145,183,255,.22)!important;
+  box-shadow:0 12px 34px rgba(0,80,255,.10)!important;
+  backdrop-filter:blur(20px) saturate(145%);
+  -webkit-backdrop-filter:blur(20px) saturate(145%);
+}
+.new-match-header-v1 .back-button{color:#2f9cff!important;font-size:15px!important;font-weight:700!important;background:none!important;border:0!important}
+.player-info-title{font-size:20px!important;font-weight:800!important;line-height:1.15!important}
+.new-match-subtitle-v1{display:block;margin-top:5px;font-size:11px;font-weight:500;color:rgba(255,255,255,.68)}
+.new-match-help-v1{justify-self:end;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.58);background:rgba(11,33,75,.42);color:#fff;font-size:20px;line-height:1}
+.player-info-content{padding:20px 16px calc(20px + env(safe-area-inset-bottom))!important}
+.new-match-player-grid-v1{display:grid;grid-template-columns:minmax(0,1fr) 54px minmax(0,1fr);gap:8px;align-items:center}
+.new-match-player-card-v1{
+  margin:0!important;padding:14px 12px 13px!important;border-radius:18px!important;overflow:hidden;
+  background:linear-gradient(145deg,rgba(12,42,91,.68),rgba(4,16,43,.82))!important;
+  border:1px solid rgba(70,148,255,.64)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 16px 34px rgba(0,35,112,.20)!important;
+  backdrop-filter:blur(18px) saturate(145%);-webkit-backdrop-filter:blur(18px) saturate(145%);
+}
+.new-match-player-card-v1.player-b-v1{border-color:rgba(201,91,255,.64)!important;background:linear-gradient(145deg,rgba(70,23,101,.58),rgba(13,9,42,.84))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.11),0 16px 34px rgba(62,0,108,.18)!important}
+.new-match-player-card-v1 .player-heading-row{margin:0 0 12px!important;display:block!important}
+.new-match-player-card-v1 .player-heading-row h2{font-size:12px!important;letter-spacing:.4px!important;font-weight:900!important;color:#3db2ff!important;white-space:nowrap}
+.new-match-player-card-v1.player-b-v1 .player-heading-row h2{color:#e18aff!important}
+.new-match-player-card-v1 .player-heading-row h2 span{font-size:10px;font-weight:750}
+.new-match-player-card-v1 .starter-choice{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+.new-match-player-select-v1{width:100%;display:grid;grid-template-columns:44px minmax(0,1fr) 14px;gap:8px;align-items:center;padding:8px 0 13px;border:0;border-bottom:1px solid rgba(255,255,255,.14);background:transparent;color:#fff;text-align:left}
+.new-match-avatar-v1{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:0;background:radial-gradient(circle at 50% 42%,#2ba7ff 0 18%,#0872e7 19% 34%,rgba(5,54,136,.88) 35% 100%);box-shadow:0 0 22px rgba(26,131,255,.40);border:1px solid rgba(88,164,255,.55)}
+.player-b-v1 .new-match-avatar-v1{background:radial-gradient(circle at 50% 42%,#e46cff 0 18%,#a837df 19% 34%,rgba(75,20,120,.9) 35% 100%);box-shadow:0 0 22px rgba(197,66,255,.34);border-color:rgba(222,126,255,.54)}
+.new-match-player-name-v1{font-size:19px;font-weight:900;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.new-match-chevron-v1{font-size:28px;line-height:1;color:rgba(255,255,255,.92)}
+.new-match-hidden-name-v1{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
+.new-match-race-label-v1{margin-top:13px;font-size:13px;color:rgba(255,255,255,.88)}
+.new-match-race-wrap-v1{margin-top:8px}
+.new-match-race-wrap-v1 input[type=number]{width:100%!important;height:54px!important;padding:0 8px!important;border-radius:12px!important;border:1px solid rgba(70,148,255,.60)!important;background:linear-gradient(180deg,rgba(12,49,112,.76),rgba(4,18,53,.88))!important;color:#fff!important;text-align:center!important;font-size:29px!important;font-weight:850!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 0 20px rgba(0,100,255,.13)!important}
+.player-b-v1 .new-match-race-wrap-v1 input[type=number]{border-color:rgba(203,91,255,.56)!important;background:linear-gradient(180deg,rgba(82,25,111,.62),rgba(22,9,49,.88))!important}
+.new-match-race-wrap-v1 .skill-range{display:none!important}
+.new-match-swap-v1{width:52px;height:78px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:linear-gradient(180deg,rgba(12,28,62,.92),rgba(3,11,28,.96));color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 8px 18px rgba(0,0,0,.28)}
+.new-match-swap-v1>span{font-size:27px;line-height:.8}.new-match-swap-v1 small{font-size:8px;line-height:1.2;color:rgba(255,255,255,.78)}
+.player-name-limit-note{margin:7px 2px 0!important;font-size:10px!important;color:rgba(255,255,255,.48)!important;text-align:right!important}
+.season-setting-v38,.recording-setting-v698{margin-top:12px!important;padding:12px!important;border:1px solid rgba(120,167,255,.23)!important;border-radius:15px!important;background:linear-gradient(145deg,rgba(11,35,78,.50),rgba(4,15,39,.68))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.season-setting-title-v38,.recording-setting-title-v698{font-size:14px!important;font-weight:900!important;color:#fff!important}
+.season-setting-grid-v381 select,.season-manage-btn-v381{background:rgba(10,30,67,.72)!important;border-color:rgba(127,172,255,.28)!important;color:#fff!important}
+.recording-choice-v698{min-height:58px!important;background:rgba(7,25,59,.72)!important;border:1px solid rgba(130,170,245,.28)!important;border-radius:13px!important}
+.recording-choice-v698.selected-v698{border-color:#2a8dff!important;background:linear-gradient(180deg,rgba(18,82,183,.84),rgba(6,39,105,.88))!important;box-shadow:0 0 24px rgba(0,104,255,.24),inset 0 1px 0 rgba(255,255,255,.15)!important}
+.new-match-start-v1{width:100%!important;min-height:72px!important;margin:14px auto 0!important;border:1px solid rgba(91,160,255,.72)!important;border-radius:16px!important;background:linear-gradient(180deg,#1474ff 0%,#0753db 56%,#063da7 100%)!important;color:#fff!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:13px!important;font-size:22px!important;font-weight:950!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.24),0 0 32px rgba(0,91,255,.34),0 14px 30px rgba(0,27,100,.28)!important}
+.new-match-play-v1{font-size:23px}.player-version{display:none!important}
+@media(max-width:390px){.new-match-player-grid-v1{grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);gap:5px}.new-match-swap-v1{width:42px;height:68px}.new-match-player-card-v1{padding:12px 9px!important}.new-match-player-name-v1{font-size:16px}.new-match-avatar-v1{width:36px;height:36px}.new-match-player-select-v1{grid-template-columns:36px minmax(0,1fr) 10px;gap:5px}.new-match-race-wrap-v1 input[type=number]{height:50px!important;font-size:26px!important}}
+@media(max-height:760px){.player-info-content{padding-top:12px!important}.new-match-player-card-v1{padding-top:10px!important;padding-bottom:10px!important}.new-match-player-select-v1{padding-top:5px;padding-bottom:8px}.new-match-race-label-v1{margin-top:8px}.season-setting-v38,.recording-setting-v698{margin-top:8px!important;padding:9px!important}.new-match-start-v1{min-height:62px!important;margin-top:9px!important}.recording-choice-v698{min-height:50px!important}}
 </style>
 <script>
 // RC59: screen-transition and large-view paint diagnostics.
