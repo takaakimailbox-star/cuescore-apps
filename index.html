@@ -8121,8 +8121,13 @@ body {
     <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
     <div class="sub-title">version 1.0</div>
 
-    <section class="cue-home-v1" id="cueHomeV1" aria-label="CueScore Home">
-      <h1 class="cue-home-brand-v1">CueScore</h1>
+    <section class="cue-home-v1 cue-home-integrated-v2" id="cueHomeV1" aria-label="CueScore Home">
+      <div class="cue-home-head-v2">
+        <h1 class="cue-home-brand-v1">CueScore</h1>
+        <button class="cue-home-settings-v2" id="cueHomeSettingsBtnV2" type="button" aria-label="設定を開く">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.2 13.6a7.8 7.8 0 0 0 0-3.2l2-1.55-2-3.45-2.5 1a8 8 0 0 0-2.75-1.6L13.6 2h-4l-.35 2.8A8 8 0 0 0 6.5 6.4L4 5.4 2 8.85l2 1.55a7.8 7.8 0 0 0 0 3.2l-2 1.55 2 3.45 2.5-1a8 8 0 0 0 2.75 1.6L9.6 22h4l.35-2.8a8 8 0 0 0 2.75-1.6l2.5 1 2-3.45Z"/></svg>
+        </button>
+      </div>
 
       <div class="cue-discipline-switcher-v1" id="cueDisciplineSwitcherV1" role="tablist" aria-label="ゲーム種目">
         <button class="cue-discipline-v1 is-selected" type="button" role="tab" aria-selected="true" data-discipline="rotation">
@@ -8143,31 +8148,79 @@ body {
         </button>
       </div>
 
-      <section class="cue-home-card-v1 cue-new-match-v1" aria-labelledby="cueNewMatchTitleV1">
-        <p class="cue-home-eyebrow-v1" id="cueNewMatchTitleV1">NEW MATCH</p>
-        <div class="cue-selected-game-v1">
-          <span class="cue-ball-icon-v1" id="cueSelectedGameIconV1" aria-hidden="true">15</span>
-          <strong class="cue-selected-game-name-v1" id="cueSelectedGameNameV1">Rotation</strong>
-        </div>
-
-        <div class="cue-home-setting-v1">
-          <div class="cue-home-setting-head-v1">
-            <span class="cue-home-setting-label-v1">ゲームルール</span>
-            <span class="cue-rule-value-v1" id="cueRuleValueV1">設定項目はありません</span>
+      <section class="cue-home-card-v1 cue-new-match-v1 cue-new-match-integrated-v2" aria-labelledby="cueNewMatchTitleV1">
+        <div class="cue-new-match-summary-v2">
+          <div>
+            <p class="cue-home-eyebrow-v1" id="cueNewMatchTitleV1">NEW MATCH</p>
+            <div class="cue-selected-game-v1">
+              <span class="cue-ball-icon-v1" id="cueSelectedGameIconV1" aria-hidden="true">15</span>
+              <strong class="cue-selected-game-name-v1" id="cueSelectedGameNameV1">Rotation</strong>
+            </div>
+          </div>
+          <div class="cue-game-rules-v2" aria-label="ゲームルール">
+            <strong>ゲームルール</strong>
+            <label class="cue-rule-toggle-v2">
+              <span>イリーガル</span>
+              <input id="cueIllegalRuleV2" type="checkbox" checked />
+              <span class="cue-toggle-track-v2" aria-hidden="true"></span>
+            </label>
+            <label class="cue-rule-toggle-v2">
+              <span>シュートアウト</span>
+              <input id="cueShootoutRuleV2" type="checkbox" />
+              <span class="cue-toggle-track-v2" aria-hidden="true"></span>
+            </label>
           </div>
         </div>
+        <span id="cueRuleValueV1" class="cue-rule-value-v1 cue-rule-value-hidden-v2">詳細版</span>
 
-        <div class="cue-home-setting-v1">
-          <div class="cue-home-setting-head-v1">
-            <span class="cue-home-setting-label-v1">記録方式</span>
-          </div>
-          <div class="cue-record-mode-v1" id="cueRecordModeV1" role="group" aria-label="記録方式">
-            <button class="is-selected" type="button" aria-pressed="true" data-record-mode="simple">シンプル</button>
-            <button type="button" aria-pressed="false" data-record-mode="detailed">詳細版</button>
-          </div>
+        <div class="new-match-player-grid-v1 cue-player-stack-v2" aria-label="プレーヤーとRace toの設定">
+          <section class="player-block new-match-player-card-v1 player-a-v1" id="newMatchPlayerCard1V1" data-player-label="A">
+            <div class="player-heading-row"><h2>先攻（ブレイク）</h2><button class="starter-choice selected" id="p1StarterBtn" type="button">先攻</button></div>
+            <button class="new-match-player-select-v1" id="p1PlayerSearchBtn" type="button" aria-label="先攻プレーヤーを選択">
+              <span class="new-match-avatar-v1" aria-hidden="true">●</span>
+              <span class="new-match-player-name-v1" id="p1NameDisplayV1">プレイヤー 1</span>
+              <span class="new-match-chevron-v1" aria-hidden="true">›</span>
+            </button>
+            <input id="p1Name" class="new-match-hidden-name-v1" type="text" value="プレイヤー 1" maxlength="10" />
+            <button class="new-match-race-row-v2" type="button" data-race-target="p1Race" aria-label="先攻プレーヤーのRace toを設定">
+              <span>Race to</span><strong id="p1RaceDisplayV2">120</strong><span aria-hidden="true">⌄</span>
+            </button>
+            <input id="p1Race" class="new-match-race-input-v2" type="number" value="120" inputmode="numeric" aria-label="Player1 Race to" readonly />
+            <input id="p1Skill" class="skill-range p1" type="range" min="1" max="6" step="1" value="2" aria-label="Player1 Race to 数字選択バー" />
+          </section>
+
+          <button class="new-match-swap-v1 cue-swap-v2" id="starterSwapBtnV1" type="button" aria-label="先攻と後攻を入れ替える">
+            <span class="cue-swap-icon-v2" aria-hidden="true">⟳</span><strong>入れ替え</strong>
+          </button>
+
+          <section class="player-block new-match-player-card-v1 player-b-v1" id="newMatchPlayerCard2V1" data-player-label="B">
+            <div class="player-heading-row"><h2>後攻</h2><button class="starter-choice" id="p2StarterBtn" type="button">後攻</button></div>
+            <button class="new-match-player-select-v1" id="p2PlayerSearchBtn" type="button" aria-label="後攻プレーヤーを選択">
+              <span class="new-match-avatar-v1" aria-hidden="true">●</span>
+              <span class="new-match-player-name-v1" id="p2NameDisplayV1">プレイヤー 2</span>
+              <span class="new-match-chevron-v1" aria-hidden="true">›</span>
+            </button>
+            <input id="p2Name" class="new-match-hidden-name-v1" type="text" value="プレイヤー 2" maxlength="10" />
+            <button class="new-match-race-row-v2" type="button" data-race-target="p2Race" aria-label="後攻プレーヤーのRace toを設定">
+              <span>Race to</span><strong id="p2RaceDisplayV2">120</strong><span aria-hidden="true">⌄</span>
+            </button>
+            <input id="p2Race" class="new-match-race-input-v2" type="number" value="120" inputmode="numeric" aria-label="Player2 Race to" readonly />
+            <input id="p2Skill" class="skill-range p2" type="range" min="1" max="6" step="1" value="2" aria-label="Player2 Race to 数字選択バー" />
+          </section>
         </div>
 
-        <button class="cue-home-primary-v1" id="newGameBtn" type="button">プレーヤーを選択</button>
+        <div class="season-setting-v38" aria-hidden="true">
+          <select id="matchCategoryV38" aria-label="試合区分"></select>
+          <select id="matchSeasonV38" aria-label="シーズン名"><option value="">指定なし</option></select>
+          <button id="manageCategoriesBtnV381" type="button">＋</button>
+          <button id="manageSeasonsBtnV381" type="button">＋</button>
+        </div>
+        <div class="player-name-limit-note" id="playerNameLimitNote">プレーヤー名は10文字まで</div>
+
+        <button class="start-game-button new-match-start-v1 cue-home-start-v2" id="startGameBtn" type="button">
+          <span class="new-match-play-v1" aria-hidden="true">▶</span><span>試合開始</span>
+        </button>
+        <p class="cue-start-note-v2">タップすると試合が開始されます</p>
       </section>
 
       <section class="cue-home-card-v1 cue-resume-v1" id="cueResumeCardV1" aria-label="Resume">
@@ -8207,6 +8260,32 @@ body {
           </span><span>Settings</span>
         </button>
       </nav>
+
+      <div class="new-match-race-picker-v1 hidden" id="newMatchRacePickerV1" aria-hidden="true">
+        <div class="new-match-race-sheet-v1" role="dialog" aria-modal="true" aria-labelledby="newMatchRacePickerTitleV1">
+          <div class="new-match-race-sheet-head-v1">
+            <strong id="newMatchRacePickerTitleV1">Race toを選択</strong>
+            <button id="newMatchRacePickerCloseV1" type="button" aria-label="閉じる">×</button>
+          </div>
+          <div class="new-match-race-options-v1" role="group" aria-label="Race to候補">
+            <button type="button" data-race-value="61">61</button>
+            <button type="button" data-race-value="90">90</button>
+            <button type="button" data-race-value="120">120</button>
+            <button type="button" data-race-value="150">150</button>
+            <button type="button" data-race-value="180">180</button>
+            <button type="button" data-race-value="240">240</button>
+            <button type="button" data-race-value="300">300</button>
+            <button type="button" data-race-value="other">その他</button>
+          </div>
+          <div class="new-match-race-custom-v1 hidden" id="newMatchRaceCustomV1">
+            <label for="newMatchRaceCustomInputV1">Race toを入力</label>
+            <div>
+              <input id="newMatchRaceCustomInputV1" type="number" min="1" step="1" inputmode="numeric" placeholder="1以上の整数" />
+              <button id="newMatchRaceCustomApplyV1" type="button">決定</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="home-dashboard" id="homeDashboard" aria-label="ダッシュボード">
@@ -8235,125 +8314,7 @@ body {
 
     <div class="credit">Created by Rion</div>
 
-    <section class="player-info-screen hidden" id="playerInfoScreen" aria-label="Player info">
-      <header class="player-info-header new-match-header-v1">
-        <button class="back-button" id="backToTitleBtn" type="button" aria-label="キャンセル">キャンセル</button>
-        <div class="player-info-title">New Match<span class="new-match-subtitle-v1">試合の設定をして開始します</span></div>
-        <button class="new-match-help-v1" id="newMatchHelpBtnV1" type="button" aria-label="New Matchの説明">?</button>
-      </header>
-
-      <div class="player-info-content">
-        <div class="new-match-player-grid-v1" aria-label="プレーヤーとRace toの設定">
-          <section class="player-block new-match-player-card-v1 player-a-v1" id="newMatchPlayerCard1V1" data-player-label="A">
-            <div class="player-heading-row"><h2>PLAYER A <span>（先攻・ブレイク）</span></h2><button class="starter-choice selected" id="p1StarterBtn" type="button">先攻</button></div>
-            <button class="new-match-player-select-v1" id="p1PlayerSearchBtn" type="button" aria-label="Player Aを選択">
-              <span class="new-match-avatar-v1" aria-hidden="true">●</span>
-              <span class="new-match-player-name-v1" id="p1NameDisplayV1">プレイヤー 1</span>
-              <span class="new-match-chevron-v1" aria-hidden="true">›</span>
-            </button>
-            <input id="p1Name" class="new-match-hidden-name-v1" type="text" value="プレイヤー 1" maxlength="10" aria-describedby="playerNameLimitNote" />
-            <div class="new-match-race-label-v1">Race to</div>
-            <div class="new-match-race-wrap-v1">
-              <input id="p1Race" type="number" value="120" inputmode="numeric" aria-label="Player1 Race to" readonly />
-              <input id="p1Skill" class="skill-range p1" type="range" min="1" max="6" step="1" value="2" aria-label="Player1 Race to 数字選択バー" />
-            </div>
-          </section>
-
-          <button class="new-match-swap-v1" id="starterSwapBtnV1" type="button" aria-label="先攻と後攻を入れ替える">
-            <span aria-hidden="true">⇄</span><small>先攻・後攻<br>入れ替え</small>
-          </button>
-
-          <section class="player-block new-match-player-card-v1 player-b-v1" id="newMatchPlayerCard2V1" data-player-label="B">
-            <div class="player-heading-row"><h2>PLAYER B <span>（後攻）</span></h2><button class="starter-choice" id="p2StarterBtn" type="button">後攻</button></div>
-            <button class="new-match-player-select-v1" id="p2PlayerSearchBtn" type="button" aria-label="Player Bを選択">
-              <span class="new-match-avatar-v1" aria-hidden="true">●</span>
-              <span class="new-match-player-name-v1" id="p2NameDisplayV1">プレイヤー 2</span>
-              <span class="new-match-chevron-v1" aria-hidden="true">›</span>
-            </button>
-            <input id="p2Name" class="new-match-hidden-name-v1" type="text" value="プレイヤー 2" maxlength="10" aria-describedby="playerNameLimitNote" />
-            <div class="new-match-race-label-v1">Race to</div>
-            <div class="new-match-race-wrap-v1">
-              <input id="p2Race" type="number" value="120" inputmode="numeric" aria-label="Player2 Race to" readonly />
-              <input id="p2Skill" class="skill-range p2" type="range" min="1" max="6" step="1" value="2" aria-label="Player2 Race to 数字選択バー" />
-            </div>
-          </section>
-        </div>
-
-        <div class="player-name-limit-note" id="playerNameLimitNote">プレーヤー名は10文字まで</div>
-
-        <section class="season-setting-v38" aria-label="試合分類設定">
-          <div class="season-setting-title-v38">試合分類</div>
-          <div class="season-setting-grid-v381">
-            <label for="matchCategoryV38">区分</label>
-            <div class="season-select-row-v381">
-              <select id="matchCategoryV38" aria-label="試合区分"></select>
-              <button id="manageCategoriesBtnV381" class="season-manage-btn-v381" type="button"
-                aria-label="試合区分を管理">＋</button>
-            </div>
-
-            <label for="matchSeasonV38">シーズン名</label>
-            <div class="season-select-row-v381">
-              <select id="matchSeasonV38" aria-label="シーズン名">
-                <option value="">指定なし</option>
-              </select>
-              <button id="manageSeasonsBtnV381" class="season-manage-btn-v381" type="button"
-                aria-label="シーズン名を管理">＋</button>
-            </div>
-          </div>
-        </section>
-
-        <section class="recording-setting-v698" aria-label="記録方法">
-          <div class="recording-setting-title-v698">記録方法</div>
-          <div class="new-match-record-summary-v1">
-            <span id="newMatchRecordModeLabelV1">シンプル版</span>
-            <small>Homeで選択済み</small>
-          </div>
-          <div class="recording-setting-options-v698">
-            <button id="recordModeSimpleChoiceV698" class="recording-choice-v698" type="button" data-record-mode-v698="simple">
-              <span class="recording-choice-name-v698">シンプル</span>
-              <span class="recording-choice-desc-v698">得点のみを記録</span>
-            </button>
-            <button id="recordModeDetailChoiceV698" class="recording-choice-v698 selected-v698" type="button" data-record-mode-v698="detail">
-              <span class="recording-choice-name-v698">詳細版</span>
-              <span class="recording-choice-desc-v698">プレー内容も記録</span>
-            </button>
-          </div>
-        </section>
-
-        <button class="start-game-button new-match-start-v1" id="startGameBtn" type="button">
-          <span class="new-match-play-v1" aria-hidden="true">▶</span>
-          <span>試合開始</span>
-        </button>
-      </div>
-
-      <div class="new-match-race-picker-v1 hidden" id="newMatchRacePickerV1" aria-hidden="true">
-        <div class="new-match-race-sheet-v1" role="dialog" aria-modal="true" aria-labelledby="newMatchRacePickerTitleV1">
-          <div class="new-match-race-sheet-head-v1">
-            <strong id="newMatchRacePickerTitleV1">Race toを選択</strong>
-            <button id="newMatchRacePickerCloseV1" type="button" aria-label="閉じる">×</button>
-          </div>
-          <div class="new-match-race-options-v1" role="group" aria-label="Race to候補">
-            <button type="button" data-race-value="61">61</button>
-            <button type="button" data-race-value="90">90</button>
-            <button type="button" data-race-value="120">120</button>
-            <button type="button" data-race-value="150">150</button>
-            <button type="button" data-race-value="180">180</button>
-            <button type="button" data-race-value="240">240</button>
-            <button type="button" data-race-value="300">300</button>
-            <button type="button" data-race-value="other">その他</button>
-          </div>
-          <div class="new-match-race-custom-v1 hidden" id="newMatchRaceCustomV1">
-            <label for="newMatchRaceCustomInputV1">Race toを入力</label>
-            <div>
-              <input id="newMatchRaceCustomInputV1" type="number" min="1" step="1" inputmode="numeric" placeholder="1以上の整数" />
-              <button id="newMatchRaceCustomApplyV1" type="button">決定</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="player-version">version 8.2.0</div>
-    </section>
+    <section class="player-info-screen hidden" id="playerInfoScreen" aria-label="Player info"></section>
 
     <section id="startConfirmOverlayV698" class="start-confirm-overlay-v698 hidden" aria-hidden="true" aria-label="試合開始確認">
       <div class="start-confirm-card-v698">
@@ -8944,16 +8905,8 @@ body {
   }
 
   function openPlayerInfo() {
-    clearPrimaryModesV127();
-    closeNavigationOverlaysV127();
-    syncNewMatchFromHomeV1();
-    app.classList.add("player-info-mode");
-    playerInfoScreen.classList.remove("hidden");
-    proGameScreen.classList.add("hidden");
-    recordsScreen?.classList.add("hidden");
-    document.getElementById("rankingsScreen")?.classList.add("hidden");
-    document.getElementById("vsAnalysisScreen")?.classList.add("hidden");
-    window.scrollTo(0, 0);
+    backToTitle();
+    document.getElementById("newMatchPlayerCard1V1")?.scrollIntoView({ behavior:"smooth", block:"center" });
   }
 
   function backToTitle() {
@@ -8989,10 +8942,8 @@ body {
     const card2=document.getElementById("newMatchPlayerCard2V1");
     const h1=card1?.querySelector(".player-heading-row h2");
     const h2=card2?.querySelector(".player-heading-row h2");
-    const label1=card1?.dataset.playerLabel || "A";
-    const label2=card2?.dataset.playerLabel || "B";
-    if(h1) h1.innerHTML = `PLAYER ${label1} <span>（${player===1?"先攻・ブレイク":"後攻"}）</span>`;
-    if(h2) h2.innerHTML = `PLAYER ${label2} <span>（${player===2?"先攻・ブレイク":"後攻"}）</span>`;
+    if(h1) h1.textContent = player===1 ? "先攻（ブレイク）" : "後攻";
+    if(h2) h2.textContent = player===2 ? "先攻（ブレイク）" : "後攻";
   }
 
   function swapNewMatchPlayerCardsV1() {
@@ -9011,14 +8962,9 @@ body {
     if (p1Skill && p2Skill) [p1Skill.value, p2Skill.value] = [p2Skill.value, p1Skill.value];
     [selectedRegisteredPlayer[1], selectedRegisteredPlayer[2]] = [selectedRegisteredPlayer[2], selectedRegisteredPlayer[1]];
 
-    const label1 = card1.dataset.playerLabel || "A";
-    card1.dataset.playerLabel = card2.dataset.playerLabel || "B";
-    card2.dataset.playerLabel = label1;
-    card1.classList.toggle("player-b-v1");
-    card2.classList.toggle("player-b-v1");
-
     syncNewMatchNameV1("p1Name", "p1NameDisplayV1");
     syncNewMatchNameV1("p2Name", "p2NameDisplayV1");
+    syncHomeRaceDisplaysV2();
     setSelectedStarter(1);
   }
 
@@ -9036,13 +8982,13 @@ body {
     const goal = document.getElementById(goalId);
     if (!skill || !goal) return;
     goal.value = skillGoals[Number(skill.value)] || 120;
+    syncHomeRaceDisplaysV2();
   }
 
-  document.getElementById("newGameBtn")?.addEventListener("click", openPlayerInfo);
   // CueScore Home v1: discipline and recording preferences.
   (() => {
     const DISCIPLINE_KEY = "cueScore.selectedDiscipline.v1";
-    const RECORD_MODE_KEY = "cueScore.recordMode.v1";
+    const RULES_KEY = "cueScore.homeRules.v2";
     const disciplines = {
       rotation: { name: "Rotation", icon: "15", rule: "設定項目はありません" },
       "9ball": { name: "9-Ball", icon: "9", rule: "標準ルール（準備中）" },
@@ -9062,9 +9008,12 @@ body {
     let selectedDiscipline = disciplines[safeRead(DISCIPLINE_KEY, "rotation")]
       ? safeRead(DISCIPLINE_KEY, "rotation")
       : "rotation";
-    let selectedRecordMode = ["simple", "detailed"].includes(safeRead(RECORD_MODE_KEY, "simple"))
-      ? safeRead(RECORD_MODE_KEY, "simple")
-      : "simple";
+    let selectedRules;
+    try {
+      selectedRules = JSON.parse(safeRead(RULES_KEY, '{"illegal":true,"shootout":false}'));
+    } catch (_) {
+      selectedRules = { illegal:true, shootout:false };
+    }
 
     const renderHomePreference = () => {
       const selected = disciplines[selectedDiscipline];
@@ -9075,13 +9024,11 @@ body {
       });
       document.getElementById("cueSelectedGameNameV1").textContent = selected.name;
       document.getElementById("cueSelectedGameIconV1").textContent = selected.icon;
-      document.getElementById("cueRuleValueV1").textContent = selected.rule;
-
-      document.querySelectorAll("[data-record-mode]").forEach(button => {
-        const active = button.dataset.recordMode === selectedRecordMode;
-        button.classList.toggle("is-selected", active);
-        button.setAttribute("aria-pressed", String(active));
-      });
+      document.getElementById("cueRuleValueV1").textContent = "詳細版";
+      const illegal = document.getElementById("cueIllegalRuleV2");
+      const shootout = document.getElementById("cueShootoutRuleV2");
+      if (illegal) illegal.checked = selectedRules.illegal !== false;
+      if (shootout) shootout.checked = Boolean(selectedRules.shootout);
     };
 
     document.getElementById("cueDisciplineSwitcherV1")?.addEventListener("click", event => {
@@ -9091,17 +9038,21 @@ body {
       safeWrite(DISCIPLINE_KEY, selectedDiscipline);
       renderHomePreference();
     });
-    document.getElementById("cueRecordModeV1")?.addEventListener("click", event => {
-      const button = event.target.closest("[data-record-mode]");
-      if (!button) return;
-      selectedRecordMode = button.dataset.recordMode === "detailed" ? "detailed" : "simple";
-      safeWrite(RECORD_MODE_KEY, selectedRecordMode);
-      renderHomePreference();
+    ["cueIllegalRuleV2","cueShootoutRuleV2"].forEach(id => {
+      document.getElementById(id)?.addEventListener("change", () => {
+        selectedRules = {
+          illegal: Boolean(document.getElementById("cueIllegalRuleV2")?.checked),
+          shootout: Boolean(document.getElementById("cueShootoutRuleV2")?.checked)
+        };
+        safeWrite(RULES_KEY, JSON.stringify(selectedRules));
+      });
     });
+    document.getElementById("cueHomeSettingsBtnV2")?.addEventListener("click", () => document.getElementById("settingsBtn")?.click());
 
     window.getCueScoreHomeSelectionV1 = () => ({
       disciplineId: selectedDiscipline,
-      recordMode: selectedRecordMode
+      recordMode: "detailed",
+      rules: { ...selectedRules }
     });
     renderHomePreference();
   })();
@@ -9445,6 +9396,13 @@ let matchRecordsRawCacheV152 = null;
   document.getElementById("newMatchPlayerCard2V1")?.addEventListener("click", event => { if (!event.target.closest("input,button")) setSelectedStarter(2); });
   document.getElementById("newMatchHelpBtnV1")?.addEventListener("click", () => alert("プレーヤーとRace to、記録方法を設定して試合を開始します。中央の⇄で先攻・後攻を入れ替えられます。"));
   const syncNewMatchNameV1 = (inputId, displayId) => { const input=document.getElementById(inputId); const display=document.getElementById(displayId); if(input&&display) display.textContent=(input.value||"").trim()||"未設定"; };
+  function syncHomeRaceDisplaysV2() {
+    [1,2].forEach(player => {
+      const input = document.getElementById(`p${player}Race`);
+      const display = document.getElementById(`p${player}RaceDisplayV2`);
+      if (input && display) display.textContent = input.value || "120";
+    });
+  }
   document.getElementById("p1Name")?.addEventListener("input", () => syncNewMatchNameV1("p1Name","p1NameDisplayV1"));
   document.getElementById("p2Name")?.addEventListener("input", () => syncNewMatchNameV1("p2Name","p2NameDisplayV1"));
   syncNewMatchNameV1("p1Name","p1NameDisplayV1");
@@ -9454,6 +9412,7 @@ let matchRecordsRawCacheV152 = null;
   setSelectedStarter(1);
   syncSkillGoal("p1Skill", "p1Race");
   syncSkillGoal("p2Skill", "p2Race");
+  syncHomeRaceDisplaysV2();
 
 
   // ---- Registered player library (Phase 1) ----
@@ -10792,6 +10751,11 @@ let matchRecordsRawCacheV152 = null;
     raceInput.value = player.race;
     rangeInput.value = raceValueToStep(player.race);
     selectedRegisteredPlayer[playerLibraryTarget] = id;
+    syncHomeRaceDisplaysV2();
+    syncNewMatchNameV1(
+      playerLibraryTarget === 1 ? "p1Name" : "p2Name",
+      playerLibraryTarget === 1 ? "p1NameDisplayV1" : "p2NameDisplayV1"
+    );
     closePlayerLibrary();
   }
 
@@ -13695,7 +13659,7 @@ let matchRecordsRawCacheV152 = null;
 
   function requestBackToPlayerInfo() {
     // Game Setをcancelした後も、戻るボタンだけは使用できる。
-    if (!confirm("現在の試合を終了してPlayer infoへ戻りますか？")) return;
+    if (!confirm("現在の試合を終了してHomeへ戻りますか？")) return;
     // RC11: invalidate delayed callbacks and close all transient game overlays.
     currentGameSessionIdV104 = null;
     breakUndoRestoreV697 = null;
@@ -13715,9 +13679,9 @@ let matchRecordsRawCacheV152 = null;
     el("proSummary")?.classList.add("hidden");
     el("proNextRackBox")?.classList.add("hidden");
     app.classList.remove("pro-game-mode");
-    app.classList.add("player-info-mode");
     proGameScreen.classList.add("hidden");
-    playerInfoScreen.classList.remove("hidden");
+    playerInfoScreen.classList.add("hidden");
+    window.scrollTo(0, 0);
   }
 
   updateRecordModeChoicesV698();
@@ -13725,11 +13689,9 @@ let matchRecordsRawCacheV152 = null;
   el("recordModeDetailChoiceV698")?.addEventListener("click", () => selectRecordModeV698("detail"));
 
   function syncNewMatchFromHomeV1() {
-    const selection = window.getCueScoreHomeSelectionV1?.();
-    const mode = selection?.recordMode === "detailed" ? "detail" : "simple";
-    selectRecordModeV698(mode);
+    selectRecordModeV698("detail");
     const label = el("newMatchRecordModeLabelV1");
-    if (label) label.textContent = mode === "detail" ? "分析用詳細版" : "シンプル版";
+    if (label) label.textContent = "分析用詳細版";
   }
 
   let activeRaceInputV1 = null;
@@ -13768,6 +13730,7 @@ let matchRecordsRawCacheV152 = null;
     const skill = el(activeRaceInputV1.id === "p1Race" ? "p1Skill" : "p2Skill");
     if (skill) skill.value = String(raceValueToStep(normalized));
     activeRaceInputV1.dispatchEvent(new Event("change", { bubbles:true }));
+    syncHomeRaceDisplaysV2();
     closeRacePickerV1();
   }
 
@@ -13780,6 +13743,9 @@ let matchRecordsRawCacheV152 = null;
         openRacePickerV1(input);
       }
     });
+  });
+  document.querySelectorAll("[data-race-target]").forEach(button => {
+    button.addEventListener("click", () => openRacePickerV1(el(button.dataset.raceTarget)));
   });
   el("newMatchRacePickerV1")?.addEventListener("click", event => {
     if (event.target === event.currentTarget) closeRacePickerV1();
@@ -13807,7 +13773,10 @@ let matchRecordsRawCacheV152 = null;
     if (event.key === "Escape" && !el("newMatchRacePickerV1")?.classList.contains("hidden")) closeRacePickerV1();
   });
 
-  el("startGameBtn")?.addEventListener("click", showStartConfirmV698);
+  el("startGameBtn")?.addEventListener("click", () => {
+    selectRecordModeV698("detail");
+    showStartConfirmV698();
+  });
   el("startConfirmBackV698")?.addEventListener("click", closeStartConfirmV698);
   el("startConfirmGoV698")?.addEventListener("click", startProGame);
   el("recordModeSimpleV611")?.addEventListener("click", () => chooseRecordModeAndStartV611("simple"));
@@ -18691,6 +18660,127 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   .season-setting-v38,.recording-setting-v698{margin-top:8px!important;padding:9px!important}
   .new-match-start-v1{min-height:54px!important;margin-top:9px!important}
   .recording-choice-v698{min-height:54px!important}
+}
+
+/* CueScore Home v2: Home / New Match integrated official layout */
+.cue-home-integrated-v2{
+  width:min(100%,480px);
+  gap:12px;
+  padding-top:calc(10px + env(safe-area-inset-top));
+}
+.cue-home-head-v2{
+  position:relative;
+  min-height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.cue-home-head-v2 .cue-home-brand-v1{font-size:27px}
+.cue-home-settings-v2{
+  position:absolute;right:0;top:50%;width:36px;height:36px;padding:6px;
+  transform:translateY(-50%);border:0;background:transparent;color:#171717;
+}
+.cue-home-settings-v2 svg{
+  width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.cue-home-integrated-v2 .cue-discipline-v1{min-height:65px!important}
+.cue-home-integrated-v2 .cue-ball-icon-v1{width:31px;height:31px;font-size:12px}
+.cue-new-match-integrated-v2{padding:16px!important}
+.cue-new-match-summary-v2{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(145px,.92fr);
+  gap:14px;padding-bottom:14px;border-bottom:1px solid #dededb;
+}
+.cue-new-match-summary-v2>div:first-child{display:flex;flex-direction:column;justify-content:center}
+.cue-new-match-summary-v2 .cue-home-eyebrow-v1{margin-bottom:16px}
+.cue-new-match-summary-v2 .cue-selected-game-v1{margin:0}
+.cue-new-match-summary-v2 .cue-selected-game-v1 .cue-ball-icon-v1{width:42px;height:42px;font-size:17px}
+.cue-new-match-summary-v2 .cue-selected-game-name-v1{font-size:23px}
+.cue-game-rules-v2{
+  padding-left:14px;border-left:1px solid #dededb;
+  display:flex;flex-direction:column;justify-content:center;gap:9px;
+}
+.cue-game-rules-v2>strong{font-size:13px}
+.cue-rule-toggle-v2{
+  display:grid;grid-template-columns:minmax(0,1fr) 38px;gap:8px;align-items:center;
+  font-size:12px;font-weight:680;color:#292929;
+}
+.cue-rule-toggle-v2 input{position:absolute;opacity:0;pointer-events:none}
+.cue-toggle-track-v2{
+  position:relative;width:38px;height:22px;border-radius:999px;background:#d2d2cf;
+  transition:background .16s ease;
+}
+.cue-toggle-track-v2::after{
+  content:"";position:absolute;left:2px;top:2px;width:18px;height:18px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.16);transition:transform .16s ease;
+}
+.cue-rule-toggle-v2 input:checked+.cue-toggle-track-v2{background:#171717}
+.cue-rule-toggle-v2 input:checked+.cue-toggle-track-v2::after{transform:translateX(16px)}
+.cue-rule-value-hidden-v2{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important}
+.cue-player-stack-v2{
+  display:flex!important;flex-direction:column!important;gap:10px!important;
+  margin-top:14px;
+}
+.cue-player-stack-v2 .new-match-player-card-v1,
+.cue-player-stack-v2 .new-match-player-card-v1.player-b-v1{
+  position:relative;margin:0!important;padding:17px 13px 10px!important;border-radius:15px!important;
+  background:#fff!important;border:1px solid #d8d8d4!important;box-shadow:none!important;
+  overflow:visible!important;
+}
+.cue-player-stack-v2 .player-heading-row{
+  position:absolute;z-index:2;left:12px;top:-11px;margin:0!important;padding:4px 9px!important;
+  border-radius:999px;background:#f4f4f2;
+}
+.cue-player-stack-v2 .player-heading-row h2,
+.cue-player-stack-v2 .new-match-player-card-v1.player-b-v1 .player-heading-row h2{
+  color:#252525!important;font-size:11px!important;font-weight:800!important;letter-spacing:0!important;
+}
+.cue-player-stack-v2 .starter-choice{display:none!important}
+.cue-player-stack-v2 .new-match-player-select-v1{
+  grid-template-columns:38px minmax(0,1fr) 14px;gap:10px;padding:5px 0 11px;
+}
+.cue-player-stack-v2 .new-match-player-name-v1{font-size:18px}
+.new-match-race-row-v2{
+  width:100%;min-height:40px!important;padding:6px 1px 0;border:0;background:transparent;color:#171717;
+  display:grid;grid-template-columns:1fr auto 16px;gap:8px;align-items:center;text-align:left;
+}
+.new-match-race-row-v2>span:first-child{font-size:12px;font-weight:700}
+.new-match-race-row-v2 strong{font-size:23px;line-height:1;font-weight:850}
+.new-match-race-row-v2>span:last-child{font-size:18px;line-height:1}
+.new-match-race-input-v2,.cue-player-stack-v2 .skill-range{display:none!important}
+.cue-swap-v2{
+  order:0;width:100%!important;height:46px!important;border-radius:12px!important;
+  display:flex!important;flex-direction:row!important;gap:10px!important;
+  border:1px solid #d8d8d4!important;background:#fafaf8!important;color:#171717!important;
+  box-shadow:none!important;
+}
+.cue-swap-v2 .cue-swap-icon-v2{
+  width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#fff;
+  box-shadow:0 2px 7px rgba(0,0,0,.09);font-size:23px!important;line-height:1!important;
+}
+.cue-swap-v2 strong{font-size:14px}
+.cue-home-start-v2{
+  min-height:54px!important;margin-top:12px!important;border-radius:12px!important;font-size:18px!important;
+}
+.cue-start-note-v2{margin:9px 0 0;text-align:center;color:#777775;font-size:11px}
+.cue-home-integrated-v2 .cue-resume-v1{margin-top:0}
+.cue-home-integrated-v2 .new-match-race-picker-v1{font-family:inherit}
+.player-info-screen#playerInfoScreen{display:none!important}
+@media(max-width:390px){
+  .cue-home-integrated-v2{padding-left:12px;padding-right:12px}
+  .cue-new-match-summary-v2{grid-template-columns:minmax(0,1fr) 145px;gap:10px}
+  .cue-new-match-integrated-v2{padding:14px!important}
+}
+@media(max-height:740px){
+  .cue-home-integrated-v2{gap:8px}
+  .cue-home-integrated-v2 .cue-discipline-v1{min-height:55px!important}
+  .cue-new-match-summary-v2{padding-bottom:11px}
+  .cue-player-stack-v2{margin-top:12px;gap:8px!important}
+  .cue-player-stack-v2 .new-match-player-card-v1,
+  .cue-player-stack-v2 .new-match-player-card-v1.player-b-v1{padding-top:15px!important;padding-bottom:7px!important}
+  .cue-swap-v2{height:42px!important}
+  .cue-home-start-v2{min-height:48px!important;margin-top:9px!important}
+  .cue-start-note-v2{margin-top:6px}
 }
 </style>
 <script>
