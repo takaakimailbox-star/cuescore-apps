@@ -8190,7 +8190,9 @@ body {
           </section>
 
           <button class="new-match-swap-v1 cue-swap-v2" id="starterSwapBtnV1" type="button" aria-label="先攻と後攻を入れ替える">
-            <span class="cue-swap-icon-v2" aria-hidden="true">⟳</span><strong>入れ替え</strong>
+            <span class="cue-swap-icon-v2" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M19 8a8 8 0 0 0-13.7-2.1L3.5 8"/><path d="M3.5 4.5V8H7"/><path d="M5 16a8 8 0 0 0 13.7 2.1l1.8-2.1"/><path d="M20.5 19.5V16H17"/></svg>
+            </span><strong>入れ替え</strong>
           </button>
 
           <section class="player-block new-match-player-card-v1 player-b-v1" id="newMatchPlayerCard2V1" data-player-label="B">
@@ -18839,6 +18841,147 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   .cue-home-start-v2{min-height:48px!important;margin-top:9px!important}
   .cue-start-note-v2{margin-top:6px}
   .cue-home-integrated-v2 .cue-resume-v1{padding:10px 14px;border-radius:18px}
+}
+
+/* CueScore Foundation polish v1: shared visual language */
+:root{
+  --cue-space-1:4px;
+  --cue-space-2:8px;
+  --cue-space-3:12px;
+  --cue-space-4:16px;
+  --cue-space-6:24px;
+  --cue-ink:#181818;
+  --cue-ink-secondary:#6f6f6b;
+  --cue-border:#dfdfda;
+  --cue-border-soft:#e9e9e5;
+  --cue-pressed:#f2f2ef;
+  --cue-focus:rgba(24,24,24,.24);
+  --cue-card-shadow:0 1px 1px rgba(0,0,0,.018),0 8px 24px rgba(0,0,0,.035);
+  --cue-motion-fast:150ms;
+}
+.cue-home-integrated-v2{
+  color:var(--cue-ink);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+.cue-home-card-v1{
+  border-color:var(--cue-border)!important;
+  box-shadow:var(--cue-card-shadow)!important;
+}
+.cue-home-eyebrow-v1{
+  color:var(--cue-ink-secondary);
+  font-weight:720;
+  letter-spacing:.14em;
+}
+.cue-selected-game-name-v1{
+  color:var(--cue-ink);
+  font-weight:790;
+  letter-spacing:-.025em;
+}
+.cue-game-rules-v2{
+  border-left-color:var(--cue-border);
+}
+.cue-game-rules-v2>strong{
+  font-weight:760;
+  letter-spacing:-.01em;
+}
+.cue-rule-toggle-v2{
+  color:#30302e;
+  font-weight:650;
+}
+.cue-toggle-track-v2{
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.035);
+}
+.cue-toggle-track-v2::after{
+  box-shadow:0 1px 2px rgba(0,0,0,.18);
+}
+.cue-player-stack-v2 .new-match-player-card-v1,
+.cue-player-stack-v2 .new-match-player-card-v1.player-b-v1{
+  border-color:var(--cue-border)!important;
+}
+.cue-player-stack-v2 .new-match-player-select-v1{
+  border-bottom-color:var(--cue-border-soft);
+  border-radius:8px 8px 0 0;
+  transition:background-color var(--cue-motion-fast) ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.cue-player-stack-v2 .new-match-player-name-v1{
+  font-weight:780;
+  letter-spacing:-.018em;
+}
+.cue-player-stack-v2 .new-match-chevron-v1{
+  color:#777773;
+  font-weight:500;
+}
+.new-match-race-row-v2{
+  border-radius:0 0 8px 8px;
+  transition:background-color var(--cue-motion-fast) ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.new-match-race-row-v2>span:first-child{
+  color:#343432;
+  font-weight:680;
+  letter-spacing:.005em;
+}
+.new-match-race-row-v2 strong{
+  font-weight:820;
+  letter-spacing:-.035em;
+}
+.cue-player-stack-v2 .player-heading-row{
+  color:#292927;
+  box-shadow:0 0 0 1px rgba(0,0,0,.018);
+}
+.cue-swap-v2{
+  border-color:var(--cue-border)!important;
+  transition:background-color var(--cue-motion-fast) ease,transform var(--cue-motion-fast) ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.cue-swap-v2 .cue-swap-icon-v2{
+  box-shadow:0 1px 5px rgba(0,0,0,.075);
+}
+.cue-swap-v2 .cue-swap-icon-v2 svg{
+  width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.cue-swap-v2 strong{font-weight:740;letter-spacing:.01em}
+.cue-home-start-v2{
+  background:#181818!important;
+  border-color:#181818!important;
+  font-weight:800!important;
+  letter-spacing:.01em;
+  transition:background-color var(--cue-motion-fast) ease,transform var(--cue-motion-fast) ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.cue-start-note-v2,.cue-resume-status-v1{color:var(--cue-ink-secondary)}
+.cue-resume-title-v1{font-weight:760}
+.cue-home-settings-v2,
+.cue-discipline-v1,
+.cue-bottom-nav-v1 button{
+  -webkit-tap-highlight-color:transparent;
+  transition:color var(--cue-motion-fast) ease,background-color var(--cue-motion-fast) ease,transform var(--cue-motion-fast) ease;
+}
+.cue-home-settings-v2 svg,
+.cue-bottom-nav-v1 svg{stroke-width:1.75}
+.cue-player-stack-v2 .new-match-player-select-v1:active,
+.new-match-race-row-v2:active,
+.cue-swap-v2:active,
+.cue-home-settings-v2:active,
+.cue-bottom-nav-v1 button:active{
+  background-color:var(--cue-pressed)!important;
+}
+.cue-home-start-v2:active{background:#303030!important}
+.cue-home-start-v2:active,.cue-swap-v2:active{transform:scale(.995)}
+.cue-home-integrated-v2 button:focus-visible,
+.cue-home-integrated-v2 input:focus-visible{
+  outline:3px solid var(--cue-focus);
+  outline-offset:2px;
+}
+@media(prefers-reduced-motion:reduce){
+  .cue-home-integrated-v2 *,
+  .cue-home-integrated-v2 *::before,
+  .cue-home-integrated-v2 *::after{
+    transition-duration:.01ms!important;
+  }
 }
 </style>
 <script>
