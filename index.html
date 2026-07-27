@@ -8192,7 +8192,7 @@ body {
           <button class="new-match-swap-v1 cue-swap-v2" id="starterSwapBtnV1" type="button" aria-label="先攻と後攻を入れ替える">
             <span class="cue-swap-icon-v2" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M19 8a8 8 0 0 0-13.7-2.1L3.5 8"/><path d="M3.5 4.5V8H7"/><path d="M5 16a8 8 0 0 0 13.7 2.1l1.8-2.1"/><path d="M20.5 19.5V16H17"/></svg>
-            </span><strong>入れ替え</strong>
+            </span>
           </button>
 
           <section class="player-block new-match-player-card-v1 player-b-v1" id="newMatchPlayerCard2V1" data-player-label="B">
@@ -18722,7 +18722,11 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
 .cue-rule-toggle-v2 input:checked+.cue-toggle-track-v2::after{transform:translateX(16px)}
 .cue-rule-value-hidden-v2{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important}
 .cue-player-stack-v2{
-  display:flex!important;flex-direction:column!important;gap:10px!important;
+  position:relative;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:auto 0 auto!important;
+  gap:10px!important;
   margin-top:14px;
 }
 .cue-player-stack-v2 .new-match-player-card-v1,
@@ -18753,16 +18757,17 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
 .new-match-race-row-v2>span:last-child{font-size:18px;line-height:1}
 .new-match-race-input-v2,.cue-player-stack-v2 .skill-range{display:none!important}
 .cue-swap-v2{
-  order:0;width:100%!important;height:46px!important;border-radius:12px!important;
-  display:flex!important;flex-direction:row!important;gap:10px!important;
+  position:relative;z-index:5;justify-self:start;align-self:center;
+  left:-22px;width:46px!important;height:46px!important;border-radius:50%!important;
+  display:grid!important;place-items:center!important;padding:0!important;
   border:1px solid #d8d8d4!important;background:#fafaf8!important;color:#171717!important;
-  box-shadow:none!important;
+  box-shadow:0 2px 9px rgba(0,0,0,.09)!important;
+  transform:translateY(-50%);
 }
 .cue-swap-v2 .cue-swap-icon-v2{
-  width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#fff;
-  box-shadow:0 2px 7px rgba(0,0,0,.09);font-size:23px!important;line-height:1!important;
+  width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#fff;
+  box-shadow:none;font-size:23px!important;line-height:1!important;
 }
-.cue-swap-v2 strong{font-size:14px}
 .cue-home-start-v2{
   min-height:54px!important;margin-top:12px!important;border-radius:12px!important;font-size:18px!important;
 }
@@ -18782,7 +18787,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   .cue-player-stack-v2{margin-top:12px;gap:8px!important}
   .cue-player-stack-v2 .new-match-player-card-v1,
   .cue-player-stack-v2 .new-match-player-card-v1.player-b-v1{padding-top:15px!important;padding-bottom:7px!important}
-  .cue-swap-v2{height:42px!important}
+  .cue-swap-v2{width:44px!important;height:44px!important}
   .cue-home-start-v2{min-height:48px!important;margin-top:9px!important}
   .cue-start-note-v2{margin-top:6px}
 }
@@ -18837,7 +18842,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   .cue-player-stack-v2 .new-match-player-name-v1{font-size:18px}
   .new-match-race-row-v2{min-height:36px!important;padding-top:3px}
   .new-match-race-row-v2 strong{font-size:24px}
-  .cue-swap-v2{height:40px!important}
+  .cue-swap-v2{left:-22px;width:44px!important;height:44px!important}
   .cue-home-start-v2{min-height:48px!important;margin-top:9px!important}
   .cue-start-note-v2{margin-top:6px}
   .cue-home-integrated-v2 .cue-resume-v1{padding:10px 14px;border-radius:18px}
@@ -18970,7 +18975,8 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   background-color:var(--cue-pressed)!important;
 }
 .cue-home-start-v2:active{background:#303030!important}
-.cue-home-start-v2:active,.cue-swap-v2:active{transform:scale(.995)}
+.cue-home-start-v2:active{transform:scale(.995)}
+.cue-swap-v2:active{transform:translateY(-50%) scale(.96)}
 .cue-home-integrated-v2 button:focus-visible,
 .cue-home-integrated-v2 input:focus-visible{
   outline:3px solid var(--cue-focus);
