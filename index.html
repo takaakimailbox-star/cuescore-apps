@@ -7892,7 +7892,7 @@ body {
   padding: 3px 1px 9px;
   border: 0;
   background: transparent;
-  color: #aaa9a6;
+  color: #92928f;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7933,9 +7933,9 @@ body {
 }
 .cue-discipline-label-v1 {
   max-width: 100%;
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.1;
-  font-weight: 720;
+  font-weight: 740;
   white-space: nowrap;
 }
 .cue-home-card-v1 {
@@ -8024,7 +8024,10 @@ body {
   font-weight: 780;
   letter-spacing: .01em;
 }
-.cue-resume-v1 { padding: 13px 15px; }
+.cue-resume-v1 {
+  margin-top: clamp(2px, 2.5dvh, 22px);
+  padding: 13px 15px;
+}
 .cue-resume-row-v1 {
   display: flex;
   align-items: center;
@@ -8077,18 +8080,27 @@ body {
 }
 .cue-bottom-nav-v1 button.is-current { color: var(--cue-home-text); }
 .cue-nav-icon-v1 {
-  height: 19px;
+  width: 20px;
+  height: 20px;
   display: grid;
   place-items: center;
-  font-size: 18px;
-  line-height: 1;
+}
+.cue-nav-icon-v1 svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 @media (max-height: 740px) {
   .cue-home-v1 { gap: 8px; padding-top: calc(8px + env(safe-area-inset-top)); }
   .cue-discipline-v1 { min-height: 58px !important; }
   .cue-new-match-v1 { padding: 13px 15px; }
   .cue-home-setting-v1 { padding: 8px 0; }
-  .cue-resume-v1 { padding: 10px 14px; }
+  .cue-resume-v1 { margin-top: 0; padding: 10px 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .cue-discipline-v1,
@@ -8170,19 +8182,29 @@ body {
 
       <nav class="cue-bottom-nav-v1" aria-label="メインナビゲーション">
         <button class="is-current" type="button" aria-current="page">
-          <span class="cue-nav-icon-v1" aria-hidden="true">⌂</span><span>Home</span>
+          <span class="cue-nav-icon-v1" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.25A1.25 1.25 0 0 1 18.75 20H5.25A1.25 1.25 0 0 1 4 18.75Z"/><path d="M9.25 20v-6.5h5.5V20"/></svg>
+          </span><span>Home</span>
         </button>
         <button id="playerManagementBtn" type="button">
-          <span class="cue-nav-icon-v1" aria-hidden="true">○</span><span>Player</span>
+          <span class="cue-nav-icon-v1" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25"/><path d="M5.5 20c.55-4.15 2.7-6.25 6.5-6.25s5.95 2.1 6.5 6.25"/></svg>
+          </span><span>Player</span>
         </button>
         <button id="recordsBtn" type="button">
-          <span class="cue-nav-icon-v1" aria-hidden="true">≡</span><span>History</span>
+          <span class="cue-nav-icon-v1" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5.25 7.5A8 8 0 1 1 4 12"/><path d="M5.25 3.75V7.5H9"/><path d="M12 7.75V12l3 1.75"/></svg>
+          </span><span>History</span>
         </button>
         <button id="openRankingsBtn" type="button">
-          <span class="cue-nav-icon-v1" aria-hidden="true">⌁</span><span>Analytics</span>
+          <span class="cue-nav-icon-v1" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4.5 19.5V14h3v5.5M10.5 19.5V9h3v10.5M16.5 19.5V4.5h3v15"/><path d="M3 19.5h18"/></svg>
+          </span><span>Analytics</span>
         </button>
         <button id="settingsBtn" type="button">
-          <span class="cue-nav-icon-v1" aria-hidden="true">⚙︎</span><span>Settings</span>
+          <span class="cue-nav-icon-v1" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.2 13.6a7.8 7.8 0 0 0 0-3.2l2-1.55-2-3.45-2.5 1a8 8 0 0 0-2.75-1.6L13.6 2h-4l-.35 2.8A8 8 0 0 0 6.5 6.4L4 5.4 2 8.85l2 1.55a7.8 7.8 0 0 0 0 3.2l-2 1.55 2 3.45 2.5-1a8 8 0 0 0 2.75 1.6L9.6 22h4l.35-2.8a8 8 0 0 0 2.75-1.6l2.5 1 2-3.45Z"/></svg>
+          </span><span>Settings</span>
         </button>
       </nav>
     </section>
