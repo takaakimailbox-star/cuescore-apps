@@ -7821,6 +7821,275 @@ body.cue-modal-visible { overscroll-behavior: none; }
 .cloud-resolution-history-item:last-child { border-bottom:0; }
 .cloud-resolution-history-empty { padding:12px 2px; color:rgba(255,255,255,.58); font-size:12px; }
 
+/* CueScore Home v1: shared monochrome multi-discipline home */
+:root {
+  --cue-home-bg: #f4f4f2;
+  --cue-home-surface: #ffffff;
+  --cue-home-text: #171717;
+  --cue-home-muted: #777775;
+  --cue-home-line: #dededb;
+  --cue-home-soft: #eeeeeb;
+  --cue-home-nav-height: 68px;
+}
+.app:not([class*="-mode"]) {
+  width: 100% !important;
+  max-width: none !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: var(--cue-home-bg) !important;
+  color: var(--cue-home-text) !important;
+}
+.app:not([class*="-mode"]) > .screen-title,
+.app:not([class*="-mode"]) > .sub-title,
+.app:not([class*="-mode"]) > .home-dashboard,
+.app:not([class*="-mode"]) > .milk-wrap,
+.app:not([class*="-mode"]) > .menu,
+.app:not([class*="-mode"]) > .credit {
+  display: none !important;
+}
+.app[class*="-mode"] > .cue-home-v1 { display: none !important; }
+.cue-home-v1 {
+  box-sizing: border-box;
+  width: min(100%, 480px);
+  height: 100dvh;
+  margin: 0 auto;
+  padding:
+    calc(12px + env(safe-area-inset-top))
+    max(16px, env(safe-area-inset-right))
+    calc(var(--cue-home-nav-height) + 18px + env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.65dvh, 15px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+}
+.cue-home-brand-v1 {
+  margin: 0;
+  text-align: center;
+  font-size: 22px;
+  line-height: 1.15;
+  font-weight: 780;
+  letter-spacing: -.03em;
+}
+.cue-discipline-switcher-v1 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2px;
+}
+.cue-discipline-v1 {
+  position: relative;
+  min-width: 0;
+  min-height: 67px !important;
+  padding: 3px 1px 9px;
+  border: 0;
+  background: transparent;
+  color: #aaa9a6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: color .18s ease, transform .18s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.cue-discipline-v1::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 1px;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--cue-home-text);
+  transform: translateX(-50%);
+  transition: width .18s ease;
+}
+.cue-discipline-v1.is-selected {
+  color: var(--cue-home-text);
+  transform: scale(1.045);
+}
+.cue-discipline-v1.is-selected::after { width: 22px; }
+.cue-ball-icon-v1 {
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 850;
+  letter-spacing: -.04em;
+}
+.cue-discipline-label-v1 {
+  max-width: 100%;
+  font-size: 10px;
+  line-height: 1.1;
+  font-weight: 720;
+  white-space: nowrap;
+}
+.cue-home-card-v1 {
+  border: 1px solid var(--cue-home-line);
+  border-radius: 20px;
+  background: var(--cue-home-surface);
+  box-shadow: 0 7px 24px rgba(0,0,0,.045);
+}
+.cue-new-match-v1 { padding: clamp(15px, 2.2dvh, 20px); }
+.cue-home-eyebrow-v1 {
+  margin: 0 0 10px;
+  color: var(--cue-home-muted);
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 780;
+  letter-spacing: .12em;
+}
+.cue-selected-game-v1 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.cue-selected-game-v1 .cue-ball-icon-v1 {
+  width: 34px;
+  height: 34px;
+  color: var(--cue-home-text);
+}
+.cue-selected-game-name-v1 {
+  font-size: 22px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -.025em;
+}
+.cue-home-setting-v1 {
+  padding: 10px 0;
+  border-top: 1px solid var(--cue-home-soft);
+}
+.cue-home-setting-head-v1 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 7px;
+}
+.cue-home-setting-label-v1 {
+  font-size: 13px;
+  font-weight: 750;
+}
+.cue-rule-value-v1 {
+  color: var(--cue-home-muted);
+  font-size: 12px;
+  text-align: right;
+}
+.cue-record-mode-v1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--cue-home-soft);
+}
+.cue-record-mode-v1 button {
+  min-height: 38px !important;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--cue-home-muted);
+  font-size: 13px;
+  font-weight: 740;
+}
+.cue-record-mode-v1 button.is-selected {
+  background: #fff;
+  color: var(--cue-home-text);
+  box-shadow: 0 1px 5px rgba(0,0,0,.08);
+}
+.cue-home-primary-v1 {
+  width: 100%;
+  min-height: 50px !important;
+  margin-top: 3px;
+  border: 0;
+  border-radius: 14px;
+  background: #1d1d1f;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 780;
+  letter-spacing: .01em;
+}
+.cue-resume-v1 { padding: 13px 15px; }
+.cue-resume-row-v1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.cue-resume-title-v1 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 780;
+  letter-spacing: .08em;
+}
+.cue-resume-status-v1 {
+  margin: 0;
+  color: var(--cue-home-muted);
+  font-size: 12px;
+}
+.cue-resume-arrow-v1 { color: #aaa9a6; font-size: 22px; }
+.cue-bottom-nav-v1 {
+  position: fixed;
+  z-index: 40;
+  left: 50%;
+  bottom: 0;
+  width: min(100%, 480px);
+  min-height: calc(var(--cue-home-nav-height) + env(safe-area-inset-bottom));
+  padding: 5px max(6px, env(safe-area-inset-right)) env(safe-area-inset-bottom) max(6px, env(safe-area-inset-left));
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 1px solid var(--cue-home-line);
+  background: rgba(250,250,248,.94);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.cue-bottom-nav-v1 button {
+  min-width: 0;
+  min-height: 56px !important;
+  padding: 4px 1px;
+  border: 0;
+  background: transparent;
+  color: #9b9b98;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 680;
+}
+.cue-bottom-nav-v1 button.is-current { color: var(--cue-home-text); }
+.cue-nav-icon-v1 {
+  height: 19px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  line-height: 1;
+}
+@media (max-height: 740px) {
+  .cue-home-v1 { gap: 8px; padding-top: calc(8px + env(safe-area-inset-top)); }
+  .cue-discipline-v1 { min-height: 58px !important; }
+  .cue-new-match-v1 { padding: 13px 15px; }
+  .cue-home-setting-v1 { padding: 8px 0; }
+  .cue-resume-v1 { padding: 10px 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cue-discipline-v1,
+  .cue-discipline-v1::after { transition: none; }
+}
 </style>
 <!-- CueScore Rotation Scoreboard v1.0 Official Release -->
 </head>
@@ -7836,11 +8105,89 @@ body.cue-modal-visible { overscroll-behavior: none; }
     <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
     <div class="sub-title">version 1.0</div>
 
+    <section class="cue-home-v1" id="cueHomeV1" aria-label="CueScore Home">
+      <h1 class="cue-home-brand-v1">CueScore</h1>
+
+      <div class="cue-discipline-switcher-v1" id="cueDisciplineSwitcherV1" role="tablist" aria-label="ゲーム種目">
+        <button class="cue-discipline-v1 is-selected" type="button" role="tab" aria-selected="true" data-discipline="rotation">
+          <span class="cue-ball-icon-v1" aria-hidden="true">15</span>
+          <span class="cue-discipline-label-v1">Rotation</span>
+        </button>
+        <button class="cue-discipline-v1" type="button" role="tab" aria-selected="false" data-discipline="9ball">
+          <span class="cue-ball-icon-v1" aria-hidden="true">9</span>
+          <span class="cue-discipline-label-v1">9-Ball</span>
+        </button>
+        <button class="cue-discipline-v1" type="button" role="tab" aria-selected="false" data-discipline="10ball">
+          <span class="cue-ball-icon-v1" aria-hidden="true">10</span>
+          <span class="cue-discipline-label-v1">10-Ball</span>
+        </button>
+        <button class="cue-discipline-v1" type="button" role="tab" aria-selected="false" data-discipline="jpa9">
+          <span class="cue-ball-icon-v1" aria-hidden="true">JPA</span>
+          <span class="cue-discipline-label-v1">JPA 9-Ball</span>
+        </button>
+      </div>
+
+      <section class="cue-home-card-v1 cue-new-match-v1" aria-labelledby="cueNewMatchTitleV1">
+        <p class="cue-home-eyebrow-v1" id="cueNewMatchTitleV1">NEW MATCH</p>
+        <div class="cue-selected-game-v1">
+          <span class="cue-ball-icon-v1" id="cueSelectedGameIconV1" aria-hidden="true">15</span>
+          <strong class="cue-selected-game-name-v1" id="cueSelectedGameNameV1">Rotation</strong>
+        </div>
+
+        <div class="cue-home-setting-v1">
+          <div class="cue-home-setting-head-v1">
+            <span class="cue-home-setting-label-v1">ゲームルール</span>
+            <span class="cue-rule-value-v1" id="cueRuleValueV1">設定項目はありません</span>
+          </div>
+        </div>
+
+        <div class="cue-home-setting-v1">
+          <div class="cue-home-setting-head-v1">
+            <span class="cue-home-setting-label-v1">記録方式</span>
+          </div>
+          <div class="cue-record-mode-v1" id="cueRecordModeV1" role="group" aria-label="記録方式">
+            <button class="is-selected" type="button" aria-pressed="true" data-record-mode="simple">シンプル</button>
+            <button type="button" aria-pressed="false" data-record-mode="detailed">詳細版</button>
+          </div>
+        </div>
+
+        <button class="cue-home-primary-v1" id="newGameBtn" type="button">プレーヤーを選択</button>
+      </section>
+
+      <section class="cue-home-card-v1 cue-resume-v1" id="cueResumeCardV1" aria-label="Resume">
+        <div class="cue-resume-row-v1">
+          <div>
+            <p class="cue-resume-title-v1">RESUME</p>
+            <p class="cue-resume-status-v1" id="cueResumeStatusV1">進行中の試合はありません</p>
+          </div>
+          <span class="cue-resume-arrow-v1" aria-hidden="true">›</span>
+        </div>
+      </section>
+
+      <nav class="cue-bottom-nav-v1" aria-label="メインナビゲーション">
+        <button class="is-current" type="button" aria-current="page">
+          <span class="cue-nav-icon-v1" aria-hidden="true">⌂</span><span>Home</span>
+        </button>
+        <button id="playerManagementBtn" type="button">
+          <span class="cue-nav-icon-v1" aria-hidden="true">○</span><span>Player</span>
+        </button>
+        <button id="recordsBtn" type="button">
+          <span class="cue-nav-icon-v1" aria-hidden="true">≡</span><span>History</span>
+        </button>
+        <button id="openRankingsBtn" type="button">
+          <span class="cue-nav-icon-v1" aria-hidden="true">⌁</span><span>Analytics</span>
+        </button>
+        <button id="settingsBtn" type="button">
+          <span class="cue-nav-icon-v1" aria-hidden="true">⚙︎</span><span>Settings</span>
+        </button>
+      </nav>
+    </section>
+
     <section class="home-dashboard" id="homeDashboard" aria-label="ダッシュボード">
       <div class="home-dashboard-head">
         <div class="home-dashboard-title">ダッシュボード</div>
         <select class="home-dashboard-select" id="dashboardPlayerSelect" aria-label="集計するプレーヤー"></select>
-        <div class="home-dashboard-actions"><button class="home-ranking-button" id="openRankingsBtn" type="button">ランキング</button><button class="home-filter-button" id="openStatisticsFilterBtn" type="button">絞り込み</button></div>
+        <div class="home-dashboard-actions"><button class="home-ranking-button" id="legacyOpenRankingsBtn" type="button">ランキング</button><button class="home-filter-button" id="openStatisticsFilterBtn" type="button">絞り込み</button></div>
       </div>
       <div class="home-dashboard-grid" id="dashboardStatsGrid">
         <div class="home-dashboard-empty">対戦履歴から成績を集計します。</div>
@@ -7853,11 +8200,11 @@ body.cue-modal-visible { overscroll-behavior: none; }
     </section>
 
     <nav class="menu" aria-label="メニュー">
-      <button class="main-button new-game" id="newGameBtn" type="button">New Game</button>
-      <button class="main-button player-management-btn" id="playerManagementBtn" type="button">プレーヤ管理</button>
-      <button class="main-button records" id="recordsBtn" type="button">対戦履歴</button>
+      <button class="main-button new-game" id="legacyNewGameBtn" type="button">New Game</button>
+      <button class="main-button player-management-btn" id="legacyPlayerManagementBtn" type="button">プレーヤ管理</button>
+      <button class="main-button records" id="legacyRecordsBtn" type="button">対戦履歴</button>
       <button class="main-button data-management-btn" id="dataManagementBtn" type="button">データ管理</button>
-      <button class="main-button settings-main-btn" id="settingsBtn" type="button">設定</button>
+      <button class="main-button settings-main-btn" id="legacySettingsBtn" type="button">設定</button>
     </nav>
 
     <div class="credit">Created by Rion</div>
@@ -8635,6 +8982,72 @@ body.cue-modal-visible { overscroll-behavior: none; }
   }
 
   document.getElementById("newGameBtn")?.addEventListener("click", openPlayerInfo);
+  // CueScore Home v1: discipline and recording preferences.
+  (() => {
+    const DISCIPLINE_KEY = "cueScore.selectedDiscipline.v1";
+    const RECORD_MODE_KEY = "cueScore.recordMode.v1";
+    const disciplines = {
+      rotation: { name: "Rotation", icon: "15", rule: "設定項目はありません" },
+      "9ball": { name: "9-Ball", icon: "9", rule: "標準ルール（準備中）" },
+      "10ball": { name: "10-Ball", icon: "10", rule: "標準ルール（準備中）" },
+      jpa9: { name: "JPA 9-Ball", icon: "JPA", rule: "JPAルール（準備中）" }
+    };
+
+    const safeRead = (key, fallback) => {
+      try { return localStorage.getItem(key) || fallback; }
+      catch (_) { return fallback; }
+    };
+    const safeWrite = (key, value) => {
+      try { localStorage.setItem(key, value); }
+      catch (_) {}
+    };
+
+    let selectedDiscipline = disciplines[safeRead(DISCIPLINE_KEY, "rotation")]
+      ? safeRead(DISCIPLINE_KEY, "rotation")
+      : "rotation";
+    let selectedRecordMode = ["simple", "detailed"].includes(safeRead(RECORD_MODE_KEY, "simple"))
+      ? safeRead(RECORD_MODE_KEY, "simple")
+      : "simple";
+
+    const renderHomePreference = () => {
+      const selected = disciplines[selectedDiscipline];
+      document.querySelectorAll("[data-discipline]").forEach(button => {
+        const active = button.dataset.discipline === selectedDiscipline;
+        button.classList.toggle("is-selected", active);
+        button.setAttribute("aria-selected", String(active));
+      });
+      document.getElementById("cueSelectedGameNameV1").textContent = selected.name;
+      document.getElementById("cueSelectedGameIconV1").textContent = selected.icon;
+      document.getElementById("cueRuleValueV1").textContent = selected.rule;
+
+      document.querySelectorAll("[data-record-mode]").forEach(button => {
+        const active = button.dataset.recordMode === selectedRecordMode;
+        button.classList.toggle("is-selected", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
+    };
+
+    document.getElementById("cueDisciplineSwitcherV1")?.addEventListener("click", event => {
+      const button = event.target.closest("[data-discipline]");
+      if (!button || !disciplines[button.dataset.discipline]) return;
+      selectedDiscipline = button.dataset.discipline;
+      safeWrite(DISCIPLINE_KEY, selectedDiscipline);
+      renderHomePreference();
+    });
+    document.getElementById("cueRecordModeV1")?.addEventListener("click", event => {
+      const button = event.target.closest("[data-record-mode]");
+      if (!button) return;
+      selectedRecordMode = button.dataset.recordMode === "detailed" ? "detailed" : "simple";
+      safeWrite(RECORD_MODE_KEY, selectedRecordMode);
+      renderHomePreference();
+    });
+
+    window.getCueScoreHomeSelectionV1 = () => ({
+      disciplineId: selectedDiscipline,
+      recordMode: selectedRecordMode
+    });
+    renderHomePreference();
+  })();
   const MATCH_RECORDS_KEY = "rotationScoreboard.matchRecords.v1";
 
   // Rotation Scoreboard Ver.6.8.0: future multi-game data foundation
