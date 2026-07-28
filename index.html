@@ -8331,8 +8331,10 @@ body {
 
     <section class="pro-game-screen hidden" id="proGameScreen" aria-label="Rotation game">
       <header class="pro-game-header">
-        <button id="proGameBackBtn" class="pro-back-btn" type="button" aria-label="戻る">‹</button>
-        <div class="pro-game-title">Rotation match!</div>
+        <button id="proGameBackBtn" class="pro-back-btn" type="button" aria-label="戻る">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8"/></svg>
+        </button>
+        <div class="pro-game-title">Rotation</div>
         <div class="pro-start-time" id="proStartTime">開始時刻 --:--</div>
       </header>
 
@@ -8357,6 +8359,7 @@ body {
                 <span id="proP2Foul" hidden>0</span>
               </div>
             </div>
+            <span class="pro-turn-arrow-v1" id="proTurnArrowV1" aria-hidden="true">←</span>
           </section>
 
           <section class="pro-status pro-status-two" aria-hidden="true">
@@ -8394,10 +8397,22 @@ body {
 
           <section class="pro-actions" id="proActionsV730">
             <button id="proPushOutBtnV730" class="pro-action pro-pushout" type="button" hidden>プッシュアウト</button>
-            <button id="proSafetyBtn" class="pro-action pro-safety" type="button">セーフティー</button>
-            <button id="proFoulBtn" class="pro-action pro-foul" type="button">ファール</button>
-            <button id="proSwitchBtn" class="pro-action pro-switch" type="button">プレーヤー交代</button>
-            <button id="proUndoBtn" class="pro-action pro-undo" type="button">戻す</button>
+            <button id="proSafetyBtn" class="pro-action pro-safety" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3 7.7 7.5 9.5 4.5-1.8 7.5-5 7.5-9.5V6Z"/></svg>
+              <span>セーフティ</span>
+            </button>
+            <button id="proFoulBtn" class="pro-action pro-foul" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3.5 20h17Z"/><path d="M12 9v5"/><path d="M12 17.2h.01"/></svg>
+              <span>ファール</span>
+            </button>
+            <button id="proSwitchBtn" class="pro-action pro-switch" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h14"/><path d="m15 5 3 3-3 3"/><path d="M20 16H6"/><path d="m9 13-3 3 3 3"/></svg>
+              <span>プレーヤー交代</span>
+            </button>
+            <button id="proUndoBtn" class="pro-action pro-undo" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7H4v-5"/><path d="M4.5 7.5A8 8 0 1 1 5 17"/></svg>
+              <span>戻る</span>
+            </button>
           </section>
         </section>
       </div>
@@ -11896,8 +11911,8 @@ let matchRecordsRawCacheV152 = null;
       const p1Items = rowData.p1.map(item => typeof item === "number" ? ballHtml(item) : symbolHtml(item)).join("");
       const p2Items = rowData.p2.map(item => typeof item === "number" ? ballHtml(item) : symbolHtml(item)).join("");
       row.innerHTML = `
-        <div class="pro-log-cell pro-log-cell-p1">${p1Items}</div>
         <div class="pro-turn-label">${rowData.label}</div>
+        <div class="pro-log-cell pro-log-cell-p1">${p1Items}</div>
         <div class="pro-log-cell pro-log-cell-p2">${p2Items}</div>
       `;
       fragment.appendChild(row);
@@ -12038,10 +12053,11 @@ let matchRecordsRawCacheV152 = null;
     const actionsV730 = el("proActionsV730");
     const pushOutEnabledV730 = Boolean(getActiveRuleV699().pushOut?.enabled);
     if (pushOutButtonV730) {
-      pushOutButtonV730.hidden = !pushOutEnabledV730;
-      pushOutButtonV730.disabled = !isPushOutAvailableV730();
+      const pushOutAvailableV730 = pushOutEnabledV730 && isPushOutAvailableV730();
+      pushOutButtonV730.hidden = !pushOutAvailableV730;
+      pushOutButtonV730.disabled = !pushOutAvailableV730;
     }
-    actionsV730?.classList.toggle("pushout-enabled-v730", pushOutEnabledV730);
+    actionsV730?.classList.toggle("pushout-enabled-v730", Boolean(pushOutButtonV730 && !pushOutButtonV730.hidden));
 
     const safetyButton = el("proSafetyBtn");
     const foulButton = el("proFoulBtn");
@@ -12125,6 +12141,7 @@ let matchRecordsRawCacheV152 = null;
     setGameTextV155("proP1Goal", goals[1]);
     setGameTextV155("proP2Goal", goals[2]);
     setGameTextV155("proGoalView", `${goals[1]} / ${goals[2]}`);
+    setGameTextV155("proTurnArrowV1", current === 1 ? "←" : "→");
 
     if (gameRenderCacheV155.activePlayer !== current) {
       el("proP1Panel")?.classList.toggle("active", current === 1);
@@ -19365,6 +19382,339 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   .new-match-race-row-v2 strong{font-size:26px}
   .cue-swap-v2{top:2px!important}
   .cue-home-start-v2{min-height:52px!important;margin-top:8px!important}
+}
+</style>
+<style>
+/* CueScore Game v1.0 — official adopted layout */
+.app.pro-game-mode{
+  width:100%!important;
+  max-width:none!important;
+  height:100dvh!important;
+  min-height:100dvh!important;
+  padding:0!important;
+  overflow:hidden!important;
+  background:#f6f6f4!important;
+}
+.pro-game-screen{
+  --game-ink:#171717;
+  --game-muted:#747474;
+  --game-line:#dededb;
+  --game-surface:#fff;
+  --rotation-accent:#a54800;
+  --rotation-soft:#fff8f2;
+  width:100%!important;
+  height:100dvh!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  color:var(--game-ink)!important;
+  background:#f6f6f4!important;
+}
+.pro-game-header{
+  flex:0 0 auto;
+  min-height:calc(58px + env(safe-area-inset-top))!important;
+  padding:env(safe-area-inset-top) max(16px,env(safe-area-inset-right)) 0 max(16px,env(safe-area-inset-left))!important;
+  grid-template-columns:72px minmax(0,1fr) 120px!important;
+  background:#fff!important;
+  color:var(--game-ink)!important;
+  border-bottom:0!important;
+}
+.pro-back-btn{
+  width:48px!important;
+  height:48px!important;
+  min-width:48px!important;
+  min-height:48px!important;
+  padding:11px!important;
+  display:grid!important;
+  place-items:center!important;
+  color:var(--game-ink)!important;
+  background:transparent!important;
+}
+.pro-back-btn svg{
+  width:27px;
+  height:27px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.pro-game-title{
+  font-size:24px!important;
+  font-weight:780!important;
+  line-height:1!important;
+  color:var(--game-ink)!important;
+}
+.pro-start-time{
+  font-size:13px!important;
+  font-weight:650!important;
+  color:var(--game-ink)!important;
+}
+.pro-game-body{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  display:grid!important;
+  grid-template-rows:auto minmax(92px,1fr) auto!important;
+  gap:9px!important;
+  padding:8px max(14px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))!important;
+  background:#f6f6f4!important;
+}
+.pro-top-fixed{min-height:0!important}
+.pro-scoreboard{
+  position:relative;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:16px!important;
+}
+.pro-player-panel{
+  min-height:132px!important;
+  padding:16px 8px 12px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border:1px solid var(--game-line)!important;
+  border-radius:12px!important;
+  color:var(--game-ink)!important;
+  background:var(--game-surface)!important;
+  box-shadow:0 7px 22px rgba(0,0,0,.035)!important;
+}
+.pro-player-panel.active{
+  color:var(--rotation-accent)!important;
+  background:var(--rotation-soft)!important;
+  border-color:var(--rotation-accent)!important;
+  box-shadow:0 7px 22px rgba(165,72,0,.08)!important;
+}
+.pro-player-name{
+  max-width:100%;
+  font-size:15px!important;
+  font-weight:680!important;
+  color:inherit!important;
+}
+.pro-score{
+  margin:4px 0 2px!important;
+  font-size:68px!important;
+  font-weight:820!important;
+  letter-spacing:-.045em;
+  color:inherit!important;
+}
+.pro-stats{
+  font-size:13px!important;
+  font-weight:650!important;
+  color:inherit!important;
+  opacity:.9!important;
+}
+.pro-turn-arrow-v1{
+  position:absolute;
+  z-index:3;
+  left:50%;
+  top:50%;
+  width:34px;
+  height:34px;
+  transform:translate(-50%,-50%);
+  display:grid;
+  place-items:center;
+  font-size:25px;
+  line-height:1;
+  color:var(--rotation-accent);
+  background:#f6f6f4;
+  border-radius:50%;
+}
+.pro-status{display:none!important}
+.pro-log-wrap{
+  min-height:0!important;
+  margin:0!important;
+  overflow:hidden!important;
+  display:flex!important;
+  flex-direction:column!important;
+  border:0!important;
+  border-radius:13px!important;
+  background:var(--game-surface)!important;
+  box-shadow:0 7px 24px rgba(0,0,0,.05)!important;
+}
+.pro-turn-log{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  padding:8px 14px 10px!important;
+  color:var(--game-ink)!important;
+  scrollbar-width:thin;
+  scrollbar-color:#aaa transparent;
+}
+.pro-rack-divider{
+  min-height:30px!important;
+  margin:5px 0 2px!important;
+  padding:4px 0 4px 13px!important;
+  display:flex!important;
+  align-items:center!important;
+  border:0!important;
+  border-left:3px solid var(--rotation-accent)!important;
+  border-radius:2px!important;
+  background:transparent!important;
+  color:var(--game-ink)!important;
+  font-size:16px!important;
+  font-weight:780!important;
+}
+.pro-rack-divider::before,
+.pro-rack-divider::after{content:none!important}
+.pro-log-row{
+  min-height:39px!important;
+  grid-template-columns:42px minmax(0,1fr) minmax(0,1fr)!important;
+  border-top:0!important;
+  border-bottom:1px solid #efefed!important;
+  background:transparent!important;
+}
+.pro-log-row .pro-turn-label{grid-column:1!important;grid-row:1!important}
+.pro-log-row .pro-log-cell-p1{grid-column:2!important;grid-row:1!important}
+.pro-log-row .pro-log-cell-p2{grid-column:3!important;grid-row:1!important}
+.pro-log-row.active-row{background:transparent!important}
+.pro-turn-label{
+  position:relative;
+  font-size:12px!important;
+  font-weight:650!important;
+  color:var(--game-muted)!important;
+}
+.pro-log-row:not(:first-child) .pro-turn-label::after{
+  content:"";
+  position:absolute;
+  top:30px;
+  bottom:-17px;
+  left:50%;
+  border-left:1px dashed #dededb;
+}
+.pro-log-cell{
+  min-height:38px!important;
+  gap:4px!important;
+  padding:4px 3px!important;
+}
+.pro-mini-ball{
+  width:19px!important;
+  height:19px!important;
+  font-size:9px!important;
+  border:1px solid rgba(0,0,0,.18)!important;
+}
+.pro-mini-ball::before{inset:5px 2px!important}
+.pro-mini-ball.solid::before{inset:4px!important}
+.pro-symbol{
+  min-width:19px;
+  height:19px;
+  padding:0 4px!important;
+  display:inline-grid;
+  place-items:center;
+  border-radius:3px;
+  font-size:11px!important;
+  line-height:1;
+  color:#fff!important;
+  background:#171717;
+}
+.pro-symbol.s,.pro-symbol.f{color:#fff!important}
+.pro-bottom-dock{
+  flex:0 0 auto!important;
+  padding:0!important;
+}
+.pro-play-area{
+  padding:10px 13px!important;
+  border-radius:13px!important;
+  background:var(--game-surface)!important;
+  box-shadow:0 7px 24px rgba(0,0,0,.05)!important;
+}
+.pro-balls{
+  width:100%!important;
+  max-width:none!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  column-gap:12px!important;
+  row-gap:8px!important;
+  margin:0!important;
+}
+.pro-ball{
+  width:45px!important;
+  height:45px!important;
+  min-width:45px!important;
+  min-height:45px!important;
+  justify-self:center;
+  border-width:1px!important;
+  font-size:17px!important;
+  box-shadow:inset -5px -6px 9px rgba(0,0,0,.18)!important;
+}
+.pro-ball::before{inset:29% 8%!important}
+.pro-ball.solid::before{inset:21%!important}
+.pro-actions{
+  width:100%!important;
+  max-width:none!important;
+  margin:9px 0 0!important;
+  padding:0!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:7px!important;
+}
+.pro-action{
+  min-width:0!important;
+  min-height:69px!important;
+  padding:7px 3px 6px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:4px!important;
+  border:1px solid #ececea!important;
+  border-radius:12px!important;
+  color:var(--game-ink)!important;
+  background:var(--game-surface)!important;
+  box-shadow:0 5px 16px rgba(0,0,0,.045)!important;
+  font-size:11px!important;
+  font-weight:680!important;
+}
+.pro-action svg{
+  width:29px;
+  height:29px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.pro-foul{color:#c1121f!important}
+.pro-action:disabled{opacity:.32!important}
+.pro-action[hidden]{display:none!important}
+.pro-pushout:not([hidden]){display:flex!important}
+.pro-actions.pushout-enabled-v730{
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+}
+.pro-next-rack-box{color:#fff}
+@media(max-width:430px) and (max-height:900px){
+  .pro-game-header{
+    min-height:calc(52px + env(safe-area-inset-top))!important;
+    grid-template-columns:58px minmax(0,1fr) 108px!important;
+  }
+  .pro-game-title{font-size:22px!important}
+  .pro-start-time{font-size:12px!important}
+  .pro-game-body{
+    gap:7px!important;
+    padding-top:6px!important;
+  }
+  .pro-player-panel{
+    min-height:116px!important;
+    padding:11px 6px 8px!important;
+  }
+  .pro-score{font-size:58px!important}
+  .pro-player-name{font-size:14px!important}
+  .pro-stats{font-size:12px!important}
+  .pro-turn-arrow-v1{width:30px;height:30px;font-size:22px}
+  .pro-turn-log{padding:5px 12px 7px!important}
+  .pro-rack-divider{min-height:27px!important;font-size:15px!important}
+  .pro-log-row{min-height:33px!important}
+  .pro-log-cell{min-height:32px!important}
+  .pro-play-area{padding:8px 11px!important}
+  .pro-balls{column-gap:9px!important;row-gap:6px!important}
+  .pro-ball{
+    width:40px!important;
+    height:40px!important;
+    min-width:40px!important;
+    min-height:40px!important;
+    font-size:15px!important;
+  }
+  .pro-actions{margin-top:7px!important;gap:6px!important}
+  .pro-action{min-height:62px!important;font-size:10px!important}
+  .pro-action svg{width:26px;height:26px}
 }
 </style>
 <script>
