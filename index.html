@@ -19002,9 +19002,9 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
 }
 .cue-player-stack-v2 .player-heading-row{
   left:28px;
-  top:-9px;
-  padding:3px 8px!important;
-  background:#f5f5f3;
+  top:-7px;
+  padding:0!important;
+  background:transparent;
   box-shadow:none;
 }
 .cue-player-stack-v2 .player-heading-row h2,
@@ -19013,7 +19013,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   font-weight:740!important;
 }
 .cue-player-stack-v2 .new-match-player-select-v1{
-  grid-template-columns:38px minmax(0,1fr) 14px;
+  grid-template-columns:minmax(0,1fr) 14px;
   gap:10px;
   min-height:54px;
   padding:3px 0 9px;
@@ -19021,8 +19021,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
 }
 .cue-player-stack-v2 .new-match-avatar-v1,
 .cue-player-stack-v2 .player-b-v1 .new-match-avatar-v1{
-  width:38px;
-  height:38px;
+  display:none!important;
 }
 .cue-player-stack-v2 .new-match-player-name-v1{
   font-size:17px;
@@ -19052,7 +19051,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   align-self:center;
   width:44px!important;
   height:44px!important;
-  transform:translateY(-50%)!important;
+  transform:none!important;
   background:#fff!important;
   box-shadow:0 2px 8px rgba(0,0,0,.065)!important;
 }
@@ -19066,7 +19065,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   height:18px;
   stroke-width:1.7;
 }
-.cue-swap-v2:active{transform:translateY(-50%) scale(.94)!important}
+.cue-swap-v2:active{transform:scale(.94)!important}
 .cue-home-start-v2{
   margin-top:10px!important;
   border-radius:11px!important;
@@ -19090,7 +19089,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
     border-radius:14px!important;
   }
   .cue-player-stack-v2 .new-match-player-select-v1{
-    grid-template-columns:38px minmax(0,1fr) 14px;
+    grid-template-columns:minmax(0,1fr) 14px;
     min-height:51px;
     padding:2px 0 8px;
   }
