@@ -8124,9 +8124,6 @@ body {
     <section class="cue-home-v1 cue-home-integrated-v2" id="cueHomeV1" aria-label="CueScore Home">
       <div class="cue-home-head-v2">
         <h1 class="cue-home-brand-v1">CueScore</h1>
-        <button class="cue-home-settings-v2" id="cueHomeSettingsBtnV2" type="button" aria-label="設定を開く">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.2 13.6a7.8 7.8 0 0 0 0-3.2l2-1.55-2-3.45-2.5 1a8 8 0 0 0-2.75-1.6L13.6 2h-4l-.35 2.8A8 8 0 0 0 6.5 6.4L4 5.4 2 8.85l2 1.55a7.8 7.8 0 0 0 0 3.2l-2 1.55 2 3.45 2.5-1a8 8 0 0 0 2.75 1.6L9.6 22h4l.35-2.8a8 8 0 0 0 2.75-1.6l2.5 1 2-3.45Z"/></svg>
-        </button>
       </div>
 
       <div class="cue-discipline-switcher-v1" id="cueDisciplineSwitcherV1" role="tablist" aria-label="ゲーム種目">
@@ -19217,10 +19214,11 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
 }
 .cue-player-stack-v2 .player-heading-row{
   left:12px;
-  top:9px;
-  padding:3px 8px!important;
-  border-radius:999px;
-  background:var(--cue-pressed);
+  top:8px;
+  padding:0!important;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
 }
 .cue-player-stack-v2 .player-heading-row h2,
 .cue-player-stack-v2 .new-match-player-card-v1.player-b-v1 .player-heading-row h2{
@@ -19318,7 +19316,6 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   }
   .cue-home-head-v2{min-height:32px}
   .cue-home-head-v2 .cue-home-brand-v1{font-size:26px;transform:none}
-  .cue-home-settings-v2{transform:translateY(-50%)}
   .cue-home-integrated-v2 .cue-discipline-v1{
     min-height:60px!important;
     padding-top:1px;
