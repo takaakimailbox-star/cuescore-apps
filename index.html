@@ -8150,26 +8150,24 @@ body {
 
       <section class="cue-home-card-v1 cue-new-match-v1 cue-new-match-integrated-v2" aria-labelledby="cueNewMatchTitleV1">
         <div class="cue-new-match-summary-v2">
-          <div>
-            <p class="cue-home-eyebrow-v1" id="cueNewMatchTitleV1">NEW MATCH</p>
-            <div class="cue-selected-game-v1">
-              <span class="cue-ball-icon-v1" id="cueSelectedGameIconV1" aria-hidden="true">15</span>
-              <strong class="cue-selected-game-name-v1" id="cueSelectedGameNameV1">Rotation</strong>
-            </div>
+          <p class="cue-home-eyebrow-v1" id="cueNewMatchTitleV1">New Match</p>
+          <div class="cue-selected-game-v1">
+            <span class="cue-ball-icon-v1" id="cueSelectedGameIconV1" aria-hidden="true">15</span>
+            <strong class="cue-selected-game-name-v1" id="cueSelectedGameNameV1">Rotation</strong>
           </div>
-          <div class="cue-game-rules-v2" aria-label="ゲームルール">
-            <strong>ゲームルール</strong>
-            <label class="cue-rule-toggle-v2">
-              <span>イリーガル</span>
-              <input id="cueIllegalRuleV2" type="checkbox" checked />
-              <span class="cue-toggle-track-v2" aria-hidden="true"></span>
-            </label>
-            <label class="cue-rule-toggle-v2">
-              <span>シュートアウト</span>
-              <input id="cueShootoutRuleV2" type="checkbox" />
-              <span class="cue-toggle-track-v2" aria-hidden="true"></span>
-            </label>
-          </div>
+        </div>
+        <div class="cue-game-rules-v2" aria-label="ゲームルール">
+          <strong>ゲームルール</strong>
+          <label class="cue-rule-toggle-v2">
+            <span>イリーガル</span>
+            <input id="cueIllegalRuleV2" type="checkbox" checked />
+            <span class="cue-toggle-track-v2" aria-hidden="true"></span>
+          </label>
+          <label class="cue-rule-toggle-v2">
+            <span>シュートアウト</span>
+            <input id="cueShootoutRuleV2" type="checkbox" />
+            <span class="cue-toggle-track-v2" aria-hidden="true"></span>
+          </label>
         </div>
         <span id="cueRuleValueV1" class="cue-rule-value-v1 cue-rule-value-hidden-v2">詳細版</span>
 
@@ -8189,14 +8187,14 @@ body {
             <input id="p1Skill" class="skill-range p1" type="range" min="1" max="6" step="1" value="2" aria-label="Player1 Race to 数字選択バー" />
           </section>
 
-          <button class="new-match-swap-v1 cue-swap-v2" id="starterSwapBtnV1" type="button" aria-label="先攻と後攻を入れ替える">
-            <span class="cue-swap-icon-v2" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M19 8a8 8 0 0 0-13.7-2.1L3.5 8"/><path d="M3.5 4.5V8H7"/><path d="M5 16a8 8 0 0 0 13.7 2.1l1.8-2.1"/><path d="M20.5 19.5V16H17"/></svg>
-            </span>
-          </button>
-
           <section class="player-block new-match-player-card-v1 player-b-v1" id="newMatchPlayerCard2V1" data-player-label="B">
             <div class="player-heading-row"><h2>後攻</h2><button class="starter-choice" id="p2StarterBtn" type="button">後攻</button></div>
+            <button class="new-match-swap-v1 cue-swap-v2" id="starterSwapBtnV1" type="button" aria-label="先攻と後攻を入れ替える">
+              <span class="cue-swap-icon-v2" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8 3v15"/><path d="m4.5 7 3.5-4 3.5 4"/><path d="M16 21V6"/><path d="m12.5 17 3.5 4 3.5-4"/></svg>
+              </span>
+              <strong>入れ替え</strong>
+            </button>
             <button class="new-match-player-select-v1" id="p2PlayerSearchBtn" type="button" aria-label="後攻プレーヤーを選択">
               <span class="new-match-avatar-v1" aria-hidden="true">●</span>
               <span class="new-match-player-name-v1" id="p2NameDisplayV1">プレイヤー 2</span>
@@ -8222,17 +8220,6 @@ body {
         <button class="start-game-button new-match-start-v1 cue-home-start-v2" id="startGameBtn" type="button">
           <span class="new-match-play-v1" aria-hidden="true">▶</span><span>試合開始</span>
         </button>
-        <p class="cue-start-note-v2">タップすると試合が開始されます</p>
-      </section>
-
-      <section class="cue-home-card-v1 cue-resume-v1" id="cueResumeCardV1" aria-label="Resume">
-        <div class="cue-resume-row-v1">
-          <div>
-            <p class="cue-resume-title-v1">RESUME</p>
-            <p class="cue-resume-status-v1" id="cueResumeStatusV1">進行中の試合はありません</p>
-          </div>
-          <span class="cue-resume-arrow-v1" aria-hidden="true">›</span>
-        </div>
       </section>
 
       <nav class="cue-bottom-nav-v1" aria-label="メインナビゲーション">
@@ -19102,6 +19089,265 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   .cue-swap-v2{left:-22px!important;width:44px!important;height:44px!important}
   .cue-swap-v2 .cue-swap-icon-v2{width:42px;height:42px}
   .cue-home-start-v2{margin-top:8px!important}
+}
+
+/* CueScore Home official layout v4: image-priority exception */
+.cue-home-integrated-v2{
+  height:100dvh!important;
+  gap:12px!important;
+  padding:
+    calc(10px + env(safe-area-inset-top))
+    max(16px, env(safe-area-inset-right))
+    calc(var(--cue-home-nav-height) + 24px + env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left))!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  overscroll-behavior-y:contain!important;
+}
+.cue-home-head-v2{
+  min-height:42px;
+}
+.cue-home-head-v2 .cue-home-brand-v1{
+  font-size:28px;
+  transform:none;
+}
+.cue-home-settings-v2{
+  width:38px;
+  height:38px;
+  transform:translateY(-50%);
+}
+.cue-home-integrated-v2 .cue-discipline-v1{
+  min-height:76px!important;
+  padding:4px 1px 11px;
+  gap:7px;
+}
+.cue-home-integrated-v2 .cue-ball-icon-v1{
+  width:38px;
+  height:38px;
+  font-size:15px;
+}
+.cue-home-integrated-v2 .cue-discipline-label-v1{
+  font-size:12px;
+  font-weight:700;
+}
+.cue-discipline-v1.is-selected::after{
+  width:32px;
+  height:3px;
+}
+.cue-new-match-integrated-v2{
+  margin-top:2px;
+  padding:18px 16px 16px!important;
+  border-radius:20px!important;
+}
+.cue-new-match-summary-v2{
+  display:block;
+  padding:0 2px 16px;
+  border-bottom:1px solid var(--cue-border);
+}
+.cue-new-match-summary-v2 .cue-home-eyebrow-v1{
+  margin:0 0 14px;
+  color:var(--cue-ink-secondary);
+  font-size:17px;
+  line-height:1.15;
+  font-weight:650;
+  letter-spacing:0;
+  text-transform:none;
+}
+.cue-new-match-summary-v2 .cue-selected-game-v1{
+  margin:0;
+  gap:14px;
+}
+.cue-new-match-summary-v2 .cue-selected-game-v1 .cue-ball-icon-v1{
+  width:48px;
+  height:48px;
+  font-size:19px;
+  border-width:1.5px;
+}
+.cue-new-match-summary-v2 .cue-selected-game-name-v1{
+  font-size:26px;
+  font-weight:780;
+}
+.cue-game-rules-v2{
+  width:calc(100% - 8px);
+  padding:16px 24px 15px 4px;
+  border:0;
+  border-bottom:1px solid var(--cue-border);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  gap:11px;
+}
+.cue-game-rules-v2>strong{
+  margin-bottom:1px;
+  font-size:14px;
+}
+.cue-rule-toggle-v2{
+  width:100%;
+  grid-template-columns:minmax(0,1fr) 36px;
+  gap:10px;
+  font-size:13px;
+  font-weight:520;
+}
+.cue-toggle-track-v2{
+  width:36px;
+  height:21px;
+}
+.cue-toggle-track-v2::after{
+  width:17px;
+  height:17px;
+}
+.cue-rule-toggle-v2 input:checked+.cue-toggle-track-v2::after{
+  transform:translateX(15px);
+}
+.cue-player-stack-v2{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:repeat(2,auto)!important;
+  grid-auto-rows:auto!important;
+  gap:12px!important;
+  margin-top:12px;
+}
+.cue-player-stack-v2 .new-match-player-card-v1,
+.cue-player-stack-v2 .new-match-player-card-v1.player-b-v1{
+  min-height:132px;
+  padding:17px 14px 10px!important;
+  border-radius:15px!important;
+}
+.cue-player-stack-v2 .player-heading-row{
+  left:12px;
+  top:9px;
+  padding:3px 8px!important;
+  border-radius:999px;
+  background:var(--cue-pressed);
+}
+.cue-player-stack-v2 .player-heading-row h2,
+.cue-player-stack-v2 .new-match-player-card-v1.player-b-v1 .player-heading-row h2{
+  font-size:11px!important;
+  font-weight:760!important;
+}
+.cue-player-stack-v2 .new-match-player-select-v1{
+  grid-template-columns:42px minmax(0,1fr) 14px;
+  gap:12px;
+  min-height:72px;
+  padding:24px 8px 11px;
+}
+.cue-player-stack-v2 .new-match-avatar-v1,
+.cue-player-stack-v2 .player-b-v1 .new-match-avatar-v1{
+  display:grid!important;
+  width:42px;
+  height:42px;
+}
+.cue-player-stack-v2 .new-match-player-name-v1{
+  font-size:18px;
+  font-weight:760;
+}
+.new-match-race-row-v2{
+  min-height:45px!important;
+  padding:7px 8px 0;
+}
+.new-match-race-row-v2>span:first-child{
+  font-size:12px;
+  font-weight:650;
+}
+.new-match-race-row-v2 strong{
+  font-size:28px;
+  font-variant-numeric:tabular-nums;
+}
+.new-match-race-row-v2>span:last-child{
+  font-size:18px;
+}
+.cue-player-stack-v2 .player-b-v1 .new-match-player-select-v1{
+  padding-top:30px;
+}
+.cue-swap-v2{
+  position:absolute!important;
+  z-index:4;
+  top:5px!important;
+  right:10px!important;
+  left:auto!important;
+  width:auto!important;
+  min-width:94px!important;
+  height:44px!important;
+  min-height:44px!important;
+  padding:0 4px!important;
+  border:0!important;
+  border-radius:8px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:5px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+.cue-swap-v2 .cue-swap-icon-v2{
+  width:24px;
+  height:24px;
+  background:transparent;
+  box-shadow:none;
+}
+.cue-swap-v2 .cue-swap-icon-v2 svg{
+  width:22px;
+  height:22px;
+  stroke-width:1.8;
+}
+.cue-swap-v2 strong{
+  display:block;
+  font-size:11px;
+  font-weight:650;
+}
+.cue-swap-v2:active{
+  transform:scale(.97)!important;
+}
+.cue-home-start-v2{
+  min-height:54px!important;
+  margin-top:14px!important;
+  border-radius:11px!important;
+  font-size:18px!important;
+}
+.cue-start-note-v2,
+.cue-resume-v1{
+  display:none!important;
+}
+@media(max-width:430px) and (max-height:900px){
+  .cue-home-integrated-v2{
+    gap:10px!important;
+    padding-top:calc(6px + env(safe-area-inset-top))!important;
+  }
+  .cue-home-head-v2{min-height:36px}
+  .cue-home-head-v2 .cue-home-brand-v1{font-size:27px;transform:none}
+  .cue-home-settings-v2{transform:translateY(-50%)}
+  .cue-home-integrated-v2 .cue-discipline-v1{
+    min-height:68px!important;
+    padding-bottom:9px;
+  }
+  .cue-new-match-integrated-v2{
+    margin-top:0;
+    padding:16px 14px 14px!important;
+  }
+  .cue-new-match-summary-v2{padding-bottom:14px}
+  .cue-new-match-summary-v2 .cue-home-eyebrow-v1{margin-bottom:12px;font-size:16px}
+  .cue-game-rules-v2{padding-top:14px;padding-bottom:13px}
+  .cue-player-stack-v2{margin-top:10px;gap:10px!important}
+  .cue-player-stack-v2 .new-match-player-card-v1,
+  .cue-player-stack-v2 .new-match-player-card-v1.player-b-v1{
+    min-height:126px;
+    padding:16px 13px 9px!important;
+  }
+  .cue-player-stack-v2 .new-match-player-select-v1{
+    grid-template-columns:40px minmax(0,1fr) 14px;
+    min-height:68px;
+    padding:23px 8px 9px;
+  }
+  .cue-player-stack-v2 .new-match-avatar-v1,
+  .cue-player-stack-v2 .player-b-v1 .new-match-avatar-v1{
+    display:grid!important;
+    width:40px;
+    height:40px;
+  }
+  .cue-player-stack-v2 .player-b-v1 .new-match-player-select-v1{padding-top:29px}
+  .new-match-race-row-v2{min-height:43px!important;padding-top:5px}
+  .cue-home-start-v2{min-height:52px!important;margin-top:12px!important}
 }
 </style>
 <script>
