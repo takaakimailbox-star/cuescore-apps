@@ -18992,16 +18992,16 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
 
 /* CueScore Home refinement v3: consistent player controls and spacing */
 .cue-player-stack-v2{
-  grid-template-rows:auto 38px auto!important;
-  gap:4px!important;
+  grid-template-rows:auto 0 auto!important;
+  gap:10px!important;
 }
 .cue-player-stack-v2 .new-match-player-card-v1,
 .cue-player-stack-v2 .new-match-player-card-v1.player-b-v1{
-  padding:14px 14px 7px!important;
+  padding:14px 14px 7px 28px!important;
   border-radius:14px!important;
 }
 .cue-player-stack-v2 .player-heading-row{
-  left:14px;
+  left:28px;
   top:-9px;
   padding:3px 8px!important;
   background:#f5f5f3;
@@ -19047,18 +19047,18 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
 }
 .cue-swap-v2{
   position:relative;
-  left:auto!important;
-  justify-self:center;
+  left:-22px!important;
+  justify-self:start;
   align-self:center;
-  width:38px!important;
-  height:38px!important;
-  transform:none!important;
+  width:44px!important;
+  height:44px!important;
+  transform:translateY(-50%)!important;
   background:#fff!important;
   box-shadow:0 2px 8px rgba(0,0,0,.065)!important;
 }
 .cue-swap-v2 .cue-swap-icon-v2{
-  width:36px;
-  height:36px;
+  width:42px;
+  height:42px;
   box-shadow:none;
 }
 .cue-swap-v2 .cue-swap-icon-v2 svg{
@@ -19066,7 +19066,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   height:18px;
   stroke-width:1.7;
 }
-.cue-swap-v2:active{transform:scale(.94)!important}
+.cue-swap-v2:active{transform:translateY(-50%) scale(.94)!important}
 .cue-home-start-v2{
   margin-top:10px!important;
   border-radius:11px!important;
@@ -19081,12 +19081,12 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
 @media(max-width:430px) and (max-height:900px){
   .cue-player-stack-v2{
     margin-top:10px;
-    grid-template-rows:auto 36px auto!important;
-    gap:3px!important;
+    grid-template-rows:auto 0 auto!important;
+    gap:8px!important;
   }
   .cue-player-stack-v2 .new-match-player-card-v1,
   .cue-player-stack-v2 .new-match-player-card-v1.player-b-v1{
-    padding:13px 13px 6px!important;
+    padding:13px 13px 6px 28px!important;
     border-radius:14px!important;
   }
   .cue-player-stack-v2 .new-match-player-select-v1{
@@ -19100,8 +19100,8 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
     height:38px;
   }
   .cue-player-stack-v2 .new-match-player-name-v1{font-size:17px}
-  .cue-swap-v2{width:36px!important;height:36px!important}
-  .cue-swap-v2 .cue-swap-icon-v2{width:34px;height:34px}
+  .cue-swap-v2{left:-22px!important;width:44px!important;height:44px!important}
+  .cue-swap-v2 .cue-swap-icon-v2{width:42px;height:42px}
   .cue-home-start-v2{margin-top:8px!important}
 }
 </style>
