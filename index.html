@@ -11881,7 +11881,7 @@ let matchRecordsRawCacheV152 = null;
 
   function ballHtml(number) {
     const cls = number <= 8 ? "solid" : "stripe";
-    return `<span class="pro-mini-ball ${cls}" style="background:${colors[number]}"><span>${number}</span></span>`;
+    return `<span class="pro-mini-ball ${cls}" style="--ball-color:${colors[number]}"><span>${number}</span></span>`;
   }
 
   function symbolHtml(symbol) {
@@ -19590,11 +19590,29 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
 .pro-mini-ball{
   width:19px!important;
   height:19px!important;
-  font-size:9px!important;
-  border:1px solid rgba(0,0,0,.18)!important;
+  font-size:10px!important;
+  color:#111!important;
+  background:#fbfbfa!important;
+  border:2px solid var(--ball-color)!important;
+  box-shadow:0 1px 2px rgba(0,0,0,.10)!important;
 }
-.pro-mini-ball::before{inset:5px 2px!important}
-.pro-mini-ball.solid::before{inset:4px!important}
+.pro-mini-ball::before{content:none!important}
+.pro-mini-ball.stripe{
+  background:
+    linear-gradient(var(--ball-color),var(--ball-color)) left 1px center/4px 2px no-repeat,
+    linear-gradient(var(--ball-color),var(--ball-color)) right 1px center/4px 2px no-repeat,
+    #fbfbfa!important;
+}
+.pro-mini-ball span{
+  min-width:12px;
+  min-height:12px;
+  padding:0 1px;
+  display:inline-grid;
+  place-items:center;
+  border-radius:999px;
+  background:#fbfbfa;
+  line-height:1;
+}
 .pro-symbol{
   min-width:19px;
   height:19px;
