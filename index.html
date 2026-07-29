@@ -13292,6 +13292,121 @@ let matchRecordsRawCacheV152 = null;
     </section>`;
   }
 
+  function buildOfficialResultProgressV1() {
+    const highestInning = Math.max(1, Number(inning) || 1, ...commonEventsV7.map(event => Number(event?.inningNumber) || 1));
+    const inningPoints = {1:Array(highestInning + 1).fill(0), 2:Array(highestInning + 1).fill(0)};
+    commonEventsV7.forEach(event => {
+      const player = Number(event?.player) === 2 ? 2 : 1;
+      const eventInning = Math.max(1, Math.min(highestInning, Number(event?.inningNumber) || 1));
+      let points = 0;
+      if (event?.type === "Shot" && event?.sourceType === "ball_pocketed") {
+        points = Math.max(0, Number(event?.data?.points ?? event?.data?.ball) || 0);
+      } else if (event?.type === "Break" && event?.sourceType === "break_result") {
+        points = Math.max(0, Number(event?.data?.scoreAdded) || 0);
+      }
+      inningPoints[player][eventInning] += points;
+    });
+    const result = {p1:[0], p2:[0], innings:[0]};
+    let p1Total = 0;
+    let p2Total = 0;
+    for (let value = 1; value <= highestInning; value++) {
+      p1Total += inningPoints[1][value];
+      p2Total += inningPoints[2][value];
+      result.p1.push(p1Total);
+      result.p2.push(p2Total);
+      result.innings.push(value);
+    }
+    result.p1[result.p1.length - 1] = Number(scores[1]) || 0;
+    result.p2[result.p2.length - 1] = Number(scores[2]) || 0;
+    return result;
+  }
+
+  function makeOfficialResultChartSvgV1(progress) {
+    const width = 680, height = 220, left = 42, right = 54, top = 28, bottom = 38;
+    const chartW = width-left-right, chartH = height-top-bottom;
+    const maxScore = Math.max(Number(goals[1])||0, Number(goals[2])||0, Number(scores[1])||0, Number(scores[2])||0, 10);
+    const maxIndex = Math.max(progress.innings.length-1, 1);
+    const point = (value,index) => ({x:left+(index/maxIndex)*chartW, y:top+chartH-(Math.max(0,Number(value)||0)/maxScore)*chartH});
+    const path = values => values.map((value,index) => { const p=point(value,index); return `${index?"L":"M"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`; }).join(" ");
+    const dots = (values,color) => values.map((value,index) => { const p=point(value,index); return `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.1" fill="${color}"/>`; }).join("");
+    const grid = [0,.25,.5,.75,1].map(part => { const y=top+chartH-chartH*part; return `<line x1="${left}" y1="${y}" x2="${width-right}" y2="${y}" stroke="#dededb" stroke-width="1" stroke-dasharray="3 3"/><text x="${left-9}" y="${y+4}" text-anchor="end" font-size="10" fill="#777">${Math.round(maxScore*part)}</text>`; }).join("");
+    const labelEvery = Math.max(1,Math.ceil(maxIndex/8));
+    const xLabels = progress.innings.map((value,index) => { if(index!==0&&index!==maxIndex&&index%labelEvery!==0)return ""; const p=point(0,index); return `<text x="${p.x.toFixed(1)}" y="${height-16}" text-anchor="middle" font-size="10" fill="#777">${value}</text>`; }).join("");
+    const lastP1=point(progress.p1.at(-1),maxIndex), lastP2=point(progress.p2.at(-1),maxIndex);
+    return `<svg class="official-result-chart-svg-v1" viewBox="0 0 ${width} ${height}" role="img" aria-label="両プレーヤーのイニング別累積得点推移">${grid}<path d="${path(progress.p1)}" fill="none" stroke="#6f3214" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="${path(progress.p2)}" fill="none" stroke="#8b8b87" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>${dots(progress.p1,"#6f3214")}${dots(progress.p2,"#8b8b87")}${xLabels}<text x="${Math.min(width-4,lastP1.x+9)}" y="${Math.max(13,lastP1.y-7)}" font-size="13" font-weight="700" fill="#6f3214">${Number(scores[1])||0}</text><text x="${Math.min(width-4,lastP2.x+9)}" y="${Math.min(height-bottom-5,lastP2.y+17)}" font-size="13" font-weight="700" fill="#777">${Number(scores[2])||0}</text></svg>`;
+  }
+
+  function resultAvatarSvgV1() {
+    return `<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="16" r="8" fill="currentColor"/><path d="M9 42c1-11 7-17 15-17s14 6 15 17c-8 4-22 4-30 0Z" fill="currentColor"/></svg>`;
+  }
+
+  function formatResultDurationV1(startedAt, endedAt) {
+    const start=new Date(startedAt||""), end=new Date(endedAt||"");
+    if(!Number.isFinite(start.getTime())||!Number.isFinite(end.getTime())||end<start)return "—";
+    const minutes=Math.max(0,Math.round((end-start)/60000));
+    if(minutes<60)return `${minutes}分`;
+    const hours=Math.floor(minutes/60), rest=minutes%60;
+    return rest?`${hours}時間${rest}分`:`${hours}時間`;
+  }
+
+  function dismissOfficialResultToGameV1() {
+    gameSetDismissed=true;
+    reviewMode=true;
+    gameEnded=false;
+    const oldSummary=el("proSummary");
+    if(oldSummary){
+      const cleanSummary=document.createElement("section");
+      cleanSummary.id="proSummary";
+      cleanSummary.className="pro-summary hidden";
+      cleanSummary.style.display="none";
+      cleanSummary.style.pointerEvents="none";
+      oldSummary.replaceWith(cleanSummary);
+    }
+    requestAnimationFrame(()=>{
+      updateGame();
+      const backButton=el("proGameBackBtn"), undoButton=el("proUndoBtn");
+      if(backButton)backButton.disabled=false;
+      if(undoButton)undoButton.disabled=undoHistory.length===0;
+    });
+  }
+
+  function renderOfficialMatchResultV1(summary,winner,stats,endedAt) {
+    const endDate=new Date(endedAt), startDate=new Date(currentGameStartedAt||"");
+    const validStart=Number.isFinite(startDate.getTime()), validEnd=Number.isFinite(endDate.getTime());
+    const dateText=validEnd?`${endDate.getFullYear()}/${endDate.getMonth()+1}/${endDate.getDate()}`:"—";
+    const timeText=validStart&&validEnd?`${String(startDate.getHours()).padStart(2,"0")}:${String(startDate.getMinutes()).padStart(2,"0")} 〜 ${String(endDate.getHours()).padStart(2,"0")}:${String(endDate.getMinutes()).padStart(2,"0")}`:"—";
+    const durationText=formatResultDurationV1(currentGameStartedAt,endedAt);
+    const progress=buildOfficialResultProgressV1();
+    const safeName1=escapeRecordText(playerName(1)), safeName2=escapeRecordText(playerName(2));
+    const infoIcon=name=>{
+      if(name==="calendar")return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v3M18 3v3M4 8h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"/></svg>`;
+      if(name==="clock")return `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
+      return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10M7 21h10M8 3c0 4 1 6 4 9-3 3-4 5-4 9M16 3c0 4-1 6-4 9 3 3 4 5 4 9"/></svg>`;
+    };
+    const playerCard=player=>`<article class="official-result-player-v1 ${player===winner?"winner":"loser"}"><div class="official-result-player-name-v1"><span class="official-result-avatar-v1">${resultAvatarSvgV1()}</span><span>${player===1?safeName1:safeName2}</span></div><div class="official-result-score-v1">${Number(scores[player])||0}</div><div class="official-result-stats-v1"><div><span>成功率</span><strong>${Number(stats.shotRate[player])||0}<small>%</small></strong></div><div><span>ハイラン</span><strong>${Number(stats.maxRun[player])||0}</strong></div></div></article>`;
+
+    summary.innerHTML=`<div class="official-result-backdrop-v1" aria-hidden="true"></div><section class="official-result-sheet-v1" role="dialog" aria-modal="true" aria-labelledby="officialResultTitleV1"><div class="official-result-handle-v1" aria-hidden="true"></div><div class="official-result-scroll-v1"><h2 id="officialResultTitleV1">試合結果</h2><div class="official-result-info-v1"><span>${infoIcon("calendar")}<b>${dateText}</b></span><span>${infoIcon("clock")}<b>${timeText}</b></span><span>${infoIcon("duration")}<b>${durationText}</b></span></div><div class="official-result-players-v1">${playerCard(1)}<span class="official-result-separator-v1" aria-hidden="true">−</span>${playerCard(2)}</div><section class="official-result-chart-card-v1"><div class="official-result-chart-header-v1"><h3>スコア推移</h3><div><span class="p1"></span>${safeName1}<span class="p2"></span>${safeName2}</div></div><span class="official-result-axis-title-v1">得点</span>${makeOfficialResultChartSvgV1(progress)}<span class="official-result-axis-bottom-v1">イニング</span></section><div class="official-result-actions-v1"><button id="officialResultReturnGameV1" class="official-result-primary-v1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h12"/></svg>試合へ戻る</button><div class="official-result-secondary-row-v1"><button id="officialResultHomeV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3Z"/></svg>ホームへ戻る</button><button id="officialResultRematchV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7V3l-2 2a8 8 0 1 0 2 6M20 3h-4"/></svg>もう一度対戦する</button></div></div><p class="official-result-note-v1">※ 試合の詳細な分析や履歴は「履歴」画面からご確認いただけます。</p></div></section>`;
+    const saveAndLeave=(button,rematch)=>{
+      if(button?.dataset.saving==="1")return;
+      if(button){button.dataset.saving="1";button.disabled=true;}
+      try{
+        const savedId=saveCurrentMatchRecord(winner,stats);
+        if(!savedId)throw new Error("試合履歴の保存IDを確認できませんでした。");
+        summary.classList.add("hidden");summary.style.display="none";summary.style.pointerEvents="none";
+        backToTitle();
+        if(rematch)requestAnimationFrame(()=>document.getElementById("newMatchPlayerCard1V1")?.scrollIntoView({block:"center"}));
+        requestAnimationFrame(()=>showToast("保存完了",navigator.onLine?"対戦履歴を端末へ保存しました":"オフラインのため端末へ保存しました"));
+      }catch(error){
+        console.error("CueScore official result save failed",error);
+        if(button){button.dataset.saving="0";button.disabled=false;}
+        alert(`試合結果を保存できませんでした。\n\n${error?.message||error}\n\n試合結果画面は保持しています。`);
+      }
+    };
+    el("officialResultReturnGameV1")?.addEventListener("click",dismissOfficialResultToGameV1);
+    el("officialResultHomeV1")?.addEventListener("click",event=>saveAndLeave(event.currentTarget,false));
+    el("officialResultRematchV1")?.addEventListener("click",event=>saveAndLeave(event.currentTarget,true));
+  }
+
   function checkWinner() {
     const winner = goalReachedPlayer();
     const summary = el("proSummary");
@@ -13331,16 +13446,14 @@ let matchRecordsRawCacheV152 = null;
         reason: "race_target_reached"
       });
     }
-    const progress = buildScoreProgress();
     const now = new Date();
-    const dateText = `${now.getFullYear()}/${String(now.getMonth()+1).padStart(2,"0")}/${String(now.getDate()).padStart(2,"0")}`;
-    const startText = el("proStartTime")?.textContent.replace("開始時刻 ","") || "--:--";
-    const endText = `${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}`;
 
     summary.style.display = "";
     summary.style.pointerEvents = "auto";
     summary.removeAttribute("aria-hidden");
     summary.classList.remove("hidden");
+    renderOfficialMatchResultV1(summary, winner, stats, now.toISOString());
+    return;
     summary.innerHTML = `
       <div class="pro-summary-card result-pages-card">
         <div class="result-pages-header">${dateText}　${startText} - ${endText}</div>
@@ -20249,6 +20362,239 @@ window.cueScoreModalDiagnosticsV159 = () => ({
   },{passive:true}));
 })();
 </script>
+
+<style>
+/* CueScore Match Result v1.0: official bottom-sheet layout */
+.pro-summary:not(.hidden){
+  padding:0!important;
+  display:block!important;
+  background:transparent!important;
+  color:#171717!important;
+}
+.official-result-backdrop-v1{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.24);
+  -webkit-backdrop-filter:blur(5px);
+  backdrop-filter:blur(5px);
+}
+.official-result-sheet-v1{
+  --result-accent:#6f3214;
+  position:absolute;
+  z-index:1;
+  left:0;
+  right:0;
+  bottom:0;
+  max-height:94svh;
+  padding:10px 0 max(8px,env(safe-area-inset-bottom));
+  overflow:hidden;
+  border-radius:28px 28px 0 0;
+  background:#fbfbfa;
+  box-shadow:0 -12px 40px rgba(0,0,0,.16);
+  text-align:left;
+}
+.official-result-handle-v1{
+  width:42px;
+  height:5px;
+  margin:0 auto 8px;
+  border-radius:99px;
+  background:#aaa;
+}
+.official-result-scroll-v1{
+  max-height:calc(94svh - max(18px,env(safe-area-inset-bottom)));
+  padding:0 18px 10px;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
+.official-result-scroll-v1>h2{
+  margin:2px 0 8px;
+  text-align:center;
+  color:#111;
+  font-size:clamp(27px,7vw,34px);
+  font-weight:850;
+  letter-spacing:.02em;
+}
+.official-result-info-v1{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px 18px;
+  margin-bottom:14px;
+  color:#666;
+  font-size:12px;
+}
+.official-result-info-v1 span{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.official-result-info-v1 svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.official-result-info-v1 b{color:#444;font-weight:600}
+.official-result-players-v1{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr);
+  align-items:center;
+  gap:5px;
+  margin-bottom:12px;
+}
+.official-result-player-v1{
+  position:relative;
+  min-width:0;
+  padding:12px 10px 11px;
+  overflow:hidden;
+  border:1px solid #dededb;
+  border-radius:14px;
+  background:#fff;
+  text-align:center;
+}
+.official-result-player-v1.winner{
+  border-color:rgba(111,50,20,.78);
+  background:rgba(111,50,20,.025);
+  color:var(--result-accent);
+  animation:official-result-winner-v1 .25s ease-out both;
+}
+.official-result-player-v1.winner::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:4px;
+  background:var(--result-accent);
+}
+@keyframes official-result-winner-v1{
+  from{background:#fff;color:#171717}
+  to{background:rgba(111,50,20,.025);color:var(--result-accent)}
+}
+@media(prefers-reduced-motion:reduce){.official-result-player-v1.winner{animation:none}}
+.official-result-player-name-v1{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  font-size:13px;
+  font-weight:750;
+}
+.official-result-player-name-v1>span:last-child{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.official-result-avatar-v1{
+  flex:0 0 auto;
+  width:27px;
+  height:27px;
+  padding:4px;
+  display:grid;
+  place-items:center;
+  border:1px solid currentColor;
+  border-radius:50%;
+  opacity:.82;
+}
+.official-result-avatar-v1 svg{width:100%;height:100%}
+.official-result-score-v1{
+  margin:4px 0 7px;
+  font-size:clamp(45px,14vw,68px);
+  font-weight:850;
+  line-height:.98;
+  letter-spacing:-.045em;
+}
+.official-result-player-v1.loser .official-result-score-v1{color:#111}
+.official-result-stats-v1{
+  padding-top:8px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-top:1px solid #e6e6e3;
+}
+.official-result-stats-v1>div{display:grid;gap:2px}
+.official-result-stats-v1>div+div{border-left:1px solid #e1e1de}
+.official-result-stats-v1 span{font-size:10px;font-weight:600;color:#555}
+.official-result-stats-v1 strong{font-size:23px;font-weight:800;line-height:1}
+.official-result-stats-v1 small{font-size:.62em}
+.official-result-separator-v1{text-align:center;font-size:20px;font-weight:800;color:#333}
+.official-result-chart-card-v1{
+  position:relative;
+  margin-bottom:12px;
+  padding:11px 10px 5px;
+  border:1px solid #e0e0dd;
+  border-radius:14px;
+  background:#fff;
+}
+.official-result-chart-header-v1{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:1px;
+}
+.official-result-chart-header-v1 h3{margin:0;font-size:15px;font-weight:800}
+.official-result-chart-header-v1>div{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  overflow:hidden;
+  color:#555;
+  font-size:9px;
+  white-space:nowrap;
+}
+.official-result-chart-header-v1>div span{width:13px;height:2px;display:inline-block;border-radius:4px}
+.official-result-chart-header-v1 .p1{background:var(--result-accent)}
+.official-result-chart-header-v1 .p2{margin-left:4px;background:#8b8b87}
+.official-result-chart-svg-v1{width:100%;height:auto;max-height:166px;display:block}
+.official-result-axis-title-v1{position:absolute;top:36px;left:12px;color:#777;font-size:9px}
+.official-result-axis-bottom-v1{display:block;margin-top:-10px;text-align:center;color:#555;font-size:10px}
+.official-result-actions-v1{display:grid;gap:8px}
+.official-result-actions-v1 button{
+  min-height:48px;
+  border-radius:12px;
+  font:inherit;
+  font-size:13px;
+  font-weight:750;
+}
+.official-result-actions-v1 svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.official-result-primary-v1{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:1px solid #111;
+  background:#171717;
+  color:#fff;
+}
+.official-result-secondary-row-v1{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.official-result-secondary-row-v1 button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  border:1px solid #dededb;
+  background:#fff;
+  color:#171717;
+}
+.official-result-note-v1{
+  margin:8px 0 0;
+  text-align:center;
+  color:#777;
+  font-size:9px;
+  line-height:1.45;
+}
+@media(max-width:370px){
+  .official-result-scroll-v1{padding-left:12px;padding-right:12px}
+  .official-result-info-v1{gap:6px 10px;font-size:10px}
+  .official-result-player-v1{padding-left:7px;padding-right:7px}
+  .official-result-avatar-v1{width:24px;height:24px}
+  .official-result-player-name-v1{gap:5px;font-size:11px}
+  .official-result-secondary-row-v1 button{font-size:11px}
+}
+@media(max-height:720px){
+  .official-result-scroll-v1>h2{font-size:25px;margin-bottom:5px}
+  .official-result-info-v1{margin-bottom:9px}
+  .official-result-player-v1{padding-top:9px;padding-bottom:8px}
+  .official-result-score-v1{font-size:43px}
+  .official-result-chart-svg-v1{max-height:138px}
+}
+</style>
 </body>
 </html>
 
