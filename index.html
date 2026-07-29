@@ -19641,22 +19641,13 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
     inset 0 0 0 1px rgba(0,0,0,.08),
     0 2px 5px rgba(0,0,0,.08)!important;
 }
-.pro-ball::before{
-  content:""!important;
-  position:absolute!important;
-  z-index:0!important;
-  left:4px!important;
-  right:4px!important;
-  top:50%!important;
-  bottom:auto!important;
-  height:9px!important;
-  transform:translateY(-50%)!important;
-  border-radius:999px!important;
-  background:var(--ball-color)!important;
-  opacity:0!important;
+.pro-ball::before{content:none!important}
+.pro-ball.stripe{
+  background:
+    linear-gradient(var(--ball-color),var(--ball-color)) left 4px center/9px 3px no-repeat,
+    linear-gradient(var(--ball-color),var(--ball-color)) right 4px center/9px 3px no-repeat,
+    #fbfbfa!important;
 }
-.pro-ball.solid::before{content:none!important}
-.pro-ball.stripe::before{opacity:1!important}
 .pro-ball span{
   position:relative!important;
   z-index:1!important;
@@ -19744,7 +19735,12 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
     min-height:40px!important;
     font-size:19px!important;
   }
-  .pro-ball::before{left:3px!important;right:3px!important;height:8px!important}
+  .pro-ball.stripe{
+    background:
+      linear-gradient(var(--ball-color),var(--ball-color)) left 4px center/9px 3px no-repeat,
+      linear-gradient(var(--ball-color),var(--ball-color)) right 4px center/9px 3px no-repeat,
+      #fbfbfa!important;
+  }
   .pro-ball span{min-width:22px;min-height:22px;padding:0 2px}
   .pro-actions{margin-top:7px!important;gap:6px!important}
   .pro-action{min-height:62px!important;font-size:10px!important}
