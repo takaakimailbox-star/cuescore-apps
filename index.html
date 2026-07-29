@@ -2951,8 +2951,7 @@
 .pro-game-screen.review-locked .pro-balls,
 .pro-game-screen.review-locked #proSafetyBtn,
 .pro-game-screen.review-locked #proFoulBtn,
-.pro-game-screen.review-locked #proSwitchBtn,
-.pro-game-screen.review-locked #proNextRackBox {
+.pro-game-screen.review-locked #proSwitchBtn {
   pointer-events: none !important;
 }
 
@@ -8379,20 +8378,6 @@ body {
           <section class="pro-play-area">
             <section class="pro-balls" id="proBalls"></section>
 
-            <section id="proNextRackBox" class="pro-next-rack-box hidden">
-              <div class="pro-rack-end-title">Rack <span id="proRackEndNumber">1</span> 終了</div>
-              <div class="pro-next-break-label">次のラックでブレイクするプレーヤーを選択</div>
-              <div class="pro-rack-player-cards">
-                <button id="proRackP1Card" class="pro-rack-player-card" type="button">
-                  <span id="proRackP1Name" class="pro-rack-card-name">Player 1</span>
-                  <span id="proRackP1Score" class="pro-rack-card-score">+0点</span>
-                </button>
-                <button id="proRackP2Card" class="pro-rack-player-card" type="button">
-                  <span id="proRackP2Name" class="pro-rack-card-name">Player 2</span>
-                  <span id="proRackP2Score" class="pro-rack-card-score">+0点</span>
-                </button>
-              </div>
-            </section>
           </section>
 
           <section class="pro-actions" id="proActionsV730">
@@ -8465,10 +8450,20 @@ body {
 
       <section id="breakResultOverlayV61" class="break-result-overlay-v61 hidden" aria-modal="true" role="dialog" aria-labelledby="breakResultTitleV61">
         <div class="break-result-card-v61">
-          <div class="break-result-rack-v61">Rack <span id="breakResultRackV61">1</span></div>
-          <div id="breakResultTitleV61" class="break-result-title-v61">ブレイク結果</div>
-          <div id="breakResultPlayerV61" class="break-result-player-v61">Player 1</div>
-          <div class="break-result-section-title-v695">ブレイクで入ったボール</div>
+          <div class="break-result-handle-v1" aria-hidden="true"></div>
+          <div class="break-result-rack-v61" hidden>Rack <span id="breakResultRackV61">1</span></div>
+          <div id="breakResultTitleV61" class="break-result-title-v61">ブレイク結果入力</div>
+          <div class="break-result-lead-v1">ブレイクの結果を入力してください</div>
+          <div class="break-player-segments-v1" role="radiogroup" aria-label="ブレイクプレーヤー">
+            <button id="breakPlayerP1V1" class="break-player-segment-v1" type="button" role="radio" aria-checked="true" data-break-player="1">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.4-5 3-7.5 7.5-7.5s7.1 2.5 7.5 7.5Z"/></svg>
+              <span id="breakPlayerP1NameV1">Player 1</span>
+            </button>
+            <button id="breakPlayerP2V1" class="break-player-segment-v1" type="button" role="radio" aria-checked="false" data-break-player="2">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.4-5 3-7.5 7.5-7.5s7.1 2.5 7.5 7.5Z"/></svg>
+              <span id="breakPlayerP2NameV1">Player 2</span>
+            </button>
+          </div>
           <div class="break-ball-grid-v696" id="breakBallGridV696">
             <button class="break-ball-btn-v696" type="button" data-break-ball="1" data-ball-number="1" style="--ball-color:#f5d54a">1</button>
             <button class="break-ball-btn-v696" type="button" data-break-ball="2" data-ball-number="2" style="--ball-color:#2b62d9">2</button>
@@ -8487,17 +8482,25 @@ body {
             <button class="break-ball-btn-v696" type="button" data-break-ball="15" data-ball-number="15" style="--ball-color:#8a4b20">15</button>
           </div>
           <div class="break-summary-v696">
-            <span>選択 <strong id="breakPocketCountV696">0球</strong></span>
-            <span>合計 <strong id="breakPocketPointsV696">0点</strong></span>
+            <span class="break-summary-pocket-v1">
+              <strong>ポケット球</strong>
+              <span id="breakPocketBallsV1" class="break-summary-balls-v1"></span>
+              <span id="breakPocketCountV696" hidden>0球</span>
+            </span>
+            <strong id="breakPocketPointsV696">0点</strong>
           </div>
-          <button id="breakNoInToggleV702" class="break-no-in-btn-v702" type="button" aria-pressed="false">ノーイン</button>
-          <div class="break-result-section-title-v695">特殊結果</div>
           <div class="break-special-grid-v696">
-            <button id="breakScratchToggleV696" class="break-special-btn-v696 trouble-v696" type="button">スクラッチ</button>
-            <button id="breakPushOutToggleV695" class="break-special-btn-v696" type="button">シュートアウト</button>
+            <button id="breakNoInToggleV702" class="break-special-btn-v696" type="button" aria-pressed="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" stroke-dasharray="2.2 2.2"/></svg>
+              <span>ノーイン</span>
+            </button>
+            <button id="breakScratchToggleV696" class="break-special-btn-v696 trouble-v696" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 11V6.2a1.4 1.4 0 0 1 2.8 0V10"/><path d="M10.6 10V4.8a1.4 1.4 0 0 1 2.8 0V10"/><path d="M13.4 10V6a1.4 1.4 0 0 1 2.8 0v5"/><path d="M16.2 11V8.2a1.4 1.4 0 0 1 2.8 0v5.2c0 4.6-2.5 7.1-6.7 7.1-3.4 0-5.2-1.8-6.6-4.4L4 13.3a1.5 1.5 0 0 1 2.4-1.7Z"/></svg>
+              <span>スクラッチ</span>
+            </button>
+            <button id="breakPushOutToggleV695" class="break-special-btn-v696" type="button" hidden>シュートアウト</button>
           </div>
-          <div class="break-result-note-v695">選択したボールは得点と残り球へ反映します。スクラッチとシュートアウトは同時に選べません。シュートアウトを選ぶと、ブレイク確定後に専用入力へ進みます。</div>
-          <button id="breakResultSaveV695" class="break-result-save-v695" type="button">ゲームを進める</button>
+          <button id="breakResultSaveV695" class="break-result-save-v695" type="button">OK</button>
         </div>
       </section>
 
@@ -11204,6 +11207,9 @@ let matchRecordsRawCacheV152 = null;
   let pendingBreakScratchV696 = false;
   let pendingBreakIllegalV696 = false;
   let breakUndoRestoreV697 = null;
+  let pendingBreakStartsNextRackV1 = false;
+  let rackBreakPromptQueuedV1 = false;
+  let breakResultSavingV1 = false;
   const BREAK_RESULT_LABELS_V61 = {
     dry: "無得点",
     one: "1個",
@@ -11290,6 +11296,30 @@ let matchRecordsRawCacheV152 = null;
     const points = balls.reduce((sum, number) => sum + number, 0);
     if (el("breakPocketCountV696")) el("breakPocketCountV696").textContent = `${balls.length}球`;
     if (el("breakPocketPointsV696")) el("breakPocketPointsV696").textContent = `${points}点`;
+    const pocketBalls = el("breakPocketBallsV1");
+    if (pocketBalls) {
+      pocketBalls.innerHTML = balls.map(number => {
+        const stripe = number >= 9 ? " stripe" : "";
+        return `<span class="break-summary-ball-v1${stripe}" style="--ball-color:${colors[number]}">${number}</span>`;
+      }).join("");
+    }
+  }
+
+  function updateBreakPlayerSegmentsV1() {
+    [1,2].forEach(player => {
+      const button = el(`breakPlayerP${player}V1`);
+      const name = el(`breakPlayerP${player}NameV1`);
+      const selected = pendingBreakPlayerV61 === player;
+      if (name) name.textContent = playerName(player);
+      button?.classList.toggle("selected-v1", selected);
+      button?.setAttribute("aria-checked", selected ? "true" : "false");
+    });
+  }
+
+  function selectBreakPlayerV1(player) {
+    if (breakResultSavingV1) return;
+    pendingBreakPlayerV61 = Number(player) === 2 ? 2 : 1;
+    updateBreakPlayerSegmentsV1();
   }
 
   function resetBreakPromptSelectionV695() {
@@ -11299,6 +11329,9 @@ let matchRecordsRawCacheV152 = null;
     pendingBreakNoInV702 = false;
     pendingBreakScratchV696 = false;
     pendingBreakIllegalV696 = false;
+    pendingBreakStartsNextRackV1 = false;
+    rackBreakPromptQueuedV1 = false;
+    breakResultSavingV1 = false;
     document.querySelectorAll("[data-break-ball]").forEach(button => button.classList.remove("selected-v696"));
     [["breakNoInToggleV702",false],["breakScratchToggleV696",false],["breakPushOutToggleV695",false]].forEach(([id]) => {
       el(id)?.classList.remove("active-v696");
@@ -11315,20 +11348,24 @@ let matchRecordsRawCacheV152 = null;
     }
     pendingBreakPlayerV61 = null;
     pendingBreakRackV61 = null;
+    pendingBreakStartsNextRackV1 = false;
     resetBreakPromptSelectionV695();
   }
 
-  function showBreakResultPromptV61(player, rackNumber) {
+  function showBreakResultPromptV61(player, rackNumber, options = {}) {
     if (recordingModeV611 !== "detail" || gameEnded || reviewMode) return;
     const overlay = el("breakResultOverlayV61");
     if (!overlay) return;
     resetBreakPromptSelectionV695();
+    breakResultSavingV1 = false;
+    if (el("breakResultSaveV695")) el("breakResultSaveV695").disabled = false;
     pendingBreakPlayerV61 = Number(player) === 2 ? 2 : 1;
     pendingBreakRackV61 = Number(rackNumber) || Number(rack) || 1;
+    pendingBreakStartsNextRackV1 = Boolean(options.nextRack);
     el("breakResultRackV61").textContent = pendingBreakRackV61;
-    el("breakResultPlayerV61").textContent = `${playerName(pendingBreakPlayerV61)} のブレイク`;
+    updateBreakPlayerSegmentsV1();
     const pushOutButtonV699 = el("breakPushOutToggleV695");
-    if (pushOutButtonV699) pushOutButtonV699.hidden = !getActiveRuleV699().pushOut.enabled;
+    if (pushOutButtonV699) pushOutButtonV699.hidden = true;
     overlay.setAttribute("aria-hidden", "false");
     overlay.classList.remove("hidden");
   }
@@ -11338,6 +11375,8 @@ let matchRecordsRawCacheV152 = null;
     const overlay = el("breakResultOverlayV61");
     if (!overlay) return;
     pendingBreakPlayerV61 = Number(payload.player) === 2 ? 2 : 1;
+    breakResultSavingV1 = false;
+    if (el("breakResultSaveV695")) el("breakResultSaveV695").disabled = false;
     pendingBreakRackV61 = Number(payload.rackNumber) || Number(rack) || 1;
     const activeBallCountV111 = Number(getActiveRuleV699().ballCount || 15);
     pendingBreakBallsV696 = new Set((payload.pocketedBalls || []).map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= activeBallCountV111));
@@ -11345,8 +11384,9 @@ let matchRecordsRawCacheV152 = null;
     pendingBreakScratchV696 = Boolean(payload.scratch);
     pendingBreakIllegalV696 = false;
     pendingBreakPushOutV695 = Boolean(payload.pushOut);
+    pendingBreakStartsNextRackV1 = false;
     el("breakResultRackV61").textContent = pendingBreakRackV61;
-    el("breakResultPlayerV61").textContent = `${playerName(pendingBreakPlayerV61)} のブレイク`;
+    updateBreakPlayerSegmentsV1();
     document.querySelectorAll("[data-break-ball]").forEach(button => {
       button.classList.toggle("selected-v696", pendingBreakBallsV696.has(Number(button.dataset.breakBall)));
     });
@@ -11361,7 +11401,7 @@ let matchRecordsRawCacheV152 = null;
 
   function toggleBreakBallV696(number, button = null) {
     const ball = Number(number);
-    if (!Number.isInteger(ball) || ball < 1 || ball > 15 || usedBalls.has(ball)) return;
+    if (!Number.isInteger(ball) || ball < 1 || ball > 15 || (!pendingBreakStartsNextRackV1 && usedBalls.has(ball))) return;
     if (pendingBreakNoInV702) {
       pendingBreakNoInV702 = false;
       el("breakNoInToggleV702")?.classList.remove("active-v696");
@@ -11428,15 +11468,19 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function saveBreakResultV61() {
+    if (breakResultSavingV1) return;
     const player = pendingBreakPlayerV61;
     const rackNumber = pendingBreakRackV61;
     if (!player || !rackNumber) return closeBreakResultPromptV61();
 
+    breakResultSavingV1 = true;
+    if (el("breakResultSaveV695")) el("breakResultSaveV695").disabled = true;
+    const startsNextRackV1 = pendingBreakStartsNextRackV1;
     const requestedPushOutV100 = Boolean(pendingBreakPushOutV695);
     const decision = buildBreakDecisionV700({
       player,
       rackNumber,
-      pocketedBalls: [...pendingBreakBallsV696].filter(ball => !usedBalls.has(ball)),
+      pocketedBalls: [...pendingBreakBallsV696].filter(ball => startsNextRackV1 || !usedBalls.has(ball)),
       scratch: pendingBreakScratchV696,
       illegalBreak: pendingBreakIllegalV696,
       pushOutRequested: requestedPushOutV100
@@ -11452,6 +11496,10 @@ let matchRecordsRawCacheV152 = null;
     };
 
     closeBreakResultPromptV61();
+    if (startsNextRackV1 && !startNextRackWith(player, { showPrompt:false })) {
+      breakResultSavingV1 = false;
+      return;
+    }
     saveAndDo(() => {
       current = player;
       decision.scoredBalls.forEach(number => {
@@ -11541,6 +11589,10 @@ let matchRecordsRawCacheV152 = null;
         if (isPushOutAvailableV730()) openPushOutV730();
       }, 0);
     }
+    setTimeout(() => {
+      breakResultSavingV1 = false;
+      if (el("breakResultSaveV695")) el("breakResultSaveV695").disabled = false;
+    }, 0);
   }
 
   function finalizeBreakRunOutV695(completedRack, finisher) {
@@ -11964,18 +12016,9 @@ let matchRecordsRawCacheV152 = null;
     balls.replaceChildren(fragment);
   }
 
-  function renderRackResult() {
-    el("proRackEndNumber").textContent = rack;
-    el("proRackP1Name").textContent = playerName(1);
-    el("proRackP2Name").textContent = playerName(2);
-    el("proRackP1Score").textContent = `+${rackScores[1]}点`;
-    el("proRackP2Score").textContent = `+${rackScores[2]}点`;
-  }
-
-
   // CueScore RC6: preserve completed-rack Inning and make run continuity explicit.
-  function startNextRackWith(player) {
-    if (gameEnded || !rackEnded || isReviewLocked()) return;
+  function startNextRackWith(player, options = {}) {
+    if (gameEnded || !rackEnded || isReviewLocked()) return false;
 
     saveAndDo(() => {
       const fifteenBallPlayer = nextBreakPlayer;
@@ -12035,9 +12078,9 @@ let matchRecordsRawCacheV152 = null;
         continuedRun: !changesPlayer ? Number(currentRun[player]) || 0 : 0,
         source: "next_rack_selection"
       });
-      el("proNextRackBox").classList.add("hidden");
     });
-    setTimeout(() => showBreakResultPromptV61(player, rack), 0);
+    if (options.showPrompt !== false) setTimeout(() => showBreakResultPromptV61(player, rack), 0);
+    return true;
   }
 
   function updateButtons() {
@@ -12074,8 +12117,21 @@ let matchRecordsRawCacheV152 = null;
       undoButton.setAttribute("aria-disabled", undoButton.disabled ? "true" : "false");
     }
 
-    el("proNextRackBox").classList.toggle("hidden", !rackEnded || gameEnded || reviewLocked);
-    if (rackEnded && !reviewLocked) renderRackResult();
+    if (
+      rackEnded &&
+      !gameEnded &&
+      !reviewLocked &&
+      recordingModeV611 === "detail" &&
+      el("breakResultOverlayV61")?.classList.contains("hidden") &&
+      !rackBreakPromptQueuedV1
+    ) {
+      rackBreakPromptQueuedV1 = true;
+      setTimeout(() => {
+        rackBreakPromptQueuedV1 = false;
+        if (!rackEnded || gameEnded || reviewMode) return;
+        showBreakResultPromptV61(nextBreakPlayer, Number(rack) + 1, { nextRack:true });
+      }, 0);
+    }
   }
 
   // CueScore RC76: immediate turn-log update after each pocketed ball.
@@ -12123,7 +12179,7 @@ let matchRecordsRawCacheV152 = null;
 
   function gameBallSignatureV155() {
     const activeBallCount = Math.max(1, Number(getActiveRuleV699().ballCount || 15));
-    return `${activeBallCount}|${[...usedBalls].sort((a,b)=>a-b).join(",")}|${rackEnded ? 1 : 0}|${gameEnded ? 1 : 0}`;
+    return `${activeBallCount}|${[...usedBalls].sort((a,b)=>a-b).join(",")}|${rackEnded ? 1 : 0}|${foulLocked ? 1 : 0}|${gameEnded ? 1 : 0}`;
   }
 
   function updateGame() {
@@ -12892,6 +12948,9 @@ let matchRecordsRawCacheV152 = null;
     pendingBreakScratchV696 = false;
     pendingBreakIllegalV696 = false;
     breakUndoRestoreV697 = null;
+    pendingBreakStartsNextRackV1 = false;
+    rackBreakPromptQueuedV1 = false;
+    breakResultSavingV1 = false;
     clearPushOutWindowV730();
     closeBreakResultPromptV61();
     closeRecordModePromptV611();
@@ -13680,7 +13739,6 @@ let matchRecordsRawCacheV152 = null;
     clearPushOutWindowV730();
     closeBreakResultPromptV61();
     el("proSummary")?.classList.add("hidden");
-    el("proNextRackBox")?.classList.add("hidden");
     app.classList.remove("pro-game-mode");
     proGameScreen.classList.add("hidden");
     playerInfoScreen.classList.add("hidden");
@@ -13823,8 +13881,8 @@ let matchRecordsRawCacheV152 = null;
   el("proFoulBtn")?.addEventListener("click", foulEvent);
   el("proSwitchBtn")?.addEventListener("click", switchPlayer);
   el("proUndoBtn")?.addEventListener("click", undo);
-  el("proRackP1Card")?.addEventListener("click", () => startNextRackWith(1));
-  el("proRackP2Card")?.addEventListener("click", () => startNextRackWith(2));
+  el("breakPlayerP1V1")?.addEventListener("click", () => selectBreakPlayerV1(1));
+  el("breakPlayerP2V1")?.addEventListener("click", () => selectBreakPlayerV1(2));
   document.querySelectorAll("[data-break-ball]").forEach(button => {
     button.addEventListener("click", () => toggleBreakBallV696(button.dataset.breakBall, button));
   });
@@ -19763,6 +19821,239 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   .pro-actions{margin-top:7px!important;gap:6px!important}
   .pro-action{min-height:62px!important;font-size:10px!important}
   .pro-action svg{width:26px;height:26px}
+}
+
+/* CueScore Break Result Bottom Sheet v1.0 */
+.break-result-overlay-v61{
+  align-items:flex-end!important;
+  justify-content:center!important;
+  padding:0!important;
+  background:rgba(17,17,17,.18)!important;
+  backdrop-filter:blur(3px)!important;
+  -webkit-backdrop-filter:blur(3px)!important;
+  overscroll-behavior:none;
+}
+.break-result-card-v61{
+  width:min(100%,520px)!important;
+  max-height:calc(100dvh - 72px)!important;
+  margin:0!important;
+  padding:10px max(20px,env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left))!important;
+  overflow:auto!important;
+  overscroll-behavior:contain;
+  border:1px solid #e2e2df!important;
+  border-bottom:0!important;
+  border-radius:24px 24px 0 0!important;
+  color:#171717!important;
+  background:#fff!important;
+  box-shadow:0 -12px 34px rgba(0,0,0,.11)!important;
+  text-align:center!important;
+}
+.break-result-handle-v1{
+  width:40px;
+  height:5px;
+  margin:0 auto 14px;
+  border-radius:999px;
+  background:#a9a9a7;
+}
+.break-result-title-v61{
+  margin:0!important;
+  color:#171717!important;
+  font-size:25px!important;
+  font-weight:800!important;
+  line-height:1.15!important;
+}
+.break-result-lead-v1{
+  margin:4px 0 15px;
+  color:#777775;
+  font-size:14px;
+  font-weight:650;
+}
+.break-player-segments-v1{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-bottom:16px;
+}
+.break-player-segment-v1{
+  min-width:0;
+  min-height:48px;
+  padding:8px 10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:1px solid #dededb;
+  border-radius:9px;
+  color:#777775;
+  background:#fff;
+  font-size:15px;
+  font-weight:750;
+  outline:none;
+  box-shadow:none;
+}
+.break-player-segment-v1 svg{
+  width:20px;
+  height:20px;
+  flex:0 0 auto;
+  fill:currentColor;
+}
+.break-player-segment-v1 span{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.break-player-segment-v1.selected-v1{
+  border-color:#c66b30;
+  color:#a54800;
+  background:#fff8f2;
+}
+.break-ball-grid-v696{
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:10px 14px!important;
+  margin:0 5px 16px!important;
+}
+.break-ball-btn-v696{
+  width:48px!important;
+  height:48px!important;
+  min-width:48px!important;
+  min-height:48px!important;
+  justify-self:center;
+  aspect-ratio:1!important;
+  border:3px solid var(--ball-color)!important;
+  border-radius:50%!important;
+  color:#171717!important;
+  background:#fbfbfa!important;
+  box-shadow:0 2px 5px rgba(0,0,0,.08)!important;
+  text-shadow:none!important;
+  font-size:21px!important;
+  font-weight:850!important;
+  line-height:1!important;
+}
+.break-ball-btn-v696[data-ball-number="9"],
+.break-ball-btn-v696[data-ball-number="10"],
+.break-ball-btn-v696[data-ball-number="11"],
+.break-ball-btn-v696[data-ball-number="12"],
+.break-ball-btn-v696[data-ball-number="13"],
+.break-ball-btn-v696[data-ball-number="14"],
+.break-ball-btn-v696[data-ball-number="15"]{
+  background:
+    linear-gradient(var(--ball-color),var(--ball-color)) left 4px center/9px 3px no-repeat,
+    linear-gradient(var(--ball-color),var(--ball-color)) right 4px center/9px 3px no-repeat,
+    #fbfbfa!important;
+}
+.break-ball-btn-v696.selected-v696{
+  opacity:1!important;
+  filter:none!important;
+  transform:none!important;
+  border-color:#d2d2cf!important;
+  color:#9c9c99!important;
+  background:#eeeeec!important;
+  box-shadow:none!important;
+}
+.break-summary-v696{
+  min-height:45px;
+  margin:0 0 13px!important;
+  padding:7px 14px!important;
+  align-items:center;
+  border-radius:10px!important;
+  color:#171717!important;
+  background:#f2f2f0!important;
+  font-size:14px!important;
+}
+.break-summary-pocket-v1{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+.break-summary-balls-v1{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:4px;
+  overflow:hidden;
+}
+.break-summary-ball-v1{
+  width:24px;
+  height:24px;
+  flex:0 0 24px;
+  display:inline-grid;
+  place-items:center;
+  border:2px solid var(--ball-color);
+  border-radius:50%;
+  color:#171717;
+  background:#fff;
+  font-size:11px;
+  font-weight:850;
+}
+.break-summary-ball-v1.stripe{
+  background:
+    linear-gradient(var(--ball-color),var(--ball-color)) left 1px center/5px 2px no-repeat,
+    linear-gradient(var(--ball-color),var(--ball-color)) right 1px center/5px 2px no-repeat,
+    #fff;
+}
+.break-special-grid-v696{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:10px!important;
+}
+.break-special-btn-v696{
+  min-height:51px!important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  border:1px solid #d8d8d5!important;
+  border-radius:10px!important;
+  color:#171717!important;
+  background:#fff!important;
+  font-size:16px!important;
+  font-weight:750!important;
+}
+.break-special-btn-v696[hidden]{display:none!important}
+.break-special-btn-v696 svg{
+  width:23px;
+  height:23px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.2;
+}
+.break-special-btn-v696.active-v696{
+  border-color:#c66b30!important;
+  color:#a54800!important;
+  background:#fff8f2!important;
+}
+.break-special-btn-v696.trouble-v696.active-v696{
+  border-color:#c7322d!important;
+  color:#b12420!important;
+  background:#fff7f6!important;
+}
+.break-result-save-v695{
+  min-height:56px!important;
+  margin-top:14px!important;
+  border-radius:10px!important;
+  color:#fff!important;
+  background:#111!important;
+  font-size:20px!important;
+  font-weight:800!important;
+}
+.break-result-save-v695:disabled{opacity:.55}
+@media(max-width:370px),(max-height:760px){
+  .break-result-card-v61{
+    padding-left:max(14px,env(safe-area-inset-left))!important;
+    padding-right:max(14px,env(safe-area-inset-right))!important;
+  }
+  .break-result-handle-v1{margin-bottom:9px}
+  .break-result-title-v61{font-size:22px!important}
+  .break-result-lead-v1{margin-bottom:10px;font-size:13px}
+  .break-player-segments-v1{margin-bottom:11px}
+  .break-player-segment-v1{min-height:43px;font-size:13px}
+  .break-ball-grid-v696{gap:6px 9px!important;margin-bottom:11px!important}
+  .break-ball-btn-v696{
+    width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;font-size:18px!important
+  }
+  .break-summary-v696{margin-bottom:9px!important}
+  .break-special-btn-v696{min-height:45px!important;font-size:14px!important}
+  .break-result-save-v695{min-height:50px!important;margin-top:10px!important}
 }
 </style>
 <script>
