@@ -11386,13 +11386,17 @@ let matchRecordsRawCacheV152 = null;
     }
     saveAndDo(() => {
       current = player;
+      addItemToCurrent("B");
+      decision.pocketedBalls.forEach(number => addItemToCurrent(number));
+      if (decision.foul) addItemToCurrent("F");
+      addItemToCurrent("/");
+
       decision.scoredBalls.forEach(number => {
         scores[player] += number;
         rackScores[player] += number;
         currentRun[player] += number;
         if (currentRun[player] > maxRun[player]) maxRun[player] = currentRun[player];
         if (decision.ballsRemainDown) usedBalls.add(number);
-        addItemToCurrent(number);
         // Legacy analysis only. The common log stores these balls inside one Break event.
         recordAnalysisEventV60("ball_pocketed", {
           player,
@@ -11432,7 +11436,6 @@ let matchRecordsRawCacheV152 = null;
 
       if (decision.foul) {
         fouls[player]++;
-        addItemToCurrent("F");
         recordAnalysisEventV60("foul", {
           player,
           foulType: decision.scratch ? "break_scratch" : "illegal_break",
@@ -11796,7 +11799,6 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function currentTurnLabel() {
-    if (rows.length === 0 && inning === 1) return "Break";
     return String(inning);
   }
 
@@ -11821,9 +11823,9 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function symbolHtml(symbol) {
-    const cls = symbol === "S" ? "s" : "f";
-    const displaySymbol = symbol;
-    return `<span class="pro-symbol ${cls}">${displaySymbol}</span>`;
+    if (symbol === "/") return `<span class="pro-break-separator" aria-hidden="true">/</span>`;
+    const cls = symbol === "S" ? "s" : symbol === "B" ? "b" : "f";
+    return `<span class="pro-symbol ${cls}">${symbol}</span>`;
   }
 
   // CueScore RC59: build large game DOM updates off-document, then commit once.
@@ -11847,8 +11849,8 @@ let matchRecordsRawCacheV152 = null;
       const p1Items = rowData.p1.map(item => typeof item === "number" ? ballHtml(item) : symbolHtml(item)).join("");
       const p2Items = rowData.p2.map(item => typeof item === "number" ? ballHtml(item) : symbolHtml(item)).join("");
       row.innerHTML = `
-        <div class="pro-turn-label">${rowData.label}</div>
         <div class="pro-log-cell pro-log-cell-p1">${p1Items}</div>
+        <div class="pro-turn-label">${rowData.label}</div>
         <div class="pro-log-cell pro-log-cell-p2">${p2Items}</div>
       `;
       fragment.appendChild(row);
@@ -19498,17 +19500,20 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
 .pro-rack-divider::after{content:none!important}
 .pro-log-row{
   min-height:39px!important;
-  grid-template-columns:42px minmax(0,1fr) minmax(0,1fr)!important;
+  grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr)!important;
   border-top:0!important;
   border-bottom:1px solid #efefed!important;
   background:transparent!important;
 }
-.pro-log-row .pro-turn-label{grid-column:1!important;grid-row:1!important}
-.pro-log-row .pro-log-cell-p1{grid-column:2!important;grid-row:1!important}
+.pro-log-row .pro-log-cell-p1{grid-column:1!important;grid-row:1!important}
+.pro-log-row .pro-turn-label{grid-column:2!important;grid-row:1!important}
 .pro-log-row .pro-log-cell-p2{grid-column:3!important;grid-row:1!important}
 .pro-log-row.active-row{background:transparent!important}
 .pro-turn-label{
   position:relative;
+  display:grid!important;
+  place-items:center!important;
+  text-align:center!important;
   font-size:12px!important;
   font-weight:650!important;
   color:var(--game-muted)!important;
@@ -19523,6 +19528,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
 }
 .pro-log-cell{
   min-height:38px!important;
+  justify-content:flex-start!important;
   gap:4px!important;
   padding:4px 3px!important;
 }
@@ -19565,6 +19571,20 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   background:#171717;
 }
 .pro-symbol.s,.pro-symbol.f{color:#fff!important}
+.pro-symbol.b{
+  color:#fff!important;
+  background:#171717!important;
+}
+.pro-break-separator{
+  min-width:9px;
+  height:19px;
+  display:inline-grid;
+  place-items:center;
+  color:#777;
+  font-size:14px;
+  font-weight:800;
+  line-height:1;
+}
 .pro-bottom-dock{
   flex:0 0 auto!important;
   padding:0!important;
