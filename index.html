@@ -7429,58 +7429,9 @@ button {
 .recording-choice-name-v698{display:block;font-size:15px;line-height:1.2}
 .recording-choice-desc-v698{display:block;margin-top:4px;font-size:10px;line-height:1.3;color:rgba(255,255,255,.72);font-weight:750}
 
-.start-confirm-overlay-v698{
-  position:fixed;
-  inset:0;
-  z-index:160;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:calc(18px + env(safe-area-inset-top)) 16px calc(18px + env(safe-area-inset-bottom));
-  background:linear-gradient(180deg,#16472d 0%,#103822 100%);
-}
-.start-confirm-overlay-v698.hidden{display:none!important}
-.start-confirm-card-v698{
-  width:min(100%,420px);
-  max-height:calc(100dvh - 36px);
-  overflow:auto;
-  padding:22px 17px 17px;
-  border-radius:20px;
-  background:rgba(7,41,25,.96);
-  border:1px solid rgba(255,255,255,.17);
-  box-shadow:0 20px 50px rgba(0,0,0,.4);
-}
-.start-confirm-title-v698{text-align:center;font-size:25px;font-weight:1000;margin-bottom:5px}
-.start-confirm-lead-v698{text-align:center;font-size:13px;color:rgba(255,255,255,.72);margin-bottom:16px}
-.start-confirm-players-v698{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:12px}
-.start-confirm-player-v698{
-  min-width:0;
-  padding:12px 8px;
-  border:2px solid rgba(255,255,255,.16);
-  border-radius:14px;
-  background:rgba(255,255,255,.06);
-  text-align:center;
-}
-.start-confirm-player-v698.breaker-v698{
-  border-color:#ffe27a;
-  background:rgba(255,226,122,.18);
-  box-shadow:0 0 18px rgba(255,226,122,.12);
-}
-.start-confirm-player-label-v698{font-size:11px;color:rgba(255,255,255,.68);font-weight:850}
-.start-confirm-player-name-v698{margin-top:5px;font-size:18px;font-weight:1000;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.start-confirm-breaker-v698{margin-top:5px;font-size:11px;color:#ffe27a;font-weight:950;min-height:14px}
-.start-confirm-list-v698{margin:0 0 15px;border-radius:13px;background:rgba(0,0,0,.15);padding:4px 12px}
-.start-confirm-row-v698{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.11);font-size:13px}
-.start-confirm-row-v698:last-child{border-bottom:0}
-.start-confirm-key-v698{color:rgba(255,255,255,.68);font-weight:800}
-.start-confirm-value-v698{text-align:right;font-weight:950;word-break:break-word}
-.start-confirm-main-v698,.start-confirm-back-v698{width:100%;min-height:54px;border:0;border-radius:13px;font-size:18px;font-weight:1000}
-.start-confirm-main-v698{background:#d49a20;color:#fff;box-shadow:0 8px 17px rgba(0,0,0,.24)}
-.start-confirm-back-v698{margin-top:9px;background:rgba(255,255,255,.10);color:#fff}
 @media(max-height:720px){
   .recording-setting-v698{padding:9px;margin-top:8px}
   .recording-choice-v698{min-height:50px;padding:6px}
-  .start-confirm-card-v698{padding-top:16px}
 }
 
 
@@ -8301,33 +8252,6 @@ body {
 
     <section class="player-info-screen hidden" id="playerInfoScreen" aria-label="Player info"></section>
 
-    <section id="startConfirmOverlayV698" class="start-confirm-overlay-v698 hidden" aria-hidden="true" aria-label="試合開始確認">
-      <div class="start-confirm-card-v698">
-        <div class="start-confirm-title-v698">試合開始確認</div>
-        <div class="start-confirm-lead-v698">設定を確認してから試合を始めます</div>
-        <div class="start-confirm-players-v698">
-          <div id="startConfirmP1CardV698" class="start-confirm-player-v698">
-            <div class="start-confirm-player-label-v698">Player 1</div>
-            <div id="startConfirmP1NameV698" class="start-confirm-player-name-v698">Player 1</div>
-            <div id="startConfirmP1BreakerV698" class="start-confirm-breaker-v698"></div>
-          </div>
-          <div id="startConfirmP2CardV698" class="start-confirm-player-v698">
-            <div class="start-confirm-player-label-v698">Player 2</div>
-            <div id="startConfirmP2NameV698" class="start-confirm-player-name-v698">Player 2</div>
-            <div id="startConfirmP2BreakerV698" class="start-confirm-breaker-v698"></div>
-          </div>
-        </div>
-        <div class="start-confirm-list-v698">
-          <div class="start-confirm-row-v698"><span class="start-confirm-key-v698">Race to</span><span id="startConfirmRaceV698" class="start-confirm-value-v698">120 / 120</span></div>
-          <div class="start-confirm-row-v698"><span class="start-confirm-key-v698">試合区分</span><span id="startConfirmCategoryV698" class="start-confirm-value-v698">Free</span></div>
-          <div class="start-confirm-row-v698"><span class="start-confirm-key-v698">シーズン</span><span id="startConfirmSeasonV698" class="start-confirm-value-v698">指定なし</span></div>
-          <div class="start-confirm-row-v698"><span class="start-confirm-key-v698">記録方法</span><span id="startConfirmModeV698" class="start-confirm-value-v698">分析用詳細版</span></div>
-        </div>
-        <button id="startConfirmGoV698" class="start-confirm-main-v698" type="button">ブレイク</button>
-        <button id="startConfirmBackV698" class="start-confirm-back-v698" type="button">戻る</button>
-      </div>
-    </section>
-
     <section class="pro-game-screen hidden" id="proGameScreen" aria-label="Rotation game">
       <header class="pro-game-header">
         <button id="proGameBackBtn" class="pro-back-btn" type="button" aria-label="戻る">
@@ -8881,7 +8805,7 @@ body {
 
   function closeNavigationOverlaysV127() {
     [
-      "startConfirmOverlayV698", "recordModeOverlayV611", "pushOutInputOverlayV730",
+      "recordModeOverlayV611", "pushOutInputOverlayV730",
       "pushOutDecisionOverlayV730", "breakResultOverlayV61", "recordDetailOverlay",
       "playerStatsOverlay", "playerLibraryOverlay"
     ].forEach(id => {
@@ -11239,13 +11163,6 @@ let matchRecordsRawCacheV152 = null;
     updateRecordModeChoicesV698();
   }
 
-  function closeStartConfirmV698() {
-    const overlay = el("startConfirmOverlayV698");
-    if (!overlay) return;
-    overlay.classList.add("hidden");
-    overlay.setAttribute("aria-hidden", "true");
-  }
-
   function normalizeRaceGoalV109(value, fallback = 120) {
     const parsed = Number(value);
     if (!Number.isFinite(parsed) || parsed <= 0) return null;
@@ -11253,42 +11170,9 @@ let matchRecordsRawCacheV152 = null;
     return integerGoal >= 1 ? integerGoal : null;
   }
 
-  function showStartConfirmV698() {
-    closeBreakResultPromptV61();
-    closeRecordModePromptV611();
-    const p1Name = limitPlayerName(el("p1Name")?.value.trim()) || "Player 1";
-    const p2Name = limitPlayerName(el("p2Name")?.value.trim()) || "Player 2";
-    const p1Goal = normalizeRaceGoalV109(el("p1Race")?.value, 120);
-    const p2Goal = normalizeRaceGoalV109(el("p2Race")?.value, 120);
-    if (!p1Goal || !p2Goal) {
-      showToast("Race to", "1以上の整数を設定してください");
-      return;
-    }
-    if (el("p1Race")) el("p1Race").value = String(p1Goal);
-    if (el("p2Race")) el("p2Race").value = String(p2Goal);
-    if (el("p1Name")) el("p1Name").value = p1Name;
-    if (el("p2Name")) el("p2Name").value = p2Name;
-    el("startConfirmP1NameV698").textContent = p1Name;
-    el("startConfirmP2NameV698").textContent = p2Name;
-    el("startConfirmRaceV698").textContent = `${p1Goal} / ${p2Goal}`;
-    el("startConfirmCategoryV698").textContent = el("matchCategoryV38")?.value || "Free";
-    el("startConfirmSeasonV698").textContent = el("matchSeasonV38")?.value || "指定なし";
-    el("startConfirmModeV698").textContent = recordingModeV611 === "detail" ? "分析用詳細版" : "シンプル版";
-    [1,2].forEach(player => {
-      el(`startConfirmP${player}CardV698`)?.classList.toggle("breaker-v698", selectedStarter === player);
-      if (el(`startConfirmP${player}BreakerV698`)) el(`startConfirmP${player}BreakerV698`).textContent = selectedStarter === player ? "ブレイク" : "";
-    });
-    if (el("startConfirmGoV698")) el("startConfirmGoV698").textContent = recordingModeV611 === "detail" ? "ブレイク" : "ゲーム開始";
-    const overlay = el("startConfirmOverlayV698");
-    if (!overlay) return;
-    overlay.classList.remove("hidden");
-    overlay.setAttribute("aria-hidden", "false");
-    requestAnimationFrame(() => el("startConfirmGoV698")?.focus({ preventScroll: true }));
-  }
-
   function chooseRecordModeAndStartV611(mode) {
     selectRecordModeV698(mode);
-    showStartConfirmV698();
+    startProGame();
   }
 
   function updateBreakPromptSummaryV696() {
@@ -12954,7 +12838,6 @@ let matchRecordsRawCacheV152 = null;
     clearPushOutWindowV730();
     closeBreakResultPromptV61();
     closeRecordModePromptV611();
-    closeStartConfirmV698();
     recordAnalysisEventV60("match_started", {
       player: startingPlayer,
       startingPlayer,
@@ -13836,10 +13719,8 @@ let matchRecordsRawCacheV152 = null;
 
   el("startGameBtn")?.addEventListener("click", () => {
     selectRecordModeV698("detail");
-    showStartConfirmV698();
+    startProGame();
   });
-  el("startConfirmBackV698")?.addEventListener("click", closeStartConfirmV698);
-  el("startConfirmGoV698")?.addEventListener("click", startProGame);
   el("recordModeSimpleV611")?.addEventListener("click", () => chooseRecordModeAndStartV611("simple"));
   el("recordModeDetailV611")?.addEventListener("click", () => chooseRecordModeAndStartV611("detail"));
   el("recordModeCancelV611")?.addEventListener("click", closeRecordModePromptV611);
@@ -17197,7 +17078,7 @@ let matchRecordsRawCacheV152 = null;
   // Ver.8.6.1: critical-action double activation guard and runtime error reporting.
   (() => {
     const guardedIds = new Set([
-      "startGameBtn", "startConfirmGoV698", "recordModeSimpleV611", "recordModeDetailV611",
+      "startGameBtn", "recordModeSimpleV611", "recordModeDetailV611",
       "resultOkBtn", "resultCancelBtn", "gameMemoSaveBtn",
       "playerEditorSaveBtn", "playerEditorDeleteBtn",
       "breakResultSaveV695", "pushOutConfirmV730", "pushOutPlayV730", "pushOutReturnV730"
