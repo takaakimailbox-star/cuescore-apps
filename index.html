@@ -20482,12 +20482,15 @@ window.cueScoreModalDiagnosticsV159 = () => ({
   }
 
   function shotRateV1(player) {
-    const stored = Number(player?.shotRate);
-    if (Number.isFinite(stored)) return `${Math.max(0, Math.min(100, Math.round(stored * 10) / 10))}%`;
     const pockets = Number(player?.pocketCount);
     const misses = Number(player?.misses);
-    if (Number.isFinite(pockets) && Number.isFinite(misses) && pockets + misses > 0) {
+    if (Number.isFinite(pockets) && Number.isFinite(misses)) {
+      if (pockets + misses <= 0) return "—";
       return `${Math.round((pockets / (pockets + misses)) * 1000) / 10}%`;
+    }
+    const stored = Number(player?.shotRate);
+    if (player?.shotRate != null && Number.isFinite(stored)) {
+      return `${Math.max(0, Math.min(100, Math.round(stored * 10) / 10))}%`;
     }
     return "—";
   }
@@ -20496,6 +20499,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
     const data = record?.analysis?.summary?.players?.[player]?.safety
       || record?.analysisSummary?.players?.[player]?.safety
       || record?.analysis?.players?.[player]?.safety;
+    if (!data || data.successRate == null) return "—";
     const rate = Number(data?.successRate);
     return Number.isFinite(rate) ? `${Math.round(rate * 10) / 10}%` : "—";
   }
@@ -20685,8 +20689,6 @@ window.cueScoreModalDiagnosticsV159 = () => ({
           <div class="match-detail-chips-v1">${tags.map(tag=>`<span>${esc(tag)}</span>`).join("")}</div>
         </section>
         <section class="match-detail-card-v1 match-detail-summary-v1">
-          <h2>試合サマリー</h2>
-          <div class="match-detail-summary-head-v1"><strong class="${winner===1?"winner":""}">${esc(p1.name||"Player1")}</strong><span>項目</span><strong class="${winner===2?"winner":""}">${esc(p2.name||"Player2")}</strong></div>
           ${summaryRows.map(([label,left,right])=>`<div class="match-detail-summary-row-v1"><strong class="${winner===1?"winner":""}">${esc(left)}</strong><span>${esc(label)}</span><strong class="${winner===2?"winner":""}">${esc(right)}</strong></div>`).join("")}
         </section>
         ${chart?`<section class="match-detail-card-v1 match-detail-chart-v1"><h2>スコア推移</h2><div class="match-detail-legend-v1"><span style="--legend:${winner===1?WALNUT:"#30302e"}">${esc(p1.name||"Player1")}</span><span style="--legend:${winner===2?WALNUT:"#30302e"}">${esc(p2.name||"Player2")}</span></div>${chart}</section>`:""}
@@ -21422,42 +21424,28 @@ body.match-detail-visible-v1{overflow:hidden!important}
   line-height:1.25;
   font-weight:780;
 }
-.match-detail-summary-v1{padding:14px 14px 10px}
-.match-detail-summary-head-v1,
+.match-detail-summary-v1{padding:7px 14px}
 .match-detail-summary-row-v1{
   display:grid;
   grid-template-columns:minmax(70px,1fr) minmax(112px,1.18fr) minmax(70px,1fr);
   align-items:center;
   text-align:center;
 }
-.match-detail-summary-head-v1{
-  min-height:34px;
-  margin-top:6px;
-  color:#777775;
-  font-size:12px;
-}
-.match-detail-summary-head-v1 strong{
-  min-width:0;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  color:#171717;
-  font-size:13px;
-}
 .match-detail-summary-row-v1{
-  min-height:35px;
+  min-height:32px;
   border-top:1px solid #ececea;
 }
+.match-detail-summary-row-v1:first-child{border-top:0}
 .match-detail-summary-row-v1 strong{
   font-size:15px;
   line-height:1.1;
   font-weight:760;
 }
 .match-detail-summary-row-v1 span{
-  color:#777775;
-  font-size:12px;
+  color:#7d7d79;
+  font-size:11px;
   line-height:1.15;
-  font-weight:620;
+  font-weight:600;
 }
 .match-detail-chart-v1{
   position:relative;
@@ -21471,10 +21459,10 @@ body.match-detail-visible-v1{overflow:hidden!important}
   display:flex;
   align-items:center;
   justify-content:flex-end;
-  gap:13px;
-  color:#555553;
-  font-size:10px;
-  font-weight:650;
+  gap:10px;
+  color:#686865;
+  font-size:9px;
+  font-weight:600;
 }
 .match-detail-legend-v1 span{
   min-width:0;
@@ -21484,9 +21472,9 @@ body.match-detail-visible-v1{overflow:hidden!important}
 }
 .match-detail-legend-v1 span::before{
   content:"";
-  width:17px;
-  height:3px;
-  margin-right:5px;
+  width:14px;
+  height:2px;
+  margin-right:4px;
   display:inline-block;
   vertical-align:middle;
   border-radius:999px;
@@ -21500,19 +21488,19 @@ body.match-detail-visible-v1{overflow:hidden!important}
 }
 .match-detail-game-history-v1{
   position:relative;
-  padding:8px 12px 12px;
+  padding:7px 12px 10px;
   overflow:hidden;
 }
 .match-detail-rack-divider-v1{
-  height:6px;
-  margin:1px 0 4px;
-  border-top:2px solid #6f3214;
+  height:4px;
+  margin:1px 0 3px;
+  border-top:1px solid #9a6b54;
 }
 .match-detail-rack-divider-v1:not(:first-child){
-  margin-top:8px;
+  margin-top:6px;
 }
 .match-detail-log-row-v1{
-  min-height:39px;
+  min-height:36px;
   display:grid;
   grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);
   align-items:center;
@@ -21521,10 +21509,11 @@ body.match-detail-visible-v1{overflow:hidden!important}
 .match-detail-log-row-v1:last-child{border-bottom:0}
 .match-detail-log-cell-v1{
   min-width:0;
-  padding:4px 3px;
+  min-height:36px;
+  padding:3px 4px;
   display:flex;
   align-items:center;
-  gap:4px;
+  gap:3px;
   flex-wrap:wrap;
 }
 .match-detail-log-cell-v1.left{justify-content:flex-end}
@@ -21597,7 +21586,6 @@ body.match-detail-visible-v1{overflow:hidden!important}
 @media(max-width:370px){
   .match-detail-scroll-v1{padding-left:8px;padding-right:8px}
   .match-detail-summary-v1{padding-left:9px;padding-right:9px}
-  .match-detail-summary-head-v1,
   .match-detail-summary-row-v1{grid-template-columns:minmax(62px,1fr) minmax(100px,1.18fr) minmax(62px,1fr)}
   .match-detail-summary-row-v1 span{font-size:11px}
   .match-detail-log-cell-v1{gap:3px}
