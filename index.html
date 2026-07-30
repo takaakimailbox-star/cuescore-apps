@@ -20649,19 +20649,21 @@ window.cueScoreModalDiagnosticsV159 = () => ({
     const p2=record.players?.[2]||{};
     const winner=Number(record.winner)===2?2:1;
     const date=datePartsV1(record);
-    const goal=Number(p1.goal)||Number(p2.goal)||0;
+    const goal1=Number(p1.goal)||0;
+    const goal2=Number(p2.goal)||0;
+    const raceTag=goal1&&goal2&&goal1!==goal2
+      ? `Race to ${goal1} / ${goal2}`
+      : (goal1||goal2?`Race to ${goal1||goal2}`:"");
     const tags=[
-      goal?`Race to ${goal}`:"",
+      raceTag,
       String(record.category||"").trim(),
       String(record.season||"").trim()
     ].filter(Boolean);
-    const inning=Number(record.inning);
     const summaryRows=[
       ["シュート成功率",shotRateV1(p1),shotRateV1(p2)],
       ["ハイラン",Number.isFinite(Number(p1.maxRun))?String(Number(p1.maxRun)):"—",Number.isFinite(Number(p2.maxRun))?String(Number(p2.maxRun)):"—"],
       ["セーフティ成功率",safetyRateV1(record,1),safetyRateV1(record,2)],
       ["ファール数",Number.isFinite(Number(p1.fouls))?String(Number(p1.fouls)):"—",Number.isFinite(Number(p2.fouls))?String(Number(p2.fouls)):"—"],
-      ["イニング数",Number.isFinite(inning)?String(inning):"—",Number.isFinite(inning)?String(inning):"—"],
       ["ブレイク数",Number.isFinite(Number(p1.breaks))?String(Number(p1.breaks)):"—",Number.isFinite(Number(p2.breaks))?String(Number(p2.breaks)):"—"],
       ["平均得点／イニング",averagePerInningV1(record,1),averagePerInningV1(record,2)]
     ];
