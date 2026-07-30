@@ -20650,11 +20650,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
     const raceTag=goal1&&goal2&&goal1!==goal2
       ? `Race to ${goal1} / ${goal2}`
       : (goal1||goal2?`Race to ${goal1||goal2}`:"");
-    const tags=[
-      raceTag,
-      String(record.category||"").trim(),
-      String(record.season||"").trim()
-    ].filter(Boolean);
+    const categoryTag=String(record.category||"").trim();
     const summaryRows=[
       ["シュート成功率",shotRateV1(p1),shotRateV1(p2)],
       ["ハイラン",Number.isFinite(Number(p1.maxRun))?String(Number(p1.maxRun)):"—",Number.isFinite(Number(p2.maxRun))?String(Number(p2.maxRun)):"—"],
@@ -20678,7 +20674,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
         <section class="match-detail-basic-v1">
           <div class="match-detail-date-v1">
             <span>${esc(date.date)} ${esc(date.time)}</span>
-            ${tags.map(tag=>`<span>${esc(tag)}</span>`).join("")}
+            ${categoryTag?`<span class="match-detail-category-v2">${esc(categoryTag)}</span>`:""}
           </div>
           <div class="match-detail-result-line-v2">
             <span class="match-detail-result-name-v2">${esc(p1.name||"Player1")}</span>
@@ -20687,6 +20683,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
             <strong class="${winner===2?"winner":""}">${Number(p2.score)||0}</strong>
             <span class="match-detail-result-name-v2">${esc(p2.name||"Player2")}</span>
           </div>
+          ${raceTag?`<div class="match-detail-race-v2">${esc(raceTag)}</div>`:""}
         </section>
         <section class="match-detail-card-v1 match-detail-summary-v1">
           ${summaryRows.map(([label,left,right])=>`<div class="match-detail-summary-row-v1"><strong class="${winner===1?"winner":""}">${esc(left)}</strong><span>${esc(label)}</span><strong class="${winner===2?"winner":""}">${esc(right)}</strong></div>`).join("")}
@@ -21353,15 +21350,20 @@ body.match-detail-visible-v1{overflow:hidden!important}
   text-align:center;
 }
 .match-detail-date-v1{
+  width:min(100%,330px);
+  margin:0 auto;
   color:#777775;
   font-size:13px;
   line-height:1.35;
   font-weight:620;
-  display:flex;
-  flex-wrap:wrap;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
   align-items:center;
-  justify-content:center;
-  gap:2px 10px;
+  gap:10px;
+  text-align:left;
+}
+.match-detail-category-v2{
+  text-align:right;
 }
 .match-detail-result-line-v2{
   margin:5px auto 0;
@@ -21391,6 +21393,13 @@ body.match-detail-visible-v1{overflow:hidden!important}
   color:#30302e;
   font-size:18px;
   font-weight:600;
+}
+.match-detail-race-v2{
+  margin-top:4px;
+  color:#777775;
+  font-size:13px;
+  line-height:1.25;
+  font-weight:620;
 }
 .match-detail-chips-v1{
   margin-top:6px;
