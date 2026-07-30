@@ -14318,6 +14318,8 @@ let matchRecordsRawCacheV152 = null;
   function cleanupHistoricalRecordV159(){
     historicalDetailControllerV159?.abort(); historicalDetailControllerV159 = null;
     const overlay = el("recordDetailOverlay"); if(!overlay) return;
+    document.body.classList.remove("match-detail-visible-v1");
+    overlay.setAttribute("aria-hidden", "true");
     overlay.classList.add("hidden"); overlay.classList.remove("history-renew-overlay-v67"); overlay.replaceChildren();
   }
 
@@ -20452,6 +20454,258 @@ window.cueScoreModalDiagnosticsV159 = () => ({
 })();
 </script>
 
+<script>
+/* CueScore Match Detail v1.0: official read-only match review screen. */
+(() => {
+  const WALNUT = "#6f3214";
+  const BALL_COLORS = {
+    1:"#f4cf36",2:"#2b61c8",3:"#cf3028",4:"#cf5897",5:"#ed8731",
+    6:"#31924a",7:"#944d1d",8:"#171717",9:"#f4cf36",10:"#2b61c8",
+    11:"#cf3028",12:"#cf5897",13:"#ed8731",14:"#31924a",15:"#944d1d"
+  };
+
+  const esc = value => typeof escapeRecordText === "function"
+    ? escapeRecordText(value)
+    : String(value ?? "").replace(/[&<>"']/g, character => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      })[character]);
+
+  function datePartsV1(record) {
+    const source = record?.startedAt || record?.playedAt || record?.endedAt;
+    const date = new Date(source || "");
+    if (!Number.isFinite(date.getTime())) return {date:"—", time:"—"};
+    const weekdays = ["日","月","火","水","木","金","土"];
+    return {
+      date:`${date.getFullYear()}/${String(date.getMonth()+1).padStart(2,"0")}/${String(date.getDate()).padStart(2,"0")}（${weekdays[date.getDay()]}）`,
+      time:`${String(date.getHours()).padStart(2,"0")}:${String(date.getMinutes()).padStart(2,"0")}`
+    };
+  }
+
+  function shotRateV1(player) {
+    const stored = Number(player?.shotRate);
+    if (Number.isFinite(stored)) return `${Math.max(0, Math.min(100, Math.round(stored * 10) / 10))}%`;
+    const pockets = Number(player?.pocketCount);
+    const misses = Number(player?.misses);
+    if (Number.isFinite(pockets) && Number.isFinite(misses) && pockets + misses > 0) {
+      return `${Math.round((pockets / (pockets + misses)) * 1000) / 10}%`;
+    }
+    return "—";
+  }
+
+  function safetyRateV1(record, player) {
+    const data = record?.analysis?.summary?.players?.[player]?.safety
+      || record?.analysisSummary?.players?.[player]?.safety
+      || record?.analysis?.players?.[player]?.safety;
+    const rate = Number(data?.successRate);
+    return Number.isFinite(rate) ? `${Math.round(rate * 10) / 10}%` : "—";
+  }
+
+  function averagePerInningV1(record, player) {
+    const innings = Number(record?.inning);
+    const score = Number(record?.players?.[player]?.score);
+    return Number.isFinite(innings) && innings > 0 && Number.isFinite(score)
+      ? (score / innings).toFixed(2)
+      : "—";
+  }
+
+  function progressV1(record) {
+    const p1 = Array.isArray(record?.progress?.p1) ? record.progress.p1.map(Number).filter(Number.isFinite) : [];
+    const p2 = Array.isArray(record?.progress?.p2) ? record.progress.p2.map(Number).filter(Number.isFinite) : [];
+    if (!p1.length || !p2.length) return null;
+    const length = Math.max(p1.length, p2.length);
+    const fill = values => Array.from({length}, (_, index) => Number(values[Math.min(index, values.length - 1)]) || 0);
+    return {p1:fill(p1), p2:fill(p2)};
+  }
+
+  function chartSvgV1(record, winner) {
+    const progress = progressV1(record);
+    if (!progress) return "";
+    const width=680, height=235, left=42, right=56, top=26, bottom=38;
+    const chartW=width-left-right, chartH=height-top-bottom;
+    const p1Score=Number(record?.players?.[1]?.score)||0;
+    const p2Score=Number(record?.players?.[2]?.score)||0;
+    const maxScore=Math.max(p1Score,p2Score,Number(record?.players?.[1]?.goal)||0,Number(record?.players?.[2]?.goal)||0,10);
+    const maxIndex=Math.max(progress.p1.length-1,1);
+    const point=(value,index)=>({
+      x:left+(index/maxIndex)*chartW,
+      y:top+chartH-(Math.max(0,Number(value)||0)/maxScore)*chartH
+    });
+    const path=values=>values.map((value,index)=>{
+      const p=point(value,index);
+      return `${index?"L":"M"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`;
+    }).join(" ");
+    const grid=[0,.25,.5,.75,1].map(part=>{
+      const y=top+chartH-chartH*part;
+      return `<line x1="${left}" y1="${y}" x2="${width-right}" y2="${y}" stroke="#e3e3e0" stroke-width="1"/><text x="${left-9}" y="${y+4}" text-anchor="end" font-size="11" fill="#777775">${Math.round(maxScore*part)}</text>`;
+    }).join("");
+    const labelEvery=Math.max(1,Math.ceil(maxIndex/7));
+    const labels=progress.p1.map((_,index)=>{
+      if(index!==0&&index!==maxIndex&&index%labelEvery!==0)return "";
+      const p=point(0,index);
+      return `<text x="${p.x.toFixed(1)}" y="${height-14}" text-anchor="middle" font-size="10" fill="#777775">${index}</text>`;
+    }).join("");
+    const p1Color=winner===1?WALNUT:"#30302e";
+    const p2Color=winner===2?WALNUT:"#30302e";
+    const last1=point(progress.p1.at(-1),maxIndex);
+    const last2=point(progress.p2.at(-1),maxIndex);
+    return `<svg class="match-detail-chart-svg-v1" viewBox="0 0 ${width} ${height}" role="img" aria-label="両プレーヤーの累積得点推移">
+      ${grid}
+      <path d="${path(progress.p1)}" fill="none" stroke="${p1Color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="${path(progress.p2)}" fill="none" stroke="${p2Color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      ${labels}
+      <text x="${Math.min(width-4,last1.x+8)}" y="${Math.max(13,last1.y-8)}" font-size="14" font-weight="750" fill="${p1Color}">${p1Score}</text>
+      <text x="${Math.min(width-4,last2.x+8)}" y="${Math.min(height-bottom-4,last2.y+18)}" font-size="14" font-weight="750" fill="${p2Color}">${p2Score}</text>
+    </svg>`;
+  }
+
+  function miniBallV1(number) {
+    const value=Number(number);
+    const color=BALL_COLORS[value] || "#999";
+    return `<span class="match-detail-mini-ball-v1 ${value>8?"stripe":""}" style="--detail-ball-color:${color}"><span>${value}</span></span>`;
+  }
+
+  function symbolV1(symbol) {
+    if(symbol==="/") return `<span class="match-detail-break-separator-v1">/</span>`;
+    const value=symbol==="S"?"s":symbol;
+    const kind=symbol==="B"?"break":symbol==="F"?"foul":"safety";
+    return `<span class="match-detail-symbol-v1 ${kind}">${value}</span>`;
+  }
+
+  function historyRowsV1(record) {
+    const events=Array.isArray(record?.eventLog?.events) ? record.eventLog.events : [];
+    if(!events.length) return [];
+    const rowMap=new Map();
+    const rows=[];
+    const rowFor=event=>{
+      const rack=Math.max(1,Number(event?.rackNumber ?? event?.data?.rack ?? event?.rack)||1);
+      const inning=Math.max(1,Number(event?.inningNumber ?? event?.data?.inning ?? event?.inning)||1);
+      const key=`${rack}:${inning}`;
+      if(!rowMap.has(key)){
+        const row={rack,inning,label:String(inning),p1:[],p2:[]};
+        rowMap.set(key,row); rows.push(row);
+      }
+      return rowMap.get(key);
+    };
+    events.forEach(event=>{
+      const player=Number(event?.player ?? event?.data?.player)===2?2:1;
+      const target=rowFor(event)[player===1?"p1":"p2"];
+      if(event?.type==="Break" && event?.sourceType==="break_result"){
+        target.push("B");
+        const balls=Array.isArray(event?.data?.pocketedBalls)
+          ? event.data.pocketedBalls
+          : Array.isArray(event?.data?.scoredBalls) ? event.data.scoredBalls : [];
+        balls.map(Number).filter(ball=>Number.isInteger(ball)&&ball>0).forEach(ball=>target.push(ball));
+        if(event?.data?.foul || event?.data?.scratch || event?.data?.illegalBreak) target.push("F");
+        target.push("/");
+      } else if(event?.type==="Shot" && event?.sourceType==="ball_pocketed"){
+        const ball=Number(event?.data?.ball);
+        if(Number.isInteger(ball)&&ball>0) target.push(ball);
+      } else if(event?.type==="Safety" || event?.sourceType==="safety"){
+        target.push("S");
+      } else if(event?.type==="Foul" || event?.sourceType==="foul"){
+        target.push("F");
+      }
+    });
+    return rows.filter(row=>row.p1.length||row.p2.length);
+  }
+
+  function gameHistoryV1(record) {
+    const rows=historyRowsV1(record);
+    if(!rows.length) return "";
+    let lastRack=null;
+    return `<section class="match-detail-game-history-v1" aria-label="試合履歴">${rows.map(row=>{
+      const divider=row.rack!==lastRack ? `<div class="match-detail-rack-divider-v1" aria-label="ラック${row.rack}"></div>` : "";
+      lastRack=row.rack;
+      const items=values=>values.map(item=>typeof item==="number"?miniBallV1(item):symbolV1(item)).join("");
+      return `${divider}<div class="match-detail-log-row-v1">
+        <div class="match-detail-log-cell-v1 left">${items(row.p1)}</div>
+        <div class="match-detail-inning-v1">${esc(row.label)}</div>
+        <div class="match-detail-log-cell-v1 right">${items(row.p2)}</div>
+      </div>`;
+    }).join("")}</section>`;
+  }
+
+  function disciplineLabelV1(record) {
+    const type=String(record?.gameType || record?.disciplineId || "rotation").toLowerCase();
+    if(type.includes("jpa")) return "JPA 9-Ball";
+    if(type.includes("10")) return "10-Ball";
+    if(type.includes("9")) return "9-Ball";
+    return "Rotation";
+  }
+
+  function openMatchDetailV1(recordId) {
+    const record=readMatchRecords().find(item=>String(item.id)===String(recordId));
+    if(!record) return;
+    cleanupHistoricalRecordV159();
+    const overlay=document.getElementById("recordDetailOverlay");
+    if(!overlay) return;
+    historicalDetailControllerV159=new AbortController();
+    const signal=historicalDetailControllerV159.signal;
+    const p1=record.players?.[1]||{};
+    const p2=record.players?.[2]||{};
+    const winner=Number(record.winner)===2?2:1;
+    const date=datePartsV1(record);
+    const goal=Number(p1.goal)||Number(p2.goal)||0;
+    const tags=[
+      goal?`Race to ${goal}`:"",
+      String(record.category||"").trim(),
+      String(record.season||"").trim(),
+      disciplineLabelV1(record)
+    ].filter(Boolean);
+    const inning=Number(record.inning);
+    const summaryRows=[
+      ["シュート成功率",shotRateV1(p1),shotRateV1(p2)],
+      ["ハイラン",Number.isFinite(Number(p1.maxRun))?String(Number(p1.maxRun)):"—",Number.isFinite(Number(p2.maxRun))?String(Number(p2.maxRun)):"—"],
+      ["セーフティ成功率",safetyRateV1(record,1),safetyRateV1(record,2)],
+      ["ファール数",Number.isFinite(Number(p1.fouls))?String(Number(p1.fouls)):"—",Number.isFinite(Number(p2.fouls))?String(Number(p2.fouls)):"—"],
+      ["イニング数",Number.isFinite(inning)?String(inning):"—",Number.isFinite(inning)?String(inning):"—"],
+      ["ブレイク数",Number.isFinite(Number(p1.breaks))?String(Number(p1.breaks)):"—",Number.isFinite(Number(p2.breaks))?String(Number(p2.breaks)):"—"],
+      ["平均得点／イニング",averagePerInningV1(record,1),averagePerInningV1(record,2)]
+    ];
+    const chart=chartSvgV1(record,winner);
+    const history=gameHistoryV1(record);
+
+    overlay.className="record-detail-overlay match-detail-overlay-v1";
+    overlay.innerHTML=`<div class="match-detail-v1">
+      <header class="match-detail-header-v1">
+        <button id="recordDetailBackBtn" class="match-detail-back-v1" type="button" aria-label="対戦履歴へ戻る">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8"/></svg>
+        </button>
+        <h1>試合詳細</h1>
+      </header>
+      <main class="match-detail-scroll-v1">
+        <section class="match-detail-basic-v1">
+          <div class="match-detail-date-v1">${esc(date.date)} ${esc(date.time)}</div>
+          <div class="match-detail-names-v1"><span>${esc(p1.name||"Player1")}</span><small>vs</small><span>${esc(p2.name||"Player2")}</span></div>
+          <div class="match-detail-score-v1">
+            <strong class="${winner===1?"winner":""}">${Number(p1.score)||0}</strong>
+            <span>−</span>
+            <strong class="${winner===2?"winner":""}">${Number(p2.score)||0}</strong>
+          </div>
+          <div class="match-detail-chips-v1">${tags.map(tag=>`<span>${esc(tag)}</span>`).join("")}</div>
+        </section>
+        <section class="match-detail-card-v1 match-detail-summary-v1">
+          <h2>試合サマリー</h2>
+          <div class="match-detail-summary-head-v1"><strong class="${winner===1?"winner":""}">${esc(p1.name||"Player1")}</strong><span>項目</span><strong class="${winner===2?"winner":""}">${esc(p2.name||"Player2")}</strong></div>
+          ${summaryRows.map(([label,left,right])=>`<div class="match-detail-summary-row-v1"><strong class="${winner===1?"winner":""}">${esc(left)}</strong><span>${esc(label)}</span><strong class="${winner===2?"winner":""}">${esc(right)}</strong></div>`).join("")}
+        </section>
+        ${chart?`<section class="match-detail-card-v1 match-detail-chart-v1"><h2>スコア推移</h2><div class="match-detail-legend-v1"><span style="--legend:${winner===1?WALNUT:"#30302e"}">${esc(p1.name||"Player1")}</span><span style="--legend:${winner===2?WALNUT:"#30302e"}">${esc(p2.name||"Player2")}</span></div>${chart}</section>`:""}
+        ${history}
+      </main>
+    </div>`;
+    overlay.classList.remove("hidden");
+    overlay.setAttribute("aria-hidden","false");
+    document.body.classList.add("match-detail-visible-v1");
+    document.getElementById("recordDetailBackBtn")?.addEventListener("click",()=>{
+      document.body.classList.remove("match-detail-visible-v1");
+      cleanupHistoricalRecordV159();
+    },{signal});
+  }
+
+  openHistoricalRecord=openMatchDetailV1;
+})();
+</script>
+
 <style>
 /* CueScore Match Result v1.0: official bottom-sheet layout */
 .pro-summary:not(.hidden){
@@ -21008,6 +21262,345 @@ window.cueScoreModalDiagnosticsV159 = () => ({
   }
   .records-list .record-final-score{min-width:62px!important;gap:3px}
   .records-list .record-matchup small{margin-left:2px;margin-right:2px}
+}
+
+/* CueScore Match Detail v1.0 */
+body.match-detail-visible-v1{overflow:hidden!important}
+.record-detail-overlay.match-detail-overlay-v1{
+  position:fixed!important;
+  inset:0!important;
+  z-index:10000!important;
+  width:100%!important;
+  height:100dvh!important;
+  display:block!important;
+  padding:0!important;
+  overflow:hidden!important;
+  color:#171717!important;
+  background:#f6f6f4!important;
+}
+.record-detail-overlay.match-detail-overlay-v1.hidden{display:none!important}
+.match-detail-v1{
+  width:100%;
+  height:100dvh;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  background:#f6f6f4;
+  color:#171717;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+}
+.match-detail-header-v1{
+  position:relative;
+  flex:0 0 auto;
+  min-height:calc(54px + env(safe-area-inset-top));
+  padding:env(safe-area-inset-top) 54px 0;
+  display:grid;
+  place-items:center;
+  border-bottom:1px solid #dededb;
+  background:rgba(255,255,255,.96);
+}
+.match-detail-header-v1 h1{
+  margin:0;
+  font-size:20px;
+  line-height:54px;
+  font-weight:760;
+  letter-spacing:.01em;
+}
+.match-detail-back-v1{
+  position:absolute;
+  left:max(12px,env(safe-area-inset-left));
+  bottom:6px;
+  width:42px;
+  height:42px;
+  padding:8px;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-radius:50%;
+  color:#171717;
+  background:transparent;
+}
+.match-detail-back-v1 svg{
+  width:26px;
+  height:26px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.match-detail-scroll-v1{
+  flex:1 1 auto;
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  padding:0 max(12px,env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));
+}
+.match-detail-basic-v1{
+  padding:14px 8px 12px;
+  text-align:center;
+}
+.match-detail-date-v1{
+  color:#777775;
+  font-size:13px;
+  line-height:1.35;
+  font-weight:620;
+}
+.match-detail-names-v1{
+  margin:8px auto 0;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr);
+  align-items:center;
+  gap:4px;
+  font-size:20px;
+  font-weight:760;
+}
+.match-detail-names-v1 span{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.match-detail-names-v1 small{
+  color:#777775;
+  font-size:13px;
+  font-weight:650;
+}
+.match-detail-score-v1{
+  margin-top:4px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+}
+.match-detail-score-v1 strong{
+  min-width:72px;
+  font-size:34px;
+  line-height:1;
+  font-weight:820;
+}
+.match-detail-score-v1 strong.winner,
+.match-detail-summary-v1 .winner{color:#6f3214}
+.match-detail-score-v1 span{
+  color:#30302e;
+  font-size:24px;
+  font-weight:600;
+}
+.match-detail-chips-v1{
+  margin-top:11px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px;
+}
+.match-detail-chips-v1 span{
+  min-height:24px;
+  padding:4px 10px;
+  display:inline-flex;
+  align-items:center;
+  border:1px solid #dededb;
+  border-radius:999px;
+  color:#555553;
+  background:#fff;
+  font-size:11px;
+  line-height:1;
+  font-weight:650;
+}
+.match-detail-card-v1,
+.match-detail-game-history-v1{
+  margin:0 0 10px;
+  border:1px solid #e2e2df;
+  border-radius:15px;
+  background:#fff;
+  box-shadow:0 3px 14px rgba(0,0,0,.035);
+}
+.match-detail-card-v1 h2{
+  margin:0;
+  font-size:17px;
+  line-height:1.25;
+  font-weight:780;
+}
+.match-detail-summary-v1{padding:14px 14px 10px}
+.match-detail-summary-head-v1,
+.match-detail-summary-row-v1{
+  display:grid;
+  grid-template-columns:minmax(70px,1fr) minmax(112px,1.18fr) minmax(70px,1fr);
+  align-items:center;
+  text-align:center;
+}
+.match-detail-summary-head-v1{
+  min-height:34px;
+  margin-top:6px;
+  color:#777775;
+  font-size:12px;
+}
+.match-detail-summary-head-v1 strong{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:#171717;
+  font-size:13px;
+}
+.match-detail-summary-row-v1{
+  min-height:35px;
+  border-top:1px solid #ececea;
+}
+.match-detail-summary-row-v1 strong{
+  font-size:15px;
+  line-height:1.1;
+  font-weight:760;
+}
+.match-detail-summary-row-v1 span{
+  color:#777775;
+  font-size:12px;
+  line-height:1.15;
+  font-weight:620;
+}
+.match-detail-chart-v1{
+  position:relative;
+  padding:14px 12px 8px;
+}
+.match-detail-legend-v1{
+  position:absolute;
+  top:14px;
+  right:14px;
+  max-width:62%;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:13px;
+  color:#555553;
+  font-size:10px;
+  font-weight:650;
+}
+.match-detail-legend-v1 span{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.match-detail-legend-v1 span::before{
+  content:"";
+  width:17px;
+  height:3px;
+  margin-right:5px;
+  display:inline-block;
+  vertical-align:middle;
+  border-radius:999px;
+  background:var(--legend);
+}
+.match-detail-chart-svg-v1{
+  width:100%;
+  height:auto;
+  margin-top:8px;
+  display:block;
+}
+.match-detail-game-history-v1{
+  position:relative;
+  padding:8px 12px 12px;
+  overflow:hidden;
+}
+.match-detail-rack-divider-v1{
+  height:6px;
+  margin:1px 0 4px;
+  border-top:2px solid #6f3214;
+}
+.match-detail-rack-divider-v1:not(:first-child){
+  margin-top:8px;
+}
+.match-detail-log-row-v1{
+  min-height:39px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);
+  align-items:center;
+  border-bottom:1px solid #ececea;
+}
+.match-detail-log-row-v1:last-child{border-bottom:0}
+.match-detail-log-cell-v1{
+  min-width:0;
+  padding:4px 3px;
+  display:flex;
+  align-items:center;
+  gap:4px;
+  flex-wrap:wrap;
+}
+.match-detail-log-cell-v1.left{justify-content:flex-end}
+.match-detail-log-cell-v1.right{justify-content:flex-start}
+.match-detail-inning-v1{
+  position:relative;
+  align-self:stretch;
+  display:grid;
+  place-items:center;
+  color:#777775;
+  font-size:12px;
+  line-height:1;
+  font-weight:650;
+}
+.match-detail-inning-v1::after{
+  content:"";
+  position:absolute;
+  top:29px;
+  bottom:-11px;
+  left:50%;
+  border-left:1px dashed #dededb;
+}
+.match-detail-log-row-v1:last-child .match-detail-inning-v1::after{display:none}
+.match-detail-mini-ball-v1{
+  width:19px;
+  height:19px;
+  display:inline-grid;
+  place-items:center;
+  border:2px solid var(--detail-ball-color);
+  border-radius:50%;
+  color:#111;
+  background:#fbfbfa;
+  box-shadow:0 1px 2px rgba(0,0,0,.1);
+  font-size:10px;
+  line-height:1;
+  font-weight:850;
+}
+.match-detail-mini-ball-v1.stripe{
+  background:
+    linear-gradient(var(--detail-ball-color),var(--detail-ball-color)) left 1px center/4px 2px no-repeat,
+    linear-gradient(var(--detail-ball-color),var(--detail-ball-color)) right 1px center/4px 2px no-repeat,
+    #fbfbfa;
+}
+.match-detail-mini-ball-v1 span{
+  min-width:12px;
+  min-height:12px;
+  display:inline-grid;
+  place-items:center;
+  border-radius:999px;
+  background:#fbfbfa;
+}
+.match-detail-symbol-v1,
+.match-detail-break-separator-v1{
+  min-width:9px;
+  height:19px;
+  display:inline-grid;
+  place-items:center;
+  color:#555553;
+  background:transparent;
+  font-size:12px;
+  line-height:1;
+  font-weight:450;
+}
+.match-detail-symbol-v1.break{color:#171717;font-weight:800}
+.match-detail-symbol-v1.safety{font-size:11px}
+.match-detail-break-separator-v1{color:#777775;font-size:14px;font-weight:800}
+@media(min-width:700px){
+  .match-detail-v1{max-width:520px;margin:0 auto;box-shadow:0 0 28px rgba(0,0,0,.08)}
+}
+@media(max-width:370px){
+  .match-detail-scroll-v1{padding-left:8px;padding-right:8px}
+  .match-detail-summary-v1{padding-left:9px;padding-right:9px}
+  .match-detail-summary-head-v1,
+  .match-detail-summary-row-v1{grid-template-columns:minmax(62px,1fr) minmax(100px,1.18fr) minmax(62px,1fr)}
+  .match-detail-summary-row-v1 span{font-size:11px}
+  .match-detail-log-cell-v1{gap:3px}
 }
 </style>
 </body>
