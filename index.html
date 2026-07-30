@@ -21487,19 +21487,30 @@ body.match-detail-visible-v1{overflow:hidden!important}
   overflow:hidden;
 }
 .match-detail-rack-divider-v1{
+  position:relative;
   height:20px;
   margin:0 0 2px;
   display:flex;
   align-items:center;
-  border-top:1px solid #9a6b54;
-  color:#6f3214;
-  font-size:10px;
+  justify-content:center;
+  color:#8a6a59;
+  font-size:9px;
   line-height:1;
-  font-weight:720;
-  letter-spacing:.02em;
+  font-weight:650;
+  letter-spacing:.04em;
+}
+.match-detail-rack-divider-v1::before{
+  content:"";
+  position:absolute;
+  top:50%;
+  right:0;
+  left:0;
+  border-top:1px solid #b89a89;
 }
 .match-detail-rack-divider-v1 span{
-  padding:0 5px;
+  position:relative;
+  z-index:1;
+  padding:0 8px;
   background:#fff;
 }
 .match-detail-rack-divider-v1:not(:first-child){
