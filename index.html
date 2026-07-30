@@ -20653,8 +20653,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
     const tags=[
       goal?`Race to ${goal}`:"",
       String(record.category||"").trim(),
-      String(record.season||"").trim(),
-      disciplineLabelV1(record)
+      String(record.season||"").trim()
     ].filter(Boolean);
     const inning=Number(record.inning);
     const summaryRows=[
@@ -20680,11 +20679,12 @@ window.cueScoreModalDiagnosticsV159 = () => ({
       <main class="match-detail-scroll-v1">
         <section class="match-detail-basic-v1">
           <div class="match-detail-date-v1">${esc(date.date)} ${esc(date.time)}</div>
-          <div class="match-detail-names-v1"><span>${esc(p1.name||"Player1")}</span><small>vs</small><span>${esc(p2.name||"Player2")}</span></div>
-          <div class="match-detail-score-v1">
+          <div class="match-detail-result-line-v2">
+            <span class="match-detail-result-name-v2">${esc(p1.name||"Player1")}</span>
             <strong class="${winner===1?"winner":""}">${Number(p1.score)||0}</strong>
             <span>−</span>
             <strong class="${winner===2?"winner":""}">${Number(p2.score)||0}</strong>
+            <span class="match-detail-result-name-v2">${esc(p2.name||"Player2")}</span>
           </div>
           <div class="match-detail-chips-v1">${tags.map(tag=>`<span>${esc(tag)}</span>`).join("")}</div>
         </section>
@@ -21273,7 +21273,7 @@ body.match-detail-visible-v1{overflow:hidden!important}
   inset:0!important;
   z-index:10000!important;
   width:100%!important;
-  height:100dvh!important;
+  height:auto!important;
   display:block!important;
   padding:0!important;
   overflow:hidden!important;
@@ -21283,7 +21283,7 @@ body.match-detail-visible-v1{overflow:hidden!important}
 .record-detail-overlay.match-detail-overlay-v1.hidden{display:none!important}
 .match-detail-v1{
   width:100%;
-  height:100dvh;
+  height:100%;
   min-height:0;
   display:flex;
   flex-direction:column;
@@ -21338,10 +21338,11 @@ body.match-detail-visible-v1{overflow:hidden!important}
   overflow-y:auto;
   overscroll-behavior:contain;
   -webkit-overflow-scrolling:touch;
-  padding:0 max(12px,env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));
+  padding:0 max(12px,env(safe-area-inset-right)) max(14px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));
+  scroll-padding-bottom:max(14px,env(safe-area-inset-bottom));
 }
 .match-detail-basic-v1{
-  padding:14px 8px 12px;
+  padding:10px 8px 9px;
   text-align:center;
 }
 .match-detail-date-v1{
@@ -21350,48 +21351,37 @@ body.match-detail-visible-v1{overflow:hidden!important}
   line-height:1.35;
   font-weight:620;
 }
-.match-detail-names-v1{
-  margin:8px auto 0;
+.match-detail-result-line-v2{
+  margin:7px auto 0;
   display:grid;
-  grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr);
+  grid-template-columns:minmax(0,1fr) auto 14px auto minmax(0,1fr);
   align-items:center;
-  gap:4px;
-  font-size:20px;
-  font-weight:760;
+  gap:7px;
 }
-.match-detail-names-v1 span{
+.match-detail-result-name-v2{
   min-width:0;
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
+  font-size:16px;
+  line-height:1.2;
+  font-weight:720;
 }
-.match-detail-names-v1 small{
-  color:#777775;
-  font-size:13px;
-  font-weight:650;
-}
-.match-detail-score-v1{
-  margin-top:4px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:18px;
-}
-.match-detail-score-v1 strong{
-  min-width:72px;
-  font-size:34px;
+.match-detail-result-line-v2 strong{
+  min-width:30px;
+  font-size:27px;
   line-height:1;
   font-weight:820;
 }
-.match-detail-score-v1 strong.winner,
+.match-detail-result-line-v2 strong.winner,
 .match-detail-summary-v1 .winner{color:#6f3214}
-.match-detail-score-v1 span{
+.match-detail-result-line-v2 > span:nth-child(3){
   color:#30302e;
-  font-size:24px;
+  font-size:18px;
   font-weight:600;
 }
 .match-detail-chips-v1{
-  margin-top:11px;
+  margin-top:8px;
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
