@@ -8542,11 +8542,19 @@ body {
         </header>
 
         <div class="player-library-main" id="playerLibraryMain">
+          <div class="player-management-intro-v2">
+            <div class="player-management-brand-v2">CueScore</div>
+            <h1>プレーヤー</h1>
+            <p>登録プレーヤーを一覧で確認できます</p>
+          </div>
           <div class="player-library-search-wrap">
             <span class="player-library-search-icon-v1" aria-hidden="true">
               <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 4.5 4.5"/></svg>
             </span>
             <input class="player-library-search" id="playerLibrarySearch" type="search" placeholder="名前を検索" autocomplete="off" />
+            <button class="player-library-register-v2" id="playerLibraryRegisterBtnV2" type="button">
+              <span aria-hidden="true">＋</span><strong>プレーヤー登録</strong>
+            </button>
             <button class="player-library-sort-v1" id="playerLibrarySortBtnV1" type="button" aria-label="並び替え">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4v16M5 7l3-3 3 3M16 20V4M13 17l3 3 3-3"/></svg>
               <span>並び替え</span>
@@ -14979,6 +14987,8 @@ let matchRecordsRawCacheV152 = null;
     }
     openPlayerEditor();
   }, true);
+
+  el("playerLibraryRegisterBtnV2")?.addEventListener("click", () => openPlayerEditor());
 
   document.getElementById("playerManagementBtn")?.addEventListener("click", openPlayerManagementV145);
 
@@ -21746,7 +21756,9 @@ body.match-detail-visible-v1{overflow:hidden!important}
 .player-library-search-icon-v1,
 .player-library-sort-v1,
 .player-library-count-v1,
-.player-library-bottom-nav-v1{display:none}
+.player-library-bottom-nav-v1,
+.player-management-intro-v2,
+.player-library-register-v2{display:none}
 .player-management-formal-v1{
   --player-accent:#7a3514;
   --player-bg:#f7f7f5;
@@ -21757,7 +21769,7 @@ body.match-detail-visible-v1{overflow:hidden!important}
 .player-management-formal-v1 .player-library-panel{
   position:relative;
   display:grid;
-  grid-template-rows:auto minmax(0,1fr) auto;
+  grid-template-rows:minmax(0,1fr) auto;
   width:100%;
   max-width:520px;
   height:100svh;
@@ -21769,13 +21781,7 @@ body.match-detail-visible-v1{overflow:hidden!important}
   color:#171717;
 }
 .player-management-formal-v1 .player-library-header{
-  display:grid;
-  grid-template-columns:46px 1fr 46px;
-  align-items:center;
-  min-height:calc(72px + env(safe-area-inset-top));
-  padding:calc(env(safe-area-inset-top) + 12px) 22px 8px;
-  border:0;
-  background:transparent;
+  display:none;
 }
 .player-management-formal-v1 .player-library-back{
   width:34px;
@@ -21825,15 +21831,45 @@ body.match-detail-visible-v1{overflow:hidden!important}
 .player-management-formal-v1 .player-library-main{
   display:flex;
   min-height:0;
-  padding:6px 16px 0;
+  padding:calc(env(safe-area-inset-top) + 8px) 16px 0;
   flex-direction:column;
   overflow:hidden;
 }
+.player-management-formal-v1 .player-management-intro-v2{
+  display:block;
+  order:0;
+  flex:0 0 auto;
+  margin:0 4px 15px;
+}
+.player-management-formal-v1 .player-management-brand-v2{
+  margin:0 0 10px;
+  color:#171717;
+  font-size:24px;
+  line-height:1.05;
+  font-weight:820;
+  letter-spacing:-.035em;
+  text-align:center;
+}
+.player-management-formal-v1 .player-management-intro-v2 h1{
+  margin:0;
+  color:#171717;
+  font-size:clamp(30px,8.4vw,38px);
+  line-height:1.05;
+  font-weight:820;
+  letter-spacing:-.045em;
+}
+.player-management-formal-v1 .player-management-intro-v2 p{
+  margin:7px 0 0;
+  color:#5e5e5b;
+  font-size:13px;
+  line-height:1.35;
+}
 .player-management-formal-v1 .player-library-search-wrap{
   display:grid;
-  grid-template-columns:minmax(0,1fr) auto;
+  grid-template-columns:1fr 1fr;
   gap:10px;
   position:relative;
+  order:1;
   margin:0 0 12px;
   padding:0;
   background:transparent;
@@ -21842,7 +21878,7 @@ body.match-detail-visible-v1{overflow:hidden!important}
   position:absolute;
   z-index:1;
   left:15px;
-  top:50%;
+  top:25px;
   display:block;
   width:23px;
   height:23px;
@@ -21859,24 +21895,49 @@ body.match-detail-visible-v1{overflow:hidden!important}
   stroke-linecap:round;
 }
 .player-management-formal-v1 .player-library-search{
+  grid-column:1 / -1;
   width:100%;
-  height:46px;
+  height:50px;
   padding:0 14px 0 48px;
-  border:0;
+  border:1px solid #d7d7d4;
   border-radius:12px;
   outline:none;
   color:#171717;
-  background:#ececea;
+  background:#fff;
   font-size:16px;
   box-shadow:none;
   -webkit-appearance:none;
 }
 .player-management-formal-v1 .player-library-search::placeholder{color:#969692}
+.player-management-formal-v1 .player-library-register-v2{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:46px;
+  gap:6px;
+  padding:0 12px;
+  border:1.25px solid #b9b9b5;
+  border-radius:11px;
+  color:#2f2f2d;
+  background:#fff;
+  font-size:15px;
+  white-space:nowrap;
+}
+.player-management-formal-v1 .player-library-register-v2 span{
+  color:var(--player-accent);
+  font-size:23px;
+  line-height:1;
+  font-weight:350;
+}
+.player-management-formal-v1 .player-library-register-v2 strong{
+  font:inherit;
+  font-weight:650;
+}
 .player-management-formal-v1 .player-library-sort-v1{
   display:flex;
   align-items:center;
   justify-content:center;
-  min-width:112px;
+  min-width:0;
   height:46px;
   gap:7px;
   padding:0 13px;
@@ -21899,6 +21960,7 @@ body.match-detail-visible-v1{overflow:hidden!important}
 }
 .player-management-formal-v1 .player-library-sort-v1.is-name-sort{background:#eeeeec}
 .player-management-formal-v1 .player-library-list{
+  order:3;
   flex:0 1 auto;
   min-height:0;
   max-height:100%;
@@ -21998,20 +22060,16 @@ body.match-detail-visible-v1{overflow:hidden!important}
 }
 .player-management-formal-v1 .player-library-count-v1{
   display:block;
+  order:2;
   flex:0 0 auto;
-  padding:10px 0 9px;
+  padding:2px 4px 9px;
   color:#444442;
-  font-size:13px;
-  text-align:center;
+  font-size:12.5px;
+  font-weight:650;
+  text-align:left;
 }
 .player-management-formal-v1 .player-library-count-v1::before{
-  content:"";
-  display:inline-block;
-  width:12px;
-  height:12px;
-  margin:0 6px -2px 0;
-  border:1.25px solid #777774;
-  border-radius:50%;
+  content:none;
 }
 .player-management-formal-v1 .player-library-bottom-nav-v1{
   display:grid;
@@ -22049,9 +22107,9 @@ body.match-detail-visible-v1{overflow:hidden!important}
   font-weight:700;
 }
 @media(max-width:390px){
-  .player-management-formal-v1 .player-library-header{padding-left:16px;padding-right:16px}
   .player-management-formal-v1 .player-library-main{padding-left:10px;padding-right:10px}
-  .player-management-formal-v1 .player-library-sort-v1{min-width:103px;padding:0 10px}
+  .player-management-formal-v1 .player-library-sort-v1{padding:0 10px}
+  .player-management-formal-v1 .player-library-register-v2{padding:0 9px}
   .player-management-formal-v1 .player-management-row-v1{
     grid-template-columns:44px minmax(64px,1fr) 46px minmax(104px,1.35fr) 16px;
     gap:7px;
@@ -22062,6 +22120,16 @@ body.match-detail-visible-v1{overflow:hidden!important}
   .player-management-formal-v1 .player-management-avatar-v1 svg{width:44px;height:44px}
   .player-management-formal-v1 .player-management-name-v1{font-size:17px}
   .player-management-formal-v1 .player-management-last-v1 span{font-size:11px}
+}
+@media(max-height:740px){
+  .player-management-formal-v1 .player-management-brand-v2{margin-bottom:6px;font-size:21px}
+  .player-management-formal-v1 .player-management-intro-v2 h1{font-size:28px}
+  .player-management-formal-v1 .player-management-intro-v2 p{margin-top:4px;font-size:11px}
+  .player-management-formal-v1 .player-management-intro-v2{margin-bottom:10px}
+  .player-management-formal-v1 .player-library-search{height:43px}
+  .player-management-formal-v1 .player-library-search-icon-v1{top:21.5px}
+  .player-management-formal-v1 .player-library-register-v2,
+  .player-management-formal-v1 .player-library-sort-v1{height:40px}
 }
 </style>
 </body>
