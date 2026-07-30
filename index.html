@@ -20550,15 +20550,11 @@ window.cueScoreModalDiagnosticsV159 = () => ({
     }).join("");
     const p1Color=winner===1?WALNUT:"#30302e";
     const p2Color=winner===2?WALNUT:"#30302e";
-    const last1=point(progress.p1.at(-1),maxIndex);
-    const last2=point(progress.p2.at(-1),maxIndex);
     return `<svg class="match-detail-chart-svg-v1" viewBox="0 0 ${width} ${height}" role="img" aria-label="両プレーヤーの累積得点推移">
       ${grid}
       <path d="${path(progress.p1)}" fill="none" stroke="${p1Color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="${path(progress.p2)}" fill="none" stroke="${p2Color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
       ${labels}
-      <text x="${Math.min(width-4,last1.x+8)}" y="${Math.max(13,last1.y-8)}" font-size="14" font-weight="750" fill="${p1Color}">${p1Score}</text>
-      <text x="${Math.min(width-4,last2.x+8)}" y="${Math.min(height-bottom-4,last2.y+18)}" font-size="14" font-weight="750" fill="${p2Color}">${p2Score}</text>
     </svg>`;
   }
 
@@ -20618,7 +20614,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
     if(!rows.length) return "";
     let lastRack=null;
     return `<section class="match-detail-game-history-v1" aria-label="試合履歴">${rows.map(row=>{
-      const divider=row.rack!==lastRack ? `<div class="match-detail-rack-divider-v1" aria-label="ラック${row.rack}"></div>` : "";
+      const divider=row.rack!==lastRack ? `<div class="match-detail-rack-divider-v1" aria-label="ラック${row.rack}"><span>Rack ${row.rack}</span></div>` : "";
       lastRack=row.rack;
       const items=values=>values.map(item=>typeof item==="number"?miniBallV1(item):symbolV1(item)).join("");
       return `${divider}<div class="match-detail-log-row-v1">
@@ -21491,12 +21487,23 @@ body.match-detail-visible-v1{overflow:hidden!important}
   overflow:hidden;
 }
 .match-detail-rack-divider-v1{
-  height:4px;
-  margin:1px 0 3px;
+  height:20px;
+  margin:0 0 2px;
+  display:flex;
+  align-items:center;
   border-top:1px solid #9a6b54;
+  color:#6f3214;
+  font-size:10px;
+  line-height:1;
+  font-weight:720;
+  letter-spacing:.02em;
+}
+.match-detail-rack-divider-v1 span{
+  padding:0 5px;
+  background:#fff;
 }
 .match-detail-rack-divider-v1:not(:first-child){
-  margin-top:6px;
+  margin-top:5px;
 }
 .match-detail-log-row-v1{
   min-height:36px;
@@ -21509,13 +21516,13 @@ body.match-detail-visible-v1{overflow:hidden!important}
 .match-detail-log-cell-v1{
   min-width:0;
   min-height:36px;
-  padding:3px 4px;
+  padding:3px 2px;
   display:flex;
   align-items:center;
-  gap:3px;
+  gap:2px;
   flex-wrap:wrap;
 }
-.match-detail-log-cell-v1.left{justify-content:flex-end}
+.match-detail-log-cell-v1.left{justify-content:flex-start}
 .match-detail-log-cell-v1.right{justify-content:flex-start}
 .match-detail-inning-v1{
   position:relative;
@@ -21537,8 +21544,9 @@ body.match-detail-visible-v1{overflow:hidden!important}
 }
 .match-detail-log-row-v1:last-child .match-detail-inning-v1::after{display:none}
 .match-detail-mini-ball-v1{
-  width:19px;
-  height:19px;
+  box-sizing:border-box;
+  width:20px;
+  height:20px;
   display:inline-grid;
   place-items:center;
   border:2px solid var(--detail-ball-color);
@@ -21546,7 +21554,7 @@ body.match-detail-visible-v1{overflow:hidden!important}
   color:#111;
   background:#fbfbfa;
   box-shadow:0 1px 2px rgba(0,0,0,.1);
-  font-size:10px;
+  font-size:9.5px;
   line-height:1;
   font-weight:850;
 }
