@@ -22131,7 +22131,557 @@ body.match-detail-visible-v1{overflow:hidden!important}
   .player-management-formal-v1 .player-library-register-v2,
   .player-management-formal-v1 .player-library-sort-v1{height:40px}
 }
+
+/* CueScore Player Detail v1.0 */
+.player-stats-overlay.player-detail-formal-v1{
+  --player-detail-accent:#7f3512;
+  --player-detail-accent-soft:#fbf7f4;
+  background:#f7f7f5;
+  color:#171717;
+}
+.player-detail-formal-v1 .player-stats-panel{
+  display:grid;
+  grid-template-rows:auto minmax(0,1fr);
+  width:100%;
+  max-width:none;
+  height:100dvh;
+  max-height:none;
+  margin:0;
+  border:0;
+  border-radius:0;
+  background:#f7f7f5;
+}
+.player-detail-formal-v1 .player-stats-header{
+  display:grid;
+  grid-template-columns:72px 1fr 72px;
+  align-items:center;
+  min-height:calc(58px + env(safe-area-inset-top));
+  padding:env(safe-area-inset-top) 16px 0;
+  border-bottom:1px solid #dededb;
+  background:rgba(255,255,255,.96);
+}
+.player-detail-formal-v1 .player-stats-back,
+.player-detail-formal-v1 .player-stats-race{
+  display:flex;
+  align-items:center;
+  min-width:44px;
+  height:44px;
+  padding:0;
+  border:0;
+  color:var(--player-detail-accent);
+  background:transparent;
+  font-size:0;
+}
+.player-detail-formal-v1 .player-stats-back::before{
+  content:"";
+  width:13px;
+  height:13px;
+  margin-left:5px;
+  border-left:2.2px solid currentColor;
+  border-bottom:2.2px solid currentColor;
+  transform:rotate(45deg);
+}
+.player-detail-formal-v1 .player-stats-title{
+  color:var(--player-detail-accent);
+  font-size:20px;
+  font-weight:700;
+  text-align:center;
+}
+.player-detail-formal-v1 .player-stats-race{
+  justify-content:flex-end;
+  font-size:24px;
+  letter-spacing:3px;
+}
+.player-detail-formal-v1 .player-stats-body{
+  min-height:0;
+  padding:18px 14px 0;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.player-detail-shell-v1{
+  display:flex;
+  width:min(100%,720px);
+  min-height:100%;
+  margin:0 auto;
+  flex-direction:column;
+  gap:12px;
+}
+.player-detail-profile-v1{
+  display:grid;
+  grid-template-columns:64px minmax(0,1fr) 20px;
+  align-items:center;
+  gap:14px;
+  min-height:86px;
+  padding:8px 10px;
+  border:0;
+  color:#171717;
+  background:transparent;
+  text-align:left;
+}
+.player-detail-avatar-v1{
+  position:relative;
+  display:grid;
+  place-items:center;
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  background:#eee9e4;
+}
+.player-detail-avatar-v1 svg{width:44px;height:44px;fill:#8a4a28}
+.player-detail-favorite-v1{
+  position:absolute;
+  right:-2px;
+  bottom:-1px;
+  display:grid;
+  place-items:center;
+  width:21px;
+  height:21px;
+  border:2px solid #fff;
+  border-radius:50%;
+  color:#fff;
+  background:var(--player-detail-accent);
+  font-size:12px;
+}
+.player-detail-profile-copy-v1{min-width:0}
+.player-detail-name-v1{
+  overflow:hidden;
+  font-size:26px;
+  font-weight:720;
+  line-height:1.2;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.player-detail-nickname-v1{
+  margin-top:5px;
+  overflow:hidden;
+  color:#696965;
+  font-size:13px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.player-detail-chevron-v1{
+  width:13px;
+  height:13px;
+  border-top:2px solid var(--player-detail-accent);
+  border-right:2px solid var(--player-detail-accent);
+  transform:rotate(45deg);
+}
+.player-detail-disciplines-v1{
+  display:flex;
+  gap:8px;
+  padding:10px;
+  overflow-x:auto;
+  border:1px solid #e5e5e2;
+  border-radius:15px;
+  background:#fff;
+  box-shadow:0 3px 14px rgba(0,0,0,.025);
+  scrollbar-width:none;
+}
+.player-detail-disciplines-v1::-webkit-scrollbar{display:none}
+.player-detail-discipline-v1{
+  display:flex;
+  min-width:78px;
+  height:82px;
+  padding:9px 8px 7px;
+  border:1px solid #dededb;
+  border-radius:12px;
+  color:#30302e;
+  background:#fff;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  font-size:12px;
+  white-space:nowrap;
+}
+.player-detail-discipline-v1 .disc-ball{
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  border:1.5px solid currentColor;
+  border-radius:50%;
+  font-weight:750;
+}
+.player-detail-discipline-v1.is-selected{
+  border-color:var(--player-detail-accent);
+  color:#fff;
+  background:var(--player-detail-accent);
+  box-shadow:0 3px 9px rgba(127,53,18,.14);
+}
+.player-detail-discipline-v1:disabled{
+  opacity:.42;
+  cursor:default;
+}
+.player-detail-card-v1{
+  border:1px solid #e5e5e2;
+  border-radius:16px;
+  background:#fff;
+  box-shadow:0 3px 15px rgba(0,0,0,.027);
+}
+.player-detail-win-v1{
+  display:grid;
+  grid-template-columns:148px minmax(0,1fr);
+  align-items:center;
+  gap:18px;
+  padding:20px;
+}
+.player-detail-gauge-v1{
+  --rate:0;
+  position:relative;
+  display:grid;
+  place-items:center;
+  width:132px;
+  height:132px;
+  border-radius:50%;
+  background:conic-gradient(var(--player-detail-accent) calc(var(--rate) * 1%),#e9e1dc 0);
+}
+.player-detail-gauge-v1::before{
+  content:"";
+  position:absolute;
+  inset:11px;
+  border-radius:50%;
+  background:#fff;
+}
+.player-detail-gauge-copy-v1{position:relative;text-align:center}
+.player-detail-gauge-value-v1{font-size:38px;font-weight:760;line-height:1}
+.player-detail-gauge-value-v1 small{font-size:19px}
+.player-detail-gauge-label-v1{margin-top:8px;color:#62625f;font-size:12px}
+.player-detail-recent-label-v1{color:#454542;font-size:13px;line-height:1.5}
+.player-detail-recent-rate-v1{
+  margin-top:8px;
+  color:var(--player-detail-accent);
+  font-size:35px;
+  font-weight:760;
+  line-height:1;
+}
+.player-detail-stars-v1{
+  margin-top:12px;
+  color:var(--player-detail-accent);
+  font-size:23px;
+  letter-spacing:2px;
+}
+.player-detail-stars-v1 .off{color:#d8d4d1}
+.player-detail-status-v1{
+  display:inline-flex;
+  margin-top:12px;
+  padding:7px 18px;
+  border-radius:9px;
+  color:#fff;
+  background:var(--player-detail-accent);
+  font-size:12px;
+}
+.player-detail-section-v1{padding:17px 18px 18px}
+.player-detail-section-title-v1{
+  margin-bottom:14px;
+  color:#171717;
+  font-size:18px;
+  font-weight:720;
+}
+.player-detail-metrics-v1{
+  display:grid;
+  grid-template-columns:repeat(var(--metric-count,3),minmax(0,1fr));
+}
+.player-detail-metric-v1{
+  min-width:0;
+  padding:3px 10px 0;
+  border-left:1px solid #e7e7e4;
+  text-align:center;
+}
+.player-detail-metric-v1:first-child{border-left:0}
+.player-detail-metric-ring-v1{
+  --rate:0;
+  position:relative;
+  display:grid;
+  place-items:center;
+  width:76px;
+  height:76px;
+  margin:0 auto;
+  border-radius:50%;
+  background:conic-gradient(var(--player-detail-accent) calc(var(--rate) * 1%),#e8e2de 0);
+}
+.player-detail-metric-ring-v1::before{
+  content:"";
+  position:absolute;
+  inset:7px;
+  border-radius:50%;
+  background:#fff;
+}
+.player-detail-metric-value-v1{position:relative;font-size:21px;font-weight:720}
+.player-detail-metric-value-v1 small{font-size:11px}
+.player-detail-metric-label-v1{
+  margin-top:9px;
+  color:#343432;
+  font-size:11px;
+  line-height:1.35;
+}
+.player-detail-vs-v1{
+  display:grid;
+  grid-template-columns:45px minmax(0,1fr) 16px;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  min-height:76px;
+  padding:12px 18px;
+  border:1px solid #e5e5e2;
+  border-radius:14px;
+  color:#171717;
+  background:#fff;
+  box-shadow:0 3px 14px rgba(0,0,0,.025);
+  text-align:left;
+}
+.player-detail-vs-v1 svg{width:38px;height:38px;fill:var(--player-detail-accent)}
+.player-detail-vs-title-v1{font-size:16px;font-weight:720}
+.player-detail-vs-sub-v1{margin-top:3px;color:#777773;font-size:11px;line-height:1.4}
+.player-detail-count-v1{
+  color:#555552;
+  font-size:12px;
+  text-align:center;
+}
+.player-detail-bottom-nav-v1{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  margin:auto -14px 0;
+  min-height:calc(72px + env(safe-area-inset-bottom));
+  padding:7px 8px calc(7px + env(safe-area-inset-bottom));
+  border-top:1px solid #dededb;
+  background:rgba(255,255,255,.97);
+}
+.player-detail-bottom-nav-v1 button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  padding:0;
+  border:0;
+  color:#8a8a87;
+  background:transparent;
+  flex-direction:column;
+  font-size:10px;
+  font-weight:550;
+}
+.player-detail-bottom-nav-v1 svg{
+  width:26px;
+  height:26px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.player-detail-bottom-nav-v1 .is-current{color:var(--player-detail-accent);font-weight:700}
+.player-detail-empty-v1{
+  padding:34px 18px;
+  color:#777773;
+  font-size:13px;
+  line-height:1.7;
+  text-align:center;
+}
+@media(max-width:390px){
+  .player-detail-formal-v1 .player-stats-body{padding-left:10px;padding-right:10px}
+  .player-detail-win-v1{grid-template-columns:118px minmax(0,1fr);gap:13px;padding:16px}
+  .player-detail-gauge-v1{width:112px;height:112px}
+  .player-detail-gauge-value-v1{font-size:33px}
+  .player-detail-metric-v1{padding-left:5px;padding-right:5px}
+  .player-detail-metric-ring-v1{width:68px;height:68px}
+  .player-detail-bottom-nav-v1{margin-left:-10px;margin-right:-10px}
+}
 </style>
+<script>
+(() => {
+  const overlay = document.getElementById("playerStatsOverlay");
+  const body = document.getElementById("playerStatsBody");
+  if (!overlay || !body || typeof openPlayerStats !== "function") return;
+
+  const esc = value => typeof escapeRecordText === "function"
+    ? escapeRecordText(value)
+    : String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+  const svgPerson = `<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="17" r="8"/><path d="M9 42c1.2-11 6.3-16 15-16s13.8 5 15 16Z"/></svg>`;
+  const navIcons = {
+    home:`<svg viewBox="0 0 24 24"><path d="m3.5 10 8.5-7 8.5 7v10.5h-6V14h-5v6.5h-6Z"/></svg>`,
+    history:`<svg viewBox="0 0 24 24"><path d="M5.25 7.5A8 8 0 1 1 4 12"/><path d="M5.25 3.75V7.5H9"/><path d="M12 7.75V12l3 1.75"/></svg>`,
+    analytics:`<svg viewBox="0 0 24 24"><path d="M4.5 19.5V14h3v5.5M10.5 19.5V9h3v10.5M16.5 19.5V4.5h3v15"/><path d="M3 19.5h18"/></svg>`,
+    player:`<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25"/><path d="M5.5 20c.55-4.15 2.7-6.25 6.5-6.25s5.95 2.1 6.5 6.25"/></svg>`,
+    settings:`<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.2 13.6a7.8 7.8 0 0 0 0-3.2l2-1.55-2-3.45-2.5 1a8 8 0 0 0-2.75-1.6L13.6 2h-4l-.35 2.8A8 8 0 0 0 6.5 6.4L4 5.4 2 8.85l2 1.55a7.8 7.8 0 0 0 0 3.2l-2 1.55 2 3.45 2.5-1a8 8 0 0 0 2.75 1.6L9.6 22h4l.35-2.8a8 8 0 0 0 2.75-1.6l2.5 1 2-3.45Z"/></svg>`
+  };
+  const disciplineDefs = [
+    {id:"rotation",label:"Rotation",icon:"R",enabled:true},
+    {id:"9ball",label:"9 Ball",icon:"9",enabled:true},
+    {id:"10ball",label:"10 Ball",icon:"10",enabled:true},
+    {id:"jpa9",label:"JPA 9",icon:"JPA",enabled:true},
+    {id:"jpa8",label:"JPA 8",icon:"JPA",enabled:false},
+    {id:"jcl",label:"JCL",icon:"JCL",enabled:false},
+    {id:"14.1",label:"14.1",icon:"14.1",enabled:false}
+  ];
+  let activeDiscipline = "rotation";
+
+  function recordDiscipline(record){
+    const raw = String(record?.disciplineId || record?.gameType || "rotation").toLowerCase().replace(/[\s_-]/g,"");
+    if (raw === "9ball" || raw === "9") return "9ball";
+    if (raw === "10ball" || raw === "10") return "10ball";
+    if (raw === "jpa9" || raw === "jpa9ball") return "jpa9";
+    return raw === "rotation" ? "rotation" : raw;
+  }
+  function playerMetrics(records, player){
+    let wins=0, highRun=0, pockets=0, misses=0, storedShotTotal=0, storedShotCount=0;
+    records.forEach(record => {
+      const side = playerSideInRecord(record, player);
+      if (!side) return;
+      if (Number(record.winner) === Number(side)) wins += 1;
+      const metric = savedPlayerMetricsV113(record, side);
+      highRun = Math.max(highRun, Number(metric.maxRun) || 0);
+      const p = Number(metric.pocketCount), m = Number(metric.misses);
+      if (Number.isFinite(p) && Number.isFinite(m) && p + m > 0) { pockets += p; misses += m; }
+      else if (Number.isFinite(Number(metric.shotRate))) { storedShotTotal += Number(metric.shotRate); storedShotCount += 1; }
+    });
+    const shotRate = pockets + misses > 0
+      ? Math.round(pockets / (pockets + misses) * 100)
+      : storedShotCount ? Math.round(storedShotTotal / storedShotCount) : null;
+    const detail = typeof buildDetailedCoachV770 === "function" ? buildDetailedCoachV770(records, player) : null;
+    return {
+      games:records.length,
+      wins,
+      winRate:records.length ? Math.round(wins / records.length * 100) : 0,
+      highRun,
+      shotRate,
+      safetyRate:Number.isFinite(Number(detail?.safetyRate)) ? Math.round(Number(detail.safetyRate)) : null
+    };
+  }
+  function metricCard(label,value,rate,suffix=""){
+    return `<div class="player-detail-metric-v1">
+      <div class="player-detail-metric-ring-v1" style="--rate:${Math.max(0,Math.min(100,Number(rate)||0))}">
+        <div class="player-detail-metric-value-v1">${esc(value)}${suffix ? `<small>${esc(suffix)}</small>` : ""}</div>
+      </div>
+      <div class="player-detail-metric-label-v1">${esc(label)}</div>
+    </div>`;
+  }
+  function navButton(action,label,icon,current=false){
+    return `<button type="button" data-player-detail-nav="${action}" class="${current ? "is-current" : ""}" ${current ? 'aria-current="page"' : ""}>${navIcons[icon]}<span>${label}</span></button>`;
+  }
+
+  window.renderFormalPlayerDetailV1 = function(playerId){
+    const player = readPlayerLibrary().find(item => String(item.id) === String(playerId));
+    if (!player) return;
+    const allPlayerRecords = recordsForRegisteredPlayer(player);
+    const records = allPlayerRecords.filter(record => recordDiscipline(record) === activeDiscipline);
+    const recent = records.slice(0,10);
+    const all = playerMetrics(records, player);
+    const recentStats = playerMetrics(recent, player);
+    const coachGrowth = typeof buildPlayerGrowthAnalysisV740 === "function" ? buildPlayerGrowthAnalysisV740(records, player) : null;
+    const coachInsight = typeof buildPlayerInsightsV750 === "function" ? buildPlayerInsightsV750(records, player, coachGrowth) : null;
+    const coach = typeof buildRionCoachV760 === "function" ? buildRionCoachV760(coachInsight, coachGrowth) : null;
+    const rating = Array.isArray(coach?.ratings) ? coach.ratings.find(item => item?.[0] === "勝ち切る力")?.[1] : null;
+    const metrics = [];
+    if (records.length) metrics.push(metricCard("ハイラン",all.highRun,Math.min(100,all.highRun),"点"));
+    if (all.shotRate != null) metrics.push(metricCard("シュート成功率",`${all.shotRate}` ,all.shotRate,"%"));
+    if (all.safetyRate != null) metrics.push(metricCard("セーフティ成功率",`${all.safetyRate}`,all.safetyRate,"%"));
+
+    document.getElementById("playerStatsRace").textContent = "•••";
+    document.getElementById("playerStatsRace").setAttribute("role","button");
+    document.getElementById("playerStatsRace").setAttribute("aria-label","プレーヤーを編集");
+    body.innerHTML = `<div class="player-detail-shell-v1">
+      <button type="button" class="player-detail-profile-v1" data-player-detail-edit="${esc(player.id)}">
+        <span class="player-detail-avatar-v1">${svgPerson}${player.favorite === true ? '<span class="player-detail-favorite-v1">★</span>' : ""}</span>
+        <span class="player-detail-profile-copy-v1">
+          <span class="player-detail-name-v1">${esc(player.name)}</span>
+          ${player.nickname ? `<span class="player-detail-nickname-v1">${esc(player.nickname)}</span>` : ""}
+        </span>
+        <span class="player-detail-chevron-v1" aria-hidden="true"></span>
+      </button>
+
+      <div class="player-detail-disciplines-v1" role="tablist" aria-label="種目">
+        ${disciplineDefs.map(item => `<button type="button" role="tab" class="player-detail-discipline-v1 ${item.id === activeDiscipline ? "is-selected" : ""}" data-player-detail-discipline="${item.id}" aria-selected="${item.id === activeDiscipline}" ${item.enabled ? "" : "disabled"}><span class="disc-ball">${item.icon}</span><span>${item.label}</span></button>`).join("")}
+      </div>
+
+      ${records.length ? `<section class="player-detail-card-v1 player-detail-win-v1">
+        <div class="player-detail-gauge-v1" style="--rate:${all.winRate}">
+          <div class="player-detail-gauge-copy-v1"><div class="player-detail-gauge-value-v1">${all.winRate}<small>%</small></div><div class="player-detail-gauge-label-v1">勝率</div></div>
+        </div>
+        <div>
+          <div class="player-detail-recent-label-v1">${disciplineDefs.find(item => item.id === activeDiscipline)?.label || ""} の最近${recent.length}試合の勝率</div>
+          <div class="player-detail-recent-rate-v1">${recentStats.winRate}%</div>
+          ${rating ? `<div class="player-detail-stars-v1">${"★".repeat(rating)}<span class="off">${"★".repeat(5-rating)}</span></div>` : ""}
+          ${coach?.ready ? `<div class="player-detail-status-v1">${esc(coach.status)}</div>` : ""}
+        </div>
+      </section>
+      ${metrics.length ? `<section class="player-detail-card-v1 player-detail-section-v1"><div class="player-detail-section-title-v1">成績サマリー</div><div class="player-detail-metrics-v1" style="--metric-count:${metrics.length}">${metrics.join("")}</div></section>` : ""}
+      <button type="button" class="player-detail-vs-v1" data-open-player-rival-v832="${esc(player.id)}">
+        ${svgPerson}
+        <span><span class="player-detail-vs-title-v1">対戦成績（VS）を見る</span><span class="player-detail-vs-sub-v1">対戦相手ごとの勝敗・勝率を確認できます</span></span>
+        <span class="player-detail-chevron-v1" aria-hidden="true"></span>
+      </button>` : `<section class="player-detail-card-v1 player-detail-empty-v1">この種目の対戦データはまだありません。</section>`}
+
+      <div class="player-detail-count-v1">登録プレーヤー数：${readPlayerLibrary().length}人</div>
+      <nav class="player-detail-bottom-nav-v1" aria-label="メインナビゲーション">
+        ${navButton("home","Home","home")}
+        ${navButton("history","対戦履歴","history")}
+        ${navButton("analytics","分析","analytics")}
+        ${navButton("player","プレーヤー","player",true)}
+        ${navButton("settings","設定","settings")}
+      </nav>
+    </div>`;
+  };
+
+  const originalOpenPlayerStats = openPlayerStats;
+  openPlayerStats = function(playerId){
+    const player = readPlayerLibrary().find(item => String(item.id) === String(playerId));
+    if (!player) return;
+    window.__cueScoreActivePlayerStatsIdV159 = String(playerId);
+    activeDiscipline = "rotation";
+    overlay.classList.add("player-detail-formal-v1");
+    overlay.classList.remove("hidden");
+    overlay.setAttribute("aria-hidden","false");
+    document.querySelector(".player-stats-title").textContent = "Player Detail";
+    window.renderFormalPlayerDetailV1(playerId);
+    body.scrollTop = 0;
+    const library = document.getElementById("playerLibraryOverlay");
+    if (library) {
+      playerStatsReturnToManagementV147 = !library.classList.contains("hidden");
+      library.classList.add("hidden");
+      library.setAttribute("aria-hidden","true");
+    }
+  };
+  window.__cueScoreOriginalOpenPlayerStatsV1 = originalOpenPlayerStats;
+
+  body.addEventListener("click", event => {
+    const discipline = event.target.closest("[data-player-detail-discipline]");
+    if (discipline && !discipline.disabled) {
+      activeDiscipline = discipline.dataset.playerDetailDiscipline || "rotation";
+      window.renderFormalPlayerDetailV1(window.__cueScoreActivePlayerStatsIdV159);
+      return;
+    }
+    const edit = event.target.closest("[data-player-detail-edit]");
+    if (edit) {
+      closePlayerStats();
+      const library = document.getElementById("playerLibraryOverlay");
+      if (library) {
+        library.classList.remove("hidden");
+        library.setAttribute("aria-hidden","false");
+      }
+      openPlayerEditor(edit.dataset.playerDetailEdit);
+      return;
+    }
+    const nav = event.target.closest("[data-player-detail-nav]");
+    if (!nav || nav.dataset.playerDetailNav === "player") return;
+    closePlayerStats();
+    if (nav.dataset.playerDetailNav === "home") { closePlayerLibrary(); backToTitle(); }
+    if (nav.dataset.playerDetailNav === "history") { closePlayerLibrary(); openRecords(); }
+    if (nav.dataset.playerDetailNav === "analytics") { closePlayerLibrary(); document.getElementById("recordsAnalyticsNavV1")?.click(); }
+    if (nav.dataset.playerDetailNav === "settings") { closePlayerLibrary(); document.getElementById("settingsBtn")?.click(); }
+  });
+  document.getElementById("playerStatsRace")?.addEventListener("click", () => {
+    const id = window.__cueScoreActivePlayerStatsIdV159;
+    if (!id || overlay.classList.contains("hidden")) return;
+    closePlayerStats();
+    const library = document.getElementById("playerLibraryOverlay");
+    if (library) {
+      library.classList.remove("hidden");
+      library.setAttribute("aria-hidden","false");
+    }
+    openPlayerEditor(id);
+  });
+})();
+</script>
 </body>
 </html>
 
