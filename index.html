@@ -8543,10 +8543,36 @@ body {
 
         <div class="player-library-main" id="playerLibraryMain">
           <div class="player-library-search-wrap">
+            <span class="player-library-search-icon-v1" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 4.5 4.5"/></svg>
+            </span>
             <input class="player-library-search" id="playerLibrarySearch" type="search" placeholder="名前を検索" autocomplete="off" />
+            <button class="player-library-sort-v1" id="playerLibrarySortBtnV1" type="button" aria-label="並び替え">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4v16M5 7l3-3 3 3M16 20V4M13 17l3 3 3-3"/></svg>
+              <span>並び替え</span>
+            </button>
           </div>
           <div class="player-library-list" id="playerLibraryList"></div>
+          <div class="player-library-count-v1" id="playerLibraryCountV1" aria-live="polite"></div>
         </div>
+
+        <nav class="player-library-bottom-nav-v1" id="playerLibraryBottomNavV1" aria-label="メインナビゲーション">
+          <button id="playerLibraryHomeNavV1" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5v8.25A1.25 1.25 0 0 1 18.75 20H5.25A1.25 1.25 0 0 1 4 18.75Z"/><path d="M9.25 20v-6.5h5.5V20"/></svg><span>Home</span>
+          </button>
+          <button id="playerLibraryHistoryNavV1" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.25 7.5A8 8 0 1 1 4 12"/><path d="M5.25 3.75V7.5H9"/><path d="M12 7.75V12l3 1.75"/></svg><span>対戦履歴</span>
+          </button>
+          <button id="playerLibraryAnalyticsNavV1" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5V14h3v5.5M10.5 19.5V9h3v10.5M16.5 19.5V4.5h3v15"/><path d="M3 19.5h18"/></svg><span>分析</span>
+          </button>
+          <button class="is-current" type="button" aria-current="page">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.25"/><path d="M5.5 20c.55-4.15 2.7-6.25 6.5-6.25s5.95 2.1 6.5 6.25"/></svg><span>プレーヤー</span>
+          </button>
+          <button id="playerLibrarySettingsNavV1" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.2 13.6a7.8 7.8 0 0 0 0-3.2l2-1.55-2-3.45-2.5 1a8 8 0 0 0-2.75-1.6L13.6 2h-4l-.35 2.8A8 8 0 0 0 6.5 6.4L4 5.4 2 8.85l2 1.55a7.8 7.8 0 0 0 0 3.2l-2 1.55 2 3.45 2.5-1a8 8 0 0 0 2.75-1.6l2.5 1 2-3.45Z"/></svg><span>設定</span>
+          </button>
+        </nav>
 
         <div class="player-editor hidden" id="playerEditor">
           <label class="player-editor-label" for="playerEditorName">Name:</label>
@@ -10640,6 +10666,14 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function openPlayerEditor(id=null) {
+    el("playerLibraryOverlay")?.classList.remove("player-management-formal-v1");
+    const libraryBack = el("playerLibraryBackBtn");
+    if (libraryBack) {
+      libraryBack.textContent = "‹ 戻る";
+      libraryBack.removeAttribute("aria-hidden");
+      libraryBack.setAttribute("aria-label", "プレーヤー一覧へ戻る");
+      libraryBack.tabIndex = 0;
+    }
     editingPlayerId = id;
     const players = readPlayerLibrary();
     const player = id ? players.find(p => p.id === id) : null;
@@ -14754,14 +14788,56 @@ let matchRecordsRawCacheV152 = null;
 
   // ---- Rebuild v1.53: selection page is selection-only; management is opened from title ----
   let playerLibraryModeV145 = "selection";
+  let playerLibrarySortV1 = "recent";
+
+  function playerRecordTimeV1(record) {
+    const value = record?.endedAt || record?.playedAt || record?.startedAt || "";
+    const time = new Date(value).getTime();
+    return Number.isFinite(time) ? time : 0;
+  }
+
+  function formatPlayerHistoryDateV1(record) {
+    const value = record?.endedAt || record?.playedAt || record?.startedAt || "";
+    if (!value) return "—";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "—";
+    const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+    return `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, "0")}/${String(date.getDate()).padStart(2, "0")}(${weekdays[date.getDay()]}) ${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
+  }
+
+  function playerAvatarSvgV1() {
+    return `<svg viewBox="0 0 48 48" aria-hidden="true">
+      <circle cx="24" cy="24" r="23"></circle>
+      <circle cx="24" cy="18" r="7"></circle>
+      <path d="M11 40c1.2-9 5.6-13.5 13-13.5S35.8 31 37 40"></path>
+    </svg>`;
+  }
 
   renderPlayerLibrary = function() {
     const list = el("playerLibraryList");
     if (!list) return;
     const query = (el("playerLibrarySearch")?.value || "").trim().toLocaleLowerCase("ja");
-    const players = readPlayerLibrary()
-      .filter(p => !query || p.name.toLocaleLowerCase("ja").includes(query))
-      .sort((a,b) => (b.lastUsed || b.updatedAt || b.createdAt || 0) - (a.lastUsed || a.updatedAt || a.createdAt || 0));
+    const allPlayers = readPlayerLibrary();
+    const playerRows = allPlayers.map(player => {
+      const records = recordsForRegisteredPlayer(player);
+      return {player, records, latest: records[0] || null};
+    });
+    const players = playerRows
+      .filter(row => !query || row.player.name.toLocaleLowerCase("ja").includes(query))
+      .sort((a, b) => {
+        if (playerLibraryModeV145 !== "management") {
+          return (b.player.lastUsed || b.player.updatedAt || b.player.createdAt || 0) -
+            (a.player.lastUsed || a.player.updatedAt || a.player.createdAt || 0);
+        }
+        if (playerLibrarySortV1 === "name") {
+          return a.player.name.localeCompare(b.player.name, "ja");
+        }
+        return playerRecordTimeV1(b.latest) - playerRecordTimeV1(a.latest) ||
+          (b.player.updatedAt || b.player.createdAt || 0) - (a.player.updatedAt || a.player.createdAt || 0);
+      });
+
+    const count = el("playerLibraryCountV1");
+    if (count) count.textContent = `登録プレーヤー数：${allPlayers.length}人`;
 
     if (!players.length) {
       const emptyText = playerLibraryModeV145 === "management"
@@ -14772,24 +14848,25 @@ let matchRecordsRawCacheV152 = null;
     }
 
     if (playerLibraryModeV145 === "management") {
-      list.innerHTML = players.map(p => `
-        <div class="player-library-item management-row">
-          <button class="player-library-manage-main" type="button" data-stats-player="${p.id}">
-            <div class="player-library-name-row"><div class="player-library-name">${escapeRecordText(p.name)}</div></div>
-            <div class="player-library-meta">Race to ${Number(p.race)||0}　最終使用 ${formatLastUsed(p.lastUsed)}</div>
-          </button>
-          <div class="player-library-actions manage-actions">
-            <button class="player-library-stats" type="button" data-stats-player="${p.id}">成績</button>
-            <button class="player-library-edit" type="button" data-edit-player="${p.id}">編集</button>
-          </div>
-        </div>`).join("");
+      list.innerHTML = players.map(({player, records, latest}) => `
+        <button class="player-management-row-v1" type="button" data-stats-player="${player.id}" aria-label="${escapeRecordText(player.name)}の詳細を開く">
+          <span class="player-management-avatar-v1">${playerAvatarSvgV1()}</span>
+          <strong class="player-management-name-v1">${escapeRecordText(player.name)}</strong>
+          <span class="player-management-stat-v1 player-management-matches-v1">
+            <small>試合数</small><b>${records.length}</b>
+          </span>
+          <span class="player-management-stat-v1 player-management-last-v1">
+            <small>最終履歴</small><span>${formatPlayerHistoryDateV1(latest)}</span>
+          </span>
+          <svg class="player-management-chevron-v1" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+        </button>`).join("");
       return;
     }
 
     const otherPlayer = playerLibraryTarget === 1 ? 2 : 1;
     const otherSelectedId = selectedRegisteredPlayer[otherPlayer];
     const currentSelectedId = selectedRegisteredPlayer[playerLibraryTarget];
-    list.innerHTML = players.map(p => {
+    list.innerHTML = players.map(({player:p}) => {
       const usedByOther = p.id === otherSelectedId;
       const selectedHere = p.id === currentSelectedId;
       const status = usedByOther
@@ -14807,9 +14884,26 @@ let matchRecordsRawCacheV152 = null;
   showPlayerLibraryMain = function() {
     editingPlayerId = null;
     const management = playerLibraryModeV145 === "management";
-    el("playerLibraryTitle").textContent = management ? "プレーヤ管理" : `Player${playerLibraryTarget} 選択`;
+    const overlay = el("playerLibraryOverlay");
+    overlay?.classList.toggle("player-management-formal-v1", management);
+    el("playerLibraryTitle").textContent = management ? "Player" : `Player${playerLibraryTarget} 選択`;
+    el("playerLibrarySearch").placeholder = management ? "プレーヤー検索" : "名前を検索";
     el("playerLibraryMain").classList.remove("hidden");
     el("playerEditor").classList.add("hidden");
+    const back = el("playerLibraryBackBtn");
+    if (back) {
+      if (management) {
+        back.innerHTML = playerAvatarSvgV1();
+        back.setAttribute("aria-hidden", "true");
+        back.removeAttribute("aria-label");
+        back.tabIndex = -1;
+      } else {
+        back.textContent = "‹ 戻る";
+        back.removeAttribute("aria-hidden");
+        back.setAttribute("aria-label", "閉じる");
+        back.tabIndex = 0;
+      }
+    }
 
     const restoreAddButton = () => {
       const add = el("playerLibraryAddBtn");
@@ -14847,6 +14941,7 @@ let matchRecordsRawCacheV152 = null;
 
   function openPlayerManagementV145() {
     playerLibraryModeV145 = "management";
+    playerLibrarySortV1 = "recent";
     el("playerLibrarySearch").value = "";
     const overlay = el("playerLibraryOverlay");
     overlay.classList.remove("hidden");
@@ -14886,6 +14981,28 @@ let matchRecordsRawCacheV152 = null;
   }, true);
 
   document.getElementById("playerManagementBtn")?.addEventListener("click", openPlayerManagementV145);
+
+  el("playerLibrarySortBtnV1")?.addEventListener("click", () => {
+    playerLibrarySortV1 = playerLibrarySortV1 === "recent" ? "name" : "recent";
+    const button = el("playerLibrarySortBtnV1");
+    button?.setAttribute("aria-label", playerLibrarySortV1 === "name" ? "名前順。タップで最終履歴順" : "最終履歴順。タップで名前順");
+    button?.classList.toggle("is-name-sort", playerLibrarySortV1 === "name");
+    renderPlayerLibrary();
+  });
+
+  el("playerLibraryHomeNavV1")?.addEventListener("click", closePlayerLibrary);
+  el("playerLibraryHistoryNavV1")?.addEventListener("click", () => {
+    closePlayerLibrary();
+    el("recordsBtn")?.click();
+  });
+  el("playerLibraryAnalyticsNavV1")?.addEventListener("click", () => {
+    closePlayerLibrary();
+    el("openRankingsBtn")?.click();
+  });
+  el("playerLibrarySettingsNavV1")?.addEventListener("click", () => {
+    closePlayerLibrary();
+    el("settingsBtn")?.click();
+  });
 
   
   // Rebuild v1.58: Data management / backup
@@ -21623,6 +21740,327 @@ body.match-detail-visible-v1{overflow:hidden!important}
   .match-detail-summary-row-v1{grid-template-columns:minmax(62px,1fr) minmax(100px,1.18fr) minmax(62px,1fr)}
   .match-detail-summary-row-v1 span{font-size:11px}
   .match-detail-log-cell-v1{gap:3px}
+}
+
+/* CueScore Player v1.0 — formal player management layout */
+.player-library-search-icon-v1,
+.player-library-sort-v1,
+.player-library-count-v1,
+.player-library-bottom-nav-v1{display:none}
+.player-management-formal-v1{
+  --player-accent:#7a3514;
+  --player-bg:#f7f7f5;
+  --player-line:#dededb;
+  background:var(--player-bg);
+  color:#171717;
+}
+.player-management-formal-v1 .player-library-panel{
+  position:relative;
+  display:grid;
+  grid-template-rows:auto minmax(0,1fr) auto;
+  width:100%;
+  max-width:520px;
+  height:100svh;
+  min-height:100svh;
+  margin:0 auto;
+  padding:0;
+  overflow:hidden;
+  background:var(--player-bg);
+  color:#171717;
+}
+.player-management-formal-v1 .player-library-header{
+  display:grid;
+  grid-template-columns:54px 1fr 54px;
+  align-items:center;
+  min-height:calc(82px + env(safe-area-inset-top));
+  padding:calc(env(safe-area-inset-top) + 16px) 22px 10px;
+  border:0;
+  background:transparent;
+}
+.player-management-formal-v1 .player-library-back{
+  width:42px;
+  height:42px;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:var(--player-accent);
+  pointer-events:none;
+}
+.player-management-formal-v1 .player-library-back svg{
+  width:36px;
+  height:36px;
+  overflow:visible;
+}
+.player-management-formal-v1 .player-library-back svg circle:first-child{
+  fill:#f3e9e1;
+  stroke:none;
+}
+.player-management-formal-v1 .player-library-back svg circle:not(:first-child),
+.player-management-formal-v1 .player-library-back svg path{
+  fill:var(--player-accent);
+  stroke:none;
+}
+.player-management-formal-v1 .player-library-title{
+  color:var(--player-accent);
+  font-size:25px;
+  line-height:1.15;
+  font-weight:750;
+  text-align:center;
+}
+.player-management-formal-v1 .player-library-add{
+  display:grid !important;
+  place-items:center;
+  justify-self:end;
+  width:42px;
+  height:42px;
+  padding:0 0 3px;
+  border:1.5px solid var(--player-accent);
+  border-radius:50%;
+  color:var(--player-accent);
+  background:#fff;
+  font-size:31px;
+  line-height:1;
+  font-weight:300;
+}
+.player-management-formal-v1 .player-library-main{
+  display:flex;
+  min-height:0;
+  padding:8px 16px 0;
+  flex-direction:column;
+  overflow:hidden;
+}
+.player-management-formal-v1 .player-library-search-wrap{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:10px;
+  position:relative;
+  margin:0 0 14px;
+  padding:0;
+  background:transparent;
+}
+.player-management-formal-v1 .player-library-search-icon-v1{
+  position:absolute;
+  z-index:1;
+  left:15px;
+  top:50%;
+  display:block;
+  width:23px;
+  height:23px;
+  color:#8d8d8a;
+  transform:translateY(-50%);
+  pointer-events:none;
+}
+.player-management-formal-v1 .player-library-search-icon-v1 svg{
+  width:100%;
+  height:100%;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+}
+.player-management-formal-v1 .player-library-search{
+  width:100%;
+  height:48px;
+  padding:0 14px 0 48px;
+  border:0;
+  border-radius:12px;
+  outline:none;
+  color:#171717;
+  background:#ececea;
+  font-size:16px;
+  box-shadow:none;
+  -webkit-appearance:none;
+}
+.player-management-formal-v1 .player-library-search::placeholder{color:#969692}
+.player-management-formal-v1 .player-library-sort-v1{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-width:112px;
+  height:48px;
+  gap:7px;
+  padding:0 13px;
+  border:1.5px solid var(--player-accent);
+  border-radius:11px;
+  color:var(--player-accent);
+  background:#fff;
+  font-size:15px;
+  font-weight:650;
+  white-space:nowrap;
+}
+.player-management-formal-v1 .player-library-sort-v1 svg{
+  width:23px;
+  height:23px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.player-management-formal-v1 .player-library-sort-v1.is-name-sort{background:#f7eee8}
+.player-management-formal-v1 .player-library-list{
+  flex:1 1 auto;
+  min-height:0;
+  margin:0;
+  padding:0 4px;
+  overflow-x:hidden;
+  overflow-y:auto;
+  border:1px solid #e8e8e5;
+  border-radius:16px;
+  background:#fff;
+  box-shadow:0 4px 18px rgba(0,0,0,.035);
+  -webkit-overflow-scrolling:touch;
+}
+.player-management-formal-v1 .player-management-row-v1{
+  display:grid;
+  grid-template-columns:48px minmax(72px,1fr) 54px minmax(116px,1.45fr) 18px;
+  align-items:center;
+  width:100%;
+  min-height:76px;
+  gap:10px;
+  padding:9px 10px;
+  border:0;
+  border-bottom:1px solid #e5e5e2;
+  color:#171717;
+  background:#fff;
+  text-align:left;
+}
+.player-management-formal-v1 .player-management-row-v1:last-child{border-bottom:0}
+.player-management-formal-v1 .player-management-row-v1:active{background:#f5f5f3}
+.player-management-formal-v1 .player-management-avatar-v1{
+  display:grid;
+  place-items:center;
+  width:48px;
+  height:48px;
+}
+.player-management-formal-v1 .player-management-avatar-v1 svg{width:48px;height:48px}
+.player-management-formal-v1 .player-management-avatar-v1 svg circle:first-child{
+  fill:#f3e9e1;
+  stroke:none;
+}
+.player-management-formal-v1 .player-management-avatar-v1 svg circle:not(:first-child),
+.player-management-formal-v1 .player-management-avatar-v1 svg path{
+  fill:var(--player-accent);
+  stroke:none;
+}
+.player-management-formal-v1 .player-management-name-v1{
+  min-width:0;
+  overflow:hidden;
+  color:#171717;
+  font-size:19px;
+  font-weight:650;
+  line-height:1.25;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.player-management-formal-v1 .player-management-stat-v1{
+  display:flex;
+  min-width:0;
+  flex-direction:column;
+  gap:3px;
+}
+.player-management-formal-v1 .player-management-stat-v1 small{
+  color:#777773;
+  font-size:11px;
+  line-height:1.15;
+  white-space:nowrap;
+}
+.player-management-formal-v1 .player-management-matches-v1 b{
+  color:var(--player-accent);
+  font-size:19px;
+  line-height:1.2;
+  font-weight:700;
+}
+.player-management-formal-v1 .player-management-last-v1 span{
+  overflow:hidden;
+  color:#2a2a29;
+  font-size:12px;
+  line-height:1.25;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.player-management-formal-v1 .player-management-chevron-v1{
+  width:17px;
+  height:17px;
+  fill:none;
+  stroke:var(--player-accent);
+  stroke-width:2.2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.player-management-formal-v1 .player-library-empty{
+  padding:48px 20px;
+  color:#777773;
+  font-size:14px;
+  line-height:1.7;
+  text-align:center;
+}
+.player-management-formal-v1 .player-library-count-v1{
+  display:block;
+  flex:0 0 auto;
+  padding:10px 0 9px;
+  color:#444442;
+  font-size:13px;
+  text-align:center;
+}
+.player-management-formal-v1 .player-library-count-v1::before{
+  content:"";
+  display:inline-block;
+  width:12px;
+  height:12px;
+  margin:0 6px -2px 0;
+  border:1.4px solid var(--player-accent);
+  border-radius:50%;
+}
+.player-management-formal-v1 .player-library-bottom-nav-v1{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  min-height:calc(68px + env(safe-area-inset-bottom));
+  padding:7px 8px calc(7px + env(safe-area-inset-bottom));
+  border-top:1px solid #dededb;
+  background:rgba(255,255,255,.96);
+}
+.player-management-formal-v1 .player-library-bottom-nav-v1 button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  padding:0;
+  border:0;
+  color:#8a8a87;
+  background:transparent;
+  flex-direction:column;
+  font-size:10px;
+  font-weight:550;
+  line-height:1.1;
+}
+.player-management-formal-v1 .player-library-bottom-nav-v1 svg{
+  width:27px;
+  height:27px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.player-management-formal-v1 .player-library-bottom-nav-v1 .is-current{
+  color:var(--player-accent);
+  font-weight:700;
+}
+@media(max-width:390px){
+  .player-management-formal-v1 .player-library-header{padding-left:16px;padding-right:16px}
+  .player-management-formal-v1 .player-library-main{padding-left:10px;padding-right:10px}
+  .player-management-formal-v1 .player-library-sort-v1{min-width:103px;padding:0 10px}
+  .player-management-formal-v1 .player-management-row-v1{
+    grid-template-columns:44px minmax(64px,1fr) 46px minmax(104px,1.35fr) 16px;
+    gap:7px;
+    padding-left:7px;
+    padding-right:7px;
+  }
+  .player-management-formal-v1 .player-management-avatar-v1,
+  .player-management-formal-v1 .player-management-avatar-v1 svg{width:44px;height:44px}
+  .player-management-formal-v1 .player-management-name-v1{font-size:17px}
+  .player-management-formal-v1 .player-management-last-v1 span{font-size:11px}
 }
 </style>
 </body>
