@@ -20676,7 +20676,10 @@ window.cueScoreModalDiagnosticsV159 = () => ({
       </header>
       <main class="match-detail-scroll-v1">
         <section class="match-detail-basic-v1">
-          <div class="match-detail-date-v1">${esc(date.date)} ${esc(date.time)}</div>
+          <div class="match-detail-date-v1">
+            <span>${esc(date.date)} ${esc(date.time)}</span>
+            ${tags.map(tag=>`<span>${esc(tag)}</span>`).join("")}
+          </div>
           <div class="match-detail-result-line-v2">
             <span class="match-detail-result-name-v2">${esc(p1.name||"Player1")}</span>
             <strong class="${winner===1?"winner":""}">${Number(p1.score)||0}</strong>
@@ -20684,7 +20687,6 @@ window.cueScoreModalDiagnosticsV159 = () => ({
             <strong class="${winner===2?"winner":""}">${Number(p2.score)||0}</strong>
             <span class="match-detail-result-name-v2">${esc(p2.name||"Player2")}</span>
           </div>
-          <div class="match-detail-chips-v1">${tags.map(tag=>`<span>${esc(tag)}</span>`).join("")}</div>
         </section>
         <section class="match-detail-card-v1 match-detail-summary-v1">
           ${summaryRows.map(([label,left,right])=>`<div class="match-detail-summary-row-v1"><strong class="${winner===1?"winner":""}">${esc(left)}</strong><span>${esc(label)}</span><strong class="${winner===2?"winner":""}">${esc(right)}</strong></div>`).join("")}
@@ -21355,6 +21357,11 @@ body.match-detail-visible-v1{overflow:hidden!important}
   font-size:13px;
   line-height:1.35;
   font-weight:620;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:2px 10px;
 }
 .match-detail-result-line-v2{
   margin:5px auto 0;
