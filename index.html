@@ -8128,7 +8128,7 @@ body {
             </button>
             <input id="p1Name" class="new-match-hidden-name-v1" type="text" value="プレイヤー 1" maxlength="10" />
             <button class="new-match-race-row-v2" type="button" data-race-target="p1Race" aria-label="先攻プレーヤーのRace toを設定">
-              <span>Race to</span><strong id="p1RaceDisplayV2">120</strong><span aria-hidden="true">⌄</span>
+              <span class="goal-label-v1">Race to</span><strong id="p1RaceDisplayV2">120</strong><small class="jpa-target-v1" hidden></small><span aria-hidden="true">⌄</span>
             </button>
             <input id="p1Race" class="new-match-race-input-v2" type="number" value="120" inputmode="numeric" aria-label="Player1 Race to" readonly />
             <input id="p1Skill" class="skill-range p1" type="range" min="1" max="6" step="1" value="2" aria-label="Player1 Race to 数字選択バー" />
@@ -8149,7 +8149,7 @@ body {
             </button>
             <input id="p2Name" class="new-match-hidden-name-v1" type="text" value="プレイヤー 2" maxlength="10" />
             <button class="new-match-race-row-v2" type="button" data-race-target="p2Race" aria-label="後攻プレーヤーのRace toを設定">
-              <span>Race to</span><strong id="p2RaceDisplayV2">120</strong><span aria-hidden="true">⌄</span>
+              <span class="goal-label-v1">Race to</span><strong id="p2RaceDisplayV2">120</strong><small class="jpa-target-v1" hidden></small><span aria-hidden="true">⌄</span>
             </button>
             <input id="p2Race" class="new-match-race-input-v2" type="number" value="120" inputmode="numeric" aria-label="Player2 Race to" readonly />
             <input id="p2Skill" class="skill-range p2" type="range" min="1" max="6" step="1" value="2" aria-label="Player2 Race to 数字選択バー" />
@@ -8257,7 +8257,7 @@ body {
         <button id="proGameBackBtn" class="pro-back-btn" type="button" aria-label="戻る">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8"/></svg>
         </button>
-        <div class="pro-game-title">Rotation</div>
+        <div class="pro-game-title" id="proGameTitleV1">Rotation</div>
         <div class="pro-start-time" id="proStartTime">開始時刻 --:--</div>
       </header>
 
@@ -8268,7 +8268,7 @@ body {
               <div class="pro-player-name" id="proP1Name">Player 1</div>
               <div class="pro-score" id="proP1Score">0</div>
               <div class="pro-stats">
-                Race to <span id="proP1Goal">120</span>
+                <span id="proP1GoalLabelV1">Race to</span> <span id="proP1Goal">120</span>
                 <span id="proP1Safety" hidden>0</span>
                 <span id="proP1Foul" hidden>0</span>
               </div>
@@ -8277,7 +8277,7 @@ body {
               <div class="pro-player-name" id="proP2Name">Player 2</div>
               <div class="pro-score" id="proP2Score">0</div>
               <div class="pro-stats">
-                Race to <span id="proP2Goal">120</span>
+                <span id="proP2GoalLabelV1">Race to</span> <span id="proP2Goal">120</span>
                 <span id="proP2Safety" hidden>0</span>
                 <span id="proP2Foul" hidden>0</span>
               </div>
@@ -8964,6 +8964,9 @@ body {
 
     [p1Name.value, p2Name.value] = [p2Name.value, p1Name.value];
     [p1Race.value, p2Race.value] = [p2Race.value, p1Race.value];
+    [p1Race.dataset.jpaSl, p2Race.dataset.jpaSl] = [p2Race.dataset.jpaSl || "5", p1Race.dataset.jpaSl || "5"];
+    [p1Race.dataset.rotationRace, p2Race.dataset.rotationRace] = [p2Race.dataset.rotationRace || "120", p1Race.dataset.rotationRace || "120"];
+    window.saveCueScoreJPA9SkillsV1?.({1:p1Race.dataset.jpaSl,2:p2Race.dataset.jpaSl});
     if (p1Skill && p2Skill) [p1Skill.value, p2Skill.value] = [p2Skill.value, p1Skill.value];
     [selectedRegisteredPlayer[1], selectedRegisteredPlayer[2]] = [selectedRegisteredPlayer[2], selectedRegisteredPlayer[1]];
 
@@ -8986,7 +8989,14 @@ body {
     const skill = document.getElementById(skillId);
     const goal = document.getElementById(goalId);
     if (!skill || !goal) return;
+    if (window.getCueScoreHomeSelectionV1?.().disciplineId === "jpa9") {
+      const sl = Math.min(9,Math.max(1,Number(goal.dataset.jpaSl)||5));
+      goal.value = String(({1:14,2:19,3:25,4:31,5:38,6:46,7:55,8:65,9:75})[sl]);
+      syncHomeRaceDisplaysV2();
+      return;
+    }
     goal.value = skillGoals[Number(skill.value)] || 120;
+    goal.dataset.rotationRace = goal.value;
     syncHomeRaceDisplaysV2();
   }
 
@@ -8994,11 +9004,12 @@ body {
   (() => {
     const DISCIPLINE_KEY = "cueScore.selectedDiscipline.v1";
     const RULES_KEY = "cueScore.homeRules.v2";
+    const JPA_SKILL_KEY = "cueScore.jpa9.skillLevels.v1";
     const disciplines = {
       rotation: { name: "Rotation", icon: "15", rule: "設定項目はありません" },
       "9ball": { name: "9-Ball", icon: "9", rule: "標準ルール（準備中）" },
       "10ball": { name: "10-Ball", icon: "10", rule: "標準ルール（準備中）" },
-      jpa9: { name: "JPA 9-Ball", icon: "JPA", rule: "JPAルール（準備中）" }
+      jpa9: { name: "JPA 9-Ball", icon: "JPA", rule: "SL別目標点" }
     };
 
     const safeRead = (key, fallback) => {
@@ -9019,9 +9030,17 @@ body {
     } catch (_) {
       selectedRules = { illegal:true, shootout:false };
     }
+    let savedJPA9Skills;
+    try {
+      savedJPA9Skills = JSON.parse(safeRead(JPA_SKILL_KEY, '{"1":5,"2":5}'));
+    } catch (_) {
+      savedJPA9Skills = {1:5,2:5};
+    }
 
     const renderHomePreference = () => {
       const selected = disciplines[selectedDiscipline];
+      const jpaMode = selectedDiscipline === "jpa9";
+      document.querySelector(".app")?.classList.toggle("jpa9-setup", jpaMode);
       document.querySelectorAll("[data-discipline]").forEach(button => {
         const active = button.dataset.discipline === selectedDiscipline;
         button.classList.toggle("is-selected", active);
@@ -9034,6 +9053,31 @@ body {
       const shootout = document.getElementById("cueShootoutRuleV2");
       if (illegal) illegal.checked = selectedRules.illegal !== false;
       if (shootout) shootout.checked = Boolean(selectedRules.shootout);
+      document.querySelectorAll(".cue-game-rules-v2").forEach(node => node.hidden = jpaMode);
+      const jpaTargets = {1:14,2:19,3:25,4:31,5:38,6:46,7:55,8:65,9:75};
+      [1,2].forEach(player => {
+        const row = document.querySelector(`[data-race-target="p${player}Race"]`);
+        const input = document.getElementById(`p${player}Race`);
+        const display = document.getElementById(`p${player}RaceDisplayV2`);
+        const label = row?.querySelector(".goal-label-v1");
+        const target = row?.querySelector(".jpa-target-v1");
+        if (jpaMode) {
+          const sl = Math.min(9, Math.max(1, Number(savedJPA9Skills?.[player] || input?.dataset.jpaSl || 5)));
+          if (input) {
+            if (!input.dataset.rotationRace) input.dataset.rotationRace = input.value || "120";
+            input.dataset.jpaSl = String(sl);
+            input.value = String(jpaTargets[sl]);
+          }
+          if (label) label.textContent = "Skill Level";
+          if (display) display.textContent = `SL ${sl}`;
+          if (target) { target.hidden = false; target.textContent = `目標 ${jpaTargets[sl]}点`; }
+        } else {
+          if (input) input.value = input.dataset.rotationRace || input.value || "120";
+          if (label) label.textContent = "Race to";
+          if (display && input) display.textContent = input.value || "120";
+          if (target) target.hidden = true;
+        }
+      });
     };
 
     document.getElementById("cueDisciplineSwitcherV1")?.addEventListener("click", event => {
@@ -9059,6 +9103,10 @@ body {
       recordMode: "detailed",
       rules: { ...selectedRules }
     });
+    window.saveCueScoreJPA9SkillsV1 = skills => {
+      savedJPA9Skills = {1:Number(skills?.[1])||5,2:Number(skills?.[2])||5};
+      safeWrite(JPA_SKILL_KEY, JSON.stringify(savedJPA9Skills));
+    };
     renderHomePreference();
   })();
   const MATCH_RECORDS_KEY = "rotationScoreboard.matchRecords.v1";
@@ -9066,7 +9114,18 @@ body {
   // Rotation Scoreboard Ver.6.8.0: future multi-game data foundation
   const ROTATION_APP_VERSION = "1.0";
   const ROTATION_GAME_TYPE = "rotation";
-  const ROTATION_RECORD_SCHEMA_VERSION = 3;
+  const JPA9_GAME_TYPE = "jpa9Ball";
+  const ROTATION_RECORD_SCHEMA_VERSION = 4;
+  const JPA9_SL_TARGETS = Object.freeze({1:14,2:19,3:25,4:31,5:38,6:46,7:55,8:65,9:75});
+  let activeGameTypeV1 = ROTATION_GAME_TYPE;
+  let jpa9SkillLevelsV1 = {1:5,2:5};
+  let deadBallsV1 = new Set();
+
+  function isJPA9V1() { return activeGameTypeV1 === JPA9_GAME_TYPE; }
+  function activeBallPointsV1(number) { return isJPA9V1() ? (Number(number) === 9 ? 2 : 1) : Number(number); }
+  function selectedGameTypeV1() {
+    return window.getCueScoreHomeSelectionV1?.().disciplineId === "jpa9" ? JPA9_GAME_TYPE : ROTATION_GAME_TYPE;
+  }
 
   // Ver.6.9.9: Billiard Rules Engine foundation.
   // UIはルール値を参照し、ゲーム固有条件を画面処理へ直接書かない。
@@ -9120,10 +9179,18 @@ body {
       pushOut: Object.freeze({ enabled:true, timing:"after_legal_break_before_first_shot", pocketedBallsScore:false, pocketedBallsRemainDown:true, scratchIsFoul:true, opponentDecisionRequired:true }),
       turnFlow: Object.freeze({ dryBreakRequiresTurnChange:true, scratchRequiresTurnChange:true, safetyRequiresTurnChange:true, foulRequiresTurnChange:true, missRequiresTurnChange:true }),
       actions: Object.freeze({ Shot:Object.freeze({enabled:true}), Safety:Object.freeze({enabled:true}), Foul:Object.freeze({enabled:true}), TurnChange:Object.freeze({enabled:true}) })
+    }),
+    jpa9Ball: Object.freeze({
+      id:"jpa9Ball", displayName:"JPA 9-Ball", ballCount:9,
+      scoring:Object.freeze({type:"jpaBallPoints", points:Object.freeze({1:1,2:1,3:1,4:1,5:1,6:1,7:1,8:1,9:2})}),
+      break:Object.freeze({pocketedBallsRemainDown:true,pocketedBallsScore:true,scratchKeepsPocketedBalls:true,scratchChangesTurn:true,illegalBreakEnabled:false}),
+      pushOut:Object.freeze({enabled:false}),
+      turnFlow:Object.freeze({dryBreakRequiresTurnChange:true,scratchRequiresTurnChange:true,safetyRequiresTurnChange:true,foulRequiresTurnChange:true,missRequiresTurnChange:true}),
+      actions:Object.freeze({Shot:Object.freeze({enabled:true}),Safety:Object.freeze({enabled:true}),Foul:Object.freeze({enabled:true}),TurnChange:Object.freeze({enabled:true})})
     })
   });
 
-  function getActiveRuleV699(gameType = ROTATION_GAME_TYPE) {
+  function getActiveRuleV699(gameType = activeGameTypeV1) {
     return BILLIARD_RULES[gameType] || BILLIARD_RULES.rotation;
   }
 
@@ -9455,7 +9522,10 @@ let matchRecordsRawCacheV152 = null;
     [1,2].forEach(player => {
       const input = document.getElementById(`p${player}Race`);
       const display = document.getElementById(`p${player}RaceDisplayV2`);
-      if (input && display) display.textContent = input.value || "120";
+      const jpa = window.getCueScoreHomeSelectionV1?.().disciplineId === "jpa9";
+      if (input && display) display.textContent = jpa ? `SL ${input.dataset.jpaSl || 5}` : (input.value || "120");
+      const target = document.querySelector(`[data-race-target="p${player}Race"] .jpa-target-v1`);
+      if (target && jpa) target.textContent = `目標 ${input?.value || JPA9_SL_TARGETS?.[5] || 38}点`;
     });
   }
   document.getElementById("p1Name")?.addEventListener("input", () => syncNewMatchNameV1("p1Name","p1NameDisplayV1"));
@@ -11094,8 +11164,8 @@ let matchRecordsRawCacheV152 = null;
     const scratch = Boolean(input.scratch);
     const illegalBreak = Boolean(breakRule.illegalBreakEnabled && input.illegalBreak);
     const foul = scratch || illegalBreak;
-    const scoredBalls = breakRule.pocketedBallsScore === false ? [] : [...pocketedBalls];
-    const scoreAdded = scoredBalls.reduce((sum, number) => sum + number, 0);
+    const scoredBalls = breakRule.pocketedBallsScore === false || (isJPA9V1() && scratch) ? [] : [...pocketedBalls];
+    const scoreAdded = scoredBalls.reduce((sum, number) => sum + activeBallPointsV1(number), 0);
     const changesTurn = foul && Boolean(breakRule.scratchChangesTurn);
     const pushOutRequested = Boolean(input.pushOutRequested && rule.pushOut?.enabled && !foul);
     return {
@@ -11103,6 +11173,7 @@ let matchRecordsRawCacheV152 = null;
       rack: Number(input.rackNumber) || Number(rack) || 1,
       pocketedBalls,
       scoredBalls,
+      deadBalls: isJPA9V1() && scratch ? [...pocketedBalls] : [],
       scoreAdded,
       scratch,
       illegalBreak,
@@ -11125,6 +11196,7 @@ let matchRecordsRawCacheV152 = null;
       result: decision.result,
       pocketedBalls: [...decision.pocketedBalls],
       scoredBalls: [...decision.scoredBalls],
+      deadBalls: [...(decision.deadBalls || [])],
       scoreAdded: decision.scoreAdded,
       scratch: decision.scratch,
       illegalBreak: decision.illegalBreak,
@@ -11312,7 +11384,7 @@ let matchRecordsRawCacheV152 = null;
 
   function updateBreakPromptSummaryV696() {
     const balls = [...pendingBreakBallsV696].sort((a,b) => a-b);
-    const points = balls.reduce((sum, number) => sum + number, 0);
+    const points = balls.reduce((sum, number) => sum + activeBallPointsV1(number), 0);
     if (el("breakPocketCountV696")) el("breakPocketCountV696").textContent = `${balls.length}球`;
     if (el("breakPocketPointsV696")) el("breakPocketPointsV696").textContent = `${points}点`;
     const pocketBalls = el("breakPocketBallsV1");
@@ -11385,6 +11457,12 @@ let matchRecordsRawCacheV152 = null;
     updateBreakPlayerSegmentsV1();
     const pushOutButtonV699 = el("breakPushOutToggleV695");
     if (pushOutButtonV699) pushOutButtonV699.hidden = true;
+    const ballCount = Number(getActiveRuleV699().ballCount || 15);
+    document.querySelectorAll("[data-break-ball]").forEach(button => {
+      button.hidden = Number(button.dataset.breakBall) > ballCount;
+    });
+    const illegalButton = el("breakIllegalToggleV696");
+    if (illegalButton) illegalButton.hidden = !getActiveRuleV699().break?.illegalBreakEnabled;
     overlay.setAttribute("aria-hidden", "false");
     overlay.classList.remove("hidden");
   }
@@ -11420,7 +11498,7 @@ let matchRecordsRawCacheV152 = null;
 
   function toggleBreakBallV696(number, button = null) {
     const ball = Number(number);
-    if (!Number.isInteger(ball) || ball < 1 || ball > 15 || (!pendingBreakStartsNextRackV1 && usedBalls.has(ball))) return;
+    if (!Number.isInteger(ball) || ball < 1 || ball > Number(getActiveRuleV699().ballCount || 15) || (!pendingBreakStartsNextRackV1 && usedBalls.has(ball))) return;
     if (pendingBreakNoInV702) {
       pendingBreakNoInV702 = false;
       el("breakNoInToggleV702")?.classList.remove("active-v696");
@@ -11527,21 +11605,28 @@ let matchRecordsRawCacheV152 = null;
       addItemToCurrent("/");
 
       decision.scoredBalls.forEach(number => {
-        scores[player] += number;
-        rackScores[player] += number;
-        currentRun[player] += number;
+        const points = activeBallPointsV1(number);
+        scores[player] += points;
+        rackScores[player] += points;
+        currentRun[player] += points;
         if (currentRun[player] > maxRun[player]) maxRun[player] = currentRun[player];
         if (decision.ballsRemainDown) usedBalls.add(number);
         // Legacy analysis only. The common log stores these balls inside one Break event.
         recordAnalysisEventV60("ball_pocketed", {
           player,
           ball: number,
-          points: number,
+          points,
           rackPocketCount: usedBalls.size,
           runAfter: currentRun[player],
           source: "break_prompt"
         }, { skipCommon: true });
       });
+      if (isJPA9V1() && decision.scratch) {
+        decision.pocketedBalls.forEach(number => {
+          usedBalls.add(number);
+          deadBallsV1.add(number);
+        });
+      }
 
       recordBreakEventV700(decision);
       armPushOutWindowV730(decision);
@@ -11596,7 +11681,15 @@ let matchRecordsRawCacheV152 = null;
         turnLockReasonV62 = "dry_break";
       }
 
-      if (usedBalls.size === Number(getActiveRuleV699().ballCount || 15)) {
+      if (isJPA9V1() && (decision.foul || decision.pocketedBalls.length === 0)) {
+        endCurrentRun(player);
+        current = player === 1 ? 2 : 1;
+        if (current === startingPlayer) { inning++; forceNewRow = true; }
+        foulLocked = false;
+        turnLockReasonV62 = null;
+      }
+
+      if ((isJPA9V1() && !decision.foul && decision.pocketedBalls.includes(9)) || usedBalls.size === Number(getActiveRuleV699().ballCount || 15)) {
         rackEnded = true;
         foulLocked = false;
         nextBreakPlayer = player;
@@ -11856,6 +11949,7 @@ let matchRecordsRawCacheV152 = null;
 
   function snapshot() {
     return {
+      activeGameTypeV1, jpa9SkillLevelsV1:{...jpa9SkillLevelsV1}, deadBallsV1:[...deadBallsV1],
       current, startingPlayer, goals:{...goals}, rack, inning,
       scores:{...scores}, rackScores:{...rackScores}, breakCount:{...breakCount}, currentRun:{...currentRun}, maxRun:{...maxRun},
       safety:{...safety}, fouls:{...fouls}, misses:{...misses},
@@ -11878,6 +11972,9 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function restore(state) {
+    activeGameTypeV1 = state.activeGameTypeV1 || ROTATION_GAME_TYPE;
+    jpa9SkillLevelsV1 = state.jpa9SkillLevelsV1 ? {...state.jpa9SkillLevelsV1} : {1:5,2:5};
+    deadBallsV1 = new Set(state.deadBallsV1 || []);
     current = state.current;
     startingPlayer = state.startingPlayer;
     goals = {...state.goals};
@@ -12083,6 +12180,7 @@ let matchRecordsRawCacheV152 = null;
       rack++;
       rackScores = {1:0, 2:0};
       usedBalls = new Set();
+      deadBallsV1 = new Set();
       rackEnded = false;
       foulLocked = false;
       turnLockReasonV62 = null;
@@ -12306,27 +12404,28 @@ let matchRecordsRawCacheV152 = null;
     if (gameEnded || rackEnded || foulLocked || isReviewLocked() || usedBalls.has(number)) return;
     if (pushOutStateV730?.stage === "available") clearPushOutWindowV730();
     saveAndDo(() => {
+      const points = activeBallPointsV1(number);
       if (pendingSafetyV62 && current === pendingSafetyV62.opponent) {
         resolvePendingSafetyV62("failed", "opponent_scored", current);
       }
       if (pendingFoulV63 && current === pendingFoulV63.opponent) {
-        resolvePendingFoulV63("opponent_scored", "ball_pocketed", current, number);
+        resolvePendingFoulV63("opponent_scored", "ball_pocketed", current, points);
       }
-      scores[current] += number;
-      rackScores[current] += number;
-      currentRun[current] += number;
+      scores[current] += points;
+      rackScores[current] += points;
+      currentRun[current] += points;
       if (currentRun[current] > maxRun[current]) maxRun[current] = currentRun[current];
       usedBalls.add(number);
       addItemToCurrent(number);
       recordAnalysisEventV60("ball_pocketed", {
         player: current,
         ball: number,
-        points: number,
+        points,
         rackPocketCount: usedBalls.size,
         runAfter: currentRun[current]
       });
 
-      if (usedBalls.size >= activeBallCountV105) {
+      if ((isJPA9V1() && number === 9) || usedBalls.size >= activeBallCountV105) {
         rackEnded = true;
         foulLocked = false;
         nextBreakPlayer = current;
@@ -12401,8 +12500,15 @@ let matchRecordsRawCacheV152 = null;
       });
       beginPendingSafetyV62(current);
       endCurrentRun(current);
-      foulLocked = true;
-      turnLockReasonV62 = "safety";
+      if (isJPA9V1()) {
+        current = current === 1 ? 2 : 1;
+        if (current === startingPlayer) { inning++; forceNewRow = true; }
+        foulLocked = false;
+        turnLockReasonV62 = null;
+      } else {
+        foulLocked = true;
+        turnLockReasonV62 = "safety";
+      }
     });
   }
 
@@ -12429,8 +12535,15 @@ let matchRecordsRawCacheV152 = null;
       });
       beginPendingFoulV63(current);
       endCurrentRun(current);
-      foulLocked = true;
-      turnLockReasonV62 = "foul";
+      if (isJPA9V1()) {
+        current = current === 1 ? 2 : 1;
+        if (current === startingPlayer) { inning++; forceNewRow = true; }
+        foulLocked = false;
+        turnLockReasonV62 = null;
+      } else {
+        foulLocked = true;
+        turnLockReasonV62 = "foul";
+      }
     });
   }
 
@@ -12901,12 +13014,18 @@ let matchRecordsRawCacheV152 = null;
 
   function startProGame() {
     markSelectedPlayersUsed();
+    activeGameTypeV1 = selectedGameTypeV1();
+    const jpaModeV1 = isJPA9V1();
     const p1Name = limitPlayerName(el("p1Name")?.value.trim()) || "Player 1";
     const p2Name = limitPlayerName(el("p2Name")?.value.trim()) || "Player 2";
     if (el("p1Name")) el("p1Name").value = p1Name;
     if (el("p2Name")) el("p2Name").value = p2Name;
-    const p1Goal = Number(el("p1Race")?.value || 120);
-    const p2Goal = Number(el("p2Race")?.value || 120);
+    jpa9SkillLevelsV1 = {
+      1:Math.min(9,Math.max(1,Number(el("p1Race")?.dataset.jpaSl || 5))),
+      2:Math.min(9,Math.max(1,Number(el("p2Race")?.dataset.jpaSl || 5)))
+    };
+    const p1Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[1]] : Number(el("p1Race")?.value || 120);
+    const p2Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[2]] : Number(el("p2Race")?.value || 120);
     currentMatchCategoryV38 = el("matchCategoryV38")?.value || "Free";
     currentMatchSeasonV38 = String(el("matchSeasonV38")?.value || "").trim().slice(0, 30);
 
@@ -12930,6 +13049,7 @@ let matchRecordsRawCacheV152 = null;
     fouls = {1:0, 2:0};
     misses = {1:0, 2:0};
     usedBalls = new Set();
+    deadBallsV1 = new Set();
     rows = [];
     undoHistory = [];
     rackEnded = false;
@@ -12979,6 +13099,8 @@ let matchRecordsRawCacheV152 = null;
     recordAnalysisEventV60("match_started", {
       player: startingPlayer,
       startingPlayer,
+      gameType: activeGameTypeV1,
+      skillLevels: isJPA9V1() ? {...jpa9SkillLevelsV1} : null,
       goals: {1:p1Goal, 2:p2Goal},
       category: currentMatchCategoryV38,
       season: currentMatchSeasonV38,
@@ -12995,6 +13117,11 @@ let matchRecordsRawCacheV152 = null;
     el("proP1LogName").textContent = p1Name;
     el("proP2LogName").textContent = p2Name;
     el("proStartTime").textContent = formatStartTime(new Date());
+    el("proGameTitleV1").textContent = jpaModeV1 ? "JPA 9-Ball" : "Rotation";
+    el("proP1GoalLabelV1").textContent = jpaModeV1 ? `SL ${jpa9SkillLevelsV1[1]} · 目標` : "Race to";
+    el("proP2GoalLabelV1").textContent = jpaModeV1 ? `SL ${jpa9SkillLevelsV1[2]} · 目標` : "Race to";
+    proGameScreen.setAttribute("aria-label", jpaModeV1 ? "JPA 9-Ball game" : "Rotation game");
+    proGameScreen.classList.toggle("jpa9-game-v1", jpaModeV1);
 
     app.classList.remove("player-info-mode");
     app.classList.add("pro-game-mode");
@@ -13906,8 +14033,17 @@ let matchRecordsRawCacheV152 = null;
     activeRaceInputV1 = input;
     const picker = el("newMatchRacePickerV1");
     if (!picker) return;
+    const jpa = window.getCueScoreHomeSelectionV1?.().disciplineId === "jpa9";
+    const options = picker.querySelector(".new-match-race-options-v1");
+    if (jpa && options) {
+      options.innerHTML = Object.entries(JPA9_SL_TARGETS).map(([sl,target]) => `<button type="button" data-race-value="${sl}">SL ${sl}<small>${target}点</small></button>`).join("");
+      el("newMatchRacePickerTitleV1").textContent = "Skill Levelを選択";
+    } else if (options && !options.querySelector('[data-race-value="61"]')) {
+      options.innerHTML = [61,90,120,150,180,240,300].map(value=>`<button type="button" data-race-value="${value}">${value}</button>`).join("") + '<button type="button" data-race-value="other">その他</button>';
+      el("newMatchRacePickerTitleV1").textContent = "Race toを選択";
+    }
     picker.querySelectorAll("[data-race-value]").forEach(button => {
-      button.classList.toggle("is-selected", Number(button.dataset.raceValue) === Number(input.value));
+      button.classList.toggle("is-selected", Number(button.dataset.raceValue) === Number(jpa ? input.dataset.jpaSl : input.value));
     });
     el("newMatchRaceCustomV1")?.classList.add("hidden");
     picker.classList.remove("hidden");
@@ -13916,12 +14052,28 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function applyRaceValueV1(value) {
+    const jpa = window.getCueScoreHomeSelectionV1?.().disciplineId === "jpa9";
+    if (jpa) {
+      const sl = Math.min(9,Math.max(1,Number(value)||0));
+      if (!activeRaceInputV1 || !JPA9_SL_TARGETS[sl]) return;
+      activeRaceInputV1.dataset.jpaSl = String(sl);
+      activeRaceInputV1.value = String(JPA9_SL_TARGETS[sl]);
+      window.saveCueScoreJPA9SkillsV1?.({
+        1:el("p1Race")?.dataset.jpaSl || 5,
+        2:el("p2Race")?.dataset.jpaSl || 5
+      });
+      activeRaceInputV1.dispatchEvent(new Event("change", {bubbles:true}));
+      syncHomeRaceDisplaysV2();
+      closeRacePickerV1();
+      return;
+    }
     const normalized = normalizeRaceGoalV109(value);
     if (!activeRaceInputV1 || !normalized) {
       showToast("Race to", "1以上の整数を入力してください");
       return;
     }
     activeRaceInputV1.value = String(normalized);
+    activeRaceInputV1.dataset.rotationRace = String(normalized);
     const skill = el(activeRaceInputV1.id === "p1Race" ? "p1Skill" : "p2Skill");
     if (skill) skill.value = String(raceValueToStep(normalized));
     activeRaceInputV1.dispatchEvent(new Event("change", { bubbles:true }));
@@ -14698,7 +14850,7 @@ let matchRecordsRawCacheV152 = null;
     const progress = buildScoreProgress();
     const record = {
       id:stableRecordId,
-      gameType: ROTATION_GAME_TYPE,
+      gameType: activeGameTypeV1,
       recordSchemaVersion: ROTATION_RECORD_SCHEMA_VERSION,
       createdByAppVersion: ROTATION_APP_VERSION,
       playedAt:endedAt,
@@ -14707,6 +14859,7 @@ let matchRecordsRawCacheV152 = null;
       winner,
       inning,
       rack,
+      jpa9: isJPA9V1() ? {skillLevels:{...jpa9SkillLevelsV1},targetPoints:{...goals},deadBalls:[...deadBallsV1]} : null,
       category: currentMatchCategoryV38,
       season: currentMatchSeasonV38,
       memo: currentMatchMemoV841,
@@ -14743,8 +14896,8 @@ let matchRecordsRawCacheV152 = null;
         manualMissesMatchEvents: Number(stats.manualMisses[1] || 0) === countManualMissesFromEventsV107(1) && Number(stats.manualMisses[2] || 0) === countManualMissesFromEventsV107(2)
       },
       players:{
-        1:{name:playerName(1),registeredPlayerId:selectedRegisteredPlayer[1]||null,goal:goals[1],score:scores[1],safety:safety[1],fouls:fouls[1],breaks:breakCount[1],maxRun:stats.maxRun[1],share:stats.share[1],misses:stats.manualMisses[1],pocketCount:stats.pocketCount[1],shotRate:stats.shotRate[1]},
-        2:{name:playerName(2),registeredPlayerId:selectedRegisteredPlayer[2]||null,goal:goals[2],score:scores[2],safety:safety[2],fouls:fouls[2],breaks:breakCount[2],maxRun:stats.maxRun[2],share:stats.share[2],misses:stats.manualMisses[2],pocketCount:stats.pocketCount[2],shotRate:stats.shotRate[2]}
+        1:{name:playerName(1),registeredPlayerId:selectedRegisteredPlayer[1]||null,goal:goals[1],skillLevel:isJPA9V1()?jpa9SkillLevelsV1[1]:null,score:scores[1],safety:safety[1],fouls:fouls[1],breaks:breakCount[1],maxRun:stats.maxRun[1],share:stats.share[1],misses:stats.manualMisses[1],pocketCount:stats.pocketCount[1],shotRate:stats.shotRate[1]},
+        2:{name:playerName(2),registeredPlayerId:selectedRegisteredPlayer[2]||null,goal:goals[2],skillLevel:isJPA9V1()?jpa9SkillLevelsV1[2]:null,score:scores[2],safety:safety[2],fouls:fouls[2],breaks:breakCount[2],maxRun:stats.maxRun[2],share:stats.share[2],misses:stats.manualMisses[2],pocketCount:stats.pocketCount[2],shotRate:stats.shotRate[2]}
       }
     };
     record.analysis.report = buildMatchAnalysisV64(
@@ -23970,6 +24123,28 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .analytics-metric-delta-v1.down{
   color:#c72c2c!important;
 }
+
+/* CueScore JPA 9-Ball: shared Home/New Match presentation */
+.jpa-target-v1{
+  margin-left:auto;
+  color:var(--cue-foundation-muted,#777775);
+  font-size:11px;
+  font-weight:650;
+  white-space:nowrap;
+}
+.jpa9-setup .new-match-race-row-v2{
+  grid-template-columns:auto auto 1fr auto;
+  column-gap:8px;
+}
+.new-match-race-options-v1 button small{
+  display:block;
+  margin-top:3px;
+  font-size:9px;
+  line-height:1.15;
+  font-weight:600;
+  opacity:.66;
+}
+.new-match-race-options-v1 button.is-selected small{opacity:.82}
 </style>
 </body>
 </html>
