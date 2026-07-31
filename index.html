@@ -22682,6 +22682,406 @@ body.match-detail-visible-v1{overflow:hidden!important}
   });
 })();
 </script>
+<style>
+/* CueScore Settings v1.0: formal shared-app layout */
+.app.settings-mode {
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 100dvh !important;
+  height: 100dvh !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: #f7f7f5 !important;
+  color: #171717 !important;
+}
+.app.settings-mode > .settings-screen {
+  display: block !important;
+}
+.settings-screen.settings-formal-v1 {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 120 !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  overflow: hidden !important;
+  background: #f7f7f5 !important;
+  color: #171717 !important;
+}
+.settings-screen.settings-formal-v1 > .settings-header,
+.settings-screen.settings-formal-v1 > .settings-content {
+  display: none !important;
+}
+.settings-formal-shell-v1 {
+  --settings-accent: #813715;
+  --settings-line: #e2e0dc;
+  --settings-muted: #777;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  width: 100%;
+  height: 100%;
+  background: #f7f7f5;
+  color: #171717;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+}
+.settings-formal-scroll-v1 {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: max(18px, env(safe-area-inset-top)) 16px 24px;
+  scrollbar-width: none;
+}
+.settings-formal-scroll-v1::-webkit-scrollbar { display: none; }
+.settings-formal-header-v1 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 82px;
+  padding: 12px 64px 8px;
+}
+.settings-formal-title-v1 {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--settings-accent);
+  font-size: clamp(28px, 7.5vw, 36px);
+  font-weight: 760;
+  letter-spacing: -.025em;
+}
+.settings-formal-title-v1 svg {
+  width: 34px;
+  height: 34px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+.settings-formal-menu-v1 {
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid rgba(129,55,21,.55);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--settings-accent);
+  font-size: 28px;
+  line-height: 1;
+  transform: translateY(-50%);
+}
+.settings-formal-menu-v1[aria-disabled="true"] { cursor: default; }
+.settings-formal-main-v1 {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100% - 82px);
+}
+.settings-formal-section-title-v1 {
+  margin: 34px 6px 14px;
+  color: var(--settings-accent);
+  font-size: 20px;
+  font-weight: 740;
+}
+.settings-data-card-v1 {
+  overflow: hidden;
+  border: 1px solid var(--settings-line);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(30,25,20,.045);
+}
+.settings-data-row-v1 {
+  display: grid;
+  grid-template-columns: 50px minmax(0,1fr) auto 18px;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  min-height: 92px;
+  padding: 14px 16px;
+  border: 0;
+  background: transparent;
+  color: #171717;
+  text-align: left;
+  font: inherit;
+}
+.settings-data-row-v1 + .settings-data-row-v1 {
+  border-top: 1px solid var(--settings-line);
+}
+.settings-data-icon-v1 {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #f3eae5;
+  color: var(--settings-accent);
+}
+.settings-data-icon-v1 svg {
+  width: 27px;
+  height: 27px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.settings-data-copy-v1 { min-width: 0; }
+.settings-data-copy-v1 strong {
+  display: block;
+  margin-bottom: 4px;
+  overflow: hidden;
+  color: #171717;
+  font-size: 18px;
+  font-weight: 720;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.settings-data-copy-v1 span {
+  display: block;
+  overflow: hidden;
+  color: var(--settings-muted);
+  font-size: 13px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.settings-cloud-state-v1 {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #198c2c;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.settings-cloud-state-v1.is-muted { color: #8a8a86; }
+.settings-cloud-state-v1.is-warning { color: #9b6a18; }
+.settings-cloud-state-v1 svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+.settings-data-chevron-v1 {
+  color: var(--settings-accent);
+  font-size: 28px;
+  font-weight: 300;
+}
+.settings-formal-spacer-v1 { flex: 1 1 120px; min-height: 100px; }
+.settings-app-footer-v1 {
+  padding: 0 6px 6px;
+}
+.settings-app-brand-v1 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 10px 0 8px;
+}
+.settings-app-brand-v1 strong {
+  color: var(--settings-accent);
+  font-size: 20px;
+}
+.settings-app-brand-v1 span {
+  color: var(--settings-muted);
+  font-size: 14px;
+}
+.settings-info-link-v1 {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  align-items: center;
+  width: 100%;
+  min-height: 42px;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid var(--settings-line);
+  background: transparent;
+  color: #343434;
+  text-align: left;
+  font: inherit;
+}
+.settings-info-link-v1[aria-disabled="true"] {
+  color: #8d8d89;
+  cursor: default;
+}
+.settings-info-link-v1 span:last-child { color: #aaa; font-size: 21px; }
+.settings-copyright-v1 {
+  padding-top: 10px;
+  color: #999;
+  font-size: 11px;
+  text-align: center;
+}
+.settings-bottom-nav-v1 {
+  display: grid;
+  grid-template-columns: repeat(5,minmax(0,1fr));
+  min-height: calc(72px + env(safe-area-inset-bottom));
+  padding: 8px 6px max(8px, env(safe-area-inset-bottom));
+  border-top: 1px solid #deddda;
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.settings-bottom-nav-v1 button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0;
+  padding: 2px;
+  border: 0;
+  background: transparent;
+  color: #989894;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 650;
+}
+.settings-bottom-nav-v1 button.is-current { color: var(--settings-accent); }
+.settings-bottom-nav-v1 svg {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media (max-width: 370px) {
+  .settings-formal-scroll-v1 { padding-left: 12px; padding-right: 12px; }
+  .settings-data-row-v1 { grid-template-columns: 44px minmax(0,1fr) auto 14px; gap: 9px; padding-left: 12px; padding-right: 12px; }
+  .settings-data-icon-v1 { width: 42px; height: 42px; }
+  .settings-data-copy-v1 strong { font-size: 16px; }
+  .settings-data-copy-v1 span { font-size: 11.5px; }
+  .settings-cloud-state-v1 { font-size: 12px; }
+}
+</style>
+
+<script>
+/* CueScore Settings v1.0: formal layout with existing data actions. */
+(() => {
+  const screen = document.getElementById("settingsScreen");
+  if (!screen || screen.dataset.formalSettingsV1 === "ready") return;
+  screen.dataset.formalSettingsV1 = "ready";
+  screen.classList.add("settings-formal-v1");
+
+  const icon = {
+    gear: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.3 13.5a7.6 7.6 0 0 0 0-3l1.8-1.4-2-3.4-2.3.9a7.4 7.4 0 0 0-2.6-1.5L13.8 2h-3.7l-.4 3.1a7.4 7.4 0 0 0-2.6 1.5l-2.3-.9-2 3.4 1.8 1.4a7.6 7.6 0 0 0 0 3l-1.8 1.4 2 3.4 2.3-.9a7.4 7.4 0 0 0 2.6 1.5l.4 3.1h3.7l.4-3.1a7.4 7.4 0 0 0 2.6-1.5l2.3.9 2-3.4Z"/></svg>',
+    cloud: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.2 18.5h11.2a4.1 4.1 0 0 0 .4-8.2A6 6 0 0 0 6.4 8.7a4.9 4.9 0 0 0-.2 9.8Z"/></svg>',
+    csv: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5h8l4 4v15H6Z"/><path d="M14 2.5v4h4"/><path d="M8.5 16.5h7M8.5 13h7M8.5 9.5H12"/></svg>',
+    restore: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.3 8.2H2.5V5.4"/><path d="M3 8a9 9 0 1 1-.2 8.3"/><path d="M12 7.5V12l3.2 2"/></svg>',
+    check: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.6 2.7L16.5 9"/></svg>',
+    home: '<svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.25A1.25 1.25 0 0 1 18.75 20H5.25A1.25 1.25 0 0 1 4 18.75Z"/><path d="M9.25 20v-6.5h5.5V20"/></svg>',
+    history: '<svg viewBox="0 0 24 24"><path d="M5.25 7.5A8 8 0 1 1 4 12"/><path d="M5.25 3.75V7.5H9"/><path d="M12 7.75V12l3 1.75"/></svg>',
+    analytics: '<svg viewBox="0 0 24 24"><path d="M4.5 19.5V14h3v5.5M10.5 19.5V9h3v10.5M16.5 19.5V4.5h3v15"/><path d="M3 19.5h18"/></svg>',
+    player: '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25"/><path d="M5.5 20c.55-4.15 2.7-6.25 6.5-6.25s5.95 2.1 6.5 6.25"/></svg>'
+  };
+  const navButton = (key, label, svg, current = false) =>
+    `<button type="button" data-settings-nav="${key}" class="${current ? "is-current" : ""}" ${current ? 'aria-current="page"' : ""}>${svg}<span>${label}</span></button>`;
+
+  const root = document.createElement("div");
+  root.className = "settings-formal-shell-v1";
+  root.innerHTML = `
+    <div class="settings-formal-scroll-v1">
+      <header class="settings-formal-header-v1">
+        <div class="settings-formal-title-v1">${icon.gear}<span>Settings</span></div>
+        <button class="settings-formal-menu-v1" type="button" aria-label="オプション" aria-disabled="true">…</button>
+      </header>
+      <main class="settings-formal-main-v1">
+        <h1 class="settings-formal-section-title-v1">データ管理</h1>
+        <section class="settings-data-card-v1" aria-label="データ管理">
+          <button class="settings-data-row-v1" type="button" data-settings-action="cloud">
+            <span class="settings-data-icon-v1">${icon.cloud}</span>
+            <span class="settings-data-copy-v1"><strong>クラウド同期</strong><span>データをクラウドと同期します</span></span>
+            <span class="settings-cloud-state-v1 is-muted" id="settingsFormalCloudStateV1">${icon.check}<span>未設定</span></span>
+            <span class="settings-data-chevron-v1" aria-hidden="true">›</span>
+          </button>
+          <button class="settings-data-row-v1" type="button" data-settings-action="csv">
+            <span class="settings-data-icon-v1">${icon.csv}</span>
+            <span class="settings-data-copy-v1"><strong>CSVエクスポート</strong><span>対戦履歴やプレーヤーデータを出力します</span></span>
+            <span></span><span class="settings-data-chevron-v1" aria-hidden="true">›</span>
+          </button>
+          <button class="settings-data-row-v1" type="button" data-settings-action="restore">
+            <span class="settings-data-icon-v1">${icon.restore}</span>
+            <span class="settings-data-copy-v1"><strong>データ復元</strong><span>バックアップからデータを復元します</span></span>
+            <span></span><span class="settings-data-chevron-v1" aria-hidden="true">›</span>
+          </button>
+        </section>
+        <div class="settings-formal-spacer-v1" aria-hidden="true"></div>
+        <footer class="settings-app-footer-v1">
+          <div class="settings-app-brand-v1"><strong>CueScore</strong><span class="settings-version">Version 1.0</span></div>
+          <button class="settings-info-link-v1" type="button" aria-disabled="true"><span>利用規約</span><span>›</span></button>
+          <button class="settings-info-link-v1" type="button" aria-disabled="true"><span>プライバシーポリシー</span><span>›</span></button>
+          <button class="settings-info-link-v1" type="button" aria-disabled="true"><span>ライセンス</span><span>›</span></button>
+          <div class="settings-copyright-v1">© ${new Date().getFullYear()} CueScore Apps</div>
+        </footer>
+      </main>
+    </div>
+    <nav class="settings-bottom-nav-v1" aria-label="メインナビゲーション">
+      ${navButton("home","Home",icon.home)}
+      ${navButton("history","対戦履歴",icon.history)}
+      ${navButton("analytics","分析",icon.analytics)}
+      ${navButton("player","プレーヤー",icon.player)}
+      ${navButton("settings","設定",icon.gear,true)}
+    </nav>`;
+  screen.appendChild(root);
+
+  const cloudState = root.querySelector("#settingsFormalCloudStateV1");
+  function readJson(key, fallback = null) {
+    try { return JSON.parse(localStorage.getItem(key) || "null") ?? fallback; }
+    catch (_) { return fallback; }
+  }
+  function renderCloudState() {
+    const config = readJson("rotationScoreboard.supabaseConfig.v1", {});
+    const deviceId = String(localStorage.getItem("rotationScoreboard.cloudDeviceId.v1") || "").trim();
+    const sync = readJson("rotationScoreboard.cloudSyncState.v1", {});
+    const pending = readJson("rotationScoreboard.cloudPendingSave.v1", null);
+    const label = cloudState?.querySelector("span");
+    if (!cloudState || !label) return;
+    cloudState.classList.remove("is-muted", "is-warning");
+    if (pending) {
+      label.textContent = "要確認";
+      cloudState.classList.add("is-warning");
+    } else if (!navigator.onLine) {
+      label.textContent = "オフライン";
+      cloudState.classList.add("is-muted");
+    } else if (config?.projectUrl && config?.publishableKey && deviceId.length >= 12 && (Number(sync?.revision) > 0 || sync?.payloadHash)) {
+      label.textContent = "正常";
+    } else if (config?.projectUrl && config?.publishableKey && deviceId.length >= 12) {
+      label.textContent = "設定済み";
+      cloudState.classList.add("is-muted");
+    } else {
+      label.textContent = "未設定";
+      cloudState.classList.add("is-muted");
+    }
+  }
+
+  document.getElementById("settingsBtn")?.addEventListener("click", () => {
+    renderCloudState();
+    root.querySelector(".settings-formal-scroll-v1")?.scrollTo(0, 0);
+  });
+  window.addEventListener("online", renderCloudState);
+  window.addEventListener("offline", renderCloudState);
+  root.addEventListener("click", event => {
+    const action = event.target.closest("[data-settings-action]")?.dataset.settingsAction;
+    if (action === "cloud") document.getElementById("settingsOpenCloudBtn")?.click();
+    if (action === "csv") document.getElementById("exportCsvBtn")?.click();
+    if (action === "restore") document.getElementById("importBackupBtn")?.click();
+
+    const nav = event.target.closest("[data-settings-nav]")?.dataset.settingsNav;
+    if (!nav || nav === "settings") return;
+    document.getElementById("settingsBackBtn")?.click();
+    if (nav === "home") return;
+    if (nav === "history") document.getElementById("recordsBtn")?.click();
+    if (nav === "analytics") document.getElementById("openRankingsBtn")?.click();
+    if (nav === "player") document.getElementById("playerManagementBtn")?.click();
+  });
+  renderCloudState();
+})();
+</script>
 </body>
 </html>
 
