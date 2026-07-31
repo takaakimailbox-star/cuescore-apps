@@ -23082,6 +23082,174 @@ body.match-detail-visible-v1{overflow:hidden!important}
   renderCloudState();
 })();
 </script>
+<style>
+/* CueScore Analytics v1.0: formal player analysis layout */
+.app.rankings-mode{width:100%!important;max-width:none!important;height:100dvh!important;min-height:100dvh!important;padding:0!important;overflow:hidden!important;background:#f7f7f5!important;color:#171717!important}
+.app.rankings-mode>.rankings-screen{display:block!important}
+.rankings-screen.analytics-formal-v1{position:fixed!important;inset:0!important;z-index:120!important;width:100%!important;height:100dvh!important;overflow:hidden!important;background:#f7f7f5!important;color:#171717!important}
+.rankings-screen.analytics-formal-v1>.rankings-header,.rankings-screen.analytics-formal-v1>.rankings-content{display:none!important}
+.analytics-shell-v1{--ac:#813715;--line:#e0ded9;--muted:#767672;display:grid;grid-template-rows:minmax(0,1fr) auto;height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif}
+.analytics-scroll-v1{min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:max(16px,env(safe-area-inset-top)) 14px 26px;scrollbar-width:none}.analytics-scroll-v1::-webkit-scrollbar{display:none}
+.analytics-brand-v1{text-align:center;color:var(--ac);font-size:20px;font-weight:760;letter-spacing:-.02em}
+.analytics-head-v1{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:14px 0 14px}.analytics-head-v1 h1{margin:0;font-size:36px;line-height:1;font-weight:820;letter-spacing:-.04em}.analytics-head-v1 p{margin:8px 0 0;color:#4f4f4c;font-size:14px}
+.analytics-cloud-v1{display:flex;align-items:center;gap:5px;flex:none;color:#168a30;font-size:12px;font-weight:700}.analytics-cloud-v1.is-muted{color:#858581}.analytics-cloud-v1.is-warning{color:#9b6a18}.analytics-cloud-v1 svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8}
+.analytics-controls-v1{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px}.analytics-selector-v1{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.25fr);overflow:hidden;border:1px solid var(--line);border-radius:12px;background:#fff}
+.analytics-field-v1{position:relative;display:flex;flex-direction:column;justify-content:center;min-width:0;min-height:62px;padding:9px 28px 9px 13px}.analytics-field-v1+.analytics-field-v1{border-left:1px solid var(--line)}.analytics-field-v1 label{font-size:11px;color:#555}.analytics-field-v1 select,.analytics-field-v1 button{width:100%;padding:0;border:0;background:transparent;color:#171717;font:inherit;font-size:14px;font-weight:650;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;-webkit-appearance:none;appearance:none}.analytics-field-v1::after{content:"⌄";position:absolute;right:10px;bottom:14px;color:var(--ac)}
+.analytics-filter-v1{display:flex;align-items:center;gap:7px;min-height:62px;padding:0 14px;border:1px solid var(--ac);border-radius:12px;background:#fff;color:var(--ac);font:inherit;font-size:14px;font-weight:720}.analytics-filter-v1 svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8}
+.analytics-compare-v1{display:grid;grid-template-columns:94px 1fr;align-items:center;margin-top:9px;border:1px solid var(--line);border-radius:11px;background:#fff;overflow:hidden}.analytics-compare-v1 span{padding:11px 13px;font-size:13px}.analytics-compare-v1 select{min-width:0;padding:11px 30px 11px 13px;border:0;border-left:1px solid var(--line);background:#fff;color:#171717;font:inherit;font-size:13px;-webkit-appearance:auto}
+.analytics-target-v1{display:flex;align-items:center;gap:7px;margin:11px 1px;color:#168a30;font-size:12px;line-height:1.4}.analytics-target-v1[hidden]{display:none!important}.analytics-target-v1 svg{width:16px;height:16px;flex:none;fill:currentColor}
+.analytics-summary-head-v1,.analytics-trend-head-v1{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:16px 1px 9px}.analytics-summary-head-v1 h2,.analytics-trend-head-v1 h2{margin:0;font-size:19px}.analytics-summary-head-v1 p{margin:0;color:#555;font-size:11px}.analytics-summary-count-v1{color:#168a30!important;font-size:16px!important}
+.analytics-metrics-v1{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.analytics-metric-v1{min-width:0;padding:12px 7px 10px;border:1px solid var(--line);border-radius:11px;background:#fff;text-align:center}.analytics-metric-v1:nth-child(n+5){grid-column:span 1}.analytics-metric-v1:nth-child(5){grid-column:1/span 1}.analytics-metric-v1:nth-child(6){grid-column:2/span 1}.analytics-metric-v1:nth-child(7){grid-column:3/span 1}.analytics-metric-name-v1{min-height:30px;font-size:11px;font-weight:720}.analytics-metric-value-v1{margin-top:5px;color:#171717;font-size:20px;font-weight:780;white-space:nowrap}.analytics-metric-value-v1 svg{width:21px;height:21px;margin-right:4px;vertical-align:-4px;color:var(--ac);fill:none;stroke:currentColor;stroke-width:1.8}.analytics-metric-delta-v1{min-height:28px;margin-top:6px;color:#858581;font-size:10px;line-height:1.35}.analytics-metric-delta-v1.up{color:#168a30}.analytics-metric-delta-v1.down{color:#d02b2b}
+.analytics-period-note-v1{margin:8px 1px 0;color:#777;font-size:10px}
+.analytics-card-v1{border:1px solid var(--line);border-radius:13px;background:#fff;box-shadow:0 5px 18px rgba(30,25,20,.035)}
+.analytics-tabs-v1{display:grid;grid-template-columns:repeat(3,1fr);margin-bottom:8px;border:1px solid var(--line);border-radius:999px;overflow:hidden}.analytics-tabs-v1 button{min-height:34px;padding:5px;border:0;border-right:1px solid var(--line);background:#fff;color:#171717;font:inherit;font-size:11px}.analytics-tabs-v1 button:last-child{border-right:0}.analytics-tabs-v1 button.is-active{background:var(--ac);color:#fff;font-weight:720}
+.analytics-chart-card-v1{padding:12px}.analytics-chart-v1{display:block;width:100%;height:165px}.analytics-chart-empty-v1{display:grid;place-items:center;height:150px;color:#858581;font-size:13px}.analytics-chart-note-v1{margin:6px 1px 0;color:#666;font-size:10px}
+.analytics-ai-v1{margin-top:16px;padding:13px}.analytics-ai-v1 h2{margin:0 0 10px;font-size:18px}.analytics-ai-grid-v1{display:grid;grid-template-columns:1fr 1fr;gap:0}.analytics-ai-column-v1{min-width:0;padding:3px 12px}.analytics-ai-column-v1:first-child{border-right:1px solid var(--line)}.analytics-ai-label-v1{margin-bottom:8px;font-size:13px;font-weight:750}.analytics-ai-label-v1.good{color:#168a30}.analytics-ai-label-v1.focus{color:#d46b13}.analytics-ai-item-v1{margin:0 0 8px;font-size:11px;line-height:1.5}.analytics-ai-empty-v1{color:#777}
+.analytics-nav-v1{display:grid;grid-template-columns:repeat(5,1fr);padding:8px 5px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:rgba(255,255,255,.96)}.analytics-nav-v1 button{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0;padding:3px 0;border:0;background:transparent;color:#999;font:inherit;font-size:10px}.analytics-nav-v1 button.is-active{color:var(--ac);font-weight:720}.analytics-nav-v1 svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8}
+@media(max-width:390px){.analytics-scroll-v1{padding-left:10px;padding-right:10px}.analytics-head-v1 h1{font-size:32px}.analytics-head-v1 p{font-size:12px}.analytics-filter-v1{padding:0 10px}.analytics-metrics-v1{gap:6px}.analytics-metric-v1{padding-left:4px;padding-right:4px}.analytics-metric-name-v1{font-size:10px}.analytics-metric-value-v1{font-size:18px}.analytics-ai-column-v1{padding-left:8px;padding-right:8px}}
+</style>
+<script>
+// CueScore Analytics v1.0: formal player analysis, built only from saved records.
+(() => {
+  const screen = document.getElementById("rankingsScreen");
+  if (!screen || screen.querySelector(".analytics-shell-v1")) return;
+  screen.classList.add("analytics-formal-v1");
+  const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+  const icon = {
+    cloud:'<svg viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .5-8A6 6 0 0 0 6 8.5 4.5 4.5 0 0 0 7 18Z"/></svg>',
+    filter:'<svg viewBox="0 0 24 24"><path d="M4 5h16l-6 7v6l-4 2v-8Z"/></svg>',
+    info:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 11v6m0-10h.01"/></svg>',
+    metric:'<svg viewBox="0 0 24 24"><path d="M4 18V9m5 9V5m5 13v-7m5 7V3"/></svg>',
+    home:'<svg viewBox="0 0 24 24"><path d="M3 11 12 3l9 8v9h-6v-6H9v6H3Z"/></svg>',
+    history:'<svg viewBox="0 0 24 24"><path d="M4 5v5h5M5 10a8 8 0 1 0 2-5"/><path d="M12 7v5l3 2"/></svg>',
+    analytics:'<svg viewBox="0 0 24 24"><path d="M4 19V9m5 10V5m5 14v-7m5 7V3M2 21h20"/></svg>',
+    player:'<svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg>',
+    settings:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 13.5v-3l-2-.7-.5-1.2.9-1.9-2.1-2.1-1.9.9-1.2-.5-.7-2h-3l-.7 2-1.2.5-1.9-.9-2.1 2.1.9 1.9-.5 1.2-2 .7v3l2 .7.5 1.2-.9 1.9 2.1 2.1 1.9-.9 1.2.5.7 2h3l.7-2 1.2-.5 1.9.9 2.1-2.1-.9-1.9.5-1.2Z"/></svg>'
+  };
+  const nav = (key,label,svg,active=false) => `<button type="button" data-analytics-nav="${key}" class="${active?'is-active':''}">${svg}<span>${label}</span></button>`;
+  screen.insertAdjacentHTML("beforeend", `<div class="analytics-shell-v1">
+    <main class="analytics-scroll-v1">
+      <div class="analytics-brand-v1">CueScore</div>
+      <header class="analytics-head-v1"><div><h1>分析</h1><p>あなたの成長や傾向をグラフと数値で確認できます</p></div><div class="analytics-cloud-v1" id="analyticsCloudV1">${icon.cloud}<span>クラウド同期：確認中</span></div></header>
+      <div class="analytics-controls-v1"><div class="analytics-selector-v1">
+        <div class="analytics-field-v1"><label>プレーヤー</label><select id="analyticsPlayerV1" aria-label="プレーヤー"></select></div>
+        <div class="analytics-field-v1"><label>期間</label><button type="button" id="analyticsPeriodV1">全期間</button></div>
+      </div><button class="analytics-filter-v1" id="analyticsFilterV1" type="button">${icon.filter}<span>フィルター</span></button></div>
+      <label class="analytics-compare-v1"><span>比較方法</span><select id="analyticsCompareV1"><option value="all">すべて（全試合のデータ）</option></select></label>
+      <div class="analytics-target-v1" id="analyticsTargetV1">${icon.info}<span></span></div>
+      <div class="analytics-summary-head-v1"><div><h2>サマリー</h2><p id="analyticsSummaryMetaV1"></p></div><p class="analytics-summary-count-v1" id="analyticsCountV1"></p></div>
+      <section class="analytics-metrics-v1" id="analyticsMetricsV1"></section>
+      <p class="analytics-period-note-v1" id="analyticsPreviousNoteV1"></p>
+      <div class="analytics-trend-head-v1"><h2>推移グラフ</h2></div>
+      <div class="analytics-tabs-v1" id="analyticsTabsV1"><button type="button" data-metric="winRate" class="is-active">勝率</button><button type="button" data-metric="shotRate">シュート成功率</button><button type="button" data-metric="safetyRate">セーフティ成功率</button></div>
+      <section class="analytics-card-v1 analytics-chart-card-v1" id="analyticsChartV1"></section>
+      <p class="analytics-chart-note-v1" id="analyticsChartNoteV1"></p>
+      <section class="analytics-card-v1 analytics-ai-v1"><h2>AI分析サマリー</h2><div class="analytics-ai-grid-v1" id="analyticsAiV1"></div></section>
+    </main>
+    <nav class="analytics-nav-v1" aria-label="メインナビゲーション">${nav("home","Home",icon.home)}${nav("history","対戦履歴",icon.history)}${nav("analytics","分析",icon.analytics,true)}${nav("player","プレーヤー",icon.player)}${nav("settings","設定",icon.settings)}</nav>
+  </div>`);
+  const $ = selector => screen.querySelector(selector);
+  let chartMetric = "winRate";
+  let returnFromFilter = false;
+  const dateOf = record => { const d=new Date(record?.endedAt||record?.playedAt||record?.startedAt||0); return Number.isNaN(d.getTime())?null:d; };
+  const playerKey = player => player?.id ? `id:${player.id}` : `name:${String(player?.name||"").trim()}`;
+  function choices(records){
+    const map=new Map();
+    try{ readPlayerLibrary().forEach(p=>{if(p?.name)map.set(playerKey(p),{id:String(p.id||""),name:String(p.name),key:playerKey(p)});}); }catch(_){}
+    records.forEach(r=>[1,2].forEach(side=>{const p=r.players?.[side]||{},id=String(p.registeredPlayerId||""),name=String(p.name||"").trim();if(name){const key=id?`id:${id}`:`name:${name}`;if(!map.has(key))map.set(key,{id,name,key});}}));
+    return [...map.values()].sort((a,b)=>a.name.localeCompare(b.name,"ja"));
+  }
+  function sideFor(record,choice){for(const side of [1,2]){const p=record.players?.[side]||{};if(choice.id&&String(p.registeredPlayerId||"")===choice.id)return side;if(!choice.id&&String(p.name||"").trim()===choice.name)return side;}return 0;}
+  function allRaw(){try{return typeof readMatchRecords==="function"?readMatchRecords():JSON.parse(localStorage.getItem("rotationScoreboard.matchRecords.v1")||"[]");}catch(_){return[]}}
+  function filterState(){try{return window.getStatisticsFilterV53?.()||{};}catch(_){return{}}}
+  function fmtDate(d,short=false){if(!d)return"";const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),day=String(d.getDate()).padStart(2,"0");return short?`${m}/${day}`:`${y}/${m}/${day}`;}
+  function filteredBase(){try{return window.getFilteredRecordsV53?.()||allRaw();}catch(_){return allRaw();}}
+  function detailStats(records,choice){
+    let chances=0,breakIns=0,safetyTotal=0,safetySuccess=0;
+    records.forEach(r=>{const side=sideFor(r,choice);if(!side)return;const events=Array.isArray(r?.analysis?.events)?r.analysis.events:[];events.filter(e=>Number(e?.player)===side&&e?.type==="break_result").forEach(e=>{chances++;const balls=Array.isArray(e.pocketedBalls)?e.pocketedBalls:[];if(balls.length||Number(e.pocketCount)>0)breakIns++;});events.filter(e=>Number(e?.player)===side&&e?.type==="safety_result").forEach(e=>{safetyTotal++;if(e?.outcome==="success")safetySuccess++;});});
+    return {breakInRate:chances?breakIns/chances*100:null,breakChances:chances,safetyRate:safetyTotal?safetySuccess/safetyTotal*100:null,safetyTotal};
+  }
+  function summarize(records,choice){
+    let games=0,wins=0,highRun=0,pockets=0,misses=0,shotSum=0,shotN=0,fouls=0,breaks=0;
+    records.forEach(r=>{const side=sideFor(r,choice);if(!side)return;games++;if(Number(r.winner)===side)wins++;const m=savedPlayerMetricsV113(r,side),p=r.players?.[side]||{};highRun=Math.max(highRun,Number(m.maxRun)||0);const po=Number(m.pocketCount),mi=Number(m.misses);if(Number.isFinite(po)&&Number.isFinite(mi)&&po+mi>0){pockets+=po;misses+=mi}else if(Number.isFinite(m.shotRate)){shotSum+=m.shotRate;shotN++}fouls+=Math.max(0,Number(m.fouls)||0);breaks+=Math.max(0,Number(p.breaks)||0);});
+    const detail=detailStats(records,choice);
+    return {games,winRate:games?wins/games*100:null,highRun:games?highRun:null,shotRate:pockets+misses?pockets/(pockets+misses)*100:(shotN?shotSum/shotN:null),safetyRate:detail.safetyRate,breakInRate:detail.breakInRate,avgFouls:games?fouls/games:null,totalBreaks:games?breaks:null};
+  }
+  function rangeFor(records){
+    const dates=records.map(dateOf).filter(Boolean).sort((a,b)=>a-b),f=filterState();
+    let start=f.from?new Date(`${f.from}T00:00:00`):dates[0]||null,end=f.to?new Date(`${f.to}T23:59:59`):dates.at(-1)||null;
+    return {start,end,label:start&&end?`${fmtDate(start)}〜${fmtDate(end,true)}`:"全期間"};
+  }
+  function previousRecords(choice,current,range){
+    if(!range.start||!range.end)return[];
+    const span=Math.max(1,range.end-range.start),end=new Date(range.start.getTime()-1),start=new Date(end.getTime()-span);
+    return allRaw().filter(r=>{const d=dateOf(r);return d&&d>=start&&d<=end&&sideFor(r,choice);});
+  }
+  const val=(v,suffix="",digits=1)=>Number.isFinite(v)?`${Number(v).toFixed(digits).replace(/\.0$/,"")}${suffix}`:"—";
+  function metricCard(name,value,now,before,key,lower=false){
+    let deltaClass="",deltaText="比較データなし";
+    if(Number.isFinite(now)&&Number.isFinite(before)){const raw=now-before,shown=key==="highRun"||key==="totalBreaks"?Math.round(raw):Number(raw.toFixed(1));const improved=lower?raw<0:raw>0;deltaClass=raw===0?"":(improved?"up":"down");deltaText=`前期比 ${raw>0?"+":""}${shown}${key.includes("Rate")||key==="winRate"?"%":""}`;}
+    return `<article class="analytics-metric-v1"><div class="analytics-metric-name-v1">${name}</div><div class="analytics-metric-value-v1">${icon.metric}${value}</div><div class="analytics-metric-delta-v1 ${deltaClass}">${deltaText}</div></article>`;
+  }
+  function monthly(records,choice,key){
+    const groups=new Map();records.forEach(r=>{const d=dateOf(r),side=sideFor(r,choice);if(!d||!side)return;const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`;if(!groups.has(k))groups.set(k,[]);groups.get(k).push(r);});
+    return [...groups.entries()].sort((a,b)=>a[0].localeCompare(b[0])).map(([keyLabel,items])=>({label:`${Number(keyLabel.slice(5))}月`,value:summarize(items,choice)[key]})).filter(p=>Number.isFinite(p.value));
+  }
+  function chart(points){
+    if(!points.length)return'<div class="analytics-chart-empty-v1">表示できる実データがありません。</div>';
+    const w=620,h=190,p={l:42,r:26,t:18,b:32},x=i=>points.length===1?(w/2):p.l+i*(w-p.l-p.r)/(points.length-1),y=v=>p.t+(100-Math.max(0,Math.min(100,v)))*(h-p.t-p.b)/100;
+    const grid=[0,25,50,75,100].map(v=>`<line x1="${p.l}" y1="${y(v)}" x2="${w-p.r}" y2="${y(v)}" stroke="#e6e4df"/><text x="${p.l-8}" y="${y(v)+4}" text-anchor="end" fill="#777" font-size="11">${v}</text>`).join("");
+    const path=points.map((pt,i)=>`${i?"L":"M"}${x(i)},${y(pt.value)}`).join(" ");
+    return `<svg class="analytics-chart-v1" viewBox="0 0 ${w} ${h}" role="img" aria-label="分析推移グラフ">${grid}<path d="${path}" fill="none" stroke="#813715" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>${points.map((pt,i)=>`<circle cx="${x(i)}" cy="${y(pt.value)}" r="4" fill="#813715"/><text x="${x(i)}" y="${h-8}" text-anchor="middle" fill="#555" font-size="11">${esc(pt.label)}</text>`).join("")}<text x="${w-p.r}" y="${Math.max(14,y(points.at(-1).value)-9)}" text-anchor="end" fill="#813715" font-size="12" font-weight="700">${val(points.at(-1).value,"%",1)}</text></svg>`;
+  }
+  function cloud(){
+    const node=$("#analyticsCloudV1"),label=node.querySelector("span");let config={},sync={},pending=null;try{config=JSON.parse(localStorage.getItem("rotationScoreboard.supabaseConfig.v1")||"{}");sync=JSON.parse(localStorage.getItem("rotationScoreboard.cloudSyncState.v1")||"{}");pending=JSON.parse(localStorage.getItem("rotationScoreboard.cloudPendingSave.v1")||"null")}catch(_){}
+    node.classList.remove("is-muted","is-warning");if(pending){label.textContent="クラウド同期：要確認";node.classList.add("is-warning")}else if(!navigator.onLine){label.textContent="クラウド同期：オフライン";node.classList.add("is-muted")}else if(config.projectUrl&&config.publishableKey&&(Number(sync.revision)>0||sync.payloadHash)){label.textContent="クラウド同期：最新"}else{label.textContent="クラウド同期：未設定";node.classList.add("is-muted")}
+  }
+  function render(){
+    const base=filteredBase(),items=choices(allRaw()),select=$("#analyticsPlayerV1"),saved=localStorage.getItem("rotationScoreboard.dashboardPlayer.v1")||"";
+    if(!select.options.length||[...select.options].some((o,i)=>o.value!==(items[i]?.key||""))){select.innerHTML=items.map(p=>`<option value="${esc(p.key)}">${esc(p.name)}</option>`).join("");select.value=items.some(p=>p.key===saved)?saved:(items[0]?.key||"")}
+    const choice=items.find(p=>p.key===select.value)||items[0];if(!choice){
+      $("#analyticsTargetV1").hidden=true;
+      $("#analyticsSummaryMetaV1").textContent="";
+      $("#analyticsCountV1").textContent="";
+      $("#analyticsMetricsV1").innerHTML='<div class="analytics-chart-empty-v1">プレーヤーを登録すると分析を表示できます。</div>';
+      $("#analyticsPreviousNoteV1").textContent="";
+      $("#analyticsChartV1").innerHTML='<div class="analytics-chart-empty-v1">表示できる実データがありません。</div>';
+      $("#analyticsChartNoteV1").textContent="";
+      $("#analyticsAiV1").innerHTML="";
+      return
+    }
+    $("#analyticsTargetV1").hidden=false;
+    select.value=choice.key;localStorage.setItem("rotationScoreboard.dashboardPlayer.v1",choice.key);
+    const records=base.filter(r=>sideFor(r,choice)),range=rangeFor(records),current=summarize(records,choice),prevRecords=previousRecords(choice,records,range),previous=summarize(prevRecords,choice);
+    $("#analyticsPeriodV1").textContent=range.label;$("#analyticsTargetV1 span").textContent=`この画面は「${choice.name}」の全試合データ（すべて）を分析しています`;$("#analyticsSummaryMetaV1").textContent=`期間：${range.label}｜すべての試合`;$("#analyticsCountV1").textContent=`${current.games}試合`;
+    $("#analyticsMetricsV1").innerHTML=[
+      metricCard("勝率",val(current.winRate,"%",1),current.winRate,previous.winRate,"winRate"),
+      metricCard("ハイラン",val(current.highRun,"",0),current.highRun,previous.highRun,"highRun"),
+      metricCard("シュート成功率",val(current.shotRate,"%",1),current.shotRate,previous.shotRate,"shotRate"),
+      metricCard("セーフティ成功率",val(current.safetyRate,"%",1),current.safetyRate,previous.safetyRate,"safetyRate"),
+      metricCard("ブレイクIN率",val(current.breakInRate,"%",1),current.breakInRate,previous.breakInRate,"breakInRate"),
+      metricCard("ファール平均",val(current.avgFouls,"",2),current.avgFouls,previous.avgFouls,"avgFouls",true),
+      metricCard("総ブレイク数",val(current.totalBreaks,"",0),current.totalBreaks,previous.totalBreaks,"totalBreaks")
+    ].join("");
+    if(range.start&&range.end){const span=Math.max(1,range.end-range.start),pe=new Date(range.start.getTime()-1),ps=new Date(pe.getTime()-span);$("#analyticsPreviousNoteV1").textContent=`※ 前期は、前期間（${fmtDate(ps)}〜${fmtDate(pe,true)}）との比較です`}else $("#analyticsPreviousNoteV1").textContent="";
+    const points=monthly(records,choice,chartMetric);$("#analyticsChartV1").innerHTML=chart(points);const metricName={winRate:"勝率",shotRate:"シュート成功率",safetyRate:"セーフティ成功率"}[chartMetric];$("#analyticsChartNoteV1").textContent=`※ 実データがある月の${metricName}の推移`;
+    let growth=null,insight=null;try{growth=buildPlayerGrowthAnalysisV740(records,choice);insight=buildPlayerInsightsV750(records,choice,growth)}catch(_){}
+    const good=[],focus=[];(growth?.metrics||[]).filter(m=>m.direction==="up").slice(0,2).forEach(m=>good.push(`${m.label}が改善しています（${m.raw>0?"+":""}${Number(m.raw).toFixed(1)}）`));(growth?.metrics||[]).filter(m=>m.direction==="down").slice(0,2).forEach(m=>focus.push(`${m.label}を確認しましょう（${m.raw>0?"+":""}${Number(m.raw).toFixed(1)}）`));
+    if(!good.length&&insight?.strength)good.push(insight.strength);if(!focus.length&&insight?.focus)focus.push(insight.focus);
+    const rows=(arr)=>arr.length?arr.map(t=>`<p class="analytics-ai-item-v1">${esc(t)}</p>`).join(""):'<p class="analytics-ai-item-v1 analytics-ai-empty-v1">比較できるデータを蓄積中です。</p>';
+    $("#analyticsAiV1").innerHTML=`<div class="analytics-ai-column-v1"><div class="analytics-ai-label-v1 good">良い傾向</div>${rows(good.slice(0,2))}</div><div class="analytics-ai-column-v1"><div class="analytics-ai-label-v1 focus">改善ポイント</div>${rows(focus.slice(0,2))}</div>`;
+    cloud();
+  }
+  $("#analyticsPlayerV1").addEventListener("change",render);$("#analyticsPeriodV1").addEventListener("click",()=>$("#analyticsFilterV1").click());$("#analyticsFilterV1").addEventListener("click",()=>{returnFromFilter=true;document.getElementById("openStatisticsFilterBtn")?.click()});
+  $("#analyticsTabsV1").addEventListener("click",e=>{const b=e.target.closest("[data-metric]");if(!b)return;chartMetric=b.dataset.metric;$("#analyticsTabsV1").querySelectorAll("button").forEach(x=>x.classList.toggle("is-active",x===b));render()});
+  document.getElementById("openRankingsBtn")?.addEventListener("click",()=>{render();$(".analytics-scroll-v1")?.scrollTo(0,0)});
+  ["statisticsFilterBackBtn","statisticsFilterApplyBtn"].forEach(id=>document.getElementById(id)?.addEventListener("click",()=>{if(!returnFromFilter)return;returnFromFilter=false;setTimeout(()=>document.getElementById("openRankingsBtn")?.click(),0)}));
+  screen.addEventListener("click",e=>{const key=e.target.closest("[data-analytics-nav]")?.dataset.analyticsNav;if(!key||key==="analytics")return;document.getElementById("rankingsBackBtn")?.click();if(key==="history")document.getElementById("recordsBtn")?.click();if(key==="player")document.getElementById("playerManagementBtn")?.click();if(key==="settings")document.getElementById("settingsBtn")?.click()});
+  window.addEventListener("online",cloud);window.addEventListener("offline",cloud);window.renderFormalAnalyticsV1=render;
+})();
+</script>
 </body>
 </html>
 
