@@ -23744,6 +23744,233 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   window.visualViewport?.addEventListener("resize",setViewportHeight);
 })();
 </script>
+<style>
+/* CueScore Foundation monochrome theme v1.0
+   Homeと同じ白・黒・グレーを全画面へ適用する。
+   ボール固有色と警告・危険操作の赤は各コンポーネント側の定義を維持する。 */
+:root{
+  --cue-foundation-ink:#171717;
+  --cue-foundation-strong:#2f2f2d;
+  --cue-foundation-muted:#777775;
+  --cue-foundation-soft:#f1f1ef;
+  --cue-foundation-line:#dededb;
+  --cue-foundation-surface:#fff;
+  --cue-foundation-bg:#f7f7f5;
+}
+
+/* 画面ごとに残っていた競技色トークンを共通モノクロへ集約 */
+.pro-game-screen{
+  --rotation-accent:var(--cue-foundation-ink)!important;
+  --rotation-soft:#f4f4f2!important;
+}
+.official-result-sheet-v1{--result-accent:var(--cue-foundation-ink)!important}
+.records-formal-v1{
+  --cue-history-walnut:var(--cue-foundation-ink)!important;
+}
+.player-management-formal-v1{--player-accent:var(--cue-foundation-ink)!important}
+.player-detail-formal-v1{
+  --player-detail-accent:var(--cue-foundation-ink)!important;
+  --player-detail-accent-soft:#f4f4f2!important;
+}
+.settings-formal-v1{--settings-accent:var(--cue-foundation-ink)!important}
+.analytics-shell-v1{--ac:var(--cue-foundation-ink)!important}
+.settings-suite-shell-v2{--ss-accent:var(--cue-foundation-ink)!important}
+.player-editor-dialog-v1{--modal-accent:var(--cue-foundation-ink)!important}
+
+/* Home / New Match */
+.cue-discipline-button-v1.is-selected,
+.cue-selected-game-v1,
+.cue-home-primary-v1,
+.cue-home-start-v2,
+.new-match-start-v1{
+  color:var(--cue-foundation-ink)!important;
+  border-color:var(--cue-foundation-ink)!important;
+}
+.cue-home-primary-v1,
+.cue-home-start-v2,
+.new-match-start-v1{
+  background:var(--cue-foundation-ink)!important;
+  color:#fff!important;
+}
+.cue-rule-toggle-v1 input:checked+span,
+.cue-toggle-v2 input:checked+span{background:var(--cue-foundation-ink)!important}
+
+/* Game / break input — ball elements intentionally excluded */
+.pro-player-panel.active{
+  color:var(--cue-foundation-ink)!important;
+  border-color:var(--cue-foundation-ink)!important;
+  background:#f4f4f2!important;
+  box-shadow:0 7px 22px rgba(0,0,0,.045)!important;
+}
+.pro-turn-arrow-v1{color:var(--cue-foundation-ink)!important}
+.break-player-segment-v1.selected-v1,
+.break-special-btn-v696.active-v696:not(.trouble-v696){
+  color:var(--cue-foundation-ink)!important;
+  border-color:var(--cue-foundation-ink)!important;
+  background:#f4f4f2!important;
+}
+
+/* Result / History / Match detail */
+.official-result-player-v1.winner{
+  color:var(--cue-foundation-ink)!important;
+  border-color:var(--cue-foundation-ink)!important;
+  background:#f4f4f2!important;
+}
+.official-result-player-v1.winner::before{background:var(--cue-foundation-ink)!important}
+.official-result-chart-header-v1 .p1,
+.official-result-chart-header-v1 .p2{background:var(--cue-foundation-ink)!important}
+.official-result-chart-svg-v1 path[stroke="#6f3214"],
+.match-detail-chart-v1 path[stroke="#6f3214"]{stroke:var(--cue-foundation-ink)!important}
+.official-result-chart-svg-v1 circle[fill="#6f3214"],
+.match-detail-chart-v1 circle[fill="#6f3214"]{fill:var(--cue-foundation-ink)!important}
+.official-result-chart-svg-v1 text[fill="#6f3214"],
+.match-detail-chart-v1 text[fill="#6f3214"]{fill:var(--cue-foundation-ink)!important}
+.record-score-value-v1.winner,
+.match-detail-summary-v1 .winner,
+.match-detail-score-v1 .winner{color:var(--cue-foundation-ink)!important}
+.match-detail-rack-divider-v1{
+  color:var(--cue-foundation-muted)!important;
+  border-color:#bdbdb9!important;
+}
+.app.records-mode{--cue-history-walnut:var(--cue-foundation-ink)!important}
+.records-filter-v1,
+.records-sort-v1,
+.record-score-value-v1.winner,
+.cue-bottom-nav-v1 button.is-current{
+  color:var(--cue-foundation-ink)!important;
+}
+
+/* Player / Player Detail */
+.player-management-formal-v1 .player-library-sort-v1,
+.player-management-formal-v1 .player-library-register-v2,
+.player-detail-tab-v1.is-active,
+.player-detail-status-v1 .is-active{
+  color:var(--cue-foundation-ink)!important;
+  border-color:var(--cue-foundation-ink)!important;
+}
+.player-detail-tab-v1.is-active,
+.player-detail-status-v1 .is-active{
+  background:var(--cue-foundation-ink)!important;
+  color:#fff!important;
+}
+.player-detail-avatar-v1 svg,
+.player-detail-vs-v1 svg{fill:var(--cue-foundation-ink)!important}
+.player-detail-gauge-v1,
+.player-detail-metric-ring-v1{
+  background:conic-gradient(var(--cue-foundation-ink) calc(var(--rate) * 1%),#e4e4e1 0)!important;
+}
+
+/* Settings and its five subordinate screens */
+.settings-header-icon-v1,
+.settings-row-icon-v1,
+.settings-info-brand-v1,
+.settings-suite-round-icon-v2{
+  color:var(--cue-foundation-ink)!important;
+}
+.settings-formal-title-v1,
+.settings-formal-menu-v1,
+.settings-formal-section-title-v1,
+.settings-data-icon-v1,
+.settings-data-chevron-v1,
+.settings-info-brand-v1,
+.settings-app-brand-v1 strong,
+.settings-info-link-v1,
+.settings-bottom-nav-v1 button.is-current,
+.settings-suite-back-v2,
+.settings-suite-section-title-v2,
+.settings-suite-chevron-v2{
+  color:var(--cue-foundation-ink)!important;
+}
+.settings-row-icon-v1,
+.settings-data-icon-v1,
+.settings-suite-round-icon-v2{background:#f1f1ef!important}
+.settings-cloud-state-v1:not(.is-error),
+.settings-suite-status-v2.ok,
+.settings-suite-sync-state-v2:not(.is-error) strong{
+  color:var(--cue-foundation-strong)!important;
+}
+.settings-suite-primary-v2{
+  background:var(--cue-foundation-ink)!important;
+  border-color:var(--cue-foundation-ink)!important;
+}
+.settings-suite-toggle-v2 input:checked+span{background:var(--cue-foundation-ink)!important}
+
+/* Analytics — positive status is monochrome; negative/error red remains */
+.analytics-brand-v1,
+.analytics-cloud-v1:not(.is-warning),
+.analytics-target-v1,
+.analytics-summary-count-v1,
+.analytics-metric-delta-v1.up,
+.analytics-ai-label-v1.good{
+  color:var(--cue-foundation-strong)!important;
+}
+.analytics-filter-v1,
+.analytics-field-v1::after,
+.analytics-nav-v1 button.is-active{
+  color:var(--cue-foundation-ink)!important;
+  border-color:var(--cue-foundation-ink)!important;
+}
+.analytics-tabs-v1 button.is-active{
+  background:var(--cue-foundation-ink)!important;
+  color:#fff!important;
+}
+.analytics-chart-v1 path[stroke="#813715"]{stroke:var(--cue-foundation-ink)!important}
+.analytics-chart-v1 circle[fill="#813715"]{fill:var(--cue-foundation-ink)!important}
+.analytics-chart-v1 text[fill="#813715"]{fill:var(--cue-foundation-ink)!important}
+
+/* Player registration / statistics filter modals */
+.player-editor-close-v1,
+.player-editor-cancel-v1,
+.statistics-filter-modal-v1 .statistics-filter-back::after,
+.statistics-filter-modal-v1 .statistics-filter-reset{
+  color:var(--cue-foundation-ink)!important;
+  border-color:var(--cue-foundation-ink)!important;
+}
+.player-editor-modal-v1 .player-editor-save,
+.statistics-filter-modal-v1 .statistics-filter-periods button.active,
+.statistics-filter-modal-v1 .statistics-filter-apply{
+  color:#fff!important;
+  border-color:var(--cue-foundation-ink)!important;
+  background:var(--cue-foundation-ink)!important;
+}
+.statistics-filter-modal-v1 .statistics-filter-periods button{
+  color:var(--cue-foundation-strong)!important;
+  border-color:#bdbdb9!important;
+}
+.statistics-filter-modal-v1 .statistics-filter-periods button.active{color:#fff!important}
+.player-editor-modal-v1 .player-editor-input:focus,
+.settings-suite-field-v2 input:focus{
+  outline-color:rgba(23,23,23,.15)!important;
+  border-color:var(--cue-foundation-ink)!important;
+}
+.player-editor-modal-v1 .player-editor-range,
+.settings-suite-radio-v2 input{accent-color:var(--cue-foundation-ink)!important}
+
+/* Bottom navigation is consistent across all primary and subordinate screens */
+.cue-bottom-nav-v1 button.is-active,
+.player-library-bottom-nav-v1 button.is-current,
+.player-detail-bottom-nav-v1 .is-current,
+.settings-bottom-nav-v1 button.is-current,
+.analytics-nav-v1 button.is-active,
+.settings-suite-bottom-nav-v2 button.is-current{
+  color:var(--cue-foundation-ink)!important;
+}
+
+/* Explicit status exceptions: danger/error remains red, normal/warning is monochrome */
+.settings-cloud-state-v1.is-warning,
+.settings-suite-status-v2:not(.error),
+.analytics-cloud-v1.is-warning{color:var(--cue-foundation-muted)!important}
+.settings-suite-status-v2.error,
+.settings-suite-sync-state-v2.is-error strong,
+.settings-suite-warning-v2 h2,
+.settings-suite-danger-v2,
+.player-editor-modal-v1 .player-editor-delete,
+.pro-foul,
+.break-special-btn-v696.trouble-v696.active-v696,
+.analytics-metric-delta-v1.down{
+  color:#c72c2c!important;
+}
+</style>
 </body>
 </html>
 
