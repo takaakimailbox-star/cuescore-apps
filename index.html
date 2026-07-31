@@ -23540,6 +23540,210 @@ body.match-detail-visible-v1{overflow:hidden!important}
   window.openCueScoreSettingsSuiteV2=openSuite;
 })();
 </script>
+<style>
+/* CueScore modal presentation v1.0 — existing player/filter logic, formal modal UI */
+body.cue-modal-lock-v1{overflow:hidden!important}
+.player-library-overlay.player-editor-modal-v1{background:#f7f7f5}
+.player-editor-modal-v1 .player-library-main{display:flex!important;filter:none}
+.player-editor-modal-v1 .player-library-bottom-nav-v1{display:grid!important}
+.player-editor-modal-v1 .player-editor{
+  position:fixed!important;z-index:410!important;inset:0!important;display:grid!important;
+  place-items:center;padding:max(18px,env(safe-area-inset-top)) 18px max(18px,env(safe-area-inset-bottom));
+  background:rgba(0,0,0,.34);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+}
+.player-editor-modal-v1 .player-editor.hidden{display:none!important}
+.player-editor-dialog-v1{
+  --modal-accent:#813715;width:min(100%,430px);max-height:min(640px,calc(var(--cue-modal-vh,100dvh) - 36px));
+  display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden;border:1px solid #deddd9;
+  border-radius:20px;background:#fff;color:#171717;box-shadow:0 22px 64px rgba(0,0,0,.2)
+}
+.player-editor-head-v1{position:relative;padding:22px 52px 8px;text-align:center}
+.player-editor-head-v1 h2{margin:0;font-size:23px;line-height:1.2;letter-spacing:-.025em}
+.player-editor-close-v1{position:absolute;top:10px;right:10px;width:44px;height:44px;border:0;background:transparent;color:var(--modal-accent);font-size:30px;font-weight:300}
+.player-editor-scroll-v1{min-height:0;padding:4px 22px 18px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.player-editor-copy-v1{margin:0 0 18px;color:#555552;font-size:13px;line-height:1.55}
+.player-editor-modal-v1 .player-editor-label{display:block;margin:14px 0 7px;color:#292927;font-size:13px;font-weight:750}
+.player-editor-modal-v1 .player-editor-input{width:100%;height:48px;padding:0 13px;border:1px solid #d8d8d4;border-radius:10px;background:#fff;color:#171717;font-size:16px;box-sizing:border-box}
+.player-editor-modal-v1 .player-editor-input:focus{outline:2px solid rgba(129,55,21,.16);border-color:var(--modal-accent)}
+.player-editor-modal-v1 .player-editor-race-row{display:grid;grid-template-columns:72px minmax(0,1fr);gap:14px;align-items:center}
+.player-editor-modal-v1 .player-editor-race{width:72px;height:44px;border:1px solid #d8d8d4;border-radius:10px;background:#f7f7f5;color:#171717;text-align:center;font-size:18px;font-weight:750}
+.player-editor-modal-v1 .player-editor-range{width:100%;accent-color:var(--modal-accent)}
+.player-editor-modal-v1 .player-editor-delete{width:100%;min-height:42px;margin-top:18px;border:1px solid #c92a2a;border-radius:10px;background:#fff;color:#c92a2a;font:inherit;font-weight:700}
+.player-editor-actions-v1{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 22px 20px;border-top:1px solid #ecece9;background:#fff}
+.player-editor-cancel-v1,.player-editor-modal-v1 .player-editor-save{min-height:50px;border-radius:10px;font:inherit;font-size:16px;font-weight:760}
+.player-editor-cancel-v1{border:1px solid var(--modal-accent);background:#fff;color:var(--modal-accent)}
+.player-editor-modal-v1 .player-editor-save{border:1px solid var(--modal-accent);background:var(--modal-accent);color:#fff}
+.player-editor-modal-v1 .player-editor-save:disabled{opacity:.5}
+
+.statistics-filter-screen.statistics-filter-modal-v1{
+  position:fixed!important;z-index:420!important;inset:0!important;width:auto!important;height:100dvh!important;
+  display:grid!important;grid-template-rows:auto minmax(0,1fr);padding:max(14px,env(safe-area-inset-top)) 14px max(14px,env(safe-area-inset-bottom));
+  overflow:hidden!important;background:rgba(0,0,0,.34)!important;color:#171717!important;
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);box-sizing:border-box
+}
+.statistics-filter-screen.statistics-filter-modal-v1.hidden{display:none!important}
+.statistics-filter-modal-v1 .statistics-filter-header{
+  width:min(100%,760px);height:auto;min-height:58px;margin:auto auto 0;padding:0 58px;
+  border:1px solid #deddd9;border-bottom:0;border-radius:20px 20px 0 0;background:#fff!important;
+  display:flex;justify-content:center;position:relative;box-sizing:border-box
+}
+.statistics-filter-modal-v1 .statistics-filter-title{font-size:23px;font-weight:780}
+.statistics-filter-modal-v1 .statistics-filter-back{
+  position:absolute!important;top:7px!important;right:9px!important;left:auto!important;width:44px!important;height:44px!important;
+  overflow:hidden!important;border:0!important;background:transparent!important;color:transparent!important;
+  font-size:0!important;line-height:0!important;text-indent:-999px!important;text-align:center!important;box-sizing:border-box
+}
+.statistics-filter-modal-v1 .statistics-filter-back::after{
+  content:"×";position:absolute;inset:0;display:grid;place-items:center;color:#813715;
+  font-size:30px;font-weight:300;line-height:1;text-indent:0
+}
+.statistics-filter-modal-v1 .statistics-filter-count{display:none}
+.statistics-filter-modal-v1 .statistics-filter-content{
+  width:min(100%,760px);min-height:0;margin:0 auto;padding:4px 20px 18px;overflow-y:auto;
+  border:1px solid #deddd9;border-top:0;border-radius:0 0 20px 20px;background:#fff!important;box-sizing:border-box;
+  box-shadow:0 22px 64px rgba(0,0,0,.2);-webkit-overflow-scrolling:touch
+}
+.statistics-filter-modal-v1 .statistics-filter-card{margin:0 0 13px;padding:13px 0;border:0;border-bottom:1px solid #e6e6e2;border-radius:0;background:#fff}
+.statistics-filter-modal-v1 .statistics-filter-card h2{margin:0 0 10px;color:#292927;font-size:15px}
+.statistics-filter-modal-v1 .statistics-filter-periods{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.statistics-filter-modal-v1 .statistics-filter-periods button{min-width:0;min-height:42px;padding:7px 5px;border:1px solid #b98e7a;border-radius:9px;background:#fff;color:#713114;font-size:12px}
+.statistics-filter-modal-v1 .statistics-filter-periods button.active{border-color:#813715;background:#813715;color:#fff}
+.statistics-filter-modal-v1 .statistics-filter-grid{gap:10px 14px}
+.statistics-filter-modal-v1 .statistics-filter-field label{color:#666662;font-size:12px}
+.statistics-filter-modal-v1 .statistics-filter-field select,.statistics-filter-modal-v1 .statistics-filter-field input{height:44px;border:1px solid #d8d8d4;border-radius:9px;background:#fff;color:#171717;font-size:14px}
+.statistics-filter-modal-v1 .statistics-filter-summary{margin:0 0 12px;padding:10px 12px;border:0;border-radius:9px;background:#f4f4f2;color:#555552;font-size:12px}
+.statistics-filter-modal-v1 .statistics-filter-actions{position:sticky;bottom:-18px;z-index:3;margin:0 -20px -18px;padding:12px 20px max(18px,env(safe-area-inset-bottom));background:#fff}
+.statistics-filter-modal-v1 .statistics-filter-actions button{min-height:50px;border-radius:10px;font-size:15px}
+.statistics-filter-modal-v1 .statistics-filter-reset{border:1px solid #813715;background:#fff;color:#813715}
+.statistics-filter-modal-v1 .statistics-filter-apply{background:#813715;color:#fff}
+.app.statistics-filter-mode>.rankings-screen.analytics-formal-v1{display:block!important}
+@media(max-width:560px){
+  .statistics-filter-modal-v1 .statistics-filter-periods{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .statistics-filter-modal-v1 .statistics-filter-periods button:last-child{grid-column:1/-1}
+}
+@media(max-width:370px){
+  .player-editor-modal-v1 .player-editor{padding-left:10px;padding-right:10px}
+  .statistics-filter-screen.statistics-filter-modal-v1{padding-left:8px;padding-right:8px}
+  .statistics-filter-modal-v1 .statistics-filter-content{padding-left:13px;padding-right:13px}
+  .statistics-filter-modal-v1 .statistics-filter-actions{margin-left:-13px;margin-right:-13px;padding-left:13px;padding-right:13px}
+}
+</style>
+<script>
+// CueScore formal modal adapters: reuse the existing player editor and statistics filter engines.
+(() => {
+  const playerOverlay=document.getElementById("playerLibraryOverlay");
+  const editor=document.getElementById("playerEditor");
+  const playerMain=document.getElementById("playerLibraryMain");
+  const existingSave=document.getElementById("playerEditorSaveBtn");
+  const existingDelete=document.getElementById("playerEditorDeleteBtn");
+  const filter=document.getElementById("statisticsFilterScreen");
+  const rankings=document.getElementById("rankingsScreen");
+  const app=document.querySelector(".app");
+  if(!playerOverlay||!editor||!filter||editor.querySelector(".player-editor-dialog-v1"))return;
+  let returnFocus=null;
+  let filterReturnFocus=null;
+  let applying=false;
+  const focusable=root=>[...root.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])')].filter(node=>!node.hidden&&node.offsetParent!==null);
+  function setViewportHeight(){document.documentElement.style.setProperty("--cue-modal-vh",`${window.visualViewport?.height||window.innerHeight}px`)}
+  function trap(event,root){
+    if(event.key!=="Tab")return;const nodes=focusable(root);if(!nodes.length)return;
+    const first=nodes[0],last=nodes[nodes.length-1];
+    if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}
+    else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
+  }
+  const dialog=document.createElement("div");
+  dialog.className="player-editor-dialog-v1";dialog.setAttribute("role","dialog");dialog.setAttribute("aria-modal","true");
+  dialog.setAttribute("aria-labelledby","playerEditorModalTitleV1");dialog.setAttribute("aria-describedby","playerEditorModalCopyV1");
+  const head=document.createElement("header");head.className="player-editor-head-v1";
+  head.innerHTML='<h2 id="playerEditorModalTitleV1">プレーヤー登録</h2><button class="player-editor-close-v1" type="button" aria-label="閉じる">×</button>';
+  const scroll=document.createElement("div");scroll.className="player-editor-scroll-v1";
+  scroll.innerHTML='<p class="player-editor-copy-v1" id="playerEditorModalCopyV1"></p>';
+  [...editor.children].forEach(node=>{if(node!==existingSave&&node!==existingDelete)scroll.appendChild(node)});
+  if(existingDelete)scroll.appendChild(existingDelete);
+  const actions=document.createElement("div");actions.className="player-editor-actions-v1";
+  const cancel=document.createElement("button");cancel.className="player-editor-cancel-v1";cancel.type="button";cancel.textContent="キャンセル";
+  actions.append(cancel,existingSave);dialog.append(head,scroll,actions);editor.appendChild(dialog);
+  const nameLabel=dialog.querySelector('label[for="playerEditorName"]');
+  const raceLabel=dialog.querySelector('label[for="playerEditorRace"]');
+  if(nameLabel)nameLabel.textContent="名前（必須）";
+  if(raceLabel)raceLabel.textContent="Race to";
+  document.getElementById("playerEditorName")?.setAttribute("placeholder","プレーヤー名を入力");
+  function cancelPlayer(){
+    document.getElementById("playerLibraryBackBtn")?.click();
+    returnFocus?.focus?.();returnFocus=null;
+  }
+  cancel.addEventListener("click",cancelPlayer);head.querySelector("button").addEventListener("click",cancelPlayer);
+  editor.addEventListener("click",event=>event.stopPropagation());
+  existingSave?.addEventListener("click",()=>{existingSave.disabled=true;requestAnimationFrame(()=>{existingSave.disabled=false})});
+  function syncPlayerModal(){
+    const open=!editor.classList.contains("hidden");
+    playerOverlay.classList.toggle("player-editor-modal-v1",open);
+    document.body.classList.toggle("cue-modal-lock-v1",open||!filter.classList.contains("hidden"));
+    playerMain?.toggleAttribute("inert",open);
+    if(!open)return;
+    playerOverlay.classList.add("player-management-formal-v1");
+    playerMain?.classList.remove("hidden");
+    const editing=document.getElementById("playerLibraryTitle")?.textContent.includes("編集");
+    document.getElementById("playerEditorModalTitleV1").textContent=editing?"プレーヤー編集":"プレーヤー登録";
+    document.getElementById("playerEditorModalCopyV1").innerHTML=editing?"":'新しいプレーヤーを登録します。<br>あとからいつでも編集できます。';
+    existingSave.textContent=editing?"保存":"登録";
+    existingDelete?.classList.toggle("hidden",!editing);
+    setViewportHeight();setTimeout(()=>document.getElementById("playerEditorName")?.focus(),30);
+  }
+  new MutationObserver(syncPlayerModal).observe(editor,{attributes:true,attributeFilter:["class"]});
+  playerOverlay.addEventListener("click",event=>{
+    const opener=event.target.closest("#playerLibraryRegisterBtnV2,#playerLibraryAddBtn,[data-edit-player]");
+    if(opener)returnFocus=opener;
+  },true);
+
+  function restoreAnalytics(){
+    app?.classList.remove("statistics-filter-mode");app?.classList.add("rankings-mode");
+    filter.classList.add("hidden");rankings?.classList.remove("hidden");
+    rankings?.removeAttribute("inert");
+    document.body.classList.remove("cue-modal-lock-v1");
+    filterReturnFocus?.focus?.();filterReturnFocus=null;
+  }
+  filter.classList.add("statistics-filter-modal-v1");
+  filter.setAttribute("role","dialog");filter.setAttribute("aria-modal","true");
+  filter.setAttribute("aria-labelledby","statisticsFilterModalTitleV1");
+  document.querySelector(".statistics-filter-title")?.setAttribute("id","statisticsFilterModalTitleV1");
+  document.getElementById("openStatisticsFilterBtn")?.addEventListener("click",event=>{filterReturnFocus=event.currentTarget;setViewportHeight()},true);
+  filter.addEventListener("click",event=>{
+    if(event.target.closest("#statisticsFilterBackBtn")){event.preventDefault();event.stopImmediatePropagation();restoreAnalytics()}
+    if(event.target.closest("#statisticsFilterResetBtn")){
+      event.preventDefault();event.stopImmediatePropagation();
+      ["statisticsFilterFrom","statisticsFilterTo","statisticsFilterCategory","statisticsFilterSeason","statisticsFilterPlayer","statisticsFilterOpponent","statisticsFilterRecordingMode","statisticsFilterOutcome","statisticsFilterTag"].forEach(id=>{
+        const field=document.getElementById(id);if(field)field.value="";
+      });
+      document.querySelectorAll("#statisticsFilterScreen [data-filter-period]").forEach(button=>button.classList.toggle("active",button.dataset.filterPeriod==="all"));
+      document.getElementById("statisticsFilterFrom")?.dispatchEvent(new Event("change",{bubbles:true}));
+      return;
+    }
+    if(event.target.closest("#statisticsFilterApplyBtn")&&!applying){
+      const from=document.getElementById("statisticsFilterFrom")?.value;
+      const to=document.getElementById("statisticsFilterTo")?.value;
+      if(from&&to&&from>to){
+        event.preventDefault();event.stopImmediatePropagation();
+        alert("開始日は終了日以前の日付を選択してください。");
+        return;
+      }
+      applying=true;setTimeout(()=>{applying=false;if(filter.classList.contains("hidden"))restoreAnalytics()},0);
+    }
+  },true);
+  const modalObserver=new MutationObserver(()=>{
+    const open=!filter.classList.contains("hidden");
+    document.body.classList.toggle("cue-modal-lock-v1",open||!editor.classList.contains("hidden"));
+    rankings?.toggleAttribute("inert",open);
+    if(open){rankings?.classList.remove("hidden");setViewportHeight();setTimeout(()=>document.querySelector(".statistics-filter-back")?.focus(),20)}
+  });
+  modalObserver.observe(filter,{attributes:true,attributeFilter:["class"]});
+  document.addEventListener("keydown",event=>{
+    if(!editor.classList.contains("hidden")){if(event.key==="Escape"){event.preventDefault();cancelPlayer()}else trap(event,dialog);return}
+    if(!filter.classList.contains("hidden")){if(event.key==="Escape"){event.preventDefault();restoreAnalytics()}else trap(event,filter)}
+  });
+  window.visualViewport?.addEventListener("resize",setViewportHeight);
+})();
+</script>
 </body>
 </html>
 
