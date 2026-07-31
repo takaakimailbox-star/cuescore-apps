@@ -23250,6 +23250,296 @@ body.match-detail-visible-v1{overflow:hidden!important}
   window.addEventListener("online",cloud);window.addEventListener("offline",cloud);window.renderFormalAnalyticsV1=render;
 })();
 </script>
+<style>
+/* CueScore Settings Suite v2.0: formal cloud, export, restore and history screens */
+#dataManagementScreen.settings-suite-v2{position:fixed!important;inset:0!important;z-index:260!important;width:100%!important;height:100dvh!important;overflow:hidden!important;background:#f8f8f6!important;color:#171717!important}
+#dataManagementScreen.settings-suite-v2>.data-management-header,
+#dataManagementScreen.settings-suite-v2>.data-management-content{display:none!important}
+.settings-suite-shell-v2{--ss-accent:#813715;--ss-line:#deddd9;--ss-muted:#777773;display:grid;grid-template-rows:minmax(0,1fr) auto;height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif}
+.settings-suite-scroll-v2{min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:max(15px,env(safe-area-inset-top)) 14px 28px;scrollbar-width:none}
+.settings-suite-scroll-v2::-webkit-scrollbar{display:none}.settings-suite-view-v2[hidden]{display:none!important}
+.settings-suite-header-v2{position:relative;display:grid;grid-template-columns:minmax(82px,1fr) auto minmax(82px,1fr);align-items:center;min-height:52px;margin-bottom:18px}
+.settings-suite-back-v2{justify-self:start;display:flex;align-items:center;gap:5px;min-height:44px;padding:0;border:0;background:transparent;color:var(--ss-accent);font:inherit;font-size:15px;font-weight:700}
+.settings-suite-back-v2 svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.settings-suite-header-v2 h1{margin:0;text-align:center;font-size:22px;line-height:1.2;letter-spacing:-.02em}.settings-suite-header-spacer-v2{min-width:82px}
+.settings-suite-intro-v2{margin:0 10px 20px;color:#292927;font-size:14px;line-height:1.65}
+.settings-suite-card-v2{margin-bottom:14px;padding:17px;border:1px solid var(--ss-line);border-radius:15px;background:#fff;box-shadow:0 5px 18px rgba(35,28,20,.035)}
+.settings-suite-card-v2 h2,.settings-suite-section-title-v2{margin:0 0 12px;color:var(--ss-accent);font-size:16px;font-weight:780}
+.settings-suite-card-v2 p{margin:5px 0;color:#444440;font-size:13px;line-height:1.55}
+.settings-suite-icon-title-v2{display:grid;grid-template-columns:48px minmax(0,1fr);gap:12px;align-items:center;margin-bottom:13px}
+.settings-suite-round-icon-v2{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:#f5ece7;color:var(--ss-accent)}
+.settings-suite-round-icon-v2 svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.settings-suite-icon-title-v2 h2{margin:0 0 3px;font-size:18px}.settings-suite-icon-title-v2 p{margin:0}
+.settings-suite-primary-v2,.settings-suite-secondary-v2,.settings-suite-danger-v2{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:48px;padding:10px 13px;border-radius:10px;font:inherit;font-size:15px;font-weight:760}
+.settings-suite-primary-v2{border:1px solid var(--ss-accent);background:var(--ss-accent);color:#fff}.settings-suite-primary-v2:disabled{opacity:.45}
+.settings-suite-secondary-v2{border:1px solid var(--ss-accent);background:#fff;color:var(--ss-accent)}
+.settings-suite-danger-v2{border:1px solid #c92a2a;background:#fff;color:#c92a2a}
+.settings-suite-primary-v2 svg,.settings-suite-secondary-v2 svg,.settings-suite-danger-v2 svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.settings-suite-field-v2{display:grid;gap:6px;margin:11px 0}.settings-suite-field-v2 label{font-size:13px;font-weight:720}
+.settings-suite-field-v2 input{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--ss-line);border-radius:9px;background:#f8f8f7;color:#171717;font:inherit;font-size:14px;box-sizing:border-box}
+.settings-suite-field-v2 input:focus{outline:2px solid rgba(129,55,21,.18);border-color:var(--ss-accent)}
+.settings-suite-note-v2{margin-top:10px!important;color:var(--ss-muted)!important;font-size:11px!important}
+.settings-suite-actions-v2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}.settings-suite-actions-v2.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.settings-suite-actions-v2 button{min-width:0;font-size:12px}.settings-suite-status-v2{min-height:20px;margin-top:9px;color:var(--ss-muted);font-size:12px;line-height:1.45}
+.settings-suite-status-v2.ok{color:#168c32}.settings-suite-status-v2.error{color:#c72c2c}
+.settings-suite-sync-state-v2{display:grid;grid-template-columns:56px minmax(0,1fr);gap:13px;align-items:center}
+.settings-suite-sync-state-v2 .settings-suite-round-icon-v2{width:56px;height:56px}.settings-suite-sync-state-v2 strong{display:block;margin-bottom:4px;color:#168c32;font-size:18px}
+.settings-suite-sync-state-v2.is-muted strong{color:#777}.settings-suite-sync-state-v2.is-error strong{color:#c72c2c}
+.settings-suite-pair-v2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.settings-suite-action-tile-v2{display:flex;align-items:center;gap:9px;min-height:74px;padding:12px;border:1px solid var(--ss-line);border-radius:11px;background:#fff;color:#171717;text-align:left;font:inherit}
+.settings-suite-action-tile-v2 svg{width:31px;height:31px;flex:none;color:var(--ss-accent);fill:none;stroke:currentColor;stroke-width:1.7}.settings-suite-action-tile-v2 strong{display:block;font-size:14px}.settings-suite-action-tile-v2 span{display:block;margin-top:2px;color:var(--ss-muted);font-size:10px;line-height:1.35}
+.settings-suite-toggle-row-v2{display:flex;align-items:center;justify-content:space-between;gap:15px}.settings-suite-toggle-v2{position:relative;width:48px;height:28px;flex:none}.settings-suite-toggle-v2 input{position:absolute;opacity:0}.settings-suite-toggle-v2 span{display:block;width:100%;height:100%;border-radius:999px;background:#cfcfcb;transition:.18s}.settings-suite-toggle-v2 span::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:.18s}.settings-suite-toggle-v2 input:checked+span{background:var(--ss-accent)}.settings-suite-toggle-v2 input:checked+span::after{transform:translateX(20px)}
+.settings-suite-list-v2{overflow:hidden;padding:0}.settings-suite-row-v2{display:grid;grid-template-columns:42px minmax(0,1fr) auto;gap:11px;align-items:center;width:100%;min-height:70px;padding:12px 15px;border:0;border-bottom:1px solid var(--ss-line);background:#fff;color:#171717;text-align:left;font:inherit}.settings-suite-row-v2:last-child{border-bottom:0}.settings-suite-row-v2 svg{width:28px;height:28px;color:#858581;fill:none;stroke:currentColor;stroke-width:1.7}.settings-suite-row-v2 strong{display:block;font-size:15px}.settings-suite-row-v2 small{display:block;margin-top:3px;color:var(--ss-muted);font-size:11px}.settings-suite-chevron-v2{color:var(--ss-accent);font-size:26px}
+.settings-suite-summary-v2{margin:12px 0;padding:13px;border:1px solid var(--ss-line);border-radius:10px;background:#fff}.settings-suite-summary-row-v2{display:flex;justify-content:space-between;gap:15px;padding:6px 0;font-size:13px}.settings-suite-summary-row-v2 strong{color:var(--ss-accent)}
+.settings-suite-filter-v2{margin:12px 0;padding:12px;border:1px solid var(--ss-line);border-radius:10px}.settings-suite-filter-v2 div{display:flex;justify-content:space-between;gap:12px;padding:5px 0;font-size:12px}.settings-suite-filter-v2 span:last-child{text-align:right;color:#444}
+.settings-suite-info-v2{padding:14px 16px;background:#fbfaf8}.settings-suite-info-v2 ul{margin:8px 0 0;padding-left:18px;color:#555;font-size:11px;line-height:1.6}
+.settings-suite-file-v2{display:none}.settings-suite-selected-v2[hidden]{display:none!important}
+.settings-suite-radio-v2{display:flex;gap:10px;padding:11px 0}.settings-suite-radio-v2 input{accent-color:var(--ss-accent)}.settings-suite-radio-v2 strong{font-size:14px}.settings-suite-radio-v2 span{display:block;margin-top:3px;color:var(--ss-muted);font-size:11px;line-height:1.45}
+.settings-suite-warning-v2{border-color:#efcfcf;background:#fffafa}.settings-suite-warning-v2 h2{color:#c72c2c}
+.settings-suite-history-host-v2 .cloud-resolution-history-list,.settings-suite-generation-host-v2 .cloud-history-list{display:block!important}
+.settings-suite-history-host-v2 .cloud-resolution-history-item,.settings-suite-generation-host-v2 .cloud-history-item{padding:14px;border-bottom:1px solid var(--ss-line);background:#fff;font-size:12px;line-height:1.5}
+.settings-suite-history-host-v2 .cloud-resolution-history-item:last-child,.settings-suite-generation-host-v2 .cloud-history-item:last-child{border-bottom:0}
+.settings-suite-generation-host-v2 .cloud-history-summary{padding:10px 14px;color:var(--ss-muted);font-size:11px}.settings-suite-generation-host-v2 .cloud-history-actions{display:flex;gap:7px;margin-top:8px}.settings-suite-generation-host-v2 button{min-height:36px;padding:7px 11px;border:1px solid var(--ss-accent);border-radius:8px;background:#fff;color:var(--ss-accent);font:inherit;font-size:12px;font-weight:700}
+.settings-suite-bottom-nav-v2{display:grid;grid-template-columns:repeat(5,1fr);min-height:72px;padding:7px 5px max(7px,env(safe-area-inset-bottom));border-top:1px solid var(--ss-line);background:rgba(255,255,255,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.settings-suite-bottom-nav-v2 button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;padding:2px;border:0;background:transparent;color:#999;font:inherit;font-size:10px;font-weight:650}.settings-suite-bottom-nav-v2 button.is-current{color:var(--ss-accent)}.settings-suite-bottom-nav-v2 svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:370px){.settings-suite-scroll-v2{padding-left:10px;padding-right:10px}.settings-suite-actions-v2.three{grid-template-columns:1fr}.settings-suite-pair-v2{grid-template-columns:1fr}.settings-suite-header-v2{grid-template-columns:minmax(70px,1fr) auto minmax(70px,1fr)}}
+</style>
+<script>
+// CueScore Settings Suite v2.0: UI adapters over existing cloud/export/restore logic.
+(() => {
+  const screen = document.getElementById("dataManagementScreen");
+  const settings = document.getElementById("settingsScreen");
+  const app = document.querySelector(".app");
+  if (!screen || screen.querySelector(".settings-suite-shell-v2")) return;
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+  const readJson = (key, fallback = null) => { try { return JSON.parse(localStorage.getItem(key) || "null") ?? fallback; } catch (_) { return fallback; } };
+  const readArray = key => { const value = readJson(key, []); return Array.isArray(value) ? value : []; };
+  const PLAYER_KEY = "rotationScoreboard.players.v1";
+  const RECORD_KEY = "rotationScoreboard.matchRecords.v1";
+  const CATEGORY_KEY = "rotationScoreboard.matchCategories.v1";
+  const SEASON_KEY = "rotationScoreboard.matchSeasons.v1";
+  const CONFIG_KEY = "rotationScoreboard.supabaseConfig.v1";
+  const DEVICE_KEY = "rotationScoreboard.cloudDeviceId.v1";
+  const AUTO_KEY = "rotationScoreboard.cloudAutoSave.v1";
+  const LAST_SYNC_KEY = "rotationScoreboard.cloudLastSuccessfulSave.v1";
+  const SYNC_HISTORY_KEY = "rotationScoreboard.cloudResolutionHistory.v1";
+  const icon = {
+    back:'<svg viewBox="0 0 24 24"><path d="m15 4-8 8 8 8"/></svg>',
+    cloud:'<svg viewBox="0 0 24 24"><path d="M6.5 18.5h10.8a4 4 0 0 0 .5-8A6 6 0 0 0 6.3 8.7a4.9 4.9 0 0 0 .2 9.8Z"/></svg>',
+    upload:'<svg viewBox="0 0 24 24"><path d="M12 16V4m0 0-4 4m4-4 4 4"/><path d="M5 14v5h14v-5"/></svg>',
+    download:'<svg viewBox="0 0 24 24"><path d="M12 4v12m0 0-4-4m4 4 4-4"/><path d="M5 18v2h14v-2"/></svg>',
+    file:'<svg viewBox="0 0 24 24"><path d="M6 2.5h8l4 4v15H6Z"/><path d="M14 2.5v4h4M9 12h6M9 16h6"/></svg>',
+    folder:'<svg viewBox="0 0 24 24"><path d="M3 6.5h7l2 2h9v11H3Z"/></svg>',
+    clock:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg>',
+    database:'<svg viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7" ry="3"/><path d="M5 5.5v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6M5 11.5v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg>',
+    home:'<svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.25A1.25 1.25 0 0 1 18.75 20H5.25A1.25 1.25 0 0 1 4 18.75Z"/><path d="M9.25 20v-6.5h5.5V20"/></svg>',
+    history:'<svg viewBox="0 0 24 24"><path d="M5.25 7.5A8 8 0 1 1 4 12"/><path d="M5.25 3.75V7.5H9"/><path d="M12 7.75V12l3 1.75"/></svg>',
+    analytics:'<svg viewBox="0 0 24 24"><path d="M4.5 19.5V14h3v5.5M10.5 19.5V9h3v10.5M16.5 19.5V4.5h3v15"/><path d="M3 19.5h18"/></svg>',
+    player:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25"/><path d="M5.5 20c.55-4.15 2.7-6.25 6.5-6.25s5.95 2.1 6.5 6.25"/></svg>',
+    gear:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.2 13.6a7.8 7.8 0 0 0 0-3.2l2-1.55-2-3.45-2.5 1a8 8 0 0 0-2.75-1.6L13.6 2h-4l-.35 2.8A8 8 0 0 0 6.5 6.4L4 5.4 2 8.85l2 1.55a7.8 7.8 0 0 0 0 3.2l-2 1.55 2 3.45 2.5-1a8 8 0 0 0 2.75-1.6l2.5 1 2-3.45Z"/></svg>'
+  };
+  const header = (view, back, title) => `<header class="settings-suite-header-v2"><button class="settings-suite-back-v2" type="button" data-suite-back="${back}">${icon.back}<span>${back === "settings" ? "設定" : "クラウド同期"}</span></button><h1>${title}</h1><span class="settings-suite-header-spacer-v2"></span></header>`;
+  const nav = ["home","history","analytics","player","settings"].map(key => {
+    const labels = {home:"Home",history:"対戦履歴",analytics:"分析",player:"プレーヤー",settings:"設定"};
+    return `<button type="button" data-suite-nav="${key}" class="${key === "settings" ? "is-current" : ""}">${icon[key === "settings" ? "gear" : key]}<span>${labels[key]}</span></button>`;
+  }).join("");
+  const root = document.createElement("div");
+  root.className = "settings-suite-shell-v2";
+  root.innerHTML = `
+    <div class="settings-suite-scroll-v2">
+      <section class="settings-suite-view-v2" data-suite-view="cloud">
+        ${header("cloud","settings","クラウド同期")}
+        <section class="settings-suite-card-v2"><h2>クラウド同期の状態</h2><div class="settings-suite-sync-state-v2" id="suiteCloudState"><span class="settings-suite-round-icon-v2">${icon.cloud}</span><div><strong>未設定</strong><p>接続設定とDevice IDを確認してください。</p><p class="settings-suite-note-v2" id="suiteLastSync">最終同期：未同期</p></div></div></section>
+        <section class="settings-suite-card-v2"><h2>接続設定</h2><div class="settings-suite-field-v2"><label for="suiteProjectUrl">Project URL</label><input id="suiteProjectUrl" type="url" autocomplete="off"></div><div class="settings-suite-field-v2"><label for="suitePublishableKey">Publishable key</label><input id="suitePublishableKey" type="password" autocomplete="off"></div><button class="settings-suite-primary-v2" id="suiteConnectBtn" type="button">接続設定を保存・確認</button><p class="settings-suite-note-v2">※ Secret key（sb_secret_...）は入力しないでください。Publishable keyはこの端末内だけに保存されます。</p><div class="settings-suite-status-v2" id="suiteConnectionStatus" role="status"></div></section>
+        <section class="settings-suite-card-v2"><h2>Device ID</h2><p>同じデータを共有するすべての端末で、同じDevice IDを設定してください。</p><div class="settings-suite-field-v2"><input id="suiteDeviceId" type="text" autocomplete="off"></div><div class="settings-suite-actions-v2 three"><button class="settings-suite-secondary-v2" id="suiteGenerateId" type="button">IDを自動生成</button><button class="settings-suite-secondary-v2" id="suiteSaveId" type="button">Device IDを保存</button><button class="settings-suite-primary-v2" id="suiteCopyId" type="button">Device IDをコピー</button></div><div class="settings-suite-status-v2" id="suiteDeviceStatus" role="status"></div></section>
+        <section class="settings-suite-card-v2"><h2>データ同期</h2><div class="settings-suite-pair-v2"><button class="settings-suite-action-tile-v2" id="suiteCloudSave" type="button">${icon.upload}<span><strong>クラウドへ保存</strong><span>データをクラウドに保存します</span></span></button><button class="settings-suite-action-tile-v2" id="suiteCloudLoad" type="button">${icon.download}<span><strong>クラウドから読み込む</strong><span>クラウドのデータを端末に復元します</span></span></button></div><div class="settings-suite-status-v2" id="suiteSyncStatus" role="status"></div></section>
+        <section class="settings-suite-card-v2"><h2>自動保存設定</h2><div class="settings-suite-toggle-row-v2"><div><strong>試合終了時に自動保存</strong><p>試合終了後、安全確認をしてクラウドへ保存します</p></div><label class="settings-suite-toggle-v2"><input id="suiteAutoSave" type="checkbox"><span></span></label></div></section>
+        <section class="settings-suite-card-v2 settings-suite-list-v2"><h2 style="padding:16px 15px 0">同期履歴・バックアップ</h2><button class="settings-suite-row-v2" type="button" data-suite-open="sync-history">${icon.clock}<span><strong>同期履歴</strong><small>クラウドとの同期履歴を確認できます</small></span><span class="settings-suite-chevron-v2">›</span></button><button class="settings-suite-row-v2" type="button" data-suite-open="generation">${icon.database}<span><strong>世代バックアップ</strong><small>過去のクラウドデータの世代を管理できます</small></span><span class="settings-suite-chevron-v2">›</span></button></section>
+      </section>
+      <section class="settings-suite-view-v2" data-suite-view="export" hidden>
+        ${header("export","settings","データ書き出し")}<p class="settings-suite-intro-v2">プレーヤーと対戦履歴を、端末に保存できます。<br>書き出したファイルは、バックアップや分析にご利用いただけます。</p>
+        <section class="settings-suite-card-v2"><div class="settings-suite-icon-title-v2"><span class="settings-suite-round-icon-v2">${icon.file}</span><div><h2>バックアップを書き出す（JSON）</h2><p>プレーヤー情報と対戦履歴を、復元可能な1つのファイルとして保存します。</p></div></div><button class="settings-suite-primary-v2" id="suiteExportJson" type="button">${icon.upload}バックアップを書き出す</button><div class="settings-suite-summary-v2"><h2>保存データ概要</h2><div class="settings-suite-summary-row-v2"><span>登録プレーヤー</span><strong id="suiteExportPlayers">0人</strong></div><div class="settings-suite-summary-row-v2"><span>対戦履歴</span><strong id="suiteExportRecords">0試合</strong></div></div><p class="settings-suite-note-v2">※ 最新の全データを1つのファイルに保存します。</p></section>
+        <section class="settings-suite-card-v2"><div class="settings-suite-icon-title-v2"><span class="settings-suite-round-icon-v2">${icon.file}</span><div><h2>CSVエクスポート</h2><p>現在の条件で絞り込んだ対戦履歴を、CSV形式で保存します。</p></div></div><div class="settings-suite-filter-v2" id="suiteCsvConditions"></div><button class="settings-suite-primary-v2" id="suiteExportCsv" type="button">${icon.upload}CSVを書き出す</button><p class="settings-suite-note-v2">※ 現在の絞り込み条件での試合データをCSVファイルとして保存します。</p></section>
+        <section class="settings-suite-card-v2 settings-suite-info-v2"><h2>書き出しについて</h2><ul><li>書き出したファイルはiPhoneの「ファイル」やiCloud Driveに保存されます。</li><li>JSONファイルは、このアプリの「データ復元」で読み込み可能です。</li><li>CSVファイルは表計算ソフトでご利用いただけます。</li></ul></section>
+      </section>
+      <section class="settings-suite-view-v2" data-suite-view="restore" hidden>
+        ${header("restore","settings","データ復元")}<p class="settings-suite-intro-v2">バックアップファイルを読み込んで、プレーヤー情報と対戦履歴を復元できます。</p>
+        <section class="settings-suite-card-v2"><div class="settings-suite-icon-title-v2"><span class="settings-suite-round-icon-v2">${icon.file}</span><div><h2>バックアップから復元</h2><p>保存したバックアップファイル（JSON）を選択してください。</p></div></div><button class="settings-suite-primary-v2" id="suiteSelectBackup" type="button">${icon.folder}バックアップファイルを選択</button><input class="settings-suite-file-v2" id="suiteBackupFile" type="file" accept=".json,application/json"></section>
+        <section class="settings-suite-card-v2 settings-suite-selected-v2" id="suiteSelectedBackup" hidden><h2>選択したバックアップ</h2><div id="suiteBackupSummary"></div></section>
+        <section class="settings-suite-card-v2 settings-suite-selected-v2" id="suiteRestoreOptions" hidden><h2>復元方法を選択</h2><label class="settings-suite-radio-v2"><input type="radio" name="suiteRestoreMode" value="merge" checked><span><strong>現在のデータへ追加</strong><span>現在のデータを保持したまま、重複を除いてバックアップ内容を追加します。</span></span></label><label class="settings-suite-radio-v2"><input type="radio" name="suiteRestoreMode" value="replace"><span><strong>現在のデータを置き換える</strong><span>現在のデータをバックアップ内容に置き換えます。</span></span></label><button class="settings-suite-primary-v2" id="suiteRestoreStart" type="button">復元を開始する</button><p class="settings-suite-note-v2">※ 復元前に現在の端末データを自動退避します。</p></section>
+        <section class="settings-suite-card-v2 settings-suite-warning-v2"><h2>危険な操作</h2><p><strong>全データを削除</strong><br>登録プレーヤーと対戦履歴をすべて削除します。この操作は元に戻せません。</p><button class="settings-suite-danger-v2" id="suiteDeleteAll" type="button">全データを削除</button></section>
+      </section>
+      <section class="settings-suite-view-v2" data-suite-view="sync-history" hidden>
+        ${header("sync-history","cloud","同期履歴")}<p class="settings-suite-intro-v2">クラウドとの同期履歴を、新しい順に表示します。</p><section class="settings-suite-card-v2 settings-suite-list-v2 settings-suite-history-host-v2" id="suiteSyncHistoryHost"></section><p class="settings-suite-note-v2">※ 既存の同期解決履歴を最大20件表示します。</p><button class="settings-suite-danger-v2" id="suiteClearSyncHistory" type="button">同期履歴をすべて削除</button>
+      </section>
+      <section class="settings-suite-view-v2" data-suite-view="generation" hidden>
+        ${header("generation","cloud","世代バックアップ")}<p class="settings-suite-intro-v2">クラウドに保存された過去のデータの世代を確認・復元できます。</p><section class="settings-suite-card-v2"><div class="settings-suite-icon-title-v2"><span class="settings-suite-round-icon-v2">${icon.database}</span><div><h2>バックアップ概要</h2><p id="suiteGenerationSummary">クラウド接続後に実データを取得します。</p></div></div></section><h2 class="settings-suite-section-title-v2">世代一覧</h2><section class="settings-suite-card-v2 settings-suite-list-v2 settings-suite-generation-host-v2" id="suiteGenerationHost"></section><p class="settings-suite-note-v2">※ 復元前には現在の端末データが自動退避されます。</p>
+      </section>
+    </div>
+    <nav class="settings-suite-bottom-nav-v2">${nav}</nav>`;
+  screen.appendChild(root);
+  screen.classList.add("settings-suite-v2");
+  const scroll = $(".settings-suite-scroll-v2", root);
+  let currentView = "cloud";
+  let selectedBackup = null;
+  let selectedBackupFile = null;
+
+  function formatDate(value) {
+    const date = value ? new Date(value) : null;
+    return date && !Number.isNaN(date.getTime()) ? new Intl.DateTimeFormat("ja-JP",{year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}).format(date) : "未同期";
+  }
+  function showView(view) {
+    currentView = view;
+    root.querySelectorAll("[data-suite-view]").forEach(node => { node.hidden = node.dataset.suiteView !== view; });
+    scroll.scrollTo(0,0);
+    if (view === "cloud") renderCloud();
+    if (view === "export") renderExport();
+    if (view === "sync-history") mountSyncHistory();
+    if (view === "generation") mountGeneration();
+  }
+  function openSuite(view) {
+    app?.classList.remove("settings-mode");
+    screen.classList.remove("hidden"); screen.setAttribute("aria-hidden","false");
+    showView(view);
+  }
+  function closeSuite() {
+    screen.classList.add("hidden"); screen.setAttribute("aria-hidden","true");
+    app?.classList.add("settings-mode");
+    showView("cloud");
+  }
+  function renderCloud() {
+    const config = readJson(CONFIG_KEY,{});
+    const device = String(localStorage.getItem(DEVICE_KEY)||"");
+    $("#suiteProjectUrl",root).value = config?.projectUrl || $("#supabaseProjectUrl")?.value || "";
+    $("#suitePublishableKey",root).value = config?.publishableKey || "";
+    $("#suiteDeviceId",root).value = device;
+    $("#suiteAutoSave",root).checked = localStorage.getItem(AUTO_KEY) !== "false";
+    const pending = readJson("rotationScoreboard.cloudPendingSave.v1",null);
+    const last = readJson(LAST_SYNC_KEY,{});
+    const state = $("#suiteCloudState",root), title = $("strong",state), body = $("p",state);
+    state.classList.remove("is-muted","is-error");
+    if (!navigator.onLine) { title.textContent="オフライン"; body.textContent="通信接続を確認してください。"; state.classList.add("is-muted"); }
+    else if (pending) { title.textContent="要確認"; body.textContent="未解決の同期処理があります。"; state.classList.add("is-error"); }
+    else if (config?.projectUrl && config?.publishableKey && device.length>=12) { title.textContent="正常"; body.textContent="クラウド同期の接続設定が保存されています。"; }
+    else { title.textContent="未設定"; body.textContent="接続設定とDevice IDを確認してください。"; state.classList.add("is-muted"); }
+    $("#suiteLastSync",root).textContent=`最終同期：${formatDate(last?.savedAt)}`;
+  }
+  function renderExport() {
+    $("#suiteExportPlayers",root).textContent=`${readArray(PLAYER_KEY).length}人`;
+    $("#suiteExportRecords",root).textContent=`${readArray(RECORD_KEY).length}試合`;
+    let filter={}; try{filter=window.getStatisticsFilterV53?.()||{}}catch(_){}
+    const player=filter.player?String(filter.player).replace(/^id:|^name:/,""):"全プレーヤー";
+    const period=filter.startDate||filter.endDate?`${filter.startDate||"指定なし"} ～ ${filter.endDate||"指定なし"}`:"すべての期間";
+    const other=[filter.category,filter.season].filter(Boolean).join("／")||"すべての試合";
+    $("#suiteCsvConditions",root).innerHTML=`<div><strong>対象</strong><span>${esc(player)}</span></div><div><strong>期間</strong><span>${esc(period)}</span></div><div><strong>その他の条件</strong><span>${esc(other)}</span></div>`;
+  }
+  function proxyClick(id) { document.getElementById(id)?.click(); }
+  function syncOldCloudInputs() {
+    const oldUrl=$("#supabaseProjectUrl"),oldKey=$("#supabasePublishableKey"),oldId=$("#cloudDeviceId");
+    if(oldUrl)oldUrl.value=$("#suiteProjectUrl",root).value.trim();
+    if(oldKey)oldKey.value=$("#suitePublishableKey",root).value.trim();
+    if(oldId)oldId.value=$("#suiteDeviceId",root).value.trim();
+  }
+  function mirrorStatus(oldId,newId) {
+    const old=document.getElementById(oldId),target=$(newId,root);if(!old||!target)return;
+    const update=()=>{target.textContent=old.textContent;target.className="settings-suite-status-v2"+(old.classList.contains("error")?" error":old.classList.contains("ok")?" ok":"")};
+    new MutationObserver(update).observe(old,{childList:true,subtree:true,characterData:true,attributes:true});update();
+  }
+  mirrorStatus("supabaseConnectionStatus","#suiteConnectionStatus");
+  mirrorStatus("deviceIdStatus","#suiteDeviceStatus");
+  mirrorStatus("cloudSyncStatus","#suiteSyncStatus");
+
+  function normalizeText(value){return String(value??"").normalize("NFKC").trim().replace(/\s+/g," ").toLocaleLowerCase("ja")}
+  function playerKey(player){const id=player?.id??player?.playerId??player?.uuid;return id?`id:${String(id)}`:`name:${normalizeText(player?.name)}`}
+  function recordKey(record){
+    const id=record?.id??record?.matchId;if(id)return `id:${String(id)}`;
+    const p1=record?.players?.[1]||record?.players?.["1"]||{},p2=record?.players?.[2]||record?.players?.["2"]||{};
+    return ["legacy",record?.startedAt||record?.playedAt||record?.endedAt||"",normalizeText(p1.name),normalizeText(p2.name),Number(p1.score||0),Number(p2.score||0)].join("|");
+  }
+  function listItemKey(item){if(typeof item==="string")return `text:${normalizeText(item)}`;return `id:${item?.id??item?.key??normalizeText(item?.name??item?.label??JSON.stringify(item))}`}
+  function validateBackup(value){return value&&typeof value==="object"&&value.format==="rotation-scoreboard-backup"&&Array.isArray(value.players)&&Array.isArray(value.matchRecords)&&value.matchRecords.every(r=>r&&typeof r==="object"&&r.players?.[1]&&r.players?.[2])}
+  function mergeUnique(current,incoming,keyFn){const keys=new Set(current.map(keyFn));const added=[];incoming.forEach(item=>{const key=keyFn(item);if(!keys.has(key)){keys.add(key);added.push(item)}});return {value:[...current,...added],added:added.length}}
+  function verifiedWrite(key,value){localStorage.setItem(key,JSON.stringify(value));const check=JSON.parse(localStorage.getItem(key)||"null");if(JSON.stringify(check)!==JSON.stringify(value))throw new Error(`${key}の保存確認に失敗しました。`)}
+  async function mergeBackup(backup){
+    const current={players:readArray(PLAYER_KEY),records:readArray(RECORD_KEY),categories:readArray(CATEGORY_KEY),seasons:readArray(SEASON_KEY)};
+    const nextPlayers=mergeUnique(current.players,backup.players,playerKey);
+    const nextRecords=mergeUnique(current.records,backup.matchRecords,recordKey);
+    const nextCategories=mergeUnique(current.categories,Array.isArray(backup.matchCategories)?backup.matchCategories:[],listItemKey);
+    const nextSeasons=mergeUnique(current.seasons,Array.isArray(backup.matchSeasons)?backup.matchSeasons:[],listItemKey);
+    const snapshotKey=`rotationScoreboard.beforeLocalMergeRestore.${Date.now()}`;
+    localStorage.setItem(snapshotKey,JSON.stringify({...current,createdAt:new Date().toISOString(),source:"before-merge-restore"}));
+    try{
+      verifiedWrite(PLAYER_KEY,nextPlayers.value);verifiedWrite(RECORD_KEY,nextRecords.value);verifiedWrite(CATEGORY_KEY,nextCategories.value);verifiedWrite(SEASON_KEY,nextSeasons.value);
+      await window.cueScoreMarkCloudDirtyV133?.("local-backup-restored",{playerCount:nextPlayers.value.length,recordCount:nextRecords.value.length});
+    }catch(error){
+      verifiedWrite(PLAYER_KEY,current.players);verifiedWrite(RECORD_KEY,current.records);verifiedWrite(CATEGORY_KEY,current.categories);verifiedWrite(SEASON_KEY,current.seasons);throw error;
+    }
+    return {players:nextPlayers.added,records:nextRecords.added,categories:nextCategories.added,seasons:nextSeasons.added};
+  }
+  function handFileToExistingRestore(file){
+    const input=document.getElementById("backupFileInput");if(!input)return false;
+    const transfer=new DataTransfer();transfer.items.add(file);input.files=transfer.files;input.dispatchEvent(new Event("change",{bubbles:true}));return true;
+  }
+  function renderSelectedBackup(file,backup){
+    const section=$("#suiteSelectedBackup",root),options=$("#suiteRestoreOptions",root);
+    section.hidden=false;options.hidden=false;
+    $("#suiteBackupSummary",root).innerHTML=`<div class="settings-suite-summary-row-v2"><span>作成日時</span><strong>${esc(formatDate(backup.exportedAt))}</strong></div><div class="settings-suite-summary-row-v2"><span>登録プレーヤー</span><strong>${backup.players.length}人</strong></div><div class="settings-suite-summary-row-v2"><span>対戦履歴</span><strong>${backup.matchRecords.length}試合</strong></div><div class="settings-suite-summary-row-v2"><span>ファイル名</span><strong>${esc(file.name)}</strong></div>`;
+  }
+  function mountSyncHistory(){
+    const host=$("#suiteSyncHistoryHost",root),list=document.getElementById("cloudResolutionHistoryList");
+    if(list&&list.parentElement!==host)host.appendChild(list);
+    if(!list?.children.length)list.innerHTML='<div class="cloud-resolution-history-empty" style="padding:18px">同期履歴はまだありません。</div>';
+  }
+  function mountGeneration(){
+    const host=$("#suiteGenerationHost",root),list=document.getElementById("cloudHistoryList");
+    if(list&&list.parentElement!==host)host.appendChild(list);
+    $("#suiteGenerationSummary",root).textContent=`登録プレーヤー ${readArray(PLAYER_KEY).length}人　対戦履歴 ${readArray(RECORD_KEY).length}試合`;
+    proxyClick("cloudHistoryRefreshBtn");
+  }
+  root.addEventListener("click",async event=>{
+    const back=event.target.closest("[data-suite-back]")?.dataset.suiteBack;if(back){if(back==="settings")closeSuite();else showView("cloud");return}
+    const open=event.target.closest("[data-suite-open]")?.dataset.suiteOpen;if(open){showView(open);return}
+    const navKey=event.target.closest("[data-suite-nav]")?.dataset.suiteNav;if(navKey){closeSuite();if(navKey==="settings")return;document.getElementById("settingsBackBtn")?.click();if(navKey==="history")proxyClick("recordsBtn");if(navKey==="analytics")proxyClick("openRankingsBtn");if(navKey==="player")proxyClick("playerManagementBtn");return}
+    const id=event.target.closest("button")?.id;
+    if(id==="suiteConnectBtn"){syncOldCloudInputs();proxyClick("supabaseConnectBtn")}
+    if(id==="suiteGenerateId"){syncOldCloudInputs();proxyClick("generateDeviceIdBtn");setTimeout(()=>{$("#suiteDeviceId",root).value=$("#cloudDeviceId")?.value||""},0)}
+    if(id==="suiteSaveId"){syncOldCloudInputs();proxyClick("saveDeviceIdBtn")}
+    if(id==="suiteCopyId"){syncOldCloudInputs();proxyClick("copyDeviceIdBtn")}
+    if(id==="suiteCloudSave")proxyClick("cloudSaveBtn");
+    if(id==="suiteCloudLoad")proxyClick("cloudLoadBtn");
+    if(id==="suiteExportJson")proxyClick("exportBackupBtn");
+    if(id==="suiteExportCsv")proxyClick("exportCsvBtn");
+    if(id==="suiteSelectBackup")$("#suiteBackupFile",root).click();
+    if(id==="suiteDeleteAll")proxyClick("deleteAllDataBtn");
+    if(id==="suiteClearSyncHistory")proxyClick("cloudResolutionHistoryClearBtn");
+    if(id==="suiteRestoreStart"&&selectedBackup&&selectedBackupFile){
+      const button=event.target.closest("button"),mode=$('input[name="suiteRestoreMode"]:checked',root)?.value||"merge";button.disabled=true;
+      try{
+        if(mode==="replace"){handFileToExistingRestore(selectedBackupFile)}
+        else{
+          const result=await mergeBackup(selectedBackup);
+          alert(`追加・統合しました。\nプレーヤー ${result.players}人追加\n対戦履歴 ${result.records}試合追加\n試合区分 ${result.categories}件追加\nシーズン ${result.seasons}件追加`);
+          window.location.reload();
+        }
+      }catch(error){console.error(error);alert(`復元できませんでした。現在のデータは元の状態へ戻しました。\n${error.message}`)}
+      finally{button.disabled=false}
+    }
+  });
+  $("#suiteAutoSave",root).addEventListener("change",event=>{const old=$("#cloudAutoSaveToggle");if(old){old.checked=event.target.checked;old.dispatchEvent(new Event("change",{bubbles:true}))}});
+  $("#suiteBackupFile",root).addEventListener("change",async event=>{
+    const file=event.target.files?.[0];if(!file)return;
+    try{const backup=JSON.parse(await file.text());if(!validateBackup(backup))throw new Error("CueScoreの正しいバックアップファイルではありません。");selectedBackup=backup;selectedBackupFile=file;renderSelectedBackup(file,backup)}
+    catch(error){selectedBackup=null;selectedBackupFile=null;alert(error.message);event.target.value=""}
+  });
+  settings?.addEventListener("click",event=>{
+    const action=event.target.closest(".settings-formal-shell-v1 [data-settings-action]")?.dataset.settingsAction;
+    if(!action)return;event.preventDefault();event.stopImmediatePropagation();
+    openSuite(action==="csv"?"export":action);
+  },true);
+  window.addEventListener("online",()=>currentView==="cloud"&&renderCloud());window.addEventListener("offline",()=>currentView==="cloud"&&renderCloud());
+  window.openCueScoreSettingsSuiteV2=openSuite;
+})();
+</script>
 </body>
 </html>
 
