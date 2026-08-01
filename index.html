@@ -8085,10 +8085,6 @@ body {
           <span class="cue-ball-icon-v1" aria-hidden="true">9</span>
           <span class="cue-discipline-label-v1">9-Ball</span>
         </button>
-        <button class="cue-discipline-v1" type="button" role="tab" aria-selected="false" data-discipline="10ball">
-          <span class="cue-ball-icon-v1" aria-hidden="true">10</span>
-          <span class="cue-discipline-label-v1">10-Ball</span>
-        </button>
         <button class="cue-discipline-v1" type="button" role="tab" aria-selected="false" data-discipline="jpa9">
           <span class="cue-ball-icon-v1" aria-hidden="true">JPA</span>
           <span class="cue-discipline-label-v1">JPA 9-Ball</span>
@@ -8115,6 +8111,12 @@ body {
             <input id="cueShootoutRuleV2" type="checkbox" />
             <span class="cue-toggle-track-v2" aria-hidden="true"></span>
           </label>
+        </div>
+        <div class="nine-ball-settings-v1" id="nineBallSettingsV1" hidden aria-label="9-Ballルール設定">
+          <label><span>ブレイク方式</span><select id="nineBallBreakRuleV1"><option value="winner">勝者ブレイク</option><option value="alternate">交互ブレイク</option><option value="loser">敗者ブレイク</option></select></label>
+          <label><span>3ファール</span><input id="nineBallThreeFoulV1" type="checkbox" checked><i aria-hidden="true"></i></label>
+          <label><span>プッシュアウト</span><input id="nineBallPushOutV1" type="checkbox" checked><i aria-hidden="true"></i></label>
+          <label><span>詳細入力</span><input id="nineBallDetailV1" type="checkbox" checked><i aria-hidden="true"></i></label>
         </div>
         <span id="cueRuleValueV1" class="cue-rule-value-v1 cue-rule-value-hidden-v2">詳細版</span>
 
@@ -9007,8 +9009,7 @@ body {
     const JPA_SKILL_KEY = "cueScore.jpa9.skillLevels.v1";
     const disciplines = {
       rotation: { name: "Rotation", icon: "15", rule: "設定項目はありません" },
-      "9ball": { name: "9-Ball", icon: "9", rule: "標準ルール（準備中）" },
-      "10ball": { name: "10-Ball", icon: "10", rule: "標準ルール（準備中）" },
+      "9ball": { name: "9-Ball", icon: "9", rule: "ラック制" },
       jpa9: { name: "JPA 9-Ball", icon: "JPA", rule: "SL別目標点" }
     };
 
@@ -9040,6 +9041,7 @@ body {
     const renderHomePreference = () => {
       const selected = disciplines[selectedDiscipline];
       const jpaMode = selectedDiscipline === "jpa9";
+      const nineBallMode = selectedDiscipline === "9ball";
       document.querySelector(".app")?.classList.toggle("jpa9-setup", jpaMode);
       document.querySelectorAll("[data-discipline]").forEach(button => {
         const active = button.dataset.discipline === selectedDiscipline;
@@ -9053,7 +9055,10 @@ body {
       const shootout = document.getElementById("cueShootoutRuleV2");
       if (illegal) illegal.checked = selectedRules.illegal !== false;
       if (shootout) shootout.checked = Boolean(selectedRules.shootout);
+      if (shootout?.closest("label")) shootout.closest("label").hidden = nineBallMode;
       document.querySelectorAll(".cue-game-rules-v2").forEach(node => node.hidden = jpaMode);
+      const nineSettings = document.getElementById("nineBallSettingsV1");
+      if (nineSettings) nineSettings.hidden = !nineBallMode;
       const jpaTargets = {1:14,2:19,3:25,4:31,5:38,6:46,7:55,8:65,9:75};
       [1,2].forEach(player => {
         const row = document.querySelector(`[data-race-target="p${player}Race"]`);
@@ -9073,6 +9078,7 @@ body {
           if (target) { target.hidden = false; target.textContent = `目標 ${jpaTargets[sl]}点`; }
         } else {
           if (input) input.value = input.dataset.rotationRace || input.value || "120";
+          if (nineBallMode && input) input.value = String(Math.min(15, Math.max(1, Number(input.dataset.nineBallRace || 5))));
           if (label) label.textContent = "Race to";
           if (display && input) display.textContent = input.value || "120";
           if (target) target.hidden = true;
@@ -9096,12 +9102,38 @@ body {
         safeWrite(RULES_KEY, JSON.stringify(selectedRules));
       });
     });
+    const NINE_SETTINGS_KEY = "cueScore.nineBall.settings.v1";
+    let nineSettingsValue;
+    try { nineSettingsValue = JSON.parse(safeRead(NINE_SETTINGS_KEY, '{"breakRule":"winner","threeFoul":true,"pushOut":true,"illegalBreak":true,"recordMode":"detail"}')); }
+    catch (_) { nineSettingsValue = {breakRule:"winner",threeFoul:true,pushOut:true,illegalBreak:true,recordMode:"detail"}; }
+    const syncNineSettings = () => {
+      const breakRule = document.getElementById("nineBallBreakRuleV1");
+      const threeFoul = document.getElementById("nineBallThreeFoulV1");
+      const pushOut = document.getElementById("nineBallPushOutV1");
+      const detail = document.getElementById("nineBallDetailV1");
+      if (breakRule) breakRule.value = nineSettingsValue.breakRule || "winner";
+      if (threeFoul) threeFoul.checked = nineSettingsValue.threeFoul !== false;
+      if (pushOut) pushOut.checked = nineSettingsValue.pushOut !== false;
+      if (detail) detail.checked = nineSettingsValue.recordMode !== "simple";
+    };
+    ["nineBallBreakRuleV1","nineBallThreeFoulV1","nineBallPushOutV1","nineBallDetailV1"].forEach(id => document.getElementById(id)?.addEventListener("change", () => {
+      nineSettingsValue = {
+        breakRule: document.getElementById("nineBallBreakRuleV1")?.value || "winner",
+        threeFoul: Boolean(document.getElementById("nineBallThreeFoulV1")?.checked),
+        pushOut: Boolean(document.getElementById("nineBallPushOutV1")?.checked),
+        illegalBreak: Boolean(document.getElementById("cueIllegalRuleV2")?.checked),
+        recordMode: document.getElementById("nineBallDetailV1")?.checked ? "detail" : "simple"
+      };
+      safeWrite(NINE_SETTINGS_KEY, JSON.stringify(nineSettingsValue));
+    }));
+    syncNineSettings();
     document.getElementById("cueHomeSettingsBtnV2")?.addEventListener("click", () => document.getElementById("settingsBtn")?.click());
 
     window.getCueScoreHomeSelectionV1 = () => ({
       disciplineId: selectedDiscipline,
       recordMode: "detailed",
       rules: { ...selectedRules }
+      ,nineBall: { ...nineSettingsValue }
     });
     window.saveCueScoreJPA9SkillsV1 = skills => {
       savedJPA9Skills = {1:Number(skills?.[1])||5,2:Number(skills?.[2])||5};
@@ -9114,17 +9146,22 @@ body {
   // Rotation Scoreboard Ver.6.8.0: future multi-game data foundation
   const ROTATION_APP_VERSION = "1.0";
   const ROTATION_GAME_TYPE = "rotation";
+  const NINE_BALL_GAME_TYPE = "nineBall";
   const JPA9_GAME_TYPE = "jpa9Ball";
   const ROTATION_RECORD_SCHEMA_VERSION = 4;
   const JPA9_SL_TARGETS = Object.freeze({1:14,2:19,3:25,4:31,5:38,6:46,7:55,8:65,9:75});
   let activeGameTypeV1 = ROTATION_GAME_TYPE;
   let jpa9SkillLevelsV1 = {1:5,2:5};
   let deadBallsV1 = new Set();
+  let nineBallSettingsV1 = {breakRule:"winner",threeFoul:true,pushOut:true,illegalBreak:true,recordMode:"detail"};
+  let nineBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[]};
 
   function isJPA9V1() { return activeGameTypeV1 === JPA9_GAME_TYPE; }
-  function activeBallPointsV1(number) { return isJPA9V1() ? (Number(number) === 9 ? 2 : 1) : Number(number); }
+  function isNineBallV1() { return activeGameTypeV1 === NINE_BALL_GAME_TYPE; }
+  function activeBallPointsV1(number) { return isJPA9V1() ? (Number(number) === 9 ? 2 : 1) : isNineBallV1() ? 0 : Number(number); }
   function selectedGameTypeV1() {
-    return window.getCueScoreHomeSelectionV1?.().disciplineId === "jpa9" ? JPA9_GAME_TYPE : ROTATION_GAME_TYPE;
+    const discipline = window.getCueScoreHomeSelectionV1?.().disciplineId;
+    return discipline === "jpa9" ? JPA9_GAME_TYPE : discipline === "9ball" ? NINE_BALL_GAME_TYPE : ROTATION_GAME_TYPE;
   }
 
   // Ver.6.9.9: Billiard Rules Engine foundation.
@@ -9192,6 +9229,42 @@ body {
 
   function getActiveRuleV699(gameType = activeGameTypeV1) {
     return BILLIARD_RULES[gameType] || BILLIARD_RULES.rotation;
+  }
+
+  function isNineBallPushOutEnabledV1() {
+    return isNineBallV1() ? nineBallSettingsV1.pushOut !== false : Boolean(getActiveRuleV699().pushOut?.enabled);
+  }
+
+  function nextNineBallBreakerV1(rackWinner) {
+    const loser = rackWinner === 1 ? 2 : 1;
+    if (nineBallSettingsV1.breakRule === "loser") return loser;
+    if (nineBallSettingsV1.breakRule === "alternate") {
+      return Number(rack) % 2 === 1 ? (nineBallStateV1.initialBreaker === 1 ? 2 : 1) : nineBallStateV1.initialBreaker;
+    }
+    return rackWinner;
+  }
+
+  function completeNineBallRackV1(rackWinner, reason = "legalNine", details = {}) {
+    if (!isNineBallV1() || rackEnded) return;
+    const winner = Number(rackWinner) === 2 ? 2 : 1;
+    const loser = winner === 1 ? 2 : 1;
+    scores[winner] += 1;
+    rackScores[winner] = 1;
+    nextBreakPlayer = nextNineBallBreakerV1(winner);
+    rackEnded = true;
+    foulLocked = false;
+    turnLockReasonV62 = null;
+    nineBallStateV1.ballInHandFor = null;
+    nineBallStateV1.rackResults.push({rack:Number(rack),winner,loser,reason,nextBreakPlayer,endedAt:new Date().toISOString(),...details});
+    nineBallStateV1.consecutiveFouls = {1:0,2:0};
+    appendCommonEventV700("RackEnd", "rack_end", {player:winner,winner,loser,rack:Number(rack),rackEndReason:reason,nextBreakPlayer,...details});
+    recordAnalysisEventV60("rack_end", {player:winner,winner,loser,rack:Number(rack),rackEndReason:reason,nextBreakPlayer,...details}, {skipCommon:true});
+  }
+
+  function spotNineBallV1(reason, player = current) {
+    if (!isNineBallV1()) return;
+    usedBalls.delete(9);
+    appendCommonEventV700("SpotBall", "spot_ball", {player,ballNumber:9,reason,rack:Number(rack)});
   }
 
   function normalizeMatchRecordV680(record) {
@@ -11162,12 +11235,13 @@ let matchRecordsRawCacheV152 = null;
       .filter(number => Number.isInteger(number) && number >= 1 && number <= Number(rule.ballCount || 15))
       .sort((a,b) => a-b);
     const scratch = Boolean(input.scratch);
-    const illegalBreak = Boolean(breakRule.illegalBreakEnabled && input.illegalBreak);
+    const illegalBreakEnabled = isNineBallV1() ? nineBallSettingsV1.illegalBreak !== false : breakRule.illegalBreakEnabled;
+    const illegalBreak = Boolean(illegalBreakEnabled && input.illegalBreak);
     const foul = scratch || illegalBreak;
     const scoredBalls = breakRule.pocketedBallsScore === false || (isJPA9V1() && scratch) ? [] : [...pocketedBalls];
     const scoreAdded = scoredBalls.reduce((sum, number) => sum + activeBallPointsV1(number), 0);
     const changesTurn = foul && Boolean(breakRule.scratchChangesTurn);
-    const pushOutRequested = Boolean(input.pushOutRequested && rule.pushOut?.enabled && !foul);
+    const pushOutRequested = Boolean(input.pushOutRequested && isNineBallPushOutEnabledV1() && rule.pushOut?.enabled && !foul);
     return {
       player,
       rack: Number(input.rackNumber) || Number(rack) || 1,
@@ -11238,7 +11312,7 @@ let matchRecordsRawCacheV152 = null;
 
   function armPushOutWindowV730(decision) {
     const rule = getActiveRuleV699();
-    if (!rule.pushOut?.enabled || !decision?.legalBreak || decision?.foul) return clearPushOutWindowV730();
+    if (!isNineBallPushOutEnabledV1() || !rule.pushOut?.enabled || !decision?.legalBreak || decision?.foul) return clearPushOutWindowV730();
     const breaker = Number(decision.player) === 2 ? 2 : 1;
     const dry = Number(decision.pocketedBalls?.length || 0) === 0;
     pushOutStateV730 = {
@@ -11255,7 +11329,7 @@ let matchRecordsRawCacheV152 = null;
 
   function isPushOutAvailableV730() {
     const rule = getActiveRuleV699();
-    return Boolean(rule.pushOut?.enabled && pushOutStateV730?.stage === "available" && Number(pushOutStateV730.executor) === Number(current) && Number(pushOutStateV730.rack) === Number(rack) && !rackEnded && !gameEnded && !isReviewLocked());
+    return Boolean(isNineBallPushOutEnabledV1() && rule.pushOut?.enabled && pushOutStateV730?.stage === "available" && Number(pushOutStateV730.executor) === Number(current) && Number(pushOutStateV730.rack) === Number(rack) && !rackEnded && !gameEnded && !isReviewLocked());
   }
 
 
@@ -11462,7 +11536,9 @@ let matchRecordsRawCacheV152 = null;
       button.hidden = Number(button.dataset.breakBall) > ballCount;
     });
     const illegalButton = el("breakIllegalToggleV696");
-    if (illegalButton) illegalButton.hidden = !getActiveRuleV699().break?.illegalBreakEnabled;
+    if (illegalButton) illegalButton.hidden = isNineBallV1()
+      ? nineBallSettingsV1.illegalBreak === false
+      : !getActiveRuleV699().break?.illegalBreakEnabled;
     overlay.setAttribute("aria-hidden", "false");
     overlay.classList.remove("hidden");
   }
@@ -11479,7 +11555,9 @@ let matchRecordsRawCacheV152 = null;
     pendingBreakBallsV696 = new Set((payload.pocketedBalls || []).map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= activeBallCountV111));
     pendingBreakNoInV702 = Boolean(payload.noIn) || (pendingBreakBallsV696.size === 0 && !payload.scratch && !payload.illegalBreak && !payload.pushOut);
     pendingBreakScratchV696 = Boolean(payload.scratch);
-    pendingBreakIllegalV696 = false;
+    pendingBreakIllegalV696 = Boolean(payload.illegalBreak) && (isNineBallV1()
+      ? nineBallSettingsV1.illegalBreak !== false
+      : Boolean(getActiveRuleV699().break?.illegalBreakEnabled));
     pendingBreakPushOutV695 = Boolean(payload.pushOut);
     pendingBreakStartsNextRackV1 = false;
     el("breakResultRackV61").textContent = pendingBreakRackV61;
@@ -11621,6 +11699,15 @@ let matchRecordsRawCacheV152 = null;
           source: "break_prompt"
         }, { skipCommon: true });
       });
+      if (isNineBallV1()) {
+        decision.pocketedBalls.forEach(number => {
+          if (number === 9 && decision.foul) return;
+          usedBalls.add(number);
+          currentRun[player] += 1;
+          if (currentRun[player] > maxRun[player]) maxRun[player] = currentRun[player];
+        });
+        if (decision.foul && decision.pocketedBalls.includes(9)) spotNineBallV1(decision.illegalBreak ? "illegal_break" : "break_foul", player);
+      }
       if (isJPA9V1() && decision.scratch) {
         decision.pocketedBalls.forEach(number => {
           usedBalls.add(number);
@@ -11681,7 +11768,27 @@ let matchRecordsRawCacheV152 = null;
         turnLockReasonV62 = "dry_break";
       }
 
-      if (isJPA9V1() && (decision.foul || decision.pocketedBalls.length === 0)) {
+      if (isNineBallV1() && (decision.foul || decision.pocketedBalls.length === 0)) {
+        endCurrentRun(player);
+        const opponent = player === 1 ? 2 : 1;
+        if (decision.foul) {
+          nineBallStateV1.consecutiveFouls[player] = Number(nineBallStateV1.consecutiveFouls[player] || 0) + 1;
+          nineBallStateV1.ballInHandFor = opponent;
+        } else {
+          nineBallStateV1.consecutiveFouls[player] = 0;
+          nineBallStateV1.ballInHandFor = null;
+        }
+        current = opponent;
+        if (current === startingPlayer) { inning++; forceNewRow = true; }
+        foulLocked = false;
+        turnLockReasonV62 = null;
+        if (pushOutStateV730?.stage === "waiting_turn_change" && Number(pushOutStateV730.executor) === Number(current)) {
+          pushOutStateV730.stage = "available";
+        }
+        if (decision.foul && Number(nineBallStateV1.consecutiveFouls[player] || 0) >= 3 && nineBallSettingsV1.threeFoul !== false) {
+          completeNineBallRackV1(opponent, "threeFoulLoss", {foulingPlayer:player,consecutiveFouls:3,source:"break"});
+        }
+      } else if (isJPA9V1() && (decision.foul || decision.pocketedBalls.length === 0)) {
         endCurrentRun(player);
         current = player === 1 ? 2 : 1;
         if (current === startingPlayer) { inning++; forceNewRow = true; }
@@ -11689,7 +11796,9 @@ let matchRecordsRawCacheV152 = null;
         turnLockReasonV62 = null;
       }
 
-      if ((isJPA9V1() && !decision.foul && decision.pocketedBalls.includes(9)) || usedBalls.size === Number(getActiveRuleV699().ballCount || 15)) {
+      if (isNineBallV1() && !decision.foul && decision.pocketedBalls.includes(9)) {
+        completeNineBallRackV1(player, "legalBreakNine", {ballNumber:9,source:"break"});
+      } else if ((isJPA9V1() && !decision.foul && decision.pocketedBalls.includes(9)) || usedBalls.size === Number(getActiveRuleV699().ballCount || 15)) {
         rackEnded = true;
         foulLocked = false;
         nextBreakPlayer = player;
@@ -11950,6 +12059,7 @@ let matchRecordsRawCacheV152 = null;
   function snapshot() {
     return {
       activeGameTypeV1, jpa9SkillLevelsV1:{...jpa9SkillLevelsV1}, deadBallsV1:[...deadBallsV1],
+      nineBallSettingsV1:{...nineBallSettingsV1}, nineBallStateV1:JSON.parse(JSON.stringify(nineBallStateV1)),
       current, startingPlayer, goals:{...goals}, rack, inning,
       scores:{...scores}, rackScores:{...rackScores}, breakCount:{...breakCount}, currentRun:{...currentRun}, maxRun:{...maxRun},
       safety:{...safety}, fouls:{...fouls}, misses:{...misses},
@@ -11975,6 +12085,8 @@ let matchRecordsRawCacheV152 = null;
     activeGameTypeV1 = state.activeGameTypeV1 || ROTATION_GAME_TYPE;
     jpa9SkillLevelsV1 = state.jpa9SkillLevelsV1 ? {...state.jpa9SkillLevelsV1} : {1:5,2:5};
     deadBallsV1 = new Set(state.deadBallsV1 || []);
+    nineBallSettingsV1 = state.nineBallSettingsV1 ? {...state.nineBallSettingsV1} : {breakRule:"winner",threeFoul:true,pushOut:true,illegalBreak:true,recordMode:"detail"};
+    nineBallStateV1 = state.nineBallStateV1 ? JSON.parse(JSON.stringify(state.nineBallStateV1)) : {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[]};
     current = state.current;
     startingPlayer = state.startingPlayer;
     goals = {...state.goals};
@@ -12139,6 +12251,32 @@ let matchRecordsRawCacheV152 = null;
   function startNextRackWith(player, options = {}) {
     if (gameEnded || !rackEnded || isReviewLocked()) return false;
 
+    if (isNineBallV1()) {
+      saveAndDo(() => {
+        const completedRack = rack;
+        const previousPlayer = current;
+        clearPushOutWindowV730();
+        current = Number(player) === 2 ? 2 : 1;
+        nextBreakPlayer = current;
+        breakCount[current]++;
+        rack++;
+        inning++;
+        rackScores = {1:0,2:0};
+        currentRun = {1:0,2:0};
+        usedBalls = new Set();
+        deadBallsV1 = new Set();
+        rackEnded = false;
+        foulLocked = false;
+        turnLockReasonV62 = null;
+        nineBallStateV1.ballInHandFor = null;
+        nineBallStateV1.consecutiveFouls = {1:0,2:0};
+        forceNewRow = true;
+        recordAnalysisEventV60("rack_started", {player:current,breakPlayer:current,rack,inning,previousRack:completedRack,previousPlayer,source:"nine_ball_next_rack"});
+      });
+      if (options.showPrompt !== false && recordingModeV611 === "detail") setTimeout(() => showBreakResultPromptV61(player, rack), 0);
+      return true;
+    }
+
     saveAndDo(() => {
       const fifteenBallPlayer = nextBreakPlayer;
       const changesPlayer = player !== fifteenBallPlayer;
@@ -12214,7 +12352,7 @@ let matchRecordsRawCacheV152 = null;
 
     const pushOutButtonV730 = el("proPushOutBtnV730");
     const actionsV730 = el("proActionsV730");
-    const pushOutEnabledV730 = Boolean(getActiveRuleV699().pushOut?.enabled);
+    const pushOutEnabledV730 = Boolean(isNineBallPushOutEnabledV1() && getActiveRuleV699().pushOut?.enabled);
     if (pushOutButtonV730) {
       const pushOutAvailableV730 = pushOutEnabledV730 && isPushOutAvailableV730();
       pushOutButtonV730.hidden = !pushOutAvailableV730;
@@ -12299,7 +12437,15 @@ let matchRecordsRawCacheV152 = null;
 
   function gameBallSignatureV155() {
     const activeBallCount = Math.max(1, Number(getActiveRuleV699().ballCount || 15));
-    return `${activeBallCount}|${[...usedBalls].sort((a,b)=>a-b).join(",")}|${rackEnded ? 1 : 0}|${foulLocked ? 1 : 0}|${gameEnded ? 1 : 0}`;
+    return `${activeBallCount}|${[...usedBalls].sort((a,b)=>a-b).join(",")}|${rackEnded ? 1 : 0}|${foulLocked ? 1 : 0}|${gameEnded ? 1 : 0}|${nineBallStateV1.ballInHandFor || 0}|${nineBallStateV1.consecutiveFouls?.[1] || 0}|${nineBallStateV1.consecutiveFouls?.[2] || 0}`;
+  }
+
+  function nineBallGoalLabelV1(player) {
+    if (!isNineBallV1()) return "Race to";
+    const notices = [];
+    if (Number(nineBallStateV1.ballInHandFor) === Number(player)) notices.push("手球フリー");
+    if (Number(nineBallStateV1.consecutiveFouls?.[player] || 0) === 2) notices.push("2ファール");
+    return notices.length ? `Race to · ${notices.join(" · ")}` : "Race to";
   }
 
   function updateGame() {
@@ -12316,6 +12462,12 @@ let matchRecordsRawCacheV152 = null;
     setGameTextV155("proInning", inning);
     setGameTextV155("proP1Goal", goals[1]);
     setGameTextV155("proP2Goal", goals[2]);
+    if (isNineBallV1()) {
+      setGameTextV155("proP1GoalLabelV1", nineBallGoalLabelV1(1));
+      setGameTextV155("proP2GoalLabelV1", nineBallGoalLabelV1(2));
+      el("proP1GoalLabelV1")?.classList.toggle("nine-ball-status-v1", nineBallGoalLabelV1(1) !== "Race to");
+      el("proP2GoalLabelV1")?.classList.toggle("nine-ball-status-v1", nineBallGoalLabelV1(2) !== "Race to");
+    }
     setGameTextV155("proGoalView", `${goals[1]} / ${goals[2]}`);
     setGameTextV155("proTurnArrowV1", current === 1 ? "←" : "→");
 
@@ -12413,9 +12565,13 @@ let matchRecordsRawCacheV152 = null;
       }
       scores[current] += points;
       rackScores[current] += points;
-      currentRun[current] += points;
+      currentRun[current] += isNineBallV1() ? 1 : points;
       if (currentRun[current] > maxRun[current]) maxRun[current] = currentRun[current];
       usedBalls.add(number);
+      if (isNineBallV1()) {
+        nineBallStateV1.consecutiveFouls[current] = 0;
+        nineBallStateV1.ballInHandFor = null;
+      }
       addItemToCurrent(number);
       recordAnalysisEventV60("ball_pocketed", {
         player: current,
@@ -12425,7 +12581,9 @@ let matchRecordsRawCacheV152 = null;
         runAfter: currentRun[current]
       });
 
-      if ((isJPA9V1() && number === 9) || usedBalls.size >= activeBallCountV105) {
+      if (isNineBallV1() && number === 9) {
+        completeNineBallRackV1(current, "legalNine", {ballNumber:9,source:"normal_shot"});
+      } else if ((isJPA9V1() && number === 9) || usedBalls.size >= activeBallCountV105) {
         rackEnded = true;
         foulLocked = false;
         nextBreakPlayer = current;
@@ -12448,6 +12606,10 @@ let matchRecordsRawCacheV152 = null;
       const toPlayerV60 = current === 1 ? 2 : 1;
       const lockedReasonV62 = turnLockReasonV62;
       const switchReasonV62 = lockedReasonV62 || "miss";
+      if (isNineBallV1() && !lockedReasonV62) {
+        nineBallStateV1.consecutiveFouls[fromPlayerV60] = 0;
+        nineBallStateV1.ballInHandFor = null;
+      }
       if (!lockedReasonV62 && pushOutStateV730?.stage === "available") clearPushOutWindowV730();
       if (!lockedReasonV62) misses[current]++;
       if (pendingSafetyV62 && fromPlayerV60 === pendingSafetyV62.opponent && !lockedReasonV62) {
@@ -12500,7 +12662,14 @@ let matchRecordsRawCacheV152 = null;
       });
       beginPendingSafetyV62(current);
       endCurrentRun(current);
-      if (isJPA9V1()) {
+      if (isNineBallV1()) {
+        nineBallStateV1.consecutiveFouls[current] = 0;
+        nineBallStateV1.ballInHandFor = null;
+        current = current === 1 ? 2 : 1;
+        if (current === startingPlayer) { inning++; forceNewRow = true; }
+        foulLocked = false;
+        turnLockReasonV62 = null;
+      } else if (isJPA9V1()) {
         current = current === 1 ? 2 : 1;
         if (current === startingPlayer) { inning++; forceNewRow = true; }
         foulLocked = false;
@@ -12535,7 +12704,23 @@ let matchRecordsRawCacheV152 = null;
       });
       beginPendingFoulV63(current);
       endCurrentRun(current);
-      if (isJPA9V1()) {
+      if (isNineBallV1()) {
+        const foulingPlayer = current;
+        const opponent = foulingPlayer === 1 ? 2 : 1;
+        nineBallStateV1.consecutiveFouls[foulingPlayer] = Number(nineBallStateV1.consecutiveFouls[foulingPlayer] || 0) + 1;
+        const foulStreak = nineBallStateV1.consecutiveFouls[foulingPlayer];
+        appendCommonEventV700("FoulCount", "consecutive_foul", {player:foulingPlayer,count:foulStreak,threeFoulRule:nineBallSettingsV1.threeFoul !== false});
+        if (foulStreak === 2) addItemToCurrent("2F");
+        if (foulStreak >= 3 && nineBallSettingsV1.threeFoul !== false) {
+          completeNineBallRackV1(opponent, "threeFoulLoss", {foulingPlayer,consecutiveFouls:3});
+        } else {
+          current = opponent;
+          nineBallStateV1.ballInHandFor = opponent;
+          if (current === startingPlayer) { inning++; forceNewRow = true; }
+          foulLocked = false;
+          turnLockReasonV62 = null;
+        }
+      } else if (isJPA9V1()) {
         current = current === 1 ? 2 : 1;
         if (current === startingPlayer) { inning++; forceNewRow = true; }
         foulLocked = false;
@@ -12584,9 +12769,14 @@ let matchRecordsRawCacheV152 = null;
       .sort((a,b)=>a-b);
     const scratchFoul = Boolean(pushOutInputScratchV730 && cfg.scratchIsFoul !== false);
     saveAndDo(()=>{
-      if (cfg.pocketedBallsRemainDown !== false) balls.forEach(ball=>usedBalls.add(ball));
+      if (cfg.pocketedBallsRemainDown !== false) balls.forEach(ball=>{ if (!(isNineBallV1() && ball === 9)) usedBalls.add(ball); });
+      if (isNineBallV1() && balls.includes(9)) spotNineBallV1("push_out", executor);
       if (scratchFoul) {
         fouls[executor]++;
+        if (isNineBallV1()) {
+          nineBallStateV1.consecutiveFouls[executor] = Number(nineBallStateV1.consecutiveFouls[executor] || 0) + 1;
+          nineBallStateV1.ballInHandFor = chooser;
+        }
         addItemToCurrent("F");
         recordAnalysisEventV60("foul", {
           player: executor,
@@ -12603,11 +12793,20 @@ let matchRecordsRawCacheV152 = null;
       appendCommonEventV700("PushOut","push_out",{player:executor,executor,chooser,pocketedBalls:balls,scratch:scratchFoul,scoreAdded:0,opponentDecisionRequired:!scratchFoul && cfg.opponentDecisionRequired!==false,sourceBreakEventId:pushOutStateV730?.sourceBreakEventId||null});
       recordAnalysisEventV60("push_out",{player:executor,executor,chooser,pocketedBalls:balls,scratch:scratchFoul,result:scratchFoul?"foul_waiting_turn_change":"awaiting_opponent_decision"},{skipCommon:true});
       endCurrentRun(executor);
-      foulLocked=true;
       if (scratchFoul) {
-        turnLockReasonV62="push_out_foul";
         pushOutStateV730=null;
+        const foulStreak = Number(nineBallStateV1.consecutiveFouls[executor] || 0);
+        appendCommonEventV700("FoulCount", "consecutive_foul", {player:executor,count:foulStreak,threeFoulRule:nineBallSettingsV1.threeFoul !== false,source:"push_out"});
+        if (foulStreak >= 3 && nineBallSettingsV1.threeFoul !== false) {
+          completeNineBallRackV1(chooser, "threeFoulLoss", {foulingPlayer:executor,consecutiveFouls:3,source:"push_out"});
+        } else {
+          current=chooser;
+          if (current === startingPlayer) { inning++; forceNewRow=true; }
+          foulLocked=false;
+          turnLockReasonV62=null;
+        }
       } else {
+        foulLocked=true;
         turnLockReasonV62="push_out_decision";
         pushOutStateV730={...pushOutStateV730,stage:"decision",executor,chooser,pocketedBalls:balls,scratch:false};
       }
@@ -12615,7 +12814,7 @@ let matchRecordsRawCacheV152 = null;
     el("pushOutInputOverlayV730")?.classList.add("hidden");
     if (scratchFoul) {
       el("pushOutDecisionOverlayV730")?.classList.add("hidden");
-      showToast("プッシュアウトでファール", `${playerName(chooser)}へ交代してください`);
+      showToast("プッシュアウトでファール", `${playerName(chooser)}が手球フリーです`);
       return;
     }
     el("pushOutDecisionPlayerV730").textContent=`${playerName(chooser)} が選択`;
@@ -13016,6 +13215,18 @@ let matchRecordsRawCacheV152 = null;
     markSelectedPlayersUsed();
     activeGameTypeV1 = selectedGameTypeV1();
     const jpaModeV1 = isJPA9V1();
+    const nineBallModeV1 = isNineBallV1();
+    const homeSelectionV1 = window.getCueScoreHomeSelectionV1?.() || {};
+    if (nineBallModeV1) {
+      nineBallSettingsV1 = {
+        breakRule: homeSelectionV1.nineBall?.breakRule || "winner",
+        threeFoul: homeSelectionV1.nineBall?.threeFoul !== false,
+        pushOut: homeSelectionV1.nineBall?.pushOut !== false,
+        illegalBreak: homeSelectionV1.rules?.illegal !== false,
+        recordMode: homeSelectionV1.nineBall?.recordMode === "simple" ? "simple" : "detail"
+      };
+      recordingModeV611 = nineBallSettingsV1.recordMode;
+    }
     const p1Name = limitPlayerName(el("p1Name")?.value.trim()) || "Player 1";
     const p2Name = limitPlayerName(el("p2Name")?.value.trim()) || "Player 2";
     if (el("p1Name")) el("p1Name").value = p1Name;
@@ -13024,8 +13235,8 @@ let matchRecordsRawCacheV152 = null;
       1:Math.min(9,Math.max(1,Number(el("p1Race")?.dataset.jpaSl || 5))),
       2:Math.min(9,Math.max(1,Number(el("p2Race")?.dataset.jpaSl || 5)))
     };
-    const p1Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[1]] : Number(el("p1Race")?.value || 120);
-    const p2Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[2]] : Number(el("p2Race")?.value || 120);
+    const p1Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[1]] : nineBallModeV1 ? Math.min(15,Math.max(1,Number(el("p1Race")?.value || 5))) : Number(el("p1Race")?.value || 120);
+    const p2Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[2]] : nineBallModeV1 ? p1Goal : Number(el("p2Race")?.value || 120);
     currentMatchCategoryV38 = el("matchCategoryV38")?.value || "Free";
     currentMatchSeasonV38 = String(el("matchSeasonV38")?.value || "").trim().slice(0, 30);
 
@@ -13050,6 +13261,7 @@ let matchRecordsRawCacheV152 = null;
     misses = {1:0, 2:0};
     usedBalls = new Set();
     deadBallsV1 = new Set();
+    nineBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:startingPlayer,rackResults:[]};
     rows = [];
     undoHistory = [];
     rackEnded = false;
@@ -13117,11 +13329,12 @@ let matchRecordsRawCacheV152 = null;
     el("proP1LogName").textContent = p1Name;
     el("proP2LogName").textContent = p2Name;
     el("proStartTime").textContent = formatStartTime(new Date());
-    el("proGameTitleV1").textContent = jpaModeV1 ? "JPA 9-Ball" : "Rotation";
+    el("proGameTitleV1").textContent = jpaModeV1 ? "JPA 9-Ball" : nineBallModeV1 ? "9-Ball" : "Rotation";
     el("proP1GoalLabelV1").textContent = jpaModeV1 ? `SL ${jpa9SkillLevelsV1[1]} · 目標` : "Race to";
     el("proP2GoalLabelV1").textContent = jpaModeV1 ? `SL ${jpa9SkillLevelsV1[2]} · 目標` : "Race to";
-    proGameScreen.setAttribute("aria-label", jpaModeV1 ? "JPA 9-Ball game" : "Rotation game");
+    proGameScreen.setAttribute("aria-label", jpaModeV1 ? "JPA 9-Ball game" : nineBallModeV1 ? "9-Ball game" : "Rotation game");
     proGameScreen.classList.toggle("jpa9-game-v1", jpaModeV1);
+    proGameScreen.classList.toggle("nine-ball-game-v1", nineBallModeV1);
 
     app.classList.remove("player-info-mode");
     app.classList.add("pro-game-mode");
@@ -13176,8 +13389,9 @@ let matchRecordsRawCacheV152 = null;
         return;
       }
       if (event?.type === "Break" && event?.sourceType === "break_result") {
-        const balls = Array.isArray(event?.data?.scoredBalls)
-          ? event.data.scoredBalls.map(Number).filter(ball => Number.isInteger(ball) && ball > 0)
+        const sourceBalls = isNineBallV1() ? event?.data?.pocketedBalls : event?.data?.scoredBalls;
+        const balls = Array.isArray(sourceBalls)
+          ? sourceBalls.map(Number).filter(ball => Number.isInteger(ball) && ball > 0)
           : [];
         pocketCount[player] += balls.length;
         nineBall[player] += balls.filter(ball => ball === 9).length;
@@ -14034,10 +14248,14 @@ let matchRecordsRawCacheV152 = null;
     const picker = el("newMatchRacePickerV1");
     if (!picker) return;
     const jpa = window.getCueScoreHomeSelectionV1?.().disciplineId === "jpa9";
+    const nineBall = window.getCueScoreHomeSelectionV1?.().disciplineId === "9ball";
     const options = picker.querySelector(".new-match-race-options-v1");
     if (jpa && options) {
       options.innerHTML = Object.entries(JPA9_SL_TARGETS).map(([sl,target]) => `<button type="button" data-race-value="${sl}">SL ${sl}<small>${target}点</small></button>`).join("");
       el("newMatchRacePickerTitleV1").textContent = "Skill Levelを選択";
+    } else if (nineBall && options) {
+      options.innerHTML = Array.from({length:15},(_,index)=>index+1).map(value=>`<button type="button" data-race-value="${value}">${value}</button>`).join("");
+      el("newMatchRacePickerTitleV1").textContent = "Race toを選択";
     } else if (options && !options.querySelector('[data-race-value="61"]')) {
       options.innerHTML = [61,90,120,150,180,240,300].map(value=>`<button type="button" data-race-value="${value}">${value}</button>`).join("") + '<button type="button" data-race-value="other">その他</button>';
       el("newMatchRacePickerTitleV1").textContent = "Race toを選択";
@@ -14067,12 +14285,22 @@ let matchRecordsRawCacheV152 = null;
       closeRacePickerV1();
       return;
     }
+    const nineBall = window.getCueScoreHomeSelectionV1?.().disciplineId === "9ball";
     const normalized = normalizeRaceGoalV109(value);
     if (!activeRaceInputV1 || !normalized) {
       showToast("Race to", "1以上の整数を入力してください");
       return;
     }
     activeRaceInputV1.value = String(normalized);
+    if (nineBall) {
+      ["p1Race","p2Race"].forEach(id => {
+        const raceInput = el(id);
+        if (!raceInput) return;
+        raceInput.value = String(Math.min(15, normalized));
+        raceInput.dataset.nineBallRace = raceInput.value;
+        raceInput.dispatchEvent(new Event("change", {bubbles:true}));
+      });
+    }
     activeRaceInputV1.dataset.rotationRace = String(normalized);
     const skill = el(activeRaceInputV1.id === "p1Race" ? "p1Skill" : "p2Skill");
     if (skill) skill.value = String(raceValueToStep(normalized));
@@ -14648,7 +14876,10 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function filteredMatchRecordsV31() {
-    const all = readMatchRecords().sort(
+    const selectedHistoryGameTypeV1 = selectedGameTypeV1();
+    const all = readMatchRecords().filter(record =>
+      String(record?.gameType || ROTATION_GAME_TYPE) === String(selectedHistoryGameTypeV1)
+    ).sort(
       (a,b)=>new Date(b.endedAt||b.playedAt)-new Date(a.endedAt||a.playedAt)
     );
     let filtered = all.slice();
@@ -14860,6 +15091,16 @@ let matchRecordsRawCacheV152 = null;
       inning,
       rack,
       jpa9: isJPA9V1() ? {skillLevels:{...jpa9SkillLevelsV1},targetPoints:{...goals},deadBalls:[...deadBallsV1]} : null,
+      nineBall: isNineBallV1() ? {
+        settings: JSON.parse(JSON.stringify(nineBallSettingsV1)),
+        consecutiveFouls: JSON.parse(JSON.stringify(nineBallStateV1.consecutiveFouls)),
+        ballInHandFor: nineBallStateV1.ballInHandFor,
+        initialBreaker: nineBallStateV1.initialBreaker,
+        rackResults: JSON.parse(JSON.stringify(nineBallStateV1.rackResults))
+      } : null,
+      breakRule: isNineBallV1() ? nineBallSettingsV1.breakRule : null,
+      initialBreaker: isNineBallV1() ? nineBallStateV1.initialBreaker : startingPlayer,
+      rackResults: isNineBallV1() ? JSON.parse(JSON.stringify(nineBallStateV1.rackResults)) : [],
       category: currentMatchCategoryV38,
       season: currentMatchSeasonV38,
       memo: currentMatchMemoV841,
@@ -17601,7 +17842,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0";
+    const PWA_VERSION = "1.0-nine-ball-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -24145,6 +24386,57 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   opacity:.66;
 }
 .new-match-race-options-v1 button.is-selected small{opacity:.82}
+
+/* CueScore 9-Ball v1: shared foundation with a restrained yellow identity. */
+.cue-discipline-switcher-v1{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.nine-ball-settings-v1{
+  display:grid;
+  gap:0;
+  margin:0 18px 14px;
+  padding:0 16px;
+  border:1px solid var(--cue-foundation-line);
+  border-radius:16px;
+  background:#fff;
+}
+.nine-ball-settings-v1[hidden]{display:none!important}
+.nine-ball-settings-v1 label{
+  min-height:48px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border-bottom:1px solid #ececea;
+  color:var(--cue-foundation-strong);
+  font-size:13px;
+  font-weight:750;
+}
+.nine-ball-settings-v1 label:last-child{border-bottom:0}
+.nine-ball-settings-v1 label>span{flex:1}
+.nine-ball-settings-v1 select{
+  max-width:150px;
+  min-height:34px;
+  border:1px solid #d7d7d3;
+  border-radius:10px;
+  background:#fff;
+  color:#171717;
+  padding:5px 26px 5px 9px;
+  font:inherit;
+}
+.nine-ball-settings-v1 input[type="checkbox"]{
+  width:40px;
+  height:24px;
+  accent-color:#171717;
+}
+.cue-discipline-v1[data-discipline="9ball"].is-selected .cue-ball-icon-v1{
+  border-color:#c8a829!important;
+  box-shadow:0 0 0 3px rgba(225,196,55,.08);
+}
+.cue-discipline-v1[data-discipline="9ball"].is-selected::after{background:#c8a829!important}
+.nine-ball-game-v1 .pro-player-panel.active{
+  border-color:#c8a829!important;
+  background:#fffdf3!important;
+}
+.nine-ball-game-v1 .pro-turn-arrow-v1{color:#8f7411!important}
+.nine-ball-status-v1{color:#8f7411!important;font-weight:800!important}
 </style>
 </body>
 </html>
