@@ -7832,7 +7832,7 @@ body {
 }
 .cue-discipline-switcher-v1 {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 2px;
 }
 .cue-discipline-v1 {
@@ -8089,6 +8089,10 @@ body {
           <span class="cue-ball-icon-v1" aria-hidden="true">10</span>
           <span class="cue-discipline-label-v1">10-Ball</span>
         </button>
+        <button class="cue-discipline-v1" type="button" role="tab" aria-selected="false" data-discipline="straightPool">
+          <span class="cue-ball-icon-v1" aria-hidden="true">14.1</span>
+          <span class="cue-discipline-label-v1">14-1</span>
+        </button>
         <button class="cue-discipline-v1" type="button" role="tab" aria-selected="false" data-discipline="jpa9">
           <span class="cue-ball-icon-v1" aria-hidden="true">JPA</span>
           <span class="cue-discipline-label-v1">JPA 9-Ball</span>
@@ -8128,6 +8132,12 @@ body {
           <label><span>プッシュアウト</span><input id="tenBallPushOutV1" type="checkbox" checked><i aria-hidden="true"></i></label>
           <label><span>コール入力</span><input id="tenBallCallInputV1" type="checkbox" checked><i aria-hidden="true"></i></label>
           <label><span>詳細入力</span><input id="tenBallDetailV1" type="checkbox" checked><i aria-hidden="true"></i></label>
+        </div>
+        <div class="nine-ball-settings-v1 straight-pool-settings-v1" id="straightPoolSettingsV1" hidden aria-label="14-1ルール設定">
+          <label><span>3ファール</span><input id="straightPoolThreeFoulV1" type="checkbox" checked><i aria-hidden="true"></i></label>
+          <label><span>コール入力</span><input id="straightPoolCallInputV1" type="checkbox" checked><i aria-hidden="true"></i></label>
+          <label><span>オープニングブレイク</span><input id="straightPoolOpeningBreakV1" type="checkbox" checked><i aria-hidden="true"></i></label>
+          <label><span>詳細入力</span><input id="straightPoolDetailV1" type="checkbox" checked><i aria-hidden="true"></i></label>
         </div>
         <span id="cueRuleValueV1" class="cue-rule-value-v1 cue-rule-value-hidden-v2">詳細版</span>
 
@@ -8405,6 +8415,7 @@ body {
             <button type="button" data-ten-result="miss">ミス</button>
             <button type="button" data-ten-result="wrong">コール不成立</button>
             <button type="button" data-ten-result="foul">ファール</button>
+            <button type="button" data-ten-result="safety">セーフティ</button>
           </div>
           <button id="tenBallCallSaveV1" class="ten-call-save-v1" type="button">確定</button>
           <button id="tenBallCallCancelV1" class="ten-call-cancel-v1" type="button">キャンセル</button>
@@ -8420,6 +8431,27 @@ body {
             <button id="tenBallDecisionPlayV1" type="button">自分が撞く</button>
             <button id="tenBallDecisionReturnV1" type="button">相手に返す</button>
           </div>
+        </div>
+      </section>
+
+      <section id="straightBreakDecisionOverlayV1" class="ten-call-overlay-v1 hidden" aria-modal="true" role="dialog" aria-labelledby="straightBreakDecisionTitleV1">
+        <div class="ten-call-sheet-v1 compact-v1">
+          <div class="ten-call-handle-v1" aria-hidden="true"></div>
+          <h2 id="straightBreakDecisionTitleV1">オープニングブレイクファール</h2>
+          <p id="straightBreakDecisionPlayerV1">次のプレーヤーが選択します</p>
+          <div class="ten-call-decision-grid-v1">
+            <button id="straightBreakAcceptV1" type="button">現状を受け入れる</button>
+            <button id="straightBreakRebreakV1" type="button">再ブレイクを要求</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="straightPoolNoticeOverlayV1" class="ten-call-overlay-v1 hidden" aria-modal="true" role="dialog" aria-labelledby="straightPoolNoticeTitleV1">
+        <div class="ten-call-sheet-v1 compact-v1">
+          <div class="ten-call-handle-v1" aria-hidden="true"></div>
+          <h2 id="straightPoolNoticeTitleV1">配置確認</h2>
+          <p id="straightPoolNoticeMessageV1"></p>
+          <button id="straightPoolNoticeOKV1" class="ten-call-save-v1" type="button">OK</button>
         </div>
       </section>
 
@@ -9061,6 +9093,7 @@ body {
       rotation: { name: "Rotation", icon: "15", rule: "設定項目はありません" },
       "9ball": { name: "9-Ball", icon: "9", rule: "ラック制" },
       "10ball": { name: "10-Ball", icon: "10", rule: "コールショット" },
+      straightPool: { name: "14-1", icon: "14.1", rule: "コールショット" },
       jpa9: { name: "JPA 9-Ball", icon: "JPA", rule: "SL別目標点" }
     };
 
@@ -9094,6 +9127,7 @@ body {
       const jpaMode = selectedDiscipline === "jpa9";
       const nineBallMode = selectedDiscipline === "9ball";
       const tenBallMode = selectedDiscipline === "10ball";
+      const straightPoolMode = selectedDiscipline === "straightPool";
       document.querySelector(".app")?.classList.toggle("jpa9-setup", jpaMode);
       document.querySelectorAll("[data-discipline]").forEach(button => {
         const active = button.dataset.discipline === selectedDiscipline;
@@ -9108,11 +9142,13 @@ body {
       if (illegal) illegal.checked = selectedRules.illegal !== false;
       if (shootout) shootout.checked = Boolean(selectedRules.shootout);
       if (shootout?.closest("label")) shootout.closest("label").hidden = nineBallMode || tenBallMode;
-      document.querySelectorAll(".cue-game-rules-v2").forEach(node => node.hidden = jpaMode);
+      document.querySelectorAll(".cue-game-rules-v2").forEach(node => node.hidden = jpaMode || straightPoolMode);
       const nineSettings = document.getElementById("nineBallSettingsV1");
       if (nineSettings) nineSettings.hidden = !nineBallMode;
       const tenSettings = document.getElementById("tenBallSettingsV1");
       if (tenSettings) tenSettings.hidden = !tenBallMode;
+      const straightSettings = document.getElementById("straightPoolSettingsV1");
+      if (straightSettings) straightSettings.hidden = !straightPoolMode;
       const jpaTargets = {1:14,2:19,3:25,4:31,5:38,6:46,7:55,8:65,9:75};
       [1,2].forEach(player => {
         const row = document.querySelector(`[data-race-target="p${player}Race"]`);
@@ -9131,10 +9167,10 @@ body {
           if (display) display.textContent = `SL ${sl}`;
           if (target) { target.hidden = false; target.textContent = `目標 ${jpaTargets[sl]}点`; }
         } else {
-          if (input) input.value = input.dataset.rotationRace || input.value || "120";
+          if (input) input.value = straightPoolMode ? (input.dataset.straightPoolTarget || "50") : (input.dataset.rotationRace || input.value || "120");
           if (nineBallMode && input) input.value = String(Math.min(15, Math.max(1, Number(input.dataset.nineBallRace || 5))));
           if (tenBallMode && input) input.value = String(Math.min(15, Math.max(1, Number(input.dataset.tenBallRace || 5))));
-          if (label) label.textContent = "Race to";
+          if (label) label.textContent = straightPoolMode ? "目標点" : "Race to";
           if (display && input) display.textContent = input.value || "120";
           if (target) target.hidden = true;
         }
@@ -9210,6 +9246,26 @@ body {
       safeWrite(TEN_SETTINGS_KEY, JSON.stringify(tenSettingsValue));
     }));
     syncTenSettings();
+    const STRAIGHT_SETTINGS_KEY = "cueScore.straightPool.settings.v1";
+    let straightSettingsValue;
+    try { straightSettingsValue = JSON.parse(safeRead(STRAIGHT_SETTINGS_KEY, '{"threeFoul":true,"callInput":true,"openingBreak":true,"recordMode":"detail"}')); }
+    catch (_) { straightSettingsValue = {threeFoul:true,callInput:true,openingBreak:true,recordMode:"detail"}; }
+    const syncStraightSettings = () => {
+      if (document.getElementById("straightPoolThreeFoulV1")) document.getElementById("straightPoolThreeFoulV1").checked = straightSettingsValue.threeFoul !== false;
+      if (document.getElementById("straightPoolCallInputV1")) document.getElementById("straightPoolCallInputV1").checked = straightSettingsValue.callInput !== false;
+      if (document.getElementById("straightPoolOpeningBreakV1")) document.getElementById("straightPoolOpeningBreakV1").checked = straightSettingsValue.openingBreak !== false;
+      if (document.getElementById("straightPoolDetailV1")) document.getElementById("straightPoolDetailV1").checked = straightSettingsValue.recordMode !== "simple";
+    };
+    ["straightPoolThreeFoulV1","straightPoolCallInputV1","straightPoolOpeningBreakV1","straightPoolDetailV1"].forEach(id => document.getElementById(id)?.addEventListener("change", () => {
+      straightSettingsValue = {
+        threeFoul: document.getElementById("straightPoolThreeFoulV1")?.checked !== false,
+        callInput: document.getElementById("straightPoolCallInputV1")?.checked !== false,
+        openingBreak: document.getElementById("straightPoolOpeningBreakV1")?.checked !== false,
+        recordMode: document.getElementById("straightPoolDetailV1")?.checked ? "detail" : "simple"
+      };
+      safeWrite(STRAIGHT_SETTINGS_KEY, JSON.stringify(straightSettingsValue));
+    }));
+    syncStraightSettings();
     document.getElementById("cueHomeSettingsBtnV2")?.addEventListener("click", () => document.getElementById("settingsBtn")?.click());
 
     window.getCueScoreHomeSelectionV1 = () => ({
@@ -9218,6 +9274,7 @@ body {
       rules: { ...selectedRules }
       ,nineBall: { ...nineSettingsValue }
       ,tenBall: { ...tenSettingsValue }
+      ,straightPool: { ...straightSettingsValue }
     });
     window.saveCueScoreJPA9SkillsV1 = skills => {
       savedJPA9Skills = {1:Number(skills?.[1])||5,2:Number(skills?.[2])||5};
@@ -9232,6 +9289,7 @@ body {
   const ROTATION_GAME_TYPE = "rotation";
   const NINE_BALL_GAME_TYPE = "nineBall";
   const TEN_BALL_GAME_TYPE = "tenBall";
+  const STRAIGHT_POOL_GAME_TYPE = "straightPool";
   const JPA9_GAME_TYPE = "jpa9Ball";
   const ROTATION_RECORD_SCHEMA_VERSION = 4;
   const JPA9_SL_TARGETS = Object.freeze({1:14,2:19,3:25,4:31,5:38,6:46,7:55,8:65,9:75});
@@ -9242,17 +9300,22 @@ body {
   let nineBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[]};
   let tenBallSettingsV1 = {breakRule:"alternate",threeFoul:true,pushOut:true,callInput:true,illegalBreak:true,recordMode:"detail"};
   let tenBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[],spotEvents:[],callEvents:[]};
+  let straightPoolSettingsV1 = {threeFoul:true,callInput:true,openingBreak:true,recordMode:"detail"};
+  let straightPoolStateV1 = {consecutiveFouls:{1:0,2:0},openingBreaker:1,phase:"openingBreak",rackCycle:1,spotEvents:[],rerackEvents:[],callEvents:[],openingBreakEvents:[]};
+  let straightBreakDecisionV1 = null;
+  let straightPoolNoticeQueueV1 = [];
 
   function isJPA9V1() { return activeGameTypeV1 === JPA9_GAME_TYPE; }
   function isNineBallV1() { return activeGameTypeV1 === NINE_BALL_GAME_TYPE; }
   function isTenBallV1() { return activeGameTypeV1 === TEN_BALL_GAME_TYPE; }
+  function isStraightPoolV1() { return activeGameTypeV1 === STRAIGHT_POOL_GAME_TYPE; }
   function isRackGameV1() { return isNineBallV1() || isTenBallV1(); }
   function activeRackSettingsV1() { return isTenBallV1() ? tenBallSettingsV1 : nineBallSettingsV1; }
   function activeRackStateV1() { return isTenBallV1() ? tenBallStateV1 : nineBallStateV1; }
-  function activeBallPointsV1(number) { return isJPA9V1() ? (Number(number) === 9 ? 2 : 1) : isRackGameV1() ? 0 : Number(number); }
+  function activeBallPointsV1(number) { return isJPA9V1() ? (Number(number) === 9 ? 2 : 1) : isRackGameV1() ? 0 : isStraightPoolV1() ? 1 : Number(number); }
   function selectedGameTypeV1() {
     const discipline = window.getCueScoreHomeSelectionV1?.().disciplineId;
-    return discipline === "jpa9" ? JPA9_GAME_TYPE : discipline === "9ball" ? NINE_BALL_GAME_TYPE : discipline === "10ball" ? TEN_BALL_GAME_TYPE : ROTATION_GAME_TYPE;
+    return discipline === "jpa9" ? JPA9_GAME_TYPE : discipline === "9ball" ? NINE_BALL_GAME_TYPE : discipline === "10ball" ? TEN_BALL_GAME_TYPE : discipline === "straightPool" ? STRAIGHT_POOL_GAME_TYPE : ROTATION_GAME_TYPE;
   }
 
   // Ver.6.9.9: Billiard Rules Engine foundation.
@@ -9307,6 +9370,14 @@ body {
       pushOut: Object.freeze({ enabled:true, timing:"after_legal_break_before_first_shot", pocketedBallsScore:false, pocketedBallsRemainDown:true, scratchIsFoul:true, opponentDecisionRequired:true }),
       turnFlow: Object.freeze({ dryBreakRequiresTurnChange:true, scratchRequiresTurnChange:true, safetyRequiresTurnChange:true, foulRequiresTurnChange:true, missRequiresTurnChange:true }),
       actions: Object.freeze({ Shot:Object.freeze({enabled:true}), Safety:Object.freeze({enabled:true}), Foul:Object.freeze({enabled:true}), TurnChange:Object.freeze({enabled:true}) })
+    }),
+    straightPool: Object.freeze({
+      id:"straightPool", displayName:"14-1", ballCount:15,
+      scoring:Object.freeze({type:"onePointPerBall"}),
+      break:Object.freeze({pocketedBallsRemainDown:true,pocketedBallsScore:true,scratchKeepsPocketedBalls:false,scratchChangesTurn:true,illegalBreakEnabled:true}),
+      pushOut:Object.freeze({enabled:false}),
+      turnFlow:Object.freeze({dryBreakRequiresTurnChange:true,scratchRequiresTurnChange:true,safetyRequiresTurnChange:true,foulRequiresTurnChange:true,missRequiresTurnChange:true}),
+      actions:Object.freeze({Shot:Object.freeze({enabled:true}),Safety:Object.freeze({enabled:true}),Foul:Object.freeze({enabled:true}),TurnChange:Object.freeze({enabled:true})})
     }),
     jpa9Ball: Object.freeze({
       id:"jpa9Ball", displayName:"JPA 9-Ball", ballCount:9,
@@ -11339,7 +11410,7 @@ let matchRecordsRawCacheV152 = null;
     const illegalBreakEnabled = isRackGameV1() ? activeRackSettingsV1().illegalBreak !== false : breakRule.illegalBreakEnabled;
     const illegalBreak = Boolean(illegalBreakEnabled && input.illegalBreak);
     const foul = scratch || illegalBreak;
-    const scoredBalls = breakRule.pocketedBallsScore === false || (isJPA9V1() && scratch) ? [] : [...pocketedBalls];
+    const scoredBalls = breakRule.pocketedBallsScore === false || (isJPA9V1() && scratch) || (isStraightPoolV1() && foul) ? [] : [...pocketedBalls];
     const scoreAdded = scoredBalls.reduce((sum, number) => sum + activeBallPointsV1(number), 0);
     const changesTurn = foul && Boolean(breakRule.scratchChangesTurn);
     const pushOutRequested = Boolean(input.pushOutRequested && isNineBallPushOutEnabledV1() && rule.pushOut?.enabled && !foul);
@@ -11354,7 +11425,7 @@ let matchRecordsRawCacheV152 = null;
       illegalBreak,
       foul,
       legalBreak: !foul,
-      ballsRemainDown: breakRule.pocketedBallsRemainDown !== false,
+      ballsRemainDown: isStraightPoolV1() && foul ? false : breakRule.pocketedBallsRemainDown !== false,
       changesTurn,
       nextPlayer: changesTurn ? (player === 1 ? 2 : 1) : player,
       pushOutRequested,
@@ -11845,6 +11916,11 @@ let matchRecordsRawCacheV152 = null;
 
       if (decision.foul) {
         fouls[player]++;
+        if (isStraightPoolV1()) {
+          scores[player] -= 2;
+          straightPoolStateV1.openingBreakEvents.push({player,rack:Number(rack),result:decision.result,penalty:-2,pocketedBalls:[...decision.pocketedBalls],at:new Date().toISOString()});
+          straightPoolStateV1.spotEvents.push({player,rack:Number(rack),balls:[...decision.pocketedBalls],reason:"opening_break_foul",at:new Date().toISOString()});
+        }
         recordAnalysisEventV60("foul", {
           player,
           foulType: decision.scratch ? "break_scratch" : "illegal_break",
@@ -11858,8 +11934,8 @@ let matchRecordsRawCacheV152 = null;
         });
         beginPendingFoulV63(player);
         endCurrentRun(player);
-        foulLocked = true;
-        turnLockReasonV62 = decision.scratch ? "break_scratch" : "illegal_break";
+        foulLocked = !isStraightPoolV1();
+        turnLockReasonV62 = isStraightPoolV1() ? null : (decision.scratch ? "break_scratch" : "illegal_break");
       } else if (decision.pocketedBalls.length === 0) {
         // RC76: A dry break counts as one miss, but does not change the player automatically.
         // Keep the breaker active and lock scoring controls until the user explicitly taps
@@ -11870,7 +11946,16 @@ let matchRecordsRawCacheV152 = null;
         turnLockReasonV62 = "dry_break";
       }
 
-      if (isRackGameV1() && (decision.foul || decision.pocketedBalls.filter(ball => !(isTenBallV1() && ball === 10)).length === 0)) {
+      if (isStraightPoolV1() && (decision.foul || decision.pocketedBalls.length === 0)) {
+        endCurrentRun(player);
+        current = player === 1 ? 2 : 1;
+        if (current === startingPlayer) { inning++; forceNewRow = true; }
+        straightPoolStateV1.phase = "playing";
+        straightPoolStateV1.consecutiveFouls[player] = 0;
+        foulLocked = false;
+        turnLockReasonV62 = null;
+        if (decision.foul && decision.pocketedBalls.length) queueStraightPoolNoticeV1("スポット確認", `${decision.pocketedBalls.join("・")}番をスポットへ戻してください`);
+      } else if (isRackGameV1() && (decision.foul || decision.pocketedBalls.filter(ball => !(isTenBallV1() && ball === 10)).length === 0)) {
         endCurrentRun(player);
         const opponent = player === 1 ? 2 : 1;
         const rackState = activeRackStateV1();
@@ -11902,10 +11987,15 @@ let matchRecordsRawCacheV152 = null;
 
       if (isNineBallV1() && !decision.foul && decision.pocketedBalls.includes(9)) {
         completeNineBallRackV1(player, "legalBreakNine", {ballNumber:9,source:"break"});
-      } else if ((isJPA9V1() && !decision.foul && decision.pocketedBalls.includes(9)) || usedBalls.size === Number(getActiveRuleV699().ballCount || 15)) {
+      } else if ((isJPA9V1() && !decision.foul && decision.pocketedBalls.includes(9)) || (!isStraightPoolV1() && usedBalls.size === Number(getActiveRuleV699().ballCount || 15))) {
         rackEnded = true;
         foulLocked = false;
         nextBreakPlayer = player;
+      }
+      if (isStraightPoolV1() && !decision.foul && decision.pocketedBalls.length) {
+        straightPoolStateV1.phase = "playing";
+        straightPoolStateV1.consecutiveFouls[player] = 0;
+        straightPoolSpotAndMaybeRerackV1([],"legal_break",player);
       }
     });
     breakUndoRestoreV697 = { undoDepth: undoHistory.length, payload: undoPromptPayloadV697 };
@@ -11916,6 +12006,9 @@ let matchRecordsRawCacheV152 = null;
       setTimeout(() => {
         if (isPushOutAvailableV730()) openPushOutV730();
       }, 0);
+    }
+    if (isStraightPoolV1() && decision.foul) {
+      setTimeout(() => openStraightBreakDecisionV1(player), 0);
     }
     setTimeout(() => {
       breakResultSavingV1 = false;
@@ -12165,6 +12258,7 @@ let matchRecordsRawCacheV152 = null;
       activeGameTypeV1, jpa9SkillLevelsV1:{...jpa9SkillLevelsV1}, deadBallsV1:[...deadBallsV1],
       nineBallSettingsV1:{...nineBallSettingsV1}, nineBallStateV1:JSON.parse(JSON.stringify(nineBallStateV1)),
       tenBallSettingsV1:{...tenBallSettingsV1}, tenBallStateV1:JSON.parse(JSON.stringify(tenBallStateV1)),
+      straightPoolSettingsV1:{...straightPoolSettingsV1}, straightPoolStateV1:JSON.parse(JSON.stringify(straightPoolStateV1)),
       current, startingPlayer, goals:{...goals}, rack, inning,
       scores:{...scores}, rackScores:{...rackScores}, breakCount:{...breakCount}, currentRun:{...currentRun}, maxRun:{...maxRun},
       safety:{...safety}, fouls:{...fouls}, misses:{...misses},
@@ -12194,6 +12288,8 @@ let matchRecordsRawCacheV152 = null;
     nineBallStateV1 = state.nineBallStateV1 ? JSON.parse(JSON.stringify(state.nineBallStateV1)) : {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[]};
     tenBallSettingsV1 = state.tenBallSettingsV1 ? {...state.tenBallSettingsV1} : {breakRule:"alternate",threeFoul:true,pushOut:true,callInput:true,illegalBreak:true,recordMode:"detail"};
     tenBallStateV1 = state.tenBallStateV1 ? JSON.parse(JSON.stringify(state.tenBallStateV1)) : {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[],spotEvents:[],callEvents:[],decisionPending:null};
+    straightPoolSettingsV1 = state.straightPoolSettingsV1 ? {...state.straightPoolSettingsV1} : {threeFoul:true,callInput:true,openingBreak:true,recordMode:"detail"};
+    straightPoolStateV1 = state.straightPoolStateV1 ? JSON.parse(JSON.stringify(state.straightPoolStateV1)) : {consecutiveFouls:{1:0,2:0},openingBreaker:1,phase:"openingBreak",rackCycle:1,spotEvents:[],rerackEvents:[],callEvents:[],openingBreakEvents:[]};
     current = state.current;
     startingPlayer = state.startingPlayer;
     goals = {...state.goals};
@@ -12471,8 +12567,9 @@ let matchRecordsRawCacheV152 = null;
     actionsV730?.classList.toggle("pushout-enabled-v730", Boolean(pushOutButtonV730 && !pushOutButtonV730.hidden));
     const callButtonV1 = el("proTenBallCallBtnV1");
     if (callButtonV1) {
-      callButtonV1.hidden = !isTenBallV1() || tenBallSettingsV1.callInput === false;
-      callButtonV1.disabled = !isTenBallV1() || rackEnded || foulLocked || gameEnded || reviewLocked;
+      const callModeV1 = (isTenBallV1() && tenBallSettingsV1.callInput !== false) || (isStraightPoolV1() && straightPoolSettingsV1.callInput !== false);
+      callButtonV1.hidden = !callModeV1;
+      callButtonV1.disabled = !callModeV1 || rackEnded || foulLocked || gameEnded || reviewLocked;
     }
 
     const safetyButton = el("proSafetyBtn");
@@ -12584,6 +12681,9 @@ let matchRecordsRawCacheV152 = null;
       setGameTextV155("proP2GoalLabelV1", nineBallGoalLabelV1(2));
       el("proP1GoalLabelV1")?.classList.toggle("nine-ball-status-v1", nineBallGoalLabelV1(1) !== "Race to");
       el("proP2GoalLabelV1")?.classList.toggle("nine-ball-status-v1", nineBallGoalLabelV1(2) !== "Race to");
+    } else if (isStraightPoolV1()) {
+      setGameTextV155("proP1GoalLabelV1", `目標 · ラン ${currentRun[1]}`);
+      setGameTextV155("proP2GoalLabelV1", `目標 · ラン ${currentRun[2]}`);
     }
     setGameTextV155("proGoalView", `${goals[1]} / ${goals[2]}`);
     setGameTextV155("proTurnArrowV1", current === 1 ? "←" : "→");
@@ -12672,6 +12772,7 @@ let matchRecordsRawCacheV152 = null;
   let tenBallCallDraftV1 = {calledBall:null,calledPocket:null,pocketedBalls:new Set(),result:"made"};
 
   function renderTenBallCallV1() {
+    const ballCountV1 = isStraightPoolV1() ? 15 : 10;
     const buildBall = (number, selected, kind) => {
       const button = document.createElement("button");
       button.type = "button";
@@ -12687,22 +12788,28 @@ let matchRecordsRawCacheV152 = null;
     const calledGrid = el("tenBallCalledBallGridV1");
     const pocketedGrid = el("tenBallPocketedGridV1");
     if (calledGrid) {
-      calledGrid.replaceChildren(...Array.from({length:10},(_,index)=>buildBall(index+1,tenBallCallDraftV1.calledBall===index+1,"called")));
+      calledGrid.replaceChildren(...Array.from({length:ballCountV1},(_,index)=>buildBall(index+1,tenBallCallDraftV1.calledBall===index+1,"called")));
     }
     if (pocketedGrid) {
-      pocketedGrid.replaceChildren(...Array.from({length:10},(_,index)=>buildBall(index+1,tenBallCallDraftV1.pocketedBalls.has(index+1),"pocketed")));
+      pocketedGrid.replaceChildren(...Array.from({length:ballCountV1},(_,index)=>buildBall(index+1,tenBallCallDraftV1.pocketedBalls.has(index+1),"pocketed")));
     }
     const pocketGrid = el("tenBallPocketGridV1");
     if (pocketGrid) {
       pocketGrid.innerHTML = TEN_BALL_POCKETS_V1.map(([id,label])=>`<button type="button" data-ten-pocket="${id}" class="${tenBallCallDraftV1.calledPocket===id?"selected-v1":""}">${label}</button>`).join("");
     }
-    document.querySelectorAll("[data-ten-result]").forEach(button => button.classList.toggle("selected-v1",button.dataset.tenResult===tenBallCallDraftV1.result));
+    document.querySelectorAll("[data-ten-result]").forEach(button => {
+      button.classList.toggle("selected-v1",button.dataset.tenResult===tenBallCallDraftV1.result);
+      if (button.dataset.tenResult === "safety") button.hidden = !isStraightPoolV1();
+    });
   }
 
   function openTenBallCallV1(preselectedBall = null) {
-    if (!isTenBallV1() || tenBallSettingsV1.callInput === false || gameEnded || rackEnded || foulLocked) return;
+    const enabledV1 = (isTenBallV1() && tenBallSettingsV1.callInput !== false) || (isStraightPoolV1() && straightPoolSettingsV1.callInput !== false);
+    if (!enabledV1 || gameEnded || rackEnded || foulLocked) return;
     const ball = Number(preselectedBall);
-    tenBallCallDraftV1 = {calledBall:Number.isInteger(ball)&&ball>=1&&ball<=10?ball:null,calledPocket:null,pocketedBalls:new Set(),result:"made"};
+    const maxBallV1 = isStraightPoolV1() ? 15 : 10;
+    tenBallCallDraftV1 = {calledBall:Number.isInteger(ball)&&ball>=1&&ball<=maxBallV1?ball:null,calledPocket:null,pocketedBalls:new Set(),result:"made"};
+    if (el("tenBallCallTitleV1")) el("tenBallCallTitleV1").textContent = isStraightPoolV1() ? "14-1 コールショット" : "コールショット";
     renderTenBallCallV1();
     el("tenBallCallOverlayV1")?.classList.remove("hidden");
   }
@@ -12718,7 +12825,130 @@ let matchRecordsRawCacheV152 = null;
     turnLockReasonV62 = null;
   }
 
+  function straightPoolSpotAndMaybeRerackV1(pocketed, reason, shooter) {
+    if (pocketed.length) {
+      straightPoolStateV1.spotEvents.push({rack:Number(rack),inning:Number(inning),player:shooter,balls:[...pocketed],reason,at:new Date().toISOString()});
+      appendCommonEventV700("Spot", "straight_pool_spot", {player:shooter,balls:[...pocketed],reason});
+      queueStraightPoolNoticeV1("スポット確認", `${pocketed.join("・")}番をスポットへ戻してください`);
+    }
+    if (usedBalls.size < 14) return;
+    const remaining = Array.from({length:15},(_,index)=>index+1).filter(ball=>!usedBalls.has(ball));
+    const fullRack = usedBalls.size >= 15;
+    straightPoolStateV1.rerackEvents.push({rack:Number(rack),inning:Number(inning),player:shooter,breakBall:fullRack?null:(remaining[0]||null),fullRack,run:Number(currentRun[shooter])||0,at:new Date().toISOString()});
+    appendCommonEventV700("Rerack", "straight_pool_rerack", {player:shooter,breakBall:fullRack?null:(remaining[0]||null),fullRack,continuedRun:Number(currentRun[shooter])||0});
+    usedBalls = new Set();
+    rack += 1;
+    straightPoolStateV1.rackCycle = rack;
+    forceNewRow = true;
+    queueStraightPoolNoticeV1("14ボールラック", fullRack ? "15球を再ラックしてください" : `${remaining[0]}番をブレイクボールとして残し、14球を再ラックしてください`);
+  }
+
+  function queueStraightPoolNoticeV1(title, message, onConfirm = null) {
+    straightPoolNoticeQueueV1.push({title,message,onConfirm});
+    showNextStraightPoolNoticeV1();
+  }
+
+  function showNextStraightPoolNoticeV1() {
+    const overlay = el("straightPoolNoticeOverlayV1");
+    if (!overlay || !overlay.classList.contains("hidden") || !straightPoolNoticeQueueV1.length) return;
+    const notice = straightPoolNoticeQueueV1[0];
+    el("straightPoolNoticeTitleV1").textContent = notice.title;
+    el("straightPoolNoticeMessageV1").textContent = notice.message;
+    overlay.classList.remove("hidden");
+  }
+
+  function closeStraightPoolNoticeV1() {
+    const notice = straightPoolNoticeQueueV1[0];
+    el("straightPoolNoticeOverlayV1")?.classList.add("hidden");
+    straightPoolNoticeQueueV1.shift();
+    if (typeof notice?.onConfirm === "function") notice.onConfirm();
+    showNextStraightPoolNoticeV1();
+    if (!straightPoolNoticeQueueV1.length && straightBreakDecisionV1) showStraightBreakDecisionV1();
+  }
+
+  function openStraightBreakDecisionV1(breaker) {
+    const opponent = breaker === 1 ? 2 : 1;
+    straightBreakDecisionV1 = {breaker,opponent};
+    if (straightPoolNoticeQueueV1.length || !el("straightPoolNoticeOverlayV1")?.classList.contains("hidden")) return;
+    showStraightBreakDecisionV1();
+  }
+
+  function showStraightBreakDecisionV1() {
+    const pending = straightBreakDecisionV1;
+    if (!pending) return;
+    const opponent = pending.opponent;
+    el("straightBreakDecisionPlayerV1").textContent = `${playerName(opponent)} が選択します`;
+    el("straightBreakDecisionOverlayV1")?.classList.remove("hidden");
+  }
+
+  function decideStraightBreakV1(choice) {
+    const pending = straightBreakDecisionV1;
+    if (!pending) return;
+    saveAndDo(() => {
+      if (choice === "rebreak") {
+        current = pending.breaker;
+        usedBalls = new Set();
+        straightPoolStateV1.phase = "openingBreak";
+        straightPoolStateV1.openingBreaker = pending.breaker;
+        forceNewRow = true;
+        appendCommonEventV700("OpeningBreakDecision", "straight_pool_rebreak", {player:pending.opponent,breaker:pending.breaker});
+      } else {
+        current = pending.opponent;
+        straightPoolStateV1.phase = "playing";
+        appendCommonEventV700("OpeningBreakDecision", "straight_pool_accept_table", {player:pending.opponent,breaker:pending.breaker});
+      }
+      foulLocked = false;
+      turnLockReasonV62 = null;
+    });
+    el("straightBreakDecisionOverlayV1")?.classList.add("hidden");
+    straightBreakDecisionV1 = null;
+    if (choice === "rebreak") setTimeout(() => showBreakResultPromptV61(current, rack), 0);
+  }
+
+  function confirmStraightPoolCallV1() {
+    if (!isStraightPoolV1() || gameEnded || rackEnded || foulLocked) return;
+    const result = tenBallCallDraftV1.result;
+    const calledBall = Number(tenBallCallDraftV1.calledBall);
+    const calledPocket = tenBallCallDraftV1.calledPocket;
+    const pocketed = [...tenBallCallDraftV1.pocketedBalls].filter(ball=>!usedBalls.has(ball)).sort((a,b)=>a-b);
+    if ((result === "made" || result === "wrong") && (!calledBall || !calledPocket)) { showToast("コールショット", "ボールとポケットを選択してください"); return; }
+    if (result === "made" && !pocketed.includes(calledBall)) { showToast("コールショット", "コールしたボールをポケット球に含めてください"); return; }
+    const shooter=current, opponent=shooter===1?2:1;
+    closeTenBallCallV1();
+    saveAndDo(()=>{
+      const event={rack:Number(rack),inning:Number(inning),player:shooter,calledBall,calledPocket,pocketedBalls:[...pocketed],result,at:new Date().toISOString()};
+      straightPoolStateV1.callEvents.push(event);
+      appendCommonEventV700("CalledShot","straight_pool_called_shot",event);
+      if(result==="made"){
+        pocketed.forEach(ball=>{usedBalls.add(ball);addItemToCurrent(ball);scores[shooter]+=1;rackScores[shooter]+=1;currentRun[shooter]+=1;});
+        maxRun[shooter]=Math.max(maxRun[shooter],currentRun[shooter]);
+        straightPoolStateV1.consecutiveFouls[shooter]=0;
+        pocketed.forEach(ball=>recordAnalysisEventV60("ball_pocketed",{player:shooter,ball,points:1,source:"straight_pool_call"}));
+        straightPoolSpotAndMaybeRerackV1([],"legal_shot",shooter);
+      }else if(result==="foul"){
+        pocketed.forEach(ball=>addItemToCurrent(ball)); addItemToCurrent("F");
+        scores[shooter]-=1; fouls[shooter]++;
+        const streak=Number(straightPoolStateV1.consecutiveFouls[shooter]||0)+1;
+        straightPoolStateV1.consecutiveFouls[shooter]=streak;
+        straightPoolSpotAndMaybeRerackV1(pocketed,"foul",shooter);
+        if(streak>=3 && straightPoolSettingsV1.threeFoul!==false){
+          scores[shooter]-=15; straightPoolStateV1.consecutiveFouls[shooter]=0; usedBalls=new Set(); rack+=1; straightPoolStateV1.rackCycle=rack; current=shooter; forceNewRow=true;
+          appendCommonEventV700("FoulPenalty","straight_pool_three_foul",{player:shooter,penalty:-16,nextBreaker:shooter});
+          queueStraightPoolNoticeV1("3ファール", "合計16点減点。15球を再ラックし、ファールしたプレーヤーがブレイクします", () => showBreakResultPromptV61(shooter, rack));
+        }else advanceRackTurnV1(opponent);
+      }else{
+        pocketed.forEach(ball=>addItemToCurrent(ball));
+        if(result==="safety"){ safety[shooter]++; addItemToCurrent("S"); }
+        else misses[shooter]++;
+        straightPoolStateV1.consecutiveFouls[shooter]=0;
+        straightPoolSpotAndMaybeRerackV1(pocketed,result,shooter);
+        advanceRackTurnV1(opponent);
+      }
+    });
+  }
+
   function confirmTenBallCallV1() {
+    if (isStraightPoolV1()) return confirmStraightPoolCallV1();
     if (!isTenBallV1() || gameEnded || rackEnded || foulLocked) return;
     const result = tenBallCallDraftV1.result;
     const calledBall = Number(tenBallCallDraftV1.calledBall);
@@ -12804,7 +13034,7 @@ let matchRecordsRawCacheV152 = null;
     if (!Number.isInteger(ballNumberV105) || ballNumberV105 < 1 || ballNumberV105 > activeBallCountV105) return;
     number = ballNumberV105;
     if (gameEnded || rackEnded || foulLocked || isReviewLocked() || usedBalls.has(number)) return;
-    if (isTenBallV1() && tenBallSettingsV1.callInput !== false) { openTenBallCallV1(number); return; }
+    if ((isTenBallV1() && tenBallSettingsV1.callInput !== false) || (isStraightPoolV1() && straightPoolSettingsV1.callInput !== false)) { openTenBallCallV1(number); return; }
     if (pushOutStateV730?.stage === "available") clearPushOutWindowV730();
     saveAndDo(() => {
       const points = activeBallPointsV1(number);
@@ -12867,6 +13097,7 @@ let matchRecordsRawCacheV152 = null;
         state.consecutiveFouls[fromPlayerV60] = 0;
         state.ballInHandFor = null;
       }
+      if (isStraightPoolV1() && !lockedReasonV62) straightPoolStateV1.consecutiveFouls[fromPlayerV60] = 0;
       if (!lockedReasonV62 && pushOutStateV730?.stage === "available") clearPushOutWindowV730();
       if (!lockedReasonV62) misses[current]++;
       if (pendingSafetyV62 && fromPlayerV60 === pendingSafetyV62.opponent && !lockedReasonV62) {
@@ -12902,6 +13133,12 @@ let matchRecordsRawCacheV152 = null;
 
   function safetyEvent() {
     if (gameEnded || rackEnded || foulLocked || isReviewLocked()) return;
+    if (isStraightPoolV1() && straightPoolSettingsV1.callInput !== false) {
+      openTenBallCallV1();
+      tenBallCallDraftV1.result = "safety";
+      renderTenBallCallV1();
+      return;
+    }
     if (pushOutStateV730?.stage === "available") clearPushOutWindowV730();
     saveAndDo(() => {
       if (pendingSafetyV62 && current === pendingSafetyV62.opponent) {
@@ -12927,7 +13164,8 @@ let matchRecordsRawCacheV152 = null;
         if (current === startingPlayer) { inning++; forceNewRow = true; }
         foulLocked = false;
         turnLockReasonV62 = null;
-      } else if (isJPA9V1()) {
+      } else if (isJPA9V1() || isStraightPoolV1()) {
+        if (isStraightPoolV1()) straightPoolStateV1.consecutiveFouls[current] = 0;
         current = current === 1 ? 2 : 1;
         if (current === startingPlayer) { inning++; forceNewRow = true; }
         foulLocked = false;
@@ -12941,6 +13179,12 @@ let matchRecordsRawCacheV152 = null;
 
   function foulEvent() {
     if (gameEnded || rackEnded || foulLocked || isReviewLocked()) return;
+    if (isStraightPoolV1() && straightPoolSettingsV1.callInput !== false) {
+      openTenBallCallV1();
+      tenBallCallDraftV1.result = "foul";
+      renderTenBallCallV1();
+      return;
+    }
     if (pushOutStateV730?.stage === "available") clearPushOutWindowV730();
     saveAndDo(() => {
       if (pendingSafetyV62 && current === pendingSafetyV62.opponent) {
@@ -12980,6 +13224,20 @@ let matchRecordsRawCacheV152 = null;
           foulLocked = false;
           turnLockReasonV62 = null;
         }
+      } else if (isStraightPoolV1()) {
+        const foulingPlayer=current, opponent=current===1?2:1;
+        scores[foulingPlayer]-=1;
+        const streak=Number(straightPoolStateV1.consecutiveFouls[foulingPlayer]||0)+1;
+        straightPoolStateV1.consecutiveFouls[foulingPlayer]=streak;
+        if(streak>=3 && straightPoolSettingsV1.threeFoul!==false){
+          scores[foulingPlayer]-=15; straightPoolStateV1.consecutiveFouls[foulingPlayer]=0; usedBalls=new Set(); rack+=1; straightPoolStateV1.rackCycle=rack; current=foulingPlayer; forceNewRow=true;
+          appendCommonEventV700("FoulPenalty","straight_pool_three_foul",{player:foulingPlayer,penalty:-16,nextBreaker:foulingPlayer});
+          queueStraightPoolNoticeV1("3ファール", "合計16点減点。15球を再ラックし、ファールしたプレーヤーがブレイクします", () => showBreakResultPromptV61(foulingPlayer, rack));
+        }else{
+          current=opponent;
+          if(current===startingPlayer){inning++;forceNewRow=true;}
+        }
+        foulLocked=false; turnLockReasonV62=null;
       } else if (isJPA9V1()) {
         current = current === 1 ? 2 : 1;
         if (current === startingPlayer) { inning++; forceNewRow = true; }
@@ -13481,6 +13739,7 @@ let matchRecordsRawCacheV152 = null;
     const jpaModeV1 = isJPA9V1();
     const nineBallModeV1 = isNineBallV1();
     const tenBallModeV1 = isTenBallV1();
+    const straightPoolModeV1 = isStraightPoolV1();
     const homeSelectionV1 = window.getCueScoreHomeSelectionV1?.() || {};
     if (nineBallModeV1) {
       nineBallSettingsV1 = {
@@ -13502,6 +13761,15 @@ let matchRecordsRawCacheV152 = null;
         recordMode: homeSelectionV1.tenBall?.recordMode === "simple" ? "simple" : "detail"
       };
       recordingModeV611 = tenBallSettingsV1.recordMode;
+    }
+    if (straightPoolModeV1) {
+      straightPoolSettingsV1 = {
+        threeFoul: homeSelectionV1.straightPool?.threeFoul !== false,
+        callInput: homeSelectionV1.straightPool?.callInput !== false,
+        openingBreak: homeSelectionV1.straightPool?.openingBreak !== false,
+        recordMode: homeSelectionV1.straightPool?.recordMode === "simple" ? "simple" : "detail"
+      };
+      recordingModeV611 = straightPoolSettingsV1.recordMode;
     }
     const p1Name = limitPlayerName(el("p1Name")?.value.trim()) || "Player 1";
     const p2Name = limitPlayerName(el("p2Name")?.value.trim()) || "Player 2";
@@ -13540,6 +13808,7 @@ let matchRecordsRawCacheV152 = null;
     deadBallsV1 = new Set();
     nineBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:startingPlayer,rackResults:[]};
     tenBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:startingPlayer,rackResults:[],spotEvents:[],callEvents:[],decisionPending:null};
+    straightPoolStateV1 = {consecutiveFouls:{1:0,2:0},openingBreaker:startingPlayer,phase:"openingBreak",rackCycle:1,spotEvents:[],rerackEvents:[],callEvents:[],openingBreakEvents:[]};
     rows = [];
     undoHistory = [];
     rackEnded = false;
@@ -13607,13 +13876,14 @@ let matchRecordsRawCacheV152 = null;
     el("proP1LogName").textContent = p1Name;
     el("proP2LogName").textContent = p2Name;
     el("proStartTime").textContent = formatStartTime(new Date());
-    el("proGameTitleV1").textContent = jpaModeV1 ? "JPA 9-Ball" : nineBallModeV1 ? "9-Ball" : tenBallModeV1 ? "10-Ball" : "Rotation";
-    el("proP1GoalLabelV1").textContent = jpaModeV1 ? `SL ${jpa9SkillLevelsV1[1]} · 目標` : "Race to";
-    el("proP2GoalLabelV1").textContent = jpaModeV1 ? `SL ${jpa9SkillLevelsV1[2]} · 目標` : "Race to";
-    proGameScreen.setAttribute("aria-label", jpaModeV1 ? "JPA 9-Ball game" : nineBallModeV1 ? "9-Ball game" : tenBallModeV1 ? "10-Ball game" : "Rotation game");
+    el("proGameTitleV1").textContent = jpaModeV1 ? "JPA 9-Ball" : nineBallModeV1 ? "9-Ball" : tenBallModeV1 ? "10-Ball" : straightPoolModeV1 ? "14-1" : "Rotation";
+    el("proP1GoalLabelV1").textContent = jpaModeV1 ? `SL ${jpa9SkillLevelsV1[1]} · 目標` : straightPoolModeV1 ? "目標点" : "Race to";
+    el("proP2GoalLabelV1").textContent = jpaModeV1 ? `SL ${jpa9SkillLevelsV1[2]} · 目標` : straightPoolModeV1 ? "目標点" : "Race to";
+    proGameScreen.setAttribute("aria-label", jpaModeV1 ? "JPA 9-Ball game" : nineBallModeV1 ? "9-Ball game" : tenBallModeV1 ? "10-Ball game" : straightPoolModeV1 ? "14-1 game" : "Rotation game");
     proGameScreen.classList.toggle("jpa9-game-v1", jpaModeV1);
     proGameScreen.classList.toggle("nine-ball-game-v1", nineBallModeV1);
     proGameScreen.classList.toggle("ten-ball-game-v1", tenBallModeV1);
+    proGameScreen.classList.toggle("straight-pool-game-v1", straightPoolModeV1);
 
     app.classList.remove("player-info-mode");
     app.classList.add("pro-game-mode");
@@ -13622,7 +13892,7 @@ let matchRecordsRawCacheV152 = null;
     el("proSummary").classList.add("hidden");
 
     updateGame();
-    if (recordingModeV611 === "detail") {
+    if (recordingModeV611 === "detail" && (!straightPoolModeV1 || straightPoolSettingsV1.openingBreak !== false)) {
       const promptSessionIdV111 = currentGameSessionIdV104;
       setTimeout(() => {
         if (currentGameSessionIdV104 !== promptSessionIdV111) return;
@@ -14538,6 +14808,7 @@ let matchRecordsRawCacheV152 = null;
     const disciplineId = window.getCueScoreHomeSelectionV1?.().disciplineId;
     const nineBall = disciplineId === "9ball";
     const tenBall = disciplineId === "10ball";
+    const straightPool = disciplineId === "straightPool";
     const options = picker.querySelector(".new-match-race-options-v1");
     if (jpa && options) {
       options.innerHTML = Object.entries(JPA9_SL_TARGETS).map(([sl,target]) => `<button type="button" data-race-value="${sl}">SL ${sl}<small>${target}点</small></button>`).join("");
@@ -14545,6 +14816,9 @@ let matchRecordsRawCacheV152 = null;
     } else if ((nineBall || tenBall) && options) {
       options.innerHTML = Array.from({length:15},(_,index)=>index+1).map(value=>`<button type="button" data-race-value="${value}">${value}</button>`).join("");
       el("newMatchRacePickerTitleV1").textContent = "Race toを選択";
+    } else if (straightPool && options) {
+      options.innerHTML = [25,50,75,100,125,150].map(value=>`<button type="button" data-race-value="${value}">${value}</button>`).join("") + '<button type="button" data-race-value="other">その他</button>';
+      el("newMatchRacePickerTitleV1").textContent = "目標点を選択";
     } else if (options && !options.querySelector('[data-race-value="61"]')) {
       options.innerHTML = [61,90,120,150,180,240,300].map(value=>`<button type="button" data-race-value="${value}">${value}</button>`).join("") + '<button type="button" data-race-value="other">その他</button>';
       el("newMatchRacePickerTitleV1").textContent = "Race toを選択";
@@ -14577,6 +14851,7 @@ let matchRecordsRawCacheV152 = null;
     const disciplineId = window.getCueScoreHomeSelectionV1?.().disciplineId;
     const nineBall = disciplineId === "9ball";
     const tenBall = disciplineId === "10ball";
+    const straightPool = disciplineId === "straightPool";
     const normalized = normalizeRaceGoalV109(value);
     if (!activeRaceInputV1 || !normalized) {
       showToast("Race to", "1以上の整数を入力してください");
@@ -14601,7 +14876,8 @@ let matchRecordsRawCacheV152 = null;
         raceInput.dispatchEvent(new Event("change", {bubbles:true}));
       });
     }
-    activeRaceInputV1.dataset.rotationRace = String(normalized);
+    if (straightPool) activeRaceInputV1.dataset.straightPoolTarget = String(normalized);
+    else if (!nineBall && !tenBall) activeRaceInputV1.dataset.rotationRace = String(normalized);
     const skill = el(activeRaceInputV1.id === "p1Race" ? "p1Skill" : "p2Skill");
     if (skill) skill.value = String(raceValueToStep(normalized));
     activeRaceInputV1.dispatchEvent(new Event("change", { bubbles:true }));
@@ -14707,6 +14983,9 @@ let matchRecordsRawCacheV152 = null;
   el("tenBallCallCancelV1")?.addEventListener("click", closeTenBallCallV1);
   el("tenBallDecisionPlayV1")?.addEventListener("click", () => decideTenBallWrongPocketV1("play"));
   el("tenBallDecisionReturnV1")?.addEventListener("click", () => decideTenBallWrongPocketV1("return"));
+  el("straightBreakAcceptV1")?.addEventListener("click", () => decideStraightBreakV1("accept"));
+  el("straightBreakRebreakV1")?.addEventListener("click", () => decideStraightBreakV1("rebreak"));
+  el("straightPoolNoticeOKV1")?.addEventListener("click", closeStraightPoolNoticeV1);
   el("pushOutScratchV730")?.addEventListener("click",()=>{pushOutInputScratchV730=!pushOutInputScratchV730;el("pushOutScratchV730")?.classList.toggle("active-v730",pushOutInputScratchV730);el("pushOutScratchV730")?.setAttribute("aria-pressed",pushOutInputScratchV730?"true":"false")});
   el("pushOutConfirmV730")?.addEventListener("click",confirmPushOutV730);
   el("pushOutCancelV730")?.addEventListener("click",()=>el("pushOutInputOverlayV730")?.classList.add("hidden"));
@@ -15429,6 +15708,16 @@ let matchRecordsRawCacheV152 = null;
         rackResults: JSON.parse(JSON.stringify(tenBallStateV1.rackResults)),
         spotEvents: JSON.parse(JSON.stringify(tenBallStateV1.spotEvents)),
         callEvents: JSON.parse(JSON.stringify(tenBallStateV1.callEvents))
+      } : null,
+      straightPool: isStraightPoolV1() ? {
+        settings: JSON.parse(JSON.stringify(straightPoolSettingsV1)),
+        consecutiveFouls: JSON.parse(JSON.stringify(straightPoolStateV1.consecutiveFouls)),
+        openingBreaker: straightPoolStateV1.openingBreaker,
+        rackCycle: straightPoolStateV1.rackCycle,
+        spotEvents: JSON.parse(JSON.stringify(straightPoolStateV1.spotEvents)),
+        rerackEvents: JSON.parse(JSON.stringify(straightPoolStateV1.rerackEvents)),
+        callEvents: JSON.parse(JSON.stringify(straightPoolStateV1.callEvents)),
+        openingBreakEvents: JSON.parse(JSON.stringify(straightPoolStateV1.openingBreakEvents))
       } : null,
       breakRule: isRackGameV1() ? activeRackSettingsV1().breakRule : null,
       initialBreaker: isRackGameV1() ? activeRackStateV1().initialBreaker : startingPlayer,
@@ -21482,6 +21771,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
     const type=String(record?.gameType || record?.disciplineId || "rotation").toLowerCase();
     if(type.includes("jpa")) return "JPA 9-Ball";
     if(type.includes("10")) return "10-Ball";
+    if(type.includes("straight") || type.includes("14")) return "14-1";
     if(type.includes("9")) return "9-Ball";
     return "Rotation";
   }
@@ -24720,7 +25010,7 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .new-match-race-options-v1 button.is-selected small{opacity:.82}
 
 /* CueScore 9-Ball v1: shared foundation with a restrained yellow identity. */
-.cue-discipline-switcher-v1{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+.cue-discipline-switcher-v1{grid-template-columns:repeat(5,minmax(0,1fr))!important}
 .nine-ball-settings-v1{
   display:grid;
   gap:0;
