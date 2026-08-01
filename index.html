@@ -8145,6 +8145,23 @@ body {
             <span class="cue-toggle-track-v2" aria-hidden="true"></span>
           </label>
         </div>
+        <div class="cue-carom-rules-v1" id="cueCaromRulesV1" aria-label="3 Cushionゲームルール" hidden>
+          <strong>ゲームルール</strong>
+          <label>
+            <span>ルール区分</span>
+            <select id="cueCaromVariantV1">
+              <option value="threeCushion">3クッション</option>
+              <option value="bandGame">バンドゲーム</option>
+              <option value="threeBall">3つ玉</option>
+              <option value="fourBall">4つ玉</option>
+            </select>
+          </label>
+          <label class="cue-rule-toggle-v2">
+            <span>25イニング draw</span>
+            <input id="cueCaromDraw25V1" type="checkbox" />
+            <span class="cue-toggle-track-v2" aria-hidden="true"></span>
+          </label>
+        </div>
 
         <div class="new-match-player-grid-v1 cue-player-stack-v2" aria-label="プレーヤーとRace toの設定">
           <section class="player-block new-match-player-card-v1 player-a-v1" id="newMatchPlayerCard1V1" data-player-label="A">
@@ -9063,6 +9080,7 @@ body {
     const DISCIPLINE_KEY = "cueScore.selectedDiscipline.v1";
     const RULES_KEY = "cueScore.homeRules.v2";
     const JPA_SKILL_KEY = "cueScore.jpa9.skillLevels.v1";
+    const CAROM_SETTINGS_KEY = "cueScore.threeCushion.settings.v1";
     const disciplines = {
       rotation: { name: "Rotation", icon: "15", rule: "設定項目はありません" },
       "9ball": { name: "9-Ball", icon: "9", rule: "ラック制" },
@@ -9085,6 +9103,11 @@ body {
       ? safeRead(DISCIPLINE_KEY, "rotation")
       : "rotation";
     let selectedRules = { illegal:true, shootout:false };
+    let caromSettingsValue;
+    try { caromSettingsValue = JSON.parse(safeRead(CAROM_SETTINGS_KEY, '{"variant":"threeCushion","drawAt25":false}')); }
+    catch (_) { caromSettingsValue = {variant:"threeCushion",drawAt25:false}; }
+    if (!["threeCushion","bandGame","threeBall","fourBall"].includes(caromSettingsValue.variant)) caromSettingsValue.variant = "threeCushion";
+    caromSettingsValue.drawAt25 = Boolean(caromSettingsValue.drawAt25);
     let savedJPA9Skills;
     try {
       savedJPA9Skills = JSON.parse(safeRead(JPA_SKILL_KEY, '{"1":5,"2":5}'));
@@ -9113,6 +9136,12 @@ body {
       if (breakRule) breakRule.value = rackSettings?.breakRule === "winner" ? "winner" : "alternate";
       if (shootout) shootout.checked = rackSettings?.pushOut !== false;
       document.querySelectorAll(".cue-game-rules-v2").forEach(node => node.hidden = !(nineBallMode || tenBallMode));
+      const caromRules = document.getElementById("cueCaromRulesV1");
+      if (caromRules) caromRules.hidden = !threeCushionMode;
+      const caromVariant = document.getElementById("cueCaromVariantV1");
+      const caromDraw25 = document.getElementById("cueCaromDraw25V1");
+      if (caromVariant) caromVariant.value = caromSettingsValue.variant;
+      if (caromDraw25) caromDraw25.checked = caromSettingsValue.drawAt25;
       const jpaTargets = {1:14,2:19,3:25,4:31,5:38,6:46,7:55,8:65,9:75};
       [1,2].forEach(player => {
         const row = document.querySelector(`[data-race-target="p${player}Race"]`);
@@ -9180,6 +9209,13 @@ body {
       safeWrite(RULES_KEY, JSON.stringify(selectedRules));
     };
     ["cueBreakRuleV2","cueShootoutRuleV2"].forEach(id => document.getElementById(id)?.addEventListener("change", persistRackRuleSettings));
+    const persistCaromSettings = () => {
+      caromSettingsValue.variant = ["threeCushion","bandGame","threeBall","fourBall"].includes(document.getElementById("cueCaromVariantV1")?.value)
+        ? document.getElementById("cueCaromVariantV1").value : "threeCushion";
+      caromSettingsValue.drawAt25 = Boolean(document.getElementById("cueCaromDraw25V1")?.checked);
+      safeWrite(CAROM_SETTINGS_KEY, JSON.stringify(caromSettingsValue));
+    };
+    ["cueCaromVariantV1","cueCaromDraw25V1"].forEach(id => document.getElementById(id)?.addEventListener("change", persistCaromSettings));
     const STRAIGHT_SETTINGS_KEY = "cueScore.straightPool.settings.v1";
     const straightSettingsValue = {threeFoul:true,openingBreak:false,recordMode:"detail"};
     safeWrite(STRAIGHT_SETTINGS_KEY, JSON.stringify(straightSettingsValue));
@@ -9192,6 +9228,7 @@ body {
       ,nineBall: { ...nineSettingsValue }
       ,tenBall: { ...tenSettingsValue }
       ,straightPool: { ...straightSettingsValue }
+      ,threeCushion: { ...caromSettingsValue }
     });
     window.saveCueScoreJPA9SkillsV1 = skills => {
       savedJPA9Skills = {1:Number(skills?.[1])||5,2:Number(skills?.[2])||5};
@@ -9220,6 +9257,7 @@ body {
   let tenBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[],spotEvents:[]};
   let straightPoolSettingsV1 = {threeFoul:true,openingBreak:false,recordMode:"detail"};
   let straightPoolStateV1 = {consecutiveFouls:{1:0,2:0},openingBreaker:null,phase:"playing",rackCycle:1,spotEvents:[],rerackEvents:[],openingBreakEvents:[]};
+  let threeCushionSettingsV1 = {variant:"threeCushion",drawAt25:false};
   let threeCushionStateV1 = {currentRun:0,currentInning:1,startingPlayer:1,completedTurns:{1:0,2:0},highRun:{1:0,2:0},innings:[]};
   let straightBreakDecisionV1 = null;
   let straightPoolNoticeQueueV1 = [];
@@ -12081,7 +12119,7 @@ let matchRecordsRawCacheV152 = null;
     if (!record) return null;
     const mode = record?.analysis?.report?.recordingMode || (record?.analysis?.events?.length ? 'detail' : 'simple');
     return buildMatchAnalysisV64(
-      Number(record.winner) || 1,
+      Number(record.winner) === 0 ? 0 : (Number(record.winner) || 1),
       record.players || {},
       record?.analysis?.summary || {},
       mode,
@@ -12185,7 +12223,7 @@ let matchRecordsRawCacheV152 = null;
       nineBallSettingsV1:{...nineBallSettingsV1}, nineBallStateV1:JSON.parse(JSON.stringify(nineBallStateV1)),
       tenBallSettingsV1:{...tenBallSettingsV1}, tenBallStateV1:JSON.parse(JSON.stringify(tenBallStateV1)),
       straightPoolSettingsV1:{...straightPoolSettingsV1}, straightPoolStateV1:JSON.parse(JSON.stringify(straightPoolStateV1)),
-      threeCushionStateV1:JSON.parse(JSON.stringify(threeCushionStateV1)),
+      threeCushionSettingsV1:{...threeCushionSettingsV1}, threeCushionStateV1:JSON.parse(JSON.stringify(threeCushionStateV1)),
       current, startingPlayer, goals:{...goals}, rack, inning,
       scores:{...scores}, rackScores:{...rackScores}, breakCount:{...breakCount}, currentRun:{...currentRun}, maxRun:{...maxRun},
       safety:{...safety}, fouls:{...fouls}, misses:{...misses},
@@ -12217,6 +12255,7 @@ let matchRecordsRawCacheV152 = null;
     tenBallStateV1 = state.tenBallStateV1 ? JSON.parse(JSON.stringify(state.tenBallStateV1)) : {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[],spotEvents:[]};
     straightPoolSettingsV1 = state.straightPoolSettingsV1 ? {...state.straightPoolSettingsV1, threeFoul:true, openingBreak:false, recordMode:"detail"} : {threeFoul:true,openingBreak:false,recordMode:"detail"};
     straightPoolStateV1 = state.straightPoolStateV1 ? {...JSON.parse(JSON.stringify(state.straightPoolStateV1)), openingBreaker:null, phase:"playing"} : {consecutiveFouls:{1:0,2:0},openingBreaker:null,phase:"playing",rackCycle:1,spotEvents:[],rerackEvents:[],openingBreakEvents:[]};
+    threeCushionSettingsV1 = state.threeCushionSettingsV1 ? {...state.threeCushionSettingsV1} : {variant:"threeCushion",drawAt25:false};
     threeCushionStateV1 = state.threeCushionStateV1 ? JSON.parse(JSON.stringify(state.threeCushionStateV1)) : {currentRun:0,currentInning:1,startingPlayer:state.startingPlayer||1,completedTurns:{1:0,2:0},highRun:{1:0,2:0},innings:[]};
     current = state.current;
     startingPlayer = state.startingPlayer;
@@ -12386,6 +12425,16 @@ let matchRecordsRawCacheV152 = null;
       if(to===threeCushionStateV1.startingPlayer){threeCushionStateV1.currentInning+=1;inning=threeCushionStateV1.currentInning;}
       ensureThreeCushionInningV1();
     });
+  }
+
+  function isThreeCushionDrawV1(){
+    return Boolean(
+      isThreeCushionV1() && threeCushionSettingsV1.drawAt25 &&
+      Number(threeCushionStateV1.completedTurns?.[1]||0) >= 25 &&
+      Number(threeCushionStateV1.completedTurns?.[2]||0) >= 25 &&
+      Number(scores[1]||0) < Number(goals[1]||0) &&
+      Number(scores[2]||0) < Number(goals[2]||0)
+    );
   }
 
   // CueScore RC59: one delegated ball handler replaces per-ball listeners.
@@ -12659,8 +12708,8 @@ let matchRecordsRawCacheV152 = null;
       el("proP1GoalLabelV1")?.classList.toggle("nine-ball-status-v1", nineBallGoalLabelV1(1) !== "Race to");
       el("proP2GoalLabelV1")?.classList.toggle("nine-ball-status-v1", nineBallGoalLabelV1(2) !== "Race to");
     } else if (isStraightPoolV1()) {
-      setGameTextV155("proP1GoalLabelV1", `目標 · ラン ${currentRun[1]}`);
-      setGameTextV155("proP2GoalLabelV1", `目標 · ラン ${currentRun[2]}`);
+      setGameTextV155("proP1GoalLabelV1", "目標");
+      setGameTextV155("proP2GoalLabelV1", "目標");
     } else if (isThreeCushionV1()) {
       setGameTextV155("proP1GoalLabelV1", "持ち点");
       setGameTextV155("proP2GoalLabelV1", "持ち点");
@@ -13180,7 +13229,7 @@ let matchRecordsRawCacheV152 = null;
     registerUndoInEventJournalV720(eventsBeforeUndoV720, commonEventsV7);
 
     if (wasReviewMode) {
-      if (goalReachedPlayer() === null) {
+      if (goalReachedPlayer() === null && !isThreeCushionDrawV1()) {
         reviewMode = false;
         gameSetDismissed = false;
         gameEnded = false;
@@ -13559,6 +13608,14 @@ let matchRecordsRawCacheV152 = null;
       };
       recordingModeV611 = straightPoolSettingsV1.recordMode;
     }
+    if (threeCushionModeV1) {
+      const variant = homeSelectionV1.threeCushion?.variant;
+      threeCushionSettingsV1 = {
+        variant: ["threeCushion","bandGame","threeBall","fourBall"].includes(variant) ? variant : "threeCushion",
+        drawAt25: Boolean(homeSelectionV1.threeCushion?.drawAt25)
+      };
+      recordingModeV611 = "detail";
+    }
     const p1Name = limitPlayerName(el("p1Name")?.value.trim()) || "Player 1";
     const p2Name = limitPlayerName(el("p2Name")?.value.trim()) || "Player 2";
     if (el("p1Name")) el("p1Name").value = p1Name;
@@ -13666,8 +13723,8 @@ let matchRecordsRawCacheV152 = null;
     el("proP2LogName").textContent = p2Name;
     el("proStartTime").textContent = formatStartTime(new Date());
     el("proGameTitleV1").textContent = threeCushionModeV1 ? "3 Cushion" : jpaModeV1 ? "JPA 9-Ball" : nineBallModeV1 ? "9-Ball" : tenBallModeV1 ? "10-Ball" : straightPoolModeV1 ? "14-1" : "Rotation";
-    el("proP1GoalLabelV1").textContent = threeCushionModeV1 ? "持ち点" : jpaModeV1 ? `SL ${jpa9SkillLevelsV1[1]} · 目標` : straightPoolModeV1 ? "目標点" : "Race to";
-    el("proP2GoalLabelV1").textContent = threeCushionModeV1 ? "持ち点" : jpaModeV1 ? `SL ${jpa9SkillLevelsV1[2]} · 目標` : straightPoolModeV1 ? "目標点" : "Race to";
+    el("proP1GoalLabelV1").textContent = threeCushionModeV1 ? "持ち点" : jpaModeV1 ? `SL ${jpa9SkillLevelsV1[1]} · 目標` : straightPoolModeV1 ? "目標" : "Race to";
+    el("proP2GoalLabelV1").textContent = threeCushionModeV1 ? "持ち点" : jpaModeV1 ? `SL ${jpa9SkillLevelsV1[2]} · 目標` : straightPoolModeV1 ? "目標" : "Race to";
     proGameScreen.setAttribute("aria-label", threeCushionModeV1 ? "3 Cushion game" : jpaModeV1 ? "JPA 9-Ball game" : nineBallModeV1 ? "9-Ball game" : tenBallModeV1 ? "10-Ball game" : straightPoolModeV1 ? "14-1 game" : "Rotation game");
     proGameScreen.classList.toggle("jpa9-game-v1", jpaModeV1);
     proGameScreen.classList.toggle("nine-ball-game-v1", nineBallModeV1);
@@ -14210,9 +14267,13 @@ let matchRecordsRawCacheV152 = null;
       if(name==="clock")return `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
       return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10M7 21h10M8 3c0 4 1 6 4 9-3 3-4 5-4 9M16 3c0 4-1 6-4 9 3 3 4 5 4 9"/></svg>`;
     };
-    const playerCard=player=>`<article class="official-result-player-v1 ${player===winner?"winner":"loser"}"><div class="official-result-player-name-v1"><span class="official-result-avatar-v1">${resultAvatarSvgV1()}</span><span>${player===1?safeName1:safeName2}</span></div><div class="official-result-score-v1">${Number(scores[player])||0}</div><div class="official-result-stats-v1"><div><span>${isThreeCushionV1()?"アベレージ":"成功率"}</span><strong>${isThreeCushionV1()?Number(stats.average?.[player]||0).toFixed(3):`${Number(stats.shotRate[player])||0}<small>%</small>`}</strong></div><div><span>ハイラン</span><strong>${Number(stats.maxRun[player])||0}</strong></div></div></article>`;
+    const playerCard=player=>`<article class="official-result-player-v1 ${winner===0?"draw":player===winner?"winner":"loser"}"><div class="official-result-player-name-v1"><span class="official-result-avatar-v1">${resultAvatarSvgV1()}</span><span>${player===1?safeName1:safeName2}</span></div><div class="official-result-score-v1">${Number(scores[player])||0}</div><div class="official-result-stats-v1"><div><span>${isThreeCushionV1()?"アベレージ":"成功率"}</span><strong>${isThreeCushionV1()?Number(stats.average?.[player]||0).toFixed(3):`${Number(stats.shotRate[player])||0}<small>%</small>`}</strong></div><div><span>ハイラン</span><strong>${Number(stats.maxRun[player])||0}</strong></div></div></article>`;
 
     summary.innerHTML=`<div class="official-result-backdrop-v1" aria-hidden="true"></div><section class="official-result-sheet-v1" role="dialog" aria-modal="true" aria-labelledby="officialResultTitleV1"><div class="official-result-handle-v1" aria-hidden="true"></div><div class="official-result-scroll-v1"><h2 id="officialResultTitleV1">試合結果</h2><div class="official-result-info-v1"><span>${infoIcon("calendar")}<b>${dateText}</b></span><span>${infoIcon("clock")}<b>${timeText}</b></span><span>${infoIcon("duration")}<b>${durationText}</b></span></div><div class="official-result-players-v1">${playerCard(1)}<span class="official-result-separator-v1" aria-hidden="true">−</span>${playerCard(2)}</div><section class="official-result-chart-card-v1"><div class="official-result-chart-header-v1"><h3>スコア推移</h3><div><span class="p1"></span>${safeName1}<span class="p2"></span>${safeName2}</div></div><span class="official-result-axis-title-v1">得点</span>${makeOfficialResultChartSvgV1(progress)}<span class="official-result-axis-bottom-v1">イニング</span></section><div class="official-result-actions-v1"><button id="officialResultReturnGameV1" class="official-result-primary-v1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h12"/></svg>試合へ戻る</button><div class="official-result-secondary-row-v1"><button id="officialResultHomeV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3Z"/></svg>ホームへ戻る</button><button id="officialResultRematchV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7V3l-2 2a8 8 0 1 0 2 6M20 3h-4"/></svg>もう一度対戦する</button></div></div><p class="official-result-note-v1">※ 試合の詳細な分析や履歴は「履歴」画面からご確認いただけます。</p></div></section>`;
+    if (winner === 0) {
+      const resultTitle = el("officialResultTitleV1");
+      resultTitle?.insertAdjacentHTML("beforeend", '<small class="official-result-draw-v1">DRAW</small>');
+    }
     const saveAndLeave=(button,rematch)=>{
       if(button?.dataset.saving==="1")return;
       if(button){button.dataset.saving="1";button.disabled=true;}
@@ -14222,7 +14283,6 @@ let matchRecordsRawCacheV152 = null;
         summary.classList.add("hidden");summary.style.display="none";summary.style.pointerEvents="none";
         backToTitle();
         if(rematch)requestAnimationFrame(()=>document.getElementById("newMatchPlayerCard1V1")?.scrollIntoView({block:"center"}));
-        requestAnimationFrame(()=>showToast("保存完了",navigator.onLine?"対戦履歴を端末へ保存しました":"オフラインのため端末へ保存しました"));
       }catch(error){
         console.error("CueScore official result save failed",error);
         if(button){button.dataset.saving="0";button.disabled=false;}
@@ -14235,10 +14295,12 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function checkWinner() {
-    const winner = goalReachedPlayer();
+    const goalWinner = goalReachedPlayer();
+    const isDraw = isThreeCushionDrawV1();
+    const winner = isDraw ? 0 : goalWinner;
     const summary = el("proSummary");
 
-    if (!winner) {
+    if (winner === null) {
       gameEnded = false;
       gameSetDismissed = false;
       reviewMode = false;
@@ -14258,7 +14320,7 @@ let matchRecordsRawCacheV152 = null;
       String(event?.data?.gameSessionId || "") === String(currentGameSessionIdV104 || "")
     );
     gameEnded = true;
-    const loser = winner === 1 ? 2 : 1;
+    const loser = winner === 0 ? null : winner === 1 ? 2 : 1;
     const stats = calculateResultStats();
     if (!wasGameEndedV109 && !hasRecordedGameEndV110) {
       recordAnalysisEventV60("game_end", {
@@ -14270,7 +14332,7 @@ let matchRecordsRawCacheV152 = null;
         goals: {1:Number(goals[1])||0, 2:Number(goals[2])||0},
         rack,
         inning,
-        reason: "race_target_reached"
+        reason: isDraw ? "inning_limit_draw" : "race_target_reached"
       });
     }
     const now = new Date();
@@ -14501,9 +14563,6 @@ let matchRecordsRawCacheV152 = null;
           summary.style.pointerEvents = "none";
         }
         backToTitle();
-        requestAnimationFrame(() => {
-          showToast("保存完了", navigator.onLine ? "対戦履歴を端末へ保存しました" : "オフラインのため端末へ保存しました");
-        });
       } catch (error) {
         console.error("CueScore result OK save failed", error);
         if (button) {
@@ -15135,7 +15194,7 @@ let matchRecordsRawCacheV152 = null;
     const historicalSignalV159 = historicalDetailControllerV159.signal;
     const p1 = record.players?.[1] || {};
     const p2 = record.players?.[2] || {};
-    const winner = Number(record.winner) === 2 ? 2 : 1;
+    const winner = Number(record.winner) === 0 ? 0 : Number(record.winner) === 2 ? 2 : 1;
     const started = new Date(record.startedAt || record.playedAt || record.endedAt);
     const ended = new Date(record.endedAt || record.playedAt || record.startedAt);
     const dateText = Number.isNaN(ended.getTime()) ? "----/--/--" : `${ended.getFullYear()}/${String(ended.getMonth()+1).padStart(2,"0")}/${String(ended.getDate()).padStart(2,"0")}`;
@@ -15469,6 +15528,7 @@ let matchRecordsRawCacheV152 = null;
       startedAt:currentGameStartedAt||endedAt,
       endedAt,
       winner,
+      result: winner === 0 ? "draw" : "win",
       inning,
       rack,
       jpa9: isJPA9V1() ? {skillLevels:{...jpa9SkillLevelsV1},targetPoints:{...goals},deadBalls:[...deadBallsV1]} : null,
@@ -15497,6 +15557,8 @@ let matchRecordsRawCacheV152 = null;
         openingBreakEvents: JSON.parse(JSON.stringify(straightPoolStateV1.openingBreakEvents))
       } : null,
       threeCushion: isThreeCushionV1() ? {
+        settings:{...threeCushionSettingsV1},ruleVariant:threeCushionSettingsV1.variant,
+        drawAt25:Boolean(threeCushionSettingsV1.drawAt25),draw:winner===0,
         targetPoints:{...goals},currentInning:Number(threeCushionStateV1.currentInning)||1,
         completedTurns:{...threeCushionStateV1.completedTurns},highRun:{...threeCushionStateV1.highRun},
         averages:{1:Number(stats.average?.[1]||0),2:Number(stats.average?.[2]||0)},
@@ -15979,8 +16041,8 @@ let matchRecordsRawCacheV152 = null;
         records.forEach((record, matchIndex) => {
           const p1 = record.players?.[1] || {};
           const p2 = record.players?.[2] || {};
-          const winnerNumber = Number(record.winner) === 2 ? 2 : 1;
-          const winnerName = winnerNumber === 2 ? (p2.name || "Player2") : (p1.name || "Player1");
+          const winnerNumber = Number(record.winner) === 0 ? 0 : Number(record.winner) === 2 ? 2 : 1;
+          const winnerName = winnerNumber === 0 ? "Draw" : winnerNumber === 2 ? (p2.name || "Player2") : (p1.name || "Player1");
           const dateParts = formatCsvDateParts(record.endedAt || record.playedAt || record.startedAt);
           const dateObject = dateParts.date ? new Date(`${dateParts.date}T00:00:00`) : null;
           const year = dateObject ? dateObject.getFullYear() : "";
@@ -16028,7 +16090,7 @@ let matchRecordsRawCacheV152 = null;
               common.memo,
               self.name || `Player${side}`,
               opponent.name || `Player${side === 1 ? 2 : 1}`,
-              winnerNumber === side ? "勝" : "敗",
+              winnerNumber === 0 ? "引分" : winnerNumber === side ? "勝" : "敗",
               common.winnerName,
               Number(self.goal) || 0,
               Number(opponent.goal) || 0,
@@ -19772,7 +19834,8 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
 .cue-new-match-summary-v2 .cue-selected-game-v1{margin:0}
 .cue-new-match-summary-v2 .cue-selected-game-v1 .cue-ball-icon-v1{width:42px;height:42px;font-size:17px}
 .cue-new-match-summary-v2 .cue-selected-game-name-v1{font-size:23px}
-.cue-game-rules-v2{
+.cue-game-rules-v2,
+.cue-carom-rules-v1{
   padding-left:14px;border-left:1px solid #dededb;
   display:flex;flex-direction:column;justify-content:center;gap:9px;
 }
@@ -19958,7 +20021,8 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
 .cue-game-rules-v2{
   border-left-color:var(--cue-border);
 }
-.cue-game-rules-v2>strong{
+.cue-game-rules-v2>strong,
+.cue-carom-rules-v1>strong{
   font-weight:760;
   letter-spacing:-.01em;
 }
@@ -20268,7 +20332,8 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   margin-bottom:1px;
   font-size:14px;
 }
-.cue-game-rules-v2>label:not(.cue-rule-toggle-v2){
+.cue-game-rules-v2>label:not(.cue-rule-toggle-v2),
+.cue-carom-rules-v1>label:not(.cue-rule-toggle-v2){
   width:100%;
   display:grid;
   grid-template-columns:minmax(0,1fr) auto;
@@ -20278,7 +20343,8 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   font-size:13px;
   font-weight:520;
 }
-.cue-game-rules-v2 select{
+.cue-game-rules-v2 select,
+.cue-carom-rules-v1 select{
   min-width:76px;
   height:30px;
   padding:0 24px 0 10px;
@@ -20289,6 +20355,15 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   font:inherit;
   font-weight:680;
   text-align-last:center;
+}
+.cue-carom-rules-v1[hidden]{display:none!important}
+.official-result-draw-v1{
+  display:block;
+  margin-top:4px;
+  color:#777775;
+  font-size:12px;
+  font-weight:750;
+  letter-spacing:.12em;
 }
 .cue-rule-toggle-v2{
   width:100%;
@@ -21591,7 +21666,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
     const signal=historicalDetailControllerV159.signal;
     const p1=record.players?.[1]||{};
     const p2=record.players?.[2]||{};
-    const winner=Number(record.winner)===2?2:1;
+    const winner=Number(record.winner)===0?0:Number(record.winner)===2?2:1;
     const date=datePartsV1(record);
     const goal1=Number(p1.goal)||0;
     const goal2=Number(p2.goal)||0;
