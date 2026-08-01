@@ -8130,12 +8130,10 @@ body {
           <label><span>ブレイク方式</span><select id="tenBallBreakRuleV1"><option value="alternate">交互ブレイク</option><option value="winner">勝者ブレイク</option></select></label>
           <label><span>3ファール</span><input id="tenBallThreeFoulV1" type="checkbox" checked><i aria-hidden="true"></i></label>
           <label><span>プッシュアウト</span><input id="tenBallPushOutV1" type="checkbox" checked><i aria-hidden="true"></i></label>
-          <label><span>コール入力</span><input id="tenBallCallInputV1" type="checkbox" checked><i aria-hidden="true"></i></label>
           <label><span>詳細入力</span><input id="tenBallDetailV1" type="checkbox" checked><i aria-hidden="true"></i></label>
         </div>
         <div class="nine-ball-settings-v1 straight-pool-settings-v1" id="straightPoolSettingsV1" hidden aria-label="14-1ルール設定">
           <label><span>3ファール</span><input id="straightPoolThreeFoulV1" type="checkbox" checked><i aria-hidden="true"></i></label>
-          <label><span>コール入力</span><input id="straightPoolCallInputV1" type="checkbox" checked><i aria-hidden="true"></i></label>
           <label><span>オープニングブレイク</span><input id="straightPoolOpeningBreakV1" type="checkbox" checked><i aria-hidden="true"></i></label>
           <label><span>詳細入力</span><input id="straightPoolDetailV1" type="checkbox" checked><i aria-hidden="true"></i></label>
         </div>
@@ -8329,10 +8327,6 @@ body {
 
           <section class="pro-actions" id="proActionsV730">
             <button id="proPushOutBtnV730" class="pro-action pro-pushout" type="button" hidden>プッシュアウト</button>
-            <button id="proTenBallCallBtnV1" class="pro-action pro-call-v1" type="button" hidden>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
-              <span>コール</span>
-            </button>
             <button id="proSafetyBtn" class="pro-action pro-safety" type="button">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3 7.7 7.5 9.5 4.5-1.8 7.5-5 7.5-9.5V6Z"/></svg>
               <span>セーフティ</span>
@@ -8399,59 +8393,24 @@ body {
         </div>
       </section>
 
-      <section id="tenBallCallOverlayV1" class="ten-call-overlay-v1 hidden" aria-modal="true" role="dialog" aria-labelledby="tenBallCallTitleV1">
-        <div class="ten-call-sheet-v1">
-          <div class="ten-call-handle-v1" aria-hidden="true"></div>
-          <h2 id="tenBallCallTitleV1">コールショット</h2>
-          <p>狙うボールとポケット、ショット結果を入力してください</p>
-          <h3>コールするボール</h3>
-          <div id="tenBallCalledBallGridV1" class="ten-call-ball-grid-v1"></div>
-          <h3>コールするポケット</h3>
-          <div id="tenBallPocketGridV1" class="ten-call-pocket-grid-v1"></div>
-          <h3>ポケットしたボール</h3>
-          <div id="tenBallPocketedGridV1" class="ten-call-ball-grid-v1"></div>
-          <div class="ten-call-results-v1" role="radiogroup" aria-label="ショット結果">
-            <button type="button" data-ten-result="made">成功</button>
-            <button type="button" data-ten-result="miss">ミス</button>
-            <button type="button" data-ten-result="wrong">コール不成立</button>
-            <button type="button" data-ten-result="foul">ファール</button>
-            <button type="button" data-ten-result="safety">セーフティ</button>
-          </div>
-          <button id="tenBallCallSaveV1" class="ten-call-save-v1" type="button">確定</button>
-          <button id="tenBallCallCancelV1" class="ten-call-cancel-v1" type="button">キャンセル</button>
-        </div>
-      </section>
-
-      <section id="tenBallDecisionOverlayV1" class="ten-call-overlay-v1 hidden" aria-modal="true" role="dialog" aria-labelledby="tenBallDecisionTitleV1">
-        <div class="ten-call-sheet-v1 compact-v1">
-          <div class="ten-call-handle-v1" aria-hidden="true"></div>
-          <h2 id="tenBallDecisionTitleV1">次のプレーを選択</h2>
-          <p id="tenBallDecisionPlayerV1">相手プレーヤーが選択します</p>
-          <div class="ten-call-decision-grid-v1">
-            <button id="tenBallDecisionPlayV1" type="button">自分が撞く</button>
-            <button id="tenBallDecisionReturnV1" type="button">相手に返す</button>
-          </div>
-        </div>
-      </section>
-
-      <section id="straightBreakDecisionOverlayV1" class="ten-call-overlay-v1 hidden" aria-modal="true" role="dialog" aria-labelledby="straightBreakDecisionTitleV1">
-        <div class="ten-call-sheet-v1 compact-v1">
-          <div class="ten-call-handle-v1" aria-hidden="true"></div>
+      <section id="straightBreakDecisionOverlayV1" class="cue-sheet-overlay-v1 hidden" aria-modal="true" role="dialog" aria-labelledby="straightBreakDecisionTitleV1">
+        <div class="cue-sheet-v1 compact-v1">
+          <div class="cue-sheet-handle-v1" aria-hidden="true"></div>
           <h2 id="straightBreakDecisionTitleV1">オープニングブレイクファール</h2>
           <p id="straightBreakDecisionPlayerV1">次のプレーヤーが選択します</p>
-          <div class="ten-call-decision-grid-v1">
+          <div class="cue-sheet-decision-grid-v1">
             <button id="straightBreakAcceptV1" type="button">現状を受け入れる</button>
             <button id="straightBreakRebreakV1" type="button">再ブレイクを要求</button>
           </div>
         </div>
       </section>
 
-      <section id="straightPoolNoticeOverlayV1" class="ten-call-overlay-v1 hidden" aria-modal="true" role="dialog" aria-labelledby="straightPoolNoticeTitleV1">
-        <div class="ten-call-sheet-v1 compact-v1">
-          <div class="ten-call-handle-v1" aria-hidden="true"></div>
+      <section id="straightPoolNoticeOverlayV1" class="cue-sheet-overlay-v1 hidden" aria-modal="true" role="dialog" aria-labelledby="straightPoolNoticeTitleV1">
+        <div class="cue-sheet-v1 compact-v1">
+          <div class="cue-sheet-handle-v1" aria-hidden="true"></div>
           <h2 id="straightPoolNoticeTitleV1">配置確認</h2>
           <p id="straightPoolNoticeMessageV1"></p>
-          <button id="straightPoolNoticeOKV1" class="ten-call-save-v1" type="button">OK</button>
+          <button id="straightPoolNoticeOKV1" class="cue-sheet-save-v1" type="button">OK</button>
         </div>
       </section>
 
@@ -8967,8 +8926,7 @@ body {
     [
       "recordModeOverlayV611", "pushOutInputOverlayV730",
       "pushOutDecisionOverlayV730", "breakResultOverlayV61", "recordDetailOverlay",
-      "playerStatsOverlay", "playerLibraryOverlay", "tenBallCallOverlayV1",
-      "tenBallDecisionOverlayV1"
+      "playerStatsOverlay", "playerLibraryOverlay"
     ].forEach(id => {
       const node = document.getElementById(id);
       if (!node) return;
@@ -9092,8 +9050,8 @@ body {
     const disciplines = {
       rotation: { name: "Rotation", icon: "15", rule: "設定項目はありません" },
       "9ball": { name: "9-Ball", icon: "9", rule: "ラック制" },
-      "10ball": { name: "10-Ball", icon: "10", rule: "コールショット" },
-      straightPool: { name: "14-1", icon: "14.1", rule: "コールショット" },
+      "10ball": { name: "10-Ball", icon: "10", rule: "ラック制" },
+      straightPool: { name: "14-1", icon: "14.1", rule: "連続得点" },
       jpa9: { name: "JPA 9-Ball", icon: "JPA", rule: "SL別目標点" }
     };
 
@@ -9220,26 +9178,23 @@ body {
     syncNineSettings();
     const TEN_SETTINGS_KEY = "cueScore.tenBall.settings.v1";
     let tenSettingsValue;
-    try { tenSettingsValue = JSON.parse(safeRead(TEN_SETTINGS_KEY, '{"breakRule":"alternate","threeFoul":true,"pushOut":true,"callInput":true,"illegalBreak":true,"recordMode":"detail"}')); }
-    catch (_) { tenSettingsValue = {breakRule:"alternate",threeFoul:true,pushOut:true,callInput:true,illegalBreak:true,recordMode:"detail"}; }
+    try { tenSettingsValue = JSON.parse(safeRead(TEN_SETTINGS_KEY, '{"breakRule":"alternate","threeFoul":true,"pushOut":true,"illegalBreak":true,"recordMode":"detail"}')); }
+    catch (_) { tenSettingsValue = {breakRule:"alternate",threeFoul:true,pushOut:true,illegalBreak:true,recordMode:"detail"}; }
     const syncTenSettings = () => {
       const breakRule = document.getElementById("tenBallBreakRuleV1");
       const threeFoul = document.getElementById("tenBallThreeFoulV1");
       const pushOut = document.getElementById("tenBallPushOutV1");
-      const callInput = document.getElementById("tenBallCallInputV1");
       const detail = document.getElementById("tenBallDetailV1");
       if (breakRule) breakRule.value = tenSettingsValue.breakRule || "alternate";
       if (threeFoul) threeFoul.checked = tenSettingsValue.threeFoul !== false;
       if (pushOut) pushOut.checked = tenSettingsValue.pushOut !== false;
-      if (callInput) callInput.checked = tenSettingsValue.callInput !== false;
       if (detail) detail.checked = tenSettingsValue.recordMode !== "simple";
     };
-    ["tenBallBreakRuleV1","tenBallThreeFoulV1","tenBallPushOutV1","tenBallCallInputV1","tenBallDetailV1"].forEach(id => document.getElementById(id)?.addEventListener("change", () => {
+    ["tenBallBreakRuleV1","tenBallThreeFoulV1","tenBallPushOutV1","tenBallDetailV1"].forEach(id => document.getElementById(id)?.addEventListener("change", () => {
       tenSettingsValue = {
         breakRule: document.getElementById("tenBallBreakRuleV1")?.value || "alternate",
         threeFoul: Boolean(document.getElementById("tenBallThreeFoulV1")?.checked),
         pushOut: Boolean(document.getElementById("tenBallPushOutV1")?.checked),
-        callInput: Boolean(document.getElementById("tenBallCallInputV1")?.checked),
         illegalBreak: Boolean(document.getElementById("cueIllegalRuleV2")?.checked),
         recordMode: document.getElementById("tenBallDetailV1")?.checked ? "detail" : "simple"
       };
@@ -9248,18 +9203,16 @@ body {
     syncTenSettings();
     const STRAIGHT_SETTINGS_KEY = "cueScore.straightPool.settings.v1";
     let straightSettingsValue;
-    try { straightSettingsValue = JSON.parse(safeRead(STRAIGHT_SETTINGS_KEY, '{"threeFoul":true,"callInput":true,"openingBreak":true,"recordMode":"detail"}')); }
-    catch (_) { straightSettingsValue = {threeFoul:true,callInput:true,openingBreak:true,recordMode:"detail"}; }
+    try { straightSettingsValue = JSON.parse(safeRead(STRAIGHT_SETTINGS_KEY, '{"threeFoul":true,"openingBreak":true,"recordMode":"detail"}')); }
+    catch (_) { straightSettingsValue = {threeFoul:true,openingBreak:true,recordMode:"detail"}; }
     const syncStraightSettings = () => {
       if (document.getElementById("straightPoolThreeFoulV1")) document.getElementById("straightPoolThreeFoulV1").checked = straightSettingsValue.threeFoul !== false;
-      if (document.getElementById("straightPoolCallInputV1")) document.getElementById("straightPoolCallInputV1").checked = straightSettingsValue.callInput !== false;
       if (document.getElementById("straightPoolOpeningBreakV1")) document.getElementById("straightPoolOpeningBreakV1").checked = straightSettingsValue.openingBreak !== false;
       if (document.getElementById("straightPoolDetailV1")) document.getElementById("straightPoolDetailV1").checked = straightSettingsValue.recordMode !== "simple";
     };
-    ["straightPoolThreeFoulV1","straightPoolCallInputV1","straightPoolOpeningBreakV1","straightPoolDetailV1"].forEach(id => document.getElementById(id)?.addEventListener("change", () => {
+    ["straightPoolThreeFoulV1","straightPoolOpeningBreakV1","straightPoolDetailV1"].forEach(id => document.getElementById(id)?.addEventListener("change", () => {
       straightSettingsValue = {
         threeFoul: document.getElementById("straightPoolThreeFoulV1")?.checked !== false,
-        callInput: document.getElementById("straightPoolCallInputV1")?.checked !== false,
         openingBreak: document.getElementById("straightPoolOpeningBreakV1")?.checked !== false,
         recordMode: document.getElementById("straightPoolDetailV1")?.checked ? "detail" : "simple"
       };
@@ -9298,10 +9251,10 @@ body {
   let deadBallsV1 = new Set();
   let nineBallSettingsV1 = {breakRule:"winner",threeFoul:true,pushOut:true,illegalBreak:true,recordMode:"detail"};
   let nineBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[]};
-  let tenBallSettingsV1 = {breakRule:"alternate",threeFoul:true,pushOut:true,callInput:true,illegalBreak:true,recordMode:"detail"};
-  let tenBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[],spotEvents:[],callEvents:[]};
-  let straightPoolSettingsV1 = {threeFoul:true,callInput:true,openingBreak:true,recordMode:"detail"};
-  let straightPoolStateV1 = {consecutiveFouls:{1:0,2:0},openingBreaker:1,phase:"openingBreak",rackCycle:1,spotEvents:[],rerackEvents:[],callEvents:[],openingBreakEvents:[]};
+  let tenBallSettingsV1 = {breakRule:"alternate",threeFoul:true,pushOut:true,illegalBreak:true,recordMode:"detail"};
+  let tenBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[],spotEvents:[]};
+  let straightPoolSettingsV1 = {threeFoul:true,openingBreak:true,recordMode:"detail"};
+  let straightPoolStateV1 = {consecutiveFouls:{1:0,2:0},openingBreaker:1,phase:"openingBreak",rackCycle:1,spotEvents:[],rerackEvents:[],openingBreakEvents:[]};
   let straightBreakDecisionV1 = null;
   let straightPoolNoticeQueueV1 = [];
 
@@ -12286,10 +12239,10 @@ let matchRecordsRawCacheV152 = null;
     deadBallsV1 = new Set(state.deadBallsV1 || []);
     nineBallSettingsV1 = state.nineBallSettingsV1 ? {...state.nineBallSettingsV1} : {breakRule:"winner",threeFoul:true,pushOut:true,illegalBreak:true,recordMode:"detail"};
     nineBallStateV1 = state.nineBallStateV1 ? JSON.parse(JSON.stringify(state.nineBallStateV1)) : {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[]};
-    tenBallSettingsV1 = state.tenBallSettingsV1 ? {...state.tenBallSettingsV1} : {breakRule:"alternate",threeFoul:true,pushOut:true,callInput:true,illegalBreak:true,recordMode:"detail"};
-    tenBallStateV1 = state.tenBallStateV1 ? JSON.parse(JSON.stringify(state.tenBallStateV1)) : {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[],spotEvents:[],callEvents:[],decisionPending:null};
-    straightPoolSettingsV1 = state.straightPoolSettingsV1 ? {...state.straightPoolSettingsV1} : {threeFoul:true,callInput:true,openingBreak:true,recordMode:"detail"};
-    straightPoolStateV1 = state.straightPoolStateV1 ? JSON.parse(JSON.stringify(state.straightPoolStateV1)) : {consecutiveFouls:{1:0,2:0},openingBreaker:1,phase:"openingBreak",rackCycle:1,spotEvents:[],rerackEvents:[],callEvents:[],openingBreakEvents:[]};
+    tenBallSettingsV1 = state.tenBallSettingsV1 ? {...state.tenBallSettingsV1} : {breakRule:"alternate",threeFoul:true,pushOut:true,illegalBreak:true,recordMode:"detail"};
+    tenBallStateV1 = state.tenBallStateV1 ? JSON.parse(JSON.stringify(state.tenBallStateV1)) : {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[],spotEvents:[]};
+    straightPoolSettingsV1 = state.straightPoolSettingsV1 ? {...state.straightPoolSettingsV1} : {threeFoul:true,openingBreak:true,recordMode:"detail"};
+    straightPoolStateV1 = state.straightPoolStateV1 ? JSON.parse(JSON.stringify(state.straightPoolStateV1)) : {consecutiveFouls:{1:0,2:0},openingBreaker:1,phase:"openingBreak",rackCycle:1,spotEvents:[],rerackEvents:[],openingBreakEvents:[]};
     current = state.current;
     startingPlayer = state.startingPlayer;
     goals = {...state.goals};
@@ -12339,8 +12292,6 @@ let matchRecordsRawCacheV152 = null;
     pushOutInputBallsV730 = new Set(state.pushOutInputBallsV730 || []);
     pushOutInputScratchV730 = Boolean(state.pushOutInputScratchV730);
     closeBreakResultPromptV61();
-    closeTenBallCallV1();
-    el("tenBallDecisionOverlayV1")?.classList.add("hidden");
   }
 
   function playerName(player) {
@@ -12565,13 +12516,6 @@ let matchRecordsRawCacheV152 = null;
       pushOutButtonV730.disabled = !pushOutAvailableV730;
     }
     actionsV730?.classList.toggle("pushout-enabled-v730", Boolean(pushOutButtonV730 && !pushOutButtonV730.hidden));
-    const callButtonV1 = el("proTenBallCallBtnV1");
-    if (callButtonV1) {
-      const callModeV1 = (isTenBallV1() && tenBallSettingsV1.callInput !== false) || (isStraightPoolV1() && straightPoolSettingsV1.callInput !== false);
-      callButtonV1.hidden = !callModeV1;
-      callButtonV1.disabled = !callModeV1 || rackEnded || foulLocked || gameEnded || reviewLocked;
-    }
-
     const safetyButton = el("proSafetyBtn");
     const foulButton = el("proFoulBtn");
     const switchButton = el("proSwitchBtn");
@@ -12765,66 +12709,6 @@ let matchRecordsRawCacheV152 = null;
     }
   }
 
-  const TEN_BALL_POCKETS_V1 = Object.freeze([
-    ["top-left","左上"],["top-center","中央上"],["top-right","右上"],
-    ["bottom-left","左下"],["bottom-center","中央下"],["bottom-right","右下"]
-  ]);
-  let tenBallCallDraftV1 = {calledBall:null,calledPocket:null,pocketedBalls:new Set(),result:"made"};
-
-  function renderTenBallCallV1() {
-    const ballCountV1 = isStraightPoolV1() ? 15 : 10;
-    const buildBall = (number, selected, kind) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.dataset.tenBall = String(number);
-      button.dataset.tenKind = kind;
-      button.className = `ten-call-ball-v1 ${number <= 8 ? "solid" : "stripe"}${selected ? " selected-v1" : ""}`;
-      button.style.setProperty("--ball-color", colors[number]);
-      button.disabled = usedBalls.has(number);
-      button.setAttribute("aria-label", `${number}番ボール${selected ? " 選択中" : ""}${button.disabled ? " ポケット済み" : ""}`);
-      button.innerHTML = `<span>${number}</span>`;
-      return button;
-    };
-    const calledGrid = el("tenBallCalledBallGridV1");
-    const pocketedGrid = el("tenBallPocketedGridV1");
-    if (calledGrid) {
-      calledGrid.replaceChildren(...Array.from({length:ballCountV1},(_,index)=>buildBall(index+1,tenBallCallDraftV1.calledBall===index+1,"called")));
-    }
-    if (pocketedGrid) {
-      pocketedGrid.replaceChildren(...Array.from({length:ballCountV1},(_,index)=>buildBall(index+1,tenBallCallDraftV1.pocketedBalls.has(index+1),"pocketed")));
-    }
-    const pocketGrid = el("tenBallPocketGridV1");
-    if (pocketGrid) {
-      pocketGrid.innerHTML = TEN_BALL_POCKETS_V1.map(([id,label])=>`<button type="button" data-ten-pocket="${id}" class="${tenBallCallDraftV1.calledPocket===id?"selected-v1":""}">${label}</button>`).join("");
-    }
-    document.querySelectorAll("[data-ten-result]").forEach(button => {
-      button.classList.toggle("selected-v1",button.dataset.tenResult===tenBallCallDraftV1.result);
-      if (button.dataset.tenResult === "safety") button.hidden = !isStraightPoolV1();
-    });
-  }
-
-  function openTenBallCallV1(preselectedBall = null) {
-    const enabledV1 = (isTenBallV1() && tenBallSettingsV1.callInput !== false) || (isStraightPoolV1() && straightPoolSettingsV1.callInput !== false);
-    if (!enabledV1 || gameEnded || rackEnded || foulLocked) return;
-    const ball = Number(preselectedBall);
-    const maxBallV1 = isStraightPoolV1() ? 15 : 10;
-    tenBallCallDraftV1 = {calledBall:Number.isInteger(ball)&&ball>=1&&ball<=maxBallV1?ball:null,calledPocket:null,pocketedBalls:new Set(),result:"made"};
-    if (el("tenBallCallTitleV1")) el("tenBallCallTitleV1").textContent = isStraightPoolV1() ? "14-1 コールショット" : "コールショット";
-    renderTenBallCallV1();
-    el("tenBallCallOverlayV1")?.classList.remove("hidden");
-  }
-
-  function closeTenBallCallV1() { el("tenBallCallOverlayV1")?.classList.add("hidden"); }
-
-  function advanceRackTurnV1(nextPlayer) {
-    const from = current;
-    endCurrentRun(from);
-    current = Number(nextPlayer) === 2 ? 2 : 1;
-    if (current === startingPlayer) { inning++; forceNewRow = true; }
-    foulLocked = false;
-    turnLockReasonV62 = null;
-  }
-
   function straightPoolSpotAndMaybeRerackV1(pocketed, reason, shooter) {
     if (pocketed.length) {
       straightPoolStateV1.spotEvents.push({rack:Number(rack),inning:Number(inning),player:shooter,balls:[...pocketed],reason,at:new Date().toISOString()});
@@ -12905,136 +12789,12 @@ let matchRecordsRawCacheV152 = null;
     if (choice === "rebreak") setTimeout(() => showBreakResultPromptV61(current, rack), 0);
   }
 
-  function confirmStraightPoolCallV1() {
-    if (!isStraightPoolV1() || gameEnded || rackEnded || foulLocked) return;
-    const result = tenBallCallDraftV1.result;
-    const calledBall = Number(tenBallCallDraftV1.calledBall);
-    const calledPocket = tenBallCallDraftV1.calledPocket;
-    const pocketed = [...tenBallCallDraftV1.pocketedBalls].filter(ball=>!usedBalls.has(ball)).sort((a,b)=>a-b);
-    if ((result === "made" || result === "wrong") && (!calledBall || !calledPocket)) { showToast("コールショット", "ボールとポケットを選択してください"); return; }
-    if (result === "made" && !pocketed.includes(calledBall)) { showToast("コールショット", "コールしたボールをポケット球に含めてください"); return; }
-    const shooter=current, opponent=shooter===1?2:1;
-    closeTenBallCallV1();
-    saveAndDo(()=>{
-      const event={rack:Number(rack),inning:Number(inning),player:shooter,calledBall,calledPocket,pocketedBalls:[...pocketed],result,at:new Date().toISOString()};
-      straightPoolStateV1.callEvents.push(event);
-      appendCommonEventV700("CalledShot","straight_pool_called_shot",event);
-      if(result==="made"){
-        pocketed.forEach(ball=>{usedBalls.add(ball);addItemToCurrent(ball);scores[shooter]+=1;rackScores[shooter]+=1;currentRun[shooter]+=1;});
-        maxRun[shooter]=Math.max(maxRun[shooter],currentRun[shooter]);
-        straightPoolStateV1.consecutiveFouls[shooter]=0;
-        pocketed.forEach(ball=>recordAnalysisEventV60("ball_pocketed",{player:shooter,ball,points:1,source:"straight_pool_call"}));
-        straightPoolSpotAndMaybeRerackV1([],"legal_shot",shooter);
-      }else if(result==="foul"){
-        pocketed.forEach(ball=>addItemToCurrent(ball)); addItemToCurrent("F");
-        scores[shooter]-=1; fouls[shooter]++;
-        const streak=Number(straightPoolStateV1.consecutiveFouls[shooter]||0)+1;
-        straightPoolStateV1.consecutiveFouls[shooter]=streak;
-        straightPoolSpotAndMaybeRerackV1(pocketed,"foul",shooter);
-        if(streak>=3 && straightPoolSettingsV1.threeFoul!==false){
-          scores[shooter]-=15; straightPoolStateV1.consecutiveFouls[shooter]=0; usedBalls=new Set(); rack+=1; straightPoolStateV1.rackCycle=rack; current=shooter; forceNewRow=true;
-          appendCommonEventV700("FoulPenalty","straight_pool_three_foul",{player:shooter,penalty:-16,nextBreaker:shooter});
-          queueStraightPoolNoticeV1("3ファール", "合計16点減点。15球を再ラックし、ファールしたプレーヤーがブレイクします", () => showBreakResultPromptV61(shooter, rack));
-        }else advanceRackTurnV1(opponent);
-      }else{
-        pocketed.forEach(ball=>addItemToCurrent(ball));
-        if(result==="safety"){ safety[shooter]++; addItemToCurrent("S"); }
-        else misses[shooter]++;
-        straightPoolStateV1.consecutiveFouls[shooter]=0;
-        straightPoolSpotAndMaybeRerackV1(pocketed,result,shooter);
-        advanceRackTurnV1(opponent);
-      }
-    });
-  }
-
-  function confirmTenBallCallV1() {
-    if (isStraightPoolV1()) return confirmStraightPoolCallV1();
-    if (!isTenBallV1() || gameEnded || rackEnded || foulLocked) return;
-    const result = tenBallCallDraftV1.result;
-    const calledBall = Number(tenBallCallDraftV1.calledBall);
-    const calledPocket = tenBallCallDraftV1.calledPocket;
-    const pocketed = [...tenBallCallDraftV1.pocketedBalls].filter(ball=>!usedBalls.has(ball)).sort((a,b)=>a-b);
-    if ((result === "made" || result === "wrong") && (!calledBall || !calledPocket)) {
-      showToast("コールショット", "ボールとポケットを選択してください"); return;
-    }
-    if (result === "made" && !pocketed.includes(calledBall)) {
-      showToast("コールショット", "コールしたボールをポケット球に含めてください"); return;
-    }
-    const shooter = current;
-    const opponent = shooter === 1 ? 2 : 1;
-    closeTenBallCallV1();
-    saveAndDo(() => {
-      const beforeRemaining = Array.from({length:10},(_,index)=>index+1).filter(ball=>!usedBalls.has(ball));
-      const tenWasLast = beforeRemaining.length === 1 && beforeRemaining[0] === 10;
-      pocketed.forEach(ball => { if (ball !== 10) usedBalls.add(ball); });
-      pocketed.forEach(ball => addItemToCurrent(ball));
-      const event = {rack:Number(rack),inning:Number(inning),player:shooter,calledBall,calledPocket,pocketedBalls:pocketed,result,at:new Date().toISOString()};
-      tenBallStateV1.callEvents.push(event);
-      appendCommonEventV700("CalledShot", "ten_ball_called_shot", event);
-      recordAnalysisEventV60("ten_ball_called_shot", event, {skipCommon:true});
-      if (pocketed.includes(10)) {
-        if (result === "made" && calledBall === 10 && tenWasLast) {
-          usedBalls.add(10);
-          completeNineBallRackV1(shooter,"legalCalledTen",{calledBall,calledPocket,source:"called_shot"});
-          return;
-        }
-        spotTenBallV1(result === "foul" ? "foul" : result === "wrong" ? "wrong_pocket" : "early_ten",shooter);
-      }
-      if (result === "made") {
-        tenBallStateV1.consecutiveFouls[shooter] = 0;
-        tenBallStateV1.ballInHandFor = null;
-        currentRun[shooter] += pocketed.length;
-        if (currentRun[shooter] > maxRun[shooter]) maxRun[shooter] = currentRun[shooter];
-      } else if (result === "foul") {
-        fouls[shooter]++;
-        addItemToCurrent("F");
-        tenBallStateV1.consecutiveFouls[shooter] = Number(tenBallStateV1.consecutiveFouls[shooter]||0)+1;
-        const streak = tenBallStateV1.consecutiveFouls[shooter];
-        appendCommonEventV700("FoulCount","consecutive_foul",{player:shooter,count:streak,threeFoulRule:tenBallSettingsV1.threeFoul!==false,source:"called_shot"});
-        if (streak >= 3 && tenBallSettingsV1.threeFoul !== false) completeNineBallRackV1(opponent,"threeFoulLoss",{foulingPlayer:shooter,source:"called_shot"});
-        else { tenBallStateV1.ballInHandFor = opponent; advanceRackTurnV1(opponent); }
-      } else if (result === "wrong") {
-        tenBallStateV1.consecutiveFouls[shooter] = 0;
-        tenBallStateV1.ballInHandFor = null;
-        endCurrentRun(shooter);
-        foulLocked = true;
-        turnLockReasonV62 = "ten_ball_opponent_decision";
-        tenBallStateV1.decisionPending = {shooter,chooser:opponent,event};
-      } else {
-        misses[shooter]++;
-        tenBallStateV1.consecutiveFouls[shooter] = 0;
-        tenBallStateV1.ballInHandFor = null;
-        advanceRackTurnV1(opponent);
-      }
-    });
-    if (result === "wrong" && tenBallStateV1.decisionPending) {
-      el("tenBallDecisionPlayerV1").textContent = `${playerName(tenBallStateV1.decisionPending.chooser)} が選択します`;
-      el("tenBallDecisionOverlayV1")?.classList.remove("hidden");
-    }
-  }
-
-  function decideTenBallWrongPocketV1(choice) {
-    const pending = tenBallStateV1.decisionPending;
-    if (!pending) return;
-    saveAndDo(() => {
-      const previousPlayer = current;
-      current = choice === "return" ? pending.shooter : pending.chooser;
-      if (current !== previousPlayer && current === startingPlayer) { inning++; forceNewRow = true; }
-      foulLocked = false;
-      turnLockReasonV62 = null;
-      appendCommonEventV700("CalledShotDecision","ten_ball_called_shot_decision",{player:pending.chooser,decision:choice,nextPlayer:current,shooter:pending.shooter});
-      tenBallStateV1.decisionPending = null;
-    });
-    el("tenBallDecisionOverlayV1")?.classList.add("hidden");
-  }
-
   function pocketBall(number) {
     const activeBallCountV105 = Math.max(1, Number(getActiveRuleV699().ballCount || 15));
     const ballNumberV105 = Number(number);
     if (!Number.isInteger(ballNumberV105) || ballNumberV105 < 1 || ballNumberV105 > activeBallCountV105) return;
     number = ballNumberV105;
     if (gameEnded || rackEnded || foulLocked || isReviewLocked() || usedBalls.has(number)) return;
-    if ((isTenBallV1() && tenBallSettingsV1.callInput !== false) || (isStraightPoolV1() && straightPoolSettingsV1.callInput !== false)) { openTenBallCallV1(number); return; }
     if (pushOutStateV730?.stage === "available") clearPushOutWindowV730();
     saveAndDo(() => {
       const points = activeBallPointsV1(number);
@@ -13069,6 +12829,9 @@ let matchRecordsRawCacheV152 = null;
         const legalFinalTen = usedBalls.size >= 10;
         if (legalFinalTen) completeNineBallRackV1(current,"legalTen",{ballNumber:10,source:"simple_shot"});
         else spotTenBallV1("early_ten",current);
+      } else if (isStraightPoolV1()) {
+        straightPoolStateV1.consecutiveFouls[current] = 0;
+        straightPoolSpotAndMaybeRerackV1([], "legal_shot", current);
       } else if ((isJPA9V1() && number === 9) || usedBalls.size >= activeBallCountV105) {
         rackEnded = true;
         foulLocked = false;
@@ -13133,12 +12896,6 @@ let matchRecordsRawCacheV152 = null;
 
   function safetyEvent() {
     if (gameEnded || rackEnded || foulLocked || isReviewLocked()) return;
-    if (isStraightPoolV1() && straightPoolSettingsV1.callInput !== false) {
-      openTenBallCallV1();
-      tenBallCallDraftV1.result = "safety";
-      renderTenBallCallV1();
-      return;
-    }
     if (pushOutStateV730?.stage === "available") clearPushOutWindowV730();
     saveAndDo(() => {
       if (pendingSafetyV62 && current === pendingSafetyV62.opponent) {
@@ -13179,12 +12936,6 @@ let matchRecordsRawCacheV152 = null;
 
   function foulEvent() {
     if (gameEnded || rackEnded || foulLocked || isReviewLocked()) return;
-    if (isStraightPoolV1() && straightPoolSettingsV1.callInput !== false) {
-      openTenBallCallV1();
-      tenBallCallDraftV1.result = "foul";
-      renderTenBallCallV1();
-      return;
-    }
     if (pushOutStateV730?.stage === "available") clearPushOutWindowV730();
     saveAndDo(() => {
       if (pendingSafetyV62 && current === pendingSafetyV62.opponent) {
@@ -13756,7 +13507,6 @@ let matchRecordsRawCacheV152 = null;
         breakRule: homeSelectionV1.tenBall?.breakRule || "alternate",
         threeFoul: homeSelectionV1.tenBall?.threeFoul !== false,
         pushOut: homeSelectionV1.tenBall?.pushOut !== false,
-        callInput: homeSelectionV1.tenBall?.callInput !== false,
         illegalBreak: homeSelectionV1.rules?.illegal !== false,
         recordMode: homeSelectionV1.tenBall?.recordMode === "simple" ? "simple" : "detail"
       };
@@ -13765,7 +13515,6 @@ let matchRecordsRawCacheV152 = null;
     if (straightPoolModeV1) {
       straightPoolSettingsV1 = {
         threeFoul: homeSelectionV1.straightPool?.threeFoul !== false,
-        callInput: homeSelectionV1.straightPool?.callInput !== false,
         openingBreak: homeSelectionV1.straightPool?.openingBreak !== false,
         recordMode: homeSelectionV1.straightPool?.recordMode === "simple" ? "simple" : "detail"
       };
@@ -13807,8 +13556,8 @@ let matchRecordsRawCacheV152 = null;
     usedBalls = new Set();
     deadBallsV1 = new Set();
     nineBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:startingPlayer,rackResults:[]};
-    tenBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:startingPlayer,rackResults:[],spotEvents:[],callEvents:[],decisionPending:null};
-    straightPoolStateV1 = {consecutiveFouls:{1:0,2:0},openingBreaker:startingPlayer,phase:"openingBreak",rackCycle:1,spotEvents:[],rerackEvents:[],callEvents:[],openingBreakEvents:[]};
+    tenBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:startingPlayer,rackResults:[],spotEvents:[]};
+    straightPoolStateV1 = {consecutiveFouls:{1:0,2:0},openingBreaker:startingPlayer,phase:"openingBreak",rackCycle:1,spotEvents:[],rerackEvents:[],openingBreakEvents:[]};
     rows = [];
     undoHistory = [];
     rackEnded = false;
@@ -13946,13 +13695,6 @@ let matchRecordsRawCacheV152 = null;
         nineBall[player] += balls.filter(ball => ball === 9).length;
         scoringEventCount += balls.length;
         return;
-      }
-      if (event?.type === "CalledShot" && event?.sourceType === "ten_ball_called_shot") {
-        const balls = Array.isArray(event?.data?.pocketedBalls)
-          ? event.data.pocketedBalls.map(Number).filter(ball => Number.isInteger(ball) && ball >= 1 && ball <= 10)
-          : [];
-        pocketCount[player] += balls.length;
-        scoringEventCount += balls.length;
       }
     });
 
@@ -14960,29 +14702,6 @@ let matchRecordsRawCacheV152 = null;
   }, true);
 
   el("proPushOutBtnV730")?.addEventListener("click", openPushOutV730);
-  el("proTenBallCallBtnV1")?.addEventListener("click", () => openTenBallCallV1());
-  el("tenBallCalledBallGridV1")?.addEventListener("click", event => {
-    const button = event.target.closest("[data-ten-ball]"); if (!button) return;
-    tenBallCallDraftV1.calledBall = Number(button.dataset.tenBall); renderTenBallCallV1();
-  });
-  el("tenBallPocketedGridV1")?.addEventListener("click", event => {
-    const button = event.target.closest("[data-ten-ball]"); if (!button) return;
-    const ball = Number(button.dataset.tenBall);
-    if (tenBallCallDraftV1.pocketedBalls.has(ball)) tenBallCallDraftV1.pocketedBalls.delete(ball); else tenBallCallDraftV1.pocketedBalls.add(ball);
-    renderTenBallCallV1();
-  });
-  el("tenBallPocketGridV1")?.addEventListener("click", event => {
-    const button = event.target.closest("[data-ten-pocket]"); if (!button) return;
-    tenBallCallDraftV1.calledPocket = button.dataset.tenPocket; renderTenBallCallV1();
-  });
-  document.querySelector(".ten-call-results-v1")?.addEventListener("click", event => {
-    const button = event.target.closest("[data-ten-result]"); if (!button) return;
-    tenBallCallDraftV1.result = button.dataset.tenResult; renderTenBallCallV1();
-  });
-  el("tenBallCallSaveV1")?.addEventListener("click", confirmTenBallCallV1);
-  el("tenBallCallCancelV1")?.addEventListener("click", closeTenBallCallV1);
-  el("tenBallDecisionPlayV1")?.addEventListener("click", () => decideTenBallWrongPocketV1("play"));
-  el("tenBallDecisionReturnV1")?.addEventListener("click", () => decideTenBallWrongPocketV1("return"));
   el("straightBreakAcceptV1")?.addEventListener("click", () => decideStraightBreakV1("accept"));
   el("straightBreakRebreakV1")?.addEventListener("click", () => decideStraightBreakV1("rebreak"));
   el("straightPoolNoticeOKV1")?.addEventListener("click", closeStraightPoolNoticeV1);
@@ -15706,8 +15425,7 @@ let matchRecordsRawCacheV152 = null;
         ballInHandFor: tenBallStateV1.ballInHandFor,
         initialBreaker: tenBallStateV1.initialBreaker,
         rackResults: JSON.parse(JSON.stringify(tenBallStateV1.rackResults)),
-        spotEvents: JSON.parse(JSON.stringify(tenBallStateV1.spotEvents)),
-        callEvents: JSON.parse(JSON.stringify(tenBallStateV1.callEvents))
+        spotEvents: JSON.parse(JSON.stringify(tenBallStateV1.spotEvents))
       } : null,
       straightPool: isStraightPoolV1() ? {
         settings: JSON.parse(JSON.stringify(straightPoolSettingsV1)),
@@ -15716,7 +15434,6 @@ let matchRecordsRawCacheV152 = null;
         rackCycle: straightPoolStateV1.rackCycle,
         spotEvents: JSON.parse(JSON.stringify(straightPoolStateV1.spotEvents)),
         rerackEvents: JSON.parse(JSON.stringify(straightPoolStateV1.rerackEvents)),
-        callEvents: JSON.parse(JSON.stringify(straightPoolStateV1.callEvents)),
         openingBreakEvents: JSON.parse(JSON.stringify(straightPoolStateV1.openingBreakEvents))
       } : null,
       breakRule: isRackGameV1() ? activeRackSettingsV1().breakRule : null,
@@ -25068,33 +24785,25 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .cue-discipline-v1[data-discipline="10ball"].is-selected::after{background:#315f9c!important}
 .ten-ball-game-v1 .pro-player-panel.active{border-color:#315f9c!important;background:#f8fbff!important}
 .ten-ball-game-v1 .pro-turn-arrow-v1,.ten-ball-status-v1{color:#315f9c!important}
-.pro-call-v1 svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
-.ten-call-overlay-v1{
+.cue-sheet-overlay-v1{
   position:fixed;inset:0;z-index:10060;display:flex;align-items:flex-end;justify-content:center;
   background:rgba(0,0,0,.22);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);
 }
-.ten-call-overlay-v1.hidden{display:none!important}
-.ten-call-sheet-v1{
+.cue-sheet-overlay-v1.hidden{display:none!important}
+.cue-sheet-v1{
   width:min(100%,560px);max-height:calc(100dvh - env(safe-area-inset-top) - 18px);overflow:auto;
   padding:10px 20px calc(18px + env(safe-area-inset-bottom));border-radius:28px 28px 0 0;background:#fff;color:#171717;
   box-shadow:0 -12px 40px rgba(0,0,0,.12);
 }
-.ten-call-sheet-v1.compact-v1{padding-bottom:calc(28px + env(safe-area-inset-bottom))}
-.ten-call-handle-v1{width:46px;height:5px;margin:0 auto 15px;border-radius:99px;background:#aaa}
-.ten-call-sheet-v1 h2{margin:0;text-align:center;font-size:25px}.ten-call-sheet-v1>p{margin:5px 0 16px;text-align:center;color:#777;font-size:13px}
-.ten-call-sheet-v1 h3{margin:14px 0 8px;font-size:13px;color:#555}
-.ten-call-ball-grid-v1{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-.ten-call-ball-v1{aspect-ratio:1;border:3px solid var(--ball-color);border-radius:50%;background:#fff;color:#111;font-size:18px;font-weight:850}
-.ten-call-ball-v1.selected-v1{background:#ededeb;opacity:.52;box-shadow:inset 0 0 0 2px #fff}
-.ten-call-pocket-grid-v1{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
-.ten-call-pocket-grid-v1 button,.ten-call-results-v1 button,.ten-call-decision-grid-v1 button{min-height:42px;border:1px solid #d9d9d6;border-radius:12px;background:#fff;color:#222;font-weight:750}
-.ten-call-pocket-grid-v1 button.selected-v1,.ten-call-results-v1 button.selected-v1{border-color:#315f9c;background:#f4f8fd;color:#244d82}
-.ten-call-results-v1{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:16px}
-.ten-call-results-v1 button[data-ten-result="foul"].selected-v1{border-color:#c72c2c;background:#fff8f8;color:#c72c2c}
-.ten-call-save-v1{width:100%;min-height:52px;margin-top:14px;border:0;border-radius:14px;background:#171717;color:#fff;font-size:17px;font-weight:800}
-.ten-call-cancel-v1{width:100%;min-height:42px;border:0;background:transparent;color:#666;font-weight:700}
-.ten-call-decision-grid-v1{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ten-call-decision-grid-v1 button:first-child{background:#171717;color:#fff}
-@media(max-width:390px){.ten-call-sheet-v1{padding-left:15px;padding-right:15px}.ten-call-ball-grid-v1{gap:6px}.cue-discipline-label-v1{font-size:10px!important}}
+.cue-sheet-v1.compact-v1{padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+.cue-sheet-handle-v1{width:46px;height:5px;margin:0 auto 15px;border-radius:99px;background:#aaa}
+.cue-sheet-v1 h2{margin:0;text-align:center;font-size:25px}
+.cue-sheet-v1>p{margin:5px 0 16px;text-align:center;color:#777;font-size:13px}
+.cue-sheet-save-v1{width:100%;min-height:52px;margin-top:14px;border:0;border-radius:14px;background:#171717;color:#fff;font-size:17px;font-weight:800}
+.cue-sheet-decision-grid-v1{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cue-sheet-decision-grid-v1 button{min-height:42px;border:1px solid #d9d9d6;border-radius:12px;background:#fff;color:#222;font-weight:750}
+.cue-sheet-decision-grid-v1 button:first-child{background:#171717;color:#fff}
+@media(max-width:390px){.cue-sheet-v1{padding-left:15px;padding-right:15px}.cue-discipline-label-v1{font-size:10px!important}}
 </style>
 </body>
 </html>
