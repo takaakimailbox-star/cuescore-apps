@@ -6,12 +6,14 @@ Each image should have a descriptive, stable filename identifying the screen or
 flow. Drafts, generated alternatives, comparison images, and unapproved
 screenshots must not be stored here as official references.
 
-## Player v2.0 (approved 2026-08-02)
+## Player v2.0 (superseded by avatar reset 2026-08-02)
 
 - `player-registration-v2.png` — registration, avatar selection, and confirmation flow.
 - `player-list-v2.png` — avatar-enabled player list and edit/delete actions.
 - `official-avatar-set-v1.png` — approved 33-avatar visual source.
 - `new-match-player-cards-v2.png` — avatar-enabled starter/opponent cards.
+
+The former multi-avatar set is retained here only as historical UI reference. It is no longer available as an in-app selectable asset. The current official player icon is `default_silhouette` only.
 
 ## Home / Match Setup v3.0 (approved reference 2026-08-02)
 

@@ -8177,7 +8177,7 @@ body {
           <section class="player-block new-match-player-card-v1 player-a-v1" id="newMatchPlayerCard1V1" data-player-label="A">
             <div class="player-heading-row"><h2>先攻（ブレイク）</h2><button class="starter-choice selected" id="p1StarterBtn" type="button">先攻</button></div>
             <button class="new-match-player-select-v1" id="p1PlayerSearchBtn" type="button" aria-label="先攻プレーヤーを選択">
-              <span class="new-match-avatar-v1 has-player-avatar-v2" aria-hidden="true"><img src="assets/icons/avatar/default/avatar_default_neutral.png" alt=""></span>
+              <span class="new-match-avatar-v1 has-player-avatar-v2" aria-hidden="true"><img src="assets/icons/avatar/default/avatar_default_silhouette.png" alt=""></span>
               <span class="new-match-player-name-v1" id="p1NameDisplayV1">プレイヤー 1</span>
               <span class="new-match-chevron-v1" aria-hidden="true">›</span>
             </button>
@@ -8196,7 +8196,7 @@ body {
               <strong class="visually-hidden-v2">入れ替え</strong>
             </button>
             <button class="new-match-player-select-v1" id="p2PlayerSearchBtn" type="button" aria-label="後攻プレーヤーを選択">
-              <span class="new-match-avatar-v1 has-player-avatar-v2" aria-hidden="true"><img src="assets/icons/avatar/default/avatar_default_neutral.png" alt=""></span>
+              <span class="new-match-avatar-v1 has-player-avatar-v2" aria-hidden="true"><img src="assets/icons/avatar/default/avatar_default_silhouette.png" alt=""></span>
               <span class="new-match-player-name-v1" id="p2NameDisplayV1">プレイヤー 2</span>
               <span class="new-match-chevron-v1" aria-hidden="true">›</span>
             </button>
@@ -8656,13 +8656,11 @@ body {
 
         <div class="player-editor hidden" id="playerEditor">
           <div class="player-editor-avatar-v2">
-            <button id="playerEditorAvatarBtnV2" class="player-editor-avatar-button-v2" type="button" aria-label="プロフィール画像を選択">
+            <button id="playerEditorAvatarBtnV2" class="player-editor-avatar-button-v2" type="button" aria-label="共通プロフィール画像" disabled>
               <span id="playerEditorAvatarPreviewV2" class="player-avatar-v2 player-avatar-default-v2" aria-hidden="true"></span>
-              <span class="player-editor-camera-v2" aria-hidden="true">📷</span>
             </button>
             <strong>プロフィール画像</strong>
-            <span>タップして変更</span>
-            <input id="playerEditorPhotoInputV2" type="file" accept="image/*" hidden />
+            <span>共通のシンプルアイコンを使用します</span>
           </div>
 
           <label class="player-editor-label" for="playerEditorName">Name:</label>
@@ -9768,61 +9766,29 @@ let matchRecordsRawCacheV152 = null;
 
   // ---- Registered player library (Phase 1) ----
   const PLAYER_LIBRARY_KEY = "rotationScoreboard.players.v1";
-  const LEGACY_PLAYER_AVATAR_IDS_V2 = Object.freeze([
-    "person-male-short","person-male-natural","person-male-mash","person-male-very-short","person-female-short","person-female-bob","person-female-long","person-female-very-short","person-female-medium",
-    "animal-dog","animal-cat","animal-rabbit","animal-panda","animal-fox","animal-lion","animal-bear","animal-penguin",
-    "ball-cue","ball-1","ball-2","ball-3","ball-4","ball-5","ball-6","ball-7","ball-8","ball-9","ball-10","ball-11","ball-12","ball-13","ball-14","ball-15"
-  ]);
-  const EXPANDED_AVATAR_SLUGS_V3 = Object.freeze({
-    male:["shichisan","all_back","center_part_loose","up_bang","side_part","gel_set","wolf","soft_wolf","spiky_short","textured_short","flipped_short","casual_short","loose_perm","twist_perm","spiral_perm","messy_perm","curly_hair","very_short","fade_cut","two_block","pompadour","basic_short","natural_medium","long_layer","buzz","man_bun","crew_cut","short_mohawk","wet_short","fringe"],
-    female:["handsome_short","mash_short","short_layer","heavy_short","jaw_bob","blunt_bob","flipped_bob","mini_bob","medium_layer","loose_medium","one_curl","loose_wave","straight_long","layered_long","loose_curl_long","korean_long","ponytail","half_up","bun","braided","twin_tail","side_braid","baby_bang_short","see_through_medium","side_swept_bob","long_bang_wave","face_frame_bob","curl_silhouette_bob","asymmetric_bob","fluffy_bob"],
-    neutral:["natural_short","mash","center_part","short_layer","medium_layer","loose_wave","wolf","bangless_medium"],
-    flower:["sakura","rose","sunflower","tulip","lavender","gerbera","hibiscus","lily_of_the_valley"]
-  });
-  const EXPANDED_AVATAR_LABELS_V3 = Object.freeze({
-    male:["七三分け","オールバック","センターパート","アップバング","サイドパート","ジェルセット","ウルフ","ソフトウルフ","スパイキーショート","束感ショート","外ハネショート","カジュアルショート","ゆるパーマ","ツイスト風","スパイラル風","波巻き風","カーリーヘア","ベリーショート","フェードカット","ツーブロック","アメリカンショート","ベーシックショート","ナチュラルミディ","ロングレイヤー","ボウズ","マンバン","クルーカット","ショートモヒカン","ウェットショート","フリンジ"],
-    female:["ハンサムショート","マッシュショート","ショートレイヤー","重めショート","顎下ボブ","切りっぱなしボブ","外ハネボブ","ミニボブ","ミディアムレイヤー","くびれミディ","ワンカール","ゆるウェーブ","ストレートロング","レイヤーロング","ゆる巻きロング","韓国風ロング","ポニーテール","ハーフアップ","お団子","三つ編み","ツインテール","編み込み","ベビーバングショート","シースルーバングミディ","サイドバングボブ","ロングバングウェーブ","顔まわりレイヤーボブ","くびれシルエットボブ","アシンメトリーボブ","ふんわりボブ"],
-    neutral:["ナチュラルショート","マッシュ","センターパート","ショートレイヤー","ミディアムレイヤー","ゆるウェーブ","ウルフ","前髪なしミディアム"],
-    flower:["桜","バラ","ひまわり","チューリップ","ラベンダー","ガーベラ","ハイビスカス","スズラン"]
-  });
-  const EXPANDED_AVATAR_FOLDER_V3 = Object.freeze({male:"person_male",female:"person_female",neutral:"person_neutral",flower:"flower"});
-  const EXPANDED_AVATAR_PRESETS_V3 = Object.freeze(Object.entries(EXPANDED_AVATAR_SLUGS_V3).flatMap(([category,slugs]) => slugs.map((slug,index) => {
-    const number=String(index+1).padStart(2,"0");
-    const id=`${category}_${number}_${slug}`;
-    return {id,category,label:EXPANDED_AVATAR_LABELS_V3[category][index],src:`assets/icons/avatar/${EXPANDED_AVATAR_FOLDER_V3[category]}/avatar_${id}.png`};
-  })));
-  const EXPANDED_AVATAR_BY_ID_V3 = new Map(EXPANDED_AVATAR_PRESETS_V3.map(item=>[item.id,item]));
-  const PLAYER_AVATAR_IDS_V2 = Object.freeze(["default_neutral",...EXPANDED_AVATAR_PRESETS_V3.map(item=>item.id),...LEGACY_PLAYER_AVATAR_IDS_V2]);
-  const PLAYER_AVATAR_LABELS_V2 = Object.freeze({
-    "person-male-short":"男性ショート","person-male-natural":"男性ナチュラル","person-male-mash":"男性マッシュ","person-male-very-short":"男性ベリーショート","person-female-short":"女性ショート","person-female-bob":"女性ボブ","person-female-long":"女性ロング","person-female-very-short":"女性ベリーショート","person-female-medium":"女性セミロング",
-    "animal-dog":"犬","animal-cat":"猫","animal-rabbit":"うさぎ","animal-panda":"パンダ","animal-fox":"キツネ","animal-lion":"ライオン","animal-bear":"クマ","animal-penguin":"ペンギン",
-    "default_neutral":"シンプル",...Object.fromEntries(EXPANDED_AVATAR_PRESETS_V3.map(item=>[item.id,item.label])),
-    "ball-cue":"手玉",...Object.fromEntries(Array.from({length:15},(_,index)=>[`ball-${index+1}`,`${index+1}番`]))
-  });
-  let playerEditorAvatarV2 = {type:"default",id:"default_neutral"};
+  const DEFAULT_PLAYER_AVATAR_ID_V4 = "default_silhouette";
+  const DEFAULT_PLAYER_AVATAR_SOURCE_V4 = "assets/icons/avatar/default/avatar_default_silhouette.png";
+  const DEFAULT_PLAYER_AVATAR_V4 = Object.freeze({type:"default",id:DEFAULT_PLAYER_AVATAR_ID_V4});
+  let playerEditorAvatarV2 = {...DEFAULT_PLAYER_AVATAR_V4};
   let playerEditorConfirmingV2 = false;
 
-  function normalizePlayerAvatarV2(avatar) {
-    if (avatar?.type === "photo" && typeof avatar.dataUrl === "string" && /^data:image\//.test(avatar.dataUrl)) {
-      return {type:"photo",dataUrl:avatar.dataUrl};
-    }
-    if (avatar?.kind === "photo" && typeof avatar.photoUrl === "string" && /^data:image\//.test(avatar.photoUrl)) return {type:"photo",dataUrl:avatar.photoUrl};
-    const requestedId = avatar?.id || avatar?.avatarId;
-    const id = PLAYER_AVATAR_IDS_V2.includes(requestedId) ? requestedId : "default_neutral";
-    return {type:id === "default_neutral" ? "default" : "preset",id};
+  function normalizePlayerAvatarV2() {
+    return {...DEFAULT_PLAYER_AVATAR_V4};
   }
 
-  function playerAvatarSourceV2(playerOrAvatar) {
-    const avatar = normalizePlayerAvatarV2(playerOrAvatar?.avatar || playerOrAvatar);
-    if (avatar.type === "photo") return avatar.dataUrl;
-    if (avatar.id === "default_neutral") return "assets/icons/avatar/default/avatar_default_neutral.png";
-    return EXPANDED_AVATAR_BY_ID_V3.get(avatar.id)?.src || `assets/avatars/${avatar.id}.webp`;
+  function playerAvatarSourceV2() {
+    return DEFAULT_PLAYER_AVATAR_SOURCE_V4;
   }
 
   function playerAvatarHtmlV2(player, className="player-avatar-v2") {
-    const label = PLAYER_AVATAR_LABELS_V2[normalizePlayerAvatarV2(player?.avatar).id] || "プロフィール画像";
-    return `<img class="${className}" src="${playerAvatarSourceV2(player)}" alt="${escapeRecordText(label)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='assets/icons/avatar/default/avatar_default_neutral.png'">`;
+    return `<img class="${className}" src="${DEFAULT_PLAYER_AVATAR_SOURCE_V4}" alt="シンプルプロフィール画像" loading="lazy" decoding="async">`;
   }
+
+  function normalizePlayerRecordAvatarV4(player) {
+    const {race,avatarId,avatarPath,avatarType,avatarImage,photoUrl,...compatiblePlayer}=player || {};
+    return {...compatiblePlayer,memo:String(player?.memo||"").slice(0,100),avatar:{...DEFAULT_PLAYER_AVATAR_V4}};
+  }
+  window.cueScoreNormalizePlayersToDefaultAvatarV4 = players => Array.isArray(players) ? players.filter(player=>player&&player.id&&player.name).map(normalizePlayerRecordAvatarV4) : [];
   let playerLibraryTarget = 1;
   let editingPlayerId = null;
   let selectedRegisteredPlayer = {1:null, 2:null};
@@ -9833,15 +9799,8 @@ let matchRecordsRawCacheV152 = null;
     try {
       const parsed = JSON.parse(rawValue);
       if (!Array.isArray(parsed)) throw new TypeError("Player library must be an array.");
-      const normalizedPlayers = parsed.filter(p => p && p.id && p.name).map(player => {
-        const {race, ...compatiblePlayer} = player;
-        return {
-          ...compatiblePlayer,
-          memo: String(player.memo || "").slice(0, 100),
-          avatar: normalizePlayerAvatarV2(player.avatar)
-        };
-      });
-      if (parsed.some(player => Object.prototype.hasOwnProperty.call(player || {}, "race"))) {
+      const normalizedPlayers = window.cueScoreNormalizePlayersToDefaultAvatarV4(parsed);
+      if (JSON.stringify(parsed) !== JSON.stringify(normalizedPlayers)) {
         verifiedLocalStorageWriteV131(PLAYER_LIBRARY_KEY, normalizedPlayers);
       }
       return normalizedPlayers;
@@ -9852,7 +9811,7 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function writePlayerLibrary(players) {
-    const normalized = Array.isArray(players) ? players : [];
+    const normalized = window.cueScoreNormalizePlayersToDefaultAvatarV4(players);
     const serialized = JSON.stringify(normalized);
     if (localStorage.getItem(PLAYER_LIBRARY_KEY) !== serialized) {
       verifiedLocalStorageWriteV131(PLAYER_LIBRARY_KEY, normalized);
@@ -9860,6 +9819,9 @@ let matchRecordsRawCacheV152 = null;
     refreshDerivedViewsV131("player-library");
     return true;
   }
+
+  // Official avatar reset v4: migrate all existing players before any screen or backup reads them.
+  readPlayerLibrary();
 
   function makePlayerId() {
     if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
@@ -11239,7 +11201,7 @@ let matchRecordsRawCacheV152 = null;
     const preview = el("playerEditorAvatarPreviewV2");
     if (!preview) return;
     preview.classList.remove("player-avatar-default-v2");
-    preview.innerHTML = `<img src="${playerAvatarSourceV2(playerEditorAvatarV2)}" alt="" onerror="this.onerror=null;this.src='assets/icons/avatar/default/avatar_default_neutral.png'">`;
+    preview.innerHTML = `<img src="${DEFAULT_PLAYER_AVATAR_SOURCE_V4}" alt="">`;
   }
 
   function updatePlayerEditorMemoCountV2() {
@@ -11270,73 +11232,11 @@ let matchRecordsRawCacheV152 = null;
     const avatar = document.querySelector(`#newMatchPlayerCard${slot}V1 .new-match-avatar-v1`);
     const selected = player || readPlayerLibrary().find(item => item.id === selectedRegisteredPlayer[slot]);
     if (!avatar) return;
-    const source = playerAvatarSourceV2(selected?.avatar || {type:"default",id:"default_neutral"});
-    avatar.innerHTML = `<img src="${source}" alt="" onerror="this.onerror=null;this.src='assets/icons/avatar/default/avatar_default_neutral.png'">`;
+    avatar.innerHTML = `<img src="${DEFAULT_PLAYER_AVATAR_SOURCE_V4}" alt="">`;
     avatar.classList.add("has-player-avatar-v2");
   }
 
-  async function compressPlayerPhotoV2(file) {
-    if (!file?.type?.startsWith("image/")) throw new Error("画像ファイルを選択してください");
-    if (file.size > 15 * 1024 * 1024) throw new Error("15MB以下の画像を選択してください");
-    const bitmap = await createImageBitmap(file, {imageOrientation:"from-image"});
-    const side = Math.min(bitmap.width, bitmap.height);
-    const canvas = document.createElement("canvas");
-    canvas.width = 320; canvas.height = 320;
-    const context = canvas.getContext("2d", {alpha:false});
-    context.fillStyle = "#f2f2f0"; context.fillRect(0, 0, 320, 320);
-    context.drawImage(bitmap, (bitmap.width-side)/2, (bitmap.height-side)/2, side, side, 0, 0, 320, 320);
-    bitmap.close?.();
-    return canvas.toDataURL("image/jpeg", .78);
-  }
-
-  function ensurePlayerAvatarChooserV2() {
-    let chooser = el("playerAvatarChooserV2");
-    if (chooser) return chooser;
-    chooser = document.createElement("section");
-    chooser.id = "playerAvatarChooserV2";
-    chooser.className = "player-avatar-chooser-v2 hidden";
-    chooser.setAttribute("role","dialog"); chooser.setAttribute("aria-modal","true"); chooser.setAttribute("aria-label","プロフィール画像を選択");
-    const idsFor = category => EXPANDED_AVATAR_PRESETS_V3.filter(item=>item.category===category).map(item=>item.id);
-    const groups = [
-      ["男性",idsFor("male"),"male"], ["女性",idsFor("female"),"female"], ["中性的",idsFor("neutral"),"neutral"], ["花",idsFor("flower"),"flower"],
-      ["既存人物",LEGACY_PLAYER_AVATAR_IDS_V2.slice(0,9),"legacy"], ["動物",LEGACY_PLAYER_AVATAR_IDS_V2.slice(9,17),"animal"], ["ビリヤード",LEGACY_PLAYER_AVATAR_IDS_V2.slice(17),"ball"]
-    ];
-    const imageFor = id => playerAvatarSourceV2({type:"preset",id});
-    chooser.innerHTML = `<header><button type="button" data-avatar-close-v2 aria-label="戻る">‹</button><strong>プロフィール画像を選択</strong><span></span></header><div class="player-avatar-tabs-v2">${groups.map(([label],index)=>`<button class="${index ? "" : "is-selected"}" type="button" data-avatar-tab-v2="${index}">${label}</button>`).join("")}</div><div class="player-avatar-groups-v2">${groups.map(([label,ids,category],index)=>`<section data-avatar-group-v2="${index}" data-avatar-category-v3="${category}" ${index ? "hidden" : ""}><h3>${label}（${ids.length}種類）</h3><div>${ids.map(id=>`<button type="button" data-avatar-id-v2="${id}" aria-label="${PLAYER_AVATAR_LABELS_V2[id]}"><img src="${imageFor(id)}" alt="" loading="lazy" onerror="this.onerror=null;this.src='assets/icons/avatar/default/avatar_default_neutral.png'"><span>${PLAYER_AVATAR_LABELS_V2[id]}</span></button>`).join("")}</div></section>`).join("")}</div><footer><button type="button" data-avatar-default-v3>未設定に戻す</button><button type="button" data-avatar-photo-v2>写真から選ぶ</button><button type="button" data-avatar-apply-v2>この画像に決定</button></footer>`;
-    el("playerEditor")?.appendChild(chooser);
-    let pending = normalizePlayerAvatarV2(playerEditorAvatarV2);
-    const renderPending = () => {
-      chooser.querySelectorAll("[data-avatar-id-v2]").forEach(button=>button.classList.toggle("is-selected",pending.type === "preset" && button.dataset.avatarIdV2 === pending.id));
-      chooser.querySelector("[data-avatar-default-v3]")?.classList.toggle("is-selected",pending.id === "default_neutral");
-    };
-    chooser.addEventListener("click", event => {
-      const avatar = event.target.closest("[data-avatar-id-v2]");
-      const tab = event.target.closest("[data-avatar-tab-v2]");
-      if (avatar) { pending={type:"preset",id:avatar.dataset.avatarIdV2}; renderPending(); }
-      if (tab) {
-        chooser.querySelectorAll("[data-avatar-tab-v2]").forEach(button=>button.classList.toggle("is-selected",button===tab));
-        chooser.querySelectorAll("[data-avatar-group-v2]").forEach(group=>group.hidden=group.dataset.avatarGroupV2!==tab.dataset.avatarTabV2);
-      }
-      if (event.target.closest("[data-avatar-close-v2]")) chooser.classList.add("hidden");
-      if (event.target.closest("[data-avatar-photo-v2]")) el("playerEditorPhotoInputV2")?.click();
-      if (event.target.closest("[data-avatar-default-v3]")) { pending={type:"default",id:"default_neutral"}; renderPending(); }
-      if (event.target.closest("[data-avatar-apply-v2]")) { playerEditorAvatarV2=pending; updatePlayerEditorAvatarPreviewV2(); chooser.classList.add("hidden"); }
-    });
-    chooser.openV2 = () => { pending=normalizePlayerAvatarV2(playerEditorAvatarV2); renderPending(); chooser.classList.remove("hidden"); };
-    chooser.setPhotoV2 = avatar => { pending=avatar; renderPending(); };
-    return chooser;
-  }
-
-  el("playerEditorAvatarBtnV2")?.addEventListener("click", () => ensurePlayerAvatarChooserV2().openV2());
   el("playerEditorMemoV2")?.addEventListener("input", updatePlayerEditorMemoCountV2);
-  el("playerEditorPhotoInputV2")?.addEventListener("change", async event => {
-    const file = event.target.files?.[0]; if (!file) return;
-    try {
-      const avatar={type:"photo",dataUrl:await compressPlayerPhotoV2(file)};
-      playerEditorAvatarV2=avatar; ensurePlayerAvatarChooserV2().setPhotoV2(avatar); updatePlayerEditorAvatarPreviewV2();
-    } catch (error) { showToast("写真を使用できません", error.message || "別の画像を選択してください"); }
-    event.target.value="";
-  });
 
   let current = 1;
   let startingPlayer = 1;
@@ -14415,7 +14315,7 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function resultAvatarSvgV1() {
-    return `<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="16" r="8" fill="currentColor"/><path d="M9 42c1-11 7-17 15-17s14 6 15 17c-8 4-22 4-30 0Z" fill="currentColor"/></svg>`;
+    return `<img class="official-default-avatar-v4" src="${DEFAULT_PLAYER_AVATAR_SOURCE_V4}" alt="">`;
   }
 
   function formatResultDurationV1(startedAt, endedAt) {
@@ -15868,11 +15768,7 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function playerAvatarSvgV1() {
-    return `<svg viewBox="0 0 48 48" aria-hidden="true">
-      <circle cx="24" cy="24" r="23"></circle>
-      <circle cx="24" cy="18" r="7"></circle>
-      <path d="M11 40c1.2-9 5.6-13.5 13-13.5S35.8 31 37 40"></path>
-    </svg>`;
+    return `<img class="official-default-avatar-v4" src="${DEFAULT_PLAYER_AVATAR_SOURCE_V4}" alt="">`;
   }
 
   renderPlayerLibrary = function() {
@@ -16130,7 +16026,7 @@ let matchRecordsRawCacheV152 = null;
         appVersion: ROTATION_APP_VERSION,
         gameType: ROTATION_GAME_TYPE,
         exportedAt: new Date().toISOString(),
-        players: safelyReadArray(DATA_PLAYER_KEY),
+        players: window.cueScoreNormalizePlayersToDefaultAvatarV4(safelyReadArray(DATA_PLAYER_KEY)),
         matchRecords: safelyReadArray(DATA_RECORD_KEY),
         matchCategories: safelyReadArray(DATA_CATEGORY_KEY),
         matchSeasons: safelyReadArray(DATA_SEASON_KEY)
@@ -16373,7 +16269,7 @@ let matchRecordsRawCacheV152 = null;
         const restoreSnapshotKey = `rotationScoreboard.beforeLocalRestore.${Date.now()}`;
         const restoreSnapshot = {
           createdAt: new Date().toISOString(),
-          players: safelyReadArray(DATA_PLAYER_KEY),
+          players: window.cueScoreNormalizePlayersToDefaultAvatarV4(safelyReadArray(DATA_PLAYER_KEY)),
           matchRecords: safelyReadArray(DATA_RECORD_KEY),
           matchCategories: safelyReadArray(DATA_CATEGORY_KEY),
           matchSeasons: safelyReadArray(DATA_SEASON_KEY)
@@ -16381,12 +16277,12 @@ let matchRecordsRawCacheV152 = null;
         localStorage.setItem(restoreSnapshotKey, JSON.stringify(restoreSnapshot));
 
         try {
-          verifiedLocalStorageWriteV131(DATA_PLAYER_KEY, backup.players);
+          verifiedLocalStorageWriteV131(DATA_PLAYER_KEY, window.cueScoreNormalizePlayersToDefaultAvatarV4(backup.players));
           verifiedLocalStorageWriteV131(DATA_RECORD_KEY, backup.matchRecords);
           if (hasCategoryData) verifiedLocalStorageWriteV131(DATA_CATEGORY_KEY, categories);
           if (hasSeasonData) verifiedLocalStorageWriteV131(DATA_SEASON_KEY, seasons);
         } catch (writeError) {
-          localStorage.setItem(DATA_PLAYER_KEY, JSON.stringify(restoreSnapshot.players));
+          localStorage.setItem(DATA_PLAYER_KEY, JSON.stringify(window.cueScoreNormalizePlayersToDefaultAvatarV4(restoreSnapshot.players)));
           localStorage.setItem(DATA_RECORD_KEY, JSON.stringify(restoreSnapshot.matchRecords));
           localStorage.setItem(DATA_CATEGORY_KEY, JSON.stringify(restoreSnapshot.matchCategories));
           localStorage.setItem(DATA_SEASON_KEY, JSON.stringify(restoreSnapshot.matchSeasons));
@@ -16991,7 +16887,7 @@ let matchRecordsRawCacheV152 = null;
         appVersion: ROTATION_APP_VERSION,
         gameType: ROTATION_GAME_TYPE,
         savedAt: new Date().toISOString(),
-        players: readArray(DATA_PLAYER_KEY),
+        players: window.cueScoreNormalizePlayersToDefaultAvatarV4(readArray(DATA_PLAYER_KEY)),
         matchRecords: readArray(DATA_RECORD_KEY),
         matchCategories: readArray(DATA_CATEGORY_KEY),
         matchSeasons: readArray(DATA_SEASON_KEY)
@@ -16999,7 +16895,7 @@ let matchRecordsRawCacheV152 = null;
     }
     function payloadCore(payload) {
       return {
-        players: Array.isArray(payload?.players) ? payload.players : [],
+        players: window.cueScoreNormalizePlayersToDefaultAvatarV4(payload?.players),
         matchRecords: Array.isArray(payload?.matchRecords) ? payload.matchRecords : [],
         matchCategories: Array.isArray(payload?.matchCategories) ? payload.matchCategories : [],
         matchSeasons: Array.isArray(payload?.matchSeasons) ? payload.matchSeasons : []
@@ -17419,13 +17315,13 @@ let matchRecordsRawCacheV152 = null;
         const recoverySnapshot = { ...current, backedUpAt:new Date().toISOString(), source:"before-generation-restore" };
         localStorage.setItem(BEFORE_CLOUD_RESTORE_KEY, JSON.stringify(recoverySnapshot));
         try {
-          verifiedLocalStorageWriteV131(DATA_PLAYER_KEY, payload.players);
+          verifiedLocalStorageWriteV131(DATA_PLAYER_KEY, window.cueScoreNormalizePlayersToDefaultAvatarV4(payload.players));
           verifiedLocalStorageWriteV131(DATA_RECORD_KEY, payload.matchRecords);
           verifiedLocalStorageWriteV131(DATA_CATEGORY_KEY, payload.matchCategories);
           verifiedLocalStorageWriteV131(DATA_SEASON_KEY, payload.matchSeasons);
         } catch (writeError) {
           // RC34: restore the original local dataset if any one of the four writes fails.
-          verifiedLocalStorageWriteV131(DATA_PLAYER_KEY, current.players);
+          verifiedLocalStorageWriteV131(DATA_PLAYER_KEY, window.cueScoreNormalizePlayersToDefaultAvatarV4(current.players));
           verifiedLocalStorageWriteV131(DATA_RECORD_KEY, current.matchRecords);
           verifiedLocalStorageWriteV131(DATA_CATEGORY_KEY, current.matchCategories);
           verifiedLocalStorageWriteV131(DATA_SEASON_KEY, current.matchSeasons);
@@ -17437,7 +17333,7 @@ let matchRecordsRawCacheV152 = null;
           payloadFingerprint(restored)
         ]);
         if (expectedHash !== restoredHash) {
-          verifiedLocalStorageWriteV131(DATA_PLAYER_KEY, current.players);
+          verifiedLocalStorageWriteV131(DATA_PLAYER_KEY, window.cueScoreNormalizePlayersToDefaultAvatarV4(current.players));
           verifiedLocalStorageWriteV131(DATA_RECORD_KEY, current.matchRecords);
           verifiedLocalStorageWriteV131(DATA_CATEGORY_KEY, current.matchCategories);
           verifiedLocalStorageWriteV131(DATA_SEASON_KEY, current.matchSeasons);
@@ -17841,7 +17737,7 @@ let matchRecordsRawCacheV152 = null;
         const stateInfo = await evaluateSyncState(row);
         if (!confirm(safetyMessage("load", local, row, stateInfo) + "\n\n現在の端末データは自動退避されます。")) return setSyncStatus("読込をキャンセルしました。");
         localStorage.setItem(BEFORE_CLOUD_RESTORE_KEY, JSON.stringify({ ...local, backedUpAt:new Date().toISOString(), source:"before-cloud-restore" }));
-        verifiedLocalStorageWriteV131(DATA_PLAYER_KEY, payload.players);
+        verifiedLocalStorageWriteV131(DATA_PLAYER_KEY, window.cueScoreNormalizePlayersToDefaultAvatarV4(payload.players));
         verifiedLocalStorageWriteV131(DATA_RECORD_KEY, payload.matchRecords);
         verifiedLocalStorageWriteV131(DATA_CATEGORY_KEY, payload.matchCategories);
         verifiedLocalStorageWriteV131(DATA_SEASON_KEY, payload.matchSeasons);
@@ -17865,7 +17761,7 @@ let matchRecordsRawCacheV152 = null;
       if (!backup) return setSyncStatus("戻せる読込前データがありません。", "error");
       if (!Array.isArray(backup.players) || !Array.isArray(backup.matchRecords) || !Array.isArray(backup.matchCategories) || !Array.isArray(backup.matchSeasons)) return setSyncStatus("退避データの形式が正しくありません。", "error");
       if (!confirm(`クラウド読込前の端末データへ戻します。\n\n退避日時：${formatDate(backup.backedUpAt)}\n${payloadSummary(backup)}\n\n現在の端末データは上書きされます。続けますか？`)) return;
-      localStorage.setItem(DATA_PLAYER_KEY, JSON.stringify(backup.players));
+      localStorage.setItem(DATA_PLAYER_KEY, JSON.stringify(window.cueScoreNormalizePlayersToDefaultAvatarV4(backup.players)));
       localStorage.setItem(DATA_RECORD_KEY, JSON.stringify(backup.matchRecords));
       localStorage.setItem(DATA_CATEGORY_KEY, JSON.stringify(backup.matchCategories));
       localStorage.setItem(DATA_SEASON_KEY, JSON.stringify(backup.matchSeasons));
@@ -25495,6 +25391,7 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .cue-match-setup-back-v3{order:0;align-self:flex-start;min-height:44px;padding:0 8px;border:0;background:transparent;color:#171717;font-size:15px;font-weight:700}.cue-new-match-summary-v2{order:1!important;padding:4px 4px 16px!important}.cue-new-match-summary-v2 .cue-home-eyebrow-v1{font-size:13px!important;letter-spacing:.12em!important}.cue-new-match-summary-v2 .cue-selected-game-v1{gap:12px!important}.cue-new-match-summary-v2 .cue-selected-game-icon-v1{width:56px!important;height:56px!important}.cue-new-match-summary-v2 .cue-selected-game-name-v1{font-size:28px!important}
 .cue-player-stack-v2{order:2!important}.cue-game-rules-v2,.cue-carom-rules-v1{order:3!important;width:100%!important;margin-top:14px!important;padding:15px!important;border:1px solid #e7e7e4!important;border-radius:14px!important;background:#fff!important}.cue-game-rules-v2>strong,.cue-carom-rules-v1>strong{font-size:17px!important}.season-setting-v38{order:4}.player-name-limit-note{order:5}.cue-home-start-v2{order:6!important;width:100%!important;min-height:56px!important;margin-top:16px!important;background:#171717!important;color:#fff!important}.cue-home-start-v2 .new-match-play-v1{color:#fff!important}.cue-toggle-track-v2{background:#dededc!important}.cue-rule-toggle-v2 input:checked+.cue-toggle-track-v2{background:#171717!important}
 @media(max-width:370px){.cue-home-v1{padding-left:12px!important;padding-right:12px!important}.cue-home-brand-v1{gap:12px!important;font-size:38px!important}.cue-home-brand-v1 img{width:58px;height:58px}.cue-discipline-switcher-v1 .cue-discipline-v1{min-height:57px!important;grid-template-columns:48px minmax(0,1fr) 16px!important;padding:6px 12px!important}.cue-discipline-switcher-v1 .cue-game-icon-v1{width:40px!important;height:40px!important}.cue-discipline-switcher-v1 .cue-discipline-label-v1 strong{font-size:18px!important}.cue-home-menu-v3 button{min-height:58px}.cue-home-v1.match-setup-active-v3 .cue-new-match-integrated-v2{padding-left:10px!important;padding-right:10px!important}}
+.official-default-avatar-v4{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}.player-editor-avatar-button-v2:disabled{cursor:default;opacity:1}
 </style>
 <script>
 // CueScore Home / Match Setup separation v3.0 — reuses all existing setup state and start handlers.
