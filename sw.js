@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-home-screen-icons-v1";
+const APP_VERSION = "1.0-player-avatar-v2";
 const CACHE_NAME = `cuescore-rotation-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
@@ -24,7 +24,40 @@ const APP_SHELL = [
   "./assets/icons/games/game-10ball.svg",
   "./assets/icons/games/game-14-1.svg",
   "./assets/icons/games/game-jpa-9ball.svg",
-  "./assets/icons/games/game-3cushion.svg"
+  "./assets/icons/games/game-3cushion.svg",
+  "./assets/avatars/person-male-short.webp",
+  "./assets/avatars/person-male-natural.webp",
+  "./assets/avatars/person-male-mash.webp",
+  "./assets/avatars/person-male-very-short.webp",
+  "./assets/avatars/person-female-short.webp",
+  "./assets/avatars/person-female-bob.webp",
+  "./assets/avatars/person-female-long.webp",
+  "./assets/avatars/person-female-very-short.webp",
+  "./assets/avatars/person-female-medium.webp",
+  "./assets/avatars/animal-dog.webp",
+  "./assets/avatars/animal-cat.webp",
+  "./assets/avatars/animal-rabbit.webp",
+  "./assets/avatars/animal-panda.webp",
+  "./assets/avatars/animal-fox.webp",
+  "./assets/avatars/animal-lion.webp",
+  "./assets/avatars/animal-bear.webp",
+  "./assets/avatars/animal-penguin.webp",
+  "./assets/avatars/ball-cue.webp",
+  "./assets/avatars/ball-1.webp",
+  "./assets/avatars/ball-2.webp",
+  "./assets/avatars/ball-3.webp",
+  "./assets/avatars/ball-4.webp",
+  "./assets/avatars/ball-5.webp",
+  "./assets/avatars/ball-6.webp",
+  "./assets/avatars/ball-7.webp",
+  "./assets/avatars/ball-8.webp",
+  "./assets/avatars/ball-9.webp",
+  "./assets/avatars/ball-10.webp",
+  "./assets/avatars/ball-11.webp",
+  "./assets/avatars/ball-12.webp",
+  "./assets/avatars/ball-13.webp",
+  "./assets/avatars/ball-14.webp",
+  "./assets/avatars/ball-15.webp"
 ];
 
 self.addEventListener("install", event => {

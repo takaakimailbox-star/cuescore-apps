@@ -8174,7 +8174,7 @@ body {
               <span class="new-match-player-name-v1" id="p1NameDisplayV1">プレイヤー 1</span>
               <span class="new-match-chevron-v1" aria-hidden="true">›</span>
             </button>
-            <input id="p1Name" class="new-match-hidden-name-v1" type="text" value="プレイヤー 1" maxlength="10" />
+            <input id="p1Name" class="new-match-hidden-name-v1" type="text" value="プレイヤー 1" maxlength="20" />
             <button class="new-match-race-row-v2" type="button" data-race-target="p1Race" aria-label="先攻プレーヤーのRace toを設定">
               <span class="goal-label-v1">Race to</span><strong id="p1RaceDisplayV2">120</strong><small class="jpa-target-v1" hidden></small><span aria-hidden="true">⌄</span>
             </button>
@@ -8195,7 +8195,7 @@ body {
               <span class="new-match-player-name-v1" id="p2NameDisplayV1">プレイヤー 2</span>
               <span class="new-match-chevron-v1" aria-hidden="true">›</span>
             </button>
-            <input id="p2Name" class="new-match-hidden-name-v1" type="text" value="プレイヤー 2" maxlength="10" />
+            <input id="p2Name" class="new-match-hidden-name-v1" type="text" value="プレイヤー 2" maxlength="20" />
             <button class="new-match-race-row-v2" type="button" data-race-target="p2Race" aria-label="後攻プレーヤーのRace toを設定">
               <span class="goal-label-v1">Race to</span><strong id="p2RaceDisplayV2">120</strong><small class="jpa-target-v1" hidden></small><span aria-hidden="true">⌄</span>
             </button>
@@ -8210,7 +8210,7 @@ body {
           <button id="manageCategoriesBtnV381" type="button">＋</button>
           <button id="manageSeasonsBtnV381" type="button">＋</button>
         </div>
-        <div class="player-name-limit-note" id="playerNameLimitNote">プレーヤー名は10文字まで</div>
+        <div class="player-name-limit-note" id="playerNameLimitNote">プレーヤー名は20文字まで</div>
 
         <button class="start-game-button new-match-start-v1 cue-home-start-v2" id="startGameBtn" type="button">
           <span class="new-match-play-v1" aria-hidden="true">▶</span><span>試合開始</span>
@@ -8650,14 +8650,27 @@ body {
         </nav>
 
         <div class="player-editor hidden" id="playerEditor">
-          <label class="player-editor-label" for="playerEditorName">Name:</label>
-          <input class="player-editor-input" id="playerEditorName" type="text" maxlength="10" />
-
-          <label class="player-editor-label" for="playerEditorRace">Race to:</label>
-          <div class="player-editor-race-row">
-            <input class="player-editor-race" id="playerEditorRace" type="number" value="120" readonly />
-            <input class="player-editor-range" id="playerEditorRange" type="range" min="1" max="6" step="1" value="2" />
+          <div class="player-editor-avatar-v2">
+            <button id="playerEditorAvatarBtnV2" class="player-editor-avatar-button-v2" type="button" aria-label="プロフィール画像を選択">
+              <span id="playerEditorAvatarPreviewV2" class="player-avatar-v2 player-avatar-default-v2" aria-hidden="true"></span>
+              <span class="player-editor-camera-v2" aria-hidden="true">📷</span>
+            </button>
+            <strong>プロフィール画像</strong>
+            <span>タップして変更</span>
+            <input id="playerEditorPhotoInputV2" type="file" accept="image/*" hidden />
           </div>
+
+          <label class="player-editor-label" for="playerEditorName">Name:</label>
+          <input class="player-editor-input" id="playerEditorName" type="text" maxlength="20" />
+
+          <label class="player-editor-label" for="playerEditorMemoV2">メモ（任意）</label>
+          <div class="player-editor-memo-wrap-v2">
+            <textarea class="player-editor-input player-editor-memo-v2" id="playerEditorMemoV2" maxlength="100" rows="4" placeholder="自由に入力できます&#10;例）ブレイクが得意です&#10;キック練習中"></textarea>
+            <span id="playerEditorMemoCountV2">0/100</span>
+          </div>
+
+          <input class="player-editor-race" id="playerEditorRace" type="hidden" value="120" />
+          <input class="player-editor-range" id="playerEditorRange" type="hidden" value="2" />
 
           <div class="player-editor-actions">
             <button class="player-editor-save" id="playerEditorSaveBtn" type="button">保存</button>
@@ -9746,6 +9759,36 @@ let matchRecordsRawCacheV152 = null;
 
   // ---- Registered player library (Phase 1) ----
   const PLAYER_LIBRARY_KEY = "rotationScoreboard.players.v1";
+  const PLAYER_AVATAR_IDS_V2 = Object.freeze([
+    "person-male-short","person-male-natural","person-male-mash","person-male-very-short","person-female-short","person-female-bob","person-female-long","person-female-very-short","person-female-medium",
+    "animal-dog","animal-cat","animal-rabbit","animal-panda","animal-fox","animal-lion","animal-bear","animal-penguin",
+    "ball-cue","ball-1","ball-2","ball-3","ball-4","ball-5","ball-6","ball-7","ball-8","ball-9","ball-10","ball-11","ball-12","ball-13","ball-14","ball-15"
+  ]);
+  const PLAYER_AVATAR_LABELS_V2 = Object.freeze({
+    "person-male-short":"男性ショート","person-male-natural":"男性ナチュラル","person-male-mash":"男性マッシュ","person-male-very-short":"男性ベリーショート","person-female-short":"女性ショート","person-female-bob":"女性ボブ","person-female-long":"女性ロング","person-female-very-short":"女性ベリーショート","person-female-medium":"女性セミロング",
+    "animal-dog":"犬","animal-cat":"猫","animal-rabbit":"うさぎ","animal-panda":"パンダ","animal-fox":"キツネ","animal-lion":"ライオン","animal-bear":"クマ","animal-penguin":"ペンギン",
+    "ball-cue":"手玉",...Object.fromEntries(Array.from({length:15},(_,index)=>[`ball-${index+1}`,`${index+1}番`]))
+  });
+  let playerEditorAvatarV2 = {type:"preset",id:"person-male-short"};
+  let playerEditorConfirmingV2 = false;
+
+  function normalizePlayerAvatarV2(avatar) {
+    if (avatar?.type === "photo" && typeof avatar.dataUrl === "string" && /^data:image\//.test(avatar.dataUrl)) {
+      return {type:"photo",dataUrl:avatar.dataUrl};
+    }
+    const id = PLAYER_AVATAR_IDS_V2.includes(avatar?.id) ? avatar.id : "person-male-short";
+    return {type:"preset",id};
+  }
+
+  function playerAvatarSourceV2(playerOrAvatar) {
+    const avatar = normalizePlayerAvatarV2(playerOrAvatar?.avatar || playerOrAvatar);
+    return avatar.type === "photo" ? avatar.dataUrl : `assets/avatars/${avatar.id}.webp`;
+  }
+
+  function playerAvatarHtmlV2(player, className="player-avatar-v2") {
+    const label = PLAYER_AVATAR_LABELS_V2[normalizePlayerAvatarV2(player?.avatar).id] || "プロフィール画像";
+    return `<img class="${className}" src="${playerAvatarSourceV2(player)}" alt="${escapeRecordText(label)}" loading="lazy" decoding="async">`;
+  }
   let playerLibraryTarget = 1;
   let editingPlayerId = null;
   let selectedRegisteredPlayer = {1:null, 2:null};
@@ -9756,7 +9799,18 @@ let matchRecordsRawCacheV152 = null;
     try {
       const parsed = JSON.parse(rawValue);
       if (!Array.isArray(parsed)) throw new TypeError("Player library must be an array.");
-      return parsed.filter(p => p && p.id && p.name);
+      const normalizedPlayers = parsed.filter(p => p && p.id && p.name).map(player => {
+        const {race, ...compatiblePlayer} = player;
+        return {
+          ...compatiblePlayer,
+          memo: String(player.memo || "").slice(0, 100),
+          avatar: normalizePlayerAvatarV2(player.avatar)
+        };
+      });
+      if (parsed.some(player => Object.prototype.hasOwnProperty.call(player || {}, "race"))) {
+        verifiedLocalStorageWriteV131(PLAYER_LIBRARY_KEY, normalizedPlayers);
+      }
+      return normalizedPlayers;
     } catch (error) {
       preserveCorruptedLocalDataV100(PLAYER_LIBRARY_KEY, rawValue, error);
       return [];
@@ -10941,7 +10995,7 @@ let matchRecordsRawCacheV152 = null;
     overlay.setAttribute("aria-hidden", "true");
   }
 
-  const PLAYER_NAME_MAX_LENGTH = 10;
+  const PLAYER_NAME_MAX_LENGTH = 20;
 
   function limitPlayerName(value) {
     return Array.from(String(value || "")).slice(0, PLAYER_NAME_MAX_LENGTH).join("");
@@ -10957,6 +11011,8 @@ let matchRecordsRawCacheV152 = null;
       libraryBack.tabIndex = 0;
     }
     editingPlayerId = id;
+    playerEditorConfirmingV2 = false;
+    el("playerEditorConfirmV2")?.classList.add("hidden");
     const players = readPlayerLibrary();
     const player = id ? players.find(p => p.id === id) : null;
     el("playerLibraryTitle").textContent = player ? "プレーヤー編集" : "新規プレーヤー登録";
@@ -10986,8 +11042,10 @@ let matchRecordsRawCacheV152 = null;
     }
 
     el("playerEditorName").value = limitPlayerName(player?.name || "");
-    el("playerEditorRace").value = player?.race || 120;
-    el("playerEditorRange").value = raceValueToStep(player?.race || 120);
+    el("playerEditorMemoV2").value = String(player?.memo || "").slice(0, 100);
+    playerEditorAvatarV2 = normalizePlayerAvatarV2(player?.avatar);
+    updatePlayerEditorAvatarPreviewV2();
+    updatePlayerEditorMemoCountV2();
     el("playerEditorDeleteBtn").classList.add("hidden");
     setTimeout(() => el("playerEditorName")?.focus(), 0);
   }
@@ -10995,15 +11053,10 @@ let matchRecordsRawCacheV152 = null;
   function savePlayerEditor() {
     const rawName = el("playerEditorName").value.trim();
     const name = limitPlayerName(rawName);
-    const raceRaw = Number(el("playerEditorRace").value);
-    const allowedRaceValues = new Set(Object.values(skillGoals).map(Number));
-    const race = allowedRaceValues.has(raceRaw) ? raceRaw : 120;
-    if (raceRaw !== race) {
-      el("playerEditorRace").value = String(race);
-      el("playerEditorRange").value = String(raceValueToStep(race));
-    }
+    const memo = String(el("playerEditorMemoV2")?.value || "").trim().slice(0, 100);
+    const avatar = normalizePlayerAvatarV2(playerEditorAvatarV2);
     if (Array.from(rawName).length > PLAYER_NAME_MAX_LENGTH) {
-      showToast("入力確認", "プレーヤー名は10文字以内で入力してください");
+      showToast("入力確認", "プレーヤー名は20文字以内で入力してください");
       el("playerEditorName").value = name;
       return;
     }
@@ -11017,12 +11070,20 @@ let matchRecordsRawCacheV152 = null;
       showToast("登録できません", "同じ名前のプレーヤーが登録されています");
       return;
     }
+    if (!editingPlayerId && !playerEditorConfirmingV2) {
+      showPlayerEditorConfirmationV2({name,memo,avatar});
+      return;
+    }
+    playerEditorConfirmingV2 = false;
     const now = Date.now();
     if (editingPlayerId) {
       const index = players.findIndex(p => p.id === editingPlayerId);
-      if (index >= 0) players[index] = {...players[index], name, race, updatedAt:now};
+      if (index >= 0) {
+        const {race, ...previous} = players[index];
+        players[index] = {...previous, name, memo, avatar, updatedAt:now};
+      }
     } else {
-      players.push({id:makePlayerId(), name, race, createdAt:now, updatedAt:now, lastUsed:null});
+      players.push({id:makePlayerId(), name, memo, avatar, createdAt:now, updatedAt:now, lastUsed:null});
     }
     writePlayerLibrary(players);
     const savedPlayerV131 = players.find(p => p.id === (editingPlayerId || players[players.length - 1]?.id));
@@ -11030,11 +11091,8 @@ let matchRecordsRawCacheV152 = null;
       [1, 2].forEach(slot => {
         if (selectedRegisteredPlayer[slot] !== savedPlayerV131.id) return;
         const nameInput = el(slot === 1 ? "p1Name" : "p2Name");
-        const raceInput = el(slot === 1 ? "p1Race" : "p2Race");
-        const rangeInput = el(slot === 1 ? "p1Skill" : "p2Skill");
         if (nameInput) nameInput.value = limitPlayerName(savedPlayerV131.name);
-        if (raceInput) raceInput.value = String(savedPlayerV131.race);
-        if (rangeInput) rangeInput.value = String(raceValueToStep(savedPlayerV131.race));
+        syncSelectedPlayerAvatarV2(slot, savedPlayerV131);
       });
     }
     showPlayerLibraryMain();
@@ -11085,9 +11143,10 @@ let matchRecordsRawCacheV152 = null;
     const raceInput = el(playerLibraryTarget === 1 ? "p1Race" : "p2Race");
     const rangeInput = el(playerLibraryTarget === 1 ? "p1Skill" : "p2Skill");
     nameInput.value = limitPlayerName(player.name);
-    raceInput.value = player.race;
-    rangeInput.value = raceValueToStep(player.race);
+    if (!raceInput.value) raceInput.value = "120";
+    if (!rangeInput.value) rangeInput.value = String(raceValueToStep(Number(raceInput.value) || 120));
     selectedRegisteredPlayer[playerLibraryTarget] = id;
+    syncSelectedPlayerAvatarV2(playerLibraryTarget, player);
     syncHomeRaceDisplaysV2();
     syncNewMatchNameV1(
       playerLibraryTarget === 1 ? "p1Name" : "p2Name",
@@ -11134,12 +11193,110 @@ let matchRecordsRawCacheV152 = null;
       const limited = limitPlayerName(event.target.value);
       if (event.target.value !== limited) event.target.value = limited;
       selectedRegisteredPlayer[player] = null;
+      syncSelectedPlayerAvatarV2(player, null);
     });
   });
 
   el("playerEditorName")?.addEventListener("input", event => {
     const limited = limitPlayerName(event.target.value);
     if (event.target.value !== limited) event.target.value = limited;
+  });
+
+  function updatePlayerEditorAvatarPreviewV2() {
+    const preview = el("playerEditorAvatarPreviewV2");
+    if (!preview) return;
+    preview.classList.remove("player-avatar-default-v2");
+    preview.innerHTML = `<img src="${playerAvatarSourceV2(playerEditorAvatarV2)}" alt="">`;
+  }
+
+  function updatePlayerEditorMemoCountV2() {
+    const memo = el("playerEditorMemoV2");
+    const count = el("playerEditorMemoCountV2");
+    if (memo && count) count.textContent = `${Array.from(memo.value).length}/100`;
+  }
+
+  function showPlayerEditorConfirmationV2(player) {
+    let confirmation = el("playerEditorConfirmV2");
+    if (!confirmation) {
+      confirmation = document.createElement("section");
+      confirmation.id = "playerEditorConfirmV2";
+      confirmation.className = "player-editor-confirm-v2 hidden";
+      confirmation.setAttribute("role","dialog"); confirmation.setAttribute("aria-modal","true"); confirmation.setAttribute("aria-label","登録内容を確認");
+      el("playerEditor")?.appendChild(confirmation);
+      confirmation.addEventListener("click", event => {
+        if (event.target.closest("[data-player-confirm-back-v2]")) { playerEditorConfirmingV2=false; confirmation.classList.add("hidden"); }
+        if (event.target.closest("[data-player-confirm-save-v2]")) { playerEditorConfirmingV2=true; confirmation.classList.add("hidden"); savePlayerEditor(); }
+        if (event.target.closest("[data-player-confirm-cancel-v2]")) { playerEditorConfirmingV2=false; confirmation.classList.add("hidden"); showPlayerLibraryMain(); }
+      });
+    }
+    confirmation.innerHTML = `<header><button type="button" data-player-confirm-back-v2 aria-label="戻る">‹</button><strong>内容を確認</strong><span></span></header><div class="player-editor-confirm-body-v2"><img src="${playerAvatarSourceV2(player.avatar)}" alt="プロフィール画像"><h2>プロフィール画像</h2><section><small>名前</small><strong>${escapeRecordText(player.name)}</strong></section><section><small>メモ（任意）</small><p>${player.memo ? escapeRecordText(player.memo).replace(/\n/g,"<br>") : "未入力"}</p></section></div><footer><button type="button" data-player-confirm-save-v2>登録する</button><button type="button" data-player-confirm-cancel-v2>キャンセル</button></footer>`;
+    confirmation.classList.remove("hidden");
+  }
+
+  function syncSelectedPlayerAvatarV2(slot, player=null) {
+    const avatar = document.querySelector(`#newMatchPlayerCard${slot}V1 .new-match-avatar-v1`);
+    const selected = player || readPlayerLibrary().find(item => item.id === selectedRegisteredPlayer[slot]);
+    if (!avatar) return;
+    avatar.innerHTML = selected ? `<img src="${playerAvatarSourceV2(selected)}" alt="">` : "";
+    avatar.classList.toggle("has-player-avatar-v2", Boolean(selected));
+  }
+
+  async function compressPlayerPhotoV2(file) {
+    if (!file?.type?.startsWith("image/")) throw new Error("画像ファイルを選択してください");
+    if (file.size > 15 * 1024 * 1024) throw new Error("15MB以下の画像を選択してください");
+    const bitmap = await createImageBitmap(file, {imageOrientation:"from-image"});
+    const side = Math.min(bitmap.width, bitmap.height);
+    const canvas = document.createElement("canvas");
+    canvas.width = 320; canvas.height = 320;
+    const context = canvas.getContext("2d", {alpha:false});
+    context.fillStyle = "#f2f2f0"; context.fillRect(0, 0, 320, 320);
+    context.drawImage(bitmap, (bitmap.width-side)/2, (bitmap.height-side)/2, side, side, 0, 0, 320, 320);
+    bitmap.close?.();
+    return canvas.toDataURL("image/jpeg", .78);
+  }
+
+  function ensurePlayerAvatarChooserV2() {
+    let chooser = el("playerAvatarChooserV2");
+    if (chooser) return chooser;
+    chooser = document.createElement("section");
+    chooser.id = "playerAvatarChooserV2";
+    chooser.className = "player-avatar-chooser-v2 hidden";
+    chooser.setAttribute("role","dialog"); chooser.setAttribute("aria-modal","true"); chooser.setAttribute("aria-label","プロフィール画像を選択");
+    const groups = [
+      ["人物",PLAYER_AVATAR_IDS_V2.slice(0,9)],
+      ["動物",PLAYER_AVATAR_IDS_V2.slice(9,17)],
+      ["ビリヤード",PLAYER_AVATAR_IDS_V2.slice(17)]
+    ];
+    chooser.innerHTML = `<header><button type="button" data-avatar-close-v2 aria-label="戻る">‹</button><strong>プロフィール画像を選択</strong><span></span></header><div class="player-avatar-tabs-v2"><button class="is-selected" type="button" data-avatar-tab-v2="0">人物</button><button type="button" data-avatar-tab-v2="1">動物</button><button type="button" data-avatar-tab-v2="2">ビリヤード</button></div><div class="player-avatar-groups-v2">${groups.map(([label,ids],index)=>`<section data-avatar-group-v2="${index}" ${index ? "hidden" : ""}><h3>${label}（${ids.length}種類）</h3><div>${ids.map(id=>`<button type="button" data-avatar-id-v2="${id}" aria-label="${PLAYER_AVATAR_LABELS_V2[id]}"><img src="assets/avatars/${id}.webp" alt=""><span>${PLAYER_AVATAR_LABELS_V2[id]}</span></button>`).join("")}</div></section>`).join("")}</div><footer><button type="button" data-avatar-photo-v2>写真ライブラリから選ぶ</button><button type="button" data-avatar-apply-v2>この画像に決定</button></footer>`;
+    el("playerEditor")?.appendChild(chooser);
+    let pending = normalizePlayerAvatarV2(playerEditorAvatarV2);
+    const renderPending = () => chooser.querySelectorAll("[data-avatar-id-v2]").forEach(button=>button.classList.toggle("is-selected",pending.type === "preset" && button.dataset.avatarIdV2 === pending.id));
+    chooser.addEventListener("click", event => {
+      const avatar = event.target.closest("[data-avatar-id-v2]");
+      const tab = event.target.closest("[data-avatar-tab-v2]");
+      if (avatar) { pending={type:"preset",id:avatar.dataset.avatarIdV2}; renderPending(); }
+      if (tab) {
+        chooser.querySelectorAll("[data-avatar-tab-v2]").forEach(button=>button.classList.toggle("is-selected",button===tab));
+        chooser.querySelectorAll("[data-avatar-group-v2]").forEach(group=>group.hidden=group.dataset.avatarGroupV2!==tab.dataset.avatarTabV2);
+      }
+      if (event.target.closest("[data-avatar-close-v2]")) chooser.classList.add("hidden");
+      if (event.target.closest("[data-avatar-photo-v2]")) el("playerEditorPhotoInputV2")?.click();
+      if (event.target.closest("[data-avatar-apply-v2]")) { playerEditorAvatarV2=pending; updatePlayerEditorAvatarPreviewV2(); chooser.classList.add("hidden"); }
+    });
+    chooser.openV2 = () => { pending=normalizePlayerAvatarV2(playerEditorAvatarV2); renderPending(); chooser.classList.remove("hidden"); };
+    chooser.setPhotoV2 = avatar => { pending=avatar; renderPending(); };
+    return chooser;
+  }
+
+  el("playerEditorAvatarBtnV2")?.addEventListener("click", () => ensurePlayerAvatarChooserV2().openV2());
+  el("playerEditorMemoV2")?.addEventListener("input", updatePlayerEditorMemoCountV2);
+  el("playerEditorPhotoInputV2")?.addEventListener("change", async event => {
+    const file = event.target.files?.[0]; if (!file) return;
+    try {
+      const avatar={type:"photo",dataUrl:await compressPlayerPhotoV2(file)};
+      playerEditorAvatarV2=avatar; ensurePlayerAvatarChooserV2().setPhotoV2(avatar); updatePlayerEditorAvatarPreviewV2();
+    } catch (error) { showToast("写真を使用できません", error.message || "別の画像を選択してください"); }
+    event.target.value="";
   });
 
   let current = 1;
@@ -15716,14 +15873,9 @@ let matchRecordsRawCacheV152 = null;
     if (playerLibraryModeV145 === "management") {
       list.innerHTML = players.map(({player, records, latest}) => `
         <button class="player-management-row-v1" type="button" data-stats-player="${player.id}" aria-label="${escapeRecordText(player.name)}の詳細を開く">
-          <span class="player-management-avatar-v1">${playerAvatarSvgV1()}</span>
-          <strong class="player-management-name-v1">${escapeRecordText(player.name)}</strong>
-          <span class="player-management-stat-v1 player-management-matches-v1">
-            <small>試合数</small><b>${records.length}</b>
-          </span>
-          <span class="player-management-stat-v1 player-management-last-v1">
-            <small>最終履歴</small><span>${formatPlayerHistoryDateV1(latest)}</span>
-          </span>
+          <span class="player-management-avatar-v1">${playerAvatarHtmlV2(player,"player-avatar-v2")}</span>
+          <span class="player-management-copy-v2"><strong class="player-management-name-v1">${escapeRecordText(player.name)}</strong>${player.memo ? `<span class="player-management-memo-v2">${escapeRecordText(player.memo)}</span>` : ""}</span>
+          <span class="player-management-menu-v2" aria-hidden="true">•••</span>
           <svg class="player-management-chevron-v1" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
         </button>`).join("");
       return;
@@ -15740,8 +15892,9 @@ let matchRecordsRawCacheV152 = null;
         : selectedHere ? `<span class="player-library-status current">現在選択中</span>` : "";
       return `<div class="player-library-item selection-only${usedByOther ? " unavailable" : ""}">
         <button class="player-library-select" type="button" ${usedByOther ? "disabled" : `data-select-player="${p.id}"`}>
-          <div class="player-library-name-row"><div class="player-library-name">${escapeRecordText(p.name)}</div>${status}</div>
-          <div class="player-library-meta">Race to ${Number(p.race)||0}　最終使用 ${formatLastUsed(p.lastUsed)}</div>
+          ${playerAvatarHtmlV2(p,"player-library-select-avatar-v2")}
+          <div><div class="player-library-name-row"><div class="player-library-name">${escapeRecordText(p.name)}</div>${status}</div>
+          <div class="player-library-meta">${p.memo ? escapeRecordText(p.memo) : `最終使用 ${formatLastUsed(p.lastUsed)}`}</div></div>
         </button>
       </div>`;
     }).join("");
@@ -18306,7 +18459,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-three-cushion-official-logo-gradient-v2";
+    const PWA_VERSION = "1.0-player-avatar-v2";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -23475,10 +23628,11 @@ body.match-detail-visible-v1{overflow:hidden!important}
     document.getElementById("playerStatsRace").setAttribute("aria-label","プレーヤーを編集");
     body.innerHTML = `<div class="player-detail-shell-v1">
       <button type="button" class="player-detail-profile-v1" data-player-detail-edit="${esc(player.id)}">
-        <span class="player-detail-avatar-v1">${svgPerson}${player.favorite === true ? '<span class="player-detail-favorite-v1">★</span>' : ""}</span>
+        <span class="player-detail-avatar-v1">${playerAvatarHtmlV2(player,"player-avatar-v2")}${player.favorite === true ? '<span class="player-detail-favorite-v1">★</span>' : ""}</span>
         <span class="player-detail-profile-copy-v1">
           <span class="player-detail-name-v1">${esc(player.name)}</span>
           ${player.nickname ? `<span class="player-detail-nickname-v1">${esc(player.nickname)}</span>` : ""}
+          ${player.memo ? `<span class="player-detail-nickname-v1">${esc(player.memo)}</span>` : ""}
         </span>
         <span class="player-detail-chevron-v1" aria-hidden="true"></span>
       </button>
@@ -25074,6 +25228,36 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   .cue-game-icon-v1{width:35px;height:35px}
   .cue-discipline-label-v1 small{display:none}
 }
+
+/* CueScore Player v2.0 — official avatar profile UI */
+.player-avatar-v2,.player-avatar-v2 img,.player-library-select-avatar-v2{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;background:#eeeeec}
+.new-match-avatar-v1.has-player-avatar-v2{background:#fff!important;border-color:#dededb!important;box-shadow:0 2px 8px rgba(0,0,0,.08)!important;overflow:hidden}
+.new-match-avatar-v1.has-player-avatar-v2::after{display:none!important}
+.new-match-avatar-v1.has-player-avatar-v2 img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.player-editor-avatar-v2{display:flex;align-items:center;flex-direction:column;gap:5px;margin:0 0 24px;color:#171717}
+.player-editor-avatar-v2 strong{font-size:16px}.player-editor-avatar-v2>span{color:#777;font-size:12px}
+.player-editor-avatar-button-v2{position:relative;width:120px;height:120px;padding:0;border:0;border-radius:50%;background:#eee;overflow:visible}
+.player-editor-avatar-button-v2 .player-avatar-v2{overflow:hidden}
+.player-editor-camera-v2{position:absolute;right:-2px;bottom:5px;display:grid!important;place-items:center;width:40px;height:40px;border:3px solid #fff;border-radius:50%;background:#f1d6a5;color:#171717;font-size:19px!important}
+.player-editor-memo-wrap-v2{position:relative}.player-editor-memo-v2{width:100%;min-height:118px;padding:13px 14px 30px!important;resize:none;line-height:1.55}
+.player-editor-memo-wrap-v2>span{position:absolute;right:12px;bottom:9px;color:#777;font-size:12px}
+.player-editor-modal-v1 .player-editor-dialog-v1{max-width:430px}
+.player-editor-modal-v1 .player-editor-scroll-v1{padding-bottom:18px}
+.player-editor-modal-v1 .player-editor-copy-v1{display:none}
+.player-avatar-chooser-v2{position:absolute;z-index:20;inset:0;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;background:#fff;color:#171717}
+.player-avatar-chooser-v2.hidden{display:none!important}
+.player-avatar-chooser-v2 header{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;min-height:58px;padding-top:env(safe-area-inset-top);border-bottom:1px solid #e6e6e2;text-align:center}
+.player-avatar-chooser-v2 header button{height:44px;border:0;background:transparent;font-size:30px}.player-avatar-chooser-v2 header strong{font-size:16px}
+.player-avatar-tabs-v2{display:flex;gap:8px;padding:10px 12px;border-bottom:1px solid #eee;overflow:auto}.player-avatar-tabs-v2 button{min-height:36px;padding:0 16px;border:0;border-radius:18px;background:#f1f1ef;color:#555;white-space:nowrap}.player-avatar-tabs-v2 button.is-selected{background:#171717;color:#fff}
+.player-avatar-groups-v2{min-height:0;padding:10px 12px;overflow:auto}.player-avatar-groups-v2 h3{margin:3px 0 10px;font-size:14px}.player-avatar-groups-v2 section>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 8px}
+.player-avatar-groups-v2 button{position:relative;display:flex;min-width:0;padding:0;border:2px solid transparent;background:transparent;align-items:center;flex-direction:column;gap:4px}.player-avatar-groups-v2 button.is-selected{border-color:#171717;border-radius:12px}.player-avatar-groups-v2 img{width:64px;height:64px;border-radius:50%;object-fit:cover}.player-avatar-groups-v2 span{width:100%;overflow:hidden;font-size:10px;text-overflow:ellipsis;white-space:nowrap}
+.player-avatar-chooser-v2 footer{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:10px 12px max(12px,env(safe-area-inset-bottom));border-top:1px solid #e6e6e2;background:#fff}.player-avatar-chooser-v2 footer button{min-height:48px;border:1px solid #c9c9c5;border-radius:10px;background:#fff;font-weight:650}.player-avatar-chooser-v2 footer button:last-child{border-color:#d7b879;background:#efd09b;color:#171717}
+.player-editor-confirm-v2{position:absolute;z-index:21;inset:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:#fff;color:#171717}.player-editor-confirm-v2.hidden{display:none!important}.player-editor-confirm-v2 header{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;min-height:58px;padding-top:env(safe-area-inset-top);border-bottom:1px solid #e6e6e2;text-align:center}.player-editor-confirm-v2 header button{height:44px;border:0;background:transparent;font-size:30px}.player-editor-confirm-body-v2{padding:22px 18px;overflow:auto}.player-editor-confirm-body-v2>img{display:block;width:150px;height:150px;margin:0 auto;border-radius:50%;object-fit:cover}.player-editor-confirm-body-v2>h2{margin:12px 0 30px;font-size:17px;text-align:center}.player-editor-confirm-body-v2 section{padding:0 0 18px;margin:0 0 18px;border-bottom:1px solid #e8e8e5}.player-editor-confirm-body-v2 small{display:block;margin-bottom:8px;color:#555;font-size:13px}.player-editor-confirm-body-v2 strong{font-size:19px}.player-editor-confirm-body-v2 p{margin:0;font-size:16px;line-height:1.6}.player-editor-confirm-v2 footer{display:grid;gap:9px;padding:12px 14px max(14px,env(safe-area-inset-bottom));background:#fff}.player-editor-confirm-v2 footer button{min-height:52px;border:1px solid #c9c9c5;border-radius:10px;background:#fff;font-size:16px;font-weight:700}.player-editor-confirm-v2 footer button:first-child{border-color:#171717;background:#171717;color:#fff}
+.player-management-formal-v1 .player-management-row-v1{grid-template-columns:58px minmax(0,1fr) 34px 18px;min-height:82px}
+.player-management-formal-v1 .player-management-avatar-v1{width:56px;height:56px}.player-management-formal-v1 .player-management-copy-v2{display:flex;min-width:0;flex-direction:column;gap:3px}.player-management-formal-v1 .player-management-memo-v2{display:-webkit-box;overflow:hidden;color:#555;font-size:12px;line-height:1.35;-webkit-box-orient:vertical;-webkit-line-clamp:2}.player-management-formal-v1 .player-management-menu-v2{font-size:17px;letter-spacing:2px;text-align:center}
+.player-library-item.selection-only .player-library-select{display:grid;grid-template-columns:52px minmax(0,1fr);align-items:center;gap:10px;text-align:left}.player-library-select-avatar-v2{width:52px;height:52px}
+.player-detail-avatar-v1{overflow:visible}.player-detail-avatar-v1>.player-avatar-v2{width:100%;height:100%}
+@media(max-width:370px){.player-avatar-groups-v2 section>div{grid-template-columns:repeat(3,minmax(0,1fr))}.player-management-formal-v1 .player-management-row-v1{grid-template-columns:52px minmax(0,1fr) 30px 16px}.player-management-formal-v1 .player-management-avatar-v1{width:50px;height:50px}}
 </style>
 </body>
 </html>
