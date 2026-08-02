@@ -8674,6 +8674,14 @@ body {
             <span id="playerEditorMemoCountV2">0/100</span>
           </div>
 
+          <label class="player-editor-primary-v1" for="playerEditorPrimaryV1">
+            <span><strong>メインプレーヤーに設定</strong><small>新しい対戦ではPlayer 1に初期表示されます</small></span>
+            <input id="playerEditorPrimaryV1" type="checkbox" />
+          </label>
+          <div class="player-editor-id-v1" id="playerEditorIdV1" hidden>
+            <span>Player ID</span><code></code>
+          </div>
+
           <input class="player-editor-race" id="playerEditorRace" type="hidden" value="120" />
           <input class="player-editor-range" id="playerEditorRange" type="hidden" value="2" />
 
@@ -9809,9 +9817,21 @@ let matchRecordsRawCacheV152 = null;
 
   function normalizePlayerRecordAvatarV4(player) {
     const {race,avatarId,avatarPath,avatarType,avatarImage,photoUrl,...compatiblePlayer}=player || {};
-    return {...compatiblePlayer,memo:String(player?.memo||"").slice(0,100),avatar:normalizePlayerAvatarV2(player?.avatar)};
+    const normalized={...compatiblePlayer,memo:String(player?.memo||"").slice(0,100),avatar:normalizePlayerAvatarV2(player?.avatar)};
+    if (player?.isPrimary === true) normalized.isPrimary=true;
+    else delete normalized.isPrimary;
+    return normalized;
   }
-  window.cueScoreNormalizePlayersToDefaultAvatarV4 = players => Array.isArray(players) ? players.filter(player=>player&&player.id&&player.name).map(normalizePlayerRecordAvatarV4) : [];
+  window.cueScoreNormalizePlayersToDefaultAvatarV4 = players => {
+    if (!Array.isArray(players)) return [];
+    let primarySeen=false;
+    return players.filter(player=>player&&player.id&&player.name).map(player=>{
+      const normalized=normalizePlayerRecordAvatarV4(player);
+      if (normalized.isPrimary && !primarySeen) primarySeen=true;
+      else delete normalized.isPrimary;
+      return normalized;
+    });
+  };
   let playerLibraryTarget = 1;
   let editingPlayerId = null;
   let selectedRegisteredPlayer = {1:null, 2:null};
@@ -9841,6 +9861,19 @@ let matchRecordsRawCacheV152 = null;
     }
     refreshDerivedViewsV131("player-library");
     return true;
+  }
+
+  function primaryPlayerV1(players=readPlayerLibrary()) {
+    return players.find(player=>player.isPrimary===true) || null;
+  }
+
+  function setExclusivePrimaryPlayerV1(players, playerId, enabled) {
+    return players.map(player=>{
+      const copy={...player};
+      if (enabled && player.id===playerId) copy.isPrimary=true;
+      else delete copy.isPrimary;
+      return copy;
+    });
   }
 
   // Official avatar reset v4: migrate all existing players before any screen or backup reads them.
@@ -11061,6 +11094,14 @@ let matchRecordsRawCacheV152 = null;
 
     el("playerEditorName").value = limitPlayerName(player?.name || "");
     el("playerEditorMemoV2").value = String(player?.memo || "").slice(0, 100);
+    const primaryToggle=el("playerEditorPrimaryV1");
+    if (primaryToggle) primaryToggle.checked=player ? player.isPrimary===true : players.length===0;
+    const idRow=el("playerEditorIdV1");
+    if (idRow) {
+      idRow.hidden=!player?.id;
+      const code=idRow.querySelector("code");
+      if (code) code.textContent=player?.id || "";
+    }
     playerEditorAvatarV2 = normalizePlayerAvatarV2(player?.avatar);
     updatePlayerEditorAvatarPreviewV2();
     updatePlayerEditorMemoCountV2();
@@ -11073,6 +11114,7 @@ let matchRecordsRawCacheV152 = null;
     const name = limitPlayerName(rawName);
     const memo = String(el("playerEditorMemoV2")?.value || "").trim().slice(0, 100);
     const avatar = normalizePlayerAvatarV2(playerEditorAvatarV2);
+    const isPrimary=Boolean(el("playerEditorPrimaryV1")?.checked);
     if (Array.from(rawName).length > PLAYER_NAME_MAX_LENGTH) {
       showToast("入力確認", "プレーヤー名は20文字以内で入力してください");
       el("playerEditorName").value = name;
@@ -11089,7 +11131,7 @@ let matchRecordsRawCacheV152 = null;
       return;
     }
     if (!editingPlayerId && !playerEditorConfirmingV2) {
-      showPlayerEditorConfirmationV2({name,memo,avatar});
+      showPlayerEditorConfirmationV2({name,memo,avatar,isPrimary});
       return;
     }
     playerEditorConfirmingV2 = false;
@@ -11103,8 +11145,10 @@ let matchRecordsRawCacheV152 = null;
     } else {
       players.push({id:makePlayerId(), name, memo, avatar, createdAt:now, updatedAt:now, lastUsed:null});
     }
+    const savedId=editingPlayerId || players[players.length-1]?.id;
+    players=setExclusivePrimaryPlayerV1(players,savedId,isPrimary);
     writePlayerLibrary(players);
-    const savedPlayerV131 = players.find(p => p.id === (editingPlayerId || players[players.length - 1]?.id));
+    const savedPlayerV131 = players.find(p => p.id === savedId);
     if (savedPlayerV131) {
       [1, 2].forEach(slot => {
         if (selectedRegisteredPlayer[slot] !== savedPlayerV131.id) return;
@@ -11112,6 +11156,7 @@ let matchRecordsRawCacheV152 = null;
         if (nameInput) nameInput.value = limitPlayerName(savedPlayerV131.name);
         syncSelectedPlayerAvatarV2(slot, savedPlayerV131);
       });
+      initializePrimaryMatchSetupV1();
     }
     showPlayerLibraryMain();
     requestAnimationFrame(() => {
@@ -11247,7 +11292,7 @@ let matchRecordsRawCacheV152 = null;
         if (event.target.closest("[data-player-confirm-cancel-v2]")) { playerEditorConfirmingV2=false; confirmation.classList.add("hidden"); showPlayerLibraryMain(); }
       });
     }
-    confirmation.innerHTML = `<header><button type="button" data-player-confirm-back-v2 aria-label="戻る">‹</button><strong>内容を確認</strong><span></span></header><div class="player-editor-confirm-body-v2"><img src="${playerAvatarSourceV2(player.avatar)}" alt="プロフィール画像"><h2>プロフィール画像</h2><section><small>名前</small><strong>${escapeRecordText(player.name)}</strong></section><section><small>メモ（任意）</small><p>${player.memo ? escapeRecordText(player.memo).replace(/\n/g,"<br>") : "未入力"}</p></section></div><footer><button type="button" data-player-confirm-save-v2>登録する</button><button type="button" data-player-confirm-cancel-v2>キャンセル</button></footer>`;
+    confirmation.innerHTML = `<header><button type="button" data-player-confirm-back-v2 aria-label="戻る">‹</button><strong>内容を確認</strong><span></span></header><div class="player-editor-confirm-body-v2"><img src="${playerAvatarSourceV2(player.avatar)}" alt="プロフィール画像"><h2>プロフィール画像</h2><section><small>名前</small><strong>${escapeRecordText(player.name)}</strong></section><section><small>メモ（任意）</small><p>${player.memo ? escapeRecordText(player.memo).replace(/\n/g,"<br>") : "未入力"}</p></section><section><small>メインプレーヤー</small><strong>${player.isPrimary ? "設定する" : "設定しない"}</strong></section></div><footer><button type="button" data-player-confirm-save-v2>登録する</button><button type="button" data-player-confirm-cancel-v2>キャンセル</button></footer>`;
     confirmation.classList.remove("hidden");
   }
 
@@ -11258,6 +11303,29 @@ let matchRecordsRawCacheV152 = null;
     avatar.innerHTML = `<img src="${playerAvatarSourceV2(selected?.avatar)}" alt="" onerror="this.onerror=null;this.src='${DEFAULT_PLAYER_AVATAR_SOURCE_V4}'">`;
     avatar.classList.add("has-player-avatar-v2");
   }
+
+  let primaryMatchSetupInitializedV1=false;
+  function initializePrimaryMatchSetupV1() {
+    if (primaryMatchSetupInitializedV1) return false;
+    if (selectedRegisteredPlayer[1]) {
+      primaryMatchSetupInitializedV1=true;
+      return false;
+    }
+    const primary=primaryPlayerV1();
+    if (!primary) return false;
+    if (selectedRegisteredPlayer[2]===primary.id) {
+      primaryMatchSetupInitializedV1=true;
+      return false;
+    }
+    selectedRegisteredPlayer[1]=primary.id;
+    const nameInput=el("p1Name");
+    if (nameInput) nameInput.value=limitPlayerName(primary.name);
+    syncSelectedPlayerAvatarV2(1,primary);
+    syncNewMatchNameV1("p1Name","p1NameDisplayV1");
+    primaryMatchSetupInitializedV1=true;
+    return true;
+  }
+  requestAnimationFrame(initializePrimaryMatchSetupV1);
 
   async function compressPlayerPhotoV5(file) {
     if (!file?.type?.startsWith("image/")) throw new Error("画像ファイルを選択してください");
@@ -15873,6 +15941,8 @@ let matchRecordsRawCacheV152 = null;
     const players = playerRows
       .filter(row => !query || row.player.name.toLocaleLowerCase("ja").includes(query))
       .sort((a, b) => {
+        const primaryOrder=Number(b.player.isPrimary===true)-Number(a.player.isPrimary===true);
+        if (primaryOrder) return primaryOrder;
         if (playerLibraryModeV145 !== "management") {
           return (b.player.lastUsed || b.player.updatedAt || b.player.createdAt || 0) -
             (a.player.lastUsed || a.player.updatedAt || a.player.createdAt || 0);
@@ -15899,7 +15969,7 @@ let matchRecordsRawCacheV152 = null;
       list.innerHTML = players.map(({player, records, latest}) => `
         <button class="player-management-row-v1" type="button" data-stats-player="${player.id}" aria-label="${escapeRecordText(player.name)}の詳細を開く">
           <span class="player-management-avatar-v1">${playerAvatarHtmlV2(player,"player-avatar-v2")}</span>
-          <span class="player-management-copy-v2"><strong class="player-management-name-v1">${escapeRecordText(player.name)}</strong>${player.memo ? `<span class="player-management-memo-v2">${escapeRecordText(player.memo)}</span>` : ""}</span>
+          <span class="player-management-copy-v2"><strong class="player-management-name-v1">${escapeRecordText(player.name)}${player.isPrimary ? `<span class="player-primary-badge-v1">メイン</span>` : ""}</strong>${player.memo ? `<span class="player-management-memo-v2">${escapeRecordText(player.memo)}</span>` : ""}</span>
           <span class="player-management-menu-v2" aria-hidden="true">•••</span>
           <svg class="player-management-chevron-v1" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
         </button>`).join("");
@@ -15918,7 +15988,7 @@ let matchRecordsRawCacheV152 = null;
       return `<div class="player-library-item selection-only${usedByOther ? " unavailable" : ""}">
         <button class="player-library-select" type="button" ${usedByOther ? "disabled" : `data-select-player="${p.id}"`}>
           ${playerAvatarHtmlV2(p,"player-library-select-avatar-v2")}
-          <div><div class="player-library-name-row"><div class="player-library-name">${escapeRecordText(p.name)}</div>${status}</div>
+          <div><div class="player-library-name-row"><div class="player-library-name">${escapeRecordText(p.name)}${p.isPrimary ? `<span class="player-primary-badge-v1">メイン</span>` : ""}</div>${status}</div>
           <div class="player-library-meta">${p.memo ? escapeRecordText(p.memo) : `最終使用 ${formatLastUsed(p.lastUsed)}`}</div></div>
         </button>
       </div>`;
@@ -25277,6 +25347,7 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .player-avatar-groups-v2{min-height:0;padding:10px 12px;overflow:auto}.player-avatar-groups-v2 h3{margin:3px 0 10px;font-size:14px}.player-avatar-groups-v2 section>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 8px}
 .player-avatar-groups-v2 button{position:relative;display:flex;min-width:0;padding:0;border:2px solid transparent;background:transparent;align-items:center;flex-direction:column;gap:4px}.player-avatar-groups-v2 button.is-selected{border-color:#171717;border-radius:12px}.player-avatar-groups-v2 img{width:64px;height:64px;border-radius:50%;object-fit:cover}.player-avatar-groups-v2 span{width:100%;overflow:hidden;font-size:10px;text-overflow:ellipsis;white-space:nowrap}
 .player-avatar-groups-v2 [data-avatar-category-v5="male"] img{background:#edf5ff}.player-avatar-groups-v2 [data-avatar-category-v5="female"] img{background:#fff0f4}.player-avatar-groups-v2 [data-avatar-category-v5="animal"] img{background:#edf8f1}.player-avatar-groups-v2 [data-avatar-category-v5="flower"] img{background:#fff4ee}.player-avatar-groups-v2 [data-avatar-category-v5="ball"] img{background:#f2f2ef;object-fit:contain}
+.player-editor-primary-v1{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:2px 0 14px;padding:14px 15px;border:1px solid #d8d8d5;border-radius:12px;background:#f7f7f5;color:#171716;cursor:pointer}.player-editor-primary-v1>span{display:flex;min-width:0;flex-direction:column;gap:3px}.player-editor-primary-v1 strong{font-size:15px}.player-editor-primary-v1 small{color:#666;font-size:11px;line-height:1.35}.player-editor-primary-v1 input{width:22px;height:22px;margin:0;accent-color:#181817}.player-editor-id-v1{display:flex;align-items:flex-start;gap:10px;margin:-5px 0 14px;color:#777;font-size:11px}.player-editor-id-v1[hidden]{display:none}.player-editor-id-v1 code{overflow-wrap:anywhere;color:#444;font-size:10px}.player-primary-badge-v1{display:inline-flex;align-items:center;margin-left:8px;padding:2px 7px;border:1px solid #bdbdb9;border-radius:999px;background:#f3f3f1;color:#333;font-size:10px;font-weight:800;line-height:1.2;vertical-align:middle}.player-management-name-v1 .player-primary-badge-v1{position:relative;top:-1px}
 .player-avatar-chooser-v2 footer{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:10px 12px max(12px,env(safe-area-inset-bottom));border-top:1px solid #e6e6e2;background:#fff}.player-avatar-chooser-v2 footer button{min-height:48px;padding:4px;border:1px solid #c9c9c5;border-radius:10px;background:#fff;font-size:12px;font-weight:650}.player-avatar-chooser-v2 footer button.is-selected{border-color:#171717;background:#f1f1ef}.player-avatar-chooser-v2 footer button:last-child{border-color:#d7b879;background:#efd09b;color:#171717}
 .player-editor-confirm-v2{position:absolute;z-index:21;inset:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:#fff;color:#171717}.player-editor-confirm-v2.hidden{display:none!important}.player-editor-confirm-v2 header{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;min-height:58px;padding-top:env(safe-area-inset-top);border-bottom:1px solid #e6e6e2;text-align:center}.player-editor-confirm-v2 header button{height:44px;border:0;background:transparent;font-size:30px}.player-editor-confirm-body-v2{padding:22px 18px;overflow:auto}.player-editor-confirm-body-v2>img{display:block;width:150px;height:150px;margin:0 auto;border-radius:50%;object-fit:cover}.player-editor-confirm-body-v2>h2{margin:12px 0 30px;font-size:17px;text-align:center}.player-editor-confirm-body-v2 section{padding:0 0 18px;margin:0 0 18px;border-bottom:1px solid #e8e8e5}.player-editor-confirm-body-v2 small{display:block;margin-bottom:8px;color:#555;font-size:13px}.player-editor-confirm-body-v2 strong{font-size:19px}.player-editor-confirm-body-v2 p{margin:0;font-size:16px;line-height:1.6}.player-editor-confirm-v2 footer{display:grid;gap:9px;padding:12px 14px max(14px,env(safe-area-inset-bottom));background:#fff}.player-editor-confirm-v2 footer button{min-height:52px;border:1px solid #c9c9c5;border-radius:10px;background:#fff;font-size:16px;font-weight:700}.player-editor-confirm-v2 footer button:first-child{border-color:#171717;background:#171717;color:#fff}
 .player-management-formal-v1 .player-management-row-v1{grid-template-columns:58px minmax(0,1fr) 34px 18px;min-height:82px}
