@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-avatar-expansion-v3";
+const APP_VERSION = "1.0-home-match-setup-v3";
 const CACHE_NAME = `cuescore-rotation-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",

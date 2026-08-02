@@ -8095,39 +8095,46 @@ body {
 
     <section class="cue-home-v1 cue-home-integrated-v2" id="cueHomeV1" aria-label="CueScore Home">
       <div class="cue-home-head-v2">
-        <h1 class="cue-home-brand-v1">CueScore</h1>
+        <h1 class="cue-home-brand-v1"><img src="assets/icons/navigation/cuescore-mark-black.svg" alt=""><span>CueScore</span></h1>
       </div>
 
       <div class="cue-discipline-switcher-v1" id="cueDisciplineSwitcherV1" role="tablist" aria-label="ゲーム種目">
-        <button class="cue-discipline-v1 is-selected" type="button" role="tab" aria-label="Rotation ローテーション" aria-selected="true" aria-pressed="true" data-discipline="rotation">
-          <img class="cue-game-icon-v1" src="assets/icons/games/game-rotation.svg" alt="" aria-hidden="true" />
-          <span class="cue-discipline-label-v1"><strong>Rotation</strong><small>ローテーション</small></span>
-        </button>
         <button class="cue-discipline-v1" type="button" role="tab" aria-label="9-Ball 9ボール" aria-selected="false" aria-pressed="false" data-discipline="9ball">
           <img class="cue-game-icon-v1" src="assets/icons/games/game-9ball.svg" alt="" aria-hidden="true" />
-          <span class="cue-discipline-label-v1"><strong>9-Ball</strong><small>9ボール</small></span>
+          <span class="cue-discipline-label-v1"><strong>9-Ball</strong></span><span class="cue-home-chevron-v3" aria-hidden="true">›</span>
         </button>
         <button class="cue-discipline-v1" type="button" role="tab" aria-label="10-Ball 10ボール" aria-selected="false" aria-pressed="false" data-discipline="10ball">
           <img class="cue-game-icon-v1" src="assets/icons/games/game-10ball.svg" alt="" aria-hidden="true" />
-          <span class="cue-discipline-label-v1"><strong>10-Ball</strong><small>10ボール</small></span>
+          <span class="cue-discipline-label-v1"><strong>10-Ball</strong></span><span class="cue-home-chevron-v3" aria-hidden="true">›</span>
+        </button>
+        <button class="cue-discipline-v1 is-selected" type="button" role="tab" aria-label="Rotation ローテーション" aria-selected="true" aria-pressed="true" data-discipline="rotation">
+          <img class="cue-game-icon-v1" src="assets/icons/games/game-rotation.svg" alt="" aria-hidden="true" />
+          <span class="cue-discipline-label-v1"><strong>Rotation</strong></span><span class="cue-home-chevron-v3" aria-hidden="true">›</span>
         </button>
         <button class="cue-discipline-v1" type="button" role="tab" aria-label="14-1" aria-selected="false" aria-pressed="false" data-discipline="straightPool">
           <img class="cue-game-icon-v1" src="assets/icons/games/game-14-1.svg" alt="" aria-hidden="true" />
-          <span class="cue-discipline-label-v1"><strong>14-1</strong><small>14-1</small></span>
+          <span class="cue-discipline-label-v1"><strong>14-1</strong></span><span class="cue-home-chevron-v3" aria-hidden="true">›</span>
         </button>
         <button class="cue-discipline-v1" type="button" role="tab" aria-label="JPA 9-Ball JPA 9ボール" aria-selected="false" aria-pressed="false" data-discipline="jpa9">
           <img class="cue-game-icon-v1" src="assets/icons/games/game-jpa-9ball.svg" alt="" aria-hidden="true" />
-          <span class="cue-discipline-label-v1"><strong>JPA 9-Ball</strong><small>JPA 9ボール</small></span>
+          <span class="cue-discipline-label-v1"><strong>JPA 9</strong></span><span class="cue-home-chevron-v3" aria-hidden="true">›</span>
         </button>
         <button class="cue-discipline-v1" type="button" role="tab" aria-label="3 Cushion 3クッション" aria-selected="false" aria-pressed="false" data-discipline="threeCushion">
           <img class="cue-game-icon-v1" src="assets/icons/games/game-3cushion.svg" alt="" aria-hidden="true" />
-          <span class="cue-discipline-label-v1"><strong>3 Cushion</strong><small>3クッション</small></span>
+          <span class="cue-discipline-label-v1"><strong>3 Cushion</strong></span><span class="cue-home-chevron-v3" aria-hidden="true">›</span>
         </button>
       </div>
 
+      <div class="cue-home-menu-v3" aria-label="主要メニュー">
+        <button id="cueHomePlayersV3" type="button"><span class="cue-nav-glyph-v1 nav-player-v1" aria-hidden="true"></span><strong>プレーヤー</strong><span aria-hidden="true">›</span></button>
+        <button id="cueHomeHistoryV3" type="button"><span class="cue-nav-glyph-v1 nav-history-v1" aria-hidden="true"></span><strong>履歴</strong><span aria-hidden="true">›</span></button>
+        <button id="cueHomeSettingsV3" type="button"><span class="cue-nav-glyph-v1 nav-settings-v1" aria-hidden="true"></span><strong>設定</strong><span aria-hidden="true">›</span></button>
+      </div>
+
       <section class="cue-home-card-v1 cue-new-match-v1 cue-new-match-integrated-v2" aria-labelledby="cueNewMatchTitleV1">
+        <button class="cue-match-setup-back-v3" id="cueMatchSetupBackV3" type="button" aria-label="ホームへ戻る">‹ ホーム</button>
         <div class="cue-new-match-summary-v2">
-          <p class="cue-home-eyebrow-v1" id="cueNewMatchTitleV1">New Match</p>
+          <p class="cue-home-eyebrow-v1" id="cueNewMatchTitleV1">NEW MATCH</p>
           <div class="cue-selected-game-v1">
             <img class="cue-selected-game-icon-v1" id="cueSelectedGameIconV1" src="assets/icons/games/game-rotation.svg" alt="" aria-hidden="true" />
             <strong class="cue-selected-game-name-v1" id="cueSelectedGameNameV1">Rotation</strong>
@@ -8216,7 +8223,7 @@ body {
       </section>
 
       <nav class="cue-bottom-nav-v1" aria-label="メインナビゲーション">
-        <button class="is-current" type="button" aria-label="ホーム" aria-current="page">
+        <button class="is-current" id="cueHomeNavV3" type="button" aria-label="ホーム" aria-current="page">
           <span class="cue-nav-icon-v1 cue-nav-glyph-v1 nav-home-v1" aria-hidden="true"></span><span>ホーム</span>
         </button>
         <button id="playerManagementBtn" type="button" aria-label="プレーヤー">
@@ -8225,7 +8232,7 @@ body {
         <button id="recordsBtn" type="button" aria-label="履歴">
           <span class="cue-nav-icon-v1 cue-nav-glyph-v1 nav-history-v1" aria-hidden="true"></span><span>履歴</span>
         </button>
-        <button id="openRankingsBtn" type="button" aria-label="分析">
+        <button id="openRankingsBtn" type="button" aria-label="分析" hidden tabindex="-1">
           <span class="cue-nav-icon-v1 cue-nav-glyph-v1 nav-analytics-v1" aria-hidden="true"></span><span>分析</span>
         </button>
         <button id="settingsBtn" type="button" aria-label="設定">
@@ -9094,7 +9101,7 @@ body {
       "9ball": { name: "9-Ball", icon: "-9-", asset: "assets/icons/games/game-9ball.svg", rule: "ラック制" },
       "10ball": { name: "10-Ball", icon: "-10-", asset: "assets/icons/games/game-10ball.svg", rule: "ラック制" },
       straightPool: { name: "14-1", icon: "14-1", asset: "assets/icons/games/game-14-1.svg", rule: "連続得点" },
-      jpa9: { name: "JPA 9-Ball", icon: "JPA 9", asset: "assets/icons/games/game-jpa-9ball.svg", rule: "SL別目標点" },
+      jpa9: { name: "JPA 9", icon: "JPA 9", asset: "assets/icons/games/game-jpa-9ball.svg", rule: "SL別目標点" },
       threeCushion: { name: "3 Cushion", icon: "3C", asset: "assets/icons/games/game-3cushion.svg", rule: "持ち点制" }
     };
 
@@ -25470,6 +25477,67 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   .cue-player-stack-v2 .cue-swap-v2{left:-36px!important;width:44px!important;min-width:44px!important;height:44px!important;min-height:44px!important}
 }
 </style>
+<style>
+/* CueScore Home / Match Setup separation v3.0 */
+.cue-home-v1{min-height:var(--app-vh,100dvh)!important;padding:calc(18px + env(safe-area-inset-top)) 18px calc(92px + env(safe-area-inset-bottom))!important;background:#f8f8f7!important;color:#171717!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch}
+.cue-home-head-v2{display:flex!important;justify-content:center!important;padding:20px 0 28px!important;border-bottom:1px solid #dededb!important}
+.cue-home-brand-v1{display:flex!important;align-items:center!important;gap:18px!important;margin:0!important;color:#111!important;font-size:clamp(42px,11vw,58px)!important;font-weight:520!important;letter-spacing:-.045em!important}
+.cue-home-brand-v1 img{width:76px;height:76px;object-fit:contain}.cue-home-brand-v1 span{display:block}
+.cue-discipline-switcher-v1{display:grid!important;grid-template-columns:1fr!important;gap:6px!important;width:100%!important;margin:18px 0 22px!important;overflow:visible!important}
+.cue-discipline-switcher-v1 .cue-discipline-v1{display:grid!important;grid-template-columns:58px minmax(0,1fr) 20px!important;align-items:center!important;gap:16px!important;min-width:0!important;min-height:64px!important;padding:8px 16px!important;border:1px solid #efefed!important;border-radius:14px!important;background:#fff!important;color:#171717!important;box-shadow:0 3px 14px rgba(0,0,0,.025)!important;text-align:left!important}
+.cue-discipline-switcher-v1 .cue-discipline-v1::after{display:none!important}.cue-discipline-switcher-v1 .cue-discipline-v1.is-selected{background:#fff!important;color:#171717!important}
+.cue-discipline-switcher-v1 .cue-game-icon-v1,.cue-discipline-switcher-v1 .cue-discipline-v1.is-selected .cue-game-icon-v1{width:46px!important;height:46px!important;filter:none!important;opacity:1!important}
+.cue-discipline-switcher-v1 .cue-discipline-label-v1,.cue-discipline-switcher-v1 .cue-discipline-label-v1 strong{font-size:21px!important;font-weight:760!important;letter-spacing:0!important;color:#171717!important}.cue-home-chevron-v3{color:#9b9b98;font-size:34px;font-weight:300;line-height:1}
+.cue-home-menu-v3{display:grid;gap:6px;padding-top:22px;border-top:1px solid #dededb}.cue-home-menu-v3 button{display:grid;grid-template-columns:50px minmax(0,1fr) 20px;align-items:center;gap:14px;min-height:64px;padding:8px 16px;border:1px solid #efefed;border-radius:14px;background:#fff;color:#171717;box-shadow:0 3px 14px rgba(0,0,0,.025);text-align:left}.cue-home-menu-v3 button>span:first-child{display:block;width:36px;height:36px;background:#171717}.cue-home-menu-v3 strong{font-size:19px}.cue-home-menu-v3 button>span:last-child{color:#9b9b98;font-size:34px;font-weight:300}
+.cue-new-match-integrated-v2{display:none!important}#openRankingsBtn[hidden]{display:none!important}.cue-bottom-nav-v1{grid-template-columns:repeat(4,minmax(0,1fr))!important;background:rgba(255,255,255,.96)!important}
+.cue-home-v1.match-setup-active-v3{padding:calc(10px + env(safe-area-inset-top)) 14px calc(22px + env(safe-area-inset-bottom))!important}.cue-home-v1.match-setup-active-v3 .cue-home-head-v2,.cue-home-v1.match-setup-active-v3 .cue-discipline-switcher-v1,.cue-home-v1.match-setup-active-v3 .cue-home-menu-v3,.cue-home-v1.match-setup-active-v3>.cue-bottom-nav-v1{display:none!important}
+.cue-home-v1.match-setup-active-v3 .cue-new-match-integrated-v2{display:flex!important;flex-direction:column!important;width:100%!important;max-width:620px!important;margin:0 auto!important;padding:10px 14px 18px!important;border:1px solid #eeeeeb!important;border-radius:22px!important;background:#fff!important;box-shadow:0 10px 28px rgba(0,0,0,.045)!important}
+.cue-match-setup-back-v3{order:0;align-self:flex-start;min-height:44px;padding:0 8px;border:0;background:transparent;color:#171717;font-size:15px;font-weight:700}.cue-new-match-summary-v2{order:1!important;padding:4px 4px 16px!important}.cue-new-match-summary-v2 .cue-home-eyebrow-v1{font-size:13px!important;letter-spacing:.12em!important}.cue-new-match-summary-v2 .cue-selected-game-v1{gap:12px!important}.cue-new-match-summary-v2 .cue-selected-game-icon-v1{width:56px!important;height:56px!important}.cue-new-match-summary-v2 .cue-selected-game-name-v1{font-size:28px!important}
+.cue-player-stack-v2{order:2!important}.cue-game-rules-v2,.cue-carom-rules-v1{order:3!important;width:100%!important;margin-top:14px!important;padding:15px!important;border:1px solid #e7e7e4!important;border-radius:14px!important;background:#fff!important}.cue-game-rules-v2>strong,.cue-carom-rules-v1>strong{font-size:17px!important}.season-setting-v38{order:4}.player-name-limit-note{order:5}.cue-home-start-v2{order:6!important;width:100%!important;min-height:56px!important;margin-top:16px!important;background:#171717!important;color:#fff!important}.cue-home-start-v2 .new-match-play-v1{color:#fff!important}.cue-toggle-track-v2{background:#dededc!important}.cue-rule-toggle-v2 input:checked+.cue-toggle-track-v2{background:#171717!important}
+@media(max-width:370px){.cue-home-v1{padding-left:12px!important;padding-right:12px!important}.cue-home-brand-v1{gap:12px!important;font-size:38px!important}.cue-home-brand-v1 img{width:58px;height:58px}.cue-discipline-switcher-v1 .cue-discipline-v1{min-height:57px!important;grid-template-columns:48px minmax(0,1fr) 16px!important;padding:6px 12px!important}.cue-discipline-switcher-v1 .cue-game-icon-v1{width:40px!important;height:40px!important}.cue-discipline-switcher-v1 .cue-discipline-label-v1 strong{font-size:18px!important}.cue-home-menu-v3 button{min-height:58px}.cue-home-v1.match-setup-active-v3 .cue-new-match-integrated-v2{padding-left:10px!important;padding-right:10px!important}}
+</style>
+<script>
+// CueScore Home / Match Setup separation v3.0 — reuses all existing setup state and start handlers.
+(() => {
+  const home=document.getElementById("cueHomeV1");
+  const setup=document.querySelector(".cue-new-match-integrated-v2");
+  if(!home||!setup||window.__cueScoreHomeSetupV3)return;
+  window.__cueScoreHomeSetupV3=true;
+  const openSetup=()=>{
+    home.classList.add("match-setup-active-v3");
+    setup.setAttribute("aria-hidden","false");
+    document.getElementById("cueHomeNavV3")?.removeAttribute("aria-current");
+    window.scrollTo(0,0);
+    if(!history.state?.cueMatchSetupV3)history.pushState({...history.state,cueMatchSetupV3:true},"");
+  };
+  const closeSetup=()=>{
+    home.classList.remove("match-setup-active-v3");
+    setup.setAttribute("aria-hidden","true");
+    document.getElementById("cueHomeNavV3")?.setAttribute("aria-current","page");
+    window.scrollTo(0,0);
+  };
+  document.getElementById("cueDisciplineSwitcherV1")?.addEventListener("click",event=>{if(event.target.closest("[data-discipline]"))openSetup()});
+  document.getElementById("cueMatchSetupBackV3")?.addEventListener("click",()=>{if(history.state?.cueMatchSetupV3)history.back();else closeSetup()});
+  document.getElementById("cueHomeNavV3")?.addEventListener("click",closeSetup);
+  document.getElementById("cueHomePlayersV3")?.addEventListener("click",()=>document.getElementById("playerManagementBtn")?.click());
+  document.getElementById("cueHomeHistoryV3")?.addEventListener("click",()=>document.getElementById("recordsBtn")?.click());
+  document.getElementById("cueHomeSettingsV3")?.addEventListener("click",()=>document.getElementById("settingsBtn")?.click());
+  let lastStartAt=0;
+  document.getElementById("startGameBtn")?.addEventListener("click",event=>{
+    const now=Date.now();
+    if(now-lastStartAt<1200){event.preventDefault();event.stopImmediatePropagation();return;}
+    lastStartAt=now;
+    requestAnimationFrame(()=>{
+      if(document.querySelector(".app")?.classList.contains("pro-game-mode")){
+        closeSetup();
+        if(history.state?.cueMatchSetupV3)history.replaceState({...history.state,cueMatchSetupV3:false},"");
+      }
+    });
+  },true);
+  window.addEventListener("popstate",()=>{if(home.classList.contains("match-setup-active-v3"))closeSetup()});
+  setup.setAttribute("aria-hidden","true");
+})();
+</script>
 </body>
 </html>
 
