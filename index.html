@@ -11119,7 +11119,10 @@ let matchRecordsRawCacheV152 = null;
     else closePlayerLibrary();
   });
   el("playerLibraryAddBtn")?.addEventListener("click", () => openPlayerEditor());
-  el("playerLibrarySearch")?.addEventListener("input", renderPlayerLibrary);
+  // Resolve the renderer when the event fires. The formal Player screen replaces
+  // renderPlayerLibrary later, so retaining the original function here would
+  // rebuild the legacy rows after a search (and hide player names under v1 CSS).
+  el("playerLibrarySearch")?.addEventListener("input", () => renderPlayerLibrary());
   el("playerEditorRange")?.addEventListener("input", () => {
     el("playerEditorRace").value = skillGoals[Number(el("playerEditorRange").value)] || 120;
   });
