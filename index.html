@@ -8185,10 +8185,8 @@ body {
           <section class="player-block new-match-player-card-v1 player-b-v1" id="newMatchPlayerCard2V1" data-player-label="B">
             <div class="player-heading-row"><h2>後攻</h2><button class="starter-choice" id="p2StarterBtn" type="button">後攻</button></div>
             <button class="new-match-swap-v1 cue-swap-v2" id="starterSwapBtnV1" type="button" aria-label="先攻と後攻を入れ替える">
-              <span class="cue-swap-icon-v2" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M8 3v15"/><path d="m4.5 7 3.5-4 3.5 4"/><path d="M16 21V6"/><path d="m12.5 17 3.5 4 3.5-4"/></svg>
-              </span>
-              <strong>入れ替え</strong>
+              <span class="cue-swap-icon-v2" aria-hidden="true">⇄</span>
+              <strong class="visually-hidden-v2">入れ替え</strong>
             </button>
             <button class="new-match-player-select-v1" id="p2PlayerSearchBtn" type="button" aria-label="後攻プレーヤーを選択">
               <span class="new-match-avatar-v1" aria-hidden="true">●</span>
@@ -9025,10 +9023,12 @@ body {
     }
     const card1=document.getElementById("newMatchPlayerCard1V1");
     const card2=document.getElementById("newMatchPlayerCard2V1");
+    card1?.classList.toggle("is-starter-v2", player === 1);
+    card2?.classList.toggle("is-starter-v2", player === 2);
     const h1=card1?.querySelector(".player-heading-row h2");
     const h2=card2?.querySelector(".player-heading-row h2");
-    if(h1) h1.textContent = player===1 ? "先攻（ブレイク）" : "後攻";
-    if(h2) h2.textContent = player===2 ? "先攻（ブレイク）" : "後攻";
+    if(h1) h1.textContent = player===1 ? "先攻" : "後攻";
+    if(h2) h2.textContent = player===2 ? "先攻" : "後攻";
   }
 
   function swapNewMatchPlayerCardsV1() {
@@ -9053,6 +9053,8 @@ body {
 
     syncNewMatchNameV1("p1Name", "p1NameDisplayV1");
     syncNewMatchNameV1("p2Name", "p2NameDisplayV1");
+    syncSelectedPlayerAvatarV2(1);
+    syncSelectedPlayerAvatarV2(2);
     syncHomeRaceDisplaysV2();
     setSelectedStarter(1);
   }
@@ -18459,7 +18461,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-player-avatar-v2";
+    const PWA_VERSION = "1.0-home-player-cards-v2";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -25258,6 +25260,184 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .player-library-item.selection-only .player-library-select{display:grid;grid-template-columns:52px minmax(0,1fr);align-items:center;gap:10px;text-align:left}.player-library-select-avatar-v2{width:52px;height:52px}
 .player-detail-avatar-v1{overflow:visible}.player-detail-avatar-v1>.player-avatar-v2{width:100%;height:100%}
 @media(max-width:370px){.player-avatar-groups-v2 section>div{grid-template-columns:repeat(3,minmax(0,1fr))}.player-management-formal-v1 .player-management-row-v1{grid-template-columns:52px minmax(0,1fr) 30px 16px}.player-management-formal-v1 .player-management-avatar-v1{width:50px;height:50px}}
+
+/* CueScore Home Player Cards v2.0 — adopted side-by-side avatar layout */
+.cue-player-stack-v2{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-template-rows:auto!important;
+  gap:30px!important;
+  margin-top:20px!important;
+}
+.cue-player-stack-v2 .new-match-player-card-v1,
+.cue-player-stack-v2 .new-match-player-card-v1.player-b-v1{
+  position:relative!important;
+  min-width:0!important;
+  min-height:218px!important;
+  padding:24px 10px 12px!important;
+  border:1px solid #e2e2df!important;
+  border-radius:9px!important;
+  background:#fff!important;
+  box-shadow:0 3px 12px rgba(0,0,0,.035)!important;
+  overflow:visible!important;
+}
+.cue-player-stack-v2 #newMatchPlayerCard1V1{grid-column:1;grid-row:1}
+.cue-player-stack-v2 #newMatchPlayerCard2V1{grid-column:2;grid-row:1}
+.cue-player-stack-v2 .player-heading-row{
+  position:absolute!important;
+  z-index:3!important;
+  top:-16px!important;
+  left:4px!important;
+  width:auto!important;
+  margin:0!important;
+  padding:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.cue-player-stack-v2 .player-heading-row h2,
+.cue-player-stack-v2 .new-match-player-card-v1.player-b-v1 .player-heading-row h2{
+  display:grid!important;
+  place-items:center!important;
+  min-width:40px!important;
+  height:34px!important;
+  margin:0!important;
+  padding:0 9px!important;
+  border-radius:999px!important;
+  background:#ededeb!important;
+  color:#555552!important;
+  font-size:12px!important;
+  line-height:1!important;
+  font-weight:760!important;
+  white-space:nowrap!important;
+}
+.cue-player-stack-v2 .new-match-player-card-v1.is-starter-v2 .player-heading-row h2{
+  background:#171717!important;
+  color:#fff!important;
+}
+.cue-player-stack-v2 .starter-choice{display:none!important}
+.cue-player-stack-v2 .new-match-player-select-v1,
+.cue-player-stack-v2 .player-b-v1 .new-match-player-select-v1{
+  display:flex!important;
+  min-height:126px!important;
+  padding:5px 0 13px!important;
+  border:0!important;
+  border-bottom:1px solid #e8e8e5!important;
+  border-radius:0!important;
+  background:transparent!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  flex-direction:column!important;
+  gap:8px!important;
+  color:#171717!important;
+  text-align:center!important;
+}
+.cue-player-stack-v2 .new-match-avatar-v1,
+.cue-player-stack-v2 .player-b-v1 .new-match-avatar-v1{
+  display:grid!important;
+  width:82px!important;
+  height:82px!important;
+  flex:0 0 82px!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.cue-player-stack-v2 .new-match-player-name-v1{
+  display:block!important;
+  width:100%!important;
+  color:#171717!important;
+  font-size:17px!important;
+  line-height:1.2!important;
+  font-weight:780!important;
+  text-align:center!important;
+}
+.cue-player-stack-v2 .new-match-chevron-v1{display:none!important}
+.cue-player-stack-v2 .new-match-race-row-v2{
+  display:grid!important;
+  grid-template-columns:1fr auto 18px!important;
+  grid-template-rows:auto auto!important;
+  min-height:62px!important;
+  padding:10px 4px 0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#171717!important;
+  text-align:center!important;
+}
+.cue-player-stack-v2 .new-match-race-row-v2>span:first-child{
+  grid-column:1/-1!important;
+  grid-row:1!important;
+  color:#333331!important;
+  font-size:10px!important;
+  line-height:1.2!important;
+  font-weight:620!important;
+  text-align:center!important;
+}
+.cue-player-stack-v2 .new-match-race-row-v2 strong{
+  grid-column:2!important;
+  grid-row:2!important;
+  color:#171717!important;
+  font-size:30px!important;
+  line-height:1.1!important;
+  font-weight:820!important;
+}
+.cue-player-stack-v2 .new-match-race-row-v2>span:last-child{
+  grid-column:3!important;
+  grid-row:2!important;
+  align-self:center!important;
+  justify-self:start!important;
+  color:#333331!important;
+  font-size:15px!important;
+}
+.cue-player-stack-v2 .jpa-target-v1{grid-column:1/-1;grid-row:3;font-size:9px}
+.cue-player-stack-v2 .cue-swap-v2{
+  position:absolute!important;
+  z-index:8!important;
+  top:50%!important;
+  left:-38px!important;
+  right:auto!important;
+  width:46px!important;
+  min-width:46px!important;
+  height:46px!important;
+  min-height:46px!important;
+  padding:0!important;
+  border:1px solid #dededb!important;
+  border-radius:50%!important;
+  background:#fff!important;
+  color:#171717!important;
+  box-shadow:0 2px 8px rgba(0,0,0,.07)!important;
+  transform:translateY(-50%)!important;
+}
+.cue-player-stack-v2 .cue-swap-v2 .cue-swap-icon-v2{
+  display:grid!important;
+  place-items:center!important;
+  width:44px!important;
+  height:44px!important;
+  background:transparent!important;
+  color:#171717!important;
+  font-size:25px!important;
+  line-height:1!important;
+  box-shadow:none!important;
+}
+.cue-player-stack-v2 .cue-swap-v2 strong{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important}
+.cue-player-stack-v2 .cue-swap-v2:active{transform:translateY(-50%) scale(.96)!important}
+.cue-home-start-v2{
+  min-height:52px!important;
+  margin-top:10px!important;
+  border:0!important;
+  border-radius:8px!important;
+  background:#171717!important;
+  box-shadow:none!important;
+  font-size:17px!important;
+}
+@media(max-width:370px){
+  .cue-player-stack-v2{gap:26px!important}
+  .cue-player-stack-v2 .new-match-player-card-v1,
+  .cue-player-stack-v2 .new-match-player-card-v1.player-b-v1{min-height:205px!important;padding-left:7px!important;padding-right:7px!important}
+  .cue-player-stack-v2 .new-match-avatar-v1,
+  .cue-player-stack-v2 .player-b-v1 .new-match-avatar-v1{width:72px!important;height:72px!important;flex-basis:72px!important}
+  .cue-player-stack-v2 .new-match-player-name-v1{font-size:15px!important}
+  .cue-player-stack-v2 .cue-swap-v2{left:-36px!important;width:44px!important;min-width:44px!important;height:44px!important;min-height:44px!important}
+}
 </style>
 </body>
 </html>
