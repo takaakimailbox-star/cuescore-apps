@@ -25553,6 +25553,43 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .cue-player-stack-v2{order:2!important}.cue-game-rules-v2,.cue-carom-rules-v1{order:3!important;width:100%!important;margin-top:14px!important;padding:15px!important;border:1px solid #e7e7e4!important;border-radius:14px!important;background:#fff!important}.cue-game-rules-v2>strong,.cue-carom-rules-v1>strong{font-size:17px!important}.season-setting-v38{order:4}.player-name-limit-note{order:5}.cue-home-start-v2{order:6!important;width:100%!important;min-height:56px!important;margin-top:16px!important;background:#171717!important;color:#fff!important}.cue-home-start-v2 .new-match-play-v1{color:#fff!important}.cue-toggle-track-v2{background:#dededc!important}.cue-rule-toggle-v2 input:checked+.cue-toggle-track-v2{background:#171717!important}
 @media(max-width:370px){.cue-home-v1{padding-left:12px!important;padding-right:12px!important}.cue-home-brand-v1{gap:12px!important;font-size:38px!important}.cue-home-brand-v1 img{width:58px;height:58px}.cue-discipline-switcher-v1 .cue-discipline-v1{min-height:57px!important;grid-template-columns:48px minmax(0,1fr) 16px!important;padding:6px 12px!important}.cue-discipline-switcher-v1 .cue-game-icon-v1{width:40px!important;height:40px!important}.cue-discipline-switcher-v1 .cue-discipline-label-v1 strong{font-size:18px!important}.cue-home-menu-v3 button{min-height:58px}.cue-home-v1.match-setup-active-v3 .cue-new-match-integrated-v2{padding-left:10px!important;padding-right:10px!important}}
 .official-default-avatar-v4{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}.player-editor-avatar-button-v2:disabled{cursor:default;opacity:1}
+
+/* CueScore Home responsive repair v4.0 */
+.cue-home-v1:not(.match-setup-active-v3){padding-bottom:calc(24px + env(safe-area-inset-bottom))!important}
+.cue-home-v1:not(.match-setup-active-v3)>.cue-bottom-nav-v1{display:none!important}
+.cue-home-v1:not(.match-setup-active-v3) .cue-discipline-switcher-v1{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-auto-flow:row!important;
+  grid-auto-columns:auto!important;
+  gap:10px!important;
+  max-width:620px!important;
+  margin:18px auto 22px!important;
+}
+.cue-home-v1:not(.match-setup-active-v3) .cue-discipline-switcher-v1 .cue-discipline-v1{
+  display:flex!important;
+  grid-column:auto!important;
+  grid-row:auto!important;
+  min-width:0!important;
+  min-height:96px!important;
+  padding:10px 4px 8px!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex-direction:column!important;
+  gap:6px!important;
+  text-align:center!important;
+}
+.cue-home-v1:not(.match-setup-active-v3) .cue-discipline-switcher-v1 .cue-game-icon-v1,
+.cue-home-v1:not(.match-setup-active-v3) .cue-discipline-switcher-v1 .cue-discipline-v1.is-selected .cue-game-icon-v1{width:50px!important;height:50px!important;flex:0 0 50px!important}
+.cue-home-v1:not(.match-setup-active-v3) .cue-discipline-switcher-v1 .cue-discipline-label-v1{display:block!important;width:100%!important;min-width:0!important}
+.cue-home-v1:not(.match-setup-active-v3) .cue-discipline-switcher-v1 .cue-discipline-label-v1 strong{display:block!important;overflow:hidden!important;font-size:13px!important;line-height:1.15!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+.cue-home-v1:not(.match-setup-active-v3) .cue-discipline-switcher-v1 .cue-home-chevron-v3{display:none!important}
+@media(max-width:370px){
+  .cue-home-v1:not(.match-setup-active-v3) .cue-discipline-switcher-v1{gap:8px!important}
+  .cue-home-v1:not(.match-setup-active-v3) .cue-discipline-switcher-v1 .cue-discipline-v1{min-height:88px!important;padding:8px 3px 7px!important}
+  .cue-home-v1:not(.match-setup-active-v3) .cue-discipline-switcher-v1 .cue-game-icon-v1,
+  .cue-home-v1:not(.match-setup-active-v3) .cue-discipline-switcher-v1 .cue-discipline-v1.is-selected .cue-game-icon-v1{width:44px!important;height:44px!important;flex-basis:44px!important}
+  .cue-home-v1:not(.match-setup-active-v3) .cue-discipline-switcher-v1 .cue-discipline-label-v1 strong{font-size:12px!important}
+}
 </style>
 <script>
 // CueScore Home / Match Setup separation v3.0 — reuses all existing setup state and start handlers.
