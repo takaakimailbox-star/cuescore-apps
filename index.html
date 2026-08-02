@@ -16009,17 +16009,17 @@ let matchRecordsRawCacheV152 = null;
     const management = playerLibraryModeV145 === "management";
     const overlay = el("playerLibraryOverlay");
     overlay?.classList.toggle("player-management-formal-v1", management);
-    el("playerLibraryTitle").textContent = management ? "Player" : `Player${playerLibraryTarget} 選択`;
+    el("playerLibraryTitle").textContent = management ? "プレーヤー" : `Player${playerLibraryTarget} 選択`;
     el("playerLibrarySearch").placeholder = management ? "プレーヤー検索" : "名前を検索";
     el("playerLibraryMain").classList.remove("hidden");
     el("playerEditor").classList.add("hidden");
     const back = el("playerLibraryBackBtn");
     if (back) {
       if (management) {
-        back.innerHTML = playerAvatarSvgV1();
-        back.setAttribute("aria-hidden", "true");
-        back.removeAttribute("aria-label");
-        back.tabIndex = -1;
+        back.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg>`;
+        back.removeAttribute("aria-hidden");
+        back.setAttribute("aria-label", "前の画面に戻る");
+        back.tabIndex = 0;
       } else {
         back.textContent = "‹ 戻る";
         back.removeAttribute("aria-hidden");
@@ -23450,18 +23450,17 @@ body.match-detail-visible-v1{overflow:hidden!important}
   white-space:normal;
 }
 .player-detail-discipline-v1 .disc-ball{
-  display:grid;
-  place-items:center;
-  width:32px;
-  height:32px;
-  border:1.5px solid currentColor;
+  display:block;
+  width:36px;
+  height:36px;
+  border:0;
   border-radius:50%;
-  font-weight:750;
+  object-fit:contain;
 }
 .player-detail-discipline-v1.is-selected{
   border-color:var(--player-detail-accent);
-  color:#fff;
-  background:var(--player-detail-accent);
+  color:var(--player-detail-accent);
+  background:#f1f1ef;
   box-shadow:0 3px 9px rgba(127,53,18,.14);
 }
 .player-detail-discipline-v1:disabled{
@@ -23660,12 +23659,12 @@ body.match-detail-visible-v1{overflow:hidden!important}
     settings:`<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.2 13.6a7.8 7.8 0 0 0 0-3.2l2-1.55-2-3.45-2.5 1a8 8 0 0 0-2.75-1.6L13.6 2h-4l-.35 2.8A8 8 0 0 0 6.5 6.4L4 5.4 2 8.85l2 1.55a7.8 7.8 0 0 0 0 3.2l-2 1.55 2 3.45 2.5-1a8 8 0 0 0 2.75 1.6L9.6 22h4l.35-2.8a8 8 0 0 0 2.75-1.6l2.5 1 2-3.45Z"/></svg>`
   };
   const disciplineDefs = [
-    {id:"9ball",label:"9-Ball",icon:"9",enabled:true},
-    {id:"10ball",label:"10-Ball",icon:"10",enabled:true},
-    {id:"rotation",label:"Rotation",icon:"R",enabled:true},
-    {id:"straightPool",label:"14-1",icon:"14-1",enabled:true},
-    {id:"jpa9",label:"JPA 9-Ball",icon:"JPA 9",enabled:true},
-    {id:"threeCushion",label:"3 Cushion",icon:"3C",enabled:true}
+    {id:"9ball",label:"9-Ball",asset:"assets/icons/games/game-9ball.svg",enabled:true},
+    {id:"10ball",label:"10-Ball",asset:"assets/icons/games/game-10ball.svg",enabled:true},
+    {id:"rotation",label:"Rotation",asset:"assets/icons/games/game-rotation.svg",enabled:true},
+    {id:"straightPool",label:"14-1",asset:"assets/icons/games/game-14-1.svg",enabled:true},
+    {id:"jpa9",label:"JPA 9-Ball",asset:"assets/icons/games/game-jpa-9ball.svg",enabled:true},
+    {id:"threeCushion",label:"3 Cushion",asset:"assets/icons/games/game-3cushion.svg",enabled:true}
   ];
   let activeDiscipline = "9ball";
 
@@ -23754,7 +23753,7 @@ body.match-detail-visible-v1{overflow:hidden!important}
       </button>
 
       <div class="player-detail-disciplines-v1" role="tablist" aria-label="種目">
-        ${disciplineDefs.map(item => `<button type="button" role="tab" class="player-detail-discipline-v1 ${item.id === activeDiscipline ? "is-selected" : ""}" data-player-detail-discipline="${item.id}" aria-selected="${item.id === activeDiscipline}" ${item.enabled ? "" : "disabled"}><span class="disc-ball">${item.icon}</span><span>${item.label}</span></button>`).join("")}
+        ${disciplineDefs.map(item => `<button type="button" role="tab" class="player-detail-discipline-v1 ${item.id === activeDiscipline ? "is-selected" : ""}" data-player-detail-discipline="${item.id}" aria-selected="${item.id === activeDiscipline}" ${item.enabled ? "" : "disabled"}><img class="disc-ball" src="${item.asset}" alt=""><span>${item.label}</span></button>`).join("")}
       </div>
 
       ${records.length ? `<section class="player-detail-card-v1 player-detail-win-v1">
@@ -24909,6 +24908,54 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 })();
 </script>
 <style>
+/* Player management navigation and official discipline artwork v1.0 */
+.player-management-formal-v1 .player-library-panel{
+  grid-template-rows:auto minmax(0,1fr);
+}
+.player-management-formal-v1 .player-library-header{
+  display:grid;
+  grid-template-columns:56px minmax(0,1fr) 56px;
+  align-items:center;
+  min-height:calc(64px + env(safe-area-inset-top));
+  padding:calc(8px + env(safe-area-inset-top)) 14px 8px;
+  border:0;
+  background:transparent;
+}
+.player-management-formal-v1 .player-library-back{
+  display:grid;
+  place-items:center;
+  width:48px;
+  height:48px;
+  border:0;
+  border-radius:50%;
+  color:#171717;
+  background:#fff;
+  box-shadow:0 10px 25px rgba(0,0,0,.09);
+  pointer-events:auto;
+}
+.player-management-formal-v1 .player-library-back svg{
+  width:25px;
+  height:25px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.player-management-formal-v1 .player-library-main{
+  padding-top:8px;
+}
+.player-management-formal-v1 .player-library-search-icon-v1,
+.player-management-formal-v1 .player-library-search{
+  display:none;
+}
+.player-management-formal-v1 .player-library-search-wrap{
+  grid-template-columns:1fr 1fr;
+}
+.player-management-formal-v1 .player-library-bottom-nav-v1{
+  display:none;
+}
+
 /* CueScore Foundation monochrome theme v1.0
    Homeと同じ白・黒・グレーを全画面へ適用する。
    ボール固有色と警告・危険操作の赤は各コンポーネント側の定義を維持する。 */
