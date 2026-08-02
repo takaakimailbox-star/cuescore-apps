@@ -8656,11 +8656,13 @@ body {
 
         <div class="player-editor hidden" id="playerEditor">
           <div class="player-editor-avatar-v2">
-            <button id="playerEditorAvatarBtnV2" class="player-editor-avatar-button-v2" type="button" aria-label="共通プロフィール画像" disabled>
+            <button id="playerEditorAvatarBtnV2" class="player-editor-avatar-button-v2" type="button" aria-label="プロフィール画像を選択">
               <span id="playerEditorAvatarPreviewV2" class="player-avatar-v2 player-avatar-default-v2" aria-hidden="true"></span>
+              <span class="player-editor-camera-v2" aria-hidden="true">📷</span>
             </button>
             <strong>プロフィール画像</strong>
-            <span>共通のシンプルアイコンを使用します</span>
+            <span>タップしてアバターまたは写真を選択</span>
+            <input id="playerEditorPhotoInputV2" type="file" accept="image/*" hidden />
           </div>
 
           <label class="player-editor-label" for="playerEditorName">Name:</label>
@@ -9769,24 +9771,45 @@ let matchRecordsRawCacheV152 = null;
   const DEFAULT_PLAYER_AVATAR_ID_V4 = "default_silhouette";
   const DEFAULT_PLAYER_AVATAR_SOURCE_V4 = "assets/icons/avatar/default/avatar_default_silhouette.png";
   const DEFAULT_PLAYER_AVATAR_V4 = Object.freeze({type:"default",id:DEFAULT_PLAYER_AVATAR_ID_V4});
+  const PLAYER_AVATAR_CATEGORY_V5 = Object.freeze({
+    male:["ショート","センターパート","マッシュ","ベリーショート","サイドパート","ミディアム","眼鏡","グレーヘア","ウェーブ","ひげ"],
+    female:["ショート","ボブ","ロングウェーブ","ベリーショート","セミロング","ポニーテール","眼鏡","ショートレイヤー","三つ編み","まとめ髪"],
+    animal:["猫","柴犬","うさぎ","キツネ","パンダ","クマ","フクロウ","ペンギン","ライオン","コアラ"],
+    flower:["バラ","桜","ひまわり","チューリップ","ユリ","アジサイ","ハス","デイジー","ツバキ","ラベンダー"],
+    ball:["手球",...Array.from({length:15},(_,index)=>`${index+1}番ボール`)]
+  });
+  const PLAYER_AVATAR_PRESETS_V5 = Object.freeze(Object.entries(PLAYER_AVATAR_CATEGORY_V5).flatMap(([category,labels]) => labels.map((label,index) => {
+    const number=category === "ball" ? (index === 0 ? "cue" : String(index).padStart(2,"0")) : String(index+1).padStart(2,"0");
+    const id=`${category}_${number}`;
+    return {id,category,label,src:`assets/icons/avatar/${category}/avatar_${id}.png`};
+  })));
+  const PLAYER_AVATAR_BY_ID_V5 = new Map(PLAYER_AVATAR_PRESETS_V5.map(item=>[item.id,item]));
   let playerEditorAvatarV2 = {...DEFAULT_PLAYER_AVATAR_V4};
   let playerEditorConfirmingV2 = false;
 
-  function normalizePlayerAvatarV2() {
+  function normalizePlayerAvatarV2(avatar) {
+    if (avatar?.type === "photo" && typeof avatar.dataUrl === "string" && /^data:image\/(jpeg|png|webp);base64,/.test(avatar.dataUrl)) {
+      return {type:"photo",dataUrl:avatar.dataUrl};
+    }
+    if (PLAYER_AVATAR_BY_ID_V5.has(avatar?.id)) return {type:"preset",id:avatar.id};
     return {...DEFAULT_PLAYER_AVATAR_V4};
   }
 
-  function playerAvatarSourceV2() {
-    return DEFAULT_PLAYER_AVATAR_SOURCE_V4;
+  function playerAvatarSourceV2(playerOrAvatar) {
+    const avatar=normalizePlayerAvatarV2(playerOrAvatar?.avatar || playerOrAvatar);
+    if (avatar.type === "photo") return avatar.dataUrl;
+    return PLAYER_AVATAR_BY_ID_V5.get(avatar.id)?.src || DEFAULT_PLAYER_AVATAR_SOURCE_V4;
   }
 
   function playerAvatarHtmlV2(player, className="player-avatar-v2") {
-    return `<img class="${className}" src="${DEFAULT_PLAYER_AVATAR_SOURCE_V4}" alt="シンプルプロフィール画像" loading="lazy" decoding="async">`;
+    const avatar=normalizePlayerAvatarV2(player?.avatar);
+    const label=PLAYER_AVATAR_BY_ID_V5.get(avatar.id)?.label || (avatar.type === "photo" ? "プロフィール写真" : "シンプルプロフィール画像");
+    return `<img class="${className}" src="${playerAvatarSourceV2(avatar)}" alt="${escapeRecordText(label)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${DEFAULT_PLAYER_AVATAR_SOURCE_V4}'">`;
   }
 
   function normalizePlayerRecordAvatarV4(player) {
     const {race,avatarId,avatarPath,avatarType,avatarImage,photoUrl,...compatiblePlayer}=player || {};
-    return {...compatiblePlayer,memo:String(player?.memo||"").slice(0,100),avatar:{...DEFAULT_PLAYER_AVATAR_V4}};
+    return {...compatiblePlayer,memo:String(player?.memo||"").slice(0,100),avatar:normalizePlayerAvatarV2(player?.avatar)};
   }
   window.cueScoreNormalizePlayersToDefaultAvatarV4 = players => Array.isArray(players) ? players.filter(player=>player&&player.id&&player.name).map(normalizePlayerRecordAvatarV4) : [];
   let playerLibraryTarget = 1;
@@ -11201,7 +11224,7 @@ let matchRecordsRawCacheV152 = null;
     const preview = el("playerEditorAvatarPreviewV2");
     if (!preview) return;
     preview.classList.remove("player-avatar-default-v2");
-    preview.innerHTML = `<img src="${DEFAULT_PLAYER_AVATAR_SOURCE_V4}" alt="">`;
+    preview.innerHTML = `<img src="${playerAvatarSourceV2(playerEditorAvatarV2)}" alt="" onerror="this.onerror=null;this.src='${DEFAULT_PLAYER_AVATAR_SOURCE_V4}'">`;
   }
 
   function updatePlayerEditorMemoCountV2() {
@@ -11232,9 +11255,74 @@ let matchRecordsRawCacheV152 = null;
     const avatar = document.querySelector(`#newMatchPlayerCard${slot}V1 .new-match-avatar-v1`);
     const selected = player || readPlayerLibrary().find(item => item.id === selectedRegisteredPlayer[slot]);
     if (!avatar) return;
-    avatar.innerHTML = `<img src="${DEFAULT_PLAYER_AVATAR_SOURCE_V4}" alt="">`;
+    avatar.innerHTML = `<img src="${playerAvatarSourceV2(selected?.avatar)}" alt="" onerror="this.onerror=null;this.src='${DEFAULT_PLAYER_AVATAR_SOURCE_V4}'">`;
     avatar.classList.add("has-player-avatar-v2");
   }
+
+  async function compressPlayerPhotoV5(file) {
+    if (!file?.type?.startsWith("image/")) throw new Error("画像ファイルを選択してください");
+    if (file.size > 15 * 1024 * 1024) throw new Error("15MB以下の画像を選択してください");
+    let source;
+    if (typeof createImageBitmap === "function") {
+      source=await createImageBitmap(file, {imageOrientation:"from-image"});
+    } else {
+      source=await new Promise((resolve,reject)=>{
+        const image=new Image(); const url=URL.createObjectURL(file);
+        image.onload=()=>{URL.revokeObjectURL(url);resolve(image);};
+        image.onerror=()=>{URL.revokeObjectURL(url);reject(new Error("画像を読み込めませんでした"));};
+        image.src=url;
+      });
+    }
+    const width=source.width || source.naturalWidth; const height=source.height || source.naturalHeight;
+    const side=Math.min(width,height); const canvas=document.createElement("canvas");
+    canvas.width=320; canvas.height=320;
+    const context=canvas.getContext("2d",{alpha:false});
+    context.fillStyle="#f2f2f0"; context.fillRect(0,0,320,320);
+    context.drawImage(source,(width-side)/2,(height-side)/2,side,side,0,0,320,320);
+    source.close?.();
+    return canvas.toDataURL("image/jpeg",.78);
+  }
+
+  function ensurePlayerAvatarChooserV5() {
+    let chooser=el("playerAvatarChooserV2");
+    if (chooser) return chooser;
+    chooser=document.createElement("section");
+    chooser.id="playerAvatarChooserV2"; chooser.className="player-avatar-chooser-v2 hidden";
+    chooser.setAttribute("role","dialog"); chooser.setAttribute("aria-modal","true"); chooser.setAttribute("aria-label","プロフィール画像を選択");
+    const groups=[["男性","male"],["女性","female"],["動物","animal"],["花","flower"],["ビリヤード","ball"]];
+    chooser.innerHTML=`<header><button type="button" data-avatar-close-v5 aria-label="戻る">‹</button><strong>プロフィール画像を選択</strong><span></span></header><div class="player-avatar-tabs-v2">${groups.map(([label],index)=>`<button class="${index ? "" : "is-selected"}" type="button" data-avatar-tab-v5="${index}">${label}</button>`).join("")}</div><div class="player-avatar-groups-v2">${groups.map(([label,category],index)=>{const presets=PLAYER_AVATAR_PRESETS_V5.filter(item=>item.category===category);return `<section data-avatar-group-v5="${index}" data-avatar-category-v5="${category}" ${index ? "hidden" : ""}><h3>${label}（${presets.length}種類）</h3><div>${presets.map(item=>`<button type="button" data-avatar-id-v5="${item.id}" aria-label="${item.label}"><img src="${item.src}" alt="" loading="lazy"><span>${item.label}</span></button>`).join("")}</div></section>`;}).join("")}</div><footer><button type="button" data-avatar-default-v5>未設定に戻す</button><button type="button" data-avatar-photo-v5>写真から選ぶ</button><button type="button" data-avatar-apply-v5>この画像に決定</button></footer>`;
+    el("playerEditor")?.appendChild(chooser);
+    let pending=normalizePlayerAvatarV2(playerEditorAvatarV2);
+    const renderPending=()=>{
+      chooser.querySelectorAll("[data-avatar-id-v5]").forEach(button=>button.classList.toggle("is-selected",pending.type === "preset" && button.dataset.avatarIdV5 === pending.id));
+      chooser.querySelector("[data-avatar-default-v5]")?.classList.toggle("is-selected",pending.type === "default");
+    };
+    chooser.addEventListener("click",event=>{
+      const avatar=event.target.closest("[data-avatar-id-v5]"); const tab=event.target.closest("[data-avatar-tab-v5]");
+      if (avatar) {pending={type:"preset",id:avatar.dataset.avatarIdV5};renderPending();}
+      if (tab) {
+        chooser.querySelectorAll("[data-avatar-tab-v5]").forEach(button=>button.classList.toggle("is-selected",button===tab));
+        chooser.querySelectorAll("[data-avatar-group-v5]").forEach(group=>group.hidden=group.dataset.avatarGroupV5!==tab.dataset.avatarTabV5);
+      }
+      if (event.target.closest("[data-avatar-close-v5]")) chooser.classList.add("hidden");
+      if (event.target.closest("[data-avatar-photo-v5]")) el("playerEditorPhotoInputV2")?.click();
+      if (event.target.closest("[data-avatar-default-v5]")) {pending={...DEFAULT_PLAYER_AVATAR_V4};renderPending();}
+      if (event.target.closest("[data-avatar-apply-v5]")) {playerEditorAvatarV2=pending;updatePlayerEditorAvatarPreviewV2();chooser.classList.add("hidden");}
+    });
+    chooser.openV5=()=>{pending=normalizePlayerAvatarV2(playerEditorAvatarV2);renderPending();chooser.classList.remove("hidden");};
+    chooser.setPhotoV5=avatar=>{pending=avatar;renderPending();};
+    return chooser;
+  }
+
+  el("playerEditorAvatarBtnV2")?.addEventListener("click",()=>ensurePlayerAvatarChooserV5().openV5());
+  el("playerEditorPhotoInputV2")?.addEventListener("change",async event=>{
+    const file=event.target.files?.[0]; if (!file) return;
+    try {
+      const avatar={type:"photo",dataUrl:await compressPlayerPhotoV5(file)};
+      playerEditorAvatarV2=avatar; ensurePlayerAvatarChooserV5().setPhotoV5(avatar); updatePlayerEditorAvatarPreviewV2();
+    } catch (error) {showToast("写真を使用できません",error.message || "別の画像を選択してください");}
+    event.target.value="";
+  });
 
   el("playerEditorMemoV2")?.addEventListener("input", updatePlayerEditorMemoCountV2);
 
@@ -14314,8 +14402,10 @@ let matchRecordsRawCacheV152 = null;
     return `<svg class="official-result-chart-svg-v1" viewBox="0 0 ${width} ${height}" role="img" aria-label="両プレーヤーのイニング別累積得点推移">${grid}<path d="${path(progress.p1)}" fill="none" stroke="#6f3214" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="${path(progress.p2)}" fill="none" stroke="#8b8b87" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>${dots(progress.p1,"#6f3214")}${dots(progress.p2,"#8b8b87")}${xLabels}<text x="${Math.min(width-4,lastP1.x+9)}" y="${Math.max(13,lastP1.y-7)}" font-size="13" font-weight="700" fill="#6f3214">${Number(scores[1])||0}</text><text x="${Math.min(width-4,lastP2.x+9)}" y="${Math.min(height-bottom-5,lastP2.y+17)}" font-size="13" font-weight="700" fill="#777">${Number(scores[2])||0}</text></svg>`;
   }
 
-  function resultAvatarSvgV1() {
-    return `<img class="official-default-avatar-v4" src="${DEFAULT_PLAYER_AVATAR_SOURCE_V4}" alt="">`;
+  function resultAvatarSvgV1(playerNumber) {
+    const registeredId=selectedRegisteredPlayer?.[playerNumber];
+    const registeredPlayer=registeredId ? readPlayerLibrary().find(player=>player.id===registeredId) : null;
+    return playerAvatarHtmlV2(registeredPlayer || {avatar:DEFAULT_PLAYER_AVATAR_V4}, "official-default-avatar-v4");
   }
 
   function formatResultDurationV1(startedAt, endedAt) {
@@ -14361,7 +14451,7 @@ let matchRecordsRawCacheV152 = null;
       if(name==="clock")return `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
       return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10M7 21h10M8 3c0 4 1 6 4 9-3 3-4 5-4 9M16 3c0 4-1 6-4 9 3 3 4 5 4 9"/></svg>`;
     };
-    const playerCard=player=>`<article class="official-result-player-v1 ${winner===0?"draw":player===winner?"winner":"loser"}"><div class="official-result-player-name-v1"><span class="official-result-avatar-v1">${resultAvatarSvgV1()}</span><span>${player===1?safeName1:safeName2}</span></div><div class="official-result-score-v1">${Number(scores[player])||0}</div><div class="official-result-stats-v1"><div><span>${isThreeCushionV1()?"アベレージ":"成功率"}</span><strong>${isThreeCushionV1()?Number(stats.average?.[player]||0).toFixed(3):`${Number(stats.shotRate[player])||0}<small>%</small>`}</strong></div><div><span>ハイラン</span><strong>${Number(stats.maxRun[player])||0}</strong></div></div></article>`;
+    const playerCard=player=>`<article class="official-result-player-v1 ${winner===0?"draw":player===winner?"winner":"loser"}"><div class="official-result-player-name-v1"><span class="official-result-avatar-v1">${resultAvatarSvgV1(player)}</span><span>${player===1?safeName1:safeName2}</span></div><div class="official-result-score-v1">${Number(scores[player])||0}</div><div class="official-result-stats-v1"><div><span>${isThreeCushionV1()?"アベレージ":"成功率"}</span><strong>${isThreeCushionV1()?Number(stats.average?.[player]||0).toFixed(3):`${Number(stats.shotRate[player])||0}<small>%</small>`}</strong></div><div><span>ハイラン</span><strong>${Number(stats.maxRun[player])||0}</strong></div></div></article>`;
 
     summary.innerHTML=`<div class="official-result-backdrop-v1" aria-hidden="true"></div><section class="official-result-sheet-v1" role="dialog" aria-modal="true" aria-labelledby="officialResultTitleV1"><div class="official-result-handle-v1" aria-hidden="true"></div><div class="official-result-scroll-v1"><h2 id="officialResultTitleV1">試合結果</h2><div class="official-result-info-v1"><span>${infoIcon("calendar")}<b>${dateText}</b></span><span>${infoIcon("clock")}<b>${timeText}</b></span><span>${infoIcon("duration")}<b>${durationText}</b></span></div><div class="official-result-players-v1">${playerCard(1)}<span class="official-result-separator-v1" aria-hidden="true">−</span>${playerCard(2)}</div><section class="official-result-chart-card-v1"><div class="official-result-chart-header-v1"><h3>スコア推移</h3><div><span class="p1"></span>${safeName1}<span class="p2"></span>${safeName2}</div></div><span class="official-result-axis-title-v1">得点</span>${makeOfficialResultChartSvgV1(progress)}<span class="official-result-axis-bottom-v1">イニング</span></section><div class="official-result-actions-v1"><button id="officialResultReturnGameV1" class="official-result-primary-v1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h12"/></svg>試合へ戻る</button><div class="official-result-secondary-row-v1"><button id="officialResultHomeV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3Z"/></svg>ホームへ戻る</button><button id="officialResultRematchV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7V3l-2 2a8 8 0 1 0 2 6M20 3h-4"/></svg>もう一度対戦する</button></div></div><p class="official-result-note-v1">※ 試合の詳細な分析や履歴は「履歴」画面からご確認いただけます。</p></div></section>`;
     if (winner === 0) {
@@ -25186,7 +25276,7 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .player-avatar-tabs-v2{display:flex;gap:8px;padding:10px 12px;border-bottom:1px solid #eee;overflow:auto}.player-avatar-tabs-v2 button{min-height:36px;padding:0 16px;border:0;border-radius:18px;background:#f1f1ef;color:#555;white-space:nowrap}.player-avatar-tabs-v2 button.is-selected{background:#171717;color:#fff}
 .player-avatar-groups-v2{min-height:0;padding:10px 12px;overflow:auto}.player-avatar-groups-v2 h3{margin:3px 0 10px;font-size:14px}.player-avatar-groups-v2 section>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 8px}
 .player-avatar-groups-v2 button{position:relative;display:flex;min-width:0;padding:0;border:2px solid transparent;background:transparent;align-items:center;flex-direction:column;gap:4px}.player-avatar-groups-v2 button.is-selected{border-color:#171717;border-radius:12px}.player-avatar-groups-v2 img{width:64px;height:64px;border-radius:50%;object-fit:cover}.player-avatar-groups-v2 span{width:100%;overflow:hidden;font-size:10px;text-overflow:ellipsis;white-space:nowrap}
-.player-avatar-groups-v2 [data-avatar-category-v3="male"] img{background:#edf5ff}.player-avatar-groups-v2 [data-avatar-category-v3="female"] img{background:#fff0f4}.player-avatar-groups-v2 [data-avatar-category-v3="neutral"] img{background:#edf8f1}.player-avatar-groups-v2 [data-avatar-category-v3="flower"] img{background:#fff4ee}
+.player-avatar-groups-v2 [data-avatar-category-v5="male"] img{background:#edf5ff}.player-avatar-groups-v2 [data-avatar-category-v5="female"] img{background:#fff0f4}.player-avatar-groups-v2 [data-avatar-category-v5="animal"] img{background:#edf8f1}.player-avatar-groups-v2 [data-avatar-category-v5="flower"] img{background:#fff4ee}.player-avatar-groups-v2 [data-avatar-category-v5="ball"] img{background:#f2f2ef;object-fit:contain}
 .player-avatar-chooser-v2 footer{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:10px 12px max(12px,env(safe-area-inset-bottom));border-top:1px solid #e6e6e2;background:#fff}.player-avatar-chooser-v2 footer button{min-height:48px;padding:4px;border:1px solid #c9c9c5;border-radius:10px;background:#fff;font-size:12px;font-weight:650}.player-avatar-chooser-v2 footer button.is-selected{border-color:#171717;background:#f1f1ef}.player-avatar-chooser-v2 footer button:last-child{border-color:#d7b879;background:#efd09b;color:#171717}
 .player-editor-confirm-v2{position:absolute;z-index:21;inset:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:#fff;color:#171717}.player-editor-confirm-v2.hidden{display:none!important}.player-editor-confirm-v2 header{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;min-height:58px;padding-top:env(safe-area-inset-top);border-bottom:1px solid #e6e6e2;text-align:center}.player-editor-confirm-v2 header button{height:44px;border:0;background:transparent;font-size:30px}.player-editor-confirm-body-v2{padding:22px 18px;overflow:auto}.player-editor-confirm-body-v2>img{display:block;width:150px;height:150px;margin:0 auto;border-radius:50%;object-fit:cover}.player-editor-confirm-body-v2>h2{margin:12px 0 30px;font-size:17px;text-align:center}.player-editor-confirm-body-v2 section{padding:0 0 18px;margin:0 0 18px;border-bottom:1px solid #e8e8e5}.player-editor-confirm-body-v2 small{display:block;margin-bottom:8px;color:#555;font-size:13px}.player-editor-confirm-body-v2 strong{font-size:19px}.player-editor-confirm-body-v2 p{margin:0;font-size:16px;line-height:1.6}.player-editor-confirm-v2 footer{display:grid;gap:9px;padding:12px 14px max(14px,env(safe-area-inset-bottom));background:#fff}.player-editor-confirm-v2 footer button{min-height:52px;border:1px solid #c9c9c5;border-radius:10px;background:#fff;font-size:16px;font-weight:700}.player-editor-confirm-v2 footer button:first-child{border-color:#171717;background:#171717;color:#fff}
 .player-management-formal-v1 .player-management-row-v1{grid-template-columns:58px minmax(0,1fr) 34px 18px;min-height:82px}

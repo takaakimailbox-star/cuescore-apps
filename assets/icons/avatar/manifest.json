@@ -1,11 +1,347 @@
 {
-  "version": 2,
+  "version": 3,
   "presets": [
     {
       "id": "default_silhouette",
       "category": "default",
-      "label": "01. シンプル（丸頭）",
+      "label": "シンプル",
       "src": "assets/icons/avatar/default/avatar_default_silhouette.png"
+    },
+    {
+      "id": "male_01",
+      "category": "male",
+      "label": "ショート",
+      "src": "assets/icons/avatar/male/avatar_male_01.png"
+    },
+    {
+      "id": "male_02",
+      "category": "male",
+      "label": "センターパート",
+      "src": "assets/icons/avatar/male/avatar_male_02.png"
+    },
+    {
+      "id": "male_03",
+      "category": "male",
+      "label": "マッシュ",
+      "src": "assets/icons/avatar/male/avatar_male_03.png"
+    },
+    {
+      "id": "male_04",
+      "category": "male",
+      "label": "ベリーショート",
+      "src": "assets/icons/avatar/male/avatar_male_04.png"
+    },
+    {
+      "id": "male_05",
+      "category": "male",
+      "label": "サイドパート",
+      "src": "assets/icons/avatar/male/avatar_male_05.png"
+    },
+    {
+      "id": "male_06",
+      "category": "male",
+      "label": "ミディアム",
+      "src": "assets/icons/avatar/male/avatar_male_06.png"
+    },
+    {
+      "id": "male_07",
+      "category": "male",
+      "label": "眼鏡",
+      "src": "assets/icons/avatar/male/avatar_male_07.png"
+    },
+    {
+      "id": "male_08",
+      "category": "male",
+      "label": "グレーヘア",
+      "src": "assets/icons/avatar/male/avatar_male_08.png"
+    },
+    {
+      "id": "male_09",
+      "category": "male",
+      "label": "ウェーブ",
+      "src": "assets/icons/avatar/male/avatar_male_09.png"
+    },
+    {
+      "id": "male_10",
+      "category": "male",
+      "label": "ひげ",
+      "src": "assets/icons/avatar/male/avatar_male_10.png"
+    },
+    {
+      "id": "female_01",
+      "category": "female",
+      "label": "ショート",
+      "src": "assets/icons/avatar/female/avatar_female_01.png"
+    },
+    {
+      "id": "female_02",
+      "category": "female",
+      "label": "ボブ",
+      "src": "assets/icons/avatar/female/avatar_female_02.png"
+    },
+    {
+      "id": "female_03",
+      "category": "female",
+      "label": "ロングウェーブ",
+      "src": "assets/icons/avatar/female/avatar_female_03.png"
+    },
+    {
+      "id": "female_04",
+      "category": "female",
+      "label": "ベリーショート",
+      "src": "assets/icons/avatar/female/avatar_female_04.png"
+    },
+    {
+      "id": "female_05",
+      "category": "female",
+      "label": "セミロング",
+      "src": "assets/icons/avatar/female/avatar_female_05.png"
+    },
+    {
+      "id": "female_06",
+      "category": "female",
+      "label": "ポニーテール",
+      "src": "assets/icons/avatar/female/avatar_female_06.png"
+    },
+    {
+      "id": "female_07",
+      "category": "female",
+      "label": "眼鏡",
+      "src": "assets/icons/avatar/female/avatar_female_07.png"
+    },
+    {
+      "id": "female_08",
+      "category": "female",
+      "label": "ショートレイヤー",
+      "src": "assets/icons/avatar/female/avatar_female_08.png"
+    },
+    {
+      "id": "female_09",
+      "category": "female",
+      "label": "三つ編み",
+      "src": "assets/icons/avatar/female/avatar_female_09.png"
+    },
+    {
+      "id": "female_10",
+      "category": "female",
+      "label": "まとめ髪",
+      "src": "assets/icons/avatar/female/avatar_female_10.png"
+    },
+    {
+      "id": "animal_01",
+      "category": "animal",
+      "label": "猫",
+      "src": "assets/icons/avatar/animal/avatar_animal_01.png"
+    },
+    {
+      "id": "animal_02",
+      "category": "animal",
+      "label": "柴犬",
+      "src": "assets/icons/avatar/animal/avatar_animal_02.png"
+    },
+    {
+      "id": "animal_03",
+      "category": "animal",
+      "label": "うさぎ",
+      "src": "assets/icons/avatar/animal/avatar_animal_03.png"
+    },
+    {
+      "id": "animal_04",
+      "category": "animal",
+      "label": "キツネ",
+      "src": "assets/icons/avatar/animal/avatar_animal_04.png"
+    },
+    {
+      "id": "animal_05",
+      "category": "animal",
+      "label": "パンダ",
+      "src": "assets/icons/avatar/animal/avatar_animal_05.png"
+    },
+    {
+      "id": "animal_06",
+      "category": "animal",
+      "label": "クマ",
+      "src": "assets/icons/avatar/animal/avatar_animal_06.png"
+    },
+    {
+      "id": "animal_07",
+      "category": "animal",
+      "label": "フクロウ",
+      "src": "assets/icons/avatar/animal/avatar_animal_07.png"
+    },
+    {
+      "id": "animal_08",
+      "category": "animal",
+      "label": "ペンギン",
+      "src": "assets/icons/avatar/animal/avatar_animal_08.png"
+    },
+    {
+      "id": "animal_09",
+      "category": "animal",
+      "label": "ライオン",
+      "src": "assets/icons/avatar/animal/avatar_animal_09.png"
+    },
+    {
+      "id": "animal_10",
+      "category": "animal",
+      "label": "コアラ",
+      "src": "assets/icons/avatar/animal/avatar_animal_10.png"
+    },
+    {
+      "id": "flower_01",
+      "category": "flower",
+      "label": "バラ",
+      "src": "assets/icons/avatar/flower/avatar_flower_01.png"
+    },
+    {
+      "id": "flower_02",
+      "category": "flower",
+      "label": "桜",
+      "src": "assets/icons/avatar/flower/avatar_flower_02.png"
+    },
+    {
+      "id": "flower_03",
+      "category": "flower",
+      "label": "ひまわり",
+      "src": "assets/icons/avatar/flower/avatar_flower_03.png"
+    },
+    {
+      "id": "flower_04",
+      "category": "flower",
+      "label": "チューリップ",
+      "src": "assets/icons/avatar/flower/avatar_flower_04.png"
+    },
+    {
+      "id": "flower_05",
+      "category": "flower",
+      "label": "ユリ",
+      "src": "assets/icons/avatar/flower/avatar_flower_05.png"
+    },
+    {
+      "id": "flower_06",
+      "category": "flower",
+      "label": "アジサイ",
+      "src": "assets/icons/avatar/flower/avatar_flower_06.png"
+    },
+    {
+      "id": "flower_07",
+      "category": "flower",
+      "label": "ハス",
+      "src": "assets/icons/avatar/flower/avatar_flower_07.png"
+    },
+    {
+      "id": "flower_08",
+      "category": "flower",
+      "label": "デイジー",
+      "src": "assets/icons/avatar/flower/avatar_flower_08.png"
+    },
+    {
+      "id": "flower_09",
+      "category": "flower",
+      "label": "ツバキ",
+      "src": "assets/icons/avatar/flower/avatar_flower_09.png"
+    },
+    {
+      "id": "flower_10",
+      "category": "flower",
+      "label": "ラベンダー",
+      "src": "assets/icons/avatar/flower/avatar_flower_10.png"
+    },
+    {
+      "id": "ball_cue",
+      "category": "ball",
+      "label": "手球",
+      "src": "assets/icons/avatar/ball/avatar_ball_cue.png"
+    },
+    {
+      "id": "ball_01",
+      "category": "ball",
+      "label": "1番ボール",
+      "src": "assets/icons/avatar/ball/avatar_ball_01.png"
+    },
+    {
+      "id": "ball_02",
+      "category": "ball",
+      "label": "2番ボール",
+      "src": "assets/icons/avatar/ball/avatar_ball_02.png"
+    },
+    {
+      "id": "ball_03",
+      "category": "ball",
+      "label": "3番ボール",
+      "src": "assets/icons/avatar/ball/avatar_ball_03.png"
+    },
+    {
+      "id": "ball_04",
+      "category": "ball",
+      "label": "4番ボール",
+      "src": "assets/icons/avatar/ball/avatar_ball_04.png"
+    },
+    {
+      "id": "ball_05",
+      "category": "ball",
+      "label": "5番ボール",
+      "src": "assets/icons/avatar/ball/avatar_ball_05.png"
+    },
+    {
+      "id": "ball_06",
+      "category": "ball",
+      "label": "6番ボール",
+      "src": "assets/icons/avatar/ball/avatar_ball_06.png"
+    },
+    {
+      "id": "ball_07",
+      "category": "ball",
+      "label": "7番ボール",
+      "src": "assets/icons/avatar/ball/avatar_ball_07.png"
+    },
+    {
+      "id": "ball_08",
+      "category": "ball",
+      "label": "8番ボール",
+      "src": "assets/icons/avatar/ball/avatar_ball_08.png"
+    },
+    {
+      "id": "ball_09",
+      "category": "ball",
+      "label": "9番ボール",
+      "src": "assets/icons/avatar/ball/avatar_ball_09.png"
+    },
+    {
+      "id": "ball_10",
+      "category": "ball",
+      "label": "10番ボール",
+      "src": "assets/icons/avatar/ball/avatar_ball_10.png"
+    },
+    {
+      "id": "ball_11",
+      "category": "ball",
+      "label": "11番ボール",
+      "src": "assets/icons/avatar/ball/avatar_ball_11.png"
+    },
+    {
+      "id": "ball_12",
+      "category": "ball",
+      "label": "12番ボール",
+      "src": "assets/icons/avatar/ball/avatar_ball_12.png"
+    },
+    {
+      "id": "ball_13",
+      "category": "ball",
+      "label": "13番ボール",
+      "src": "assets/icons/avatar/ball/avatar_ball_13.png"
+    },
+    {
+      "id": "ball_14",
+      "category": "ball",
+      "label": "14番ボール",
+      "src": "assets/icons/avatar/ball/avatar_ball_14.png"
+    },
+    {
+      "id": "ball_15",
+      "category": "ball",
+      "label": "15番ボール",
+      "src": "assets/icons/avatar/ball/avatar_ball_15.png"
     }
   ]
 }
