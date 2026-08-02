@@ -16037,10 +16037,10 @@ let matchRecordsRawCacheV152 = null;
       add.dataset.editorAction = "";
       add.classList.remove("delete-mode", "editor-hidden-action");
       add.disabled = false;
-      add.style.display = "block";
-      add.style.visibility = "visible";
-      add.style.pointerEvents = "auto";
-      add.style.opacity = "1";
+      add.style.setProperty("display", management ? "none" : "block", "important");
+      add.style.visibility = management ? "hidden" : "visible";
+      add.style.pointerEvents = management ? "none" : "auto";
+      add.style.opacity = management ? "0" : "1";
     };
 
     restoreAddButton();
@@ -24934,13 +24934,23 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   pointer-events:auto;
 }
 .player-management-formal-v1 .player-library-back svg{
-  width:25px;
-  height:25px;
+  width:30px;
+  height:30px;
   fill:none;
   stroke:currentColor;
-  stroke-width:2.4;
+  stroke-width:3.25;
   stroke-linecap:round;
   stroke-linejoin:round;
+}
+.player-management-formal-v1 .player-library-back svg path{
+  fill:none;
+  stroke:currentColor;
+  stroke-width:3.25;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.player-management-formal-v1 .player-library-add{
+  display:none!important;
 }
 .player-management-formal-v1 .player-library-main{
   padding-top:8px;
