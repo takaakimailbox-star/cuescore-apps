@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-home-player-cards-v2";
+const APP_VERSION = "1.0-avatar-expansion-v3";
 const CACHE_NAME = `cuescore-rotation-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
@@ -25,6 +25,8 @@ const APP_SHELL = [
   "./assets/icons/games/game-14-1.svg",
   "./assets/icons/games/game-jpa-9ball.svg",
   "./assets/icons/games/game-3cushion.svg",
+  "./assets/icons/avatar/manifest.json",
+  "./assets/icons/avatar/default/avatar_default_neutral.png",
   "./assets/avatars/person-male-short.webp",
   "./assets/avatars/person-male-natural.webp",
   "./assets/avatars/person-male-mash.webp",
@@ -61,9 +63,15 @@ const APP_SHELL = [
 ];
 
 self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL))
-  );
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    await cache.addAll(APP_SHELL);
+    const response = await fetch("./assets/icons/avatar/manifest.json", {cache:"no-store"});
+    if (!response.ok) throw new Error("Avatar manifest could not be loaded");
+    const manifest = await response.json();
+    const presetPaths = (manifest.presets || []).map(item => `./${item.src}`);
+    await cache.addAll(presetPaths);
+  })());
 });
 
 self.addEventListener("activate", event => {

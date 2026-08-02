@@ -8170,7 +8170,7 @@ body {
           <section class="player-block new-match-player-card-v1 player-a-v1" id="newMatchPlayerCard1V1" data-player-label="A">
             <div class="player-heading-row"><h2>先攻（ブレイク）</h2><button class="starter-choice selected" id="p1StarterBtn" type="button">先攻</button></div>
             <button class="new-match-player-select-v1" id="p1PlayerSearchBtn" type="button" aria-label="先攻プレーヤーを選択">
-              <span class="new-match-avatar-v1" aria-hidden="true">●</span>
+              <span class="new-match-avatar-v1 has-player-avatar-v2" aria-hidden="true"><img src="assets/icons/avatar/default/avatar_default_neutral.png" alt=""></span>
               <span class="new-match-player-name-v1" id="p1NameDisplayV1">プレイヤー 1</span>
               <span class="new-match-chevron-v1" aria-hidden="true">›</span>
             </button>
@@ -8189,7 +8189,7 @@ body {
               <strong class="visually-hidden-v2">入れ替え</strong>
             </button>
             <button class="new-match-player-select-v1" id="p2PlayerSearchBtn" type="button" aria-label="後攻プレーヤーを選択">
-              <span class="new-match-avatar-v1" aria-hidden="true">●</span>
+              <span class="new-match-avatar-v1 has-player-avatar-v2" aria-hidden="true"><img src="assets/icons/avatar/default/avatar_default_neutral.png" alt=""></span>
               <span class="new-match-player-name-v1" id="p2NameDisplayV1">プレイヤー 2</span>
               <span class="new-match-chevron-v1" aria-hidden="true">›</span>
             </button>
@@ -9761,35 +9761,60 @@ let matchRecordsRawCacheV152 = null;
 
   // ---- Registered player library (Phase 1) ----
   const PLAYER_LIBRARY_KEY = "rotationScoreboard.players.v1";
-  const PLAYER_AVATAR_IDS_V2 = Object.freeze([
+  const LEGACY_PLAYER_AVATAR_IDS_V2 = Object.freeze([
     "person-male-short","person-male-natural","person-male-mash","person-male-very-short","person-female-short","person-female-bob","person-female-long","person-female-very-short","person-female-medium",
     "animal-dog","animal-cat","animal-rabbit","animal-panda","animal-fox","animal-lion","animal-bear","animal-penguin",
     "ball-cue","ball-1","ball-2","ball-3","ball-4","ball-5","ball-6","ball-7","ball-8","ball-9","ball-10","ball-11","ball-12","ball-13","ball-14","ball-15"
   ]);
+  const EXPANDED_AVATAR_SLUGS_V3 = Object.freeze({
+    male:["shichisan","all_back","center_part_loose","up_bang","side_part","gel_set","wolf","soft_wolf","spiky_short","textured_short","flipped_short","casual_short","loose_perm","twist_perm","spiral_perm","messy_perm","curly_hair","very_short","fade_cut","two_block","pompadour","basic_short","natural_medium","long_layer","buzz","man_bun","crew_cut","short_mohawk","wet_short","fringe"],
+    female:["handsome_short","mash_short","short_layer","heavy_short","jaw_bob","blunt_bob","flipped_bob","mini_bob","medium_layer","loose_medium","one_curl","loose_wave","straight_long","layered_long","loose_curl_long","korean_long","ponytail","half_up","bun","braided","twin_tail","side_braid","baby_bang_short","see_through_medium","side_swept_bob","long_bang_wave","face_frame_bob","curl_silhouette_bob","asymmetric_bob","fluffy_bob"],
+    neutral:["natural_short","mash","center_part","short_layer","medium_layer","loose_wave","wolf","bangless_medium"],
+    flower:["sakura","rose","sunflower","tulip","lavender","gerbera","hibiscus","lily_of_the_valley"]
+  });
+  const EXPANDED_AVATAR_LABELS_V3 = Object.freeze({
+    male:["七三分け","オールバック","センターパート","アップバング","サイドパート","ジェルセット","ウルフ","ソフトウルフ","スパイキーショート","束感ショート","外ハネショート","カジュアルショート","ゆるパーマ","ツイスト風","スパイラル風","波巻き風","カーリーヘア","ベリーショート","フェードカット","ツーブロック","アメリカンショート","ベーシックショート","ナチュラルミディ","ロングレイヤー","ボウズ","マンバン","クルーカット","ショートモヒカン","ウェットショート","フリンジ"],
+    female:["ハンサムショート","マッシュショート","ショートレイヤー","重めショート","顎下ボブ","切りっぱなしボブ","外ハネボブ","ミニボブ","ミディアムレイヤー","くびれミディ","ワンカール","ゆるウェーブ","ストレートロング","レイヤーロング","ゆる巻きロング","韓国風ロング","ポニーテール","ハーフアップ","お団子","三つ編み","ツインテール","編み込み","ベビーバングショート","シースルーバングミディ","サイドバングボブ","ロングバングウェーブ","顔まわりレイヤーボブ","くびれシルエットボブ","アシンメトリーボブ","ふんわりボブ"],
+    neutral:["ナチュラルショート","マッシュ","センターパート","ショートレイヤー","ミディアムレイヤー","ゆるウェーブ","ウルフ","前髪なしミディアム"],
+    flower:["桜","バラ","ひまわり","チューリップ","ラベンダー","ガーベラ","ハイビスカス","スズラン"]
+  });
+  const EXPANDED_AVATAR_FOLDER_V3 = Object.freeze({male:"person_male",female:"person_female",neutral:"person_neutral",flower:"flower"});
+  const EXPANDED_AVATAR_PRESETS_V3 = Object.freeze(Object.entries(EXPANDED_AVATAR_SLUGS_V3).flatMap(([category,slugs]) => slugs.map((slug,index) => {
+    const number=String(index+1).padStart(2,"0");
+    const id=`${category}_${number}_${slug}`;
+    return {id,category,label:EXPANDED_AVATAR_LABELS_V3[category][index],src:`assets/icons/avatar/${EXPANDED_AVATAR_FOLDER_V3[category]}/avatar_${id}.png`};
+  })));
+  const EXPANDED_AVATAR_BY_ID_V3 = new Map(EXPANDED_AVATAR_PRESETS_V3.map(item=>[item.id,item]));
+  const PLAYER_AVATAR_IDS_V2 = Object.freeze(["default_neutral",...EXPANDED_AVATAR_PRESETS_V3.map(item=>item.id),...LEGACY_PLAYER_AVATAR_IDS_V2]);
   const PLAYER_AVATAR_LABELS_V2 = Object.freeze({
     "person-male-short":"男性ショート","person-male-natural":"男性ナチュラル","person-male-mash":"男性マッシュ","person-male-very-short":"男性ベリーショート","person-female-short":"女性ショート","person-female-bob":"女性ボブ","person-female-long":"女性ロング","person-female-very-short":"女性ベリーショート","person-female-medium":"女性セミロング",
     "animal-dog":"犬","animal-cat":"猫","animal-rabbit":"うさぎ","animal-panda":"パンダ","animal-fox":"キツネ","animal-lion":"ライオン","animal-bear":"クマ","animal-penguin":"ペンギン",
+    "default_neutral":"シンプル",...Object.fromEntries(EXPANDED_AVATAR_PRESETS_V3.map(item=>[item.id,item.label])),
     "ball-cue":"手玉",...Object.fromEntries(Array.from({length:15},(_,index)=>[`ball-${index+1}`,`${index+1}番`]))
   });
-  let playerEditorAvatarV2 = {type:"preset",id:"person-male-short"};
+  let playerEditorAvatarV2 = {type:"default",id:"default_neutral"};
   let playerEditorConfirmingV2 = false;
 
   function normalizePlayerAvatarV2(avatar) {
     if (avatar?.type === "photo" && typeof avatar.dataUrl === "string" && /^data:image\//.test(avatar.dataUrl)) {
       return {type:"photo",dataUrl:avatar.dataUrl};
     }
-    const id = PLAYER_AVATAR_IDS_V2.includes(avatar?.id) ? avatar.id : "person-male-short";
-    return {type:"preset",id};
+    if (avatar?.kind === "photo" && typeof avatar.photoUrl === "string" && /^data:image\//.test(avatar.photoUrl)) return {type:"photo",dataUrl:avatar.photoUrl};
+    const requestedId = avatar?.id || avatar?.avatarId;
+    const id = PLAYER_AVATAR_IDS_V2.includes(requestedId) ? requestedId : "default_neutral";
+    return {type:id === "default_neutral" ? "default" : "preset",id};
   }
 
   function playerAvatarSourceV2(playerOrAvatar) {
     const avatar = normalizePlayerAvatarV2(playerOrAvatar?.avatar || playerOrAvatar);
-    return avatar.type === "photo" ? avatar.dataUrl : `assets/avatars/${avatar.id}.webp`;
+    if (avatar.type === "photo") return avatar.dataUrl;
+    if (avatar.id === "default_neutral") return "assets/icons/avatar/default/avatar_default_neutral.png";
+    return EXPANDED_AVATAR_BY_ID_V3.get(avatar.id)?.src || `assets/avatars/${avatar.id}.webp`;
   }
 
   function playerAvatarHtmlV2(player, className="player-avatar-v2") {
     const label = PLAYER_AVATAR_LABELS_V2[normalizePlayerAvatarV2(player?.avatar).id] || "プロフィール画像";
-    return `<img class="${className}" src="${playerAvatarSourceV2(player)}" alt="${escapeRecordText(label)}" loading="lazy" decoding="async">`;
+    return `<img class="${className}" src="${playerAvatarSourceV2(player)}" alt="${escapeRecordText(label)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='assets/icons/avatar/default/avatar_default_neutral.png'">`;
   }
   let playerLibraryTarget = 1;
   let editingPlayerId = null;
@@ -9879,7 +9904,7 @@ let matchRecordsRawCacheV152 = null;
             <div class="player-library-name"></div>
             ${status}
           </div>
-          <div class="player-library-meta">Race to ${p.race}　最終使用 ${formatLastUsed(p.lastUsed)}</div>
+          <div class="player-library-meta">最終使用 ${formatLastUsed(p.lastUsed)}</div>
         </button>
         <div class="player-library-actions">
           <button class="player-library-stats" type="button" data-stats-player="${p.id}">成績</button>
@@ -10814,7 +10839,6 @@ let matchRecordsRawCacheV152 = null;
     el("playerStatsBody").innerHTML = `
       <div class="player-stats-name-row">
         <div class="player-stats-name">${escapeRecordText(player.name)}</div>
-        <div class="player-stats-race-inline">Race to ${Number(player.race)||0}</div>
       </div>
 
       <div class="player-stats-filter" role="group" aria-label="集計期間">
@@ -11208,7 +11232,7 @@ let matchRecordsRawCacheV152 = null;
     const preview = el("playerEditorAvatarPreviewV2");
     if (!preview) return;
     preview.classList.remove("player-avatar-default-v2");
-    preview.innerHTML = `<img src="${playerAvatarSourceV2(playerEditorAvatarV2)}" alt="">`;
+    preview.innerHTML = `<img src="${playerAvatarSourceV2(playerEditorAvatarV2)}" alt="" onerror="this.onerror=null;this.src='assets/icons/avatar/default/avatar_default_neutral.png'">`;
   }
 
   function updatePlayerEditorMemoCountV2() {
@@ -11239,8 +11263,9 @@ let matchRecordsRawCacheV152 = null;
     const avatar = document.querySelector(`#newMatchPlayerCard${slot}V1 .new-match-avatar-v1`);
     const selected = player || readPlayerLibrary().find(item => item.id === selectedRegisteredPlayer[slot]);
     if (!avatar) return;
-    avatar.innerHTML = selected ? `<img src="${playerAvatarSourceV2(selected)}" alt="">` : "";
-    avatar.classList.toggle("has-player-avatar-v2", Boolean(selected));
+    const source = playerAvatarSourceV2(selected?.avatar || {type:"default",id:"default_neutral"});
+    avatar.innerHTML = `<img src="${source}" alt="" onerror="this.onerror=null;this.src='assets/icons/avatar/default/avatar_default_neutral.png'">`;
+    avatar.classList.add("has-player-avatar-v2");
   }
 
   async function compressPlayerPhotoV2(file) {
@@ -11264,15 +11289,19 @@ let matchRecordsRawCacheV152 = null;
     chooser.id = "playerAvatarChooserV2";
     chooser.className = "player-avatar-chooser-v2 hidden";
     chooser.setAttribute("role","dialog"); chooser.setAttribute("aria-modal","true"); chooser.setAttribute("aria-label","プロフィール画像を選択");
+    const idsFor = category => EXPANDED_AVATAR_PRESETS_V3.filter(item=>item.category===category).map(item=>item.id);
     const groups = [
-      ["人物",PLAYER_AVATAR_IDS_V2.slice(0,9)],
-      ["動物",PLAYER_AVATAR_IDS_V2.slice(9,17)],
-      ["ビリヤード",PLAYER_AVATAR_IDS_V2.slice(17)]
+      ["男性",idsFor("male"),"male"], ["女性",idsFor("female"),"female"], ["中性的",idsFor("neutral"),"neutral"], ["花",idsFor("flower"),"flower"],
+      ["既存人物",LEGACY_PLAYER_AVATAR_IDS_V2.slice(0,9),"legacy"], ["動物",LEGACY_PLAYER_AVATAR_IDS_V2.slice(9,17),"animal"], ["ビリヤード",LEGACY_PLAYER_AVATAR_IDS_V2.slice(17),"ball"]
     ];
-    chooser.innerHTML = `<header><button type="button" data-avatar-close-v2 aria-label="戻る">‹</button><strong>プロフィール画像を選択</strong><span></span></header><div class="player-avatar-tabs-v2"><button class="is-selected" type="button" data-avatar-tab-v2="0">人物</button><button type="button" data-avatar-tab-v2="1">動物</button><button type="button" data-avatar-tab-v2="2">ビリヤード</button></div><div class="player-avatar-groups-v2">${groups.map(([label,ids],index)=>`<section data-avatar-group-v2="${index}" ${index ? "hidden" : ""}><h3>${label}（${ids.length}種類）</h3><div>${ids.map(id=>`<button type="button" data-avatar-id-v2="${id}" aria-label="${PLAYER_AVATAR_LABELS_V2[id]}"><img src="assets/avatars/${id}.webp" alt=""><span>${PLAYER_AVATAR_LABELS_V2[id]}</span></button>`).join("")}</div></section>`).join("")}</div><footer><button type="button" data-avatar-photo-v2>写真ライブラリから選ぶ</button><button type="button" data-avatar-apply-v2>この画像に決定</button></footer>`;
+    const imageFor = id => playerAvatarSourceV2({type:"preset",id});
+    chooser.innerHTML = `<header><button type="button" data-avatar-close-v2 aria-label="戻る">‹</button><strong>プロフィール画像を選択</strong><span></span></header><div class="player-avatar-tabs-v2">${groups.map(([label],index)=>`<button class="${index ? "" : "is-selected"}" type="button" data-avatar-tab-v2="${index}">${label}</button>`).join("")}</div><div class="player-avatar-groups-v2">${groups.map(([label,ids,category],index)=>`<section data-avatar-group-v2="${index}" data-avatar-category-v3="${category}" ${index ? "hidden" : ""}><h3>${label}（${ids.length}種類）</h3><div>${ids.map(id=>`<button type="button" data-avatar-id-v2="${id}" aria-label="${PLAYER_AVATAR_LABELS_V2[id]}"><img src="${imageFor(id)}" alt="" loading="lazy" onerror="this.onerror=null;this.src='assets/icons/avatar/default/avatar_default_neutral.png'"><span>${PLAYER_AVATAR_LABELS_V2[id]}</span></button>`).join("")}</div></section>`).join("")}</div><footer><button type="button" data-avatar-default-v3>未設定に戻す</button><button type="button" data-avatar-photo-v2>写真から選ぶ</button><button type="button" data-avatar-apply-v2>この画像に決定</button></footer>`;
     el("playerEditor")?.appendChild(chooser);
     let pending = normalizePlayerAvatarV2(playerEditorAvatarV2);
-    const renderPending = () => chooser.querySelectorAll("[data-avatar-id-v2]").forEach(button=>button.classList.toggle("is-selected",pending.type === "preset" && button.dataset.avatarIdV2 === pending.id));
+    const renderPending = () => {
+      chooser.querySelectorAll("[data-avatar-id-v2]").forEach(button=>button.classList.toggle("is-selected",pending.type === "preset" && button.dataset.avatarIdV2 === pending.id));
+      chooser.querySelector("[data-avatar-default-v3]")?.classList.toggle("is-selected",pending.id === "default_neutral");
+    };
     chooser.addEventListener("click", event => {
       const avatar = event.target.closest("[data-avatar-id-v2]");
       const tab = event.target.closest("[data-avatar-tab-v2]");
@@ -11283,6 +11312,7 @@ let matchRecordsRawCacheV152 = null;
       }
       if (event.target.closest("[data-avatar-close-v2]")) chooser.classList.add("hidden");
       if (event.target.closest("[data-avatar-photo-v2]")) el("playerEditorPhotoInputV2")?.click();
+      if (event.target.closest("[data-avatar-default-v3]")) { pending={type:"default",id:"default_neutral"}; renderPending(); }
       if (event.target.closest("[data-avatar-apply-v2]")) { playerEditorAvatarV2=pending; updatePlayerEditorAvatarPreviewV2(); chooser.classList.add("hidden"); }
     });
     chooser.openV2 = () => { pending=normalizePlayerAvatarV2(playerEditorAvatarV2); renderPending(); chooser.classList.remove("hidden"); };
@@ -25253,7 +25283,8 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .player-avatar-tabs-v2{display:flex;gap:8px;padding:10px 12px;border-bottom:1px solid #eee;overflow:auto}.player-avatar-tabs-v2 button{min-height:36px;padding:0 16px;border:0;border-radius:18px;background:#f1f1ef;color:#555;white-space:nowrap}.player-avatar-tabs-v2 button.is-selected{background:#171717;color:#fff}
 .player-avatar-groups-v2{min-height:0;padding:10px 12px;overflow:auto}.player-avatar-groups-v2 h3{margin:3px 0 10px;font-size:14px}.player-avatar-groups-v2 section>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 8px}
 .player-avatar-groups-v2 button{position:relative;display:flex;min-width:0;padding:0;border:2px solid transparent;background:transparent;align-items:center;flex-direction:column;gap:4px}.player-avatar-groups-v2 button.is-selected{border-color:#171717;border-radius:12px}.player-avatar-groups-v2 img{width:64px;height:64px;border-radius:50%;object-fit:cover}.player-avatar-groups-v2 span{width:100%;overflow:hidden;font-size:10px;text-overflow:ellipsis;white-space:nowrap}
-.player-avatar-chooser-v2 footer{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:10px 12px max(12px,env(safe-area-inset-bottom));border-top:1px solid #e6e6e2;background:#fff}.player-avatar-chooser-v2 footer button{min-height:48px;border:1px solid #c9c9c5;border-radius:10px;background:#fff;font-weight:650}.player-avatar-chooser-v2 footer button:last-child{border-color:#d7b879;background:#efd09b;color:#171717}
+.player-avatar-groups-v2 [data-avatar-category-v3="male"] img{background:#edf5ff}.player-avatar-groups-v2 [data-avatar-category-v3="female"] img{background:#fff0f4}.player-avatar-groups-v2 [data-avatar-category-v3="neutral"] img{background:#edf8f1}.player-avatar-groups-v2 [data-avatar-category-v3="flower"] img{background:#fff4ee}
+.player-avatar-chooser-v2 footer{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:10px 12px max(12px,env(safe-area-inset-bottom));border-top:1px solid #e6e6e2;background:#fff}.player-avatar-chooser-v2 footer button{min-height:48px;padding:4px;border:1px solid #c9c9c5;border-radius:10px;background:#fff;font-size:12px;font-weight:650}.player-avatar-chooser-v2 footer button.is-selected{border-color:#171717;background:#f1f1ef}.player-avatar-chooser-v2 footer button:last-child{border-color:#d7b879;background:#efd09b;color:#171717}
 .player-editor-confirm-v2{position:absolute;z-index:21;inset:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:#fff;color:#171717}.player-editor-confirm-v2.hidden{display:none!important}.player-editor-confirm-v2 header{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;min-height:58px;padding-top:env(safe-area-inset-top);border-bottom:1px solid #e6e6e2;text-align:center}.player-editor-confirm-v2 header button{height:44px;border:0;background:transparent;font-size:30px}.player-editor-confirm-body-v2{padding:22px 18px;overflow:auto}.player-editor-confirm-body-v2>img{display:block;width:150px;height:150px;margin:0 auto;border-radius:50%;object-fit:cover}.player-editor-confirm-body-v2>h2{margin:12px 0 30px;font-size:17px;text-align:center}.player-editor-confirm-body-v2 section{padding:0 0 18px;margin:0 0 18px;border-bottom:1px solid #e8e8e5}.player-editor-confirm-body-v2 small{display:block;margin-bottom:8px;color:#555;font-size:13px}.player-editor-confirm-body-v2 strong{font-size:19px}.player-editor-confirm-body-v2 p{margin:0;font-size:16px;line-height:1.6}.player-editor-confirm-v2 footer{display:grid;gap:9px;padding:12px 14px max(14px,env(safe-area-inset-bottom));background:#fff}.player-editor-confirm-v2 footer button{min-height:52px;border:1px solid #c9c9c5;border-radius:10px;background:#fff;font-size:16px;font-weight:700}.player-editor-confirm-v2 footer button:first-child{border-color:#171717;background:#171717;color:#fff}
 .player-management-formal-v1 .player-management-row-v1{grid-template-columns:58px minmax(0,1fr) 34px 18px;min-height:82px}
 .player-management-formal-v1 .player-management-avatar-v1{width:56px;height:56px}.player-management-formal-v1 .player-management-copy-v2{display:flex;min-width:0;flex-direction:column;gap:3px}.player-management-formal-v1 .player-management-memo-v2{display:-webkit-box;overflow:hidden;color:#555;font-size:12px;line-height:1.35;-webkit-box-orient:vertical;-webkit-line-clamp:2}.player-management-formal-v1 .player-management-menu-v2{font-size:17px;letter-spacing:2px;text-align:center}
