@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Rotation">
+  <circle cx="50" cy="50" r="43" fill="#fff" stroke="#9A3F0A" stroke-width="5"/>
+  <text x="50" y="64" text-anchor="middle" fill="#111" font-family="-apple-system,BlinkMacSystemFont,Arial,sans-serif" font-size="44" font-weight="800">R</text>
+</svg>

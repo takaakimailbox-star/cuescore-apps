@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="10-Ball">
+  <circle cx="50" cy="50" r="43" fill="#fff" stroke="#0057B8" stroke-width="5"/>
+  <path d="M13 50h12M75 50h12" stroke="#0057B8" stroke-width="6"/>
+  <text x="50" y="62" text-anchor="middle" fill="#111" font-family="-apple-system,BlinkMacSystemFont,Arial,sans-serif" font-size="35" font-weight="800">10</text>
+</svg>

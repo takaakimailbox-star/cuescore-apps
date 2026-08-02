@@ -8099,29 +8099,29 @@ body {
       </div>
 
       <div class="cue-discipline-switcher-v1" id="cueDisciplineSwitcherV1" role="tablist" aria-label="ゲーム種目">
-        <button class="cue-discipline-v1 is-selected" type="button" role="tab" aria-selected="true" data-discipline="rotation">
-          <span class="cue-ball-icon-v1" aria-hidden="true">15</span>
-          <span class="cue-discipline-label-v1">Rotation</span>
+        <button class="cue-discipline-v1 is-selected" type="button" role="tab" aria-label="Rotation ローテーション" aria-selected="true" aria-pressed="true" data-discipline="rotation">
+          <img class="cue-game-icon-v1" src="assets/icons/games/game-rotation.svg" alt="" aria-hidden="true" />
+          <span class="cue-discipline-label-v1"><strong>Rotation</strong><small>ローテーション</small></span>
         </button>
-        <button class="cue-discipline-v1" type="button" role="tab" aria-selected="false" data-discipline="9ball">
-          <span class="cue-ball-icon-v1" aria-hidden="true">9</span>
-          <span class="cue-discipline-label-v1">9-Ball</span>
+        <button class="cue-discipline-v1" type="button" role="tab" aria-label="9-Ball 9ボール" aria-selected="false" aria-pressed="false" data-discipline="9ball">
+          <img class="cue-game-icon-v1" src="assets/icons/games/game-9ball.svg" alt="" aria-hidden="true" />
+          <span class="cue-discipline-label-v1"><strong>9-Ball</strong><small>9ボール</small></span>
         </button>
-        <button class="cue-discipline-v1" type="button" role="tab" aria-selected="false" data-discipline="10ball">
-          <span class="cue-ball-icon-v1" aria-hidden="true">10</span>
-          <span class="cue-discipline-label-v1">10-Ball</span>
+        <button class="cue-discipline-v1" type="button" role="tab" aria-label="10-Ball 10ボール" aria-selected="false" aria-pressed="false" data-discipline="10ball">
+          <img class="cue-game-icon-v1" src="assets/icons/games/game-10ball.svg" alt="" aria-hidden="true" />
+          <span class="cue-discipline-label-v1"><strong>10-Ball</strong><small>10ボール</small></span>
         </button>
-        <button class="cue-discipline-v1" type="button" role="tab" aria-selected="false" data-discipline="straightPool">
-          <span class="cue-ball-icon-v1" aria-hidden="true">14.1</span>
-          <span class="cue-discipline-label-v1">14-1</span>
+        <button class="cue-discipline-v1" type="button" role="tab" aria-label="14-1" aria-selected="false" aria-pressed="false" data-discipline="straightPool">
+          <img class="cue-game-icon-v1" src="assets/icons/games/game-14-1.svg" alt="" aria-hidden="true" />
+          <span class="cue-discipline-label-v1"><strong>14-1</strong><small>14-1</small></span>
         </button>
-        <button class="cue-discipline-v1" type="button" role="tab" aria-selected="false" data-discipline="jpa9">
-          <span class="cue-ball-icon-v1" aria-hidden="true">JPA</span>
-          <span class="cue-discipline-label-v1">JPA 9-Ball</span>
+        <button class="cue-discipline-v1" type="button" role="tab" aria-label="JPA 9-Ball JPA 9ボール" aria-selected="false" aria-pressed="false" data-discipline="jpa9">
+          <img class="cue-game-icon-v1" src="assets/icons/games/game-jpa-9ball.svg" alt="" aria-hidden="true" />
+          <span class="cue-discipline-label-v1"><strong>JPA 9-Ball</strong><small>JPA 9ボール</small></span>
         </button>
-        <button class="cue-discipline-v1" type="button" role="tab" aria-selected="false" data-discipline="threeCushion">
-          <span class="cue-ball-icon-v1 cue-carom-icon-v1" aria-hidden="true">3C</span>
-          <span class="cue-discipline-label-v1">3 Cushion</span>
+        <button class="cue-discipline-v1" type="button" role="tab" aria-label="3 Cushion 3クッション" aria-selected="false" aria-pressed="false" data-discipline="threeCushion">
+          <img class="cue-game-icon-v1" src="assets/icons/games/game-3cushion.svg" alt="" aria-hidden="true" />
+          <span class="cue-discipline-label-v1"><strong>3 Cushion</strong><small>3クッション</small></span>
         </button>
       </div>
 
@@ -8129,7 +8129,7 @@ body {
         <div class="cue-new-match-summary-v2">
           <p class="cue-home-eyebrow-v1" id="cueNewMatchTitleV1">New Match</p>
           <div class="cue-selected-game-v1">
-            <span class="cue-ball-icon-v1" id="cueSelectedGameIconV1" aria-hidden="true">15</span>
+            <img class="cue-selected-game-icon-v1" id="cueSelectedGameIconV1" src="assets/icons/games/game-rotation.svg" alt="" aria-hidden="true" />
             <strong class="cue-selected-game-name-v1" id="cueSelectedGameNameV1">Rotation</strong>
           </div>
         </div>
@@ -8218,30 +8218,20 @@ body {
       </section>
 
       <nav class="cue-bottom-nav-v1" aria-label="メインナビゲーション">
-        <button class="is-current" type="button" aria-current="page">
-          <span class="cue-nav-icon-v1" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.25A1.25 1.25 0 0 1 18.75 20H5.25A1.25 1.25 0 0 1 4 18.75Z"/><path d="M9.25 20v-6.5h5.5V20"/></svg>
-          </span><span>Home</span>
+        <button class="is-current" type="button" aria-label="ホーム" aria-current="page">
+          <span class="cue-nav-icon-v1 cue-nav-glyph-v1 nav-home-v1" aria-hidden="true"></span><span>ホーム</span>
         </button>
-        <button id="playerManagementBtn" type="button">
-          <span class="cue-nav-icon-v1" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25"/><path d="M5.5 20c.55-4.15 2.7-6.25 6.5-6.25s5.95 2.1 6.5 6.25"/></svg>
-          </span><span>Player</span>
+        <button id="playerManagementBtn" type="button" aria-label="プレーヤー">
+          <span class="cue-nav-icon-v1 cue-nav-glyph-v1 nav-player-v1" aria-hidden="true"></span><span>プレーヤー</span>
         </button>
-        <button id="recordsBtn" type="button">
-          <span class="cue-nav-icon-v1" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M5.25 7.5A8 8 0 1 1 4 12"/><path d="M5.25 3.75V7.5H9"/><path d="M12 7.75V12l3 1.75"/></svg>
-          </span><span>History</span>
+        <button id="recordsBtn" type="button" aria-label="履歴">
+          <span class="cue-nav-icon-v1 cue-nav-glyph-v1 nav-history-v1" aria-hidden="true"></span><span>履歴</span>
         </button>
-        <button id="openRankingsBtn" type="button">
-          <span class="cue-nav-icon-v1" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M4.5 19.5V14h3v5.5M10.5 19.5V9h3v10.5M16.5 19.5V4.5h3v15"/><path d="M3 19.5h18"/></svg>
-          </span><span>Analytics</span>
+        <button id="openRankingsBtn" type="button" aria-label="分析">
+          <span class="cue-nav-icon-v1 cue-nav-glyph-v1 nav-analytics-v1" aria-hidden="true"></span><span>分析</span>
         </button>
-        <button id="settingsBtn" type="button">
-          <span class="cue-nav-icon-v1" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.2 13.6a7.8 7.8 0 0 0 0-3.2l2-1.55-2-3.45-2.5 1a8 8 0 0 0-2.75-1.6L13.6 2h-4l-.35 2.8A8 8 0 0 0 6.5 6.4L4 5.4 2 8.85l2 1.55a7.8 7.8 0 0 0 0 3.2l-2 1.55 2 3.45 2.5-1a8 8 0 0 0 2.75 1.6L9.6 22h4l.35-2.8a8 8 0 0 0 2.75-1.6l2.5 1 2-3.45Z"/></svg>
-          </span><span>Settings</span>
+        <button id="settingsBtn" type="button" aria-label="設定">
+          <span class="cue-nav-icon-v1 cue-nav-glyph-v1 nav-settings-v1" aria-hidden="true"></span><span>設定</span>
         </button>
       </nav>
 
@@ -9085,12 +9075,12 @@ body {
     const JPA_SKILL_KEY = "cueScore.jpa9.skillLevels.v1";
     const CAROM_SETTINGS_KEY = "cueScore.threeCushion.settings.v1";
     const disciplines = {
-      rotation: { name: "Rotation", icon: "15", rule: "設定項目はありません" },
-      "9ball": { name: "9-Ball", icon: "9", rule: "ラック制" },
-      "10ball": { name: "10-Ball", icon: "10", rule: "ラック制" },
-      straightPool: { name: "14-1", icon: "14.1", rule: "連続得点" },
-      jpa9: { name: "JPA 9-Ball", icon: "JPA", rule: "SL別目標点" },
-      threeCushion: { name: "3 Cushion", icon: "3C", rule: "持ち点制" }
+      rotation: { name: "Rotation", icon: "R", asset: "assets/icons/games/game-rotation.svg", rule: "設定項目はありません" },
+      "9ball": { name: "9-Ball", icon: "-9-", asset: "assets/icons/games/game-9ball.svg", rule: "ラック制" },
+      "10ball": { name: "10-Ball", icon: "-10-", asset: "assets/icons/games/game-10ball.svg", rule: "ラック制" },
+      straightPool: { name: "14-1", icon: "14-1", asset: "assets/icons/games/game-14-1.svg", rule: "連続得点" },
+      jpa9: { name: "JPA 9-Ball", icon: "JPA 9", asset: "assets/icons/games/game-jpa-9ball.svg", rule: "SL別目標点" },
+      threeCushion: { name: "3 Cushion", icon: "3C", asset: "assets/icons/games/game-3cushion.svg", rule: "持ち点制" }
     };
 
     const safeRead = (key, fallback) => {
@@ -9130,9 +9120,11 @@ body {
         const active = button.dataset.discipline === selectedDiscipline;
         button.classList.toggle("is-selected", active);
         button.setAttribute("aria-selected", String(active));
+        button.setAttribute("aria-pressed", String(active));
       });
       document.getElementById("cueSelectedGameNameV1").textContent = selected.name;
-      document.getElementById("cueSelectedGameIconV1").textContent = selected.icon;
+      const selectedGameIcon = document.getElementById("cueSelectedGameIconV1");
+      if (selectedGameIcon) selectedGameIcon.src = selected.asset;
       const breakRule = document.getElementById("cueBreakRuleV2");
       const shootout = document.getElementById("cueShootoutRuleV2");
       const rackSettings = nineBallMode ? nineSettingsValue : tenBallMode ? tenSettingsValue : null;
@@ -24975,6 +24967,113 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .cue-sheet-decision-grid-v1 button{min-height:42px;border:1px solid #d9d9d6;border-radius:12px;background:#fff;color:#222;font-weight:750}
 .cue-sheet-decision-grid-v1 button:first-child{background:#171717;color:#fff}
 @media(max-width:390px){.cue-sheet-v1{padding-left:15px;padding-right:15px}.cue-discipline-label-v1{font-size:10px!important}}
+
+/* CueScore Home Screen Icons v1.0 */
+.cue-discipline-switcher-v1{
+  display:grid!important;
+  grid-template-columns:none!important;
+  grid-auto-flow:column;
+  grid-auto-columns:68px;
+  justify-content:start;
+  gap:2px!important;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:0 0 4px!important;
+  scroll-snap-type:x proximity;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+.cue-discipline-switcher-v1::-webkit-scrollbar{display:none}
+.cue-discipline-v1{
+  --game-accent:#171717;
+  min-width:68px!important;
+  min-height:82px!important;
+  padding:4px 1px 5px!important;
+  gap:4px!important;
+  scroll-snap-align:start;
+  color:#9b9b98!important;
+}
+.cue-discipline-v1[data-discipline="rotation"]{--game-accent:#9a3f0a}
+.cue-discipline-v1[data-discipline="9ball"]{--game-accent:#f4b400}
+.cue-discipline-v1[data-discipline="10ball"]{--game-accent:#0057b8}
+.cue-discipline-v1[data-discipline="straightPool"]{--game-accent:#0a7d2c}
+.cue-discipline-v1[data-discipline="jpa9"]{--game-accent:#f4b400}
+.cue-discipline-v1[data-discipline="threeCushion"]{--game-accent:#8e8e8e}
+.cue-game-icon-v1{
+  display:block;
+  width:40px;
+  height:40px;
+  margin:0 auto;
+  border-radius:50%;
+  transition:outline-color .16s ease,background-color .16s ease;
+}
+.cue-discipline-label-v1{
+  display:block!important;
+  min-height:28px;
+  color:inherit!important;
+  font-size:10px!important;
+  line-height:1.15!important;
+  letter-spacing:0!important;
+  white-space:nowrap;
+}
+.cue-discipline-label-v1 strong,.cue-discipline-label-v1 small{display:block}
+.cue-discipline-label-v1 strong{font-size:10px;font-weight:630}
+.cue-discipline-label-v1 small{margin-top:2px;font-size:8px;font-weight:520}
+.cue-discipline-v1.is-selected{color:#171717!important}
+.cue-discipline-v1.is-selected .cue-game-icon-v1{
+  outline:1px solid var(--game-accent);
+  outline-offset:-2px;
+  background:color-mix(in srgb,var(--game-accent) 4%,#fff);
+}
+.cue-discipline-v1.is-selected .cue-discipline-label-v1 strong{font-weight:760}
+.cue-discipline-v1.is-selected::after{
+  width:24px!important;
+  height:3px!important;
+  bottom:0!important;
+  background:#171717!important;
+}
+.cue-selected-game-icon-v1{
+  display:block;
+  width:48px;
+  height:48px;
+  flex:0 0 48px;
+  border-radius:50%;
+}
+.cue-bottom-nav-v1 button{
+  min-height:60px!important;
+  gap:3px!important;
+  color:#a0a09d!important;
+  font-size:10px!important;
+  font-weight:560!important;
+}
+.cue-bottom-nav-v1 button.is-current{color:#171717!important;font-weight:760!important}
+.cue-nav-glyph-v1{
+  display:block;
+  width:25px;
+  height:25px;
+  background:currentColor;
+  -webkit-mask-position:center;
+  mask-position:center;
+  -webkit-mask-repeat:no-repeat;
+  mask-repeat:no-repeat;
+  -webkit-mask-size:contain;
+  mask-size:contain;
+}
+.nav-home-v1{-webkit-mask-image:url("assets/icons/navigation/nav-home.svg");mask-image:url("assets/icons/navigation/nav-home.svg")}
+.nav-player-v1{-webkit-mask-image:url("assets/icons/navigation/nav-player.svg");mask-image:url("assets/icons/navigation/nav-player.svg")}
+.nav-history-v1{-webkit-mask-image:url("assets/icons/navigation/nav-history.svg");mask-image:url("assets/icons/navigation/nav-history.svg")}
+.nav-analytics-v1{-webkit-mask-image:url("assets/icons/navigation/nav-analytics.svg");mask-image:url("assets/icons/navigation/nav-analytics.svg")}
+.nav-settings-v1{-webkit-mask-image:url("assets/icons/navigation/nav-settings.svg");mask-image:url("assets/icons/navigation/nav-settings.svg")}
+@media(max-width:390px){
+  .cue-discipline-switcher-v1{grid-auto-columns:64px;gap:0!important}
+  .cue-discipline-v1{min-width:64px!important}
+  .cue-game-icon-v1{width:38px;height:38px}
+}
+@media(max-height:860px){
+  .cue-discipline-v1{min-height:74px!important}
+  .cue-game-icon-v1{width:35px;height:35px}
+  .cue-discipline-label-v1 small{display:none}
+}
 </style>
 </body>
 </html>
