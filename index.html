@@ -9946,15 +9946,18 @@ let matchRecordsRawCacheV152 = null;
   function recordsForRegisteredPlayer(player) {
     if (!player) return [];
     const normalizedName = String(player.name || "").trim().toLocaleLowerCase("ja");
+    const knownPlayerIds = new Set(readPlayerLibrary().map(item => String(item.id || "")));
+    const matchesPlayer = side => {
+      const registeredId = String(side?.registeredPlayerId || "");
+      if (registeredId === String(player.id)) return true;
+      const orphanedOrLegacyId = !registeredId || !knownPlayerIds.has(registeredId);
+      return orphanedOrLegacyId
+        && String(side?.name || "").trim().toLocaleLowerCase("ja") === normalizedName;
+    };
     return readMatchRecords().filter(record => {
       const p1 = record.players?.[1] || {};
       const p2 = record.players?.[2] || {};
-      const idMatch = p1.registeredPlayerId === player.id || p2.registeredPlayerId === player.id;
-      if (idMatch) return true;
-      // Older records may not have a registeredPlayerId. Only use name fallback when no id was saved.
-      const p1Fallback = !p1.registeredPlayerId && String(p1.name || "").trim().toLocaleLowerCase("ja") === normalizedName;
-      const p2Fallback = !p2.registeredPlayerId && String(p2.name || "").trim().toLocaleLowerCase("ja") === normalizedName;
-      return p1Fallback || p2Fallback;
+      return matchesPlayer(p1) || matchesPlayer(p2);
     }).sort((a,b) => new Date(b.endedAt || b.playedAt) - new Date(a.endedAt || a.playedAt));
   }
 
@@ -9964,8 +9967,14 @@ let matchRecordsRawCacheV152 = null;
     if (p1.registeredPlayerId === player.id) return 1;
     if (p2.registeredPlayerId === player.id) return 2;
     const name = String(player.name || "").trim().toLocaleLowerCase("ja");
-    if (!p1.registeredPlayerId && String(p1.name || "").trim().toLocaleLowerCase("ja") === name) return 1;
-    if (!p2.registeredPlayerId && String(p2.name || "").trim().toLocaleLowerCase("ja") === name) return 2;
+    const knownPlayerIds = new Set(readPlayerLibrary().map(item => String(item.id || "")));
+    const isLegacyNameMatch = side => {
+      const registeredId = String(side?.registeredPlayerId || "");
+      return (!registeredId || !knownPlayerIds.has(registeredId))
+        && String(side?.name || "").trim().toLocaleLowerCase("ja") === name;
+    };
+    if (isLegacyNameMatch(p1)) return 1;
+    if (isLegacyNameMatch(p2)) return 2;
     return null;
   }
 
@@ -23409,10 +23418,11 @@ body.match-detail-visible-v1{overflow:hidden!important}
   transform:rotate(45deg);
 }
 .player-detail-disciplines-v1{
-  display:flex;
-  gap:8px;
-  padding:10px;
-  overflow-x:auto;
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:4px;
+  padding:8px 4px;
+  overflow:visible;
   border:1px solid #e5e5e2;
   border-radius:15px;
   background:#fff;
@@ -23422,9 +23432,10 @@ body.match-detail-visible-v1{overflow:hidden!important}
 .player-detail-disciplines-v1::-webkit-scrollbar{display:none}
 .player-detail-discipline-v1{
   display:flex;
-  min-width:78px;
-  height:82px;
-  padding:9px 8px 7px;
+  min-width:0;
+  width:100%;
+  height:76px;
+  padding:7px 1px 6px;
   border:1px solid #dededb;
   border-radius:12px;
   color:#30302e;
@@ -23432,15 +23443,17 @@ body.match-detail-visible-v1{overflow:hidden!important}
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:7px;
-  font-size:12px;
-  white-space:nowrap;
+  gap:5px;
+  font-size:clamp(8px,2.45vw,11px);
+  line-height:1.08;
+  text-align:center;
+  white-space:normal;
 }
 .player-detail-discipline-v1 .disc-ball{
   display:grid;
   place-items:center;
-  width:34px;
-  height:34px;
+  width:32px;
+  height:32px;
   border:1.5px solid currentColor;
   border-radius:50%;
   font-weight:750;
@@ -23647,22 +23660,30 @@ body.match-detail-visible-v1{overflow:hidden!important}
     settings:`<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.2 13.6a7.8 7.8 0 0 0 0-3.2l2-1.55-2-3.45-2.5 1a8 8 0 0 0-2.75-1.6L13.6 2h-4l-.35 2.8A8 8 0 0 0 6.5 6.4L4 5.4 2 8.85l2 1.55a7.8 7.8 0 0 0 0 3.2l-2 1.55 2 3.45 2.5-1a8 8 0 0 0 2.75 1.6L9.6 22h4l.35-2.8a8 8 0 0 0 2.75-1.6l2.5 1 2-3.45Z"/></svg>`
   };
   const disciplineDefs = [
+    {id:"9ball",label:"9-Ball",icon:"9",enabled:true},
+    {id:"10ball",label:"10-Ball",icon:"10",enabled:true},
     {id:"rotation",label:"Rotation",icon:"R",enabled:true},
-    {id:"9ball",label:"9 Ball",icon:"9",enabled:true},
-    {id:"10ball",label:"10 Ball",icon:"10",enabled:true},
-    {id:"jpa9",label:"JPA 9",icon:"JPA",enabled:true},
-    {id:"jpa8",label:"JPA 8",icon:"JPA",enabled:false},
-    {id:"jcl",label:"JCL",icon:"JCL",enabled:false},
-    {id:"14.1",label:"14.1",icon:"14.1",enabled:false}
+    {id:"straightPool",label:"14-1",icon:"14-1",enabled:true},
+    {id:"jpa9",label:"JPA 9-Ball",icon:"JPA 9",enabled:true},
+    {id:"threeCushion",label:"3 Cushion",icon:"3C",enabled:true}
   ];
-  let activeDiscipline = "rotation";
+  let activeDiscipline = "9ball";
 
+  function disciplineFromValue(value){
+    const raw = String(value || "").normalize("NFKC").toLowerCase().replace(/[\s_.-]/g,"");
+    if (["9ball","nineball","nine","9"].includes(raw)) return "9ball";
+    if (["10ball","tenball","ten","10"].includes(raw)) return "10ball";
+    if (["jpa9","jpa9ball","jpanineball"].includes(raw)) return "jpa9";
+    if (["straightpool","141","14","fourteenone"].includes(raw)) return "straightPool";
+    if (["threecushion","3cushion","3c","carom"].includes(raw)) return "threeCushion";
+    if (raw === "rotation") return "rotation";
+    return "";
+  }
   function recordDiscipline(record){
-    const raw = String(record?.disciplineId || record?.gameType || "rotation").toLowerCase().replace(/[\s_-]/g,"");
-    if (raw === "9ball" || raw === "9") return "9ball";
-    if (raw === "10ball" || raw === "10") return "10ball";
-    if (raw === "jpa9" || raw === "jpa9ball") return "jpa9";
-    return raw === "rotation" ? "rotation" : raw;
+    const candidates = [record?.gameType, record?.disciplineId, record?.rulesEngine?.ruleId, record?.ruleId]
+      .map(disciplineFromValue)
+      .filter(Boolean);
+    return candidates.find(value => value !== "rotation") || candidates[0] || "rotation";
   }
   function playerMetrics(records, player){
     let wins=0, highRun=0, pockets=0, misses=0, storedShotTotal=0, storedShotCount=0;
@@ -23770,11 +23791,11 @@ body.match-detail-visible-v1{overflow:hidden!important}
     const player = readPlayerLibrary().find(item => String(item.id) === String(playerId));
     if (!player) return;
     window.__cueScoreActivePlayerStatsIdV159 = String(playerId);
-    activeDiscipline = "rotation";
+    activeDiscipline = "9ball";
     overlay.classList.add("player-detail-formal-v1");
     overlay.classList.remove("hidden");
     overlay.setAttribute("aria-hidden","false");
-    document.querySelector(".player-stats-title").textContent = "Player Detail";
+    document.querySelector(".player-stats-title").textContent = "プレーヤー情報";
     window.renderFormalPlayerDetailV1(playerId);
     body.scrollTop = 0;
     const library = document.getElementById("playerLibraryOverlay");
