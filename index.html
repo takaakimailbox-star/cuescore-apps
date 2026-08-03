@@ -23338,12 +23338,13 @@ body.match-detail-visible-v1{overflow:hidden!important}
 }
 .player-detail-formal-v1 .player-stats-race{
   justify-content:flex-end;
-  font-size:24px;
-  letter-spacing:3px;
+  font-size:38px;
+  line-height:1;
+  letter-spacing:0;
 }
 .player-detail-formal-v1 .player-stats-body{
   min-height:0;
-  padding:18px 14px 0;
+  padding:8px 14px 0!important;
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
 }
@@ -23353,15 +23354,15 @@ body.match-detail-visible-v1{overflow:hidden!important}
   min-height:100%;
   margin:0 auto;
   flex-direction:column;
-  gap:12px;
+  gap:10px;
 }
 .player-detail-profile-v1{
   display:grid;
-  grid-template-columns:64px minmax(0,1fr) 20px;
+  grid-template-columns:64px minmax(0,1fr);
   align-items:center;
   gap:14px;
-  min-height:86px;
-  padding:8px 10px;
+  min-height:72px;
+  padding:4px 10px;
   border:0;
   color:#171717;
   background:transparent;
@@ -23393,6 +23394,7 @@ body.match-detail-visible-v1{overflow:hidden!important}
 }
 .player-detail-profile-copy-v1{min-width:0}
 .player-detail-name-v1{
+  display:block;
   overflow:hidden;
   font-size:26px;
   font-weight:720;
@@ -23401,6 +23403,7 @@ body.match-detail-visible-v1{overflow:hidden!important}
   white-space:nowrap;
 }
 .player-detail-nickname-v1{
+  display:block;
   margin-top:5px;
   overflow:hidden;
   color:#696965;
@@ -23736,19 +23739,17 @@ body.match-detail-visible-v1{overflow:hidden!important}
     if (all.shotRate != null) metrics.push(metricCard("シュート成功率",`${all.shotRate}` ,all.shotRate,"%"));
     if (all.safetyRate != null) metrics.push(metricCard("セーフティ成功率",`${all.safetyRate}`,all.safetyRate,"%"));
 
-    document.getElementById("playerStatsRace").textContent = "•••";
+    document.getElementById("playerStatsRace").textContent = "›";
     document.getElementById("playerStatsRace").setAttribute("role","button");
     document.getElementById("playerStatsRace").setAttribute("aria-label","プレーヤーを編集");
     body.innerHTML = `<div class="player-detail-shell-v1">
-      <button type="button" class="player-detail-profile-v1" data-player-detail-edit="${esc(player.id)}">
+      <div class="player-detail-profile-v1">
         <span class="player-detail-avatar-v1">${playerAvatarHtmlV2(player,"player-avatar-v2")}${player.favorite === true ? '<span class="player-detail-favorite-v1">★</span>' : ""}</span>
         <span class="player-detail-profile-copy-v1">
           <span class="player-detail-name-v1">${esc(player.name)}</span>
-          ${player.nickname ? `<span class="player-detail-nickname-v1">${esc(player.nickname)}</span>` : ""}
           ${player.memo ? `<span class="player-detail-nickname-v1">${esc(player.memo)}</span>` : ""}
         </span>
-        <span class="player-detail-chevron-v1" aria-hidden="true"></span>
-      </button>
+      </div>
 
       <div class="player-detail-disciplines-v1" role="tablist" aria-label="種目">
         ${disciplineDefs.map(item => `<button type="button" role="tab" class="player-detail-discipline-v1 ${item.id === activeDiscipline ? "is-selected" : ""}" data-player-detail-discipline="${item.id}" aria-selected="${item.id === activeDiscipline}" ${item.enabled ? "" : "disabled"}><img class="disc-ball" src="${item.asset}" alt=""><span>${item.label}</span></button>`).join("")}
@@ -23772,7 +23773,6 @@ body.match-detail-visible-v1{overflow:hidden!important}
         <span class="player-detail-chevron-v1" aria-hidden="true"></span>
       </button>` : `<section class="player-detail-card-v1 player-detail-empty-v1">この種目の対戦データはまだありません。</section>`}
 
-      <div class="player-detail-count-v1">登録プレーヤー数：${readPlayerLibrary().length}人</div>
       <nav class="player-detail-bottom-nav-v1" aria-label="メインナビゲーション">
         ${navButton("home","Home","home")}
         ${navButton("history","対戦履歴","history")}
@@ -23805,6 +23805,11 @@ body.match-detail-visible-v1{overflow:hidden!important}
   window.__cueScoreOriginalOpenPlayerStatsV1 = originalOpenPlayerStats;
 
   body.addEventListener("click", event => {
+    const rival = event.target.closest("[data-open-player-rival-v832]");
+    if (rival) {
+      window.openRivalAnalysisForPlayerV832?.(String(rival.dataset.openPlayerRivalV832 || ""));
+      return;
+    }
     const discipline = event.target.closest("[data-player-detail-discipline]");
     if (discipline && !discipline.disabled) {
       activeDiscipline = discipline.dataset.playerDetailDiscipline || "rotation";
