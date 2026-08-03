@@ -8126,13 +8126,13 @@ body {
       </div>
 
       <div class="cue-home-menu-v3" aria-label="主要メニュー">
-        <button id="cueHomePlayersV3" type="button"><span class="cue-nav-glyph-v1 nav-player-v1" aria-hidden="true"></span><strong>プレーヤー</strong><span aria-hidden="true">›</span></button>
-        <button id="cueHomeHistoryV3" type="button"><span class="cue-nav-glyph-v1 nav-history-v1" aria-hidden="true"></span><strong>履歴</strong><span aria-hidden="true">›</span></button>
+        <button id="cueHomePlayersV3" type="button"><span class="cue-nav-glyph-v1 nav-player-v1" aria-hidden="true"></span><strong>プレーヤー一覧</strong><span aria-hidden="true">›</span></button>
+        <button id="cueHomeHistoryV3" type="button"><span class="cue-nav-glyph-v1 nav-history-v1" aria-hidden="true"></span><strong>試合履歴一覧</strong><span aria-hidden="true">›</span></button>
         <button id="cueHomeSettingsV3" type="button"><span class="cue-nav-glyph-v1 nav-settings-v1" aria-hidden="true"></span><strong>設定</strong><span aria-hidden="true">›</span></button>
       </div>
 
       <section class="cue-home-card-v1 cue-new-match-v1 cue-new-match-integrated-v2" aria-label="試合設定">
-        <button class="cue-match-setup-back-v3" id="cueMatchSetupBackV3" type="button" aria-label="ホームへ戻る"><span aria-hidden="true">‹</span></button>
+        <button class="cue-match-setup-back-v3" id="cueMatchSetupBackV3" type="button" aria-label="ホームへ戻る"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg></button>
         <div class="cue-new-match-summary-v2">
           <div class="cue-selected-game-v1">
             <img class="cue-selected-game-icon-v1" id="cueSelectedGameIconV1" src="assets/icons/games/game-rotation.svg" alt="" aria-hidden="true" />
@@ -18618,7 +18618,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-match-setup-rules-v1";
+    const PWA_VERSION = "1.0-navigation-labels-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -25585,7 +25585,8 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   border-radius:50%!important;background:rgba(255,255,255,.94)!important;color:#171717!important;
   box-shadow:0 12px 28px rgba(0,0,0,.08)!important;font-size:0!important;
 }
-.cue-match-setup-back-v3>span{display:block;transform:translateX(-1px);font-family:Arial,sans-serif;font-size:43px;font-weight:300;line-height:.8}
+.cue-match-setup-back-v3>svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:3.25;stroke-linecap:round;stroke-linejoin:round}
+.cue-match-setup-back-v3>svg path{fill:none;stroke:currentColor;stroke-width:3.25;stroke-linecap:round;stroke-linejoin:round}
 .cue-new-match-summary-v2{padding-top:0!important}
 .cue-new-match-summary-v2 .cue-home-eyebrow-v1[hidden]{display:none!important}
 .cue-game-rules-v2,.cue-carom-rules-v1{padding:0 15px!important;overflow:hidden}
@@ -25602,7 +25603,6 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .cue-carom-rules-v1>.cue-rule-toggle-v2{min-height:48px!important;border-top:0!important}
 @media(max-width:430px){
   .cue-match-setup-back-v3{width:46px!important;height:46px!important;min-height:46px!important}
-  .cue-match-setup-back-v3>span{font-size:41px}
 }
 .player-library-item.selection-only .player-library-select{display:grid;grid-template-columns:52px minmax(0,1fr);align-items:center;gap:10px;text-align:left}.player-library-select-avatar-v2{width:52px;height:52px}
 .player-detail-avatar-v1{overflow:visible}.player-detail-avatar-v1>.player-avatar-v2{width:100%;height:100%}
