@@ -12108,6 +12108,23 @@ let matchRecordsRawCacheV152 = null;
     window.setTimeout(() => { breakResultBackHandlingV3 = false; }, 220);
   }
 
+  function activeBreakBallCountV1() {
+    return Math.max(0, Math.min(15, Number(getActiveRuleV699().ballCount || 15)));
+  }
+
+  function syncBreakBallVisibilityV1() {
+    const ballCount = activeBreakBallCountV1();
+    document.querySelectorAll("[data-break-ball]").forEach(button => {
+      const ball = Number(button.dataset.breakBall);
+      button.hidden = ball > ballCount;
+      if (button.hidden) {
+        pendingBreakBallsV696.delete(ball);
+        button.classList.remove("selected-v696");
+      }
+    });
+    return ballCount;
+  }
+
   function showBreakResultPromptV61(player, rackNumber, options = {}) {
     if (recordingModeV611 !== "detail" || gameEnded || reviewMode || isStraightPoolV1()) return;
     const overlay = el("breakResultOverlayV61");
@@ -12128,10 +12145,7 @@ let matchRecordsRawCacheV152 = null;
     updateBreakPlayerSegmentsV1();
     const pushOutButtonV699 = el("breakPushOutToggleV695");
     if (pushOutButtonV699) pushOutButtonV699.hidden = true;
-    const ballCount = Number(getActiveRuleV699().ballCount || 15);
-    document.querySelectorAll("[data-break-ball]").forEach(button => {
-      button.hidden = Number(button.dataset.breakBall) > ballCount;
-    });
+    syncBreakBallVisibilityV1();
     const illegalButton = el("breakIllegalToggleV696");
     if (illegalButton) illegalButton.hidden = isRackGameV1()
       ? activeRackSettingsV1().illegalBreak === false
@@ -12155,7 +12169,7 @@ let matchRecordsRawCacheV152 = null;
     breakResultSavingV1 = false;
     if (el("breakResultSaveV695")) el("breakResultSaveV695").disabled = false;
     pendingBreakRackV61 = Number(payload.rackNumber) || Number(rack) || 1;
-    const activeBallCountV111 = Number(getActiveRuleV699().ballCount || 15);
+    const activeBallCountV111 = activeBreakBallCountV1();
     pendingBreakBallsV696 = new Set((payload.pocketedBalls || []).map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= activeBallCountV111));
     pendingBreakNoInV702 = !payload.preBreakFoul && (Boolean(payload.noIn) || (pendingBreakBallsV696.size === 0 && !payload.scratch && !payload.illegalBreak && !payload.pushOut));
     pendingBreakPreFoulV1 = Boolean(payload.preBreakFoul);
@@ -12167,6 +12181,7 @@ let matchRecordsRawCacheV152 = null;
     pendingBreakStartsNextRackV1 = false;
     el("breakResultRackV61").textContent = pendingBreakRackV61;
     updateBreakPlayerSegmentsV1();
+    syncBreakBallVisibilityV1();
     document.querySelectorAll("[data-break-ball]").forEach(button => {
       button.classList.toggle("selected-v696", pendingBreakBallsV696.has(Number(button.dataset.breakBall)));
     });
@@ -18848,7 +18863,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-official-ball-icon-v1";
+    const PWA_VERSION = "1.0-break-ball-display-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -26405,12 +26420,23 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .cue-ball-summary-v1[data-cue-ball-striped="true"]::before,.cue-ball-history-v1[data-cue-ball-striped="true"]::before{left:1px!important}
 .cue-ball-summary-v1[data-cue-ball-striped="true"]::after,.cue-ball-history-v1[data-cue-ball-striped="true"]::after{right:1px!important}
 .cue-official-ball-v1:active:not(:disabled){transform:scale(.96)!important;filter:none!important}
-.break-ball-btn-v696.selected-v696,.pushout-ball-v730.selected-v730{
+.cue-official-ball-v1[hidden]{display:none!important}
+.pushout-ball-v730.selected-v730{
   opacity:1!important;filter:none!important;transform:none!important;
   border-color:var(--cue-ball-color)!important;background:#fff!important;
   box-shadow:0 0 0 2px #111!important;
 }
-.cue-official-ball-v1[data-ball-state="used"],.pro-ball.cue-official-ball-v1.used{opacity:.35!important;filter:none!important}
+.break-ball-btn-v696.selected-v696,
+.cue-official-ball-v1[data-ball-state="used"],
+.pro-ball.cue-official-ball-v1.used{
+  --cue-ball-color:#b8b8b5!important;
+  opacity:1!important;filter:none!important;transform:none!important;
+  color:#858582!important;background:#f3f3f1!important;
+  box-shadow:none!important;
+}
+.break-ball-btn-v696.selected-v696 .cue-ball-number-v1,
+.cue-official-ball-v1[data-ball-state="used"] .cue-ball-number-v1,
+.pro-ball.cue-official-ball-v1.used .cue-ball-number-v1{color:#858582!important}
 .cue-official-ball-v1:disabled:not([data-ball-state="used"]){opacity:.46!important;filter:grayscale(.15)!important}
 .pro-balls.rack-ended .cue-official-ball-v1{opacity:.35!important}
 .pro-balls.locked .cue-official-ball-v1:not(.used){opacity:.46!important}
