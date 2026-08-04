@@ -8976,6 +8976,41 @@ body {
 
   
   <script>
+  // CueScore feature access v1.0: future purchase/subscription state connects here.
+  (() => {
+    const defaults = Object.freeze({
+      detailedAnalytics:true, ranking:true, cloudSync:true, backup:true,
+      dataSharing:true, seasonManagement:true, aiAnalysis:true,
+      csvExport:true, advancedFeatures:true
+    });
+    let entitlementProvider = null;
+    const access = key => {
+      if (!(key in defaults)) return false;
+      if (typeof entitlementProvider !== "function") return defaults[key];
+      try {
+        const resolved = entitlementProvider({ ...defaults });
+        return typeof resolved?.[key] === "boolean" ? resolved[key] : defaults[key];
+      } catch (error) {
+        console.error("CueScore feature access provider failed", error);
+        return defaults[key];
+      }
+    };
+    window.CueScoreFeatureAccess = Object.freeze({
+      defaults,
+      canUse:access,
+      snapshot:() => Object.freeze(Object.fromEntries(Object.keys(defaults).map(key => [key, access(key)]))),
+      connectEntitlementProvider:provider => { entitlementProvider = typeof provider === "function" ? provider : null; }
+    });
+    window.canUseDetailedAnalytics=()=>access("detailedAnalytics");
+    window.canUseRanking=()=>access("ranking");
+    window.canUseCloudSync=()=>access("cloudSync");
+    window.canUseBackup=()=>access("backup");
+    window.canUseDataSharing=()=>access("dataSharing");
+    window.canUseSeasonManagement=()=>access("seasonManagement");
+    window.canUseAIAnalysis=()=>access("aiAnalysis");
+    window.canUseCsvExport=()=>access("csvExport");
+  })();
+
   const app = document.querySelector(".app");
   const playerInfoScreen = document.getElementById("playerInfoScreen");
   const proGameScreen = document.getElementById("proGameScreen");
@@ -13840,6 +13875,7 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function openClassificationManagerV381() {
+    if (!window.CueScoreFeatureAccess.canUse("seasonManagement")) return;
     populateClassificationSelectsV381();
     renderClassificationManagerV381();
     el("classificationManagerV381")?.classList.remove("hidden");
@@ -16423,6 +16459,7 @@ let matchRecordsRawCacheV152 = null;
     }
 
     function exportBackup() {
+      if (!window.CueScoreFeatureAccess.canUse("backup")) return;
       try {
         const payload = makeBackupPayload();
         const blob = new Blob([JSON.stringify(payload, null, 2)], {type: "application/json"});
@@ -16483,6 +16520,7 @@ let matchRecordsRawCacheV152 = null;
     }
 
     function exportCsv() {
+      if (!window.CueScoreFeatureAccess.canUse("csvExport")) return;
       try {
         const sourceRecords = window.getFilteredRecordsV53
           ? window.getFilteredRecordsV53()
@@ -16624,6 +16662,7 @@ let matchRecordsRawCacheV152 = null;
     }
 
     async function importBackupFile(file) {
+      if (!window.CueScoreFeatureAccess.canUse("backup")) return;
       try {
         const raw = await file.text();
         const backup = JSON.parse(raw);
@@ -16717,6 +16756,7 @@ let matchRecordsRawCacheV152 = null;
     byId("exportBackupBtn")?.addEventListener("click", exportBackup);
     byId("exportCsvBtn")?.addEventListener("click", exportCsv);
     byId("importBackupBtn")?.addEventListener("click", () => {
+      if (!window.CueScoreFeatureAccess.canUse("backup")) return;
       const input = byId("backupFileInput");
       if (!input) return;
       input.value = "";
@@ -17992,6 +18032,7 @@ let matchRecordsRawCacheV152 = null;
       return { savedRevision, savedPayloadHash };
     }
     async function cloudSave() {
+      if (!window.CueScoreFeatureAccess.canUse("cloudSync")) return;
       const button = byId("cloudSaveBtn");
       button.disabled = true;
       setSyncStatus("クラウドへ保存する前にRevisionを確認中…");
@@ -18049,6 +18090,7 @@ let matchRecordsRawCacheV152 = null;
       }
     }
     async function cloudAutoSaveAfterMatch() {
+      if (!window.CueScoreFeatureAccess.canUse("cloudSync")) return;
       if (!isAutoSaveEnabled()) return;
       try {
         getValidConfig();
@@ -18113,6 +18155,7 @@ let matchRecordsRawCacheV152 = null;
     window.rotationCloudAutoSaveAfterMatch = cloudAutoSaveAfterMatch;
 
     async function cloudLoad(options = {}) {
+      if (!window.CueScoreFeatureAccess.canUse("cloudSync")) return;
       const button = byId("cloudLoadBtn"); button.disabled = true; setSyncStatus("クラウドデータを確認中…");
       try {
         const row = await fetchCloudRow(); if (!row?.payload) throw new Error("クラウド保存データがありません。");
@@ -18507,6 +18550,7 @@ let matchRecordsRawCacheV152 = null;
       }).join("");
     }
     function open() {
+      if (!window.CueScoreFeatureAccess.canUse("detailedAnalytics")) return;
       app.classList.remove("player-info-mode","pro-game-mode","records-mode","vs-analysis-mode","statistics-filter-mode");
       app.classList.add("rankings-mode");
       document.getElementById("playerInfoScreen")?.classList.add("hidden");
@@ -18727,7 +18771,7 @@ let matchRecordsRawCacheV152 = null;
     let cloudDetailsReturnToSettings=false;
     el('settingsBtn')?.addEventListener('click',open);el('settingsBackBtn')?.addEventListener('click',close);
     el('settingsCopyDeviceIdBtn')?.addEventListener('click',async()=>{const id=(localStorage.getItem(DEVICE_ID_KEY)||'').trim();const st=el('settingsCloudStatus');if(!id){st.textContent='Device IDが未設定です。';st.classList.add('error');return}try{await navigator.clipboard.writeText(id);st.textContent='Device IDをコピーしました。';st.classList.remove('error')}catch(_){st.textContent='コピーできませんでした。クラウド詳細からコピーしてください。';st.classList.add('error')}});
-    el('settingsOpenCloudBtn')?.addEventListener('click',()=>{cloudDetailsReturnToSettings=true;close();document.getElementById('dataManagementBtn')?.click();setTimeout(()=>document.querySelector('.cloud-settings-card')?.scrollIntoView({behavior:'smooth',block:'start'}),80)});
+    el('settingsOpenCloudBtn')?.addEventListener('click',()=>{if(!window.CueScoreFeatureAccess.canUse("cloudSync"))return;cloudDetailsReturnToSettings=true;close();document.getElementById('dataManagementBtn')?.click();setTimeout(()=>document.querySelector('.cloud-settings-card')?.scrollIntoView({behavior:'smooth',block:'start'}),80)});
     el('dataManagementBackBtn')?.addEventListener('click',event=>{if(!cloudDetailsReturnToSettings)return;event.preventDefault();event.stopImmediatePropagation();const dataScreen=el('dataManagementScreen');dataScreen?.classList.add('hidden');dataScreen?.setAttribute('aria-hidden','true');cloudDetailsReturnToSettings=false;open();},true);
     el('settingsAutoSaveToggle')?.addEventListener('change',e=>{localStorage.setItem(AUTO_KEY,e.target.checked?'true':'false');const main=document.getElementById('cloudAutoSaveToggle');if(main)main.checked=e.target.checked;el('settingsCloudStatus').textContent=e.target.checked?'自動クラウド保存をONにしました。':'自動クラウド保存をOFFにしました。'});
     el('settingsSaveGenerationBtn')?.addEventListener('click',async event=>{const button=event.currentTarget;const input=el('settingsGenerationCount');const n=Math.round(Number(input.value));const st=el('settingsCloudStatus');if(!Number.isFinite(n)||n<1||n>30){st.textContent='保持件数は1〜30の整数で入力してください。';st.classList.add('error');input.focus();return}input.value=String(n);localStorage.setItem(GEN_KEY,String(n));input.blur();button.disabled=true;button.textContent='反映中…';st.textContent=`保持件数を${n}件に設定しました。クラウド履歴へ反映しています…`;st.classList.remove('error');try{if((localStorage.getItem(DEVICE_ID_KEY)||'').trim().length>=12&&typeof window.cueScoreApplyGenerationRetentionV135==='function'){const result=await window.cueScoreApplyGenerationRetentionV135();await document.getElementById('cloudHistoryRefreshBtn')?.click();st.textContent=`保持件数を${n}件に設定し、古い世代を${result.deletedCount||0}件整理しました。`}else{st.textContent=`保持件数を${n}件に設定しました。Device ID設定後の次回クラウド保存から反映されます。`}}catch(error){console.error(error);st.textContent=`保持件数は${n}件に保存しましたが、クラウド履歴の整理に失敗しました：${error.message}`;st.classList.add('error')}finally{button.disabled=false;button.textContent='保持件数を保存'}});
@@ -18778,7 +18822,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-break-foul-transfer-v1";
+    const PWA_VERSION = "1.0-feature-access-foundation-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -24746,7 +24790,9 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     const good=[],focus=[];(growth?.metrics||[]).filter(m=>m.direction==="up").slice(0,2).forEach(m=>good.push(`${m.label}が改善しています（${m.raw>0?"+":""}${Number(m.raw).toFixed(1)}）`));(growth?.metrics||[]).filter(m=>m.direction==="down").slice(0,2).forEach(m=>focus.push(`${m.label}を確認しましょう（${m.raw>0?"+":""}${Number(m.raw).toFixed(1)}）`));
     if(!good.length&&insight?.strength)good.push(insight.strength);if(!focus.length&&insight?.focus)focus.push(insight.focus);
     const rows=(arr)=>arr.length?arr.map(t=>`<p class="analytics-ai-item-v1">${esc(t)}</p>`).join(""):'<p class="analytics-ai-item-v1 analytics-ai-empty-v1">比較できるデータを蓄積中です。</p>';
-    $("#analyticsAiV1").innerHTML=`<div class="analytics-ai-column-v1"><div class="analytics-ai-label-v1 good">良い傾向</div>${rows(good.slice(0,2))}</div><div class="analytics-ai-column-v1"><div class="analytics-ai-label-v1 focus">改善ポイント</div>${rows(focus.slice(0,2))}</div>`;
+    $("#analyticsAiV1").innerHTML=window.CueScoreFeatureAccess.canUse("aiAnalysis")
+      ? `<div class="analytics-ai-column-v1"><div class="analytics-ai-label-v1 good">良い傾向</div>${rows(good.slice(0,2))}</div><div class="analytics-ai-column-v1"><div class="analytics-ai-label-v1 focus">改善ポイント</div>${rows(focus.slice(0,2))}</div>`
+      : "";
     cloud();
   }
   $("#analyticsPlayerV1").addEventListener("change",render);$("#analyticsPeriodV1").addEventListener("click",()=>$("#analyticsFilterV1").click());$("#analyticsFilterV1").addEventListener("click",()=>{returnFromFilter=true;document.getElementById("openStatisticsFilterBtn")?.click()});
