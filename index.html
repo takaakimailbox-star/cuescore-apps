@@ -8089,6 +8089,18 @@ body {
     </div>
   </div>
 
+  <section id="iphonePortraitOnlyV1" class="iphone-portrait-only-v1 hidden" role="alertdialog" aria-modal="true" aria-labelledby="iphonePortraitTitleV1" aria-describedby="iphonePortraitBodyV1" aria-hidden="true" tabindex="-1">
+    <div class="iphone-portrait-card-v1">
+      <svg class="iphone-portrait-icon-v1" viewBox="0 0 72 72" aria-hidden="true">
+        <rect x="23" y="9" width="26" height="46" rx="7"></rect>
+        <path d="M31 15h10M34 49h4"></path>
+        <path d="M13 31a23 23 0 0 0 38 20M13 31l-1 9 9-2"></path>
+      </svg>
+      <h1 id="iphonePortraitTitleV1">縦向きでご利用ください</h1>
+      <p id="iphonePortraitBodyV1">CueScoreは縦画面専用です。<br>iPhoneを縦向きに戻してください。</p>
+    </div>
+  </section>
+
   <main class="app" aria-label="Rotation Scoreboard">
     <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
     <div class="sub-title">version 1.0</div>
@@ -18729,7 +18741,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-break-result-back-v1";
+    const PWA_VERSION = "1.0-iphone-portrait-only-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -23865,6 +23877,61 @@ body.match-detail-visible-v1{overflow:hidden!important}
   .player-detail-metric-ring-v1{width:68px;height:68px}
   .player-detail-bottom-nav-v1{margin-left:-10px;margin-right:-10px}
 }
+
+/* CueScore iPhone portrait-only guard v1.0 */
+.iphone-portrait-only-v1{
+  position:fixed;
+  inset:0;
+  z-index:60000;
+  display:grid;
+  place-items:center;
+  padding:
+    calc(20px + env(safe-area-inset-top))
+    calc(24px + env(safe-area-inset-right))
+    calc(20px + env(safe-area-inset-bottom))
+    calc(24px + env(safe-area-inset-left));
+  background:#f4f4f2;
+  color:#171717;
+  overscroll-behavior:none;
+}
+.iphone-portrait-only-v1.hidden{display:none!important}
+.iphone-portrait-card-v1{
+  width:min(460px,88vw);
+  padding:30px 28px 32px;
+  border:1px solid #e2e2df;
+  border-radius:28px;
+  background:#fff;
+  box-shadow:0 14px 38px rgba(0,0,0,.09);
+  text-align:center;
+}
+.iphone-portrait-icon-v1{
+  display:block;
+  width:72px;
+  height:72px;
+  margin:0 auto 18px;
+  fill:none;
+  stroke:#171717;
+  stroke-width:3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.iphone-portrait-card-v1 h1{
+  margin:0;
+  color:#171717;
+  font-size:clamp(24px,5vw,30px);
+  font-weight:800;
+  line-height:1.25;
+  letter-spacing:-.025em;
+}
+.iphone-portrait-card-v1 p{
+  margin:14px 0 0;
+  color:#666663;
+  font-size:clamp(16px,3vw,19px);
+  font-weight:500;
+  line-height:1.65;
+}
+html.cue-iphone-landscape-v1,
+html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:none!important}
 </style>
 <script>
 (() => {
@@ -26120,6 +26187,76 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   },true);
   window.addEventListener("popstate",()=>{if(home.classList.contains("match-setup-active-v3"))closeSetup()});
   setup.setAttribute("aria-hidden","true");
+})();
+</script>
+<script>
+/* CueScore iPhone portrait-only behavior v1.0 — preserves the live app state while rotated. */
+(() => {
+  if (window.__cueScoreIphonePortraitOnlyV1) return;
+  window.__cueScoreIphonePortraitOnlyV1 = true;
+
+  const isIphone = /iPhone|iPod/i.test(navigator.userAgent || "");
+  if (!isIphone) return;
+
+  const overlay = document.getElementById("iphonePortraitOnlyV1");
+  const appRoot = document.querySelector("main.app");
+  if (!overlay || !appRoot) return;
+
+  let returnFocus = null;
+  let updateFrame = 0;
+
+  const orientationQuery = window.matchMedia?.("(orientation: landscape)");
+  const isLandscape = () => orientationQuery
+    ? orientationQuery.matches
+    : window.innerWidth > window.innerHeight;
+
+  const requestPortraitLock = () => {
+    const standalone = navigator.standalone === true || window.matchMedia?.("(display-mode: standalone)").matches;
+    if (!standalone || !screen.orientation?.lock) return;
+    Promise.resolve(screen.orientation.lock("portrait-primary")).catch(() => {});
+  };
+
+  const applyOrientation = () => {
+    updateFrame = 0;
+    const blocked = isLandscape();
+    overlay.classList.toggle("hidden", !blocked);
+    overlay.setAttribute("aria-hidden", String(!blocked));
+    document.documentElement.classList.toggle("cue-iphone-landscape-v1", blocked);
+    appRoot.inert = blocked;
+    appRoot.setAttribute("aria-hidden", String(blocked));
+
+    if (blocked) {
+      if (document.activeElement instanceof HTMLElement && appRoot.contains(document.activeElement)) {
+        returnFocus = document.activeElement;
+        returnFocus.blur();
+      }
+      overlay.focus({preventScroll:true});
+      requestPortraitLock();
+      return;
+    }
+
+    appRoot.removeAttribute("aria-hidden");
+    if (returnFocus?.isConnected) returnFocus.focus({preventScroll:true});
+    returnFocus = null;
+  };
+
+  const scheduleOrientationUpdate = () => {
+    if (updateFrame) cancelAnimationFrame(updateFrame);
+    updateFrame = requestAnimationFrame(applyOrientation);
+  };
+
+  requestPortraitLock();
+  scheduleOrientationUpdate();
+  window.addEventListener("resize", scheduleOrientationUpdate, {passive:true});
+  window.addEventListener("orientationchange", scheduleOrientationUpdate, {passive:true});
+  window.addEventListener("pageshow", scheduleOrientationUpdate, {passive:true});
+  window.visualViewport?.addEventListener("resize", scheduleOrientationUpdate, {passive:true});
+  orientationQuery?.addEventListener?.("change", scheduleOrientationUpdate);
+  screen.orientation?.addEventListener?.("change", scheduleOrientationUpdate);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) scheduleOrientationUpdate();
+  });
+  document.addEventListener("pointerup", requestPortraitLock, {passive:true});
 })();
 </script>
 </body>
