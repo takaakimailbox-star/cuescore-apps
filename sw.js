@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-break-result-modal-v1";
+const APP_VERSION = "1.0-break-result-back-v1";
 const CACHE_NAME = `cuescore-rotation-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",

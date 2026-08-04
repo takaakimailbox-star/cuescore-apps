@@ -8440,7 +8440,11 @@ body {
       <section id="breakResultOverlayV61" class="break-result-overlay-v61 hidden" aria-modal="true" role="dialog" aria-labelledby="breakResultTitleV61">
         <div class="break-result-card-v61">
           <div class="break-result-rack-v61" hidden>Rack <span id="breakResultRackV61">1</span></div>
-          <div id="breakResultTitleV61" class="break-result-title-v61">ブレイク結果入力</div>
+          <div class="break-result-header-v3">
+            <button id="breakResultBackV3" class="break-result-back-v3" type="button" aria-label="戻る"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg></button>
+            <div id="breakResultTitleV61" class="break-result-title-v61">ブレイク結果入力</div>
+            <span class="break-result-header-spacer-v3" aria-hidden="true"></span>
+          </div>
           <div class="break-result-lead-v1">ブレイクの結果を入力してください</div>
           <div class="break-player-segments-v1" role="radiogroup" aria-label="ブレイクプレーヤー">
             <button id="breakPlayerP1V1" class="break-player-segment-v1" type="button" role="radio" aria-checked="true" data-break-player="1">
@@ -8488,9 +8492,17 @@ body {
             </button>
             <button id="breakPushOutToggleV695" class="break-special-btn-v696" type="button" hidden>シュートアウト</button>
           </div>
-          <div class="break-result-actions-v2">
-            <button id="breakResultCancelV2" class="break-result-cancel-v2" type="button" data-dialog-close>キャンセル</button>
-            <button id="breakResultSaveV695" class="break-result-save-v695" type="button">OK</button>
+          <div class="break-result-actions-v2"><button id="breakResultSaveV695" class="break-result-save-v695" type="button">OK</button></div>
+        </div>
+      </section>
+
+      <section id="breakInterruptConfirmV3" class="break-interrupt-overlay-v3 hidden" aria-modal="true" role="dialog" aria-labelledby="breakInterruptTitleV3" aria-hidden="true">
+        <div class="break-interrupt-card-v3">
+          <h2 id="breakInterruptTitleV3">ゲームを中断しますか？</h2>
+          <p>入力中のブレイク結果は保存されません。New Match画面へ戻ります。</p>
+          <div class="break-interrupt-actions-v3">
+            <button id="breakInterruptCancelV3" type="button" data-dialog-close>キャンセル</button>
+            <button id="breakInterruptProceedV3" type="button">中断する</button>
           </div>
         </div>
       </section>
@@ -11841,6 +11853,8 @@ let matchRecordsRawCacheV152 = null;
   let rackBreakPromptQueuedV1 = false;
   let breakResultSavingV1 = false;
   let breakResultCloseTimerV2 = 0;
+  let breakResultSourceV3 = "game";
+  let breakResultBackHandlingV3 = false;
   const BREAK_RESULT_LABELS_V61 = {
     dry: "無得点",
     one: "1個",
@@ -11933,6 +11947,8 @@ let matchRecordsRawCacheV152 = null;
 
   function closeBreakResultPromptV61() {
     const overlay = el("breakResultOverlayV61");
+    el("breakInterruptConfirmV3")?.classList.add("hidden");
+    el("breakInterruptConfirmV3")?.setAttribute("aria-hidden", "true");
     if (overlay) {
       if (breakResultCloseTimerV2) window.clearTimeout(breakResultCloseTimerV2);
       overlay.classList.add("is-closing-v2");
@@ -11946,7 +11962,67 @@ let matchRecordsRawCacheV152 = null;
     pendingBreakPlayerV61 = null;
     pendingBreakRackV61 = null;
     pendingBreakStartsNextRackV1 = false;
+    breakResultSourceV3 = "game";
+    if (history.state?.cueBreakResultV3) history.replaceState({...history.state,cueBreakResultV3:false}, "");
     resetBreakPromptSelectionV695();
+  }
+
+  function markBreakResultHistoryV3() {
+    if (history.state?.cueBreakResultV3) return;
+    history.pushState({...history.state,cueBreakResultV3:true}, "");
+  }
+
+  function showBreakInterruptConfirmV3() {
+    const dialog = el("breakInterruptConfirmV3");
+    if (!dialog) return;
+    dialog.classList.remove("hidden");
+    dialog.setAttribute("aria-hidden", "false");
+    requestAnimationFrame(() => el("breakInterruptCancelV3")?.focus({preventScroll:true}));
+  }
+
+  function hideBreakInterruptConfirmV3({restoreHistory=false} = {}) {
+    const dialog = el("breakInterruptConfirmV3");
+    dialog?.classList.add("hidden");
+    dialog?.setAttribute("aria-hidden", "true");
+    if (restoreHistory) markBreakResultHistoryV3();
+    requestAnimationFrame(() => el("breakResultBackV3")?.focus({preventScroll:true}));
+  }
+
+  function interruptNewMatchFromBreakV3() {
+    if (breakResultBackHandlingV3) return;
+    breakResultBackHandlingV3 = true;
+    hideBreakInterruptConfirmV3();
+    currentGameSessionIdV104 = null;
+    currentGameStartedAt = null;
+    currentGameRecordSaved = false;
+    currentGameRecordIdV100 = null;
+    breakUndoRestoreV697 = null;
+    rows = [];
+    undoHistory = [];
+    analysisEventsV60 = [];
+    commonEventsV7 = [];
+    closeBreakResultPromptV61();
+    el("proSummary")?.classList.add("hidden");
+    app.classList.remove("pro-game-mode");
+    proGameScreen.classList.add("hidden");
+    playerInfoScreen.classList.add("hidden");
+    backToTitle();
+    requestAnimationFrame(() => {
+      window.openCueMatchSetupV3?.();
+      breakResultBackHandlingV3 = false;
+    });
+  }
+
+  function handleBreakResultBackV3({fromHistory=false} = {}) {
+    if (breakResultSavingV1 || breakResultBackHandlingV3) return;
+    if (breakResultSourceV3 === "new-match") {
+      showBreakInterruptConfirmV3();
+      if (fromHistory) markBreakResultHistoryV3();
+      return;
+    }
+    breakResultBackHandlingV3 = true;
+    closeBreakResultPromptV61();
+    window.setTimeout(() => { breakResultBackHandlingV3 = false; }, 220);
   }
 
   function showBreakResultPromptV61(player, rackNumber, options = {}) {
@@ -11959,6 +12035,7 @@ let matchRecordsRawCacheV152 = null;
     }
     overlay.classList.remove("is-closing-v2");
     resetBreakPromptSelectionV695();
+    breakResultSourceV3 = options.source === "new-match" ? "new-match" : "game";
     breakResultSavingV1 = false;
     if (el("breakResultSaveV695")) el("breakResultSaveV695").disabled = false;
     pendingBreakPlayerV61 = Number(player) === 2 ? 2 : 1;
@@ -11978,6 +12055,7 @@ let matchRecordsRawCacheV152 = null;
       : !getActiveRuleV699().break?.illegalBreakEnabled;
     overlay.setAttribute("aria-hidden", "false");
     overlay.classList.remove("hidden");
+    markBreakResultHistoryV3();
   }
 
   function restoreBreakPromptFromUndoV697(payload) {
@@ -11989,6 +12067,7 @@ let matchRecordsRawCacheV152 = null;
       breakResultCloseTimerV2 = 0;
     }
     overlay.classList.remove("is-closing-v2");
+    breakResultSourceV3 = "game";
     pendingBreakPlayerV61 = Number(payload.player) === 2 ? 2 : 1;
     breakResultSavingV1 = false;
     if (el("breakResultSaveV695")) el("breakResultSaveV695").disabled = false;
@@ -12014,6 +12093,7 @@ let matchRecordsRawCacheV152 = null;
     updateBreakPromptSummaryV696();
     overlay.setAttribute("aria-hidden", "false");
     overlay.classList.remove("hidden");
+    markBreakResultHistoryV3();
   }
 
   function toggleBreakBallV696(number, button = null) {
@@ -14055,7 +14135,7 @@ let matchRecordsRawCacheV152 = null;
       setTimeout(() => {
         if (currentGameSessionIdV104 !== promptSessionIdV111) return;
         if (!app.classList.contains("pro-game-mode") || gameEnded) return;
-        showBreakResultPromptV61(startingPlayer, 1);
+        showBreakResultPromptV61(startingPlayer, 1, {source:"new-match"});
       }, 0);
     }
   }
@@ -15153,7 +15233,18 @@ let matchRecordsRawCacheV152 = null;
   el("breakScratchToggleV696")?.addEventListener("click", () => toggleBreakSpecialV696("scratch"));
   el("breakPushOutToggleV695")?.addEventListener("click", () => toggleBreakSpecialV696("push_out"));
   el("breakResultSaveV695")?.addEventListener("click", () => saveBreakResultV61());
-  el("breakResultCancelV2")?.addEventListener("click", () => closeBreakResultPromptV61());
+  el("breakResultBackV3")?.addEventListener("click", () => handleBreakResultBackV3());
+  el("breakInterruptCancelV3")?.addEventListener("click", () => hideBreakInterruptConfirmV3());
+  el("breakInterruptProceedV3")?.addEventListener("click", interruptNewMatchFromBreakV3);
+  window.addEventListener("popstate", () => {
+    const confirmDialog = el("breakInterruptConfirmV3");
+    if (confirmDialog && !confirmDialog.classList.contains("hidden")) {
+      hideBreakInterruptConfirmV3({restoreHistory:true});
+      return;
+    }
+    const overlay = el("breakResultOverlayV61");
+    if (overlay && !overlay.classList.contains("hidden")) handleBreakResultBackV3({fromHistory:true});
+  });
   
 
   // Rebuild v1.43: compact list, result word in score column, and reusable historical result view
@@ -18638,7 +18729,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-break-result-modal-v1";
+    const PWA_VERSION = "1.0-break-result-back-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -18864,7 +18955,7 @@ let matchRecordsRawCacheV152 = null;
     '#proSummary','.record-detail-overlay','.player-library-overlay','.player-stats-overlay',
     '#gameMemoDialog','.historical-edit-dialog-v35','.classification-manager-v381',
     '.break-result-overlay-v61','.pushout-overlay-v730','.record-mode-overlay-v611',
-    '.start-confirm-overlay-v698'
+    '.start-confirm-overlay-v698','.break-interrupt-overlay-v3'
   ];
   let hiddenAt = 0;
 
@@ -19039,7 +19130,7 @@ let matchRecordsRawCacheV152 = null;
     '#proSummary','.record-detail-overlay','.player-library-overlay','.player-stats-overlay',
     '#gameMemoDialog','.historical-edit-dialog-v35','.classification-manager-v381',
     '.break-result-overlay-v61','.pushout-overlay-v730','.record-mode-overlay-v611',
-    '.start-confirm-overlay-v698'
+    '.start-confirm-overlay-v698','.break-interrupt-overlay-v3'
   ];
   const focusableSelector = [
     'button:not([disabled])','a[href]','input:not([disabled]):not([type="hidden"])',
@@ -25656,12 +25747,35 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   animation:break-modal-card-in-v2 200ms cubic-bezier(.2,.75,.25,1) both;
   transform-origin:center center;
 }
+.break-result-header-v3{
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr) 44px;
+  align-items:center;
+  gap:6px;
+  margin:-4px 0 2px;
+}
+.break-result-back-v3{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-radius:50%;
+  color:#171717;
+  background:#fff;
+  box-shadow:0 8px 22px rgba(0,0,0,.09);
+}
+.break-result-back-v3 svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:3.25;stroke-linecap:round;stroke-linejoin:round}
+.break-result-back-v3 svg path{fill:none;stroke:currentColor;stroke-width:3.25;stroke-linecap:round;stroke-linejoin:round}
+.break-result-back-v3:focus-visible{outline:3px solid rgba(23,23,23,.18);outline-offset:2px}
+.break-result-header-spacer-v3{display:block;width:44px;height:44px}
+.break-result-header-v3 .break-result-title-v61{font-size:22px!important;white-space:nowrap}
 .break-result-overlay-v61.is-closing-v2 .break-result-card-v61{
   animation:break-modal-card-out-v2 180ms ease-in both;
 }
 .break-result-actions-v2{
   display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-columns:minmax(0,1fr);
   gap:10px;
   margin-top:14px;
 }
@@ -25679,6 +25793,35 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   background:#fff;
 }
 .break-result-actions-v2 .break-result-save-v695{border:1px solid #111!important;background:#111!important;color:#fff!important}
+.break-interrupt-overlay-v3{
+  position:fixed;
+  inset:0;
+  z-index:4100;
+  display:grid;
+  place-items:center;
+  padding:max(22px,env(safe-area-inset-top)) 20px max(22px,env(safe-area-inset-bottom));
+  background:rgba(0,0,0,.28);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+  animation:break-modal-backdrop-in-v2 180ms ease-out both;
+}
+.break-interrupt-overlay-v3.hidden{display:none!important}
+.break-interrupt-card-v3{
+  width:min(88vw,390px);
+  padding:24px 20px 18px;
+  border:1px solid rgba(23,23,23,.10);
+  border-radius:24px;
+  background:#fff;
+  box-shadow:0 18px 50px rgba(0,0,0,.20);
+  text-align:center;
+  animation:break-modal-card-in-v2 190ms cubic-bezier(.2,.75,.25,1) both;
+}
+.break-interrupt-card-v3 h2{margin:0;color:#171717;font-size:22px;line-height:1.3}
+.break-interrupt-card-v3 p{margin:10px 0 20px;color:#6f6f6c;font-size:14px;font-weight:600;line-height:1.55}
+.break-interrupt-actions-v3{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.break-interrupt-actions-v3 button{min-height:50px;border-radius:12px;font:inherit;font-size:16px;font-weight:800}
+#breakInterruptCancelV3{border:1px solid #cfcfcb;color:#171717;background:#fff}
+#breakInterruptProceedV3{border:1px solid #171717;color:#fff;background:#171717}
 @keyframes break-modal-backdrop-in-v2{from{opacity:0}to{opacity:1}}
 @keyframes break-modal-backdrop-out-v2{from{opacity:1}to{opacity:0}}
 @keyframes break-modal-card-in-v2{from{opacity:0;transform:scale(.965)}to{opacity:1;transform:scale(1)}}
@@ -25687,6 +25830,10 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   .break-result-card-v61{padding:17px 14px 14px!important;border-radius:24px!important}
   .break-result-actions-v2{margin-top:10px}
   .break-result-cancel-v2,.break-result-actions-v2 .break-result-save-v695{min-height:48px!important;font-size:16px!important}
+  .break-result-header-v3{grid-template-columns:40px minmax(0,1fr) 40px}
+  .break-result-back-v3,.break-result-header-spacer-v3{width:40px;height:40px}
+  .break-result-header-v3 .break-result-title-v61{font-size:19px!important}
+  .break-interrupt-card-v3{padding:21px 16px 15px;border-radius:22px}
 }
 @media(prefers-reduced-motion:reduce){
   .break-result-overlay-v61,.break-result-overlay-v61.is-closing-v2,
@@ -25951,6 +26098,8 @@ body.cue-modal-lock-v1{overflow:hidden!important}
     document.getElementById("cueHomeNavV3")?.setAttribute("aria-current","page");
     window.scrollTo(0,0);
   };
+  window.openCueMatchSetupV3=openSetup;
+  window.closeCueMatchSetupV3=closeSetup;
   document.getElementById("cueDisciplineSwitcherV1")?.addEventListener("click",event=>{if(event.target.closest("[data-discipline]"))openSetup()});
   document.getElementById("cueMatchSetupBackV3")?.addEventListener("click",()=>{if(history.state?.cueMatchSetupV3)history.back();else closeSetup()});
   document.getElementById("cueHomeNavV3")?.addEventListener("click",closeSetup);
