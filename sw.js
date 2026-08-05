@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-match-setup-card-motion-v1";
+const APP_VERSION = "1.0-ios-match-card-motion-v2";
 const CACHE_NAME = `cuescore-rotation-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
