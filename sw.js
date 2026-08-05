@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-match-detail-nine-summary-v1";
+const APP_VERSION = "1.0-nine-history-correction-v1";
 const CACHE_NAME = `cuescore-rotation-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
