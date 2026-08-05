@@ -18863,7 +18863,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-match-setup-swipe-v1";
+    const PWA_VERSION = "1.0-match-setup-card-motion-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -26193,10 +26193,15 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .cue-home-v1.match-setup-active-v3{padding:calc(10px + env(safe-area-inset-top)) 14px calc(22px + env(safe-area-inset-bottom))!important}.cue-home-v1.match-setup-active-v3 .cue-home-head-v2,.cue-home-v1.match-setup-active-v3 .cue-discipline-switcher-v1,.cue-home-v1.match-setup-active-v3 .cue-home-menu-v3,.cue-home-v1.match-setup-active-v3>.cue-bottom-nav-v1{display:none!important}
 .cue-home-v1.match-setup-active-v3 .cue-new-match-integrated-v2{display:flex!important;flex-direction:column!important;width:100%!important;max-width:620px!important;margin:0 auto!important;padding:10px 14px 18px!important;border:1px solid #eeeeeb!important;border-radius:22px!important;background:#fff!important;box-shadow:0 10px 28px rgba(0,0,0,.045)!important;touch-action:pan-y}
 .cue-match-setup-back-v3{order:0;align-self:flex-start;min-height:44px;padding:0 8px;border:0;background:transparent;color:#171717;font-size:15px;font-weight:700}.cue-new-match-summary-v2{order:1!important;padding:4px 4px 16px!important}.cue-new-match-summary-v2 .cue-home-eyebrow-v1{font-size:13px!important;letter-spacing:.12em!important}.cue-new-match-summary-v2 .cue-selected-game-v1{gap:12px!important}.cue-new-match-summary-v2 .cue-selected-game-icon-v1{width:56px!important;height:56px!important}.cue-new-match-summary-v2 .cue-selected-game-name-v1{font-size:28px!important}
-.cue-new-match-summary-v2.cue-swipe-next-v4{animation:cueSwipeNextV4 180ms ease-out}.cue-new-match-summary-v2.cue-swipe-prev-v4{animation:cueSwipePrevV4 180ms ease-out}
-@keyframes cueSwipeNextV4{from{opacity:.4;transform:translateX(14px)}to{opacity:1;transform:translateX(0)}}
-@keyframes cueSwipePrevV4{from{opacity:.4;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
-@media(prefers-reduced-motion:reduce){.cue-new-match-summary-v2.cue-swipe-next-v4,.cue-new-match-summary-v2.cue-swipe-prev-v4{animation:none}}
+.cue-new-match-integrated-v2.cue-card-out-next-v5{animation:cueCardOutNextV5 140ms ease-in forwards;pointer-events:none}
+.cue-new-match-integrated-v2.cue-card-out-prev-v5{animation:cueCardOutPrevV5 140ms ease-in forwards;pointer-events:none}
+.cue-new-match-integrated-v2.cue-card-in-next-v5{animation:cueCardInNextV5 180ms cubic-bezier(.22,.72,.3,1);pointer-events:none}
+.cue-new-match-integrated-v2.cue-card-in-prev-v5{animation:cueCardInPrevV5 180ms cubic-bezier(.22,.72,.3,1);pointer-events:none}
+@keyframes cueCardOutNextV5{to{opacity:.28;transform:translateX(-52px) scale(.985)}}
+@keyframes cueCardOutPrevV5{to{opacity:.28;transform:translateX(52px) scale(.985)}}
+@keyframes cueCardInNextV5{from{opacity:.28;transform:translateX(52px) scale(.985)}to{opacity:1;transform:translateX(0) scale(1)}}
+@keyframes cueCardInPrevV5{from{opacity:.28;transform:translateX(-52px) scale(.985)}to{opacity:1;transform:translateX(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.cue-new-match-integrated-v2.cue-card-out-next-v5,.cue-new-match-integrated-v2.cue-card-out-prev-v5,.cue-new-match-integrated-v2.cue-card-in-next-v5,.cue-new-match-integrated-v2.cue-card-in-prev-v5{animation:none}}
 .cue-player-stack-v2{order:2!important}.cue-game-rules-v2,.cue-carom-rules-v1{order:3!important;width:100%!important;margin-top:14px!important;padding:15px!important;border:1px solid #e7e7e4!important;border-radius:14px!important;background:#fff!important}.cue-game-rules-v2>strong,.cue-carom-rules-v1>strong{font-size:17px!important}.season-setting-v38{order:4}.player-name-limit-note{order:5}.cue-home-start-v2{order:6!important;width:100%!important;min-height:56px!important;margin-top:16px!important;background:#171717!important;color:#fff!important}.cue-home-start-v2 .new-match-play-v1{color:#fff!important}.cue-toggle-track-v2{background:#dededc!important}.cue-rule-toggle-v2 input:checked+.cue-toggle-track-v2{background:#171717!important}
 @media(max-width:370px){.cue-home-v1{padding-left:12px!important;padding-right:12px!important}.cue-home-brand-v1{gap:12px!important;font-size:38px!important}.cue-home-brand-v1 img{width:58px;height:58px}.cue-discipline-switcher-v1 .cue-discipline-v1{min-height:57px!important;grid-template-columns:48px minmax(0,1fr) 16px!important;padding:6px 12px!important}.cue-discipline-switcher-v1 .cue-game-icon-v1{width:40px!important;height:40px!important}.cue-discipline-switcher-v1 .cue-discipline-label-v1 strong{font-size:18px!important}.cue-home-menu-v3 button{min-height:58px}.cue-home-v1.match-setup-active-v3 .cue-new-match-integrated-v2{padding-left:10px!important;padding-right:10px!important}}
 .official-default-avatar-v4{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}.player-editor-avatar-button-v2:disabled{cursor:default;opacity:1}
@@ -26270,21 +26275,31 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   let swipeStartX=0;
   let swipeStartY=0;
   let swipeTracking=false;
+  let swipeAnimating=false;
   const switchDisciplineBySwipe=direction=>{
+    if(swipeAnimating)return;
     const current=document.querySelector("[data-discipline].is-selected")?.dataset.discipline;
     const currentIndex=Math.max(0,swipeOrder.indexOf(current));
     const nextIndex=(currentIndex+direction+swipeOrder.length)%swipeOrder.length;
     const target=document.querySelector(`[data-discipline="${swipeOrder[nextIndex]}"]`);
     if(!target)return;
-    target.click();
-    const summary=document.querySelector(".cue-new-match-summary-v2");
-    if(!summary)return;
-    summary.classList.remove("cue-swipe-next-v4","cue-swipe-prev-v4");
-    void summary.offsetWidth;
-    summary.classList.add(direction>0?"cue-swipe-next-v4":"cue-swipe-prev-v4");
+    swipeAnimating=true;
+    const reduceMotion=window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    const outClass=direction>0?"cue-card-out-next-v5":"cue-card-out-prev-v5";
+    const inClass=direction>0?"cue-card-in-next-v5":"cue-card-in-prev-v5";
+    setup.classList.add(outClass);
+    window.setTimeout(()=>{
+      setup.classList.remove(outClass);
+      target.click();
+      setup.classList.add(inClass);
+      window.setTimeout(()=>{
+        setup.classList.remove(inClass);
+        swipeAnimating=false;
+      },reduceMotion?0:190);
+    },reduceMotion?0:145);
   };
   setup.addEventListener("pointerdown",event=>{
-    if(!event.isPrimary||!home.classList.contains("match-setup-active-v3")){swipeTracking=false;return;}
+    if(swipeAnimating||!event.isPrimary||!home.classList.contains("match-setup-active-v3")){swipeTracking=false;return;}
     swipeStartX=event.clientX;
     swipeStartY=event.clientY;
     swipeTracking=true;
