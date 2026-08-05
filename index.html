@@ -18821,7 +18821,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-nine-history-correction-v1";
+    const PWA_VERSION = "1.0-detail-score-style-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22265,9 +22265,9 @@ window.cueScoreModalDiagnosticsV159 = () => ({
           <img class="match-detail-game-icon-v4" src="${disciplineDefV4.asset}" alt="ゲーム種目">
           <div class="match-detail-result-line-v2">
             <span class="match-detail-result-player-v3"><img src="${detailAvatarV3(p1)}" alt="${esc(p1.name||"Player1")}のプロフィール画像"><span class="match-detail-result-name-v2">${esc(p1.name||"Player1")}</span></span>
-            <strong class="${winner===1?"winner":""}">${Number(p1.score)||0}</strong>
+            <strong class="${winner===1?"winner":winner===2?"loser":""}">${Number(p1.score)||0}</strong>
             <span>−</span>
-            <strong class="${winner===2?"winner":""}">${Number(p2.score)||0}</strong>
+            <strong class="${winner===2?"winner":winner===1?"loser":""}">${Number(p2.score)||0}</strong>
             <span class="match-detail-result-player-v3"><img src="${detailAvatarV3(p2)}" alt="${esc(p2.name||"Player2")}のプロフィール画像"><span class="match-detail-result-name-v2">${esc(p2.name||"Player2")}</span></span>
           </div>
           ${raceTag?`<div class="match-detail-race-v2">${esc(raceTag)}</div>`:""}
@@ -23045,6 +23045,10 @@ body.match-detail-visible-v1{overflow:hidden!important}
 }
 .match-detail-result-line-v2 strong.winner,
 .match-detail-summary-v1 .winner{color:#6f3214}
+.match-detail-result-line-v2 strong.loser{
+  color:#777775;
+  font-weight:450;
+}
 .match-detail-result-line-v2 > span:nth-child(3){
   color:#30302e;
   font-size:18px;
