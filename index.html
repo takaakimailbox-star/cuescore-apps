@@ -8151,33 +8151,6 @@ body {
             <strong class="cue-selected-game-name-v1" id="cueSelectedGameNameV1">Rotation</strong>
           </div>
         </div>
-        <div class="cue-game-rules-v2" aria-label="ゲームルール">
-          <label class="cue-rule-toggle-v2" id="cueNineOnFootRowV3">
-            <span>9オンフット</span>
-            <input id="cueNineOnFootV3" type="checkbox" />
-            <span class="cue-toggle-track-v2" aria-hidden="true"></span>
-          </label>
-          <label class="cue-rule-toggle-v2">
-            <span>ブレイクボックス</span>
-            <input id="cueBreakBoxV3" type="checkbox" />
-            <span class="cue-toggle-track-v2" aria-hidden="true"></span>
-          </label>
-        </div>
-        <div class="cue-carom-rules-v1" id="cueCaromRulesV1" aria-label="3 Cushionゲームルール" hidden>
-          <fieldset class="cue-carom-variant-list-v3">
-            <legend>ルール区分</legend>
-            <label><span>3クッション</span><input type="radio" name="cueCaromVariantV3" value="threeCushion" checked><span class="cue-rule-check-v3" aria-hidden="true">✓</span></label>
-            <label><span>バンドゲーム</span><input type="radio" name="cueCaromVariantV3" value="bandGame"><span class="cue-rule-check-v3" aria-hidden="true">✓</span></label>
-            <label><span>3つ玉</span><input type="radio" name="cueCaromVariantV3" value="threeBall"><span class="cue-rule-check-v3" aria-hidden="true">✓</span></label>
-            <label><span>4つ玉</span><input type="radio" name="cueCaromVariantV3" value="fourBall"><span class="cue-rule-check-v3" aria-hidden="true">✓</span></label>
-          </fieldset>
-          <label class="cue-rule-toggle-v2">
-            <span>25イニング draw</span>
-            <input id="cueCaromDraw25V1" type="checkbox" />
-            <span class="cue-toggle-track-v2" aria-hidden="true"></span>
-          </label>
-        </div>
-
         <div class="new-match-player-grid-v1 cue-player-stack-v2" aria-label="プレーヤーとRace toの設定">
           <section class="player-block new-match-player-card-v1 player-a-v1" id="newMatchPlayerCard1V1" data-player-label="A">
             <div class="player-heading-row"><h2>先攻（ブレイク）</h2><button class="starter-choice selected" id="p1StarterBtn" type="button">先攻</button></div>
@@ -8313,7 +8286,7 @@ body {
         <section class="pro-top-fixed">
           <section class="pro-scoreboard">
             <div class="pro-player-panel active" id="proP1Panel">
-              <div class="pro-player-name" id="proP1Name">Player 1</div>
+              <div class="pro-player-identity-v2"><div class="pro-player-name" id="proP1Name">Player 1</div><img class="pro-player-avatar-v2" id="proP1AvatarV2" src="assets/icons/avatar/default/avatar_default_silhouette.png" alt=""></div>
               <div class="pro-score" id="proP1Score">0</div>
               <div class="pro-stats">
                 <span id="proP1GoalLabelV1">Race to</span> <span id="proP1Goal">120</span>
@@ -8322,7 +8295,7 @@ body {
               </div>
             </div>
             <div class="pro-player-panel" id="proP2Panel">
-              <div class="pro-player-name" id="proP2Name">Player 2</div>
+              <div class="pro-player-identity-v2"><div class="pro-player-name" id="proP2Name">Player 2</div><img class="pro-player-avatar-v2" id="proP2AvatarV2" src="assets/icons/avatar/default/avatar_default_silhouette.png" alt=""></div>
               <div class="pro-score" id="proP2Score">0</div>
               <div class="pro-stats">
                 <span id="proP2GoalLabelV1">Race to</span> <span id="proP2Goal">120</span>
@@ -9213,10 +9186,11 @@ body {
       : "rotation";
     let selectedRules = { illegal:true, shootout:false };
     let caromSettingsValue;
-    try { caromSettingsValue = JSON.parse(safeRead(CAROM_SETTINGS_KEY, '{"variant":"threeCushion","drawAt25":false}')); }
-    catch (_) { caromSettingsValue = {variant:"threeCushion",drawAt25:false}; }
-    if (!["threeCushion","bandGame","threeBall","fourBall"].includes(caromSettingsValue.variant)) caromSettingsValue.variant = "threeCushion";
-    caromSettingsValue.drawAt25 = Boolean(caromSettingsValue.drawAt25);
+    try { caromSettingsValue = JSON.parse(safeRead(CAROM_SETTINGS_KEY, '{"variant":"threeCushion","drawAt25":true}')); }
+    catch (_) { caromSettingsValue = {variant:"threeCushion",drawAt25:true}; }
+    caromSettingsValue.variant = "threeCushion";
+    caromSettingsValue.drawAt25 = true;
+    safeWrite(CAROM_SETTINGS_KEY, JSON.stringify(caromSettingsValue));
     let savedJPA9Skills;
     try {
       savedJPA9Skills = JSON.parse(safeRead(JPA_SKILL_KEY, '{"1":5,"2":5}'));
@@ -9248,9 +9222,9 @@ body {
       if (breakBox) breakBox.checked = Boolean(rackSettings?.breakBox);
       const nineOnFootRow = document.getElementById("cueNineOnFootRowV3");
       if (nineOnFootRow) nineOnFootRow.hidden = !nineBallMode;
-      document.querySelectorAll(".cue-game-rules-v2").forEach(node => node.hidden = !(nineBallMode || tenBallMode));
+      document.querySelectorAll(".cue-game-rules-v2").forEach(node => node.hidden = true);
       const caromRules = document.getElementById("cueCaromRulesV1");
-      if (caromRules) caromRules.hidden = !threeCushionMode;
+      if (caromRules) caromRules.hidden = true;
       const caromDraw25 = document.getElementById("cueCaromDraw25V1");
       document.querySelectorAll('input[name="cueCaromVariantV3"]').forEach(input => {
         input.checked = input.value === caromSettingsValue.variant;
@@ -9294,18 +9268,18 @@ body {
     });
     const NINE_SETTINGS_KEY = "cueScore.nineBall.settings.v1";
     let nineSettingsValue;
-    try { nineSettingsValue = JSON.parse(safeRead(NINE_SETTINGS_KEY, '{"breakRule":"alternate","threeFoul":true,"pushOut":false,"illegalBreak":true,"recordMode":"detail","nineOnFoot":false,"breakBox":false}')); }
-    catch (_) { nineSettingsValue = {breakRule:"alternate",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",nineOnFoot:false,breakBox:false}; }
-    nineSettingsValue = {...nineSettingsValue, breakRule:"alternate", pushOut:false, threeFoul:true, illegalBreak:true, recordMode:"detail", nineOnFoot:Boolean(nineSettingsValue.nineOnFoot), breakBox:Boolean(nineSettingsValue.breakBox)};
+    try { nineSettingsValue = JSON.parse(safeRead(NINE_SETTINGS_KEY, '{"breakRule":"winner","threeFoul":true,"pushOut":false,"illegalBreak":true,"recordMode":"detail","nineOnFoot":false,"breakBox":false}')); }
+    catch (_) { nineSettingsValue = {breakRule:"winner",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",nineOnFoot:false,breakBox:false}; }
+    nineSettingsValue = {...nineSettingsValue, breakRule:"winner", pushOut:false, threeFoul:true, illegalBreak:true, recordMode:"detail", nineOnFoot:false, breakBox:false};
     const TEN_SETTINGS_KEY = "cueScore.tenBall.settings.v1";
     let tenSettingsValue;
-    try { tenSettingsValue = JSON.parse(safeRead(TEN_SETTINGS_KEY, '{"breakRule":"alternate","threeFoul":true,"pushOut":false,"illegalBreak":true,"recordMode":"detail","breakBox":false}')); }
-    catch (_) { tenSettingsValue = {breakRule:"alternate",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",breakBox:false}; }
-    tenSettingsValue = {...tenSettingsValue, breakRule:"alternate", pushOut:false, threeFoul:true, illegalBreak:true, recordMode:"detail", breakBox:Boolean(tenSettingsValue.breakBox)};
-    const BREAK_DEFAULT_MIGRATION_KEY = "cueScore.breakRuleDefault.v2";
+    try { tenSettingsValue = JSON.parse(safeRead(TEN_SETTINGS_KEY, '{"breakRule":"winner","threeFoul":true,"pushOut":false,"illegalBreak":true,"recordMode":"detail","breakBox":false}')); }
+    catch (_) { tenSettingsValue = {breakRule:"winner",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",breakBox:false}; }
+    tenSettingsValue = {...tenSettingsValue, breakRule:"winner", pushOut:false, threeFoul:true, illegalBreak:true, recordMode:"detail", breakBox:false};
+    const BREAK_DEFAULT_MIGRATION_KEY = "cueScore.breakRuleDefault.v3";
     if (safeRead(BREAK_DEFAULT_MIGRATION_KEY, "") !== "applied") {
-      nineSettingsValue.breakRule = "alternate";
-      tenSettingsValue.breakRule = "alternate";
+      nineSettingsValue.breakRule = "winner";
+      tenSettingsValue.breakRule = "winner";
       safeWrite(NINE_SETTINGS_KEY, JSON.stringify(nineSettingsValue));
       safeWrite(TEN_SETTINGS_KEY, JSON.stringify(tenSettingsValue));
       safeWrite(BREAK_DEFAULT_MIGRATION_KEY, "applied");
@@ -9313,10 +9287,10 @@ body {
     const persistRackRuleSettings = () => {
       const target = selectedDiscipline === "9ball" ? nineSettingsValue : selectedDiscipline === "10ball" ? tenSettingsValue : null;
       if (!target) return;
-      target.breakRule = "alternate";
+      target.breakRule = "winner";
       target.pushOut = false;
-      target.breakBox = Boolean(document.getElementById("cueBreakBoxV3")?.checked);
-      if (selectedDiscipline === "9ball") target.nineOnFoot = Boolean(document.getElementById("cueNineOnFootV3")?.checked);
+      target.breakBox = false;
+      if (selectedDiscipline === "9ball") target.nineOnFoot = false;
       target.threeFoul = true;
       target.illegalBreak = true;
       target.recordMode = "detail";
@@ -9327,9 +9301,8 @@ body {
     ["cueNineOnFootV3","cueBreakBoxV3"].forEach(id => document.getElementById(id)?.addEventListener("change", persistRackRuleSettings));
     const persistCaromSettings = () => {
       const selectedVariant = document.querySelector('input[name="cueCaromVariantV3"]:checked')?.value;
-      caromSettingsValue.variant = ["threeCushion","bandGame","threeBall","fourBall"].includes(selectedVariant)
-        ? selectedVariant : "threeCushion";
-      caromSettingsValue.drawAt25 = Boolean(document.getElementById("cueCaromDraw25V1")?.checked);
+      caromSettingsValue.variant = "threeCushion";
+      caromSettingsValue.drawAt25 = true;
       safeWrite(CAROM_SETTINGS_KEY, JSON.stringify(caromSettingsValue));
     };
     document.querySelectorAll('input[name="cueCaromVariantV3"]').forEach(input => input.addEventListener("change", persistCaromSettings));
@@ -9369,13 +9342,13 @@ body {
   let activeGameTypeV1 = ROTATION_GAME_TYPE;
   let jpa9SkillLevelsV1 = {1:5,2:5};
   let deadBallsV1 = new Set();
-  let nineBallSettingsV1 = {breakRule:"alternate",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",nineOnFoot:false,breakBox:false};
+  let nineBallSettingsV1 = {breakRule:"winner",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",nineOnFoot:false,breakBox:false};
   let nineBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[]};
-  let tenBallSettingsV1 = {breakRule:"alternate",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",breakBox:false};
+  let tenBallSettingsV1 = {breakRule:"winner",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",breakBox:false};
   let tenBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[],spotEvents:[]};
   let straightPoolSettingsV1 = {threeFoul:true,openingBreak:false,recordMode:"detail"};
   let straightPoolStateV1 = {consecutiveFouls:{1:0,2:0},openingBreaker:null,phase:"playing",rackCycle:1,spotEvents:[],rerackEvents:[],openingBreakEvents:[]};
-  let threeCushionSettingsV1 = {variant:"threeCushion",drawAt25:false};
+  let threeCushionSettingsV1 = {variant:"threeCushion",drawAt25:true};
   let threeCushionStateV1 = {currentRun:0,currentInning:1,startingPlayer:1,completedTurns:{1:0,2:0},highRun:{1:0,2:0},innings:[]};
   let straightBreakDecisionV1 = null;
   let straightPoolNoticeQueueV1 = [];
@@ -9480,14 +9453,7 @@ body {
   }
 
   function nextNineBallBreakerV1(rackWinner) {
-    const settings = activeRackSettingsV1();
-    const state = activeRackStateV1();
-    const loser = rackWinner === 1 ? 2 : 1;
-    if (settings.breakRule === "loser") return loser;
-    if (settings.breakRule === "alternate") {
-      return Number(rack) % 2 === 1 ? (state.initialBreaker === 1 ? 2 : 1) : state.initialBreaker;
-    }
-    return rackWinner;
+    return Number(rackWinner) === 2 ? 2 : 1;
   }
 
   function completeNineBallRackV1(rackWinner, reason = "legalNine", details = {}) {
@@ -9919,6 +9885,17 @@ let matchRecordsRawCacheV152 = null;
     const avatar=normalizePlayerAvatarV2(playerOrAvatar?.avatar || playerOrAvatar);
     if (avatar.type === "photo") return avatar.dataUrl;
     return PLAYER_AVATAR_BY_ID_V5.get(avatar.id)?.src || DEFAULT_PLAYER_AVATAR_SOURCE_V4;
+  }
+
+  function syncProGamePlayerAvatarsV2() {
+    const players = readPlayerLibrary();
+    [1,2].forEach(player => {
+      const registered = players.find(item => item.id === selectedRegisteredPlayer[player]);
+      const avatar = el(`proP${player}AvatarV2`);
+      if (!avatar) return;
+      avatar.src = playerAvatarSourceV2(registered?.avatar);
+      avatar.alt = registered ? `${registered.name}のプロフィール画像` : `プレーヤー${player}のプロフィール画像`;
+    });
   }
 
   function playerAvatarHtmlV2(player, className="player-avatar-v2") {
@@ -12759,13 +12736,13 @@ let matchRecordsRawCacheV152 = null;
     activeGameTypeV1 = state.activeGameTypeV1 || ROTATION_GAME_TYPE;
     jpa9SkillLevelsV1 = state.jpa9SkillLevelsV1 ? {...state.jpa9SkillLevelsV1} : {1:5,2:5};
     deadBallsV1 = new Set(state.deadBallsV1 || []);
-    nineBallSettingsV1 = state.nineBallSettingsV1 ? {...state.nineBallSettingsV1, breakRule:"alternate", pushOut:false, threeFoul:true, illegalBreak:true, recordMode:"detail", nineOnFoot:Boolean(state.nineBallSettingsV1.nineOnFoot), breakBox:Boolean(state.nineBallSettingsV1.breakBox)} : {breakRule:"alternate",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",nineOnFoot:false,breakBox:false};
+    nineBallSettingsV1 = state.nineBallSettingsV1 ? {...state.nineBallSettingsV1, breakRule:"winner", pushOut:false, threeFoul:true, illegalBreak:true, recordMode:"detail", nineOnFoot:false, breakBox:false} : {breakRule:"winner",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",nineOnFoot:false,breakBox:false};
     nineBallStateV1 = state.nineBallStateV1 ? JSON.parse(JSON.stringify(state.nineBallStateV1)) : {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[]};
-    tenBallSettingsV1 = state.tenBallSettingsV1 ? {...state.tenBallSettingsV1, breakRule:"alternate", pushOut:false, threeFoul:true, illegalBreak:true, recordMode:"detail", breakBox:Boolean(state.tenBallSettingsV1.breakBox)} : {breakRule:"alternate",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",breakBox:false};
+    tenBallSettingsV1 = state.tenBallSettingsV1 ? {...state.tenBallSettingsV1, breakRule:"winner", pushOut:false, threeFoul:true, illegalBreak:true, recordMode:"detail", breakBox:false} : {breakRule:"winner",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",breakBox:false};
     tenBallStateV1 = state.tenBallStateV1 ? JSON.parse(JSON.stringify(state.tenBallStateV1)) : {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[],spotEvents:[]};
     straightPoolSettingsV1 = state.straightPoolSettingsV1 ? {...state.straightPoolSettingsV1, threeFoul:true, openingBreak:false, recordMode:"detail"} : {threeFoul:true,openingBreak:false,recordMode:"detail"};
     straightPoolStateV1 = state.straightPoolStateV1 ? {...JSON.parse(JSON.stringify(state.straightPoolStateV1)), openingBreaker:null, phase:"playing"} : {consecutiveFouls:{1:0,2:0},openingBreaker:null,phase:"playing",rackCycle:1,spotEvents:[],rerackEvents:[],openingBreakEvents:[]};
-    threeCushionSettingsV1 = state.threeCushionSettingsV1 ? {...state.threeCushionSettingsV1} : {variant:"threeCushion",drawAt25:false};
+    threeCushionSettingsV1 = {variant:"threeCushion",drawAt25:true};
     threeCushionStateV1 = state.threeCushionStateV1 ? JSON.parse(JSON.stringify(state.threeCushionStateV1)) : {currentRun:0,currentInning:1,startingPlayer:state.startingPlayer||1,completedTurns:{1:0,2:0},highRun:{1:0,2:0},innings:[]};
     current = state.current;
     startingPlayer = state.startingPlayer;
@@ -14093,24 +14070,24 @@ let matchRecordsRawCacheV152 = null;
     const homeSelectionV1 = window.getCueScoreHomeSelectionV1?.() || {};
     if (nineBallModeV1) {
       nineBallSettingsV1 = {
-        breakRule: "alternate",
+        breakRule: "winner",
         threeFoul: true,
         pushOut: false,
         illegalBreak: true,
         recordMode: "detail",
-        nineOnFoot: Boolean(homeSelectionV1.nineBall?.nineOnFoot),
-        breakBox: Boolean(homeSelectionV1.nineBall?.breakBox)
+        nineOnFoot: false,
+        breakBox: false
       };
       recordingModeV611 = nineBallSettingsV1.recordMode;
     }
     if (tenBallModeV1) {
       tenBallSettingsV1 = {
-        breakRule: "alternate",
+        breakRule: "winner",
         threeFoul: true,
         pushOut: false,
         illegalBreak: true,
         recordMode: "detail",
-        breakBox: Boolean(homeSelectionV1.tenBall?.breakBox)
+        breakBox: false
       };
       recordingModeV611 = tenBallSettingsV1.recordMode;
     }
@@ -14123,10 +14100,9 @@ let matchRecordsRawCacheV152 = null;
       recordingModeV611 = straightPoolSettingsV1.recordMode;
     }
     if (threeCushionModeV1) {
-      const variant = homeSelectionV1.threeCushion?.variant;
       threeCushionSettingsV1 = {
-        variant: ["threeCushion","bandGame","threeBall","fourBall"].includes(variant) ? variant : "threeCushion",
-        drawAt25: Boolean(homeSelectionV1.threeCushion?.drawAt25)
+        variant: "threeCushion",
+        drawAt25: true
       };
       recordingModeV611 = "detail";
     }
@@ -14234,6 +14210,7 @@ let matchRecordsRawCacheV152 = null;
 
     el("proP1Name").textContent = p1Name;
     el("proP2Name").textContent = p2Name;
+    syncProGamePlayerAvatarsV2();
     el("proP1LogName").textContent = p1Name;
     el("proP2LogName").textContent = p2Name;
     el("proStartTime").textContent = formatStartTime(new Date());
@@ -18864,7 +18841,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-unified-ball-icons-v2";
+    const PWA_VERSION = "1.0-match-rules-avatar-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -26503,6 +26480,20 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .cue-official-ball-v1:disabled:not([data-ball-state="used"]){opacity:.46!important;filter:grayscale(.15)!important}
 .pro-balls.rack-ended .cue-official-ball-v1{opacity:.35!important}
 .pro-balls.locked .cue-official-ball-v1:not(.used){opacity:.46!important}
+.pro-player-identity-v2{
+  display:flex;max-width:100%;align-items:center;justify-content:center;gap:7px;
+}
+.pro-player-identity-v2 .pro-player-name{
+  min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.pro-player-avatar-v2{
+  width:30px;height:30px;flex:0 0 30px;border:1px solid #dededb;border-radius:50%;
+  background:#eeeeec;object-fit:cover;
+}
+@media(max-width:390px){
+  .pro-player-identity-v2{gap:5px}
+  .pro-player-avatar-v2{width:26px;height:26px;flex-basis:26px}
+}
 </style>
 </body>
 </html>
