@@ -9011,11 +9011,11 @@ body {
     window.canUseCsvExport=()=>access("csvExport");
   })();
 
-  // CueScore Official BallIcon v1.0: one renderer for every 1-15 ball surface.
+  // CueScore Official BallIcon v2.0: Home 9/10 icons are the single source of truth for every 1-15 ball surface.
   (() => {
     const colors = Object.freeze({
-      1:"#FFD400",2:"#2563EB",3:"#E53935",4:"#EC4899",5:"#FB8C00",
-      6:"#43A047",7:"#8D5E34",8:"#111111",9:"#FFD400",10:"#2563EB",
+      1:"#F4B400",2:"#0057B8",3:"#E53935",4:"#EC4899",5:"#FB8C00",
+      6:"#43A047",7:"#8D5E34",8:"#111111",9:"#F4B400",10:"#0057B8",
       11:"#E53935",12:"#EC4899",13:"#FB8C00",14:"#43A047",15:"#8D5E34"
     });
     const number = value => Math.max(1, Math.min(15, Math.trunc(Number(value) || 1)));
@@ -9026,7 +9026,8 @@ body {
       if (options.size) element.classList.add(`cue-ball-${options.size}-v1`);
       if (options.state) element.dataset.ballState = options.state;
       element.dataset.cueBallNumber = String(value);
-      element.dataset.cueBallStriped = value >= 9 ? "true" : "false";
+      element.dataset.cueBallMarked = value >= 9 ? "true" : "false";
+      delete element.dataset.cueBallStriped;
       element.style.setProperty("--cue-ball-color", colors[value]);
       element.style.setProperty("--ball-color", colors[value]);
       element.innerHTML = `<span class="cue-ball-number-v1">${value}</span>`;
@@ -9037,7 +9038,7 @@ body {
       const ball = number(value);
       const classes = ["cue-official-ball-v1", options.size ? `cue-ball-${options.size}-v1` : "", options.classes || ""].filter(Boolean).join(" ");
       const state = options.state ? ` data-ball-state="${String(options.state)}"` : "";
-      return `<span class="${classes}" data-cue-ball-number="${ball}" data-cue-ball-striped="${ball >= 9}"${state} style="--cue-ball-color:${colors[ball]};--ball-color:${colors[ball]}"><span class="cue-ball-number-v1">${ball}</span></span>`;
+      return `<span class="${classes}" data-cue-ball-number="${ball}" data-cue-ball-marked="${ball >= 9}"${state} style="--cue-ball-color:${colors[ball]};--ball-color:${colors[ball]}"><span class="cue-ball-number-v1">${ball}</span></span>`;
     };
     window.CueScoreBallIcon = Object.freeze({ colors, decorate, html });
     document.querySelectorAll(".break-ball-btn-v696[data-ball-number]").forEach(element => decorate(element, { number:element.dataset.ballNumber, size:"selection" }));
@@ -18863,7 +18864,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-ios-match-card-motion-v2";
+    const PWA_VERSION = "1.0-unified-ball-icons-v2";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -26414,18 +26415,21 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 })();
 </script>
 <style>
-/* CueScore Official BallIcon v1.0 — shared 1-15 design for selection, play and history. */
+/* CueScore Official BallIcon v2.0 — Home 9/10 ring-and-dash design shared across every screen. */
 .cue-official-ball-v1{
   --cue-ball-size:44px;
   --cue-ball-number-size:20px;
-  --cue-ball-triangle-height:5px;
-  --cue-ball-triangle-width:7px;
+  --cue-ball-mark-width:6px;
+  --cue-ball-mark-height:3px;
+  --cue-ball-mark-inset:3px;
   position:relative!important;
   box-sizing:border-box!important;
   width:var(--cue-ball-size)!important;
   height:var(--cue-ball-size)!important;
   min-width:var(--cue-ball-size)!important;
   min-height:var(--cue-ball-size)!important;
+  flex:0 0 var(--cue-ball-size)!important;
+  aspect-ratio:1/1!important;
   display:inline-grid!important;
   place-items:center!important;
   overflow:visible!important;
@@ -26460,30 +26464,24 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   position:absolute!important;
   z-index:1!important;
   top:50%!important;
-  width:0!important;
-  height:0!important;
+  width:var(--cue-ball-mark-width)!important;
+  height:var(--cue-ball-mark-height)!important;
   transform:translateY(-50%)!important;
-  background:transparent!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:var(--cue-ball-color)!important;
 }
-.cue-official-ball-v1[data-cue-ball-striped="true"]::before{
+.cue-official-ball-v1[data-cue-ball-marked="true"]::before{
   content:""!important;
-  left:3px!important;
-  border-top:var(--cue-ball-triangle-height) solid transparent!important;
-  border-bottom:var(--cue-ball-triangle-height) solid transparent!important;
-  border-left:var(--cue-ball-triangle-width) solid var(--cue-ball-color)!important;
+  left:var(--cue-ball-mark-inset)!important;
 }
-.cue-official-ball-v1[data-cue-ball-striped="true"]::after{
+.cue-official-ball-v1[data-cue-ball-marked="true"]::after{
   content:""!important;
-  right:3px!important;
-  border-top:var(--cue-ball-triangle-height) solid transparent!important;
-  border-bottom:var(--cue-ball-triangle-height) solid transparent!important;
-  border-right:var(--cue-ball-triangle-width) solid var(--cue-ball-color)!important;
+  right:var(--cue-ball-mark-inset)!important;
 }
 .cue-ball-selection-v1,.cue-ball-game-v1{--cue-ball-size:44px;--cue-ball-number-size:20px}
-.cue-ball-summary-v1{--cue-ball-size:24px;--cue-ball-number-size:11px;--cue-ball-triangle-height:3px;--cue-ball-triangle-width:4px}
-.cue-ball-history-v1{--cue-ball-size:20px;--cue-ball-number-size:9.5px;--cue-ball-triangle-height:2.5px;--cue-ball-triangle-width:4px}
-.cue-ball-summary-v1[data-cue-ball-striped="true"]::before,.cue-ball-history-v1[data-cue-ball-striped="true"]::before{left:1px!important}
-.cue-ball-summary-v1[data-cue-ball-striped="true"]::after,.cue-ball-history-v1[data-cue-ball-striped="true"]::after{right:1px!important}
+.cue-ball-summary-v1{--cue-ball-size:24px;--cue-ball-number-size:11px;--cue-ball-mark-width:3.5px;--cue-ball-mark-height:2px;--cue-ball-mark-inset:1.5px}
+.cue-ball-history-v1{--cue-ball-size:20px;--cue-ball-number-size:9.5px;--cue-ball-mark-width:3px;--cue-ball-mark-height:1.5px;--cue-ball-mark-inset:1px}
 .cue-official-ball-v1:active:not(:disabled){transform:scale(.96)!important;filter:none!important}
 .cue-official-ball-v1[hidden]{display:none!important}
 .pushout-ball-v730.selected-v730{
