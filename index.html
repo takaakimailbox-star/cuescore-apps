@@ -8188,9 +8188,7 @@ body {
         </div>
 
         <div class="season-setting-v38" aria-hidden="true">
-          <select id="matchCategoryV38" aria-label="試合区分"></select>
           <select id="matchSeasonV38" aria-label="シーズン名"><option value="">指定なし</option></select>
-          <button id="manageCategoriesBtnV381" type="button">＋</button>
           <button id="manageSeasonsBtnV381" type="button">＋</button>
         </div>
         <div class="player-name-limit-note" id="playerNameLimitNote">プレーヤー名は20文字まで</div>
@@ -8286,7 +8284,7 @@ body {
         <section class="pro-top-fixed">
           <section class="pro-scoreboard">
             <div class="pro-player-panel active" id="proP1Panel">
-              <div class="pro-player-identity-v2"><div class="pro-player-name" id="proP1Name">Player 1</div><img class="pro-player-avatar-v2" id="proP1AvatarV2" src="assets/icons/avatar/default/avatar_default_silhouette.png" alt=""></div>
+              <div class="pro-player-identity-v2"><img class="pro-player-avatar-v2" id="proP1AvatarV2" src="assets/icons/avatar/default/avatar_default_silhouette.png" alt=""><div class="pro-player-name" id="proP1Name">Player 1</div></div>
               <div class="pro-score" id="proP1Score">0</div>
               <div class="pro-stats">
                 <span id="proP1GoalLabelV1">Race to</span> <span id="proP1Goal">120</span>
@@ -8295,7 +8293,7 @@ body {
               </div>
             </div>
             <div class="pro-player-panel" id="proP2Panel">
-              <div class="pro-player-identity-v2"><div class="pro-player-name" id="proP2Name">Player 2</div><img class="pro-player-avatar-v2" id="proP2AvatarV2" src="assets/icons/avatar/default/avatar_default_silhouette.png" alt=""></div>
+              <div class="pro-player-identity-v2"><img class="pro-player-avatar-v2" id="proP2AvatarV2" src="assets/icons/avatar/default/avatar_default_silhouette.png" alt=""><div class="pro-player-name" id="proP2Name">Player 2</div></div>
               <div class="pro-score" id="proP2Score">0</div>
               <div class="pro-stats">
                 <span id="proP2GoalLabelV1">Race to</span> <span id="proP2Goal">120</span>
@@ -8539,12 +8537,6 @@ body {
           <button type="button" data-records-filter="recent10">直近10試合</button>
         </div>
         <div class="records-season-filter-v38">
-          <select id="recordsCategorySelectV38" aria-label="試合区分で絞り込み">
-            <option value="">区分：すべて</option>
-            <option value="Free">Free</option>
-            <option value="大会">大会</option>
-            <option value="その他">その他</option>
-          </select>
           <select id="recordsSeasonSelectV38" aria-label="シーズンで絞り込み">
             <option value="">シーズン：すべて</option>
           </select>
@@ -8862,7 +8854,6 @@ body {
           </div>
         </section>
         <section class="statistics-filter-card"><h2>分類・対象</h2><div class="statistics-filter-grid">
-          <div class="statistics-filter-field"><label for="statisticsCategory">試合区分</label><select id="statisticsCategory"><option value="">すべて</option></select></div>
           <div class="statistics-filter-field"><label for="statisticsSeason">シーズン</label><select id="statisticsSeason"><option value="">すべて</option></select></div>
           <div class="statistics-filter-field full"><label for="statisticsPlayer">プレーヤー</label><select id="statisticsPlayer"><option value="">すべて</option></select></div>
           <div class="statistics-filter-field full"><label for="statisticsOpponent">対戦相手</label><select id="statisticsOpponent"><option value="">すべて</option></select></div>
@@ -8916,22 +8907,11 @@ body {
       aria-label="試合分類管理">
       <header class="classification-manager-header-v381">
         <button id="classificationManagerBackV381" type="button" aria-label="戻る">‹ 戻る</button>
-        <div>試合分類管理</div>
+        <div>シーズン管理</div>
         <span></span>
       </header>
 
       <div class="classification-manager-body-v381">
-        <section class="classification-section-v381">
-          <div class="classification-section-head-v381">
-            <div>
-              <h2>試合区分</h2>
-              <p>Freeは固定で、編集・削除できません。</p>
-            </div>
-            <button id="addCategoryBtnV381" type="button">＋追加</button>
-          </div>
-          <div id="categoryListV381" class="classification-list-v381"></div>
-        </section>
-
         <section class="classification-section-v381">
           <div class="classification-section-head-v381">
             <div>
@@ -12656,7 +12636,7 @@ let matchRecordsRawCacheV152 = null;
     };
   }
 
-  let currentMatchCategoryV38 = "Free";
+  let currentMatchCategoryV38 = "";
   let currentMatchSeasonV38 = "";
   const GAME_MEMO_TAGS_V32 = ["ブレイク", "セーフティー", "フォーム", "メンタル", "集中力", "キュー切れ", "取り切り", "その他"];
 
@@ -14117,7 +14097,7 @@ let matchRecordsRawCacheV152 = null;
     const rackRaceModeV1 = nineBallModeV1 || tenBallModeV1;
     const p1Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[1]] : rackRaceModeV1 ? Math.min(15,Math.max(1,Number(el("p1Race")?.value || 5))) : Number(el("p1Race")?.value || 120);
     const p2Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[2]] : rackRaceModeV1 ? p1Goal : Number(el("p2Race")?.value || 120);
-    currentMatchCategoryV38 = el("matchCategoryV38")?.value || "Free";
+    currentMatchCategoryV38 = "";
     currentMatchSeasonV38 = String(el("matchSeasonV38")?.value || "").trim().slice(0, 30);
 
     if (!Number.isFinite(p1Goal) || p1Goal <= 0 || !Number.isFinite(p2Goal) || p2Goal <= 0) {
@@ -15755,7 +15735,7 @@ let matchRecordsRawCacheV152 = null;
             <div class="label">ファール</div><div class="value">${Number(p1.fouls)||0}</div><div class="value">${Number(p2.fouls)||0}</div>
             <div class="label">セーフティー</div><div class="value">${Number(p1.safety)||0}</div><div class="value">${Number(p2.safety)||0}</div>
           </div>
-          ${(record.category || record.season) ? `<div class="record-detail-season-v38">${record.category ? `<span>${esc(record.category)}</span>` : ""}${record.season ? `<span>${esc(record.season)}</span>` : ""}</div>` : ""}
+          ${record.season ? `<div class="record-detail-season-v38"><span>${esc(record.season)}</span></div>` : ""}
           ${(record.memo || record.matchMemo || record.reflection || record.playerReflections || (Array.isArray(record.tags) && record.tags.length)) ? `<div class="record-detail-memo">${Array.isArray(record.tags) && record.tags.length ? `<div class="record-detail-tags">${record.tags.map(tag => `<span class="memo-tag-chip">${esc(tag)}</span>`).join("")}</div>` : ""}${record.playerReflections ? `<div class="record-detail-memo-title">プレーヤー別の振り返り</div>${[1,2].map(p=>{const r=record.playerReflections?.[p]||record.playerReflections?.[String(p)];if(!r||!reflectionHasContentV840(r))return "";const n=record.players?.[p]?.name||`Player ${p}`;return `<div class="reflection-player-preview-v841"><div class="reflection-player-name-v841">${esc(n)}</div>${renderReflectionPreviewV840(r)}</div>`;}).join("")}${(record.matchMemo||record.memo)?`<div class="reflection-player-preview-v841"><div class="reflection-player-name-v841">試合全体メモ</div><div>${esc(record.matchMemo||record.memo)}</div></div>`:""}` : record.reflection ? `<div class="record-detail-memo-title">試合の振り返り（旧形式）</div><div class="record-reflection-v840">${renderReflectionPreviewV840(record.reflection)}</div>` : (record.memo ? `<div class="record-detail-memo-title">試合メモ</div><div>${esc(record.memo)}</div>` : "")}</div>` : ""}
         </section>
         <section class="history-renew-page-v67" data-history-page-v67="1" role="tabpanel">
@@ -18346,7 +18326,7 @@ let matchRecordsRawCacheV152 = null;
         : (()=>{try{const v=JSON.parse(localStorage.getItem("rotationScoreboard.matchRecords.v1")||"[]");return Array.isArray(v)?v:[]}catch(_){return[]}})();
       return records.filter(r=>r&&r.players?.[1]&&r.players?.[2]);
     };
-    const read=()=>{try{return {...defaults,...JSON.parse(localStorage.getItem(KEY)||"{}")}}catch(_){return {...defaults}}};
+    const read=()=>{try{return {...defaults,...JSON.parse(localStorage.getItem(KEY)||"{}"),category:""}}catch(_){return {...defaults}}};
     const save=f=>localStorage.setItem(KEY,JSON.stringify({...defaults,...f}));
     const day=v=>{if(!v)return null;const d=new Date(v+"T00:00:00");return Number.isNaN(d.getTime())?null:d};
     const dateOf=r=>{const d=new Date(r.endedAt||r.playedAt||r.startedAt||0);return Number.isNaN(d.getTime())?null:d};
@@ -18378,11 +18358,11 @@ let matchRecordsRawCacheV152 = null;
     function options(){
       const records=rawRecords(),cats=[...new Set(records.map(r=>String(r.category||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ja")),seasons=[...new Set(records.map(r=>String(r.season||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ja")),tags=[...new Set(records.flatMap(r=>Array.isArray(r.tags)?r.tags:[]).map(String).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ja"));
       const pm=new Map();records.forEach(r=>[1,2].forEach(side=>{const p=r.players?.[side]||{},name=String(p.name||"").trim(),id=String(p.registeredPlayerId||"");if(name)pm.set(id?`id:${id}`:`name:${name}`,name)}));
-      const fill=(id,vals)=>{const node=el(id),cur=node.value;node.innerHTML='<option value="">すべて</option>'+vals.map(v=>{const pair=Array.isArray(v),value=pair?v[0]:v,label=pair?v[1]:v;return `<option value="${String(value??'').replace(/"/g,'&quot;')}">${String(label??'')}</option>`}).join('');node.value=cur};
-      fill(ids.category,cats);fill(ids.season,seasons);fill(ids.tag,tags);const players=[...pm.entries()].sort((a,b)=>a[1].localeCompare(b[1],"ja"));fill(ids.player,players);fill(ids.opponent,players)
+      const fill=(id,vals)=>{const node=el(id);if(!node)return;const cur=node.value;node.innerHTML='<option value="">すべて</option>'+vals.map(v=>{const pair=Array.isArray(v),value=pair?v[0]:v,label=pair?v[1]:v;return `<option value="${String(value??'').replace(/"/g,'&quot;')}">${String(label??'')}</option>`}).join('');node.value=cur};
+      fill(ids.season,seasons);fill(ids.tag,tags);const players=[...pm.entries()].sort((a,b)=>a[1].localeCompare(b[1],"ja"));fill(ids.player,players);fill(ids.opponent,players)
     }
     function load(){options();const f=read();Object.entries(ids).forEach(([k,id])=>{if(el(id))el(id).value=f[k]||""});document.querySelectorAll('[data-period]').forEach(b=>b.classList.toggle('active',b.dataset.period===f.period));updateSummary()}
-    function current(){const active=document.querySelector('[data-period].active');return {period:active?.dataset.period||"all",from:el(ids.from).value,to:el(ids.to).value,category:el(ids.category).value,season:el(ids.season).value,player:el(ids.player).value,opponent:el(ids.opponent).value,recordingMode:el(ids.recordingMode).value,outcome:el(ids.outcome).value,tag:el(ids.tag).value}}
+    function current(){const active=document.querySelector('[data-period].active');return {period:active?.dataset.period||"all",from:el(ids.from).value,to:el(ids.to).value,category:"",season:el(ids.season).value,player:el(ids.player).value,opponent:el(ids.opponent).value,recordingMode:el(ids.recordingMode).value,outcome:el(ids.outcome).value,tag:el(ids.tag).value}}
     function labelFor(id){const n=el(id);return n?.selectedOptions?.[0]?.textContent||"すべて"}
     function summaryText(f=current()){
       const parts=[];parts.push({all:"全期間",year:"今年",month:"今月","30days":"直近30日",recent10:"直近10試合"}[f.period]||(f.from||f.to?`${f.from||"開始なし"}〜${f.to||"終了なし"}`:"全期間"));
@@ -18841,7 +18821,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-match-rules-avatar-v1";
+    const PWA_VERSION = "1.0-player-avatar-layout-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22177,7 +22157,12 @@ window.cueScoreModalDiagnosticsV159 = () => ({
     const raceTag=goal1&&goal2&&goal1!==goal2
       ? `Race to ${goal1} / ${goal2}`
       : (goal1||goal2?`Race to ${goal1||goal2}`:"");
-    const categoryTag=String(record.category||"").trim();
+    const categoryTag="";
+    const registeredPlayersV3=readPlayerLibrary();
+    const detailAvatarV3=player=>{
+      const registered=registeredPlayersV3.find(item=>item.id===player?.registeredPlayerId);
+      return playerAvatarSourceV2(registered?.avatar);
+    };
     const summaryRows=[
       ["シュート成功率",shotRateV1(p1),shotRateV1(p2)],
       ["ハイラン",Number.isFinite(Number(p1.maxRun))?String(Number(p1.maxRun)):"—",Number.isFinite(Number(p2.maxRun))?String(Number(p2.maxRun)):"—"],
@@ -22204,11 +22189,11 @@ window.cueScoreModalDiagnosticsV159 = () => ({
             ${categoryTag?`<span class="match-detail-category-v2">${esc(categoryTag)}</span>`:""}
           </div>
           <div class="match-detail-result-line-v2">
-            <span class="match-detail-result-name-v2">${esc(p1.name||"Player1")}</span>
+            <span class="match-detail-result-player-v3"><img src="${detailAvatarV3(p1)}" alt="${esc(p1.name||"Player1")}のプロフィール画像"><span class="match-detail-result-name-v2">${esc(p1.name||"Player1")}</span></span>
             <strong class="${winner===1?"winner":""}">${Number(p1.score)||0}</strong>
             <span>−</span>
             <strong class="${winner===2?"winner":""}">${Number(p2.score)||0}</strong>
-            <span class="match-detail-result-name-v2">${esc(p2.name||"Player2")}</span>
+            <span class="match-detail-result-player-v3"><img src="${detailAvatarV3(p2)}" alt="${esc(p2.name||"Player2")}のプロフィール画像"><span class="match-detail-result-name-v2">${esc(p2.name||"Player2")}</span></span>
           </div>
           ${raceTag?`<div class="match-detail-race-v2">${esc(raceTag)}</div>`:""}
         </section>
@@ -22817,7 +22802,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
   font-size:clamp(7px,2vw,10px);line-height:1.05;white-space:nowrap
 }
 .records-disciplines-v2 button.is-selected{border-color:#171717;background:#f1f1ef}
-.records-disciplines-v2 img,.records-all-icon-v2{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;object-fit:contain}
+.records-disciplines-v2 img,.records-all-icon-v2{display:grid;place-items:center;width:27.2px;height:27.2px;border-radius:50%;object-fit:contain}
 .records-all-icon-v2{border:2px solid #171717;font-size:9px;font-weight:800}
 .records-search-v1,#recordsCloudStatusV1,.records-bottom-nav-v1{display:none!important}
 .records-controls-v1{padding-top:0}
@@ -22830,7 +22815,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
   grid-template-areas:"icon date race chevron" "icon matchup score chevron"!important;
   min-height:70px!important;column-gap:8px!important
 }
-.record-game-icon-v2{grid-area:icon;width:40px;height:40px;border-radius:50%;object-fit:contain;align-self:center}
+.record-game-icon-v2{grid-area:icon;width:32px;height:32px;border-radius:50%;object-fit:contain;align-self:center;justify-self:center}
 .records-list .record-date-compact{grid-area:date!important}
 .record-race-v2{grid-area:race;color:#666663;font-size:clamp(10px,2.8vw,12px);font-weight:520;white-space:nowrap;text-align:right}
 .records-list .record-matchup{grid-area:matchup!important}
@@ -22841,9 +22826,9 @@ window.cueScoreModalDiagnosticsV159 = () => ({
 @media(max-width:370px){
   .records-disciplines-v2{margin-left:8px;margin-right:8px;gap:2px}
   .records-disciplines-v2 button{height:64px}
-  .records-disciplines-v2 img,.records-all-icon-v2{width:30px;height:30px}
+  .records-disciplines-v2 img,.records-all-icon-v2{width:24px;height:24px}
   .records-list .record-card{grid-template-columns:38px minmax(0,1fr) auto 10px!important;column-gap:5px!important}
-  .record-game-icon-v2{width:36px;height:36px}
+  .record-game-icon-v2{width:28.8px;height:28.8px}
 }
 
 /* CueScore Match Detail v1.0 */
@@ -22963,6 +22948,12 @@ body.match-detail-visible-v1{overflow:hidden!important}
   font-size:15px;
   line-height:1.2;
   font-weight:720;
+}
+.match-detail-result-player-v3{
+  min-width:0;display:flex;align-items:center;flex-direction:column;gap:4px;
+}
+.match-detail-result-player-v3>img{
+  width:44px;height:44px;border:1px solid #dededb;border-radius:50%;background:#eeeeec;object-fit:cover;
 }
 .match-detail-result-line-v2 strong{
   min-width:30px;
