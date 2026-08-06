@@ -22267,6 +22267,17 @@ window.cueScoreModalDiagnosticsV159 = () => ({
       } else if(event?.type==="Safety" || event?.sourceType==="safety"){
         target.push("S");
       } else if(event?.type==="Foul" || event?.sourceType==="foul"){
+        // A scratch/illegal break is already represented by the F attached to
+        // its Break event. The common log also stores a linked Foul event for
+        // analysis, so rendering both would incorrectly produce "F / F".
+        const foulType=String(event?.data?.foulType ?? event?.foulType ?? "");
+        const foulSource=String(event?.data?.source ?? event?.source ?? "");
+        const linkedBreak=event?.data?.parentBreakEvent ?? event?.parentBreakEvent;
+        const isBreakFoul=Boolean(linkedBreak)
+          || foulSource==="break_prompt"
+          || foulType==="break_scratch"
+          || foulType==="illegal_break";
+        if(isBreakFoul) return;
         target.push("F");
       } else if(event?.type==="FoulCount" || event?.sourceType==="consecutive_foul"){
         const count=Number(event?.data?.count ?? event?.count)||0;
