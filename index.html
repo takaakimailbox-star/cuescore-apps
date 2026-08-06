@@ -12083,23 +12083,20 @@ let matchRecordsRawCacheV152 = null;
         button.classList.remove("selected-v696");
       }
     });
-    const grid = el("breakBallGridV696");
     const scratchRow = el("breakScratchRowV1");
     const specialGrid = el("breakSpecialGridV696");
     const scratchButton = el("breakScratchToggleV696");
     const usesOfficialScratchIcon = isNineBallV1() || isTenBallV1() || activeGameTypeV1 === ROTATION_GAME_TYPE;
-    const inlineForNineBall = usesOfficialScratchIcon && isNineBallV1();
     specialGrid?.classList.toggle("is-legacy-scratch-v1", !usesOfficialScratchIcon);
     if (scratchButton) {
-      scratchButton.classList.toggle("is-inline-nine-ball-v1", inlineForNineBall);
+      scratchButton.classList.remove("is-inline-nine-ball-v1");
       scratchButton.classList.toggle("is-legacy-scratch-v1", !usesOfficialScratchIcon);
       scratchButton.classList.toggle("break-special-btn-v696", !usesOfficialScratchIcon);
       scratchButton.classList.toggle("trouble-v696", !usesOfficialScratchIcon);
-      if (inlineForNineBall && grid && scratchButton.parentElement !== grid) grid.append(scratchButton);
-      if (usesOfficialScratchIcon && !inlineForNineBall && scratchRow && scratchButton.parentElement !== scratchRow) scratchRow.append(scratchButton);
+      if (usesOfficialScratchIcon && scratchRow && scratchButton.parentElement !== scratchRow) scratchRow.append(scratchButton);
       if (!usesOfficialScratchIcon && specialGrid && scratchButton.parentElement !== specialGrid) specialGrid.append(scratchButton);
     }
-    scratchRow?.classList.toggle("hidden", inlineForNineBall || !usesOfficialScratchIcon);
+    scratchRow?.classList.toggle("hidden", !usesOfficialScratchIcon);
     return ballCount;
   }
 
@@ -18849,7 +18846,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-break-scratch-cue-ball-v1";
+    const PWA_VERSION = "1.0-unified-scratch-position-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -21654,17 +21651,19 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   border-radius:50%;
 }
 .break-scratch-legacy-icon-v1{display:none}
-.break-scratch-icon-btn-v1.is-inline-nine-ball-v1{
-  width:100%;
-  min-width:0;
-  justify-self:center;
-}
 .break-scratch-icon-btn-v1.active-v696{
+  color:#9c9c99;
+  background:transparent;
+  box-shadow:none;
+}
+.break-scratch-icon-btn-v1.active-v696:not(.is-legacy-scratch-v1) img{opacity:1;filter:grayscale(1) brightness(.93)}
+.break-scratch-icon-btn-v1.is-legacy-scratch-v1.active-v696{
   color:#b12420;
   background:#fff7f6;
-  box-shadow:inset 0 0 0 2px #c7322d;
+  box-shadow:none;
 }
 .break-scratch-icon-btn-v1:disabled{opacity:.45}
+.break-scratch-icon-btn-v1:focus,.break-scratch-icon-btn-v1:focus-visible{outline:none!important}
 .break-summary-v696{
   min-height:45px;
   margin:0 0 13px!important;
