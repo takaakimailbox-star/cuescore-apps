@@ -14096,7 +14096,7 @@ let matchRecordsRawCacheV152 = null;
     };
     const rackRaceModeV1 = nineBallModeV1 || tenBallModeV1;
     const p1Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[1]] : rackRaceModeV1 ? Math.min(15,Math.max(1,Number(el("p1Race")?.value || 5))) : Number(el("p1Race")?.value || 120);
-    const p2Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[2]] : rackRaceModeV1 ? p1Goal : Number(el("p2Race")?.value || 120);
+    const p2Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[2]] : rackRaceModeV1 ? Math.min(15,Math.max(1,Number(el("p2Race")?.value || 5))) : Number(el("p2Race")?.value || 120);
     currentMatchCategoryV38 = "";
     currentMatchSeasonV38 = String(el("matchSeasonV38")?.value || "").trim().slice(0, 30);
 
@@ -15206,22 +15206,12 @@ let matchRecordsRawCacheV152 = null;
     }
     activeRaceInputV1.value = String(normalized);
     if (nineBall) {
-      ["p1Race","p2Race"].forEach(id => {
-        const raceInput = el(id);
-        if (!raceInput) return;
-        raceInput.value = String(Math.min(15, normalized));
-        raceInput.dataset.nineBallRace = raceInput.value;
-        raceInput.dispatchEvent(new Event("change", {bubbles:true}));
-      });
+      activeRaceInputV1.value = String(Math.min(15, normalized));
+      activeRaceInputV1.dataset.nineBallRace = activeRaceInputV1.value;
     }
     if (tenBall) {
-      ["p1Race","p2Race"].forEach(id => {
-        const raceInput = el(id);
-        if (!raceInput) return;
-        raceInput.value = String(Math.min(15, normalized));
-        raceInput.dataset.tenBallRace = raceInput.value;
-        raceInput.dispatchEvent(new Event("change", {bubbles:true}));
-      });
+      activeRaceInputV1.value = String(Math.min(15, normalized));
+      activeRaceInputV1.dataset.tenBallRace = activeRaceInputV1.value;
     }
     if (threeCushion) activeRaceInputV1.dataset.threeCushionTarget = String(normalized);
     else if (straightPool) activeRaceInputV1.dataset.straightPoolTarget = String(normalized);
@@ -18835,7 +18825,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-unified-result-detail-v1";
+    const PWA_VERSION = "1.0-individual-race-targets-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
