@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-bold-home-logo-v1";
+const APP_VERSION = "1.0-iphone-edge-back-v1";
 const CACHE_NAME = `cuescore-rotation-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",

@@ -18913,7 +18913,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-remove-break-foul-input-v1";
+    const PWA_VERSION = "1.0-iphone-edge-back-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -26493,14 +26493,6 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .cue-home-v1.match-setup-active-v3{padding:calc(10px + env(safe-area-inset-top)) 14px calc(22px + env(safe-area-inset-bottom))!important}.cue-home-v1.match-setup-active-v3 .cue-home-head-v2,.cue-home-v1.match-setup-active-v3 .cue-discipline-switcher-v1,.cue-home-v1.match-setup-active-v3 .cue-home-menu-v3,.cue-home-v1.match-setup-active-v3>.cue-bottom-nav-v1{display:none!important}
 .cue-home-v1.match-setup-active-v3 .cue-new-match-integrated-v2{display:flex!important;flex-direction:column!important;width:100%!important;max-width:620px!important;margin:0 auto!important;padding:10px 14px 18px!important;border:1px solid #eeeeeb!important;border-radius:22px!important;background:#fff!important;box-shadow:0 10px 28px rgba(0,0,0,.045)!important;touch-action:pan-y}
 .cue-match-setup-back-v3{order:0;align-self:flex-start;min-height:44px;padding:0 8px;border:0;background:transparent;color:#171717;font-size:15px;font-weight:700}.cue-new-match-summary-v2{order:1!important;padding:4px 4px 16px!important}.cue-new-match-summary-v2 .cue-home-eyebrow-v1{font-size:13px!important;letter-spacing:.12em!important}.cue-new-match-summary-v2 .cue-selected-game-v1{gap:12px!important}.cue-new-match-summary-v2 .cue-selected-game-icon-v1{width:56px!important;height:56px!important}.cue-new-match-summary-v2 .cue-selected-game-name-v1{font-size:28px!important}
-.cue-new-match-integrated-v2.cue-card-out-next-v5{animation:cueCardOutNextV5 180ms ease-in forwards;pointer-events:none}
-.cue-new-match-integrated-v2.cue-card-out-prev-v5{animation:cueCardOutPrevV5 180ms ease-in forwards;pointer-events:none}
-.cue-new-match-integrated-v2.cue-card-in-next-v5{animation:cueCardInNextV5 240ms cubic-bezier(.22,.72,.3,1);pointer-events:none}
-.cue-new-match-integrated-v2.cue-card-in-prev-v5{animation:cueCardInPrevV5 240ms cubic-bezier(.22,.72,.3,1);pointer-events:none}
-@keyframes cueCardOutNextV5{to{opacity:.15;transform:translateX(-70px) scale(.98)}}
-@keyframes cueCardOutPrevV5{to{opacity:.15;transform:translateX(70px) scale(.98)}}
-@keyframes cueCardInNextV5{from{opacity:.15;transform:translateX(70px) scale(.98)}to{opacity:1;transform:translateX(0) scale(1)}}
-@keyframes cueCardInPrevV5{from{opacity:.15;transform:translateX(-70px) scale(.98)}to{opacity:1;transform:translateX(0) scale(1)}}
 .cue-player-stack-v2{order:2!important}.cue-game-rules-v2,.cue-carom-rules-v1{order:3!important;width:100%!important;margin-top:14px!important;padding:15px!important;border:1px solid #e7e7e4!important;border-radius:14px!important;background:#fff!important}.cue-game-rules-v2>strong,.cue-carom-rules-v1>strong{font-size:17px!important}.season-setting-v38{order:4}.player-name-limit-note{order:5}.cue-home-start-v2{order:6!important;width:100%!important;min-height:56px!important;margin-top:16px!important;background:#171717!important;color:#fff!important}.cue-home-start-v2 .new-match-play-v1{color:#fff!important}.cue-toggle-track-v2{background:#dededc!important}.cue-rule-toggle-v2 input:checked+.cue-toggle-track-v2{background:#171717!important}
 @media(max-width:370px){.cue-home-v1{padding-left:12px!important;padding-right:12px!important}.cue-home-brand-v1 img{width:min(100%,330px)!important;height:auto!important}.cue-discipline-switcher-v1 .cue-discipline-v1{min-height:57px!important;grid-template-columns:48px minmax(0,1fr) 16px!important;padding:6px 12px!important}.cue-discipline-switcher-v1 .cue-game-icon-v1{width:40px!important;height:40px!important}.cue-discipline-switcher-v1 .cue-discipline-label-v1 strong{font-size:18px!important}.cue-home-menu-v3 button{min-height:58px}.cue-home-v1.match-setup-active-v3 .cue-new-match-integrated-v2{padding-left:10px!important;padding-right:10px!important}}
 .official-default-avatar-v4{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}.player-editor-avatar-button-v2:disabled{cursor:default;opacity:1}
@@ -26570,63 +26562,6 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   document.getElementById("cueHomePlayersV3")?.addEventListener("click",()=>document.getElementById("playerManagementBtn")?.click());
   document.getElementById("cueHomeHistoryV3")?.addEventListener("click",()=>document.getElementById("recordsBtn")?.click());
   document.getElementById("cueHomeSettingsV3")?.addEventListener("click",()=>document.getElementById("settingsBtn")?.click());
-  const swipeOrder=["9ball","10ball","rotation","straightPool","jpa9","threeCushion"];
-  let swipeStartX=0;
-  let swipeStartY=0;
-  let swipeTracking=false;
-  let swipeAnimating=false;
-  const playCardSwipeMotion=async(direction,phase)=>{
-    const distance=direction>0?70:-70;
-    const outgoing=phase==="out";
-    const keyframes=outgoing
-      ? [{opacity:1,transform:"translateX(0) scale(1)"},{opacity:.15,transform:`translateX(${-distance}px) scale(.98)`}]
-      : [{opacity:.15,transform:`translateX(${distance}px) scale(.98)`},{opacity:1,transform:"translateX(0) scale(1)"}];
-    const duration=outgoing?180:240;
-    if(typeof setup.animate==="function"){
-      const animation=setup.animate(keyframes,{duration,easing:outgoing?"ease-in":"cubic-bezier(.22,.72,.3,1)",fill:"forwards"});
-      try{await animation.finished;}catch(_){}
-      animation.cancel();
-      return;
-    }
-    const fallbackClass=outgoing
-      ? (direction>0?"cue-card-out-next-v5":"cue-card-out-prev-v5")
-      : (direction>0?"cue-card-in-next-v5":"cue-card-in-prev-v5");
-    setup.classList.add(fallbackClass);
-    await new Promise(resolve=>window.setTimeout(resolve,duration));
-    setup.classList.remove(fallbackClass);
-  };
-  const switchDisciplineBySwipe=async direction=>{
-    if(swipeAnimating)return;
-    const current=document.querySelector("[data-discipline].is-selected")?.dataset.discipline;
-    const currentIndex=Math.max(0,swipeOrder.indexOf(current));
-    const nextIndex=(currentIndex+direction+swipeOrder.length)%swipeOrder.length;
-    const target=document.querySelector(`[data-discipline="${swipeOrder[nextIndex]}"]`);
-    if(!target)return;
-    swipeAnimating=true;
-    try{
-      await playCardSwipeMotion(direction,"out");
-      target.click();
-      await playCardSwipeMotion(direction,"in");
-    }finally{
-      swipeAnimating=false;
-    }
-  };
-  setup.addEventListener("pointerdown",event=>{
-    if(swipeAnimating||!event.isPrimary||!home.classList.contains("match-setup-active-v3")){swipeTracking=false;return;}
-    swipeStartX=event.clientX;
-    swipeStartY=event.clientY;
-    swipeTracking=true;
-  });
-  setup.addEventListener("pointerup",event=>{
-    if(!swipeTracking||!event.isPrimary)return;
-    swipeTracking=false;
-    const deltaX=event.clientX-swipeStartX;
-    const deltaY=event.clientY-swipeStartY;
-    if(Math.abs(deltaX)<56||Math.abs(deltaX)<Math.abs(deltaY)*1.35)return;
-    if(event.cancelable)event.preventDefault();
-    switchDisciplineBySwipe(deltaX<0?1:-1);
-  });
-  setup.addEventListener("pointercancel",()=>{swipeTracking=false;});
   let lastStartAt=0;
   document.getElementById("startGameBtn")?.addEventListener("click",event=>{
     const now=Date.now();
@@ -26871,6 +26806,127 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   .break-player-arrow-v1{width:28px;height:28px;font-size:20px}
 }
 </style>
+<script>
+// CueScore iPhone edge-back gesture v1.0 — delegates to the visible existing back button.
+(() => {
+  if (window.__cueScoreEdgeBackV1) return;
+  window.__cueScoreEdgeBackV1 = true;
+
+  const EDGE_START_MAX = 24;
+  const MIN_HORIZONTAL_TRAVEL = 72;
+  const MAX_VERTICAL_TRAVEL = 48;
+  const MAX_GESTURE_DURATION = 900;
+  const HORIZONTAL_DOMINANCE = 1.35;
+  const backButtonSelectors = [
+    "#cueMatchSetupBackV3",
+    "#recordsBackV2",
+    "#playerLibraryBackBtn",
+    "#playerStatsBackBtn",
+    "#dataManagementBackBtn",
+    "#settingsBackBtn",
+    "#statisticsFilterBackBtn",
+    "#rankingsBackBtn",
+    "#vsAnalysisBackBtn",
+    "#classificationManagerBackV381",
+    "#recordDetailBackBtn",
+    "[data-suite-back]"
+  ];
+
+  const isVisible = element => {
+    if (!element || element.hidden || element.disabled) return false;
+    if (element.getAttribute("aria-hidden") === "true") return false;
+    if (element.closest("[hidden],.hidden,[aria-hidden='true']")) return false;
+    const style = getComputedStyle(element);
+    return style.display !== "none" && style.visibility !== "hidden" && element.getClientRects().length > 0;
+  };
+
+  const candidateBackButton = () => {
+    for (const selector of backButtonSelectors) {
+      const candidates = document.querySelectorAll(selector);
+      for (const candidate of candidates) {
+        if (isVisible(candidate)) return candidate;
+      }
+    }
+    return null;
+  };
+
+  const hasVisibleBlockingModal = backButton => Array.from(document.querySelectorAll(
+    "dialog[open],[role='dialog'][aria-modal='true'],[aria-modal='true']"
+  )).some(modal => isVisible(modal) && (!backButton || !modal.contains(backButton)));
+
+  const isTransitionBlocked = (backButton = candidateBackButton()) => {
+    if (hasVisibleBlockingModal(backButton)) return true;
+    if (isVisible(document.getElementById("proGameScreen"))) return true;
+    if (isVisible(document.getElementById("proSummary"))) return true;
+    if (isVisible(document.getElementById("breakResultOverlayV61"))) return true;
+    if (isVisible(document.getElementById("breakInterruptConfirmV3"))) return true;
+    const detail = document.getElementById("recordDetailOverlay");
+    return Boolean(detail?.classList.contains("is-result-mode-v5") && isVisible(detail));
+  };
+
+  const visibleBackButton = () => {
+    const backButton = candidateBackButton();
+    return backButton && !isTransitionBlocked(backButton) ? backButton : null;
+  };
+
+  let gesture = null;
+  const resetGesture = () => { gesture = null; };
+
+  document.addEventListener("touchstart", event => {
+    resetGesture();
+    if (event.touches.length !== 1) return;
+    const touch = event.touches[0];
+    if (touch.clientX > EDGE_START_MAX) return;
+    const backButton = visibleBackButton();
+    if (!backButton) return;
+    gesture = {
+      startX: touch.clientX,
+      startY: touch.clientY,
+      startedAt: performance.now(),
+      backButton,
+      cancelled: false
+    };
+  }, {passive:true, capture:true});
+
+  document.addEventListener("touchmove", event => {
+    if (!gesture || event.touches.length !== 1) return;
+    const touch = event.touches[0];
+    const dx = touch.clientX - gesture.startX;
+    const dy = touch.clientY - gesture.startY;
+    if (dx < -10 || (Math.abs(dy) > 18 && Math.abs(dy) > Math.max(1, dx) * .8)) {
+      gesture.cancelled = true;
+    }
+  }, {passive:true, capture:true});
+
+  document.addEventListener("touchend", event => {
+    if (!gesture || event.changedTouches.length !== 1) {
+      resetGesture();
+      return;
+    }
+    const completedGesture = gesture;
+    resetGesture();
+    if (completedGesture.cancelled || isTransitionBlocked(completedGesture.backButton)) return;
+    const touch = event.changedTouches[0];
+    const dx = touch.clientX - completedGesture.startX;
+    const dy = touch.clientY - completedGesture.startY;
+    const elapsed = performance.now() - completedGesture.startedAt;
+    if (dx < MIN_HORIZONTAL_TRAVEL) return;
+    if (Math.abs(dy) > MAX_VERTICAL_TRAVEL || dx < Math.abs(dy) * HORIZONTAL_DOMINANCE) return;
+    if (elapsed > MAX_GESTURE_DURATION) return;
+    if (!isVisible(completedGesture.backButton) || completedGesture.backButton !== visibleBackButton()) return;
+    if (event.cancelable) event.preventDefault();
+    completedGesture.backButton.click();
+  }, {passive:false, capture:true});
+
+  document.addEventListener("touchcancel", resetGesture, {passive:true, capture:true});
+
+  window.CueScoreEdgeBackV1 = Object.freeze({
+    visibleBackButton,
+    isTransitionBlocked,
+    constants:Object.freeze({EDGE_START_MAX,MIN_HORIZONTAL_TRAVEL,MAX_VERTICAL_TRAVEL,MAX_GESTURE_DURATION,HORIZONTAL_DOMINANCE})
+  });
+})();
+</script>
 </body>
 </html>
 
