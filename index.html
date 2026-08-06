@@ -8454,14 +8454,17 @@ body {
             <button class="break-ball-btn-v696" type="button" data-break-ball="14" data-ball-number="14">14</button>
             <button class="break-ball-btn-v696" type="button" data-break-ball="15" data-ball-number="15">15</button>
           </div>
-          <div class="break-special-grid-v696">
+          <div class="break-scratch-row-v1" id="breakScratchRowV1">
+            <button id="breakScratchToggleV696" class="break-scratch-icon-btn-v1" type="button" aria-pressed="false">
+              <img src="assets/icons/balls/cue-ball-dotted.svg" alt="" aria-hidden="true">
+              <svg class="break-scratch-legacy-icon-v1" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" stroke-dasharray="2.2 2.2"/></svg>
+              <span>スクラッチ</span>
+            </button>
+          </div>
+          <div class="break-special-grid-v696" id="breakSpecialGridV696">
             <button id="breakPreFoulToggleV1" class="break-special-btn-v696 trouble-v696" type="button" aria-pressed="false">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 11V6.2a1.4 1.4 0 0 1 2.8 0V10"/><path d="M10.6 10V4.8a1.4 1.4 0 0 1 2.8 0V10"/><path d="M13.4 10V6a1.4 1.4 0 0 1 2.8 0v5"/><path d="M16.2 11V8.2a1.4 1.4 0 0 1 2.8 0v5.2c0 4.6-2.5 7.1-6.7 7.1-3.4 0-5.2-1.8-6.6-4.4L4 13.3a1.5 1.5 0 0 1 2.4-1.7Z"/></svg>
               <span>ファール（ブレイク交代）</span>
-            </button>
-            <button id="breakScratchToggleV696" class="break-special-btn-v696 trouble-v696" type="button">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" stroke-dasharray="2.2 2.2"/></svg>
-              <span>スクラッチ</span>
             </button>
             <button id="breakPushOutToggleV695" class="break-special-btn-v696" type="button" hidden>シュートアウト</button>
           </div>
@@ -12080,6 +12083,23 @@ let matchRecordsRawCacheV152 = null;
         button.classList.remove("selected-v696");
       }
     });
+    const grid = el("breakBallGridV696");
+    const scratchRow = el("breakScratchRowV1");
+    const specialGrid = el("breakSpecialGridV696");
+    const scratchButton = el("breakScratchToggleV696");
+    const usesOfficialScratchIcon = isNineBallV1() || isTenBallV1() || activeGameTypeV1 === ROTATION_GAME_TYPE;
+    const inlineForNineBall = usesOfficialScratchIcon && isNineBallV1();
+    specialGrid?.classList.toggle("is-legacy-scratch-v1", !usesOfficialScratchIcon);
+    if (scratchButton) {
+      scratchButton.classList.toggle("is-inline-nine-ball-v1", inlineForNineBall);
+      scratchButton.classList.toggle("is-legacy-scratch-v1", !usesOfficialScratchIcon);
+      scratchButton.classList.toggle("break-special-btn-v696", !usesOfficialScratchIcon);
+      scratchButton.classList.toggle("trouble-v696", !usesOfficialScratchIcon);
+      if (inlineForNineBall && grid && scratchButton.parentElement !== grid) grid.append(scratchButton);
+      if (usesOfficialScratchIcon && !inlineForNineBall && scratchRow && scratchButton.parentElement !== scratchRow) scratchRow.append(scratchButton);
+      if (!usesOfficialScratchIcon && specialGrid && scratchButton.parentElement !== specialGrid) specialGrid.append(scratchButton);
+    }
+    scratchRow?.classList.toggle("hidden", inlineForNineBall || !usesOfficialScratchIcon);
     return ballCount;
   }
 
@@ -18829,7 +18849,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-custom-race-input-v1";
+    const PWA_VERSION = "1.0-break-scratch-cue-ball-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -21603,6 +21623,48 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   background:#eeeeec!important;
   box-shadow:none!important;
 }
+.break-scratch-row-v1{
+  display:flex;
+  justify-content:center;
+  margin:-3px 0 13px;
+}
+.break-scratch-row-v1.hidden{display:none!important}
+.break-scratch-icon-btn-v1{
+  width:72px;
+  min-height:70px;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  gap:3px;
+  border:0;
+  border-radius:12px;
+  color:#555552;
+  background:transparent;
+  font:inherit;
+  font-size:11px;
+  font-weight:750;
+  line-height:1.2;
+}
+.break-scratch-icon-btn-v1 img{
+  width:48px;
+  height:48px;
+  display:block;
+  border-radius:50%;
+}
+.break-scratch-legacy-icon-v1{display:none}
+.break-scratch-icon-btn-v1.is-inline-nine-ball-v1{
+  width:100%;
+  min-width:0;
+  justify-self:center;
+}
+.break-scratch-icon-btn-v1.active-v696{
+  color:#b12420;
+  background:#fff7f6;
+  box-shadow:inset 0 0 0 2px #c7322d;
+}
+.break-scratch-icon-btn-v1:disabled{opacity:.45}
 .break-summary-v696{
   min-height:45px;
   margin:0 0 13px!important;
@@ -21640,9 +21702,10 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   font-weight:850;
 }
 .break-special-grid-v696{
-  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-template-columns:minmax(0,1fr)!important;
   gap:10px!important;
 }
+.break-special-grid-v696.is-legacy-scratch-v1{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 .break-special-btn-v696{
   min-height:51px!important;
   display:flex;
@@ -21656,6 +21719,18 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   font-size:16px!important;
   font-weight:750!important;
 }
+.break-scratch-icon-btn-v1.is-legacy-scratch-v1{
+  width:100%;
+  min-height:51px;
+  padding:0 12px;
+  flex-direction:row;
+  justify-content:center;
+  gap:9px;
+  border-radius:10px;
+  font-size:16px;
+}
+.break-scratch-icon-btn-v1.is-legacy-scratch-v1 img{display:none}
+.break-scratch-icon-btn-v1.is-legacy-scratch-v1 .break-scratch-legacy-icon-v1{display:block}
 #breakPreFoulToggleV1{font-size:14px!important}
 .break-special-btn-v696[hidden]{display:none!important}
 .break-special-btn-v696 svg{
@@ -21699,6 +21774,9 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   .break-ball-btn-v696{
     width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;font-size:18px!important
   }
+  .break-scratch-row-v1{margin-bottom:9px}
+  .break-scratch-icon-btn-v1{width:64px;min-height:62px;font-size:10px}
+  .break-scratch-icon-btn-v1 img{width:42px;height:42px}
   .break-summary-v696{margin-bottom:9px!important}
   .break-special-btn-v696{min-height:45px!important;font-size:14px!important}
   .break-result-save-v695{min-height:50px!important;margin-top:10px!important}

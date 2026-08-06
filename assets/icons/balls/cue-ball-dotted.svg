@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">CueScore 手玉アイコン</title>
+  <desc id="desc">黒いドットを付けた白い手玉の外周を、グレーの丸い点線で表したアイコン</desc>
+  <circle cx="64" cy="64" r="47" fill="#FFFFFF"/>
+  <!-- 黒いドットは、小さい表示でも手玉と認識できる3点構成 -->
+  <ellipse cx="49" cy="35" rx="5" ry="3.5" fill="#111111" transform="rotate(-14 49 35)"/>
+  <ellipse cx="34" cy="76" rx="4" ry="5" fill="#111111" transform="rotate(-24 34 76)"/>
+  <ellipse cx="91" cy="68" rx="4" ry="5.5" fill="#111111" transform="rotate(18 91 68)"/>
+  <circle
+    cx="64"
+    cy="64"
+    r="47"
+    stroke="#737373"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-dasharray="1 8"
+  />
+</svg>

@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-custom-race-input-v1";
+const APP_VERSION = "1.0-break-scratch-cue-ball-v1";
 const CACHE_NAME = `cuescore-rotation-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
@@ -25,6 +25,7 @@ const APP_SHELL = [
   "./assets/icons/games/game-14-1.svg",
   "./assets/icons/games/game-jpa-9ball.svg",
   "./assets/icons/games/game-3cushion.svg",
+  "./assets/icons/balls/cue-ball-dotted.svg",
   "./assets/icons/avatar/manifest.json",
   "./assets/icons/avatar/default/avatar_default_silhouette.png"
 ];
