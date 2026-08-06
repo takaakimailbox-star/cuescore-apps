@@ -9325,6 +9325,7 @@ body {
   let nineBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[]};
   let tenBallSettingsV1 = {breakRule:"winner",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",breakBox:false};
   let tenBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[],spotEvents:[]};
+  let rotationStateV1 = {consecutiveFouls:{1:0,2:0}};
   let straightPoolSettingsV1 = {threeFoul:true,openingBreak:false,recordMode:"detail"};
   let straightPoolStateV1 = {consecutiveFouls:{1:0,2:0},openingBreaker:null,phase:"playing",rackCycle:1,spotEvents:[],rerackEvents:[],openingBreakEvents:[]};
   let threeCushionSettingsV1 = {variant:"threeCushion",drawAt25:true};
@@ -12082,7 +12083,7 @@ let matchRecordsRawCacheV152 = null;
     const scratchRow = el("breakScratchRowV1");
     const specialGrid = el("breakSpecialGridV696");
     const scratchButton = el("breakScratchToggleV696");
-    const usesOfficialScratchIcon = isNineBallV1() || isTenBallV1() || activeGameTypeV1 === ROTATION_GAME_TYPE;
+    const usesOfficialScratchIcon = isNineBallV1() || isTenBallV1() || isJPA9V1() || activeGameTypeV1 === ROTATION_GAME_TYPE;
     specialGrid?.classList.toggle("is-legacy-scratch-v1", !usesOfficialScratchIcon);
     if (specialGrid) specialGrid.hidden = usesOfficialScratchIcon;
     if (scratchButton) {
@@ -12378,6 +12379,8 @@ let matchRecordsRawCacheV152 = null;
         const rackSettings = activeRackSettingsV1();
         if (decision.foul) {
           rackState.consecutiveFouls[player] = Number(rackState.consecutiveFouls[player] || 0) + 1;
+          replaceCurrentFoulMarkerV1(rackState.consecutiveFouls[player]);
+          appendCommonEventV700("FoulCount", "consecutive_foul", {player,count:rackState.consecutiveFouls[player],threeFoulRule:rackSettings.threeFoul !== false,source:"break"});
           rackState.ballInHandFor = decision.preBreakFoul ? null : opponent;
         } else {
           rackState.consecutiveFouls[player] = 0;
@@ -12399,6 +12402,9 @@ let matchRecordsRawCacheV152 = null;
         if (current === startingPlayer) { inning++; forceNewRow = true; }
         foulLocked = false;
         turnLockReasonV62 = null;
+      } else if (activeGameTypeV1 === ROTATION_GAME_TYPE) {
+        if (decision.foul) incrementRotationFoulV1(player);
+        else rotationStateV1.consecutiveFouls[player] = 0;
       }
 
       if (decision.preBreakFoul && current === player) {
@@ -12684,6 +12690,7 @@ let matchRecordsRawCacheV152 = null;
       activeGameTypeV1, jpa9SkillLevelsV1:{...jpa9SkillLevelsV1}, deadBallsV1:[...deadBallsV1],
       nineBallSettingsV1:{...nineBallSettingsV1}, nineBallStateV1:JSON.parse(JSON.stringify(nineBallStateV1)),
       tenBallSettingsV1:{...tenBallSettingsV1}, tenBallStateV1:JSON.parse(JSON.stringify(tenBallStateV1)),
+      rotationStateV1:JSON.parse(JSON.stringify(rotationStateV1)),
       straightPoolSettingsV1:{...straightPoolSettingsV1}, straightPoolStateV1:JSON.parse(JSON.stringify(straightPoolStateV1)),
       threeCushionSettingsV1:{...threeCushionSettingsV1}, threeCushionStateV1:JSON.parse(JSON.stringify(threeCushionStateV1)),
       current, startingPlayer, goals:{...goals}, rack, inning,
@@ -12715,6 +12722,7 @@ let matchRecordsRawCacheV152 = null;
     nineBallStateV1 = state.nineBallStateV1 ? JSON.parse(JSON.stringify(state.nineBallStateV1)) : {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[]};
     tenBallSettingsV1 = state.tenBallSettingsV1 ? {...state.tenBallSettingsV1, breakRule:"winner", pushOut:false, threeFoul:true, illegalBreak:true, recordMode:"detail", breakBox:false} : {breakRule:"winner",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",breakBox:false};
     tenBallStateV1 = state.tenBallStateV1 ? JSON.parse(JSON.stringify(state.tenBallStateV1)) : {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[],spotEvents:[]};
+    rotationStateV1 = state.rotationStateV1 ? JSON.parse(JSON.stringify(state.rotationStateV1)) : {consecutiveFouls:{1:0,2:0}};
     straightPoolSettingsV1 = state.straightPoolSettingsV1 ? {...state.straightPoolSettingsV1, threeFoul:true, openingBreak:false, recordMode:"detail"} : {threeFoul:true,openingBreak:false,recordMode:"detail"};
     straightPoolStateV1 = state.straightPoolStateV1 ? {...JSON.parse(JSON.stringify(state.straightPoolStateV1)), openingBreaker:null, phase:"playing"} : {consecutiveFouls:{1:0,2:0},openingBreaker:null,phase:"playing",rackCycle:1,spotEvents:[],rerackEvents:[],openingBreakEvents:[]};
     threeCushionSettingsV1 = {variant:"threeCushion",drawAt25:true};
@@ -12794,6 +12802,28 @@ let matchRecordsRawCacheV152 = null;
     row[current === 1 ? "p1" : "p2"].push(item);
   }
 
+  function replaceCurrentFoulMarkerV1(count) {
+    const row = ensureCurrentRow();
+    const items = row[current === 1 ? "p1" : "p2"];
+    const index = Math.max(items.lastIndexOf("F"), items.lastIndexOf("f"));
+    if (index < 0) return;
+    if (Number(count) === 2) items[index] = "2 Fouls";
+    if (Number(count) === 3) items[index] = "3 Fouls!";
+  }
+
+  function rotationFoulCountV1(player) {
+    return Number(rotationStateV1.consecutiveFouls?.[player] || 0);
+  }
+
+  function incrementRotationFoulV1(player) {
+    const previous = rotationFoulCountV1(player);
+    const next = previous >= 3 ? 1 : previous + 1;
+    rotationStateV1.consecutiveFouls[player] = next;
+    appendCommonEventV700("FoulCount", "consecutive_foul", {player,count:next,actualSequence:previous + 1,cycle:true,threeFoulRule:false});
+    replaceCurrentFoulMarkerV1(next);
+    return next;
+  }
+
   function ballHtml(number) {
     const cls = number <= 8 ? "solid" : "stripe";
     return window.CueScoreBallIcon.html(number, { size:"history", classes:`pro-mini-ball ${cls}` });
@@ -12801,6 +12831,8 @@ let matchRecordsRawCacheV152 = null;
 
   function symbolHtml(symbol) {
     if (symbol === "/") return `<span class="pro-break-separator" aria-hidden="true">/</span>`;
+    if (symbol === "2 Fouls") return `<span class="pro-symbol f consecutive-foul-v1">2 Fouls</span>`;
+    if (symbol === "3 Fouls!") return `<strong class="pro-symbol f consecutive-foul-v1 three-v1">3 Fouls!</strong>`;
     const cls = symbol === "S" ? "s" : symbol === "B" ? "b" : "f";
     const displaySymbol = symbol === "S" ? "s" : symbol;
     return `<span class="pro-symbol ${cls}">${displaySymbol}</span>`;
@@ -13017,6 +13049,7 @@ let matchRecordsRawCacheV152 = null;
       rackEnded = false;
       foulLocked = false;
       turnLockReasonV62 = null;
+      if (activeGameTypeV1 === ROTATION_GAME_TYPE) rotationStateV1.consecutiveFouls = {1:0,2:0};
 
       // A rack boundary always starts a new log row. The Inning and currentRun
       // continue only when the same player takes the next break.
@@ -13137,7 +13170,7 @@ let matchRecordsRawCacheV152 = null;
 
   function gameBallSignatureV155() {
     const activeBallCount = Math.max(1, Number(getActiveRuleV699().ballCount || 15));
-    const rackState = isRackGameV1() ? activeRackStateV1() : {ballInHandFor:null,consecutiveFouls:{1:0,2:0}};
+    const rackState = isRackGameV1() ? activeRackStateV1() : activeGameTypeV1 === ROTATION_GAME_TYPE ? rotationStateV1 : {ballInHandFor:null,consecutiveFouls:{1:0,2:0}};
     return `${activeBallCount}|${[...usedBalls].sort((a,b)=>a-b).join(",")}|${rackEnded ? 1 : 0}|${foulLocked ? 1 : 0}|${gameEnded ? 1 : 0}|${rackState.ballInHandFor || 0}|${rackState.consecutiveFouls?.[1] || 0}|${rackState.consecutiveFouls?.[2] || 0}`;
   }
 
@@ -13146,7 +13179,8 @@ let matchRecordsRawCacheV152 = null;
     const state = activeRackStateV1();
     const notices = [];
     if (Number(state.ballInHandFor) === Number(player)) notices.push("手球フリー");
-    if (Number(state.consecutiveFouls?.[player] || 0) === 2) notices.push("2ファール");
+    if (Number(state.consecutiveFouls?.[player] || 0) === 2) notices.push("2 Fouls");
+    if (Number(state.consecutiveFouls?.[player] || 0) === 3) notices.push("3 Fouls!");
     return notices.length ? `Race to · ${notices.join(" · ")}` : "Race to";
   }
 
@@ -13176,6 +13210,12 @@ let matchRecordsRawCacheV152 = null;
       setGameTextV155("proP1GoalLabelV1", "持ち点");
       setGameTextV155("proP2GoalLabelV1", "持ち点");
       setGameTextV155("threeCushionRunValueV1", threeCushionStateV1.currentRun || 0);
+    } else if (activeGameTypeV1 === ROTATION_GAME_TYPE) {
+      const rotationLabel = player => rotationFoulCountV1(player) === 2 ? "目標 · 2 Fouls" : rotationFoulCountV1(player) === 3 ? "目標 · 3 Fouls!" : "目標";
+      setGameTextV155("proP1GoalLabelV1", rotationLabel(1));
+      setGameTextV155("proP2GoalLabelV1", rotationLabel(2));
+      el("proP1GoalLabelV1")?.classList.toggle("three-fouls-v1", rotationFoulCountV1(1) === 3);
+      el("proP2GoalLabelV1")?.classList.toggle("three-fouls-v1", rotationFoulCountV1(2) === 3);
     }
     setGameTextV155("proGoalView", `${goals[1]} / ${goals[2]}`);
     setGameTextV155("proTurnArrowV1", current === 1 ? "←" : "→");
@@ -13361,6 +13401,8 @@ let matchRecordsRawCacheV152 = null;
         const state = activeRackStateV1();
         state.consecutiveFouls[current] = 0;
         state.ballInHandFor = null;
+      } else if (activeGameTypeV1 === ROTATION_GAME_TYPE) {
+        rotationStateV1.consecutiveFouls[current] = 0;
       }
       addItemToCurrent(number);
       recordAnalysisEventV60("ball_pocketed", {
@@ -13408,6 +13450,7 @@ let matchRecordsRawCacheV152 = null;
         state.consecutiveFouls[fromPlayerV60] = 0;
         state.ballInHandFor = null;
       }
+      if (activeGameTypeV1 === ROTATION_GAME_TYPE && !lockedReasonV62) rotationStateV1.consecutiveFouls[fromPlayerV60] = 0;
       if (isStraightPoolV1() && !lockedReasonV62) straightPoolStateV1.consecutiveFouls[fromPlayerV60] = 0;
       if (!lockedReasonV62 && pushOutStateV730?.stage === "available") clearPushOutWindowV730();
       if (!lockedReasonV62) misses[current]++;
@@ -13461,6 +13504,7 @@ let matchRecordsRawCacheV152 = null;
       });
       beginPendingSafetyV62(current);
       endCurrentRun(current);
+      if (activeGameTypeV1 === ROTATION_GAME_TYPE) rotationStateV1.consecutiveFouls[current] = 0;
       if (isRackGameV1()) {
         const state = activeRackStateV1();
         state.consecutiveFouls[current] = 0;
@@ -13513,7 +13557,7 @@ let matchRecordsRawCacheV152 = null;
         state.consecutiveFouls[foulingPlayer] = Number(state.consecutiveFouls[foulingPlayer] || 0) + 1;
         const foulStreak = state.consecutiveFouls[foulingPlayer];
         appendCommonEventV700("FoulCount", "consecutive_foul", {player:foulingPlayer,count:foulStreak,threeFoulRule:settings.threeFoul !== false});
-        if (foulStreak === 2) addItemToCurrent("2F");
+        replaceCurrentFoulMarkerV1(foulStreak);
         if (foulStreak >= 3 && settings.threeFoul !== false) {
           completeNineBallRackV1(opponent, "threeFoulLoss", {foulingPlayer,consecutiveFouls:3});
         } else {
@@ -13543,6 +13587,10 @@ let matchRecordsRawCacheV152 = null;
         if (current === startingPlayer) { inning++; forceNewRow = true; }
         foulLocked = false;
         turnLockReasonV62 = null;
+      } else if (activeGameTypeV1 === ROTATION_GAME_TYPE) {
+        incrementRotationFoulV1(current);
+        foulLocked = true;
+        turnLockReasonV62 = "foul";
       } else {
         foulLocked = true;
         turnLockReasonV62 = "foul";
@@ -14118,6 +14166,7 @@ let matchRecordsRawCacheV152 = null;
     deadBallsV1 = new Set();
     nineBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:startingPlayer,rackResults:[]};
     tenBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:startingPlayer,rackResults:[],spotEvents:[]};
+    rotationStateV1 = {consecutiveFouls:{1:0,2:0}};
     straightPoolStateV1 = {consecutiveFouls:{1:0,2:0},openingBreaker:null,phase:"playing",rackCycle:1,spotEvents:[],rerackEvents:[],openingBreakEvents:[]};
     threeCushionStateV1 = {currentRun:0,currentInning:1,startingPlayer,completedTurns:{1:0,2:0},highRun:{1:0,2:0},innings:[{inning:1,p1:null,p2:null,p1Total:0,p2Total:0}]};
     rows = [];
@@ -21332,6 +21381,17 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   font-size:12px!important;
   font-weight:450!important;
 }
+.pro-symbol.consecutive-foul-v1{
+  width:auto!important;
+  white-space:nowrap;
+  font-size:10px!important;
+  letter-spacing:-.02em;
+}
+.pro-symbol.consecutive-foul-v1.three-v1{
+  font-weight:800!important;
+  color:#171717!important;
+}
+.three-fouls-v1{font-weight:800!important}
 .pro-symbol.b{
   color:#171717!important;
   font-weight:800!important;
@@ -22159,6 +22219,8 @@ window.cueScoreModalDiagnosticsV159 = () => ({
 
   function symbolV1(symbol) {
     if(symbol==="/") return `<span class="match-detail-break-separator-v1">/</span>`;
+    if(symbol==="2 Fouls") return `<span class="match-detail-symbol-v1 foul consecutive-foul-v1">2 Fouls</span>`;
+    if(symbol==="3 Fouls!") return `<strong class="match-detail-symbol-v1 foul consecutive-foul-v1 three-v1">3 Fouls!</strong>`;
     const value=symbol==="S"?"s":symbol;
     const kind=symbol==="B"?"break":symbol==="F"||symbol==="f"?"foul":"safety";
     return `<span class="match-detail-symbol-v1 ${kind}">${value}</span>`;
@@ -22201,6 +22263,11 @@ window.cueScoreModalDiagnosticsV159 = () => ({
         target.push("S");
       } else if(event?.type==="Foul" || event?.sourceType==="foul"){
         target.push("F");
+      } else if(event?.type==="FoulCount" || event?.sourceType==="consecutive_foul"){
+        const count=Number(event?.data?.count ?? event?.count)||0;
+        const index=Math.max(target.lastIndexOf("F"),target.lastIndexOf("f"));
+        if(index>=0&&count===2) target[index]="2 Fouls";
+        if(index>=0&&count===3) target[index]="3 Fouls!";
       }
     });
     return rows.filter(row=>row.p1.length||row.p2.length);
@@ -23318,6 +23385,8 @@ body.match-detail-visible-v1{overflow:hidden!important}
 }
 .match-detail-log-cell-v1.left{justify-content:flex-start}
 .match-detail-log-cell-v1.right{justify-content:flex-start}
+.match-detail-symbol-v1.consecutive-foul-v1{width:auto!important;white-space:nowrap;font-size:10px!important}
+.match-detail-symbol-v1.consecutive-foul-v1.three-v1{font-weight:800!important;color:#171717!important}
 .match-detail-inning-v1{
   position:relative;
   align-self:stretch;
