@@ -9229,8 +9229,8 @@ body {
           if (target) { target.hidden = false; target.textContent = `目標 ${jpaTargets[sl]}点`; }
         } else {
           if (input) input.value = threeCushionMode ? (input.dataset.threeCushionTarget || (player === 1 ? "25" : "30")) : straightPoolMode ? (input.dataset.straightPoolTarget || "50") : (input.dataset.rotationRace || input.value || "120");
-          if (nineBallMode && input) input.value = String(Math.min(15, Math.max(1, Number(input.dataset.nineBallRace || 5))));
-          if (tenBallMode && input) input.value = String(Math.min(15, Math.max(1, Number(input.dataset.tenBallRace || 5))));
+          if (nineBallMode && input) input.value = String(Math.max(1, Number(input.dataset.nineBallRace || 5)));
+          if (tenBallMode && input) input.value = String(Math.max(1, Number(input.dataset.tenBallRace || 5)));
           if (label) label.textContent = threeCushionMode ? "持ち点" : straightPoolMode ? "目標点" : "Race to";
           if (row) row.setAttribute("aria-label", `${player === 1 ? "先攻" : "後攻"}プレーヤーの${threeCushionMode ? "持ち点" : straightPoolMode ? "目標点" : "Race to"}を設定`);
           if (display && input) display.textContent = input.value || "120";
@@ -14095,8 +14095,8 @@ let matchRecordsRawCacheV152 = null;
       2:Math.min(9,Math.max(1,Number(el("p2Race")?.dataset.jpaSl || 5)))
     };
     const rackRaceModeV1 = nineBallModeV1 || tenBallModeV1;
-    const p1Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[1]] : rackRaceModeV1 ? Math.min(15,Math.max(1,Number(el("p1Race")?.value || 5))) : Number(el("p1Race")?.value || 120);
-    const p2Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[2]] : rackRaceModeV1 ? Math.min(15,Math.max(1,Number(el("p2Race")?.value || 5))) : Number(el("p2Race")?.value || 120);
+    const p1Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[1]] : rackRaceModeV1 ? Math.max(1,Number(el("p1Race")?.value || 5)) : Number(el("p1Race")?.value || 120);
+    const p2Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[2]] : rackRaceModeV1 ? Math.max(1,Number(el("p2Race")?.value || 5)) : Number(el("p2Race")?.value || 120);
     currentMatchCategoryV38 = "";
     currentMatchSeasonV38 = String(el("matchSeasonV38")?.value || "").trim().slice(0, 30);
 
@@ -15135,6 +15135,7 @@ let matchRecordsRawCacheV152 = null;
     const picker = el("newMatchRacePickerV1");
     if (!picker) return;
     picker.classList.add("hidden");
+    picker.classList.remove("is-custom-v6");
     picker.setAttribute("aria-hidden", "true");
     el("newMatchRaceCustomV1")?.classList.add("hidden");
     activeRaceInputV1?.focus({ preventScroll: true });
@@ -15157,7 +15158,7 @@ let matchRecordsRawCacheV152 = null;
       options.innerHTML = Object.entries(JPA9_SL_TARGETS).map(([sl,target]) => `<button type="button" data-race-value="${sl}">SL ${sl}<small>${target}点</small></button>`).join("");
       el("newMatchRacePickerTitleV1").textContent = "Skill Levelを選択";
     } else if ((nineBall || tenBall) && options) {
-      options.innerHTML = Array.from({length:15},(_,index)=>index+1).map(value=>`<button type="button" data-race-value="${value}">${value}</button>`).join("");
+      options.innerHTML = Array.from({length:15},(_,index)=>index+1).map(value=>`<button type="button" data-race-value="${value}">${value}</button>`).join("") + '<button type="button" data-race-value="other">その他</button>';
       el("newMatchRacePickerTitleV1").textContent = "Race toを選択";
     } else if (straightPool && options) {
       options.innerHTML = [25,50,75,100,125,150].map(value=>`<button type="button" data-race-value="${value}">${value}</button>`).join("") + '<button type="button" data-race-value="other">その他</button>';
@@ -15173,6 +15174,7 @@ let matchRecordsRawCacheV152 = null;
       button.classList.toggle("is-selected", Number(button.dataset.raceValue) === Number(jpa ? input.dataset.jpaSl : input.value));
     });
     el("newMatchRaceCustomV1")?.classList.add("hidden");
+    picker.classList.remove("is-custom-v6");
     picker.classList.remove("hidden");
     picker.setAttribute("aria-hidden", "false");
     requestAnimationFrame(() => picker.querySelector("[data-race-value].is-selected, [data-race-value]")?.focus());
@@ -15206,11 +15208,11 @@ let matchRecordsRawCacheV152 = null;
     }
     activeRaceInputV1.value = String(normalized);
     if (nineBall) {
-      activeRaceInputV1.value = String(Math.min(15, normalized));
+      activeRaceInputV1.value = String(normalized);
       activeRaceInputV1.dataset.nineBallRace = activeRaceInputV1.value;
     }
     if (tenBall) {
-      activeRaceInputV1.value = String(Math.min(15, normalized));
+      activeRaceInputV1.value = String(normalized);
       activeRaceInputV1.dataset.tenBallRace = activeRaceInputV1.value;
     }
     if (threeCushion) activeRaceInputV1.dataset.threeCushionTarget = String(normalized);
@@ -15243,11 +15245,13 @@ let matchRecordsRawCacheV152 = null;
     if (choice.dataset.raceValue === "other") {
       const custom = el("newMatchRaceCustomV1");
       custom?.classList.remove("hidden");
+      el("newMatchRacePickerV1")?.classList.add("is-custom-v6");
       const customInput = el("newMatchRaceCustomInputV1");
       if (customInput) {
         customInput.value = activeRaceInputV1?.value || "";
         customInput.focus();
         customInput.select();
+        requestAnimationFrame(()=>customInput.scrollIntoView({block:"center",behavior:"smooth"}));
       }
       return;
     }
@@ -18825,7 +18829,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-individual-race-targets-v1";
+    const PWA_VERSION = "1.0-custom-race-input-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -20270,6 +20274,12 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   background:rgba(0,0,0,.32);
 }
 .new-match-race-picker-v1.hidden{display:none!important}
+.new-match-race-picker-v1.is-custom-v6{
+  align-items:flex-start;
+  padding-top:max(18px,calc(env(safe-area-inset-top) + 18px));
+}
+.new-match-race-picker-v1.is-custom-v6 .new-match-race-options-v1{display:none}
+.new-match-race-picker-v1.is-custom-v6 .new-match-race-sheet-v1{margin-top:min(18vh,120px)}
 .new-match-race-sheet-v1{
   width:min(100%,488px);padding:17px;border-radius:20px;background:#fff;color:#171717;
   box-shadow:0 20px 60px rgba(0,0,0,.22);
