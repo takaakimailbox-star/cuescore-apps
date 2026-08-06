@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 360" role="img" aria-labelledby="title desc">
+  <title id="title">CueScore</title>
+  <desc id="desc">CueScore official refined logo</desc>
+  <g fill="#111111">
+    <path d="M172 44C95.9 44 36 103.9 36 180s59.9 136 136 136c43.3 0 82.3-19.7 108-50.6l-37-35.1c-16.1 22.8-41.9 37.7-71 37.7-48.8 0-88-39.2-88-88s39.2-88 88-88c28.2 0 53.5 13.2 69.7 33.8l41-28.5C257.9 65 217.3 44 172 44Z"/>
+    <circle cx="172" cy="180" r="34"/>
+    <text x="345" y="249" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="138" font-weight="400" letter-spacing="-6">CueScore</text>
+  </g>
+</svg>

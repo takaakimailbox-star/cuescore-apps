@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-player-card-colors-v1";
+const APP_VERSION = "1.0-refined-home-logo-v1";
 const CACHE_NAME = `cuescore-rotation-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
@@ -14,6 +14,7 @@ const APP_SHELL = [
   "./icons/icon-maskable-192.png",
   "./icons/icon-maskable-512.png",
   "./assets/icons/navigation/cuescore-mark-black.svg",
+  "./assets/icons/navigation/cuescore-logo-refined.svg",
   "./assets/icons/navigation/nav-home.svg",
   "./assets/icons/navigation/nav-player.svg",
   "./assets/icons/navigation/nav-history.svg",
