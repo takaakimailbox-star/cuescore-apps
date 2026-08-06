@@ -8462,10 +8462,6 @@ body {
             </button>
           </div>
           <div class="break-special-grid-v696" id="breakSpecialGridV696">
-            <button id="breakPreFoulToggleV1" class="break-special-btn-v696 trouble-v696" type="button" aria-pressed="false">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 11V6.2a1.4 1.4 0 0 1 2.8 0V10"/><path d="M10.6 10V4.8a1.4 1.4 0 0 1 2.8 0V10"/><path d="M13.4 10V6a1.4 1.4 0 0 1 2.8 0v5"/><path d="M16.2 11V8.2a1.4 1.4 0 0 1 2.8 0v5.2c0 4.6-2.5 7.1-6.7 7.1-3.4 0-5.2-1.8-6.6-4.4L4 13.3a1.5 1.5 0 0 1 2.4-1.7Z"/></svg>
-              <span>ファール（ブレイク交代）</span>
-            </button>
             <button id="breakPushOutToggleV695" class="break-special-btn-v696" type="button" hidden>シュートアウト</button>
           </div>
           <div class="break-result-actions-v2"><button id="breakResultSaveV695" class="break-result-save-v695" type="button">OK</button></div>
@@ -12088,6 +12084,7 @@ let matchRecordsRawCacheV152 = null;
     const scratchButton = el("breakScratchToggleV696");
     const usesOfficialScratchIcon = isNineBallV1() || isTenBallV1() || activeGameTypeV1 === ROTATION_GAME_TYPE;
     specialGrid?.classList.toggle("is-legacy-scratch-v1", !usesOfficialScratchIcon);
+    if (specialGrid) specialGrid.hidden = usesOfficialScratchIcon;
     if (scratchButton) {
       scratchButton.classList.remove("is-inline-nine-ball-v1");
       scratchButton.classList.toggle("is-legacy-scratch-v1", !usesOfficialScratchIcon);
@@ -12184,25 +12181,6 @@ let matchRecordsRawCacheV152 = null;
     if (pendingBreakBallsV696.has(ball)) pendingBreakBallsV696.delete(ball);
     else pendingBreakBallsV696.add(ball);
     button?.classList.toggle("selected-v696", pendingBreakBallsV696.has(ball));
-    updateBreakPromptSummaryV696();
-  }
-
-  function toggleBreakPreFoulV1() {
-    pendingBreakPreFoulV1 = !pendingBreakPreFoulV1;
-    if (pendingBreakPreFoulV1) {
-      pendingBreakBallsV696.clear();
-      pendingBreakNoInV702 = false;
-      pendingBreakScratchV696 = false;
-      pendingBreakIllegalV696 = false;
-      pendingBreakPushOutV695 = false;
-      document.querySelectorAll("[data-break-ball]").forEach(button => button.classList.remove("selected-v696"));
-      [["breakScratchToggleV696",false],["breakPushOutToggleV695",false]].forEach(([id,active]) => {
-        el(id)?.classList.toggle("active-v696", active);
-        el(id)?.setAttribute("aria-pressed", "false");
-      });
-    }
-    el("breakPreFoulToggleV1")?.classList.toggle("active-v696", pendingBreakPreFoulV1);
-    el("breakPreFoulToggleV1")?.setAttribute("aria-pressed", pendingBreakPreFoulV1 ? "true" : "false");
     updateBreakPromptSummaryV696();
   }
 
@@ -15338,7 +15316,6 @@ let matchRecordsRawCacheV152 = null;
   document.querySelectorAll("[data-break-ball]").forEach(button => {
     button.addEventListener("click", () => toggleBreakBallV696(button.dataset.breakBall, button));
   });
-  el("breakPreFoulToggleV1")?.addEventListener("click", toggleBreakPreFoulV1);
   el("breakScratchToggleV696")?.addEventListener("click", () => toggleBreakSpecialV696("scratch"));
   el("breakPushOutToggleV695")?.addEventListener("click", () => toggleBreakSpecialV696("push_out"));
   el("breakResultSaveV695")?.addEventListener("click", () => saveBreakResultV61());
@@ -18846,7 +18823,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-unified-scratch-position-v1";
+    const PWA_VERSION = "1.0-remove-break-foul-input-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -21704,6 +21681,7 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   grid-template-columns:minmax(0,1fr)!important;
   gap:10px!important;
 }
+.break-special-grid-v696[hidden]{display:none!important}
 .break-special-grid-v696.is-legacy-scratch-v1{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 .break-special-btn-v696{
   min-height:51px!important;
@@ -21730,7 +21708,6 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
 }
 .break-scratch-icon-btn-v1.is-legacy-scratch-v1 img{display:none}
 .break-scratch-icon-btn-v1.is-legacy-scratch-v1 .break-scratch-legacy-icon-v1{display:block}
-#breakPreFoulToggleV1{font-size:14px!important}
 .break-special-btn-v696[hidden]{display:none!important}
 .break-special-btn-v696 svg{
   width:23px;

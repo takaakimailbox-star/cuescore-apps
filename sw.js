@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-unified-scratch-position-v1";
+const APP_VERSION = "1.0-remove-break-foul-input-v1";
 const CACHE_NAME = `cuescore-rotation-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
