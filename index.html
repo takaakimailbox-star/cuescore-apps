@@ -8439,6 +8439,7 @@ body {
               <img id="breakPlayerP2AvatarV1" src="assets/icons/avatar/default/avatar_default_silhouette.png" alt="" aria-hidden="true">
               <span id="breakPlayerP2NameV1">Player 2</span>
             </button>
+            <span id="breakPlayerArrowV1" class="break-player-arrow-v1" aria-hidden="true">←</span>
           </div>
           <div class="break-ball-grid-v696" id="breakBallGridV696">
             <button class="break-ball-btn-v696" type="button" data-break-ball="1" data-ball-number="1">1</button>
@@ -9319,6 +9320,14 @@ body {
   const STRAIGHT_POOL_GAME_TYPE = "straightPool";
   const JPA9_GAME_TYPE = "jpa9Ball";
   const THREE_CUSHION_GAME_TYPE = "threeCushion";
+  const GAME_DISCIPLINE_VISUALS_V1 = Object.freeze({
+    [ROTATION_GAME_TYPE]: Object.freeze({ accent:"#9A3F0A" }),
+    [NINE_BALL_GAME_TYPE]: Object.freeze({ accent:"#F4B400" }),
+    [TEN_BALL_GAME_TYPE]: Object.freeze({ accent:"#0057B8" }),
+    [STRAIGHT_POOL_GAME_TYPE]: Object.freeze({ accent:"#0A7D2C" }),
+    [JPA9_GAME_TYPE]: Object.freeze({ accent:"#F4B400" }),
+    [THREE_CUSHION_GAME_TYPE]: Object.freeze({ accent:"#6F6F6F" })
+  });
   const ROTATION_RECORD_SCHEMA_VERSION = 4;
   const JPA9_SL_TARGETS = Object.freeze({1:14,2:19,3:25,4:31,5:38,6:46,7:55,8:65,9:75});
   let activeGameTypeV1 = ROTATION_GAME_TYPE;
@@ -9341,6 +9350,15 @@ body {
   function isTenBallV1() { return activeGameTypeV1 === TEN_BALL_GAME_TYPE; }
   function isStraightPoolV1() { return activeGameTypeV1 === STRAIGHT_POOL_GAME_TYPE; }
   function isThreeCushionV1() { return activeGameTypeV1 === THREE_CUSHION_GAME_TYPE; }
+  function gameDisciplineVisualV1(gameType = activeGameTypeV1) {
+    return GAME_DISCIPLINE_VISUALS_V1[gameType] || GAME_DISCIPLINE_VISUALS_V1[ROTATION_GAME_TYPE];
+  }
+  function syncGameDisciplineVisualsV1() {
+    const accent = gameDisciplineVisualV1().accent;
+    [el("proGameScreen"), el("breakResultOverlayV61")].forEach(target => {
+      target?.style.setProperty("--cue-discipline-accent", accent);
+    });
+  }
   function isRackGameV1() { return isNineBallV1() || isTenBallV1(); }
   function activeRackSettingsV1() { return isTenBallV1() ? tenBallSettingsV1 : nineBallSettingsV1; }
   function activeRackStateV1() { return isTenBallV1() ? tenBallStateV1 : nineBallStateV1; }
@@ -11945,6 +11963,7 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function updateBreakPlayerSegmentsV1() {
+    syncGameDisciplineVisualsV1();
     [1,2].forEach(player => {
       const button = el(`breakPlayerP${player}V1`);
       const name = el(`breakPlayerP${player}NameV1`);
@@ -11962,6 +11981,7 @@ let matchRecordsRawCacheV152 = null;
       button?.classList.toggle("selected-v1", selected);
       button?.setAttribute("aria-checked", selected ? "true" : "false");
     });
+    if (el("breakPlayerArrowV1")) el("breakPlayerArrowV1").textContent = pendingBreakPlayerV61 === 2 ? "→" : "←";
   }
 
   function selectBreakPlayerV1(player) {
@@ -14093,6 +14113,7 @@ let matchRecordsRawCacheV152 = null;
   function startProGame() {
     markSelectedPlayersUsed();
     activeGameTypeV1 = selectedGameTypeV1();
+    syncGameDisciplineVisualsV1();
     const jpaModeV1 = isJPA9V1();
     const nineBallModeV1 = isNineBallV1();
     const tenBallModeV1 = isTenBallV1();
@@ -26013,7 +26034,7 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .cue-discipline-v1[data-discipline="10ball"]{--game-accent:#0057b8}
 .cue-discipline-v1[data-discipline="straightPool"]{--game-accent:#0a7d2c}
 .cue-discipline-v1[data-discipline="jpa9"]{--game-accent:#f4b400}
-.cue-discipline-v1[data-discipline="threeCushion"]{--game-accent:#8e8e8e}
+.cue-discipline-v1[data-discipline="threeCushion"]{--game-accent:#6f6f6f}
 .cue-game-icon-v1{
   display:block;
   width:40px;
@@ -26791,9 +26812,63 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   width:30px;height:30px;flex:0 0 30px;border:1px solid #dededb;border-radius:50%;
   background:#eeeeec;object-fit:cover;
 }
+
+/* CueScore all-discipline player-card identity v1.0 */
+.pro-game-screen,.break-result-overlay-v61{
+  --cue-discipline-accent:#9A3F0A;
+}
+.pro-game-screen .pro-scoreboard .pro-player-panel{
+  border-color:#dededb!important;
+  color:#171717!important;
+  background:#fff!important;
+  box-shadow:0 7px 22px rgba(0,0,0,.035)!important;
+}
+.pro-game-screen .pro-scoreboard .pro-player-panel.active{
+  border-color:var(--cue-discipline-accent)!important;
+  color:#171717!important;
+  background:#fff!important;
+  background:color-mix(in srgb,var(--cue-discipline-accent) 5%,#fff)!important;
+  box-shadow:0 7px 22px color-mix(in srgb,var(--cue-discipline-accent) 12%,transparent)!important;
+}
+.pro-game-screen .pro-scoreboard .pro-player-panel.active *{color:inherit!important}
+.pro-game-screen .pro-scoreboard .pro-turn-arrow-v1{color:var(--cue-discipline-accent)!important}
+.break-player-segments-v1{position:relative}
+.break-player-segment-v1{
+  border-color:#dededb!important;
+  color:#777775!important;
+  background:#fff!important;
+}
+.break-player-segment-v1.selected-v1{
+  border-color:var(--cue-discipline-accent)!important;
+  color:#171717!important;
+  background:#fff!important;
+  background:color-mix(in srgb,var(--cue-discipline-accent) 5%,#fff)!important;
+  box-shadow:0 4px 14px color-mix(in srgb,var(--cue-discipline-accent) 10%,transparent)!important;
+}
+.break-player-arrow-v1{
+  position:absolute;
+  z-index:3;
+  left:50%;
+  top:50%;
+  width:30px;
+  height:30px;
+  transform:translate(-50%,-50%);
+  display:grid;
+  place-items:center;
+  border:1px solid #e3e3df;
+  border-radius:50%;
+  color:var(--cue-discipline-accent);
+  background:#fff;
+  box-shadow:0 4px 12px rgba(0,0,0,.07);
+  font-size:22px;
+  font-weight:650;
+  line-height:1;
+  pointer-events:none;
+}
 @media(max-width:390px){
   .pro-player-identity-v2{gap:5px}
   .pro-player-avatar-v2{width:26px;height:26px;flex-basis:26px}
+  .break-player-arrow-v1{width:28px;height:28px;font-size:20px}
 }
 </style>
 </body>
