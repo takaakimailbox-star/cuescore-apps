@@ -13204,8 +13204,11 @@ let matchRecordsRawCacheV152 = null;
       el("proP1GoalLabelV1")?.classList.toggle("nine-ball-status-v1", nineBallGoalLabelV1(1) !== "Race to");
       el("proP2GoalLabelV1")?.classList.toggle("nine-ball-status-v1", nineBallGoalLabelV1(2) !== "Race to");
     } else if (isStraightPoolV1()) {
-      setGameTextV155("proP1GoalLabelV1", "目標");
-      setGameTextV155("proP2GoalLabelV1", "目標");
+      const straightLabel = player => Number(straightPoolStateV1.consecutiveFouls?.[player] || 0) === 2 ? "目標 · 2 Fouls" : Number(straightPoolStateV1.consecutiveFouls?.[player] || 0) === 3 ? "目標 · 3 Fouls!" : "目標";
+      setGameTextV155("proP1GoalLabelV1", straightLabel(1));
+      setGameTextV155("proP2GoalLabelV1", straightLabel(2));
+      el("proP1GoalLabelV1")?.classList.toggle("three-fouls-v1", Number(straightPoolStateV1.consecutiveFouls?.[1] || 0) === 3);
+      el("proP2GoalLabelV1")?.classList.toggle("three-fouls-v1", Number(straightPoolStateV1.consecutiveFouls?.[2] || 0) === 3);
     } else if (isThreeCushionV1()) {
       setGameTextV155("proP1GoalLabelV1", "持ち点");
       setGameTextV155("proP2GoalLabelV1", "持ち点");
@@ -13572,6 +13575,8 @@ let matchRecordsRawCacheV152 = null;
         scores[foulingPlayer]-=1;
         const streak=Number(straightPoolStateV1.consecutiveFouls[foulingPlayer]||0)+1;
         straightPoolStateV1.consecutiveFouls[foulingPlayer]=streak;
+        appendCommonEventV700("FoulCount", "consecutive_foul", {player:foulingPlayer,count:streak,threeFoulRule:straightPoolSettingsV1.threeFoul!==false,discipline:"straightPool"});
+        replaceCurrentFoulMarkerV1(streak);
         if(streak>=3 && straightPoolSettingsV1.threeFoul!==false){
           scores[foulingPlayer]-=15; straightPoolStateV1.consecutiveFouls[foulingPlayer]=0; usedBalls=new Set(); rack+=1; straightPoolStateV1.rackCycle=rack; current=foulingPlayer; forceNewRow=true;
           appendCommonEventV700("FoulPenalty","straight_pool_three_foul",{player:foulingPlayer,penalty:-16,nextBreaker:foulingPlayer});
