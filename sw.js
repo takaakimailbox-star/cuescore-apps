@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-jpa-9ball-icon-v11";
+const APP_VERSION = "1.0-game-header-icons-v1";
 const CACHE_NAME = `cuescore-rotation-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",

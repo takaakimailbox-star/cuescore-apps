@@ -8276,7 +8276,10 @@ body {
         <button id="proGameBackBtn" class="pro-back-btn" type="button" aria-label="戻る">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8"/></svg>
         </button>
-        <div class="pro-game-title" id="proGameTitleV1">Rotation</div>
+        <div class="pro-game-title-wrap-v1">
+          <img class="pro-game-title-icon-v1" id="proGameTitleIconV1" src="assets/icons/games/game-rotation.svg" alt="" aria-hidden="true">
+          <div class="pro-game-title" id="proGameTitleV1">Rotation</div>
+        </div>
         <div class="pro-start-time" id="proStartTime">開始時刻 --:--</div>
       </header>
 
@@ -14243,7 +14246,19 @@ let matchRecordsRawCacheV152 = null;
     el("proP1LogName").textContent = p1Name;
     el("proP2LogName").textContent = p2Name;
     el("proStartTime").textContent = formatStartTime(new Date());
-    el("proGameTitleV1").textContent = threeCushionModeV1 ? "3 Cushion" : jpaModeV1 ? "JPA 9-Ball" : nineBallModeV1 ? "9-Ball" : tenBallModeV1 ? "10-Ball" : straightPoolModeV1 ? "14-1" : "Rotation";
+    const proDisciplineV1 = threeCushionModeV1
+      ? {title:"3 Cushion",icon:"assets/icons/games/game-3cushion.svg"}
+      : jpaModeV1
+        ? {title:"JPA 9-Ball",icon:"assets/icons/games/game-jpa-9ball.svg"}
+        : nineBallModeV1
+          ? {title:"9-Ball",icon:"assets/icons/games/game-9ball.svg"}
+          : tenBallModeV1
+            ? {title:"10-Ball",icon:"assets/icons/games/game-10ball.svg"}
+            : straightPoolModeV1
+              ? {title:"14-1",icon:"assets/icons/games/game-14-1.svg"}
+              : {title:"Rotation",icon:"assets/icons/games/game-rotation.svg"};
+    el("proGameTitleV1").textContent = proDisciplineV1.title;
+    el("proGameTitleIconV1").src = proDisciplineV1.icon;
     el("proP1GoalLabelV1").textContent = threeCushionModeV1 ? "持ち点" : jpaModeV1 ? `SL ${jpa9SkillLevelsV1[1]} · 目標` : straightPoolModeV1 ? "目標" : "Race to";
     el("proP2GoalLabelV1").textContent = threeCushionModeV1 ? "持ち点" : jpaModeV1 ? `SL ${jpa9SkillLevelsV1[2]} · 目標` : straightPoolModeV1 ? "目標" : "Race to";
     proGameScreen.setAttribute("aria-label", threeCushionModeV1 ? "3 Cushion game" : jpaModeV1 ? "JPA 9-Ball game" : nineBallModeV1 ? "9-Ball game" : tenBallModeV1 ? "10-Ball game" : straightPoolModeV1 ? "14-1 game" : "Rotation game");
@@ -21186,6 +21201,23 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
   font-weight:780!important;
   line-height:1!important;
   color:var(--game-ink)!important;
+}
+.pro-game-title-wrap-v1{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+.pro-game-title-icon-v1{
+  width:32px;
+  height:32px;
+  flex:0 0 32px;
+  object-fit:contain;
+}
+.pro-game-title-wrap-v1 .pro-game-title{
+  min-width:0;
+  white-space:nowrap;
 }
 .pro-start-time{
   font-size:13px!important;
