@@ -1,5 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="JPA 9-Ball">
+  <!-- Original 9-Ball icon: unchanged -->
   <circle cx="50" cy="50" r="43" fill="#fff" stroke="#F4B400" stroke-width="5"/>
-  <text x="50" y="45" text-anchor="middle" fill="#111" font-family="-apple-system,BlinkMacSystemFont,Arial,sans-serif" font-size="24" font-weight="800">JPA</text>
-  <text x="50" y="72" text-anchor="middle" fill="#111" font-family="-apple-system,BlinkMacSystemFont,Arial,sans-serif" font-size="30" font-weight="800">9</text>
+  <path d="M17 50h13M70 50h13" stroke="#F4B400" stroke-width="6"/>
+  <text x="50" y="64" text-anchor="middle" fill="#111" font-family="-apple-system,BlinkMacSystemFont,Arial,sans-serif" font-size="44" font-weight="800">9</text>
+
+  <!-- White backing hides the yellow ring across the full JPA word area -->
+  <rect x="18" y="1" width="64" height="31" rx="2" fill="#fff"/>
+
+  <!-- Added JPA mark -->
+  <text x="50" y="30" text-anchor="middle" fill="#111"
+        font-family="-apple-system,BlinkMacSystemFont,Arial,sans-serif"
+        font-size="29" font-weight="800" letter-spacing="0">JPA</text>
 </svg>
