@@ -18929,7 +18929,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-navigation-motion-boot-v1";
+    const PWA_VERSION = "1.0-settings-header-navigation-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -24577,7 +24577,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   --settings-line: #e2e0dc;
   --settings-muted: #777;
   display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr);
   width: 100%;
   height: 100%;
   background: #f7f7f5;
@@ -24589,10 +24589,46 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
-  padding: max(18px, env(safe-area-inset-top)) 16px 24px;
+  padding: 8px 16px max(24px, env(safe-area-inset-bottom));
   scrollbar-width: none;
 }
 .settings-formal-scroll-v1::-webkit-scrollbar { display: none; }
+.settings-page-header-v2 {
+  display: grid;
+  grid-template-columns: 56px minmax(0,1fr) 56px;
+  align-items: center;
+  min-height: calc(64px + env(safe-area-inset-top));
+  padding: calc(8px + env(safe-area-inset-top)) 14px 8px;
+  background: #f7f7f5;
+}
+.settings-page-back-v2 {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: #171717;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,.09);
+}
+.settings-page-back-v2 svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.settings-page-title-v2 {
+  color: #171717;
+  font-size: 23px;
+  line-height: 1.15;
+  font-weight: 750;
+  text-align: center;
+}
 .settings-formal-header-v1 {
   position: relative;
   display: flex;
@@ -24839,17 +24875,15 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     analytics: '<svg viewBox="0 0 24 24"><path d="M4.5 19.5V14h3v5.5M10.5 19.5V9h3v10.5M16.5 19.5V4.5h3v15"/><path d="M3 19.5h18"/></svg>',
     player: '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25"/><path d="M5.5 20c.55-4.15 2.7-6.25 6.5-6.25s5.95 2.1 6.5 6.25"/></svg>'
   };
-  const navButton = (key, label, svg, current = false) =>
-    `<button type="button" data-settings-nav="${key}" class="${current ? "is-current" : ""}" ${current ? 'aria-current="page"' : ""}>${svg}<span>${label}</span></button>`;
-
   const root = document.createElement("div");
   root.className = "settings-formal-shell-v1";
   root.innerHTML = `
+    <header class="settings-page-header-v2">
+      <button class="settings-page-back-v2" type="button" data-settings-home-back aria-label="ホームへ戻る"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg></button>
+      <div class="settings-page-title-v2">設定</div>
+      <span aria-hidden="true"></span>
+    </header>
     <div class="settings-formal-scroll-v1">
-      <header class="settings-formal-header-v1">
-        <div class="settings-formal-title-v1"><span data-cuescore-logo="horizontal-black"></span></div>
-        <button class="settings-formal-menu-v1" type="button" aria-label="オプション" aria-disabled="true">…</button>
-      </header>
       <main class="settings-formal-main-v1">
         <h1 class="settings-formal-section-title-v1">データ管理</h1>
         <section class="settings-data-card-v1" aria-label="データ管理">
@@ -24880,14 +24914,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
           <div class="settings-copyright-v1">© ${new Date().getFullYear()} CueScore Apps</div>
         </footer>
       </main>
-    </div>
-    <nav class="settings-bottom-nav-v1" aria-label="メインナビゲーション">
-      ${navButton("home","Home",icon.home)}
-      ${navButton("history","対戦履歴",icon.history)}
-      ${navButton("analytics","分析",icon.analytics)}
-      ${navButton("player","プレーヤー",icon.player)}
-      ${navButton("settings","設定",icon.gear,true)}
-    </nav>`;
+    </div>`;
   screen.appendChild(root);
 
   const cloudState = root.querySelector("#settingsFormalCloudStateV1");
@@ -24927,6 +24954,10 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   window.addEventListener("online", renderCloudState);
   window.addEventListener("offline", renderCloudState);
   root.addEventListener("click", event => {
+    if (event.target.closest("[data-settings-home-back]")) {
+      document.getElementById("settingsBackBtn")?.click();
+      return;
+    }
     const action = event.target.closest("[data-settings-action]")?.dataset.settingsAction;
     if (action === "cloud") document.getElementById("settingsOpenCloudBtn")?.click();
     if (action === "csv") document.getElementById("exportCsvBtn")?.click();
@@ -25118,7 +25149,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
 #dataManagementScreen.settings-suite-v2{position:fixed!important;inset:0!important;z-index:260!important;width:100%!important;height:100dvh!important;overflow:hidden!important;background:#f8f8f6!important;color:#171717!important}
 #dataManagementScreen.settings-suite-v2>.data-management-header,
 #dataManagementScreen.settings-suite-v2>.data-management-content{display:none!important}
-.settings-suite-shell-v2{--ss-accent:#813715;--ss-line:#deddd9;--ss-muted:#777773;display:grid;grid-template-rows:minmax(0,1fr) auto;height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif}
+.settings-suite-shell-v2{--ss-accent:#813715;--ss-line:#deddd9;--ss-muted:#777773;display:grid;grid-template-rows:minmax(0,1fr);height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif}
 .settings-suite-scroll-v2{min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:max(15px,env(safe-area-inset-top)) 14px 28px;scrollbar-width:none}
 .settings-suite-scroll-v2::-webkit-scrollbar{display:none}.settings-suite-view-v2[hidden]{display:none!important}
 .settings-suite-header-v2{position:relative;display:grid;grid-template-columns:minmax(82px,1fr) auto minmax(82px,1fr);align-items:center;min-height:52px;margin-bottom:18px}
@@ -25202,10 +25233,6 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     gear:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.2 13.6a7.8 7.8 0 0 0 0-3.2l2-1.55-2-3.45-2.5 1a8 8 0 0 0-2.75-1.6L13.6 2h-4l-.35 2.8A8 8 0 0 0 6.5 6.4L4 5.4 2 8.85l2 1.55a7.8 7.8 0 0 0 0 3.2l-2 1.55 2 3.45 2.5-1a8 8 0 0 0 2.75-1.6l2.5 1 2-3.45Z"/></svg>'
   };
   const header = (view, back, title) => `<header class="settings-suite-header-v2"><button class="settings-suite-back-v2" type="button" data-suite-back="${back}">${icon.back}<span>${back === "settings" ? "設定" : "クラウド同期"}</span></button><h1>${title}</h1><span class="settings-suite-header-spacer-v2"></span></header>`;
-  const nav = ["home","history","analytics","player","settings"].map(key => {
-    const labels = {home:"Home",history:"対戦履歴",analytics:"分析",player:"プレーヤー",settings:"設定"};
-    return `<button type="button" data-suite-nav="${key}" class="${key === "settings" ? "is-current" : ""}">${icon[key === "settings" ? "gear" : key]}<span>${labels[key]}</span></button>`;
-  }).join("");
   const root = document.createElement("div");
   root.className = "settings-suite-shell-v2";
   root.innerHTML = `
@@ -25238,8 +25265,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       <section class="settings-suite-view-v2" data-suite-view="generation" hidden>
         ${header("generation","cloud","世代バックアップ")}<p class="settings-suite-intro-v2">クラウドに保存された過去のデータの世代を確認・復元できます。</p><section class="settings-suite-card-v2"><div class="settings-suite-icon-title-v2"><span class="settings-suite-round-icon-v2">${icon.database}</span><div><h2>バックアップ概要</h2><p id="suiteGenerationSummary">クラウド接続後に実データを取得します。</p></div></div></section><h2 class="settings-suite-section-title-v2">世代一覧</h2><section class="settings-suite-card-v2 settings-suite-list-v2 settings-suite-generation-host-v2" id="suiteGenerationHost"></section><p class="settings-suite-note-v2">※ 復元前には現在の端末データが自動退避されます。</p>
       </section>
-    </div>
-    <nav class="settings-suite-bottom-nav-v2">${nav}</nav>`;
+    </div>`;
   screen.appendChild(root);
   screen.classList.add("settings-suite-v2");
   const scroll = $(".settings-suite-scroll-v2", root);
@@ -26851,6 +26877,7 @@ body.cue-edge-back-animating-v2 .app{
   const HORIZONTAL_DOMINANCE = 1.2;
   const backButtonSelectors = [
     "#cueMatchSetupBackV3",
+    "[data-settings-home-back]",
     "#recordsBackV2",
     "#playerLibraryBackBtn",
     "#playerStatsBackBtn",
