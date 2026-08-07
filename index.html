@@ -8208,23 +8208,13 @@ body {
         </button>
       </section>
 
-      <nav class="cue-bottom-nav-v1" aria-label="メインナビゲーション">
-        <button class="is-current" id="cueHomeNavV3" type="button" aria-label="ホーム" aria-current="page">
-          <span class="cue-nav-icon-v1 cue-nav-glyph-v1 nav-home-v1" aria-hidden="true"></span><span>ホーム</span>
-        </button>
-        <button id="playerManagementBtn" type="button" aria-label="プレーヤー">
-          <span class="cue-nav-icon-v1 cue-nav-glyph-v1 nav-player-v1" aria-hidden="true"></span><span>プレーヤー</span>
-        </button>
-        <button id="recordsBtn" type="button" aria-label="履歴">
-          <span class="cue-nav-icon-v1 cue-nav-glyph-v1 nav-history-v1" aria-hidden="true"></span><span>履歴</span>
-        </button>
-        <button id="openRankingsBtn" type="button" aria-label="分析" hidden tabindex="-1">
-          <span class="cue-nav-icon-v1 cue-nav-glyph-v1 nav-analytics-v1" aria-hidden="true"></span><span>分析</span>
-        </button>
-        <button id="settingsBtn" type="button" aria-label="設定">
-          <span class="cue-nav-icon-v1 cue-nav-glyph-v1 nav-settings-v1" aria-hidden="true"></span><span>設定</span>
-        </button>
-      </nav>
+      <div class="cue-global-actions-v2" hidden aria-hidden="true">
+        <button id="cueHomeNavV3" type="button" tabindex="-1"></button>
+        <button id="playerManagementBtn" type="button" tabindex="-1"></button>
+        <button id="recordsBtn" type="button" tabindex="-1"></button>
+        <button id="openRankingsBtn" type="button" tabindex="-1"></button>
+        <button id="settingsBtn" type="button" tabindex="-1"></button>
+      </div>
 
       <div class="new-match-race-picker-v1 hidden" id="newMatchRacePickerV1" aria-hidden="true">
         <div class="new-match-race-sheet-v1" role="dialog" aria-modal="true" aria-labelledby="newMatchRacePickerTitleV1">
@@ -8570,23 +8560,6 @@ body {
       </div>
       <div class="records-list" id="recordsList"></div>
 
-      <nav class="cue-bottom-nav-v1 records-bottom-nav-v1" aria-label="メインナビゲーション">
-        <button id="recordsHomeNavV1" type="button">
-          <span class="cue-nav-icon-v1" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.25A1.25 1.25 0 0 1 18.75 20H5.25A1.25 1.25 0 0 1 4 18.75Z"/><path d="M9.25 20v-6.5h5.5V20"/></svg></span><span>Home</span>
-        </button>
-        <button id="recordsPlayerNavV1" type="button">
-          <span class="cue-nav-icon-v1" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25"/><path d="M5.5 20c.55-4.15 2.7-6.25 6.5-6.25s5.95 2.1 6.5 6.25"/></svg></span><span>Player</span>
-        </button>
-        <button class="is-current" type="button" aria-current="page">
-          <span class="cue-nav-icon-v1" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5.25 7.5A8 8 0 1 1 4 12"/><path d="M5.25 3.75V7.5H9"/><path d="M12 7.75V12l3 1.75"/></svg></span><span>History</span>
-        </button>
-        <button id="recordsAnalyticsNavV1" type="button">
-          <span class="cue-nav-icon-v1" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.5 19.5V14h3v5.5M10.5 19.5V9h3v10.5M16.5 19.5V4.5h3v15"/><path d="M3 19.5h18"/></svg></span><span>Analytics</span>
-        </button>
-        <button id="recordsSettingsNavV1" type="button">
-          <span class="cue-nav-icon-v1" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.2 13.6a7.8 7.8 0 0 0 0-3.2l2-1.55-2-3.45-2.5 1a8 8 0 0 0-2.75-1.6L13.6 2h-4l-.35 2.8A8 8 0 0 0 6.5 6.4L4 5.4 2 8.85l2 1.55a7.8 7.8 0 0 0 0 3.2l-2 1.55 2 3.45 2.5-1a8 8 0 0 0 2.75 1.6L9.6 22h4l.35-2.8a8 8 0 0 0 2.75-1.6l2.5 1 2-3.45Z"/></svg></span><span>Settings</span>
-        </button>
-      </nav>
     </section>
 
     <section id="recordDetailOverlay" class="record-detail-overlay hidden" aria-label="対戦結果詳細"></section>
@@ -8632,24 +8605,6 @@ body {
           <div class="player-library-list" id="playerLibraryList"></div>
           <div class="player-library-count-v1" id="playerLibraryCountV1" aria-live="polite"></div>
         </div>
-
-        <nav class="player-library-bottom-nav-v1" id="playerLibraryBottomNavV1" aria-label="メインナビゲーション">
-          <button id="playerLibraryHomeNavV1" type="button">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5v8.25A1.25 1.25 0 0 1 18.75 20H5.25A1.25 1.25 0 0 1 4 18.75Z"/><path d="M9.25 20v-6.5h5.5V20"/></svg><span>Home</span>
-          </button>
-          <button id="playerLibraryHistoryNavV1" type="button">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.25 7.5A8 8 0 1 1 4 12"/><path d="M5.25 3.75V7.5H9"/><path d="M12 7.75V12l3 1.75"/></svg><span>対戦履歴</span>
-          </button>
-          <button id="playerLibraryAnalyticsNavV1" type="button">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5V14h3v5.5M10.5 19.5V9h3v10.5M16.5 19.5V4.5h3v15"/><path d="M3 19.5h18"/></svg><span>分析</span>
-          </button>
-          <button class="is-current" type="button" aria-current="page">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.25"/><path d="M5.5 20c.55-4.15 2.7-6.25 6.5-6.25s5.95 2.1 6.5 6.25"/></svg><span>プレーヤー</span>
-          </button>
-          <button id="playerLibrarySettingsNavV1" type="button">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.2 13.6a7.8 7.8 0 0 0 0-3.2l2-1.55-2-3.45-2.5 1a8 8 0 0 0-2.75-1.6L13.6 2h-4l-.35 2.8A8 8 0 0 0 6.5 6.4L4 5.4 2 8.85l2 1.55a7.8 7.8 0 0 0 0 3.2l-2 1.55 2 3.45 2.5-1a8 8 0 0 0 2.75-1.6l2.5 1 2-3.45Z"/></svg><span>設定</span>
-          </button>
-        </nav>
 
         <div class="player-editor hidden" id="playerEditor">
           <div class="player-editor-avatar-v2">
@@ -18929,7 +18884,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-settings-header-navigation-v1";
+    const PWA_VERSION = "1.0-bottom-navigation-retired-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -24412,10 +24367,6 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       <div class="player-detail-metric-label-v1">${esc(label)}</div>
     </div>`;
   }
-  function navButton(action,label,icon,current=false){
-    return `<button type="button" data-player-detail-nav="${action}" class="${current ? "is-current" : ""}" ${current ? 'aria-current="page"' : ""}>${navIcons[icon]}<span>${label}</span></button>`;
-  }
-
   window.renderFormalPlayerDetailV1 = function(playerId){
     const player = readPlayerLibrary().find(item => String(item.id) === String(playerId));
     if (!player) return;
@@ -24467,13 +24418,6 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
         <span class="player-detail-chevron-v1" aria-hidden="true"></span>
       </button>` : `<section class="player-detail-card-v1 player-detail-empty-v1">この種目の対戦データはまだありません。</section>`}
 
-      <nav class="player-detail-bottom-nav-v1" aria-label="メインナビゲーション">
-        ${navButton("home","Home","home")}
-        ${navButton("history","対戦履歴","history")}
-        ${navButton("analytics","分析","analytics")}
-        ${navButton("player","プレーヤー","player",true)}
-        ${navButton("settings","設定","settings")}
-      </nav>
     </div>`;
   };
 
@@ -24980,7 +24924,9 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
 .app.rankings-mode>.rankings-screen{display:block!important}
 .rankings-screen.analytics-formal-v1{position:fixed!important;inset:0!important;z-index:120!important;width:100%!important;height:100dvh!important;overflow:hidden!important;background:#f7f7f5!important;color:#171717!important}
 .rankings-screen.analytics-formal-v1>.rankings-header,.rankings-screen.analytics-formal-v1>.rankings-content{display:none!important}
-.analytics-shell-v1{--ac:#813715;--line:#e0ded9;--muted:#767672;display:grid;grid-template-rows:minmax(0,1fr) auto;height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif}
+.analytics-shell-v1{--ac:#813715;--line:#e0ded9;--muted:#767672;position:relative;display:grid;grid-template-rows:minmax(0,1fr);height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif}
+.analytics-home-back-v2{position:absolute;z-index:4;top:calc(8px + env(safe-area-inset-top));left:14px;display:grid;place-items:center;width:48px;height:48px;padding:0;border:0;border-radius:50%;color:#171717;background:#fff;box-shadow:0 10px 25px rgba(0,0,0,.09)}
+.analytics-home-back-v2 svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:3.25;stroke-linecap:round;stroke-linejoin:round}
 .analytics-scroll-v1{min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:max(16px,env(safe-area-inset-top)) 14px 26px;scrollbar-width:none}.analytics-scroll-v1::-webkit-scrollbar{display:none}
 .analytics-brand-v1{text-align:center;color:var(--ac);font-size:20px;font-weight:760;letter-spacing:-.02em}
 .analytics-head-v1{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:14px 0 14px}.analytics-head-v1 h1{margin:0;font-size:36px;line-height:1;font-weight:820;letter-spacing:-.04em}.analytics-head-v1 p{margin:8px 0 0;color:#4f4f4c;font-size:14px}
@@ -25018,8 +24964,8 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     player:'<svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg>',
     settings:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 13.5v-3l-2-.7-.5-1.2.9-1.9-2.1-2.1-1.9.9-1.2-.5-.7-2h-3l-.7 2-1.2.5-1.9-.9-2.1 2.1.9 1.9-.5 1.2-2 .7v3l2 .7.5 1.2-.9 1.9 2.1 2.1 1.9-.9 1.2.5.7 2h3l.7-2 1.2-.5 1.9.9 2.1-2.1-.9-1.9.5-1.2Z"/></svg>'
   };
-  const nav = (key,label,svg,active=false) => `<button type="button" data-analytics-nav="${key}" class="${active?'is-active':''}">${svg}<span>${label}</span></button>`;
   screen.insertAdjacentHTML("beforeend", `<div class="analytics-shell-v1">
+    <button class="analytics-home-back-v2" type="button" data-analytics-home-back aria-label="ホームへ戻る"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg></button>
     <main class="analytics-scroll-v1">
       <div class="analytics-brand-v1"><span data-cuescore-logo="horizontal-black"></span></div>
       <header class="analytics-head-v1"><div><h1>分析</h1><p>あなたの成長や傾向をグラフと数値で確認できます</p></div><div class="analytics-cloud-v1" id="analyticsCloudV1">${icon.cloud}<span>クラウド同期：確認中</span></div></header>
@@ -25038,9 +24984,9 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       <p class="analytics-chart-note-v1" id="analyticsChartNoteV1"></p>
       <section class="analytics-card-v1 analytics-ai-v1"><h2>AI分析サマリー</h2><div class="analytics-ai-grid-v1" id="analyticsAiV1"></div></section>
     </main>
-    <nav class="analytics-nav-v1" aria-label="メインナビゲーション">${nav("home","Home",icon.home)}${nav("history","対戦履歴",icon.history)}${nav("analytics","分析",icon.analytics,true)}${nav("player","プレーヤー",icon.player)}${nav("settings","設定",icon.settings)}</nav>
   </div>`);
   const $ = selector => screen.querySelector(selector);
+  $("[data-analytics-home-back]")?.addEventListener("click",()=>document.getElementById("rankingsBackBtn")?.click());
   let chartMetric = "winRate";
   let returnFromFilter = false;
   const dateOf = record => { const d=new Date(record?.endedAt||record?.playedAt||record?.startedAt||0); return Number.isNaN(d.getTime())?null:d; };
@@ -26878,6 +26824,7 @@ body.cue-edge-back-animating-v2 .app{
   const backButtonSelectors = [
     "#cueMatchSetupBackV3",
     "[data-settings-home-back]",
+    "[data-analytics-home-back]",
     "#recordsBackV2",
     "#playerLibraryBackBtn",
     "#playerStatsBackBtn",
