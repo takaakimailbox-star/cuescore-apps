@@ -11253,7 +11253,7 @@ let matchRecordsRawCacheV152 = null;
         if (nameInput) nameInput.value = limitPlayerName(savedPlayerV131.name);
         syncSelectedPlayerAvatarV2(slot, savedPlayerV131);
       });
-      initializePrimaryMatchSetupV1();
+      initializePrimaryMatchSetupV1({force:true});
     }
     showPlayerLibraryMain();
     requestAnimationFrame(() => {
@@ -11401,25 +11401,28 @@ let matchRecordsRawCacheV152 = null;
     avatar.classList.add("has-player-avatar-v2");
   }
 
-  let primaryMatchSetupInitializedV1=false;
-  function initializePrimaryMatchSetupV1() {
-    if (primaryMatchSetupInitializedV1) return false;
-    if (selectedRegisteredPlayer[1]) {
-      primaryMatchSetupInitializedV1=true;
-      return false;
-    }
+  function initializePrimaryMatchSetupV1(options={}) {
     const primary=primaryPlayerV1();
     if (!primary) return false;
+    if (selectedRegisteredPlayer[1]===primary.id) {
+      const nameInput=el("p1Name");
+      if (nameInput) nameInput.value=limitPlayerName(primary.name);
+      syncSelectedPlayerAvatarV2(1,primary);
+      syncNewMatchNameV1("p1Name","p1NameDisplayV1");
+      setSelectedStarter(1);
+      return true;
+    }
+    if (!options.force && selectedRegisteredPlayer[1]) return false;
     if (selectedRegisteredPlayer[2]===primary.id) {
-      primaryMatchSetupInitializedV1=true;
-      return false;
+      swapNewMatchPlayerCardsV1();
+      return true;
     }
     selectedRegisteredPlayer[1]=primary.id;
     const nameInput=el("p1Name");
     if (nameInput) nameInput.value=limitPlayerName(primary.name);
     syncSelectedPlayerAvatarV2(1,primary);
     syncNewMatchNameV1("p1Name","p1NameDisplayV1");
-    primaryMatchSetupInitializedV1=true;
+    setSelectedStarter(1);
     return true;
   }
   requestAnimationFrame(initializePrimaryMatchSetupV1);
@@ -18914,7 +18917,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-app-icon-size-v2";
+    const PWA_VERSION = "1.0-primary-player-edge-back-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -26544,6 +26547,7 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   if(!home||!setup||window.__cueScoreHomeSetupV3)return;
   window.__cueScoreHomeSetupV3=true;
   const openSetup=()=>{
+    initializePrimaryMatchSetupV1({force:true});
     home.classList.add("match-setup-active-v3");
     setup.setAttribute("aria-hidden","false");
     document.getElementById("cueHomeNavV3")?.removeAttribute("aria-current");
@@ -26814,11 +26818,11 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   if (window.__cueScoreEdgeBackV1) return;
   window.__cueScoreEdgeBackV1 = true;
 
-  const EDGE_START_MAX = 24;
-  const MIN_HORIZONTAL_TRAVEL = 72;
-  const MAX_VERTICAL_TRAVEL = 48;
-  const MAX_GESTURE_DURATION = 900;
-  const HORIZONTAL_DOMINANCE = 1.35;
+  const EDGE_START_MAX = 64;
+  const MIN_HORIZONTAL_TRAVEL = 60;
+  const MAX_VERTICAL_TRAVEL = 60;
+  const MAX_GESTURE_DURATION = 1200;
+  const HORIZONTAL_DOMINANCE = 1.2;
   const backButtonSelectors = [
     "#cueMatchSetupBackV3",
     "#recordsBackV2",

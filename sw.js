@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-app-icon-size-v2";
+const APP_VERSION = "1.0-primary-player-edge-back-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
