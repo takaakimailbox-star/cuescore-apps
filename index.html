@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja" class="cue-app-booting-v2">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -8078,8 +8078,20 @@ body {
 .three-cushion-game-v1 .pro-bottom-dock{padding-top:10px!important}
 @media(max-width:430px){.cue-discipline-switcher-v1{grid-template-columns:repeat(6,minmax(0,1fr))!important}.cue-discipline-switcher-v1 .cue-ball-icon-v1{width:26px;height:26px;font-size:10px}.three-cushion-game-v1 .pro-score{font-size:66px!important}.three-cushion-run-v1{top:178px}.three-cushion-actions-v1 button{min-height:82px}}
 </style>
+  <style id="cueScoreBootStylesV2">
+    html.cue-app-booting-v2,
+    html.cue-app-booting-v2 body{background:#111!important}
+    html.cue-app-booting-v2 .app{visibility:hidden!important}
+    .cue-logo-splash-v1{position:fixed;z-index:10000;inset:0;display:grid;place-items:center;background:#111;opacity:1;transition:opacity .22s ease;pointer-events:auto}
+    .cue-logo-splash-v1>img{display:block;width:min(78vw,420px);height:auto;max-height:56px;object-fit:contain}
+    .cue-logo-splash-v1.is-hidden{opacity:0;pointer-events:none}
+    @media(prefers-reduced-motion:reduce){.cue-logo-splash-v1{transition:none}}
+  </style>
 </head>
 <body>
+  <div class="cue-logo-splash-v1" id="cueLogoSplashV2" role="status" aria-label="CueScoreを起動中">
+    <img src="src/assets/logo/CueScore_Logo_Horizontal_White.svg" alt="CueScore">
+  </div>
   <div class="toast" id="toast">
     <div>
       背面タップ<br>
@@ -18917,7 +18929,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-primary-player-edge-back-v1";
+    const PWA_VERSION = "1.0-navigation-motion-boot-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -26812,6 +26824,20 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   .break-player-arrow-v1{width:28px;height:28px;font-size:20px}
 }
 </style>
+<style id="cueScoreEdgeBackMotionV2">
+body.cue-edge-back-animating-v2 .app{
+  pointer-events:none!important;
+  animation:cue-edge-back-out-v2 220ms cubic-bezier(.22,.72,.28,1) forwards!important;
+  will-change:transform,opacity;
+}
+@keyframes cue-edge-back-out-v2{
+  from{transform:translateX(0);opacity:1}
+  to{transform:translateX(34vw);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+  body.cue-edge-back-animating-v2 .app{animation-duration:1ms!important}
+}
+</style>
 <script>
 // CueScore iPhone edge-back gesture v1.0 — delegates to the visible existing back button.
 (() => {
@@ -26875,6 +26901,26 @@ body.cue-modal-lock-v1{overflow:hidden!important}
     return backButton && !isTransitionBlocked(backButton) ? backButton : null;
   };
 
+  let backTransitionActive = false;
+  const animateBack = backButton => {
+    if (!backButton || backTransitionActive) return;
+    backTransitionActive = true;
+    document.body.classList.add("cue-edge-back-animating-v2");
+    const appRoot = document.querySelector(".app");
+    let completed = false;
+    const finish = () => {
+      if (completed) return;
+      completed = true;
+      backButton.click();
+      setTimeout(() => {
+        document.body.classList.remove("cue-edge-back-animating-v2");
+        backTransitionActive = false;
+      },80);
+    };
+    appRoot?.addEventListener("animationend", finish, {once:true});
+    setTimeout(finish,280);
+  };
+
   let gesture = null;
   const resetGesture = () => { gesture = null; };
 
@@ -26921,13 +26967,14 @@ body.cue-modal-lock-v1{overflow:hidden!important}
     if (elapsed > MAX_GESTURE_DURATION) return;
     if (!isVisible(completedGesture.backButton) || completedGesture.backButton !== visibleBackButton()) return;
     if (event.cancelable) event.preventDefault();
-    completedGesture.backButton.click();
+    animateBack(completedGesture.backButton);
   }, {passive:false, capture:true});
 
   document.addEventListener("touchcancel", resetGesture, {passive:true, capture:true});
 
   window.CueScoreEdgeBackV1 = Object.freeze({
     visibleBackButton,
+    animateBack,
     isTransitionBlocked,
     constants:Object.freeze({EDGE_START_MAX,MIN_HORIZONTAL_TRAVEL,MAX_VERTICAL_TRAVEL,MAX_GESTURE_DURATION,HORIZONTAL_DOMINANCE})
   });
@@ -26995,19 +27042,14 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   })));
   observer.observe(document.body,{childList:true,subtree:true});
 
-  const splash = document.createElement("div");
-  splash.className = "cue-logo-splash-v1";
-  splash.setAttribute("role","status");
-  splash.setAttribute("aria-label","CueScoreを起動中");
-  splash.innerHTML = '<span data-cuescore-logo="horizontal-white"></span>';
-  document.body.appendChild(splash);
-  hydrate(splash);
+  const splash = document.getElementById("cueLogoSplashV2");
   const startedAt = performance.now();
   window.addEventListener("load", () => {
     const delay = Math.max(0,650 - (performance.now() - startedAt));
     setTimeout(() => {
-      splash.classList.add("is-hidden");
-      setTimeout(() => splash.remove(),230);
+      document.documentElement.classList.remove("cue-app-booting-v2");
+      splash?.classList.add("is-hidden");
+      setTimeout(() => splash?.remove(),230);
     },delay);
   },{once:true});
 
