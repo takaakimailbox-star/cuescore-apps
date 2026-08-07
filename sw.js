@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-cuescore-apps-migration-v1";
+const APP_VERSION = "1.0-app-icon-fix-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
@@ -8,6 +8,9 @@ const APP_SHELL = [
   "./src/assets/logo/CueScore_Logo_Horizontal_White.svg",
   "./src/assets/logo/CueScore_LogoMark_Black.svg",
   "./src/assets/logo/CueScore_LogoMark_White.svg",
+  "./icons/cuescore-app-icon-180.png",
+  "./icons/cuescore-app-icon-192.png",
+  "./icons/cuescore-app-icon-512.png",
   "./assets/icons/navigation/nav-home.svg",
   "./assets/icons/navigation/nav-player.svg",
   "./assets/icons/navigation/nav-history.svg",

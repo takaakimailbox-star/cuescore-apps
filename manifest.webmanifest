@@ -12,27 +12,27 @@
   "theme_color": "#123f28",
   "icons": [
     {
-      "src": "./src/assets/logo/CueScore_LogoMark_Black.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "./icons/cuescore-app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./src/assets/logo/CueScore_LogoMark_Black.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "./icons/cuescore-app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./src/assets/logo/CueScore_LogoMark_White.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "./icons/cuescore-app-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "./src/assets/logo/CueScore_LogoMark_White.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "./icons/cuescore-app-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "maskable"
     }
   ]
