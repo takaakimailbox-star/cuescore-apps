@@ -1,8 +1,9 @@
-const APP_VERSION = "1.0-bottom-navigation-retired-v1";
+const APP_VERSION = "1.0-official-demo-data-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
+  "./demo-data.js",
   "./manifest.webmanifest",
   "./src/assets/logo/CueScore_Logo_Horizontal_Black.svg",
   "./src/assets/logo/CueScore_Logo_Horizontal_White.svg",

@@ -8896,6 +8896,7 @@ body {
   </main>
 
   
+  <script src="./demo-data.js"></script>
   <script>
   // CueScore feature access v1.0: future purchase/subscription state connects here.
   (() => {
@@ -9121,11 +9122,11 @@ body {
     };
 
     const safeRead = (key, fallback) => {
-      try { return localStorage.getItem(key) || fallback; }
+      try { return localStorage.getItem(window.CueScoreDemoData?.resolveSettingKey(key) || key) || fallback; }
       catch (_) { return fallback; }
     };
     const safeWrite = (key, value) => {
-      try { localStorage.setItem(key, value); }
+      try { localStorage.setItem(window.CueScoreDemoData?.resolveSettingKey(key) || key, value); }
       catch (_) {}
     };
 
@@ -9551,8 +9552,12 @@ body {
 
 let matchRecordsRawCacheV152 = null;
   let matchRecordsParsedCacheV152 = [];
+  function activeCueScoreDataKeyV1(normalKey) {
+    return window.CueScoreDemoData?.resolveKey(normalKey) || normalKey;
+  }
   function readMatchRecords() {
-    const rawValue = localStorage.getItem(MATCH_RECORDS_KEY);
+    const storageKey = activeCueScoreDataKeyV1(MATCH_RECORDS_KEY);
+    const rawValue = localStorage.getItem(storageKey);
     if (!rawValue) {
       matchRecordsRawCacheV152 = null;
       matchRecordsParsedCacheV152 = [];
@@ -9568,16 +9573,17 @@ let matchRecordsRawCacheV152 = null;
     } catch (error) {
       matchRecordsRawCacheV152 = null;
       matchRecordsParsedCacheV152 = [];
-      preserveCorruptedLocalDataV100(MATCH_RECORDS_KEY, rawValue, error);
+      preserveCorruptedLocalDataV100(storageKey, rawValue, error);
       return [];
     }
   }
 
   function persistMatchRecordsOnlyV161(records) {
+    const storageKey = activeCueScoreDataKeyV1(MATCH_RECORDS_KEY);
     const normalized = Array.isArray(records) ? records : [];
     const serialized = JSON.stringify(normalized);
-    if (localStorage.getItem(MATCH_RECORDS_KEY) !== serialized) {
-      verifiedLocalStorageWriteV131(MATCH_RECORDS_KEY, normalized);
+    if (localStorage.getItem(storageKey) !== serialized) {
+      verifiedLocalStorageWriteV131(storageKey, normalized);
     }
     matchRecordsRawCacheV152 = serialized;
     matchRecordsParsedCacheV152 = normalized.map(normalizeMatchRecordV680);
@@ -9892,27 +9898,29 @@ let matchRecordsRawCacheV152 = null;
   let selectedRegisteredPlayer = {1:null, 2:null};
 
   function readPlayerLibrary() {
-    const rawValue = localStorage.getItem(PLAYER_LIBRARY_KEY);
+    const storageKey = activeCueScoreDataKeyV1(PLAYER_LIBRARY_KEY);
+    const rawValue = localStorage.getItem(storageKey);
     if (!rawValue) return [];
     try {
       const parsed = JSON.parse(rawValue);
       if (!Array.isArray(parsed)) throw new TypeError("Player library must be an array.");
       const normalizedPlayers = window.cueScoreNormalizePlayersToDefaultAvatarV4(parsed);
       if (JSON.stringify(parsed) !== JSON.stringify(normalizedPlayers)) {
-        verifiedLocalStorageWriteV131(PLAYER_LIBRARY_KEY, normalizedPlayers);
+        verifiedLocalStorageWriteV131(storageKey, normalizedPlayers);
       }
       return normalizedPlayers;
     } catch (error) {
-      preserveCorruptedLocalDataV100(PLAYER_LIBRARY_KEY, rawValue, error);
+      preserveCorruptedLocalDataV100(storageKey, rawValue, error);
       return [];
     }
   }
 
   function writePlayerLibrary(players) {
+    const storageKey = activeCueScoreDataKeyV1(PLAYER_LIBRARY_KEY);
     const normalized = window.cueScoreNormalizePlayersToDefaultAvatarV4(players);
     const serialized = JSON.stringify(normalized);
-    if (localStorage.getItem(PLAYER_LIBRARY_KEY) !== serialized) {
-      verifiedLocalStorageWriteV131(PLAYER_LIBRARY_KEY, normalized);
+    if (localStorage.getItem(storageKey) !== serialized) {
+      verifiedLocalStorageWriteV131(storageKey, normalized);
     }
     refreshDerivedViewsV131("player-library");
     return true;
@@ -13770,7 +13778,7 @@ let matchRecordsRawCacheV152 = null;
 
   function readClassificationArrayV381(key) {
     try {
-      const value = JSON.parse(localStorage.getItem(key) || "[]");
+      const value = JSON.parse(localStorage.getItem(activeCueScoreDataKeyV1(key)) || "[]");
       return Array.isArray(value) ? value : [];
     } catch (_) {
       return [];
@@ -13778,7 +13786,7 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function writeClassificationArrayV381(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(activeCueScoreDataKeyV1(key), JSON.stringify(value));
   }
 
   function initializeClassificationsV381() {
@@ -17407,6 +17415,7 @@ let matchRecordsRawCacheV152 = null;
 
     // RC34: mark destructive/restored local data as pending without automatically overwriting cloud.
     async function markLocalCloudDirtyV133(reason = "local-data-changed", meta = {}) {
+      if (window.CueScoreDemoData?.isDemo()) return null;
       const payload = buildPayload();
       const payloadHash = await payloadFingerprint(payload).catch(() => "");
       const pending = {
@@ -18884,7 +18893,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-bottom-navigation-retired-v1";
+    const PWA_VERSION = "1.0-official-demo-data-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -19710,7 +19719,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{margin:0;padding:6px;opaci
 <script>
 // RC59 performance diagnostics: parsed-record cache and render/write coalescing.
 window.cueScorePerformanceDiagnosticsV152 = function(){
-  const raw = localStorage.getItem("rotationScoreboard.matchRecords.v1") || "";
+  const raw = localStorage.getItem(activeCueScoreDataKeyV1("rotationScoreboard.matchRecords.v1")) || "";
   return {
     appVersion: "1.0",
     matchRecordBytes: new Blob([raw]).size,
@@ -19740,7 +19749,7 @@ window.cueScorePerformanceDiagnosticsV152 = function(){
     renderFrame: 0
   };
 
-  const signature = () => `${localStorage.getItem(HISTORY_KEY) || '[]'}\u0000${localStorage.getItem(FILTER_KEY) || '{}'}`;
+  const signature = () => `${localStorage.getItem(activeCueScoreDataKeyV1(HISTORY_KEY)) || '[]'}\u0000${localStorage.getItem(FILTER_KEY) || '{}'}`;
   const originalFiltered = window.getFilteredRecordsV53;
   if (typeof originalFiltered === 'function' && !originalFiltered.__cueScoreMemoizedV153) {
     const memoized = function(...args) {
@@ -19769,8 +19778,9 @@ window.cueScorePerformanceDiagnosticsV152 = function(){
   }
 
   window.addEventListener('storage', event => {
-    if (event.key === HISTORY_KEY || event.key === FILTER_KEY) invalidate();
+    if (event.key === activeCueScoreDataKeyV1(HISTORY_KEY) || event.key === FILTER_KEY) invalidate();
   });
+  document.addEventListener('cuescore:data-updated', invalidate);
 
   // Coalesce repeated derived-view refreshes into one animation frame.
   const renderTargets = ['renderHomeDashboardV50', 'renderPlayerRankingsV51', 'renderVsAnalysisV52'];
@@ -19825,7 +19835,7 @@ window.cueScorePerformanceDiagnosticsV152 = function(){
     cacheActive: Boolean(state.filtered && state.signature === signature()),
     coalescedRenderFrames: state.scheduledFrames,
     pendingDerivedViews: Array.from(state.pendingRenderNames),
-    historyBytes: new Blob([localStorage.getItem(HISTORY_KEY) || '']).size,
+    historyBytes: new Blob([localStorage.getItem(activeCueScoreDataKeyV1(HISTORY_KEY)) || '']).size,
     filterBytes: new Blob([localStorage.getItem(FILTER_KEY) || '']).size
   });
 })();
@@ -19863,8 +19873,8 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
     try { return localStorage.getItem(key) || ""; } catch (_) { return ""; }
   };
   const signature = extra => [
-    safeStorage("rotationScoreboard.matchRecords.v1"),
-    safeStorage("rotationScoreboard.playerLibrary.v1"),
+    safeStorage(activeCueScoreDataKeyV1("rotationScoreboard.matchRecords.v1")),
+    safeStorage(activeCueScoreDataKeyV1("rotationScoreboard.players.v1")),
     safeStorage("rotationScoreboard.statisticsFilter.v53"),
     extra || ""
   ].join("|");
@@ -24798,6 +24808,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   .settings-data-copy-v1 span { font-size: 11.5px; }
   .settings-cloud-state-v1 { font-size: 12px; }
 }
+.settings-demo-card-v1{display:grid;gap:12px;padding:16px;border:1px solid #deded9;border-radius:16px;background:#fff}.settings-demo-head-v1{display:flex;align-items:center;justify-content:space-between;gap:12px}.settings-demo-head-v1 strong{font-size:18px}.settings-demo-state-v1{padding:5px 10px;border-radius:999px;background:#eeeeeb;color:#666;font-size:12px;font-weight:750}.settings-demo-state-v1.is-demo{background:#171717;color:#fff}.settings-demo-note-v1{margin:0;color:#666;font-size:13px;line-height:1.55}.settings-demo-actions-v1{display:grid;grid-template-columns:1fr 1fr;gap:9px}.settings-demo-actions-v1 button{min-height:44px;padding:9px 10px;border:1px solid #d8d8d3;border-radius:11px;background:#fff;color:#171717;font:inherit;font-size:13px;font-weight:700}.settings-demo-actions-v1 button.is-primary{background:#171717;color:#fff;border-color:#171717}.settings-demo-actions-v1 button.is-danger{color:#a52920}.settings-data-row-v1.is-demo-disabled{opacity:.48}
 </style>
 
 <script>
@@ -24848,6 +24859,18 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
             <span></span><span class="settings-data-chevron-v1" aria-hidden="true">›</span>
           </button>
         </section>
+        <h1 class="settings-formal-section-title-v1">開発・デモ</h1>
+        <section class="settings-demo-card-v1" aria-label="Official Demo Data">
+          <div class="settings-demo-head-v1"><strong>Official Demo Data</strong><span class="settings-demo-state-v1" id="settingsDemoStateV1">通常モード</span></div>
+          <p class="settings-demo-note-v1">デモデータは専用領域に保存されます。作成・切替・リセット・削除を行っても、通常のプレーヤー、対戦履歴、設定、メインプレーヤーは変更されません。</p>
+          <div class="settings-demo-actions-v1">
+            <button type="button" data-demo-action="create">作成／再読込</button>
+            <button type="button" class="is-primary" data-demo-action="enter">デモへ切替</button>
+            <button type="button" data-demo-action="normal">通常へ戻る</button>
+            <button type="button" data-demo-action="reset">デモをリセット</button>
+            <button type="button" class="is-danger" data-demo-action="delete">デモを削除</button>
+          </div>
+        </section>
         <div class="settings-formal-spacer-v1" aria-hidden="true"></div>
         <footer class="settings-app-footer-v1">
           <div class="settings-app-brand-v1"><span data-cuescore-logo="horizontal-black"></span><span class="settings-version">Version 1.0</span></div>
@@ -24862,11 +24885,22 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   screen.appendChild(root);
 
   const cloudState = root.querySelector("#settingsFormalCloudStateV1");
+  const demoApi = window.CueScoreDemoData;
   function readJson(key, fallback = null) {
     try { return JSON.parse(localStorage.getItem(key) || "null") ?? fallback; }
     catch (_) { return fallback; }
   }
   function renderCloudState() {
+    const demoMode = Boolean(demoApi?.isDemo());
+    const demoState = root.querySelector("#settingsDemoStateV1");
+    if (demoState) {
+      demoState.textContent = demoMode ? "デモモード" : "通常モード";
+      demoState.classList.toggle("is-demo", demoMode);
+    }
+    root.querySelectorAll("[data-settings-action]").forEach(button => {
+      button.classList.toggle("is-demo-disabled", demoMode);
+      button.setAttribute("aria-disabled", String(demoMode));
+    });
     const config = readJson("rotationScoreboard.supabaseConfig.v1", {});
     const deviceId = String(localStorage.getItem("rotationScoreboard.cloudDeviceId.v1") || "").trim();
     const sync = readJson("rotationScoreboard.cloudSyncState.v1", {});
@@ -24903,9 +24937,43 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       return;
     }
     const action = event.target.closest("[data-settings-action]")?.dataset.settingsAction;
+    if (action && demoApi?.isDemo()) {
+      alert("デモモード中はクラウド同期・書き出し・復元を利用できません。通常データは変更されません。");
+      return;
+    }
     if (action === "cloud") document.getElementById("settingsOpenCloudBtn")?.click();
     if (action === "csv") document.getElementById("exportCsvBtn")?.click();
     if (action === "restore") document.getElementById("importBackupBtn")?.click();
+
+    const demoAction = event.target.closest("[data-demo-action]")?.dataset.demoAction;
+    if (demoAction) {
+      if (!demoApi) return;
+      if (document.querySelector(".app")?.classList.contains("pro-game-mode")) {
+        alert("試合中はデータ領域を切り替えられません。試合を終了してから操作してください。");
+        return;
+      }
+      const normalSafe = "通常データは変更されません。";
+      if (demoAction === "create" && confirm(`公式デモデータ（10名・24試合）を作成／再読込します。\n${normalSafe}`)) {
+        demoApi.create();
+        alert(`公式デモデータを準備しました。\n${normalSafe}`);
+      }
+      if (demoAction === "enter" && confirm(`公式デモデータへ切り替えます。\n${normalSafe}`)) {
+        demoApi.create(); demoApi.setMode("demo"); location.reload();
+      }
+      if (demoAction === "normal" && confirm(`通常データへ戻ります。デモデータは保持されます。\n${normalSafe}`)) {
+        demoApi.setMode("normal"); location.reload();
+      }
+      if (demoAction === "reset" && confirm(`デモデータを初期状態へ戻します。デモ中の変更は失われます。\n${normalSafe}`)) {
+        demoApi.create();
+        if (demoApi.isDemo()) location.reload(); else alert(`デモデータを初期状態へ戻しました。\n${normalSafe}`);
+      }
+      if (demoAction === "delete" && confirm(`デモデータだけを削除します。\n${normalSafe}`)) {
+        const wasDemo = demoApi.isDemo(); demoApi.remove();
+        if (wasDemo) location.reload(); else alert(`デモデータを削除しました。\n${normalSafe}`);
+      }
+      renderCloudState();
+      return;
+    }
 
     const nav = event.target.closest("[data-settings-nav]")?.dataset.settingsNav;
     if (!nav || nav === "settings") return;
