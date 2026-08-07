@@ -6,13 +6,13 @@
   <meta name="theme-color" content="#f4f4f2" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Rotation Scoreboard" />
+  <meta name="apple-mobile-web-app-title" content="CueScore" />
   <meta name="format-detection" content="telephone=no" />
-  <meta name="description" content="CueScore Rotation Scoreboard — ローテーション競技用スコアボード" />
+  <meta name="description" content="CueScore Apps — 複数のキュースポーツを記録・分析できる統合スコアリングアプリ" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" type="image/svg+xml" href="./src/assets/logo/CueScore_LogoMark_Black.svg" />
   <link rel="apple-touch-icon" href="./src/assets/logo/CueScore_LogoMark_Black.svg" />
-  <title>CueScore Rotation Scoreboard v1.0</title>
+  <title>CueScore Apps v1.0</title>
   <style>
     :root {
       --bg: #16472d;
@@ -8099,8 +8099,8 @@ body {
     </div>
   </section>
 
-  <main class="app" aria-label="Rotation Scoreboard">
-    <h1 class="screen-title">ROTATION<br>SCOREBOARD</h1>
+  <main class="app" aria-label="CueScore">
+    <h1 class="screen-title">CUESCORE</h1>
     <div class="sub-title">version 1.0</div>
 
     <section class="cue-home-v1 cue-home-integrated-v2" id="cueHomeV1" aria-label="CueScore Home">
@@ -9311,7 +9311,7 @@ body {
   const MATCH_RECORDS_KEY = "rotationScoreboard.matchRecords.v1";
 
   // Rotation Scoreboard Ver.6.8.0: future multi-game data foundation
-  const ROTATION_APP_VERSION = "1.0";
+  const CUESCORE_APP_VERSION = "1.0";
   const ROTATION_GAME_TYPE = "rotation";
   const NINE_BALL_GAME_TYPE = "nineBall";
   const TEN_BALL_GAME_TYPE = "tenBall";
@@ -16125,7 +16125,7 @@ let matchRecordsRawCacheV152 = null;
       id:stableRecordId,
       gameType: activeGameTypeV1,
       recordSchemaVersion: ROTATION_RECORD_SCHEMA_VERSION,
-      createdByAppVersion: ROTATION_APP_VERSION,
+      createdByAppVersion: CUESCORE_APP_VERSION,
       playedAt:endedAt,
       startedAt:currentGameStartedAt||endedAt,
       endedAt,
@@ -16476,7 +16476,8 @@ let matchRecordsRawCacheV152 = null;
     const DATA_RECORD_KEY = "rotationScoreboard.matchRecords.v1";
     const DATA_CATEGORY_KEY = "rotationScoreboard.matchCategories.v1";
     const DATA_SEASON_KEY = "rotationScoreboard.matchSeasons.v1";
-    const BACKUP_FORMAT = "rotation-scoreboard-backup";
+    const BACKUP_FORMAT = "cuescore-apps-backup";
+    const LEGACY_BACKUP_FORMAT = "rotation-scoreboard-backup";
     const BACKUP_SCHEMA_VERSION = 2;
 
     const byId = id => document.getElementById(id);
@@ -16531,8 +16532,9 @@ let matchRecordsRawCacheV152 = null;
     function makeBackupPayload() {
       return {
         format: BACKUP_FORMAT,
+        appName: "CueScore Apps",
         schemaVersion: BACKUP_SCHEMA_VERSION,
-        appVersion: ROTATION_APP_VERSION,
+        appVersion: CUESCORE_APP_VERSION,
         gameType: ROTATION_GAME_TYPE,
         exportedAt: new Date().toISOString(),
         players: window.cueScoreNormalizePlayersToDefaultAvatarV4(safelyReadArray(DATA_PLAYER_KEY)),
@@ -16555,7 +16557,7 @@ let matchRecordsRawCacheV152 = null;
         const url = URL.createObjectURL(blob);
         const anchor = document.createElement("a");
         anchor.href = url;
-        anchor.download = `CueScore_Rotation_Scoreboard_v1.0_Backup_${dateStamp()}.json`;
+        anchor.download = `CueScore_Apps_v1.0_Backup_${dateStamp()}.json`;
         document.body.appendChild(anchor);
         anchor.click();
         anchor.remove();
@@ -16714,7 +16716,7 @@ let matchRecordsRawCacheV152 = null;
         const url = URL.createObjectURL(blob);
         const anchor = document.createElement("a");
         anchor.href = url;
-        anchor.download = `Rotation_Scoreboard_Excel_Analysis_${dateStamp()}.csv`;
+        anchor.download = `CueScore_Apps_Analysis_${dateStamp()}.csv`;
         document.body.appendChild(anchor);
         anchor.click();
         anchor.remove();
@@ -16729,7 +16731,7 @@ let matchRecordsRawCacheV152 = null;
 
     function validateBackup(value) {
       if (!value || typeof value !== "object") return false;
-      if (value.format !== BACKUP_FORMAT) return false;
+      if (![BACKUP_FORMAT, LEGACY_BACKUP_FORMAT].includes(value.format)) return false;
       if (!Array.isArray(value.players) || !Array.isArray(value.matchRecords)) return false;
       if (value.schemaVersion != null && (!Number.isInteger(Number(value.schemaVersion)) || Number(value.schemaVersion) < 1)) return false;
 
@@ -16756,7 +16758,7 @@ let matchRecordsRawCacheV152 = null;
         const raw = await file.text();
         const backup = JSON.parse(raw);
         if (!validateBackup(backup)) {
-          alert("Rotation Scoreboardの正しいバックアップファイルではありません。");
+          alert("CueScoreの正しいバックアップファイルではありません。");
           return;
         }
 
@@ -17395,9 +17397,10 @@ let matchRecordsRawCacheV152 = null;
     }
     function buildPayload() {
       return {
-        format: "rotation-scoreboard-cloud-backup",
+        format: "cuescore-apps-cloud-backup",
+        appName: "CueScore Apps",
         schemaVersion: 2,
-        appVersion: ROTATION_APP_VERSION,
+        appVersion: CUESCORE_APP_VERSION,
         gameType: ROTATION_GAME_TYPE,
         savedAt: new Date().toISOString(),
         players: window.cueScoreNormalizePlayersToDefaultAvatarV4(readArray(DATA_PLAYER_KEY)),
@@ -18911,7 +18914,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-official-logo-rc1";
+    const PWA_VERSION = "1.0-cuescore-apps-migration-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -25302,7 +25305,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     return ["legacy",record?.startedAt||record?.playedAt||record?.endedAt||"",normalizeText(p1.name),normalizeText(p2.name),Number(p1.score||0),Number(p2.score||0)].join("|");
   }
   function listItemKey(item){if(typeof item==="string")return `text:${normalizeText(item)}`;return `id:${item?.id??item?.key??normalizeText(item?.name??item?.label??JSON.stringify(item))}`}
-  function validateBackup(value){return value&&typeof value==="object"&&value.format==="rotation-scoreboard-backup"&&Array.isArray(value.players)&&Array.isArray(value.matchRecords)&&value.matchRecords.every(r=>r&&typeof r==="object"&&r.players?.[1]&&r.players?.[2])}
+  function validateBackup(value){return value&&typeof value==="object"&&["cuescore-apps-backup","rotation-scoreboard-backup"].includes(value.format)&&Array.isArray(value.players)&&Array.isArray(value.matchRecords)&&value.matchRecords.every(r=>r&&typeof r==="object"&&r.players?.[1]&&r.players?.[2])}
   function mergeUnique(current,incoming,keyFn){const keys=new Set(current.map(keyFn));const added=[];incoming.forEach(item=>{const key=keyFn(item);if(!keys.has(key)){keys.add(key);added.push(item)}});return {value:[...current,...added],added:added.length}}
   function verifiedWrite(key,value){localStorage.setItem(key,JSON.stringify(value));const check=JSON.parse(localStorage.getItem(key)||"null");if(JSON.stringify(check)!==JSON.stringify(value))throw new Error(`${key}の保存確認に失敗しました。`)}
   async function mergeBackup(backup){

@@ -1,5 +1,5 @@
-const APP_VERSION = "1.0-official-logo-rc1";
-const CACHE_NAME = `cuescore-rotation-v${APP_VERSION}`;
+const APP_VERSION = "1.0-cuescore-apps-migration-v1";
+const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",

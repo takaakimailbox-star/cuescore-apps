@@ -1,6 +1,8 @@
-# CueScore Rotation Scoreboard v1.0 Release Audit
+# Historical Release Audit — Rotation Scoreboard v1.0
 
 監査日: 2026-07-24
+
+> この文書はCueScore Appsへ統合する前の基準実装に関する履歴記録です。
 
 ## 修正内容
 

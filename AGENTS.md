@@ -1,4 +1,4 @@
-# CueScore Rotation Scoreboard Development Instructions
+# CueScore Apps Development Instructions
 
 ## Official Sources
 

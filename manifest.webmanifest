@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "CueScore Rotation Scoreboard",
+  "name": "CueScore Apps",
   "short_name": "CueScore",
-  "description": "ローテーション競技用スコアボード。試合記録、分析、履歴、統計、クラウド同期に対応します。",
+  "description": "複数のキュースポーツに対応するCueScore統合アプリ。試合記録、分析、履歴、統計、クラウド同期を利用できます。",
   "lang": "ja",
   "start_url": "./index.html",
   "scope": "./",

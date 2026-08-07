@@ -1,7 +1,8 @@
 # CueScore Official Documentation
 
 This directory contains the official specifications and adopted UI references
-for CueScore Rotation Scoreboard.
+for CueScore Apps. Rotation Scoreboard is retained in the official archive as
+the initial reference implementation and historical product context.
 
 ## Single Source of Truth
 

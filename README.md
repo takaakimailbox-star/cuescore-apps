@@ -2,14 +2,14 @@
   <img src="src/assets/logo/CueScore_Logo_Horizontal_Black.svg" width="308" alt="CueScore">
 </p>
 
-# Rotation Scoreboard v1.0 Official Release
+# CueScore Apps
 
-CueScore Rotation Scoreboardは、ローテーション競技用のスコアボードPWAです。
+CueScore Appsは、Rotation、9-Ball、10-Ball、14-1、JPA 9-Ball、3 Cushionを1つの体験で扱う統合PWAです。ユーザー向けブランドは「CueScore」です。
 
 ## 正式版
 
 - Version: 1.0
-- Release base: RC76
+- Initial release base: Rotation Scoreboard RC76
 - Release date: 2026-07-24
 - Primary target: iPhone portrait / Safari / Home Screen PWA
 
@@ -19,6 +19,11 @@ CueScore Rotation Scoreboardは、ローテーション競技用のスコアボ�
 - `manifest.webmanifest` — PWA manifest
 - `sw.js` — Service Worker
 - `src/assets/logo/` — Official Logo Master SVG（Horizontal / LogoMark、Black / White）
+
+## Repository / Pages
+
+- Repository: [takaakimailbox-star/cuescore-apps](https://github.com/takaakimailbox-star/cuescore-apps)
+- GitHub Pages: [CueScore Apps](https://takaakimailbox-star.github.io/cuescore-apps/)
 
 ## 公開方法
 
@@ -37,5 +42,9 @@ GitHub Pagesでは `index.html` が起点になります。
 
 ## PWA更新
 
-Service Workerのアプリ版は `1.0`、キャッシュ名は `cuescore-rotation-v1.0` です。
+Service Workerのキャッシュ名は `cuescore-apps-*` です。
 次版公開時はHTML側の `PWA_VERSION` と `sw.js` の `APP_VERSION` を同じ値へ更新してください。
+
+## 保存データ互換
+
+既存ユーザーのデータを保護するため、`rotationScoreboard.*` のLocalStorageキーは互換キーとして維持しています。新規JSONバックアップは `cuescore-apps-backup` 形式で出力し、旧 `rotation-scoreboard-backup` 形式も読み込めます。
