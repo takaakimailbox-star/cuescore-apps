@@ -1,20 +1,13 @@
-const APP_VERSION = "1.0-iphone-edge-back-v1";
+const APP_VERSION = "1.0-official-logo-rc1";
 const CACHE_NAME = `cuescore-rotation-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
-  "./icons/favicon.ico",
-  "./icons/favicon-16.png",
-  "./icons/favicon-32.png",
-  "./icons/favicon-48.png",
-  "./icons/icon-180.png",
-  "./icons/icon-192.png",
-  "./icons/icon-512.png",
-  "./icons/icon-maskable-192.png",
-  "./icons/icon-maskable-512.png",
-  "./assets/icons/navigation/cuescore-mark-black.svg",
-  "./assets/icons/navigation/cuescore-logo-bold.svg",
+  "./src/assets/logo/CueScore_Logo_Horizontal_Black.svg",
+  "./src/assets/logo/CueScore_Logo_Horizontal_White.svg",
+  "./src/assets/logo/CueScore_LogoMark_Black.svg",
+  "./src/assets/logo/CueScore_LogoMark_White.svg",
   "./assets/icons/navigation/nav-home.svg",
   "./assets/icons/navigation/nav-player.svg",
   "./assets/icons/navigation/nav-history.svg",

@@ -1,4 +1,8 @@
-# CueScore Rotation Scoreboard v1.0 Official Release
+<p align="center">
+  <img src="src/assets/logo/CueScore_Logo_Horizontal_Black.svg" width="308" alt="CueScore">
+</p>
+
+# Rotation Scoreboard v1.0 Official Release
 
 CueScore Rotation Scoreboardは、ローテーション競技用のスコアボードPWAです。
 
@@ -14,9 +18,7 @@ CueScore Rotation Scoreboardは、ローテーション競技用のスコアボ�
 - `index.html` — 正式Release HTML
 - `manifest.webmanifest` — PWA manifest
 - `sw.js` — Service Worker
-- `icons/icon-180.png` — Apple touch icon
-- `icons/icon-192.png` — PWA icon
-- `icons/icon-512.png` — PWA icon
+- `src/assets/logo/` — Official Logo Master SVG（Horizontal / LogoMark、Black / White）
 
 ## 公開方法
 

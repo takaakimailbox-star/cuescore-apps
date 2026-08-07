@@ -10,10 +10,8 @@
   <meta name="format-detection" content="telephone=no" />
   <meta name="description" content="CueScore Rotation Scoreboard — ローテーション競技用スコアボード" />
   <link rel="manifest" href="./manifest.webmanifest" />
-  <link rel="icon" href="./icons/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16.png" />
-  <link rel="apple-touch-icon" href="./icons/icon-180.png" />
+  <link rel="icon" type="image/svg+xml" href="./src/assets/logo/CueScore_LogoMark_Black.svg" />
+  <link rel="apple-touch-icon" href="./src/assets/logo/CueScore_LogoMark_Black.svg" />
   <title>CueScore Rotation Scoreboard v1.0</title>
   <style>
     :root {
@@ -8107,7 +8105,7 @@ body {
 
     <section class="cue-home-v1 cue-home-integrated-v2" id="cueHomeV1" aria-label="CueScore Home">
       <div class="cue-home-head-v2">
-        <h1 class="cue-home-brand-v1"><img src="assets/icons/navigation/cuescore-logo-bold.svg" alt="CueScore"></h1>
+        <h1 class="cue-home-brand-v1"><span data-cuescore-logo="horizontal-black"></span></h1>
       </div>
 
       <div class="cue-discipline-switcher-v1" id="cueDisciplineSwitcherV1" role="tablist" aria-label="ゲーム種目">
@@ -8602,7 +8600,7 @@ body {
 
         <div class="player-library-main" id="playerLibraryMain">
           <div class="player-management-intro-v2">
-            <div class="player-management-brand-v2">CueScore</div>
+            <div class="player-management-brand-v2"><span data-cuescore-logo="horizontal-black"></span></div>
             <h1>プレーヤー</h1>
             <p>登録プレーヤーを一覧で確認できます</p>
           </div>
@@ -18913,7 +18911,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-iphone-edge-back-v1";
+    const PWA_VERSION = "1.0-official-logo-rc1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -24831,7 +24829,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   root.innerHTML = `
     <div class="settings-formal-scroll-v1">
       <header class="settings-formal-header-v1">
-        <div class="settings-formal-title-v1">${icon.gear}<span>Settings</span></div>
+        <div class="settings-formal-title-v1"><span data-cuescore-logo="horizontal-black"></span></div>
         <button class="settings-formal-menu-v1" type="button" aria-label="オプション" aria-disabled="true">…</button>
       </header>
       <main class="settings-formal-main-v1">
@@ -24856,7 +24854,8 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
         </section>
         <div class="settings-formal-spacer-v1" aria-hidden="true"></div>
         <footer class="settings-app-footer-v1">
-          <div class="settings-app-brand-v1"><strong>CueScore</strong><span class="settings-version">Version 1.0</span></div>
+          <div class="settings-app-brand-v1"><span data-cuescore-logo="horizontal-black"></span><span class="settings-version">Version 1.0</span></div>
+          <button class="settings-info-link-v1" type="button" data-cuescore-about><span>About CueScore</span><span>›</span></button>
           <button class="settings-info-link-v1" type="button" aria-disabled="true"><span>利用規約</span><span>›</span></button>
           <button class="settings-info-link-v1" type="button" aria-disabled="true"><span>プライバシーポリシー</span><span>›</span></button>
           <button class="settings-info-link-v1" type="button" aria-disabled="true"><span>ライセンス</span><span>›</span></button>
@@ -24973,7 +24972,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   const nav = (key,label,svg,active=false) => `<button type="button" data-analytics-nav="${key}" class="${active?'is-active':''}">${svg}<span>${label}</span></button>`;
   screen.insertAdjacentHTML("beforeend", `<div class="analytics-shell-v1">
     <main class="analytics-scroll-v1">
-      <div class="analytics-brand-v1">CueScore</div>
+      <div class="analytics-brand-v1"><span data-cuescore-logo="horizontal-black"></span></div>
       <header class="analytics-head-v1"><div><h1>分析</h1><p>あなたの成長や傾向をグラフと数値で確認できます</p></div><div class="analytics-cloud-v1" id="analyticsCloudV1">${icon.cloud}<span>クラウド同期：確認中</span></div></header>
       <div class="analytics-controls-v1"><div class="analytics-selector-v1">
         <div class="analytics-field-v1"><label>プレーヤー</label><select id="analyticsPlayerV1" aria-label="プレーヤー"></select></div>
@@ -26924,6 +26923,99 @@ body.cue-modal-lock-v1{overflow:hidden!important}
     visibleBackButton,
     isTransitionBlocked,
     constants:Object.freeze({EDGE_START_MAX,MIN_HORIZONTAL_TRAVEL,MAX_VERTICAL_TRAVEL,MAX_GESTURE_DURATION,HORIZONTAL_DOMINANCE})
+  });
+})();
+</script>
+<style id="cueScoreOfficialLogoStylesV1">
+/* CueScore Official Logo RC v1.0: one reusable SVG source for every brand surface. */
+[data-cuescore-logo]{display:inline-flex;align-items:center;justify-content:center;line-height:0}
+[data-cuescore-logo] img{display:block;width:auto;height:100%;max-width:100%;object-fit:contain}
+.cue-home-brand-v1 [data-cuescore-logo]{width:100%;height:32px}
+.cue-home-brand-v1 [data-cuescore-logo] img{width:auto!important;height:32px!important;max-width:100%!important}
+.player-management-brand-v2 [data-cuescore-logo]{width:142px;height:34px}
+.settings-formal-title-v1 [data-cuescore-logo]{width:174px;height:28px}
+.settings-app-brand-v1 [data-cuescore-logo]{width:132px;height:24px}
+.analytics-brand-v1 [data-cuescore-logo]{width:128px;height:24px}
+.cue-logo-splash-v1{position:fixed;z-index:10000;inset:0;display:grid;place-items:center;background:#111111;opacity:1;transition:opacity .22s ease;pointer-events:auto}
+.cue-logo-splash-v1 [data-cuescore-logo]{width:min(78vw,420px);height:56px}
+.cue-logo-splash-v1.is-hidden{opacity:0;pointer-events:none}
+.cue-about-dialog-v1{width:min(calc(100% - 32px),430px);padding:0;border:0;border-radius:22px;background:#fff;color:#111;box-shadow:0 24px 80px rgba(0,0,0,.28)}
+.cue-about-dialog-v1::backdrop{background:rgba(0,0,0,.58);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.cue-about-card-v1{padding:32px 24px 22px;text-align:center}
+.cue-about-card-v1 [data-cuescore-logo]{width:min(100%,280px);height:36px}
+.cue-about-card-v1 p{margin:14px 0 22px;color:#777;font-size:14px}
+.cue-about-card-v1 button{min-width:132px;min-height:44px;border:1px solid #111;border-radius:12px;background:#111;color:#fff;font:inherit;font-weight:750}
+@media(prefers-color-scheme:dark){
+  .cue-about-dialog-v1{background:#111;color:#fff}
+  .cue-about-card-v1 p{color:#c9c9c6}
+  .cue-about-card-v1 button{border-color:#fff;background:#fff;color:#111}
+}
+@media(prefers-reduced-motion:reduce){.cue-logo-splash-v1{transition:none}}
+</style>
+<script>
+// CueScore Official Logo RC v1.0 — SVG files are the only replaceable brand masters.
+(() => {
+  if (window.CueScoreLogo) return;
+  const sources = Object.freeze({
+    "horizontal-black":"src/assets/logo/CueScore_Logo_Horizontal_Black.svg",
+    "horizontal-white":"src/assets/logo/CueScore_Logo_Horizontal_White.svg",
+    "mark-black":"src/assets/logo/CueScore_LogoMark_Black.svg",
+    "mark-white":"src/assets/logo/CueScore_LogoMark_White.svg"
+  });
+  const hydrate = root => {
+    (root || document).querySelectorAll("[data-cuescore-logo]").forEach(host => {
+      const variant = host.dataset.cuescoreLogo;
+      if (!sources[variant] || host.querySelector("img")) return;
+      const image = document.createElement("img");
+      image.src = sources[variant];
+      image.alt = host.dataset.cuescoreLogoAlt || "CueScore";
+      image.decoding = "async";
+      host.appendChild(image);
+    });
+  };
+  const create = (variant, options = {}) => {
+    const host = document.createElement(options.tagName || "span");
+    host.dataset.cuescoreLogo = variant;
+    if (options.alt) host.dataset.cuescoreLogoAlt = options.alt;
+    hydrate(host.parentNode || {querySelectorAll:() => [host]});
+    return host;
+  };
+  window.CueScoreLogo = Object.freeze({sources,hydrate,create});
+  hydrate(document);
+
+  const observer = new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => {
+    if (node.nodeType === Node.ELEMENT_NODE) hydrate(node.matches?.("[data-cuescore-logo]") ? node.parentNode : node);
+  })));
+  observer.observe(document.body,{childList:true,subtree:true});
+
+  const splash = document.createElement("div");
+  splash.className = "cue-logo-splash-v1";
+  splash.setAttribute("role","status");
+  splash.setAttribute("aria-label","CueScoreを起動中");
+  splash.innerHTML = '<span data-cuescore-logo="horizontal-white"></span>';
+  document.body.appendChild(splash);
+  hydrate(splash);
+  const startedAt = performance.now();
+  window.addEventListener("load", () => {
+    const delay = Math.max(0,650 - (performance.now() - startedAt));
+    setTimeout(() => {
+      splash.classList.add("is-hidden");
+      setTimeout(() => splash.remove(),230);
+    },delay);
+  },{once:true});
+
+  const about = document.createElement("dialog");
+  about.className = "cue-about-dialog-v1";
+  const aboutVariant = matchMedia("(prefers-color-scheme: dark)").matches ? "horizontal-white" : "horizontal-black";
+  about.innerHTML = `<div class="cue-about-card-v1"><span data-cuescore-logo="${aboutVariant}"></span><p>Version 1.0</p><button type="button">閉じる</button></div>`;
+  document.body.appendChild(about);
+  hydrate(about);
+  about.querySelector("button")?.addEventListener("click",() => about.close());
+  about.addEventListener("click",event => { if (event.target === about) about.close(); });
+  document.addEventListener("click",event => {
+    if (!event.target.closest("[data-cuescore-about]")) return;
+    if (typeof about.showModal === "function") about.showModal();
+    else about.setAttribute("open","");
   });
 })();
 </script>

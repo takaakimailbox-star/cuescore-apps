@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="title desc">
+  <title id="title">CueScore</title>
+  <desc id="desc">CueScore official logo mark</desc>
+  <g fill="#FFFFFF">
+    <path d="M76.8 25.5A36 36 0 1 0 77.5 73.7L66.7 63.3A21 21 0 1 1 66.2 36.1Z"/>
+    <circle cx="50" cy="50" r="10.5"/>
+  </g>
+</svg>
