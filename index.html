@@ -8072,12 +8072,12 @@ body {
 .three-cushion-game-v1 .pro-log-wrap{background:#fff;border:1px solid #dededb;border-radius:14px;box-shadow:none;min-height:0;overflow:auto}
 .three-cushion-run-v1{position:absolute;z-index:3;top:186px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;background:#fff;padding:4px 18px;color:#171717;white-space:nowrap}
 .three-cushion-run-v1[hidden]{display:none!important}.three-cushion-run-v1 span{font-size:12px;font-weight:600}.three-cushion-run-v1 strong{font-size:28px;line-height:1}
-.three-cushion-game-v1 .pro-scoreboard{margin-bottom:22px}.three-cushion-game-v1 .pro-player-panel{border-color:#dededb!important;background:#fff!important;color:#171717!important}.three-cushion-game-v1 .pro-player-panel.active{border-color:#171717!important}.three-cushion-game-v1 .pro-player-panel.active *{color:#171717!important}
-.three-cushion-game-v1 .pro-score{font-size:76px!important}.three-cushion-game-v1 .pro-stats{font-size:14px!important}.three-cushion-game-v1 #proP1Goal,.three-cushion-game-v1 #proP2Goal{display:block;font-size:26px;margin-top:2px}.three-cushion-game-v1 .pro-stats [hidden]{display:none!important}
+.three-cushion-game-v1 .pro-player-panel{border-color:#dededb!important;background:#fff!important;color:#171717!important}.three-cushion-game-v1 .pro-player-panel.active{border-color:#171717!important}.three-cushion-game-v1 .pro-player-panel.active *{color:#171717!important}
+.three-cushion-game-v1 .pro-stats [hidden]{display:none!important}
 .three-cushion-table-v1{width:100%;font-variant-numeric:tabular-nums}.three-cushion-head-v1,.three-cushion-row-v1{display:grid;grid-template-columns:1fr 54px 1fr;align-items:center;text-align:center;border-bottom:1px solid #ececea;min-height:43px}.three-cushion-head-v1{position:sticky;top:0;background:#fff;z-index:2;font-size:13px;font-weight:700}.three-cushion-row-v1>span{font-size:15px}.three-cushion-row-v1>span:first-child{text-align:left;padding-left:20%}.three-cushion-row-v1>span:last-child{text-align:right;padding-right:20%}.three-cushion-row-v1 i{display:inline-block;width:1px;height:15px;background:#b8b8b4;margin:0 12px;vertical-align:middle}.three-cushion-row-v1 b{font-weight:500}.three-cushion-row-v1 b.current-v1{width:34px;height:34px;border:2px solid #171717;border-radius:50%;display:grid;place-items:center;justify-self:center}
 .three-cushion-actions-v1{display:grid;grid-template-columns:1fr 1fr;gap:12px}.three-cushion-actions-v1[hidden]{display:none!important}.three-cushion-actions-v1 button{min-height:92px;border:1px solid #dededb;border-radius:14px;background:#fff;color:#171717;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:inherit}.three-cushion-actions-v1 strong{font-size:34px}.three-cushion-actions-v1 span{font-size:13px;font-weight:600}
 .three-cushion-game-v1 .pro-bottom-dock{padding-top:10px!important}
-@media(max-width:430px){.cue-discipline-switcher-v1{grid-template-columns:repeat(6,minmax(0,1fr))!important}.cue-discipline-switcher-v1 .cue-ball-icon-v1{width:26px;height:26px;font-size:10px}.three-cushion-game-v1 .pro-score{font-size:66px!important}.three-cushion-run-v1{top:178px}.three-cushion-actions-v1 button{min-height:82px}}
+@media(max-width:430px){.cue-discipline-switcher-v1{grid-template-columns:repeat(6,minmax(0,1fr))!important}.cue-discipline-switcher-v1 .cue-ball-icon-v1{width:26px;height:26px;font-size:10px}.three-cushion-run-v1{top:178px}.three-cushion-actions-v1 button{min-height:82px}}
 </style>
   <style id="cueScoreBootStylesV2">
     html.cue-app-booting-v2,
@@ -8130,7 +8130,7 @@ body {
           <img class="cue-game-icon-v1" src="assets/icons/games/game-10ball.svg" alt="" aria-hidden="true" />
           <span class="cue-discipline-label-v1"><strong>10-Ball</strong></span><span class="cue-home-chevron-v3" aria-hidden="true">›</span>
         </button>
-        <button class="cue-discipline-v1 is-selected" type="button" role="tab" aria-label="Rotation ローテーション" aria-selected="true" aria-pressed="true" data-discipline="rotation">
+        <button class="cue-discipline-v1" type="button" role="tab" aria-label="Rotation ローテーション" aria-selected="false" aria-pressed="false" data-discipline="rotation">
           <img class="cue-game-icon-v1" src="assets/icons/games/game-rotation.svg" alt="" aria-hidden="true" />
           <span class="cue-discipline-label-v1"><strong>Rotation</strong></span><span class="cue-home-chevron-v3" aria-hidden="true">›</span>
         </button>
@@ -9159,10 +9159,9 @@ body {
       const threeCushionMode = selectedDiscipline === "threeCushion";
       document.querySelector(".app")?.classList.toggle("jpa9-setup", jpaMode);
       document.querySelectorAll("[data-discipline]").forEach(button => {
-        const active = button.dataset.discipline === selectedDiscipline;
-        button.classList.toggle("is-selected", active);
-        button.setAttribute("aria-selected", String(active));
-        button.setAttribute("aria-pressed", String(active));
+        button.classList.remove("is-selected");
+        button.setAttribute("aria-selected", "false");
+        button.setAttribute("aria-pressed", "false");
       });
       document.getElementById("cueSelectedGameNameV1").textContent = selected.name;
       const selectedGameIcon = document.getElementById("cueSelectedGameIconV1");
@@ -18945,7 +18944,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-discipline-summary-rows-v1";
+    const PWA_VERSION = "1.0-home-neutral-three-cushion-cards-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
