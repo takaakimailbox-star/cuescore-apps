@@ -18893,7 +18893,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-official-demo-data-v1";
+    const PWA_VERSION = "1.0-safe-service-worker-activation-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -19010,6 +19010,7 @@ let matchRecordsRawCacheV152 = null;
           button && (button.textContent = "更新");
           return;
         }
+        updateReloadRequestedV150 = true;
         waiting.postMessage({ type: "SKIP_WAITING" });
         // controllerchangeで新しいWorkerへ切り替わった後にだけ再読込する。
         clearManagedTimeoutV150(updateFallbackTimerV150);
@@ -19028,8 +19029,12 @@ let matchRecordsRawCacheV152 = null;
     }
 
     let refreshing = false;
+    let updateReloadRequestedV150 = false;
     let updateFallbackTimerV150 = 0;
     navigator.serviceWorker.addEventListener("controllerchange", () => {
+      // Initial Service Worker control must never interrupt an active screen.
+      // Reload only after the player explicitly accepts the update banner.
+      if (!updateReloadRequestedV150) return;
       if (refreshing) return;
       refreshing = true;
       clearManagedTimeoutV150(updateFallbackTimerV150);

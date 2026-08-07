@@ -1,0 +1,22 @@
+import assert from "node:assert/strict";
+import fs from "node:fs";
+
+const html = fs.readFileSync(new URL("../index.html", import.meta.url), "utf8");
+const lifecycleStart = html.indexOf("// CueScore RC59: PWA lifecycle");
+const lifecycleEnd = html.indexOf("// CueScore Rotation Scoreboard", lifecycleStart);
+assert.ok(lifecycleStart >= 0 && lifecycleEnd > lifecycleStart, "PWA lifecycle block must exist");
+
+const lifecycle = html.slice(lifecycleStart, lifecycleEnd);
+const controllerHandler = lifecycle.match(
+  /navigator\.serviceWorker\.addEventListener\("controllerchange", \(\) => \{([\s\S]*?)\n    \}\);/
+)?.[1] || "";
+
+assert.match(controllerHandler, /if \(!updateReloadRequestedV150\) return;/);
+assert.match(controllerHandler, /location\.reload\(\);/);
+assert.ok(
+  controllerHandler.indexOf("if (!updateReloadRequestedV150) return;") < controllerHandler.indexOf("location.reload();"),
+  "Initial Service Worker control must be guarded before reload"
+);
+assert.match(lifecycle, /updateReloadRequestedV150 = true;\s+waiting\.postMessage\(\{ type: "SKIP_WAITING" \}\);/);
+
+console.log("Service Worker activation reload guard test passed.");
