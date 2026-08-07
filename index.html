@@ -3722,6 +3722,7 @@
   font-weight: 800;
   cursor: pointer;
 }
+.data-delete-button + .data-delete-button { margin-top: 10px; }
 
 .data-management-message {
   min-height: 26px;
@@ -8760,8 +8761,10 @@ body {
         <input id="backupFileInput" type="file" accept=".json,application/json" hidden />
 
         <section class="data-warning-card">
-          <h2>全データ削除</h2>
-          <p>登録プレーヤーと対戦履歴をすべて削除します。この操作は取り消せません。</p>
+          <h2>データ削除</h2>
+          <p>削除対象を選んでください。各操作の前に確認画面を表示し、削除前バックアップを端末内へ保存します。</p>
+          <button class="data-delete-button" id="deleteAllMatchRecordsBtn" type="button">試合履歴をすべて削除</button>
+          <button class="data-delete-button" id="deleteAllPlayersBtn" type="button">プレーヤーデータをすべて削除</button>
           <button class="data-delete-button" id="deleteAllDataBtn" type="button">全データを削除</button>
         </section>
 
@@ -9523,17 +9526,20 @@ body {
 
   // RC32: keep a recoverable snapshot before destructive local operations.
   function createDestructiveBackupV132(reason, extra = {}) {
+    const categoryKey = activeCueScoreDataKeyV1("rotationScoreboard.matchCategories.v1");
+    const seasonKey = activeCueScoreDataKeyV1("rotationScoreboard.matchSeasons.v1");
+    const backupPrefix = window.CueScoreDemoData?.isDemo() ? "cuescore-demo.beforeDelete" : "rotationScoreboard.beforeDelete";
     const snapshot = {
       schemaVersion: "1.0-RC59",
       reason: String(reason || "destructive-operation"),
       createdAt: new Date().toISOString(),
       players: readPlayerLibrary(),
       matchRecords: readMatchRecords(),
-      matchCategories: (() => { try { return JSON.parse(localStorage.getItem(DATA_CATEGORY_KEY) || "[]"); } catch (_) { return []; } })(),
-      matchSeasons: (() => { try { return JSON.parse(localStorage.getItem(DATA_SEASON_KEY) || "[]"); } catch (_) { return []; } })(),
+      matchCategories: (() => { try { return JSON.parse(localStorage.getItem(categoryKey) || "[]"); } catch (_) { return []; } })(),
+      matchSeasons: (() => { try { return JSON.parse(localStorage.getItem(seasonKey) || "[]"); } catch (_) { return []; } })(),
       ...extra
     };
-    const key = `rotationScoreboard.beforeDelete.${Date.now()}`;
+    const key = `${backupPrefix}.${Date.now()}`;
     verifiedLocalStorageWriteV131(key, snapshot);
     return key;
   }
@@ -11144,14 +11150,14 @@ let matchRecordsRawCacheV152 = null;
 
     const headerAction = el("playerLibraryAddBtn");
     if (player) {
-      headerAction.textContent = "削除";
-      headerAction.setAttribute("aria-label", "このプレーヤーを削除");
-      headerAction.dataset.editorAction = "delete";
-      headerAction.classList.remove("editor-hidden-action");
-      headerAction.classList.add("delete-mode");
-      headerAction.style.display = "block";
-      headerAction.style.visibility = "visible";
-      headerAction.style.pointerEvents = "auto";
+      headerAction.textContent = "＋";
+      headerAction.setAttribute("aria-label", "新規プレーヤー登録");
+      headerAction.dataset.editorAction = "";
+      headerAction.classList.remove("delete-mode");
+      headerAction.classList.add("editor-hidden-action");
+      headerAction.style.display = "none";
+      headerAction.style.visibility = "hidden";
+      headerAction.style.pointerEvents = "none";
     } else {
       headerAction.textContent = "＋";
       headerAction.setAttribute("aria-label", "新規登録");
@@ -11244,14 +11250,13 @@ let matchRecordsRawCacheV152 = null;
     });
   }
 
-  function deletePlayerEditor() {
-    if (!editingPlayerId) return;
-    const player = readPlayerLibrary().find(p => p.id === editingPlayerId);
-    if (!player || !confirm(`「${player.name}」を削除しますか？`)) return;
-    createDestructiveBackupV132("delete-player", { deletedPlayerId: editingPlayerId, deletedPlayerName: player.name });
-    writePlayerLibrary(readPlayerLibrary().filter(p => p.id !== editingPlayerId));
+  function deletePlayerByIdV1(playerId) {
+    const player = readPlayerLibrary().find(p => String(p.id) === String(playerId));
+    if (!player || !confirm(`「${player.name}」を削除しますか？\n\nこのプレーヤーを削除しても、過去の試合履歴は残ります。`)) return false;
+    createDestructiveBackupV132("delete-player", { deletedPlayerId: String(player.id), deletedPlayerName: player.name });
+    writePlayerLibrary(readPlayerLibrary().filter(p => String(p.id) !== String(player.id)));
     [1, 2].forEach(slot => {
-      if (selectedRegisteredPlayer[slot] !== editingPlayerId) return;
+      if (String(selectedRegisteredPlayer[slot] || "") !== String(player.id)) return;
       selectedRegisteredPlayer[slot] = null;
       const nameInput = el(slot === 1 ? "p1Name" : "p2Name");
       const raceInput = el(slot === 1 ? "p1Race" : "p2Race");
@@ -11260,10 +11265,16 @@ let matchRecordsRawCacheV152 = null;
       if (raceInput) raceInput.value = "120";
       if (rangeInput) rangeInput.value = String(raceValueToStep(120));
     });
-    showPlayerLibraryMain();
     refreshAfterDestructiveChangeV132("player-deleted");
-    showToast("プレーヤーを削除しました", "削除前バックアップを保存し、関連画面へ反映しました");
+    showToast("プレーヤーを削除しました", "過去の試合履歴は保持されています");
+    return true;
   }
+
+  function deletePlayerEditor() {
+    if (!editingPlayerId || !deletePlayerByIdV1(editingPlayerId)) return;
+    showPlayerLibraryMain();
+  }
+  window.deleteCueScorePlayerV1 = deletePlayerByIdV1;
 
   function selectRegisteredPlayer(id) {
     const players = readPlayerLibrary();
@@ -15558,7 +15569,7 @@ let matchRecordsRawCacheV152 = null;
     const p2Name = record.players?.[2]?.name || "Player2";
 
     const confirmed = window.confirm(
-      `${p1Name} vs ${p2Name} の試合履歴を削除しますか？\n\nこの操作は元に戻せません。`
+      `${p1Name} vs ${p2Name} の試合履歴を削除しますか？\n\n削除すると、この試合は履歴・分析・ランキング・VSから削除されます。\nこの操作は元に戻せません。`
     );
     if (!confirmed) return;
 
@@ -15572,10 +15583,12 @@ let matchRecordsRawCacheV152 = null;
       overlay.classList.add("hidden");
       overlay.innerHTML = "";
     }
+    document.body.classList.remove("match-detail-visible-v1");
 
     renderMatchRecords();
     refreshAfterDestructiveChangeV132("match-record-deleted");
     showToast("履歴を削除しました", "削除前バックアップを保存し、集計画面へ反映しました");
+    return true;
   }
 
 
@@ -16450,10 +16463,10 @@ let matchRecordsRawCacheV152 = null;
   
   // Rebuild v1.58: Data management / backup
   (() => {
-    const DATA_PLAYER_KEY = "rotationScoreboard.players.v1";
-    const DATA_RECORD_KEY = "rotationScoreboard.matchRecords.v1";
-    const DATA_CATEGORY_KEY = "rotationScoreboard.matchCategories.v1";
-    const DATA_SEASON_KEY = "rotationScoreboard.matchSeasons.v1";
+    const DATA_PLAYER_KEY = activeCueScoreDataKeyV1("rotationScoreboard.players.v1");
+    const DATA_RECORD_KEY = activeCueScoreDataKeyV1("rotationScoreboard.matchRecords.v1");
+    const DATA_CATEGORY_KEY = activeCueScoreDataKeyV1("rotationScoreboard.matchCategories.v1");
+    const DATA_SEASON_KEY = activeCueScoreDataKeyV1("rotationScoreboard.matchSeasons.v1");
     const BACKUP_FORMAT = "cuescore-apps-backup";
     const LEGACY_BACKUP_FORMAT = "rotation-scoreboard-backup";
     const BACKUP_SCHEMA_VERSION = 2;
@@ -16794,6 +16807,39 @@ let matchRecordsRawCacheV152 = null;
       }
     }
 
+    function clearSelectedPlayersV1() {
+      selectedRegisteredPlayer = {1:null,2:null};
+      [1,2].forEach(slot => {
+        const input = byId(slot === 1 ? "p1Name" : "p2Name");
+        if (input) input.value = "";
+      });
+    }
+
+    function deleteAllMatchRecords() {
+      const count = readMatchRecords().length;
+      if (!count) return alert("削除する試合履歴はありません。");
+      if (!confirm(`すべての試合履歴（${count}試合）を削除しますか？\n\n履歴・分析・ランキング・VSの集計から削除されます。\nこの操作は元に戻せません。`)) return;
+      createDestructiveBackupV132("delete-all-match-records", { deletedRecordCount:count });
+      writeMatchRecords([]);
+      updateDataSummary();
+      refreshAfterDestructiveChangeV132("all-match-records-deleted");
+      setDataMessage(`試合履歴${count}試合を削除しました。削除前バックアップは端末内に保存されています。`);
+      alert(`試合履歴${count}試合を削除しました。`);
+    }
+
+    function deleteAllPlayers() {
+      const count = readPlayerLibrary().length;
+      if (!count) return alert("削除するプレーヤーはいません。");
+      if (!confirm(`すべてのプレーヤー（${count}人）を削除しますか？\n\n過去の試合履歴は残ります。\nこの操作は元に戻せません。`)) return;
+      createDestructiveBackupV132("delete-all-players", { deletedPlayerCount:count });
+      writePlayerLibrary([]);
+      clearSelectedPlayersV1();
+      updateDataSummary();
+      refreshAfterDestructiveChangeV132("all-players-deleted");
+      setDataMessage(`プレーヤー${count}人を削除しました。過去の試合履歴は保持されています。`);
+      alert(`プレーヤー${count}人を削除しました。過去の試合履歴は残ります。`);
+    }
+
     function deleteAllData() {
       const first = confirm(
         "登録プレーヤーと対戦履歴をすべて削除します。\nこの操作は取り消せません。\n\n続けますか？"
@@ -16806,14 +16852,16 @@ let matchRecordsRawCacheV152 = null;
       if (!second) return;
 
       createDestructiveBackupV132("delete-all-local-data");
-      localStorage.removeItem(DATA_PLAYER_KEY);
-      localStorage.removeItem(DATA_RECORD_KEY);
+      writePlayerLibrary([]);
+      writeMatchRecords([]);
       localStorage.removeItem(DATA_CATEGORY_KEY);
       localStorage.removeItem(DATA_SEASON_KEY);
       // 削除確認。残っていれば失敗として扱い、ユーザーへ明示する。
-      const remaining = [DATA_PLAYER_KEY, DATA_RECORD_KEY, DATA_CATEGORY_KEY, DATA_SEASON_KEY]
-        .filter(key => localStorage.getItem(key) !== null);
+      const remaining = [DATA_PLAYER_KEY, DATA_RECORD_KEY]
+        .filter(key => localStorage.getItem(key) !== "[]")
+        .concat([DATA_CATEGORY_KEY, DATA_SEASON_KEY].filter(key => localStorage.getItem(key) !== null));
       if (remaining.length) throw new Error("一部の端末データを削除できませんでした。");
+      clearSelectedPlayersV1();
       updateDataSummary();
       refreshAfterDestructiveChangeV132("all-local-data-deleted");
       setDataMessage("全データを削除しました。削除前バックアップは端末内に保存されています。");
@@ -16836,6 +16884,8 @@ let matchRecordsRawCacheV152 = null;
       if (file) importBackupFile(file);
     });
     byId("deleteAllDataBtn")?.addEventListener("click", deleteAllData);
+    byId("deleteAllMatchRecordsBtn")?.addEventListener("click", deleteAllMatchRecords);
+    byId("deleteAllPlayersBtn")?.addEventListener("click", deleteAllPlayers);
   })();
 
 
@@ -16883,6 +16933,8 @@ let matchRecordsRawCacheV152 = null;
       if (reason === "cloud-conflict") return "他端末との競合確認";
       if (reason === "player-deleted") return "プレーヤー削除後の同期確認";
       if (reason === "match-record-deleted") return "履歴削除後の同期確認";
+      if (reason === "all-match-records-deleted") return "全履歴削除後の同期確認";
+      if (reason === "all-players-deleted") return "全プレーヤー削除後の同期確認";
       if (reason === "all-local-data-deleted") return "全データ削除後の同期確認";
       if (reason === "local-backup-restored") return "バックアップ復元後の同期確認";
       if (reason === "before-cloud-restored") return "読込前データ復元後の同期確認";
@@ -18893,7 +18945,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-safe-service-worker-activation-v1";
+    const PWA_VERSION = "1.0-safe-delete-workflows-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22468,6 +22520,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
         </section>
         ${chart?`<section class="match-detail-card-v1 match-detail-chart-v1"><h2>スコア推移</h2><div class="match-detail-legend-v1"><span style="--legend:${winner===1?WALNUT:"#30302e"}">${esc(p1.name||"Player1")}</span><span style="--legend:${winner===2?WALNUT:"#30302e"}">${esc(p2.name||"Player2")}</span></div>${chart}</section>`:""}
         ${history}
+        ${resultMode?"":`<section class="match-detail-delete-section-v1"><button id="matchDetailDeleteV1" type="button">この試合を削除</button><p>削除すると、この試合は履歴とすべての集計から除外されます。</p></section>`}
       </main>
       ${resultMode?`<footer class="match-detail-result-footer-v5"><button id="matchDetailResultOkV5" type="button">OK</button></footer>`:""}
     </div>`;
@@ -22492,6 +22545,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
       backToTitle();
       requestAnimationFrame(()=>window.openCueMatchSetupV3?.());
     },{signal});
+    document.getElementById("matchDetailDeleteV1")?.addEventListener("click",()=>deleteHistoricalRecordV35(recordId),{signal});
   }
 
   openHistoricalRecord=openMatchDetailV1;
@@ -23217,6 +23271,7 @@ body.match-detail-visible-v1{overflow:hidden!important}
   font-weight:780;
 }
 .match-detail-result-footer-v5 button:disabled{opacity:.68}
+.match-detail-delete-section-v1{padding:24px 4px 8px;text-align:center}.match-detail-delete-section-v1 button{width:100%;min-height:46px;border:1px solid #c92a2a;border-radius:11px;background:#fff;color:#b4231c;font:inherit;font-size:15px;font-weight:750}.match-detail-delete-section-v1 p{margin:8px 4px 0;color:#777773;font-size:12px;line-height:1.5}
 .match-detail-basic-v1{
   padding:8px 8px 8px;
   text-align:center;
@@ -24305,6 +24360,7 @@ body.match-detail-visible-v1{overflow:hidden!important}
 }
 html.cue-iphone-landscape-v1,
 html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:none!important}
+.player-detail-delete-v1{display:block;width:100%;min-height:46px;margin-top:28px;border:1px solid #c92a2a;border-radius:11px;background:#fff;color:#b4231c;font:inherit;font-size:15px;font-weight:750}.player-detail-delete-note-v1{margin:8px 4px 0;color:#777773;font-size:12px;line-height:1.5;text-align:center}
 </style>
 <script>
 (() => {
@@ -24432,6 +24488,8 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
         <span><span class="player-detail-vs-title-v1">対戦成績（VS）を見る</span><span class="player-detail-vs-sub-v1">対戦相手ごとの勝敗・勝率を確認できます</span></span>
         <span class="player-detail-chevron-v1" aria-hidden="true"></span>
       </button>` : `<section class="player-detail-card-v1 player-detail-empty-v1">この種目の対戦データはまだありません。</section>`}
+      <button type="button" class="player-detail-delete-v1" data-player-detail-delete="${esc(player.id)}">プレーヤーを削除</button>
+      <p class="player-detail-delete-note-v1">削除しても、過去の試合履歴は残ります。</p>
 
     </div>`;
   };
@@ -24478,6 +24536,20 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
         library.setAttribute("aria-hidden","false");
       }
       openPlayerEditor(edit.dataset.playerDetailEdit);
+      return;
+    }
+    const deleteButton = event.target.closest("[data-player-detail-delete]");
+    if (deleteButton) {
+      const playerId = String(deleteButton.dataset.playerDetailDelete || "");
+      if (!playerId || !window.deleteCueScorePlayerV1?.(playerId)) return;
+      closePlayerStats();
+      playerLibraryModeV145 = "management";
+      const library = document.getElementById("playerLibraryOverlay");
+      if (library) {
+        library.classList.remove("hidden");
+        library.setAttribute("aria-hidden","false");
+      }
+      showPlayerLibraryMain();
       return;
     }
     const nav = event.target.closest("[data-player-detail-nav]");
@@ -24829,6 +24901,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     cloud: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.2 18.5h11.2a4.1 4.1 0 0 0 .4-8.2A6 6 0 0 0 6.4 8.7a4.9 4.9 0 0 0-.2 9.8Z"/></svg>',
     csv: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5h8l4 4v15H6Z"/><path d="M14 2.5v4h4"/><path d="M8.5 16.5h7M8.5 13h7M8.5 9.5H12"/></svg>',
     restore: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.3 8.2H2.5V5.4"/><path d="M3 8a9 9 0 1 1-.2 8.3"/><path d="M12 7.5V12l3.2 2"/></svg>',
+    trash: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 3h6l1 4H8l1-4ZM6.5 7l.8 14h9.4l.8-14M10 11v6M14 11v6"/></svg>',
     check: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.6 2.7L16.5 9"/></svg>',
     home: '<svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5v8.25A1.25 1.25 0 0 1 18.75 20H5.25A1.25 1.25 0 0 1 4 18.75Z"/><path d="M9.25 20v-6.5h5.5V20"/></svg>',
     history: '<svg viewBox="0 0 24 24"><path d="M5.25 7.5A8 8 0 1 1 4 12"/><path d="M5.25 3.75V7.5H9"/><path d="M12 7.75V12l3 1.75"/></svg>',
@@ -24861,6 +24934,11 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
           <button class="settings-data-row-v1" type="button" data-settings-action="restore">
             <span class="settings-data-icon-v1">${icon.restore}</span>
             <span class="settings-data-copy-v1"><strong>データ復元</strong><span>バックアップからデータを復元します</span></span>
+            <span></span><span class="settings-data-chevron-v1" aria-hidden="true">›</span>
+          </button>
+          <button class="settings-data-row-v1" type="button" data-settings-action="delete">
+            <span class="settings-data-icon-v1">${icon.trash}</span>
+            <span class="settings-data-copy-v1"><strong>データ削除</strong><span>履歴・プレーヤー・全データを整理します</span></span>
             <span></span><span class="settings-data-chevron-v1" aria-hidden="true">›</span>
           </button>
         </section>
@@ -24903,8 +24981,9 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       demoState.classList.toggle("is-demo", demoMode);
     }
     root.querySelectorAll("[data-settings-action]").forEach(button => {
-      button.classList.toggle("is-demo-disabled", demoMode);
-      button.setAttribute("aria-disabled", String(demoMode));
+      const blocked = demoMode && button.dataset.settingsAction !== "delete";
+      button.classList.toggle("is-demo-disabled", blocked);
+      button.setAttribute("aria-disabled", String(blocked));
     });
     const config = readJson("rotationScoreboard.supabaseConfig.v1", {});
     const deviceId = String(localStorage.getItem("rotationScoreboard.cloudDeviceId.v1") || "").trim();
@@ -24942,7 +25021,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       return;
     }
     const action = event.target.closest("[data-settings-action]")?.dataset.settingsAction;
-    if (action && demoApi?.isDemo()) {
+    if (action && action !== "delete" && demoApi?.isDemo()) {
       alert("デモモード中はクラウド同期・書き出し・復元を利用できません。通常データは変更されません。");
       return;
     }
@@ -25276,7 +25355,13 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
         <section class="settings-suite-card-v2"><div class="settings-suite-icon-title-v2"><span class="settings-suite-round-icon-v2">${icon.file}</span><div><h2>バックアップから復元</h2><p>保存したバックアップファイル（JSON）を選択してください。</p></div></div><button class="settings-suite-primary-v2" id="suiteSelectBackup" type="button">${icon.folder}バックアップファイルを選択</button><input class="settings-suite-file-v2" id="suiteBackupFile" type="file" accept=".json,application/json"></section>
         <section class="settings-suite-card-v2 settings-suite-selected-v2" id="suiteSelectedBackup" hidden><h2>選択したバックアップ</h2><div id="suiteBackupSummary"></div></section>
         <section class="settings-suite-card-v2 settings-suite-selected-v2" id="suiteRestoreOptions" hidden><h2>復元方法を選択</h2><label class="settings-suite-radio-v2"><input type="radio" name="suiteRestoreMode" value="merge" checked><span><strong>現在のデータへ追加</strong><span>現在のデータを保持したまま、重複を除いてバックアップ内容を追加します。</span></span></label><label class="settings-suite-radio-v2"><input type="radio" name="suiteRestoreMode" value="replace"><span><strong>現在のデータを置き換える</strong><span>現在のデータをバックアップ内容に置き換えます。</span></span></label><button class="settings-suite-primary-v2" id="suiteRestoreStart" type="button">復元を開始する</button><p class="settings-suite-note-v2">※ 復元前に現在の端末データを自動退避します。</p></section>
-        <section class="settings-suite-card-v2 settings-suite-warning-v2"><h2>危険な操作</h2><p><strong>全データを削除</strong><br>登録プレーヤーと対戦履歴をすべて削除します。この操作は元に戻せません。</p><button class="settings-suite-danger-v2" id="suiteDeleteAll" type="button">全データを削除</button></section>
+      </section>
+      <section class="settings-suite-view-v2" data-suite-view="delete" hidden>
+        ${header("delete","settings","データ削除")}<p class="settings-suite-intro-v2">削除するデータの単位を選んでください。通常データとOfficial Demo Dataは別々に処理されます。</p>
+        <section class="settings-suite-card-v2 settings-suite-warning-v2"><h2>試合履歴</h2><p>すべての試合履歴を、履歴・分析・ランキング・VSから削除します。プレーヤーは残ります。</p><button class="settings-suite-danger-v2" id="suiteDeleteRecords" type="button">試合履歴をすべて削除</button></section>
+        <section class="settings-suite-card-v2 settings-suite-warning-v2"><h2>プレーヤーデータ</h2><p>登録プレーヤーをすべて削除します。過去の試合履歴と当時の名前は残ります。</p><button class="settings-suite-danger-v2" id="suiteDeletePlayers" type="button">プレーヤーデータをすべて削除</button></section>
+        <section class="settings-suite-card-v2 settings-suite-warning-v2"><h2>すべてのデータ</h2><p>登録プレーヤー、対戦履歴、試合区分、シーズンを削除します。二段階で確認します。</p><button class="settings-suite-danger-v2" id="suiteDeleteAll" type="button">全データを削除</button></section>
+        <p class="settings-suite-note-v2">※ 削除前には現在の対象データを端末内へ自動退避します。クラウドは自動上書きせず、同期確認待ちになります。</p>
       </section>
       <section class="settings-suite-view-v2" data-suite-view="sync-history" hidden>
         ${header("sync-history","cloud","同期履歴")}<p class="settings-suite-intro-v2">クラウドとの同期履歴を、新しい順に表示します。</p><section class="settings-suite-card-v2 settings-suite-list-v2 settings-suite-history-host-v2" id="suiteSyncHistoryHost"></section><p class="settings-suite-note-v2">※ 既存の同期解決履歴を最大20件表示します。</p><button class="settings-suite-danger-v2" id="suiteClearSyncHistory" type="button">同期履歴をすべて削除</button>
@@ -25418,6 +25503,8 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     if(id==="suiteExportJson")proxyClick("exportBackupBtn");
     if(id==="suiteExportCsv")proxyClick("exportCsvBtn");
     if(id==="suiteSelectBackup")$("#suiteBackupFile",root).click();
+    if(id==="suiteDeleteRecords")proxyClick("deleteAllMatchRecordsBtn");
+    if(id==="suiteDeletePlayers")proxyClick("deleteAllPlayersBtn");
     if(id==="suiteDeleteAll")proxyClick("deleteAllDataBtn");
     if(id==="suiteClearSyncHistory")proxyClick("cloudResolutionHistoryClearBtn");
     if(id==="suiteRestoreStart"&&selectedBackup&&selectedBackupFile){
@@ -25442,6 +25529,10 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   settings?.addEventListener("click",event=>{
     const action=event.target.closest(".settings-formal-shell-v1 [data-settings-action]")?.dataset.settingsAction;
     if(!action)return;event.preventDefault();event.stopImmediatePropagation();
+    if(window.CueScoreDemoData?.isDemo() && action!=="delete"){
+      alert("デモモード中はクラウド同期・書き出し・復元を利用できません。通常データは変更されません。");
+      return;
+    }
     openSuite(action==="csv"?"export":action);
   },true);
   window.addEventListener("online",()=>currentView==="cloud"&&renderCloud());window.addEventListener("offline",()=>currentView==="cloud"&&renderCloud());
