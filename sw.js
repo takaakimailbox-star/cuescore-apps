@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-selective-pinch-stability-v1";
+const APP_VERSION = "1.0-discipline-summary-rows-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",

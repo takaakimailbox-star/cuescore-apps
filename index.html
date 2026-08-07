@@ -16196,8 +16196,8 @@ let matchRecordsRawCacheV152 = null;
         manualMissesMatchEvents: Number(stats.manualMisses[1] || 0) === countManualMissesFromEventsV107(1) && Number(stats.manualMisses[2] || 0) === countManualMissesFromEventsV107(2)
       },
       players:{
-        1:{name:playerName(1),registeredPlayerId:selectedRegisteredPlayer[1]||null,goal:goals[1],skillLevel:isJPA9V1()?jpa9SkillLevelsV1[1]:null,score:scores[1],safety:safety[1],fouls:fouls[1],breaks:breakCount[1],maxRun:stats.maxRun[1],completedTurns:Number(stats.completedTurns?.[1]||0),average:Number(stats.average?.[1]||0),share:stats.share[1],misses:stats.manualMisses[1],pocketCount:stats.pocketCount[1],shotRate:stats.shotRate[1]},
-        2:{name:playerName(2),registeredPlayerId:selectedRegisteredPlayer[2]||null,goal:goals[2],skillLevel:isJPA9V1()?jpa9SkillLevelsV1[2]:null,score:scores[2],safety:safety[2],fouls:fouls[2],breaks:breakCount[2],maxRun:stats.maxRun[2],completedTurns:Number(stats.completedTurns?.[2]||0),average:Number(stats.average?.[2]||0),share:stats.share[2],misses:stats.manualMisses[2],pocketCount:stats.pocketCount[2],shotRate:stats.shotRate[2]}
+        1:{name:playerName(1),registeredPlayerId:selectedRegisteredPlayer[1]||null,goal:goals[1],skillLevel:isJPA9V1()?jpa9SkillLevelsV1[1]:null,score:scores[1],safety:safety[1],fouls:fouls[1],breaks:breakCount[1],maxRun:stats.maxRun[1],completedTurns:Number(stats.completedTurns?.[1]??stats.turnCount?.[1]??0),average:Number(stats.average?.[1]||0),share:stats.share[1],misses:stats.manualMisses[1],pocketCount:stats.pocketCount[1],shotRate:stats.shotRate[1]},
+        2:{name:playerName(2),registeredPlayerId:selectedRegisteredPlayer[2]||null,goal:goals[2],skillLevel:isJPA9V1()?jpa9SkillLevelsV1[2]:null,score:scores[2],safety:safety[2],fouls:fouls[2],breaks:breakCount[2],maxRun:stats.maxRun[2],completedTurns:Number(stats.completedTurns?.[2]??stats.turnCount?.[2]??0),average:Number(stats.average?.[2]||0),share:stats.share[2],misses:stats.manualMisses[2],pocketCount:stats.pocketCount[2],shotRate:stats.shotRate[2]}
       }
     };
     record.analysis.report = buildMatchAnalysisV64(
@@ -18945,7 +18945,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-selective-pinch-stability-v1";
+    const PWA_VERSION = "1.0-discipline-summary-rows-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22255,11 +22255,31 @@ window.cueScoreModalDiagnosticsV159 = () => ({
   }
 
   function averagePerInningV1(record, player) {
-    const innings = Number(record?.inning);
+    const storedAverage=Number(record?.players?.[player]?.average);
+    if(Number.isFinite(storedAverage) && storedAverage>0)return storedAverage.toFixed(2);
+    const innings = inningsCountNumberV1(record,player);
     const score = Number(record?.players?.[player]?.score);
     return Number.isFinite(innings) && innings > 0 && Number.isFinite(score)
       ? (score / innings).toFixed(2)
       : "—";
+  }
+
+  function inningsCountNumberV1(record,player) {
+    const stored=Number(record?.players?.[player]?.completedTurns);
+    if(Number.isFinite(stored) && stored>0)return stored;
+    const events=Array.isArray(record?.eventLog?.events)?record.eventLog.events:[];
+    const innings=new Set(events
+      .filter(event=>Number(event?.player ?? event?.data?.player)===(player===2?2:1))
+      .map(event=>Number(event?.inningNumber ?? event?.data?.inning ?? event?.inning))
+      .filter(value=>Number.isInteger(value)&&value>0));
+    if(innings.size)return innings.size;
+    const fallback=Number(record?.inning);
+    return Number.isFinite(fallback)&&fallback>0?fallback:0;
+  }
+
+  function inningsCountV1(record,player) {
+    const value=inningsCountNumberV1(record,player);
+    return value>0?String(value):"—";
   }
 
   function progressV1(record) {
@@ -22502,11 +22522,14 @@ window.cueScoreModalDiagnosticsV159 = () => ({
       const registered=registeredPlayersV3.find(item=>item.id===player?.registeredPlayerId);
       return playerAvatarSourceV2(registered?.avatar);
     };
+    const shotRowV4=["シュート成功率",shotRateV1(p1),shotRateV1(p2)];
+    const highRunRowV4=["ハイラン",Number.isFinite(Number(p1.maxRun))?String(Number(p1.maxRun)):"—",Number.isFinite(Number(p2.maxRun))?String(Number(p2.maxRun)):"—"];
+    const foulRowV4=["ファール数",Number.isFinite(Number(p1.fouls))?String(Number(p1.fouls)):"—",Number.isFinite(Number(p2.fouls))?String(Number(p2.fouls)):"—"];
     const defaultSummaryRows=[
-      ["シュート成功率",shotRateV1(p1),shotRateV1(p2)],
-      ["ハイラン",Number.isFinite(Number(p1.maxRun))?String(Number(p1.maxRun)):"—",Number.isFinite(Number(p2.maxRun))?String(Number(p2.maxRun)):"—"],
+      shotRowV4,
+      highRunRowV4,
       ["セーフティ成功率",safetyRateV1(record,1),safetyRateV1(record,2)],
-      ["ファール数",Number.isFinite(Number(p1.fouls))?String(Number(p1.fouls)):"—",Number.isFinite(Number(p2.fouls))?String(Number(p2.fouls)):"—"],
+      foulRowV4,
       ["ブレイク数",Number.isFinite(Number(p1.breaks))?String(Number(p1.breaks)):"—",Number.isFinite(Number(p2.breaks))?String(Number(p2.breaks)):"—"],
       ["平均得点／イニング",averagePerInningV1(record,1),averagePerInningV1(record,2)]
     ];
@@ -22514,6 +22537,12 @@ window.cueScoreModalDiagnosticsV159 = () => ({
       ["シュート成功率",shotRateV1(p1),shotRateV1(p2)],
       ["マスワリ回数",String(masuwariV4[1]),String(masuwariV4[2])],
       ["ファール回数",Number.isFinite(Number(p1.fouls))?String(Number(p1.fouls)):"—",Number.isFinite(Number(p2.fouls))?String(Number(p2.fouls)):"—"]
+    ] : disciplineV4==="rotation" ? [
+      shotRowV4,highRunRowV4,foulRowV4
+    ] : disciplineV4==="straightPool" ? [
+      shotRowV4,highRunRowV4,["平均得点／イニング",averagePerInningV1(record,1),averagePerInningV1(record,2)],foulRowV4
+    ] : disciplineV4==="jpa9" ? [
+      ["イニング数",inningsCountV1(record,1),inningsCountV1(record,2)],shotRowV4,highRunRowV4,foulRowV4
     ] : defaultSummaryRows;
     const chart=chartSvgV1(record,winner);
     const history=gameHistoryV1(record);
