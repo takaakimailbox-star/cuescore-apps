@@ -18945,7 +18945,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-safe-delete-workflows-v1";
+    const PWA_VERSION = "1.0-tenball-result-parity-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22240,8 +22240,10 @@ window.cueScoreModalDiagnosticsV159 = () => ({
   }
 
   function progressV1(record) {
-    if(recordDisciplineV2(record)==="9ball") {
+    const discipline=recordDisciplineV2(record);
+    if(discipline==="9ball" || discipline==="10ball") {
       const storedRackResults=Array.isArray(record?.rackResults) ? record.rackResults
+        : discipline==="10ball" && Array.isArray(record?.tenBall?.rackResults) ? record.tenBall.rackResults
         : Array.isArray(record?.nineBall?.rackResults) ? record.nineBall.rackResults : [];
       let rackResults=storedRackResults;
       if(!rackResults.length && Array.isArray(record?.eventLog?.events)) {
@@ -22277,7 +22279,8 @@ window.cueScoreModalDiagnosticsV159 = () => ({
     const chartW=width-left-right, chartH=height-top-bottom;
     const p1Score=Number(record?.players?.[1]?.score)||0;
     const p2Score=Number(record?.players?.[2]?.score)||0;
-    const minimumScale=recordDisciplineV2(record)==="9ball"?1:10;
+    const rackScoreMode=["9ball","10ball"].includes(recordDisciplineV2(record));
+    const minimumScale=rackScoreMode?1:10;
     const maxScore=Math.max(p1Score,p2Score,Number(record?.players?.[1]?.goal)||0,Number(record?.players?.[2]?.goal)||0,minimumScale);
     const maxIndex=Math.max(progress.p1.length-1,1);
     const point=(value,index)=>({
@@ -22405,8 +22408,9 @@ window.cueScoreModalDiagnosticsV159 = () => ({
     return "Rotation";
   }
 
-  function nineBallMasuwariCountsV1(record) {
+  function rackGameMasuwariCountsV1(record) {
     const counts={1:0,2:0};
+    const targetBall=recordDisciplineV2(record)==="10ball"?10:9;
     const commonEvents=Array.isArray(record?.eventLog?.events)?record.eventLog.events:[];
     const analysisEvents=Array.isArray(record?.analysis?.events)?record.analysis.events:[];
     const events=commonEvents.length?commonEvents:analysisEvents;
@@ -22443,7 +22447,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
           if(Number.isInteger(ball)) pocketed.add(ball);
         }
       });
-      if(pocketed.has(9)) counts[breaker]+=1;
+      if(pocketed.has(targetBall)) counts[breaker]+=1;
     });
     return counts;
   }
@@ -22469,7 +22473,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
     const categoryTag="";
     const disciplineV4=recordDisciplineV2(record);
     const disciplineDefV4=recordsDisciplineDefsV2.find(item=>item.id===disciplineV4) || recordsDisciplineDefsV2[0];
-    const masuwariV4=nineBallMasuwariCountsV1(record);
+    const masuwariV4=rackGameMasuwariCountsV1(record);
     const registeredPlayersV3=readPlayerLibrary();
     const detailAvatarV3=player=>{
       const registered=registeredPlayersV3.find(item=>item.id===player?.registeredPlayerId);
@@ -22483,7 +22487,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
       ["ブレイク数",Number.isFinite(Number(p1.breaks))?String(Number(p1.breaks)):"—",Number.isFinite(Number(p2.breaks))?String(Number(p2.breaks)):"—"],
       ["平均得点／イニング",averagePerInningV1(record,1),averagePerInningV1(record,2)]
     ];
-    const summaryRows=disciplineV4==="9ball" ? [
+    const summaryRows=["9ball","10ball"].includes(disciplineV4) ? [
       ["シュート成功率",shotRateV1(p1),shotRateV1(p2)],
       ["マスワリ回数",String(masuwariV4[1]),String(masuwariV4[2])],
       ["ファール回数",Number.isFinite(Number(p1.fouls))?String(Number(p1.fouls)):"—",Number.isFinite(Number(p2.fouls))?String(Number(p2.fouls)):"—"]
