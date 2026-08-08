@@ -8343,6 +8343,10 @@ body {
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3 7.7 7.5 9.5 4.5-1.8 7.5-5 7.5-9.5V6Z"/></svg>
               <span>セーフティ</span>
             </button>
+            <button id="jpaDeadBtnV1" class="pro-action jpa-dead-action-v1" type="button" aria-label="直前に選択したボールをデッドにする" hidden disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="m7 17 10-10"/></svg>
+              <span>デッド</span>
+            </button>
             <button id="proFoulBtn" class="pro-action pro-foul" type="button">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3.5 20h17Z"/><path d="M12 9v5"/><path d="M12 17.2h.01"/></svg>
               <span>ファール</span>
@@ -9311,6 +9315,8 @@ body {
   let activeGameTypeV1 = ROTATION_GAME_TYPE;
   let jpa9SkillLevelsV1 = {1:5,2:5};
   let deadBallsV1 = new Set();
+  let jpaLastPocketV1 = null;
+  let jpaDeadEventsV1 = [];
   let nineBallSettingsV1 = {breakRule:"winner",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",nineOnFoot:false,breakBox:false};
   let nineBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[]};
   let tenBallSettingsV1 = {breakRule:"winner",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",breakBox:false};
@@ -12712,6 +12718,8 @@ let matchRecordsRawCacheV152 = null;
   function snapshot() {
     return {
       activeGameTypeV1, jpa9SkillLevelsV1:{...jpa9SkillLevelsV1}, deadBallsV1:[...deadBallsV1],
+      jpaLastPocketV1:jpaLastPocketV1 ? JSON.parse(JSON.stringify(jpaLastPocketV1)) : null,
+      jpaDeadEventsV1:JSON.parse(JSON.stringify(jpaDeadEventsV1)),
       nineBallSettingsV1:{...nineBallSettingsV1}, nineBallStateV1:JSON.parse(JSON.stringify(nineBallStateV1)),
       tenBallSettingsV1:{...tenBallSettingsV1}, tenBallStateV1:JSON.parse(JSON.stringify(tenBallStateV1)),
       rotationStateV1:JSON.parse(JSON.stringify(rotationStateV1)),
@@ -12742,6 +12750,8 @@ let matchRecordsRawCacheV152 = null;
     activeGameTypeV1 = state.activeGameTypeV1 || ROTATION_GAME_TYPE;
     jpa9SkillLevelsV1 = state.jpa9SkillLevelsV1 ? {...state.jpa9SkillLevelsV1} : {1:5,2:5};
     deadBallsV1 = new Set(state.deadBallsV1 || []);
+    jpaLastPocketV1 = state.jpaLastPocketV1 ? JSON.parse(JSON.stringify(state.jpaLastPocketV1)) : null;
+    jpaDeadEventsV1 = Array.isArray(state.jpaDeadEventsV1) ? JSON.parse(JSON.stringify(state.jpaDeadEventsV1)) : [];
     nineBallSettingsV1 = state.nineBallSettingsV1 ? {...state.nineBallSettingsV1, breakRule:"winner", pushOut:false, threeFoul:true, illegalBreak:true, recordMode:"detail", nineOnFoot:false, breakBox:false} : {breakRule:"winner",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",nineOnFoot:false,breakBox:false};
     nineBallStateV1 = state.nineBallStateV1 ? JSON.parse(JSON.stringify(state.nineBallStateV1)) : {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:1,rackResults:[]};
     tenBallSettingsV1 = state.tenBallSettingsV1 ? {...state.tenBallSettingsV1, breakRule:"winner", pushOut:false, threeFoul:true, illegalBreak:true, recordMode:"detail", breakBox:false} : {breakRule:"winner",threeFoul:true,pushOut:false,illegalBreak:true,recordMode:"detail",breakBox:false};
@@ -12853,6 +12863,16 @@ let matchRecordsRawCacheV152 = null;
     return window.CueScoreBallIcon.html(number, { size:"history", classes:`pro-mini-ball ${cls}` });
   }
 
+  function logItemHtmlV1(item) {
+    if (typeof item === "number") return ballHtml(item);
+    if (item && typeof item === "object" && item.type === "jpa_dead") {
+      const number = Number(item.ball);
+      const cls = number <= 8 ? "solid" : "stripe";
+      return window.CueScoreBallIcon.html(number, { size:"history", state:"used", classes:`pro-mini-ball ${cls} jpa-dead-ball-v1` });
+    }
+    return symbolHtml(item);
+  }
+
   function symbolHtml(symbol) {
     if (symbol === "/") return `<span class="pro-break-separator" aria-hidden="true">/</span>`;
     if (symbol === "2 Fouls") return `<span class="pro-symbol f consecutive-foul-v1">2 Fouls</span>`;
@@ -12892,8 +12912,8 @@ let matchRecordsRawCacheV152 = null;
 
       const row = document.createElement("div");
       row.className = "pro-log-row" + (index === rows.length - 1 ? " active-row" : "");
-      const p1Items = rowData.p1.map(item => typeof item === "number" ? ballHtml(item) : symbolHtml(item)).join("");
-      const p2Items = rowData.p2.map(item => typeof item === "number" ? ballHtml(item) : symbolHtml(item)).join("");
+      const p1Items = rowData.p1.map(logItemHtmlV1).join("");
+      const p2Items = rowData.p2.map(logItemHtmlV1).join("");
       row.innerHTML = `
         <div class="pro-log-cell pro-log-cell-p1">${p1Items}</div>
         <div class="pro-turn-label">${rowData.label}</div>
@@ -13016,6 +13036,7 @@ let matchRecordsRawCacheV152 = null;
         currentRun = {1:0,2:0};
         usedBalls = new Set();
         deadBallsV1 = new Set();
+        jpaLastPocketV1 = null;
         rackEnded = false;
         foulLocked = false;
         turnLockReasonV62 = null;
@@ -13070,6 +13091,7 @@ let matchRecordsRawCacheV152 = null;
       rackScores = {1:0, 2:0};
       usedBalls = new Set();
       deadBallsV1 = new Set();
+      jpaLastPocketV1 = null;
       rackEnded = false;
       foulLocked = false;
       turnLockReasonV62 = null;
@@ -13115,6 +13137,7 @@ let matchRecordsRawCacheV152 = null;
     const foulButton = el("proFoulBtn");
     const switchButton = el("proSwitchBtn");
     const undoButton = el("proUndoBtn");
+    const jpaDeadButton = el("jpaDeadBtnV1");
     const threeCushionUndoButton = el("threeCushionUndoV1");
     const threeCushionAddButton = el("threeCushionAddV1");
     const threeCushionSwitchButton = el("threeCushionSwitchV1");
@@ -13122,6 +13145,12 @@ let matchRecordsRawCacheV152 = null;
     if (safetyButton) safetyButton.disabled = rackEnded || foulLocked || gameEnded || reviewLocked;
     if (foulButton) foulButton.disabled = rackEnded || foulLocked || gameEnded || reviewLocked;
     if (switchButton) switchButton.disabled = rackEnded || gameEnded || reviewLocked;
+    if (jpaDeadButton) {
+      jpaDeadButton.hidden = !isJPA9V1();
+      jpaDeadButton.disabled = !canMarkJPADeadV1() || rackEnded || gameEnded || reviewLocked;
+      jpaDeadButton.setAttribute("aria-disabled", jpaDeadButton.disabled ? "true" : "false");
+    }
+    actionsV730?.classList.toggle("jpa-dead-enabled-v1", isJPA9V1());
     if (threeCushionAddButton) threeCushionAddButton.disabled = gameEnded || reviewLocked;
     if (threeCushionSwitchButton) threeCushionSwitchButton.disabled = gameEnded || reviewLocked;
 
@@ -13428,6 +13457,12 @@ let matchRecordsRawCacheV152 = null;
     if (pushOutStateV730?.stage === "available") clearPushOutWindowV730();
     saveAndDo(() => {
       const points = activeBallPointsV1(number);
+      const jpaBeforeV1 = isJPA9V1() ? {
+        score:Number(scores[current])||0,
+        rackScore:Number(rackScores[current])||0,
+        run:Number(currentRun[current])||0,
+        maxRun:Number(maxRun[current])||0
+      } : null;
       if (pendingSafetyV62 && current === pendingSafetyV62.opponent) {
         resolvePendingSafetyV62("failed", "opponent_scored", current);
       }
@@ -13455,6 +13490,17 @@ let matchRecordsRawCacheV152 = null;
         runAfter: currentRun[current]
       });
 
+      if (isJPA9V1()) {
+        const row = rows[rows.length - 1];
+        const side = current === 1 ? "p1" : "p2";
+        jpaLastPocketV1 = {
+          ball:number, player:current, rack:Number(rack), inning:Number(inning),
+          rowIndex:rows.length - 1,
+          itemIndex:Math.max(0, Number(row?.[side]?.length || 1) - 1),
+          side, dead:false, before:jpaBeforeV1
+        };
+      }
+
       if (isNineBallV1() && number === 9) {
         completeNineBallRackV1(current, "legalNine", {ballNumber:9,source:"normal_shot"});
       } else if (isTenBallV1() && number === 10) {
@@ -13469,6 +13515,65 @@ let matchRecordsRawCacheV152 = null;
         foulLocked = false;
         nextBreakPlayer = current;
       }
+    });
+  }
+
+  function canMarkJPADeadV1() {
+    const target = jpaLastPocketV1;
+    const ball = Number(target?.ball);
+    return Boolean(
+      isJPA9V1() && target && !target.dead &&
+      ball >= 1 && ball <= 8 &&
+      Number(target.player) === Number(current) &&
+      Number(target.rack) === Number(rack) &&
+      Number(target.inning) === Number(inning) &&
+      usedBalls.has(ball) && !deadBallsV1.has(ball)
+    );
+  }
+
+  function markLastJPA9BallDeadV1() {
+    if (!canMarkJPADeadV1() || gameEnded || rackEnded || isReviewLocked()) return;
+    saveAndDo(() => {
+      const target = jpaLastPocketV1;
+      const ball = Number(target.ball);
+      const player = Number(target.player) === 2 ? 2 : 1;
+      const before = target.before || {};
+      scores[player] = Number(before.score) || 0;
+      rackScores[player] = Number(before.rackScore) || 0;
+      currentRun[player] = Number(before.run) || 0;
+      maxRun[player] = Number(before.maxRun) || 0;
+      deadBallsV1.add(ball);
+
+      const row = rows[Number(target.rowIndex)];
+      const items = row?.[target.side];
+      if (Array.isArray(items) && Number(items[Number(target.itemIndex)]) === ball) {
+        items[Number(target.itemIndex)] = {type:"jpa_dead",ball};
+      }
+
+      const analysisEvent = [...analysisEventsV60].reverse().find(event =>
+        event?.type === "ball_pocketed" && !event.dead &&
+        Number(event.player) === player && Number(event.ball) === ball && Number(event.rack) === Number(rack)
+      );
+      if (analysisEvent) {
+        analysisEvent.points = 0;
+        analysisEvent.dead = true;
+        analysisEvent.scores = analysisScoreStateV60();
+      }
+      const commonEvent = [...commonEventsV7].reverse().find(event =>
+        event?.sourceType === "ball_pocketed" && !event?.data?.dead &&
+        Number(event.player) === player && Number(event?.data?.ball) === ball && Number(event.rackNumber) === Number(rack)
+      );
+      if (commonEvent) {
+        commonEvent.data.points = 0;
+        commonEvent.data.dead = true;
+        commonEvent.data.scoreAfter = Number(scores[player]) || 0;
+      }
+
+      const deadEvent = {player,ball,rack:Number(rack),inning:Number(inning),points:0,at:new Date().toISOString()};
+      jpaDeadEventsV1.push(deadEvent);
+      appendCommonEventV700("DeadBall", "ball_dead", deadEvent);
+      recordAnalysisEventV60("ball_dead", deadEvent, {skipCommon:true});
+      jpaLastPocketV1 = {...target,dead:true};
     });
   }
 
@@ -14209,6 +14314,8 @@ let matchRecordsRawCacheV152 = null;
     misses = {1:0, 2:0};
     usedBalls = new Set();
     deadBallsV1 = new Set();
+    jpaLastPocketV1 = null;
+    jpaDeadEventsV1 = [];
     nineBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:startingPlayer,rackResults:[]};
     tenBallStateV1 = {consecutiveFouls:{1:0,2:0},ballInHandFor:null,initialBreaker:startingPlayer,rackResults:[],spotEvents:[]};
     rotationStateV1 = {consecutiveFouls:{1:0,2:0}};
@@ -15412,6 +15519,7 @@ let matchRecordsRawCacheV152 = null;
   el("pushOutPlayV730")?.addEventListener("click",()=>decidePushOutV730("play"));
   el("pushOutReturnV730")?.addEventListener("click",()=>decidePushOutV730("return"));
   el("proSafetyBtn")?.addEventListener("click", safetyEvent);
+  el("jpaDeadBtnV1")?.addEventListener("click", markLastJPA9BallDeadV1);
   el("proFoulBtn")?.addEventListener("click", foulEvent);
   el("proSwitchBtn")?.addEventListener("click", switchPlayer);
   el("threeCushionAddV1")?.addEventListener("click", addThreeCushionPointV1);
@@ -16154,7 +16262,12 @@ let matchRecordsRawCacheV152 = null;
       result: winner === 0 ? "draw" : "win",
       inning,
       rack,
-      jpa9: isJPA9V1() ? {skillLevels:{...jpa9SkillLevelsV1},targetPoints:{...goals},deadBalls:[...deadBallsV1]} : null,
+      jpa9: isJPA9V1() ? {
+        skillLevels:{...jpa9SkillLevelsV1},
+        targetPoints:{...goals},
+        deadBalls:[...deadBallsV1],
+        deadBallEvents:JSON.parse(JSON.stringify(jpaDeadEventsV1))
+      } : null,
       nineBall: isNineBallV1() ? {
         settings: JSON.parse(JSON.stringify(nineBallSettingsV1)),
         consecutiveFouls: JSON.parse(JSON.stringify(nineBallStateV1.consecutiveFouls)),
@@ -18975,7 +19088,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-break-winning-ball-next-rack-v1";
+    const PWA_VERSION = "1.0-jpa9-dead-ball-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22209,7 +22322,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
 
 <script>
 (() => {
-  const ids=["proSafetyBtn","proFoulBtn","proSwitchBtn","proUndoBtn","threeCushionUndoV1"];
+  const ids=["proSafetyBtn","jpaDeadBtnV1","proFoulBtn","proSwitchBtn","proUndoBtn","threeCushionUndoV1"];
   ids.forEach(id=>document.getElementById(id)?.addEventListener("click",()=>{
     try{ if(navigator.vibrate) navigator.vibrate(8); }catch(_){}
   },{passive:true}));
@@ -22248,6 +22361,17 @@ html body .three-cushion-game-v1 .pro-scoreboard .pro-turn-arrow-v1{color:#36363
   border:2px solid #171717;
   background:#fff;
   font-weight:700;
+}
+</style>
+<style id="jpaDeadBallStylesV1">
+html body .jpa9-game-v1 .pro-actions.jpa-dead-enabled-v1{
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+}
+html body .jpa9-game-v1 .jpa-dead-action-v1{
+  color:#555553!important;
+}
+html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
+  opacity:.32!important;
 }
 </style>
 <script>

@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-break-winning-ball-next-rack-v1";
+const APP_VERSION = "1.0-jpa9-dead-ball-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
