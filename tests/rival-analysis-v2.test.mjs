@@ -16,6 +16,6 @@ assert.match(html,/最近の直接対戦/);
 assert.match(html,/data-rival-record-id/);
 assert.match(html,/window\.openMatchDetailV1\?\.\(row\.dataset\.rivalRecordId\)/);
 assert.match(html,/rivalDisciplineV2=window\.__cueScoreRivalReturnV2\?\.discipline/);
-assert.match(sw,/1\.0-rival-analysis-v2/);
+assert.match(sw,/const APP_VERSION = "1\.0-[^"]+"/);
 
 console.log("Rival Analysis v2 player-journey design and navigation checks passed.");
