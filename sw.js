@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-player-journey-v2.1";
+const APP_VERSION = "1.0-analysis-v2";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
