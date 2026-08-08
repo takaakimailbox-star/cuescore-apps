@@ -8075,9 +8075,9 @@ body {
 .three-cushion-game-v1 .pro-player-panel{border-color:#dededb!important;background:#fff!important;color:#171717!important}.three-cushion-game-v1 .pro-player-panel.active{border-color:#171717!important}.three-cushion-game-v1 .pro-player-panel.active *{color:#171717!important}
 .three-cushion-game-v1 .pro-stats [hidden]{display:none!important}
 .three-cushion-table-v1{width:100%;font-variant-numeric:tabular-nums}.three-cushion-head-v1,.three-cushion-row-v1{display:grid;grid-template-columns:1fr 54px 1fr;align-items:center;text-align:center;border-bottom:1px solid #ececea;min-height:43px}.three-cushion-head-v1{position:sticky;top:0;background:#fff;z-index:2;font-size:13px;font-weight:700}.three-cushion-row-v1>span{font-size:15px}.three-cushion-row-v1>span:first-child{text-align:left;padding-left:20%}.three-cushion-row-v1>span:last-child{text-align:right;padding-right:20%}.three-cushion-row-v1 i{display:inline-block;width:1px;height:15px;background:#b8b8b4;margin:0 12px;vertical-align:middle}.three-cushion-row-v1 b{font-weight:500}.three-cushion-row-v1 b.current-v1{width:34px;height:34px;border:2px solid #171717;border-radius:50%;display:grid;place-items:center;justify-self:center}
-.three-cushion-actions-v1{display:grid;grid-template-columns:1fr 1fr;gap:12px}.three-cushion-actions-v1[hidden]{display:none!important}.three-cushion-actions-v1 button{min-height:92px;border:1px solid #dededb;border-radius:14px;background:#fff;color:#171717;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:inherit}.three-cushion-actions-v1 strong{font-size:34px}.three-cushion-actions-v1 span{font-size:13px;font-weight:600}
+.three-cushion-actions-v1{display:grid;grid-template-columns:1fr 1fr;gap:12px}.three-cushion-actions-v1[hidden]{display:none!important}.three-cushion-actions-v1 button{min-height:92px;border:1px solid #dededb;border-radius:14px;background:#fff;color:#171717;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:inherit}.three-cushion-actions-v1 strong{font-size:34px}.three-cushion-actions-v1 span{font-size:13px;font-weight:600}.three-cushion-actions-v1 .three-cushion-undo-v1{grid-column:1/-1;min-height:54px;flex-direction:row;gap:8px}.three-cushion-undo-v1 svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.three-cushion-undo-v1:disabled{opacity:.42;cursor:default}
 .three-cushion-game-v1 .pro-bottom-dock{padding-top:10px!important}
-@media(max-width:430px){.cue-discipline-switcher-v1{grid-template-columns:repeat(6,minmax(0,1fr))!important}.cue-discipline-switcher-v1 .cue-ball-icon-v1{width:26px;height:26px;font-size:10px}.three-cushion-run-v1{top:178px}.three-cushion-actions-v1 button{min-height:82px}}
+@media(max-width:430px){.cue-discipline-switcher-v1{grid-template-columns:repeat(6,minmax(0,1fr))!important}.cue-discipline-switcher-v1 .cue-ball-icon-v1{width:26px;height:26px;font-size:10px}.three-cushion-run-v1{top:178px}.three-cushion-actions-v1 button{min-height:82px}.three-cushion-actions-v1 .three-cushion-undo-v1{min-height:50px}}
 </style>
   <style id="cueScoreBootStylesV2">
     html.cue-app-booting-v2,
@@ -8353,6 +8353,10 @@ body {
           <section class="three-cushion-actions-v1" id="threeCushionActionsV1" hidden>
             <button id="threeCushionAddV1" type="button" aria-label="現在のプレーヤーに1点を追加"><strong>+1</strong><span>得点を追加</span></button>
             <button id="threeCushionSwitchV1" type="button" aria-label="相手に交代してイニングを進める"><strong>交代</strong><span>相手に交代（イニング+1）</span></button>
+            <button id="threeCushionUndoV1" class="three-cushion-undo-v1" type="button" aria-label="ゲームの進行を1つ戻す" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7H4v-5"/><path d="M4.5 7.5A8 8 0 1 1 5 17"/></svg>
+              <span>戻る</span>
+            </button>
           </section>
         </section>
       </div>
@@ -13100,6 +13104,7 @@ let matchRecordsRawCacheV152 = null;
     const foulButton = el("proFoulBtn");
     const switchButton = el("proSwitchBtn");
     const undoButton = el("proUndoBtn");
+    const threeCushionUndoButton = el("threeCushionUndoV1");
     const threeCushionAddButton = el("threeCushionAddV1");
     const threeCushionSwitchButton = el("threeCushionSwitchV1");
 
@@ -13113,6 +13118,10 @@ let matchRecordsRawCacheV152 = null;
     if (undoButton) {
       undoButton.disabled = undoHistory.length === 0;
       undoButton.setAttribute("aria-disabled", undoButton.disabled ? "true" : "false");
+    }
+    if (threeCushionUndoButton) {
+      threeCushionUndoButton.disabled = undoHistory.length === 0;
+      threeCushionUndoButton.setAttribute("aria-disabled", threeCushionUndoButton.disabled ? "true" : "false");
     }
 
     if (
@@ -15365,7 +15374,7 @@ let matchRecordsRawCacheV152 = null;
   }, true);
   // reviewModeのUndoはdocument captureで独立処理。親要素や重なりの影響を受けない。
   document.addEventListener("click", event => {
-    const target = event.target instanceof Element ? event.target.closest("#proUndoBtn") : null;
+    const target = event.target instanceof Element ? event.target.closest("#proUndoBtn, #threeCushionUndoV1") : null;
     if (!target || !reviewMode) return;
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -15386,6 +15395,7 @@ let matchRecordsRawCacheV152 = null;
   el("proSwitchBtn")?.addEventListener("click", switchPlayer);
   el("threeCushionAddV1")?.addEventListener("click", addThreeCushionPointV1);
   el("threeCushionSwitchV1")?.addEventListener("click", switchThreeCushionPlayerV1);
+  el("threeCushionUndoV1")?.addEventListener("click", undo);
   el("proUndoBtn")?.addEventListener("click", undo);
   el("breakPlayerP1V1")?.addEventListener("click", () => selectBreakPlayerV1(1));
   el("breakPlayerP2V1")?.addEventListener("click", () => selectBreakPlayerV1(2));
@@ -18944,7 +18954,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-home-neutral-three-cushion-cards-v1";
+    const PWA_VERSION = "1.0-three-cushion-undo-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22178,7 +22188,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
 
 <script>
 (() => {
-  const ids=["proSafetyBtn","proFoulBtn","proSwitchBtn","proUndoBtn"];
+  const ids=["proSafetyBtn","proFoulBtn","proSwitchBtn","proUndoBtn","threeCushionUndoV1"];
   ids.forEach(id=>document.getElementById(id)?.addEventListener("click",()=>{
     try{ if(navigator.vibrate) navigator.vibrate(8); }catch(_){}
   },{passive:true}));
