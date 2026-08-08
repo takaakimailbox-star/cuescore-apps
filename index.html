@@ -27475,6 +27475,58 @@ body.cue-edge-back-animating-v2 .app{
 .player-detail-formal-v1 .player-detail-metric-card-v2 strong{color:#171717}
 @media(max-width:390px){.player-journey-scroll-v2{padding-left:10px;padding-right:10px}.player-journey-header-v2 h1{font-size:19px}.journey-match-v2{grid-template-columns:43px 48px minmax(0,1fr) auto 10px;gap:6px}.journey-summary-v2 strong{font-size:22px}.player-detail-metrics-grid-v2{gap:6px}}
 </style>
+<style>
+/* CueScore player journey v2.1 — visual parity with the approved mockups */
+.player-detail-formal-v1 .player-stats-body{padding-top:0!important}
+.player-detail-shell-v1{gap:8px}
+.player-detail-profile-card-v2{grid-template-columns:68px minmax(0,1fr);min-height:92px;padding:10px 14px;border-radius:18px}
+.player-detail-avatar-v2,.player-detail-avatar-v2 .player-avatar-v2{width:64px;height:64px}
+.player-detail-formal-v1 .player-detail-name-v1{font-size:24px}
+.player-detail-main-badge-v2{margin-top:5px;padding:3px 8px;font-size:9px}
+.player-detail-note-v2{margin-top:4px;font-size:11px}
+.player-detail-formal-v1 .player-detail-disciplines-v1{padding:5px;gap:3px;border-radius:16px}
+.player-detail-formal-v1 .player-detail-discipline-v1{height:66px;padding:4px 1px;gap:3px;border-radius:10px}
+.player-detail-formal-v1 .player-detail-discipline-v1 .disc-ball{width:33px;height:33px}
+.player-detail-recent-v2{padding:14px 16px}
+.player-detail-recent-head-v2 strong{font-size:17px}
+.player-detail-record-v2{display:grid;grid-template-columns:auto auto auto auto minmax(58px,1fr);align-items:baseline;justify-content:start;gap:5px;margin-top:8px}
+.player-detail-formal-v1 .player-detail-record-v2 b{display:inline;color:#171717;font-size:34px}
+.player-detail-formal-v1 .player-detail-record-v2 span{display:inline;color:#171717;font-size:14px}
+.player-detail-formal-v1 .player-detail-record-v2 .player-detail-winrate-v2{justify-self:end;margin-left:16px;font-size:28px!important}
+.player-detail-form-v2{margin-top:10px}.player-detail-form-v2 i{width:29px;height:29px}
+.player-detail-metrics-grid-v2{gap:6px}
+.player-detail-metric-card-v2{min-height:72px;padding:11px 13px;border-radius:14px}
+.player-detail-metric-card-v2 strong{margin-top:5px;font-size:21px}
+.player-detail-link-v2{min-height:64px;padding:9px 14px;border-radius:14px}
+.player-detail-link-icon-v2{width:36px;height:36px;font-size:17px}
+.player-detail-link-v2 strong{color:#171717;font-size:15px}.player-detail-link-v2 small{margin-top:2px}
+.player-detail-formal-v1 .player-detail-delete-v1{min-height:43px;margin-top:8px}
+.player-detail-formal-v1 .player-detail-delete-note-v1{margin-top:5px;font-size:10px}
+.player-journey-header-v2{min-height:calc(58px + env(safe-area-inset-top))}
+.player-journey-header-v2 h1{font-size:20px}
+.player-journey-scroll-v2{padding-top:4px}
+.player-journey-shell-v2{gap:10px}
+.journey-player-v2{grid-template-columns:58px minmax(0,1fr) auto;padding:11px 13px;border-radius:18px}
+.journey-avatar-v2{width:56px;height:56px}.journey-player-v2 strong{font-size:23px}
+.journey-discipline-v2 img{width:40px;height:40px}
+.journey-summary-v2{padding:14px 7px;border-radius:18px}.journey-summary-v2 strong{font-size:23px}
+.journey-segment-v2 button,.journey-filter-v2 button{min-height:37px}
+.journey-opponent-v2{grid-template-columns:48px minmax(0,1fr) auto 12px;min-height:78px;padding:10px 12px;border-radius:15px}
+.journey-opponent-avatar-v2{width:46px;height:46px}.journey-opponent-v2 strong{font-size:17px}.journey-opponent-meta-v2{margin-top:3px}.journey-opponent-rate-v2 strong{font-size:19px}
+.journey-history-profile-v2{padding:10px 13px;border-radius:18px}.journey-history-profile-v2 .journey-avatar-v2{width:52px;height:52px}.journey-history-profile-v2 strong{font-size:20px}
+.journey-filter-v2 button{padding:0 14px}
+.journey-month-v2{margin-top:8px;font-size:17px}
+.journey-match-v2{grid-template-columns:45px 50px minmax(0,1fr) auto 11px;min-height:78px;padding:9px 10px;border-radius:15px}
+.journey-game-v2 img{width:34px;height:34px}.journey-result-v2 strong{font-size:15px}
+@media(max-width:390px){
+  .player-detail-profile-card-v2{grid-template-columns:62px minmax(0,1fr)}
+  .player-detail-avatar-v2,.player-detail-avatar-v2 .player-avatar-v2{width:58px;height:58px}
+  .player-detail-formal-v1 .player-detail-name-v1{font-size:22px}
+  .player-detail-formal-v1 .player-detail-discipline-v1{height:62px;font-size:8px}
+  .player-detail-formal-v1 .player-detail-discipline-v1 .disc-ball{width:31px;height:31px}
+  .journey-match-v2{grid-template-columns:41px 45px minmax(0,1fr) auto 9px;gap:5px;padding-left:8px;padding-right:8px}
+}
+</style>
 <script>
 // CueScore Player Journey v2.0: player overview, opponent records, and player match history.
 (() => {
