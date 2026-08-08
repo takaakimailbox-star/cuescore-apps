@@ -186,6 +186,12 @@
       opacity: .88;
     }
 
+    .toast.rack-transition-toast-v1 {
+      z-index: 20020;
+      background: rgba(23,23,23,.96);
+      color: #fff;
+    }
+
     @keyframes toastIn {
       from { opacity: 0; transform: translate(-50%, -10px); }
       to { opacity: 1; transform: translate(-50%, 0); }
@@ -12302,13 +12308,13 @@ let matchRecordsRawCacheV152 = null;
       });
       if (isRackGameV1()) {
         decision.pocketedBalls.forEach(number => {
-          if ((isNineBallV1() && number === 9 && decision.foul) || (isTenBallV1() && number === 10)) return;
+          if (((isNineBallV1() && number === 9) || (isTenBallV1() && number === 10)) && decision.foul) return;
           usedBalls.add(number);
           currentRun[player] += 1;
           if (currentRun[player] > maxRun[player]) maxRun[player] = currentRun[player];
         });
         if (decision.foul && decision.pocketedBalls.includes(9)) spotNineBallV1(decision.illegalBreak ? "illegal_break" : "break_foul", player);
-        if (decision.pocketedBalls.includes(10)) spotTenBallV1(decision.foul ? "break_foul" : "break_ten", player);
+        if (decision.foul && decision.pocketedBalls.includes(10)) spotTenBallV1("break_foul", player);
       }
       if (isJPA9V1() && decision.scratch) {
         decision.pocketedBalls.forEach(number => {
@@ -12385,7 +12391,7 @@ let matchRecordsRawCacheV152 = null;
         foulLocked = false;
         turnLockReasonV62 = null;
         if (decision.foul && decision.pocketedBalls.length) queueStraightPoolNoticeV1("スポット確認", `${decision.pocketedBalls.join("・")}番をスポットへ戻してください`);
-      } else if (isRackGameV1() && (decision.foul || decision.pocketedBalls.filter(ball => !(isTenBallV1() && ball === 10)).length === 0)) {
+      } else if (isRackGameV1() && (decision.foul || decision.pocketedBalls.length === 0)) {
         endCurrentRun(player);
         const opponent = player === 1 ? 2 : 1;
         const rackState = activeRackStateV1();
@@ -12428,8 +12434,13 @@ let matchRecordsRawCacheV152 = null;
         turnLockReasonV62 = null;
       }
 
-      if (isNineBallV1() && !decision.foul && decision.pocketedBalls.includes(9)) {
-        completeNineBallRackV1(player, "legalBreakNine", {ballNumber:9,source:"break"});
+      const legalBreakWinningBallV1 = !decision.foul && (
+        (isNineBallV1() && decision.pocketedBalls.includes(9)) ||
+        (isTenBallV1() && decision.pocketedBalls.includes(10))
+      );
+      if (legalBreakWinningBallV1) {
+        const winningBallV1 = isTenBallV1() ? 10 : 9;
+        completeNineBallRackV1(player, isTenBallV1() ? "legalBreakTen" : "legalBreakNine", {ballNumber:winningBallV1,source:"break"});
       } else if ((isJPA9V1() && !decision.foul && decision.pocketedBalls.includes(9)) || (!isStraightPoolV1() && usedBalls.size === Number(getActiveRuleV699().ballCount || 15))) {
         rackEnded = true;
         foulLocked = false;
@@ -13130,15 +13141,25 @@ let matchRecordsRawCacheV152 = null;
       !isStraightPoolV1() &&
       !reviewLocked &&
       recordingModeV611 === "detail" &&
-      el("breakResultOverlayV61")?.classList.contains("hidden") &&
+      (el("breakResultOverlayV61")?.classList.contains("hidden") || el("breakResultOverlayV61")?.classList.contains("is-closing-v2")) &&
       !rackBreakPromptQueuedV1
     ) {
       rackBreakPromptQueuedV1 = true;
       setTimeout(() => {
-        rackBreakPromptQueuedV1 = false;
-        if (!rackEnded || gameEnded || reviewMode) return;
-        showBreakResultPromptV61(nextBreakPlayer, Number(rack) + 1, { nextRack:true });
-      }, 0);
+        if (!rackEnded || gameEnded || reviewMode) {
+          rackBreakPromptQueuedV1 = false;
+          return;
+        }
+        const nextRackNumberV1 = Number(rack) + 1;
+        const nextBreakerV1 = Number(nextBreakPlayer) === 2 ? 2 : 1;
+        showToast(`Rack ${nextRackNumberV1}を開始`, `${playerName(nextBreakerV1)}がブレイクします`);
+        document.querySelector(".toast")?.classList.add("rack-transition-toast-v1");
+        window.setTimeout(() => {
+          rackBreakPromptQueuedV1 = false;
+          if (!rackEnded || gameEnded || reviewMode) return;
+          showBreakResultPromptV61(nextBreakerV1, nextRackNumberV1, { nextRack:true });
+        }, 700);
+      }, 220);
     }
   }
 
@@ -18954,7 +18975,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-three-cushion-clarity-v1";
+    const PWA_VERSION = "1.0-break-winning-ball-next-rack-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
