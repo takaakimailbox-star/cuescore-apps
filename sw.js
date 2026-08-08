@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-demo-data-v1-2";
+const APP_VERSION = "1.0-player-history-open-v3";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
