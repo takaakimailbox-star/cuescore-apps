@@ -24,6 +24,6 @@ assert.match(html,/ファール数は相手と同じ/);
 assert.match(html,/ハイランは相手と同じ/);
 assert.match(html,/\.analysis-v2\{min-width:0;overflow:hidden\}/);
 assert.match(html,/#rankingsScreen>\.analytics-shell-v1[^}]+display:none!important/);
-assert.match(sw,/1\.0-analysis-v2/);
+assert.match(sw,/const APP_VERSION = "1\.0-[^"]+"/);
 
 console.log("Analysis v2 home, player change analysis, and match analysis checks passed.");
