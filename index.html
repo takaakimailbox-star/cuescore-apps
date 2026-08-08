@@ -12861,8 +12861,8 @@ let matchRecordsRawCacheV152 = null;
       const live = innings.find(item => Number(item.inning) === currentInning) || {inning:currentInning,p1:null,p2:null,p1Total:0,p2Total:0};
       const items = innings.some(item => Number(item.inning) === currentInning) ? innings : [...innings,live];
       log.innerHTML = `<div class="three-cushion-table-v1"><div class="three-cushion-head-v1"><span>${escapeRecordText(playerName(1))}</span><span>INN</span><span>${escapeRecordText(playerName(2))}</span></div>${items.map(item=>{
-        const cell=(points,total)=>Number.isFinite(Number(points))&&points!==null?`${Number(points)>0?Number(points):"-"}${Number(points)>0?` <i></i> ${Number(total)||0}`:""}`:"-";
-        return `<div class="three-cushion-row-v1"><span>${cell(item.p1,item.p1Total)}</span><b class="${Number(item.inning)===currentInning?"current-v1":""}">${item.inning}</b><span>${cell(item.p2,item.p2Total)}</span></div>`;
+        const cell=points=>Number.isFinite(Number(points))&&points!==null&&Number(points)>0?Number(points):"-";
+        return `<div class="three-cushion-row-v1"><span>${cell(item.p1)}</span><b class="${Number(item.inning)===currentInning?"current-v1":""}">${item.inning}</b><span>${cell(item.p2)}</span></div>`;
       }).join("")}</div>`;
       requestAnimationFrame(()=>{log.scrollTop=log.scrollHeight;});
       return;
@@ -18954,7 +18954,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-three-cushion-undo-v1";
+    const PWA_VERSION = "1.0-three-cushion-clarity-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22200,6 +22200,33 @@ window.cueScoreModalDiagnosticsV159 = () => ({
 #proGameScreen,
 #breakResultOverlayV61{
   touch-action:pan-x pan-y!important;
+}
+</style>
+<style id="threeCushionClarityV1">
+/* 3 Cushion uses monochrome weight and contrast to show turn state. */
+html body .three-cushion-game-v1 .pro-scoreboard .pro-player-panel{
+  border:1px solid #dededb!important;
+  background:#fff!important;
+  box-shadow:0 7px 22px rgba(0,0,0,.035)!important;
+}
+html body .three-cushion-game-v1 .pro-scoreboard .pro-player-panel.active{
+  border:2px solid #363634!important;
+  background:#fff!important;
+  box-shadow:0 7px 22px rgba(0,0,0,.07)!important;
+}
+html body .three-cushion-game-v1 .pro-scoreboard .pro-turn-arrow-v1{color:#363634!important}
+.three-cushion-game-v1 .three-cushion-row-v1>span{
+  padding-inline:0!important;
+  text-align:center!important;
+  font-size:17px;
+  font-weight:650;
+}
+.three-cushion-game-v1 .three-cushion-row-v1 b.current-v1{
+  width:34px;
+  height:34px;
+  border:2px solid #171717;
+  background:#fff;
+  font-weight:700;
 }
 </style>
 <script>
