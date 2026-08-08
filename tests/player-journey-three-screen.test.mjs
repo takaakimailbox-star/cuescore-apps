@@ -20,6 +20,7 @@ assert.match(html,/window\.openPlayerOpponentRecordsV2\(opponentReturn\.playerId
 assert.match(html,/data-player-record-open-v3/);
 assert.match(html,/openPlayerJourneyMatchV3\(direct\.dataset\.playerRecordOpenV3\)/);
 assert.match(html,/window\.openMatchDetailV1\|\|window\.openHistoricalRecordV2/);
+assert.match(html,/\.record-detail-overlay\.match-detail-overlay-v1\{[\s\S]*?z-index:16000!important/);
 assert.match(html,/journeyDiscipline=discipline\.dataset\.playerDetailDiscipline\|\|"9ball"/);
 assert.match(html,/const active=journeyDiscipline/);
 assert.match(html,/aria-selected=\"\$\{d\.id===active\}\"/);
