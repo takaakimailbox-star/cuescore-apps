@@ -20,6 +20,9 @@ assert.match(html,/window\.openPlayerOpponentRecordsV2\(opponentReturn\.playerId
 assert.match(html,/data-player-record-open-v3/);
 assert.match(html,/openPlayerJourneyMatchV3\(direct\.dataset\.playerRecordOpenV3\)/);
 assert.match(html,/window\.openMatchDetailV1\|\|window\.openHistoricalRecordV2/);
+assert.match(html,/journeyDiscipline=discipline\.dataset\.playerDetailDiscipline\|\|"9ball"/);
+assert.match(html,/const active=journeyDiscipline/);
+assert.match(html,/aria-selected=\"\$\{d\.id===active\}\"/);
 assert.match(html,/select\.dispatchEvent\(new Event\("change",\{bubbles:true\}\)\)/);
 assert.doesNotMatch(html,/player-journey-overlay-v2[\s\S]{0,800}player-detail-bottom-nav-v1/);
 assert.match(html,/CueScore player journey v2\.1/);
