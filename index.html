@@ -8872,7 +8872,7 @@ body {
 
     <section class="vs-analysis-screen hidden" id="vsAnalysisScreen" aria-label="対戦相性分析">
       <header class="vs-analysis-header">
-        <button class="vs-analysis-back" id="vsAnalysisBackBtn" type="button" aria-label="戻る">‹ 戻る</button>
+        <button class="vs-analysis-back" id="vsAnalysisBackBtn" type="button" aria-label="戻る"></button>
         <div class="vs-analysis-title">ライバル分析</div>
         <div class="vs-analysis-count" id="vsAnalysisCount"></div>
       </header>
@@ -18849,11 +18849,26 @@ let matchRecordsRawCacheV152 = null;
     if (!screen || !result || !p1Select || !p2Select) return;
     let fixedPlayerIdV832 = "";
     let returnPlayerIdV832 = "";
+    let rivalDisciplineV2 = "9ball";
     const VS_SELECTION_KEY = "rotationScoreboard.vsSelection.v1";
     const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
     const safeRecords = () => window.getFilteredRecordsV53 ? window.getFilteredRecordsV53() : [];
     const safePlayers = () => { try { return typeof readPlayerLibrary === "function" ? readPlayerLibrary() : []; } catch(_){ return []; } };
     const recordTime = record => new Date(record.endedAt || record.playedAt || record.startedAt || 0).getTime() || 0;
+    const rivalDisciplineDefsV2=[
+      {id:"9ball",label:"9-Ball",asset:"./assets/icons/games/game-9ball.svg"},
+      {id:"10ball",label:"10-Ball",asset:"./assets/icons/games/game-10ball.svg"},
+      {id:"rotation",label:"Rotation",asset:"./assets/icons/games/game-rotation.svg"},
+      {id:"straightPool",label:"14-1",asset:"./assets/icons/games/game-14-1.svg"},
+      {id:"jpa9",label:"JPA 9-Ball",asset:"./assets/icons/games/game-jpa-9ball.svg"},
+      {id:"threeCushion",label:"3 Cushion",asset:"./assets/icons/games/game-3cushion.svg"}
+    ];
+    const rivalDisciplineV2Of=record=>typeof recordDisciplineV2==="function"?recordDisciplineV2(record):"9ball";
+    const rivalAvatarV2=choice=>{
+      const player=safePlayers().find(item=>String(item.id||"")===String(choice?.id||""));
+      if(player&&typeof playerAvatarHtmlV2==="function")return playerAvatarHtmlV2(player,"rival-avatar-image-v2");
+      return `<span class="rival-avatar-fallback-v2">${esc(String(choice?.name||"?").slice(0,1))}</span>`;
+    };
     function choices(){
       const map=new Map();
       safePlayers().forEach(p=>{if(p?.id&&p?.name)map.set(`id:${p.id}`,{key:`id:${p.id}`,id:String(p.id),name:String(p.name)});});
@@ -18952,25 +18967,33 @@ let matchRecordsRawCacheV152 = null;
       const selectedOpponentKey=String(p2Select.value||'');
       const b=opponents.find(item=>item.key===selectedOpponentKey)||opponents[0];
       if(!b){count.textContent="";result.innerHTML='<div class="vs-empty">対戦相手を選択してください。</div>';return;}
+      const rivalDisciplineV2Def=rivalDisciplineDefsV2.find(item=>item.id===rivalDisciplineV2)||rivalDisciplineDefsV2[0];
+      const rivalTopV2=`<section class="rival-matchup-v2"><div class="rival-player-v2"><span class="rival-avatar-v2">${rivalAvatarV2(a)}</span><strong>${esc(a.name)}</strong><small>基準プレーヤー</small></div><div class="rival-versus-v2"><span>VS</span><img src="${rivalDisciplineV2Def.asset}" alt="${esc(rivalDisciplineV2Def.label)}"></div><div class="rival-player-v2"><span class="rival-avatar-v2">${rivalAvatarV2(b)}</span><strong>${esc(b.name)}</strong><label><span>対戦相手</span><select class="rival-opponent-select-v2" aria-label="対戦相手">${p2Select.innerHTML}</select></label></div></section><nav class="rival-disciplines-v2" aria-label="ゲーム種目">${rivalDisciplineDefsV2.map(item=>`<button type="button" class="${item.id===rivalDisciplineV2?'is-selected':''}" data-rival-discipline-v2="${item.id}">${item.label}</button>`).join('')}</nav>`;
       localStorage.setItem(VS_SELECTION_KEY,JSON.stringify({p1:a.key,p2:b.key}));
-      const matches=safeRecords().filter(r=>sideFor(r,a)&&sideFor(r,b)&&sideFor(r,a)!==sideFor(r,b)).sort((x,y)=>recordTime(x)-recordTime(y));
+      const matches=safeRecords().filter(r=>rivalDisciplineV2Of(r)===rivalDisciplineV2&&sideFor(r,a)&&sideFor(r,b)&&sideFor(r,a)!==sideFor(r,b)).sort((x,y)=>recordTime(x)-recordTime(y));
       if(count) count.textContent="";
-      if(!matches.length){result.innerHTML='<div class="vs-empty">この2人の直接対戦履歴はまだありません。<br>対戦を保存すると自動集計されます。</div>';return;}
+      if(!matches.length){result.innerHTML=`${rivalTopV2}<div class="vs-empty">${esc(rivalDisciplineV2Def.label)}の直接対戦履歴はまだありません。<br>対戦を保存すると自動集計されます。</div>`;const emptySelect=result.querySelector(".rival-opponent-select-v2");if(emptySelect){emptySelect.dataset.selectedKey=b.key;emptySelect.value=b.key;}return;}
       const sideA=r=>sideFor(r,a), sideB=r=>sideFor(r,b);const ma=metrics(matches,sideA),mb=metrics(matches,sideB);
       const recent=[...matches].sort((x,y)=>recordTime(y)-recordTime(x)).slice(0,5);
-      const rows=[['勝利数',`${ma.wins}勝`,`${mb.wins}勝`],['勝率',`${Math.round(ma.winRate)}%`,`${Math.round(mb.winRate)}%`],['平均得点',ma.avgScore.toFixed(1),mb.avgScore.toFixed(1)],['平均イニング',ma.avgInning?ma.avgInning.toFixed(1):'–',mb.avgInning?mb.avgInning.toFixed(1):'–'],['ハイラン',String(ma.highRun),String(mb.highRun)],['シュート率',`${Math.round(ma.shotRate)}%`,`${Math.round(mb.shotRate)}%`],['ファール/試合',ma.avgFouls.toFixed(1),mb.avgFouls.toFixed(1)]];
+      const rows=[['シュート成功率',`${Math.round(ma.shotRate)}%`,`${Math.round(mb.shotRate)}%`],['ハイラン',String(ma.highRun),String(mb.highRun)],['ファール／試合',ma.avgFouls.toFixed(1),mb.avgFouls.toFixed(1)],['セーフティ成功率',ma.safetySuccessRate===null?'—':`${Math.round(ma.safetySuccessRate)}%`,mb.safetySuccessRate===null?'—':`${Math.round(mb.safetySuccessRate)}%`]];
       const recentRows=recent.map(r=>{
         const sa=sideA(r), sb=sideB(r), win=Number(r.winner)===sa;
         const dateValue=r.endedAt||r.playedAt||r.startedAt;
         const dateObj=dateValue?new Date(dateValue):null;
         const dateLabel=dateObj&&!Number.isNaN(dateObj.getTime())?`${dateObj.getMonth()+1}/${dateObj.getDate()}`:'日付なし';
-        return `<div class="vs-recent-row"><div class="vs-recent-date">${dateLabel}</div><div class="vs-recent-result ${win?'win':'loss'}">${win?'○':'×'}</div></div>`;
+        const scoreA=Number(r.players?.[sa]?.score)||0,scoreB=Number(r.players?.[sb]?.score)||0;
+        return `<button class="rival-history-row-v2" type="button" data-rival-record-id="${esc(r.id)}"><span><small>${dateLabel}　${esc(rivalDisciplineV2Def.label)}</small><strong>${esc(a.name)} vs ${esc(b.name)}</strong></span><span><em class="${win?'':'is-loss'}">${win?'勝ち':'負け'}</em><strong>${scoreA} − ${scoreB}</strong><b>›</b></span></button>`;
       }).join('');
       const insight=rivalInsight(matches,recent,a,b,sideA,sideB,ma,mb);
-      result.innerHTML=`<div class="vs-rival-overview"><div class="vs-rival-overview-head"><div class="vs-rival-overview-title">${esc(a.name)}から見た相性</div><div class="vs-rival-badge">${insight.status}</div></div><div class="vs-rival-message">${esc(insight.trend)}</div><div class="vs-recent-compare"><div class="vs-recent-compare-card"><div class="vs-recent-compare-label">全期間勝率</div><div class="vs-recent-compare-value">${Math.round(ma.winRate)}%</div></div><div class="vs-recent-compare-card"><div class="vs-recent-compare-label">直近${recent.length}試合</div><div class="vs-recent-compare-value">${insight.recentRecord}</div></div><div class="vs-recent-compare-card"><div class="vs-recent-compare-label">直近勝率</div><div class="vs-recent-compare-value">${Math.round(insight.recentA.winRate)}%</div></div></div><div class="vs-rival-grid"><div class="vs-rival-card"><div class="vs-rival-label">勝ちにつながっている点</div><div class="vs-rival-text">${esc(insight.strength)}</div></div><div class="vs-rival-card"><div class="vs-rival-label">注意したい点</div><div class="vs-rival-text">${esc(insight.risk)}</div></div><div class="vs-rival-card full"><div class="vs-rival-label">次回のワンポイント</div><div class="vs-rival-text">${esc(insight.action)}</div></div></div></div><div class="vs-summary"><div class="vs-summary-card"><div class="vs-summary-label">直接対戦</div><div class="vs-summary-value">${matches.length}</div></div><div class="vs-summary-card"><div class="vs-summary-label">${esc(a.name)} 勝利</div><div class="vs-summary-value">${ma.wins}</div></div><div class="vs-summary-card"><div class="vs-summary-label">${esc(b.name)} 勝利</div><div class="vs-summary-value">${mb.wins}</div></div></div><div class="vs-comparison"><div class="vs-comparison-head"><div class="vs-comparison-name">${esc(a.name)}</div><div>比較</div><div class="vs-comparison-name">${esc(b.name)}</div></div>${rows.map(row=>`<div class="vs-comparison-row"><div class="vs-comparison-value">${row[1]}</div><div class="vs-comparison-label">${row[0]}</div><div class="vs-comparison-value">${row[2]}</div></div>`).join('')}</div><div class="vs-recent"><div class="vs-recent-title">直近の直接対戦（新しい順・最大5試合）</div><div class="vs-recent-list">${recentRows}</div></div>`;
+      const losses=Math.max(0,matches.length-ma.wins);
+      const form=recent.map(r=>{const win=Number(r.winner)===sideA(r);return `<i class="${win?'':'is-loss'}">${win?'W':'L'}</i>`;}).join('');
+      result.innerHTML=`${rivalTopV2}<section class="rival-overview-v2"><div class="rival-overview-top-v2"><div><small>直接対戦</small><strong>${matches.length}試合</strong></div><div class="rival-record-v2"><strong>${ma.wins}</strong><span>勝</span><strong>${losses}</strong><span>敗</span></div><div><small>勝率</small><strong>${Math.round(ma.winRate)}%</strong></div></div><div class="rival-form-v2">${form}</div><p><b>${esc(insight.status)}</b><span>${esc(insight.trend)}</span></p></section><h2 class="rival-section-title-v2">次の対戦ポイント</h2><section class="rival-next-v2"><article><i class="is-good">✓</i><div><small>活かしたい強み</small><strong>${esc(insight.strength)}</strong></div></article><article><i class="is-warn">!</i><div><small>注意したい場面</small><strong>${esc(insight.risk)}</strong></div></article><article class="rival-action-v2"><i>→</i><div><small>りおんのワンポイント</small><strong>${esc(insight.action)}</strong></div></article></section><h2 class="rival-section-title-v2">成績比較</h2><section class="rival-comparison-v2"><div class="rival-comparison-head-v2"><strong>${esc(a.name)}</strong><span>${matches.length}試合平均</span><strong>${esc(b.name)}</strong></div>${rows.map(row=>`<div><strong>${row[1]}</strong><span>${row[0]}</span><strong>${row[2]}</strong></div>`).join('')}</section><h2 class="rival-section-title-v2">最近の直接対戦</h2><section class="rival-history-v2">${recentRows}</section>`;
+      const renderedSelect=result.querySelector(".rival-opponent-select-v2");
+      if(renderedSelect){renderedSelect.dataset.selectedKey=b.key;renderedSelect.value=b.key;}
     }
     function openForPlayer(playerId){
       fixedPlayerIdV832=String(playerId||'');
+      rivalDisciplineV2=window.__cueScoreRivalReturnV2?.discipline||rivalDisciplineV2||"9ball";
       if(count) count.textContent="";
       returnPlayerIdV832=fixedPlayerIdV832;
       document.getElementById('playerStatsOverlay')?.classList.add('hidden');
@@ -18993,6 +19016,8 @@ let matchRecordsRawCacheV152 = null;
       else backToTitle();
     });
     p2Select.addEventListener("change",()=>{p2Select.dataset.selectedKey=String(p2Select.value||'');render();});
+    result.addEventListener("change",event=>{if(event.target.matches(".rival-opponent-select-v2")){p2Select.value=event.target.value;p2Select.dataset.selectedKey=event.target.value;render();}});
+    result.addEventListener("click",event=>{const discipline=event.target.closest("[data-rival-discipline-v2]");if(discipline){rivalDisciplineV2=discipline.dataset.rivalDisciplineV2||"9ball";render();return;}const row=event.target.closest("[data-rival-record-id]");if(row)window.openMatchDetailV1?.(row.dataset.rivalRecordId);});
     window.openRivalAnalysisForPlayerV832=openForPlayer;
     window.renderVsAnalysisV52=()=>{if(!screen.classList.contains('hidden'))render();};
   })();
@@ -27587,6 +27612,54 @@ body.cue-edge-back-animating-v2 .app{
   document.getElementById("playerStatsBody")?.addEventListener("click",event=>{const opponents=event.target.closest("[data-open-opponents-v2]");if(opponents){const selected=event.currentTarget.querySelector("[data-player-detail-discipline].is-selected")?.dataset.playerDetailDiscipline||"9ball";openRivals(opponents.dataset.openOpponentsV2,selected);return;}const history=event.target.closest("[data-open-player-history-v2]");if(history)openHistory(history.dataset.openPlayerHistoryV2);});
 })();
 </script>
+<style>
+/* CueScore Rival Analysis v2.0 — player journey drill-down */
+.app.vs-analysis-mode .vs-analysis-screen{background:#f7f7f5;color:#171717;overflow:hidden}
+.app.vs-analysis-mode .vs-analysis-header{position:relative;flex:0 0 auto;height:calc(64px + env(safe-area-inset-top));min-height:calc(64px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 12px 0;background:#fff;border-bottom:1px solid #e4e4e0;grid-template-columns:58px minmax(0,1fr) 58px}
+.app.vs-analysis-mode .vs-analysis-back{display:grid;place-items:center;width:52px;height:52px;padding:0;color:#171717;font-size:0}
+.app.vs-analysis-mode .vs-analysis-back::before{content:"‹";font-size:42px;font-weight:300;line-height:1}
+.app.vs-analysis-mode .vs-analysis-title{font-size:22px;font-weight:850}
+.app.vs-analysis-mode .vs-analysis-content{min-height:0;overflow-y:auto;padding:12px 14px max(28px,env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
+.app.vs-analysis-mode .vs-analysis-guide,.app.vs-analysis-mode>.vs-analysis-screen .vs-select-panel,.app.vs-analysis-mode .vs-swap-button{display:none!important}
+.app.vs-analysis-mode #vsAnalysisResult{width:min(100%,720px);margin:0 auto}
+.app.vs-analysis-mode .rival-matchup-v2{display:grid;grid-template-columns:minmax(0,1fr) 50px minmax(0,1fr);align-items:center;padding:14px 10px;border:1px solid #e0e0dc;border-radius:19px;background:#fff}
+.app.vs-analysis-mode .rival-player-v2{display:grid;justify-items:center;min-width:0}
+.app.vs-analysis-mode .rival-avatar-v2{display:grid;place-items:center;width:62px;height:62px;overflow:hidden;border-radius:50%;background:#eee}
+.app.vs-analysis-mode .rival-avatar-image-v2{width:100%;height:100%;object-fit:cover}
+.app.vs-analysis-mode .rival-avatar-fallback-v2{display:grid;place-items:center;width:100%;height:100%;font-size:22px;font-weight:850}
+.app.vs-analysis-mode .rival-player-v2>strong{max-width:100%;margin-top:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:18px}
+.app.vs-analysis-mode .rival-player-v2>small,.app.vs-analysis-mode .rival-player-v2 label>span{margin-top:2px;color:#777773;font-size:9px}
+.app.vs-analysis-mode .rival-player-v2 label{display:grid;justify-items:center;max-width:100%}
+.app.vs-analysis-mode .rival-opponent-select-v2{max-width:120px;border:0;background:transparent;color:#666661;font:700 11px -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;text-align:center}
+.app.vs-analysis-mode .rival-versus-v2{display:grid;justify-items:center;gap:8px;color:#777773;font-size:11px;font-weight:850}
+.app.vs-analysis-mode .rival-versus-v2 img{width:38px;height:38px}
+.app.vs-analysis-mode .rival-disciplines-v2{display:flex;gap:7px;margin:10px 0 0;overflow-x:auto;scrollbar-width:none}
+.app.vs-analysis-mode .rival-disciplines-v2::-webkit-scrollbar{display:none}
+.app.vs-analysis-mode .rival-disciplines-v2 button{flex:0 0 auto;min-height:37px;padding:0 15px;border:1px solid #deded9;border-radius:10px;background:#fff;color:#62625e;font:750 11px -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}
+.app.vs-analysis-mode .rival-disciplines-v2 button.is-selected{border-color:#171717;background:#171717;color:#fff}
+.app.vs-analysis-mode .rival-overview-v2{margin-top:10px;padding:16px;border:1px solid #dfdfdb;border-radius:19px;background:#fff}
+.app.vs-analysis-mode .rival-overview-top-v2{display:grid;grid-template-columns:1fr 1.25fr 1fr;align-items:end}
+.app.vs-analysis-mode .rival-overview-top-v2>div{min-width:0}
+.app.vs-analysis-mode .rival-overview-top-v2 small{display:block;color:#777773;font-size:10px}
+.app.vs-analysis-mode .rival-overview-top-v2 strong{display:block;margin-top:3px;font-size:26px}
+.app.vs-analysis-mode .rival-overview-top-v2>div:last-child{text-align:right}
+.app.vs-analysis-mode .rival-record-v2{display:flex;align-items:baseline;justify-content:center;gap:3px;border-left:1px solid #e5e5e1;border-right:1px solid #e5e5e1}
+.app.vs-analysis-mode .rival-record-v2 strong{display:inline;font-size:30px}.app.vs-analysis-mode .rival-record-v2 span{font-size:10px}
+.app.vs-analysis-mode .rival-form-v2{display:flex;justify-content:center;gap:6px;margin-top:14px}
+.app.vs-analysis-mode .rival-form-v2 i{display:grid;place-items:center;width:27px;height:27px;border-radius:8px;background:#eaf6ed;color:#21813a;font-style:normal;font-size:10px;font-weight:850}
+.app.vs-analysis-mode .rival-form-v2 i.is-loss{background:#fff0ef;color:#b8322b}
+.app.vs-analysis-mode .rival-overview-v2 p{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:13px -2px -2px;padding-top:12px;border-top:1px solid #ecece8}
+.app.vs-analysis-mode .rival-overview-v2 p b{flex:0 0 auto;padding:5px 9px;border-radius:8px;background:#edf6ef;color:#207a36;font-size:11px}.app.vs-analysis-mode .rival-overview-v2 p span{color:#666661;font-size:10px;text-align:right}
+.app.vs-analysis-mode .rival-section-title-v2{margin:18px 3px 8px;font-size:18px}
+.app.vs-analysis-mode .rival-next-v2,.app.vs-analysis-mode .rival-comparison-v2,.app.vs-analysis-mode .rival-history-v2{overflow:hidden;border:1px solid #dfdfdb;border-radius:19px;background:#fff}
+.app.vs-analysis-mode .rival-next-v2 article{display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;align-items:center;padding:13px 14px;border-top:1px solid #ecece8}.app.vs-analysis-mode .rival-next-v2 article:first-child{border-top:0}
+.app.vs-analysis-mode .rival-next-v2 article>i{display:grid;place-items:center;width:30px;height:30px;border:1px solid #202020;border-radius:50%;color:#202020;font-style:normal;font-size:15px;font-weight:850}.app.vs-analysis-mode .rival-next-v2 article>i.is-good{border-color:#25813b;color:#25813b}.app.vs-analysis-mode .rival-next-v2 article>i.is-warn{border-color:#bf4b37;color:#bf4b37}
+.app.vs-analysis-mode .rival-next-v2 small{display:block;color:#777773;font-size:9px}.app.vs-analysis-mode .rival-next-v2 strong{display:block;margin-top:3px;font-size:12px;line-height:1.45}.app.vs-analysis-mode .rival-next-v2 .rival-action-v2{background:#f8f8f6}
+.app.vs-analysis-mode .rival-comparison-v2>div{display:grid;grid-template-columns:1fr 1.35fr 1fr;align-items:center;min-height:43px;border-top:1px solid #ecece8;text-align:center}.app.vs-analysis-mode .rival-comparison-v2>div:first-child{border-top:0;background:#fafaf8}.app.vs-analysis-mode .rival-comparison-v2 span{color:#72726e;font-size:10px}.app.vs-analysis-mode .rival-comparison-v2 strong{font-size:14px}.app.vs-analysis-mode .rival-comparison-head-v2 strong{font-size:11px}
+.app.vs-analysis-mode .rival-history-row-v2{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;width:100%;padding:12px 14px;border:0;border-top:1px solid #ecece8;background:transparent;color:#171717;text-align:left}.app.vs-analysis-mode .rival-history-row-v2:first-child{border-top:0}.app.vs-analysis-mode .rival-history-row-v2>span:first-child small,.app.vs-analysis-mode .rival-history-row-v2>span:first-child strong{display:block}.app.vs-analysis-mode .rival-history-row-v2 small{color:#777773;font-size:9px}.app.vs-analysis-mode .rival-history-row-v2 strong{margin-top:3px;font-size:12px}.app.vs-analysis-mode .rival-history-row-v2>span:last-child{display:grid;grid-template-columns:auto auto auto;align-items:center;gap:8px}.app.vs-analysis-mode .rival-history-row-v2 em{padding:4px 7px;border:1px solid #27833d;border-radius:7px;color:#27833d;font-style:normal;font-size:9px;font-weight:850}.app.vs-analysis-mode .rival-history-row-v2 em.is-loss{border-color:#bd392f;color:#bd392f}.app.vs-analysis-mode .rival-history-row-v2 b{color:#8b8b87;font-size:24px;font-weight:400}
+.app.vs-analysis-mode .vs-empty{margin-top:14px;padding:42px 14px;border:1px solid #dfdfdb;border-radius:19px;background:#fff;color:#777773}
+@media(max-width:380px){.app.vs-analysis-mode .vs-analysis-content{padding-left:10px;padding-right:10px}.app.vs-analysis-mode .rival-matchup-v2{padding:12px 6px}.app.vs-analysis-mode .rival-avatar-v2{width:56px;height:56px}.app.vs-analysis-mode .rival-opponent-select-v2{max-width:100px}}
+</style>
 <style>
 /* CueScore Analysis v2.0 — complete replacement of the legacy analytics UI */
 #rankingsScreen>.analytics-shell-v1,#rankingsScreen>.rankings-header,#rankingsScreen>.rankings-content{display:none!important}

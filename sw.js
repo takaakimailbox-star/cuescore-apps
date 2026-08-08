@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-player-navigation-v5";
+const APP_VERSION = "1.0-rival-analysis-v2";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
