@@ -24,6 +24,10 @@ assert.match(html,/window\.__cueScoreRivalReturnV2=\{playerId:rivalState\.player
 assert.match(html,/window\.openPlayerOpponentRecordsV2\(opponentReturn\.playerId,opponentReturn\.discipline\|\|'9ball'\)/);
 assert.doesNotMatch(html,/data-player-record-open-v3/);
 assert.match(html,/<button class=\"journey-match-v2 journey-match-v3\" type=\"button\" data-player-record-id/);
+assert.match(html,/journey-match-score-v3\"><strong class=\"\$\{isWin\?\"winner\":\"loser\"\}\"/);
+assert.match(html,/\.journey-match-score-v3 \.loser\{color:#777775;font-weight:450\}/);
+assert.match(html,/record-match-avatar-v3/);
+assert.match(html,/recordPlayerV3 = data => recordPlayersV3\.find/);
 assert.match(html,/hide\(historyRoot\);opener\(String\(recordId\|\|\"\"\)\)/);
 assert.match(html,/returnToPlayerHistoryV4=false;show\(historyRoot\)/);
 assert.match(html,/window\.openMatchDetailV1\|\|window\.openHistoricalRecordV2/);

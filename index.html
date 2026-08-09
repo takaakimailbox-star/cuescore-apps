@@ -16216,6 +16216,8 @@ let matchRecordsRawCacheV152 = null;
       recordsRenderLimitV154 = RECORD_RENDER_BATCH_V154;
     }
     const visibleRecordsV154 = records.slice(0, recordsRenderLimitV154);
+    const recordPlayersV3 = readPlayerLibrary();
+    const recordPlayerV3 = data => recordPlayersV3.find(item => String(item.id) === String(data?.registeredPlayerId || "")) || data || {};
     const remainingV154 = Math.max(0, records.length - visibleRecordsV154.length);
     const cardsHtmlV154 = visibleRecordsV154.map(record=>{
       const p1=record.players?.[1]||{}, p2=record.players?.[2]||{};
@@ -16226,10 +16228,11 @@ let matchRecordsRawCacheV152 = null;
       const gameIconV2 = recordsDisciplineDefsV2.find(item => item.id === disciplineV2)?.asset || recordsDisciplineDefsV2[2].asset;
       const goal1V2 = Number(p1.goal)||0, goal2V2 = Number(p2.goal)||0;
       const raceV2 = goal1V2 === goal2V2 ? goal1V2 : `${goal1V2} / ${goal2V2}`;
+      const p1ProfileV3 = recordPlayerV3(p1), p2ProfileV3 = recordPlayerV3(p2);
       return `<button class="record-card" type="button" data-record-id="${escapeRecordText(record.id)}">
         <img class="record-game-icon-v2" src="${gameIconV2}" alt="">
         <span class="record-date-compact">${formatRecordListDate(record.endedAt||record.playedAt)}</span>
-        <span class="record-matchup">${escapeRecordText(p1.name||"Player1")} <small>vs</small> ${escapeRecordText(p2.name||"Player2")}</span>
+        <span class="record-matchup"><span class="record-match-player-v3"><span class="record-match-avatar-v3">${playerAvatarHtmlV2(p1ProfileV3)}</span><strong>${escapeRecordText(p1.name||"Player1")}</strong></span><small>vs</small><span class="record-match-player-v3"><span class="record-match-avatar-v3">${playerAvatarHtmlV2(p2ProfileV3)}</span><strong>${escapeRecordText(p2.name||"Player2")}</strong></span></span>
         <span class="record-race-v2">Race to ${raceV2}</span>
         <span class="record-final-score">${resultScore}</span>
         <span class="record-chevron-v1" aria-hidden="true">›</span>
@@ -23298,7 +23301,9 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
 .records-list .record-matchup{
   grid-area:matchup!important;
   min-width:0!important;
-  display:block!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:5px!important;
   color:var(--cue-history-text)!important;
   font-size:clamp(14px,3.85vw,17px)!important;
   line-height:1.2!important;
@@ -23307,6 +23312,10 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
   overflow:hidden!important;
   text-overflow:ellipsis!important;
 }
+.record-match-player-v3{display:flex;min-width:0;align-items:center;gap:4px}
+.record-match-player-v3 strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.record-match-avatar-v3{display:grid;flex:0 0 25px;width:25px;height:25px;place-items:center;overflow:hidden;border-radius:50%;background:#eee}
+.record-match-avatar-v3 .player-avatar-v2{width:100%;height:100%;object-fit:cover}
 .records-list .record-matchup small{
   margin:0 4px;
   color:#777775;
@@ -27570,7 +27579,9 @@ body.cue-edge-back-animating-v2 .app{
 .journey-match-vs-v3{flex:none;color:#777773;font-size:10px;font-weight:700}
 .journey-match-opponent-avatar-v3{display:grid;flex:0 0 28px;place-items:center;width:28px;height:28px;overflow:hidden;border-radius:50%;background:#eee}.journey-match-opponent-avatar-v3 .player-avatar-v2{width:100%;height:100%;object-fit:cover}
 .journey-match-opponent-v3 strong{min-width:0;overflow:hidden;font-size:13px;text-overflow:ellipsis;white-space:nowrap}
-.journey-match-score-v3{grid-area:score;align-self:center;color:#171717;font-size:18px;font-weight:850;white-space:nowrap;font-variant-numeric:tabular-nums}
+.journey-match-score-v3{grid-area:score;display:flex;align-self:center;align-items:center;gap:4px;color:#777775;font-size:18px;font-weight:500;white-space:nowrap;font-variant-numeric:tabular-nums}
+.journey-match-score-v3 .winner{color:#171717;font-weight:850}
+.journey-match-score-v3 .loser{color:#777775;font-weight:450}
 .journey-match-v3 .journey-match-open-v3{grid-area:chevron;align-self:center;width:12px;height:auto;background:transparent!important;font-size:28px}
 @media(max-width:390px){
   .player-detail-profile-card-v2{grid-template-columns:62px minmax(0,1fr)}
@@ -27623,7 +27634,7 @@ body.cue-edge-back-animating-v2 .app{
   function renderHistory(){const p=player(historyState.playerId);if(!p)return;const all=records(p),summary=stats(all,p);let items=historyState.filter==="all"?all:all.filter(r=>disc(r)===historyState.filter);if(historyState.period==="month"){const now=new Date();items=items.filter(r=>{const d=timeOf(r);return d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth();});}const grouped=new Map();items.forEach(r=>{const d=timeOf(r),key=Number.isNaN(d.getTime())?"日付なし":`${d.getFullYear()}年${d.getMonth()+1}月`;if(!grouped.has(key))grouped.set(key,[]);grouped.get(key).push(r);});historyRoot.querySelector(".player-journey-shell-v2").innerHTML=`
     <section class="player-journey-card-v2 journey-history-profile-v2"><span class="journey-avatar-v2">${avatar(p)}</span><span><strong>${esc(p.name)}</strong><span class="journey-history-stats-v2"><span>全${summary.games}試合</span><span>${summary.wins}勝 ${summary.losses}敗</span><span>勝率 ${summary.rate}%</span></span></span></section>
     <div class="journey-filter-v2" role="tablist" aria-label="ゲーム種目"><button role="tab" aria-selected="${historyState.filter==="all"}" class="${historyState.filter==="all"?"is-selected":""}" data-history-filter="all"><span class="journey-history-all-icon-v3">ALL</span><span>すべて</span></button>${defs.map(d=>`<button role="tab" aria-selected="${historyState.filter===d.id}" class="${historyState.filter===d.id?"is-selected":""}" data-history-filter="${d.id}"><img src="${d.asset}" alt=""><span>${d.label}</span></button>`).join("")}<button data-history-period class="${historyState.period==="month"?"is-selected":""}">${historyState.period==="month"?"今月":"期間"}</button></div>
-    ${items.length?[...grouped.entries()].map(([month,rows])=>`<div class="journey-month-v2">${month}</div><div class="journey-list-v2">${rows.map(r=>{const s=side(r,p),o=opponentLibrary(opponent(r,s)),d=def(disc(r)),dt=timeOf(r),isWin=won(r,s),weekdays=["日","月","火","水","木","金","土"];const date=Number.isNaN(dt.getTime())?"日付なし":`${dt.getFullYear()}/${String(dt.getMonth()+1).padStart(2,"0")}/${String(dt.getDate()).padStart(2,"0")}（${weekdays[dt.getDay()]}） ${String(dt.getHours()).padStart(2,"0")}:${String(dt.getMinutes()).padStart(2,"0")}`;return `<button class="journey-match-v2 journey-match-v3" type="button" data-player-record-id="${esc(r.id)}" aria-label="${esc(d.label)} ${esc(o.name||"対戦相手")}との試合詳細を開く"><span class="journey-game-v2"><img src="${d.asset}" alt=""><small>${d.label}</small></span><span class="journey-match-date-v3">${date}</span><span class="journey-match-race-v3">${esc(raceOf(r))}</span><span class="journey-match-opponent-v3"><span class="journey-match-result-v3 ${isWin?"":"loss"}">${isWin?"勝ち":"負け"}</span><span class="journey-match-vs-v3">vs</span><span class="journey-match-opponent-avatar-v3">${avatar(o)}</span><strong>${esc(o.name||"対戦相手")}</strong></span><strong class="journey-match-score-v3">${scoreOf(r,s)} - ${scoreOf(r,s===1?2:1)}</strong><span class="journey-match-open-v3" aria-hidden="true">›</span></button>`;}).join("")}</div>`).join(""):`<div class="player-journey-card-v2 journey-empty-v2">条件に一致する試合履歴はありません。</div>`}`;}
+    ${items.length?[...grouped.entries()].map(([month,rows])=>`<div class="journey-month-v2">${month}</div><div class="journey-list-v2">${rows.map(r=>{const s=side(r,p),o=opponentLibrary(opponent(r,s)),d=def(disc(r)),dt=timeOf(r),isWin=won(r,s),weekdays=["日","月","火","水","木","金","土"];const date=Number.isNaN(dt.getTime())?"日付なし":`${dt.getFullYear()}/${String(dt.getMonth()+1).padStart(2,"0")}/${String(dt.getDate()).padStart(2,"0")}（${weekdays[dt.getDay()]}） ${String(dt.getHours()).padStart(2,"0")}:${String(dt.getMinutes()).padStart(2,"0")}`;return `<button class="journey-match-v2 journey-match-v3" type="button" data-player-record-id="${esc(r.id)}" aria-label="${esc(d.label)} ${esc(o.name||"対戦相手")}との試合詳細を開く"><span class="journey-game-v2"><img src="${d.asset}" alt=""><small>${d.label}</small></span><span class="journey-match-date-v3">${date}</span><span class="journey-match-race-v3">${esc(raceOf(r))}</span><span class="journey-match-opponent-v3"><span class="journey-match-result-v3 ${isWin?"":"loss"}">${isWin?"勝ち":"負け"}</span><span class="journey-match-vs-v3">vs</span><span class="journey-match-opponent-avatar-v3">${avatar(o)}</span><strong>${esc(o.name||"対戦相手")}</strong></span><span class="journey-match-score-v3"><strong class="${isWin?"winner":"loser"}">${scoreOf(r,s)}</strong><span>−</span><strong class="${isWin?"loser":"winner"}">${scoreOf(r,s===1?2:1)}</strong></span><span class="journey-match-open-v3" aria-hidden="true">›</span></button>`;}).join("")}</div>`).join(""):`<div class="player-journey-card-v2 journey-empty-v2">条件に一致する試合履歴はありません。</div>`}`;}
   function openHistory(id){historyState={playerId:String(id),filter:"all",period:"all"};document.getElementById("playerStatsOverlay")?.classList.add("hidden");renderHistory();show(historyRoot);}
   window.openPlayerOpponentRecordsV2=openRivals;window.openPlayerMatchHistoryV2=openHistory;
   rivalRoot.addEventListener("click",event=>{if(event.target.closest("[data-rival-opponent]"))window.__cueScoreRivalReturnV2={playerId:rivalState.playerId,discipline:rivalState.discipline};},true);
