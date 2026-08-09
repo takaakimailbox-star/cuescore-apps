@@ -22590,7 +22590,18 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
   }
 
   function historyRowsV1(record) {
-    const events=Array.isArray(record?.eventLog?.events) ? record.eventLog.events : [];
+    const commonEvents=Array.isArray(record?.eventLog?.events) ? record.eventLog.events : [];
+    // Sample Data and older detailed records can retain the canonical analysis
+    // event stream without duplicating it in eventLog. Normalize that stream
+    // here so Match Detail follows the same stored facts as Analytics.
+    const events=commonEvents.length ? commonEvents : (Array.isArray(record?.analysis?.events) ? record.analysis.events.map(event=>({
+      ...event,
+      sourceType:event.type,
+      type:({break_result:"Break",ball_pocketed:"Shot",carom_point:"Shot",safety:"Safety",foul:"Foul",consecutive_foul:"FoulCount"})[event.type] || event.type,
+      rackNumber:event.rack,
+      inningNumber:event.inning,
+      data:event
+    })) : []);
     if(!events.length) return [];
     const rowMap=new Map();
     const rows=[];
