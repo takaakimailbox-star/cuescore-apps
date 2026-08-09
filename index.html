@@ -25235,16 +25235,16 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
             <span></span><span class="settings-data-chevron-v1" aria-hidden="true">›</span>
           </button>
         </section>
-        <h1 class="settings-formal-section-title-v1">開発・デモ</h1>
+        <h1 class="settings-formal-section-title-v1">サンプルデータ</h1>
         <section class="settings-demo-card-v1" aria-label="Official Demo Data">
-          <div class="settings-demo-head-v1"><strong>Official Demo Data</strong><span class="settings-demo-state-v1" id="settingsDemoStateV1">通常モード</span></div>
-          <p class="settings-demo-note-v1">デモデータは専用領域に保存されます。作成・切替・リセット・削除を行っても、通常のプレーヤー、対戦履歴、設定、メインプレーヤーは変更されません。</p>
+          <div class="settings-demo-head-v1"><strong>Official Demo Data</strong><span class="settings-demo-state-v1" id="settingsDemoStateV1">通常データ</span></div>
+          <p class="settings-demo-note-v1">アプリの画面と機能を試せます。通常のデータには影響しません。</p>
           <div class="settings-demo-actions-v1">
-            <button type="button" data-demo-action="create">作成／再読込</button>
-            <button type="button" class="is-primary" data-demo-action="enter">デモへ切替</button>
-            <button type="button" data-demo-action="normal">通常へ戻る</button>
-            <button type="button" data-demo-action="reset">デモをリセット</button>
-            <button type="button" class="is-danger" data-demo-action="delete">デモを削除</button>
+            <button type="button" data-demo-action="create">準備する</button>
+            <button type="button" class="is-primary" data-demo-action="enter">サンプルを見る</button>
+            <button type="button" data-demo-action="normal">通常データへ戻る</button>
+            <button type="button" data-demo-action="reset">初期状態に戻す</button>
+            <button type="button" class="is-danger" data-demo-action="delete">削除</button>
           </div>
         </section>
         <div class="settings-formal-spacer-v1" aria-hidden="true"></div>
@@ -25270,7 +25270,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     const demoMode = Boolean(demoApi?.isDemo());
     const demoState = root.querySelector("#settingsDemoStateV1");
     if (demoState) {
-      demoState.textContent = demoMode ? "デモモード" : "通常モード";
+      demoState.textContent = demoMode ? "サンプルデータ" : "通常データ";
       demoState.classList.toggle("is-demo", demoMode);
     }
     root.querySelectorAll("[data-settings-action]").forEach(button => {
@@ -25315,7 +25315,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     }
     const action = event.target.closest("[data-settings-action]")?.dataset.settingsAction;
     if (action && action !== "delete" && demoApi?.isDemo()) {
-      alert("デモモード中は書き出し・復元を利用できません。通常データは変更されません。");
+      alert("サンプルデータ表示中は書き出し・復元を利用できません。通常データは変更されません。");
       return;
     }
     if (action === "cloud") document.getElementById("settingsOpenCloudBtn")?.click();
@@ -25330,21 +25330,21 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
         return;
       }
       const normalSafe = "通常データは変更されません。";
-      if (demoAction === "create" && confirm(`公式デモデータ（10名・900試合・全6種目・詳細記録）を作成／再読込します。\n${normalSafe}`)) {
+      if (demoAction === "create" && confirm(`Official Demo Data（10名・900試合・全6種目・詳細記録）を準備します。\n${normalSafe}`)) {
         demoApi.create();
         alert(`公式デモデータを準備しました。\n${normalSafe}`);
       }
-      if (demoAction === "enter" && confirm(`公式デモデータへ切り替えます。\n${normalSafe}`)) {
+      if (demoAction === "enter" && confirm(`サンプルデータを表示します。\n${normalSafe}`)) {
         demoApi.create(); demoApi.setMode("demo"); location.reload();
       }
-      if (demoAction === "normal" && confirm(`通常データへ戻ります。デモデータは保持されます。\n${normalSafe}`)) {
+      if (demoAction === "normal" && confirm(`通常データへ戻ります。サンプルデータは保持されます。\n${normalSafe}`)) {
         demoApi.setMode("normal"); location.reload();
       }
-      if (demoAction === "reset" && confirm(`デモデータを初期状態へ戻します。デモ中の変更は失われます。\n${normalSafe}`)) {
+      if (demoAction === "reset" && confirm(`サンプルデータを初期状態へ戻します。サンプルデータでの変更は失われます。\n${normalSafe}`)) {
         demoApi.create();
         if (demoApi.isDemo()) location.reload(); else alert(`デモデータを初期状態へ戻しました。\n${normalSafe}`);
       }
-      if (demoAction === "delete" && confirm(`デモデータだけを削除します。\n${normalSafe}`)) {
+      if (demoAction === "delete" && confirm(`サンプルデータだけを削除します。\n${normalSafe}`)) {
         const wasDemo = demoApi.isDemo(); demoApi.remove();
         if (wasDemo) location.reload(); else alert(`デモデータを削除しました。\n${normalSafe}`);
       }

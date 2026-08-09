@@ -30,7 +30,7 @@ Supported release scope:
 
 Suggested review path:
 1. Launch CueScore Apps.
-2. Open Official Demo Data from Settings and switch to the isolated demo data area.
+2. Open Sample Data from Settings and select “View Sample” to enter the isolated Official Demo Data area.
 3. Review Players, History, and Analytics.
 4. Start a new match and proceed through match entry.
 5. Complete the match and confirm the saved result appears in History and Analytics.

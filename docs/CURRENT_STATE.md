@@ -60,7 +60,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 
 - Privacy Policy URL、Support URL、公開用連絡先
 - App Review担当者の氏名・メール・電話番号
-- Official Demo Dataの本番向け名称・導線案のProduct Owner承認
+- Privacy Policy / Support / Terms of Useの正式URL採用
 - 提出ビルドとPrivacy Policy / Review Notesの最終一致
 
 ## Active Decisions
@@ -70,6 +70,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - v1.0ではCSVと自動クラウド同期をLaterとして扱う。
 - App Store v1.0 release profileはCSV・クラウド同期を無効化し、関連UIを表示しない。
 - Official Demo Dataは提出ビルドに収録し、通常データとの完全分離を維持する。
+- Official Demo Dataの本番向け表示は「サンプルデータ」を採用し、状態を「通常データ／サンプルデータ」、操作を「準備する／サンプルを見る／通常データへ戻る／初期状態に戻す／削除」とする。
 
 ## v1.0 RC Verification
 

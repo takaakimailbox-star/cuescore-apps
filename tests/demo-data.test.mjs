@@ -2,6 +2,15 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import vm from "node:vm";
 
+const html = fs.readFileSync(new URL("../index.html", import.meta.url), "utf8");
+assert.match(html, /サンプルデータ/);
+assert.match(html, /通常データ/);
+assert.match(html, /準備する/);
+assert.match(html, /サンプルを見る/);
+assert.match(html, /通常データへ戻る/);
+assert.match(html, /初期状態に戻す/);
+assert.match(html, /アプリの画面と機能を試せます。通常のデータには影響しません。/);
+
 class MemoryStorage {
   #values = new Map();
   get length() { return this.#values.size; }
