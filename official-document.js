@@ -1,0 +1,1 @@
+const source=document.body.dataset.source;const output=document.querySelector("[data-document]");fetch(source).then(r=>{if(!r.ok)throw new Error("Document unavailable");return r.text()}).then(text=>{output.textContent=text}).catch(()=>{output.textContent="公式文書を読み込めませんでした。公開前に配置を確認してください。"});

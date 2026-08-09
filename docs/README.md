@@ -16,6 +16,13 @@ The following seven documents are the current official specification set:
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
 7. `official/07_CueScore_Official_Design_Decision_Log_v1.0_Official_Release.docx`
 
+The App Store v1.0 official release package is managed separately under
+`official/app-store-v1.0/`:
+
+- `public/`: Privacy Policy, Terms of Use, and Support source documents.
+- `submission/`: App Store Description, Keywords, Review Notes, and Release Notes.
+- Unconfirmed URLs and contact details remain unset and must not be inferred.
+
 Design System v2.0 is the official successor to Design System v1.0, whose
 source file is not present in the current official archive.
 
