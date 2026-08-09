@@ -12,6 +12,22 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 3. 本ファイルは運用上の現在状態であり、正式仕様を新規作成しない。
 4. 正式資料と矛盾した場合は推測せずProduct Ownerへ確認する。
 
+## App Store v1.0 RC：競技別プレーヤー統計4指標（2026年8月9日）
+
+- Product Owner採用済み仕様として、プレーヤー詳細の4カードを競技タブ別に切り替える実装へ更新。
+- Rotation：試合数／ハイラン／シュート成功率／ブレイクイン率。
+- 9 Ball・10 Ball：試合数／マス割率／シュート成功率／ブレイクイン率。
+- JPA 9 Ball：試合数／シュート成功率／ブレイクイン率／平均イニング。
+- Straight Pool（14.1）：試合数／ハイラン／シュート成功率／平均得点/イニング。
+- Three Cushion（3C）：試合数／ハイラン／平均得点/イニング／おすすめ持ち点。
+- ブレイクイン率は、自分のブレイクのうち「1球以上入球かつファールなし」の割合。スクラッチ、その他ファール、イリーガル、ブレイク失敗は入球があっても失敗として集計。
+- 9 Ball／10 Ballのマス割率は、既存のブレイクランアウト判定による成立ラック数 ÷ 対象完了ラック数。既存判定ロジックは変更していない。
+- 14.1／3Cの平均得点/イニングは、保存済み対象試合の総得点 ÷ 完了イニング総数。
+- JPA 9 Ball平均イニングは正式な分母定義が未確定のため、推測せず「—」表示。
+- 3Cおすすめ持ち点はNBA、JPBF、UMB等の公開原典から標準アベレージ対応表の具体値を確認できていないため、推測せず「—」表示。
+- 新規保存項目・データ移行なし。既存試合とサンプルデータから表示時に再計算し、通常データとの分離や保存仕様は変更していない。
+- 正式決定記録：`docs/official/07_CueScore_Official_Design_Decision_Log_v1.1_Official_Release.docx` Decision 017。
+
 ## Repository Baseline
 
 - Repository: `takaakimailbox-star/cuescore-apps`
@@ -29,7 +45,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 ## Current Implementation State
 
 - CueScore AppsはiPhone縦画面向けPWAとして実装されている。
-- Official Demo Dataは通常ユーザーデータと分離された開発・デモ用機能として扱う。
+- Official Demo Dataは製品上「サンプルデータ」と表示し、通常ユーザーデータと完全分離して扱う。
 - バックアップ/復元およびプレーヤー写真の実装経路を現行コードで確認済み。
 - CSV出力およびクラウド同期関連コードは将来再利用のため残しているが、App Store v1.0 release profileでは非提供。
 - ネイティブiOSプロジェクトおよびApp Store本審査提出は開始していない。
