@@ -68,3 +68,17 @@ Stop and request direction when:
 - the change could alter stored-data compatibility;
 - the change requires deleting or replacing an existing workflow;
 - Product Owner approval is required by an official document.
+
+## Shared Current State
+
+Before every implementation task, also review:
+
+- `docs/CURRENT_STATE.md`
+
+`docs/CURRENT_STATE.md` is the shared operational-state reference used by ChatGPT and Codex. It does not replace the Official Release specifications.
+
+- Verify current implementation facts in the repository; do not copy old chat assumptions into `CURRENT_STATE.md`.
+- After a completed task, update `docs/CURRENT_STATE.md` when the task changes implementation state, active decisions, deferred work, or retired directions.
+- Record completed facts, not planned work.
+- Commit the related `CURRENT_STATE.md` update together with the implementation change whenever practical.
+- If `CURRENT_STATE.md` conflicts with an Official Release source, the Official Release source wins and work must stop for Product Owner confirmation.
