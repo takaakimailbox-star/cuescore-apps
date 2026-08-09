@@ -2,6 +2,17 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 
 const html = fs.readFileSync(new URL("../index.html", import.meta.url), "utf8");
+const sw = fs.readFileSync(new URL("../sw.js", import.meta.url), "utf8");
+const manifest = fs.readFileSync(new URL("../manifest.webmanifest", import.meta.url), "utf8");
+assert.match(sw, /const APP_VERSION = "2\.0-[^"]+"/);
+assert.match(html, /id:"app-store-v1"/);
+assert.match(html, /csvExport:false/);
+assert.match(html, /cloudSync:false/);
+assert.match(html, /officialDemoData:true/);
+assert.match(html, /data-settings-action="cloud" data-release-feature="cloud-sync" hidden/);
+assert.match(html, /data-settings-action="export"/);
+assert.match(html, /data-release-feature="csv-export" hidden/);
+assert.doesNotMatch(manifest, /クラウド同期を利用できます/);
 const lifecycleStart = html.indexOf("// CueScore RC59: PWA lifecycle");
 const lifecycleEnd = html.indexOf("// CueScore Rotation Scoreboard", lifecycleStart);
 assert.ok(lifecycleStart >= 0 && lifecycleEnd > lifecycleStart, "PWA lifecycle block must exist");

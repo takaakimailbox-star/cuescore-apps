@@ -1,10 +1,18 @@
-const APP_VERSION = "2.0-detailed-demo-year-v1";
+const APP_VERSION = "2.0-app-store-v1-rc-alignment-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
   "./demo-data.js",
   "./manifest.webmanifest",
+  "./privacy.html",
+  "./terms.html",
+  "./support.html",
+  "./official-pages.css",
+  "./official-document.js",
+  "./docs/official/app-store-v1.0/public/CueScore_Privacy_Policy_v1.0_Official.md",
+  "./docs/official/app-store-v1.0/public/CueScore_Terms_of_Use_v1.0_Official.md",
+  "./docs/official/app-store-v1.0/public/CueScore_Support_v1.0_Official.md",
   "./src/assets/logo/CueScore_Logo_Horizontal_Black.svg",
   "./src/assets/logo/CueScore_Logo_Horizontal_White.svg",
   "./src/assets/logo/CueScore_LogoMark_Black.svg",

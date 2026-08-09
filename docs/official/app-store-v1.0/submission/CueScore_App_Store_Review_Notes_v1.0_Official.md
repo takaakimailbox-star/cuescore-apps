@@ -30,7 +30,7 @@ Supported release scope:
 
 Suggested review path:
 1. Launch CueScore Apps.
-2. Open the demo/development area from Settings and switch to Official Demo Data if available in the submitted build.
+2. Open Official Demo Data from Settings and switch to the isolated demo data area.
 3. Review Players, History, and Analytics.
 4. Start a new match and proceed through match entry.
 5. Complete the match and confirm the saved result appears in History and Analytics.
@@ -42,7 +42,7 @@ No paid subscription or external purchase is required to review the Version 1.0 
 以下は実ビルド確認後に必ず更新すること。
 
 - [ ] App Review担当者がアクセスできる正確なメニュー名称
-- [ ] Official Demo Data が本番ビルドに残るかどうか
+- [x] Official Demo Data を本番ビルドに収録する
 - [ ] バックアップ／復元が提出ビルドで完成している
 - [ ] プレーヤー写真が提出ビルドで完成している
 - [ ] オフライン動作を実機確認済み

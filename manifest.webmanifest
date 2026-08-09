@@ -2,7 +2,7 @@
   "id": "./",
   "name": "CueScore Apps",
   "short_name": "CueScore",
-  "description": "複数のキュースポーツに対応するCueScore統合アプリ。試合記録、分析、履歴、統計、クラウド同期を利用できます。",
+  "description": "複数のキュースポーツに対応するCueScore統合アプリ。試合記録、分析、履歴、統計をオフラインでも利用できます。",
   "lang": "ja",
   "start_url": "./index.html",
   "scope": "./",

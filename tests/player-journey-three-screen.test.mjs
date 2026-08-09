@@ -42,6 +42,6 @@ assert.match(html,/select\.dispatchEvent\(new Event\("change",\{bubbles:true\}\)
 assert.doesNotMatch(html,/player-journey-overlay-v2[\s\S]{0,800}player-detail-bottom-nav-v1/);
 assert.match(html,/CueScore player journey v2\.1/);
 assert.match(html,/grid-template-columns:auto auto auto auto minmax\(58px,1fr\)/);
-assert.match(serviceWorker,/const APP_VERSION = "1\.0-[^"]+"/);
+assert.match(serviceWorker,/const APP_VERSION = "2\.0-[^"]+"/);
 
 console.log("Player information, opponent records, and player history three-screen checks passed.");

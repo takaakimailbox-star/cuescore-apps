@@ -31,7 +31,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - CueScore AppsはiPhone縦画面向けPWAとして実装されている。
 - Official Demo Dataは通常ユーザーデータと分離された開発・デモ用機能として扱う。
 - バックアップ/復元およびプレーヤー写真の実装経路を現行コードで確認済み。
-- CSV出力およびクラウド同期関連コードも現行実装内に存在する。
+- CSV出力およびクラウド同期関連コードは将来再利用のため残しているが、App Store v1.0 release profileでは非提供。
 - ネイティブiOSプロジェクトおよびApp Store本審査提出は開始していない。
 
 ## App Store v1.0公開準備
@@ -60,8 +60,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 
 - Privacy Policy URL、Support URL、公開用連絡先
 - App Review担当者の氏名・メール・電話番号
-- Official Demo Dataを提出ビルドに残すか
-- CSV・クラウド同期関連UIとコードをv1.0提出ビルドで非提供にする方法
+- Official Demo Dataの本番向け名称・導線案のProduct Owner承認
 - 提出ビルドとPrivacy Policy / Review Notesの最終一致
 
 ## Active Decisions
@@ -69,3 +68,11 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - GitHub上の正式資料と本ファイルをChatGPT/Codexの共通参照に使う。
 - v1.0ではバックアップ/復元とプレーヤー写真を採用する。
 - v1.0ではCSVと自動クラウド同期をLaterとして扱う。
+- App Store v1.0 release profileはCSV・クラウド同期を無効化し、関連UIを表示しない。
+- Official Demo Dataは提出ビルドに収録し、通常データとの完全分離を維持する。
+
+## v1.0 RC Verification
+
+- 回帰テスト計画: `docs/implementation/CueScore_App_Store_v1.0_RC_Regression_Test_Plan_2026-08-09.md`
+- Service Workerの現行2.0系版番号にテスト期待値を統一。
+- 自動テスト14件の全成功をRC整合変更の必須条件とする。

@@ -8543,7 +8543,7 @@ body {
           <strong class="records-count" id="recordsCount">0試合</strong>
           <span id="recordsCloudStatusV1">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18h10.5a3.5 3.5 0 0 0 .35-6.98A6 6 0 0 0 6.4 9.6 4.25 4.25 0 0 0 7 18Z"/><path d="M12 11v7m0 0-2.5-2.5M12 18l2.5-2.5"/></svg>
-            <span data-records-cloud-label-v1>クラウド同期：最新</span>
+            <span data-records-cloud-label-v1>端末に保存</span>
           </span>
         </div>
       </div>
@@ -8676,7 +8676,7 @@ body {
           <p>登録プレーヤーと対戦履歴を、1つのバックアップファイルに保存します。</p>
         </section>
 
-        <section class="cloud-settings-card" aria-label="Supabaseクラウド同期">
+        <section class="cloud-settings-card" aria-label="Supabaseクラウド同期" data-release-feature="cloud-sync" hidden>
           <h2>Supabaseクラウド同期</h2>
           <p>接続設定を確認し、iPhone・Macで同じDevice IDを入力して同期します。メール登録やログインは不要です。</p>
           <div class="cloud-field">
@@ -8764,7 +8764,7 @@ body {
           <span>端末へJSONファイルを保存</span>
         </button>
 
-        <button class="data-action-button csv-export" id="exportCsvBtn" type="button">
+        <button class="data-action-button csv-export" id="exportCsvBtn" type="button" data-release-feature="csv-export" hidden>
           <strong>絞り込み結果をCSVで書き出す</strong>
           <span>1選手1行・Excel分析向け（現在の条件を反映）</span>
         </button>
@@ -8797,7 +8797,7 @@ body {
         <div class="settings-version">Version 1.0</div>
       </header>
       <div class="settings-content">
-        <section class="settings-card">
+        <section class="settings-card" data-release-feature="cloud-sync" hidden>
           <h2>クラウド同期</h2>
           <div class="settings-row"><div class="settings-label">Device ID</div><div class="settings-value" id="settingsDeviceIdValue">未設定</div></div>
           <div class="settings-actions"><button class="settings-button" id="settingsCopyDeviceIdBtn" type="button">Device IDをコピー</button><button class="settings-button" id="settingsOpenCloudBtn" type="button">クラウド詳細</button></div>
@@ -8805,7 +8805,7 @@ body {
           <div class="settings-row"><div class="settings-label">現在のRevision</div><div class="settings-value" id="settingsRevisionValue">未確認</div></div>
           <div class="settings-status" id="settingsCloudStatus"></div>
         </section>
-        <section class="settings-card">
+        <section class="settings-card" data-release-feature="cloud-sync" hidden>
           <h2>世代バックアップ</h2>
           <div class="settings-row"><label class="settings-label" for="settingsGenerationCount">保持件数</label><input class="settings-number" id="settingsGenerationCount" type="number" min="1" max="30" step="1" value="10"></div>
           <p>クラウド保存時に保持する世代数です。1〜30件で設定できます。保存時にクラウド履歴へ即時反映されます。</p>
@@ -8916,12 +8916,18 @@ body {
   
   <script src="./demo-data.js"></script>
   <script>
-  // CueScore feature access v1.0: future purchase/subscription state connects here.
+  // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
+    window.CueScoreReleaseProfile = Object.freeze({
+      id:"app-store-v1",
+      csvExport:false,
+      cloudSync:false,
+      officialDemoData:true
+    });
     const defaults = Object.freeze({
-      detailedAnalytics:true, ranking:true, cloudSync:true, backup:true,
+      detailedAnalytics:true, ranking:true, cloudSync:false, backup:true,
       dataSharing:true, seasonManagement:true, aiAnalysis:true,
-      csvExport:true, advancedFeatures:true
+      csvExport:false, advancedFeatures:true
     });
     let entitlementProvider = null;
     const access = key => {
@@ -9717,7 +9723,7 @@ let matchRecordsRawCacheV152 = null;
   function updateRecordsCloudStatusV1() {
     const status = document.getElementById("recordsCloudStatusV1");
     if (!status) return;
-    const label = navigator.onLine ? "クラウド同期：最新" : "オフライン：端末に保存";
+    const label = navigator.onLine ? "端末に保存" : "オフライン：端末に保存";
     const labelNode = status.querySelector("[data-records-cloud-label-v1]");
     if (labelNode) labelNode.textContent = label;
   }
@@ -18470,6 +18476,7 @@ let matchRecordsRawCacheV152 = null;
 
     let cloudReconcileInFlightV118 = null;
     async function reconcileCloudAfterResumeV118({ retryPending = true } = {}) {
+      if (!window.CueScoreFeatureAccess.canUse("cloudSync")) return { state: "disabled-for-release" };
       if (cloudReconcileInFlightV118) return cloudReconcileInFlightV118;
       cloudReconcileInFlightV118 = (async () => {
         if (!navigator.onLine) return { state: "offline" };
@@ -25206,15 +25213,15 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       <main class="settings-formal-main-v1">
         <h1 class="settings-formal-section-title-v1">データ管理</h1>
         <section class="settings-data-card-v1" aria-label="データ管理">
-          <button class="settings-data-row-v1" type="button" data-settings-action="cloud">
+          <button class="settings-data-row-v1" type="button" data-settings-action="cloud" data-release-feature="cloud-sync" hidden>
             <span class="settings-data-icon-v1">${icon.cloud}</span>
             <span class="settings-data-copy-v1"><strong>クラウド同期</strong><span>データをクラウドと同期します</span></span>
             <span class="settings-cloud-state-v1 is-muted" id="settingsFormalCloudStateV1">${icon.check}<span>未設定</span></span>
             <span class="settings-data-chevron-v1" aria-hidden="true">›</span>
           </button>
-          <button class="settings-data-row-v1" type="button" data-settings-action="csv">
+          <button class="settings-data-row-v1" type="button" data-settings-action="export">
             <span class="settings-data-icon-v1">${icon.csv}</span>
-            <span class="settings-data-copy-v1"><strong>CSVエクスポート</strong><span>対戦履歴やプレーヤーデータを出力します</span></span>
+            <span class="settings-data-copy-v1"><strong>バックアップ</strong><span>データを書き出して保管します</span></span>
             <span></span><span class="settings-data-chevron-v1" aria-hidden="true">›</span>
           </button>
           <button class="settings-data-row-v1" type="button" data-settings-action="restore">
@@ -25308,11 +25315,11 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     }
     const action = event.target.closest("[data-settings-action]")?.dataset.settingsAction;
     if (action && action !== "delete" && demoApi?.isDemo()) {
-      alert("デモモード中はクラウド同期・書き出し・復元を利用できません。通常データは変更されません。");
+      alert("デモモード中は書き出し・復元を利用できません。通常データは変更されません。");
       return;
     }
     if (action === "cloud") document.getElementById("settingsOpenCloudBtn")?.click();
-    if (action === "csv") document.getElementById("exportCsvBtn")?.click();
+    if (action === "export") window.openCueScoreSettingsSuiteV2?.("export");
     if (action === "restore") document.getElementById("importBackupBtn")?.click();
 
     const demoAction = event.target.closest("[data-demo-action]")?.dataset.demoAction;
@@ -25621,7 +25628,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   root.className = "settings-suite-shell-v2";
   root.innerHTML = `
     <div class="settings-suite-scroll-v2">
-      <section class="settings-suite-view-v2" data-suite-view="cloud">
+      <section class="settings-suite-view-v2" data-suite-view="cloud" data-release-feature="cloud-sync">
         ${header("cloud","settings","クラウド同期")}
         <section class="settings-suite-card-v2"><h2>クラウド同期の状態</h2><div class="settings-suite-sync-state-v2" id="suiteCloudState"><span class="settings-suite-round-icon-v2">${icon.cloud}</span><div><strong>未設定</strong><p>接続設定とDevice IDを確認してください。</p><p class="settings-suite-note-v2" id="suiteLastSync">最終同期：未同期</p></div></div></section>
         <section class="settings-suite-card-v2"><h2>接続設定</h2><div class="settings-suite-field-v2"><label for="suiteProjectUrl">Project URL</label><input id="suiteProjectUrl" type="url" autocomplete="off"></div><div class="settings-suite-field-v2"><label for="suitePublishableKey">Publishable key</label><input id="suitePublishableKey" type="password" autocomplete="off"></div><button class="settings-suite-primary-v2" id="suiteConnectBtn" type="button">接続設定を保存・確認</button><p class="settings-suite-note-v2">※ Secret key（sb_secret_...）は入力しないでください。Publishable keyはこの端末内だけに保存されます。</p><div class="settings-suite-status-v2" id="suiteConnectionStatus" role="status"></div></section>
@@ -25633,8 +25640,8 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       <section class="settings-suite-view-v2" data-suite-view="export" hidden>
         ${header("export","settings","データ書き出し")}<p class="settings-suite-intro-v2">プレーヤーと対戦履歴を、端末に保存できます。<br>書き出したファイルは、バックアップや分析にご利用いただけます。</p>
         <section class="settings-suite-card-v2"><div class="settings-suite-icon-title-v2"><span class="settings-suite-round-icon-v2">${icon.file}</span><div><h2>バックアップを書き出す（JSON）</h2><p>プレーヤー情報と対戦履歴を、復元可能な1つのファイルとして保存します。</p></div></div><button class="settings-suite-primary-v2" id="suiteExportJson" type="button">${icon.upload}バックアップを書き出す</button><div class="settings-suite-summary-v2"><h2>保存データ概要</h2><div class="settings-suite-summary-row-v2"><span>登録プレーヤー</span><strong id="suiteExportPlayers">0人</strong></div><div class="settings-suite-summary-row-v2"><span>対戦履歴</span><strong id="suiteExportRecords">0試合</strong></div></div><p class="settings-suite-note-v2">※ 最新の全データを1つのファイルに保存します。</p></section>
-        <section class="settings-suite-card-v2"><div class="settings-suite-icon-title-v2"><span class="settings-suite-round-icon-v2">${icon.file}</span><div><h2>CSVエクスポート</h2><p>現在の条件で絞り込んだ対戦履歴を、CSV形式で保存します。</p></div></div><div class="settings-suite-filter-v2" id="suiteCsvConditions"></div><button class="settings-suite-primary-v2" id="suiteExportCsv" type="button">${icon.upload}CSVを書き出す</button><p class="settings-suite-note-v2">※ 現在の絞り込み条件での試合データをCSVファイルとして保存します。</p></section>
-        <section class="settings-suite-card-v2 settings-suite-info-v2"><h2>書き出しについて</h2><ul><li>書き出したファイルはiPhoneの「ファイル」やiCloud Driveに保存されます。</li><li>JSONファイルは、このアプリの「データ復元」で読み込み可能です。</li><li>CSVファイルは表計算ソフトでご利用いただけます。</li></ul></section>
+        <section class="settings-suite-card-v2" data-release-feature="csv-export" hidden><div class="settings-suite-icon-title-v2"><span class="settings-suite-round-icon-v2">${icon.file}</span><div><h2>CSVエクスポート</h2><p>現在の条件で絞り込んだ対戦履歴を、CSV形式で保存します。</p></div></div><div class="settings-suite-filter-v2" id="suiteCsvConditions"></div><button class="settings-suite-primary-v2" id="suiteExportCsv" type="button">${icon.upload}CSVを書き出す</button><p class="settings-suite-note-v2">※ 現在の絞り込み条件での試合データをCSVファイルとして保存します。</p></section>
+        <section class="settings-suite-card-v2 settings-suite-info-v2"><h2>書き出しについて</h2><ul><li>書き出したファイルはiPhoneの「ファイル」やiCloud Driveに保存されます。</li><li>JSONファイルは、このアプリの「データ復元」で読み込み可能です。</li></ul></section>
       </section>
       <section class="settings-suite-view-v2" data-suite-view="restore" hidden>
         ${header("restore","settings","データ復元")}<p class="settings-suite-intro-v2">バックアップファイルを読み込んで、プレーヤー情報と対戦履歴を復元できます。</p>
@@ -25647,7 +25654,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
         <section class="settings-suite-card-v2 settings-suite-warning-v2"><h2>試合履歴</h2><p>すべての試合履歴を、履歴・分析・ランキング・VSから削除します。プレーヤーは残ります。</p><button class="settings-suite-danger-v2" id="suiteDeleteRecords" type="button">試合履歴をすべて削除</button></section>
         <section class="settings-suite-card-v2 settings-suite-warning-v2"><h2>プレーヤーデータ</h2><p>登録プレーヤーをすべて削除します。過去の試合履歴と当時の名前は残ります。</p><button class="settings-suite-danger-v2" id="suiteDeletePlayers" type="button">プレーヤーデータをすべて削除</button></section>
         <section class="settings-suite-card-v2 settings-suite-warning-v2"><h2>すべてのデータ</h2><p>登録プレーヤー、対戦履歴、試合区分、シーズンを削除します。二段階で確認します。</p><button class="settings-suite-danger-v2" id="suiteDeleteAll" type="button">全データを削除</button></section>
-        <p class="settings-suite-note-v2">※ 削除前には現在の対象データを端末内へ自動退避します。クラウドは自動上書きせず、同期確認待ちになります。</p>
+        <p class="settings-suite-note-v2">※ 削除前には現在の対象データを端末内へ自動退避します。</p>
       </section>
       <section class="settings-suite-view-v2" data-suite-view="sync-history" hidden>
         ${header("sync-history","cloud","同期履歴")}<p class="settings-suite-intro-v2">クラウドとの同期履歴を、新しい順に表示します。</p><section class="settings-suite-card-v2 settings-suite-list-v2 settings-suite-history-host-v2" id="suiteSyncHistoryHost"></section><p class="settings-suite-note-v2">※ 既存の同期解決履歴を最大20件表示します。</p><button class="settings-suite-danger-v2" id="suiteClearSyncHistory" type="button">同期履歴をすべて削除</button>
@@ -25677,6 +25684,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     if (view === "generation") mountGeneration();
   }
   function openSuite(view) {
+    if (view === "cloud" && !window.CueScoreFeatureAccess.canUse("cloudSync")) return;
     app?.classList.remove("settings-mode");
     screen.classList.remove("hidden"); screen.setAttribute("aria-hidden","false");
     showView(view);
@@ -25816,10 +25824,10 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     const action=event.target.closest(".settings-formal-shell-v1 [data-settings-action]")?.dataset.settingsAction;
     if(!action)return;event.preventDefault();event.stopImmediatePropagation();
     if(window.CueScoreDemoData?.isDemo() && action!=="delete"){
-      alert("デモモード中はクラウド同期・書き出し・復元を利用できません。通常データは変更されません。");
+      alert("デモモード中は書き出し・復元を利用できません。通常データは変更されません。");
       return;
     }
-    openSuite(action==="csv"?"export":action);
+    openSuite(action);
   },true);
   window.addEventListener("online",()=>currentView==="cloud"&&renderCloud());window.addEventListener("offline",()=>currentView==="cloud"&&renderCloud());
   window.openCueScoreSettingsSuiteV2=openSuite;
