@@ -33,32 +33,44 @@ Object.entries(normalKeys).forEach(([name, key]) => storage.setItem(key, normalF
 
 const first = demo.create(storage);
 assert.equal(first.players.length, 10);
-assert.equal(first.records.length, 132);
+assert.equal(first.records.length, 900);
 assert.equal(first.players.filter(player => player.isPrimary).length, 1);
 assert.equal(first.players[0].id, "demo-player-01");
-assert.equal(first.players[0].name, "Haruto");
+assert.equal(first.players[0].name, "はると");
 assert.equal(new Set(first.players.map(player => player.id)).size, 10);
-assert.equal(new Set(first.records.map(record => record.id)).size, 132);
+assert.equal(new Set(first.records.map(record => record.id)).size, 900);
 assert.deepEqual(new Set(first.records.map(record => record.gameType)), new Set(["rotation", "nineBall", "tenBall", "straightPool", "jpa9", "threeCushion"]));
-assert.equal(JSON.stringify(first.records.slice(0,24).map(record=>record.id)),JSON.stringify(Array.from({length:24},(_,index)=>`demo-match-${String(index+1).padStart(4,"0")}`)));
 first.players.forEach(player=>{
   const games=first.records.filter(record=>[1,2].some(side=>record.players?.[side]?.registeredPlayerId===player.id));
-  assert.ok(games.length>=15,`${player.name} should have enough demo matches`);
+  for(const disciplineId of ["9ball","10ball","rotation","straightPool","jpa9","threeCushion"]){
+    const disciplineGames=games.filter(record=>record.disciplineId===disciplineId);
+    assert.ok(disciplineGames.length>=30,`${player.name} should have 30+ ${disciplineId} matches`);
+  }
+  const rivalCounts=new Map();
+  games.forEach(record=>{const side=record.players[1].registeredPlayerId===player.id?1:2;const rival=record.players[side===1?2:1].registeredPlayerId;const key=`${record.disciplineId}:${rival}`;rivalCounts.set(key,(rivalCounts.get(key)||0)+1);});
+  assert.ok(Math.max(...rivalCounts.values())>=20,`${player.name} should have a 20+ match rival`);
 });
 for(const disciplineId of ["9ball","10ball","rotation","straightPool","jpa9","threeCushion"]){
-  assert.ok(first.records.filter(record=>record.disciplineId===disciplineId).length>=18,`${disciplineId} should have at least 18 matches`);
+  assert.equal(first.records.filter(record=>record.disciplineId===disciplineId).length,150,`${disciplineId} should have 150 matches`);
 }
+assert.ok(first.records.every(record=>record.analysis?.report?.recordingMode==="detail"));
+assert.ok(first.records.every(record=>record.analysis?.events?.some(event=>event.type==="ball_pocketed")));
+assert.ok(first.records.every(record=>record.analysis?.events?.some(event=>event.type==="player_switch")));
+assert.ok(first.records.some(record=>record.analysis?.events?.some(event=>event.type==="safety_result")));
+assert.ok(first.records.some(record=>record.analysis?.events?.some(event=>event.type==="foul_result")));
+const playedTimes=first.records.map(record=>Date.parse(record.playedAt));
+assert.ok(Math.max(...playedTimes)-Math.min(...playedTimes)>=360*24*60*60*1000,"history should span about one year");
 Object.entries(normalKeys).forEach(([name, key]) => assert.equal(storage.getItem(key), normalFixture[name]));
 
 const deterministic = JSON.stringify(first);
 assert.equal(JSON.stringify(demo.create(storage)), deterministic);
-const legacyRecords=first.records.slice(0,24);
+const legacyRecords=first.records.slice(0,24).map(record=>({...record,createdByAppVersion:"CueScore Official Demo Data v1.2"}));
 storage.setItem(demo.keys.records,JSON.stringify(legacyRecords));
 storage.setItem(demo.keys.metadata,JSON.stringify({version:"1.1",playerCount:10,matchCount:24}));
 const upgraded=demo.upgrade(storage);
-assert.equal(upgraded.records.length,132);
-assert.equal(JSON.stringify(upgraded.records.slice(0,24)),JSON.stringify(legacyRecords));
-assert.equal(JSON.parse(storage.getItem(demo.keys.metadata)).version,"1.2");
+assert.equal(upgraded.records.length,900);
+assert.notEqual(JSON.stringify(upgraded.records.slice(0,24)),JSON.stringify(legacyRecords));
+assert.equal(JSON.parse(storage.getItem(demo.keys.metadata)).version,"2.0");
 demo.setMode("demo", storage);
 assert.equal(demo.isDemo(storage), true);
 Object.entries(normalKeys).forEach(([name, key]) => assert.equal(demo.resolveKey(key, storage), demo.keys[name]));
@@ -82,4 +94,4 @@ Object.values(demo.keys).filter(key => key !== demo.keys.mode).forEach(key => as
 assert.equal(storage.getItem("cuescore-demo.settings.cueScore.discipline.v1"), null);
 Object.entries(normalKeys).forEach(([name, key]) => assert.equal(storage.getItem(key), normalFixture[name]));
 
-console.log("Official Demo Data isolation tests passed (10 players, 132 matches across 6 disciplines).");
+console.log("Official Demo Data isolation tests passed (10 players, 900 detailed matches across 6 disciplines).");

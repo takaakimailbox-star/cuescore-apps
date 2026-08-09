@@ -1,4 +1,4 @@
-const APP_VERSION = "1.0-history-avatars-score-weight-v1";
+const APP_VERSION = "2.0-detailed-demo-year-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
