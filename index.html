@@ -18968,7 +18968,7 @@ let matchRecordsRawCacheV152 = null;
       const b=opponents.find(item=>item.key===selectedOpponentKey)||opponents[0];
       if(!b){count.textContent="";result.innerHTML='<div class="vs-empty">対戦相手を選択してください。</div>';return;}
       const rivalDisciplineV2Def=rivalDisciplineDefsV2.find(item=>item.id===rivalDisciplineV2)||rivalDisciplineDefsV2[0];
-      const rivalTopV2=`<section class="rival-matchup-v2"><div class="rival-player-v2"><span class="rival-avatar-v2">${rivalAvatarV2(a)}</span><strong>${esc(a.name)}</strong><small>基準プレーヤー</small></div><div class="rival-versus-v2"><span>VS</span><img src="${rivalDisciplineV2Def.asset}" alt="${esc(rivalDisciplineV2Def.label)}"></div><div class="rival-player-v2"><span class="rival-avatar-v2">${rivalAvatarV2(b)}</span><strong>${esc(b.name)}</strong><label><span>対戦相手</span><select class="rival-opponent-select-v2" aria-label="対戦相手">${p2Select.innerHTML}</select></label></div></section><nav class="rival-disciplines-v2" aria-label="ゲーム種目">${rivalDisciplineDefsV2.map(item=>`<button type="button" class="${item.id===rivalDisciplineV2?'is-selected':''}" data-rival-discipline-v2="${item.id}">${item.label}</button>`).join('')}</nav>`;
+      const rivalTopV2=`<section class="rival-matchup-v2"><div class="rival-player-v2"><span class="rival-avatar-v2">${rivalAvatarV2(a)}</span><strong>${esc(a.name)}</strong><small>基準プレーヤー</small></div><div class="rival-versus-v2"><span>VS</span><img src="${rivalDisciplineV2Def.asset}" alt="${esc(rivalDisciplineV2Def.label)}"></div><div class="rival-player-v2"><span class="rival-avatar-v2">${rivalAvatarV2(b)}</span><strong>${esc(b.name)}</strong><label><span>対戦相手</span><select class="rival-opponent-select-v2" aria-label="対戦相手">${p2Select.innerHTML}</select></label></div></section><nav class="rival-disciplines-v2" aria-label="ゲーム種目">${rivalDisciplineDefsV2.map(item=>`<button type="button" class="${item.id===rivalDisciplineV2?'is-selected':''}" data-rival-discipline-v2="${item.id}" aria-pressed="${item.id===rivalDisciplineV2}"><img src="${item.asset}" alt=""><span>${item.label}</span></button>`).join('')}</nav>`;
       localStorage.setItem(VS_SELECTION_KEY,JSON.stringify({p1:a.key,p2:b.key}));
       const matches=safeRecords().filter(r=>rivalDisciplineV2Of(r)===rivalDisciplineV2&&sideFor(r,a)&&sideFor(r,b)&&sideFor(r,a)!==sideFor(r,b)).sort((x,y)=>recordTime(x)-recordTime(y));
       if(count) count.textContent="";
@@ -27516,7 +27516,7 @@ body.cue-edge-back-animating-v2 .app{
 .player-detail-shell-v1{gap:8px}
 .player-detail-profile-card-v2{grid-template-columns:68px minmax(0,1fr);min-height:92px;padding:10px 14px;border-radius:18px}
 .player-detail-avatar-v2,.player-detail-avatar-v2 .player-avatar-v2{width:64px;height:64px}
-.player-detail-formal-v1 .player-detail-name-v1{font-size:24px}
+.player-detail-formal-v1 .player-detail-name-v1{color:#171717!important;font-size:24px}
 .player-detail-main-badge-v2{margin-top:5px;padding:3px 8px;font-size:9px}
 .player-detail-note-v2{margin-top:4px;font-size:11px}
 .player-detail-formal-v1 .player-detail-disciplines-v1{padding:5px;gap:3px;border-radius:16px}
@@ -27642,8 +27642,10 @@ body.cue-edge-back-animating-v2 .app{
 .app.vs-analysis-mode .rival-versus-v2 img{width:38px;height:38px}
 .app.vs-analysis-mode .rival-disciplines-v2{display:flex;gap:7px;margin:10px 0 0;overflow-x:auto;scrollbar-width:none}
 .app.vs-analysis-mode .rival-disciplines-v2::-webkit-scrollbar{display:none}
-.app.vs-analysis-mode .rival-disciplines-v2 button{flex:0 0 auto;min-height:37px;padding:0 15px;border:1px solid #deded9;border-radius:10px;background:#fff;color:#62625e;font:750 11px -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}
-.app.vs-analysis-mode .rival-disciplines-v2 button.is-selected{border-color:#171717;background:#171717;color:#fff}
+.app.vs-analysis-mode .rival-disciplines-v2 button{display:grid;flex:0 0 72px;grid-template-rows:36px auto;place-items:center;gap:3px;min-height:66px;padding:6px 3px;border:1px solid #deded9;border-radius:11px;background:#fff;color:#62625e;font:750 9px -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;line-height:1.1}
+.app.vs-analysis-mode .rival-disciplines-v2 button img{width:36px;height:36px;object-fit:contain}
+.app.vs-analysis-mode .rival-disciplines-v2 button span{white-space:nowrap}
+.app.vs-analysis-mode .rival-disciplines-v2 button.is-selected{border-color:#f2ad00;background:#fff5d8;color:#171717;box-shadow:inset 0 0 0 .5px #f2ad00}
 .app.vs-analysis-mode .rival-overview-v2{margin-top:10px;padding:16px;border:1px solid #dfdfdb;border-radius:19px;background:#fff}
 .app.vs-analysis-mode .rival-overview-top-v2{display:grid;grid-template-columns:1fr 1.25fr 1fr;align-items:end}
 .app.vs-analysis-mode .rival-overview-top-v2>div{min-width:0}

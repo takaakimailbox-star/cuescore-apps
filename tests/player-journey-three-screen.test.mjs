@@ -26,6 +26,9 @@ assert.match(html,/\.record-detail-overlay\.match-detail-overlay-v1\{[\s\S]*?z-i
 assert.match(html,/journeyDiscipline=discipline\.dataset\.playerDetailDiscipline\|\|"9ball"/);
 assert.match(html,/const active=journeyDiscipline/);
 assert.match(html,/aria-selected=\"\$\{d\.id===active\}\"/);
+assert.match(html,/\.player-detail-formal-v1 \.player-detail-name-v1\{color:#171717!important/);
+assert.match(html,/data-rival-discipline-v2=\"\$\{item\.id\}\" aria-pressed/);
+assert.match(html,/rival-disciplines-v2 button img\{width:36px;height:36px/);
 assert.match(html,/select\.dispatchEvent\(new Event\("change",\{bubbles:true\}\)\)/);
 assert.doesNotMatch(html,/player-journey-overlay-v2[\s\S]{0,800}player-detail-bottom-nav-v1/);
 assert.match(html,/CueScore player journey v2\.1/);
