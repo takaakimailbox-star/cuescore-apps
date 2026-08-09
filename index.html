@@ -14898,7 +14898,7 @@ let matchRecordsRawCacheV152 = null;
     const labelEvery = Math.max(1,Math.ceil(maxIndex/8));
     const xLabels = progress.innings.map((value,index) => { if(index!==0&&index!==maxIndex&&index%labelEvery!==0)return ""; const p=point(0,index); return `<text x="${p.x.toFixed(1)}" y="${height-16}" text-anchor="middle" font-size="10" fill="#777">${value}</text>`; }).join("");
     const lastP1=point(progress.p1.at(-1),maxIndex), lastP2=point(progress.p2.at(-1),maxIndex);
-    return `<svg class="official-result-chart-svg-v1" viewBox="0 0 ${width} ${height}" role="img" aria-label="両プレーヤーのイニング別累積得点推移">${grid}<path d="${path(progress.p1)}" fill="none" stroke="#6f3214" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="${path(progress.p2)}" fill="none" stroke="#8b8b87" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>${dots(progress.p1,"#6f3214")}${dots(progress.p2,"#8b8b87")}${xLabels}<text x="${Math.min(width-4,lastP1.x+9)}" y="${Math.max(13,lastP1.y-7)}" font-size="13" font-weight="700" fill="#6f3214">${Number(scores[1])||0}</text><text x="${Math.min(width-4,lastP2.x+9)}" y="${Math.min(height-bottom-5,lastP2.y+17)}" font-size="13" font-weight="700" fill="#777">${Number(scores[2])||0}</text></svg>`;
+    return `<svg class="official-result-chart-svg-v1" viewBox="0 0 ${width} ${height}" role="img" aria-label="両プレーヤーのイニング別累積得点推移">${grid}<path d="${path(progress.p1)}" fill="none" stroke="#171717" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="${path(progress.p2)}" fill="none" stroke="#8b8b87" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>${dots(progress.p1,"#171717")}${dots(progress.p2,"#8b8b87")}${xLabels}<text x="${Math.min(width-4,lastP1.x+9)}" y="${Math.max(13,lastP1.y-7)}" font-size="13" font-weight="700" fill="#171717">${Number(scores[1])||0}</text><text x="${Math.min(width-4,lastP2.x+9)}" y="${Math.min(height-bottom-5,lastP2.y+17)}" font-size="13" font-weight="700" fill="#777">${Number(scores[2])||0}</text></svg>`;
   }
 
   function resultAvatarSvgV1(playerNumber) {
@@ -22423,7 +22423,7 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
 <script>
 /* CueScore Match Detail v1.0: official read-only match review screen. */
 (() => {
-  const WALNUT = "#6f3214";
+  const WINNER_INK = "#171717";
 
   const esc = value => typeof escapeRecordText === "function"
     ? escapeRecordText(value)
@@ -22555,8 +22555,8 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
       const p=point(0,index);
       return `<text x="${p.x.toFixed(1)}" y="${height-14}" text-anchor="middle" font-size="10" fill="#777775">${index}</text>`;
     }).join("");
-    const p1Color=winner===1?WALNUT:"#30302e";
-    const p2Color=winner===2?WALNUT:"#30302e";
+    const p1Color=winner===1?WINNER_INK:"#30302e";
+    const p2Color=winner===2?WINNER_INK:"#30302e";
     return `<svg class="match-detail-chart-svg-v1" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="両プレーヤーの累積得点推移">
       ${grid}
       <path d="${path(progress.p1)}" fill="none" stroke="${p1Color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -22785,7 +22785,7 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
         <section class="match-detail-card-v1 match-detail-summary-v1">
           ${summaryRows.map(([label,left,right])=>`<div class="match-detail-summary-row-v1"><strong class="${winner===1?"winner":""}">${esc(left)}</strong><span>${esc(label)}</span><strong class="${winner===2?"winner":""}">${esc(right)}</strong></div>`).join("")}
         </section>
-        ${chart?`<section class="match-detail-card-v1 match-detail-chart-v1"><h2>スコア推移</h2><div class="match-detail-legend-v1"><span style="--legend:${winner===1?WALNUT:"#30302e"}">${esc(p1.name||"Player1")}</span><span style="--legend:${winner===2?WALNUT:"#30302e"}">${esc(p2.name||"Player2")}</span></div>${chart}</section>`:""}
+        ${chart?`<section class="match-detail-card-v1 match-detail-chart-v1"><h2>スコア推移</h2><div class="match-detail-legend-v1"><span style="--legend:${winner===1?WINNER_INK:"#30302e"}">${esc(p1.name||"Player1")}</span><span style="--legend:${winner===2?WINNER_INK:"#30302e"}">${esc(p2.name||"Player2")}</span></div>${chart}</section>`:""}
         ${history}
         ${resultMode?"":`<section class="match-detail-delete-section-v1"><button id="matchDetailDeleteV1" type="button">この試合を削除</button><p>削除すると、この試合は履歴とすべての集計から除外されます。</p></section>`}
       </main>
@@ -22841,7 +22841,7 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
   backdrop-filter:blur(5px);
 }
 .official-result-sheet-v1{
-  --result-accent:#6f3214;
+  --result-accent:#171717;
   position:absolute;
   z-index:1;
   left:0;
@@ -23065,7 +23065,7 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
   --cue-history-muted:#777775;
   --cue-history-line:#dededb;
   --cue-history-soft:#f1f1ef;
-  --cue-history-walnut:#7a3512;
+  --cue-history-walnut:#171717;
   --cue-history-nav:68px;
 }
 .app.records-mode>.cue-home-v1{display:none!important}
@@ -23600,7 +23600,7 @@ body.match-detail-visible-v1{overflow:hidden!important}
   font-weight:820;
 }
 .match-detail-result-line-v2 strong.winner,
-.match-detail-summary-v1 .winner{color:#6f3214}
+.match-detail-summary-v1 .winner{color:#171717}
 .match-detail-result-line-v2 strong.loser{
   color:#777775;
   font-weight:450;
@@ -26186,6 +26186,7 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .official-result-chart-svg-v1 text[fill="#6f3214"],
 .match-detail-chart-v1 text[fill="#6f3214"]{fill:var(--cue-foundation-ink)!important}
 .record-score-value-v1.winner,
+.match-detail-result-line-v2 strong.winner,
 .match-detail-summary-v1 .winner,
 .match-detail-score-v1 .winner{color:var(--cue-foundation-ink)!important}
 .match-detail-rack-divider-v1{
