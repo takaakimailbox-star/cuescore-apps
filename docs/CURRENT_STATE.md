@@ -58,9 +58,9 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 
 ## 要確認事項
 
-- Privacy Policy URL、Support URL、公開用連絡先
+- 公開用連絡先
 - App Review担当者の氏名・メール・電話番号
-- Privacy Policy / Support / Terms of Useの正式URL採用
+- App Store提出時に使用する公開URL候補の最終採用
 - 提出ビルドとPrivacy Policy / Review Notesの最終一致
 
 ## Active Decisions
@@ -71,6 +71,14 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - App Store v1.0 release profileはCSV・クラウド同期を無効化し、関連UIを表示しない。
 - Official Demo Dataは提出ビルドに収録し、通常データとの完全分離を維持する。
 - Official Demo Dataの本番向け表示は「サンプルデータ」を採用し、状態を「通常データ／サンプルデータ」、操作を「準備する／サンプルを見る／通常データへ戻る／初期状態に戻す／削除」とする。
+
+## App Store Public URL Candidates
+
+- Privacy Policy: https://takaakimailbox-star.github.io/cuescore-apps/privacy.html
+- Support: https://takaakimailbox-star.github.io/cuescore-apps/support.html
+- Terms of Use: https://takaakimailbox-star.github.io/cuescore-apps/terms.html
+- 2026-08-09にGitHub Pages上の外部表示、Official本文読み込み、3ページ間リンクを確認済み。
+- 正式URL候補として管理する。Supportページの公開用連絡先確定後にApp Store提出用として最終採用する。
 
 ## v1.0 RC Verification
 
