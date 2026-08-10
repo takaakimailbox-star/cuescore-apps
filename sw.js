@@ -1,4 +1,4 @@
-const APP_VERSION = "2.0-app-store-v1-rc-alignment-v1";
+const APP_VERSION = "2.0-player-detail-metrics-v2";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",

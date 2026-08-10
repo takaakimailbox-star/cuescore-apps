@@ -36,7 +36,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - 成長の推移、グラフ、次のアドバイス、配色、余白は変更していない。
 - 正式決定記録：`docs/official/09_CueScore_v1.0RC_Player_Analytics_Discipline_Statistics_Spec.md`。
 
-## App Store v1.0 RC：競技別プレーヤー統計4指標（2026年8月9日）
+## App Store v1.0 RC：競技別プレーヤー統計4指標（2026年8月10日 再確認）
 
 - Product Owner採用済み仕様として、プレーヤー詳細の4カードを競技タブ別に切り替える実装へ更新。
 - Rotation：試合数／ハイラン／シュート成功率／ブレイクイン率。
@@ -47,10 +47,12 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - ブレイクイン率は、自分のブレイクのうち「1球以上入球かつファールなし」の割合。スクラッチ、その他ファール、イリーガル、ブレイク失敗は入球があっても失敗として集計。
 - 9 Ball／10 Ballのマス割率は、既存のブレイクランアウト判定による成立ラック数 ÷ 対象完了ラック数。既存判定ロジックは変更していない。
 - 14.1／3Cの平均得点/イニングは、保存済み対象試合の総得点 ÷ 完了イニング総数。
-- JPA 9 Ball平均イニングは正式な分母定義が未確定のため、推測せず「—」表示。
+- JPA 9 Ball平均イニングは、対象試合における自分の完了イニング総数 ÷ 対象試合数。0点で終了した完了イニングも総数に含め、保存済みイベントログから再計算する。
 - 3Cおすすめ持ち点はNBA、JPBF、UMB等の公開原典から標準アベレージ対応表の具体値を確認できていないため、推測せず「—」表示。
 - 新規保存項目・データ移行なし。既存試合とサンプルデータから表示時に再計算し、通常データとの分離や保存仕様は変更していない。
-- 正式決定記録：`docs/official/07_CueScore_Official_Design_Decision_Log_v1.1_Official_Release.docx` Decision 017。
+- Game Result／Player Analyticsの競技別統計とは目的と表示項目を分離し、Player Detail専用の長期プロフィール4指標として維持する。
+- 2026年8月10日、最新 `main`、正式文書、現行実装、サンプルデータ互換テストを再照合し、6競技の表示切替と上記算出定義が一致することを確認。
+- 正式決定記録：`docs/official/07_CueScore_Official_Design_Decision_Log_v1.2_Official_Release.docx` Decision 017（同内容を含む最新版）。
 
 ## Repository Baseline
 

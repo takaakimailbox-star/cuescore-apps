@@ -27776,9 +27776,10 @@ body.cue-edge-back-animating-v2 .app{
     const masuwariRate=targetRacks?`${Math.round(masuwari/targetRacks*100)}%`:"—";
     const pointsPerInning=totalInnings?String(Math.round(totalScore/totalInnings*100)/100):"—";
     const games=String(filtered.length);
+    const averageInnings=filtered.length&&totalInnings?String(Math.round(totalInnings/filtered.length*100)/100):"—";
     if(active==="rotation")return [["試合数",games],["ハイラン",String(highRun)],["シュート成功率",shotRate],["ブレイクイン率",breakIn]];
     if(active==="9ball"||active==="10ball")return [["試合数",games],["マス割率",masuwariRate],["シュート成功率",shotRate],["ブレイクイン率",breakIn]];
-    if(active==="jpa9")return [["試合数",games],["シュート成功率",shotRate],["ブレイクイン率",breakIn],["平均イニング","—"]];
+    if(active==="jpa9")return [["試合数",games],["シュート成功率",shotRate],["ブレイクイン率",breakIn],["平均イニング",averageInnings]];
     if(active==="straightPool")return [["試合数",games],["ハイラン",String(highRun)],["シュート成功率",shotRate],["平均得点/イニング",pointsPerInning]];
     return [["試合数",games],["ハイラン",String(highRun)],["平均得点/イニング",pointsPerInning],["おすすめ持ち点","—"]];
   };
