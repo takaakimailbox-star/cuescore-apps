@@ -30,6 +30,7 @@ const APP_SHELL = [
   "./assets/icons/games/game-10ball.svg",
   "./assets/icons/games/game-14-1.svg",
   "./assets/icons/games/game-jpa-9ball.svg",
+  "./assets/icons/games/game-jpa-9ball-home.svg",
   "./assets/icons/games/game-3cushion.svg",
   "./assets/icons/balls/cue-ball-dotted.svg",
   "./assets/icons/avatar/manifest.json",
