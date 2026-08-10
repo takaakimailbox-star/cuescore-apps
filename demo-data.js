@@ -5,7 +5,7 @@
   // 500 records is the production snapshot. A 1,000-record snapshot remains
   // available to the automated performance benchmark, but exceeds the safe
   // localStorage budget once detailed events are retained.
-  const VERSION="3.0",PREFIX="cuescore-demo",TOTAL_MATCHES=500,MAX_MATCHES=1000;
+  const VERSION="3.0",PREFIX="cuescore-demo",PLAYER_COUNT=10,TOTAL_MATCHES=500,MAX_MATCHES=1000;
   const KEYS=Object.freeze({
     mode:`${PREFIX}.mode.v1`,players:`${PREFIX}.players.v1`,records:`${PREFIX}.matchRecords.v1`,
     categories:`${PREFIX}.matchCategories.v1`,seasons:`${PREFIX}.matchSeasons.v1`,metadata:`${PREFIX}.metadata.v1`
@@ -192,13 +192,41 @@
   const data=(limit=TOTAL_MATCHES)=>({players:buildPlayers(),records:buildMatches(limit),categories:[{id:"category_free",name:"Free",locked:true},{id:"category_tournament",name:"大会",locked:false},{id:"category_league",name:"リーグ",locked:false}],seasons:[{id:"sample-season-2025-26",name:"2025-26 シーズン"},{id:"sample-season-2026",name:"2026 シーズン"}]});
   const storageOrDefault=storage=>storage||globalThis.localStorage,writeJson=(storage,key,value)=>storage.setItem(key,JSON.stringify(value));
   const readJson=(storage,key,fallback)=>{try{return JSON.parse(storage.getItem(key)||"null")??fallback;}catch(_){return fallback;}};
+  const sampleDataKeys=[KEYS.players,KEYS.records,KEYS.categories,KEYS.seasons,KEYS.metadata];
+  function sampleReady(storage){
+    const metadata=readJson(storage,KEYS.metadata,{});
+    return metadata?.version===VERSION
+      && Number(metadata?.playerCount)===PLAYER_COUNT
+      && Number(metadata?.matchCount)===TOTAL_MATCHES
+      && sampleDataKeys.slice(0,4).every(key=>storage.getItem(key)!==null);
+  }
+  function writeSnapshot(storage,snapshot){
+    const previous=new Map(sampleDataKeys.map(key=>[key,storage.getItem(key)]));
+    try{
+      writeJson(storage,KEYS.players,snapshot.players);
+      writeJson(storage,KEYS.records,snapshot.records);
+      writeJson(storage,KEYS.categories,snapshot.categories);
+      writeJson(storage,KEYS.seasons,snapshot.seasons);
+      writeJson(storage,KEYS.metadata,{version:VERSION,playerCount:snapshot.players.length,matchCount:snapshot.records.length});
+    }catch(error){
+      for(const [key,value] of previous){
+        try{if(value===null)storage.removeItem(key);else storage.setItem(key,value);}catch(_){}
+      }
+      throw error;
+    }
+    return snapshot;
+  }
   const api=Object.freeze({version:VERSION,prefix:PREFIX,keys:KEYS,
     isDemo(storage){return storageOrDefault(storage).getItem(KEYS.mode)==="demo";},
+    isReady(storage){return sampleReady(storageOrDefault(storage));},
     resolveKey(normalKey,storage){return this.isDemo(storage)?(NORMAL_TO_DEMO_KEY[normalKey]||normalKey):normalKey;},
     resolveSettingKey(normalKey,storage){return this.isDemo(storage)?`${PREFIX}.settings.${normalKey}`:normalKey;},
-    create(storage){const target=storageOrDefault(storage),snapshot=data();writeJson(target,KEYS.players,snapshot.players);writeJson(target,KEYS.records,snapshot.records);writeJson(target,KEYS.categories,snapshot.categories);writeJson(target,KEYS.seasons,snapshot.seasons);writeJson(target,KEYS.metadata,{version:VERSION,playerCount:snapshot.players.length,matchCount:snapshot.records.length});return snapshot;},
+    create(storage){const target=storageOrDefault(storage),snapshot=data();return writeSnapshot(target,snapshot);},
+    ensure(storage){const target=storageOrDefault(storage);return sampleReady(target)?true:this.create(target);},
     upgrade(storage){const target=storageOrDefault(storage),metadata=readJson(target,KEYS.metadata,{});if(metadata?.version===VERSION)return {players:readJson(target,KEYS.players,buildPlayers()),records:readJson(target,KEYS.records,buildMatches())};return this.create(target);},
-    setMode(mode,storage){storageOrDefault(storage).setItem(KEYS.mode,mode==="demo"?"demo":"normal");},
+    setMode(mode,storage){const target=storageOrDefault(storage),next=mode==="demo"?"demo":"normal";target.setItem(KEYS.mode,next);if(target.getItem(KEYS.mode)!==next)throw new Error("Data mode could not be saved");return next;},
+    enter(storage){const target=storageOrDefault(storage);this.ensure(target);this.setMode("demo",target);return true;},
+    leave(storage){this.setMode("normal",storage);return true;},
     remove(storage){const target=storageOrDefault(storage),names=[];for(let index=0;index<Number(target.length||0);index++){const key=target.key(index);if(key?.startsWith(`${PREFIX}.`))names.push(key);}[...new Set([...names,...Object.values(KEYS)])].forEach(key=>target.removeItem(key));target.setItem(KEYS.mode,"normal");},
     snapshot:data,benchmark(limit){return data(limit)}
   });

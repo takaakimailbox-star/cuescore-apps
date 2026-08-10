@@ -8914,7 +8914,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js"></script>
+  <script src="./demo-data.js?v=2.0-sample-data-mode-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19216,7 +19216,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "1.0-jpa9-dead-ball-v1";
+    const PWA_VERSION = "2.0-sample-data-mode-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -25461,23 +25461,30 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
         return;
       }
       const normalSafe = "通常データは変更されません。";
-      if (demoAction === "create" && confirm(`Official Demo Data（10名・900試合・全6種目・詳細記録）を準備します。\n${normalSafe}`)) {
-        demoApi.create();
-        alert(`公式デモデータを準備しました。\n${normalSafe}`);
-      }
-      if (demoAction === "enter" && confirm(`サンプルデータを表示します。\n${normalSafe}`)) {
-        demoApi.create(); demoApi.setMode("demo"); location.reload();
-      }
-      if (demoAction === "normal" && confirm(`通常データへ戻ります。サンプルデータは保持されます。\n${normalSafe}`)) {
-        demoApi.setMode("normal"); location.reload();
-      }
-      if (demoAction === "reset" && confirm(`サンプルデータを初期状態へ戻します。サンプルデータでの変更は失われます。\n${normalSafe}`)) {
-        demoApi.create();
-        if (demoApi.isDemo()) location.reload(); else alert(`デモデータを初期状態へ戻しました。\n${normalSafe}`);
-      }
-      if (demoAction === "delete" && confirm(`サンプルデータだけを削除します。\n${normalSafe}`)) {
-        const wasDemo = demoApi.isDemo(); demoApi.remove();
-        if (wasDemo) location.reload(); else alert(`デモデータを削除しました。\n${normalSafe}`);
+      try {
+        if (demoAction === "create" && confirm(`Official Demo Data（10名・500試合・全6種目・詳細記録）を準備します。\n${normalSafe}`)) {
+          demoApi.create();
+          alert(`公式デモデータを準備しました。\n${normalSafe}`);
+        }
+        if (demoAction === "enter" && confirm(`サンプルデータを表示します。\n${normalSafe}`)) {
+          demoApi.enter();
+          location.reload();
+        }
+        if (demoAction === "normal" && confirm(`通常データへ戻ります。サンプルデータは保持されます。\n${normalSafe}`)) {
+          demoApi.leave();
+          location.reload();
+        }
+        if (demoAction === "reset" && confirm(`サンプルデータを初期状態へ戻します。サンプルデータでの変更は失われます。\n${normalSafe}`)) {
+          demoApi.create();
+          if (demoApi.isDemo()) location.reload(); else alert(`デモデータを初期状態へ戻しました。\n${normalSafe}`);
+        }
+        if (demoAction === "delete" && confirm(`サンプルデータだけを削除します。\n${normalSafe}`)) {
+          const wasDemo = demoApi.isDemo(); demoApi.remove();
+          if (wasDemo) location.reload(); else alert(`デモデータを削除しました。\n${normalSafe}`);
+        }
+      } catch (error) {
+        console.error("Sample data operation failed", error);
+        alert(`サンプルデータを切り替えられませんでした。端末の空き容量を確認して、もう一度お試しください。\n${normalSafe}`);
       }
       renderCloudState();
       return;

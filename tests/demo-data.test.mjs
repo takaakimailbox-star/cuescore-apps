@@ -6,6 +6,9 @@ import vm from "node:vm";
 const html = fs.readFileSync(new URL("../index.html", import.meta.url), "utf8");
 for (const label of ["サンプルデータ","通常データ","準備する","サンプルを見る","通常データへ戻る","初期状態に戻す"]) assert.match(html,new RegExp(label));
 assert.match(html,/アプリの画面と機能を試せます。通常のデータには影響しません。/);
+assert.match(html,/demoApi\.enter\(\)/,"normal → sample must use the guarded mode transition");
+assert.match(html,/demoApi\.leave\(\)/,"sample → normal must use the guarded mode transition");
+assert.doesNotMatch(html,/demoApi\.create\(\);\s*demoApi\.setMode\("demo"\)/,"entering prepared sample data must not rewrite it");
 assert.match(html,/record\?\.analysis\?\.events/,"Match Detail must fall back to the canonical analysis stream");
 
 class MemoryStorage {
@@ -84,6 +87,19 @@ assert.ok(sample.records.filter(record=>record.disciplineId==="threeCushion").ev
 Object.entries(normalKeys).forEach(([name,key])=>assert.equal(storage.getItem(key),normalFixture[name]));
 const deterministic=JSON.stringify(sample);
 assert.equal(JSON.stringify(demo.create(storage)),deterministic);
+assert.equal(demo.isReady(storage),true);
+const protectedSampleStorage={
+  get length(){return storage.length;},key:index=>storage.key(index),getItem:key=>storage.getItem(key),removeItem:key=>storage.removeItem(key),
+  setItem(key,value){
+    if(String(key).startsWith(`${demo.prefix}.`)&&key!==demo.keys.mode) throw new Error("prepared sample data must not be rewritten when entering");
+    storage.setItem(key,value);
+  }
+};
+assert.equal(demo.enter(protectedSampleStorage),true);
+assert.equal(demo.isDemo(storage),true);
+Object.entries(normalKeys).forEach(([name,key])=>assert.equal(demo.resolveKey(key,storage),demo.keys[name]));
+assert.equal(demo.leave(storage),true);
+assert.equal(demo.isDemo(storage),false);
 storage.setItem(demo.keys.metadata,JSON.stringify({version:"2.0"}));
 assert.equal(demo.upgrade(storage).records.length,500);
 assert.equal(JSON.parse(storage.getItem(demo.keys.metadata)).version,"3.0");
@@ -96,6 +112,33 @@ Object.entries(normalKeys).forEach(([name,key])=>assert.equal(storage.getItem(ke
 demo.setMode("demo",storage);demo.remove(storage);
 assert.equal(demo.isDemo(storage),false);
 Object.entries(normalKeys).forEach(([name,key])=>assert.equal(storage.getItem(key),normalFixture[name]));
+
+const restartContext=vm.createContext({localStorage:storage});
+restartContext.globalThis=restartContext;
+demo.setMode("demo",storage);
+vm.runInContext(fs.readFileSync(new URL("../demo-data.js",import.meta.url),"utf8"),restartContext);
+assert.equal(restartContext.CueScoreDemoData.isDemo(),true,"sample mode must survive an app restart");
+assert.equal(restartContext.CueScoreDemoData.resolveKey(normalKeys.records),demo.keys.records);
+restartContext.CueScoreDemoData.leave();
+assert.equal(restartContext.CueScoreDemoData.resolveKey(normalKeys.records),normalKeys.records);
+
+class QuotaStorage extends MemoryStorage {
+  constructor(limit){super();this.limit=limit;}
+  setItem(key,value){
+    const entries=Array.from({length:this.length},(_,index)=>this.key(index)).filter(Boolean);
+    const current=entries.reduce((sum,item)=>sum+(item.length+(item===String(key)?0:String(this.getItem(item)||"").length))*2,0);
+    const previous=String(this.getItem(key)||"");
+    const next=current-(previous?String(key).length*2:0)+(String(key).length+String(value).length)*2;
+    if(next>this.limit){const error=new Error("Storage quota exceeded");error.name="QuotaExceededError";throw error;}
+    super.setItem(key,value);
+  }
+}
+const quotaStorage=new QuotaStorage(5*1024*1024);
+quotaStorage.setItem(normalKeys.records,"x".repeat(1200000));
+assert.throws(()=>demo.enter(quotaStorage),error=>error?.name==="QuotaExceededError");
+assert.equal(quotaStorage.getItem(demo.keys.mode),null,"failed preparation must not switch data mode");
+assert.equal(quotaStorage.getItem(demo.keys.players),null,"failed preparation must roll back partial sample data");
+assert.equal(quotaStorage.getItem(normalKeys.records).length,1200000,"failed preparation must not alter normal data");
 
 const serialized500=JSON.stringify(sample),parseStart=performance.now();JSON.parse(serialized500);const parse500Ms=performance.now()-parseStart;
 assert.ok(Buffer.byteLength(serialized500)<3.5*1024*1024,"500 detailed matches must remain within the safe sample-data budget");
