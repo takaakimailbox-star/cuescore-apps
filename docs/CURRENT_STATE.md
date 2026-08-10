@@ -26,6 +26,16 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - 本決定はGame Result表示に対する仕様であり、プレーヤー詳細のJPA 9 Ball「平均イニング」未確定事項は変更しない。
 - 正式仕様：`docs/official/08_CueScore_v1.0RC_GameResult_Statistics_Spec.docx`。
 
+## App Store v1.0 RC：Player Analytics競技別統計3指標（2026年8月10日）
+
+- Player Analyticsの統計定義を採用済みGame Result仕様へ統一。
+- 9 Ball・10 Ball：シュート率／マス割／平均ファール。
+- Rotation：ハイラン／シュート率／平均ファール。
+- JPA 9 Ball・Straight Pool（14.1）・Three Cushion（3C）：アベレージ／ハイラン／平均ファール。
+- 現在の変化、変化の根拠では既存カード構造を維持し、競技選択時に統計ラベルと値だけを切り替える。
+- 成長の推移、グラフ、次のアドバイス、配色、余白は変更していない。
+- 正式決定記録：`docs/official/09_CueScore_v1.0RC_Player_Analytics_Discipline_Statistics_Spec.md`。
+
 ## App Store v1.0 RC：競技別プレーヤー統計4指標（2026年8月9日）
 
 - Product Owner採用済み仕様として、プレーヤー詳細の4カードを競技タブ別に切り替える実装へ更新。
