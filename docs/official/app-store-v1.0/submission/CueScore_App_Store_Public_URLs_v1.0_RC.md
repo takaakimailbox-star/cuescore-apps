@@ -15,6 +15,8 @@
 - ページタイトル、見出し、各Official Markdown本文の読み込みを確認。
 - Privacy、Terms、Supportのナビゲーションリンクが正しい実URLを指すことを確認。
 - Privacy → Terms → Support → Privacy の画面遷移を確認。
+- 2026-08-10、アプリSettingsの「利用規約」「プライバシーポリシー」を上記Terms／Privacyへ同一タブで接続。PWA・Safariの標準「戻る」でSettingsへ復帰し、取得済みApp Shellからのオフライン表示経路を維持する。
+- ライセンスについては、正式な表示画面・文書・OSS一覧・URLが現時点で存在しないため、推測で作成・接続していない。
 
 ## App Store提出時の扱い
 

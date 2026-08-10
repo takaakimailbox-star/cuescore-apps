@@ -25376,9 +25376,9 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
         <footer class="settings-app-footer-v1">
           <div class="settings-app-brand-v1"><span data-cuescore-logo="horizontal-black"></span><span class="settings-version">Version 1.0</span></div>
           <button class="settings-info-link-v1" type="button" data-cuescore-about><span>About CueScore</span><span>›</span></button>
-          <button class="settings-info-link-v1" type="button" aria-disabled="true"><span>利用規約</span><span>›</span></button>
-          <button class="settings-info-link-v1" type="button" aria-disabled="true"><span>プライバシーポリシー</span><span>›</span></button>
-          <button class="settings-info-link-v1" type="button" aria-disabled="true"><span>ライセンス</span><span>›</span></button>
+          <button class="settings-info-link-v1" type="button" data-settings-legal="terms.html"><span>利用規約</span><span>›</span></button>
+          <button class="settings-info-link-v1" type="button" data-settings-legal="privacy.html"><span>プライバシーポリシー</span><span>›</span></button>
+          <button class="settings-info-link-v1" type="button" aria-disabled="true" disabled><span>ライセンス</span><span>›</span></button>
           <div class="settings-copyright-v1">© ${new Date().getFullYear()} CueScore Apps</div>
         </footer>
       </main>
@@ -25438,6 +25438,12 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       document.getElementById("settingsBackBtn")?.click();
       return;
     }
+    const legalPage = event.target.closest("[data-settings-legal]")?.dataset.settingsLegal;
+    if (legalPage) {
+      sessionStorage.setItem("cuescore.returnToSettings.v1","1");
+      window.location.assign(new URL(legalPage, window.location.href).href);
+      return;
+    }
     const action = event.target.closest("[data-settings-action]")?.dataset.settingsAction;
     if (action && action !== "delete" && demoApi?.isDemo()) {
       alert("サンプルデータ表示中は書き出し・復元を利用できません。通常データは変更されません。");
@@ -25486,6 +25492,10 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     if (nav === "player") document.getElementById("playerManagementBtn")?.click();
   });
   renderCloudState();
+  if (sessionStorage.getItem("cuescore.returnToSettings.v1") === "1") {
+    sessionStorage.removeItem("cuescore.returnToSettings.v1");
+    requestAnimationFrame(() => document.getElementById("settingsBtn")?.click());
+  }
 })();
 </script>
 <style>

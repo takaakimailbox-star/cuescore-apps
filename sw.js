@@ -1,4 +1,4 @@
-const APP_VERSION = "2.0-jpa9-match-points-v1";
+const APP_VERSION = "2.0-settings-legal-links-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
@@ -87,7 +87,7 @@ self.addEventListener("fetch", event => {
       try {
         const response = await fetch(event.request);
         const cache = await caches.open(CACHE_NAME);
-        cache.put("./index.html", response.clone());
+        cache.put(event.request, response.clone());
         return response;
       } catch (_) {
         return (await caches.match(event.request)) || (await caches.match("./index.html"));
