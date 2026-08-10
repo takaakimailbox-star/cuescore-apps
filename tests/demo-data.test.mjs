@@ -42,6 +42,13 @@ for(const record of sample.records){
   assert.ok(Number(record.players[loser].score)<Number(record.players[loser].goal),`loser goal mismatch: ${record.id}`);
   assert.ok(Array.isArray(record.analysis?.events)&&record.analysis.events.length>0);
   assert.equal(record.analysis.report.recordingMode,"detail");
+  if(record.disciplineId==="jpa9"){
+    const targets={1:14,2:19,3:25,4:31,5:38,6:46,7:55,8:65,9:75};
+    for(const side of [1,2]){
+      assert.equal(Number(record.players[side].goal),targets[Number(record.players[side].skillLevel)],`JPA SL target mismatch: ${record.id} side ${side}`);
+      assert.equal(Number(record.jpa9.skillLevels[side]),Number(record.players[side].skillLevel));
+    }
+  }
 }
 const dates=sample.records.map(record=>Date.parse(record.startedAt));
 assert.ok(Math.max(...dates)-Math.min(...dates)>450*86400000,"sample history must span 12–18 months");

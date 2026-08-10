@@ -9319,6 +9319,41 @@ body {
   });
   const ROTATION_RECORD_SCHEMA_VERSION = 4;
   const JPA9_SL_TARGETS = Object.freeze({1:14,2:19,3:25,4:31,5:38,6:46,7:55,8:65,9:75});
+  // JPA official scoresheet (p_scoresheet.pdf): upper bounds for the loser-score
+  // bands 20-0 through 12-8. Result and Match Detail share these pure helpers.
+  const JPA9_MATCH_POINT_UPPER_BOUNDS_V1 = Object.freeze({
+    1:Object.freeze([2,3,4,6,7,8,10,11,13]),
+    2:Object.freeze([3,5,7,8,10,12,14,16,18]),
+    3:Object.freeze([4,6,9,11,14,16,19,21,24]),
+    4:Object.freeze([5,8,11,14,18,21,24,27,30]),
+    5:Object.freeze([6,10,14,18,22,26,29,33,37]),
+    6:Object.freeze([8,12,17,22,27,31,36,40,45]),
+    7:Object.freeze([10,15,21,26,32,37,43,49,54]),
+    8:Object.freeze([13,19,26,32,39,45,52,58,64]),
+    9:Object.freeze([17,24,31,38,46,53,60,67,74])
+  });
+  function calculateJPA9MatchPointsV1(loserSkillLevel,loserScore){
+    const skillLevel=Number(loserSkillLevel),score=Number(loserScore);
+    const bounds=JPA9_MATCH_POINT_UPPER_BOUNDS_V1[skillLevel];
+    if(!bounds||!Number.isInteger(score)||score<0||score>=Number(JPA9_SL_TARGETS[skillLevel]))return null;
+    const loserPoints=bounds.findIndex(upper=>score<=upper);
+    if(loserPoints<0)return null;
+    return Object.freeze({winner:20-loserPoints,loser:loserPoints});
+  }
+  function jpa9MatchPointsForPlayersV1(winner,players,skillLevels){
+    const winnerSide=Number(winner);
+    if(![1,2].includes(winnerSide))return null;
+    const loserSide=winnerSide===1?2:1;
+    const loser=players?.[loserSide]||{};
+    const loserSkillLevel=loser.skillLevel ?? skillLevels?.[loserSide] ?? skillLevels?.[String(loserSide)];
+    const allocation=calculateJPA9MatchPointsV1(loserSkillLevel,loser.score);
+    if(!allocation)return null;
+    return winnerSide===1
+      ? Object.freeze({1:allocation.winner,2:allocation.loser})
+      : Object.freeze({1:allocation.loser,2:allocation.winner});
+  }
+  window.calculateJPA9MatchPointsV1=calculateJPA9MatchPointsV1;
+  window.jpa9MatchPointsForPlayersV1=jpa9MatchPointsForPlayersV1;
   let activeGameTypeV1 = ROTATION_GAME_TYPE;
   let jpa9SkillLevelsV1 = {1:5,2:5};
   let deadBallsV1 = new Set();
@@ -15017,8 +15052,15 @@ let matchRecordsRawCacheV152 = null;
       const statItems=resultStatItems(player);
       return `<article class="official-result-player-v1 ${winner===0?"draw":player===winner?"winner":"loser"}"><div class="official-result-player-name-v1"><span class="official-result-avatar-v1">${resultAvatarSvgV1(player)}</span><span>${player===1?safeName1:safeName2}</span></div><div class="official-result-score-v1">${Number(scores[player])||0}</div><div class="official-result-stats-v1"><div><span>${statItems[0][0]}</span><strong>${statItems[0][1]}</strong></div><div><span>${statItems[1][0]}</span><strong>${statItems[1][1]}</strong></div></div></article>`;
     };
+    const jpaMatchPoints=isJPA9V1()?jpa9MatchPointsForPlayersV1(winner,{
+      1:{score:scores[1],skillLevel:jpa9SkillLevelsV1[1]},
+      2:{score:scores[2],skillLevel:jpa9SkillLevelsV1[2]}
+    },jpa9SkillLevelsV1):null;
+    const matchPointHtml=jpaMatchPoints
+      ? `<div class="jpa-match-points-v1" aria-label="マッチポイント ${jpaMatchPoints[1]} 対 ${jpaMatchPoints[2]}"><span>マッチポイント</span><strong>${jpaMatchPoints[1]} − ${jpaMatchPoints[2]}</strong><small>合計20ポイント</small></div>`
+      : isJPA9V1()?`<div class="jpa-match-points-v1 is-unavailable" aria-label="マッチポイント 算出不可"><span>マッチポイント</span><strong>—</strong></div>`:"";
 
-    summary.innerHTML=`<div class="official-result-backdrop-v1" aria-hidden="true"></div><section class="official-result-sheet-v1" role="dialog" aria-modal="true" aria-labelledby="officialResultTitleV1"><div class="official-result-handle-v1" aria-hidden="true"></div><div class="official-result-scroll-v1"><h2 id="officialResultTitleV1">試合結果</h2><div class="official-result-info-v1"><span>${infoIcon("calendar")}<b>${dateText}</b></span><span>${infoIcon("clock")}<b>${timeText}</b></span><span>${infoIcon("duration")}<b>${durationText}</b></span></div><div class="official-result-players-v1">${playerCard(1)}<span class="official-result-separator-v1" aria-hidden="true">−</span>${playerCard(2)}</div><section class="official-result-chart-card-v1"><div class="official-result-chart-header-v1"><h3>スコア推移</h3><div><span class="p1"></span>${safeName1}<span class="p2"></span>${safeName2}</div></div><span class="official-result-axis-title-v1">得点</span>${makeOfficialResultChartSvgV1(progress)}<span class="official-result-axis-bottom-v1">イニング</span></section><div class="official-result-actions-v1"><button id="officialResultReturnGameV1" class="official-result-primary-v1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h12"/></svg>試合へ戻る</button><div class="official-result-secondary-row-v1"><button id="officialResultHomeV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3Z"/></svg>ホームへ戻る</button><button id="officialResultRematchV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7V3l-2 2a8 8 0 1 0 2 6M20 3h-4"/></svg>もう一度対戦する</button></div></div><p class="official-result-note-v1">※ 試合の詳細な分析や履歴は「履歴」画面からご確認いただけます。</p></div></section>`;
+    summary.innerHTML=`<div class="official-result-backdrop-v1" aria-hidden="true"></div><section class="official-result-sheet-v1" role="dialog" aria-modal="true" aria-labelledby="officialResultTitleV1"><div class="official-result-handle-v1" aria-hidden="true"></div><div class="official-result-scroll-v1"><h2 id="officialResultTitleV1">試合結果</h2><div class="official-result-info-v1"><span>${infoIcon("calendar")}<b>${dateText}</b></span><span>${infoIcon("clock")}<b>${timeText}</b></span><span>${infoIcon("duration")}<b>${durationText}</b></span></div><div class="official-result-players-v1">${playerCard(1)}<span class="official-result-separator-v1" aria-hidden="true">−</span>${playerCard(2)}</div>${matchPointHtml}<section class="official-result-chart-card-v1"><div class="official-result-chart-header-v1"><h3>スコア推移</h3><div><span class="p1"></span>${safeName1}<span class="p2"></span>${safeName2}</div></div><span class="official-result-axis-title-v1">得点</span>${makeOfficialResultChartSvgV1(progress)}<span class="official-result-axis-bottom-v1">イニング</span></section><div class="official-result-actions-v1"><button id="officialResultReturnGameV1" class="official-result-primary-v1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h12"/></svg>試合へ戻る</button><div class="official-result-secondary-row-v1"><button id="officialResultHomeV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3Z"/></svg>ホームへ戻る</button><button id="officialResultRematchV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7V3l-2 2a8 8 0 1 0 2 6M20 3h-4"/></svg>もう一度対戦する</button></div></div><p class="official-result-note-v1">※ 試合の詳細な分析や履歴は「履歴」画面からご確認いただけます。</p></div></section>`;
     if (winner === 0) {
       const resultTitle = el("officialResultTitleV1");
       resultTitle?.insertAdjacentHTML("beforeend", '<small class="official-result-draw-v1">DRAW</small>');
@@ -22795,6 +22837,12 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
     const disciplineV4=recordDisciplineV2(record);
     const disciplineDefV4=recordsDisciplineDefsV2.find(item=>item.id===disciplineV4) || recordsDisciplineDefsV2[0];
     const masuwariV4=rackGameMasuwariCountsV1(record);
+    const jpaMatchPointsV1=disciplineV4==="jpa9"
+      ? jpa9MatchPointsForPlayersV1(winner,record.players,record?.jpa9?.skillLevels)
+      : null;
+    const jpaMatchPointHtmlV1=disciplineV4==="jpa9"
+      ? `<div class="jpa-match-points-v1 match-detail-jpa-match-points-v1 ${jpaMatchPointsV1?"":"is-unavailable"}" aria-label="${jpaMatchPointsV1?`マッチポイント ${jpaMatchPointsV1[1]} 対 ${jpaMatchPointsV1[2]}`:"マッチポイント 算出不可"}"><span>マッチポイント</span><strong>${jpaMatchPointsV1?`${jpaMatchPointsV1[1]} − ${jpaMatchPointsV1[2]}`:"—"}</strong>${jpaMatchPointsV1?"<small>合計20ポイント</small>":""}</div>`
+      : "";
     const registeredPlayersV3=readPlayerLibrary();
     const detailAvatarV3=player=>{
       const registered=registeredPlayersV3.find(item=>item.id===player?.registeredPlayerId);
@@ -22847,6 +22895,7 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
             <strong class="${winner===2?"winner":winner===1?"loser":""}">${Number(p2.score)||0}</strong>
             <span class="match-detail-result-player-v3"><img src="${detailAvatarV3(p2)}" alt="${esc(p2.name||"Player2")}のプロフィール画像"><span class="match-detail-result-name-v2">${esc(p2.name||"Player2")}</span></span>
           </div>
+          ${jpaMatchPointHtmlV1}
           ${raceTag?`<div class="match-detail-race-v2">${esc(raceTag)}</div>`:""}
         </section>
         <section class="match-detail-card-v1 match-detail-summary-v1">
@@ -23040,6 +23089,25 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
 .official-result-stats-v1 strong{font-size:23px;font-weight:800;line-height:1}
 .official-result-stats-v1 small{font-size:.62em}
 .official-result-separator-v1{text-align:center;font-size:20px;font-weight:800;color:#333}
+.jpa-match-points-v1{
+  width:min(100%,270px);
+  min-height:42px;
+  margin:-4px auto 12px;
+  padding:7px 13px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  column-gap:12px;
+  border:1px solid #dededb;
+  border-radius:12px;
+  background:#fff;
+  color:#171717;
+}
+.jpa-match-points-v1 span{font-size:12px;font-weight:700;text-align:left}
+.jpa-match-points-v1 strong{font-size:20px;font-weight:820;line-height:1;white-space:nowrap}
+.jpa-match-points-v1 small{grid-column:1/-1;margin-top:2px;color:#777775;font-size:9px;text-align:right}
+.jpa-match-points-v1.is-unavailable strong{color:#777775}
+.match-detail-jpa-match-points-v1{margin:8px auto 2px}
 .official-result-chart-card-v1{
   position:relative;
   margin-bottom:12px;
