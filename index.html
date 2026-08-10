@@ -8914,7 +8914,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-sample-data-mode-v1"></script>
+  <script src="./demo-data.js?v=2.0-player-detail-compat-v2"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -10090,8 +10090,9 @@ let matchRecordsRawCacheV152 = null;
   function playerSideInRecord(record, player) {
     const p1 = record.players?.[1] || {};
     const p2 = record.players?.[2] || {};
-    if (p1.registeredPlayerId === player.id) return 1;
-    if (p2.registeredPlayerId === player.id) return 2;
+    const playerId = String(player?.id || "");
+    if (playerId && String(p1.registeredPlayerId || "") === playerId) return 1;
+    if (playerId && String(p2.registeredPlayerId || "") === playerId) return 2;
     const name = String(player.name || "").trim().toLocaleLowerCase("ja");
     const knownPlayerIds = new Set(readPlayerLibrary().map(item => String(item.id || "")));
     const isLegacyNameMatch = side => {
@@ -19216,7 +19217,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-sample-data-mode-v1";
+    const PWA_VERSION = "2.0-player-detail-compat-v2";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -27769,11 +27770,14 @@ body.cue-edge-back-animating-v2 .app{
   const def = id => defs.find(item=>item.id===id)||defs[2];
   const player = id => readPlayerLibrary().find(item=>String(item.id)===String(id));
   const side = (record,p) => playerSideInRecord(record,p);
-  const records = p => recordsForRegisteredPlayer(p).slice().sort((a,b)=>new Date(b.endedAt||b.playedAt||b.startedAt||0)-new Date(a.endedAt||a.playedAt||a.startedAt||0));
+  // Keep every Player Detail section on the same compatibility-filtered record set.
+  // recordsForRegisteredPlayer intentionally accepts legacy name matches, while this
+  // final guard excludes malformed records that cannot resolve the player's side.
+  const records = p => recordsForRegisteredPlayer(p).filter(record=>side(record,p)).sort((a,b)=>new Date(b.endedAt||b.playedAt||b.startedAt||0)-new Date(a.endedAt||a.playedAt||a.startedAt||0));
   const won = (record,s) => Number(record.winner||record.winnerSide||record.result?.winnerSide||0)===Number(s);
   const stats = (items,p) => { const wins=items.filter(r=>won(r,side(r,p))).length;return {games:items.length,wins,losses:Math.max(0,items.length-wins),rate:items.length?Math.round(wins/items.length*100):0}; };
   const avatar = (p,cls="player-avatar-v2") => typeof playerAvatarHtmlV2==="function"?playerAvatarHtmlV2(p,cls):"";
-  const opponent = (record,s) => record.players?.[s===1?2:1]||{};
+  const opponent = (record,s) => s ? record?.players?.[s===1?2:1]||{} : {};
   const opponentLibrary = data => {const id=String(data?.registeredPlayerId||"");return readPlayerLibrary().find(p=>String(p.id)===id)||data||{};};
   const timeOf = record => new Date(record.endedAt||record.playedAt||record.startedAt||0);
   const scoreOf = (record,s) => Number(record.players?.[s]?.score??record.finalScore?.[s]??0)||0;

@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-sample-data-mode-v1";
+const APP_VERSION = "2.0-player-detail-compat-v2";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-sample-data-mode-v1",
+  "./demo-data.js?v=2.0-player-detail-compat-v2",
   "./manifest.webmanifest",
   "./privacy.html",
   "./terms.html",
