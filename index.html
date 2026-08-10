@@ -27751,13 +27751,14 @@ body.cue-edge-back-animating-v2 .app{
     let highRun=0,pockets=0,misses=0,storedShotTotal=0,storedShotCount=0;
     let breakAttempts=0,breakSuccesses=0,masuwari=0,targetRacks=0,totalScore=0,totalInnings=0;
     filtered.forEach(record=>{
-      const side=side(record,p),own=record?.players?.[side]||{},metrics=savedPlayerMetricsV113(record,side);
+      const playerSide=side(record,p);if(!playerSide)return;
+      const own=record?.players?.[playerSide]||{},metrics=savedPlayerMetricsV113(record,playerSide);
       highRun=Math.max(highRun,Number(metrics.maxRun)||Number(own.maxRun)||0);
       const ownPockets=Number(own.pocketCount),ownMisses=Number(own.misses);
       if(Number.isFinite(ownPockets)&&Number.isFinite(ownMisses)&&ownPockets+ownMisses>0){pockets+=ownPockets;misses+=ownMisses;}
       else if(Number.isFinite(Number(metrics.shotRate))){storedShotTotal+=Number(metrics.shotRate);storedShotCount+=1;}
       const events=playerMetricEventsV1(record);
-      events.filter(event=>playerMetricTypeV1(event)==="break_result"&&Number(playerMetricValueV1(event,"player")??playerMetricValueV1(event,"breakPlayer"))===side).forEach(event=>{
+      events.filter(event=>playerMetricTypeV1(event)==="break_result"&&Number(playerMetricValueV1(event,"player")??playerMetricValueV1(event,"breakPlayer"))===playerSide).forEach(event=>{
         breakAttempts+=1;
         const balls=Array.isArray(playerMetricValueV1(event,"pocketedBalls"))?playerMetricValueV1(event,"pocketedBalls"):[];
         const count=balls.length||Number(playerMetricValueV1(event,"pocketCount"))||0;
@@ -27765,10 +27766,10 @@ body.cue-edge-back-animating-v2 .app{
         if(count>0&&!foul)breakSuccesses+=1;
       });
       if(active==="9ball"||active==="10ball"){
-        masuwari+=Number(rackGameMasuwariCountsV1(record)?.[side])||0;
+        masuwari+=Number(rackGameMasuwariCountsV1(record)?.[playerSide])||0;
         targetRacks+=completedRackCountV1(record);
       }
-      const innings=inningsCountNumberV1(record,side),score=Number(own.score);
+      const innings=inningsCountNumberV1(record,playerSide),score=Number(own.score);
       if(innings>0&&Number.isFinite(score)){totalInnings+=innings;totalScore+=score;}
     });
     const shotRate=pockets+misses>0?`${Math.round(pockets/(pockets+misses)*100)}%`:storedShotCount?`${Math.round(storedShotTotal/storedShotCount)}%`:"—";
@@ -27800,6 +27801,91 @@ body.cue-edge-back-animating-v2 .app{
   };
 })();
 </script>
+<style>
+/* CueScore v1.0 RC: shared navigation-control tokens */
+:root{
+  --cue-nav-hit-size-v1:48px;
+  --cue-nav-line-width-v1:2.4px;
+  --cue-nav-control-radius-v1:12px;
+  --cue-nav-control-bg-v1:transparent;
+  --cue-nav-control-shadow-v1:none;
+  --cue-nav-control-padding-v1:0;
+}
+
+/* Back controls share hit area, line weight, background and shadow. */
+.player-management-formal-v1 .player-library-back,
+.records-back-v2,
+.player-detail-formal-v1 .player-stats-back,
+.settings-page-back-v2,
+.settings-suite-back-v2,
+.app.vs-analysis-mode .vs-analysis-back,
+.analysis-v2-header button{
+  width:var(--cue-nav-hit-size-v1)!important;
+  min-width:var(--cue-nav-hit-size-v1)!important;
+  height:var(--cue-nav-hit-size-v1)!important;
+  min-height:var(--cue-nav-hit-size-v1)!important;
+  padding:var(--cue-nav-control-padding-v1)!important;
+  border:0!important;
+  border-radius:var(--cue-nav-control-radius-v1)!important;
+  background:var(--cue-nav-control-bg-v1)!important;
+  box-shadow:var(--cue-nav-control-shadow-v1)!important;
+  color:#171717!important;
+}
+.player-management-formal-v1 .player-library-back svg,
+.records-back-v2 svg,
+.settings-page-back-v2 svg,
+.settings-suite-back-v2 svg{
+  width:28px!important;
+  height:28px!important;
+  stroke-width:var(--cue-nav-line-width-v1)!important;
+}
+.player-detail-formal-v1 .player-stats-back::before{
+  width:15px!important;
+  height:15px!important;
+  margin-left:15px!important;
+  border-width:0 0 var(--cue-nav-line-width-v1) var(--cue-nav-line-width-v1)!important;
+}
+
+/* Edit and add controls use the same 48px interaction target. */
+.player-detail-formal-v1 .player-stats-race,
+.player-management-formal-v1 .player-library-add{
+  min-width:var(--cue-nav-hit-size-v1)!important;
+  height:var(--cue-nav-hit-size-v1)!important;
+  padding:var(--cue-nav-control-padding-v1)!important;
+  border:0!important;
+  border-radius:var(--cue-nav-control-radius-v1)!important;
+  background:var(--cue-nav-control-bg-v1)!important;
+  box-shadow:var(--cue-nav-control-shadow-v1)!important;
+  color:#171717!important;
+}
+
+/* Filter and sort controls share the same surface treatment. */
+.records-filter-toggle-v1,
+.records-sort-v1,
+.player-management-formal-v1 .player-library-sort-v1,
+.journey-segment-v2 button,
+.journey-filter-v2 button{
+  min-height:44px!important;
+  padding:0 14px!important;
+  border:1px solid #dededb!important;
+  border-radius:var(--cue-nav-control-radius-v1)!important;
+  background:#fff!important;
+  box-shadow:var(--cue-nav-control-shadow-v1)!important;
+  color:#171717!important;
+}
+
+/* Forward chevrons share visual weight without changing card layout. */
+.player-management-formal-v1 .player-management-chevron-v1,
+.record-chevron-v1,
+.player-detail-chevron-v1,
+.journey-chevron-v2,
+.settings-data-chevron-v1{
+  color:#777774!important;
+  border-color:#777774!important;
+  stroke:#777774!important;
+  stroke-width:2px!important;
+}
+</style>
 <style>
 /* CueScore Rival Analysis v2.0 — player journey drill-down */
 .app.vs-analysis-mode .vs-analysis-screen{background:#f7f7f5;color:#171717;overflow:hidden}

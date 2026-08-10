@@ -29,6 +29,12 @@ source file is not present in the current official archive.
 Official Design Decision Log v1.2 is the official successor to v1.1. Versions
 1.0 and 1.1 remain in the official directory as preceding releases.
 
+Adopted RC decision addenda that supplement the latest Decision Log:
+
+- `official/08_CueScore_v1.0RC_GameResult_Statistics_Spec.docx`
+- `official/09_CueScore_v1.0RC_Player_Analytics_Discipline_Statistics_Spec.md`
+- `official/10_CueScore_v1.0RC_UI_Unification_PlayerDetail_Bugfix_Decision.md`
+
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and
 this index is updated.

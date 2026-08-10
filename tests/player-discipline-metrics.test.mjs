@@ -18,7 +18,7 @@ for(const flag of ["foul","scratch","breakFoul","illegalBreak","preBreakFoul","b
 }
 
 // Existing rack-game break-and-run judgement remains the numerator source.
-assert.match(html,/masuwari\+=Number\(rackGameMasuwariCountsV1\(record\)\?\.\[side\]\)\|\|0/);
+assert.match(html,/masuwari\+=Number\(rackGameMasuwariCountsV1\(record\)\?\.\[playerSide\]\)\|\|0/);
 assert.match(html,/targetRacks\+=completedRackCountV1\(record\)/);
 assert.match(html,/const masuwariRate=targetRacks\?`\$\{Math\.round\(masuwari\/targetRacks\*100\)\}%`:"—"/);
 
