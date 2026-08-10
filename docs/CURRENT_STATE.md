@@ -115,6 +115,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 
 - CSV入出力
 - 自動クラウド同期
+- 試合共有（Match Sharing）：1台で記録した完了試合を対戦相手のCueScore Appsへ転送し、相手側の履歴・統計・分析へ取り込める機能。v1.0非搭載、v1.1以降候補。転送方式・プレーヤー紐付け・重複防止・編集競合・データ互換を正式設計してから実装する。
 
 ## 要確認事項
 
@@ -131,6 +132,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - App Store v1.0 release profileはCSV・クラウド同期を無効化し、関連UIを表示しない。
 - Official Demo Dataは提出ビルドに収録し、通常データとの完全分離を維持する。
 - Official Demo Dataの本番向け表示は「サンプルデータ」を採用し、状態を「通常データ／サンプルデータ」、操作を「準備する／サンプルを見る／通常データへ戻る／初期状態に戻す／削除」とする。
+- 試合共有（Match Sharing）はv1.0ではLaterとし、自動クラウド同期とは別の将来機能として扱う。実装開始前にProduct Ownerの再採用判断を必要とする。正式決定記録：`docs/official/12_CueScore_Later_Match_Sharing_Decision.md`。
 
 ## App Store Public URL Candidates
 

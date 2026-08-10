@@ -35,6 +35,7 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/09_CueScore_v1.0RC_Player_Analytics_Discipline_Statistics_Spec.md`
 - `official/10_CueScore_v1.0RC_UI_Unification_PlayerDetail_Bugfix_Decision.md`
 - `official/11_CueScore_v1.0RC_JPA9_MatchPoint_Decision.md`
+- `official/12_CueScore_Later_Match_Sharing_Decision.md`
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and
