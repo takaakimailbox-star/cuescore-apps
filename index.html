@@ -14513,6 +14513,27 @@ let matchRecordsRawCacheV152 = null;
     return Number(calculateManualMissesV107()[target] || 0);
   }
 
+  function calculateCompletedTurnsFromEventsV1() {
+    const turns={1:new Set(),2:new Set()};
+    const turnSources=new Set(["break_result","ball_pocketed","safety","foul","player_switch"]);
+    commonEventsV7.forEach(event=>{
+      if(!turnSources.has(String(event?.sourceType||"")))return;
+      const player=Number(event?.data?.fromPlayer ?? event?.player)===2?2:1;
+      const inningNumber=Number(event?.data?.inningBefore ?? event?.inningNumber ?? event?.data?.inning);
+      if(!Number.isInteger(inningNumber)||inningNumber<1)return;
+      const rackNumber=isJPA9V1()?Math.max(1,Number(event?.rackNumber ?? event?.data?.rack)||1):1;
+      turns[player].add(`${rackNumber}:${inningNumber}`);
+    });
+    return {1:turns[1].size,2:turns[2].size};
+  }
+
+  function currentMatchMasuwariCountV1(player) {
+    const target=Number(player)===2?2:1;
+    const explicit=analysisEventsV60.filter(event=>event?.type==="break_run_out"&&Number(event?.player)===target).length;
+    if(explicit)return explicit;
+    return analysisEventsV60.filter(event=>event?.type==="break_result"&&event?.breakRunOut===true&&Number(event?.breakPlayer ?? event?.player)===target).length;
+  }
+
   function calculateResultStats() {
     if (isThreeCushionV1()) {
       const completedTurns={1:Number(threeCushionStateV1.completedTurns[1])||0,2:Number(threeCushionStateV1.completedTurns[2])||0};
@@ -14550,7 +14571,13 @@ let matchRecordsRawCacheV152 = null;
       2: Math.max(maxRun[2], currentRun[2])
     };
 
-    return {nineBall, maxRun: effectiveMaxRun, turnCount, pocketCount, share, shotRate, manualMisses: manualMissesV107};
+    const completedTurns=calculateCompletedTurnsFromEventsV1();
+    const average={
+      1:completedTurns[1]?Number((scores[1]/completedTurns[1]).toFixed(3)):0,
+      2:completedTurns[2]?Number((scores[2]/completedTurns[2]).toFixed(3)):0
+    };
+
+    return {nineBall, maxRun: effectiveMaxRun, turnCount, completedTurns, average, pocketCount, share, shotRate, manualMisses: manualMissesV107};
   }
 
   function buildScoreProgress() {
@@ -14923,6 +14950,18 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function dismissOfficialResultToGameV1() {
+    if(currentGameRecordSaved&&currentGameRecordIdV100){
+      try{
+        const recordId=String(currentGameRecordIdV100);
+        writeMatchRecords(readMatchRecords().filter(record=>String(record?.id)!==recordId));
+        currentGameRecordSaved=false;
+        currentGameRecordIdV100=null;
+      }catch(error){
+        console.error("CueScore result review restore failed",error);
+        alert(`試合画面へ戻る準備に失敗しました。\n\n${error?.message||error}\n\n試合結果は保存済みです。`);
+        return;
+      }
+    }
     gameSetDismissed=true;
     reviewMode=true;
     gameEnded=false;
@@ -14948,14 +14987,9 @@ let matchRecordsRawCacheV152 = null;
       try{
         const savedId=saveCurrentMatchRecord(winner,stats);
         if(!savedId)throw new Error("試合履歴の保存IDを確認できませんでした。");
-        summary.classList.add("hidden");
-        summary.style.display="none";
-        summary.style.pointerEvents="none";
-        requestAnimationFrame(()=>window.openMatchResultDetailV5(savedId));
-        return;
       }catch(error){
         console.error("CueScore result detail save failed",error);
-        alert(`試合結果を保存できませんでした。\n\n${error?.message||error}\n\n試合画面へ戻って、もう一度お試しください。`);
+        alert(`試合結果を保存できませんでした。\n\n${error?.message||error}\n\n試合結果画面は保持しています。`);
       }
     }
     const endDate=new Date(endedAt), startDate=new Date(currentGameStartedAt||"");
@@ -14970,7 +15004,19 @@ let matchRecordsRawCacheV152 = null;
       if(name==="clock")return `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
       return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10M7 21h10M8 3c0 4 1 6 4 9-3 3-4 5-4 9M16 3c0 4-1 6-4 9 3 3 4 5 4 9"/></svg>`;
     };
-    const playerCard=player=>`<article class="official-result-player-v1 ${winner===0?"draw":player===winner?"winner":"loser"}"><div class="official-result-player-name-v1"><span class="official-result-avatar-v1">${resultAvatarSvgV1(player)}</span><span>${player===1?safeName1:safeName2}</span></div><div class="official-result-score-v1">${Number(scores[player])||0}</div><div class="official-result-stats-v1"><div><span>${isThreeCushionV1()?"アベレージ":"成功率"}</span><strong>${isThreeCushionV1()?Number(stats.average?.[player]||0).toFixed(3):`${Number(stats.shotRate[player])||0}<small>%</small>`}</strong></div><div><span>ハイラン</span><strong>${Number(stats.maxRun[player])||0}</strong></div></div></article>`;
+    const resultStatItems=player=>{
+      const shotRate=`${Number(stats.shotRate?.[player])||0}<small>%</small>`;
+      const highRun=String(Number(stats.maxRun?.[player])||0);
+      const average=Number(stats.average?.[player]||0);
+      if(isNineBallV1()||isTenBallV1())return [["シュート率",shotRate],["マス割",String(currentMatchMasuwariCountV1(player))]];
+      if(activeGameTypeV1===ROTATION_GAME_TYPE)return [["ハイラン",highRun],["シュート率",shotRate]];
+      if(isJPA9V1()||isStraightPoolV1())return [["アベレージ",average.toFixed(2)],["ハイラン",highRun]];
+      return [["アベレージ",average.toFixed(3)],["ハイラン",highRun]];
+    };
+    const playerCard=player=>{
+      const statItems=resultStatItems(player);
+      return `<article class="official-result-player-v1 ${winner===0?"draw":player===winner?"winner":"loser"}"><div class="official-result-player-name-v1"><span class="official-result-avatar-v1">${resultAvatarSvgV1(player)}</span><span>${player===1?safeName1:safeName2}</span></div><div class="official-result-score-v1">${Number(scores[player])||0}</div><div class="official-result-stats-v1"><div><span>${statItems[0][0]}</span><strong>${statItems[0][1]}</strong></div><div><span>${statItems[1][0]}</span><strong>${statItems[1][1]}</strong></div></div></article>`;
+    };
 
     summary.innerHTML=`<div class="official-result-backdrop-v1" aria-hidden="true"></div><section class="official-result-sheet-v1" role="dialog" aria-modal="true" aria-labelledby="officialResultTitleV1"><div class="official-result-handle-v1" aria-hidden="true"></div><div class="official-result-scroll-v1"><h2 id="officialResultTitleV1">試合結果</h2><div class="official-result-info-v1"><span>${infoIcon("calendar")}<b>${dateText}</b></span><span>${infoIcon("clock")}<b>${timeText}</b></span><span>${infoIcon("duration")}<b>${durationText}</b></span></div><div class="official-result-players-v1">${playerCard(1)}<span class="official-result-separator-v1" aria-hidden="true">−</span>${playerCard(2)}</div><section class="official-result-chart-card-v1"><div class="official-result-chart-header-v1"><h3>スコア推移</h3><div><span class="p1"></span>${safeName1}<span class="p2"></span>${safeName2}</div></div><span class="official-result-axis-title-v1">得点</span>${makeOfficialResultChartSvgV1(progress)}<span class="official-result-axis-bottom-v1">イニング</span></section><div class="official-result-actions-v1"><button id="officialResultReturnGameV1" class="official-result-primary-v1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h12"/></svg>試合へ戻る</button><div class="official-result-secondary-row-v1"><button id="officialResultHomeV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3Z"/></svg>ホームへ戻る</button><button id="officialResultRematchV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7V3l-2 2a8 8 0 1 0 2 6M20 3h-4"/></svg>もう一度対戦する</button></div></div><p class="official-result-note-v1">※ 試合の詳細な分析や履歴は「履歴」画面からご確認いただけます。</p></div></section>`;
     if (winner === 0) {

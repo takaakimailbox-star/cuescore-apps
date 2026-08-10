@@ -1,6 +1,6 @@
 # CueScore Apps Current State
 
-Updated: 2026-08-09  
+Updated: 2026-08-10
 Status: Living operational reference
 
 ## Purpose and Authority
@@ -11,6 +11,20 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 2. Official Design Decision Logの最新適用判断を優先。
 3. 本ファイルは運用上の現在状態であり、正式仕様を新規作成しない。
 4. 正式資料と矛盾した場合は推測せずProduct Ownerへ確認する。
+
+## App Store v1.0 RC：Game Result競技別統計2指標（2026年8月10日）
+
+- Product Owner採用済み仕様として、Game Resultのプレーヤーカード下部2指標を競技別に切り替える。
+- 9 Ball・10 Ball：シュート率／マス割。マス割は既存のブレイクランアウト成立回数を使用。
+- Rotation：ハイラン／シュート率。
+- JPA 9 Ball：アベレージ（総得点 ÷ 自分の総イニング数。0点で終了したイニングを含む）／ハイラン。
+- Straight Pool（14.1）：アベレージ（総得点 ÷ イニング数）／ハイラン。
+- Three Cushion（3C）：アベレージ（総得点 ÷ イニング数）／ハイラン。
+- レイアウト、カード寸法、色、余白は変更せず、表示ラベルと計算式のみ切り替える。
+- 試合終了時は結果を先に保存してGame Resultを表示する。Game Resultから「試合へ戻る」場合のみ、その保存済み結果を取り消して試合進行の再編集へ戻す。
+- Undo反映後のイベントログから完了手番を再計算し、既存データ形式を変更しない。
+- 本決定はGame Result表示に対する仕様であり、プレーヤー詳細のJPA 9 Ball「平均イニング」未確定事項は変更しない。
+- 正式仕様：`docs/official/08_CueScore_v1.0RC_GameResult_Statistics_Spec.docx`。
 
 ## App Store v1.0 RC：競技別プレーヤー統計4指標（2026年8月9日）
 
