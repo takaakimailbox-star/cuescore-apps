@@ -27230,11 +27230,14 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .pro-game-screen .pro-scoreboard .pro-turn-arrow-v1{color:var(--cue-discipline-accent)!important}
 .break-player-segments-v1{position:relative}
 .break-player-segment-v1{
+  box-sizing:border-box;
+  border-width:1px!important;
   border-color:#dededb!important;
   color:#777775!important;
   background:#fff!important;
 }
 .break-player-segment-v1.selected-v1{
+  border-width:2px!important;
   border-color:var(--cue-discipline-accent)!important;
   color:#171717!important;
   background:#fff!important;
@@ -27261,10 +27264,18 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   line-height:1;
   pointer-events:none;
 }
+/* CueScore v1.0 RC: keep the tap target intact while improving scratch visibility. */
+.break-scratch-icon-btn-v1 img{
+  width:52px;
+  height:52px;
+}
 @media(max-width:390px){
   .pro-player-identity-v2{gap:5px}
   .pro-player-avatar-v2{width:26px;height:26px;flex-basis:26px}
   .break-player-arrow-v1{width:28px;height:28px;font-size:20px}
+}
+@media(max-height:700px){
+  .break-scratch-icon-btn-v1 img{width:46px;height:46px}
 }
 </style>
 <style id="cueScoreEdgeBackMotionV2">
