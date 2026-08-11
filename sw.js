@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-player-history-ui-v1";
+const APP_VERSION = "2.0-jpa9-icon-unified-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-player-history-ui-v1",
+  "./demo-data.js?v=2.0-jpa9-icon-unified-v1",
   "./manifest.webmanifest",
   "./privacy.html",
   "./terms.html",
@@ -30,7 +30,6 @@ const APP_SHELL = [
   "./assets/icons/games/game-10ball.svg",
   "./assets/icons/games/game-14-1.svg",
   "./assets/icons/games/game-jpa-9ball.svg",
-  "./assets/icons/games/game-jpa-9ball-home.svg",
   "./assets/icons/games/game-3cushion.svg",
   "./assets/icons/balls/cue-ball-dotted.svg",
   "./assets/icons/avatar/manifest.json",
