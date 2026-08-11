@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-rack-start-toast-v1";
+const APP_VERSION = "2.0-circle-close-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-rack-start-toast-v1",
+  "./demo-data.js?v=2.0-circle-close-v1",
   "./manifest.webmanifest",
   "./privacy.html",
   "./terms.html",

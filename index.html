@@ -7763,6 +7763,26 @@ body.cue-modal-visible { overscroll-behavior: none; }
   :where(button:not(.result-dot), [role="button"]) { min-height: 44px; }
 }
 
+/* Circular modal close: preserve the 44pt target without Safari stretching it into an oval. */
+.cue-circle-close-v1,
+.official-result-close-v1{
+  box-sizing:border-box!important;
+  width:44px!important;
+  height:44px!important;
+  min-width:44px!important;
+  min-height:44px!important;
+  aspect-ratio:1/1!important;
+  flex:0 0 44px!important;
+  align-self:center!important;
+  padding:0!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:50%!important;
+  line-height:1!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+}
+
 /* CueScore RC42: cloud generation history clarity and restore safety */
 .cloud-history-item.is-latest { border-color:rgba(255,226,120,.72); background:rgba(96,72,0,.20); }
 .cloud-history-item.is-invalid { border-color:rgba(255,122,137,.58); background:rgba(92,20,31,.24); }
@@ -8243,7 +8263,7 @@ body {
         <div class="new-match-race-sheet-v1" role="dialog" aria-modal="true" aria-labelledby="newMatchRacePickerTitleV1">
           <div class="new-match-race-sheet-head-v1">
             <strong id="newMatchRacePickerTitleV1">Race toを選択</strong>
-            <button id="newMatchRacePickerCloseV1" type="button" aria-label="閉じる">×</button>
+            <button id="newMatchRacePickerCloseV1" class="cue-circle-close-v1" type="button" aria-label="閉じる">×</button>
           </div>
           <div class="new-match-race-options-v1" role="group" aria-label="Race to候補">
             <button type="button" data-race-value="61">61</button>
@@ -8929,7 +8949,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-rack-start-toast-v1"></script>
+  <script src="./demo-data.js?v=2.0-circle-close-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19288,7 +19308,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-rack-start-toast-v1";
+    const PWA_VERSION = "2.0-circle-close-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
