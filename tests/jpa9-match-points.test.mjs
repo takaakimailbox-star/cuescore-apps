@@ -49,16 +49,20 @@ test("player order is preserved and incomplete/non-JPA data stays unassigned",()
 test("Game Result and Match Detail use the same shared allocation",()=>{
   assert.match(html,/const jpaMatchPoints=isJPA9V1\(\)\?jpa9MatchPointsForPlayersV1/);
   assert.match(html,/const jpaMatchPointsV1=disciplineV4==="jpa9"[\s\S]*?jpa9MatchPointsForPlayersV1\(winner,record\.players,record\?\.jpa9\?\.skillLevels\)/);
-  assert.match(html,/official-result-player-match-point-v2[\s\S]*?jpaMatchPoints\[player\][\s\S]*?<small>pt<\/small>/);
-  assert.match(html,/official-result-score-v1[\s\S]*?\$\{matchPoint\}<div class="official-result-stats-v1"/);
-  assert.match(html,/match-detail-result-player-v3[\s\S]*?jpaPlayerMatchPointV2\(1\)[\s\S]*?jpaPlayerMatchPointV2\(2\)/);
-  assert.match(html,/match-detail-player-match-point-v2[\s\S]*?jpaMatchPointsV1\[player\][\s\S]*?<i>pt<\/i>/);
+  assert.match(html,/separator\.textContent=jpaMatchPoints\?`\$\{jpaMatchPoints\[1\]\}–\$\{jpaMatchPoints\[2\]\}`:"—"/);
+  assert.match(html,/const jpaMatchPointValueV3=disciplineV4==="jpa9"[\s\S]*?jpaMatchPointsV1\[1\][\s\S]*?jpaMatchPointsV1\[2\]/);
+  assert.match(html,/official-result-match-points-v3/);
+  assert.match(html,/match-detail-match-points-v3/);
+  assert.doesNotMatch(html,/<(?:span|small|strong|b|i)[^>]*>マッチポイント<\//);
+  assert.doesNotMatch(html,/<(?:small|i)>pt<\//);
   assert.doesNotMatch(html,/<div class="jpa-match-points-v1/);
 });
 
-test("20-0 and 14-6 keep Player 1 / Player 2 order while two-digit point labels remain compact",()=>{
+test("20-0, 16-4, 14-6 and 12-8 keep Player 1 / Player 2 order in one compact line",()=>{
   assert.deepEqual({...context.window.jpa9MatchPointsForPlayersV1(1,{1:{score:38,skillLevel:5},2:{score:0,skillLevel:5}})},{1:20,2:0});
+  assert.deepEqual({...context.window.jpa9MatchPointsForPlayersV1(1,{1:{score:38,skillLevel:5},2:{score:19,skillLevel:5}})},{1:16,2:4});
   assert.deepEqual({...context.window.jpa9MatchPointsForPlayersV1(1,{1:{score:38,skillLevel:5},2:{score:27,skillLevel:5}})},{1:14,2:6});
-  assert.match(html,/\.official-result-player-match-point-v2>strong\{font-size:18px;[\s\S]*?white-space:nowrap/);
-  assert.match(html,/\.match-detail-player-match-point-v2\{[\s\S]*?min-width:74px;[\s\S]*?\.match-detail-player-match-point-v2 b\{[\s\S]*?white-space:nowrap/);
+  assert.deepEqual({...context.window.jpa9MatchPointsForPlayersV1(1,{1:{score:38,skillLevel:5},2:{score:34,skillLevel:5}})},{1:12,2:8});
+  assert.match(html,/\.official-result-match-points-v3\{[\s\S]*?font-weight:500;[\s\S]*?white-space:nowrap/);
+  assert.match(html,/\.match-detail-match-points-v3\{[\s\S]*?font-weight:480;[\s\S]*?white-space:nowrap/);
 });
