@@ -47,12 +47,22 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 
 ## App Store v1.0 Final RC：Game Result Modal復元・スコア推移修正（2026年8月11日）
 
-- Game ResultはBottom Sheetではなく、Official Design System／UI Componentsどおり中央Result Modalを使用する。左右16pt相当、最大幅560pt、角丸28pt、Fade＋Scale、右上Close、背面操作不可とし、Bottom Sheet用Grabberと下端固定構造は使用しない。
+- Game ResultはBottom Sheetではなく中央Result Modalを使用する。左右16pt相当、最大幅560pt、角丸28pt、Fade＋Scale、背面操作不可とし、Bottom Sheet用Grabberと下端固定構造は使用しない。2026年8月11日のProduct Owner決定により、Game Resultに限り右上Closeを廃止した。
 - Game ResultとMatch Detailは同じUndo対応の得点推移生成関数を使用し、保存形式や新規保存項目は変更しない。
 - 9 Ball／10 BallはラックをX軸、累積ラック勝利数をY軸とし、`rackResults`、競技別`rackResults`、旧履歴の`rack_end`の順に使用する。入球イベントはラック得点にしない。
 - Rotation／JPA 9 Ball／Straight Pool（14.1）／Three Cushion（3C）はイニングをX軸、累積得点をY軸とする。JPAは有効得点、14.1は入球・ブレイク得点と通常／3ファール減点、3Cは`carom_point`または保存済みイニングを反映する。
 - 最終点だけ保存スコアへ強制置換する処理を廃止。通常試合はUndo後の有効共通イベント、Official Demo Data v3.1と旧履歴は既存の検証済み保存推移を共通関数内の後方互換経路で使用する。
 - PWAキャッシュ版は `2.0-game-result-modal-progress-v1`。Official Release文書は変更していない。
+
+## App Store v1.0 Final RC：Game Result Modal右上Close廃止（2026年8月11日）
+
+- Product Owner採用決定により、Game Result Modalの右上×を表示しない。
+- 試合進行へ戻る正式経路は「試合へ戻る」ボタンだけとし、保存済みの暫定結果を取り消してGame画面へ復帰する既存処理を維持する。
+- 「ホームへ戻る」「もう一度対戦する」は維持する。BackdropタップおよびEscapeではGame Resultを閉じない。
+- 中央配置、左右余白、最大幅、角丸、Fade＋Scale、背面操作不可は維持する。
+- Race Picker、Result以外のModal、Picker、OverlayのClose仕様は変更しない。
+- 正式決定記録：`docs/official/13_CueScore_v1.0FinalRC_GameResult_Close_Decision.md`。Official Design Decision Log v1.3へのDecision 019追記案を同文書に記録した。
+- 現行Official Design System v2.0およびUI Components v1.0の一般Modal／Result Close規定にはGame Result例外の追補が必要。既存Official Release本体は未変更。
 
 ## App Store v1.0 RC：Player Analytics競技別統計3指標（2026年8月10日）
 

@@ -12,11 +12,17 @@ vm.runInNewContext(`${html.slice(start,end)}\nwindow.testBuilder=scoreProgressFo
 const build=(record,discipline)=>JSON.parse(JSON.stringify(context.window.testBuilder(record,discipline)));
 const common=(sourceType,player,inning,data={})=>({type:sourceType==="rack_end"?"RackEnd":"Shot",sourceType,player,inningNumber:inning,data});
 
-test("Official Game Result is a centered Modal without Bottom Sheet affordances",()=>{
+test("Official Game Result is a centered Modal with explicit action-only dismissal",()=>{
   assert.doesNotMatch(html,/official-result-handle-v1/);
   assert.match(html,/\.official-result-sheet-v1\{[\s\S]*width:min\(100%,560px\);[\s\S]*border-radius:28px;/);
   assert.match(html,/@keyframes official-result-modal-in-v1/);
-  assert.match(html,/id="officialResultCloseV1"/);
+  assert.doesNotMatch(html,/id="officialResultCloseV1"/);
+  assert.doesNotMatch(html,/\.official-result-close-v1\s*\{/);
+  assert.doesNotMatch(html,/officialResultCloseV1[^\n]*addEventListener/);
+  assert.match(html,/id="officialResultReturnGameV1"[\s\S]*?試合へ戻る/);
+  assert.match(html,/officialResultReturnGameV1"\)\?\.addEventListener\("click",dismissOfficialResultToGameV1\)/);
+  assert.doesNotMatch(html,/official-result-backdrop-v1[^\n]*addEventListener/);
+  assert.doesNotMatch(html,/event\.key\s*===?\s*["']Escape["'][\s\S]{0,240}dismissOfficialResultToGameV1/);
   assert.doesNotMatch(html,/\.official-result-sheet-v1\{[\s\S]{0,400}bottom:0;/);
 });
 

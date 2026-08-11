@@ -9,7 +9,7 @@ assert.match(
   "Race/number picker must use the shared circular close shape"
 );
 
-const sharedCloseRule = html.match(/\.cue-circle-close-v1,\s*\.official-result-close-v1\s*\{([\s\S]*?)\n\}/)?.[1] || "";
+const sharedCloseRule = html.match(/\.cue-circle-close-v1\s*\{([\s\S]*?)\n\}/)?.[1] || "";
 for (const declaration of [
   /width:44px!important/,
   /height:44px!important/,
@@ -31,7 +31,7 @@ assert.match(
   "the global mobile touch target must remain intact"
 );
 assert.match(html, /\.new-match-race-sheet-head-v1\{display:flex;align-items:center;justify-content:space-between/);
-assert.match(html, /\.official-result-close-v1\{[\s\S]*?top:14px;[\s\S]*?right:14px;/);
+assert.doesNotMatch(html, /officialResultCloseV1|\.official-result-close-v1\s*\{/);
 assert.match(html, /\.player-editor-close-v1\{[^}]*width:44px;height:44px/);
 
 console.log("Circular modal close regression checks passed");

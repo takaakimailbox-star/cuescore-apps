@@ -7764,8 +7764,7 @@ body.cue-modal-visible { overscroll-behavior: none; }
 }
 
 /* Circular modal close: preserve the 44pt target without Safari stretching it into an oval. */
-.cue-circle-close-v1,
-.official-result-close-v1{
+.cue-circle-close-v1{
   box-sizing:border-box!important;
   width:44px!important;
   height:44px!important;
@@ -8949,7 +8948,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-circle-close-v1"></script>
+  <script src="./demo-data.js?v=2.0-result-action-only-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -15151,7 +15150,7 @@ let matchRecordsRawCacheV152 = null;
       ? `<div class="jpa-match-points-v1" aria-label="マッチポイント ${jpaMatchPoints[1]} 対 ${jpaMatchPoints[2]}"><span>マッチポイント</span><strong>${jpaMatchPoints[1]} − ${jpaMatchPoints[2]}</strong><small>合計20ポイント</small></div>`
       : isJPA9V1()?`<div class="jpa-match-points-v1 is-unavailable" aria-label="マッチポイント 算出不可"><span>マッチポイント</span><strong>—</strong></div>`:"";
 
-    summary.innerHTML=`<div class="official-result-backdrop-v1" aria-hidden="true"></div><section class="official-result-sheet-v1" role="dialog" aria-modal="true" aria-labelledby="officialResultTitleV1"><button id="officialResultCloseV1" class="official-result-close-v1" type="button" aria-label="試合結果を閉じる">×</button><div class="official-result-scroll-v1"><h2 id="officialResultTitleV1">試合結果</h2><div class="official-result-info-v1"><span>${infoIcon("calendar")}<b>${dateText}</b></span><span>${infoIcon("clock")}<b>${timeText}</b></span><span>${infoIcon("duration")}<b>${durationText}</b></span></div><div class="official-result-players-v1">${playerCard(1)}<span class="official-result-separator-v1" aria-hidden="true">−</span>${playerCard(2)}</div>${matchPointHtml}<section class="official-result-chart-card-v1"><div class="official-result-chart-header-v1"><h3>スコア推移</h3><div><span class="p1"></span>${safeName1}<span class="p2"></span>${safeName2}</div></div><span class="official-result-axis-title-v1">得点</span>${makeOfficialResultChartSvgV1(progress)}<span class="official-result-axis-bottom-v1">${progress.axis}</span></section><div class="official-result-actions-v1"><button id="officialResultReturnGameV1" class="official-result-primary-v1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h12"/></svg>試合へ戻る</button><div class="official-result-secondary-row-v1"><button id="officialResultHomeV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3Z"/></svg>ホームへ戻る</button><button id="officialResultRematchV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7V3l-2 2a8 8 0 1 0 2 6M20 3h-4"/></svg>もう一度対戦する</button></div></div><p class="official-result-note-v1">※ 試合の詳細な分析や履歴は「履歴」画面からご確認いただけます。</p></div></section>`;
+    summary.innerHTML=`<div class="official-result-backdrop-v1" aria-hidden="true"></div><section class="official-result-sheet-v1" role="dialog" aria-modal="true" aria-labelledby="officialResultTitleV1"><div class="official-result-scroll-v1"><h2 id="officialResultTitleV1">試合結果</h2><div class="official-result-info-v1"><span>${infoIcon("calendar")}<b>${dateText}</b></span><span>${infoIcon("clock")}<b>${timeText}</b></span><span>${infoIcon("duration")}<b>${durationText}</b></span></div><div class="official-result-players-v1">${playerCard(1)}<span class="official-result-separator-v1" aria-hidden="true">−</span>${playerCard(2)}</div>${matchPointHtml}<section class="official-result-chart-card-v1"><div class="official-result-chart-header-v1"><h3>スコア推移</h3><div><span class="p1"></span>${safeName1}<span class="p2"></span>${safeName2}</div></div><span class="official-result-axis-title-v1">得点</span>${makeOfficialResultChartSvgV1(progress)}<span class="official-result-axis-bottom-v1">${progress.axis}</span></section><div class="official-result-actions-v1"><button id="officialResultReturnGameV1" class="official-result-primary-v1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h12"/></svg>試合へ戻る</button><div class="official-result-secondary-row-v1"><button id="officialResultHomeV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3Z"/></svg>ホームへ戻る</button><button id="officialResultRematchV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7V3l-2 2a8 8 0 1 0 2 6M20 3h-4"/></svg>もう一度対戦する</button></div></div><p class="official-result-note-v1">※ 試合の詳細な分析や履歴は「履歴」画面からご確認いただけます。</p></div></section>`;
     if (winner === 0) {
       const resultTitle = el("officialResultTitleV1");
       resultTitle?.insertAdjacentHTML("beforeend", '<small class="official-result-draw-v1">DRAW</small>');
@@ -15171,7 +15170,6 @@ let matchRecordsRawCacheV152 = null;
         alert(`試合結果を保存できませんでした。\n\n${error?.message||error}\n\n試合結果画面は保持しています。`);
       }
     };
-    el("officialResultCloseV1")?.addEventListener("click",dismissOfficialResultToGameV1);
     el("officialResultReturnGameV1")?.addEventListener("click",dismissOfficialResultToGameV1);
     el("officialResultHomeV1")?.addEventListener("click",event=>saveAndLeave(event.currentTarget,false));
     el("officialResultRematchV1")?.addEventListener("click",event=>saveAndLeave(event.currentTarget,true));
@@ -19308,7 +19306,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-circle-close-v1";
+    const PWA_VERSION = "2.0-result-action-only-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -23055,23 +23053,6 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
   font-size:clamp(27px,7vw,34px);
   font-weight:850;
   letter-spacing:.02em;
-}
-.official-result-close-v1{
-  position:absolute;
-  z-index:2;
-  top:14px;
-  right:14px;
-  width:36px;
-  height:36px;
-  padding:0;
-  display:grid;
-  place-items:center;
-  border:0;
-  border-radius:50%;
-  color:#444;
-  background:#eeeeec;
-  font-size:25px;
-  line-height:1;
 }
 @keyframes official-result-modal-in-v1{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
 @media(prefers-reduced-motion:reduce){.official-result-sheet-v1{animation:none}}
