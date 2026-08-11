@@ -8948,7 +8948,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-result-action-only-v1"></script>
+  <script src="./demo-data.js?v=2.0-match-detail-scroll-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19306,7 +19306,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-result-action-only-v1";
+    const PWA_VERSION = "2.0-match-detail-scroll-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -23653,9 +23653,9 @@ body.match-detail-visible-v1{overflow:hidden!important}
   left:0!important;
   z-index:16000!important;
   width:100%!important;
-  height:100dvh!important;
-  min-height:100dvh!important;
-  max-height:100dvh!important;
+  height:var(--cue-visual-height,100dvh)!important;
+  min-height:var(--cue-visual-height,100dvh)!important;
+  max-height:var(--cue-visual-height,100dvh)!important;
   display:block!important;
   padding:0!important;
   overflow:hidden!important;
@@ -23721,6 +23721,7 @@ body.match-detail-visible-v1{overflow:hidden!important}
   overflow-y:auto;
   overflow-x:hidden;
   overscroll-behavior:contain;
+  touch-action:pan-y;
   -webkit-overflow-scrolling:touch;
   padding:0 max(12px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));
   scroll-padding-bottom:max(24px,env(safe-area-inset-bottom));

@@ -17,8 +17,8 @@ assert.doesNotMatch(
 );
 assert.match(
   html,
-  /\.record-detail-overlay\.match-detail-overlay-v1\{[\s\S]*?height:100dvh!important;[\s\S]*?max-height:100dvh!important;/,
-  "match detail height must not collapse with the zoomed visual viewport"
+  /\.record-detail-overlay\.match-detail-overlay-v1\{[\s\S]*?height:var\(--cue-visual-height,100dvh\)!important;[\s\S]*?max-height:var\(--cue-visual-height,100dvh\)!important;/,
+  "match detail height must follow the live visual viewport with a dynamic-viewport fallback"
 );
 assert.match(html, /preserveAspectRatio="xMidYMid meet"/);
 assert.match(
