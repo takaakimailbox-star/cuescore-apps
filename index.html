@@ -8948,7 +8948,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-jpa9-icon-unified-v1"></script>
+  <script src="./demo-data.js?v=2.0-jpa9-player-points-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -15138,17 +15138,16 @@ let matchRecordsRawCacheV152 = null;
       if(isJPA9V1()||isStraightPoolV1())return [["アベレージ",average.toFixed(2)],["ハイラン",highRun]];
       return [["アベレージ",average.toFixed(3)],["ハイラン",highRun]];
     };
-    const playerCard=player=>{
-      const statItems=resultStatItems(player);
-      return `<article class="official-result-player-v1 ${winner===0?"draw":player===winner?"winner":"loser"}"><div class="official-result-player-name-v1"><span class="official-result-avatar-v1">${resultAvatarSvgV1(player)}</span><span>${player===1?safeName1:safeName2}</span></div><div class="official-result-score-v1">${Number(scores[player])||0}</div><div class="official-result-stats-v1"><div><span>${statItems[0][0]}</span><strong>${statItems[0][1]}</strong></div><div><span>${statItems[1][0]}</span><strong>${statItems[1][1]}</strong></div></div></article>`;
-    };
     const jpaMatchPoints=isJPA9V1()?jpa9MatchPointsForPlayersV1(winner,{
       1:{score:scores[1],skillLevel:jpa9SkillLevelsV1[1]},
       2:{score:scores[2],skillLevel:jpa9SkillLevelsV1[2]}
     },jpa9SkillLevelsV1):null;
-    const matchPointHtml=jpaMatchPoints
-      ? `<div class="jpa-match-points-v1" aria-label="マッチポイント ${jpaMatchPoints[1]} 対 ${jpaMatchPoints[2]}"><span>マッチポイント</span><strong>${jpaMatchPoints[1]} − ${jpaMatchPoints[2]}</strong><small>合計20ポイント</small></div>`
-      : isJPA9V1()?`<div class="jpa-match-points-v1 is-unavailable" aria-label="マッチポイント 算出不可"><span>マッチポイント</span><strong>—</strong></div>`:"";
+    const playerCard=player=>{
+      const statItems=resultStatItems(player),safeName=player===1?safeName1:safeName2;
+      const matchPoint=isJPA9V1()?`<div class="official-result-player-match-point-v2 ${jpaMatchPoints?"":"is-unavailable"}" aria-label="${safeName}のマッチポイント ${jpaMatchPoints?jpaMatchPoints[player]:"算出不可"}"><span>マッチポイント</span><strong>${jpaMatchPoints?jpaMatchPoints[player]:"—"}${jpaMatchPoints?"<small>pt</small>":""}</strong></div>`:"";
+      return `<article class="official-result-player-v1 ${winner===0?"draw":player===winner?"winner":"loser"}"><div class="official-result-player-name-v1"><span class="official-result-avatar-v1">${resultAvatarSvgV1(player)}</span><span>${safeName}</span></div><div class="official-result-score-v1">${Number(scores[player])||0}</div>${matchPoint}<div class="official-result-stats-v1"><div><span>${statItems[0][0]}</span><strong>${statItems[0][1]}</strong></div><div><span>${statItems[1][0]}</span><strong>${statItems[1][1]}</strong></div></div></article>`;
+    };
+    const matchPointHtml="";
 
     summary.innerHTML=`<div class="official-result-backdrop-v1" aria-hidden="true"></div><section class="official-result-sheet-v1" role="dialog" aria-modal="true" aria-labelledby="officialResultTitleV1"><div class="official-result-scroll-v1"><h2 id="officialResultTitleV1">試合結果</h2><div class="official-result-info-v1"><span>${infoIcon("calendar")}<b>${dateText}</b></span><span>${infoIcon("clock")}<b>${timeText}</b></span><span>${infoIcon("duration")}<b>${durationText}</b></span></div><div class="official-result-players-v1">${playerCard(1)}<span class="official-result-separator-v1" aria-hidden="true">−</span>${playerCard(2)}</div>${matchPointHtml}<section class="official-result-chart-card-v1"><div class="official-result-chart-header-v1"><h3>スコア推移</h3><div><span class="p1"></span>${safeName1}<span class="p2"></span>${safeName2}</div></div><span class="official-result-axis-title-v1">得点</span>${makeOfficialResultChartSvgV1(progress)}<span class="official-result-axis-bottom-v1">${progress.axis}</span></section><div class="official-result-actions-v1"><button id="officialResultReturnGameV1" class="official-result-primary-v1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h12"/></svg>試合へ戻る</button><div class="official-result-secondary-row-v1"><button id="officialResultHomeV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3Z"/></svg>ホームへ戻る</button><button id="officialResultRematchV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7V3l-2 2a8 8 0 1 0 2 6M20 3h-4"/></svg>もう一度対戦する</button></div></div><p class="official-result-note-v1">※ 試合の詳細な分析や履歴は「履歴」画面からご確認いただけます。</p></div></section>`;
     if (winner === 0) {
@@ -19306,7 +19305,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-jpa9-icon-unified-v1";
+    const PWA_VERSION = "2.0-jpa9-player-points-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22905,9 +22904,10 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
     const jpaMatchPointsV1=disciplineV4==="jpa9"
       ? jpa9MatchPointsForPlayersV1(winner,record.players,record?.jpa9?.skillLevels)
       : null;
-    const jpaMatchPointHtmlV1=disciplineV4==="jpa9"
-      ? `<div class="jpa-match-points-v1 match-detail-jpa-match-points-v1 ${jpaMatchPointsV1?"":"is-unavailable"}" aria-label="${jpaMatchPointsV1?`マッチポイント ${jpaMatchPointsV1[1]} 対 ${jpaMatchPointsV1[2]}`:"マッチポイント 算出不可"}"><span>マッチポイント</span><strong>${jpaMatchPointsV1?`${jpaMatchPointsV1[1]} − ${jpaMatchPointsV1[2]}`:"—"}</strong>${jpaMatchPointsV1?"<small>合計20ポイント</small>":""}</div>`
+    const jpaPlayerMatchPointV2=player=>disciplineV4==="jpa9"
+      ? `<span class="match-detail-player-match-point-v2 ${jpaMatchPointsV1?"":"is-unavailable"}" aria-label="マッチポイント ${jpaMatchPointsV1?jpaMatchPointsV1[player]:"算出不可"}"><small>マッチポイント</small><b>${jpaMatchPointsV1?jpaMatchPointsV1[player]:"—"}${jpaMatchPointsV1?"<i>pt</i>":""}</b></span>`
       : "";
+    const jpaMatchPointHtmlV1="";
     const registeredPlayersV3=readPlayerLibrary();
     const detailAvatarV3=player=>{
       const registered=registeredPlayersV3.find(item=>item.id===player?.registeredPlayerId);
@@ -22954,11 +22954,11 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
           </div>
           <img class="match-detail-game-icon-v4" src="${disciplineDefV4.asset}" alt="ゲーム種目">
           <div class="match-detail-result-line-v2">
-            <span class="match-detail-result-player-v3"><img src="${detailAvatarV3(p1)}" alt="${esc(p1.name||"Player1")}のプロフィール画像"><span class="match-detail-result-name-v2">${esc(p1.name||"Player1")}</span></span>
+            <span class="match-detail-result-player-v3"><img src="${detailAvatarV3(p1)}" alt="${esc(p1.name||"Player1")}のプロフィール画像"><span class="match-detail-result-name-v2">${esc(p1.name||"Player1")}</span>${jpaPlayerMatchPointV2(1)}</span>
             <strong class="${winner===1?"winner":winner===2?"loser":""}">${Number(p1.score)||0}</strong>
             <span>−</span>
             <strong class="${winner===2?"winner":winner===1?"loser":""}">${Number(p2.score)||0}</strong>
-            <span class="match-detail-result-player-v3"><img src="${detailAvatarV3(p2)}" alt="${esc(p2.name||"Player2")}のプロフィール画像"><span class="match-detail-result-name-v2">${esc(p2.name||"Player2")}</span></span>
+            <span class="match-detail-result-player-v3"><img src="${detailAvatarV3(p2)}" alt="${esc(p2.name||"Player2")}のプロフィール画像"><span class="match-detail-result-name-v2">${esc(p2.name||"Player2")}</span>${jpaPlayerMatchPointV2(2)}</span>
           </div>
           ${jpaMatchPointHtmlV1}
           ${raceTag?`<div class="match-detail-race-v2">${esc(raceTag)}</div>`:""}
@@ -23152,25 +23152,22 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
 .official-result-stats-v1 strong{font-size:23px;font-weight:800;line-height:1}
 .official-result-stats-v1 small{font-size:.62em}
 .official-result-separator-v1{text-align:center;font-size:20px;font-weight:800;color:#333}
-.jpa-match-points-v1{
-  width:min(100%,270px);
-  min-height:42px;
-  margin:-4px auto 12px;
-  padding:7px 13px;
+.official-result-player-match-point-v2{
   display:grid;
   grid-template-columns:minmax(0,1fr) auto;
-  align-items:center;
-  column-gap:12px;
+  align-items:baseline;
+  gap:5px;
+  margin:0 0 8px;
+  padding:6px 7px;
   border:1px solid #dededb;
-  border-radius:12px;
-  background:#fff;
+  border-radius:9px;
+  background:#f7f7f5;
   color:#171717;
 }
-.jpa-match-points-v1 span{font-size:12px;font-weight:700;text-align:left}
-.jpa-match-points-v1 strong{font-size:20px;font-weight:820;line-height:1;white-space:nowrap}
-.jpa-match-points-v1 small{grid-column:1/-1;margin-top:2px;color:#777775;font-size:9px;text-align:right}
-.jpa-match-points-v1.is-unavailable strong{color:#777775}
-.match-detail-jpa-match-points-v1{margin:8px auto 2px}
+.official-result-player-match-point-v2>span{min-width:0;font-size:9px;font-weight:700;white-space:nowrap}
+.official-result-player-match-point-v2>strong{font-size:18px;font-weight:850;line-height:1;white-space:nowrap}
+.official-result-player-match-point-v2 small{margin-left:2px;font-size:8px;font-weight:700}
+.official-result-player-match-point-v2.is-unavailable strong{color:#777775}
 .official-result-chart-card-v1{
   position:relative;
   margin-bottom:12px;
@@ -23798,6 +23795,11 @@ body.match-detail-visible-v1{overflow:hidden!important}
 .match-detail-result-player-v3>img{
   width:44px;height:44px;border:1px solid #dededb;border-radius:50%;background:#eeeeec;object-fit:cover;
 }
+.match-detail-player-match-point-v2{display:grid;min-width:74px;margin-top:2px;padding:5px 7px;border:1px solid #dededb;border-radius:9px;background:#fff;color:#171717;line-height:1.05}
+.match-detail-player-match-point-v2 small{font-size:8px;font-weight:700;white-space:nowrap}
+.match-detail-player-match-point-v2 b{margin-top:3px;font-size:17px;font-weight:850;white-space:nowrap}
+.match-detail-player-match-point-v2 i{margin-left:2px;font-size:8px;font-style:normal;font-weight:700}
+.match-detail-player-match-point-v2.is-unavailable b{color:#777775}
 .match-detail-result-line-v2 strong{
   min-width:30px;
   font-size:25px;

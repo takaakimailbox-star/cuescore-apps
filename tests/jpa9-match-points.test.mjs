@@ -49,6 +49,16 @@ test("player order is preserved and incomplete/non-JPA data stays unassigned",()
 test("Game Result and Match Detail use the same shared allocation",()=>{
   assert.match(html,/const jpaMatchPoints=isJPA9V1\(\)\?jpa9MatchPointsForPlayersV1/);
   assert.match(html,/const jpaMatchPointsV1=disciplineV4==="jpa9"[\s\S]*?jpa9MatchPointsForPlayersV1\(winner,record\.players,record\?\.jpa9\?\.skillLevels\)/);
-  assert.match(html,/\$\{matchPointHtml\}<section class="official-result-chart-card-v1"/);
-  assert.match(html,/\$\{jpaMatchPointHtmlV1\}[\s\S]*?\$\{raceTag/);
+  assert.match(html,/official-result-player-match-point-v2[\s\S]*?jpaMatchPoints\[player\][\s\S]*?<small>pt<\/small>/);
+  assert.match(html,/official-result-score-v1[\s\S]*?\$\{matchPoint\}<div class="official-result-stats-v1"/);
+  assert.match(html,/match-detail-result-player-v3[\s\S]*?jpaPlayerMatchPointV2\(1\)[\s\S]*?jpaPlayerMatchPointV2\(2\)/);
+  assert.match(html,/match-detail-player-match-point-v2[\s\S]*?jpaMatchPointsV1\[player\][\s\S]*?<i>pt<\/i>/);
+  assert.doesNotMatch(html,/<div class="jpa-match-points-v1/);
+});
+
+test("20-0 and 14-6 keep Player 1 / Player 2 order while two-digit point labels remain compact",()=>{
+  assert.deepEqual({...context.window.jpa9MatchPointsForPlayersV1(1,{1:{score:38,skillLevel:5},2:{score:0,skillLevel:5}})},{1:20,2:0});
+  assert.deepEqual({...context.window.jpa9MatchPointsForPlayersV1(1,{1:{score:38,skillLevel:5},2:{score:27,skillLevel:5}})},{1:14,2:6});
+  assert.match(html,/\.official-result-player-match-point-v2>strong\{font-size:18px;[\s\S]*?white-space:nowrap/);
+  assert.match(html,/\.match-detail-player-match-point-v2\{[\s\S]*?min-width:74px;[\s\S]*?\.match-detail-player-match-point-v2 b\{[\s\S]*?white-space:nowrap/);
 });
