@@ -8914,7 +8914,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-player-detail-metrics-scope-v2"></script>
+  <script src="./demo-data.js?v=2.0-game-result-modal-progress-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -14616,49 +14616,94 @@ let matchRecordsRawCacheV152 = null;
     return {nineBall, maxRun: effectiveMaxRun, turnCount, completedTurns, average, pocketCount, share, shotRate, manualMisses: manualMissesV107};
   }
 
-  function buildScoreProgress() {
-    const p1 = [0];
-    const p2 = [0];
-    let s1 = 0;
-    let s2 = 0;
-    let foundScoringEventV112 = false;
+  // Final RC: one Undo-aware score-progress builder is shared by Game Result,
+  // saved records, Official Demo Data and Match Detail. It does not invent a
+  // replacement final point; legacy records fall back to their stored progress.
+  function scoreProgressForRecordV1(record, disciplineOverride = "") {
+    const normalizeDiscipline = value => {
+      const key=String(value||"").toLowerCase().replace(/[\s_-]/g,"");
+      if(key==="nineball"||key==="9ball")return "9ball";
+      if(key==="tenball"||key==="10ball")return "10ball";
+      if(key==="jpa9"||key==="jpa9ball")return "jpa9";
+      if(key==="straightpool"||key==="141"||key==="14.1")return "straightPool";
+      if(key==="threecushion"||key==="3c"||key==="3cushion")return "threeCushion";
+      return "rotation";
+    };
+    const discipline=normalizeDiscipline(disciplineOverride||record?.disciplineId||record?.gameType||record?.rulesEngine?.ruleId);
+    const commonEvents=Array.isArray(record?.eventLog?.events)?record.eventLog.events:[];
+    const analysisEvents=Array.isArray(record?.analysis?.events)?record.analysis.events:[];
+    const events=(commonEvents.length?commonEvents:analysisEvents).filter(Boolean);
+    const eventSource=event=>String(event?.sourceType||event?.type||"").toLowerCase();
+    const eventData=event=>event?.data&&typeof event.data==="object"?event.data:event;
+    const eventPlayer=event=>Number(event?.player??eventData(event)?.player)===2?2:1;
+    const eventInning=event=>Math.max(1,Number(event?.inningNumber??eventData(event)?.inning??event?.inning)||1);
+    const storedProgress=()=>{
+      const p1=Array.isArray(record?.progress?.p1)?record.progress.p1.map(Number).filter(Number.isFinite):[];
+      const p2=Array.isArray(record?.progress?.p2)?record.progress.p2.map(Number).filter(Number.isFinite):[];
+      if(!p1.length||!p2.length)return null;
+      const length=Math.max(p1.length,p2.length);
+      const fill=values=>Array.from({length},(_,index)=>Number(values[Math.min(index,values.length-1)])||0);
+      return {p1:fill(p1),p2:fill(p2),steps:Array.from({length},(_,index)=>index),axis:discipline==="9ball"||discipline==="10ball"?"ラック":"イニング"};
+    };
 
-    commonEventsV7.forEach(event => {
-      const player = Number(event?.player) === 2 ? 2 : 1;
-      let points = 0;
-      if (event?.type === "Shot" && event?.sourceType === "ball_pocketed") {
-        points = Math.max(0, Number(event?.data?.points ?? event?.data?.ball) || 0);
-      } else if (event?.type === "Shot" && event?.sourceType === "carom_point") {
-        points = Math.max(0, Number(event?.data?.points) || 0);
-      } else if (event?.type === "Shot" && event?.sourceType === "carom_point") {
-        points = Math.max(0, Number(event?.data?.points) || 0);
-      } else if (event?.type === "Break" && event?.sourceType === "break_result") {
-        points = Math.max(0, Number(event?.data?.scoreAdded) || 0);
+    if(discipline==="9ball"||discipline==="10ball"){
+      const disciplineResults=discipline==="10ball"?record?.tenBall?.rackResults:record?.nineBall?.rackResults;
+      let rackResults=Array.isArray(record?.rackResults)&&record.rackResults.length?record.rackResults:Array.isArray(disciplineResults)?disciplineResults:[];
+      if(!rackResults.length){
+        rackResults=events.filter(event=>eventSource(event)==="rack_end"||String(event?.type||"").toLowerCase()==="rackend")
+          .map(event=>({rack:Number(event?.rackNumber??eventData(event)?.rack??event?.rack)||1,winner:Number(eventData(event)?.winner??event?.winner??event?.player)}));
       }
-      if (!points) return;
-      foundScoringEventV112 = true;
-      if (player === 1) s1 += points;
-      else s2 += points;
-      p1.push(s1);
-      p2.push(s2);
+      if(rackResults.length){
+        const ordered=[...rackResults].sort((a,b)=>(Number(a?.rack)||0)-(Number(b?.rack)||0));
+        const result={p1:[0],p2:[0],steps:[0],axis:"ラック"};let p1=0,p2=0;
+        ordered.forEach((rackResult,index)=>{const winner=Number(rackResult?.winner??rackResult?.player);if(winner===1)p1++;if(winner===2)p2++;result.p1.push(p1);result.p2.push(p2);result.steps.push(Number(rackResult?.rack)||index+1);});
+        return result;
+      }
+      return storedProgress();
+    }
+
+    // Demo v3.1 and pre-common-event archives keep their validated historical
+    // series in `progress`. Use it before reconstructing from older analysis
+    // events whose foul/dead-ball fields were not score-authoritative.
+    if(!commonEvents.length){const legacy=storedProgress();if(legacy)return legacy;}
+
+    const activeScoringSources=new Set(["ball_pocketed","break_result","carom_point","foul","straight_pool_three_foul"]);
+    const scoringEvents=events.filter(event=>activeScoringSources.has(eventSource(event))||String(event?.type||"").toLowerCase()==="foulpenalty");
+    if(!scoringEvents.length&&discipline==="threeCushion"&&Array.isArray(record?.threeCushion?.innings)&&record.threeCushion.innings.length){
+      const result={p1:[0],p2:[0],steps:[0],axis:"イニング"};
+      [...record.threeCushion.innings].sort((a,b)=>(Number(a?.inning)||0)-(Number(b?.inning)||0)).forEach((row,index)=>{result.p1.push(Number(row?.p1Total)||0);result.p2.push(Number(row?.p2Total)||0);result.steps.push(Number(row?.inning)||index+1);});
+      return result;
+    }
+    if(!scoringEvents.length)return storedProgress();
+
+    const highestInning=Math.max(1,...scoringEvents.map(eventInning));
+    const inningDelta={1:Array(highestInning+1).fill(0),2:Array(highestInning+1).fill(0)};
+    scoringEvents.forEach((event,index)=>{
+      const source=eventSource(event),data=eventData(event),player=eventPlayer(event),targetInning=eventInning(event);
+      let points=0;
+      if(source==="ball_pocketed"||source==="carom_point")points=Number(data?.points??data?.pocketCount??data?.ball)||0;
+      else if(source==="break_result")points=Number(data?.scoreAdded??data?.pocketPoints)||0;
+      else if(discipline==="straightPool"&&(source==="straight_pool_three_foul"||String(event?.type||"").toLowerCase()==="foulpenalty"))points=Number(data?.penalty)||-16;
+      else if(discipline==="straightPool"&&source==="foul"){
+        const next=scoringEvents[index+1],nextSource=next?eventSource(next):"";
+        if(next&&eventPlayer(next)===player&&(nextSource==="straight_pool_three_foul"||String(next?.type||"").toLowerCase()==="foulpenalty"))return;
+        points=String(data?.foulType||"").includes("break")?-2:-1;
+      }
+      inningDelta[player][targetInning]+=points;
     });
+    const result={p1:[0],p2:[0],steps:[0],axis:"イニング"};let p1=0,p2=0;
+    for(let value=1;value<=highestInning;value++){p1+=inningDelta[1][value];p2+=inningDelta[2][value];result.p1.push(p1);result.p2.push(p2);result.steps.push(value);}
+    return result;
+  }
+  window.scoreProgressForRecordV1=scoreProgressForRecordV1;
 
-    // Legacy fallback where no standard scoring events exist.
-    if (!foundScoringEventV112) {
-      rows.forEach(row => {
-        (row.p1 || []).forEach(item => { if (typeof item === "number") s1 += item; });
-        (row.p2 || []).forEach(item => { if (typeof item === "number") s2 += item; });
-        p1.push(s1);
-        p2.push(s2);
-      });
-    }
+  function currentProgressRecordV1(){
+    return {gameType:activeGameTypeV1,disciplineId:activeGameTypeV1,eventLog:{events:commonEventsV7},rackResults:isRackGameV1()?[...activeRackStateV1().rackResults]:[],nineBall:{rackResults:[...nineBallStateV1.rackResults]},tenBall:{rackResults:[...tenBallStateV1.rackResults]},threeCushion:{innings:JSON.parse(JSON.stringify(threeCushionStateV1.innings||[]))}};
+  }
 
-    if (p1.length === 1) {
-      p1.push(Number(scores[1]) || 0);
-      p2.push(Number(scores[2]) || 0);
-    }
-
-    return {p1, p2};
+  function buildScoreProgress() {
+    const progress=scoreProgressForRecordV1(currentProgressRecordV1(),activeGameTypeV1);
+    return progress?{p1:[...progress.p1],p2:[...progress.p2]}:{p1:[0],p2:[0]};
   }
 
   function makeResultChartSvg(progress) {
@@ -14927,47 +14972,22 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function buildOfficialResultProgressV1() {
-    const highestInning = Math.max(1, Number(inning) || 1, ...commonEventsV7.map(event => Number(event?.inningNumber) || 1));
-    const inningPoints = {1:Array(highestInning + 1).fill(0), 2:Array(highestInning + 1).fill(0)};
-    commonEventsV7.forEach(event => {
-      const player = Number(event?.player) === 2 ? 2 : 1;
-      const eventInning = Math.max(1, Math.min(highestInning, Number(event?.inningNumber) || 1));
-      let points = 0;
-      if (event?.type === "Shot" && event?.sourceType === "ball_pocketed") {
-        points = Math.max(0, Number(event?.data?.points ?? event?.data?.ball) || 0);
-      } else if (event?.type === "Break" && event?.sourceType === "break_result") {
-        points = Math.max(0, Number(event?.data?.scoreAdded) || 0);
-      }
-      inningPoints[player][eventInning] += points;
-    });
-    const result = {p1:[0], p2:[0], innings:[0]};
-    let p1Total = 0;
-    let p2Total = 0;
-    for (let value = 1; value <= highestInning; value++) {
-      p1Total += inningPoints[1][value];
-      p2Total += inningPoints[2][value];
-      result.p1.push(p1Total);
-      result.p2.push(p2Total);
-      result.innings.push(value);
-    }
-    result.p1[result.p1.length - 1] = Number(scores[1]) || 0;
-    result.p2[result.p2.length - 1] = Number(scores[2]) || 0;
-    return result;
+    return scoreProgressForRecordV1(currentProgressRecordV1(),activeGameTypeV1)||{p1:[0],p2:[0],steps:[0],axis:isRackGameV1()?"ラック":"イニング"};
   }
 
   function makeOfficialResultChartSvgV1(progress) {
     const width = 680, height = 220, left = 42, right = 54, top = 28, bottom = 38;
     const chartW = width-left-right, chartH = height-top-bottom;
     const maxScore = Math.max(Number(goals[1])||0, Number(goals[2])||0, Number(scores[1])||0, Number(scores[2])||0, 10);
-    const maxIndex = Math.max(progress.innings.length-1, 1);
+    const maxIndex = Math.max(progress.steps.length-1, 1);
     const point = (value,index) => ({x:left+(index/maxIndex)*chartW, y:top+chartH-(Math.max(0,Number(value)||0)/maxScore)*chartH});
     const path = values => values.map((value,index) => { const p=point(value,index); return `${index?"L":"M"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`; }).join(" ");
     const dots = (values,color) => values.map((value,index) => { const p=point(value,index); return `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.1" fill="${color}"/>`; }).join("");
     const grid = [0,.25,.5,.75,1].map(part => { const y=top+chartH-chartH*part; return `<line x1="${left}" y1="${y}" x2="${width-right}" y2="${y}" stroke="#dededb" stroke-width="1" stroke-dasharray="3 3"/><text x="${left-9}" y="${y+4}" text-anchor="end" font-size="10" fill="#777">${Math.round(maxScore*part)}</text>`; }).join("");
     const labelEvery = Math.max(1,Math.ceil(maxIndex/8));
-    const xLabels = progress.innings.map((value,index) => { if(index!==0&&index!==maxIndex&&index%labelEvery!==0)return ""; const p=point(0,index); return `<text x="${p.x.toFixed(1)}" y="${height-16}" text-anchor="middle" font-size="10" fill="#777">${value}</text>`; }).join("");
+    const xLabels = progress.steps.map((value,index) => { if(index!==0&&index!==maxIndex&&index%labelEvery!==0)return ""; const p=point(0,index); return `<text x="${p.x.toFixed(1)}" y="${height-16}" text-anchor="middle" font-size="10" fill="#777">${value}</text>`; }).join("");
     const lastP1=point(progress.p1.at(-1),maxIndex), lastP2=point(progress.p2.at(-1),maxIndex);
-    return `<svg class="official-result-chart-svg-v1" viewBox="0 0 ${width} ${height}" role="img" aria-label="両プレーヤーのイニング別累積得点推移">${grid}<path d="${path(progress.p1)}" fill="none" stroke="#171717" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="${path(progress.p2)}" fill="none" stroke="#8b8b87" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>${dots(progress.p1,"#171717")}${dots(progress.p2,"#8b8b87")}${xLabels}<text x="${Math.min(width-4,lastP1.x+9)}" y="${Math.max(13,lastP1.y-7)}" font-size="13" font-weight="700" fill="#171717">${Number(scores[1])||0}</text><text x="${Math.min(width-4,lastP2.x+9)}" y="${Math.min(height-bottom-5,lastP2.y+17)}" font-size="13" font-weight="700" fill="#777">${Number(scores[2])||0}</text></svg>`;
+    return `<svg class="official-result-chart-svg-v1" viewBox="0 0 ${width} ${height}" role="img" aria-label="両プレーヤーの${progress.axis}別累積得点推移">${grid}<path d="${path(progress.p1)}" fill="none" stroke="#171717" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="${path(progress.p2)}" fill="none" stroke="#8b8b87" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>${dots(progress.p1,"#171717")}${dots(progress.p2,"#8b8b87")}${xLabels}<text x="${Math.min(width-4,lastP1.x+9)}" y="${Math.max(13,lastP1.y-7)}" font-size="13" font-weight="700" fill="#171717">${Number(progress.p1.at(-1))||0}</text><text x="${Math.min(width-4,lastP2.x+9)}" y="${Math.min(height-bottom-5,lastP2.y+17)}" font-size="13" font-weight="700" fill="#777">${Number(progress.p2.at(-1))||0}</text></svg>`;
   }
 
   function resultAvatarSvgV1(playerNumber) {
@@ -15061,7 +15081,7 @@ let matchRecordsRawCacheV152 = null;
       ? `<div class="jpa-match-points-v1" aria-label="マッチポイント ${jpaMatchPoints[1]} 対 ${jpaMatchPoints[2]}"><span>マッチポイント</span><strong>${jpaMatchPoints[1]} − ${jpaMatchPoints[2]}</strong><small>合計20ポイント</small></div>`
       : isJPA9V1()?`<div class="jpa-match-points-v1 is-unavailable" aria-label="マッチポイント 算出不可"><span>マッチポイント</span><strong>—</strong></div>`:"";
 
-    summary.innerHTML=`<div class="official-result-backdrop-v1" aria-hidden="true"></div><section class="official-result-sheet-v1" role="dialog" aria-modal="true" aria-labelledby="officialResultTitleV1"><div class="official-result-handle-v1" aria-hidden="true"></div><div class="official-result-scroll-v1"><h2 id="officialResultTitleV1">試合結果</h2><div class="official-result-info-v1"><span>${infoIcon("calendar")}<b>${dateText}</b></span><span>${infoIcon("clock")}<b>${timeText}</b></span><span>${infoIcon("duration")}<b>${durationText}</b></span></div><div class="official-result-players-v1">${playerCard(1)}<span class="official-result-separator-v1" aria-hidden="true">−</span>${playerCard(2)}</div>${matchPointHtml}<section class="official-result-chart-card-v1"><div class="official-result-chart-header-v1"><h3>スコア推移</h3><div><span class="p1"></span>${safeName1}<span class="p2"></span>${safeName2}</div></div><span class="official-result-axis-title-v1">得点</span>${makeOfficialResultChartSvgV1(progress)}<span class="official-result-axis-bottom-v1">イニング</span></section><div class="official-result-actions-v1"><button id="officialResultReturnGameV1" class="official-result-primary-v1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h12"/></svg>試合へ戻る</button><div class="official-result-secondary-row-v1"><button id="officialResultHomeV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3Z"/></svg>ホームへ戻る</button><button id="officialResultRematchV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7V3l-2 2a8 8 0 1 0 2 6M20 3h-4"/></svg>もう一度対戦する</button></div></div><p class="official-result-note-v1">※ 試合の詳細な分析や履歴は「履歴」画面からご確認いただけます。</p></div></section>`;
+    summary.innerHTML=`<div class="official-result-backdrop-v1" aria-hidden="true"></div><section class="official-result-sheet-v1" role="dialog" aria-modal="true" aria-labelledby="officialResultTitleV1"><button id="officialResultCloseV1" class="official-result-close-v1" type="button" aria-label="試合結果を閉じる">×</button><div class="official-result-scroll-v1"><h2 id="officialResultTitleV1">試合結果</h2><div class="official-result-info-v1"><span>${infoIcon("calendar")}<b>${dateText}</b></span><span>${infoIcon("clock")}<b>${timeText}</b></span><span>${infoIcon("duration")}<b>${durationText}</b></span></div><div class="official-result-players-v1">${playerCard(1)}<span class="official-result-separator-v1" aria-hidden="true">−</span>${playerCard(2)}</div>${matchPointHtml}<section class="official-result-chart-card-v1"><div class="official-result-chart-header-v1"><h3>スコア推移</h3><div><span class="p1"></span>${safeName1}<span class="p2"></span>${safeName2}</div></div><span class="official-result-axis-title-v1">得点</span>${makeOfficialResultChartSvgV1(progress)}<span class="official-result-axis-bottom-v1">${progress.axis}</span></section><div class="official-result-actions-v1"><button id="officialResultReturnGameV1" class="official-result-primary-v1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h12"/></svg>試合へ戻る</button><div class="official-result-secondary-row-v1"><button id="officialResultHomeV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3Z"/></svg>ホームへ戻る</button><button id="officialResultRematchV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7V3l-2 2a8 8 0 1 0 2 6M20 3h-4"/></svg>もう一度対戦する</button></div></div><p class="official-result-note-v1">※ 試合の詳細な分析や履歴は「履歴」画面からご確認いただけます。</p></div></section>`;
     if (winner === 0) {
       const resultTitle = el("officialResultTitleV1");
       resultTitle?.insertAdjacentHTML("beforeend", '<small class="official-result-draw-v1">DRAW</small>');
@@ -15081,6 +15101,7 @@ let matchRecordsRawCacheV152 = null;
         alert(`試合結果を保存できませんでした。\n\n${error?.message||error}\n\n試合結果画面は保持しています。`);
       }
     };
+    el("officialResultCloseV1")?.addEventListener("click",dismissOfficialResultToGameV1);
     el("officialResultReturnGameV1")?.addEventListener("click",dismissOfficialResultToGameV1);
     el("officialResultHomeV1")?.addEventListener("click",event=>saveAndLeave(event.currentTarget,false));
     el("officialResultRematchV1")?.addEventListener("click",event=>saveAndLeave(event.currentTarget,true));
@@ -19217,7 +19238,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-player-detail-metrics-scope-v2";
+    const PWA_VERSION = "2.0-game-result-modal-progress-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22594,36 +22615,9 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
   }
 
   function progressV1(record) {
-    const discipline=recordDisciplineV2(record);
-    if(discipline==="9ball" || discipline==="10ball") {
-      const storedRackResults=Array.isArray(record?.rackResults) ? record.rackResults
-        : discipline==="10ball" && Array.isArray(record?.tenBall?.rackResults) ? record.tenBall.rackResults
-        : Array.isArray(record?.nineBall?.rackResults) ? record.nineBall.rackResults : [];
-      let rackResults=storedRackResults;
-      if(!rackResults.length && Array.isArray(record?.eventLog?.events)) {
-        rackResults=record.eventLog.events
-          .filter(event=>event?.sourceType==="rack_end" || event?.type==="RackEnd")
-          .map(event=>({rack:Number(event?.rackNumber ?? event?.data?.rack ?? event?.rack)||1,winner:Number(event?.data?.winner ?? event?.winner ?? event?.player)}));
-      }
-      if(rackResults.length) {
-        const ordered=[...rackResults].sort((a,b)=>(Number(a?.rack)||0)-(Number(b?.rack)||0));
-        const p1=[0], p2=[0];
-        let score1=0, score2=0;
-        ordered.forEach(result=>{
-          const winner=Number(result?.winner ?? result?.player);
-          if(winner===1) score1+=1;
-          if(winner===2) score2+=1;
-          p1.push(score1); p2.push(score2);
-        });
-        return {p1,p2};
-      }
-    }
-    const p1 = Array.isArray(record?.progress?.p1) ? record.progress.p1.map(Number).filter(Number.isFinite) : [];
-    const p2 = Array.isArray(record?.progress?.p2) ? record.progress.p2.map(Number).filter(Number.isFinite) : [];
-    if (!p1.length || !p2.length) return null;
-    const length = Math.max(p1.length, p2.length);
-    const fill = values => Array.from({length}, (_, index) => Number(values[Math.min(index, values.length - 1)]) || 0);
-    return {p1:fill(p1), p2:fill(p2)};
+    return typeof window.scoreProgressForRecordV1==="function"
+      ? window.scoreProgressForRecordV1(record,recordDisciplineV2(record))
+      : null;
   }
 
   function chartSvgV1(record, winner) {
@@ -22945,10 +22939,12 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
 </script>
 
 <style>
-/* CueScore Match Result v1.0: official bottom-sheet layout */
+/* CueScore Match Result v1.0: Official central Result Modal */
 .pro-summary:not(.hidden){
-  padding:0!important;
-  display:block!important;
+  padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
   background:transparent!important;
   color:#171717!important;
 }
@@ -22961,41 +22957,54 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
 }
 .official-result-sheet-v1{
   --result-accent:#171717;
-  position:absolute;
+  position:relative;
   z-index:1;
-  left:0;
-  right:0;
-  bottom:0;
-  max-height:94svh;
-  padding:10px 0 max(8px,env(safe-area-inset-bottom));
+  width:min(100%,560px);
+  height:min(94svh,820px);
+  max-height:calc(100svh - 32px);
+  padding:0;
   overflow:hidden;
-  border-radius:28px 28px 0 0;
+  border-radius:28px;
   background:#fbfbfa;
-  box-shadow:0 -12px 40px rgba(0,0,0,.16);
+  box-shadow:0 24px 64px rgba(0,0,0,.22);
   text-align:left;
-}
-.official-result-handle-v1{
-  width:42px;
-  height:5px;
-  margin:0 auto 8px;
-  border-radius:99px;
-  background:#aaa;
+  animation:official-result-modal-in-v1 .22s ease-out both;
 }
 .official-result-scroll-v1{
-  max-height:calc(94svh - max(18px,env(safe-area-inset-bottom)));
-  padding:0 18px 10px;
+  height:100%;
+  max-height:100%;
+  padding:16px 18px 18px;
   overflow-y:auto;
   overscroll-behavior:contain;
   -webkit-overflow-scrolling:touch;
 }
 .official-result-scroll-v1>h2{
-  margin:2px 0 8px;
+  margin:2px 44px 8px;
   text-align:center;
   color:#111;
   font-size:clamp(27px,7vw,34px);
   font-weight:850;
   letter-spacing:.02em;
 }
+.official-result-close-v1{
+  position:absolute;
+  z-index:2;
+  top:14px;
+  right:14px;
+  width:36px;
+  height:36px;
+  padding:0;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-radius:50%;
+  color:#444;
+  background:#eeeeec;
+  font-size:25px;
+  line-height:1;
+}
+@keyframes official-result-modal-in-v1{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.official-result-sheet-v1{animation:none}}
 .official-result-info-v1{
   display:flex;
   justify-content:center;

@@ -45,6 +45,15 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - 本決定はGame Result表示に対する仕様であり、プレーヤー詳細のJPA 9 Ball「平均イニング」未確定事項は変更しない。
 - 正式仕様：`docs/official/08_CueScore_v1.0RC_GameResult_Statistics_Spec.docx`。
 
+## App Store v1.0 Final RC：Game Result Modal復元・スコア推移修正（2026年8月11日）
+
+- Game ResultはBottom Sheetではなく、Official Design System／UI Componentsどおり中央Result Modalを使用する。左右16pt相当、最大幅560pt、角丸28pt、Fade＋Scale、右上Close、背面操作不可とし、Bottom Sheet用Grabberと下端固定構造は使用しない。
+- Game ResultとMatch Detailは同じUndo対応の得点推移生成関数を使用し、保存形式や新規保存項目は変更しない。
+- 9 Ball／10 BallはラックをX軸、累積ラック勝利数をY軸とし、`rackResults`、競技別`rackResults`、旧履歴の`rack_end`の順に使用する。入球イベントはラック得点にしない。
+- Rotation／JPA 9 Ball／Straight Pool（14.1）／Three Cushion（3C）はイニングをX軸、累積得点をY軸とする。JPAは有効得点、14.1は入球・ブレイク得点と通常／3ファール減点、3Cは`carom_point`または保存済みイニングを反映する。
+- 最終点だけ保存スコアへ強制置換する処理を廃止。通常試合はUndo後の有効共通イベント、Official Demo Data v3.1と旧履歴は既存の検証済み保存推移を共通関数内の後方互換経路で使用する。
+- PWAキャッシュ版は `2.0-game-result-modal-progress-v1`。Official Release文書は変更していない。
+
 ## App Store v1.0 RC：Player Analytics競技別統計3指標（2026年8月10日）
 
 - Player Analyticsの統計定義を採用済みGame Result仕様へ統一。

@@ -5,12 +5,12 @@ const html = fs.readFileSync(new URL("../index.html", import.meta.url), "utf8");
 
 assert.match(
   html,
-  /if\(discipline==="9ball" \|\| discipline==="10ball"\)/,
-  "9-Ball and 10-Ball must both build score progress from rack results"
+  /if\(discipline==="9ball"\|\|discipline==="10ball"\)/,
+  "9-Ball and 10-Ball must both use the shared rack-progress branch"
 );
 assert.match(
   html,
-  /discipline==="10ball" && Array\.isArray\(record\?\.tenBall\?\.rackResults\)/,
+  /discipline==="10ball"\?record\?\.tenBall\?\.rackResults:record\?\.nineBall\?\.rackResults/,
   "10-Ball must support its discipline-specific rack-results archive"
 );
 assert.match(
