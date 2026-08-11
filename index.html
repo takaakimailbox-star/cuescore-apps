@@ -8914,7 +8914,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-player-detail-masuwari-scope-v1"></script>
+  <script src="./demo-data.js?v=2.0-player-detail-metrics-scope-v2"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19217,7 +19217,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-player-detail-masuwari-scope-v1";
+    const PWA_VERSION = "2.0-player-detail-metrics-scope-v2";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22586,6 +22586,7 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
     const fallback=Number(record?.inning);
     return Number.isFinite(fallback)&&fallback>0?fallback:0;
   }
+  window.inningsCountNumberV1 = inningsCountNumberV1;
 
   function inningsCountV1(record,player) {
     const value=inningsCountNumberV1(record,player);
@@ -27859,7 +27860,7 @@ body.cue-edge-back-animating-v2 .app{
         masuwari+=Number(window.rackGameMasuwariCountsV1(record)?.[playerSide])||0;
         targetRacks+=completedRackCountV1(record);
       }
-      const innings=inningsCountNumberV1(record,playerSide),score=Number(own.score);
+      const innings=window.inningsCountNumberV1(record,playerSide),score=Number(own.score);
       if(innings>0&&Number.isFinite(score)){totalInnings+=innings;totalScore+=score;}
     });
     const shotRate=pockets+misses>0?`${Math.round(pockets/(pockets+misses)*100)}%`:storedShotCount?`${Math.round(storedShotTotal/storedShotCount)}%`:"—";

@@ -43,6 +43,20 @@ const runOutRecord={disciplineId:"9ball",analysis:{events:[
 ]}};
 assert.equal(sharedContext.window.rackGameMasuwariCountsV1(runOutRecord)[1],1);
 
+const inningsStart=html.indexOf("function inningsCountNumberV1(");
+const inningsBrace=html.indexOf("{",inningsStart);
+let inningsDepth=0,inningsEnd=-1;
+for(let index=inningsBrace;index<html.length;index++){
+  if(html[index]==="{")inningsDepth++;
+  if(html[index]==="}"&&--inningsDepth===0){inningsEnd=index+1;break;}
+}
+assert.ok(inningsStart>=0&&inningsEnd>inningsStart,"missing innings-count helper");
+vm.runInContext(`${html.slice(inningsStart,inningsEnd)}\nwindow.inningsCountNumberV1=inningsCountNumberV1;`,sharedContext);
+assert.equal(sharedContext.window.inningsCountNumberV1({players:{1:{completedTurns:4}}},1),4);
+assert.match(html,/window\.inningsCountNumberV1 = inningsCountNumberV1/);
+assert.match(html,/const innings=window\.inningsCountNumberV1\(record,playerSide\)/);
+assert.doesNotMatch(html,/const innings=inningsCountNumberV1\(record,playerSide\)/);
+
 // 14.1 / 3C points per inning uses final score divided by completed innings.
 assert.match(html,/if\(innings>0&&Number\.isFinite\(score\)\)\{totalInnings\+=innings;totalScore\+=score;\}/);
 assert.match(html,/const pointsPerInning=totalInnings\?String\(Math\.round\(totalScore\/totalInnings\*100\)\/100\):"—"/);
