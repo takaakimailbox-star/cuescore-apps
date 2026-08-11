@@ -9,7 +9,7 @@ assert.match(html, /decision\.foul && decision\.pocketedBalls\.includes\(10\)\) 
 assert.doesNotMatch(html, /if \(decision\.pocketedBalls\.includes\(10\)\) spotTenBallV1/);
 assert.match(html, /isRackGameV1\(\) && \(decision\.foul \|\| decision\.pocketedBalls\.length === 0\)/);
 assert.doesNotMatch(html, /decision\.pocketedBalls\.filter\(ball => !\(isTenBallV1\(\) && ball === 10\)\)/);
-assert.match(html, /showToast\(`Rack \$\{nextRackNumberV1\}を開始`, `\$\{playerName\(nextBreakerV1\)\}がブレイクします`\)/);
+assert.match(html, /showRackStartToastV1\(nextRackNumberV1,nextBreakerV1\)/);
 assert.match(html, /\.toast\.rack-transition-toast-v1[\s\S]*?z-index: 20020/);
 assert.match(html, /classList\.add\("rack-transition-toast-v1"\)/);
 assert.match(html, /showBreakResultPromptV61\(nextBreakerV1, nextRackNumberV1, \{ nextRack:true \}\)/);

@@ -77,7 +77,7 @@ for(const section of ["最近の成績","対戦相手別の成績","このプレ
 }
 
 const version=serviceWorker.match(/const APP_VERSION = "([^"]+)"/)?.[1];
-assert.equal(version,"2.0-break-return-scroll-v1");
+assert.equal(version,"2.0-rack-start-toast-v1");
 assert.match(html,new RegExp(`const PWA_VERSION = "${version}"`));
 assert.match(html,new RegExp(`demo-data\\.js\\?v=${version}`));
 assert.match(serviceWorker,new RegExp(`demo-data\\.js\\?v=${version}`));

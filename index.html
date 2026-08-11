@@ -188,8 +188,23 @@
 
     .toast.rack-transition-toast-v1 {
       z-index: 20020;
+      flex-direction: column;
+      gap: 2px;
       background: rgba(23,23,23,.96);
       color: #fff;
+    }
+
+    .toast.rack-transition-toast-v1 strong,
+    .toast.rack-transition-toast-v1 span {
+      width: 100%;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .toast.rack-transition-toast-v1 strong { white-space: nowrap; }
+    .toast.rack-transition-toast-v1 span {
+      white-space: normal;
+      overflow-wrap: anywhere;
     }
 
     @keyframes toastIn {
@@ -8914,7 +8929,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-break-return-scroll-v1"></script>
+  <script src="./demo-data.js?v=2.0-rack-start-toast-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -9032,6 +9047,13 @@ body {
       toast.classList.remove("show");
       setTimeout(() => toast.remove(), 220);
     }, 1900);
+  }
+
+  function showRackStartToastV1(rackNumber, breaker) {
+    const safeRack=Math.max(1,Number(rackNumber)||1);
+    const safeBreaker=Number(breaker)===2?2:1;
+    showToast(`Rack ${safeRack}を開始`, `${playerName(safeBreaker)}がブレイクします`);
+    document.querySelector(".toast")?.classList.add("rack-transition-toast-v1");
   }
 
   function openPlayerInfo() {
@@ -13248,8 +13270,7 @@ let matchRecordsRawCacheV152 = null;
         }
         const nextRackNumberV1 = Number(rack) + 1;
         const nextBreakerV1 = Number(nextBreakPlayer) === 2 ? 2 : 1;
-        showToast(`Rack ${nextRackNumberV1}を開始`, `${playerName(nextBreakerV1)}がブレイクします`);
-        document.querySelector(".toast")?.classList.add("rack-transition-toast-v1");
+        showRackStartToastV1(nextRackNumberV1,nextBreakerV1);
         window.setTimeout(() => {
           rackBreakPromptQueuedV1 = false;
           if (!rackEnded || gameEnded || reviewMode) return;
@@ -14493,7 +14514,12 @@ let matchRecordsRawCacheV152 = null;
       setTimeout(() => {
         if (currentGameSessionIdV104 !== promptSessionIdV111) return;
         if (!app.classList.contains("pro-game-mode") || gameEnded) return;
-        showBreakResultPromptV61(startingPlayer, 1, {source:"new-match"});
+        showRackStartToastV1(1,startingPlayer);
+        window.setTimeout(() => {
+          if (currentGameSessionIdV104 !== promptSessionIdV111) return;
+          if (!app.classList.contains("pro-game-mode") || gameEnded) return;
+          showBreakResultPromptV61(startingPlayer, 1, {source:"new-match"});
+        },700);
       }, 0);
     }
   }
@@ -19262,7 +19288,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-break-return-scroll-v1";
+    const PWA_VERSION = "2.0-rack-start-toast-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
