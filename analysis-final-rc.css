@@ -1,0 +1,7 @@
+.analysis-v2-status.attention{background:#fff1ea;color:#b94720}
+.analysis-v2-status.neutral{background:#f0f0ed;color:#62625e}
+.analysis-v2-change span.attention{color:#b94720}
+.analysis-final-rc-evidence .analysis-v2-metric strong{display:block;font-size:clamp(16px,4.5vw,21px);white-space:nowrap}
+.analysis-final-rc-evidence .analysis-v2-metric em{float:none;display:block;margin-top:6px}
+.analysis-v2-advice-row.no-chevron-final-rc{grid-template-columns:64px minmax(0,1fr)}
+.analysis-v2-empty-inline{padding:16px 4px;color:#747470;font-size:12px}

@@ -19,7 +19,7 @@ test("Player Analytics derives Game Result-compatible statistics from saved matc
   assert.match(html,/avgFouls:games\?fouls\/games:0/);
 });
 
-test("Player Analytics preserves layout and replaces only metric labels and values",()=>{
+test("Player Analytics preserves the adopted cards before Final RC semantics are applied",()=>{
   assert.match(html,/function renderPlayerWithDisciplineMetrics\(\)/);
   assert.match(html,/deltaGrid\.innerHTML=analysisMetricCards\(metrics,"analysis-v2-delta"\)/);
   assert.match(html,/evidenceGrid\.innerHTML=winRateCard\+analysisMetricCards\(metrics,"analysis-v2-metric"\)/);

@@ -12,6 +12,7 @@
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" type="image/svg+xml" href="./src/assets/logo/CueScore_LogoMark_Black.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="./icons/cuescore-app-icon-180.png" />
+  <link rel="stylesheet" href="./analysis-final-rc.css" />
   <title>CueScore Apps v1.0</title>
   <style>
     :root {
@@ -8948,7 +8949,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-legal-back-v1"></script>
+  <script src="./demo-data.js?v=2.0-analytics-final-rc-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -12660,7 +12661,7 @@ let matchRecordsRawCacheV152 = null;
       else if (late === 1) challenges.push('終盤にファールがありました。勝負どころでは無理なポジションより確実な手球管理を優先しましょう');
       else if (foulCount >= 3) challenges.push(`ファールが${foulCount}回ありました。手球の走る距離を抑える選択が安定につながります`);
       if (punishedRate != null && punishedRate >= 60) challenges.push(`ファール後に${punishedRate}%の割合で得点を許しており、ファールの影響が大きく出ました`);
-      else if (punishedRate != null && punishedRate < 40) strengths.push('ファール後も相手の得点を抑え、失点を小さくできました');
+      else if (punishedRate != null && punishedRate < 40 && foulCount < 3) challenges.push('ファール後の失点は抑えましたが、ファール自体を減らすことが次の安定につながります');
     }
 
     if (breakEvents.length) {
@@ -19309,7 +19310,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-legal-back-v1";
+    const PWA_VERSION = "2.0-analytics-final-rc-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -28205,6 +28206,7 @@ body.cue-edge-back-animating-v2 .app{
   root.addEventListener("click",event=>{if(event.target.closest("[data-analysis-back]")){if(view==="home")document.getElementById("rankingsBackBtn")?.click();else openHome();return}if(event.target.closest("[data-open-player-analysis]")){openPlayer();return}if(event.target.closest("[data-open-match-analysis]")){openMatch();return}});
   root.addEventListener("change",event=>{if(event.target.matches("[data-analysis-player]")){selectedPlayerId=event.target.value;renderPlayerWithDisciplineMetrics()}if(event.target.matches("[data-analysis-discipline]")){selectedDiscipline=event.target.value;renderPlayerWithDisciplineMetrics()}});
   document.getElementById("openRankingsBtn")?.addEventListener("click",()=>setTimeout(openHome,0));
+  window.CueScoreAnalysisV2Context={selectedPlayer:()=>players().find(x=>String(x.id)===String(selectedPlayerId))||primary(),selectedDiscipline:()=>selectedDiscipline,selectedRecord:()=>allRecords().find(r=>String(r.id)===String(selectedRecordId))||allRecords()[0]||null,recordsFor,discipline,aggregate,metric,recordPlayer,completedTurns:analyticsCompletedTurns,masuwariCount:analyticsMasuwariCount};
   window.renderAnalysisHomeV2=openHome;window.renderPlayerAnalysisV2=openPlayer;window.renderMatchAnalysisV2=openMatch;
   openHome();
 })();
@@ -28215,6 +28217,7 @@ body.cue-edge-back-animating-v2 .app{
   const root=document.querySelector(".analysis-v2");
   if(!root)return;
   const enforce=()=>{
+    if(window.CueScoreAnalyticsFinalRC)return;
     const playerView=root.querySelector('[data-analysis-view="player"]');
     if(!playerView||playerView.hidden)return;
     const target=playerView.querySelector(".analysis-v2-target")?.textContent||"";
@@ -28246,6 +28249,7 @@ body.cue-edge-back-animating-v2 .app{
   new MutationObserver(correct).observe(root,{childList:true,subtree:true});
 })();
 </script>
+  <script src="./analysis-final-rc.js"></script>
 </body>
 </html>
 

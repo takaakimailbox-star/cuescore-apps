@@ -17,6 +17,7 @@ assert.match(html,/変化の根拠/);
 assert.match(html,/勝敗を分けたポイント/);
 assert.match(html,/スコア推移/);
 assert.match(html,/サマリー比較/);
+assert.match(html,/analysis-final-rc\.js/);
 assert.match(html,/data sufficiency guard/);
 assert.match(html,/前期間の試合数が少ないため、変化はまだ評価しません/);
 assert.match(html,/textContent===.蓄積中./);

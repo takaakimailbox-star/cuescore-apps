@@ -1,15 +1,17 @@
-const APP_VERSION = "2.0-legal-back-v1";
+const APP_VERSION = "2.0-analytics-final-rc-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-legal-back-v1",
+  "./demo-data.js?v=2.0-analytics-final-rc-v1",
   "./manifest.webmanifest",
   "./privacy.html",
   "./terms.html",
   "./support.html",
   "./official-pages.css",
   "./official-document.js",
+  "./analysis-final-rc.js",
+  "./analysis-final-rc.css",
   "./docs/official/app-store-v1.0/public/CueScore_Privacy_Policy_v1.0_Official.md",
   "./docs/official/app-store-v1.0/public/CueScore_Terms_of_Use_v1.0_Official.md",
   "./docs/official/app-store-v1.0/public/CueScore_Support_v1.0_Official.md",
