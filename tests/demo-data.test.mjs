@@ -23,7 +23,7 @@ const storage=new MemoryStorage(),context=vm.createContext({localStorage:storage
 context.globalThis=context;
 vm.runInContext(fs.readFileSync(new URL("../demo-data.js",import.meta.url),"utf8"),context);
 const demo=context.CueScoreDemoData;
-assert.equal(demo.version,"3.0");
+assert.equal(demo.version,"3.1");
 
 const normalKeys={players:"rotationScoreboard.players.v1",records:"rotationScoreboard.matchRecords.v1",categories:"rotationScoreboard.matchCategories.v1",seasons:"rotationScoreboard.matchSeasons.v1"};
 const normalFixture={players:JSON.stringify([{id:"real-player",name:"Real"}]),records:JSON.stringify([{id:"real-match"}]),categories:JSON.stringify([{id:"real-category"}]),seasons:JSON.stringify([{id:"real-season"}])};
@@ -31,12 +31,12 @@ Object.entries(normalKeys).forEach(([name,key])=>storage.setItem(key,normalFixtu
 
 const started=performance.now(),sample=demo.create(storage),createdMs=performance.now()-started;
 assert.equal(sample.players.length,10);
-assert.equal(sample.records.length,500);
+assert.equal(sample.records.length,120);
 assert.equal(sample.players.filter(player=>player.isPrimary).length,1);
 const playerIds=new Set(sample.players.map(player=>player.id));
 assert.equal(playerIds.size,10);
-assert.equal(new Set(sample.records.map(record=>record.id)).size,500);
-assert.deepEqual(Object.fromEntries([...new Set(sample.records.map(record=>record.disciplineId))].sort().map(id=>[id,sample.records.filter(record=>record.disciplineId===id).length])),{"10ball":88,"9ball":104,jpa9:74,rotation:101,straightPool:76,threeCushion:57});
+assert.equal(new Set(sample.records.map(record=>record.id)).size,120);
+assert.deepEqual(Object.fromEntries([...new Set(sample.records.map(record=>record.disciplineId))].sort().map(id=>[id,sample.records.filter(record=>record.disciplineId===id).length])),{"10ball":20,"9ball":20,jpa9:20,rotation:20,straightPool:20,threeCushion:20});
 
 for(const record of sample.records){
   for(const side of [1,2]) assert.ok(playerIds.has(record.players[side].registeredPlayerId),`unknown Player ID in ${record.id}`);
@@ -62,7 +62,7 @@ assert.ok(new Set([...months.values()].map(bucket=>bucket.games)).size>=6,"month
 assert.ok(new Set([...months.values()].map(bucket=>Math.round(bucket.wins/bucket.games*100))).size>=6,"monthly win-rate graph must vary");
 assert.ok(new Set([...months.values()].map(bucket=>Math.round(bucket.shots.reduce((a,b)=>a+b,0)/bucket.shots.length))).size>=4,"monthly shot-rate graph must vary");
 const playerCounts=sample.players.map(player=>sample.records.filter(record=>[1,2].some(side=>record.players[side].registeredPlayerId===player.id)).length);
-assert.ok(Math.min(...playerCounts)>=90&&Math.max(...playerCounts)<=110,"match distribution should be broad and natural");
+assert.ok(Math.min(...playerCounts)>=18&&Math.max(...playerCounts)<=32,"match distribution should be broad and natural");
 
 const allEvents=sample.records.flatMap(record=>record.analysis.events);
 for(const type of ["break_result","ball_pocketed","player_switch","foul","safety","safety_result","rack_end"]) assert.ok(allEvents.some(event=>event.type===type),`missing ${type}`);
@@ -83,6 +83,10 @@ assert.ok(sample.records.some(record=>record.players[1].score===0||record.player
 assert.ok(sample.records.some(record=>record.inning>=30));
 assert.ok(sample.records.some(record=>record.eventLog?.undoCount>0));
 assert.ok(sample.records.filter(record=>record.disciplineId==="threeCushion").every(record=>record.recommendedHandicap==null&&record.threeCushion?.recommendedHandicap==null));
+assert.ok(new Set(sample.records.filter(record=>record.disciplineId==="jpa9").flatMap(record=>[record.players[1].skillLevel,record.players[2].skillLevel])).size>=5,"JPA sample must retain meaningful SL differences");
+for(const disciplineId of ["straightPool","threeCushion"]){
+  assert.ok(new Set(sample.records.filter(record=>record.disciplineId===disciplineId).map(record=>record.inning)).size>=6,`${disciplineId} must retain varied innings`);
+}
 
 Object.entries(normalKeys).forEach(([name,key])=>assert.equal(storage.getItem(key),normalFixture[name]));
 const deterministic=JSON.stringify(sample);
@@ -100,9 +104,9 @@ assert.equal(demo.isDemo(storage),true);
 Object.entries(normalKeys).forEach(([name,key])=>assert.equal(demo.resolveKey(key,storage),demo.keys[name]));
 assert.equal(demo.leave(storage),true);
 assert.equal(demo.isDemo(storage),false);
-storage.setItem(demo.keys.metadata,JSON.stringify({version:"2.0"}));
-assert.equal(demo.upgrade(storage).records.length,500);
-assert.equal(JSON.parse(storage.getItem(demo.keys.metadata)).version,"3.0");
+storage.setItem(demo.keys.metadata,JSON.stringify({version:"3.0",playerCount:10,matchCount:500}));
+assert.equal(demo.upgrade(storage).records.length,120);
+assert.equal(JSON.parse(storage.getItem(demo.keys.metadata)).version,"3.1");
 demo.setMode("demo",storage);
 Object.entries(normalKeys).forEach(([name,key])=>assert.equal(demo.resolveKey(key,storage),demo.keys[name]));
 storage.setItem(demo.keys.records,"[]");
@@ -133,15 +137,20 @@ class QuotaStorage extends MemoryStorage {
     super.setItem(key,value);
   }
 }
-const quotaStorage=new QuotaStorage(5*1024*1024);
+const quotaStorage=new QuotaStorage(4*1024*1024);
 quotaStorage.setItem(normalKeys.records,"x".repeat(1200000));
-assert.throws(()=>demo.enter(quotaStorage),error=>error?.name==="QuotaExceededError");
-assert.equal(quotaStorage.getItem(demo.keys.mode),null,"failed preparation must not switch data mode");
-assert.equal(quotaStorage.getItem(demo.keys.players),null,"failed preparation must roll back partial sample data");
-assert.equal(quotaStorage.getItem(normalKeys.records).length,1200000,"failed preparation must not alter normal data");
+assert.equal(demo.enter(quotaStorage),true,"120-match sample must fit beside representative iPhone local data");
+assert.equal(demo.isDemo(quotaStorage),true);
+assert.equal(JSON.parse(quotaStorage.getItem(demo.keys.records)).length,120);
+assert.equal(quotaStorage.getItem(normalKeys.records).length,1200000,"sample preparation must not alter normal data");
+demo.leave(quotaStorage);
+assert.equal(demo.isDemo(quotaStorage),false);
 
-const serialized500=JSON.stringify(sample),parseStart=performance.now();JSON.parse(serialized500);const parse500Ms=performance.now()-parseStart;
-assert.ok(Buffer.byteLength(serialized500)<3.5*1024*1024,"500 detailed matches must remain within the safe sample-data budget");
+const serializedProduction=JSON.stringify(sample),parseStart=performance.now();JSON.parse(serializedProduction);const parseProductionMs=performance.now()-parseStart;
+assert.ok(Buffer.byteLength(serializedProduction)<1024*1024,"120 detailed matches must stay below the 1 MiB product-snapshot budget");
+const fiveHundred=demo.benchmark(500),serialized500=JSON.stringify(fiveHundred);
+assert.equal(fiveHundred.records.length,500);
+assert.ok(Buffer.byteLength(serialized500)>3*1024*1024,"500 detailed matches remain a performance-only dataset");
 const benchStart=performance.now(),thousand=demo.benchmark(1000),benchGeneratedMs=performance.now()-benchStart;
 const stringifyStart=performance.now(),serialized1000=JSON.stringify(thousand),stringify1000Ms=performance.now()-stringifyStart;
 const parse1000Start=performance.now();JSON.parse(serialized1000);const parse1000Ms=performance.now()-parse1000Start;
@@ -149,4 +158,4 @@ assert.equal(thousand.records.length,1000);
 assert.ok(benchGeneratedMs<1500&&stringify1000Ms<1500&&parse1000Ms<1500);
 assert.ok(Buffer.byteLength(serialized1000)>5*1024*1024,"1,000 detailed records should remain a benchmark, not the localStorage production snapshot");
 
-console.log(JSON.stringify({players:10,matches:500,playerRange:[Math.min(...playerCounts),Math.max(...playerCounts)],period:[new Date(Math.min(...dates)).toISOString(),new Date(Math.max(...dates)).toISOString()],events:allEvents.length,size500MiB:(Buffer.byteLength(serialized500)/1048576).toFixed(2),created500Ms:createdMs.toFixed(1),parse500Ms:parse500Ms.toFixed(1),size1000MiB:(Buffer.byteLength(serialized1000)/1048576).toFixed(2),generated1000Ms:benchGeneratedMs.toFixed(1),stringify1000Ms:stringify1000Ms.toFixed(1),parse1000Ms:parse1000Ms.toFixed(1)}));
+console.log(JSON.stringify({players:10,matches:120,disciplineCounts:Object.fromEntries([...new Set(sample.records.map(record=>record.disciplineId))].sort().map(id=>[id,sample.records.filter(record=>record.disciplineId===id).length])),playerRange:[Math.min(...playerCounts),Math.max(...playerCounts)],period:[new Date(Math.min(...dates)).toISOString(),new Date(Math.max(...dates)).toISOString()],events:allEvents.length,size120MiB:(Buffer.byteLength(serializedProduction)/1048576).toFixed(2),created120Ms:createdMs.toFixed(1),parse120Ms:parseProductionMs.toFixed(1),size500MiB:(Buffer.byteLength(serialized500)/1048576).toFixed(2),size1000MiB:(Buffer.byteLength(serialized1000)/1048576).toFixed(2),generated1000Ms:benchGeneratedMs.toFixed(1),stringify1000Ms:stringify1000Ms.toFixed(1),parse1000Ms:parse1000Ms.toFixed(1)}));

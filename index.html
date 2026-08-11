@@ -8914,7 +8914,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-player-detail-compat-v2"></script>
+  <script src="./demo-data.js?v=2.0-sample-data-120-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19217,7 +19217,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-player-detail-compat-v2";
+    const PWA_VERSION = "2.0-sample-data-120-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -25463,7 +25463,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       }
       const normalSafe = "通常データは変更されません。";
       try {
-        if (demoAction === "create" && confirm(`Official Demo Data（10名・500試合・全6種目・詳細記録）を準備します。\n${normalSafe}`)) {
+        if (demoAction === "create" && confirm(`Official Demo Data（10名・120試合・全6種目・詳細記録）を準備します。\n${normalSafe}`)) {
           demoApi.create();
           alert(`公式デモデータを準備しました。\n${normalSafe}`);
         }

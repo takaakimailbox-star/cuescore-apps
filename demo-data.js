@@ -1,11 +1,10 @@
-/* CueScore Sample Data v3.0 — deterministic production-like RC verification data. */
+/* CueScore Sample Data v3.1 — deterministic production-like RC verification data. */
 (() => {
   "use strict";
 
-  // 500 records is the production snapshot. A 1,000-record snapshot remains
-  // available to the automated performance benchmark, but exceeds the safe
-  // localStorage budget once detailed events are retained.
-  const VERSION="3.0",PREFIX="cuescore-demo",PLAYER_COUNT=10,TOTAL_MATCHES=500,MAX_MATCHES=1000;
+  // 120 records (20 per discipline) is the iPhone-safe production snapshot.
+  // Larger 500/1,000-record datasets remain available only through benchmark().
+  const VERSION="3.1",PREFIX="cuescore-demo",PLAYER_COUNT=10,TOTAL_MATCHES=120,MAX_MATCHES=1000;
   const KEYS=Object.freeze({
     mode:`${PREFIX}.mode.v1`,players:`${PREFIX}.players.v1`,records:`${PREFIX}.matchRecords.v1`,
     categories:`${PREFIX}.matchCategories.v1`,seasons:`${PREFIX}.matchSeasons.v1`,metadata:`${PREFIX}.metadata.v1`
@@ -174,7 +173,7 @@
     const playersData={1:playerData(1),2:playerData(2)},endedAt=new Date(events.lastAt()),disciplineId=item.discipline.disciplineId;
     const playerSummary=side=>{const own=events.analysis.filter(event=>event.player===side),safety=own.filter(event=>event.type==="safety_result"),fouls=own.filter(event=>event.type==="foul");return {safety:{total:safety.length,success:safety.filter(event=>event.outcome==="success").length,failed:safety.filter(event=>event.outcome==="failed").length,successRate:safety.length?Math.round(safety.filter(event=>event.outcome==="success").length/safety.length*100):null},foul:{total:fouls.length,opening:fouls.filter(event=>event.phase==="opening").length,middle:fouls.filter(event=>event.phase==="middle").length,late:fouls.filter(event=>event.phase==="late").length,punished:0,noScore:0,punishedRate:null}};};
     const close=Math.abs(scores[1]-scores[2])<=Math.max(2,Math.round(Math.max(goals[1],goals[2])*.1));
-    return {id:`sample-match-${String(item.index+1).padStart(4,"0")}`,gameType:item.discipline.gameType,disciplineId,recordSchemaVersion:4,createdByAppVersion:"CueScore Sample Data v3.0",playedAt:endedAt.toISOString(),startedAt:item.date.toISOString(),endedAt:endedAt.toISOString(),winner,result:"win",inning:extra.inning,rack:extra.rack,initialBreaker:item.index%2+1,rackResults:extra.rackResults,
+    return {id:`sample-match-${String(item.index+1).padStart(4,"0")}`,gameType:item.discipline.gameType,disciplineId,recordSchemaVersion:4,createdByAppVersion:"CueScore Sample Data v3.1",playedAt:endedAt.toISOString(),startedAt:item.date.toISOString(),endedAt:endedAt.toISOString(),winner,result:"win",inning:extra.inning,rack:extra.rack,initialBreaker:item.index%2+1,rackResults:extra.rackResults,
       jpa9:disciplineId==="jpa9"?{skillLevels:{1:playersData[1].skillLevel,2:playersData[2].skillLevel},targetPoints:{1:goals[1],2:goals[2]},deadBalls:[],deadBallEvents:[]}:null,
       nineBall:disciplineId==="9ball"?{initialBreaker:item.index%2+1,rackResults:extra.rackResults}:null,tenBall:disciplineId==="10ball"?{initialBreaker:item.index%2+1,rackResults:extra.rackResults,spotEvents:[]}:null,
       straightPool:disciplineId==="straightPool"?{rackCycle:extra.rack,spotEvents:[],rerackEvents:[],openingBreakEvents:[]}:null,
@@ -186,7 +185,12 @@
 
   function buildMatches(limit=TOTAL_MATCHES){
     const players=buildPlayers(),all=makeSchedule(),requested=clamp(Number(limit)||TOTAL_MATCHES,0,MAX_MATCHES);
-    const schedule=requested>=all.length?all:Array.from({length:requested},(_,position)=>all[Math.floor(position*all.length/requested)]);
+    const schedule=requested===TOTAL_MATCHES
+      ? disciplineDefinitions.flatMap(definition=>{
+          const candidates=all.filter(item=>item.discipline.disciplineId===definition.disciplineId);
+          return Array.from({length:20},(_,position)=>candidates[Math.floor(position*candidates.length/20)]);
+        }).sort((a,b)=>a.date-b.date)
+      : requested>=all.length?all:Array.from({length:requested},(_,position)=>all[Math.floor(position*all.length/requested)]);
     return schedule.map(item=>{const random=randomFor(`match:${item.discipline.disciplineId}:${item.localIndex}`);return ["9ball","10ball"].includes(item.discipline.disciplineId)?rackMatch(item,players,random):pointsMatch(item,players,random);});
   }
   const data=(limit=TOTAL_MATCHES)=>({players:buildPlayers(),records:buildMatches(limit),categories:[{id:"category_free",name:"Free",locked:true},{id:"category_tournament",name:"大会",locked:false},{id:"category_league",name:"リーグ",locked:false}],seasons:[{id:"sample-season-2025-26",name:"2025-26 シーズン"},{id:"sample-season-2026",name:"2026 シーズン"}]});
