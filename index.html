@@ -8914,7 +8914,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-game-result-modal-progress-v1"></script>
+  <script src="./demo-data.js?v=2.0-break-return-scroll-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -11952,6 +11952,7 @@ let matchRecordsRawCacheV152 = null;
   let breakResultCloseTimerV2 = 0;
   let breakResultSourceV3 = "game";
   let breakResultBackHandlingV3 = false;
+  let revealLatestGameLogAfterBreakV1 = false;
   const BREAK_RESULT_LABELS_V61 = {
     dry: "無得点",
     one: "1個",
@@ -12066,6 +12067,10 @@ let matchRecordsRawCacheV152 = null;
         overlay.classList.add("hidden");
         overlay.classList.remove("is-closing-v2");
         breakResultCloseTimerV2 = 0;
+        if (revealLatestGameLogAfterBreakV1) {
+          revealLatestGameLogAfterBreakV1 = false;
+          revealCurrentGameLogPositionV1();
+        }
       }, 190);
     }
     pendingBreakPlayerV61 = null;
@@ -12322,8 +12327,10 @@ let matchRecordsRawCacheV152 = null;
       pushOut: requestedPushOutV100
     };
 
+    revealLatestGameLogAfterBreakV1 = true;
     closeBreakResultPromptV61();
     if (startsNextRackV1 && !startNextRackWith(player, { showPrompt:false })) {
+      revealLatestGameLogAfterBreakV1 = false;
       breakResultSavingV1 = false;
       return;
     }
@@ -12925,6 +12932,20 @@ let matchRecordsRawCacheV152 = null;
     return `<span class="pro-symbol ${cls}">${displaySymbol}</span>`;
   }
 
+  function revealCurrentGameLogPositionV1() {
+    const log=el("proTurnLog");
+    if(!log||isThreeCushionV1())return;
+    const currentRack=String(Math.max(1,Number(rack)||1));
+    const rackRows=[...log.querySelectorAll(`.pro-log-row[data-rack="${currentRack}"]`)];
+    const target=rackRows.at(-1)||log.querySelector(".pro-log-row.active-row")||log.lastElementChild;
+    if(!(target instanceof HTMLElement))return;
+    const logRect=log.getBoundingClientRect();
+    const targetRect=target.getBoundingClientRect();
+    const maxTop=Math.max(0,log.scrollHeight-log.clientHeight);
+    const desiredTop=Math.max(0,Math.min(maxTop,log.scrollTop+targetRect.bottom-logRect.bottom+8));
+    log.scrollTo({top:desiredTop,left:log.scrollLeft,behavior:"auto"});
+  }
+
   // CueScore RC59: build large game DOM updates off-document, then commit once.
   function renderLog() {
     const log = el("proTurnLog");
@@ -12948,6 +12969,7 @@ let matchRecordsRawCacheV152 = null;
       if (rowData.rack !== lastRack) {
         const divider = document.createElement("div");
         divider.className = "pro-rack-divider";
+        divider.dataset.rack = String(rowData.rack);
         divider.textContent = String(rowData.rack);
         fragment.appendChild(divider);
         lastRack = rowData.rack;
@@ -12955,6 +12977,8 @@ let matchRecordsRawCacheV152 = null;
 
       const row = document.createElement("div");
       row.className = "pro-log-row" + (index === rows.length - 1 ? " active-row" : "");
+      row.dataset.rack = String(rowData.rack);
+      row.dataset.inning = String(rowData.inning);
       const p1Items = rowData.p1.map(logItemHtmlV1).join("");
       const p2Items = rowData.p2.map(logItemHtmlV1).join("");
       row.innerHTML = `
@@ -19238,7 +19262,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-game-result-modal-progress-v1";
+    const PWA_VERSION = "2.0-break-return-scroll-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
