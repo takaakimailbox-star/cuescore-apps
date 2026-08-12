@@ -8639,7 +8639,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-player-library-restore-v1"></script>
+  <script src="./demo-data.js?v=2.0-player-selection-formal-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -16081,11 +16081,11 @@ let matchRecordsRawCacheV152 = null;
       const status = usedByOther
         ? `<span class="player-library-status">Player${otherPlayer}で選択中</span>`
         : selectedHere ? `<span class="player-library-status current">現在選択中</span>` : "";
-      return `<div class="player-library-item selection-only${usedByOther ? " unavailable" : ""}">
-        <button class="player-library-select" type="button" ${usedByOther ? "disabled" : `data-select-player="${p.id}"`}>
-          ${playerAvatarHtmlV2(p,"player-library-select-avatar-v2")}
-          <div><div class="player-library-name-row"><div class="player-library-name">${escapeRecordText(p.name)}${p.isPrimary ? `<span class="player-primary-badge-v1">メイン</span>` : ""}</div>${status}</div>
-          <div class="player-library-meta">${p.memo ? escapeRecordText(p.memo) : `最終使用 ${formatLastUsed(p.lastUsed)}`}</div></div>
+      return `<div class="player-selection-row-v1${usedByOther ? " is-unavailable" : ""}">
+        <button class="player-selection-button-v1" type="button" ${usedByOther ? "disabled" : `data-select-player="${p.id}"`} aria-label="${escapeRecordText(p.name)}${usedByOther ? `、Player${otherPlayer}で選択中` : selectedHere ? "、現在選択中" : "を選択"}">
+          <span class="player-selection-avatar-v1">${playerAvatarHtmlV2(p,"player-avatar-v2")}</span>
+          <span class="player-selection-copy-v1"><span class="player-library-name-row"><span class="player-library-name">${escapeRecordText(p.name)}${p.isPrimary ? `<span class="player-primary-badge-v1">メイン</span>` : ""}</span>${status}</span>
+          ${p.memo ? `<span class="player-selection-memo-v1">${escapeRecordText(p.memo)}</span>` : ""}<span class="player-library-meta">最終使用 ${formatLastUsed(p.lastUsed)}</span></span>
         </button>
       </div>`;
     }).join("");
@@ -16095,20 +16095,16 @@ let matchRecordsRawCacheV152 = null;
     editingPlayerId = null;
     const management = playerLibraryModeV145 === "management";
     const overlay = el("playerLibraryOverlay");
-    overlay?.classList.toggle("player-management-formal-v1", management);
+    overlay?.classList.add("player-management-formal-v1");
+    overlay?.classList.toggle("player-selection-formal-v1", !management);
     el("playerLibraryTitle").textContent = management ? "プレーヤー一覧" : `Player${playerLibraryTarget} 選択`;
     el("playerLibrarySearch").placeholder = management ? "プレーヤー検索" : "名前を検索";
     el("playerLibraryMain").classList.remove("hidden");
     el("playerEditor").classList.add("hidden");
     const back = el("playerLibraryBackBtn");
     if (back) {
-      if (management) {
-        back.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg>`;
-        back.setAttribute("aria-label", "前の画面に戻る");
-      } else {
-        back.textContent = "‹ 戻る";
-        back.setAttribute("aria-label", "閉じる");
-      }
+      back.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg>`;
+      back.setAttribute("aria-label", management ? "前の画面に戻る" : "試合設定に戻る");
       back.removeAttribute("aria-hidden");
       back.tabIndex = 0;
     }
@@ -18725,7 +18721,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-player-library-restore-v1";
+    const PWA_VERSION = "2.0-player-selection-formal-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -26365,7 +26361,40 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   .break-result-overlay-v61,.break-result-overlay-v61.is-closing-v2,
   .break-result-card-v61,.break-result-overlay-v61.is-closing-v2 .break-result-card-v61{animation-duration:1ms!important}
 }
-.player-library-item.selection-only .player-library-select{display:grid;grid-template-columns:52px minmax(0,1fr);align-items:center;gap:10px;text-align:left}.player-library-select-avatar-v2{width:52px;height:52px}
+/* Formal Player Library selection — shared white shell with selection-only rows. */
+.player-selection-formal-v1 .player-library-main{padding-top:8px}
+.player-selection-formal-v1 .player-library-search-wrap{display:block;margin-bottom:12px}
+.player-selection-formal-v1 .player-library-search-icon-v1{display:block;top:25px}
+.player-selection-formal-v1 .player-library-search{
+  display:block;width:100%;height:50px;padding:0 14px 0 48px;border:1px solid #d7d7d4;
+  border-radius:12px;color:#171717;background:#fff;font-size:16px;-webkit-appearance:none
+}
+.player-selection-formal-v1 .player-library-sort-v1,.player-selection-formal-v1 .player-management-intro-v2,
+.player-selection-formal-v1 .player-library-register-v2{display:none!important}
+.player-selection-formal-v1 .player-library-list{padding:0 4px;border:1px solid #e8e8e5;border-radius:16px;background:#fff}
+.player-selection-row-v1{border-bottom:1px solid #e9e9e6;background:#fff}
+.player-selection-row-v1:last-child{border-bottom:0}
+.player-selection-button-v1{
+  display:grid;grid-template-columns:56px minmax(0,1fr);align-items:center;width:100%;min-height:82px;
+  gap:12px;padding:10px;border:0;color:#171717;background:#fff;text-align:left;cursor:pointer
+}
+.player-selection-button-v1:active{background:#f5f5f3}
+.player-selection-avatar-v1{position:relative;display:block;width:56px;height:56px}
+.player-selection-copy-v1{display:flex;min-width:0;flex-direction:column;gap:3px}
+.player-selection-formal-v1 .player-library-name{color:#171717;font-size:18px;font-weight:650}
+.player-selection-formal-v1 .player-library-name-row{align-items:flex-start;justify-content:space-between}
+.player-selection-formal-v1 .player-library-status{background:#ececea;color:#454543;font-size:10px}
+.player-selection-formal-v1 .player-library-status.current{background:#e5f0ff;color:#1765c1}
+.player-selection-formal-v1 .player-library-meta{margin:0;color:#777775;font-size:11px}
+.player-selection-memo-v1{display:block;overflow:hidden;color:#555;font-size:12px;line-height:1.35;text-overflow:ellipsis;white-space:nowrap}
+.player-selection-row-v1.is-unavailable{opacity:.48}
+.player-selection-row-v1.is-unavailable .player-selection-button-v1{cursor:default}
+.player-selection-row-v1.is-unavailable .player-selection-button-v1:active{background:#fff}
+@media(max-width:390px){
+  .player-selection-button-v1{grid-template-columns:50px minmax(0,1fr);min-height:76px;gap:9px;padding:9px 8px}
+  .player-selection-avatar-v1{width:50px;height:50px}
+  .player-selection-formal-v1 .player-library-name{font-size:16px}
+}
 .player-detail-avatar-v1{overflow:visible}.player-detail-avatar-v1>.player-avatar-v2{width:100%;height:100%}
 @media(max-width:370px){.player-avatar-groups-v2 section>div{grid-template-columns:repeat(3,minmax(0,1fr))}.player-management-formal-v1 .player-management-row-v1{grid-template-columns:52px minmax(0,1fr) 16px}.player-management-formal-v1 .player-management-avatar-v1{width:50px;height:50px}}
 

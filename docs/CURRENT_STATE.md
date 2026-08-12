@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## v1.0 Final RC：Player1／Player2正式Selection UI統一（2026年8月12日）
+
+- New MatchのPlayer1／Player2選択画面も、管理画面と同じ白基調の正式Player Library外装、正式avatar、検索、追加、Back UIへ統一した。
+- 選択画面は行タップで選択し、メインプレーヤー最上位、現在選択中、相手側で選択済みのdisabled、プロフィールメモ、最終使用を表示する。管理用の成績／編集操作は表示しない。
+- 6競技は同じPlayer1／Player2選択入口を使用し、旧緑色Player選択UIは現行New Match導線から使用しない。
+- 選択ロジック、プレーヤーデータ、保存形式、試合メモ／タグのv1.0非採用状態は変更していない。Official Releaseも変更していない。
+
 ## v1.0 Final RC：正式Player Library回帰復旧（2026年8月12日）
 
 - Code Cleanup Phase 1で未参照Legacy関数を削除した際、直後の正式Player Library renderer overrideまで誤って削除され、旧Player1／Player2選択UIが露出する回帰が発生した。
