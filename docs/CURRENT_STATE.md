@@ -84,8 +84,8 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - 「ホームへ戻る」「もう一度対戦する」は維持する。BackdropタップおよびEscapeではGame Resultを閉じない。
 - 中央配置、左右余白、最大幅、角丸、Fade＋Scale、背面操作不可は維持する。
 - Race Picker、Result以外のModal、Picker、OverlayのClose仕様は変更しない。
-- 正式決定記録：`docs/official/13_CueScore_v1.0FinalRC_GameResult_Close_Decision.md`。Official Design Decision Log v1.3へのDecision 019追記案を同文書に記録した。
-- 現行Official Design System v2.0およびUI Components v1.0の一般Modal／Result Close規定にはGame Result例外の追補が必要。既存Official Release本体は未変更。
+- 正式決定記録：`docs/official/13_CueScore_v1.0FinalRC_GameResult_Close_Decision.md`。Decision 019としてOfficial Design Decision Log v1.3へ正式収録した。
+- Game Result Close例外は、一般Modal規則を維持したままDesign System v2.1、UI Components v1.1、Official Design Decision Log v1.3へ正式反映済み。既存のv2.0／v1.0／v1.2は履歴として保持する。
 
 ## App Store v1.0 RC：Player Analytics競技別統計3指標（2026年8月10日）
 
