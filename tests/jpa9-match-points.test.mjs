@@ -65,4 +65,7 @@ test("20-0, 16-4, 14-6 and 12-8 keep Player 1 / Player 2 order in one compact li
   assert.deepEqual({...context.window.jpa9MatchPointsForPlayersV1(1,{1:{score:38,skillLevel:5},2:{score:34,skillLevel:5}})},{1:12,2:8});
   assert.match(html,/\.official-result-match-points-v3\{[\s\S]*?font-weight:500;[\s\S]*?white-space:nowrap/);
   assert.match(html,/\.match-detail-match-points-v3\{[\s\S]*?font-weight:480;[\s\S]*?white-space:nowrap/);
+  assert.match(html,/\.official-result-players-v1\.has-jpa-match-points-v3\{grid-template-columns:minmax\(0,1fr\) minmax\(76px,86px\) minmax\(0,1fr\)\}/);
+  assert.doesNotMatch(html,/\.official-result-players-v1\.has-jpa-match-points-v3 \.official-result-score-v1\{margin-top:/);
+  assert.doesNotMatch(html,/\.official-result-match-points-v3\{[^}]*position:absolute/);
 });

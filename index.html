@@ -8640,7 +8640,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-numeric-input-limits-v1"></script>
+  <script src="./demo-data.js?v=2.0-jpa9-result-lines-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -14683,7 +14683,7 @@ let matchRecordsRawCacheV152 = null;
     const labelEvery = Math.max(1,Math.ceil(maxIndex/8));
     const xLabels = progress.steps.map((value,index) => { if(index!==0&&index!==maxIndex&&index%labelEvery!==0)return ""; const p=point(0,index); return `<text x="${p.x.toFixed(1)}" y="${height-16}" text-anchor="middle" font-size="10" fill="#777">${value}</text>`; }).join("");
     const lastP1=point(progress.p1.at(-1),maxIndex), lastP2=point(progress.p2.at(-1),maxIndex);
-    return `<svg class="official-result-chart-svg-v1" viewBox="0 0 ${width} ${height}" role="img" aria-label="両プレーヤーの${progress.axis}別累積得点推移">${grid}<path d="${path(progress.p1)}" fill="none" stroke="#171717" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="${path(progress.p2)}" fill="none" stroke="#8b8b87" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>${dots(progress.p1,"#171717")}${dots(progress.p2,"#8b8b87")}${xLabels}<text x="${Math.min(width-4,lastP1.x+9)}" y="${Math.max(13,lastP1.y-7)}" font-size="13" font-weight="700" fill="#171717">${Number(progress.p1.at(-1))||0}</text><text x="${Math.min(width-4,lastP2.x+9)}" y="${Math.min(height-bottom-5,lastP2.y+17)}" font-size="13" font-weight="700" fill="#777">${Number(progress.p2.at(-1))||0}</text></svg>`;
+    return `<svg class="official-result-chart-svg-v1" viewBox="0 0 ${width} ${height}" role="img" aria-label="両プレーヤーの${progress.axis}別累積得点推移。Player 1は実線、Player 2は破線">${grid}<path class="score-progress-line-p1-v1" d="${path(progress.p1)}" fill="none" stroke="#171717" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path class="score-progress-line-p2-v1" d="${path(progress.p2)}" fill="none" stroke="#8b8b87" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 6"/>${dots(progress.p1,"#171717")}${dots(progress.p2,"#8b8b87")}${xLabels}<text x="${Math.min(width-4,lastP1.x+9)}" y="${Math.max(13,lastP1.y-7)}" font-size="13" font-weight="700" fill="#171717">${Number(progress.p1.at(-1))||0}</text><text x="${Math.min(width-4,lastP2.x+9)}" y="${Math.min(height-bottom-5,lastP2.y+17)}" font-size="13" font-weight="700" fill="#777">${Number(progress.p2.at(-1))||0}</text></svg>`;
   }
 
   function resultAvatarSvgV1(playerNumber) {
@@ -18761,7 +18761,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-numeric-input-limits-v1";
+    const PWA_VERSION = "2.0-jpa9-result-lines-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22177,8 +22177,8 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
     const p2Color=winner===2?WINNER_INK:"#30302e";
     return `<svg class="match-detail-chart-svg-v1" viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="両プレーヤーの累積得点推移">
       ${grid}
-      <path d="${path(progress.p1)}" fill="none" stroke="${p1Color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="${path(progress.p2)}" fill="none" stroke="${p2Color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path class="score-progress-line-p1-v1" d="${path(progress.p1)}" fill="none" stroke="${p1Color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path class="score-progress-line-p2-v1" d="${path(progress.p2)}" fill="none" stroke="${p2Color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 6"/>
       ${labels}
     </svg>`;
   }
@@ -22414,7 +22414,7 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
         <section class="match-detail-card-v1 match-detail-summary-v1">
           ${summaryRows.map(([label,left,right])=>`<div class="match-detail-summary-row-v1"><strong class="${winner===1?"winner":""}">${esc(left)}</strong><span>${esc(label)}</span><strong class="${winner===2?"winner":""}">${esc(right)}</strong></div>`).join("")}
         </section>
-        ${chart?`<section class="match-detail-card-v1 match-detail-chart-v1"><h2>スコア推移</h2><div class="match-detail-legend-v1"><span style="--legend:${winner===1?WINNER_INK:"#30302e"}">${esc(p1.name||"Player1")}</span><span style="--legend:${winner===2?WINNER_INK:"#30302e"}">${esc(p2.name||"Player2")}</span></div>${chart}</section>`:""}
+        ${chart?`<section class="match-detail-card-v1 match-detail-chart-v1"><h2>スコア推移</h2><div class="match-detail-legend-v1"><span class="score-progress-legend-p1-v1" style="--legend:${winner===1?WINNER_INK:"#30302e"}">${esc(p1.name||"Player1")}</span><span class="score-progress-legend-p2-v1" style="--legend:${winner===2?WINNER_INK:"#30302e"}">${esc(p2.name||"Player2")}</span></div>${chart}</section>`:""}
         ${history}
         ${resultMode?"":`<section class="match-detail-delete-section-v1"><button id="matchDetailDeleteV1" type="button">この試合を削除</button><p>削除すると、この試合は履歴とすべての集計から除外されます。</p></section>`}
       </main>
@@ -22600,19 +22600,14 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
 .official-result-stats-v1 strong{font-size:23px;font-weight:800;line-height:1}
 .official-result-stats-v1 small{font-size:.62em}
 .official-result-separator-v1{text-align:center;font-size:20px;font-weight:800;color:#333}
-.official-result-players-v1.has-jpa-match-points-v3{position:relative}
-.official-result-players-v1.has-jpa-match-points-v3 .official-result-score-v1{margin-top:42px}
+.official-result-players-v1.has-jpa-match-points-v3{grid-template-columns:minmax(0,1fr) minmax(76px,86px) minmax(0,1fr)}
 .official-result-match-points-v3{
-  position:absolute;
-  top:45px;
-  left:50%;
-  z-index:2;
-  width:86px;
+  width:100%;
+  min-width:0;
   min-height:31px;
   display:grid;
   place-items:center;
   padding:5px 8px;
-  transform:translateX(-50%);
   border:1px solid #dededb;
   border-radius:9px;
   background:#fff;
@@ -22649,9 +22644,9 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
   font-size:9px;
   white-space:nowrap;
 }
-.official-result-chart-header-v1>div span{width:13px;height:2px;display:inline-block;border-radius:4px}
-.official-result-chart-header-v1 .p1{background:var(--result-accent)}
-.official-result-chart-header-v1 .p2{margin-left:4px;background:#8b8b87}
+.official-result-chart-header-v1>div span{width:14px;height:0;display:inline-block;border-top:2px solid;border-radius:0}
+.official-result-chart-header-v1 .p1{border-color:var(--result-accent)}
+.official-result-chart-header-v1 .p2{margin-left:4px;border-color:#8b8b87;border-top-style:dashed}
 .official-result-chart-svg-v1{width:100%;height:auto;max-height:166px;display:block}
 .official-result-axis-title-v1{position:absolute;top:36px;left:12px;color:#777;font-size:9px}
 .official-result-axis-bottom-v1{display:block;margin-top:-10px;text-align:center;color:#555;font-size:10px}
@@ -23360,13 +23355,13 @@ body.match-detail-visible-v1{overflow:hidden!important}
 .match-detail-legend-v1 span::before{
   content:"";
   width:14px;
-  height:2px;
+  height:0;
   margin-right:4px;
   display:inline-block;
   vertical-align:middle;
-  border-radius:999px;
-  background:var(--legend);
+  border-top:2px solid var(--legend);
 }
+.match-detail-legend-v1 .score-progress-legend-p2-v1::before{border-top-style:dashed}
 .match-detail-chart-svg-v1{
   width:100%;
   max-width:100%;
@@ -25855,7 +25850,7 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 }
 .official-result-player-v1.winner::before{background:var(--cue-foundation-ink)!important}
 .official-result-chart-header-v1 .p1,
-.official-result-chart-header-v1 .p2{background:var(--cue-foundation-ink)!important}
+.official-result-chart-header-v1 .p2{border-color:var(--cue-foundation-ink)!important}
 .official-result-chart-svg-v1 path[stroke="#6f3214"],
 .match-detail-chart-v1 path[stroke="#6f3214"]{stroke:var(--cue-foundation-ink)!important}
 .official-result-chart-svg-v1 circle[fill="#6f3214"],
