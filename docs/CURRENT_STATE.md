@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## v1.0 Final RC：正式Player Library回帰復旧（2026年8月12日）
+
+- Code Cleanup Phase 1で未参照Legacy関数を削除した際、直後の正式Player Library renderer overrideまで誤って削除され、旧Player1／Player2選択UIが露出する回帰が発生した。
+- 正常比較元 `68886dc4bb7180f68477b5aa1079301552532246` から、白基調の正式Player Library描画、検索、並び替え、avatar、メインプレーヤー優先、現在選択中、最終使用、Player Detail／編集／新規追加の導線を復旧した。
+- 試合メモ／タグのUI・生成・検索・絞り込み・編集は復活させず、Phase 1 Finalの非採用状態を維持する。
+- Phase 2の未使用コード削除はiPhone実機で本修正を確認するまで開始しない。
+- Official Releaseは変更していない。
+
 ## v1.0 Final RC：試合メモ／タグ非採用・コード整理 Phase 1（2026年8月12日）
 
 - Product Owner決定により、試合メモ／タグはv1.0非採用とし、新規入力・生成・検索・絞り込みUIおよび専用ロジックを削除した。

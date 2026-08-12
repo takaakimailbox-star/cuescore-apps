@@ -8639,7 +8639,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-memo-tag-phase1-final-v1"></script>
+  <script src="./demo-data.js?v=2.0-player-library-restore-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -16028,6 +16028,123 @@ let matchRecordsRawCacheV152 = null;
     return Number.isFinite(time) ? time : 0;
   }
 
+  renderPlayerLibrary = function() {
+    const list = el("playerLibraryList");
+    if (!list) return;
+    const query = (el("playerLibrarySearch")?.value || "").trim().toLocaleLowerCase("ja");
+    const allPlayers = readPlayerLibrary();
+    const playerRows = allPlayers.map(player => {
+      const records = recordsForRegisteredPlayer(player);
+      return {player, records, latest: records[0] || null};
+    });
+    const players = playerRows
+      .filter(row => !query || row.player.name.toLocaleLowerCase("ja").includes(query))
+      .sort((a, b) => {
+        const primaryOrder=Number(b.player.isPrimary===true)-Number(a.player.isPrimary===true);
+        if (primaryOrder) return primaryOrder;
+        if (playerLibraryModeV145 !== "management") {
+          return (b.player.lastUsed || b.player.updatedAt || b.player.createdAt || 0) -
+            (a.player.lastUsed || a.player.updatedAt || a.player.createdAt || 0);
+        }
+        if (playerLibrarySortV1 === "name") {
+          return a.player.name.localeCompare(b.player.name, "ja");
+        }
+        return playerRecordTimeV1(b.latest) - playerRecordTimeV1(a.latest) ||
+          (b.player.updatedAt || b.player.createdAt || 0) - (a.player.updatedAt || a.player.createdAt || 0);
+      });
+
+    const count = el("playerLibraryCountV1");
+    if (count) count.textContent = `登録プレーヤー数：${allPlayers.length}人`;
+
+    if (!players.length) {
+      const emptyText = query ? "該当するプレーヤーがいません" : "登録プレーヤーはまだいません。<br>右上の＋から登録できます。";
+      list.innerHTML = `<div class="player-library-empty">${emptyText}</div>`;
+      return;
+    }
+
+    if (playerLibraryModeV145 === "management") {
+      list.innerHTML = players.map(({player}) => `
+        <button class="player-management-row-v1" type="button" data-stats-player="${player.id}" aria-label="${escapeRecordText(player.name)}の詳細を開く">
+          <span class="player-management-avatar-v1">${playerAvatarHtmlV2(player,"player-avatar-v2")}${player.isPrimary ? `<span class="player-primary-pin-v2" aria-label="メインプレーヤー"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="m14.8 6.5 2.7 2.7-2 1.1-.5 3.1-1.4 1.4-2.2-2.2-3.8 3.8-.9-.9 3.8-3.8-2.2-2.2 1.4-1.4 3.1-.5Z"/></svg></span>` : ""}</span>
+          <span class="player-management-copy-v2"><strong class="player-management-name-v1">${escapeRecordText(player.name)}</strong>${player.memo ? `<span class="player-management-memo-v2">${escapeRecordText(player.memo)}</span>` : ""}</span>
+          <svg class="player-management-chevron-v1" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+        </button>`).join("");
+      return;
+    }
+
+    const otherPlayer = playerLibraryTarget === 1 ? 2 : 1;
+    const otherSelectedId = selectedRegisteredPlayer[otherPlayer];
+    const currentSelectedId = selectedRegisteredPlayer[playerLibraryTarget];
+    list.innerHTML = players.map(({player:p}) => {
+      const usedByOther = p.id === otherSelectedId;
+      const selectedHere = p.id === currentSelectedId;
+      const status = usedByOther
+        ? `<span class="player-library-status">Player${otherPlayer}で選択中</span>`
+        : selectedHere ? `<span class="player-library-status current">現在選択中</span>` : "";
+      return `<div class="player-library-item selection-only${usedByOther ? " unavailable" : ""}">
+        <button class="player-library-select" type="button" ${usedByOther ? "disabled" : `data-select-player="${p.id}"`}>
+          ${playerAvatarHtmlV2(p,"player-library-select-avatar-v2")}
+          <div><div class="player-library-name-row"><div class="player-library-name">${escapeRecordText(p.name)}${p.isPrimary ? `<span class="player-primary-badge-v1">メイン</span>` : ""}</div>${status}</div>
+          <div class="player-library-meta">${p.memo ? escapeRecordText(p.memo) : `最終使用 ${formatLastUsed(p.lastUsed)}`}</div></div>
+        </button>
+      </div>`;
+    }).join("");
+  };
+
+  showPlayerLibraryMain = function() {
+    editingPlayerId = null;
+    const management = playerLibraryModeV145 === "management";
+    const overlay = el("playerLibraryOverlay");
+    overlay?.classList.toggle("player-management-formal-v1", management);
+    el("playerLibraryTitle").textContent = management ? "プレーヤー一覧" : `Player${playerLibraryTarget} 選択`;
+    el("playerLibrarySearch").placeholder = management ? "プレーヤー検索" : "名前を検索";
+    el("playerLibraryMain").classList.remove("hidden");
+    el("playerEditor").classList.add("hidden");
+    const back = el("playerLibraryBackBtn");
+    if (back) {
+      if (management) {
+        back.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg>`;
+        back.setAttribute("aria-label", "前の画面に戻る");
+      } else {
+        back.textContent = "‹ 戻る";
+        back.setAttribute("aria-label", "閉じる");
+      }
+      back.removeAttribute("aria-hidden");
+      back.tabIndex = 0;
+    }
+
+    const restoreAddButton = () => {
+      const add = el("playerLibraryAddBtn");
+      if (!add) return;
+      add.textContent = "＋";
+      add.setAttribute("aria-label", "新規プレーヤー登録");
+      add.removeAttribute("aria-hidden");
+      add.dataset.editorAction = "";
+      add.classList.remove("delete-mode", "editor-hidden-action");
+      add.disabled = false;
+      add.style.setProperty("display", "grid", "important");
+      add.style.visibility = "visible";
+      add.style.pointerEvents = "auto";
+      add.style.opacity = "1";
+    };
+
+    restoreAddButton();
+    overlay?.querySelector(".player-library-header")?.classList.toggle("selection-mode", !management);
+    renderPlayerLibrary();
+    requestAnimationFrame(restoreAddButton);
+    setTimeout(restoreAddButton, 50);
+  };
+
+  openPlayerLibrary = function(target) {
+    playerLibraryModeV145 = "selection";
+    playerLibraryTarget = target;
+    el("playerLibrarySearch").value = "";
+    const overlay = el("playerLibraryOverlay");
+    overlay.classList.remove("hidden");
+    overlay.setAttribute("aria-hidden", "false");
+    showPlayerLibraryMain();
+  };
+
   function openPlayerManagementV145() {
     playerLibraryModeV145 = "management";
     playerLibrarySortV1 = "recent";
@@ -18608,7 +18725,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-memo-tag-phase1-final-v1";
+    const PWA_VERSION = "2.0-player-library-restore-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
