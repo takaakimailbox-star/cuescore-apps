@@ -5040,7 +5040,7 @@ button {
   color: #fff;
 }
 
-.record-detail-memo {
+.record-detail-reflection-v841 {
   margin: 12px 8px 0;
   padding: 10px 12px;
   border-radius: 9px;
@@ -5051,7 +5051,7 @@ button {
   text-align: left;
 }
 
-.record-detail-memo-title {
+.record-detail-reflection-title-v841 {
   margin-bottom: 4px;
   font-weight: 800;
   color: #806000;
@@ -5143,27 +5143,6 @@ button {
   .records-filter-buttons button { font-size: 13px; }
 }
 
-
-/* Rotation Scoreboard iPhone Ver.3.9: 旧履歴のメモ／タグ表示互換 */
-.record-detail-tags {
-  display:flex;
-  flex-wrap:wrap;
-  gap:5px;
-  margin-bottom:6px;
-}
-.memo-tag-chip {
-  display:inline-flex;
-  align-items:center;
-  min-height:23px;
-  padding:2px 8px;
-  border-radius:999px;
-  background:#dcecdf;
-  color:#17603b;
-  font-size:12px;
-  font-weight:800;
-  line-height:1.15;
-  white-space:nowrap;
-}
 
 /* Rotation Scoreboard iPhone Ver.3.9: 推移グラフ切り替え */
 .player-chart-switch {
@@ -6984,7 +6963,7 @@ button {
   margin-top: 5px !important;
 }
 .history-renew-page-v67 .record-detail-season-v38,
-.history-renew-page-v67 .record-detail-memo {
+.history-renew-page-v67 .record-detail-reflection-v841 {
   background: #fff !important;
   color: #303134 !important;
   border: 1px solid #e6e8eb !important;
@@ -8660,7 +8639,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-memo-tag-phase1-v1"></script>
+  <script src="./demo-data.js?v=2.0-memo-tag-phase1-final-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -15624,7 +15603,7 @@ let matchRecordsRawCacheV152 = null;
             <div class="label">セーフティー</div><div class="value">${Number(p1.safety)||0}</div><div class="value">${Number(p2.safety)||0}</div>
           </div>
           ${record.season ? `<div class="record-detail-season-v38"><span>${esc(record.season)}</span></div>` : ""}
-          ${(record.memo || record.matchMemo || record.reflection || record.playerReflections || (Array.isArray(record.tags) && record.tags.length)) ? `<div class="record-detail-memo">${Array.isArray(record.tags) && record.tags.length ? `<div class="record-detail-tags">${record.tags.map(tag => `<span class="memo-tag-chip">${esc(tag)}</span>`).join("")}</div>` : ""}${record.playerReflections ? `<div class="record-detail-memo-title">プレーヤー別の振り返り</div>${[1,2].map(p=>{const r=record.playerReflections?.[p]||record.playerReflections?.[String(p)];if(!r||!reflectionHasContentV840(r))return "";const n=record.players?.[p]?.name||`Player ${p}`;return `<div class="reflection-player-preview-v841"><div class="reflection-player-name-v841">${esc(n)}</div>${renderReflectionPreviewV840(r)}</div>`;}).join("")}${(record.matchMemo||record.memo)?`<div class="reflection-player-preview-v841"><div class="reflection-player-name-v841">試合全体メモ</div><div>${esc(record.matchMemo||record.memo)}</div></div>`:""}` : record.reflection ? `<div class="record-detail-memo-title">試合の振り返り（旧形式）</div><div class="record-reflection-v840">${renderReflectionPreviewV840(record.reflection)}</div>` : (record.memo ? `<div class="record-detail-memo-title">試合メモ</div><div>${esc(record.memo)}</div>` : "")}</div>` : ""}
+          ${(record.reflection || record.playerReflections) ? `<div class="record-detail-reflection-v841">${record.playerReflections ? `<div class="record-detail-reflection-title-v841">プレーヤー別の振り返り</div>${[1,2].map(p=>{const r=record.playerReflections?.[p]||record.playerReflections?.[String(p)];if(!r||!reflectionHasContentV840(r))return "";const n=record.players?.[p]?.name||`Player ${p}`;return `<div class="reflection-player-preview-v841"><div class="reflection-player-name-v841">${esc(n)}</div>${renderReflectionPreviewV840(r)}</div>`;}).join("")}` : record.reflection ? `<div class="record-detail-reflection-title-v841">試合の振り返り（旧形式）</div><div class="record-reflection-v840">${renderReflectionPreviewV840(record.reflection)}</div>` : ""}</div>` : ""}
         </section>
         <section class="history-renew-page-v67" data-history-page-v67="1" role="tabpanel">
           <div class="history-renew-page-title-v67">得点推移</div>
@@ -18629,7 +18608,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-memo-tag-phase1-v1";
+    const PWA_VERSION = "2.0-memo-tag-phase1-final-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {

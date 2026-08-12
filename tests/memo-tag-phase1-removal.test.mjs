@@ -13,7 +13,12 @@ for(const removed of [
   /GAME_MEMO_TAGS_V32/,
   /data-game-memo-tag=/,
   /historicalEditMemoV35/,
-  /試合タグ（共通/
+  /試合タグ（共通/,
+  /record-detail-memo/,
+  /record-detail-tags/,
+  /memo-tag-chip/,
+  /試合全体メモ/,
+  /試合メモ<\//
 ]) assert.doesNotMatch(html,removed,`removed match memo/tag UI or logic remains: ${removed}`);
 
 assert.doesNotMatch(demoSource,/matchMemo\s*:/);
@@ -26,11 +31,13 @@ assert.match(html,/playerReflections:/);
 assert.match(html,/playerEditorMemoV2/);
 assert.match(demoSource,/definition\.memo/);
 
-// Old record fields remain readable in Match Detail and exportable through the existing CSV shape.
-assert.match(html,/record\.memo \|\| record\.matchMemo/);
-assert.match(html,/Array\.isArray\(record\.tags\)/);
+// Old match memo/tag fields are not rendered, but remain exportable through the existing CSV shape.
+assert.doesNotMatch(html,/record\.memo \|\| record\.matchMemo/);
 assert.match(html,/tags: Array\.isArray\(record\.tags\) \? record\.tags\.join/);
 assert.match(html,/memo: record\.memo \|\| ""/);
+assert.match(html,/return \{\s*\.\.\.record,\s*gameType:/);
+assert.match(html,/matchRecords: safelyReadArray\(DATA_RECORD_KEY\)/);
+assert.match(html,/verifiedLocalStorageWriteV131\(DATA_RECORD_KEY, backup\.matchRecords\)/);
 
 class MemoryStorage {
   #values=new Map();
