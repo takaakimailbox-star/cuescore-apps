@@ -7981,9 +7981,10 @@ body {
           <div class="new-match-race-custom-v1 hidden" id="newMatchRaceCustomV1">
             <label for="newMatchRaceCustomInputV1">Race toを入力</label>
             <div>
-              <input id="newMatchRaceCustomInputV1" type="number" min="1" step="1" inputmode="numeric" placeholder="1以上の整数" />
+              <input id="newMatchRaceCustomInputV1" type="number" min="1" step="1" inputmode="numeric" placeholder="1以上の整数" aria-describedby="newMatchRaceCustomErrorV1" />
               <button id="newMatchRaceCustomApplyV1" type="button">決定</button>
             </div>
+            <p id="newMatchRaceCustomErrorV1" class="new-match-race-custom-error-v1" role="status" aria-live="polite"></p>
           </div>
         </div>
       </div>
@@ -8639,7 +8640,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-player-selection-formal-v1"></script>
+  <script src="./demo-data.js?v=2.0-numeric-input-limits-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -11665,9 +11666,41 @@ let matchRecordsRawCacheV152 = null;
 
   function normalizeRaceGoalV109(value, fallback = 120) {
     const parsed = Number(value);
-    if (!Number.isFinite(parsed) || parsed <= 0) return null;
-    const integerGoal = Math.trunc(parsed);
-    return integerGoal >= 1 ? integerGoal : null;
+    if (!Number.isFinite(parsed) || !Number.isInteger(parsed) || parsed < 1) return null;
+    return parsed;
+  }
+
+  const NEW_MATCH_GOAL_LIMITS_V1 = Object.freeze({
+    "9ball": Object.freeze({min:1,max:100,label:"Race to"}),
+    "10ball": Object.freeze({min:1,max:100,label:"Race to"}),
+    rotation: Object.freeze({min:1,max:1000,label:"目標点"}),
+    straightPool: Object.freeze({min:1,max:1000,label:"目標点"}),
+    threeCushion: Object.freeze({min:1,max:100,label:"持ち点"})
+  });
+
+  function validateNewMatchGoalV1(disciplineId, value) {
+    if (disciplineId === "jpa9") return {valid:true,value:null,limit:null,message:""};
+    const limit = NEW_MATCH_GOAL_LIMITS_V1[disciplineId] || NEW_MATCH_GOAL_LIMITS_V1.rotation;
+    const normalized = normalizeRaceGoalV109(value);
+    const valid = normalized !== null && normalized >= limit.min && normalized <= limit.max;
+    return {valid,value:valid ? normalized : null,limit,message:valid ? "" : `${limit.min}〜${limit.max}で入力してください`};
+  }
+
+  function updateCustomGoalValidationV1() {
+    const disciplineId = window.getCueScoreHomeSelectionV1?.().disciplineId || "rotation";
+    const input = el("newMatchRaceCustomInputV1");
+    const apply = el("newMatchRaceCustomApplyV1");
+    const error = el("newMatchRaceCustomErrorV1");
+    const limit = NEW_MATCH_GOAL_LIMITS_V1[disciplineId];
+    if (!input || !apply || !limit) return;
+    input.min = String(limit.min);
+    input.max = String(limit.max);
+    input.step = "1";
+    input.placeholder = `${limit.min}〜${limit.max}`;
+    const result = validateNewMatchGoalV1(disciplineId, input.value);
+    apply.disabled = !result.valid;
+    input.setAttribute("aria-invalid", result.valid || input.value === "" ? "false" : "true");
+    if (error) error.textContent = input.value === "" ? "" : result.message;
   }
 
   function chooseRecordModeAndStartV611(mode) {
@@ -14014,14 +14047,16 @@ let matchRecordsRawCacheV152 = null;
       1:Math.min(9,Math.max(1,Number(el("p1Race")?.dataset.jpaSl || 5))),
       2:Math.min(9,Math.max(1,Number(el("p2Race")?.dataset.jpaSl || 5)))
     };
-    const rackRaceModeV1 = nineBallModeV1 || tenBallModeV1;
-    const p1Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[1]] : rackRaceModeV1 ? Math.max(1,Number(el("p1Race")?.value || 5)) : Number(el("p1Race")?.value || 120);
-    const p2Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[2]] : rackRaceModeV1 ? Math.max(1,Number(el("p2Race")?.value || 5)) : Number(el("p2Race")?.value || 120);
+    const p1ValidationV1 = jpaModeV1 ? null : validateNewMatchGoalV1(activeGameTypeV1, el("p1Race")?.value);
+    const p2ValidationV1 = jpaModeV1 ? null : validateNewMatchGoalV1(activeGameTypeV1, el("p2Race")?.value);
+    const p1Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[1]] : p1ValidationV1?.value;
+    const p2Goal = jpaModeV1 ? JPA9_SL_TARGETS[jpa9SkillLevelsV1[2]] : p2ValidationV1?.value;
     currentMatchCategoryV38 = "";
     currentMatchSeasonV38 = String(el("matchSeasonV38")?.value || "").trim().slice(0, 30);
 
-    if (!Number.isFinite(p1Goal) || p1Goal <= 0 || !Number.isFinite(p2Goal) || p2Goal <= 0) {
-      showToast("Goal", "正しいGoalを設定してください");
+    if (!jpaModeV1 && (!p1ValidationV1?.valid || !p2ValidationV1?.valid)) {
+      const invalid = !p1ValidationV1?.valid ? p1ValidationV1 : p2ValidationV1;
+      showToast(invalid?.limit?.label || "Goal", invalid?.message || "正しいGoalを設定してください");
       return;
     }
 
@@ -15098,6 +15133,7 @@ let matchRecordsRawCacheV152 = null;
     picker.classList.remove("is-custom-v6");
     picker.setAttribute("aria-hidden", "true");
     el("newMatchRaceCustomV1")?.classList.add("hidden");
+    if (el("newMatchRaceCustomErrorV1")) el("newMatchRaceCustomErrorV1").textContent = "";
     activeRaceInputV1?.focus({ preventScroll: true });
     activeRaceInputV1 = null;
   }
@@ -15161,11 +15197,13 @@ let matchRecordsRawCacheV152 = null;
     const tenBall = disciplineId === "10ball";
     const straightPool = disciplineId === "straightPool";
     const threeCushion = disciplineId === "threeCushion";
-    const normalized = normalizeRaceGoalV109(value);
-    if (!activeRaceInputV1 || !normalized) {
-      showToast(threeCushion ? "持ち点" : "Race to", "1以上の整数を入力してください");
+    const validation = validateNewMatchGoalV1(disciplineId, value);
+    if (!activeRaceInputV1 || !validation.valid) {
+      showToast(validation.limit?.label || (threeCushion ? "持ち点" : "Race to"), validation.message);
+      updateCustomGoalValidationV1();
       return;
     }
+    const normalized = validation.value;
     activeRaceInputV1.value = String(normalized);
     if (nineBall) {
       activeRaceInputV1.value = String(normalized);
@@ -15209,6 +15247,7 @@ let matchRecordsRawCacheV152 = null;
       const customInput = el("newMatchRaceCustomInputV1");
       if (customInput) {
         customInput.value = activeRaceInputV1?.value || "";
+        updateCustomGoalValidationV1();
         customInput.focus();
         customInput.select();
         requestAnimationFrame(()=>customInput.scrollIntoView({block:"center",behavior:"smooth"}));
@@ -15219,6 +15258,7 @@ let matchRecordsRawCacheV152 = null;
   });
   el("newMatchRacePickerCloseV1")?.addEventListener("click", closeRacePickerV1);
   el("newMatchRaceCustomApplyV1")?.addEventListener("click", () => applyRaceValueV1(el("newMatchRaceCustomInputV1")?.value));
+  el("newMatchRaceCustomInputV1")?.addEventListener("input", updateCustomGoalValidationV1);
   el("newMatchRaceCustomInputV1")?.addEventListener("keydown", event => {
     if (event.key === "Enter") applyRaceValueV1(event.currentTarget.value);
   });
@@ -18721,7 +18761,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-player-selection-formal-v1";
+    const PWA_VERSION = "2.0-numeric-input-limits-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -20204,6 +20244,8 @@ window.cueScoreHistoryDomDiagnosticsV154 = function(){
 .new-match-race-custom-v1 button{
   border:1px solid #171717;border-radius:11px;background:#171717;color:#fff;font-weight:800;
 }
+.new-match-race-custom-v1 button:disabled{opacity:.42;cursor:not-allowed}
+.new-match-race-custom-error-v1{min-height:18px;margin:7px 0 0;color:#b42318;font-size:12px;line-height:1.5}
 @media(max-width:390px){
   .player-info-content{padding-left:12px!important;padding-right:12px!important}
   .new-match-player-grid-v1{grid-template-columns:minmax(0,1fr) 38px minmax(0,1fr);gap:5px}
