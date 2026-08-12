@@ -178,7 +178,7 @@
       nineBall:disciplineId==="9ball"?{initialBreaker:item.index%2+1,rackResults:extra.rackResults}:null,tenBall:disciplineId==="10ball"?{initialBreaker:item.index%2+1,rackResults:extra.rackResults,spotEvents:[]}:null,
       straightPool:disciplineId==="straightPool"?{rackCycle:extra.rack,spotEvents:[],rerackEvents:[],openingBreakEvents:[]}:null,
       threeCushion:disciplineId==="threeCushion"?{targetPoints:{1:goals[1],2:goals[2]},currentInning:extra.inning,completedTurns:{1:playersData[1].completedTurns,2:playersData[2].completedTurns},highRun:{1:playersData[1].maxRun,2:playersData[2].maxRun},averages:{1:playersData[1].average,2:playersData[2].average},innings:[]}:null,
-      category:item.index%19===0?"大会":item.index%13===0?"リーグ":"Free",season:item.date<new Date("2026-04-01T00:00:00+09:00")?"2025-26 シーズン":"2026 シーズン",memo:"",matchMemo:close?"接戦の振り返り":"",tags:close?["接戦"]:[],
+      category:item.index%19===0?"大会":item.index%13===0?"リーグ":"Free",season:item.date<new Date("2026-04-01T00:00:00+09:00")?"2025-26 シーズン":"2026 シーズン",
       rulesEngine:{schemaVersion:2,gameplayEventVersion:"7.2.0",ruleId:item.discipline.gameType},eventLog:{schemaVersion:"7.2.0",undoModel:"snapshot_rebuild_with_event_invalidation_v7.2",events:[],journal:[],undoCount:item.index%41===0?1:0},
       analysis:{schemaVersion:2,events:events.analysis,summary:{schemaVersion:2,eventCount:events.analysis.length,players:{1:playerSummary(1),2:playerSummary(2)}},report:{recordingMode:"detail"}},progress,players:playersData};
   }

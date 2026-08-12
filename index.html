@@ -5040,19 +5040,6 @@ button {
   color: #fff;
 }
 
-.record-memo-preview {
-  grid-column: 1 / -1;
-  min-width: 0;
-  margin-top: 3px;
-  color: rgba(255,255,255,.7);
-  font-size: 13px;
-  line-height: 1.25;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: left;
-}
-
 .record-detail-memo {
   margin: 12px 8px 0;
   padding: 10px 12px;
@@ -5068,18 +5055,6 @@ button {
   margin-bottom: 4px;
   font-weight: 800;
   color: #806000;
-}
-
-.player-stats-memo {
-  grid-column: 1 / -1;
-  min-width: 0;
-  color: rgba(255,255,255,.68);
-  font-size: 12px;
-  line-height: 1.25;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: left;
 }
 
 @media (max-width: 390px) {
@@ -5169,125 +5144,26 @@ button {
 }
 
 
-/* Rotation Scoreboard iPhone Ver.3.9: 試合メモタグ */
-.game-memo-tag-title {
-  margin: 0 0 7px;
-  color: #555;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.game-memo-tag-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 7px;
-  margin-bottom: 12px;
-}
-
-.game-memo-tag-button {
-  min-height: 39px;
-  border: 1px solid #9cb5a8;
-  border-radius: 999px;
-  background: #f4f7f5;
-  color: #365548;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.game-memo-tag-button.selected {
-  background: #168a4e;
-  border-color: #168a4e;
-  color: #fff;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.35);
-}
-
-.result-memo-tags,
+/* Rotation Scoreboard iPhone Ver.3.9: 旧履歴のメモ／タグ表示互換 */
 .record-detail-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-bottom: 6px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  margin-bottom:6px;
 }
-
-.memo-tag-chip,
-.record-tag-chip {
-  display: inline-flex;
-  align-items: center;
-  min-height: 23px;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: #dcecdf;
-  color: #17603b;
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1.15;
-  white-space: nowrap;
+.memo-tag-chip {
+  display:inline-flex;
+  align-items:center;
+  min-height:23px;
+  padding:2px 8px;
+  border-radius:999px;
+  background:#dcecdf;
+  color:#17603b;
+  font-size:12px;
+  font-weight:800;
+  line-height:1.15;
+  white-space:nowrap;
 }
-
-.records-tag-filter {
-  display: flex;
-  gap: 6px;
-  margin-top: 8px;
-  padding-bottom: 3px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.records-tag-filter::-webkit-scrollbar {
-  display: none;
-}
-
-.records-tag-filter button {
-  flex: 0 0 auto;
-  min-height: 34px;
-  padding: 5px 10px;
-  border: 1px solid rgba(255,255,255,.25);
-  border-radius: 999px;
-  background: rgba(255,255,255,.07);
-  color: rgba(255,255,255,.76);
-  font-size: 12px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.records-tag-filter button.active {
-  background: #cfe9d7;
-  border-color: #fff;
-  color: #155d38;
-}
-
-.record-memo-preview,
-.player-stats-memo {
-  display: flex !important;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 5px;
-}
-
-.record-memo-text {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.record-memo-preview .record-tag-chip,
-.player-stats-memo .record-tag-chip {
-  background: rgba(214,241,222,.95);
-  color: #145d37;
-}
-
-@media (max-width: 390px) {
-  .game-memo-tag-grid {
-    gap: 6px;
-  }
-
-  .game-memo-tag-button {
-    font-size: 13px;
-  }
-}
-
 
 /* Rotation Scoreboard iPhone Ver.3.9: 推移グラフ切り替え */
 .player-chart-switch {
@@ -5325,26 +5201,6 @@ button {
 @media (max-width:370px) {
   .player-chart-switch { gap: 4px; }
   .player-chart-switch button { font-size: 11.5px; }
-}
-
-
-/* Rotation Scoreboard iPhone Ver.3.9: メモ本文からタグを自動付与 */
-.game-memo-auto-tag-note {
-  margin: -2px 0 9px;
-  color: #66756d;
-  font-size: 12px;
-  line-height: 1.35;
-}
-.game-memo-tag-button.auto-detected:not(.selected) {
-  background: #e7f4eb;
-  border-color: #55a875;
-  color: #17603b;
-  box-shadow: inset 0 0 0 1px rgba(22,138,78,.18);
-}
-.game-memo-tag-button.auto-detected:not(.selected)::after {
-  content: " 自動";
-  font-size: 10px;
-  opacity: .75;
 }
 
 
@@ -5403,142 +5259,11 @@ button {
 }
 
 
-/* Rotation Scoreboard iPhone Ver.3.9: 履歴メモ・タグ編集／削除 */
-.historical-result-actions-v35 {
-  grid-template-columns: 1fr 1fr 1fr !important;
-  gap: 8px !important;
-}
-
-.record-detail-edit-v35 {
-  background: #fff0b8 !important;
-  color: #755400 !important;
-}
-
+/* Rotation Scoreboard iPhone Ver.3.9: 履歴削除 */
 .record-detail-delete-v35 {
   background: #ffd9d9 !important;
   color: #a00000 !important;
 }
-
-.historical-edit-dialog-v35 {
-  position: fixed;
-  inset: 0;
-  z-index: 11000;
-  display: grid;
-  place-items: center;
-  padding:
-    max(16px, env(safe-area-inset-top))
-    max(16px, env(safe-area-inset-right))
-    max(16px, env(safe-area-inset-bottom))
-    max(16px, env(safe-area-inset-left));
-  background: rgba(0,0,0,.68);
-}
-
-.historical-edit-card-v35 {
-  width: min(92vw, 430px);
-  max-height: 88dvh;
-  overflow-y: auto;
-  box-sizing: border-box;
-  padding: 18px;
-  border-radius: 17px;
-  background: #fff;
-  color: #222;
-  box-shadow: 0 18px 50px rgba(0,0,0,.38);
-}
-
-.historical-edit-title-v35 {
-  text-align: center;
-  font-size: 24px;
-  font-weight: 800;
-}
-
-.historical-edit-note-v35 {
-  margin: 4px 0 12px;
-  text-align: center;
-  color: #777;
-  font-size: 13px;
-}
-
-.historical-edit-tag-grid-v35 {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 7px;
-  margin-bottom: 12px;
-}
-
-.historical-edit-tag-v35 {
-  min-height: 39px;
-  border: 1px solid #9cb5a8;
-  border-radius: 999px;
-  background: #f4f7f5;
-  color: #365548;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.historical-edit-tag-v35.selected {
-  background: #168a4e;
-  border-color: #168a4e;
-  color: #fff;
-}
-
-#historicalEditMemoV35 {
-  width: 100%;
-  min-height: 145px;
-  box-sizing: border-box;
-  resize: vertical;
-  border: 2px solid #8ba89a;
-  border-radius: 11px;
-  padding: 12px;
-  font-size: 17px;
-  line-height: 1.45;
-}
-
-.historical-edit-count-v35 {
-  margin-top: 5px;
-  text-align: right;
-  color: #777;
-  font-size: 13px;
-}
-
-.historical-edit-actions-v35 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.historical-edit-actions-v35 button {
-  min-height: 48px;
-  border: 0;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-#historicalEditCancelV35 {
-  background: #eee;
-  color: #555;
-}
-
-#historicalEditSaveV35 {
-  background: #15894e;
-  color: #fff;
-}
-
-@media (max-width: 390px) {
-  .historical-result-actions-v35 {
-    gap: 6px !important;
-  }
-
-  .historical-result-actions-v35 .result-action-btn {
-    font-size: 15px !important;
-  }
-
-  .historical-edit-tag-v35 {
-    font-size: 13px;
-  }
-}
-
 
 /* Rotation Scoreboard iPhone Ver.3.9: 対戦相手ランキング */
 .player-opponent-rankings-v36{display:grid;gap:12px;margin-bottom:20px}
@@ -7628,7 +7353,6 @@ button {
 
 .player-reflection-card-v841 { border:2px solid #b5cbbf; border-radius:14px; padding:12px; margin:0 0 14px; background:#f8fbf9; }
 .player-reflection-title-v841 { font-size:17px; font-weight:900; color:#176d43; margin:0 0 12px; padding-bottom:8px; border-bottom:1px solid #cddbd4; }
-.match-reflection-card-v841 { border:2px solid #d2c18a; border-radius:14px; padding:12px; margin:0 0 14px; background:#fffdf5; }
 .reflection-player-preview-v841 { margin-top:9px; padding-top:8px; border-top:1px solid #d9e4de; }
 .reflection-player-preview-v841:first-child { margin-top:0; padding-top:0; border-top:0; }
 .reflection-player-name-v841 { font-weight:900; color:#176d43; margin-bottom:5px; }
@@ -8586,7 +8310,6 @@ body {
       <div class="records-filter-panel" id="recordsAdvancedFiltersV1" aria-label="詳細な絞り込み条件" hidden>
         <div class="records-filter-buttons" role="group" aria-label="表示範囲">
           <button type="button" data-records-filter="all" class="active">全件</button>
-          <button type="button" data-records-filter="memo">メモあり</button>
           <button type="button" data-records-filter="month">今月</button>
           <button type="button" data-records-filter="recent10">直近10試合</button>
         </div>
@@ -8596,17 +8319,6 @@ body {
           </select>
         </div>
 
-        <div class="records-tag-filter" aria-label="タグで絞り込み">
-          <button type="button" data-records-tag="" class="active">タグすべて</button>
-          <button type="button" data-records-tag="ブレイク">ブレイク</button>
-          <button type="button" data-records-tag="セーフティー">セーフティー</button>
-          <button type="button" data-records-tag="フォーム">フォーム</button>
-          <button type="button" data-records-tag="メンタル">メンタル</button>
-          <button type="button" data-records-tag="集中力">集中力</button>
-          <button type="button" data-records-tag="キュー切れ">キュー切れ</button>
-          <button type="button" data-records-tag="取り切り">取り切り</button>
-          <button type="button" data-records-tag="その他">その他</button>
-        </div>
         <div class="records-filter-summary" id="recordsFilterSummary"></div>
       </div>
       <div class="records-list" id="recordsList"></div>
@@ -8880,7 +8592,6 @@ body {
           <div class="statistics-filter-field full"><label for="statisticsOpponent">対戦相手</label><select id="statisticsOpponent"><option value="">すべて</option></select></div>
           <div class="statistics-filter-field"><label for="statisticsRecordingMode">記録モード</label><select id="statisticsRecordingMode"><option value="">すべて</option><option value="detail">分析モードのみ</option><option value="simple">シンプル版・旧データ</option></select></div>
           <div class="statistics-filter-field"><label for="statisticsOutcome">勝敗</label><select id="statisticsOutcome"><option value="">すべて</option><option value="win">勝ち試合のみ</option><option value="loss">負け試合のみ</option></select></div>
-          <div class="statistics-filter-field full"><label for="statisticsTag">タグ</label><select id="statisticsTag"><option value="">すべて</option></select></div>
         </div></section>
         <div class="statistics-filter-summary" id="statisticsFilterSummary">全期間・すべての試合を集計します。</div>
         <div class="statistics-filter-actions"><button class="statistics-filter-reset" id="statisticsFilterResetBtn" type="button">全解除</button><button class="statistics-filter-apply" id="statisticsFilterApplyBtn" type="button">この条件を適用</button></div>
@@ -8949,7 +8660,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-analytics-final-rc-v1"></script>
+  <script src="./demo-data.js?v=2.0-memo-tag-phase1-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -9711,47 +9422,9 @@ let matchRecordsRawCacheV152 = null;
     return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,"0")}/${String(d.getDate()).padStart(2,"0")} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
   }
 
-  function renderMatchRecordsLegacy() {
-    const list = el("recordsList");
-    const count = el("recordsCount");
-    if (!list) return;
-    const records = readMatchRecords().sort((a,b) => new Date(b.endedAt || b.playedAt) - new Date(a.endedAt || a.playedAt));
-    if (count) count.textContent = `${records.length}試合`;
-    if (!records.length) {
-      list.innerHTML = `<div class="record-empty">まだ対戦履歴はありません。<br>Game Set画面でOKを押すと保存されます。</div>`;
-      return;
-    }
-    list.innerHTML = records.map(record => {
-      const p1 = record.players[1] || {};
-      const p2 = record.players[2] || {};
-      const winnerName = record.winner === 1 ? p1.name : p2.name;
-      return `<article class="record-card">
-        <div class="record-date">${formatRecordDate(record.endedAt || record.playedAt)}</div>
-        <div class="record-score-row">
-          <div class="record-player">
-            <div class="record-name ${record.winner===1?"winner":""}">${escapeRecordText(p1.name)}</div>
-            <div class="record-score">${Number(p1.score)||0}</div>
-          </div>
-          <div class="record-vs">−</div>
-          <div class="record-player right">
-            <div class="record-name ${record.winner===2?"winner":""}">${escapeRecordText(p2.name)}</div>
-            <div class="record-score">${Number(p2.score)||0}</div>
-          </div>
-        </div>
-        <div class="record-winner">Winner：${escapeRecordText(winnerName)}</div>
-        <div class="record-details">
-          <div>Race to<strong>${Number(p1.goal)||0} / ${Number(p2.goal)||0}</strong></div>
-          <div>Inning<strong>${Number(record.inning)||0}</strong></div>
-          <div>High Run<strong>${Number(p1.maxRun)||0} / ${Number(p2.maxRun)||0}</strong></div>
-        </div>
-      </article>`;
-    }).join("");
-  }
-
   function openRecords() {
     recordsActiveFilterV31 = "all";
     recordsSearchQueryV31 = "";
-    recordsActiveTagV32 = "";
     recordsCategoryFilterV38 = "";
     recordsSeasonFilterV38 = "";
     recordsSortOrderV1 = "newest";
@@ -9891,12 +9564,6 @@ let matchRecordsRawCacheV152 = null;
     renderMatchRecords();
   });
 
-  document.querySelectorAll("[data-records-tag]").forEach(button => {
-    button.addEventListener("click", () => {
-      recordsActiveTagV32 = button.dataset.recordsTag || "";
-      renderMatchRecords();
-    });
-  });
 
   document.getElementById("recordsBackBtn")?.addEventListener("click", backToTitle);
   document.getElementById("backToTitleBtn")?.addEventListener("click", backToTitle);
@@ -10631,7 +10298,7 @@ let matchRecordsRawCacheV152 = null;
         const monthKey = monthButton.dataset.playerMonth || "";
         if(!monthKey) return;
         const [year, month] = monthKey.split("-").map(Number);
-        window.recordsSpecificMonthV34 = {year, month}; recordsActiveFilterV31 = "month"; recordsSearchQueryV31 = ""; recordsActiveTagV32 = "";
+        window.recordsSpecificMonthV34 = {year, month}; recordsActiveFilterV31 = "month"; recordsSearchQueryV31 = "";
         const searchInput = el("recordsSearchInput"); if(searchInput) searchInput.value = "";
         app.classList.remove("player-stats-mode"); el("playerStatsScreen")?.classList.add("hidden"); el("recordsScreen")?.classList.remove("hidden"); renderMatchRecords();
       }
@@ -10799,11 +10466,6 @@ let matchRecordsRawCacheV152 = null;
         <span class="player-stats-opponent">vs ${escapeRecordText(opponent.name || `Player${other}`)}</span>
         <span class="player-stats-date">${formatRecordListDate(record.endedAt || record.playedAt)}</span>
         <span class="player-stats-score">${score}</span>
-        ${(record.memo || (Array.isArray(record.tags) && record.tags.length)) ? `
-          <span class="player-stats-memo">
-            ${Array.isArray(record.tags) ? record.tags.map(tag => `<span class="record-tag-chip">${escapeRecordText(tag)}</span>`).join("") : ""}
-            ${record.memo ? `<span>📝 ${escapeRecordText(record.memo)}</span>` : ""}
-          </span>` : ""}
       </button>`);
     });
 
@@ -11610,14 +11272,11 @@ let matchRecordsRawCacheV152 = null;
   let currentGameRecordIdV100 = null;
   // RC4: one stable identifier per match. Re-confirming the same match can never create a duplicate record.
   let currentGameSessionIdV104 = null;
-  let currentGameMemo = "";
-  let currentGameTags = [];
   let currentGameReflectionV840 = { mood:"", mental:[], technicalNote:"", nextFocus:"", freeMemo:"" }; // legacy compatibility
   let currentPlayerReflectionsV841 = {
     1:{ mood:"", mental:[], technicalNote:"", nextFocus:"", freeMemo:"" },
     2:{ mood:"", mental:[], technicalNote:"", nextFocus:"", freeMemo:"" }
   };
-  let currentMatchMemoV841 = "";
 
   // Ver.6.0: 分析用イベント基盤。画面操作は増やさず、既存操作を時系列で保存する。
   let analysisEventsV60 = [];
@@ -12761,25 +12420,6 @@ let matchRecordsRawCacheV152 = null;
 
   let currentMatchCategoryV38 = "";
   let currentMatchSeasonV38 = "";
-  const GAME_MEMO_TAGS_V32 = ["ブレイク", "セーフティー", "フォーム", "メンタル", "集中力", "キュー切れ", "取り切り", "その他"];
-
-  const GAME_MEMO_AUTO_TAG_RULES_V331 = [
-    { tag: "ブレイク", words: ["ブレイク", "break"] },
-    { tag: "セーフティー", words: ["セーフティー", "セーフティ", "safety"] },
-    { tag: "フォーム", words: ["フォーム", "ストローク", "構え", "姿勢"] },
-    { tag: "メンタル", words: ["メンタル", "緊張", "弱気", "焦り", "不安", "プレッシャー"] },
-    { tag: "集中力", words: ["集中", "集中力", "注意力", "気が散る", "集中切れ"] },
-    { tag: "キュー切れ", words: ["キュー切れ", "キレ", "切れ", "回転"] },
-    { tag: "取り切り", words: ["取り切り", "取切り", "ランアウト", "マスワリ"] }
-  ];
-
-  function detectMemoTagsV331(memoText) {
-    const normalized = String(memoText || "").toLocaleLowerCase("ja");
-    return GAME_MEMO_AUTO_TAG_RULES_V331
-      .filter(rule => rule.words.some(word => normalized.includes(String(word).toLocaleLowerCase("ja"))))
-      .map(rule => rule.tag);
-  }
-
   const colors = window.CueScoreBallIcon.colors;
 
   function el(id) { return document.getElementById(id); }
@@ -14444,11 +14084,8 @@ let matchRecordsRawCacheV152 = null;
     currentGameSessionIdV104 = (window.crypto && crypto.randomUUID)
       ? crypto.randomUUID()
       : `match_${Date.now()}_${Math.random().toString(36).slice(2,10)}`;
-    currentGameMemo = "";
-    currentGameTags = [];
     currentGameReflectionV840 = { mood:"", mental:[], technicalNote:"", nextFocus:"", freeMemo:"" };
     currentPlayerReflectionsV841 = {1:{mood:"",mental:[],technicalNote:"",nextFocus:"",freeMemo:""},2:{mood:"",mental:[],technicalNote:"",nextFocus:"",freeMemo:""}};
-    currentMatchMemoV841 = "";
     analysisEventsV60 = [];
     analysisEventSequenceV60 = 0;
     commonEventsV7 = [];
@@ -14837,30 +14474,6 @@ let matchRecordsRawCacheV152 = null;
     el("resultDot3")?.classList.toggle("active", safePage === 3);
   }
 
-  function saveCurrentMatchRecordLegacy(winner, stats) {
-    if (currentGameRecordSaved) return;
-    const endedAt = new Date().toISOString();
-    const record = {
-      id: (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : `g_${Date.now()}_${Math.random().toString(36).slice(2,8)}`,
-      playedAt: endedAt,
-      startedAt: currentGameStartedAt || endedAt,
-      endedAt,
-      winner,
-      inning,
-      rack,
-      players: {
-        1: {name:playerName(1), registeredPlayerId:selectedRegisteredPlayer[1] || null, goal:goals[1], score:scores[1], safety:safety[1], fouls:fouls[1], breaks:breakCount[1], maxRun:stats.maxRun[1], completedTurns:Number(stats.completedTurns?.[1]||0), average:Number(stats.average?.[1]||0), share:stats.share[1], misses:stats.manualMisses[1], pocketCount:stats.pocketCount[1], shotRate:stats.shotRate[1]},
-        2: {name:playerName(2), registeredPlayerId:selectedRegisteredPlayer[2] || null, goal:goals[2], score:scores[2], safety:safety[2], fouls:fouls[2], breaks:breakCount[2], maxRun:stats.maxRun[2], completedTurns:Number(stats.completedTurns?.[2]||0), average:Number(stats.average?.[2]||0), share:stats.share[2], misses:stats.manualMisses[2], pocketCount:stats.pocketCount[2], shotRate:stats.shotRate[2]}
-      }
-    };
-    const records = readMatchRecords();
-    records.push(record);
-    writeMatchRecords(records);
-    currentGameRecordSaved = true;
-    currentGameRecordIdV100 = record.id;
-  }
-
-  // Ver.7.8.0: one positive observation, one gentle point, and one practice suggestion.
   function buildMatchReviewV780(player, winner, stats) {
     const opponent = player === 1 ? 2 : 1;
     const won = player === winner;
@@ -15022,11 +14635,10 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function playerReflectionsHaveContentV841(){
-    return reflectionHasContentV840(currentPlayerReflectionsV841?.[1]) || reflectionHasContentV840(currentPlayerReflectionsV841?.[2]) || !!currentMatchMemoV841;
+    return reflectionHasContentV840(currentPlayerReflectionsV841?.[1]) || reflectionHasContentV840(currentPlayerReflectionsV841?.[2]);
   }
   function renderPlayerReflectionsPreviewV841(){
     const blocks=[1,2].filter(p=>reflectionHasContentV840(currentPlayerReflectionsV841?.[p])).map(p=>`<div class="reflection-player-preview-v841"><div class="reflection-player-name-v841">${escapeRecordText(playerName(p))}</div>${renderReflectionPreviewV840(currentPlayerReflectionsV841[p])}</div>`);
-    if(currentMatchMemoV841) blocks.push(`<div class="reflection-player-preview-v841"><div class="reflection-player-name-v841">試合全体メモ</div><div>${escapeRecordText(currentMatchMemoV841)}</div></div>`);
     return blocks.join("");
   }
   function reflectionEditorHtmlV841(player){
@@ -15320,16 +14932,13 @@ let matchRecordsRawCacheV152 = null;
           <button id="resultDot3" class="result-dot" type="button" aria-label="おすすめ練習ページ"></button>
         </div>
 
-        <div id="resultMemoPreview" class="result-memo-preview ${(currentGameTags.length || playerReflectionsHaveContentV841()) ? "" : "hidden"}">
-          <div id="resultMemoPreviewTags" class="result-memo-tags">
-            ${currentGameTags.map(tag => `<span class="memo-tag-chip">${escapeRecordText(tag)}</span>`).join("")}
-          </div>
+        <div id="resultMemoPreview" class="result-memo-preview ${playerReflectionsHaveContentV841() ? "" : "hidden"}">
           <div id="resultReflectionPreviewV840">${renderPlayerReflectionsPreviewV841()}</div>
         </div>
 
         <div class="result-actions result-actions-three">
           <button id="resultOkBtn" class="result-action-btn result-ok" type="button">OK</button>
-          <button id="resultMemoBtn" class="result-action-btn result-memo" type="button">${(playerReflectionsHaveContentV841() || currentGameTags.length) ? "振り返り編集" : "振り返り"}</button>
+          <button id="resultMemoBtn" class="result-action-btn result-memo" type="button">${playerReflectionsHaveContentV841() ? "振り返り編集" : "振り返り"}</button>
           <button id="resultCancelBtn" class="result-action-btn result-cancel" type="button">cancel</button>
         </div>
       </div>`;
@@ -15370,19 +14979,10 @@ let matchRecordsRawCacheV152 = null;
           <div class="game-memo-title">プレーヤー別の振り返り</div>
           ${reflectionEditorHtmlV841(1)}
           ${reflectionEditorHtmlV841(2)}
-          <section class="match-reflection-card-v841">
-            <div class="player-reflection-title-v841">試合全体メモ</div>
-            <textarea id="gameMemoInput" class="game-reflection-text-v840" maxlength="300" placeholder="台の状態、試合の雰囲気など、2人に共通する内容">${escapeRecordText(currentMatchMemoV841)}</textarea>
-          </section>
-          <div class="game-memo-tag-title">試合タグ（共通・複数選択できます）</div>
-          <div class="game-memo-tag-grid" id="gameMemoTagGrid">
-            ${GAME_MEMO_TAGS_V32.map(tag => `<button type="button" class="game-memo-tag-button ${currentGameTags.includes(tag) ? "selected" : ""}" data-game-memo-tag="${escapeRecordText(tag)}">${escapeRecordText(tag)}</button>`).join("")}
-          </div>
           <div class="game-memo-actions"><button id="gameMemoCancelBtn" type="button">キャンセル</button><button id="gameMemoSaveBtn" type="button">保存</button></div>
         </div>`;
       document.body.appendChild(dialog);
 
-      const selectedTags = new Set(currentGameTags);
       const draft={};
       [1,2].forEach(player=>{
         const source=currentPlayerReflectionsV841[player]||{};
@@ -15398,23 +14998,15 @@ let matchRecordsRawCacheV152 = null;
         if(draft[player].mental.has(value)) draft[player].mental.delete(value); else draft[player].mental.add(value);
         button.classList.toggle("selected",draft[player].mental.has(value));
       }));
-      dialog.querySelectorAll("[data-game-memo-tag]").forEach(button=>button.addEventListener("click",()=>{ const tag=button.dataset.gameMemoTag; if(!tag)return; if(selectedTags.has(tag))selectedTags.delete(tag);else selectedTags.add(tag); button.classList.toggle("selected",selectedTags.has(tag)); }));
       el("gameMemoCancelBtn")?.addEventListener("click", closeGameMemoDialog);
       el("gameMemoSaveBtn")?.addEventListener("click", () => {
         const limit=(id,n)=>Array.from(el(id)?.value.trim()||"").slice(0,n).join("");
         [1,2].forEach(player=>{ currentPlayerReflectionsV841[player]={mood:draft[player].mood,mental:Array.from(draft[player].mental),technicalNote:limit(`reflectionTechnicalV841_${player}`,160),nextFocus:limit(`reflectionNextV841_${player}`,160),freeMemo:limit(`reflectionFreeV841_${player}`,240)}; });
-        currentMatchMemoV841=limit("gameMemoInput",300);
-        currentGameMemo=currentMatchMemoV841;
         currentGameReflectionV840={mood:"",mental:[],technicalNote:"",nextFocus:"",freeMemo:""};
-        const manualTags=GAME_MEMO_TAGS_V32.filter(tag=>selectedTags.has(tag));
-        const summaries=[reflectionSummaryV840(currentPlayerReflectionsV841[1]),reflectionSummaryV840(currentPlayerReflectionsV841[2]),currentMatchMemoV841].filter(Boolean).join("／");
-        const autoTags=detectMemoTagsV331(summaries);
-        const mergedTags=new Set([...manualTags,...autoTags]); currentGameTags=GAME_MEMO_TAGS_V32.filter(tag=>mergedTags.has(tag));
-        const preview=el("resultMemoPreview"),previewTags=el("resultMemoPreviewTags"),reflectionPreview=el("resultReflectionPreviewV840"),memoButton=el("resultMemoBtn");
-        if(previewTags) previewTags.innerHTML=currentGameTags.map(tag=>`<span class="memo-tag-chip">${escapeRecordText(tag)}</span>`).join("");
+        const preview=el("resultMemoPreview"),reflectionPreview=el("resultReflectionPreviewV840"),memoButton=el("resultMemoBtn");
         if(reflectionPreview) reflectionPreview.innerHTML=renderPlayerReflectionsPreviewV841();
-        if(preview) preview.classList.toggle("hidden",!(playerReflectionsHaveContentV841()||currentGameTags.length));
-        if(memoButton) memoButton.textContent=(playerReflectionsHaveContentV841()||currentGameTags.length)?"振り返り編集":"振り返り";
+        if(preview) preview.classList.toggle("hidden",!playerReflectionsHaveContentV841());
+        if(memoButton) memoButton.textContent=playerReflectionsHaveContentV841()?"振り返り編集":"振り返り";
         closeGameMemoDialog();
       });
       dialog.addEventListener("click",event=>{if(event.target===dialog)closeGameMemoDialog();});
@@ -15519,14 +15111,6 @@ let matchRecordsRawCacheV152 = null;
   updateRecordModeChoicesV698();
   el("recordModeSimpleChoiceV698")?.addEventListener("click", () => selectRecordModeV698("simple"));
   el("recordModeDetailChoiceV698")?.addEventListener("click", () => selectRecordModeV698("detail"));
-
-  function syncNewMatchFromHomeV1() {
-    selectRecordModeV698("detail");
-    const label = el("newMatchRecordModeLabelV1");
-    if (label) label.textContent = "分析用詳細版";
-  }
-
-  let activeRaceInputV1 = null;
 
   function closeRacePickerV1() {
     const picker = el("newMatchRacePickerV1");
@@ -15782,110 +15366,6 @@ let matchRecordsRawCacheV152 = null;
     });
   }
 
-
-  function closeHistoricalEditDialogV35() {
-    document.getElementById("historicalEditDialogV35")?.remove();
-  }
-
-  function openHistoricalEditDialogV35(recordId) {
-    const records = readMatchRecords();
-    const record = records.find(item => String(item.id) === String(recordId));
-    if (!record) return;
-
-    closeHistoricalEditDialogV35();
-
-    const currentMemo = String(record.memo || "");
-    const currentTags = Array.isArray(record.tags) ? record.tags : [];
-
-    const dialog = document.createElement("div");
-    dialog.id = "historicalEditDialogV35";
-    dialog.className = "historical-edit-dialog-v35";
-    dialog.innerHTML = `
-      <div class="historical-edit-card-v35" role="dialog" aria-modal="true" aria-label="試合データ編集">
-        <div class="historical-edit-title-v35">試合データ編集</div>
-        <div class="historical-edit-note-v35">メモとタグを編集できます</div>
-
-        <div class="historical-edit-tag-grid-v35">
-          ${GAME_MEMO_TAGS_V32.map(tag => `
-            <button type="button"
-              class="historical-edit-tag-v35 ${currentTags.includes(tag) ? "selected" : ""}"
-              data-historical-edit-tag="${escapeRecordText(tag)}">
-              ${escapeRecordText(tag)}
-            </button>
-          `).join("")}
-        </div>
-
-        <textarea id="historicalEditMemoV35" maxlength="120"
-          placeholder="試合メモ">${escapeRecordText(currentMemo)}</textarea>
-
-        <div class="historical-edit-count-v35">
-          <span id="historicalEditCountV35">${Array.from(currentMemo).length}</span>/120
-        </div>
-
-        <div class="historical-edit-actions-v35">
-          <button id="historicalEditCancelV35" type="button">キャンセル</button>
-          <button id="historicalEditSaveV35" type="button">保存</button>
-        </div>
-      </div>
-    `;
-
-    document.body.appendChild(dialog);
-
-    const selectedTags = new Set(currentTags);
-
-    dialog.querySelectorAll("[data-historical-edit-tag]").forEach(button => {
-      button.addEventListener("click", () => {
-        const tag = button.dataset.historicalEditTag;
-        if (!tag) return;
-        if (selectedTags.has(tag)) selectedTags.delete(tag);
-        else selectedTags.add(tag);
-        button.classList.toggle("selected", selectedTags.has(tag));
-      });
-    });
-
-    const memoInput = document.getElementById("historicalEditMemoV35");
-
-    memoInput?.addEventListener("input", () => {
-      const limited = Array.from(memoInput.value).slice(0, 120).join("");
-      if (memoInput.value !== limited) memoInput.value = limited;
-      const counter = document.getElementById("historicalEditCountV35");
-      if (counter) counter.textContent = Array.from(memoInput.value).length;
-    });
-
-    document.getElementById("historicalEditCancelV35")
-      ?.addEventListener("click", closeHistoricalEditDialogV35);
-
-    document.getElementById("historicalEditSaveV35")
-      ?.addEventListener("click", () => {
-        const updatedMemo = Array.from(memoInput?.value.trim() || "").slice(0, 120).join("");
-        const autoTags = typeof detectMemoTagsV331 === "function"
-          ? detectMemoTagsV331(updatedMemo)
-          : [];
-        const mergedTags = new Set([...selectedTags, ...autoTags]);
-        const updatedTags = GAME_MEMO_TAGS_V32.filter(tag => mergedTags.has(tag));
-
-        const latestRecords = readMatchRecords();
-        const index = latestRecords.findIndex(item => String(item.id) === String(recordId));
-        if (index < 0) return;
-
-        latestRecords[index] = {
-          ...latestRecords[index],
-          memo: updatedMemo,
-          tags: updatedTags,
-          updatedAt: new Date().toISOString()
-        };
-
-        writeMatchRecords(latestRecords);
-        closeHistoricalEditDialogV35();
-        renderMatchRecords();
-        openHistoricalRecord(recordId);
-        showToast("履歴を更新しました", "メモとタグを端末へ保存しました");
-      });
-
-    dialog.addEventListener("click", event => {
-      if (event.target === dialog) closeHistoricalEditDialogV35();
-    });
-  }
 
   function deleteHistoricalRecordV35(recordId) {
     const records = readMatchRecords();
@@ -16159,7 +15639,6 @@ let matchRecordsRawCacheV152 = null;
       </div>
       <div class="result-actions history-renew-actions-v67">
         <button id="recordDetailBackBtn" class="result-action-btn record-detail-back" type="button">戻る</button>
-        <button id="recordDetailEditBtnV35" class="result-action-btn record-detail-edit-v35" type="button">編集</button>
         <button id="recordDetailDeleteBtnV35" class="result-action-btn record-detail-delete-v35" type="button">削除</button>
       </div>
     </div>`;
@@ -16194,7 +15673,6 @@ let matchRecordsRawCacheV152 = null;
       }
     }, {passive:true, signal: historicalSignalV159});
     el("recordDetailBackBtn")?.addEventListener("click", cleanupHistoricalRecordV159, {signal: historicalSignalV159});
-    el("recordDetailEditBtnV35")?.addEventListener("click",()=>openHistoricalEditDialogV35(recordId), {signal: historicalSignalV159});
     el("recordDetailDeleteBtnV35")?.addEventListener("click",()=>deleteHistoricalRecordV35(recordId), {signal: historicalSignalV159});
     goHistoricalPageV67(0);
   }
@@ -16202,7 +15680,6 @@ let matchRecordsRawCacheV152 = null;
 
   let recordsActiveFilterV31 = "all";
   let recordsSearchQueryV31 = "";
-  let recordsActiveTagV32 = "";
   let recordsCategoryFilterV38 = "";
   let recordsSeasonFilterV38 = "";
   let recordsSortOrderV1 = "newest";
@@ -16239,12 +15716,7 @@ let matchRecordsRawCacheV152 = null;
     );
     let filtered = all.slice();
 
-    if (recordsActiveFilterV31 === "memo") {
-      filtered = filtered.filter(record =>
-        String(record.memo || "").trim() ||
-        (Array.isArray(record.tags) && record.tags.length)
-      );
-    } else if (recordsActiveFilterV31 === "month") {
+    if (recordsActiveFilterV31 === "month") {
       const now = new Date();
       const targetYear = window.recordsSpecificMonthV34?.year ?? now.getFullYear();
       const targetMonth = window.recordsSpecificMonthV34?.month ?? (now.getMonth() + 1);
@@ -16257,12 +15729,6 @@ let matchRecordsRawCacheV152 = null;
       });
     } else if (recordsActiveFilterV31 === "recent10") {
       filtered = filtered.slice(0, 10);
-    }
-
-    if (recordsActiveTagV32) {
-      filtered = filtered.filter(record =>
-        Array.isArray(record.tags) && record.tags.includes(recordsActiveTagV32)
-      );
     }
 
     if (recordsCategoryFilterV38) {
@@ -16279,9 +15745,8 @@ let matchRecordsRawCacheV152 = null;
         const p1 = record.players?.[1] || {};
         const p2 = record.players?.[2] || {};
         return normalizeRecordSearchTextV31([
-          p1.name, p2.name, record.memo,
+          p1.name, p2.name,
           record.category, record.season,
-          ...(Array.isArray(record.tags) ? record.tags : []),
           formatRecordListDate(record.endedAt || record.playedAt),
           p1.score, p2.score
         ].join(" ")).includes(query);
@@ -16296,24 +15761,18 @@ let matchRecordsRawCacheV152 = null;
     document.querySelectorAll("[data-records-filter]").forEach(button => {
       button.classList.toggle("active", button.dataset.recordsFilter === recordsActiveFilterV31);
     });
-    document.querySelectorAll("[data-records-tag]").forEach(button => {
-      button.classList.toggle("active", button.dataset.recordsTag === recordsActiveTagV32);
-    });
-
     const summary = el("recordsFilterSummary");
     if (!summary) return;
     const selectedMonthLabelV34 = window.recordsSpecificMonthV34
       ? `${window.recordsSpecificMonthV34.year}年${window.recordsSpecificMonthV34.month}月`
       : "今月";
 
-    const label = recordsActiveFilterV31 === "memo" ? "メモあり"
-      : recordsActiveFilterV31 === "month" ? selectedMonthLabelV34
+    const label = recordsActiveFilterV31 === "month" ? selectedMonthLabelV34
       : recordsActiveFilterV31 === "recent10" ? "直近10試合"
       : "全件";
-    const tagText = recordsActiveTagV32 ? `／#${recordsActiveTagV32}` : "";
     summary.textContent = recordsSearchQueryV31
-      ? `${label}${tagText}：${shown}件（全${total}件から検索）`
-      : `${label}${tagText}：${shown}件`;
+      ? `${label}：${shown}件（全${total}件から検索）`
+      : `${label}：${shown}件`;
   }
 
   // RC59: render large history lists incrementally and use one delegated click handler.
@@ -16324,7 +15783,7 @@ let matchRecordsRawCacheV152 = null;
 
   function recordsRenderSignatureNowV154(recordsLength){
     return JSON.stringify([
-      recordsActiveFilterV31, recordsSearchQueryV31, recordsActiveTagV32,
+      recordsActiveFilterV31, recordsSearchQueryV31,
       recordsCategoryFilterV38, recordsSeasonFilterV38, recordsDisciplineV2, window.recordsSpecificMonthV34 || "",
       Number(recordsLength)||0
     ]);
@@ -16498,9 +15957,6 @@ let matchRecordsRawCacheV152 = null;
       rackResults: isRackGameV1() ? JSON.parse(JSON.stringify(activeRackStateV1().rackResults)) : [],
       category: currentMatchCategoryV38,
       season: currentMatchSeasonV38,
-      memo: currentMatchMemoV841,
-      matchMemo: currentMatchMemoV841,
-      tags: [...currentGameTags],
       playerReflections: JSON.parse(JSON.stringify(currentPlayerReflectionsV841)),
       reflection: JSON.parse(JSON.stringify(currentGameReflectionV840)),
       rulesEngine: {
@@ -16592,142 +16048,6 @@ let matchRecordsRawCacheV152 = null;
     const time = new Date(value).getTime();
     return Number.isFinite(time) ? time : 0;
   }
-
-  function formatPlayerHistoryDateV1(record) {
-    const value = record?.endedAt || record?.playedAt || record?.startedAt || "";
-    if (!value) return "—";
-    const date = new Date(value);
-    if (Number.isNaN(date.getTime())) return "—";
-    const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
-    return `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, "0")}/${String(date.getDate()).padStart(2, "0")}(${weekdays[date.getDay()]}) ${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
-  }
-
-  function playerAvatarSvgV1() {
-    return `<img class="official-default-avatar-v4" src="${DEFAULT_PLAYER_AVATAR_SOURCE_V4}" alt="">`;
-  }
-
-  renderPlayerLibrary = function() {
-    const list = el("playerLibraryList");
-    if (!list) return;
-    const query = (el("playerLibrarySearch")?.value || "").trim().toLocaleLowerCase("ja");
-    const allPlayers = readPlayerLibrary();
-    const playerRows = allPlayers.map(player => {
-      const records = recordsForRegisteredPlayer(player);
-      return {player, records, latest: records[0] || null};
-    });
-    const players = playerRows
-      .filter(row => !query || row.player.name.toLocaleLowerCase("ja").includes(query))
-      .sort((a, b) => {
-        const primaryOrder=Number(b.player.isPrimary===true)-Number(a.player.isPrimary===true);
-        if (primaryOrder) return primaryOrder;
-        if (playerLibraryModeV145 !== "management") {
-          return (b.player.lastUsed || b.player.updatedAt || b.player.createdAt || 0) -
-            (a.player.lastUsed || a.player.updatedAt || a.player.createdAt || 0);
-        }
-        if (playerLibrarySortV1 === "name") {
-          return a.player.name.localeCompare(b.player.name, "ja");
-        }
-        return playerRecordTimeV1(b.latest) - playerRecordTimeV1(a.latest) ||
-          (b.player.updatedAt || b.player.createdAt || 0) - (a.player.updatedAt || a.player.createdAt || 0);
-      });
-
-    const count = el("playerLibraryCountV1");
-    if (count) count.textContent = `登録プレーヤー数：${allPlayers.length}人`;
-
-    if (!players.length) {
-      const emptyText = playerLibraryModeV145 === "management"
-        ? (query ? "該当するプレーヤーがいません" : "登録プレーヤーはまだいません。<br>右上の＋から登録できます。")
-        : (query ? "該当するプレーヤーがいません" : "登録プレーヤーはまだいません。<br>右上の＋から登録できます。");
-      list.innerHTML = `<div class="player-library-empty">${emptyText}</div>`;
-      return;
-    }
-
-    if (playerLibraryModeV145 === "management") {
-      list.innerHTML = players.map(({player, records, latest}) => `
-        <button class="player-management-row-v1" type="button" data-stats-player="${player.id}" aria-label="${escapeRecordText(player.name)}の詳細を開く">
-          <span class="player-management-avatar-v1">${playerAvatarHtmlV2(player,"player-avatar-v2")}${player.isPrimary ? `<span class="player-primary-pin-v2" aria-label="メインプレーヤー"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="m14.8 6.5 2.7 2.7-2 1.1-.5 3.1-1.4 1.4-2.2-2.2-3.8 3.8-.9-.9 3.8-3.8-2.2-2.2 1.4-1.4 3.1-.5Z"/></svg></span>` : ""}</span>
-          <span class="player-management-copy-v2"><strong class="player-management-name-v1">${escapeRecordText(player.name)}</strong>${player.memo ? `<span class="player-management-memo-v2">${escapeRecordText(player.memo)}</span>` : ""}</span>
-          <svg class="player-management-chevron-v1" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
-        </button>`).join("");
-      return;
-    }
-
-    const otherPlayer = playerLibraryTarget === 1 ? 2 : 1;
-    const otherSelectedId = selectedRegisteredPlayer[otherPlayer];
-    const currentSelectedId = selectedRegisteredPlayer[playerLibraryTarget];
-    list.innerHTML = players.map(({player:p}) => {
-      const usedByOther = p.id === otherSelectedId;
-      const selectedHere = p.id === currentSelectedId;
-      const status = usedByOther
-        ? `<span class="player-library-status">Player${otherPlayer}で選択中</span>`
-        : selectedHere ? `<span class="player-library-status current">現在選択中</span>` : "";
-      return `<div class="player-library-item selection-only${usedByOther ? " unavailable" : ""}">
-        <button class="player-library-select" type="button" ${usedByOther ? "disabled" : `data-select-player="${p.id}"`}>
-          ${playerAvatarHtmlV2(p,"player-library-select-avatar-v2")}
-          <div><div class="player-library-name-row"><div class="player-library-name">${escapeRecordText(p.name)}${p.isPrimary ? `<span class="player-primary-badge-v1">メイン</span>` : ""}</div>${status}</div>
-          <div class="player-library-meta">${p.memo ? escapeRecordText(p.memo) : `最終使用 ${formatLastUsed(p.lastUsed)}`}</div></div>
-        </button>
-      </div>`;
-    }).join("");
-  };
-
-  showPlayerLibraryMain = function() {
-    editingPlayerId = null;
-    const management = playerLibraryModeV145 === "management";
-    const overlay = el("playerLibraryOverlay");
-    overlay?.classList.toggle("player-management-formal-v1", management);
-    el("playerLibraryTitle").textContent = management ? "プレーヤー一覧" : `Player${playerLibraryTarget} 選択`;
-    el("playerLibrarySearch").placeholder = management ? "プレーヤー検索" : "名前を検索";
-    el("playerLibraryMain").classList.remove("hidden");
-    el("playerEditor").classList.add("hidden");
-    const back = el("playerLibraryBackBtn");
-    if (back) {
-      if (management) {
-        back.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg>`;
-        back.removeAttribute("aria-hidden");
-        back.setAttribute("aria-label", "前の画面に戻る");
-        back.tabIndex = 0;
-      } else {
-        back.textContent = "‹ 戻る";
-        back.removeAttribute("aria-hidden");
-        back.setAttribute("aria-label", "閉じる");
-        back.tabIndex = 0;
-      }
-    }
-
-    const restoreAddButton = () => {
-      const add = el("playerLibraryAddBtn");
-      if (!add) return;
-      add.textContent = "＋";
-      add.setAttribute("aria-label", "新規プレーヤー登録");
-      add.removeAttribute("aria-hidden");
-      add.dataset.editorAction = "";
-      add.classList.remove("delete-mode", "editor-hidden-action");
-      add.disabled = false;
-      add.style.setProperty("display", "grid", "important");
-      add.style.visibility = "visible";
-      add.style.pointerEvents = "auto";
-      add.style.opacity = "1";
-    };
-
-    restoreAddButton();
-    el("playerLibraryOverlay")?.querySelector(".player-library-header")?.classList.toggle("selection-mode", !management);
-    renderPlayerLibrary();
-
-    // iPhone Safari / ホーム画面起動では、直前のdisplay:noneが1フレーム残る場合がある。
-    requestAnimationFrame(restoreAddButton);
-    setTimeout(restoreAddButton, 50);
-  };
-
-  openPlayerLibrary = function(target) {
-    playerLibraryModeV145 = "selection";
-    playerLibraryTarget = target;
-    el("playerLibrarySearch").value = "";
-    const overlay = el("playerLibraryOverlay");
-    overlay.classList.remove("hidden");
-    overlay.setAttribute("aria-hidden", "false");
-    showPlayerLibraryMain();
-  };
 
   function openPlayerManagementV145() {
     playerLibraryModeV145 = "management";
@@ -18778,8 +18098,8 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     const KEY="rotationScoreboard.statisticsFilter.v53";
     const screen=document.getElementById("statisticsFilterScreen"), openBtn=document.getElementById("openStatisticsFilterBtn");
-    const ids={from:"statisticsFromDate",to:"statisticsToDate",category:"statisticsCategory",season:"statisticsSeason",player:"statisticsPlayer",opponent:"statisticsOpponent",recordingMode:"statisticsRecordingMode",outcome:"statisticsOutcome",tag:"statisticsTag"};
-    const defaults={period:"all",from:"",to:"",category:"",season:"",player:"",opponent:"",recordingMode:"",outcome:"",tag:""};
+    const ids={from:"statisticsFromDate",to:"statisticsToDate",category:"statisticsCategory",season:"statisticsSeason",player:"statisticsPlayer",opponent:"statisticsOpponent",recordingMode:"statisticsRecordingMode",outcome:"statisticsOutcome"};
+    const defaults={period:"all",from:"",to:"",category:"",season:"",player:"",opponent:"",recordingMode:"",outcome:""};
     const el=id=>document.getElementById(id);
     const rawRecords=()=>{
       const records = typeof readMatchRecords === "function"
@@ -18787,7 +18107,7 @@ let matchRecordsRawCacheV152 = null;
         : (()=>{try{const v=JSON.parse(localStorage.getItem("rotationScoreboard.matchRecords.v1")||"[]");return Array.isArray(v)?v:[]}catch(_){return[]}})();
       return records.filter(r=>r&&r.players?.[1]&&r.players?.[2]);
     };
-    const read=()=>{try{return {...defaults,...JSON.parse(localStorage.getItem(KEY)||"{}"),category:""}}catch(_){return {...defaults}}};
+    const read=()=>{try{const {tag:_legacyTag,...supported}=JSON.parse(localStorage.getItem(KEY)||"{}");return {...defaults,...supported,category:""}}catch(_){return {...defaults}}};
     const save=f=>localStorage.setItem(KEY,JSON.stringify({...defaults,...f}));
     const day=v=>{if(!v)return null;const d=new Date(v+"T00:00:00");return Number.isNaN(d.getTime())?null:d};
     const dateOf=r=>{const d=new Date(r.endedAt||r.playedAt||r.startedAt||0);return Number.isNaN(d.getTime())?null:d};
@@ -18804,7 +18124,6 @@ let matchRecordsRawCacheV152 = null;
         const d=dateOf(r);if(f.period!=="recent10"){if(range.start&&(!d||d<range.start))return false;if(range.end&&(!d||d>range.end))return false}
         if(f.category&&String(r.category||"")!==f.category)return false;
         if(f.season&&String(r.season||"")!==f.season)return false;
-        if(f.tag&&!(Array.isArray(r.tags)&&r.tags.includes(f.tag)))return false;
         if(!sideMatches(r,f.player)||!sideMatches(r,f.opponent))return false;
         if(f.player&&f.opponent&&sideForKey(r,f.player)===sideForKey(r,f.opponent))return false;
         if(f.recordingMode==="detail"&&!isDetail(r))return false;
@@ -18817,17 +18136,17 @@ let matchRecordsRawCacheV152 = null;
     }
     window.getFilteredRecordsV53=apply;window.getStatisticsFilterV53=read;
     function options(){
-      const records=rawRecords(),cats=[...new Set(records.map(r=>String(r.category||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ja")),seasons=[...new Set(records.map(r=>String(r.season||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ja")),tags=[...new Set(records.flatMap(r=>Array.isArray(r.tags)?r.tags:[]).map(String).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ja"));
+      const records=rawRecords(),cats=[...new Set(records.map(r=>String(r.category||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ja")),seasons=[...new Set(records.map(r=>String(r.season||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ja"));
       const pm=new Map();records.forEach(r=>[1,2].forEach(side=>{const p=r.players?.[side]||{},name=String(p.name||"").trim(),id=String(p.registeredPlayerId||"");if(name)pm.set(id?`id:${id}`:`name:${name}`,name)}));
       const fill=(id,vals)=>{const node=el(id);if(!node)return;const cur=node.value;node.innerHTML='<option value="">すべて</option>'+vals.map(v=>{const pair=Array.isArray(v),value=pair?v[0]:v,label=pair?v[1]:v;return `<option value="${String(value??'').replace(/"/g,'&quot;')}">${String(label??'')}</option>`}).join('');node.value=cur};
-      fill(ids.season,seasons);fill(ids.tag,tags);const players=[...pm.entries()].sort((a,b)=>a[1].localeCompare(b[1],"ja"));fill(ids.player,players);fill(ids.opponent,players)
+      fill(ids.season,seasons);const players=[...pm.entries()].sort((a,b)=>a[1].localeCompare(b[1],"ja"));fill(ids.player,players);fill(ids.opponent,players)
     }
     function load(){options();const f=read();Object.entries(ids).forEach(([k,id])=>{if(el(id))el(id).value=f[k]||""});document.querySelectorAll('[data-period]').forEach(b=>b.classList.toggle('active',b.dataset.period===f.period));updateSummary()}
-    function current(){const active=document.querySelector('[data-period].active');return {period:active?.dataset.period||"all",from:el(ids.from).value,to:el(ids.to).value,category:"",season:el(ids.season).value,player:el(ids.player).value,opponent:el(ids.opponent).value,recordingMode:el(ids.recordingMode).value,outcome:el(ids.outcome).value,tag:el(ids.tag).value}}
+    function current(){const active=document.querySelector('[data-period].active');return {period:active?.dataset.period||"all",from:el(ids.from).value,to:el(ids.to).value,category:"",season:el(ids.season).value,player:el(ids.player).value,opponent:el(ids.opponent).value,recordingMode:el(ids.recordingMode).value,outcome:el(ids.outcome).value}}
     function labelFor(id){const n=el(id);return n?.selectedOptions?.[0]?.textContent||"すべて"}
     function summaryText(f=current()){
       const parts=[];parts.push({all:"全期間",year:"今年",month:"今月","30days":"直近30日",recent10:"直近10試合"}[f.period]||(f.from||f.to?`${f.from||"開始なし"}〜${f.to||"終了なし"}`:"全期間"));
-      if(f.category)parts.push(`区分：${labelFor(ids.category)}`);if(f.season)parts.push(`シーズン：${labelFor(ids.season)}`);if(f.player)parts.push(`プレーヤー：${labelFor(ids.player)}`);if(f.opponent)parts.push(`相手：${labelFor(ids.opponent)}`);if(f.recordingMode)parts.push(labelFor(ids.recordingMode));if(f.outcome)parts.push(labelFor(ids.outcome));if(f.tag)parts.push(`タグ：${labelFor(ids.tag)}`);return parts.join("／")
+      if(f.category)parts.push(`区分：${labelFor(ids.category)}`);if(f.season)parts.push(`シーズン：${labelFor(ids.season)}`);if(f.player)parts.push(`プレーヤー：${labelFor(ids.player)}`);if(f.opponent)parts.push(`相手：${labelFor(ids.opponent)}`);if(f.recordingMode)parts.push(labelFor(ids.recordingMode));if(f.outcome)parts.push(labelFor(ids.outcome));return parts.join("／")
     }
     function updateSummary(){const f=current();el("statisticsFilterSummary").textContent=summaryText(f)+(f.outcome&&!f.player?"（勝敗の絞り込みにはプレーヤー選択が必要です）":"");el("statisticsFilterCount").textContent=`${applyWith(f).length}試合`}
     function applyWith(f){const old=localStorage.getItem(KEY);save(f);const result=apply(rawRecords());if(old===null)localStorage.removeItem(KEY);else localStorage.setItem(KEY,old);return result}
@@ -19263,7 +18582,7 @@ let matchRecordsRawCacheV152 = null;
     el('dataManagementBackBtn')?.addEventListener('click',event=>{if(!cloudDetailsReturnToSettings)return;event.preventDefault();event.stopImmediatePropagation();const dataScreen=el('dataManagementScreen');dataScreen?.classList.add('hidden');dataScreen?.setAttribute('aria-hidden','true');cloudDetailsReturnToSettings=false;open();},true);
     el('settingsAutoSaveToggle')?.addEventListener('change',e=>{localStorage.setItem(AUTO_KEY,e.target.checked?'true':'false');const main=document.getElementById('cloudAutoSaveToggle');if(main)main.checked=e.target.checked;el('settingsCloudStatus').textContent=e.target.checked?'自動クラウド保存をONにしました。':'自動クラウド保存をOFFにしました。'});
     el('settingsSaveGenerationBtn')?.addEventListener('click',async event=>{const button=event.currentTarget;const input=el('settingsGenerationCount');const n=Math.round(Number(input.value));const st=el('settingsCloudStatus');if(!Number.isFinite(n)||n<1||n>30){st.textContent='保持件数は1〜30の整数で入力してください。';st.classList.add('error');input.focus();return}input.value=String(n);localStorage.setItem(GEN_KEY,String(n));input.blur();button.disabled=true;button.textContent='反映中…';st.textContent=`保持件数を${n}件に設定しました。クラウド履歴へ反映しています…`;st.classList.remove('error');try{if((localStorage.getItem(DEVICE_ID_KEY)||'').trim().length>=12&&typeof window.cueScoreApplyGenerationRetentionV135==='function'){const result=await window.cueScoreApplyGenerationRetentionV135();await document.getElementById('cloudHistoryRefreshBtn')?.click();st.textContent=`保持件数を${n}件に設定し、古い世代を${result.deletedCount||0}件整理しました。`}else{st.textContent=`保持件数を${n}件に設定しました。Device ID設定後の次回クラウド保存から反映されます。`}}catch(error){console.error(error);st.textContent=`保持件数は${n}件に保存しましたが、クラウド履歴の整理に失敗しました：${error.message}`;st.classList.add('error')}finally{button.disabled=false;button.textContent='保持件数を保存'}});
-    el('settingsResetFilterBtn')?.addEventListener('click',()=>{localStorage.setItem(FILTER_KEY,JSON.stringify({period:'all',from:'',to:'',category:'',season:'',player:'',opponent:'',recordingMode:'',outcome:'',tag:''}));window.renderHomeDashboardV50?.();window.renderPlayerRankingsV51?.();window.renderVsAnalysisV52?.();el('settingsGeneralStatus').textContent='統計フィルターを全解除しました。'});
+    el('settingsResetFilterBtn')?.addEventListener('click',()=>{localStorage.setItem(FILTER_KEY,JSON.stringify({period:'all',from:'',to:'',category:'',season:'',player:'',opponent:'',recordingMode:'',outcome:''}));window.renderHomeDashboardV50?.();window.renderPlayerRankingsV51?.();window.renderVsAnalysisV52?.();el('settingsGeneralStatus').textContent='統計フィルターを全解除しました。'});
     el('settingsResetPreferencesBtn')?.addEventListener('click',()=>{if(!confirm(`端末内の表示・選択設定を初期状態へ戻します。\n\n登録プレーヤー、対戦履歴、Device ID、クラウド接続設定は削除しません。\n続けますか？`))return;prefKeys.forEach(k=>localStorage.removeItem(k));localStorage.setItem(GEN_KEY,'10');refresh();window.renderHomeDashboardV50?.();window.renderPlayerRankingsV51?.();window.renderVsAnalysisV52?.();el('settingsGeneralStatus').textContent='端末内設定を初期状態へ戻しました。'});
     window.openSettingsV55=open;
   })();
@@ -19310,7 +18629,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-analytics-final-rc-v1";
+    const PWA_VERSION = "2.0-memo-tag-phase1-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -19539,7 +18858,7 @@ let matchRecordsRawCacheV152 = null;
   ];
   const modalSelectors = [
     '#proSummary','.record-detail-overlay','.player-library-overlay','.player-stats-overlay',
-    '#gameMemoDialog','.historical-edit-dialog-v35','.classification-manager-v381',
+    '#gameMemoDialog','.classification-manager-v381',
     '.break-result-overlay-v61','.pushout-overlay-v730','.record-mode-overlay-v611',
     '.start-confirm-overlay-v698','.break-interrupt-overlay-v3'
   ];
@@ -19684,7 +19003,7 @@ let matchRecordsRawCacheV152 = null;
 
   document.querySelectorAll(
     ".player-library-overlay, .player-stats-overlay, .record-detail-overlay, .game-memo-dialog, " +
-    ".historical-edit-dialog-v35, .classification-manager-v381, .pro-summary"
+    ".classification-manager-v381, .pro-summary"
   ).forEach(node => {
     node.setAttribute("role", "dialog");
     node.setAttribute("aria-modal", "true");
@@ -19699,7 +19018,7 @@ let matchRecordsRawCacheV152 = null;
 
     const closeButton = visibleDialog.querySelector(
       '[data-dialog-close], .player-library-back, .player-stats-back, .record-detail-back, ' +
-      '#gameMemoCancelBtn, #historicalEditCancelV35, .result-cancel'
+      '#gameMemoCancelBtn, .result-cancel'
     );
     if (closeButton instanceof HTMLElement) {
       event.preventDefault();
@@ -19714,7 +19033,7 @@ let matchRecordsRawCacheV152 = null;
   window.__cueScoreModalFocusLifecycleV148 = true;
   const modalSelectors = [
     '#proSummary','.record-detail-overlay','.player-library-overlay','.player-stats-overlay',
-    '#gameMemoDialog','.historical-edit-dialog-v35','.classification-manager-v381',
+    '#gameMemoDialog','.classification-manager-v381',
     '.break-result-overlay-v61','.pushout-overlay-v730','.record-mode-overlay-v611',
     '.start-confirm-overlay-v698','.break-interrupt-overlay-v3'
   ];
@@ -19917,7 +19236,6 @@ let matchRecordsRawCacheV152 = null;
     max-height: calc(var(--cue-visual-height, 100dvh) - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 18px) !important;
   }
   .game-memo-card,
-  .historical-edit-card-v35,
   .pro-summary-card,
   .record-detail-overlay > * {
     overflow-y: auto !important;
@@ -22830,15 +22148,6 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
     }).join("")}</section>`;
   }
 
-  function disciplineLabelV1(record) {
-    const type=String(record?.gameType || record?.disciplineId || "rotation").toLowerCase();
-    if(type.includes("jpa")) return "JPA 9-Ball";
-    if(type.includes("10")) return "10-Ball";
-    if(type.includes("straight") || type.includes("14")) return "14-1";
-    if(type.includes("9")) return "9-Ball";
-    return "Rotation";
-  }
-
   function rackGameMasuwariCountsV1(record) {
     const counts={1:0,2:0};
     const targetBall=recordDisciplineV2(record)==="10ball"?10:9;
@@ -23447,14 +22756,12 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
 }
 .records-filter-panel[hidden]{display:none!important}
 .records-filter-buttons{margin-top:0!important}
-.records-filter-buttons button,
-.records-tag-filter button{
+.records-filter-buttons button{
   border-color:#dededb!important;
   color:#666!important;
   background:#f4f4f2!important;
 }
-.records-filter-buttons button.active,
-.records-tag-filter button.active{
+.records-filter-buttons button.active{
   border-color:var(--cue-history-walnut)!important;
   color:#fff!important;
   background:var(--cue-history-walnut)!important;

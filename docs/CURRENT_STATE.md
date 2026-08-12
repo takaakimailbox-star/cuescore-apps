@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## v1.0 Final RC：試合メモ／タグ非採用・コード整理 Phase 1（2026年8月12日）
+
+- Product Owner決定により、試合メモ／タグはv1.0非採用とし、新規入力・生成・検索・絞り込みUIおよび専用ロジックを削除した。
+- 既存record内の `memo`、`matchMemo`、`tags`、`reflection`、`playerReflections` は保存データ互換のため削除・変換せず、Backup／Restore、旧履歴表示、CSV出力で保持する。
+- プレーヤープロフィールのメモと、Decision 013で採用済みのプレーヤー別振り返りは別機能として維持する。
+- 将来の試合メモ／タグ再検討はLaterとし、v1.0では新しい保存項目やデータ移行を追加しない。
+- Official Releaseは変更していない。
+
 ## App Store v1.0 RC：Settings法務導線（2026年8月10日）
 
 - Settingsの「利用規約」は同一タブで `terms.html`、「プライバシーポリシー」は同一タブで `privacy.html` を開く。遷移前の一時フラグにより、ブラウザ／PWAの標準「戻る」でSettingsへ復帰できる。
