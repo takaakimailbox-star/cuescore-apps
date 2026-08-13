@@ -8640,7 +8640,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-step4-legal-support-v1"></script>
+  <script src="./demo-data.js?v=2.0-step6-sample-data-label-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -18869,7 +18869,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-step4-legal-support-v1";
+    const PWA_VERSION = "2.0-step6-sample-data-label-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -25031,8 +25031,8 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
           </button>
         </section>
         <h1 class="settings-formal-section-title-v1">サンプルデータ</h1>
-        <section class="settings-demo-card-v1" aria-label="Official Demo Data">
-          <div class="settings-demo-head-v1"><strong>Official Demo Data</strong><span class="settings-demo-state-v1" id="settingsDemoStateV1">通常データ</span></div>
+        <section class="settings-demo-card-v1" aria-label="サンプルデータ">
+          <div class="settings-demo-head-v1"><strong>サンプルデータ</strong><span class="settings-demo-state-v1" id="settingsDemoStateV1">通常データ</span></div>
           <p class="settings-demo-note-v1">アプリの画面と機能を試せます。通常のデータには影響しません。</p>
           <div class="settings-demo-actions-v1">
             <button type="button" data-demo-action="create">準備する</button>
@@ -25132,9 +25132,9 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       }
       const normalSafe = "通常データは変更されません。";
       try {
-        if (demoAction === "create" && confirm(`Official Demo Data（10名・120試合・全6種目・詳細記録）を準備します。\n${normalSafe}`)) {
+        if (demoAction === "create" && confirm(`サンプルデータ（10名・120試合・全6種目・詳細記録）を準備します。\n${normalSafe}`)) {
           demoApi.create();
-          alert(`公式デモデータを準備しました。\n${normalSafe}`);
+          alert(`サンプルデータを準備しました。\n${normalSafe}`);
         }
         if (demoAction === "enter" && confirm(`サンプルデータを表示します。\n${normalSafe}`)) {
           demoApi.enter();
@@ -25465,7 +25465,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
         <section class="settings-suite-card-v2 settings-suite-selected-v2" id="suiteRestoreOptions" hidden><h2>復元方法を選択</h2><label class="settings-suite-radio-v2"><input type="radio" name="suiteRestoreMode" value="merge" checked><span><strong>現在のデータへ追加</strong><span>現在のデータを保持したまま、重複を除いてバックアップ内容を追加します。</span></span></label><label class="settings-suite-radio-v2"><input type="radio" name="suiteRestoreMode" value="replace"><span><strong>現在のデータを置き換える</strong><span>現在のデータをバックアップ内容に置き換えます。</span></span></label><button class="settings-suite-primary-v2" id="suiteRestoreStart" type="button">復元を開始する</button><p class="settings-suite-note-v2">※ 復元前に現在の端末データを自動退避します。</p></section>
       </section>
       <section class="settings-suite-view-v2" data-suite-view="delete" hidden>
-        ${header("delete","settings","データ削除")}<p class="settings-suite-intro-v2">削除するデータの単位を選んでください。通常データとOfficial Demo Dataは別々に処理されます。</p>
+        ${header("delete","settings","データ削除")}<p class="settings-suite-intro-v2">削除するデータの単位を選んでください。通常データとサンプルデータは別々に処理されます。</p>
         <section class="settings-suite-card-v2 settings-suite-warning-v2"><h2>試合履歴</h2><p>すべての試合履歴を、履歴・分析・ランキング・VSから削除します。プレーヤーは残ります。</p><button class="settings-suite-danger-v2" id="suiteDeleteRecords" type="button">試合履歴をすべて削除</button></section>
         <section class="settings-suite-card-v2 settings-suite-warning-v2"><h2>プレーヤーデータ</h2><p>登録プレーヤーをすべて削除します。過去の試合履歴と当時の名前は残ります。</p><button class="settings-suite-danger-v2" id="suiteDeletePlayers" type="button">プレーヤーデータをすべて削除</button></section>
         <section class="settings-suite-card-v2 settings-suite-warning-v2"><h2>すべてのデータ</h2><p>登録プレーヤー、対戦履歴、試合区分、シーズンを削除します。二段階で確認します。</p><button class="settings-suite-danger-v2" id="suiteDeleteAll" type="button">全データを削除</button></section>

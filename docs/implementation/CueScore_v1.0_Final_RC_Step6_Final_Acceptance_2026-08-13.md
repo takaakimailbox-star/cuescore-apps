@@ -4,6 +4,17 @@
 基準main: `554e137463279fb5041295a5840bbc5c331d6ddf`  
 作業ブランチ: `codex/cuescore-step6-final-acceptance`
 
+## FA-STEP6-001軽微修正後の再受入れ（2026-08-13）
+
+- Product Ownerは初回`CONDITIONAL PASS`を承認したが、FA-STEP6-001は受容せず、ネイティブ化前の軽微修正を指示した。
+- 独立ブランチ`codex/cuescore-step6-sample-data-label-fix`で、Settingsカード見出し・アクセシブル名・作成確認文・作成完了通知・データ削除説明の利用者向け表記を「サンプルデータ」へ統一した。
+- 内部コメント、内部識別子、`demo-data.js`の保存キー／保存領域、変数名、技術資料上の内部名称`Official Demo Data`は変更していない。
+- UI文言回帰テストを既存`demo-data.test.mjs`へ追加し、PWAキャッシュ版を`2.0-step6-sample-data-label-v1`へ同期した。
+- 全自動テストは117件成功／失敗0／スキップ0。390 × 844pxブラウザでSettingsカード表示、データ削除説明、横スクロールなしを再確認し、作成確認文と作成完了通知はソースおよび回帰テストで確認した。
+- 再受入れ集計はBlocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0。FA-STEP6-001は解消済み。
+- Step 6 Gate 1、6、9、10、13、14への回帰は確認されず、その他Gateに関係する競技・保存・データ処理は変更していない。
+- Product Owner最終確認前の判定：`PWA Final Acceptance: PASS候補`。
+
 ## 検証環境
 
 - macOSローカルワークツリー
