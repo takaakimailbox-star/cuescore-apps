@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-jpa9-result-metrics-refinement-v1";
+const APP_VERSION = "2.0-six-discipline-race-display-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-jpa9-result-metrics-refinement-v1",
+  "./demo-data.js?v=2.0-six-discipline-race-display-v1",
   "./manifest.webmanifest",
   "./privacy.html",
   "./terms.html",

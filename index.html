@@ -8640,7 +8640,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-jpa9-result-metrics-refinement-v1"></script>
+  <script src="./demo-data.js?v=2.0-six-discipline-race-display-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -14784,11 +14784,9 @@ let matchRecordsRawCacheV152 = null;
       return `<article class="official-result-player-v1 ${winner===0?"draw":player===winner?"winner":"loser"}"><div class="official-result-player-name-v1"><span class="official-result-avatar-v1">${resultAvatarSvgV1(player)}</span><span>${safeName}${skillLevel}</span></div><div class="official-result-score-v1">${Number(scores[player])||0}</div><div class="official-result-stats-v1"><div><span>${statItems[0][0]}</span><strong>${statItems[0][1]}</strong></div><div><span>${statItems[1][0]}</span><strong>${statItems[1][1]}</strong></div></div></article>`;
     };
     const matchPointHtml="";
-    const resultConditionText=isNineBallV1()||isTenBallV1()
-      ? `Race to ${Number(goals[1])||0}${Number(goals[1])!==Number(goals[2])?` / ${Number(goals[2])||0}`:""}`
-      : isJPA9V1()?`Race／先取点 ${Number(goals[1])||0} / ${Number(goals[2])||0}`
-      : isThreeCushionV1()?`持ち点 ${Number(goals[1])||0} / ${Number(goals[2])||0}`
-      : `目標点 ${Number(goals[1])||0}${Number(goals[1])!==Number(goals[2])?` / ${Number(goals[2])||0}`:""}`;
+    const resultGoal1=Number(goals[1])||Number(goals[2])||0;
+    const resultGoal2=Number(goals[2])||Number(goals[1])||0;
+    const resultConditionText=`Race to ${resultGoal1}-${resultGoal2}`;
 
     summary.innerHTML=`<div class="official-result-backdrop-v1" aria-hidden="true"></div><section class="official-result-sheet-v1" role="dialog" aria-modal="true" aria-labelledby="officialResultTitleV1"><div class="official-result-scroll-v1"><h2 id="officialResultTitleV1">試合結果</h2><div class="official-result-info-v1"><span>${infoIcon("calendar")}<b>${dateText}</b></span><span>${infoIcon("clock")}<b>${timeText}</b></span><span>${infoIcon("duration")}<b>${durationText}</b></span></div><div class="official-result-players-v1">${playerCard(1)}<span class="official-result-separator-v1" aria-hidden="true">−</span>${playerCard(2)}</div>${matchPointHtml}<div class="official-result-condition-v1">${escapeRecordText(resultConditionText)}</div><section class="official-result-chart-card-v1"><div class="official-result-chart-header-v1"><h3>スコア推移</h3><div><span class="p1"></span>${safeName1}<span class="p2"></span>${safeName2}</div></div><span class="official-result-axis-title-v1">得点</span>${makeOfficialResultChartSvgV1(progress)}<span class="official-result-axis-bottom-v1">${progress.axis}</span></section><div class="official-result-actions-v1"><button id="officialResultReturnGameV1" class="official-result-primary-v1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7M7 12h12"/></svg>試合へ戻る</button><div class="official-result-secondary-row-v1"><button id="officialResultHomeV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3Z"/></svg>ホームへ戻る</button><button id="officialResultRematchV1" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7V3l-2 2a8 8 0 1 0 2 6M20 3h-4"/></svg>もう一度対戦する</button></div></div><p class="official-result-note-v1">※ 試合の詳細な分析や履歴は「履歴」画面からご確認いただけます。</p></div></section>`;
     if(isJPA9V1()){
@@ -18776,7 +18774,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-jpa9-result-metrics-refinement-v1";
+    const PWA_VERSION = "2.0-six-discipline-race-display-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22357,9 +22355,9 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
     const date=datePartsV1(record);
     const goal1=Number(p1.goal)||0;
     const goal2=Number(p2.goal)||0;
-    const raceTag=goal1&&goal2&&goal1!==goal2
-      ? `Race to ${goal1} / ${goal2}`
-      : (goal1||goal2?`Race to ${goal1||goal2}`:"");
+    const raceGoal1=goal1||goal2;
+    const raceGoal2=goal2||goal1;
+    const raceTag=`Race to ${raceGoal1||"—"}-${raceGoal2||"—"}`;
     const categoryTag="";
     const disciplineV4=recordDisciplineV2(record);
     const disciplineDefV4=recordsDisciplineDefsV2.find(item=>item.id===disciplineV4) || recordsDisciplineDefsV2[0];
@@ -22395,14 +22393,7 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
     ] : [inningsRowV4,highRunRowV4,averageRowV4];
     const chart=chartSvgV1(record,winner);
     const history=resultMode?"":gameHistoryV1(record);
-    const completedRackCount=(Number(p1.score)||0)+(Number(p2.score)||0);
-    const finalRackCount=completedRackCount||Math.max(0,(Number(record?.rack)||1)-1);
-    const conditionItems=["9ball","10ball"].includes(disciplineV4)
-      ? [`最終ラック数 ${finalRackCount||"—"}`,raceTag]
-      : disciplineV4==="jpa9" ? [`Race／先取点 ${goal1||"—"} / ${goal2||"—"}`]
-      : disciplineV4==="threeCushion"
-        ? [`持ち点 ${goal1||"—"} / ${goal2||"—"}`]
-        : [`目標点 ${goal1||goal2||"—"}${goal1&&goal2&&goal1!==goal2?` / ${goal2}`:""}`];
+    const conditionItems=[raceTag];
 
     overlay.className=`record-detail-overlay match-detail-overlay-v1${resultMode?" is-result-mode-v5":""}`;
     overlay.innerHTML=`<div class="match-detail-v1">

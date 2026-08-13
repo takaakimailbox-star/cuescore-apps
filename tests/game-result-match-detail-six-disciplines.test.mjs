@@ -19,7 +19,7 @@ test("Match Detail uses the adopted discipline-specific metrics",()=>{
 
 test("JPA upper result facts and one metrics card avoid duplicate rows without schema changes",()=>{
   assert.match(html,/match-detail-result-name-v2[^`]*\$\{disciplineV4==="jpa9"\?`<small>SL/);
-  assert.match(html,/disciplineV4==="jpa9" \? \[`Race／先取点/);
+  assert.match(html,/const raceTag=`Race to \$\{raceGoal1\|\|"—"\}-\$\{raceGoal2\|\|"—"\}`/);
   assert.match(html,/disciplineV4==="jpa9" \? \[\s*inningsRowV4,safetyRowV4,averageRowV4,highRunRowV4,foulRowV4/);
   assert.doesNotMatch(html,/const jpaResultRowsV1=/);
   assert.doesNotMatch(html,/>試合結果情報</);
@@ -32,7 +32,7 @@ test("JPA Game Result retains SL, final points, match points and race context",(
   assert.match(html,/match-detail-result-name-v2[^`]*\$\{disciplineV4==="jpa9"\?`<small>SL/);
   assert.match(html,/const jpaMatchPointsV1=disciplineV4==="jpa9"/);
   assert.match(html,/Number\(p1\.score\)\|\|0/);
-  assert.match(html,/disciplineV4==="jpa9" \? \[`Race／先取点/);
+  assert.match(html,/const raceTag=`Race to \$\{raceGoal1\|\|"—"\}-\$\{raceGoal2\|\|"—"\}`/);
 });
 
 test("3C renders inning, high run and average without a foul metric",()=>{

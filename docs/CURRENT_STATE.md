@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## v1.0 Final RC：6競技 Race to表示統一（2026年8月13日）
+
+- Game Result／Match Detailの試合条件表示を、6競技すべて `Race to X-Y` へ統一した。XはPlayer 1、YはPlayer 2の既存goalを使用する。
+- 9-Ball／10-Ballの「最終ラック数」、Rotation／14.1の「目標点」、JPAの「Race／先取点」、3Cの「持ち点」とスラッシュ区切りを、両画面の条件行から廃止した。
+- 共通renderer `openMatchDetailV1`で同じ表示を生成する。共通目標しかない旧データは同値を左右へ表示する。
+- 競技ルール、勝敗判定、内部goal、JPA SL・マッチポイント、3C持ち点、Metrics、保存schemaは変更していない。
+- 正式決定：`docs/official/20_CueScore_v1.0FinalRC_6Disciplines_RaceTo_Display_Decision.md`。後継仕様：`docs/official/21_CueScore_v1.0FinalRC_6Disciplines_RaceTo_Display_Spec.md`。
+
 ## v1.0 Final RC：JPA 9-Ball Result / Detail Metrics整理（2026年8月13日）
 
 - JPA 9-Ballの上部にPlayer名、Avatar、SL、Race／先取点、最終取得点、マッチポイントを集約した。

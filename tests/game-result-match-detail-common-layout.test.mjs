@@ -22,11 +22,11 @@ test("Rotation, JPA and Straight Pool use their adopted metrics",()=>{
 });
 
 test("JPA result facts remain above one five-row metrics card",()=>{
-  for(const label of ["SL","Race／先取点","マッチポイント","イニング","セーフティ","アベレージ","ハイラン","ファール"]){
+  for(const label of ["SL","Race to","マッチポイント","イニング","セーフティ","アベレージ","ハイラン","ファール"]){
     assert.ok(html.includes(label),`missing JPA label: ${label}`);
   }
   assert.match(html,/match-detail-result-name-v2[^`]*\$\{disciplineV4==="jpa9"\?`<small>SL/);
-  assert.match(html,/disciplineV4==="jpa9" \? \[`Race／先取点/);
+  assert.match(html,/const raceTag=`Race to \$\{raceGoal1\|\|"—"\}-\$\{raceGoal2\|\|"—"\}`/);
   assert.doesNotMatch(html,/const jpaResultRowsV1=/);
   assert.doesNotMatch(html,/>試合結果情報</);
   assert.doesNotMatch(html,/>分析情報</);
@@ -52,7 +52,7 @@ test("result mode has no header close/back button and remains width-safe",()=>{
 
 test("PWA cache and document script versions stay synchronized",()=>{
   const sw=readFileSync(new URL("../sw.js",import.meta.url),"utf8");
-  assert.match(sw,/APP_VERSION = "2\.0-jpa9-result-metrics-refinement-v1"/);
-  assert.match(sw,/demo-data\.js\?v=2\.0-jpa9-result-metrics-refinement-v1/);
-  assert.match(html,/demo-data\.js\?v=2\.0-jpa9-result-metrics-refinement-v1/);
+  assert.match(sw,/APP_VERSION = "2\.0-six-discipline-race-display-v1"/);
+  assert.match(sw,/demo-data\.js\?v=2\.0-six-discipline-race-display-v1/);
+  assert.match(html,/demo-data\.js\?v=2\.0-six-discipline-race-display-v1/);
 });
