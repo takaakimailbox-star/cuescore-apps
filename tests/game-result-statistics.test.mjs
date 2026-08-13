@@ -6,8 +6,9 @@ const html=readFileSync(new URL("../index.html",import.meta.url),"utf8");
 
 test("Game Result uses the adopted two-stat mapping for all six disciplines",()=>{
   assert.match(html,/isNineBallV1\(\)\|\|isTenBallV1\(\).*\[\["シュート率",shotRate\],\["マス割"/);
-  assert.match(html,/activeGameTypeV1===ROTATION_GAME_TYPE.*\[\["ハイラン",highRun\],\["シュート率",shotRate\]\]/);
-  assert.match(html,/isJPA9V1\(\)\|\|isStraightPoolV1\(\).*\[\["アベレージ",average\.toFixed\(2\)\],\["ハイラン",highRun\]\]/);
+  assert.match(html,/activeGameTypeV1===ROTATION_GAME_TYPE.*\[\["シュート率",shotRate\],\["ハイラン",highRun\]\]/);
+  assert.match(html,/isJPA9V1\(\).*\[\["イニング".*\["セーフティ"/);
+  assert.match(html,/isStraightPoolV1\(\).*\[\["アベレージ",average\.toFixed\(2\)\],\["ハイラン",highRun\]\]/);
   assert.match(html,/return \[\["アベレージ",average\.toFixed\(3\)\],\["ハイラン",highRun\]\]/);
 });
 

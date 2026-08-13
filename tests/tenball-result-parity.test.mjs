@@ -23,7 +23,7 @@ assert.match(
   /\["9ball","10ball"\]\.includes\(disciplineV4\) \? \[/,
   "9-Ball and 10-Ball must share the same three-row result summary"
 );
-assert.match(html, /\["マスワリ回数",String\(masuwariV4\[1\]\),String\(masuwariV4\[2\]\)\]/);
-assert.match(html, /\["ファール回数",Number\.isFinite/);
+assert.match(html, /\["マス割",String\(masuwariV4\[1\]\),String\(masuwariV4\[2\]\)\]/);
+assert.match(html, /const foulRowV4=\["ファール",Number\.isFinite/);
 
 console.log("10-Ball result/detail parity checks passed.");
