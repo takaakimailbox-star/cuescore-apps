@@ -35,7 +35,7 @@ test("all six disciplines continue to use the same formal Match Detail path",()=
   }
   assert.match(html,/window\.openMatchDetailV1=openMatchDetailV1/);
   assert.match(html,/const history=gameHistoryV1\(record\)/);
-  assert.match(html,/class="match-detail-game-history-v1" aria-label="試合履歴"/);
+  assert.match(html,/class="match-detail-game-history-v1" aria-label="ゲーム履歴"/);
 });
 
 test("Game Result and other overlays keep their independent scroll rules",()=>{

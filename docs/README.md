@@ -9,12 +9,12 @@ the initial reference implementation and historical product context.
 The following seven documents are the current official specification set:
 
 1. `official/01_CueScore_Product_Architecture_v1.0.docx`
-2. `official/02_CueScore_Design_System_v2.0_Official_Release.docx`
+2. `official/02_CueScore_Design_System_v2.1_Official_Release.docx`
 3. `official/03_CueScore_UI_Kit_v1.0.docx`
-4. `official/04_CueScore_UI_Components_v1.0_Official_Release.docx`
+4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v1.2_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v1.4_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -23,11 +23,11 @@ The App Store v1.0 official release package is managed separately under
 - `submission/`: App Store Description, Keywords, Review Notes, and Release Notes.
 - Unconfirmed URLs and contact details remain unset and must not be inferred.
 
-Design System v2.0 is the official successor to Design System v1.0, whose
-source file is not present in the current official archive.
+Design System v2.1 is the current official release and successor to v2.0.
+Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v1.2 is the official successor to v1.1. Versions
-1.0 and 1.1 remain in the official directory as preceding releases.
+Official Design Decision Log v1.4 is the current official release and successor
+to v1.3. Earlier versions remain in the official directory as preceding releases.
 
 Adopted RC decision addenda that supplement the latest Decision Log:
 
@@ -36,6 +36,9 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/10_CueScore_v1.0RC_UI_Unification_PlayerDetail_Bugfix_Decision.md`
 - `official/11_CueScore_v1.0RC_JPA9_MatchPoint_Decision.md`
 - `official/12_CueScore_Later_Match_Sharing_Decision.md`
+- `official/13_CueScore_v1.0FinalRC_GameResult_Close_Decision.md`
+- `official/14_CueScore_v1.0FinalRC_GameResult_MatchDetail_6Disciplines_Decision.md`
+- `official/15_CueScore_v1.0FinalRC_GameResult_MatchDetail_6Disciplines_Spec.md`
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and
@@ -47,9 +50,9 @@ Both documents are authoritative and are used together:
 
 - **UI Kit v1.0** defines component classification, layout patterns, screen
   templates, and the shared UI library.
-- **UI Components v1.0** defines component contracts, states, interactions,
+- **UI Components v1.1** defines component contracts, states, interactions,
   accessibility, prohibited behavior, and acceptance criteria.
-- **Design System v2.0** is authoritative for shared tokens, dimensions,
+- **Design System v2.1** is authoritative for shared tokens, dimensions,
   colors, typography, motion, and cross-screen visual rules.
 
 ## Adopted UI References
