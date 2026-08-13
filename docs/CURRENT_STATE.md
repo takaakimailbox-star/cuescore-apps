@@ -70,7 +70,7 @@
 ## App Store v1.0 RC：Settings法務導線（2026年8月10日）
 
 - Settingsの「利用規約」は同一タブで `terms.html`、「プライバシーポリシー」は同一タブで `privacy.html` を開く。遷移前の一時フラグにより、ブラウザ／PWAの標準「戻る」でSettingsへ復帰できる。
-- 公開先は既存のGitHub Pages正式URL候補を使用し、新しいURLや本文は作成していない。
+- 公開先は既存のGitHub Pages URLを使用し、Step 4で正式公開URLとして確定した。新しいURLや本文は作成していない。
 - Terms／PrivacyのHTML、Official Markdown、表示スクリプト、スタイルはService WorkerのApp Shell対象で、取得済み環境ではオフライン表示できる。
 - ライセンス画面、ライセンス文書、OSSライセンス一覧、正式表示URLは現行リポジトリおよび公式文書に存在しない。推測で作成せず、正式資料が確定するまで無効状態を維持する。
 - 法務ページ遷移時のService Workerは遷移先URLへレスポンスを保存し、Home用 `index.html` キャッシュを上書きしない。
@@ -217,7 +217,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - 2026-08-09付の公式Markdown一式を `docs/official/app-store-v1.0/` に登録。
 - 公開文書とApp Store提出資料を分離して管理。
 - Privacy Policy / Terms of Use / Support の公開用HTML入口を用意。
-- URL、公開用連絡先、App Review連絡先は未確定のため未記入。
+- Privacy Policy、Terms of Use、SupportのURLと公開用連絡先は2026-08-13のStep 4で確定済み。App Review連絡担当者の氏名・メール・電話番号は未確定。
 - 整合確認結果を `docs/implementation/CueScore_App_Store_v1.0_Consistency_Review_2026-08-09.md` に記録。
 - 現段階は公式文書のGitHub反映と整合確認まで。ネイティブ化、TestFlight、App Store Connect登録、本審査提出には未着手。
 
@@ -236,7 +236,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - 6競技
 - プレーヤー管理、メインプレーヤー、アバター／写真
 - 試合進行、ブレイク入力、Undo
-- 試合履歴、統計・分析、Official Demo Data
+- 試合履歴、統計・分析、サンプルデータ（内部名称：Official Demo Data）
 - オフライン利用、バックアップ／復元
 
 ## Deferred / Later
@@ -247,9 +247,9 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 
 ## 要確認事項
 
-- 公開用連絡先
 - App Review担当者の氏名・メール・電話番号
-- App Store提出時に使用する公開URL候補の最終採用
+- ネイティブiOS提出ビルド、TestFlight、App Store Connect登録
+- 実提出ビルドでの6競技完走、オフライン、バックアップ／復元、プレーヤー写真の動作確認
 - 提出ビルドとPrivacy Policy / Review Notesの最終一致
 
 ## Active Decisions
@@ -258,7 +258,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - v1.0ではバックアップ/復元とプレーヤー写真を採用する。
 - v1.0ではCSVと自動クラウド同期をLaterとして扱う。
 - App Store v1.0 release profileはCSV・クラウド同期を無効化し、関連UIを表示しない。
-- Official Demo Dataは提出ビルドに収録し、通常データとの完全分離を維持する。
+- Official Demo Dataはv1.0提出予定範囲に含める。実提出ビルドでの収録と通常ユーザーデータからの分離確認は未実施。
 - Official Demo Dataの本番向け表示は「サンプルデータ」を採用し、状態を「通常データ／サンプルデータ」、操作を「準備する／サンプルを見る／通常データへ戻る／初期状態に戻す／削除」とする。
 - 試合共有（Match Sharing）はv1.0ではLaterとし、自動クラウド同期とは別の将来機能として扱う。実装開始前にProduct Ownerの再採用判断を必要とする。正式決定記録：`docs/official/12_CueScore_Later_Match_Sharing_Decision.md`。
 
@@ -268,19 +268,20 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - JPA 9-Ballは既存のSL／Race仕様を維持し、自由入力上限の対象外とする。
 - 上限は新規試合の自由入力と試合開始時の検証にのみ適用し、既存recordの読込・History／Match Detail表示・Backup／Restore・保存形式には適用しない。既存値を移行、自動補正、削除しない。
 
-## App Store Public URL Candidates
+## App Store Public URLs
 
 - Privacy Policy: https://takaakimailbox-star.github.io/cuescore-apps/privacy.html
 - Support: https://takaakimailbox-star.github.io/cuescore-apps/support.html
 - Terms of Use: https://takaakimailbox-star.github.io/cuescore-apps/terms.html
-- 2026-08-09にGitHub Pages上の外部表示、Official本文読み込み、3ページ間リンクを確認済み。
-- 正式URL候補として管理する。Supportページの公開用連絡先確定後にApp Store提出用として最終採用する。
+- 公開問い合わせ先: cuescore.apps@gmail.com
+- 問い合わせ方法: メール。問い合わせフォームはVersion 1.0では非採用。
+- 2026-08-09にGitHub Pages上の外部表示、Official本文読み込み、3ページ間リンクを確認済み。2026-08-13のStep 4でApp Store提出用の正式URLとして確定した。
 
 ## v1.0 RC Verification
 
 - 回帰テスト計画: `docs/implementation/CueScore_App_Store_v1.0_RC_Regression_Test_Plan_2026-08-09.md`
 - Service Workerの現行2.0系版番号にテスト期待値を統一。
-- 自動テスト14件の全成功をRC整合変更の必須条件とする。
+- 自動テスト117件の全成功（失敗0、スキップ0）をFinal RC整合変更の必須条件とする。
 
 ## サンプルデータ v3.1（2026年8月11日）
 
