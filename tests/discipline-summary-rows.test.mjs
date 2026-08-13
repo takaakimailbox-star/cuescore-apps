@@ -9,11 +9,11 @@ assert.doesNotMatch(html,/const WALNUT = "#6f3214"/);
 
 assert.match(html,/disciplineV4==="rotation" \? \[\s*shotRowV4,highRunRowV4,foulRowV4/);
 assert.match(html,/disciplineV4==="straightPool" \? \[\s*averageRowV4,highRunRowV4,foulRowV4/);
-assert.match(html,/disciplineV4==="jpa9" \? \[\s*averageRowV4,highRunRowV4,foulRowV4/);
+assert.match(html,/disciplineV4==="jpa9" \? \[\s*inningsRowV4,safetyRowV4,averageRowV4,highRunRowV4,foulRowV4/);
 assert.match(html,/\] : \[inningsRowV4,highRunRowV4,averageRowV4\];/);
 assert.match(html,/completedTurns:Number\(stats\.completedTurns\?\.\[1\]\?\?stats\.turnCount\?\.\[1\]\?\?0\)/);
 assert.match(html,/function inningsCountNumberV1\(record,player\)/);
 assert.match(html,/const storedAverage=Number\(record\?\.players\?\.\[player\]\?\.average\)/);
-assert.match(html,/const jpaResultRowsV1=disciplineV4==="jpa9"/);
+assert.doesNotMatch(html,/const jpaResultRowsV1=/);
 
 console.log("Discipline-specific match summary checks passed.");

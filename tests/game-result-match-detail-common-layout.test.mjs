@@ -15,16 +15,21 @@ test("rack games share shoot, run-out and foul labels",()=>{
   assert.match(html,/\["9ball","10ball"\]\.includes\(disciplineV4\) \? \[\s*shotRowV4,\s*\["マス割"[\s\S]*?foulRowV4/);
 });
 
-test("Rotation, JPA and Straight Pool share their three adopted analysis metrics",()=>{
+test("Rotation, JPA and Straight Pool use their adopted metrics",()=>{
   assert.match(html,/disciplineV4==="rotation" \? \[\s*shotRowV4,highRunRowV4,foulRowV4/);
   assert.match(html,/disciplineV4==="straightPool" \? \[\s*averageRowV4,highRunRowV4,foulRowV4/);
-  assert.match(html,/disciplineV4==="jpa9" \? \[\s*averageRowV4,highRunRowV4,foulRowV4/);
+  assert.match(html,/disciplineV4==="jpa9" \? \[\s*inningsRowV4,safetyRowV4,averageRowV4,highRunRowV4,foulRowV4/);
 });
 
-test("JPA result facts and analysis are rendered in both modes",()=>{
-  for(const label of ["SL","Race／先取点","最終取得点","マッチポイント","イニング","セーフティ","試合結果情報","分析情報"]){
+test("JPA result facts remain above one five-row metrics card",()=>{
+  for(const label of ["SL","Race／先取点","マッチポイント","イニング","セーフティ","アベレージ","ハイラン","ファール"]){
     assert.ok(html.includes(label),`missing JPA label: ${label}`);
   }
+  assert.match(html,/match-detail-result-name-v2[^`]*\$\{disciplineV4==="jpa9"\?`<small>SL/);
+  assert.match(html,/disciplineV4==="jpa9" \? \[`Race／先取点/);
+  assert.doesNotMatch(html,/const jpaResultRowsV1=/);
+  assert.doesNotMatch(html,/>試合結果情報</);
+  assert.doesNotMatch(html,/>分析情報</);
   assert.match(html,/jpa9MatchPointsForPlayersV1\(winner,record\.players,record\?\.jpa9\?\.skillLevels\)/);
 });
 
@@ -47,7 +52,7 @@ test("result mode has no header close/back button and remains width-safe",()=>{
 
 test("PWA cache and document script versions stay synchronized",()=>{
   const sw=readFileSync(new URL("../sw.js",import.meta.url),"utf8");
-  assert.match(sw,/APP_VERSION = "2\.0-result-detail-common-layout-v1"/);
-  assert.match(sw,/demo-data\.js\?v=2\.0-result-detail-common-layout-v1/);
-  assert.match(html,/demo-data\.js\?v=2\.0-result-detail-common-layout-v1/);
+  assert.match(sw,/APP_VERSION = "2\.0-jpa9-result-metrics-refinement-v1"/);
+  assert.match(sw,/demo-data\.js\?v=2\.0-jpa9-result-metrics-refinement-v1/);
+  assert.match(html,/demo-data\.js\?v=2\.0-jpa9-result-metrics-refinement-v1/);
 });

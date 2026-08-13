@@ -13,24 +13,26 @@ test("Match Detail uses the adopted discipline-specific metrics",()=>{
   assert.match(html,/\["9ball","10ball"\]\.includes\(disciplineV4\) \? \[\s*shotRowV4,\s*\["マス割".*foulRowV4/s);
   assert.match(html,/disciplineV4==="rotation" \? \[\s*shotRowV4,highRunRowV4,foulRowV4/);
   assert.match(html,/disciplineV4==="straightPool" \? \[\s*averageRowV4,highRunRowV4,foulRowV4/);
-  assert.match(html,/disciplineV4==="jpa9" \? \[\s*averageRowV4,highRunRowV4,foulRowV4/);
+  assert.match(html,/disciplineV4==="jpa9" \? \[\s*inningsRowV4,safetyRowV4,averageRowV4,highRunRowV4,foulRowV4/);
   assert.match(html,/\] : \[inningsRowV4,highRunRowV4,averageRowV4\];/);
 });
 
-test("JPA Match Detail separates result facts from analysis without schema changes",()=>{
-  for(const label of ["SL","Race／先取点","最終取得点","マッチポイント","イニング","セーフティ","試合結果情報","分析情報"]){
-    assert.ok(html.includes(label),`missing JPA Match Detail label: ${label}`);
-  }
-  assert.match(html,/const jpaResultRowsV1=disciplineV4==="jpa9"/);
+test("JPA upper result facts and one metrics card avoid duplicate rows without schema changes",()=>{
+  assert.match(html,/match-detail-result-name-v2[^`]*\$\{disciplineV4==="jpa9"\?`<small>SL/);
+  assert.match(html,/disciplineV4==="jpa9" \? \[`Race／先取点/);
+  assert.match(html,/disciplineV4==="jpa9" \? \[\s*inningsRowV4,safetyRowV4,averageRowV4,highRunRowV4,foulRowV4/);
+  assert.doesNotMatch(html,/const jpaResultRowsV1=/);
+  assert.doesNotMatch(html,/>試合結果情報</);
+  assert.doesNotMatch(html,/>分析情報</);
   assert.match(html,/jpa9MatchPointsForPlayersV1\(winner,record\.players,record\?\.jpa9\?\.skillLevels\)/);
   assert.doesNotMatch(html,/recordSchemaVersion\s*:\s*[2-9][0-9]*/);
 });
 
 test("JPA Game Result retains SL, final points, match points and race context",()=>{
-  assert.match(html,/const skillLevel=isJPA9V1\(\)\?`<small>SL/);
-  assert.match(html,/const jpaMatchPoints=isJPA9V1\(\)\?jpa9MatchPointsForPlayersV1/);
-  assert.match(html,/official-result-score-v1/);
-  assert.match(html,/isJPA9V1\(\)\?`Race／先取点/);
+  assert.match(html,/match-detail-result-name-v2[^`]*\$\{disciplineV4==="jpa9"\?`<small>SL/);
+  assert.match(html,/const jpaMatchPointsV1=disciplineV4==="jpa9"/);
+  assert.match(html,/Number\(p1\.score\)\|\|0/);
+  assert.match(html,/disciplineV4==="jpa9" \? \[`Race／先取点/);
 });
 
 test("3C renders inning, high run and average without a foul metric",()=>{

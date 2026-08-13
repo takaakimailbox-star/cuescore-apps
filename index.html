@@ -8640,7 +8640,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-result-detail-common-layout-v1"></script>
+  <script src="./demo-data.js?v=2.0-jpa9-result-metrics-refinement-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -18776,7 +18776,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-result-detail-common-layout-v1";
+    const PWA_VERSION = "2.0-jpa9-result-metrics-refinement-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22381,6 +22381,7 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
     const averageRowV4=["アベレージ",averagePerInningV1(record,1),averagePerInningV1(record,2)];
     const foulRowV4=["ファール",Number.isFinite(Number(p1.fouls))?String(Number(p1.fouls)):"—",Number.isFinite(Number(p2.fouls))?String(Number(p2.fouls)):"—"];
     const inningsRowV4=["イニング",inningsCountV1(record,1),inningsCountV1(record,2)];
+    const safetyRowV4=["セーフティ",Number.isFinite(Number(p1.safety))?String(Number(p1.safety)):"—",Number.isFinite(Number(p2.safety))?String(Number(p2.safety)):"—"];
     const summaryRows=["9ball","10ball"].includes(disciplineV4) ? [
       shotRowV4,
       ["マス割",String(masuwariV4[1]),String(masuwariV4[2])],
@@ -22390,23 +22391,15 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
     ] : disciplineV4==="straightPool" ? [
       averageRowV4,highRunRowV4,foulRowV4
     ] : disciplineV4==="jpa9" ? [
-      averageRowV4,highRunRowV4,foulRowV4
+      inningsRowV4,safetyRowV4,averageRowV4,highRunRowV4,foulRowV4
     ] : [inningsRowV4,highRunRowV4,averageRowV4];
-    const jpaResultRowsV1=disciplineV4==="jpa9" ? [
-      ["SL",Number.isFinite(Number(p1.skillLevel))?String(Number(p1.skillLevel)):"—",Number.isFinite(Number(p2.skillLevel))?String(Number(p2.skillLevel)):"—"],
-      ["Race／先取点",goal1?String(goal1):"—",goal2?String(goal2):"—"],
-      ["最終取得点",String(Number(p1.score)||0),String(Number(p2.score)||0)],
-      ["マッチポイント",jpaMatchPointsV1?String(jpaMatchPointsV1[1]):"—",jpaMatchPointsV1?String(jpaMatchPointsV1[2]):"—"],
-      ["イニング",inningsCountV1(record,1),inningsCountV1(record,2)],
-      ["セーフティ",Number.isFinite(Number(p1.safety))?String(Number(p1.safety)):"—",Number.isFinite(Number(p2.safety))?String(Number(p2.safety)):"—"]
-    ] : [];
     const chart=chartSvgV1(record,winner);
     const history=resultMode?"":gameHistoryV1(record);
     const completedRackCount=(Number(p1.score)||0)+(Number(p2.score)||0);
     const finalRackCount=completedRackCount||Math.max(0,(Number(record?.rack)||1)-1);
     const conditionItems=["9ball","10ball"].includes(disciplineV4)
       ? [`最終ラック数 ${finalRackCount||"—"}`,raceTag]
-      : disciplineV4==="jpa9" ? []
+      : disciplineV4==="jpa9" ? [`Race／先取点 ${goal1||"—"} / ${goal2||"—"}`]
       : disciplineV4==="threeCushion"
         ? [`持ち点 ${goal1||"—"} / ${goal2||"—"}`]
         : [`目標点 ${goal1||goal2||"—"}${goal1&&goal2&&goal1!==goal2?` / ${goal2}`:""}`];
@@ -22427,18 +22420,16 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
           </div>
           <img class="match-detail-game-icon-v4" src="${disciplineDefV4.asset}" alt="ゲーム種目">
           <div class="match-detail-result-line-v2 ${disciplineV4==="jpa9"?"has-jpa-match-points-v3":""}">
-            <span class="match-detail-result-player-v3"><img src="${detailAvatarV3(p1)}" alt="${esc(p1.name||"Player1")}のプロフィール画像"><span class="match-detail-result-name-v2">${esc(p1.name||"Player1")}</span></span>
+            <span class="match-detail-result-player-v3"><img src="${detailAvatarV3(p1)}" alt="${esc(p1.name||"Player1")}のプロフィール画像"><span class="match-detail-result-name-v2">${esc(p1.name||"Player1")}${disciplineV4==="jpa9"?`<small>SL ${Number.isFinite(Number(p1.skillLevel))?Number(p1.skillLevel):"—"}</small>`:""}</span></span>
             <strong class="${winner===1?"winner":winner===2?"loser":""}">${Number(p1.score)||0}</strong>
             <span>${disciplineV4==="jpa9"?`<span class="match-detail-match-points-v3 ${jpaMatchPointsV1?"":"is-unavailable"}" aria-label="${jpaMatchPointsV1?`マッチポイント ${jpaMatchPointsV1[1]} 対 ${jpaMatchPointsV1[2]}`:"マッチポイント 算出不可"}">${jpaMatchPointValueV3}</span>`:"−"}</span>
             <strong class="${winner===2?"winner":winner===1?"loser":""}">${Number(p2.score)||0}</strong>
-            <span class="match-detail-result-player-v3"><img src="${detailAvatarV3(p2)}" alt="${esc(p2.name||"Player2")}のプロフィール画像"><span class="match-detail-result-name-v2">${esc(p2.name||"Player2")}</span></span>
+            <span class="match-detail-result-player-v3"><img src="${detailAvatarV3(p2)}" alt="${esc(p2.name||"Player2")}のプロフィール画像"><span class="match-detail-result-name-v2">${esc(p2.name||"Player2")}${disciplineV4==="jpa9"?`<small>SL ${Number.isFinite(Number(p2.skillLevel))?Number(p2.skillLevel):"—"}</small>`:""}</span></span>
           </div>
           ${jpaMatchPointHtmlV1}
           ${conditionItems.length?`<div class="match-detail-conditions-v5">${conditionItems.filter(Boolean).map(item=>`<span class="match-detail-race-v2">${esc(item)}</span>`).join("")}</div>`:""}
-          ${disciplineV4==="jpa9"?`<h2 class="match-detail-section-title-v1">試合結果情報</h2><div class="match-detail-jpa-result-v1">${jpaResultRowsV1.map(([label,left,right])=>`<div class="match-detail-summary-row-v1"><strong>${esc(left)}</strong><span>${esc(label)}</span><strong>${esc(right)}</strong></div>`).join("")}</div>`:""}
         </section>
         <section class="match-detail-card-v1 match-detail-summary-v1">
-          ${disciplineV4==="jpa9"?'<h2 class="match-detail-section-title-v1">分析情報</h2>':""}
           ${summaryRows.map(([label,left,right])=>`<div class="match-detail-summary-row-v1"><strong class="${winner===1?"winner":""}">${esc(left)}</strong><span>${esc(label)}</span><strong class="${winner===2?"winner":""}">${esc(right)}</strong></div>`).join("")}
         </section>
         ${chart?`<section class="match-detail-card-v1 match-detail-chart-v1"><h2>スコア推移</h2><div class="match-detail-legend-v1"><span class="score-progress-legend-p1-v1" style="--legend:${winner===1?WINNER_INK:"#30302e"}">${esc(p1.name||"Player1")}</span><span class="score-progress-legend-p2-v1" style="--legend:${winner===2?WINNER_INK:"#30302e"}">${esc(p2.name||"Player2")}</span></div>${chart}</section>`:""}
@@ -23286,6 +23277,7 @@ body.match-detail-visible-v1{overflow:hidden!important}
   line-height:1.2;
   font-weight:720;
 }
+.match-detail-result-name-v2 small{display:block;margin-top:2px;color:#777775;font-size:11px;font-weight:650;line-height:1.1}
 .match-detail-result-player-v3{
   min-width:0;display:flex;align-items:center;flex-direction:column;gap:4px;
 }

@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## v1.0 Final RC：JPA 9-Ball Result / Detail Metrics整理（2026年8月13日）
+
+- JPA 9-Ballの上部にPlayer名、Avatar、SL、Race／先取点、最終取得点、マッチポイントを集約した。
+- 下部は「イニング／セーフティ／アベレージ／ハイラン／ファール」の5行をこの順で表示する1枚のMetricsカードとした。
+- 下部からSL、Race／先取点、最終取得点、マッチポイントの重複表示と、「試合結果情報」「分析情報」の見出し分離を廃止した。
+- Decision 021の共通renderer、Game Result／Match Detailの下部差分、JPAスコア推移、マッチポイント計算、保存互換性は維持する。他5競技は変更しない。
+- 正式決定：`docs/official/18_CueScore_v1.0FinalRC_JPA9_Result_Detail_Metrics_Refinement_Decision.md`。後継仕様：`docs/official/19_CueScore_v1.0FinalRC_JPA9_Result_Detail_Metrics_Refinement_Spec.md`。
+
 ## v1.0 Final RC：Game Result / Match Detail共通レイアウト（2026年8月13日）
 
 - Game ResultとMatch Detailは`openMatchDetailV1`を共通rendererとして使用し、日時・種目、Player／Avatar／最終スコア、競技条件、Metrics、スコア推移まで同じ情報構造・順序・デザインとした。

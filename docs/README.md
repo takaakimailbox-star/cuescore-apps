@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v1.5_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v1.6_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -26,8 +26,8 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v1.5 is the current official release and successor
-to v1.4. Earlier versions remain in the official directory as preceding releases.
+Official Design Decision Log v1.6 is the current official release and successor
+to v1.5. Earlier versions remain in the official directory as preceding releases.
 
 Adopted RC decision addenda that supplement the latest Decision Log:
 
@@ -41,6 +41,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/15_CueScore_v1.0FinalRC_GameResult_MatchDetail_6Disciplines_Spec.md`
 - `official/16_CueScore_v1.0FinalRC_GameResult_MatchDetail_CommonLayout_Decision.md`
 - `official/17_CueScore_v1.0FinalRC_GameResult_MatchDetail_CommonLayout_Spec.md`
+- `official/18_CueScore_v1.0FinalRC_JPA9_Result_Detail_Metrics_Refinement_Decision.md`
+- `official/19_CueScore_v1.0FinalRC_JPA9_Result_Detail_Metrics_Refinement_Spec.md`
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and

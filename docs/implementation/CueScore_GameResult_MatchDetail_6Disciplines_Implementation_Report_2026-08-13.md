@@ -5,6 +5,8 @@
 
 ## 変更概要
 
+- JPA 9-Ballは上部にSL、Race／先取点、最終取得点、マッチポイントを集約し、下部をイニング／セーフティ／アベレージ／ハイラン／ファールの1カードへ整理した。
+- JPA下部から重複するSL、Race／先取点、最終取得点、マッチポイントと、「試合結果情報」「分析情報」の見出し分離を削除した。
 - Game Resultは保存済みrecord IDを`openMatchResultDetailV5`へ渡し、Match Detailと同じ`openMatchDetailV1`で描画する構造へ変更した。
 - 両画面は日時・種目、Player／Avatar／最終スコア、競技条件、競技別Metrics、スコア推移まで同一表示となる。
 - Game Resultではゲーム履歴と削除UIを生成せず、終了後3アクションを表示する。Match Detailはゲーム履歴、削除UI、削除説明文を維持する。
@@ -21,14 +23,14 @@
 
 - 9-Ball／10-Ball: シュート率／マス割／ファール。
 - Rotation: シュート率／ハイラン／ファール。
-- JPA 9-Ball: SL／Race・先取点／最終取得点／マッチポイント／イニング／セーフティ、およびアベレージ／ハイラン／ファール。
+- JPA 9-Ball: 上部＝SL／Race・先取点／最終取得点／マッチポイント。Metrics＝イニング／セーフティ／アベレージ／ハイラン／ファール。
 - Straight Pool（14.1）: アベレージ／ハイラン／ファール。
 - Three Cushion（3C）: イニング／ハイラン／アベレージ。ファールなし。
 
 ## 文書更新
 
-- Formal Decision 016と後継仕様017を追加。
-- Official Design Decision Log v1.5へDecision 021を追加。Decision 020は削除せず、後続上書き関係を記録。
+- Formal Decision 018と後継仕様019を追加。
+- Official Design Decision Log v1.6へDecision 022を追加。Decision 020／021は削除せず、後続上書き関係を記録。
 - `docs/README.md`と`docs/CURRENT_STATE.md`を更新。
 
 ## テスト
