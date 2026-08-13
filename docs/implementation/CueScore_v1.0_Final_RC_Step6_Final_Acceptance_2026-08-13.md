@@ -13,7 +13,7 @@
 - 全自動テストは117件成功／失敗0／スキップ0。390 × 844pxブラウザでSettingsカード表示、データ削除説明、横スクロールなしを再確認し、作成確認文と作成完了通知はソースおよび回帰テストで確認した。
 - 再受入れ集計はBlocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0。FA-STEP6-001は解消済み。
 - Step 6 Gate 1、6、9、10、13、14への回帰は確認されず、その他Gateに関係する競技・保存・データ処理は変更していない。
-- Product Owner最終確認前の判定：`PWA Final Acceptance: PASS候補`。
+- Product Owner承認後の最終判定：`PWA Final Acceptance: PASS`。
 
 ## 検証環境
 
@@ -55,11 +55,11 @@
 - Backup schema・ファイル名互換、Replace、Merge、重複抑止、不正JSON、形式不一致、QuotaExceeded、メモリスナップショット、書込み後再読込、Rollback、Rollback再検証を現行実装と自動テストで確認した。
 - 実iPhoneのファイル保存／ファイル選択UIは確認待ち。
 
-### Gate 6：通常データ／サンプルデータ分離 — PASS（Minor 1件）
+### Gate 6：通常データ／サンプルデータ分離 — PASS
 
 - `demo-data.js`の専用キー解決、通常キーとの分離、10プレーヤー・6競技各20試合・合計120試合・3,523イベント、作成／初期化／削除経路を確認した。
 - Settingsに「準備する」「サンプルを見る」「通常データへ戻る」「初期状態に戻す」「削除」が存在する。
-- 名称上のMinorとして、内部名称`Official Demo Data`がSettingsカードの利用者向けテキストにも表示される。詳細は不具合一覧に記録する。
+- 初回監査で検出した名称上のMinorはFA-STEP6-001で解消済み。内部名称`Official Demo Data`は利用者向けテキストへ表示されない。
 
 ### Gate 7：Player Final Acceptance — PASS
 
@@ -100,22 +100,24 @@
 - 確認画面で横スクロール、主要ボタン欠け、閉じられないResult、Legal長文の横はみ出しは確認されなかった。
 - safe-areaやSafari UIとの干渉は実iPhone確認待ち。
 
-### Gate 14：公開前残存文字列監査 — PASS（Minor 1件）
+### Gate 14：公開前残存文字列監査 — PASS
 
 - `TODO`、`FIXME`、`prototype`、`development`、`debug`、`temporary`、`RC`、`demo`、`Official Demo Data`、`Cloud Sync`、`CSV`、`公開前`、`未確定`をrepo全体検索した。
 - TODO／公開前／未確定はテスト、CURRENT_STATE、過去Implementation Report、提出前に本当に未確定な事項。RC、prototype、development、temporaryは履歴資料、内部コメント、識別子。CSVとCloud SyncはLater説明、hidden／disabled UI、将来用コードであり一律削除対象ではない。
-- 公開UI上の内部名称`Official Demo Data`だけをMinorとして記録した。
+- 初回監査で公開UI上に確認した内部名称`Official Demo Data`はFA-STEP6-001で解消済み。内部コメント、技術資料、歴史資料の内部名称は意図どおり維持した。
 
 ## 発見不具合
 
-### FA-STEP6-001 — Settingsに内部名称が利用者向け表示される
+### FA-STEP6-001 — Resolved
 
-- Severity: Minor
+- 初回Severity: Minor
+- 最終状態: Resolved
 - 再現手順: Home → Settings → サンプルデータ。
 - 期待結果: Step 6定義どおり製品表示は「サンプルデータ」、`Official Demo Data`は内部名称としてのみ扱う。
-- 実際結果: セクション名・状態は「サンプルデータ」だが、カード見出し、作成確認文、データ削除説明に`Official Demo Data`が表示される。
+- 初回結果: セクション名・状態は「サンプルデータ」だが、カード見出し、作成確認文、データ削除説明に`Official Demo Data`が表示された。
+- 修正後結果: カード見出し、アクセシブル名、作成確認文、作成完了通知、データ削除説明を「サンプルデータ」へ統一し、390 × 844pxで可視UIに`Official Demo Data`が残らないことを確認した。
 - 影響範囲: Settingsの名称整合のみ。試合、保存、通常／サンプル分離、Backup / Restoreには影響しない。
-- 推奨修正: Product Owner承認後の独立した軽微修正Stepで、利用者向け3箇所を「サンプルデータ」へ統一し、`aria-label`や内部識別子はアクセシビリティ要件とテストを確認して変更する。
+- 実施修正: 独立した軽微修正Stepで利用者向け表記を統一し、内部識別子、保存領域、変数名、データschema、内部ロジック、技術資料上の内部名称は変更していない。
 - 保存互換への影響: なし。
 - 修正リスク: 低。ただし既存の正式Regression Planのカード名記載とテスト期待値を同時に整合する必要がある。
 
@@ -124,7 +126,7 @@
 - Blocker: 0
 - Critical: 0
 - Major: 0
-- Minor: 1
+- Minor: 0
 - Cosmetic: 0
 
 ## 実機確認待ち
@@ -143,13 +145,13 @@
 
 ## Final Acceptance判定
 
-`PWA Final Acceptance: CONDITIONAL PASS`
+`PWA Final Acceptance: PASS`
 
-Blocker 0、Critical 0、Major 0、自動テスト全成功。残存は機能影響のない名称整合Minor 1件のみ。Step 6定義上、ネイティブ化を停止する条件には該当しない。
+Blocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0、自動テスト全成功。FA-STEP6-001は解消済みで、Step 6 Gate 1〜14を覆す回帰は確認されなかった。
 
 ## ネイティブ化可否
 
-Product OwnerがFA-STEP6-001を受容するか、別の軽微修正Stepとして扱うかを決定した後、ネイティブ化へ進行可能。実iPhone確認待ち項目をネイティブ／提出ビルドの確認完了とみなしてはならない。
+PWA側Acceptanceとしてネイティブ化へ進行可能。実iPhone確認待ち項目をネイティブ／提出ビルドの確認完了とみなしてはならない。
 
 ## 変更範囲
 
