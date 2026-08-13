@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## v1.0 Final RC Step 6：ネイティブ化前Final Acceptance（2026年8月13日）
+
+- 基準main `554e137463279fb5041295a5840bbc5c331d6ddf`でGate 1〜14を再監査し、自動テスト117件成功／失敗0／スキップ0を確認した。
+- 390px幅ブラウザでHome、New Match、Settings、9-Ballの開始・進行・完了・Result・完了後Undo・再進行・保存・History・再読込・Analytics、Legal / Supportを確認した。Service Worker取得後にローカルサーバーを停止し、Home、10-Ball試合設定、History、Supportがキャッシュから表示できることも確認した。
+- 初回監査では、Settingsのサンプルデータカードに内部名称`Official Demo Data`が利用者向けテキストとして表示される名称不一致をMinor 1件として記録した。Product Ownerは受容せず、独立した軽微修正Stepでカード見出し・確認文・完了通知・データ削除説明を「サンプルデータ」へ統一した。内部識別子、保存領域名、変数名、技術資料上の内部名称は変更していない。
+- 軽微修正後の再検証ではBlocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0、自動テスト117件成功／失敗0／スキップ0。Step 6への回帰は確認されず、Product Owner承認により`PWA Final Acceptance: PASS`と確定した。PWA側Acceptanceとしてネイティブ化へ進行可能だが、Release確定、App Store提出、ネイティブ化自体は開始していない。
+- Home Screen PWA、iOS Safari固有挙動、safe-area、写真選択、Backupファイル保存／選択、mailto、実機オフライン起動、長時間試合、画面回転抑止、実機6競技完走はProduct Owner実機確認待ち。
+- 詳細記録：`docs/implementation/CueScore_v1.0_Final_RC_Step6_Final_Acceptance_2026-08-13.md`。
+
 ## v1.0 Final RC：9-Ball / 10-Ball マス割判定修正（2026年8月13日）
 
 - マス割を「ブレーカーが相手へ一度も手番を渡さず、ファールせず、ブレイク入球を含む全対象球をテーブル上からなくしてラックに勝利した場合のみ1回」と正式確定した。
