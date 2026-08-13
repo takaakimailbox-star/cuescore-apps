@@ -8640,7 +8640,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-restore-quota-safety-v1"></script>
+  <script src="./demo-data.js?v=2.0-step4-legal-support-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -18869,7 +18869,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-restore-quota-safety-v1";
+    const PWA_VERSION = "2.0-step4-legal-support-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -25169,10 +25169,13 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     if (nav === "player") document.getElementById("playerManagementBtn")?.click();
   });
   renderCloudState();
-  if (sessionStorage.getItem("cuescore.returnToSettings.v1") === "1") {
+  const restoreSettingsAfterLegalV160 = () => {
+    if (sessionStorage.getItem("cuescore.returnToSettings.v1") !== "1") return;
     sessionStorage.removeItem("cuescore.returnToSettings.v1");
     requestAnimationFrame(() => document.getElementById("settingsBtn")?.click());
-  }
+  };
+  restoreSettingsAfterLegalV160();
+  window.addEventListener("pageshow", restoreSettingsAfterLegalV160);
 })();
 </script>
 <style>
@@ -25435,7 +25438,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     player:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25"/><path d="M5.5 20c.55-4.15 2.7-6.25 6.5-6.25s5.95 2.1 6.5 6.25"/></svg>',
     gear:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.2 13.6a7.8 7.8 0 0 0 0-3.2l2-1.55-2-3.45-2.5 1a8 8 0 0 0-2.75-1.6L13.6 2h-4l-.35 2.8A8 8 0 0 0 6.5 6.4L4 5.4 2 8.85l2 1.55a7.8 7.8 0 0 0 0 3.2l-2 1.55 2 3.45 2.5-1a8 8 0 0 0 2.75-1.6l2.5 1 2-3.45Z"/></svg>'
   };
-  const header = (view, back, title) => `<header class="settings-suite-header-v2"><button class="settings-suite-back-v2" type="button" data-suite-back="${back}">${icon.back}<span>${back === "settings" ? "設定" : "クラウド同期"}</span></button><h1>${title}</h1><span class="settings-suite-header-spacer-v2"></span></header>`;
+  const header = (view, back, title) => `<header class="settings-suite-header-v2"><button class="settings-suite-back-v2" type="button" data-suite-back="${back}" aria-label="${back === "settings" ? "設定へ戻る" : "クラウド同期へ戻る"}">${icon.back}</button><h1>${title}</h1><span class="settings-suite-header-spacer-v2"></span></header>`;
   const root = document.createElement("div");
   root.className = "settings-suite-shell-v2";
   root.innerHTML = `

@@ -221,6 +221,16 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - 整合確認結果を `docs/implementation/CueScore_App_Store_v1.0_Consistency_Review_2026-08-09.md` に記録。
 - 現段階は公式文書のGitHub反映と整合確認まで。ネイティブ化、TestFlight、App Store Connect登録、本審査提出には未着手。
 
+## App Store v1.0 Final RC Step 4：公開前Legal / Support最終整備（2026年8月13日）
+
+- Privacy Policy、Terms of Use、Supportの正式公開URLを`https://takaakimailbox-star.github.io/cuescore-apps/`配下の各公開ページへ確定した。
+- 公開問い合わせ方法はメール、統一表示は`cuescore.apps@gmail.com`とし、`mailto:cuescore.apps@gmail.com`からメール作成へ進める。問い合わせフォームはVersion 1.0では非採用。
+- 3ページはOfficial Markdownを正本としてfetchし、raw HTMLを許可しないDOM生成rendererで見出し、段落、箇条書き、太字、インラインコード、区切り線、リンクを通常のWeb文書として表示する。Markdown生表示は廃止した。
+- Terms、Privacy、Supportから公開前TODOを削除し、正式Support URLと問い合わせ先へ到達できる状態にした。
+- Terms、Privacy、Supportは同じ戻るUIと相互ナビゲーションを使用する。Settings経由は既存履歴でSettingsへ戻り、直接アクセスまたは履歴不成立時はCueScore Appsホームへ戻る。
+- Settings子画面の戻るボタンは視覚上の矢印だけを表示し、「設定」「クラウド同期」の文字を表示しない。戻り先を示す`aria-label`は維持する。
+- App Store提出、Release確定、スコアリング、保存schema、Backup / Restore等は本Stepでは変更していない。
+
 ## v1.0 Release Scope
 
 - 6競技

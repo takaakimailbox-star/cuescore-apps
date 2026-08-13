@@ -6,14 +6,18 @@ const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const sw=fs.readFileSync(new URL("../sw.js",import.meta.url),"utf8");
 const terms=fs.readFileSync(new URL("../terms.html",import.meta.url),"utf8");
 const privacy=fs.readFileSync(new URL("../privacy.html",import.meta.url),"utf8");
+const support=fs.readFileSync(new URL("../support.html",import.meta.url),"utf8");
 const script=fs.readFileSync(new URL("../official-document.js",import.meta.url),"utf8");
 const styles=fs.readFileSync(new URL("../official-pages.css",import.meta.url),"utf8");
+const supportMarkdown=fs.readFileSync(new URL("../docs/official/app-store-v1.0/public/CueScore_Support_v1.0_Official.md",import.meta.url),"utf8");
+const privacyMarkdown=fs.readFileSync(new URL("../docs/official/app-store-v1.0/public/CueScore_Privacy_Policy_v1.0_Official.md",import.meta.url),"utf8");
+const termsMarkdown=fs.readFileSync(new URL("../docs/official/app-store-v1.0/public/CueScore_Terms_of_Use_v1.0_Official.md",import.meta.url),"utf8");
 
 test("Settings connects Terms and Privacy without changing the footer layout",()=>{
   assert.match(html,/class="settings-info-link-v1" type="button" data-settings-legal="terms\.html"><span>利用規約/);
   assert.match(html,/class="settings-info-link-v1" type="button" data-settings-legal="privacy\.html"><span>プライバシーポリシー/);
   assert.match(html,/const legalPage = event\.target\.closest\("\[data-settings-legal\]"\)[\s\S]*?sessionStorage\.setItem\("cuescore\.returnToSettings\.v1","1"\)[\s\S]*?window\.location\.assign\(new URL\(legalPage, window\.location\.href\)\.href\)/);
-  assert.match(html,/sessionStorage\.getItem\("cuescore\.returnToSettings\.v1"\) === "1"[\s\S]*?sessionStorage\.removeItem[\s\S]*?document\.getElementById\("settingsBtn"\)\?\.click\(\)/);
+  assert.match(html,/const restoreSettingsAfterLegalV160 = \(\) => \{[\s\S]*?sessionStorage\.getItem\("cuescore\.returnToSettings\.v1"\) !== "1"[\s\S]*?sessionStorage\.removeItem[\s\S]*?document\.getElementById\("settingsBtn"\)\?\.click\(\)[\s\S]*?window\.addEventListener\("pageshow", restoreSettingsAfterLegalV160\)/);
 });
 
 test("License remains explicitly unavailable until an official source exists",()=>{
@@ -21,22 +25,50 @@ test("License remains explicitly unavailable until an official source exists",()
   assert.doesNotMatch(html,/data-settings-legal="license/);
 });
 
-test("Terms and Privacy official sources are cached for offline navigation",()=>{
+test("Terms, Privacy and Support official sources are cached for offline navigation",()=>{
   assert.match(terms,/CueScore_Terms_of_Use_v1\.0_Official\.md/);
   assert.match(privacy,/CueScore_Privacy_Policy_v1\.0_Official\.md/);
-  for(const path of ["./terms.html","./privacy.html","./official-document.js","./official-pages.css"])assert.ok(sw.includes(`"${path}"`));
+  assert.match(support,/CueScore_Support_v1\.0_Official\.md/);
+  for(const path of ["./terms.html","./privacy.html","./support.html","./official-document.js","./official-pages.css"])assert.ok(sw.includes(`"${path}"`));
   assert.match(sw,/cache\.put\(event\.request, response\.clone\(\)\)/);
   assert.doesNotMatch(sw,/cache\.put\("\.\/index\.html", response\.clone\(\)\)/);
 });
 
-test("Terms and Privacy share an accessible in-page Back control",()=>{
-  for(const page of [terms,privacy]){
+test("Terms, Privacy and Support share an accessible in-page Back control",()=>{
+  for(const page of [terms,privacy,support]){
     assert.match(page,/<button class="legal-back-v1" type="button" data-legal-back aria-label="CueScore Appsへ戻る">/);
     assert.match(page,/<path d="m15 4-8 8 8 8"\/>/);
   }
   assert.match(styles,/\.legal-back-v1\{[^}]*min-width:48px;min-height:48px/);
   assert.match(styles,/padding-top:env\(safe-area-inset-top\)/);
   assert.match(styles,/\.site-header\{position:sticky;top:0/);
+});
+
+test("Official Markdown is rendered as safe semantic DOM instead of raw Markdown text",()=>{
+  for(const page of [terms,privacy,support]){
+    assert.match(page,/<article class="official-document-v2" data-document/);
+    assert.doesNotMatch(page,/<pre data-document>/);
+    for(const destination of ["privacy.html","terms.html","support.html"])assert.ok(page.includes(`./${destination}`));
+  }
+  assert.match(script,/fetch\(source\)[\s\S]*?renderOfficialMarkdown\(text,output\)/);
+  for(const tag of ["h${heading[1].length}","ul","li","strong","code","a","hr"])assert.ok(script.includes(`document.createElement(${tag.startsWith("h$")?"`":"\""}${tag}${tag.startsWith("h$")?"`":"\""})`));
+  assert.match(script,/\["http:","https:","mailto:"\]\.includes\(url\.protocol\)/);
+  assert.doesNotMatch(script,/innerHTML\s*=/);
+  assert.match(styles,/\.official-document-v2\{min-width:0;overflow-wrap:anywhere/);
+});
+
+test("Published support contact exists and pre-release TODO text is absent",()=>{
+  assert.match(supportMarkdown,/\[cuescore\.apps@gmail\.com\]\(mailto:cuescore\.apps@gmail\.com\)/);
+  assert.match(supportMarkdown,/https:\/\/takaakimailbox-star\.github\.io\/cuescore-apps\/support\.html/);
+  const published=[supportMarkdown,privacyMarkdown,termsMarkdown].join("\n");
+  for(const todo of ["公開前必須設定","公開前に必ず","［公開URLを設定］","［公開用メールアドレスを設定］","［必要に応じて設定］"]){
+    assert.doesNotMatch(published,new RegExp(todo));
+  }
+});
+
+test("Settings child Back controls show only the arrow and retain destination labels",()=>{
+  assert.match(html,/data-suite-back="\$\{back\}" aria-label="\$\{back === "settings" \? "設定へ戻る" : "クラウド同期へ戻る"\}">\$\{icon\.back\}<\/button>/);
+  assert.doesNotMatch(html,/\$\{icon\.back\}<span>\$\{back === "settings"/);
 });
 
 test("legal Back returns to Settings history and safely falls back to Home",()=>{
