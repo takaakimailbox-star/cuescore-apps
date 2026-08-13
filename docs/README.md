@@ -21,7 +21,7 @@ The App Store v1.0 official release package is managed separately under
 
 - `public/`: Privacy Policy, Terms of Use, and Support source documents.
 - `submission/`: App Store Description, Keywords, Review Notes, and Release Notes.
-- Unconfirmed URLs and contact details remain unset and must not be inferred.
+- Privacy Policy、Terms of Use、Supportの正式URLと公開メールは2026-08-13に確定済み。App Review連絡担当者情報と実提出ビルドでの最終一致は未確認であり、推測で完了扱いにしない。
 
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.

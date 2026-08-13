@@ -19,13 +19,14 @@ CueScore Apps の初回正式リリース。
 - Undo
 - 試合履歴
 - 統計・分析
-- Official Demo Data
+- サンプルデータ
 - オフライン利用
 - バックアップ／復元
 
 ### Deferred
 - CSV入出力
 - 自動クラウド同期
+- 試合共有（Match Sharing）
 
 ## App Store運用メモ
 
