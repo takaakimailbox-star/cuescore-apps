@@ -151,9 +151,25 @@
 
 Blocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0、自動テスト全成功。FA-STEP6-001は解消済みで、Step 6 Gate 1〜14を覆す回帰は確認されなかった。
 
+## FA-IPHONE-001：進行中試合の再起動復元（2026年8月14日）
+
+- iPhone Home Screen PWAで9-Ball進行中にアプリを完全終了すると、再起動後にHomeへ戻り、Player、Race、得点、手番、入力履歴を継続できない事象を実機確認した。
+- 原因は、進行中状態とUndoスナップショットがJavaScriptメモリにしか存在せず、永続キー、保存処理、起動時復元処理がなかったこと。9-Ball固有ではなく6競技共通で、通常データ／サンプルデータ双方に影響した。
+- Product Owner Decisionにより、進行中試合がある場合は再起動時に自動復帰する仕様と、完了試合recordおよびBackup JSONから独立した専用localStorageスナップショットをVersion 1.0へ追加することを承認した。
+- `cueScore.inProgressMatch.v1`を通常データ用キーとし、サンプルデータ中は既存の設定キーresolverにより`cuescore-demo.settings.cueScore.inProgressMatch.v1`へ分離する。既存データ移行は行わない。
+- Player、競技、Race／目標点／持ち点、得点、ラック、手番、ブレイク、イニング、ファール、入力履歴、競技固有状態、イベントログおよび直近50状態のUndoを、各確定操作後と`visibilitychange`／`pagehide`で同期保存する。
+- 試合完了・履歴保存時、Homeへ戻る明示破棄時、ブレイク入力からの明示中断時に専用スナップショットを削除する。不正・完了済み・未知競技のスナップショットは復帰せず削除する。
+- 9-Ballは異なるRace 2-3、Player名、ブレイク入力、入球、手番交代後にブラウザ再読込し、自動復帰後の表示・履歴一致とUndo成立を確認した。
+- 6競技共通の保存対象、復元対象、競技allowlist、通常／サンプル分離、完了／破棄cleanupを自動テストで固定した。全自動テストは122件成功／失敗0／スキップ0。
+- 完了試合record、Backup JSON、Player、History、Analyticsの保存形式、競技ルールは変更していない。Service Workerキャッシュ版のみ`2.0-fa-iphone-001-v1`へ同期した。
+- Severity最終判定は修正前Critical、コード修正後Resolved候補。実iPhoneでの再確認前は実機PASSとしない。
+- 現在状態：`FA-IPHONE-001: Code Fix Complete / iPhone Re-test Required`。
+
+このため、実iPhone再確認が完了するまでPWA Final Acceptanceは再確認待ちとし、App Store提出、Release確定、ネイティブ化へ進まない。
+
 ## ネイティブ化可否
 
-PWA側Acceptanceとしてネイティブ化へ進行可能。実iPhone確認待ち項目をネイティブ／提出ビルドの確認完了とみなしてはならない。
+FA-IPHONE-001のコード修正は完了したが、実iPhone再確認が終わるまではネイティブ化へ進行しない。実iPhone確認待ち項目をネイティブ／提出ビルドの確認完了とみなしてはならない。
 
 ## 変更範囲
 

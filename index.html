@@ -8640,7 +8640,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-step6-sample-data-label-v1"></script>
+  <script src="./demo-data.js?v=2.0-fa-iphone-001-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -11915,6 +11915,7 @@ let matchRecordsRawCacheV152 = null;
     currentGameStartedAt = null;
     currentGameRecordSaved = false;
     currentGameRecordIdV100 = null;
+    clearInProgressMatchV1();
     breakUndoRestoreV697 = null;
     rows = [];
     undoHistory = [];
@@ -12568,17 +12569,27 @@ let matchRecordsRawCacheV152 = null;
       rows:JSON.parse(JSON.stringify(rows)),
       rackEnded, foulLocked, forceNewRow, gameEnded, gameSetDismissed,
       reviewMode, nextBreakPlayer, currentGameRecordSaved, currentGameRecordIdV100, currentGameSessionIdV104,
+      currentGameStartedAt,
+      playerNames:{1:playerName(1),2:playerName(2)},
+      selectedRegisteredPlayer:{...selectedRegisteredPlayer},
+      currentMatchCategoryV38, currentMatchSeasonV38, recordingModeV611,
+      currentGameReflectionV840:JSON.parse(JSON.stringify(currentGameReflectionV840)),
+      currentPlayerReflectionsV841:JSON.parse(JSON.stringify(currentPlayerReflectionsV841)),
       analysisEventsV60: JSON.parse(JSON.stringify(analysisEventsV60)),
       analysisEventSequenceV60,
       commonEventsV7: JSON.parse(JSON.stringify(commonEventsV7)),
       commonEventSequenceV7,
+      commonEventJournalV72:JSON.parse(JSON.stringify(commonEventJournalV72)),
+      commonEventJournalSequenceV72, commonEventIdentitySequenceV72, undoOperationSequenceV72,
       pendingBreakPlayerV61, pendingBreakRackV61, pendingBreakResultV695, pendingBreakPushOutV695,
       pendingBreakBallsV696:[...pendingBreakBallsV696], pendingBreakNoInV702, pendingBreakPreFoulV1, pendingBreakScratchV696, pendingBreakIllegalV696,
       pendingSafetyV62: pendingSafetyV62 ? {...pendingSafetyV62} : null,
       pendingFoulV63: pendingFoulV63 ? {...pendingFoulV63} : null,
       turnLockReasonV62,
       pushOutStateV730: pushOutStateV730 ? JSON.parse(JSON.stringify(pushOutStateV730)) : null,
-      pushOutInputBallsV730:[...pushOutInputBallsV730], pushOutInputScratchV730
+      pushOutInputBallsV730:[...pushOutInputBallsV730], pushOutInputScratchV730,
+      breakUndoRestoreV697:breakUndoRestoreV697 ? JSON.parse(JSON.stringify(breakUndoRestoreV697)) : null,
+      pendingBreakStartsNextRackV1, rackBreakPromptQueuedV1
     };
   }
 
@@ -12622,6 +12633,13 @@ let matchRecordsRawCacheV152 = null;
     currentGameRecordSaved = Boolean(state.currentGameRecordSaved);
     currentGameRecordIdV100 = state.currentGameRecordIdV100 || null;
     currentGameSessionIdV104 = state.currentGameSessionIdV104 || currentGameSessionIdV104 || null;
+    currentGameStartedAt = state.currentGameStartedAt || currentGameStartedAt || null;
+    selectedRegisteredPlayer = state.selectedRegisteredPlayer ? {...state.selectedRegisteredPlayer} : {1:null,2:null};
+    currentMatchCategoryV38 = String(state.currentMatchCategoryV38 || "");
+    currentMatchSeasonV38 = String(state.currentMatchSeasonV38 || "");
+    recordingModeV611 = state.recordingModeV611 === "simple" ? "simple" : "detail";
+    currentGameReflectionV840 = state.currentGameReflectionV840 ? JSON.parse(JSON.stringify(state.currentGameReflectionV840)) : {mood:"",mental:[],technicalNote:"",nextFocus:"",freeMemo:""};
+    currentPlayerReflectionsV841 = state.currentPlayerReflectionsV841 ? JSON.parse(JSON.stringify(state.currentPlayerReflectionsV841)) : {1:{mood:"",mental:[],technicalNote:"",nextFocus:"",freeMemo:""},2:{mood:"",mental:[],technicalNote:"",nextFocus:"",freeMemo:""}};
     analysisEventsV60 = Array.isArray(state.analysisEventsV60)
       ? JSON.parse(JSON.stringify(state.analysisEventsV60))
       : [];
@@ -12630,6 +12648,10 @@ let matchRecordsRawCacheV152 = null;
       ? JSON.parse(JSON.stringify(state.commonEventsV7))
       : [];
     commonEventSequenceV7 = Number(state.commonEventSequenceV7) || commonEventsV7.length;
+    commonEventJournalV72 = Array.isArray(state.commonEventJournalV72) ? JSON.parse(JSON.stringify(state.commonEventJournalV72)) : [];
+    commonEventJournalSequenceV72 = Number(state.commonEventJournalSequenceV72) || commonEventJournalV72.length;
+    commonEventIdentitySequenceV72 = Number(state.commonEventIdentitySequenceV72) || commonEventSequenceV7;
+    undoOperationSequenceV72 = Number(state.undoOperationSequenceV72) || 0;
     pendingBreakPlayerV61 = state.pendingBreakPlayerV61 ?? null;
     pendingBreakRackV61 = state.pendingBreakRackV61 ?? null;
     pendingBreakResultV695 = state.pendingBreakResultV695 ?? null;
@@ -12646,7 +12668,91 @@ let matchRecordsRawCacheV152 = null;
     pushOutStateV730 = state.pushOutStateV730 ? JSON.parse(JSON.stringify(state.pushOutStateV730)) : null;
     pushOutInputBallsV730 = new Set(state.pushOutInputBallsV730 || []);
     pushOutInputScratchV730 = Boolean(state.pushOutInputScratchV730);
+    breakUndoRestoreV697 = state.breakUndoRestoreV697 ? JSON.parse(JSON.stringify(state.breakUndoRestoreV697)) : null;
+    pendingBreakStartsNextRackV1 = Boolean(state.pendingBreakStartsNextRackV1);
+    rackBreakPromptQueuedV1 = Boolean(state.rackBreakPromptQueuedV1);
     closeBreakResultPromptV61();
+  }
+
+  // FA-IPHONE-001: in-progress matches use an isolated, mode-aware snapshot.
+  // This key is intentionally outside completed match records and Backup JSON.
+  const IN_PROGRESS_MATCH_KEY_V1 = "cueScore.inProgressMatch.v1";
+  const IN_PROGRESS_MATCH_SCHEMA_V1 = 1;
+  const IN_PROGRESS_PERSISTED_UNDO_LIMIT_V1 = 50;
+  function inProgressMatchStorageKeyV1() {
+    return window.CueScoreDemoData?.resolveSettingKey(IN_PROGRESS_MATCH_KEY_V1) || IN_PROGRESS_MATCH_KEY_V1;
+  }
+  function clearInProgressMatchV1() {
+    try { localStorage.removeItem(inProgressMatchStorageKeyV1()); } catch (error) { console.error("CueScore in-progress cleanup failed", error); }
+  }
+  function persistInProgressMatchV1() {
+    if (!currentGameSessionIdV104 || gameEnded || currentGameRecordSaved || !app.classList.contains("pro-game-mode")) {
+      clearInProgressMatchV1();
+      return;
+    }
+    try {
+      const payload = {
+        schemaVersion:IN_PROGRESS_MATCH_SCHEMA_V1,
+        savedAt:new Date().toISOString(),
+        state:snapshot(),
+        // Keep recent Undo states without allowing a long match to duplicate
+        // hundreds of growing snapshots into the browser's small quota.
+        undoHistory:JSON.parse(JSON.stringify(undoHistory.slice(-IN_PROGRESS_PERSISTED_UNDO_LIMIT_V1)))
+      };
+      localStorage.setItem(inProgressMatchStorageKeyV1(), JSON.stringify(payload));
+    } catch (error) {
+      console.error("CueScore in-progress save failed", error);
+    }
+  }
+  function readInProgressMatchV1() {
+    const key = inProgressMatchStorageKeyV1();
+    let raw = null;
+    try { raw = localStorage.getItem(key); } catch (_) { return null; }
+    if (!raw) return null;
+    try {
+      const payload = JSON.parse(raw);
+      const state = payload?.state;
+      if (Number(payload?.schemaVersion) !== IN_PROGRESS_MATCH_SCHEMA_V1 || !state || typeof state !== "object" || !state.currentGameSessionIdV104 || state.gameEnded || state.currentGameRecordSaved) throw new Error("Unsupported in-progress snapshot");
+      if (![ROTATION_GAME_TYPE,NINE_BALL_GAME_TYPE,TEN_BALL_GAME_TYPE,STRAIGHT_POOL_GAME_TYPE,JPA9_GAME_TYPE,THREE_CUSHION_GAME_TYPE].includes(state.activeGameTypeV1)) throw new Error("Unsupported discipline");
+      return payload;
+    } catch (error) {
+      console.error("CueScore in-progress snapshot ignored", error);
+      try { localStorage.removeItem(key); } catch (_) {}
+      return null;
+    }
+  }
+  function restoreInProgressMatchV1() {
+    const payload = readInProgressMatchV1();
+    if (!payload) return false;
+    restore(payload.state);
+    undoHistory = Array.isArray(payload.undoHistory) ? JSON.parse(JSON.stringify(payload.undoHistory)).slice(-MAX_UNDO_DEPTH_V111) : [];
+    const p1Name = String(payload.state.playerNames?.[1] || payload.state.p1Name || "Player 1");
+    const p2Name = String(payload.state.playerNames?.[2] || payload.state.p2Name || "Player 2");
+    el("proP1Name").textContent = p1Name;
+    el("proP2Name").textContent = p2Name;
+    el("proP1LogName").textContent = p1Name;
+    el("proP2LogName").textContent = p2Name;
+    el("proStartTime").textContent = formatStartTime(new Date(currentGameStartedAt || Date.now()));
+    const visual = activeGameTypeV1 === THREE_CUSHION_GAME_TYPE ? {title:"3 Cushion",icon:"assets/icons/games/game-3cushion.svg"} : activeGameTypeV1 === JPA9_GAME_TYPE ? {title:"JPA 9-Ball",icon:"assets/icons/games/game-jpa-9ball.svg"} : activeGameTypeV1 === NINE_BALL_GAME_TYPE ? {title:"9-Ball",icon:"assets/icons/games/game-9ball.svg"} : activeGameTypeV1 === TEN_BALL_GAME_TYPE ? {title:"10-Ball",icon:"assets/icons/games/game-10ball.svg"} : activeGameTypeV1 === STRAIGHT_POOL_GAME_TYPE ? {title:"14-1",icon:"assets/icons/games/game-14-1.svg"} : {title:"Rotation",icon:"assets/icons/games/game-rotation.svg"};
+    el("proGameTitleV1").textContent = visual.title;
+    el("proGameTitleIconV1").src = visual.icon;
+    proGameScreen.setAttribute("aria-label", `${visual.title} game`);
+    syncGameDisciplineVisualsV1();
+    syncProGamePlayerAvatarsV2();
+    proGameScreen.classList.toggle("jpa9-game-v1", isJPA9V1());
+    proGameScreen.classList.toggle("nine-ball-game-v1", isNineBallV1());
+    proGameScreen.classList.toggle("ten-ball-game-v1", isTenBallV1());
+    proGameScreen.classList.toggle("straight-pool-game-v1", isStraightPoolV1());
+    proGameScreen.classList.toggle("three-cushion-game-v1", isThreeCushionV1());
+    if (el("threeCushionRunV1")) el("threeCushionRunV1").hidden = !isThreeCushionV1();
+    if (el("threeCushionActionsV1")) el("threeCushionActionsV1").hidden = !isThreeCushionV1();
+    app.classList.remove("player-info-mode");
+    app.classList.add("pro-game-mode");
+    playerInfoScreen.classList.add("hidden");
+    proGameScreen.classList.remove("hidden");
+    el("proSummary")?.classList.add("hidden");
+    updateGame();
+    return true;
   }
 
   function playerName(player) {
@@ -13175,6 +13281,7 @@ let matchRecordsRawCacheV152 = null;
     const duration = performance.now() - started;
     gameRenderCacheV155.lastDurationMs = Number(duration.toFixed(2));
     gameRenderCacheV155.maxDurationMs = Math.max(gameRenderCacheV155.maxDurationMs, duration);
+    persistInProgressMatchV1();
   }
 
   window.cueScoreRenderDiagnosticsV155 = () => ({
@@ -15203,6 +15310,7 @@ let matchRecordsRawCacheV152 = null;
   function requestBackToPlayerInfo() {
     // Game Setをcancelした後も、戻るボタンだけは使用できる。
     if (!confirm("現在の試合を終了してHomeへ戻りますか？")) return;
+    clearInProgressMatchV1();
     // RC11: invalidate delayed callbacks and close all transient game overlays.
     currentGameSessionIdV104 = null;
     breakUndoRestoreV697 = null;
@@ -15434,6 +15542,9 @@ let matchRecordsRawCacheV152 = null;
   el("breakResultBackV3")?.addEventListener("click", () => handleBreakResultBackV3());
   el("breakInterruptCancelV3")?.addEventListener("click", () => hideBreakInterruptConfirmV3());
   el("breakInterruptProceedV3")?.addEventListener("click", interruptNewMatchFromBreakV3);
+  document.addEventListener("visibilitychange", () => { if (document.hidden) persistInProgressMatchV1(); });
+  window.addEventListener("pagehide", persistInProgressMatchV1);
+  requestAnimationFrame(restoreInProgressMatchV1);
   window.addEventListener("popstate", () => {
     const confirmDialog = el("breakInterruptConfirmV3");
     if (confirmDialog && !confirmDialog.classList.contains("hidden")) {
@@ -16130,6 +16241,7 @@ let matchRecordsRawCacheV152 = null;
     persistMatchRecordsOnlyV161(existingRecords);
     currentGameRecordSaved=true;
     currentGameRecordIdV100=record.id;
+    clearInProgressMatchV1();
 
     // ダッシュボード再集計やクラウド自動保存は付随処理。
     // ここで例外が起きても、端末保存済みのOK操作と画面遷移を中断しない。
@@ -18869,7 +18981,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-step6-sample-data-label-v1";
+    const PWA_VERSION = "2.0-fa-iphone-001-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
