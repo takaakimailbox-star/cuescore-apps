@@ -24,12 +24,36 @@ test("snapshot covers shared and discipline-specific continuation state",()=>{
   }
 });
 
-test("every committed action saves and startup restores automatically",()=>{
+test("every committed action saves while startup renders Home card without auto restore",()=>{
   assert.match(html,/function updateGame\(\)[\s\S]*?persistInProgressMatchV1\(\);[\s\S]*?function saveAndDo/);
   assert.match(html,/document\.addEventListener\("visibilitychange"[\s\S]*?persistInProgressMatchV1/);
   assert.match(html,/window\.addEventListener\("pagehide", persistInProgressMatchV1\)/);
-  assert.match(html,/requestAnimationFrame\(restoreInProgressMatchV1\)/);
+  assert.match(html,/requestAnimationFrame\(renderInProgressHomeCardV1\)/);
+  assert.doesNotMatch(html,/requestAnimationFrame\(restoreInProgressMatchV1\)/);
   assert.match(html,/undoHistory = Array\.isArray\(payload\.undoHistory\)[\s\S]*?updateGame\(\)/);
+});
+
+test("Home card displays required match context and resumes only on user action",()=>{
+  for(const text of ["中断中の試合","試合を再開","cueResumeDisciplineV1","cueResumePlayer1V1","cueResumePlayer2V1","cueResumeConditionV1","cueResumeTimeV1"]){
+    assert.match(html,new RegExp(text));
+  }
+  assert.match(html,/cueResumeMatchV1"\)\?\.addEventListener\("click",resumeInProgressFromHomeV1\)/);
+  assert.match(html,/function resumeInProgressFromHomeV1\(\)[\s\S]*?restoreInProgressMatchV1\(\)/);
+});
+
+test("new-match choice provides resume, replace and cancel branches",()=>{
+  for(const text of ["中断中の試合があります","中断中の試合を再開","新しい試合を始める","キャンセル"]){
+    assert.match(html,new RegExp(text));
+  }
+  assert.match(html,/cueInProgressNewV1"\)\?\.addEventListener[\s\S]*?clearInProgressMatchV1\(\)[\s\S]*?button\.click\(\)/);
+  assert.match(html,/cueInProgressCancelV1"\)\?\.addEventListener\("click",closeInProgressChoiceV1\)/);
+  assert.match(html,/cueDisciplineSwitcherV1"\)\?\.addEventListener\("click"[\s\S]*?openInProgressChoiceV1\(button\)[\s\S]*?,true\)/);
+});
+
+test("all six disciplines have existing terminology for the Home card",()=>{
+  for(const label of ["Rotation","9-Ball","10-Ball","14-1","JPA 9-Ball","3 Cushion","目標点","Race to","SL / Race","持ち点"]){
+    assert.match(html,new RegExp(label.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")));
+  }
 });
 
 test("completion and both explicit discard paths clear the active snapshot",()=>{

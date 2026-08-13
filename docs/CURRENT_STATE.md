@@ -290,16 +290,18 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 
 - 回帰テスト計画: `docs/implementation/CueScore_App_Store_v1.0_RC_Regression_Test_Plan_2026-08-09.md`
 - Service Workerの現行2.0系版番号にテスト期待値を統一。
-- FA-IPHONE-001回帰を含む自動テスト122件の全成功（失敗0、スキップ0）をFinal RC整合変更の必須条件とする。
+- FA-IPHONE-001 Homeカード回帰を含む自動テスト125件の全成功（失敗0、スキップ0）をFinal RC整合変更の必須条件とする。
 
 ## FA-IPHONE-001：進行中試合の再起動復元（2026年8月14日）
 
-- 進行中試合が存在する場合、CueScore Apps再起動時にその試合へ自動復帰する。
+- 進行中試合が存在してもCueScore Apps再起動時はHomeを表示し、6競技カードより上に「中断中の試合」カードを表示する。起動直後の自動復帰は採用しない。
+- 中断カードには競技名、Player 1／2、競技別のRace／目標点／持ち点／SL、開始時刻を表示し、「試合を再開」の明示操作でのみGame画面へ復元する。
+- 中断中に6競技カードから新規試合へ進む場合は、「中断中の試合を再開」「新しい試合を始める」「キャンセル」の3分岐を表示する。新規開始を明示選択した場合のみ現在領域の中断スナップショットを削除する。
 - 進行中状態は専用schema version 1、通常キー`cueScore.inProgressMatch.v1`へ保存する。サンプルデータでは既存resolverによる専用設定キーへ分離し、通常データと混在させない。
 - 6競技のPlayer、競技、Race／目標点／持ち点、得点、ラック、手番、ブレイク、イニング、ファール、入力履歴、競技固有状態、イベントログ、直近50状態のUndoを保存対象とする。
 - 試合完了・履歴保存、明示的なHome復帰、ブレイク入力中の明示中断で進行中スナップショットを削除する。不正・完了済みスナップショットは復帰しない。
 - 完了試合record、Backup JSON、Player、History、Analyticsの保存形式、競技ルール、既存データは変更・移行しない。
-- コード、自動テストおよびブラウザ再読込相当の9-Ball復帰・Undo確認は完了。実iPhone Home Screen PWAでの再確認は未完了。
+- コード、自動テストおよび390×844pxブラウザで、9-Ball再起動後のHomeカード、長いPlayer名、Race 2-3、再開、3分岐、横スクロールなしを確認済み。実iPhone Home Screen PWAでの再確認は未完了。
 - 現在判定：`FA-IPHONE-001: Code Fix Complete / iPhone Re-test Required`。実機再確認前にApp Store提出、Release確定、ネイティブ化へ進まない。
 
 ## サンプルデータ v3.1（2026年8月11日）
