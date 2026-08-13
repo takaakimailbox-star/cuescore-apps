@@ -12,12 +12,12 @@ test("Game Result uses the adopted two-stat mapping for all six disciplines",()=
   assert.match(html,/return \[\["アベレージ",average\.toFixed\(3\)\],\["ハイラン",highRun\]\]/);
 });
 
-test("Game Result averages count event-derived zero-point turns and masuwari uses run-out events",()=>{
+test("Game Result averages count event-derived zero-point turns and uses the shared masuwari evaluator",()=>{
   assert.match(html,/function calculateCompletedTurnsFromEventsV1\(\)/);
   assert.match(html,/new Set\(\["break_result","ball_pocketed","safety","foul","player_switch"\]\)/);
   assert.match(html,/scores\[1\]\/completedTurns\[1\]/);
   assert.match(html,/function currentMatchMasuwariCountV1\(player\)/);
-  assert.match(html,/event\?\.type==="break_run_out"/);
+  assert.match(html,/window\.rackGameMasuwariCountsV1\?\.\(record\)/);
 });
 
 test("Game Result is shown after save and return-to-game removes the provisional saved record",()=>{

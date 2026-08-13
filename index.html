@@ -8640,7 +8640,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-six-discipline-race-display-v1"></script>
+  <script src="./demo-data.js?v=2.0-masuwari-judgement-fix-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -14286,9 +14286,9 @@ let matchRecordsRawCacheV152 = null;
 
   function currentMatchMasuwariCountV1(player) {
     const target=Number(player)===2?2:1;
-    const explicit=analysisEventsV60.filter(event=>event?.type==="break_run_out"&&Number(event?.player)===target).length;
-    if(explicit)return explicit;
-    return analysisEventsV60.filter(event=>event?.type==="break_result"&&event?.breakRunOut===true&&Number(event?.breakPlayer ?? event?.player)===target).length;
+    const record=currentProgressRecordV1();
+    record.analysis={events:analysisEventsV60};
+    return Number(window.rackGameMasuwariCountsV1?.(record)?.[target])||0;
   }
 
   function calculateResultStats() {
@@ -18774,7 +18774,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-six-discipline-race-display-v1";
+    const PWA_VERSION = "2.0-masuwari-judgement-fix-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22297,7 +22297,9 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
 
   function rackGameMasuwariCountsV1(record) {
     const counts={1:0,2:0};
-    const targetBall=recordDisciplineV2(record)==="10ball"?10:9;
+    const discipline=recordDisciplineV2(record);
+    if(!["9ball","10ball"].includes(discipline)) return counts;
+    const targetBall=discipline==="10ball"?10:9;
     const commonEvents=Array.isArray(record?.eventLog?.events)?record.eventLog.events:[];
     const analysisEvents=Array.isArray(record?.analysis?.events)?record.analysis.events:[];
     const events=commonEvents.length?commonEvents:analysisEvents;
@@ -22317,24 +22319,30 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
       const interrupted=rackEvents.some(event=>{
         if(event===breakEvent || event===rackEnd) return false;
         const type=eventType(event);
-        if(type==="foul" || type==="safety" || type==="player_switch" || type==="shot_missed" || type==="miss") return true;
-        if(["ball_pocketed","shot","break_result"].includes(type) && Number(value(event,"player"))!==breaker) return true;
+        const player=Number(value(event,"player") ?? value(event,"fromPlayer"));
+        if(type==="player_switch") return true;
+        if(type==="foul" && player===breaker) return true;
+        if(["ball_pocketed","shot","safety","foul","shot_missed","miss","break_result"].includes(type) && player && player!==breaker) return true;
         return false;
       });
       if(interrupted) return;
-      const pocketed=new Set();
+      const ballsOnTable=new Set(Array.from({length:targetBall},(_,index)=>index+1));
       const breakBalls=Array.isArray(value(breakEvent,"pocketedBalls"))
         ? value(breakEvent,"pocketedBalls")
         : Array.isArray(value(breakEvent,"scoredBalls")) ? value(breakEvent,"scoredBalls") : [];
-      breakBalls.map(Number).filter(Number.isInteger).forEach(ball=>pocketed.add(ball));
+      breakBalls.map(Number).filter(ball=>Number.isInteger(ball)&&ball>=1&&ball<=targetBall).forEach(ball=>ballsOnTable.delete(ball));
       rackEvents.forEach(event=>{
         const type=eventType(event);
-        if((type==="ball_pocketed" || (String(event?.type||"").toLowerCase()==="shot" && type==="ball_pocketed")) && Number(value(event,"player"))===breaker){
-          const ball=Number(value(event,"ball"));
-          if(Number.isInteger(ball)) pocketed.add(ball);
+        if(type==="ball_pocketed" && Number(value(event,"player"))===breaker){
+          const ball=Number(value(event,"ball") ?? value(event,"ballNumber"));
+          if(Number.isInteger(ball)&&ball>=1&&ball<=targetBall) ballsOnTable.delete(ball);
+        }
+        if(type==="spot_ball" || String(event?.type||"").toLowerCase()==="spotball"){
+          const ball=Number(value(event,"ballNumber") ?? value(event,"ball"));
+          if(Number.isInteger(ball)&&ball>=1&&ball<=targetBall) ballsOnTable.add(ball);
         }
       });
-      if(pocketed.has(targetBall)) counts[breaker]+=1;
+      if(ballsOnTable.size===0) counts[breaker]+=1;
     });
     return counts;
   }
@@ -27662,10 +27670,7 @@ body.cue-edge-back-animating-v2 .app{
   const recordsFor=player=>allRecords().filter(r=>side(r,player));
   const metric=(record,s)=>savedPlayerMetricsV113(record,s)||{};
   const analyticsMasuwariCount= (record,s)=>{
-    const events=Array.isArray(record?.analysis?.events)?record.analysis.events:[];
-    const explicit=events.filter(event=>event?.type==="break_run_out"&&Number(event?.player)===Number(s)).length;
-    if(explicit)return explicit;
-    return events.filter(event=>event?.type==="break_result"&&event?.breakRunOut===true&&Number(event?.breakPlayer ?? event?.player)===Number(s)).length;
+    return Number(window.rackGameMasuwariCountsV1?.(record)?.[Number(s)])||0;
   };
   const analyticsCompletedTurns=(record,s)=>{
     const stored=Number(metric(record,s).completedTurns ?? recordPlayer(record,s).completedTurns);

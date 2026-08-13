@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## v1.0 Final RC：9-Ball / 10-Ball マス割判定修正（2026年8月13日）
+
+- マス割を「ブレーカーが相手へ一度も手番を渡さず、ファールせず、ブレイク入球を含む全対象球をテーブル上からなくしてラックに勝利した場合のみ1回」と正式確定した。
+- 9-Ballは1〜9番、10-Ballは1〜10番を対象とし、スポットイベントを反映したラック終了時のテーブル状態で判定する。
+- 9番／10番の早期入球によるラック勝利は維持するが、他球が残る場合はマス割に数えない。
+- Game Result、Match Detail、Player Detail、Player Analytics、Match Analyticsを共通関数 `rackGameMasuwariCountsV1(record)` へ統一した。
+- 球番号単位の履歴が不足する過去recordは、旧 `breakRunOut`／`break_run_out`フラグだけから推測せず0回とする。
+- 保存schema、localStorage、Backup／Restore、既存record、ラック勝敗、Race、Undo、保存タイミング、スコア推移、Player情報は変更していない。
+- Formal Decision 022、後継仕様023、Official Design Decision Log v1.8 Decision 024を正本とする。
+
 ## v1.0 Final RC：6競技 Race to表示統一（2026年8月13日）
 
 - Game Result／Match Detailの試合条件表示を、6競技すべて `Race to X-Y` へ統一した。XはPlayer 1、YはPlayer 2の既存goalを使用する。

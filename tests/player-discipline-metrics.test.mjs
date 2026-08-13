@@ -38,7 +38,8 @@ assert.ok(helperStart>=0&&helperEnd>helperStart,"missing rack-game masuwari help
 const sharedContext=vm.createContext({window:{},recordDisciplineV2:record=>record.disciplineId});
 vm.runInContext(`${html.slice(helperStart,helperEnd)}\nwindow.rackGameMasuwariCountsV1=rackGameMasuwariCountsV1;`,sharedContext);
 const runOutRecord={disciplineId:"9ball",analysis:{events:[
-  {type:"break_result",player:1,rack:1,pocketedBalls:[9]},
+  {type:"break_result",player:1,rack:1,pocketedBalls:[1]},
+  ...Array.from({length:8},(_,index)=>({type:"ball_pocketed",player:1,rack:1,ball:index+2})),
   {type:"rack_end",winner:1,rack:1}
 ]}};
 assert.equal(sharedContext.window.rackGameMasuwariCountsV1(runOutRecord)[1],1);

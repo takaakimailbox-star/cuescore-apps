@@ -52,7 +52,7 @@ test("result mode has no header close/back button and remains width-safe",()=>{
 
 test("PWA cache and document script versions stay synchronized",()=>{
   const sw=readFileSync(new URL("../sw.js",import.meta.url),"utf8");
-  assert.match(sw,/APP_VERSION = "2\.0-six-discipline-race-display-v1"/);
-  assert.match(sw,/demo-data\.js\?v=2\.0-six-discipline-race-display-v1/);
-  assert.match(html,/demo-data\.js\?v=2\.0-six-discipline-race-display-v1/);
+  assert.match(sw,/APP_VERSION = "2\.0-masuwari-judgement-fix-v1"/);
+  assert.match(sw,/demo-data\.js\?v=2\.0-masuwari-judgement-fix-v1/);
+  assert.match(html,/demo-data\.js\?v=2\.0-masuwari-judgement-fix-v1/);
 });

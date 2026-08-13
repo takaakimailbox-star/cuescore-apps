@@ -15,7 +15,7 @@ assert.match(
 );
 assert.match(
   html,
-  /const targetBall=recordDisciplineV2\(record\)==="10ball"\?10:9;/,
+  /const targetBall=discipline==="10ball"\?10:9;/,
   "10-Ball run-outs must be validated with the 10 ball"
 );
 assert.match(
