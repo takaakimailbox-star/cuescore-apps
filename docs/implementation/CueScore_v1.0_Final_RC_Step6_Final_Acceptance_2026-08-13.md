@@ -1,7 +1,9 @@
 # CueScore Apps v1.0 Final RC Step 6 Final Acceptance
 
-検証日: 2026-08-13  
-基準main: `554e137463279fb5041295a5840bbc5c331d6ddf`  
+検証日: 2026-08-13
+
+基準main: `554e137463279fb5041295a5840bbc5c331d6ddf`
+
 作業ブランチ: `codex/cuescore-step6-final-acceptance`
 
 ## FA-STEP6-001軽微修正後の再受入れ（2026-08-13）
