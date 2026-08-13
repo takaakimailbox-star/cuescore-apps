@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## v1.0 Final RC：Game Result / Match Detail共通レイアウト（2026年8月13日）
+
+- Game ResultとMatch Detailは`openMatchDetailV1`を共通rendererとして使用し、日時・種目、Player／Avatar／最終スコア、競技条件、Metrics、スコア推移まで同じ情報構造・順序・デザインとした。
+- Game Resultはゲーム履歴と削除UIを生成せず、最下部に「試合へ戻る」「ホームへ戻る」「もう一度対戦する」を表示する。Match Detailはゲーム履歴、削除UI、削除説明文を維持する。
+- 両画面のMetricsは、9-Ball／10-Ball＝シュート率・マス割・ファール、Rotation＝シュート率・ハイラン・ファール、JPA／14.1＝アベレージ・ハイラン・ファール、3C＝イニング・ハイラン・アベレージとした。
+- Decision 020は履歴として維持し、後続Decision 021が画面責務と3C Metricsを上書きする。
+- 保存schema、localStorage、Backup／Restore、過去データ、Undo、保存取消、スコア推移生成、JPAマッチポイント、10-Ballマス割判定は変更していない。
+- 正式決定：`docs/official/16_CueScore_v1.0FinalRC_GameResult_MatchDetail_CommonLayout_Decision.md`。後継仕様：`docs/official/17_CueScore_v1.0FinalRC_GameResult_MatchDetail_CommonLayout_Spec.md`。
+
 ## v1.0 Final RC：Game Result / Match Detail 6競技正式仕様（2026年8月13日）
 
 - Game Resultの主要2指標を、9-Ball／10-Ball＝シュート率・マス割、Rotation＝シュート率・ハイラン、JPA 9-Ball＝イニング・セーフティ、14.1／3C＝アベレージ・ハイランへ統一した。
@@ -51,7 +60,7 @@
 - サンプルデータ生成時のJPA SLは先取点から公式対応表で決定し、SLと先取点の整合を保証する。
 - 正式決定記録：`docs/official/11_CueScore_v1.0RC_JPA9_MatchPoint_Decision.md`。
 
-Updated: 2026-08-11
+Updated: 2026-08-13
 Status: Living operational reference
 
 ## Purpose and Authority

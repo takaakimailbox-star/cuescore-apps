@@ -34,7 +34,7 @@ test("all six disciplines continue to use the same formal Match Detail path",()=
     assert.ok(html.includes(`id:"${discipline}"`),`missing ${discipline} Match Detail definition`);
   }
   assert.match(html,/window\.openMatchDetailV1=openMatchDetailV1/);
-  assert.match(html,/const history=gameHistoryV1\(record\)/);
+  assert.match(html,/const history=resultMode\?"":gameHistoryV1\(record\)/);
   assert.match(html,/class="match-detail-game-history-v1" aria-label="ゲーム履歴"/);
 });
 
