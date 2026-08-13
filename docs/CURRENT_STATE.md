@@ -203,6 +203,15 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - CSV出力およびクラウド同期関連コードは将来再利用のため残しているが、App Store v1.0 release profileでは非提供。
 - ネイティブiOSプロジェクトおよびApp Store本審査提出は開始していない。
 
+## v1.0 Final RC：Restore QuotaExceeded安全修正（2026年8月13日）
+
+- 置換Restore／Merge Restoreは、復元前の現在データを同じlocalStorageへ複製せず、Player、Match History、Category、Seasonのraw値をメモリ上に保持する。
+- 復元書込み後は全対象を再読込して期待値と照合する。失敗時はメモリスナップショットからロールバックし、再読込照合が成功した場合のみ「元の状態へ戻しました」と表示する。
+- JSON parse失敗、Backup形式不一致、QuotaExceededError、ロールバック検証失敗を区別し、容量不足をBackup破損として案内しない。
+- `rotationScoreboard.beforeLocalRestore.*`と`rotationScoreboard.beforeLocalMergeRestore.*`は新規作成しない。既存分は無条件削除せず、従来のRestore専用一時退避に限定した最大5世代の保持処理のみ維持する。
+- Backup JSON、保存schema、localStorage正式キー、Player／Match record構造は変更していない。IndexedDB全面移行とStorage層の大規模変更はLaterとする。
+- 正式決定：`docs/official/24_CueScore_v1.0FinalRC_Restore_QuotaExceeded_Safety_Decision.md`。正式仕様：`docs/official/25_CueScore_v1.0FinalRC_Restore_QuotaExceeded_Safety_Spec.md`。
+
 ## App Store v1.0公開準備
 
 - 2026-08-09付の公式Markdown一式を `docs/official/app-store-v1.0/` に登録。

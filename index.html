@@ -8640,7 +8640,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-masuwari-judgement-fix-v1"></script>
+  <script src="./demo-data.js?v=2.0-restore-quota-safety-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -9289,6 +9289,98 @@ body {
       throw wrapped;
     }
   }
+
+  // CueScore v1.0 Final RC: restore safety must not duplicate live data in localStorage.
+  function isQuotaExceededErrorV160(error) {
+    const visited = new Set();
+    let currentError = error;
+    while (currentError && !visited.has(currentError)) {
+      visited.add(currentError);
+      if (
+        currentError.name === "QuotaExceededError" ||
+        currentError.code === 22 ||
+        currentError.code === 1014 ||
+        /quota|storage quota|保存容量が不足/i.test(String(currentError.message || ""))
+      ) return true;
+      currentError = currentError.cause;
+    }
+    return false;
+  }
+
+  function captureLocalStorageSnapshotV160(keys) {
+    return Object.fromEntries(keys.map(key => [key, localStorage.getItem(key)]));
+  }
+
+  function localStorageMatchesSnapshotV160(snapshot) {
+    return Object.entries(snapshot).every(([key, rawValue]) => localStorage.getItem(key) === rawValue);
+  }
+
+  function restoreLocalStorageSnapshotV160(snapshot) {
+    try {
+      Object.entries(snapshot).forEach(([key, rawValue]) => {
+        if (rawValue === null) localStorage.removeItem(key);
+        else localStorage.setItem(key, rawValue);
+      });
+      return localStorageMatchesSnapshotV160(snapshot);
+    } catch (error) {
+      console.error("[CueScore] Restore rollback failed", error);
+      return false;
+    }
+  }
+
+  function writeAndVerifyRestoreEntriesV160(entries) {
+    entries.forEach(([key, value]) => {
+      const serialized = JSON.stringify(value);
+      localStorage.setItem(key, serialized);
+      if (localStorage.getItem(key) !== serialized) {
+        throw new Error(`${key}の保存確認に失敗しました。`);
+      }
+    });
+    return entries.every(([key, value]) => localStorage.getItem(key) === JSON.stringify(value));
+  }
+
+  function performLocalRestoreTransactionV160(snapshotKeys, entries) {
+    const snapshot = captureLocalStorageSnapshotV160(snapshotKeys);
+    try {
+      if (!writeAndVerifyRestoreEntriesV160(entries)) {
+        throw new Error("復元内容の照合に失敗しました。");
+      }
+      return { snapshot };
+    } catch (error) {
+      const transactionError = new Error(error?.message || "復元書き込みに失敗しました。");
+      transactionError.cause = error;
+      const unchanged = localStorageMatchesSnapshotV160(snapshot);
+      transactionError.restoreDataUnchanged = unchanged;
+      transactionError.restoreRollbackVerified = unchanged ? true : restoreLocalStorageSnapshotV160(snapshot);
+      throw transactionError;
+    }
+  }
+
+  function restoreFailureMessageV160(error) {
+    if (error?.restoreRollbackVerified === false) {
+      return "復元中にエラーが発生し、元のデータへ完全に戻せたことを確認できません。アプリの使用を続けず、保存済みバックアップを保管したままサポート確認を行ってください。";
+    }
+    if (isQuotaExceededErrorV160(error)) {
+      if (error?.restoreDataUnchanged) {
+        return "復元できませんでした。端末の保存容量が不足しているため、データを復元できませんでした。現在のデータは変更されていません。";
+      }
+      return "端末の保存容量が不足したため復元できませんでした。現在のデータは元の状態へ戻しました。";
+    }
+    if (error?.restoreRollbackVerified) {
+      return "復元中にエラーが発生しました。現在のデータは元の状態へ戻しました。";
+    }
+    return "復元中にエラーが発生しました。現在のデータは変更されていません。";
+  }
+
+  window.CueScoreRestoreSafetyV160 = {
+    isQuotaExceededError: isQuotaExceededErrorV160,
+    captureSnapshot: captureLocalStorageSnapshotV160,
+    matchesSnapshot: localStorageMatchesSnapshotV160,
+    restoreSnapshot: restoreLocalStorageSnapshotV160,
+    writeAndVerify: writeAndVerifyRestoreEntriesV160,
+    performTransaction: performLocalRestoreTransactionV160,
+    failureMessage: restoreFailureMessageV160
+  };
 
   let derivedViewRefreshQueuedV131 = false;
   function isViewVisibleV152(id) {
@@ -16546,14 +16638,27 @@ let matchRecordsRawCacheV152 = null;
 
     async function importBackupFile(file) {
       if (!window.CueScoreFeatureAccess.canUse("backup")) return;
+      let backup;
       try {
         const raw = await file.text();
-        const backup = JSON.parse(raw);
-        if (!validateBackup(backup)) {
-          alert("CueScoreの正しいバックアップファイルではありません。");
+        try {
+          backup = JSON.parse(raw);
+        } catch (parseError) {
+          console.error(parseError);
+          alert("バックアップファイルを読み込めませんでした。JSONファイルが破損している可能性があります。");
           return;
         }
+      } catch (readError) {
+        console.error(readError);
+        alert("バックアップファイルを読み込めませんでした。");
+        return;
+      }
+      if (!validateBackup(backup)) {
+        alert("このバックアップファイルはCueScore Appsで復元できる形式ではありません。");
+        return;
+      }
 
+      try {
         const playerCount = backup.players.length;
         const recordCount = backup.matchRecords.length;
         const hasCategoryData = Array.isArray(backup.matchCategories);
@@ -16572,31 +16677,21 @@ let matchRecordsRawCacheV152 = null;
         );
         if (!proceed) return;
 
-        const restoreSnapshotKey = `rotationScoreboard.beforeLocalRestore.${Date.now()}`;
-        const restoreSnapshot = {
-          createdAt: new Date().toISOString(),
-          players: window.cueScoreNormalizePlayersToDefaultAvatarV4(safelyReadArray(DATA_PLAYER_KEY)),
-          matchRecords: safelyReadArray(DATA_RECORD_KEY),
-          matchCategories: safelyReadArray(DATA_CATEGORY_KEY),
-          matchSeasons: safelyReadArray(DATA_SEASON_KEY)
-        };
-        localStorage.setItem(restoreSnapshotKey, JSON.stringify(restoreSnapshot));
-
+        const snapshotKeys = [DATA_PLAYER_KEY, DATA_RECORD_KEY, DATA_CATEGORY_KEY, DATA_SEASON_KEY];
+        const restoreEntries = [
+          [DATA_PLAYER_KEY, window.cueScoreNormalizePlayersToDefaultAvatarV4(backup.players)],
+          [DATA_RECORD_KEY, backup.matchRecords]
+        ];
+        if (hasCategoryData) restoreEntries.push([DATA_CATEGORY_KEY, categories]);
+        if (hasSeasonData) restoreEntries.push([DATA_SEASON_KEY, seasons]);
+        window.CueScoreRestoreSafetyV160.performTransaction(snapshotKeys, restoreEntries);
         try {
-          verifiedLocalStorageWriteV131(DATA_PLAYER_KEY, window.cueScoreNormalizePlayersToDefaultAvatarV4(backup.players));
-          verifiedLocalStorageWriteV131(DATA_RECORD_KEY, backup.matchRecords);
-          if (hasCategoryData) verifiedLocalStorageWriteV131(DATA_CATEGORY_KEY, categories);
-          if (hasSeasonData) verifiedLocalStorageWriteV131(DATA_SEASON_KEY, seasons);
-        } catch (writeError) {
-          localStorage.setItem(DATA_PLAYER_KEY, JSON.stringify(window.cueScoreNormalizePlayersToDefaultAvatarV4(restoreSnapshot.players)));
-          localStorage.setItem(DATA_RECORD_KEY, JSON.stringify(restoreSnapshot.matchRecords));
-          localStorage.setItem(DATA_CATEGORY_KEY, JSON.stringify(restoreSnapshot.matchCategories));
-          localStorage.setItem(DATA_SEASON_KEY, JSON.stringify(restoreSnapshot.matchSeasons));
-          throw writeError;
+          await window.cueScoreMarkCloudDirtyV133?.("local-backup-restored", {
+            playerCount, recordCount, categoryCount, seasonCount
+          });
+        } catch (cloudError) {
+          console.error("[CueScore] Restore completed, but cloud dirty marking failed", cloudError);
         }
-        await window.cueScoreMarkCloudDirtyV133?.("local-backup-restored", {
-          playerCount, recordCount, categoryCount, seasonCount
-        });
         alert(
           `復元しました。\n登録プレーヤー ${playerCount}人\n対戦履歴 ${recordCount}試合\n` +
           `試合区分 ${categoryCount}件\nシーズン ${seasonCount}件\n\nクラウドは自動上書きせず、保存方法の確認待ちにしました。`
@@ -16604,7 +16699,7 @@ let matchRecordsRawCacheV152 = null;
         window.location.reload();
       } catch (error) {
         console.error(error);
-        alert("バックアップファイルを読み込めませんでした。ファイルが破損している可能性があります。");
+        alert(window.CueScoreRestoreSafetyV160.failureMessage(error));
       }
     }
 
@@ -18774,7 +18869,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-masuwari-judgement-fix-v1";
+    const PWA_VERSION = "2.0-restore-quota-safety-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -25463,21 +25558,19 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   function listItemKey(item){if(typeof item==="string")return `text:${normalizeText(item)}`;return `id:${item?.id??item?.key??normalizeText(item?.name??item?.label??JSON.stringify(item))}`}
   function validateBackup(value){return value&&typeof value==="object"&&["cuescore-apps-backup","rotation-scoreboard-backup"].includes(value.format)&&Array.isArray(value.players)&&Array.isArray(value.matchRecords)&&value.matchRecords.every(r=>r&&typeof r==="object"&&r.players?.[1]&&r.players?.[2])}
   function mergeUnique(current,incoming,keyFn){const keys=new Set(current.map(keyFn));const added=[];incoming.forEach(item=>{const key=keyFn(item);if(!keys.has(key)){keys.add(key);added.push(item)}});return {value:[...current,...added],added:added.length}}
-  function verifiedWrite(key,value){localStorage.setItem(key,JSON.stringify(value));const check=JSON.parse(localStorage.getItem(key)||"null");if(JSON.stringify(check)!==JSON.stringify(value))throw new Error(`${key}の保存確認に失敗しました。`)}
   async function mergeBackup(backup){
     const current={players:readArray(PLAYER_KEY),records:readArray(RECORD_KEY),categories:readArray(CATEGORY_KEY),seasons:readArray(SEASON_KEY)};
     const nextPlayers=mergeUnique(current.players,backup.players,playerKey);
     const nextRecords=mergeUnique(current.records,backup.matchRecords,recordKey);
     const nextCategories=mergeUnique(current.categories,Array.isArray(backup.matchCategories)?backup.matchCategories:[],listItemKey);
     const nextSeasons=mergeUnique(current.seasons,Array.isArray(backup.matchSeasons)?backup.matchSeasons:[],listItemKey);
-    const snapshotKey=`rotationScoreboard.beforeLocalMergeRestore.${Date.now()}`;
-    localStorage.setItem(snapshotKey,JSON.stringify({...current,createdAt:new Date().toISOString(),source:"before-merge-restore"}));
+    window.CueScoreRestoreSafetyV160.performTransaction(
+      [PLAYER_KEY,RECORD_KEY,CATEGORY_KEY,SEASON_KEY],
+      [[PLAYER_KEY,nextPlayers.value],[RECORD_KEY,nextRecords.value],[CATEGORY_KEY,nextCategories.value],[SEASON_KEY,nextSeasons.value]]
+    );
     try{
-      verifiedWrite(PLAYER_KEY,nextPlayers.value);verifiedWrite(RECORD_KEY,nextRecords.value);verifiedWrite(CATEGORY_KEY,nextCategories.value);verifiedWrite(SEASON_KEY,nextSeasons.value);
       await window.cueScoreMarkCloudDirtyV133?.("local-backup-restored",{playerCount:nextPlayers.value.length,recordCount:nextRecords.value.length});
-    }catch(error){
-      verifiedWrite(PLAYER_KEY,current.players);verifiedWrite(RECORD_KEY,current.records);verifiedWrite(CATEGORY_KEY,current.categories);verifiedWrite(SEASON_KEY,current.seasons);throw error;
-    }
+    }catch(cloudError){console.error("[CueScore] Merge restore completed, but cloud dirty marking failed",cloudError)}
     return {players:nextPlayers.added,records:nextRecords.added,categories:nextCategories.added,seasons:nextSeasons.added};
   }
   function handFileToExistingRestore(file){
@@ -25527,14 +25620,23 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
           alert(`追加・統合しました。\nプレーヤー ${result.players}人追加\n対戦履歴 ${result.records}試合追加\n試合区分 ${result.categories}件追加\nシーズン ${result.seasons}件追加`);
           window.location.reload();
         }
-      }catch(error){console.error(error);alert(`復元できませんでした。現在のデータは元の状態へ戻しました。\n${error.message}`)}
+      }catch(error){console.error(error);alert(window.CueScoreRestoreSafetyV160.failureMessage(error))}
       finally{button.disabled=false}
     }
   });
   $("#suiteAutoSave",root).addEventListener("change",event=>{const old=$("#cloudAutoSaveToggle");if(old){old.checked=event.target.checked;old.dispatchEvent(new Event("change",{bubbles:true}))}});
   $("#suiteBackupFile",root).addEventListener("change",async event=>{
     const file=event.target.files?.[0];if(!file)return;
-    try{const backup=JSON.parse(await file.text());if(!validateBackup(backup))throw new Error("CueScoreの正しいバックアップファイルではありません。");selectedBackup=backup;selectedBackupFile=file;renderSelectedBackup(file,backup)}
+    try{
+      let backup;
+      let raw;
+      try{raw=await file.text()}
+      catch(readError){console.error(readError);throw new Error("バックアップファイルを読み込めませんでした。")}
+      try{backup=JSON.parse(raw)}
+      catch(parseError){console.error(parseError);throw new Error("バックアップファイルを読み込めませんでした。JSONファイルが破損している可能性があります。")}
+      if(!validateBackup(backup))throw new Error("このバックアップファイルはCueScore Appsで復元できる形式ではありません。");
+      selectedBackup=backup;selectedBackupFile=file;renderSelectedBackup(file,backup)
+    }
     catch(error){selectedBackup=null;selectedBackupFile=null;alert(error.message);event.target.value=""}
   });
   settings?.addEventListener("click",event=>{

@@ -37,7 +37,8 @@ assert.match(html,/tags: Array\.isArray\(record\.tags\) \? record\.tags\.join/);
 assert.match(html,/memo: record\.memo \|\| ""/);
 assert.match(html,/return \{\s*\.\.\.record,\s*gameType:/);
 assert.match(html,/matchRecords: safelyReadArray\(DATA_RECORD_KEY\)/);
-assert.match(html,/verifiedLocalStorageWriteV131\(DATA_RECORD_KEY, backup\.matchRecords\)/);
+assert.match(html,/\[DATA_RECORD_KEY, backup\.matchRecords\]/);
+assert.match(html,/CueScoreRestoreSafetyV160\.performTransaction\(snapshotKeys, restoreEntries\)/);
 
 class MemoryStorage {
   #values=new Map();
