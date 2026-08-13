@@ -77,9 +77,7 @@ Version 1.0 では、広告配信を目的としたトラッキングを行わ�
 
 ## 12. お問い合わせ
 
-プライバシーに関するお問い合わせは、CueScore Apps 公式サポートページに記載する連絡先からお問い合わせください。
-
-**公開前必須設定:** サポートページの公開URLおよび連絡先情報を確定し、本項から到達できる状態にしてください。
+プライバシーに関するお問い合わせは、[CueScore Apps 公式サポートページ](https://takaakimailbox-star.github.io/cuescore-apps/support.html)をご確認いただくか、[cuescore.apps@gmail.com](mailto:cuescore.apps@gmail.com)へメールでお問い合わせください。
 
 ---
 

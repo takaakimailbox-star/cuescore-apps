@@ -4,7 +4,7 @@
 **Effective Date:** 2026-08-09  
 **Product:** CueScore Apps
 
-CueScore Apps をご利用いただきありがとうございます。このページは、App Store から案内する公式サポートページとして使用することを想定しています。
+CueScore Apps をご利用いただきありがとうございます。このページは、App Store から案内する公式サポートページです。
 
 ## CueScore Apps について
 
@@ -60,19 +60,18 @@ Version 1.0 のリリース対象として、任意のプレーヤー写真設�
 
 ## プライバシー
 
-プライバシーに関する方針は、CueScore Apps Privacy Policy をご確認ください。
+プライバシーに関する方針は、[CueScore Apps Privacy Policy](https://takaakimailbox-star.github.io/cuescore-apps/privacy.html) をご確認ください。
 
 ## 利用規約
 
-本アプリの利用条件は、CueScore Apps Terms of Use をご確認ください。
+本アプリの利用条件は、[CueScore Apps Terms of Use](https://takaakimailbox-star.github.io/cuescore-apps/terms.html) をご確認ください。
 
 ## お問い合わせ先
 
-**公開前に必ず以下を確定してください。App Store の Support URL は、利用者が実際に連絡できる情報へ到達できる必要があります。**
+CueScore Appsへのお問い合わせは、メールで受け付けています。
 
-- サポートURL: `［公開URLを設定］`
-- 連絡用メールアドレス: `［公開用メールアドレスを設定］`
-- その他の連絡情報: `［必要に応じて設定］`
+- サポートページ: [CueScore Apps Support](https://takaakimailbox-star.github.io/cuescore-apps/support.html)
+- メール: [cuescore.apps@gmail.com](mailto:cuescore.apps@gmail.com)
 
 ---
 
