@@ -167,6 +167,16 @@ Blocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0、自動テスト全成�
 
 このため、実iPhone再確認が完了するまでPWA Final Acceptanceは再確認待ちとし、App Store提出、Release確定、ネイティブ化へ進まない。
 
+### FA-IPHONE-001 UX更新：Homeカード方式（2026年8月14日）
+
+- Product Ownerは起動直後の自動Game復帰を変更し、進行中スナップショットが存在してもHomeを表示する方式を採用した。
+- Homeの6競技カードより上に「中断中の試合」カードを表示し、競技、Player 1／2、競技別条件、開始時刻と主操作「試合を再開」を提示する。復元はこの明示操作時だけ実行する。
+- 中断中に6競技カードを選択した場合は、「中断中の試合を再開」「新しい試合を始める」「キャンセル」の3分岐を表示する。新規開始を明示選択した場合だけ現在データ領域の中断スナップショットを削除する。
+- 既存`cueScore.inProgressMatch.v1`、schema version 1、直近50 Undo、通常／サンプル分離、検証・cleanup、完了試合record、Backup JSONを変更していない。既存FA-IPHONE-001スナップショットをそのまま利用する。
+- 390×844pxブラウザで、再起動後Home維持、長いPlayer名を含む9-Ballカード、Race 2-3、横スクロールなし、再開後の状態一致、3分岐を確認した。全自動テストは125件成功／失敗0／スキップ0。
+- 6競技のカード表記と再開経路、通常／サンプル領域分離は共通実装と回帰テストで確認した。実iPhone再確認前は実機PASSとしない。
+- 現在状態：`In-progress Match UX: Home Card Implemented / iPhone Re-test Required`。
+
 ## ネイティブ化可否
 
 FA-IPHONE-001のコード修正は完了したが、実iPhone再確認が終わるまではネイティブ化へ進行しない。実iPhone確認待ち項目をネイティブ／提出ビルドの確認完了とみなしてはならない。
