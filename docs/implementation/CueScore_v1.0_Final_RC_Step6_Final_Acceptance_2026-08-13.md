@@ -195,6 +195,15 @@ Blocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0、自動テスト全成�
 - 390×844px相当でカード高、横スクロール、長いPlayer名、再開動作を確認する。実iPhone再確認前は実機PASSとしない。
 - 現在状態：`In-progress Match Compact Card v2: Implemented / iPhone Re-test Required`。
 
+### FA-IPHONE-002：再起動後カード消失修正／Compact Card v3（2026年8月14日）
+
+- 実iPhone Home Screen PWAで、Homeに中断カードを表示して完全終了後、再起動するとカードが表示されない事象を確認した。
+- 根本原因は`pagehide`／`visibilitychange`時の`persistInProgressMatchV1`が、Homeの非`pro-game-mode`状態を破棄条件として扱い、保存済みsnapshotを削除していたことだった。
+- 終了、再起動、単なるHome表示ではsnapshotを保持する。試合完了、確認付き明示破棄、「新しい試合を始める」、不正snapshotの場合のみ削除し、`pageshow`時にカードを再描画する。
+- 最終UIは高さ88pxの2段構成。上段は「中断中の試合」・競技アイコン・開始年月日時分、下段はPlayer 1／2・競技条件・「再開 ›」。競技名文字は省き、accessible nameには競技名と完全なPlayer名を保持する。
+- 保存schema、キー、50 Undo、通常／サンプル分離、Backup JSON、完了試合record、History、Analytics、競技ルールは変更していない。
+- Severityは修正前Critical候補、修正・回帰後の残存Blocker／Critical／Majorは0。現在状態：`FA-IPHONE-002: Code Fix Complete / Compact Card v3 Implemented / iPhone Re-test Required`。
+
 ## ネイティブ化可否
 
 FA-IPHONE-001のコード修正は完了したが、実iPhone再確認が終わるまではネイティブ化へ進行しない。実iPhone確認待ち項目をネイティブ／提出ビルドの確認完了とみなしてはならない。
