@@ -41,6 +41,12 @@ test("Compact Card v4 dimensions and spacing remain unchanged",()=>{
   assert.match(html,/\.cue-resume-action-v1\{[^}]*white-space:nowrap/);
 });
 
+test("iOS flex sizing cannot collapse either Player name to avatar-only width",()=>{
+  assert.match(phase3,/\.cue-resume-player-v4\s*\{[^}]*flex:\s*1 1 0%[^}]*min-width:\s*0[^}]*max-width:\s*none/);
+  assert.match(phase3,/\.cue-resume-player-v4 > span\s*\{[^}]*display:\s*block[^}]*flex:\s*1 1 0%[^}]*width:\s*0[^}]*min-width:\s*0/);
+  assert.match(phase3,/-webkit-text-fill-color:\s*#4f4f4c/);
+});
+
 test("Phase 3 adds no forced reflow, timer repaint or data-path workaround",()=>{
   assert.doesNotMatch(phase3,/offsetWidth|offsetHeight|getBoundingClientRect|animation/);
   const phase3Scripts=html.match(/FA-IPHONE-003 Phase 3[\s\S]{0,1600}/)?.[0]||"";

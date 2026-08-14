@@ -7,8 +7,9 @@
 - 実iPhoneの初回診断ログ取得に成功し、起動直後の`render:dom-after`／`pageshow:after`時点でPlayer名、Player Library、Player一覧DOMが存在することを確認した。画面切替後との比較用に、初回entriesをメモリ保持したままHome復帰時に診断パネルを再展開し、navigation後ログとHome復帰後ログを含めて2回目コピーできるようにした。
 - Phase 2時点ではDOM値と実画面表示の差の根本原因は確定前であり、Player描画ロジックは変更しなかった。
 - FA-IPHONE-003の実機PASS後、スイッチ、診断UI、診断コード、診断manifest、診断Launcherを正式Cleanup Stepで削除する。
-- Phase 3で対象DOM／祖先のcomputed styleと画面切替処理を監査し、Home中断カードとPlayer一覧が、iOSのlegacy momentum scroll layer内で非表示状態から内容を公開するpaint条件を共有していることを特定した。Player一覧には追加で`contain: layout style paint`が適用されていた。
-- Playerデータ、snapshot、resolver、schemaを変更せず、対象2領域の`-webkit-overflow-scrolling: touch`を`auto`へ戻し、Player一覧のpaint containment／`content-visibility`最適化を解除した。forced reflow、timer、遅延再renderは使用していない。診断コードはCleanup待ちで、FA-IPHONE-003の最終PASSはiPhone実機再確認待ち。
+- Phase 3 v4ではiOS scroll layer／Player一覧paint containmentを安全化したが、v4実機スクリーンショットで中断カードのavatarと`vs`だけが表示され、Player名は引き続き非表示だったため、中断カードの原因としては不十分と判定した。
+- 同時取得ログでは起動77ms／117ms時点で両Player名の`textContent`、resolver、card表示状態が正常だった。表示形状とCSS cascadeから、中断カードの`flex:0 1 auto`＋percentage `max-width`をWebKitがavatar-only最小幅へ縮小し、名前flex itemを幅0にしていたことを中断カード固有の根本原因と特定した。
+- v5ではcompact flexを維持したまま両Player wrapperへ`flex:1 1 0%`で残余幅を確定配分し、名前を明示的なshrink対象にした。Playerデータ、snapshot、resolver、schema、64px高、34px競技アイコン、24px avatar、5px間隔、dividerなし、ellipsis、右端`再開 ›`は変更していない。最終PASSはiPhone再確認待ち。
 
 ## v1.0 Final RC Step 6：ネイティブ化前Final Acceptance（2026年8月13日）
 

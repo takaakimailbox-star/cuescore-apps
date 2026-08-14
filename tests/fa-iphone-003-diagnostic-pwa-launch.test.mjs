@@ -23,11 +23,11 @@ test("only the explicit diagnostic query selects the temporary manifest",()=>{
 });
 
 test("diagnostic manifest is offline-cached and versioned with the diagnostic build",()=>{
-  assert.match(sw,/const APP_VERSION = "2\.0-fa-iphone-003-phase3-paint-v4"/);
+  assert.match(sw,/const APP_VERSION = "2\.0-fa-iphone-003-player-name-flex-v5"/);
   assert.match(sw,/"\.\/manifest\.webmanifest"/);
   assert.match(sw,/"\.\/manifest-fa-iphone-003-diagnostic\.webmanifest"/);
   assert.match(sw,/"\.\/fa-iphone-003-diagnostic\.html"/);
-  assert.match(html,/const PWA_VERSION = "2\.0-fa-iphone-003-phase3-paint-v4"/);
+  assert.match(html,/const PWA_VERSION = "2\.0-fa-iphone-003-player-name-flex-v5"/);
 });
 
 test("diagnostic launcher replaces itself with the query-gated app URL",()=>{

@@ -236,6 +236,13 @@ Blocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0、自動テスト全成�
 - Playerデータロジック、snapshot、resolver、Player／Match schema、Backup JSON、Compact Cardの64px高・34px競技アイコン・24px avatar・5px間隔・dividerなし・ellipsis・右端`再開 ›`は変更していない。
 - 診断スイッチ、診断パネル、診断manifest、診断Launcher、診断テストはiPhone PASS後のCleanup Stepまで維持する。状態：`FA-IPHONE-003 Phase 3: iOS Initial Paint Root Fix Implemented / iPhone Re-test Required`。
 
+### FA-IPHONE-003 Phase 3 v4実機再判定／Player Name Flex Width v5
+
+- v4実機スクリーンショットでは中断カードの競技アイコン、両avatar、`vs`、`再開 ›`は描画された一方、Player名だけが非表示だった。scroll layer／paint containment対策だけでは中断カード症状を解消できず、v4の根本原因判定を訂正した。
+- 同じ起動ログの77ms／117ms時点で`石塚 貴章`／`プレイヤー 2`のDOM値、resolver、card表示状態は正常だった。要素単位の表示差と最終CSSから、`.cue-resume-player-v4`の`flex:0 1 auto`とpercentage `max-width`の組合せがWebKitでavatar-only最小幅へ縮み、名前子要素が幅0になることを中断カード固有原因と特定した。
+- compact flexのまま両Player wrapperを`flex:1 1 0%`へ変更し、名前spanへ残余幅を明示配分した。競技アイコン、avatar、`vs`、Player名、`再開 ›`の順序と既存寸法は維持する。
+- forced reflow、timer、遅延再render、Player再読込は使用していない。Playerデータ、snapshot、resolver、Player／Match schema、Backup JSONは変更していない。状態：`FA-IPHONE-003 Player Name Flex Width v5: Implemented / iPhone Re-test Required`。
+
 ## ネイティブ化可否
 
 FA-IPHONE-001のコード修正は完了したが、実iPhone再確認が終わるまではネイティブ化へ進行しない。実iPhone確認待ち項目をネイティブ／提出ビルドの確認完了とみなしてはならない。
