@@ -8664,7 +8664,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-fa-iphone-003-diagnostic-toggle-v2"></script>
+  <script src="./demo-data.js?v=2.0-fa-iphone-003-diagnostic-toggle-v3"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -12709,6 +12709,7 @@ let matchRecordsRawCacheV152 = null;
   }
   let FA_IPHONE_003_DEBUG_V1 = FA_IPHONE_003_QUERY_DEBUG_V1 || readFaIphone003FlagV1();
   const faIphone003EntriesV1 = [];
+  const FA_IPHONE_003_PANEL_STYLE_V1 = "position:fixed;z-index:30000;right:4px;bottom:4px;left:4px;max-height:42dvh;padding:8px;border:2px solid #111;border-radius:10px;background:rgba(255,255,255,.97);color:#111;font:10px/1.35 ui-monospace,SFMono-Regular,monospace;overflow:auto;text-align:left";
   function faIphone003DebugV1(stage, detail = {}) {
     if (!FA_IPHONE_003_DEBUG_V1) return;
     const entry = {at:new Date().toISOString(),ms:Math.round(performance.now()),stage,...detail};
@@ -12736,7 +12737,7 @@ let matchRecordsRawCacheV152 = null;
     const panel=document.createElement("section");
     panel.id="faIphone003PanelV1";
     panel.setAttribute("aria-label","FA-IPHONE-003 診断ログ");
-    panel.style.cssText="position:fixed;z-index:30000;right:4px;bottom:4px;left:4px;max-height:42dvh;padding:8px;border:2px solid #111;border-radius:10px;background:rgba(255,255,255,.97);color:#111;font:10px/1.35 ui-monospace,SFMono-Regular,monospace;overflow:auto;text-align:left";
+    panel.style.cssText=FA_IPHONE_003_PANEL_STYLE_V1;
     panel.innerHTML='<div style="display:flex;position:sticky;top:0;justify-content:space-between;gap:8px;background:#fff"><strong>FA-IPHONE-003</strong><button id="faIphone003CopyV1" type="button" style="min-height:32px;padding:3px 10px">コピー</button></div><pre id="faIphone003OutputV1" style="margin:6px 0 0;white-space:pre-wrap;overflow-wrap:anywhere"></pre>';
     document.body.appendChild(panel);
     el("faIphone003CopyV1")?.addEventListener("click",async()=>{
@@ -12748,7 +12749,26 @@ let matchRecordsRawCacheV152 = null;
         el("faIphone003OutputV1").hidden=true;
       }catch(_){el("faIphone003OutputV1")?.focus();}
     });
-    faIphone003DebugV1("diagnostic:start",{pwa:"2.0-fa-iphone-003-diagnostic-toggle-v2",url:location.href,query:FA_IPHONE_003_QUERY_DEBUG_V1,storedFlag:readFaIphone003FlagV1()});
+    if (!faIphone003EntriesV1.length) faIphone003DebugV1("diagnostic:start",{pwa:"2.0-fa-iphone-003-diagnostic-toggle-v3",url:location.href,query:FA_IPHONE_003_QUERY_DEBUG_V1,storedFlag:readFaIphone003FlagV1()});
+    else el("faIphone003OutputV1").textContent=faIphone003EntriesV1.map(item=>JSON.stringify(item)).join("\n");
+  }
+  function showFaIphone003PanelV1() {
+    if (!FA_IPHONE_003_DEBUG_V1) return false;
+    installFaIphone003PanelV1();
+    const panel=el("faIphone003PanelV1");
+    const output=el("faIphone003OutputV1");
+    const copy=el("faIphone003CopyV1");
+    if (!panel || !output || !copy) return false;
+    panel.style.cssText=FA_IPHONE_003_PANEL_STYLE_V1;
+    output.hidden=false;
+    output.textContent=faIphone003EntriesV1.map(item=>JSON.stringify(item)).join("\n");
+    copy.textContent="コピー";
+    return true;
+  }
+  function isFaIphone003HomeVisibleV1() {
+    if (!FA_IPHONE_003_DEBUG_V1 || el("cueHomeV1")?.classList.contains("hidden")) return false;
+    if (!el("playerLibraryOverlay")?.classList.contains("hidden")) return false;
+    return !["settings-mode","records-mode","rankings-mode","pro-game-mode","vs-analysis-mode","player-info-mode","statistics-filter-mode"].some(mode=>app.classList.contains(mode));
   }
   function setFaIphone003DiagnosticV1(enabled) {
     try {
@@ -16669,10 +16689,17 @@ let matchRecordsRawCacheV152 = null;
   window.addEventListener("pageshow", event => {
     initializePlayerUiV1();
     faIphone003DebugV1("pageshow:after",{persisted:event.persisted,...faIphone003DomV1()});
+    if (isFaIphone003HomeVisibleV1()) showFaIphone003PanelV1();
   });
   if (FA_IPHONE_003_DEBUG_V1) document.addEventListener("click", event => {
+    if (event.target.closest("#faIphone003PanelV1")) return;
     const target=event.target.closest("button,a,[role='button']");
-    requestAnimationFrame(()=>faIphone003DebugV1("navigation:after",{target:target?.id||target?.getAttribute("aria-label")||String(target?.textContent||"").trim().slice(0,80),...faIphone003DomV1()}));
+    requestAnimationFrame(()=>{
+      faIphone003DebugV1("navigation:after",{target:target?.id||target?.getAttribute("aria-label")||String(target?.textContent||"").trim().slice(0,80),...faIphone003DomV1()});
+      if (!isFaIphone003HomeVisibleV1()) return;
+      showFaIphone003PanelV1();
+      faIphone003DebugV1("home:return",faIphone003DomV1());
+    });
   });
 
   el("playerLibrarySortBtnV1")?.addEventListener("click", () => {
@@ -19213,7 +19240,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-fa-iphone-003-diagnostic-toggle-v2";
+    const PWA_VERSION = "2.0-fa-iphone-003-diagnostic-toggle-v3";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {

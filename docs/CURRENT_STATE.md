@@ -4,6 +4,8 @@
 
 - FA-IPHONE-003の実iPhone診断を継続する。診断URL／診断専用manifest／診断Launcher方式では、Home Screenからの通常PWA再起動時に診断パネルを維持できなかった。
 - 通常のCueScore AppsのSettingsに一時診断スイッチを追加し、専用グローバルフラグ`cueScore.debug.faIphone003`が`"1"`の間は、queryなしの通常PWA起動でも既存診断パネルとログ取得を有効にする。フラグは正式Settings schema、Player／Match schema、Backup JSON、通常／サンプルデータ領域に含めない。
+- 実iPhoneの初回診断ログ取得に成功し、起動直後の`render:dom-after`／`pageshow:after`時点でPlayer名、Player Library、Player一覧DOMが存在することを確認した。画面切替後との比較用に、初回entriesをメモリ保持したままHome復帰時に診断パネルを再展開し、navigation後ログとHome復帰後ログを含めて2回目コピーできるようにした。
+- DOM値と実画面表示の差の根本原因は確定前であり、Player描画ロジックの根本修正はまだ行っていない。
 - FA-IPHONE-003の根本修正は未実施。実機ログ取得と根本修正完了後、スイッチ、診断UI、診断コード、診断manifest、診断Launcherを正式cleanup Stepで削除する。
 
 ## v1.0 Final RC Step 6：ネイティブ化前Final Acceptance（2026年8月13日）
