@@ -211,6 +211,7 @@ Blocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0、自動テスト全成�
 - 競技アイコンは34px・左端独立領域、Player avatarは24pxとし、薄い縦線とサイズ差で識別する。Player写真、preset、defaultは既存resolverを利用する。
 - 名前のみ均等にellipsisし、accessible nameには競技名と完全な両Player名を保持する。保存schema・復元ロジック・Undo・通常／サンプル分離・3分岐・Backup JSON・競技ルールは変更していない。
 - 現在状態：`Compact Card v4: Implemented / FA-IPHONE-002 iPhone PASS / iPhone UI Re-test Required`。
+- Compact Card v4 micro adjustmentとして、競技アイコン右側dividerを削除し、Player 1／`vs`／Player 2を1つの対戦ブロックへ統合した。64px高、34px競技アイコン、24px avatar、右端「再開 ›」、保存・復元仕様は変更していない。
 
 ## ネイティブ化可否
 

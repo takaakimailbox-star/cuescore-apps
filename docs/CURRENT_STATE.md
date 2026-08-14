@@ -317,6 +317,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - Compact Card v4として高さ64pxの1列カードを採用した。表示は競技アイコン、Player 1 avatar＋名前、`vs`、Player 2 avatar＋名前、`再開 ›`のみとし、日時・競技条件はHomeカードから非表示にした。
 - 競技アイコン34pxを左端の区切り付き独立領域に置き、Player avatar 24pxより大きく表示する。既存Player写真／preset avatar／default avatarのresolverを再利用し、新規schemaは追加しない。
 - v4 UIは実iPhone再確認待ち。保存・復元、50 Undo、通常／サンプル分離、3分岐、Backup JSON、競技ルールは変更していない。
+- Compact Card v4 micro adjustmentとして、競技アイコン右側のdividerを削除し、44px独立領域と余白のみでPlayer領域と区別する。Player 1／`vs`／Player 2は5px間隔の単一対戦ブロックへ統合した。その他仕様は変更していない。
 
 ## サンプルデータ v3.1（2026年8月11日）
 
