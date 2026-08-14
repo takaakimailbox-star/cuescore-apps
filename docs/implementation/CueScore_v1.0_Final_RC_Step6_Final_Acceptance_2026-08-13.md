@@ -177,6 +177,15 @@ Blocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0、自動テスト全成�
 - 6競技のカード表記と再開経路、通常／サンプル領域分離は共通実装と回帰テストで確認した。実iPhone再確認前は実機PASSとしない。
 - 現在状態：`In-progress Match UX: Home Card Implemented / iPhone Re-test Required`。
 
+### FA-IPHONE-001 実機UX改善：コンパクト中断カード（2026年8月14日）
+
+- Product OwnerはHome中断カード方式を維持し、大型の縦カードを高さを抑えたコンパクト横長カードへ変更することを採用した。
+- 必須情報を3段へ整理し、大きな黒い再開ボタンを廃止した。カード全体がタップ／クリック／キーボード操作可能な再開操作で、右側に補助導線「再開 ›」を表示する。
+- 長いPlayer名は視覚上ellipsisとし、カードのaccessible nameではPlayer 1／2の完全な名前、競技、条件、再開操作を提供する。競技アイコンは装飾扱いを維持する。
+- 6競技の条件表記と新規試合開始時の3分岐は変更していない。`cueScore.inProgressMatch.v1`、サンプルデータ分離キー、schema version 1、直近50 Undo、復元・cleanup、完了試合record、Backup JSON、History、Analytics、競技ルールも変更していない。
+- 390×844px相当のブラウザでカード寸法、横スクロールなし、長いPlayer名、カード全体からの再開、3分岐を再確認する。実iPhone再確認前は実機PASSとしない。
+- 現在状態：`In-progress Match Compact Card: Implemented / iPhone Re-test Required`。
+
 ## ネイティブ化可否
 
 FA-IPHONE-001のコード修正は完了したが、実iPhone再確認が終わるまではネイティブ化へ進行しない。実iPhone確認待ち項目をネイティブ／提出ビルドの確認完了とみなしてはならない。
