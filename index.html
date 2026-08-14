@@ -10,14 +10,6 @@
   <meta name="format-detection" content="telephone=no" />
   <meta name="description" content="CueScore Apps — 複数のキュースポーツを記録・分析できる統合スコアリングアプリ" />
   <link rel="manifest" href="./manifest.webmanifest" />
-  <script>
-    // Temporary FA-IPHONE-003 diagnostic install target. Normal launches keep
-    // the official manifest and start_url; only the explicit diagnostic URL
-    // installs a Home Screen entry that preserves the debug query.
-    if (new URLSearchParams(location.search).get("debug") === "fa-iphone-003") {
-      document.querySelector('link[rel="manifest"]').href = "./manifest-fa-iphone-003-diagnostic.webmanifest";
-    }
-  </script>
   <link rel="icon" type="image/svg+xml" href="./src/assets/logo/CueScore_LogoMark_Black.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="./icons/cuescore-app-icon-180.png" />
   <link rel="stylesheet" href="./analysis-final-rc.css" />
@@ -8664,7 +8656,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-fa-iphone-003-player-name-unclipped-v7"></script>
+  <script src="./demo-data.js?v=2.0-final-acceptance-rc1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -12701,99 +12693,6 @@ let matchRecordsRawCacheV152 = null;
   const IN_PROGRESS_MATCH_KEY_V1 = "cueScore.inProgressMatch.v1";
   const IN_PROGRESS_MATCH_SCHEMA_V1 = 1;
   const IN_PROGRESS_PERSISTED_UNDO_LIMIT_V1 = 50;
-  const FA_IPHONE_003_DEBUG_KEY_V1 = "cueScore.debug.faIphone003";
-  const FA_IPHONE_003_QUERY_DEBUG_V1 = new URLSearchParams(location.search).get("debug") === "fa-iphone-003";
-  function readFaIphone003FlagV1() {
-    try { return localStorage.getItem(FA_IPHONE_003_DEBUG_KEY_V1) === "1"; }
-    catch (_) { return false; }
-  }
-  let FA_IPHONE_003_DEBUG_V1 = FA_IPHONE_003_QUERY_DEBUG_V1 || readFaIphone003FlagV1();
-  const faIphone003EntriesV1 = [];
-  const FA_IPHONE_003_PANEL_STYLE_V1 = "position:fixed;z-index:30000;right:4px;bottom:4px;left:4px;max-height:42dvh;padding:8px;border:2px solid #111;border-radius:10px;background:rgba(255,255,255,.97);color:#111;font:10px/1.35 ui-monospace,SFMono-Regular,monospace;overflow:auto;text-align:left";
-  function faIphone003DebugV1(stage, detail = {}) {
-    if (!FA_IPHONE_003_DEBUG_V1) return;
-    const entry = {at:new Date().toISOString(),ms:Math.round(performance.now()),stage,...detail};
-    faIphone003EntriesV1.push(entry);
-    const output=el("faIphone003OutputV1");
-    if(output)output.textContent=faIphone003EntriesV1.map(item=>JSON.stringify(item)).join("\n");
-  }
-  function faIphone003DomV1() {
-    if (!FA_IPHONE_003_DEBUG_V1) return {};
-    const card=el("cueResumeCardV1");
-    const list=el("playerLibraryList");
-    return {
-      player1:el("cueResumePlayer1V1")?.textContent ?? null,
-      player2:el("cueResumePlayer2V1")?.textContent ?? null,
-      cardHidden:card?.hidden ?? null,
-      cardAria:card?.getAttribute("aria-label") ?? null,
-      playerListChildren:list?.children.length ?? null,
-      playerListText:String(list?.innerText||"").slice(0,500),
-      playerOverlayHidden:el("playerLibraryOverlay")?.classList.contains("hidden") ?? null,
-      playerListContentVisibility:list ? getComputedStyle(list).contentVisibility : null
-    };
-  }
-  function installFaIphone003PanelV1() {
-    if (!FA_IPHONE_003_DEBUG_V1 || el("faIphone003PanelV1")) return;
-    const panel=document.createElement("section");
-    panel.id="faIphone003PanelV1";
-    panel.setAttribute("aria-label","FA-IPHONE-003 診断ログ");
-    panel.style.cssText=FA_IPHONE_003_PANEL_STYLE_V1;
-    panel.innerHTML='<div style="display:flex;position:sticky;top:0;justify-content:space-between;gap:8px;background:#fff"><strong>FA-IPHONE-003</strong><button id="faIphone003CopyV1" type="button" style="min-height:32px;padding:3px 10px">コピー</button></div><pre id="faIphone003OutputV1" style="margin:6px 0 0;white-space:pre-wrap;overflow-wrap:anywhere"></pre>';
-    document.body.appendChild(panel);
-    el("faIphone003CopyV1")?.addEventListener("click",async()=>{
-      const text=faIphone003EntriesV1.map(item=>JSON.stringify(item)).join("\n");
-      try{
-        await navigator.clipboard.writeText(text);
-        el("faIphone003CopyV1").textContent="コピー済み";
-        panel.style.cssText+=";top:4px;right:4px;bottom:auto;left:auto;width:190px;max-height:48px";
-        el("faIphone003OutputV1").hidden=true;
-      }catch(_){el("faIphone003OutputV1")?.focus();}
-    });
-    if (!faIphone003EntriesV1.length) faIphone003DebugV1("diagnostic:start",{pwa:"2.0-fa-iphone-003-player-name-unclipped-v7",url:location.href,query:FA_IPHONE_003_QUERY_DEBUG_V1,storedFlag:readFaIphone003FlagV1()});
-    else el("faIphone003OutputV1").textContent=faIphone003EntriesV1.map(item=>JSON.stringify(item)).join("\n");
-  }
-  function showFaIphone003PanelV1() {
-    if (!FA_IPHONE_003_DEBUG_V1) return false;
-    installFaIphone003PanelV1();
-    const panel=el("faIphone003PanelV1");
-    const output=el("faIphone003OutputV1");
-    const copy=el("faIphone003CopyV1");
-    if (!panel || !output || !copy) return false;
-    panel.style.cssText=FA_IPHONE_003_PANEL_STYLE_V1;
-    output.hidden=false;
-    output.textContent=faIphone003EntriesV1.map(item=>JSON.stringify(item)).join("\n");
-    copy.textContent="コピー";
-    return true;
-  }
-  function isFaIphone003HomeVisibleV1() {
-    if (!FA_IPHONE_003_DEBUG_V1 || el("cueHomeV1")?.classList.contains("hidden")) return false;
-    if (!el("playerLibraryOverlay")?.classList.contains("hidden")) return false;
-    return !["settings-mode","records-mode","rankings-mode","pro-game-mode","vs-analysis-mode","player-info-mode","statistics-filter-mode"].some(mode=>app.classList.contains(mode));
-  }
-  function setFaIphone003DiagnosticV1(enabled) {
-    try {
-      if (enabled) localStorage.setItem(FA_IPHONE_003_DEBUG_KEY_V1,"1");
-      else localStorage.removeItem(FA_IPHONE_003_DEBUG_KEY_V1);
-    } catch (error) {
-      console.error("CueScore FA-IPHONE-003 diagnostic flag update failed",error);
-      return false;
-    }
-    FA_IPHONE_003_DEBUG_V1 = Boolean(enabled);
-    if (FA_IPHONE_003_DEBUG_V1) {
-      installFaIphone003PanelV1();
-      faIphone003DebugV1("diagnostic:toggle",{enabled:true,storedFlag:readFaIphone003FlagV1()});
-    } else {
-      el("faIphone003PanelV1")?.remove();
-      faIphone003EntriesV1.length=0;
-    }
-    return true;
-  }
-  window.CueScoreFaIphone003DiagnosticV1 = Object.freeze({
-    key:FA_IPHONE_003_DEBUG_KEY_V1,
-    isEnabled:()=>FA_IPHONE_003_DEBUG_V1,
-    isStored:readFaIphone003FlagV1,
-    setEnabled:setFaIphone003DiagnosticV1
-  });
   function inProgressMatchStorageKeyV1() {
     return window.CueScoreDemoData?.resolveSettingKey(IN_PROGRESS_MATCH_KEY_V1) || IN_PROGRESS_MATCH_KEY_V1;
   }
@@ -12900,7 +12799,6 @@ let matchRecordsRawCacheV152 = null;
     const snapshotName=String(state?.playerNames?.[slot] ?? state?.[`p${slot}Name`] ?? "").trim();
     const registeredName=String(registeredPlayer?.name ?? "").trim();
     const result=snapshotName||registeredName||`Player ${slot}`;
-    faIphone003DebugV1("name:resolve",{slot,snapshotName,registeredName,result,registeredId:registeredPlayer?.id??null});
     return result;
   }
   function renderInProgressHomeCardV1() {
@@ -12921,13 +12819,6 @@ let matchRecordsRawCacheV152 = null;
     const players=readPlayerLibrary();
     const player1Record=players.find(item=>item.id===state.selectedRegisteredPlayer?.[1]);
     const player2Record=players.find(item=>item.id===state.selectedRegisteredPlayer?.[2]);
-    faIphone003DebugV1("render:inputs",{
-      schemaVersion:payload.schemaVersion,
-      snapshotPlayerNames:state.playerNames??null,
-      legacyNames:{p1Name:state.p1Name??null,p2Name:state.p2Name??null},
-      selectedRegisteredPlayer:state.selectedRegisteredPlayer??null,
-      playerLibrary:players.map(player=>({id:player.id,name:player.name,avatar:player.avatar?.type??null,isPrimary:player.isPrimary===true}))
-    });
     // Names are synchronous snapshot data. Player Library is only an immediate
     // fallback for older/incomplete snapshots and remains the avatar source.
     const player1=inProgressPlayerNameV1(state,1,player1Record);
@@ -12943,7 +12834,6 @@ let matchRecordsRawCacheV152 = null;
       avatar.onerror=()=>{avatar.onerror=null;avatar.src=DEFAULT_PLAYER_AVATAR_SOURCE_V4;};
     });
     card.setAttribute("aria-label",`中断中の${visual.name}、${player1}対${player2}、${condition}、試合を再開`);
-    faIphone003DebugV1("render:dom-after",faIphone003DomV1());
     return true;
   }
   let pendingNewMatchDisciplineButtonV1=null;
@@ -16673,7 +16563,7 @@ let matchRecordsRawCacheV152 = null;
 
   document.getElementById("playerManagementBtn")?.addEventListener("click", openPlayerManagementV145);
 
-  // FA-IPHONE-003: complete every Player-dependent initial view in one
+  // Complete every Player-dependent initial view in one
   // synchronous startup pass. localStorage is synchronous; no timer,
   // navigation, pageshow-only refresh, or secondary interaction is required.
   function initializePlayerUiV1() {
@@ -16681,25 +16571,11 @@ let matchRecordsRawCacheV152 = null;
     renderPlayerLibrary();
     renderInProgressHomeCardV1();
     initializePrimaryMatchSetupV1();
-    faIphone003DebugV1("startup:player-ui-after",faIphone003DomV1());
     return true;
   }
-  installFaIphone003PanelV1();
   initializePlayerUiV1();
   window.addEventListener("pageshow", event => {
     initializePlayerUiV1();
-    faIphone003DebugV1("pageshow:after",{persisted:event.persisted,...faIphone003DomV1()});
-    if (isFaIphone003HomeVisibleV1()) showFaIphone003PanelV1();
-  });
-  if (FA_IPHONE_003_DEBUG_V1) document.addEventListener("click", event => {
-    if (event.target.closest("#faIphone003PanelV1")) return;
-    const target=event.target.closest("button,a,[role='button']");
-    requestAnimationFrame(()=>{
-      faIphone003DebugV1("navigation:after",{target:target?.id||target?.getAttribute("aria-label")||String(target?.textContent||"").trim().slice(0,80),...faIphone003DomV1()});
-      if (!isFaIphone003HomeVisibleV1()) return;
-      showFaIphone003PanelV1();
-      faIphone003DebugV1("home:return",faIphone003DomV1());
-    });
   });
 
   el("playerLibrarySortBtnV1")?.addEventListener("click", () => {
@@ -19240,7 +19116,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-fa-iphone-003-player-name-unclipped-v7";
+    const PWA_VERSION = "2.0-final-acceptance-rc1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -25413,12 +25289,6 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
             <button type="button" class="is-danger" data-demo-action="delete">削除</button>
           </div>
         </section>
-        <h1 class="settings-formal-section-title-v1">一時診断</h1>
-        <section class="settings-demo-card-v1" aria-label="FA-IPHONE-003 一時診断設定">
-          <div class="settings-demo-head-v1"><label for="settingsFaIphone003Toggle"><strong>FA-IPHONE-003 診断モード</strong></label><input class="settings-switch" id="settingsFaIphone003Toggle" type="checkbox" role="switch"></div>
-          <p class="settings-demo-note-v1">Player初期表示の実機診断用。一時機能です。</p>
-          <div class="settings-status" id="settingsFaIphone003Status" role="status"></div>
-        </section>
         <div class="settings-formal-spacer-v1" aria-hidden="true"></div>
         <footer class="settings-app-footer-v1">
           <div class="settings-app-brand-v1"><span data-cuescore-logo="horizontal-black"></span><span class="settings-version">Version 1.0</span></div>
@@ -25474,15 +25344,8 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     }
   }
 
-  function renderDiagnosticState() {
-    const diagnostic=window.CueScoreFaIphone003DiagnosticV1;
-    const toggle=root.querySelector("#settingsFaIphone003Toggle");
-    if(toggle)toggle.checked=diagnostic?.isStored()===true;
-  }
-
   document.getElementById("settingsBtn")?.addEventListener("click", () => {
     renderCloudState();
-    renderDiagnosticState();
     root.querySelector(".settings-formal-scroll-v1")?.scrollTo(0, 0);
   });
   window.addEventListener("online", renderCloudState);
@@ -25552,17 +25415,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     if (nav === "analytics") document.getElementById("openRankingsBtn")?.click();
     if (nav === "player") document.getElementById("playerManagementBtn")?.click();
   });
-  root.querySelector("#settingsFaIphone003Toggle")?.addEventListener("change",event=>{
-    const toggle=event.currentTarget;
-    const enabled=Boolean(toggle.checked);
-    const diagnostic=window.CueScoreFaIphone003DiagnosticV1;
-    const status=root.querySelector("#settingsFaIphone003Status");
-    const saved=diagnostic?.setEnabled(enabled)===true;
-    toggle.checked=diagnostic?.isStored()===true;
-    if(status){status.textContent=saved?(enabled?"診断モードをONにしました。":"診断モードをOFFにしました。"):"診断モードを変更できませんでした。";status.classList.toggle("error",!saved);}
-  });
   renderCloudState();
-  renderDiagnosticState();
   const restoreSettingsAfterLegalV160 = () => {
     if (sessionStorage.getItem("cuescore.returnToSettings.v1") !== "1") return;
     sessionStorage.removeItem("cuescore.returnToSettings.v1");
@@ -28144,8 +27997,8 @@ body.cue-edge-back-animating-v2 .app{
 .app.vs-analysis-mode .vs-empty{margin-top:14px;padding:42px 14px;border:1px solid #dfdfdb;border-radius:19px;background:#fff;color:#777773}
 @media(max-width:380px){.app.vs-analysis-mode .vs-analysis-content{padding-left:10px;padding-right:10px}.app.vs-analysis-mode .rival-matchup-v2{padding:12px 6px}.app.vs-analysis-mode .rival-avatar-v2{width:56px;height:56px}.app.vs-analysis-mode .rival-opponent-select-v2{max-width:100px}}
 </style>
-<style id="faIphone003Phase3PaintSafetyV1">
-/* FA-IPHONE-003 Phase 3: keep initial text in normal paint invalidation paths.
+<style id="cueInitialPlayerPaintSafetyV1">
+/* Keep initial Player text in normal paint invalidation paths.
    Modern iOS scrolls these overflow areas natively; the legacy momentum hint
    can retain a stale composited layer when hidden content becomes visible. */
 .cue-home-v1,

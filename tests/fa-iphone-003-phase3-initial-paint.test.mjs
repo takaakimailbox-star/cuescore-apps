@@ -3,19 +3,19 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 
 const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
-const phase3=html.match(/<style id="faIphone003Phase3PaintSafetyV1">([\s\S]*?)<\/style>/)?.[1]||"";
+const paintSafety=html.match(/<style id="cueInitialPlayerPaintSafetyV1">([\s\S]*?)<\/style>/)?.[1]||"";
 
 test("Home resume card stays on the normal iOS paint invalidation path",()=>{
-  assert.ok(phase3);
-  const scrollRule=phase3.match(/\.cue-home-v1,[\s\S]*?\}/)?.[0]||"";
+  assert.ok(paintSafety);
+  const scrollRule=paintSafety.match(/\.cue-home-v1,[\s\S]*?\}/)?.[0]||"";
   assert.match(scrollRule,/-webkit-overflow-scrolling:\s*auto/);
   assert.doesNotMatch(scrollRule,/transform|translateZ|will-change|contain\s*:/);
 });
 
 test("Player Library removes the shared stale scroll layer and paint containment",()=>{
-  assert.match(phase3,/\.player-management-formal-v1 \.player-library-list,[\s\S]*?\.player-selection-formal-v1 \.player-library-list[\s\S]*?-webkit-overflow-scrolling:\s*auto/);
-  assert.match(phase3,/#playerLibraryList\s*\{\s*contain:\s*none/);
-  assert.match(phase3,/#playerLibraryOverlay,[\s\S]*?#playerLibraryList > \*[\s\S]*?content-visibility:\s*visible/);
+  assert.match(paintSafety,/\.player-management-formal-v1 \.player-library-list,[\s\S]*?\.player-selection-formal-v1 \.player-library-list[\s\S]*?-webkit-overflow-scrolling:\s*auto/);
+  assert.match(paintSafety,/#playerLibraryList\s*\{\s*contain:\s*none/);
+  assert.match(paintSafety,/#playerLibraryOverlay,[\s\S]*?#playerLibraryList > \*[\s\S]*?content-visibility:\s*visible/);
 });
 
 test("fresh startup still writes both Player names synchronously before returning",()=>{
@@ -42,15 +42,14 @@ test("Compact Card v4 dimensions and spacing remain unchanged",()=>{
 });
 
 test("iOS receives a definite unclipped grid track for each Player name",()=>{
-  assert.match(phase3,/\.cue-resume-player-v4\s*\{[^}]*display:\s*grid[^}]*grid-template-columns:\s*24px minmax\(0, 1fr\)[^}]*flex:\s*1 1 0%/);
-  assert.match(phase3,/\.cue-resume-player-v4 > span\s*\{[^}]*display:\s*block[^}]*width:\s*auto[^}]*min-width:\s*0[^}]*max-width:\s*100%/);
-  const nameRule=phase3.match(/\.cue-resume-player-v4 > span\s*\{([^}]*)\}/)?.[1]||"";
+  assert.match(paintSafety,/\.cue-resume-player-v4\s*\{[^}]*display:\s*grid[^}]*grid-template-columns:\s*24px minmax\(0, 1fr\)[^}]*flex:\s*1 1 0%/);
+  assert.match(paintSafety,/\.cue-resume-player-v4 > span\s*\{[^}]*display:\s*block[^}]*width:\s*auto[^}]*min-width:\s*0[^}]*max-width:\s*100%/);
+  const nameRule=paintSafety.match(/\.cue-resume-player-v4 > span\s*\{([^}]*)\}/)?.[1]||"";
   assert.doesNotMatch(nameRule,/(?:^|\n)\s*width:\s*0\s*;/);
-  assert.match(phase3,/\.cue-resume-player-v4 > span\s*\{[^}]*overflow:\s*visible[^}]*color:\s*#4f4f4c[^}]*text-overflow:\s*clip[^}]*-webkit-text-fill-color:\s*currentColor/);
+  assert.match(paintSafety,/\.cue-resume-player-v4 > span\s*\{[^}]*overflow:\s*visible[^}]*color:\s*#4f4f4c[^}]*text-overflow:\s*clip[^}]*-webkit-text-fill-color:\s*currentColor/);
 });
 
-test("Phase 3 adds no forced reflow, timer repaint or data-path workaround",()=>{
-  assert.doesNotMatch(phase3,/offsetWidth|offsetHeight|getBoundingClientRect|animation/);
-  const phase3Scripts=html.match(/FA-IPHONE-003 Phase 3[\s\S]{0,1600}/)?.[0]||"";
-  assert.doesNotMatch(phase3Scripts,/setTimeout|setInterval|requestAnimationFrame|readPlayerLibrary\(/);
+test("paint safety adds no forced reflow, timer repaint or data-path workaround",()=>{
+  assert.doesNotMatch(paintSafety,/offsetWidth|offsetHeight|getBoundingClientRect|animation/);
+  assert.doesNotMatch(paintSafety,/setTimeout|setInterval|requestAnimationFrame|readPlayerLibrary\(/);
 });

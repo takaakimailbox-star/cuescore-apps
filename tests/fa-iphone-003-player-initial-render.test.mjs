@@ -4,12 +4,12 @@ import fs from "node:fs";
 
 const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
 
-test("FA-IPHONE-003 synchronizes Player Library, list, resume card and main Player in startup order",()=>{
+test("startup synchronizes Player Library, list, resume card and main Player in order",()=>{
   assert.match(html,/function initializePlayerUiV1\(\) \{\s*readPlayerLibrary\(\);\s*renderPlayerLibrary\(\);\s*renderInProgressHomeCardV1\(\);\s*initializePrimaryMatchSetupV1\(\);[\s\S]*?return true;\s*\}/);
   assert.match(html,/function initializePlayerUiV1\(\)[\s\S]*?initializePlayerUiV1\(\);\s*window\.addEventListener\("pageshow", event => \{\s*initializePlayerUiV1\(\)/);
 });
 
-test("FA-IPHONE-003 initial Player render does not depend on timers, animation frames or navigation",()=>{
+test("initial Player render does not depend on timers, animation frames or navigation",()=>{
   const initializer=html.match(/function initializePlayerUiV1\(\) \{([\s\S]*?)\n  \}/)?.[1]||"";
   assert.ok(initializer);
   assert.doesNotMatch(initializer,/setTimeout|requestAnimationFrame|Promise|queueMicrotask/);
@@ -28,15 +28,4 @@ test("normal and sample modes keep the existing key resolvers and Compact Card C
   assert.match(html,/\.cue-resume-card-v1\{[^}]*min-height:64px!important/);
   assert.match(html,/\.cue-resume-game-v4 img\{width:34px;height:34px\}/);
   assert.match(html,/\.cue-resume-player-v4 img\{width:24px;height:24px/);
-});
-
-test("temporary diagnostics are query or isolated-flag gated and capture the Phase 2 values",()=>{
-  assert.match(html,/new URLSearchParams\(location\.search\)\.get\("debug"\) === "fa-iphone-003"/);
-  assert.match(html,/localStorage\.getItem\(FA_IPHONE_003_DEBUG_KEY_V1\) === "1"/);
-  for(const value of ["snapshotPlayerNames","selectedRegisteredPlayer","playerLibrary","name:resolve","render:dom-after","pageshow:after","navigation:after","playerListChildren"]){
-    assert.match(html,new RegExp(value.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")));
-  }
-  const diagnostic=html.match(/const FA_IPHONE_003_DEBUG_KEY_V1[\s\S]*?function inProgressMatchStorageKeyV1/)?.[0]||"";
-  assert.ok(diagnostic);
-  assert.doesNotMatch(diagnostic,/verifiedLocalStorageWrite/);
 });

@@ -255,6 +255,17 @@ Blocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0、自動テスト全成�
 - 名前span自身の`overflow:hidden + text-overflow:ellipsis`をiOS初期paintの失敗経路と特定し、確定grid trackは維持したまま`overflow:visible + text-overflow:clip`の通常文字paintへ変更した。色は`color`と`currentColor`で同期する。
 - 64px高、競技アイコン、avatar、`vs`、右端`再開 ›`、カード全体操作を維持する。Playerデータ、snapshot、resolver、schema、Backup、timer、forced reflowへの変更はない。状態：`FA-IPHONE-003 Player Name Unclipped Paint v7: Implemented / iPhone Re-test Required`。
 
+## FA-IPHONE-003 Cleanup / Final Acceptance再確認（2026年8月15日）
+
+- Product Ownerが実iPhoneで両Player名の起動直後表示を確認し、FA-IPHONE-003を`Resolved / iPhone PASS`とした。
+- 正式修正である同期初期化、paint invalidation安全化、`24px minmax(0,1fr)` grid、名前spanの`width:0`廃止、`overflow:visible`、`text-overflow:clip`、`-webkit-text-fill-color:currentColor`は維持した。
+- 一時診断Settings UI、専用localStorage参照、パネル／ログ、query分岐、診断manifest、Launcher、Service Worker診断cache、診断専用テストを削除した。PWA番号は`2.0-final-acceptance-rc1`。
+- Gate 1：正式自動テスト140件成功／失敗0／スキップ0。Gate 2：6競技Core Flow回帰PASS。Gate 3：進行中保存・再起動回帰PASS。Gate 4：50 Undo回帰PASS。
+- Gate 5：Backup / Restore形式変更なし。Gate 6：normal / sample分離維持。Gate 7：Player一覧、Main Player、avatar、写真経路、初期描画回帰PASS。Gate 8：History / Detail / Analytics回帰PASS。
+- Gate 9：通常manifestと更新済みService Workerを確認し、キャッシュ取得後のサーバー停止状態で再起動PASS。Gate 10：Settingsから診断UIがなく、正式項目が正常。Gate 11：Legal / Support回帰PASS。Gate 12：公開表記／Later回帰PASS。
+- Gate 13：390px縦画面でbody `clientWidth=390`／`scrollWidth=390`、Compact Card 354×64px、名前track約79pxを確認。Gate 14：診断文字列は実行コード、UI、通常manifest、Service Workerに残存なし。履歴資料と正式再発防止テスト上のIssue名のみ許容した。
+- 保存schema、Backup JSON、Player／Match schema、競技ルールは変更していない。SeverityはBlocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0。判定：`PWA Final Acceptance: RECONFIRMED / iPhone Final Check Required`。
+
 ## ネイティブ化可否
 
 FA-IPHONE-001のコード修正は完了したが、実iPhone再確認が終わるまではネイティブ化へ進行しない。実iPhone確認待ち項目をネイティブ／提出ビルドの確認完了とみなしてはならない。

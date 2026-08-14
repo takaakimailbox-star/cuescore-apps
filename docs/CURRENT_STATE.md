@@ -1,17 +1,14 @@
 # CueScore Apps Current State
 
-## FA-IPHONE-003：一時診断スイッチ方式（2026年8月14日）
+## FA-IPHONE-003：Resolved / iPhone PASS / Cleanup Complete（2026年8月15日）
 
-- FA-IPHONE-003の実iPhone診断を継続する。診断URL／診断専用manifest／診断Launcher方式では、Home Screenからの通常PWA再起動時に診断パネルを維持できなかった。
-- 通常のCueScore AppsのSettingsに一時診断スイッチを追加し、専用グローバルフラグ`cueScore.debug.faIphone003`が`"1"`の間は、queryなしの通常PWA起動でも既存診断パネルとログ取得を有効にする。フラグは正式Settings schema、Player／Match schema、Backup JSON、通常／サンプルデータ領域に含めない。
-- 実iPhoneの初回診断ログ取得に成功し、起動直後の`render:dom-after`／`pageshow:after`時点でPlayer名、Player Library、Player一覧DOMが存在することを確認した。画面切替後との比較用に、初回entriesをメモリ保持したままHome復帰時に診断パネルを再展開し、navigation後ログとHome復帰後ログを含めて2回目コピーできるようにした。
-- Phase 2時点ではDOM値と実画面表示の差の根本原因は確定前であり、Player描画ロジックは変更しなかった。
-- FA-IPHONE-003の実機PASS後、スイッチ、診断UI、診断コード、診断manifest、診断Launcherを正式Cleanup Stepで削除する。
-- Phase 3 v4ではiOS scroll layer／Player一覧paint containmentを安全化したが、v4実機スクリーンショットで中断カードのavatarと`vs`だけが表示され、Player名は引き続き非表示だったため、中断カードの原因としては不十分と判定した。
-- 同時取得ログでは起動77ms／117ms時点で両Player名の`textContent`、resolver、card表示状態が正常だった。表示形状とCSS cascadeから、中断カードの`flex:0 1 auto`＋percentage `max-width`をWebKitがavatar-only最小幅へ縮小し、名前flex itemを幅0にしていたことを中断カード固有の根本原因と特定した。
-- v5ではcompact flexを維持したまま両Player wrapperへ`flex:1 1 0%`で残余幅を確定配分し、名前を明示的なshrink対象にした。Playerデータ、snapshot、resolver、schema、64px高、34px競技アイコン、24px avatar、5px間隔、dividerなし、ellipsis、右端`再開 ›`は変更していない。最終PASSはiPhone再確認待ち。
-- v5実機でもwrapperの余白と両avatarは描画されたがPlayer名だけが非表示だった。Safariでは名前spanの`width:0`がflex-growより優先されていたため、v6では外側compact flexを維持しつつ各Player内部を`24px minmax(0,1fr)`の2列gridへ変更し、名前から`width:0`を廃止した。最終PASSはiPhone再確認待ち。
-- v6実機では名前用grid幅が確保されてもPlayer名のglyphだけが非表示だった。ログでsnapshot、resolver、DOM、ARIA、card表示が起動64–135msの全段階で正常なことを確認し、情報量／データ／幅不足を除外した。v7ではiOS初期paintで文字を消している名前span自身の`overflow:hidden + text-overflow:ellipsis`経路を廃止し、確定grid track内の通常文字paintへ変更した。最終PASSはiPhone再確認待ち。
+- Product Ownerが実iPhone Home Screen PWAで、中断カードの両Player名が起動直後から表示されることを確認した。FA-IPHONE-003は`Resolved / iPhone PASS`。
+- 正式修正は、Player関連UIの同期初期化、iOS paint invalidation安全化、Player内部の`24px minmax(0,1fr)`確定grid track、名前spanの`width:0`廃止、`overflow:visible`、`text-overflow:clip`、`-webkit-text-fill-color:currentColor`で構成する。
+- Compact Cardの64px高、34px競技アイコン、24px avatar、compact matchup、dividerなし、`vs`、右端`再開 ›`、カード全体タップを維持した。
+- 一時診断Settings UI、専用localStorage参照、診断パネル／ログ、query分岐、診断manifest、診断Launcher、Service Worker診断cache、診断専用テストを削除した。診断文字列はユーザー向けUI・実行コード・通常manifest・Service Workerに残していない。
+- Cleanup後の正式回帰テストは140件成功／失敗0／スキップ0。390px縦画面、正式Settings、通常manifest、Player名、Compact Card、横overflowなし、Service Workerオフライン再起動を再確認した。
+- Player／Match／in-progress schema、50 Undo、Backup JSON、History、Analytics、Main Player、通常／サンプル分離、競技ルールは変更していない。Gate 1〜14はPASS、SeverityはBlocker 0／Critical 0／Major 0／Minor 0／Cosmetic 0。
+- PWA Final Acceptanceを再確認した。Product Ownerによる通常版iPhone最終確認後の推奨次工程は`Step 7 — Native iOS Preparation / Xcode Wrapper & Submission Build Planning`。ネイティブ化、TestFlight、App Store提出、Release確定は未実施。
 
 ## v1.0 Final RC Step 6：ネイティブ化前Final Acceptance（2026年8月13日）
 
