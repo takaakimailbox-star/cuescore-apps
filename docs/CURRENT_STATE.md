@@ -305,6 +305,15 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - 長いPlayer名は2段目でellipsisとし、accessible nameでは完全名を保持する。カード全体からの再開、「再開 ›」補助導線、新規試合時の3分岐、保存schema・復元ロジックは変更していない。390×844px相当のブラウザ確認後も、実iPhone Home Screen PWAでの再確認までは未完了とする。
 - 現在判定：`FA-IPHONE-001: Code Fix Complete / iPhone Re-test Required`。実機再確認前にApp Store提出、Release確定、ネイティブ化へ進まない。
 
+## FA-IPHONE-002：再起動後の中断カード保持とCompact Card v3（2026年8月14日）
+
+- iPhone Home Screen PWAで、Homeに中断カードを表示した状態から完全終了・再起動するとカードが消える事象を確認した。
+- 根本原因は、`pagehide`／`visibilitychange`から呼ばれる`persistInProgressMatchV1`が、Homeでは`pro-game-mode`でないことを理由に有効な保存済みsnapshotを削除していたこと。snapshotは終了イベント時に消えていた。
+- 終了・再起動・単なるHome表示では既存snapshotを保持し、試合完了、確認付きの明示破棄、新規試合開始の明示選択、不正snapshotの場合だけ削除するようcleanup条件を修正した。`pageshow`でもHomeカードを再描画する。
+- カード最終UIは2段・高さ88px。上段は「中断中の試合」・競技アイコン・`YYYY/MM/DD HH:mm`、下段はPlayer 1／2・競技条件・「再開 ›」。開始日時を優先し、取得不能時のみ保存日時へfallbackする。競技名文字は表示しない。
+- Player名はellipsis、accessible nameは完全名と競技名・条件・再開操作を保持する。保存キー、schema version 1、Undo 50状態、通常／サンプル分離、Backup JSON、完了試合record、競技ルールは変更していない。
+- 最終Severity：修正前はCritical候補、根本原因特定・コード修正・回帰テスト後の残存Severityは0。実iPhone再確認前は`Code Fix Complete / iPhone Re-test Required`とする。
+
 ## サンプルデータ v3.1（2026年8月11日）
 
 - 旧サンプル試合を使用せず、安定したPlayer IDを持つ登録済み10プレーヤーだけで決定論的に再生成する。
