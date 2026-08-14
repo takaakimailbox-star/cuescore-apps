@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-in-progress-compact-card-v4";
+const APP_VERSION = "2.0-compact-card-v4-name-flex-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-in-progress-compact-card-v4",
+  "./demo-data.js?v=2.0-compact-card-v4-name-flex-v1",
   "./manifest.webmanifest",
   "./privacy.html",
   "./terms.html",

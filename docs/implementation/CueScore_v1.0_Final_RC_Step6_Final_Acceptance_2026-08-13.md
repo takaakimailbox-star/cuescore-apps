@@ -213,6 +213,13 @@ Blocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0、自動テスト全成�
 - 現在状態：`Compact Card v4: Implemented / FA-IPHONE-002 iPhone PASS / iPhone UI Re-test Required`。
 - Compact Card v4 micro adjustmentとして、競技アイコン右側dividerを削除し、Player 1／`vs`／Player 2を1つの対戦ブロックへ統合した。64px高、34px競技アイコン、24px avatar、右端「再開 ›」、保存・復元仕様は変更していない。
 
+### Compact Card v4 Player Name初期描画／Matchup Flex補正（2026年8月14日）
+
+- Player名は中断snapshotの`playerNames`を同期的に最優先してHome初回描画から表示する。空白または旧不完全snapshotの場合だけ、同じ同期処理内で登録Player名へfallbackする。後続タイマーやPlayer Library再描画への依存は追加していない。
+- Player 1／`vs`／Player 2の対戦ブロックを均等3列Gridから内容幅ベースのcompact flexへ変更した。要素間は5px、両Player領域は同じ最大幅、名前はellipsisとし、両avatar・`vs`・右端「再開 ›」を常時表示する。
+- カード高64px、競技アイコン34px、Player avatar 24px、dividerなし、カード全体からの再開、3分岐、50 Undo、通常／サンプル分離は維持した。保存schema、Backup JSON、完了試合record、History、Analytics、競技ルール、Official Releaseは変更していない。
+- 状態：`Compact Card v4 Name Render Fix + Matchup Flex: Implemented / iPhone UI Re-test Required`。
+
 ## ネイティブ化可否
 
 FA-IPHONE-001のコード修正は完了したが、実iPhone再確認が終わるまではネイティブ化へ進行しない。実iPhone確認待ち項目をネイティブ／提出ビルドの確認完了とみなしてはならない。

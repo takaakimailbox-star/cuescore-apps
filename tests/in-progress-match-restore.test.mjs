@@ -47,13 +47,22 @@ test("Home card uses the single-row v4 avatar layout and exposes the required ma
   assert.match(html,/\.cue-resume-game-v4 img\{width:34px;height:34px\}/);
   assert.doesNotMatch(html,/\.cue-resume-game-v4\{[^}]*border-right/);
   assert.match(html,/cue-resume-matchup-v4[\s\S]*?cueResumePlayer1AvatarV4[\s\S]*?cue-resume-vs-v4[\s\S]*?cueResumePlayer2AvatarV4/);
-  assert.match(html,/\.cue-resume-matchup-v4\{[^}]*grid-template-columns:minmax\(0,1fr\) auto minmax\(0,1fr\)[^}]*gap:5px/);
+  assert.match(html,/\.cue-resume-matchup-v4\{[^}]*display:flex[^}]*gap:5px[^}]*overflow:hidden/);
+  assert.doesNotMatch(html,/\.cue-resume-matchup-v4\{[^}]*grid-template-columns/);
+  assert.match(html,/\.cue-resume-player-v4\{[^}]*flex:0 1 auto[^}]*max-width:calc\(\(100% - 20px\)\/2\)/);
   assert.match(html,/\.cue-resume-player-v4 img\{width:24px;height:24px/);
   assert.match(html,/\.cue-resume-player-v4 span\{[^}]*text-overflow:ellipsis/);
   assert.match(html,/playerAvatarSourceV2\(registered\?\.avatar\)/);
   assert.match(html,/card\.setAttribute\("aria-label",`中断中の\$\{visual\.name\}、\$\{player1\}対\$\{player2\}、\$\{condition\}、試合を再開`\)/);
   assert.match(html,/card\.addEventListener\("click",resumeInProgressFromHomeV1\)/);
   assert.match(html,/function resumeInProgressFromHomeV1\(\)[\s\S]*?restoreInProgressMatchV1\(\)/);
+});
+
+test("Home card resolves both names synchronously from snapshot before using Player Library fallback",()=>{
+  assert.match(html,/function inProgressPlayerNameV1\(state, slot, registeredPlayer\)[\s\S]*?state\?\.playerNames\?\.\[slot\][\s\S]*?\.trim\(\)[\s\S]*?if\(snapshotName\)return snapshotName/);
+  assert.match(html,/const players=readPlayerLibrary\(\);[\s\S]*?const player1=inProgressPlayerNameV1\(state,1,player1Record\);[\s\S]*?cueResumePlayer1V1"\)\.textContent=player1/);
+  assert.match(html,/const player2=inProgressPlayerNameV1\(state,2,player2Record\);[\s\S]*?cueResumePlayer2V1"\)\.textContent=player2/);
+  assert.doesNotMatch(html,/setTimeout\([^)]*renderInProgressHomeCardV1/);
 });
 
 test("FA-IPHONE-002 preserves a valid snapshot while Home is shown or the process exits",()=>{

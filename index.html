@@ -8656,7 +8656,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-in-progress-compact-card-v4"></script>
+  <script src="./demo-data.js?v=2.0-compact-card-v4-name-flex-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -12797,6 +12797,12 @@ let matchRecordsRawCacheV152 = null;
     if(!Number.isFinite(date.getTime()))return "日時 —";
     return `${date.getFullYear()}/${String(date.getMonth()+1).padStart(2,"0")}/${String(date.getDate()).padStart(2,"0")} ${String(date.getHours()).padStart(2,"0")}:${String(date.getMinutes()).padStart(2,"0")}`;
   }
+  function inProgressPlayerNameV1(state, slot, registeredPlayer) {
+    const snapshotName=String(state?.playerNames?.[slot] ?? state?.[`p${slot}Name`] ?? "").trim();
+    if(snapshotName)return snapshotName;
+    const registeredName=String(registeredPlayer?.name ?? "").trim();
+    return registeredName||`Player ${slot}`;
+  }
   function renderInProgressHomeCardV1() {
     const card=el("cueResumeCardV1");
     if(!card)return false;
@@ -12810,13 +12816,15 @@ let matchRecordsRawCacheV152 = null;
     const state=payload.state;
     const visual=IN_PROGRESS_VISUALS_V1[state.activeGameTypeV1]||IN_PROGRESS_VISUALS_V1[ROTATION_GAME_TYPE];
     el("cueResumeIconV1").src=visual.icon;
-    const player1=String(state.playerNames?.[1]||"Player 1");
-    const player2=String(state.playerNames?.[2]||"Player 2");
     const condition=inProgressConditionTextV1(state);
     const time=inProgressTimeTextV1(payload);
     const players=readPlayerLibrary();
     const player1Record=players.find(item=>item.id===state.selectedRegisteredPlayer?.[1]);
     const player2Record=players.find(item=>item.id===state.selectedRegisteredPlayer?.[2]);
+    // Names are synchronous snapshot data. Player Library is only an immediate
+    // fallback for older/incomplete snapshots and remains the avatar source.
+    const player1=inProgressPlayerNameV1(state,1,player1Record);
+    const player2=inProgressPlayerNameV1(state,2,player2Record);
     el("cueResumePlayer1V1").textContent=player1;
     el("cueResumePlayer2V1").textContent=player2;
     el("cueResumePlayer1V1").title=player1;
@@ -19097,7 +19105,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-in-progress-compact-card-v4";
+    const PWA_VERSION = "2.0-compact-card-v4-name-flex-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -27013,7 +27021,7 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .cue-home-v1{min-height:var(--app-vh,100dvh)!important;padding:calc(18px + env(safe-area-inset-top)) 18px calc(92px + env(safe-area-inset-bottom))!important;background:#f8f8f7!important;color:#171717!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch}
 .cue-home-head-v2{display:flex!important;justify-content:center!important;padding:20px 0 28px!important;border-bottom:1px solid #dededb!important}
 .cue-resume-card-v1{display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:7px;width:100%;max-width:620px;min-height:64px!important;margin:8px auto 2px;padding:7px 12px;border:1px solid #dededb;border-radius:15px;background:#fff;color:#171717;box-shadow:0 4px 18px rgba(0,0,0,.045);font:inherit;text-align:left;-webkit-tap-highlight-color:transparent;touch-action:pan-y}
-.cue-resume-card-v1[hidden]{display:none!important}.cue-resume-card-v1:focus-visible{outline:3px solid #171717;outline-offset:3px}.cue-resume-card-v1:active{background:#f2f2f0}.cue-resume-game-v4{display:grid;place-items:center;width:44px;height:38px}.cue-resume-game-v4 img{width:34px;height:34px}.cue-resume-matchup-v4{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:5px;min-width:0}.cue-resume-player-v4{display:flex;align-items:center;gap:5px;min-width:0}.cue-resume-player-v4 img{width:24px;height:24px;flex:0 0 24px;border-radius:50%;object-fit:cover}.cue-resume-player-v4 span{min-width:0;overflow:hidden;color:#4f4f4c;font-size:11.5px;text-overflow:ellipsis;white-space:nowrap}.cue-resume-vs-v4{color:#8a8a87;font-size:10px}.cue-resume-action-v1{color:#171717;font-size:12px;font-weight:760;white-space:nowrap}
+.cue-resume-card-v1[hidden]{display:none!important}.cue-resume-card-v1:focus-visible{outline:3px solid #171717;outline-offset:3px}.cue-resume-card-v1:active{background:#f2f2f0}.cue-resume-game-v4{display:grid;place-items:center;width:44px;height:38px}.cue-resume-game-v4 img{width:34px;height:34px}.cue-resume-matchup-v4{display:flex;align-items:center;justify-content:flex-start;gap:5px;min-width:0;overflow:hidden}.cue-resume-player-v4{display:flex;flex:0 1 auto;align-items:center;gap:5px;min-width:29px;max-width:calc((100% - 20px)/2)}.cue-resume-player-v4 img{width:24px;height:24px;flex:0 0 24px;border-radius:50%;object-fit:cover}.cue-resume-player-v4 span{min-width:0;overflow:hidden;color:#4f4f4c;font-size:11.5px;text-overflow:ellipsis;white-space:nowrap}.cue-resume-vs-v4{flex:0 0 auto;color:#8a8a87;font-size:10px}.cue-resume-action-v1{color:#171717;font-size:12px;font-weight:760;white-space:nowrap}
 .cue-in-progress-choice-v1{position:fixed;z-index:9200;inset:0;display:grid;place-items:end center;padding:18px 14px calc(18px + env(safe-area-inset-bottom));background:rgba(0,0,0,.42)}.cue-in-progress-choice-v1.hidden{display:none}.cue-in-progress-choice-v1>section{display:grid;gap:10px;width:min(100%,520px);padding:20px;border-radius:18px;background:#fff;box-shadow:0 18px 50px rgba(0,0,0,.2)}.cue-in-progress-choice-v1 h2{margin:0;color:#171717;font-size:21px}.cue-in-progress-choice-v1 p{margin:0 0 6px;color:#5f5f5c;font-size:14px;line-height:1.55}.cue-in-progress-choice-v1 button{min-height:48px;border:1px solid #171717;border-radius:10px;background:#fff;color:#171717;font-size:15px;font-weight:720}.cue-in-progress-choice-v1 button:first-of-type{background:#171717;color:#fff}.cue-in-progress-choice-v1 button:last-child{border-color:#dededb}
 .cue-home-brand-v1{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;margin:0!important;color:#111!important}
 .cue-home-brand-v1 img{display:block!important;width:min(100%,386px)!important;height:auto!important;object-fit:contain!important}
