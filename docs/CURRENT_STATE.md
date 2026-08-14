@@ -10,6 +10,7 @@
 - Phase 3 v4ではiOS scroll layer／Player一覧paint containmentを安全化したが、v4実機スクリーンショットで中断カードのavatarと`vs`だけが表示され、Player名は引き続き非表示だったため、中断カードの原因としては不十分と判定した。
 - 同時取得ログでは起動77ms／117ms時点で両Player名の`textContent`、resolver、card表示状態が正常だった。表示形状とCSS cascadeから、中断カードの`flex:0 1 auto`＋percentage `max-width`をWebKitがavatar-only最小幅へ縮小し、名前flex itemを幅0にしていたことを中断カード固有の根本原因と特定した。
 - v5ではcompact flexを維持したまま両Player wrapperへ`flex:1 1 0%`で残余幅を確定配分し、名前を明示的なshrink対象にした。Playerデータ、snapshot、resolver、schema、64px高、34px競技アイコン、24px avatar、5px間隔、dividerなし、ellipsis、右端`再開 ›`は変更していない。最終PASSはiPhone再確認待ち。
+- v5実機でもwrapperの余白と両avatarは描画されたがPlayer名だけが非表示だった。Safariでは名前spanの`width:0`がflex-growより優先されていたため、v6では外側compact flexを維持しつつ各Player内部を`24px minmax(0,1fr)`の2列gridへ変更し、名前から`width:0`を廃止した。最終PASSはiPhone再確認待ち。
 
 ## v1.0 Final RC Step 6：ネイティブ化前Final Acceptance（2026年8月13日）
 

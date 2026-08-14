@@ -41,9 +41,11 @@ test("Compact Card v4 dimensions and spacing remain unchanged",()=>{
   assert.match(html,/\.cue-resume-action-v1\{[^}]*white-space:nowrap/);
 });
 
-test("iOS flex sizing cannot collapse either Player name to avatar-only width",()=>{
-  assert.match(phase3,/\.cue-resume-player-v4\s*\{[^}]*flex:\s*1 1 0%[^}]*min-width:\s*0[^}]*max-width:\s*none/);
-  assert.match(phase3,/\.cue-resume-player-v4 > span\s*\{[^}]*display:\s*block[^}]*flex:\s*1 1 0%[^}]*width:\s*0[^}]*min-width:\s*0/);
+test("iOS receives a definite grid track for each Player name",()=>{
+  assert.match(phase3,/\.cue-resume-player-v4\s*\{[^}]*display:\s*grid[^}]*grid-template-columns:\s*24px minmax\(0, 1fr\)[^}]*flex:\s*1 1 0%/);
+  assert.match(phase3,/\.cue-resume-player-v4 > span\s*\{[^}]*display:\s*block[^}]*width:\s*auto[^}]*min-width:\s*0[^}]*max-width:\s*100%/);
+  const nameRule=phase3.match(/\.cue-resume-player-v4 > span\s*\{([^}]*)\}/)?.[1]||"";
+  assert.doesNotMatch(nameRule,/(?:^|\n)\s*width:\s*0\s*;/);
   assert.match(phase3,/-webkit-text-fill-color:\s*#4f4f4c/);
 });
 

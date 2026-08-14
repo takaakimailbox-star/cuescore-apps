@@ -243,6 +243,12 @@ Blocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0、自動テスト全成�
 - compact flexのまま両Player wrapperを`flex:1 1 0%`へ変更し、名前spanへ残余幅を明示配分した。競技アイコン、avatar、`vs`、Player名、`再開 ›`の順序と既存寸法は維持する。
 - forced reflow、timer、遅延再render、Player再読込は使用していない。Playerデータ、snapshot、resolver、Player／Match schema、Backup JSONは変更していない。状態：`FA-IPHONE-003 Player Name Flex Width v5: Implemented / iPhone Re-test Required`。
 
+### FA-IPHONE-003 Player Name Grid Track v6
+
+- v5実機画像でPWA番号`2.0-fa-iphone-003-player-name-flex-v5`を確認した。Player wrapperへ残余幅は配分され両avatar位置も広がったが、Player名だけは非表示のままだったため、外側wrapper幅不足の判定を訂正した。
+- iOS Safariでは名前spanの`width:0`が入れ子flexのgrow計算より優先されていた。外側matchupのcompact flexは維持し、各Player内部だけを`24px avatar + minmax(0,1fr) name`の2列gridへ変更して名前へ確定trackを与えた。名前spanの`width:0`は廃止した。
+- 64px高、34px競技アイコン、24px avatar、5px間隔、dividerなし、ellipsis、右端`再開 ›`、カード全体操作を維持する。データ、snapshot、resolver、schema、Backup、timer、forced reflowへの変更はない。状態：`FA-IPHONE-003 Player Name Grid Track v6: Implemented / iPhone Re-test Required`。
+
 ## ネイティブ化可否
 
 FA-IPHONE-001のコード修正は完了したが、実iPhone再確認が終わるまではネイティブ化へ進行しない。実iPhone確認待ち項目をネイティブ／提出ビルドの確認完了とみなしてはならない。

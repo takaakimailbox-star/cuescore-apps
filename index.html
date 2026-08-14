@@ -8664,7 +8664,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-fa-iphone-003-player-name-flex-v5"></script>
+  <script src="./demo-data.js?v=2.0-fa-iphone-003-player-name-grid-v6"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -12749,7 +12749,7 @@ let matchRecordsRawCacheV152 = null;
         el("faIphone003OutputV1").hidden=true;
       }catch(_){el("faIphone003OutputV1")?.focus();}
     });
-    if (!faIphone003EntriesV1.length) faIphone003DebugV1("diagnostic:start",{pwa:"2.0-fa-iphone-003-player-name-flex-v5",url:location.href,query:FA_IPHONE_003_QUERY_DEBUG_V1,storedFlag:readFaIphone003FlagV1()});
+    if (!faIphone003EntriesV1.length) faIphone003DebugV1("diagnostic:start",{pwa:"2.0-fa-iphone-003-player-name-grid-v6",url:location.href,query:FA_IPHONE_003_QUERY_DEBUG_V1,storedFlag:readFaIphone003FlagV1()});
     else el("faIphone003OutputV1").textContent=faIphone003EntriesV1.map(item=>JSON.stringify(item)).join("\n");
   }
   function showFaIphone003PanelV1() {
@@ -19240,7 +19240,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-fa-iphone-003-player-name-flex-v5";
+    const PWA_VERSION = "2.0-fa-iphone-003-player-name-grid-v6";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -28163,17 +28163,21 @@ body.cue-edge-back-animating-v2 .app{
 }
 /* WebKit can resolve flex:0 1 auto plus a percentage max-width to the
    avatar-only minimum. Give both Player wrappers a definite share of the
-   remaining row and make the name itself the shrinkable flex item. */
+   remaining row and give each name a definite grid track beside its avatar. */
 .cue-resume-player-v4 {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  align-items: center;
   flex: 1 1 0%;
+  gap: 5px;
   min-width: 0;
   max-width: none;
 }
 .cue-resume-player-v4 > span {
   display: block;
-  flex: 1 1 0%;
-  width: 0;
+  width: auto;
   min-width: 0;
+  max-width: 100%;
   -webkit-text-fill-color: #4f4f4c;
 }
 </style>
