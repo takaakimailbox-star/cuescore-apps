@@ -33,11 +33,16 @@ test("every committed action saves while startup renders Home card without auto 
   assert.match(html,/undoHistory = Array\.isArray\(payload\.undoHistory\)[\s\S]*?updateGame\(\)/);
 });
 
-test("Home card displays required match context and resumes only on user action",()=>{
-  for(const text of ["中断中の試合","試合を再開","cueResumeDisciplineV1","cueResumePlayer1V1","cueResumePlayer2V1","cueResumeConditionV1","cueResumeTimeV1"]){
+test("Home card is compact, fully clickable and exposes the required match context",()=>{
+  for(const text of ["中断中の試合","再開&nbsp;›","cueResumeDisciplineV1","cueResumePlayer1V1","cueResumePlayer2V1","cueResumeConditionV1","cueResumeTimeV1"]){
     assert.match(html,new RegExp(text));
   }
-  assert.match(html,/cueResumeMatchV1"\)\?\.addEventListener\("click",resumeInProgressFromHomeV1\)/);
+  assert.match(html,/<button class="cue-resume-card-v1" id="cueResumeCardV1" type="button"/);
+  assert.doesNotMatch(html,/id="cueResumeMatchV1"[^>]*>試合を再開/);
+  assert.match(html,/\.cue-resume-card-v1\{[^}]*min-height:132px!important/);
+  assert.match(html,/\.cue-resume-players-v1\{[^}]*text-overflow:ellipsis/);
+  assert.match(html,/card\.setAttribute\("aria-label",`中断中の\$\{visual\.name\}、\$\{player1\}対\$\{player2\}、\$\{condition\}、試合を再開`\)/);
+  assert.match(html,/card\.addEventListener\("click",resumeInProgressFromHomeV1\)/);
   assert.match(html,/function resumeInProgressFromHomeV1\(\)[\s\S]*?restoreInProgressMatchV1\(\)/);
 });
 
