@@ -186,6 +186,15 @@ Blocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0、自動テスト全成�
 - 390×844px相当のブラウザでカード寸法、横スクロールなし、長いPlayer名、カード全体からの再開、3分岐を再確認する。実iPhone再確認前は実機PASSとしない。
 - 現在状態：`In-progress Match Compact Card: Implemented / iPhone Re-test Required`。
 
+### FA-IPHONE-001 実機UX改善：2段コンパクトカード v2（2026年8月14日）
+
+- Product Ownerは132pxの3段カードをさらに圧縮し、高さ約90〜100pxの2段構成を正式採用した。
+- 1段目は「中断中の試合」・競技名・競技アイコン、2段目はPlayer 1／2・競技条件・開始時刻・補助導線「再開 ›」で構成する。
+- Player名を優先的にellipsisし、競技条件・開始時刻・再開導線を固定表示する。accessible nameでは完全なPlayer名、競技名、条件、再開操作を保持する。
+- カード全体のタップ／クリック／Enter／Spaceによる再開、新規試合時の3分岐を維持する。保存schema、復元、Undo、通常／サンプル分離、Backup JSON、競技ルールは変更していない。
+- 390×844px相当でカード高、横スクロール、長いPlayer名、再開動作を確認する。実iPhone再確認前は実機PASSとしない。
+- 現在状態：`In-progress Match Compact Card v2: Implemented / iPhone Re-test Required`。
+
 ## ネイティブ化可否
 
 FA-IPHONE-001のコード修正は完了したが、実iPhone再確認が終わるまではネイティブ化へ進行しない。実iPhone確認待ち項目をネイティブ／提出ビルドの確認完了とみなしてはならない。
