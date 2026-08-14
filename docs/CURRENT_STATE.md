@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## FA-IPHONE-003：一時診断スイッチ方式（2026年8月14日）
+
+- FA-IPHONE-003の実iPhone診断を継続する。診断URL／診断専用manifest／診断Launcher方式では、Home Screenからの通常PWA再起動時に診断パネルを維持できなかった。
+- 通常のCueScore AppsのSettingsに一時診断スイッチを追加し、専用グローバルフラグ`cueScore.debug.faIphone003`が`"1"`の間は、queryなしの通常PWA起動でも既存診断パネルとログ取得を有効にする。フラグは正式Settings schema、Player／Match schema、Backup JSON、通常／サンプルデータ領域に含めない。
+- FA-IPHONE-003の根本修正は未実施。実機ログ取得と根本修正完了後、スイッチ、診断UI、診断コード、診断manifest、診断Launcherを正式cleanup Stepで削除する。
+
 ## v1.0 Final RC Step 6：ネイティブ化前Final Acceptance（2026年8月13日）
 
 - 基準main `554e137463279fb5041295a5840bbc5c331d6ddf`でGate 1〜14を再監査し、自動テスト117件成功／失敗0／スキップ0を確認した。

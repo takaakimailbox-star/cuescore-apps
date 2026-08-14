@@ -8664,7 +8664,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-fa-iphone-003-diagnostic-v3"></script>
+  <script src="./demo-data.js?v=2.0-fa-iphone-003-diagnostic-toggle-v2"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -12701,7 +12701,13 @@ let matchRecordsRawCacheV152 = null;
   const IN_PROGRESS_MATCH_KEY_V1 = "cueScore.inProgressMatch.v1";
   const IN_PROGRESS_MATCH_SCHEMA_V1 = 1;
   const IN_PROGRESS_PERSISTED_UNDO_LIMIT_V1 = 50;
-  const FA_IPHONE_003_DEBUG_V1 = new URLSearchParams(location.search).get("debug") === "fa-iphone-003";
+  const FA_IPHONE_003_DEBUG_KEY_V1 = "cueScore.debug.faIphone003";
+  const FA_IPHONE_003_QUERY_DEBUG_V1 = new URLSearchParams(location.search).get("debug") === "fa-iphone-003";
+  function readFaIphone003FlagV1() {
+    try { return localStorage.getItem(FA_IPHONE_003_DEBUG_KEY_V1) === "1"; }
+    catch (_) { return false; }
+  }
+  let FA_IPHONE_003_DEBUG_V1 = FA_IPHONE_003_QUERY_DEBUG_V1 || readFaIphone003FlagV1();
   const faIphone003EntriesV1 = [];
   function faIphone003DebugV1(stage, detail = {}) {
     if (!FA_IPHONE_003_DEBUG_V1) return;
@@ -12735,10 +12741,39 @@ let matchRecordsRawCacheV152 = null;
     document.body.appendChild(panel);
     el("faIphone003CopyV1")?.addEventListener("click",async()=>{
       const text=faIphone003EntriesV1.map(item=>JSON.stringify(item)).join("\n");
-      try{await navigator.clipboard.writeText(text);el("faIphone003CopyV1").textContent="コピー済み";}catch(_){el("faIphone003OutputV1")?.focus();}
+      try{
+        await navigator.clipboard.writeText(text);
+        el("faIphone003CopyV1").textContent="コピー済み";
+        panel.style.cssText+=";top:4px;right:4px;bottom:auto;left:auto;width:190px;max-height:48px";
+        el("faIphone003OutputV1").hidden=true;
+      }catch(_){el("faIphone003OutputV1")?.focus();}
     });
-    faIphone003DebugV1("diagnostic:start",{pwa:"2.0-fa-iphone-003-diagnostic-v3",url:location.href});
+    faIphone003DebugV1("diagnostic:start",{pwa:"2.0-fa-iphone-003-diagnostic-toggle-v2",url:location.href,query:FA_IPHONE_003_QUERY_DEBUG_V1,storedFlag:readFaIphone003FlagV1()});
   }
+  function setFaIphone003DiagnosticV1(enabled) {
+    try {
+      if (enabled) localStorage.setItem(FA_IPHONE_003_DEBUG_KEY_V1,"1");
+      else localStorage.removeItem(FA_IPHONE_003_DEBUG_KEY_V1);
+    } catch (error) {
+      console.error("CueScore FA-IPHONE-003 diagnostic flag update failed",error);
+      return false;
+    }
+    FA_IPHONE_003_DEBUG_V1 = Boolean(enabled);
+    if (FA_IPHONE_003_DEBUG_V1) {
+      installFaIphone003PanelV1();
+      faIphone003DebugV1("diagnostic:toggle",{enabled:true,storedFlag:readFaIphone003FlagV1()});
+    } else {
+      el("faIphone003PanelV1")?.remove();
+      faIphone003EntriesV1.length=0;
+    }
+    return true;
+  }
+  window.CueScoreFaIphone003DiagnosticV1 = Object.freeze({
+    key:FA_IPHONE_003_DEBUG_KEY_V1,
+    isEnabled:()=>FA_IPHONE_003_DEBUG_V1,
+    isStored:readFaIphone003FlagV1,
+    setEnabled:setFaIphone003DiagnosticV1
+  });
   function inProgressMatchStorageKeyV1() {
     return window.CueScoreDemoData?.resolveSettingKey(IN_PROGRESS_MATCH_KEY_V1) || IN_PROGRESS_MATCH_KEY_V1;
   }
@@ -19178,7 +19213,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-fa-iphone-003-diagnostic-v3";
+    const PWA_VERSION = "2.0-fa-iphone-003-diagnostic-toggle-v2";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -25351,6 +25386,12 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
             <button type="button" class="is-danger" data-demo-action="delete">削除</button>
           </div>
         </section>
+        <h1 class="settings-formal-section-title-v1">一時診断</h1>
+        <section class="settings-demo-card-v1" aria-label="FA-IPHONE-003 一時診断設定">
+          <div class="settings-demo-head-v1"><label for="settingsFaIphone003Toggle"><strong>FA-IPHONE-003 診断モード</strong></label><input class="settings-switch" id="settingsFaIphone003Toggle" type="checkbox" role="switch"></div>
+          <p class="settings-demo-note-v1">Player初期表示の実機診断用。一時機能です。</p>
+          <div class="settings-status" id="settingsFaIphone003Status" role="status"></div>
+        </section>
         <div class="settings-formal-spacer-v1" aria-hidden="true"></div>
         <footer class="settings-app-footer-v1">
           <div class="settings-app-brand-v1"><span data-cuescore-logo="horizontal-black"></span><span class="settings-version">Version 1.0</span></div>
@@ -25406,8 +25447,15 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     }
   }
 
+  function renderDiagnosticState() {
+    const diagnostic=window.CueScoreFaIphone003DiagnosticV1;
+    const toggle=root.querySelector("#settingsFaIphone003Toggle");
+    if(toggle)toggle.checked=diagnostic?.isStored()===true;
+  }
+
   document.getElementById("settingsBtn")?.addEventListener("click", () => {
     renderCloudState();
+    renderDiagnosticState();
     root.querySelector(".settings-formal-scroll-v1")?.scrollTo(0, 0);
   });
   window.addEventListener("online", renderCloudState);
@@ -25477,7 +25525,17 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     if (nav === "analytics") document.getElementById("openRankingsBtn")?.click();
     if (nav === "player") document.getElementById("playerManagementBtn")?.click();
   });
+  root.querySelector("#settingsFaIphone003Toggle")?.addEventListener("change",event=>{
+    const toggle=event.currentTarget;
+    const enabled=Boolean(toggle.checked);
+    const diagnostic=window.CueScoreFaIphone003DiagnosticV1;
+    const status=root.querySelector("#settingsFaIphone003Status");
+    const saved=diagnostic?.setEnabled(enabled)===true;
+    toggle.checked=diagnostic?.isStored()===true;
+    if(status){status.textContent=saved?(enabled?"診断モードをONにしました。":"診断モードをOFFにしました。"):"診断モードを変更できませんでした。";status.classList.toggle("error",!saved);}
+  });
   renderCloudState();
+  renderDiagnosticState();
   const restoreSettingsAfterLegalV160 = () => {
     if (sessionStorage.getItem("cuescore.returnToSettings.v1") !== "1") return;
     sessionStorage.removeItem("cuescore.returnToSettings.v1");

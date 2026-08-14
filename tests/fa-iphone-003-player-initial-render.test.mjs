@@ -30,12 +30,13 @@ test("normal and sample modes keep the existing key resolvers and Compact Card C
   assert.match(html,/\.cue-resume-player-v4 img\{width:24px;height:24px/);
 });
 
-test("temporary diagnostics are URL-gated, in-memory only and capture the Phase 2 values",()=>{
+test("temporary diagnostics are query or isolated-flag gated and capture the Phase 2 values",()=>{
   assert.match(html,/new URLSearchParams\(location\.search\)\.get\("debug"\) === "fa-iphone-003"/);
+  assert.match(html,/localStorage\.getItem\(FA_IPHONE_003_DEBUG_KEY_V1\) === "1"/);
   for(const value of ["snapshotPlayerNames","selectedRegisteredPlayer","playerLibrary","name:resolve","render:dom-after","pageshow:after","navigation:after","playerListChildren"]){
     assert.match(html,new RegExp(value.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")));
   }
-  const diagnostic=html.match(/const FA_IPHONE_003_DEBUG_V1[\s\S]*?function inProgressMatchStorageKeyV1/)?.[0]||"";
+  const diagnostic=html.match(/const FA_IPHONE_003_DEBUG_KEY_V1[\s\S]*?function inProgressMatchStorageKeyV1/)?.[0]||"";
   assert.ok(diagnostic);
-  assert.doesNotMatch(diagnostic,/localStorage\.setItem|verifiedLocalStorageWrite/);
+  assert.doesNotMatch(diagnostic,/verifiedLocalStorageWrite/);
 });

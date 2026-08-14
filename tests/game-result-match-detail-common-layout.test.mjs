@@ -53,7 +53,7 @@ test("result mode has no header close/back button and remains width-safe",()=>{
 test("PWA cache and document script versions stay synchronized",()=>{
   const sw=readFileSync(new URL("../sw.js",import.meta.url),"utf8");
   const version=sw.match(/const APP_VERSION = "([^"]+)"/)?.[1];
-  assert.equal(version,"2.0-fa-iphone-003-diagnostic-v3");
+  assert.equal(version,"2.0-fa-iphone-003-diagnostic-toggle-v2");
   assert.match(sw,new RegExp(`demo-data\\.js\\?v=${version}`));
   assert.match(html,new RegExp(`demo-data\\.js\\?v=${version}`));
 });

@@ -23,11 +23,11 @@ test("only the explicit diagnostic query selects the temporary manifest",()=>{
 });
 
 test("diagnostic manifest is offline-cached and versioned with the diagnostic build",()=>{
-  assert.match(sw,/const APP_VERSION = "2\.0-fa-iphone-003-diagnostic-v3"/);
+  assert.match(sw,/const APP_VERSION = "2\.0-fa-iphone-003-diagnostic-toggle-v2"/);
   assert.match(sw,/"\.\/manifest\.webmanifest"/);
   assert.match(sw,/"\.\/manifest-fa-iphone-003-diagnostic\.webmanifest"/);
   assert.match(sw,/"\.\/fa-iphone-003-diagnostic\.html"/);
-  assert.match(html,/const PWA_VERSION = "2\.0-fa-iphone-003-diagnostic-v3"/);
+  assert.match(html,/const PWA_VERSION = "2\.0-fa-iphone-003-diagnostic-toggle-v2"/);
 });
 
 test("diagnostic launcher replaces itself with the query-gated app URL",()=>{
@@ -36,8 +36,8 @@ test("diagnostic launcher replaces itself with the query-gated app URL",()=>{
   assert.doesNotMatch(launcher,/localStorage|sessionStorage|indexedDB/);
 });
 
-test("diagnostic activation remains query-gated without storage or UI schema changes",()=>{
-  assert.match(html,/const FA_IPHONE_003_DEBUG_V1 = new URLSearchParams\(location\.search\)\.get\("debug"\) === "fa-iphone-003"/);
+test("diagnostic activation keeps query support without storage or UI schema changes",()=>{
+  assert.match(html,/const FA_IPHONE_003_QUERY_DEBUG_V1 = new URLSearchParams\(location\.search\)\.get\("debug"\) === "fa-iphone-003"/);
   assert.match(html,/const IN_PROGRESS_MATCH_SCHEMA_V1 = 1/);
   assert.match(html,/\.cue-resume-card-v1\{[^}]*min-height:64px!important/);
 });
