@@ -33,19 +33,21 @@ test("every committed action saves while startup renders Home card without auto 
   assert.match(html,/undoHistory = Array\.isArray\(payload\.undoHistory\)[\s\S]*?updateGame\(\)/);
 });
 
-test("Home card uses the final two-row v3 layout and exposes the required match context",()=>{
-  for(const text of ["中断中の試合","再開&nbsp;›","cueResumePlayer1V1","cueResumePlayer2V1","cueResumeConditionV1","cueResumeTimeV1"]){
+test("Home card uses the single-row v4 avatar layout and exposes the required match context",()=>{
+  for(const text of ["再開&nbsp;›","cueResumePlayer1V1","cueResumePlayer2V1","cueResumePlayer1AvatarV4","cueResumePlayer2AvatarV4"]){
     assert.match(html,new RegExp(text));
   }
   assert.match(html,/<button class="cue-resume-card-v1" id="cueResumeCardV1" type="button"/);
   assert.doesNotMatch(html,/id="cueResumeMatchV1"[^>]*>試合を再開/);
-  assert.match(html,/\.cue-resume-card-v1\{[^}]*grid-template-rows:auto auto[^}]*min-height:88px!important/);
+  assert.match(html,/\.cue-resume-card-v1\{[^}]*grid-template-columns:44px minmax\(0,1fr\) auto minmax\(0,1fr\) auto[^}]*min-height:64px!important/);
   assert.doesNotMatch(html,/cue-resume-match-v1/);
   assert.doesNotMatch(html,/id="cueResumeDisciplineV1"/);
-  assert.match(html,/cue-resume-heading-v2[\s\S]*?cueResumeIconV1[\s\S]*?cueResumeTimeV1/);
-  assert.match(html,/cue-resume-meta-v1[\s\S]*?cueResumePlayer1V1[\s\S]*?cueResumeConditionV1[\s\S]*?再開&nbsp;›/);
-  assert.match(html,/getFullYear\(\)[\s\S]*?getMonth\(\)\+1[\s\S]*?getDate\(\)/);
-  assert.match(html,/\.cue-resume-players-v1\{[^}]*text-overflow:ellipsis/);
+  assert.doesNotMatch(html,/id="cueResumeTimeV1"|id="cueResumeConditionV1"/);
+  assert.match(html,/cue-resume-game-v4[\s\S]*?cueResumeIconV1[\s\S]*?cueResumePlayer1AvatarV4[\s\S]*?cueResumePlayer1V1[\s\S]*?cue-resume-vs-v4[\s\S]*?cueResumePlayer2AvatarV4[\s\S]*?cueResumePlayer2V1[\s\S]*?再開&nbsp;›/);
+  assert.match(html,/\.cue-resume-game-v4 img\{width:34px;height:34px\}/);
+  assert.match(html,/\.cue-resume-player-v4 img\{width:24px;height:24px/);
+  assert.match(html,/\.cue-resume-player-v4 span\{[^}]*text-overflow:ellipsis/);
+  assert.match(html,/playerAvatarSourceV2\(registered\?\.avatar\)/);
   assert.match(html,/card\.setAttribute\("aria-label",`中断中の\$\{visual\.name\}、\$\{player1\}対\$\{player2\}、\$\{condition\}、試合を再開`\)/);
   assert.match(html,/card\.addEventListener\("click",resumeInProgressFromHomeV1\)/);
   assert.match(html,/function resumeInProgressFromHomeV1\(\)[\s\S]*?restoreInProgressMatchV1\(\)/);

@@ -313,6 +313,10 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - カード最終UIは2段・高さ88px。上段は「中断中の試合」・競技アイコン・`YYYY/MM/DD HH:mm`、下段はPlayer 1／2・競技条件・「再開 ›」。開始日時を優先し、取得不能時のみ保存日時へfallbackする。競技名文字は表示しない。
 - Player名はellipsis、accessible nameは完全名と競技名・条件・再開操作を保持する。保存キー、schema version 1、Undo 50状態、通常／サンプル分離、Backup JSON、完了試合record、競技ルールは変更していない。
 - 最終Severity：修正前はCritical候補、根本原因特定・コード修正・回帰テスト後の残存Severityは0。実iPhone再確認前は`Code Fix Complete / iPhone Re-test Required`とする。
+- Product Owner実機再確認により、Home表示→PWA完全終了→Home Screen再起動後も同一カードとsnapshotが保持されることを確認した。`FA-IPHONE-002: Resolved / iPhone PASS`。
+- Compact Card v4として高さ64pxの1列カードを採用した。表示は競技アイコン、Player 1 avatar＋名前、`vs`、Player 2 avatar＋名前、`再開 ›`のみとし、日時・競技条件はHomeカードから非表示にした。
+- 競技アイコン34pxを左端の区切り付き独立領域に置き、Player avatar 24pxより大きく表示する。既存Player写真／preset avatar／default avatarのresolverを再利用し、新規schemaは追加しない。
+- v4 UIは実iPhone再確認待ち。保存・復元、50 Undo、通常／サンプル分離、3分岐、Backup JSON、競技ルールは変更していない。
 
 ## サンプルデータ v3.1（2026年8月11日）
 
