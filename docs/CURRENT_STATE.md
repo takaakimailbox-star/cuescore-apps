@@ -5,8 +5,10 @@
 - FA-IPHONE-003の実iPhone診断を継続する。診断URL／診断専用manifest／診断Launcher方式では、Home Screenからの通常PWA再起動時に診断パネルを維持できなかった。
 - 通常のCueScore AppsのSettingsに一時診断スイッチを追加し、専用グローバルフラグ`cueScore.debug.faIphone003`が`"1"`の間は、queryなしの通常PWA起動でも既存診断パネルとログ取得を有効にする。フラグは正式Settings schema、Player／Match schema、Backup JSON、通常／サンプルデータ領域に含めない。
 - 実iPhoneの初回診断ログ取得に成功し、起動直後の`render:dom-after`／`pageshow:after`時点でPlayer名、Player Library、Player一覧DOMが存在することを確認した。画面切替後との比較用に、初回entriesをメモリ保持したままHome復帰時に診断パネルを再展開し、navigation後ログとHome復帰後ログを含めて2回目コピーできるようにした。
-- DOM値と実画面表示の差の根本原因は確定前であり、Player描画ロジックの根本修正はまだ行っていない。
-- FA-IPHONE-003の根本修正は未実施。実機ログ取得と根本修正完了後、スイッチ、診断UI、診断コード、診断manifest、診断Launcherを正式cleanup Stepで削除する。
+- Phase 2時点ではDOM値と実画面表示の差の根本原因は確定前であり、Player描画ロジックは変更しなかった。
+- FA-IPHONE-003の実機PASS後、スイッチ、診断UI、診断コード、診断manifest、診断Launcherを正式Cleanup Stepで削除する。
+- Phase 3で対象DOM／祖先のcomputed styleと画面切替処理を監査し、Home中断カードとPlayer一覧が、iOSのlegacy momentum scroll layer内で非表示状態から内容を公開するpaint条件を共有していることを特定した。Player一覧には追加で`contain: layout style paint`が適用されていた。
+- Playerデータ、snapshot、resolver、schemaを変更せず、対象2領域の`-webkit-overflow-scrolling: touch`を`auto`へ戻し、Player一覧のpaint containment／`content-visibility`最適化を解除した。forced reflow、timer、遅延再renderは使用していない。診断コードはCleanup待ちで、FA-IPHONE-003の最終PASSはiPhone実機再確認待ち。
 
 ## v1.0 Final RC Step 6：ネイティブ化前Final Acceptance（2026年8月13日）
 

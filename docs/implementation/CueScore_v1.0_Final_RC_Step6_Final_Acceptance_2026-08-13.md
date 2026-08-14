@@ -228,6 +228,14 @@ Blocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0、自動テスト全成�
 - snapshot完全名 → 登録Player名 →既定名のfallback、avatar resolver、Player写真、通常／サンプル分離を維持した。Compact Card v4のレイアウト、flex、間隔、サイズは変更していない。
 - 保存schema、Player schema、Backup形式、Undo、History、Analytics、競技ルール、Official Releaseへの変更はない。コード修正後の残存Blocker／Critical／Majorは0。状態：`FA-IPHONE-003: Code Fix Complete / Player Initial Render Synchronized / iPhone Re-test Required`。
 
+## FA-IPHONE-003 Phase 3：iOS Initial Paint Root Fix（2026年8月14日）
+
+- 2回分の実機診断ログで、起動約89ms時点のsnapshot、Player Library、resolver return、`render:dom-after`、`pageshow:after`に正しいPlayer名とPlayer一覧DOMが存在し、SettingsからHomeへ戻った約22.7秒後もDOM値が同一であることを確認した。データ遅延ではなく、iOS Home Screen PWAの初回paint問題へ分類を変更した。
+- computed styleとCSSを監査した結果、中断カードは`.cue-home-v1`のoverflow scroll領域内で`hidden`から公開され、Player一覧もoverflow scroll領域内かつ非表示overlay内でDOM生成後に公開される。両領域にlegacy `-webkit-overflow-scrolling: touch`があり、Player一覧には`contain: layout style paint`と`content-visibility`最適化も重なっていた。画面切替時のoverlay `display`／class変更とscroll layer再構成がrepaint triggerになっていた。
+- 対象Home／Player一覧だけを通常のpaint invalidationへ戻すため、`-webkit-overflow-scrolling`を`auto`へ変更し、Player一覧のpaint containmentと`content-visibility`最適化を解除した。forced reflow、timer、遅延再render、Player再読込は追加していない。
+- Playerデータロジック、snapshot、resolver、Player／Match schema、Backup JSON、Compact Cardの64px高・34px競技アイコン・24px avatar・5px間隔・dividerなし・ellipsis・右端`再開 ›`は変更していない。
+- 診断スイッチ、診断パネル、診断manifest、診断Launcher、診断テストはiPhone PASS後のCleanup Stepまで維持する。状態：`FA-IPHONE-003 Phase 3: iOS Initial Paint Root Fix Implemented / iPhone Re-test Required`。
+
 ## ネイティブ化可否
 
 FA-IPHONE-001のコード修正は完了したが、実iPhone再確認が終わるまではネイティブ化へ進行しない。実iPhone確認待ち項目をネイティブ／提出ビルドの確認完了とみなしてはならない。

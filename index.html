@@ -8664,7 +8664,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-fa-iphone-003-diagnostic-toggle-v3"></script>
+  <script src="./demo-data.js?v=2.0-fa-iphone-003-phase3-paint-v4"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -12749,7 +12749,7 @@ let matchRecordsRawCacheV152 = null;
         el("faIphone003OutputV1").hidden=true;
       }catch(_){el("faIphone003OutputV1")?.focus();}
     });
-    if (!faIphone003EntriesV1.length) faIphone003DebugV1("diagnostic:start",{pwa:"2.0-fa-iphone-003-diagnostic-toggle-v3",url:location.href,query:FA_IPHONE_003_QUERY_DEBUG_V1,storedFlag:readFaIphone003FlagV1()});
+    if (!faIphone003EntriesV1.length) faIphone003DebugV1("diagnostic:start",{pwa:"2.0-fa-iphone-003-phase3-paint-v4",url:location.href,query:FA_IPHONE_003_QUERY_DEBUG_V1,storedFlag:readFaIphone003FlagV1()});
     else el("faIphone003OutputV1").textContent=faIphone003EntriesV1.map(item=>JSON.stringify(item)).join("\n");
   }
   function showFaIphone003PanelV1() {
@@ -19240,7 +19240,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-fa-iphone-003-diagnostic-toggle-v3";
+    const PWA_VERSION = "2.0-fa-iphone-003-phase3-paint-v4";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -28143,6 +28143,24 @@ body.cue-edge-back-animating-v2 .app{
 .app.vs-analysis-mode .rival-history-row-v2{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;width:100%;padding:12px 14px;border:0;border-top:1px solid #ecece8;background:transparent;color:#171717;text-align:left}.app.vs-analysis-mode .rival-history-row-v2:first-child{border-top:0}.app.vs-analysis-mode .rival-history-row-v2>span:first-child small,.app.vs-analysis-mode .rival-history-row-v2>span:first-child strong{display:block}.app.vs-analysis-mode .rival-history-row-v2 small{color:#777773;font-size:9px}.app.vs-analysis-mode .rival-history-row-v2 strong{margin-top:3px;font-size:12px}.app.vs-analysis-mode .rival-history-row-v2>span:last-child{display:grid;grid-template-columns:auto auto auto;align-items:center;gap:8px}.app.vs-analysis-mode .rival-history-row-v2 em{padding:4px 7px;border:1px solid #27833d;border-radius:7px;color:#27833d;font-style:normal;font-size:9px;font-weight:850}.app.vs-analysis-mode .rival-history-row-v2 em.is-loss{border-color:#bd392f;color:#bd392f}.app.vs-analysis-mode .rival-history-row-v2 b{color:#8b8b87;font-size:24px;font-weight:400}
 .app.vs-analysis-mode .vs-empty{margin-top:14px;padding:42px 14px;border:1px solid #dfdfdb;border-radius:19px;background:#fff;color:#777773}
 @media(max-width:380px){.app.vs-analysis-mode .vs-analysis-content{padding-left:10px;padding-right:10px}.app.vs-analysis-mode .rival-matchup-v2{padding:12px 6px}.app.vs-analysis-mode .rival-avatar-v2{width:56px;height:56px}.app.vs-analysis-mode .rival-opponent-select-v2{max-width:100px}}
+</style>
+<style id="faIphone003Phase3PaintSafetyV1">
+/* FA-IPHONE-003 Phase 3: keep initial text in normal paint invalidation paths.
+   Modern iOS scrolls these overflow areas natively; the legacy momentum hint
+   can retain a stale composited layer when hidden content becomes visible. */
+.cue-home-v1,
+.player-management-formal-v1 .player-library-list,
+.player-selection-formal-v1 .player-library-list {
+  -webkit-overflow-scrolling: auto;
+}
+#playerLibraryList {
+  contain: none;
+}
+#playerLibraryOverlay,
+#playerLibraryList,
+#playerLibraryList > * {
+  content-visibility: visible;
+}
 </style>
 <style>
 /* CueScore Analysis v2.0 — complete replacement of the legacy analytics UI */
