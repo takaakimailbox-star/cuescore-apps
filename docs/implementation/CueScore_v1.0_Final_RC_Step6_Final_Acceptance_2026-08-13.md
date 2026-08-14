@@ -220,6 +220,14 @@ Blocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0、自動テスト全成�
 - カード高64px、競技アイコン34px、Player avatar 24px、dividerなし、カード全体からの再開、3分岐、50 Undo、通常／サンプル分離は維持した。保存schema、Backup JSON、完了試合record、History、Analytics、競技ルール、Official Releaseは変更していない。
 - 状態：`Compact Card v4 Name Render Fix + Matchup Flex: Implemented / iPhone UI Re-test Required`。
 
+### FA-IPHONE-003 Player Initial Render Delay（2026年8月14日）
+
+- 実iPhone Home Screen PWAで、中断カードのPlayer名が初回は空白で画面切替後に表示され、プレーヤー一覧も数秒遅れて表示される事象を確認した。初期SeverityはMajor候補。
+- localStorageのPlayer Library読込は同期だが、起動時処理は中断カードとメインPlayer設定を別々の`requestAnimationFrame`へ委ね、プレーヤー一覧はnavigation時にのみ描画していた。Player関連UIをHome初回表示内で完成させる同期経路がなかったことが根本原因。
+- `readPlayerLibrary`、プレーヤー一覧、中断カード、メインPlayerを順番に完成させる同期初期化を追加し、起動時と`pageshow`時に共通利用した。timer、画面切替、追加refreshは初回表示の成立条件ではない。
+- snapshot完全名 → 登録Player名 →既定名のfallback、avatar resolver、Player写真、通常／サンプル分離を維持した。Compact Card v4のレイアウト、flex、間隔、サイズは変更していない。
+- 保存schema、Player schema、Backup形式、Undo、History、Analytics、競技ルール、Official Releaseへの変更はない。コード修正後の残存Blocker／Critical／Majorは0。状態：`FA-IPHONE-003: Code Fix Complete / Player Initial Render Synchronized / iPhone Re-test Required`。
+
 ## ネイティブ化可否
 
 FA-IPHONE-001のコード修正は完了したが、実iPhone再確認が終わるまではネイティブ化へ進行しない。実iPhone確認待ち項目をネイティブ／提出ビルドの確認完了とみなしてはならない。

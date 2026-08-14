@@ -28,7 +28,8 @@ test("every committed action saves while startup renders Home card without auto 
   assert.match(html,/function updateGame\(\)[\s\S]*?persistInProgressMatchV1\(\);[\s\S]*?function saveAndDo/);
   assert.match(html,/document\.addEventListener\("visibilitychange"[\s\S]*?persistInProgressMatchV1/);
   assert.match(html,/window\.addEventListener\("pagehide", persistInProgressMatchV1\)/);
-  assert.match(html,/requestAnimationFrame\(renderInProgressHomeCardV1\)/);
+  assert.match(html,/function initializePlayerUiV1\(\)[\s\S]*?renderInProgressHomeCardV1\(\)[\s\S]*?initializePlayerUiV1\(\)/);
+  assert.doesNotMatch(html,/requestAnimationFrame\(renderInProgressHomeCardV1\)/);
   assert.doesNotMatch(html,/requestAnimationFrame\(restoreInProgressMatchV1\)/);
   assert.match(html,/undoHistory = Array\.isArray\(payload\.undoHistory\)[\s\S]*?updateGame\(\)/);
 });
@@ -71,7 +72,7 @@ test("FA-IPHONE-002 preserves a valid snapshot while Home is shown or the proces
 });
 
 test("FA-IPHONE-002 rerenders the retained snapshot on PWA pageshow",()=>{
-  assert.match(html,/window\.addEventListener\("pageshow",renderInProgressHomeCardV1\)/);
+  assert.match(html,/window\.addEventListener\("pageshow", initializePlayerUiV1\)/);
   assert.match(html,/window\.addEventListener\("pagehide", persistInProgressMatchV1\)/);
 });
 

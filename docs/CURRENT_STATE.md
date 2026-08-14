@@ -321,6 +321,14 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - Compact Card v4のPlayer名初期描画を補正した。snapshot内の完全名を同期的に最優先し、空白／旧不完全snapshotのみ登録Player名へ即時fallbackするため、Player Libraryの後続再描画を待たずHome初回表示とPWA再起動直後から両名を表示する。
 - 対戦ブロックは均等3列Gridから内容幅ベースのcompact flexへ変更した。両avatarと`vs`を固定表示し、両Player名へ同じ最大幅とellipsisを適用して、短い名前での不自然な空白と長い名前での片側占有を防止する。カード高64px、競技アイコン34px、avatar 24px、右端「再開 ›」、保存schema・復元・Undo・通常／サンプル分離・Backup JSON・競技ルールは変更していない。
 
+## FA-IPHONE-003：Player Initial Render Delay（2026年8月14日）
+
+- 実iPhone Home Screen PWAで、起動直後の中断カードPlayer名が空白となり画面切替後に表示されること、プレーヤー一覧も初回表示から数秒遅れることを確認した。データ消失はないため初期SeverityはMajor候補とした。
+- Player LibraryのlocalStorage読込は同期だが、Player関連UIの初期化が分散していた。中断カードとメインPlayer設定は別々の`requestAnimationFrame`、プレーヤー一覧は画面を開いた時だけ描画され、Home初回表示を完成させる同期初期化経路が存在しなかった。
+- `readPlayerLibrary` → プレーヤー一覧描画 → 中断カード描画 → メインPlayer設定を1回の同期初期化へ統合した。起動時と`pageshow`時に同じ処理を実行し、初回表示はtimer、画面切替、secondary refreshを待たない。
+- 中断カード名はsnapshot完全名 → 登録Player Library名 → `Player 1`／`Player 2`の同期fallbackを維持した。Compact Card v4のflex、5px間隔、高さ64px、競技アイコン34px、avatar 24px、右端「再開 ›」は変更していない。
+- 保存schema、Player schema、Backup JSON、50 Undo、通常／サンプル分離、History、Analytics、競技ルール、Official Releaseは変更していない。コード修正後の残存Blocker／Critical／Majorは0。実iPhone再確認前は`FA-IPHONE-003: Code Fix Complete / Player Initial Render Synchronized / iPhone Re-test Required`とする。
+
 ## サンプルデータ v3.1（2026年8月11日）
 
 - 旧サンプル試合を使用せず、安定したPlayer IDを持つ登録済み10プレーヤーだけで決定論的に再生成する。

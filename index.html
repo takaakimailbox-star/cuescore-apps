@@ -8656,7 +8656,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-compact-card-v4-name-flex-v1"></script>
+  <script src="./demo-data.js?v=2.0-fa-iphone-003-player-init-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -11261,8 +11261,6 @@ let matchRecordsRawCacheV152 = null;
     setSelectedStarter(1);
     return true;
   }
-  requestAnimationFrame(initializePrimaryMatchSetupV1);
-
   async function compressPlayerPhotoV5(file) {
     if (!file?.type?.startsWith("image/")) throw new Error("画像ファイルを選択してください");
     if (file.size > 15 * 1024 * 1024) throw new Error("15MB以下の画像を選択してください");
@@ -15667,8 +15665,6 @@ let matchRecordsRawCacheV152 = null;
   el("breakInterruptProceedV3")?.addEventListener("click", interruptNewMatchFromBreakV3);
   document.addEventListener("visibilitychange", () => { if (document.hidden) persistInProgressMatchV1(); });
   window.addEventListener("pagehide", persistInProgressMatchV1);
-  requestAnimationFrame(renderInProgressHomeCardV1);
-  window.addEventListener("pageshow",renderInProgressHomeCardV1);
   window.addEventListener("popstate", () => {
     const confirmDialog = el("breakInterruptConfirmV3");
     if (confirmDialog && !confirmDialog.classList.contains("hidden")) {
@@ -16566,6 +16562,19 @@ let matchRecordsRawCacheV152 = null;
   el("playerLibraryRegisterBtnV2")?.addEventListener("click", () => openPlayerEditor());
 
   document.getElementById("playerManagementBtn")?.addEventListener("click", openPlayerManagementV145);
+
+  // FA-IPHONE-003: complete every Player-dependent initial view in one
+  // synchronous startup pass. localStorage is synchronous; no timer,
+  // navigation, pageshow-only refresh, or secondary interaction is required.
+  function initializePlayerUiV1() {
+    readPlayerLibrary();
+    renderPlayerLibrary();
+    renderInProgressHomeCardV1();
+    initializePrimaryMatchSetupV1();
+    return true;
+  }
+  initializePlayerUiV1();
+  window.addEventListener("pageshow", initializePlayerUiV1);
 
   el("playerLibrarySortBtnV1")?.addEventListener("click", () => {
     playerLibrarySortV1 = playerLibrarySortV1 === "recent" ? "name" : "recent";
@@ -19105,7 +19114,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-compact-card-v4-name-flex-v1";
+    const PWA_VERSION = "2.0-fa-iphone-003-player-init-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
