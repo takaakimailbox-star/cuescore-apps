@@ -60,7 +60,7 @@ test("Home card uses the single-row v4 avatar layout and exposes the required ma
 });
 
 test("Home card resolves both names synchronously from snapshot before using Player Library fallback",()=>{
-  assert.match(html,/function inProgressPlayerNameV1\(state, slot, registeredPlayer\)[\s\S]*?state\?\.playerNames\?\.\[slot\][\s\S]*?\.trim\(\)[\s\S]*?if\(snapshotName\)return snapshotName/);
+  assert.match(html,/function inProgressPlayerNameV1\(state, slot, registeredPlayer\)[\s\S]*?state\?\.playerNames\?\.\[slot\][\s\S]*?\.trim\(\)[\s\S]*?const result=snapshotName\|\|registeredName/);
   assert.match(html,/const players=readPlayerLibrary\(\);[\s\S]*?const player1=inProgressPlayerNameV1\(state,1,player1Record\);[\s\S]*?cueResumePlayer1V1"\)\.textContent=player1/);
   assert.match(html,/const player2=inProgressPlayerNameV1\(state,2,player2Record\);[\s\S]*?cueResumePlayer2V1"\)\.textContent=player2/);
   assert.doesNotMatch(html,/setTimeout\([^)]*renderInProgressHomeCardV1/);
@@ -72,7 +72,7 @@ test("FA-IPHONE-002 preserves a valid snapshot while Home is shown or the proces
 });
 
 test("FA-IPHONE-002 rerenders the retained snapshot on PWA pageshow",()=>{
-  assert.match(html,/window\.addEventListener\("pageshow", initializePlayerUiV1\)/);
+  assert.match(html,/window\.addEventListener\("pageshow", event => \{\s*initializePlayerUiV1\(\)/);
   assert.match(html,/window\.addEventListener\("pagehide", persistInProgressMatchV1\)/);
 });
 

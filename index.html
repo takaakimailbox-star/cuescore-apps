@@ -8656,7 +8656,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-fa-iphone-003-player-init-v1"></script>
+  <script src="./demo-data.js?v=2.0-fa-iphone-003-diagnostic-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -12693,6 +12693,44 @@ let matchRecordsRawCacheV152 = null;
   const IN_PROGRESS_MATCH_KEY_V1 = "cueScore.inProgressMatch.v1";
   const IN_PROGRESS_MATCH_SCHEMA_V1 = 1;
   const IN_PROGRESS_PERSISTED_UNDO_LIMIT_V1 = 50;
+  const FA_IPHONE_003_DEBUG_V1 = new URLSearchParams(location.search).get("debug") === "fa-iphone-003";
+  const faIphone003EntriesV1 = [];
+  function faIphone003DebugV1(stage, detail = {}) {
+    if (!FA_IPHONE_003_DEBUG_V1) return;
+    const entry = {at:new Date().toISOString(),ms:Math.round(performance.now()),stage,...detail};
+    faIphone003EntriesV1.push(entry);
+    const output=el("faIphone003OutputV1");
+    if(output)output.textContent=faIphone003EntriesV1.map(item=>JSON.stringify(item)).join("\n");
+  }
+  function faIphone003DomV1() {
+    if (!FA_IPHONE_003_DEBUG_V1) return {};
+    const card=el("cueResumeCardV1");
+    const list=el("playerLibraryList");
+    return {
+      player1:el("cueResumePlayer1V1")?.textContent ?? null,
+      player2:el("cueResumePlayer2V1")?.textContent ?? null,
+      cardHidden:card?.hidden ?? null,
+      cardAria:card?.getAttribute("aria-label") ?? null,
+      playerListChildren:list?.children.length ?? null,
+      playerListText:String(list?.innerText||"").slice(0,500),
+      playerOverlayHidden:el("playerLibraryOverlay")?.classList.contains("hidden") ?? null,
+      playerListContentVisibility:list ? getComputedStyle(list).contentVisibility : null
+    };
+  }
+  function installFaIphone003PanelV1() {
+    if (!FA_IPHONE_003_DEBUG_V1 || el("faIphone003PanelV1")) return;
+    const panel=document.createElement("section");
+    panel.id="faIphone003PanelV1";
+    panel.setAttribute("aria-label","FA-IPHONE-003 診断ログ");
+    panel.style.cssText="position:fixed;z-index:30000;right:4px;bottom:4px;left:4px;max-height:42dvh;padding:8px;border:2px solid #111;border-radius:10px;background:rgba(255,255,255,.97);color:#111;font:10px/1.35 ui-monospace,SFMono-Regular,monospace;overflow:auto;text-align:left";
+    panel.innerHTML='<div style="display:flex;position:sticky;top:0;justify-content:space-between;gap:8px;background:#fff"><strong>FA-IPHONE-003</strong><button id="faIphone003CopyV1" type="button" style="min-height:32px;padding:3px 10px">コピー</button></div><pre id="faIphone003OutputV1" style="margin:6px 0 0;white-space:pre-wrap;overflow-wrap:anywhere"></pre>';
+    document.body.appendChild(panel);
+    el("faIphone003CopyV1")?.addEventListener("click",async()=>{
+      const text=faIphone003EntriesV1.map(item=>JSON.stringify(item)).join("\n");
+      try{await navigator.clipboard.writeText(text);el("faIphone003CopyV1").textContent="コピー済み";}catch(_){el("faIphone003OutputV1")?.focus();}
+    });
+    faIphone003DebugV1("diagnostic:start",{pwa:"2.0-fa-iphone-003-diagnostic-v1",url:location.href});
+  }
   function inProgressMatchStorageKeyV1() {
     return window.CueScoreDemoData?.resolveSettingKey(IN_PROGRESS_MATCH_KEY_V1) || IN_PROGRESS_MATCH_KEY_V1;
   }
@@ -12797,9 +12835,10 @@ let matchRecordsRawCacheV152 = null;
   }
   function inProgressPlayerNameV1(state, slot, registeredPlayer) {
     const snapshotName=String(state?.playerNames?.[slot] ?? state?.[`p${slot}Name`] ?? "").trim();
-    if(snapshotName)return snapshotName;
     const registeredName=String(registeredPlayer?.name ?? "").trim();
-    return registeredName||`Player ${slot}`;
+    const result=snapshotName||registeredName||`Player ${slot}`;
+    faIphone003DebugV1("name:resolve",{slot,snapshotName,registeredName,result,registeredId:registeredPlayer?.id??null});
+    return result;
   }
   function renderInProgressHomeCardV1() {
     const card=el("cueResumeCardV1");
@@ -12819,6 +12858,13 @@ let matchRecordsRawCacheV152 = null;
     const players=readPlayerLibrary();
     const player1Record=players.find(item=>item.id===state.selectedRegisteredPlayer?.[1]);
     const player2Record=players.find(item=>item.id===state.selectedRegisteredPlayer?.[2]);
+    faIphone003DebugV1("render:inputs",{
+      schemaVersion:payload.schemaVersion,
+      snapshotPlayerNames:state.playerNames??null,
+      legacyNames:{p1Name:state.p1Name??null,p2Name:state.p2Name??null},
+      selectedRegisteredPlayer:state.selectedRegisteredPlayer??null,
+      playerLibrary:players.map(player=>({id:player.id,name:player.name,avatar:player.avatar?.type??null,isPrimary:player.isPrimary===true}))
+    });
     // Names are synchronous snapshot data. Player Library is only an immediate
     // fallback for older/incomplete snapshots and remains the avatar source.
     const player1=inProgressPlayerNameV1(state,1,player1Record);
@@ -12834,6 +12880,7 @@ let matchRecordsRawCacheV152 = null;
       avatar.onerror=()=>{avatar.onerror=null;avatar.src=DEFAULT_PLAYER_AVATAR_SOURCE_V4;};
     });
     card.setAttribute("aria-label",`中断中の${visual.name}、${player1}対${player2}、${condition}、試合を再開`);
+    faIphone003DebugV1("render:dom-after",faIphone003DomV1());
     return true;
   }
   let pendingNewMatchDisciplineButtonV1=null;
@@ -16571,10 +16618,19 @@ let matchRecordsRawCacheV152 = null;
     renderPlayerLibrary();
     renderInProgressHomeCardV1();
     initializePrimaryMatchSetupV1();
+    faIphone003DebugV1("startup:player-ui-after",faIphone003DomV1());
     return true;
   }
+  installFaIphone003PanelV1();
   initializePlayerUiV1();
-  window.addEventListener("pageshow", initializePlayerUiV1);
+  window.addEventListener("pageshow", event => {
+    initializePlayerUiV1();
+    faIphone003DebugV1("pageshow:after",{persisted:event.persisted,...faIphone003DomV1()});
+  });
+  if (FA_IPHONE_003_DEBUG_V1) document.addEventListener("click", event => {
+    const target=event.target.closest("button,a,[role='button']");
+    requestAnimationFrame(()=>faIphone003DebugV1("navigation:after",{target:target?.id||target?.getAttribute("aria-label")||String(target?.textContent||"").trim().slice(0,80),...faIphone003DomV1()}));
+  });
 
   el("playerLibrarySortBtnV1")?.addEventListener("click", () => {
     playerLibrarySortV1 = playerLibrarySortV1 === "recent" ? "name" : "recent";
@@ -19114,7 +19170,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-fa-iphone-003-player-init-v1";
+    const PWA_VERSION = "2.0-fa-iphone-003-diagnostic-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
