@@ -204,6 +204,14 @@ Blocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0、自動テスト全成�
 - 保存schema、キー、50 Undo、通常／サンプル分離、Backup JSON、完了試合record、History、Analytics、競技ルールは変更していない。
 - Severityは修正前Critical候補、修正・回帰後の残存Blocker／Critical／Majorは0。現在状態：`FA-IPHONE-002: Code Fix Complete / Compact Card v3 Implemented / iPhone Re-test Required`。
 
+### Compact Card v4 Avatar／FA-IPHONE-002実機PASS（2026年8月14日）
+
+- Product Owner実機確認で、Home中断カード表示、PWA完全終了、Home Screen再起動、同一カード再表示、snapshot保持を確認した。`FA-IPHONE-002: Resolved / iPhone PASS`。
+- 中断カードを高さ64pxの1列へ変更し、競技アイコン、Player 1 avatar＋名前、`vs`、Player 2 avatar＋名前、`再開 ›`を表示する。日時・競技条件はHomeカード上のみ非表示とした。
+- 競技アイコンは34px・左端独立領域、Player avatarは24pxとし、薄い縦線とサイズ差で識別する。Player写真、preset、defaultは既存resolverを利用する。
+- 名前のみ均等にellipsisし、accessible nameには競技名と完全な両Player名を保持する。保存schema・復元ロジック・Undo・通常／サンプル分離・3分岐・Backup JSON・競技ルールは変更していない。
+- 現在状態：`Compact Card v4: Implemented / FA-IPHONE-002 iPhone PASS / iPhone UI Re-test Required`。
+
 ## ネイティブ化可否
 
 FA-IPHONE-001のコード修正は完了したが、実iPhone再確認が終わるまではネイティブ化へ進行しない。実iPhone確認待ち項目をネイティブ／提出ビルドの確認完了とみなしてはならない。

@@ -7866,11 +7866,11 @@ body {
       </div>
 
       <button class="cue-resume-card-v1" id="cueResumeCardV1" type="button" aria-label="中断中の試合を再開" hidden>
-        <div class="cue-resume-card-head-v1">
-          <span class="cue-resume-heading-v2"><span class="cue-resume-eyebrow-v1" id="cueResumeTitleV1">中断中の試合</span><img id="cueResumeIconV1" src="assets/icons/games/game-rotation.svg" alt="" aria-hidden="true" /></span>
-          <span id="cueResumeTimeV1"></span>
-        </div>
-        <div class="cue-resume-meta-v1"><span class="cue-resume-players-v1"><span id="cueResumePlayer1V1"></span><span aria-hidden="true"> vs </span><span id="cueResumePlayer2V1"></span></span><span id="cueResumeConditionV1"></span><span class="cue-resume-action-v1" aria-hidden="true">再開&nbsp;›</span></div>
+        <span class="cue-resume-game-v4"><img id="cueResumeIconV1" src="assets/icons/games/game-rotation.svg" alt="" aria-hidden="true" /></span>
+        <span class="cue-resume-player-v4"><img id="cueResumePlayer1AvatarV4" src="assets/icons/avatar/default/avatar_default_silhouette.png" alt="" aria-hidden="true" /><span id="cueResumePlayer1V1"></span></span>
+        <span class="cue-resume-vs-v4" aria-hidden="true">vs</span>
+        <span class="cue-resume-player-v4"><img id="cueResumePlayer2AvatarV4" src="assets/icons/avatar/default/avatar_default_silhouette.png" alt="" aria-hidden="true" /><span id="cueResumePlayer2V1"></span></span>
+        <span class="cue-resume-action-v1" aria-hidden="true">再開&nbsp;›</span>
       </button>
 
       <div class="cue-discipline-switcher-v1" id="cueDisciplineSwitcherV1" role="tablist" aria-label="ゲーム種目">
@@ -8658,7 +8658,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-in-progress-compact-card-v3"></script>
+  <script src="./demo-data.js?v=2.0-in-progress-compact-card-v4"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -12816,12 +12816,19 @@ let matchRecordsRawCacheV152 = null;
     const player2=String(state.playerNames?.[2]||"Player 2");
     const condition=inProgressConditionTextV1(state);
     const time=inProgressTimeTextV1(payload);
+    const players=readPlayerLibrary();
+    const player1Record=players.find(item=>item.id===state.selectedRegisteredPlayer?.[1]);
+    const player2Record=players.find(item=>item.id===state.selectedRegisteredPlayer?.[2]);
     el("cueResumePlayer1V1").textContent=player1;
     el("cueResumePlayer2V1").textContent=player2;
     el("cueResumePlayer1V1").title=player1;
     el("cueResumePlayer2V1").title=player2;
-    el("cueResumeConditionV1").textContent=condition;
-    el("cueResumeTimeV1").textContent=time;
+    [1,2].forEach(slot=>{
+      const avatar=el(`cueResumePlayer${slot}AvatarV4`);
+      const registered=slot===1?player1Record:player2Record;
+      avatar.src=playerAvatarSourceV2(registered?.avatar);
+      avatar.onerror=()=>{avatar.onerror=null;avatar.src=DEFAULT_PLAYER_AVATAR_SOURCE_V4;};
+    });
     card.setAttribute("aria-label",`中断中の${visual.name}、${player1}対${player2}、${condition}、試合を再開`);
     return true;
   }
@@ -19092,7 +19099,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-in-progress-compact-card-v3";
+    const PWA_VERSION = "2.0-in-progress-compact-card-v4";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -27007,8 +27014,8 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 /* CueScore Home / Match Setup separation v3.0 */
 .cue-home-v1{min-height:var(--app-vh,100dvh)!important;padding:calc(18px + env(safe-area-inset-top)) 18px calc(92px + env(safe-area-inset-bottom))!important;background:#f8f8f7!important;color:#171717!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch}
 .cue-home-head-v2{display:flex!important;justify-content:center!important;padding:20px 0 28px!important;border-bottom:1px solid #dededb!important}
-.cue-resume-card-v1{display:grid;grid-template-rows:auto auto;gap:7px;width:100%;max-width:620px;min-height:88px!important;margin:9px auto 2px;padding:9px 14px;border:1px solid #dededb;border-radius:15px;background:#fff;color:#171717;box-shadow:0 4px 18px rgba(0,0,0,.045);font:inherit;text-align:left;-webkit-tap-highlight-color:transparent;touch-action:pan-y}
-.cue-resume-card-v1[hidden]{display:none!important}.cue-resume-card-v1:focus-visible{outline:3px solid #171717;outline-offset:3px}.cue-resume-card-v1:active{background:#f2f2f0}.cue-resume-card-head-v1{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;color:#62625f;font-size:11px;white-space:nowrap}.cue-resume-heading-v2{display:flex;align-items:center;gap:8px;min-width:0;white-space:nowrap}.cue-resume-eyebrow-v1{color:#666663;font-size:10.5px;font-weight:750;letter-spacing:.05em}.cue-resume-card-head-v1 img{width:24px;height:24px;flex:0 0 24px}.cue-resume-meta-v1{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:8px;min-width:0;color:#62625f;font-size:11px}.cue-resume-players-v1{display:block;min-width:0;overflow:hidden;color:#4f4f4c;font-size:12px;text-overflow:ellipsis;white-space:nowrap}.cue-resume-meta-v1>#cueResumeConditionV1{white-space:nowrap}.cue-resume-action-v1{color:#171717;font-size:12px;font-weight:760;white-space:nowrap}
+.cue-resume-card-v1{display:grid;grid-template-columns:44px minmax(0,1fr) auto minmax(0,1fr) auto;align-items:center;gap:7px;width:100%;max-width:620px;min-height:64px!important;margin:8px auto 2px;padding:7px 12px;border:1px solid #dededb;border-radius:15px;background:#fff;color:#171717;box-shadow:0 4px 18px rgba(0,0,0,.045);font:inherit;text-align:left;-webkit-tap-highlight-color:transparent;touch-action:pan-y}
+.cue-resume-card-v1[hidden]{display:none!important}.cue-resume-card-v1:focus-visible{outline:3px solid #171717;outline-offset:3px}.cue-resume-card-v1:active{background:#f2f2f0}.cue-resume-game-v4{display:grid;place-items:center;width:44px;height:38px;border-right:1px solid #e4e4e1}.cue-resume-game-v4 img{width:34px;height:34px}.cue-resume-player-v4{display:flex;align-items:center;gap:5px;min-width:0}.cue-resume-player-v4 img{width:24px;height:24px;flex:0 0 24px;border-radius:50%;object-fit:cover}.cue-resume-player-v4 span{min-width:0;overflow:hidden;color:#4f4f4c;font-size:11.5px;text-overflow:ellipsis;white-space:nowrap}.cue-resume-vs-v4{color:#8a8a87;font-size:10px}.cue-resume-action-v1{color:#171717;font-size:12px;font-weight:760;white-space:nowrap}
 .cue-in-progress-choice-v1{position:fixed;z-index:9200;inset:0;display:grid;place-items:end center;padding:18px 14px calc(18px + env(safe-area-inset-bottom));background:rgba(0,0,0,.42)}.cue-in-progress-choice-v1.hidden{display:none}.cue-in-progress-choice-v1>section{display:grid;gap:10px;width:min(100%,520px);padding:20px;border-radius:18px;background:#fff;box-shadow:0 18px 50px rgba(0,0,0,.2)}.cue-in-progress-choice-v1 h2{margin:0;color:#171717;font-size:21px}.cue-in-progress-choice-v1 p{margin:0 0 6px;color:#5f5f5c;font-size:14px;line-height:1.55}.cue-in-progress-choice-v1 button{min-height:48px;border:1px solid #171717;border-radius:10px;background:#fff;color:#171717;font-size:15px;font-weight:720}.cue-in-progress-choice-v1 button:first-of-type{background:#171717;color:#fff}.cue-in-progress-choice-v1 button:last-child{border-color:#dededb}
 .cue-home-brand-v1{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;margin:0!important;color:#111!important}
 .cue-home-brand-v1 img{display:block!important;width:min(100%,386px)!important;height:auto!important;object-fit:contain!important}
