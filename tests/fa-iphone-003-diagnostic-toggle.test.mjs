@@ -70,10 +70,10 @@ test("Compact Card contract remains unchanged",()=>{
 });
 
 test("diagnostic PWA version is synchronized",()=>{
-  assert.match(html,/const PWA_VERSION = "2\.0-fa-iphone-003-player-name-grid-v6"/);
-  assert.match(html,/demo-data\.js\?v=2\.0-fa-iphone-003-player-name-grid-v6/);
-  assert.match(sw,/const APP_VERSION = "2\.0-fa-iphone-003-player-name-grid-v6"/);
-  assert.match(sw,/demo-data\.js\?v=2\.0-fa-iphone-003-player-name-grid-v6/);
+  assert.match(html,/const PWA_VERSION = "2\.0-fa-iphone-003-player-name-unclipped-v7"/);
+  assert.match(html,/demo-data\.js\?v=2\.0-fa-iphone-003-player-name-unclipped-v7/);
+  assert.match(sw,/const APP_VERSION = "2\.0-fa-iphone-003-player-name-unclipped-v7"/);
+  assert.match(sw,/demo-data\.js\?v=2\.0-fa-iphone-003-player-name-unclipped-v7/);
 });
 
 test("diagnostic mode writes no non-diagnostic localStorage key",()=>{

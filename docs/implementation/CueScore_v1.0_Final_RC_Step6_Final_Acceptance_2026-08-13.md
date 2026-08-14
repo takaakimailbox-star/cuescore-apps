@@ -249,6 +249,12 @@ Blocker 0、Critical 0、Major 0、Minor 0、Cosmetic 0、自動テスト全成�
 - iOS Safariでは名前spanの`width:0`が入れ子flexのgrow計算より優先されていた。外側matchupのcompact flexは維持し、各Player内部だけを`24px avatar + minmax(0,1fr) name`の2列gridへ変更して名前へ確定trackを与えた。名前spanの`width:0`は廃止した。
 - 64px高、34px競技アイコン、24px avatar、5px間隔、dividerなし、ellipsis、右端`再開 ›`、カード全体操作を維持する。データ、snapshot、resolver、schema、Backup、timer、forced reflowへの変更はない。状態：`FA-IPHONE-003 Player Name Grid Track v6: Implemented / iPhone Re-test Required`。
 
+### FA-IPHONE-003 Player Name Unclipped Paint v7
+
+- v6実機ログではsnapshot、resolver、DOM text、ARIA、card表示が起動64–135msの全段階で正常で、画像でも両Playerのgrid領域が確保されていたが、Player名glyphだけが非表示だった。これにより情報量、保存データ、名前解決、DOM設定、幅0を除外した。
+- 名前span自身の`overflow:hidden + text-overflow:ellipsis`をiOS初期paintの失敗経路と特定し、確定grid trackは維持したまま`overflow:visible + text-overflow:clip`の通常文字paintへ変更した。色は`color`と`currentColor`で同期する。
+- 64px高、競技アイコン、avatar、`vs`、右端`再開 ›`、カード全体操作を維持する。Playerデータ、snapshot、resolver、schema、Backup、timer、forced reflowへの変更はない。状態：`FA-IPHONE-003 Player Name Unclipped Paint v7: Implemented / iPhone Re-test Required`。
+
 ## ネイティブ化可否
 
 FA-IPHONE-001のコード修正は完了したが、実iPhone再確認が終わるまではネイティブ化へ進行しない。実iPhone確認待ち項目をネイティブ／提出ビルドの確認完了とみなしてはならない。

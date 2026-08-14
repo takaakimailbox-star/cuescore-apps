@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-fa-iphone-003-player-name-grid-v6";
+const APP_VERSION = "2.0-fa-iphone-003-player-name-unclipped-v7";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-fa-iphone-003-player-name-grid-v6",
+  "./demo-data.js?v=2.0-fa-iphone-003-player-name-unclipped-v7",
   "./manifest.webmanifest",
   "./manifest-fa-iphone-003-diagnostic.webmanifest",
   "./fa-iphone-003-diagnostic.html",
