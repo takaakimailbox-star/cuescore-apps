@@ -8664,7 +8664,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-fa-iphone-003-diagnostic-v2"></script>
+  <script src="./demo-data.js?v=2.0-fa-iphone-003-diagnostic-v3"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -12737,7 +12737,7 @@ let matchRecordsRawCacheV152 = null;
       const text=faIphone003EntriesV1.map(item=>JSON.stringify(item)).join("\n");
       try{await navigator.clipboard.writeText(text);el("faIphone003CopyV1").textContent="コピー済み";}catch(_){el("faIphone003OutputV1")?.focus();}
     });
-    faIphone003DebugV1("diagnostic:start",{pwa:"2.0-fa-iphone-003-diagnostic-v2",url:location.href});
+    faIphone003DebugV1("diagnostic:start",{pwa:"2.0-fa-iphone-003-diagnostic-v3",url:location.href});
   }
   function inProgressMatchStorageKeyV1() {
     return window.CueScoreDemoData?.resolveSettingKey(IN_PROGRESS_MATCH_KEY_V1) || IN_PROGRESS_MATCH_KEY_V1;
@@ -19178,7 +19178,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-fa-iphone-003-diagnostic-v2";
+    const PWA_VERSION = "2.0-fa-iphone-003-diagnostic-v3";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {

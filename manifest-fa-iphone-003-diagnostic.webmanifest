@@ -4,7 +4,7 @@
   "short_name": "CueScore",
   "description": "複数のキュースポーツに対応するCueScore統合アプリ。試合記録、分析、履歴、統計をオフラインでも利用できます。",
   "lang": "ja",
-  "start_url": "./index.html?debug=fa-iphone-003",
+  "start_url": "./fa-iphone-003-diagnostic.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
