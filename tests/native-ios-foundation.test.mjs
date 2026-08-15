@@ -10,6 +10,7 @@ const infoPlist = fs.readFileSync(new URL("../ios/App/App/Info.plist", import.me
 
 test("native runtime skips Service Worker while the PWA registration remains intact", () => {
   assert.match(html, /window\.Capacitor\?\.isNativePlatform\?\.\(\)/);
+  assert.match(html, /location\.protocol === "capacitor:"/);
   assert.match(html, /const canUseServiceWorker =\s*!isNativeRuntimeV170/);
   assert.match(html, /navigator\.serviceWorker\.register\("\.\/sw\.js"/);
 });
@@ -34,3 +35,16 @@ test("Capacitor foundation uses bundled assets without a remote server URL", () 
   assert.equal(packageJson.devDependencies["@capacitor/cli"], "8.0.2");
 });
 
+test("native backup writes the unchanged JSON payload to a file and opens the iOS share sheet", () => {
+  assert.match(html, /const isNativeCapacitorRuntime =\s*location\.protocol === "capacitor:"/);
+  assert.match(html, /capacitor\?\.Plugins\?\.Filesystem/);
+  assert.match(html, /capacitor\?\.Plugins\?\.Share/);
+  assert.match(html, /capacitor\?\.registerPlugin\?\.\("Filesystem"\)/);
+  assert.match(html, /capacitor\?\.registerPlugin\?\.\("Share"\)/);
+  assert.match(html, /Filesystem\.writeFile\(\{/);
+  assert.match(html, /directory: "CACHE"/);
+  assert.match(html, /encoding: "utf8"/);
+  assert.match(html, /Share\.share\(\{/);
+  assert.match(html, /url: file\.uri/);
+  assert.match(html, /const blob = new Blob\(\[json\]/);
+});

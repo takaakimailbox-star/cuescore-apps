@@ -16680,15 +16680,45 @@ let matchRecordsRawCacheV152 = null;
       return `${date.getFullYear()}${pad(date.getMonth()+1)}${pad(date.getDate())}_${pad(date.getHours())}${pad(date.getMinutes())}`;
     }
 
-    function exportBackup() {
-      if (!window.CueScoreFeatureAccess.canUse("backup")) return;
+    async function exportBackup() {
+      if (!window.CueScoreFeatureAccess.canUse("backup")) {
+        setDataMessage("バックアップ機能を利用できません。");
+        return;
+      }
       try {
         const payload = makeBackupPayload();
-        const blob = new Blob([JSON.stringify(payload, null, 2)], {type: "application/json"});
+        const filename = `CueScore_Apps_v1.0_Backup_${dateStamp()}.json`;
+        const json = JSON.stringify(payload, null, 2);
+        const isNativeCapacitorRuntime =
+          location.protocol === "capacitor:" || Boolean(window.Capacitor?.isNativePlatform?.());
+        if (isNativeCapacitorRuntime) {
+          const capacitor = window.Capacitor;
+          const Filesystem = capacitor?.Plugins?.Filesystem || capacitor?.registerPlugin?.("Filesystem");
+          const Share = capacitor?.Plugins?.Share || capacitor?.registerPlugin?.("Share");
+          if (!Filesystem?.writeFile || !Share?.share) {
+            throw new Error("iOSバックアップ用プラグインを読み込めませんでした。");
+          }
+          setDataMessage("バックアップファイルを作成しています…");
+          const file = await Filesystem.writeFile({
+            path: filename,
+            data: json,
+            directory: "CACHE",
+            encoding: "utf8"
+          });
+          setDataMessage("iOSの共有画面を開きました。「ファイルに保存」を選択してください。");
+          await Share.share({
+            title: "CueScore Apps バックアップ",
+            text: "CueScore Apps v1.0 バックアップ",
+            url: file.uri,
+            dialogTitle: "バックアップを保存"
+          });
+          return;
+        }
+        const blob = new Blob([json], {type: "application/json"});
         const url = URL.createObjectURL(blob);
         const anchor = document.createElement("a");
         anchor.href = url;
-        anchor.download = `CueScore_Apps_v1.0_Backup_${dateStamp()}.json`;
+        anchor.download = filename;
         document.body.appendChild(anchor);
         anchor.click();
         anchor.remove();
@@ -16698,10 +16728,15 @@ let matchRecordsRawCacheV152 = null;
           `試合区分${payload.matchCategories.length}件／シーズン${payload.matchSeasons.length}件`
         );
       } catch (error) {
-        console.error(error);
-        alert("バックアップを書き出せませんでした。");
+        console.error("[CueScore backup export]", error);
+        const detail = error?.message ? String(error.message) : "不明なエラー";
+        setDataMessage(`バックアップを書き出せませんでした：${detail}`);
+        alert(`バックアップを書き出せませんでした。\n${detail}`);
       }
     }
+
+    // Settings Suite から隠しボタンを経由せず、同じ処理を直接呼び出す。
+    window.cueScoreExportBackup = exportBackup;
 
 
     // Rotation Scoreboard Ver.5.4.0: Excel analysis CSV export
@@ -19131,7 +19166,8 @@ let matchRecordsRawCacheV152 = null;
       window.clearTimeout(id);
       managedTimersV150.delete(id);
     };
-    const isNativeRuntimeV170 = Boolean(window.Capacitor?.isNativePlatform?.());
+    const isNativeRuntimeV170 =
+      location.protocol === "capacitor:" || Boolean(window.Capacitor?.isNativePlatform?.());
     document.documentElement.dataset.runtime = isNativeRuntimeV170 ? "native" : "web";
     const canUseServiceWorker =
       !isNativeRuntimeV170 &&
@@ -25857,7 +25893,12 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     if(id==="suiteCopyId"){syncOldCloudInputs();proxyClick("copyDeviceIdBtn")}
     if(id==="suiteCloudSave")proxyClick("cloudSaveBtn");
     if(id==="suiteCloudLoad")proxyClick("cloudLoadBtn");
-    if(id==="suiteExportJson")proxyClick("exportBackupBtn");
+    if(id==="suiteExportJson"){
+      const button=event.target.closest("button");
+      button.disabled=true;
+      try{await window.cueScoreExportBackup?.()}
+      finally{button.disabled=false}
+    }
     if(id==="suiteExportCsv")proxyClick("exportCsvBtn");
     if(id==="suiteSelectBackup")$("#suiteBackupFile",root).click();
     if(id==="suiteDeleteRecords")proxyClick("deleteAllMatchRecordsBtn");
