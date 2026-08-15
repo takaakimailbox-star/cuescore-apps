@@ -94,11 +94,19 @@ test("rollback verification failure is reported as an unconfirmed critical state
 
 test("replace and merge restore do not create localStorage snapshot keys", () => {
   const replaceBlock = html.slice(html.indexOf("async function importBackupFile(file)"), html.indexOf("function clearSelectedPlayersV1"));
-  const mergeBlock = html.slice(html.indexOf("async function mergeBackup(backup)"), html.indexOf("function handFileToExistingRestore"));
+  const mergeBlock = html.slice(html.indexOf("async function mergeBackup(backup)"), html.indexOf("function renderSelectedBackup"));
   assert.doesNotMatch(replaceBlock, /beforeLocalRestore|restoreSnapshotKey/);
   assert.doesNotMatch(mergeBlock, /beforeLocalMergeRestore|snapshotKey/);
   assert.match(replaceBlock, /CueScoreRestoreSafetyV160\.performTransaction/);
   assert.match(mergeBlock, /CueScoreRestoreSafetyV160\.performTransaction/);
+});
+
+test("Settings Suite uses the formal validator and direct restore path on iOS", () => {
+  assert.match(html, /window\.cueScoreValidateBackup = validateBackup/);
+  assert.match(html, /window\.cueScoreImportBackupFile = importBackupFile/);
+  assert.match(html, /function validateBackup\(value\)\{return Boolean\(window\.cueScoreValidateBackup/);
+  assert.match(html, /await window\.cueScoreImportBackupFile\?\.\(selectedBackupFile\)/);
+  assert.doesNotMatch(html, /new DataTransfer\(\)/);
 });
 
 test("legacy snapshot retention stays bounded and scoped away from formal data keys", () => {

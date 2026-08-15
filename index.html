@@ -16985,6 +16985,10 @@ let matchRecordsRawCacheV152 = null;
       }
     }
 
+    // Settings Suite も正式な検証・復元処理を直接利用する。
+    window.cueScoreValidateBackup = validateBackup;
+    window.cueScoreImportBackupFile = importBackupFile;
+
     function clearSelectedPlayersV1() {
       selectedRegisteredPlayer = {1:null,2:null};
       [1,2].forEach(slot => {
@@ -25845,7 +25849,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     return ["legacy",record?.startedAt||record?.playedAt||record?.endedAt||"",normalizeText(p1.name),normalizeText(p2.name),Number(p1.score||0),Number(p2.score||0)].join("|");
   }
   function listItemKey(item){if(typeof item==="string")return `text:${normalizeText(item)}`;return `id:${item?.id??item?.key??normalizeText(item?.name??item?.label??JSON.stringify(item))}`}
-  function validateBackup(value){return value&&typeof value==="object"&&["cuescore-apps-backup","rotation-scoreboard-backup"].includes(value.format)&&Array.isArray(value.players)&&Array.isArray(value.matchRecords)&&value.matchRecords.every(r=>r&&typeof r==="object"&&r.players?.[1]&&r.players?.[2])}
+  function validateBackup(value){return Boolean(window.cueScoreValidateBackup?.(value))}
   function mergeUnique(current,incoming,keyFn){const keys=new Set(current.map(keyFn));const added=[];incoming.forEach(item=>{const key=keyFn(item);if(!keys.has(key)){keys.add(key);added.push(item)}});return {value:[...current,...added],added:added.length}}
   async function mergeBackup(backup){
     const current={players:readArray(PLAYER_KEY),records:readArray(RECORD_KEY),categories:readArray(CATEGORY_KEY),seasons:readArray(SEASON_KEY)};
@@ -25861,10 +25865,6 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       await window.cueScoreMarkCloudDirtyV133?.("local-backup-restored",{playerCount:nextPlayers.value.length,recordCount:nextRecords.value.length});
     }catch(cloudError){console.error("[CueScore] Merge restore completed, but cloud dirty marking failed",cloudError)}
     return {players:nextPlayers.added,records:nextRecords.added,categories:nextCategories.added,seasons:nextSeasons.added};
-  }
-  function handFileToExistingRestore(file){
-    const input=document.getElementById("backupFileInput");if(!input)return false;
-    const transfer=new DataTransfer();transfer.items.add(file);input.files=transfer.files;input.dispatchEvent(new Event("change",{bubbles:true}));return true;
   }
   function renderSelectedBackup(file,backup){
     const section=$("#suiteSelectedBackup",root),options=$("#suiteRestoreOptions",root);
@@ -25908,7 +25908,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     if(id==="suiteRestoreStart"&&selectedBackup&&selectedBackupFile){
       const button=event.target.closest("button"),mode=$('input[name="suiteRestoreMode"]:checked',root)?.value||"merge";button.disabled=true;
       try{
-        if(mode==="replace"){handFileToExistingRestore(selectedBackupFile)}
+        if(mode==="replace"){await window.cueScoreImportBackupFile?.(selectedBackupFile)}
         else{
           const result=await mergeBackup(selectedBackup);
           alert(`追加・統合しました。\nプレーヤー ${result.players}人追加\n対戦履歴 ${result.records}試合追加\n試合区分 ${result.categories}件追加\nシーズン ${result.seasons}件追加`);
