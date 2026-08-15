@@ -12,6 +12,7 @@ Status: Native foundation verified / final device gates remain
 - iPhone実機でインストール、オフライン起動、Player写真表示を確認した。
 - JSON Backup exportをCapacitor Filesystem／Shareへ接続し、iPhone実機で共有画面とファイル保存の成功を確認した。
 - Backup RestoreはSettings Suiteから正式validator／transaction処理を直接呼び出す形へ統一した。
+- 保存済みJSONの選択からBackup Restore完了まで、iPhone実機で成功を確認した。
 - quota超過、途中失敗、rollback検証失敗、破損JSON、不正形式、重複IDを保存前またはtransaction内で処理する。
 - Debug／Release simulator buildが成功した。
 - App iconは1024×1024、alphaなしを確認した。
@@ -23,6 +24,7 @@ Status: Native foundation verified / final device gates remain
 - Debug iOS Simulator build: PASS
 - Release iOS Simulator build: PASS
 - Native Backup export on physical iPhone: PASS
+- Native Backup restore on physical iPhone: PASS
 - Web Backup schema and browser download compatibility: maintained
 
 ## Warning assessment
@@ -34,7 +36,7 @@ Status: Native foundation verified / final device gates remain
 
 ## Remaining device gates
 
-1. 保存済みJSONをiPhoneのFiles pickerから選び、追加／置換Restoreを各1回確認する。
+1. 追加／置換Restoreのうち未確認の方式があれば、別データで1回確認する。
 2. 機内モードcold launchでHome、6競技、保存、Player、History、Analytics、Settings、Legal／Supportを確認する。
 3. Player写真の選択取消、HEIC入力、再起動後表示、Backup→Restore後表示を確認する。
 4. background／foreground、強制終了、通常updateで保存データが維持されることを確認する。
