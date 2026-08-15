@@ -1,0 +1,22 @@
+{
+  "name": "cuescore-apps",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CueScore Apps v1.0 PWA and native iOS container",
+  "scripts": {
+    "build:native-web": "node scripts/build-native-web.mjs",
+    "native:sync": "npm run build:native-web && cap sync ios",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@capacitor/core": "8.0.2",
+    "@capacitor/ios": "8.0.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.0.2"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
+

@@ -1,0 +1,10 @@
+{
+  "appId": "com.takaakimailboxstar.cuescoreapps",
+  "appName": "CueScore Apps",
+  "webDir": "native-web",
+  "ios": {
+    "contentInset": "never",
+    "preferredContentMode": "mobile"
+  }
+}
+

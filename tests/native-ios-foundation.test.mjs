@@ -1,0 +1,36 @@
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import test from "node:test";
+
+const html = fs.readFileSync(new URL("../index.html", import.meta.url), "utf8");
+const config = JSON.parse(fs.readFileSync(new URL("../capacitor.config.json", import.meta.url), "utf8"));
+const packageJson = JSON.parse(fs.readFileSync(new URL("../package.json", import.meta.url), "utf8"));
+const project = fs.readFileSync(new URL("../ios/App/App.xcodeproj/project.pbxproj", import.meta.url), "utf8");
+const infoPlist = fs.readFileSync(new URL("../ios/App/App/Info.plist", import.meta.url), "utf8");
+
+test("native runtime skips Service Worker while the PWA registration remains intact", () => {
+  assert.match(html, /window\.Capacitor\?\.isNativePlatform\?\.\(\)/);
+  assert.match(html, /const canUseServiceWorker =\s*!isNativeRuntimeV170/);
+  assert.match(html, /navigator\.serviceWorker\.register\("\.\/sw\.js"/);
+});
+
+test("iOS target is iPhone-only, portrait-only, version 1.0 build 1", () => {
+  assert.doesNotMatch(project, /TARGETED_DEVICE_FAMILY = "1,2"/);
+  assert.match(project, /TARGETED_DEVICE_FAMILY = 1;/);
+  assert.match(project, /MARKETING_VERSION = 1\.0;/);
+  assert.match(project, /CURRENT_PROJECT_VERSION = 1;/);
+  assert.match(infoPlist, /UIInterfaceOrientationPortrait/);
+  assert.doesNotMatch(infoPlist, /UIInterfaceOrientationLandscape/);
+  assert.doesNotMatch(infoPlist, /UISupportedInterfaceOrientations~ipad/);
+});
+
+test("Capacitor foundation uses bundled assets without a remote server URL", () => {
+  assert.equal(config.appName, "CueScore Apps");
+  assert.equal(config.webDir, "native-web");
+  assert.equal(config.server, undefined);
+  assert.equal(config.ios.contentInset, "never");
+  assert.equal(packageJson.dependencies["@capacitor/core"], "8.0.2");
+  assert.equal(packageJson.dependencies["@capacitor/ios"], "8.0.2");
+  assert.equal(packageJson.devDependencies["@capacitor/cli"], "8.0.2");
+});
+

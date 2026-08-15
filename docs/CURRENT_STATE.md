@@ -117,6 +117,14 @@
 Updated: 2026-08-15
 Status: Living operational reference
 
+## Step 7B Native iOS Foundation（2026年8月15日）
+
+- `codex/cuescore-step7b-native-ios-foundation` でCapacitor 8.0.2の薄型native containerを生成した。
+- Bundle IDは `com.takaakimailboxstar.cuescoreapps`、Apple Teamは `U26DF88PRW`。iOS 15以上、iPhone専用、portrait専用、version 1.0 build 1。
+- native assetsは再現可能なcopy工程で `native-web` に生成し、remote `server.url` は使用しない。PWAのService Workerは維持し、Capacitor native runtimeだけ登録を抑止する。
+- Web／foundation回帰143件PASS。Xcode 26.6、iPhone 17 Simulator（iOS 26.5）でDebug build、install、Home cold launchを確認した。
+- 実機の保存、background/foreground、Backup/Restore、Player写真、offlineは次の人間操作Gate。1024px正式icon、launch screen、privacy manifestも提出前に確定が必要。
+
 ## Purpose and Authority
 
 ChatGPTとCodexで共有する現在状態の参照ファイル。Official Releaseを置き換えず、最新の実装状態、採用判断、延期項目を記録する。
