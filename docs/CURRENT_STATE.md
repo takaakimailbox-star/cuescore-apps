@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Step 7：Native iOS Preparation 計画完了／採用待ち（2026年8月15日）
+
+- PWA v1.0はFinal AcceptanceおよびFA-IPHONE-003実機確認を完了し、完成状態にある。
+- `origin/main`基準`0dcd146ec70aed6c5dcce328aeec478a5e4109c9`で現行PWA、保存、Backup／Restore、Player写真、Service Worker、orientation／safe-area、App Store提出資料を監査した。
+- Native方式は、現行Web assetsと保存schemaを維持するCapacitor薄型iOSコンテナを推奨案とした。これは提案であり、Product Owner採用待ち。
+- PWAからnativeへのデータ移行は既存Backup JSON→Restoreを正式候補とし、自動storage移行は前提にしない。現行Backupに含まれない中断試合とUndoは移行対象外となる。
+- Xcode project作成、Capacitor／npm導入、Swift／native bridge実装、署名、TestFlight、App Store提出、Release確定は未実施。
+- 詳細計画：`docs/implementation/CueScore_v1.0_Step7_Native_iOS_Preparation_2026-08-15.md`。
+
 ## FA-IPHONE-003：Resolved / iPhone PASS / Cleanup Complete（2026年8月15日）
 
 - Product Ownerが実iPhone Home Screen PWAで、中断カードの両Player名が起動直後から表示されることを確認した。FA-IPHONE-003は`Resolved / iPhone PASS`。
@@ -105,7 +114,7 @@
 - サンプルデータ生成時のJPA SLは先取点から公式対応表で決定し、SLと先取点の整合を保証する。
 - 正式決定記録：`docs/official/11_CueScore_v1.0RC_JPA9_MatchPoint_Decision.md`。
 
-Updated: 2026-08-13
+Updated: 2026-08-15
 Status: Living operational reference
 
 ## Purpose and Authority
