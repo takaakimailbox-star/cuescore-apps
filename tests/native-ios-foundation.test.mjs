@@ -35,6 +35,15 @@ test("Capacitor foundation uses bundled assets without a remote server URL", () 
   assert.equal(packageJson.devDependencies["@capacitor/cli"], "8.0.2");
 });
 
+test("native v1 remains local-first and bundles every offline legal page", () => {
+  assert.match(html, /csvExport:false,\s*cloudSync:false/);
+  assert.match(html, /const canUseServiceWorker =\s*!isNativeRuntimeV170/);
+  for (const relative of ["privacy.html", "terms.html", "support.html"]) {
+    assert.equal(fs.existsSync(new URL(`../native-web/${relative}`, import.meta.url)), true);
+    assert.equal(fs.existsSync(new URL(`../ios/App/App/public/${relative}`, import.meta.url)), true);
+  }
+});
+
 test("native backup writes the unchanged JSON payload to a file and opens the iOS share sheet", () => {
   assert.match(html, /const isNativeCapacitorRuntime =\s*location\.protocol === "capacitor:"/);
   assert.match(html, /capacitor\?\.Plugins\?\.Filesystem/);
