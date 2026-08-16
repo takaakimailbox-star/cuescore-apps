@@ -1,7 +1,7 @@
 # CueScore v1.0 — TestFlight Readiness
 
 Date: 2026-08-16  
-Status: Build 1 upload PASS / Apple processing in progress
+Status: Build 1 ready / Internal TestFlight invitation sent
 
 ## App identity
 
@@ -50,12 +50,14 @@ Status: Build 1 upload PASS / Apple processing in progress
 - Xcode managed distribution signing: PASS
 - Release archive creation and App Store validation: PASS
 - App Store Connect upload: PASS at 2026-08-16 21:24 JST
+- Export compliance: no encryption algorithms implemented; saved and accepted
+- Internal group: `CueScore Internal Testers`（automatic distribution enabled）
+- Internal tester: Product Owner invited
 
 ## Next gates
 
-1. Wait for Apple processing of Build 1.
-2. Complete export-compliance information if App Store Connect requests it.
-3. Enable internal TestFlight testing.
-4. Install through TestFlight and verify that local data is retained across the update.
+1. Product Owner accepts the TestFlight invitation and installs Build 1.
+2. Verify that local data is retained across the TestFlight update.
+3. Run the short TestFlight smoke test and record the result.
 
 Build 1 was uploaded only after explicit Product Owner approval. App Store release submission has not been performed.
