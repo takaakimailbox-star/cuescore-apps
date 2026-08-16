@@ -1,7 +1,7 @@
 # CueScore v1.0 — TestFlight Readiness
 
 Date: 2026-08-16  
-Status: Build 1 ready / Internal TestFlight invitation sent
+Status: Internal TestFlight Build 1 smoke test PASS
 
 ## App identity
 
@@ -53,11 +53,14 @@ Status: Build 1 ready / Internal TestFlight invitation sent
 - Export compliance: no encryption algorithms implemented; saved and accepted
 - Internal group: `CueScore Internal Testers`（automatic distribution enabled）
 - Internal tester: Product Owner invited
+- TestFlight install on physical iPhone: PASS（2026-08-17）
+- Existing players, photos, and match history retained after TestFlight install: PASS
+- Offline launch after TestFlight install: PASS
+- Native backup export after TestFlight install: PASS
 
 ## Next gates
 
-1. Product Owner accepts the TestFlight invitation and installs Build 1.
-2. Verify that local data is retained across the TestFlight update.
-3. Run the short TestFlight smoke test and record the result.
+1. Continue development with Build 2 or later when changes are ready.
+2. Keep App Store release submission behind a separate Product Owner approval gate.
 
 Build 1 was uploaded only after explicit Product Owner approval. App Store release submission has not been performed.
