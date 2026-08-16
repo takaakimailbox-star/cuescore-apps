@@ -15,6 +15,7 @@ Status: Native foundation verified / final device gates remain
 - 保存済みJSONの選択からBackup Restore完了まで、iPhone実機で成功を確認した。
 - 機内モードでのcold launchと主要機能の動作をiPhone実機で確認した。
 - Player写真の選択、再起動後の保持、選択取消時の既存写真保持をiPhone実機で確認した。
+- background／foregroundと強制終了後もPlayer、写真、履歴が保持されることをiPhone実機で確認した。
 - quota超過、途中失敗、rollback検証失敗、破損JSON、不正形式、重複IDを保存前またはtransaction内で処理する。
 - Debug／Release simulator buildが成功した。
 - App iconは1024×1024、alphaなしを確認した。
@@ -29,6 +30,7 @@ Status: Native foundation verified / final device gates remain
 - Native Backup restore on physical iPhone: PASS
 - Native offline cold launch and primary flows on physical iPhone: PASS
 - Native Player photo selection, relaunch persistence, and picker cancellation on physical iPhone: PASS
+- Native background, foreground, force-quit, and local data persistence on physical iPhone: PASS
 - Web Backup schema and browser download compatibility: maintained
 
 ## Warning assessment
@@ -42,7 +44,7 @@ Status: Native foundation verified / final device gates remain
 
 1. 追加／置換Restoreのうち未確認の方式があれば、別データで1回確認する。
 2. Player写真のBackup→Restore後表示を確認する。
-3. background／foreground、強制終了、通常updateで保存データが維持されることを確認する。
+3. TestFlightまたは通常updateで保存データが維持されることを確認する。
 4. 小型／大型iPhoneでsafe-area、keyboard、modal、Game Resultを確認する。
 
 ## Remaining submission gates
