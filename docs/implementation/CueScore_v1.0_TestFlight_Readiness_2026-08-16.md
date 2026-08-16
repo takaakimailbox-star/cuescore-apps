@@ -1,7 +1,7 @@
 # CueScore v1.0 — TestFlight Readiness
 
 Date: 2026-08-16  
-Status: Local preflight PASS / Apple distribution setup required
+Status: Build 1 upload PASS / Apple processing in progress
 
 ## App identity
 
@@ -29,33 +29,33 @@ Status: Local preflight PASS / Apple distribution setup required
 - Capacitor／Cordova Privacy Manifest inclusion: PASS
 - Official Description／Review Notes／Keywords／Release Notes／Public URLs: prepared
 
-## Apple-side prerequisites
+## Apple-side registration
 
-- App Store Connect app record must exist before the first build upload.
-- Proposed record values:
+- App ID registration: PASS
+- App Store Connect app record creation: PASS
+- Registered record values:
   - Platform: iOS
   - Name: CueScore Apps
   - Primary language: Japanese
   - Bundle ID: `com.takaakimailboxstar.cuescoreapps`
-  - SKU candidate: `cuescore-apps-ios-v1`
-  - User Access: Full Access（single-owner operation assumption; owner decides）
+  - SKU: `cuescore-apps-ios-v1`
+  - User Access: Full Access
 - Latest Apple agreements must be accepted by the Account Holder when App Store Connect requires them.
 - App Review contact name, email, and phone remain Product Owner input.
 
 ## Signing finding
 
 - Installed valid identity: Apple Development
-- Apple Distribution identity: not found at 2026-08-16 preflight
-- Distribution certificate/profile creation changes persistent Apple account signing state. Create through Xcode automatic signing only after Product Owner confirmation.
+- Local Apple Distribution identity: not present after upload
+- Xcode managed distribution signing: PASS
+- Release archive creation and App Store validation: PASS
+- App Store Connect upload: PASS at 2026-08-16 21:24 JST
 
 ## Next gates
 
-1. Product Owner confirms the SKU and User Access choice.
-2. Product Owner signs in to App Store Connect and creates the app record; legal agreement acceptance remains a user action.
-3. Create or fetch Apple Distribution signing material through Xcode.
-4. Produce the Release archive and run Validate App.
-5. Review validation output; do not upload until Product Owner explicitly approves upload.
-6. Upload Build 1, wait for Apple processing, complete export-compliance information, and enable internal testing.
-7. Install through TestFlight and verify that local data is retained across the update.
+1. Wait for Apple processing of Build 1.
+2. Complete export-compliance information if App Store Connect requests it.
+3. Enable internal TestFlight testing.
+4. Install through TestFlight and verify that local data is retained across the update.
 
-No build has been uploaded and no App Store Connect record has been created by this preparation step.
+Build 1 was uploaded only after explicit Product Owner approval. App Store release submission has not been performed.
