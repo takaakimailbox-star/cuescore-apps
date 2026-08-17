@@ -101,7 +101,8 @@ test("all six disciplines have existing terminology for the Home card",()=>{
 test("completion and both explicit discard paths clear the active snapshot",()=>{
   assert.match(html,/function interruptNewMatchFromBreakV3\(\)[\s\S]*?clearInProgressMatchV1\(\)/);
   assert.match(html,/function requestBackToPlayerInfo\(\)[\s\S]*?clearInProgressMatchV1\(\)/);
-  assert.match(html,/persistMatchRecordsOnlyV161\(existingRecords\);[\s\S]*?clearInProgressMatchV1\(\)/);
+  assert.match(html,/function persistCompletedMatchRecordsV162\(records\)[\s\S]*?localStorage\.removeItem\(inProgressKey\)[\s\S]*?persistMatchRecordsOnlyV161\(records\)/);
+  assert.match(html,/persistCompletedMatchRecordsV162\(existingRecords\)/);
 });
 
 test("invalid or completed snapshots cannot reopen as an active game",()=>{

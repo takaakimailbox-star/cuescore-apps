@@ -44,6 +44,15 @@ test("native v1 remains local-first and bundles every offline legal page", () =>
   }
 });
 
+test("generated and copied native index use the current source implementation", () => {
+  const nativeHtml = fs.readFileSync(new URL("../native-web/index.html", import.meta.url), "utf8");
+  const copiedHtml = fs.readFileSync(new URL("../ios/App/App/public/index.html", import.meta.url), "utf8");
+  assert.equal(nativeHtml, html);
+  assert.equal(copiedHtml, html);
+  assert.match(copiedHtml, /function persistCompletedMatchRecordsV162\(records\)/);
+  assert.match(copiedHtml, /adding another Player must not unset the existing primary Player/);
+});
+
 test("native backup writes the unchanged JSON payload to a file and opens the iOS share sheet", () => {
   assert.match(html, /const isNativeCapacitorRuntime =\s*location\.protocol === "capacitor:"/);
   assert.match(html, /capacitor\?\.Plugins\?\.Filesystem/);

@@ -13,6 +13,16 @@
 - App Store本審査提出と一般公開は未承認であり、実施していない。Product Ownerの別途明示承認を必須とする。
 - 詳細記録：`docs/implementation/CueScore_v1.0_Step7B_Native_iOS_Foundation_2026-08-15.md`、`docs/implementation/CueScore_v1.0_Step7B_Native_iOS_Progress_2026-08-16.md`、`docs/implementation/CueScore_v1.0_TestFlight_Readiness_2026-08-16.md`。
 
+## TestFlight Build 1 追加実戦テスト／Build 2修正候補（2026年8月17日）
+
+- 上記の初回スモークテストPASS後、追加の9-Ball実戦テストで、Main Player消失、試合終了時の端末保存エラー、保持用Game Result表示、マス割0表示の4件が報告された。
+- Main Player消失は、新規Playerを非Mainで保存した際に既存Playerを含む全員から`isPrimary`を削除する処理を確認し、Player schemaを変えず対象Playerだけを解除するよう修正した。
+- 試合保存は、完了recordと置換対象の中断試合snapshotを一時的に同時保持するためWebKit quota境界で失敗し得る経路を確認した。完了時は中断snapshotを先に解放してrecordを照合保存し、失敗時だけsnapshotを復元する最小修正を行った。保存失敗時に結果画面を保持する既存安全動作は維持する。
+- 保存に失敗すると保存済みrecord用の共通rendererへ進めず、保持用結果モーダルが表示されるため、報告されたGame Result差異は保存失敗経路と整合する。Build 1のソース、`native-web`、Xcode同梱`public`は調査時点で同一だったが、アップロード済みArchive本体は残っておらず再抽出確認はできていない。
+- マス割はOfficial Decision 022／Spec 023を維持する。提供画像の可視履歴だけでは、ブレーカーが相手へ手番を渡さず1〜9番をすべてなくしたRackを確認できないため、今回の実Matchを正式な1回とは確定していない。保存recordの生JSONは未取得であり、判定実装は変更していない。
+- 修正後は自動テスト152件成功／失敗0。native assetを再生成・Xcodeへcopyし、source／generated／copied assetの一致、Debug／Release simulator buildをPASSした。実iPhone確認とBuild 2作成・配信は別Gateとし、Build Number 1は再利用しない。
+- 調査記録：`docs/implementation/CueScore_TestFlight_Build1_4Issues_Investigation_2026-08-17.md`。
+
 ## FA-IPHONE-003：Resolved / iPhone PASS / Cleanup Complete（2026年8月15日）
 
 - Product Ownerが実iPhone Home Screen PWAで、中断カードの両Player名が起動直後から表示されることを確認した。FA-IPHONE-003は`Resolved / iPhone PASS`。

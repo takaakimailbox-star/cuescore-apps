@@ -9494,6 +9494,30 @@ let matchRecordsRawCacheV152 = null;
     return true;
   }
 
+  // A completed record can be slightly larger than the live in-progress
+  // snapshot it replaces. Release that snapshot before the verified write so
+  // WebKit does not need quota for both copies at once. If the record write
+  // fails, restore the snapshot so the existing result-recovery path remains
+  // available and no playable data is discarded.
+  function persistCompletedMatchRecordsV162(records) {
+    const inProgressKey = inProgressMatchStorageKeyV1();
+    const inProgressRaw = localStorage.getItem(inProgressKey);
+    try {
+      if (inProgressRaw !== null) localStorage.removeItem(inProgressKey);
+      persistMatchRecordsOnlyV161(records);
+      return true;
+    } catch (error) {
+      if (inProgressRaw !== null) {
+        try {
+          localStorage.setItem(inProgressKey, inProgressRaw);
+        } catch (restoreError) {
+          console.error("CueScore completed-match snapshot restore failed", restoreError);
+        }
+      }
+      throw error;
+    }
+  }
+
   function writeMatchRecords(records) {
     persistMatchRecordsOnlyV161(records);
     refreshDerivedViewsV131("match-records");
@@ -9793,8 +9817,14 @@ let matchRecordsRawCacheV152 = null;
   function setExclusivePrimaryPlayerV1(players, playerId, enabled) {
     return players.map(player=>{
       const copy={...player};
-      if (enabled && player.id===playerId) copy.isPrimary=true;
-      else delete copy.isPrimary;
+      if (enabled) {
+        if (player.id===playerId) copy.isPrimary=true;
+        else delete copy.isPrimary;
+      } else if (player.id===playerId) {
+        // Saving a non-primary Player must only clear that Player. In particular,
+        // adding another Player must not unset the existing primary Player.
+        delete copy.isPrimary;
+      }
       return copy;
     });
   }
@@ -16358,10 +16388,9 @@ let matchRecordsRawCacheV152 = null;
     // ここまでを保存の必須処理とし、失敗時は呼び出し元へ通知する。
     // RC61: the result OK path must complete using local persistence only.
     // Derived rendering and cloud work are deliberately deferred until after navigation.
-    persistMatchRecordsOnlyV161(existingRecords);
+    persistCompletedMatchRecordsV162(existingRecords);
     currentGameRecordSaved=true;
     currentGameRecordIdV100=record.id;
-    clearInProgressMatchV1();
 
     // ダッシュボード再集計やクラウド自動保存は付随処理。
     // ここで例外が起きても、端末保存済みのOK操作と画面遷移を中断しない。

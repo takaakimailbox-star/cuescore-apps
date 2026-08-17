@@ -84,3 +84,10 @@ test("all display and analytics paths use the shared evaluator",()=>{
   assert.match(html,/const analyticsMasuwariCount= \(record,s\)=>\{\s*return Number\(window\.rackGameMasuwariCountsV1\?\.\(record\)\?\.\[Number\(s\)\]\)\|\|0;/);
   assert.doesNotMatch(html,/const analyticsMasuwariCount=[\s\S]{0,500}breakRunOut===true/);
 });
+
+test("9ball masuwari remains identical after record save and reload",()=>{
+  const record={disciplineId:"9ball",eventLog:{events:ballEvents("9ball")}};
+  const reloaded=JSON.parse(JSON.stringify(record));
+  assert.equal(context.window.evaluate(record)[1],1);
+  assert.equal(context.window.evaluate(reloaded)[1],1);
+});

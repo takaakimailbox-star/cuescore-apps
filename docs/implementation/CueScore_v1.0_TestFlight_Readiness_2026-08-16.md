@@ -1,7 +1,7 @@
 # CueScore v1.0 — TestFlight Readiness
 
 Date: 2026-08-16  
-Status: Internal TestFlight Build 1 smoke test PASS
+Status: Initial internal smoke test PASS / additional field-test issues recorded
 
 ## App identity
 
@@ -61,7 +61,8 @@ Status: Internal TestFlight Build 1 smoke test PASS
 
 ## Next gates
 
-1. Continue development with Build 2 or later when changes are ready.
-2. Keep App Store release submission behind a separate Product Owner approval gate.
+1. Minimal source fixes for the 2026-08-17 Build 1 additional field-test findings passed 152 automated tests and Debug／Release simulator builds; verify them on a physical iPhone.
+2. Create Build 2 or later only after the Product Owner opens that separate gate; never reuse Build Number 1.
+3. Keep App Store release submission behind a separate Product Owner approval gate.
 
 Build 1 was uploaded only after explicit Product Owner approval. App Store release submission has not been performed.
