@@ -41,7 +41,7 @@ Status: Internal TestFlight Build 1 smoke test PASS
   - SKU: `cuescore-apps-ios-v1`
   - User Access: Full Access
 - Latest Apple agreements must be accepted by the Account Holder when App Store Connect requires them.
-- App Review contact name, email, and phone remain Product Owner input.
+- TestFlight App Review contact name, email, and phone: registered in App Store Connect（personal details intentionally omitted from this repository）
 
 ## Signing finding
 
@@ -57,6 +57,7 @@ Status: Internal TestFlight Build 1 smoke test PASS
 - Existing players, photos, and match history retained after TestFlight install: PASS
 - Offline launch after TestFlight install: PASS
 - Native backup export after TestFlight install: PASS
+- Internal TestFlight Build 1 smoke test: PASS（Product Owner report, 2026-08-17）
 
 ## Next gates
 

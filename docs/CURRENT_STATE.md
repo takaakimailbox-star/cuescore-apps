@@ -1,13 +1,17 @@
 # CueScore Apps Current State
 
-## Step 7：Native iOS Preparation 計画完了／採用待ち（2026年8月15日）
+## Step 7B：Native iOS／TestFlight Build 1 実機確認完了（2026年8月17日）
 
-- PWA v1.0はFinal AcceptanceおよびFA-IPHONE-003実機確認を完了し、完成状態にある。
-- `origin/main`基準`0dcd146ec70aed6c5dcce328aeec478a5e4109c9`で現行PWA、保存、Backup／Restore、Player写真、Service Worker、orientation／safe-area、App Store提出資料を監査した。
-- Native方式は、現行Web assetsと保存schemaを維持するCapacitor薄型iOSコンテナを推奨案とした。これは提案であり、Product Owner採用待ち。
-- PWAからnativeへのデータ移行は既存Backup JSON→Restoreを正式候補とし、自動storage移行は前提にしない。現行Backupに含まれない中断試合とUndoは移行対象外となる。
-- Xcode project作成、Capacitor／npm導入、Swift／native bridge実装、署名、TestFlight、App Store提出、Release確定は未実施。
-- 詳細計画：`docs/implementation/CueScore_v1.0_Step7_Native_iOS_Preparation_2026-08-15.md`。
+- Native iOS foundation：GO。現行Web assetsと保存schemaを維持するCapacitor 8.0.2薄型iOSコンテナ方式をProduct Ownerが採用し、Xcode projectとnative bridgeを実装済み。
+- App identity：Bundle ID `com.takaakimailboxstar.cuescoreapps`、Apple Team `U26DF88PRW`、Marketing Version `1.0`、Build `1`。iOS 15以上、iPhone専用、portrait専用、Automatic Signing。
+- Native Backup書き出し、Backup復元、オフライン起動、Player写真、ローカルデータ保持を実iPhoneで確認し、すべてPASS。
+- 自動テスト146件成功／失敗0。Debug／Release simulator build、Release Archive、App Store向けValidateをPASS。
+- Apple Developer Individual登録、Explicit App ID登録、App Store Connectアプリレコード登録を完了。App Store Connect App IDは`6802027038`、SKUは`cuescore-apps-ios-v1`。
+- TestFlight Version 1.0 Build 1のアップロード、Apple処理、輸出コンプライアンス回答、内部グループ配信、実iPhoneインストールを完了。
+- TestFlight Build 1スモークテストで、既存Player、写真、試合履歴、オフライン起動、Backup書き出しを再確認し、すべてPASS。TestFlight Build 1：GO / PASS、内部運用：GO。
+- 次の配布Buildは`2`以上とする。今回の状態同期ではBuild 2を作成しない。
+- App Store本審査提出と一般公開は未承認であり、実施していない。Product Ownerの別途明示承認を必須とする。
+- 詳細記録：`docs/implementation/CueScore_v1.0_Step7B_Native_iOS_Foundation_2026-08-15.md`、`docs/implementation/CueScore_v1.0_Step7B_Native_iOS_Progress_2026-08-16.md`、`docs/implementation/CueScore_v1.0_TestFlight_Readiness_2026-08-16.md`。
 
 ## FA-IPHONE-003：Resolved / iPhone PASS / Cleanup Complete（2026年8月15日）
 
@@ -114,7 +118,7 @@
 - サンプルデータ生成時のJPA SLは先取点から公式対応表で決定し、SLと先取点の整合を保証する。
 - 正式決定記録：`docs/official/11_CueScore_v1.0RC_JPA9_MatchPoint_Decision.md`。
 
-Updated: 2026-08-15
+Updated: 2026-08-17
 Status: Living operational reference
 
 ## Step 7B Native iOS Foundation（2026年8月15日）
@@ -122,8 +126,9 @@ Status: Living operational reference
 - `codex/cuescore-step7b-native-ios-foundation` でCapacitor 8.0.2の薄型native containerを生成した。
 - Bundle IDは `com.takaakimailboxstar.cuescoreapps`、Apple Teamは `U26DF88PRW`。iOS 15以上、iPhone専用、portrait専用、version 1.0 build 1。
 - native assetsは再現可能なcopy工程で `native-web` に生成し、remote `server.url` は使用しない。PWAのService Workerは維持し、Capacitor native runtimeだけ登録を抑止する。
-- Web／foundation回帰143件PASS。Xcode 26.6、iPhone 17 Simulator（iOS 26.5）でDebug build、install、Home cold launchを確認した。
-- 実機の保存、background/foreground、Backup/Restore、Player写真、offlineは次の人間操作Gate。1024px正式icon、launch screen、privacy manifestも提出前に確定が必要。
+- Web／foundation回帰を拡張し、自動テスト146件PASS／失敗0。Xcode 26.6、iPhone 17 Simulator（iOS 26.5）でDebug／Release build、install、Home cold launchを確認した。
+- 1024px正式App Icon（alphaなし）、launch screen、Capacitor／Cordova Privacy ManifestのArchive内同梱を確認した。
+- 実iPhoneでBackup書き出し、Backup復元、Player写真、offline、データ保持をPASS。Release Archive、App Store Validate、TestFlight Build 1実機スモークテストもPASS。
 
 ## Purpose and Authority
 
@@ -233,11 +238,11 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 
 ## Current Implementation State
 
-- CueScore AppsはiPhone縦画面向けPWAとして実装されている。
+- CueScore AppsはiPhone縦画面向けPWAと、同じWeb assets／保存schemaを使用するCapacitor Native iOSアプリとして実装されている。
 - Official Demo Dataは製品上「サンプルデータ」と表示し、通常ユーザーデータと完全分離して扱う。v3.1は登録済み10プレーヤー、全6競技各20試合、合計120試合・3,523件の詳細イベントで再構築済み。
-- バックアップ/復元およびプレーヤー写真の実装経路を現行コードで確認済み。
+- Native iOSではFilesystem／Share経由のBackup書き出し、検証済みファイルからのBackup復元、プレーヤー写真、オフライン起動、ローカルデータ保持を実iPhoneで確認済み。
 - CSV出力およびクラウド同期関連コードは将来再利用のため残しているが、App Store v1.0 release profileでは非提供。
-- ネイティブiOSプロジェクトおよびApp Store本審査提出は開始していない。
+- Native iOS foundation、App Store Connectアプリ登録、TestFlight Build 1内部配信と実機確認は完了。App Store本審査提出と一般公開は開始していない。
 
 ## v1.0 Final RC：Restore QuotaExceeded安全修正（2026年8月13日）
 
@@ -253,9 +258,9 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - 2026-08-09付の公式Markdown一式を `docs/official/app-store-v1.0/` に登録。
 - 公開文書とApp Store提出資料を分離して管理。
 - Privacy Policy / Terms of Use / Support の公開用HTML入口を用意。
-- Privacy Policy、Terms of Use、SupportのURLと公開用連絡先は2026-08-13のStep 4で確定済み。App Review連絡担当者の氏名・メール・電話番号は未確定。
+- Privacy Policy、Terms of Use、SupportのURLと公開用連絡先は2026-08-13のStep 4で確定済み。TestFlightのApp Review連絡先はApp Store Connectへ入力済み。
 - 整合確認結果を `docs/implementation/CueScore_App_Store_v1.0_Consistency_Review_2026-08-09.md` に記録。
-- 現段階は公式文書のGitHub反映と整合確認まで。ネイティブ化、TestFlight、App Store Connect登録、本審査提出には未着手。
+- Native iOS化、App Store Connect登録、TestFlight Build 1内部配信と実機確認まで完了。本審査提出と一般公開は未着手。
 
 ## App Store v1.0 Final RC Step 4：公開前Legal / Support最終整備（2026年8月13日）
 
@@ -283,10 +288,11 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 
 ## 要確認事項
 
-- App Review担当者の氏名・メール・電話番号
-- ネイティブiOS提出ビルド、TestFlight、App Store Connect登録
-- 実提出ビルドでの6競技完走、オフライン、バックアップ／復元、プレーヤー写真の動作確認
+- App Store本審査提出時の連絡先・メタデータ最終確認
+- 実提出ビルドでの6競技完走（TestFlight Build 1では基本スモークテストまで完了）
 - 提出ビルドとPrivacy Policy / Review Notesの最終一致
+- App Privacy、年齢制限、カテゴリ、価格・配信地域、公開スクリーンショットの最終設定
+- EU向けトレーダーステータスの判断・登録
 
 ## Active Decisions
 
@@ -297,6 +303,8 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - Official Demo Dataはv1.0提出予定範囲に含める。実提出ビルドでの収録と通常ユーザーデータからの分離確認は未実施。
 - Official Demo Dataの本番向け表示は「サンプルデータ」を採用し、状態を「通常データ／サンプルデータ」、操作を「準備する／サンプルを見る／通常データへ戻る／初期状態に戻す／削除」とする。
 - 試合共有（Match Sharing）はv1.0ではLaterとし、自動クラウド同期とは別の将来機能として扱う。実装開始前にProduct Ownerの再採用判断を必要とする。正式決定記録：`docs/official/12_CueScore_Later_Match_Sharing_Decision.md`。
+- Native iOS foundation、実機基本機能、TestFlight Build 1、TestFlight内部運用はGO。Build 2開発はGOだが、本状態同期ではBuild 2を作成しない。
+- App Store本審査提出と一般公開は未承認。Product Ownerの明示承認なしに実施しない。
 
 ## 新規試合の数値入力上限（2026年8月12日）
 
