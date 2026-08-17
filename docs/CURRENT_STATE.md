@@ -1,15 +1,17 @@
 # CueScore Apps Current State
 
-## Step 7B：Native iOS／TestFlight Build 1 実機確認完了（2026年8月17日）
+## Step 7B：Native iOS／TestFlight Build 2 内部配信完了（2026年8月17日）
 
 - Native iOS foundation：GO。現行Web assetsと保存schemaを維持するCapacitor 8.0.2薄型iOSコンテナ方式をProduct Ownerが採用し、Xcode projectとnative bridgeを実装済み。
-- App identity：Bundle ID `com.takaakimailboxstar.cuescoreapps`、Apple Team `U26DF88PRW`、Marketing Version `1.0`、Build `1`。iOS 15以上、iPhone専用、portrait専用、Automatic Signing。
+- App identity：Bundle ID `com.takaakimailboxstar.cuescoreapps`、Apple Team `U26DF88PRW`、Marketing Version `1.0`。Build 1の実機確認とBuild 2の内部配信を完了。iOS 15以上、iPhone専用、portrait専用、Automatic Signing。
 - Native Backup書き出し、Backup復元、オフライン起動、Player写真、ローカルデータ保持を実iPhoneで確認し、すべてPASS。
 - 自動テスト146件成功／失敗0。Debug／Release simulator build、Release Archive、App Store向けValidateをPASS。
 - Apple Developer Individual登録、Explicit App ID登録、App Store Connectアプリレコード登録を完了。App Store Connect App IDは`6802027038`、SKUは`cuescore-apps-ios-v1`。
 - TestFlight Version 1.0 Build 1のアップロード、Apple処理、輸出コンプライアンス回答、内部グループ配信、実iPhoneインストールを完了。
 - TestFlight Build 1スモークテストで、既存Player、写真、試合履歴、オフライン起動、Backup書き出しを再確認し、すべてPASS。TestFlight Build 1：GO / PASS、内部運用：GO。
-- 次の配布Buildは`2`以上とする。今回の状態同期ではBuild 2を作成しない。
+- TestFlight Version 1.0 Build 2は、修正済みソースcommit `b54649f`から作成した。自動テスト152件成功／失敗0、Release Archive、App Store Validate、アップロード、Apple処理、輸出コンプライアンス回答をPASSした。
+- Build 2は既存内部グループ`CueScore Internal Testers`へ配信済みで、App Store Connect上の状態は「テスト中」。Product OwnerはTestFlightから更新可能。Build 2の実iPhoneスモークテストは未実施。
+- 次の配布BuildではBuild Number `1`または`2`を再利用しない。
 - App Store本審査提出と一般公開は未承認であり、実施していない。Product Ownerの別途明示承認を必須とする。
 - 詳細記録：`docs/implementation/CueScore_v1.0_Step7B_Native_iOS_Foundation_2026-08-15.md`、`docs/implementation/CueScore_v1.0_Step7B_Native_iOS_Progress_2026-08-16.md`、`docs/implementation/CueScore_v1.0_TestFlight_Readiness_2026-08-16.md`。
 
@@ -20,7 +22,7 @@
 - 試合保存は、完了recordと置換対象の中断試合snapshotを一時的に同時保持するためWebKit quota境界で失敗し得る経路を確認した。完了時は中断snapshotを先に解放してrecordを照合保存し、失敗時だけsnapshotを復元する最小修正を行った。保存失敗時に結果画面を保持する既存安全動作は維持する。
 - 保存に失敗すると保存済みrecord用の共通rendererへ進めず、保持用結果モーダルが表示されるため、報告されたGame Result差異は保存失敗経路と整合する。Build 1のソース、`native-web`、Xcode同梱`public`は調査時点で同一だったが、アップロード済みArchive本体は残っておらず再抽出確認はできていない。
 - マス割はOfficial Decision 022／Spec 023を維持する。提供画像の可視履歴だけでは、ブレーカーが相手へ手番を渡さず1〜9番をすべてなくしたRackを確認できないため、今回の実Matchを正式な1回とは確定していない。保存recordの生JSONは未取得であり、判定実装は変更していない。
-- 修正後は自動テスト152件成功／失敗0。native assetを再生成・Xcodeへcopyし、source／generated／copied assetの一致、Debug／Release simulator buildをPASSした。実iPhone確認とBuild 2作成・配信は別Gateとし、Build Number 1は再利用しない。
+- 修正後は自動テスト152件成功／失敗0。native assetを再生成・Xcodeへcopyし、source／generated／copied assetの一致を確認した。Build 2はRelease Archive、App Store Validate、アップロード、内部配信までPASS。実iPhone確認は未実施で、Build Number 1／2は再利用しない。
 - 調査記録：`docs/implementation/CueScore_TestFlight_Build1_4Issues_Investigation_2026-08-17.md`。
 
 ## FA-IPHONE-003：Resolved / iPhone PASS / Cleanup Complete（2026年8月15日）

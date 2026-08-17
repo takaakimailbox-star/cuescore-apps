@@ -1,7 +1,7 @@
 # CueScore v1.0 — TestFlight Readiness
 
 Date: 2026-08-16  
-Status: Initial internal smoke test PASS / additional field-test issues recorded
+Status: Build 1 smoke test PASS / Build 2 internal distribution PASS / Build 2 physical-device verification pending
 
 ## App identity
 
@@ -59,10 +59,26 @@ Status: Initial internal smoke test PASS / additional field-test issues recorded
 - Native backup export after TestFlight install: PASS
 - Internal TestFlight Build 1 smoke test: PASS（Product Owner report, 2026-08-17）
 
+## TestFlight Build 2 distribution（2026-08-17）
+
+- Source commit: `b54649f` (`build: set TestFlight build number 2`)
+- Marketing Version／Build: `1.0 (2)`
+- Automated tests: 152 pass / 0 fail
+- Source／generated／Xcode-copied native asset SHA-256: `7cc4d67e55936face1885d7b026c785ba49fbba35fda91197ed34d1be0d81e07`
+- Signed Release Archive: PASS
+- App Store validation: PASS（Xcode Organizer: all validation checks passed）
+- TestFlight upload: PASS（2026-08-17 16:56 JST）
+- Apple processing: PASS
+- Export compliance: no encryption algorithms implemented; saved and accepted
+- Internal group: `CueScore Internal Testers`（2 builds／automatic distribution）
+- App Store Connect status: `Testing`
+- Product Owner TestFlight update availability: PASS
+- Build 2 physical-iPhone install and smoke test: pending
+
 ## Next gates
 
-1. Minimal source fixes for the 2026-08-17 Build 1 additional field-test findings passed 152 automated tests and Debug／Release simulator builds; verify them on a physical iPhone.
-2. Create Build 2 or later only after the Product Owner opens that separate gate; never reuse Build Number 1.
-3. Keep App Store release submission behind a separate Product Owner approval gate.
+1. Install/update to TestFlight Build 2 on the Product Owner's physical iPhone and run the instructed smoke test.
+2. Never reuse Build Number 1 or 2 for a future upload.
+3. Keep App Store Review submission and public release behind a separate Product Owner approval gate.
 
-Build 1 was uploaded only after explicit Product Owner approval. App Store release submission has not been performed.
+Build 1 and Build 2 were uploaded only after explicit Product Owner approval. App Store Review submission and public release have not been performed.
