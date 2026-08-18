@@ -1,6 +1,6 @@
 # CueScore Apps Current State
 
-## Build 4候補：Player分析リニューアル ソース実装完了（2026年8月18日）
+## TestFlight Build 4 内部配信完了／実iPhone確認待ち（2026年8月18日）
 
 - Product Owner採用の順序「今の状態 → 主要指標 → 推移 → 今回のポイント → 自己ベスト → 詳細分析入口」でPlayer分析トップを再構成した。既存Rival Analysis／Single Match Analysisは削除せず入口を維持した。
 - 9-Ball／10-Ball／Rotation／JPA 9-Ballのブレイクイン率は、判定材料の揃う`break_result`だけからderived metricとして算出する。event不足を0として混ぜず、複数球入球も1成功とする。
@@ -9,9 +9,14 @@
 - eligible recordだけを使う競技別自己ベストとMatch Detailリンクを追加した。同率は指標値、記録日時の新しい順、Match ID辞書順で安定選択し、0／欠損を候補にしない。
 - 欠損数値は`—`、空状態は「データなし」、比較不成立は「比較できません」とした。Player／Match／Backup／event schema、保存key、Undo、競技ルールは変更していない。
 - 全自動テスト175件成功／失敗0。source／generated／Xcode-copied native asset一致、iOS Simulator Debug／Release buildをPASSした。
-- Marketing Versionは`1.0`、Build Numberは`3`のまま。Build Number 4設定、Archive、App Store Validate、TestFlight upload／配信、App Review提出、一般公開は実施していない。
+- Marketing Version `1.0`／Build Number `4`をsource commit `257f707022afe0f4b9b3f119b28e2532259dcb49`から作成した。全自動テスト175件成功／失敗0、source／generated／Xcode-copied native assetのSHA-256は`4fb3e4d935f085485305c530b129b7f7052d940b4493788ff7dcabaaf8a3fbc1`で一致し、iOS Simulator Debug／ReleaseをPASSした。
+- Signed Release Archive、App Store Validate、TestFlight upload、Apple処理をPASS。輸出コンプライアンスは「上記のアルゴリズムのどれでもない」で保存し、既存内部グループ`CueScore Internal Testers`へBuild 4を追加した。App Store Connect上の状態は「テスト中」で、Product OwnerはTestFlightから更新可能。
+- Build 4の実iPhone確認はpending。分析トップ、競技別指標、自己ベスト、Match Detailリンク、欠損表示、既存詳細分析等を未確認のままPASS扱いにしない。
+- Build Number `1`〜`4`は再利用しない。次の配布Buildは`5`以上とする。
+- App Store Review提出と一般公開は未承認であり、実施していない。
 - 正式決定：`docs/official/28_CueScore_v1.0_Build4_Player_Analytics_Renewal_Decision.md`。仕様：`docs/official/29_CueScore_v1.0_Build4_Player_Analytics_Renewal_Spec.md`。
 - 実装記録：`docs/implementation/CueScore_Build4_Candidate_Player_Analytics_Renewal_Implementation_2026-08-18.md`。
+- 配信記録：`docs/implementation/CueScore_Build4_TestFlight_Distribution_2026-08-18.md`。
 
 ## TestFlight Build 3 実iPhone UI確認／分析指標データ監査（2026年8月18日）
 
