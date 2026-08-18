@@ -1,7 +1,7 @@
 # CueScore Apps — TestFlight Build 3 Distribution Record
 
 Date: 2026-08-18  
-Status: Internal TestFlight distribution PASS / physical-device verification pending
+Status: Internal TestFlight distribution PASS / approved UI-change physical-device scope PASS
 
 ## Scope and authority
 
@@ -39,11 +39,26 @@ Status: Internal TestFlight distribution PASS / physical-device verification pen
 - Group build count after addition: 3
 - Build 3 App Store Connect status: `Testing`
 
-## Pending verification
+## Physical-iPhone verification（Product Owner report, 2026-08-18）
 
-- Product Owner TestFlight update／installation of Build 3: not yet confirmed in this record
-- Build 3 physical-iPhone smoke test: not yet performed or not yet reported
-- These pending items are not treated as PASS.
+- Rotation：通常ファール／セーフティ後の手動交代 PASS
+- 9-Ball：通常ファール／セーフティ後の手動交代 PASS
+- 10-Ball：通常ファール／セーフティ後の手動交代 PASS
+- Straight Pool（14-1）：通常ファール／セーフティ後の手動交代 PASS
+- JPA 9-Ball：通常ファール／セーフティ後の手動交代 PASS
+- JPA 9-Ball：「デッド」の一番左配置 PASS
+- 3 Cushion：今回の変更対象外であることを仕様・実装scopeで確認。3C完走PASSではない
+
+## Items not newly verified by this report
+
+- Backup書き出し／復元
+- Offline起動
+- Player写真／データ保持
+- 全6競技の完全完走
+- 全Analytics
+- その他のBuild 3総合スモーク項目
+
+These items retain any prior-build historical result but are not newly treated as Build 3 PASS.
 
 ## Release controls
 

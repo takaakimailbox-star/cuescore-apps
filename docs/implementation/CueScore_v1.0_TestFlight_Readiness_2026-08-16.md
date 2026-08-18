@@ -1,7 +1,7 @@
 # CueScore v1.0 — TestFlight Readiness
 
 Date: 2026-08-16  
-Status: Build 1 smoke test PASS / Build 2 internal distribution PASS / Build 2 Main Player physical-device check PASS / Build 3 internal distribution PASS / Build 3 physical-device check pending
+Status: Build 1 smoke test PASS / Build 2 internal distribution PASS / Build 2 Main Player physical-device check PASS / Build 3 internal distribution PASS / Build 3 approved UI-change physical-device scope PASS
 
 ## App identity
 
@@ -94,12 +94,13 @@ Status: Build 1 smoke test PASS / Build 2 internal distribution PASS / Build 2 M
 - Export compliance: `上記のアルゴリズムのどれでもない`; saved and accepted
 - Internal group: `CueScore Internal Testers`（3 builds）
 - App Store Connect status: `Testing`
-- Build 3 TestFlight update／physical-iPhone smoke test: pending; not recorded as PASS
+- Build 3 physical-iPhone approved UI-change scope: PASS（manual turn change in Rotation／9-Ball／10-Ball／14-1／JPA 9-Ball, and JPA Dead leftmost placement; Product Owner report, 2026-08-18）
+- Build 3 Backup／Offline／all-six-discipline completion／all-Analytics and other full smoke items: not newly verified
 - App Store Review submission／public release: not performed
 
 ## Next gates
 
-1. Update or install Build 3 from TestFlight and run the Product Owner-selected physical-device smoke test.
+1. Decide the formally adopted analytics-renewal scope after reviewing the Build 4 candidate data audit; do not infer missing historical values.
 2. Never reuse Build Number 1, 2, or 3 for a future upload.
 3. Use Build Number 4 or greater for the next distribution build.
 4. Keep App Store Review submission and public release behind a separate Product Owner approval gate.

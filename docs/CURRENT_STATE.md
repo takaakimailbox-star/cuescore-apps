@@ -1,12 +1,22 @@
 # CueScore Apps Current State
 
+## TestFlight Build 3 実iPhone UI確認／分析指標データ監査（2026年8月18日）
+
+- Product OwnerがTestFlight Build 3を実iPhoneで確認し、Rotation、9-Ball、10-Ball、14-1、JPA 9-Ballの通常ファール／セーフティ後の手動交代と、JPA 9-Ball「デッド」の一番左配置をPASSと報告した。
+- 3CはDecision 026／Spec 027および実装上、今回の変更対象外。これはscope確認であり、Build 3での3C完走PASSを意味しない。
+- Backup、Offline、全6競技完全完走、全Analytics等は今回の報告から新たにPASS扱いにしていない。
+- Build 4候補の分析指標を監査した。現行詳細recordではブレイクイン率、本人breakラックを分母とするマス割り率、3C以外のファール手番率を算出できるが、event不足の旧recordへ一律適用できないため総合判定は△。3Cファール率は×。
+- 最大ハイランと1試合最高得点／最多得点は保存値から正確に取得可能。分母を必要とする自己ベストはeligible record限定の条件付き候補とし、不足値を0で補完しない。
+- 欠損数値は`—`、空状態は「データなし」、比較不成立は「比較できません」を推奨。分析実装、schema変更、Build 4作成、TestFlight upload、App Review、一般公開は実施していない。
+- 詳細記録：`docs/implementation/CueScore_Build3_Physical_iPhone_Analytics_Data_Audit_2026-08-18.md`。
+
 ## TestFlight Build 3 内部配信完了（2026年8月18日）
 
 - Post-Build 2の交代操作UI統一を含むsource commit `d3aa729ff68533d4edf82fd8865df08b5894161a`（`build: set TestFlight build number 3`）から、Marketing Version `1.0`／Build `3`を作成した。
 - 全自動テスト153件成功／失敗0。source／generated／Xcode-copied native assetのSHA-256は`23ae38c0a98413a7c8ef273a0af7dc888f92d9048a376bc59c14ed987b94bae9`で一致し、iOS Simulator Debug／Release buildをPASSした。
 - Signed Release Archive、App Store Validate、TestFlight upload、Apple処理をPASS。アップロードは2026年8月18日13:01 JSTに完了した。
 - 輸出コンプライアンスは「上記のアルゴリズムのどれでもない」で保存済み。既存内部グループ`CueScore Internal Testers`へ追加し、App Store Connect上のBuild 3は「テスト中」。
-- Build 3のTestFlight更新／実iPhoneスモークテストは未確認。確認前の項目をPASS扱いにしない。
+- Build 3のTestFlight実iPhone確認では、今回の交代操作UI変更とJPA「デッド」配置をPASS。Backup、Offline、全6競技完全完走、全Analytics等は今回未確認のためPASS扱いにしない。
 - Build Number `1`、`2`、`3`は再利用しない。次の配布Buildは`4`以上とする。
 - App Store本審査提出と一般公開は未承認であり、実施していない。
 - 詳細記録：`docs/implementation/CueScore_Build3_TestFlight_Distribution_2026-08-18.md`。
