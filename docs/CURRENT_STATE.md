@@ -1,5 +1,16 @@
 # CueScore Apps Current State
 
+## TestFlight Build 5 内部配信完了／実iPhone確認待ち（2026年8月19日）
+
+- Player起点の分析導線、compact化した分析UI、率自己ベストのeligible判定強化を含むsource commit `f7f7f97bb705619fbebad98f99d4c57643ebe7a4`から、Marketing Version `1.0`／Build Number `5`を作成した。
+- Native source／generated bundle／Xcode copied assetsのSHA-256一致を確認。全自動テストは`180 pass / 0 fail / 0 skipped`、iOS Simulator Debug／Releaseはいずれも`BUILD SUCCEEDED`。
+- Signed Release ArchiveとApp Store ValidateをPASSし、Xcode OrganizerからTestFlight Internal Onlyとしてアップロードした。Apple処理完了後、輸出コンプライアンスは「上記のアルゴリズムのどれでもない」で保存した。
+- 既存内部グループ`CueScore Internal Testers`へBuild 5を追加済み。App Store Connect上の状態は「テスト中」で、Product OwnerはiPhoneのTestFlightからBuild 5へ更新可能。
+- Build 5の実iPhone確認はpending。Build 5対象の分析導線、UI、自己ベストリンク等を未確認のままPASS扱いにしない。
+- Build Number `1`〜`5`は再利用しない。次の配布Buildは`6`以上とする。
+- App Store Review提出と一般公開は実施していない。価格、配信地域、App Privacy、EUトレーダーステータス、公開用スクリーンショットの最終設定も実施していない。
+- 配信記録：`docs/implementation/CueScore_Build5_TestFlight_Distribution_2026-08-19.md`。
+
 ## Build 5候補：Player起点分析・UI整理・率自己ベスト安全化（2026年8月18日）
 
 - Product OwnerのBuild 4実iPhone確認で、Player分析トップの第一印象「見づらい」と、最高マス割り率100%のリンク先試合不整合が報告された。この2点だけをBuild 4実機確認の事実として記録し、他の分析項目はPASS扱いにしない。
@@ -8,7 +19,7 @@
 - 100%問題の構造原因は、正式マス割り数がrecord全体の分子である一方、分母が詳細eventの残る一部rackだけになり得たこと。全完了rackに一意で判定可能なbreak eventが対応しない部分欠損recordを率自己ベストから除外し、分子が分母を超えるrecordも除外する。
 - 最高ブレイクイン率もsingle record内の対象break eventが一部だけ詳細化されたrecordを除外する。最高シュート率と最高アベレージは正式分母が確認できるrecordだけを継続利用する。minimum denominatorは未決定で追加していない。
 - Native source／generated bundle／Xcode copied assetsのSHA-256一致を確認。全自動テストは`180 pass / 0 fail / 0 skipped`、iOS Simulator Debug／Releaseはいずれも`BUILD SUCCEEDED`。
-- Build Numberは`4`のまま。Build 5 Archive／Validate／TestFlight upload／内部配信、App Review、一般公開は未実施。
+- 候補実装完了時点ではBuild Number `4`のままだった。その後、上記の別配信GateでBuild Number `5`を設定し、Archive／Validate／TestFlight内部配信まで完了した。App Reviewと一般公開は未実施。
 - 正式決定：`docs/official/30_CueScore_v1.0_Build5_Player_Origin_Analytics_Decision.md`。仕様：`docs/official/31_CueScore_v1.0_Build5_Player_Origin_Analytics_Spec.md`。
 - 実装・検証記録：`docs/implementation/CueScore_Build5_Candidate_Analytics_Navigation_UI_Masuwari_Fix_2026-08-19.md`。
 
