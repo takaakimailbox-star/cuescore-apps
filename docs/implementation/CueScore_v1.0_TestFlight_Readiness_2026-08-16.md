@@ -1,7 +1,7 @@
 # CueScore v1.0 — TestFlight Readiness
 
 Date: 2026-08-16  
-Status: Build 1 smoke test PASS / Build 2 internal distribution PASS / Build 2 physical-device verification pending
+Status: Build 1 smoke test PASS / Build 2 internal distribution PASS / Build 2 Main Player physical-device check PASS
 
 ## App identity
 
@@ -73,12 +73,15 @@ Status: Build 1 smoke test PASS / Build 2 internal distribution PASS / Build 2 p
 - Internal group: `CueScore Internal Testers`（2 builds／automatic distribution）
 - App Store Connect status: `Testing`
 - Product Owner TestFlight update availability: PASS
-- Build 2 physical-iPhone install and smoke test: pending
+- Build 2 physical-iPhone Main Player retention check: PASS（Product Owner report, 2026-08-18）
+- Build 2 remaining physical-iPhone smoke-test items: not recorded as complete in this document
+- The post-Build 2 manual-turn-change UI unification adopted on 2026-08-18 is implemented in source but is not included in uploaded Build 2.
 
 ## Next gates
 
-1. Install/update to TestFlight Build 2 on the Product Owner's physical iPhone and run the instructed smoke test.
+1. Complete any remaining Build 2 physical-device checks that the Product Owner chooses to run.
 2. Never reuse Build Number 1 or 2 for a future upload.
-3. Keep App Store Review submission and public release behind a separate Product Owner approval gate.
+3. If the post-Build 2 UI unification is distributed, use Build Number 3 or greater after a separate distribution decision.
+4. Keep App Store Review submission and public release behind a separate Product Owner approval gate.
 
 Build 1 and Build 2 were uploaded only after explicit Product Owner approval. App Store Review submission and public release have not been performed.

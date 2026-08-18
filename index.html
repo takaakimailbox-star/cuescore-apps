@@ -8094,14 +8094,14 @@ body {
           </section>
 
           <section class="pro-actions" id="proActionsV730">
+            <button id="jpaDeadBtnV1" class="pro-action jpa-dead-action-v1" type="button" aria-label="直前に選択したボールをデッドにする" hidden disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="m7 17 10-10"/></svg>
+              <span>デッド</span>
+            </button>
             <button id="proPushOutBtnV730" class="pro-action pro-pushout" type="button" hidden>プッシュアウト</button>
             <button id="proSafetyBtn" class="pro-action pro-safety" type="button">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3 7.7 7.5 9.5 4.5-1.8 7.5-5 7.5-9.5V6Z"/></svg>
               <span>セーフティ</span>
-            </button>
-            <button id="jpaDeadBtnV1" class="pro-action jpa-dead-action-v1" type="button" aria-label="直前に選択したボールをデッドにする" hidden disabled>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="m7 17 10-10"/></svg>
-              <span>デッド</span>
             </button>
             <button id="proFoulBtn" class="pro-action pro-foul" type="button">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3.5 20h17Z"/><path d="M12 9v5"/><path d="M12 17.2h.01"/></svg>
@@ -11647,6 +11647,11 @@ let matchRecordsRawCacheV152 = null;
   let pendingSafetyV62 = null;
   let turnLockReasonV62 = null;
 
+  function beginManualTurnChangeV1(reason) {
+    foulLocked = true;
+    turnLockReasonV62 = reason;
+  }
+
   // Ver.7.4.0: legal break直後だけ有効になる共通Push Out状態。
   let pushOutStateV730 = null;
   let pushOutInputBallsV730 = new Set();
@@ -11679,7 +11684,7 @@ let matchRecordsRawCacheV152 = null;
 
   function isPushOutAvailableV730() {
     const rule = getActiveRuleV699();
-    return Boolean(isNineBallPushOutEnabledV1() && rule.pushOut?.enabled && pushOutStateV730?.stage === "available" && Number(pushOutStateV730.executor) === Number(current) && Number(pushOutStateV730.rack) === Number(rack) && !rackEnded && !gameEnded && !isReviewLocked());
+    return Boolean(isNineBallPushOutEnabledV1() && rule.pushOut?.enabled && pushOutStateV730?.stage === "available" && Number(pushOutStateV730.executor) === Number(current) && Number(pushOutStateV730.rack) === Number(rack) && !rackEnded && !foulLocked && !gameEnded && !isReviewLocked());
   }
 
 
@@ -13257,7 +13262,7 @@ let matchRecordsRawCacheV152 = null;
     if (switchButton) switchButton.disabled = rackEnded || gameEnded || reviewLocked;
     if (jpaDeadButton) {
       jpaDeadButton.hidden = !isJPA9V1();
-      jpaDeadButton.disabled = !canMarkJPADeadV1() || rackEnded || gameEnded || reviewLocked;
+      jpaDeadButton.disabled = !canMarkJPADeadV1() || rackEnded || foulLocked || gameEnded || reviewLocked;
       jpaDeadButton.setAttribute("aria-disabled", jpaDeadButton.disabled ? "true" : "false");
     }
     actionsV730?.classList.toggle("jpa-dead-enabled-v1", isJPA9V1());
@@ -13766,20 +13771,9 @@ let matchRecordsRawCacheV152 = null;
         const state = activeRackStateV1();
         state.consecutiveFouls[current] = 0;
         state.ballInHandFor = null;
-        current = current === 1 ? 2 : 1;
-        if (current === startingPlayer) { inning++; forceNewRow = true; }
-        foulLocked = false;
-        turnLockReasonV62 = null;
-      } else if (isJPA9V1() || isStraightPoolV1()) {
-        if (isStraightPoolV1()) straightPoolStateV1.consecutiveFouls[current] = 0;
-        current = current === 1 ? 2 : 1;
-        if (current === startingPlayer) { inning++; forceNewRow = true; }
-        foulLocked = false;
-        turnLockReasonV62 = null;
-      } else {
-        foulLocked = true;
-        turnLockReasonV62 = "safety";
       }
+      if (isStraightPoolV1()) straightPoolStateV1.consecutiveFouls[current] = 0;
+      beginManualTurnChangeV1("safety");
     });
   }
 
@@ -13818,11 +13812,8 @@ let matchRecordsRawCacheV152 = null;
         if (foulStreak >= 3 && settings.threeFoul !== false) {
           completeNineBallRackV1(opponent, "threeFoulLoss", {foulingPlayer,consecutiveFouls:3});
         } else {
-          current = opponent;
           state.ballInHandFor = opponent;
-          if (current === startingPlayer) { inning++; forceNewRow = true; }
-          foulLocked = false;
-          turnLockReasonV62 = null;
+          beginManualTurnChangeV1("foul");
         }
       } else if (isStraightPoolV1()) {
         const foulingPlayer=current, opponent=current===1?2:1;
@@ -13836,23 +13827,17 @@ let matchRecordsRawCacheV152 = null;
           appendCommonEventV700("FoulPenalty","straight_pool_three_foul",{player:foulingPlayer,penalty:-16,nextBreaker:foulingPlayer});
           straightPoolStateV1.phase="playing";
           queueStraightPoolNoticeV1("3ファール", "合計16点減点。15球を再ラックしてプレーを再開してください");
+          foulLocked=false; turnLockReasonV62=null;
         }else{
-          current=opponent;
-          if(current===startingPlayer){inning++;forceNewRow=true;}
+          beginManualTurnChangeV1("foul");
         }
-        foulLocked=false; turnLockReasonV62=null;
       } else if (isJPA9V1()) {
-        current = current === 1 ? 2 : 1;
-        if (current === startingPlayer) { inning++; forceNewRow = true; }
-        foulLocked = false;
-        turnLockReasonV62 = null;
+        beginManualTurnChangeV1("foul");
       } else if (activeGameTypeV1 === ROTATION_GAME_TYPE) {
         incrementRotationFoulV1(current);
-        foulLocked = true;
-        turnLockReasonV62 = "foul";
+        beginManualTurnChangeV1("foul");
       } else {
-        foulLocked = true;
-        turnLockReasonV62 = "foul";
+        beginManualTurnChangeV1("foul");
       }
     });
   }
