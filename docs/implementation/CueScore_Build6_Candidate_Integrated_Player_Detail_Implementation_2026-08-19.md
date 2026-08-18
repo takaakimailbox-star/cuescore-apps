@@ -1,6 +1,6 @@
 # CueScore Build 6 Candidate — Integrated Player Detail Implementation
 
-更新日：2026-08-19（JST）  
+更新日：2026-08-19（JST）
 状態：source実装・自動検証完了／配布未承認
 
 ## 実装範囲
