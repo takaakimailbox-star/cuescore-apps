@@ -33,7 +33,9 @@
     if(!BREAK_DISCIPLINES.has(discipline))return{eligible:false,numerator:0,denominator:0,rate:null};
     const events=detailedEvents(record).filter(event=>eventType(event)==="break_result"&&eventPlayer(event)===Number(side));
     const eligible=events.filter(isBreakEventEligible);
-    if(!eligible.length)return{eligible:false,numerator:0,denominator:0,rate:null};
+    // A single-record best must not be calculated from only the surviving
+    // detailed events of a partially recorded match.
+    if(!eligible.length||eligible.length!==events.length)return{eligible:false,numerator:0,denominator:0,rate:null};
     const numerator=eligible.filter(event=>{
       const balls=value(event,"pocketedBalls");
       const pocketCount=Array.isArray(balls)?balls.length:Number(value(event,"pocketCount"))||0;
@@ -47,9 +49,18 @@
     if(!MASUWARI_DISCIPLINES.has(discipline))return{eligible:false,numerator:0,denominator:0,rate:null};
     const events=commonEvents(record);
     if(!events.length)return{eligible:false,numerator:0,denominator:0,rate:null};
-    const rackNumbers=[...new Set(events.map(rackOf))];
+    const completedRacks=[...new Set(events.filter(event=>eventType(event)==="rack_end").map(rackOf))];
+    if(!completedRacks.length)return{eligible:false,numerator:0,denominator:0,rate:null};
+    // Record-level eligibility: every completed rack must have exactly one
+    // detailed, classifiable break_result. Otherwise a partial record can turn
+    // one surviving successful rack into a misleading 1/1 (100%) best.
+    const hasCompleteRackLedger=completedRacks.every(rack=>{
+      const breaks=events.filter(event=>rackOf(event)===rack&&eventType(event)==="break_result");
+      return breaks.length===1&&isBreakEventEligible(breaks[0]);
+    });
+    if(!hasCompleteRackLedger)return{eligible:false,numerator:0,denominator:0,rate:null};
     let denominator=0;
-    rackNumbers.forEach(rack=>{
+    completedRacks.forEach(rack=>{
       const rackEvents=events.filter(event=>rackOf(event)===rack);
       const breakEvent=rackEvents.find(event=>eventType(event)==="break_result"&&eventPlayer(event)===Number(side));
       const rackEnd=rackEvents.find(event=>eventType(event)==="rack_end");
@@ -61,6 +72,7 @@
     if(!denominator)return{eligible:false,numerator:0,denominator:0,rate:null};
     const counts=typeof officialCounter==="function"?officialCounter(record):null;
     const numerator=Math.max(0,Number(counts?.[Number(side)])||0);
+    if(numerator>denominator)return{eligible:false,numerator:0,denominator:0,rate:null};
     return{eligible:true,numerator,denominator,rate:percent(numerator,denominator)};
   }
 

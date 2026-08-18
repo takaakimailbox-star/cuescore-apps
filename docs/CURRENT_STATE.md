@@ -1,5 +1,17 @@
 # CueScore Apps Current State
 
+## Build 5候補：Player起点分析・UI整理・率自己ベスト安全化（2026年8月18日）
+
+- Product OwnerのBuild 4実iPhone確認で、Player分析トップの第一印象「見づらい」と、最高マス割り率100%のリンク先試合不整合が報告された。この2点だけをBuild 4実機確認の事実として記録し、他の分析項目はPASS扱いにしない。
+- Homeの独立「分析」入口を廃止し、Player Detailの「プレーヤー分析を見る」と「このプレーヤーの試合履歴」から分析へ進むPlayer起点導線へ変更した。試合一覧の各recordからMatch DetailまたはPlayer目線のMatch Analysisへ進める。viewer Playerはruntime contextで渡し、schemaには保存しない。
+- Player selectorを外し、競技selectorを維持。header／状態／主要指標／chartをcompact化し、推移selectorをselectへ変更、自己ベストは先頭2件を視覚的に優先した。Rival AnalysisとSingle Match Analysis本体は維持する。
+- 100%問題の構造原因は、正式マス割り数がrecord全体の分子である一方、分母が詳細eventの残る一部rackだけになり得たこと。全完了rackに一意で判定可能なbreak eventが対応しない部分欠損recordを率自己ベストから除外し、分子が分母を超えるrecordも除外する。
+- 最高ブレイクイン率もsingle record内の対象break eventが一部だけ詳細化されたrecordを除外する。最高シュート率と最高アベレージは正式分母が確認できるrecordだけを継続利用する。minimum denominatorは未決定で追加していない。
+- Native source／generated bundle／Xcode copied assetsのSHA-256一致を確認。全自動テストは`180 pass / 0 fail / 0 skipped`、iOS Simulator Debug／Releaseはいずれも`BUILD SUCCEEDED`。
+- Build Numberは`4`のまま。Build 5 Archive／Validate／TestFlight upload／内部配信、App Review、一般公開は未実施。
+- 正式決定：`docs/official/30_CueScore_v1.0_Build5_Player_Origin_Analytics_Decision.md`。仕様：`docs/official/31_CueScore_v1.0_Build5_Player_Origin_Analytics_Spec.md`。
+- 実装・検証記録：`docs/implementation/CueScore_Build5_Candidate_Analytics_Navigation_UI_Masuwari_Fix_2026-08-19.md`。
+
 ## TestFlight Build 4 内部配信完了／実iPhone確認待ち（2026年8月18日）
 
 - Product Owner採用の順序「今の状態 → 主要指標 → 推移 → 今回のポイント → 自己ベスト → 詳細分析入口」でPlayer分析トップを再構成した。既存Rival Analysis／Single Match Analysisは削除せず入口を維持した。

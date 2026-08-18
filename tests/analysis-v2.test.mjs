@@ -5,8 +5,9 @@ const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const sw=fs.readFileSync(new URL("../sw.js",import.meta.url),"utf8");
 
 assert.match(html,/CueScore Analysis v2\.0/);
-assert.match(html,/id="cueHomeAnalysisV3"/);
-assert.match(html,/cueHomeAnalysisV3[^\n]+openRankingsBtn/);
+assert.doesNotMatch(html,/id="cueHomeAnalysisV3"/);
+assert.match(html,/openPlayerAnalysisForPlayerV5/);
+assert.match(html,/openMatchAnalysisForPlayerV5/);
 assert.match(html,/data-analysis-view="home"/);
 assert.match(html,/data-analysis-view="player"/);
 assert.match(html,/data-analysis-view="match"/);

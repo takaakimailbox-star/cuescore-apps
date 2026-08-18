@@ -7902,7 +7902,6 @@ body {
       <div class="cue-home-menu-v3" aria-label="主要メニュー">
         <button id="cueHomePlayersV3" type="button"><span class="cue-nav-glyph-v1 nav-player-v1" aria-hidden="true"></span><strong>プレーヤー一覧</strong><span aria-hidden="true">›</span></button>
         <button id="cueHomeHistoryV3" type="button"><span class="cue-nav-glyph-v1 nav-history-v1" aria-hidden="true"></span><strong>試合履歴一覧</strong><span aria-hidden="true">›</span></button>
-        <button id="cueHomeAnalysisV3" type="button"><span class="cue-nav-glyph-v1 nav-analytics-v1" aria-hidden="true"></span><strong>分析</strong><span aria-hidden="true">›</span></button>
         <button id="cueHomeSettingsV3" type="button"><span class="cue-nav-glyph-v1 nav-settings-v1" aria-hidden="true"></span><strong>設定</strong><span aria-hidden="true">›</span></button>
       </div>
 
@@ -27847,6 +27846,22 @@ body.cue-edge-back-animating-v2 .app{
   document.getElementById("playerStatsBody")?.addEventListener("click",event=>{const discipline=event.target.closest("[data-player-detail-discipline]");if(discipline)journeyDiscipline=discipline.dataset.playerDetailDiscipline||"9ball";},true);
   document.getElementById("playerStatsBody")?.addEventListener("click",event=>{const opponents=event.target.closest("[data-open-opponents-v2]");if(opponents){const selected=event.currentTarget.querySelector("[data-player-detail-discipline].is-selected")?.dataset.playerDetailDiscipline||"9ball";openRivals(opponents.dataset.openOpponentsV2,selected);return;}const history=event.target.closest("[data-open-player-history-v2]");if(history)openHistory(history.dataset.openPlayerHistoryV2);});
 
+  // Build 5 candidate: analysis is entered from a concrete Player context.
+  window.openPlayerDetailV5=reopenPlayer;
+  const addPlayerAnalysisEntryV5=id=>{
+    const links=document.querySelector("#playerStatsBody .player-detail-links-v2");
+    if(!links||links.querySelector("[data-open-player-analysis-v5]"))return;
+    const historyLabel=links.querySelector("[data-open-player-history-v2] strong");
+    if(historyLabel)historyLabel.textContent="試合一覧";
+    const button=document.createElement("button");button.className="player-detail-link-v2 player-analysis-entry-v5";button.type="button";button.dataset.openPlayerAnalysisV5=String(id);button.innerHTML='<span class="player-detail-link-icon-v2">↗</span><span><strong>プレーヤー分析を見る</strong><small>今の状態・推移・自己ベスト</small></span><span class="player-detail-chevron-v1"></span>';links.prepend(button);
+  };
+  const renderPlayerDetailBeforeBuild5=window.renderFormalPlayerDetailV1;
+  window.renderFormalPlayerDetailV1=function(id){renderPlayerDetailBeforeBuild5?.(id);addPlayerAnalysisEntryV5(id);};
+  document.getElementById("playerStatsBody")?.addEventListener("click",event=>{const entry=event.target.closest("[data-open-player-analysis-v5]");if(entry)window.openPlayerAnalysisForPlayerV5?.(entry.dataset.openPlayerAnalysisV5,journeyDiscipline);});
+  const addHistoryAnalysisEntriesV5=()=>historyRoot.querySelectorAll("[data-player-record-id]").forEach(row=>{if(row.nextElementSibling?.matches("[data-player-analysis-record-id]"))return;const button=document.createElement("button");button.type="button";button.className="journey-match-analysis-v5";button.dataset.playerAnalysisRecordId=row.dataset.playerRecordId;button.textContent="この試合を分析";row.insertAdjacentElement("afterend",button);});
+  new MutationObserver(addHistoryAnalysisEntriesV5).observe(historyRoot,{subtree:true,childList:true});
+  historyRoot.addEventListener("click",event=>{const button=event.target.closest("[data-player-analysis-record-id]");if(!button)return;event.preventDefault();event.stopImmediatePropagation();window.openMatchAnalysisForPlayerV5?.(button.dataset.playerAnalysisRecordId,historyState.playerId);},true);
+
   // App Store v1.0: four player metrics selected for each discipline.
   // All values are derived at render time so older records and isolated sample data
   // remain readable without a storage migration.
@@ -28160,7 +28175,7 @@ body.cue-edge-back-animating-v2 .app{
   const analysisMetricCards=(metrics,className)=>metrics.map(item=>`<div class="${className}"><span>${item.label}</span><strong>${item.value}</strong><em class="${item.attention(item.delta)?"attention":""}">${signed(item.delta,item.suffix)}</em></div>`).join("");
   const signed=(value,suffix="")=>`${value>0?"+":""}${value}${suffix}`;
   const root=document.createElement("div");root.className="analysis-v2";root.innerHTML=`<header class="analysis-v2-header"><button type="button" data-analysis-back aria-label="戻る">‹</button><h1 id="analysisV2Title">分析</h1><span></span></header><main class="analysis-v2-scroll"><div class="analysis-v2-shell"><section class="analysis-v2-view" data-analysis-view="home"></section><section class="analysis-v2-view" data-analysis-view="player" hidden></section><section class="analysis-v2-view" data-analysis-view="match" hidden></section></div></main>`;screen.appendChild(root);
-  let view="home",selectedPlayerId="",selectedDiscipline="9ball",selectedRecordId="";
+  let view="home",selectedPlayerId="",selectedDiscipline="9ball",selectedRecordId="",selectedViewerPlayerId="",analysisOrigin="legacy";
   const viewNode=name=>root.querySelector(`[data-analysis-view="${name}"]`);
   const setView=name=>{view=name;root.querySelectorAll("[data-analysis-view]").forEach(node=>node.hidden=node.dataset.analysisView!==name);root.querySelector("#analysisV2Title").textContent=name==="home"?"分析":name==="player"?"プレーヤー分析":"試合分析";root.querySelector(".analysis-v2-scroll")?.scrollTo(0,0)};
   const primary=()=>players().find(p=>p.isPrimary===true)||players()[0]||null;
@@ -28184,11 +28199,23 @@ body.cue-edge-back-animating-v2 .app{
       evidenceGrid.innerHTML=winRateCard+analysisMetricCards(metrics,"analysis-v2-metric");
     }
   }
-  function openHome(){renderHome();setView("home")};function openPlayer(){renderPlayerWithDisciplineMetrics();setView("player")};function openMatch(){renderMatch();setView("match")};
-  root.addEventListener("click",event=>{if(event.target.closest("[data-analysis-back]")){if(view==="home")document.getElementById("rankingsBackBtn")?.click();else openHome();return}if(event.target.closest("[data-open-player-analysis]")){openPlayer();return}if(event.target.closest("[data-open-match-analysis]")){openMatch();return}});
+  function renderMatchForViewerV5(){
+    const record=allRecords().find(r=>String(r.id)===String(selectedRecordId))||allRecords()[0];
+    const viewer=players().find(player=>String(player.id)===String(selectedViewerPlayerId));
+    const viewerSide=record&&viewer?side(record,viewer):0;
+    const actualWinner=record?Number(record.winner||record.winnerSide||record.result?.winnerSide||0):0;
+    if(record&&viewerSide)record.winner=viewerSide;
+    renderMatch();
+    if(record&&viewerSide){record.winner=actualWinner;const badge=viewNode("match").querySelector(".analysis-v2-win");if(badge)badge.textContent=actualWinner===viewerSide?"勝ち":"負け";const meta=viewNode("match").querySelector(".analysis-v2-match-meta");if(meta)meta.textContent+=`・${recordPlayer(record,viewerSide).name||viewer.name}目線`;}
+  }
+  function openHome(){renderHome();setView("home")};function openPlayer(){renderPlayerWithDisciplineMetrics();setView("player")};function openMatch(){renderMatchForViewerV5();setView("match")};
+  const returnToPlayerOrigin=()=>{document.getElementById("rankingsBackBtn")?.click();setTimeout(()=>window.openPlayerDetailV5?.(selectedPlayerId||selectedViewerPlayerId),0)};
+  root.addEventListener("click",event=>{if(event.target.closest("[data-analysis-back]")){if(analysisOrigin==="player-detail"||analysisOrigin==="player-history")returnToPlayerOrigin();else if(view==="home")document.getElementById("rankingsBackBtn")?.click();else openHome();return}if(event.target.closest("[data-open-player-analysis]")){openPlayer();return}if(event.target.closest("[data-open-match-analysis]")){openMatch();return}});
   root.addEventListener("change",event=>{if(event.target.matches("[data-analysis-player]")){selectedPlayerId=event.target.value;renderPlayerWithDisciplineMetrics()}if(event.target.matches("[data-analysis-discipline]")){selectedDiscipline=event.target.value;renderPlayerWithDisciplineMetrics()}});
   document.getElementById("openRankingsBtn")?.addEventListener("click",()=>setTimeout(openHome,0));
   window.CueScoreAnalysisV2Context={selectedPlayer:()=>players().find(x=>String(x.id)===String(selectedPlayerId))||primary(),selectedDiscipline:()=>selectedDiscipline,selectedRecord:()=>allRecords().find(r=>String(r.id)===String(selectedRecordId))||allRecords()[0]||null,recordsFor,discipline,aggregate,metric,recordPlayer,completedTurns:analyticsCompletedTurns,masuwariCount:analyticsMasuwariCount};
+  window.openPlayerAnalysisForPlayerV5=(playerId,disciplineId="9ball")=>{selectedPlayerId=String(playerId||"");selectedDiscipline=disciplineId;analysisOrigin="player-detail";document.getElementById("playerStatsOverlay")?.classList.add("hidden");document.getElementById("openRankingsBtn")?.click();setTimeout(openPlayer,0)};
+  window.openMatchAnalysisForPlayerV5=(recordId,playerId)=>{selectedRecordId=String(recordId||"");selectedViewerPlayerId=String(playerId||"");selectedPlayerId=selectedViewerPlayerId;analysisOrigin="player-history";document.querySelector(".player-history-overlay-v2")?.classList.add("hidden");document.getElementById("openRankingsBtn")?.click();setTimeout(openMatch,0)};
   window.renderAnalysisHomeV2=openHome;window.renderPlayerAnalysisV2=openPlayer;window.renderMatchAnalysisV2=openMatch;
   openHome();
 })();

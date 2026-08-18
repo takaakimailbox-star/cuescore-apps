@@ -61,17 +61,16 @@
     const status=current.games<3?"データ蓄積中":previous.games<3?"安定":current.winRate>previous.winRate?"改善傾向":current.winRate<previous.winRate?"要調整":"安定";
     const summary=current.games?`直近${current.games}試合　${current.wins}勝${current.losses}敗　勝率${Math.round(current.winRate)}%`:"データなし";
     const playerName=esc(player.name||"Player"),playerId=esc(player.id||"");
-    const playerOptions=[...document.querySelectorAll('[data-analysis-player] option')].map(option=>`<option value="${esc(option.value)}" ${String(option.value)===String(player.id)?"selected":""}>${esc(option.textContent)}</option>`).join("");
     const disciplineOptions=[...document.querySelectorAll('[data-analysis-discipline] option')].map(option=>`<option value="${esc(option.value)}" ${option.value===discipline?"selected":""}>${esc(option.textContent)}</option>`).join("");
     const trendKeys=["winRate",...defs.map(def=>def.key)],trendRecords=records.slice(0,10).reverse();
     view.innerHTML=`
-      <section class="analysis-v2-card analysis-b4-context"><div><strong title="${playerName}">${playerName}</strong><span>${esc(labels[discipline])}</span></div><div><select class="analysis-v2-select" data-analysis-player aria-label="プレーヤー">${playerOptions}</select><select class="analysis-v2-select" data-analysis-discipline aria-label="競技">${disciplineOptions}</select></div></section>
+      <section class="analysis-v2-card analysis-b4-context"><div><strong title="${playerName}">${playerName}</strong><span>プレーヤー分析</span></div><div><select class="analysis-v2-select" data-analysis-discipline aria-label="競技">${disciplineOptions}</select></div></section>
       <section class="analysis-v2-card analysis-b4-now"><div class="analysis-b4-heading"><h2>今の状態</h2><span>${status}</span></div><strong>${summary}</strong><small>条件を満たす保存済み試合だけを指標へ使用しています</small></section>
       <h2 class="analysis-v2-section-title">主要指標</h2><section class="analysis-b4-metrics">${defs.map(def=>`<article><strong>${fmt(def.key,current[def.key])}</strong><span>${def.label}</span></article>`).join("")}</section>
-      <section class="analysis-v2-card analysis-b4-trend"><div class="analysis-b4-heading"><h2>推移</h2><span>直近${trendRecords.length}試合</span></div><div class="analysis-b4-tabs" role="tablist">${trendKeys.map((key,index)=>`<button type="button" data-b4-trend="${key}" class="${index===0?"is-active":""}" role="tab">${labels[key]}</button>`).join("")}</div><div data-b4-chart>${chart(trendRecords.map(record=>recordMetric(record,player,"winRate",discipline,h)),"winRate")}</div></section>
+      <section class="analysis-v2-card analysis-b4-trend"><div class="analysis-b4-heading"><h2>推移</h2><span>直近${trendRecords.length}試合</span></div><label class="analysis-b4-trend-picker"><span>表示指標</span><select data-b4-trend-select aria-label="推移の表示指標">${trendKeys.map(key=>`<option value="${key}">${labels[key]}</option>`).join("")}</select></label><div data-b4-chart>${chart(trendRecords.map(record=>recordMetric(record,player,"winRate",discipline,h)),"winRate")}</div></section>
       <section class="analysis-v2-card analysis-b4-points"><h2>今回のポイント</h2><div><strong>強み</strong><span>${points.strength}</span></div><div><strong>次の課題</strong><span>${points.challenge}</span></div></section>
       <h2 class="analysis-v2-section-title">自己ベスト</h2>${bests.length?`<section class="analysis-b4-bests">${bests.map(best=>`<button type="button" data-b4-match-id="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${best.key==="score"&&discipline==="jpa9"?"1試合最多得点":bestLabels[best.key]}</span><small>${esc(labels[discipline])}・${recordDate(best.record)}</small><i>試合を見る ›</i></button>`).join("")}</section>`:'<section class="analysis-v2-card analysis-b4-empty">データなし</section>'}
-      <h2 class="analysis-v2-section-title">詳細分析</h2><section class="analysis-b4-links"><button type="button" data-b4-rival="${playerId}"><span>対戦相手分析を見る</span><b>›</b></button><button type="button" data-open-match-analysis><span>試合別分析を見る</span><b>›</b></button></section>`;
+      <h2 class="analysis-v2-section-title">詳細分析</h2><section class="analysis-b4-links"><button type="button" data-b4-rival="${playerId}"><span>対戦相手分析を見る</span><b>›</b></button></section>`;
     view.dataset.build4Rendered="true";
     view._build4={player,discipline,records:trendRecords,helpers:h};
   }
@@ -80,6 +79,7 @@
     const best=event.target.closest("[data-b4-match-id]");if(best){window.openMatchDetailV1?.(best.dataset.b4MatchId);return;}
     const rival=event.target.closest("[data-b4-rival]");if(rival){window.openRivalAnalysisForPlayerV832?.(rival.dataset.b4Rival);return;}
   });
+  root.addEventListener("change",event=>{const picker=event.target.closest("[data-b4-trend-select]");if(!picker)return;const state=view._build4,key=picker.value;const values=state.records.map(record=>recordMetric(record,state.player,key,state.discipline,state.helpers));view.querySelector("[data-b4-chart]").innerHTML=chart(values,key);});
   new MutationObserver(()=>queueMicrotask(render)).observe(view,{childList:true});
   queueMicrotask(render);
   window.CueScoreBuild4Analytics={render,chart,recordMetric};

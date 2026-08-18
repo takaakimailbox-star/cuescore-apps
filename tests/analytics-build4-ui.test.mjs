@@ -11,11 +11,24 @@ test("Build 4 analytics assets are loaded after the existing analytics layer",()
   assert.match(html,/analysis-build4\.css/);
 });
 
-test("player top contains all six adopted blocks and detail entries",()=>{
-  for(const label of ["今の状態","主要指標","推移","今回のポイント","自己ベスト","詳細分析","対戦相手分析を見る","試合別分析を見る"])assert.match(script,new RegExp(label));
+test("player top contains all six adopted blocks and Player-origin detail entry",()=>{
+  for(const label of ["今の状態","主要指標","推移","今回のポイント","自己ベスト","詳細分析","対戦相手分析を見る"])assert.match(script,new RegExp(label));
+  assert.doesNotMatch(script,/試合別分析を見る/);
+  assert.doesNotMatch(script,/data-analysis-player aria-label="プレーヤー"/);
+  assert.match(script,/data-b4-trend-select/);
   assert.match(script,/window\.openMatchDetailV1\?\.\(best\.dataset\.b4MatchId\)/);
   assert.match(script,/window\.openRivalAnalysisForPlayerV832\?\.\(rival\.dataset\.b4Rival\)/);
-  assert.match(script,/data-open-match-analysis/);
+});
+
+test("Build 5 navigation starts analysis from Player Detail and carries viewer context",()=>{
+  assert.doesNotMatch(html,/id="cueHomeAnalysisV3"/);
+  assert.match(html,/プレーヤー分析を見る/);
+  assert.match(html,/historyLabel\.textContent="試合一覧"/);
+  assert.match(html,/この試合を分析/);
+  assert.match(html,/openPlayerAnalysisForPlayerV5/);
+  assert.match(html,/openMatchAnalysisForPlayerV5/);
+  assert.match(html,/selectedViewerPlayerId/);
+  assert.match(html,/目線/);
 });
 
 test("missing values and partial trend points are not coerced to zero",()=>{
