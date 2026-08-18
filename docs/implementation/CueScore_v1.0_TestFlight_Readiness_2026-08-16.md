@@ -1,7 +1,7 @@
 # CueScore v1.0 — TestFlight Readiness
 
 Date: 2026-08-16  
-Status: Build 1 smoke test PASS / Build 2 internal distribution PASS / Build 2 Main Player physical-device check PASS
+Status: Build 1 smoke test PASS / Build 2 internal distribution PASS / Build 2 Main Player physical-device check PASS / Build 3 internal distribution PASS / Build 3 physical-device check pending
 
 ## App identity
 
@@ -9,7 +9,8 @@ Status: Build 1 smoke test PASS / Build 2 internal distribution PASS / Build 2 M
 - Bundle ID: `com.takaakimailboxstar.cuescoreapps`
 - Apple Team: `U26DF88PRW`
 - Marketing Version: `1.0`
-- Build: `1`
+- Initial TestFlight Build: `1`
+- Latest TestFlight Build: `3`
 - Platform: iPhone only
 - Orientation: Portrait only
 - Minimum iOS: 15.0
@@ -77,11 +78,30 @@ Status: Build 1 smoke test PASS / Build 2 internal distribution PASS / Build 2 M
 - Build 2 remaining physical-iPhone smoke-test items: not recorded as complete in this document
 - The post-Build 2 manual-turn-change UI unification adopted on 2026-08-18 is implemented in source but is not included in uploaded Build 2.
 
+## TestFlight Build 3 distribution（2026-08-18）
+
+- Source commit: `d3aa729ff68533d4edf82fd8865df08b5894161a` (`build: set TestFlight build number 3`)
+- Marketing Version／Build: `1.0 (3)`
+- Included scope: post-Build 2 manual-turn-change UI unification
+- Automated tests: 153 pass / 0 fail
+- Source／generated／Xcode-copied native asset SHA-256: `23ae38c0a98413a7c8ef273a0af7dc888f92d9048a376bc59c14ed987b94bae9`
+- iOS Simulator Debug build: PASS
+- iOS Simulator Release build: PASS
+- Signed Release Archive: PASS
+- App Store validation: PASS（Xcode Organizer: all validation checks passed, approximately 12:57 JST）
+- TestFlight upload: PASS（2026-08-18 13:01 JST）
+- Apple processing: PASS
+- Export compliance: `上記のアルゴリズムのどれでもない`; saved and accepted
+- Internal group: `CueScore Internal Testers`（3 builds）
+- App Store Connect status: `Testing`
+- Build 3 TestFlight update／physical-iPhone smoke test: pending; not recorded as PASS
+- App Store Review submission／public release: not performed
+
 ## Next gates
 
-1. Complete any remaining Build 2 physical-device checks that the Product Owner chooses to run.
-2. Never reuse Build Number 1 or 2 for a future upload.
-3. If the post-Build 2 UI unification is distributed, use Build Number 3 or greater after a separate distribution decision.
+1. Update or install Build 3 from TestFlight and run the Product Owner-selected physical-device smoke test.
+2. Never reuse Build Number 1, 2, or 3 for a future upload.
+3. Use Build Number 4 or greater for the next distribution build.
 4. Keep App Store Review submission and public release behind a separate Product Owner approval gate.
 
-Build 1 and Build 2 were uploaded only after explicit Product Owner approval. App Store Review submission and public release have not been performed.
+Build 1, Build 2, and Build 3 were uploaded only after explicit Product Owner approval. App Store Review submission and public release have not been performed.

@@ -1,5 +1,16 @@
 # CueScore Apps Current State
 
+## TestFlight Build 3 内部配信完了（2026年8月18日）
+
+- Post-Build 2の交代操作UI統一を含むsource commit `d3aa729ff68533d4edf82fd8865df08b5894161a`（`build: set TestFlight build number 3`）から、Marketing Version `1.0`／Build `3`を作成した。
+- 全自動テスト153件成功／失敗0。source／generated／Xcode-copied native assetのSHA-256は`23ae38c0a98413a7c8ef273a0af7dc888f92d9048a376bc59c14ed987b94bae9`で一致し、iOS Simulator Debug／Release buildをPASSした。
+- Signed Release Archive、App Store Validate、TestFlight upload、Apple処理をPASS。アップロードは2026年8月18日13:01 JSTに完了した。
+- 輸出コンプライアンスは「上記のアルゴリズムのどれでもない」で保存済み。既存内部グループ`CueScore Internal Testers`へ追加し、App Store Connect上のBuild 3は「テスト中」。
+- Build 3のTestFlight更新／実iPhoneスモークテストは未確認。確認前の項目をPASS扱いにしない。
+- Build Number `1`、`2`、`3`は再利用しない。次の配布Buildは`4`以上とする。
+- App Store本審査提出と一般公開は未承認であり、実施していない。
+- 詳細記録：`docs/implementation/CueScore_Build3_TestFlight_Distribution_2026-08-18.md`。
+
 ## Post-Build 2：交代操作UI統一（2026年8月18日）
 
 - Product Owner採用により、Rotation、9-Ball、10-Ball、14-1、JPA 9-Ballの通常ファール／セーフティ後を、既存Rotation方式の手動交代待ちへ統一した。入力したPlayerを保持し、自動交代せず、「交代」まで通常ゲーム入力をロックする。
@@ -7,7 +18,7 @@
 - JPA 9-Ballの「デッド」を表示操作列の一番左へ移した。Dead機能、得点、イベント記録は変更していない。
 - 保存／Player／Match／Backup schema、Undo上限、競技ルール、得点、勝敗、Analytics定義は変更していない。
 - ソース実装と自動検証は完了。全自動テスト153件成功／失敗0、native asset 3系統一致、iOS Simulator Debug／Release buildをPASS。実iPhoneでの本UI変更確認は未実施。
-- TestFlight Build 2は本変更前にアップロード・内部配信済みで、本変更を含まない。Build Number 2は再利用せず、次回配布はBuild 3以上とする。今回、新しいBuildのアップロードは行っていない。
+- TestFlight Build 2は本変更前の版で本変更を含まない。本変更を含むBuild 3はアップロード・内部配信済みで、実iPhone確認待ち。Build Number 1／2／3は再利用しない。
 - 正式決定：`docs/official/26_CueScore_v1.0_PostBuild2_ManualTurnChange_UI_Unification_Decision.md`。後継仕様：`docs/official/27_CueScore_v1.0_PostBuild2_ManualTurnChange_UI_Unification_Spec.md`。
 - 実装記録：`docs/implementation/CueScore_PostBuild2_UI_Unification_Implementation_2026-08-18.md`。
 
@@ -22,7 +33,7 @@
 - TestFlight Build 1スモークテストで、既存Player、写真、試合履歴、オフライン起動、Backup書き出しを再確認し、すべてPASS。TestFlight Build 1：GO / PASS、内部運用：GO。
 - TestFlight Version 1.0 Build 2は、修正済みソースcommit `b54649f`から作成した。自動テスト152件成功／失敗0、Release Archive、App Store Validate、アップロード、Apple処理、輸出コンプライアンス回答をPASSした。
 - Build 2は既存内部グループ`CueScore Internal Testers`へ配信済みで、App Store Connect上の状態は「テスト中」。Product OwnerはTestFlightから更新し、Main Player保持を実iPhoneで確認してPASS。その他のBuild 2スモーク項目は本記録では未確認。
-- 次の配布BuildではBuild Number `1`または`2`を再利用しない。
+- 次の配布BuildではBuild Number `1`、`2`、`3`を再利用せず、`4`以上を使用する。
 - App Store本審査提出と一般公開は未承認であり、実施していない。Product Ownerの別途明示承認を必須とする。
 - 詳細記録：`docs/implementation/CueScore_v1.0_Step7B_Native_iOS_Foundation_2026-08-15.md`、`docs/implementation/CueScore_v1.0_Step7B_Native_iOS_Progress_2026-08-16.md`、`docs/implementation/CueScore_v1.0_TestFlight_Readiness_2026-08-16.md`。
 
