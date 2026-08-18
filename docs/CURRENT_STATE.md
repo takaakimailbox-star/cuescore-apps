@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## Build 6候補：Player Detail／Player Analysis統合（2026年8月19日）
+
+- Product Owner承認に基づき、Player DetailとPlayer AnalysisをPlayer固定の単一Player Detailへ統合した。通常導線の独立「プレーヤー分析を見る」は廃止し、プロフィール、通算、競技selector、今の状態、主要指標、最近の調子、折りたたみ式推移、自己ベスト、最近の試合、Rival／試合一覧入口を同一画面に配置した。
+- Build 4/5の正式derived metricsとeligible判定を再利用し、欠損を0または推定値で補完しない。自己ベストと最近の試合はMatch Detailへ遷移し、試合一覧から既存Player目線Match Analysisへ進める。
+- Player編集、Main Player、avatar、History、Rival Analysis、Single Match Analysis、通常／サンプルデータ、既存schema、Backup／Restore、Undo、競技ルールは維持する。
+- 本項目はBuild 6候補のsource状態。Build Number 6は未設定で、Archive、Validate、TestFlight upload／内部配信、App Review、一般公開は未実施。
+- 実装記録：`docs/implementation/CueScore_Build6_Candidate_Integrated_Player_Detail_Implementation_2026-08-19.md`。
+
 ## TestFlight Build 5 内部配信完了／実iPhone確認待ち（2026年8月19日）
 
 - Player起点の分析導線、compact化した分析UI、率自己ベストのeligible判定強化を含むsource commit `f7f7f97bb705619fbebad98f99d4c57643ebe7a4`から、Marketing Version `1.0`／Build Number `5`を作成した。

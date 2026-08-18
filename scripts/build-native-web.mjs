@@ -11,6 +11,8 @@ const files = [
   "analysis-final-rc.js",
   "analysis-build4.css",
   "analysis-build4.js",
+  "player-detail-build6.css",
+  "player-detail-build6.js",
   "analytics-build4-metrics.js",
   "demo-data.js",
   "manifest.webmanifest",

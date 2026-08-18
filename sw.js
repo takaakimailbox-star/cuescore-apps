@@ -15,6 +15,8 @@ const APP_SHELL = [
   "./analytics-build4-metrics.js",
   "./analysis-build4.js",
   "./analysis-build4.css",
+  "./player-detail-build6.js",
+  "./player-detail-build6.css",
   "./docs/official/app-store-v1.0/public/CueScore_Privacy_Policy_v1.0_Official.md",
   "./docs/official/app-store-v1.0/public/CueScore_Terms_of_Use_v1.0_Official.md",
   "./docs/official/app-store-v1.0/public/CueScore_Support_v1.0_Official.md",
