@@ -51,6 +51,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/25_CueScore_v1.0FinalRC_Restore_QuotaExceeded_Safety_Spec.md`
 - `official/26_CueScore_v1.0_PostBuild2_ManualTurnChange_UI_Unification_Decision.md`
 - `official/27_CueScore_v1.0_PostBuild2_ManualTurnChange_UI_Unification_Spec.md`
+- `official/28_CueScore_v1.0_Build4_Player_Analytics_Renewal_Decision.md`
+- `official/29_CueScore_v1.0_Build4_Player_Analytics_Renewal_Spec.md`
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and

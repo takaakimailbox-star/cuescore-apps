@@ -1,5 +1,18 @@
 # CueScore Apps Current State
 
+## Build 4候補：Player分析リニューアル ソース実装完了（2026年8月18日）
+
+- Product Owner採用の順序「今の状態 → 主要指標 → 推移 → 今回のポイント → 自己ベスト → 詳細分析入口」でPlayer分析トップを再構成した。既存Rival Analysis／Single Match Analysisは削除せず入口を維持した。
+- 9-Ball／10-Ball／Rotation／JPA 9-Ballのブレイクイン率は、判定材料の揃う`break_result`だけからderived metricとして算出する。event不足を0として混ぜず、複数球入球も1成功とする。
+- 9-Ball／10-BallのPlayer分析用マス割り率は、正式共通判定`rackGameMasuwariCountsV1(record)`を分子にし、本人break・完了・非交代を確認できるeligible rackだけを分母にする。Player Detail等の既存定義は置換していない。
+- 平均ファールは既存の「総ファール数 ÷ 対象試合数」を維持。ファール手番率、3Cファール率、Best Game／Rating、旧record推定補完はLaterのまま。
+- eligible recordだけを使う競技別自己ベストとMatch Detailリンクを追加した。同率は指標値、記録日時の新しい順、Match ID辞書順で安定選択し、0／欠損を候補にしない。
+- 欠損数値は`—`、空状態は「データなし」、比較不成立は「比較できません」とした。Player／Match／Backup／event schema、保存key、Undo、競技ルールは変更していない。
+- 全自動テスト175件成功／失敗0。source／generated／Xcode-copied native asset一致、iOS Simulator Debug／Release buildをPASSした。
+- Marketing Versionは`1.0`、Build Numberは`3`のまま。Build Number 4設定、Archive、App Store Validate、TestFlight upload／配信、App Review提出、一般公開は実施していない。
+- 正式決定：`docs/official/28_CueScore_v1.0_Build4_Player_Analytics_Renewal_Decision.md`。仕様：`docs/official/29_CueScore_v1.0_Build4_Player_Analytics_Renewal_Spec.md`。
+- 実装記録：`docs/implementation/CueScore_Build4_Candidate_Player_Analytics_Renewal_Implementation_2026-08-18.md`。
+
 ## TestFlight Build 3 実iPhone UI確認／分析指標データ監査（2026年8月18日）
 
 - Product OwnerがTestFlight Build 3を実iPhoneで確認し、Rotation、9-Ball、10-Ball、14-1、JPA 9-Ballの通常ファール／セーフティ後の手動交代と、JPA 9-Ball「デッド」の一番左配置をPASSと報告した。
@@ -28,7 +41,7 @@
 - JPA 9-Ballの「デッド」を表示操作列の一番左へ移した。Dead機能、得点、イベント記録は変更していない。
 - 保存／Player／Match／Backup schema、Undo上限、競技ルール、得点、勝敗、Analytics定義は変更していない。
 - ソース実装と自動検証は完了。全自動テスト153件成功／失敗0、native asset 3系統一致、iOS Simulator Debug／Release buildをPASS。実iPhoneでの本UI変更確認は未実施。
-- TestFlight Build 2は本変更前の版で本変更を含まない。本変更を含むBuild 3はアップロード・内部配信済みで、実iPhone確認待ち。Build Number 1／2／3は再利用しない。
+- TestFlight Build 2は本変更前の版で本変更を含まない。本変更を含むBuild 3はアップロード・内部配信済みで、Product Ownerによる対象UIの実iPhone確認をPASS。Build Number 1／2／3は再利用しない。
 - 正式決定：`docs/official/26_CueScore_v1.0_PostBuild2_ManualTurnChange_UI_Unification_Decision.md`。後継仕様：`docs/official/27_CueScore_v1.0_PostBuild2_ManualTurnChange_UI_Unification_Spec.md`。
 - 実装記録：`docs/implementation/CueScore_PostBuild2_UI_Unification_Implementation_2026-08-18.md`。
 

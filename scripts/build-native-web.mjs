@@ -9,6 +9,9 @@ const files = [
   "index.html",
   "analysis-final-rc.css",
   "analysis-final-rc.js",
+  "analysis-build4.css",
+  "analysis-build4.js",
+  "analytics-build4-metrics.js",
   "demo-data.js",
   "manifest.webmanifest",
   "official-document.js",
@@ -45,4 +48,3 @@ for (const relative of directories) {
 }
 
 console.log(`CueScore native web bundle created at ${path.relative(root, output)}`);
-
