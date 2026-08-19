@@ -1,11 +1,22 @@
 # CueScore Apps Current State
 
+## TestFlight Build 6 内部配信完了／実iPhone確認待ち（2026年8月19日）
+
+- Player Detail／Player Analysis統合を含むsource commit `7e54b8ce31aa2dde73568a1b08cdddb73a96fb20`から、Marketing Version `1.0`／Build Number `6`を作成した。
+- Native source／generated bundle／Xcode copied assetsのSHA-256一致を確認。全自動テストは`186 pass / 0 fail / 0 skipped`、iOS Simulator Debug／Releaseはいずれも`BUILD SUCCEEDED`。
+- Signed Release ArchiveとApp Store ValidateをPASSし、Xcode OrganizerからTestFlight Internal Onlyとしてアップロードした。Apple処理完了後、輸出コンプライアンスは「上記のアルゴリズムのどれでもない」で保存した。
+- Build 6は既存内部グループ`CueScore Internal Testers`に含まれ、App Store Connect上の状態は「テスト中」。Product OwnerはiPhoneのTestFlightからBuild 6へ更新可能。
+- Build 6の実iPhone確認はpending。統合Player Detail、競技切替、自己ベスト／最近の試合からのMatch Detail遷移、Rival／試合一覧入口、長いPlayer名、欠損表示、通常／サンプル切替等を未確認のままPASS扱いにしない。
+- Build Number `1`〜`6`は再利用しない。次の配布Buildは`7`以上とする。
+- App Store Review提出と一般公開は実施していない。価格、配信地域、App Privacy、EUトレーダーステータス、公開用スクリーンショットの最終設定も実施していない。
+- 配信記録：`docs/implementation/CueScore_Build6_TestFlight_Distribution_2026-08-19.md`。
+
 ## Build 6候補：Player Detail／Player Analysis統合（2026年8月19日）
 
 - Product Owner承認に基づき、Player DetailとPlayer AnalysisをPlayer固定の単一Player Detailへ統合した。通常導線の独立「プレーヤー分析を見る」は廃止し、プロフィール、通算、競技selector、今の状態、主要指標、最近の調子、折りたたみ式推移、自己ベスト、最近の試合、Rival／試合一覧入口を同一画面に配置した。
 - Build 4/5の正式derived metricsとeligible判定を再利用し、欠損を0または推定値で補完しない。自己ベストと最近の試合はMatch Detailへ遷移し、試合一覧から既存Player目線Match Analysisへ進める。
 - Player編集、Main Player、avatar、History、Rival Analysis、Single Match Analysis、通常／サンプルデータ、既存schema、Backup／Restore、Undo、競技ルールは維持する。
-- 本項目はBuild 6候補のsource状態。Build Number 6は未設定で、Archive、Validate、TestFlight upload／内部配信、App Review、一般公開は未実施。
+- 本項目のsource実装は上記の別配信GateでBuild Number `6`を設定し、Archive／Validate／TestFlight内部配信まで完了した。実iPhone確認はpending。App Reviewと一般公開は未実施。
 - 実装記録：`docs/implementation/CueScore_Build6_Candidate_Integrated_Player_Detail_Implementation_2026-08-19.md`。
 
 ## TestFlight Build 5 内部配信完了／実iPhone確認待ち（2026年8月19日）
