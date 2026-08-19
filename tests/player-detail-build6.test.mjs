@@ -8,23 +8,30 @@ const css=fs.readFileSync(new URL("../player-detail-build6.css",import.meta.url)
 const nativeBuild=fs.readFileSync(new URL("../scripts/build-native-web.mjs",import.meta.url),"utf8");
 const sw=fs.readFileSync(new URL("../sw.js",import.meta.url),"utf8");
 
-test("Build 6 integrated Player Detail assets load after adopted analytics",()=>{
+test("two-level Player Detail assets remain in web, native, and service worker bundles",()=>{
   assert.match(html,/analysis-build4\.js[\s\S]*player-detail-build6\.js/);
-  assert.match(html,/player-detail-build6\.css/);
   assert.match(nativeBuild,/player-detail-build6\.js/);
-  assert.match(nativeBuild,/player-detail-build6\.css/);
   assert.match(sw,/player-detail-build6\.js/);
 });
 
-test("integrated Player Detail contains all eight approved sections",()=>{
-  for(const text of ["通算","今の状態","主要指標","最近の調子","推移を見る","自己ベスト","最近の試合","対戦相手別の成績","試合一覧"]){
-    assert.match(script,new RegExp(text));
-  }
-  assert.doesNotMatch(script,/プレーヤー分析を見る/);
-  assert.doesNotMatch(script,/data-analysis-player/);
+test("level one is Player Info with all six discipline summary rows",()=>{
+  assert.match(script,/header\("プレーヤー情報"\)/);
+  assert.match(script,/競技別通算/);
+  assert.match(script,/data-pd7-discipline/);
+  for(const text of ["9-Ball","10-Ball","Rotation","14-1","JPA 9-Ball","3 Cushion"])assert.match(script,new RegExp(text));
+  assert.match(script,/records\.length\?`\$\{wins\}勝\$\{losses\}敗`:"勝敗 —"/);
 });
 
-test("all disciplines keep their adopted metric sets",()=>{
+test("level two fixes a discipline and contains the adopted analytics journey",()=>{
+  for(const text of ["プレーヤー情報へ戻る","通算","主要指標","今の状態","推移","自己ベスト","最近の試合","対戦相手別の成績","全試合"]){assert.match(script,new RegExp(text));}
+  assert.match(script,/api\.aggregate\(records,player,helpers\)/);
+  assert.match(script,/api\.bests\(records,player,active,helpers\)/);
+  assert.match(script,/openMatchDetailV1/);
+  assert.match(script,/openPlayerOpponentRecordsV2/);
+  assert.match(script,/openPlayerMatchHistoryV2/);
+});
+
+test("all disciplines keep the approved metric sets",()=>{
   assert.match(script,/"9ball":\["shotRate","breakInRate","masuwariRate","avgFouls"\]/);
   assert.match(script,/rotation:\["shotRate","breakInRate","highRun","avgFouls"\]/);
   assert.match(script,/jpa9:\["average","breakInRate","highRun","avgFouls"\]/);
@@ -32,24 +39,17 @@ test("all disciplines keep their adopted metric sets",()=>{
   assert.match(script,/threeCushion:\["average","highRun"\]/);
 });
 
-test("trend, bests and recent matches use the existing derived metrics and Match Detail",()=>{
-  assert.match(script,/CueScoreBuild4Metrics/);
-  assert.match(script,/api\.aggregate/);
-  assert.match(script,/api\.bests/);
-  assert.match(script,/CueScoreBuild4Analytics\?\.chart/);
-  assert.match(script,/openMatchDetailV1\?\.\(match\.dataset\.pd6Match\)/);
+test("detail density is collapsed and recent content is limited",()=>{
+  assert.match(script,/bests\.slice\(0,3\)/);
+  assert.match(script,/records\.slice\(0,3\)/);
+  assert.match(script,/data-pd7-trend hidden/);
   assert.match(script,/value==null\?"—"/);
 });
 
-test("initial density and expansion contracts are explicit",()=>{
-  assert.match(script,/index>=3\?"pd6-more-best"/);
-  assert.match(script,/index>=2\?"pd6-more-match"/);
-  assert.match(script,/data-pd6-best-toggle/);
-  assert.match(script,/data-pd6-match-toggle/);
-  assert.match(script,/data-pd6-trend-toggle aria-expanded="false"/);
-});
-
-test("390px portrait keeps compact two-column metric and best cards",()=>{
+test("white cards force legible dark text and fit 390px portrait",()=>{
+  assert.match(css,/color-scheme:light/);
+  assert.match(css,/-webkit-text-fill-color:#171717/);
+  assert.match(css,/background:#fff!important/);
   assert.match(css,/grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
   assert.match(css,/@media\(max-width:390px\)/);
   assert.match(css,/text-overflow:ellipsis/);

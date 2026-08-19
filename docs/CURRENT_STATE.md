@@ -1,5 +1,16 @@
 # CueScore Apps Current State
 
+## Build 7候補：マス割り率修正・2段階Player UI source実装完了（2026年8月19日）
+
+- Product Owner採用により、9-Ball／10-BallのPlayer分析用マス割り率を「正式マス割り回数 ÷ 本人がブレイクした全判定可能完了ラック数」へ修正した。通常交代、miss、ファール、break foul、break失敗を分母から除外しない。正式マス割り成功条件は変更していない。
+- 完了ラックとbreak ledgerが試合record全体で一致しない場合は率全体をineligibleとし、部分recordから1/1=100%を生成しない。3/4=75%、1/2=50%、1/1=100%、0/4=0%の契約テストを追加した。
+- Player Detailを、プロフィールと6競技通算一覧の「プレーヤー情報」と、Player／競技固定の「競技詳細」の2段階へ再構成した。競技詳細は通算、主要指標、今の状態、折りたたみ推移、自己ベスト3件、最近の試合3件、Rival／全試合入口を持つ。
+- 白背景のPlayer名・カード本文へ濃色と`-webkit-text-fill-color`を明示し、iOS appearance継承による白抜けを防ぐ。390px portraitの2列カードとellipsisを維持する。
+- 全自動テストは`191 pass / 0 fail / 0 skipped`。Native source／generated bundle／Xcode copied assetのSHA-256一致、iOS Simulator Debug／Releaseの`BUILD SUCCEEDED`を確認した。実iPhone確認は未実施であり、PASS扱いにしない。
+- 正式決定：`docs/official/34_CueScore_v1.0_Build7_Masuwari_Rate_TwoLevel_Player_UI_Decision.md`。仕様：`docs/official/35_CueScore_v1.0_Build7_Masuwari_Rate_TwoLevel_Player_UI_Spec.md`。
+- 実装記録：`docs/implementation/CueScore_Build7_Candidate_Masuwari_Rate_TwoLevel_Player_UI_Implementation_2026-08-19.md`。
+- Marketing Versionは`1.0`、Build Numberは`6`のまま。Build 7 Archive、Validate、TestFlight upload、App Review、一般公開は実施していない。
+
 ## Build 6 実iPhone報告：マス割り率100%問題の監査完了／仕様判断待ち（2026年8月19日）
 
 - Product Ownerから、Build 6のPlayer Detailで最高マス割り率が実感と合わない100%となり、リンク先試合とも整合しない旨が報告された。この報告範囲だけを記録し、Build 6の他項目を新たにPASS扱いにしない。

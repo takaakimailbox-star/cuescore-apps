@@ -31,7 +31,7 @@ test("break-in rejects a partially detailed single record",()=>{
 });
 
 test("masuwari denominator uses player's completed break racks",()=>{
-  const input=record([breakEvent(1,1),event("rack_end",1,1,{winner:1}),breakEvent(2,2),event("rack_end",2,2,{winner:2}),breakEvent(1,3)]);
+  const input=record([breakEvent(1,1),event("rack_end",1,1,{winner:1}),breakEvent(2,2),event("rack_end",2,2,{winner:2})]);
   const result=metrics.masuwariForRecord(input,1,"9ball",()=>({1:1,2:0}));
   assert.deepEqual(result,{eligible:true,numerator:1,denominator:1,rate:100});
 });
@@ -61,8 +61,22 @@ for(const [name,events] of [
   ["turn transfer",[breakEvent(1,1,{pocketedBalls:[1],pocketCount:1}),event("player_switch",1,1,{fromPlayer:1,toPlayer:2}),event("rack_end",2,1,{winner:2})]],
   ["foul",[breakEvent(1,1,{pocketedBalls:[1],pocketCount:1,foul:true}),event("rack_end",2,1,{winner:2})]],
   ["break foul",[breakEvent(1,1,{pocketedBalls:[1],pocketCount:1,breakFoul:true}),event("rack_end",2,1,{winner:2})]]
-])test(`masuwari denominator excludes ${name}`,()=>{
-  assert.equal(metrics.masuwariForRecord(record(events),1,"9ball",()=>({1:0})).eligible,false);
+])test(`masuwari denominator includes a classifiable completed ${name} rack`,()=>{
+  assert.deepEqual(metrics.masuwariForRecord(record(events),1,"9ball",()=>({1:0})),{eligible:true,numerator:0,denominator:1,rate:0});
+});
+
+const ratioRecord=(total,side=1)=>record(Array.from({length:total},(_,index)=>[
+  breakEvent(side,index+1),event("rack_end",side,index+1,{winner:side})
+]).flat());
+for(const [denominator,numerator,rate] of [[4,3,75],[2,1,50],[1,1,100],[4,0,0]]){
+  test(`masuwari adopted denominator: ${numerator}/${denominator} = ${rate}%`,()=>{
+    assert.deepEqual(metrics.masuwariForRecord(ratioRecord(denominator),1,"9ball",()=>({1:numerator,2:0})),{eligible:true,numerator,denominator,rate});
+  });
+}
+
+test("masuwari rejects a break ledger with a rack missing rack_end",()=>{
+  const input=record([breakEvent(1,1),event("rack_end",1,1,{winner:1}),breakEvent(1,2)]);
+  assert.equal(metrics.masuwariForRecord(input,1,"9ball",()=>({1:1,2:0})).eligible,false);
 });
 
 test("shot and average eligibility reject missing denominators",()=>{

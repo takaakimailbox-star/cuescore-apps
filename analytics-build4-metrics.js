@@ -51,24 +51,22 @@
     if(!events.length)return{eligible:false,numerator:0,denominator:0,rate:null};
     const completedRacks=[...new Set(events.filter(event=>eventType(event)==="rack_end").map(rackOf))];
     if(!completedRacks.length)return{eligible:false,numerator:0,denominator:0,rate:null};
-    // Record-level eligibility: every completed rack must have exactly one
-    // detailed, classifiable break_result. Otherwise a partial record can turn
-    // one surviving successful rack into a misleading 1/1 (100%) best.
-    const hasCompleteRackLedger=completedRacks.every(rack=>{
-      const breaks=events.filter(event=>rackOf(event)===rack&&eventType(event)==="break_result");
-      return breaks.length===1&&isBreakEventEligible(breaks[0]);
-    });
+    const breakEvents=events.filter(event=>eventType(event)==="break_result");
+    const breakRacks=[...new Set(breakEvents.map(rackOf))];
+    // Record-level eligibility: the completed-rack ledger and break ledger must
+    // describe the same racks, and every rack must have one classifiable break.
+    // This prevents a surviving successful rack in a partial record from being
+    // promoted to a misleading 1/1 (100%) lifetime, trend, or personal best.
+    const hasCompleteRackLedger=completedRacks.length===breakRacks.length&&
+      completedRacks.every(rack=>breakRacks.includes(rack)&&breakEvents.filter(event=>rackOf(event)===rack).length===1&&isBreakEventEligible(breakEvents.find(event=>rackOf(event)===rack)));
     if(!hasCompleteRackLedger)return{eligible:false,numerator:0,denominator:0,rate:null};
-    let denominator=0;
-    completedRacks.forEach(rack=>{
-      const rackEvents=events.filter(event=>rackOf(event)===rack);
-      const breakEvent=rackEvents.find(event=>eventType(event)==="break_result"&&eventPlayer(event)===Number(side));
-      const rackEnd=rackEvents.find(event=>eventType(event)==="rack_end");
-      const invalidBreak=breakEvent&&["foul","scratch","breakFoul","illegalBreak","preBreakFoul","breakFailed"]
-        .some(key=>Boolean(value(breakEvent,key)));
-      const transferred=rackEvents.some(event=>eventType(event)==="player_switch");
-      if(breakEvent&&rackEnd&&isBreakEventEligible(breakEvent)&&!invalidBreak&&!transferred)denominator+=1;
-    });
+    // The adopted denominator is every classifiable completed rack broken by
+    // this player. A miss, foul, failed break, or later player transfer remains
+    // a break opportunity; only incomplete/unclassifiable records are excluded.
+    const denominator=completedRacks.filter(rack=>{
+      const breakEvent=breakEvents.find(event=>rackOf(event)===rack);
+      return eventPlayer(breakEvent)===Number(side);
+    }).length;
     if(!denominator)return{eligible:false,numerator:0,denominator:0,rate:null};
     const counts=typeof officialCounter==="function"?officialCounter(record):null;
     const numerator=Math.max(0,Number(counts?.[Number(side)])||0);
