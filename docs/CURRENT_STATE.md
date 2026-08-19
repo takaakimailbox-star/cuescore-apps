@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## Build 6 実iPhone報告：マス割り率100%問題の監査完了／仕様判断待ち（2026年8月19日）
+
+- Product Ownerから、Build 6のPlayer Detailで最高マス割り率が実感と合わない100%となり、リンク先試合とも整合しない旨が報告された。この報告範囲だけを記録し、Build 6の他項目を新たにPASS扱いにしない。
+- 正式マス割り回数関数ではなく、Player分析用率の分母が通常の`player_switch`を含むラックを除外することが直接原因。監査fixtureで、4ブレイク3マス割りが3/3=100%、2ブレイク1マス割りが1/1=100%、4ブレイク0マス割りが分母0の`—`になることを再現した。
+- 詳細eventが完全なrecordでも発生する構造問題。簡易・旧recordは`break_result`不足、サンプルデータは現行common event ledger不足という別の互換性制約も確認した。
+- 指定された「石塚 貴章／9-Ball／2026-08-18」の生record JSONはrepositoryおよび提供ファイル内になく、個別rack、実分子・実分母は推測せず未確認とした。
+- 推奨案は、record全体の判定材料が完全な場合だけ、正式マス割り回数を「本人がブレイクした全判定可能完了ラック数」で割る方式。現行Official Spec 029/031の分母記載変更を伴うため、Product Owner承認前に実装・Official仕様は変更しない。
+- Build Number `7`設定、Archive、Validate、TestFlight upload、App Review提出、一般公開は実施していない。
+- 監査記録：`docs/implementation/CueScore_Masuwari_Rate_Deep_Audit_2026-08-19.md`。
+
 ## TestFlight Build 6 内部配信完了／実iPhone確認待ち（2026年8月19日）
 
 - Player Detail／Player Analysis統合を含むsource commit `7e54b8ce31aa2dde73568a1b08cdddb73a96fb20`から、Marketing Version `1.0`／Build Number `6`を作成した。
