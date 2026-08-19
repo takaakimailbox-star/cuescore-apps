@@ -11,9 +11,17 @@
 - Marketing Version：`1.0`
 - Build Number：`6`（変更なし）
 
+### Simulator UIレビュー修正の再開状態
+
+- 再開時`origin/main`：`900d1f9b01e30c3231a2e5e7557ffb29fda58b2c`
+- Local branch：`codex/cuescore-step7b-native-ios-foundation`
+- 再開時local HEADと`origin/main`は一致し、worktreeはcleanだった。
+- 中断後に残っていた変更は、正本`CueScore_Build7_Simulator_UI_Review_Fixes_2026-08-19.md`と照合してから継続した。
+
 ## 2. 正式資料
 
-- Official Design Decision Logをv2.0へ更新し、Decision 026として本採用事項を記録した。
+- Official Design Decision Logをv2.1へ更新し、Decision 026へSimulator UIレビュー後の追加採用事項を追記した。
+- `docs/official/07_CueScore_Official_Design_Decision_Log_v2.1_Official_Release.docx`
 - `docs/official/34_CueScore_v1.0_Build7_Masuwari_Rate_TwoLevel_Player_UI_Decision.md`
 - `docs/official/35_CueScore_v1.0_Build7_Masuwari_Rate_TwoLevel_Player_UI_Spec.md`
 
@@ -43,11 +51,14 @@ Official 029/031の非foul・非transferラックだけを分母にする契約�
 
 ### 第2階層：競技詳細
 
-- Playerと競技を固定し、プレーヤー情報へ戻る導線を表示する。
-- 通算、競技別主要指標、今の状態、初期折りたたみ推移、自己ベスト3件、最近の試合3件、Rival Analysis、当該競技の全試合入口を配置した。
+- Playerと競技を固定し、中央Navigation Titleを競技別の`○○ 詳細`へ変更した。標準Navigation戻るで第1階層へ戻るため、画面内の重複戻るlinkは削除した。
+- Player＋Main状態と競技通算を1つのcompact summaryへ統合した。
+- 競技別主要指標は9／10-Ball、Rotation、JPA 9-Ballを4分割1段、14-1を3分割1段、3 Cushionを2分割1段とした。
+- 競技通算と重複していた「今の状態」sectionをUIから削除した。初期折りたたみ推移は維持した。
+- 自己ベスト最大3件を件数どおりの1段summaryへ変更し、2件時に空枠を作らない。最近の試合3件、Rival Analysis、当該競技の全試合入口は維持した。
 - 自己ベストと最近の試合は記録元Match Detailへ遷移する。
 - 既存Player HistoryからSingle Match Analysisへ進む経路を維持した。
-- 白背景のPlayer名とカード本文に濃色および`-webkit-text-fill-color`を明示し、390px portrait、2列カード、ellipsis、横overflowなしの契約を追加した。
+- 白背景のPlayer名とカード本文に濃色および`-webkit-text-fill-color`を明示し、390px portrait、1段summary、ellipsis、横overflowなしの契約を追加した。
 
 ## 5. 互換性
 
@@ -55,16 +66,41 @@ Player編集、Main Player、avatar、History、Match Detail、Rival Analysis、
 
 ## 6. テストと検証
 
-- 全自動テスト：`191 pass / 0 fail / 0 skipped`。
+- 全自動テスト：`194 pass / 0 fail / 0 skipped`。
 - マス割り率：`3/4 = 75%`、`1/2 = 50%`、`1/1 = 100%`、`0/4 = 0%`。
 - 通常交代、foul、break foulを分母に含むことを確認した。
 - incomplete rack ledger、breakのみ、rack endのみ、重複／不足、分母0、分子超過をineligibleとする回帰契約を確認した。
 - 2段階UI：6競技通算行、競技固定詳細、主要指標、折りたたみ推移、自己ベスト3件、最近の試合3件、Match Detail、Rival／History導線、欠損、390px、白背景文字色を確認した。
 - Native source／`native-web`／Xcode copied `ios/App/App/public`の主要変更assetはSHA-256一致。Xcode copied側にCapacitor生成の`cordova.js`／`cordova_plugins.js`だけが追加される既存構成を確認した。
+- `index.html`：`61bc6844a52146be176160d56b394bd641ab21eed90a016f17cb38cd0c5e4d77`
+- `player-detail-build6.js`：`fd765c487a03cba1fc93cde0cf672e0a6e6f43451406dad6497f8a455249aeeb`
+- `player-detail-build6.css`：`b8a1eb8c348c62256f4f47a478cc2758f8d0794832715c66dff313b0010a5864`
 - iOS Simulator Debug：`BUILD SUCCEEDED`。
 - iOS Simulator Release：`BUILD SUCCEEDED`。
 
-## 7. 配布Gate
+## 7. Simulator UI再確認
+
+iPhone 17 Simulator（iOS 26.5、portrait、390px前後）で、次の7画面を初期表示から目視確認した。
+
+- プレーヤー情報：6競技通算一覧、Player名、Main Player表示、編集導線、白背景上の文字を確認。
+- 9-Ball／10-Ball／Rotation／14-1／JPA 9-Ball／3 Cushion：競技別Navigation Title、compact Player＋通算、競技別主要指標1段、初期折りたたみ推移、件数どおりの自己ベスト1段、最近の試合、Rival／全試合入口を確認。
+- 全7画面で横overflow、白抜け文字、重複する画面内戻るlinkを認めなかった。
+- 3 Cushionに不要なブレイクイン率／マス割り率／平均ファールを表示していないことを確認した。
+- 実iPhone確認は未実施であり、Simulator結果から実機PASSとは扱わない。
+
+スクリーンショット保存先：
+
+`/Users/Ludique/Documents/Codex/CueScore_Build7_UI_Review_Fixes_2026-08-19/`
+
+- `01-player-info.png`
+- `02-9-ball-detail.png`
+- `03-10-ball-detail.png`
+- `04-rotation-detail.png`
+- `05-14-1-detail.png`
+- `06-jpa-9-ball-detail.png`
+- `07-3-cushion-detail.png`
+
+## 8. 配布Gate
 
 - Build Numberは`6`のまま。
 - Build 7 Archive：未実施。

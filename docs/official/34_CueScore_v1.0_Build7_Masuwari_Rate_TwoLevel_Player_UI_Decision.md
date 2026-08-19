@@ -11,6 +11,8 @@
 
 Player Detailは、Player情報と6競技の通算一覧を示す第1階層と、選択競技に固定した分析・履歴を示す第2階層へ分離する。情報量を一画面へ積み上げず、Player起点のRival Analysis、Match Detail、Single Match Analysis導線は維持する。
 
+Simulator UIレビュー後、第2階層は競技別Navigation Title、compact Player＋通算summary、主要指標1段、初期closedの推移、自己ベスト最大3件1段、最近の試合、Rival／全試合入口の順とする。競技通算と重複する「今の状態」sectionおよび画面内の重複戻るlinkは廃止し、標準Navigation戻るでPlayer情報へ戻る。
+
 ## Eligibility and compatibility
 
 完了ラック、breaker、判定可能な`break_result`、`rack_end`、正式マス割り判定材料が試合record全体で揃う場合だけ率を算出する。部分recordの残存ラックだけで1/1を作らない。不足は`—`／`データなし`とし、0または推定値で補完しない。
@@ -27,4 +29,5 @@ Official 029/031の「非foul・非transferラックのみを分母にする」�
 
 ## Revision history
 
+- 2026-08-19: Simulator UIレビュー後の競技詳細圧縮、競技別Title、「今の状態」廃止、指標／自己ベスト1段化、戻る導線整理を追加採用。
 - 2026-08-19: Product Owner採用によりOfficial Release 1.0。

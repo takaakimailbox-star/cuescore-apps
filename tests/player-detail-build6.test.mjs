@@ -23,7 +23,10 @@ test("level one is Player Info with all six discipline summary rows",()=>{
 });
 
 test("level two fixes a discipline and contains the adopted analytics journey",()=>{
-  for(const text of ["プレーヤー情報へ戻る","通算","主要指標","今の状態","推移","自己ベスト","最近の試合","対戦相手別の成績","全試合"]){assert.match(script,new RegExp(text));}
+  for(const text of ["通算","主要指標","推移","自己ベスト","最近の試合","対戦相手別の成績","全試合"]){assert.match(script,new RegExp(text));}
+  assert.doesNotMatch(script,/プレーヤー情報へ戻る/);
+  assert.doesNotMatch(script,/今の状態/);
+  assert.doesNotMatch(script,/pd7-now/);
   assert.match(script,/api\.aggregate\(records,player,helpers\)/);
   assert.match(script,/api\.bests\(records,player,active,helpers\)/);
   assert.match(script,/openMatchDetailV1/);
@@ -46,11 +49,34 @@ test("detail density is collapsed and recent content is limited",()=>{
   assert.match(script,/value==null\?"—"/);
 });
 
+test("detail navigation title is game specific and the standard back button owns navigation",()=>{
+  assert.match(html,/id="playerStatsTitle"/);
+  assert.match(script,/header\(`\$\{def\(active\)\.label\} 詳細`,""\)/);
+  assert.match(script,/playerStatsBackBtn/);
+  for(const text of ["Rotation","9-Ball","10-Ball","JPA 9-Ball","14-1","3 Cushion"])assert.match(script,new RegExp(text));
+});
+
+test("metric and best summaries use one responsive row without blank segments",()=>{
+  assert.match(script,/pd7-metrics count-\$\{keys\.length\}/);
+  assert.match(script,/pd7-bests count-\$\{Math\.min\(bests\.length,3\)\}/);
+  assert.match(css,/\.pd7-metrics\.count-4\{grid-template-columns:repeat\(4,minmax\(0,1fr\)\)\}/);
+  assert.match(css,/\.pd7-metrics\.count-3,\.pd7-bests\.count-3\{grid-template-columns:repeat\(3,minmax\(0,1fr\)\)\}/);
+  assert.match(css,/\.pd7-metrics\.count-2,\.pd7-bests\.count-2\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)\}/);
+  assert.doesNotMatch(css,/overflow-x\s*:\s*(auto|scroll)/);
+});
+
+test("discipline detail keeps compact player and game context",()=>{
+  assert.match(script,/pd7-detail-summary/);
+  assert.match(script,/profile\(player,true\)/);
+  assert.match(script,/state\.discipline=active/);
+  assert.match(script,/value==null\?"—"/);
+});
+
 test("white cards force legible dark text and fit 390px portrait",()=>{
   assert.match(css,/color-scheme:light/);
   assert.match(css,/-webkit-text-fill-color:#171717/);
   assert.match(css,/background:#fff!important/);
-  assert.match(css,/grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
+  assert.match(css,/minmax\(0,1fr\)/);
   assert.match(css,/@media\(max-width:390px\)/);
   assert.match(css,/text-overflow:ellipsis/);
 });

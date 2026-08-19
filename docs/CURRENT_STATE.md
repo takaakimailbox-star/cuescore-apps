@@ -1,12 +1,13 @@
 # CueScore Apps Current State
 
-## Build 7候補：マス割り率修正・2段階Player UI source実装完了（2026年8月19日）
+## Build 7候補：Simulator UIレビュー修正・再確認完了（2026年8月19日）
 
 - Product Owner採用により、9-Ball／10-BallのPlayer分析用マス割り率を「正式マス割り回数 ÷ 本人がブレイクした全判定可能完了ラック数」へ修正した。通常交代、miss、ファール、break foul、break失敗を分母から除外しない。正式マス割り成功条件は変更していない。
 - 完了ラックとbreak ledgerが試合record全体で一致しない場合は率全体をineligibleとし、部分recordから1/1=100%を生成しない。3/4=75%、1/2=50%、1/1=100%、0/4=0%の契約テストを追加した。
-- Player Detailを、プロフィールと6競技通算一覧の「プレーヤー情報」と、Player／競技固定の「競技詳細」の2段階へ再構成した。競技詳細は通算、主要指標、今の状態、折りたたみ推移、自己ベスト3件、最近の試合3件、Rival／全試合入口を持つ。
-- 白背景のPlayer名・カード本文へ濃色と`-webkit-text-fill-color`を明示し、iOS appearance継承による白抜けを防ぐ。390px portraitの2列カードとellipsisを維持する。
-- 全自動テストは`191 pass / 0 fail / 0 skipped`。Native source／generated bundle／Xcode copied assetのSHA-256一致、iOS Simulator Debug／Releaseの`BUILD SUCCEEDED`を確認した。実iPhone確認は未実施であり、PASS扱いにしない。
+- Player Detailを、プロフィールと6競技通算一覧の「プレーヤー情報」と、Player／競技固定の「競技詳細」の2段階へ再構成した。Simulator UIレビュー後、競技詳細は競技別Navigation Title、compact Player＋通算、主要指標1段、折りたたみ推移、自己ベスト最大3件1段、最近の試合3件、Rival／全試合入口へ圧縮した。重複する「今の状態」sectionと画面内戻るlinkは廃止した。
+- 白背景のPlayer名・カード本文へ濃色と`-webkit-text-fill-color`を明示し、iOS appearance継承による白抜けを防ぐ。390px portraitで4／3／2指標と3／2／1件の自己ベストを横scrollなしの1段summaryとして表示する。
+- 追加修正後の全自動テストは`194 pass / 0 fail / 0 skipped`。Native source／generated bundle／Xcode copied assetのSHA-256一致、iOS Simulator Debug／Releaseの`BUILD SUCCEEDED`を確認した。
+- iPhone 17 Simulator（portrait、390px前後）で、プレーヤー情報と9-Ball／10-Ball／Rotation／14-1／JPA 9-Ball／3 Cushionの7画面を再確認した。競技別Title、白背景上の文字、6競技通算、主要指標、折りたたみ推移、自己ベスト、最近の試合、Rival／全試合入口、横overflowなしをPASS。スクリーンショットは`/Users/Ludique/Documents/Codex/CueScore_Build7_UI_Review_Fixes_2026-08-19/`へ保存した。実iPhone確認は未実施であり、PASS扱いにしない。
 - 正式決定：`docs/official/34_CueScore_v1.0_Build7_Masuwari_Rate_TwoLevel_Player_UI_Decision.md`。仕様：`docs/official/35_CueScore_v1.0_Build7_Masuwari_Rate_TwoLevel_Player_UI_Spec.md`。
 - 実装記録：`docs/implementation/CueScore_Build7_Candidate_Masuwari_Rate_TwoLevel_Player_UI_Implementation_2026-08-19.md`。
 - Marketing Versionは`1.0`、Build Numberは`6`のまま。Build 7 Archive、Validate、TestFlight upload、App Review、一般公開は実施していない。

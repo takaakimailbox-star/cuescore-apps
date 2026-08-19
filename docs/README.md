@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.0_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.1_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -26,8 +26,8 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.0 is the current official release and successor
-to v1.9. Earlier versions remain in the official directory as preceding releases.
+Official Design Decision Log v2.1 is the current official release and successor
+to v2.0. Earlier versions remain in the official directory as preceding releases.
 
 Adopted RC decision addenda that supplement the latest Decision Log:
 

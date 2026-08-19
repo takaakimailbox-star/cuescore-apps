@@ -45,19 +45,16 @@
   }
   function renderDetail(player,active){
     state.level="detail";state.discipline=active;header(`${def(active).label} 詳細`,"");
-    const records=recordsFor(player).filter(record=>discipline(record)===active),recent=records.slice(0,10),previous=records.slice(10,20);
-    const all=api.aggregate(records,player,helpers),now=api.aggregate(recent,player,helpers),before=api.aggregate(previous,player,helpers),keys=metricKeys[active]||[],bests=api.bests(records,player,active,helpers);
-    const status=now.games<3?"データ蓄積中":before.games<3?"安定":now.winRate>before.winRate?"改善傾向":now.winRate<before.winRate?"要調整":"安定";
+    const records=recordsFor(player).filter(record=>discipline(record)===active);
+    const all=api.aggregate(records,player,helpers),keys=metricKeys[active]||[],bests=api.bests(records,player,active,helpers);
     const trendKeys=["winRate",...keys],trendRecords=records.slice(0,10).reverse();state.trendRecords=trendRecords;
     const recentRows=records.slice(0,3).map(record=>{const s=side(record,player),opp=opponent(record,s);return `<button type="button" class="pd7-match" data-pd7-match="${esc(record.id)}"><span><strong>${won(record,s)?"勝ち":"負け"}　${score(record,s)} - ${score(record,s===1?2:1)}</strong><small>${dateText(record)}・vs ${esc(opp.name||"対戦相手")}</small></span><b>›</b></button>`;}).join("");
     const bestCards=bests.slice(0,3).map(best=>`<button type="button" class="pd7-best" data-pd7-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${active==="jpa9"&&best.key==="score"?"1試合最多得点":bestLabels[best.key]}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("");
     const summary=records.length?`${all.games}試合　${all.wins}勝${all.losses}敗　勝率${Math.round(all.winRate)}%`:"0試合　勝率 —";
-    body.innerHTML=`<div class="player-detail-shell-v1 pd7-shell"><button type="button" class="pd7-level-back" data-pd7-info>‹ プレーヤー情報へ戻る</button>${profile(player,true)}
-      <section class="pd7-overall"><span><small>${def(active).label} 通算</small><strong>${summary}</strong></span></section>
-      <h2 class="pd7-title">主要指標</h2><section class="pd7-metrics">${keys.map(key=>`<article><strong>${fmt(key,all[key])}</strong><span>${labels[key]}</span></article>`).join("")||'<div class="pd7-empty">データなし</div>'}</section>
-      <section class="pd7-now"><div><h2>今の状態</h2><b>${status}</b></div><strong>${now.games?`直近${now.games}試合　${now.wins}勝${now.losses}敗　勝率${Math.round(now.winRate)}%`:"データなし"}</strong><span>${recent.length?recent.slice(0,5).map(r=>`<i class="${won(r,side(r,player))?"win":"loss"}">${won(r,side(r,player))?"W":"L"}</i>`).join(""):""}</span></section>
+    body.innerHTML=`<div class="player-detail-shell-v1 pd7-shell"><section class="pd7-detail-summary">${profile(player,true)}<span><small>${def(active).label} 通算</small><strong>${summary}</strong></span></section>
+      <h2 class="pd7-title">主要指標</h2><section class="pd7-metrics count-${keys.length}">${keys.map(key=>`<article><strong>${fmt(key,all[key])}</strong><span>${labels[key]}</span></article>`).join("")||'<div class="pd7-empty">データなし</div>'}</section>
       <section class="pd7-trend-card"><button type="button" data-pd7-trend-toggle aria-expanded="false"><span><strong>推移</strong><small>指標の変化を見る</small></span><b>⌄</b></button><div class="pd7-trend" data-pd7-trend hidden><select data-pd7-trend-key aria-label="推移の指標">${trendKeys.map(key=>`<option value="${key}">${labels[key]}</option>`).join("")}</select><div data-pd7-chart>${chart(trendRecords.map(r=>recordMetric(r,player,"winRate",active)),"winRate")}</div></div></section>
-      <h2 class="pd7-title">自己ベスト</h2>${bestCards?`<section class="pd7-bests">${bestCards}</section>`:'<section class="pd7-empty-card">データなし</section>'}
+      <h2 class="pd7-title">自己ベスト</h2>${bestCards?`<section class="pd7-bests count-${Math.min(bests.length,3)}">${bestCards}</section>`:'<section class="pd7-empty-card">データなし</section>'}
       <h2 class="pd7-title">最近の試合</h2>${recentRows?`<section class="pd7-matches">${recentRows}</section>`:'<section class="pd7-empty-card">データなし</section>'}
       <section class="pd7-links"><button type="button" data-pd7-rivals><span><strong>対戦相手別の成績</strong><small>${def(active).label}の相手別勝敗・勝率</small></span><b>›</b></button><button type="button" data-pd7-history><span><strong>${def(active).label}の全試合</strong><small>Match Detail・試合別分析へ</small></span><b>›</b></button></section></div>`;
   }

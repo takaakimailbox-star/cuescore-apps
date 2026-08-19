@@ -24,13 +24,17 @@ record-level completenessを必須とする。全完了ラックとbreak ledger�
 
 ## Level 2: Discipline detail
 
-Playerと競技を固定し、Player情報へ戻る導線を示す。競技別通算、主要指標、今の状態／直近フォーム、初期折りたたみの推移、初期3件の自己ベスト、直近3試合、Rival Analysis、当該競技の全試合を表示する。
+Playerと競技を固定する。中央Navigation Titleは`Rotation 詳細`、`9-Ball 詳細`、`10-Ball 詳細`、`JPA 9-Ball 詳細`、`14-1 詳細`、`3 Cushion 詳細`の競技別表示とする。標準Navigation戻るでPlayer情報へ戻り、画面内へ同義の戻るlinkを重複配置しない。
+
+上からcompact Player＋競技通算summary、主要指標1段、初期折りたたみの推移、自己ベスト最大3件1段、直近3試合、Rival Analysis、当該競技の全試合を表示する。競技通算と重複する「今の状態」見出し、badge、勝敗summary、W/L表示は置かない。
+
+9-Ball／10-Ball／Rotation／JPA 9-Ballは4指標を横1段4分割、14-1は3指標を横1段3分割、3 Cushionは2指標を横1段2分割する。自己ベストは初期最大3件を1つのsummary block内で件数どおりに分割し、2件時に空枠を作らない。横scrollは禁止する。
 
 自己ベストと最近の試合はMatch Detailへ遷移する。全試合から既存Player目線Single Match Analysisへ進める。Rival Analysisは選択競技を引き継ぐ。
 
 ## Visual and accessibility contract
 
-iPhone portrait／390pxを優先し、2列カード、ellipsis、十分なtap領域、横overflowなしを維持する。白背景カードは明示的な濃色textと`-webkit-text-fill-color`を持ち、iOSのappearance継承でPlayer名や本文が白抜けしない。欠損数値は`—`、空状態は`データなし`。
+iPhone portrait／390pxを優先し、競技別通算一覧、1段summary、ellipsis、十分なtap領域、横overflowなしを維持する。白背景カードは明示的な濃色textと`-webkit-text-fill-color`を持ち、iOSのappearance継承でPlayer名や本文が白抜けしない。欠損数値は`—`、空状態は`データなし`。
 
 ## Compatibility and prohibitions
 
