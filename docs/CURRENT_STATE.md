@@ -1,5 +1,16 @@
 # CueScore Apps Current State
 
+## TestFlight Build 7 内部配信完了／実iPhone確認待ち（2026年8月19日）
+
+- Build 7候補のSimulator UIレビュー修正を含むsource commit `a25c7c692637266f12abcc89e895bc64c65dce24`から、Marketing Version `1.0`／Build Number `7`を作成した。
+- Native source／generated bundle／Xcode copied assetsのSHA-256一致を確認。全自動テストは`194 pass / 0 fail / 0 skipped`、iOS Simulator Debug／Releaseはいずれも`BUILD SUCCEEDED`。
+- Signed Release ArchiveとApp Store ValidateをPASSし、Xcode Organizerから`TestFlight Internal Only`としてアップロードした。Apple処理完了後、輸出コンプライアンスは「上記のアルゴリズムのどれでもない」で保存した。
+- Build 7は既存内部グループ`CueScore Internal Testers`に含まれ、App Store Connect上の状態は「テスト中」。Product OwnerはiPhoneのTestFlightからBuild 7へ更新可能。
+- Build 7の実iPhone確認はpending。Player情報／6競技詳細、白背景上の文字、主要指標、最近の調子、自己ベスト、最近の試合、Rival／全試合入口等を未確認のままPASS扱いにしない。
+- Build Number `1`〜`7`は再利用しない。次の配布Buildは`8`以上とする。
+- App Store Review提出と一般公開は実施していない。価格、配信地域、App Privacy、EUトレーダーステータス、公開用スクリーンショットの最終設定も実施していない。
+- 配信記録：`docs/implementation/CueScore_Build7_TestFlight_Distribution_2026-08-19.md`。
+
 ## Build 7候補：Simulator UIレビュー修正・再確認完了（2026年8月19日）
 
 - Product Owner採用により、9-Ball／10-BallのPlayer分析用マス割り率を「正式マス割り回数 ÷ 本人がブレイクした全判定可能完了ラック数」へ修正した。通常交代、miss、ファール、break foul、break失敗を分母から除外しない。正式マス割り成功条件は変更していない。
@@ -10,7 +21,7 @@
 - iPhone 17 Simulator（portrait、390px前後）で、プレーヤー情報と9-Ball／10-Ball／Rotation／14-1／JPA 9-Ball／3 Cushionの7画面を再確認した。競技別Title、白背景上の文字、6競技通算、主要指標、折りたたみ推移、自己ベスト、最近の試合、Rival／全試合入口、横overflowなしをPASS。スクリーンショットは`/Users/Ludique/Documents/Codex/CueScore_Build7_UI_Review_Fixes_2026-08-19/`へ保存した。実iPhone確認は未実施であり、PASS扱いにしない。
 - 正式決定：`docs/official/34_CueScore_v1.0_Build7_Masuwari_Rate_TwoLevel_Player_UI_Decision.md`。仕様：`docs/official/35_CueScore_v1.0_Build7_Masuwari_Rate_TwoLevel_Player_UI_Spec.md`。
 - 実装記録：`docs/implementation/CueScore_Build7_Candidate_Masuwari_Rate_TwoLevel_Player_UI_Implementation_2026-08-19.md`。
-- Marketing Versionは`1.0`、Build Numberは`6`のまま。Build 7 Archive、Validate、TestFlight upload、App Review、一般公開は実施していない。
+- 候補実装完了時点ではMarketing Version `1.0`／Build Number `6`だった。その後、上記の別配信GateでBuild Number `7`を設定し、Archive／Validate／TestFlight内部配信まで完了した。実iPhone確認はpending。App Reviewと一般公開は未実施。
 
 ## Build 6 実iPhone報告：マス割り率100%問題の監査完了／仕様判断待ち（2026年8月19日）
 
