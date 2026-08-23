@@ -7,7 +7,7 @@
   const esc=value=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
   const labels={
     "9ball":"9-Ball","10ball":"10-Ball",rotation:"Rotation",jpa9:"JPA 9-Ball",straightPool:"14-1",threeCushion:"3 Cushion",
-    winRate:"勝率",shotRate:"シュート率",breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",highRun:"ハイラン",average:"アベレージ",avgFouls:"平均ファール",
+    winRate:"勝率",shotRate:"シュート率",breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",highRun:"ハイラン",average:"アベレージ",avgFouls:"平均ファール/ラック",
     score:"1試合最高得点",masuwariCount:"1試合最多マス割り",leastWinningInnings:"最少イニング勝利"
   };
   const percentKeys=new Set(["winRate","shotRate","breakInRate","masuwariRate"]);
@@ -27,7 +27,7 @@
     completedTurns:(record,side)=>ctx().completedTurns(record,side),discipline:record=>ctx().discipline(record),
     masuwariCounts:record=>window.rackGameMasuwariCountsV1?.(record)||{1:0,2:0}
   });
-  const fmt=(key,value)=>value==null?"—":percentKeys.has(key)?`${Math.round(value)}%`:key==="avgFouls"?Number(value).toFixed(1):key==="average"?Number(value).toFixed(3).replace(/0+$/,"").replace(/\.$/,""):String(Math.round(value*100)/100);
+  const fmt=(key,value)=>value==null?"—":percentKeys.has(key)?`${Math.round(value)}%`:key==="avgFouls"?Number(value).toFixed(2):key==="average"?Number(value).toFixed(3).replace(/0+$/,"").replace(/\.$/,""):String(Math.round(value*100)/100);
   const metricDefs=discipline=>(metricsByDiscipline[discipline]||[]).map(key=>({key,label:labels[key],higher:key!=="avgFouls"}));
   const recordDate=record=>{const d=new Date(record?.endedAt||record?.playedAt||record?.startedAt||0);return Number.isNaN(d.getTime())?"日付なし":`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,"0")}/${String(d.getDate()).padStart(2,"0")}`;};
   function recordMetric(record,player,key,discipline,h){

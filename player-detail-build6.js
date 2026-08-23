@@ -8,7 +8,7 @@
     {id:"rotation",label:"Rotation",asset:"assets/icons/games/game-rotation.svg"},{id:"straightPool",label:"14-1",asset:"assets/icons/games/game-14-1.svg"},
     {id:"jpa9",label:"JPA 9-Ball",asset:"assets/icons/games/game-jpa-9ball.svg"},{id:"threeCushion",label:"3 Cushion",asset:"assets/icons/games/game-3cushion.svg"}
   ];
-  const labels={winRate:"勝率",shotRate:"シュート率",breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",highRun:"ハイラン",average:"アベレージ",avgFouls:"平均ファール"};
+  const labels={winRate:"勝率",shotRate:"シュート率",breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",highRun:"ハイラン",average:"アベレージ",avgFouls:"平均ファール/ラック"};
   const metricKeys={"9ball":["shotRate","breakInRate","masuwariRate","avgFouls"],"10ball":["shotRate","breakInRate","masuwariRate","avgFouls"],rotation:["shotRate","breakInRate","highRun","avgFouls"],jpa9:["average","breakInRate","highRun","avgFouls"],straightPool:["average","highRun","avgFouls"],threeCushion:["average","highRun"]};
   const bestLabels={shotRate:"最高シュート率",breakInRate:"最高ブレイクイン率",masuwariRate:"最高マス割り率",masuwariCount:"1試合最多マス割り",highRun:"最大ハイラン",score:"1試合最高得点",average:"最高アベレージ",leastWinningInnings:"最少イニング勝利"};
   const percent=new Set(["winRate","shotRate","breakInRate","masuwariRate"]);
@@ -23,7 +23,7 @@
   const dateValue=record=>new Date(record?.endedAt||record?.playedAt||record?.startedAt||0).getTime()||0;
   const dateText=record=>{const d=new Date(dateValue(record));return dateValue(record)?`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,"0")}/${String(d.getDate()).padStart(2,"0")}`:"日付なし";};
   const helpers={side,won,metric,recordPlayer,completedTurns,discipline,masuwariCounts:record=>window.rackGameMasuwariCountsV1?.(record)||{1:0,2:0}};
-  const fmt=(key,value)=>value==null?"—":percent.has(key)?`${Math.round(value)}%`:key==="avgFouls"?Number(value).toFixed(1):key==="average"?Number(value).toFixed(3).replace(/0+$/," ").trim().replace(/\.$/,""):String(Math.round(value*100)/100);
+  const fmt=(key,value)=>value==null?"—":percent.has(key)?`${Math.round(value)}%`:key==="avgFouls"?Number(value).toFixed(2):key==="average"?Number(value).toFixed(3).replace(/0+$/," ").trim().replace(/\.$/,""):String(Math.round(value*100)/100);
   const avatar=player=>typeof playerAvatarHtmlV2==="function"?playerAvatarHtmlV2(player,"player-avatar-v2"):"";
   const opponent=(record,s)=>recordPlayer(record,s===1?2:1);
   const score=(record,s)=>Number(metric(record,s)?.score??recordPlayer(record,s)?.score)||0;

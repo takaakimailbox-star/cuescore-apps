@@ -4,6 +4,8 @@ import fs from "node:fs";
 
 const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const script=fs.readFileSync(new URL("../player-detail-build6.js",import.meta.url),"utf8");
+assert.match(script,/avgFouls:"平均ファール\/ラック"/);
+assert.match(script,/key==="avgFouls"\?Number\(value\)\.toFixed\(2\)/);
 const css=fs.readFileSync(new URL("../player-detail-build6.css",import.meta.url),"utf8");
 const nativeBuild=fs.readFileSync(new URL("../scripts/build-native-web.mjs",import.meta.url),"utf8");
 const sw=fs.readFileSync(new URL("../sw.js",import.meta.url),"utf8");

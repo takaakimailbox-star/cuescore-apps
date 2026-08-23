@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Build 8候補 Follow-up：平均ファール/ラック実装・検証完了（2026年8月24日）
+
+- Product Owner採用により、3 Cushionを除く5競技の主要指標を`平均ファール/ラック`へ変更した。計算はeligible recordの総ファール数 ÷ 判定可能な完了ラック総数、表示は小数第2位までとする。
+- 9-Ball／10-Ballは完了`rackResults`または`rack_end`、Rotation／JPAは`rack_completed`／`rack_end`と`game_end`最終rack、14-1は明示的な再ラック境界だけを分母とする。途中rackと推定値は数えない。
+- 境界証拠のない旧・簡易recordとSample Data v3.1のRotation／14-1／JPA points recordはineligibleで`—`。9-Ball／10-Ball sampleは明示的`rackResults`を利用する。Player／Match／Backup／event schemaは変更しない。
+- 3 Cushionでは指標を引き続き非表示。分析Navigationは変更せず、現行Player起点を磨く案の具体化だけをImplementation Recordへ記録する。
+- 自動テスト`206 pass / 0 fail / 0 skipped`、native source／generated bundle／Xcode copied asset一致、iOS Simulator Debug／Releaseとも`BUILD SUCCEEDED`。390×844 portraitでRotationの4指標1段と長い表示名、3 Cushionの2指標・該当指標非表示・横overflowなしを目視確認した。
+- 正式決定：`docs/official/38_CueScore_v1.0_Build8_Average_Fouls_Per_Rack_Decision.md`。仕様：`docs/official/39_CueScore_v1.0_Build8_Average_Fouls_Per_Rack_Spec.md`。
+
 ## Build 8候補：Build 7実iPhoneレビュー修正 実装・Simulator検証完了／実iPhone再確認待ち（2026年8月23日）
 
 - 基準`main`は`3286992b739eaf17f36671214a2433d34d95181b`。Build 7実iPhoneレビューで採用されたPlayer journey、Navigation、写真選択、3 Cushion、ブレイク後履歴位置の修正をBuild 8候補sourceへ実装した。
@@ -9,7 +18,7 @@
 - Player削除は閲覧画面からPlayer編集へ移動。写真確定後はavatar chooserを閉じて登録／編集previewへ直接戻す。
 - 3 Cushionは`+1／交代／戻る`の1段3列。確定0は`-`、未到達／未確定は空白。Undoと競技ルールは変更していない。
 - ブレイク結果close後は現在rack dividerまたは同rack最新行を対象に履歴位置を補正する。
-- 平均ファールの現行分母は対象試合数。名称・計算変更は未採用で実装していない。分析導線再設計は監査と3案提示までで、追加実装していない。
+- 当時の平均ファール分母は対象試合数だった。後続Official 038／039で`平均ファール/ラック`へ正式変更した。分析導線再設計は未実装。
 - 自動テスト`202 pass / 0 fail / 0 skipped`、iOS Simulator Debug／Releaseともに`BUILD SUCCEEDED`。iPhone 17 SimulatorでPlayer情報、9-Ball詳細、固定履歴、compact操作、1階層Backを確認した。
 - 実iPhoneではTake Photo、Photo Library／Choose File復帰、Swipe Back、3 Cushion、ブレイク後rack位置、6競技、Backup／Restore、通常／サンプルを再確認する。Build 8 TestFlight upload、App Review、一般公開は未実施。
 - 正式決定：`docs/official/36_CueScore_v1.0_Build8_iPhone_Review_Decision.md`。仕様：`docs/official/37_CueScore_v1.0_Build8_iPhone_Review_Spec.md`。実装記録：`docs/implementation/CueScore_Build8_Candidate_iPhone_Review_Implementation_2026-08-23.md`。

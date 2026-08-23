@@ -61,6 +61,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/35_CueScore_v1.0_Build7_Masuwari_Rate_TwoLevel_Player_UI_Spec.md`
 - `official/36_CueScore_v1.0_Build8_iPhone_Review_Decision.md`
 - `official/37_CueScore_v1.0_Build8_iPhone_Review_Spec.md`
+- `official/38_CueScore_v1.0_Build8_Average_Fouls_Per_Rack_Decision.md`
+- `official/39_CueScore_v1.0_Build8_Average_Fouls_Per_Rack_Spec.md`
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and
