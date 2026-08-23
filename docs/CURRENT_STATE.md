@@ -1,12 +1,22 @@
 # CueScore Apps Current State
 
+## TestFlight Build 8 内部配信完了／実iPhone確認待ち（2026年8月24日）
+
+- Pattern A最終化commit `02401628ee9579eb3c8ac9b5c8244d268ed29dde`とBuild Number 8 commit `b63aca2686b05b1bc5a6489f86a2f5fedc648e4e`を`origin/main`へpushし、Archive sourceとremoteの一致を確認した。
+- 全自動テスト`207 pass / 0 fail / 0 skipped`、native asset整合、iOS Simulator Debug／Release、Signed Release Archive、App Store ValidateをすべてPASSした。
+- Xcode Organizerから`TestFlight Internal Only`としてVersion `1.0`／Build `8`をアップロード。Apple処理完了後、輸出コンプライアンスは正式回答「上記のアルゴリズムのどれでもない」で保存した。
+- Build 8は既存内部グループ`CueScore Internal Testers`に含まれ、App Store Connect上の状態は`テスト中`。Product OwnerはiPhoneのTestFlightからBuild 8へ更新可能。
+- 実iPhone確認はpending。Take Photo、写真選択復帰、Navigation／Swipe Back、3 Cushion、ブレイク後rack位置、6競技、通常／サンプル、Backup／Restore等を未確認のままPASS扱いにしない。
+- App Store Review提出、外部テスター、一般公開、価格／配信地域等の公開設定変更は実施していない。Build Number `1`〜`8`は再利用しない。
+- 配布記録：`docs/implementation/CueScore_Build8_TestFlight_Distribution_2026-08-24.md`。
+
 ## Build 8 Pattern A採用：Navigation最終化・配布前Gate PASS（2026年8月24日）
 
 - Product Ownerは現行Player起点を維持するPattern AをBuild 8へ採用した。`分析`ラベル、`対戦相手別の成績`、compactな`詳細／分析`を維持し、Pattern B、独立Analysis Home、タブ、大規模再構成は採用しない。
 - Navigation監査で、競技固定全試合から開いたMatch AnalysisのBackだけがPlayer情報へ飛ぶ差分を確認。Player ID、競技ID、Match ID、viewer Player IDをruntime contextで保持し、同じ競技固定全試合へ1階層で戻す最小修正を行った。
 - Match Detail→競技固定全試合、Rival Analysis→対戦相手別の成績→競技詳細、競技固定全試合→競技詳細→Player情報の既存契約は維持する。左上BackとSwipe Backは同じ表示中Back controlを使用する。
 - Official 036／037がPattern Aの画面構成とラベルをすでに正式化しているため、不要なOfficial文書は追加しない。提案記録は`docs/proposals/CueScore_Player_First_Analytics_Navigation_Proposal_2026-08-24.md`。
-- 全自動テスト`207 pass / 0 fail / 0 skipped`、source／generated／Xcode copied indexのSHA-256一致、iOS Simulator Debug／Releaseとも`BUILD SUCCEEDED`。Marketing Version `1.0`／Build Number `8`、Bundle ID、Team、iPhone only、iOS 15.0を実効設定で確認した。Archive／Validate／TestFlight Internal Onlyは未実施。実iPhone未確認項目をPASS扱いにしない。
+- 全自動テスト`207 pass / 0 fail / 0 skipped`、source／generated／Xcode copied indexのSHA-256一致、iOS Simulator Debug／Releaseとも`BUILD SUCCEEDED`。Marketing Version `1.0`／Build Number `8`、Bundle ID、Team、iPhone only、iOS 15.0を実効設定で確認した。その後、上記の別配布GateでArchive／Validate／TestFlight Internal OnlyまでPASSした。実iPhone未確認項目をPASS扱いにしない。
 
 ## Build 8候補 Follow-up：平均ファール/ラック実装・検証完了（2026年8月24日）
 
