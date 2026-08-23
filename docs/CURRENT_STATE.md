@@ -6,7 +6,7 @@
 - Navigation監査で、競技固定全試合から開いたMatch AnalysisのBackだけがPlayer情報へ飛ぶ差分を確認。Player ID、競技ID、Match ID、viewer Player IDをruntime contextで保持し、同じ競技固定全試合へ1階層で戻す最小修正を行った。
 - Match Detail→競技固定全試合、Rival Analysis→対戦相手別の成績→競技詳細、競技固定全試合→競技詳細→Player情報の既存契約は維持する。左上BackとSwipe Backは同じ表示中Back controlを使用する。
 - Official 036／037がPattern Aの画面構成とラベルをすでに正式化しているため、不要なOfficial文書は追加しない。提案記録は`docs/proposals/CueScore_Player_First_Analytics_Navigation_Proposal_2026-08-24.md`。
-- 全自動テスト`207 pass / 0 fail / 0 skipped`、source／generated／Xcode copied indexのSHA-256一致、iOS Simulator Debug／Releaseとも`BUILD SUCCEEDED`。Archive／Validate／TestFlight Internal Onlyは未実施。実iPhone未確認項目をPASS扱いにしない。
+- 全自動テスト`207 pass / 0 fail / 0 skipped`、source／generated／Xcode copied indexのSHA-256一致、iOS Simulator Debug／Releaseとも`BUILD SUCCEEDED`。Marketing Version `1.0`／Build Number `8`、Bundle ID、Team、iPhone only、iOS 15.0を実効設定で確認した。Archive／Validate／TestFlight Internal Onlyは未実施。実iPhone未確認項目をPASS扱いにしない。
 
 ## Build 8候補 Follow-up：平均ファール/ラック実装・検証完了（2026年8月24日）
 
