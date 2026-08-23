@@ -9,6 +9,6 @@ assert.match(html, /function addThreeCushionPointV1\([\s\S]*?saveAndDo\(/);
 assert.match(html, /function switchThreeCushionPlayerV1\([\s\S]*?saveAndDo\(/);
 assert.match(html, /threeCushionUndoButton\.disabled = undoHistory\.length === 0/);
 assert.match(html, /el\("threeCushionUndoV1"\)\?\.addEventListener\("click", undo\)/);
-assert.match(html, /\.three-cushion-undo-v1\{grid-column:1\/-1/);
+assert.match(html, /\.three-cushion-actions-v1 \.three-cushion-undo-v1\{grid-column:auto/);
 
 console.log("3 Cushion undo checks passed");

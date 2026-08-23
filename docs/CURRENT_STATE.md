@@ -1,5 +1,19 @@
 # CueScore Apps Current State
 
+## Build 8候補：Build 7実iPhoneレビュー修正 実装・Simulator検証完了／実iPhone再確認待ち（2026年8月23日）
+
+- 基準`main`は`3286992b739eaf17f36671214a2433d34d95181b`。Build 7実iPhoneレビューで採用されたPlayer journey、Navigation、写真選択、3 Cushion、ブレイク後履歴位置の修正をBuild 8候補sourceへ実装した。
+- Take Photoクラッシュの直接原因はiOS `Info.plist`の`NSCameraUsageDescription`欠落。必須privacy usage descriptionを追加し、既存file input、Photo Library、Choose File、画像圧縮、avatar schemaは変更していない。実iPhone撮影再確認前はPASS扱いにしない。
+- 競技詳細から「最近の試合」を削除し、競技アイコン付きTitle、Rival／全試合入口を維持。競技詳細起点の全試合はPlayer／競技固定でselectorを非表示、各カード右端を「詳細」「分析」にcompact化した。
+- Backは`競技固定履歴 → 同競技詳細 → Player情報`の1階層単位へ修正。edge Swipe Backは同じBack controlを使用し、指追従／完了／cancel motionを追加した。
+- Player削除は閲覧画面からPlayer編集へ移動。写真確定後はavatar chooserを閉じて登録／編集previewへ直接戻す。
+- 3 Cushionは`+1／交代／戻る`の1段3列。確定0は`-`、未到達／未確定は空白。Undoと競技ルールは変更していない。
+- ブレイク結果close後は現在rack dividerまたは同rack最新行を対象に履歴位置を補正する。
+- 平均ファールの現行分母は対象試合数。名称・計算変更は未採用で実装していない。分析導線再設計は監査と3案提示までで、追加実装していない。
+- 自動テスト`202 pass / 0 fail / 0 skipped`、iOS Simulator Debug／Releaseともに`BUILD SUCCEEDED`。iPhone 17 SimulatorでPlayer情報、9-Ball詳細、固定履歴、compact操作、1階層Backを確認した。
+- 実iPhoneではTake Photo、Photo Library／Choose File復帰、Swipe Back、3 Cushion、ブレイク後rack位置、6競技、Backup／Restore、通常／サンプルを再確認する。Build 8 TestFlight upload、App Review、一般公開は未実施。
+- 正式決定：`docs/official/36_CueScore_v1.0_Build8_iPhone_Review_Decision.md`。仕様：`docs/official/37_CueScore_v1.0_Build8_iPhone_Review_Spec.md`。実装記録：`docs/implementation/CueScore_Build8_Candidate_iPhone_Review_Implementation_2026-08-23.md`。
+
 ## TestFlight Build 7 内部配信完了／実iPhone確認待ち（2026年8月19日）
 
 - Build 7候補のSimulator UIレビュー修正を含むsource commit `a25c7c692637266f12abcc89e895bc64c65dce24`から、Marketing Version `1.0`／Build Number `7`を作成した。
@@ -255,7 +269,7 @@
 - サンプルデータ生成時のJPA SLは先取点から公式対応表で決定し、SLと先取点の整合を保証する。
 - 正式決定記録：`docs/official/11_CueScore_v1.0RC_JPA9_MatchPoint_Decision.md`。
 
-Updated: 2026-08-18
+Updated: 2026-08-23
 Status: Living operational reference
 
 ## Step 7B Native iOS Foundation（2026年8月15日）

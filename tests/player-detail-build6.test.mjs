@@ -22,8 +22,9 @@ test("level one is Player Info with all six discipline summary rows",()=>{
   assert.match(script,/records\.length\?`\$\{wins\}勝\$\{losses\}敗`:"勝敗 —"/);
 });
 
-test("level two fixes a discipline and contains the adopted analytics journey",()=>{
-  for(const text of ["通算","主要指標","推移","自己ベスト","最近の試合","対戦相手別の成績","全試合"]){assert.match(script,new RegExp(text));}
+test("level two fixes a discipline and contains the Build 8 analytics journey",()=>{
+  for(const text of ["通算","主要指標","推移","自己ベスト","対戦相手別の成績","全試合"]){assert.match(script,new RegExp(text));}
+  assert.doesNotMatch(script,/最近の試合/);
   assert.doesNotMatch(script,/プレーヤー情報へ戻る/);
   assert.doesNotMatch(script,/今の状態/);
   assert.doesNotMatch(script,/pd7-now/);
@@ -42,16 +43,16 @@ test("all disciplines keep the approved metric sets",()=>{
   assert.match(script,/threeCushion:\["average","highRun"\]/);
 });
 
-test("detail density is collapsed and recent content is limited",()=>{
+test("detail density is collapsed and duplicate recent matches are removed",()=>{
   assert.match(script,/bests\.slice\(0,3\)/);
-  assert.match(script,/records\.slice\(0,3\)/);
+  assert.doesNotMatch(script,/records\.slice\(0,3\)/);
   assert.match(script,/data-pd7-trend hidden/);
   assert.match(script,/value==null\?"—"/);
 });
 
 test("detail navigation title is game specific and the standard back button owns navigation",()=>{
   assert.match(html,/id="playerStatsTitle"/);
-  assert.match(script,/header\(`\$\{def\(active\)\.label\} 詳細`,""\)/);
+  assert.match(script,/header\(`\$\{def\(active\)\.label\} 詳細`,"",def\(active\)\.asset\)/);
   assert.match(script,/playerStatsBackBtn/);
   for(const text of ["Rotation","9-Ball","10-Ball","JPA 9-Ball","14-1","3 Cushion"])assert.match(script,new RegExp(text));
 });

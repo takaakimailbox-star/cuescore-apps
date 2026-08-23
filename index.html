@@ -15,6 +15,11 @@
   <link rel="stylesheet" href="./analysis-final-rc.css" />
   <link rel="stylesheet" href="./analysis-build4.css" />
   <link rel="stylesheet" href="./player-detail-build6.css" />
+  <style id="build8PlayerTitleV1">
+  .pd8-title-with-icon{display:flex!important;align-items:center;justify-content:center;gap:7px}.pd8-title-with-icon img{width:25px;height:25px;flex:0 0 auto}
+  .pd8-discipline-fixed .player-history-disciplines-v4{display:none!important}
+  .pd8-history-match{position:relative}.pd8-history-match .journey-match-v3{width:100%;padding-right:62px!important}.pd8-history-match .journey-match-open-v3,.pd8-history-match .journey-match-analysis-v5{position:absolute!important;right:9px!important;width:46px!important;height:28px!important;min-height:28px!important;margin:0!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:center!important;border:1px solid #d9d9d6!important;border-radius:8px!important;background:#fff!important;color:#171717!important;-webkit-text-fill-color:#171717!important;font-size:10px!important;font-weight:750!important;line-height:1!important;letter-spacing:0!important;writing-mode:horizontal-tb!important;transform:none!important;z-index:2}.pd8-history-match .journey-match-open-v3{top:8px!important}.pd8-history-match .journey-match-analysis-v5{top:auto!important;bottom:8px!important}
+  </style>
   <title>CueScore Apps v1.0</title>
   <style>
     :root {
@@ -7821,9 +7826,9 @@ body {
 .three-cushion-game-v1 .pro-player-panel{border-color:#dededb!important;background:#fff!important;color:#171717!important}.three-cushion-game-v1 .pro-player-panel.active{border-color:#171717!important}.three-cushion-game-v1 .pro-player-panel.active *{color:#171717!important}
 .three-cushion-game-v1 .pro-stats [hidden]{display:none!important}
 .three-cushion-table-v1{width:100%;font-variant-numeric:tabular-nums}.three-cushion-head-v1,.three-cushion-row-v1{display:grid;grid-template-columns:1fr 54px 1fr;align-items:center;text-align:center;border-bottom:1px solid #ececea;min-height:43px}.three-cushion-head-v1{position:sticky;top:0;background:#fff;z-index:2;font-size:13px;font-weight:700}.three-cushion-row-v1>span{font-size:15px}.three-cushion-row-v1>span:first-child{text-align:left;padding-left:20%}.three-cushion-row-v1>span:last-child{text-align:right;padding-right:20%}.three-cushion-row-v1 i{display:inline-block;width:1px;height:15px;background:#b8b8b4;margin:0 12px;vertical-align:middle}.three-cushion-row-v1 b{font-weight:500}.three-cushion-row-v1 b.current-v1{width:34px;height:34px;border:2px solid #171717;border-radius:50%;display:grid;place-items:center;justify-self:center}
-.three-cushion-actions-v1{display:grid;grid-template-columns:1fr 1fr;gap:12px}.three-cushion-actions-v1[hidden]{display:none!important}.three-cushion-actions-v1 button{min-height:92px;border:1px solid #dededb;border-radius:14px;background:#fff;color:#171717;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:inherit}.three-cushion-actions-v1 strong{font-size:34px}.three-cushion-actions-v1 span{font-size:13px;font-weight:600}.three-cushion-actions-v1 .three-cushion-undo-v1{grid-column:1/-1;min-height:54px;flex-direction:row;gap:8px}.three-cushion-undo-v1 svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.three-cushion-undo-v1:disabled{opacity:.42;cursor:default}
+.three-cushion-actions-v1{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.three-cushion-actions-v1[hidden]{display:none!important}.three-cushion-actions-v1 button{min-height:72px;border:1px solid #dededb;border-radius:14px;background:#fff;color:#171717;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px 3px;font:inherit}.three-cushion-actions-v1 strong{font-size:25px}.three-cushion-actions-v1 span{font-size:10px;font-weight:600;line-height:1.2}.three-cushion-actions-v1 .three-cushion-undo-v1{grid-column:auto;min-height:72px;flex-direction:column;gap:3px}.three-cushion-undo-v1 svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.three-cushion-undo-v1:disabled{opacity:.42;cursor:default}
 .three-cushion-game-v1 .pro-bottom-dock{padding-top:10px!important}
-@media(max-width:430px){.cue-discipline-switcher-v1{grid-template-columns:repeat(6,minmax(0,1fr))!important}.cue-discipline-switcher-v1 .cue-ball-icon-v1{width:26px;height:26px;font-size:10px}.three-cushion-run-v1{top:178px}.three-cushion-actions-v1 button{min-height:82px}.three-cushion-actions-v1 .three-cushion-undo-v1{min-height:50px}}
+@media(max-width:430px){.cue-discipline-switcher-v1{grid-template-columns:repeat(6,minmax(0,1fr))!important}.cue-discipline-switcher-v1 .cue-ball-icon-v1{width:26px;height:26px;font-size:10px}.three-cushion-run-v1{top:178px}.three-cushion-actions-v1 button,.three-cushion-actions-v1 .three-cushion-undo-v1{min-height:68px}}
 </style>
   <style id="cueScoreBootStylesV2">
     html.cue-app-booting-v2,
@@ -8657,7 +8662,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-final-acceptance-rc1"></script>
+  <script src="./demo-data.js?v=2.0-build8-candidate-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -11064,7 +11069,7 @@ let matchRecordsRawCacheV152 = null;
     playerEditorAvatarV2 = normalizePlayerAvatarV2(player?.avatar);
     updatePlayerEditorAvatarPreviewV2();
     updatePlayerEditorMemoCountV2();
-    el("playerEditorDeleteBtn").classList.add("hidden");
+    el("playerEditorDeleteBtn").classList.toggle("hidden", !player);
     setTimeout(() => el("playerEditorName")?.focus(), 0);
   }
 
@@ -11352,7 +11357,11 @@ let matchRecordsRawCacheV152 = null;
     const file=event.target.files?.[0]; if (!file) return;
     try {
       const avatar={type:"photo",dataUrl:await compressPlayerPhotoV5(file)};
-      playerEditorAvatarV2=avatar; ensurePlayerAvatarChooserV5().setPhotoV5(avatar); updatePlayerEditorAvatarPreviewV2();
+      playerEditorAvatarV2=avatar;
+      const chooser=ensurePlayerAvatarChooserV5();
+      chooser.setPhotoV5(avatar);
+      chooser.classList.add("hidden");
+      updatePlayerEditorAvatarPreviewV2();
     } catch (error) {showToast("写真を使用できません",error.message || "別の画像を選択してください");}
     event.target.value="";
   });
@@ -12985,7 +12994,7 @@ let matchRecordsRawCacheV152 = null;
     const log=el("proTurnLog");
     if(!log||isThreeCushionV1())return;
     const currentRack=String(Math.max(1,Number(rack)||1));
-    const rackRows=[...log.querySelectorAll(`.pro-log-row[data-rack="${currentRack}"]`)];
+    const rackRows=[...log.querySelectorAll(`.pro-rack-divider[data-rack="${currentRack}"],.pro-log-row[data-rack="${currentRack}"]`)];
     const target=rackRows.at(-1)||log.querySelector(".pro-log-row.active-row")||log.lastElementChild;
     if(!(target instanceof HTMLElement))return;
     const logRect=log.getBoundingClientRect();
@@ -13005,7 +13014,7 @@ let matchRecordsRawCacheV152 = null;
       const live = innings.find(item => Number(item.inning) === currentInning) || {inning:currentInning,p1:null,p2:null,p1Total:0,p2Total:0};
       const items = innings.some(item => Number(item.inning) === currentInning) ? innings : [...innings,live];
       log.innerHTML = `<div class="three-cushion-table-v1"><div class="three-cushion-head-v1"><span>${escapeRecordText(playerName(1))}</span><span>INN</span><span>${escapeRecordText(playerName(2))}</span></div>${items.map(item=>{
-        const cell=points=>Number.isFinite(Number(points))&&points!==null&&Number(points)>0?Number(points):"-";
+        const cell=points=>points==null?"":Number.isFinite(Number(points))&&Number(points)>0?Number(points):"-";
         return `<div class="three-cushion-row-v1"><span>${cell(item.p1)}</span><b class="${Number(item.inning)===currentInning?"current-v1":""}">${item.inning}</b><span>${cell(item.p2)}</span></div>`;
       }).join("")}</div>`;
       requestAnimationFrame(()=>{log.scrollTop=log.scrollHeight;});
@@ -19170,7 +19179,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-final-acceptance-rc1";
+    const PWA_VERSION = "2.0-build8-candidate-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -27437,6 +27446,8 @@ body.cue-edge-back-animating-v2 .app{
   animation:cue-edge-back-out-v2 220ms cubic-bezier(.22,.72,.28,1) forwards!important;
   will-change:transform,opacity;
 }
+body.cue-edge-back-tracking-v3 .app{pointer-events:none!important;transform:translateX(var(--cue-edge-back-x,0px));opacity:calc(1 - var(--cue-edge-back-progress,0)*.22);will-change:transform,opacity;transition:none!important}
+body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.22,.72,.28,1),opacity 180ms ease!important}
 @keyframes cue-edge-back-out-v2{
   from{transform:translateX(0);opacity:1}
   to{transform:translateX(34vw);opacity:0}
@@ -27511,11 +27522,28 @@ body.cue-edge-back-animating-v2 .app{
   };
 
   let backTransitionActive = false;
+  const clearInteractiveBack = () => {
+    const appRoot=document.querySelector(".app");
+    document.body.classList.remove("cue-edge-back-tracking-v3","cue-edge-back-cancelling-v3");
+    appRoot?.style.removeProperty("--cue-edge-back-x");appRoot?.style.removeProperty("--cue-edge-back-progress");
+  };
+  const cancelInteractiveBack = () => {
+    const appRoot=document.querySelector(".app");if(!appRoot)return clearInteractiveBack();
+    document.body.classList.add("cue-edge-back-cancelling-v3");
+    appRoot.style.setProperty("--cue-edge-back-x","0px");appRoot.style.setProperty("--cue-edge-back-progress","0");
+    setTimeout(clearInteractiveBack,190);
+  };
   const animateBack = backButton => {
     if (!backButton || backTransitionActive) return;
     backTransitionActive = true;
-    document.body.classList.add("cue-edge-back-animating-v2");
     const appRoot = document.querySelector(".app");
+    if(document.body.classList.contains("cue-edge-back-tracking-v3")){
+      document.body.classList.add("cue-edge-back-cancelling-v3");
+      appRoot?.style.setProperty("--cue-edge-back-x","100vw");appRoot?.style.setProperty("--cue-edge-back-progress","1");
+      setTimeout(()=>{backButton.click();clearInteractiveBack();backTransitionActive=false;},190);
+      return;
+    }
+    document.body.classList.add("cue-edge-back-animating-v2");
     let completed = false;
     const finish = () => {
       if (completed) return;
@@ -27547,6 +27575,7 @@ body.cue-edge-back-animating-v2 .app{
       backButton,
       cancelled: false
     };
+    document.body.classList.add("cue-edge-back-tracking-v3");
   }, {passive:true, capture:true});
 
   document.addEventListener("touchmove", event => {
@@ -27556,8 +27585,13 @@ body.cue-edge-back-animating-v2 .app{
     const dy = touch.clientY - gesture.startY;
     if (dx < -10 || (Math.abs(dy) > 18 && Math.abs(dy) > Math.max(1, dx) * .8)) {
       gesture.cancelled = true;
+      cancelInteractiveBack();
+      return;
     }
-  }, {passive:true, capture:true});
+    const progress=Math.max(0,Math.min(1,dx/Math.max(1,innerWidth)));
+    const appRoot=document.querySelector(".app");appRoot?.style.setProperty("--cue-edge-back-x",`${Math.max(0,dx)}px`);appRoot?.style.setProperty("--cue-edge-back-progress",String(progress));
+    if(dx>0&&event.cancelable)event.preventDefault();
+  }, {passive:false, capture:true});
 
   document.addEventListener("touchend", event => {
     if (!gesture || event.changedTouches.length !== 1) {
@@ -27566,20 +27600,17 @@ body.cue-edge-back-animating-v2 .app{
     }
     const completedGesture = gesture;
     resetGesture();
-    if (completedGesture.cancelled || isTransitionBlocked(completedGesture.backButton)) return;
+    if (completedGesture.cancelled || isTransitionBlocked(completedGesture.backButton)){cancelInteractiveBack();return;}
     const touch = event.changedTouches[0];
     const dx = touch.clientX - completedGesture.startX;
     const dy = touch.clientY - completedGesture.startY;
     const elapsed = performance.now() - completedGesture.startedAt;
-    if (dx < MIN_HORIZONTAL_TRAVEL) return;
-    if (Math.abs(dy) > MAX_VERTICAL_TRAVEL || dx < Math.abs(dy) * HORIZONTAL_DOMINANCE) return;
-    if (elapsed > MAX_GESTURE_DURATION) return;
-    if (!isVisible(completedGesture.backButton) || completedGesture.backButton !== visibleBackButton()) return;
+    if (dx < MIN_HORIZONTAL_TRAVEL || Math.abs(dy) > MAX_VERTICAL_TRAVEL || dx < Math.abs(dy) * HORIZONTAL_DOMINANCE || elapsed > MAX_GESTURE_DURATION || !isVisible(completedGesture.backButton) || completedGesture.backButton !== visibleBackButton()){cancelInteractiveBack();return;}
     if (event.cancelable) event.preventDefault();
     animateBack(completedGesture.backButton);
   }, {passive:false, capture:true});
 
-  document.addEventListener("touchcancel", resetGesture, {passive:true, capture:true});
+  document.addEventListener("touchcancel",()=>{resetGesture();cancelInteractiveBack();},{passive:true,capture:true});
 
   window.CueScoreEdgeBackV1 = Object.freeze({
     visibleBackButton,
