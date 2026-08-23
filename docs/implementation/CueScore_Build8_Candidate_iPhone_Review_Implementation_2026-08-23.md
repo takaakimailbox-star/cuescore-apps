@@ -65,3 +65,12 @@ Product Owner承認前に案A〜Cの追加実装は行わない。
 
 Build 8 TestFlight upload、App Review、一般公開は実施していない。
 
+## 2026-08-24 Pattern A finalization
+
+Product Ownerは現行Player起点を維持するPattern Aを採用した。`分析`ラベル、`対戦相手別の成績`、試合カード右端の`詳細／分析`を維持し、Pattern B、独立Analysis Home、タブ、大規模Navigation再構成は採用しない。
+
+監査では、競技固定全試合から開いたMatch Detailは元一覧へ戻る一方、Match AnalysisのBackだけがPlayer情報へ戻っていた。Match Analysisを開く際にPlayer／競技／Match／viewer Player contextをruntimeで渡し、左上Backと同じcontrolを使うSwipe Backを含め、同じ競技固定全試合へ1階層で復帰するよう最小修正した。保存schemaと他Navigationは変更していない。
+
+Official 036／037が採用構成とラベルをすでに正式化しているため、新しいOfficial Decision／Specは追加しない。全回帰・配布結果は後続のBuild 8 Distribution Recordへ記録する。
+
+Pattern A最終化後は全自動テスト`207 pass / 0 fail / 0 skipped`。source／generated `native-web`／Xcode copied `public`のindex SHA-256は`b24a84f227c30985cd723ed3df9ecf4e7e1d9bb4257f3c517acc100061274f4b`で一致し、iOS Simulator Debug／Releaseはいずれも`BUILD SUCCEEDED`。
