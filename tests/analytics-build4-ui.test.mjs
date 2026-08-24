@@ -4,8 +4,8 @@ import fs from "node:fs";
 
 const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const script=fs.readFileSync(new URL("../analysis-build4.js",import.meta.url),"utf8");
-assert.match(script,/avgFouls:"平均ファール\/ラック"/);
-assert.match(script,/key==="avgFouls"\?Number\(value\)\.toFixed\(2\)/);
+assert.match(script,/foulRate:"ファール率"/);
+assert.match(script,/key==="foulRate"\?`\$\{Number\(value\)\.toFixed\(2\)\}%`/);
 const css=fs.readFileSync(new URL("../analysis-build4.css",import.meta.url),"utf8");
 
 test("Build 4 analytics assets are loaded after the existing analytics layer",()=>{
@@ -41,10 +41,10 @@ test("missing values and partial trend points are not coerced to zero",()=>{
 });
 
 test("all disciplines use the approved metric sets",()=>{
-  assert.match(script,/"9ball":\["shotRate","breakInRate","masuwariRate","avgFouls"\]/);
-  assert.match(script,/rotation:\["shotRate","breakInRate","highRun","avgFouls"\]/);
-  assert.match(script,/jpa9:\["average","breakInRate","highRun","avgFouls"\]/);
-assert.match(script,/straightPool:\["average","highRun","avgFouls"\]/);
+  assert.match(script,/"9ball":\["shotRate","breakInRate","masuwariRate","foulRate"\]/);
+  assert.match(script,/rotation:\["shotRate","breakInRate","highRun","foulRate"\]/);
+  assert.match(script,/jpa9:\["average","breakInRate","highRun","foulRate"\]/);
+assert.match(script,/straightPool:\["average","highRun","foulRate"\]/);
 assert.match(script,/threeCushion:\["average","highRun"\]/);
   assert.match(script,/threeCushion:\["average","highRun"\]/);
 });

@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Build 9候補：ファール率・指標別推移ポップアップ 実装／Simulator検証完了（2026年8月25日）
+
+- Product Owner採用により、3 Cushionを除く5競技の`平均ファール/ラック`を`ファール率`へ置換した。`ファール率 = foul_racks / participated_completed_racks × 100`とし、完了・本人の実参加・本人ファールをrack単位で明示判定できるrecordだけをeligibleとする。
+- 相手のブレイクランアウト等で本人に実手番がないrack、途中rack、境界または参加証拠のない旧・簡易recordは分母へ入れない。1rack内の複数ファールは分子1。推定せず`—`を維持し、3 Cushionには代替指標を追加しない。
+- 競技詳細の独立`推移 / 指標の変化を見る`cardを削除。勝率と対応主要指標の`>`から、その指標だけのbottom-sheet推移popupを直接開く。同一Player／競技詳細を維持し、閉じると同じ文脈へ戻る。
+- 勝率・シュート率・ブレイクイン率・マス割り率は小数1桁、ファール率は小数2桁。390×844で横overflowなし、直接popup、title、close後の文脈維持を目視PASSした。
+- 全自動テスト`216 pass / 0 fail / 0 skipped`、native source／generated／Xcode copied asset整合、iOS Simulator Debug／Releaseとも`BUILD SUCCEEDED`。Marketing Version `1.0`／Build Number `9`。実iPhone／TestFlight Build 9確認はpendingで、Archive、Validate、upload、App Review、一般公開は実施していない。
+- Official 040／041が、ファール指標と競技詳細推移UIについてOfficial 038／039を置換する。実装記録：`docs/implementation/CueScore_Build9_Foul_Rate_Metric_Trend_Popup_Implementation_2026-08-25.md`。
+
 ## TestFlight Build 8 内部配信完了／実iPhone確認待ち（2026年8月24日）
 
 - Pattern A最終化commit `02401628ee9579eb3c8ac9b5c8244d268ed29dde`とBuild Number 8 commit `b63aca2686b05b1bc5a6489f86a2f5fedc648e4e`を`origin/main`へpushし、Archive sourceとremoteの一致を確認した。

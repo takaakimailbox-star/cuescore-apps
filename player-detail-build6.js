@@ -8,8 +8,8 @@
     {id:"rotation",label:"Rotation",asset:"assets/icons/games/game-rotation.svg"},{id:"straightPool",label:"14-1",asset:"assets/icons/games/game-14-1.svg"},
     {id:"jpa9",label:"JPA 9-Ball",asset:"assets/icons/games/game-jpa-9ball.svg"},{id:"threeCushion",label:"3 Cushion",asset:"assets/icons/games/game-3cushion.svg"}
   ];
-  const labels={winRate:"勝率",shotRate:"シュート率",breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",highRun:"ハイラン",average:"アベレージ",avgFouls:"平均ファール/ラック"};
-  const metricKeys={"9ball":["shotRate","breakInRate","masuwariRate","avgFouls"],"10ball":["shotRate","breakInRate","masuwariRate","avgFouls"],rotation:["shotRate","breakInRate","highRun","avgFouls"],jpa9:["average","breakInRate","highRun","avgFouls"],straightPool:["average","highRun","avgFouls"],threeCushion:["average","highRun"]};
+  const labels={winRate:"勝率",shotRate:"シュート率",breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",highRun:"ハイラン",average:"アベレージ",foulRate:"ファール率"};
+  const metricKeys={"9ball":["shotRate","breakInRate","masuwariRate","foulRate"],"10ball":["shotRate","breakInRate","masuwariRate","foulRate"],rotation:["shotRate","breakInRate","highRun","foulRate"],jpa9:["average","breakInRate","highRun","foulRate"],straightPool:["average","highRun","foulRate"],threeCushion:["average","highRun"]};
   const bestLabels={shotRate:"最高シュート率",breakInRate:"最高ブレイクイン率",masuwariRate:"最高マス割り率",masuwariCount:"1試合最多マス割り",highRun:"最大ハイラン",score:"1試合最高得点",average:"最高アベレージ",leastWinningInnings:"最少イニング勝利"};
   const percent=new Set(["winRate","shotRate","breakInRate","masuwariRate"]);
   const discipline=record=>window.CueScoreAnalysisV2Context?.discipline?.(record)||"rotation";
@@ -23,7 +23,8 @@
   const dateValue=record=>new Date(record?.endedAt||record?.playedAt||record?.startedAt||0).getTime()||0;
   const dateText=record=>{const d=new Date(dateValue(record));return dateValue(record)?`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,"0")}/${String(d.getDate()).padStart(2,"0")}`:"日付なし";};
   const helpers={side,won,metric,recordPlayer,completedTurns,discipline,masuwariCounts:record=>window.rackGameMasuwariCountsV1?.(record)||{1:0,2:0}};
-  const fmt=(key,value)=>value==null?"—":percent.has(key)?`${Math.round(value)}%`:key==="avgFouls"?Number(value).toFixed(2):key==="average"?Number(value).toFixed(3).replace(/0+$/," ").trim().replace(/\.$/,""):String(Math.round(value*100)/100);
+  percent.add("foulRate");
+  const fmt=(key,value)=>value==null?"—":key==="foulRate"?`${Number(value).toFixed(2)}%`:percent.has(key)?`${Number(value).toFixed(1)}%`:key==="average"?Number(value).toFixed(3).replace(/0+$/," ").trim().replace(/\.$/,""):String(Math.round(value*100)/100);
   const avatar=player=>typeof playerAvatarHtmlV2==="function"?playerAvatarHtmlV2(player,"player-avatar-v2"):"";
   const opponent=(record,s)=>recordPlayer(record,s===1?2:1);
   const score=(record,s)=>Number(metric(record,s)?.score??recordPlayer(record,s)?.score)||0;
@@ -40,21 +41,22 @@
   function renderInfo(player){
     state.level="info";header("プレーヤー情報");
     const allRecords=recordsFor(player);
-    const rows=defs.map(item=>{const records=allRecords.filter(record=>discipline(record)===item.id),wins=records.filter(record=>won(record,side(record,player))).length,losses=records.length-wins;return `<button type="button" class="pd7-discipline-row" data-pd7-discipline="${item.id}"><img src="${item.asset}" alt=""><span><strong>${item.label}</strong><small>${records.length}試合　${records.length?`${wins}勝${losses}敗`:"勝敗 —"}</small></span><span><small>勝率</small><strong>${records.length?`${Math.round(wins/records.length*100)}%`:"—"}</strong></span><b>›</b></button>`;}).join("");
+    const rows=defs.map(item=>{const records=allRecords.filter(record=>discipline(record)===item.id),wins=records.filter(record=>won(record,side(record,player))).length,losses=records.length-wins;return `<button type="button" class="pd7-discipline-row" data-pd7-discipline="${item.id}"><img src="${item.asset}" alt=""><span><strong>${item.label}</strong><small>${records.length}試合　${records.length?`${wins}勝${losses}敗`:"勝敗 —"}</small></span><span><small>勝率</small><strong>${records.length?`${(wins/records.length*100).toFixed(1)}%`:"—"}</strong></span><b>›</b></button>`;}).join("");
     body.innerHTML=`<div class="player-detail-shell-v1 pd7-shell">${profile(player)}<h2 class="pd7-title">競技別通算</h2><section class="pd7-discipline-list">${rows}</section></div>`;
   }
   function renderDetail(player,active){
     state.level="detail";state.discipline=active;header(`${def(active).label} 詳細`,"",def(active).asset);
     const records=recordsFor(player).filter(record=>discipline(record)===active);
     const all=api.aggregate(records,player,helpers),keys=metricKeys[active]||[],bests=api.bests(records,player,active,helpers);
-    const trendKeys=["winRate",...keys],trendRecords=records.slice(0,10).reverse();state.trendRecords=trendRecords;
+    const trendRecords=records.slice(0,10).reverse();state.trendRecords=trendRecords;
     const bestCards=bests.slice(0,3).map(best=>`<button type="button" class="pd7-best" data-pd7-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${active==="jpa9"&&best.key==="score"?"1試合最多得点":bestLabels[best.key]}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("");
-    const summary=records.length?`${all.games}試合　${all.wins}勝${all.losses}敗　勝率${Math.round(all.winRate)}%`:"0試合　勝率 —";
+    const summary=records.length?`${all.games}試合　${all.wins}勝${all.losses}敗`:"0試合　勝敗 —";
     body.innerHTML=`<div class="player-detail-shell-v1 pd7-shell"><section class="pd7-detail-summary">${profile(player,true)}<span><small>${def(active).label} 通算</small><strong>${summary}</strong></span></section>
-      <h2 class="pd7-title">主要指標</h2><section class="pd7-metrics count-${keys.length}">${keys.map(key=>`<article><strong>${fmt(key,all[key])}</strong><span>${labels[key]}</span></article>`).join("")||'<div class="pd7-empty">データなし</div>'}</section>
-      <section class="pd7-trend-card"><button type="button" data-pd7-trend-toggle aria-expanded="false"><span><strong>推移</strong><small>指標の変化を見る</small></span><b>⌄</b></button><div class="pd7-trend" data-pd7-trend hidden><select data-pd7-trend-key aria-label="推移の指標">${trendKeys.map(key=>`<option value="${key}">${labels[key]}</option>`).join("")}</select><div data-pd7-chart>${chart(trendRecords.map(r=>recordMetric(r,player,"winRate",active)),"winRate")}</div></div></section>
+      <button type="button" class="pd7-win-rate" data-pd7-metric-trend="winRate" aria-label="勝率の推移を見る"><span><small>勝率</small><strong>${fmt("winRate",all.winRate)}</strong></span><b>›</b></button>
+      <h2 class="pd7-title">主要指標</h2><section class="pd7-metrics count-${keys.length}">${keys.map(key=>{const supported=["shotRate","breakInRate","masuwariRate","foulRate"].includes(key);return supported?`<button type="button" class="pd7-metric" data-pd7-metric-trend="${key}" aria-label="${labels[key]}の推移を見る"><strong>${fmt(key,all[key])}</strong><span>${labels[key]}</span><b>›</b></button>`:`<article><strong>${fmt(key,all[key])}</strong><span>${labels[key]}</span></article>`;}).join("")||'<div class="pd7-empty">データなし</div>'}</section>
       <h2 class="pd7-title">自己ベスト</h2>${bestCards?`<section class="pd7-bests count-${Math.min(bests.length,3)}">${bestCards}</section>`:'<section class="pd7-empty-card">データなし</section>'}
-      <section class="pd7-links"><button type="button" data-pd7-rivals><span><strong>対戦相手別の成績</strong><small>${def(active).label}の相手別勝敗・勝率</small></span><b>›</b></button><button type="button" data-pd7-history><span><strong>${def(active).label}の全試合</strong><small>Match Detail・試合別分析へ</small></span><b>›</b></button></section></div>`;
+      <section class="pd7-links"><button type="button" data-pd7-rivals><span><strong>対戦相手別の成績</strong><small>${def(active).label}の相手別勝敗・勝率</small></span><b>›</b></button><button type="button" data-pd7-history><span><strong>${def(active).label}の全試合</strong><small>Match Detail・試合別分析へ</small></span><b>›</b></button></section>
+      <div class="pd7-trend-modal" data-pd7-trend-modal hidden><button type="button" class="pd7-trend-backdrop" data-pd7-trend-close aria-label="閉じる"></button><section role="dialog" aria-modal="true" aria-labelledby="pd7TrendTitle"><header><h2 id="pd7TrendTitle" data-pd7-trend-title></h2><button type="button" data-pd7-trend-close aria-label="閉じる">×</button></header><small>直近${trendRecords.length}試合</small><div data-pd7-chart></div></section></div></div>`;
   }
   function render(playerId,level="info",active=state.discipline){const player=players().find(item=>String(item.id)===String(playerId));if(!player)return;state.playerId=String(playerId);state.player=player;level==="detail"?renderDetail(player,active):renderInfo(player);}
   const previous=window.renderFormalPlayerDetailV1;
@@ -65,9 +67,10 @@
     const match=event.target.closest("[data-pd7-match]");if(match){window.openMatchDetailV1?.(match.dataset.pd7Match);return;}
     const rivals=event.target.closest("[data-pd7-rivals]");if(rivals){window.openPlayerOpponentRecordsV2?.(state.playerId,state.discipline);return;}
     const history=event.target.closest("[data-pd7-history]");if(history){window.openPlayerMatchHistoryV2?.(state.playerId,state.discipline);return;}
-    const trendToggle=event.target.closest("[data-pd7-trend-toggle]");if(trendToggle){const panel=body.querySelector("[data-pd7-trend]"),open=Boolean(panel?.hidden);if(panel)panel.hidden=!open;trendToggle.setAttribute("aria-expanded",String(open));return;}
+    const trend=event.target.closest("[data-pd7-metric-trend]");if(trend){const key=trend.dataset.pd7MetricTrend,modal=body.querySelector("[data-pd7-trend-modal]");if(!modal)return;modal.querySelector("[data-pd7-trend-title]").textContent=`${labels[key]}の推移`;modal.querySelector("[data-pd7-chart]").innerHTML=chart(state.trendRecords.map(record=>recordMetric(record,state.player,key,state.discipline)),key);modal.hidden=false;modal.querySelector("[data-pd7-trend-close]:not(.pd7-trend-backdrop)")?.focus();return;}
+    const close=event.target.closest("[data-pd7-trend-close]");if(close){const modal=body.querySelector("[data-pd7-trend-modal]");if(modal)modal.hidden=true;return;}
   },true);
-  body.addEventListener("change",event=>{const select=event.target.closest("[data-pd7-trend-key]");if(!select)return;const key=select.value,values=state.trendRecords.map(record=>recordMetric(record,state.player,key,state.discipline));body.querySelector("[data-pd7-chart]").innerHTML=chart(values,key);});
+  document.addEventListener("keydown",event=>{if(event.key!=="Escape")return;const modal=body.querySelector("[data-pd7-trend-modal]");if(modal&&!modal.hidden)modal.hidden=true;});
   document.getElementById("playerStatsBackBtn")?.addEventListener("click",event=>{if(state.level!=="detail")return;event.preventDefault();event.stopImmediatePropagation();render(state.playerId,"info");},true);
   const historyRoot=document.getElementById("playerMatchHistoryV2");
   const openHistoryBase=window.openPlayerMatchHistoryV2;

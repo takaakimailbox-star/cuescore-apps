@@ -12,6 +12,7 @@ const files = [
   "analysis-build4.css",
   "analysis-build4.js",
   "player-detail-build6.css",
+  "player-detail-build8.css",
   "player-detail-build6.js",
   "analytics-build4-metrics.js",
   "demo-data.js",

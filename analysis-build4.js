@@ -7,16 +7,16 @@
   const esc=value=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
   const labels={
     "9ball":"9-Ball","10ball":"10-Ball",rotation:"Rotation",jpa9:"JPA 9-Ball",straightPool:"14-1",threeCushion:"3 Cushion",
-    winRate:"勝率",shotRate:"シュート率",breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",highRun:"ハイラン",average:"アベレージ",avgFouls:"平均ファール/ラック",
+    winRate:"勝率",shotRate:"シュート率",breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",highRun:"ハイラン",average:"アベレージ",foulRate:"ファール率",
     score:"1試合最高得点",masuwariCount:"1試合最多マス割り",leastWinningInnings:"最少イニング勝利"
   };
-  const percentKeys=new Set(["winRate","shotRate","breakInRate","masuwariRate"]);
+  const percentKeys=new Set(["winRate","shotRate","breakInRate","masuwariRate","foulRate"]);
   const metricsByDiscipline={
-    "9ball":["shotRate","breakInRate","masuwariRate","avgFouls"],
-    "10ball":["shotRate","breakInRate","masuwariRate","avgFouls"],
-    rotation:["shotRate","breakInRate","highRun","avgFouls"],
-    jpa9:["average","breakInRate","highRun","avgFouls"],
-    straightPool:["average","highRun","avgFouls"],threeCushion:["average","highRun"]
+    "9ball":["shotRate","breakInRate","masuwariRate","foulRate"],
+    "10ball":["shotRate","breakInRate","masuwariRate","foulRate"],
+    rotation:["shotRate","breakInRate","highRun","foulRate"],
+    jpa9:["average","breakInRate","highRun","foulRate"],
+    straightPool:["average","highRun","foulRate"],threeCushion:["average","highRun"]
   };
   const bestLabels={shotRate:"最高シュート率",breakInRate:"最高ブレイクイン率",masuwariRate:"最高マス割り率",masuwariCount:"1試合最多マス割り",highRun:"最大ハイラン",score:"1試合最高得点",average:"最高アベレージ",leastWinningInnings:"最少イニング勝利"};
   const ctx=()=>window.CueScoreAnalysisV2Context;
@@ -27,8 +27,8 @@
     completedTurns:(record,side)=>ctx().completedTurns(record,side),discipline:record=>ctx().discipline(record),
     masuwariCounts:record=>window.rackGameMasuwariCountsV1?.(record)||{1:0,2:0}
   });
-  const fmt=(key,value)=>value==null?"—":percentKeys.has(key)?`${Math.round(value)}%`:key==="avgFouls"?Number(value).toFixed(2):key==="average"?Number(value).toFixed(3).replace(/0+$/,"").replace(/\.$/,""):String(Math.round(value*100)/100);
-  const metricDefs=discipline=>(metricsByDiscipline[discipline]||[]).map(key=>({key,label:labels[key],higher:key!=="avgFouls"}));
+  const fmt=(key,value)=>value==null?"—":key==="foulRate"?`${Number(value).toFixed(2)}%`:percentKeys.has(key)?`${Number(value).toFixed(1)}%`:key==="average"?Number(value).toFixed(3).replace(/0+$/,"").replace(/\.$/,""):String(Math.round(value*100)/100);
+  const metricDefs=discipline=>(metricsByDiscipline[discipline]||[]).map(key=>({key,label:labels[key],higher:key!=="foulRate"}));
   const recordDate=record=>{const d=new Date(record?.endedAt||record?.playedAt||record?.startedAt||0);return Number.isNaN(d.getTime())?"日付なし":`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,"0")}/${String(d.getDate()).padStart(2,"0")}`;};
   function recordMetric(record,player,key,discipline,h){
     const side=h.side(record,player);if(!side)return null;
@@ -40,7 +40,7 @@
   function chart(values,key){
     const valid=values.filter(value=>Number.isFinite(value));
     if(!valid.length)return'<div class="analysis-b4-empty">データなし</div>';
-    const w=340,h=142,p=24,max=percentKeys.has(key)?100:Math.max(1,...valid),min=key==="avgFouls"?0:Math.min(0,...valid),range=Math.max(1,max-min),step=values.length>1?(w-p*2)/(values.length-1):0;
+    const w=340,h=142,p=24,max=percentKeys.has(key)?100:Math.max(1,...valid),min=key==="foulRate"?0:Math.min(0,...valid),range=Math.max(1,max-min),step=values.length>1?(w-p*2)/(values.length-1):0;
     const point=(value,index)=>`${p+index*step},${h-p-((value-min)/range)*(h-p*2)}`;
     let paths=[],current=[];values.forEach((value,index)=>{if(Number.isFinite(value))current.push(point(value,index));else if(current.length){paths.push(current);current=[];}});if(current.length)paths.push(current);
     return`<svg class="analysis-b4-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(labels[key])}の推移"><path d="M${p} ${h-p}H${w-p}M${p} ${h/2}H${w-p}M${p} ${p}H${w-p}" stroke="#e4e4e0" stroke-width="1"/>${paths.map(points=>`<polyline points="${points.join(" ")}" fill="none" stroke="#171717" stroke-width="2.5"/>`).join("")}${values.map((value,index)=>Number.isFinite(value)?`<circle cx="${p+index*step}" cy="${h-p-((value-min)/range)*(h-p*2)}" r="4" fill="#171717"/>`:"").join("")}</svg>`;

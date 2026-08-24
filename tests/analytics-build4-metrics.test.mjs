@@ -90,12 +90,59 @@ const completedRecord=(events,extra={})=>({
   ...record(events),endedAt:"2026-08-24T00:00:00Z",result:"win",...extra
 });
 
-test("average fouls per rack uses total fouls over eligible completed racks",()=>{
-  const four=completedRecord(Array.from({length:4},(_,index)=>event("rack_end",1,index+1,{winner:1})));
-  const ten=completedRecord(Array.from({length:10},(_,index)=>event("rack_end",1,index+1,{winner:1})));
-  assert.deepEqual(metrics.averageFoulsForRecord(four,{fouls:4},"9ball"),{eligible:true,numerator:4,denominator:4,value:1});
-  assert.equal(metrics.averageFoulsForRecord(ten,{fouls:4},"10ball").value,.4);
-  assert.equal(metrics.averageFoulsForRecord(four,{fouls:0},"9ball").value,0);
+const completedRack=(rack,participants=[1],foulPlayers=[])=>[
+  ...participants.map(player=>event("player_switch",player,rack,{fromPlayer:player,toPlayer:player===1?2:1})),
+  ...foulPlayers.map(player=>event("foul",player,rack,{foulType:"ordinary"})),
+  event("rack_end",1,rack,{winner:1})
+];
+
+test("foul rate counts foul racks over participated completed racks",()=>{
+  const events=[];
+  for(let rack=1;rack<=8;rack++)events.push(...completedRack(rack,[1,2],rack<=3?[1]:[]));
+  for(let rack=9;rack<=10;rack++)events.push(breakEvent(2,rack),event("rack_end",2,rack,{winner:2}));
+  assert.deepEqual(metrics.foulRateForRecord(completedRecord(events),1,"9ball"),{eligible:true,numerator:3,denominator:8,rate:37.5});
+});
+
+test("multiple fouls in one rack count once",()=>{
+  const events=[];
+  for(let rack=1;rack<=5;rack++)events.push(...completedRack(rack,[1,2],rack<=2?[1]:[]));
+  events.splice(2,0,event("foul",1,1,{foulType:"second-in-rack"}));
+  assert.deepEqual(metrics.foulRateForRecord(completedRecord(events),1,"10ball"),{eligible:true,numerator:2,denominator:5,rate:40});
+});
+
+test("opponent break-and-run is excluded from target denominator",()=>{
+  const input=completedRecord([breakEvent(2,1),event("rack_end",2,1,{winner:2})]);
+  assert.deepEqual(metrics.foulRateForRecord(input,1,"9ball"),{eligible:false,numerator:0,denominator:0,rate:null});
+});
+
+test("target break-foul is both participated and a foul rack",()=>{
+  const input=completedRecord([breakEvent(1,1,{breakFoul:true}),event("foul",1,1),event("rack_end",2,1,{winner:2})]);
+  assert.deepEqual(metrics.foulRateForRecord(input,1,"9ball"),{eligible:true,numerator:1,denominator:1,rate:100});
+});
+
+test("participated rack without foul stays in denominator",()=>{
+  const input=completedRecord(completedRack(1,[1,2],[]));
+  assert.deepEqual(metrics.foulRateForRecord(input,1,"rotation"),{eligible:true,numerator:0,denominator:1,rate:0});
+});
+
+test("incomplete and non-determinable participation are ineligible",()=>{
+  assert.equal(metrics.foulRateForRecord(completedRecord([event("foul",1,1)]),1,"9ball").eligible,false);
+  assert.equal(metrics.foulRateForRecord(completedRecord([event("rack_end",2,1,{winner:2})]),1,"9ball").eligible,false);
+  assert.equal(metrics.foulRateForRecord(completedRecord([event("rack_end",1,1)]),1,"threeCushion").eligible,false);
+});
+
+test("rotation, JPA and 14-1 require explicit completion and participation evidence",()=>{
+  const rotation=completedRecord([event("player_switch",1,1,{fromPlayer:1,toPlayer:2}),event("foul",1,1),event("rack_completed",2,1)]);
+  const jpa=completedRecord([breakEvent(1,1,{breakFoul:true}),event("game_end",2,1)]);
+  const straight=completedRecord([event("ball_pocketed",1,1),event("foul",1,1),event("straight_pool_rerack",2,1)]);
+  assert.deepEqual(metrics.foulRateForRecord(rotation,1,"rotation"),{eligible:true,numerator:1,denominator:1,rate:100});
+  assert.deepEqual(metrics.foulRateForRecord(jpa,1,"jpa9"),{eligible:true,numerator:1,denominator:1,rate:100});
+  assert.deepEqual(metrics.foulRateForRecord(straight,1,"straightPool"),{eligible:true,numerator:1,denominator:1,rate:100});
+});
+
+test("stored completion without a target event ledger stays ineligible",()=>{
+  const stored=completedRecord([],{rackResults:[{rack:1,winner:1}]});
+  assert.deepEqual(metrics.foulRateForRecord(stored,1,"9ball"),{eligible:false,numerator:0,denominator:0,rate:null});
 });
 
 test("average fouls per rack supports each adopted discipline boundary",()=>{
@@ -111,13 +158,12 @@ test("average fouls per rack rejects indeterminate and unfinished racks",()=>{
   assert.deepEqual(metrics.completedRacksForRecord(completedRecord([event("rack_end",1,1)]),"threeCushion"),{eligible:false,denominator:0});
 });
 
-test("aggregate excludes fouls from ineligible records and exposes zero",()=>{
-  const records=[completedRecord([event("rack_end",1,1),event("rack_end",1,2)]),completedRecord([],{id:"missing"})];
-  records[0].players[1].fouls=0;records[1].players[1].fouls=9;
+test("aggregate excludes ineligible records and exposes zero foul rate",()=>{
+  const records=[completedRecord(completedRack(1,[1,2],[])),completedRecord([],{id:"missing"})];
   const helpers={side:()=>1,won:()=>true,metric:(item,side)=>item.players[side],recordPlayer:(item,side)=>item.players[side],completedTurns:()=>0,discipline:()=>"9ball",masuwariCounts:()=>({1:0,2:0})};
   const result=metrics.aggregate(records,{},helpers);
-  assert.equal(result.avgFouls,0);
-  assert.equal(result.eligible.foulRacks,2);
+  assert.equal(result.foulRate,0);
+  assert.equal(result.eligible.foulRacks,1);
 });
 
 test("best tie-break uses value, newest date, then match id",()=>{

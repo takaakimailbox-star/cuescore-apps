@@ -10,6 +10,8 @@
   const value=(event,key)=>event?.data?.[key]??event?.[key];
   const eventType=event=>String(event?.sourceType||event?.type||"").normalize("NFKC").toLowerCase();
   const eventPlayer=event=>Number(value(event,"breakPlayer")??value(event,"player")??value(event,"fromPlayer"));
+  const eventPlayers=event=>[value(event,"breakPlayer"),value(event,"player"),value(event,"fromPlayer"),value(event,"toPlayer")]
+    .map(Number).filter(player=>[1,2].includes(player));
   const rackOf=event=>Math.max(1,Number(event?.rackNumber??value(event,"rack"))||1);
   const commonEvents=record=>Array.isArray(record?.eventLog?.events)?record.eventLog.events:[];
   const legacyEvents=record=>Array.isArray(record?.analysis?.events)?record.analysis.events:[];
@@ -53,6 +55,49 @@
     const fouls=Number(metric?.fouls);
     if(!racks.eligible||!Number.isFinite(fouls)||fouls<0)return{eligible:false,numerator:0,denominator:0,value:null};
     return{eligible:true,numerator:fouls,denominator:racks.denominator,value:fouls/racks.denominator};
+  }
+
+  const FOUL_DISCIPLINES=new Set(["9ball","10ball","rotation","jpa9","straightPool"]);
+  const PARTICIPATION_EVENTS=new Set(["break_result","ball_pocketed","shot","safety","foul","player_switch","straight_pool_three_foul"]);
+  const foulEvent=event=>eventType(event)==="foul"||eventType(event)==="straight_pool_three_foul"||(
+    eventType(event)==="break_result"&&["foul","scratch","breakFoul","illegalBreak","preBreakFoul"].some(key=>Boolean(value(event,key)))
+  );
+
+  function completedRackIdsForRecord(record,discipline){
+    if(!FOUL_DISCIPLINES.has(discipline)||!completeRecord(record))return null;
+    const events=detailedEvents(record);
+    if(discipline==="9ball"||discipline==="10ball"){
+      const disciplineResults=discipline==="10ball"?record?.tenBall?.rackResults:record?.nineBall?.rackResults;
+      const stored=Array.isArray(record?.rackResults)&&record.rackResults.length?record.rackResults:Array.isArray(disciplineResults)?disciplineResults:[];
+      const racks=stored.length?stored.map(item=>Number(item?.rack)):events.filter(event=>eventType(event)==="rack_end").map(rackOf);
+      const completed=new Set(racks.filter(rack=>Number.isInteger(rack)&&rack>0));
+      return completed.size?completed:null;
+    }
+    if(discipline==="straightPool"){
+      const stored=Array.isArray(record?.straightPool?.rerackEvents)?record.straightPool.rerackEvents:[];
+      const racks=stored.length?stored.map(item=>Number(item?.rack)):events
+        .filter(event=>["straight_pool_rerack","straight_pool_three_foul"].includes(eventType(event))).map(rackOf);
+      const completed=new Set(racks.filter(rack=>Number.isInteger(rack)&&rack>0));
+      return completed.size?completed:null;
+    }
+    const completed=new Set(events.filter(event=>["rack_completed","rack_end"].includes(eventType(event))).map(rackOf));
+    const gameEnd=events.find(event=>eventType(event)==="game_end");
+    if(gameEnd)completed.add(rackOf(gameEnd));
+    return completed.size?completed:null;
+  }
+
+  function foulRateForRecord(record,side,discipline){
+    const completed=completedRackIdsForRecord(record,discipline),target=Number(side),events=detailedEvents(record);
+    if(!completed||![1,2].includes(target)||!events.length)return{eligible:false,numerator:0,denominator:0,rate:null};
+    let denominator=0,numerator=0;
+    for(const rack of completed){
+      const rackEvents=events.filter(event=>rackOf(event)===rack);
+      const participated=rackEvents.some(event=>PARTICIPATION_EVENTS.has(eventType(event))&&eventPlayers(event).includes(target));
+      if(!participated)continue;
+      denominator+=1;
+      if(rackEvents.some(event=>foulEvent(event)&&eventPlayers(event).includes(target)))numerator+=1;
+    }
+    return denominator?{eligible:true,numerator,denominator,rate:percent(numerator,denominator)}:{eligible:false,numerator:0,denominator:0,rate:null};
   }
 
   function isBreakEventEligible(event){
@@ -126,7 +171,7 @@
   }
 
   function aggregate(items,player,helpers){
-    let wins=0,fouls=0,foulRacks=0,pockets=0,shots=0,totalScore=0,totalTurns=0,breakIn=0,breaks=0,masuwari=0,breakRacks=0,highRun=0;
+    let wins=0,foulRackCount=0,participatedRacks=0,pockets=0,shots=0,totalScore=0,totalTurns=0,breakIn=0,breaks=0,masuwari=0,breakRacks=0,highRun=0;
     items.forEach(record=>{
       const side=helpers.side(record,player);
       if(!side)return;
@@ -139,8 +184,8 @@
       const average=averageForRecord(metric,helpers.recordPlayer(record,side),turns);
       if(average.eligible){totalScore+=average.numerator;totalTurns+=average.denominator;}
       const discipline=helpers.discipline(record);
-      const foulMetric=averageFoulsForRecord(record,metric,discipline);
-      if(foulMetric.eligible){fouls+=foulMetric.numerator;foulRacks+=foulMetric.denominator;}
+      const foulMetric=foulRateForRecord(record,side,discipline);
+      if(foulMetric.eligible){foulRackCount+=foulMetric.numerator;participatedRacks+=foulMetric.denominator;}
       const breakMetric=breakInForRecord(record,side,discipline);
       if(breakMetric.eligible){breakIn+=breakMetric.numerator;breaks+=breakMetric.denominator;}
       const masuwariMetric=masuwariForRecord(record,side,discipline,helpers.masuwariCounts);
@@ -150,8 +195,8 @@
     return{
       games,wins,losses:Math.max(0,games-wins),winRate:games?wins/games*100:null,
       shotRate:percent(pockets,shots),breakInRate:percent(breakIn,breaks),masuwariRate:percent(masuwari,breakRacks),
-      highRun,average:totalTurns?totalScore/totalTurns:null,avgFouls:foulRacks?fouls/foulRacks:null,
-      eligible:{shots,breaks,breakRacks,averageTurns:totalTurns,foulRacks}
+      highRun,average:totalTurns?totalScore/totalTurns:null,foulRate:percent(foulRackCount,participatedRacks),
+      eligible:{shots,breaks,breakRacks,averageTurns:totalTurns,foulRacks:participatedRacks}
     };
   }
 
@@ -203,5 +248,5 @@
     return keys.map(key=>map[key]).filter(Boolean);
   }
 
-  return{BREAK_DISCIPLINES,MASUWARI_DISCIPLINES,eventType,eventPlayer,rackOf,detailedEvents,isBreakEventEligible,breakInForRecord,masuwariForRecord,completedRacksForRecord,averageFoulsForRecord,shotRateForRecord,averageForRecord,aggregate,chooseBest,bests};
+  return{BREAK_DISCIPLINES,MASUWARI_DISCIPLINES,eventType,eventPlayer,rackOf,detailedEvents,isBreakEventEligible,breakInForRecord,masuwariForRecord,completedRacksForRecord,averageFoulsForRecord,completedRackIdsForRecord,foulRateForRecord,shotRateForRecord,averageForRecord,aggregate,chooseBest,bests};
 });

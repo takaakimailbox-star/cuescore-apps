@@ -1,0 +1,87 @@
+.pd7-win-rate {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  min-height: 48px;
+  padding: 9px 13px;
+  border: 1px solid #dededb;
+  border-radius: 14px;
+  background: #fff !important;
+  text-align: left;
+}
+.pd7-win-rate small,
+.pd7-win-rate strong,
+.pd7-metric strong,
+.pd7-metric span,
+.pd7-metric b { display: block; }
+.pd7-win-rate small {
+  color: #696966 !important;
+  -webkit-text-fill-color: #696966;
+  font-size: 9px;
+}
+.pd7-win-rate strong { margin-top: 2px; font-size: 20px; }
+.pd7-win-rate b,
+.pd7-metric b {
+  color: #888 !important;
+  -webkit-text-fill-color: #888;
+  font-size: 20px;
+  font-weight: 400;
+}
+.pd7-metrics .pd7-metric {
+  min-width: 0;
+  padding: 10px 4px;
+  border: 0;
+  border-left: 1px solid #e7e7e4;
+  background: #fff !important;
+  text-align: center;
+}
+.pd7-metrics .pd7-metric:first-child { border-left: 0; }
+.pd7-metric b { margin-top: 2px; font-size: 14px; }
+.pd7-trend-modal[hidden] { display: none !important; }
+.pd7-trend-modal {
+  position: fixed;
+  z-index: 10050;
+  inset: 0;
+  display: grid;
+  align-items: end;
+}
+.pd7-trend-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(0, 0, 0, .42) !important;
+}
+.pd7-trend-modal > section {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 430px);
+  max-height: 70vh;
+  margin: 0 auto;
+  padding: 16px 16px calc(18px + env(safe-area-inset-bottom));
+  border-radius: 20px 20px 0 0;
+  background: #fff !important;
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, .18);
+}
+.pd7-trend-modal header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 36px;
+  align-items: center;
+  gap: 10px;
+}
+.pd7-trend-modal h2 { margin: 0; font-size: 18px; }
+.pd7-trend-modal header button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: #f0f0ed !important;
+  font-size: 22px;
+}
+.pd7-trend-modal > section > small {
+  display: block;
+  margin-top: 3px;
+  color: #696966 !important;
+  -webkit-text-fill-color: #696966;
+  font-size: 9px;
+}
+.pd7-trend-modal .analysis-b4-chart { height: 170px; margin-top: 10px; }

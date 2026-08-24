@@ -4,8 +4,8 @@ import fs from "node:fs";
 
 const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const script=fs.readFileSync(new URL("../player-detail-build6.js",import.meta.url),"utf8");
-assert.match(script,/avgFouls:"平均ファール\/ラック"/);
-assert.match(script,/key==="avgFouls"\?Number\(value\)\.toFixed\(2\)/);
+assert.match(script,/foulRate:"ファール率"/);
+assert.match(script,/key==="foulRate"\?`\$\{Number\(value\)\.toFixed\(2\)\}%`/);
 const css=fs.readFileSync(new URL("../player-detail-build6.css",import.meta.url),"utf8");
 const nativeBuild=fs.readFileSync(new URL("../scripts/build-native-web.mjs",import.meta.url),"utf8");
 const sw=fs.readFileSync(new URL("../sw.js",import.meta.url),"utf8");
@@ -14,6 +14,9 @@ test("two-level Player Detail assets remain in web, native, and service worker b
   assert.match(html,/analysis-build4\.js[\s\S]*player-detail-build6\.js/);
   assert.match(nativeBuild,/player-detail-build6\.js/);
   assert.match(sw,/player-detail-build6\.js/);
+  assert.match(html,/player-detail-build8\.css/);
+  assert.match(nativeBuild,/player-detail-build8\.css/);
+  assert.match(sw,/player-detail-build8\.css/);
 });
 
 test("level one is Player Info with all six discipline summary rows",()=>{
@@ -25,7 +28,7 @@ test("level one is Player Info with all six discipline summary rows",()=>{
 });
 
 test("level two fixes a discipline and contains the Build 8 analytics journey",()=>{
-  for(const text of ["通算","主要指標","推移","自己ベスト","対戦相手別の成績","全試合"]){assert.match(script,new RegExp(text));}
+  for(const text of ["通算","主要指標","自己ベスト","対戦相手別の成績","全試合"]){assert.match(script,new RegExp(text));}
   assert.doesNotMatch(script,/最近の試合/);
   assert.doesNotMatch(script,/プレーヤー情報へ戻る/);
   assert.doesNotMatch(script,/今の状態/);
@@ -38,18 +41,35 @@ test("level two fixes a discipline and contains the Build 8 analytics journey",(
 });
 
 test("all disciplines keep the approved metric sets",()=>{
-  assert.match(script,/"9ball":\["shotRate","breakInRate","masuwariRate","avgFouls"\]/);
-  assert.match(script,/rotation:\["shotRate","breakInRate","highRun","avgFouls"\]/);
-  assert.match(script,/jpa9:\["average","breakInRate","highRun","avgFouls"\]/);
-  assert.match(script,/straightPool:\["average","highRun","avgFouls"\]/);
+  assert.match(script,/"9ball":\["shotRate","breakInRate","masuwariRate","foulRate"\]/);
+  assert.match(script,/rotation:\["shotRate","breakInRate","highRun","foulRate"\]/);
+  assert.match(script,/jpa9:\["average","breakInRate","highRun","foulRate"\]/);
+  assert.match(script,/straightPool:\["average","highRun","foulRate"\]/);
   assert.match(script,/threeCushion:\["average","highRun"\]/);
 });
 
 test("detail density is collapsed and duplicate recent matches are removed",()=>{
   assert.match(script,/bests\.slice\(0,3\)/);
   assert.doesNotMatch(script,/records\.slice\(0,3\)/);
-  assert.match(script,/data-pd7-trend hidden/);
+  assert.doesNotMatch(script,/data-pd7-trend-toggle/);
+  assert.match(script,/data-pd7-metric-trend="winRate"/);
+  assert.match(script,/data-pd7-trend-modal hidden/);
   assert.match(script,/value==null\?"—"/);
+});
+
+test("each supported metric opens one direct trend popup",()=>{
+  assert.match(script,/data-pd7-metric-trend="winRate"/);
+  assert.match(script,/\["shotRate","breakInRate","masuwariRate","foulRate"\]\.includes\(key\)/);
+  assert.match(script,/role="dialog" aria-modal="true"/);
+  assert.match(script,/data-pd7-trend-close/);
+  assert.doesNotMatch(script,/指標の変化を見る/);
+  assert.doesNotMatch(script,/data-pd7-trend-key/);
+});
+
+test("rate precision is one decimal except foul rate at two decimals",()=>{
+  assert.match(script,/Number\(value\)\.toFixed\(1\)/);
+  assert.match(script,/Number\(value\)\.toFixed\(2\)/);
+  assert.match(script,/wins\/records\.length\*100\)\.toFixed\(1\)/);
 });
 
 test("detail navigation title is game specific and the standard back button owns navigation",()=>{
