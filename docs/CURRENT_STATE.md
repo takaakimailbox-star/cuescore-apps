@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## TestFlight Build 10 内部配信完了／実iPhone確認待ち（2026年8月25日）
+
+- v1分析範囲・推移軸を確定したBuild 10候補commit `b5b786c262214e9c7c03a097fe894fa8ed82f160`を`origin/main`へpushし、その同一sourceからArchiveした。
+- 全自動テスト`220 pass / 0 fail / 0 skipped`、native asset整合、Simulator Debug／Release、Signed Release Archive、App Store ValidateをPASSした。
+- Xcode Organizerから`TestFlight Internal Only`としてVersion `1.0`／Build `10`をアップロード。App Store Connectへのアップロード日は`2026年8月25日 22:29` JST。
+- 輸出コンプライアンスは既存正式回答「上記のアルゴリズムのどれでもない」で保存。Build 10は既存内部グループ`CueScore Internal Testers`に含まれ、状態は`テスト中`。
+- 実iPhone確認はpending。通常導線、推移Y/X軸、同日試合識別、point callout、文脈復帰、写真、Swipe Back、3 Cushion、6競技、Backup／Restore、通常／サンプル等を未確認のままPASS扱いにしない。
+- App Store Review提出、外部TestFlight、一般公開、価格／配信地域変更は実施していない。Build Number `1`〜`10`は再利用しない。
+- 配布記録：`docs/implementation/CueScore_Build10_TestFlight_Distribution_2026-08-25.md`。
+
 ## Build 10候補：v1分析範囲・推移軸の明確化 実装完了（2026年8月25日）
 
 - v1通常導線をPlayer情報、競技詳細、主要指標と指標別推移、自己ベスト、簡潔な対戦相手別成績、競技固定の全試合、Match Detailへ限定した。
