@@ -84,4 +84,5 @@
   -webkit-text-fill-color: #696966;
   font-size: 9px;
 }
-.pd7-trend-modal .analysis-b4-chart { height: 170px; margin-top: 10px; }
+.pd7-trend-modal .analysis-b4-chart { display:block; width:100%; height:auto; margin-top:10px; overflow:visible; }
+.analysis-b4-chart-wrap{position:relative;max-width:100%;overflow:hidden}.analysis-b4-y-label,.analysis-b4-x-label{fill:#777773;font-size:8px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}.analysis-b4-point-callout{display:block;width:max-content;max-width:calc(100% - 24px);margin:4px auto 0;padding:6px 10px;border-radius:9px;background:#171717;color:#fff;font-size:12px;font-weight:700;text-align:center}.analysis-b4-point-callout[hidden]{display:none}.analysis-b4-chart [data-b4-point]:focus{outline:none;stroke:#fff;stroke-width:2}

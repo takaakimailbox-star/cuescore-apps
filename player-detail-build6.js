@@ -28,7 +28,7 @@
   const avatar=player=>typeof playerAvatarHtmlV2==="function"?playerAvatarHtmlV2(player,"player-avatar-v2"):"";
   const opponent=(record,s)=>recordPlayer(record,s===1?2:1);
   const score=(record,s)=>Number(metric(record,s)?.score??recordPlayer(record,s)?.score)||0;
-  const chart=(values,key)=>window.CueScoreBuild4Analytics?.chart?.(values,key)||'<div class="pd7-empty">データなし</div>';
+  const chart=(values,key,records)=>window.CueScoreBuild4Analytics?.chart?.(values,key,records)||'<div class="pd7-empty">データなし</div>';
   const recordMetric=(record,player,key,active)=>window.CueScoreBuild4Analytics?.recordMetric?.(record,player,key,active,helpers)??null;
   const state={playerId:null,level:"info",discipline:"9ball",trendRecords:[],player:null};
   const def=id=>defs.find(item=>item.id===id)||defs[0];
@@ -55,7 +55,7 @@
       <button type="button" class="pd7-win-rate" data-pd7-metric-trend="winRate" aria-label="勝率の推移を見る"><span><small>勝率</small><strong>${fmt("winRate",all.winRate)}</strong></span><b>›</b></button>
       <h2 class="pd7-title">主要指標</h2><section class="pd7-metrics count-${keys.length}">${keys.map(key=>{const supported=["shotRate","breakInRate","masuwariRate","foulRate"].includes(key);return supported?`<button type="button" class="pd7-metric" data-pd7-metric-trend="${key}" aria-label="${labels[key]}の推移を見る"><strong>${fmt(key,all[key])}</strong><span>${labels[key]}</span><b>›</b></button>`:`<article><strong>${fmt(key,all[key])}</strong><span>${labels[key]}</span></article>`;}).join("")||'<div class="pd7-empty">データなし</div>'}</section>
       <h2 class="pd7-title">自己ベスト</h2>${bestCards?`<section class="pd7-bests count-${Math.min(bests.length,3)}">${bestCards}</section>`:'<section class="pd7-empty-card">データなし</section>'}
-      <section class="pd7-links"><button type="button" data-pd7-rivals><span><strong>対戦相手別の成績</strong><small>${def(active).label}の相手別勝敗・勝率</small></span><b>›</b></button><button type="button" data-pd7-history><span><strong>${def(active).label}の全試合</strong><small>Match Detail・試合別分析へ</small></span><b>›</b></button></section>
+      <section class="pd7-links"><button type="button" data-pd7-rivals><span><strong>対戦相手別の成績</strong><small>${def(active).label}の相手別勝敗・勝率</small></span><b>›</b></button><button type="button" data-pd7-history><span><strong>${def(active).label}の全試合</strong><small>試合詳細を見る</small></span><b>›</b></button></section>
       <div class="pd7-trend-modal" data-pd7-trend-modal hidden><button type="button" class="pd7-trend-backdrop" data-pd7-trend-close aria-label="閉じる"></button><section role="dialog" aria-modal="true" aria-labelledby="pd7TrendTitle"><header><h2 id="pd7TrendTitle" data-pd7-trend-title></h2><button type="button" data-pd7-trend-close aria-label="閉じる">×</button></header><small>直近${trendRecords.length}試合</small><div data-pd7-chart></div></section></div></div>`;
   }
   function render(playerId,level="info",active=state.discipline){const player=players().find(item=>String(item.id)===String(playerId));if(!player)return;state.playerId=String(playerId);state.player=player;level==="detail"?renderDetail(player,active):renderInfo(player);}
@@ -67,7 +67,8 @@
     const match=event.target.closest("[data-pd7-match]");if(match){window.openMatchDetailV1?.(match.dataset.pd7Match);return;}
     const rivals=event.target.closest("[data-pd7-rivals]");if(rivals){window.openPlayerOpponentRecordsV2?.(state.playerId,state.discipline);return;}
     const history=event.target.closest("[data-pd7-history]");if(history){window.openPlayerMatchHistoryV2?.(state.playerId,state.discipline);return;}
-    const trend=event.target.closest("[data-pd7-metric-trend]");if(trend){const key=trend.dataset.pd7MetricTrend,modal=body.querySelector("[data-pd7-trend-modal]");if(!modal)return;modal.querySelector("[data-pd7-trend-title]").textContent=`${labels[key]}の推移`;modal.querySelector("[data-pd7-chart]").innerHTML=chart(state.trendRecords.map(record=>recordMetric(record,state.player,key,state.discipline)),key);modal.hidden=false;modal.querySelector("[data-pd7-trend-close]:not(.pd7-trend-backdrop)")?.focus();return;}
+    const point=event.target.closest("[data-b4-point]");if(point){const output=point.closest(".analysis-b4-chart-wrap")?.querySelector("[data-b4-point-callout]");if(output){output.textContent=`${point.dataset.b4Date}　${point.dataset.b4Value}`;output.hidden=false;}return;}
+    const trend=event.target.closest("[data-pd7-metric-trend]");if(trend){const key=trend.dataset.pd7MetricTrend,modal=body.querySelector("[data-pd7-trend-modal]");if(!modal)return;modal.querySelector("[data-pd7-trend-title]").textContent=`${labels[key]}の推移`;modal.querySelector("[data-pd7-chart]").innerHTML=chart(state.trendRecords.map(record=>recordMetric(record,state.player,key,state.discipline)),key,state.trendRecords);modal.hidden=false;modal.querySelector("[data-pd7-trend-close]:not(.pd7-trend-backdrop)")?.focus();return;}
     const close=event.target.closest("[data-pd7-trend-close]");if(close){const modal=body.querySelector("[data-pd7-trend-modal]");if(modal)modal.hidden=true;return;}
   },true);
   document.addEventListener("keydown",event=>{if(event.key!=="Escape")return;const modal=body.querySelector("[data-pd7-trend-modal]");if(modal&&!modal.hidden)modal.hidden=true;});
@@ -99,6 +100,7 @@
       row.replaceWith(wrapper);wrapper.append(row,analysis);
       const detail=row.querySelector(".journey-match-open-v3");if(detail)detail.textContent="詳細";
       analysis.textContent="分析";
+      analysis.hidden=true;analysis.setAttribute("aria-hidden","true");analysis.tabIndex=-1;
     });
   };
   if(historyRoot)new MutationObserver(compactHistory).observe(historyRoot,{subtree:true,childList:true});

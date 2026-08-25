@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## Build 10候補：v1分析範囲・推移軸の明確化 実装完了（2026年8月25日）
+
+- v1通常導線をPlayer情報、競技詳細、主要指標と指標別推移、自己ベスト、簡潔な対戦相手別成績、競技固定の全試合、Match Detailへ限定した。
+- 競技固定の試合カードでは`分析`操作を非表示とし、対戦相手一覧から深いRival Analysisへ進むタップ導線を外した。既存のMatch Analysis／Analysis Home／旧Player Analysis／Rival Analysis実装は互換目的で保持し、削除やschema変更はしていない。
+- rate推移にY軸`100% / 75% / 50% / 25% / 0%`、X軸の日付（同日複数試合は連番）、各点の正確な値と日付を表示するタップ可能なcalloutを追加。ファール率2桁、その他rate1桁と既存定義を維持した。
+- Marketing Version `1.0`／次の未使用Build Number `10`。全自動テスト`220 pass / 0 fail / 0 skipped`、native source／generated／Xcode copied asset整合、Simulator Debug／Releaseとも`BUILD SUCCEEDED`、portrait起動表示をPASSした。Archive／Validate／TestFlight Internal Onlyは後続Gateで記録する。実iPhone確認はpendingで、App Store Review・外部TestFlight・一般公開は対象外。
+- Official 042／043がv1分析通常導線と推移グラフ可読性を定義する。実装記録：`docs/implementation/CueScore_Build10_Analytics_Scope_Trend_Axis_Implementation_2026-08-25.md`。
+
 ## TestFlight Build 9 内部配信完了／実iPhone確認待ち（2026年8月25日）
 
 - Build 9候補commit `5a0877e840292a976bcdd0affaef1f870c4065ea`を`origin/main`へpushし、local／remote同期とclean状態を確認した。

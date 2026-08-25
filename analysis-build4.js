@@ -37,13 +37,17 @@
     if(key==="highRun")return Number(metric.maxRun)||0;
     return aggregate[key];
   }
-  function chart(values,key){
+  function chart(values,key,records=[]){
     const valid=values.filter(value=>Number.isFinite(value));
     if(!valid.length)return'<div class="analysis-b4-empty">データなし</div>';
-    const w=340,h=142,p=24,max=percentKeys.has(key)?100:Math.max(1,...valid),min=key==="foulRate"?0:Math.min(0,...valid),range=Math.max(1,max-min),step=values.length>1?(w-p*2)/(values.length-1):0;
-    const point=(value,index)=>`${p+index*step},${h-p-((value-min)/range)*(h-p*2)}`;
+    const w=340,h=184,left=38,right=10,top=12,bottom=34,max=percentKeys.has(key)?100:Math.max(1,...valid),min=percentKeys.has(key)?0:Math.min(0,...valid),range=Math.max(1,max-min),step=values.length>1?(w-left-right)/(values.length-1):0;
+    const point=(value,index)=>`${left+index*step},${h-bottom-((value-min)/range)*(h-top-bottom)}`;
+    const dates=records.map(record=>{const d=new Date(record?.endedAt||record?.playedAt||record?.startedAt||0);return Number.isNaN(d.getTime())?"試合":`${d.getMonth()+1}/${d.getDate()}`;}),totals=dates.reduce((map,date)=>(map[date]=(map[date]||0)+1,map),{}),seen={};
+    const xLabels=dates.map(date=>{seen[date]=(seen[date]||0)+1;return totals[date]>1?`${date}·${seen[date]}`:date;});
+    const ticks=percentKeys.has(key)?[100,75,50,25,0]:[max,(max+min)/2,min];
+    const valueText=value=>key==="foulRate"?`${Number(value).toFixed(2)}%`:percentKeys.has(key)?`${Number(value).toFixed(1)}%`:String(Math.round(Number(value)*100)/100);
     let paths=[],current=[];values.forEach((value,index)=>{if(Number.isFinite(value))current.push(point(value,index));else if(current.length){paths.push(current);current=[];}});if(current.length)paths.push(current);
-    return`<svg class="analysis-b4-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(labels[key])}の推移"><path d="M${p} ${h-p}H${w-p}M${p} ${h/2}H${w-p}M${p} ${p}H${w-p}" stroke="#e4e4e0" stroke-width="1"/>${paths.map(points=>`<polyline points="${points.join(" ")}" fill="none" stroke="#171717" stroke-width="2.5"/>`).join("")}${values.map((value,index)=>Number.isFinite(value)?`<circle cx="${p+index*step}" cy="${h-p-((value-min)/range)*(h-p*2)}" r="4" fill="#171717"/>`:"").join("")}</svg>`;
+    return`<div class="analysis-b4-chart-wrap"><svg class="analysis-b4-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(labels[key])}の推移">${ticks.map(tick=>{const y=h-bottom-((tick-min)/range)*(h-top-bottom);return `<line x1="${left}" y1="${y}" x2="${w-right}" y2="${y}" stroke="#e4e4e0"/><text class="analysis-b4-y-label" x="${left-6}" y="${y+3}" text-anchor="end">${percentKeys.has(key)?`${Math.round(tick)}%`:Math.round(tick*100)/100}</text>`;}).join("")}${paths.map(points=>`<polyline points="${points.join(" ")}" fill="none" stroke="#171717" stroke-width="2.5"/>`).join("")}${values.map((value,index)=>Number.isFinite(value)?`<circle data-b4-point tabindex="0" role="button" aria-label="${esc(xLabels[index]||`試合${index+1}`)} ${valueText(value)}" data-b4-date="${esc(xLabels[index]||`試合${index+1}`)}" data-b4-value="${valueText(value)}" cx="${left+index*step}" cy="${h-bottom-((value-min)/range)*(h-top-bottom)}" r="5" fill="#171717"/>`:"").join("")}${values.map((value,index)=>Number.isFinite(value)?`<text class="analysis-b4-x-label" x="${left+index*step}" y="${h-9}" text-anchor="middle">${esc(xLabels[index]||String(index+1))}</text>`:"").join("")}</svg><output class="analysis-b4-point-callout" data-b4-point-callout hidden></output></div>`;
   }
   function pointText(current,previous,defs){
     if(previous.games<1)return{strength:"比較できません",challenge:"比較できません"};
@@ -67,7 +71,7 @@
       <section class="analysis-v2-card analysis-b4-context"><div><strong title="${playerName}">${playerName}</strong><span>プレーヤー分析</span></div><div><select class="analysis-v2-select" data-analysis-discipline aria-label="競技">${disciplineOptions}</select></div></section>
       <section class="analysis-v2-card analysis-b4-now"><div class="analysis-b4-heading"><h2>今の状態</h2><span>${status}</span></div><strong>${summary}</strong><small>条件を満たす保存済み試合だけを指標へ使用しています</small></section>
       <h2 class="analysis-v2-section-title">主要指標</h2><section class="analysis-b4-metrics">${defs.map(def=>`<article><strong>${fmt(def.key,current[def.key])}</strong><span>${def.label}</span></article>`).join("")}</section>
-      <section class="analysis-v2-card analysis-b4-trend"><div class="analysis-b4-heading"><h2>推移</h2><span>直近${trendRecords.length}試合</span></div><label class="analysis-b4-trend-picker"><span>表示指標</span><select data-b4-trend-select aria-label="推移の表示指標">${trendKeys.map(key=>`<option value="${key}">${labels[key]}</option>`).join("")}</select></label><div data-b4-chart>${chart(trendRecords.map(record=>recordMetric(record,player,"winRate",discipline,h)),"winRate")}</div></section>
+      <section class="analysis-v2-card analysis-b4-trend"><div class="analysis-b4-heading"><h2>推移</h2><span>直近${trendRecords.length}試合</span></div><label class="analysis-b4-trend-picker"><span>表示指標</span><select data-b4-trend-select aria-label="推移の表示指標">${trendKeys.map(key=>`<option value="${key}">${labels[key]}</option>`).join("")}</select></label><div data-b4-chart>${chart(trendRecords.map(record=>recordMetric(record,player,"winRate",discipline,h)),"winRate",trendRecords)}</div></section>
       <section class="analysis-v2-card analysis-b4-points"><h2>今回のポイント</h2><div><strong>強み</strong><span>${points.strength}</span></div><div><strong>次の課題</strong><span>${points.challenge}</span></div></section>
       <h2 class="analysis-v2-section-title">自己ベスト</h2>${bests.length?`<section class="analysis-b4-bests">${bests.map(best=>`<button type="button" data-b4-match-id="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${best.key==="score"&&discipline==="jpa9"?"1試合最多得点":bestLabels[best.key]}</span><small>${esc(labels[discipline])}・${recordDate(best.record)}</small><i>試合を見る ›</i></button>`).join("")}</section>`:'<section class="analysis-v2-card analysis-b4-empty">データなし</section>'}
       <h2 class="analysis-v2-section-title">詳細分析</h2><section class="analysis-b4-links"><button type="button" data-b4-rival="${playerId}"><span>対戦相手分析を見る</span><b>›</b></button></section>`;
@@ -75,11 +79,12 @@
     view._build4={player,discipline,records:trendRecords,helpers:h};
   }
   root.addEventListener("click",event=>{
-    const trend=event.target.closest("[data-b4-trend]");if(trend){const state=view._build4,key=trend.dataset.b4Trend;view.querySelectorAll("[data-b4-trend]").forEach(button=>button.classList.toggle("is-active",button===trend));const values=state.records.map(record=>recordMetric(record,state.player,key,state.discipline,state.helpers));view.querySelector("[data-b4-chart]").innerHTML=chart(values,key);return;}
+    const point=event.target.closest("[data-b4-point]");if(point){const output=point.closest(".analysis-b4-chart-wrap")?.querySelector("[data-b4-point-callout]");if(output){output.textContent=`${point.dataset.b4Date}　${point.dataset.b4Value}`;output.hidden=false;}return;}
+    const trend=event.target.closest("[data-b4-trend]");if(trend){const state=view._build4,key=trend.dataset.b4Trend;view.querySelectorAll("[data-b4-trend]").forEach(button=>button.classList.toggle("is-active",button===trend));const values=state.records.map(record=>recordMetric(record,state.player,key,state.discipline,state.helpers));view.querySelector("[data-b4-chart]").innerHTML=chart(values,key,state.records);return;}
     const best=event.target.closest("[data-b4-match-id]");if(best){window.openMatchDetailV1?.(best.dataset.b4MatchId);return;}
     const rival=event.target.closest("[data-b4-rival]");if(rival){window.openRivalAnalysisForPlayerV832?.(rival.dataset.b4Rival);return;}
   });
-  root.addEventListener("change",event=>{const picker=event.target.closest("[data-b4-trend-select]");if(!picker)return;const state=view._build4,key=picker.value;const values=state.records.map(record=>recordMetric(record,state.player,key,state.discipline,state.helpers));view.querySelector("[data-b4-chart]").innerHTML=chart(values,key);});
+  root.addEventListener("change",event=>{const picker=event.target.closest("[data-b4-trend-select]");if(!picker)return;const state=view._build4,key=picker.value;const values=state.records.map(record=>recordMetric(record,state.player,key,state.discipline,state.helpers));view.querySelector("[data-b4-chart]").innerHTML=chart(values,key,state.records);});
   new MutationObserver(()=>queueMicrotask(render)).observe(view,{childList:true});
   queueMicrotask(render);
   window.CueScoreBuild4Analytics={render,chart,recordMetric};
