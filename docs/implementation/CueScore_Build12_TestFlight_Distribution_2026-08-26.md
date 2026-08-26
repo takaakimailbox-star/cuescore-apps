@@ -1,6 +1,6 @@
 # CueScore Apps — TestFlight Build 12 Internal Distribution Record
 
-Date: 2026-08-26 (JST)  
+Date: 2026-08-26 (JST)
 Status: Internal TestFlight distribution PASS / physical-iPhone verification pending
 
 ## Final report
