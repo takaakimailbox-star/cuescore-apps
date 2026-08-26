@@ -7,6 +7,7 @@ const script=fs.readFileSync(new URL("../player-detail-build6.js",import.meta.ur
 assert.match(script,/foulRate:"ファール率"/);
 assert.match(script,/key==="foulRate"\?`\$\{Number\(value\)\.toFixed\(2\)\}%`/);
 const css=fs.readFileSync(new URL("../player-detail-build6.css",import.meta.url),"utf8");
+const revision=fs.readFileSync(new URL("../ui-revision-v12.js",import.meta.url),"utf8");
 const nativeBuild=fs.readFileSync(new URL("../scripts/build-native-web.mjs",import.meta.url),"utf8");
 const sw=fs.readFileSync(new URL("../sw.js",import.meta.url),"utf8");
 
@@ -49,7 +50,7 @@ test("all disciplines keep the approved metric sets",()=>{
 });
 
 test("detail density is collapsed and duplicate recent matches are removed",()=>{
-  assert.match(script,/bests\.slice\(0,3\)/);
+  assert.match(script,/displayedBests\.slice\(0,3\)/);
   assert.doesNotMatch(script,/records\.slice\(0,3\)/);
   assert.doesNotMatch(script,/data-pd7-trend-toggle/);
   assert.match(script,/data-pd7-metric-trend="winRate"/);
@@ -57,13 +58,11 @@ test("detail density is collapsed and duplicate recent matches are removed",()=>
   assert.match(script,/value==null\?"—"/);
 });
 
-test("each supported metric opens one direct trend popup",()=>{
-  assert.match(script,/data-pd7-metric-trend="winRate"/);
-  assert.match(script,/\["shotRate","breakInRate","masuwariRate","foulRate"\]\.includes\(key\)/);
-  assert.match(script,/role="dialog" aria-modal="true"/);
-  assert.match(script,/data-pd7-trend-close/);
-  assert.doesNotMatch(script,/指標の変化を見る/);
-  assert.doesNotMatch(script,/data-pd7-trend-key/);
+test("normal v1 detail replaces metric sheets with one full-screen trends page",()=>{
+  assert.match(revision,/グラフで見る/);
+  assert.match(revision,/removeAttribute\("data-pd7-metric-trend"\)/);
+  assert.match(revision,/querySelector\("\[data-pd7-trend-modal\]"\)\?\.remove\(\)/);
+  assert.match(revision,/className="pd12-trends hidden"/);
 });
 
 test("rate precision is one decimal except foul rate at two decimals",()=>{
@@ -81,7 +80,7 @@ test("detail navigation title is game specific and the standard back button owns
 
 test("metric and best summaries use one responsive row without blank segments",()=>{
   assert.match(script,/pd7-metrics count-\$\{keys\.length\}/);
-  assert.match(script,/pd7-bests count-\$\{Math\.min\(bests\.length,3\)\}/);
+  assert.match(script,/pd7-bests count-\$\{Math\.min\(displayedBests\.length,3\)\}/);
   assert.match(css,/\.pd7-metrics\.count-4\{grid-template-columns:repeat\(4,minmax\(0,1fr\)\)\}/);
   assert.match(css,/\.pd7-metrics\.count-3,\.pd7-bests\.count-3\{grid-template-columns:repeat\(3,minmax\(0,1fr\)\)\}/);
   assert.match(css,/\.pd7-metrics\.count-2,\.pd7-bests\.count-2\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)\}/);

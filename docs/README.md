@@ -69,6 +69,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/43_CueScore_v1.0_Analytics_Scope_Trend_Axis_Spec.md`
 - `official/44_CueScore_v1.0_Build11_Back_Performance_Opponent_Records_Decision.md`
 - `official/45_CueScore_v1.0_Build11_Back_Performance_Opponent_Records_Spec.md`
+- `official/46_CueScore_v1.0_UI_Navigation_Revision_Decision.md`
+- `official/47_CueScore_v1.0_UI_Navigation_Revision_Spec.md`
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and

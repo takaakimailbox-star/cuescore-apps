@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="./analysis-final-rc.css" />
   <link rel="stylesheet" href="./analysis-build4.css" />
   <link rel="stylesheet" href="./player-detail-build6.css" />
+  <link rel="stylesheet" href="./ui-revision-v12.css" />
   <link rel="stylesheet" href="./player-detail-build8.css" />
   <style id="build8PlayerTitleV1">
   .pd8-title-with-icon{display:flex!important;align-items:center;justify-content:center;gap:7px}.pd8-title-with-icon img{width:25px;height:25px;flex:0 0 auto}
@@ -8663,7 +8664,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build9-candidate-v1"></script>
+  <script src="./demo-data.js?v=2.0-build12-ui-revision-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19180,7 +19181,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build9-candidate-v1";
+    const PWA_VERSION = "2.0-build12-ui-revision-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -27897,7 +27898,7 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   const renderPlayerDetailBeforeBuild5=window.renderFormalPlayerDetailV1;
   window.renderFormalPlayerDetailV1=function(id){renderPlayerDetailBeforeBuild5?.(id);addPlayerAnalysisEntryV5(id);};
   document.getElementById("playerStatsBody")?.addEventListener("click",event=>{const entry=event.target.closest("[data-open-player-analysis-v5]");if(entry)window.openPlayerAnalysisForPlayerV5?.(entry.dataset.openPlayerAnalysisV5,journeyDiscipline);});
-  const addHistoryAnalysisEntriesV5=()=>historyRoot.querySelectorAll("[data-player-record-id]").forEach(row=>{if(row.nextElementSibling?.matches("[data-player-analysis-record-id]"))return;const button=document.createElement("button");button.type="button";button.className="journey-match-analysis-v5";button.dataset.playerAnalysisRecordId=row.dataset.playerRecordId;button.textContent="この試合を分析";row.insertAdjacentElement("afterend",button);});
+  const addHistoryAnalysisEntriesV5=()=>historyRoot.querySelectorAll("[data-player-analysis-record-id]").forEach(button=>button.remove());
   new MutationObserver(addHistoryAnalysisEntriesV5).observe(historyRoot,{subtree:true,childList:true});
   historyRoot.addEventListener("click",event=>{const button=event.target.closest("[data-player-analysis-record-id]");if(!button)return;event.preventDefault();event.stopImmediatePropagation();window.openMatchAnalysisForPlayerV5?.(button.dataset.playerAnalysisRecordId,historyState.playerId,historyState.discipline);},true);
 
@@ -28302,6 +28303,7 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   <script src="./analytics-build4-metrics.js"></script>
   <script src="./analysis-build4.js"></script>
   <script src="./player-detail-build6.js"></script>
+  <script src="./ui-revision-v12.js"></script>
 </body>
 </html>
 

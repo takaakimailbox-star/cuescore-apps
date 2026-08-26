@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## v1.0 UI／Navigation Revision 実装・自動検証完了／実iPhone確認待ち（2026年8月26日）
+
+- Product Owner採用により、Rotation／14-1／JPAの自己ベストから`1試合最高得点`を除外。競技詳細の個別指標bottom sheetを通常導線から外し、`グラフで見る`から全適用指標を縦に確認するPlayer・競技固定の全画面推移pageへ置換した。算出式とeligible判定は変更していない。
+- 対戦相手別成績から4項目summary、sort、競技selectorを撤去し、相手を最新対戦順＋既存ID tie-breakで固定表示。相手固定履歴をPlayer vs Opponent、aggregate、compact月別履歴の順へ変更した。
+- Player履歴から期間／詳細／分析buttonを撤去し、card／chevronのMatch Detail入口を維持。Player一覧はsortを撤去し、main、actual match latest usage、既存stable ID順のcompact一段rowへ変更した。
+- 全自動テスト`232 pass / 0 fail`。Chrome `390×844`で全画面Trends、固定Opponent Records、固定履歴、横overflowなしを正規操作でPASS。native sync後、iOS Simulator Debug／Releaseとも`BUILD SUCCEEDED`。
+- Marketing Version `1.0`／Build Number `11`のまま。Archive、Validate、TestFlight upload、内部配信、App Review、一般公開は実施していない。実iPhoneのSafe Area、Swipe Back体感、長い実データ名、OS pickerはpendingでありPASS扱いにしない。
+- Official 046／047が、競合範囲でOfficial 040／041、042／043、044／045を置換する。実装記録：`docs/implementation/CueScore_v1.0_UI_Navigation_Revision_Implementation_2026-08-26.md`。
+
 ## TestFlight Build 11 内部配信完了／実iPhone確認待ち（2026年8月26日）
 
 - Back応答改善と対戦相手別成績UIを含むBuild 11候補commit `8236d45a9430c137bc24574822927654896322f9`を`origin/main`へpushし、その同一sourceからArchiveした。

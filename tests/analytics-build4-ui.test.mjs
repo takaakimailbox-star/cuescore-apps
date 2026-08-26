@@ -26,7 +26,7 @@ test("Build 5 navigation starts analysis from Player Detail and carries viewer c
   assert.doesNotMatch(html,/id="cueHomeAnalysisV3"/);
   assert.match(html,/プレーヤー分析を見る/);
   assert.match(html,/historyLabel\.textContent="試合一覧"/);
-  assert.match(html,/この試合を分析/);
+  assert.doesNotMatch(html,/この試合を分析/);
   assert.match(html,/openPlayerAnalysisForPlayerV5/);
   assert.match(html,/openMatchAnalysisForPlayerV5/);
   assert.match(html,/selectedViewerPlayerId/);
