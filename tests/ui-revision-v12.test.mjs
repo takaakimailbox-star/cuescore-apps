@@ -24,6 +24,9 @@ test("opponent records are fixed-context, unsorted by controls, and recency orde
   assert.match(revision,/\.journey-summary-v2,\.journey-segment-v2/);
   assert.match(revision,/select\.replaceWith\(fixed\)/);
   assert.match(revision,/latest\.get\(b\.dataset\.rivalOpponent\).*latest\.get\(a\.dataset\.rivalOpponent\)/);
+  assert.match(revision,/classList\.add\("pd13-rival-context"\)/);
+  assert.match(revision,/classList\.remove\("player-journey-card-v2"\)/);
+  assert.match(css,/\.pd13-rival-context[\s\S]*background:transparent/);
 });
 
 test("normal histories remove period and analysis actions but retain detail cards",()=>{
@@ -31,6 +34,25 @@ test("normal histories remove period and analysis actions but retain detail card
   assert.match(revision,/querySelectorAll\("\[data-player-analysis-record-id\]"\)/);
   assert.match(revision,/data-player-record-id/);
   assert.match(revision,/試合詳細を開く/);
+});
+
+test("opponent-fixed and player histories use separate compact match contracts",()=>{
+  assert.match(revision,/classList\.toggle\("pd13-opponent-match",opponentFixed\)/);
+  assert.match(revision,/classList\.toggle\("pd13-player-match",!opponentFixed\)/);
+  assert.match(revision,/opponent\.querySelector\("img"\)\?\.remove\(\)/);
+  assert.match(revision,/row\.querySelector\("\.journey-game-v2"\)\?\.remove\(\)/);
+  assert.match(revision,/row\.querySelector\("\.journey-match-opponent-avatar-v3"\)\?\.remove\(\)/);
+  assert.match(css,/\.pd13-opponent-match[\s\S]*min-height:48px/);
+  assert.match(css,/\.pd13-player-match[\s\S]*min-height:54px/);
+  assert.match(css,/\.pd13-player-match \.journey-game-v2 img \{ display:none/);
+});
+
+test("Match Detail tap and edge swipe share the remembered history origin",()=>{
+  assert.match(revision,/rememberMatchDetailOrigin/);
+  assert.match(revision,/document\.addEventListener\("click",rememberMatchDetailOrigin,true\)/);
+  assert.match(revision,/document\.addEventListener\("keydown"/);
+  assert.match(revision,/const closeMatchDetailBase=window\.closeFormalMatchDetailV2/);
+  assert.match(revision,/window\.closeFormalMatchDetailV2=.*closeMatchDetailBase\?\.\(\).*history\?\.classList\.remove\("hidden"\)/);
 });
 
 test("player management has automatic deterministic order and compact memo",()=>{

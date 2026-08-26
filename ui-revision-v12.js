@@ -70,6 +70,7 @@
     const root=document.getElementById("playerOpponentRecordsV2");if(!root||root.classList.contains("hidden"))return;
     root.querySelectorAll(".journey-summary-v2,.journey-segment-v2").forEach(node=>node.remove());
     const select=root.querySelector(".journey-discipline-v2 select");if(select){const fixed=document.createElement("span");fixed.className="pd12-fixed-discipline";fixed.textContent=select.selectedOptions[0]?.textContent||def(detail()?.state?.discipline).label;select.replaceWith(fixed);}
+    const context=root.querySelector(".journey-player-v2");if(context){context.classList.add("pd13-rival-context");context.classList.remove("player-journey-card-v2");context.setAttribute("aria-label",`${context.querySelector("strong")?.textContent||"Player"}、${context.querySelector(".pd12-fixed-discipline")?.textContent||"競技"}の対戦相手別成績`);}
     const player=detail()?.state?.player,active=detail()?.state?.discipline;if(!player||!active)return;
     const latest=new Map();(window.recordsForRegisteredPlayer?.(player)||[]).filter(record=>discipline(record)===active).forEach(record=>{const s=side(record,player),raw=recordPlayer(record,s===1?2:1),key=String(raw.registeredPlayerId||raw.name||"");latest.set(key,Math.max(latest.get(key)||0,time(record)));});
     const list=root.querySelector(".journey-list-v2");if(list){const current=[...list.querySelectorAll("[data-rival-opponent]")],ordered=[...current].sort((a,b)=>(latest.get(b.dataset.rivalOpponent)||0)-(latest.get(a.dataset.rivalOpponent)||0)||stable(a.dataset.rivalOpponent,b.dataset.rivalOpponent));if(current.some((row,index)=>row!==ordered[index]))ordered.forEach(row=>list.appendChild(row));}
@@ -82,14 +83,27 @@
     const root=document.getElementById("playerMatchHistoryV2");if(!root||root.classList.contains("hidden"))return;
     const shell=root.querySelector(".player-journey-shell-v2"),opponent=shell?.querySelector(".journey-history-opponent-v11"),summary=shell?.querySelector(".journey-history-summary-v4");
     if(opponent&&summary&&opponent.previousElementSibling!==null)shell.insertBefore(opponent,summary);
+    if(opponent){opponent.classList.add("pd13-opponent-context");opponent.classList.remove("player-journey-card-v2");opponent.querySelector("img")?.remove();opponent.querySelector("small")?.remove();}
     root.querySelector("[data-history-period]")?.remove();
     root.querySelectorAll("[data-player-analysis-record-id]").forEach(node=>node.remove());
-    root.querySelectorAll("[data-player-record-id]").forEach(row=>{row.setAttribute("aria-label",`${row.getAttribute("aria-label")||"試合"}、試合詳細を開く`);const open=row.querySelector(".journey-match-open-v3");if(open){open.textContent="›";open.setAttribute("aria-hidden","true");}});
+    const opponentFixed=Boolean(root.dataset.pd8Opponent);
+    root.querySelectorAll("[data-player-record-id]").forEach(row=>{
+      row.classList.toggle("pd13-opponent-match",opponentFixed);row.classList.toggle("pd13-player-match",!opponentFixed);
+      if(opponentFixed){row.querySelector(".journey-game-v2")?.remove();row.querySelector(".journey-match-vs-v3")?.remove();row.querySelector(".journey-match-opponent-avatar-v3")?.remove();row.querySelector(".journey-match-opponent-v3>strong")?.remove();}
+      row.setAttribute("aria-label",`${row.getAttribute("aria-label")||"試合"}、試合詳細を開く`);const open=row.querySelector(".journey-match-open-v3");if(open){open.textContent="›";open.setAttribute("aria-hidden","true");}
+    });
   }
   const history=document.getElementById("playerMatchHistoryV2");if(history)new MutationObserver(()=>requestAnimationFrame(reviseHistory)).observe(history,{subtree:true,childList:true,attributes:true,attributeFilter:["class"]});
   const openHistoryBase=window.openPlayerMatchHistoryV2;
   window.openPlayerMatchHistoryV2=(...args)=>{openHistoryBase?.(...args);reviseHistory();};
   document.addEventListener("click",event=>{if(event.target.closest("#playerOpponentRecordsV2 [data-rival-opponent]"))reviseHistory();});
+
+  let matchDetailReturn=null;
+  const rememberMatchDetailOrigin=event=>{const row=event.target.closest?.("#playerMatchHistoryV2 [data-player-record-id]");if(row)matchDetailReturn={opponentKey:history?.dataset.pd8Opponent||""};};
+  document.addEventListener("click",rememberMatchDetailOrigin,true);
+  document.addEventListener("keydown",event=>{if(["Enter"," "].includes(event.key))rememberMatchDetailOrigin(event);},true);
+  const closeMatchDetailBase=window.closeFormalMatchDetailV2;
+  window.closeFormalMatchDetailV2=()=>{const origin=matchDetailReturn;closeMatchDetailBase?.();if(origin){history?.classList.remove("hidden");history?.setAttribute("aria-hidden","false");matchDetailReturn=null;}};
 
   document.addEventListener("keydown",event=>{if(event.key==="Escape"&&!trends.classList.contains("hidden")){event.preventDefault();closeTrends();}});
   window.CueScoreUiRevisionV12={openTrends,closeTrends,reviseDetail,reviseRivals,reviseHistory,revisePlayerList};

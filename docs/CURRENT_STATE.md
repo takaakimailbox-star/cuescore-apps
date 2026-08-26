@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## v1.0 実iPhone UI／Match Detail Back修正完了・自動検証PASS／実iPhone再確認待ち（2026年8月27日）
+
+- Build 12の実iPhone確認で確定した表示差分を修正。対戦相手別成績の選択Player／固定競技を白cardからcompact context headerへ分離し、白cardは対戦相手だけにした。
+- 相手固定履歴はsmall avatarのPlayer vs Opponent、aggregate、月別履歴の順を維持し、競技重複表示を削除。match cardは日付／時刻、勝敗、score、race、chevronだけの48px基準へcompact化した。
+- Player履歴は競技名／相手名を保持し、大きな競技icon／相手avatarを省いた54px基準の別layoutへcompact化した。相手固定履歴とPlayer履歴を別仕様として実装・テストした。
+- 履歴cardから開いたMatch Detailのoriginを保持し、左上Backとedge Swipe Backを同じclose／restore処理へ統一。相手固定履歴／Player履歴の各2経路を回帰test化した。
+- 全自動テスト`234 pass / 0 fail / 0 skipped`。source／native-web／iOS copied assets一致、Simulator Debug／Releaseとも`BUILD SUCCEEDED`。
+- Marketing Version `1.0`／Build Number `12`のまま。実iPhoneの4 Back経路、Safe Area、gesture体感、390×844、長い実Player名は再確認までpending。追加TestFlight upload、App Store Review、外部配信、一般公開は実施していない。
+- Official 048／049がOfficial 046／047を競合範囲で明確化する。実装記録：`docs/implementation/CueScore_v1.0_iPhone_UI_Back_Fix_Implementation_2026-08-27.md`。
+
 ## TestFlight Build 12 内部配信完了／実iPhone確認待ち（2026年8月26日）
 
 - v1.0 UI／Navigation Revision commit `dbc3e97`とBuild Number設定commit `42c0d97df1342fb32e4feb67a79dafc9040c37d8`を`origin/main`へpushし、その同一sourceからArchiveした。
