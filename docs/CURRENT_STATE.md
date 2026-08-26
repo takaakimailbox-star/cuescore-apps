@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## TestFlight Build 11 内部配信完了／実iPhone確認待ち（2026年8月26日）
+
+- Back応答改善と対戦相手別成績UIを含むBuild 11候補commit `8236d45a9430c137bc24574822927654896322f9`を`origin/main`へpushし、その同一sourceからArchiveした。
+- 全自動テスト`226 pass / 0 fail / 0 skipped`、native asset整合、Simulator Debug／Release、Signed Release Archive、App Store ValidateをPASSした。
+- Xcode Organizerから`TestFlight Internal Only`としてVersion `1.0`／Build `11`をアップロード。App Store Connectアップロード日`2026年8月26日 9:14` JST。
+- 輸出コンプライアンスは既存正式回答「上記のアルゴリズムのどれでもない」で保存。Build 11は既存内部グループ`CueScore Internal Testers`に含まれ、状態は`テスト中`。
+- 実iPhone確認はpending。左上／Swipe Backの体感応答、Player／競技／相手文脈、対戦相手別成績、固定履歴、Match Detail、390×844、長い名前、通常／サンプル等を未確認のままPASS扱いにしない。
+- App Store Review提出、外部TestFlight、一般公開、価格／配信地域変更は実施していない。Build Number `1`〜`11`は再利用しない。
+- 配布記録：`docs/implementation/CueScore_Build11_TestFlight_Distribution_2026-08-26.md`。
+
 ## Build 11候補：Back応答改善・対戦相手別成績UI更新（2026年8月26日）
 
 - Build 10内部配信済みの`origin/main` commit `98653d4fc70547a3c0f900f8cb98bfa581b1962a`を基準に、Marketing Version `1.0`／次の未使用Build Number `11`を設定した。
