@@ -32,7 +32,7 @@ test("same-day matches get a visible sequence suffix",()=>{
 test("v1 normal journeys keep simple opponent results and Match Detail only",()=>{
   assert.match(detail,/試合詳細を見る/);
   assert.match(detail,/analysis\.hidden=true/);
-  assert.match(html,/<article class="journey-opponent-v2">/);
-  assert.doesNotMatch(html,/<button class="journey-opponent-v2" type="button" data-rival-opponent=/);
+  assert.match(html,/<button class="journey-opponent-v2" type="button" data-rival-opponent=/);
+  assert.match(html,/openOpponentHistory\(row\.dataset\.rivalOpponent\)/);
   assert.match(html,/window\.openRivalAnalysisForPlayerV832/);
 });

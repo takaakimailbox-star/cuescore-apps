@@ -67,6 +67,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/41_CueScore_v1.0_Build9_Foul_Rate_Metric_Trend_Popup_Spec.md`
 - `official/42_CueScore_v1.0_Analytics_Scope_Trend_Axis_Decision.md`
 - `official/43_CueScore_v1.0_Analytics_Scope_Trend_Axis_Spec.md`
+- `official/44_CueScore_v1.0_Build11_Back_Performance_Opponent_Records_Decision.md`
+- `official/45_CueScore_v1.0_Build11_Back_Performance_Opponent_Records_Spec.md`
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and

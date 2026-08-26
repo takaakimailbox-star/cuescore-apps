@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## Build 11候補：Back応答改善・対戦相手別成績UI更新（2026年8月26日）
+
+- Build 10内部配信済みの`origin/main` commit `98653d4fc70547a3c0f900f8cb98bfa581b1962a`を基準に、Marketing Version `1.0`／次の未使用Build Number `11`を設定した。
+- Back遅延の直接要因だったedge Swipe Back完了後190ms／最大280msの固定待機を廃止。tap／swipeは同じ標準Back controlを即時実行し、押下中の視覚反応を追加した。
+- Player一覧、Player情報、競技詳細、競技固定履歴、Player編集等は保持済みDOMを先に復帰する。入力受付、handler開始、DOM完了、視覚利用可能をruntime内だけで段階計測でき、console／永続ログは追加していない。
+- 対戦相手別成績をcompact header、`対戦相手 / 試合 / 勝敗 / 勝率`、既存sort、compact cardへ更新。W／L badge履歴を削除し、相手cardから相手・競技固定履歴、Match Detailへ進む。深いRival Analysisへは進まない。
+- 欠損結果は敗戦として補完せず、判定可能試合だけを勝敗と勝率の分母にする。採点、保存schema、Backup／Restore、分析指標定義、通常／サンプル分離は変更していない。
+- 全自動テスト`226 pass / 0 fail / 0 skipped`、native sync、iOS Simulator Debug／Releaseとも`BUILD SUCCEEDED`。実iPhone確認はpendingであり、体感Back応答、Swipe Back、390×844表示、長い名前等を未確認のままPASS扱いにしない。
+- Official 044／045がBuild 11のNavigation、性能計測、対戦相手別成績UIを定義する。実装記録：`docs/implementation/CueScore_Build11_Back_Latency_Opponent_Records_UI_Implementation_2026-08-26.md`。Archive／Validate／TestFlight Internal Onlyは後続Gateで記録する。
+
 ## TestFlight Build 10 内部配信完了／実iPhone確認待ち（2026年8月25日）
 
 - v1分析範囲・推移軸を確定したBuild 10候補commit `b5b786c262214e9c7c03a097fe894fa8ed82f160`を`origin/main`へpushし、その同一sourceからArchiveした。
