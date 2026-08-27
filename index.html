@@ -27485,8 +27485,12 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
     "#vsAnalysisBackBtn",
     "#classificationManagerBackV381",
     "#recordDetailBackBtn",
-    "[data-suite-back]"
+    "[data-suite-back]",
+    "[data-journey-back]",
+    ".pd12-trends-back",
+    "[data-analysis-back]"
   ];
+  const backButtonSelector = backButtonSelectors.join(",");
 
   const isVisible = element => {
     if (!element || element.hidden || element.disabled) return false;
@@ -27526,7 +27530,7 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   };
 
   let backTransitionActive = false;
-  document.addEventListener("pointerdown",event=>{const button=event.target.closest(backButtonSelectors.join(","));if(button)button.dataset.cueBackSource="tap";},{passive:true,capture:true});
+  document.addEventListener("pointerdown",event=>{const button=event.target.closest(backButtonSelector);if(button)button.dataset.cueBackSource="tap";},{passive:true,capture:true});
   const clearInteractiveBack = () => {
     const appRoot=document.querySelector(".app");
     document.body.classList.remove("cue-edge-back-tracking-v3","cue-edge-back-cancelling-v3");
@@ -27570,6 +27574,9 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   document.addEventListener("touchstart", event => {
     resetGesture();
     if (event.touches.length !== 1) return;
+    // A direct Back tap must remain a native tap. Starting edge tracking here
+    // disables pointer events on .app and WebKit can then cancel the click.
+    if (event.target.closest(backButtonSelector)) return;
     const touch = event.touches[0];
     if (touch.clientX > EDGE_START_MAX) return;
     const backButton = visibleBackButton();
@@ -27994,7 +28001,11 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
 .settings-page-back-v2,
 .settings-suite-back-v2,
 .app.vs-analysis-mode .vs-analysis-back,
-.analysis-v2-header button{
+.analysis-v2-header button,
+.player-journey-back-v2,
+.pd12-trends-back,
+.match-detail-back-v1,
+.analytics-home-back-v2{
   width:var(--cue-nav-hit-size-v1)!important;
   min-width:var(--cue-nav-hit-size-v1)!important;
   height:var(--cue-nav-hit-size-v1)!important;

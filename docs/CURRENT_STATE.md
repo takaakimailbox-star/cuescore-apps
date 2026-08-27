@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## v1.0 全ページBack総監査／iOS App Icon原因修正・自動検証完了／実iPhone再確認待ち（2026年8月27日）
+
+- 実iPhoneで左上Back tapが失効し、edge Swipe Backは戻れる共通原因を確定。edge gestureが左端の`touchstart`直後に`.app`を`pointer-events:none`へ変更し、Back button自身のclick生成をWebKit上で失効させ得ていた。
+- Back control自身から始まるtouchはedge trackingを開始しない共通修正を実施。Player／競技／対戦相手／履歴／Match Detailに加え、対戦相手別成績、Player履歴、全画面推移、Player起点分析を同一Back対象・48px基準へ統一した。
+- iOS icon不一致はcacheではなく、Asset CatalogにCapacitor初期templateの青いiconが残っていたことが直接原因。正式SSOTを既存`icons/cuescore-app-icon-512.png`のCueScore意匠と確定し、iOS用opaque RGB 1024pxへ同期した。
+- 全自動テスト`237 pass / 0 fail / 0 skipped`、source／native-web／iOS copied index一致、Simulator Debug／Releaseとも`BUILD SUCCEEDED`。unsigned verification Archiveを作成し、App bundleの120px AppIconが正式CueScore Cマークであることを確認した。
+- 採点、saved-data schema、Backup／Restore、analytics formulaは変更していない。実iPhoneの全Back tap／SwipeとTestFlight icon目視はpendingで、未確認のままPASS扱いにしない。
+- Official 050／051。実装記録：`docs/implementation/CueScore_v1.0_Global_Back_Audit_AppIcon_Investigation_Implementation_2026-08-27.md`。
+
 ## v1.0 実iPhone UI／Match Detail Back修正完了・自動検証PASS／実iPhone再確認待ち（2026年8月27日）
 
 - Build 12の実iPhone確認で確定した表示差分を修正。対戦相手別成績の選択Player／固定競技を白cardからcompact context headerへ分離し、白cardは対戦相手だけにした。
