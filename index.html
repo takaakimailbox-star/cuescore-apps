@@ -9431,7 +9431,7 @@ body {
 
 
   // RC32: keep a recoverable snapshot before destructive local operations.
-  function createDestructiveBackupV132(reason, extra = {}) {
+  function createDestructiveBackupV132(reason, extra = {}, scopedData = null) {
     const categoryKey = activeCueScoreDataKeyV1("rotationScoreboard.matchCategories.v1");
     const seasonKey = activeCueScoreDataKeyV1("rotationScoreboard.matchSeasons.v1");
     const backupPrefix = window.CueScoreDemoData?.isDemo() ? "cuescore-demo.beforeDelete" : "rotationScoreboard.beforeDelete";
@@ -9439,8 +9439,8 @@ body {
       schemaVersion: "1.0-RC59",
       reason: String(reason || "destructive-operation"),
       createdAt: new Date().toISOString(),
-      players: readPlayerLibrary(),
-      matchRecords: readMatchRecords(),
+      players: Array.isArray(scopedData?.players) ? scopedData.players : readPlayerLibrary(),
+      matchRecords: Array.isArray(scopedData?.matchRecords) ? scopedData.matchRecords : readMatchRecords(),
       matchCategories: (() => { try { return JSON.parse(localStorage.getItem(categoryKey) || "[]"); } catch (_) { return []; } })(),
       matchSeasons: (() => { try { return JSON.parse(localStorage.getItem(seasonKey) || "[]"); } catch (_) { return []; } })(),
       ...extra
@@ -11141,7 +11141,11 @@ let matchRecordsRawCacheV152 = null;
   function deletePlayerByIdV1(playerId) {
     const player = readPlayerLibrary().find(p => String(p.id) === String(playerId));
     if (!player || !confirm(`「${player.name}」を削除しますか？\n\nこのプレーヤーを削除しても、過去の試合履歴は残ります。`)) return false;
-    createDestructiveBackupV132("delete-player", { deletedPlayerId: String(player.id), deletedPlayerName: player.name });
+    createDestructiveBackupV132(
+      "delete-player",
+      { deletedPlayerId: String(player.id), deletedPlayerName: player.name, backupScope: "deleted-player-only" },
+      { players: [player], matchRecords: [] }
+    );
     writePlayerLibrary(readPlayerLibrary().filter(p => String(p.id) !== String(player.id)));
     [1, 2].forEach(slot => {
       if (String(selectedRegisteredPlayer[slot] || "") !== String(player.id)) return;
@@ -15762,7 +15766,11 @@ let matchRecordsRawCacheV152 = null;
     );
     if (!confirmed) return;
 
-    createDestructiveBackupV132("delete-match-record", { deletedRecordId: String(recordId) });
+    createDestructiveBackupV132(
+      "delete-match-record",
+      { deletedRecordId: String(recordId), backupScope: "deleted-match-only" },
+      { players: [], matchRecords: [record] }
+    );
     writeMatchRecords(
       records.filter(item => String(item.id) !== String(recordId))
     );
@@ -16925,7 +16933,7 @@ let matchRecordsRawCacheV152 = null;
       if (!value || typeof value !== "object") return false;
       if (![BACKUP_FORMAT, LEGACY_BACKUP_FORMAT].includes(value.format)) return false;
       if (!Array.isArray(value.players) || !Array.isArray(value.matchRecords)) return false;
-      if (value.schemaVersion != null && (!Number.isInteger(Number(value.schemaVersion)) || Number(value.schemaVersion) < 1)) return false;
+      if (value.schemaVersion != null && (!Number.isInteger(Number(value.schemaVersion)) || Number(value.schemaVersion) < 1 || Number(value.schemaVersion) > BACKUP_SCHEMA_VERSION)) return false;
 
       // Schema Version 1（Ver.3.9）は区分・シーズンを持たないため許可する。
       if (value.matchCategories != null && !Array.isArray(value.matchCategories)) return false;
@@ -16942,6 +16950,37 @@ let matchRecordsRawCacheV152 = null;
       const ids = value.matchRecords.map(record => String(record.id || record.matchId || "").trim()).filter(Boolean);
       if (new Set(ids).size !== ids.length) return false;
       return true;
+    }
+
+    function migrateBackupToCanonicalV170(value) {
+      if (!validateBackup(value)) throw new TypeError("Unsupported or invalid CueScore backup.");
+      const schemaVersion = Number(value.schemaVersion || 1);
+      if (![1, 2].includes(schemaVersion)) throw new TypeError(`Unsupported CueScore backup schema: ${schemaVersion}`);
+      const players = window.cueScoreNormalizePlayersToDefaultAvatarV4(value.players).map(player => ({
+        ...player,
+        id: String(player.id ?? player.playerId ?? player.uuid ?? "").trim()
+      }));
+      if (players.some(player => !player.id || !String(player.name || "").trim())) throw new TypeError("Backup player identity is incomplete.");
+      if (new Set(players.map(player => player.id)).size !== players.length) throw new TypeError("Backup player IDs are duplicated.");
+      const normalizeSide = side => {
+        const normalized = {...side};
+        if (normalized.registeredPlayerId != null) normalized.registeredPlayerId = String(normalized.registeredPlayerId).trim();
+        return normalized;
+      };
+      const matchRecords = value.matchRecords.map(record => {
+        const id = String(record.id ?? record.matchId ?? "").trim();
+        if (!id) throw new TypeError("Backup match identity is incomplete.");
+        return normalizeMatchRecordV680({...record,id,players:{...record.players,1:normalizeSide(record.players[1]),2:normalizeSide(record.players[2])}});
+      });
+      if (new Set(matchRecords.map(record => record.id)).size !== matchRecords.length) throw new TypeError("Backup match IDs are duplicated.");
+      return {
+        ...value,
+        schemaVersion: BACKUP_SCHEMA_VERSION,
+        players,
+        matchRecords,
+        ...(Array.isArray(value.matchCategories) ? {matchCategories:value.matchCategories} : {}),
+        ...(Array.isArray(value.matchSeasons) ? {matchSeasons:value.matchSeasons} : {})
+      };
     }
 
     async function importBackupFile(file) {
@@ -16963,6 +17002,14 @@ let matchRecordsRawCacheV152 = null;
       }
       if (!validateBackup(backup)) {
         alert("このバックアップファイルはCueScore Appsで復元できる形式ではありません。");
+        return;
+      }
+
+      try {
+        backup = migrateBackupToCanonicalV170(backup);
+      } catch (migrationError) {
+        console.error(migrationError);
+        alert("このバックアップは安全に現行形式へ変換できないため、復元を中止しました。現在のデータは変更されていません。");
         return;
       }
 
@@ -17013,6 +17060,7 @@ let matchRecordsRawCacheV152 = null;
 
     // Settings Suite も正式な検証・復元処理を直接利用する。
     window.cueScoreValidateBackup = validateBackup;
+    window.cueScoreMigrateBackupToCanonicalV170 = migrateBackupToCanonicalV170;
     window.cueScoreImportBackupFile = importBackupFile;
 
     function clearSelectedPlayersV1() {
@@ -25878,6 +25926,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   function validateBackup(value){return Boolean(window.cueScoreValidateBackup?.(value))}
   function mergeUnique(current,incoming,keyFn){const keys=new Set(current.map(keyFn));const added=[];incoming.forEach(item=>{const key=keyFn(item);if(!keys.has(key)){keys.add(key);added.push(item)}});return {value:[...current,...added],added:added.length}}
   async function mergeBackup(backup){
+    backup=window.cueScoreMigrateBackupToCanonicalV170(backup);
     const current={players:readArray(PLAYER_KEY),records:readArray(RECORD_KEY),categories:readArray(CATEGORY_KEY),seasons:readArray(SEASON_KEY)};
     const nextPlayers=mergeUnique(current.players,backup.players,playerKey);
     const nextRecords=mergeUnique(current.records,backup.matchRecords,recordKey);

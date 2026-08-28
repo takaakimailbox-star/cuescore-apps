@@ -31,8 +31,16 @@
 .pd12-trend-card { margin:0 0 12px; padding:14px 10px 12px; border:1px solid #e2e2dd; border-radius:16px; background:#fff; }
 .pd12-trend-card h2 { margin:0 4px 8px; font-size:16px; }
 .pd12-trend-card small { display:block; margin:0 4px 8px; color:#777; }
-.pd12-chart-scroll { overflow-x:auto; overscroll-behavior-x:contain; }
-.pd12-chart-scroll .analysis-b4-chart-wrap { min-width:340px; }
+.pd12-chart-scroll { overflow-x:hidden; overscroll-behavior-x:contain; }
+.pd12-chart-scroll .analysis-b4-chart-wrap { min-width:0; }
+.pd12-chart-scroll .analysis-b4-chart { height:208px; margin:0; overflow:visible; }
+.pd12-chart-scroll .analysis-b4-y-label,
+.pd12-chart-scroll .analysis-b4-x-label { fill:#242424; font-size:11px; font-weight:750; }
+.pd12-chart-scroll .analysis-b4-axis-caption { fill:#555; font-size:9px; font-weight:700; }
+.pd12-chart-scroll .analysis-b4-grid { stroke:#d4d4cf; stroke-width:1; }
+.pd12-chart-scroll .analysis-b4-axis { stroke:#777; stroke-width:1.2; }
+.pd12-chart-scroll .analysis-b4-plot-line { stroke:#171717; stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
+.pd12-chart-scroll .analysis-b4-plot-point { fill:#fff; stroke:#171717; stroke-width:3; }
 .journey-summary-v2, .journey-segment-v2 { display:none !important; }
 .journey-player-v2 .journey-discipline-v2 select { display:none !important; }
 .pd12-fixed-discipline { color:#666; font-size:12px; font-weight:800; }
