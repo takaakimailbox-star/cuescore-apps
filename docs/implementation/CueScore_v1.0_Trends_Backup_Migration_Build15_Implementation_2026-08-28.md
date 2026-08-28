@@ -1,7 +1,7 @@
 # CueScore v1.0 — Trends / Backup Migration / Build 15 Implementation
 
 Date: 2026-08-28  
-Status: implementation gates PASS / TestFlight distribution pending
+Status: implementation, Archive, Validate and Internal-only upload PASS / Apple processing confirmation pending
 
 ## Direct cause
 
@@ -31,4 +31,6 @@ FixturesはProduct OwnerのDesktop提供ファイルを直接使用し、個人�
 - source／native-web／iOS copied assets一致。
 - Simulator Debug／Release: `BUILD SUCCEEDED`.
 - Physical iPhone: pending.
-- Archive／Validate／TestFlight Internal Only: pending.
+- Signed Release Archive: `/private/tmp/CueScore-Build15.xcarchive`, `ARCHIVE SUCCEEDED`.
+- App Store validation: `App 1.0 (15) validated`, all validation checks PASS.
+- Xcode distribution: `Upload for TestFlight (Internal Testing Only)`で`App 1.0 (15) uploaded`。App Store Connectの処理完了、輸出コンプライアンス、既存内部グループ`CueScore Internal Testers`の状態確認はサインイン後までpending。
