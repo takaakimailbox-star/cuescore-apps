@@ -1,7 +1,7 @@
 # CueScore v1.0 — Release Candidate Build 16 Preparation
 
 Date: 2026-08-28  
-Status: implementation, Archive, Validate and Internal-only upload PASS / compliance, internal group and physical iPhone pending
+Status: implementation, Archive, Validate and Internal TestFlight distribution PASS / physical iPhone pending
 
 ## Basis
 
@@ -25,7 +25,8 @@ Status: implementation, Archive, Validate and Internal-only upload PASS / compli
 - Signed Release Archive: `ARCHIVE SUCCEEDED`。
 - App Store validation: `App 1.0 (16) validated`、all validation checks PASS。
 - Xcode distribution: `Upload for TestFlight (Internal Testing Only)`で`App 1.0 (16) uploaded`。
-- App Store Connect: Apple処理完了、Build 16表示まで確認。輸出コンプライアンス回答保存と`CueScore Internal Testers`状態確定はpending。
+- App Store Connect: Apple処理完了後、輸出コンプライアンスを正式回答「上記のアルゴリズムのどれでもない」で保存した。
+- Internal distribution: Build 16は`CI CueScore Internal Testers`（招待数1）に含まれ、状態は`テスト中`。Product OwnerはiPhoneのTestFlightから更新可能。
 - RC Build 16 physical iPhone: pending。
 - App Store metadata／public screenshots: RC実iPhone PASS後に監査するためpending。
 - App Store Review／External TestFlight／一般公開:未実施。

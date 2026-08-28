@@ -6,7 +6,8 @@
 - 公開版Settingsではサンプルデータ見出し／card／全操作入口をrenderしない。サンプルデータ実装と通常データ分離は開発検証互換として維持し、Backup／Restore／Data Deleteは変更していない。
 - App Store ConnectでBuild 16未使用を確認し、Marketing Version `1.0`／Build Number `16`をRC候補に設定した。
 - 全自動テスト`244 pass / 0 fail / 0 skipped`。390×844 Settingsでsample heading／region 0、横overflowなし。native asset一致、Simulator Debug／Releaseとも`BUILD SUCCEEDED`。
-- 同一sourceからSigned Archive、App Store Validate、`TestFlight (Internal Testing Only)` uploadをPASS。Apple処理完了後、Build 16がApp Store Connectへ表示された。輸出コンプライアンス回答保存と内部グループ確定、RC実iPhone確認、App Store metadata／公開用screenshots監査はpending。RC実iPhone PASS前にmetadata監査を開始せず、明示承認前にApp Store Reviewへ提出しない。
+- 同一sourceからSigned Archive、App Store Validate、`TestFlight (Internal Testing Only)` uploadをPASS。Apple処理完了後、輸出コンプライアンスを正式回答「上記のアルゴリズムのどれでもない」で保存した。Build 16は内部グループ`CI CueScore Internal Testers`（招待数1）に含まれ、App Store Connect上の状態は`テスト中`。
+- RC Build 16の実iPhone確認と、実機PASS後に行うApp Store metadata／公開用screenshots監査はpending。RC実iPhone PASS前にmetadata監査を開始せず、明示承認前にApp Store Reviewへ提出しない。
 - Official 056／057。実装記録：`docs/implementation/CueScore_v1.0_Release_Candidate_Build16_Preparation_2026-08-28.md`。
 
 ## Build 15候補：推移可読性・旧Backup migration／個別削除修正（2026年8月28日）
