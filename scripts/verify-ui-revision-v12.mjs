@@ -29,9 +29,10 @@ assert.equal(await page.locator("#playerOpponentRecordsV2 [data-rival-sort]").co
 assert.equal(await page.locator("#playerOpponentRecordsV2 .journey-discipline-v2 select").count(),0);
 assert.equal(await noOverflow("#playerOpponentRecordsV2"),true);
 await page.locator("#playerOpponentRecordsV2 [data-rival-opponent]").first().click();
+assert.equal(await page.locator("#playerMatchHistoryV2 .journey-history-opponent-v11").count(),0);
 assert.equal(await page.locator("#playerMatchHistoryV2 [data-history-period]").count(),0);
 assert.equal(await page.locator("#playerMatchHistoryV2 [data-player-analysis-record-id]").count(),0);
 assert.equal(await noOverflow("#playerMatchHistoryV2"),true);
 
-console.log(JSON.stringify({viewport:"390x844",trends:"pass",opponents:"pass",history:"pass",overflow:"pass"}));
+console.log(JSON.stringify({viewport:"390x844",trends:"pass",opponents:"pass",opponentVsRow:"removed",history:"pass",overflow:"pass"}));
 await browser.close();

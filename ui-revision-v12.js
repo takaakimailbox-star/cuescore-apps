@@ -81,12 +81,10 @@
 
   function reviseHistory(){
     const root=document.getElementById("playerMatchHistoryV2");if(!root||root.classList.contains("hidden"))return;
-    const shell=root.querySelector(".player-journey-shell-v2"),opponent=shell?.querySelector(".journey-history-opponent-v11"),summary=shell?.querySelector(".journey-history-summary-v4");
-    if(opponent&&summary&&opponent.previousElementSibling!==null)shell.insertBefore(opponent,summary);
-    if(opponent){opponent.classList.add("pd13-opponent-context");opponent.classList.remove("player-journey-card-v2");opponent.querySelector("img")?.remove();opponent.querySelector("small")?.remove();}
+    const opponentFixed=Boolean(root.dataset.pd8Opponent),opponent=root.querySelector(".journey-history-opponent-v11");
+    if(opponentFixed)opponent?.remove();
     root.querySelector("[data-history-period]")?.remove();
     root.querySelectorAll("[data-player-analysis-record-id]").forEach(node=>node.remove());
-    const opponentFixed=Boolean(root.dataset.pd8Opponent);
     root.querySelectorAll("[data-player-record-id]").forEach(row=>{
       row.classList.toggle("pd13-opponent-match",opponentFixed);row.classList.toggle("pd13-player-match",!opponentFixed);
       if(opponentFixed){row.querySelector(".journey-game-v2")?.remove();row.querySelector(".journey-match-vs-v3")?.remove();row.querySelector(".journey-match-opponent-avatar-v3")?.remove();row.querySelector(".journey-match-opponent-v3>strong")?.remove();}

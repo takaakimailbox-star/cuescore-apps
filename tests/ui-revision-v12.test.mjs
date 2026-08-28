@@ -39,12 +39,18 @@ test("normal histories remove period and analysis actions but retain detail card
 test("opponent-fixed and player histories use separate compact match contracts",()=>{
   assert.match(revision,/classList\.toggle\("pd13-opponent-match",opponentFixed\)/);
   assert.match(revision,/classList\.toggle\("pd13-player-match",!opponentFixed\)/);
-  assert.match(revision,/opponent\.querySelector\("img"\)\?\.remove\(\)/);
+  assert.match(revision,/if\(opponentFixed\)opponent\?\.remove\(\)/);
   assert.match(revision,/row\.querySelector\("\.journey-game-v2"\)\?\.remove\(\)/);
   assert.match(revision,/row\.querySelector\("\.journey-match-opponent-avatar-v3"\)\?\.remove\(\)/);
   assert.match(css,/\.pd13-opponent-match[\s\S]*min-height:48px/);
   assert.match(css,/\.pd13-player-match[\s\S]*min-height:54px/);
   assert.match(css,/\.pd13-player-match \.journey-game-v2 img \{ display:none/);
+});
+
+test("opponent-fixed history removes the redundant Player vs Opponent row only in fixed context",()=>{
+  assert.match(revision,/const opponentFixed=Boolean\(root\.dataset\.pd8Opponent\),opponent=root\.querySelector\("\.journey-history-opponent-v11"\)/);
+  assert.match(revision,/if\(opponentFixed\)opponent\?\.remove\(\)/);
+  assert.doesNotMatch(revision,/opponent\?\.remove\(\);[\s\S]*if\(!opponentFixed\)opponent\?\.remove\(\)/);
 });
 
 test("Match Detail tap and edge swipe share the remembered history origin",()=>{

@@ -75,6 +75,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/49_CueScore_v1.0_iPhone_UI_Back_Fix_Spec.md`
 - `official/50_CueScore_v1.0_Global_Back_AppIcon_Decision.md`
 - `official/51_CueScore_v1.0_Global_Back_AppIcon_Spec.md`
+- `official/52_CueScore_v1.0_Remove_Opponent_VS_Row_Decision.md`
+- `official/53_CueScore_v1.0_Remove_Opponent_VS_Row_Spec.md`
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and

@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## v1.0 相手固定履歴VS行削除・390×844レビュー撮影（2026年8月28日）
+
+- 相手・競技固定履歴ではtitleが相手と競技を明示するため、本文の`Player vs Opponent`行をavatar含め行全体で削除した。通常Player履歴、aggregate、月別履歴、match card、Match Detail、Back／Swipe Backは維持した。
+- 全自動テスト`238 pass / 0 fail / 0 skipped`。390×844でVS行0件と横overflowなしを確認した。
+- review専用`docs/assets/review-ui/2026-08-28/`へ41 PNGを保存。30枚は390×844寸法検査済み、最終11枚はviewport resetにより731×720の補足画像としてREADMEへ明記した。Home、Player管理、全6競技詳細／推移／入力、Opponent Records／固定履歴、Player履歴、Match Detail、Setup／picker、9-Ball Result、Settings、Backup／Restore、About／法務／Supportを含む。
+- 追加5競技Result、全scroll位置、empty/no-data全組合せ、OS picker、削除確定、Sample Data実行確認、全体試合履歴一覧は未撮影としてREADMEと実装記録へ明示した。review setはProduct Owner確認前に正式採用扱いにしない。
+- Official 052／053がOfficial 046／047／048／049の`Player vs Opponent`行に関する記述だけを競合範囲で置き換える。
+- scoring rules、saved-data schema、Backup／Restore、analytics formula、App Store Review／一般公開／外部TestFlightは変更していない。
+- 実装記録：`docs/implementation/CueScore_v1.0_Remove_Opponent_VS_Row_Full_Screenshot_Review_Implementation_2026-08-28.md`。
+
 ## TestFlight Build 14 内部配信完了／実iPhone再確認待ち（2026年8月28日）
 
 - 全ページBack修正と正式CueScore App Iconを含む最新sourceを基準に、Marketing Version `1.0`／Build Number `14`を設定したcommit `a9f5eb6bfa860c12067b6938cbce6a3422e332e9`を`origin/main`へpushし、同一sourceからArchiveした。
