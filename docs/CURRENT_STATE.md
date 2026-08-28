@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## TestFlight Build 14 内部配信完了／実iPhone再確認待ち（2026年8月28日）
+
+- 全ページBack修正と正式CueScore App Iconを含む最新sourceを基準に、Marketing Version `1.0`／Build Number `14`を設定したcommit `a9f5eb6bfa860c12067b6938cbce6a3422e332e9`を`origin/main`へpushし、同一sourceからArchiveした。
+- Build Number更新前後とも全自動テスト`237 pass / 0 fail / 0 skipped`。native asset整合、iOS Simulator Debug／Release、Signed Release Archive、App Store ValidateをPASSした。
+- Xcode Organizerから`TestFlight Internal Only`としてVersion `1.0`／Build `14`をアップロード。輸出コンプライアンスは正式回答「上記のアルゴリズムのどれでもない」で保存した。
+- Build 14は既存内部グループ`CueScore Internal Testers`（1名）に含まれ、App Store Connect上の状態は`テスト中`。
+- 実iPhoneでの正式App Icon、全ページBack tap／edge Swipe Back、文脈復帰、Safe Area、390×844、長い実データ名、写真、OS picker、通常／サンプル、6競技主要機能は再確認までpendingで、未確認のままPASS扱いにしない。
+- App Store Review提出、外部TestFlight、一般公開、価格／配信地域変更は実施していない。Build Number `1`〜`14`は再利用しない。
+- 配布記録：`docs/implementation/CueScore_Build14_TestFlight_Distribution_2026-08-28.md`。
+
 ## v1.0 全ページBack総監査／iOS App Icon原因修正・自動検証完了／実iPhone再確認待ち（2026年8月27日）
 
 - 実iPhoneで左上Back tapが失効し、edge Swipe Backは戻れる共通原因を確定。edge gestureが左端の`touchstart`直後に`.app`を`pointer-events:none`へ変更し、Back button自身のclick生成をWebKit上で失効させ得ていた。
