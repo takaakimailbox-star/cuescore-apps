@@ -6,7 +6,7 @@
 - 旧Backup削除不能の直接原因はID不整合ではなく、大容量Restore後の個別削除前に全Player／全MatchをlocalStorageへ再複製する安全退避の容量増幅。個別削除では対象entityだけを退避し、全件削除の全体退避は維持した。
 - schema 1／2を現行schema 2へcanonicalizeする共通migrationをReplace／Mergeへ追加。unsafe／unsupportedはtransaction前に停止する。
 - Product Owner提供4 fixtureでmigration／round-trip、Player削除、Matchがある3 fixtureのMatch削除、primary最大1、orphan 0、console error 0をPASS。個人データfixtureはrepositoryへ保存していない。
-- 全自動テスト`244 pass / 0 fail / 0 skipped`、native asset一致、Chrome 390×844、Simulator Debug／ReleaseをPASS。同一commitからBuild 15 Signed Archive、Validate、`TestFlight (Internal Testing Only)` uploadまでPASS。Apple処理完了、輸出コンプライアンス、既存内部グループ状態と実iPhone確認はpending。
+- 全自動テスト`244 pass / 0 fail / 0 skipped`、native asset一致、Chrome 390×844、Simulator Debug／ReleaseをPASS。同一commitからBuild 15 Signed Archive、Validate、`TestFlight (Internal Testing Only)` uploadまでPASS。Apple処理完了後、輸出コンプライアンスを正式回答「上記のアルゴリズムのどれでもない」で保存。既存内部グループ`CueScore Internal Testers`に含まれ、状態は`テスト中`。実iPhone確認のみpending。
 - Official 054／055。実装記録：`docs/implementation/CueScore_v1.0_Trends_Backup_Migration_Build15_Implementation_2026-08-28.md`。
 
 ## v1.0 相手固定履歴VS行削除・390×844レビュー撮影（2026年8月28日）
