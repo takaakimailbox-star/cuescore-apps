@@ -4,7 +4,8 @@ import { performance } from "node:perf_hooks";
 import vm from "node:vm";
 
 const html = fs.readFileSync(new URL("../index.html", import.meta.url), "utf8");
-for (const label of ["サンプルデータ","通常データ","準備する","サンプルを見る","通常データへ戻る","初期状態に戻す"]) assert.match(html,new RegExp(label));
+assert.match(html,/const ENABLE_SAMPLE_DATA_UI = false;/,"public v1.0 must not render the sample-data Settings entry");
+for (const label of ["サンプルデータ","通常データ","準備する","サンプルを見る","通常データへ戻る","初期状態に戻す"]) assert.match(html,new RegExp(label),"development-only sample tools remain implemented");
 assert.match(html,/アプリの画面と機能を試せます。通常のデータには影響しません。/);
 assert.match(html,/<section class="settings-demo-card-v1" aria-label="サンプルデータ">/);
 assert.match(html,/<div class="settings-demo-head-v1"><strong>サンプルデータ<\/strong>/);

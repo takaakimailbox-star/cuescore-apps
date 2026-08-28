@@ -79,6 +79,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/53_CueScore_v1.0_Remove_Opponent_VS_Row_Spec.md`
 - `official/54_CueScore_v1.0_Trends_Backup_Migration_Decision.md`
 - `official/55_CueScore_v1.0_Trends_Backup_Migration_Spec.md`
+- `official/56_CueScore_v1.0_Release_Candidate_Public_Sample_UI_Decision.md`
+- `official/57_CueScore_v1.0_Release_Candidate_Public_Sample_UI_Spec.md`
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and

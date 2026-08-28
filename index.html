@@ -25347,6 +25347,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   if (!screen || screen.dataset.formalSettingsV1 === "ready") return;
   screen.dataset.formalSettingsV1 = "ready";
   screen.classList.add("settings-formal-v1");
+  const ENABLE_SAMPLE_DATA_UI = false;
 
   const icon = {
     gear: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.3 13.5a7.6 7.6 0 0 0 0-3l1.8-1.4-2-3.4-2.3.9a7.4 7.4 0 0 0-2.6-1.5L13.8 2h-3.7l-.4 3.1a7.4 7.4 0 0 0-2.6 1.5l-2.3-.9-2 3.4 1.8 1.4a7.6 7.6 0 0 0 0 3l-1.8 1.4 2 3.4 2.3-.9a7.4 7.4 0 0 0 2.6 1.5l.4 3.1h3.7l.4-3.1a7.4 7.4 0 0 0 2.6-1.5l2.3.9 2-3.4Z"/></svg>',
@@ -25394,7 +25395,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
             <span></span><span class="settings-data-chevron-v1" aria-hidden="true">›</span>
           </button>
         </section>
-        <h1 class="settings-formal-section-title-v1">サンプルデータ</h1>
+        ${ENABLE_SAMPLE_DATA_UI ? `<h1 class="settings-formal-section-title-v1">サンプルデータ</h1>
         <section class="settings-demo-card-v1" aria-label="サンプルデータ">
           <div class="settings-demo-head-v1"><strong>サンプルデータ</strong><span class="settings-demo-state-v1" id="settingsDemoStateV1">通常データ</span></div>
           <p class="settings-demo-note-v1">アプリの画面と機能を試せます。通常のデータには影響しません。</p>
@@ -25405,7 +25406,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
             <button type="button" data-demo-action="reset">初期状態に戻す</button>
             <button type="button" class="is-danger" data-demo-action="delete">削除</button>
           </div>
-        </section>
+        </section>` : ""}
         <div class="settings-formal-spacer-v1" aria-hidden="true"></div>
         <footer class="settings-app-footer-v1">
           <div class="settings-app-brand-v1"><span data-cuescore-logo="horizontal-black"></span><span class="settings-version">Version 1.0</span></div>
