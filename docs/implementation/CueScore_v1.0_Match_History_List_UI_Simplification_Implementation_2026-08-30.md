@@ -20,7 +20,7 @@
 - 390×844 in-app browser: title、7種目tab、対象件数、既存empty state、検索／filter／sort control 0件、document／body幅390、横overflowなし。
 - Layout: tabから件数6px、件数からlist 0px。削除領域の空白なし。
 - iOS Simulator Debug／Release: `BUILD SUCCEEDED`。
-- App Store ConnectはApple Account再認証待ち。次の未使用Build確認、Build設定、Archive／Validate／TestFlight Internal Onlyはpending。
+- App Store ConnectでBuild 19未使用を確認し、Marketing Version `1.0`／Build Number `19`を設定した。Archive／Validate／TestFlight Internal Onlyはpending。
 - 実iPhone確認はpending。
 
 ## Release Boundary
