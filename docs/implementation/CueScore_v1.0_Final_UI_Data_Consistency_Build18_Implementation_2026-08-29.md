@@ -1,7 +1,7 @@
 # CueScore v1.0 — Final UI and Data Consistency / Build 18 Candidate
 
 Date: 2026-08-29  
-Status: implementation and automated verification PASS / distribution Gate pending
+Status: implementation／automated verification／Archive／Validate／TestFlight Internal distribution PASS / physical iPhone pending
 
 ## Basis
 
@@ -33,8 +33,12 @@ Status: implementation and automated verification PASS / distribution Gate pendi
 - 390×844 in-app browser: viewport／document／body幅390、横overflowなし。Player 0人案内1件、開始disabled、placeholder候補0を確認。
 - iOS Simulator Debug: `BUILD SUCCEEDED`。
 - iOS Simulator Release: `BUILD SUCCEEDED`。
+- Signed Archive: `ARCHIVE SUCCEEDED`（Version `1.0`／Build `18`）。
+- App Store Validate: PASS。
+- `TestFlight (Internal Testing Only)` upload: PASS。App Store Connectアップロード日`2026年8月29日 22:39` JST。
+- Apple processing: PASS。輸出コンプライアンスは正式回答「上記のアルゴリズムのどれでもない」で保存した。
+- Internal distribution: `CI CueScore Internal Testers`（tester／招待数1）、App Store Connect状態`テスト中`。
 - RC Build 18 physical iPhone: pending。
-- Archive／Validate／TestFlight Internal Only／Apple processing／輸出コンプライアンス／`テスト中`: pending。
 
 ## Unchanged
 

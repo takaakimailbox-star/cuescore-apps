@@ -1,13 +1,15 @@
 # CueScore Apps Current State
 
-## v1.0 最終UI・データ整合／Build 18候補（2026年8月29日）
+## v1.0 最終UI・データ整合／Build 18内部配信完了（2026年8月29日）
 
 - 推移グラフを試合単体値から、既存aggregate SSOTによる古い→新しい各時点の累計値へ変更した。欠損eligible値は0へ変換せず、最新点は同Player／同競技の主要指標と同じ全対象record aggregateになる。
 - 競技固定履歴は`9-Ballの全試合`のように競技をtitleへ明示し、競技名とRace toをcardから除いた1行compact rowへ変更した。通常Player履歴と相手固定履歴、Match DetailのRace toは維持した。
 - 14-1の`14ボールラック`案内だけをpull handleなしの中央Modalへ変更し、overlay、OK、queue、scoring／rerack stateは維持した。
 - 新規試合は登録Player IDを持つ異なる2人だけを許可する。0人時は画面内に1つの登録案内、1人時は`対戦相手を追加`を表示し、初回Home強制遷移は行わない。既存placeholder由来historyは削除・migrationせず保持する。
 - 全自動テスト`255 pass / 0 fail / 0 skipped`、source／native-web／iOS copied asset一致、内蔵ブラウザ390×844でPlayer 0人案内・開始disabled・placeholder候補0・横overflowなし、Simulator Debug／Releaseとも`BUILD SUCCEEDED`。
-- App Store ConnectでBuild 18未使用を確認し、Marketing Version `1.0`／Build Number `18`を設定した。Archive／Validate／TestFlight Internal Onlyは後続Gate。実iPhone確認はpending。App Store Review、External TestFlight、一般公開は実施しない。
+- App Store ConnectでBuild 18未使用を確認し、Marketing Version `1.0`／Build Number `18`を設定した。同一sourceからSigned Archive、App Store Validate、`TestFlight (Internal Testing Only)` uploadをPASS。App Store Connectアップロード日`2026年8月29日 22:39` JST。
+- Apple処理完了後、輸出コンプライアンスを正式回答「上記のアルゴリズムのどれでもない」で保存した。Build 18は内部グループ`CI CueScore Internal Testers`（招待数1）に含まれ、状態は`テスト中`。
+- RC Build 18の実iPhone確認はpending。App Store Review、External TestFlight、一般公開は実施していない。
 - Official 060／061。実装記録：`docs/implementation/CueScore_v1.0_Final_UI_Data_Consistency_Build18_Implementation_2026-08-29.md`。
 
 ## v1.0 Break Input即時表示修正／Build 17候補（2026年8月29日）
