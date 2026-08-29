@@ -85,6 +85,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/59_CueScore_v1.0_Break_Input_Immediate_Spec.md`
 - `official/60_CueScore_v1.0_Final_UI_Data_Consistency_Decision.md`
 - `official/61_CueScore_v1.0_Final_UI_Data_Consistency_Spec.md`
+- `official/62_CueScore_v1.0_Match_History_List_UI_Simplification_Decision.md`
+- `official/63_CueScore_v1.0_Match_History_List_UI_Simplification_Spec.md`
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and

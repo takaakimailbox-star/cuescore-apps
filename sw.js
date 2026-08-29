@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-build18-final-ui-data-consistency-v1";
+const APP_VERSION = "2.0-build19-history-list-simplification-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-build18-final-ui-data-consistency-v1",
+  "./demo-data.js?v=2.0-build19-history-list-simplification-v1",
   "./manifest.webmanifest",
   "./privacy.html",
   "./terms.html",

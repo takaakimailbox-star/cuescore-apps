@@ -59,5 +59,5 @@ test("Build 18 asset is ordered last and included in native and offline bundles"
   assert.ok(index.indexOf("ui-revision-v12.js")<index.indexOf("final-ui-build18.js"));
   assert.match(nativeBuild,/final-ui-build18\.js/);
   assert.match(sw,/final-ui-build18\.js/);
-  assert.match(sw,/2\.0-build18-final-ui-data-consistency-v1/);
+  assert.match(sw,/2\.0-build19-history-list-simplification-v1/);
 });

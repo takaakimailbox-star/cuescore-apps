@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## v1.0 試合履歴一覧UI簡素化／次RC候補（2026年8月30日）
+
+- 全体履歴titleを`試合履歴一覧`へ変更し、検索、詳細絞り込み、並び替え、保存状態の上部UIを除去した。上からtitle、7種目tab、対象件数、履歴card一覧の順とし、削除領域の不要余白を残さない。
+- `すべて`と6競技tabは現行名・順序を維持。各tabとも新しい試合から古い試合へ固定し、同日時は既存Match ID辞書順で決定的に並べる。新schemaは追加していない。
+- 履歴card、Match Detail、Back tap／edge Swipe Back、勝敗、score、Player情報、Backup／Restore、分析、採点は変更していない。詳細検索とユーザー指定sortはLater / Deferred。
+- native asset同期後、全自動テスト`261 pass / 0 fail / 0 skipped`。内蔵ブラウザ390×844でtitle、7tab、対象件数、empty state、検索／filter／sort 0件、document幅390、横overflowなし、件数とlist間0pxを確認した。Simulator Debug／Releaseとも`BUILD SUCCEEDED`。
+- App Store Connectのセッション再認証待ちのため、次の未使用Build番号確認とRC／TestFlight工程はpending。実iPhone確認もpending。App Store Review、External TestFlight、一般公開は実施しない。
+- Official 062／063。実装記録：`docs/implementation/CueScore_v1.0_Match_History_List_UI_Simplification_Implementation_2026-08-30.md`。
+
 ## v1.0 最終UI・データ整合／Build 18内部配信完了（2026年8月29日）
 
 - 推移グラフを試合単体値から、既存aggregate SSOTによる古い→新しい各時点の累計値へ変更した。欠損eligible値は0へ変換せず、最新点は同Player／同競技の主要指標と同じ全対象record aggregateになる。
