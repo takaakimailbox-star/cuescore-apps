@@ -13,7 +13,7 @@ assert.match(html, /showRackStartToastV1\(nextRackNumberV1,nextBreakerV1\)/);
 assert.match(html, /\.toast\.rack-transition-toast-v1[\s\S]*?z-index: 20020/);
 assert.match(html, /classList\.add\("rack-transition-toast-v1"\)/);
 assert.match(html, /showBreakResultPromptV61\(nextBreakerV1, nextRackNumberV1, \{ nextRack:true \}\)/);
-assert.match(html, /if \(!rackEnded \|\| gameEnded \|\| reviewMode\) return/);
+assert.match(html, /rackBreakPromptQueuedV1 = true;\s*const nextRackNumberV1 = Number\(rack\) \+ 1;/);
 assert.match(html, /classList\.contains\("hidden"\) \|\| el\("breakResultOverlayV61"\)\?\.classList\.contains\("is-closing-v2"\)/);
 
 console.log("9-Ball and 10-Ball break winning-ball transition checks passed");

@@ -12395,7 +12395,7 @@ let matchRecordsRawCacheV152 = null;
       const nextBreaker = decision.nextPlayer;
       if (breakCount[player] > 0) breakCount[player]--;
       breakCount[nextBreaker] = Number(breakCount[nextBreaker] || 0) + 1;
-      setTimeout(() => showBreakResultPromptV61(nextBreaker, rackNumber, {source:"game"}), 0);
+      showBreakResultPromptV61(nextBreaker, rackNumber, {source:"game"});
     }
     setTimeout(() => {
       breakResultSavingV1 = false;
@@ -13176,7 +13176,7 @@ let matchRecordsRawCacheV152 = null;
         forceNewRow = true;
         recordAnalysisEventV60("rack_started", {player:current,breakPlayer:current,rack,inning,previousRack:completedRack,previousPlayer,source:"nine_ball_next_rack"});
       });
-      if (options.showPrompt !== false && recordingModeV611 === "detail") setTimeout(() => showBreakResultPromptV61(player, rack), 0);
+      if (options.showPrompt !== false && recordingModeV611 === "detail") showBreakResultPromptV61(player, rack);
       return true;
     }
 
@@ -13242,7 +13242,7 @@ let matchRecordsRawCacheV152 = null;
         source: "next_rack_selection"
       });
     });
-    if (options.showPrompt !== false) setTimeout(() => showBreakResultPromptV61(player, rack), 0);
+    if (options.showPrompt !== false) showBreakResultPromptV61(player, rack);
     return true;
   }
 
@@ -13305,20 +13305,11 @@ let matchRecordsRawCacheV152 = null;
       !rackBreakPromptQueuedV1
     ) {
       rackBreakPromptQueuedV1 = true;
-      setTimeout(() => {
-        if (!rackEnded || gameEnded || reviewMode) {
-          rackBreakPromptQueuedV1 = false;
-          return;
-        }
-        const nextRackNumberV1 = Number(rack) + 1;
-        const nextBreakerV1 = Number(nextBreakPlayer) === 2 ? 2 : 1;
-        showRackStartToastV1(nextRackNumberV1,nextBreakerV1);
-        window.setTimeout(() => {
-          rackBreakPromptQueuedV1 = false;
-          if (!rackEnded || gameEnded || reviewMode) return;
-          showBreakResultPromptV61(nextBreakerV1, nextRackNumberV1, { nextRack:true });
-        }, 700);
-      }, 220);
+      const nextRackNumberV1 = Number(rack) + 1;
+      const nextBreakerV1 = Number(nextBreakPlayer) === 2 ? 2 : 1;
+      showRackStartToastV1(nextRackNumberV1,nextBreakerV1);
+      rackBreakPromptQueuedV1 = false;
+      showBreakResultPromptV61(nextBreakerV1, nextRackNumberV1, { nextRack:true });
     }
   }
 
@@ -13576,7 +13567,7 @@ let matchRecordsRawCacheV152 = null;
     });
     el("straightBreakDecisionOverlayV1")?.classList.add("hidden");
     straightBreakDecisionV1 = null;
-    if (choice === "rebreak") setTimeout(() => showBreakResultPromptV61(current, rack), 0);
+    if (choice === "rebreak") showBreakResultPromptV61(current, rack);
   }
 
   function pocketBall(number) {
@@ -14532,17 +14523,8 @@ let matchRecordsRawCacheV152 = null;
 
     updateGame();
     if (!threeCushionModeV1 && !straightPoolModeV1 && recordingModeV611 === "detail") {
-      const promptSessionIdV111 = currentGameSessionIdV104;
-      setTimeout(() => {
-        if (currentGameSessionIdV104 !== promptSessionIdV111) return;
-        if (!app.classList.contains("pro-game-mode") || gameEnded) return;
-        showRackStartToastV1(1,startingPlayer);
-        window.setTimeout(() => {
-          if (currentGameSessionIdV104 !== promptSessionIdV111) return;
-          if (!app.classList.contains("pro-game-mode") || gameEnded) return;
-          showBreakResultPromptV61(startingPlayer, 1, {source:"new-match"});
-        },700);
-      }, 0);
+      showRackStartToastV1(1,startingPlayer);
+      showBreakResultPromptV61(startingPlayer, 1, {source:"new-match"});
     }
   }
 

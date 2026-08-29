@@ -81,6 +81,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/55_CueScore_v1.0_Trends_Backup_Migration_Spec.md`
 - `official/56_CueScore_v1.0_Release_Candidate_Public_Sample_UI_Decision.md`
 - `official/57_CueScore_v1.0_Release_Candidate_Public_Sample_UI_Spec.md`
+- `official/58_CueScore_v1.0_Break_Input_Immediate_Decision.md`
+- `official/59_CueScore_v1.0_Break_Input_Immediate_Spec.md`
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and
