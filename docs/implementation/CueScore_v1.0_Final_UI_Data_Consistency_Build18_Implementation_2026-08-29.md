@@ -9,6 +9,7 @@ Status: implementation and automated verification PASS / distribution Gate pendi
 - Start時にlocal／origin一致、working tree cleanを確認した。
 - App Store ConnectでBuild 18が未使用であることを確認した。Build 17は再利用しない。
 - Marketing Version `1.0`を維持する。
+- Implementation commit: `8aee676`。その後Build Number `18`を設定した。
 
 ## Implementation
 
