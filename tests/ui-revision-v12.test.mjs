@@ -38,7 +38,7 @@ test("normal histories remove period and analysis actions but retain detail card
 
 test("opponent-fixed and player histories use separate compact match contracts",()=>{
   assert.match(revision,/classList\.toggle\("pd13-opponent-match",opponentFixed\)/);
-  assert.match(revision,/classList\.toggle\("pd13-player-match",!opponentFixed\)/);
+  assert.match(revision,/classList\.toggle\("pd13-player-match",!opponentFixed&&!disciplineFixed\)/);
   assert.match(revision,/if\(opponentFixed\)opponent\?\.remove\(\)/);
   assert.match(revision,/row\.querySelector\("\.journey-game-v2"\)\?\.remove\(\)/);
   assert.match(revision,/row\.querySelector\("\.journey-match-opponent-avatar-v3"\)\?\.remove\(\)/);
@@ -48,7 +48,7 @@ test("opponent-fixed and player histories use separate compact match contracts",
 });
 
 test("opponent-fixed history removes the redundant Player vs Opponent row only in fixed context",()=>{
-  assert.match(revision,/const opponentFixed=Boolean\(root\.dataset\.pd8Opponent\),opponent=root\.querySelector\("\.journey-history-opponent-v11"\)/);
+  assert.match(revision,/const opponentFixed=Boolean\(root\.dataset\.pd8Opponent\),disciplineFixed=Boolean\(root\.dataset\.pd8Discipline\)&&!opponentFixed,opponent=root\.querySelector\("\.journey-history-opponent-v11"\)/);
   assert.match(revision,/if\(opponentFixed\)opponent\?\.remove\(\)/);
   assert.doesNotMatch(revision,/opponent\?\.remove\(\);[\s\S]*if\(!opponentFixed\)opponent\?\.remove\(\)/);
 });

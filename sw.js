@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-build12-iphone-ui-back-fix-v1";
+const APP_VERSION = "2.0-build18-final-ui-data-consistency-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-build12-iphone-ui-back-fix-v1",
+  "./demo-data.js?v=2.0-build18-final-ui-data-consistency-v1",
   "./manifest.webmanifest",
   "./privacy.html",
   "./terms.html",
@@ -18,6 +18,7 @@ const APP_SHELL = [
   "./player-detail-build6.js",
   "./player-detail-build6.css",
   "./ui-revision-v12.js",
+  "./final-ui-build18.js",
   "./ui-revision-v12.css",
   "./player-detail-build8.css",
   "./docs/official/app-store-v1.0/public/CueScore_Privacy_Policy_v1.0_Official.md",

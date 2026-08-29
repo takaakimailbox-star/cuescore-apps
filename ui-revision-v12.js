@@ -17,6 +17,7 @@
   const def=id=>defs.find(item=>item.id===id)||defs[0];
   const detail=()=>window.CueScoreBuild6PlayerDetail;
   const chartApi=()=>window.CueScoreBuild4Analytics;
+  const aggregateApi=()=>window.CueScoreBuild4Metrics;
   const side=(record,player)=>typeof window.playerSideInRecord==="function"?Number(window.playerSideInRecord(record,player))||0:0;
   const won=(record,s)=>Number(record?.winner||record?.winnerSide||record?.result?.winnerSide||0)===Number(s);
   const metric=(record,s)=>typeof window.savedPlayerMetricsV113==="function"?window.savedPlayerMetricsV113(record,s)||{}:{};
@@ -34,7 +35,7 @@
     const active=state.discipline,records=(typeof window.recordsForRegisteredPlayer==="function"?window.recordsForRegisteredPlayer(state.player):[]).filter(record=>discipline(record)===active).sort((a,b)=>new Date(a?.endedAt||a?.playedAt||a?.startedAt||0)-new Date(b?.endedAt||b?.playedAt||b?.startedAt||0));
     trends.querySelector("h1").textContent=`${def(active).label} 推移`;
     trends.querySelector("main").innerHTML=(metricOrder[active]||["winRate"]).map(key=>{
-      const values=records.map(record=>chartApi()?.recordMetric?.(record,state.player,key,active,helpers)??null);
+      const values=records.map((_,index)=>aggregateApi()?.aggregate?.(records.slice(0,index+1),state.player,helpers)?.[key]??null);
       const graph=chartApi()?.chart?.(values,key,records)||'<div class="pd7-empty">データなし</div>';
       return `<section class="pd12-trend-card"><h2>${labels[key]}</h2><small>${records.length?`${records.length}試合`:'データなし'}</small><div class="pd12-chart-scroll">${graph}</div></section>`;
     }).join("");
@@ -81,13 +82,15 @@
 
   function reviseHistory(){
     const root=document.getElementById("playerMatchHistoryV2");if(!root||root.classList.contains("hidden"))return;
-    const opponentFixed=Boolean(root.dataset.pd8Opponent),opponent=root.querySelector(".journey-history-opponent-v11");
+    const opponentFixed=Boolean(root.dataset.pd8Opponent),disciplineFixed=Boolean(root.dataset.pd8Discipline)&&!opponentFixed,opponent=root.querySelector(".journey-history-opponent-v11");
     if(opponentFixed)opponent?.remove();
+    if(disciplineFixed){const active=root.dataset.pd8Discipline,title=root.querySelector(".player-journey-header-v2 h1");if(title){title.textContent=`${def(active).label}の全試合`;title.setAttribute("aria-label",`${def(active).label}の全試合`);}}
     root.querySelector("[data-history-period]")?.remove();
     root.querySelectorAll("[data-player-analysis-record-id]").forEach(node=>node.remove());
     root.querySelectorAll("[data-player-record-id]").forEach(row=>{
-      row.classList.toggle("pd13-opponent-match",opponentFixed);row.classList.toggle("pd13-player-match",!opponentFixed);
+      row.classList.toggle("pd13-opponent-match",opponentFixed);row.classList.toggle("pd13-fixed-discipline-match",disciplineFixed);row.classList.toggle("pd13-player-match",!opponentFixed&&!disciplineFixed);
       if(opponentFixed){row.querySelector(".journey-game-v2")?.remove();row.querySelector(".journey-match-vs-v3")?.remove();row.querySelector(".journey-match-opponent-avatar-v3")?.remove();row.querySelector(".journey-match-opponent-v3>strong")?.remove();}
+      if(disciplineFixed){row.querySelector(".journey-game-v2")?.remove();row.querySelector(".journey-match-race-v3")?.remove();const date=row.querySelector(".journey-match-date-v3"),opponentLine=row.querySelector(".journey-match-opponent-v3");if(date){const match=date.textContent.match(/\d{4}\/(\d{2})\/(\d{2})（.）\s+(\d{2}:\d{2})/);if(match)date.textContent=`${Number(match[1])}/${Number(match[2])} ${match[3]}`;if(opponentLine)opponentLine.insertBefore(date,opponentLine.querySelector(".journey-match-vs-v3"));}}
       row.setAttribute("aria-label",`${row.getAttribute("aria-label")||"試合"}、試合詳細を開く`);const open=row.querySelector(".journey-match-open-v3");if(open){open.textContent="›";open.setAttribute("aria-hidden","true");}
     });
   }

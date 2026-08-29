@@ -7926,10 +7926,10 @@ body {
             <div class="player-heading-row"><h2>先攻（ブレイク）</h2><button class="starter-choice selected" id="p1StarterBtn" type="button">先攻</button></div>
             <button class="new-match-player-select-v1" id="p1PlayerSearchBtn" type="button" aria-label="先攻プレーヤーを選択">
               <span class="new-match-avatar-v1 has-player-avatar-v2" aria-hidden="true"><img src="assets/icons/avatar/default/avatar_default_silhouette.png" alt=""></span>
-              <span class="new-match-player-name-v1" id="p1NameDisplayV1">プレイヤー 1</span>
+              <span class="new-match-player-name-v1" id="p1NameDisplayV1">プレーヤーを追加</span>
               <span class="new-match-chevron-v1" aria-hidden="true">›</span>
             </button>
-            <input id="p1Name" class="new-match-hidden-name-v1" type="text" value="プレイヤー 1" maxlength="20" />
+            <input id="p1Name" class="new-match-hidden-name-v1" type="text" value="" maxlength="20" />
             <button class="new-match-race-row-v2" type="button" data-race-target="p1Race" aria-label="先攻プレーヤーのRace toを設定">
               <span class="goal-label-v1">Race to</span><strong id="p1RaceDisplayV2">120</strong><small class="jpa-target-v1" hidden></small><span aria-hidden="true">⌄</span>
             </button>
@@ -7945,10 +7945,10 @@ body {
             </button>
             <button class="new-match-player-select-v1" id="p2PlayerSearchBtn" type="button" aria-label="後攻プレーヤーを選択">
               <span class="new-match-avatar-v1 has-player-avatar-v2" aria-hidden="true"><img src="assets/icons/avatar/default/avatar_default_silhouette.png" alt=""></span>
-              <span class="new-match-player-name-v1" id="p2NameDisplayV1">プレイヤー 2</span>
+              <span class="new-match-player-name-v1" id="p2NameDisplayV1">対戦相手を追加</span>
               <span class="new-match-chevron-v1" aria-hidden="true">›</span>
             </button>
-            <input id="p2Name" class="new-match-hidden-name-v1" type="text" value="プレイヤー 2" maxlength="20" />
+            <input id="p2Name" class="new-match-hidden-name-v1" type="text" value="" maxlength="20" />
             <button class="new-match-race-row-v2" type="button" data-race-target="p2Race" aria-label="後攻プレーヤーのRace toを設定">
               <span class="goal-label-v1">Race to</span><strong id="p2RaceDisplayV2">120</strong><small class="jpa-target-v1" hidden></small><span aria-hidden="true">⌄</span>
             </button>
@@ -8664,7 +8664,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build12-iphone-ui-back-fix-v1"></script>
+  <script src="./demo-data.js?v=2.0-build18-final-ui-data-consistency-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -13517,6 +13517,7 @@ let matchRecordsRawCacheV152 = null;
     const overlay = el("straightPoolNoticeOverlayV1");
     if (!overlay || !overlay.classList.contains("hidden") || !straightPoolNoticeQueueV1.length) return;
     const notice = straightPoolNoticeQueueV1[0];
+    overlay.classList.toggle("straight-pool-rerack-modal-v18",notice.title==="14ボールラック");
     el("straightPoolNoticeTitleV1").textContent = notice.title;
     el("straightPoolNoticeMessageV1").textContent = notice.message;
     overlay.classList.remove("hidden");
@@ -19211,7 +19212,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build12-iphone-ui-back-fix-v1";
+    const PWA_VERSION = "2.0-build18-final-ui-data-consistency-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -26622,6 +26623,16 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .cue-sheet-decision-grid-v1 button{min-height:42px;border:1px solid #d9d9d6;border-radius:12px;background:#fff;color:#222;font-weight:750}
 .cue-sheet-decision-grid-v1 button:first-child{background:#171717;color:#fff}
 @media(max-width:390px){.cue-sheet-v1{padding-left:15px;padding-right:15px}.cue-discipline-label-v1{font-size:10px!important}}
+.cue-sheet-overlay-v1.straight-pool-rerack-modal-v18{align-items:center;padding:20px}
+.straight-pool-rerack-modal-v18 .cue-sheet-v1{width:min(88vw,390px);max-height:calc(100dvh - 40px);padding:24px 20px 18px;border-radius:24px;box-shadow:0 18px 50px rgba(0,0,0,.20);text-align:center}
+.straight-pool-rerack-modal-v18 .cue-sheet-handle-v1{display:none}
+.straight-pool-rerack-modal-v18 .cue-sheet-save-v1{margin-top:18px}
+.match-player-guide-v18{display:grid;gap:7px;margin:12px 0 2px;padding:15px;border:1px solid #deded9;border-radius:14px;background:#fff;text-align:center}
+.match-player-guide-v18[hidden]{display:none!important}
+.match-player-guide-v18 strong{font-size:16px}
+.match-player-guide-v18 span{color:#666;font-size:12px;line-height:1.5}
+.match-player-guide-v18 button{min-height:46px;margin-top:4px;border:0;border-radius:11px;background:#171717;color:#fff;font:inherit;font-weight:800}
+.cue-home-start-v2:disabled{opacity:.4;pointer-events:none}
 
 /* CueScore Home Screen Icons v1.0 */
 .cue-discipline-switcher-v1{
@@ -28347,6 +28358,7 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   <script src="./analysis-build4.js"></script>
   <script src="./player-detail-build6.js"></script>
   <script src="./ui-revision-v12.js"></script>
+  <script src="./final-ui-build18.js"></script>
 </body>
 </html>
 

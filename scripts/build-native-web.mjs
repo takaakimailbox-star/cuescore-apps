@@ -16,6 +16,7 @@ const files = [
   "player-detail-build8.css",
   "player-detail-build6.js",
   "ui-revision-v12.js",
+  "final-ui-build18.js",
   "analytics-build4-metrics.js",
   "demo-data.js",
   "manifest.webmanifest",
