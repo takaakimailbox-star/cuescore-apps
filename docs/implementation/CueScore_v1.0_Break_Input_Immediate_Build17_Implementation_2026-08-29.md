@@ -1,7 +1,7 @@
 # CueScore v1.0 — Break Input Immediate Display / Build 17 Candidate
 
 Date: 2026-08-29  
-Status: implementation, automated verification, Archive, Validate and Internal-only upload PASS / Apple processing pending
+Status: implementation, automated verification, Archive, Validate and TestFlight internal distribution PASS / physical iPhone verification pending
 
 ## Basis
 
@@ -39,7 +39,7 @@ Status: implementation, automated verification, Archive, Validate and Internal-o
 - Signed Release Archive: `ARCHIVE SUCCEEDED`。
 - App Store validation: `App 1.0 (17) validated`、all validation checks PASS。
 - Xcode distribution: `Upload for TestFlight (Internal Testing Only)`で`App 1.0 (17) uploaded`。
-- App Store Connect: Apple処理、輸出コンプライアンス、内部グループ／`テスト中`確認はpending。
+- App Store Connect: Apple処理完了。輸出コンプライアンスは正式回答「上記のアルゴリズムのどれでもない」で保存した。Build 17は内部グループ`CI CueScore Internal Testers`（招待数1）に含まれ、状態は`テスト中`。
 - RC Build 17 physical iPhone: pending。
 
 ## Unchanged
