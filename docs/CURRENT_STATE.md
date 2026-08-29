@@ -5,7 +5,8 @@
 - Break Input表示遅延の直接原因は、Match開始時のrack通知後`700ms`待機と、次rack／game時の`220ms + 700ms`待機だった。Break Inputのrender自体、保存、計算処理は原因ではない。
 - 9-Ball、10-Ball、Rotation、JPA 9-BallのMatch開始、次rack／game、Break権交代、Undo／再ブレイク復帰で`showBreakResultPromptV61`を同期実行し、rack通知は同時表示のまま維持した。14-1と3 Cushionは従来どおり対象外。
 - Break Player、rack/game state、二重保存guard、scoring rules、saved-data schema、analytics、Backup／Restore、その他UIは変更していない。
-- native asset同期後、全自動テスト`249 pass / 0 fail / 0 skipped`。内蔵ブラウザ390×844でBreak Input visible／操作可能、Break Player 1選択、viewport／document幅390、横overflowなしを確認した。App Store ConnectでBuild 17未使用を確認。Simulator Debug／Release、Archive／Validate／TestFlight Internal Onlyは後続Gate。Build 16は旧RCとして再利用しない。
+- native asset同期後、全自動テスト`249 pass / 0 fail / 0 skipped`。内蔵ブラウザ390×844でBreak Input visible／操作可能、Break Player 1選択、viewport／document幅390、横overflowなしを確認した。
+- App Store ConnectでBuild 17未使用を確認し、Marketing Version `1.0`／Build Number `17`を設定した。Simulator Debug／Release、Signed Archive、App Store Validate、`TestFlight (Internal Testing Only)` uploadまでPASS。Apple処理、輸出コンプライアンス、内部グループ`テスト中`状態はpending。Build 16は旧RCとして再利用しない。
 - Official 058／059。実装記録：`docs/implementation/CueScore_v1.0_Break_Input_Immediate_Build17_Implementation_2026-08-29.md`。
 
 ## v1.0 Release Candidate Build 16準備（2026年8月28日）

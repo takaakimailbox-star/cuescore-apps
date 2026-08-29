@@ -1,13 +1,15 @@
 # CueScore v1.0 — Break Input Immediate Display / Build 17 Candidate
 
 Date: 2026-08-29  
-Status: implementation and automated verification PASS / RC distribution gates pending
+Status: implementation, automated verification, Archive, Validate and Internal-only upload PASS / Apple processing pending
 
 ## Basis
 
 - Start SHA: `833cc69ab3bdd4d4c271c871cfa2cccee56f27dc`
 - Marketing Version: `1.0`
 - Build 16は旧RCとして再利用しない。App Store ConnectのiOSビルド一覧でBuild 17が未使用であることを確認した。
+- Build-number source SHA: `51c2ad096fcaac3119e98236a34d0b5d5254c5a6`。
+- Marketing Version `1.0`／Build Number `17`。
 
 ## Direct Cause
 
@@ -32,8 +34,12 @@ Status: implementation and automated verification PASS / RC distribution gates p
 - Full automated tests after native sync: `249 pass / 0 fail / 0 skipped`。
 - source／native-web／iOS copied assets:一致。
 - 390×844 in-app browser: Break Input visible／`aria-hidden="false"`、Break Player 1選択、Save操作可能、viewport／document幅390、横overflowなし。
-- iOS Simulator Debug／Release: pending。
-- Signed Archive／Validate／TestFlight Internal Only: pending。
+- iOS Simulator Debug: `BUILD SUCCEEDED`。
+- iOS Simulator Release: `BUILD SUCCEEDED`。
+- Signed Release Archive: `ARCHIVE SUCCEEDED`。
+- App Store validation: `App 1.0 (17) validated`、all validation checks PASS。
+- Xcode distribution: `Upload for TestFlight (Internal Testing Only)`で`App 1.0 (17) uploaded`。
+- App Store Connect: Apple処理、輸出コンプライアンス、内部グループ／`テスト中`確認はpending。
 - RC Build 17 physical iPhone: pending。
 
 ## Unchanged
