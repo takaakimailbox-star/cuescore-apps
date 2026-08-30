@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.1_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.2_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -26,8 +26,8 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.1 is the current official release and successor
-to v2.0. Earlier versions remain in the official directory as preceding releases.
+Official Design Decision Log v2.2 is the current official release and successor
+to v2.1. Earlier versions remain in the official directory as preceding releases.
 
 Adopted RC decision addenda that supplement the latest Decision Log:
 
@@ -89,6 +89,11 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/63_CueScore_v1.0_Match_History_List_UI_Simplification_Spec.md`
 - `official/64_CueScore_v1.0_History_Card_Readability_Decision.md`
 - `official/65_CueScore_v1.0_History_Card_Readability_Spec.md`
+- `official/66_CueScore_Product_Architecture_v2.0_Navigation_Information_Architecture_Official_Release.md`
+- `official/67_CueScore_v1.x_Navigation_Architecture_Decision.md`
+- `official/68_CueScore_v1.x_Navigation_Information_Architecture_Spec.md`
+- `official/69_CueScore_v1.0_Compact_Discipline_History_Card_Decision.md`
+- `official/70_CueScore_v1.0_Compact_Discipline_History_Card_Spec.md`
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and
