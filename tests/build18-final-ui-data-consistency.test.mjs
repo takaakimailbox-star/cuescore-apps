@@ -34,8 +34,8 @@ test("cumulative latest point equals the full eligible aggregate and keeps missi
   assert.equal(points.at(-1).breakInRate,null);
 });
 
-test("fixed 9-Ball history has explicit title and compact row contract",()=>{
-  assert.match(revision,/textContent=`\$\{def\(active\)\.label\}の全試合`/);
+test("fixed 9-Ball history keeps its explicit title and adopted row contract",()=>{
+  assert.match(revision,/label=`\$\{def\(active\)\.label\}の全試合`/);
   assert.match(revision,/pd13-fixed-discipline-match/);
   assert.match(revision,/journey-game-v2/);
   assert.match(revision,/journey-match-race-v3/);
@@ -59,5 +59,5 @@ test("Build 18 asset is ordered last and included in native and offline bundles"
   assert.ok(index.indexOf("ui-revision-v12.js")<index.indexOf("final-ui-build18.js"));
   assert.match(nativeBuild,/final-ui-build18\.js/);
   assert.match(sw,/final-ui-build18\.js/);
-  assert.match(sw,/2\.0-build19-history-list-simplification-v1/);
+  assert.match(sw,/2\.0-build20-history-card-readability-v3/);
 });

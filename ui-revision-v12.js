@@ -84,14 +84,19 @@
     const root=document.getElementById("playerMatchHistoryV2");if(!root||root.classList.contains("hidden"))return;
     const opponentFixed=Boolean(root.dataset.pd8Opponent),disciplineFixed=Boolean(root.dataset.pd8Discipline)&&!opponentFixed,opponent=root.querySelector(".journey-history-opponent-v11");
     if(opponentFixed)opponent?.remove();
-    if(disciplineFixed){const active=root.dataset.pd8Discipline,title=root.querySelector(".player-journey-header-v2 h1");if(title){title.textContent=`${def(active).label}の全試合`;title.setAttribute("aria-label",`${def(active).label}の全試合`);}}
+    if(disciplineFixed){const active=root.dataset.pd8Discipline,title=root.querySelector(".player-journey-header-v2 h1"),label=`${def(active).label}の全試合`;if(title){if(title.textContent!==label)title.textContent=label;if(title.getAttribute("aria-label")!==label)title.setAttribute("aria-label",label);}}
     root.querySelector("[data-history-period]")?.remove();
     root.querySelectorAll("[data-player-analysis-record-id]").forEach(node=>node.remove());
     root.querySelectorAll("[data-player-record-id]").forEach(row=>{
       row.classList.toggle("pd13-opponent-match",opponentFixed);row.classList.toggle("pd13-fixed-discipline-match",disciplineFixed);row.classList.toggle("pd13-player-match",!opponentFixed&&!disciplineFixed);
       if(opponentFixed){row.querySelector(".journey-game-v2")?.remove();row.querySelector(".journey-match-vs-v3")?.remove();row.querySelector(".journey-match-opponent-avatar-v3")?.remove();row.querySelector(".journey-match-opponent-v3>strong")?.remove();}
-      if(disciplineFixed){row.querySelector(".journey-game-v2")?.remove();row.querySelector(".journey-match-race-v3")?.remove();const date=row.querySelector(".journey-match-date-v3"),opponentLine=row.querySelector(".journey-match-opponent-v3");if(date){const match=date.textContent.match(/\d{4}\/(\d{2})\/(\d{2})（.）\s+(\d{2}:\d{2})/);if(match)date.textContent=`${Number(match[1])}/${Number(match[2])} ${match[3]}`;if(opponentLine)opponentLine.insertBefore(date,opponentLine.querySelector(".journey-match-vs-v3"));}}
-      row.setAttribute("aria-label",`${row.getAttribute("aria-label")||"試合"}、試合詳細を開く`);const open=row.querySelector(".journey-match-open-v3");if(open){open.textContent="›";open.setAttribute("aria-hidden","true");}
+      if(disciplineFixed){
+        row.querySelector(".journey-game-v2")?.remove();row.querySelector(".journey-match-race-v3")?.remove();row.querySelector(".journey-match-vs-v3")?.remove();
+        const date=row.querySelector(".journey-match-date-v3"),result=row.querySelector(".journey-match-result-v3"),opponentLine=row.querySelector(".journey-match-opponent-v3");
+        if(date){const match=date.textContent.match(/\d{4}\/(\d{2})\/(\d{2})（.）\s+(\d{2}:\d{2})/);if(match)date.textContent=`${Number(match[1])}/${Number(match[2])} ${match[3]}`;if(opponentLine&&date.parentElement!==row)row.insertBefore(date,opponentLine);}
+        if(result&&opponentLine&&result.parentElement!==row)row.insertBefore(result,opponentLine);
+      }
+      if(!row.dataset.pd13DetailLabel){const detailSuffix="、試合詳細を開く",currentLabel=row.getAttribute("aria-label")||"試合";row.setAttribute("aria-label",`${currentLabel}${detailSuffix}`);row.dataset.pd13DetailLabel="true";}const open=row.querySelector(".journey-match-open-v3");if(open){if(open.textContent!=="›")open.textContent="›";open.setAttribute("aria-hidden","true");}
     });
   }
   const history=document.getElementById("playerMatchHistoryV2");if(history)new MutationObserver(()=>requestAnimationFrame(reviseHistory)).observe(history,{subtree:true,childList:true,attributes:true,attributeFilter:["class"]});

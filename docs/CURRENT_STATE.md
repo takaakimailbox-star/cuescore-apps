@@ -1,5 +1,16 @@
 # CueScore Apps Current State
 
+## v1.0 履歴card可読性改善／Build 20 RC候補（2026年8月30日）
+
+- 全体の`試合履歴一覧`は左右Playerへ均等な名前領域を割り当て、390pt幅で両名とも全角6文字相当までellipsisなし、長い名前だけ必要に応じ1行ellipsisとした。avatar、`vs`、score、chevron、card高とMatch Detail導線は維持した。
+- 競技固定履歴を116pxの2段cardへ変更。上段は短縮日時と勝敗、下段は相手avatar／相手名／score／chevronとし、`vs`を削除した。card内競技名／Race toは引き続き非表示で、Match DetailのRace toは維持した。
+- 競技固定履歴のDOM整形をidempotent化し、MutationObserver再実行時のaria-label反復追記を防止した。通常Player履歴と相手固定履歴、scoring、勝敗判定、sorting、grouping、saved-data schema、Backup／Restore、分析は変更していない。
+- 全自動testは`265 pass / 0 fail / 0 skipped`。source／native-web／iOS copied `index.html`、`ui-revision-v12.js`、`ui-revision-v12.css`はSHA-256一致。
+- 内蔵ブラウザ390×844でviewport／document幅390、全体履歴の6文字相当名・長い名前ellipsis・3桁score・chevron、競技固定cardの2段・高さ116px・`vs`／競技名／Race to 0件、card tapとMatch Detail Race toを確認。横overflowなし。
+- Simulator Debug／Releaseはともに`BUILD SUCCEEDED`。App Store ConnectでBuild 19が最新使用済みであることを確認し、Marketing Version `1.0`／Build Number `20`をRC候補に設定した。
+- Build 20のTestFlight Internal Only配信と実iPhone確認はpending。App Store Review、External TestFlight、一般公開は実施していない。
+- Official 064／065。実装記録：`docs/implementation/CueScore_v1.0_History_Card_Readability_Build20_Implementation_2026-08-30.md`。
+
 ## v1.0 試合履歴一覧UI簡素化／次RC候補（2026年8月30日）
 
 - 全体履歴titleを`試合履歴一覧`へ変更し、検索、詳細絞り込み、並び替え、保存状態の上部UIを除去した。上からtitle、7種目tab、対象件数、履歴card一覧の順とし、削除領域の不要余白を残さない。

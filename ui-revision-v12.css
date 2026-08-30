@@ -96,20 +96,22 @@
 #playerMatchHistoryV2 .pd13-player-match .journey-match-open-v3 { grid-area:chevron; }
 #playerMatchHistoryV2 .pd13-fixed-discipline-match {
   grid-template-columns:minmax(0,1fr) auto 12px !important;
-  grid-template-areas:'opponent score chevron' !important;
-  min-height:52px !important; gap:6px !important; padding:7px 10px !important; border-radius:13px;
+  grid-template-rows:auto auto !important;
+  grid-template-areas:'date result result' 'opponent score chevron' !important;
+  min-height:116px !important; column-gap:10px !important; row-gap:12px !important; padding:16px 12px !important; border-radius:15px;
 }
 #playerMatchHistoryV2 .pd13-fixed-discipline-match .journey-match-date-v3 {
-  display:inline; margin-right:7px; color:#666; font-size:10px; white-space:nowrap;
+  grid-area:date; display:block; margin:0; color:#666; font-size:12px; font-weight:650; white-space:nowrap;
 }
 #playerMatchHistoryV2 .pd13-fixed-discipline-match .journey-match-opponent-v3 {
   grid-area:opponent; display:flex; min-width:0; align-items:center; gap:6px;
 }
-#playerMatchHistoryV2 .pd13-fixed-discipline-match .journey-match-result-v3 { flex:none; }
-#playerMatchHistoryV2 .pd13-fixed-discipline-match .journey-match-vs-v3 { flex:none; }
-#playerMatchHistoryV2 .pd13-fixed-discipline-match .journey-match-opponent-avatar-v3 { flex:0 0 28px; width:28px; height:28px; }
-#playerMatchHistoryV2 .pd13-fixed-discipline-match .journey-match-opponent-v3 strong { min-width:0; overflow:hidden; font-size:11px; text-overflow:ellipsis; white-space:nowrap; }
-#playerMatchHistoryV2 .pd13-fixed-discipline-match .journey-match-score-v3 { grid-area:score; flex:none; font-size:15px; white-space:nowrap; }
+#playerMatchHistoryV2 .pd13-fixed-discipline-match .journey-match-result-v3 { grid-area:result; justify-self:end; padding:3px 8px; border:0; color:#27833d; background:rgba(39,131,61,.08); }
+#playerMatchHistoryV2 .pd13-fixed-discipline-match .journey-match-result-v3.loss { color:#bd392f; background:rgba(189,57,47,.08); }
+#playerMatchHistoryV2 .pd13-fixed-discipline-match .journey-match-vs-v3 { display:none; }
+#playerMatchHistoryV2 .pd13-fixed-discipline-match .journey-match-opponent-avatar-v3 { flex:0 0 32px; width:32px; height:32px; }
+#playerMatchHistoryV2 .pd13-fixed-discipline-match .journey-match-opponent-v3 strong { min-width:0; overflow:hidden; font-size:14px; text-overflow:ellipsis; white-space:nowrap; }
+#playerMatchHistoryV2 .pd13-fixed-discipline-match .journey-match-score-v3 { grid-area:score; flex:none; justify-self:end; padding-left:8px; font-size:17px; white-space:nowrap; }
 #playerMatchHistoryV2 .pd13-fixed-discipline-match .journey-match-open-v3 { grid-area:chevron; }
 @media(max-width:390px){
   .pd12-trends-scroll{padding-left:10px;padding-right:10px}
