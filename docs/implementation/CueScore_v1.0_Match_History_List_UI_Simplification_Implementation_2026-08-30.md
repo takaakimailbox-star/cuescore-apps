@@ -1,7 +1,7 @@
 # CueScore v1.0 — Match History List UI Simplification Implementation
 
 - Date: 2026-08-30
-- Status: implementation and local verification PASS / TestFlight Gate pending sign-in
+- Status: implementation／automated verification／Archive／Apple validation／TestFlight Internal distribution PASS / physical iPhone pending
 - Basis SHA: `4ee4df53cf78840d1ca2335aa34a62c76be7cdc1`
 
 ## Implementation
@@ -20,7 +20,12 @@
 - 390×844 in-app browser: title、7種目tab、対象件数、既存empty state、検索／filter／sort control 0件、document／body幅390、横overflowなし。
 - Layout: tabから件数6px、件数からlist 0px。削除領域の空白なし。
 - iOS Simulator Debug／Release: `BUILD SUCCEEDED`。
-- App Store ConnectでBuild 19未使用を確認し、Marketing Version `1.0`／Build Number `19`を設定した。Archive／Validate／TestFlight Internal Onlyはpending。
+- App Store ConnectでBuild 19未使用を確認し、Marketing Version `1.0`／Build Number `19`を設定した。
+- Signed Archive: `ARCHIVE SUCCEEDED`。
+- Apple upload analysis／validation: PASS。
+- `TestFlight (Internal Testing Only)` upload: PASS。App Store Connectアップロード日`2026年8月30日 9:00` JST。
+- Apple processing: PASS。輸出コンプライアンスは正式回答「上記のアルゴリズムのどれでもない」で保存した。
+- Internal distribution: `CI CueScore Internal Testers`（tester／招待数1）、App Store Connect状態`テスト中`。
 - 実iPhone確認はpending。
 
 ## Release Boundary

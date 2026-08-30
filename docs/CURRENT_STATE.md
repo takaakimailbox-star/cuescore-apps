@@ -6,7 +6,9 @@
 - `すべて`と6競技tabは現行名・順序を維持。各tabとも新しい試合から古い試合へ固定し、同日時は既存Match ID辞書順で決定的に並べる。新schemaは追加していない。
 - 履歴card、Match Detail、Back tap／edge Swipe Back、勝敗、score、Player情報、Backup／Restore、分析、採点は変更していない。詳細検索とユーザー指定sortはLater / Deferred。
 - native asset同期後、全自動テスト`261 pass / 0 fail / 0 skipped`。内蔵ブラウザ390×844でtitle、7tab、対象件数、empty state、検索／filter／sort 0件、document幅390、横overflowなし、件数とlist間0pxを確認した。Simulator Debug／Releaseとも`BUILD SUCCEEDED`。
-- App Store ConnectでBuild 19未使用を確認し、Marketing Version `1.0`／Build Number `19`を設定した。Archive／Validate／TestFlight Internal Onlyは後続Gate。実iPhone確認はpending。App Store Review、External TestFlight、一般公開は実施しない。
+- App Store ConnectでBuild 19未使用を確認し、Marketing Version `1.0`／Build Number `19`を設定した。同一sourceからSigned Archive、Apple upload analysis／validation、`TestFlight (Internal Testing Only)` uploadをPASS。App Store Connectアップロード日`2026年8月30日 9:00` JST。
+- Apple処理完了後、輸出コンプライアンスを正式回答「上記のアルゴリズムのどれでもない」で保存した。Build 19は内部グループ`CI CueScore Internal Testers`（テスター／招待数1）に含まれ、状態は`テスト中`。
+- RC Build 19の実iPhone確認はpending。App Store Review、External TestFlight、一般公開は実施していない。
 - Official 062／063。実装記録：`docs/implementation/CueScore_v1.0_Match_History_List_UI_Simplification_Implementation_2026-08-30.md`。
 
 ## v1.0 最終UI・データ整合／Build 18内部配信完了（2026年8月29日）
