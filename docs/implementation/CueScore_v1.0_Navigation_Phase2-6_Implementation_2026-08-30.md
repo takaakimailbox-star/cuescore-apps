@@ -20,5 +20,14 @@ Date: 2026-08-30
 - iOS Simulator Release: build succeeded on iPhone 17 / iOS 26.5.
 - Native bundle: Capacitor sync completed and source/native parity tests passed.
 
-The App Store build/archive/upload and internal TestFlight verification are recorded separately after distribution completes.
+## Build 23 distribution
 
+- Marketing version `1.0`, build `23` was committed and pushed on the implementation branch.
+- A signed generic iOS archive completed successfully.
+- App Store Connect upload completed successfully and Apple processing finished without upload errors.
+- Export compliance was recorded as containing no proprietary or standard cryptographic algorithm implemented by the app.
+- Build 23 was added to the existing `CueScore Internal Testers` group with one internal tester and is available for iPhone TestFlight verification.
+- Version 1.0 was changed from Build 22 to Build 23 and saved with the prepared metadata and screenshots.
+- The four existing App Review contact fields were preserved without editing.
+- The release mode remains manual.
+- `審査用に追加` was not selected and no App Review submission was created.
