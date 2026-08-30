@@ -1,0 +1,36 @@
+:root{--cue-phase1-nav-height:68px}
+.cue-phase1-tab-bar{
+  position:fixed;z-index:18000;left:50%;bottom:0;display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));width:min(100%,520px);
+  min-height:calc(var(--cue-phase1-nav-height) + env(safe-area-inset-bottom));
+  padding:5px max(6px,env(safe-area-inset-right)) env(safe-area-inset-bottom) max(6px,env(safe-area-inset-left));
+  transform:translateX(-50%);border-top:1px solid #dededb;background:rgba(250,250,248,.96);
+  box-shadow:0 -5px 18px rgba(0,0,0,.035);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)
+}
+.cue-phase1-tab-bar[hidden]{display:none!important}
+.cue-phase1-tab-bar button{display:flex;min-width:0;min-height:56px;align-items:center;justify-content:center;flex-direction:column;gap:3px;padding:3px 1px;border:0;background:transparent;color:#969693;font:inherit;font-size:10px;font-weight:620;line-height:1;-webkit-tap-highlight-color:transparent}
+.cue-phase1-tab-bar button[aria-selected="true"]{color:#171717;font-weight:780}
+.cue-phase1-tab-bar button:active{background:#eeeeec}
+.cue-phase1-tab-bar button:focus-visible{outline:3px solid #171717;outline-offset:-3px;border-radius:10px}
+.cue-phase1-tab-icon{display:block;width:25px;height:25px;background:currentColor;mask-position:center;mask-repeat:no-repeat;mask-size:contain;-webkit-mask-position:center;-webkit-mask-repeat:no-repeat;-webkit-mask-size:contain}
+.cue-phase1-tab-icon.home{mask-image:url("assets/icons/navigation/nav-home.svg");-webkit-mask-image:url("assets/icons/navigation/nav-home.svg")}
+.cue-phase1-tab-icon.player{mask-image:url("assets/icons/navigation/nav-player.svg");-webkit-mask-image:url("assets/icons/navigation/nav-player.svg")}
+.cue-phase1-tab-icon.history{mask-image:url("assets/icons/navigation/nav-history.svg");-webkit-mask-image:url("assets/icons/navigation/nav-history.svg")}
+.cue-phase1-tab-icon.settings{mask-image:url("assets/icons/navigation/nav-settings.svg");-webkit-mask-image:url("assets/icons/navigation/nav-settings.svg")}
+body.cue-phase1-normal-mode .records-list{padding-bottom:calc(var(--cue-phase1-nav-height) + 18px + env(safe-area-inset-bottom))!important}
+body.cue-phase1-normal-mode .player-library-main,
+body.cue-phase1-normal-mode .player-stats-body,
+body.cue-phase1-normal-mode .player-journey-scroll-v2,
+body.cue-phase1-normal-mode .settings-formal-scroll-v1,
+body.cue-phase1-normal-mode .settings-suite-scroll-v2{scroll-padding-bottom:calc(var(--cue-phase1-nav-height) + 18px + env(safe-area-inset-bottom));padding-bottom:calc(var(--cue-phase1-nav-height) + 18px + env(safe-area-inset-bottom))!important}
+body.cue-phase1-normal-mode .record-detail-overlay.match-detail-overlay-v1 .match-detail-scroll-v1{padding-bottom:calc(var(--cue-phase1-nav-height) + 18px + env(safe-area-inset-bottom))!important;scroll-padding-bottom:calc(var(--cue-phase1-nav-height) + 18px + env(safe-area-inset-bottom))!important}
+body.cue-phase1-normal-mode .cue-home-v1{padding-bottom:calc(var(--cue-phase1-nav-height) + 24px + env(safe-area-inset-bottom))!important}
+body.cue-phase1-normal-mode .records-back-v2[data-phase1-root-back],
+body.cue-phase1-normal-mode .settings-page-back-v2[data-phase1-root-back],
+body.cue-phase1-normal-mode .player-library-back[data-phase1-root-back]{visibility:hidden;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.cue-phase1-tab-bar *{transition:none!important}}
+
+/* Official 069/070: compact discipline-fixed history card. */
+#playerMatchHistoryV2 .pd13-fixed-discipline-match{
+  min-height:98px!important;max-height:105px!important;row-gap:6px!important;padding:9px 12px!important
+}

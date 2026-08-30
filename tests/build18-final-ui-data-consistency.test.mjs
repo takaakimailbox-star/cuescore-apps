@@ -55,9 +55,10 @@ test("match setup requires two registered distinct players",()=>{
   assert.doesNotMatch(index,/value="プレイヤー [12]"/);
 });
 
-test("Build 18 asset is ordered last and included in native and offline bundles",()=>{
+test("Build 18 compatibility asset precedes the Phase 1 shell and remains bundled",()=>{
   assert.ok(index.indexOf("ui-revision-v12.js")<index.indexOf("final-ui-build18.js"));
+  assert.ok(index.indexOf("final-ui-build18.js")<index.indexOf("navigation-shell-phase1.js"));
   assert.match(nativeBuild,/final-ui-build18\.js/);
   assert.match(sw,/final-ui-build18\.js/);
-  assert.match(sw,/2\.0-build20-history-card-readability-v3/);
+  assert.match(sw,/2\.0-build21-navigation-shell-phase1-v1/);
 });
