@@ -7,7 +7,7 @@ CueScore Apps
 ビリヤードの試合・履歴・分析
 
 ## Promotional Text（任意）
-試合を記録し、振り返り、次のプレーへ。複数競技に対応したビリヤード用スコア・履歴・分析アプリ。
+6競技のスコア記録、プレーヤー管理、試合履歴、分析をひとつに。オフライン対応で、バックアップ／復元も利用できます。
 
 ## Description
 
@@ -32,7 +32,6 @@ CueScore Apps は、ビリヤードの試合を記録し、履歴を振り返り
 ・アバター／プレーヤー写真
 ・試合履歴
 ・統計・分析
-・サンプルデータ
 ・オフラインでの主要機能利用
 ・バックアップ／復元
 
@@ -41,3 +40,12 @@ CueScore Apps は、試合中の分かりやすさと、試合後の振り返り
 Version 1.0 では、安定した基本体験を優先し、自動クラウド同期およびCSV入出力は提供しません。
 
 日々の練習、仲間との対戦、試合記録の蓄積にご利用ください。
+
+## App Store Connect転記値
+
+- Name: `CueScore Apps`
+- Subtitle: `ビリヤードの試合・履歴・分析`
+- Support URL: `https://takaakimailbox-star.github.io/cuescore-apps/support.html`
+- Marketing URL: 空欄（任意項目）
+- Version: `1.0`
+- Copyright: `2026 TAKAAAKI ISHIZUKA`

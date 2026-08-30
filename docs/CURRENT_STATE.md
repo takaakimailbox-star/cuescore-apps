@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## Build 21 App Store v1.0 RC公開準備／提出停止（2026年8月30日）
+
+- App Store ConnectのVersion 1.0へ、公開説明、キーワード、Support URL、Copyright、Build 21現行仕様に合わせたReview Notes、既存TestFlight審査連絡先、ログイン不要、手動公開を保存した。6.5インチ枠の1242×2688 JPEGスクリーンショット6枚を登録した。
+- App情報はサブタイトル、Sports／Utilities、第三者コンテンツなし、年齢制限4+を保存。App PrivacyはPrivacy Policy URLと「データの収集なし」を公開した。価格は無料、配信範囲は175地域すべて。Mac／Apple Vision Pro互換配信は無効化した。
+- Build 21は`TestFlight (Internal Testing Only)`でアップロードされているため、Version 1.0のBuild選択画面でradioがdisabledとなりApp Store版へ紐付けできない。既存Build 12〜21も同様。Build番号は再利用できないため、App Store提出可能なBuild 22以降を通常のApp Store Connect配信用としてArchive／Uploadする必要がある。
+- 「審査用に追加」は押しておらず、App Store Reviewへの提出、一般公開は実施していない。現在の停止要因は提出可能Buildの不在のみ。監査記録：`docs/implementation/CueScore_Build21_App_Store_RC_Readiness_Audit_2026-08-30.md`。
+
 ## Navigation Architecture Phase 1／Build 21実iPhone確認PASS（2026年8月30日）
 
 - Product Architecture v2.0とDecision 027に基づき、Normal Mode共通bottom navigationを`ホーム／プレーヤー／履歴／設定`の4 top-levelへ統一した。練習tabは表示せず、CueScore logoはbrandingに限定した。
