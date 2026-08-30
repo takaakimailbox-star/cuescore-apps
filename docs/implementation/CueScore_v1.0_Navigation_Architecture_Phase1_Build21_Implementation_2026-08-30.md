@@ -1,7 +1,7 @@
 # CueScore Apps — Navigation Architecture Phase 1 / Build 21 Implementation Record
 
 Date: 2026-08-30  
-Status: Phase 1 implementation and Internal TestFlight distribution PASS / physical iPhone confirmation pending
+Status: Phase 1 implementation, Internal TestFlight distribution, and Product Owner physical iPhone confirmation PASS
 
 ## 1. Adopted scope
 
@@ -54,7 +54,7 @@ No change was made to scoring, winner determination, Player ID/Match ID, saved-d
 - Export compliance: saved as `上記のアルゴリズムのどれでもない`.
 - Internal group: `CueScore Internal Testers`, invitation count 1.
 - App Store Connect status: `テスト中`.
-- Physical iPhone verification remains pending and is not recorded as PASS.
+- Product Owner completed the physical iPhone confirmation and reported `PASS` on 2026-08-30.
 
 ## 7. Official records
 
@@ -65,6 +65,6 @@ No change was made to scoring, winner determination, Player ID/Match ID, saved-d
 - `docs/official/69_CueScore_v1.0_Compact_Discipline_History_Card_Decision.md`
 - `docs/official/70_CueScore_v1.0_Compact_Discipline_History_Card_Spec.md`
 
-## 8. Product Owner handoff
+## 8. Product Owner confirmation
 
-Install TestFlight Build 21 on the physical iPhone and confirm the four-tab shell, tab retap/root behavior, deep-state restore, Match Detail cross-tab behavior, Match Mode hidden navigation, result return, active-match restore, compact 98px fixed-discipline cards, Safe Area, long real names, and existing six-discipline scoring/data flows. Do not proceed to Phase 2 or App Store Review until the Product Owner explicitly approves the next gate.
+The Product Owner confirmed TestFlight Build 21 on the physical iPhone and reported `PASS` on 2026-08-30. This closes the Phase 1 physical-device gate. Phase 2 and App Store Review remain separate gates and were not started.
