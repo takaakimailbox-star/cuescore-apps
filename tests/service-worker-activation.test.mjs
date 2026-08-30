@@ -15,6 +15,7 @@ assert.match(html, /csvExport:false/);
 assert.match(html, /cloudSync:false/);
 assert.match(html, /officialDemoData:true/);
 assert.match(html, /data-settings-action="cloud" data-release-feature="cloud-sync" hidden/);
+assert.match(html, /\.settings-data-row-v1\[hidden\]\s*\{\s*display\s*:\s*none;\s*\}/);
 assert.match(html, /data-settings-action="export"/);
 assert.match(html, /data-release-feature="csv-export" hidden/);
 assert.doesNotMatch(manifest, /クラウド同期を利用できます/);

@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## Build 22 公開前仕上げ／通常App Store Connect upload（2026年8月30日）
+
+- 設定のクラウド同期行は`hidden`済みだったが、rowの`display:grid`が標準hidden規則を上書きしていた。scoped CSSでhidden rowを`display:none`に固定し、v1.0では非表示とした。バックアップ／復元／削除は維持した。
+- scoring、勝敗、競技ルール、saved-data schema、Backup／Restore、analytics、aggregate、既存機能、Navigation Architectureは変更していない。
+- 全自動テスト`276 pass / 0 fail / 0 skipped`。390×844でクラウド同期非表示、横overflowなし、console error 0。Simulator Debug／Releaseとも`BUILD SUCCEEDED`。source／native-web／iOS copied `index.html`のSHA-256は一致した。
+- Marketing Version `1.0`／Build Number `22`でSigned Release Archiveを作成。Xcode Organizerで通常の`App Store Connect`方式を選択し、`App 1.0 (22) uploaded`を確認した（2026年8月30日17:10 JST）。`TestFlight Internal Only`方式は使用していない。
+- Apple processing完了後、輸出コンプライアンスは既存の正式回答で確定し、Build 22をVersion 1.0へ紐付けて保存した。TestFlightでは`提出準備完了`、内部group `CueScore Internal Testers`（招待1名）を確認し、実iPhoneで最終確認できる状態にした。実機上の最終確認自体はpending。
+- Version 1.0の「審査用に追加」が有効な状態まで整備して直前で停止した。同buttonは押しておらず、App Store Review提出と一般公開は実施していない。
+- Official 071／072。実装記録：`docs/implementation/CueScore_v1.0_Cloud_Sync_Row_Hidden_Build22_Implementation_2026-08-30.md`。
+
 ## Build 21 App Store v1.0 RC公開準備／提出停止（2026年8月30日）
 
 - App Store ConnectのVersion 1.0へ、公開説明、キーワード、Support URL、Copyright、Build 21現行仕様に合わせたReview Notes、既存TestFlight審査連絡先、ログイン不要、手動公開を保存した。6.5インチ枠の1242×2688 JPEGスクリーンショット6枚を登録した。

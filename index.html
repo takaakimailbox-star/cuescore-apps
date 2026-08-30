@@ -8626,7 +8626,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build21-navigation-shell-phase1-v1"></script>
+  <script src="./demo-data.js?v=2.0-build22-cloud-row-hidden-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19159,7 +19159,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build21-navigation-shell-phase1-v1";
+    const PWA_VERSION = "2.0-build22-cloud-row-hidden-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -25116,6 +25116,9 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   color: #171717;
   text-align: left;
   font: inherit;
+}
+.settings-data-row-v1[hidden] {
+  display: none;
 }
 .settings-data-row-v1 + .settings-data-row-v1 {
   border-top: 1px solid var(--settings-line);
