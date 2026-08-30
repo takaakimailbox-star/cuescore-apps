@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-build22-cloud-row-hidden-v1";
+const APP_VERSION = "2.0-navigation-phase2-6-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-build22-cloud-row-hidden-v1",
+  "./demo-data.js?v=2.0-navigation-phase2-6-v1",
   "./manifest.webmanifest",
   "./privacy.html",
   "./terms.html",
@@ -22,6 +22,8 @@ const APP_SHELL = [
   "./ui-revision-v12.css",
   "./navigation-shell-phase1.css",
   "./navigation-shell-phase1.js",
+  "./navigation-phase2-6.css",
+  "./navigation-phase2-6.js",
   "./player-detail-build8.css",
   "./docs/official/app-store-v1.0/public/CueScore_Privacy_Policy_v1.0_Official.md",
   "./docs/official/app-store-v1.0/public/CueScore_Terms_of_Use_v1.0_Official.md",

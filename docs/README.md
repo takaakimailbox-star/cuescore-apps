@@ -96,6 +96,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/70_CueScore_v1.0_Compact_Discipline_History_Card_Spec.md`
 - `official/71_CueScore_v1.0_Cloud_Sync_Row_Hidden_Decision.md`
 - `official/72_CueScore_v1.0_Cloud_Sync_Row_Hidden_Spec.md`
+- `official/73_CueScore_v1.0_Navigation_Phase2-6_Decision.md`
+- `official/74_CueScore_v1.0_Navigation_Phase2-6_Spec.md`
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and

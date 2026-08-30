@@ -46,7 +46,7 @@
   const openRoot=key=>{
     closeMatchDetail();
     if(key==="home"){document.getElementById("recordsBackV2")?.click();window.scrollTo(0,0)}
-    if(key==="player"){document.getElementById("recordsBackV2")?.click();document.getElementById("playerManagementBtn")?.click();const title=document.getElementById("playerLibraryTitle");if(title)title.textContent="プレーヤー";document.querySelector("#playerLibraryMain")?.scrollTo?.(0,0)}
+    if(key==="player"){document.body.dataset.cuePlayerContext="browse";document.getElementById("recordsBackV2")?.click();document.getElementById("playerManagementBtn")?.click();const title=document.getElementById("playerLibraryTitle");if(title)title.textContent="プレーヤー";document.querySelector("#playerLibraryMain")?.scrollTo?.(0,0)}
     if(key==="history"){hideTransientPlayerViews();document.getElementById("recordsBtn")?.click();document.querySelector('[data-records-discipline-v2="all"]')?.click();document.querySelector("#recordsList")?.scrollTo?.(0,0)}
     if(key==="settings"){hideTransientPlayerViews();document.getElementById("recordsBackV2")?.click();document.getElementById("settingsBtn")?.click();document.querySelector(".settings-formal-scroll-v1")?.scrollTo?.(0,0)}
     setActive(key);
