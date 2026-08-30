@@ -29,11 +29,16 @@
 ## Distribution Boundary
 
 - App Store Connectの最新使用済み番号はBuild 19。Build 20を未使用の次番号として採番した。
-- TestFlight Internal Only: pending
+- Signed Release Archive: PASS
+- TestFlight Internal Only upload: PASS（App Store Connectアップロード日 `2026-08-30 11:31 JST`）
+- Apple processing: 終了
+- Export compliance: 「上記のアルゴリズムのどれでもない」で保存
+- Internal group: `CI CueScore Internal Testers`（招待数1）
+- App Store Connect status: `テスト中`
+- 実iPhone: pending
 - App Store Review: 未提出
 - External TestFlight／一般公開: 未実施
 
 ## Cleanup
 
-- 作業用localhost、内蔵ブラウザtab、viewport overrideは配信作業完了後に終了／解除する。
-
+- 作業用localhostを停止し、viewport overrideを解除した。配信確認用の内蔵ブラウザtabは記録完了後に閉じる。
