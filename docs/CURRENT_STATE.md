@@ -1,5 +1,16 @@
 # CueScore Apps Current State
 
+## Navigation Architecture Phase 1／Build 21内部配信完了（2026年8月30日）
+
+- Product Architecture v2.0とDecision 027に基づき、Normal Mode共通bottom navigationを`ホーム／プレーヤー／履歴／設定`の4 top-levelへ統一した。練習tabは表示せず、CueScore logoはbrandingに限定した。
+- 各tabはroot再tap、別tabからのruntime文脈復元、Match Detail表示中のcross-tab closeを実装。Match Modeではbottom navigationを非表示とし、Game Result終了後はHomeへ戻る既存契約を維持した。
+- 競技固定履歴cardは文字、avatar、score、chevronを維持したままpadding／gapだけを圧縮し、390×844実測98px（仕様95〜100px第一候補、最大105px）とした。通常履歴、相手固定履歴、Match DetailのRace toは変更していない。
+- scoring、勝敗判定、Player ID／Match ID、saved-data schema、Race to、Backup／Restore、analytics式、aggregate SSOT、競技ルール、Break Input、14-1 rerackは変更していない。
+- 全自動testは`276 pass / 0 fail / 0 skipped`。source／native-web／iOS copied assetの主要5ファイルはSHA-256一致。内蔵ブラウザ390×844で4 tab、root／deep state復元、Match Detail cross-tab、Settings Data Management、Match Mode非表示、full termination後active match再開、98px compact card、横overflow 0、console error 0を確認した。
+- iOS Simulator Debug／Releaseはともに`BUILD SUCCEEDED`。Marketing Version `1.0`／Build Number `21`でSigned Release Archiveと`TestFlight Internal Only` uploadをPASSした。
+- Apple処理完了後、輸出コンプライアンスを正式回答「上記のアルゴリズムのどれでもない」で保存。Build 21は内部グループ`CueScore Internal Testers`（招待数1）に含まれ、状態は`テスト中`。実iPhone確認はpending。
+- Decision Log v2.2、Official 066〜070、実装記録`docs/implementation/CueScore_v1.0_Navigation_Architecture_Phase1_Build21_Implementation_2026-08-30.md`。Phase 2、App Store Review、External TestFlight、一般公開は実施していない。
+
 ## v1.0 履歴card可読性改善／Build 20内部配信完了（2026年8月30日）
 
 - 全体の`試合履歴一覧`は左右Playerへ均等な名前領域を割り当て、390pt幅で両名とも全角6文字相当までellipsisなし、長い名前だけ必要に応じ1行ellipsisとした。avatar、`vs`、score、chevron、card高とMatch Detail導線は維持した。
