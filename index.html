@@ -7464,6 +7464,19 @@ button {
 }
 body.cue-modal-visible { overscroll-behavior: none; }
 
+/* CueScore Build 29: non-editable UI must not trigger iOS selection/callout. */
+:where(html, body, body *) {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+:where(input, textarea, [contenteditable="true"], [contenteditable="plaintext-only"]),
+:where(input, textarea, [contenteditable="true"], [contenteditable="plaintext-only"]) * {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+
 /* CueScore RC29: focus visibility and touch-target hardening */
 :where(button, a, input, select, textarea, [tabindex]):focus-visible {
   outline: 3px solid #ffd54a !important;
@@ -8610,7 +8623,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build28-safe-cleanup-v1"></script>
+  <script src="./demo-data.js?v=2.0-build29-ios-webview-fixes-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -8835,6 +8848,18 @@ body {
 
   // CueScore Home v1: discipline and recording preferences.
   (() => {
+    const selectorTrace = window.CueScoreSelectorTraceV1 || (() => {
+      const entries=[];
+      const mark=(stage,detail={})=>{
+        const entry={stage,t:performance.now(),wall:Date.now(),...detail};
+        entries.push(entry);
+        if(entries.length>240)entries.shift();
+        document.documentElement.dataset.cueSelectorStage=stage;
+        console.info("[CueScoreSelectorTrace]",JSON.stringify(entry));
+        return entry;
+      };
+      return window.CueScoreSelectorTraceV1=Object.freeze({mark,entries:()=>entries.slice(),export:()=>JSON.stringify(entries,null,2)});
+    })();
     const DISCIPLINE_KEY = "cueScore.selectedDiscipline.v1";
     const RULES_KEY = "cueScore.homeRules.v2";
     const JPA_SKILL_KEY = "cueScore.jpa9.skillLevels.v1";
@@ -8938,9 +8963,21 @@ body {
     document.getElementById("cueDisciplineSwitcherV1")?.addEventListener("click", event => {
       const button = event.target.closest("[data-discipline]");
       if (!button || !disciplines[button.dataset.discipline]) return;
+      const started=performance.now(),disciplineId=button.dataset.discipline;
+      selectorTrace.mark("handler:start",{disciplineId,isTrusted:event.isTrusted});
       selectedDiscipline = button.dataset.discipline;
+      selectorTrace.mark("state:update",{disciplineId,elapsed:performance.now()-started});
+      selectorTrace.mark("state-restoration:skipped",{disciplineId,reason:"selector path has no restoration call",elapsed:performance.now()-started});
+      const storageStarted=performance.now();
       safeWrite(DISCIPLINE_KEY, selectedDiscipline);
+      selectorTrace.mark("localStorage:complete",{disciplineId,duration:performance.now()-storageStarted,elapsed:performance.now()-started});
+      const renderStarted=performance.now();
       renderHomePreference();
+      selectorTrace.mark("render:complete",{disciplineId,duration:performance.now()-renderStarted,elapsed:performance.now()-started});
+      requestAnimationFrame(()=>{
+        const selectedButton=document.querySelector(`[data-discipline="${disciplineId}"]`);
+        selectorTrace.mark("ui:paint",{disciplineId,elapsed:performance.now()-started,selected:selectedButton?.classList.contains("is-selected")===true,ariaSelected:selectedButton?.getAttribute("aria-selected")});
+      });
     });
     const NINE_SETTINGS_KEY = "cueScore.nineBall.settings.v1";
     let nineSettingsValue;
@@ -12838,9 +12875,13 @@ let matchRecordsRawCacheV152 = null;
   el("cueDisciplineSwitcherV1")?.addEventListener("click",event=>{
     const button=event.target.closest("[data-discipline]");
     if(!button)return;
-    if(el("cueHomeV1")?.classList.contains("match-setup-active-v3"))return;
+    const trace=window.CueScoreSelectorTraceV1,disciplineId=button.dataset.discipline;
+    trace?.mark("active-match-guard:start",{disciplineId});
+    if(el("cueHomeV1")?.classList.contains("match-setup-active-v3")){trace?.mark("active-match-guard:skipped",{disciplineId,reason:"setup already active"});return;}
     if(allowNewMatchAfterChoiceV1){allowNewMatchAfterChoiceV1=false;return;}
-    if(!readInProgressMatchV1())return;
+    const snapshotStarted=performance.now(),snapshot=readInProgressMatchV1();
+    trace?.mark("active-match-snapshot:complete",{disciplineId,duration:performance.now()-snapshotStarted,present:Boolean(snapshot)});
+    if(!snapshot)return;
     event.preventDefault();
     event.stopImmediatePropagation();
     openInProgressChoiceV1(button);
@@ -19139,7 +19180,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build28-safe-cleanup-v1";
+    const PWA_VERSION = "2.0-build29-ios-webview-fixes-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -28290,8 +28331,16 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   <script src="./final-ui-build18.js"></script>
   <link rel="stylesheet" href="./navigation-shell-phase1.css" />
   <script src="./navigation-shell-phase1.js"></script>
-  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build28-safe-cleanup-v1" />
-  <script src="./navigation-phase2-6.js?v=2.0-build28-safe-cleanup-v1"></script>
+  <script>
+  (()=>{
+    const editable=target=>target instanceof Element&&Boolean(target.closest('input,textarea,[contenteditable="true"],[contenteditable="plaintext-only"]'));
+    document.addEventListener("contextmenu",event=>{if(!editable(event.target))event.preventDefault();},true);
+    document.addEventListener("selectstart",event=>{if(!editable(event.target))event.preventDefault();},true);
+    window.CueScoreEditableSelectionV1=Object.freeze({isEditableTarget:editable});
+  })();
+  </script>
+  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build29-ios-webview-fixes-v1" />
+  <script src="./navigation-phase2-6.js?v=2.0-build29-ios-webview-fixes-v1"></script>
 </body>
 </html>
 

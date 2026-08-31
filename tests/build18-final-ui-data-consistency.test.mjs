@@ -60,5 +60,5 @@ test("Build 18 compatibility asset precedes the Phase 1 shell and remains bundle
   assert.ok(index.indexOf("final-ui-build18.js")<index.indexOf("navigation-shell-phase1.js"));
   assert.match(nativeBuild,/final-ui-build18\.js/);
   assert.match(sw,/final-ui-build18\.js/);
-  assert.match(sw,/2\.0-build28-safe-cleanup-v1/);
+  assert.match(sw,/2\.0-build29-ios-webview-fixes-v1/);
 });

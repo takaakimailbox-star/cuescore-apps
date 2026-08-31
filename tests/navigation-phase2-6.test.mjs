@@ -55,7 +55,7 @@ test("Player root observation work is coalesced to one animation frame",()=>{
 
 test("discipline changes avoid repeating setup initialization and active-match storage parsing",()=>{
   assert.match(html,/if\(home\.classList\.contains\("match-setup-active-v3"\)\)return;/);
-  assert.match(html,/if\(el\("cueHomeV1"\)\?\.classList\.contains\("match-setup-active-v3"\)\)return;/);
+  assert.match(html,/classList\.contains\("match-setup-active-v3"\)\)\{trace\?\.mark\("active-match-guard:skipped"/);
 });
 
 test("Phase 6 Home is reduced to resume and new match",()=>{
@@ -73,7 +73,7 @@ test("new match opens setup with the compact icon-only six-discipline selector i
   assert.match(js,/if\(selected\)selected\.click\(\)/);
   assert.match(js,/addEventListener\("pointerdown"/);
   assert.match(js,/addEventListener\("pointerup"/);
-  assert.match(js,/addEventListener\("mousedown"/);
+  assert.doesNotMatch(js,/addEventListener\("mousedown",beginSwipe/);
   assert.match(js,/now-lastSwipeAt<400/);
   assert.match(js,/Math\.abs\(dx\)<52/);
   assert.match(js,/current\+\(dx<0\?1:-1\)/);

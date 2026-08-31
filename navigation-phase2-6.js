@@ -126,10 +126,19 @@
       const buttons=[...(switcher?.querySelectorAll("[data-discipline]")||[])],current=Math.max(0,buttons.findIndex(button=>button.classList.contains("is-selected"))),next=Math.max(0,Math.min(buttons.length-1,current+(dx<0?1:-1)));
       if(next!==current){buttons[next].click();suppressSwipeClick=true;setTimeout(()=>{suppressSwipeClick=false},0);buttons[next].scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"});}
     };
+    const markSelectorEvent=event=>{const button=event.target.closest?.("[data-discipline]");if(button)window.CueScoreSelectorTraceV1?.mark(`event:${event.type}`,{disciplineId:button.dataset.discipline,isTrusted:event.isTrusted,pointerType:event.pointerType||"",cancelable:event.cancelable,defaultPrevented:event.defaultPrevented});};
+    ["touchstart","touchend","pointerdown","pointerup","click"].forEach(type=>switcher?.addEventListener(type,markSelectorEvent,{capture:true,passive:type!=="click"}));
     setup?.addEventListener("pointerdown",beginSwipe,{passive:true});setup?.addEventListener("pointerup",endSwipe,{passive:true});
-    setup?.addEventListener("mousedown",beginSwipe,{passive:true});setup?.addEventListener("mouseup",endSwipe,{passive:true});
     switcher?.addEventListener("click",event=>{if(suppressSwipeClick&&!event.isTrusted){return;}if(suppressSwipeClick){event.preventDefault();event.stopImmediatePropagation();suppressSwipeClick=false;}},true);
-    switcher?.addEventListener("click",event=>event.target.closest("[data-discipline]")?.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"}),true);
+    switcher?.addEventListener("click",event=>{
+      const button=event.target.closest("[data-discipline]");if(!button)return;
+      const started=performance.now();
+      requestAnimationFrame(()=>{
+        const container=button.parentElement,buttonRect=button.getBoundingClientRect(),containerRect=container?.getBoundingClientRect();
+        if(containerRect&&(buttonRect.left<containerRect.left||buttonRect.right>containerRect.right))button.scrollIntoView({behavior:"auto",block:"nearest",inline:"nearest"});
+        window.CueScoreSelectorTraceV1?.mark("scroll-adjust:complete",{disciplineId:button.dataset.discipline,duration:performance.now()-started});
+      });
+    },true);
   }
 
   window.CueScoreNavigationPhase2To6=Object.freeze({render,stateFor,active,tabCount:()=>body.querySelectorAll("[data-hub-tab]").length,disciplineCount:()=>body.querySelectorAll("[data-hub-discipline]").length});
