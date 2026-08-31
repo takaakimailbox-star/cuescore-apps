@@ -40,10 +40,10 @@ test("Phase 5 separates Player browsing from Settings management",()=>{
   assert.match(html,/\.settings-data-row-v1\[hidden\]\s*\{\s*display:\s*none/);
 });
 
-test("Phase 6 Home is reduced to resume, new match, and recent three",()=>{
+test("Phase 6 Home is reduced to resume and new match",()=>{
   assert.match(js,/data-home-new-match-v2/);
-  assert.match(js,/slice\(0,3\)/);
-  assert.match(js,/data-home-recent-match/);
+  assert.doesNotMatch(js,/data-home-recent-match/);
+  assert.doesNotMatch(css,/home-recent-v2/);
   assert.match(css,/\.cue-home-v1:not\(\.match-setup-active-v3\) \.cue-discipline-switcher-v1/);
   assert.match(css,/\.cue-home-menu-v3\{display:none!important\}/);
 });

@@ -117,11 +117,8 @@
   const home=document.getElementById("cueHomeV1"),resume=document.getElementById("cueResumeCardV1");
   if(home&&resume&&!home.querySelector("[data-home-new-match-v2]")){
     const newMatch=document.createElement("button");newMatch.type="button";newMatch.className="home-new-match-v2";newMatch.dataset.homeNewMatchV2="true";newMatch.innerHTML='<span aria-hidden="true">＋</span><strong>新しい試合</strong><b aria-hidden="true">›</b>';
-    const recent=document.createElement("section");recent.className="home-recent-v2";recent.dataset.homeRecentV2="true";
-    resume.insertAdjacentElement("afterend",newMatch);newMatch.insertAdjacentElement("afterend",recent);
-    const renderRecent=()=>{const records=(typeof readMatchRecords==="function"?readMatchRecords():[]).sort((a,b)=>dateValue(b)-dateValue(a)).slice(0,3);recent.innerHTML=`<h2>最近の試合</h2>${records.length?`<div>${records.map(record=>{const p1=recordPlayer(record,1),p2=recordPlayer(record,2),winner=Number(record?.winner||record?.winnerSide||record?.result?.winnerSide||0);return `<button type="button" data-home-recent-match="${esc(record.id)}"><span><small>${dateText(record)}　${esc(def(discipline(record)).label)}</small><strong>${esc(p1.name||"Player 1")} ${score(record,1)} − ${score(record,2)} ${esc(p2.name||"Player 2")}</strong></span><b>${winner?"›":"—"}</b></button>`;}).join("")}</div>`:'<p>保存済みの試合はまだありません。</p>'}`;};
-    newMatch.addEventListener("click",()=>window.openCueMatchSetupV3?.());recent.addEventListener("click",event=>{const row=event.target.closest("[data-home-recent-match]");if(row)window.openMatchDetailV1?.(row.dataset.homeRecentMatch);});
-    renderRecent();window.addEventListener("pageshow",renderRecent);document.addEventListener("cue-score-records-changed",renderRecent);
+    resume.insertAdjacentElement("afterend",newMatch);
+    newMatch.addEventListener("click",()=>window.openCueMatchSetupV3?.());
   }
 
   window.CueScoreNavigationPhase2To6=Object.freeze({render,stateFor,active,tabCount:()=>body.querySelectorAll("[data-hub-tab]").length,disciplineCount:()=>body.querySelectorAll("[data-hub-discipline] option").length});
