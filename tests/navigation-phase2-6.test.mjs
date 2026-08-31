@@ -11,7 +11,9 @@ const build=readFileSync(new URL("../scripts/build-native-web.mjs",import.meta.u
 test("Phase 2 Player Hub has one selector and the adopted three tabs",()=>{
   assert.match(js,/discipline:"9ball",tab:"results"/);
   for(const label of ["成績","試合","分析"])assert.match(js,new RegExp(`"${label}"`));
-  assert.match(js,/data-hub-discipline/);
+  assert.match(js,/role="tab" data-hub-discipline/);
+  assert.doesNotMatch(js,/<select data-hub-discipline/);
+  assert.match(css,/overflow-x:auto/);
   assert.match(js,/playerState=new Map\(\)/);
   assert.doesNotMatch(js,/localStorage\.(?:setItem|removeItem)/);
 });

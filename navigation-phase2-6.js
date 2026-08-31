@@ -34,7 +34,7 @@
 
   const syncLegacyState=()=>{const legacy=window.CueScoreBuild6PlayerDetail?.state;if(!legacy)return;legacy.playerId=active.playerId;legacy.player=active.player;legacy.discipline=active.state.discipline;legacy.level="hub";};
   const profile=player=>`<section class="hub-profile-v2"><span class="hub-avatar-v2">${avatar(player)}</span><span><strong title="${esc(player.name)}">${esc(player.name)}</strong>${player.isPrimary===true?'<b>メインプレーヤー</b>':""}</span></section>`;
-  const selector=state=>`<label class="hub-discipline-v2"><img src="${def(state.discipline).asset}" alt=""><select data-hub-discipline aria-label="競技">${defs.map(item=>`<option value="${item.id}" ${item.id===state.discipline?"selected":""}>${item.label}</option>`).join("")}</select><span aria-hidden="true">⌄</span></label>`;
+  const selector=state=>`<div class="hub-discipline-v2" role="tablist" aria-label="競技">${defs.map(item=>`<button type="button" role="tab" data-hub-discipline="${item.id}" aria-selected="${item.id===state.discipline}" class="${item.id===state.discipline?"is-selected":""}"><img src="${item.asset}" alt=""><span>${item.label}</span></button>`).join("")}</div>`;
   const tabs=state=>`<div class="hub-tabs-v2" role="tablist" aria-label="プレーヤーハブ">${[["results","成績"],["matches","試合"],["analysis","分析"]].map(([key,label])=>`<button type="button" role="tab" data-hub-tab="${key}" aria-selected="${state.tab===key}" class="${state.tab===key?"is-selected":""}">${label}</button>`).join("")}</div>`;
   const empty=text=>`<section class="hub-card-v2 hub-empty-v2">${text}</section>`;
   const matchRow=(record,player)=>{const s=side(record,player),o=opponent(record,s),isWin=won(record,s);return `<button type="button" class="hub-match-row-v2" data-hub-match="${esc(record.id)}"><span><small>${dateText(record)}　${esc(o.name||"対戦相手")}</small><strong>${isWin?"勝ち":"負け"}　${score(record,s)} − ${score(record,s===1?2:1)}</strong></span><b aria-hidden="true">›</b></button>`;};
@@ -85,6 +85,7 @@
   const previous=window.renderFormalPlayerDetailV1;
   window.renderFormalPlayerDetailV1=function(playerId){previous?.(playerId);render(playerId);};
   body.addEventListener("click",event=>{
+    const disciplineButton=event.target.closest("[data-hub-discipline]");if(disciplineButton){render(active.playerId,{discipline:disciplineButton.dataset.hubDiscipline});return;}
     const tab=event.target.closest("[data-hub-tab]");if(tab){render(active.playerId,{tab:tab.dataset.hubTab});return;}
     const match=event.target.closest("[data-hub-match]");if(match){window.openMatchDetailV1?.(match.dataset.hubMatch);return;}
     if(event.target.closest("[data-hub-all-matches]")){window.openPlayerMatchHistoryV2?.(active.playerId,active.state.discipline);return;}
@@ -92,7 +93,6 @@
     if(event.target.closest("[data-hub-trends]")){syncLegacyState();window.CueScoreUiRevisionV12?.openTrends?.();return;}
     if(event.target.closest("[data-hub-full-analysis]")){window.openPlayerAnalysisForPlayerV5?.(active.playerId,active.state.discipline);return;}
   },true);
-  body.addEventListener("change",event=>{if(event.target.matches("[data-hub-discipline]"))render(active.playerId,{discipline:event.target.value});},true);
 
   const settingsRoot=document.querySelector(".settings-formal-main-v1");
   if(settingsRoot&&!settingsRoot.querySelector("[data-settings-player-management-v2]")){
@@ -127,5 +127,5 @@
     document.getElementById("cueMatchSetupBackV3")?.addEventListener("click",closeDiscipline);
   }
 
-  window.CueScoreNavigationPhase2To6=Object.freeze({render,stateFor,active,tabCount:()=>body.querySelectorAll("[data-hub-tab]").length,disciplineCount:()=>body.querySelectorAll("[data-hub-discipline] option").length});
+  window.CueScoreNavigationPhase2To6=Object.freeze({render,stateFor,active,tabCount:()=>body.querySelectorAll("[data-hub-tab]").length,disciplineCount:()=>body.querySelectorAll("[data-hub-discipline]").length});
 })();
