@@ -1,5 +1,16 @@
 # CueScore Apps Current State
 
+## Build 28 Phase B-1 Safe Cleanup／Internal TestFlight配信完了（2026年8月31日）
+
+- Phase A監査で安全と判定した範囲だけを対象に、非表示の旧Home dashboard markup／旧route宣言、v1.0で非公開のCloud Sync初期化、production CSV click入口、重複Player Library event handlerを削除または停止した。
+- scoring、winner determination、Race to、JPA、Break Input、14-1 rerack、Player ID／Match ID、saved-data schema、Backup／Restore、analytics formulas、aggregate SSOT、History、active-match recoveryは変更していない。
+- 全自動test `294 pass / 0 fail / 0 skipped`。native asset一致、390×844の主要遷移・横overflowなし、Simulator Debug／Releaseとも`BUILD SUCCEEDED`を確認した。
+- 9-Ball selectorは全6種目と同水準で正常反応し、自動環境では固有の遅延を再現しなかった。報告された実iPhone問題は独立調査として継続し、未確認のまま解決扱いにしない。
+- Marketing Version `1.0`／Build Number `28`。Signed Archive `/private/tmp/CueScore-Build28.xcarchive`を通常App Store Connect配信用としてuploadし、Apple processing終了を確認した。
+- 輸出コンプライアンスは既存回答`上記のアルゴリズムのどれでもない`で保存。Build 28は内部group `CueScore Internal Testers`（テスター1名）に含まれ、group上の状態は`テスト中`。実iPhoneのTestFlightで確認可能。
+- Version 1.0は`提出準備中`、既存App Store build紐付けはBuild 24のまま変更していない。`審査用に追加`、App Review提出、External TestFlight、一般公開は未実施。
+- Archive対象source commit `685c271726d917b906f66d5189e687831d24c98c`。最終実装・配信記録：`docs/implementation/CueScore_Build28_PhaseB1_Safe_Cleanup_Implementation_2026-08-31.md`。
+
 ## Build 27 Player Hub統合／9-Ball選択Performance Follow-up（2026年8月31日）
 
 - New Matchの競技icon tap時、選択処理とは別に試合設定初期化と進行中試合snapshot読込が毎回重複していた。試合設定表示中は両処理を再実行しない最小修正とし、選択表示、Race to、Break、active-match recovery契約は維持した。
