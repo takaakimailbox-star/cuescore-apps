@@ -45,6 +45,11 @@ test("Phase 5 separates Player browsing from Settings management",()=>{
   assert.match(html,/\.settings-data-row-v1\[hidden\]\s*\{\s*display:\s*none/);
 });
 
+test("Player root observation work is coalesced to one animation frame",()=>{
+  assert.match(js,/let playerReconcileQueued=false/);
+  assert.match(js,/new MutationObserver\(schedulePlayerReconcile\)/);
+});
+
 test("Phase 6 Home is reduced to resume and new match",()=>{
   assert.match(js,/data-home-new-match-v2/);
   assert.doesNotMatch(js,/data-home-recent-match/);
@@ -53,7 +58,7 @@ test("Phase 6 Home is reduced to resume and new match",()=>{
   assert.match(css,/\.cue-home-menu-v3\{display:none!important\}/);
 });
 
-test("new match opens setup with the six-discipline selector integrated",()=>{
+test("new match opens setup with the compact icon-only six-discipline selector integrated",()=>{
   assert.doesNotMatch(js,/match-discipline-active-v3/);
   assert.doesNotMatch(js,/種目を選択/);
   assert.match(js,/cueDisciplineSwitcherV1/);
@@ -67,7 +72,9 @@ test("new match opens setup with the six-discipline selector integrated",()=>{
   assert.match(html,/button\.classList\.toggle\("is-selected", selected\)/);
   assert.match(html,/button\.setAttribute\("aria-selected", String\(selected\)\)/);
   assert.match(css,/match-setup-active-v3 \.cue-new-match-integrated-v2>\.cue-discipline-switcher-v1\{order:1;display:flex!important/);
-  assert.match(css,/flex:0 0 84px!important/);
+  assert.match(css,/flex:1 0 48px!important/);
+  assert.match(css,/\.cue-discipline-label-v1\{display:none!important\}/);
+  assert.match(css,/\.cue-new-match-integrated-v2\{padding:0 2px 16px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important\}/);
   assert.match(css,/overflow-x:auto!important/);
 });
 

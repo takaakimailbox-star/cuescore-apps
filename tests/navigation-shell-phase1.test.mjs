@@ -29,6 +29,13 @@ test("retap returns to root while cross-tab navigation restores saved runtime st
   assert.match(js,/state\.historyDiscipline=selected/);
 });
 
+test("root navigation coalesces observation work and history avoids a duplicate all-filter render",()=>{
+  assert.doesNotMatch(js,/recordsBtn"\)\?\.click\(\);document\.querySelector\('\[data-records-discipline-v2="all"\]'/);
+  assert.match(js,/if\(filter!=="all"\)/);
+  assert.match(js,/let reconcileQueued=false/);
+  assert.match(js,/new MutationObserver\(scheduleReconcile\)/);
+});
+
 test("Match Detail closes before a cross-tab move and existing Back ownership stays intact",()=>{
   assert.match(js,/const closeMatchDetail=/);
   assert.match(js,/window\.closeFormalMatchDetailV2\(\)/);

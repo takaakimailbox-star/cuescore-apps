@@ -8626,7 +8626,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build25-review-fixes-v1"></script>
+  <script src="./demo-data.js?v=2.0-build26-ui-performance-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -16027,8 +16027,8 @@ let matchRecordsRawCacheV152 = null;
     return String(value || "").toLocaleLowerCase("ja").replace(/\s+/g, " ").trim();
   }
 
-  function filteredMatchRecordsV31() {
-    const all = readMatchRecords().filter(record =>
+  function filteredMatchRecordsV31(sourceRecords=readMatchRecords()) {
+    const all = sourceRecords.filter(record =>
       recordsDisciplineV2 === "all" || recordDisciplineV2(record) === recordsDisciplineV2
     ).sort((a,b) => {
       const aTime = new Date(a.endedAt || a.playedAt).getTime();
@@ -16132,11 +16132,12 @@ let matchRecordsRawCacheV152 = null;
     const list = el("recordsList");
     const count = el("recordsCount");
     if (!list) return;
+    const sourceRecords = readMatchRecords();
     const categorySelectV381 = el("recordsCategorySelectV38");
     if (categorySelectV381) {
       const selected = recordsCategoryFilterV38;
       const managedCategories = categoryItemsV381();
-      const historicCategories = readMatchRecords()
+      const historicCategories = sourceRecords
         .map(record => String(record.category || "").trim())
         .filter(Boolean);
 
@@ -16154,7 +16155,7 @@ let matchRecordsRawCacheV152 = null;
     }
 
     const allSeasonsV38 = [...new Set(
-      readMatchRecords()
+      sourceRecords
         .map(record => String(record.season || "").trim())
         .filter(Boolean)
     )].sort((a, b) => a.localeCompare(b, "ja"));
@@ -16169,7 +16170,7 @@ let matchRecordsRawCacheV152 = null;
       seasonSelectV38.value = current;
     }
 
-    const {all, filtered: records} = filteredMatchRecordsV31();
+    const {all, filtered: records} = filteredMatchRecordsV31(sourceRecords);
     if (count) count.textContent = `${records.length}試合`;
     updateRecordsFilterUiV31(all.length, records.length);
     if (!records.length) {
@@ -16405,10 +16406,10 @@ let matchRecordsRawCacheV152 = null;
 
     if (playerLibraryModeV145 === "management") {
       list.innerHTML = players.map(({player}) => `
-        <button class="player-management-row-v1" type="button" data-stats-player="${player.id}" aria-label="${escapeRecordText(player.name)}の詳細を開く">
+        <button class="player-management-row-v1" type="button" data-stats-player="${player.id}" aria-label="${escapeRecordText(player.name)}を編集">
           <span class="player-management-avatar-v1">${playerAvatarHtmlV2(player,"player-avatar-v2")}${player.isPrimary ? `<span class="player-primary-pin-v2" aria-label="メインプレーヤー"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="m14.8 6.5 2.7 2.7-2 1.1-.5 3.1-1.4 1.4-2.2-2.2-3.8 3.8-.9-.9 3.8-3.8-2.2-2.2 1.4-1.4 3.1-.5Z"/></svg></span>` : ""}</span>
           <span class="player-management-copy-v2"><strong class="player-management-name-v1">${escapeRecordText(player.name)}</strong>${player.memo ? `<span class="player-management-memo-v2">${escapeRecordText(player.memo)}</span>` : ""}</span>
-          <svg class="player-management-chevron-v1" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+          <svg class="player-management-edit-v1" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h3.6L19 8.6 15.4 5 5 15.4Z"/><path d="m13.8 6.6 3.6 3.6"/></svg>
         </button>`).join("");
       return;
     }
@@ -16438,7 +16439,7 @@ let matchRecordsRawCacheV152 = null;
     const overlay = el("playerLibraryOverlay");
     overlay?.classList.add("player-management-formal-v1");
     overlay?.classList.toggle("player-selection-formal-v1", !management);
-    el("playerLibraryTitle").textContent = management ? "プレーヤー一覧" : `Player${playerLibraryTarget} 選択`;
+    el("playerLibraryTitle").textContent = management ? "プレーヤー管理" : `Player${playerLibraryTarget} 選択`;
     el("playerLibrarySearch").placeholder = management ? "プレーヤー検索" : "名前を検索";
     el("playerLibraryMain").classList.remove("hidden");
     el("playerEditor").classList.add("hidden");
@@ -19159,7 +19160,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build25-review-fixes-v1";
+    const PWA_VERSION = "2.0-build26-ui-performance-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -28309,8 +28310,8 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   <script src="./final-ui-build18.js"></script>
   <link rel="stylesheet" href="./navigation-shell-phase1.css" />
   <script src="./navigation-shell-phase1.js"></script>
-  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build25-review-fixes-v1" />
-  <script src="./navigation-phase2-6.js?v=2.0-build25-review-fixes-v1"></script>
+  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build26-ui-performance-v1" />
+  <script src="./navigation-phase2-6.js?v=2.0-build26-ui-performance-v1"></script>
 </body>
 </html>
 

@@ -1,5 +1,17 @@
 # CueScore Apps Current State
 
+## Build 26 UI仕上げ／Navigation Performance Audit（2026年8月31日）
+
+- New Matchの上部6種目selectorをicon-onlyの横一列へ圧縮し、選択中の大きな種目icon／名称、tap、補助swipe、既存色を維持した。画面全体を囲う巨大Cardのborder／radius／shadow／backgroundを外し、Backを通常detail相当の控えめな矢印へ変更した。
+- Settings側はtitleを`プレーヤー管理`、row右端を鉛筆icon、追加操作を`＋ プレーヤー追加`へ変更した。bottom navigation側のPlayer閲覧UIと、Settings → Player Management → Player Editのrouting差は維持した。
+- Performance Auditでは、History rootが`openRecords()`後に`all` filterを再clickして全履歴を二重描画していたこと、同一render中のmatch records重複read、body全体MutationObserverの同期／重複reconcileをroot causeとして確認。不要なfilter clickを除去し、履歴sourceを1回のreadへ共有し、observerを1 animation frameへcoalesceした。
+- 390×844の同一click計測（各2回）でHome→Player `295/285ms`→`282/301ms`、Home→History `1180/1178ms`→`283/282ms`、Home→Settings `289/287ms`→`284/300ms`。Home→New Matchは自動操作API完了値が`3060/3060ms`→`3073/3071ms`で、visible UI paintとは分離できない残存計測riskとして実iPhone確認対象にした。
+- scoring、winner、Player／Match ID、saved-data schema、Race to、JPA、Break Input、14-1、Backup／Restore、analytics formula／aggregate SSOT、active-match recovery、navigation-state restoration contractは変更していない。
+- source／native-web／iOS copied assetsを同期。全自動test `288 pass / 0 fail / 0 skipped`。390×844で6種目icon-only、選択表示、Full Screen、Player Management鉛筆、horizontal overflowなし、console error 0を確認。Simulator Debug／Releaseはともに`BUILD SUCCEEDED`。
+- Marketing Version `1.0`／Build Number `26`。Signed Release Archive `/private/tmp/CueScore-Build26.xcarchive`を作成し、通常のApp Store Connect配信用としてApple validation／uploadをPASS。2026年8月31日17:08 JSTに`Upload succeeded`／`EXPORT SUCCEEDED`、Apple processing `終了`を確認した。
+- 輸出コンプライアンスは既存回答`上記のアルゴリズムのどれでもない`で保存。Build 26は内部group `CueScore Internal Testers`（テスター1名）に含まれ、状態は`提出準備完了`。実iPhoneで確認可能な状態で停止した。
+- Version 1.0へ現在紐付くBuild 24は変更していない。画面は`1.0 提出準備中`で`審査用に追加`が表示される直前状態。App Review、External TestFlight、一般公開は未実施。Official 079／080、実装記録：`docs/implementation/CueScore_Build26_UI_Performance_Audit_Implementation_2026-08-31.md`。
+
 ## Build 25 対戦設定／Player Editor実iPhoneレビュー修正（2026年8月31日）
 
 - Build 24実機レビューを受け、`新しい試合`から種目専用画面を廃止して既存対戦設定へ直接進む。対戦設定上部へ6種目のicon＋label selectorを統合し、tap、横scroll、隣1種目の左右swipe、選択表示を実装した。Homeのボタン位置と最近の試合非表示は維持した。
