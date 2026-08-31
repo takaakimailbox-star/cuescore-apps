@@ -7,8 +7,9 @@
 - Global Historyの種目iconをRace toの直前へ移動した。Match Detail、sorting、grouping、score、Player情報を維持した。
 - source／native-web／Xcode copied assetsを同期。全自動test `285 pass / 0 fail / 0 skipped`。390×844の主要journeyを確認し、Simulator Debug／Releaseはともに`BUILD SUCCEEDED`。
 - Marketing Version `1.0`／Build Number `24`。Official 075／076。実装記録：`docs/implementation/CueScore_Build24_iPhone_Review_Fixes_Implementation_2026-08-31.md`。
+- 同一sourceからSigned Release Archiveを作成し、通常の`App Store Connect`配信用（Internal Testing Onlyではない）としてuploadをPASSした。2026年8月31日10:58 JSTに`Upload succeeded`／`EXPORT SUCCEEDED`を確認。Apple processing、Version 1.0への紐付け、内部TestFlight状態、提出直前状態はApp Store Connect再ログイン後に確認する。
 - scoring、勝敗、Player ID／Match ID、saved-data schema、Race to persistence、Backup／Restore、analytics formula、aggregate SSOT、discipline rules、Break Input、14-1 rerack、Practice、monetization、cloud syncは変更していない。
-- Build 23は審査提出しない。`審査用に追加`、App Review提出、一般公開は未実施。
+- Build 23は審査提出しない。Build 24でも`審査用に追加`、App Review提出、一般公開は未実施。
 
 ## Build 22 公開前仕上げ／通常App Store Connect upload（2026年8月30日）
 

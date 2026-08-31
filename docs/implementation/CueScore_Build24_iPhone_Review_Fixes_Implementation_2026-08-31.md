@@ -21,10 +21,12 @@
 - 390×844 in-app Browser: Home, six-discipline selection, 14-1 setup, Player Hub selector, Settings direct editor route, and History layout verified.
 - Native source, generated bundle, and Xcode copied assets synchronized.
 - Simulator Debug and Release: `BUILD SUCCEEDED`.
+- Signed Release Archive: `/private/tmp/CueScore-Build24.xcarchive` (`ARCHIVE SUCCEEDED`).
+- Normal App Store Connect distribution upload (not Internal Testing Only): `Upload succeeded` / `EXPORT SUCCEEDED` at 2026-08-31 10:58 JST.
+- App Store Connect processing, Version 1.0 association, and Internal TestFlight availability remain to be verified after reauthentication.
 
 ## Preserved contracts
 
 No changes to scoring, winner calculation, Player ID / Match ID, saved-data schema, Race to persistence, Backup / Restore, analytics formulas, aggregate SSOT, discipline rules, Break Input, 14-1 rerack, Practice, monetization, or cloud sync.
 
 App Review was not submitted and `審査用に追加` was not selected.
-
