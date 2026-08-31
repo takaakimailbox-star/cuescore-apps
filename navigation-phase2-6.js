@@ -123,14 +123,26 @@
   const home=document.getElementById("cueHomeV1"),resume=document.getElementById("cueResumeCardV1");
   if(home&&resume&&!home.querySelector("[data-home-new-match-v2]")){
     const newMatch=document.createElement("button");newMatch.type="button";newMatch.className="home-new-match-v2";newMatch.dataset.homeNewMatchV2="true";newMatch.innerHTML='<span aria-hidden="true">＋</span><strong>新しい試合</strong><b aria-hidden="true">›</b>';
-    const disciplineTitle=document.createElement("div");disciplineTitle.className="home-discipline-title-v3";disciplineTitle.innerHTML='<button type="button" data-home-discipline-back-v3 aria-label="ホームへ戻る">‹</button><strong>種目を選択</strong><span></span>';
     resume.insertAdjacentElement("afterend",newMatch);
-    newMatch.insertAdjacentElement("afterend",disciplineTitle);
-    const closeDiscipline=()=>home.classList.remove("match-discipline-active-v3");
-    newMatch.addEventListener("click",()=>{home.classList.add("match-discipline-active-v3");home.querySelector("[data-discipline]")?.focus();});
-    disciplineTitle.addEventListener("click",event=>{if(event.target.closest("[data-home-discipline-back-v3]"))closeDiscipline();});
-    document.getElementById("cueDisciplineSwitcherV1")?.addEventListener("click",event=>{if(event.target.closest("[data-discipline]"))closeDiscipline();},true);
-    document.getElementById("cueMatchSetupBackV3")?.addEventListener("click",closeDiscipline);
+    const switcher=document.getElementById("cueDisciplineSwitcherV1"),setup=document.querySelector(".cue-new-match-integrated-v2"),back=document.getElementById("cueMatchSetupBackV3");
+    if(switcher&&setup&&back)back.insertAdjacentElement("afterend",switcher);
+    newMatch.addEventListener("click",()=>{
+      const selected=switcher?.querySelector("[data-discipline].is-selected")||switcher?.querySelector("[data-discipline]");
+      if(selected)selected.click();else window.openCueMatchSetupV3?.();
+    });
+    let swipeStart=null,suppressSwipeClick=false,lastSwipeAt=0;
+    const beginSwipe=event=>{if(event.isPrimary!==false)swipeStart={x:event.clientX,y:event.clientY};};
+    const endSwipe=event=>{
+      if(!swipeStart)return;const start=swipeStart;swipeStart=null;
+      const dx=event.clientX-start.x,dy=event.clientY-start.y;if(Math.abs(dx)<52||Math.abs(dx)<=Math.abs(dy)*1.25)return;
+      const now=performance.now();if(now-lastSwipeAt<400)return;lastSwipeAt=now;
+      const buttons=[...(switcher?.querySelectorAll("[data-discipline]")||[])],current=Math.max(0,buttons.findIndex(button=>button.classList.contains("is-selected"))),next=Math.max(0,Math.min(buttons.length-1,current+(dx<0?1:-1)));
+      if(next!==current){buttons[next].click();suppressSwipeClick=true;setTimeout(()=>{suppressSwipeClick=false},0);buttons[next].scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"});}
+    };
+    setup?.addEventListener("pointerdown",beginSwipe,{passive:true});setup?.addEventListener("pointerup",endSwipe,{passive:true});
+    setup?.addEventListener("mousedown",beginSwipe,{passive:true});setup?.addEventListener("mouseup",endSwipe,{passive:true});
+    switcher?.addEventListener("click",event=>{if(suppressSwipeClick&&!event.isTrusted){return;}if(suppressSwipeClick){event.preventDefault();event.stopImmediatePropagation();suppressSwipeClick=false;}},true);
+    switcher?.addEventListener("click",event=>event.target.closest("[data-discipline]")?.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"}),true);
   }
 
   window.CueScoreNavigationPhase2To6=Object.freeze({render,stateFor,active,tabCount:()=>body.querySelectorAll("[data-hub-tab]").length,disciplineCount:()=>body.querySelectorAll("[data-hub-discipline]").length});

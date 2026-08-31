@@ -1,5 +1,16 @@
 # CueScore Apps Current State
 
+## Build 25 対戦設定／Player Editor実iPhoneレビュー修正（2026年8月31日）
+
+- Build 24実機レビューを受け、`新しい試合`から種目専用画面を廃止して既存対戦設定へ直接進む。対戦設定上部へ6種目のicon＋label selectorを統合し、tap、横scroll、隣1種目の左右swipe、選択表示を実装した。Homeのボタン位置と最近の試合非表示は維持した。
+- Player Registration／Editを共通full-screen画面へ変更。共通Back、avatar／写真、名前、memo、main設定、mode別CTAを維持し、削除はEditだけに表示する。初期input focus／keyboard自動表示を廃止した。
+- scoring、勝敗、Break、Player ID／Match ID、saved-data／Backup schema、analytics、aggregate SSOT、Race to、14-1、3 Cushion、JPA、Match Result／Detail計算、cloud sync、App Store metadataは変更していない。
+- source／native-web／Xcode copied assetsを同期。全自動test `286 pass / 0 fail / 0 skipped`。390×844で直接遷移、6種目tap、選択表示、横overflow 0、Registration／Edit full-screen、初期input focusなし、field tap focus、Back、console error 0を確認した。swipe event contractは自動回帰testで固定し、実指操作はInternal TestFlightのProduct Owner確認対象とする。
+- Simulator Debug／Releaseはともに`BUILD SUCCEEDED`。Marketing Version `1.0`／Build Number `25`。Official 077／078。実装記録：`docs/implementation/CueScore_Build25_Match_Setup_Player_Editor_Implementation_2026-08-31.md`。
+- 同一sourceからSigned Release Archive `/private/tmp/CueScore-Build25.xcarchive`を作成し、通常のApp Store Connect配信用（Internal Testing Onlyではない）としてApple validation／uploadをPASSした。2026年8月31日14:35 JSTに`Upload succeeded`／`EXPORT SUCCEEDED`を確認し、Apple processingは`終了`。
+- 輸出コンプライアンスは既存の正式回答`上記のアルゴリズムのどれでもない`で保存した。Build 25は内部group `CueScore Internal Testers`（テスター1名）に含まれ、状態は`提出準備完了`。Product Ownerが実iPhoneのTestFlightで確認できる状態で停止した。
+- Version 1.0へ現在紐付くBuild 24は変更していない。App Review、`審査用に追加`、External TestFlight、一般公開は未実施。
+
 ## Build 24 実iPhoneレビュー修正（2026年8月31日）
 
 - Build 23実機レビューで確認された6点を修正した。Homeはbranding／中断再開／新しい試合だけとし、最近の試合を削除した。新しい試合は6種目選択を経て既存対戦設定へ進む。

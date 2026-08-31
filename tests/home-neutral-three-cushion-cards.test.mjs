@@ -10,9 +10,9 @@ assert.doesNotMatch(
   /class="cue-discipline-v1 is-selected"[^>]*data-discipline="rotation"/,
   "Home must not ship with a preselected discipline ring"
 );
-assert.match(html,/button\.classList\.remove\("is-selected"\);/);
-assert.match(html,/button\.setAttribute\("aria-selected", "false"\);/);
-assert.match(html,/button\.setAttribute\("aria-pressed", "false"\);/);
+assert.match(html,/button\.classList\.toggle\("is-selected", selected\);/);
+assert.match(html,/button\.setAttribute\("aria-selected", String\(selected\)\);/);
+assert.match(html,/button\.setAttribute\("aria-pressed", String\(selected\)\);/);
 assert.doesNotMatch(html,/\.three-cushion-game-v1 \.pro-score\{font-size:/);
 assert.doesNotMatch(html,/\.three-cushion-game-v1 \.pro-stats\{font-size:/);
 assert.doesNotMatch(html,/\.three-cushion-game-v1 #proP1Goal/);

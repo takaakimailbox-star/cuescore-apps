@@ -53,11 +53,32 @@ test("Phase 6 Home is reduced to resume and new match",()=>{
   assert.match(css,/\.cue-home-menu-v3\{display:none!important\}/);
 });
 
-test("new match presents all six disciplines before setup",()=>{
-  assert.match(js,/match-discipline-active-v3/);
-  assert.match(js,/種目を選択/);
+test("new match opens setup with the six-discipline selector integrated",()=>{
+  assert.doesNotMatch(js,/match-discipline-active-v3/);
+  assert.doesNotMatch(js,/種目を選択/);
   assert.match(js,/cueDisciplineSwitcherV1/);
-  assert.match(css,/match-discipline-active-v3:not\(\.match-setup-active-v3\) \.cue-discipline-switcher-v1\{display:grid!important/);
+  assert.match(js,/if\(selected\)selected\.click\(\)/);
+  assert.match(js,/addEventListener\("pointerdown"/);
+  assert.match(js,/addEventListener\("pointerup"/);
+  assert.match(js,/addEventListener\("mousedown"/);
+  assert.match(js,/now-lastSwipeAt<400/);
+  assert.match(js,/Math\.abs\(dx\)<52/);
+  assert.match(js,/current\+\(dx<0\?1:-1\)/);
+  assert.match(html,/button\.classList\.toggle\("is-selected", selected\)/);
+  assert.match(html,/button\.setAttribute\("aria-selected", String\(selected\)\)/);
+  assert.match(css,/match-setup-active-v3 \.cue-new-match-integrated-v2>\.cue-discipline-switcher-v1\{order:1;display:flex!important/);
+  assert.match(css,/flex:0 0 84px!important/);
+  assert.match(css,/overflow-x:auto!important/);
+});
+
+test("player registration and editing use a full-screen screen without autofocus",()=>{
+  assert.match(html,/\.player-editor-dialog-v1\{[^}]*width:100%;height:100%;max-height:none/);
+  assert.match(html,/\.player-editor-close-v1\{[^}]*width:64px;min-height:44px/);
+  assert.match(html,/aria-label="戻る">‹ 戻る/);
+  assert.match(html,/existingSave\.textContent=editing\?"保存":"登録"/);
+  assert.match(html,/existingDelete\?\.classList\.toggle\("hidden",!editing\)/);
+  assert.match(html,/document\.activeElement\?\.blur\?\.\(\)/);
+  assert.doesNotMatch(html,/setTimeout\(\(\)=>playerEditorName\.focus\(\),0\)/);
 });
 
 test("Phase 2-6 assets load last, ship natively, and remain offline",()=>{

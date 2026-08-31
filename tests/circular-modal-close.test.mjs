@@ -32,6 +32,10 @@ assert.match(
 );
 assert.match(html, /\.new-match-race-sheet-head-v1\{display:flex;align-items:center;justify-content:space-between/);
 assert.doesNotMatch(html, /officialResultCloseV1|\.official-result-close-v1\s*\{/);
-assert.match(html, /\.player-editor-close-v1\{[^}]*width:44px;height:44px/);
+assert.match(
+  html,
+  /\.player-editor-close-v1\{[^}]*width:64px;min-height:44px/,
+  "the full-screen player editor must use a standard Back control instead of a circular modal close"
+);
 
 console.log("Circular modal close regression checks passed");
