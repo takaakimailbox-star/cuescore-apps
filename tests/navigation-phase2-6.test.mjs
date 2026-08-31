@@ -35,6 +35,7 @@ test("Phase 4 keeps aggregate SSOT and moves Personal Best presentation to resul
 
 test("Phase 5 separates Player browsing from Settings management",()=>{
   assert.match(js,/プレーヤー管理/);
+  assert.match(js,/<circle cx="23" cy="22" r="4\.2"><\/circle>/);
   assert.match(js,/設定の「プレーヤー管理」から登録できます/);
   assert.match(js,/data-cue-player-context/);
   assert.match(css,/data-cue-player-context="browse"/);
