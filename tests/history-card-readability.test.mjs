@@ -11,8 +11,14 @@ test("global history keeps seven tabs, both player lanes, score, chevron, and ca
   assert.equal((index.match(/<button[^>]+data-records-discipline-v2=/g) || []).length, 7);
   assert.match(index, /record-matchup[^`]+record-match-player-v3[^`]+record-match-player-v3/);
   assert.match(index, /record-final-score/);
+  assert.match(index, /record-race-v2"><img class="record-game-icon-v2"[^>]+>Race to/);
   assert.match(index, /record-chevron-v1/);
   assert.match(index, /installRecordsDelegatedClickV154\(\)/);
+});
+
+test("global history places the discipline icon beside Race to",()=>{
+  assert.match(index,/grid-template-areas:"date race chevron" "matchup score chevron"!important/);
+  assert.match(index,/\.record-race-v2\{grid-area:race;display:flex;align-items:center;justify-content:flex-end;gap:5px/);
 });
 
 test("global history reserves equal player lanes sized for six full-width characters", () => {

@@ -16197,10 +16197,9 @@ let matchRecordsRawCacheV152 = null;
       const raceV2 = goal1V2 === goal2V2 ? goal1V2 : `${goal1V2} / ${goal2V2}`;
       const p1ProfileV3 = recordPlayerV3(p1), p2ProfileV3 = recordPlayerV3(p2);
       return `<button class="record-card" type="button" data-record-id="${escapeRecordText(record.id)}">
-        <img class="record-game-icon-v2" src="${gameIconV2}" alt="">
         <span class="record-date-compact">${formatRecordListDate(record.endedAt||record.playedAt)}</span>
         <span class="record-matchup"><span class="record-match-player-v3"><span class="record-match-avatar-v3">${playerAvatarHtmlV2(p1ProfileV3)}</span><strong>${escapeRecordText(p1.name||"Player1")}</strong></span><small>vs</small><span class="record-match-player-v3"><span class="record-match-avatar-v3">${playerAvatarHtmlV2(p2ProfileV3)}</span><strong>${escapeRecordText(p2.name||"Player2")}</strong></span></span>
-        <span class="record-race-v2">Race to ${raceV2}</span>
+        <span class="record-race-v2"><img class="record-game-icon-v2" src="${gameIconV2}" alt="">Race to ${raceV2}</span>
         <span class="record-final-score">${resultScore}</span>
         <span class="record-chevron-v1" aria-hidden="true">›</span>
       </button>`;
@@ -23490,14 +23489,14 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
 .records-meta-v1{min-height:24px;margin:0;justify-content:flex-start}
 .records-list{padding-top:2px!important;padding-bottom:calc(16px + env(safe-area-inset-bottom))!important}
 .records-list .record-card{
-  grid-template-columns:42px minmax(0,1fr) auto 11px!important;
+  grid-template-columns:minmax(0,1fr) auto 11px!important;
   grid-template-rows:auto auto!important;
-  grid-template-areas:"icon date race chevron" "matchup matchup score chevron"!important;
+  grid-template-areas:"date race chevron" "matchup score chevron"!important;
   min-height:70px!important;column-gap:8px!important
 }
-.record-game-icon-v2{grid-area:icon;width:32px;height:32px;border-radius:50%;object-fit:contain;align-self:center;justify-self:start}
+.record-game-icon-v2{width:25px;height:25px;flex:0 0 25px;border-radius:50%;object-fit:contain}
 .records-list .record-date-compact{grid-area:date!important}
-.record-race-v2{grid-area:race;color:#666663;font-size:clamp(10px,2.8vw,12px);font-weight:520;white-space:nowrap;text-align:right}
+.record-race-v2{grid-area:race;display:flex;align-items:center;justify-content:flex-end;gap:5px;color:#666663;font-size:clamp(10px,2.8vw,12px);font-weight:520;white-space:nowrap;text-align:right}
 .records-list .record-matchup{grid-area:matchup!important}
 .records-list .record-final-score{grid-area:score!important}
 .record-score-value-v1.loser{font-weight:450;color:#777775}
@@ -23507,8 +23506,8 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
   .records-disciplines-v2{margin-left:8px;margin-right:8px;gap:2px}
   .records-disciplines-v2 button{height:64px}
   .records-disciplines-v2 img,.records-all-icon-v2{width:24px;height:24px}
-  .records-list .record-card{grid-template-columns:38px minmax(0,1fr) auto 10px!important;column-gap:5px!important}
-  .record-game-icon-v2{width:28.8px;height:28.8px}
+  .records-list .record-card{grid-template-columns:minmax(0,1fr) auto 10px!important;column-gap:5px!important}
+  .record-game-icon-v2{width:23px;height:23px;flex-basis:23px}
 }
 
 /* CueScore Match Detail v1.0 */
