@@ -58,4 +58,15 @@ No uniquely slow or non-responsive 9-Ball path was reproduced at 390×844. This 
 
 ## Distribution boundary
 
-Build 28 is intended for Internal TestFlight physical-iPhone confirmation. App Review, Add for Review, External TestFlight, and public release remain out of scope.
+- Signed App Store archive: succeeded (`/private/tmp/CueScore-Build28.xcarchive`).
+- Normal App Store Connect upload: succeeded on 2026-08-31 at approximately 23:12 JST; App Store Connect records the upload at 23:13 JST.
+- Processing/upload status: finished.
+- Export compliance: saved with the established answer, "None of the algorithms mentioned above."
+- Internal TestFlight group: `CueScore Internal Testers` (1 internal tester).
+- Internal TestFlight status: `Testing` for Version 1.0 (28).
+- Physical-iPhone availability: Build 28 is available to the internal tester through TestFlight.
+- App Store Version 1.0 remains `Prepare for Submission`; its currently selected App Store build was not changed by this Phase B-1 request.
+- `Add for Review` remains available and was not clicked. App Review was not submitted.
+- External TestFlight and public release were not performed.
+
+Source/archive commit: `685c271726d917b906f66d5189e687831d24c98c`.
