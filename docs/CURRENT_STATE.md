@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## Build 29 iOS WebView Selector／Global Text Selection実機再確認待ち（2026年9月1日）
+
+- Build 28実iPhoneで、9-Ball selectorが毎回30秒以上反応しない現象と、非editable通常表示の長押しでCopy／Look Up／Translateが出る現象を確認。Simulator正常だけでは解決扱いにしない。
+- 9-Ball経路へtouch／pointer／click、handler、discipline state、state restoration、active-match snapshot、localStorage、render、UI paintの時刻付きin-memory／console instrumentationを追加。新しいlocalStorage keyは作らず、saved-data schemaは変更していない。
+- selectorに重なっていたPhase 2–6補助経路から互換mouse handlerを除去し、capture中の同期smooth scrollを、event dispatch後に必要な場合だけ行う非animated nearest補正へ変更。実iPhonetrace未採取のためP0は修正済みではなくBuild 29確認待ち。
+- 非editable UIは`user-select:none`／`-webkit-touch-callout:none`とcapture-phase `selectstart`／`contextmenu`防止を適用。input／textarea／contenteditableはカーソル、選択、Copy／Pasteを維持。P1も実iPhone確認待ち。
+- 全自動test `297 pass / 0 fail / 0 skipped`。native asset一致、Simulator Debug／Releaseとも`BUILD SUCCEEDED`。Marketing Version `1.0`／Build Number `29`、Archive `/private/tmp/CueScore-Build29.xcarchive`。
+- 通常App Store Connect upload成功。輸出コンプライアンスは既存回答で保存。Build 29は`CueScore Internal Testers`に含まれ`テスト中`。Version 1.0は`提出準備中`のままで、App Review、`審査用に追加`、External TestFlight、一般公開は未実施。
+- Source/archive commit `0ae5739`。実装記録：`docs/implementation/CueScore_Build29_iOS_WebView_Selector_Text_Selection_Implementation_2026-09-01.md`。
+
 ## Build 28 Phase B-1 Safe Cleanup／Internal TestFlight配信完了（2026年8月31日）
 
 - Phase A監査で安全と判定した範囲だけを対象に、非表示の旧Home dashboard markup／旧route宣言、v1.0で非公開のCloud Sync初期化、production CSV click入口、重複Player Library event handlerを削除または停止した。
