@@ -3,6 +3,7 @@
 - Date: 2026-09-01
 - Version: 1.0
 - Build: 30
+- Source/archive commit: `6518b37bbaad1c50b3c4ab2931c4f25a971efb3b`
 
 ## Scope
 
@@ -33,4 +34,6 @@ The diagnostic-only `ios.webContentsDebuggingEnabled=true` setting was used only
 
 ## Distribution guardrails
 
-Build 30 is for Internal TestFlight confirmation only. App Review, `審査用に追加`, External TestFlight, and public release must remain untouched.
+The signed archive `/private/tmp/CueScore-Build30.xcarchive` was uploaded with the normal App Store Connect method. Apple processing finished as `VALID`; `usesNonExemptEncryption=false` records the existing export-compliance answer. `CueScore Internal Testers` is an internal group with all-build access and its build relationship contains Build 30.
+
+Version 1.0 remains `PREPARE_FOR_SUBMISSION`; its App Store build relationship was not changed to Build 30. App Review, `審査用に追加`, External TestFlight, and public release were not performed.

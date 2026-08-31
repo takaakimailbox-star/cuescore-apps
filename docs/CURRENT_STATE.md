@@ -8,7 +8,8 @@
 - 修正後の同一実機traceはtrusted click受信、handler／state／localStorage／render完了1ms、UI paint約25ms。Product Ownerが9-Ballの即時反応を確認した。
 - P1も同一実機で確認し、通常表示の長押しでは選択／Copy／調べる等が出ず、Player登録・編集の入力欄ではカーソル／文字選択を維持した。
 - 全自動test `297 pass / 0 fail / 0 skipped`。source／native-web／iOS copied asset一致。390×844で6種目、9-Ball選択、横overflow 0、console error 0。Simulator Debug／Releaseとも`BUILD SUCCEEDED`。
-- Marketing Version `1.0`／Build Number `30`。実装記録：`docs/implementation/CueScore_Build30_iPhone_9Ball_Edge_Gesture_Fix_Implementation_2026-09-01.md`。
+- Marketing Version `1.0`／Build Number `30`。source/archive commit `6518b37bbaad1c50b3c4ab2931c4f25a971efb3b`。Signed Archive `/private/tmp/CueScore-Build30.xcarchive`を通常App Store Connect方式でuploadし、Apple processing `VALID`を確認した。
+- 輸出コンプライアンスは既存回答`usesNonExemptEncryption=false`。internal／全Buildアクセスの`CueScore Internal Testers`がBuild 30を含むことをAPIで確認。Version 1.0は`PREPARE_FOR_SUBMISSION`のまま、Build 30へ審査用紐付けしていない。App Review、`審査用に追加`、External TestFlight、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build30_iPhone_9Ball_Edge_Gesture_Fix_Implementation_2026-09-01.md`。
 
 ## Build 29 iOS WebView Selector／Global Text Selection実機再確認（2026年9月1日）
 
