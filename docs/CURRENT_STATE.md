@@ -1,5 +1,17 @@
 # CueScore Apps Current State
 
+## Build 27 Player Hub統合／9-Ball選択Performance Follow-up（2026年8月31日）
+
+- New Matchの競技icon tap時、選択処理とは別に試合設定初期化と進行中試合snapshot読込が毎回重複していた。試合設定表示中は両処理を再実行しない最小修正とし、選択表示、Race to、Break、active-match recovery契約は維持した。
+- 390×844の同一計測（各3回）で、9-Ball `299/302/301ms`、10-Ball `299/300/299ms`、Rotation `300/301/300ms`、14-1 `299/301/299ms`、JPA `302/298/300ms`、3 Cushion `300/301/299ms`。9-Ball固有の遅延は自動環境では再現せず、全6種目が同水準であることを確認した。実iPhoneの最終体感確認はInternal TestFlight対象とする。
+- Bottom navigationのPlayerを単一Player Hubへ統合。行本文はPlayer Information、独立した44pt鉛筆領域はPlayer Edit、右上＋はPlayer Registerへ遷移する。Settingsへ動的追加していた重複Player Management入口を削除した。
+- Player Hub一覧は56pt row、38pt avatar、名前1行／memo任意1行ellipsis、main pin、44pt edit hit areaへ圧縮。10行で560ptとなるportrait密度契約をtestで固定し、長い名前／memoの横overflowを防止した。Register／Editはfull-screen、初期autofocusなしを維持した。
+- scoring、winner、Player／Match ID、saved-data schema、Race to、Break Input、14-1、JPA、Backup／Restore、analytics formula／aggregate SSOT、active-match recovery、Build 26のNew Match決定は変更していない。
+- source／native-web／iOS copied assetsを同期。全自動test `289 pass / 0 fail / 0 skipped`。390×844でPlayer Information／Edit／Registerの分離、Settings重複入口なし、6種目選択、横overflowなしを確認。Simulator Debug／Releaseはともに`BUILD SUCCEEDED`。
+- Marketing Version `1.0`／Build Number `27`。Signed Archive `/private/tmp/CueScore-Build27.xcarchive`を作成し、通常App Store Connect配信用のApple validation／uploadをPASS。2026年8月31日21:30 JSTに`Upload succeeded`／`EXPORT SUCCEEDED`、processing `VALID`を確認した。
+- 輸出コンプライアンスは既存回答`上記のアルゴリズムのどれでもない`（`usesNonExemptEncryption=false`）で保存。Build 27は`IN_BETA_TESTING`。内部group `CueScore Internal Testers`はInternal／全Build access／テスター1名のため、実iPhoneで確認可能な状態で停止した。
+- Version 1.0の既存Build紐付けは変更していない。App Review、`審査用に追加`、External TestFlight、一般公開は未実施。Official 081／082、実装記録：`docs/implementation/CueScore_Build27_PlayerHub_9Ball_Performance_Followup_Implementation_2026-08-31.md`。
+
 ## Build 26 UI仕上げ／Navigation Performance Audit（2026年8月31日）
 
 - New Matchの上部6種目selectorをicon-onlyの横一列へ圧縮し、選択中の大きな種目icon／名称、tap、補助swipe、既存色を維持した。画面全体を囲う巨大Cardのborder／radius／shadow／backgroundを外し、Backを通常detail相当の控えめな矢印へ変更した。

@@ -33,14 +33,17 @@ test("Phase 4 keeps aggregate SSOT and moves Personal Best presentation to resul
   assert.match(js,/data-hub-trends/);
 });
 
-test("Phase 5 separates Player browsing from Settings management",()=>{
-  assert.match(js,/プレーヤー管理/);
-  assert.match(js,/<circle cx="23" cy="22" r="4\.2"><\/circle>/);
-  assert.match(js,/設定の「プレーヤー管理」から登録できます/);
+test("Phase 5 consolidates browsing, information, registration, and editing in Player Hub",()=>{
   assert.match(js,/data-cue-player-context/);
-  assert.match(js,/cuePlayerContext!=="management"/);
-  assert.match(js,/openPlayerEditor\(row\.dataset\.statsPlayer\)/);
+  assert.doesNotMatch(js,/data-settings-player-management-v2/);
+  assert.match(html,/class="player-hub-info-v3"[^>]*data-stats-player/);
+  assert.match(html,/class="player-hub-edit-v3"[^>]*data-edit-player/);
+  assert.match(html,/の情報を表示/);
+  assert.match(html,/を編集/);
+  assert.match(js,/add\?\.style\.setProperty\("display","grid","important"\)/);
   assert.match(css,/data-cue-player-context="browse"/);
+  assert.match(css,/grid-template-columns:minmax\(0,1fr\) 44px/);
+  assert.match(css,/min-height:56px/);
   assert.match(html,/data-release-feature="cloud-sync" hidden/);
   assert.match(html,/\.settings-data-row-v1\[hidden\]\s*\{\s*display:\s*none/);
 });
@@ -48,6 +51,11 @@ test("Phase 5 separates Player browsing from Settings management",()=>{
 test("Player root observation work is coalesced to one animation frame",()=>{
   assert.match(js,/let playerReconcileQueued=false/);
   assert.match(js,/new MutationObserver\(schedulePlayerReconcile\)/);
+});
+
+test("discipline changes avoid repeating setup initialization and active-match storage parsing",()=>{
+  assert.match(html,/if\(home\.classList\.contains\("match-setup-active-v3"\)\)return;/);
+  assert.match(html,/if\(el\("cueHomeV1"\)\?\.classList\.contains\("match-setup-active-v3"\)\)return;/);
 });
 
 test("Phase 6 Home is reduced to resume and new match",()=>{

@@ -94,23 +94,11 @@
     if(event.target.closest("[data-hub-full-analysis]")){window.openPlayerAnalysisForPlayerV5?.(active.playerId,active.state.discipline);return;}
   },true);
 
-  const settingsRoot=document.querySelector(".settings-formal-main-v1");
-  if(settingsRoot&&!settingsRoot.querySelector("[data-settings-player-management-v2]")){
-    const heading=settingsRoot.querySelector(".settings-formal-section-title-v1");
-    const section=document.createElement("section");section.className="settings-data-card-v1 settings-player-management-v2";section.dataset.settingsPlayerManagementV2="true";
-    section.innerHTML='<button class="settings-data-row-v1" type="button" data-open-player-management-v2><span class="settings-data-icon-v1 hub-person-icon-v2" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="12" cy="9" r="4"></circle><path d="M4.5 23c.7-4.8 3.1-7.2 7.5-7.2 2.4 0 4.2.7 5.5 2.2"></path><circle cx="23" cy="22" r="4.2"></circle><path d="M23 15.5v2M23 26.5v2M16.5 22h2M27.5 22h2M18.4 17.4l1.4 1.4M26.2 25.2l1.4 1.4M27.6 17.4l-1.4 1.4M19.8 25.2l-1.4 1.4"></path></svg></span><span class="settings-data-copy-v1"><strong>プレーヤー管理</strong><span>登録・編集・メイン設定・削除</span></span><span></span><span class="settings-data-chevron-v1" aria-hidden="true">›</span></button>';
-    const label=document.createElement("h1");label.className="settings-formal-section-title-v1";label.textContent="プレーヤー";
-    settingsRoot.insertBefore(section,heading);settingsRoot.insertBefore(label,section);
-    section.addEventListener("click",()=>{document.body.dataset.cuePlayerContext="management";document.getElementById("settingsBackBtn")?.click();document.getElementById("playerManagementBtn")?.click();});
-  }
-
   const reconcilePlayerRoot=()=>{
     const browse=document.body.dataset.cuePlayerContext==="browse",overlay=document.getElementById("playerLibraryOverlay");
     if(!browse||!overlay||overlay.classList.contains("hidden"))return;
     const add=document.getElementById("playerLibraryAddBtn"),register=document.getElementById("playerLibraryRegisterBtnV2"),rootTitle=document.getElementById("playerLibraryTitle");
-    add?.style.setProperty("display","none","important");if(register)register.hidden=true;if(rootTitle)rootTitle.textContent="プレーヤー";
-    const emptyState=overlay.querySelector(".player-library-empty");
-    if(emptyState&&emptyState.textContent.includes("右上の＋"))emptyState.textContent="登録プレーヤーはまだいません。設定の「プレーヤー管理」から登録できます。";
+    add?.style.setProperty("display","grid","important");if(register)register.hidden=true;if(rootTitle)rootTitle.textContent="プレーヤー";
   };
   let playerReconcileQueued=false;
   const schedulePlayerReconcile=()=>{
@@ -119,13 +107,6 @@
     requestAnimationFrame(()=>{playerReconcileQueued=false;reconcilePlayerRoot()});
   };
   new MutationObserver(schedulePlayerReconcile).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["class","style","data-cue-player-context"]});
-  document.body.addEventListener("click",event=>{
-    if(document.body.dataset.cuePlayerContext!=="management")return;
-    const row=event.target.closest("#playerLibraryList [data-stats-player]");if(!row)return;
-    event.preventDefault();event.stopImmediatePropagation();
-    if(typeof openPlayerEditor==="function")openPlayerEditor(row.dataset.statsPlayer);
-  },true);
-
   const home=document.getElementById("cueHomeV1"),resume=document.getElementById("cueResumeCardV1");
   if(home&&resume&&!home.querySelector("[data-home-new-match-v2]")){
     const newMatch=document.createElement("button");newMatch.type="button";newMatch.className="home-new-match-v2";newMatch.dataset.homeNewMatchV2="true";newMatch.innerHTML='<span aria-hidden="true">＋</span><strong>新しい試合</strong><b aria-hidden="true">›</b>';

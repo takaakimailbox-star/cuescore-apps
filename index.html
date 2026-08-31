@@ -8626,7 +8626,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build26-ui-performance-v1"></script>
+  <script src="./demo-data.js?v=2.0-build27-player-hub-performance-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -12867,6 +12867,7 @@ let matchRecordsRawCacheV152 = null;
   el("cueDisciplineSwitcherV1")?.addEventListener("click",event=>{
     const button=event.target.closest("[data-discipline]");
     if(!button)return;
+    if(el("cueHomeV1")?.classList.contains("match-setup-active-v3"))return;
     if(allowNewMatchAfterChoiceV1){allowNewMatchAfterChoiceV1=false;return;}
     if(!readInProgressMatchV1())return;
     event.preventDefault();
@@ -16406,11 +16407,13 @@ let matchRecordsRawCacheV152 = null;
 
     if (playerLibraryModeV145 === "management") {
       list.innerHTML = players.map(({player}) => `
-        <button class="player-management-row-v1" type="button" data-stats-player="${player.id}" aria-label="${escapeRecordText(player.name)}を編集">
-          <span class="player-management-avatar-v1">${playerAvatarHtmlV2(player,"player-avatar-v2")}${player.isPrimary ? `<span class="player-primary-pin-v2" aria-label="メインプレーヤー"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="m14.8 6.5 2.7 2.7-2 1.1-.5 3.1-1.4 1.4-2.2-2.2-3.8 3.8-.9-.9 3.8-3.8-2.2-2.2 1.4-1.4 3.1-.5Z"/></svg></span>` : ""}</span>
-          <span class="player-management-copy-v2"><strong class="player-management-name-v1">${escapeRecordText(player.name)}</strong>${player.memo ? `<span class="player-management-memo-v2">${escapeRecordText(player.memo)}</span>` : ""}</span>
-          <svg class="player-management-edit-v1" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h3.6L19 8.6 15.4 5 5 15.4Z"/><path d="m13.8 6.6 3.6 3.6"/></svg>
-        </button>`).join("");
+        <div class="player-management-row-v1">
+          <button class="player-hub-info-v3" type="button" data-stats-player="${player.id}" aria-label="${escapeRecordText(player.name)}の情報を表示">
+            <span class="player-management-avatar-v1">${playerAvatarHtmlV2(player,"player-avatar-v2")}${player.isPrimary ? `<span class="player-primary-pin-v2" aria-label="メインプレーヤー"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="m14.8 6.5 2.7 2.7-2 1.1-.5 3.1-1.4 1.4-2.2-2.2-3.8 3.8-.9-.9 3.8-3.8-2.2-2.2 1.4-1.4 3.1-.5Z"/></svg></span>` : ""}</span>
+            <span class="player-management-copy-v2"><strong class="player-management-name-v1">${escapeRecordText(player.name)}</strong>${player.memo ? `<span class="player-management-memo-v2">${escapeRecordText(player.memo)}</span>` : ""}</span>
+          </button>
+          <button class="player-hub-edit-v3" type="button" data-edit-player="${player.id}" aria-label="${escapeRecordText(player.name)}を編集"><svg class="player-management-edit-v1" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h3.6L19 8.6 15.4 5 5 15.4Z"/><path d="m13.8 6.6 3.6 3.6"/></svg></button>
+        </div>`).join("");
       return;
     }
 
@@ -19160,7 +19163,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build26-ui-performance-v1";
+    const PWA_VERSION = "2.0-build27-player-hub-performance-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -27157,6 +27160,7 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   if(!home||!setup||window.__cueScoreHomeSetupV3)return;
   window.__cueScoreHomeSetupV3=true;
   const openSetup=()=>{
+    if(home.classList.contains("match-setup-active-v3"))return;
     initializePrimaryMatchSetupV1({force:true});
     home.classList.add("match-setup-active-v3");
     setup.setAttribute("aria-hidden","false");
@@ -28310,8 +28314,8 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   <script src="./final-ui-build18.js"></script>
   <link rel="stylesheet" href="./navigation-shell-phase1.css" />
   <script src="./navigation-shell-phase1.js"></script>
-  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build26-ui-performance-v1" />
-  <script src="./navigation-phase2-6.js?v=2.0-build26-ui-performance-v1"></script>
+  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build27-player-hub-performance-v1" />
+  <script src="./navigation-phase2-6.js?v=2.0-build27-player-hub-performance-v1"></script>
 </body>
 </html>
 
