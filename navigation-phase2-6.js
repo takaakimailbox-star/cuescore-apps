@@ -113,6 +113,12 @@
     if(emptyState&&emptyState.textContent.includes("右上の＋"))emptyState.textContent="登録プレーヤーはまだいません。設定の「プレーヤー管理」から登録できます。";
   };
   new MutationObserver(()=>requestAnimationFrame(reconcilePlayerRoot)).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["class","style","data-cue-player-context"]});
+  document.getElementById("playerLibraryList")?.addEventListener("click",event=>{
+    if(document.body.dataset.cuePlayerContext!=="management")return;
+    const row=event.target.closest("[data-stats-player]");if(!row)return;
+    event.preventDefault();event.stopImmediatePropagation();
+    if(typeof openPlayerEditor==="function")openPlayerEditor(row.dataset.statsPlayer);
+  },true);
 
   const home=document.getElementById("cueHomeV1"),resume=document.getElementById("cueResumeCardV1");
   if(home&&resume&&!home.querySelector("[data-home-new-match-v2]")){

@@ -38,6 +38,8 @@ test("Phase 5 separates Player browsing from Settings management",()=>{
   assert.match(js,/<circle cx="23" cy="22" r="4\.2"><\/circle>/);
   assert.match(js,/設定の「プレーヤー管理」から登録できます/);
   assert.match(js,/data-cue-player-context/);
+  assert.match(js,/cuePlayerContext!=="management"/);
+  assert.match(js,/openPlayerEditor\(row\.dataset\.statsPlayer\)/);
   assert.match(css,/data-cue-player-context="browse"/);
   assert.match(html,/data-release-feature="cloud-sync" hidden/);
   assert.match(html,/\.settings-data-row-v1\[hidden\]\s*\{\s*display:\s*none/);
