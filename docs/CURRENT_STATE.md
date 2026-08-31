@@ -1,6 +1,16 @@
 # CueScore Apps Current State
 
-## Build 29 iOS WebView Selector／Global Text Selection実機再確認待ち（2026年9月1日）
+## Build 30 9-Ball実機root cause修正／Internal TestFlight準備中（2026年9月1日）
+
+- Build 29をiPhone 16e／iOS 26.6.1で再現し、trusted `pointerdown`／`touchstart`／`pointerup`／`touchend`後に`click`だけが生成されず、handler以降が開始していないことを実測した。
+- 9-Ball実機領域はx=16〜70.671875px、共通edge Back開始範囲はx<=64px。9-Ballの大半でedge trackingが即時に`.app{pointer-events:none}`を適用し、WebKitがpending clickを破棄していたことをroot causeとして確定した。
+- edge Backはbutton／link／input／textarea／select／summary／contenteditable／`role=button`／`role=tab`から始まるtouchでは開始しない最小修正とした。非interactive左端からのedge swipeは維持。scoring、winner、Race to、JPA、Break Input、14-1、IDs、saved-data、Backup／Restore、analytics、aggregate、history、active-match recoveryは変更していない。
+- 修正後の同一実機traceはtrusted click受信、handler／state／localStorage／render完了1ms、UI paint約25ms。Product Ownerが9-Ballの即時反応を確認した。
+- P1も同一実機で確認し、通常表示の長押しでは選択／Copy／調べる等が出ず、Player登録・編集の入力欄ではカーソル／文字選択を維持した。
+- 全自動test `297 pass / 0 fail / 0 skipped`。source／native-web／iOS copied asset一致。390×844で6種目、9-Ball選択、横overflow 0、console error 0。Simulator Debug／Releaseとも`BUILD SUCCEEDED`。
+- Marketing Version `1.0`／Build Number `30`。実装記録：`docs/implementation/CueScore_Build30_iPhone_9Ball_Edge_Gesture_Fix_Implementation_2026-09-01.md`。
+
+## Build 29 iOS WebView Selector／Global Text Selection実機再確認（2026年9月1日）
 
 - Build 28実iPhoneで、9-Ball selectorが毎回30秒以上反応しない現象と、非editable通常表示の長押しでCopy／Look Up／Translateが出る現象を確認。Simulator正常だけでは解決扱いにしない。
 - 9-Ball経路へtouch／pointer／click、handler、discipline state、state restoration、active-match snapshot、localStorage、render、UI paintの時刻付きin-memory／console instrumentationを追加。新しいlocalStorage keyは作らず、saved-data schemaは変更していない。

@@ -27484,6 +27484,7 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   const MAX_VERTICAL_TRAVEL = 60;
   const MAX_GESTURE_DURATION = 1200;
   const HORIZONTAL_DOMINANCE = 1.2;
+  const interactiveTargetSelector = "button,a[href],input,textarea,select,summary,[contenteditable='true'],[role='button'],[role='tab']";
   const backButtonSelectors = [
     "#cueMatchSetupBackV3",
     "[data-settings-home-back]",
@@ -27587,9 +27588,9 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   document.addEventListener("touchstart", event => {
     resetGesture();
     if (event.touches.length !== 1) return;
-    // A direct Back tap must remain a native tap. Starting edge tracking here
-    // disables pointer events on .app and WebKit can then cancel the click.
-    if (event.target.closest(backButtonSelector)) return;
+    // A direct control tap must remain a native tap. Starting edge tracking
+    // disables pointer events on .app and WebKit then cancels the pending click.
+    if (event.target.closest(interactiveTargetSelector)) return;
     const touch = event.touches[0];
     if (touch.clientX > EDGE_START_MAX) return;
     const backButton = visibleBackButton();
