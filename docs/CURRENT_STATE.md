@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## Build 24 実iPhoneレビュー修正（2026年8月31日）
+
+- Build 23実機レビューで確認された6点を修正した。Homeはbranding／中断再開／新しい試合だけとし、最近の試合を削除した。新しい試合は6種目選択を経て既存対戦設定へ進む。
+- Player Hubはアイコン付き横スクロールselectorへ変更し、Playerごとのruntime discipline／tab復元を維持した。Settingsのプレーヤー管理は人物＋歯車iconとし、Player cardから既存Editorへ直接進む。Player tab側はPlayer Hub閲覧のまま。
+- Global Historyの種目iconをRace toの直前へ移動した。Match Detail、sorting、grouping、score、Player情報を維持した。
+- source／native-web／Xcode copied assetsを同期。全自動test `285 pass / 0 fail / 0 skipped`。390×844の主要journeyを確認し、Simulator Debug／Releaseはともに`BUILD SUCCEEDED`。
+- Marketing Version `1.0`／Build Number `24`。Official 075／076。実装記録：`docs/implementation/CueScore_Build24_iPhone_Review_Fixes_Implementation_2026-08-31.md`。
+- scoring、勝敗、Player ID／Match ID、saved-data schema、Race to persistence、Backup／Restore、analytics formula、aggregate SSOT、discipline rules、Break Input、14-1 rerack、Practice、monetization、cloud syncは変更していない。
+- Build 23は審査提出しない。`審査用に追加`、App Review提出、一般公開は未実施。
+
 ## Build 22 公開前仕上げ／通常App Store Connect upload（2026年8月30日）
 
 - 設定のクラウド同期行は`hidden`済みだったが、rowの`display:grid`が標準hidden規則を上書きしていた。scoped CSSでhidden rowを`display:none`に固定し、v1.0では非表示とした。バックアップ／復元／削除は維持した。
