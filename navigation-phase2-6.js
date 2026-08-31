@@ -117,8 +117,14 @@
   const home=document.getElementById("cueHomeV1"),resume=document.getElementById("cueResumeCardV1");
   if(home&&resume&&!home.querySelector("[data-home-new-match-v2]")){
     const newMatch=document.createElement("button");newMatch.type="button";newMatch.className="home-new-match-v2";newMatch.dataset.homeNewMatchV2="true";newMatch.innerHTML='<span aria-hidden="true">＋</span><strong>新しい試合</strong><b aria-hidden="true">›</b>';
+    const disciplineTitle=document.createElement("div");disciplineTitle.className="home-discipline-title-v3";disciplineTitle.innerHTML='<button type="button" data-home-discipline-back-v3 aria-label="ホームへ戻る">‹</button><strong>種目を選択</strong><span></span>';
     resume.insertAdjacentElement("afterend",newMatch);
-    newMatch.addEventListener("click",()=>window.openCueMatchSetupV3?.());
+    newMatch.insertAdjacentElement("afterend",disciplineTitle);
+    const closeDiscipline=()=>home.classList.remove("match-discipline-active-v3");
+    newMatch.addEventListener("click",()=>{home.classList.add("match-discipline-active-v3");home.querySelector("[data-discipline]")?.focus();});
+    disciplineTitle.addEventListener("click",event=>{if(event.target.closest("[data-home-discipline-back-v3]"))closeDiscipline();});
+    document.getElementById("cueDisciplineSwitcherV1")?.addEventListener("click",event=>{if(event.target.closest("[data-discipline]"))closeDiscipline();},true);
+    document.getElementById("cueMatchSetupBackV3")?.addEventListener("click",closeDiscipline);
   }
 
   window.CueScoreNavigationPhase2To6=Object.freeze({render,stateFor,active,tabCount:()=>body.querySelectorAll("[data-hub-tab]").length,disciplineCount:()=>body.querySelectorAll("[data-hub-discipline] option").length});

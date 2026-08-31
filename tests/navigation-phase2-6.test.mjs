@@ -48,6 +48,13 @@ test("Phase 6 Home is reduced to resume and new match",()=>{
   assert.match(css,/\.cue-home-menu-v3\{display:none!important\}/);
 });
 
+test("new match presents all six disciplines before setup",()=>{
+  assert.match(js,/match-discipline-active-v3/);
+  assert.match(js,/種目を選択/);
+  assert.match(js,/cueDisciplineSwitcherV1/);
+  assert.match(css,/match-discipline-active-v3:not\(\.match-setup-active-v3\) \.cue-discipline-switcher-v1\{display:grid!important/);
+});
+
 test("Phase 2-6 assets load last, ship natively, and remain offline",()=>{
   assert.ok(html.indexOf("navigation-phase2-6.js")>html.indexOf("navigation-shell-phase1.js"));
   for(const asset of ["navigation-phase2-6.js","navigation-phase2-6.css"]){assert.match(sw,new RegExp(asset.replace(".","\\.")));assert.match(build,new RegExp(asset.replace(".","\\.")));}
