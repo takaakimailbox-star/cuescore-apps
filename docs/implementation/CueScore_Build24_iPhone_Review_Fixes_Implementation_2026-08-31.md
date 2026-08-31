@@ -23,7 +23,11 @@
 - Simulator Debug and Release: `BUILD SUCCEEDED`.
 - Signed Release Archive: `/private/tmp/CueScore-Build24.xcarchive` (`ARCHIVE SUCCEEDED`).
 - Normal App Store Connect distribution upload (not Internal Testing Only): `Upload succeeded` / `EXPORT SUCCEEDED` at 2026-08-31 10:58 JST.
-- App Store Connect processing, Version 1.0 association, and Internal TestFlight availability remain to be verified after reauthentication.
+- App Store Connect processing: completed.
+- Export compliance: saved with the existing formal answer `上記のアルゴリズムのどれでもない`.
+- Internal TestFlight: included in `CueScore Internal Testers` (1 tester), status `提出準備完了`; available for physical-iPhone verification.
+- Version 1.0: replaced Build 23 association with Build 24 and saved. Existing metadata, screenshots, review contact, and manual-release setting were preserved.
+- Stopped with `審査用に追加` enabled. The button was not selected and App Review was not submitted.
 
 ## Preserved contracts
 
