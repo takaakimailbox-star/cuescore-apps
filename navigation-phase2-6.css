@@ -29,6 +29,23 @@ body[data-cue-player-context="browse"] #playerLibraryOverlay .player-management-
 .player-management-formal-v1 .player-primary-pin-v2{display:none!important}
 .player-management-formal-v1 .player-hub-edit-v3 .player-management-edit-v1{width:18px;height:18px}
 .cue-home-v1:not(.match-setup-active-v3){--cue-home-logo-shift-v32:30px}.cue-home-v1:not(.match-setup-active-v3) .cue-discipline-switcher-v1,.cue-home-v1:not(.match-setup-active-v3) .cue-home-menu-v3{display:none!important}.cue-home-v1:not(.match-setup-active-v3) .cue-home-head-v2{padding:calc(8px + var(--cue-home-logo-shift-v32)) 0 18px!important}.cue-home-v1:not(.match-setup-active-v3) .cue-home-brand-v1 [data-cuescore-logo]{height:42px!important}.cue-home-v1:not(.match-setup-active-v3) .cue-home-brand-v1 [data-cuescore-logo] img{height:42px!important}.home-new-match-v2{display:grid;grid-template-columns:38px minmax(0,1fr) 18px;align-items:center;gap:10px;width:100%;max-width:620px;min-height:62px;margin:calc(clamp(190px,38svh,330px) - var(--cue-home-logo-shift-v32,0px)) auto 0;padding:10px 14px;border:0;border-radius:15px;background:#171717;color:#fff;font:inherit;text-align:left}.cue-resume-card-v1:not([hidden])+.home-new-match-v2{margin-top:calc(clamp(110px,22svh,180px) - var(--cue-home-logo-shift-v32,0px))}.home-new-match-v2>span{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#fff;color:#171717;font-size:22px}.home-new-match-v2 strong{font-size:17px}.home-new-match-v2 b{font-size:24px;font-weight:400}
+
+/* Build 33: match the supplied iPhone Home reference at 390 x 844 points. */
+.cue-home-v1:not(.match-setup-active-v3){background:#fff!important;overflow:hidden!important}
+.cue-home-v1:not(.match-setup-active-v3) .cue-home-head-v2{padding:clamp(210px,28svh,242px) 0 0!important;border-bottom:0!important}
+.cue-home-v1:not(.match-setup-active-v3) .cue-home-brand-v1 [data-cuescore-logo],
+.cue-home-v1:not(.match-setup-active-v3) .cue-home-brand-v1 [data-cuescore-logo] img{height:64px!important}
+.cue-home-v1:not(.match-setup-active-v3) .home-new-match-v2{min-height:66px;margin:clamp(190px,26.5svh,232px) auto 0!important;border-radius:16px!important;padding:10px 14px!important}
+.cue-home-v1:not(.match-setup-active-v3) .cue-resume-card-v1:not([hidden])+.home-new-match-v2{margin-top:clamp(92px,14svh,124px)!important}
+.cue-home-v1:not(.match-setup-active-v3) .home-new-match-v2>span{width:34px;height:34px}
+.cue-home-v1:not(.match-setup-active-v3) .home-new-match-v2 strong{font-size:17px}
+@media(max-height:700px){.cue-home-v1:not(.match-setup-active-v3) .cue-home-head-v2{padding-top:clamp(124px,23svh,166px)!important}.cue-home-v1:not(.match-setup-active-v3) .home-new-match-v2{margin-top:clamp(108px,22svh,154px)!important}}
+
+/* Build 33: reproduce the supplied Settings composition and its lower information block. */
+.settings-screen.settings-formal-v1,.settings-formal-shell-v1,.settings-page-header-v2{background:#fff!important}
+.settings-formal-spacer-v1{display:block!important;flex:0 0 clamp(132px,18svh,160px)!important;min-height:132px!important}
+.settings-app-footer-v1{padding:8px 6px 0!important}
+@media(max-height:700px){.settings-formal-spacer-v1{flex-basis:clamp(44px,10svh,70px)!important;min-height:44px!important}}
 .home-discipline-title-v3{display:none!important}.cue-home-v1.match-setup-active-v3 .home-new-match-v2{display:none!important}
 .cue-home-v1.match-setup-active-v3 .cue-new-match-integrated-v2{--cue-new-match-main-shift-v32:30px;padding:var(--cue-new-match-main-shift-v32) 2px 16px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
 .cue-home-v1.match-setup-active-v3 .cue-match-setup-back-v3{width:40px!important;height:40px!important;min-height:40px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#70706d!important}
@@ -53,4 +70,11 @@ body[data-cue-player-context="browse"] #playerLibraryOverlay .player-management-
   .settings-data-copy-v1 strong{margin-bottom:1px;font-size:15px}.settings-data-copy-v1 span{font-size:10.5px}.settings-formal-spacer-v1{display:none}
   .settings-app-footer-v1{padding:8px 6px 0}.settings-app-brand-v1{padding:4px 0}.settings-app-brand-v1 [data-cuescore-logo] img{height:22px!important}.settings-app-brand-v1 span{font-size:11px}
   .settings-info-link-v1{min-height:36px;font-size:13px}.settings-copyright-v1{padding-top:4px;font-size:9px}
+}
+
+/* Build 33 Settings reference override follows the compact root rules. */
+@media (max-width:430px) and (min-height:780px){
+  .settings-screen.settings-formal-v1,.settings-formal-shell-v1,.settings-page-header-v2{background:#fff!important}
+  .settings-formal-spacer-v1{display:block!important;flex:0 0 clamp(132px,18svh,160px)!important;min-height:132px!important}
+  .settings-app-footer-v1{padding:8px 6px 0!important}
 }

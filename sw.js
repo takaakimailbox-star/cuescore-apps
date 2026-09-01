@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-build32-final-review-followup-v2";
+const APP_VERSION = "2.0-build33-home-reference-v2";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-build32-final-review-followup-v2",
+  "./demo-data.js?v=2.0-build33-home-reference-v2",
   "./manifest.webmanifest",
   "./privacy.html",
   "./terms.html",
@@ -22,8 +22,8 @@ const APP_SHELL = [
   "./ui-revision-v12.css",
   "./navigation-shell-phase1.css",
   "./navigation-shell-phase1.js",
-  "./navigation-phase2-6.css?v=2.0-build32-final-review-followup-v2",
-  "./navigation-phase2-6.js?v=2.0-build32-final-review-followup-v2",
+  "./navigation-phase2-6.css?v=2.0-build33-home-reference-v2",
+  "./navigation-phase2-6.js?v=2.0-build33-home-reference-v2",
   "./player-detail-build8.css",
   "./docs/official/app-store-v1.0/public/CueScore_Privacy_Policy_v1.0_Official.md",
   "./docs/official/app-store-v1.0/public/CueScore_Terms_of_Use_v1.0_Official.md",
@@ -36,6 +36,7 @@ const APP_SHELL = [
   "./icons/cuescore-app-icon-192.png",
   "./icons/cuescore-app-icon-512.png",
   "./assets/icons/navigation/nav-home.svg",
+  "./assets/icons/navigation/nav-home-reference-build33.png",
   "./assets/icons/navigation/nav-player.svg",
   "./assets/icons/navigation/nav-history.svg",
   "./assets/icons/navigation/nav-analytics.svg",

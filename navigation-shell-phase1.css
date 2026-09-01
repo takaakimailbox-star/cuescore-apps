@@ -13,7 +13,8 @@
 .cue-phase1-tab-bar button:active{background:#eeeeec}
 .cue-phase1-tab-bar button:focus-visible{outline:3px solid #171717;outline-offset:-3px;border-radius:10px}
 .cue-phase1-tab-icon{display:block;width:25px;height:25px;background:currentColor;mask-position:center;mask-repeat:no-repeat;mask-size:contain;-webkit-mask-position:center;-webkit-mask-repeat:no-repeat;-webkit-mask-size:contain}
-.cue-phase1-tab-icon.home{mask-image:url("assets/icons/navigation/nav-home.svg");-webkit-mask-image:url("assets/icons/navigation/nav-home.svg")}
+.cue-phase1-tab-icon.home{background:transparent url("assets/icons/navigation/nav-home-reference-build33.png") center/contain no-repeat;mask-image:none;-webkit-mask-image:none}
+.cue-phase1-tab-bar button:not([aria-selected="true"]) .cue-phase1-tab-icon.home{opacity:.42}
 .cue-phase1-tab-icon.player{mask-image:url("assets/icons/navigation/nav-player.svg");-webkit-mask-image:url("assets/icons/navigation/nav-player.svg")}
 .cue-phase1-tab-icon.history{mask-image:url("assets/icons/navigation/nav-history.svg");-webkit-mask-image:url("assets/icons/navigation/nav-history.svg")}
 .cue-phase1-tab-icon.settings{mask-image:url("assets/icons/navigation/nav-settings.svg");-webkit-mask-image:url("assets/icons/navigation/nav-settings.svg")}
