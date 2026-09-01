@@ -43,12 +43,41 @@
     document.body.classList.remove("match-detail-visible-v1");
   };
   const hideTransientPlayerViews=()=>document.querySelectorAll("#playerLibraryOverlay,#playerStatsOverlay,.player-journey-overlay-v2,.pd12-trends").forEach(node=>{node.classList.add("hidden");node.setAttribute("aria-hidden","true")});
-  const openRoot=key=>{
+  const closeSettingsRoot=()=>{
+    if(!app.classList.contains("settings-mode"))return;
+    document.getElementById("settingsBackBtn")?.click();
+    app.classList.remove("settings-mode");
+    const screen=document.getElementById("settingsScreen");
+    screen?.classList.add("hidden");screen?.setAttribute("aria-hidden","true");
+  };
+  const closeHistoryRoot=()=>{
+    if(!app.classList.contains("records-mode"))return;
+    document.getElementById("recordsBackV2")?.click();
+    app.classList.remove("records-mode");
+    const screen=document.getElementById("recordsScreen");
+    screen?.classList.add("hidden");screen?.setAttribute("aria-hidden","true");
+  };
+  const leaveTopLevel=key=>{
     closeMatchDetail();
-    if(key==="home"){document.getElementById("recordsBackV2")?.click();window.scrollTo(0,0)}
-    if(key==="player"){document.body.dataset.cuePlayerContext="browse";document.getElementById("recordsBackV2")?.click();document.getElementById("playerManagementBtn")?.click();const title=document.getElementById("playerLibraryTitle");if(title)title.textContent="プレーヤー";document.querySelector("#playerLibraryMain")?.scrollTo?.(0,0)}
-    if(key==="history"){hideTransientPlayerViews();document.getElementById("recordsBtn")?.click();document.querySelector("#recordsList")?.scrollTo?.(0,0)}
-    if(key==="settings"){hideTransientPlayerViews();document.getElementById("recordsBackV2")?.click();document.getElementById("settingsBtn")?.click();document.querySelector(".settings-formal-scroll-v1")?.scrollTo?.(0,0)}
+    if(key!=="settings")closeSettingsRoot();
+    if(key!=="history")closeHistoryRoot();
+    if(key!=="player")hideTransientPlayerViews();
+  };
+  const enforceRootVisibility=key=>{
+    const settings=document.getElementById("settingsScreen"),history=document.getElementById("recordsScreen");
+    settings?.classList.toggle("hidden",key!=="settings");settings?.setAttribute("aria-hidden",String(key!=="settings"));
+    history?.classList.toggle("hidden",key!=="history");history?.setAttribute("aria-hidden",String(key!=="history"));
+    if(key!=="player")hideTransientPlayerViews();
+    app.classList.toggle("settings-mode",key==="settings");
+    app.classList.toggle("records-mode",key==="history");
+  };
+  const openRoot=key=>{
+    leaveTopLevel(key);
+    if(key==="home"){window.scrollTo(0,0)}
+    if(key==="player"){document.body.dataset.cuePlayerContext="browse";hideTransientPlayerViews();document.getElementById("playerManagementBtn")?.click();const title=document.getElementById("playerLibraryTitle");if(title)title.textContent="プレーヤー";document.querySelector("#playerLibraryMain")?.scrollTo?.(0,0)}
+    if(key==="history"){document.getElementById("recordsBtn")?.click();document.querySelector("#recordsList")?.scrollTo?.(0,0)}
+    if(key==="settings"){document.getElementById("settingsBtn")?.click();document.querySelector(".settings-formal-scroll-v1")?.scrollTo?.(0,0)}
+    enforceRootVisibility(key);
     setActive(key);
   };
   const restore=key=>{
@@ -93,6 +122,6 @@
   };
   new MutationObserver(scheduleReconcile).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["class","aria-hidden"]});
   document.addEventListener("click",event=>{if(event.target.closest("[data-records-discipline-v2]")){const key=event.target.closest("[data-records-discipline-v2]").dataset.recordsDisciplineV2;state.historyDiscipline=key||"all"}},true);
-  window.CueScoreNavigationPhase1=Object.freeze({go,openRoot,restore,state,isMatchMode,reconcile,tabCount:()=>nav.querySelectorAll("[data-phase1-tab]").length});
+  window.CueScoreNavigationPhase1=Object.freeze({go,openRoot,restore,state,isMatchMode,reconcile,leaveTopLevel,enforceRootVisibility,tabCount:()=>nav.querySelectorAll("[data-phase1-tab]").length});
   reconcile();
 })();

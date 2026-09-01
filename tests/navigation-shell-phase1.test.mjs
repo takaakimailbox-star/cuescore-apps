@@ -29,6 +29,16 @@ test("retap returns to root while cross-tab navigation restores saved runtime st
   assert.match(js,/state\.historyDiscipline=selected/);
 });
 
+test("cross-tab moves close the previous top-level mode before opening the destination",()=>{
+  assert.match(js,/const leaveTopLevel=key=>/);
+  assert.match(js,/if\(key!=="settings"\)closeSettingsRoot\(\)/);
+  assert.match(js,/if\(key!=="history"\)closeHistoryRoot\(\)/);
+  assert.match(js,/if\(key!=="player"\)hideTransientPlayerViews\(\)/);
+  assert.match(js,/leaveTopLevel\(key\);[\s\S]*?if\(key==="history"\)\{document\.getElementById\("recordsBtn"\)\?\.click\(\)/);
+  assert.match(js,/const enforceRootVisibility=key=>/);
+  assert.match(js,/enforceRootVisibility\(key\);\s*setActive\(key\)/);
+});
+
 test("root navigation coalesces observation work and history avoids a duplicate all-filter render",()=>{
   assert.doesNotMatch(js,/recordsBtn"\)\?\.click\(\);document\.querySelector\('\[data-records-discipline-v2="all"\]'/);
   assert.match(js,/if\(filter!=="all"\)/);

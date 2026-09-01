@@ -13,7 +13,7 @@ const formal=html.slice(formalOverride,formalEnd);
 for(const required of [
   "player-management-row-v1",
   "player-management-avatar-v1",
-  "player-primary-pin-v2",
+  "player-primary-badge-v1",
   "player-selection-row-v1",
   "player-selection-button-v1",
   "player-selection-avatar-v1",
@@ -23,6 +23,7 @@ for(const required of [
   "recordsForRegisteredPlayer(player)",
   "playerLibrarySortV1 === \"name\""
 ]) assert.ok(formal.includes(required),`formal Player Library behavior missing: ${required}`);
+assert.ok(!formal.includes("player-primary-pin-v2"),"main Player must not overlay a pin on the avatar");
 
 assert.match(html,/openPlayerLibrary = function\(target\)/);
 assert.match(html,/overlay\?\.classList\.add\("player-management-formal-v1"\)/);
