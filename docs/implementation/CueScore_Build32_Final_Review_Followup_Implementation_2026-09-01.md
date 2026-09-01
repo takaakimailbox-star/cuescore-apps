@@ -25,4 +25,13 @@
 
 ## Boundary
 
-Physical-iPhone confirmation remains required. This implementation does not upload to TestFlight, attach a review build, submit App Review, distribute externally, or release publicly.
+## Internal TestFlight
+
+- Source/archive commit: `fe9e8571d43dccea9378df13a4ba79f363a4ec73`.
+- Signed archive: `/private/tmp/CueScore-Build32.xcarchive`; archive succeeded.
+- Normal App Store Connect upload succeeded; Apple processing reached `VALID`.
+- Existing export-compliance answer is recorded as `usesNonExemptEncryption=false`.
+- `CueScore Internal Testers` is internal with all-build access, so Build 32 is automatically available to the group.
+- Version 1.0 remains `PREPARE_FOR_SUBMISSION`; Build 32 is not linked as its App Store review build.
+
+Physical-iPhone confirmation remains required. App Review, review-build attachment, External TestFlight, and public release were not performed.
