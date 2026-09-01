@@ -1,14 +1,15 @@
 # CueScore Apps Current State
 
-## Build 31 Final Review UI／Navigation実装・Internal TestFlight準備中（2026年9月1日）
+## Build 31 Final Review UI／Navigation実装・Internal TestFlight配布完了（2026年9月1日）
 
 - Build 30実iPhone最終レビューで採用したHome、Player、Player Hub、Settings、Bottom Navigation改善を小さな安定化batchとして実装した。
 - Settings→Historyのactive/content不一致は、共通shellが遷移元`settings-mode`を一元closeせず、destination open後に旧cleanupがSettings DOMを再露出し得たことがroot cause。遷移元close→destination open→非destination root明示hidden→active/mode同期へ統一した。同じ共通経路でPlayer detail／opponent journeyのtop-level dead navigationを修正した。
 - 別tabからPlayerへ戻ると保存済みruntime detail contextを復元し、active Player再tapはPlayer rootへ戻る。Match Detail／Player journey固有Back ownershipは維持した。
 - Home logoを拡大・上方化し、`新しい試合`を親指reach側へ移動。Home iconをmonochrome 3-dot cue-ballへ変更。Player rootは青いavatar pinを廃止し名前横badgeへ変更。Player Hubは6競技icon-only 1列。Settings root Backを削除し390×844で1画面化した。
 - scoring、winner、Race to、JPA、Break Input、14-1、Undo、GameSet、active-match recovery、IDs、saved-data schema、Backup／Restore、analytics formulas／aggregate SSOT、History／Match Detail correctnessは変更していない。Build 30 edge-gesture／text-selection fixを維持した。
-- 自動testはBuild番号・文書最終化前checkpointで`303 pass / 0 fail / 0 skipped`。390×844はHome／Player／History／Settings横overflow 0、console/runtime error 0。Settingsはscrollなし。Simulator Debug／Releaseとも`BUILD SUCCEEDED`。
-- Marketing Version `1.0`／Build Number `31`へ採番。Internal TestFlight作成、processing、実iPhone確認はpending。App Review、`審査用に追加`、External TestFlight、一般公開は未実施。
+- 最終自動testは`303 pass / 0 fail / 0 skipped`。390×844はHome／Player／History／Settings横overflow 0、console/runtime error 0。Settingsはscrollなし。Simulator Debug／Releaseとも`BUILD SUCCEEDED`。
+- Marketing Version `1.0`／Build Number `31`。source/archive commit `59bc1b68bd8a2a65e2a33cd2d9c5fed35ea8c29a`。Signed Archive `/private/tmp/CueScore-Build31.xcarchive`、通常App Store Connect upload、Apple processing `VALID`を確認した。
+- 輸出コンプライアンスは既存回答`usesNonExemptEncryption=false`。internal／全Buildアクセスの`CueScore Internal Testers`へBuild 31は自動配布対象。Version 1.0は`PREPARE_FOR_SUBMISSION`のまま、Build 31へ審査用紐付けしていない。実iPhone確認はpending。App Review、`審査用に追加`、External TestFlight、一般公開は未実施。
 - Official 083／084。実装記録：`docs/implementation/CueScore_Build31_Final_Review_UI_Navigation_Implementation_2026-09-01.md`。
 
 ## Build 30 9-Ball実機root cause修正／Internal TestFlight準備中（2026年9月1日）

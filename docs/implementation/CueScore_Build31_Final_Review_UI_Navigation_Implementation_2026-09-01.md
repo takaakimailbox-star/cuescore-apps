@@ -41,7 +41,7 @@ The Build 30 interactive-control edge exclusion remains present. Non-editable te
 
 ## Verification
 
-- Automated: `303 pass / 0 fail / 0 skipped` before Build-number/document finalization.
+- Automated: `303 pass / 0 fail / 0 skipped` after Build-number/document finalization.
 - 390×844 browser: horizontal overflow 0; console/runtime errors 0.
 - Settings root: `scrollHeight == clientHeight`; all data/legal entries visible; Back control count 0.
 - Settings → History: Settings hidden, History visible, `records-mode`, active History.
@@ -53,10 +53,19 @@ The Build 30 interactive-control edge exclusion remains present. Non-editable te
 - Simulator Debug: `BUILD SUCCEEDED`.
 - Simulator Release: `BUILD SUCCEEDED`.
 
+## Archive and Internal TestFlight
+
+- Source/archive commit: `59bc1b68bd8a2a65e2a33cd2d9c5fed35ea8c29a`.
+- Signed archive: `/private/tmp/CueScore-Build31.xcarchive`; archive succeeded.
+- Normal App Store Connect export/upload succeeded; Apple processing reached `VALID`.
+- Existing export-compliance answer is recorded as `usesNonExemptEncryption=false`.
+- `CueScore Internal Testers` is an internal group with all-build access, so Build 31 is automatically available to that group.
+- Version 1.0 remains `PREPARE_FOR_SUBMISSION`; Build 31 is not its App Store review build.
+
 ## Pending Physical iPhone
 
 The Internal TestFlight Build 31 candidate must be checked on a physical iPhone for P0/P1, all four top-level tabs, Player/Opponent/Match Detail Back contexts, retap/restore, New Match thumb reach, intended edge Swipe Back, and editable/non-editable text behavior. These items are not marked PASS until that check occurs.
 
 ## Distribution Boundary
 
-Internal TestFlight only. App Review, `審査用に追加`, External TestFlight, and public release are not authorized and remain unperformed.
+Internal TestFlight only. App Review, `審査用に追加`, External TestFlight, and public release were not performed.
