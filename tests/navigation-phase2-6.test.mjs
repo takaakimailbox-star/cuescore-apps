@@ -82,7 +82,7 @@ test("new match opens setup with the compact icon-only six-discipline selector i
   assert.match(css,/match-setup-active-v3 \.cue-new-match-integrated-v2>\.cue-discipline-switcher-v1\{order:1;display:flex!important/);
   assert.match(css,/flex:1 0 48px!important/);
   assert.match(css,/\.cue-discipline-label-v1\{display:none!important\}/);
-  assert.match(css,/\.cue-new-match-integrated-v2\{padding:0 2px 16px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important\}/);
+  assert.match(css,/\.cue-new-match-integrated-v2\{--cue-new-match-main-shift-v32:30px;padding:var\(--cue-new-match-main-shift-v32\) 2px 16px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important\}/);
   assert.match(css,/overflow-x:auto!important/);
 });
 

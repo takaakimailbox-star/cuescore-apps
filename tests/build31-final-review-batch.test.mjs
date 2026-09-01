@@ -12,7 +12,7 @@ test("Home adopts the monochrome three-dot cue-ball icon and adjusted reach layo
   assert.equal((homeIcon.match(/<ellipse /g)||[]).length,3);
   assert.doesNotMatch(homeIcon,/#(?:[0-9a-f]{3}){1,2}|gradient|filter/i);
   assert.match(css,/cue-home-brand-v1 \[data-cuescore-logo\]\{height:42px!important\}/);
-  assert.match(css,/margin:clamp\(190px,38svh,330px\) auto 0/);
+  assert.match(css,/margin:calc\(clamp\(190px,38svh,330px\) - var\(--cue-home-logo-shift-v32,0px\)\) auto 0/);
 });
 
 test("Player root uses a small name badge and no avatar pin",()=>{

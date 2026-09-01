@@ -8623,7 +8623,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build29-ios-webview-fixes-v1"></script>
+  <script src="./demo-data.js?v=2.0-build32-final-review-followup-v2"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19180,7 +19180,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build29-ios-webview-fixes-v1";
+    const PWA_VERSION = "2.0-build32-final-review-followup-v2";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -27874,8 +27874,8 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   function ensure(id,title){let root=document.getElementById(id);if(!root){root=document.createElement("section");root.id=id;root.className="player-journey-overlay-v2 hidden";root.innerHTML=`<header class="player-journey-header-v2">${back}<h1>${title}</h1><span></span></header><main class="player-journey-scroll-v2"><div class="player-journey-shell-v2"></div></main>`;document.body.appendChild(root);}return root;}
   const rivalRoot=ensure("playerOpponentRecordsV2","対戦相手別の成績"),historyRoot=ensure("playerMatchHistoryV2","このプレーヤーの試合履歴");
   let rivalState={playerId:"",discipline:"9ball",sort:"games"},historyState={playerId:"",filter:"all",period:"all",opponentKey:"",origin:"player"};
-  function show(root){root.classList.remove("hidden");root.querySelector(".player-journey-scroll-v2")?.scrollTo(0,0);}
-  function hide(root){root.classList.add("hidden");}
+  function show(root){root.classList.remove("hidden");root.setAttribute("aria-hidden","false");root.querySelector(".player-journey-scroll-v2")?.scrollTo(0,0);}
+  function hide(root){root.classList.add("hidden");root.setAttribute("aria-hidden","true");}
   const measureBackV11=(route,source,action)=>{const perf=window.CueScoreBackPerfV11,item=perf?.begin(route,source||"tap");perf?.stage(item,"handlerStart");action();perf?.stage(item,"domComplete");perf?.usable(item);};
   function restorePlayerDetail(){hide(rivalRoot);hide(historyRoot);const detail=document.getElementById("playerStatsOverlay");detail?.classList.remove("hidden");detail?.setAttribute("aria-hidden","false");}
   function reopenPlayer(id){if(String(window.__cueScoreActivePlayerStatsIdV159||"")===String(id)&&document.getElementById("playerStatsBody")?.childElementCount){restorePlayerDetail();return;}hide(rivalRoot);hide(historyRoot);openPlayerStats?.(id);}
@@ -28340,8 +28340,8 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
     window.CueScoreEditableSelectionV1=Object.freeze({isEditableTarget:editable});
   })();
   </script>
-  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build29-ios-webview-fixes-v1" />
-  <script src="./navigation-phase2-6.js?v=2.0-build29-ios-webview-fixes-v1"></script>
+  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build32-final-review-followup-v2" />
+  <script src="./navigation-phase2-6.js?v=2.0-build32-final-review-followup-v2"></script>
 </body>
 </html>
 

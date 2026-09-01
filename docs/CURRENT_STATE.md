@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## Build 32 Final Review Follow-up実装完了（2026年9月1日）
+
+- Build 31実iPhone follow-up 4件をlatest main `26642cb408fdbe42efa2a7b3fa1ab6d978c47741`基準の1 batchへ統合した。
+- Home logoは42pxを維持して30px下げ、`新しい試合`とBottom Navigation位置は維持。Home iconは細い外周と球面角度に沿う3楕円へ忠実化した。
+- New Match主要領域を30px下げ、6競技1列、9-Ball即時反応、Race to、Player選択、side swap、start契約を維持した。
+- Player配下Back不具合のroot causeは、共通navがoverlayへ付けた`aria-hidden=true`をjourney側`show()`が解除せず、表示中もpointer inputが抑止されたこと。`.hidden`と`aria-hidden`を同じ表示primitiveで同期した。
+- 全自動test `308 pass / 0 fail / 0 skipped`。source／native-web／iOS copied asset一致。390×844でhorizontal overflow 0、Player all-matches Back 1tap復帰、Simulator Debug／Releaseとも`BUILD SUCCEEDED`。
+- Marketing Version `1.0`／Build Number `32`。実iPhone確認、TestFlight upload、App Review、`審査用に追加`、External TestFlight、一般公開は未実施。
+- Official 085／086。実装記録：`docs/implementation/CueScore_Build32_Final_Review_Followup_Implementation_2026-09-01.md`。
+
 ## Build 31 Final Review UI／Navigation実装・Internal TestFlight配布完了（2026年9月1日）
 
 - Build 30実iPhone最終レビューで採用したHome、Player、Player Hub、Settings、Bottom Navigation改善を小さな安定化batchとして実装した。
