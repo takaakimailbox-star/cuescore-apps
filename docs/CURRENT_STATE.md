@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## Build 38 Internal TestFlight配布完了（2026年9月2日）
+
+- 実行開始時latest `main` `061cde8ee35cb8c01f4364aa135168016416b62c`を基準に、App Store ConnectでBuild 37まで使用済みであることを確認し、Version `1.0`／Build `38`を採番した。Archive source commitは`b5d3c74`。
+- 全自動test `337 pass / 0 fail / 0 skipped`。Simulator Debug／Releaseとも`BUILD SUCCEEDED`。390×844 horizontal overflow 0、console error 0、Match Detail遷移／Back contract、Bottom Navigation、9-Ball selector／filter、Build 35 exact-origin復元に回帰なし。
+- Signed Archive `/private/tmp/CueScore-Build38.xcarchive`のArchive／Uploadに成功。Build upload ID `f5a51a91-8843-4f45-8819-0e7998f4d593`、Apple processing `VALID`、`usesNonExemptEncryption=false`を確認した。
+- Build 38はInternal group `CueScore Internal Testers`の配布対象で、iPhoneのTestFlightアプリから更新・インストール可能。実iPhone最終受入、Edge Swipe Back、Dynamic TypeはPendingでありPASS扱いにしない。
+- External TestFlight、外部テスター、Public Link、Beta App Review、App Review、審査用に追加、Version 1.0審査用build変更、一般公開は未実施。配布記録：`docs/implementation/CueScore_Build38_Internal_TestFlight_Distribution_2026-09-02.md`。
+
 ## Post-Build 37 ページレイアウト洗練・分析導線整理（2026年9月2日）
 
 - Product Owner採用により、種目別全試合、対戦相手別成績、特定対戦相手履歴のページ階層を統一した。既存集計を用いる3列SummaryStatsBar、52px文脈ヘッダー、22px見出し、16/20/32/12/8pxの対象画面限定リズムを実装。
