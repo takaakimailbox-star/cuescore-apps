@@ -5,7 +5,7 @@
 - latest `main` `df5729e3a5eb02c0470ac819231df2e43365b6c4`を基準に全Edge Swipe Backを監査。共通controllerの1.2秒duration制限、全button開始除外、touchstart直後のtap無効化、body直下Player overlay非追従をroot causeとして修正した。
 - 左端64px以内、intent 8px＋横優位1.2倍、完了60px、縦許容60px、duration 4秒の共通contractへ統一。完了時はvisible Back buttonをclickし、Match DetailはBuild 39 `exactMatchDetailOrigin`を含む既存close contractを通る。短距離は180ms cancel、完了は最大220msでfollow animationする。
 - New Matchの左上BackはDOMから削除し、Bottom Navigationを維持。全自動test `346 pass / 0 fail / 0 skipped`、Simulator Debug／Releaseとも`BUILD SUCCEEDED`、390×844 horizontal overflow 0、console error 0。
-- Version `1.0`／Build `40`。Internal TestFlight配布はこの記録後に実施する。各Enabled画面、Match Detail 5入口、slow／cancel／follow、exact context復元の実iPhone受入はPendingでありPASS扱いにしない。External TestFlight、App Review、審査用に追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build40_Edge_Swipe_Audit_New_Match_Back_Removal_Implementation_2026-09-02.md`。
+- Version `1.0`／Build `40`。source/archive commit `4ced986`からSigned Archive／App Store Connect uploadに成功。Build upload ID `6e5eac16-4c5e-4385-be2a-e58a4c423d5e`、processing `VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`の配布対象を確認し、実iPhoneのTestFlightから更新可能。各Enabled画面、Match Detail 5入口、slow／cancel／follow、exact context復元の実iPhone受入はPendingでありPASS扱いにしない。External TestFlight、App Review、審査用に追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build40_Edge_Swipe_Audit_New_Match_Back_Removal_Implementation_2026-09-02.md`。
 
 ## Build 39 Player Detail exact Back修正（2026年9月2日）
 

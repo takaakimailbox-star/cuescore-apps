@@ -86,5 +86,6 @@ visible Backが存在し、modal／active matchでblockされていない次のc
 
 ## 配布境界
 
-Internal TestFlightまで。External TestFlight、外部テスター、Public Link、Beta App Review、App Review、審査用への追加、Version 1.0審査用build変更、一般公開は行わない。
+source/archive commitは`4ced986`。Signed Archive `/private/tmp/CueScore-Build40.xcarchive`からApp Store Connect uploadに成功した。Build upload IDは`6e5eac16-4c5e-4385-be2a-e58a4c423d5e`、processingは`VALID`、`usesNonExemptEncryption=false`を確認。Build 40はInternal group `CueScore Internal Testers`の配布対象で、実iPhoneのTestFlightから更新・インストール可能。
 
+Internal TestFlightまでで停止。External TestFlight、外部テスター、Public Link、Beta App Review、App Review、審査用への追加、Version 1.0審査用build変更、一般公開は行っていない。
