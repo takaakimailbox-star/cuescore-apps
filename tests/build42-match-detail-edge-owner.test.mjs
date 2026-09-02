@@ -6,7 +6,7 @@ const html=readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const revision=readFileSync(new URL("../ui-revision-v12.js",import.meta.url),"utf8");
 
 test("visible Match Detail owns edge Back ahead of underlying Player Back",()=>{
-  assert.match(html,/const candidateBackButton = \(\) => \{\s*const matchDetailBack=document\.querySelector\("#recordDetailOverlay:not\(\.hidden\):not\(\[aria-hidden='true'\]\) #recordDetailBackBtn"\);\s*if\(isVisible\(matchDetailBack\)\)return matchDetailBack;/);
+  assert.match(html,/const candidateBackButton = \(\) => \{\s*const matchDetailBack=document\.querySelector\("#recordDetailOverlay:not\(\.hidden\):not\(\[aria-hidden='true'\]\) #recordDetailBackBtn"\);\s*if\(matchDetailBack&&matchDetailBack\.getClientRects\(\)\.length>0\)return matchDetailBack;/);
   assert.match(html,/requestBackContract\(backButton\)/);
   assert.match(html,/window\.closeFormalMatchDetailV2\?\.\(\)/);
 });

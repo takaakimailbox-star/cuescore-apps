@@ -6,13 +6,13 @@ const html=readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const revision=readFileSync(new URL("../ui-revision-v12.js",import.meta.url),"utf8");
 
 test("Match Detail Edge Swipe invokes the formal close contract without synthetic click",()=>{
-  assert.match(html,/const requestBackContract = backButton => \{[\s\S]*?backButton\.id==="recordDetailBackBtn"&&isVisible\(matchDetail\)&&typeof window\.closeFormalMatchDetailV2==="function"[\s\S]*?window\.closeFormalMatchDetailV2\(\);[\s\S]*?return true;/);
+  assert.match(html,/const requestBackContract = backButton => \{[\s\S]*?ownsVisibleMatchDetail[\s\S]*?typeof window\.closeFormalMatchDetailV2==="function"[\s\S]*?window\.closeFormalMatchDetailV2\(\);[\s\S]*?return true;/);
   assert.match(html,/requestBackContract\(backButton\)/);
   assert.doesNotMatch(html,/backButton\.dataset\.cueBackSource="swipe";backButton\.click\(\)/);
 });
 
 test("non-Match Detail screens retain their existing visible button contract",()=>{
-  assert.match(html,/if\(backButton\.id==="recordDetailBackBtn"[\s\S]*?return true;\s*}\s*backButton\.click\(\);/);
+  assert.match(html,/if\(ownsVisibleMatchDetail&&typeof window\.closeFormalMatchDetailV2==="function"\)[\s\S]*?return true;\s*}\s*backButton\.click\(\);/);
   assert.match(html,/requestBackContract,/);
 });
 
