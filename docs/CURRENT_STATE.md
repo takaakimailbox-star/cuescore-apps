@@ -4,7 +4,7 @@
 
 - Build 41実iPhoneで自己ベスト／最近の試合からのEdge Swipe animationは完走したがMatch Detailが閉じなかった。背面Player Informationの`#playerStatsBackBtn`がDOM上visibleで、共通candidate順により表示中の`#recordDetailBackBtn`より先に選ばれていたことがroot cause。
 - visible Match DetailのBackを最優先ownerとし、同じbutton click → Build 35 `closeFormalMatchDetailV2()` → Build 39 `exactMatchDetailOrigin`復元を通す。入口別routeは追加せず、Build 41 lifecycle resetと対戦相手別の正常経路を維持。
-- 全自動test `354 pass / 0 fail / 0 skipped`。Simulator Debug／Releaseとも`BUILD SUCCEEDED`、390×844 horizontal overflow 0、console error 0、Bottom Navigation表示、New Match Backなし。Version `1.0`／Build `42`。自己ベスト／最近を含む実iPhone各3回の受入はPendingでありPASS扱いにしない。実装記録：`docs/implementation/CueScore_Build42_MatchDetail_EdgeSwipe_Back_Owner_Fix_Implementation_2026-09-03.md`。
+- 全自動test `354 pass / 0 fail / 0 skipped`。Simulator Debug／Releaseとも`BUILD SUCCEEDED`、390×844 horizontal overflow 0、console error 0、Bottom Navigation表示、New Match Backなし。Version `1.0`／Build `42`。source/archive commit `1e09803`、Build upload ID `88b5dbba-b43d-407c-a4ec-f00635f92005`、processing `VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`配布対象を確認。自己ベスト／最近を含む実iPhone各3回の受入はPendingでありPASS扱いにしない。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build42_MatchDetail_EdgeSwipe_Back_Owner_Fix_Implementation_2026-09-03.md`。
 
 ## Build 41 Match Detail Edge Swipe state reset修正（2026年9月3日）
 

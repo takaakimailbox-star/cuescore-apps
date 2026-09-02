@@ -56,4 +56,6 @@ Internal TestFlight Build 42で以下を各3回確認する。実機確認前は
 
 ## 配布境界
 
-Internal TestFlightまで。External TestFlight、Beta App Review、App Review、`審査用に追加`、一般公開は行わない。
+source/archive commitは`1e09803`。Signed Archive `/private/tmp/CueScore-Build42.xcarchive`からApp Store Connect uploadに成功。Build upload ID `88b5dbba-b43d-407c-a4ec-f00635f92005`、processing `VALID`、`usesNonExemptEncryption=false`を確認した。Build 42はInternal group `CueScore Internal Testers`の配布対象で、実iPhoneのTestFlightから更新・インストール可能。
+
+Internal TestFlightまでで停止。External TestFlight、Beta App Review、App Review、`審査用に追加`、一般公開は行っていない。
