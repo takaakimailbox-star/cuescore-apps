@@ -35,3 +35,13 @@ Build 38のPlayer Hub再構成後も、Build 34の`exactMatchDetailOrigin`は旧
 
 実iPhoneでの5入口、1tap、scroll位置、Edge Swipeの最終受入はInternal TestFlight Build 39で確認待ち。自動／Simulator／browser結果を実iPhone PASSとは扱わない。
 
+## Internal TestFlight distribution
+
+- Archive source commit: `6541732`
+- Signed Archive: `/private/tmp/CueScore-Build39.xcarchive`
+- Archive／Xcode App Store Connect upload: SUCCESS
+- Build upload ID: `e07f0db7-33ad-485b-918b-943b45870f6c`
+- Apple processing: `VALID`
+- `usesNonExemptEncryption=false`
+- Internal group `CueScore Internal Testers`: Build 39を含む
+- External TestFlight、App Review、審査用に追加、Version 1.0審査用build変更、一般公開: 未実施

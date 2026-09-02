@@ -6,7 +6,7 @@
 - `CueScorePlayerHubV2`をplayer／discipline／tab／tab内scrollのsnapshot・restore SSOTとし、restore時にPlayer Libraryを閉じて同じPlayer Informationを復元する。自己ベストは`personal-best`、最近は`player-recent`としてorigin kindも分離した。
 - Build 35のpointer/click入力、`closeFormalMatchDetailV2()`、Edge Swipe共通経路、Match Card C、scoring、analytics、saved-data schema、Backup/Restore、Bottom Navigation、9-Ball selectorは変更していない。
 - 5入口をdeterministic sample dataで確認。自己ベストは分析tab、最近は試合tab、全試合はdiscipline-fixed history、対戦相手別は同じopponent、Global Historyは同画面へ復元。390×844 overflow 0、console error 0。
-- 全自動test `341 pass / 0 fail / 0 skipped`。Simulator Debug／Releaseとも`BUILD SUCCEEDED`。Version `1.0`／Build `39`。実iPhoneでの5入口・scroll・Edge Swipe最終受入はPendingでありPASS扱いにしない。実装記録：`docs/implementation/CueScore_Build39_Player_Detail_Exact_Back_Fix_Implementation_2026-09-02.md`。
+- 全自動test `341 pass / 0 fail / 0 skipped`。Simulator Debug／Releaseとも`BUILD SUCCEEDED`。Version `1.0`／Build `39`。source/archive commit `6541732`から署名Archive／App Store Connect uploadに成功し、Build upload ID `e07f0db7-33ad-485b-918b-943b45870f6c`、processing `VALID`、`usesNonExemptEncryption=false`を確認。Internal group `CueScore Internal Testers`の配布対象でiPhoneから更新可能。実iPhoneでの5入口・scroll・Edge Swipe最終受入はPendingでありPASS扱いにしない。External TestFlight、App Review、審査用に追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build39_Player_Detail_Exact_Back_Fix_Implementation_2026-09-02.md`。
 
 ## Build 38 Internal TestFlight配布完了（2026年9月2日）
 
