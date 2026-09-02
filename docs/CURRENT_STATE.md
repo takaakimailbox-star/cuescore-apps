@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## Build 35 Match Detail Back入力導線修正（2026年9月2日）
+
+- Build 34の実iPhone確認で「最近の試合 → Match Detail → 左上Back」が無反応だったため、Build 34のBack修正はFAILのまま。latest `main` `0bb701d3`を基準に入力導線を再調査した。
+- 実DOMは`button#recordDetailBackBtn.match-detail-back-v1`。正式Detailはinline `onclick`とWebViewのclick生成だけに依存し、Build 34 exact-origin wrapperはcloseへ到達しないtapを救えなかった。旧Detail handlerは置換前markupのもので、正式renderer後のclose wrapper順とは独立していた。
+- formal Backへ`pointerdown`／検証付き`pointerup`／`click` fallbackを明示登録し、1つのrequest-closeから実行時点の`closeFormalMatchDetailV2()`を呼ぶ。Edge Swipeも同じbuttonのclickを経由するためclose contractはSSOT。48×48 hit area、`z-index:3`、`pointer-events:auto`、`touch-action:manipulation`を明示した。
+- Build 34の`exactMatchDetailOrigin`復元は維持。Match Card Cは別batchの未解決事項として今回は変更していない。
+- ローカル実DOMで対象buttonが最前面であることと、全体Historyから1tap close／入口復帰を確認。5入口の実iPhone合否はInternal TestFlight Build 35確認待ちであり、確認前にPASS扱いしない。
+- 全自動test `321 pass / 0 fail / 0 skipped`。source／native-web／iOS copied assetを同期し、Simulator Debug／Releaseとも`BUILD SUCCEEDED`。Marketing Version `1.0`／Build Number `35`。
+- Official 089／090。実装記録：`docs/implementation/CueScore_Build35_Match_Detail_Back_Input_Fix_Implementation_2026-09-02.md`。
+
 ## Build 34 Match Card C／Match Detail Back実装（2026年9月2日）
 
 - latest `main` `8ee1ee9a7e3d3bd641ed30fa6348d5ec7346d331`を基準に、試合カードCの情報密度をPlayer最近／競技別全試合／対戦相手別／全体Historyへ統合した。

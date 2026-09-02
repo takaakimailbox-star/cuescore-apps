@@ -8623,7 +8623,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build34-match-card-c-back-v1"></script>
+  <script src="./demo-data.js?v=2.0-build35-match-detail-back-input-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19180,7 +19180,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build34-match-card-c-back-v1";
+    const PWA_VERSION = "2.0-build35-match-detail-back-input-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22816,7 +22816,7 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
     overlay.className=`record-detail-overlay match-detail-overlay-v1${resultMode?" is-result-mode-v5":""}`;
     overlay.innerHTML=`<div class="match-detail-v1">
       <header class="match-detail-header-v1">
-        ${resultMode?'<span class="match-detail-header-spacer-v5" aria-hidden="true"></span>':`<button id="recordDetailBackBtn" class="match-detail-back-v1" type="button" aria-label="対戦履歴へ戻る" onclick="window.closeFormalMatchDetailV2?.()">
+        ${resultMode?'<span class="match-detail-header-spacer-v5" aria-hidden="true"></span>':`<button id="recordDetailBackBtn" class="match-detail-back-v1" type="button" aria-label="対戦履歴へ戻る">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8"/></svg>
         </button>`}
         <h1>${resultMode?"試合結果":"試合詳細"}</h1>
@@ -22850,6 +22850,24 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
     overlay.classList.remove("hidden");
     overlay.setAttribute("aria-hidden","false");
     document.body.classList.add("match-detail-visible-v1");
+    const detailBack=document.getElementById("recordDetailBackBtn");
+    if(detailBack){
+      let pointerDownAt=0,pointerDownX=0,pointerDownY=0,lastCloseRequestAt=0;
+      const trace=(type,event)=>{const entries=window.__cueScoreMatchDetailBackTraceV35=Array.isArray(window.__cueScoreMatchDetailBackTraceV35)?window.__cueScoreMatchDetailBackTraceV35:[];entries.push({type,at:performance.now(),pointerType:event?.pointerType||"",trusted:Boolean(event?.isTrusted)});if(entries.length>24)entries.splice(0,entries.length-24);};
+      const requestClose=(event,source)=>{
+        const now=performance.now();if(now-lastCloseRequestAt<450)return;
+        lastCloseRequestAt=now;trace(`close-request:${source}`,event);
+        detailBack.dataset.cueBackSource=source;
+        window.closeFormalMatchDetailV2?.();
+      };
+      detailBack.addEventListener("pointerdown",event=>{pointerDownAt=performance.now();pointerDownX=event.clientX;pointerDownY=event.clientY;trace("pointerdown",event);},{signal});
+      detailBack.addEventListener("pointerup",event=>{
+        trace("pointerup",event);
+        const moved=Math.hypot(event.clientX-pointerDownX,event.clientY-pointerDownY);
+        if(event.isPrimary!==false&&performance.now()-pointerDownAt<900&&moved<18){event.preventDefault();requestClose(event,"tap");}
+      },{signal});
+      detailBack.addEventListener("click",event=>{trace("click",event);requestClose(event,detailBack.dataset.cueBackSource==="swipe"?"swipe":"click");},{signal});
+    }
     document.getElementById("officialResultReturnGameV1")?.addEventListener("click",()=>{
       document.body.classList.remove("match-detail-visible-v1");
       cleanupHistoricalRecordV159();
@@ -23585,6 +23603,7 @@ body.match-detail-visible-v1{overflow:hidden!important}
 .match-detail-conditions-v5{display:flex;justify-content:center;flex-wrap:wrap;gap:6px}
 .match-detail-back-v1{
   position:absolute;
+  z-index:3;
   left:max(12px,env(safe-area-inset-left));
   bottom:5px;
   width:40px;
@@ -23596,6 +23615,8 @@ body.match-detail-visible-v1{overflow:hidden!important}
   border-radius:50%;
   color:#171717;
   background:transparent;
+  pointer-events:auto!important;
+  touch-action:manipulation;
 }
 .match-detail-back-v1 svg{
   width:23px;
@@ -28340,8 +28361,8 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
     window.CueScoreEditableSelectionV1=Object.freeze({isEditableTarget:editable});
   })();
   </script>
-  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build34-match-card-c-back-v1" />
-  <script src="./navigation-phase2-6.js?v=2.0-build34-match-card-c-back-v1"></script>
+  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build35-match-detail-back-input-v1" />
+  <script src="./navigation-phase2-6.js?v=2.0-build35-match-detail-back-input-v1"></script>
 </body>
 </html>
 
