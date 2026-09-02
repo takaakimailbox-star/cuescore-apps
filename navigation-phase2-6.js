@@ -84,6 +84,26 @@
     requestAnimationFrame(()=>{const panel=body.querySelector(".hub-content-v2");if(panel)panel.scrollTop=active.state.scroll[active.state.tab]||0;});
   }
 
+  const snapshot=()=>{
+    if(!active.playerId||!active.state)return null;
+    const panel=body.querySelector(".hub-content-v2");
+    active.state.scroll[active.state.tab]=panel?.scrollTop||body.scrollTop||0;
+    return {playerId:active.playerId,discipline:active.state.discipline,tab:active.state.tab,scrollTop:active.state.scroll[active.state.tab]||0};
+  };
+  const restore=saved=>{
+    if(!saved?.playerId)return false;
+    const state=stateFor(saved.playerId);
+    state.discipline=saved.discipline||state.discipline;
+    state.tab=saved.tab||state.tab;
+    state.scroll[state.tab]=Number(saved.scrollTop)||0;
+    const library=document.getElementById("playerLibraryOverlay"),overlay=document.getElementById("playerStatsOverlay");
+    library?.classList.add("hidden");library?.setAttribute("aria-hidden","true");
+    overlay?.classList.remove("hidden");overlay?.setAttribute("aria-hidden","false");
+    render(saved.playerId,{discipline:state.discipline,tab:state.tab});
+    return true;
+  };
+  window.CueScorePlayerHubV2=Object.freeze({snapshot,restore});
+
   const previous=window.renderFormalPlayerDetailV1;
   window.renderFormalPlayerDetailV1=function(playerId){previous?.(playerId);render(playerId);};
   body.addEventListener("click",event=>{

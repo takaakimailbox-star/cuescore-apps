@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## Build 39 Player Detail exact Back修正（2026年9月2日）
+
+- 実iPhone Build 38で、Player Information起点の最近の試合／自己ベストからMatch Detailを閉じるとPlayer一覧まで戻る回帰を確認。Backの1tap入力とclose contractではなく、Build 38 Player Hubが所有するexact opening contextの未連携がroot causeだった。
+- `CueScorePlayerHubV2`をplayer／discipline／tab／tab内scrollのsnapshot・restore SSOTとし、restore時にPlayer Libraryを閉じて同じPlayer Informationを復元する。自己ベストは`personal-best`、最近は`player-recent`としてorigin kindも分離した。
+- Build 35のpointer/click入力、`closeFormalMatchDetailV2()`、Edge Swipe共通経路、Match Card C、scoring、analytics、saved-data schema、Backup/Restore、Bottom Navigation、9-Ball selectorは変更していない。
+- 5入口をdeterministic sample dataで確認。自己ベストは分析tab、最近は試合tab、全試合はdiscipline-fixed history、対戦相手別は同じopponent、Global Historyは同画面へ復元。390×844 overflow 0、console error 0。
+- 全自動test `341 pass / 0 fail / 0 skipped`。Simulator Debug／Releaseとも`BUILD SUCCEEDED`。Version `1.0`／Build `39`。実iPhoneでの5入口・scroll・Edge Swipe最終受入はPendingでありPASS扱いにしない。実装記録：`docs/implementation/CueScore_Build39_Player_Detail_Exact_Back_Fix_Implementation_2026-09-02.md`。
+
 ## Build 38 Internal TestFlight配布完了（2026年9月2日）
 
 - 実行開始時latest `main` `061cde8ee35cb8c01f4364aa135168016416b62c`を基準に、App Store ConnectでBuild 37まで使用済みであることを確認し、Version `1.0`／Build `38`を採番した。Archive source commitは`b5d3c74`。
