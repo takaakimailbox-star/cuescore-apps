@@ -7,6 +7,7 @@
 - Global Historyは2 player、24px avatar、18px discipline icon、Race、score、chevronを保持。score nowrap、name ellipsis、390px breakpointを共通保護した。
 - Build 35 Backのpointer入力、`closeFormalMatchDetailV2()`、Edge Swipe、exact origin／scroll復元は変更していない。実iPhone確認前はPASS扱いにしない。
 - 全自動test `327 pass / 0 fail / 0 skipped`。source／native-web／iOS copied assetを同期し、Simulator Debug／Releaseとも`BUILD SUCCEEDED`。Marketing Version `1.0`／Build Number `36`。実iPhoneでのC案忠実度と5入口Back再確認はInternal TestFlight確認待ち。
+- source/archive commit `004612f`を`main`へ反映。Signed Archive `/private/tmp/CueScore-Build36.xcarchive`をApp Store Connectへuploadし、Delivery UUID `a37e38ad-0a2e-4dcf-a08c-25bf32a41a5a`、processing／import `VALID`、`usesNonExemptEncryption=false`を確認した。Build 36は`提出準備完了`で、内部group `CueScore Internal Testers`（招待数1）の配布対象。App Review、Version 1.0審査用build紐付け、External TestFlight、一般公開は未実施。
 - Official 091／092。実装記録：`docs/implementation/CueScore_Build36_Match_Card_C_Fidelity_Reimplementation_2026-09-02.md`。
 
 ## Build 35 Match Detail Back入力導線修正（2026年9月2日）

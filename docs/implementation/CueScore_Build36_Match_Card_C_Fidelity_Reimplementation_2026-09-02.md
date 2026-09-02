@@ -15,3 +15,12 @@ Verification before distribution:
 - Native web generation and Capacitor sync completed; source and copied assets are aligned.
 - iOS Simulator Debug and Release builds both succeeded.
 - The 390-point CSS contract fixes each card family to a two-layer compact layout, prevents score wrapping, and ellipsizes long identities. Physical-iPhone visual acceptance remains pending and is not reported as PASS.
+
+Distribution stopped at Internal TestFlight:
+
+- Source/archive commit: `004612f` on `main`.
+- Signed archive: `/private/tmp/CueScore-Build36.xcarchive`.
+- Delivery UUID: `a37e38ad-0a2e-4dcf-a08c-25bf32a41a5a`; processing and import status `VALID`.
+- Export compliance: `usesNonExemptEncryption=false` (the established “none of the algorithms above” answer).
+- App Store Connect status: Ready to Submit; internal group `CueScore Internal Testers`, one invite.
+- No external testing, App Review submission, review-build linkage, or public release was performed.
