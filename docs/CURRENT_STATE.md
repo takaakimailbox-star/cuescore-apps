@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## Build 43 Match Detail Edge Swipe direct close修正候補（2026年9月3日）
+
+- Build 42実iPhoneでも自己ベスト／最近の試合からSwipe animationは完走するがDetailが閉じずFAIL。Build 42は正しい`#recordDetailBackBtn`を選択済みだが、最終処理がiPhone WebView上の合成`button.click()`へ依存していた。
+- Edge Swipe共通`requestBackContract()`を追加。表示中Match Detailでは合成clickを介さず、左上Backと同じ実行時`window.closeFormalMatchDetailV2()`へ直接合流する。Build 39 exact origin wrapper、新しいrouteなし、他画面のbutton contractを維持。
+- 全自動test `357 pass / 0 fail / 0 skipped`。Simulator Debug／Releaseとも`BUILD SUCCEEDED`。390×844 horizontal overflow 0、console error 0、Bottom Navigation表示、New Match Backなし。Version `1.0`／Build `43`候補。実iPhone受入はPendingでありPASS扱いにしない。main push／Internal TestFlightは未実施。実装記録：`docs/implementation/CueScore_Build43_MatchDetail_EdgeSwipe_Direct_Close_Implementation_2026-09-03.md`。
+
 ## Build 42 Match Detail Edge Swipe Back owner修正（2026年9月3日）
 
 - Build 41実iPhoneで自己ベスト／最近の試合からのEdge Swipe animationは完走したがMatch Detailが閉じなかった。背面Player Informationの`#playerStatsBackBtn`がDOM上visibleで、共通candidate順により表示中の`#recordDetailBackBtn`より先に選ばれていたことがroot cause。

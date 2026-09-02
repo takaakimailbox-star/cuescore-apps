@@ -10,7 +10,7 @@ test("slow half-width edge swipe completes through the visible Back contract",()
   assert.match(html,/const EDGE_START_MAX = 64/);
   assert.match(html,/const MIN_HORIZONTAL_TRAVEL = 60/);
   assert.match(html,/const MAX_GESTURE_DURATION = 4000/);
-  assert.match(html,/backButton\.dataset\.cueBackSource="swipe";backButton\.click\(\)/);
+  assert.match(html,/requestBackContract\(backButton\)/);
 });
 
 test("short and vertical gestures cancel naturally",()=>{

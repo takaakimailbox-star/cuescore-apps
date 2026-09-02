@@ -8,7 +8,7 @@ const detail=readFileSync(new URL("../player-detail-build6.js",import.meta.url),
 test("Back removes fixed gesture waits and provides immediate touch feedback",()=>{
   assert.doesNotMatch(html,/setTimeout\(\(\)=>\{backButton\.click\(\);clearInteractiveBack\(\);backTransitionActive=false;\},190\)/);
   assert.doesNotMatch(html,/setTimeout\(finish,280\)/);
-  assert.match(html,/backButton\.dataset\.cueBackSource="swipe";backButton\.click\(\)/);
+  assert.match(html,/requestBackContract\(backButton\)/);
   assert.match(html,/touch-action:manipulation/);
   assert.match(html,/cue-back-feedback-v11/);
 });

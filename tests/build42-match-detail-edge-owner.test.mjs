@@ -7,7 +7,7 @@ const revision=readFileSync(new URL("../ui-revision-v12.js",import.meta.url),"ut
 
 test("visible Match Detail owns edge Back ahead of underlying Player Back",()=>{
   assert.match(html,/const candidateBackButton = \(\) => \{\s*const matchDetailBack=document\.querySelector\("#recordDetailOverlay:not\(\.hidden\):not\(\[aria-hidden='true'\]\) #recordDetailBackBtn"\);\s*if\(isVisible\(matchDetailBack\)\)return matchDetailBack;/);
-  assert.match(html,/backButton\.dataset\.cueBackSource="swipe";backButton\.click\(\)/);
+  assert.match(html,/requestBackContract\(backButton\)/);
   assert.match(html,/window\.closeFormalMatchDetailV2\?\.\(\)/);
 });
 

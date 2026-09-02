@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="./analysis-final-rc.css" />
   <link rel="stylesheet" href="./analysis-build4.css" />
   <link rel="stylesheet" href="./player-detail-build6.css" />
-  <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build42-edge-owner" />
+  <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build43-direct-close" />
   <link rel="stylesheet" href="./player-detail-build8.css" />
   <style id="build8PlayerTitleV1">
   .pd8-title-with-icon{display:flex!important;align-items:center;justify-content:center;gap:7px}.pd8-title-with-icon img{width:25px;height:25px;flex:0 0 auto}
@@ -8623,7 +8623,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build42-edge-owner"></script>
+  <script src="./demo-data.js?v=2.0-build43-direct-close"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19181,7 +19181,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build42-edge-owner";
+    const PWA_VERSION = "2.0-build43-direct-close";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -27582,13 +27582,24 @@ body.cue-edge-back-cancelling-v3>.app,body.cue-edge-back-cancelling-v3>#playerOp
     document.body.style.setProperty("--cue-edge-back-x","0px");document.body.style.setProperty("--cue-edge-back-progress","0");
     visualResetTimer=setTimeout(()=>{if(sequence===gestureSequence)clearInteractiveBack();},190);
   };
+  const requestBackContract = backButton => {
+    if(!backButton)return false;
+    backButton.dataset.cueBackSource="swipe";
+    const matchDetail=document.getElementById("recordDetailOverlay");
+    if(backButton.id==="recordDetailBackBtn"&&isVisible(matchDetail)&&typeof window.closeFormalMatchDetailV2==="function"){
+      window.closeFormalMatchDetailV2();
+      return true;
+    }
+    backButton.click();
+    return true;
+  };
   const animateBack = backButton => {
     if (!backButton || backTransitionActive) return;
     backTransitionActive = true;
     if(document.body.classList.contains("cue-edge-back-tracking-v3")){
       document.body.classList.add("cue-edge-back-cancelling-v3");
       document.body.style.setProperty("--cue-edge-back-x","100vw");document.body.style.setProperty("--cue-edge-back-progress","1");
-      backButton.dataset.cueBackSource="swipe";backButton.click();
+      requestBackContract(backButton);
       requestAnimationFrame(()=>{clearInteractiveBack();backTransitionActive=false;});
       return;
     }
@@ -27597,7 +27608,7 @@ body.cue-edge-back-cancelling-v3>.app,body.cue-edge-back-cancelling-v3>#playerOp
     const finish = () => {
       if (completed) return;
       completed = true;
-      backButton.dataset.cueBackSource="swipe";backButton.click();
+      requestBackContract(backButton);
       requestAnimationFrame(() => {
         document.body.classList.remove("cue-edge-back-animating-v2");
         backTransitionActive = false;
@@ -27680,6 +27691,7 @@ body.cue-edge-back-cancelling-v3>.app,body.cue-edge-back-cancelling-v3>#playerOp
   window.CueScoreEdgeBackV1 = Object.freeze({
     visibleBackButton,
     animateBack,
+    requestBackContract,
     isTransitionBlocked,
     reset:()=>abortGesture({animate:false}),
     debugState:()=>Object.freeze({active:Boolean(gesture),identifier:gesture?.identifier??null,backTransitionActive,visualResetPending:Boolean(visualResetTimer)}),
@@ -28368,7 +28380,7 @@ body.cue-edge-back-cancelling-v3>.app,body.cue-edge-back-cancelling-v3>#playerOp
   <script src="./analytics-build4-metrics.js"></script>
   <script src="./analysis-build4.js"></script>
   <script src="./player-detail-build6.js"></script>
-  <script src="./ui-revision-v12.js?v=2.0-build42-edge-owner"></script>
+  <script src="./ui-revision-v12.js?v=2.0-build43-direct-close"></script>
   <script src="./final-ui-build18.js"></script>
   <link rel="stylesheet" href="./navigation-shell-phase1.css" />
   <script src="./navigation-shell-phase1.js"></script>
@@ -28380,8 +28392,8 @@ body.cue-edge-back-cancelling-v3>.app,body.cue-edge-back-cancelling-v3>#playerOp
     window.CueScoreEditableSelectionV1=Object.freeze({isEditableTarget:editable});
   })();
   </script>
-  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build42-edge-owner" />
-  <script src="./navigation-phase2-6.js?v=2.0-build42-edge-owner"></script>
+  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build43-direct-close" />
+  <script src="./navigation-phase2-6.js?v=2.0-build43-direct-close"></script>
 </body>
 </html>
 
