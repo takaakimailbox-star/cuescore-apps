@@ -42,5 +42,9 @@ Build 35 pointer input, `closeFormalMatchDetailV2()`, edge-swipe convergence, ex
 - Native web generation and Capacitor iOS sync: passed.
 - Marketing Version: 1.0. Build Number: 37.
 - iOS Simulator Debug and Release builds both succeeded.
-- Internal TestFlight delivery results are recorded after completion.
+- Source/archive commit: `d0d0aa4`.
+- Signed archive: `/private/tmp/CueScore-Build37.xcarchive`.
+- App Store Connect Delivery UUID `76534b77-ae7e-40e3-bb87-2411e8940315`; processing/import `VALID`; `usesNonExemptEncryption=false`.
+- Build 37 is Ready to Submit and associated with the internal `CueScore Internal Testers` group.
+- GitHub `main` push of the source plus supplied/reference screenshots awaits explicit approval because those images will be transmitted to the repository remote.
 - No App Review submission, review-build attachment, External TestFlight, or public release is authorized.
