@@ -87,4 +87,6 @@ Internal TestFlight Build 41で各項目を3回連続確認する。自動／Sim
 
 ## 配布境界
 
-Internal TestFlightまで。External TestFlight、外部テスター、Public Link、Beta App Review、App Review、`審査用に追加`、Version 1.0審査用build変更、一般公開は行わない。
+source/archive commitは`39b2200`。Signed Archive `/private/tmp/CueScore-Build41.xcarchive`からApp Store Connect uploadに成功。Build upload ID `8fda71ea-9592-473e-a2a7-c73d4cdce33d`、processing `VALID`、`usesNonExemptEncryption=false`を確認した。Build 41はInternal group `CueScore Internal Testers`の配布対象で、実iPhoneのTestFlightから更新・インストール可能。
+
+Internal TestFlightまでで停止。External TestFlight、外部テスター、Public Link、Beta App Review、App Review、`審査用に追加`、Version 1.0審査用build変更、一般公開は行っていない。
