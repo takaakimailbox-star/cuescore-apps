@@ -20,7 +20,8 @@ test("short and vertical gestures cancel naturally",()=>{
 });
 
 test("tracking begins after horizontal intent and covers Player journey overlays",()=>{
-  assert.match(html,/if\(dx>8&&dx>Math\.abs\(dy\)\*HORIZONTAL_DOMINANCE\)document\.body\.classList\.add\("cue-edge-back-tracking-v3"\)/);
+  assert.match(html,/const hasIntent=dx>8&&dx>Math\.abs\(dy\)\*HORIZONTAL_DOMINANCE/);
+  assert.match(html,/if\(hasIntent\)document\.body\.classList\.add\("cue-edge-back-tracking-v3"\)/);
   for(const root of ["body.cue-edge-back-tracking-v3>.app","#playerOpponentRecordsV2","#playerMatchHistoryV2"])assert.match(html,new RegExp(root.replace(/[.>]/g,"\\$&")));
   assert.doesNotMatch(html,/interactiveTargetSelector = "button/);
   assert.match(html,/\[role='tab'\],\[data-discipline\]/);

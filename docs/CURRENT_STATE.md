@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## Build 41 Match Detail Edge Swipe state reset修正（2026年9月3日）
+
+- Build 40実iPhoneで、自己ベスト／最近の試合からMatch Detailを開き、Edge Swipeが途中cancelされると次のSwipeが無反応になる問題を確認。対戦相手別 → 特定相手の試合画面と左上BackはPASSだった。
+- root causeはcancel animationの旧190ms timeoutが次gesture中のtracking stateを消す競合と、cancel判定後もgesture object／touch identifierをtouchendまで保持する不完全cleanup。共通`abortGesture()`でactive ownerを即時解除し、timeout invalidation、sequence ownership、touch identifier照合、touchcancel／pointercancel／lostpointercapture／blur／pagehide cleanupを統一した。
+- Build 35左上Back、Build 39 exact origin restore、Match Card C、scoring、analytics、saved-data、Bottom Navigation、New Match Back削除は変更していない。
+- 全自動test `351 pass / 0 fail / 0 skipped`。Simulator Debug／Releaseとも`BUILD SUCCEEDED`。390×844 horizontal overflow 0、console error 0、Bottom Navigation表示、New Match Back DOMなし。Version `1.0`／Build `41`。実iPhone各3回の受入はPendingでありPASS扱いにしない。実装記録：`docs/implementation/CueScore_Build41_MatchDetail_EdgeSwipe_State_Reset_Fix_Implementation_2026-09-03.md`。
+
 ## Build 40 Edge Swipe監査／New Match Back削除（2026年9月2日）
 
 - latest `main` `df5729e3a5eb02c0470ac819231df2e43365b6c4`を基準に全Edge Swipe Backを監査。共通controllerの1.2秒duration制限、全button開始除外、touchstart直後のtap無効化、body直下Player overlay非追従をroot causeとして修正した。
