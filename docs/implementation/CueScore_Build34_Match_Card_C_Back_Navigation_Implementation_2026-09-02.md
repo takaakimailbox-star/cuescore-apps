@@ -24,4 +24,4 @@
 
 ## Distribution Boundary
 
-Build 34はMatch Detail Backの実iPhone checkpointに適する。Internal TestFlightまでを対象とし、App Review、Version 1.0審査用build紐付け、External TestFlight、一般公開は行わない。
+Build 34はMatch Detail Backの実iPhone checkpointとして、Signed Archive `/private/tmp/CueScore-Build34.xcarchive`を作成した。個人APIキー認証でApp Store Connectへuploadし、Delivery UUID `afcb8538-12de-4979-9616-9713eab276f8`、processing `VALID`、`usesNonExemptEncryption=false`を確認した。既存のInternal／全Buildアクセスgroupの配布対象とし、App Review、Version 1.0審査用build紐付け、External TestFlight、一般公開は行っていない。
