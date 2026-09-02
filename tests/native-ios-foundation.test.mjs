@@ -19,7 +19,7 @@ test("iOS target is iPhone-only, portrait-only, version 1.0 build 37", () => {
   assert.doesNotMatch(project, /TARGETED_DEVICE_FAMILY = "1,2"/);
   assert.match(project, /TARGETED_DEVICE_FAMILY = 1;/);
   assert.match(project, /MARKETING_VERSION = 1\.0;/);
-  assert.match(project, /CURRENT_PROJECT_VERSION = 37;/);
+  assert.match(project, /CURRENT_PROJECT_VERSION = 38;/);
   assert.match(infoPlist, /UIInterfaceOrientationPortrait/);
   assert.doesNotMatch(infoPlist, /UIInterfaceOrientationLandscape/);
   assert.doesNotMatch(infoPlist, /UISupportedInterfaceOrientations~ipad/);
