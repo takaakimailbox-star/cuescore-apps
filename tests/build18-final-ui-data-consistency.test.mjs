@@ -37,7 +37,7 @@ test("cumulative latest point equals the full eligible aggregate and keeps missi
 test("fixed 9-Ball history keeps its explicit title and adopted row contract",()=>{
   assert.match(revision,/label=`\$\{def\(active\)\.label\}の全試合`/);
   assert.match(revision,/pd13-fixed-discipline-match/);
-  assert.match(revision,/journey-game-v2/);
+  assert.match(revision,/matchCardCClassV37\(opponentFixed\?"opponent":disciplineFixed\?"all-matches"/);
   assert.match(css,/\.pd13-fixed-discipline-match \.journey-match-race-v3/);
   assert.match(css,/\.pd13-fixed-discipline-match/);
 });
@@ -60,5 +60,5 @@ test("Build 18 compatibility asset precedes the Phase 1 shell and remains bundle
   assert.ok(index.indexOf("final-ui-build18.js")<index.indexOf("navigation-shell-phase1.js"));
   assert.match(nativeBuild,/final-ui-build18\.js/);
   assert.match(sw,/final-ui-build18\.js/);
-  assert.match(sw,/2\.0-build36-match-card-c-fidelity-v1/);
+  assert.match(sw,/2\.0-build37-match-card-c-visual-reference-v1/);
 });

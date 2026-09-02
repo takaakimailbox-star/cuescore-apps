@@ -30,19 +30,18 @@ test("global history reserves equal player lanes sized for six full-width charac
 
 test("discipline-fixed history uses the C balance with date, result, opponent, score, race and chevron", () => {
   assert.match(revision, /label=`\$\{def\(active\)\.label\}の全試合`/);
-  assert.match(revision, /disciplineFixed[\s\S]+journey-game-v2[\s\S]+journey-match-vs-v3/);
-  assert.match(revision, /row\.insertBefore\(date,opponentLine\)/);
-  assert.match(revision, /row\.insertBefore\(result,opponentLine\)/);
+  assert.doesNotMatch(revision, /journey-game-v2"\)\?\.remove/);
+  assert.match(revision, /if\(disciplineFixed\)[\s\S]+journey-match-vs-v3/);
   assert.match(revision, /row\.dataset\.pd13DetailLabel/);
-  assert.match(css, /grid-template-areas:'date result chevron' 'opponent score chevron' 'race race chevron'/);
-  assert.match(css, /\.pd13-fixed-discipline-match \.journey-match-race-v3 \{ grid-area:race; display:block/);
+  assert.match(css, /grid-template-areas:'date date date date result chevron' 'avatar opponent game race score chevron'/);
+  assert.match(css, /match-card-c-all-matches-v37 \.journey-match-race-v3\{grid-area:race!important/);
   assert.match(css, /\.pd13-fixed-discipline-match \.journey-match-vs-v3 \{ display:none; \}/);
 });
 
 test("discipline-fixed history preserves six-character opponent space and detail path", () => {
-  assert.match(css, /\.pd13-fixed-discipline-match \.journey-match-opponent-v3 strong \{[^}]*font-size:14px/);
-  assert.match(css, /\.pd13-fixed-discipline-match \.journey-match-score-v3 \{[^}]*grid-area:score/);
-  assert.match(css, /\.pd13-fixed-discipline-match \.journey-match-open-v3 \{ grid-area:chevron; \}/);
+  assert.match(css, /match-card-c-all-matches-v37 \.journey-match-opponent-v3>strong\{grid-area:opponent!important;font-size:14px/);
+  assert.match(css, /match-card-c-all-matches-v37 \.journey-match-score-v3\{grid-area:score!important/);
+  assert.match(css, /match-card-c-all-matches-v37 \.journey-match-open-v3\{grid-area:chevron!important/);
   assert.match(index, /data-player-record-id/);
   assert.match(index, /window\.openHistoricalRecordV2\s*=\s*openHistoricalRecord/);
   assert.match(index, /match-detail-race-v2/);

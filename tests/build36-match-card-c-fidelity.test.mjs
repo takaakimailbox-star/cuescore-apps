@@ -14,23 +14,22 @@ test("one shared C helper names all four match-list contexts",()=>{
 });
 
 test("recent and opponent cards keep the compact two-layer hierarchy",()=>{
-  assert.match(css,/match-card-c-recent-v36[^}]*min-height:52px/);
-  assert.match(css,/match-card-c-opponent-v36[^}]*min-height:48px/);
-  assert.match(css,/grid-template-areas:'date race chevron chevron' 'result score chevron chevron'/);
+  assert.match(css,/match-card-c-recent-v37[^}]*grid-template-columns:44px 28px/);
+  assert.match(css,/match-card-c-opponent-v37[^}]*grid-template-rows:16px 28px/);
+  assert.match(css,/grid-template-areas:'date date date result chevron' 'game race race score chevron'/);
 });
 
 test("discipline all matches replaces Build 34 three rows with two rows",()=>{
-  assert.match(css,/match-card-c-all-matches-v36[^}]*grid-template-rows:auto auto/);
-  assert.match(css,/grid-template-areas:'date result chevron' 'opponent score chevron'/);
-  assert.match(css,/match-card-c-all-matches-v36[^}]*min-height:58px/);
-  assert.match(css,/journey-match-opponent-avatar-v3\{width:26px;height:26px/);
-  assert.match(revision,/date\.dataset\.raceV36=/);
+  assert.match(css,/match-card-c-all-matches-v37[^}]*grid-template-rows:16px 28px/);
+  assert.match(css,/grid-template-areas:'date date date date result chevron' 'avatar opponent game race score chevron'/);
+  assert.match(css,/journey-match-opponent-avatar-v3\{grid-area:avatar!important;width:28px;height:28px/);
+  assert.doesNotMatch(revision,/journey-game-v2"\)\?\.remove/);
 });
 
 test("global History retains identity while compacting icon and avatars",()=>{
-  assert.match(index,/record-card \$\{cardClassV36\}/);
-  assert.match(css,/match-card-c-global-v36[^}]*min-height:62px/);
-  assert.match(css,/record-game-icon-v2\{width:18px!important;height:18px/);
+  assert.match(index,/record-card \$\{cardClassV37\}/);
+  assert.match(css,/match-card-c-global-v37[^}]*grid-template-rows:16px 28px/);
+  assert.match(css,/record-game-icon-v2\{width:22px!important;height:22px/);
   assert.match(css,/record-match-avatar-v3\{width:24px!important;height:24px/);
 });
 
@@ -38,7 +37,7 @@ test("large scores, long names and 390px width remain protected",()=>{
   assert.match(css,/white-space:nowrap;font-variant-numeric:tabular-nums/);
   assert.match(css,/overflow:hidden;text-overflow:ellipsis;white-space:nowrap/);
   assert.match(css,/@media\(max-width:390px\)/);
-  assert.doesNotMatch(css,/match-card-c-v36[^}]*overflow-x/);
+  assert.doesNotMatch(css,/match-card-c-v37[^}]*overflow-x/);
 });
 
 test("Build 35 Back input and exact-origin contracts are untouched",()=>{

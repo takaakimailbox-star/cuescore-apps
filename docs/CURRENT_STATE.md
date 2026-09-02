@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Build 37 Match Card C正式Visual Reference準拠（2026年9月2日）
+
+- latest `main` `8444746`を基準に、添付「CueScore 試合カード C案（完成デザイン）」を正式Visual Source of Truthとして採用し、Build 36の近似実装を完成扱いにせず再実装した。
+- 共通cardは56px固定、radius 12px、左右padding 16px、score 20px Bold、Race／target 12px、必要contextのavatar 28px。勝ちは`#1E8E3E`／`#E6F4EA`、負けは`#D93025`／`#FDE7E9`。
+- Recentへopponent avatarを復元。競技別全試合はdate／resultの1段目と、avatar／name／discipline icon／Race／score／chevronの2段目。対戦相手別は既知identityのみ省略してdiscipline iconを保持。Global Historyは2 playerと両avatarを保持した。
+- 390×844実測は全context高さ56px、horizontal overflow 0。Recent 3件、全試合はBottom Navigationより上に6件、対戦相手別score右端x=345で一致、Global Historyは9件を完全表示。console error 0。
+- Build 35 Back、`closeFormalMatchDetailV2()`、Edge Swipe、exact origin／filter／scroll復元は未変更。Global History → Match Detail → Backの1tap復帰を回帰確認。実iPhone未確認はPASS扱いにしない。
+- 全自動test `333 pass / 0 fail / 0 skipped`。source／native-web／iOS copied assetを同期し、Simulator Debug／Releaseとも`BUILD SUCCEEDED`。Marketing Version `1.0`／Build Number `37`。Official 093／094。実装記録：`docs/implementation/CueScore_Build37_Match_Card_C_Official_Visual_Reference_Implementation_2026-09-02.md`。
+
 ## Build 36 Match Card C忠実再実装（2026年9月2日）
 
 - Product Owner採用済みC案に対するBuild 34部分適用を完成扱いにせず、latest `main` `33755d8`から共通match-card familyとして再構成した。

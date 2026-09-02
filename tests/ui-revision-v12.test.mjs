@@ -40,9 +40,9 @@ test("opponent-fixed and player histories use separate compact match contracts",
   assert.match(revision,/classList\.toggle\("pd13-opponent-match",opponentFixed\)/);
   assert.match(revision,/classList\.toggle\("pd13-player-match",!opponentFixed&&!disciplineFixed\)/);
   assert.match(revision,/if\(opponentFixed\)opponent\?\.remove\(\)/);
-  assert.match(revision,/row\.querySelector\("\.journey-game-v2"\)\?\.remove\(\)/);
+  assert.doesNotMatch(revision,/row\.querySelector\("\.journey-game-v2"\)\?\.remove\(\)/);
   assert.match(revision,/row\.querySelector\("\.journey-match-opponent-avatar-v3"\)\?\.remove\(\)/);
-  assert.match(css,/\.pd13-opponent-match[\s\S]*min-height:48px/);
+  assert.match(css,/match-card-c-opponent-v37[\s\S]*height:56px!important/);
   assert.match(css,/\.pd13-player-match[\s\S]*min-height:54px/);
   assert.match(css,/\.pd13-player-match \.journey-game-v2 img \{ display:none/);
 });

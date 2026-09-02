@@ -1,8 +1,8 @@
 (() => {
   "use strict";
   const esc=value=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
-  const matchCardCClassV36=context=>`match-card-c-v36 match-card-c-${String(context||"default")}-v36`;
-  window.CueScoreMatchCardC=Object.freeze({classes:matchCardCClassV36});
+  const matchCardCClassV37=context=>`match-card-c-v37 match-card-c-${String(context||"default")}-v37`;
+  window.CueScoreMatchCardC=Object.freeze({classes:matchCardCClassV37});
   const defs=[
     {id:"9ball",label:"9-Ball"},{id:"10ball",label:"10-Ball"},{id:"rotation",label:"Rotation"},
     {id:"straightPool",label:"14-1"},{id:"jpa9",label:"JPA 9-Ball"},{id:"threeCushion",label:"3 Cushion"}
@@ -90,15 +90,13 @@
     root.querySelector("[data-history-period]")?.remove();
     root.querySelectorAll("[data-player-analysis-record-id]").forEach(node=>node.remove());
     root.querySelectorAll("[data-player-record-id]").forEach(row=>{
-      row.classList.add(...matchCardCClassV36(opponentFixed?"opponent":disciplineFixed?"all-matches":"player-history").split(" "));
+      row.classList.remove("match-card-c-opponent-v37","match-card-c-all-matches-v37","match-card-c-player-history-v37");
+      row.classList.add(...matchCardCClassV37(opponentFixed?"opponent":disciplineFixed?"all-matches":"player-history").split(" "));
       row.classList.toggle("pd13-opponent-match",opponentFixed);row.classList.toggle("pd13-fixed-discipline-match",disciplineFixed);row.classList.toggle("pd13-player-match",!opponentFixed&&!disciplineFixed);
-      if(opponentFixed){row.querySelector(".journey-game-v2")?.remove();row.querySelector(".journey-match-vs-v3")?.remove();row.querySelector(".journey-match-opponent-avatar-v3")?.remove();row.querySelector(".journey-match-opponent-v3>strong")?.remove();}
-      if(disciplineFixed){
-        row.querySelector(".journey-game-v2")?.remove();row.querySelector(".journey-match-vs-v3")?.remove();
-        const date=row.querySelector(".journey-match-date-v3"),result=row.querySelector(".journey-match-result-v3"),opponentLine=row.querySelector(".journey-match-opponent-v3");
-        if(date){const match=date.textContent.match(/\d{4}\/(\d{2})\/(\d{2})（.）\s+(\d{2}:\d{2})/);if(match)date.textContent=`${Number(match[1])}/${Number(match[2])} ${match[3]}`;date.dataset.raceV36=row.querySelector(".journey-match-race-v3")?.textContent?.trim()||"";if(opponentLine&&date.parentElement!==row)row.insertBefore(date,opponentLine);}
-        if(result&&opponentLine&&result.parentElement!==row)row.insertBefore(result,opponentLine);
-      }
+      const date=row.querySelector(".journey-match-date-v3");
+      if((opponentFixed||disciplineFixed)&&date){const match=date.textContent.match(/\d{4}\/(\d{2})\/(\d{2})(（.）)\s+(\d{2}:\d{2})/);if(match)date.textContent=`${Number(match[1])}/${Number(match[2])}${match[3]} ${match[4]}`;}
+      if(opponentFixed){row.querySelector(".journey-match-vs-v3")?.remove();row.querySelector(".journey-match-opponent-avatar-v3")?.remove();row.querySelector(".journey-match-opponent-v3>strong")?.remove();}
+      if(disciplineFixed)row.querySelector(".journey-match-vs-v3")?.remove();
       if(!row.dataset.pd13DetailLabel){const detailSuffix="、試合詳細を開く",currentLabel=row.getAttribute("aria-label")||"試合";row.setAttribute("aria-label",`${currentLabel}${detailSuffix}`);row.dataset.pd13DetailLabel="true";}const open=row.querySelector(".journey-match-open-v3");if(open){if(open.textContent!=="›")open.textContent="›";open.setAttribute("aria-hidden","true");}
     });
   }

@@ -8,9 +8,9 @@ const css=readFileSync(new URL("../ui-revision-v12.css",import.meta.url),"utf8")
 
 test("recent matches use the adopted C-balance card family",()=>{
   assert.match(nav,/CueScoreMatchCardC\?\.classes\?\.\("recent"\)/);
-  assert.match(nav,/match-card-c-result-v36/);
-  assert.match(nav,/match-card-c-score-v36/);
-  assert.match(css,/\.hub-match-row-v2\.match-card-c-recent-v36/);
+  assert.match(nav,/match-card-c-result-v37/);
+  assert.match(nav,/match-card-c-score-v37/);
+  assert.match(css,/\.hub-match-row-v2\.match-card-c-recent-v37/);
 });
 
 test("all required Match Detail origins are captured before navigation",()=>{
@@ -32,5 +32,5 @@ test("C balance preserves Race and protects narrow screens",()=>{
   assert.doesNotMatch(revision,/journey-match-race-v3"\)\?\.remove/);
   assert.match(css,/\.journey-match-race-v3 \{ grid-area:race; display:block/);
   assert.match(css,/@media\(max-width:390px\)/);
-  assert.doesNotMatch(css,/\.match-card-c-v36[^}]*overflow-x/);
+  assert.doesNotMatch(css,/\.match-card-c-v37[^}]*overflow-x/);
 });
