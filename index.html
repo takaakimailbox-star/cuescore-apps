@@ -8623,7 +8623,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build35-match-detail-back-input-v1"></script>
+  <script src="./demo-data.js?v=2.0-build36-match-card-c-fidelity-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -16211,7 +16211,8 @@ let matchRecordsRawCacheV152 = null;
       const goal1V2 = Number(p1.goal)||0, goal2V2 = Number(p2.goal)||0;
       const raceV2 = goal1V2 === goal2V2 ? goal1V2 : `${goal1V2} / ${goal2V2}`;
       const p1ProfileV3 = recordPlayerV3(p1), p2ProfileV3 = recordPlayerV3(p2);
-      return `<button class="record-card" type="button" data-record-id="${escapeRecordText(record.id)}">
+      const cardClassV36 = window.CueScoreMatchCardC?.classes?.("global") || "match-card-c-v36 match-card-c-global-v36";
+      return `<button class="record-card ${cardClassV36}" type="button" data-record-id="${escapeRecordText(record.id)}">
         <span class="record-date-compact">${formatRecordListDate(record.endedAt||record.playedAt)}</span>
         <span class="record-matchup"><span class="record-match-player-v3"><span class="record-match-avatar-v3">${playerAvatarHtmlV2(p1ProfileV3)}</span><strong>${escapeRecordText(p1.name||"Player1")}</strong></span><small>vs</small><span class="record-match-player-v3"><span class="record-match-avatar-v3">${playerAvatarHtmlV2(p2ProfileV3)}</span><strong>${escapeRecordText(p2.name||"Player2")}</strong></span></span>
         <span class="record-race-v2"><img class="record-game-icon-v2" src="${gameIconV2}" alt="">Race to ${raceV2}</span>
@@ -19180,7 +19181,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build35-match-detail-back-input-v1";
+    const PWA_VERSION = "2.0-build36-match-card-c-fidelity-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -28361,8 +28362,8 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
     window.CueScoreEditableSelectionV1=Object.freeze({isEditableTarget:editable});
   })();
   </script>
-  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build35-match-detail-back-input-v1" />
-  <script src="./navigation-phase2-6.js?v=2.0-build35-match-detail-back-input-v1"></script>
+  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build36-match-card-c-fidelity-v1" />
+  <script src="./navigation-phase2-6.js?v=2.0-build36-match-card-c-fidelity-v1"></script>
 </body>
 </html>
 

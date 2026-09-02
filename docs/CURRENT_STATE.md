@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Build 36 Match Card C忠実再実装（2026年9月2日）
+
+- Product Owner採用済みC案に対するBuild 34部分適用を完成扱いにせず、latest `main` `33755d8`から共通match-card familyとして再構成した。
+- `CueScoreMatchCardC.classes(context)`をcontext classのSSOTとし、Recent 52px、競技別全試合 58px・2層、対戦相手別 48px、Global History 62px・2層へ統一。全試合はBuild 34の3行76pxからRaceをdate補助へ統合し、小型26px avatar、右側score優先へ変更した。
+- Global Historyは2 player、24px avatar、18px discipline icon、Race、score、chevronを保持。score nowrap、name ellipsis、390px breakpointを共通保護した。
+- Build 35 Backのpointer入力、`closeFormalMatchDetailV2()`、Edge Swipe、exact origin／scroll復元は変更していない。実iPhone確認前はPASS扱いにしない。
+- 全自動test `327 pass / 0 fail / 0 skipped`。source／native-web／iOS copied assetを同期し、Simulator Debug／Releaseとも`BUILD SUCCEEDED`。Marketing Version `1.0`／Build Number `36`。実iPhoneでのC案忠実度と5入口Back再確認はInternal TestFlight確認待ち。
+- Official 091／092。実装記録：`docs/implementation/CueScore_Build36_Match_Card_C_Fidelity_Reimplementation_2026-09-02.md`。
+
 ## Build 35 Match Detail Back入力導線修正（2026年9月2日）
 
 - Build 34の実iPhone確認で「最近の試合 → Match Detail → 左上Back」が無反応だったため、Build 34のBack修正はFAILのまま。latest `main` `0bb701d3`を基準に入力導線を再調査した。
