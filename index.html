@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="./analysis-final-rc.css" />
   <link rel="stylesheet" href="./analysis-build4.css" />
   <link rel="stylesheet" href="./player-detail-build6.css" />
-  <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build37-match-card-c-visual-reference-v5" />
+  <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-post-build37-page-layout-v2" />
   <link rel="stylesheet" href="./player-detail-build8.css" />
   <style id="build8PlayerTitleV1">
   .pd8-title-with-icon{display:flex!important;align-items:center;justify-content:center;gap:7px}.pd8-title-with-icon img{width:25px;height:25px;flex:0 0 auto}
@@ -8623,7 +8623,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build37-match-card-c-visual-reference-v1"></script>
+  <script src="./demo-data.js?v=2.0-post-build37-page-layout-v2"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19181,7 +19181,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build37-match-card-c-visual-reference-v1";
+    const PWA_VERSION = "2.0-post-build37-page-layout-v2";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -27886,6 +27886,7 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   const won = (record,s) => winnerSide(record)===Number(s);
   const stats = (items,p) => {const resolved=items.filter(r=>[1,2].includes(winnerSide(r))),wins=resolved.filter(r=>won(r,side(r,p))).length,losses=Math.max(0,resolved.length-wins);return {games:items.length,resolved:resolved.length,wins,losses,rate:resolved.length?wins/resolved.length*100:null};};
   const rateText = value => Number.isFinite(value)?`${Number(value).toFixed(1)}%`:"—";
+  const summaryStatsBar = summary => `<section class="page-summary-stats-v1" aria-label="試合集計"><div role="group" aria-label="試合 ${summary.games}"><span>試合</span><strong>${summary.games}</strong></div><div role="group" aria-label="勝敗 ${summary.resolved?`${summary.wins}勝 ${summary.losses}敗`:"未集計"}"><span>勝敗</span><strong>${summary.resolved?`${summary.wins}勝 ${summary.losses}敗`:"—"}</strong></div><div role="group" aria-label="勝率 ${rateText(summary.rate)}"><span>勝率</span><strong>${rateText(summary.rate)}</strong></div></section>`;
   const avatar = (p,cls="player-avatar-v2") => typeof playerAvatarHtmlV2==="function"?playerAvatarHtmlV2(p,cls):"";
   const opponent = (record,s) => s ? record?.players?.[s===1?2:1]||{} : {};
   const opponentLibrary = data => {const id=String(data?.registeredPlayerId||"");return readPlayerLibrary().find(p=>String(p.id)===id)||data||{};};
@@ -27902,20 +27903,19 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   function restorePlayerDetail(){hide(rivalRoot);hide(historyRoot);const detail=document.getElementById("playerStatsOverlay");detail?.classList.remove("hidden");detail?.setAttribute("aria-hidden","false");}
   function reopenPlayer(id){if(String(window.__cueScoreActivePlayerStatsIdV159||"")===String(id)&&document.getElementById("playerStatsBody")?.childElementCount){restorePlayerDetail();return;}hide(rivalRoot);hide(historyRoot);openPlayerStats?.(id);}
   function rivalGroups(items,p){const map=new Map();items.forEach(record=>{const s=side(record,p);if(!s)return;const raw=opponent(record,s);const key=String(raw.registeredPlayerId||raw.name||"");if(!key)return;if(!map.has(key))map.set(key,{key,opponent:opponentLibrary(raw),items:[]});map.get(key).items.push(record);});return [...map.values()].map(group=>({...group,summary:stats(group.items,p)}));}
-  function renderRivals(){const p=player(rivalState.playerId);if(!p)return;const filtered=records(p).filter(r=>disc(r)===rivalState.discipline);const summary=stats(filtered,p);let groups=rivalGroups(filtered,p);groups.sort((a,b)=>rivalState.sort==="rate"?((b.summary.rate??-1)-(a.summary.rate??-1))||(b.summary.games-a.summary.games):(b.summary.games-a.summary.games)||((b.summary.rate??-1)-(a.summary.rate??-1)));const d=def(rivalState.discipline);rivalRoot.querySelector(".player-journey-shell-v2").innerHTML=`
+  function renderRivals(){const p=player(rivalState.playerId);if(!p)return;const filtered=records(p).filter(r=>disc(r)===rivalState.discipline);let groups=rivalGroups(filtered,p);groups.sort((a,b)=>rivalState.sort==="rate"?((b.summary.rate??-1)-(a.summary.rate??-1))||(b.summary.games-a.summary.games):(b.summary.games-a.summary.games)||((b.summary.rate??-1)-(a.summary.rate??-1)));const d=def(rivalState.discipline);rivalRoot.querySelector(".player-journey-shell-v2").innerHTML=`
     <section class="player-journey-card-v2 journey-player-v2"><span class="journey-avatar-v2">${avatar(p)}</span><strong>${esc(p.name)}</strong><label class="journey-discipline-v2"><img src="${d.asset}" alt=""><select aria-label="種目">${defs.map(x=>`<option value="${x.id}" ${x.id===d.id?"selected":""}>${x.label}</option>`).join("")}</select></label></section>
-    <section class="player-journey-card-v2 journey-summary-v2"><div><span>対戦相手</span><strong>${groups.length}人</strong></div><div><span>試合</span><strong>${summary.games}試合</strong></div><div><span>勝敗</span><strong>${summary.resolved?`${summary.wins}勝${summary.losses}敗`:"—"}</strong></div><div><span>勝率</span><strong>${rateText(summary.rate)}</strong></div></section>
-    <div class="journey-segment-v2"><button class="${rivalState.sort==="games"?"is-selected":""}" data-rival-sort="games">対戦数順</button><button class="${rivalState.sort==="rate"?"is-selected":""}" data-rival-sort="rate">勝率順</button></div>
+    <h2 class="page-journey-heading-v1">対戦相手</h2>
     <div class="journey-list-v2">${groups.length?groups.map(group=>{const s=group.summary;return `<button class="journey-opponent-v2" type="button" data-rival-opponent="${esc(group.key)}" aria-label="${esc(group.opponent.name||"対戦相手")}との${esc(d.label)}試合を見る"><span class="journey-opponent-avatar-v2">${avatar(group.opponent)}</span><span><strong>${esc(group.opponent.name||"対戦相手")}</strong><span class="journey-opponent-meta-v2"><span>${s.games}試合</span><span>${s.resolved?`${s.wins}勝${s.losses}敗`:"勝敗 —"}</span></span></span><span class="journey-opponent-rate-v2"><span>勝率</span><strong>${rateText(s.rate)}</strong></span><span class="journey-chevron-v2">›</span></button>`;}).join(""):`<div class="player-journey-card-v2 journey-empty-v2">この種目の対戦相手別データはまだありません。</div>`}</div>`;}
   function openRivals(id,discipline="9ball"){rivalState={playerId:String(id),discipline,sort:"games"};document.getElementById("playerStatsOverlay")?.classList.add("hidden");renderRivals();show(rivalRoot);}
   function renderHistory(){const p=player(historyState.playerId);if(!p)return;const all=records(p),opponentGroups=rivalGroups(all,p);const selectedOpponent=historyState.opponentKey?opponentGroups.find(group=>group.key===historyState.opponentKey):null;let items=historyState.filter==="all"?all:all.filter(r=>disc(r)===historyState.filter);if(historyState.opponentKey)items=items.filter(r=>String(opponent(r,side(r,p))?.registeredPlayerId||opponent(r,side(r,p))?.name||"")===historyState.opponentKey);if(historyState.period==="month"){const now=new Date();items=items.filter(r=>{const d=timeOf(r);return d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth();});}const summary=stats(items,p),grouped=new Map();items.forEach(r=>{const d=timeOf(r),key=Number.isNaN(d.getTime())?"日付なし":`${d.getFullYear()}年${d.getMonth()+1}月`;if(!grouped.has(key))grouped.set(key,[]);grouped.get(key).push(r);});const title=historyRoot.querySelector(".player-journey-header-v2 h1");if(title){const titleText=selectedOpponent?`${selectedOpponent.opponent.name||"対戦相手"}との${def(historyState.filter).label}試合`:`${p.name}の試合履歴`;title.className="player-history-title-v4";title.setAttribute("aria-label",titleText);title.innerHTML=selectedOpponent?`<span class="player-history-title-name-v4">${esc(titleText)}</span>`:`<span class="player-history-title-avatar-v4">${avatar(p)}</span><span class="player-history-title-name-v4">${esc(titleText)}</span>`;}historyRoot.querySelector(".player-journey-shell-v2").innerHTML=`
-    <section class="player-journey-card-v2 journey-history-summary-v4">全${summary.games}試合 ${summary.resolved?`${summary.wins}勝${summary.losses}敗`:"勝敗 —"} 勝率${rateText(summary.rate)}</section>
+    ${summaryStatsBar(summary)}
     ${historyState.opponentKey?`<section class="player-journey-card-v2 journey-history-opponent-v11"><span>${avatar(p)}</span><strong>${esc(p.name)}</strong><b>vs</b><span>${avatar(selectedOpponent?.opponent||{})}</span><strong>${esc(selectedOpponent?.opponent?.name||"対戦相手")}</strong><img src="${def(historyState.filter).asset}" alt=""><small>${def(historyState.filter).label}</small></section>`:`<div class="records-disciplines-v2 player-history-disciplines-v4" role="tablist" aria-label="ゲーム種目"><button type="button" role="tab" aria-selected="${historyState.filter==="all"}" class="${historyState.filter==="all"?"is-selected":""}" data-history-filter="all"><span class="records-all-icon-v2">ALL</span><span>すべて</span></button>${defs.map(d=>`<button type="button" role="tab" aria-selected="${historyState.filter===d.id}" class="${historyState.filter===d.id?"is-selected":""}" data-history-filter="${d.id}"><img src="${d.asset}" alt=""><span>${d.label}</span></button>`).join("")}</div>`}
     ${historyState.opponentKey?"":`<div class="journey-history-period-v4"><button type="button" data-history-period class="${historyState.period==="month"?"is-selected":""}">${historyState.period==="month"?"今月":"期間"}</button></div>`}
     ${items.length?[...grouped.entries()].map(([month,rows])=>`<div class="journey-month-v2">${month}</div><div class="journey-list-v2">${rows.map(r=>{const s=side(r,p),o=opponentLibrary(opponent(r,s)),d=def(disc(r)),dt=timeOf(r),isWin=won(r,s),weekdays=["日","月","火","水","木","金","土"];const date=Number.isNaN(dt.getTime())?"日付なし":`${dt.getFullYear()}/${String(dt.getMonth()+1).padStart(2,"0")}/${String(dt.getDate()).padStart(2,"0")}（${weekdays[dt.getDay()]}） ${String(dt.getHours()).padStart(2,"0")}:${String(dt.getMinutes()).padStart(2,"0")}`;return `<button class="journey-match-v2 journey-match-v3" type="button" data-player-record-id="${esc(r.id)}" aria-label="${esc(d.label)} ${esc(o.name||"対戦相手")}との試合詳細を開く"><span class="journey-game-v2"><img src="${d.asset}" alt=""><small>${d.label}</small></span><span class="journey-match-date-v3">${date}</span><span class="journey-match-race-v3">${esc(raceOf(r))}</span><span class="journey-match-opponent-v3"><span class="journey-match-result-v3 ${isWin?"":"loss"}">${isWin?"勝ち":"負け"}</span><span class="journey-match-vs-v3">vs</span><span class="journey-match-opponent-avatar-v3">${avatar(o)}</span><strong>${esc(o.name||"対戦相手")}</strong></span><span class="journey-match-score-v3"><strong class="${isWin?"winner":"loser"}">${scoreOf(r,s)}</strong><span>−</span><strong class="${isWin?"loser":"winner"}">${scoreOf(r,s===1?2:1)}</strong></span><span class="journey-match-open-v3" aria-hidden="true">›</span></button>`;}).join("")}</div>`).join(""):`<div class="player-journey-card-v2 journey-empty-v2">条件に一致する試合履歴はありません。</div>`}`;}
-  function openHistory(id){historyState={playerId:String(id),filter:"all",period:"all",opponentKey:"",origin:"player"};historyRoot.dataset.pd8Opponent="";document.getElementById("playerStatsOverlay")?.classList.add("hidden");renderHistory();show(historyRoot);}
+  function openHistory(id,discipline="all"){const filter=defs.some(item=>item.id===discipline)?discipline:"all";historyState={playerId:String(id),filter,period:"all",opponentKey:"",origin:"player"};historyRoot.dataset.pd8Opponent="";historyRoot.dataset.pd8Discipline=filter==="all"?"":filter;document.getElementById("playerStatsOverlay")?.classList.add("hidden");renderHistory();show(historyRoot);}
   function openOpponentHistory(key){historyState={playerId:rivalState.playerId,filter:rivalState.discipline,period:"all",opponentKey:String(key||""),origin:"rivals"};historyRoot.dataset.pd8Opponent=historyState.opponentKey;hide(rivalRoot);renderHistory();show(historyRoot);}
-  window.openPlayerOpponentRecordsV2=openRivals;window.openPlayerMatchHistoryV2=openHistory;
+  window.openPlayerOpponentRecordsV2=openRivals;window.openPlayerMatchHistoryV2=openHistory;window.CueScorePlayerJourneyV2=Object.freeze({openRivals,openHistory});
   rivalRoot.addEventListener("click",event=>{const backButton=event.target.closest("[data-journey-back]");if(backButton){measureBackV11("opponent-records-to-discipline-detail",backButton.dataset.cueBackSource,restorePlayerDetail);return;}const sort=event.target.closest("[data-rival-sort]");if(sort){rivalState.sort=sort.dataset.rivalSort;renderRivals();return;}const row=event.target.closest("[data-rival-opponent]");if(row)openOpponentHistory(row.dataset.rivalOpponent);});rivalRoot.addEventListener("change",event=>{if(event.target.matches(".journey-discipline-v2 select")){rivalState.discipline=event.target.value;renderRivals();}});
   let returnToPlayerHistoryV4=false;
   const closeMatchDetailBeforePlayerHistoryV4=window.closeFormalMatchDetailV2;
@@ -28350,7 +28350,7 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   <script src="./analytics-build4-metrics.js"></script>
   <script src="./analysis-build4.js"></script>
   <script src="./player-detail-build6.js"></script>
-  <script src="./ui-revision-v12.js?v=2.0-build37-match-card-c-visual-reference-v2"></script>
+  <script src="./ui-revision-v12.js?v=2.0-post-build37-page-layout-v2"></script>
   <script src="./final-ui-build18.js"></script>
   <link rel="stylesheet" href="./navigation-shell-phase1.css" />
   <script src="./navigation-shell-phase1.js"></script>
@@ -28362,8 +28362,8 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
     window.CueScoreEditableSelectionV1=Object.freeze({isEditableTarget:editable});
   })();
   </script>
-  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build37-match-card-c-visual-reference-v1" />
-  <script src="./navigation-phase2-6.js?v=2.0-build37-match-card-c-visual-reference-v2"></script>
+  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-post-build37-page-layout-v2" />
+  <script src="./navigation-phase2-6.js?v=2.0-post-build37-page-layout-v2"></script>
 </body>
 </html>
 

@@ -73,7 +73,7 @@
     const root=document.getElementById("playerOpponentRecordsV2");if(!root||root.classList.contains("hidden"))return;
     root.querySelectorAll(".journey-summary-v2,.journey-segment-v2").forEach(node=>node.remove());
     const select=root.querySelector(".journey-discipline-v2 select");if(select){const fixed=document.createElement("span");fixed.className="pd12-fixed-discipline";fixed.textContent=select.selectedOptions[0]?.textContent||def(detail()?.state?.discipline).label;select.replaceWith(fixed);}
-    const context=root.querySelector(".journey-player-v2");if(context){context.classList.add("pd13-rival-context");context.classList.remove("player-journey-card-v2");context.setAttribute("aria-label",`${context.querySelector("strong")?.textContent||"Player"}、${context.querySelector(".pd12-fixed-discipline")?.textContent||"競技"}の対戦相手別成績`);}
+    const context=root.querySelector(".journey-player-v2");if(context){context.classList.add("pd13-rival-context","page-rival-context-v1");context.classList.remove("player-journey-card-v2");context.setAttribute("aria-label",`${context.querySelector("strong")?.textContent||"Player"}、${context.querySelector(".pd12-fixed-discipline")?.textContent||"競技"}の対戦相手別成績`);}
     const player=detail()?.state?.player,active=detail()?.state?.discipline;if(!player||!active)return;
     const latest=new Map();(window.recordsForRegisteredPlayer?.(player)||[]).filter(record=>discipline(record)===active).forEach(record=>{const s=side(record,player),raw=recordPlayer(record,s===1?2:1),key=String(raw.registeredPlayerId||raw.name||"");latest.set(key,Math.max(latest.get(key)||0,time(record)));});
     const list=root.querySelector(".journey-list-v2");if(list){const current=[...list.querySelectorAll("[data-rival-opponent]")],ordered=[...current].sort((a,b)=>(latest.get(b.dataset.rivalOpponent)||0)-(latest.get(a.dataset.rivalOpponent)||0)||stable(a.dataset.rivalOpponent,b.dataset.rivalOpponent));if(current.some((row,index)=>row!==ordered[index]))ordered.forEach(row=>list.appendChild(row));}
@@ -86,7 +86,7 @@
     const root=document.getElementById("playerMatchHistoryV2");if(!root||root.classList.contains("hidden"))return;
     const opponentFixed=Boolean(root.dataset.pd8Opponent),disciplineFixed=Boolean(root.dataset.pd8Discipline)&&!opponentFixed,opponent=root.querySelector(".journey-history-opponent-v11");
     if(opponentFixed)opponent?.remove();
-    if(disciplineFixed){const active=root.dataset.pd8Discipline,title=root.querySelector(".player-journey-header-v2 h1"),label=`${def(active).label}の全試合`;if(title){if(title.textContent!==label)title.textContent=label;if(title.getAttribute("aria-label")!==label)title.setAttribute("aria-label",label);}}
+    if(disciplineFixed){const active=root.dataset.pd8Discipline,title=root.querySelector(".player-journey-header-v2 h1"),label=`${def(active).label}の全試合`;root.querySelector(".player-history-disciplines-v4")?.remove();if(title){if(title.textContent!==label)title.textContent=label;if(title.getAttribute("aria-label")!==label)title.setAttribute("aria-label",label);}}
     root.querySelector("[data-history-period]")?.remove();
     root.querySelectorAll("[data-player-analysis-record-id]").forEach(node=>node.remove());
     root.querySelectorAll("[data-player-record-id]").forEach(row=>{

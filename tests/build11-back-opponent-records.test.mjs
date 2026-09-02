@@ -31,10 +31,10 @@ test("cached visible contexts return before non-critical rebuild work",()=>{
 });
 
 test("opponent records are compact, precise and contain no W L history badges",()=>{
-  assert.match(html,/grid-template-columns:repeat\(4,1fr\)/);
+  assert.match(html,/page-journey-heading-v1">対戦相手/);
   assert.match(html,/rateText = value => Number\.isFinite\(value\)\?`\$\{Number\(value\)\.toFixed\(1\)\}%`/);
-  assert.match(html,/data-rival-sort="games"/);
-  assert.match(html,/data-rival-sort="rate"/);
+  assert.doesNotMatch(html,/data-rival-sort="games"/);
+  assert.doesNotMatch(html,/data-rival-sort="rate"/);
   const render=html.slice(html.indexOf("function renderRivals()"),html.indexOf("function openRivals"));
   assert.doesNotMatch(render,/journey-form-v2|>W<|>L</);
   assert.match(render,/data-rival-opponent/);

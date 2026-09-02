@@ -61,12 +61,13 @@
   }
 
   function analysisView(records,player,state){
-    const currentRecords=records.slice(0,10),previousRecords=records.slice(10,20),current=api.aggregate(currentRecords,player,helpers),previous=api.aggregate(previousRecords,player,helpers),keys=metricKeys[state.discipline]||[],advice=points(current,previous,state);
+    const currentRecords=records.slice(0,10),previousRecords=records.slice(10,20),current=api.aggregate(currentRecords,player,helpers),previous=api.aggregate(previousRecords,player,helpers),keys=metricKeys[state.discipline]||[],advice=points(current,previous,state),bests=api.bests(records,player,state.discipline,helpers).filter(best=>!(["rotation","straightPool","jpa9"].includes(state.discipline)&&best.key==="score")).slice(0,4);
     const status=current.games<3?"データ蓄積中":previous.games<3?"安定":current.winRate>previous.winRate?"改善傾向":current.winRate<previous.winRate?"要調整":"安定";
     return `<section class="hub-card-v2 hub-now-v2"><div><h2>今の状態</h2><b>${status}</b></div><strong>${current.games?`直近${current.games}試合　${current.wins}勝${current.losses}敗　勝率${Math.round(current.winRate)}%`:"データなし"}</strong><small>条件を満たす保存済み試合だけを使用しています</small></section>
       <h2 class="hub-heading-v2">主要指標</h2><section class="hub-metrics-v2">${keys.map(key=>`<article><strong>${fmt(key,current[key])}</strong><span>${labels[key]}</span></article>`).join("")||"<span>データなし</span>"}</section>
+      <section class="hub-links-v2"><button type="button" data-hub-trends><span><strong>推移</strong><small>主要指標をグラフで見る</small></span><b>›</b></button></section>
       <section class="hub-card-v2 hub-points-v2"><h2>今回のポイント</h2><div><strong>強み</strong><span>${advice.strength}</span></div><div><strong>次の課題</strong><span>${advice.challenge}</span></div></section>
-      <section class="hub-links-v2"><button type="button" data-hub-trends><span><strong>推移</strong><small>主要指標をグラフで見る</small></span><b>›</b></button><button type="button" data-hub-full-analysis><span><strong>詳しい分析</strong><small>直近summaryと既存分析を見る</small></span><b>›</b></button><button type="button" data-hub-opponents><span><strong>対戦相手分析</strong><small>相手ごとの成績と試合</small></span><b>›</b></button></section>`;
+      <h2 class="hub-heading-v2">自己ベスト</h2>${bests.length?`<section class="hub-bests-v2">${bests.map(best=>`<button type="button" data-hub-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabels[best.key]||best.key}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("")}</section>`:empty("この競技の自己ベストはまだありません。")}`;
   }
 
   function render(playerId,options={}){
@@ -89,8 +90,8 @@
     const disciplineButton=event.target.closest("[data-hub-discipline]");if(disciplineButton){render(active.playerId,{discipline:disciplineButton.dataset.hubDiscipline});return;}
     const tab=event.target.closest("[data-hub-tab]");if(tab){render(active.playerId,{tab:tab.dataset.hubTab});return;}
     const match=event.target.closest("[data-hub-match]");if(match){window.openMatchDetailV1?.(match.dataset.hubMatch);return;}
-    if(event.target.closest("[data-hub-all-matches]")){window.openPlayerMatchHistoryV2?.(active.playerId,active.state.discipline);return;}
-    if(event.target.closest("[data-hub-opponents]")){window.openPlayerOpponentRecordsV2?.(active.playerId,active.state.discipline);return;}
+    if(event.target.closest("[data-hub-all-matches]")){event.preventDefault();event.stopImmediatePropagation();(window.CueScorePlayerJourneyV2?.openHistory||window.openPlayerMatchHistoryV2)?.(active.playerId,active.state.discipline);return;}
+    if(event.target.closest("[data-hub-opponents]")){event.preventDefault();event.stopImmediatePropagation();(window.CueScorePlayerJourneyV2?.openRivals||window.openPlayerOpponentRecordsV2)?.(active.playerId,active.state.discipline);return;}
     if(event.target.closest("[data-hub-trends]")){syncLegacyState();window.CueScoreUiRevisionV12?.openTrends?.();return;}
     if(event.target.closest("[data-hub-full-analysis]")){window.openPlayerAnalysisForPlayerV5?.(active.playerId,active.state.discipline);return;}
   },true);

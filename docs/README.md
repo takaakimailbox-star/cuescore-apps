@@ -31,6 +31,8 @@ to v2.1. Earlier versions remain in the official directory as preceding releases
 
 Adopted RC decision addenda that supplement the latest Decision Log:
 
+- `official/95_CueScore_v1.0_Post_Build37_Page_Layout_Refinement_Decision.md`
+- `official/96_CueScore_v1.0_Post_Build37_Page_Layout_Refinement_Spec.md`
 - `official/91_CueScore_v1.0_Build36_Match_Card_C_Fidelity_Decision.md`
 - `official/92_CueScore_v1.0_Build36_Match_Card_C_Fidelity_Spec.md`
 - `official/93_CueScore_v1.0_Build37_Match_Card_C_Official_Visual_Reference_Decision.md`

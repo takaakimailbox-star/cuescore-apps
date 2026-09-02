@@ -24,7 +24,7 @@ test("opponent records are fixed-context, unsorted by controls, and recency orde
   assert.match(revision,/\.journey-summary-v2,\.journey-segment-v2/);
   assert.match(revision,/select\.replaceWith\(fixed\)/);
   assert.match(revision,/latest\.get\(b\.dataset\.rivalOpponent\).*latest\.get\(a\.dataset\.rivalOpponent\)/);
-  assert.match(revision,/classList\.add\("pd13-rival-context"\)/);
+  assert.match(revision,/classList\.add\("pd13-rival-context","page-rival-context-v1"\)/);
   assert.match(revision,/classList\.remove\("player-journey-card-v2"\)/);
   assert.match(css,/\.pd13-rival-context[\s\S]*background:transparent/);
 });

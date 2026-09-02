@@ -20,8 +20,8 @@ test("Phase 2 Player Hub has one selector and the adopted three tabs",()=>{
 
 test("Phase 3 match routes reuse shared Match Detail and consolidated opponent flow",()=>{
   assert.match(js,/openMatchDetailV1\?\.\(match\.dataset\.hubMatch\)/);
-  assert.match(js,/openPlayerMatchHistoryV2\?\.\(active\.playerId,active\.state\.discipline\)/);
-  assert.match(js,/openPlayerOpponentRecordsV2\?\.\(active\.playerId,active\.state\.discipline\)/);
+  assert.match(js,/CueScorePlayerJourneyV2\?\.openHistory[\s\S]*active\.playerId,active\.state\.discipline/);
+  assert.match(js,/CueScorePlayerJourneyV2\?\.openRivals[\s\S]*active\.playerId,active\.state\.discipline/);
   assert.doesNotMatch(js,/function\s+openMatchDetail/);
 });
 

@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## Post-Build 37 ページレイアウト洗練・分析導線整理（2026年9月2日）
+
+- Product Owner採用により、種目別全試合、対戦相手別成績、特定対戦相手履歴のページ階層を統一した。既存集計を用いる3列SummaryStatsBar、52px文脈ヘッダー、22px見出し、16/20/32/12/8pxの対象画面限定リズムを実装。
+- Player Informationの分析タブから重複する`詳しい分析`と`対戦相手分析`を非表示にし、`今の状態 → 主要指標 → 推移 → 今回のポイント → 自己ベスト`で完結させた。分析式・保存データ・対戦相手集計は削除していない。
+- Build 37 Match Card CのSSOT・56px寸法、Build 35 Match Detail Back/exact-origin、Recent Matches、Global Historyは保護。実iPhone受入はPending。このbatchではArchive、TestFlight、App Review、External TestFlight、一般公開を行わない。
+
 ## Build 37 Match Card C正式Visual Reference準拠（2026年9月2日）
 
 - latest `main` `8444746`を基準に、添付「CueScore 試合カード C案（完成デザイン）」を正式Visual Source of Truthとして採用し、Build 36の近似実装を完成扱いにせず再実装した。
@@ -8,7 +14,7 @@
 - 390×844実測は全context高さ56px、horizontal overflow 0。Recent 3件、全試合はBottom Navigationより上に6件、対戦相手別score右端x=345で一致、Global Historyは9件を完全表示。console error 0。
 - Build 35 Back、`closeFormalMatchDetailV2()`、Edge Swipe、exact origin／filter／scroll復元は未変更。Global History → Match Detail → Backの1tap復帰を回帰確認。実iPhone未確認はPASS扱いにしない。
 - 全自動test `333 pass / 0 fail / 0 skipped`。source／native-web／iOS copied assetを同期し、Simulator Debug／Releaseとも`BUILD SUCCEEDED`。Marketing Version `1.0`／Build Number `37`。Official 093／094。実装記録：`docs/implementation/CueScore_Build37_Match_Card_C_Official_Visual_Reference_Implementation_2026-09-02.md`。
-- source/archive commit `d0d0aa4`。Signed Archive `/private/tmp/CueScore-Build37.xcarchive`をApp Store Connectへuploadし、Delivery UUID `76534b77-ae7e-40e3-bb87-2411e8940315`、processing／import `VALID`、`usesNonExemptEncryption=false`を確認。Build 37は`提出準備完了`で内部group `CueScore Internal Testers`の配布対象。App Review、Version 1.0審査用build紐付け、External TestFlight、一般公開は未実施。正式画像／比較画像を含むGitHub `main` pushは外部公開の明示承認待ち。
+- source/archive commit `d0d0aa4`。Signed Archive `/private/tmp/CueScore-Build37.xcarchive`をApp Store Connectへuploadし、Delivery UUID `76534b77-ae7e-40e3-bb87-2411e8940315`、processing／import `VALID`、`usesNonExemptEncryption=false`を確認。Build 37は`提出準備完了`で内部group `CueScore Internal Testers`の配布対象。App Review、Version 1.0審査用build紐付け、External TestFlight、一般公開は未実施。正式画像／比較画像を含むGitHub `main`反映済み。
 
 ## Build 36 Match Card C忠実再実装（2026年9月2日）
 
