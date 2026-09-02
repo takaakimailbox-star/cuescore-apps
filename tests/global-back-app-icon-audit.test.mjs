@@ -12,7 +12,7 @@ const adoptedIosIconSha256="49b2aa25427930af44eb9f4d90fe00265c0396fe3af6f81e8d05
 
 test("direct interactive-control taps are excluded from edge tracking before pointer events are disabled",()=>{
   assert.match(html,/const backButtonSelector = backButtonSelectors\.join\(","\)/);
-  assert.match(html,/interactiveTargetSelector = "button,a\[href\],input,textarea,select,summary,\[contenteditable='true'\],\[role='button'\],\[role='tab'\]"/);
+  assert.match(html,/interactiveTargetSelector = "input,textarea,select,summary,\[contenteditable='true'\],\[role='tab'\],\[data-discipline\]"/);
   assert.match(html,/if \(event\.target\.closest\(interactiveTargetSelector\)\) return;[\s\S]*?cue-edge-back-tracking-v3/);
 });
 

@@ -135,6 +135,7 @@
     resume.insertAdjacentElement("afterend",newMatch);
     const switcher=document.getElementById("cueDisciplineSwitcherV1"),setup=document.querySelector(".cue-new-match-integrated-v2"),back=document.getElementById("cueMatchSetupBackV3");
     if(switcher&&setup&&back)back.insertAdjacentElement("afterend",switcher);
+    back?.remove();
     newMatch.addEventListener("click",()=>{
       const selected=switcher?.querySelector("[data-discipline].is-selected")||switcher?.querySelector("[data-discipline]");
       if(selected)selected.click();else window.openCueMatchSetupV3?.();

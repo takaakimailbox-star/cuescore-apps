@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## Build 40 Edge Swipe監査／New Match Back削除（2026年9月2日）
+
+- latest `main` `df5729e3a5eb02c0470ac819231df2e43365b6c4`を基準に全Edge Swipe Backを監査。共通controllerの1.2秒duration制限、全button開始除外、touchstart直後のtap無効化、body直下Player overlay非追従をroot causeとして修正した。
+- 左端64px以内、intent 8px＋横優位1.2倍、完了60px、縦許容60px、duration 4秒の共通contractへ統一。完了時はvisible Back buttonをclickし、Match DetailはBuild 39 `exactMatchDetailOrigin`を含む既存close contractを通る。短距離は180ms cancel、完了は最大220msでfollow animationする。
+- New Matchの左上BackはDOMから削除し、Bottom Navigationを維持。全自動test `346 pass / 0 fail / 0 skipped`、Simulator Debug／Releaseとも`BUILD SUCCEEDED`、390×844 horizontal overflow 0、console error 0。
+- Version `1.0`／Build `40`。Internal TestFlight配布はこの記録後に実施する。各Enabled画面、Match Detail 5入口、slow／cancel／follow、exact context復元の実iPhone受入はPendingでありPASS扱いにしない。External TestFlight、App Review、審査用に追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build40_Edge_Swipe_Audit_New_Match_Back_Removal_Implementation_2026-09-02.md`。
+
 ## Build 39 Player Detail exact Back修正（2026年9月2日）
 
 - 実iPhone Build 38で、Player Information起点の最近の試合／自己ベストからMatch Detailを閉じるとPlayer一覧まで戻る回帰を確認。Backの1tap入力とclose contractではなく、Build 38 Player Hubが所有するexact opening contextの未連携がroot causeだった。

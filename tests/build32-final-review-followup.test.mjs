@@ -31,11 +31,11 @@ test("New Match moves its main content down as one layout without forcing the st
 test("Player journey visibility synchronizes hidden, aria-hidden, and hit testing",()=>{
   assert.match(html,/function show\(root\)\{root\.classList\.remove\("hidden"\);root\.setAttribute\("aria-hidden","false"\)/);
   assert.match(html,/function hide\(root\)\{root\.classList\.add\("hidden"\);root\.setAttribute\("aria-hidden","true"\);\}/);
-  assert.match(html,/interactiveTargetSelector = "button,a\[href\],input,textarea,select,summary/);
+  assert.match(html,/interactiveTargetSelector = "input,textarea,select,summary/);
 });
 
 test("changed layout assets use a fresh app-shell version",()=>{
-  assert.match(html,/navigation-phase2-6\.css\?v=2\.0-build39-player-exact-back/);
-  assert.match(html,/navigation-phase2-6\.js\?v=2\.0-build39-player-exact-back/);
-  assert.match(sw,/APP_VERSION = "2\.0-build39-player-exact-back"/);
+  assert.match(html,/navigation-phase2-6\.css\?v=2\.0-build40-edge-swipe/);
+  assert.match(html,/navigation-phase2-6\.js\?v=2\.0-build40-edge-swipe/);
+  assert.match(sw,/APP_VERSION = "2\.0-build40-edge-swipe"/);
 });

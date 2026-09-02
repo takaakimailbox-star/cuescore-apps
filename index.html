@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="./analysis-final-rc.css" />
   <link rel="stylesheet" href="./analysis-build4.css" />
   <link rel="stylesheet" href="./player-detail-build6.css" />
-  <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build39-player-exact-back" />
+  <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build40-edge-swipe" />
   <link rel="stylesheet" href="./player-detail-build8.css" />
   <style id="build8PlayerTitleV1">
   .pd8-title-with-icon{display:flex!important;align-items:center;justify-content:center;gap:7px}.pd8-title-with-icon img{width:25px;height:25px;flex:0 0 auto}
@@ -8623,7 +8623,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build39-player-exact-back"></script>
+  <script src="./demo-data.js?v=2.0-build40-edge-swipe"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19181,7 +19181,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build39-player-exact-back";
+    const PWA_VERSION = "2.0-build40-edge-swipe";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -27478,15 +27478,15 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 }
 </style>
 <style id="cueScoreEdgeBackMotionV2">
-body.cue-edge-back-animating-v2 .app{
+body.cue-edge-back-animating-v2>.app,body.cue-edge-back-animating-v2>#playerOpponentRecordsV2,body.cue-edge-back-animating-v2>#playerMatchHistoryV2,body.cue-edge-back-animating-v2>.pd12-trends-overlay{
   pointer-events:none!important;
   animation:cue-edge-back-out-v2 220ms cubic-bezier(.22,.72,.28,1) forwards!important;
   will-change:transform,opacity;
 }
 .player-stats-back,.player-library-back,.player-journey-back-v2,.match-detail-back-v1{touch-action:manipulation;transition:opacity 80ms ease,transform 80ms ease}
 .player-stats-back:active,.player-library-back:active,.player-journey-back-v2:active,.match-detail-back-v1:active,.cue-back-feedback-v11{opacity:.45!important;transform:scale(.92)!important}
-body.cue-edge-back-tracking-v3 .app{pointer-events:none!important;transform:translateX(var(--cue-edge-back-x,0px));opacity:calc(1 - var(--cue-edge-back-progress,0)*.22);will-change:transform,opacity;transition:none!important}
-body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.22,.72,.28,1),opacity 180ms ease!important}
+body.cue-edge-back-tracking-v3>.app,body.cue-edge-back-tracking-v3>#playerOpponentRecordsV2,body.cue-edge-back-tracking-v3>#playerMatchHistoryV2,body.cue-edge-back-tracking-v3>.pd12-trends-overlay{pointer-events:none!important;transform:translateX(var(--cue-edge-back-x,0px));opacity:calc(1 - var(--cue-edge-back-progress,0)*.22);will-change:transform,opacity;transition:none!important}
+body.cue-edge-back-cancelling-v3>.app,body.cue-edge-back-cancelling-v3>#playerOpponentRecordsV2,body.cue-edge-back-cancelling-v3>#playerMatchHistoryV2,body.cue-edge-back-cancelling-v3>.pd12-trends-overlay{transition:transform 180ms cubic-bezier(.22,.72,.28,1),opacity 180ms ease!important}
 @keyframes cue-edge-back-out-v2{
   from{transform:translateX(0);opacity:1}
   to{transform:translateX(34vw);opacity:0}
@@ -27504,11 +27504,10 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   const EDGE_START_MAX = 64;
   const MIN_HORIZONTAL_TRAVEL = 60;
   const MAX_VERTICAL_TRAVEL = 60;
-  const MAX_GESTURE_DURATION = 1200;
+  const MAX_GESTURE_DURATION = 4000;
   const HORIZONTAL_DOMINANCE = 1.2;
-  const interactiveTargetSelector = "button,a[href],input,textarea,select,summary,[contenteditable='true'],[role='button'],[role='tab']";
+  const interactiveTargetSelector = "input,textarea,select,summary,[contenteditable='true'],[role='tab'],[data-discipline]";
   const backButtonSelectors = [
-    "#cueMatchSetupBackV3",
     "[data-settings-home-back]",
     "[data-analytics-home-back]",
     "#recordsBackV2",
@@ -27568,23 +27567,20 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   let backTransitionActive = false;
   document.addEventListener("pointerdown",event=>{const button=event.target.closest(backButtonSelector);if(button)button.dataset.cueBackSource="tap";},{passive:true,capture:true});
   const clearInteractiveBack = () => {
-    const appRoot=document.querySelector(".app");
     document.body.classList.remove("cue-edge-back-tracking-v3","cue-edge-back-cancelling-v3");
-    appRoot?.style.removeProperty("--cue-edge-back-x");appRoot?.style.removeProperty("--cue-edge-back-progress");
+    document.body.style.removeProperty("--cue-edge-back-x");document.body.style.removeProperty("--cue-edge-back-progress");
   };
   const cancelInteractiveBack = () => {
-    const appRoot=document.querySelector(".app");if(!appRoot)return clearInteractiveBack();
     document.body.classList.add("cue-edge-back-cancelling-v3");
-    appRoot.style.setProperty("--cue-edge-back-x","0px");appRoot.style.setProperty("--cue-edge-back-progress","0");
+    document.body.style.setProperty("--cue-edge-back-x","0px");document.body.style.setProperty("--cue-edge-back-progress","0");
     setTimeout(clearInteractiveBack,190);
   };
   const animateBack = backButton => {
     if (!backButton || backTransitionActive) return;
     backTransitionActive = true;
-    const appRoot = document.querySelector(".app");
     if(document.body.classList.contains("cue-edge-back-tracking-v3")){
       document.body.classList.add("cue-edge-back-cancelling-v3");
-      appRoot?.style.setProperty("--cue-edge-back-x","100vw");appRoot?.style.setProperty("--cue-edge-back-progress","1");
+      document.body.style.setProperty("--cue-edge-back-x","100vw");document.body.style.setProperty("--cue-edge-back-progress","1");
       backButton.dataset.cueBackSource="swipe";backButton.click();
       requestAnimationFrame(()=>{clearInteractiveBack();backTransitionActive=false;});
       return;
@@ -27600,7 +27596,7 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
         backTransitionActive = false;
       });
     };
-    appRoot?.addEventListener("animationend", finish, {once:true});
+    document.querySelector(".app")?.addEventListener("animationend", finish, {once:true});
     requestAnimationFrame(finish);
   };
 
@@ -27624,7 +27620,6 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
       backButton,
       cancelled: false
     };
-    document.body.classList.add("cue-edge-back-tracking-v3");
   }, {passive:true, capture:true});
 
   document.addEventListener("touchmove", event => {
@@ -27637,8 +27632,9 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
       cancelInteractiveBack();
       return;
     }
+    if(dx>8&&dx>Math.abs(dy)*HORIZONTAL_DOMINANCE)document.body.classList.add("cue-edge-back-tracking-v3");
     const progress=Math.max(0,Math.min(1,dx/Math.max(1,innerWidth)));
-    const appRoot=document.querySelector(".app");appRoot?.style.setProperty("--cue-edge-back-x",`${Math.max(0,dx)}px`);appRoot?.style.setProperty("--cue-edge-back-progress",String(progress));
+    document.body.style.setProperty("--cue-edge-back-x",`${Math.max(0,dx)}px`);document.body.style.setProperty("--cue-edge-back-progress",String(progress));
     if(dx>0&&event.cancelable)event.preventDefault();
   }, {passive:false, capture:true});
 
@@ -28350,7 +28346,7 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
   <script src="./analytics-build4-metrics.js"></script>
   <script src="./analysis-build4.js"></script>
   <script src="./player-detail-build6.js"></script>
-  <script src="./ui-revision-v12.js?v=2.0-build39-player-exact-back"></script>
+  <script src="./ui-revision-v12.js?v=2.0-build40-edge-swipe"></script>
   <script src="./final-ui-build18.js"></script>
   <link rel="stylesheet" href="./navigation-shell-phase1.css" />
   <script src="./navigation-shell-phase1.js"></script>
@@ -28362,8 +28358,8 @@ body.cue-edge-back-cancelling-v3 .app{transition:transform 180ms cubic-bezier(.2
     window.CueScoreEditableSelectionV1=Object.freeze({isEditableTarget:editable});
   })();
   </script>
-  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build39-player-exact-back" />
-  <script src="./navigation-phase2-6.js?v=2.0-build39-player-exact-back"></script>
+  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build40-edge-swipe" />
+  <script src="./navigation-phase2-6.js?v=2.0-build40-edge-swipe"></script>
 </body>
 </html>
 
