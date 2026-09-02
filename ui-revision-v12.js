@@ -91,7 +91,7 @@
       row.classList.toggle("pd13-opponent-match",opponentFixed);row.classList.toggle("pd13-fixed-discipline-match",disciplineFixed);row.classList.toggle("pd13-player-match",!opponentFixed&&!disciplineFixed);
       if(opponentFixed){row.querySelector(".journey-game-v2")?.remove();row.querySelector(".journey-match-vs-v3")?.remove();row.querySelector(".journey-match-opponent-avatar-v3")?.remove();row.querySelector(".journey-match-opponent-v3>strong")?.remove();}
       if(disciplineFixed){
-        row.querySelector(".journey-game-v2")?.remove();row.querySelector(".journey-match-race-v3")?.remove();row.querySelector(".journey-match-vs-v3")?.remove();
+        row.querySelector(".journey-game-v2")?.remove();row.querySelector(".journey-match-vs-v3")?.remove();
         const date=row.querySelector(".journey-match-date-v3"),result=row.querySelector(".journey-match-result-v3"),opponentLine=row.querySelector(".journey-match-opponent-v3");
         if(date){const match=date.textContent.match(/\d{4}\/(\d{2})\/(\d{2})（.）\s+(\d{2}:\d{2})/);if(match)date.textContent=`${Number(match[1])}/${Number(match[2])} ${match[3]}`;if(opponentLine&&date.parentElement!==row)row.insertBefore(date,opponentLine);}
         if(result&&opponentLine&&result.parentElement!==row)row.insertBefore(result,opponentLine);
@@ -111,6 +111,38 @@
   const closeMatchDetailBase=window.closeFormalMatchDetailV2;
   window.closeFormalMatchDetailV2=()=>{const origin=matchDetailReturn;closeMatchDetailBase?.();if(origin){history?.classList.remove("hidden");history?.setAttribute("aria-hidden","false");matchDetailReturn=null;}};
 
+  // Build 34: one exact opening-context snapshot for every Match Detail entry.
+  // Earlier layers remembered only Player History rows, leaving direct Player Hub
+  // and Personal Best entries with no deterministic return owner on iOS.
+  let exactMatchDetailOrigin=null;
+  const visible=node=>Boolean(node&&!node.classList.contains("hidden")&&node.getAttribute("aria-hidden")!=="true");
+  const captureExactOrigin=target=>{
+    const playerStats=document.getElementById("playerStatsOverlay"),records=document.querySelector(".records-screen:not(.hidden),#recordsScreen:not(.hidden)"),historyRoot=document.getElementById("playerMatchHistoryV2");
+    let kind="";
+    if(target?.closest?.("#playerMatchHistoryV2 [data-player-record-id]"))kind=historyRoot?.dataset.pd8Opponent?"opponent-history":"player-history";
+    else if(target?.closest?.("#recordsList [data-record-id],.records-list [data-record-id]"))kind="global-history";
+    else if(target?.closest?.("#playerStatsBody [data-pd7-match]"))kind="personal-best";
+    else if(target?.closest?.("#playerStatsBody [data-hub-match]"))kind="player-recent";
+    else if(visible(historyRoot))kind=historyRoot?.dataset.pd8Opponent?"opponent-history":"player-history";
+    else if(visible(playerStats))kind="player-detail";
+    else if(records)kind="global-history";
+    if(!kind)return null;
+    const scroll=kind.includes("history")?(kind==="global-history"?records?.querySelector(".records-list"):historyRoot?.querySelector(".player-journey-scroll-v2")):document.getElementById("playerStatsBody");
+    return {kind,scrollTop:scroll?.scrollTop||0,historyFilter:historyRoot?.querySelector("[data-history-filter].is-selected")?.dataset.historyFilter||"",playerId:historyRoot?.dataset.pd8PlayerId||detail()?.state?.playerId||"",discipline:historyRoot?.dataset.pd8Discipline||detail()?.state?.discipline||""};
+  };
+  document.addEventListener("click",event=>{const trigger=event.target.closest?.("[data-player-record-id],[data-record-id],[data-pd7-match],[data-hub-match]");if(trigger)exactMatchDetailOrigin=captureExactOrigin(trigger);},true);
+  document.addEventListener("keydown",event=>{if(!["Enter"," "].includes(event.key))return;const trigger=event.target.closest?.("[data-player-record-id],[data-record-id],[data-pd7-match],[data-hub-match]");if(trigger)exactMatchDetailOrigin=captureExactOrigin(trigger);},true);
+  const openMatchDetailExactBase=window.openMatchDetailV1;
+  if(typeof openMatchDetailExactBase==="function")window.openMatchDetailV1=(recordId,options={})=>{if(options?.source!=="result"&&!exactMatchDetailOrigin)exactMatchDetailOrigin=captureExactOrigin(null);return openMatchDetailExactBase(recordId,options);};
+  const closeMatchDetailExactBase=window.closeFormalMatchDetailV2;
+  window.closeFormalMatchDetailV2=()=>{
+    const origin=exactMatchDetailOrigin;closeMatchDetailExactBase?.();exactMatchDetailOrigin=null;if(!origin)return;
+    const playerStats=document.getElementById("playerStatsOverlay"),historyRoot=document.getElementById("playerMatchHistoryV2");
+    if(["player-history","opponent-history"].includes(origin.kind)){historyRoot?.classList.remove("hidden");historyRoot?.setAttribute("aria-hidden","false");playerStats?.classList.add("hidden");const scroll=historyRoot?.querySelector(".player-journey-scroll-v2");if(scroll)requestAnimationFrame(()=>scroll.scrollTop=origin.scrollTop);}
+    else if(origin.kind!=="global-history"){playerStats?.classList.remove("hidden");playerStats?.setAttribute("aria-hidden","false");const scroll=document.getElementById("playerStatsBody");if(scroll)requestAnimationFrame(()=>scroll.scrollTop=origin.scrollTop);}
+    else {const scroll=document.querySelector(".records-screen:not(.hidden) .records-list,#recordsScreen:not(.hidden) .records-list");if(scroll)requestAnimationFrame(()=>scroll.scrollTop=origin.scrollTop);}
+  };
+
   document.addEventListener("keydown",event=>{if(event.key==="Escape"&&!trends.classList.contains("hidden")){event.preventDefault();closeTrends();}});
-  window.CueScoreUiRevisionV12={openTrends,closeTrends,reviseDetail,reviseRivals,reviseHistory,revisePlayerList};
+  window.CueScoreUiRevisionV12={openTrends,closeTrends,reviseDetail,reviseRivals,reviseHistory,revisePlayerList,captureExactOrigin};
 })();

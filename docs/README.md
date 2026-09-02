@@ -31,6 +31,9 @@ to v2.1. Earlier versions remain in the official directory as preceding releases
 
 Adopted RC decision addenda that supplement the latest Decision Log:
 
+- `official/87_CueScore_v1.0_Build34_Match_Card_C_Back_Navigation_Decision.md`
+- `official/88_CueScore_v1.0_Build34_Match_Card_C_Back_Navigation_Spec.md`
+
 - `official/08_CueScore_v1.0RC_GameResult_Statistics_Spec.docx`
 - `official/09_CueScore_v1.0RC_Player_Analytics_Discipline_Statistics_Spec.md`
 - `official/10_CueScore_v1.0RC_UI_Unification_PlayerDetail_Bugfix_Decision.md`

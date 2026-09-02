@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Build 34 Match Card C／Match Detail Back実装（2026年9月2日）
+
+- latest `main` `8ee1ee9a7e3d3bd641ed30fa6348d5ec7346d331`を基準に、試合カードCの情報密度をPlayer最近／競技別全試合／対戦相手別／全体Historyへ統合した。
+- 競技別全試合はRace toを保持する3行76px、全体Historyは2 player laneとscore／Race／chevronを保持する66px基準とした。390×844でhorizontal overflow 0。
+- Match Detail Backのroot causeは、後段wrapperがPlayer History rowだけをoriginとして記憶し、自己ベスト／最近／全体Historyの直接入口に所有元snapshotがなかったこと。全5入口をcapture phaseで一元記録し、同じ文脈とscrollTopへ復元するよう修正した。
+- scoring、winner、Race to、JPA、Break Input、14-1、Undo、Game Set、IDs、saved-data schema、Backup／Restore、analytics formula／aggregate SSOTは変更していない。
+- 全自動test `316 pass / 0 fail / 0 skipped`。native asset一致。Marketing Version `1.0`／Build Number `34`。Internal TestFlight配布はこの記録時点では未実施。
+- Official 087／088。実装記録：`docs/implementation/CueScore_Build34_Match_Card_C_Back_Navigation_Implementation_2026-09-02.md`。
+
 ## Build 32 Final Review Follow-up／Internal TestFlight配布完了（2026年9月1日）
 
 - Build 31実iPhone follow-up 4件をlatest main `26642cb408fdbe42efa2a7b3fa1ab6d978c47741`基準の1 batchへ統合した。

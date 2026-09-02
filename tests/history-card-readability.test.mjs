@@ -28,13 +28,14 @@ test("global history reserves equal player lanes sized for six full-width charac
   assert.match(index, /record-match-player-v3 strong\{min-width:0;overflow:hidden;text-overflow:ellipsis/);
 });
 
-test("discipline-fixed history uses two rows without game, Race to, or vs", () => {
+test("discipline-fixed history uses the C balance with date, result, opponent, score, race and chevron", () => {
   assert.match(revision, /label=`\$\{def\(active\)\.label\}の全試合`/);
-  assert.match(revision, /disciplineFixed[\s\S]+journey-game-v2[\s\S]+journey-match-race-v3[\s\S]+journey-match-vs-v3/);
+  assert.match(revision, /disciplineFixed[\s\S]+journey-game-v2[\s\S]+journey-match-vs-v3/);
   assert.match(revision, /row\.insertBefore\(date,opponentLine\)/);
   assert.match(revision, /row\.insertBefore\(result,opponentLine\)/);
   assert.match(revision, /row\.dataset\.pd13DetailLabel/);
-  assert.match(css, /grid-template-areas:'date result result' 'opponent score chevron'/);
+  assert.match(css, /grid-template-areas:'date result chevron' 'opponent score chevron' 'race race chevron'/);
+  assert.match(css, /\.pd13-fixed-discipline-match \.journey-match-race-v3 \{ grid-area:race; display:block/);
   assert.match(css, /\.pd13-fixed-discipline-match \.journey-match-vs-v3 \{ display:none; \}/);
 });
 

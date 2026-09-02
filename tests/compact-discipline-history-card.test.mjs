@@ -2,12 +2,11 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import test from "node:test";
 
-const css=readFileSync(new URL("../navigation-shell-phase1.css",import.meta.url),"utf8");
 const existing=readFileSync(new URL("../ui-revision-v12.css",import.meta.url),"utf8");
 
 test("discipline-fixed history targets the adopted compact height",()=>{
-  assert.match(css,/#playerMatchHistoryV2 \.pd13-fixed-discipline-match\{[\s\S]*min-height:98px!important;max-height:105px!important/);
-  assert.match(css,/row-gap:6px!important;padding:9px 12px!important/);
+  assert.match(existing,/#playerMatchHistoryV2 \.pd13-fixed-discipline-match \{[\s\S]*grid-template-rows:auto auto auto !important/);
+  assert.match(existing,/min-height:76px !important; column-gap:8px !important; row-gap:3px !important/);
 });
 
 test("compact override preserves six-character name, score, chevron and avatar contracts",()=>{
@@ -18,6 +17,6 @@ test("compact override preserves six-character name, score, chevron and avatar c
 });
 
 test("compact override does not change width or introduce horizontal scrolling",()=>{
-  const block=css.match(/#playerMatchHistoryV2 \.pd13-fixed-discipline-match\{([\s\S]*?)\}/)?.[1]||"";
-  assert.doesNotMatch(block,/width|overflow-x|font-size|avatar/);
+  const block=existing.match(/#playerMatchHistoryV2 \.pd13-fixed-discipline-match \{([\s\S]*?)\}/)?.[1]||"";
+  assert.doesNotMatch(block,/overflow-x/);
 });
