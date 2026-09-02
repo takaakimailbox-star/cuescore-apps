@@ -22,3 +22,5 @@ The inspected target is `button#recordDetailBackBtn`. No covering element was pr
 ## Validation status
 
 Browser inspection confirmed the actual button, 48×48 hit area, foreground hit-test ownership, and one-tap close/return from Global History. Automated and native build results are recorded in `docs/CURRENT_STATE.md`. Product acceptance is still pending the five-origin real-iPhone TestFlight matrix.
+
+Build 35 was archived at `/private/tmp/CueScore-Build35.xcarchive` and uploaded through the personal App Store Connect API key. Delivery UUID `1feb29ed-95b4-423b-8ef5-9971b8c7ef54` completed with processing/import status `VALID` and `usesNonExemptEncryption=false`. The existing internal all-build-access group `CueScore Internal Testers` receives the build. No external testing, App Review submission, review-build linkage, or public release was performed.

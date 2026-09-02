@@ -8,6 +8,7 @@
 - Build 34の`exactMatchDetailOrigin`復元は維持。Match Card Cは別batchの未解決事項として今回は変更していない。
 - ローカル実DOMで対象buttonが最前面であることと、全体Historyから1tap close／入口復帰を確認。5入口の実iPhone合否はInternal TestFlight Build 35確認待ちであり、確認前にPASS扱いしない。
 - 全自動test `321 pass / 0 fail / 0 skipped`。source／native-web／iOS copied assetを同期し、Simulator Debug／Releaseとも`BUILD SUCCEEDED`。Marketing Version `1.0`／Build Number `35`。
+- source commit `3b9274c`を`main`へ反映。Signed Archive `/private/tmp/CueScore-Build35.xcarchive`をApp Store Connectへuploadし、Delivery UUID `1feb29ed-95b4-423b-8ef5-9971b8c7ef54`、processing／import `VALID`、`usesNonExemptEncryption=false`を確認した。既存のInternal／全Buildアクセスgroup `CueScore Internal Testers`の配布対象。App Review、Version 1.0審査用build紐付け、External TestFlight、一般公開は未実施。
 - Official 089／090。実装記録：`docs/implementation/CueScore_Build35_Match_Detail_Back_Input_Fix_Implementation_2026-09-02.md`。
 
 ## Build 34 Match Card C／Match Detail Back実装（2026年9月2日）
