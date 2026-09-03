@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-build56-history-names";
+const APP_VERSION = "2.0-build57-rotation-dry-break";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-build56-history-names",
+  "./demo-data.js?v=2.0-build57-rotation-dry-break",
   "./manifest.webmanifest",
   "./privacy.html",
   "./terms.html",
@@ -17,13 +17,13 @@ const APP_SHELL = [
   "./analysis-build4.css",
   "./player-detail-build6.js",
   "./player-detail-build6.css",
-  "./ui-revision-v12.js?v=2.0-build56-history-names",
+  "./ui-revision-v12.js?v=2.0-build57-rotation-dry-break",
   "./final-ui-build18.js",
-  "./ui-revision-v12.css?v=2.0-build56-history-names",
+  "./ui-revision-v12.css?v=2.0-build57-rotation-dry-break",
   "./navigation-shell-phase1.css",
   "./navigation-shell-phase1.js",
-  "./navigation-phase2-6.css?v=2.0-build56-history-names",
-  "./navigation-phase2-6.js?v=2.0-build56-history-names",
+  "./navigation-phase2-6.css?v=2.0-build57-rotation-dry-break",
+  "./navigation-phase2-6.js?v=2.0-build57-rotation-dry-break",
   "./player-detail-build8.css",
   "./docs/official/app-store-v1.0/public/CueScore_Privacy_Policy_v1.0_Official.md",
   "./docs/official/app-store-v1.0/public/CueScore_Terms_of_Use_v1.0_Official.md",
