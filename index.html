@@ -12307,8 +12307,17 @@ let matchRecordsRawCacheV152 = null;
         foulLocked = false;
         turnLockReasonV62 = null;
       } else if (activeGameTypeV1 === ROTATION_GAME_TYPE) {
-        if (decision.foul) incrementRotationFoulV1(player);
-        else rotationStateV1.consecutiveFouls[player] = 0;
+        if (decision.foul) {
+          incrementRotationFoulV1(player);
+        } else {
+          rotationStateV1.consecutiveFouls[player] = 0;
+          if (decision.pocketedBalls.length === 0) {
+            current = player === 1 ? 2 : 1;
+            if (current === startingPlayer) { inning++; forceNewRow = true; }
+            foulLocked = false;
+            turnLockReasonV62 = null;
+          }
+        }
       }
 
       if (decision.preBreakFoul && current === player) {
