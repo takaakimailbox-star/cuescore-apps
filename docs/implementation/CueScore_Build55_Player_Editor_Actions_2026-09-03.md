@@ -17,6 +17,6 @@ Date: 2026-09-03
 - source/archive commit: `42825a7`（UI修正commit `61e6ea5`）。
 - `main`へpush済み。
 - Xcode `TestFlight Internal Only`で`App 1.0 (55) uploaded`を確認。Upload時刻は2026-09-03 21:07 JST、Delivery UUIDは`33855546-8d97-4c55-b858-c0218f2a45f4`。
-- Apple upload受付後の状態は`Uploaded package is processing`。個人APIキーはAppleから401を返したため、保存済みXcode account sessionでuploadを完遂した。
+- Apple processing完了後、App Store Connectで輸出コンプライアンスを過去Buildと同じ「上記のアルゴリズムのどれでもない」として保存。Build 55が`テスト準備完了`になり、Internal group `CueScore Internal Testers`（内部、テスター1名）へ配布されていることを確認した。個人APIキーはAppleから401を返したため、保存済みApple Account sessionで確認・設定を完遂した。
 - 実iPhone受入はpending。プレーヤー登録、avatar決定、プレーヤー編集の3導線をBuild 55で確認するまで実機PASS扱いにしない。
 - External TestFlight、App Review、審査用build追加、一般公開は行っていない。
