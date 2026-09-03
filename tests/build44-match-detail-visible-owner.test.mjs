@@ -5,12 +5,12 @@ import {readFileSync} from "node:fs";
 const html=readFileSync(new URL("../index.html",import.meta.url),"utf8");
 
 test("Player-origin Match Detail ownership does not inherit a hidden ancestor",()=>{
-  assert.match(html,/matchDetailBack&&matchDetailBack\.getClientRects\(\)\.length>0/);
+  assert.match(html,/document\.body\.classList\.contains\("match-detail-visible-v1"\)&&matchDetailBack/);
   assert.doesNotMatch(html,/if\(isVisible\(matchDetailBack\)\)return matchDetailBack/);
 });
 
 test("direct close uses the Match Detail overlay's own open state",()=>{
-  assert.match(html,/const ownsVisibleMatchDetail=backButton\.id==="recordDetailBackBtn"&&matchDetail&&!matchDetail\.classList\.contains\("hidden"\)&&matchDetail\.getAttribute\("aria-hidden"\)!=="true"/);
+  assert.match(html,/const ownsVisibleMatchDetail=backButton\.id==="recordDetailBackBtn"&&document\.body\.classList\.contains\("match-detail-visible-v1"\)/);
   assert.match(html,/if\(ownsVisibleMatchDetail&&typeof window\.closeFormalMatchDetailV2==="function"\)\{\s*window\.closeFormalMatchDetailV2\(\)/);
   assert.doesNotMatch(html,/backButton\.id==="recordDetailBackBtn"&&isVisible\(matchDetail\)/);
 });
