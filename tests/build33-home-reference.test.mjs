@@ -21,7 +21,7 @@ test("Home tab uses the transparent reference-derived cue-ball PNG",()=>{
 });
 
 test("Build 33 has a fresh app-shell version",()=>{
-  assert.match(sw,/APP_VERSION = "2\.0-build54-readable-trends"/);
+  assert.match(sw,/APP_VERSION = "2\.0-build55-player-actions"/);
 });
 
 test("Settings keeps the supplied data-card and lower app-information composition",()=>{
