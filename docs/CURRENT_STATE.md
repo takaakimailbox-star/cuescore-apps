@@ -1,10 +1,10 @@
 # CueScore Apps Current State
 
-## Build 44 Player-origin Match Detail visible owner修正候補（2026年9月3日）
+## Build 44 Player-origin Match Detail visible owner修正（2026年9月3日）
 
 - Build 43実iPhoneでも自己ベスト／最近の試合からSwipe後にDetailが元位置へ戻りFAIL。Build 43 direct-close条件が共通`isVisible()`を使い、Player起点Match Detailのhidden祖先を拾ってfalseとなり、合成click fallbackへ落ちていた。
 - owner選択はrendered button rect、direct-closeは`#recordDetailOverlay`自身の`.hidden`／`aria-hidden`をSSOTとし、hidden祖先を継承しない。open Match Detailは必ず実行時のBuild 39 exact close wrapperへ直結する。
-- 全自動test `360 pass / 0 fail / 0 skipped`。Simulator Debug／Release成功、390×844 overflow 0、console error 0。Version `1.0`／Build `44`候補。実iPhone受入はPendingでPASS扱いにしない。main push／Internal TestFlightは未実施。実装記録：`docs/implementation/CueScore_Build44_PlayerOrigin_MatchDetail_Visible_Owner_Fix_Implementation_2026-09-03.md`。
+- 全自動test `360 pass / 0 fail / 0 skipped`。Simulator Debug／Release成功、390×844 overflow 0、console error 0。Version `1.0`／Build `44`。source/archive commit `d3ab1c6`、Build upload ID `575a51c9-09ee-480e-83b6-ae1a000cfec7`、processing `VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`配布対象を確認。実iPhone受入はPendingでPASS扱いにしない。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build44_PlayerOrigin_MatchDetail_Visible_Owner_Fix_Implementation_2026-09-03.md`。
 
 ## Build 43 Match Detail Edge Swipe direct close修正（2026年9月3日）
 

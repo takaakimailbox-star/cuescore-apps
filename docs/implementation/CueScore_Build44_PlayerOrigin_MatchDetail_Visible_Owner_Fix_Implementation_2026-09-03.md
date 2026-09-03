@@ -46,5 +46,6 @@ Internal TestFlight Build 44で各3回確認する。確認前はPASS扱いに�
 
 ## 配布境界
 
-現時点はローカル検証段階。main pushとInternal TestFlightはProduct Ownerの明示承認後に行う。External TestFlight、Beta App Review、App Review、審査用追加、一般公開は行わない。
+source/archive commitは`d3ab1c6`。Signed Archive `/private/tmp/CueScore-Build44.xcarchive`からApp Store Connect uploadに成功。Build upload ID `575a51c9-09ee-480e-83b6-ae1a000cfec7`、processing `VALID`、`usesNonExemptEncryption=false`を確認した。Build 44はInternal group `CueScore Internal Testers`の配布対象で、実iPhoneのTestFlightから更新・インストール可能。
 
+Internal TestFlightまでで停止。External TestFlight、Beta App Review、App Review、審査用追加、一般公開は行っていない。
