@@ -26,6 +26,11 @@
 - Node test: `351 pass / 0 fail / 0 skipped`
 - native web生成／Capacitor iOS copy完了。
 - iOS Simulator Debug: `BUILD SUCCEEDED`
+- source/archive commit: `1a5ae38`
+- Delivery／Build ID: `a503d323-2d56-4a55-86df-d89e83a3fb20`
+- App Store Connect processing／import: `VALID`
+- `usesNonExemptEncryption=false`
+- Internal group `CueScore Internal Testers`: Build 48を含むことを確認
 - 実iPhone確認: Pending
 
 ## 配布境界
