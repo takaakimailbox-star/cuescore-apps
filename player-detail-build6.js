@@ -47,7 +47,11 @@
     state.level="detail";state.discipline=active;header(`${def(active).label} 詳細`,"",def(active).asset);
     const records=recordsFor(player).filter(record=>discipline(record)===active);
     const all=api.aggregate(records,player,helpers),keys=metricKeys[active]||[],bests=api.bests(records,player,active,helpers);
-    const displayedBests=bests.filter(best=>!(["rotation","straightPool","jpa9"].includes(active)&&best.key==="score"));
+    const displayedBests=bests.filter(best=>{
+      if(["rotation","straightPool","jpa9"].includes(active)&&best.key==="score")return false;
+      if(["9ball","10ball"].includes(active)&&best.key==="breakInRate")return false;
+      return true;
+    });
     const bestCards=displayedBests.slice(0,3).map(best=>`<button type="button" class="pd7-best" data-pd7-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${active==="jpa9"&&best.key==="score"?"1試合最多得点":bestLabels[best.key]}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("");
     const summary=records.length?`${all.games}試合　${all.wins}勝${all.losses}敗`:"0試合　勝敗 —";
     body.innerHTML=`<div class="player-detail-shell-v1 pd7-shell"><section class="pd7-detail-summary">${profile(player,true)}<span><small>${def(active).label} 通算</small><strong>${summary}</strong></span></section>

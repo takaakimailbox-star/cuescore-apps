@@ -1,5 +1,10 @@
 # CueScore Apps Current State
 
+## Build 48 Player Hub表示／Match Detailスクロール修正（2026年9月3日）
+
+- Product Ownerの実iPhone報告を基に、最近の試合cardの勝敗badge／大きなscore重なり、9-Ball／10-Ball自己ベスト構成、自己ベスト1列表示、Player起点Match Detailの下方向scrollを修正した。
+- 390×844実画面でRotation `120−63`の非重複（間隔5px）、10-Ball自己ベスト1列／ブレイクイン率なし、Match Detailの下方向移動を確認。全自動test `351 pass / 0 fail / 0 skipped`、native web同期、Simulator Debug `BUILD SUCCEEDED`。Version `1.0`／Build `48`。実iPhone受入はPending。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build48_Player_Hub_Layout_And_MatchDetail_Scroll_Fix_Implementation_2026-09-03.md`。
+
 ## CueScore v1.0公式トップページ実装（2026年9月3日）
 
 - Product Owner決定により、既存GitHub PagesをCueScore v1.0公式サイトとして完成。アプリruntimeを保護するため、Pages公開元は`main /docs`を採用し、公開rootで公式トップ、`/support.html`、`/privacy.html`、`/terms.html`を提供する。

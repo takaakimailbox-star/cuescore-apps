@@ -17,9 +17,10 @@ test("Match Detail uses the live visual viewport instead of a fixed 100dvh scrol
 
 test("Match Detail has one bounded vertical scroll container with safe-area clearance",()=>{
   const scroller=html.match(/\.match-detail-scroll-v1\{([\s\S]*?)\n\}/)?.[1]||"";
-  assert.match(scroller,/flex:1 1 auto/);
+  assert.match(scroller,/flex:1 1 0/);
+  assert.match(scroller,/height:0/);
   assert.match(scroller,/min-height:0/);
-  assert.match(scroller,/overflow-y:auto/);
+  assert.match(scroller,/overflow-y:scroll/);
   assert.match(scroller,/overflow-x:hidden/);
   assert.match(scroller,/overscroll-behavior:contain/);
   assert.match(scroller,/touch-action:pan-y/);

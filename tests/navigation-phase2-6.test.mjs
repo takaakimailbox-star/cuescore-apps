@@ -27,7 +27,7 @@ test("Phase 3 match routes reuse shared Match Detail and consolidated opponent f
 
 test("Phase 4 keeps aggregate SSOT and moves Personal Best presentation to results",()=>{
   assert.match(js,/api\.aggregate\(records,player,helpers\)/);
-  assert.match(js,/api\.bests\(records,player,state\.discipline,helpers\)/);
+  assert.match(js,/displayedBestsFor\(records,player,state\.discipline\)/);
   assert.match(js,/active\.state\.tab==="analysis"\?analysisView/);
   assert.match(js,/data-hub-full-analysis/);
   assert.doesNotMatch(js,/data-hub-trends|ファール率|foulRate/);

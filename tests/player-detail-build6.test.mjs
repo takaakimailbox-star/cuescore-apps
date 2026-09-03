@@ -78,8 +78,9 @@ test("metric and best summaries use one responsive row without blank segments",(
   assert.match(script,/pd7-metrics count-\$\{keys\.length\}/);
   assert.match(script,/pd7-bests count-\$\{Math\.min\(displayedBests\.length,3\)\}/);
   assert.match(css,/\.pd7-metrics\.count-4\{grid-template-columns:repeat\(4,minmax\(0,1fr\)\)\}/);
-  assert.match(css,/\.pd7-metrics\.count-3,\.pd7-bests\.count-3\{grid-template-columns:repeat\(3,minmax\(0,1fr\)\)\}/);
-  assert.match(css,/\.pd7-metrics\.count-2,\.pd7-bests\.count-2\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)\}/);
+  assert.match(css,/\.pd7-metrics\.count-3\{grid-template-columns:repeat\(3,minmax\(0,1fr\)\)\}/);
+  assert.match(css,/\.pd7-metrics\.count-2\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)\}/);
+  assert.match(css,/\.pd7-bests\.count-3,\.pd7-bests\.count-2,\.pd7-bests\.count-1\{grid-template-columns:1fr\}/);
   assert.doesNotMatch(css,/overflow-x\s*:\s*(auto|scroll)/);
 });
 
