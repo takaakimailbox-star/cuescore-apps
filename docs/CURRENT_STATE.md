@@ -1,5 +1,10 @@
 # CueScore Apps Current State
 
+## Build 57 Rotationノーイン時の手番交代修正（2026年9月4日）
+
+- Rotationのブレイク結果「ノーイン」で、共通処理後に手番交代と入力ロック解除が欠落していた問題を修正。9-Ball／10-Ballと同様に次プレーヤーへ交代し、次の入力が可能になる。先攻へ戻る場合のinning更新、Rotationの連続ファール数リセットも維持した。
+- 全自動test `361 pass / 0 fail / 0 skipped`。native web／iOS assets同期、Release Archive成功。Version `1.0`／Build `57`。source commit `aa3824b`、build commit `dd4d965`、Build ID `d745fd3b-8c66-4a10-a48e-5a8ef18ccfb6`。輸出コンプライアンス回答後に`テスト中`となり、Internal group `CueScore Internal Testers`（内部、テスター1名）への配布を確認。実iPhone受入はpending。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build57_Rotation_Dry_Break_Turn_Switch_2026-09-04.md`。
+
 ## Build 56 試合履歴の長い日本語氏名表示修正（2026年9月3日）
 
 - 全体の試合履歴カードで氏名領域を再配分し、390px幅でも「小瀬古 賢太郎」「一ノ瀬 沙夜香」を省略せず1行表示する。score、Race to、競技アイコン、chevronは維持し、氏名とscoreの重なりを防止した。
