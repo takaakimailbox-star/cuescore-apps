@@ -56,8 +56,8 @@ test("detail density is collapsed and duplicate recent matches are removed",()=>
   assert.match(script,/value==null\?"—"/);
 });
 
-test("normal v1 detail has no trends entry or graph overlay",()=>{
-  assert.doesNotMatch(revision,/グラフで見る|className="pd12-trends hidden"|openTrends/);
+test("normal v1 detail delegates trends to the restored dedicated page",()=>{
+  assert.match(revision,/className="pd12-trends hidden"|openTrends/);
   assert.doesNotMatch(script,/data-pd7-metric-trend|data-pd7-trend-modal/);
 });
 

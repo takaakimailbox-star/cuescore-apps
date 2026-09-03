@@ -12,11 +12,11 @@ test("Build 4 analytics assets are loaded after the existing analytics layer",()
   assert.match(html,/analysis-build4\.css/);
 });
 
-test("player top contains all six adopted blocks and Player-origin detail entry",()=>{
-  for(const label of ["今の状態","主要指標","今回のポイント","自己ベスト","詳細分析","対戦相手分析を見る"])assert.match(script,new RegExp(label));
+test("player top restores the trend graph and keeps Player-origin detail entry",()=>{
+  for(const label of ["今の状態","主要指標","推移グラフ","今回のポイント","自己ベスト","詳細分析","対戦相手分析を見る"])assert.match(script,new RegExp(label));
   assert.doesNotMatch(script,/試合別分析を見る/);
   assert.doesNotMatch(script,/data-analysis-player aria-label="プレーヤー"/);
-  assert.doesNotMatch(script,/data-b4-trend-select|analysis-b4-trend|function chart/);
+  assert.match(script,/data-b4-trend-select|analysis-b4-trend|function chart/);
   assert.match(script,/window\.openMatchDetailV1\?\.\(best\.dataset\.b4MatchId\)/);
   assert.match(script,/window\.openRivalAnalysisForPlayerV832\?\.\(rival\.dataset\.b4Rival\)/);
 });
@@ -36,7 +36,7 @@ test("missing analysis values are not coerced to zero",()=>{
   assert.match(script,/value==null\?"—"/);
   assert.match(script,/比較できません/);
   assert.match(script,/データなし/);
-  assert.doesNotMatch(script,/data-b4-chart/);
+  assert.match(script,/data-b4-chart/);
 });
 
 test("all disciplines use the approved metric sets",()=>{

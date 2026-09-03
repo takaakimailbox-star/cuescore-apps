@@ -30,7 +30,8 @@ test("Phase 4 keeps aggregate SSOT and moves Personal Best presentation to resul
   assert.match(js,/displayedBestsFor\(records,player,state\.discipline\)/);
   assert.match(js,/active\.state\.tab==="analysis"\?analysisView/);
   assert.match(js,/data-hub-full-analysis/);
-  assert.doesNotMatch(js,/data-hub-trends|ファール率|foulRate/);
+  assert.match(js,/data-hub-trends/);
+  assert.doesNotMatch(js,/ファール率|foulRate/);
 });
 
 test("Phase 5 consolidates browsing, information, registration, and editing in Player Hub",()=>{

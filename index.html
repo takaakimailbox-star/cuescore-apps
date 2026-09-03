@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="./analysis-final-rc.css" />
   <link rel="stylesheet" href="./analysis-build4.css" />
   <link rel="stylesheet" href="./player-detail-build6.css" />
-  <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build49-player-hub-scroll-portal" />
+  <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build53-original-trends" />
   <link rel="stylesheet" href="./player-detail-build8.css" />
   <style id="build8PlayerTitleV1">
   .pd8-title-with-icon{display:flex!important;align-items:center;justify-content:center;gap:7px}.pd8-title-with-icon img{width:25px;height:25px;flex:0 0 auto}
@@ -8623,7 +8623,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build49-player-hub-scroll-portal"></script>
+  <script src="./demo-data.js?v=2.0-build53-original-trends"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19153,7 +19153,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build49-player-hub-scroll-portal";
+    const PWA_VERSION = "2.0-build53-original-trends";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -25551,7 +25551,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     <button class="analytics-home-back-v2" type="button" data-analytics-home-back aria-label="ホームへ戻る"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg></button>
     <main class="analytics-scroll-v1">
       <div class="analytics-brand-v1"><span data-cuescore-logo="horizontal-black"></span></div>
-      <header class="analytics-head-v1"><div><h1>分析</h1><p>あなたの成長や傾向を数値で確認できます</p></div><div class="analytics-cloud-v1" id="analyticsCloudV1">${icon.cloud}<span>クラウド同期：確認中</span></div></header>
+      <header class="analytics-head-v1"><div><h1>分析</h1><p>あなたの成長や傾向をグラフと数値で確認できます</p></div><div class="analytics-cloud-v1" id="analyticsCloudV1">${icon.cloud}<span>クラウド同期：確認中</span></div></header>
       <div class="analytics-controls-v1"><div class="analytics-selector-v1">
         <div class="analytics-field-v1"><label>プレーヤー</label><select id="analyticsPlayerV1" aria-label="プレーヤー"></select></div>
         <div class="analytics-field-v1"><label>期間</label><button type="button" id="analyticsPeriodV1">全期間</button></div>
@@ -25561,11 +25561,16 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       <div class="analytics-summary-head-v1"><div><h2>サマリー</h2><p id="analyticsSummaryMetaV1"></p></div><p class="analytics-summary-count-v1" id="analyticsCountV1"></p></div>
       <section class="analytics-metrics-v1" id="analyticsMetricsV1"></section>
       <p class="analytics-period-note-v1" id="analyticsPreviousNoteV1"></p>
+      <div class="analytics-trend-head-v1"><h2>推移グラフ</h2></div>
+      <div class="analytics-tabs-v1" id="analyticsTabsV1"><button type="button" data-metric="winRate" class="is-active">勝率</button><button type="button" data-metric="shotRate">シュート成功率</button><button type="button" data-metric="safetyRate">セーフティ成功率</button></div>
+      <section class="analytics-card-v1 analytics-chart-card-v1" id="analyticsChartV1"></section>
+      <p class="analytics-chart-note-v1" id="analyticsChartNoteV1"></p>
       <section class="analytics-card-v1 analytics-ai-v1"><h2>AI分析サマリー</h2><div class="analytics-ai-grid-v1" id="analyticsAiV1"></div></section>
     </main>
   </div>`);
   const $ = selector => screen.querySelector(selector);
   $("[data-analytics-home-back]")?.addEventListener("click",()=>document.getElementById("rankingsBackBtn")?.click());
+  let chartMetric = "winRate";
   let returnFromFilter = false;
   const dateOf = record => { const d=new Date(record?.endedAt||record?.playedAt||record?.startedAt||0); return Number.isNaN(d.getTime())?null:d; };
   const playerKey = player => player?.id ? `id:${player.id}` : `name:${String(player?.name||"").trim()}`;
@@ -25607,6 +25612,17 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     if(Number.isFinite(now)&&Number.isFinite(before)){const raw=now-before,shown=key==="highRun"||key==="totalBreaks"?Math.round(raw):Number(raw.toFixed(1));const improved=lower?raw<0:raw>0;deltaClass=raw===0?"":(improved?"up":"down");deltaText=`前期比 ${raw>0?"+":""}${shown}${key.includes("Rate")||key==="winRate"?"%":""}`;}
     return `<article class="analytics-metric-v1"><div class="analytics-metric-name-v1">${name}</div><div class="analytics-metric-value-v1">${icon.metric}${value}</div><div class="analytics-metric-delta-v1 ${deltaClass}">${deltaText}</div></article>`;
   }
+  function monthly(records,choice,key){
+    const groups=new Map();records.forEach(r=>{const d=dateOf(r),side=sideFor(r,choice);if(!d||!side)return;const k=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`;if(!groups.has(k))groups.set(k,[]);groups.get(k).push(r);});
+    return [...groups.entries()].sort((a,b)=>a[0].localeCompare(b[0])).map(([keyLabel,items])=>({label:`${Number(keyLabel.slice(5))}月`,value:summarize(items,choice)[key]})).filter(p=>Number.isFinite(p.value));
+  }
+  function chart(points){
+    if(!points.length)return'<div class="analytics-chart-empty-v1">表示できる実データがありません。</div>';
+    const w=620,h=190,p={l:42,r:26,t:18,b:32},x=i=>points.length===1?(w/2):p.l+i*(w-p.l-p.r)/(points.length-1),y=v=>p.t+(100-Math.max(0,Math.min(100,v)))*(h-p.t-p.b)/100;
+    const grid=[0,25,50,75,100].map(v=>`<line x1="${p.l}" y1="${y(v)}" x2="${w-p.r}" y2="${y(v)}" stroke="#e6e4df"/><text x="${p.l-8}" y="${y(v)+4}" text-anchor="end" fill="#777" font-size="11">${v}</text>`).join("");
+    const path=points.map((pt,i)=>`${i?"L":"M"}${x(i)},${y(pt.value)}`).join(" ");
+    return `<svg class="analytics-chart-v1" viewBox="0 0 ${w} ${h}" role="img" aria-label="分析推移グラフ">${grid}<path d="${path}" fill="none" stroke="#813715" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>${points.map((pt,i)=>`<circle cx="${x(i)}" cy="${y(pt.value)}" r="4" fill="#813715"/><text x="${x(i)}" y="${h-8}" text-anchor="middle" fill="#555" font-size="11">${esc(pt.label)}</text>`).join("")}<text x="${w-p.r}" y="${Math.max(14,y(points.at(-1).value)-9)}" text-anchor="end" fill="#813715" font-size="12" font-weight="700">${val(points.at(-1).value,"%",1)}</text></svg>`;
+  }
   function cloud(){
     const node=$("#analyticsCloudV1"),label=node.querySelector("span");let config={},sync={},pending=null;try{config=JSON.parse(localStorage.getItem("rotationScoreboard.supabaseConfig.v1")||"{}");sync=JSON.parse(localStorage.getItem("rotationScoreboard.cloudSyncState.v1")||"{}");pending=JSON.parse(localStorage.getItem("rotationScoreboard.cloudPendingSave.v1")||"null")}catch(_){}
     node.classList.remove("is-muted","is-warning");if(pending){label.textContent="クラウド同期：要確認";node.classList.add("is-warning")}else if(!navigator.onLine){label.textContent="クラウド同期：オフライン";node.classList.add("is-muted")}else if(config.projectUrl&&config.publishableKey&&(Number(sync.revision)>0||sync.payloadHash)){label.textContent="クラウド同期：最新"}else{label.textContent="クラウド同期：未設定";node.classList.add("is-muted")}
@@ -25620,6 +25636,8 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       $("#analyticsCountV1").textContent="";
       $("#analyticsMetricsV1").innerHTML='<div class="analytics-chart-empty-v1">プレーヤーを登録すると分析を表示できます。</div>';
       $("#analyticsPreviousNoteV1").textContent="";
+      $("#analyticsChartV1").innerHTML='<div class="analytics-chart-empty-v1">表示できる実データがありません。</div>';
+      $("#analyticsChartNoteV1").textContent="";
       $("#analyticsAiV1").innerHTML="";
       return
     }
@@ -25636,6 +25654,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       metricCard("総ブレイク数",val(current.totalBreaks,"",0),current.totalBreaks,previous.totalBreaks,"totalBreaks")
     ].join("");
     if(range.start&&range.end){const span=Math.max(1,range.end-range.start),pe=new Date(range.start.getTime()-1),ps=new Date(pe.getTime()-span);$("#analyticsPreviousNoteV1").textContent=`※ 前期は、前期間（${fmtDate(ps)}〜${fmtDate(pe,true)}）との比較です`}else $("#analyticsPreviousNoteV1").textContent="";
+    const points=monthly(records,choice,chartMetric);$("#analyticsChartV1").innerHTML=chart(points);const metricName={winRate:"勝率",shotRate:"シュート成功率",safetyRate:"セーフティ成功率"}[chartMetric];$("#analyticsChartNoteV1").textContent=`※ 実データがある月の${metricName}の推移`;
     let growth=null,insight=null;try{growth=buildPlayerGrowthAnalysisV740(records,choice);insight=buildPlayerInsightsV750(records,choice,growth)}catch(_){}
     const good=[],focus=[];(growth?.metrics||[]).filter(m=>m.direction==="up").slice(0,2).forEach(m=>good.push(`${m.label}が改善しています（${m.raw>0?"+":""}${Number(m.raw).toFixed(1)}）`));(growth?.metrics||[]).filter(m=>m.direction==="down").slice(0,2).forEach(m=>focus.push(`${m.label}を確認しましょう（${m.raw>0?"+":""}${Number(m.raw).toFixed(1)}）`));
     if(!good.length&&insight?.strength)good.push(insight.strength);if(!focus.length&&insight?.focus)focus.push(insight.focus);
@@ -25646,6 +25665,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     cloud();
   }
   $("#analyticsPlayerV1").addEventListener("change",render);$("#analyticsPeriodV1").addEventListener("click",()=>$("#analyticsFilterV1").click());$("#analyticsFilterV1").addEventListener("click",()=>{returnFromFilter=true;document.getElementById("openStatisticsFilterBtn")?.click()});
+  $("#analyticsTabsV1").addEventListener("click",e=>{const b=e.target.closest("[data-metric]");if(!b)return;chartMetric=b.dataset.metric;$("#analyticsTabsV1").querySelectorAll("button").forEach(x=>x.classList.toggle("is-active",x===b));render()});
   document.getElementById("openRankingsBtn")?.addEventListener("click",()=>{render();$(".analytics-scroll-v1")?.scrollTo(0,0)});
   ["statisticsFilterBackBtn","statisticsFilterApplyBtn"].forEach(id=>document.getElementById(id)?.addEventListener("click",()=>{if(!returnFromFilter)return;returnFromFilter=false;setTimeout(()=>document.getElementById("openRankingsBtn")?.click(),0)}));
   screen.addEventListener("click",e=>{const key=e.target.closest("[data-analytics-nav]")?.dataset.analyticsNav;if(!key||key==="analytics")return;document.getElementById("rankingsBackBtn")?.click();if(key==="history")document.getElementById("recordsBtn")?.click();if(key==="player")document.getElementById("playerManagementBtn")?.click();if(key==="settings")document.getElementById("settingsBtn")?.click()});
@@ -27451,7 +27471,7 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .settings-formal-title-v1 [data-cuescore-logo]{width:174px;height:28px}
 .settings-app-brand-v1 [data-cuescore-logo]{width:132px;height:24px}
 .analytics-brand-v1 [data-cuescore-logo]{width:128px;height:24px}
-.cue-logo-splash-v1{position:fixed;z-index:10000;inset:0;display:grid;place-items:center;background:#111111;opacity:1;transition:opacity .22s ease;pointer-events:auto}
+.cue-logo-splash-v1{position:fixed!important;z-index:2147483647!important;inset:0!important;width:100vw!important;height:100dvh!important;display:grid;place-items:center;background:#111111;opacity:1;transition:opacity .22s ease;pointer-events:auto}
 .cue-logo-splash-v1 [data-cuescore-logo]{width:min(78vw,420px);height:56px}
 .cue-logo-splash-v1.is-hidden{opacity:0;pointer-events:none}
 .cue-about-dialog-v1{width:min(calc(100% - 32px),430px);padding:0;border:0;border-radius:22px;background:#fff;color:#111;box-shadow:0 24px 80px rgba(0,0,0,.28)}
@@ -28122,7 +28142,7 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   <script src="./analytics-build4-metrics.js"></script>
   <script src="./analysis-build4.js"></script>
   <script src="./player-detail-build6.js"></script>
-  <script src="./ui-revision-v12.js?v=2.0-build49-player-hub-scroll-portal"></script>
+  <script src="./ui-revision-v12.js?v=2.0-build53-original-trends"></script>
   <script src="./final-ui-build18.js"></script>
   <link rel="stylesheet" href="./navigation-shell-phase1.css" />
   <script src="./navigation-shell-phase1.js"></script>
@@ -28134,8 +28154,8 @@ body.cue-modal-lock-v1{overflow:hidden!important}
     window.CueScoreEditableSelectionV1=Object.freeze({isEditableTarget:editable});
   })();
   </script>
-  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build49-player-hub-scroll-portal" />
-  <script src="./navigation-phase2-6.js?v=2.0-build49-player-hub-scroll-portal"></script>
+  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build53-original-trends" />
+  <script src="./navigation-phase2-6.js?v=2.0-build53-original-trends"></script>
 </body>
 </html>
 

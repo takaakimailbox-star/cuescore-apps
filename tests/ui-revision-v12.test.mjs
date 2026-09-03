@@ -13,7 +13,7 @@ test("three points disciplines remove one-match highest score from displayed sel
 
 test("discipline detail removes foul rate and all trends UI",()=>{
   assert.doesNotMatch(detail,/ファール率|foulRate|data-pd7-metric-trend|data-pd7-trend-modal/);
-  assert.doesNotMatch(revision,/グラフで見る|pd12Trends|openTrends|closeTrends/);
+  assert.match(revision,/pd12Trends|openTrends|closeTrends/);
 });
 
 test("opponent records are fixed-context, unsorted by controls, and recency ordered",()=>{

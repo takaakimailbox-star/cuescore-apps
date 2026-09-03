@@ -12,8 +12,8 @@ const nativeBuild=readFileSync(new URL("../scripts/build-native-web.mjs",import.
 const require=createRequire(import.meta.url);
 const metrics=require("../analytics-build4-metrics.js");
 
-test("full-screen trend presentation is removed",()=>{
-  assert.doesNotMatch(revision,/pd12Trends|openTrends|グラフで見る/);
+test("full-screen trend presentation is restored without legacy inline controls",()=>{
+  assert.match(revision,/pd12Trends|openTrends/);
   assert.match(revision,/removeAttribute\("data-pd7-metric-trend"\)/);
 });
 
@@ -59,5 +59,5 @@ test("Build 18 compatibility asset precedes the Phase 1 shell and remains bundle
   assert.ok(index.indexOf("final-ui-build18.js")<index.indexOf("navigation-shell-phase1.js"));
   assert.match(nativeBuild,/final-ui-build18\.js/);
   assert.match(sw,/final-ui-build18\.js/);
-  assert.match(sw,/2\.0-build49-player-hub-scroll-portal/);
+  assert.match(sw,/2\.0-build53-original-trends/);
 });

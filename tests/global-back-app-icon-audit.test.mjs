@@ -20,7 +20,7 @@ test("all current full-screen Back controls participate in the common contract",
     assert.match(html,new RegExp(selector.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")));
   }
   assert.match(html,/\.player-journey-back-v2,[\s\S]*?\.match-detail-back-v1,[\s\S]*?\.analytics-home-back-v2\{/);
-  assert.doesNotMatch(revision,/pd12-trends-back/);
+  assert.match(revision,/pd12-trends-back[\s\S]*closeTrends/);
 });
 
 test("Web, Home Screen and iOS use the adopted CueScore icon family",()=>{

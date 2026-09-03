@@ -1,5 +1,27 @@
 # CueScore Apps Current State
 
+## Build 53 従来版Player推移画面の忠実復元（2026年9月3日）
+
+- Build 52のPlayer Hub内埋め込みselector式graphは従来の採用表示と異なっていた。Git履歴から従来の専用`pd12Trends`画面を特定し、「プレーヤー情報 → 分析 → 推移」から開くfull-screen構成へ復元した。
+- 競技別に勝率と主要指標を1cardずつ縦表示し、対象となる全保存試合を古い順に累積集計する。graph pointの日付／値表示と左上Backも復元。ファール率／ファール平均は表示へ戻していない。
+- 全自動test `355 pass / 0 fail / 0 skipped`、native web／iOS copied assets同期済み。Version `1.0`／Build `53`。Internal TestFlight配布結果はupload完了後に追記する。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build53_Original_Player_Trends_Restore_2026-09-03.md`。
+
+## Build 52 Player情報「分析」タブ 推移グラフ復元（2026年9月3日）
+
+- Build 51は「プレーヤー情報 → 分析」タブではなく、その先の別Player分析screenへ復元していたため実iPhoneでFAIL。最終表示ownerである`navigation-phase2-6.js`のPlayer Hub分析タブへ推移グラフを直接復元した。
+- 勝率と競技別主要指標を直近10試合で切替表示。ファール率／ファール平均は表示指標・selectorとも削除状態を維持。Build 51の起動スプラッシュ全面表示修正も維持した。
+- 全自動test `355 pass / 0 fail / 0 skipped`、native web／iOS copied assets同期、Release Archive／export成功。Version `1.0`／Build `52`。Delivery／Build ID `21fb3302-17a0-41b3-a0eb-a48ab26af2a0`、processing／import `VALID`、`usesNonExemptEncryption=false`、全Build自動対象のInternal group `CueScore Internal Testers`への配布を確認。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build52_Player_Hub_Analysis_Trend_Restore_2026-09-03.md`。
+
+## Build 51 Player分析推移グラフ／起動スプラッシュ修正（2026年9月3日）
+
+- Build 50で復元先を正式分析screenと誤認していたため、実際の「プレーヤー情報 → 分析」を描画するBuild 4分析layerへ推移グラフを復元。勝率と競技別主要指標を切替表示し、ファール率／ファール平均はUIへ戻していない。
+- 起動中の黒いCueScoreスプラッシュを最上位かつ`100dvh`全面表示に固定し、読み込み完了前のBottom Navigationが下端に露出しないよう修正。全自動test PASS、native web／iOS copied assets同期、Release Archive／export成功。Version `1.0`／Build `51`。Delivery／Build ID `4672179a-4d2e-45dd-84d4-f1cdcac926f4`、processing／import `VALID`、`usesNonExemptEncryption=false`、全Build自動対象のInternal group `CueScore Internal Testers`への配布を確認。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build51_Player_Analysis_Trend_And_Splash_Fix_2026-09-03.md`。
+
+## Build 50 分析画面 推移グラフ復元（2026年9月3日）
+
+- Product Owner指示により、正式な分析画面へ勝率／シュート成功率／セーフティ成功率の月別推移グラフを復元。ファール率／ファール平均は削除状態を維持した。
+- Player Hubの重複推移リンクやPlayer Detailの旧グラフは復元せず、正式分析画面をSSOTとして維持。全自動test `353 pass / 0 fail / 0 skipped`、native web同期、Simulator Debug／Release archive成功。Version `1.0`／Build `50`。Delivery／Build ID `a779a3bd-6d7c-4b9d-8f42-7bc38f31c405`、processing／import `VALID`、`usesNonExemptEncryption=false`、全Build自動対象のInternal group `CueScore Internal Testers`への配布を確認。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build50_Analytics_Trend_Restore_Implementation_2026-09-03.md`。
+
 ## Build 49 自己ベスト横1列／Match Detail入力修正（2026年9月3日）
 
 - Build 48実iPhoneで自己ベスト配置の意図違いと、Player起点Match Detailのscroll不能が継続。自己ベストを横1列へ変更した。

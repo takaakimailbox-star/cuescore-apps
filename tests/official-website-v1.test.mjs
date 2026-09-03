@@ -34,6 +34,6 @@ test("all six implemented games use official icons",()=>{
 test("GitHub Pages website does not replace the app runtime",()=>{
   const app=read("index.html"),project=read("ios/App/App.xcodeproj/project.pbxproj");
   assert.match(app,/id="cueScoreApp"|CueScore Apps v1\.0/);
-  assert.match(project,/CURRENT_PROJECT_VERSION = 49;/);
+  assert.match(project,/CURRENT_PROJECT_VERSION = 53;/);
   assert.doesNotMatch(app,/Billiards Score &amp; Match Tracker/);
 });

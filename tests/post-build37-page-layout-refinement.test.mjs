@@ -23,12 +23,13 @@ test("target pages use the adopted hierarchy without changing Match Card C",()=>
   assert.match(nav,/data-hub-all-matches[^\n]+stopImmediatePropagation\(\)[^\n]+CueScorePlayerJourneyV2/);
 });
 
-test("Player Information analysis ends at Self Best without redundant links",()=>{
+test("Player Information analysis links to the restored dedicated trends page",()=>{
   const analysis=nav.slice(nav.indexOf("function analysisView"),nav.indexOf("function render(playerId"));
   assert.ok(analysis.indexOf("今の状態")<analysis.indexOf("主要指標"));
-  assert.ok(analysis.indexOf("主要指標")<analysis.indexOf("今回のポイント"));
+  assert.ok(analysis.indexOf("主要指標")<analysis.indexOf("data-hub-trends"));
+  assert.ok(analysis.indexOf("data-hub-trends")<analysis.indexOf("今回のポイント"));
   assert.ok(analysis.indexOf("今回のポイント")<analysis.indexOf("自己ベスト"));
-  assert.doesNotMatch(analysis,/詳しい分析|対戦相手分析|推移|グラフ|data-hub-trends|ファール率|foulRate/);
+  assert.doesNotMatch(analysis,/詳しい分析|対戦相手分析|ファール率|foulRate/);
   assert.match(nav,/data-hub-full-analysis/);
   assert.match(nav,/data-hub-opponents/);
 });

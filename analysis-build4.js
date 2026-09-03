@@ -30,6 +30,21 @@
   const fmt=(key,value)=>value==null?"—":percentKeys.has(key)?`${Number(value).toFixed(1)}%`:key==="average"?Number(value).toFixed(3).replace(/0+$/,"").replace(/\.$/,""):String(Math.round(value*100)/100);
   const metricDefs=discipline=>(metricsByDiscipline[discipline]||[]).map(key=>({key,label:labels[key],higher:true}));
   const recordDate=record=>{const d=new Date(record?.endedAt||record?.playedAt||record?.startedAt||0);return Number.isNaN(d.getTime())?"日付なし":`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,"0")}/${String(d.getDate()).padStart(2,"0")}`;};
+  function recordMetric(record,player,key,discipline,h){
+    const side=h.side(record,player);if(!side)return null;
+    if(key==="winRate")return h.won(record,side)?100:0;
+    const one=api.aggregate([record],player,h);
+    const value=one?.[key];
+    return Number.isFinite(value)?value:null;
+  }
+  function chart(values,key,records){
+    if(!values.some(Number.isFinite))return '<div class="analysis-b4-empty">表示できる実データがありません。</div>';
+    const finite=values.filter(Number.isFinite),percent=percentKeys.has(key),rawMin=Math.min(...finite),rawMax=Math.max(...finite),min=percent?0:Math.min(0,rawMin),max=percent?100:Math.max(1,rawMax),range=Math.max(1,max-min),w=620,h=210,left=48,right=22,top=18,bottom=38;
+    const x=index=>values.length===1?w/2:left+index*(w-left-right)/(values.length-1),y=value=>h-bottom-((value-min)/range)*(h-top-bottom);
+    const ticks=percent?[100,75,50,25,0]:[max,(max+min)/2,min],dates=records.map(recordDate),labelEvery=Math.max(1,Math.ceil(values.length/5));
+    const paths=[];let current=[];values.forEach((value,index)=>{if(Number.isFinite(value))current.push(`${x(index)},${y(value)}`);else if(current.length){paths.push(current);current=[];}});if(current.length)paths.push(current);
+    return `<div class="analysis-b4-chart-wrap"><svg class="analysis-b4-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(labels[key])}の推移グラフ">${ticks.map(tick=>`<line x1="${left}" y1="${y(tick)}" x2="${w-right}" y2="${y(tick)}" stroke="#e6e6e2" stroke-width="1"/><text x="${left-8}" y="${y(tick)+4}" text-anchor="end" fill="#777" font-size="10">${percent?`${Math.round(tick)}%`:Math.round(tick*100)/100}</text>`).join("")}<line x1="${left}" y1="${top}" x2="${left}" y2="${h-bottom}" stroke="#aaa"/><line x1="${left}" y1="${h-bottom}" x2="${w-right}" y2="${h-bottom}" stroke="#aaa"/>${paths.map(points=>`<polyline points="${points.join(" ")}" fill="none" stroke="#218238" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`).join("")}${values.map((value,index)=>Number.isFinite(value)?`<circle cx="${x(index)}" cy="${y(value)}" r="5" fill="#218238"/>`:"").join("")}${values.map((value,index)=>Number.isFinite(value)&&(index===0||index===values.length-1||index%labelEvery===0)?`<text x="${x(index)}" y="${h-10}" text-anchor="middle" fill="#777" font-size="10">${esc(dates[index])}</text>`:"").join("")}</svg></div>`;
+  }
   function pointText(current,previous,defs){
     if(previous.games<1)return{strength:"比較できません",challenge:"比較できません"};
     const changes=defs.map(def=>{const now=current[def.key],before=previous[def.key];if(!Number.isFinite(now)||!Number.isFinite(before))return null;const raw=now-before;return{...def,raw,score:def.higher?raw:-raw};}).filter(Boolean);
@@ -47,20 +62,23 @@
     const summary=current.games?`直近${current.games}試合　${current.wins}勝${current.losses}敗　勝率${Math.round(current.winRate)}%`:"データなし";
     const playerName=esc(player.name||"Player"),playerId=esc(player.id||"");
     const disciplineOptions=[...document.querySelectorAll('[data-analysis-discipline] option')].map(option=>`<option value="${esc(option.value)}" ${option.value===discipline?"selected":""}>${esc(option.textContent)}</option>`).join("");
+    const trendKeys=["winRate",...defs.map(def=>def.key)],trendRecords=records.slice(0,10).reverse();
     view.innerHTML=`
       <section class="analysis-v2-card analysis-b4-context"><div><strong title="${playerName}">${playerName}</strong><span>プレーヤー分析</span></div><div><select class="analysis-v2-select" data-analysis-discipline aria-label="競技">${disciplineOptions}</select></div></section>
       <section class="analysis-v2-card analysis-b4-now"><div class="analysis-b4-heading"><h2>今の状態</h2><span>${status}</span></div><strong>${summary}</strong><small>条件を満たす保存済み試合だけを指標へ使用しています</small></section>
       <h2 class="analysis-v2-section-title">主要指標</h2><section class="analysis-b4-metrics">${defs.map(def=>`<article><strong>${fmt(def.key,current[def.key])}</strong><span>${def.label}</span></article>`).join("")}</section>
+      <section class="analysis-v2-card analysis-b4-trend"><div class="analysis-b4-heading"><h2>推移グラフ</h2><span>直近${trendRecords.length}試合</span></div><label class="analysis-b4-trend-picker"><span>表示指標</span><select data-b4-trend-select aria-label="推移グラフの表示指標">${trendKeys.map(key=>`<option value="${key}">${labels[key]}</option>`).join("")}</select></label><div data-b4-chart>${chart(trendRecords.map(record=>recordMetric(record,player,"winRate",discipline,h)),"winRate",trendRecords)}</div></section>
       <section class="analysis-v2-card analysis-b4-points"><h2>今回のポイント</h2><div><strong>強み</strong><span>${points.strength}</span></div><div><strong>次の課題</strong><span>${points.challenge}</span></div></section>
       <h2 class="analysis-v2-section-title">自己ベスト</h2>${bests.length?`<section class="analysis-b4-bests">${bests.map(best=>`<button type="button" data-b4-match-id="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${best.key==="score"&&discipline==="jpa9"?"1試合最多得点":bestLabels[best.key]}</span><small>${esc(labels[discipline])}・${recordDate(best.record)}</small><i>試合を見る ›</i></button>`).join("")}</section>`:'<section class="analysis-v2-card analysis-b4-empty">データなし</section>'}
       <h2 class="analysis-v2-section-title">詳細分析</h2><section class="analysis-b4-links"><button type="button" data-b4-rival="${playerId}"><span>対戦相手分析を見る</span><b>›</b></button></section>`;
-    view.dataset.build4Rendered="true";
+    view.dataset.build4Rendered="true";view._build4={player,discipline,records:trendRecords,helpers:h};
   }
   root.addEventListener("click",event=>{
     const best=event.target.closest("[data-b4-match-id]");if(best){window.openMatchDetailV1?.(best.dataset.b4MatchId);return;}
     const rival=event.target.closest("[data-b4-rival]");if(rival){window.openRivalAnalysisForPlayerV832?.(rival.dataset.b4Rival);return;}
   });
+  root.addEventListener("change",event=>{const picker=event.target.closest("[data-b4-trend-select]");if(!picker)return;const state=view._build4;if(!state)return;const key=picker.value,values=state.records.map(record=>recordMetric(record,state.player,key,state.discipline,state.helpers));view.querySelector("[data-b4-chart]").innerHTML=chart(values,key,state.records);});
   new MutationObserver(()=>queueMicrotask(render)).observe(view,{childList:true});
   queueMicrotask(render);
-  window.CueScoreBuild4Analytics={render};
+  window.CueScoreBuild4Analytics={render,chart,recordMetric};
 })();

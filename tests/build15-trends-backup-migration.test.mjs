@@ -34,6 +34,7 @@ test("individual deletion backups contain only the deleted entity",()=>{
   assert.match(html,/Array\.isArray\(scopedData\?\.matchRecords\)/);
 });
 
-test("analysis no longer exposes trend chart code",()=>{
-  assert.doesNotMatch(analysis,/function chart|data-b4-chart|analysis-b4-trend|推移/);
+test("player analysis exposes its restored inline trend chart",()=>{
+  assert.match(analysis,/function chart|data-b4-chart|analysis-b4-trend|推移グラフ/);
+  assert.doesNotMatch(analysis,/foulRate|ファール率/);
 });
