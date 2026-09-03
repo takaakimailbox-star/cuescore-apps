@@ -1,5 +1,10 @@
 # CueScore Apps Current State
 
+## Build 56 試合履歴の長い日本語氏名表示修正（2026年9月3日）
+
+- 全体の試合履歴カードで氏名領域を再配分し、390px幅でも「小瀬古 賢太郎」「一ノ瀬 沙夜香」を省略せず1行表示する。score、Race to、競技アイコン、chevronは維持し、氏名とscoreの重なりを防止した。
+- 全自動test `360 pass / 0 fail / 0 skipped`。390×844で両氏名の`clientWidth = scrollWidth = 71px`、card overflow 0、scoreとの間隔6pxを確認。native web／iOS assets同期、Release Archive／IPA export成功。Version `1.0`／Build `56`。source commit `15baa3f`、Build ID `a2074d86-1c43-49fc-9ff0-82433a5e18e2`。輸出コンプライアンス回答後に`テスト準備完了`、Internal group `CueScore Internal Testers`（内部、テスター1名）への配布を確認。実iPhone受入はpending。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build56_History_Name_Width_2026-09-03.md`。
+
 ## Build 55 Player登録／編集操作復元（2026年9月3日）
 
 - iPhone WebViewでプレーヤー登録／編集／アバター選択の操作footerがBottom Navigation下へ押し出される問題を修正。各subflowを`100dvh`の全画面ownerへ統一し、表示中はBottom Navigationを非表示化した。
