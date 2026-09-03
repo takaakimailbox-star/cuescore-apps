@@ -4,7 +4,7 @@
 
 - Build 44実iPhoneで左上Backは正常だが、自己ベスト／最近の試合からのEdge Swipeはanimation後にDetailへ戻りFAIL。Build 44のowner選択が`recordDetailBackBtn.getClientRects()`を要求し、Player起点WebViewで背後のPlayer Backを誤選択する余地が残っていた。
 - `body.match-detail-visible-v1`を表示状態／Edge Swipe ownerのSSOTとし、矩形・hidden祖先・overlay属性に依存せずMatch Detail Backを選択する。Swipe完了は左上Backと同じ実行時`closeFormalMatchDetailV2()`へ直結し、Build 39 exact origin復元を維持する。
-- 全自動test `363 pass / 0 fail / 0 skipped`。Simulator Debug／Release成功、390×844 overflow 0、console error 0。Version `1.0`／Build `45`。実iPhone受入はPendingでPASS扱いにしない。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build45_MatchDetail_Body_State_Owner_Fix_Implementation_2026-09-03.md`。
+- 全自動test `363 pass / 0 fail / 0 skipped`。Simulator Debug／Release成功、390×844 overflow 0、console error 0。Version `1.0`／Build `45`。source/archive commit `c13c75d`、Build upload ID `53a22d6e-d1ec-4384-a664-e22778be0bc3`、processing `VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`配布対象を確認。実iPhone受入はPendingでPASS扱いにしない。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build45_MatchDetail_Body_State_Owner_Fix_Implementation_2026-09-03.md`。
 
 ## Build 44 Player-origin Match Detail visible owner修正（2026年9月3日）
 
