@@ -4,7 +4,7 @@
 
 - Product Owner指示により、Player Hub、競技別分析、正式な分析画面からファール率表示と推移グラフ一式（表示、選択、タップ、modal）を撤去した。
 - 保存済み試合、ファールevent、集計互換性のための内部計算は維持。試合結果／Match Detailの得点推移は分析画面とは別機能のため維持した。
-- 全自動test `343 pass / 0 fail / 0 skipped`、native web同期、Simulator Debug `BUILD SUCCEEDED`。Version `1.0`／Build `47`。Internal TestFlight配布と実iPhone確認はPending。External TestFlight、App Review、審査用追加、一般公開は実施しない。実装記録：`docs/implementation/CueScore_Build47_Analysis_Foul_Rate_Trend_Removal_Implementation_2026-09-03.md`。
+- 全自動test `343 pass / 0 fail / 0 skipped`、native web同期、Simulator Debug `BUILD SUCCEEDED`。Version `1.0`／Build `47`。source/archive commit `69a3dc1`、Delivery／Build ID `089a907c-9eb9-4d1a-842c-3cfeacdc0109`、processing／import `VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`配布対象を確認。実iPhone受入はPending。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build47_Analysis_Foul_Rate_Trend_Removal_Implementation_2026-09-03.md`。
 
 ## Build 46 全Swipe機能撤去（2026年9月3日）
 

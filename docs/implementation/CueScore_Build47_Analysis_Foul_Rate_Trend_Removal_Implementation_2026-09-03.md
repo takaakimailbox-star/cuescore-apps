@@ -22,6 +22,11 @@
 - Build 47専用regression testで対象UI不在と内部データ互換性を固定。
 - native web生成とCapacitor iOS copy完了。
 - iOS Simulator Debug: `BUILD SUCCEEDED`
+- source/archive commit: `69a3dc1`
+- Delivery／Build ID: `089a907c-9eb9-4d1a-842c-3cfeacdc0109`
+- App Store Connect processing／import: `VALID`
+- `usesNonExemptEncryption=false`
+- Internal group `CueScore Internal Testers`: Build 47を含むことを確認
 - 実iPhone確認: Pending
 
 ## 配布境界
