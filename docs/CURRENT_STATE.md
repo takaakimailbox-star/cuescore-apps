@@ -1,5 +1,10 @@
 # CueScore Apps Current State
 
+## Build 55 Player登録／編集操作復元（2026年9月3日）
+
+- iPhone WebViewでプレーヤー登録／編集／アバター選択の操作footerがBottom Navigation下へ押し出される問題を修正。各subflowを`100dvh`の全画面ownerへ統一し、表示中はBottom Navigationを非表示化した。
+- 登録は`キャンセル／登録`、編集は`キャンセル／変更`を下端固定し、Avatar chooserの`この画像に決定`もsafe area内へ固定。全自動test `359 pass / 0 fail / 0 skipped`、native web／iOS assets同期、Release Archive／IPA export成功。Version `1.0`／Build `55`。source/archive commit `42825a7`、Xcode `TestFlight Internal Only`で`App 1.0 (55) uploaded`、Delivery UUID `33855546-8d97-4c55-b858-c0218f2a45f4`を確認。Apple processingと実iPhone受入はpending。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build55_Player_Editor_Actions_2026-09-03.md`。
+
 ## Build 54 推移グラフ可読性改善（2026年9月3日）
 
 - Build 53の専用推移画面／累積集計を維持し、cardをcompact化。最新値を右上へ表示し、日付を`M/D`へ短縮、同日試合へ連番を付与、左右端切れを防止した。point tapの日付／値表示を復元し、推移画面ではBottom Navigationを非表示にした。
