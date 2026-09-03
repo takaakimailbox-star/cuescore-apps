@@ -4,7 +4,7 @@
 
 - Build 52のPlayer Hub内埋め込みselector式graphは従来の採用表示と異なっていた。Git履歴から従来の専用`pd12Trends`画面を特定し、「プレーヤー情報 → 分析 → 推移」から開くfull-screen構成へ復元した。
 - 競技別に勝率と主要指標を1cardずつ縦表示し、対象となる全保存試合を古い順に累積集計する。graph pointの日付／値表示と左上Backも復元。ファール率／ファール平均は表示へ戻していない。
-- 全自動test `355 pass / 0 fail / 0 skipped`、native web／iOS copied assets同期済み。Version `1.0`／Build `53`。Internal TestFlight配布結果はupload完了後に追記する。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build53_Original_Player_Trends_Restore_2026-09-03.md`。
+- 全自動test `355 pass / 0 fail / 0 skipped`、native web／iOS copied assets同期、Release Archive／IPA export成功。Version `1.0`／Build `53`。source/archive commit `cb5e8e9`、Delivery／Build ID `3abc24da-d454-43ca-b5e5-9e6c4cc26b2a`、processing／import `VALID`、`usesNonExemptEncryption=false`、全Build自動対象のInternal group `CueScore Internal Testers`への配布を確認。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build53_Original_Player_Trends_Restore_2026-09-03.md`。
 
 ## Build 52 Player情報「分析」タブ 推移グラフ復元（2026年9月3日）
 
