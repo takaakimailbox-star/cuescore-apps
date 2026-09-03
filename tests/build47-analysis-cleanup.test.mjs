@@ -31,6 +31,19 @@ test("Build 53 Player Info analysis opens the original cumulative per-metric tre
   assert.doesNotMatch(revision,/foulRate|ファール率/);
 });
 
+test("Build 54 makes the dedicated trends compact, readable, and full screen",()=>{
+  const analysis=read("analysis-build4.js"),revision=read("ui-revision-v12.js"),css=read("ui-revision-v12.css");
+  assert.match(analysis,/data-b4-point/);
+  assert.match(analysis,/data-b4-point-callout/);
+  assert.match(analysis,/getMonth\(\)\+1.*getDate\(\)/);
+  assert.match(analysis,/right=48/);
+  assert.match(revision,/pd12-trend-heading/);
+  assert.match(revision,/formatTrendValue/);
+  assert.match(revision,/pd12-trends-open/);
+  assert.match(css,/\.pd12-chart-scroll \.analysis-b4-chart \{ height:154px/);
+  assert.match(css,/\.pd12-trends-open \.cue-phase1-tab-bar/);
+});
+
 test("Build 51 splash covers the complete viewport above every app surface",()=>{
   const index=read("index.html");
   assert.match(index,/\.cue-logo-splash-v1\{position:fixed!important;z-index:2147483647!important;inset:0!important;width:100vw!important;height:100dvh!important/);

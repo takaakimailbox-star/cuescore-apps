@@ -20,6 +20,8 @@
   const detail=()=>window.CueScoreBuild6PlayerDetail;
   const chartApi=()=>window.CueScoreBuild4Analytics;
   const aggregateApi=()=>window.CueScoreBuild4Metrics;
+  const percentKeys=new Set(["winRate","shotRate","breakInRate","masuwariRate"]);
+  const formatTrendValue=(key,value)=>value==null?"—":percentKeys.has(key)?`${Number(value).toFixed(1)}%`:key==="average"?Number(value).toFixed(3).replace(/0+$/g,"").replace(/\.$/,""):String(Math.round(Number(value)*100)/100);
   const side=(record,player)=>typeof window.playerSideInRecord==="function"?Number(window.playerSideInRecord(record,player))||0:0;
   const won=(record,s)=>Number(record?.winner||record?.winnerSide||record?.result?.winnerSide||0)===Number(s);
   const metric=(record,s)=>typeof window.savedPlayerMetricsV113==="function"?window.savedPlayerMetricsV113(record,s)||{}:{};
@@ -33,7 +35,7 @@
   trends.className="pd12-trends hidden";trends.id="pd12Trends";trends.setAttribute("aria-hidden","true");
   trends.innerHTML='<header class="pd12-trends-header"><button class="pd12-trends-back" type="button" aria-label="分析に戻る">‹</button><h1></h1><span></span></header><main class="pd12-trends-scroll"></main>';
   document.body.appendChild(trends);
-  function closeTrends(){trends.classList.add("hidden");trends.setAttribute("aria-hidden","true");document.getElementById("playerStatsOverlay")?.setAttribute("aria-hidden","false");}
+  function closeTrends(){trends.classList.add("hidden");trends.setAttribute("aria-hidden","true");document.body.classList.remove("pd12-trends-open");document.getElementById("playerStatsOverlay")?.setAttribute("aria-hidden","false");}
   function openTrends(){
     const state=detail()?.state;if(!state?.player||!state.discipline)return;
     const active=state.discipline,records=(typeof window.recordsForRegisteredPlayer==="function"?window.recordsForRegisteredPlayer(state.player):[]).filter(record=>discipline(record)===active).sort((a,b)=>new Date(a?.endedAt||a?.playedAt||a?.startedAt||0)-new Date(b?.endedAt||b?.playedAt||b?.startedAt||0));
@@ -41,9 +43,10 @@
     trends.querySelector("main").innerHTML=(metricOrder[active]||["winRate"]).map(key=>{
       const values=records.map((_,index)=>aggregateApi()?.aggregate?.(records.slice(0,index+1),state.player,helpers)?.[key]??null);
       const graph=chartApi()?.chart?.(values,key,records)||'<div class="pd7-empty">データなし</div>';
-      return `<section class="pd12-trend-card"><h2>${labels[key]}</h2><small>${records.length?`${records.length}試合`:'データなし'}</small><div class="pd12-chart-scroll">${graph}</div></section>`;
+      const latest=[...values].reverse().find(Number.isFinite);
+      return `<section class="pd12-trend-card"><div class="pd12-trend-heading"><span><h2>${labels[key]}</h2><small>${records.length?`${records.length}試合`:'データなし'}</small></span><strong>${formatTrendValue(key,latest)}</strong></div><div class="pd12-chart-scroll">${graph}</div></section>`;
     }).join("");
-    document.getElementById("playerStatsOverlay")?.setAttribute("aria-hidden","true");trends.classList.remove("hidden");trends.setAttribute("aria-hidden","false");trends.querySelector("main").scrollTop=0;trends.querySelector("button")?.focus();
+    document.getElementById("playerStatsOverlay")?.setAttribute("aria-hidden","true");document.body.classList.add("pd12-trends-open");trends.classList.remove("hidden");trends.setAttribute("aria-hidden","false");trends.querySelector("main").scrollTop=0;trends.querySelector("button")?.focus();
   }
   trends.addEventListener("click",event=>{if(event.target.closest(".pd12-trends-back")){closeTrends();return;}const point=event.target.closest("[data-b4-point]");if(point){const output=point.closest(".analysis-b4-chart-wrap")?.querySelector("[data-b4-point-callout]");if(output){output.textContent=`${point.dataset.b4Date}　${point.dataset.b4Value}`;output.hidden=false;}}});
 

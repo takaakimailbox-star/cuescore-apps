@@ -27,13 +27,16 @@
 .pd12-trends-header { display:grid; grid-template-columns:48px minmax(0,1fr) 48px; align-items:center; min-height:58px; padding-top:env(safe-area-inset-top); background:#fff; border-bottom:1px solid #deded9; }
 .pd12-trends-back { display:grid; place-items:center; min-width:44px; min-height:44px; border:0; background:transparent; color:#171717; font-size:36px; }
 .pd12-trends-header h1 { margin:0; overflow:hidden; font-size:18px; text-align:center; text-overflow:ellipsis; white-space:nowrap; }
-.pd12-trends-scroll { flex:1; overflow-y:auto; padding:14px 12px calc(24px + env(safe-area-inset-bottom)); }
-.pd12-trend-card { margin:0 0 12px; padding:14px 10px 12px; border:1px solid #e2e2dd; border-radius:16px; background:#fff; }
-.pd12-trend-card h2 { margin:0 4px 8px; font-size:16px; }
-.pd12-trend-card small { display:block; margin:0 4px 8px; color:#777; }
+.pd12-trends-open .cue-phase1-tab-bar { display:none !important; pointer-events:none !important; }
+.pd12-trends-scroll { flex:1; overflow-y:auto; padding:10px 12px calc(18px + env(safe-area-inset-bottom)); }
+.pd12-trend-card { margin:0 0 10px; padding:12px 10px 10px; border:1px solid #e2e2dd; border-radius:16px; background:#fff; }
+.pd12-trend-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:0 4px 4px; }
+.pd12-trend-card h2 { margin:0; font-size:17px; }
+.pd12-trend-card small { display:block; margin-top:3px; color:#777; font-size:11px; }
+.pd12-trend-heading strong { font-size:24px; line-height:1; white-space:nowrap; }
 .pd12-chart-scroll { overflow-x:hidden; overscroll-behavior-x:contain; }
 .pd12-chart-scroll .analysis-b4-chart-wrap { min-width:0; }
-.pd12-chart-scroll .analysis-b4-chart { height:208px; margin:0; overflow:visible; }
+.pd12-chart-scroll .analysis-b4-chart { height:154px; margin:0; overflow:visible; }
 .pd12-chart-scroll .analysis-b4-y-label,
 .pd12-chart-scroll .analysis-b4-x-label { fill:#242424; font-size:11px; font-weight:750; }
 .pd12-chart-scroll .analysis-b4-axis-caption { fill:#555; font-size:9px; font-weight:700; }
@@ -41,6 +44,8 @@
 .pd12-chart-scroll .analysis-b4-axis { stroke:#777; stroke-width:1.2; }
 .pd12-chart-scroll .analysis-b4-plot-line { stroke:#171717; stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
 .pd12-chart-scroll .analysis-b4-plot-point { fill:#fff; stroke:#171717; stroke-width:3; }
+.analysis-b4-point-callout { display:block; min-height:20px; margin:-3px 4px 0; color:#555; font-size:11px; font-weight:750; text-align:center; }
+.analysis-b4-point-callout[hidden] { visibility:hidden; }
 .journey-summary-v2, .journey-segment-v2 { display:none !important; }
 .journey-player-v2 .journey-discipline-v2 select { display:none !important; }
 .pd12-fixed-discipline { color:#666; font-size:12px; font-weight:800; }
