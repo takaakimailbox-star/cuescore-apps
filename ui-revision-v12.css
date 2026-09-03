@@ -135,6 +135,28 @@
 #playerMatchHistoryV2 .match-card-c-v37.match-card-c-all-matches-v37,#playerMatchHistoryV2 .match-card-c-v37.match-card-c-opponent-v37,.records-list .record-card.match-card-c-v37.match-card-c-global-v37{height:56px!important;min-height:56px!important;max-height:56px!important;padding:5px 16px!important}
 @media(max-width:390px){.hub-match-row-v2.match-card-c-recent-v37{grid-template-columns:38px 26px minmax(64px,1fr) 34px minmax(76px,auto) 9px;gap:5px;padding-left:16px!important;padding-right:16px!important}.hub-match-row-v2.match-card-c-recent-v37 .match-card-c-result-v37{width:34px}.hub-match-row-v2.match-card-c-recent-v37 .match-card-c-score-v37{min-width:76px}.match-card-c-avatar-v37{width:26px;height:26px}.match-card-c-score-v37{font-size:18px}.match-card-c-global-v37 .record-match-player-v3 strong{max-width:62px}}
 
+/* Build 56: keep a common Japanese 3-character family + 3-character given
+   name readable on one line in the global Match History card. */
+@media(max-width:390px){
+  .records-list .record-card.match-card-c-global-v37{
+    grid-template-columns:minmax(0,1fr) minmax(50px,auto) 10px!important;
+    column-gap:6px!important;
+  }
+  .match-card-c-global-v37 .record-matchup{gap:3px!important}
+  .match-card-c-global-v37 .record-match-player-v3{gap:2px!important}
+  .match-card-c-global-v37 .record-match-avatar-v3{
+    width:22px!important;
+    height:22px!important;
+    flex-basis:22px!important;
+  }
+  .match-card-c-global-v37 .record-match-player-v3 strong{
+    max-width:none!important;
+    font-size:11.5px!important;
+    letter-spacing:-.015em;
+  }
+  .match-card-c-global-v37 .record-final-score{min-width:50px!important}
+}
+
 /* Post-Build 37: adopted page hierarchy around the protected Match Card C. */
 #playerOpponentRecordsV2,#playerMatchHistoryV2{--page-layout-ink:#171717;--page-layout-muted:#767672;--page-layout-line:#e5e5e2;--page-layout-surface:#fff}
 #playerOpponentRecordsV2 .player-journey-scroll-v2,
