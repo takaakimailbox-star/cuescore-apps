@@ -86,7 +86,7 @@ test("player registration and editing use a full-screen screen without autofocus
   assert.match(html,/\.player-editor-dialog-v1\{[^}]*width:100%;height:100%;max-height:none/);
   assert.match(html,/\.player-editor-close-v1\{[^}]*width:64px;min-height:44px/);
   assert.match(html,/aria-label="戻る">‹ 戻る/);
-  assert.match(html,/existingSave\.textContent=editing\?"保存":"登録"/);
+  assert.match(html,/existingSave\.textContent=editing\?"変更":"登録"/);
   assert.match(html,/existingDelete\?\.classList\.toggle\("hidden",!editing\)/);
   assert.match(html,/document\.activeElement\?\.blur\?\.\(\)/);
   assert.doesNotMatch(html,/setTimeout\(\(\)=>playerEditorName\.focus\(\),0\)/);

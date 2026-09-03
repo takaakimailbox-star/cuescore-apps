@@ -11310,6 +11310,9 @@ let matchRecordsRawCacheV152 = null;
     });
     chooser.openV5=()=>{pending=normalizePlayerAvatarV2(playerEditorAvatarV2);renderPending();chooser.classList.remove("hidden");};
     chooser.setPhotoV5=avatar=>{pending=avatar;renderPending();};
+    const syncAvatarChooserViewportV55=()=>document.body.classList.toggle("player-avatar-chooser-visible-v55",!chooser.classList.contains("hidden"));
+    new MutationObserver(syncAvatarChooserViewportV55).observe(chooser,{attributes:true,attributeFilter:["class"]});
+    syncAvatarChooserViewportV55();
     return chooser;
   }
 
@@ -26006,9 +26009,9 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .player-editor-modal-v1 .player-editor-race{width:72px;height:44px;border:1px solid #d8d8d4;border-radius:10px;background:#f7f7f5;color:#171717;text-align:center;font-size:18px;font-weight:750}
 .player-editor-modal-v1 .player-editor-range{width:100%;accent-color:var(--modal-accent)}
 .player-editor-modal-v1 .player-editor-delete{width:100%;min-height:42px;margin-top:18px;border:1px solid #c92a2a;border-radius:10px;background:#fff;color:#c92a2a;font:inherit;font-weight:700}
-.player-editor-actions-v1{display:block;width:min(100%,620px);margin:0 auto;padding:10px 18px max(14px,env(safe-area-inset-bottom));border-top:1px solid #ecece9;background:#fff;box-sizing:border-box}
+.player-editor-actions-v1{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;width:min(100%,620px);margin:0 auto;padding:10px 18px max(14px,env(safe-area-inset-bottom));border-top:1px solid #ecece9;background:#fff;box-sizing:border-box}
 .player-editor-cancel-v1,.player-editor-modal-v1 .player-editor-save{min-height:46px;border-radius:10px;font:inherit;font-size:16px;font-weight:760}
-.player-editor-cancel-v1{display:none!important}.player-editor-modal-v1 .player-editor-save{width:100%;border:1px solid var(--modal-accent);background:var(--modal-accent);color:#fff}
+.player-editor-cancel-v1{display:block;border:1px solid var(--modal-accent);background:#fff;color:var(--modal-accent)}.player-editor-modal-v1 .player-editor-save{width:100%;border:1px solid var(--modal-accent);background:var(--modal-accent);color:#fff}
 .player-editor-modal-v1 .player-editor-save:disabled{opacity:.5}
 
 .statistics-filter-screen.statistics-filter-modal-v1{
@@ -26114,15 +26117,20 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   function syncPlayerModal(){
     const open=!editor.classList.contains("hidden");
     playerOverlay.classList.toggle("player-editor-modal-v1",open);
+    document.body.classList.toggle("player-editor-visible-v55",open);
     document.body.classList.toggle("cue-modal-lock-v1",open||!filter.classList.contains("hidden"));
     playerMain?.toggleAttribute("inert",open);
-    if(!open)return;
+    if(!open){
+      document.getElementById("playerAvatarChooserV2")?.classList.add("hidden");
+      document.body.classList.remove("player-avatar-chooser-visible-v55");
+      return;
+    }
     playerOverlay.classList.add("player-management-formal-v1");
     playerMain?.classList.add("hidden");
     const editing=document.getElementById("playerLibraryTitle")?.textContent.includes("編集");
     document.getElementById("playerEditorModalTitleV1").textContent=editing?"プレーヤー編集":"プレーヤー登録";
     document.getElementById("playerEditorModalCopyV1").innerHTML=editing?"":'新しいプレーヤーを登録します。<br>あとからいつでも編集できます。';
-    existingSave.textContent=editing?"保存":"登録";
+    existingSave.textContent=editing?"変更":"登録";
     existingDelete?.classList.toggle("hidden",!editing);
     setViewportHeight();document.activeElement?.blur?.();editor.tabIndex=-1;requestAnimationFrame(()=>editor.focus({preventScroll:true}));
   }
@@ -26737,6 +26745,15 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .player-avatar-groups-v2 [data-avatar-category-v5="male"] img{background:#edf5ff}.player-avatar-groups-v2 [data-avatar-category-v5="female"] img{background:#fff0f4}.player-avatar-groups-v2 [data-avatar-category-v5="animal"] img{background:#edf8f1}.player-avatar-groups-v2 [data-avatar-category-v5="flower"] img{background:#fff4ee}.player-avatar-groups-v2 [data-avatar-category-v5="ball"] img{background:#f2f2ef;object-fit:contain}
 .player-editor-primary-v1{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:3px 0 0;padding:6px 2px;border:0;border-radius:0;background:transparent;color:#555553;cursor:pointer}.player-editor-primary-v1>span{display:flex;min-width:0;flex-direction:column;gap:2px}.player-editor-primary-v1 strong{font-size:13px;font-weight:650}.player-editor-primary-v1 small{color:#888884;font-size:10px;line-height:1.3}.player-editor-primary-v1 input{width:20px;height:20px;margin:0;accent-color:#181817}.player-editor-id-v1{display:flex;align-items:flex-start;gap:10px;margin:-5px 0 14px;color:#777;font-size:11px}.player-editor-id-v1[hidden]{display:none}.player-editor-id-v1 code{overflow-wrap:anywhere;color:#444;font-size:10px}.player-primary-badge-v1{display:inline-flex;align-items:center;margin-left:8px;padding:2px 7px;border:1px solid #bdbdb9;border-radius:999px;background:#f3f3f1;color:#333;font-size:10px;font-weight:800;line-height:1.2;vertical-align:middle}.player-management-name-v1 .player-primary-badge-v1{position:relative;top:-1px}
 .player-avatar-chooser-v2 footer{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:10px 12px max(12px,env(safe-area-inset-bottom));border-top:1px solid #e6e6e2;background:#fff}.player-avatar-chooser-v2 footer button{min-height:48px;padding:4px;border:1px solid #c9c9c5;border-radius:10px;background:#fff;font-size:12px;font-weight:650}.player-avatar-chooser-v2 footer button.is-selected{border-color:#171717;background:#f1f1ef}.player-avatar-chooser-v2 footer button:last-child{border-color:#d7b879;background:#efd09b;color:#171717}
+/* Build 55: player editor subflows own the whole visual viewport. Their
+   persistent actions must never resolve underneath the app tab bar on iOS. */
+body.player-editor-visible-v55 .cue-phase1-tab-bar,
+body.player-avatar-chooser-visible-v55 .cue-phase1-tab-bar{display:none!important;pointer-events:none!important}
+body.player-editor-visible-v55 #playerLibraryOverlay,
+body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;min-height:100dvh!important}
+.player-editor-modal-v1 .player-editor{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;min-height:100dvh!important}
+.player-editor-modal-v1 .player-editor-dialog-v1{height:100dvh!important;min-height:100dvh!important}
+.player-avatar-chooser-v2{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;min-height:100dvh!important;z-index:10030!important}
 .player-editor-confirm-v2{position:absolute;z-index:21;inset:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:#fff;color:#171717}.player-editor-confirm-v2.hidden{display:none!important}.player-editor-confirm-v2 header{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;min-height:58px;padding-top:env(safe-area-inset-top);border-bottom:1px solid #e6e6e2;text-align:center}.player-editor-confirm-v2 header button{height:44px;border:0;background:transparent;font-size:30px}.player-editor-confirm-body-v2{padding:22px 18px;overflow:auto}.player-editor-confirm-body-v2>img{display:block;width:150px;height:150px;margin:0 auto;border-radius:50%;object-fit:cover}.player-editor-confirm-body-v2>h2{margin:12px 0 30px;font-size:17px;text-align:center}.player-editor-confirm-body-v2 section{padding:0 0 18px;margin:0 0 18px;border-bottom:1px solid #e8e8e5}.player-editor-confirm-body-v2 small{display:block;margin-bottom:8px;color:#555;font-size:13px}.player-editor-confirm-body-v2 strong{font-size:19px}.player-editor-confirm-body-v2 p{margin:0;font-size:16px;line-height:1.6}.player-editor-confirm-v2 footer{display:grid;gap:9px;padding:12px 14px max(14px,env(safe-area-inset-bottom));background:#fff}.player-editor-confirm-v2 footer button{min-height:52px;border:1px solid #c9c9c5;border-radius:10px;background:#fff;font-size:16px;font-weight:700}.player-editor-confirm-v2 footer button:first-child{border-color:#171717;background:#171717;color:#fff}
 .player-management-formal-v1 .player-management-row-v1{grid-template-columns:58px minmax(0,1fr) 18px;min-height:82px}
 .player-management-formal-v1 .player-management-avatar-v1{width:56px;height:56px}.player-management-formal-v1 .player-management-copy-v2{display:flex;min-width:0;flex-direction:column;gap:3px}.player-management-formal-v1 .player-management-memo-v2{display:-webkit-box;overflow:hidden;color:#555;font-size:12px;line-height:1.35;-webkit-box-orient:vertical;-webkit-line-clamp:2}.player-management-formal-v1 .player-management-menu-v2{font-size:17px;letter-spacing:2px;text-align:center}
