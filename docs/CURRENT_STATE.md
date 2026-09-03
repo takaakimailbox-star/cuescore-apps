@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## Build 49 自己ベスト横1列／Match Detail入力修正（2026年9月3日）
+
+- Build 48実iPhoneで自己ベスト配置の意図違いと、Player起点Match Detailのscroll不能が継続。自己ベストを横1列へ変更した。
+- Match Detailはmodal順序競合で`aria-hidden=true`／`pointer-events:none`へ戻されていたことを特定。Detailをbody直下へ移し、DOM順を最前面SSOTに変更し、表示中のBottom Navigationを無効化した。
+- 390×844で自己ベスト3件横1行、Detailの`pointer-events=auto`、下方向操作`scrollTop 0 → 520`、Back後のPlayer／Rotation／試合tab復元を確認。全自動test `352 pass / 0 fail / 0 skipped`、native web同期、Simulator Debug `BUILD SUCCEEDED`。Version `1.0`／Build `49`。実iPhone受入はPending。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build49_Horizontal_Bests_And_MatchDetail_Input_Fix_Implementation_2026-09-03.md`。
+
 ## Build 48 Player Hub表示／Match Detailスクロール修正（2026年9月3日）
 
 - Product Ownerの実iPhone報告を基に、最近の試合cardの勝敗badge／大きなscore重なり、9-Ball／10-Ball自己ベスト構成、自己ベスト1列表示、Player起点Match Detailの下方向scrollを修正した。

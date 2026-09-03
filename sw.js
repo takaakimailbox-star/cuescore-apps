@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-build48-player-hub-fixes";
+const APP_VERSION = "2.0-build49-player-hub-scroll-portal";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-build48-player-hub-fixes",
+  "./demo-data.js?v=2.0-build49-player-hub-scroll-portal",
   "./manifest.webmanifest",
   "./privacy.html",
   "./terms.html",
@@ -17,13 +17,13 @@ const APP_SHELL = [
   "./analysis-build4.css",
   "./player-detail-build6.js",
   "./player-detail-build6.css",
-  "./ui-revision-v12.js?v=2.0-build48-player-hub-fixes",
+  "./ui-revision-v12.js?v=2.0-build49-player-hub-scroll-portal",
   "./final-ui-build18.js",
-  "./ui-revision-v12.css?v=2.0-build48-player-hub-fixes",
+  "./ui-revision-v12.css?v=2.0-build49-player-hub-scroll-portal",
   "./navigation-shell-phase1.css",
   "./navigation-shell-phase1.js",
-  "./navigation-phase2-6.css?v=2.0-build48-player-hub-fixes",
-  "./navigation-phase2-6.js?v=2.0-build48-player-hub-fixes",
+  "./navigation-phase2-6.css?v=2.0-build49-player-hub-scroll-portal",
+  "./navigation-phase2-6.js?v=2.0-build49-player-hub-scroll-portal",
   "./player-detail-build8.css",
   "./docs/official/app-store-v1.0/public/CueScore_Privacy_Policy_v1.0_Official.md",
   "./docs/official/app-store-v1.0/public/CueScore_Terms_of_Use_v1.0_Official.md",
