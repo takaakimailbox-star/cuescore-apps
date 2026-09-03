@@ -3,7 +3,7 @@
 ## Build 54 推移グラフ可読性改善（2026年9月3日）
 
 - Build 53の専用推移画面／累積集計を維持し、cardをcompact化。最新値を右上へ表示し、日付を`M/D`へ短縮、同日試合へ連番を付与、左右端切れを防止した。point tapの日付／値表示を復元し、推移画面ではBottom Navigationを非表示にした。
-- percent目盛り0〜100%／25%刻み、非percent指標の実data追従、ファール率削除を維持。全自動test `356 pass / 0 fail / 0 skipped`、native web／iOS copied assets同期済み。Version `1.0`／Build `54`。Internal TestFlight結果はupload完了後に追記する。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build54_Readable_Trends_2026-09-03.md`。
+- percent目盛り0〜100%／25%刻み、非percent指標の実data追従、ファール率削除を維持。全自動test `356 pass / 0 fail / 0 skipped`、native web／iOS copied assets同期、Release Archive／IPA export成功。Version `1.0`／Build `54`。source/archive commit `cc6fb58`、Delivery／Build ID `f1f4b399-4468-4730-9308-46ce4a6e6b43`、processing／import `VALID`、`usesNonExemptEncryption=false`、全Build自動対象のInternal group `CueScore Internal Testers`への配布を確認。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build54_Readable_Trends_2026-09-03.md`。
 
 ## Build 53 従来版Player推移画面の忠実復元（2026年9月3日）
 

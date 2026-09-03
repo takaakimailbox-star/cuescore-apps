@@ -18,6 +18,10 @@ Date: 2026-09-03
 ## 検証・配布
 
 - 全Node回帰test: `356 pass / 0 fail / 0 skipped`
-- native web生成、Capacitor iOS同期済み。
-- Internal TestFlight結果はupload完了後に追記する。
+- native web生成、Capacitor iOS同期、署名付きRelease Archive、IPA export成功。
+- source/archive commit: `cc6fb58`
+- Delivery / Build ID: `f1f4b399-4468-4730-9308-46ce4a6e6b43`
+- Apple processing / import: `VALID`
+- `usesNonExemptEncryption=false`
+- Internal group `CueScore Internal Testers`は全Build自動アクセスで、Build 54の配布対象化をAPIで確認。
 - External TestFlight、App Review、審査用build追加、一般公開は行わない。
