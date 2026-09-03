@@ -35,7 +35,7 @@ test("Player journey visibility synchronizes hidden, aria-hidden, and hit testin
 });
 
 test("changed layout assets use a fresh app-shell version",()=>{
-  assert.match(html,/navigation-phase2-6\.css\?v=2\.0-build57-rotation-dry-break/);
-  assert.match(html,/navigation-phase2-6\.js\?v=2\.0-build57-rotation-dry-break/);
-  assert.match(sw,/APP_VERSION = "2\.0-build57-rotation-dry-break"/);
+  assert.match(html,/navigation-phase2-6\.css\?v=2\.0-build58-history-race-label/);
+  assert.match(html,/navigation-phase2-6\.js\?v=2\.0-build58-history-race-label/);
+  assert.match(sw,/APP_VERSION = "2\.0-build58-history-race-label"/);
 });

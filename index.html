@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="./analysis-final-rc.css" />
   <link rel="stylesheet" href="./analysis-build4.css" />
   <link rel="stylesheet" href="./player-detail-build6.css" />
-  <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build57-rotation-dry-break" />
+  <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build58-history-race-label" />
   <link rel="stylesheet" href="./player-detail-build8.css" />
   <style id="build8PlayerTitleV1">
   .pd8-title-with-icon{display:flex!important;align-items:center;justify-content:center;gap:7px}.pd8-title-with-icon img{width:25px;height:25px;flex:0 0 auto}
@@ -8623,7 +8623,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build57-rotation-dry-break"></script>
+  <script src="./demo-data.js?v=2.0-build58-history-race-label"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -16193,13 +16193,13 @@ let matchRecordsRawCacheV152 = null;
       const disciplineV2 = recordDisciplineV2(record);
       const gameIconV2 = recordsDisciplineDefsV2.find(item => item.id === disciplineV2)?.asset || recordsDisciplineDefsV2[2].asset;
       const goal1V2 = Number(p1.goal)||0, goal2V2 = Number(p2.goal)||0;
-      const raceV2 = goal1V2 === goal2V2 ? goal1V2 : `${goal1V2} / ${goal2V2}`;
+      const raceLabelV2 = goal1V2 === goal2V2 ? `Race to ${goal1V2}` : `Race ${goal1V2}/${goal2V2}`;
       const p1ProfileV3 = recordPlayerV3(p1), p2ProfileV3 = recordPlayerV3(p2);
       const cardClassV37 = window.CueScoreMatchCardC?.classes?.("global") || "match-card-c-v37 match-card-c-global-v37";
       return `<button class="record-card ${cardClassV37}" type="button" data-record-id="${escapeRecordText(record.id)}">
         <span class="record-date-compact">${formatRecordListDate(record.endedAt||record.playedAt)}</span>
         <span class="record-matchup"><span class="record-match-player-v3"><span class="record-match-avatar-v3">${playerAvatarHtmlV2(p1ProfileV3)}</span><strong>${escapeRecordText(p1.name||"Player1")}</strong></span><small>vs</small><span class="record-match-player-v3"><span class="record-match-avatar-v3">${playerAvatarHtmlV2(p2ProfileV3)}</span><strong>${escapeRecordText(p2.name||"Player2")}</strong></span></span>
-        <span class="record-race-v2"><img class="record-game-icon-v2" src="${gameIconV2}" alt="">Race to ${raceV2}</span>
+        <span class="record-race-v2"><img class="record-game-icon-v2" src="${gameIconV2}" alt="">${raceLabelV2}</span>
         <span class="record-final-score">${resultScore}</span>
         <span class="record-chevron-v1" aria-hidden="true">›</span>
       </button>`;
@@ -19165,7 +19165,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build57-rotation-dry-break";
+    const PWA_VERSION = "2.0-build58-history-race-label";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -28168,7 +28168,7 @@ body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!impo
   <script src="./analytics-build4-metrics.js"></script>
   <script src="./analysis-build4.js"></script>
   <script src="./player-detail-build6.js"></script>
-  <script src="./ui-revision-v12.js?v=2.0-build57-rotation-dry-break"></script>
+  <script src="./ui-revision-v12.js?v=2.0-build58-history-race-label"></script>
   <script src="./final-ui-build18.js"></script>
   <link rel="stylesheet" href="./navigation-shell-phase1.css" />
   <script src="./navigation-shell-phase1.js"></script>
@@ -28180,8 +28180,8 @@ body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!impo
     window.CueScoreEditableSelectionV1=Object.freeze({isEditableTarget:editable});
   })();
   </script>
-  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build57-rotation-dry-break" />
-  <script src="./navigation-phase2-6.js?v=2.0-build57-rotation-dry-break"></script>
+  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build58-history-race-label" />
+  <script src="./navigation-phase2-6.js?v=2.0-build58-history-race-label"></script>
 </body>
 </html>
 

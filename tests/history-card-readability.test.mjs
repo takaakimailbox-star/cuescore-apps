@@ -11,7 +11,7 @@ test("global history keeps seven tabs, both player lanes, score, chevron, and ca
   assert.equal((index.match(/<button[^>]+data-records-discipline-v2=/g) || []).length, 7);
   assert.match(index, /record-matchup[^`]+record-match-player-v3[^`]+record-match-player-v3/);
   assert.match(index, /record-final-score/);
-  assert.match(index, /record-race-v2"><img class="record-game-icon-v2"[^>]+>Race to/);
+  assert.match(index, /record-race-v2"><img class="record-game-icon-v2"[^>]+>\$\{raceLabelV2\}/);
   assert.match(index, /record-chevron-v1/);
   assert.match(index, /installRecordsDelegatedClickV154\(\)/);
 });
