@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="./analysis-final-rc.css" />
   <link rel="stylesheet" href="./analysis-build4.css" />
   <link rel="stylesheet" href="./player-detail-build6.css" />
-  <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build45-body-owner" />
+  <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build46-no-swipe" />
   <link rel="stylesheet" href="./player-detail-build8.css" />
   <style id="build8PlayerTitleV1">
   .pd8-title-with-icon{display:flex!important;align-items:center;justify-content:center;gap:7px}.pd8-title-with-icon img{width:25px;height:25px;flex:0 0 auto}
@@ -8623,7 +8623,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build45-body-owner"></script>
+  <script src="./demo-data.js?v=2.0-build46-no-swipe"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -15264,8 +15264,6 @@ let matchRecordsRawCacheV152 = null;
         </div>
       </div>`;
 
-    let touchStartX = 0;
-    let touchStartY = 0;
     let resultPageV780 = 0;
     const goResultPageV780 = page => {
       resultPageV780 = Math.max(0, Math.min(3, page));
@@ -15273,18 +15271,6 @@ let matchRecordsRawCacheV152 = null;
       const pages = el("resultPagesTrack")?.querySelectorAll(".result-page");
       pages?.forEach((pageEl, index) => { if (index !== resultPageV780) pageEl.scrollTop = 0; });
     };
-    const viewport = el("resultPagesViewport");
-    viewport?.addEventListener("touchstart", event => {
-      touchStartX = event.touches[0].clientX;
-      touchStartY = event.touches[0].clientY;
-    }, {passive:true});
-    viewport?.addEventListener("touchend", event => {
-      const diffX = event.changedTouches[0].clientX - touchStartX;
-      const diffY = event.changedTouches[0].clientY - touchStartY;
-      if (Math.abs(diffX) < 35 || Math.abs(diffX) <= Math.abs(diffY)) return;
-      goResultPageV780(resultPageV780 + (diffX < 0 ? 1 : -1));
-    }, {passive:true});
-
     function closeGameMemoDialog() {
       const dialog = el("gameMemoDialog");
       if (dialog) dialog.remove();
@@ -15978,8 +15964,6 @@ let matchRecordsRawCacheV152 = null;
     overlay.classList.remove("hidden");
 
     let historicalPageV67 = 0;
-    let touchStartX = 0;
-    let touchStartY = 0;
     const goHistoricalPageV67 = page => {
       historicalPageV67 = Math.max(0, Math.min(HISTORY_PAGE_COUNT_V67 - 1, Number(page) || 0));
       setHistoricalResultPage(historicalPageV67);
@@ -15993,18 +15977,6 @@ let matchRecordsRawCacheV152 = null;
         overlay.querySelector(`[data-history-tab-v67="${historicalPageV67}"]`)?.focus();
       }, {signal: historicalSignalV159});
     });
-    const body = overlay.querySelector(".history-renew-body-v67");
-    body?.addEventListener("touchstart", event => {
-      touchStartX = event.touches[0].clientX;
-      touchStartY = event.touches[0].clientY;
-    }, {passive:true, signal: historicalSignalV159});
-    body?.addEventListener("touchend", event => {
-      const dx = event.changedTouches[0].clientX - touchStartX;
-      const dy = event.changedTouches[0].clientY - touchStartY;
-      if (Math.abs(dx) >= 55 && Math.abs(dx) > Math.abs(dy) * 1.35) {
-        goHistoricalPageV67(historicalPageV67 + (dx < 0 ? 1 : -1));
-      }
-    }, {passive:true, signal: historicalSignalV159});
     el("recordDetailBackBtn")?.addEventListener("click", cleanupHistoricalRecordV159, {signal: historicalSignalV159});
     el("recordDetailDeleteBtnV35")?.addEventListener("click",()=>deleteHistoricalRecordV35(recordId), {signal: historicalSignalV159});
     goHistoricalPageV67(0);
@@ -19181,7 +19153,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build45-body-owner";
+    const PWA_VERSION = "2.0-build46-no-swipe";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22867,7 +22839,7 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
         const moved=Math.hypot(event.clientX-pointerDownX,event.clientY-pointerDownY);
         if(event.isPrimary!==false&&performance.now()-pointerDownAt<900&&moved<18){event.preventDefault();requestClose(event,"tap");}
       },{signal});
-      detailBack.addEventListener("click",event=>{trace("click",event);requestClose(event,detailBack.dataset.cueBackSource==="swipe"?"swipe":"click");},{signal});
+      detailBack.addEventListener("click",event=>{trace("click",event);requestClose(event,"click");},{signal});
     }
     document.getElementById("officialResultReturnGameV1")?.addEventListener("click",()=>{
       document.body.classList.remove("match-detail-visible-v1");
@@ -27477,228 +27449,10 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   .break-scratch-icon-btn-v1 img{width:46px;height:46px}
 }
 </style>
-<style id="cueScoreEdgeBackMotionV2">
-body.cue-edge-back-animating-v2>.app,body.cue-edge-back-animating-v2>#playerOpponentRecordsV2,body.cue-edge-back-animating-v2>#playerMatchHistoryV2,body.cue-edge-back-animating-v2>.pd12-trends-overlay{
-  pointer-events:none!important;
-  animation:cue-edge-back-out-v2 220ms cubic-bezier(.22,.72,.28,1) forwards!important;
-  will-change:transform,opacity;
-}
+<style id="cueScoreBackTapFeedbackV46">
 .player-stats-back,.player-library-back,.player-journey-back-v2,.match-detail-back-v1{touch-action:manipulation;transition:opacity 80ms ease,transform 80ms ease}
 .player-stats-back:active,.player-library-back:active,.player-journey-back-v2:active,.match-detail-back-v1:active,.cue-back-feedback-v11{opacity:.45!important;transform:scale(.92)!important}
-body.cue-edge-back-tracking-v3>.app,body.cue-edge-back-tracking-v3>#playerOpponentRecordsV2,body.cue-edge-back-tracking-v3>#playerMatchHistoryV2,body.cue-edge-back-tracking-v3>.pd12-trends-overlay{pointer-events:none!important;transform:translateX(var(--cue-edge-back-x,0px));opacity:calc(1 - var(--cue-edge-back-progress,0)*.22);will-change:transform,opacity;transition:none!important}
-body.cue-edge-back-cancelling-v3>.app,body.cue-edge-back-cancelling-v3>#playerOpponentRecordsV2,body.cue-edge-back-cancelling-v3>#playerMatchHistoryV2,body.cue-edge-back-cancelling-v3>.pd12-trends-overlay{transition:transform 180ms cubic-bezier(.22,.72,.28,1),opacity 180ms ease!important}
-@keyframes cue-edge-back-out-v2{
-  from{transform:translateX(0);opacity:1}
-  to{transform:translateX(34vw);opacity:0}
-}
-@media(prefers-reduced-motion:reduce){
-  body.cue-edge-back-animating-v2 .app{animation-duration:1ms!important}
-}
 </style>
-<script>
-// CueScore iPhone edge-back gesture v1.0 — delegates to the visible existing back button.
-(() => {
-  if (window.__cueScoreEdgeBackV1) return;
-  window.__cueScoreEdgeBackV1 = true;
-
-  const EDGE_START_MAX = 64;
-  const MIN_HORIZONTAL_TRAVEL = 60;
-  const MAX_VERTICAL_TRAVEL = 60;
-  const MAX_GESTURE_DURATION = 4000;
-  const HORIZONTAL_DOMINANCE = 1.2;
-  const interactiveTargetSelector = "input,textarea,select,summary,[contenteditable='true'],[role='tab'],[data-discipline]";
-  const backButtonSelectors = [
-    "[data-settings-home-back]",
-    "[data-analytics-home-back]",
-    "#recordsBackV2",
-    "#playerLibraryBackBtn",
-    "#playerStatsBackBtn",
-    "#dataManagementBackBtn",
-    "#settingsBackBtn",
-    "#statisticsFilterBackBtn",
-    "#rankingsBackBtn",
-    "#vsAnalysisBackBtn",
-    "#classificationManagerBackV381",
-    "#recordDetailBackBtn",
-    "[data-suite-back]",
-    "[data-journey-back]",
-    ".pd12-trends-back",
-    "[data-analysis-back]"
-  ];
-  const backButtonSelector = backButtonSelectors.join(",");
-
-  const isVisible = element => {
-    if (!element || element.hidden || element.disabled) return false;
-    if (element.getAttribute("aria-hidden") === "true") return false;
-    if (element.closest("[hidden],.hidden,[aria-hidden='true']")) return false;
-    const style = getComputedStyle(element);
-    return style.display !== "none" && style.visibility !== "hidden" && element.getClientRects().length > 0;
-  };
-
-  const candidateBackButton = () => {
-    const matchDetailBack=document.getElementById("recordDetailBackBtn");
-    if(document.body.classList.contains("match-detail-visible-v1")&&matchDetailBack)return matchDetailBack;
-    for (const selector of backButtonSelectors) {
-      const candidates = document.querySelectorAll(selector);
-      for (const candidate of candidates) {
-        if (isVisible(candidate)) return candidate;
-      }
-    }
-    return null;
-  };
-
-  const hasVisibleBlockingModal = backButton => Array.from(document.querySelectorAll(
-    "dialog[open],[role='dialog'][aria-modal='true'],[aria-modal='true']"
-  )).some(modal => isVisible(modal) && (!backButton || !modal.contains(backButton)));
-
-  const isTransitionBlocked = (backButton = candidateBackButton()) => {
-    if (hasVisibleBlockingModal(backButton)) return true;
-    if (isVisible(document.getElementById("proGameScreen"))) return true;
-    if (isVisible(document.getElementById("proSummary"))) return true;
-    if (isVisible(document.getElementById("breakResultOverlayV61"))) return true;
-    if (isVisible(document.getElementById("breakInterruptConfirmV3"))) return true;
-    const detail = document.getElementById("recordDetailOverlay");
-    return Boolean(detail?.classList.contains("is-result-mode-v5") && isVisible(detail));
-  };
-
-  const visibleBackButton = () => {
-    const backButton = candidateBackButton();
-    return backButton && !isTransitionBlocked(backButton) ? backButton : null;
-  };
-
-  let backTransitionActive = false;
-  let visualResetTimer = 0;
-  let gestureSequence = 0;
-  document.addEventListener("pointerdown",event=>{const button=event.target.closest(backButtonSelector);if(button)button.dataset.cueBackSource="tap";},{passive:true,capture:true});
-  const clearInteractiveBack = () => {
-    if(visualResetTimer){clearTimeout(visualResetTimer);visualResetTimer=0;}
-    document.body.classList.remove("cue-edge-back-tracking-v3","cue-edge-back-cancelling-v3");
-    document.body.style.removeProperty("--cue-edge-back-x");document.body.style.removeProperty("--cue-edge-back-progress");
-  };
-  const cancelInteractiveBack = () => {
-    if(visualResetTimer)clearTimeout(visualResetTimer);
-    const sequence=gestureSequence;
-    document.body.classList.add("cue-edge-back-cancelling-v3");
-    document.body.style.setProperty("--cue-edge-back-x","0px");document.body.style.setProperty("--cue-edge-back-progress","0");
-    visualResetTimer=setTimeout(()=>{if(sequence===gestureSequence)clearInteractiveBack();},190);
-  };
-  const requestBackContract = backButton => {
-    if(!backButton)return false;
-    backButton.dataset.cueBackSource="swipe";
-    const ownsVisibleMatchDetail=backButton.id==="recordDetailBackBtn"&&document.body.classList.contains("match-detail-visible-v1");
-    if(ownsVisibleMatchDetail&&typeof window.closeFormalMatchDetailV2==="function"){
-      window.closeFormalMatchDetailV2();
-      return true;
-    }
-    backButton.click();
-    return true;
-  };
-  const animateBack = backButton => {
-    if (!backButton || backTransitionActive) return;
-    backTransitionActive = true;
-    if(document.body.classList.contains("cue-edge-back-tracking-v3")){
-      document.body.classList.add("cue-edge-back-cancelling-v3");
-      document.body.style.setProperty("--cue-edge-back-x","100vw");document.body.style.setProperty("--cue-edge-back-progress","1");
-      requestBackContract(backButton);
-      requestAnimationFrame(()=>{clearInteractiveBack();backTransitionActive=false;});
-      return;
-    }
-    document.body.classList.add("cue-edge-back-animating-v2");
-    let completed = false;
-    const finish = () => {
-      if (completed) return;
-      completed = true;
-      requestBackContract(backButton);
-      requestAnimationFrame(() => {
-        document.body.classList.remove("cue-edge-back-animating-v2");
-        backTransitionActive = false;
-      });
-    };
-    document.querySelector(".app")?.addEventListener("animationend", finish, {once:true});
-    requestAnimationFrame(finish);
-  };
-
-  let gesture = null;
-  const resetGesture = () => { gesture = null; };
-  const abortGesture = ({animate=true}={}) => {
-    const hasVisualState=Boolean(visualResetTimer)||document.body.classList.contains("cue-edge-back-tracking-v3")||document.body.classList.contains("cue-edge-back-cancelling-v3");
-    if(!gesture&&!hasVisualState)return;
-    gesture=null;
-    gestureSequence+=1;
-    if(animate)cancelInteractiveBack();else clearInteractiveBack();
-  };
-  const touchForGesture=(touches,current)=>Array.from(touches||[]).find(touch=>touch.identifier===current?.identifier)||null;
-
-  document.addEventListener("touchstart", event => {
-    if(backTransitionActive)return;
-    abortGesture({animate:false});
-    gestureSequence+=1;
-    if (event.touches.length !== 1) return;
-    // A direct control tap must remain a native tap. Starting edge tracking
-    // disables pointer events on .app and WebKit then cancels the pending click.
-    if (event.target.closest(interactiveTargetSelector)) return;
-    const touch = event.touches[0];
-    if (touch.clientX > EDGE_START_MAX) return;
-    const backButton = visibleBackButton();
-    if (!backButton) return;
-    gesture = {
-      startX: touch.clientX,
-      startY: touch.clientY,
-      startedAt: performance.now(),
-      identifier: touch.identifier,
-      backButton,
-      sequence: gestureSequence
-    };
-  }, {passive:true, capture:true});
-
-  document.addEventListener("touchmove", event => {
-    if (!gesture || event.touches.length !== 1) return;
-    const touch = touchForGesture(event.touches,gesture);
-    if(!touch){abortGesture();return;}
-    const dx = touch.clientX - gesture.startX;
-    const dy = touch.clientY - gesture.startY;
-    if (dx < -10 || (Math.abs(dy) > 18 && Math.abs(dy) > Math.max(1, dx) * .8)) {
-      abortGesture();
-      return;
-    }
-    const hasIntent=dx>8&&dx>Math.abs(dy)*HORIZONTAL_DOMINANCE;
-    if(dx>0&&event.cancelable)event.preventDefault();
-    if(hasIntent)document.body.classList.add("cue-edge-back-tracking-v3");
-    const progress=Math.max(0,Math.min(1,dx/Math.max(1,innerWidth)));
-    document.body.style.setProperty("--cue-edge-back-x",`${Math.max(0,dx)}px`);document.body.style.setProperty("--cue-edge-back-progress",String(progress));
-  }, {passive:false, capture:true});
-
-  document.addEventListener("touchend", event => {
-    if (!gesture)return;
-    const completedGesture = gesture;
-    resetGesture();
-    const touch = touchForGesture(event.changedTouches,completedGesture);
-    if(!touch||isTransitionBlocked(completedGesture.backButton)){gestureSequence+=1;cancelInteractiveBack();return;}
-    const dx = touch.clientX - completedGesture.startX;
-    const dy = touch.clientY - completedGesture.startY;
-    const elapsed = performance.now() - completedGesture.startedAt;
-    if (dx < MIN_HORIZONTAL_TRAVEL || Math.abs(dy) > MAX_VERTICAL_TRAVEL || dx < Math.abs(dy) * HORIZONTAL_DOMINANCE || elapsed > MAX_GESTURE_DURATION || !isVisible(completedGesture.backButton) || completedGesture.backButton !== visibleBackButton()){gestureSequence+=1;cancelInteractiveBack();return;}
-    if (event.cancelable) event.preventDefault();
-    animateBack(completedGesture.backButton);
-  }, {passive:false, capture:true});
-
-  document.addEventListener("touchcancel",()=>abortGesture(),{passive:true,capture:true});
-  document.addEventListener("pointercancel",event=>{if(event.pointerType==="touch")abortGesture();},{passive:true,capture:true});
-  document.addEventListener("lostpointercapture",event=>{if(event.pointerType==="touch")abortGesture();},{passive:true,capture:true});
-  window.addEventListener("blur",()=>abortGesture({animate:false}),{passive:true});
-  window.addEventListener("pagehide",()=>abortGesture({animate:false}),{passive:true});
-
-  window.CueScoreEdgeBackV1 = Object.freeze({
-    visibleBackButton,
-    animateBack,
-    requestBackContract,
-    isTransitionBlocked,
-    reset:()=>abortGesture({animate:false}),
-    debugState:()=>Object.freeze({active:Boolean(gesture),identifier:gesture?.identifier??null,backTransitionActive,visualResetPending:Boolean(visualResetTimer)}),
-    constants:Object.freeze({EDGE_START_MAX,MIN_HORIZONTAL_TRAVEL,MAX_VERTICAL_TRAVEL,MAX_GESTURE_DURATION,HORIZONTAL_DOMINANCE})
-  });
-})();
-</script>
 <style id="cueScoreOfficialLogoStylesV1">
 /* CueScore Official Logo RC v1.0: one reusable SVG source for every brand surface. */
 [data-cuescore-logo]{display:inline-flex;align-items:center;justify-content:center;line-height:0}
@@ -28380,7 +28134,7 @@ body.cue-edge-back-cancelling-v3>.app,body.cue-edge-back-cancelling-v3>#playerOp
   <script src="./analytics-build4-metrics.js"></script>
   <script src="./analysis-build4.js"></script>
   <script src="./player-detail-build6.js"></script>
-  <script src="./ui-revision-v12.js?v=2.0-build45-body-owner"></script>
+  <script src="./ui-revision-v12.js?v=2.0-build46-no-swipe"></script>
   <script src="./final-ui-build18.js"></script>
   <link rel="stylesheet" href="./navigation-shell-phase1.css" />
   <script src="./navigation-shell-phase1.js"></script>
@@ -28392,8 +28146,8 @@ body.cue-edge-back-cancelling-v3>.app,body.cue-edge-back-cancelling-v3>#playerOp
     window.CueScoreEditableSelectionV1=Object.freeze({isEditableTarget:editable});
   })();
   </script>
-  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build45-body-owner" />
-  <script src="./navigation-phase2-6.js?v=2.0-build45-body-owner"></script>
+  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build46-no-swipe" />
+  <script src="./navigation-phase2-6.js?v=2.0-build46-no-swipe"></script>
 </body>
 </html>
 

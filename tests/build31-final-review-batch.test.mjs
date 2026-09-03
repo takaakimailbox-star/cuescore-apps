@@ -40,9 +40,8 @@ test("Settings root has no Back control and keeps compact legal/data content",()
   assert.match(css,/min-height:62px/);
 });
 
-test("Build 30 interaction protections remain present",()=>{
-  assert.match(html,/interactiveTargetSelector\s*=/);
-  assert.match(html,/cue-edge-back-tracking-v3/);
+test("text-selection protections remain while swipe interception is absent",()=>{
+  assert.doesNotMatch(html,/interactiveTargetSelector\s*=|cue-edge-back-tracking-v3/);
   assert.match(html,/document\.addEventListener\("selectstart"/);
   assert.match(html,/input,textarea,\[contenteditable="true"\]/);
 });

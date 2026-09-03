@@ -10,10 +10,9 @@ const appIcon=readFileSync(new URL("../ios/App/App/Assets.xcassets/AppIcon.appic
 const oldCapacitorIconSha256="29e4777e319de3ee5a52c3a8004ec19d0568414004257e36d7c94a077d71c93b";
 const adoptedIosIconSha256="49b2aa25427930af44eb9f4d90fe00265c0396fe3af6f81e8d05ef7571b072d3";
 
-test("direct interactive-control taps are excluded from edge tracking before pointer events are disabled",()=>{
-  assert.match(html,/const backButtonSelector = backButtonSelectors\.join\(","\)/);
-  assert.match(html,/interactiveTargetSelector = "input,textarea,select,summary,\[contenteditable='true'\],\[role='tab'\],\[data-discipline\]"/);
-  assert.match(html,/if \(event\.target\.closest\(interactiveTargetSelector\)\) return;[\s\S]*?cue-edge-back-tracking-v3/);
+test("global edge tracking and its pointer-event interception are removed",()=>{
+  assert.doesNotMatch(html,/CueScoreEdgeBack|cue-edge-back|interactiveTargetSelector/);
+  assert.doesNotMatch(html,/--cue-edge-back-x|cancelInteractiveBack/);
 });
 
 test("all current full-screen Back controls participate in the common contract",()=>{

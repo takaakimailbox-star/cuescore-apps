@@ -18,10 +18,10 @@ test("one physical tap reaches the shared close contract even when WebKit omits 
   assert.match(html,/now-lastCloseRequestAt<450/);
 });
 
-test("tap and edge swipe converge on the same button and close SSOT",()=>{
-  assert.match(html,/"#recordDetailBackBtn"/);
-  assert.match(html,/backButton\.click\(\)/);
-  assert.match(html,/detailBack\.dataset\.cueBackSource==="swipe"\?"swipe":"click"/);
+test("tap uses the Match Detail close SSOT without a swipe route",()=>{
+  assert.match(html,/getElementById\("recordDetailBackBtn"\)/);
+  assert.match(html,/detailBack\.addEventListener\("click",event=>\{trace\("click",event\);requestClose\(event,"click"\)/);
+  assert.doesNotMatch(html,/CueScoreEdgeBack|cue-edge-back|cueBackSource==="swipe"/);
   assert.match(revision,/const closeMatchDetailExactBase=window\.closeFormalMatchDetailV2/);
 });
 

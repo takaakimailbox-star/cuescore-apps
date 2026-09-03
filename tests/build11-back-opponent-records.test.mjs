@@ -5,10 +5,8 @@ import {readFileSync} from "node:fs";
 const html=readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const detail=readFileSync(new URL("../player-detail-build6.js",import.meta.url),"utf8");
 
-test("Back removes fixed gesture waits and provides immediate touch feedback",()=>{
-  assert.doesNotMatch(html,/setTimeout\(\(\)=>\{backButton\.click\(\);clearInteractiveBack\(\);backTransitionActive=false;\},190\)/);
-  assert.doesNotMatch(html,/setTimeout\(finish,280\)/);
-  assert.match(html,/requestBackContract\(backButton\)/);
+test("Back controls provide immediate tap feedback without swipe machinery",()=>{
+  assert.doesNotMatch(html,/CueScoreEdgeBack|cue-edge-back|requestBackContract/);
   assert.match(html,/touch-action:manipulation/);
   assert.match(html,/cue-back-feedback-v11/);
 });

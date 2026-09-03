@@ -140,19 +140,8 @@
       const selected=switcher?.querySelector("[data-discipline].is-selected")||switcher?.querySelector("[data-discipline]");
       if(selected)selected.click();else window.openCueMatchSetupV3?.();
     });
-    let swipeStart=null,suppressSwipeClick=false,lastSwipeAt=0;
-    const beginSwipe=event=>{if(event.isPrimary!==false)swipeStart={x:event.clientX,y:event.clientY};};
-    const endSwipe=event=>{
-      if(!swipeStart)return;const start=swipeStart;swipeStart=null;
-      const dx=event.clientX-start.x,dy=event.clientY-start.y;if(Math.abs(dx)<52||Math.abs(dx)<=Math.abs(dy)*1.25)return;
-      const now=performance.now();if(now-lastSwipeAt<400)return;lastSwipeAt=now;
-      const buttons=[...(switcher?.querySelectorAll("[data-discipline]")||[])],current=Math.max(0,buttons.findIndex(button=>button.classList.contains("is-selected"))),next=Math.max(0,Math.min(buttons.length-1,current+(dx<0?1:-1)));
-      if(next!==current){buttons[next].click();suppressSwipeClick=true;setTimeout(()=>{suppressSwipeClick=false},0);buttons[next].scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"});}
-    };
     const markSelectorEvent=event=>{const button=event.target.closest?.("[data-discipline]");if(button)window.CueScoreSelectorTraceV1?.mark(`event:${event.type}`,{disciplineId:button.dataset.discipline,isTrusted:event.isTrusted,pointerType:event.pointerType||"",cancelable:event.cancelable,defaultPrevented:event.defaultPrevented});};
     ["touchstart","touchend","pointerdown","pointerup","click"].forEach(type=>switcher?.addEventListener(type,markSelectorEvent,{capture:true,passive:type!=="click"}));
-    setup?.addEventListener("pointerdown",beginSwipe,{passive:true});setup?.addEventListener("pointerup",endSwipe,{passive:true});
-    switcher?.addEventListener("click",event=>{if(suppressSwipeClick&&!event.isTrusted){return;}if(suppressSwipeClick){event.preventDefault();event.stopImmediatePropagation();suppressSwipeClick=false;}},true);
     switcher?.addEventListener("click",event=>{
       const button=event.target.closest("[data-discipline]");if(!button)return;
       const started=performance.now();

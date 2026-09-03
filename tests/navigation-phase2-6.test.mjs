@@ -71,12 +71,7 @@ test("new match opens setup with the compact icon-only six-discipline selector i
   assert.doesNotMatch(js,/種目を選択/);
   assert.match(js,/cueDisciplineSwitcherV1/);
   assert.match(js,/if\(selected\)selected\.click\(\)/);
-  assert.match(js,/addEventListener\("pointerdown"/);
-  assert.match(js,/addEventListener\("pointerup"/);
-  assert.doesNotMatch(js,/addEventListener\("mousedown",beginSwipe/);
-  assert.match(js,/now-lastSwipeAt<400/);
-  assert.match(js,/Math\.abs\(dx\)<52/);
-  assert.match(js,/current\+\(dx<0\?1:-1\)/);
+  assert.doesNotMatch(js,/beginSwipe|endSwipe|swipeStart|lastSwipeAt|suppressSwipeClick/);
   assert.match(html,/button\.classList\.toggle\("is-selected", selected\)/);
   assert.match(html,/button\.setAttribute\("aria-selected", String\(selected\)\)/);
   assert.match(css,/match-setup-active-v3 \.cue-new-match-integrated-v2>\.cue-discipline-switcher-v1\{order:1;display:flex!important/);

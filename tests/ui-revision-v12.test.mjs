@@ -53,7 +53,7 @@ test("opponent-fixed history removes the redundant Player vs Opponent row only i
   assert.doesNotMatch(revision,/opponent\?\.remove\(\);[\s\S]*if\(!opponentFixed\)opponent\?\.remove\(\)/);
 });
 
-test("Match Detail tap and edge swipe share the remembered history origin",()=>{
+test("Match Detail Back keeps the remembered history origin",()=>{
   assert.match(revision,/rememberMatchDetailOrigin/);
   assert.match(revision,/document\.addEventListener\("click",rememberMatchDetailOrigin,true\)/);
   assert.match(revision,/document\.addEventListener\("keydown"/);
