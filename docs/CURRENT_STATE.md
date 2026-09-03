@@ -4,7 +4,7 @@
 
 - Product Owner決定により、実iPhoneで不安定だったEdge Swipeを継続修正せず、全画面のSwipe操作を正式廃止。共通Edge Back controller、touch／cancel listener、gesture state、timer、threshold、追従／完了animationを削除した。
 - 試合結果ページ送り、旧試合詳細ページ送り、新規試合の競技切替に残っていたSwipeも撤去。各画面の左上Back、Match Detailのpointer入力／tap feedback、Build 39 `exactMatchDetailOrigin`復元、明示button／tab操作は維持。
-- 全自動test `344 pass / 0 fail / 0 skipped`。source／native-web／iOS copied assetsでSwipe実装不在、Simulator Debug／Release成功、390×844 overflow 0、console error 0。Version `1.0`／Build `46`。実iPhone受入はPendingでPASS扱いにしない。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build46_Remove_All_Swipe_Implementation_2026-09-03.md`。
+- 全自動test `344 pass / 0 fail / 0 skipped`。source／native-web／iOS copied assetsでSwipe実装不在、Simulator Debug／Release成功、390×844 overflow 0、console error 0。Version `1.0`／Build `46`。source/archive commit `db3123a`、Delivery／Build ID `219b0c56-2074-4932-9370-203aa8ff2886`、processing／import `VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`配布対象を確認。実iPhone受入はPendingでPASS扱いにしない。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build46_Remove_All_Swipe_Implementation_2026-09-03.md`。
 
 ## Build 45 Match Detail body-state owner修正（2026年9月3日）
 

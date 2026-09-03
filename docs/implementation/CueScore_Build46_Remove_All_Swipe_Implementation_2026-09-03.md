@@ -35,4 +35,6 @@
 
 ## 配布境界
 
-Internal TestFlightまでで停止する。External TestFlight、Beta App Review、App Review、審査用追加、一般公開は行わない。
+source/archive commitは`db3123a`。Signed Archive `/private/tmp/CueScore-Build46.xcarchive`からApp Store Connect uploadに成功。Delivery／Build ID `219b0c56-2074-4932-9370-203aa8ff2886`、processing／import `VALID`、`usesNonExemptEncryption=false`を確認した。Build 46はInternal group `CueScore Internal Testers`の配布対象で、実iPhoneのTestFlightから更新・インストール可能。
+
+Internal TestFlightまでで停止。External TestFlight、Beta App Review、App Review、審査用追加、一般公開は行っていない。
