@@ -26,10 +26,9 @@ test("target pages use the adopted hierarchy without changing Match Card C",()=>
 test("Player Information analysis ends at Self Best without redundant links",()=>{
   const analysis=nav.slice(nav.indexOf("function analysisView"),nav.indexOf("function render(playerId"));
   assert.ok(analysis.indexOf("今の状態")<analysis.indexOf("主要指標"));
-  assert.ok(analysis.indexOf("主要指標")<analysis.indexOf("推移"));
-  assert.ok(analysis.indexOf("推移")<analysis.indexOf("今回のポイント"));
+  assert.ok(analysis.indexOf("主要指標")<analysis.indexOf("今回のポイント"));
   assert.ok(analysis.indexOf("今回のポイント")<analysis.indexOf("自己ベスト"));
-  assert.doesNotMatch(analysis,/詳しい分析|対戦相手分析/);
+  assert.doesNotMatch(analysis,/詳しい分析|対戦相手分析|推移|グラフ|data-hub-trends|ファール率|foulRate/);
   assert.match(nav,/data-hub-full-analysis/);
   assert.match(nav,/data-hub-opponents/);
 });

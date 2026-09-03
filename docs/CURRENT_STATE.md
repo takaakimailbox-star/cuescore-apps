@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## Build 47 分析ファール率／推移グラフ撤去（2026年9月3日）
+
+- Product Owner指示により、Player Hub、競技別分析、正式な分析画面からファール率表示と推移グラフ一式（表示、選択、タップ、modal）を撤去した。
+- 保存済み試合、ファールevent、集計互換性のための内部計算は維持。試合結果／Match Detailの得点推移は分析画面とは別機能のため維持した。
+- 全自動test `343 pass / 0 fail / 0 skipped`、native web同期、Simulator Debug `BUILD SUCCEEDED`。Version `1.0`／Build `47`。Internal TestFlight配布と実iPhone確認はPending。External TestFlight、App Review、審査用追加、一般公開は実施しない。実装記録：`docs/implementation/CueScore_Build47_Analysis_Foul_Rate_Trend_Removal_Implementation_2026-09-03.md`。
+
 ## Build 46 全Swipe機能撤去（2026年9月3日）
 
 - Product Owner決定により、実iPhoneで不安定だったEdge Swipeを継続修正せず、全画面のSwipe操作を正式廃止。共通Edge Back controller、touch／cancel listener、gesture state、timer、threshold、追従／完了animationを削除した。

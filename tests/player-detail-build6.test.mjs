@@ -4,8 +4,7 @@ import fs from "node:fs";
 
 const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const script=fs.readFileSync(new URL("../player-detail-build6.js",import.meta.url),"utf8");
-assert.match(script,/foulRate:"ファール率"/);
-assert.match(script,/key==="foulRate"\?`\$\{Number\(value\)\.toFixed\(2\)\}%`/);
+assert.doesNotMatch(script,/foulRate|ファール率/);
 const css=fs.readFileSync(new URL("../player-detail-build6.css",import.meta.url),"utf8");
 const revision=fs.readFileSync(new URL("../ui-revision-v12.js",import.meta.url),"utf8");
 const nativeBuild=fs.readFileSync(new URL("../scripts/build-native-web.mjs",import.meta.url),"utf8");
@@ -42,10 +41,10 @@ test("level two fixes a discipline and contains the Build 8 analytics journey",(
 });
 
 test("all disciplines keep the approved metric sets",()=>{
-  assert.match(script,/"9ball":\["shotRate","breakInRate","masuwariRate","foulRate"\]/);
-  assert.match(script,/rotation:\["shotRate","breakInRate","highRun","foulRate"\]/);
-  assert.match(script,/jpa9:\["average","breakInRate","highRun","foulRate"\]/);
-  assert.match(script,/straightPool:\["average","highRun","foulRate"\]/);
+  assert.match(script,/"9ball":\["shotRate","breakInRate","masuwariRate"\]/);
+  assert.match(script,/rotation:\["shotRate","breakInRate","highRun"\]/);
+  assert.match(script,/jpa9:\["average","breakInRate","highRun"\]/);
+  assert.match(script,/straightPool:\["average","highRun"\]/);
   assert.match(script,/threeCushion:\["average","highRun"\]/);
 });
 
@@ -53,21 +52,18 @@ test("detail density is collapsed and duplicate recent matches are removed",()=>
   assert.match(script,/displayedBests\.slice\(0,3\)/);
   assert.doesNotMatch(script,/records\.slice\(0,3\)/);
   assert.doesNotMatch(script,/data-pd7-trend-toggle/);
-  assert.match(script,/data-pd7-metric-trend="winRate"/);
-  assert.match(script,/data-pd7-trend-modal hidden/);
+  assert.doesNotMatch(script,/data-pd7-metric-trend|data-pd7-trend-modal/);
   assert.match(script,/value==null\?"—"/);
 });
 
-test("normal v1 detail replaces metric sheets with one full-screen trends page",()=>{
-  assert.match(revision,/グラフで見る/);
-  assert.match(revision,/removeAttribute\("data-pd7-metric-trend"\)/);
-  assert.match(revision,/querySelector\("\[data-pd7-trend-modal\]"\)\?\.remove\(\)/);
-  assert.match(revision,/className="pd12-trends hidden"/);
+test("normal v1 detail has no trends entry or graph overlay",()=>{
+  assert.doesNotMatch(revision,/グラフで見る|className="pd12-trends hidden"|openTrends/);
+  assert.doesNotMatch(script,/data-pd7-metric-trend|data-pd7-trend-modal/);
 });
 
-test("rate precision is one decimal except foul rate at two decimals",()=>{
+test("rate precision is one decimal",()=>{
   assert.match(script,/Number\(value\)\.toFixed\(1\)/);
-  assert.match(script,/Number\(value\)\.toFixed\(2\)/);
+  assert.doesNotMatch(script,/toFixed\(2\)/);
   assert.match(script,/wins\/records\.length\*100\)\.toFixed\(1\)/);
 });
 

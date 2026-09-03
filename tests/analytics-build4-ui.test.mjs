@@ -4,8 +4,7 @@ import fs from "node:fs";
 
 const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const script=fs.readFileSync(new URL("../analysis-build4.js",import.meta.url),"utf8");
-assert.match(script,/foulRate:"ファール率"/);
-assert.match(script,/key==="foulRate"\?`\$\{Number\(value\)\.toFixed\(2\)\}%`/);
+assert.doesNotMatch(script,/foulRate|ファール率/);
 const css=fs.readFileSync(new URL("../analysis-build4.css",import.meta.url),"utf8");
 
 test("Build 4 analytics assets are loaded after the existing analytics layer",()=>{
@@ -14,10 +13,10 @@ test("Build 4 analytics assets are loaded after the existing analytics layer",()
 });
 
 test("player top contains all six adopted blocks and Player-origin detail entry",()=>{
-  for(const label of ["今の状態","主要指標","推移","今回のポイント","自己ベスト","詳細分析","対戦相手分析を見る"])assert.match(script,new RegExp(label));
+  for(const label of ["今の状態","主要指標","今回のポイント","自己ベスト","詳細分析","対戦相手分析を見る"])assert.match(script,new RegExp(label));
   assert.doesNotMatch(script,/試合別分析を見る/);
   assert.doesNotMatch(script,/data-analysis-player aria-label="プレーヤー"/);
-  assert.match(script,/data-b4-trend-select/);
+  assert.doesNotMatch(script,/data-b4-trend-select|analysis-b4-trend|function chart/);
   assert.match(script,/window\.openMatchDetailV1\?\.\(best\.dataset\.b4MatchId\)/);
   assert.match(script,/window\.openRivalAnalysisForPlayerV832\?\.\(rival\.dataset\.b4Rival\)/);
 });
@@ -33,18 +32,18 @@ test("Build 5 navigation starts analysis from Player Detail and carries viewer c
   assert.match(html,/目線/);
 });
 
-test("missing values and partial trend points are not coerced to zero",()=>{
+test("missing analysis values are not coerced to zero",()=>{
   assert.match(script,/value==null\?"—"/);
   assert.match(script,/比較できません/);
   assert.match(script,/データなし/);
-  assert.match(script,/Number\.isFinite\(value\)/);
+  assert.doesNotMatch(script,/data-b4-chart/);
 });
 
 test("all disciplines use the approved metric sets",()=>{
-  assert.match(script,/"9ball":\["shotRate","breakInRate","masuwariRate","foulRate"\]/);
-  assert.match(script,/rotation:\["shotRate","breakInRate","highRun","foulRate"\]/);
-  assert.match(script,/jpa9:\["average","breakInRate","highRun","foulRate"\]/);
-assert.match(script,/straightPool:\["average","highRun","foulRate"\]/);
+  assert.match(script,/"9ball":\["shotRate","breakInRate","masuwariRate"\]/);
+  assert.match(script,/rotation:\["shotRate","breakInRate","highRun"\]/);
+  assert.match(script,/jpa9:\["average","breakInRate","highRun"\]/);
+assert.match(script,/straightPool:\["average","highRun"\]/);
 assert.match(script,/threeCushion:\["average","highRun"\]/);
   assert.match(script,/threeCushion:\["average","highRun"\]/);
 });

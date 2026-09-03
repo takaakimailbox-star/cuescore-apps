@@ -16,11 +16,11 @@ test("global edge tracking and its pointer-event interception are removed",()=>{
 });
 
 test("all current full-screen Back controls participate in the common contract",()=>{
-  for(const selector of ["[data-journey-back]",".pd12-trends-back","[data-analysis-back]"]){
+  for(const selector of ["[data-journey-back]","[data-analysis-back]"]){
     assert.match(html,new RegExp(selector.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")));
   }
-  assert.match(html,/\.player-journey-back-v2,[\s\S]*?\.pd12-trends-back,[\s\S]*?\.match-detail-back-v1,[\s\S]*?\.analytics-home-back-v2\{/);
-  assert.match(revision,/\.pd12-trends-back/);
+  assert.match(html,/\.player-journey-back-v2,[\s\S]*?\.match-detail-back-v1,[\s\S]*?\.analytics-home-back-v2\{/);
+  assert.doesNotMatch(revision,/pd12-trends-back/);
 });
 
 test("Web, Home Screen and iOS use the adopted CueScore icon family",()=>{

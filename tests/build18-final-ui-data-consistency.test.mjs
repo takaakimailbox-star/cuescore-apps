@@ -12,10 +12,9 @@ const nativeBuild=readFileSync(new URL("../scripts/build-native-web.mjs",import.
 const require=createRequire(import.meta.url);
 const metrics=require("../analytics-build4-metrics.js");
 
-test("full-screen trends use aggregate SSOT for cumulative points",()=>{
-  assert.match(revision,/CueScoreBuild4Metrics/);
-  assert.match(revision,/aggregate\?\.\(records\.slice\(0,index\+1\),state\.player,helpers\)\?\.\[key\]/);
-  assert.doesNotMatch(revision,/const values=records\.map\(record=>chartApi\(\)\?\.recordMetric/);
+test("full-screen trend presentation is removed",()=>{
+  assert.doesNotMatch(revision,/pd12Trends|openTrends|グラフで見る/);
+  assert.match(revision,/removeAttribute\("data-pd7-metric-trend"\)/);
 });
 
 test("cumulative latest point equals the full eligible aggregate and keeps missing rates unavailable",()=>{
@@ -60,5 +59,5 @@ test("Build 18 compatibility asset precedes the Phase 1 shell and remains bundle
   assert.ok(index.indexOf("final-ui-build18.js")<index.indexOf("navigation-shell-phase1.js"));
   assert.match(nativeBuild,/final-ui-build18\.js/);
   assert.match(sw,/final-ui-build18\.js/);
-  assert.match(sw,/2\.0-build46-no-swipe/);
+  assert.match(sw,/2\.0-build47-analysis-cleanup/);
 });

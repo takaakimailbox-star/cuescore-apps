@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-build46-no-swipe";
+const APP_VERSION = "2.0-build47-analysis-cleanup";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-build46-no-swipe",
+  "./demo-data.js?v=2.0-build47-analysis-cleanup",
   "./manifest.webmanifest",
   "./privacy.html",
   "./terms.html",
@@ -17,13 +17,13 @@ const APP_SHELL = [
   "./analysis-build4.css",
   "./player-detail-build6.js",
   "./player-detail-build6.css",
-  "./ui-revision-v12.js?v=2.0-build46-no-swipe",
+  "./ui-revision-v12.js?v=2.0-build47-analysis-cleanup",
   "./final-ui-build18.js",
-  "./ui-revision-v12.css?v=2.0-build46-no-swipe",
+  "./ui-revision-v12.css?v=2.0-build47-analysis-cleanup",
   "./navigation-shell-phase1.css",
   "./navigation-shell-phase1.js",
-  "./navigation-phase2-6.css?v=2.0-build46-no-swipe",
-  "./navigation-phase2-6.js?v=2.0-build46-no-swipe",
+  "./navigation-phase2-6.css?v=2.0-build47-analysis-cleanup",
+  "./navigation-phase2-6.js?v=2.0-build47-analysis-cleanup",
   "./player-detail-build8.css",
   "./docs/official/app-store-v1.0/public/CueScore_Privacy_Policy_v1.0_Official.md",
   "./docs/official/app-store-v1.0/public/CueScore_Terms_of_Use_v1.0_Official.md",

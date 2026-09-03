@@ -3,8 +3,7 @@ import fs from "node:fs";
 import test from "node:test";
 
 const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
-const chart=fs.readFileSync(new URL("../analysis-build4.js",import.meta.url),"utf8");
-const css=fs.readFileSync(new URL("../ui-revision-v12.css",import.meta.url),"utf8");
+const analysis=fs.readFileSync(new URL("../analysis-build4.js",import.meta.url),"utf8");
 
 test("restore accepts only supported backup schemas and migrates before writes",()=>{
   assert.match(html,/Number\(value\.schemaVersion\) > BACKUP_SCHEMA_VERSION/);
@@ -35,17 +34,6 @@ test("individual deletion backups contain only the deleted entity",()=>{
   assert.match(html,/Array\.isArray\(scopedData\?\.matchRecords\)/);
 });
 
-test("trend chart reserves visible axes and centers a single point",()=>{
-  assert.match(chart,/h=208,left=48,right=14,top=16,bottom=44/);
-  assert.match(chart,/values\.length===1\?left\+\(w-left-right\)\/2/);
-  assert.match(chart,/analysis-b4-axis-caption[\s\S]*試合日/);
-  assert.match(chart,/labelEvery=Math\.max\(1,Math\.ceil\(values\.length\/5\)\)/);
-});
-
-test("full-screen trends keep labels, grid, line and points readable at 390px",()=>{
-  assert.match(css,/\.pd12-chart-scroll \{ overflow-x:hidden/);
-  assert.match(css,/analysis-b4-y-label[\s\S]*font-size:11px/);
-  assert.match(css,/analysis-b4-grid[\s\S]*#d4d4cf/);
-  assert.match(css,/analysis-b4-plot-line[\s\S]*stroke-width:3/);
-  assert.match(css,/analysis-b4-plot-point[\s\S]*stroke-width:3/);
+test("analysis no longer exposes trend chart code",()=>{
+  assert.doesNotMatch(analysis,/function chart|data-b4-chart|analysis-b4-trend|推移/);
 });

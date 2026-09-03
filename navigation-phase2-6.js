@@ -10,10 +10,10 @@
     {id:"rotation",label:"Rotation",asset:"assets/icons/games/game-rotation.svg"},{id:"straightPool",label:"14-1",asset:"assets/icons/games/game-14-1.svg"},
     {id:"jpa9",label:"JPA 9-Ball",asset:"assets/icons/games/game-jpa-9ball.svg"},{id:"threeCushion",label:"3 Cushion",asset:"assets/icons/games/game-3cushion.svg"}
   ];
-  const labels={winRate:"勝率",shotRate:"シュート率",breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",foulRate:"ファール率",average:"アベレージ",highRun:"ハイラン"};
-  const metricKeys={"9ball":["shotRate","breakInRate","masuwariRate","foulRate"],"10ball":["shotRate","breakInRate","masuwariRate","foulRate"],rotation:["shotRate","breakInRate","highRun","foulRate"],jpa9:["average","breakInRate","highRun","foulRate"],straightPool:["average","highRun","foulRate"],threeCushion:["average","highRun"]};
+  const labels={winRate:"勝率",shotRate:"シュート率",breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",average:"アベレージ",highRun:"ハイラン"};
+  const metricKeys={"9ball":["shotRate","breakInRate","masuwariRate"],"10ball":["shotRate","breakInRate","masuwariRate"],rotation:["shotRate","breakInRate","highRun"],jpa9:["average","breakInRate","highRun"],straightPool:["average","highRun"],threeCushion:["average","highRun"]};
   const bestLabels={shotRate:"最高シュート率",breakInRate:"最高ブレイクイン率",masuwariRate:"最高マス割り率",masuwariCount:"1試合最多マス割り",highRun:"最大ハイラン",score:"1試合最高得点",average:"最高アベレージ",leastWinningInnings:"最少イニング勝利"};
-  const percent=new Set(["winRate","shotRate","breakInRate","masuwariRate","foulRate"]),playerState=new Map();
+  const percent=new Set(["winRate","shotRate","breakInRate","masuwariRate"]),playerState=new Map();
   const def=id=>defs.find(item=>item.id===id)||defs[0];
   const players=()=>typeof readPlayerLibrary==="function"?readPlayerLibrary():[];
   const side=(record,player)=>typeof playerSideInRecord==="function"?Number(playerSideInRecord(record,player))||0:0;
@@ -24,7 +24,7 @@
   const metric=(record,s)=>typeof savedPlayerMetricsV113==="function"?savedPlayerMetricsV113(record,s)||{}:{};
   const recordPlayer=(record,s)=>record?.players?.[s]||{};
   const helpers={side,won,metric,recordPlayer,completedTurns:(record,s)=>window.CueScoreAnalysisV2Context?.completedTurns?.(record,s)??window.inningsCountNumberV1?.(record,s),discipline,masuwariCounts:record=>window.rackGameMasuwariCountsV1?.(record)||{1:0,2:0}};
-  const fmt=(key,value)=>value==null?"—":key==="foulRate"?`${Number(value).toFixed(2)}%`:percent.has(key)?`${Number(value).toFixed(1)}%`:key==="average"?Number(value).toFixed(3).replace(/0+$/,"").replace(/\.$/,""):String(Math.round(Number(value)*100)/100);
+  const fmt=(key,value)=>value==null?"—":percent.has(key)?`${Number(value).toFixed(1)}%`:key==="average"?Number(value).toFixed(3).replace(/0+$/,"").replace(/\.$/,""):String(Math.round(Number(value)*100)/100);
   const avatar=player=>typeof playerAvatarHtmlV2==="function"?playerAvatarHtmlV2(player,"player-avatar-v2"):"";
   const playerProfile=data=>players().find(item=>String(item.id)===String(data?.registeredPlayerId||""))||data||{};
   const opponent=(record,s)=>playerProfile(recordPlayer(record,s===1?2:1));
@@ -54,7 +54,7 @@
 
   function points(current,previous,state){
     if(previous.games<1)return{strength:"比較できる過去データを蓄積中です",challenge:"試合記録を続けましょう"};
-    const changes=(metricKeys[state.discipline]||[]).map(key=>{const now=current[key],before=previous[key];if(!Number.isFinite(now)||!Number.isFinite(before))return null;const score=(key==="foulRate"?-1:1)*(now-before);return{key,score};}).filter(Boolean);
+    const changes=(metricKeys[state.discipline]||[]).map(key=>{const now=current[key],before=previous[key];if(!Number.isFinite(now)||!Number.isFinite(before))return null;return{key,score:now-before};}).filter(Boolean);
     if(!changes.length)return{strength:"比較できる指標を蓄積中です",challenge:"試合記録を続けましょう"};
     const best=[...changes].sort((a,b)=>b.score-a.score)[0],worst=[...changes].sort((a,b)=>a.score-b.score)[0];
     return{strength:best.score>0?`${labels[best.key]}が前期間より改善しています`:`${labels[best.key]}は前期間と同水準です`,challenge:worst.score<0?`${labels[worst.key]}を前期間の水準へ戻しましょう`:"現在の安定した内容を継続しましょう"};
@@ -65,7 +65,6 @@
     const status=current.games<3?"データ蓄積中":previous.games<3?"安定":current.winRate>previous.winRate?"改善傾向":current.winRate<previous.winRate?"要調整":"安定";
     return `<section class="hub-card-v2 hub-now-v2"><div><h2>今の状態</h2><b>${status}</b></div><strong>${current.games?`直近${current.games}試合　${current.wins}勝${current.losses}敗　勝率${Math.round(current.winRate)}%`:"データなし"}</strong><small>条件を満たす保存済み試合だけを使用しています</small></section>
       <h2 class="hub-heading-v2">主要指標</h2><section class="hub-metrics-v2">${keys.map(key=>`<article><strong>${fmt(key,current[key])}</strong><span>${labels[key]}</span></article>`).join("")||"<span>データなし</span>"}</section>
-      <section class="hub-links-v2"><button type="button" data-hub-trends><span><strong>推移</strong><small>主要指標をグラフで見る</small></span><b>›</b></button></section>
       <section class="hub-card-v2 hub-points-v2"><h2>今回のポイント</h2><div><strong>強み</strong><span>${advice.strength}</span></div><div><strong>次の課題</strong><span>${advice.challenge}</span></div></section>
       <h2 class="hub-heading-v2">自己ベスト</h2>${bests.length?`<section class="hub-bests-v2">${bests.map(best=>`<button type="button" data-hub-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabels[best.key]||best.key}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("")}</section>`:empty("この競技の自己ベストはまだありません。")}`;
   }
@@ -112,7 +111,6 @@
     const match=event.target.closest("[data-hub-match]");if(match){window.openMatchDetailV1?.(match.dataset.hubMatch);return;}
     if(event.target.closest("[data-hub-all-matches]")){event.preventDefault();event.stopImmediatePropagation();(window.CueScorePlayerJourneyV2?.openHistory||window.openPlayerMatchHistoryV2)?.(active.playerId,active.state.discipline);return;}
     if(event.target.closest("[data-hub-opponents]")){event.preventDefault();event.stopImmediatePropagation();(window.CueScorePlayerJourneyV2?.openRivals||window.openPlayerOpponentRecordsV2)?.(active.playerId,active.state.discipline);return;}
-    if(event.target.closest("[data-hub-trends]")){syncLegacyState();window.CueScoreUiRevisionV12?.openTrends?.();return;}
     if(event.target.closest("[data-hub-full-analysis]")){window.openPlayerAnalysisForPlayerV5?.(active.playerId,active.state.discipline);return;}
   },true);
 

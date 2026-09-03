@@ -15,17 +15,10 @@ assert.match(await first.getAttribute("aria-label"),/詳細を開く/);
 assert.equal(await noOverflow("#playerLibraryList"),true);
 await first.click();
 await page.locator('#playerStatsOverlay [data-pd7-discipline="9ball"]').click();
-await page.getByRole("button",{name:/グラフで見る/}).click();
-await page.locator("#pd12Trends:not(.hidden)").waitFor();
-assert.deepEqual(await page.locator(".pd12-trend-card h2").allTextContents(),["勝率","シュート率","ブレイクイン率","マス割り率","ファール率"]);
-assert.ok(await page.locator(".pd12-trend-card .analysis-b4-y-label").count()>=5);
-assert.ok(await page.locator(".pd12-trend-card .analysis-b4-x-label").count()>=1);
-assert.equal(await page.locator(".pd12-trend-card .analysis-b4-axis-caption").first().textContent(),"試合日");
-assert.equal(await page.locator(".pd12-trend-card .analysis-b4-y-label").first().evaluate(node=>getComputedStyle(node).fill!=="none"&&Number.parseFloat(getComputedStyle(node).fontSize)>=11),true);
-assert.equal(await page.locator("[data-pd7-trend-modal]").count(),0);
-assert.equal(await noOverflow("#pd12Trends"),true);
-await page.getByRole("button",{name:"競技詳細に戻る"}).click();
-assert.equal(await page.locator("#pd12Trends.hidden").count(),1);
+assert.equal(await page.getByRole("button",{name:/グラフで見る/}).count(),0);
+assert.equal(await page.locator("#pd12Trends").count(),0);
+assert.equal(await page.getByText("ファール率",{exact:true}).count(),0);
+assert.equal(await noOverflow("#playerStatsOverlay"),true);
 
 await page.locator("[data-pd7-rivals]").click();
 assert.equal(await page.locator("#playerOpponentRecordsV2 .journey-summary-v2").count(),0);
@@ -38,5 +31,5 @@ assert.equal(await page.locator("#playerMatchHistoryV2 [data-history-period]").c
 assert.equal(await page.locator("#playerMatchHistoryV2 [data-player-analysis-record-id]").count(),0);
 assert.equal(await noOverflow("#playerMatchHistoryV2"),true);
 
-console.log(JSON.stringify({viewport:"390x844",trends:"pass",opponents:"pass",opponentVsRow:"removed",history:"pass",overflow:"pass"}));
+console.log(JSON.stringify({viewport:"390x844",foulRate:"removed",trends:"removed",opponents:"pass",opponentVsRow:"removed",history:"pass",overflow:"pass"}));
 await browser.close();
