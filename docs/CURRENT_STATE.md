@@ -4,7 +4,7 @@
 
 - Build 48実iPhoneで自己ベスト配置の意図違いと、Player起点Match Detailのscroll不能が継続。自己ベストを横1列へ変更した。
 - Match Detailはmodal順序競合で`aria-hidden=true`／`pointer-events:none`へ戻されていたことを特定。Detailをbody直下へ移し、DOM順を最前面SSOTに変更し、表示中のBottom Navigationを無効化した。
-- 390×844で自己ベスト3件横1行、Detailの`pointer-events=auto`、下方向操作`scrollTop 0 → 520`、Back後のPlayer／Rotation／試合tab復元を確認。全自動test `352 pass / 0 fail / 0 skipped`、native web同期、Simulator Debug `BUILD SUCCEEDED`。Version `1.0`／Build `49`。実iPhone受入はPending。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build49_Horizontal_Bests_And_MatchDetail_Input_Fix_Implementation_2026-09-03.md`。
+- 390×844で自己ベスト3件横1行、Detailの`pointer-events=auto`、下方向操作`scrollTop 0 → 520`、Back後のPlayer／Rotation／試合tab復元を確認。全自動test `352 pass / 0 fail / 0 skipped`、native web同期、Simulator Debug／Release archive成功。Version `1.0`／Build `49`。source/archive commit `c6425d9`、Delivery／Build ID `339ca6db-2e6d-4b44-b2f4-6095c0d27011`、processing／import `VALID`、`usesNonExemptEncryption=false`、全Build自動対象のInternal group `CueScore Internal Testers`への配布を確認。実iPhone受入はPending。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：`docs/implementation/CueScore_Build49_Horizontal_Bests_And_MatchDetail_Input_Fix_Implementation_2026-09-03.md`。
 
 ## Build 48 Player Hub表示／Match Detailスクロール修正（2026年9月3日）
 
