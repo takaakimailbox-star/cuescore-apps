@@ -34,6 +34,11 @@
 
 ## リリース境界
 
+- site commit: `d60fd9900b11ba3f8a68bc011954da4dd8625c83`
+- GitHub Pages source: `main /docs`
+- GitHub Pages build: `1191510806` / `built`
+- 公開URL: `https://takaakimailbox-star.github.io/cuescore-apps/`
+- 公開root／Support／Privacy／TermsをHTTPS実URLで確認済み
 - GitHub Pagesのみ
 - TestFlight作成なし
 - App Store Review提出なし

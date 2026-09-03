@@ -4,7 +4,7 @@
 
 - Product Owner決定により、既存GitHub PagesをCueScore v1.0公式サイトとして完成。アプリruntimeを保護するため、Pages公開元は`main /docs`を採用し、公開rootで公式トップ、`/support.html`、`/privacy.html`、`/terms.html`を提供する。
 - 白・黒・warm gray基調のmobile-first 1ページ構成。Hero、記録／振り返り／成績、実装済み6ゲーム、Match／History／Player、Privacy、Final CTAを実装。現行demo UIの390×844実スクリーンショット4枚と正式iconを使用し、App Store CTAは正式URL未確定のため「App Store 公開予定」。
-- 390×844、393×852、430×932、768、1440でhorizontal overflow 0、全画像読込成功、Support／Privacy／Terms公式Markdown表示、console error 0。全自動test `347 pass / 0 fail / 0 skipped`。アプリBuildは`47`のまま、TestFlight作成／App Review提出なし。実装記録：`docs/implementation/CueScore_Official_Website_GitHubPages_v1_Implementation_2026-09-03.md`。
+- 390×844、393×852、430×932、768、1440でhorizontal overflow 0、全画像読込成功、Support／Privacy／Terms公式Markdown表示、console error 0。全自動test `347 pass / 0 fail / 0 skipped`。site commit `d60fd99`、Pages build `1191510806`成功、実URL `https://takaakimailbox-star.github.io/cuescore-apps/`でHTTPS表示を確認。アプリBuildは`47`のまま、TestFlight作成／App Review提出なし。実装記録：`docs/implementation/CueScore_Official_Website_GitHubPages_v1_Implementation_2026-09-03.md`。
 
 ## Build 47 分析ファール率／推移グラフ撤去（2026年9月3日）
 
