@@ -3,7 +3,7 @@
 ## Build 60 Free / Pro課金境界（2026年9月4日）
 
 - Freeは全保存recordの新しい順で全競技共通の最新20件を履歴・基本成績・Match Detailに使用し、21件目以降も保存を継続する。Proは全保存recordを使用し、自己ベスト、詳細分析・推移、対戦相手別、全履歴、Backup、Restoreを解放する。入口は1種類のCueScore Pro画面へ統一した。
-- StoreKit 2 bridgeを追加し、正式Non-Consumable Product ID `com.takaakimailboxstar.cuescoreapps.pro`をソース／StoreKit Configuration／App Store Connectで完全一致させた。App Store Connect IAP Apple IDは`6808464490`。Pro判定はverified transactionをSSOTとし、local booleanには依存しない。全自動test `371 pass / 0 fail / 0 skipped`、Simulator Debug `BUILD SUCCEEDED`。Version `1.0`／Build `60`。main反映、価格設定、Internal TestFlight配布結果は完了後に追記する。External TestFlight、App Review、審査用追加、一般公開は実施しない。実装記録：`docs/implementation/CueScore_Build60_Free_Pro_Monetization_Implementation_2026-09-04.md`。
+- StoreKit 2 bridgeを追加し、正式Non-Consumable Product ID `com.takaakimailboxstar.cuescoreapps.pro`をソース／StoreKit Configuration／App Store Connectで完全一致させた。App Store Connect IAP Apple IDは`6808464490`。Pro判定はverified transactionをSSOTとし、local booleanには依存しない。日本を基準地域として価格`¥980`を保存し、App Store Connect上の適用予定日は`2026年9月14日`。全自動test `371 pass / 0 fail / 0 skipped`、Simulator Debug `BUILD SUCCEEDED`。Version `1.0`／Build `60`。実装commit `6cecd64`をmainへ反映し、App Store Connect Build Upload ID `e0b8459f-7ebf-4022-a036-d1fe71bbed0c`は処理状態`VALID`、輸出コンプライアンス`usesNonExemptEncryption=false`。Build 60にInternal group `CueScore Internal Testers`が紐付いていることをApp Store Connect画面でも確認した。実iPhone確認はProduct Owner確認待ち。External TestFlight、App Review、審査用追加、一般公開は実施していない。実装記録：`docs/implementation/CueScore_Build60_Free_Pro_Monetization_Implementation_2026-09-04.md`。
 
 ## Build 59 競技別自己ベスト項目更新（2026年9月4日）
 

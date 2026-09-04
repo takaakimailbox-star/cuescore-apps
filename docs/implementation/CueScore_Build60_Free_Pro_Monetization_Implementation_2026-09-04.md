@@ -26,5 +26,7 @@
 - Simulator Debug：BUILD SUCCEEDED
 - App Store Connect IAP：CueScore Pro／Apple ID `6808464490`
 - Product ID：`com.takaakimailboxstar.cuescoreapps.pro`（ソース、StoreKit Configuration、App Store Connect完全一致）
-- Build、commit、App Store Connect Build ID、Internal TestFlight状態は配布完了後に追記する。
-- External TestFlight、App Review、審査用追加、一般公開は実施しない。
+- Version `1.0`／Build `60`、実装commitは`6cecd64`。日本を基準地域として価格`¥980`を保存し、App Store Connect上の適用予定日は`2026年9月14日`。
+- App Store Connect Build Upload IDは`e0b8459f-7ebf-4022-a036-d1fe71bbed0c`。処理状態`VALID`、輸出コンプライアンス`usesNonExemptEncryption=false`を確認した。
+- Build 60にInternal group `CueScore Internal Testers`が紐付いていることをApp Store Connect画面でも確認した。実iPhone確認はProduct Owner確認待ち。
+- External TestFlight、App Review、審査用追加、一般公開は実施していない。
