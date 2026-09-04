@@ -29,6 +29,11 @@ test("all record consumers start from the common policy while match writes keep 
   assert.match(html,/record-access-v1\.js[\s\S]*monetization-v1\.js/);
 });
 
+test("CueScore Pro hero uses the official CueScore logo mark",()=>{
+  assert.match(monetization,/CueScore_LogoMark_White\.svg/);
+  assert.doesNotMatch(monetization,/cue-pro-mark-v1\">C</);
+});
+
 test("one Pro screen owns all approved entry sources without a persisted entitlement flag",()=>{
   for(const source of ["personalBest","analysis","opponents","historyLimit","backup","restore"])assert.match(monetization,new RegExp(`${source}:`));
   assert.doesNotMatch(monetization,/localStorage\.(getItem|setItem).*pro/i);
