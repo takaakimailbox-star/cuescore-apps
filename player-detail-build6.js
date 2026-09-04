@@ -10,7 +10,8 @@
   ];
   const labels={winRate:"勝率",shotRate:"シュート率",breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",highRun:"ハイラン",average:"アベレージ"};
   const metricKeys={"9ball":["shotRate","breakInRate","masuwariRate"],"10ball":["shotRate","breakInRate","masuwariRate"],rotation:["shotRate","breakInRate","highRun"],jpa9:["average","breakInRate","highRun"],straightPool:["average","highRun"],threeCushion:["average","highRun"]};
-  const bestLabels={shotRate:"最高シュート率",breakInRate:"最高ブレイクイン率",masuwariRate:"最高マス割り率",masuwariCount:"1試合最多マス割り",highRun:"最大ハイラン",score:"1試合最高得点",average:"最高アベレージ",leastWinningInnings:"最少イニング勝利"};
+  const bestLabels={shotRate:"最高シュート率",breakInRate:"最高ブレイクイン率",masuwariRate:"最高マス割り率",masuwariCount:"1試合最多マス割り",breakPocketCount:"最高ブレイクポケット数",breakScore:"最高ブレイク得点",highRun:"最大ハイラン",score:"1試合最高得点",average:"最高アベレージ",leastWinningInnings:"最少イニング勝利"};
+  const bestLabel=(key,disciplineId)=>key==="leastWinningInnings"&&disciplineId==="jpa9"?"最短イニング":bestLabels[key]||key;
   const percent=new Set(["winRate","shotRate","breakInRate","masuwariRate"]);
   const discipline=record=>window.CueScoreAnalysisV2Context?.discipline?.(record)||"rotation";
   const players=()=>typeof readPlayerLibrary==="function"?readPlayerLibrary():[];
@@ -46,13 +47,8 @@
   function renderDetail(player,active){
     state.level="detail";state.discipline=active;header(`${def(active).label} 詳細`,"",def(active).asset);
     const records=recordsFor(player).filter(record=>discipline(record)===active);
-    const all=api.aggregate(records,player,helpers),keys=metricKeys[active]||[],bests=api.bests(records,player,active,helpers);
-    const displayedBests=bests.filter(best=>{
-      if(["rotation","straightPool","jpa9"].includes(active)&&best.key==="score")return false;
-      if(["9ball","10ball"].includes(active)&&best.key==="breakInRate")return false;
-      return true;
-    });
-    const bestCards=displayedBests.slice(0,3).map(best=>`<button type="button" class="pd7-best" data-pd7-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${active==="jpa9"&&best.key==="score"?"1試合最多得点":bestLabels[best.key]}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("");
+    const all=api.aggregate(records,player,helpers),keys=metricKeys[active]||[],displayedBests=api.bests(records,player,active,helpers).slice(0,3);
+    const bestCards=displayedBests.map(best=>`<button type="button" class="pd7-best" data-pd7-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,active)}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("");
     const summary=records.length?`${all.games}試合　${all.wins}勝${all.losses}敗`:"0試合　勝敗 —";
     body.innerHTML=`<div class="player-detail-shell-v1 pd7-shell"><section class="pd7-detail-summary">${profile(player,true)}<span><small>${def(active).label} 通算</small><strong>${summary}</strong></span></section>
       <article class="pd7-win-rate"><span><small>勝率</small><strong>${fmt("winRate",all.winRate)}</strong></span></article>

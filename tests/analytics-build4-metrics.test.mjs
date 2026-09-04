@@ -180,3 +180,40 @@ test("least value uses ascending selection",()=>{
   const chosen=metrics.chooseBest([{value:8,record:{id:"a"}},{value:5,record:{id:"b"}}],"asc");
   assert.equal(chosen.value,5);
 });
+
+test("legal break best counts pockets for 9-Ball and sums ball values for Rotation",()=>{
+  const nine=metrics.breakBestForRecord(record([
+    breakEvent(1,1,{pocketedBalls:[1,3,7],pocketCount:3}),
+    breakEvent(1,2,{pocketedBalls:[2,4],pocketCount:2})
+  ]),1,"9ball");
+  assert.deepEqual(nine,{eligible:true,pocketCount:3,score:null});
+  const rotation=metrics.breakBestForRecord(record([
+    breakEvent(1,1,{pocketedBalls:[1,4,8],pocketCount:3}),
+    breakEvent(1,2,{pocketedBalls:[10,15],pocketCount:2})
+  ]),1,"rotation");
+  assert.deepEqual(rotation,{eligible:true,pocketCount:3,score:25});
+});
+
+test("break best excludes fouls and rejects incomplete legacy break evidence",()=>{
+  const foul=metrics.breakBestForRecord(record([
+    breakEvent(1,1,{pocketedBalls:[8,9],pocketCount:2,scratch:true}),
+    breakEvent(1,2,{pocketedBalls:[1,2],pocketCount:2})
+  ]),1,"rotation");
+  assert.deepEqual(foul,{eligible:true,pocketCount:2,score:3});
+  const partial={sourceType:"break_result",player:1,rackNumber:2,data:{player:1,pocketedBalls:[9]}};
+  assert.equal(metrics.breakBestForRecord(record([breakEvent(1,1,{pocketedBalls:[1]}),partial]),1,"rotation").eligible,false);
+});
+
+test("personal best keys follow the approved six-discipline contract",()=>{
+  const helpers={side:()=>1,won:item=>item.winner===1,metric:(item,side)=>item.players[side],recordPlayer:(item,side)=>item.players[side],completedTurns:(item,side)=>item.players[side].completedTurns,discipline:()=>"",masuwariCounts:()=>({1:1,2:0})};
+  const item=completedRecord([
+    breakEvent(1,1,{pocketedBalls:[1,4,8],pocketCount:3}),
+    event("rack_end",1,1,{winner:1})
+  ],{players:{1:{score:13,maxRun:8,pocketCount:9,misses:1,completedTurns:4},2:{score:1}}});
+  assert.deepEqual(metrics.bests([item],{}, "9ball",helpers).map(best=>best.key),["shotRate","masuwariCount","breakPocketCount"]);
+  assert.deepEqual(metrics.bests([item],{}, "10ball",helpers).map(best=>best.key),["shotRate","masuwariCount","breakPocketCount"]);
+  assert.deepEqual(metrics.bests([item],{}, "rotation",helpers).map(best=>best.key),["shotRate","highRun","breakScore"]);
+  assert.deepEqual(metrics.bests([item],{}, "straightPool",helpers).map(best=>best.key),["highRun","average"]);
+  assert.deepEqual(metrics.bests([item],{}, "jpa9",helpers).map(best=>best.key),["highRun","average","leastWinningInnings"]);
+  assert.deepEqual(metrics.bests([item],{}, "threeCushion",helpers).map(best=>best.key),["highRun","average","leastWinningInnings"]);
+});

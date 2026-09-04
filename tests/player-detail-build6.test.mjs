@@ -49,7 +49,7 @@ test("all disciplines keep the approved metric sets",()=>{
 });
 
 test("detail density is collapsed and duplicate recent matches are removed",()=>{
-  assert.match(script,/displayedBests\.slice\(0,3\)/);
+  assert.match(script,/displayedBests=api\.bests\(records,player,active,helpers\)\.slice\(0,3\)/);
   assert.doesNotMatch(script,/records\.slice\(0,3\)/);
   assert.doesNotMatch(script,/data-pd7-trend-toggle/);
   assert.doesNotMatch(script,/data-pd7-metric-trend|data-pd7-trend-modal/);

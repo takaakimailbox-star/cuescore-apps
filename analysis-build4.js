@@ -18,7 +18,8 @@
     jpa9:["average","breakInRate","highRun"],
     straightPool:["average","highRun"],threeCushion:["average","highRun"]
   };
-  const bestLabels={shotRate:"最高シュート率",breakInRate:"最高ブレイクイン率",masuwariRate:"最高マス割り率",masuwariCount:"1試合最多マス割り",highRun:"最大ハイラン",score:"1試合最高得点",average:"最高アベレージ",leastWinningInnings:"最少イニング勝利"};
+  const bestLabels={shotRate:"最高シュート率",breakInRate:"最高ブレイクイン率",masuwariRate:"最高マス割り率",masuwariCount:"1試合最多マス割り",breakPocketCount:"最高ブレイクポケット数",breakScore:"最高ブレイク得点",highRun:"最大ハイラン",score:"1試合最高得点",average:"最高アベレージ",leastWinningInnings:"最少イニング勝利"};
+  const bestLabel=(key,discipline)=>key==="leastWinningInnings"&&discipline==="jpa9"?"最短イニング":bestLabels[key]||key;
   const ctx=()=>window.CueScoreAnalysisV2Context;
   const helpers=()=>({
     side:(record,player)=>{const data1=record?.players?.[1]||{},data2=record?.players?.[2]||{},id=String(player?.id||"");if(id&&String(data1.registeredPlayerId||"")===id)return 1;if(id&&String(data2.registeredPlayerId||"")===id)return 2;return String(data1.name||"")===String(player?.name||"")?1:String(data2.name||"")===String(player?.name||"")?2:0;},
@@ -70,7 +71,7 @@
       <h2 class="analysis-v2-section-title">主要指標</h2><section class="analysis-b4-metrics">${defs.map(def=>`<article><strong>${fmt(def.key,current[def.key])}</strong><span>${def.label}</span></article>`).join("")}</section>
       <section class="analysis-v2-card analysis-b4-trend"><div class="analysis-b4-heading"><h2>推移グラフ</h2><span>直近${trendRecords.length}試合</span></div><label class="analysis-b4-trend-picker"><span>表示指標</span><select data-b4-trend-select aria-label="推移グラフの表示指標">${trendKeys.map(key=>`<option value="${key}">${labels[key]}</option>`).join("")}</select></label><div data-b4-chart>${chart(trendRecords.map(record=>recordMetric(record,player,"winRate",discipline,h)),"winRate",trendRecords)}</div></section>
       <section class="analysis-v2-card analysis-b4-points"><h2>今回のポイント</h2><div><strong>強み</strong><span>${points.strength}</span></div><div><strong>次の課題</strong><span>${points.challenge}</span></div></section>
-      <h2 class="analysis-v2-section-title">自己ベスト</h2>${bests.length?`<section class="analysis-b4-bests">${bests.map(best=>`<button type="button" data-b4-match-id="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${best.key==="score"&&discipline==="jpa9"?"1試合最多得点":bestLabels[best.key]}</span><small>${esc(labels[discipline])}・${recordDate(best.record)}</small><i>試合を見る ›</i></button>`).join("")}</section>`:'<section class="analysis-v2-card analysis-b4-empty">データなし</section>'}
+      <h2 class="analysis-v2-section-title">自己ベスト</h2>${bests.length?`<section class="analysis-b4-bests">${bests.map(best=>`<button type="button" data-b4-match-id="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,discipline)}</span><small>${esc(labels[discipline])}・${recordDate(best.record)}</small><i>試合を見る ›</i></button>`).join("")}</section>`:'<section class="analysis-v2-card analysis-b4-empty">データなし</section>'}
       <h2 class="analysis-v2-section-title">詳細分析</h2><section class="analysis-b4-links"><button type="button" data-b4-rival="${playerId}"><span>対戦相手分析を見る</span><b>›</b></button></section>`;
     view.dataset.build4Rendered="true";view._build4={player,discipline,records:trendRecords,helpers:h};
   }

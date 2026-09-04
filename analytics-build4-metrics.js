@@ -127,6 +127,27 @@
     return{eligible:true,numerator,denominator:eligible.length,rate:percent(numerator,eligible.length)};
   }
 
+  function breakBestForRecord(record,side,discipline){
+    if(!BREAK_DISCIPLINES.has(discipline))return{eligible:false,pocketCount:null,score:null};
+    const events=detailedEvents(record).filter(event=>eventType(event)==="break_result"&&eventPlayer(event)===Number(side));
+    const eligible=events.filter(isBreakEventEligible);
+    if(!eligible.length||eligible.length!==events.length)return{eligible:false,pocketCount:null,score:null};
+    const legal=eligible.filter(event=>!["foul","scratch","breakFoul","illegalBreak","preBreakFoul","breakFailed"]
+      .some(key=>Boolean(value(event,key))));
+    if(!legal.length)return{eligible:true,pocketCount:null,score:null};
+    let pocketCount=null,score=null;
+    legal.forEach(event=>{
+      const balls=value(event,"pocketedBalls");
+      const count=Array.isArray(balls)?balls.length:Number(value(event,"pocketCount"));
+      if(Number.isFinite(count)&&count>0)pocketCount=Math.max(pocketCount??0,count);
+      if(discipline==="rotation"&&Array.isArray(balls)){
+        const valid=[...new Set(balls.map(Number))].filter(ball=>Number.isInteger(ball)&&ball>=1&&ball<=15);
+        if(valid.length===balls.length&&valid.length)score=Math.max(score??0,valid.reduce((sum,ball)=>sum+ball,0));
+      }
+    });
+    return{eligible:true,pocketCount,score};
+  }
+
   function masuwariForRecord(record,side,discipline,officialCounter){
     if(!MASUWARI_DISCIPLINES.has(discipline))return{eligible:false,numerator:0,denominator:0,rate:null};
     const events=commonEvents(record);
@@ -222,7 +243,8 @@
       const shot=shotRateForRecord(metric),breakIn=breakInForRecord(record,side,discipline);
       const masuwari=masuwariForRecord(record,side,discipline,helpers.masuwariCounts);
       const average=averageForRecord(metric,recordPlayer,helpers.completedTurns(record,side));
-      return{record,side,won:helpers.won(record,side),score:Number(metric.score??recordPlayer.score),highRun:Number(metric.maxRun),shot,breakIn,masuwari,average};
+      const breakBest=breakBestForRecord(record,side,discipline);
+      return{record,side,won:helpers.won(record,side),score:Number(metric.score??recordPlayer.score),highRun:Number(metric.maxRun),shot,breakIn,breakBest,masuwari,average};
     }).filter(Boolean);
     const candidate=(key,getter,direction="desc")=>{
       const winner=chooseBest(rows.map(row=>({record:row.record,value:getter(row)})),direction);
@@ -234,19 +256,21 @@
       breakInRate:candidate("breakInRate",row=>row.breakIn.eligible?row.breakIn.rate:null),
       masuwariRate:candidate("masuwariRate",row=>row.masuwari.eligible?row.masuwari.rate:null),
       masuwariCount:candidate("masuwariCount",row=>row.masuwari.eligible?row.masuwari.numerator:null),
+      breakPocketCount:candidate("breakPocketCount",row=>row.breakBest.eligible?row.breakBest.pocketCount:null),
+      breakScore:candidate("breakScore",row=>row.breakBest.eligible?row.breakBest.score:null),
       average:candidate("average",row=>row.average.eligible?row.average.value:null),
       leastWinningInnings:candidate("leastWinningInnings",row=>row.won&&row.average.eligible?row.average.denominator:null,"asc")
     };
     const keys={
-      "9ball":["shotRate","breakInRate","masuwariRate","masuwariCount"],
-      "10ball":["shotRate","breakInRate","masuwariRate","masuwariCount"],
-      rotation:["highRun","score","shotRate","breakInRate"],
-      jpa9:["highRun","score","average","breakInRate"],
-      straightPool:["highRun","score","average"],
+      "9ball":["shotRate","masuwariCount","breakPocketCount"],
+      "10ball":["shotRate","masuwariCount","breakPocketCount"],
+      rotation:["shotRate","highRun","breakScore"],
+      jpa9:["highRun","average","leastWinningInnings"],
+      straightPool:["highRun","average"],
       threeCushion:["highRun","average","leastWinningInnings"]
     }[discipline]||[];
     return keys.map(key=>map[key]).filter(Boolean);
   }
 
-  return{BREAK_DISCIPLINES,MASUWARI_DISCIPLINES,eventType,eventPlayer,rackOf,detailedEvents,isBreakEventEligible,breakInForRecord,masuwariForRecord,completedRacksForRecord,averageFoulsForRecord,completedRackIdsForRecord,foulRateForRecord,shotRateForRecord,averageForRecord,aggregate,chooseBest,bests};
+  return{BREAK_DISCIPLINES,MASUWARI_DISCIPLINES,eventType,eventPlayer,rackOf,detailedEvents,isBreakEventEligible,breakInForRecord,breakBestForRecord,masuwariForRecord,completedRacksForRecord,averageFoulsForRecord,completedRackIdsForRecord,foulRateForRecord,shotRateForRecord,averageForRecord,aggregate,chooseBest,bests};
 });

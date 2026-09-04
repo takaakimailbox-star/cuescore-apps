@@ -9,10 +9,14 @@ const legacyCss=read("player-detail-build6.css");
 const cardCss=read("ui-revision-v12.css");
 const html=read("index.html");
 
-test("9-Ball and 10-Ball omit break-in rate from self bests and cap the shared list at three",()=>{
-  assert.match(hub,/\["9ball","10ball"\]\.includes\(disciplineId\)&&best\.key==="breakInRate"/);
-  assert.match(hub,/\}\)\.slice\(0,3\)/);
-  assert.match(read("player-detail-build6.js"),/\["9ball","10ball"\]\.includes\(active\)&&best\.key==="breakInRate"/);
+test("self best renderers consume the approved metric contract and cap the shared list at three",()=>{
+  assert.match(hub,/api\.bests\(records,player,disciplineId,helpers\)\.slice\(0,3\)/);
+  const legacy=read("player-detail-build6.js");
+  assert.match(legacy,/api\.bests\(records,player,active,helpers\)\.slice\(0,3\)/);
+  for(const source of [hub,legacy]){
+    assert.match(source,/breakPocketCount:"最高ブレイクポケット数"/);
+    assert.match(source,/breakScore:"最高ブレイク得点"/);
+  }
 });
 
 test("self best cards use one horizontal row in both player detail renderers",()=>{

@@ -12,7 +12,7 @@
   ];
   const labels={winRate:"勝率",shotRate:"シュート率",breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",average:"アベレージ",highRun:"ハイラン"};
   const metricKeys={"9ball":["shotRate","breakInRate","masuwariRate"],"10ball":["shotRate","breakInRate","masuwariRate"],rotation:["shotRate","breakInRate","highRun"],jpa9:["average","breakInRate","highRun"],straightPool:["average","highRun"],threeCushion:["average","highRun"]};
-  const bestLabels={shotRate:"最高シュート率",breakInRate:"最高ブレイクイン率",masuwariRate:"最高マス割り率",masuwariCount:"1試合最多マス割り",highRun:"最大ハイラン",score:"1試合最高得点",average:"最高アベレージ",leastWinningInnings:"最少イニング勝利"};
+  const bestLabels={shotRate:"最高シュート率",breakInRate:"最高ブレイクイン率",masuwariRate:"最高マス割り率",masuwariCount:"1試合最多マス割り",breakPocketCount:"最高ブレイクポケット数",breakScore:"最高ブレイク得点",highRun:"最大ハイラン",score:"1試合最高得点",average:"最高アベレージ",leastWinningInnings:"最少イニング勝利"};
   const percent=new Set(["winRate","shotRate","breakInRate","masuwariRate"]),playerState=new Map();
   const def=id=>defs.find(item=>item.id===id)||defs[0];
   const players=()=>typeof readPlayerLibrary==="function"?readPlayerLibrary():[];
@@ -38,17 +38,14 @@
   const selector=state=>`<div class="hub-discipline-v2" role="tablist" aria-label="競技">${defs.map(item=>`<button type="button" role="tab" data-hub-discipline="${item.id}" aria-label="${item.label}" aria-selected="${item.id===state.discipline}" class="${item.id===state.discipline?"is-selected":""}"><img src="${item.asset}" alt="" aria-hidden="true"></button>`).join("")}</div>`;
   const tabs=state=>`<div class="hub-tabs-v2" role="tablist" aria-label="プレーヤーハブ">${[["results","成績"],["matches","試合"],["analysis","分析"]].map(([key,label])=>`<button type="button" role="tab" data-hub-tab="${key}" aria-selected="${state.tab===key}" class="${state.tab===key?"is-selected":""}">${label}</button>`).join("")}</div>`;
   const empty=text=>`<section class="hub-card-v2 hub-empty-v2">${text}</section>`;
-  const displayedBestsFor=(records,player,disciplineId)=>api.bests(records,player,disciplineId,helpers).filter(best=>{
-    if(["rotation","straightPool","jpa9"].includes(disciplineId)&&best.key==="score")return false;
-    if(["9ball","10ball"].includes(disciplineId)&&best.key==="breakInRate")return false;
-    return true;
-  }).slice(0,3);
+  const bestLabel=(key,disciplineId)=>key==="leastWinningInnings"&&disciplineId==="jpa9"?"最短イニング":bestLabels[key]||key;
+  const displayedBestsFor=(records,player,disciplineId)=>api.bests(records,player,disciplineId,helpers).slice(0,3);
   const matchRow=(record,player)=>{const s=side(record,player),o=opponent(record,s),isWin=won(record,s),cardClass=window.CueScoreMatchCardC?.classes?.("recent")||"match-card-c-v37 match-card-c-recent-v37";return `<button type="button" class="hub-match-row-v2 ${cardClass}" data-hub-match="${esc(record.id)}"><small class="match-card-c-date-v37">${dateText(record)}</small><span class="match-card-c-avatar-v37">${avatar(o)}</span><strong class="match-card-c-opponent-v37">${esc(o.name||"対戦相手")}</strong><span class="match-card-c-result-v37 ${isWin?"is-win":"is-loss"}">${isWin?"勝ち":"負け"}</span><span class="match-card-c-score-v37">${score(record,s)}<i>−</i>${score(record,s===1?2:1)}</span><b aria-hidden="true">›</b></button>`;};
 
   function resultsView(records,player,state){
     const all=api.aggregate(records,player,helpers),bests=displayedBestsFor(records,player,state.discipline);
     return `<section class="hub-summary-v2"><article><span>試合数</span><strong>${all.games}</strong></article><article><span>勝</span><strong>${all.wins}</strong></article><article><span>敗</span><strong>${all.losses}</strong></article><article><span>勝率</span><strong>${fmt("winRate",all.winRate)}</strong></article></section>
-      <h2 class="hub-heading-v2">自己ベスト</h2>${bests.length?`<section class="hub-bests-v2">${bests.map(best=>`<button type="button" data-hub-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabels[best.key]||best.key}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("")}</section>`:empty("この競技の自己ベストはまだありません。")} `;
+      <h2 class="hub-heading-v2">自己ベスト</h2>${bests.length?`<section class="hub-bests-v2">${bests.map(best=>`<button type="button" data-hub-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,state.discipline)}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("")}</section>`:empty("この競技の自己ベストはまだありません。")} `;
   }
 
   function matchesView(records,player,state){
@@ -72,7 +69,7 @@
       <h2 class="hub-heading-v2">主要指標</h2><section class="hub-metrics-v2">${keys.map(key=>`<article><strong>${fmt(key,current[key])}</strong><span>${labels[key]}</span></article>`).join("")||"<span>データなし</span>"}</section>
       <section class="hub-links-v2"><button type="button" data-hub-trends><span><strong>推移</strong><small>主要指標をグラフで見る</small></span><b>›</b></button></section>
       <section class="hub-card-v2 hub-points-v2"><h2>今回のポイント</h2><div><strong>強み</strong><span>${advice.strength}</span></div><div><strong>次の課題</strong><span>${advice.challenge}</span></div></section>
-      <h2 class="hub-heading-v2">自己ベスト</h2>${bests.length?`<section class="hub-bests-v2">${bests.map(best=>`<button type="button" data-hub-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabels[best.key]||best.key}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("")}</section>`:empty("この競技の自己ベストはまだありません。")}`;
+      <h2 class="hub-heading-v2">自己ベスト</h2>${bests.length?`<section class="hub-bests-v2">${bests.map(best=>`<button type="button" data-hub-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,state.discipline)}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("")}</section>`:empty("この競技の自己ベストはまだありません。")}`;
   }
 
   function render(playerId,options={}){

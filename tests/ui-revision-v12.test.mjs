@@ -7,8 +7,9 @@ const detail=readFileSync(new URL("../player-detail-build6.js",import.meta.url),
 const revision=readFileSync(new URL("../ui-revision-v12.js",import.meta.url),"utf8");
 const css=readFileSync(new URL("../ui-revision-v12.css",import.meta.url),"utf8");
 
-test("three points disciplines remove one-match highest score from displayed self best",()=>{
-  assert.match(detail,/\["rotation","straightPool","jpa9"\]\.includes\(active\)&&best\.key==="score"/);
+test("self best display consumes the approved three-item metrics contract",()=>{
+  assert.match(detail,/api\.bests\(records,player,active,helpers\)\.slice\(0,3\)/);
+  assert.doesNotMatch(detail,/best\.key==="score"/);
 });
 
 test("discipline detail removes foul rate and all trends UI",()=>{
