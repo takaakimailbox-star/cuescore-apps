@@ -1,5 +1,10 @@
 # CueScore Apps Current State
 
+## Build 59 競技別自己ベスト項目更新（2026年9月4日）
+
+- 6競技の自己ベストをProduct Owner確定内容へ更新。9-Ball／10-Ballは最高シュート率・1試合最多マス割り・最高ブレイクポケット数、Rotationは最高シュート率・最大ハイラン・最高ブレイク得点、14-1は最大ハイラン・最高アベレージ、JPA 9-Ballは最大ハイラン・最高アベレージ・最短イニング、3 Cushionは最大ハイラン・最高アベレージ・最少イニング勝利とした。
+- ブレイク項目は有効なブレイクeventだけを集計し、ファール／スクラッチ／不正ブレイクおよび詳細不足の旧記録を除外。JPA 9-Ballの最短イニングは勝利試合だけを対象とする。全自動test 366 pass / 0 fail / 0 skipped。native web／iOS assets同期、Release Archive／upload成功。Version 1.0／Build 59。source/build commit 95961f6、Build ID 5369fad0-21bb-4ea0-90ff-6eb9dd1de031。輸出コンプライアンス回答後、Internal group CueScore Internal Testers（内部、テスター1名）で「テスト中」を確認。実iPhone受入はpending。External TestFlight、App Review、審査用追加、一般公開は未実施。実装記録：docs/implementation/CueScore_Build59_Personal_Best_Contract_2026-09-04.md。
+
 ## Build 58 試合履歴の非対称Race表記短縮（2026年9月4日）
 
 - 全体履歴カードで「Race to 90 / 61」のような長い非対称目標点が右列を拡張し、下段の長い日本語氏名を省略していた。左右同一は「Race to 61」を維持し、左右異なる場合だけ「Race 90/61」へ短縮して氏名領域を確保した。
