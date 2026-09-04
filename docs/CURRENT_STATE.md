@@ -1,5 +1,10 @@
 # CueScore Apps Current State
 
+## Build 61 CueScore Pro正式ロゴ／Internal TestFlight（2026年9月4日）
+
+- CueScore Pro画面上部の仮「C」マークを、既存の正式白色CueScoreロゴマークへ置換。黒い角丸背景と画面構成は維持した。全自動test `372 pass / 0 fail / 0 skipped`。
+- Version `1.0`／Build `61`。実装commit `e5255b0`、Build番号更新commit `1ae1f9c`をmainへ反映。App Store Connect Build ID `67228b68-73a5-44a6-8c10-13d25962d1f1`は処理状態`VALID`、輸出コンプライアンス`usesNonExemptEncryption=false`。Build 61にInternal group `CueScore Internal Testers`が紐付いていることをApp Store Connect画面で確認した。実iPhone確認はProduct Owner確認待ち。External TestFlight、App Review、審査用追加、一般公開は実施していない。
+
 ## Build 60 Free / Pro課金境界（2026年9月4日）
 
 - Freeは全保存recordの新しい順で全競技共通の最新20件を履歴・基本成績・Match Detailに使用し、21件目以降も保存を継続する。Proは全保存recordを使用し、自己ベスト、詳細分析・推移、対戦相手別、全履歴、Backup、Restoreを解放する。入口は1種類のCueScore Pro画面へ統一した。
