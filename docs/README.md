@@ -113,6 +113,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/76_CueScore_v1.0_Build24_iPhone_Review_Fixes_Spec.md`
 - `official/77_CueScore_v1.0_Build25_Match_Setup_Player_Editor_Decision.md`
 - `official/78_CueScore_v1.0_Build25_Match_Setup_Player_Editor_Spec.md`
+- `official/97_CueScore_v1.0_Free_Pro_Monetization_Decision.md`
+- `official/98_CueScore_v1.0_Free_Pro_Monetization_Spec.md`
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and

@@ -44,8 +44,11 @@
 
   function resultsView(records,player,state){
     const all=api.aggregate(records,player,helpers),bests=displayedBestsFor(records,player,state.discipline);
+    const bestContent=window.CueScoreEntitlement?.isPro?.()
+      ? (bests.length?`<section class="hub-bests-v2">${bests.map(best=>`<button type="button" data-hub-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,state.discipline)}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("")}</section>`:empty("この競技の自己ベストはまだありません。"))
+      : `<button type="button" class="cue-pro-locked-card-v1" data-pro-personal-best><span><strong>自己ベスト</strong><small>Proで競技ごとの自己ベストを確認できます</small></span><span class="cue-pro-badge-v1">🔒 Pro</span></button>`;
     return `<section class="hub-summary-v2"><article><span>試合数</span><strong>${all.games}</strong></article><article><span>勝</span><strong>${all.wins}</strong></article><article><span>敗</span><strong>${all.losses}</strong></article><article><span>勝率</span><strong>${fmt("winRate",all.winRate)}</strong></article></section>
-      <h2 class="hub-heading-v2">自己ベスト</h2>${bests.length?`<section class="hub-bests-v2">${bests.map(best=>`<button type="button" data-hub-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,state.discipline)}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("")}</section>`:empty("この競技の自己ベストはまだありません。")} `;
+      ${bestContent}`;
   }
 
   function matchesView(records,player,state){
@@ -63,6 +66,7 @@
   }
 
   function analysisView(records,player,state){
+    if(!window.CueScoreEntitlement?.isPro?.())return `<button type="button" class="cue-pro-locked-card-v1" data-hub-tab="analysis"><span><strong>分析</strong><small>詳細分析と推移グラフはProで利用できます</small></span><span class="cue-pro-badge-v1">🔒 Pro</span></button>`;
     const currentRecords=records.slice(0,10),previousRecords=records.slice(10,20),current=api.aggregate(currentRecords,player,helpers),previous=api.aggregate(previousRecords,player,helpers),keys=metricKeys[state.discipline]||[],advice=points(current,previous,state),bests=displayedBestsFor(records,player,state.discipline);
     const status=current.games<3?"データ蓄積中":previous.games<3?"安定":current.winRate>previous.winRate?"改善傾向":current.winRate<previous.winRate?"要調整":"安定";
     return `<section class="hub-card-v2 hub-now-v2"><div><h2>今の状態</h2><b>${status}</b></div><strong>${current.games?`直近${current.games}試合　${current.wins}勝${current.losses}敗　勝率${Math.round(current.winRate)}%`:"データなし"}</strong><small>条件を満たす保存済み試合だけを使用しています</small></section>

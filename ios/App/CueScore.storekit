@@ -1,0 +1,35 @@
+{
+  "identifier" : "CUESCORE-PRO-STOREKIT-CONFIG",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "980",
+      "familyShareable" : false,
+      "internalID" : "CUESCORE-PRO-NONCONSUMABLE",
+      "localizations" : [
+
+      ],
+      "productID" : "com.takaakimailboxstar.cuescoreapps.pro",
+      "referenceName" : "CueScore Pro",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6802027038",
+    "_developerTeamID" : "U26DF88PRW",
+    "_failTransactionsEnabled" : false,
+    "_locale" : "ja_JP",
+    "_renewalBillingIssuesEnabled" : false,
+    "_storefront" : "JPN",
+    "_timeRate" : 0
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

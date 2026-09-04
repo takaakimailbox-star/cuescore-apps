@@ -15,8 +15,9 @@
   <link rel="stylesheet" href="./analysis-final-rc.css" />
   <link rel="stylesheet" href="./analysis-build4.css" />
   <link rel="stylesheet" href="./player-detail-build6.css" />
-  <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build59-personal-bests" />
+  <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build60-free-pro-foundation" />
   <link rel="stylesheet" href="./player-detail-build8.css" />
+  <link rel="stylesheet" href="./monetization-v1.css?v=1.0-build60-free-pro-v2" />
   <style id="build8PlayerTitleV1">
   .pd8-title-with-icon{display:flex!important;align-items:center;justify-content:center;gap:7px}.pd8-title-with-icon img{width:25px;height:25px;flex:0 0 auto}
   .pd8-discipline-fixed .player-history-disciplines-v4{display:none!important}
@@ -8623,7 +8624,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build59-personal-bests"></script>
+  <script src="./demo-data.js?v=2.0-build60-free-pro-foundation"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -9883,7 +9884,9 @@ let matchRecordsRawCacheV152 = null;
       return orphanedOrLegacyId
         && String(side?.name || "").trim().toLocaleLowerCase("ja") === normalizedName;
     };
-    return readMatchRecords().filter(record => {
+    const allSavedRecordsV1 = readMatchRecords();
+    const eligibleRecordsV1 = window.CueScoreRecordAccess?.getEligibleRecords(allSavedRecordsV1) || allSavedRecordsV1;
+    return eligibleRecordsV1.filter(record => {
       const p1 = record.players?.[1] || {};
       const p2 = record.players?.[2] || {};
       return matchesPlayer(p1) || matchesPlayer(p2);
@@ -16129,7 +16132,8 @@ let matchRecordsRawCacheV152 = null;
     const list = el("recordsList");
     const count = el("recordsCount");
     if (!list) return;
-    const sourceRecords = readMatchRecords();
+    const allSavedRecordsV1 = readMatchRecords();
+    const sourceRecords = window.CueScoreRecordAccess?.getEligibleRecords(allSavedRecordsV1) || allSavedRecordsV1;
     const categorySelectV381 = el("recordsCategorySelectV38");
     if (categorySelectV381) {
       const selected = recordsCategoryFilterV38;
@@ -16205,7 +16209,8 @@ let matchRecordsRawCacheV152 = null;
       </button>`;
     }).join("");
     list.innerHTML = cardsHtmlV154 +
-      (remainingV154 ? `<div class="records-load-more-v154"><button type="button" data-records-load-more-v154>さらに${Math.min(RECORD_RENDER_BATCH_V154, remainingV154)}件表示</button></div>` : "");
+      (remainingV154 ? `<div class="records-load-more-v154"><button type="button" data-records-load-more-v154>さらに${Math.min(RECORD_RENDER_BATCH_V154, remainingV154)}件表示</button></div>` : "") +
+      (window.CueScoreRecordAccess?.hasHiddenRecords(allSavedRecordsV1) ? `<aside class="cue-history-limit-v1"><strong>20件まで表示しています</strong><button type="button" data-pro-history-limit>Proですべての履歴を見る</button></aside>` : "");
     installRecordsDelegatedClickV154();
   }
 
@@ -19165,7 +19170,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build59-personal-bests";
+    const PWA_VERSION = "2.0-build60-free-pro-foundation";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22746,8 +22751,10 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
   window.rackGameMasuwariCountsV1 = rackGameMasuwariCountsV1;
 
   function openMatchDetailV1(recordId,options={}) {
-    const record=readMatchRecords().find(item=>String(item.id)===String(recordId));
-    if(!record) return;
+    const allSavedRecordsV1=readMatchRecords();
+    const eligibleRecordsV1=options?.source==="result"?allSavedRecordsV1:(window.CueScoreRecordAccess?.getEligibleRecords(allSavedRecordsV1)||allSavedRecordsV1);
+    const record=eligibleRecordsV1.find(item=>String(item.id)===String(recordId));
+    if(!record){if(allSavedRecordsV1.some(item=>String(item.id)===String(recordId)))window.CueScorePro?.open?.("historyLimit");return;}
     const resultMode=options?.source==="result";
     cleanupHistoricalRecordV159();
     const overlay=document.getElementById("recordDetailOverlay");
@@ -28168,7 +28175,7 @@ body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!impo
   <script src="./analytics-build4-metrics.js"></script>
   <script src="./analysis-build4.js"></script>
   <script src="./player-detail-build6.js"></script>
-  <script src="./ui-revision-v12.js?v=2.0-build59-personal-bests"></script>
+  <script src="./ui-revision-v12.js?v=2.0-build60-free-pro-foundation"></script>
   <script src="./final-ui-build18.js"></script>
   <link rel="stylesheet" href="./navigation-shell-phase1.css" />
   <script src="./navigation-shell-phase1.js"></script>
@@ -28180,8 +28187,10 @@ body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!impo
     window.CueScoreEditableSelectionV1=Object.freeze({isEditableTarget:editable});
   })();
   </script>
-  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build59-personal-bests" />
-  <script src="./navigation-phase2-6.js?v=2.0-build59-personal-bests"></script>
+  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build60-free-pro-foundation" />
+  <script src="./navigation-phase2-6.js?v=2.0-build60-free-pro-foundation"></script>
+  <script src="./record-access-v1.js?v=1.0-build60-free-pro-v2"></script>
+  <script src="./monetization-v1.js?v=1.0-build60-free-pro-v2"></script>
 </body>
 </html>
 

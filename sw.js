@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-build59-personal-bests";
+const APP_VERSION = "2.0-build60-free-pro-foundation";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-build59-personal-bests",
+  "./demo-data.js?v=2.0-build60-free-pro-foundation",
   "./manifest.webmanifest",
   "./privacy.html",
   "./terms.html",
@@ -17,14 +17,17 @@ const APP_SHELL = [
   "./analysis-build4.css",
   "./player-detail-build6.js",
   "./player-detail-build6.css",
-  "./ui-revision-v12.js?v=2.0-build59-personal-bests",
+  "./ui-revision-v12.js?v=2.0-build60-free-pro-foundation",
   "./final-ui-build18.js",
-  "./ui-revision-v12.css?v=2.0-build59-personal-bests",
+  "./ui-revision-v12.css?v=2.0-build60-free-pro-foundation",
   "./navigation-shell-phase1.css",
   "./navigation-shell-phase1.js",
-  "./navigation-phase2-6.css?v=2.0-build59-personal-bests",
-  "./navigation-phase2-6.js?v=2.0-build59-personal-bests",
+  "./navigation-phase2-6.css?v=2.0-build60-free-pro-foundation",
+  "./navigation-phase2-6.js?v=2.0-build60-free-pro-foundation",
   "./player-detail-build8.css",
+  "./record-access-v1.js?v=1.0-build60-free-pro-v2",
+  "./monetization-v1.js?v=1.0-build60-free-pro-v2",
+  "./monetization-v1.css?v=1.0-build60-free-pro-v2",
   "./docs/official/app-store-v1.0/public/CueScore_Privacy_Policy_v1.0_Official.md",
   "./docs/official/app-store-v1.0/public/CueScore_Terms_of_Use_v1.0_Official.md",
   "./docs/official/app-store-v1.0/public/CueScore_Support_v1.0_Official.md",

@@ -1,5 +1,10 @@
 # CueScore Apps Current State
 
+## Build 60 Free / Pro課金境界（2026年9月4日）
+
+- Freeは全保存recordの新しい順で全競技共通の最新20件を履歴・基本成績・Match Detailに使用し、21件目以降も保存を継続する。Proは全保存recordを使用し、自己ベスト、詳細分析・推移、対戦相手別、全履歴、Backup、Restoreを解放する。入口は1種類のCueScore Pro画面へ統一した。
+- StoreKit 2 bridgeを追加し、正式Non-Consumable Product ID `com.takaakimailboxstar.cuescoreapps.pro`をソース／StoreKit Configuration／App Store Connectで完全一致させた。App Store Connect IAP Apple IDは`6808464490`。Pro判定はverified transactionをSSOTとし、local booleanには依存しない。全自動test `371 pass / 0 fail / 0 skipped`、Simulator Debug `BUILD SUCCEEDED`。Version `1.0`／Build `60`。main反映、価格設定、Internal TestFlight配布結果は完了後に追記する。External TestFlight、App Review、審査用追加、一般公開は実施しない。実装記録：`docs/implementation/CueScore_Build60_Free_Pro_Monetization_Implementation_2026-09-04.md`。
+
 ## Build 59 競技別自己ベスト項目更新（2026年9月4日）
 
 - 6競技の自己ベストをProduct Owner確定内容へ更新。9-Ball／10-Ballは最高シュート率・1試合最多マス割り・最高ブレイクポケット数、Rotationは最高シュート率・最大ハイラン・最高ブレイク得点、14-1は最大ハイラン・最高アベレージ、JPA 9-Ballは最大ハイラン・最高アベレージ・最短イニング、3 Cushionは最大ハイラン・最高アベレージ・最少イニング勝利とした。
