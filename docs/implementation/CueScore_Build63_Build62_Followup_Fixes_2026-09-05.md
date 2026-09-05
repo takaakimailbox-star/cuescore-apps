@@ -23,8 +23,18 @@
 - 390×844 Browser: Terms → Privacy（Web navigation）→ アプリ側Back → Settingsを確認
 - 法務Back: 48×48px tap target、headerは`safe-area-inset-top`を除いた60pxのcontent領域を確保
 - Release iOS Simulator build: BUILD SUCCEEDED
+- Release device archive: `/private/tmp/CueScoreBuild63.xcarchive` / ARCHIVE SUCCEEDED
+
+## Internal TestFlight
+
+- source/archive commit: `6165164`
+- App Store Connect upload: SUCCEEDED
+- Build ID: `b1cd06d1-5a05-48d5-be95-7acdf77b5f94`
+- processing: `VALID`
+- export compliance: `usesNonExemptEncryption=false`
+- Internal group: `CueScore Internal Testers`（Internal／全Build access）でBuild 63の配布対象をAPI確認
+- 実iPhone 16e受入: Product Owner確認待ち
 
 ## 非対象
 
 IAP価格取得・購入不可、StoreKit／App Store Connect設定、Free／Pro境界、Swipe、External TestFlight、App Review、一般公開は変更していない。
-
