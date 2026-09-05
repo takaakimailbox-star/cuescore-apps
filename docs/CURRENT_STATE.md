@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## Build 64 Legal viewport／About／License修正（2026年9月5日）
+
+- Terms／Privacy／Supportへ`viewport-fit=cover`を追加し、法務画面をsafe area所有の固定app headerと、その下の単一独立scroll ownerへ分離した。390×844でheader下端`88.09px`とcontent scroll上端`88.09px`が一致、Back target`48px`、横overflowなし、Terms→Privacy遷移後もheader位置不変、Back 1タップでアプリへ戻ることを確認した。実iPhone 16eのsafe area最終受入はProduct Owner確認待ち。
+- 最新の公式資料・resource・dependency metadataに正式License destinationがないため、無反応だったSettingsの「ライセンス」行をv1.0 UIから非表示にした。About CueScoreの「閉じる」だけに限定してfocus outline／tap highlightを除去し、黒背景・白文字とclose動作を維持した。
+- 全自動test `374 pass / 0 fail / 0 skipped`、390×844 Browser QA、Release iOS Simulator build、device archive／IPA exportをPASS。Version `1.0`／Build `64`。実装commit `4ce8256`をmainへ反映。App Store Connect Build Upload／Build ID `2f7319c7-8219-4a23-bb8f-5039ec1abb5c`は処理状態`VALID`、輸出コンプライアンス`usesNonExemptEncryption=false`。全Build自動対象のInternal group `CueScore Internal Testers`の配布一覧先頭にBuild 64があることをAPIで確認した。IAP調査、External TestFlight、App Review、審査用追加、一般公開は実施していない。
+
 ## Build 63 Build 62実機QA Follow-up修正（2026年9月5日）
 
 - HistoryのFree 20件CTAからCueScore Proを開く際、元の`recordsScreen`、競技filter、`recordsList`のscroll位置を専用snapshotとして保持し、Back時にDOM描画後まで同じscroll ownerへ復元する。390×844で`すべて`最下部の`scrollTop 758 → 758`、filter維持、差分0pxを確認した。
