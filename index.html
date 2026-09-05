@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="./player-detail-build6.css" />
   <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build60-free-pro-foundation" />
   <link rel="stylesheet" href="./player-detail-build8.css" />
-  <link rel="stylesheet" href="./monetization-v1.css?v=1.0-build63-followup-fix-v1" />
+  <link rel="stylesheet" href="./monetization-v1.css?v=1.0-build64-legal-viewport-v1" />
   <style id="build8PlayerTitleV1">
   .pd8-title-with-icon{display:flex!important;align-items:center;justify-content:center;gap:7px}.pd8-title-with-icon img{width:25px;height:25px;flex:0 0 auto}
   .pd8-discipline-fixed .player-history-disciplines-v4{display:none!important}
@@ -8624,7 +8624,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build63-followup-fix-v1"></script>
+  <script src="./demo-data.js?v=2.0-build64-legal-viewport-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19170,7 +19170,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build63-followup-fix-v1";
+    const PWA_VERSION = "2.0-build64-legal-viewport-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -25390,7 +25390,6 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
           <button class="settings-info-link-v1" type="button" data-cuescore-about><span>About CueScore</span><span>›</span></button>
           <button class="settings-info-link-v1" type="button" data-settings-legal="terms.html"><span>利用規約</span><span>›</span></button>
           <button class="settings-info-link-v1" type="button" data-settings-legal="privacy.html"><span>プライバシーポリシー</span><span>›</span></button>
-          <button class="settings-info-link-v1" type="button" aria-disabled="true" disabled><span>ライセンス</span><span>›</span></button>
           <div class="settings-copyright-v1">© ${new Date().getFullYear()} CueScore Apps</div>
         </footer>
       </main>
@@ -27513,6 +27512,8 @@ body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!impo
 .cue-about-card-v1 [data-cuescore-logo]{width:min(100%,280px);height:36px}
 .cue-about-card-v1 p{margin:14px 0 22px;color:#777;font-size:14px}
 .cue-about-card-v1 button{min-width:132px;min-height:44px;border:1px solid #111;border-radius:12px;background:#111;color:#fff;font:inherit;font-weight:750}
+.cue-about-card-v1 button:focus,.cue-about-card-v1 button:focus-visible{outline:none!important;outline-color:transparent!important;box-shadow:none!important}
+.cue-about-card-v1 button{-webkit-tap-highlight-color:transparent}
 @media(prefers-color-scheme:dark){
   .cue-about-dialog-v1{background:#111;color:#fff}
   .cue-about-card-v1 p{color:#c9c9c6}
@@ -28190,7 +28191,7 @@ body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!impo
   <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build60-free-pro-foundation" />
   <script src="./navigation-phase2-6.js?v=2.0-build60-free-pro-foundation"></script>
   <script src="./record-access-v1.js?v=1.0-build60-free-pro-v2"></script>
-  <script src="./monetization-v1.js?v=1.0-build63-followup-fix-v1"></script>
+  <script src="./monetization-v1.js?v=1.0-build64-legal-viewport-v1"></script>
 </body>
 </html>
 

@@ -20,8 +20,8 @@ test("Settings connects Terms and Privacy without changing the footer layout",()
   assert.match(html,/const restoreSettingsAfterLegalV160 = \(\) => \{[\s\S]*?sessionStorage\.getItem\("cuescore\.returnToSettings\.v1"\) !== "1"[\s\S]*?sessionStorage\.removeItem[\s\S]*?document\.getElementById\("settingsBtn"\)\?\.click\(\)[\s\S]*?window\.addEventListener\("pageshow", restoreSettingsAfterLegalV160\)/);
 });
 
-test("License remains explicitly unavailable until an official source exists",()=>{
-  assert.match(html,/aria-disabled="true" disabled><span>ライセンス/);
+test("License is hidden when no official destination or resource exists",()=>{
+  assert.doesNotMatch(html,/>ライセンス</);
   assert.doesNotMatch(html,/data-settings-legal="license/);
 });
 
@@ -29,7 +29,7 @@ test("Terms, Privacy and Support official sources are cached for offline navigat
   assert.match(terms,/CueScore_Terms_of_Use_v1\.0_Official\.md/);
   assert.match(privacy,/CueScore_Privacy_Policy_v1\.0_Official\.md/);
   assert.match(support,/CueScore_Support_v1\.0_Official\.md/);
-  for(const path of ["./terms.html","./privacy.html","./support.html","./official-document.js?v=1.0-build63-followup-fix-v1","./official-pages.css?v=1.0-build63-followup-fix-v1"])assert.ok(sw.includes(`"${path}"`));
+  for(const path of ["./terms.html","./privacy.html","./support.html","./official-document.js?v=1.0-build64-legal-viewport-v1","./official-pages.css?v=1.0-build64-legal-viewport-v1"])assert.ok(sw.includes(`"${path}"`));
   assert.match(sw,/cache\.put\(event\.request, response\.clone\(\)\)/);
   assert.doesNotMatch(sw,/cache\.put\("\.\/index\.html", response\.clone\(\)\)/);
 });
@@ -38,13 +38,24 @@ test("Terms, Privacy and Support share an accessible in-page Back control",()=>{
   for(const page of [terms,privacy,support]){
     assert.match(page,/<button class="legal-back-v1" type="button" data-legal-back aria-label="CueScore Appsへ戻る">/);
     assert.match(page,/<path d="m15 4-8 8 8 8"\/>/);
-    assert.match(page,/official-pages\.css\?v=1\.0-build63-followup-fix-v1/);
-    assert.match(page,/official-document\.js\?v=1\.0-build63-followup-fix-v1/);
+    assert.match(page,/<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">/);
+    assert.match(page,/<div class="legal-scroll-v2"><main class="document">/);
+    assert.match(page,/official-pages\.css\?v=1\.0-build64-legal-viewport-v1/);
+    assert.match(page,/official-document\.js\?v=1\.0-build64-legal-viewport-v1/);
   }
   assert.match(styles,/\.legal-back-v1\{[^}]*min-width:48px;min-height:48px/);
   assert.match(styles,/padding-top:env\(safe-area-inset-top\)/);
   assert.match(styles,/min-height:calc\(60px \+ env\(safe-area-inset-top\)\)/);
-  assert.match(styles,/\.site-header\{position:sticky;top:0/);
+  assert.match(styles,/body\{[^}]*height:100dvh[^}]*grid-template-rows:auto minmax\(0,1fr\)[^}]*overflow:hidden/);
+  assert.match(styles,/\.site-header\{position:relative/);
+  assert.match(styles,/\.legal-scroll-v2\{[^}]*min-height:0[^}]*overflow-y:auto/);
+});
+
+test("About close removes only its yellow focus and tap ring",()=>{
+  assert.match(html,/\.cue-about-card-v1 button:focus,\.cue-about-card-v1 button:focus-visible\{outline:none!important;outline-color:transparent!important;box-shadow:none!important\}/);
+  assert.match(html,/\.cue-about-card-v1 button\{-webkit-tap-highlight-color:transparent\}/);
+  assert.match(html,/about\.querySelector\("button"\)\?\.addEventListener\("click",\(\) => about\.close\(\)\)/);
+  assert.doesNotMatch(html,/\*:focus\s*\{[^}]*outline\s*:\s*none/);
 });
 
 test("Official Markdown is rendered as safe semantic DOM instead of raw Markdown text",()=>{
