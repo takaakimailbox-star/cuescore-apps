@@ -49,6 +49,10 @@ const renderOfficialMarkdown=(markdown,target)=>{
 };
 
 backButton?.addEventListener("click",()=>{
+  if(window.parent!==window){
+    window.parent.postMessage({type:"CUESCORE_CLOSE_LEGAL_VIEW"},window.location.origin);
+    return;
+  }
   const homeUrl=new URL("./",window.location.href).href;
   window.location.assign(homeUrl);
 });

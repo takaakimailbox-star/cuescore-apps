@@ -16,8 +16,10 @@ const termsMarkdown=fs.readFileSync(new URL("../docs/official/app-store-v1.0/pub
 test("Settings connects Terms and Privacy without changing the footer layout",()=>{
   assert.match(html,/class="settings-info-link-v1" type="button" data-settings-legal="terms\.html"><span>利用規約/);
   assert.match(html,/class="settings-info-link-v1" type="button" data-settings-legal="privacy\.html"><span>プライバシーポリシー/);
-  assert.match(html,/const legalPage = event\.target\.closest\("\[data-settings-legal\]"\)[\s\S]*?sessionStorage\.setItem\("cuescore\.returnToSettings\.v1","1"\)[\s\S]*?window\.location\.assign\(new URL\(legalPage, window\.location\.href\)\.href\)/);
-  assert.match(html,/const restoreSettingsAfterLegalV160 = \(\) => \{[\s\S]*?sessionStorage\.getItem\("cuescore\.returnToSettings\.v1"\) !== "1"[\s\S]*?sessionStorage\.removeItem[\s\S]*?document\.getElementById\("settingsBtn"\)\?\.click\(\)[\s\S]*?window\.addEventListener\("pageshow", restoreSettingsAfterLegalV160\)/);
+  assert.match(html,/const openLegalViewV165 = legalPage => \{[\s\S]*?cue-legal-overlay-v65[\s\S]*?cue-legal-frame-v65[\s\S]*?legalFrameV165\.src = new URL\(legalPage, window\.location\.href\)\.href[\s\S]*?legalOverlayV165\.hidden = false/);
+  assert.match(html,/const legalPage = event\.target\.closest\("\[data-settings-legal\]"\)[\s\S]*?openLegalViewV165\(legalPage\)/);
+  assert.doesNotMatch(html,/cuescore\.returnToSettings\.v1/);
+  assert.doesNotMatch(html,/window\.location\.assign\(new URL\(legalPage/);
 });
 
 test("License is hidden when no official destination or resource exists",()=>{
@@ -29,7 +31,7 @@ test("Terms, Privacy and Support official sources are cached for offline navigat
   assert.match(terms,/CueScore_Terms_of_Use_v1\.0_Official\.md/);
   assert.match(privacy,/CueScore_Privacy_Policy_v1\.0_Official\.md/);
   assert.match(support,/CueScore_Support_v1\.0_Official\.md/);
-  for(const path of ["./terms.html","./privacy.html","./support.html","./official-document.js?v=1.0-build64-legal-viewport-v1","./official-pages.css?v=1.0-build64-legal-viewport-v1"])assert.ok(sw.includes(`"${path}"`));
+  for(const path of ["./terms.html","./privacy.html","./support.html","./official-document.js?v=1.0-build65-in-app-legal-view-v1","./official-pages.css?v=1.0-build65-in-app-legal-view-v1"])assert.ok(sw.includes(`"${path}"`));
   assert.match(sw,/cache\.put\(event\.request, response\.clone\(\)\)/);
   assert.doesNotMatch(sw,/cache\.put\("\.\/index\.html", response\.clone\(\)\)/);
 });
@@ -40,8 +42,8 @@ test("Terms, Privacy and Support share an accessible in-page Back control",()=>{
     assert.match(page,/<path d="m15 4-8 8 8 8"\/>/);
     assert.match(page,/<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">/);
     assert.match(page,/<div class="legal-scroll-v2"><main class="document">/);
-    assert.match(page,/official-pages\.css\?v=1\.0-build64-legal-viewport-v1/);
-    assert.match(page,/official-document\.js\?v=1\.0-build64-legal-viewport-v1/);
+    assert.match(page,/official-pages\.css\?v=1\.0-build65-in-app-legal-view-v1/);
+    assert.match(page,/official-document\.js\?v=1\.0-build65-in-app-legal-view-v1/);
   }
   assert.match(styles,/\.legal-back-v1\{[^}]*min-width:48px;min-height:48px/);
   assert.match(styles,/padding-top:env\(safe-area-inset-top\)/);
@@ -86,6 +88,11 @@ test("Settings child Back controls show only the arrow and retain destination la
 });
 
 test("legal Back returns directly to Settings even after website navigation and safely falls back to Home",()=>{
+  assert.match(script,/if\(window\.parent!==window\)[\s\S]*?window\.parent\.postMessage\(\{type:"CUESCORE_CLOSE_LEGAL_VIEW"\},window\.location\.origin\)[\s\S]*?return/);
+  assert.match(html,/event\.origin !== window\.location\.origin \|\| event\.source !== legalFrameV165\?\.contentWindow/);
+  assert.match(html,/event\.data\?\.type === "CUESCORE_CLOSE_LEGAL_VIEW"\) closeLegalViewV165\(\)/);
+  assert.match(html,/const closeLegalViewV165 = \(\) => \{[\s\S]*?legalOverlayV165\.hidden = true[\s\S]*?legalFrameV165\?\.removeAttribute\("src"\)/);
+  assert.doesNotMatch(html,/closeLegalViewV165[\s\S]{0,300}cue-app-booting-v2/);
   assert.match(script,/window\.location\.assign\(homeUrl\)/);
   assert.doesNotMatch(script,/window\.history\.back\(\)/);
 });

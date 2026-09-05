@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="./player-detail-build6.css" />
   <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build60-free-pro-foundation" />
   <link rel="stylesheet" href="./player-detail-build8.css" />
-  <link rel="stylesheet" href="./monetization-v1.css?v=1.0-build64-legal-viewport-v1" />
+  <link rel="stylesheet" href="./monetization-v1.css?v=1.0-build65-in-app-legal-view-v1" />
   <style id="build8PlayerTitleV1">
   .pd8-title-with-icon{display:flex!important;align-items:center;justify-content:center;gap:7px}.pd8-title-with-icon img{width:25px;height:25px;flex:0 0 auto}
   .pd8-discipline-fixed .player-history-disciplines-v4{display:none!important}
@@ -8624,7 +8624,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build64-legal-viewport-v1"></script>
+  <script src="./demo-data.js?v=2.0-build65-in-app-legal-view-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19170,7 +19170,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build64-legal-viewport-v1";
+    const PWA_VERSION = "2.0-build65-in-app-legal-view-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -25444,6 +25444,29 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   });
   window.addEventListener("online", renderCloudState);
   window.addEventListener("offline", renderCloudState);
+  let legalOverlayV165 = null;
+  let legalFrameV165 = null;
+  const closeLegalViewV165 = () => {
+    if (!legalOverlayV165) return;
+    legalOverlayV165.hidden = true;
+    legalFrameV165?.removeAttribute("src");
+  };
+  const openLegalViewV165 = legalPage => {
+    if (!legalOverlayV165) {
+      legalOverlayV165 = document.createElement("div");
+      legalOverlayV165.className = "cue-legal-overlay-v65";
+      legalOverlayV165.hidden = true;
+      legalOverlayV165.innerHTML = '<iframe class="cue-legal-frame-v65" title="CueScore 法務情報"></iframe>';
+      document.body.appendChild(legalOverlayV165);
+      legalFrameV165 = legalOverlayV165.querySelector("iframe");
+    }
+    legalFrameV165.src = new URL(legalPage, window.location.href).href;
+    legalOverlayV165.hidden = false;
+  };
+  window.addEventListener("message", event => {
+    if (event.origin !== window.location.origin || event.source !== legalFrameV165?.contentWindow) return;
+    if (event.data?.type === "CUESCORE_CLOSE_LEGAL_VIEW") closeLegalViewV165();
+  });
   root.addEventListener("click", event => {
     if (event.target.closest("[data-settings-home-back]")) {
       document.getElementById("settingsBackBtn")?.click();
@@ -25451,8 +25474,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     }
     const legalPage = event.target.closest("[data-settings-legal]")?.dataset.settingsLegal;
     if (legalPage) {
-      sessionStorage.setItem("cuescore.returnToSettings.v1","1");
-      window.location.assign(new URL(legalPage, window.location.href).href);
+      openLegalViewV165(legalPage);
       return;
     }
     const action = event.target.closest("[data-settings-action]")?.dataset.settingsAction;
@@ -25510,16 +25532,10 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     if (nav === "player") document.getElementById("playerManagementBtn")?.click();
   });
   renderCloudState();
-  const restoreSettingsAfterLegalV160 = () => {
-    if (sessionStorage.getItem("cuescore.returnToSettings.v1") !== "1") return;
-    sessionStorage.removeItem("cuescore.returnToSettings.v1");
-    requestAnimationFrame(() => document.getElementById("settingsBtn")?.click());
-  };
-  restoreSettingsAfterLegalV160();
-  window.addEventListener("pageshow", restoreSettingsAfterLegalV160);
 })();
 </script>
 <style>
+.cue-legal-overlay-v65{position:fixed;inset:0;z-index:10000;width:100%;height:100dvh;background:#fff}.cue-legal-overlay-v65[hidden]{display:none!important}.cue-legal-frame-v65{display:block;width:100%;height:100%;border:0;background:#fff}
 /* CueScore Analytics v1.0: formal player analysis layout */
 .app.rankings-mode{width:100%!important;max-width:none!important;height:100dvh!important;min-height:100dvh!important;padding:0!important;overflow:hidden!important;background:#f7f7f5!important;color:#171717!important}
 .app.rankings-mode>.rankings-screen{display:block!important}
@@ -28191,7 +28207,7 @@ body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!impo
   <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build60-free-pro-foundation" />
   <script src="./navigation-phase2-6.js?v=2.0-build60-free-pro-foundation"></script>
   <script src="./record-access-v1.js?v=1.0-build60-free-pro-v2"></script>
-  <script src="./monetization-v1.js?v=1.0-build64-legal-viewport-v1"></script>
+  <script src="./monetization-v1.js?v=1.0-build65-in-app-legal-view-v1"></script>
 </body>
 </html>
 
