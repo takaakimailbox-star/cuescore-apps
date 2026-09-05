@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## Build 65 法務画面Back時スプラッシュ修正（2026年9月5日）
+
+- 原因はSettingsからTerms／Privacyへ`window.location.assign()`でトップレベル遷移し、法務画面Backもアプリrootへ`window.location.assign()`していたため、`index.html`の再読込・再初期化と起動スプラッシュ処理が毎回実行されていたこと。親アプリを保持する全画面法務ビューへ最小変更し、法務画面Backはsame-originの親へclose通知を送り、法務ビューだけを閉じる契約へ変更した。直接URLで法務ページを開いた場合のHome fallbackは維持した。
+- 390×844のCodexアプリ内Browserで`Settings → 利用規約 → Back → Settings`と`Settings → Privacy → Back → Settings`を確認。両方ともBack直後に親URL不変、Settings DOM保持、起動classなし、スプラッシュ要素なしを確認した。実iPhone 16eの最終受入はProduct Owner確認待ち。
+- 全自動test `374 pass / 0 fail / 0 skipped`、Release iOS Simulator build、device archive／IPA exportをPASS。Version `1.0`／Build `65`。実装commit `a52f8c1`をmainへ反映。App Store Connect Build ID `94d0a923-5300-4451-b425-e217ca14e1cb`は処理状態`VALID`、輸出コンプライアンス`usesNonExemptEncryption=false`。全Build自動対象のInternal group `CueScore Internal Testers`の配布一覧先頭にBuild 65があることをAPIで確認した。IAP、StoreKit、Free／Pro仕様、その他UIは変更していない。External TestFlight、App Review、審査用追加、一般公開は実施していない。
+
 ## Build 64 Legal viewport／About／License修正（2026年9月5日）
 
 - Terms／Privacy／Supportへ`viewport-fit=cover`を追加し、法務画面をsafe area所有の固定app headerと、その下の単一独立scroll ownerへ分離した。390×844でheader下端`88.09px`とcontent scroll上端`88.09px`が一致、Back target`48px`、横overflowなし、Terms→Privacy遷移後もheader位置不変、Back 1タップでアプリへ戻ることを確認した。実iPhone 16eのsafe area最終受入はProduct Owner確認待ち。
