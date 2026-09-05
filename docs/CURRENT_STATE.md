@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## Build 63 Build 62実機QA Follow-up修正（2026年9月5日）
+
+- HistoryのFree 20件CTAからCueScore Proを開く際、元の`recordsScreen`、競技filter、`recordsList`のscroll位置を専用snapshotとして保持し、Back時にDOM描画後まで同じscroll ownerへ復元する。390×844で`すべて`最下部の`scrollTop 758 → 758`、filter維持、差分0pxを確認した。
+- Terms／Privacy／Supportのアプリ側Backは、headerのcontent高60pxへ`safe-area-inset-top`を加算して48×48px tap targetをsafe area内へ配置した。Terms → PrivacyのWeb navigation後も左上BackからSettingsへ直接復帰する。法務資産はBuild 63 cache busterで更新した。
+- Licenseは公式資料・現行resourceに正式destinationが存在しないことを再確認し、推測実装せずdisabled状態を維持した。全自動test `373 pass / 0 fail / 0 skipped`、390×844 Browser QA、Release iOS Simulator buildをPASS。Version `1.0`／Build `63`。Internal TestFlight配布情報はupload後に追記する。IAP調査、External TestFlight、App Review、一般公開は実施していない。実装記録：`docs/implementation/CueScore_Build63_Build62_Followup_Fixes_2026-09-05.md`。
+
 ## Build 62 最小UI修正／Internal TestFlight（2026年9月5日）
 
 - SettingsのBackup／Restore行は`🔒 Pro` badgeとchevronをcard内の独立列へ固定し、390×844で重なり・横overflowなしを確認。CueScore Pro画面は同viewport内にロゴ、説明、特典、購入／復元buttonを収めてscrollを不要化し、反転白ロゴを既存の通常黒CueScoreロゴへ変更した。

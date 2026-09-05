@@ -29,7 +29,7 @@ test("Terms, Privacy and Support official sources are cached for offline navigat
   assert.match(terms,/CueScore_Terms_of_Use_v1\.0_Official\.md/);
   assert.match(privacy,/CueScore_Privacy_Policy_v1\.0_Official\.md/);
   assert.match(support,/CueScore_Support_v1\.0_Official\.md/);
-  for(const path of ["./terms.html","./privacy.html","./support.html","./official-document.js","./official-pages.css"])assert.ok(sw.includes(`"${path}"`));
+  for(const path of ["./terms.html","./privacy.html","./support.html","./official-document.js?v=1.0-build63-followup-fix-v1","./official-pages.css?v=1.0-build63-followup-fix-v1"])assert.ok(sw.includes(`"${path}"`));
   assert.match(sw,/cache\.put\(event\.request, response\.clone\(\)\)/);
   assert.doesNotMatch(sw,/cache\.put\("\.\/index\.html", response\.clone\(\)\)/);
 });
@@ -38,9 +38,12 @@ test("Terms, Privacy and Support share an accessible in-page Back control",()=>{
   for(const page of [terms,privacy,support]){
     assert.match(page,/<button class="legal-back-v1" type="button" data-legal-back aria-label="CueScore Appsへ戻る">/);
     assert.match(page,/<path d="m15 4-8 8 8 8"\/>/);
+    assert.match(page,/official-pages\.css\?v=1\.0-build63-followup-fix-v1/);
+    assert.match(page,/official-document\.js\?v=1\.0-build63-followup-fix-v1/);
   }
   assert.match(styles,/\.legal-back-v1\{[^}]*min-width:48px;min-height:48px/);
   assert.match(styles,/padding-top:env\(safe-area-inset-top\)/);
+  assert.match(styles,/min-height:calc\(60px \+ env\(safe-area-inset-top\)\)/);
   assert.match(styles,/\.site-header\{position:sticky;top:0/);
 });
 
@@ -71,9 +74,7 @@ test("Settings child Back controls show only the arrow and retain destination la
   assert.doesNotMatch(html,/\$\{icon\.back\}<span>\$\{back === "settings"/);
 });
 
-test("legal Back returns to Settings history and safely falls back to Home",()=>{
-  assert.match(script,/sessionStorage\.getItem\(settingsReturnKey\)==="1"/);
-  assert.match(script,/!openedFromSettings\|\|window\.history\.length<=1[\s\S]*?window\.location\.replace\(homeUrl\)/);
-  assert.match(script,/window\.history\.back\(\)/);
-  assert.match(script,/window\.addEventListener\("pagehide"[\s\S]*?window\.setTimeout[\s\S]*?window\.location\.replace\(homeUrl\)/);
+test("legal Back returns directly to Settings even after website navigation and safely falls back to Home",()=>{
+  assert.match(script,/window\.location\.assign\(homeUrl\)/);
+  assert.doesNotMatch(script,/window\.history\.back\(\)/);
 });

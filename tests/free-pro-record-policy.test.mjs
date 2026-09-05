@@ -40,7 +40,11 @@ test("minimal Pro UI stays compact and restores its exact origin",()=>{
   assert.match(monetizationCss,/\.cue-pro-scroll-v1\{[^}]*overflow:hidden/);
   assert.match(monetizationCss,/\.settings-data-row-v1 \.cue-pro-badge-v1\{[^}]*white-space:nowrap/);
   assert.doesNotMatch(monetization,/cue-pro-legal-v1/);
-  assert.match(monetization,/originScroll=captureScroll\(\)/);
+  assert.match(monetization,/originScroll=captureScroll\(currentSource\)/);
+  assert.match(monetization,/source==="historyLimit"[\s\S]*?document\.getElementById\("recordsList"\)/);
+  assert.match(monetization,/filter:screen\?\.querySelector\("\[data-records-discipline-v2\]\.is-selected"\)/);
+  assert.match(monetization,/restoreAfterRender\(snapshot\)/);
+  assert.match(monetization,/requestAnimationFrame\(\(\)=>\{restoreScroll\(snapshot\);requestAnimationFrame/);
   assert.match(monetization,/focus\?\.\(\{preventScroll:true\}\)/);
   assert.match(monetization,/requestAnimationFrame\(\(\)=>restoreScroll\(snapshot\)\)/);
   assert.match(html,/🔒 Proですべての履歴を見る/);

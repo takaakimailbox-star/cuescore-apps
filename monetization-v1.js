@@ -38,11 +38,28 @@
   document.body.appendChild(overlay);
   let returnFocus=null,currentSource="",replay=null,bypass=false,originScroll=null;
   const status=overlay.querySelector("[data-pro-status]");
-  const captureScroll=()=>({windowX:window.scrollX,windowY:window.scrollY,elements:[...document.querySelectorAll("*")].filter(node=>node!==overlay&&(node.scrollTop||node.scrollLeft)).map(node=>({node,top:node.scrollTop,left:node.scrollLeft}))});
-  function restoreScroll(snapshot){if(!snapshot)return;window.scrollTo(snapshot.windowX,snapshot.windowY);snapshot.elements.forEach(({node,top,left})=>{if(node.isConnected){node.scrollTop=top;node.scrollLeft=left}})}
-  function close(unlocked=false){const snapshot=originScroll;overlay.hidden=true;document.body.classList.remove("cue-pro-open-v1");if(unlocked&&replay){const action=replay;replay=null;queueMicrotask(action)}else{try{returnFocus?.focus?.({preventScroll:true})}catch{returnFocus?.focus?.()}restoreScroll(snapshot);requestAnimationFrame(()=>restoreScroll(snapshot))}originScroll=null;currentSource=""}
+  const captureScroll=source=>{
+    if(source==="historyLimit"){
+      const screen=document.getElementById("recordsScreen"),scroll=document.getElementById("recordsList");
+      return {kind:"globalHistory",screen,scroll,top:scroll?.scrollTop||0,left:scroll?.scrollLeft||0,filter:screen?.querySelector("[data-records-discipline-v2].is-selected")?.dataset.recordsDisciplineV2||"all"};
+    }
+    return {kind:"generic",windowX:window.scrollX,windowY:window.scrollY,elements:[...document.querySelectorAll("*")].filter(node=>node!==overlay&&(node.scrollTop||node.scrollLeft)).map(node=>({node,top:node.scrollTop,left:node.scrollLeft}))};
+  };
+  function restoreScroll(snapshot){
+    if(!snapshot)return;
+    if(snapshot.kind==="globalHistory"){
+      snapshot.screen?.classList.remove("hidden");
+      const selected=snapshot.screen?.querySelector("[data-records-discipline-v2].is-selected")?.dataset.recordsDisciplineV2;
+      if(selected!==snapshot.filter)snapshot.screen?.querySelector(`[data-records-discipline-v2="${snapshot.filter}"]`)?.click();
+      if(snapshot.scroll?.isConnected){snapshot.scroll.scrollTop=snapshot.top;snapshot.scroll.scrollLeft=snapshot.left}
+      return;
+    }
+    window.scrollTo(snapshot.windowX,snapshot.windowY);snapshot.elements.forEach(({node,top,left})=>{if(node.isConnected){node.scrollTop=top;node.scrollLeft=left}});
+  }
+  function restoreAfterRender(snapshot){restoreScroll(snapshot);requestAnimationFrame(()=>{restoreScroll(snapshot);requestAnimationFrame(()=>restoreScroll(snapshot))});setTimeout(()=>restoreScroll(snapshot),80)}
+  function close(unlocked=false){const snapshot=originScroll;overlay.hidden=true;document.body.classList.remove("cue-pro-open-v1");if(unlocked&&replay){const action=replay;replay=null;queueMicrotask(action)}else{try{returnFocus?.focus?.({preventScroll:true})}catch{returnFocus?.focus?.()}restoreAfterRender(snapshot)}originScroll=null;currentSource=""}
   function syncPaywall(){const s=entitlement.snapshot;overlay.querySelector("[data-pro-price]").textContent=s.product?.localizedPrice||"価格を取得できません";overlay.querySelector("[data-pro-buy]").disabled=!s.product||s.status!=="ready";if(s.isPro&&!overlay.hidden)close(true)}
-  function open(source,options={}){currentSource=sourceNames[source]?source:"analysis";returnFocus=options.trigger||document.activeElement;replay=typeof options.replay==="function"?options.replay:null;originScroll=captureScroll();status.textContent=`${sourceNames[currentSource]}はProで利用できます。`;status.classList.remove("is-error");overlay.hidden=false;document.body.classList.add("cue-pro-open-v1");syncPaywall();overlay.querySelector(".cue-pro-back-v1")?.focus({preventScroll:true})}
+  function open(source,options={}){currentSource=sourceNames[source]?source:"analysis";returnFocus=options.trigger||document.activeElement;replay=typeof options.replay==="function"?options.replay:null;originScroll=captureScroll(currentSource);status.textContent=`${sourceNames[currentSource]}はProで利用できます。`;status.classList.remove("is-error");overlay.hidden=false;document.body.classList.add("cue-pro-open-v1");syncPaywall();overlay.querySelector(".cue-pro-back-v1")?.focus({preventScroll:true})}
   window.CueScorePro=Object.freeze({open,close,source:()=>currentSource});
   overlay.querySelector(".cue-pro-back-v1").addEventListener("click",()=>close(false));
   overlay.querySelector("[data-pro-buy]").addEventListener("click",async()=>{status.textContent="購入を確認しています…";const result=await entitlement.purchase();if(result.status==="success")return close(true);if(result.status==="cancelled"){status.textContent="";return}if(result.status==="pending"){status.textContent="購入は保留中です。承認後に自動で反映されます。";return}status.textContent="購入を完了できませんでした。時間をおいてもう一度お試しください。";status.classList.add("is-error")});
