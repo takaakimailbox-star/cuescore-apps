@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## Build 62 最小UI修正／Internal TestFlight（2026年9月5日）
+
+- SettingsのBackup／Restore行は`🔒 Pro` badgeとchevronをcard内の独立列へ固定し、390×844で重なり・横overflowなしを確認。CueScore Pro画面は同viewport内にロゴ、説明、特典、購入／復元buttonを収めてscrollを不要化し、反転白ロゴを既存の通常黒CueScoreロゴへ変更した。
+- HistoryのPro誘導文言を`🔒 Proですべての履歴を見る`へ変更。Pro画面を開いた入口のscreen／tab／filterを変更せず、windowとscrollable ancestorの位置を保存・復元する共通Back処理へ統一した。全自動test `373 pass / 0 fail / 0 skipped`。
+- Version `1.0`／Build `62`。実装commit `1ee628f`をmainへ反映。App Store Connect Build Upload／Build ID `4d8a132b-fc3a-4065-99fc-f400a34b503f`は処理状態`VALID`、輸出コンプライアンス`usesNonExemptEncryption=false`。全Build自動対象のInternal group `CueScore Internal Testers`の配布ビルド一覧先頭にBuild 62があることをAPIで確認した。実iPhone 16e確認はProduct Owner確認待ち。IAP購入不可の原因調査、External TestFlight、App Review、審査用追加、一般公開は実施していない。
+
 ## Build 61 CueScore Pro正式ロゴ／Internal TestFlight（2026年9月4日）
 
 - CueScore Pro画面上部の仮「C」マークを、既存の正式白色CueScoreロゴマークへ置換。黒い角丸背景と画面構成は維持した。全自動test `372 pass / 0 fail / 0 skipped`。
