@@ -972,6 +972,15 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - 整合確認結果を `docs/implementation/CueScore_App_Store_v1.0_Consistency_Review_2026-08-09.md` に記録。
 - Native iOS化、App Store Connect登録、TestFlight Build 1内部配信と実機確認まで完了。本審査提出と一般公開は未着手。
 
+## CueScore Pro IAP：App Store Connect手続き待ち（2026年9月7日）
+
+- 有料アプリ契約は同意済みだが、App Store Connect上の現在ステータスは「ユーザ情報を保留中」であり、まだActiveではない。
+- 銀行口座は登録完了。App Store Connect上でApple側の更新処理中で、変更内容の反映には最大24時間かかる旨が表示されている。
+- 米国税務フォームはW-8BENの入力途中。税務判断が必要な項目は推測入力せず、Product Owner判断まで保留する。
+- IAP Product ID、StoreKit 2実装、bridge、価格表示、Free / Pro gateを含むCueScore側コードは、Apple側の契約・銀行・税務情報がActiveになるまで変更しない。
+- Apple側の必要情報がActiveになった後、Internal TestFlightでCueScore Proの商品価格取得を再確認する。その時点でも価格を取得できない場合に限り、StoreKit 2／bridge側の原因調査を再開する。
+- 現在の状態は`IAP Investigation Paused / Waiting for App Store Connect Activation`。本状態更新では新Build作成、TestFlight Upload、External TestFlight、App Review、一般公開を行わない。
+
 ## App Store v1.0 Final RC Step 4：公開前Legal / Support最終整備（2026年8月13日）
 
 - Privacy Policy、Terms of Use、Supportの正式公開URLを`https://takaakimailbox-star.github.io/cuescore-apps/`配下の各公開ページへ確定した。

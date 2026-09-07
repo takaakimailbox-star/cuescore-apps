@@ -37,3 +37,12 @@
 - App Store Connect Build ID: `cb98d62a-3a43-45c6-8c45-b8f5a72c2486`。`processingState=VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`の一覧先頭にBuild 66があることを確認した。
 - App Store Connect metadata変更はSandboxへ反映されるまで最大1時間かかる場合があるため、TestFlight実機での`¥980`表示・購入sheet・購入後解放・再起動維持・復元はProduct Owner確認待ち。
 - External TestFlight、App Review提出、一般公開は実施しない。
+
+## App Store Connect契約・銀行・税務の追確認と調査停止（2026年9月7日）
+
+- 有料アプリ契約は同意済みだが、App Store Connect上のステータスは「ユーザ情報を保留中」で、まだActiveではない。
+- 銀行口座は登録完了し、Apple側の更新処理中。画面上では変更内容が最大24時間後に反映されると案内されている。
+- 米国税務フォームはW-8BENの入力途中。税務判断が必要な項目は推測入力せず、Product Owner判断まで保留する。
+- このため、TestFlightでの価格未取得を現時点でCueScore側のStoreKit 2／bridge不具合とは確定しない。Apple側の契約・銀行・税務情報がActiveになるまで、IAP原因調査と実装変更を停止する。
+- Active確認後、現行TestFlight Buildで`CueScore Pro`の商品価格取得を再確認する。その時点でも価格を取得できない場合のみ、`Product.products(for:)`、native plugin登録、Capacitor bridge、entitlement同期の順で原因調査を再開する。
+- 本追記ではソースコード、IAP metadata、価格schedule、Product ID、Free / Pro仕様を変更していない。新Build作成、TestFlight Upload、External TestFlight、App Review、一般公開も行っていない。
