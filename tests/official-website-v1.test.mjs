@@ -5,7 +5,7 @@ import {resolve} from "node:path";
 
 const root=resolve(new URL("..",import.meta.url).pathname);
 const read=path=>readFileSync(resolve(root,path),"utf8");
-const site=read("docs/index.html");
+const site=read("docs/cuescore/index.html");
 
 test("official website has the adopted structure and truthful pre-release CTA",()=>{
   assert.match(site,/<title>CueScore \| Billiards Score &amp; Match Tracker<\/title>/);
