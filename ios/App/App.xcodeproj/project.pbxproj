@@ -17,7 +17,28 @@
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
+		C5C100032E6A000100000001 /* CueScoreStoreKitLocalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C100012E6A000100000001 /* CueScoreStoreKitLocalTests.swift */; };
+		C5C100042E6A000100000001 /* CueScore.storekit in Resources */ = {isa = PBXBuildFile; fileRef = C5C001052E6A000100000001 /* CueScore.storekit */; };
+		C5C200032E6A000100000001 /* CueScoreStoreKitLocalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C200012E6A000100000001 /* CueScoreStoreKitLocalUITests.swift */; };
+		C5C200042E6A000100000001 /* CueScore.storekit in Resources */ = {isa = PBXBuildFile; fileRef = C5C001052E6A000100000001 /* CueScore.storekit */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C5C1000D2E6A000100000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 504EC3031FED79650016851F;
+			remoteInfo = App;
+		};
+		C5C2000D2E6A000100000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 504EC3031FED79650016851F;
+			remoteInfo = App;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2FAD9762203C412B000D30F8 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
@@ -33,6 +54,10 @@
 		50B271D01FEDC1A000F3C39B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
 		958DCC722DB07C7200EA8C5F /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = ../debug.xcconfig; sourceTree = SOURCE_ROOT; };
 		C5C001052E6A000100000001 /* CueScore.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = CueScore.storekit; sourceTree = "<group>"; };
+		C5C100012E6A000100000001 /* CueScoreStoreKitLocalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CueScoreStoreKitLocalTests.swift; sourceTree = "<group>"; };
+		C5C100022E6A000100000001 /* CueScoreStoreKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CueScoreStoreKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5C200012E6A000100000001 /* CueScoreStoreKitLocalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CueScoreStoreKitLocalUITests.swift; sourceTree = "<group>"; };
+		C5C200022E6A000100000001 /* CueScoreStoreKitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CueScoreStoreKitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +66,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D22ABE92AF431CB00220026 /* CapApp-SPM in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5C100062E6A000100000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5C200062E6A000100000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +92,8 @@
 				C5C001052E6A000100000001 /* CueScore.storekit */,
 				958DCC722DB07C7200EA8C5F /* debug.xcconfig */,
 				504EC3061FED79650016851F /* App */,
+				C5C1000C2E6A000100000001 /* CueScoreStoreKitTests */,
+				C5C2000C2E6A000100000001 /* CueScoreStoreKitUITests */,
 				504EC3051FED79650016851F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,6 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				504EC3041FED79650016851F /* App.app */,
+				C5C100022E6A000100000001 /* CueScoreStoreKitTests.xctest */,
+				C5C200022E6A000100000001 /* CueScoreStoreKitUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -80,6 +123,22 @@
 				50B271D01FEDC1A000F3C39B /* public */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		C5C1000C2E6A000100000001 /* CueScoreStoreKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				C5C100012E6A000100000001 /* CueScoreStoreKitLocalTests.swift */,
+			);
+			path = CueScoreStoreKitTests;
+			sourceTree = "<group>";
+		};
+		C5C2000C2E6A000100000001 /* CueScoreStoreKitUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C5C200012E6A000100000001 /* CueScoreStoreKitLocalUITests.swift */,
+			);
+			path = CueScoreStoreKitUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -105,6 +164,42 @@
 			productReference = 504EC3041FED79650016851F /* App.app */;
 			productType = "com.apple.product-type.application";
 		};
+		C5C100082E6A000100000001 /* CueScoreStoreKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C5C1000B2E6A000100000001 /* Build configuration list for PBXNativeTarget "CueScoreStoreKitTests" */;
+			buildPhases = (
+				C5C100052E6A000100000001 /* Sources */,
+				C5C100062E6A000100000001 /* Frameworks */,
+				C5C100072E6A000100000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C5C1000E2E6A000100000001 /* PBXTargetDependency */,
+			);
+			name = CueScoreStoreKitTests;
+			productName = CueScoreStoreKitTests;
+			productReference = C5C100022E6A000100000001 /* CueScoreStoreKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C5C200082E6A000100000001 /* CueScoreStoreKitUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C5C2000B2E6A000100000001 /* Build configuration list for PBXNativeTarget "CueScoreStoreKitUITests" */;
+			buildPhases = (
+				C5C200052E6A000100000001 /* Sources */,
+				C5C200062E6A000100000001 /* Frameworks */,
+				C5C200072E6A000100000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C5C2000E2E6A000100000001 /* PBXTargetDependency */,
+			);
+			name = CueScoreStoreKitUITests;
+			productName = CueScoreStoreKitUITests;
+			productReference = C5C200022E6A000100000001 /* CueScoreStoreKitUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -118,6 +213,15 @@
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1100;
 						ProvisioningStyle = Automatic;
+					};
+					C5C100082E6A000100000001 = {
+						CreatedOnToolsVersion = 26.0;
+						ProvisioningStyle = Automatic;
+					};
+					C5C200082E6A000100000001 = {
+						CreatedOnToolsVersion = 26.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 504EC3031FED79650016851F;
 					};
 				};
 			};
@@ -138,6 +242,8 @@
 			projectRoot = "";
 			targets = (
 				504EC3031FED79650016851F /* App */,
+				C5C100082E6A000100000001 /* CueScoreStoreKitTests */,
+				C5C200082E6A000100000001 /* CueScoreStoreKitUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -156,6 +262,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C5C100072E6A000100000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5C100042E6A000100000001 /* CueScore.storekit in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5C200072E6A000100000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5C200042E6A000100000001 /* CueScore.storekit in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -169,7 +291,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C5C100052E6A000100000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5C100032E6A000100000001 /* CueScoreStoreKitLocalTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5C200052E6A000100000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C5C200032E6A000100000001 /* CueScoreStoreKitLocalUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C5C2000E2E6A000100000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 504EC3031FED79650016851F /* App */;
+			targetProxy = C5C2000D2E6A000100000001 /* PBXContainerItemProxy */;
+		};
+		C5C1000E2E6A000100000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 504EC3031FED79650016851F /* App */;
+			targetProxy = C5C1000D2E6A000100000001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		504EC30B1FED79650016851F /* Main.storyboard */ = {
@@ -346,6 +497,72 @@
 			};
 			name = Release;
 		};
+		C5C100092E6A000100000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U26DF88PRW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.takaakimailboxstar.cuescoreapps.storekittests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/App";
+			};
+			name = Debug;
+		};
+		C5C1000A2E6A000100000001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U26DF88PRW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.takaakimailboxstar.cuescoreapps.storekittests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/App";
+			};
+			name = Release;
+		};
+		C5C200092E6A000100000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U26DF88PRW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.takaakimailboxstar.cuescoreapps.storekituitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = App;
+			};
+			name = Debug;
+		};
+		C5C2000A2E6A000100000001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = U26DF88PRW;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.takaakimailboxstar.cuescoreapps.storekituitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = App;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -363,6 +580,24 @@
 			buildConfigurations = (
 				504EC3171FED79650016851F /* Debug */,
 				504EC3181FED79650016851F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C5C1000B2E6A000100000001 /* Build configuration list for PBXNativeTarget "CueScoreStoreKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C5C100092E6A000100000001 /* Debug */,
+				C5C1000A2E6A000100000001 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C5C2000B2E6A000100000001 /* Build configuration list for PBXNativeTarget "CueScoreStoreKitUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C5C200092E6A000100000001 /* Debug */,
+				C5C2000A2E6A000100000001 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

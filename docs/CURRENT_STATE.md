@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## CueScore専用ローカルStoreKit実取引テスト環境（2026年9月14日）
+
+- App Store Connectの契約状態に依存しない、CueScore専用の共有Scheme `CueScoreLocalStoreKit` を追加した。Run／Testへ`CueScore.storekit`を接続し、hosted XCTest `CueScoreStoreKitTests`と最小UITest `CueScoreStoreKitUITests`を追加した。製品コード、正式Product ID `com.takaakimailboxstar.cuescoreapps.pro`、Free／Pro仕様は変更していない。
+- 接続実機上の`SKTestSession`で、ローカル商品`¥980`取得、purchase success、verified transaction、即時entitlement、fresh entitlement readによる再起動相当のPro維持、`AppStore.sync()`による購入復元、refund後のFree復帰をPASSした。UITestではSettingsのPro導線到達を確認した。
+- Free復帰時は既存policy testで「保存済み試合を削除せず、表示だけを全競技共通の最新20件へ戻す」契約を維持し、全自動testは`386 pass / 0 fail / 0 skipped`。Simulatorでは`SKInternalErrorDomain Code=3`がCueScoreとCueSnapiの双方で再現したため、TestFlight版を上書きしない別bundle IDの実機test appで検証した。
+- このローカル検証はApp Store Connect実商品／TestFlight Sandbox購入とは分離している。Paid Applications Agreement／W-8BENを含むApple側契約がActiveになるまで、TestFlight Sandbox購入確認、新Build、TestFlight Upload、External TestFlight、App Review、一般公開は停止する。詳細：`docs/implementation/CueScore_Local_StoreKit_Transaction_Test_Environment_2026-09-14.md`。
+
 ## Build 66 IAP商品取得・購入・Pro解放修正（2026年9月7日）
 
 - TestFlightで`価格を取得できません`となる原因は、App Store ConnectのIAP `com.takaakimailboxstar.cuescoreapps.pro`が日本語localization 0件・availability未作成の`MISSING_METADATA`だったこと。日本語表示、JPN availability、即時価格`¥980`、1170×2532審査用画像を登録した（IAP審査提出は未実施）。metadata反映には最大1時間かかる場合がある。

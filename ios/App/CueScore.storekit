@@ -1,5 +1,5 @@
 {
-  "identifier" : "CUESCORE-PRO-STOREKIT-CONFIG",
+  "identifier" : "8CBE895C-1E2A-4F62-A8F8-BA90B92554B6",
   "nonRenewingSubscriptions" : [
 
   ],
@@ -7,9 +7,13 @@
     {
       "displayPrice" : "980",
       "familyShareable" : false,
-      "internalID" : "CUESCORE-PRO-NONCONSUMABLE",
+      "internalID" : "6808464490",
       "localizations" : [
-
+        {
+          "description" : "CueScoreの全Pro機能を利用できます。",
+          "displayName" : "CueScore Pro",
+          "locale" : "ja"
+        }
       ],
       "productID" : "com.takaakimailboxstar.cuescoreapps.pro",
       "referenceName" : "CueScore Pro",
@@ -17,19 +21,20 @@
     }
   ],
   "settings" : {
-    "_applicationInternalID" : "6802027038",
+    "_applicationInternalID" : "",
     "_developerTeamID" : "U26DF88PRW",
     "_failTransactionsEnabled" : false,
     "_locale" : "ja_JP",
-    "_renewalBillingIssuesEnabled" : false,
     "_storefront" : "JPN",
-    "_timeRate" : 0
+    "_storeKitErrors" : [
+
+    ]
   },
   "subscriptionGroups" : [
 
   ],
   "version" : {
-    "major" : 4,
+    "major" : 3,
     "minor" : 0
   }
 }
