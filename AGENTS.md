@@ -1,5 +1,22 @@
 # CueScore Apps Development Instructions
 
+## Required Reading Order
+
+Read only what the current task needs, in this order:
+
+1. `/Users/Ludique/Documents/Codex/共通開発基準/共通アプリ開発ルール_v1_2026-09-14.md`
+2. `docs/Development_Orchestrator_SSOT.md`
+3. `docs/CURRENT_STATUS.md`
+4. `docs/handoff/CURRENT_DECISION.md`
+5. `docs/handoff/CURRENT_REPORT.md`
+6. the implementation files and evidence required for the current task
+
+This order supplements the official product-source rules below. Do not reread
+all historical reports, evidence, images, or implementation records by default.
+Start with focused verification and reuse a prior PASS only when the relevant
+code, test, fixture, and ground-truth hashes still match; record why it was not
+rerun in `CURRENT_REPORT.md`.
+
 ## Official Sources
 
 Before changing implementation, review:
