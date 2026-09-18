@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## Build 69 Purchase Lifecycle Diagnostic／Internal TestFlight（2026年9月18日）
+
+- Build 68実機Sandbox購入は`PRODUCTS_OK`、bridge、Apple商品、purchase sheet、認証までPASSしたが、認証後に`購入を確認しています…`で停止しPro未解放。起動時generic errorも再現した。Build 69は購入挙動を変えず、Swift P01〜P12、JavaScript J01〜J06、Transaction.updates、currentEntitlements、visibility／refresh、listener registration、Storefrontのdiagnosticだけを追加した。
+- diagnosticはPro画面で最新20件を表示する。listener rejectionのunhandled Promiseだけを最小catchで防止。Product ID、StoreKit `displayPrice`、purchase／pending／cancel semantics、verified authority、finish、Restore、Free最新20件、保存data／schemaは変更していない。CueSnapi型native refactorは未実施。
+- Focused diagnostics `24 pass / 0 fail`、全Node test `402 pass / 0 fail / 0 skipped`、Release Simulator build、device Archive、uploadをPASS。Local StoreKit XCTestはiOS 26.5 Simulator、UITestはiOS 27 Simulatorでtest operationが応答せず中断し、`TEST ENVIRONMENT BLOCKED`として製品FAILと分離した。Version `1.0`／Build `69`。App Store Connect Build ID `0a7e49b7-dd49-4ead-8733-5692e0bceef2`は`VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`の配布対象。Product Ownerの1回だけの購入diagnostic確認待ち。詳細：`docs/implementation/CueScore_Build69_Purchase_Lifecycle_Diagnostic_2026-09-18.md`。
+
 ## Build 68 Capacitor bridge最小修正／Internal TestFlight（2026年9月18日）
 
 - Build 67実機diagnosticの`BRIDGE_ERROR`を受け、native StoreKit plugin取得を`Capacitor.Plugins.CueScoreStoreKit`第一候補、`registerPlugin` fallbackへ最小修正した。diagnosticを維持し、Local StoreKit UI testで`PRODUCTS_OK / count=1 / match=YES`を確認。Product ID、StoreKit `displayPrice`、purchase、verified entitlement、Restore、Free / Pro仕様は変更していない。

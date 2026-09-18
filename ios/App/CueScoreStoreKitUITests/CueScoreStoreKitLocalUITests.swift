@@ -40,5 +40,11 @@ final class CueScoreStoreKitLocalUITests: XCTestCase {
             )
         ).firstMatch
         XCTAssertTrue(diagnostic.waitForExistence(timeout: 15))
+        XCTAssertTrue(app.staticTexts["Purchase Diagnostic"].firstMatch.waitForExistence(timeout: 5))
+        XCTAssertTrue(
+            app.staticTexts.matching(
+                NSPredicate(format: "label BEGINSWITH[c] %@", "Storefront:")
+            ).firstMatch.waitForExistence(timeout: 5)
+        )
     }
 }

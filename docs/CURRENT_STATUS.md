@@ -1,15 +1,16 @@
 # CueScore Current Status
 
 - Updated: 2026-09-18
-- Version / Build: `1.0 (68)`
-- GitHub baseline: `d48630539a73b148a0bb7555e8aa3696f6028405`
-- Build 67 Product Owner result: TestFlightで`Diagnostic: BRIDGE_ERROR`、`¥980` NOT DISPLAYED
-- Build 68 fix: `Capacitor.Plugins.CueScoreStoreKit`を第一候補、`registerPlugin`をfallbackとする最小bridge修正
-- Diagnostic states: `BRIDGE_ERROR` / `STOREKIT_ERROR` / `PRODUCTS_EMPTY` / `PRODUCTS_OK`
-- Product behavior: Product ID、StoreKit `displayPrice`、purchase、verified entitlement、Restore、Free / Pro仕様は変更なし
-- TestFlight: Build ID `c2b68531-4333-47ca-957d-501287330eb4`、`VALID`、`usesNonExemptEncryption=false`、`CueScore Internal Testers`配布対象
-- Current gate: `READY FOR PRODUCT OWNER BUILD 68 SANDBOX IAP TEST`
-- Product Owner next: TestFlightで1.0 (68)へ更新し、`Settings → CueScore Pro`で`¥980`、`PRODUCTS_OK`、Sandbox購入、即時／再起動後／復元後のPro維持を確認
+- Version / Build: `1.0 (69)`
+- GitHub baseline: `6bd467fe5fdfe715ea24bc3fc1c3475ba434f65f`
+- Build 68 Product Owner result: `PRODUCTS_OK`、purchase sheet、認証までPASS。認証後は`購入を確認しています…`のままでPro未解放。起動時errorも再現
+- Build 69 scope: purchase behaviorを変えず、native P01〜P12、JavaScript J01〜J06、visibility／refresh、Transaction.updates、currentEntitlements、listener registration、Storefrontのdiagnosticを追加
+- Product behavior: Product ID、StoreKit `displayPrice`、purchase、verified entitlement、finish、Restore、Free / Pro仕様は変更なし
+- Tests: focused diagnostics `24 pass / 0 fail`、Full Node `402 pass / 0 fail / 0 skipped`、Release Simulator build PASS
+- Local StoreKit: XCTestはiOS 26.5 Simulator、UITestはiOS 27 Simulatorでtest operationが応答せず中断。`TEST ENVIRONMENT BLOCKED`であり製品FAILではない
+- TestFlight: Build ID `0a7e49b7-dd49-4ead-8733-5692e0bceef2`、`VALID`、`usesNonExemptEncryption=false`、`CueScore Internal Testers`配布対象
+- Current gate: `READY FOR PRODUCT OWNER BUILD 69 PURCHASE DIAGNOSTIC TEST`
+- Product Owner next: TestFlightで1.0 (69)へ更新し、購入を1回だけ実行して最終diagnostic phaseを報告。Restore／再購入は行わない
 - External TestFlight: not performed
 - App Review: not submitted
 - Public release: not performed
