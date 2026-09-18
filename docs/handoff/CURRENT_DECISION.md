@@ -1,29 +1,24 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-TESTFLIGHT-SANDBOX-IAP-20260918`
+- Decision ID: `CUESCORE-B67-IAP-DIAGNOSTIC-20260918`
 - Date: 2026-09-18
 - Product Owner Decision: GO
-- Scope: Internal TestFlight Build 66でApple実商品を使うSandbox IAP検証を再開する
+- Gate result: `READY FOR PRODUCT OWNER BUILD 67 DIAGNOSTIC TEST`
 
 ## Objective
 
-`Internal TestFlight Build 66 → Sandbox → StoreKit 2 → verified entitlement`が実際に成立することを確認する。Phase AではCodexがGit、製品実装、Build 66、App Store Connectのpreflightを行い、問題がなければProduct Owner実機テストのREADY判定で停止する。
+Build 66で区別できなかったWeb → native bridge失敗、`Product.products(for:)` throw、products 0件、商品取得成功を、製品仕様を変えずBuild 67の実機画面で識別できるようにする。
 
-## Authorized work
+## Completed scope
 
-- GitHub最新`main`、branch、HEAD、working treeを確認する。
-- Version `1.0`、Build `66`、正式Product ID、StoreKit 2 verified entitlement、`displayPrice`、Free最新20件、購入後の即時更新、`AppStore.sync()` Restore、商品取得失敗時の既存Pro保護を確認する。
-- App Store Connect API／既存EvidenceでBuild 66、Internal TestFlight、IAP metadata／availabilityを確認する。
-- `docs/handoff/CURRENT_DECISION.md`、`docs/handoff/CURRENT_REPORT.md`、必要最小限の`docs/CURRENT_STATUS.md`だけを更新する。
-- Phase A判定をhandoff checkpointとしてcommitし、GitHub `main`へpushする。
+- Version `1.0`を維持し、Buildを`67`へ更新した。
+- `BRIDGE_ERROR`、`STOREKIT_ERROR`、`PRODUCTS_EMPTY`、`PRODUCTS_OK`を独立表示するdiagnostic-only layerを追加した。
+- StoreKit throwは非機密なNSError domain／code、empty／successはproducts count、successは対象Product ID一致を返す。
+- CueScore Pro画面へ小さな補助diagnosticを追加した。
+- Product ID、商品type、StoreKit `displayPrice`、purchase、verified transaction、current entitlement、transaction updates、`AppStore.sync()`、Free / Pro保存・表示仕様を変更していない。
+- Regression、Release Simulator build、Release device Archive、App Store Connect uploadを完了した。
+- Build 67はApple処理`VALID`、輸出コンプライアンス回答済み、内部テスター配布対象である。
 
-## Protected scope
+## Current boundary
 
-- 製品コード、StoreKit実装、Product ID、Bundle ID、価格、商品type、Version、Build番号を変更しない。
-- Build 67、Archive、TestFlight Upload、External TestFlight、App Review、一般公開を行わない。
-- 既存working treeをclean、reset、stashしない。
-- Product Ownerの実機結果を推測でPASSにしない。
-
-## Gate boundary
-
-Phase Aが正常なら`READY FOR PRODUCT OWNER TESTFLIGHT SANDBOX IAP TEST`として停止する。実機Sandbox transaction結果を受け取る前に、コード修正や次工程へ進まない。
+Product OwnerがTestFlight Build 67で`Settings → CueScore Pro`を開き、`¥980`の有無とdiagnostic全文を報告するまでSTOPする。結果を推測しない。Build 68、StoreKit原因修正、External TestFlight、App Review、Releaseへ進まない。

@@ -1,13 +1,15 @@
 # CueScore Current Status
 
 - Updated: 2026-09-18
-- Version / Build: `1.0 (66)`
-- GitHub main / baseline HEAD: `ed7ad32f160a39d96508624c07406eff5ebea6d5`
-- Product code baseline: `28491de158a3d078b8d844a671dc9327f3463a9a`（`28491de → ed7ad32`はhandoff／status文書8ファイルのみ）
-- Local StoreKit: dedicated `SKTestSession` transaction suite PASS。¥980取得、verified purchase、即時／継続entitlement、Restore、refund、Free最新20件を確認済み
-- Phase A: `READY FOR PRODUCT OWNER TESTFLIGHT SANDBOX IAP TEST`
-- Current stop: Product OwnerによるInternal TestFlight Build 66の実機Sandbox IAP確認待ち
-- TestFlight Sandbox IAP: NOT TESTED YET
+- Version / Build: `1.0 (67)`
+- GitHub baseline: `47934551f3dad205aeb1b8864f9dedeaa898b5a5`
+- Build 66 Product Owner result: TestFlight Sandboxで`¥980` NOT DISPLAYED、product fetch FAIL
+- Build 67: diagnostic-only Internal TestFlight build READY
+- Diagnostic states: `BRIDGE_ERROR` / `STOREKIT_ERROR`（domain・code）/ `PRODUCTS_EMPTY`（count=0）/ `PRODUCTS_OK`（count・Product ID一致）
+- Product behavior: Product ID、StoreKit `displayPrice`、purchase、verified entitlement、Restore、Free / Pro仕様は変更なし
+- TestFlight: Build ID `50063f56-1a0f-4c05-9ef1-3ece12d40ae0`、`VALID`、`usesNonExemptEncryption=false`、`CueScore Internal Testers`配布対象
+- Current gate: `READY FOR PRODUCT OWNER BUILD 67 DIAGNOSTIC TEST`
+- Product Owner next: TestFlightで1.0 (67)へ更新し、`Settings → CueScore Pro`の価格とdiagnostic表示をそのまま報告
 - External TestFlight: not performed
 - App Review: not submitted
 - Public release: not performed

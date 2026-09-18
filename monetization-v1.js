@@ -1,23 +1,29 @@
 (() => {
   "use strict";
+  const diagnostic=Object.freeze({
+    fromError(error){const data=error?.data&&typeof error.data==="object"?error.data:error||{},code=String(error?.code||data?.diagnosticState||"");if(code==="PRODUCTS_EMPTY")return{state:"PRODUCTS_EMPTY",productsCount:Number(data.productsCount)||0};if(code==="STOREKIT_ERROR")return{state:"STOREKIT_ERROR",errorDomain:String(data.errorDomain||"unknown"),errorCode:Number.isFinite(Number(data.errorCode))?Number(data.errorCode):"unknown"};return{state:"BRIDGE_ERROR"}},
+    fromProduct(product){return{state:"PRODUCTS_OK",productsCount:Number(product?.productsCount)||0,productIdMatched:product?.productIdMatched===true}},
+    format(value){if(!value?.state)return"";if(value.state==="PRODUCTS_OK")return`Diagnostic: PRODUCTS_OK / count=${value.productsCount} / match=${value.productIdMatched?"YES":"NO"}`;if(value.state==="PRODUCTS_EMPTY")return`Diagnostic: PRODUCTS_EMPTY / count=${value.productsCount}`;if(value.state==="STOREKIT_ERROR")return`Diagnostic: STOREKIT_ERROR / domain=${value.errorDomain} / code=${value.errorCode}`;return"Diagnostic: BRIDGE_ERROR"}
+  });
+  const root=typeof window==="undefined"?globalThis:window;root.CueScoreIapDiagnostic=diagnostic;if(typeof document==="undefined")return;
   const PRO_PRODUCT_ID="com.takaakimailboxstar.cuescoreapps.pro";
   const sourceNames=Object.freeze({personalBest:"自己ベスト",analysis:"分析",opponents:"対戦相手別",historyLimit:"全履歴",backup:"バックアップ",restore:"データ復元"});
   const events=new EventTarget();
-  let adapter=null,state=Object.freeze({status:"unavailable",isPro:false,product:null,error:null});
+  const capacitor=window.Capacitor,isNative=Boolean(capacitor?.isNativePlatform?.());
+  let adapter=null,state=Object.freeze({status:"unavailable",isPro:false,product:null,error:null,diagnostic:null});
   const emit=next=>{state=Object.freeze({...state,...next});events.dispatchEvent(new CustomEvent("change",{detail:state}));window.dispatchEvent(new CustomEvent("cuescore:entitlement-change",{detail:state}));};
   const verified=value=>Boolean(value?.verified===true&&value?.isPro===true);
   const entitlement=Object.freeze({
     get snapshot(){return state},isPro:()=>state.isPro===true,
     subscribe(listener){const fn=event=>listener(event.detail);events.addEventListener("change",fn);return()=>events.removeEventListener("change",fn)},
-    async connect(next){adapter=next&&typeof next==="object"?next:null;if(!adapter){emit({status:"unavailable",isPro:false,product:null,error:null});return state}if(typeof adapter.subscribe==="function")adapter.subscribe(value=>{if(value?.verified===true)emit({status:"ready",isPro:Boolean(value.isPro),error:null})});return this.refresh()},
-    async refresh(){if(!adapter?.currentEntitlement){emit({status:"unavailable",isPro:false,product:null,error:null});return state}emit({status:"loading",error:null});let current;try{current=await adapter.currentEntitlement()}catch(error){emit({status:"error",isPro:false,product:null,error:String(error?.message||error)});return state}let product=null,productError=null;try{product=await adapter.product?.()}catch(error){productError=String(error?.message||error)}const isPro=verified(current);emit({status:product||isPro?"ready":"error",isPro,product:product||null,error:productError});return state},
+    async connect(next){adapter=next&&typeof next==="object"?next:null;if(!adapter){emit({status:"unavailable",isPro:false,product:null,error:null,diagnostic:isNative?{state:"BRIDGE_ERROR"}:null});return state}if(typeof adapter.subscribe==="function")adapter.subscribe(value=>{if(value?.verified===true)emit({status:"ready",isPro:Boolean(value.isPro),error:null})});return this.refresh()},
+    async refresh(){if(!adapter?.currentEntitlement){emit({status:"unavailable",isPro:false,product:null,error:null,diagnostic:isNative?{state:"BRIDGE_ERROR"}:null});return state}emit({status:"loading",error:null});let current;try{current=await adapter.currentEntitlement()}catch(error){emit({status:"error",isPro:false,product:null,error:String(error?.message||error),diagnostic:{state:"BRIDGE_ERROR"}});return state}let product=null,productError=null,productDiagnostic=null;try{product=await adapter.product?.();if(product)productDiagnostic=diagnostic.fromProduct(product)}catch(error){productError=String(error?.message||error);productDiagnostic=diagnostic.fromError(error)}const isPro=verified(current);emit({status:product||isPro?"ready":"error",isPro,product:product||null,error:productError,diagnostic:productDiagnostic});return state},
     async purchase(){if(!adapter?.purchase)return{status:"unavailable"};try{const result=await adapter.purchase();if(["cancelled","pending"].includes(result?.status))return result;if(verified(result)){emit({status:"ready",isPro:true,error:null});return{status:"success"}}return{status:"failure"}}catch(error){return{status:"failure",error}}},
     async restore(){if(!adapter?.restore)return{status:"unavailable"};try{const result=await adapter.restore();if(verified(result)){emit({status:"ready",isPro:true,error:null});return{status:"success"}}return{status:"notFound"}}catch(error){return{status:"failure",error}}}
   });
   window.CueScoreEntitlement=entitlement;
 
-  const capacitor=window.Capacitor;
-  const storeKit=capacitor?.isNativePlatform?.()&&capacitor?.registerPlugin?capacitor.registerPlugin("CueScoreStoreKit"):null;
+  const storeKit=isNative&&capacitor?.registerPlugin?capacitor.registerPlugin("CueScoreStoreKit"):null;
   if(storeKit){
     const nativeAdapter={
       product:()=>storeKit.getProduct(),
@@ -34,7 +40,7 @@
   window.CueScoreFeatureAccess?.connectEntitlementProvider?.(defaults=>({...defaults,detailedAnalytics:entitlement.isPro(),ranking:entitlement.isPro(),backup:entitlement.isPro()}));
 
   const overlay=document.createElement("section");overlay.className="cue-pro-overlay-v1";overlay.hidden=true;overlay.setAttribute("aria-label","CueScore Pro");
-  overlay.innerHTML=`<header class="cue-pro-header-v1"><button class="cue-pro-back-v1" type="button" aria-label="戻る">‹</button><h1>CueScore Pro</h1><span></span></header><main class="cue-pro-scroll-v1"><section class="cue-pro-hero-v1"><div class="cue-pro-mark-v1"><img src="src/assets/logo/CueScore_LogoMark_Black.svg" alt="" aria-hidden="true"></div><h2>CueScore Pro</h2><p class="cue-pro-lead-v1">記録をもっと残す。<br>プレーをもっと振り返る。</p></section><section class="cue-pro-values-v1"><div><i>✓</i><span>履歴無制限</span></div><div><i>✓</i><span>自己ベスト</span></div><div><i>✓</i><span>詳細分析・推移</span></div><div><i>✓</i><span>対戦相手別の振り返り</span></div><div><i>✓</i><span>Backup / Restore</span></div></section><p class="cue-pro-price-v1" data-pro-price>価格を取得できません</p><p class="cue-pro-once-v1">一度の購入でずっと利用できます</p><button class="cue-pro-buy-v1" type="button" data-pro-buy disabled>Proを購入</button><button class="cue-pro-restore-v1" type="button" data-pro-restore>購入を復元</button><p class="cue-pro-status-v1" data-pro-status></p></main>`;
+  overlay.innerHTML=`<header class="cue-pro-header-v1"><button class="cue-pro-back-v1" type="button" aria-label="戻る">‹</button><h1>CueScore Pro</h1><span></span></header><main class="cue-pro-scroll-v1"><section class="cue-pro-hero-v1"><div class="cue-pro-mark-v1"><img src="src/assets/logo/CueScore_LogoMark_Black.svg" alt="" aria-hidden="true"></div><h2>CueScore Pro</h2><p class="cue-pro-lead-v1">記録をもっと残す。<br>プレーをもっと振り返る。</p></section><section class="cue-pro-values-v1"><div><i>✓</i><span>履歴無制限</span></div><div><i>✓</i><span>自己ベスト</span></div><div><i>✓</i><span>詳細分析・推移</span></div><div><i>✓</i><span>対戦相手別の振り返り</span></div><div><i>✓</i><span>Backup / Restore</span></div></section><p class="cue-pro-price-v1" data-pro-price>価格を取得できません</p><p class="cue-pro-diagnostic-v1" data-pro-diagnostic hidden></p><p class="cue-pro-once-v1">一度の購入でずっと利用できます</p><button class="cue-pro-buy-v1" type="button" data-pro-buy disabled>Proを購入</button><button class="cue-pro-restore-v1" type="button" data-pro-restore>購入を復元</button><p class="cue-pro-status-v1" data-pro-status></p></main>`;
   document.body.appendChild(overlay);
   let returnFocus=null,currentSource="",replay=null,bypass=false,originScroll=null;
   const status=overlay.querySelector("[data-pro-status]");
@@ -58,7 +64,7 @@
   }
   function restoreAfterRender(snapshot){restoreScroll(snapshot);requestAnimationFrame(()=>{restoreScroll(snapshot);requestAnimationFrame(()=>restoreScroll(snapshot))});setTimeout(()=>restoreScroll(snapshot),80)}
   function close(unlocked=false){const snapshot=originScroll;overlay.hidden=true;document.body.classList.remove("cue-pro-open-v1");if(unlocked&&replay){const action=replay;replay=null;queueMicrotask(action)}else{try{returnFocus?.focus?.({preventScroll:true})}catch{returnFocus?.focus?.()}restoreAfterRender(snapshot)}originScroll=null;currentSource=""}
-  function syncPaywall(){const s=entitlement.snapshot;overlay.querySelector("[data-pro-price]").textContent=s.product?.localizedPrice||"価格を取得できません";overlay.querySelector("[data-pro-buy]").disabled=!s.product||s.status!=="ready";if(s.isPro&&!overlay.hidden)close(true)}
+  function syncPaywall(){const s=entitlement.snapshot,diagnosticNode=overlay.querySelector("[data-pro-diagnostic]"),diagnosticText=diagnostic.format(s.diagnostic);overlay.querySelector("[data-pro-price]").textContent=s.product?.localizedPrice||"価格を取得できません";diagnosticNode.textContent=diagnosticText;diagnosticNode.hidden=!diagnosticText;overlay.querySelector("[data-pro-buy]").disabled=!s.product||s.status!=="ready";if(s.isPro&&!overlay.hidden)close(true)}
   function open(source,options={}){currentSource=sourceNames[source]?source:"analysis";returnFocus=options.trigger||document.activeElement;replay=typeof options.replay==="function"?options.replay:null;originScroll=captureScroll(currentSource);status.textContent=`${sourceNames[currentSource]}はProで利用できます。`;status.classList.remove("is-error");overlay.hidden=false;document.body.classList.add("cue-pro-open-v1");syncPaywall();void entitlement.refresh();overlay.querySelector(".cue-pro-back-v1")?.focus({preventScroll:true})}
   window.CueScorePro=Object.freeze({open,close,source:()=>currentSource});
   overlay.querySelector(".cue-pro-back-v1").addEventListener("click",()=>close(false));

@@ -38,18 +38,40 @@ public final class CueScoreStoreKitPlugin: CAPPlugin, CAPBridgedPlugin {
     @objc func getProduct(_ call: CAPPluginCall) {
         Task {
             do {
-                guard let product = try await Product.products(for: [Self.proProductID]).first else {
-                    call.reject("CueScore Pro is not available in the current storefront.")
+                let products = try await Product.products(for: [Self.proProductID])
+                guard let product = products.first else {
+                    call.reject(
+                        "CueScore Pro is not available in the current storefront.",
+                        "PRODUCTS_EMPTY",
+                        nil,
+                        [
+                            "diagnosticState": "PRODUCTS_EMPTY",
+                            "productsCount": products.count
+                        ]
+                    )
                     return
                 }
                 call.resolve([
                     "productId": product.id,
                     "displayName": product.displayName,
                     "description": product.description,
-                    "localizedPrice": product.displayPrice
+                    "localizedPrice": product.displayPrice,
+                    "diagnosticState": "PRODUCTS_OK",
+                    "productsCount": products.count,
+                    "productIdMatched": product.id == Self.proProductID
                 ])
             } catch {
-                call.reject("Unable to load CueScore Pro.", nil, error)
+                let nsError = error as NSError
+                call.reject(
+                    "Unable to load CueScore Pro.",
+                    "STOREKIT_ERROR",
+                    error,
+                    [
+                        "diagnosticState": "STOREKIT_ERROR",
+                        "errorDomain": nsError.domain,
+                        "errorCode": nsError.code
+                    ]
+                )
             }
         }
     }

@@ -1,101 +1,60 @@
 # CueScore Current Report
 
 - App: CueScore
-- Decision ID: `CUESCORE-TESTFLIGHT-SANDBOX-IAP-20260918`
+- Decision ID: `CUESCORE-B67-IAP-DIAGNOSTIC-20260918`
 - Date: 2026-09-18
-- Gate Result: READY
-- TestFlight Sandbox IAP: NOT TESTED YET
+- Gate Result: `READY FOR PRODUCT OWNER BUILD 67 DIAGNOSTIC TEST`
+- Version / Build: `1.0 (67)`
 
 ## 結論
 
-`READY FOR PRODUCT OWNER TESTFLIGHT SANDBOX IAP TEST`
+Build 66のSandbox商品取得FAILを実機で分類するdiagnostic-only Build 67を実装し、Internal TestFlightで利用可能にした。Product Ownerの実機結果を待ってSTOPする。
 
-Codex Phase Aのpreflightに、製品コード変更またはBuild 67を必要とする問題はなかった。Product OwnerがInternal TestFlightのCueScore Version 1.0 / Build 66をiPhoneで操作し、Apple実商品のSandbox transactionを確認する段階で停止する。
+## 実装
 
-## 理由
+- native `getProduct()`成功時に`PRODUCTS_OK`、products 0件時に`PRODUCTS_EMPTY`、throw時に`STOREKIT_ERROR`を返す。
+- throw時はNSError domain／codeのみ、商品応答時はproducts countと対象Product ID一致を非機密Evidenceとして返す。
+- Web bridge呼び出し失敗を`BRIDGE_ERROR`へ分類する。
+- CueScore Pro画面へ購入UIを置換しない小さなdiagnostic表示を追加した。
+- 正式Product ID `com.takaakimailboxstar.cuescoreapps.pro`、StoreKit `displayPrice`、purchase、verified entitlement、Restore、Free最新20件／保存継続を変更していない。
 
-### Git baseline
+## Test / Build Evidence
 
-- 2026-09-18に`origin/main`をfetchし、最新が`ed7ad32f160a39d96508624c07406eff5ebea6d5`であることを確認した。
-- 製品コード基準は`28491de158a3d078b8d844a671dc9327f3463a9a`。`28491de → ed7ad32`の差分はhandoff／status文書8ファイルだけで、製品コード、Xcode、StoreKit、Version、Buildに差分はない。
-- 既存の主working treeは別branch上に未commit変更があるため、clean／reset／stashせず保全した。今回のGateは`origin/main`から作成した専用worktreeで実施した。
+- Focused／関連Node test: `57 pass / 0 fail`
+- Full Node regression: `391 pass / 0 fail / 0 skipped`
+- Diagnostic分岐専用test: `5 pass`
+- Release iOS Simulator build: `BUILD SUCCEEDED`
+- Local StoreKit実機XCTest: `1 pass / 0 fail`
+- Local StoreKit実機UITest: test runnerのAutomation Mode有効化タイムアウトにより開始前BLOCKED
+- iOS 27 Simulator UITest補完: 既存アプリのUIScene lifecycle要件でapp launch前停止し`1 fail`。diagnostic分岐FAILではなくXcode 27 test environment問題として分離した
+- Release device Archive: `ARCHIVE SUCCEEDED`
+- Archive identity: Bundle ID `com.takaakimailboxstar.cuescoreapps`、Version `1.0`、Build `67`
+- Archive内Local StoreKit configuration: 0件
+- App Store Connect upload: `EXPORT SUCCEEDED` / `Upload succeeded`
 
-### Product baseline / StoreKit
+## App Store Connect Evidence
 
-- Xcode設定はVersion `1.0`、Build `66`、正式Bundle ID `com.takaakimailboxstar.cuescoreapps`。
-- Product IDはWeb、native StoreKit bridge、StoreKit Configurationで`com.takaakimailboxstar.cuescoreapps.pro`に一致する。
-- 商品typeはNon-Consumable。価格表示はStoreKit `Product.displayPrice`を使用する。
-- Pro authorityはStoreKit 2のverified transactionであり、`Transaction.currentEntitlements`と`Transaction.updates`を確認する。
-- 購入成功時は即時にPro entitlementを更新する。Restoreは`AppStore.sync()`後のverified current entitlementだけを採用する。
-- 商品取得が失敗しても、先に取得したverified entitlementがProならFreeへ降格しない。
-- Freeは全保存recordを削除・変更せず、全競技共通で新しい順の20件だけを表示対象にする。Proは全件を利用する。
-
-### Build 66 / App Store Connect
-
-App Store Connect APIを読み取り専用で確認した。
-
-- App ID: `6802027038`
-- Bundle ID: `com.takaakimailboxstar.cuescoreapps`
-- Build ID: `cb98d62a-3a43-45c6-8c45-b8f5a72c2486`
-- Version / Build: `1.0 (66)`
-- Build processing state: `VALID`
-- Build expired: `false`
+- App Store Connect Build ID: `50063f56-1a0f-4c05-9ef1-3ece12d40ae0`
+- processing state: `VALID`
+- `usesNonExemptEncryption=false`
 - Internal group: `CueScore Internal Testers`
-- group type: internal、all-build access有効
-- IAP Apple ID: `6808464490`
-- IAP state: `READY_TO_SUBMIT`
-- IAP type: `NON_CONSUMABLE`
-- Product ID: `com.takaakimailboxstar.cuescoreapps.pro`
-- Japanese localization: 1件
-- Availability: `JPN`
-- Base territory / currency: `JPN / JPY`
-- JPN customer price: `980`
-- Review screenshot: `1170 × 2532`、asset state `COMPLETE`
+- group type: internal
+- all-build access: true
+- Build 67 group membership: true
+- External TestFlight、App Review、Version 1.0審査用build変更、一般公開: 未実施
 
-IAPに明白なmetadata／availability未設定はない。Build 66は有効なInternal TestFlight配布対象であり、Build 67を作成する必要はない。Apple側契約状態はAPIで取得せず、Decisionに記録された2026-09-18のProduct Owner確認をGate前提として扱った。
+## Product Owner確認
 
-## 数字 / Evidence
+1. TestFlightからCueScore `1.0 (67)`へ更新する。
+2. `Settings → CueScore Pro`を開く。
+3. `¥980`が表示されるか確認する。
+4. diagnostic表示を確認する。
+5. 表示内容を省略せずそのまま報告する。
 
-- GitHub main SHA: `ed7ad32f160a39d96508624c07406eff5ebea6d5`
-- Product code SHA: `28491de158a3d078b8d844a671dc9327f3463a9a`
-- Version / Build: `1.0 (66)`
-- Product ID: `com.takaakimailboxstar.cuescoreapps.pro`
-- TestFlight group: `CueScore Internal Testers`
-- Focused Node regression: `15 pass / 0 fail / 0 skipped`
-- Existing full Node regression: `386 pass / 0 fail / 0 skipped`
-- Existing Local StoreKit XCTest: `1 pass`
-- Existing Local StoreKit UITest: `1 pass`
-- Changed files: `docs/CURRENT_STATUS.md`、`docs/handoff/CURRENT_DECISION.md`、`docs/handoff/CURRENT_REPORT.md`
+判定は、`¥980 + PRODUCTS_OK`なら商品取得PASS、`PRODUCTS_EMPTY / count=0`ならApple Sandbox／availability側優先、`STOREKIT_ERROR`ならdomain／code起点、`BRIDGE_ERROR`ならCapacitor bridge／plugin経路優先とする。
 
-Local StoreKit transaction suiteは、製品コード・test・StoreKit configurationが既存PASSの基準から変わっておらず、今回の目的がApple実商品によるTestFlight Sandbox確認であるため再実行していない。focused Node regressionは現行sourceに対して再実行した。
+## STOP / protected state
 
-## Product Owner実機確認
-
-対象：Internal TestFlightのCueScore Version 1.0 / Build 66
-
-1. CueScoreをTestFlightから起動する。
-2. Settings → CueScore Proを開く。
-3. 「価格を取得できません」ではなく、Appleから取得した`¥980`が表示されることを確認する。
-4. 購入ボタンを押す。
-5. Sandbox購入sheetが表示されることを確認する。
-6. Sandbox購入を完了する。
-7. CueScoreへ戻った直後にProが解放されることを確認する。
-8. Pro限定入口へ実際に入れることを確認する。
-9. CueScoreを完全終了する。
-10. CueScoreを再起動する。
-11. Pro状態が維持されることを確認する。
-12. Restore／購入を復元を実行する。
-13. エラーにならずPro状態が維持されることを確認する。
-14. 保存済み試合が消えていないことを確認する。
-
-TestFlightのIAPはSandbox環境であり、実料金を発生させる本番購入として扱わない。パスワード、認証コード、Sandbox Apple Accountの認証情報は報告に含めない。
-
-## Protected / not performed
-
-- 製品コード、StoreKit実装、Product ID、Bundle ID、価格、商品type、Version、Build番号は変更していない。
-- Build、Archive、Build 67作成、TestFlight Upload、External TestFlight、App Review、一般公開は行っていない。
-- Product Ownerの実機Sandbox purchaseは未実施であり、PASS扱いしていない。
-
-## STOP reason
-
-Codex Phase AはREADY。次の操作はProduct OwnerによるiPhone実機のTestFlight Sandbox IAP確認である。実機結果を受け取るまで、コード修正、新Build、External TestFlight、App Review、Releaseへ進まない。
+- Build 67候補と主working treeの既存変更は保全した。
+- Build 68、原因修正、External TestFlight、App Review、Releaseは開始していない。
+- 次工程はProduct OwnerのBuild 67実機diagnostic報告後に別Gateで判断する。

@@ -7,14 +7,14 @@ const native=fs.readFileSync(new URL("../ios/App/App/CueScoreStoreKitPlugin.swif
 const config=fs.readFileSync(new URL("../ios/App/CueScore.storekit",import.meta.url),"utf8");
 const recordPolicy=fs.readFileSync(new URL("../record-access-v1.js",import.meta.url),"utf8");
 
-test("Build 66 keeps the immutable Product ID identical in web, native and StoreKit configuration",()=>{
+test("Build 67 keeps the immutable Product ID identical in web, native and StoreKit configuration",()=>{
   const id="com.takaakimailboxstar.cuescoreapps.pro";
   for(const source of [web,native,config])assert.ok(source.includes(id));
 });
 
 test("StoreKit product success returns localized displayPrice and zero products stays unavailable",()=>{
-  assert.match(native,/Product\.products\(for: \[Self\.proProductID\]\)\.first/);
-  assert.match(native,/guard let product[\s\S]*?call\.reject\("CueScore Pro is not available in the current storefront\."\)/);
+  assert.match(native,/let products = try await Product\.products\(for: \[Self\.proProductID\]\)/);
+  assert.match(native,/guard let product = products\.first[\s\S]*?"PRODUCTS_EMPTY"/);
   assert.match(native,/"localizedPrice": product\.displayPrice/);
   assert.match(web,/s\.product\?\.localizedPrice\|\|"価格を取得できません"/);
   assert.match(web,/disabled=!s\.product\|\|s\.status!=="ready"/);

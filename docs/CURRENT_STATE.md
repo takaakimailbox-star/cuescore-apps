@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## Build 67 IAP runtime diagnostic／Internal TestFlight（2026年9月18日）
+
+- Build 66のTestFlight Sandboxで`¥980`を取得できなかったため、製品仕様を変えず、`BRIDGE_ERROR`、`STOREKIT_ERROR`（domain／code）、`PRODUCTS_EMPTY`（count=0）、`PRODUCTS_OK`（count／Product ID一致）をPro画面で識別できるBuild 67専用diagnosticを追加した。正式Product ID、StoreKit `displayPrice`、purchase、verified entitlement、Restore、Free / Pro仕様は変更していない。
+- 全Node test `391 pass / 0 fail / 0 skipped`、Release iOS Simulator、device Archive、uploadをPASS。Local StoreKit実機XCTestは`1 pass`。実機UITestはAutomation Modeタイムアウト、iOS 27 Simulator UITestは既存appのUIScene lifecycle要件で開始／起動前BLOCKEDとして製品diagnosticとは分離した。
+- Version `1.0`／Build `67`。App Store Connect Build ID `50063f56-1a0f-4c05-9ef1-3ece12d40ae0`は`VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`の配布対象。Product Ownerの実機diagnostic確認待ち。Build 68、原因修正、External TestFlight、App Review、一般公開は未実施。詳細：`docs/implementation/CueScore_Build67_IAP_Diagnostic_TestFlight_2026-09-18.md`。
+
 ## CueScore専用ローカルStoreKit実取引テスト環境（2026年9月14日）
 
 - App Store Connectの契約状態に依存しない、CueScore専用の共有Scheme `CueScoreLocalStoreKit` を追加した。Run／Testへ`CueScore.storekit`を接続し、hosted XCTest `CueScoreStoreKitTests`と最小UITest `CueScoreStoreKitUITests`を追加した。製品コード、正式Product ID `com.takaakimailboxstar.cuescoreapps.pro`、Free／Pro仕様は変更していない。
