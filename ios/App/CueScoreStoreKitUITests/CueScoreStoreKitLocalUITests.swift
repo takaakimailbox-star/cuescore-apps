@@ -27,24 +27,29 @@ final class CueScoreStoreKitLocalUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["CueScore Pro"].firstMatch.waitForExistence(timeout: 10))
     }
 
-    func testProGateLoadsLocalStoreKitProduct() throws {
+    func testProGateLoadsLocalStoreKitProductWithoutDiagnosticUI() throws {
         let app = launch()
         openProFromSettings(app)
 
-        let diagnostic = app.staticTexts.matching(
-            NSPredicate(
-                format: "label CONTAINS[c] %@ AND label CONTAINS[c] %@ AND label CONTAINS[c] %@",
-                "Diagnostic: PRODUCTS_OK",
-                "count=1",
-                "match=YES"
-            )
-        ).firstMatch
-        XCTAssertTrue(diagnostic.waitForExistence(timeout: 15))
-        XCTAssertTrue(app.staticTexts["Purchase Diagnostic"].firstMatch.waitForExistence(timeout: 5))
         XCTAssertTrue(
             app.staticTexts.matching(
-                NSPredicate(format: "label BEGINSWITH[c] %@", "Storefront:")
+                NSPredicate(format: "label CONTAINS[c] %@", "980")
+            ).firstMatch.waitForExistence(timeout: 15)
+        )
+        XCTAssertTrue(
+            app.buttons.matching(
+                NSPredicate(format: "label == %@", "Proを購入")
             ).firstMatch.waitForExistence(timeout: 5)
+        )
+        XCTAssertFalse(
+            app.staticTexts.matching(
+                NSPredicate(format: "label CONTAINS[c] %@", "Diagnostic:")
+            ).firstMatch.exists
+        )
+        XCTAssertFalse(
+            app.staticTexts.matching(
+                NSPredicate(format: "label == %@", "Purchase Diagnostic")
+            ).firstMatch.exists
         )
     }
 }

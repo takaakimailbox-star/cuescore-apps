@@ -1,23 +1,25 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-B69-PURCHASE-LIFECYCLE-DIAGNOSTIC-20260918`
+- Decision ID: `CUESCORE-B71-DEPENDENCY-REPRODUCIBILITY-20260918`
 - Date: 2026-09-18
 - Product Owner Decision: GO
-- Gate result: `READY FOR PRODUCT OWNER BUILD 69 PURCHASE DIAGNOSTIC TEST`
+- Gate result: `PRE-UPLOAD SOURCE / ARTIFACT GATE PASS`
 
 ## Objective
 
-Build 68のTestFlight Sandbox購入が認証後に停止したため、購入挙動を変えず、StoreKit native lifecycle、Capacitor Promise、JavaScript entitlement、foreground refreshの正確な停止phaseをBuild 69で特定する。
+正式受入対象外としたBuild 70の製品変更を維持し、GitHub正本の`Package.resolved`を強制使用してBuild 71を再Build／Archive／Internal TestFlight配布する。新機能・追加製品修正は行わない。
 
-## Completed scope
+## Completed before upload
 
-- Version `1.0`を維持し、Buildを`69`へ更新した。
-- native P01〜P12、JavaScript J01〜J06と、Transaction.updates／currentEntitlements／visibility／refresh／listener registrationの非機密diagnosticを追加した。
-- Pro画面へStorefrontと最新20件のPurchase Diagnosticを一時表示した。
-- listener registration rejectionを安全に捕捉し、unhandled Promiseを防止した。
-- CueSnapi native architectureの移植、Product ID、purchase semantics、verified authority、finish、Restore、Free / Pro仕様は変更していない。
-- Node regression、Release build、Release device Archive、App Store Connect uploadを完了した。
+- latest `origin/main`が`5818a1714eda7b971a27dc98eea305f18cdb3b9b`であることを確認した。
+- clean worktree dependencyを`npm ci`で`package-lock.json`から再現した。
+- `cap sync ios`でnpm標準pathのlocal Capacitor packagesを生成した。package.json／package-lock.json／Package.resolvedは無差分。
+- Xcode 27のhelpで`-onlyUsePackageVersionsFromResolvedFile`と`-disableAutomaticPackageResolution`対応を確認し、両方を使用した。
+- `ion-ios-filesystem 1.1.2` / `0d81e26…`、`capacitor-swift-pm 8.0.2` / `13a391…`を専用checkoutへ固定した。
+- Pro UX／Promise focused、IAP combined、Full Node regression、Release Simulator build、device ArchiveをPASSした。
+- Archiveは`com.takaakimailboxstar.cuescoreapps` / `1.0 (71)`、`.storekit` 0件。
+- Archive build graphが専用checkoutの`ion-ios-filesystem 1.1.2` / `0d81e26…`を使用したことを確認した。
 
 ## Current boundary
 
-Build 69はApp Store Connectで`VALID`となり、`CueScore Internal Testers`から利用可能である。Product Ownerが購入を1回だけ実施し、最終diagnostic phaseを報告する。Restore／再購入は行わない。実機Evidence受領前にnative refactor、Build 70、External TestFlight、App Review、Releaseへ進まない。
+GitHub反映予定sourceとArchive dependencyの一致を確認済み。source commit／push後にだけBuild 71をApp Store Connectへuploadし、`VALID`／encryption／Internal groupを確認する。Build 72、External TestFlight、App Review、Releaseへ進まない。

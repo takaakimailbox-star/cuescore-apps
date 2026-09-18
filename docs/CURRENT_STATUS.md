@@ -1,16 +1,16 @@
 # CueScore Current Status
 
 - Updated: 2026-09-18
-- Version / Build: `1.0 (69)`
-- GitHub baseline: `6bd467fe5fdfe715ea24bc3fc1c3475ba434f65f`
-- Build 68 Product Owner result: `PRODUCTS_OK`、purchase sheet、認証までPASS。認証後は`購入を確認しています…`のままでPro未解放。起動時errorも再現
-- Build 69 scope: purchase behaviorを変えず、native P01〜P12、JavaScript J01〜J06、visibility／refresh、Transaction.updates、currentEntitlements、listener registration、Storefrontのdiagnosticを追加
-- Product behavior: Product ID、StoreKit `displayPrice`、purchase、verified entitlement、finish、Restore、Free / Pro仕様は変更なし
-- Tests: focused diagnostics `24 pass / 0 fail`、Full Node `402 pass / 0 fail / 0 skipped`、Release Simulator build PASS
-- Local StoreKit: XCTestはiOS 26.5 Simulator、UITestはiOS 27 Simulatorでtest operationが応答せず中断。`TEST ENVIRONMENT BLOCKED`であり製品FAILではない
-- TestFlight: Build ID `0a7e49b7-dd49-4ead-8733-5692e0bceef2`、`VALID`、`usesNonExemptEncryption=false`、`CueScore Internal Testers`配布対象
-- Current gate: `READY FOR PRODUCT OWNER BUILD 69 PURCHASE DIAGNOSTIC TEST`
-- Product Owner next: TestFlightで1.0 (69)へ更新し、購入を1回だけ実行して最終diagnostic phaseを報告。Restore／再購入は行わない
+- Version / Build: `1.0 (71)`
+- GitHub baseline: `5818a1714eda7b971a27dc98eea305f18cdb3b9b`
+- Build 70: 製品実装／testはPASSしたが、Archive dependencyがsourceと不一致のため正式受入対象外
+- Build 71 scope: Build 70のPro UX／Startup Promise Safetyを変更せず、clean `npm ci`環境とGitHub `Package.resolved`固定で再Build
+- Dependency source: `ion-ios-filesystem 1.1.2` / `0d81e26e828ff9582807e2339112cedf2e0fab85`、`capacitor-swift-pm 8.0.2`
+- Dependency artifact: Archive build graphも同じversion／revisionを使用
+- Tests: Pro UX／Promise focused `9 pass`、IAP combined `33 pass`、Full Node `411 pass / 0 fail / 0 skipped`
+- Build verification: Release Simulator build／device Archive PASS、Bundle ID `com.takaakimailboxstar.cuescoreapps`、Archive `1.0 (71)`、`.storekit` 0件
+- Current gate: `PRE-UPLOAD SOURCE / ARTIFACT GATE PASS`
+- TestFlight: Build 71 upload pending
 - External TestFlight: not performed
 - App Review: not submitted
 - Public release: not performed

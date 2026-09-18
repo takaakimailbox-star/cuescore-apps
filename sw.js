@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-build69-purchase-diagnostic-v1";
+const APP_VERSION = "2.0-build70-pro-ux-startup-safety-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-build69-purchase-diagnostic-v1",
+  "./demo-data.js?v=2.0-build70-pro-ux-startup-safety-v1",
   "./manifest.webmanifest",
   "./privacy.html",
   "./terms.html",
@@ -26,8 +26,8 @@ const APP_SHELL = [
   "./navigation-phase2-6.js?v=2.0-build60-free-pro-foundation",
   "./player-detail-build8.css",
   "./record-access-v1.js?v=1.0-build60-free-pro-v2",
-  "./monetization-v1.js?v=1.0-build69-purchase-diagnostic-v1",
-  "./monetization-v1.css?v=1.0-build69-purchase-diagnostic-v1",
+  "./monetization-v1.js?v=1.0-build70-pro-ux-startup-safety-v1",
+  "./monetization-v1.css?v=1.0-build70-pro-ux-startup-safety-v1",
   "./docs/official/app-store-v1.0/public/CueScore_Privacy_Policy_v1.0_Official.md",
   "./docs/official/app-store-v1.0/public/CueScore_Terms_of_Use_v1.0_Official.md",
   "./docs/official/app-store-v1.0/public/CueScore_Support_v1.0_Official.md",

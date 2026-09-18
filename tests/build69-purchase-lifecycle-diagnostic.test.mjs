@@ -85,11 +85,11 @@ test("foreground, transaction update and current entitlement reads are diagnosti
   assert.match(native, /"revoked"/);
 });
 
-test("temporary Pro diagnostics show storefront and a bounded phase history", () => {
-  assert.match(web, /data-pro-storefront/);
-  assert.match(web, /Purchase Diagnostic/);
-  assert.match(web, /data-purchase-diagnostic/);
-  assert.match(css, /\.cue-pro-purchase-diagnostic-v1 pre\{[^}]*height:78px[^}]*overflow:auto/);
+test("Build 69 diagnostic helpers remain available without shipping their temporary UI", () => {
+  assert.doesNotMatch(web, /data-pro-storefront/);
+  assert.doesNotMatch(web, /Purchase Diagnostic/);
+  assert.doesNotMatch(web, /data-purchase-diagnostic/);
+  assert.doesNotMatch(css, /cue-pro-purchase-diagnostic-v1/);
   assert.equal(diagnostic.formatStorefront({storefrontCountryCode: "us", storefrontId: "143441"}), "Storefront: US / 143441");
   assert.equal(diagnostic.formatStorefront({}), "Storefront: unavailable");
 });

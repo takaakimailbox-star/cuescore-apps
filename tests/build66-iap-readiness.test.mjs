@@ -17,7 +17,7 @@ test("StoreKit product success returns localized displayPrice and zero products 
   assert.match(native,/guard let product = products\.first[\s\S]*?"PRODUCTS_EMPTY"/);
   assert.match(native,/"localizedPrice": product\.displayPrice/);
   assert.match(web,/s\.product\?\.localizedPrice\|\|"価格を取得できません"/);
-  assert.match(web,/disabled=!s\.product\|\|s\.status!=="ready"/);
+  assert.match(web,/buyButton\.disabled=operationInFlight\|\|!s\.product\|\|s\.status!=="ready"/);
 });
 
 test("verified, cancelled, pending and failure purchase outcomes remain distinct",()=>{
@@ -31,12 +31,12 @@ test("verified, cancelled, pending and failure purchase outcomes remain distinct
 test("entitlement refresh preserves verified Pro when only product lookup fails",()=>{
   assert.match(web,/current=await adapter\.currentEntitlement\(\)/);
   assert.match(web,/product=await adapter\.product\?\.\(\)/);
-  assert.match(web,/const isPro=verified\(current\);emit\(\{status:product\|\|isPro\?"ready":"error",isPro/);
+  assert.match(web,/const isPro=verified\(current\);emit\(\{status:product\|\|isPro\?"ready":"error",isPro,product:product\|\|previousProduct\|\|null/);
 });
 
 test("product and entitlement retry on Pro open and foreground lifecycle",()=>{
-  assert.match(web,/syncPaywall\(\);void entitlement\.refresh\(\)/);
-  assert.match(web,/visibilitychange[\s\S]*?visibilityState==="visible"[\s\S]*?entitlement\.refresh\(\)/);
+  assert.match(web,/syncPaywall\(\);void refreshSafely\("PRO_OPEN"\)/);
+  assert.match(web,/visibilitychange[\s\S]*?visibilityState==="visible"[\s\S]*?refreshSafely\("FOREGROUND"\)/);
 });
 
 test("restore syncs App Store and unlocks only a verified current entitlement",()=>{

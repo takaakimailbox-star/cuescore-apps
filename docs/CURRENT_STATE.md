@@ -1,5 +1,17 @@
 # CueScore Apps Current State
 
+## Build 71 Dependency Reproducibility（2026年9月18日）
+
+- Build 70の製品実装を変更せず、clean `npm ci`と`cap sync ios`でnative dependency pathを再生成。Xcode 27で対応を実確認した`-onlyUsePackageVersionsFromResolvedFile`／`-disableAutomaticPackageResolution`を使用し、GitHub `Package.resolved`だけからSwift Packageを解決した。
+- Repository／Archive build graphの双方で`ion-ios-filesystem 1.1.2`／revision `0d81e26e828ff9582807e2339112cedf2e0fab85`、`capacitor-swift-pm 8.0.2`／revision `13a39179b3df796f3bb2e70c47ccdd92593f34d2`を確認。`Package.resolved`、package.json、package-lock.jsonは無差分。
+- Pro UX／Promise focused `9 pass / 0 fail`、IAP combined `33 pass / 0 fail`、全Node `411 pass / 0 fail / 0 skipped`、Release Simulator build、device ArchiveをPASS。Archiveは`com.takaakimailboxstar.cuescoreapps`／`1.0 (71)`、`.storekit` 0件。GitHub反映予定sourceとArchive dependencyの完全一致を確認し、source commit／push後のInternal TestFlight upload待ち。詳細：`docs/implementation/CueScore_Build71_Dependency_Reproducibility_2026-09-18.md`。
+
+## Build 70 Pro UX／Startup Promise Safety（2026年9月18日）
+
+- Build 69実機Sandbox購入でApple実商品、verified purchase、即時Pro解放、完全終了→再起動後のPro維持までPASS。Build 70では課金contractを維持し、購入中表示／二重操作防止／成功表示、verified Pro時のbadge除去／購入済み表示、Build 69 diagnostic UI除去、entitlement refresh safe boundary、global unhandled-rejection汎用toast除去を実装した。
+- Focused `34 pass / 0 fail / 0 skipped`、IAP focused `33 pass / 0 fail / 0 skipped`、全Node `411 pass / 0 fail / 0 skipped`。Release Simulator build、test target compilation、device Archive、uploadをPASS。Free cold launch 3回とforeground復帰1回で誤った通信／保存通知なし。Version `1.0`／Build `70`。App Store Connect Build ID `edf4cd08-005c-4c96-abdc-57353b603e80`は`VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`対象。
+- ただしArchive時にXcodeがrepository固定`ion-ios-filesystem 1.1.2`から`1.1.4`へ自動解決したため、GitHub main候補とTestFlight Build 70の依存sourceが一致しない。製品FAILではなくsource identity GateのFAILとして正式受入対象外。自動lockfile差分は復元し、PO実機確認案内は行っていない。詳細：`docs/implementation/CueScore_Build70_Pro_UX_Startup_Safety_2026-09-18.md`。
+
 ## Build 69 Purchase Lifecycle Diagnostic／Internal TestFlight（2026年9月18日）
 
 - Build 68実機Sandbox購入は`PRODUCTS_OK`、bridge、Apple商品、purchase sheet、認証までPASSしたが、認証後に`購入を確認しています…`で停止しPro未解放。起動時generic errorも再現した。Build 69は購入挙動を変えず、Swift P01〜P12、JavaScript J01〜J06、Transaction.updates、currentEntitlements、visibility／refresh、listener registration、Storefrontのdiagnosticだけを追加した。

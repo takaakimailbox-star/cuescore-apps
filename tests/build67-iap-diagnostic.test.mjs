@@ -67,10 +67,9 @@ test("Build 67 records product success count and Product ID match", () => {
   assert.match(native, /"productIdMatched": product\.id == Self\.proProductID/);
 });
 
-test("Build 67 diagnostic UI is supplemental and does not control purchase or entitlement", () => {
-  assert.match(web, /data-pro-diagnostic hidden/);
-  assert.match(web, /diagnosticNode\.textContent=diagnosticText/);
-  assert.match(web, /disabled=!s\.product\|\|s\.status!=="ready"/);
+test("Build 67 diagnostic helper remains supplemental after its temporary UI is removed", () => {
+  assert.doesNotMatch(web, /data-pro-diagnostic/);
+  assert.match(web, /buyButton\.disabled=operationInFlight\|\|!s\.product\|\|s\.status!=="ready"/);
   assert.doesNotMatch(web, /verified\s*=\s*.*diagnostic|diagnostic.*isPro\s*=\s*true/);
-  assert.match(css, /\.cue-pro-diagnostic-v1\{[^}]*font-size:9px/);
+  assert.doesNotMatch(css, /\.cue-pro-diagnostic-v1/);
 });

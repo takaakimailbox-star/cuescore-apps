@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="./player-detail-build6.css" />
   <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build60-free-pro-foundation" />
   <link rel="stylesheet" href="./player-detail-build8.css" />
-  <link rel="stylesheet" href="./monetization-v1.css?v=1.0-build69-purchase-diagnostic-v1" />
+  <link rel="stylesheet" href="./monetization-v1.css?v=1.0-build70-pro-ux-startup-safety-v1" />
   <style id="build8PlayerTitleV1">
   .pd8-title-with-icon{display:flex!important;align-items:center;justify-content:center;gap:7px}.pd8-title-with-icon img{width:25px;height:25px;flex:0 0 auto}
   .pd8-discipline-fixed .player-history-disciplines-v4{display:none!important}
@@ -8624,7 +8624,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build69-purchase-diagnostic-v1"></script>
+  <script src="./demo-data.js?v=2.0-build70-pro-ux-startup-safety-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19162,7 +19162,6 @@ let matchRecordsRawCacheV152 = null;
 
     window.addEventListener("unhandledrejection", event => {
       console.error("[CueScore v1.0] unhandled promise rejection", event.reason);
-      if (typeof showToast === "function") showToast("通信または保存を完了できませんでした", "接続状態を確認して、もう一度お試しください。");
     });
   })();
 
@@ -19170,7 +19169,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build69-purchase-diagnostic-v1";
+    const PWA_VERSION = "2.0-build70-pro-ux-startup-safety-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -28207,7 +28206,7 @@ body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!impo
   <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build60-free-pro-foundation" />
   <script src="./navigation-phase2-6.js?v=2.0-build60-free-pro-foundation"></script>
   <script src="./record-access-v1.js?v=1.0-build60-free-pro-v2"></script>
-  <script src="./monetization-v1.js?v=1.0-build69-purchase-diagnostic-v1"></script>
+  <script src="./monetization-v1.js?v=1.0-build70-pro-ux-startup-safety-v1"></script>
 </body>
 </html>
 
