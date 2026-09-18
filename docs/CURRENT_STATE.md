@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## Build 74 Settings Real-Device Fit Fix（2026年9月19日）
+
+- Build 73のProduct Owner実機TestFlightではVersion `1.0 (73)`と`CueScore Pro ✓`を確認した一方、Privacy Policy rowがfixed bottom tab barの下へ隠れたため実機GateをFAILとした。
+- 原因はBuild 73の先行CSSより後から読み込まれる`navigation-phase2-6.css`が、同じ`.settings-formal-spacer-v1`へ`min-height:132px !important`を再適用していたこと。compact iPhone条件でこのspacer 1要素だけを0pxへ固定し、Data row 63px、legal row 44px、plan action 44px、bottom navigationは変更していない。
+- 390×844 fixed tab bar込みでPrivacy bottom `586.5px` <= nav top `776px`、余裕`189.5px`、横overflowなし、initial scrollTop 0を確認。Settings focused `25 pass / 0 fail`、全Node `422 pass / 0 fail / 0 skipped`、Release Simulator build、device ArchiveをPASS。Archiveは`com.takaakimailboxstar.cuescoreapps`／`1.0 (74)`、`.storekit` 0件。GitHub／TestFlight反映はこの記録時点でpending。詳細：`docs/implementation/CueScore_Build74_Settings_Real_Device_Fit_Fix_2026-09-19.md`。
+
 ## Build 73 Compact Settings Finalization（2026年9月18日）
 
 - Build 72で実機PASSした現在プラン表示と`CueScoreEntitlement` SSOTを維持し、390×844のSettingsでプラン、Backup／Restore、About、Terms、Privacy、copyrightをroot scrollなしに表示するcompact layoutを正式化した。Data row 63px、legal row 44px、plan action 44pxを維持し、項目削除や課金／保存仕様変更はない。
