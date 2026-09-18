@@ -3,12 +3,12 @@
 - App: CueScore
 - Decision ID: `CUESCORE-B71-DEPENDENCY-REPRODUCIBILITY-20260918`
 - Date: 2026-09-18
-- Gate Result: `PRE-UPLOAD SOURCE / ARTIFACT GATE PASS`
+- Gate Result: `READY FOR PRODUCT OWNER BUILD 71 PRO UX + STARTUP SAFETY TEST`
 - Version / Build: `1.0 (71)`
 
 ## 結論
 
-Build 70候補の製品変更を維持し、GitHub `Package.resolved`を強制使用したBuild 71のtest／Release build／ArchiveをPASSした。GitHub反映予定sourceとArchive dependencyは完全一致。commit／push後にだけInternal TestFlight uploadへ進む。
+Build 70候補の製品変更を維持し、GitHub `Package.resolved`を強制使用したBuild 71のtest／Release build／Archive／Internal TestFlight配布をPASSした。GitHub source dependencyとArchive dependencyは完全一致。Product OwnerのBuild 71実機確認待ちでSTOPする。
 
 ## Dependency Evidence
 
@@ -42,10 +42,26 @@ Build 70候補の製品変更を維持し、GitHub `Package.resolved`を強制�
 - Archive内`.storekit`: 0件
 - Archive dependency pathはBuild 71専用SourcePackages checkoutを参照
 
-## Pending
+## Git / App Store Connect Evidence
 
-- source commit／push
-- App Store Connect upload／Build ID／processing
-- encryption／Internal group確認
+- Build source commit: `aa67c564928725654403005ecf7e878daaf83e10`
+- Push: `origin/main`へ成功、push直後`HEAD == origin/main`
+- Upload: `EXPORT SUCCEEDED` / `Upload succeeded`
+- App Store Connect Build ID: `2b8390e4-5436-4673-9ecf-9c1f7da1a77d`
+- Processing: `VALID`
+- Encryption: `usesNonExemptEncryption=false`
+- Internal group: `CueScore Internal Testers`、internal／all-build access／Build 71対象
+
+## Product Owner確認
+
+1. TestFlightからCueScore `1.0 (71)`へ更新する。
+2. アプリを完全終了して再起動する。
+3. 起動時に誤った通信／保存通知が出ないことを確認する。
+4. Pro状態が維持されていることを確認する。
+5. Backup等に`🔒 Pro`が残っていないことを確認する。
+6. Pro限定機能へ直接入れることを確認する。
+7. アプリをbackgroundへ移し、foreground復帰後もエラー通知が出ないことを確認する。
+
+再購入は行わない。
 
 Build 72、External TestFlight、App Review、Releaseは未実施。

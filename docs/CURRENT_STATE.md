@@ -4,7 +4,7 @@
 
 - Build 70の製品実装を変更せず、clean `npm ci`と`cap sync ios`でnative dependency pathを再生成。Xcode 27で対応を実確認した`-onlyUsePackageVersionsFromResolvedFile`／`-disableAutomaticPackageResolution`を使用し、GitHub `Package.resolved`だけからSwift Packageを解決した。
 - Repository／Archive build graphの双方で`ion-ios-filesystem 1.1.2`／revision `0d81e26e828ff9582807e2339112cedf2e0fab85`、`capacitor-swift-pm 8.0.2`／revision `13a39179b3df796f3bb2e70c47ccdd92593f34d2`を確認。`Package.resolved`、package.json、package-lock.jsonは無差分。
-- Pro UX／Promise focused `9 pass / 0 fail`、IAP combined `33 pass / 0 fail`、全Node `411 pass / 0 fail / 0 skipped`、Release Simulator build、device ArchiveをPASS。Archiveは`com.takaakimailboxstar.cuescoreapps`／`1.0 (71)`、`.storekit` 0件。GitHub反映予定sourceとArchive dependencyの完全一致を確認し、source commit／push後のInternal TestFlight upload待ち。詳細：`docs/implementation/CueScore_Build71_Dependency_Reproducibility_2026-09-18.md`。
+- Pro UX／Promise focused `9 pass / 0 fail`、IAP combined `33 pass / 0 fail`、全Node `411 pass / 0 fail / 0 skipped`、Release Simulator build、device Archive、uploadをPASS。Archiveは`com.takaakimailboxstar.cuescoreapps`／`1.0 (71)`、`.storekit` 0件。GitHub source dependencyとArchive dependencyの完全一致を確認。Build source commit `aa67c564928725654403005ecf7e878daaf83e10`をmainへpush。App Store Connect Build ID `2b8390e4-5436-4673-9ecf-9c1f7da1a77d`は`VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`対象。Product OwnerのBuild 71実機確認待ち。詳細：`docs/implementation/CueScore_Build71_Dependency_Reproducibility_2026-09-18.md`。
 
 ## Build 70 Pro UX／Startup Promise Safety（2026年9月18日）
 

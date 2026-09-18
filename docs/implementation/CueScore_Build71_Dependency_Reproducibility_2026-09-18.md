@@ -26,7 +26,7 @@ Build 70のPro UX／Startup Promise Safety実装を変更せず、GitHub `Packag
 - revision: `13a39179b3df796f3bb2e70c47ccdd92593f34d2`
 - Package.resolved、workspace-state、checkout HEAD、Archive build graphを相互確認済み
 
-## Evidence before upload
+## Evidence
 
 - Pro UX／Startup Promise focused: `9 pass / 0 fail`
 - IAP combined: `33 pass / 0 fail`
@@ -36,7 +36,14 @@ Build 70のPro UX／Startup Promise Safety実装を変更せず、GitHub `Packag
 - Identity: `com.takaakimailboxstar.cuescoreapps` / `1.0 (71)`
 - Archive `.storekit`: 0件
 - GitHub source dependencyとArchive dependency: 完全一致
+- Build source commit: `aa67c564928725654403005ecf7e878daaf83e10`
+- Push: `origin/main`へ成功
+- Upload: `EXPORT SUCCEEDED` / `Upload succeeded`
+- App Store Connect Build ID: `2b8390e4-5436-4673-9ecf-9c1f7da1a77d`
+- Processing: `VALID`
+- Encryption: `usesNonExemptEncryption=false`
+- Internal group: `CueScore Internal Testers`、Build 71対象
 
 ## Boundary
 
-新機能・追加製品修正、dependency version変更、Build 72、External TestFlight、App Review、Releaseは実施しない。
+`READY FOR PRODUCT OWNER BUILD 71 PRO UX + STARTUP SAFETY TEST`でSTOPする。新機能・追加製品修正、dependency version変更、Build 72、External TestFlight、App Review、Releaseは実施しない。

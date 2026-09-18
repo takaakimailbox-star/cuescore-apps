@@ -3,7 +3,7 @@
 - Decision ID: `CUESCORE-B71-DEPENDENCY-REPRODUCIBILITY-20260918`
 - Date: 2026-09-18
 - Product Owner Decision: GO
-- Gate result: `PRE-UPLOAD SOURCE / ARTIFACT GATE PASS`
+- Gate result: `READY FOR PRODUCT OWNER BUILD 71 PRO UX + STARTUP SAFETY TEST`
 
 ## Objective
 
@@ -20,6 +20,6 @@
 - Archiveは`com.takaakimailboxstar.cuescoreapps` / `1.0 (71)`、`.storekit` 0件。
 - Archive build graphが専用checkoutの`ion-ios-filesystem 1.1.2` / `0d81e26…`を使用したことを確認した。
 
-## Current boundary
+## Completed distribution
 
-GitHub反映予定sourceとArchive dependencyの一致を確認済み。source commit／push後にだけBuild 71をApp Store Connectへuploadし、`VALID`／encryption／Internal groupを確認する。Build 72、External TestFlight、App Review、Releaseへ進まない。
+Build source commit `aa67c564928725654403005ecf7e878daaf83e10`をGitHub mainへpushし、同一sourceのArchiveをApp Store Connectへuploadした。Build ID `2b8390e4-5436-4673-9ecf-9c1f7da1a77d`は`VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`対象。Product OwnerのBuild 71実機確認待ちでSTOPする。Build 72、External TestFlight、App Review、Releaseへ進まない。
