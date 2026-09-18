@@ -34,6 +34,14 @@ Free／Pro／Unknownの表示、購入導線、Backup／Restore、About、Terms�
 - Repository `Package.resolved`とArchive専用checkout一致
 - Fixed flags: `-onlyUsePackageVersionsFromResolvedFile`、`-disableAutomaticPackageResolution`、`-skipPackageUpdates`
 
-## Distribution boundary
+## Distribution Evidence
 
-同一sourceをGitHub mainへpush後、Internal TestFlight Build 73へuploadし、`READY FOR PRODUCT OWNER BUILD 73 COMPACT SETTINGS TEST`でSTOPする。Build 74、External TestFlight、App Review、Releaseへ進まない。
+- Build source commit: `50db6291a12222f31e708c86ce3f68af3123edd3`
+- GitHub push: `main`へ成功
+- App Store Connect upload: `Upload succeeded`
+- Build ID: `c494bb28-686a-4dbd-a0cb-60555a4b90db`
+- Processing state: `VALID`
+- Encryption: `usesNonExemptEncryption=false`
+- Internal group: `CueScore Internal Testers`（Build 73 membership確認済み）
+
+`READY FOR PRODUCT OWNER BUILD 73 COMPACT SETTINGS TEST`でSTOPした。Build 74、External TestFlight、App Review、Releaseへ進まない。

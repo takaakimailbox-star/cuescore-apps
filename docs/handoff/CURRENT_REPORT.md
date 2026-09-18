@@ -3,12 +3,12 @@
 - App: CueScore
 - Decision ID: `CUESCORE-B73-COMPACT-SETTINGS-20260918`
 - Date: 2026-09-18
-- Gate Result: Archive PASS／distribution pending
+- Gate Result: `READY FOR PRODUCT OWNER BUILD 73 COMPACT SETTINGS TEST`
 - Version / Build: `1.0 (73)`
 
 ## 結論
 
-Build 73のcompact Settings実装、test、390×844 visual audit、固定dependency Release build／device ArchiveをPASSした。GitHub main反映とInternal TestFlight uploadを続行する。
+Build 73のcompact Settings実装、test、390×844 visual audit、固定dependency Release build／device Archive、GitHub main反映、Internal TestFlight配布をPASSした。Product Ownerの実機確認へ進める。
 
 ## Product Evidence
 
@@ -41,12 +41,16 @@ Build 73のcompact Settings実装、test、390×844 visual audit、固定depende
 
 ## Distribution
 
-- Build source commit: commit前
-- Push: pending
-- Upload: pending
-- App Store Connect Build ID: pending
-- Processing: pending
-- Encryption: pending
-- Internal group: pending
+- Build source commit: `50db6291a12222f31e708c86ce3f68af3123edd3`
+- Push: GitHub `main`へ成功
+- Upload: `Upload succeeded`
+- App Store Connect Build ID: `c494bb28-686a-4dbd-a0cb-60555a4b90db`
+- Processing: `VALID`
+- Encryption: `usesNonExemptEncryption=false`
+- Internal group: `CueScore Internal Testers`（Build 73 membership確認済み）
+
+## STOP
+
+`READY FOR PRODUCT OWNER BUILD 73 COMPACT SETTINGS TEST`
 
 External TestFlight、App Review、Releaseは実施しない。
