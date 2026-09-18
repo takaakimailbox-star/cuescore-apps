@@ -11,10 +11,10 @@
 - Geometry: 390×844 fixed tab bar込みでPrivacy bottom `586.5px` <= bottom nav top `776px`（余裕`189.5px`）、spacer 0px、Data row 63px／legal row 44px
 - Dependency: `ion-ios-filesystem 1.1.2` / `0d81e26e828ff9582807e2339112cedf2e0fab85`、`capacitor-swift-pm 8.0.2`
 - Build verification: Release Simulator build／device Archive PASS、Bundle ID `com.takaakimailboxstar.cuescoreapps`、Archive `1.0 (74)`、`.storekit` 0件
-- Build source commit: commit前
-- App Store Connect: upload前
-- Internal TestFlight: upload前
-- Current gate: Build 74 Archive PASS、GitHub反映／Internal TestFlight upload前
+- Build source commit: `416bb4c6a0ba0f43d51ac8ba444edec894d34999`（mainへpush済み）
+- App Store Connect: Build ID `602c7f3f-29bc-461a-ab29-e4f84337fe73`、`VALID`、`usesNonExemptEncryption=false`
+- Internal TestFlight: `CueScore Internal Testers`へ追加済み
+- Current gate: `READY FOR PRODUCT OWNER BUILD 74 SETTINGS REAL-DEVICE FIT TEST`
 - External TestFlight: not performed
 - App Review: not submitted
 - Public release: not performed

@@ -3,12 +3,12 @@
 - App: CueScore
 - Decision ID: `CUESCORE-B74-SETTINGS-REAL-DEVICE-FIT-20260919`
 - Date: 2026-09-19
-- Gate Result: Archive PASS／distribution pending
+- Gate Result: `READY FOR PRODUCT OWNER BUILD 74 SETTINGS REAL-DEVICE FIT TEST`
 - Version / Build: `1.0 (74)`
 
 ## 結論
 
-Build 73実機FAILの原因を後段`navigation-phase2-6.css`によるspacer再適用と特定し、そのspacer 1要素だけをcompact iPhone条件で0pxにした。row、fixed bottom navigation、課金、Pro、保存data、navigation contractは変更していない。test、geometry、Release build／ArchiveをPASSし、GitHub main反映とInternal TestFlight uploadを続行する。
+Build 73実機FAILの原因を後段`navigation-phase2-6.css`によるspacer再適用と特定し、そのspacer 1要素だけをcompact iPhone条件で0pxにした。row、fixed bottom navigation、課金、Pro、保存data、navigation contractは変更していない。test、geometry、Release build／Archive、GitHub main反映、Internal TestFlight配布をPASSした。
 
 ## Geometry Evidence
 
@@ -39,12 +39,16 @@ Build 73実機FAILの原因を後段`navigation-phase2-6.css`によるspacer再�
 
 ## Distribution
 
-- Build source commit: commit前
-- Push: pending
-- Upload: pending
-- App Store Connect Build ID: pending
-- Processing: pending
-- Encryption: pending
-- Internal group: pending
+- Build source commit: `416bb4c6a0ba0f43d51ac8ba444edec894d34999`
+- Push: GitHub `main`へ成功
+- Upload: `Upload succeeded`
+- App Store Connect Build ID: `602c7f3f-29bc-461a-ab29-e4f84337fe73`
+- Processing: `VALID`
+- Encryption: `usesNonExemptEncryption=false`
+- Internal group: `CueScore Internal Testers`（Build 74 membership確認済み）
+
+## STOP
+
+`READY FOR PRODUCT OWNER BUILD 74 SETTINGS REAL-DEVICE FIT TEST`
 
 External TestFlight、App Review、Releaseは実施しない。

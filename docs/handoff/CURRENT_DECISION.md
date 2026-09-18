@@ -3,7 +3,7 @@
 - Decision ID: `CUESCORE-B74-SETTINGS-REAL-DEVICE-FIT-20260919`
 - Date: 2026-09-19
 - Product Owner Decision: GO
-- Gate state: Archive PASS／distribution pending
+- Gate state: `READY FOR PRODUCT OWNER BUILD 74 SETTINGS REAL-DEVICE FIT TEST`
 
 ## Objective
 
@@ -19,4 +19,4 @@ Build 73の実機TestFlightでPrivacy Policy rowをbottom tab barの下へ押し
 
 ## Boundary
 
-全PASS時だけBuild `1.0 (74)`をGitHub mainとInternal TestFlightへ反映し、`READY FOR PRODUCT OWNER BUILD 74 SETTINGS REAL-DEVICE FIT TEST`でSTOPする。Build 75、External TestFlight、App Review、Releaseへ進まない。
+Build `1.0 (74)`をGitHub mainとInternal TestFlightへ反映し、`READY FOR PRODUCT OWNER BUILD 74 SETTINGS REAL-DEVICE FIT TEST`でSTOPした。Build 75、External TestFlight、App Review、Releaseへ進まない。

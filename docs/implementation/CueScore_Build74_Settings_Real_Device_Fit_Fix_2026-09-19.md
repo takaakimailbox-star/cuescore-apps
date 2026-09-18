@@ -37,6 +37,14 @@ Build 74は`navigation-phase2-6.css`の末尾で、390×844を含むcompact iPho
 - Repository `Package.resolved`とArchive build checkout一致
 - Fixed flags: `-onlyUsePackageVersionsFromResolvedFile`、`-disableAutomaticPackageResolution`、`-skipPackageUpdates`
 
-## Distribution boundary
+## Distribution Evidence
 
-同一product sourceをGitHub mainへpush後、Internal TestFlight Build 74へuploadし、`READY FOR PRODUCT OWNER BUILD 74 SETTINGS REAL-DEVICE FIT TEST`でSTOPする。Build 75、External TestFlight、App Review、Releaseへ進まない。
+- Build source commit: `416bb4c6a0ba0f43d51ac8ba444edec894d34999`
+- GitHub push: `main`へ成功
+- App Store Connect upload: `Upload succeeded`
+- Build ID: `602c7f3f-29bc-461a-ab29-e4f84337fe73`
+- Processing state: `VALID`
+- Encryption: `usesNonExemptEncryption=false`
+- Internal group: `CueScore Internal Testers`（Build 74 membership確認済み）
+
+`READY FOR PRODUCT OWNER BUILD 74 SETTINGS REAL-DEVICE FIT TEST`でSTOPした。Build 75、External TestFlight、App Review、Releaseへ進まない。
