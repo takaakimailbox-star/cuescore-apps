@@ -9,6 +9,32 @@ const native = fs.readFileSync(new URL("../ios/App/App/CueScoreStoreKitPlugin.sw
 const web = fs.readFileSync(new URL("../monetization-v1.js", import.meta.url), "utf8");
 const css = fs.readFileSync(new URL("../monetization-v1.css", import.meta.url), "utf8");
 
+test("Build 68 uses the injected Capacitor plugin registry first", () => {
+  const registered = {getProduct() {}};
+  let fallbackCalls = 0;
+  const value = diagnostic.storeKitPlugin({
+    Plugins: {CueScoreStoreKit: registered},
+    registerPlugin() { fallbackCalls += 1; return {fallback: true}; }
+  }, true);
+  assert.equal(value, registered);
+  assert.equal(fallbackCalls, 0);
+});
+
+test("Build 68 falls back to registerPlugin when the registry entry is absent", () => {
+  const fallback = {getProduct() {}};
+  const value = diagnostic.storeKitPlugin({registerPlugin(name) {
+    assert.equal(name, "CueScoreStoreKit");
+    return fallback;
+  }}, true);
+  assert.equal(value, fallback);
+});
+
+test("Build 68 reports no bridge adapter when neither native path exists", () => {
+  assert.equal(diagnostic.storeKitPlugin({}, true), null);
+  assert.equal(diagnostic.storeKitPlugin({Plugins: {}}, true), null);
+  assert.equal(diagnostic.storeKitPlugin({Plugins: {CueScoreStoreKit: {}}}, false), null);
+});
+
 test("Build 67 distinguishes bridge errors without exposing error details", () => {
   assert.deepEqual(diagnostic.fromError(new Error("bridge unavailable")), {state: "BRIDGE_ERROR"});
   assert.equal(diagnostic.format({state: "BRIDGE_ERROR"}), "Diagnostic: BRIDGE_ERROR");

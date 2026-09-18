@@ -1,6 +1,7 @@
 (() => {
   "use strict";
   const diagnostic=Object.freeze({
+    storeKitPlugin(capacitor,isNative){return isNative?capacitor?.Plugins?.CueScoreStoreKit??capacitor?.registerPlugin?.("CueScoreStoreKit")??null:null},
     fromError(error){const data=error?.data&&typeof error.data==="object"?error.data:error||{},code=String(error?.code||data?.diagnosticState||"");if(code==="PRODUCTS_EMPTY")return{state:"PRODUCTS_EMPTY",productsCount:Number(data.productsCount)||0};if(code==="STOREKIT_ERROR")return{state:"STOREKIT_ERROR",errorDomain:String(data.errorDomain||"unknown"),errorCode:Number.isFinite(Number(data.errorCode))?Number(data.errorCode):"unknown"};return{state:"BRIDGE_ERROR"}},
     fromProduct(product){return{state:"PRODUCTS_OK",productsCount:Number(product?.productsCount)||0,productIdMatched:product?.productIdMatched===true}},
     format(value){if(!value?.state)return"";if(value.state==="PRODUCTS_OK")return`Diagnostic: PRODUCTS_OK / count=${value.productsCount} / match=${value.productIdMatched?"YES":"NO"}`;if(value.state==="PRODUCTS_EMPTY")return`Diagnostic: PRODUCTS_EMPTY / count=${value.productsCount}`;if(value.state==="STOREKIT_ERROR")return`Diagnostic: STOREKIT_ERROR / domain=${value.errorDomain} / code=${value.errorCode}`;return"Diagnostic: BRIDGE_ERROR"}
@@ -23,7 +24,7 @@
   });
   window.CueScoreEntitlement=entitlement;
 
-  const storeKit=isNative&&capacitor?.registerPlugin?capacitor.registerPlugin("CueScoreStoreKit"):null;
+  const storeKit=diagnostic.storeKitPlugin(capacitor,isNative);
   if(storeKit){
     const nativeAdapter={
       product:()=>storeKit.getProduct(),

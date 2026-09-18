@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## Build 68 Capacitor bridge最小修正／Internal TestFlight（2026年9月18日）
+
+- Build 67実機diagnosticの`BRIDGE_ERROR`を受け、native StoreKit plugin取得を`Capacitor.Plugins.CueScoreStoreKit`第一候補、`registerPlugin` fallbackへ最小修正した。diagnosticを維持し、Local StoreKit UI testで`PRODUCTS_OK / count=1 / match=YES`を確認。Product ID、StoreKit `displayPrice`、purchase、verified entitlement、Restore、Free / Pro仕様は変更していない。
+- Focused test `29 pass / 0 fail`、全Node test `394 pass / 0 fail / 0 skipped`、Release Simulator build、device Archive、uploadをPASS。Local StoreKit UITestは`1 pass`。XCTestは実機ロックで開始前BLOCKED、Simulatorでは既知の`SKInternalErrorDomain Code=3`によりStoreKitTest override不可として製品FAILと分離した。Build 67の同一native StoreKit XCTestは実機で`1 pass`済み。
+- Version `1.0`／Build `68`。App Store Connect Build ID `c2b68531-4333-47ca-957d-501287330eb4`は`VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`の配布対象。Product Ownerの実機Sandbox IAP確認待ち。Build 69、External TestFlight、App Review、一般公開は未実施。詳細：`docs/implementation/CueScore_Build68_IAP_Bridge_Fix_2026-09-18.md`。
+
 ## Build 67 IAP runtime diagnostic／Internal TestFlight（2026年9月18日）
 
 - Build 66のTestFlight Sandboxで`¥980`を取得できなかったため、製品仕様を変えず、`BRIDGE_ERROR`、`STOREKIT_ERROR`（domain／code）、`PRODUCTS_EMPTY`（count=0）、`PRODUCTS_OK`（count／Product ID一致）をPro画面で識別できるBuild 67専用diagnosticを追加した。正式Product ID、StoreKit `displayPrice`、purchase、verified entitlement、Restore、Free / Pro仕様は変更していない。

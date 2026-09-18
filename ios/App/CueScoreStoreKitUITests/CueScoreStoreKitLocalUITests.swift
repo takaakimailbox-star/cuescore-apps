@@ -27,8 +27,18 @@ final class CueScoreStoreKitLocalUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["CueScore Pro"].firstMatch.waitForExistence(timeout: 10))
     }
 
-    func testProGateIsReachableFromSettings() throws {
+    func testProGateLoadsLocalStoreKitProduct() throws {
         let app = launch()
         openProFromSettings(app)
+
+        let diagnostic = app.staticTexts.matching(
+            NSPredicate(
+                format: "label CONTAINS[c] %@ AND label CONTAINS[c] %@ AND label CONTAINS[c] %@",
+                "Diagnostic: PRODUCTS_OK",
+                "count=1",
+                "match=YES"
+            )
+        ).firstMatch
+        XCTAssertTrue(diagnostic.waitForExistence(timeout: 15))
     }
 }
