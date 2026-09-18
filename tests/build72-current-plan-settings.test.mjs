@@ -51,6 +51,15 @@ test("plan card uses overflow-safe portrait layout", () => {
   assert.match(html, /\.settings-plan-card-v72[\s\S]*?border-radius: 18px/);
 });
 
+test("compact iPhone portrait layout keeps every Settings item on one page", () => {
+  assert.match(html, /@media \(max-width: 430px\) and \(max-height: 900px\)/);
+  assert.match(html, /@media \(max-width: 430px\) and \(max-height: 900px\)[\s\S]*?\.settings-data-row-v1 \{[\s\S]*?min-height: 63px !important/);
+  assert.match(html, /@media \(max-width: 430px\) and \(max-height: 900px\)[\s\S]*?\.settings-plan-action-v72 \{[\s\S]*?min-height: 44px/);
+  assert.match(html, /@media \(max-width: 430px\) and \(max-height: 900px\)[\s\S]*?\.settings-formal-spacer-v1 \{[\s\S]*?min-height: 0 !important/);
+  assert.match(html, /@media \(max-width: 430px\) and \(max-height: 900px\)[\s\S]*?\.settings-info-link-v1 \{ min-height: 42px; \}/);
+  assert.match(html, /\.settings-plan-value-v72[\s\S]*?overflow-wrap: anywhere/);
+});
+
 test("Build 71 Pro and startup safety contracts remain present", () => {
   assert.match(web, /refreshSafely\("FOREGROUND"\)/);
   assert.match(web, /if\(entitlement\.isPro\(\)\)\{[\s\S]*?\.cue-pro-badge-v1/);

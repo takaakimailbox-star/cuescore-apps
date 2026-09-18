@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## Build 73 Compact Settings Finalization（2026年9月18日）
+
+- Build 72で実機PASSした現在プラン表示と`CueScoreEntitlement` SSOTを維持し、390×844のSettingsでプラン、Backup／Restore、About、Terms、Privacy、copyrightをroot scrollなしに表示するcompact layoutを正式化した。Data row 63px、legal row 44px、plan action 44pxを維持し、項目削除や課金／保存仕様変更はない。
+- Settings focused `8 pass / 0 fail`、全Node `419 pass / 0 fail / 0 skipped`。390×844でUnknown／Free／Proの縦横overflowなし、Privacyまで初期位置表示、Pro badge 0件、About／Terms／Privacy遷移をPASSした。
+- Release Simulator buildとdevice ArchiveをPASS。Archiveは`com.takaakimailboxstar.cuescoreapps`／`1.0 (73)`、`.storekit` 0件。repositoryとArchive checkoutは`ion-ios-filesystem 1.1.2`／revision `0d81e26e828ff9582807e2339112cedf2e0fab85`、`capacitor-swift-pm 8.0.2`で一致。GitHub／TestFlight反映はこの記録時点でpending。詳細：`docs/implementation/CueScore_Build73_Compact_Settings_Finalization_2026-09-18.md`。
+
 ## Build 72 Current Plan Settings UI（2026年9月18日）
 
 - Settings上部へ`CueScoreEntitlement`をSSOTとする現在プランcardを追加。Unknownは`確認中`、Freeは`CueScore Free`、verified Proは`CueScore Pro ✓`。Freeは`Proを購入・購入を復元`、Proは`購入・復元について`から既存CueScore Pro画面を再利用する。purchase／Restore／foreground／refresh後にsubscriptionから即時更新し、新しいlocal Pro flagは追加していない。
