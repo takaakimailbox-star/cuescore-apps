@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="./player-detail-build6.css" />
   <link rel="stylesheet" href="./ui-revision-v12.css?v=2.0-build60-free-pro-foundation" />
   <link rel="stylesheet" href="./player-detail-build8.css" />
-  <link rel="stylesheet" href="./monetization-v1.css?v=1.0-build70-pro-ux-startup-safety-v1" />
+  <link rel="stylesheet" href="./monetization-v1.css?v=1.0-build72-current-plan-settings-v1" />
   <style id="build8PlayerTitleV1">
   .pd8-title-with-icon{display:flex!important;align-items:center;justify-content:center;gap:7px}.pd8-title-with-icon img{width:25px;height:25px;flex:0 0 auto}
   .pd8-discipline-fixed .player-history-disciplines-v4{display:none!important}
@@ -8624,7 +8624,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build70-pro-ux-startup-safety-v1"></script>
+  <script src="./demo-data.js?v=2.0-build72-current-plan-settings-v1"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -19169,7 +19169,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build70-pro-ux-startup-safety-v1";
+    const PWA_VERSION = "2.0-build72-current-plan-settings-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -25145,6 +25145,48 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   background: #fff;
   box-shadow: 0 8px 24px rgba(30,25,20,.045);
 }
+.settings-plan-card-v72 {
+  overflow: hidden;
+  border: 1px solid var(--settings-line);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(30,25,20,.045);
+}
+.settings-plan-status-v72,
+.settings-plan-action-v72 {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 58px;
+  padding: 12px 16px;
+}
+.settings-plan-status-v72 strong { min-width: 0; font-size: 16px; font-weight: 720; }
+.settings-plan-value-v72 {
+  max-width: 100%;
+  color: #555551;
+  font-size: 14px;
+  font-weight: 760;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+.settings-plan-value-v72.is-pro { color: #198c2c; }
+.settings-plan-value-v72.is-unknown { color: #8a8a86; }
+.settings-plan-action-v72 {
+  grid-template-columns: minmax(0,1fr) 18px;
+  border: 0;
+  border-top: 1px solid var(--settings-line);
+  background: transparent;
+  color: #171717;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 680;
+  text-align: left;
+}
+.settings-plan-action-v72:disabled { color: #8a8a86; }
+.settings-plan-action-v72 .settings-data-chevron-v1 { text-align: right; }
 .settings-data-row-v1 {
   display: grid;
   grid-template-columns: 50px minmax(0,1fr) auto 18px;
@@ -25347,6 +25389,17 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     </header>
     <div class="settings-formal-scroll-v1">
       <main class="settings-formal-main-v1">
+        <h1 class="settings-formal-section-title-v1">プラン</h1>
+        <section class="settings-plan-card-v72" aria-label="現在のプラン">
+          <div class="settings-plan-status-v72">
+            <strong>プラン</strong>
+            <span class="settings-plan-value-v72 is-unknown" data-settings-plan-state aria-live="polite">確認中</span>
+          </div>
+          <button class="settings-plan-action-v72" type="button" data-settings-plan-action disabled>
+            <span data-settings-plan-action-label>購入情報を確認中</span>
+            <span class="settings-data-chevron-v1" aria-hidden="true">›</span>
+          </button>
+        </section>
         <h1 class="settings-formal-section-title-v1">データ管理</h1>
         <section class="settings-data-card-v1" aria-label="データ管理">
           <button class="settings-data-row-v1" type="button" data-settings-action="cloud" data-release-feature="cloud-sync" hidden>
@@ -28206,7 +28259,7 @@ body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!impo
   <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build60-free-pro-foundation" />
   <script src="./navigation-phase2-6.js?v=2.0-build60-free-pro-foundation"></script>
   <script src="./record-access-v1.js?v=1.0-build60-free-pro-v2"></script>
-  <script src="./monetization-v1.js?v=1.0-build70-pro-ux-startup-safety-v1"></script>
+  <script src="./monetization-v1.js?v=1.0-build72-current-plan-settings-v1"></script>
 </body>
 </html>
 

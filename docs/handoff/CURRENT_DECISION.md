@@ -1,25 +1,25 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-B71-DEPENDENCY-REPRODUCIBILITY-20260918`
+- Decision ID: `CUESCORE-B72-CURRENT-PLAN-SETTINGS-20260918`
 - Date: 2026-09-18
 - Product Owner Decision: GO
-- Gate result: `READY FOR PRODUCT OWNER BUILD 71 PRO UX + STARTUP SAFETY TEST`
+- Current gate: Internal TestFlight upload pending
 
 ## Objective
 
-正式受入対象外としたBuild 70の製品変更を維持し、GitHub正本の`Package.resolved`を強制使用してBuild 71を再Build／Archive／Internal TestFlight配布する。新機能・追加製品修正は行わない。
+Settings画面上部へ現在のFree／Pro／確認中状態を表示する「プラン」cardを、CueScoreの既存Design Systemと`CueScoreEntitlement` SSOTだけを使って最小実装する。購入／復元は既存CueScore Pro画面を再利用し、課金contractとFree／Pro境界を変更しない。
 
 ## Completed before upload
 
-- latest `origin/main`が`5818a1714eda7b971a27dc98eea305f18cdb3b9b`であることを確認した。
-- clean worktree dependencyを`npm ci`で`package-lock.json`から再現した。
-- `cap sync ios`でnpm標準pathのlocal Capacitor packagesを生成した。package.json／package-lock.json／Package.resolvedは無差分。
-- Xcode 27のhelpで`-onlyUsePackageVersionsFromResolvedFile`と`-disableAutomaticPackageResolution`対応を確認し、両方を使用した。
-- `ion-ios-filesystem 1.1.2` / `0d81e26…`、`capacitor-swift-pm 8.0.2` / `13a391…`を専用checkoutへ固定した。
-- Pro UX／Promise focused、IAP combined、Full Node regression、Release Simulator build、device ArchiveをPASSした。
-- Archiveは`com.takaakimailboxstar.cuescoreapps` / `1.0 (71)`、`.storekit` 0件。
-- Archive build graphが専用checkoutの`ion-ios-filesystem 1.1.2` / `0d81e26…`を使用したことを確認した。
+- baseline `e763170b7ec061050bb0ffd0796860ec11e97dc9`からBuild 72を実装した。
+- Unknown `確認中`、Free `CueScore Free`、Pro `CueScore Pro ✓`と状態別導線を実装した。
+- purchase／restore／foreground／refreshで既存entitlement subscriptionから即時更新する。
+- Build 72 focused `7 pass`、Build 70 + 72 focused `16 pass`、Full Node `418 pass / 0 fail / 0 skipped`。
+- 390×844相当でUnknown／Free／Proをvisual auditし、Pro badge除去と横崩れなしを確認した。
+- Release Simulator buildとdevice ArchiveをPASSした。Simulator実行はXcode 27 SDKの既存UIScene lifecycle要件でenvironment BLOCKEDのため、Web資産の390×844 auditとdevice Archiveから分離した。
+- Archiveは`com.takaakimailboxstar.cuescoreapps` / `1.0 (72)`、`.storekit` 0件。
+- `-skipPackageUpdates`を含む固定手順でArchive build graphが`ion-ios-filesystem 1.1.2` / `0d81e26…`を使用し、repository `Package.resolved`と一致した。
 
-## Completed distribution
+## Boundary
 
-Build source commit `aa67c564928725654403005ecf7e878daaf83e10`をGitHub mainへpushし、同一sourceのArchiveをApp Store Connectへuploadした。Build ID `2b8390e4-5436-4673-9ecf-9c1f7da1a77d`は`VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`対象。Product OwnerのBuild 71実機確認待ちでSTOPする。Build 72、External TestFlight、App Review、Releaseへ進まない。
+Build 72をInternal TestFlightへ配布し、`READY FOR PRODUCT OWNER BUILD 72 CURRENT PLAN UI TEST`でSTOPする。Build 73、External TestFlight、App Review、Releaseへ進まない。

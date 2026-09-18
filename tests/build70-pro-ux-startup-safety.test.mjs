@@ -61,7 +61,7 @@ test("verified Pro removes lock badges and prevents MutationObserver re-decorati
   assert.match(web, /\.cue-pro-entry-v1[\s\S]*?classList\.remove\("cue-pro-entry-v1"\)/);
   assert.match(web, /\.cue-history-limit-v1[\s\S]*?node=>node\.remove\(\)/);
   assert.match(web, /MutationObserver\(\(\)=>requestAnimationFrame\(decorate\)\)/);
-  assert.match(web, /entitlement\.subscribe\(snapshot=>\{syncPaywall\(\);decorate\(\)/);
+  assert.match(web, /entitlement\.subscribe\(snapshot=>\{syncPaywall\(\);syncSettingsPlan\(snapshot\);decorate\(\)/);
 });
 
 test("existing Pro sees active state and never a repurchase button", () => {
