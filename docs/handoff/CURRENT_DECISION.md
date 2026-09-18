@@ -3,7 +3,7 @@
 - Decision ID: `CUESCORE-B72-CURRENT-PLAN-SETTINGS-20260918`
 - Date: 2026-09-18
 - Product Owner Decision: GO
-- Current gate: Internal TestFlight upload pending
+- Gate result: `READY FOR PRODUCT OWNER BUILD 72 CURRENT PLAN UI TEST`
 
 ## Objective
 
@@ -23,3 +23,7 @@ Settings画面上部へ現在のFree／Pro／確認中状態を表示する「�
 ## Boundary
 
 Build 72をInternal TestFlightへ配布し、`READY FOR PRODUCT OWNER BUILD 72 CURRENT PLAN UI TEST`でSTOPする。Build 73、External TestFlight、App Review、Releaseへ進まない。
+
+## Completed distribution
+
+Build source commit `59e95be5342e8e0e7e11cc5d13593ba2a14db083`をGitHub mainへpushし、同一product sourceのArchiveをApp Store Connectへuploadした。Build ID `c0a3dddc-d3f0-4425-a2ab-63ed1b0c249f`は`VALID`、`usesNonExemptEncryption=false`。Internal group `CueScore Internal Testers`はinternal／全BuildアクセスでBuild 72を配布対象とする。Product Ownerの実機確認待ちでSTOPする。

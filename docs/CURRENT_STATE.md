@@ -4,7 +4,7 @@
 
 - Settings上部へ`CueScoreEntitlement`をSSOTとする現在プランcardを追加。Unknownは`確認中`、Freeは`CueScore Free`、verified Proは`CueScore Pro ✓`。Freeは`Proを購入・購入を復元`、Proは`購入・復元について`から既存CueScore Pro画面を再利用する。purchase／Restore／foreground／refresh後にsubscriptionから即時更新し、新しいlocal Pro flagは追加していない。
 - Build 72 focused `7 pass`、Build 70 + 72 focused `16 pass`、全Node `418 pass / 0 fail / 0 skipped`。390×844相当でUnknown／Free／Pro、Pro badge除去、横崩れなしを確認。Release Simulator buildとdevice ArchiveをPASS。Archiveは`com.takaakimailboxstar.cuescoreapps`／`1.0 (72)`、`.storekit` 0件。
-- Pre-Archive GateでXcodeの1.1.4自動切替を検出して正式artifactから除外。`-skipPackageUpdates`を追加した固定手順で再Buildし、正式Archive build graphはrepositoryと同じ`ion-ios-filesystem 1.1.2`／revision `0d81e26e828ff9582807e2339112cedf2e0fab85`を使用。詳細：`docs/implementation/CueScore_Build72_Current_Plan_Settings_UI_2026-09-18.md`。
+- Pre-Archive GateでXcodeの1.1.4自動切替を検出して正式artifactから除外。`-skipPackageUpdates`を追加した固定手順で再Buildし、正式Archive build graphはrepositoryと同じ`ion-ios-filesystem 1.1.2`／revision `0d81e26e828ff9582807e2339112cedf2e0fab85`を使用。Build source commit `59e95be5342e8e0e7e11cc5d13593ba2a14db083`をmainへpush。App Store Connect Build ID `c0a3dddc-d3f0-4425-a2ab-63ed1b0c249f`は`VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`対象。詳細：`docs/implementation/CueScore_Build72_Current_Plan_Settings_UI_2026-09-18.md`。
 
 ## Build 71 Dependency Reproducibility（2026年9月18日）
 

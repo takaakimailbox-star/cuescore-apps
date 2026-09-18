@@ -38,3 +38,13 @@ Release Simulator artifactのcompileは成功したが、iOS Simulator起動はX
 ## Boundary
 
 Internal TestFlight Build 72配布後、Product Ownerの実機現在プランUI確認でSTOPする。Build 73、External TestFlight、App Review、Releaseへ進まない。
+
+## Distribution Evidence
+
+- Build source commit: `59e95be5342e8e0e7e11cc5d13593ba2a14db083`
+- Push: `origin/main`へ成功
+- Upload: `EXPORT SUCCEEDED` / `Upload succeeded`
+- App Store Connect Build ID: `c0a3dddc-d3f0-4425-a2ab-63ed1b0c249f`
+- Processing: `VALID`
+- Encryption: `usesNonExemptEncryption=false`
+- Internal group: `CueScore Internal Testers`（internal／全Buildアクセス）
