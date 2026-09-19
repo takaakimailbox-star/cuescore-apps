@@ -1,32 +1,60 @@
-# CueScore Apps — App Store v1.0 Official Documents
+# CueScore Apps App Store v1.0 Official Documents
 
-作成日: 2026-08-09
+- Document owner: CueScore Apps
+- Status: Official Release
+- Version: 1.0 Revision 2
+- Original publication: 2026-08-09
+- Revised: 2026-09-20
+- Approval: Product Owner Decision `CUESCORE-V1-FINAL-SUBMISSION-FIX-JP-20260920`
 
-## 収録ファイル
-1. Privacy_Policy_v1.0_Official.md
-2. Terms_of_Use_v1.0_Official.md
-3. Support_v1.0_Official.md
-4. App_Store_Description_v1.0_Official.md
-5. App_Store_Keywords_v1.0_Official.md
-6. App_Store_Review_Notes_v1.0_Official.md
-7. Release_Notes_v1.0_Official.md
+## Purpose
 
-## v1.0採用済みRelease Scope
-6競技、プレーヤー管理、メインプレーヤー、アバター／写真、試合進行、ブレイク入力、Undo、履歴、Analytics、オフライン、バックアップ／復元。App Store公開UIではサンプルデータ導線を表示しない。
+This package is the authoritative source for CueScore Apps v1.0 App Store metadata, App Review guidance, and public legal and support pages. Revision 2 aligns the package with Build 77, the adopted Free and Pro boundary, StoreKit 2, and the Japan-only launch decision.
 
-## Later
-CSV、自動クラウド同期、試合共有（Match Sharing）。試合共有は自動クラウド同期とは別の将来機能として扱い、v1.0にはUI・保存形式・転送処理を追加しない。
+## Official Files
 
-## 正式確定済みの公開情報
+1. `public/CueScore_Privacy_Policy_v1.0_Official.md`
+2. `public/CueScore_Terms_of_Use_v1.0_Official.md`
+3. `public/CueScore_Support_v1.0_Official.md`
+4. `submission/CueScore_App_Store_Description_v1.0_Official.md`
+5. `submission/CueScore_App_Store_Keywords_v1.0_Official.md`
+6. `submission/CueScore_App_Store_Review_Notes_v1.0_Official.md`
+7. `submission/CueScore_Release_Notes_v1.0_Official.md`
+
+## v1.0 Release Scope
+
+Free includes all six disciplines, match creation and completion, saving, player management, and the newest 20 saved records across all disciplines. Records after the newest 20 remain stored and are not deleted.
+
+CueScore Pro is a one-time Non-Consumable purchase. It unlocks all saved history, personal bests, detailed analytics and trends, opponent-specific review, Backup, and Restore. The immutable Product ID is `com.takaakimailboxstar.cuescoreapps.pro`. Verified StoreKit 2 entitlement is the purchase authority.
+
+The v1.0 launch territory is Japan only. The app and CueScore Pro In-App Purchase must both remain Japan only unless a later Product Owner decision expands availability.
+
+## Deferred
+
+- CSV import and export
+- Automatic cloud sync
+- Match Sharing
+- Territories outside Japan
+
+## Public Information
+
 - Privacy Policy: https://takaakimailbox-star.github.io/cuescore-apps/privacy.html
 - Terms of Use: https://takaakimailbox-star.github.io/cuescore-apps/terms.html
 - Support: https://takaakimailbox-star.github.io/cuescore-apps/support.html
-- 公開メール: cuescore.apps@gmail.com
-- 問い合わせ方法: メール
-- 問い合わせフォーム: Version 1.0では非採用
+- Support email: cuescore.apps@gmail.com
+- Contact method: Email
+- Contact form: Not included in Version 1.0
 
-## 公開前に未確定で残る必須項目
-- 実際の提出ビルドと各文書の最終一致確認
-- App Review担当者用の氏名・メール・電話番号
+## Publication Controls
 
-未確定項目は、実提出ビルドまたはProduct Ownerの入力が必要なため、推測で完了扱いにしません。
+- App Store submission candidate: Version `1.0`, Build `77`
+- App Review submission and public release require a separate Product Owner approval.
+- StoreKit `Product.displayPrice` is the in-app price authority. Official documents must not hard-code a storefront price.
+- Git history preserves the pre-monetization revision of this package.
+
+## Revision History
+
+| Revision | Date | Status | Summary | Approval |
+|---|---|---|---|---|
+| 1 | 2026-08-09 | Official Release | Initial App Store v1.0 package | CueScore Apps |
+| 2 | 2026-09-20 | Official Release | Align Build 77 metadata and public documents with Free and Pro, StoreKit, and Japan-only launch | Product Owner Decision `CUESCORE-V1-FINAL-SUBMISSION-FIX-JP-20260920` |
