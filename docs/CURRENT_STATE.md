@@ -3,7 +3,7 @@
 ## Build 76 Settings Scroll Lock（2026年9月19日）
 
 - Build 75のProduct Owner実機確認で全項目fitとspacingはPASSしたが、上下スワイプ時にSettings全体が動くfollow-upが残った。390×844を含むcompact fit範囲だけ`.settings-formal-scroll-v1`を`overflow-y:hidden`／`overscroll-behavior:none`へ切り替え、画面外へ内容が出る小さい端末では既存`overflow-y:auto` fallbackを維持した。
-- row、section spacing、Privacy／copyright／bottom nav geometry、課金、Pro、保存data、navigationは変更していない。390×844でスワイプ前後の表示位置不変をvisual audit。focused `19 pass / 0 fail`、全Node `428 pass / 0 fail / 0 skipped`、Release Simulator build、device ArchiveをPASS。Archiveは`com.takaakimailboxstar.cuescoreapps`／`1.0 (76)`、`.storekit` 0件。詳細：`docs/implementation/CueScore_Build76_Settings_Scroll_Lock_2026-09-19.md`。
+- row、section spacing、Privacy／copyright／bottom nav geometry、課金、Pro、保存data、navigationは変更していない。390×844でスワイプ前後の表示位置不変をvisual audit。focused `19 pass / 0 fail`、全Node `428 pass / 0 fail / 0 skipped`、Release Simulator build、device ArchiveをPASS。Archiveは`com.takaakimailboxstar.cuescoreapps`／`1.0 (76)`、`.storekit` 0件。Build source commit `84d53ba4bdaafc9b4a7f1e1a66bb143929883b25`をmainへpush。App Store Connect Build ID `728bec63-150b-4736-ac71-42b61aa15b4b`は`VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`対象。`READY FOR PRODUCT OWNER BUILD 76 SETTINGS SCROLL LOCK TEST`でSTOPした。詳細：`docs/implementation/CueScore_Build76_Settings_Scroll_Lock_2026-09-19.md`。
 
 ## Build 75 Settings Spacing Polish（2026年9月19日）
 

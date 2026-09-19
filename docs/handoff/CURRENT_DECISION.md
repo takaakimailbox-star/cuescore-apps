@@ -3,7 +3,7 @@
 - Decision ID: `CUESCORE-B76-SETTINGS-SCROLL-LOCK-20260919`
 - Date: 2026-09-19
 - Product Owner Decision: GO
-- Gate state: distribution in progress
+- Gate state: `READY FOR PRODUCT OWNER BUILD 76 SETTINGS SCROLL LOCK TEST`
 
 ## Objective
 

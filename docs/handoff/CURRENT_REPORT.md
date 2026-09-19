@@ -3,12 +3,12 @@
 - App: CueScore
 - Decision ID: `CUESCORE-B76-SETTINGS-SCROLL-LOCK-20260919`
 - Date: 2026-09-19
-- Gate Result: distribution in progress
+- Gate Result: `READY FOR PRODUCT OWNER BUILD 76 SETTINGS SCROLL LOCK TEST`
 - Version / Build: `1.0 (76)`
 
 ## 結論
 
-Build 75の表示とspacingを維持し、compact fit範囲のSettings scroll ownerだけを固定した。小さい端末のoverflow fallback、row、fixed bottom navigation、課金、Pro、保存data、navigation contractは変更していない。test、visual audit、Release build／ArchiveをPASSした。
+Build 75の表示とspacingを維持し、compact fit範囲のSettings scroll ownerだけを固定した。小さい端末のoverflow fallback、row、fixed bottom navigation、課金、Pro、保存data、navigation contractは変更していない。test、visual audit、Release build／Archive、GitHub main反映、Internal TestFlight配布をPASSした。
 
 ## Geometry Evidence
 
@@ -39,10 +39,16 @@ Build 75の表示とspacingを維持し、compact fit範囲のSettings scroll ow
 
 ## Distribution
 
-- Build source commit／Push／App Store Connect／Internal group: pending
+- Build source commit: `84d53ba4bdaafc9b4a7f1e1a66bb143929883b25`
+- Push: GitHub `main`へ成功
+- Upload: `Upload succeeded`
+- App Store Connect Build ID: `728bec63-150b-4736-ac71-42b61aa15b4b`
+- Processing: `VALID`
+- Encryption: `usesNonExemptEncryption=false`
+- Internal group: `CueScore Internal Testers`（Build 76対象を確認済み）
 
 ## STOP
 
-Distribution完了後、`READY FOR PRODUCT OWNER BUILD 76 SETTINGS SCROLL LOCK TEST`。
+`READY FOR PRODUCT OWNER BUILD 76 SETTINGS SCROLL LOCK TEST`
 
 External TestFlight、App Review、Releaseは実施しない。

@@ -24,6 +24,14 @@ Build 75で全項目は1画面内に収まったが、Settingsのscroll ownerが
 - `ion-ios-filesystem 1.1.2` / `0d81e26e828ff9582807e2339112cedf2e0fab85`
 - `capacitor-swift-pm 8.0.2` / `13a39179b3df796f3bb2e70c47ccdd92593f34d2`
 
-## Distribution
+## Distribution evidence
 
-GitHub main／App Store Connect／Internal TestFlight反映は進行中。
+- Build source commit: `84d53ba4bdaafc9b4a7f1e1a66bb143929883b25`
+- GitHub push: `main`へ成功
+- App Store Connect upload: `Upload succeeded`
+- Build ID: `728bec63-150b-4736-ac71-42b61aa15b4b`
+- Processing: `VALID`
+- Encryption: `usesNonExemptEncryption=false`
+- Internal group: `CueScore Internal Testers`（Build 76対象を確認済み）
+
+`READY FOR PRODUCT OWNER BUILD 76 SETTINGS SCROLL LOCK TEST`でSTOPした。Build 77、External TestFlight、App Review、Releaseへ進まない。
