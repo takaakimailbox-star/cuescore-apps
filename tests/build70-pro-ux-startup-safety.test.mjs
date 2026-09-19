@@ -10,10 +10,11 @@ const web = fs.readFileSync(new URL("../monetization-v1.js", import.meta.url), "
 const css = fs.readFileSync(new URL("../monetization-v1.css", import.meta.url), "utf8");
 
 test("all fire-and-forget entitlement refresh entry points use the safe boundary", () => {
-  assert.match(web, /const refreshSafely=phase=>diagnostic\.settleSafely/);
-  for (const phase of ["INITIAL_NATIVE", "PRO_OPEN", "FOREGROUND", "FALLBACK"]) {
+  assert.match(web, /const refreshSafely=\(phase,options\)=>diagnostic\.settleSafely/);
+  for (const phase of ["INITIAL_NATIVE", "FOREGROUND", "FALLBACK"]) {
     assert.ok(web.includes(`refreshSafely("${phase}")`), phase);
   }
+  assert.ok(web.includes('refreshSafely("PRO_OPEN",{freshProduct:true})'), "PRO_OPEN");
   assert.doesNotMatch(web, /void entitlement\.refresh\(\)/);
 });
 
@@ -38,7 +39,7 @@ test("safe boundary consumes a rejected Promise with only classified error data"
 test("temporary entitlement and product failures do not demote a verified Pro state", () => {
   assert.match(web, /previouslyVerified=state\.isPro===true/);
   assert.match(web, /status:previouslyVerified\?"ready":"error",isPro:previouslyVerified/);
-  assert.match(web, /product:product\|\|previousProduct\|\|null/);
+  assert.match(web, /product:product\|\|\(freshProduct\?null:previousProduct\)\|\|null/);
   assert.match(web, /PRODUCT_REFRESH_REJECTED/);
 });
 

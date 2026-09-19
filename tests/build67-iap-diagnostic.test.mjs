@@ -69,7 +69,7 @@ test("Build 67 records product success count and Product ID match", () => {
 
 test("Build 67 diagnostic helper remains supplemental after its temporary UI is removed", () => {
   assert.doesNotMatch(web, /data-pro-diagnostic/);
-  assert.match(web, /buyButton\.disabled=operationInFlight\|\|!s\.product\|\|s\.status!=="ready"/);
+  assert.match(web, /buyButton\.disabled=!productView\.canPurchase/);
   assert.doesNotMatch(web, /verified\s*=\s*.*diagnostic|diagnostic.*isPro\s*=\s*true/);
   assert.doesNotMatch(css, /\.cue-pro-diagnostic-v1/);
 });

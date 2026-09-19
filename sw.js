@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-build76-settings-scroll-lock-v1";
+const APP_VERSION = "2.0-build77-fresh-storekit-price-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-build76-settings-scroll-lock-v1",
+  "./demo-data.js?v=2.0-build77-fresh-storekit-price-v1",
   "./manifest.webmanifest",
   "./privacy.html",
   "./terms.html",
@@ -22,7 +22,7 @@ const APP_SHELL = [
   "./ui-revision-v12.css?v=2.0-build60-free-pro-foundation",
   "./navigation-shell-phase1.css",
   "./navigation-shell-phase1.js",
-  "./navigation-phase2-6.css?v=2.0-build76-settings-scroll-lock-v1",
+  "./navigation-phase2-6.css?v=2.0-build77-fresh-storekit-price-v1",
   "./navigation-phase2-6.js?v=2.0-build60-free-pro-foundation",
   "./player-detail-build8.css",
   "./record-access-v1.js?v=1.0-build60-free-pro-v2",

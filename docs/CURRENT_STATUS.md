@@ -1,20 +1,18 @@
 # CueScore Current Status
 
 - Updated: 2026-09-19
-- Version / Build: `1.0 (76)`
-- Build 75 Product Owner device review: PASS（全項目fit／spacing）、follow-upとして上下スワイプ時の移動を停止
-- Build 76 scope: 1画面に収まるcompact Settingsのscroll ownerだけを固定し、小さい端末のoverflow fallbackを維持
-- States: `確認中` / `CueScore Free` / `CueScore Pro ✓`を維持
-- Entry: Freeは`Proを購入・購入を復元`、Proは`購入・復元について`から既存CueScore Pro画面を再利用
-- Protected scope: StoreKit、購入／復元、Free／Pro境界、保存data、Build 71 Startup Promise Safetyは変更なし
-- Tests: Settings focused `19 pass / 0 fail`、Full Node `428 pass / 0 fail / 0 skipped`
-- Geometry: 390×844 fixed tab bar込みでPrivacy bottom `678.5px` <= bottom nav top `776px - 60px`（余裕`97.5px`）、bounded spacer 40px、Data row 63px／legal row 44px
+- Version / Build: `1.0 (77)`
+- Build 76 Product Owner evidence: Japan SandboxでFree、Pro画面`$5.99`、Apple購入sheet`¥980`。購入は未確定
+- Build 77 scope: Pro画面open時に古い商品価格を破棄し、native StoreKitから商品をFresh取得するまで`価格を確認中…`／購入不可
+- Success: Fresh `Product.displayPrice`を表示して購入buttonを有効化
+- Failure: `価格を取得できません`、購入不可、古いstorefront価格へfallbackしない
+- Protected scope: Product ID、purchase、verified transaction／finish、currentEntitlements、Transaction.updates、restore、CueScoreEntitlement、Free／Pro境界、Build 76 Settings、Startup Promise Safetyは変更なし
+- Tests: IAP focused `29 pass / 0 fail`、Full Node `432 pass / 0 fail / 0 skipped`
 - Dependency: `ion-ios-filesystem 1.1.2` / `0d81e26e828ff9582807e2339112cedf2e0fab85`、`capacitor-swift-pm 8.0.2`
-- Build verification: Release Simulator build／device Archive PASS、Bundle ID `com.takaakimailboxstar.cuescoreapps`、Archive `1.0 (76)`、`.storekit` 0件
-- Build source commit: `84d53ba4bdaafc9b4a7f1e1a66bb143929883b25`（mainへpush済み）
-- App Store Connect: Build ID `728bec63-150b-4736-ac71-42b61aa15b4b`、`VALID`、`usesNonExemptEncryption=false`
-- Internal TestFlight: `CueScore Internal Testers`対象を確認済み
-- Current gate: `READY FOR PRODUCT OWNER BUILD 76 SETTINGS SCROLL LOCK TEST`
+- Build verification: Release Simulator build／device Archive PASS、Bundle ID `com.takaakimailboxstar.cuescoreapps`、Archive `1.0 (77)`、`.storekit` 0件
+- Source identity: source／iOS copied／Archiveの`monetization-v1.js` SHA-256一致
+- Distribution: commit／push／Internal TestFlightは未実施
+- Current gate: Build 77候補完成。GitHub反映とInternal TestFlight配布待ち
 - External TestFlight: not performed
 - App Review: not submitted
 - Public release: not performed
