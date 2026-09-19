@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## Build 75 Settings Spacing Polish（2026年9月19日）
+
+- Build 74の全項目fitを維持し、row寸法を変えず、0px spacerを40pxのbounded spacingへ変更。title→Plan、Plan→Data、Data→footer、footer周辺へ固定余白を配分し、4ブロックの窮屈感を軽減した。課金、Pro／Free、保存data、navigation、bottom navは変更していない。
+- 390×844 fixed tab bar込みでPrivacy bottom `678.5px`、nav top `776px`、安全余白`97.5px`。必須`privacyRow.bottom <= bottomNav.top - 60px`をPASSし、copyrightは`678.5–699px`、横overflowなし、root scrollなし。Build 74の余白`189.5px`から理想範囲60–100pxへ再配分した。
+- Settings focused `44 pass / 0 fail`、全Node `425 pass / 0 fail / 0 skipped`、Release Simulator build、device ArchiveをPASS。Archiveは`com.takaakimailboxstar.cuescoreapps`／`1.0 (75)`、`.storekit` 0件。固定dependencyとsource／native／Archive asset一致を確認。GitHub／Internal TestFlight反映は進行中。詳細：`docs/implementation/CueScore_Build75_Settings_Spacing_Polish_2026-09-19.md`。
+
 ## Build 74 Settings Real-Device Fit Fix（2026年9月19日）
 
 - Build 73のProduct Owner実機TestFlightではVersion `1.0 (73)`と`CueScore Pro ✓`を確認した一方、Privacy Policy rowがfixed bottom tab barの下へ隠れたため実機GateをFAILとした。

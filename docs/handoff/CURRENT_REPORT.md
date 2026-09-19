@@ -1,34 +1,34 @@
 # CueScore Current Report
 
 - App: CueScore
-- Decision ID: `CUESCORE-B74-SETTINGS-REAL-DEVICE-FIT-20260919`
+- Decision ID: `CUESCORE-B75-SETTINGS-SPACING-POLISH-20260919`
 - Date: 2026-09-19
-- Gate Result: `READY FOR PRODUCT OWNER BUILD 74 SETTINGS REAL-DEVICE FIT TEST`
-- Version / Build: `1.0 (74)`
+- Gate Result: distribution in progress
+- Version / Build: `1.0 (75)`
 
 ## 結論
 
-Build 73実機FAILの原因を後段`navigation-phase2-6.css`によるspacer再適用と特定し、そのspacer 1要素だけをcompact iPhone条件で0pxにした。row、fixed bottom navigation、課金、Pro、保存data、navigation contractは変更していない。test、geometry、Release build／Archive、GitHub main反映、Internal TestFlight配布をPASSした。
+Build 74の0px spacerを大きなflex spacerへ戻さず40pxに制限し、4ブロック間へ固定余白を再配分した。row、fixed bottom navigation、課金、Pro、保存data、navigation contractは変更していない。test、geometry、Release build／ArchiveをPASSし、GitHub／Internal TestFlight反映を進行中。
 
 ## Geometry Evidence
 
 - Viewport: `390×844`
 - Fixed bottom navigation: top `776px`／height `68px`
-- Privacy Policy row: top `542.5px`／bottom `586.5px`／height `44px`
-- Acceptance: `586.5 <= 776`、余裕`189.5px`
-- Spacer: display `none`／height `0px`／min-height `0px`
+- Privacy Policy row: bottom `678.5px`／height `44px`
+- Acceptance: `678.5 <= 776 - 60`、余裕`97.5px`
+- Spacer: display `block`／height `40px`／min-height `40px`
 - Data row: `63px`、legal row: `44px`
 - horizontal overflowなし、initial `scrollTop=0`
 
 ## Test / Build Evidence
 
-- Settings focused: `25 pass / 0 fail`
-- Full Node regression: `422 pass / 0 fail / 0 skipped`
+- Settings focused: `44 pass / 0 fail`
+- Full Node regression: `425 pass / 0 fail / 0 skipped`
 - Release iOS Simulator build: `BUILD SUCCEEDED`
 - Release device Archive: `ARCHIVE SUCCEEDED`
-- Archive identity: `com.takaakimailboxstar.cuescoreapps` / `1.0 (74)`
+- Archive identity: `com.takaakimailboxstar.cuescoreapps` / `1.0 (75)`
 - Archive内`.storekit`: 0件
-- source／native-web／iOS copied／Archive `navigation-phase2-6.css` SHA-256: `0446001b3d4d81229c271dd496a6e8c3881b764f26f276566f9263fabb549dd7`
+- source／iOS copied／Archive `navigation-phase2-6.css` SHA-256: `33164b4c3a350812a44d561d860e7ef71061b1fe698beed368cebb189eeee61a`
 
 ## Dependency Evidence
 
@@ -39,16 +39,12 @@ Build 73実機FAILの原因を後段`navigation-phase2-6.css`によるspacer再�
 
 ## Distribution
 
-- Build source commit: `416bb4c6a0ba0f43d51ac8ba444edec894d34999`
-- Push: GitHub `main`へ成功
-- Upload: `Upload succeeded`
-- App Store Connect Build ID: `602c7f3f-29bc-461a-ab29-e4f84337fe73`
-- Processing: `VALID`
-- Encryption: `usesNonExemptEncryption=false`
-- Internal group: `CueScore Internal Testers`（Build 74 membership確認済み）
+- Build source commit: pending
+- Push: pending
+- Upload／App Store Connect／Internal group: pending
 
 ## STOP
 
-`READY FOR PRODUCT OWNER BUILD 74 SETTINGS REAL-DEVICE FIT TEST`
+Distribution完了後、`READY FOR PRODUCT OWNER BUILD 75 SETTINGS SPACING POLISH TEST`。
 
 External TestFlight、App Review、Releaseは実施しない。

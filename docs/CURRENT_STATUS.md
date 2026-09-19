@@ -1,20 +1,20 @@
 # CueScore Current Status
 
 - Updated: 2026-09-19
-- Version / Build: `1.0 (74)`
-- Build 73 Product Owner device review: FAIL（Privacy Policyがfixed bottom tab barの下）
-- Build 74 scope: 後段CSSが再適用したSettings spacerだけを除去し、Privacy Policyをbottom tab barより上へ配置
+- Version / Build: `1.0 (75)`
+- Build 74 Product Owner device review: PASS（全項目がスクロールなしで表示）
+- Build 75 scope: Build 74の余剰189.5pxを、rowを変えず4ブロック間の固定spacingへ再配分
 - States: `確認中` / `CueScore Free` / `CueScore Pro ✓`を維持
 - Entry: Freeは`Proを購入・購入を復元`、Proは`購入・復元について`から既存CueScore Pro画面を再利用
 - Protected scope: StoreKit、購入／復元、Free／Pro境界、保存data、Build 71 Startup Promise Safetyは変更なし
-- Tests: Settings focused `25 pass / 0 fail`、Full Node `422 pass / 0 fail / 0 skipped`
-- Geometry: 390×844 fixed tab bar込みでPrivacy bottom `586.5px` <= bottom nav top `776px`（余裕`189.5px`）、spacer 0px、Data row 63px／legal row 44px
+- Tests: Settings focused `44 pass / 0 fail`、Full Node `425 pass / 0 fail / 0 skipped`
+- Geometry: 390×844 fixed tab bar込みでPrivacy bottom `678.5px` <= bottom nav top `776px - 60px`（余裕`97.5px`）、bounded spacer 40px、Data row 63px／legal row 44px
 - Dependency: `ion-ios-filesystem 1.1.2` / `0d81e26e828ff9582807e2339112cedf2e0fab85`、`capacitor-swift-pm 8.0.2`
-- Build verification: Release Simulator build／device Archive PASS、Bundle ID `com.takaakimailboxstar.cuescoreapps`、Archive `1.0 (74)`、`.storekit` 0件
-- Build source commit: `416bb4c6a0ba0f43d51ac8ba444edec894d34999`（mainへpush済み）
-- App Store Connect: Build ID `602c7f3f-29bc-461a-ab29-e4f84337fe73`、`VALID`、`usesNonExemptEncryption=false`
-- Internal TestFlight: `CueScore Internal Testers`へ追加済み
-- Current gate: `READY FOR PRODUCT OWNER BUILD 74 SETTINGS REAL-DEVICE FIT TEST`
+- Build verification: Release Simulator build／device Archive PASS、Bundle ID `com.takaakimailboxstar.cuescoreapps`、Archive `1.0 (75)`、`.storekit` 0件
+- Build source commit: pending
+- App Store Connect: upload pending
+- Internal TestFlight: pending
+- Current gate: Build 75 distribution in progress
 - External TestFlight: not performed
 - App Review: not submitted
 - Public release: not performed
