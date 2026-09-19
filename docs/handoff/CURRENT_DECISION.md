@@ -3,7 +3,7 @@
 - Decision ID: `CUESCORE-B77-FRESH-STOREKIT-PRICE-20260919`
 - Date: 2026-09-19
 - Product Owner Decision: GO
-- Gate state: Build 77 candidate verified; Internal TestFlight pending
+- Gate state: `READY FOR PRODUCT OWNER BUILD 77 FRESH STOREKIT PRICE TEST`
 
 ## Objective
 

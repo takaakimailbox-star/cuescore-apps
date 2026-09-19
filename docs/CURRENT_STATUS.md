@@ -11,8 +11,10 @@
 - Dependency: `ion-ios-filesystem 1.1.2` / `0d81e26e828ff9582807e2339112cedf2e0fab85`、`capacitor-swift-pm 8.0.2`
 - Build verification: Release Simulator build／device Archive PASS、Bundle ID `com.takaakimailboxstar.cuescoreapps`、Archive `1.0 (77)`、`.storekit` 0件
 - Source identity: source／iOS copied／Archiveの`monetization-v1.js` SHA-256一致
-- Distribution: commit／push／Internal TestFlightは未実施
-- Current gate: Build 77候補完成。GitHub反映とInternal TestFlight配布待ち
+- Build source commit: `9828a8499f514d239b717d248a9a99976db23944`（origin/mainへpush済み）
+- App Store Connect: Build ID `a1ebcb96-b6a4-4e88-b5e5-f79e149e15dd`、`VALID`、`usesNonExemptEncryption=false`
+- Internal TestFlight: `CueScore Internal Testers`（internal／全Buildアクセス）対象
+- Current gate: `READY FOR PRODUCT OWNER BUILD 77 FRESH STOREKIT PRICE TEST`
 - External TestFlight: not performed
 - App Review: not submitted
 - Public release: not performed

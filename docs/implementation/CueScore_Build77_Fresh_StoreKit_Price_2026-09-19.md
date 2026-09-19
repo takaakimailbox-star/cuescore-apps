@@ -27,4 +27,12 @@ Product ID、Non-Consumable、purchase、verified transaction、transaction.fini
 
 ## Distribution
 
-GitHub commit／push、App Store Connect upload、Internal TestFlightは未実施。
+- Build source commit: `9828a8499f514d239b717d248a9a99976db23944`
+- GitHub push: `origin/main`へ成功
+- App Store Connect upload: `Upload succeeded`
+- Build ID: `a1ebcb96-b6a4-4e88-b5e5-f79e149e15dd`
+- Processing: `VALID`
+- Encryption: `usesNonExemptEncryption=false`
+- Internal group: `CueScore Internal Testers`（internal／全Buildアクセス）
+
+`READY FOR PRODUCT OWNER BUILD 77 FRESH STOREKIT PRICE TEST`でSTOPした。Build 78、External TestFlight、App Review、Releaseへ進まない。

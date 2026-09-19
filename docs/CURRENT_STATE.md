@@ -4,7 +4,7 @@
 
 - Build 76 Japan SandboxでPro画面は`$5.99`、Apple購入sheetは`¥980`だった。native bridgeは既にFresh `Product.products(for:)`と`Product.displayPrice`を使用しており、原因はWeb側がPro画面open時に以前の`state.product.localizedPrice`をrefresh前に描画し、Fresh商品取得失敗時にも保持していたこと。
 - Pro画面open時に同期的なFresh product loadingへ入り、取得中`価格を確認中…`／購入不可、成功後Fresh `Product.displayPrice`／購入可、失敗時`価格を取得できません`／購入不可へ最小修正。旧storefront価格へfallbackせず、verified Proは失敗時も降格しない。Product ID、purchase、verified／finish、entitlement updates、restore、Free／Pro境界は不変。
-- IAP focused `29 pass / 0 fail`、全Node `432 pass / 0 fail / 0 skipped`、Release Simulator build、device ArchiveをPASS。Archiveは`com.takaakimailboxstar.cuescoreapps`／`1.0 (77)`、`.storekit` 0件。固定dependencyとsource／native／Archive asset一致を確認。GitHub commit／push、Internal TestFlightは未実施。詳細：`docs/implementation/CueScore_Build77_Fresh_StoreKit_Price_2026-09-19.md`。
+- IAP focused `29 pass / 0 fail`、全Node `432 pass / 0 fail / 0 skipped`、Release Simulator build、device ArchiveをPASS。Archiveは`com.takaakimailboxstar.cuescoreapps`／`1.0 (77)`、`.storekit` 0件。固定dependencyとsource／native／Archive asset一致を確認。Build source commit `9828a8499f514d239b717d248a9a99976db23944`をorigin/mainへpush。App Store Connect Build ID `a1ebcb96-b6a4-4e88-b5e5-f79e149e15dd`は`VALID`、`usesNonExemptEncryption=false`、Internal group `CueScore Internal Testers`（全Buildアクセス）の対象。`READY FOR PRODUCT OWNER BUILD 77 FRESH STOREKIT PRICE TEST`でSTOPした。詳細：`docs/implementation/CueScore_Build77_Fresh_StoreKit_Price_2026-09-19.md`。
 
 ## Build 76 Settings Scroll Lock（2026年9月19日）
 
