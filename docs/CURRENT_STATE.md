@@ -1,5 +1,10 @@
 # CueScore Apps Current State
 
+## Build 76 Settings Scroll Lock（2026年9月19日）
+
+- Build 75のProduct Owner実機確認で全項目fitとspacingはPASSしたが、上下スワイプ時にSettings全体が動くfollow-upが残った。390×844を含むcompact fit範囲だけ`.settings-formal-scroll-v1`を`overflow-y:hidden`／`overscroll-behavior:none`へ切り替え、画面外へ内容が出る小さい端末では既存`overflow-y:auto` fallbackを維持した。
+- row、section spacing、Privacy／copyright／bottom nav geometry、課金、Pro、保存data、navigationは変更していない。390×844でスワイプ前後の表示位置不変をvisual audit。focused `19 pass / 0 fail`、全Node `428 pass / 0 fail / 0 skipped`、Release Simulator build、device ArchiveをPASS。Archiveは`com.takaakimailboxstar.cuescoreapps`／`1.0 (76)`、`.storekit` 0件。詳細：`docs/implementation/CueScore_Build76_Settings_Scroll_Lock_2026-09-19.md`。
+
 ## Build 75 Settings Spacing Polish（2026年9月19日）
 
 - Build 74の全項目fitを維持し、row寸法を変えず、0px spacerを40pxのbounded spacingへ変更。title→Plan、Plan→Data、Data→footer、footer周辺へ固定余白を配分し、4ブロックの窮屈感を軽減した。課金、Pro／Free、保存data、navigation、bottom navは変更していない。

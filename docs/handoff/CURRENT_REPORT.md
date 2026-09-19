@@ -1,14 +1,14 @@
 # CueScore Current Report
 
 - App: CueScore
-- Decision ID: `CUESCORE-B75-SETTINGS-SPACING-POLISH-20260919`
+- Decision ID: `CUESCORE-B76-SETTINGS-SCROLL-LOCK-20260919`
 - Date: 2026-09-19
-- Gate Result: `READY FOR PRODUCT OWNER BUILD 75 SETTINGS SPACING POLISH TEST`
-- Version / Build: `1.0 (75)`
+- Gate Result: distribution in progress
+- Version / Build: `1.0 (76)`
 
 ## 結論
 
-Build 74の0px spacerを大きなflex spacerへ戻さず40pxに制限し、4ブロック間へ固定余白を再配分した。row、fixed bottom navigation、課金、Pro、保存data、navigation contractは変更していない。test、geometry、Release build／Archive、GitHub main反映、Internal TestFlight配布をPASSした。
+Build 75の表示とspacingを維持し、compact fit範囲のSettings scroll ownerだけを固定した。小さい端末のoverflow fallback、row、fixed bottom navigation、課金、Pro、保存data、navigation contractは変更していない。test、visual audit、Release build／ArchiveをPASSした。
 
 ## Geometry Evidence
 
@@ -22,13 +22,13 @@ Build 74の0px spacerを大きなflex spacerへ戻さず40pxに制限し、4ブ�
 
 ## Test / Build Evidence
 
-- Settings focused: `44 pass / 0 fail`
-- Full Node regression: `425 pass / 0 fail / 0 skipped`
+- Settings focused: `19 pass / 0 fail`
+- Full Node regression: `428 pass / 0 fail / 0 skipped`
 - Release iOS Simulator build: `BUILD SUCCEEDED`
 - Release device Archive: `ARCHIVE SUCCEEDED`
-- Archive identity: `com.takaakimailboxstar.cuescoreapps` / `1.0 (75)`
+- Archive identity: `com.takaakimailboxstar.cuescoreapps` / `1.0 (76)`
 - Archive内`.storekit`: 0件
-- source／iOS copied／Archive `navigation-phase2-6.css` SHA-256: `33164b4c3a350812a44d561d860e7ef71061b1fe698beed368cebb189eeee61a`
+- source／iOS copied／Archive `navigation-phase2-6.css` SHA-256: `24c472291e0e61137e7dd483e88474bafcdead38d2e10011557efc43051dbf9b`
 
 ## Dependency Evidence
 
@@ -39,16 +39,10 @@ Build 74の0px spacerを大きなflex spacerへ戻さず40pxに制限し、4ブ�
 
 ## Distribution
 
-- Build source commit: `9cfbf671f7d858602cd72aa015443f112cfae21b`
-- Push: GitHub `main`へ成功
-- Upload: `Upload succeeded`
-- App Store Connect Build ID: `1c0b1ec2-24c1-4e73-a15c-c6eed4b950aa`
-- Processing: `VALID`
-- Encryption: `usesNonExemptEncryption=false`
-- Internal group: `CueScore Internal Testers`（Build 75対象を確認済み）
+- Build source commit／Push／App Store Connect／Internal group: pending
 
 ## STOP
 
-`READY FOR PRODUCT OWNER BUILD 75 SETTINGS SPACING POLISH TEST`
+Distribution完了後、`READY FOR PRODUCT OWNER BUILD 76 SETTINGS SCROLL LOCK TEST`。
 
 External TestFlight、App Review、Releaseは実施しない。

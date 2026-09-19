@@ -28,5 +28,5 @@ test("Build 75 preserves row sizes, copyright, legal navigation, and fixed navig
   assert.match(html, /data-settings-legal="terms\.html"/);
   assert.match(html, /data-settings-legal="privacy\.html"/);
   assert.match(html, /navigation-shell-phase1\.css/);
-  assert.match(html, /navigation-phase2-6\.css\?v=2\.0-build75-settings-spacing-polish-v1/);
+  assert.match(html, /navigation-phase2-6\.css\?v=2\.0-build76-settings-scroll-lock-v1/);
 });
