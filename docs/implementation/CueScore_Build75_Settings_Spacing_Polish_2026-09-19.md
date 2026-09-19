@@ -38,6 +38,14 @@ Build 74とBuild 75を同じ390×844のfixed bottom nav込みで比較し、Buil
 - Repository `Package.resolved`とArchive build checkout一致
 - Fixed flags: `-onlyUsePackageVersionsFromResolvedFile`、`-disableAutomaticPackageResolution`、`-skipPackageUpdates`
 
-## Distribution
+## Distribution evidence
 
-GitHub main／App Store Connect／Internal TestFlight反映は進行中。完了後にBuild ID、processing、encryption、internal groupを追記する。
+- Build source commit: `9cfbf671f7d858602cd72aa015443f112cfae21b`
+- GitHub push: `main`へ成功
+- App Store Connect upload: `Upload succeeded`
+- Build ID: `1c0b1ec2-24c1-4e73-a15c-c6eed4b950aa`
+- Processing state: `VALID`
+- Encryption: `usesNonExemptEncryption=false`
+- Internal group: `CueScore Internal Testers`（Build 75対象を確認済み）
+
+`READY FOR PRODUCT OWNER BUILD 75 SETTINGS SPACING POLISH TEST`でSTOPした。Build 76、External TestFlight、App Review、Releaseへ進まない。

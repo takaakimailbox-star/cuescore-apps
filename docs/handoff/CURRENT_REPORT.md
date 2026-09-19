@@ -3,12 +3,12 @@
 - App: CueScore
 - Decision ID: `CUESCORE-B75-SETTINGS-SPACING-POLISH-20260919`
 - Date: 2026-09-19
-- Gate Result: distribution in progress
+- Gate Result: `READY FOR PRODUCT OWNER BUILD 75 SETTINGS SPACING POLISH TEST`
 - Version / Build: `1.0 (75)`
 
 ## 結論
 
-Build 74の0px spacerを大きなflex spacerへ戻さず40pxに制限し、4ブロック間へ固定余白を再配分した。row、fixed bottom navigation、課金、Pro、保存data、navigation contractは変更していない。test、geometry、Release build／ArchiveをPASSし、GitHub／Internal TestFlight反映を進行中。
+Build 74の0px spacerを大きなflex spacerへ戻さず40pxに制限し、4ブロック間へ固定余白を再配分した。row、fixed bottom navigation、課金、Pro、保存data、navigation contractは変更していない。test、geometry、Release build／Archive、GitHub main反映、Internal TestFlight配布をPASSした。
 
 ## Geometry Evidence
 
@@ -39,12 +39,16 @@ Build 74の0px spacerを大きなflex spacerへ戻さず40pxに制限し、4ブ�
 
 ## Distribution
 
-- Build source commit: pending
-- Push: pending
-- Upload／App Store Connect／Internal group: pending
+- Build source commit: `9cfbf671f7d858602cd72aa015443f112cfae21b`
+- Push: GitHub `main`へ成功
+- Upload: `Upload succeeded`
+- App Store Connect Build ID: `1c0b1ec2-24c1-4e73-a15c-c6eed4b950aa`
+- Processing: `VALID`
+- Encryption: `usesNonExemptEncryption=false`
+- Internal group: `CueScore Internal Testers`（Build 75対象を確認済み）
 
 ## STOP
 
-Distribution完了後、`READY FOR PRODUCT OWNER BUILD 75 SETTINGS SPACING POLISH TEST`。
+`READY FOR PRODUCT OWNER BUILD 75 SETTINGS SPACING POLISH TEST`
 
 External TestFlight、App Review、Releaseは実施しない。
