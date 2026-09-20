@@ -1,6 +1,7 @@
 # CueScore v1.0 Final Release Readiness Re-Audit
 
-- Decision ID: `CUESCORE-V1-FINAL-SUBMISSION-FIX-JP-20260920`
+- Audit Decision ID: `CUESCORE-V1-FINAL-SUBMISSION-FIX-JP-20260920`
+- Final Decision ID: `CUESCORE-V1-FINAL-PRICE-PRIVACY-DECISION-20260920`
 - Re-audit date: 2026-09-20
 - Repository: `takaakimailbox-star/cuescore-apps`
 - GitHub main at re-audit start: `e27906b0c2d541d2e16d4df3e934af82c1855c6f`
@@ -10,14 +11,16 @@
 
 ## Executive Summary
 
-**READY FOR PRODUCT OWNER FINAL SUBMISSION REVIEW**
+**READY FOR PRODUCT OWNER APP REVIEW SUBMISSION**
 
 旧監査のB-01、B-02、B-03、B-05と提出準備項目は解消した。App Store Connect上でVersion 1.0はBuild 77を選択し、現行metadata、Build 77 screenshots、Japan-only availability、CueScore Proを含む2項目review draftが一致している。App Review提出、External TestFlight、Releaseは行っていない。
 
-ただし、App Reviewへ送信する最終承認前にProduct Owner判断が必要なEvidenceが2件残る。
+Product Ownerは残っていた2件を次のとおり最終判断した。
 
-1. B-04: Japan SandboxのFresh `Product.displayPrice`は`$5.99`、Apple購入sheetは`¥980`。購入lifecycleはPASSしたがProduction非再現は証明されていない。
-2. Privacy Report: Xcode Organizer生成PDFは空白1ページで、warning 0を明示的に証明しない。Archiveにはapp-level `PrivacyInfo.xcprivacy`がない。
+1. B-04: `ACCEPTED RISK — TESTFLIGHT-SPECIFIC SANDBOX METADATA ISSUE`。
+2. Privacy Report: `NOT VERIFIED EVIDENCE GAP — NON-BLOCKING FOR APP REVIEW SUBMISSION`。
+
+製品source変更、価格hard-code、app-level privacy manifest追加、Build 78は不要。App Review提出はまだ行っておらず、Submit for Review直前でSTOPしている。
 
 ## B-01 — Version 1.0 Build relationship: RESOLVED
 
@@ -49,15 +52,19 @@
 
 旧5枚をBuild 77現行UIへ差し替え、Settings Pro画像を維持した。diagnostic UI、旧Backup単独画面、unsupported featureは含まない。
 
-## B-04 — `$5.99` / `¥980`: PRODUCT OWNER FINAL DECISION REQUIRED
+## B-04 — `$5.99` / `¥980`: ACCEPTED RISK — TESTFLIGHT-SPECIFIC SANDBOX METADATA ISSUE
 
 - Build 77はPro画面open時にFresh `Product.products(for:)`を実行し、表示authorityは`Product.displayPrice`。
 - stale price fallback、`¥980` hard-code、独自通貨変換はない。
 - Japan Sandbox実機: Pro画面`$5.99`、Apple購入sheet`¥980`。
 - Sandbox購入成功、verified entitlement、即時Pro解放、badge消滅、再起動後Pro維持をPASS。
 - App Store ConnectのJPN IAP価格は`¥980`、IAP availabilityはJPNのみ。
+- 同一Product ID／同一製品sourceのXcode direct installではFresh `Product.displayPrice=¥980`。
+- TestFlightとXcode directの製品source、native asset hash、Product IDは同一。Build 78は作成していない。
 
-購入sheetの最終価格は正しいが、ProductionでPro画面が`¥980`になる証拠はない。Product Ownerが提出時のaccepted riskとするかを最終判断する。
+Apple購入sheetの最終価格とXcode direct installの`Product.displayPrice`はいずれも`¥980`であり、誤ったUSD metadataはTestFlight／Sandbox distribution pathへ強く分離された。Product Ownerはv1.0の既知TestFlight／Sandbox validation anomalyとしてaccepted riskに再分類した。製品コードを変更せず、`¥980` hard-codeや独自currency conversionを追加しない。
+
+Evidence: `docs/release/evidence/CueScore_v1.0_StoreKit_Price_AB_Diagnostic_2026-09-20.md`。
 
 ## B-05 — Japan-only availability: RESOLVED
 
@@ -92,14 +99,18 @@ App Store Connect実画面は次を表示した。
 
 現行source／policyのtrackingなし、advertisingなし、analytics SDKなし、user-created data local-first、player photo optional、CueScore accountなし、StoreKit entitlement利用と矛盾しない。推測による回答変更は行っていない。
 
-## Xcode Privacy Report: INCONCLUSIVE
+## Xcode Privacy Report: NOT VERIFIED EVIDENCE GAP — NON-BLOCKING
 
 - Xcode OrganizerからBuild 77 ArchiveのPrivacy Reportを生成。
 - PDF: 807 bytes、1ページ、抽出textなし、visualは空白。
 - Archive内app-level `PrivacyInfo.xcprivacy`: 0件。
 - Capacitor／Cordova framework manifests: tracking false、収集dataなし、accessed API typesなし。
+- Build 77: `VALID`／`APP_STORE_ELIGIBLE`。
+- App Privacy回答: 現行実装と整合。
+- analytics／advertising SDK: なし。
+- confirmed missing Required Reason API declaration: なし。
 
-空白PDFはwarning 0を明示しないため、Privacy／Required Reason API／missing manifest warningを0件としてPASS判定しない。Evidence: `docs/release/evidence/CueScore_v1.0_Build77_Privacy_Report.pdf`。
+空白PDFはwarning 0を明示しないため、Privacy／Required Reason API／missing manifest warningを0件としてPASS判定せず、`NOT VERIFIED`を維持する。一方、上記のBuild／manifest／実装EvidenceからProduct OwnerはApp Review submissionに対してnon-blockingと判断した。根拠のないapp-level privacy manifestは追加しない。Evidence: `docs/release/evidence/CueScore_v1.0_Build77_Privacy_Report.pdf`。
 
 ## Product / Artifact Baseline: PASS
 
@@ -118,6 +129,6 @@ App Store Connect実画面は次を表示した。
 - App Review submission: not performed
 - Release: not performed
 
-**READY FOR PRODUCT OWNER FINAL SUBMISSION REVIEW**
+**READY FOR PRODUCT OWNER APP REVIEW SUBMISSION**
 
-Product OwnerがB-04とPrivacy Report Evidenceを最終判断し、App Review提出を別途明示承認するまでSTOPする。
+B-04とPrivacy Report EvidenceのProduct Owner最終判断は完了した。App Review提出はこのGateの許可範囲外であり、Submit for Review直前でSTOPする。

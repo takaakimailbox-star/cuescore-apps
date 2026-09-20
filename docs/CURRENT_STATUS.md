@@ -2,16 +2,17 @@
 
 - Updated: 2026-09-20
 - Version / Build: `1.0 (77)`
-- Final submission fix gate: `READY FOR PRODUCT OWNER FINAL SUBMISSION REVIEW`
-- App Review submission readiness: `BLOCKED — PRODUCT OWNER FINAL DECISION REQUIRED`
+- Final price / privacy gate: `READY FOR PRODUCT OWNER APP REVIEW SUBMISSION`
+- App Review submission readiness: `READY — PRODUCT OWNER SUBMISSION ACTION PENDING`
 - Resolved: Version 1.0 → Build 77、現行Review Notes／metadata、Build 77 screenshots 6枚、Japan-only、将来地域の自動追加OFF、Version 1.0 + CueScore Proの同一review draft
 - Review draft: `READY_FOR_REVIEW`、2項目のみ（iOS App Version 1.0／CueScore Pro）
 - Screenshots: 6枚すべて`COMPLETE`、1242×2688。Build 77版5枚＋Settings Pro 1枚
 - Availability: AppはJPN 1地域のみ、`availableInNewTerritories=false`。CueScore ProもJPNのみ
 - Build relationship: Version 1.0 → Build 77（Build ID `a1ebcb96-b6a4-4e88-b5e5-f79e149e15dd`、`VALID`、`APP_STORE_ELIGIBLE`）
-- Remaining Product Owner decisions: Japan SandboxのFresh価格`$5.99`／Apple購入sheet`¥980`不一致をaccepted riskとするか。Xcode生成Privacy Reportが空白1ページでwarning 0を証明しない点をどう扱うか
+- Price decision: B-04は`ACCEPTED RISK — TESTFLIGHT-SPECIFIC SANDBOX METADATA ISSUE`。同一製品sourceのXcode direct installは`¥980`、TestFlight Build 77のApple購入sheetも`¥980`であり、製品source変更／価格hard-code／Build 78は不要
+- Privacy decision: Xcode Privacy Reportはwarning 0の明示Evidenceとして`NOT VERIFIED`のまま。ただしBuild 77は`VALID`／`APP_STORE_ELIGIBLE`、App Privacy回答と実装は整合し、既存Capacitor／Cordova privacy manifestsに確認済みの欠落はないため、App Review submissionには`NON-BLOCKING`
 - Product source change / Build 78: なし
-- External TestFlight / App Review submission / Release: 未実施
+- External TestFlight / App Review submission / Release: 未実施（Submit for Review直前でSTOP）
 - Canonical instruction: `docs/handoff/CURRENT_DECISION.md`
 - Canonical report: `docs/handoff/CURRENT_REPORT.md`
 

@@ -1,17 +1,37 @@
 # CueScore Current Report
 
 - App: CueScore
-- Decision ID: `CUESCORE-V1-FINAL-SUBMISSION-FIX-JP-20260920`
+- Decision ID: `CUESCORE-V1-FINAL-PRICE-PRIVACY-DECISION-20260920`
 - Date: 2026-09-20
-- Gate Result: `READY FOR PRODUCT OWNER FINAL SUBMISSION REVIEW`
-- Submission Readiness: `BLOCKED — PRODUCT OWNER FINAL DECISION REQUIRED`
+- Gate Result: `READY FOR PRODUCT OWNER APP REVIEW SUBMISSION`
+- Submission Readiness: `READY — PRODUCT OWNER SUBMISSION ACTION PENDING`
 - Version / Build: `1.0 (77)`
 
 ## 結論
 
-許可されたJapan-only最終提出修正は完了した。Version 1.0／Build 77、現行metadata、Build 77 screenshots、Japan-only availability、CueScore Proを含む2項目review draftは整合している。App Reviewへは送信していない。
+価格とPrivacyの最終判断を文書へ反映した。B-04はTestFlight／Sandbox固有metadata anomalyのaccepted risk、Privacy Reportは`NOT VERIFIED`のEvidence gapを維持しつつApp Review submissionにはnon-blockingとなった。製品sourceは変更せず、Build 78も作成していない。
 
-提出前にProduct Ownerが判断すべき未解決Evidenceは、Fresh価格`$5.99`とApple購入sheet`¥980`の不一致、および空白のXcode Privacy Reportがwarning 0を証明しない点の2件である。
+Version 1.0／Build 77、現行metadata、Build 77 screenshots、Japan-only availability、CueScore Proを含む2項目review draftは提出準備済み。App Reviewへは送信していない。
+
+## Price Decision Evidence
+
+- TestFlight Build 77 Fresh `Product.displayPrice`: `$5.99`
+- Xcode direct install／同一製品source `Product.displayPrice`: `¥980`
+- TestFlight Apple purchase sheet: `¥980`
+- Product source／Product ID: 不変
+- Price hard-code／独自currency conversion: なし
+- Classification: `ACCEPTED RISK — TESTFLIGHT-SPECIFIC SANDBOX METADATA ISSUE`
+- Evidence: `docs/release/evidence/CueScore_v1.0_StoreKit_Price_AB_Diagnostic_2026-09-20.md`
+
+## Privacy Decision Evidence
+
+- Xcode Privacy Report: 空白1ページ。warning 0の明示Evidenceとしては`NOT VERIFIED`。
+- Build 77: `VALID`、`APP_STORE_ELIGIBLE`。
+- App Store Connect App Privacy: 「データの収集なし」。tracking／advertising／analytics SDKなし、local-first、CueScore accountなしの現行仕様と整合。
+- Capacitor／Cordova framework manifests: 存在、tracking false、収集dataなし、accessed API typesなし。
+- Confirmed missing Required Reason API declaration: なし。
+- Classification: `NOT VERIFIED EVIDENCE GAP — NON-BLOCKING FOR APP REVIEW SUBMISSION`。
+- App-level privacy manifest: 根拠がないため追加していない。
 
 ## App Store Connect Evidence
 
@@ -28,29 +48,15 @@
   1. iOS App Version 1.0
   2. CueScore Pro（IAP version `77232928-f772-40ca-9982-9ec8cbef32ff`）
 
-## Screenshot Replacement Evidence
+## Screenshot / Build Evidence
 
-- 旧5枚をBuild 77 UIへ差し替え、Settings Pro画像は維持。
-- 最終6枚: `01_Home_Build77.png`、`02_Player_List_Build77.png`、`03_Player_Detail_Build77.png`、`05_History_Build77.png`、`06_Match_Detail_Build77.png`、`07_Settings_Pro.png`
-- 全件`COMPLETE`、1242×2688。
-- draft解除前後の2項目Evidenceを`docs/release/evidence/`へ保存。
-
-## Privacy Evidence
-
-- App Store Connect App Privacy: 「データの収集なし」。tracking／advertising／analytics SDKなし、local-first、CueScore accountなしの現行仕様と整合。
-- Xcode OrganizerからBuild 77 Privacy Reportを生成。
-- PDFは807 bytes、1ページ、抽出textなし、visualは空白。warning 0の明示Evidenceにはならない。
-- Archive内にapp-level `PrivacyInfo.xcprivacy`はない。Capacitor／Cordova framework manifestsはtracking false、収集dataなし、accessed API typesなし。
-
-## Build / Test Evidence
-
+- screenshots 6枚は全件`COMPLETE`、1242×2688。
 - Full Node regression: `432 pass / 0 fail / 0 skipped`
 - Build source: `9828a8499f514d239b717d248a9a99976db23944`
-- Product source以降の変更: docs／metadata／screenshotsのみ
 - Archive: `com.takaakimailboxstar.cuescoreapps` / `1.0 (77)` / `.storekit` 0件
 - `ion-ios-filesystem 1.1.2` / `0d81e26e828ff9582807e2339112cedf2e0fab85`
 - `capacitor-swift-pm 8.0.2` / `13a39179b3df796f3bb2e70c47ccdd92593f34d2`
-- source／native copied assets／Archive dependency一致。
+- source／native copied assets／Archive dependency: 一致
 
 ## Change / Distribution State
 
@@ -59,9 +65,10 @@
 - External TestFlight: 未実施
 - App Review submission: 未実施
 - Release: 未実施
+- Commit / push: このDecisionでは未実施
 
 ## STOP
 
-`READY FOR PRODUCT OWNER FINAL SUBMISSION REVIEW`
+`READY FOR PRODUCT OWNER APP REVIEW SUBMISSION`
 
-Product Ownerは上記2件を最終判断し、別途App Review提出を明示承認する。現在のtaskでは提出しない。
+Submit for Review直前でSTOP。現在のtaskではApp Reviewへ提出しない。

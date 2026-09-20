@@ -1,27 +1,34 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-V1-FINAL-SUBMISSION-FIX-JP-20260920`
+- Decision ID: `CUESCORE-V1-FINAL-PRICE-PRIVACY-DECISION-20260920`
 - Date: 2026-09-20
-- Product Owner Decision: GO（Japan-only）
-- Gate state: `READY FOR PRODUCT OWNER FINAL SUBMISSION REVIEW`
+- Product Owner Decision: `ACCEPT FOR APP REVIEW PREPARATION`
+- Gate state: `READY FOR PRODUCT OWNER APP REVIEW SUBMISSION`
 
-## Completed Scope
+## Price Decision
 
-- App availabilityをJapan-onlyへ固定し、`availableInNewTerritories=false`を保存・API再読取。
-- App Store Version 1.0はBuild 77を選択済み。
-- App Review Notes、Description、Promotional Text、Official／public Privacy・Terms・SupportをBuild 77 Free／Pro仕様へ整合。
-- App Store screenshotsを現行Build 77 UIへ更新。6枚すべて`COMPLETE`、1242×2688。
-- review draftの削除前Evidenceを保存後、draft内の2項目だけを一時解除。Version 1.0、Build 77、CueScore Pro IAP本体は削除していない。
-- 同じreview draftへiOS App Version 1.0とCueScore Proを再追加し、2項目だけであることを再読取。
-- App Privacy実画面は「データの収集なし」で、現行local-first／trackingなし実装と整合。
-- Xcode OrganizerからBuild 77 Privacy Reportを生成・保存。
+- B-04を`BLOCKER`から`ACCEPTED RISK — TESTFLIGHT-SPECIFIC SANDBOX METADATA ISSUE`へ再分類する。
+- TestFlight Build 77: Fresh `Product.displayPrice=$5.99`。
+- Xcode direct install／同一製品source: `Product.displayPrice=¥980`。
+- TestFlight Apple purchase sheet: `¥980`。
+- Product source、Product ID、StoreKit `Product.displayPrice` authorityは不変。価格hard-code、独自通貨換算、Build 78は作成しない。
+- A/B Evidence: `docs/release/evidence/CueScore_v1.0_StoreKit_Price_AB_Diagnostic_2026-09-20.md`。
 
-## Final Review Items
+## Privacy Decision
 
-1. Japan SandboxではPro画面のFresh `Product.displayPrice`が`$5.99`、Apple購入sheetが`¥980`。購入lifecycleはPASSしているが、Production非再現は証明されていない。
-2. Xcode生成Privacy Reportは空白1ページで、privacy／Required Reason API／missing manifest warningが0件であることを明示的に証明しない。Archiveにはapp-level `PrivacyInfo.xcprivacy`がなく、組込みCapacitor／Cordova manifestsはtracking false／収集dataなし。
+- 空白のXcode Privacy Reportはwarning 0の明示Evidenceではなく、Privacy validationは`NOT VERIFIED`を維持する。
+- Build 77は`VALID`／`APP_STORE_ELIGIBLE`。App Privacy回答は現行実装と整合する。
+- Capacitor／Cordovaの`PrivacyInfo.xcprivacy`は存在し、tracking false。analytics／advertising SDKはなく、Required Reason API declaration欠落の確認Evidenceもない。
+- Evidence gapは`NON-BLOCKING FOR APP REVIEW SUBMISSION`。根拠なしにapp-level privacy manifestを追加しない。
+
+## Submission Baseline
+
+- Version 1.0はBuild 77を選択済み。
+- screenshots 6枚は全件`COMPLETE`。
+- App／CueScore ProはJapan-only。
+- review draftはiOS App Version 1.0とCueScore Proの2項目のみで`READY_FOR_REVIEW`。
 
 ## Boundary / STOP
 
 - Product source変更、Build 78、External TestFlight、App Review提出、Releaseは禁止。
-- Product Ownerの最終提出判断までSTOPする。
+- Submit for Reviewは押していない。Product OwnerがApp Review submissionを実行または別途明示承認する直前でSTOPする。
