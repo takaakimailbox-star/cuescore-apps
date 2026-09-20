@@ -1,24 +1,18 @@
 # CueScore Current Status
 
-- Updated: 2026-09-19
+- Updated: 2026-09-20
 - Version / Build: `1.0 (77)`
-- Build 76 Product Owner evidence: Japan SandboxでFree、Pro画面`$5.99`、Apple購入sheet`¥980`。購入は未確定
-- Build 77 scope: Pro画面open時に古い商品価格を破棄し、native StoreKitから商品をFresh取得するまで`価格を確認中…`／購入不可
-- Success: Fresh `Product.displayPrice`を表示して購入buttonを有効化
-- Failure: `価格を取得できません`、購入不可、古いstorefront価格へfallbackしない
-- Protected scope: Product ID、purchase、verified transaction／finish、currentEntitlements、Transaction.updates、restore、CueScoreEntitlement、Free／Pro境界、Build 76 Settings、Startup Promise Safetyは変更なし
-- Tests: IAP focused `29 pass / 0 fail`、Full Node `432 pass / 0 fail / 0 skipped`
-- Dependency: `ion-ios-filesystem 1.1.2` / `0d81e26e828ff9582807e2339112cedf2e0fab85`、`capacitor-swift-pm 8.0.2`
-- Build verification: Release Simulator build／device Archive PASS、Bundle ID `com.takaakimailboxstar.cuescoreapps`、Archive `1.0 (77)`、`.storekit` 0件
-- Source identity: source／iOS copied／Archiveの`monetization-v1.js` SHA-256一致
-- Build source commit: `9828a8499f514d239b717d248a9a99976db23944`（origin/mainへpush済み）
-- App Store Connect: Build ID `a1ebcb96-b6a4-4e88-b5e5-f79e149e15dd`、`VALID`、`usesNonExemptEncryption=false`
-- Internal TestFlight: `CueScore Internal Testers`（internal／全Buildアクセス）対象
-- Current gate: `READY FOR PRODUCT OWNER BUILD 77 FRESH STOREKIT PRICE TEST`
-- External TestFlight: not performed
-- App Review: not submitted
-- Public release: not performed
+- Final submission fix gate: `READY FOR PRODUCT OWNER FINAL SUBMISSION REVIEW`
+- App Review submission readiness: `BLOCKED — PRODUCT OWNER FINAL DECISION REQUIRED`
+- Resolved: Version 1.0 → Build 77、現行Review Notes／metadata、Build 77 screenshots 6枚、Japan-only、将来地域の自動追加OFF、Version 1.0 + CueScore Proの同一review draft
+- Review draft: `READY_FOR_REVIEW`、2項目のみ（iOS App Version 1.0／CueScore Pro）
+- Screenshots: 6枚すべて`COMPLETE`、1242×2688。Build 77版5枚＋Settings Pro 1枚
+- Availability: AppはJPN 1地域のみ、`availableInNewTerritories=false`。CueScore ProもJPNのみ
+- Build relationship: Version 1.0 → Build 77（Build ID `a1ebcb96-b6a4-4e88-b5e5-f79e149e15dd`、`VALID`、`APP_STORE_ELIGIBLE`）
+- Remaining Product Owner decisions: Japan SandboxのFresh価格`$5.99`／Apple購入sheet`¥980`不一致をaccepted riskとするか。Xcode生成Privacy Reportが空白1ページでwarning 0を証明しない点をどう扱うか
+- Product source change / Build 78: なし
+- External TestFlight / App Review submission / Release: 未実施
 - Canonical instruction: `docs/handoff/CURRENT_DECISION.md`
 - Canonical report: `docs/handoff/CURRENT_REPORT.md`
 
-For long-term history and evidence, use `docs/CURRENT_STATE.md`. Do not expand this file into a build-by-build archive.
+Long-term evidence: `docs/CURRENT_STATE.md` and `docs/release/CueScore_v1.0_Final_Release_Readiness_Audit_2026-09-20.md`.

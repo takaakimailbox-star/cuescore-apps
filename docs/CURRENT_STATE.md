@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## v1.0 Final Submission Fix — Japan Only（2026年9月20日）
+
+- Product Owner採用によりv1.0をJapan-onlyへ固定。App availabilityはJPN 1地域、`availableInNewTerritories=false`、CueScore Pro IAPもJPNのみ。Version 1.0はBuild 77（`VALID`／`APP_STORE_ELIGIBLE`／暗号化申告false）を選択している。
+- Official／public Privacy・Terms・Support、App Store Description／Promotional Text／Review NotesをBuild 77のFree／Pro／IAP仕様へ整合。App Privacy実画面の「データの収集なし」は、tracking／advertising／analytics SDKなし、local-first、CueScore accountなしの実装と一致した。
+- App Store screenshots旧5枚をBuild 77現行UIへ差し替え、Settings Pro画像を維持。最終6枚は全件`COMPLETE`、1242×2688。review draft解除前後のEvidenceを保存し、同じdraftへiOS App Version 1.0とCueScore Proだけを再追加した。Version／Build／IAP本体は削除していない。
+- Gateは`READY FOR PRODUCT OWNER FINAL SUBMISSION REVIEW`。ただし提出可否は、Japan SandboxのFresh価格`$5.99`／Apple購入sheet`¥980`不一致と、Xcode Organizer生成Privacy Reportが空白1ページでwarning 0を証明しない点についてProduct Owner最終判断が必要。App Review提出、External TestFlight、Release、Build 78、製品source変更は実施していない。詳細：`docs/release/CueScore_v1.0_Final_Release_Readiness_Audit_2026-09-20.md`。
+
 ## Build 77 Fresh StoreKit Price（2026年9月19日）
 
 - Build 76 Japan SandboxでPro画面は`$5.99`、Apple購入sheetは`¥980`だった。native bridgeは既にFresh `Product.products(for:)`と`Product.displayPrice`を使用しており、原因はWeb側がPro画面open時に以前の`state.product.localizedPrice`をrefresh前に描画し、Fresh商品取得失敗時にも保持していたこと。

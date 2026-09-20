@@ -31,6 +31,7 @@ The v1.0 launch territory is Japan only. The app and CueScore Pro In-App Purchas
 
 ## Deferred
 
+- v1.0では、CSV、自動クラウド同期、試合共有（Match Sharing）を搭載しません。
 - CSV import and export
 - Automatic cloud sync
 - Match Sharing

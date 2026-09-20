@@ -1,22 +1,27 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-B77-FRESH-STOREKIT-PRICE-20260919`
-- Date: 2026-09-19
-- Product Owner Decision: GO
-- Gate state: `READY FOR PRODUCT OWNER BUILD 77 FRESH STOREKIT PRICE TEST`
+- Decision ID: `CUESCORE-V1-FINAL-SUBMISSION-FIX-JP-20260920`
+- Date: 2026-09-20
+- Product Owner Decision: GO（Japan-only）
+- Gate state: `READY FOR PRODUCT OWNER FINAL SUBMISSION REVIEW`
 
-## Objective
+## Completed Scope
 
-Pro画面を開くたびにnative StoreKitから商品をFresh取得し、取得前の古いstorefront価格を表示しない。取得中は`価格を確認中…`かつ購入不可、成功後はfresh `Product.displayPrice`を表示して購入可能、失敗時は`価格を取得できません`かつ購入不可とする。
+- App availabilityをJapan-onlyへ固定し、`availableInNewTerritories=false`を保存・API再読取。
+- App Store Version 1.0はBuild 77を選択済み。
+- App Review Notes、Description、Promotional Text、Official／public Privacy・Terms・SupportをBuild 77 Free／Pro仕様へ整合。
+- App Store screenshotsを現行Build 77 UIへ更新。6枚すべて`COMPLETE`、1242×2688。
+- review draftの削除前Evidenceを保存後、draft内の2項目だけを一時解除。Version 1.0、Build 77、CueScore Pro IAP本体は削除していない。
+- 同じreview draftへiOS App Version 1.0とCueScore Proを再追加し、2項目だけであることを再読取。
+- App Privacy実画面は「データの収集なし」で、現行local-first／trackingなし実装と整合。
+- Xcode OrganizerからBuild 77 Privacy Reportを生成・保存。
 
-## Acceptance
+## Final Review Items
 
-- stateに旧`$5.99`があってもopen直後に描画しない。
-- Fresh取得成功で`¥980`等のStoreKit `Product.displayPrice`へ更新し、購入buttonを有効化。
-- Fresh取得失敗で旧価格へfallbackせず、verified Proも降格しない。
-- purchase／verified／finish／entitlement／restore semanticsは不変。
-- Full Node regression fail 0、固定dependencyでRelease build／ArchiveをPASS。
+1. Japan SandboxではPro画面のFresh `Product.displayPrice`が`$5.99`、Apple購入sheetが`¥980`。購入lifecycleはPASSしているが、Production非再現は証明されていない。
+2. Xcode生成Privacy Reportは空白1ページで、privacy／Required Reason API／missing manifest warningが0件であることを明示的に証明しない。Archiveにはapp-level `PrivacyInfo.xcprivacy`がなく、組込みCapacitor／Cordova manifestsはtracking false／収集dataなし。
 
-## Boundary
+## Boundary / STOP
 
-Build `1.0 (77)`をInternal TestFlightへ反映し、`READY FOR PRODUCT OWNER BUILD 77 FRESH STOREKIT PRICE TEST`でSTOPする。Build 78、External TestFlight、App Review、Releaseへ進まない。
+- Product source変更、Build 78、External TestFlight、App Review提出、Releaseは禁止。
+- Product Ownerの最終提出判断までSTOPする。

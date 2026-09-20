@@ -23,6 +23,8 @@ The App Store v1.0 official release package is managed separately under
 - `submission/`: App Store Description, Keywords, Review Notes, and Release Notes.
 - Revision 2（2026-09-20）はBuild 77のFree／CueScore Pro境界、StoreKit 2、Non-Consumable、Japan-only launchへ整合済み。Privacy Policy、Terms of Use、Supportの正式URLと公開メールを維持する。
 - App Review連絡担当者情報、提出対象Build、初回CueScore Pro IAPの同一submission、およびApp Privacy回答はApp Store Connectの実状態を最終Evidenceとし、推測で完了扱いにしない。
+- Final submission fix record: `implementation/CueScore_v1.0_Final_Submission_Fix_Japan_Only_2026-09-20.md`
+- Final re-audit: `release/CueScore_v1.0_Final_Release_Readiness_Audit_2026-09-20.md`
 
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.

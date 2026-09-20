@@ -1,0 +1,45 @@
+{
+  "capturedAt": "2026-09-20T00:12:01.268Z",
+  "submission": {
+    "id": "7fd64b66-fe2e-424e-9038-a37cbddf8e87",
+    "state": "READY_FOR_REVIEW"
+  },
+  "itemCount": 2,
+  "items": [
+    {
+      "id": "N2ZkNjRiNjYtZmUyZS00MjRlLTkwMzgtYTM3Y2JkZGY4ZTg3fDZ8ODg5ODM5NjU3",
+      "state": "READY_FOR_REVIEW",
+      "relationships": {
+        "appStoreVersion": {
+          "type": "appStoreVersions",
+          "id": "deb842d0-c7f5-4bcf-9248-443bcb090cdf"
+        },
+        "inAppPurchaseVersion": null
+      }
+    },
+    {
+      "id": "N2ZkNjRiNjYtZmUyZS00MjRlLTkwMzgtYTM3Y2JkZGY4ZTg3fDE3fDc3MjMyOTI4LWY3NzItNDBjYS05OTgyLTllYzhjYmVmMzJmZg",
+      "state": "READY_FOR_REVIEW",
+      "relationships": {
+        "appStoreVersion": null,
+        "inAppPurchaseVersion": {
+          "type": "inAppPurchaseVersions",
+          "id": "77232928-f772-40ca-9982-9ec8cbef32ff"
+        }
+      }
+    }
+  ],
+  "verifiedTargets": {
+    "appStoreVersion": {
+      "id": "deb842d0-c7f5-4bcf-9248-443bcb090cdf",
+      "versionString": "1.0",
+      "platform": "IOS"
+    },
+    "inAppPurchase": {
+      "id": "6808464490",
+      "name": "CueScore Pro",
+      "productId": "com.takaakimailboxstar.cuescoreapps.pro",
+      "type": "NON_CONSUMABLE"
+    }
+  }
+}
