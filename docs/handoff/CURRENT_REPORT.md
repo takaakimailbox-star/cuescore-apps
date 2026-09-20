@@ -65,7 +65,7 @@ Version 1.0／Build 77、現行metadata、Build 77 screenshots、Japan-only avai
 - External TestFlight: 未実施
 - App Review submission: 未実施
 - Release: 未実施
-- Commit / push: このDecisionでは未実施
+- Final documentation commit / push: 実施済み（製品source変更なし）
 
 ## STOP
 
