@@ -11,16 +11,16 @@
 
 ## Executive Summary
 
-**READY FOR PRODUCT OWNER APP REVIEW SUBMISSION**
+**APP REVIEW SUBMITTED — WAITING FOR REVIEW**
 
-旧監査のB-01、B-02、B-03、B-05と提出準備項目は解消した。App Store Connect上でVersion 1.0はBuild 77を選択し、現行metadata、Build 77 screenshots、Japan-only availability、CueScore Proを含む2項目review draftが一致している。App Review提出、External TestFlight、Releaseは行っていない。
+旧監査のB-01、B-02、B-03、B-05と提出準備項目は解消した。App Store Connect上でVersion 1.0はBuild 77を選択し、現行metadata、Build 77 screenshots、Japan-only availability、CueScore Proを含む2項目review draftが一致した状態でApp Reviewへ提出した。External TestFlightと自動Releaseは行っていない。
 
 Product Ownerは残っていた2件を次のとおり最終判断した。
 
 1. B-04: `ACCEPTED RISK — TESTFLIGHT-SPECIFIC SANDBOX METADATA ISSUE`。
 2. Privacy Report: `NOT VERIFIED EVIDENCE GAP — NON-BLOCKING FOR APP REVIEW SUBMISSION`。
 
-製品source変更、価格hard-code、app-level privacy manifest追加、Build 78は不要。App Review提出はまだ行っておらず、Submit for Review直前でSTOPしている。
+製品source変更、価格hard-code、app-level privacy manifest追加、Build 78は行わず、承認された2項目だけを提出した。
 
 ## B-01 — Version 1.0 Build relationship: RESOLVED
 
@@ -74,10 +74,10 @@ Evidence: `docs/release/evidence/CueScore_v1.0_StoreKit_Price_AB_Diagnostic_2026
 - `availableInNewTerritories=false`
 - CueScore Pro IAP available territories: `JPN`のみ
 
-## Initial IAP Submission Draft: RESOLVED
+## Initial IAP Submission Draft: RESOLVED / SUBMITTED
 
 - Review submission ID: `7fd64b66-fe2e-424e-9038-a37cbddf8e87`
-- State: `READY_FOR_REVIEW`
+- Pre-submit state: `READY_FOR_REVIEW`
 - Item count: 2
 - Item 1: iOS App Version 1.0
 - Item 2: CueScore Pro／Product ID `com.takaakimailboxstar.cuescoreapps.pro`
@@ -126,9 +126,22 @@ App Store Connect実画面は次を表示した。
 
 - Build 78: not created
 - External TestFlight: not performed
-- App Review submission: not performed
+- App Review submission: performed
 - Release: not performed
 
-**READY FOR PRODUCT OWNER APP REVIEW SUBMISSION**
+B-04とPrivacy Report EvidenceのProduct Owner最終判断後、明示承認に基づきApp Review submissionを実施した。審査結果待ちでSTOPし、自動Releaseへ進まない。
 
-B-04とPrivacy Report EvidenceのProduct Owner最終判断は完了した。App Review提出はこのGateの許可範囲外であり、Submit for Review直前でSTOPする。
+## App Review Submission Result
+
+- Review submission ID: `7fd64b66-fe2e-424e-9038-a37cbddf8e87`
+- Submitted: `2026-09-20T08:22:32.348Z`（2026-09-20 17:22:32 JST）
+- Submission state: `WAITING_FOR_REVIEW`
+- App Version 1.0 state: `WAITING_FOR_REVIEW`
+- CueScore Pro state: `WAITING_FOR_REVIEW`
+- Submitted items: 2（iOS App Version 1.0／CueScore Pro）
+- Version release type: `MANUAL`
+- External TestFlight／automatic Release: not performed
+
+Evidence: `docs/release/evidence/CueScore_v1.0_App_Review_Submission_2026-09-20.json`。
+
+**APP REVIEW SUBMITTED — WAITING FOR REVIEW**

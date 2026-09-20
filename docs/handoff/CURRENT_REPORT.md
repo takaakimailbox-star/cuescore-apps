@@ -3,15 +3,23 @@
 - App: CueScore
 - Decision ID: `CUESCORE-V1-FINAL-PRICE-PRIVACY-DECISION-20260920`
 - Date: 2026-09-20
-- Gate Result: `READY FOR PRODUCT OWNER APP REVIEW SUBMISSION`
-- Submission Readiness: `READY — PRODUCT OWNER SUBMISSION ACTION PENDING`
+- Gate Result: `APP REVIEW SUBMITTED — WAITING FOR REVIEW`
+- Submission State: `WAITING_FOR_REVIEW`
 - Version / Build: `1.0 (77)`
 
 ## 結論
 
 価格とPrivacyの最終判断を文書へ反映した。B-04はTestFlight／Sandbox固有metadata anomalyのaccepted risk、Privacy Reportは`NOT VERIFIED`のEvidence gapを維持しつつApp Review submissionにはnon-blockingとなった。製品sourceは変更せず、Build 78も作成していない。
 
-Version 1.0／Build 77、現行metadata、Build 77 screenshots、Japan-only availability、CueScore Proを含む2項目review draftは提出準備済み。App Reviewへは送信していない。
+Version 1.0／Build 77、現行metadata、Build 77 screenshots、Japan-only availability、CueScore Proを含む2項目をApp Reviewへ提出した。自動Releaseには進んでいない。
+
+## Submission Result
+
+- Review submission ID: `7fd64b66-fe2e-424e-9038-a37cbddf8e87`
+- Submitted timestamp: `2026-09-20T08:22:32.348Z`（2026-09-20 17:22:32 JST）
+- Submission state: `WAITING_FOR_REVIEW`
+- App Version state: `WAITING_FOR_REVIEW`
+- CueScore Pro state: `WAITING_FOR_REVIEW`
 
 ## Price Decision Evidence
 
@@ -35,7 +43,7 @@ Version 1.0／Build 77、現行metadata、Build 77 screenshots、Japan-only avai
 
 ## App Store Connect Evidence
 
-- Version 1.0 state: `READY_FOR_REVIEW`
+- Version 1.0 state: `WAITING_FOR_REVIEW`
 - Selected Build: `77`
 - Build ID: `a1ebcb96-b6a4-4e88-b5e5-f79e149e15dd`
 - Build: `VALID`、`APP_STORE_ELIGIBLE`、`usesNonExemptEncryption=false`
@@ -43,7 +51,7 @@ Version 1.0／Build 77、現行metadata、Build 77 screenshots、Japan-only avai
 - `availableInNewTerritories=false`
 - CueScore Pro: `com.takaakimailboxstar.cuescoreapps.pro`、Non-Consumable、JPNのみ
 - Review submission ID: `7fd64b66-fe2e-424e-9038-a37cbddf8e87`
-- Review submission state: `READY_FOR_REVIEW`
+- Review submission state: `WAITING_FOR_REVIEW`
 - Review draft item count: 2
   1. iOS App Version 1.0
   2. CueScore Pro（IAP version `77232928-f772-40ca-9982-9ec8cbef32ff`）
@@ -63,12 +71,12 @@ Version 1.0／Build 77、現行metadata、Build 77 screenshots、Japan-only avai
 - Product code change: なし
 - Build 78: なし
 - External TestFlight: 未実施
-- App Review submission: 未実施
+- App Review submission: 実施済み
 - Release: 未実施
 - Final documentation commit / push: 実施済み（製品source変更なし）
 
 ## STOP
 
-`READY FOR PRODUCT OWNER APP REVIEW SUBMISSION`
+`APP REVIEW SUBMITTED — WAITING FOR REVIEW`
 
-Submit for Review直前でSTOP。現在のtaskではApp Reviewへ提出しない。
+審査結果待ちでSTOP。自動Releaseへ進まない。

@@ -1,0 +1,42 @@
+{
+  "gate": "APP REVIEW SUBMITTED — WAITING FOR REVIEW",
+  "capturedAt": "2026-09-20T08:22:34.661Z",
+  "submittedAt": "2026-09-20T08:22:32.348Z",
+  "submittedAtJST": "2026-09-20T17:22:32.348+09:00",
+  "reviewSubmission": {
+    "id": "7fd64b66-fe2e-424e-9038-a37cbddf8e87",
+    "state": "WAITING_FOR_REVIEW",
+    "itemCount": 2
+  },
+  "appStoreVersion": {
+    "id": "deb842d0-c7f5-4bcf-9248-443bcb090cdf",
+    "version": "1.0",
+    "state": "WAITING_FOR_REVIEW",
+    "releaseType": "MANUAL",
+    "build": {
+      "id": "a1ebcb96-b6a4-4e88-b5e5-f79e149e15dd",
+      "version": "77",
+      "processingState": "VALID",
+      "audience": "APP_STORE_ELIGIBLE"
+    }
+  },
+  "inAppPurchase": {
+    "id": "6808464490",
+    "name": "CueScore Pro",
+    "productId": "com.takaakimailboxstar.cuescoreapps.pro",
+    "type": "NON_CONSUMABLE",
+    "state": "WAITING_FOR_REVIEW"
+  },
+  "availability": {
+    "territories": ["JPN"],
+    "territoryCount": 1,
+    "availableInNewTerritories": false
+  },
+  "protectedState": {
+    "productSourceChanged": false,
+    "build78Created": false,
+    "metadataChanged": false,
+    "externalTestFlightPerformed": false,
+    "automaticReleasePerformed": false
+  }
+}
