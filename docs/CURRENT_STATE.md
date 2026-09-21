@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## Build 78 TestFlight IAP Final Diagnostic（2026年9月22日）
+
+- Gate判定: `A — NON-BLOCKING — TESTFLIGHT/SANDBOX STOREFRONT METADATA ISSUE`。Build 78はIAP観点で`READY FOR APP REVIEW RESUBMISSION`。再提出自体はこの診断taskでは実施していない。
+- Product Owner実機でBuild 78のcold launch、Race selector、Player Search黄色focus枠除去、verified Pro entitlementをPASS。Pro画面のFresh価格は`$5.99`、Settingsは`CueScore Pro ✓`。RestoreはApple Account password UI到達までPASSし、password未入力のためcompletionは`NOT TESTED — NOT FAILED`。
+- App Store Connect read-only再確認では、CueScore ProはProduct ID `com.takaakimailboxstar.cuescoreapps.pro`、`NON_CONSUMABLE`、JPNのみ、基準地域JPN、active manual価格`JPY 980`、IAP/アプリとも`availableInNewTerritories=false`。Build 78は`VALID`／`APP_STORE_ELIGIBLE`／internal `IN_BETA_TESTING`。
+- Build 78のnative/Web IAP sourceはBuild 77とSHA一致。StoreKit 2 `Product.products(for:)`、`Product.displayPrice`、verified transaction、`Transaction.currentEntitlements`／`Transaction.updates`、`AppStore.sync()`を維持し、product runtimeに`$5.99`／`¥980` hard-codeなし。Archive `.storekit` 0件。IAP focused `44 pass / 0 fail / 0 skipped`。
+- Build 77のTestFlight `$5.99`／Apple purchase sheet `¥980`／Xcode direct `¥980`と同じdistribution-path固有現象がBuild 78で継続し、新しい製品側IAP regressionは検出されなかった。Version 1.0は`REJECTED`、submissionは`UNRESOLVED_ISSUES`、review-build relationshipはBuild 77のまま。price、metadata、availability、Build relationship、submission、sourceは変更していない。Evidence：`docs/release/evidence/CueScore_Build78_TestFlight_IAP_Final_Diagnostic_2026-09-22.md`。
+
 ## Build 78 App Review RC / Internal TestFlight（2026年9月21日）
 
 - Gate: `READY FOR PRODUCT OWNER BUILD 78 INTERNAL TESTFLIGHT REVIEW`。Build 77のApp Review起動crashは、3本のApple `.ips`、Build 77 Archive/dSYM UUID一致、完全symbolicationによりiOS/iPadOS 27のUIScene lifecycle未対応を`CONFIRMED ROOT CAUSE`と確定。単一scene manifest、SceneDelegate、AppDelegate configurationを最小追加した。

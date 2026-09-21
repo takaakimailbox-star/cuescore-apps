@@ -1,0 +1,66 @@
+{
+  "date": "2026-09-22",
+  "classification": "NON-BLOCKING — TESTFLIGHT/SANDBOX STOREFRONT METADATA ISSUE",
+  "gate": "READY FOR APP REVIEW RESUBMISSION",
+  "productSourceCommit": "6e0a569e32e473f6b5bfa14c74eeca1482820467",
+  "appStoreConnect": {
+    "appId": "6802027038",
+    "bundleId": "com.takaakimailboxstar.cuescoreapps",
+    "appAvailableTerritories": ["JPN"],
+    "appAvailableInNewTerritories": false,
+    "iapId": "6808464490",
+    "productId": "com.takaakimailboxstar.cuescoreapps.pro",
+    "iapType": "NON_CONSUMABLE",
+    "iapState": "READY_TO_SUBMIT",
+    "iapAvailableTerritories": ["JPN"],
+    "iapAvailableInNewTerritories": false,
+    "baseTerritory": "JPN",
+    "currency": "JPY",
+    "customerPrice": "980",
+    "priceManual": true,
+    "build78Id": "eb2f6582-c42b-444d-9755-218e5e03ff49",
+    "build78ProcessingState": "VALID",
+    "build78Audience": "APP_STORE_ELIGIBLE",
+    "build78InternalState": "IN_BETA_TESTING",
+    "version1State": "REJECTED",
+    "reviewSubmissionState": "UNRESOLVED_ISSUES",
+    "selectedReviewBuild": "77"
+  },
+  "deviceEvidence": [
+    {
+      "file": "IMG_3700.PNG",
+      "sha256": "dc432c121eefd0d7e1120f039bd2de9db262aa6f5d7620431c41ff5354bf0d08",
+      "observed": ["$5.99", "CueScore Pro active"]
+    },
+    {
+      "file": "IMG_3702.PNG",
+      "sha256": "50c7b2b7b8fa1256f6ad321f3e45f4bc8d3ff1cd8b3ca582364963e14717a1f4",
+      "observed": ["CueScore Pro checkmark", "Version 1.0"]
+    },
+    {
+      "file": "IMG_3701.PNG",
+      "sha256": "72fce7e25b9d5642edc750552c949a771579f46b315517306834feb67d651319",
+      "observed": ["Apple Account authentication reached", "restore completion not performed"]
+    }
+  ],
+  "source": {
+    "productId": "com.takaakimailboxstar.cuescoreapps.pro",
+    "productFetch": "Product.products(for:)",
+    "displayAuthority": "Product.displayPrice",
+    "verifiedEntitlement": true,
+    "currentEntitlements": true,
+    "transactionUpdates": true,
+    "appStoreSync": true,
+    "hardcodedUsdPrice": false,
+    "hardcodedJpyPriceInProductRuntime": false,
+    "archiveStoreKitFileCount": 0,
+    "monetizationSha256": "388ce045c2c925c761cc3f7c1055c4a41f76dbecdf5f9069d5cfc2dca9f30dca"
+  },
+  "tests": {
+    "iapFocusedPass": 44,
+    "iapFocusedFail": 0,
+    "iapFocusedSkipped": 0
+  },
+  "restore": "RESTORE COMPLETION NOT TESTED — NOT FAILED",
+  "mutationsPerformed": false
+}
