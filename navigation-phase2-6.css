@@ -14,6 +14,7 @@ body[data-cue-player-context="browse"] #playerLibraryOverlay .player-library-mai
 body[data-cue-player-context="browse"] #playerLibraryOverlay .player-library-search-wrap{display:block!important;margin:0 0 6px!important;padding:0!important}
 body[data-cue-player-context="browse"] #playerLibraryOverlay .player-library-search-icon-v1{display:block!important;top:22px!important;left:13px!important}
 body[data-cue-player-context="browse"] #playerLibraryOverlay .player-library-search{display:block!important;width:100%!important;height:44px!important;padding:0 12px 0 39px!important;border-radius:11px!important}
+.player-library-search:focus,.player-library-search:focus-visible{outline:none!important;outline-offset:0!important}
 body[data-cue-player-context="browse"] #playerLibraryOverlay .player-library-sort-v1{display:none!important}
 body[data-cue-player-context="browse"] #playerLibraryOverlay .player-library-count-v1{margin:0 4px 4px!important;font-size:10px!important;line-height:14px!important}
 body[data-cue-player-context="browse"] #playerLibraryOverlay .player-management-list-v1{border-radius:12px!important}

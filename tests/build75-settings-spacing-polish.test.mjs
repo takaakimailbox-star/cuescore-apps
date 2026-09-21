@@ -28,5 +28,5 @@ test("Build 75 preserves row sizes, copyright, legal navigation, and fixed navig
   assert.match(html, /data-settings-legal="terms\.html"/);
   assert.match(html, /data-settings-legal="privacy\.html"/);
   assert.match(html, /navigation-shell-phase1\.css/);
-  assert.match(html, /navigation-phase2-6\.css\?v=2\.0-build77-fresh-storekit-price-v1/);
+  assert.match(html, /navigation-phase2-6\.css\?v=2\.0-build78-app-review-rc-v1/);
 });
