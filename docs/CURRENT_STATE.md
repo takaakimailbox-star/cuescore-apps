@@ -1,11 +1,19 @@
 # CueScore Apps Current State
 
-## v1.0 App Review Submission（2026年9月20日）
+## Build 78 App Review RC / Internal TestFlight（2026年9月21日）
 
-- Gate: `APP REVIEW SUBMITTED — WAITING FOR REVIEW`。
+- Gate: `READY FOR PRODUCT OWNER BUILD 78 INTERNAL TESTFLIGHT REVIEW`。Build 77のApp Review起動crashは、3本のApple `.ips`、Build 77 Archive/dSYM UUID一致、完全symbolicationによりiOS/iPadOS 27のUIScene lifecycle未対応を`CONFIRMED ROOT CAUSE`と確定。単一scene manifest、SceneDelegate、AppDelegate configurationを最小追加した。
+- Build 78にはUIScene fix、9-Ball／10-Ball Race selectorのBottom Navigation + safe-area clearance、Player Search限定の黄色focus枠除去だけを収録。schema、競技ルール、Player、History、IAP、Free／Pro、metadataは変更していない。
+- focused `11 pass / 0 fail`、全Node `443 pass / 0 fail / 0 skipped`、native UI `1 pass / 0 fail`、Release Simulator build、device ArchiveをPASS。iOS 27 SimulatorでiPhone／iPad cold launch各`3/3`、`NoSceneLifecycleAdoption` 0件。Archiveは`com.takaakimailboxstar.cuescoreapps`／`1.0 (78)`、`.storekit` 0件、App/dSYM UUID一致、固定dependencyとsource／native／Archive asset一致を確認。
+- Product source commit `6e0a569e32e473f6b5bfa14c74eeca1482820467`をGitHub mainへpush。App Store Connect Build ID `eb2f6582-c42b-444d-9755-218e5e03ff49`は`VALID`／`APP_STORE_ELIGIBLE`、`usesNonExemptEncryption=false`、internal `IN_BETA_TESTING`。全Buildアクセスの`CueScore Internal Testers`にBuild 78が含まれる。
+- App Review submissionは`UNRESOLVED_ISSUES`、Version 1.0は`REJECTED`、審査用Build紐付けはBuild 77のまま。Build 78の審査紐付け、再提出、Apple返信、metadata変更、External TestFlight、Releaseは実施していない。詳細：`docs/implementation/CueScore_Build78_App_Review_RC_Internal_TestFlight_2026-09-21.md`。
+
+## v1.0 App Review Submission / Reject（2026年9月20–21日）
+
+- 2026年9月20日の提出時Gateは`APP REVIEW SUBMITTED — WAITING FOR REVIEW`。2026年9月21日にBuild 77 launch crashでGuideline 2.1(a) Rejectとなり、現在はsubmission `UNRESOLVED_ISSUES`／Version 1.0 `REJECTED`。
 - 提出直前にVersion 1.0、Build 77、CueScore Pro、Japan 1地域のみ、`availableInNewTerritories=false`、review draft 2項目をApp Store Connect APIで再確認した。Versionのrelease typeは`MANUAL`。
 - Review submission ID `7fd64b66-fe2e-424e-9038-a37cbddf8e87`を2026-09-20 17:22:32 JST（`2026-09-20T08:22:32.348Z`）に提出。submission、App Version 1.0、CueScore Proはいずれも`WAITING_FOR_REVIEW`。
-- Product source、Build 78、metadata、External TestFlight、自動Releaseは変更／実施していない。審査結果待ちでSTOP。Evidence：`docs/release/evidence/CueScore_v1.0_App_Review_Submission_2026-09-20.json`。
+- 提出時点ではProduct source、Build 78、metadata、External TestFlight、自動Releaseを変更／実施せずSTOPした。その後のBuild 78 RC状態は上記sectionを正本とする。提出Evidence：`docs/release/evidence/CueScore_v1.0_App_Review_Submission_2026-09-20.json`。
 
 ## v1.0 Final Price / Privacy Decision（2026年9月20日）
 

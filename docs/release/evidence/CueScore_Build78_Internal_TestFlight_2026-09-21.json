@@ -1,0 +1,58 @@
+{
+  "recordedAt": "2026-09-21",
+  "sourceCommit": "6e0a569e32e473f6b5bfa14c74eeca1482820467",
+  "version": "1.0",
+  "build": "78",
+  "bundleId": "com.takaakimailboxstar.cuescoreapps",
+  "archive": {
+    "result": "ARCHIVE SUCCEEDED",
+    "storeKitFileCount": 0,
+    "appUuid": "080FD5E7-F806-3676-9AFD-500ED91C421B",
+    "dSYMUuid": "080FD5E7-F806-3676-9AFD-500ED91C421B",
+    "appExecutableSha256": "284bac85c018ee1edb89c5656e57284770297baa8f8000ee8660a5deee8309c4",
+    "sdkBuild": "24A430",
+    "minimumOsVersion": "15.0"
+  },
+  "dependencies": {
+    "packageResolvedSha256": "1e68bbcd65eea223108220becced97a2d9eb05c79aaaa88e6f879078b8a6a0aa",
+    "ion-ios-filesystem": {
+      "version": "1.1.2",
+      "revision": "0d81e26e828ff9582807e2339112cedf2e0fab85"
+    },
+    "capacitor-swift-pm": {
+      "version": "8.0.2",
+      "revision": "13a39179b3df796f3bb2e70c47ccdd92593f34d2"
+    }
+  },
+  "tests": {
+    "focused": { "pass": 11, "fail": 0 },
+    "fullNode": { "pass": 443, "fail": 0, "skipped": 0 },
+    "nativeUi": { "pass": 1, "fail": 0 },
+    "releaseSimulatorBuild": "PASS",
+    "iphoneIos27ColdLaunch": { "pass": 3, "fail": 0 },
+    "ipadIos27ColdLaunch": { "pass": 3, "fail": 0 },
+    "noSceneLifecycleAdoption": 0
+  },
+  "appStoreConnect": {
+    "buildId": "eb2f6582-c42b-444d-9755-218e5e03ff49",
+    "processingState": "VALID",
+    "buildAudienceType": "APP_STORE_ELIGIBLE",
+    "usesNonExemptEncryption": false,
+    "internalBuildState": "IN_BETA_TESTING",
+    "externalBuildState": "READY_FOR_BETA_SUBMISSION",
+    "internalGroup": {
+      "id": "b50dbb76-fa29-4fff-8024-3493e68d907c",
+      "name": "CueScore Internal Testers",
+      "isInternalGroup": true,
+      "hasAccessToAllBuilds": true,
+      "containsBuild78": true
+    }
+  },
+  "appReview": {
+    "submissionId": "7fd64b66-fe2e-424e-9038-a37cbddf8e87",
+    "submissionState": "UNRESOLVED_ISSUES",
+    "versionState": "REJECTED",
+    "selectedReviewBuild": "77",
+    "resubmitted": false
+  }
+}
