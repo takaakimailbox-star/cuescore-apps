@@ -1,0 +1,95 @@
+{
+  "recordedAt": "2026-09-22T13:11:50.336Z",
+  "recordedAtJst": "2026-09-22T22:11:50.336+09:00",
+  "app": {
+    "id": "6802027038",
+    "name": "CueScore Apps",
+    "bundleId": "com.takaakimailboxstar.cuescoreapps"
+  },
+  "source": {
+    "build78Commit": "6e0a569e32e473f6b5bfa14c74eeca1482820467",
+    "preResubmissionDocumentationCommit": "6359471ad4fa0502e69d2895e4037fb364148e61"
+  },
+  "appStoreVersion": {
+    "id": "deb842d0-c7f5-4bcf-9248-443bcb090cdf",
+    "versionString": "1.0",
+    "state": "WAITING_FOR_REVIEW",
+    "releaseType": "MANUAL"
+  },
+  "build": {
+    "id": "eb2f6582-c42b-444d-9755-218e5e03ff49",
+    "version": "78",
+    "processingState": "VALID"
+  },
+  "reviewSubmission": {
+    "id": "7fd64b66-fe2e-424e-9038-a37cbddf8e87",
+    "state": "WAITING_FOR_REVIEW",
+    "submittedDate": "2026-09-22T13:10:04.044Z",
+    "submittedDateJst": "2026-09-22T22:10:04.044+09:00",
+    "submittedItems": [
+      {
+        "type": "appStoreVersions",
+        "id": "deb842d0-c7f5-4bcf-9248-443bcb090cdf",
+        "display": "iOS App Version 1.0 (78)",
+        "state": "WAITING_FOR_REVIEW"
+      },
+      {
+        "type": "inAppPurchaseVersions",
+        "id": "77232928-f772-40ca-9982-9ec8cbef32ff",
+        "display": "CueScore Pro",
+        "state": "WAITING_FOR_REVIEW"
+      }
+    ]
+  },
+  "appReviewReply": {
+    "sent": true,
+    "uiTimestampJst": "2026-09-22 22:08 JST",
+    "body": "Hello App Review Team,\n\nThank you for the detailed crash reports.\n\nWe identified the cause of the launch crash in version 1.0 (Build 77). The app had not adopted the UIScene lifecycle required when running the iOS 27 SDK build on iOS/iPadOS 27.\n\nWe have updated the app to use the UIScene lifecycle and submitted a new build, Build 78.\n\nWe verified the fix with repeated cold launches on iOS 27 iPhone and iPad simulator environments, as well as on a physical iPhone through TestFlight. The app now launches normally.\n\nNo user data format, scoring rules, or in-app purchase product identifiers were changed as part of this fix.\n\nThank you for reviewing the updated build.\n\nBest regards,\nCueScore Apps"
+  },
+  "availability": {
+    "appAvailableTerritories": [
+      "JPN"
+    ],
+    "appAvailableInNewTerritories": false,
+    "iapAvailableTerritories": [
+      "JPN"
+    ],
+    "iapAvailableInNewTerritories": false
+  },
+  "inAppPurchase": {
+    "id": "6808464490",
+    "name": "CueScore Pro",
+    "productId": "com.takaakimailboxstar.cuescoreapps.pro",
+    "type": "NON_CONSUMABLE",
+    "state": "WAITING_FOR_REVIEW",
+    "japanCurrency": "JPY",
+    "japanCustomerPrice": "980"
+  },
+  "uiReadBack": {
+    "reviewSubmissionState": "審査待ち",
+    "appVersionDisplay": "1.0 (78)",
+    "appVersionState": "審査待ち",
+    "iapDisplay": "CueScore Pro",
+    "iapState": "審査待ち",
+    "submittedAtDisplay": "2026年9月22日 22:10",
+    "messageCount": 2,
+    "replyVisible": true
+  },
+  "nonSubmittedEmptyDraft": {
+    "id": "ccca99c0-4ab6-4518-8133-58c51abe378e",
+    "state": "READY_FOR_REVIEW",
+    "submittedDate": null,
+    "itemCount": 0,
+    "note": "Created during API workflow discovery; it contains no items and is not the submitted review. No deletion or release action was performed."
+  },
+  "boundaries": {
+    "sourceChanged": false,
+    "build79Created": false,
+    "iapPriceChanged": false,
+    "availabilityChanged": false,
+    "metadataChanged": false,
+    "screenshotsChanged": false,
+    "automaticReleaseEnabled": false,
+    "released": false
+  }
+}

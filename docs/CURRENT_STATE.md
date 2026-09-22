@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## Build 78 App Review再提出（2026年9月22日）
+
+- Gate完了: `APP REVIEW RESUBMITTED — WAITING_FOR_REVIEW`。Version `1.0`の審査BuildをBuild 77からBuild 78へ変更し、既存submission `7fd64b66-fe2e-424e-9038-a37cbddf8e87`でVersion 1.0とCueScore Proを再提出した。submitted timestampは`2026-09-22T13:10:04.044Z`（22:10:04 JST）。
+- Apple ReviewへUIScene lifecycle未対応の原因、Build 78修正、iPhone／iPad Simulatorと実iPhoneのcold launch検証、schema／scoring rules／IAP Product ID不変を説明する指定文を22:08 JSTに返信し、Resolution Centerのメッセージ一覧で送信済みを確認した。
+- APIとApp Store Connect画面のread-backでsubmission、Version 1.0、CueScore Proはいずれも`WAITING_FOR_REVIEW`／「審査待ち」。Build 78 ID `eb2f6582-c42b-444d-9755-218e5e03ff49`は`VALID`、画面表示は`1.0 (78)`。
+- App／IAPはJPNのみ、双方`availableInNewTerritories=false`、CueScore Proは`NON_CONSUMABLE`／`com.takaakimailboxstar.cuescoreapps.pro`／`JPY 980`を維持。release typeは`MANUAL`。metadata、screenshots、Privacy、source、価格、availabilityは変更していない。
+- 再提出方法のAPI検証中にitem 0件・未提出の空draft `ccca99c0-4ab6-4518-8133-58c51abe378e`が作成されたが、今回の提出には含まれず外部影響なし。削除／Releaseは実施していない。詳細：`docs/release/CueScore_Build78_App_Review_Resubmission_2026-09-22.md`、機械可読Evidence：`docs/release/evidence/CueScore_Build78_App_Review_Resubmission_2026-09-22.json`。
+
 ## Build 78 TestFlight IAP Final Diagnostic（2026年9月22日）
 
 - Gate判定: `A — NON-BLOCKING — TESTFLIGHT/SANDBOX STOREFRONT METADATA ISSUE`。Build 78はIAP観点で`READY FOR APP REVIEW RESUBMISSION`。再提出自体はこの診断taskでは実施していない。
