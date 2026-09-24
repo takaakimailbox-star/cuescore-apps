@@ -64,10 +64,11 @@ Use this reading order:
 
 ## Protected current boundary
 
-- Formal version/build: `1.0 (66)`
+- Formal version/build: `1.0 (78)`
 - Formal Product ID: `com.takaakimailboxstar.cuescoreapps.pro`
-- Local StoreKit transaction test: PASS
-- TestFlight Sandbox IAP validation: STOP until Apple-side contracts are Active
-- External TestFlight, App Review, and public release: not performed
+- App Review: Version 1.0 and CueScore Pro approved; submission `COMPLETE`
+- App Version state: `PENDING_DEVELOPER_RELEASE`
+- Release type: `MANUAL`
+- Public release: not performed
 
 These facts are summarized for workflow protection. Their detailed evidence remains in `docs/CURRENT_STATE.md` and `docs/implementation/CueScore_Local_StoreKit_Transaction_Test_Environment_2026-09-14.md`.

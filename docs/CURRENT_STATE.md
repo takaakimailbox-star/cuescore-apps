@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## v1.0 Final Release Audit（2026年9月24日）
+
+- Gate判定: `READY FOR PRODUCT OWNER MANUAL RELEASE`。App Store Connect read-only確認でsubmission `7fd64b66-fe2e-424e-9038-a37cbddf8e87`は`COMPLETE`、Version 1.0とCueScore Proの両itemは`APPROVED`。Version 1.0は`PENDING_DEVELOPER_RELEASE`、release typeは`MANUAL`。
+- Version `1.0`はBuild `78`（ID `eb2f6582-c42b-444d-9755-218e5e03ff49`、`VALID`／`APP_STORE_ELIGIBLE`）を選択。App／IAPはJPNのみ、双方`availableInNewTerritories=false`。CueScore Proは`NON_CONSUMABLE`／`com.takaakimailboxstar.cuescoreapps.pro`／`APPROVED`／`JPY 980`。
+- 承認済みmetadataはOfficial v1.0 packageと一致。iPhone 6.5-inch screenshot 6枚は全件`COMPLETE`、Privacy／Terms／Support URLはHTTP 200。2026-09-24のApp Privacy実画面再読取だけはbrowser未認証のため`NOT VERIFIED`だが、過去の「データの収集なし」Evidence、Build 78以降の製品差分0、Apple承認と整合しnon-blocking。
+- Build 78 source commitから現main `c66008647a79c624bfd40df300956c84a7a4bc97`まではdocumentation／evidenceのみ。Archive UUID、executable SHA-256、`.storekit` 0件、dependency identityを再確認。Product Owner実iPhoneのcold launch／Race／Player Search／Pro entitlementはPASS。physical iPadとRestore完了は`NOT VERIFIED`。
+- item 0件の未提出draft `ccca99c0-4ab6-4518-8133-58c51abe378e`は現在も存在するが、accepted submission／Version／Build／Releaseへの影響なし。Release、Build 79、Archive、Upload、ASC設定変更は実施していない。詳細：`docs/release/CueScore_v1.0_Final_PreRelease_Audit_2026-09-24.md`。
+
 ## Build 78 App Review再提出（2026年9月22日）
 
 - Gate完了: `APP REVIEW RESUBMITTED — WAITING_FOR_REVIEW`。Version `1.0`の審査BuildをBuild 77からBuild 78へ変更し、既存submission `7fd64b66-fe2e-424e-9038-a37cbddf8e87`でVersion 1.0とCueScore Proを再提出した。submitted timestampは`2026-09-22T13:10:04.044Z`（22:10:04 JST）。

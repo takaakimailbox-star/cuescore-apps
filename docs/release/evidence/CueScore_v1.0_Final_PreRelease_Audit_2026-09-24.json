@@ -1,0 +1,74 @@
+{
+  "verifiedAt": "2026-09-24T02:29:12.961Z",
+  "verifiedAtJst": "2026-09-24T11:29:12.961+09:00",
+  "conclusion": "READY FOR PRODUCT OWNER MANUAL RELEASE",
+  "releasePerformed": false,
+  "app": {
+    "id": "6802027038",
+    "name": "CueScore Apps",
+    "bundleId": "com.takaakimailboxstar.cuescoreapps",
+    "version": "1.0",
+    "state": "PENDING_DEVELOPER_RELEASE",
+    "releaseType": "MANUAL",
+    "availableTerritories": ["JPN"],
+    "availableInNewTerritories": false
+  },
+  "build": {
+    "number": "78",
+    "id": "eb2f6582-c42b-444d-9755-218e5e03ff49",
+    "processingState": "VALID",
+    "audience": "APP_STORE_ELIGIBLE",
+    "sourceCommit": "6e0a569e32e473f6b5bfa14c74eeca1482820467",
+    "archiveUuid": "080FD5E7-F806-3676-9AFD-500ED91C421B",
+    "executableSha256": "284bac85c018ee1edb89c5656e57284770297baa8f8000ee8660a5deee8309c4",
+    "packageResolvedSha256": "1e68bbcd65eea223108220becced97a2d9eb05c79aaaa88e6f879078b8a6a0aa",
+    "storekitFileCount": 0
+  },
+  "reviewSubmission": {
+    "id": "7fd64b66-fe2e-424e-9038-a37cbddf8e87",
+    "state": "COMPLETE",
+    "submittedDate": "2026-09-22T13:10:04.044Z",
+    "items": [
+      {"type": "appStoreVersion", "id": "deb842d0-c7f5-4bcf-9248-443bcb090cdf", "state": "APPROVED"},
+      {"type": "inAppPurchaseVersion", "id": "77232928-f772-40ca-9982-9ec8cbef32ff", "state": "APPROVED"}
+    ]
+  },
+  "inAppPurchase": {
+    "id": "6808464490",
+    "name": "CueScore Pro",
+    "productId": "com.takaakimailboxstar.cuescoreapps.pro",
+    "type": "NON_CONSUMABLE",
+    "state": "APPROVED",
+    "availableTerritories": ["JPN"],
+    "availableInNewTerritories": false,
+    "currency": "JPY",
+    "customerPrice": "980"
+  },
+  "metadata": {
+    "locale": "ja",
+    "name": "CueScore Apps",
+    "subtitle": "ビリヤードの試合・履歴・分析",
+    "supportUrl": "https://takaakimailbox-star.github.io/cuescore-apps/support.html",
+    "privacyPolicyUrl": "https://takaakimailbox-star.github.io/cuescore-apps/privacy.html",
+    "publicTermsUrl": "https://takaakimailbox-star.github.io/cuescore-apps/terms.html",
+    "primaryCategory": "SPORTS",
+    "secondaryCategory": "UTILITIES",
+    "screenshotSet": "APP_IPHONE_65",
+    "screenshotCount": 6,
+    "screenshotStates": ["COMPLETE", "COMPLETE", "COMPLETE", "COMPLETE", "COMPLETE", "COMPLETE"],
+    "publicUrlHttpStatus": {"privacy": 200, "terms": 200, "support": 200}
+  },
+  "emptyDraft": {
+    "id": "ccca99c0-4ab6-4518-8133-58c51abe378e",
+    "state": "READY_FOR_REVIEW",
+    "submittedDate": null,
+    "itemCount": 0,
+    "impact": "NONE"
+  },
+  "classification": {
+    "blockers": [],
+    "nonBlocking": ["Unsubmitted review draft contains zero items", "Official App Store package operational notes still name Build 77; Build 78 release evidence supersedes that historical note"],
+    "acceptedRisk": ["TestFlight/Sandbox Product.displayPrice may show $5.99 while the JPN Apple purchase sheet and ASC price are JPY 980", "Blank Xcode Privacy Report remains an evidence gap and was accepted as non-blocking"],
+    "notVerified": ["Physical iPad test", "Restore completion after Apple Account authentication", "Fresh App Privacy UI read-back on 2026-09-24; prior accepted UI evidence says no data collected and current review is approved"]
+  }
+}
