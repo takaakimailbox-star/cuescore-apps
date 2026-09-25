@@ -1,20 +1,22 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-V1-FINAL-PRERELEASE-AUDIT-20260924`
-- Date: 2026-09-24
-- Product Owner instruction: perform a read-only final release audit and do not Release
-- Gate result: `READY FOR PRODUCT OWNER MANUAL RELEASE`
+- Decision ID: `CUESCORE-V1-PUBLIC-RELEASE-CLOSE-20260925`
+- Date: 2026-09-25
+- Product Owner instruction: record the public Japan App Store release and close the Version 1.0 release phase
+- Gate result: `CUESCORE v1.0 RELEASE COMPLETE`
 
-## Confirmed baseline
+## Confirmed release state
 
-- Version 1.0 and CueScore Pro are approved in completed submission `7fd64b66-fe2e-424e-9038-a37cbddf8e87`.
-- Version 1.0 is `PENDING_DEVELOPER_RELEASE` with release type `MANUAL` and Build 78 selected.
-- App and IAP remain Japan only. CueScore Pro remains Non-Consumable, Product ID unchanged, and JPY 980.
-- Build 78 identity and the accepted UIScene, Race selector, and Player Search fixes match the recorded source and Archive evidence.
-- No release blocker was found.
+- Version 1.0 and CueScore Pro were approved on 2026-09-24.
+- Product Owner Manual Release was performed on 2026-09-24.
+- App Store Connect reports Version 1.0 as `READY_FOR_SALE` / `READY_FOR_DISTRIBUTION` with Build 78 selected.
+- Product Owner confirmed the general-user listing in the Japan App Store at approximately 2026-09-25 16:37 JST.
+- App and CueScore Pro remain Japan only; CueScore Pro remains Non-Consumable, Product ID unchanged, and JPY 980.
+- Version 1.0 release work is complete.
 
 ## Boundary / STOP
 
-- The audit is complete and stops before public release.
-- Manual Release is a separate Product Owner operation.
-- Do not create Build 79, rebuild, upload, change source, metadata, price, availability, IAP, or release mode without a later instruction.
+- Preserve the released Version 1.0 / Build 78 product source and evidence.
+- Do not create Build 79 or Version 1.1 without a new Product Owner Decision.
+- Do not start deferred features automatically.
+- Do not change metadata, pricing, territories, IAP, or the released product as part of this close record.

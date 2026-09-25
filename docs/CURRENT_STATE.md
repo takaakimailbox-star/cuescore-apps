@@ -1,5 +1,16 @@
 # CueScore Apps Current State
 
+## v1.0 Public Release Complete（2026年9月25日）
+
+- Gate完了: `v1.0 PUBLICLY AVAILABLE ON JAPAN APP STORE` / `CUESCORE v1.0 RELEASE COMPLETE`。Appleは2026-09-24にVersion 1.0とCueScore Proを承認し、Product Ownerが同日にManual Releaseを実施した。
+- 2026-09-25 16:37 JST頃、Product Ownerが日本App Storeアプリで`cuescore apps`を検索し、`CueScore Apps`、Subtitle `ビリヤードの試合・履歴・分析`、Developer `TAKAAKI ISHIZUKA`、`入手`、`アプリ内購入`、公開screenshotsを実機確認した。Evidence `IMG_3733.PNG`は1170×2532、SHA-256 `47e58c29b02c635072b02aa69ef8101834a14fc5cabf1998770f2c38e9da4ff5`。
+- App Store Connect read-only確認ではVersion 1.0は`appStoreState=READY_FOR_SALE`／`appVersionState=READY_FOR_DISTRIBUTION`、release type `MANUAL`、Build 78（ID `eb2f6582-c42b-444d-9755-218e5e03ff49`）は`VALID`／`APP_STORE_ELIGIBLE`。Submission `7fd64b66-fe2e-424e-9038-a37cbddf8e87`は`COMPLETE`、App Version／CueScore Pro両itemは`APPROVED`。
+- 日本App Store public Lookup APIはVersion `1.0`を1件返し、`currentVersionReleaseDate=2026-09-24T08:07:06Z`（17:07:06 JST）。これはApple公開API fieldであり、Product OwnerのManual Releaseボタン操作時刻とはみなさない。
+- App／CueScore ProはJPNのみ、双方`availableInNewTerritories=false`。CueScore Proは`NON_CONSUMABLE`／`com.takaakimailboxstar.cuescoreapps.pro`／`APPROVED`／`JPY 980`。
+- 公開BuildのProduct sourceは`6e0a569e32e473f6b5bfa14c74eeca1482820467`。Build 78以降の製品source変更0件。Build 79、Version 1.1、新Archive／Upload、metadata／price／availability／IAP変更、Deferred機能開始は実施していない。
+- Build 77 Reject、UIScene recovery、TestFlight/Sandbox `$5.99`、Privacy Report gapはHistorical／Acceptedとして保持。physical iPadとRestore認証完了後の結果は`NOT VERIFIED / non-blocking historical`。CSV、自動cloud sync、Match Sharing、Japan外地域はDeferredを維持。
+- item 0件の未提出draft `ccca99c0-4ab6-4518-8133-58c51abe378e`は現在も存在するが、Version 1.0は公開済みで影響なし。draftは削除／提出／変更していない。Evidence：`docs/release/evidence/CueScore_v1.0_App_Store_Public_Release_2026-09-25.md`。
+
 ## v1.0 Final Release Audit（2026年9月24日）
 
 - Gate判定: `READY FOR PRODUCT OWNER MANUAL RELEASE`。App Store Connect read-only確認でsubmission `7fd64b66-fe2e-424e-9038-a37cbddf8e87`は`COMPLETE`、Version 1.0とCueScore Proの両itemは`APPROVED`。Version 1.0は`PENDING_DEVELOPER_RELEASE`、release typeは`MANUAL`。

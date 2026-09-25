@@ -1,0 +1,77 @@
+{
+  "recordedAt": "2026-09-25T07:44:05.427Z",
+  "recordedAtJst": "2026-09-25T16:44:05.427+09:00",
+  "conclusion": "CUESCORE v1.0 RELEASE COMPLETE",
+  "app": {
+    "id": "6802027038",
+    "name": "CueScore Apps",
+    "bundleId": "com.takaakimailboxstar.cuescoreapps",
+    "version": "1.0",
+    "appStoreState": "READY_FOR_SALE",
+    "appVersionState": "READY_FOR_DISTRIBUTION",
+    "releaseType": "MANUAL",
+    "availableTerritories": ["JPN"],
+    "availableInNewTerritories": false
+  },
+  "build": {
+    "number": "78",
+    "id": "eb2f6582-c42b-444d-9755-218e5e03ff49",
+    "processingState": "VALID",
+    "audience": "APP_STORE_ELIGIBLE",
+    "productSourceCommit": "6e0a569e32e473f6b5bfa14c74eeca1482820467",
+    "archiveUuid": "080FD5E7-F806-3676-9AFD-500ED91C421B",
+    "executableSha256": "284bac85c018ee1edb89c5656e57284770297baa8f8000ee8660a5deee8309c4",
+    "storekitFileCount": 0
+  },
+  "review": {
+    "submissionId": "7fd64b66-fe2e-424e-9038-a37cbddf8e87",
+    "submissionState": "COMPLETE",
+    "appleApprovalDate": "2026-09-24",
+    "appVersionItemState": "APPROVED",
+    "iapVersionItemState": "APPROVED"
+  },
+  "release": {
+    "productOwnerManualReleaseDate": "2026-09-24",
+    "productOwnerManualReleaseTime": null,
+    "applePublicLookupCurrentVersionReleaseDate": "2026-09-24T08:07:06Z",
+    "applePublicLookupCurrentVersionReleaseDateJst": "2026-09-24T17:07:06+09:00",
+    "applePublicLookupReleaseDate": "2026-09-24T07:00:00Z",
+    "applePublicLookupReleaseDateJst": "2026-09-24T16:00:00+09:00",
+    "publicStoreUrl": "https://apps.apple.com/jp/app/cuescore-apps/id6802027038"
+  },
+  "productOwnerEvidence": {
+    "observedAtApproxJst": "2026-09-25T16:37:00+09:00",
+    "file": "/Users/Ludique/Desktop/IMG_3733.PNG",
+    "pixelWidth": 1170,
+    "pixelHeight": 2532,
+    "sha256": "47e58c29b02c635072b02aa69ef8101834a14fc5cabf1998770f2c38e9da4ff5",
+    "observations": ["CueScore Apps", "ビリヤードの試合・履歴・分析", "TAKAAKI ISHIZUKA", "入手", "アプリ内購入", "public screenshots"]
+  },
+  "inAppPurchase": {
+    "id": "6808464490",
+    "name": "CueScore Pro",
+    "productId": "com.takaakimailboxstar.cuescoreapps.pro",
+    "type": "NON_CONSUMABLE",
+    "state": "APPROVED",
+    "availableTerritories": ["JPN"],
+    "availableInNewTerritories": false,
+    "currency": "JPY",
+    "customerPrice": "980"
+  },
+  "emptyDraft": {
+    "id": "ccca99c0-4ab6-4518-8133-58c51abe378e",
+    "state": "READY_FOR_REVIEW",
+    "submittedDate": null,
+    "itemCount": 0,
+    "releaseImpact": "NONE"
+  },
+  "boundaries": {
+    "productSourceChanged": false,
+    "build79Created": false,
+    "version11Created": false,
+    "archiveCreated": false,
+    "uploadPerformed": false,
+    "appStoreConnectMutationPerformed": false,
+    "deferredWorkStarted": false
+  }
+}

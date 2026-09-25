@@ -67,8 +67,8 @@ Use this reading order:
 - Formal version/build: `1.0 (78)`
 - Formal Product ID: `com.takaakimailboxstar.cuescoreapps.pro`
 - App Review: Version 1.0 and CueScore Pro approved; submission `COMPLETE`
-- App Version state: `PENDING_DEVELOPER_RELEASE`
+- App Version state: `READY_FOR_SALE` / `READY_FOR_DISTRIBUTION`
 - Release type: `MANUAL`
-- Public release: not performed
+- Public release: complete; Japan App Store availability confirmed by Product Owner on 2026-09-25
 
 These facts are summarized for workflow protection. Their detailed evidence remains in `docs/CURRENT_STATE.md` and `docs/implementation/CueScore_Local_StoreKit_Transaction_Test_Environment_2026-09-14.md`.
