@@ -3,12 +3,12 @@
 - Decision ID: `CUESCORE-V11-FINAL-RELEASE-AUDIT-20260927`
 - Date: 2026-09-27
 - Product Owner instruction: perform a read-only final audit before Manual Release of Version 1.1 / Build 79
-- Gate: `FINAL PRE-RELEASE AUDIT / STOP`
+- Gate: `READY FOR PRODUCT OWNER v1.1 MANUAL RELEASE / STOP`
 
 ## Audit boundary
 
 - Do not release, enable automatic release, create Build 80, archive, upload, or change metadata, screenshots, Privacy, CueScore Pro, price, availability, Version 1.0, or product source.
-- Read current App Store Connect values only. The Product Owner-provided notice says review is complete and eligible for distribution, but a fresh authenticated read-back is required before a release-ready conclusion.
+- Read current App Store Connect values only. Fresh authenticated read-back confirms Version 1.1 is Pending Developer Release; this Decision does not authorize Codex to release it.
 - Candidate identity to verify: Version `1.1`, Build `79`, Build ID `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`, Submission `ccca99c0-4ab6-4518-8133-58c51abe378e`, Bundle ID `com.takaakimailboxstar.cuescoreapps`, source commit `39e3071f898c7af8499abbfee6f0043307699f6f`.
 
 ## Scope retained from the approved implementation
@@ -31,5 +31,5 @@
 
 ## STOP
 
-- Current read-only access failed: API `401 NOT_AUTHORIZED`; browser session absent. Do not infer current state from historical Evidence.
-- Stop without Manual Release. The next action is to restore a valid read-only App Store Connect access path, then repeat the final audit.
+- The API credential remains unavailable for automation (`401 NOT_AUTHORIZED`), but the Product Owner's authenticated App Store Connect browser read-back shows Version 1.1 Pending Developer Release, Build 79 selected, the release button untouched, exact What's New, and six screenshots.
+- Stop without Manual Release. The next action belongs to the Product Owner: select the existing Version 1.1 release button without changing settings. Codex must perform a separate read-only post-release verification afterward.

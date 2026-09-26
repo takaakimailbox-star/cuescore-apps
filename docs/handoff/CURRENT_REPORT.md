@@ -3,12 +3,12 @@
 - App: CueScore Apps
 - Decision ID: `CUESCORE-V11-FINAL-RELEASE-AUDIT-20260927`
 - Date: 2026-09-27
-- Gate result: `NOT READY FOR PRODUCT OWNER v1.1 RELEASE / STOP`
+- Gate result: `READY FOR PRODUCT OWNER v1.1 MANUAL RELEASE / STOP`
 - Released Version / Build: `1.0 (78)` unchanged
 
 ## Result
 
-Product Owner-provided notice reports that Version 1.1 review completed and is eligible for distribution. The repository and historical Evidence align with Version 1.1 / Build 79, but the mandatory fresh App Store Connect read-back could not be performed: the configured API access returned `401 NOT_AUTHORIZED`, and the in-app browser had no authenticated session. Manual Release was not performed and this Gate is not release-ready.
+Product Owner-provided notice reports that Version 1.1 review completed and is eligible for distribution. A fresh authenticated App Store Connect browser read-back confirms Version 1.1 is `デベロッパによるリリース待ち` (Pending Developer Release), Build 79 is selected, and the enabled release button has not been activated. This Gate is ready for the Product Owner's Manual Release only.
 
 ## Evidence
 
@@ -26,7 +26,7 @@ Product Owner-provided notice reports that Version 1.1 review completed and is e
 - dry scratch、9番除外、中断復元、History／Backupはautomated PASSのみで、physical deviceでは`NOT VERIFIED`。
 - ASC Version 1.1 ID `33dfe87f-9b22-42b5-acff-ef52e3c6464e`、Build 79 ID `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`、release type `MANUAL`。
 - Review submission `ccca99c0-4ab6-4518-8133-58c51abe378e`: `WAITING_FOR_REVIEW`、submitted `2026-09-26T02:40:12.101Z`、Version 1.1のみ1 item、IAP itemなし。
-- These App Store Connect values are historical Evidence. Their current values, including approval state, Manual release setting, metadata/screenshots, Privacy, IAP, availability, and v1.0 public state, are `NOT VERIFIED` in this audit.
+- Current Version 1.1 state, selected Build 79, exact What's New, and six screenshots were freshly read. App Privacy UI, separate CueScore Pro / availability pages, and Version 1.0 page remain `NOT VERIFIED` in this resumed browser session; their committed API Evidence is consistent and no change action was performed.
 
 ## Files and boundary
 
@@ -36,4 +36,4 @@ Product Owner-provided notice reports that Version 1.1 review completed and is e
 - Build 79 source commit: `39e3071f898c7af8499abbfee6f0043307699f6f`、GitHub mainへpush済み。
 - Build 79 Archive／IPA／Upload／Internal TestFlight: 完了。
 - App Store Version 1.1 preparation／App Review submission are documented as complete. External TestFlight、公開Build 78、Release: 未操作。
-- Release、automatic release変更、External TestFlight、Build 80は未実施。次Gateは有効なread-only App Store Connectアクセス復旧後の最終監査。
+- Release、automatic release変更、External TestFlight、Build 80は未実施。次GateはProduct Owner Manual Release後のread-only public-release verification。
