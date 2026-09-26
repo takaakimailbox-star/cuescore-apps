@@ -34,7 +34,7 @@ test("SceneDelegate preserves the storyboard bridge and Capacitor URL forwarding
 
 test("SceneDelegate is compiled without changing release identity or device family", () => {
   assert.match(project, /SceneDelegate\.swift in Sources/);
-  assert.match(project, /CURRENT_PROJECT_VERSION = 78;/);
+  assert.match(project, /CURRENT_PROJECT_VERSION = 79;/);
   assert.match(project, /MARKETING_VERSION = 1\.0;/);
   assert.match(project, /IPHONEOS_DEPLOYMENT_TARGET = 15\.0;/);
   assert.match(project, /TARGETED_DEVICE_FAMILY = 1;/);
