@@ -1,18 +1,17 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-V11-APP-REVIEW-SUBMISSION-20260926`
-- Date: 2026-09-26
-- Product Owner instruction: submit App Store Version 1.1 with Build 79 to App Review and stop after `WAITING_FOR_REVIEW` confirmation
-- Gate: `APP REVIEW SUBMITTED — WAITING FOR REVIEW / STOP`
+- Decision ID: `CUESCORE-V11-FINAL-RELEASE-AUDIT-20260927`
+- Date: 2026-09-27
+- Product Owner instruction: perform a read-only final audit before Manual Release of Version 1.1 / Build 79
+- Gate: `FINAL PRE-RELEASE AUDIT / STOP`
 
-## App Review submission
+## Audit boundary
 
-- App Store Version `1.1` created and Build `79` selected; exact Build ID is `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`.
-- Release type is `MANUAL`; App and CueScore Pro remain JPN only with `availableInNewTerritories=false`.
-- Japanese What's New is limited to JPA Dead cumulative display and break-scratch Dead visual unification. Approved Version 1.0 metadata and six screenshots are inherited unchanged.
-- Submission `ccca99c0-4ab6-4518-8133-58c51abe378e` was submitted at `2026-09-26T02:40:12.101Z`. Parent submission and App Version 1.1 are `WAITING_FOR_REVIEW`; submitted scope is Version 1.1 only. Approved CueScore Pro was not re-added.
+- Do not release, enable automatic release, create Build 80, archive, upload, or change metadata, screenshots, Privacy, CueScore Pro, price, availability, Version 1.0, or product source.
+- Read current App Store Connect values only. The Product Owner-provided notice says review is complete and eligible for distribution, but a fresh authenticated read-back is required before a release-ready conclusion.
+- Candidate identity to verify: Version `1.1`, Build `79`, Build ID `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`, Submission `ccca99c0-4ab6-4518-8133-58c51abe378e`, Bundle ID `com.takaakimailboxstar.cuescoreapps`, source commit `39e3071f898c7af8499abbfee6f0043307699f6f`.
 
-## Implemented behavior
+## Scope retained from the approved implementation
 
 - JPA 9-Ballだけ、ゲーム中に`ラック ｜ イニング ｜ デッド`を常時表示する。
 - 通常`ball_dead`とbreak foul／scratchの`break_result.data.deadBalls`から1〜8番を試合累計し、Foul／scratch flag自体、dry scratch、9番は数えない。
@@ -21,7 +20,7 @@
 - `DEAD`label、badge、×印、新しいopacity／filter／色／サイズ、履歴順序／spacing変更は追加しない。
 - 他5競技、Analytics式、JPA SL／Race／得点、Player／History／Backup schemaを変更しない。
 
-## Verification and packaging
+## Existing verification and packaging
 
 - Dedicated Dead scenarios: `16 pass / 0 fail / 0 skipped`（Node entry `17/17`）。
 - Combined focused: `64 pass / 0 fail / 0 skipped`。
@@ -30,11 +29,7 @@
 - 390×844 visual: PASS。summary Dead 4、history `state="used"` 4球、横overflowなし。
 - Archive: `com.takaakimailboxstar.cuescoreapps` / `1.1 (79)`、UUID `080FD5E7-F806-3676-9AFD-500ED91C421B`、`.storekit` 0件。
 
-## Boundary / STOP
+## STOP
 
-- Product Owner physical iPhone: Version、cold launch／Home、JPA Dead summary、normal Dead、break scratch Dead visual／count、Undo history／countをALL PASS。
-- dry scratch、9番除外、中断復元、History／Backupはautomated Evidenceのみ。physical iPhone PASSへ拡張しない。screenshot Evidenceなし。
-- Build 79 source commit／push、Test、Archive、IPA export、Apple validation、Upload、Internal TestFlight、Product Owner verificationまで完了。
-- Build ID `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`は`VALID`／`APP_STORE_ELIGIBLE`／internal `IN_BETA_TESTING`を維持。
-- 公開済みVersion 1.0 Build 78は変更しない。
-- App Review submission is complete. External TestFlight、Release、automatic release変更、Build 80は実施しない。次GateはApple review result。
+- Current read-only access failed: API `401 NOT_AUTHORIZED`; browser session absent. Do not infer current state from historical Evidence.
+- Stop without Manual Release. The next action is to restore a valid read-only App Store Connect access path, then repeat the final audit.

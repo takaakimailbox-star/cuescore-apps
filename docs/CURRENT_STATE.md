@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## Version 1.1 Final Pre-Release Audit（2026年9月27日）
+
+- Gate: `NOT READY FOR PRODUCT OWNER v1.1 RELEASE`。Product Owner提供通知の文面はApp Review完了・配信可能と一致するが、公開直前に必須のApp Store Connect現在値read-backを完了できなかった。
+- API read-only accessは`401 NOT_AUTHORIZED`、in-app browserは既存認証sessionなしで`authResult=FAILED`。秘密情報は出力していない。したがってSubmission、Version 1.1／Build 79 relationship、Manual release、metadata／screenshots、Privacy、CueScore Pro、availability、公開Version 1.0の**現在値**は`NOT VERIFIED`であり、履歴Evidenceから推測して公開可としない。
+- Repository main `1170ca587f48e684bedfd40badf7f9812c65cb5e`とOfficial Decision 99／Spec 100、Build 79・Product Owner physical iPhone・v1.1 submission Evidenceを確認。Build 79 source commit `39e3071f898c7af8499abbfee6f0043307699f6f`以後のmain差分はdocumentation／Evidenceのみで、製品source追加変更は0件。
+- Release、automatic release変更、Build 80、Archive／Upload、metadata／screenshots／Privacy／IAP／price／availability、公開Version 1.0操作は実施していない。次Gateは正しいread-only App Store Connect認証復旧後の再監査。Evidence: `docs/release/CueScore_v1.1_Final_PreRelease_Audit_2026-09-27.md`。
+
 ## Version 1.1 App Review Submission（2026年9月26日）
 
 - Gate: `APP REVIEW SUBMITTED — WAITING FOR REVIEW`。Product Owner承認後、Version `1.1`／Build `79`をreview submission `ccca99c0-4ab6-4518-8133-58c51abe378e`でApp Reviewへ提出した。
