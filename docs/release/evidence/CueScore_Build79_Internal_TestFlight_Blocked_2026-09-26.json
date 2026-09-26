@@ -1,0 +1,51 @@
+{
+  "app": "CueScore Apps",
+  "date": "2026-09-26",
+  "gate": "BLOCKED — VERSION 1.0 PRE-RELEASE TRAIN CLOSED",
+  "candidate": {
+    "bundleId": "com.takaakimailboxstar.cuescoreapps",
+    "version": "1.0",
+    "build": "79",
+    "sourceCommit": "a66293a8082498ae28f0d8a96d80d302cca91639",
+    "archiveUuid": "080FD5E7-F806-3676-9AFD-500ED91C421B",
+    "executableSha256": "a109268c93ecf132d3e50c72ebfd729fe4f584611c206012ed76214d1453fa2b",
+    "ipaSha256": "1845dd7d084038ca42e0de781d982ed588ffc5e7d93959a701af898bf4c38351",
+    "storekitFileCount": 0
+  },
+  "tests": {
+    "deadDedicated": { "pass": 16, "fail": 0, "skipped": 0 },
+    "focused": { "pass": 59, "fail": 0, "skipped": 0 },
+    "fullNode": { "pass": 459, "fail": 0, "skipped": 0 },
+    "releaseSimulatorBuild": "PASS",
+    "deviceArchive": "PASS",
+    "ipaExport": "PASS",
+    "diffCheck": "PASS"
+  },
+  "dependencies": {
+    "packageResolvedSha256": "1e68bbcd65eea223108220becced97a2d9eb05c79aaaa88e6f879078b8a6a0aa",
+    "ionIosFilesystem": { "version": "1.1.2", "revision": "0d81e26e828ff9582807e2339112cedf2e0fab85" },
+    "capacitorSwiftPm": { "version": "8.0.2", "revision": "13a39179b3df796f3bb2e70c47ccdd92593f34d2" }
+  },
+  "appleValidation": {
+    "result": "FAIL",
+    "errors": [
+      { "code": 90186, "summary": "Invalid Pre-Release Train; version 1.0 is closed for new build submissions" },
+      { "code": 90062, "summary": "CFBundleShortVersionString must be higher than previously approved version 1.0" }
+    ]
+  },
+  "appStoreConnectReadback": {
+    "checkedAt": "2026-09-26T01:15:57.318Z",
+    "build79Count": 0,
+    "build79Id": null,
+    "internalTestFlight": "NOT_DISTRIBUTED",
+    "publicVersion": { "version": "1.0", "state": "READY_FOR_SALE", "versionState": "READY_FOR_DISTRIBUTION" },
+    "publicBuild": { "build": "78", "id": "eb2f6582-c42b-444d-9755-218e5e03ff49", "processingState": "VALID", "audience": "APP_STORE_ELIGIBLE" }
+  },
+  "boundary": {
+    "publicBuild78Changed": false,
+    "version11Created": false,
+    "appReviewSubmitted": false,
+    "releasePerformed": false,
+    "metadataChanged": false
+  }
+}

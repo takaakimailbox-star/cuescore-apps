@@ -1,9 +1,9 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-JPA9-DEAD-BALL-UI-IMPLEMENTATION-20260926`
+- Decision ID: `CUESCORE-BUILD79-INTERNAL-TESTFLIGHT-BLOCKED-20260926`
 - Date: 2026-09-26
-- Product Owner instruction: implement the approved JPA 9-Ball cumulative Dead Ball UI without a new Dead visual or schema
-- Gate: `IMPLEMENTATION COMPLETE / PRODUCT OWNER ACCEPTED / UNRELEASED / STOP`
+- Product Owner instruction: distribute the accepted JPA 9-Ball Dead Ball UI as Build 79 to Internal TestFlight without creating Version 1.1
+- Gate: `BLOCKED — VERSION 1.0 PRE-RELEASE TRAIN CLOSED / STOP`
 
 ## Implemented behavior
 
@@ -14,17 +14,19 @@
 - `DEAD`label、badge、×印、新しいopacity／filter／色／サイズ、履歴順序／spacing変更は追加しない。
 - 他5競技、Analytics式、JPA SL／Race／得点、Player／History／Backup schemaを変更しない。
 
-## Verification
+## Verification and packaging
 
 - Dedicated Dead: `16 pass / 0 fail / 0 skipped`。
-- Combined focused: `58 pass / 0 fail / 0 skipped`。
+- Combined focused: `59 pass / 0 fail / 0 skipped`。
 - Full Node: `459 pass / 0 fail / 0 skipped`。
-- Release Simulator build: PASS with the fixed Build 78 dependency identity。
+- Release Simulator build、device Archive、App Store IPA export: PASS with the fixed dependency identity。
 - 390×844 visual: PASS。summary Dead 4、history `state="used"` 4球、横overflowなし。
+- Archive: `com.takaakimailboxstar.cuescoreapps` / `1.0 (79)`、UUID `080FD5E7-F806-3676-9AFD-500ED91C421B`、`.storekit` 0件。
 
 ## Boundary / STOP
 
-- Implementation、Test、Evidence、Product Owner Acceptance、commit／pushまで完了してSTOP。
-- 実装は未配布。次Gateは将来Buildへの収載判断。
-- Build番号は78のまま。Build 79、Archive、TestFlight、App Store Connect、Version 1.1は開始しない。
+- Build 79 source commit／push、Test、Archive、IPA exportまで完了。
+- Apple validationは`90186 Invalid Pre-Release Train`／`90062 higher version required`。公開済みVersion 1.0へ新BuildはUploadできない。
+- Build 79 ASC recordは0件、Internal TestFlight未配布。Version 1.1は指示どおり作成せずSTOP。
 - 公開済みVersion 1.0 Build 78は変更しない。
+- 次Gateは、より高いmarketing versionでInternal TestFlight候補を作成するProduct Owner Decision。

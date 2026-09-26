@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Build 79 Internal TestFlight Gate — Upload BLOCKED（2026年9月26日）
+
+- Gate: `BLOCKED — VERSION 1.0 PRE-RELEASE TRAIN CLOSED`。Product Owner承認済みJPA 9-Ball Dead Ball UIをBuild 79へ固定し、Pre-Archive Gate、Release Simulator Build、device Archive、App Store用IPA exportまでPASSしたが、Apple validationは`90186 Invalid Pre-Release Train`と`90062 CFBundleShortVersionString must contain a higher version than the previously approved version 1.0`を返した。
+- Build 79 source commitは`a66293a8082498ae28f0d8a96d80d302cca91639`。Bundle ID `com.takaakimailboxstar.cuescoreapps`、Version `1.0`、Build `79`。Archive UUID `080FD5E7-F806-3676-9AFD-500ED91C421B`、executable SHA-256 `a109268c93ecf132d3e50c72ebfd729fe4f584611c206012ed76214d1453fa2b`、`.storekit` 0件。
+- Dedicated Dead `16/16`、JPA／Undo／中断復元／History／Backup focused `59/59`、全Node `459/459`、Release Simulator Build、device Archive、IPA export、`git diff --check`はPASS。製品test FAILは0件。
+- Appleの公開後version ruleにより、公開済みVersion 1.0へ新しいBuild 79をUploadできない。指示境界に従いVersion 1.1等へ変更せずSTOPしたため、Build 79のApp Store Connect Build IDは存在せず、Internal TestFlight未配布、Product Owner実機確認未実施。
+- App Store Connect read-backではBuild 79は0件。公開Version 1.0は`READY_FOR_SALE`／`READY_FOR_DISTRIBUTION`、選択Build 78は`VALID`／`APP_STORE_ELIGIBLE`、Internal `IN_BETA_TESTING`のまま。公開Build 78、App Review、metadata、IAP、価格、availability、Releaseへ変更0件。
+- 次Gateには、より高い`CFBundleShortVersionString`を持つ配布候補（例：Version 1.1）を作成するProduct Owner Decisionが必要。新App Store Version作成やApp Review提出はInternal TestFlight upload自体の前提ではないが、このtaskではVersion変更が明示禁止のため実施していない。Evidence: `docs/implementation/CueScore_Build79_JPA_Dead_Ball_Internal_TestFlight_2026-09-26.md`。
+
 ## JPA 9-Ball Dead Ball UI（2026年9月26日）
 
 - Gate: `採用済み / Prototype PASS / Implementation Complete / Product Owner Accepted / 未配布`。Product Ownerは修正版Prototypeと、Test・Build・VisualをPASSしたImplementationを承認した。JPA 9-Ballのゲーム中画面へ試合累計`デッド`表示を実装済み。
@@ -9,7 +18,7 @@
 - break scratch／break foul同時入球を1〜8番だけDeadへ変換し、9番を明示的に除外した。live historyとMatch Detailは通常Deadを含む全Deadを共通`state="used"`rendererへ通し、文字label、新visual、順序／spacing変更は行っていない。
 - Dedicated `16/16`、focused `58/58`、全Node `459/459`、Release Simulator BuildをPASS。390×844で`ラック 2 ｜ イニング 3 ｜ デッド 4`、既存Dead visual統一、横overflowなしを確認した。
 - Official: `docs/official/99_CueScore_JPA9_Dead_Ball_UI_Decision.md`、`docs/official/100_CueScore_JPA9_Dead_Ball_UI_Spec.md`。Implementation Evidence: `docs/implementation/CueScore_JPA9_Dead_Ball_UI_Implementation_2026-09-26.md`。
-- Build番号は78のまま。Build 79、新Archive、TestFlight、App Store Connect、Version 1.1は開始していない。公開済みv1.0 release closeは下記履歴として維持する。
+- Build 79 source／Archiveは作成済みだが、Version 1.0 train closedのためUpload前validationでBLOCKED。Internal TestFlightは未配布。公開済みv1.0 release closeは下記履歴として維持する。
 
 ## v1.0 Public Release Complete（2026年9月25日）
 

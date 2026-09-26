@@ -125,6 +125,7 @@ JPA 9-Ball Dead Ball UI implementation evidence:
 
 - `implementation/CueScore_JPA9_Dead_Ball_UI_Prototype_2026-09-25.md`
 - `implementation/CueScore_JPA9_Dead_Ball_UI_Implementation_2026-09-26.md`
+- `implementation/CueScore_Build79_JPA_Dead_Ball_Internal_TestFlight_2026-09-26.md` (`BLOCKED`: released Version 1.0 train closed)
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and
