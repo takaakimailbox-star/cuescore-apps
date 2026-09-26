@@ -1,9 +1,9 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-BUILD79-V1.1-INTERNAL-TESTFLIGHT-20260926`
+- Decision ID: `CUESCORE-BUILD79-PO-ACCEPTANCE-20260926`
 - Date: 2026-09-26
-- Product Owner instruction: retry the accepted JPA 9-Ball Dead Ball UI as Marketing Version 1.1 Build 79 for Internal TestFlight only
-- Gate: `READY FOR PRODUCT OWNER BUILD 79 INTERNAL TESTFLIGHT REVIEW / STOP`
+- Product Owner instruction: close the Version 1.1 Build 79 Internal TestFlight Gate after physical iPhone ALL PASS
+- Gate: `PRODUCT OWNER ACCEPTED — INTERNAL TESTFLIGHT PASS / STOP`
 
 ## Implemented behavior
 
@@ -25,8 +25,9 @@
 
 ## Boundary / STOP
 
-- Build 79 source commit／push、Test、Archive、IPA export、Apple validation、Uploadまで完了。
-- Version 1.1 validationはerror 0。旧`90186`／`90062`は解消。
-- Build ID `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`は`VALID`／`APP_STORE_ELIGIBLE`／internal `IN_BETA_TESTING`。
+- Product Owner physical iPhone: Version、cold launch／Home、JPA Dead summary、normal Dead、break scratch Dead visual／count、Undo history／countをALL PASS。
+- dry scratch、9番除外、中断復元、History／Backupはautomated Evidenceのみ。physical iPhone PASSへ拡張しない。screenshot Evidenceなし。
+- Build 79 source commit／push、Test、Archive、IPA export、Apple validation、Upload、Internal TestFlight、Product Owner verificationまで完了。
+- Build ID `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`は`VALID`／`APP_STORE_ELIGIBLE`／internal `IN_BETA_TESTING`を維持。
 - 公開済みVersion 1.0 Build 78は変更しない。
-- App Store Version 1.1、App Review、External TestFlight、Releaseは開始しない。次GateはProduct Owner実機確認。
+- App Store Version 1.1、App Review、External TestFlight、Release、Build 80は開始しない。次GateはApp Store Updateに関する別Product Owner Decision。

@@ -1,7 +1,7 @@
 # CueScore Version 1.1 Build 79 Internal TestFlight Evidence
 
 - Date: 2026-09-26 JST
-- Gate result: `READY FOR PRODUCT OWNER BUILD 79 INTERNAL TESTFLIGHT REVIEW`
+- Gate result: `PRODUCT OWNER ACCEPTED — INTERNAL TESTFLIGHT PASS`
 - Source commit: `39e3071f898c7af8499abbfee6f0043307699f6f`
 - App Store Connect Build ID / Delivery UUID: `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`
 - Public production: Version 1.0 / Build 78 unchanged
@@ -64,4 +64,4 @@ At `2026-09-26T01:32:35.912Z` App Store Connect API returned:
 
 ## Product Owner device gate
 
-Product Owner device results are pending. Check TestFlight `1.1 (79)`, cold launch, initial Dead 0, normal Dead +1, break scratch plus ball 3 visual/count, Undo, dry scratch, and—when safely reproducible—9 ball plus scratch/foul exclusion. Do not record PASS until the physical-device review is completed.
+Product Owner completed the physical iPhone review on 2026-09-26 with `ALL PASS / ALL OK` for Version `1.1 (79)`, cold launch／Home, JPA Dead summary, normal Dead cumulative update, break scratch Dead history／existing visual／cumulative update, and Undo history／cumulative restore. No screenshot was supplied. dry scratch, 9 ball exclusion, in-progress recovery, History, and Backup remain automated Evidence only and are not recorded as physical-device PASS. See `CueScore_Build79_Product_Owner_Physical_iPhone_Acceptance_2026-09-26.md`.

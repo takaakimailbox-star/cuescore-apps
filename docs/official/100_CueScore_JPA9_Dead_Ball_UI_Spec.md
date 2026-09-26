@@ -1,9 +1,9 @@
 # CueScore JPA 9-Ball Dead Ball UI Specification
 
-**Status:** Adopted / Prototype PASS / Implementation Complete / Product Owner Accepted / Undistributed
+**Status:** Adopted / Prototype PASS / Implementation Complete / Build 79 Internal TestFlight / Product Owner Accepted
 **Decision:** `99_CueScore_JPA9_Dead_Ball_UI_Decision.md`
 **Publication date:** 2026-09-25
-**Implementation status:** Complete and Product Owner accepted; not included in a new distributed Build
+**Implementation status:** Complete; Version 1.1 Build 79 Internal TestFlight and Product Owner physical iPhone verification PASS; App Store update not started
 
 **Final Product Owner correction:** 2026-09-26 — 新規Dead visualを不採用。現行通常Dead球の既存`state="used"`表示をそのまま使用。
 
@@ -114,4 +114,4 @@ JPA 9-Ballのlive historyと保存済みMatch Detail historyで、Dead Ballの�
 - 他5競技へDead UIまたは用語が現れない。
 - Analyticsの既存値と保存schemaに変更がない。
 
-2026-09-26、上記acceptanceをfocused test、全Node regression、Release Simulator build、390×844 visual auditでPASSし、Product OwnerがImplementationを受け入れた。Implementation Evidenceは`docs/implementation/CueScore_JPA9_Dead_Ball_UI_Implementation_2026-09-26.md`を正本とする。実装は未配布であり、Build番号更新、Archive、TestFlight、App Store Connect操作は行っていない。
+2026-09-26、上記acceptanceをfocused test、全Node regression、Release Simulator build、390×844 visual auditでPASSし、Product OwnerがImplementationを受け入れた。Version 1.1 Build 79をInternal TestFlightへ配布し、Product Owner physical iPhoneでVersion、cold launch／Home、JPA開始時Dead summary、normal Dead、break scratch Dead history／既存visual／累計、Undo history／累計を`ALL PASS`とした。dry scratch、9番除外、中断復元、History／Backupはautomated EvidenceでPASSしているが、このphysical device確認には含めない。Implementation Evidenceは`docs/implementation/CueScore_JPA9_Dead_Ball_UI_Implementation_2026-09-26.md`、physical acceptanceは`docs/implementation/CueScore_Build79_Product_Owner_Physical_iPhone_Acceptance_2026-09-26.md`を正本とする。App Store Version 1.1 updateは未開始。

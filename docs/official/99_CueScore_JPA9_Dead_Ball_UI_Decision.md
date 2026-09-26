@@ -1,9 +1,9 @@
 # CueScore JPA 9-Ball Dead Ball UI Decision
 
-**Status:** Adopted / Prototype PASS / Implementation Complete / Product Owner Accepted / Undistributed
+**Status:** Adopted / Prototype PASS / Implementation Complete / Build 79 Internal TestFlight / Product Owner Accepted
 **Decision date:** 2026-09-25
 **Approved by:** Product Owner
-**Release boundary:** Version 1.0 Build 78 remains unchanged
+**Release boundary:** Version 1.0 Build 78 remains unchanged; App Store Version 1.1 update not started
 
 **Final Product Owner correction:** 2026-09-26 — 新しいDead visualは設計せず、現行製品の通常Dead球表示を全Dead Ballへそのまま統一適用する。
 
@@ -48,4 +48,4 @@ Undo、中断試合保存／復元、Match History、Backup／Restoreでは既�
 
 ## Gate
 
-Product Ownerは修正版390×844 Prototypeを承認し、Prototype Gateを`PASS — READY FOR IMPLEMENTATION`とした。2026-09-26に本Decisionの範囲で製品実装、focused／全Node regression、Release Simulator build、390×844 visual auditを完了し、Product OwnerがImplementationを受け入れた。実装は未配布であり、次Gateは将来Buildへの収載判断とする。公開済みVersion 1.0 Build 78は変更しない。
+Product Ownerは修正版390×844 Prototypeを承認し、Prototype Gateを`PASS — READY FOR IMPLEMENTATION`とした。2026-09-26に本Decisionの範囲で製品実装、focused／全Node regression、Release Simulator build、390×844 visual auditを完了し、Product OwnerがImplementationを受け入れた。その後Version 1.1 Build 79をInternal TestFlightへ配布し、Product Ownerがphysical iPhoneでVersion、cold launch／Home、JPA Dead summary、normal Dead、break scratch Dead history／既存visual／累計、Undo history／累計を`ALL PASS`とした。App Store Version 1.1 updateは未開始であり、公開済みVersion 1.0 Build 78は変更しない。
