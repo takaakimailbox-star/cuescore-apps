@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## Version 1.1 Public Release Verification（2026年9月27日）
+
+- Gate: `v1.1 MANUAL RELEASE COMPLETE — POST-RELEASE VERIFICATION PASS`。Product OwnerがManual Releaseを実施後、認証済みApp Store Connect read-backでVersion `1.1`は`配信準備完了`（Ready for Distribution）、Build `1.1 (79)`は選択維持を確認した。
+- 日本App Store公開ページは到達可能で、CueScore Apps、承認済みSubtitle、スクリーンショット、アプリ内購入、App Privacyの`データの収集なし`を確認。公開ページ上ではVersion 1.1文字列自体が表示されなかったため、公開ページのversion-number propagationは`NOT VERIFIED`とする。App Store Connectの配信準備完了をrelease-stateの正本とする。
+- CodexはRelease、設定変更、Build 80、Archive／Upload、metadata／screenshots／Privacy／IAP／price／availability、公開Version 1.0操作を行っていない。Evidence: `docs/release/CueScore_v1.1_Public_Release_Verification_2026-09-27.md`。
+
 ## Version 1.1 Final Pre-Release Audit（2026年9月27日）
 
 - Gate: `READY FOR PRODUCT OWNER v1.1 MANUAL RELEASE`。Product Owner提供通知の文面と、認証済みApp Store Connect Browserのread-backが一致した。Version `1.1`は`デベロッパによるリリース待ち`（Pending Developer Release）で、Release buttonはenabledだが未操作。Build `1.1 (79)`が選択され、binary statusはverified。

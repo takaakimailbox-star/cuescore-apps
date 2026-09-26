@@ -3,12 +3,12 @@
 - Decision ID: `CUESCORE-V11-FINAL-RELEASE-AUDIT-20260927`
 - Date: 2026-09-27
 - Product Owner instruction: perform a read-only final audit before Manual Release of Version 1.1 / Build 79
-- Gate: `READY FOR PRODUCT OWNER v1.1 MANUAL RELEASE / STOP`
+- Gate: `v1.1 MANUAL RELEASE COMPLETE / POST-RELEASE VERIFICATION PASS / STOP`
 
 ## Audit boundary
 
 - Do not release, enable automatic release, create Build 80, archive, upload, or change metadata, screenshots, Privacy, CueScore Pro, price, availability, Version 1.0, or product source.
-- Read current App Store Connect values only. Fresh authenticated read-back confirms Version 1.1 is Pending Developer Release; this Decision does not authorize Codex to release it.
+- Read current App Store Connect values only. The Product Owner completed the Manual Release; post-release verification is complete.
 - Candidate identity to verify: Version `1.1`, Build `79`, Build ID `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`, Submission `ccca99c0-4ab6-4518-8133-58c51abe378e`, Bundle ID `com.takaakimailboxstar.cuescoreapps`, source commit `39e3071f898c7af8499abbfee6f0043307699f6f`.
 
 ## Scope retained from the approved implementation
@@ -31,5 +31,5 @@
 
 ## STOP
 
-- The API credential remains unavailable for automation (`401 NOT_AUTHORIZED`), but the Product Owner's authenticated App Store Connect browser read-back shows Version 1.1 Pending Developer Release, Build 79 selected, the release button untouched, exact What's New, and six screenshots.
-- Stop without Manual Release. The next action belongs to the Product Owner: select the existing Version 1.1 release button without changing settings. Codex must perform a separate read-only post-release verification afterward.
+- Authenticated App Store Connect browser read-back shows Version 1.1 `配信準備完了` (Ready for Distribution), with Build 79 retained. The public Japan App Store page is reachable and shows the approved public identity, screenshots, In-App Purchase presence, and no-data-collected Privacy disclosure.
+- Stop. No further release, metadata, build, product, or App Store Connect action is authorized in this Gate.
