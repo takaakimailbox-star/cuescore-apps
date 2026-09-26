@@ -129,6 +129,11 @@ JPA 9-Ball Dead Ball UI implementation evidence:
 - `implementation/CueScore_Build79_v1.1_JPA_Dead_Ball_Internal_TestFlight_2026-09-26.md` (`IN_BETA_TESTING`)
 - `implementation/CueScore_Build79_Product_Owner_Physical_iPhone_Acceptance_2026-09-26.md` (`ALL PASS`)
 
+Version 1.1 App Store submission preparation evidence:
+
+- `release/CueScore_v1.1_App_Store_Submission_Preparation_2026-09-26.md` (`READY FOR PRODUCT OWNER APP REVIEW SUBMISSION`; not submitted)
+- `release/evidence/CueScore_v1.1_App_Store_Submission_Preparation_2026-09-26.json`
+
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and
 this index is updated.

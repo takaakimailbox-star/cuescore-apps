@@ -1,9 +1,16 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-BUILD79-PO-ACCEPTANCE-20260926`
+- Decision ID: `CUESCORE-V11-APP-STORE-SUBMISSION-PREPARATION-20260926`
 - Date: 2026-09-26
-- Product Owner instruction: close the Version 1.1 Build 79 Internal TestFlight Gate after physical iPhone ALL PASS
-- Gate: `PRODUCT OWNER ACCEPTED — INTERNAL TESTFLIGHT PASS / STOP`
+- Product Owner instruction: prepare App Store Version 1.1 with Build 79 and stop immediately before App Review submission
+- Gate: `READY FOR PRODUCT OWNER APP REVIEW SUBMISSION / STOP`
+
+## App Store preparation
+
+- App Store Version `1.1` created and Build `79` selected; exact Build ID is `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`.
+- Release type is `MANUAL`; App and CueScore Pro remain JPN only with `availableInNewTerritories=false`.
+- Japanese What's New is limited to JPA Dead cumulative display and break-scratch Dead visual unification. Approved Version 1.0 metadata and six screenshots are inherited unchanged.
+- Review draft `ccca99c0-4ab6-4518-8133-58c51abe378e` contains one `READY_FOR_REVIEW` item: iOS App Version 1.1. It is not submitted. Approved CueScore Pro is not re-added.
 
 ## Implemented behavior
 
@@ -30,4 +37,4 @@
 - Build 79 source commit／push、Test、Archive、IPA export、Apple validation、Upload、Internal TestFlight、Product Owner verificationまで完了。
 - Build ID `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`は`VALID`／`APP_STORE_ELIGIBLE`／internal `IN_BETA_TESTING`を維持。
 - 公開済みVersion 1.0 Build 78は変更しない。
-- App Store Version 1.1、App Review、External TestFlight、Release、Build 80は開始しない。次GateはApp Store Updateに関する別Product Owner Decision。
+- App Store Version 1.1 preparation is complete. `Submit for Review`、App Review submission、External TestFlight、Release、Build 80は実施しない。次GateはProduct Ownerによる提出承認。

@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## Version 1.1 App Store Submission Preparation（2026年9月26日）
+
+- Gate: `READY FOR PRODUCT OWNER APP REVIEW SUBMISSION`。App Store ConnectにVersion `1.1`（ID `33dfe87f-9b22-42b5-acff-ef52e3c6464e`）を作成し、Product Owner Accepted済みBuild `79`（ID `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`、`VALID`／`APP_STORE_ELIGIBLE`）を選択した。
+- Release typeは`MANUAL`。App／CueScore ProはJPNのみ、双方`availableInNewTerritories=false`。CueScore Proは既存`APPROVED`の`NON_CONSUMABLE`／`JPY 980`を維持し、Version 1.1 submissionへ再追加していない。
+- What's NewはJPA 9-BallのDead累計表示とbreak scratch時等のDead表示統一だけを記載。Version 1.0承認済みmetadataを継承し、description／keywords／Support URL／promotional text一致、iPhone 6.5-inch screenshots 6件すべて`COMPLETE`をread-backした。
+- 既知の空draft `ccca99c0-4ab6-4518-8133-58c51abe378e`を重複draft作成なしで使用。現在`READY_FOR_REVIEW`／submitted dateなし／item 1件（Version 1.1のみ、IAP 0件）。Versionとitemは`READY_FOR_REVIEW`でblocking required-field error 0件。
+- 現在状態: `Version 1.1 / Build 79 — READY FOR PRODUCT OWNER APP REVIEW SUBMISSION`。`Submit for Review`、App Review、Release、External TestFlight、Build 80、Archive／Upload、製品source／IAP／price／availability変更は未実施。Evidence: `docs/release/CueScore_v1.1_App_Store_Submission_Preparation_2026-09-26.md`。
+
 ## Build 79 Product Owner Acceptance（2026年9月26日）
 
 - Gate: `PRODUCT OWNER ACCEPTED — INTERNAL TESTFLIGHT PASS`。Product Ownerがphysical iPhoneでVersion `1.1 (79)`を確認し、総合判定`ALL PASS / ALL OK`とした。

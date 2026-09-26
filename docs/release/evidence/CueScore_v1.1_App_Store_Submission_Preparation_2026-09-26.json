@@ -1,0 +1,102 @@
+{
+  "app": "CueScore Apps",
+  "date": "2026-09-26",
+  "gate": "READY FOR PRODUCT OWNER APP REVIEW SUBMISSION",
+  "auditCheckedAt": "2026-09-26T02:25:08.202Z",
+  "appStoreVersion": {
+    "id": "33dfe87f-9b22-42b5-acff-ef52e3c6464e",
+    "version": "1.1",
+    "state": "READY_FOR_REVIEW",
+    "releaseType": "MANUAL",
+    "createdDate": "2026-09-25T19:21:18-07:00"
+  },
+  "build": {
+    "number": "79",
+    "id": "0b61e6fe-14b6-452a-bc2e-a6b2b02524d2",
+    "bundleId": "com.takaakimailboxstar.cuescoreapps",
+    "sourceCommit": "39e3071f898c7af8499abbfee6f0043307699f6f",
+    "processingState": "VALID",
+    "audience": "APP_STORE_ELIGIBLE",
+    "usesNonExemptEncryption": false,
+    "internalTestFlightState": "IN_BETA_TESTING"
+  },
+  "whatsNewJa": "JPA 9-Ballの試合入力を改善しました。\n・試合中にデッドボールの累計数を確認できるようになりました。\n・ブレイクスクラッチ時などのデッドボール表示を統一しました。",
+  "metadata": {
+    "descriptionMatchesVersion10": true,
+    "keywordsMatchVersion10": true,
+    "supportUrlMatchesVersion10": true,
+    "promotionalTextMatchesVersion10": true,
+    "appNameUnchanged": true,
+    "subtitleUnchanged": true,
+    "categoriesUnchanged": true,
+    "ageRatingUnchanged": true,
+    "screenshots": {
+      "displayType": "APP_IPHONE_65",
+      "count": 6,
+      "complete": 6,
+      "changed": false
+    }
+  },
+  "publicUrls": {
+    "support": "https://takaakimailbox-star.github.io/cuescore-apps/support.html",
+    "privacy": "https://takaakimailbox-star.github.io/cuescore-apps/privacy.html",
+    "terms": "https://takaakimailbox-star.github.io/cuescore-apps/terms.html",
+    "httpStatus": { "support": 200, "privacy": 200, "terms": 200 },
+    "publicJapanStorePrivacy": "DATA_NOT_COLLECTED",
+    "directAuthenticatedAppPrivacyUi": "NOT_VERIFIED"
+  },
+  "availability": {
+    "appTerritories": ["JPN"],
+    "appAvailableInNewTerritories": false,
+    "iapTerritories": ["JPN"],
+    "iapAvailableInNewTerritories": false
+  },
+  "iap": {
+    "id": "6808464490",
+    "name": "CueScore Pro",
+    "productId": "com.takaakimailboxstar.cuescoreapps.pro",
+    "type": "NON_CONSUMABLE",
+    "state": "APPROVED",
+    "currency": "JPY",
+    "price": 980,
+    "addedToSubmission": false,
+    "changed": false
+  },
+  "reviewSubmission": {
+    "id": "ccca99c0-4ab6-4518-8133-58c51abe378e",
+    "state": "READY_FOR_REVIEW",
+    "submittedDate": null,
+    "itemCount": 1,
+    "items": [
+      {
+        "id": "Y2NjYTk5YzAtNGFiNi00NTE4LTgxMzMtNThjNTFhYmUzNzhlfDZ8ODkyMDI1MzQw",
+        "type": "APP_STORE_VERSION",
+        "appStoreVersionId": "33dfe87f-9b22-42b5-acff-ef52e3c6464e",
+        "state": "READY_FOR_REVIEW"
+      }
+    ],
+    "submitted": false
+  },
+  "existingVerification": {
+    "deadDedicated": { "pass": 16, "fail": 0, "skipped": 0 },
+    "focused": { "pass": 64, "fail": 0, "skipped": 0 },
+    "fullNode": { "pass": 459, "fail": 0, "skipped": 0 },
+    "releaseSimulatorBuild": "PASS",
+    "appleValidation": "PASS",
+    "productOwnerPhysicalIPhone": "ALL_PASS_FOR_RECORDED_ITEMS"
+  },
+  "boundary": {
+    "blockingErrorsDetected": 0,
+    "appReviewSubmitted": false,
+    "releasePerformed": false,
+    "automaticReleaseEnabled": false,
+    "externalTestFlight": false,
+    "build80Created": false,
+    "archiveCreated": false,
+    "uploadPerformed": false,
+    "productSourceChanged": false,
+    "iapChanged": false,
+    "priceChanged": false,
+    "availabilityChanged": false
+  }
+}
