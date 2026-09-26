@@ -133,6 +133,8 @@ Version 1.1 App Store submission preparation evidence:
 
 - `release/CueScore_v1.1_App_Store_Submission_Preparation_2026-09-26.md` (`READY FOR PRODUCT OWNER APP REVIEW SUBMISSION`; not submitted)
 - `release/evidence/CueScore_v1.1_App_Store_Submission_Preparation_2026-09-26.json`
+- `release/CueScore_v1.1_App_Review_Submission_2026-09-26.md` (`APP REVIEW SUBMITTED — WAITING FOR REVIEW`)
+- `release/evidence/CueScore_v1.1_App_Review_Submission_2026-09-26.json`
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and

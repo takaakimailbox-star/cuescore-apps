@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## Version 1.1 App Review Submission（2026年9月26日）
+
+- Gate: `APP REVIEW SUBMITTED — WAITING FOR REVIEW`。Product Owner承認後、Version `1.1`／Build `79`をreview submission `ccca99c0-4ab6-4518-8133-58c51abe378e`でApp Reviewへ提出した。
+- submitted timestampは`2026-09-26T02:40:12.101Z`（2026-09-26 11:40:12.101 JST）。提出後read-backでsubmissionとApp Version 1.1はいずれも`WAITING_FOR_REVIEW`。
+- submitted itemはVersion 1.1のみ1件。Build ID `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`、`VALID`／`APP_STORE_ELIGIBLE`、release type `MANUAL`を維持。CueScore Proは既存`APPROVED`のためitemへ追加していない。
+- App／CueScore ProはJPNのみ、双方`availableInNewTerritories=false`。CueScore Proは`NON_CONSUMABLE`／`JPY 980`を維持。
+- Release、automatic release変更、Build 80、Archive／Upload、External TestFlight、metadata／screenshots／Privacy／IAP／price／availability、公開Version 1.0への操作は実施していない。Evidence: `docs/release/CueScore_v1.1_App_Review_Submission_2026-09-26.md`。
+
 ## Version 1.1 App Store Submission Preparation（2026年9月26日）
 
 - Gate: `READY FOR PRODUCT OWNER APP REVIEW SUBMISSION`。App Store ConnectにVersion `1.1`（ID `33dfe87f-9b22-42b5-acff-ef52e3c6464e`）を作成し、Product Owner Accepted済みBuild `79`（ID `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`、`VALID`／`APP_STORE_ELIGIBLE`）を選択した。

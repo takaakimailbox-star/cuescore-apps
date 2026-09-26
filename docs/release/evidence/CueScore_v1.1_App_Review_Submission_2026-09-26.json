@@ -1,0 +1,80 @@
+{
+  "app": "CueScore Apps",
+  "date": "2026-09-26",
+  "result": "APP REVIEW SUBMITTED — WAITING FOR REVIEW",
+  "preflight": {
+    "checkedAt": "2026-09-26T02:39:57.180Z",
+    "result": "PASS",
+    "blockingErrors": 0,
+    "submissionState": "READY_FOR_REVIEW",
+    "versionState": "READY_FOR_REVIEW",
+    "itemCount": 1
+  },
+  "submission": {
+    "id": "ccca99c0-4ab6-4518-8133-58c51abe378e",
+    "submittedAtUtc": "2026-09-26T02:40:12.101Z",
+    "submittedAtJst": "2026-09-26T11:40:12.101+09:00",
+    "state": "WAITING_FOR_REVIEW",
+    "itemCount": 1,
+    "items": [
+      {
+        "id": "Y2NjYTk5YzAtNGFiNi00NTE4LTgxMzMtNThjNTFhYmUzNzhlfDZ8ODkyMDI1MzQw",
+        "type": "APP_STORE_VERSION",
+        "resourceStateAtReadBack": "READY_FOR_REVIEW",
+        "appStoreVersionId": "33dfe87f-9b22-42b5-acff-ef52e3c6464e",
+        "inAppPurchaseVersionId": null
+      }
+    ]
+  },
+  "postSubmissionReadBack": {
+    "checkedAt": "2026-09-26T02:40:41.508Z",
+    "result": "PASS"
+  },
+  "appStoreVersion": {
+    "id": "33dfe87f-9b22-42b5-acff-ef52e3c6464e",
+    "version": "1.1",
+    "state": "WAITING_FOR_REVIEW",
+    "releaseType": "MANUAL"
+  },
+  "build": {
+    "number": "79",
+    "id": "0b61e6fe-14b6-452a-bc2e-a6b2b02524d2",
+    "bundleId": "com.takaakimailboxstar.cuescoreapps",
+    "sourceCommit": "39e3071f898c7af8499abbfee6f0043307699f6f",
+    "processingState": "VALID",
+    "audience": "APP_STORE_ELIGIBLE",
+    "usesNonExemptEncryption": false
+  },
+  "whatsNewJa": "JPA 9-Ballの試合入力を改善しました。\n・試合中にデッドボールの累計数を確認できるようになりました。\n・ブレイクスクラッチ時などのデッドボール表示を統一しました。",
+  "availability": {
+    "appTerritories": ["JPN"],
+    "appAvailableInNewTerritories": false,
+    "iapTerritories": ["JPN"],
+    "iapAvailableInNewTerritories": false
+  },
+  "iap": {
+    "name": "CueScore Pro",
+    "productId": "com.takaakimailboxstar.cuescoreapps.pro",
+    "type": "NON_CONSUMABLE",
+    "state": "APPROVED",
+    "currency": "JPY",
+    "price": 980,
+    "addedToSubmission": false,
+    "changed": false
+  },
+  "boundary": {
+    "releasePerformed": false,
+    "automaticReleaseEnabled": false,
+    "build80Created": false,
+    "archiveCreated": false,
+    "uploadPerformed": false,
+    "externalTestFlight": false,
+    "metadataChangedAfterPreparation": false,
+    "screenshotsChanged": false,
+    "appPrivacyChanged": false,
+    "iapChanged": false,
+    "priceChanged": false,
+    "availabilityChanged": false,
+    "publicVersion10Changed": false
+  }
+}
