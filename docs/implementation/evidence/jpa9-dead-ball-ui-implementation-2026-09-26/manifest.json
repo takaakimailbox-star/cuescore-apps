@@ -1,0 +1,21 @@
+{
+  "date": "2026-09-26",
+  "viewportCssPixels": {
+    "width": 390,
+    "height": 844,
+    "deviceScaleFactor": 3
+  },
+  "runtimeReadback": {
+    "deadCount": 4,
+    "summaryVisible": true,
+    "historyUsedStateBallCount": 4
+  },
+  "files": [
+    {
+      "path": "390x844-jpa-dead-cumulative-and-history.png",
+      "pixelWidth": 1170,
+      "pixelHeight": 2532,
+      "sha256": "e0604602c5d4d4d85e98a20bee9bf36b3b4f15055b8daa9da0520679d148182f"
+    }
+  ]
+}

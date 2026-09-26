@@ -118,6 +118,13 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/78_CueScore_v1.0_Build25_Match_Setup_Player_Editor_Spec.md`
 - `official/97_CueScore_v1.0_Free_Pro_Monetization_Decision.md`
 - `official/98_CueScore_v1.0_Free_Pro_Monetization_Spec.md`
+- `official/99_CueScore_JPA9_Dead_Ball_UI_Decision.md`
+- `official/100_CueScore_JPA9_Dead_Ball_UI_Spec.md`
+
+JPA 9-Ball Dead Ball UI implementation evidence:
+
+- `implementation/CueScore_JPA9_Dead_Ball_UI_Prototype_2026-09-25.md`
+- `implementation/CueScore_JPA9_Dead_Ball_UI_Implementation_2026-09-26.md`
 
 Product Vision v1.0 Release Candidate is intentionally excluded. It must not be
 used as an official source unless a future Official Release is approved and

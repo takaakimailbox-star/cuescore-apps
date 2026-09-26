@@ -1,0 +1,33 @@
+{
+  "title": "CueScore JPA 9-Ball Dead Ball UI Product Owner Final-Correction Prototype",
+  "date": "2026-09-26",
+  "baselineCommit": "a318a7588093a715913d1e69f10ccf681ccab0c8",
+  "gate": "adopted-final-correction-prototype-product-implementation-not-started",
+  "deadBallPresentation": {
+    "authority": "released product existing normal JPA Dead ball state=used",
+    "customVisual": false,
+    "visibleLabel": false,
+    "existingSourceValues": {
+      "size": "history 20x20px",
+      "ballColor": "#b8b8b5",
+      "numberColor": "#858582",
+      "background": "#f3f3f1",
+      "opacity": 1,
+      "filter": "none",
+      "boxShadow": "none"
+    }
+  },
+  "images": [
+    {"file": "00_contact_sheet.png", "width": 1200, "height": 1860, "sha256": "aefafb1bc31d89dae4d0a43891c23edf976befe12ef2d3fcf857536a002e968c"},
+    {"file": "01_normal_scoring_ball_390x844.png", "width": 390, "height": 844, "sha256": "93f20db8e5072c15f454769ef5ffafb59a74303465ffff293be6d900647fae0f"},
+    {"file": "02_dead_ball_390x844.png", "width": 390, "height": 844, "sha256": "a1f88715dcdd6698fc811b06903672864e73b7c265aa41665a62aa31e265097f"},
+    {"file": "03_break_scratch_dead_ball_390x844.png", "width": 390, "height": 844, "sha256": "4ad2dd5e8feae95e94311d3b81b72fac1217ca2500f6c418390451e07519a579"},
+    {"file": "04_normal_foul_dead_ball_390x844.png", "width": 390, "height": 844, "sha256": "5d7e531cd5cb7386933612716225ad0605a76cb17b3504a32f5c147a7128199b"},
+    {"file": "05_dead_0_390x844.png", "width": 390, "height": 844, "sha256": "1dc7aee82911a844d906c371f290cf2bcb2c6c9c62944dfaa1e375d9b192ba81"},
+    {"file": "06_multiple_dead_390x844.png", "width": 390, "height": 844, "sha256": "0bd4248ec69f4fc6d7ccc1b6fdb4e39a436d053e29c5f4499abc073b514c38d1"}
+  ],
+  "rejectedPrototypes": [
+    {"directory": "rejected-label-v1", "reason": "Visible DEAD label rejected by Product Owner on 2026-09-26"},
+    {"directory": "rejected-custom-visual-v2", "reason": "New opacity/saturation/brightness Dead visual rejected by Product Owner on 2026-09-26"}
+  ]
+}

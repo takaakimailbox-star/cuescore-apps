@@ -1,48 +1,30 @@
 # CueScore Current Report
 
 - App: CueScore Apps
-- Decision ID: `CUESCORE-V1-PUBLIC-RELEASE-CLOSE-20260925`
-- Date: 2026-09-25
-- Gate result: `CUESCORE v1.0 RELEASE COMPLETE`
-- Version / Build: `1.0 (78)`
+- Decision ID: `CUESCORE-JPA9-DEAD-BALL-UI-IMPLEMENTATION-20260926`
+- Date: 2026-09-26
+- Gate result: `IMPLEMENTATION COMPLETE / PRODUCT OWNER ACCEPTED / UNRELEASED / STOP`
+- Released Version / Build: `1.0 (78)` unchanged
 
 ## Result
 
-Version 1.0 is publicly available in the Japan App Store. App Store Connect reports `READY_FOR_SALE` / `READY_FOR_DISTRIBUTION`; the completed submission contains approved App Version and CueScore Pro items. Product Owner physical-device evidence confirms the general-user listing, Get button, In-App Purchase label, and public screenshots.
+Product Owner承認済みJPA 9-Ball Dead Ball UIを製品sourceへ実装した。試合累計Dead summary、break／normal foul Dead、9番除外、live history／Match Detailの既存`state="used"`統一を完了し、新しい保存schemaとDead visualは追加していない。
 
-## COMPLETE
+## Evidence
 
-- Version 1.0 and Build 78.
-- App Review and CueScore Pro approval.
-- Product Owner Manual Release.
-- Japan App Store public availability.
+- Dead dedicated: `16/16 PASS`。
+- JPA／Undo／in-progress／History／Backup focused: `58/58 PASS`。
+- 全Node: `459/459 PASS`。
+- Release Simulator Build: PASS。
+- Visual: CSS viewport 390×844、summary `ラック 2 ｜ イニング 3 ｜ デッド 4`、既存Dead visual 4球、通常得点球④を維持。
+- Source／native copied bundle SHA-256一致: `07d8a0b211865a2dfd0fe59f59aad3637cf1d70662b7f75f181e47050471d226`。
+- Build identity remains `com.takaakimailboxstar.cuescoreapps` / `1.0 (78)`、`.storekit` 0件。
 
-## Historical / accepted
+## Files and boundary
 
-- Build 77 launch crash Reject and Build 78 UIScene recovery.
-- TestFlight/Sandbox `$5.99` metadata issue.
-- Privacy Report evidence gap.
-
-## NOT VERIFIED / non-blocking historical
-
-- Physical iPad.
-- Restore completion after Apple Account authentication.
-
-## Deferred / later
-
-- CSV import/export.
-- Automatic cloud sync.
-- Match Sharing.
-- Territories outside Japan.
-
-## Change / verification
-
-- Product / Official / App Store Connect changes: none
-- Documentation changed: public release evidence and current state/handoff files
-- Build 79 / Version 1.1: not started
-- Empty review draft: zero items, not submitted or changed, no release impact
-- Detailed evidence: `docs/release/evidence/CueScore_v1.0_App_Store_Public_Release_2026-09-25.md`
-
-## STOP
-
-Version 1.0 release phase is closed. Await a new Product Owner Decision before any next-version or deferred work.
+- Product: `index.html` and generated native web copy。
+- Tests: `tests/jpa9-dead-ball-ui-implementation.test.mjs`。
+- Docs: Official 99／100、CURRENT_STATE／STATUS、README、Prototype／Implementation Evidence、handoff。
+- commit / push: Product Owner Acceptance Gateで実施。
+- Build 79 / Archive / TestFlight / App Store Connect / Version 1.1: 未実施。
+- 実装は未配布。将来Buildへの収載判断までSTOP。

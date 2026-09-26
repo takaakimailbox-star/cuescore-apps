@@ -1,5 +1,16 @@
 # CueScore Apps Current State
 
+## JPA 9-Ball Dead Ball UI（2026年9月26日）
+
+- Gate: `採用済み / Prototype PASS / Implementation Complete / Product Owner Accepted / 未配布`。Product Ownerは修正版Prototypeと、Test・Build・VisualをPASSしたImplementationを承認した。JPA 9-Ballのゲーム中画面へ試合累計`デッド`表示を実装済み。
+- Dead Ballは、通常Dead操作、ブレイク時のスクラッチ／ファール同時入球、通常ファール同時入球のうち、得点としてどちらにも与えられない1〜8番の的球。Foul／scratch事象自体は加算せず、入球なしスクラッチはDead 0、9番はDeadにしない。
+- 通常Deadは`ball_dead`、ブレイク同時Deadは`break_result.data.deadBalls`の1〜8番から導出する。rack-localな`deadBallsV1`は累計SSOTにせず、Undo-awareな`commonEventsV7`から再計算する。新しい保存schemaは追加していない。
+- 2026-09-26 Product Owner最終訂正により、新しいDead visualは設計しない。現行通常Deadが使用する既存`state="used"`球表示の色・濃さ・opacity・saturation・brightness・サイズ等を変更せず、ブレイクスクラッチ／ファール同時入球のDeadにも同じ表示を統一適用する。`DEAD`等のlabel、badge、×印は追加しない。
+- break scratch／break foul同時入球を1〜8番だけDeadへ変換し、9番を明示的に除外した。live historyとMatch Detailは通常Deadを含む全Deadを共通`state="used"`rendererへ通し、文字label、新visual、順序／spacing変更は行っていない。
+- Dedicated `16/16`、focused `58/58`、全Node `459/459`、Release Simulator BuildをPASS。390×844で`ラック 2 ｜ イニング 3 ｜ デッド 4`、既存Dead visual統一、横overflowなしを確認した。
+- Official: `docs/official/99_CueScore_JPA9_Dead_Ball_UI_Decision.md`、`docs/official/100_CueScore_JPA9_Dead_Ball_UI_Spec.md`。Implementation Evidence: `docs/implementation/CueScore_JPA9_Dead_Ball_UI_Implementation_2026-09-26.md`。
+- Build番号は78のまま。Build 79、新Archive、TestFlight、App Store Connect、Version 1.1は開始していない。公開済みv1.0 release closeは下記履歴として維持する。
+
 ## v1.0 Public Release Complete（2026年9月25日）
 
 - Gate完了: `v1.0 PUBLICLY AVAILABLE ON JAPAN APP STORE` / `CUESCORE v1.0 RELEASE COMPLETE`。Appleは2026-09-24にVersion 1.0とCueScore Proを承認し、Product Ownerが同日にManual Releaseを実施した。

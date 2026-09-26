@@ -8076,9 +8076,10 @@ body {
             <span class="pro-turn-arrow-v1" id="proTurnArrowV1" aria-hidden="true">←</span>
           </section>
 
-          <section class="pro-status pro-status-two" aria-hidden="true">
-            <span id="proRack">1</span>
-            <span id="proInning">1</span>
+          <section class="pro-status pro-status-two jpa-dead-summary-v1" id="jpaDeadSummaryV1" aria-label="ラック、イニング、デッド累計" aria-live="polite" hidden>
+            <span><span>ラック</span><strong id="proRack">1</strong></span>
+            <span><span>イニング</span><strong id="proInning">1</strong></span>
+            <span><span>デッド</span><strong id="jpaDeadCountV1">0</strong></span>
             <span id="proGoalView" hidden>120 / 120</span>
           </section>
         </section>
@@ -11550,6 +11551,43 @@ let matchRecordsRawCacheV152 = null;
     return appendCommonEventV700(COMMON_EVENT_TYPE_MAP_V7[sourceType], sourceType, normalizedDetails);
   }
 
+  function jpaDeadBallNumberV1(value) {
+    const ball = Number(value);
+    return Number.isInteger(ball) && ball >= 1 && ball <= 8 ? ball : null;
+  }
+
+  function jpaBreakDeadBallsV1(pocketedBalls, isDeadBreak) {
+    if (!isDeadBreak) return [];
+    return [...new Set((Array.isArray(pocketedBalls) ? pocketedBalls : [])
+      .map(jpaDeadBallNumberV1)
+      .filter(ball => ball !== null))].sort((a,b) => a - b);
+  }
+
+  function jpaDeadBallEntriesV1(events = []) {
+    const entries = [];
+    const seen = new Set();
+    (Array.isArray(events) ? events : []).forEach((event, eventIndex) => {
+      const sourceType = String(event?.sourceType || "");
+      const eventIdentity = String(event?.id || `event-${Number(event?.sequence) || eventIndex + 1}`);
+      const balls = sourceType === "ball_dead"
+        ? [event?.data?.ball]
+        : sourceType === "break_result" ? event?.data?.deadBalls : [];
+      (Array.isArray(balls) ? balls : []).forEach(value => {
+        const ball = jpaDeadBallNumberV1(value);
+        if (ball === null) return;
+        const identity = `${eventIdentity}:${ball}`;
+        if (seen.has(identity)) return;
+        seen.add(identity);
+        entries.push({eventId:eventIdentity, ball, sourceType});
+      });
+    });
+    return entries;
+  }
+
+  function jpaDeadBallCountV1(events = commonEventsV7) {
+    return jpaDeadBallEntriesV1(events).length;
+  }
+
   // Ver.7.0.0: Break is a first-class rule-engine event.
   function buildBreakDecisionV700(input = {}) {
     const rule = getActiveRuleV699();
@@ -11563,7 +11601,8 @@ let matchRecordsRawCacheV152 = null;
     const illegalBreakEnabled = isRackGameV1() ? activeRackSettingsV1().illegalBreak !== false : breakRule.illegalBreakEnabled;
     const illegalBreak = Boolean(illegalBreakEnabled && input.illegalBreak);
     const foul = preBreakFoul || scratch || illegalBreak;
-    const scoredBalls = preBreakFoul || breakRule.pocketedBallsScore === false || (isJPA9V1() && scratch) || (isStraightPoolV1() && foul) ? [] : [...pocketedBalls];
+    const jpaDeadBalls = jpaBreakDeadBallsV1(pocketedBalls, isJPA9V1() && foul && !preBreakFoul);
+    const scoredBalls = preBreakFoul || breakRule.pocketedBallsScore === false || (isJPA9V1() && foul) || (isStraightPoolV1() && foul) ? [] : [...pocketedBalls];
     const scoreAdded = scoredBalls.reduce((sum, number) => sum + activeBallPointsV1(number), 0);
     const changesTurn = preBreakFoul || (foul && Boolean(breakRule.scratchChangesTurn));
     const pushOutRequested = Boolean(input.pushOutRequested && isNineBallPushOutEnabledV1() && rule.pushOut?.enabled && !foul);
@@ -11572,7 +11611,7 @@ let matchRecordsRawCacheV152 = null;
       rack: Number(input.rackNumber) || Number(rack) || 1,
       pocketedBalls,
       scoredBalls,
-      deadBalls: isJPA9V1() && scratch ? [...pocketedBalls] : [],
+      deadBalls: jpaDeadBalls,
       scoreAdded,
       scratch,
       preBreakFoul,
@@ -12172,7 +12211,10 @@ let matchRecordsRawCacheV152 = null;
         addItemToCurrent("f");
       } else {
         addItemToCurrent("B");
-        decision.pocketedBalls.forEach(number => addItemToCurrent(number));
+        const deadBreakBallsV1 = new Set(decision.deadBalls || []);
+        decision.pocketedBalls.forEach(number => addItemToCurrent(
+          deadBreakBallsV1.has(number) ? {type:"jpa_dead",ball:number} : number
+        ));
         if (decision.foul) addItemToCurrent("F");
       }
       addItemToCurrent("/");
@@ -12204,8 +12246,8 @@ let matchRecordsRawCacheV152 = null;
         if (decision.foul && decision.pocketedBalls.includes(9)) spotNineBallV1(decision.illegalBreak ? "illegal_break" : "break_foul", player);
         if (decision.foul && decision.pocketedBalls.includes(10)) spotTenBallV1("break_foul", player);
       }
-      if (isJPA9V1() && decision.scratch) {
-        decision.pocketedBalls.forEach(number => {
+      if (isJPA9V1() && decision.deadBalls.length) {
+        decision.deadBalls.forEach(number => {
           usedBalls.add(number);
           deadBallsV1.add(number);
         });
@@ -12952,12 +12994,16 @@ let matchRecordsRawCacheV152 = null;
     return window.CueScoreBallIcon.html(number, { size:"history", classes:`pro-mini-ball ${cls}` });
   }
 
+  function jpaDeadBallHtmlV1(number, classes) {
+    return window.CueScoreBallIcon.html(number, { size:"history", state:"used", classes });
+  }
+
   function logItemHtmlV1(item) {
     if (typeof item === "number") return ballHtml(item);
     if (item && typeof item === "object" && item.type === "jpa_dead") {
       const number = Number(item.ball);
       const cls = number <= 8 ? "solid" : "stripe";
-      return window.CueScoreBallIcon.html(number, { size:"history", state:"used", classes:`pro-mini-ball ${cls} jpa-dead-ball-v1` });
+      return jpaDeadBallHtmlV1(number, `pro-mini-ball ${cls} jpa-dead-ball-v1`);
     }
     return symbolHtml(item);
   }
@@ -13360,6 +13406,12 @@ let matchRecordsRawCacheV152 = null;
     setGameTextV155("proP2Foul", fouls[2]);
     setGameTextV155("proRack", rack);
     setGameTextV155("proInning", inning);
+    setGameTextV155("jpaDeadCountV1", isJPA9V1() ? jpaDeadBallCountV1() : 0);
+    const jpaDeadSummaryV1 = el("jpaDeadSummaryV1");
+    if (jpaDeadSummaryV1) {
+      jpaDeadSummaryV1.hidden = !isJPA9V1();
+      jpaDeadSummaryV1.setAttribute("aria-hidden", isJPA9V1() ? "false" : "true");
+    }
     setGameTextV155("proP1Goal", goals[1]);
     setGameTextV155("proP2Goal", goals[2]);
     if (isRackGameV1()) {
@@ -22452,6 +22504,50 @@ html body .three-cushion-game-v1 .pro-scoreboard .pro-turn-arrow-v1{color:#36363
 }
 </style>
 <style id="jpaDeadBallStylesV1">
+.jpa-dead-summary-v1{
+  display:none!important;
+}
+html body .jpa9-game-v1 .jpa-dead-summary-v1:not([hidden]){
+  min-height:33px!important;
+  margin-top:7px!important;
+  padding:0!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  align-items:center!important;
+  border:1px solid #e0e0dc!important;
+  border-radius:10px!important;
+  color:#171717!important;
+  background:#fff!important;
+  box-shadow:0 4px 14px rgba(0,0,0,.035)!important;
+  font-size:12px!important;
+  font-weight:650!important;
+  font-variant-numeric:tabular-nums!important;
+}
+html body .jpa9-game-v1 .jpa-dead-summary-v1>span:not([hidden]){
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  min-width:0!important;
+}
+html body .jpa9-game-v1 .jpa-dead-summary-v1>span:not([hidden])+span:not([hidden])::before{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;
+  top:50%!important;
+  width:1px!important;
+  height:14px!important;
+  transform:translateY(-50%)!important;
+  background:#dededb!important;
+}
+html body .jpa9-game-v1 .jpa-dead-summary-v1 strong{
+  font-size:15px!important;
+  font-weight:780!important;
+}
+html body .jpa9-game-v1 .jpa-dead-summary-v1>span:nth-child(3) strong{
+  color:var(--rotation-accent)!important;
+}
 html body .jpa9-game-v1 .pro-actions.jpa-dead-enabled-v1{
   grid-template-columns:repeat(5,minmax(0,1fr))!important;
 }
@@ -22602,6 +22698,11 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
     return window.CueScoreBallIcon.html(value, { size:"history", classes:`match-detail-mini-ball-v1 ${value>8?"stripe":""}` });
   }
 
+  function deadMiniBallV1(number) {
+    const value=Number(number);
+    return jpaDeadBallHtmlV1(value, `match-detail-mini-ball-v1 ${value>8?"stripe":""} jpa-dead-ball-v1`);
+  }
+
   function symbolV1(symbol) {
     if(symbol==="/") return `<span class="match-detail-break-separator-v1">/</span>`;
     if(symbol==="2 Fouls") return `<span class="match-detail-symbol-v1 foul consecutive-foul-v1">2 Fouls</span>`;
@@ -22649,12 +22750,27 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
         const balls=Array.isArray(event?.data?.pocketedBalls)
           ? event.data.pocketedBalls
           : Array.isArray(event?.data?.scoredBalls) ? event.data.scoredBalls : [];
-        balls.map(Number).filter(ball=>Number.isInteger(ball)&&ball>0).forEach(ball=>target.push(ball));
+        const deadBalls=new Set(jpaBreakDeadBallsV1(event?.data?.deadBalls,true));
+        balls.map(Number).filter(ball=>Number.isInteger(ball)&&ball>0).forEach(ball=>{
+          target.push(deadBalls.has(ball)?{type:"jpa_dead",ball}:ball);
+        });
         if(event?.data?.foul || event?.data?.scratch || event?.data?.illegalBreak) target.push("F");
         target.push("/");
       } else if(event?.type==="Shot" && event?.sourceType==="ball_pocketed"){
         const ball=Number(event?.data?.ball);
-        if(Number.isInteger(ball)&&ball>0) target.push(ball);
+        if(Number.isInteger(ball)&&ball>0) target.push(event?.data?.dead?{type:"jpa_dead",ball}:ball);
+      } else if(event?.type==="DeadBall" || event?.sourceType==="ball_dead"){
+        const ball=jpaDeadBallNumberV1(event?.data?.ball);
+        if(ball===null) return;
+        let index=-1;
+        for(let candidate=target.length-1;candidate>=0;candidate-=1){
+          const item=target[candidate];
+          if(item===ball || (item&&typeof item==="object"&&item.type==="jpa_dead"&&Number(item.ball)===ball)){
+            index=candidate;
+            break;
+          }
+        }
+        if(index>=0) target[index]={type:"jpa_dead",ball};
       } else if(event?.type==="Safety" || event?.sourceType==="safety"){
         target.push("S");
       } else if(event?.type==="Foul" || event?.sourceType==="foul"){
@@ -22687,7 +22803,11 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
     return `<section class="match-detail-game-history-v1" aria-label="ゲーム履歴"><h2>ゲーム履歴</h2>${rows.map(row=>{
       const divider=row.rack!==lastRack ? `<div class="match-detail-rack-divider-v1" aria-label="ラック${row.rack}"><span>Rack ${row.rack}</span></div>` : "";
       lastRack=row.rack;
-      const items=values=>values.map(item=>typeof item==="number"?miniBallV1(item):symbolV1(item)).join("");
+      const items=values=>values.map(item=>{
+        if(typeof item==="number") return miniBallV1(item);
+        if(item&&typeof item==="object"&&item.type==="jpa_dead") return deadMiniBallV1(item.ball);
+        return symbolV1(item);
+      }).join("");
       return `${divider}<div class="match-detail-log-row-v1">
         <div class="match-detail-log-cell-v1 left">${items(row.p1)}</div>
         <div class="match-detail-inning-v1">${esc(row.label)}</div>
