@@ -1,0 +1,52 @@
+{
+  "app": "CueScore Apps",
+  "date": "2026-09-26",
+  "gate": "READY FOR PRODUCT OWNER BUILD 79 INTERNAL TESTFLIGHT REVIEW",
+  "candidate": {
+    "bundleId": "com.takaakimailboxstar.cuescoreapps",
+    "version": "1.1",
+    "build": "79",
+    "sourceCommit": "39e3071f898c7af8499abbfee6f0043307699f6f",
+    "archiveUuid": "080FD5E7-F806-3676-9AFD-500ED91C421B",
+    "executableSha256": "98557ceec8924d56ccdaa462f868a5394cc220d2b83fcfc7eeb1b46b7ea386c4",
+    "ipaSha256": "3db17894813a5d578840255c4629e04ae6027f2425cbc054aef6ce2d3e902e6f",
+    "storekitFileCount": 0
+  },
+  "tests": {
+    "deadDedicatedScenarios": { "pass": 16, "fail": 0, "skipped": 0, "nodeEntries": 17 },
+    "focused": { "pass": 64, "fail": 0, "skipped": 0 },
+    "fullNode": { "pass": 459, "fail": 0, "skipped": 0 },
+    "releaseSimulatorBuild": "PASS",
+    "deviceArchive": "PASS",
+    "ipaExport": "PASS",
+    "diffCheck": "PASS"
+  },
+  "validation": {
+    "result": "PASS",
+    "errors": 0,
+    "resolvedPreviousCodes": [90186, 90062]
+  },
+  "upload": {
+    "result": "PASS",
+    "deliveryUuid": "0b61e6fe-14b6-452a-bc2e-a6b2b02524d2"
+  },
+  "appStoreConnect": {
+    "checkedAt": "2026-09-26T01:32:35.912Z",
+    "buildId": "0b61e6fe-14b6-452a-bc2e-a6b2b02524d2",
+    "processingState": "VALID",
+    "buildAudienceType": "APP_STORE_ELIGIBLE",
+    "usesNonExemptEncryption": false,
+    "internalBuildState": "IN_BETA_TESTING",
+    "internalGroup": "CueScore Internal Testers"
+  },
+  "boundary": {
+    "publicVersion": "1.0",
+    "publicBuild": "78",
+    "publicBuildChanged": false,
+    "appStoreVersion11Created": false,
+    "appReviewSubmitted": false,
+    "externalTestFlight": false,
+    "releasePerformed": false,
+    "metadataChanged": false
+  }
+}

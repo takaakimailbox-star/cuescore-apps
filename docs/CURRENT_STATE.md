@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Build 79 Version 1.1 Internal TestFlight（2026年9月26日）
+
+- Gate: `READY FOR PRODUCT OWNER BUILD 79 INTERNAL TESTFLIGHT REVIEW`。Product Owner Decisionにより、公開後に閉じたVersion 1.0 trainを再利用せず、Marketing Versionだけを`1.1`へ変更したBuild 79を作成・Uploadした。App Store Version 1.1は作成していない。
+- Build 79 source commitは`39e3071f898c7af8499abbfee6f0043307699f6f`。Bundle ID `com.takaakimailboxstar.cuescoreapps`、Version `1.1`、Build `79`。JPA Dead Ball製品source、保存schema、競技ルール、IAPは変更していない。
+- Dead dedicated scenarios `16/16`（Node entry `17/17`）、JPA／Undo／中断復元／History／Backup focused `64/64`、全Node `459/459`、Release Simulator Build、device Archive、IPA export、`git diff --check`をPASS。
+- Apple validationはerror 0でPASSし、旧`90186`／`90062`は解消。Delivery／Build ID `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`は`VALID`／`APP_STORE_ELIGIBLE`／`usesNonExemptEncryption=false`。
+- Internal group `CueScore Internal Testers`（`hasAccessToAllBuilds=true`）にBuild 79を確認し、internal stateは`IN_BETA_TESTING`。Product Owner実機確認はpendingであり、PASSを先取りしていない。
+- 公開Version 1.0は`READY_FOR_SALE`／`READY_FOR_DISTRIBUTION`、選択Build 78のまま。App Store Version 1.1、App Review、External TestFlight、Release、metadata／Privacy／CueScore Pro／price／availability変更は実施していない。Evidence: `docs/implementation/CueScore_Build79_v1.1_JPA_Dead_Ball_Internal_TestFlight_2026-09-26.md`。
+
 ## Build 79 Internal TestFlight Gate — Upload BLOCKED（2026年9月26日）
 
 - Gate: `BLOCKED — VERSION 1.0 PRE-RELEASE TRAIN CLOSED`。Product Owner承認済みJPA 9-Ball Dead Ball UIをBuild 79へ固定し、Pre-Archive Gate、Release Simulator Build、device Archive、App Store用IPA exportまでPASSしたが、Apple validationは`90186 Invalid Pre-Release Train`と`90062 CFBundleShortVersionString must contain a higher version than the previously approved version 1.0`を返した。

@@ -1,9 +1,9 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-BUILD79-INTERNAL-TESTFLIGHT-BLOCKED-20260926`
+- Decision ID: `CUESCORE-BUILD79-V1.1-INTERNAL-TESTFLIGHT-20260926`
 - Date: 2026-09-26
-- Product Owner instruction: distribute the accepted JPA 9-Ball Dead Ball UI as Build 79 to Internal TestFlight without creating Version 1.1
-- Gate: `BLOCKED — VERSION 1.0 PRE-RELEASE TRAIN CLOSED / STOP`
+- Product Owner instruction: retry the accepted JPA 9-Ball Dead Ball UI as Marketing Version 1.1 Build 79 for Internal TestFlight only
+- Gate: `READY FOR PRODUCT OWNER BUILD 79 INTERNAL TESTFLIGHT REVIEW / STOP`
 
 ## Implemented behavior
 
@@ -16,17 +16,17 @@
 
 ## Verification and packaging
 
-- Dedicated Dead: `16 pass / 0 fail / 0 skipped`。
-- Combined focused: `59 pass / 0 fail / 0 skipped`。
+- Dedicated Dead scenarios: `16 pass / 0 fail / 0 skipped`（Node entry `17/17`）。
+- Combined focused: `64 pass / 0 fail / 0 skipped`。
 - Full Node: `459 pass / 0 fail / 0 skipped`。
 - Release Simulator build、device Archive、App Store IPA export: PASS with the fixed dependency identity。
 - 390×844 visual: PASS。summary Dead 4、history `state="used"` 4球、横overflowなし。
-- Archive: `com.takaakimailboxstar.cuescoreapps` / `1.0 (79)`、UUID `080FD5E7-F806-3676-9AFD-500ED91C421B`、`.storekit` 0件。
+- Archive: `com.takaakimailboxstar.cuescoreapps` / `1.1 (79)`、UUID `080FD5E7-F806-3676-9AFD-500ED91C421B`、`.storekit` 0件。
 
 ## Boundary / STOP
 
-- Build 79 source commit／push、Test、Archive、IPA exportまで完了。
-- Apple validationは`90186 Invalid Pre-Release Train`／`90062 higher version required`。公開済みVersion 1.0へ新BuildはUploadできない。
-- Build 79 ASC recordは0件、Internal TestFlight未配布。Version 1.1は指示どおり作成せずSTOP。
+- Build 79 source commit／push、Test、Archive、IPA export、Apple validation、Uploadまで完了。
+- Version 1.1 validationはerror 0。旧`90186`／`90062`は解消。
+- Build ID `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`は`VALID`／`APP_STORE_ELIGIBLE`／internal `IN_BETA_TESTING`。
 - 公開済みVersion 1.0 Build 78は変更しない。
-- 次Gateは、より高いmarketing versionでInternal TestFlight候補を作成するProduct Owner Decision。
+- App Store Version 1.1、App Review、External TestFlight、Releaseは開始しない。次GateはProduct Owner実機確認。
