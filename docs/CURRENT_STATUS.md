@@ -3,7 +3,7 @@
 - Updated: 2026-09-27
 - Public Version / Build: `1.0 (78)`
 - Candidate Version / Build: `1.1 (79)`
-- Gate: `MATCH SHARING v1 FORMAL DOCUMENTATION — READY FOR PRODUCT OWNER APPROVAL / IMPLEMENTATION NOT STARTED`
+- Gate: `MATCH SHARING v1 FORMAL DOCUMENTATION COMMITTED / IMPLEMENTATION NOT STARTED`
 - Public availability: Japan App Store confirmed by Product Owner at approximately 2026-09-25 16:37 JST
 - App Store state: `READY_FOR_SALE` / `READY_FOR_DISTRIBUTION`
 - Review submission: `COMPLETE`
@@ -13,7 +13,7 @@
 - CueScore Pro: `com.takaakimailboxstar.cuescoreapps.pro`, `NON_CONSUMABLE`, `APPROVED`, `JPY 980`
 - Released product source: `6e0a569e32e473f6b5bfa14c74eeca1482820467`; Build 79 candidate source: `39e3071f898c7af8499abbfee6f0043307699f6f`
 - v1.0 release phase: complete; released Build 78 remains unchanged
-- Match Sharing v1: Design / Technical Feasibility complete; Formal Decision / Specification prepared; Implementation NOT STARTED; Version 1.1 unchanged
+- Match Sharing v1: Design / Technical Feasibility complete; Formal Decision / Specification approved and committed; Implementation NOT STARTED; Version 1.1 unchanged
 - Active product decision: JPA 9-Ball cumulative Dead Ball UI and existing normal-Dead history visual unification
 - Active phase: Product Owner completed Manual Release. Authenticated App Store Connect read-back shows App Store Version `1.1` as `配信準備完了` (Ready for Distribution); Build `1.1 (79)` remains selected.
 - Submission Evidence: submission `ccca99c0-4ab6-4518-8133-58c51abe378e`, Version 1.1 only / one item / no IAP item. Public Japan App Store page is reachable; version-number propagation on that public page is not separately displayed.

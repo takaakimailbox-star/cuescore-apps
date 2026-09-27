@@ -2,8 +2,8 @@
 
 - Decision ID: `CUESCORE-MATCH-SHARING-V1-FORMAL-DOCS-20260927`
 - Date: 2026-09-27
-- Product Owner instruction: formalize the adopted Match Sharing v1 Design Decision and Specification without starting implementation
-- Gate: `FORMAL DOCUMENTATION PREPARED / PRODUCT OWNER APPROVAL REQUIRED / STOP`
+- Product Owner instruction: approve and commit the adopted Match Sharing v1 Design Decision and Specification without starting implementation
+- Gate: `FORMAL DOCUMENTATION APPROVED / COMMITTED / IMPLEMENTATION NOT STARTED / STOP`
 
 ## Scope
 
@@ -26,8 +26,8 @@
 ## Boundary
 
 - Do not implement Match Sharing, UI, QR scanner, product schema, persistence, Backup integration, Version, Build, Archive, Upload, TestFlight, or App Store Connect changes.
-- Do not commit or push before Product Owner Formal Documentation Approval.
+- Documentation commit / push is complete following Product Owner Formal Documentation Approval.
 
 ## STOP
 
-Stop at `READY FOR PRODUCT OWNER FORMAL DOCUMENTATION APPROVAL` with documentation changes uncommitted.
+Stop at `MATCH SHARING v1 FORMAL DOCUMENTATION COMMITTED / IMPLEMENTATION NOT STARTED`. Do not begin UI Prototype or product implementation without a separate Product Owner Decision.
