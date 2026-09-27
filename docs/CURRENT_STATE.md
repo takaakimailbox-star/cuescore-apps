@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## Match Sharing v1 Formal Design and Technical Feasibility（2026年9月27日）
+
+- Gate: `DESIGN / TECHNICAL FEASIBILITY COMPLETE — FORMAL SPECIFICATION COMPLETE — IMPLEMENTATION NOT STARTED`。
+- Match Sharingは完了・確定済み1試合を相手のCueScoreへ1回受け渡す機能であり、同期ではない。共有後の両端末は独立し、アカウント／クラウドを必須にしない。
+- Primary transportはECC-M Single QR。論理Formatは内部保存schemaから分離し、`compact representation → deflate → Base45 → CSM1: prefix → Single QR`とする。共有ファイル／iOS共有シートはfallback候補、直接P2PはLater、複数QRは通常経路に採用しない。
+- 受信入口は試合履歴一覧、送信入口は試合詳細。Player mapping、UUID v4 `sharedMatchId`、新local Match ID、保存前duplicate rejection、通常History／Detail／Statistics／Analytics反映、Demo全面禁止、privacy除外、all-or-nothing Import、Backup／Restoreでの`sharedMatchId`維持を正式化した。
+- Evidence：6競技×Short／Medium／Long 18/18 Single QR theoretical fit、V19／V25／V30 physical iPhone 3/3 PASS、Round-trip 18/18、parity 162/162、Negative 10/10、Demo separation PASS、privacy禁止データ混入0、FAIL 0、BLOCKED 0。
+- 未確認：Build 79 live user records、production localStorage transaction、Backup／Restore統合、製品UI／camera、exact final payloadのphysical scan。未確認事項をPASSへ拡張しない。
+- Decision 12はLater登録の履歴として維持する。後続正式文書は`docs/official/101_CueScore_Match_Sharing_v1_Decision.md`と`docs/official/102_CueScore_Match_Sharing_v1_Spec.md`。Formal Specification完了はImplementation承認ではない。Version 1.1へ追加せず、製品sourceは未変更。
+
 ## Version 1.1 Public Release Verification（2026年9月27日）
 
 - Gate: `v1.1 MANUAL RELEASE COMPLETE — POST-RELEASE VERIFICATION PASS`。Product OwnerがManual Releaseを実施後、認証済みApp Store Connect read-backでVersion `1.1`は`配信準備完了`（Ready for Distribution）、Build `1.1 (79)`は選択維持を確認した。

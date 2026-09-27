@@ -1,35 +1,33 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-V11-FINAL-RELEASE-AUDIT-20260927`
+- Decision ID: `CUESCORE-MATCH-SHARING-V1-FORMAL-DOCS-20260927`
 - Date: 2026-09-27
-- Product Owner instruction: perform a read-only final audit before Manual Release of Version 1.1 / Build 79
-- Gate: `v1.1 MANUAL RELEASE COMPLETE / POST-RELEASE VERIFICATION PASS / STOP`
+- Product Owner instruction: formalize the adopted Match Sharing v1 Design Decision and Specification without starting implementation
+- Gate: `FORMAL DOCUMENTATION PREPARED / PRODUCT OWNER APPROVAL REQUIRED / STOP`
 
-## Audit boundary
+## Scope
 
-- Do not release, enable automatic release, create Build 80, archive, upload, or change metadata, screenshots, Privacy, CueScore Pro, price, availability, Version 1.0, or product source.
-- Read current App Store Connect values only. The Product Owner completed the Manual Release; post-release verification is complete.
-- Candidate identity to verify: Version `1.1`, Build `79`, Build ID `0b61e6fe-14b6-452a-bc2e-a6b2b02524d2`, Submission `ccca99c0-4ab6-4518-8133-58c51abe378e`, Bundle ID `com.takaakimailboxstar.cuescoreapps`, source commit `39e3071f898c7af8499abbfee6f0043307699f6f`.
+- Preserve Decision 12 as the historical Later / Deferred registration.
+- Create Official 101 Match Sharing v1 Decision and Official 102 Match Sharing v1 Specification.
+- Add Decision 028 to the successor Official Design Decision Log v2.3.
+- Sync CURRENT_STATE and documentation indexes to Design / Technical Feasibility Complete, Formal Specification Complete, Implementation NOT STARTED.
+- Preserve Version 1.1 and all product source.
 
-## Scope retained from the approved implementation
+## Adopted direction
 
-- JPA 9-Ballだけ、ゲーム中に`ラック ｜ イニング ｜ デッド`を常時表示する。
-- 通常`ball_dead`とbreak foul／scratchの`break_result.data.deadBalls`から1〜8番を試合累計し、Foul／scratch flag自体、dry scratch、9番は数えない。
-- 同一event＋球番号の重複を除外し、Undo-awareな`commonEventsV7`から再計算する。保存schemaを追加しない。
-- live historyとMatch Detailは通常Deadを含む全Deadへ既存`CueScoreBallIcon.html(...,{size:"history",state:"used"})`を共通適用する。
-- `DEAD`label、badge、×印、新しいopacity／filter／色／サイズ、履歴順序／spacing変更は追加しない。
-- 他5競技、Analytics式、JPA SL／Race／得点、Player／History／Backup schemaを変更しない。
+- Match Sharing transfers one completed and finalized match once; it is not synchronization.
+- ECC-M Single QR is the v1 Primary transport.
+- Sender entry is Match Detail; receiver entry is Match History list.
+- Receiver explicitly maps Player A / B to local players.
+- UUID v4 `sharedMatchId` is independent from the receiver's new local Match ID and prevents duplicate import.
+- The logical Match Sharing Format is independent from the internal saved-record schema.
+- Privacy exclusions, Demo separation, pre-write validation, all-or-nothing import, and Backup / Restore continuity are formal requirements.
 
-## Existing verification and packaging
+## Boundary
 
-- Dedicated Dead scenarios: `16 pass / 0 fail / 0 skipped`（Node entry `17/17`）。
-- Combined focused: `64 pass / 0 fail / 0 skipped`。
-- Full Node: `459 pass / 0 fail / 0 skipped`。
-- Release Simulator build、device Archive、App Store IPA export: PASS with the fixed dependency identity。
-- 390×844 visual: PASS。summary Dead 4、history `state="used"` 4球、横overflowなし。
-- Archive: `com.takaakimailboxstar.cuescoreapps` / `1.1 (79)`、UUID `080FD5E7-F806-3676-9AFD-500ED91C421B`、`.storekit` 0件。
+- Do not implement Match Sharing, UI, QR scanner, product schema, persistence, Backup integration, Version, Build, Archive, Upload, TestFlight, or App Store Connect changes.
+- Do not commit or push before Product Owner Formal Documentation Approval.
 
 ## STOP
 
-- Authenticated App Store Connect browser read-back shows Version 1.1 `配信準備完了` (Ready for Distribution), with Build 79 retained. The public Japan App Store page is reachable and shows the approved public identity, screenshots, In-App Purchase presence, and no-data-collected Privacy disclosure.
-- Stop. No further release, metadata, build, product, or App Store Connect action is authorized in this Gate.
+Stop at `READY FOR PRODUCT OWNER FORMAL DOCUMENTATION APPROVAL` with documentation changes uncommitted.
