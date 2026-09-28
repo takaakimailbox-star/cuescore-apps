@@ -1,45 +1,44 @@
 # CueScore Current Report
 
 - App: CueScore Apps
-- Decision ID: `CUESCORE-MATCH-SHARING-V1-STAGE2-20260928`
+- Decision ID: `CUESCORE-MATCH-SHARING-V1-STAGE3-20260928`
 - Date: 2026-09-28
-- Gate result: `STAGE 2 PRODUCT OWNER / CHATGPT APPROVED`
-- Baseline: `651f352f1ad67f381291254f14dda97c268edacb`
+- Gate result: `STAGE 3 PRODUCT OWNER / CHATGPT APPROVED`
+- Baseline: `0057e2bd5449bdb4e70a805c2b7cc2a61091bfb9`
 - Commit / push: AUTHORIZED IN THIS APPROVAL GATE; final SHA is reported after fresh read-back
 
 ## Result
 
-Free基本Statisticsの全保存record参照を修正前testで再現し、History／Detail／Player aggregateと同じglobal newest-20 policyへ統一した。完了済み通常Matchへ初回共有時だけoptional UUID v4 `sharedMatchId`を保存するboundary、全通常保存recordのduplicate lookup、Backup v2のvalidation／Replace／Merge互換を実装した。
+Explicit receiver mapping、deferred new Player draft、6競技receiver-local Match再構成、full-collection duplicate TOCTOU protection、Player／Match原子transaction、semantic read-back、verified rollbackをproduction coreとして実装した。Free Case C用exact-ID one-shot accessはmemory-only coreに限定し、UIへ未接続。
 
 ## Verification
 
-- Before-fix reproduction: `0/1 EXPECTED FAIL`
-- Stage 2 dedicated: `15/15 PASS`
-- Related focused regression: `129/129 PASS`
-- Stage 1 focused: `14/14 PASS`
-- Stage 1 capacity: `18/18 fit`, ECC-M Version `19–30`, final `884–1852 chars`
-- Full Node: `488/488 PASS / 0 FAIL / 0 SKIPPED`
+- Stage 3 dedicated: `24/24 PASS`
+- Stage 1 + Stage 2 + Stage 3 focused: `53/53 PASS`
+- Six disciplines × Short / Medium / Long: `18/18 PASS`
+- Player mapping combinations: `4/4 PASS`
+- Free Case A / B / C: `3/3 PASS`
+- Privacy contamination: `0/18`
+- Full Node: `512/512 PASS / 0 FAIL / 0 SKIPPED`
 - native-web generation / copied iOS public parity: PASS
 - `git diff --check`: PASS
 
 ## Changed scope
 
-- Product: Match Sharing persistence helper, index storage/Backup/Statistics adapters, native-web/PWA asset registration
-- Tests: Stage 2 access, persistence, duplicate, Backup/Restore and rollback coverage
-- Documentation: Stage 2 Evidence and current SSOT/handoff state
-- Dependencies: 0
-- Official 101 / 102 changes: 0
-- Version / Build changes: 0
+- Product: pure deferred Player draft module, import transaction module, narrow storage adapter, native-web/PWA asset registration
+- Tests: Stage 3 mapping, reconstruction, duplicate, transaction failures, rollback, Demo, privacy, Backup and Case A/B/C coverage
+- Documentation: Stage 3 Evidence and current SSOT/handoff state
+- Dependencies / Info.plist / Official 101-102 / Version-Build: 0 changes
 
 ## Not verified / not started
 
-- physical iPhone / iPad: NOT VERIFIED; no Stage 2 UI or distribution artifact exists
-- Stage 3 Import transaction / Player mapping: NOT STARTED
-- QR / Camera / UI / Free History notice: NOT STARTED
-- Build / Archive / Upload / TestFlight / App Store Connect: NOT PERFORMED
+- Product UI navigation, success Detail/toast, Dynamic Type, VoiceOver and physical iPhone/iPad: NOT VERIFIED
+- Stage 4 Sender QR: NOT STARTED
+- Stage 5 Scanner/Camera/Receiver UI/Free History UI: NOT STARTED
+- Build/Archive/Upload/TestFlight/App Store Connect: NOT PERFORMED
 
 ## STOP
 
-Stage 2 source、tests、Evidence、SSOTを本Approval Gateでcommit／pushし、fresh read-back後にSTOPする。Stage 3は開始しない。
+Stage 3 source、tests、Evidence、SSOTを本Approval Gateでcommit／pushし、fresh read-back後にSTOPする。Stage 4は開始しない。
 
-`MATCH SHARING v1 STAGE 2 APPROVED / STAGE 3 NOT STARTED`
+`MATCH SHARING v1 STAGE 3 APPROVED / STAGE 4 NOT STARTED`

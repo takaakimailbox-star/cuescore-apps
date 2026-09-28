@@ -8626,7 +8626,11 @@ body {
 
   
   <script src="./demo-data.js?v=2.0-build79-jpa-dead-ball-internal-v1"></script>
+  <script src="./match-sharing-validation-v1.js"></script>
+  <script src="./match-sharing-adapters-v1.js"></script>
   <script src="./match-sharing-persistence-v1.js"></script>
+  <script src="./match-sharing-player-drafts-v1.js"></script>
+  <script src="./match-sharing-transaction-v1.js"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -9839,6 +9843,56 @@ let matchRecordsRawCacheV152 = null;
     if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
     return `p_${Date.now()}_${Math.random().toString(36).slice(2,9)}`;
   }
+
+  // Match Sharing v1 Stage 3: receiver import is a storage-facing service.
+  // No UI calls this API until a later approved Gate.
+  const matchSharingImportedDetailAccessV1 = window.CueScoreMatchSharingTransactionV1?.createOneShotImportedDetailAccess();
+  function importSharedMatchV1(logicalMatch, mappingPlan) {
+    const service = window.CueScoreMatchSharingTransactionV1;
+    if (!service) throw new Error("Match Sharing import service is unavailable.");
+    const result = service.importSharedMatch({
+      logicalMatch,
+      mappingPlan,
+      demoMode:Boolean(window.CueScoreDemoData?.isDemo?.()),
+      readPlayers:readPlayerLibrary,
+      readMatches:readMatchRecords,
+      playerIdFactory:makePlayerId,
+      matchIdFactory:() => (window.crypto&&crypto.randomUUID)
+        ? crypto.randomUUID()
+        : `g_${Date.now()}_${Math.random().toString(36).slice(2,8)}`,
+      now:Date.now(),
+      appVersion:CUESCORE_APP_VERSION,
+      recordSchemaVersion:ROTATION_RECORD_SCHEMA_VERSION,
+      eventSchemaVersion:COMMON_EVENT_SCHEMA_VERSION_V7,
+      analysisSchemaVersion:ANALYSIS_SCHEMA_VERSION_V60,
+      transaction:{
+        perform(nextPlayers,nextMatches) {
+          return performLocalRestoreTransactionV160(
+            [PLAYER_LIBRARY_KEY,MATCH_RECORDS_KEY],
+            [[PLAYER_LIBRARY_KEY,nextPlayers],[MATCH_RECORDS_KEY,nextMatches]]
+          );
+        },
+        restore(snapshot) { return restoreLocalStorageSnapshotV160(snapshot); },
+        matchesSnapshot(snapshot) { return localStorageMatchesSnapshotV160(snapshot); }
+      }
+    });
+    matchSharingImportedDetailAccessV1?.grant(result.importedLocalMatchId);
+    refreshDerivedViewsV131("match-sharing-import");
+    Promise.resolve(window.cueScoreMarkCloudDirtyV133?.("match-sharing-import")).catch(error => {
+      console.warn("CueScore Match Sharing cloud dirty marker failed", error);
+    });
+    return result;
+  }
+
+  function consumeImportedMatchDetailOnceV1(matchId) {
+    return matchSharingImportedDetailAccessV1?.consume(matchId, wanted =>
+      readMatchRecords().find(record => String(record?.id) === String(wanted)) || null
+    ) || null;
+  }
+
+  window.cueScoreImportSharedMatchV1 = importSharedMatchV1;
+  window.cueScoreConsumeImportedMatchDetailOnceV1 = consumeImportedMatchDetailOnceV1;
+  window.cueScoreClearImportedMatchDetailAccessV1 = () => matchSharingImportedDetailAccessV1?.clear();
 
   function raceValueToStep(race) {
     const values = [60,120,150,180,240,300];
