@@ -5,7 +5,7 @@
 - Date: 2026-09-28
 - Gate result: `STAGE 5A PHYSICAL SCANNER PASS — STAGE 5B NOT STARTED`
 - Baseline: `0dfb82372f0555de7c29a77d2e58835708aa90a5`
-- Commit / push: Stage 5A source／tests／Evidence commit `17507c7e0152eca735553d553480a4a40b47277b` pushed to `main`; final state-sync read-back in progress
+- Commit / push: Stage 5A source／tests／Evidence commit `17507c7e0152eca735553d553480a4a40b47277b` and final state sync pushed to `main`; fresh read-back complete
 
 ## Result
 
@@ -37,6 +37,6 @@ Physical FAIL #2の実機runtime tracingで、Native plugin resolve後かつCame
 
 ## STOP
 
-Stage 5A source、physical FAIL履歴、root-cause fix、physical PASS、tests、SSOTだけをcommit／pushし、fresh read-back後にSTOPする。Stage 5Bへ進まない。
+Stage 5A source、physical FAIL履歴、root-cause fix、physical PASS、tests、SSOTだけをcommit／pushし、fresh read-backを完了した。ここでSTOPし、Stage 5Bへ進まない。
 
 `STAGE 5A PHYSICAL SCANNER PASS RECORDED / STAGE 5B NOT STARTED`
