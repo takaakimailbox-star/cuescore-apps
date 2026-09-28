@@ -5,7 +5,7 @@
 - Date: 2026-09-28
 - Gate result: `STAGE 5A PHYSICAL SCANNER PASS — STAGE 5B NOT STARTED`
 - Baseline: `0dfb82372f0555de7c29a77d2e58835708aa90a5`
-- Commit / push: authorized after the physical Gate; final audit in progress
+- Commit / push: Stage 5A source／tests／Evidence commit `17507c7e0152eca735553d553480a4a40b47277b` pushed to `main`; final state-sync read-back in progress
 
 ## Result
 

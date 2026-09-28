@@ -3,7 +3,7 @@
 - Date: 2026-09-28 JST
 - Baseline: `0dfb82372f0555de7c29a77d2e58835708aa90a5`
 - Gate: `STAGE 5A PHYSICAL SCANNER PASS / STAGE 5B NOT STARTED`
-- Commit / push: pending final audit; Product Owner physical Gate is PASS
+- Commit / push: Stage 5A source／tests／Evidence commit `17507c7e0152eca735553d553480a4a40b47277b` pushed to `main`; Product Owner physical Gate is PASS
 
 ## Implemented scope
 
