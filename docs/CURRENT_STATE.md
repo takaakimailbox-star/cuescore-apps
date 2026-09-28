@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## Match Sharing v1 Implementation Stage 4 Sender QR Product Owner PASS（2026年9月28日）
+
+- Gate: `STAGE 4 COMPLETE — PRODUCT OWNER PHYSICAL IPHONE QR TEST 3/3 PASS — STAGE 5 NOT STARTED`。
+- 完了・確定済み通常Matchの試合詳細header右上へ採用済み`QR glyph + 共有`を追加し、Demo／result mode／未完了／中断／invalidでは非表示またはserviceで再拒否する。初回共有はStage 2のverified lazy `sharedMatchId`を保存し、repeat shareは同一IDとdeterministic payloadを再利用する。
+- Stage 1 production adapter／compact／raw DEFLATE／Base45／`CSM1:`と、vendored `fflate 0.8.3`、Nayuki QR generator `1.8.0`を接続。ECC-M、alphanumeric、boostなし、4-module quiet zone、標準白黒、292×292ptのSingle QRを生成する。
+- Sender画面は`試合を共有`、最小試合情報、QR、短い説明だけを表示。Backは同じMatch Detailのscroll／focusへ戻り、生成失敗は既存toastでDetailに留まる。Stage 5 Receiver／Scanner／Cameraは未着手。
+- Stage 4 dedicated `12/12`、Stage 1〜4 focused `65/65`、全Node `524/524`、18 fixture QR `18/18`（Version 19〜30）、native asset parity、390×844 visual audit、Release Simulator BuildをPASS。FAIL 0、SKIPPED 0。
+- Production A/B/C QRを`outputs/match-sharing-stage4/`へ作成。Product OwnerがMac画面表示をphysical iPhone標準Cameraで読み、Version 19／25／30を`3/3 PASS`、通常認識可能と判定した。Import、全端末／表示条件、Stage 5 in-app Scannerへ一般化しない。Evidence: `docs/implementation/CueScore_Match_Sharing_v1_Stage4_Sender_QR_2026-09-28.md`。
+- Version `1.1 (79)`、Official 101/102、schema、Info.plist、dependency manifestは変更なし。Stage 4差分を本Gateでcommit／pushし、Stage 5、Archive、Upload、TestFlight、App Store Connect操作へ進まない。
+
 ## Match Sharing v1 Implementation Stage 3 Product Owner Approval（2026年9月28日）
 
 - Gate: `STAGE 3 APPROVED — FINAL AUDIT / COMMIT / PUSH AUTHORIZED — STAGE 4 NOT STARTED`。

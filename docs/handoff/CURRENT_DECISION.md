@@ -1,24 +1,23 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-MATCH-SHARING-V1-STAGE3-20260928`
+- Decision ID: `CUESCORE-MATCH-SHARING-V1-STAGE4-20260928`
 - Date: 2026-09-28
-- Product Owner instruction: approve, final-audit, test, commit and push Match Sharing v1 Stage 3 only
-- Gate: `STAGE 3 APPROVED / FINAL AUDIT / COMMIT / PUSH / FRESH READ-BACK / STOP`
+- Product Owner instruction: record Stage 4 physical PASS, final-audit, test, commit and push Stage 4 only
+- Gate: `STAGE 4 PHYSICAL PASS / FINAL AUDIT / COMMIT / PUSH / FRESH READ-BACK / STOP`
 
 ## Scope
 
-- Reuse Stage 1 logical format/adapters/validation and Stage 2 shared identity/duplicate/Backup foundation.
-- Add explicit receiver mapping plan with existing or deferred new Self/Opponent Players.
-- Reconstruct receiver-local Match records for all six disciplines with new local Match ID and preserved sharedMatchId.
-- Add Player/Match all-or-nothing transaction, final duplicate check, semantic read-back and verified rollback.
-- Return exact imported local Match ID and provide the adopted Free Case C in-memory one-shot capability core.
+- Add adopted Match Detail `QR glyph + 共有` for completed normal Matches only.
+- Reuse Stage 2 lazy shared identity and Stage 1 production format with browser raw DEFLATE.
+- Generate deterministic ECC-M alphanumeric Single QR with Nayuki, four-module quiet zone and 292pt display.
+- Provide the adopted Sender screen, Back restoration, existing-toast error handling and A/B/C production QR evidence.
 
 ## Boundary
 
-- No Sender/Receiver UI, QR generation, scanner, camera, Info.plist, Free History UI or Pro redesign.
-- No Backup implementation change, dependency, Official 101/102, Version/Build, Archive, Upload, TestFlight or App Store Connect work.
-- One reviewable Stage 3 commit and push to GitHub `main` are authorized after all required tests pass.
+- No Receiver UI, scanner, camera, Info.plist, Import UI, Free History UI or Stage 5 work.
+- No Official 101/102, schema, Version/Build, Archive, Upload, TestFlight or App Store Connect work.
+- One reviewable Stage 4 commit and push to GitHub `main` are authorized after all required tests pass. Physical result is limited to A/B/C 3/3 on the tested iPhone standard Camera.
 
 ## STOP
 
-Stop at `MATCH SHARING v1 STAGE 3 COMMITTED / STAGE 4 NOT STARTED`. Do not start Stage 4.
+Stop at `MATCH SHARING v1 STAGE 4 COMMITTED / STAGE 5 NOT STARTED`. Do not start Stage 5.
