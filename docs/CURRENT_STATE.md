@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## Match Sharing v1 Implementation Stage 1 Product Owner Approval（2026年9月28日）
+
+- Gate: `STAGE 1 FORMAT / ADAPTERS / VALIDATION APPROVED / COMMITTED — STAGE 2 NOT STARTED`。
+- Production completed MatchからLogical Format v1を構築するpure adapter、traceable compact mapping、`CSM1:` envelope、Base45、SHA-256 integrity、bounded raw-DEFLATE codec boundary、typed validation errorを独立moduleへ実装した。
+- Production identifierは6競技の現行値を使用し、JPA 9-Ballは`jpa9Ball`。Official Demo v3.1の6競技×Short／Medium／Long 18 fixtureをproduction fieldへ変換して検証した。
+- Stage 1 focused `14/14` PASS。18/18 round-trip、Must Preserve parity、privacy Must Omit contamination 0、指定negative 14項目＋encoded-size 1項目 PASS、Demo export rejection PASS。
+- QR capacity evidenceは18/18でfinal `CSM1:` 884〜1852 chars、ECC-M理論Version 19〜30。QR生成／physical scanはStage 1対象外で、今回のfinal payload physical scanは`NOT VERIFIED`。
+- 全Node regression `473/473 PASS / 0 FAIL / 0 SKIPPED`。Product storage write、UI、Backup、Camera、Info.plist、Version／Build変更は0件。
+- Product Owner / ChatGPTはStage 1を承認し、source／tests／Evidence／SSOTをapproval GateでGitHub `main`へ正本化する。Stage 2以降は未着手。
+
 ## Match Sharing v1 Primary UI Prototype Product Owner PASS（2026年9月27日）
 
 - Gate: `DESIGN / TECHNICAL FEASIBILITY COMPLETE — FORMAL SPECIFICATION COMPLETE — PRIMARY UI PROTOTYPE PRODUCT OWNER PASS — IMPLEMENTATION NOT STARTED`。

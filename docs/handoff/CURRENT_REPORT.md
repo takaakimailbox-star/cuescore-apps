@@ -1,61 +1,46 @@
 # CueScore Current Report
 
 - App: CueScore Apps
-- Decision ID: `CUESCORE-MATCH-SHARING-V1-FORMAL-DOCS-20260927`
-- Date: 2026-09-27
-- Gate result: `MATCH SHARING v1 FORMAL DOCUMENTATION COMMITTED / IMPLEMENTATION NOT STARTED`
-- Implementation state: `NOT STARTED`
+- Decision ID: `CUESCORE-MATCH-SHARING-V1-STAGE1-20260928`
+- Date: 2026-09-28
+- Gate result: `STAGE 1 FORMAT / ADAPTERS / VALIDATION PRODUCT OWNER APPROVED`
+- Baseline: `551aed938f3dbf450473fd7d9031d9131bba28e7`
+- Commit / push: AUTHORIZED IN THIS APPROVAL GATE; final SHA is reported after fresh read-back
 
 ## Result
 
-Match Sharing v1のProduct Owner採用内容と、Feasibility、Physical iPhone QR、Round-trip Technical FeasibilityのEvidenceを正式文書へ整理した。Decision 12はLater / Deferred登録の履歴として維持し、後続のOfficial 101 / 102が設計未決事項を正式化する構成とした。Product Owner / ChatGPT Final Review後、documentation-only commitをGitHub `main`へpushした。
+Match Sharing v1 Stage 1のpure coreを独立moduleとして実装した。production completed MatchからLogical Format v1を作り、追跡可能なcompact mapping、Base45、`CSM1:` envelope、SHA-256 integrity、bounded raw-DEFLATE adapterを通してdecode後のLogical Formatへ復元する。localStorage、DOM、QR、Camera、Backupとの統合はない。
 
-## Evidence carried forward
+## Verification
 
-- 6競技 × Short / Medium / Long：18ケース
-- ECC-M Single QR theoretical fit：18/18 PASS、QR Version 18〜30
-- Product Owner physical iPhone：V19 / V25 / V30、3/3 PASS
-- Round-trip：18/18 PASS
-- Parity：162/162 PASS
-- History / Match Detail / Player Detail / Statistics / Analytics：各18/18 PASS
-- Player mapping：18/18 PASS、sender local Player ID混入0
-- duplicate rejection、Demo separation：PASS
-- Negative：10/10 PASS
-- privacy禁止データ混入：0
-- FAIL 0、BLOCKED 0
+- Stage 1 focused entries: `14/14 PASS`
+- 6競技 × Short / Medium / Long round-trip: `18/18 PASS`
+- Must Preserve parity: `18/18 PASS`
+- Must Omit privacy contamination: `0/18`
+- Required negative cases: `14/14 PASS`; encoded-size guard additional `1/1 PASS`
+- Demo export boundary: PASS
+- Theoretical ECC-M QR capacity: `18/18 fit`, Version `19–30`, final payload `884–1852 chars`
+- Full Node regression: `473/473 PASS / 0 FAIL / 0 SKIPPED`
+- `git diff --check`: PASS
 
-既存Evidenceは対象prototypeとfixtureを変更していないため再実行していない。今回のverificationはdocumentation consistency、DOCX render、Git diffに限定する。
+## Changed scope
 
-## Documentation verification
+- Product core source: 3 new pure modules
+- Tests/helper: Stage 1 fixture, round-trip, privacy, limits, negative and regression coverage
+- Evidence: Markdown plus machine-readable capacity JSON
+- Existing Match Sharing historical test: aligned with the current Official 101/102 succession while retaining Decision 12
+- SSOT/status/handoff documentation: current Stage 1 state only
+- Product storage writes: 0
+- UI / Backup / Camera / Version / Build changes: 0
 
-- Official 101／102とDecision 12、CURRENT_STATE、Decision Log v2.3の関係を照合：PASS
-- Decision Log v2.3 section audit：1 section、Letter portrait、header／footer非リンク、PASS
-- Decision Log v2.3 render：21 pagesを全ページvisual audit、clipping／overlap／broken table 0件
-- style lint：v2.2由来の既存direct formatting構造を維持。新規lint regression 0件
-- `git diff --check`：PASS
-- documentation変更：8 files
-- Product source変更：0 files
+## Not verified / not started
 
-## Changed documentation
-
-- `docs/official/07_CueScore_Official_Design_Decision_Log_v2.3_Official_Release.docx`
-- `docs/official/101_CueScore_Match_Sharing_v1_Decision.md`
-- `docs/official/102_CueScore_Match_Sharing_v1_Spec.md`
-- `docs/README.md`
-- `docs/CURRENT_STATE.md`
-- `docs/CURRENT_STATUS.md`
-- `docs/handoff/CURRENT_DECISION.md`
-- `docs/handoff/CURRENT_REPORT.md`
-
-## Boundary and unresolved items
-
-- Product source変更：0件
-- Product implementation、UI Prototype、QR scanner、schema変更：未実施
-- Version / Build / Archive / Upload / TestFlight / App Store Connect：未操作
-- Build 79 live record、production persistence、Backup統合、製品UI / camera、exact final payload physical scan：NOT VERIFIED
-- commit：実施済み（documentation only）
-- push：GitHub `main`へ実施済み
+- Product runtime compression adapter and app bundle integration
+- production localStorage persistence / import transaction / Player mapping
+- QR generation and final encoded payload physical iPhone scan
+- Backup / Restore, Camera permission, scanner and UI
+- Stage 2 and later work
 
 ## STOP
 
-Formal DocumentationはAPPROVED／COMMITTED。Match Sharing UI Prototype、製品実装、schema変更、Version／Build／配布工程へ進まずSTOPする。
+Stage 1 source and Evidence are committed/pushed by this approval Gate. Stage 2、Build、distributionへ進まない。
