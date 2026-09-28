@@ -1,6 +1,6 @@
 # CueScore Apps — Match Sharing v1 Design Decision
 
-**Status:** Adopted / Design and Technical Feasibility Complete / Formal Specification Complete / Implementation NOT STARTED
+**Status:** Adopted / Design and Technical Feasibility Complete / Formal Specification Complete / Primary UI Prototype Product Owner PASS / Implementation NOT STARTED
 
 **Decision date:** 2026-09-27
 
@@ -35,7 +35,9 @@ Match Sharing v1のPrimary transportとして、ECC-MのSingle QRを採用する
 
 `試合詳細 → 試合を共有 → 対象1試合のSingle QR表示`
 
-共有対象は、完了・確定済みの表示中1試合だけとする。送信メニューのアイコン、ボタン形状、位置、サイズ、visualはPrototypeとProduct Owner UI Reviewで決定する。
+共有対象は、完了・確定済みの表示中1試合だけとする。Product Owner UI Reviewにより、試合詳細header右上の`QR glyph + 共有`を採用した。visible labelは`共有`、accessibility labelは`試合を共有`相当とする。
+
+遷移先headerは`試合を共有`とし、競技、日時、Player A / B、score / result、Race / target等の主要条件、短い読取説明、Single QRを表示する。QRは標準白黒、quiet zone維持、logo・着色・角丸なしとする。Prototypeの約292×292pt表示はProduct Owner physical iPhoneで`PASS — 普通に読めた`を確認した。この結果を未試験の全端末・全表示条件へ一般化しない。
 
 ## Receiver navigation
 
@@ -43,7 +45,18 @@ Match Sharing v1のPrimary transportとして、ECC-MのSingle QRを採用する
 
 `試合履歴一覧 → 試合を受け取る → QR読み取り → payload検証 → 試合内容確認 → あなたはどちらですか？ → 自分Player mapping → 相手Player mapping → 最終確認 → 試合を取り込む → 保存 → 通常の試合詳細`
 
-受信メニューのアイコン、ボタン形状、位置、サイズ、visualはPrototypeとProduct Owner UI Reviewで決定する。
+Product Owner UI Reviewにより、試合履歴一覧header右上の`QR glyph + 受け取る`を採用した。visible labelは`受け取る`、accessibility labelは`試合を受け取る`相当とする。件数行右側へ置く案は、filter／Match cardとの混同と誤タップを避け、Senderとのheader action一貫性を保つため不採用とした。
+
+## Primary UI Prototype decisions
+
+Match Sharing v1 Primary UI PrototypeはProduct Owner ReviewをPASSした。製品実装の承認ではない。
+
+- Scanner headerは`試合を受け取る`。未要求時はiOS標準Camera permission後にScannerへ進み、許可済みは直接Scanner、拒否済みは再要求ループを行わずSettings recoveryを示す。CueScore独自の事前permission tutorial画面を通常Flowへ追加しない。
+- validation PASS後は`試合を確認`で試合内容と`あなたはどちらですか？`を1画面へ統合する。Player A / Bを実名表示し、未選択では`次へ` disabled、選択後は状態を明示して`次へ` enabledとする。名前タップだけで即遷移しない。
+- Self Player Mappingは共有名とreceiver local Playerを分け、既存Playerまたは`新しいプレーヤーとして追加`をユーザーが明示選択する。名前一致や共有名からの自動mapping／自動作成を行わない。
+- Opponent Player Mapping headerは`対戦相手を選択`。同名local Playerが1人ならQuick候補として提示するが自動選択しない。複数同名は既存Player Pickerで確認し、Selfで選択済みPlayerは`自分として選択済み`としてdisabledにする。同一local PlayerをSelf／Opponent両方へmappingしない。
+- 最終確認headerは`取り込み内容を確認`、mapping sectionは`この端末での登録`とする。`取り込むまでは試合とプレーヤーは保存されません`を表示し、`試合を取り込む`押下前はMatch、Player、Historyを変更しない。
+- Import transactionとread-back成功後は通常Match Detailへ直接遷移し、現行の淡緑success toast patternで`✓ 試合を取り込みました`を一時表示する。専用Success画面は追加しない。
 
 ## Player mapping
 
@@ -51,8 +64,11 @@ Match Sharing v1のPrimary transportとして、ECC-MのSingle QRを採用する
 
 - 選択した自分側を受信端末のlocal Playerへmappingする。
 - 相手側は既存Playerを明示選択するか、共有Player名を初期値としてImportフロー内で新規Playerを作成する。
+- 自分側にも`新しいプレーヤーとして追加`を提供する。
 - 名前だけで同一人物と自動判定しない。
 - 未登録相手の作成にPlayer管理画面への離脱を必須としない。
+- 通常候補表示はreceiver-local avatar、Player名、必要時の`メイン`表示に限定し、メモ全文や最終使用日を常時表示しない。
+- 既存Player Pickerを再利用し、Match Sharing専用Pickerを新設しない。
 
 ## Match identity and duplicate prevention
 
@@ -70,7 +86,13 @@ Match Sharing v1のPrimary transportとして、ECC-MのSingle QRを採用する
 
 取り込んだ試合は通常試合として扱い、Match History、Match Detail、Player Detail、Statistics、Analyticsへ通常の1試合として反映する。
 
-「共有」「受信」「Imported」等のbadge、label、専用一覧は追加しない。
+「共有」「受信」「Imported」「QRから追加」等のbadge、label、専用一覧、Import元表示は追加しない。通常Match Detailの`共有`actionは通常操作として維持できる。
+
+## Free / Pro
+
+Match Sharing v1はFree / Pro共通機能とする。送信・受信へPro badge、lock、paywall、entitlement gateを設けない。受信した試合は通常Matchとして既存Free / Pro record-access contractに従う。
+
+現行sourceではFreeの20件はstorage上限ではなく、保存済み全recordを新しい順に安定sortした先頭20件のaccess／view policyである。storage writeはunfiltered collectionを使用するため21件目以降も保存可能である。ただし、古い日時のImport recordが先頭20件外になる場合のImport直後Detail導線、Statistics／Analytics適用、成功feedbackとの順序はImplementation Designで確定し、Match Sharingだけの特別扱いを推測で追加しない。
 
 ## Privacy and omitted data
 
@@ -132,12 +154,16 @@ Importは原子的に扱う。Player新規作成とMatch保存を含む全処理
 - Negative tests：10/10 PASS
 - Demo separation：PASS
 - privacy禁止データ混入：0
+- Primary UI Prototype：Product Owner PASS
+- Sender QR約292×292pt：Product Owner physical iPhone PASS
+- Sender Entry、Receiver Entry、Scanner、Match Preview / Side Selection、Self Mapping、Opponent Mapping、Final Confirmation、Import Success：Product Owner ADOPTED
+- Match Sharing Free / Pro共通：Product Owner ADOPTED
 - FAIL：0、BLOCKED：0
 
-EvidenceはOfficial Demo Data v3.1 fixturesと隔離prototypeを使用した。Build 79のlive user record、production localStorage transaction、Backup / Restore統合、製品UI、カメラdecode、最終payloadの個別physical scanは未確認であり、PASSへ拡張しない。
+EvidenceはOfficial Demo Data v3.1 fixturesと隔離prototypeを使用した。UI Prototype採用記録は`docs/implementation/CueScore_Match_Sharing_v1_UI_Prototype_PO_Acceptance_2026-09-27.md`を参照する。Build 79のlive user record、production localStorage transaction、Backup / Restore統合、production scanner／camera decode、Dynamic Type、VoiceOver／focus、permission denied production UI、new Player creation production flow、最終実装のphysical testは未確認であり、PASSへ拡張しない。
 
 ## Gate
 
-**Design / Technical Feasibility Complete. Formal Specification Complete. Implementation NOT STARTED.**
+**Design / Technical Feasibility Complete. Formal Specification Complete. Primary UI Prototype Product Owner PASS. Implementation NOT STARTED.**
 
-次GateはProduct OwnerによるFormal Documentation Approval。その後も、別のImplementation Decisionなしに製品実装、UI実装、schema変更、Build、配布へ進まない。
+今回のUI Prototype Decision同期は製品実装承認ではない。別のImplementation Decisionなしに製品実装、QR scanner実装、Camera API／Info.plist、schema、Backup、Free / Pro gate、Version、Build、配布へ進まない。

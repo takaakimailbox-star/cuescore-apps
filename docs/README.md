@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.3_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.4_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -29,8 +29,8 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.3 is the current official release and successor
-to v2.2. Earlier versions remain in the official directory as preceding releases.
+Official Design Decision Log v2.4 is the current official release and successor
+to v2.3. Earlier versions remain in the official directory as preceding releases.
 
 Adopted RC decision addenda that supplement the latest Decision Log:
 
@@ -127,8 +127,10 @@ Match Sharing v1 formal design status:
 
 - Design / Technical Feasibility: complete
 - Formal Specification: complete
+- Primary UI Prototype: Product Owner PASS
 - Product implementation: not started
 - Decision 12 remains the historical Later / Deferred registration; Official 101 / 102 are the adopted successor Decision and Specification.
+- UI Prototype acceptance evidence: `implementation/CueScore_Match_Sharing_v1_UI_Prototype_PO_Acceptance_2026-09-27.md`
 
 JPA 9-Ball Dead Ball UI implementation evidence:
 

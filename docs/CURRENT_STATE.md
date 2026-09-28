@@ -1,15 +1,17 @@
 # CueScore Apps Current State
 
-## Match Sharing v1 Formal Design and Technical Feasibility（2026年9月27日）
+## Match Sharing v1 Primary UI Prototype Product Owner PASS（2026年9月27日）
 
-- Gate: `DESIGN / TECHNICAL FEASIBILITY COMPLETE — FORMAL SPECIFICATION COMPLETE — IMPLEMENTATION NOT STARTED`。
+- Gate: `DESIGN / TECHNICAL FEASIBILITY COMPLETE — FORMAL SPECIFICATION COMPLETE — PRIMARY UI PROTOTYPE PRODUCT OWNER PASS — IMPLEMENTATION NOT STARTED`。
 - Match Sharingは完了・確定済み1試合を相手のCueScoreへ1回受け渡す機能であり、同期ではない。共有後の両端末は独立し、アカウント／クラウドを必須にしない。
 - Primary transportはECC-M Single QR。論理Formatは内部保存schemaから分離し、`compact representation → deflate → Base45 → CSM1: prefix → Single QR`とする。共有ファイル／iOS共有シートはfallback候補、直接P2PはLater、複数QRは通常経路に採用しない。
 - 受信入口は試合履歴一覧、送信入口は試合詳細。Player mapping、UUID v4 `sharedMatchId`、新local Match ID、保存前duplicate rejection、通常History／Detail／Statistics／Analytics反映、Demo全面禁止、privacy除外、all-or-nothing Import、Backup／Restoreでの`sharedMatchId`維持を正式化した。
 - Evidence：6競技×Short／Medium／Long 18/18 Single QR theoretical fit、V19／V25／V30 physical iPhone 3/3 PASS、Round-trip 18/18、parity 162/162、Negative 10/10、Demo separation PASS、privacy禁止データ混入0、FAIL 0、BLOCKED 0。
-- 未確認：Build 79 live user records、production localStorage transaction、Backup／Restore統合、製品UI／camera、exact final payloadのphysical scan。未確認事項をPASSへ拡張しない。
+- Product Ownerは、Sender／Receiver header actions、292pt QR表示、Scanner permission flow、Match Preview＋side選択、Self／Opponent mapping、Final Confirmation、通常Match Detail＋success toastをPrimary UIとして採用した。Match Sharing v1はFree / Pro共通機能とし、Pro gateを設けない。
+- Free 20件は現行source／Official 98上のstorage上限ではなくaccess／view limitで、storage writeはunfiltered collectionを使用する。古い日時のImportが先頭20件外になる場合のDetail／Statistics／Analytics動作はImplementation Designで確定する。
+- 未確認：Build 79 live user records、production localStorage transaction、Backup／Restore統合、production scanner／camera decode、Dynamic Type、VoiceOver／focus、permission denied production UI、new Player creation production flow、Free 20件境界の詳細動作、final implementation physical test。未確認事項をPASSへ拡張しない。
 - Decision 12はLater登録の履歴として維持する。後続正式文書は`docs/official/101_CueScore_Match_Sharing_v1_Decision.md`と`docs/official/102_CueScore_Match_Sharing_v1_Spec.md`。Formal Specification完了はImplementation承認ではない。Version 1.1へ追加せず、製品sourceは未変更。
-- Product Owner / ChatGPT Final ReviewはAPPROVED。Official 101／102、Decision Log v2.3、関連SSOTをdocumentation-onlyでGitHub `main`へ正本化した。Match Sharing UI Prototype／製品実装は開始していない。
+- Formal DocumentationはOfficial 101／102、Decision Log v2.3、関連SSOTとしてGitHub `main`へ正本化済み。後続UI Prototype ReviewはProduct Owner PASSとなり、Official 101／102、Decision Log v2.4、Evidenceへ同期してdocumentation-onlyでGitHub `main`へ正本化した。製品実装は開始していない。
 
 ## Version 1.1 Public Release Verification（2026年9月27日）
 
@@ -1215,7 +1217,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 
 - CSV入出力
 - 自動クラウド同期
-- 試合共有（Match Sharing）：1台で記録した完了試合を対戦相手のCueScore Appsへ転送し、相手側の履歴・統計・分析へ取り込める機能。v1.0非搭載、v1.1以降候補。転送方式・プレーヤー紐付け・重複防止・編集競合・データ互換を正式設計してから実装する。
+- 試合共有（Match Sharing）：1台で記録した完了試合を対戦相手のCueScore Appsへ転送し、相手側の履歴・統計・分析へ取り込める機能。v1.0非搭載。Formal Design／Technical Feasibility／Formal Specification／Primary UI Prototype Product Owner Reviewは完了したが、製品実装は未着手で、Version 1.1にも含めていない。
 
 ## 要確認事項
 
@@ -1233,7 +1235,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - App Store v1.0 release profileはCSV・クラウド同期を無効化し、関連UIを表示しない。
 - Official Demo Dataはv1.0提出予定範囲に含める。実提出ビルドでの収録と通常ユーザーデータからの分離確認は未実施。
 - Official Demo Dataの本番向け表示は「サンプルデータ」を採用し、状態を「通常データ／サンプルデータ」、操作を「準備する／サンプルを見る／通常データへ戻る／初期状態に戻す／削除」とする。
-- 試合共有（Match Sharing）はv1.0ではLaterとし、自動クラウド同期とは別の将来機能として扱う。実装開始前にProduct Ownerの再採用判断を必要とする。正式決定記録：`docs/official/12_CueScore_Later_Match_Sharing_Decision.md`。
+- 試合共有（Match Sharing）はv1.0ではLaterとしていた履歴をDecision 12に維持する。その後Official 101／102でFormal Design／Specification、Decision Log v2.4でPrimary UI Prototype Product Owner PASSとFree／Pro共通Decisionを追補した。Implementation Decisionは未発行で、製品実装は未着手。正式記録：`docs/official/12_CueScore_Later_Match_Sharing_Decision.md`、`docs/official/101_CueScore_Match_Sharing_v1_Decision.md`、`docs/official/102_CueScore_Match_Sharing_v1_Spec.md`。
 - Native iOS foundation、実機基本機能、TestFlight Build 1、TestFlight内部運用はGO。Build 2開発はGOだが、本状態同期ではBuild 2を作成しない。
 - App Store本審査提出と一般公開は未承認。Product Ownerの明示承認なしに実施しない。
 
