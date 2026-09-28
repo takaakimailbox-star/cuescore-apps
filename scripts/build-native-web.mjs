@@ -26,6 +26,7 @@ const files = [
   "demo-data.js",
   "monetization-v1.js",
   "record-access-v1.js",
+  "match-sharing-persistence-v1.js",
   "manifest.webmanifest",
   "official-document.js",
   "official-pages.css",

@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Match Sharing v1 Implementation Stage 2 Product Owner Approval（2026年9月28日）
+
+- Gate: `STAGE 2 FREE ACCESS / SHARED ID / BACKUP-RESTORE APPROVED — COMMIT / PUSH AUTHORIZED — STAGE 3 NOT STARTED`。
+- 修正前27件fixtureでFree基本Statisticsが全保存recordを参照する既存Official 98／102不一致を`0/1 EXPECTED FAIL`で再現。Statistics sourceを共通`CueScoreRecordAccess`へ統一し、Freeはglobal newest 20件を先に確定してからfilter、Proは全27件を維持した。Free History UIは未実装。
+- optional UUID v4 `sharedMatchId`を、完了済み通常Matchの初回共有時だけlazy生成・verified persistence・semantic read-backするstorage boundaryとして実装。legacy欠損正常、valid ID再利用、Demo／未完了／malformed拒否、失敗rollback、新schema／bulk migrationなし。
+- duplicate lookupはFree表示外を含む全通常保存recordを対象とし、pending／invalid／Demo／削除済みを除外。Backup Version 2を維持し、new Backup preserve、old Backup欠損互換、Replace保持、Mergeはshared ID優先＋local ID fallback＋conflict拒否、Restore後duplicate検出を確認した。
+- Stage 2 dedicated `15/15`、関連focused `129/129`、Stage 1 `14/14`、全Node `488/488`、capacity 18/18／ECC-M Version 19〜30、native-web parity、`git diff --check` PASS。FAIL 0、BLOCKED 0。
+- Product Owner / ChatGPTはStage 2を承認した。Evidence: `docs/implementation/CueScore_Match_Sharing_v1_Stage2_Persistence_Backup_Access_2026-09-28.md`。本Approval Gateでsource／tests／Evidence／SSOTをGitHub `main`へ正本化し、Stage 3、UI、QR、Camera、Info.plist、Version／Build、配布へ進まない。
+
 ## Match Sharing v1 Implementation Stage 1 Product Owner Approval（2026年9月28日）
 
 - Gate: `STAGE 1 FORMAT / ADAPTERS / VALIDATION APPROVED / COMMITTED — STAGE 2 NOT STARTED`。

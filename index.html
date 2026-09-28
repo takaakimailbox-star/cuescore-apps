@@ -8626,6 +8626,7 @@ body {
 
   
   <script src="./demo-data.js?v=2.0-build79-jpa-dead-ball-internal-v1"></script>
+  <script src="./match-sharing-persistence-v1.js"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -9517,6 +9518,30 @@ let matchRecordsRawCacheV152 = null;
     refreshDerivedViewsV131("match-records");
     return true;
   }
+
+  // Match Sharing v1 Stage 2: lazily persist one stable transport identity
+  // for the completed normal Match being shared. No bulk migration is done.
+  function ensureSharedMatchIdV1(matchId) {
+    const persistence = window.CueScoreMatchSharingPersistenceV1;
+    if (!persistence) throw new Error("Match Sharing persistence service is unavailable.");
+    return persistence.ensureSharedMatchId({
+      matchId,
+      demoMode: Boolean(window.CueScoreDemoData?.isDemo?.()),
+      readRecords: readMatchRecords,
+      replaceRecords: persistMatchRecordsOnlyV161,
+      uuidFactory: () => crypto.randomUUID()
+    });
+  }
+
+  function findDuplicateSharedMatchIdV1(sharedMatchId, options = {}) {
+    if (window.CueScoreDemoData?.isDemo?.()) return null;
+    return window.CueScoreMatchSharingPersistenceV1?.findDuplicateSharedMatchId(
+      readMatchRecords(), sharedMatchId, options
+    ) || null;
+  }
+
+  window.cueScoreEnsureSharedMatchIdV1 = ensureSharedMatchIdV1;
+  window.cueScoreFindDuplicateSharedMatchIdV1 = findDuplicateSharedMatchIdV1;
 
   function escapeRecordText(value) {
     return String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
@@ -16931,12 +16956,23 @@ let matchRecordsRawCacheV152 = null;
       const validRecord = record => {
         if (!record || typeof record !== "object" || Array.isArray(record)) return false;
         const players = record.players;
-        return players && typeof players === "object" && players[1] && players[2];
+        if (!(players && typeof players === "object" && players[1] && players[2])) return false;
+        try {
+          window.CueScoreMatchSharingPersistenceV1?.assertOptionalSharedMatchId(record);
+          return true;
+        } catch (_) {
+          return false;
+        }
       };
       if (!value.players.every(validPlayer) || !value.matchRecords.every(validRecord)) return false;
 
       const ids = value.matchRecords.map(record => String(record.id || record.matchId || "").trim()).filter(Boolean);
       if (new Set(ids).size !== ids.length) return false;
+      try {
+        window.CueScoreMatchSharingPersistenceV1?.validateSharedMatchIds(value.matchRecords);
+      } catch (_) {
+        return false;
+      }
       return true;
     }
 
@@ -18698,7 +18734,8 @@ let matchRecordsRawCacheV152 = null;
       const records = typeof readMatchRecords === "function"
         ? readMatchRecords()
         : (()=>{try{const v=JSON.parse(localStorage.getItem("rotationScoreboard.matchRecords.v1")||"[]");return Array.isArray(v)?v:[]}catch(_){return[]}})();
-      return records.filter(r=>r&&r.players?.[1]&&r.players?.[2]);
+      const validRecords=records.filter(r=>r&&r.players?.[1]&&r.players?.[2]);
+      return window.CueScoreRecordAccess?.getEligibleRecords(validRecords) || validRecords;
     };
     const read=()=>{try{const {tag:_legacyTag,...supported}=JSON.parse(localStorage.getItem(KEY)||"{}");return {...defaults,...supported,category:""}}catch(_){return {...defaults}}};
     const save=f=>localStorage.setItem(KEY,JSON.stringify({...defaults,...f}));
@@ -26128,11 +26165,6 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
 
   function normalizeText(value){return String(value??"").normalize("NFKC").trim().replace(/\s+/g," ").toLocaleLowerCase("ja")}
   function playerKey(player){const id=player?.id??player?.playerId??player?.uuid;return id?`id:${String(id)}`:`name:${normalizeText(player?.name)}`}
-  function recordKey(record){
-    const id=record?.id??record?.matchId;if(id)return `id:${String(id)}`;
-    const p1=record?.players?.[1]||record?.players?.["1"]||{},p2=record?.players?.[2]||record?.players?.["2"]||{};
-    return ["legacy",record?.startedAt||record?.playedAt||record?.endedAt||"",normalizeText(p1.name),normalizeText(p2.name),Number(p1.score||0),Number(p2.score||0)].join("|");
-  }
   function listItemKey(item){if(typeof item==="string")return `text:${normalizeText(item)}`;return `id:${item?.id??item?.key??normalizeText(item?.name??item?.label??JSON.stringify(item))}`}
   function validateBackup(value){return Boolean(window.cueScoreValidateBackup?.(value))}
   function mergeUnique(current,incoming,keyFn){const keys=new Set(current.map(keyFn));const added=[];incoming.forEach(item=>{const key=keyFn(item);if(!keys.has(key)){keys.add(key);added.push(item)}});return {value:[...current,...added],added:added.length}}
@@ -26140,7 +26172,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     backup=window.cueScoreMigrateBackupToCanonicalV170(backup);
     const current={players:readArray(PLAYER_KEY),records:readArray(RECORD_KEY),categories:readArray(CATEGORY_KEY),seasons:readArray(SEASON_KEY)};
     const nextPlayers=mergeUnique(current.players,backup.players,playerKey);
-    const nextRecords=mergeUnique(current.records,backup.matchRecords,recordKey);
+    const nextRecords=window.CueScoreMatchSharingPersistenceV1.mergeMatchRecords(current.records,backup.matchRecords);
     const nextCategories=mergeUnique(current.categories,Array.isArray(backup.matchCategories)?backup.matchCategories:[],listItemKey);
     const nextSeasons=mergeUnique(current.seasons,Array.isArray(backup.matchSeasons)?backup.matchSeasons:[],listItemKey);
     window.CueScoreRestoreSafetyV160.performTransaction(
