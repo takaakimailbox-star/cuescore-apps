@@ -35,6 +35,7 @@ const APP_SHELL = [
   "./match-sharing-player-drafts-v1.js",
   "./match-sharing-transaction-v1.js",
   "./match-sharing-sender-v1.js",
+  "./match-sharing-receiver-v1.js",
   "./monetization-v1.js?v=1.0-build72-current-plan-settings-v1",
   "./monetization-v1.css?v=1.0-build72-current-plan-settings-v1",
   "./docs/official/app-store-v1.0/public/CueScore_Privacy_Policy_v1.0_Official.md",

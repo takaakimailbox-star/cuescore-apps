@@ -14,6 +14,7 @@
 		C5C300022E6A000100000001 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C300012E6A000100000001 /* SceneDelegate.swift */; };
 		C5C001012E6A000100000001 /* CueScoreStoreKitPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C001022E6A000100000001 /* CueScoreStoreKitPlugin.swift */; };
 		C5C001032E6A000100000001 /* CueScoreBridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C001042E6A000100000001 /* CueScoreBridgeViewController.swift */; };
+		C5C500012E6A000100000001 /* CueScoreQRScannerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C500022E6A000100000001 /* CueScoreQRScannerPlugin.swift */; };
 		504EC30D1FED79650016851F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30B1FED79650016851F /* Main.storyboard */; };
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
@@ -49,6 +50,7 @@
 		C5C300012E6A000100000001 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C5C001022E6A000100000001 /* CueScoreStoreKitPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CueScoreStoreKitPlugin.swift; sourceTree = "<group>"; };
 		C5C001042E6A000100000001 /* CueScoreBridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CueScoreBridgeViewController.swift; sourceTree = "<group>"; };
+		C5C500022E6A000100000001 /* CueScoreQRScannerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CueScoreQRScannerPlugin.swift; sourceTree = "<group>"; };
 		504EC30C1FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		504EC30E1FED79650016851F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		504EC3111FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				C5C300012E6A000100000001 /* SceneDelegate.swift */,
 				C5C001022E6A000100000001 /* CueScoreStoreKitPlugin.swift */,
 				C5C001042E6A000100000001 /* CueScoreBridgeViewController.swift */,
+				C5C500022E6A000100000001 /* CueScoreQRScannerPlugin.swift */,
 				504EC30B1FED79650016851F /* Main.storyboard */,
 				504EC30E1FED79650016851F /* Assets.xcassets */,
 				504EC3101FED79650016851F /* LaunchScreen.storyboard */,
@@ -292,6 +295,7 @@
 				C5C300022E6A000100000001 /* SceneDelegate.swift in Sources */,
 				C5C001012E6A000100000001 /* CueScoreStoreKitPlugin.swift in Sources */,
 				C5C001032E6A000100000001 /* CueScoreBridgeViewController.swift in Sources */,
+				C5C500012E6A000100000001 /* CueScoreQRScannerPlugin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

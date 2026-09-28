@@ -308,7 +308,7 @@ test("Import result supports Stage 2 Backup identity and restored duplicate dete
   assert.equal(persistence.findDuplicateSharedMatchId(harness.state.matches,result.sharedMatchId)?.id,result.importedLocalMatchId);
 });
 
-test("production wiring uses existing Restore safety, normal keys and no Stage 5 Receiver UI or Camera changes",()=>{
+test("production wiring preserves Stage 3 Restore safety and does not include Stage 5B import UI",()=>{
   for(const file of ["match-sharing-validation-v1.js","match-sharing-adapters-v1.js","match-sharing-player-drafts-v1.js","match-sharing-transaction-v1.js"]){
     assert.match(html,new RegExp(file.replaceAll(".","\\.")));
     assert.match(nativeBuild,new RegExp(file.replaceAll(".","\\.")));
@@ -317,5 +317,7 @@ test("production wiring uses existing Restore safety, normal keys and no Stage 5
   assert.match(html,/performLocalRestoreTransactionV160\([\s\S]*PLAYER_LIBRARY_KEY,MATCH_RECORDS_KEY/);
   assert.match(html,/window\.cueScoreImportSharedMatchV1 = importSharedMatchV1/);
   assert.match(html,/window\.cueScoreConsumeImportedMatchDetailOnceV1 = consumeImportedMatchDetailOnceV1/);
-  assert.doesNotMatch(html,/id="matchSharing(Scanner|Receiver)/);
+  assert.match(html,/id="matchSharingReceiverV1"/);
+  assert.match(html,/id="matchSharingScannerStateV1"/);
+  assert.doesNotMatch(html,/id="matchSharing(SelfMapping|OpponentMapping|ImportConfirmation|SideSelection|MatchPreview)/);
 });

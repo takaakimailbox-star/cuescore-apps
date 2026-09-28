@@ -1,5 +1,16 @@
 # CueScore Apps Current State
 
+## Match Sharing v1 Stage 5A Physical FAIL #2 Root Cause Fix（2026年9月28日）
+
+- Gate: `STAGE 5A PHYSICAL SCANNER PASS — STAGE 5B NOT STARTED`。
+- Product Owner physical iPhone初回確認は`FAIL — CAMERA PREVIEW / CAPTURE DID NOT START`。Receiver入口、Scanner遷移／chrome／guide、error、retry復帰はPASSしたが、実camera preview、AVCaptureSession scan、QR recognitionはFAIL。A/B/Cとproduction decode physicalは`NOT TESTED`。
+- Evidence画像ではScannerの濃色領域がWeb側placeholderのままで、native previewは表示されていなかった。source auditで、Capacitor internal queueから呼ばれる`startScan`がUIKit preview操作を明示的にmain threadへdispatchしていないこと、CSS／WebView座標をhost viewへ変換せずpreviewを配置していたこと、WebViewとのz-orderが未確立だったことを確認した。startup bridge failureがgeneric invalid-QRへ誤分類され、retry前のdefensive stopも不足していた。
+- 最小修正としてUIKit preview生成／配置をmain threadへ移し、WebView座標をhost座標へ変換し、previewをWebView前面へ配置。native preview側で既存guide角を維持し、bounds変更時にpreview layerを再layoutする。captureは専用queueでdevice／input／output／QR metadataを構成し、`startRunning()`後の`isRunning`を必須確認する。bridgeは`registerPlugin`を優先し、startup errorをcamera errorとして保持。retryは旧sessionをstopしてから再開する。
+- 最終監査はStage 5A dedicated `16/16`、Stage 1〜5A `81/81`、全Node `540/540`、native-web／iOS public parity、Release Simulator BuildをPASS。署名済み`CueScore Stage5A` Version `1.1 (79)`を同じphysical iPhoneへ再install済み。公開`CueScore Apps`は別Bundleとして維持。
+- Physical FAIL #2のruntime diagnosticでNative plugin resolve後、Camera APIを1回も呼ぶ前に`ReferenceError: Can't find variable: readRecords`が発生したことを確認。実関数`readMatchRecords`への依存mapping名不一致が確定原因で、`readRecords: readMatchRecords`へ1点修正した。
+- 同じphysical iPhone 16eで修正後、authorization `notDetermined → authorized`、back Camera discovery、input/output追加、`.qr` metadata、280×280 pt preview attach、`session.isRunning=true`をruntime read-backし、Product OwnerもCamera起動を確認。続く実機確認でQR A／B／C（ECC-M Version 19／25／30）のin-app recognitionとCueScore validation成功を`3/3 PASS`、BackによるCamera停止をPASSと確認。未試験のQR Version／端末／表示条件へ一般化しない。Retryは不要だったため`NOT TESTED — NOT FAILED`。
+- 一時diagnostic logは最終候補から除去。Stage 5A dedicated `16/16`、Stage 1〜5A `81/81`、全Node `540/540`、native parity、Release Simulator Build、最終device Build／reinstallをPASS。Evidence: `docs/implementation/CueScore_Match_Sharing_v1_Stage5A_Physical_FAIL2_Diagnosis_Fix_2026-09-28.md`、`outputs/match-sharing-stage5a/physical-fail-2-2026-09-28/`。commit／pushせず、Stage 5Bへ進まない。
+
 ## Match Sharing v1 Implementation Stage 4 Sender QR Product Owner PASS（2026年9月28日）
 
 - Gate: `STAGE 4 COMPLETE — PRODUCT OWNER PHYSICAL IPHONE QR TEST 3/3 PASS — STAGE 5 NOT STARTED`。

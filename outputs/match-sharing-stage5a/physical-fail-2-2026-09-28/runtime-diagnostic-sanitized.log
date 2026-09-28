@@ -1,0 +1,29 @@
+Stage 5A physical iPhone runtime diagnostic — 2026-09-28 JST
+Bundle: com.takaakimailboxstar.cuescoreapps.stage5a
+
+FAIL #2 capture before fix:
+controllerCreateRequested hasReceiver=true hasFactory=true
+pluginResolved resolved=true
+controllerEnterRejected code=UNCLASSIFIED name=ReferenceError message="Can't find variable: readRecords"
+Native authorizationStatus invocation count=0
+
+Runtime capture after minimum fix:
+authorization status=notDetermined
+permissionRequest before=notDetermined
+permissionResult status=authorized
+startScanCalled authorization=authorized
+previewAttach attached=true height=280.0 width=280.0
+deviceDiscovery count=2
+discoveredDevice index=0 localizedName="Back Camera" position=back type=AVCaptureDeviceTypeBuiltInWideAngleCamera
+discoveredDevice index=1 localizedName="Front Camera" position=front type=AVCaptureDeviceTypeBuiltInWideAngleCamera
+selectedDevice localizedName="Back Camera" position=back type=AVCaptureDeviceTypeBuiltInWideAngleCamera
+inputCreation success=true
+outputCreation success=true
+canAddInput value=true
+canAddOutput value=true
+metadataType value=qr
+sessionConfigured value=true
+sessionRunning isRunning=true
+nativeStartResolved authorization=authorized active=true deviceFound=true inputAdded=true outputAdded=true metadataType=qr previewAttached=true previewWidth=280 previewHeight=280
+
+No camera frame, image, QR payload, Apple account data, secret, password, authorization token, or device unique ID is included.

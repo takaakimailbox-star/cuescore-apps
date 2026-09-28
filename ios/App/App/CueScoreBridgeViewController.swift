@@ -4,5 +4,6 @@ import Capacitor
 final class CueScoreBridgeViewController: CAPBridgeViewController {
     override func capacitorDidLoad() {
         bridge?.registerPluginInstance(CueScoreStoreKitPlugin())
+        bridge?.registerPluginInstance(CueScoreQRScannerPlugin())
     }
 }

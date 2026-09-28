@@ -38,6 +38,7 @@ const files = [
   "match-sharing-player-drafts-v1.js",
   "match-sharing-transaction-v1.js",
   "match-sharing-sender-v1.js",
+  "match-sharing-receiver-v1.js",
   "manifest.webmanifest",
   "official-document.js",
   "official-pages.css",

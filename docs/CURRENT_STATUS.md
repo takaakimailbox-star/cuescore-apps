@@ -3,7 +3,7 @@
 - Updated: 2026-09-28
 - Public Version / Build: `1.0 (78)`
 - Candidate Version / Build: `1.1 (79)`
-- Gate: `MATCH SHARING v1 STAGE 4 COMPLETE / PRODUCT OWNER PHYSICAL QR 3/3 PASS / STAGE 5 NOT STARTED`
+- Gate: `MATCH SHARING v1 STAGE 5A PHYSICAL SCANNER PASS / STAGE 5B NOT STARTED`
 - Public availability: Japan App Store confirmed by Product Owner at approximately 2026-09-25 16:37 JST
 - App Store state: `READY_FOR_SALE` / `READY_FOR_DISTRIBUTION`
 - Review submission: `COMPLETE`
@@ -13,7 +13,7 @@
 - CueScore Pro: `com.takaakimailboxstar.cuescoreapps.pro`, `NON_CONSUMABLE`, `APPROVED`, `JPY 980`
 - Released product source: `6e0a569e32e473f6b5bfa14c74eeca1482820467`; Build 79 candidate source: `39e3071f898c7af8499abbfee6f0043307699f6f`
 - v1.0 release phase: complete; released Build 78 remains unchanged
-- Match Sharing v1: Stage 1–3 approved and committed; Stage 4 Sender Entry / production Single QR implemented with 12/12 dedicated, 65/65 Stage 1–4 focused, 524/524 full Node, 18/18 production QR and Release Simulator Build PASS. Product Owner physical iPhone standard-Camera QR A/B/C test is 3/3 PASS for Versions 19/25/30; Stage 5 not started; Version 1.1 unchanged
+- Match Sharing v1: Stage 1–4 approved and committed; Stage 4 physical standard-Camera QR A/B/C is 3/3 PASS. Stage 5A FAIL #2 was a pre-Native JavaScript dependency-name mismatch (`readRecords` vs `readMatchRecords`), not a device Camera failure. One-line mapping fix completed. Same iPhone 16e now has physical authorization/discovery/preview/session start PASS, in-app QR A/B/C recognition and CueScore validation 3/3 PASS, and Back Camera stop PASS. Dedicated 16/16, Stage 1–5A 81/81, full Node 540/540, native parity, Release Simulator Build and final no-debug-log reinstall PASS. Retry is NOT TESTED — NOT FAILED. Stage 5B not started; Version/Build unchanged
 - Active product decision: JPA 9-Ball cumulative Dead Ball UI and existing normal-Dead history visual unification
 - Active phase: Product Owner completed Manual Release. Authenticated App Store Connect read-back shows App Store Version `1.1` as `配信準備完了` (Ready for Distribution); Build `1.1 (79)` remains selected.
 - Submission Evidence: submission `ccca99c0-4ab6-4518-8133-58c51abe378e`, Version 1.1 only / one item / no IAP item. Public Japan App Store page is reachable; version-number propagation on that public page is not separately displayed.

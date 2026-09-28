@@ -8268,7 +8268,7 @@ body {
       <header class="records-hero-v1">
         <button id="recordsBackV2" class="records-back-v2" type="button" aria-label="前の画面に戻る"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg></button>
         <h1>試合履歴一覧</h1>
-        <span class="records-header-spacer-v2" aria-hidden="true"></span>
+        <button id="matchSharingReceiveV1" class="match-sharing-receive-v1" type="button" aria-label="試合を受け取る" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h5v5H5zM14 5h5v5h-5zM5 14h5v5H5zM15 14h2v2h-2zM18 14h1v5h-5v-2h2v-1h2z"/></svg><span>受け取る</span></button>
       </header>
 
       <div class="records-disciplines-v2" id="recordsDisciplinesV2" role="tablist" aria-label="ゲーム種目">
@@ -8291,6 +8291,33 @@ body {
     </section>
 
     <section id="recordDetailOverlay" class="record-detail-overlay hidden" aria-label="対戦結果詳細"></section>
+
+    <section id="matchSharingReceiverV1" class="match-sharing-receiver-v1 hidden" aria-label="試合を受け取る" aria-hidden="true">
+      <header class="match-sharing-receiver-header-v1">
+        <button id="matchSharingReceiverBackV1" type="button" aria-label="試合履歴へ戻る"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8"/></svg></button>
+        <h1>試合を受け取る</h1>
+        <span aria-hidden="true"></span>
+      </header>
+      <main class="match-sharing-receiver-content-v1">
+        <div id="matchSharingScannerStateV1" class="match-sharing-scanner-state-v1" role="status" aria-live="polite">
+          <div class="match-sharing-scanner-copy-v1">
+            <p>相手のCueScoreに表示されている</p>
+            <p>QRコードを読み取ってください</p>
+          </div>
+          <div id="matchSharingPreviewGuideV1" class="match-sharing-preview-guide-v1" aria-label="QRコード読み取り範囲"><span aria-hidden="true"></span></div>
+          <p class="match-sharing-scanner-footer-v1">QRコードを枠内に合わせてください</p>
+        </div>
+        <div id="matchSharingReceiverMessageV1" class="match-sharing-receiver-message-v1" role="status" aria-live="assertive" hidden>
+          <div class="match-sharing-receiver-message-icon-v1" aria-hidden="true"></div>
+          <h2 id="matchSharingReceiverMessageTitleV1" tabindex="-1"></h2>
+          <p id="matchSharingReceiverMessageTextV1"></p>
+          <div class="match-sharing-receiver-message-actions-v1">
+            <button id="matchSharingReceiverRetryV1" type="button">もう一度読み取る</button>
+            <button id="matchSharingReceiverSettingsV1" type="button" hidden>設定を開く</button>
+          </div>
+        </div>
+      </main>
+    </section>
 
     <section id="playerStatsOverlay" class="player-stats-overlay hidden" aria-label="プレーヤー個人成績" aria-hidden="true">
       <div class="player-stats-panel">
@@ -8635,6 +8662,7 @@ body {
   <script src="./match-sharing-player-drafts-v1.js"></script>
   <script src="./match-sharing-transaction-v1.js"></script>
   <script src="./match-sharing-sender-v1.js"></script>
+  <script src="./match-sharing-receiver-v1.js"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -9581,10 +9609,119 @@ let matchRecordsRawCacheV152 = null;
     playerInfoScreen.classList.add("hidden");
     proGameScreen.classList.add("hidden");
     recordsScreen?.classList.remove("hidden");
+    syncMatchSharingReceiverEntryV1();
     updateRecordsCloudStatusV1();
     renderMatchRecords();
     window.scrollTo(0,0);
   }
+
+  const matchSharingReceiverMemoryV1=window.CueScoreMatchSharingReceiverV1?.createMemoryState?.();
+  let matchSharingScannerControllerV1=null;
+  function syncMatchSharingReceiverEntryV1(){
+    const button=document.getElementById("matchSharingReceiveV1");
+    if(button)button.hidden=Boolean(window.CueScoreDemoData?.isDemo?.());
+  }
+  function matchSharingNativeBridgeV1(){
+    const capacitor=window.Capacitor;
+    if(!capacitor)return null;
+    try{
+      const plugin=capacitor.registerPlugin?.("CueScoreQRScanner")||capacitor.Plugins?.CueScoreQRScanner||null;
+      return plugin;
+    }catch(error){
+      const plugin=capacitor.Plugins?.CueScoreQRScanner||null;
+      return plugin;
+    }
+  }
+  function matchSharingPreviewRectV1(){
+    const node=document.getElementById("matchSharingPreviewGuideV1");
+    const rect=node?.getBoundingClientRect();
+    return rect?{x:rect.left,y:rect.top,width:rect.width,height:rect.height}:null;
+  }
+  function renderMatchSharingReceiverStateV1(state){
+    const scanner=document.getElementById("matchSharingScannerStateV1");
+    const message=document.getElementById("matchSharingReceiverMessageV1");
+    const title=document.getElementById("matchSharingReceiverMessageTitleV1");
+    const text=document.getElementById("matchSharingReceiverMessageTextV1");
+    const retry=document.getElementById("matchSharingReceiverRetryV1");
+    const settings=document.getElementById("matchSharingReceiverSettingsV1");
+    if(!scanner||!message||!title||!text||!retry||!settings)return;
+    const isScanner=state?.screen==="scanner";
+    scanner.hidden=!isScanner;message.hidden=isScanner;
+    message.classList.toggle("is-success",state?.screen==="success");
+    settings.hidden=state?.permission!=="denied";
+    retry.hidden=state?.screen==="success"||state?.screen==="unavailable"||(state?.permission==="restricted");
+    retry.dataset.receiverRetryMode=state?.permission==="denied"?"permission":"scan";
+    retry.textContent=state?.permission==="denied"?"カメラを確認する":"もう一度読み取る";
+    if(state?.screen==="success"){
+      title.textContent="試合共有QRを読み取りました";
+      text.textContent="この試合データを確認できました。";
+    }else if(state?.screen==="permission"){
+      title.textContent=state.permission==="restricted"?"カメラを使用できません":"カメラの許可が必要です";
+      text.textContent=state.message||"設定でカメラを許可してください。";
+    }else if(state?.screen==="unavailable"){
+      title.textContent="カメラを使用できません";
+      text.textContent=state.message||"この端末ではカメラを使用できません。";
+    }else if(state?.screen==="error"){
+      title.textContent="QRコードを読み取れませんでした";
+      text.textContent=state.message||"もう一度お試しください。";
+    }
+    if(!message.hidden)requestAnimationFrame(()=>title.focus?.());
+  }
+  function ensureMatchSharingScannerControllerV1(){
+    if(matchSharingScannerControllerV1)return matchSharingScannerControllerV1;
+    matchSharingScannerControllerV1=window.CueScoreMatchSharingReceiverV1.createScannerController({
+      bridge:matchSharingNativeBridgeV1(),
+      memory:matchSharingReceiverMemoryV1,
+      readRecords:readMatchRecords,
+      isDemo:()=>Boolean(window.CueScoreDemoData?.isDemo?.()),
+      onState:renderMatchSharingReceiverStateV1,
+    });
+    window.CueScoreMatchSharingReceiverRuntimeV1=Object.freeze({
+      state:()=>matchSharingReceiverMemoryV1?.get?.()||null,
+      scannerDiagnostic:()=>matchSharingScannerControllerV1?.diagnostic?.()||null,
+      clear:()=>matchSharingReceiverMemoryV1?.clear?.(),
+    });
+    return matchSharingScannerControllerV1;
+  }
+  async function startMatchSharingReceiverV1({recheckPermission=false}={}){
+    if(window.CueScoreDemoData?.isDemo?.())return;
+    const overlay=document.getElementById("matchSharingReceiverV1");
+    if(!overlay)return;
+    if(overlay.parentElement!==document.body)document.body.appendChild(overlay);
+    overlay.classList.remove("hidden");overlay.setAttribute("aria-hidden","false");
+    document.body.classList.add("match-sharing-receiver-visible-v1");
+    document.body.style.overflow="hidden";
+    renderMatchSharingReceiverStateV1({screen:"scanner",permission:"checking"});
+    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+    try{
+      const controller=ensureMatchSharingScannerControllerV1();
+      if(recheckPermission)await controller.enter(matchSharingPreviewRectV1());
+      else await controller.enter(matchSharingPreviewRectV1());
+    }catch(error){
+      renderMatchSharingReceiverStateV1({screen:"unavailable",permission:"unavailable",message:"この端末ではカメラを使用できません。",code:error?.code||"BRIDGE_UNAVAILABLE"});
+    }
+  }
+  async function closeMatchSharingReceiverV1(){
+    await ensureMatchSharingScannerControllerV1().back();
+    const overlay=document.getElementById("matchSharingReceiverV1");
+    overlay?.classList.add("hidden");overlay?.setAttribute("aria-hidden","true");
+    document.body.classList.remove("match-sharing-receiver-visible-v1");
+    document.body.style.overflow="";
+    document.getElementById("matchSharingReceiveV1")?.focus();
+  }
+
+  document.getElementById("matchSharingReceiveV1")?.addEventListener("click",()=>startMatchSharingReceiverV1());
+  document.getElementById("matchSharingReceiverBackV1")?.addEventListener("click",closeMatchSharingReceiverV1);
+  document.getElementById("matchSharingReceiverRetryV1")?.addEventListener("click",async event=>{
+    renderMatchSharingReceiverStateV1({screen:"scanner",permission:"authorized"});
+    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+    const controller=ensureMatchSharingScannerControllerV1();
+    if(event.currentTarget.dataset.receiverRetryMode==="permission")await controller.enter(matchSharingPreviewRectV1());
+    else await controller.retry(matchSharingPreviewRectV1());
+  });
+  document.getElementById("matchSharingReceiverSettingsV1")?.addEventListener("click",()=>ensureMatchSharingScannerControllerV1().openSettings());
+  window.addEventListener("pagehide",()=>{if(matchSharingScannerControllerV1?.isActive?.())matchSharingScannerControllerV1.back();});
+  window.openMatchSharingReceiverV1=startMatchSharingReceiverV1;
 
   document.getElementById("recordsBackV2")?.addEventListener("click", backToTitle);
   document.getElementById("recordsDisciplinesV2")?.addEventListener("click", event => {
@@ -23781,7 +23918,7 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
 /* CueScore Match History v2.0 — player-style header and discipline row */
 .records-hero-v1{
   display:grid;
-  grid-template-columns:56px minmax(0,1fr) 56px;
+  grid-template-columns:76px minmax(0,1fr) 76px;
   align-items:center;
   min-height:calc(64px + env(safe-area-inset-top));
   padding:calc(8px + env(safe-area-inset-top)) 14px 8px;
@@ -23794,6 +23931,27 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
 }
 .records-back-v2:focus,.records-back-v2:focus-visible{outline:none!important}
 .records-back-v2 svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:3.25;stroke-linecap:round;stroke-linejoin:round}
+.match-sharing-receive-v1{
+  justify-self:end;
+  min-width:76px;
+  min-height:44px;
+  padding:0 2px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  border:0;
+  border-radius:10px;
+  color:#171717;
+  background:transparent;
+  font:inherit;
+  font-size:12px;
+  line-height:1;
+  font-weight:720;
+  touch-action:manipulation;
+}
+.match-sharing-receive-v1[hidden]{display:none!important}
+.match-sharing-receive-v1 svg{width:19px;height:19px;fill:currentColor;flex:0 0 auto}
 .records-disciplines-v2{
   flex:0 0 auto;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;
   margin:0 14px 6px;padding:5px 4px;border:1px solid #e5e5e2;border-radius:15px;background:#fff;
@@ -23970,6 +24128,95 @@ body.match-detail-visible-v1 .cue-phase1-tab-bar{display:none!important;pointer-
   .match-sharing-sender-content-v1{padding-top:10px}
   .match-sharing-qr-frame-v1{width:min(260px,calc(100vw - 56px));margin-top:10px}
   .match-sharing-instruction-v1{margin-top:9px}
+}
+.match-sharing-receiver-v1{
+  position:fixed;
+  z-index:1400;
+  inset:0;
+  width:100%;
+  height:100dvh;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  color:#171717;
+  background:#f6f6f4;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+}
+.match-sharing-receiver-v1.hidden{display:none!important}
+body.match-sharing-receiver-visible-v1 .cue-bottom-nav-v1,
+body.match-sharing-receiver-visible-v1 .cue-phase1-tab-bar,
+body.match-sharing-receiver-visible-v1 .records-bottom-nav-v1,
+body.match-sharing-receiver-visible-v1 .player-library-bottom-nav-v1,
+body.match-sharing-receiver-visible-v1 .player-detail-bottom-nav-v1,
+body.match-sharing-receiver-visible-v1 .settings-bottom-nav-v1,
+body.match-sharing-receiver-visible-v1 .settings-suite-bottom-nav-v2{display:none!important}
+.match-sharing-receiver-header-v1{
+  position:relative;
+  flex:0 0 auto;
+  min-height:calc(50px + env(safe-area-inset-top));
+  padding:env(safe-area-inset-top) 52px 0;
+  display:grid;
+  place-items:center;
+  border-bottom:1px solid #dededb;
+  background:rgba(255,255,255,.97);
+}
+.match-sharing-receiver-header-v1 h1{margin:0;font-size:20px;line-height:50px;font-weight:760;letter-spacing:.01em}
+.match-sharing-receiver-header-v1>span{position:absolute;right:12px;bottom:3px;width:44px;height:44px}
+#matchSharingReceiverBackV1{
+  position:absolute;
+  left:max(12px,env(safe-area-inset-left));
+  bottom:5px;
+  width:44px;
+  height:44px;
+  padding:10px;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-radius:50%;
+  color:#171717;
+  background:transparent;
+  touch-action:manipulation;
+}
+#matchSharingReceiverBackV1 svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.match-sharing-receiver-content-v1{
+  flex:1 1 0;
+  min-height:0;
+  padding:22px max(18px,env(safe-area-inset-right)) max(18px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));
+  overflow:hidden;
+}
+.match-sharing-scanner-state-v1{height:100%;display:flex;flex-direction:column;align-items:center}
+.match-sharing-scanner-state-v1[hidden],.match-sharing-receiver-message-v1[hidden]{display:none!important}
+.match-sharing-scanner-copy-v1{text-align:center;font-size:16px;font-weight:650;line-height:1.5}
+.match-sharing-scanner-copy-v1 p{margin:0}
+.match-sharing-preview-guide-v1{
+  position:relative;
+  width:min(280px,calc(100vw - 52px));
+  aspect-ratio:1;
+  margin:28px auto 0;
+  flex:0 0 auto;
+  overflow:hidden;
+  border:2px solid rgba(255,255,255,.88);
+  background:#252525;
+  box-shadow:0 0 0 1px rgba(0,0,0,.18);
+}
+.match-sharing-preview-guide-v1::before,.match-sharing-preview-guide-v1::after,.match-sharing-preview-guide-v1>span::before,.match-sharing-preview-guide-v1>span::after{
+  content:"";position:absolute;z-index:2;width:28px;height:28px;border-color:#fff;border-style:solid;pointer-events:none
+}
+.match-sharing-preview-guide-v1::before{left:10px;top:10px;border-width:3px 0 0 3px}
+.match-sharing-preview-guide-v1::after{right:10px;top:10px;border-width:3px 3px 0 0}
+.match-sharing-preview-guide-v1>span::before{left:10px;bottom:10px;border-width:0 0 3px 3px}
+.match-sharing-preview-guide-v1>span::after{right:10px;bottom:10px;border-width:0 3px 3px 0}
+.match-sharing-scanner-footer-v1{margin:auto 0 4px;color:#656563;font-size:14px;font-weight:560;text-align:center}
+.match-sharing-receiver-message-v1{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px 10px 48px}
+.match-sharing-receiver-message-icon-v1{width:58px;height:58px;margin-bottom:18px;border:2px solid #171717;border-radius:50%}
+.match-sharing-receiver-message-v1.is-success .match-sharing-receiver-message-icon-v1::after{content:"✓";display:grid;place-items:center;width:100%;height:100%;font-size:34px;font-weight:800}
+.match-sharing-receiver-message-v1 h2{margin:0;font-size:22px;line-height:1.35}
+.match-sharing-receiver-message-v1 p{max-width:300px;margin:10px auto 0;color:#666664;font-size:15px;line-height:1.55}
+.match-sharing-receiver-message-actions-v1{width:min(100%,320px);margin-top:24px;display:grid;gap:10px}
+.match-sharing-receiver-message-actions-v1 button{min-height:50px;padding:0 16px;border:1px solid #d2d2cf;border-radius:13px;background:#fff;color:#171717;font:inherit;font-size:16px;font-weight:720}
+@media(max-height:700px){
+  .match-sharing-receiver-content-v1{padding-top:14px}
+  .match-sharing-preview-guide-v1{width:min(244px,calc(100vw - 70px));margin-top:16px}
 }
 .match-detail-scroll-v1{
   flex:1 1 0;
