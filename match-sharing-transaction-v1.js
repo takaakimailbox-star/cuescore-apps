@@ -25,27 +25,33 @@
   const side=(value,index)=>value?.[index]??value?.[String(index)];
   const idOf=value=>String(value?.id??"").trim();
   const isObject=value=>Boolean(value)&&typeof value==="object"&&!Array.isArray(value);
+  const canonical=value=>Array.isArray(value)
+    ?value.map(canonical)
+    :isObject(value)?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
+  const semanticallyEqual=(left,right)=>JSON.stringify(canonical(left))===JSON.stringify(canonical(right));
 
   function validateMappingPlan(mappingPlan,logicalMatch){
     if(!isObject(mappingPlan))fail("MISSING_MAPPING","Receiver mapping is required");
-    const selectedSide=Number(mappingPlan.selectedSide);
-    if(![1,2].includes(selectedSide))fail("INVALID_SIDE","Self side must be selected explicitly");
-    const entries=[mappingPlan.self,mappingPlan.opponent];
+    if(Object.hasOwn(mappingPlan,"selectedSide")||Object.hasOwn(mappingPlan,"self")||Object.hasOwn(mappingPlan,"opponent")){
+      fail("LEGACY_MAPPING_PLAN","Self/opponent mapping is not supported");
+    }
+    const bySide=isObject(mappingPlan.bySide)?mappingPlan.bySide:null;
+    const entries=[side(bySide,1),side(bySide,2)];
     if(entries.some(entry=>!isObject(entry)||!["existing","new"].includes(entry.kind))){
-      fail("MISSING_MAPPING","Self and opponent mappings are required");
+      fail("MISSING_MAPPING","Player 1 and Player 2 mappings are required");
     }
-    if(mappingPlan.self.kind==="existing"&&mappingPlan.opponent.kind==="existing"&&String(mappingPlan.self.playerId)===String(mappingPlan.opponent.playerId)){
-      fail("SAME_LOCAL_PLAYER","Self and opponent must use different local Players");
+    if(entries[0].kind==="existing"&&entries[1].kind==="existing"&&String(entries[0].playerId)===String(entries[1].playerId)){
+      fail("SAME_LOCAL_PLAYER","Player 1 and Player 2 must use different local Players");
     }
-    if(mappingPlan.self.kind==="new"&&mappingPlan.opponent.kind==="new"){
-      const selfKey=String(mappingPlan.self.pendingKey||"");
-      const opponentKey=String(mappingPlan.opponent.pendingKey||"");
-      if(mappingPlan.self.draft===mappingPlan.opponent.draft||(selfKey&&selfKey===opponentKey)){
-        fail("SAME_PENDING_PLAYER","Self and opponent cannot use the same pending Player");
+    if(entries[0].kind==="new"&&entries[1].kind==="new"){
+      const firstKey=String(entries[0].pendingKey||"");
+      const secondKey=String(entries[1].pendingKey||"");
+      if(entries[0].draft===entries[1].draft||(firstKey&&firstKey===secondKey)){
+        fail("SAME_PENDING_PLAYER","Player 1 and Player 2 cannot use the same pending Player");
       }
     }
     validation.validateSharedMatchV1(logicalMatch);
-    return {selectedSide,opponentSide:selectedSide===1?2:1};
+    return {bySide:{1:entries[0],2:entries[1]}};
   }
 
   function requireExistingPlayer(entry,currentPlayers,label){
@@ -56,7 +62,7 @@
   }
 
   function resolveMappings(logicalMatch,mappingPlan,currentPlayers,{now,idFactory}={}){
-    const {selectedSide,opponentSide}=validateMappingPlan(mappingPlan,logicalMatch);
+    const validated=validateMappingPlan(mappingPlan,logicalMatch);
     const existing=clone(Array.isArray(currentPlayers)?currentPlayers:[]);
     const created=[];
     const resolve=(entry,label)=>{
@@ -65,13 +71,12 @@
       created.push(draft);
       return clone(draft);
     };
-    const self=resolve(mappingPlan.self,"Self");
-    const opponent=resolve(mappingPlan.opponent,"Opponent");
-    if(idOf(self)===idOf(opponent))fail("SAME_LOCAL_PLAYER","Self and opponent must use different local Players");
-    const bySide={};
-    bySide[selectedSide]=self;
-    bySide[opponentSide]=opponent;
-    return {selectedSide,opponentSide,self,opponent,bySide,created};
+    const bySide={
+      1:resolve(validated.bySide[1],"Player 1"),
+      2:resolve(validated.bySide[2],"Player 2"),
+    };
+    if(idOf(bySide[1])===idOf(bySide[2]))fail("SAME_LOCAL_PLAYER","Player 1 and Player 2 must use different local Players");
+    return {bySide,created};
   }
 
   function buildReceiverLocalMatch(logicalMatch,mapping,{localMatchId,appVersion="1.0",recordSchemaVersion=4,eventSchemaVersion=5,analysisSchemaVersion=2,checkedAt}={}){
@@ -150,7 +155,7 @@
       fail("READBACK_MISMATCH","Receiver-local Player mapping did not match");
     }
     const rebuilt=adapters.buildSharedMatchV1(record,{sharedMatchId:logicalMatch.sharedMatchId});
-    if(JSON.stringify(rebuilt)!==JSON.stringify(expectedLogicalForMapping(logicalMatch,mapping))){
+    if(!semanticallyEqual(rebuilt,expectedLogicalForMapping(logicalMatch,mapping))){
       fail("READBACK_MISMATCH","Imported Match semantic facts did not match");
     }
     return record;

@@ -1,13 +1,17 @@
 # CueScore Apps Current State
 
-## Match Sharing v1 Symmetric Player Mapping Formal Amendment（2026年9月29日）
+## Match Sharing v1 Revised Stage 3 + Stage 5B（2026年9月29日）
 
-- Gate: `FORMAL DESIGN AMENDMENT PRODUCT OWNER / CHATGPT APPROVED / REVISED IMPLEMENTATION NOT STARTED / REVISED PHYSICAL E2E NOT VERIFIED`。
-- Stage 5B旧Receiver Flowはautomated `15/15`、Stage 1〜5B `96/96`、全Node `555/555`、18 fixture production E2E、390×844、native parity、Release Simulator BuildをPASS。Product Owner physical iPhoneではQR scan、旧Preview／Side Selection／Self Mapping／Opponent Mapping、Import transaction、通常Match Detail、duplicate rejectionをPASSした。これは旧Flowの機能成立Evidenceとして保持する。
-- Product Owner UX feedbackを受け、`あなたはどちらですか？`、Self Mapping、Opponent Mappingを廃止し、Shared Player A / Bをreceiver-local Player A / Bへ対称に明示mappingする6点Revisionを正式採用した。Previewとmappingを`試合を確認`の1画面へ統合し、receiver本人の参加を要求せず、main Playerへ依存しない。
-- Source Investigation判定は`B — SAFE WITH LIMITED CHANGES`。Match schema、Format v1、Backup schema、Analytics architecture、Free / Pro、Demoは変更不要。Stage 3 mapping input、Stage 5B UI/state、tests、変更後physical E2Eが必要。
-- Player UIはmapping前／pending newにdefault avatar、existing mapping後にreceiver-local avatarを使用し、sender avatarを共有・推測しない。Duplicateは専用状態へ分離し、generic read failure文言を使用しない。
-- Official 101／102とDecision Log v2.5 Decision 030へFormal Amendmentを同期し、Product Owner / ChatGPT Final ReviewでAPPROVEDとなった。Stage 5B未commit product差分は旧Flow候補として変更せず保全し、本GateではFormal Amendment documentationだけをcommit／push対象とする。Evidence: `docs/implementation/CueScore_Match_Sharing_v1_Symmetric_Player_Mapping_Amendment_2026-09-29.md`。
+- Gate: `REVISED STAGE 3 + STAGE 5B FINAL ACCEPTED / PRODUCT OWNER PHYSICAL PASS / RELEASE READINESS NOT STARTED`。
+- Stage 5B旧Receiver Flowのautomated／physical PASSは履歴として保持する。Decision 030に従い、`あなたはどちらですか？`、Self Mapping、Opponent Mappingを製品候補から除去し、Shared Player 1／2をreceiver-local Player 1／2へ対称に明示mappingする実装へ改訂した。
+- Stage 3 primary contractは`bySide.{1,2}`。双方必須、同じlocal Player／pending Playerの二重割当禁止、legacy `selectedSide/self/opponent`拒否、名前自動mappingなし、main Player依存なし。既存all-or-nothing transaction、duplicate再確認、semantic read-back、rollbackを維持する。
+- Receiverは`試合を確認`へPreviewとPlayer 1／2 mappingを統合。mapping前／pending newはdefault avatar、existing mapping後はreceiver-local avatarだけを使用。Final Confirmationはshared名→local名を両side表示し、Duplicateは専用状態へ分離した。
+- 第三者`ゆな vs かいと`をmain Player `貴章`の端末へImportする自動検証で、ゆな／かいとのrecord各1件、貴章0件、main Player不変を確認。6競技×Short／Medium／Long 18 fixture、4 mapping組合せ、Free Case C、Demo／privacy、Backup／re-share契約を維持した。
+- Revised Stage 3 dedicated `26/26`、Stage 3＋5B `41/41`、Stage 1〜5B focused `99/99`、全Node `557/557`、390×844＋360×780、native parity、Release Simulator BuildをPASS。初回physical確認ではQR Aのduplicate専用画面とQR C認識はPASSしたが、duplicate後の`他の試合を読み取る`でScannerへ戻った際にcamera previewが再起動せずFAIL。BackでHistoryへ戻り再入場するとcameraは起動した。
+- retry fix #1でnative stop、listener解除、state clear、authorization再確認、listener再登録、fresh startへ揃えたが、Product Owner physical retestでもcamera映像は再開せずFAIL。成功する手動回避との差としてReceiver overlay／body stateの閉じ直しが残っていたため、fix #2では画面内retryを廃止し、action自体を既存の`closeMatchSharingReceiverV1()`→`startMatchSharingReceiverV1()`へ接続した。これによりoverlay resetとpreview座標取得前のlayout安定化を含め、Back→History→Receiver再入場と同じproduct routeを通る。
+- Stage 5A＋5B `31/31`、focused `99/99`、全Node `557/557`、native parity、Release Simulator BuildをPASS。retry fix #2の署名付き`CueScore Stage5B` Version `1.1 (79)`（executable SHA-256 `523fe2a3b9ac602d4de923a0cc955754bb45626991ecd289635aebf76deceb6c`）を同じphysical iPhoneへ上書きinstall／read-back済み。Product Owner physical retest #2で、duplicate→`他の試合を読み取る`→Receiverを離れずcamera映像再開→別QR読取を`OK / PASS`確認。最終retestのscreenshotは提供されていないため画像Evidenceとは記録しない。
+- Product Owner Final Acceptanceで、改訂symmetric Receiver Flow、Import、Duplicate rejection／専用UX、retry camera restart、別QR scanをphysical PASSとして確定。Stage 1、Stage 2、Revised Stage 3、Stage 4、Stage 5A、Revised Stage 5BはPASS。Physical VoiceOver／Dynamic Type、iPad、printed QR、low-lightは`NOT VERIFIED`のまま。
+- Version `1.1 (79)`、Official 101／102、Decision 030、Format、schema、dependency、公開アプリは変更なし。Archive、Upload、TestFlight、App Store Connect、Releaseは未実施。Evidence: `docs/implementation/CueScore_Match_Sharing_v1_Stage5B_Receiver_Import_UI_2026-09-28.md`。
 
 ## Match Sharing v1 Stage 5A Physical FAIL #2 Root Cause Fix（2026年9月28日）
 
@@ -1276,7 +1280,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 
 - CSV入出力
 - 自動クラウド同期
-- 試合共有（Match Sharing）：1台で記録した完了試合を別のCueScore Appsへ転送し、receiver-local Player A / Bへ対称mappingして履歴・統計・分析へ取り込める機能。公開Version 1.1非搭載。Stage 1〜5B旧Flowは実装・旧Flow physical E2Eまで完了したが未commit。Symmetric Player Mapping Formal Amendmentは完了し、改訂実装は未着手。
+- 試合共有（Match Sharing）：1台で記録した完了試合を別のCueScore Appsへ転送し、receiver-local Player A / Bへ対称mappingして履歴・統計・分析へ取り込める機能。公開Version 1.1非搭載。Stage 1、Stage 2、Revised Stage 3、Stage 4、Stage 5A、Revised Stage 5Bは実装・自動検証・Product Owner physical acceptanceまでPASS。Release Readinessは未着手。
 
 ## 要確認事項
 
@@ -1294,7 +1298,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - App Store v1.0 release profileはCSV・クラウド同期を無効化し、関連UIを表示しない。
 - Official Demo Dataはv1.0提出予定範囲に含める。実提出ビルドでの収録と通常ユーザーデータからの分離確認は未実施。
 - Official Demo Dataの本番向け表示は「サンプルデータ」を採用し、状態を「通常データ／サンプルデータ」、操作を「準備する／サンプルを見る／通常データへ戻る／初期状態に戻す／削除」とする。
-- 試合共有（Match Sharing）はv1.0ではLaterとしていた履歴をDecision 12に維持する。Official 101／102、Decision 028／029に続き、Decision Log v2.5 Decision 030がReceiverのown-side／Self／Opponent部分を対称Player A / B mappingへ後続置換した。Stage 5B旧Flow product差分は未commitで保全し、改訂実装は未着手。正式記録：`docs/official/12_CueScore_Later_Match_Sharing_Decision.md`、`docs/official/101_CueScore_Match_Sharing_v1_Decision.md`、`docs/official/102_CueScore_Match_Sharing_v1_Spec.md`。
+- 試合共有（Match Sharing）はv1.0ではLaterとしていた履歴をDecision 12に維持する。Official 101／102、Decision 028／029に続き、Decision Log v2.5 Decision 030がReceiverのown-side／Self／Opponent部分を対称Player A / B mappingへ後続置換した。Revised Stage 3＋Stage 5Bは最終Acceptance PASS。正式記録：`docs/official/12_CueScore_Later_Match_Sharing_Decision.md`、`docs/official/101_CueScore_Match_Sharing_v1_Decision.md`、`docs/official/102_CueScore_Match_Sharing_v1_Spec.md`。
 - Native iOS foundation、実機基本機能、TestFlight Build 1、TestFlight内部運用はGO。Build 2開発はGOだが、本状態同期ではBuild 2を作成しない。
 - App Store本審査提出と一般公開は未承認。Product Ownerの明示承認なしに実施しない。
 

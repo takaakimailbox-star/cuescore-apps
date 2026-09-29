@@ -18,6 +18,7 @@ test("Decision 12 remains historical while Official 101/102 govern Match Sharing
   assert.match(decision101,/Decision 12を削除または上書きしない/);
   assert.match(spec102,/CueScore Match Sharing Format v1/);
   assert.match(current,/Decision 12はLater登録の履歴として維持する/);
-  assert.match(current,/試合共有（Match Sharing）[\s\S]*?v1\.0非搭載/);
+  assert.match(current,/試合共有（Match Sharing）[\s\S]*?公開Version 1\.1非搭載/);
+  assert.match(current,/試合共有（Match Sharing）はv1\.0ではLaterとしていた履歴をDecision 12に維持する/);
   assert.match(appStoreIndex,/CSV、自動クラウド同期、試合共有（Match Sharing）/);
 });

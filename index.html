@@ -8319,6 +8319,14 @@ body {
       </main>
     </section>
 
+    <section id="matchSharingFlowV1" class="match-sharing-flow-v1 hidden" aria-label="試合の取り込み" aria-hidden="true">
+      <header class="match-sharing-flow-header-v1">
+        <button id="matchSharingFlowBackV1" type="button" aria-label="前の画面へ戻る"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8"/></svg></button>
+        <h1 id="matchSharingFlowTitleV1" tabindex="-1">試合を確認</h1><span aria-hidden="true"></span>
+      </header>
+      <main id="matchSharingFlowContentV1" class="match-sharing-flow-content-v1"></main>
+    </section>
+
     <section id="playerStatsOverlay" class="player-stats-overlay hidden" aria-label="プレーヤー個人成績" aria-hidden="true">
       <div class="player-stats-panel">
         <header class="player-stats-header">
@@ -8663,6 +8671,7 @@ body {
   <script src="./match-sharing-transaction-v1.js"></script>
   <script src="./match-sharing-sender-v1.js"></script>
   <script src="./match-sharing-receiver-v1.js"></script>
+  <script src="./match-sharing-ui-v1.js"></script>
   <script>
   // CueScore App Store v1.0 RC: Later features remain implemented but unavailable.
   (() => {
@@ -8773,6 +8782,9 @@ body {
     if (old) old.remove();
     const toast = document.createElement("div");
     toast.className = "toast";
+    toast.setAttribute("role","status");
+    toast.setAttribute("aria-live","polite");
+    toast.setAttribute("aria-atomic","true");
     toast.innerHTML = `<strong>${title}</strong><span>${message}</span>`;
     document.body.appendChild(toast);
     requestAnimationFrame(() => toast.classList.add("show"));
@@ -9617,6 +9629,8 @@ let matchRecordsRawCacheV152 = null;
 
   const matchSharingReceiverMemoryV1=window.CueScoreMatchSharingReceiverV1?.createMemoryState?.();
   let matchSharingScannerControllerV1=null;
+  let matchSharingFlowControllerV1=null;
+  let matchSharingPlayerPickerKindV1=null;
   function syncMatchSharingReceiverEntryV1(){
     const button=document.getElementById("matchSharingReceiveV1");
     if(button)button.hidden=Boolean(window.CueScoreDemoData?.isDemo?.());
@@ -9638,6 +9652,10 @@ let matchRecordsRawCacheV152 = null;
     return rect?{x:rect.left,y:rect.top,width:rect.width,height:rect.height}:null;
   }
   function renderMatchSharingReceiverStateV1(state){
+    if(state?.screen==="success"){
+      requestAnimationFrame(()=>openMatchSharingFlowV1());
+      return;
+    }
     const scanner=document.getElementById("matchSharingScannerStateV1");
     const message=document.getElementById("matchSharingReceiverMessageV1");
     const title=document.getElementById("matchSharingReceiverMessageTitleV1");
@@ -9651,7 +9669,7 @@ let matchRecordsRawCacheV152 = null;
     settings.hidden=state?.permission!=="denied";
     retry.hidden=state?.screen==="success"||state?.screen==="unavailable"||(state?.permission==="restricted");
     retry.dataset.receiverRetryMode=state?.permission==="denied"?"permission":"scan";
-    retry.textContent=state?.permission==="denied"?"カメラを確認する":"もう一度読み取る";
+    retry.textContent=state?.code==="DUPLICATE"?"他の試合を読み取る":state?.permission==="denied"?"カメラを確認する":"もう一度読み取る";
     if(state?.screen==="success"){
       title.textContent="試合共有QRを読み取りました";
       text.textContent="この試合データを確認できました。";
@@ -9662,8 +9680,8 @@ let matchRecordsRawCacheV152 = null;
       title.textContent="カメラを使用できません";
       text.textContent=state.message||"この端末ではカメラを使用できません。";
     }else if(state?.screen==="error"){
-      title.textContent="QRコードを読み取れませんでした";
-      text.textContent=state.message||"もう一度お試しください。";
+      title.textContent=state.code==="DUPLICATE"?"この試合はすでに取り込み済みです":"QRコードを読み取れませんでした";
+      text.textContent=state.code==="DUPLICATE"?"同じ試合が試合履歴に保存されています。":state.message||"もう一度お試しください。";
     }
     if(!message.hidden)requestAnimationFrame(()=>title.focus?.());
   }
@@ -9710,14 +9728,77 @@ let matchRecordsRawCacheV152 = null;
     document.getElementById("matchSharingReceiveV1")?.focus();
   }
 
+  function matchSharingFlowSummaryV1(logical){
+    const p1=logical?.players?.[1]||logical?.players?.["1"]||{};
+    const p2=logical?.players?.[2]||logical?.players?.["2"]||{};
+    const labels={rotation:"Rotation",nineBall:"9-Ball",tenBall:"10-Ball",straightPool:"14-1",jpa9Ball:"JPA 9-Ball",threeCushion:"3 Cushion"};
+    const ended=new Date(logical?.endedAt||logical?.startedAt||0);
+    const date=Number.isNaN(ended.getTime())?"日付なし":`${ended.getFullYear()}/${String(ended.getMonth()+1).padStart(2,"0")}/${String(ended.getDate()).padStart(2,"0")} ${String(ended.getHours()).padStart(2,"0")}:${String(ended.getMinutes()).padStart(2,"0")}`;
+    const condition=logical?.match?.targetPoints?`目標 ${logical.match.targetPoints}点`:(p1.goal||p2.goal?`Race to ${Number(p1.goal)||"—"}-${Number(p2.goal)||"—"}`:"");
+    return {p1,p2,date,condition,game:labels[logical?.gameType]||"CueScore"};
+  }
+  function matchSharingFlowMappingRowV1(state,sideNumber){
+    const summary=matchSharingFlowSummaryV1(state.logicalMatch),shared=sideNumber===1?summary.p1:summary.p2,selected=state.bySide?.[sideNumber];
+    const players=matchSharingFlowControllerV1.players(),local=selected?.kind==="existing"?players.find(player=>String(player.id)===String(selected.playerId)):selected?.draft;
+    const other=state.bySide?.[sideNumber===1?2:1],isNew=selected?.kind==="new";
+    const avatar=selected?.kind==="existing"&&local?playerAvatarHtmlV2(local,"match-sharing-flow-avatar-v1"):playerAvatarHtmlV2({name:local?.name||shared.name,avatar:{type:"default",id:"default_silhouette"}},"match-sharing-flow-avatar-v1");
+    const status=local?.name?`${avatar}<span><small>この端末</small><strong>${escapeRecordText(local.name)}</strong></span>`:`<span class="match-sharing-flow-unmapped-v1">未選択</span>`;
+    const otherId=other?.kind==="existing"?String(other.playerId):"";
+    return `<div class="match-sharing-flow-mapping-row-v1" data-mapping-side="${sideNumber}"><div class="match-sharing-flow-shared-player-v1"><span>Player ${sideNumber}</span><strong>${escapeRecordText(shared.name||"")}</strong></div><div class="match-sharing-flow-mapped-player-v1">${status}</div><button type="button" class="match-sharing-flow-other-v1" data-open-player-picker="${sideNumber}" data-other-player-id="${escapeRecordText(otherId)}">プレーヤーを選ぶ <span aria-hidden="true">›</span></button><button type="button" class="match-sharing-flow-new-v1 ${isNew?"is-selected":""}" data-new-player="${sideNumber}" aria-pressed="${isNew}">＋ <span>新しいプレーヤーとして追加</span></button>${isNew?`<label class="match-sharing-flow-name-input-v1"><span>プレーヤー名</span><input data-new-player-name="${sideNumber}" maxlength="20" value="${escapeRecordText(selected?.draft?.name||shared.name||"")}" autocomplete="off"></label>`:""}</div>`;
+  }
+  function renderMatchSharingFlowV1(state){
+    const overlay=document.getElementById("matchSharingFlowV1"),title=document.getElementById("matchSharingFlowTitleV1"),content=document.getElementById("matchSharingFlowContentV1");
+    if(!overlay||!title||!content||!state?.logicalMatch)return;
+    const s=matchSharingFlowSummaryV1(state.logicalMatch);
+    title.textContent=state.step==="mapping"?"試合を確認":"取り込み内容を確認";
+    if(state.step==="mapping"){
+      const ready=window.CueScoreMatchSharingUiV1.mappingReady(state.bySide?.[1])&&window.CueScoreMatchSharingUiV1.mappingReady(state.bySide?.[2])&&!window.CueScoreMatchSharingUiV1.sameLocalPlayer(state.bySide?.[1],state.bySide?.[2]);
+      content.innerHTML=`<section class="match-sharing-flow-match-v1"><span>${escapeRecordText(s.game)}</span><time>${escapeRecordText(s.date)}</time><div><strong>${escapeRecordText(s.p1.name||"")}</strong><b>${Number(s.p1.score)||0} − ${Number(s.p2.score)||0}</b><strong>${escapeRecordText(s.p2.name||"")}</strong></div>${s.condition?`<small>${escapeRecordText(s.condition)}</small>`:""}</section><section class="match-sharing-flow-section-v1"><h2>この端末のプレーヤー</h2>${matchSharingFlowMappingRowV1(state,1)}${matchSharingFlowMappingRowV1(state,2)}</section><button type="button" class="match-sharing-flow-primary-v1" data-flow-next ${ready?"":"disabled"}>次へ</button>`;
+    }else if(state.step==="confirm"){
+      const players=matchSharingFlowControllerV1.players(),display=mapping=>mapping?.kind==="existing"?players.find(p=>String(p.id)===String(mapping.playerId))||{}:mapping?.draft||{};
+      const first=display(state.bySide[1]),second=display(state.bySide[2]);
+      content.innerHTML=`<section class="match-sharing-flow-match-v1"><span>${escapeRecordText(s.game)}</span><time>${escapeRecordText(s.date)}</time><div><strong>${escapeRecordText(s.p1.name||"")}</strong><b>${Number(s.p1.score)||0} − ${Number(s.p2.score)||0}</b><strong>${escapeRecordText(s.p2.name||"")}</strong></div>${s.condition?`<small>${escapeRecordText(s.condition)}</small>`:""}</section><section class="match-sharing-flow-section-v1"><h2>この端末での登録</h2><div class="match-sharing-flow-confirm-player-v1"><span>Player 1</span>${playerAvatarHtmlV2(first,"match-sharing-flow-avatar-v1")}<strong>${escapeRecordText(s.p1.name||"")} → ${escapeRecordText(first.name||"")}</strong>${state.bySide[1].kind==="new"?"<small>＋ 新しいプレーヤーとして追加</small>":""}</div><div class="match-sharing-flow-confirm-player-v1"><span>Player 2</span>${playerAvatarHtmlV2(second,"match-sharing-flow-avatar-v1")}<strong>${escapeRecordText(s.p2.name||"")} → ${escapeRecordText(second.name||"")}</strong>${state.bySide[2].kind==="new"?"<small>＋ 新しいプレーヤーとして追加</small>":""}</div></section><p class="match-sharing-flow-unsaved-v1">取り込むまでは試合とプレーヤーは保存されません</p>${state.error?`<p class="match-sharing-flow-error-v1" role="alert">試合を取り込めませんでした。保存内容は変更されていません。</p>`:""}<button type="button" class="match-sharing-flow-primary-v1" data-flow-import>試合を取り込む</button>`;
+    }
+    requestAnimationFrame(()=>title.focus());
+  }
+  function ensureMatchSharingFlowControllerV1(){
+    if(matchSharingFlowControllerV1)return matchSharingFlowControllerV1;
+    matchSharingFlowControllerV1=window.CueScoreMatchSharingUiV1.createReceiverFlow({readPlayers:readPlayerLibrary,importMatch:importSharedMatchV1,onChange:renderMatchSharingFlowV1});
+    return matchSharingFlowControllerV1;
+  }
+  function openMatchSharingFlowV1(){
+    const memory=matchSharingReceiverMemoryV1?.get?.();if(!memory?.logicalMatch)return;
+    document.getElementById("matchSharingReceiverV1")?.classList.add("hidden");
+    const overlay=document.getElementById("matchSharingFlowV1");overlay?.classList.remove("hidden");overlay?.setAttribute("aria-hidden","false");
+    document.body.classList.add("match-sharing-flow-visible-v1");
+    ensureMatchSharingFlowControllerV1().setLogicalMatch(memory.logicalMatch);
+  }
+  async function closeMatchSharingFlowV1({toScanner=false}={}){
+    matchSharingFlowControllerV1?.reset();matchSharingReceiverMemoryV1?.clear?.();
+    const overlay=document.getElementById("matchSharingFlowV1");overlay?.classList.add("hidden");overlay?.setAttribute("aria-hidden","true");document.body.classList.remove("match-sharing-flow-visible-v1");
+    if(toScanner)await startMatchSharingReceiverV1();else await closeMatchSharingReceiverV1();
+  }
+  document.getElementById("matchSharingFlowBackV1")?.addEventListener("click",async()=>{const flow=ensureMatchSharingFlowControllerV1(),state=flow.get();if(state.step==="mapping")return closeMatchSharingFlowV1({toScanner:true});flow.back()});
+  document.getElementById("matchSharingFlowContentV1")?.addEventListener("click",async event=>{
+    const flow=ensureMatchSharingFlowControllerV1(),state=flow.get();
+    const pickerButton=event.target.closest("[data-open-player-picker]");if(pickerButton){openMatchSharingPlayerPickerV1(pickerButton.dataset.openPlayerPicker);return}
+    const newButton=event.target.closest("[data-new-player]");if(newButton){const sideNumber=Number(newButton.dataset.newPlayer),s=matchSharingFlowSummaryV1(state.logicalMatch),shared=sideNumber===1?s.p1:s.p2,value={kind:"new",pendingKey:`side-${sideNumber}-${state.sharedMatchId}`,draft:{name:shared.name||"",memo:"",avatar:{type:"default",id:"default_silhouette"}}};flow.selectMapping(sideNumber,value);return}
+    if(event.target.closest("[data-flow-next]")){try{flow.next()}catch(error){showToast("選択を確認してください",error.message)}return}
+    if(event.target.closest("[data-flow-import]")){const button=event.target.closest("[data-flow-import]");button.disabled=true;button.setAttribute("aria-busy","true");try{const completed=flow.commit(),id=completed.result.importedLocalMatchId;document.getElementById("matchSharingFlowV1")?.classList.add("hidden");document.body.classList.remove("match-sharing-flow-visible-v1","match-sharing-receiver-visible-v1");document.body.style.overflow="";matchSharingReceiverMemoryV1?.clear?.();renderMatchRecords();if(!window.cueScoreOpenImportedMatchDetailOnceV1?.(id))throw new Error("Imported Match detail could not be opened");showToast("✓ 試合を取り込みました","通常の試合として保存しました") }catch(error){console.warn("CueScore Match Sharing import failed",error);renderMatchSharingFlowV1(flow.get())}return}
+  });
+  document.getElementById("matchSharingFlowContentV1")?.addEventListener("change",event=>{const sideNumber=Number(event.target.dataset.newPlayerName);if(![1,2].includes(sideNumber))return;const state=ensureMatchSharingFlowControllerV1().get(),value={kind:"new",pendingKey:`side-${sideNumber}-${state.sharedMatchId}`,draft:{name:event.target.value,memo:"",avatar:{type:"default",id:"default_silhouette"}}};ensureMatchSharingFlowControllerV1().selectMapping(sideNumber,value)});
+
   document.getElementById("matchSharingReceiveV1")?.addEventListener("click",()=>startMatchSharingReceiverV1());
   document.getElementById("matchSharingReceiverBackV1")?.addEventListener("click",closeMatchSharingReceiverV1);
   document.getElementById("matchSharingReceiverRetryV1")?.addEventListener("click",async event=>{
-    renderMatchSharingReceiverStateV1({screen:"scanner",permission:"authorized"});
-    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
-    const controller=ensureMatchSharingScannerControllerV1();
-    if(event.currentTarget.dataset.receiverRetryMode==="permission")await controller.enter(matchSharingPreviewRectV1());
-    else await controller.retry(matchSharingPreviewRectV1());
+    if(event.currentTarget.dataset.receiverRetryMode==="permission"){
+      renderMatchSharingReceiverStateV1({screen:"scanner",permission:"authorized"});
+      await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+      await ensureMatchSharingScannerControllerV1().enter(matchSharingPreviewRectV1());
+      return;
+    }
+    await closeMatchSharingReceiverV1();
+    await startMatchSharingReceiverV1();
   });
   document.getElementById("matchSharingReceiverSettingsV1")?.addEventListener("click",()=>ensureMatchSharingScannerControllerV1().openSettings());
   window.addEventListener("pagehide",()=>{if(matchSharingScannerControllerV1?.isActive?.())matchSharingScannerControllerV1.back();});
@@ -16406,6 +16487,8 @@ let matchRecordsRawCacheV152 = null;
     if (!list) return;
     const allSavedRecordsV1 = readMatchRecords();
     const sourceRecords = window.CueScoreRecordAccess?.getEligibleRecords(allSavedRecordsV1) || allSavedRecordsV1;
+    const hiddenPastCountV1=window.CueScoreMatchSharingUiV1?.hiddenPastCount?.(allSavedRecordsV1,sourceRecords)||0;
+    const hiddenPastNoticeV1=hiddenPastCountV1?`<aside class="cue-history-limit-v1" aria-label="全競技で過去の試合${hiddenPastCountV1}件があります"><strong>過去の試合 ${hiddenPastCountV1}件</strong><p>Freeでは最新20試合を表示しています。<br>Proでは過去の試合もすべて確認できます。</p><button type="button" data-pro-history-limit>🔒 Proですべての履歴を見る</button></aside>`:"";
     const categorySelectV381 = el("recordsCategorySelectV38");
     if (categorySelectV381) {
       const selected = recordsCategoryFilterV38;
@@ -16447,9 +16530,9 @@ let matchRecordsRawCacheV152 = null;
     if (count) count.textContent = `${records.length}試合`;
     updateRecordsFilterUiV31(all.length, records.length);
     if (!records.length) {
-      list.innerHTML = all.length
+      list.innerHTML = (all.length
         ? `<div class="record-empty">条件に一致する対戦履歴はありません。</div>`
-        : `<div class="record-empty">まだ対戦履歴はありません。<br>Game Set画面でOKを押すと保存されます。</div>`;
+        : `<div class="record-empty">まだ対戦履歴はありません。<br>Game Set画面でOKを押すと保存されます。</div>`)+hiddenPastNoticeV1;
       return;
     }
     const signatureV154 = recordsRenderSignatureNowV154(records.length);
@@ -16482,7 +16565,7 @@ let matchRecordsRawCacheV152 = null;
     }).join("");
     list.innerHTML = cardsHtmlV154 +
       (remainingV154 ? `<div class="records-load-more-v154"><button type="button" data-records-load-more-v154>さらに${Math.min(RECORD_RENDER_BATCH_V154, remainingV154)}件表示</button></div>` : "") +
-      (window.CueScoreRecordAccess?.hasHiddenRecords(allSavedRecordsV1) ? `<aside class="cue-history-limit-v1"><strong>20件まで表示しています</strong><button type="button" data-pro-history-limit>🔒 Proですべての履歴を見る</button></aside>` : "");
+      hiddenPastNoticeV1;
     installRecordsDelegatedClickV154();
   }
 
@@ -16673,6 +16756,19 @@ let matchRecordsRawCacheV152 = null;
     const count = el("playerLibraryCountV1");
     if (count) count.textContent = `登録プレーヤー数：${allPlayers.length}人`;
 
+    if (playerLibraryModeV145 === "match-sharing") {
+      const flowState=matchSharingFlowControllerV1?.get?.()||{};
+      const mappingSide=Number(matchSharingPlayerPickerKindV1);
+      const selected=flowState.bySide?.[mappingSide];
+      const other=flowState.bySide?.[mappingSide===1?2:1];
+      list.innerHTML = players.length ? players.map(({player:p}) => {
+        const usedByOther=other?.kind==="existing"&&String(other.playerId)===String(p.id);
+        const selectedHere=selected?.kind==="existing"&&String(selected.playerId)===String(p.id);
+        return `<div class="${"player-selection-row-v1"}${usedByOther?" is-unavailable":""}"><button class="player-selection-button-v1" type="button" ${usedByOther?"disabled aria-disabled=\"true\"":`data-select-player="${escapeRecordText(p.id)}"`} aria-label="${escapeRecordText(p.name)}${usedByOther?"、もう一方で選択済み":selectedHere?"、現在選択中":"を選択"}"><span class="player-selection-avatar-v1">${playerAvatarHtmlV2(p,"player-avatar-v2")}</span><span class="player-selection-copy-v1"><span class="player-library-name-row"><span class="player-library-name">${escapeRecordText(p.name)}</span>${usedByOther?'<span class="player-library-status">もう一方で選択済み</span>':selectedHere?'<span class="player-library-status current">現在選択中</span>':""}</span></span></button></div>`;
+      }).join("") : `<div class="player-library-empty">登録プレーヤーはまだいません。</div>`;
+      return;
+    }
+
     if (!players.length) {
       const emptyText = query ? "該当するプレーヤーがいません" : "登録プレーヤーはまだいません。<br>右上の＋から登録できます。";
       list.innerHTML = `<div class="player-library-empty">${emptyText}</div>`;
@@ -16713,17 +16809,18 @@ let matchRecordsRawCacheV152 = null;
   showPlayerLibraryMain = function() {
     editingPlayerId = null;
     const management = playerLibraryModeV145 === "management";
+    const matchSharingPicker = playerLibraryModeV145 === "match-sharing";
     const overlay = el("playerLibraryOverlay");
     overlay?.classList.add("player-management-formal-v1");
     overlay?.classList.toggle("player-selection-formal-v1", !management);
-    el("playerLibraryTitle").textContent = management ? "プレーヤー管理" : `Player${playerLibraryTarget} 選択`;
+    el("playerLibraryTitle").textContent = management ? "プレーヤー管理" : matchSharingPicker ? `Player ${matchSharingPlayerPickerKindV1} を選択` : `Player${playerLibraryTarget} 選択`;
     el("playerLibrarySearch").placeholder = management ? "プレーヤー検索" : "名前を検索";
     el("playerLibraryMain").classList.remove("hidden");
     el("playerEditor").classList.add("hidden");
     const back = el("playerLibraryBackBtn");
     if (back) {
       back.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg>`;
-      back.setAttribute("aria-label", management ? "前の画面に戻る" : "試合設定に戻る");
+      back.setAttribute("aria-label", management ? "前の画面に戻る" : matchSharingPicker ? "プレーヤー対応へ戻る" : "試合設定に戻る");
       back.removeAttribute("aria-hidden");
       back.tabIndex = 0;
     }
@@ -16731,6 +16828,14 @@ let matchRecordsRawCacheV152 = null;
     const restoreAddButton = () => {
       const add = el("playerLibraryAddBtn");
       if (!add) return;
+      if (matchSharingPicker) {
+        add.classList.add("editor-hidden-action");
+        add.setAttribute("aria-hidden","true");
+        add.style.setProperty("display","none","important");
+        add.style.visibility="hidden";
+        add.style.pointerEvents="none";
+        return;
+      }
       add.textContent = "＋";
       add.setAttribute("aria-label", "新規プレーヤー登録");
       add.removeAttribute("aria-hidden");
@@ -16760,6 +16865,16 @@ let matchRecordsRawCacheV152 = null;
     showPlayerLibraryMain();
   };
 
+  function openMatchSharingPlayerPickerV1(kind) {
+    matchSharingPlayerPickerKindV1=Number(kind)===2?2:1;
+    playerLibraryModeV145="match-sharing";
+    el("playerLibrarySearch").value="";
+    const overlay=el("playerLibraryOverlay");
+    overlay.classList.remove("hidden");
+    overlay.setAttribute("aria-hidden","false");
+    showPlayerLibraryMain();
+  }
+
   function openPlayerManagementV145() {
     playerLibraryModeV145 = "management";
     playerLibrarySortV1 = "recent";
@@ -16779,6 +16894,12 @@ let matchRecordsRawCacheV152 = null;
     event.preventDefault();
     event.stopImmediatePropagation();
     if (playerLibraryModeV145 === "selection" && select) selectRegisteredPlayer(select.dataset.selectPlayer);
+    if (playerLibraryModeV145 === "match-sharing" && select) {
+      const flow=ensureMatchSharingFlowControllerV1();
+      const mapping={kind:"existing",playerId:select.dataset.selectPlayer};
+      flow.selectMapping(matchSharingPlayerPickerKindV1,mapping);
+      closePlayerLibrary();
+    }
     if (playerLibraryModeV145 === "management" && stats) openPlayerStats(stats.dataset.statsPlayer);
     if (playerLibraryModeV145 === "management" && edit) openPlayerEditor(edit.dataset.editPlayer);
   }, true);
@@ -23145,10 +23266,12 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
     return "一度前の画面へ戻って、もう一度お試しください。";
   }
 
+  let matchSharingImportedRecordOverrideV1=null;
   function openMatchDetailV1(recordId,options={}) {
     const allSavedRecordsV1=readMatchRecords();
     const eligibleRecordsV1=options?.source==="result"?allSavedRecordsV1:(window.CueScoreRecordAccess?.getEligibleRecords(allSavedRecordsV1)||allSavedRecordsV1);
-    const record=eligibleRecordsV1.find(item=>String(item.id)===String(recordId));
+    const transientRecordV1=matchSharingImportedRecordOverrideV1&&String(matchSharingImportedRecordOverrideV1.id)===String(recordId)?matchSharingImportedRecordOverrideV1:null;
+    const record=transientRecordV1||eligibleRecordsV1.find(item=>String(item.id)===String(recordId));
     if(!record){if(allSavedRecordsV1.some(item=>String(item.id)===String(recordId)))window.CueScorePro?.open?.("historyLimit");return;}
     const resultMode=options?.source==="result";
     cleanupHistoricalRecordV159();
@@ -23310,6 +23433,12 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
   // emoji-tab detail must never be reopened through a captured legacy global.
   window.openHistoricalRecordV2=openMatchDetailV1;
   window.openMatchDetailV1=openMatchDetailV1;
+  window.cueScoreOpenImportedMatchDetailOnceV1=recordId=>{
+    const record=window.cueScoreConsumeImportedMatchDetailOnceV1?.(recordId);
+    if(!record)return false;
+    matchSharingImportedRecordOverrideV1=record;
+    try{openMatchDetailV1(recordId);return true}finally{matchSharingImportedRecordOverrideV1=null}
+  };
   window.openMatchResultDetailV5=recordId=>openMatchDetailV1(recordId,{source:"result"});
   window.closeFormalMatchDetailV2=()=>{
     const resultMode=document.getElementById("recordDetailOverlay")?.classList.contains("is-result-mode-v5");
@@ -24214,6 +24343,14 @@ body.match-sharing-receiver-visible-v1 .settings-suite-bottom-nav-v2{display:non
 .match-sharing-receiver-message-v1 p{max-width:300px;margin:10px auto 0;color:#666664;font-size:15px;line-height:1.55}
 .match-sharing-receiver-message-actions-v1{width:min(100%,320px);margin-top:24px;display:grid;gap:10px}
 .match-sharing-receiver-message-actions-v1 button{min-height:50px;padding:0 16px;border:1px solid #d2d2cf;border-radius:13px;background:#fff;color:#171717;font:inherit;font-size:16px;font-weight:720}
+.match-sharing-flow-v1{position:fixed;z-index:1410;inset:0;height:100dvh;display:flex;flex-direction:column;overflow:hidden;background:#f6f6f4;color:#171717;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif}.match-sharing-flow-v1.hidden{display:none!important}body.match-sharing-flow-visible-v1 .cue-bottom-nav-v1,body.match-sharing-flow-visible-v1 .records-bottom-nav-v1{display:none!important}.match-sharing-flow-header-v1{position:relative;flex:0 0 auto;min-height:calc(50px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 52px 0;display:grid;place-items:center;border-bottom:1px solid #dededb;background:rgba(255,255,255,.97)}.match-sharing-flow-header-v1 h1{margin:0;font-size:20px;line-height:50px;font-weight:760}.match-sharing-flow-header-v1>span{position:absolute;right:12px;bottom:3px;width:44px;height:44px}.match-sharing-flow-header-v1 button{position:absolute;left:max(12px,env(safe-area-inset-left));bottom:5px;width:44px;height:44px;padding:10px;display:grid;place-items:center;border:0;border-radius:50%;background:transparent;color:#171717}.match-sharing-flow-header-v1 svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.match-sharing-flow-content-v1{flex:1 1 0;min-height:0;display:flex;flex-direction:column;gap:14px;padding:18px max(18px,env(safe-area-inset-right)) max(18px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));overflow-y:auto;overflow-x:hidden}.match-sharing-flow-match-v1,.match-sharing-flow-section-v1,.match-sharing-flow-shared-name-v1{width:min(100%,354px);margin:0 auto;border:1px solid #dededb;border-radius:15px;background:#fff}.match-sharing-flow-match-v1{padding:15px;text-align:center}.match-sharing-flow-match-v1>span{display:block;font-size:17px;font-weight:760}.match-sharing-flow-match-v1 time,.match-sharing-flow-match-v1 small{display:block;margin-top:4px;color:#737370;font-size:13px}.match-sharing-flow-match-v1>div{margin-top:13px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:10px}.match-sharing-flow-match-v1 strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:15px}.match-sharing-flow-match-v1 b{font-size:22px;white-space:nowrap}.match-sharing-flow-section-v1{padding:15px}.match-sharing-flow-section-v1 h2{margin:0 0 12px;font-size:18px}.match-sharing-flow-side-v1{display:grid;gap:10px}.match-sharing-flow-side-v1 button,.match-sharing-flow-player-v1,.match-sharing-flow-new-v1{width:100%;min-height:54px;border:1px solid #d8d8d5;border-radius:12px;background:#fff;color:#171717;font:inherit;font-size:16px;font-weight:720}.match-sharing-flow-side-v1 button{position:relative;padding:10px 44px}.match-sharing-flow-side-v1 i{position:absolute;right:15px;font-style:normal}.match-sharing-flow-side-v1 .is-selected,.match-sharing-flow-player-v1.is-selected,.match-sharing-flow-new-v1.is-selected{border:2px solid #171717;background:#f2f2ef}.match-sharing-flow-shared-name-v1{padding:12px 15px;display:grid;gap:3px}.match-sharing-flow-shared-name-v1 span{color:#737370;font-size:12px}.match-sharing-flow-shared-name-v1 strong{font-size:18px}.match-sharing-flow-players-v1{display:grid;gap:8px}.match-sharing-flow-player-v1{display:grid;grid-template-columns:42px minmax(0,1fr) 24px;align-items:center;gap:10px;padding:6px 12px;text-align:left}.match-sharing-flow-player-v1:disabled{opacity:.48}.match-sharing-flow-avatar-v1{width:40px;height:40px;border:1px solid #dededb;border-radius:50%;object-fit:cover;background:#eee}.match-sharing-flow-player-v1 span{min-width:0}.match-sharing-flow-player-v1 strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.match-sharing-flow-player-v1 small{display:block;color:#737370;font-size:11px}.match-sharing-flow-player-v1 i{font-style:normal;text-align:center}.match-sharing-flow-new-v1{margin-top:10px;padding:8px 12px}.match-sharing-flow-name-input-v1{display:grid;gap:5px;margin-top:10px;color:#666;font-size:12px}.match-sharing-flow-name-input-v1 input{width:100%;min-height:46px;padding:10px 12px;border:1px solid #cfcfcb;border-radius:10px;background:#fff;color:#171717;font:inherit;font-size:16px}.match-sharing-flow-primary-v1{width:min(100%,354px);min-height:54px;margin:auto auto 0;border:0;border-radius:14px;background:#171717;color:#fff;font:inherit;font-size:17px;font-weight:780}.match-sharing-flow-primary-v1:disabled{opacity:.35}.match-sharing-flow-confirm-player-v1{display:grid;grid-template-columns:72px 40px minmax(0,1fr);align-items:center;gap:9px;padding:10px 0;border-top:1px solid #e5e5e2}.match-sharing-flow-confirm-player-v1>span{color:#737370;font-size:13px}.match-sharing-flow-confirm-player-v1 strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.match-sharing-flow-confirm-player-v1 small{grid-column:3;color:#737370;font-size:12px}.match-sharing-flow-unsaved-v1,.match-sharing-flow-error-v1{width:min(100%,354px);margin:0 auto;text-align:center;color:#666;font-size:13px;line-height:1.5}.match-sharing-flow-error-v1{color:#9e241d}.match-sharing-flow-empty-v1{margin:4px;color:#777;font-size:14px}.cue-history-limit-v1{display:grid;gap:6px}.cue-history-limit-v1 strong{font-size:17px}.cue-history-limit-v1 p{margin:0;color:#686865;font-size:13px;line-height:1.5}.cue-history-limit-v1 button{min-height:44px}
+body.match-sharing-flow-visible-v1 .cue-phase1-tab-bar{display:none!important}
+.match-sharing-flow-header-v1 h1:focus{outline:none}
+.match-sharing-flow-other-v1{width:100%;min-height:48px;margin-top:10px;padding:0 12px;display:flex;align-items:center;justify-content:space-between;border:1px solid #d8d8d5;border-radius:12px;background:#fff;color:#171717;font:inherit;font-size:15px;font-weight:700;text-align:left}
+.match-sharing-flow-header-v1 h1:focus,.match-sharing-receiver-message-v1 h2:focus{outline:none}
+.match-sharing-flow-mapping-row-v1{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:12px 0;border-top:1px solid #e5e5e2}.match-sharing-flow-shared-player-v1,.match-sharing-flow-mapped-player-v1{min-width:0;display:flex;align-items:center;gap:8px}.match-sharing-flow-shared-player-v1{display:grid;gap:2px}.match-sharing-flow-shared-player-v1 span,.match-sharing-flow-mapped-player-v1 small{color:#737370;font-size:11px}.match-sharing-flow-shared-player-v1 strong,.match-sharing-flow-mapped-player-v1 strong{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}.match-sharing-flow-mapped-player-v1>span:not(.match-sharing-flow-unmapped-v1){min-width:0}.match-sharing-flow-unmapped-v1{color:#777;font-size:13px}.match-sharing-flow-mapping-row-v1 .match-sharing-flow-other-v1,.match-sharing-flow-mapping-row-v1 .match-sharing-flow-new-v1{grid-column:1/-1;margin-top:0}.match-sharing-flow-mapping-row-v1 .match-sharing-flow-name-input-v1{grid-column:1/-1;margin-top:0}
+@media(max-width:360px){.match-sharing-flow-content-v1{padding-left:12px;padding-right:12px}.match-sharing-flow-match-v1>div{gap:6px}.match-sharing-flow-match-v1 strong{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.match-sharing-flow-v1 *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 @media(max-height:700px){
   .match-sharing-receiver-content-v1{padding-top:14px}
   .match-sharing-preview-guide-v1{width:min(244px,calc(100vw - 70px));margin-top:16px}

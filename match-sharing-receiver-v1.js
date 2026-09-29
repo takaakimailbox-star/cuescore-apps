@@ -131,7 +131,14 @@
       if(status==="restricted")return emit({screen:"permission",permission:"restricted",message:"この端末ではカメラの使用が制限されています。"});
       return emit({screen:"unavailable",permission:"unavailable",message:"この端末ではカメラを使用できません。"});
     };
-    const retry=async rect=>{memory.clear();await stopNative();return startAuthorized(rect||lastRect);};
+    const retry=async rect=>{
+      const nextRect=rect||lastRect;
+      memory.clear();
+      await stopNative();
+      await removeListeners();
+      setDiagnostic({phase:"retry-reenter",nativeStart:null,errorCode:null});
+      return enter(nextRect);
+    };
     const back=async()=>{await stopNative();await removeListeners();memory.clear();setDiagnostic({phase:"closed",nativeStart:null,errorCode:null});emit({screen:"closed"});};
     const openSettings=async()=>bridge?.openSettings?.();
     return Object.freeze({enter,retry,back,openSettings,memory,isActive:()=>active,diagnostic:()=>clone(diagnostic)});

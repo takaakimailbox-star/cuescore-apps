@@ -39,6 +39,7 @@ const files = [
   "match-sharing-transaction-v1.js",
   "match-sharing-sender-v1.js",
   "match-sharing-receiver-v1.js",
+  "match-sharing-ui-v1.js",
   "manifest.webmanifest",
   "official-document.js",
   "official-pages.css",

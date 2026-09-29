@@ -22,11 +22,12 @@ function logicalFor(fixture=stage1Fixtures()[0]){
   return adapters.buildSharedMatchV1(fixture.source,{sharedMatchId:fixture.sharedMatchId});
 }
 
-function mappingFor(logical,self="existing",opponent="existing"){
+function mappingFor(logical,first="existing",second="existing"){
   return {
-    selectedSide:1,
-    self:self==="existing"?{kind:"existing",playerId:"local-self"}:{kind:"new",pendingKey:"self",draft:{name:logical.players[1].name}},
-    opponent:opponent==="existing"?{kind:"existing",playerId:"local-opponent"}:{kind:"new",pendingKey:"opponent",draft:{name:logical.players[2].name}},
+    bySide:{
+      1:first==="existing"?{kind:"existing",playerId:"local-self"}:{kind:"new",pendingKey:"side-1",draft:{name:logical.players[1].name}},
+      2:second==="existing"?{kind:"existing",playerId:"local-opponent"}:{kind:"new",pendingKey:"side-2",draft:{name:logical.players[2].name}},
+    },
   };
 }
 
@@ -105,25 +106,52 @@ test("Player drafts preserve the current 20-character, duplicate-name, avatar an
   assert.equal(existing[0].isPrimary,true);
 });
 
-test("mapping plan requires explicit distinct sides and never auto-maps by name",()=>{
+test("mapping plan requires explicit distinct Player 1/2 mappings and rejects the legacy self/opponent contract",()=>{
   const logical=logicalFor();
-  assert.throws(()=>transaction.validateMappingPlan({},logical),error=>error.code==="INVALID_SIDE");
-  assert.throws(()=>transaction.validateMappingPlan({selectedSide:1,self:{kind:"existing",playerId:"same"},opponent:{kind:"existing",playerId:"same"}},logical),error=>error.code==="SAME_LOCAL_PLAYER");
-  assert.throws(()=>transaction.validateMappingPlan({selectedSide:1,self:{kind:"new",pendingKey:"same",draft:{name:"A"}},opponent:{kind:"new",pendingKey:"same",draft:{name:"B"}}},logical),error=>error.code==="SAME_PENDING_PLAYER");
-  assert.throws(()=>transaction.validateMappingPlan({selectedSide:1,self:{name:logical.players[1].name},opponent:{name:logical.players[2].name}},logical),error=>error.code==="MISSING_MAPPING");
+  assert.throws(()=>transaction.validateMappingPlan({},logical),error=>error.code==="MISSING_MAPPING");
+  assert.throws(()=>transaction.validateMappingPlan({bySide:{1:{kind:"existing",playerId:"a"}}},logical),error=>error.code==="MISSING_MAPPING");
+  assert.throws(()=>transaction.validateMappingPlan({bySide:{2:{kind:"existing",playerId:"b"}}},logical),error=>error.code==="MISSING_MAPPING");
+  assert.throws(()=>transaction.validateMappingPlan({selectedSide:1,self:{kind:"existing",playerId:"a"},opponent:{kind:"existing",playerId:"b"}},logical),error=>error.code==="LEGACY_MAPPING_PLAN");
+  assert.throws(()=>transaction.validateMappingPlan({bySide:{1:{kind:"existing",playerId:"same"},2:{kind:"existing",playerId:"same"}}},logical),error=>error.code==="SAME_LOCAL_PLAYER");
+  assert.throws(()=>transaction.validateMappingPlan({bySide:{1:{kind:"new",pendingKey:"same",draft:{name:"A"}},2:{kind:"new",pendingKey:"same",draft:{name:"B"}}}},logical),error=>error.code==="SAME_PENDING_PLAYER");
+  assert.throws(()=>transaction.validateMappingPlan({bySide:{1:{name:logical.players[1].name},2:{name:logical.players[2].name}}},logical),error=>error.code==="MISSING_MAPPING");
 });
 
-test("selected side 2 maps Self and Opponent to the correct receiver-local Player references",()=>{
+test("symmetric Player 1/2 mapping is independent of the receiver main Player",()=>{
   const logical=logicalFor();
-  const players=[localPlayer("self-side-2",logical.players[2].name),localPlayer("opponent-side-1",logical.players[1].name)];
+  const players=[localPlayer("main","貴章",{isPrimary:true}),localPlayer("side-1",logical.players[1].name),localPlayer("side-2",logical.players[2].name)];
   const harness=makeHarness({logical,players});
-  importWith(harness,logical,{
-    selectedSide:2,
-    self:{kind:"existing",playerId:"self-side-2"},
-    opponent:{kind:"existing",playerId:"opponent-side-1"},
-  });
-  assert.equal(harness.state.matches[0].players[1].registeredPlayerId,"opponent-side-1");
-  assert.equal(harness.state.matches[0].players[2].registeredPlayerId,"self-side-2");
+  importWith(harness,logical,{bySide:{1:{kind:"existing",playerId:"side-1"},2:{kind:"existing",playerId:"side-2"}}});
+  assert.equal(harness.state.matches[0].players[1].registeredPlayerId,"side-1");
+  assert.equal(harness.state.matches[0].players[2].registeredPlayerId,"side-2");
+  assert.equal(harness.state.players.find(player=>player.id==="main").isPrimary,true);
+  assert.equal(harness.state.matches[0].players[1].registeredPlayerId==="main",false);
+  assert.equal(harness.state.matches[0].players[2].registeredPlayerId==="main",false);
+});
+
+test("third-party ゆな vs かいと import keeps main 貴章 unchanged and outside both mapped sides",()=>{
+  const logical=logicalFor();
+  logical.players[1].name="ゆな";logical.players[2].name="かいと";
+  const players=[localPlayer("main-takaaki","貴章",{isPrimary:true}),localPlayer("local-yuna","ゆな"),localPlayer("local-kaito","かいと")];
+  const harness=makeHarness({logical,players}),before=clone(players[0]);
+  importWith(harness,logical,{bySide:{1:{kind:"existing",playerId:"local-yuna"},2:{kind:"existing",playerId:"local-kaito"}}});
+  const imported=harness.state.matches[0];
+  assert.deepEqual(harness.state.players.find(player=>player.id==="main-takaaki"),before);
+  assert.equal(imported.players[1].registeredPlayerId,"local-yuna");
+  assert.equal(imported.players[2].registeredPlayerId,"local-kaito");
+  assert.equal(Object.values(imported.players).some(player=>player.registeredPlayerId==="main-takaaki"),false);
+});
+
+test("third-party import contributes to both mapped Player collections and not to the receiver main Player",()=>{
+  const logical=logicalFor();
+  logical.players[1].name="ゆな";logical.players[2].name="かいと";
+  const players=[localPlayer("main-takaaki","貴章",{isPrimary:true}),localPlayer("local-yuna","ゆな"),localPlayer("local-kaito","かいと")];
+  const harness=makeHarness({logical,players});
+  importWith(harness,logical,{bySide:{1:{kind:"existing",playerId:"local-yuna"},2:{kind:"existing",playerId:"local-kaito"}}});
+  const recordsFor=playerId=>harness.state.matches.filter(record=>[1,2].some(side=>record.players?.[side]?.registeredPlayerId===playerId));
+  assert.equal(recordsFor("local-yuna").length,1);
+  assert.equal(recordsFor("local-kaito").length,1);
+  assert.equal(recordsFor("main-takaaki").length,0);
 });
 
 for(const [selfKind,opponentKind] of [["existing","existing"],["new","existing"],["existing","new"],["new","new"]]){
@@ -146,10 +174,10 @@ for(const [selfKind,opponentKind] of [["existing","existing"],["new","existing"]
 test("missing, deleted, invalid, duplicate-name, long-name and colliding generated Player mappings reject before writes",()=>{
   const logical=logicalFor(),base=makeHarness({logical});
   const cases=[
-    [{selectedSide:1,self:{kind:"existing",playerId:"missing"},opponent:{kind:"existing",playerId:"local-opponent"}},"INVALID_LOCAL_PLAYER"],
-    [{selectedSide:1,self:{kind:"existing",playerId:"broken"},opponent:{kind:"existing",playerId:"local-opponent"}},"INVALID_LOCAL_PLAYER",[...base.state.players,{id:"broken",name:""}]],
+    [{bySide:{1:{kind:"existing",playerId:"missing"},2:{kind:"existing",playerId:"local-opponent"}}},"INVALID_LOCAL_PLAYER"],
+    [{bySide:{1:{kind:"existing",playerId:"broken"},2:{kind:"existing",playerId:"local-opponent"}}},"INVALID_LOCAL_PLAYER",[...base.state.players,{id:"broken",name:""}]],
     [mappingFor(logical,"new","existing"),"DUPLICATE_PLAYER_NAME",[...base.state.players,localPlayer("same-name",logical.players[1].name)]],
-    [{...mappingFor(logical,"new","existing"),self:{kind:"new",draft:{name:"123456789012345678901"}}},"PLAYER_NAME_TOO_LONG"],
+    [{bySide:{...mappingFor(logical,"new","existing").bySide,1:{kind:"new",draft:{name:"123456789012345678901"}}}},"PLAYER_NAME_TOO_LONG"],
   ];
   for(const [mapping,code,players] of cases){
     const harness=makeHarness({logical,players:players??base.state.players}),snapshot=harness.before();
@@ -308,7 +336,7 @@ test("Import result supports Stage 2 Backup identity and restored duplicate dete
   assert.equal(persistence.findDuplicateSharedMatchId(harness.state.matches,result.sharedMatchId)?.id,result.importedLocalMatchId);
 });
 
-test("production wiring preserves Stage 3 Restore safety and does not include Stage 5B import UI",()=>{
+test("production wiring preserves Stage 3 Restore safety when Stage 5B connects the adopted import UI",()=>{
   for(const file of ["match-sharing-validation-v1.js","match-sharing-adapters-v1.js","match-sharing-player-drafts-v1.js","match-sharing-transaction-v1.js"]){
     assert.match(html,new RegExp(file.replaceAll(".","\\.")));
     assert.match(nativeBuild,new RegExp(file.replaceAll(".","\\.")));
@@ -319,5 +347,7 @@ test("production wiring preserves Stage 3 Restore safety and does not include St
   assert.match(html,/window\.cueScoreConsumeImportedMatchDetailOnceV1 = consumeImportedMatchDetailOnceV1/);
   assert.match(html,/id="matchSharingReceiverV1"/);
   assert.match(html,/id="matchSharingScannerStateV1"/);
-  assert.doesNotMatch(html,/id="matchSharing(SelfMapping|OpponentMapping|ImportConfirmation|SideSelection|MatchPreview)/);
+  assert.match(html,/id="matchSharingFlowV1"/);
+  assert.match(html,/flow\.commit\(\)/);
+  assert.match(html,/cueScoreOpenImportedMatchDetailOnceV1/);
 });

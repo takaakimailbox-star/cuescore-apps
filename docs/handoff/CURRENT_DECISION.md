@@ -3,7 +3,7 @@
 - Decision ID: `CUESCORE-MATCH-SHARING-V1-SYMMETRIC-MAPPING-AMENDMENT-20260929`
 - Date: 2026-09-29
 - Product Owner / ChatGPT decision: `SYMMETRIC PLAYER A/B MAPPING + RECEIVER UX REVISION — APPROVED`
-- Gate: `FORMAL DESIGN AMENDMENT APPROVED / DOCUMENTATION COMMIT-PUSH AUTHORIZED / REVISED IMPLEMENTATION NOT STARTED / STOP`
+- Gate: `REVISED STAGE 5B FINAL ACCEPTED / COMMIT + PUSH AUTHORIZED / RELEASE READINESS NOT STARTED`
 
 ## Adopted amendment
 
@@ -21,13 +21,19 @@
 - Normal Match Detail＋success toast after successful Import.
 - Decision 028 / 029 remain historical records; Decision 030 supersedes only their affected Receiver scope.
 
+## Implementation result
+
+- Stage 3 now consumes symmetric `bySide.{1,2}` mappings and rejects the legacy self/opponent contract.
+- Stage 5B now combines Preview and both Player mappings on `試合を確認`, preserves mappings across Back, uses only neutral/receiver-local avatars, and presents duplicate as a dedicated state.
+- Third-party Import is main-Player independent; six disciplines / 18 fixtures and all four existing/new combinations pass.
+- Initial revised physical testing confirmed QR A duplicate handling and QR C recognition, but direct retry from the duplicate state failed to restart camera preview. Controller-only retry fix #1 also failed physical retest. Fix #2 routes the action through the complete Receiver close/open product lifecycle. Product Owner physical retry retest #2 confirmed camera preview restart and another QR read with `OK / PASS`.
+- Product Owner Final Acceptance confirms the revised symmetric Receiver Flow, Import, duplicate rejection / dedicated UX, retry camera restart, and different-QR scan after retry.
+
 ## Boundary
 
-- Documentation-only final audit / commit / push in this Gate.
-- Do not edit, stage, commit or discard the existing uncommitted Stage 5B product diff.
-- No Stage 3 / Stage 5B implementation, Prototype, Build, Version change, Archive, Upload, TestFlight or App Store Connect work.
-- Commit and push only the explicit Formal Amendment documentation paths; keep every Stage 5B product path unstaged and byte-identical.
+- Final audit, Evidence finalization, commit, push, and GitHub fresh read-back are authorized.
+- No further product expansion, Version change, Archive, Upload, TestFlight, App Store Connect, Release, or Release Readiness work.
 
 ## STOP
 
-Stop after the approved Formal Amendment documentation is committed, pushed, and fresh-read back. Revised Stage 3 / Stage 5B implementation remains not started.
+Stop after commit, push, and GitHub fresh read-back. The next Gate is Match Sharing v1 Final Integration / Release Readiness and is not authorized in this task.

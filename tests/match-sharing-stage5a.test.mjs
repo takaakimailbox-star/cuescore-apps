@@ -23,13 +23,13 @@ function fakeBridge(status="authorized"){
   const callbacks=new Map();
   let current=status;
   return {
-    authCalls:0,permissionCalls:0,startCalls:0,stopCalls:0,settingsCalls:0,lastRect:null,
+    authCalls:0,permissionCalls:0,startCalls:0,stopCalls:0,settingsCalls:0,listenerRemoveCalls:0,lastRect:null,
     async authorizationStatus(){this.authCalls+=1;return {status:current}},
     async requestPermission(){this.permissionCalls+=1;current=current==="notDetermined"?"authorized":current;return {status:current}},
     async startScan({previewRect}){this.startCalls+=1;this.lastRect=previewRect;return {active:true}},
     async stopScan(){this.stopCalls+=1;return {active:false}},
     async openSettings(){this.settingsCalls+=1;return {opened:true}},
-    async addListener(name,callback){callbacks.set(name,callback);return {remove:()=>callbacks.delete(name)}},
+    async addListener(name,callback){callbacks.set(name,callback);return {remove:()=>{this.listenerRemoveCalls+=1;callbacks.delete(name)}}},
     async emit(name,data){return callbacks.get(name)?.(data)},
   };
 }
@@ -167,13 +167,13 @@ test("duplicate is detected against the full completed collection with zero writ
   await assert.rejects(()=>receiver.decodeScannedPayload({payload,records}),error=>error.code==="DUPLICATE");
 });
 
-test("controller accepts one callback, supports retry after error, and Back clears camera and memory",async()=>{
+test("controller accepts one callback, fully re-enters after error, and Back clears camera and memory",async()=>{
   const bridge=fakeBridge(),states=[],memory=receiver.createMemoryState();
   const controller=receiver.createScannerController({bridge,memory,onState:value=>states.push(value)});
   const rect={x:10,y:120,width:280,height:280};await controller.enter(rect);
   await bridge.emit("scanResult",{value:"https://example.com"});
   assert.equal(states.at(-1).screen,"error");assert.equal(memory.get(),null);assert.equal(bridge.stopCalls,1);
-  await controller.retry(rect);assert.equal(bridge.startCalls,2);
+  await controller.retry(rect);assert.equal(bridge.startCalls,2);assert.equal(bridge.authCalls,2);assert.equal(bridge.listenerRemoveCalls,2);
   assert.equal(controller.diagnostic().phase,"running");
   const {payload}=await fixturePayload(fixtures[0]);
   await bridge.emit("scanResult",{value:payload});
@@ -183,7 +183,7 @@ test("controller accepts one callback, supports retry after error, and Back clea
   await controller.back();assert.equal(memory.get(),null);assert.equal(controller.isActive(),false);assert.ok(bridge.stopCalls>=2);
 });
 
-test("bridge and native startup failures remain camera errors and retry starts from a stopped session",async()=>{
+test("bridge and native startup failures remain camera errors and retry uses the full stopped re-entry path",async()=>{
   const states=[];
   const failedAuth={async authorizationStatus(){throw Object.assign(new Error("bridge"),{code:"BRIDGE_FAILURE"})}};
   const authController=receiver.createScannerController({bridge:failedAuth,onState:value=>states.push(value)});
@@ -197,7 +197,7 @@ test("bridge and native startup failures remain camera errors and retry starts f
   assert.equal(states.at(-1).screen,"unavailable");
   assert.equal(startController.diagnostic().phase,"start-failed");
   await startController.retry({x:0,y:0,width:280,height:280});
-  assert.equal(bridge.stopCalls,1);
+  assert.equal(bridge.stopCalls,1);assert.equal(bridge.authCalls,2);assert.equal(bridge.listenerRemoveCalls,2);
 });
 
 test("History receiver entry, scanner copy, accessibility and error recovery match the adopted UI",()=>{

@@ -1,0 +1,91 @@
+{
+  "fixture": "sample-match-0706",
+  "shots": [
+    "01_Unified_Mapping_Initial_390x844.png",
+    "02_Unified_Mapping_Complete_390x844.png",
+    "03_Final_Import_Confirmation_390x844.png",
+    "04_Duplicate_Dedicated_UX_390x844.png",
+    "05_Import_Success_Normal_Detail_390x844.png"
+  ],
+  "audit": {
+    "screens390": [
+      {
+        "name": "01_Unified_Mapping_Initial_390x844.png",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visibleScreen": "matchSharingFlowV1",
+        "horizontalOverflow": false,
+        "clipping": false,
+        "undersizedVisibleControls": [],
+        "importedBadges": 0,
+        "successStatus": null
+      },
+      {
+        "name": "02_Unified_Mapping_Complete_390x844.png",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visibleScreen": "matchSharingFlowV1",
+        "horizontalOverflow": false,
+        "clipping": false,
+        "undersizedVisibleControls": [],
+        "importedBadges": 0,
+        "successStatus": null
+      },
+      {
+        "name": "03_Final_Import_Confirmation_390x844.png",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visibleScreen": "matchSharingFlowV1",
+        "horizontalOverflow": false,
+        "clipping": false,
+        "undersizedVisibleControls": [],
+        "importedBadges": 0,
+        "successStatus": null
+      },
+      {
+        "name": "05_Import_Success_Normal_Detail_390x844.png",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visibleScreen": "recordDetailOverlay",
+        "horizontalOverflow": false,
+        "clipping": false,
+        "undersizedVisibleControls": [],
+        "importedBadges": 0,
+        "successStatus": "✓ 試合を取り込みました通常の試合として保存しました"
+      },
+      {
+        "name": "04_Duplicate_Dedicated_UX_390x844.png",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visibleScreen": "matchSharingReceiverV1",
+        "horizontalOverflow": false,
+        "clipping": false,
+        "undersizedVisibleControls": [],
+        "importedBadges": 0,
+        "successStatus": null
+      }
+    ],
+    "360x780-unified-complete": {
+      "viewport": {
+        "width": 360,
+        "height": 780
+      },
+      "visibleScreen": "matchSharingFlowV1",
+      "horizontalOverflow": false,
+      "clipping": false,
+      "undersizedVisibleControls": [],
+      "importedBadges": 0,
+      "successStatus": null
+    }
+  }
+}
