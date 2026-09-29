@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Match Sharing v1 Final Integration / Release Readiness（2026年9月30日）
+
+- Gate: `READY`。baseline `ac34e37b361ea658994c342cce07dcc9ff3a2282`でOfficial 101／102、Decision 030、全Stage実装、Evidence、current sourceをfresh auditし、2026年9月30日の再検証でもformal behavior conflict、製品FAIL、supported-device blockerは0件。
+- Match Sharing focused `99/99`、全Node `557/557`、capacity 18/18（ECC-M Version 19〜30）、native parity、390×844 visual audit、Release Simulator BuildをPASS。built AppはBundle ID `com.takaakimailboxstar.cuescoreapps`、`1.1 (79)`、`.storekit` 0件、executable SHA-256 `ab2dd6e677665fe87534fee0f96c206d2ebfd3b0fb64b15ba6dead215f738865`。
+- Product Owner physical EvidenceはSender QR V19／V25／V30、Scanner A／B／C、validation、Back停止、改訂symmetric Receiver Flow、Import、Duplicate、retry camera restart＋別QRをPASS。final retry PASS screenshotはなく、PO reportとして区別して保持する。
+- Physical VoiceOver、最大Dynamic Type、camera denied/restricted recoveryはRelease前推奨だがblockerではない。iPadはiPhone-only native targetの正式scope外。printed QR、low-light／extreme angleはLater robustness確認。
+- 最新Release EvidenceではApp Store Version `1.1`／Build `79`は配信準備完了で、Match Sharing sourceはその後に実装された。次candidateはVersion `1.2`／Build `80`を推奨するが、本GateではVersion／Buildを変更していない。
+- Product source、schema、dependency変更0。次candidate `1.2 (80)`のArchive／Upload／TestFlight／App Store Connect／Releaseは`NOT STARTED`。Evidence: `docs/implementation/CueScore_Match_Sharing_v1_Final_Integration_Release_Readiness_2026-09-29.md`。
+
 ## Match Sharing v1 Revised Stage 3 + Stage 5B（2026年9月29日）
 
 - Gate: `REVISED STAGE 3 + STAGE 5B FINAL ACCEPTED / PRODUCT OWNER PHYSICAL PASS / RELEASE READINESS NOT STARTED`。
