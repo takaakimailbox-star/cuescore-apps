@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Match Sharing v1 Symmetric Player Mapping Formal Amendment（2026年9月29日）
+
+- Gate: `FORMAL DESIGN AMENDMENT PRODUCT OWNER / CHATGPT APPROVED / REVISED IMPLEMENTATION NOT STARTED / REVISED PHYSICAL E2E NOT VERIFIED`。
+- Stage 5B旧Receiver Flowはautomated `15/15`、Stage 1〜5B `96/96`、全Node `555/555`、18 fixture production E2E、390×844、native parity、Release Simulator BuildをPASS。Product Owner physical iPhoneではQR scan、旧Preview／Side Selection／Self Mapping／Opponent Mapping、Import transaction、通常Match Detail、duplicate rejectionをPASSした。これは旧Flowの機能成立Evidenceとして保持する。
+- Product Owner UX feedbackを受け、`あなたはどちらですか？`、Self Mapping、Opponent Mappingを廃止し、Shared Player A / Bをreceiver-local Player A / Bへ対称に明示mappingする6点Revisionを正式採用した。Previewとmappingを`試合を確認`の1画面へ統合し、receiver本人の参加を要求せず、main Playerへ依存しない。
+- Source Investigation判定は`B — SAFE WITH LIMITED CHANGES`。Match schema、Format v1、Backup schema、Analytics architecture、Free / Pro、Demoは変更不要。Stage 3 mapping input、Stage 5B UI/state、tests、変更後physical E2Eが必要。
+- Player UIはmapping前／pending newにdefault avatar、existing mapping後にreceiver-local avatarを使用し、sender avatarを共有・推測しない。Duplicateは専用状態へ分離し、generic read failure文言を使用しない。
+- Official 101／102とDecision Log v2.5 Decision 030へFormal Amendmentを同期し、Product Owner / ChatGPT Final ReviewでAPPROVEDとなった。Stage 5B未commit product差分は旧Flow候補として変更せず保全し、本GateではFormal Amendment documentationだけをcommit／push対象とする。Evidence: `docs/implementation/CueScore_Match_Sharing_v1_Symmetric_Player_Mapping_Amendment_2026-09-29.md`。
+
 ## Match Sharing v1 Stage 5A Physical FAIL #2 Root Cause Fix（2026年9月28日）
 
 - Gate: `STAGE 5A PHYSICAL SCANNER PASS — STAGE 5B NOT STARTED`。
@@ -57,7 +66,7 @@
 - Primary transportはECC-M Single QR。論理Formatは内部保存schemaから分離し、`compact representation → deflate → Base45 → CSM1: prefix → Single QR`とする。共有ファイル／iOS共有シートはfallback候補、直接P2PはLater、複数QRは通常経路に採用しない。
 - 受信入口は試合履歴一覧、送信入口は試合詳細。Player mapping、UUID v4 `sharedMatchId`、新local Match ID、保存前duplicate rejection、通常History／Detail／Statistics／Analytics反映、Demo全面禁止、privacy除外、all-or-nothing Import、Backup／Restoreでの`sharedMatchId`維持を正式化した。
 - Evidence：6競技×Short／Medium／Long 18/18 Single QR theoretical fit、V19／V25／V30 physical iPhone 3/3 PASS、Round-trip 18/18、parity 162/162、Negative 10/10、Demo separation PASS、privacy禁止データ混入0、FAIL 0、BLOCKED 0。
-- Product Ownerは、Sender／Receiver header actions、292pt QR表示、Scanner permission flow、Match Preview＋side選択、Self／Opponent mapping、Final Confirmation、通常Match Detail＋success toastをPrimary UIとして採用した。Match Sharing v1はFree / Pro共通機能とし、Pro gateを設けない。
+- Product Ownerは当時、Sender／Receiver header actions、292pt QR表示、Scanner permission flow、Match Preview＋side選択、Self／Opponent mapping、Final Confirmation、通常Match Detail＋success toastをPrimary UIとして採用した。Side Selection／Self／Opponent部分は2026年9月29日のSymmetric Player Mapping Amendmentで後続置換された。Sender／Scanner／Final action／success behaviorとFree / Pro共通Decisionは維持する。
 - Free 20件は現行source／Official 98上のstorage上限ではなくaccess／view limitで、storage writeはunfiltered collectionを使用する。古い日時のImportが先頭20件外になる場合のDetail／Statistics／Analytics動作はImplementation Designで確定する。
 - 未確認：Build 79 live user records、production localStorage transaction、Backup／Restore統合、production scanner／camera decode、Dynamic Type、VoiceOver／focus、permission denied production UI、new Player creation production flow、Free 20件境界の詳細動作、final implementation physical test。未確認事項をPASSへ拡張しない。
 - Decision 12はLater登録の履歴として維持する。後続正式文書は`docs/official/101_CueScore_Match_Sharing_v1_Decision.md`と`docs/official/102_CueScore_Match_Sharing_v1_Spec.md`。Formal Specification完了はImplementation承認ではない。Version 1.1へ追加せず、製品sourceは未変更。
@@ -1267,7 +1276,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 
 - CSV入出力
 - 自動クラウド同期
-- 試合共有（Match Sharing）：1台で記録した完了試合を対戦相手のCueScore Appsへ転送し、相手側の履歴・統計・分析へ取り込める機能。v1.0非搭載。Formal Design／Technical Feasibility／Formal Specification／Primary UI Prototype Product Owner Reviewは完了したが、製品実装は未着手で、Version 1.1にも含めていない。
+- 試合共有（Match Sharing）：1台で記録した完了試合を別のCueScore Appsへ転送し、receiver-local Player A / Bへ対称mappingして履歴・統計・分析へ取り込める機能。公開Version 1.1非搭載。Stage 1〜5B旧Flowは実装・旧Flow physical E2Eまで完了したが未commit。Symmetric Player Mapping Formal Amendmentは完了し、改訂実装は未着手。
 
 ## 要確認事項
 
@@ -1285,7 +1294,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - App Store v1.0 release profileはCSV・クラウド同期を無効化し、関連UIを表示しない。
 - Official Demo Dataはv1.0提出予定範囲に含める。実提出ビルドでの収録と通常ユーザーデータからの分離確認は未実施。
 - Official Demo Dataの本番向け表示は「サンプルデータ」を採用し、状態を「通常データ／サンプルデータ」、操作を「準備する／サンプルを見る／通常データへ戻る／初期状態に戻す／削除」とする。
-- 試合共有（Match Sharing）はv1.0ではLaterとしていた履歴をDecision 12に維持する。その後Official 101／102でFormal Design／Specification、Decision Log v2.4でPrimary UI Prototype Product Owner PASSとFree／Pro共通Decisionを追補した。Implementation Decisionは未発行で、製品実装は未着手。正式記録：`docs/official/12_CueScore_Later_Match_Sharing_Decision.md`、`docs/official/101_CueScore_Match_Sharing_v1_Decision.md`、`docs/official/102_CueScore_Match_Sharing_v1_Spec.md`。
+- 試合共有（Match Sharing）はv1.0ではLaterとしていた履歴をDecision 12に維持する。Official 101／102、Decision 028／029に続き、Decision Log v2.5 Decision 030がReceiverのown-side／Self／Opponent部分を対称Player A / B mappingへ後続置換した。Stage 5B旧Flow product差分は未commitで保全し、改訂実装は未着手。正式記録：`docs/official/12_CueScore_Later_Match_Sharing_Decision.md`、`docs/official/101_CueScore_Match_Sharing_v1_Decision.md`、`docs/official/102_CueScore_Match_Sharing_v1_Spec.md`。
 - Native iOS foundation、実機基本機能、TestFlight Build 1、TestFlight内部運用はGO。Build 2開発はGOだが、本状態同期ではBuild 2を作成しない。
 - App Store本審査提出と一般公開は未承認。Product Ownerの明示承認なしに実施しない。
 

@@ -1,42 +1,38 @@
 # CueScore Current Report
 
 - App: CueScore Apps
-- Decision ID: `CUESCORE-MATCH-SHARING-V1-STAGE5A-20260928`
-- Date: 2026-09-28
-- Gate result: `STAGE 5A PHYSICAL SCANNER PASS — STAGE 5B NOT STARTED`
-- Baseline: `0dfb82372f0555de7c29a77d2e58835708aa90a5`
-- Commit / push: Stage 5A source／tests／Evidence commit `17507c7e0152eca735553d553480a4a40b47277b` and final state sync pushed to `main`; fresh read-back complete
+- Decision ID: `CUESCORE-MATCH-SHARING-V1-SYMMETRIC-MAPPING-AMENDMENT-20260929`
+- Date: 2026-09-29
+- Gate result: `SYMMETRIC PLAYER A/B MAPPING + RECEIVER UX REVISION — APPROVED`
+- Baseline: `003928ad7df2e70596ad7a7a1479cde4b84ff0fa`
+- Commit / push: authorized for explicit Formal Amendment documentation paths only; Stage 5B product diff remains excluded
 
 ## Result
 
-Physical FAIL #2の実機runtime tracingで、Native plugin resolve後かつCamera API呼出し前に`ReferenceError: Can't find variable: readRecords`が発生していた。controller dependencyは実在する`readMatchRecords`へ明示mappingする必要があり、ここを1点修正した。同じiPhone 16eでpermission `notDetermined → authorized`、back Camera、input/output、QR metadata、preview attach、`session.isRunning=true`までPASSし、Product OwnerもCamera起動を確認。続いてQR A／B／Cのphysical in-app scanとCueScore validation成功を`3/3 PASS`、Back Camera stopをPASSと確認した。Stage 5B Match Preview／mapping／Import接続は未実装。
+Official 101 / 102を、Receiver本人の参加を要求しない対称Player A / B mappingへ同期した。Match PreviewとA / B local mappingを1画面へ統合し、default／receiver-local avatar rule、third-party Import、main Player非依存、dedicated duplicate UXを正式化した。
 
-## Verification
+Decision 028 / 029は当時の履歴として保持し、Decision Log v2.5 Decision 030がReceiverのown-side selection、Self Mapping、Opponent Mapping、generic duplicate presentationだけを後続置換する。Sender、Scanner、Format、transaction、privacy、Demo、Free / Pro、Backup / Restore、success Detailは維持する。
 
-- Stage 5A dedicated: `16/16 PASS`
-- Stage 1–5A focused: `81/81 PASS`
-- Stage 4 A/B/C Version 19/25/30 and all 18 production fixtures decode/validate: PASS
-- Full Node: `540/540 PASS / 0 FAIL / 0 SKIPPED`
-- native-web / copied iOS public parity: PASS
-- 390×844 scanner audit: clipping / overlap / horizontal scroll / unnecessary vertical scroll all 0
-- Release Simulator Build: `BUILD SUCCEEDED`
-- Separate signed `CueScore Stage5A` 1.1 (79) final no-debug-log device Build: BUILD / REINSTALL PASS; executable SHA-256 `c3aeb7d0df11802b8da043e295a4e59040289068b3fa68af648bfacbaf3981a7`; `.storekit` 0; physical Camera start PASS
+## Evidence
 
-## Changed scope
+- Symmetric Mapping Investigation: `B — SAFE WITH LIMITED CHANGES`
+- Match schema / History / Detail / Player aggregate / Statistics / Analytics / six disciplines / Backup / re-share: symmetric side 1 / 2 contract confirmed
+- Third-party non-persistent probe: Import success, unrelated main Player unchanged, created Players 0, re-share logical parity PASS
+- Old-flow Stage 5B automated: `15/15`; Stage 1–5B `96/96`; full Node `555/555`; 18 fixture production E2E PASS
+- Old-flow Product Owner physical E2E: QR scan, old Preview / mapping, Import, normal Detail and duplicate rejection PASS; retained as historical functional Evidence
+- Revised implementation: NOT STARTED
+- Revised physical E2E: NOT VERIFIED
 
-- Product: original Stage 5A scope plus explicit main-thread preview install, WebView coordinate conversion/z-order, preview layout/guide, capture `isRunning` gate, registerPlugin fallback, camera-specific startup error and retry stop/restart
-- Tests: original Stage 5A coverage plus native preview integration and startup/retry failure classification
-- Evidence: Stage 5A report, physical FAIL screenshots/hashes, root-cause/fix report and 390×844 scanner PNG
-- Package dependency / Official 101-102 / schema / Version-Build: 0 changes
+## Documentation scope
 
-## Not verified / not started
+- Official 101 / 102 amended
+- Official Design Decision Log v2.5 / Decision 030 prepared
+- `CURRENT_STATE`, `CURRENT_STATUS`, handoff and Implementation Design synchronized
+- Amendment Evidence added
+- Product source changed by this task: 0
 
-- Fixed-build physical authorization, Camera discovery, preview, capture running, QR A/B/C in-app scan／validation and Back Camera stop: PASS. Retry: NOT TESTED — NOT FAILED. Dynamic Type and VoiceOver: NOT VERIFIED
-- Stage 5B Match Preview, side selection, mapping, Import and Free History UI: NOT STARTED
-- Archive/Upload/TestFlight/App Store Connect: NOT PERFORMED
+## Boundary / STOP
 
-## STOP
+Existing Stage 5B product source／tests／outputs remain uncommitted and must stay byte-identical. This Gate performs only the approved documentation commit／push and fresh read-back; Prototype、Build、Archive、Upload、TestFlight、App Store Connectは実施しない。
 
-Stage 5A source、physical FAIL履歴、root-cause fix、physical PASS、tests、SSOTだけをcommit／pushし、fresh read-backを完了した。ここでSTOPし、Stage 5Bへ進まない。
-
-`STAGE 5A PHYSICAL SCANNER PASS RECORDED / STAGE 5B NOT STARTED`
+`SYMMETRIC MAPPING FORMAL AMENDMENT APPROVED / REVISED IMPLEMENTATION NOT STARTED`

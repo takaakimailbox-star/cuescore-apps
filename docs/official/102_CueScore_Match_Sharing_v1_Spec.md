@@ -1,8 +1,8 @@
 # CueScore Apps — Match Sharing Format v1 Specification
 
-**Status:** Adopted / Design and Technical Feasibility Complete / Formal Specification Complete / Primary UI Prototype Product Owner PASS / Implementation NOT STARTED
+**Status:** Adopted / Symmetric Player Mapping Formal Amendment Product Owner / ChatGPT APPROVED / Revised Implementation NOT STARTED
 
-**Specification date:** 2026-09-27
+**Specification date:** 2026-09-27 / Amendment date: 2026-09-29
 
 **Authority:** Product Owner adopted specification
 **Governing decision:** `101_CueScore_Match_Sharing_v1_Decision.md`
@@ -29,13 +29,15 @@ Match Sharing v1は同期、共同編集、クラウドアカウント、複数�
 
 受信側は試合履歴一覧ページから開始する。
 
-`試合履歴一覧 → 試合を受け取る → QR読み取り → payload検証 → 試合内容確認 → 自分side選択 → 自分Player mapping → 相手Player mapping → 最終確認 → 試合を取り込む → 保存 → 通常の試合詳細`
+`試合履歴一覧 → 試合を受け取る → QR読み取り → payload検証 → 試合確認＋Player A / B local mapping → 最終確認 → 試合を取り込む → 保存 → 通常の試合詳細＋success toast`
 
 保存は最終確認後にだけ実行する。validation失敗、mapping未完了、ユーザーcancelでは保存しない。
 
 受信入口は試合履歴一覧header右上の`QR glyph + 受け取る`とする。visible labelは`受け取る`、accessibility labelは`試合を受け取る`相当とする。件数行右側には置かない。
 
 Camera permissionは、未要求時にiOS標準dialogを経てScannerへ進み、許可済みは直接Scannerへ進む。拒否済みは再要求ループを行わず説明とSettings recoveryを提供する。CueScore独自の事前permission tutorial画面を通常Flowへ追加しない。Scanner headerは`試合を受け取る`とする。
+
+Receiver本人がMatch participantである必要はない。`あなたはどちらですか？`、own-side selection、Self Mapping、Opponent Mappingを現行Flowへ含めない。
 
 ## 3. Transport
 
@@ -124,21 +126,40 @@ Importはreceiver側で新しいlocal Match IDを生成する。local Match ID�
 
 保存前に既存通常試合の`sharedMatchId`を検索する。一致がある場合、Player作成またはMatch保存を行わず拒否する。
 
-ユーザー向け第一候補：`この試合はすでに取り込まれています。`
+Duplicateはscan failureではない。QR recognition、decode、validation成功後に`sharedMatchId`一致を検出した状態として、次の専用UXを使用する。
 
-## 6. Player mapping
+- Header：`この試合はすでに取り込み済みです`
+- Body：`同じ試合が試合履歴に保存されています。`
+- Primary action：`他の試合を読み取る`
+- Back：Historyへ戻る
 
-1. receiverはPlayer A / Player Bのどちらが自分かを選択する。
-2. 選択sideをreceiverのlocal Playerへ明示mappingする。
-3. 相手sideは既存local Playerを明示選択するか、Importフロー内で新規作成する。
-4. 新規作成時は共有Player名を初期値として使用できる。
-5. 名前一致だけで自動的に同一人物と判定しない。
-6. mapping完了前にMatchを保存しない。
-7. Self側にも`新しいプレーヤーとして追加`を提供し、ユーザーが明示選択した場合だけ作成Flowへ進む。共有名から自動作成しない。
-8. 通常候補はreceiver-local avatar、Player名、必要時の`メイン`表示に限定し、メモ全文、最終使用日、内部local IDを常時表示しない。
-9. Opponent Mapping headerは`対戦相手を選択`とする。同名local Playerが1人ならQuick候補にできるが自動選択しない。同名が複数ならQuick候補で決めつけず既存Player Pickerで確認する。
-10. Selfで選択済みPlayerはOpponent候補で`自分として選択済み`としてdisabledにし、同一local PlayerをSelfとOpponentへmappingしてはならない。
-11. `ほかのプレーヤーを選ぶ`は既存Player Pickerを再利用し、Match Sharing専用Pickerを新設しない。
+Duplicateに`QRコードを読み取れませんでした`を使用しない。
+
+## 6. Symmetric Player mapping
+
+1. Shared Player Aをreceiver-local Player Aへ、Shared Player Bをreceiver-local Player Bへ明示mappingする。
+2. Receiver本人がPlayer A / Bのどちらであるかを選択させず、Receiver本人がMatch participantであることも要求しない。
+3. A / B双方で既存local Playerまたはpending new Playerを選択できる。
+4. 新規作成時は共有Player名を初期値として使用できるが、自動作成しない。
+5. 名前一致だけで自動的に同一人物と判定または選択しない。
+6. A / B双方のmapping完了前にMatchを保存しない。
+7. 同一local PlayerをA / B両方へmappingしてはならない。
+8. pending new Playerはfinal transaction前に保存せず、`isPrimary`を付与しない。
+9. main / primary Playerを自動mappingまたは自動変更せず、`isPrimary`をSelf判定へ使用しない。
+10. `ほかのプレーヤーを選ぶ`は既存Player Pickerを再利用し、Match Sharing専用Pickerを新設しない。
+11. 通常候補はreceiver-local avatarとPlayer名を中心とし、メモ全文、最終使用日、内部local IDを常時表示しない。
+
+### 6.1 Third-party Import
+
+Receiver main PlayerがMatch participantでない第三者Importを許容する。main Playerが貴章の端末でShared Matchがゆな対かいとの場合、Sharedゆなをlocalゆな、Sharedかいとをlocalかいとへmappingできる。Import後はゆな／かいとのPlayer Detail、Statistics、Analyticsへそれぞれのsideとして反映し、貴章には反映しない。main Playerは貴章のまま維持し、Matchへ自動追加しない。
+
+### 6.2 Receiver avatar source
+
+- mapping前：default / neutral avatar＋shared Player name
+- existing local Player mapping後：receiver-local avatar＋receiver-local Player name
+- pending new Player：default avatar＋pending Player name
+
+sender avatarをpayloadへ追加せず、Receiver UIで復元または推測しない。
 
 ## 7. Decode validation and integrity
 
@@ -167,7 +188,7 @@ Prototypeで使用したSHA-256 digestは破損検出方式の正式候補とす
 - unknown formatVersion：`この試合データを読み込むにはCueScoreの更新が必要です。`
 - corrupted / invalid：`この試合データを読み込めませんでした。`
 - non-CueScore QR：`CueScoreの試合共有コードではありません。`
-- duplicate：`この試合はすでに取り込まれています。`
+- duplicate：section 5.3の専用duplicate UX。generic read failureとは分離する。
 
 最終文言、accessibility announcement、error placementはUI Prototypeで確認する。
 
@@ -224,11 +245,12 @@ Primary UI Prototypeは390×844を最低対象としてProduct Owner ReviewをPA
 2. Sender QR Display：header `試合を共有`、試合識別情報、約292×292ptの標準白黒Single QR、短い説明。
 3. Receiver Entry：試合履歴一覧header右上`QR glyph + 受け取る`。件数行右側案は不採用。
 4. Scanner：header `試合を受け取る`、camera preview、控えめなscan guide、短い説明。iOS標準permissionを使用する。
-5. Match Preview / Side Selection：header `試合を確認`。試合情報と`あなたはどちらですか？`を統合し、Player A / Bを実名で選択する。未選択では`次へ` disabled、選択後enabled。タップ即遷移しない。
-6. Self Mapping：共有名とlocal Playerを分離し、既存／新規を明示選択する。通常候補は簡素表示とする。
-7. Opponent Mapping：header `対戦相手を選択`。同名1人はQuick候補、同名複数は既存Picker、Self選択済みPlayerはdisabled、新規追加を提供する。
-8. Final Confirmation：header `取り込み内容を確認`、section `この端末での登録`。BackはOpponent Mappingへ戻り、項目別`編集`buttonは追加しない。新規予定は`＋`と`新しいプレーヤーとして追加`で表示し、`取り込むまでは試合とプレーヤーは保存されません`を表示する。
+5. Unified Match Preview / Mapping：header `試合を確認`。競技、日時、Player A / B、score / result、Race / targetと、`この端末のプレーヤー`sectionのA / B local mappingを1画面へ統合する。両方未完了では`次へ` disabled、完了後enabled。
+6. Player rows：mapping前はdefault avatar＋shared name、existing mapping後はreceiver-local avatar＋local Player name、pending new Playerはdefault avatar＋pending nameを表示する。名前一致による自動選択は行わない。
+7. Existing / New mapping：A / B双方で既存Player Pickerまたは`新しいプレーヤーとして追加`を利用でき、同一local Playerの重複指定を禁止する。
+8. Final Confirmation：header `取り込み内容を確認`、section `この端末での登録`。`自分`／`対戦相手`ではなく、各shared Playerとreceiver-local Playerの対応を表示する。新規予定は`＋`と`新しいプレーヤーとして追加`で示し、`取り込むまでは試合とプレーヤーは保存されません`を表示する。
 9. Import Success：通常Match Detailへ直接遷移し、`✓ 試合を取り込みました`を淡緑success toastで一時表示する。専用Success画面を追加しない。
+10. Duplicate：専用duplicate stateを表示し、`他の試合を読み取る`でScannerへ戻る。BackはHistoryへ戻る。
 
 次はImplementation Designで確定する：production scanner／camera decode、現行`NSCameraUsageDescription`へのQR用途反映、Dynamic Type、VoiceOver／focus、exact animation／haptics、permission denied production UI、new Player作成production flow、Free 20件境界の詳細動作、transaction／Backup統合、final implementation physical test。Prototype PASSを製品実装PASSへ拡張しない。
 
@@ -249,7 +271,9 @@ Primary UI Prototypeは390×844を最低対象としてProduct Owner ReviewをPA
 | Negative tests | 10/10 PASS |
 | Demo separation | PASS |
 | Privacy prohibited-data contamination | 0 |
-| Primary UI Prototype | Product Owner PASS |
+| Old Receiver Flow Physical E2E | Product Owner PASS; historical functional Evidence |
+| Symmetric Mapping Investigation | B — SAFE WITH LIMITED CHANGES |
+| Symmetric Receiver UX Amendment | Product Owner ADOPTED |
 | Sender QR 292pt physical iPhone | PASS |
 | Free / Pro common availability | Product Owner ADOPTED |
 | FAIL / BLOCKED | 0 / 0 |
@@ -260,7 +284,8 @@ Physical Evidenceは、試験済みのV19／V25／V30だけを支持する。未
 
 - 6競技の完了試合をRound-tripできる。
 - Must Preserve factsと現行History / Detail / Statistics / Analyticsの結果が一致する。
-- receiver視点のPlayer mappingが明示選択どおりになる。
+- Shared Player A / Bの対称local mappingが明示選択どおりになる。
+- Receiver本人が参加しない第三者Matchを通常Matchとして取り込める。
 - sender local IDsとMust Omit情報がpayloadへ混入しない。
 - UUID v4 `sharedMatchId`を維持し、新local Match IDを生成する。
 - duplicate、unknown version、truncated、corrupted、invalid game type、missing players、invalid result、malformed UUID、oversized payloadを保存前に拒否する。
@@ -268,7 +293,7 @@ Physical Evidenceは、試験済みのV19／V25／V30だけを支持する。未
 - transaction失敗時にpartial Player / Matchを残さない。
 - Backup / Restore後も`sharedMatchId`とduplicate protectionを維持する。
 - UI PrototypeとProduct Owner ReviewをPASSする。
-- Sender／Receiver入口、Scanner、side選択、Self／Opponent mapping、Final Confirmation、Import Successが本Specificationの採用UI contractと一致する。
+- Sender／Receiver入口、Scanner、Unified Preview / A-B Mapping、Final Confirmation、dedicated duplicate state、Import Successが本Specificationの採用UI contractと一致する。
 - Match Sharing送受信をFree / Pro共通で利用でき、Pro gateを追加しない。
 
 ## 15. Evidence limitations
@@ -278,7 +303,7 @@ Physical Evidenceは、試験済みのV19／V25／V30だけを支持する。未
 - Build 79 live user recordとpopulate済みcommon event journal
 - production localStorage write / rollback
 - Backup / Restore統合
-- production UI実装、camera permission、scanner decode
+- revised symmetric Receiver UI実装と変更後physical E2E
 - Dynamic Type、VoiceOver／focus、exact animation／haptics
 - permission denied production UI、new Player creation production flow
 - Free 20件境界におけるImport直後Detail／Statistics／Analyticsの詳細動作
@@ -286,8 +311,10 @@ Physical Evidenceは、試験済みのV19／V25／V30だけを支持する。未
 - forward compatibility adapter
 - sender authenticity
 
-## 16. Implementation boundary
+## 16. Amendment relationship and implementation boundary
 
-**Implementation NOT STARTED.**
+2026年9月27日に採用したSide Selection、Self Mapping、Opponent Mappingは当時の正式履歴として保持する。2026年9月29日のSymmetric Player Mapping Amendmentが、そのReceiver部分とgeneric duplicate presentationだけを後続置換する。Single QR、Sender／Receiver入口、Scanner、Format、sharedMatchId、duplicate protection、transaction、privacy、Demo、Free / Pro、Backup / Restore、Import Successは維持する。
 
-本Specificationは製品source、保存schema、製品UI、Version、Build、配布、App Store状態を変更しない。Primary UI PrototypeはProduct Owner PASSだが、別のImplementation Decisionが発行されるまで製品実装へ進まない。
+**FORMAL DESIGN AMENDMENT PRODUCT OWNER / CHATGPT APPROVED / REVISED IMPLEMENTATION NOT STARTED / REVISED PHYSICAL E2E NOT VERIFIED.**
+
+本Amendmentは製品source、保存schema、製品UI、Version、Build、配布、App Store状態を変更しない。

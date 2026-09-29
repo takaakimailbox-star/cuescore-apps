@@ -10,6 +10,20 @@
 
 **Status:** DESIGN GATE COMPLETE — STAGE 1 IMPLEMENTED / TESTED / PRODUCT OWNER APPROVED
 
+## 2026-09-29 Symmetric Player Mapping Amendment
+
+Product OwnerはPhysical Stage 5B E2E後、Receiver Flowを対称Player A / B mappingへ改訂した。本節が本書内のown-side selection、Self Mapping、Opponent Mapping、generic duplicate presentationに関する旧記載を後続置換する。旧記載は当時の設計・実装履歴として残す。
+
+- `あなたはどちらですか？`とSelf / Opponent概念を廃止する。
+- Shared Player A / Bをreceiver-local Player A / Bへそれぞれ明示mappingする。
+- PreviewとA / B mappingを`試合を確認`の1画面へ統合する。
+- Receiver本人がMatch participantであることを要求せず、main Playerへ依存しない。
+- Player avatarはdefaultまたはreceiver-local avatarだけを使い、sender avatarを共有・推測しない。
+- Duplicateを専用状態へ分離する。
+- Stage 3 mapping inputは`selectedSide / self / opponent`から`bySide[1] / bySide[2]`相当へ改訂する。
+
+Match storage schema、Format v1、Backup schema、Analytics architecture、Free / Pro、Demo、all-or-nothing transactionは変更しない。改訂実装と変更後physical E2Eは未着手／未確認である。正式Evidenceは`CueScore_Match_Sharing_v1_Symmetric_Player_Mapping_Amendment_2026-09-29.md`を参照する。
+
 ## 1. Conclusion
 
 Match Sharing v1は、現行の保存schemaを全面変更せず、次の分離構成で安全に実装できる。
@@ -33,7 +47,7 @@ fresh source auditでは、History、通常Match Detail、Player aggregateはeli
 
 - `docs/official/101_CueScore_Match_Sharing_v1_Decision.md`
 - `docs/official/102_CueScore_Match_Sharing_v1_Spec.md`
-- Official Design Decision Log v2.4 / Decisions 028–029
+- Official Design Decision Log v2.5 / Decisions 028–030
 - `docs/CURRENT_STATE.md`
 - `docs/implementation/CueScore_Match_Sharing_v1_UI_Prototype_PO_Acceptance_2026-09-27.md`
 - Decision 12（Later登録の履歴。維持）
@@ -216,7 +230,7 @@ Undo and in-progress snapshots are unaffected because sharing is only available 
 
 1. Decode and fully validate payload.
 2. Duplicate scan over full normal records.
-3. Validate Self/Opponent selections are present and distinct.
+3. Validate Player A / B mappings are both present and resolve to distinct receiver-local Players.
 4. Resolve existing receiver Players.
 5. For each requested new Player, validate the same 20-character/name/duplicate rules and construct an in-memory draft with a new local ID and default local avatar/memo.
 6. Build a receiver-local Match with a new local Match ID, mapped `registeredPlayerId`s, preserved `sharedMatchId`, empty local-only fields, and rebuilt audit.
@@ -501,10 +515,10 @@ Extract shared pure functions from the current editor:
 The Match Sharing new-Player sheet uses the existing full-screen Player editor visual/validation but runs in a `deferredCommit` mode. It returns the confirmed draft to the receiver state machine without `writePlayerLibrary`. Final transaction persists it.
 
 - Prefill the shared display name.
-- Self and Opponent both support this path.
+- Player A and Player B both support this path.
 - Default `isPrimary = false`; do not alter the current main Player during import unless a separate future PO decision explicitly permits it.
 - On duplicate name, return to mapping with the existing error and encourage selecting the existing Player.
-- The existing picker must filter/disable the Self-mapped Player during Opponent selection.
+- The existing picker must filter/disable the local Player already mapped to the other side.
 
 ## 13. Navigation and pending state
 
@@ -514,7 +528,7 @@ Use one in-memory `MatchSharingFlowStateV1` owned by a controller, not localStor
 idle
 senderPreparing → senderQR
 receiverScanning → receiverValidating → receiverPreview
-→ selfMapping → opponentMapping → finalConfirmation
+→ unifiedPlayerMapping → finalConfirmation
 → committing → successDetail
 ```
 
@@ -522,9 +536,8 @@ State fields:
 
 - sender origin record ID and detail origin snapshot
 - decoded immutable logical payload
-- selected source side
-- Self mapping (`existingId` or confirmed pending Player draft)
-- Opponent mapping (`existingId` or confirmed pending Player draft)
+- Player A mapping (`existingId` or confirmed pending Player draft)
+- Player B mapping (`existingId` or confirmed pending Player draft)
 - imported local Match ID only after commit
 - camera permission/session state
 
@@ -532,10 +545,8 @@ Back behavior:
 
 - Sender QR → same Match Detail and prior scroll/focus.
 - Scanner → History and restore header-action focus.
-- Preview → Scanner; decoded payload can be discarded to require rescan.
-- Self → Preview, preserving side.
-- Opponent → Self, preserving confirmed drafts/selections.
-- Final → Opponent.
+- Preview / mapping → Scanner; decoded payload can be discarded to require rescan.
+- Final → unified Preview / mapping with both confirmed drafts/selections preserved.
 - Success Detail → normal History origin semantics.
 
 Cancel before commit clears the entire state and writes nothing. Backgrounding stops scanner. Mapping/final screens may retain memory state during a short background/foreground cycle, but process termination/reload cancels the flow; do not persist sensitive payload or pending Player drafts. After return to foreground, camera restarts only if scanner remains active and permission is authorized.
@@ -544,7 +555,7 @@ Cancel before commit clears the entire state and writes nothing. Backgrounding s
 
 | Condition | Detection boundary | UI direction / persistence |
 |---|---|---|
-| Duplicate | full normal records before mapping and before write | `この試合はすでに取り込まれています。`; no write |
+| Duplicate | full normal records before mapping and before write | dedicated state: header `この試合はすでに取り込み済みです`、body `同じ試合が試合履歴に保存されています。`、action `他の試合を読み取る`、Back to History; no write |
 | Non-CueScore QR | no `CSM1:` | `CueScoreの試合共有コードではありません。`; remain scanner |
 | Corrupted / bad digest / malformed | decoder/validator | `この試合データを読み込めませんでした。`; no write |
 | Unknown format version | envelope/logical version | update-required message; no guessed migration |
@@ -554,7 +565,7 @@ Cancel before commit clears the entire state and writes nothing. Backgrounding s
 | Oversized payload | before Base45 decode / before inflate | corrupted message; no large allocation/write |
 | Camera denied/restricted | native typed state | inline Settings recovery with `UIApplication.openSettingsURLString`; no loop |
 | Camera unavailable/interrupted | native scanner | recoverable message/Retry; keep no decoded state |
-| Mapping conflict | UI + final validation | Self Player disabled in Opponent picker; `次へ` disabled |
+| Mapping conflict | UI + final validation | Player already mapped to the other side is disabled; `次へ` disabled |
 | Transaction / read-back failure | transaction wrapper | rollback, existing Restore-style message; never navigate to Detail |
 | QuotaExceeded | existing helper classifier | explicit unchanged/restored message; no partial data |
 
@@ -568,7 +579,8 @@ Use inline screen state or modal for recoverable scanner/mapping errors; use the
 - Sender buttons: visible `共有`, accessibility label `試合を共有`.
 - Receiver: visible `受け取る`, label `試合を受け取る`.
 - Scanner guide is not color-only; instruction text and VoiceOver announcement explain positioning. Native cancel/Settings controls have explicit Japanese labels.
-- Side/mapping selection uses border/check plus `aria-pressed`/selected text; never color alone.
+- A / B mapping selection uses border/check plus `aria-pressed`/selected text; never color alone.
+- Person rows show default/neutral avatar before mapping, receiver-local avatar after existing mapping, and default avatar for pending new Player. Sender avatar is never used.
 - Disabled `次へ` retains explanatory label/state.
 - Success/error uses polite/assertive live regions as appropriate and does not depend on animation.
 - Respect `prefers-reduced-motion`; toast may appear/disappear without slide animation.
@@ -603,7 +615,7 @@ The Free History notice is not a Match Sharing entry. Current Demo uses the same
 - Six export/import adapters with Short/Medium/Long fixtures and production `jpa9Ball` mapping.
 - UUID v4 creation/validation and lazy persistence reuse.
 - Duplicate scan including Free-hidden and restored records.
-- Player mapping existing/new/mixed/new-new, same-ID rejection, duplicate names.
+- Symmetric A / B mapping existing/new/mixed/new-new, same-ID rejection, duplicate names, unrelated main Player unchanged.
 - Transaction: every write/read-back failure point, quota, rollback verification.
 - Free History accepted collection/count: 19→0 hidden, 20→0, 21→1, 27→7; invalid entries excluded; deleted entries absent; Pro→0 notice.
 - Global hidden count stays fixed across discipline, month/recent10, category, season and search filters while `recordsCount` follows the visible filtered set.
@@ -619,7 +631,7 @@ The Free History notice is not a Match Sharing entry. Current Demo uses the same
 - Product record → compact → deflate → Base45 → decode → receiver record for all 18 prior cases.
 - QR module/version/ecc assertions; exact ECC-M and no boost.
 - Six-discipline parity for History, normal Detail, Player Detail, Statistics and Analytics.
-- Existing/existing, new/existing, existing/new, new/new Player paths.
+- Existing/existing, new/existing, existing/new, new/new A / B Player paths, including third-party Import where receiver main Player is not a participant.
 - Import → Backup → delete/replace/merge Restore → duplicate rejection.
 - Imported Match re-share keeps the same `sharedMatchId` while issuing a new QR with the same logical identity.
 - History empty-filter state still renders the global hidden notice; genuinely empty accepted collection does not.
@@ -629,10 +641,10 @@ The Free History notice is not a Match Sharing entry. Current Demo uses the same
 
 - Camera authorization: notDetermined/authorized/denied/restricted.
 - Back/background/foreground/interruption and scanner single-result behavior.
-- Sender/Receiver header actions, all adopted screens, focus return, disabled/enabled states.
+- Sender/Receiver header actions, Unified Preview / A-B Mapping, Final Confirmation, focus return, disabled/enabled states and receiver avatar source.
 - Free History notice at 19/20/21/27, all filters, long count text, 390×844/narrow width, Dynamic Type, VoiceOver order/labels and 44pt CTA.
 - Import success old record: normal Detail + toast once, Back to History notice, no forced paywall, no second access after Back/reload/relaunch.
-- Duplicate/non-CueScore/corrupted/unknown/oversized/quota errors.
+- Dedicated duplicate state and non-CueScore/corrupted/unknown/oversized/quota errors.
 - 390×844 plus narrow width, Dynamic Type, VoiceOver, Reduce Motion.
 - Product Owner physical iPhone scan of minimum/middle/heaviest final production payload; do not infer from prototype-only results.
 
