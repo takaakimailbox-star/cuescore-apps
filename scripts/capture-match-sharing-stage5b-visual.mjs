@@ -54,10 +54,11 @@ const auditPage=()=>page.evaluate(()=>{
     undersizedVisibleControls:controls.map(node=>({id:node.id||null,text:(node.textContent||node.value||"").trim().slice(0,40),...rect(node)})).filter(item=>item.width<44||item.height<44),
     importedBadges:[...document.querySelectorAll("body *")].filter(node=>/^(Imported|受信badge|QRから追加)$/.test((node.textContent||"").trim())).length,
     successStatus:[...document.querySelectorAll('[role="status"]')].filter(node=>{const style=getComputedStyle(node),value=node.getBoundingClientRect();return style.display!=="none"&&style.visibility!=="hidden"&&value.width>0&&value.height>0}).map(node=>(node.textContent||"").trim()).find(text=>text.includes("試合を取り込みました"))||null,
+    deleteStatus:[...document.querySelectorAll('[role="status"]')].filter(node=>{const style=getComputedStyle(node),value=node.getBoundingClientRect();return style.display!=="none"&&style.visibility!=="hidden"&&value.width>0&&value.height>0}).map(node=>(node.textContent||"").trim()).find(text=>text.includes("試合を削除しました"))||null,
   };
 });
 const shots=[],screenAudits=[];
-const capture=async(name)=>{const file=path.join(output,name);await page.screenshot({path:file,animations:"disabled"});shots.push(file);screenAudits.push({name,...await auditPage()});};
+const capture=async(name)=>{await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));const file=path.join(output,name);await page.screenshot({path:file,animations:"disabled"});shots.push(file);screenAudits.push({name,...await auditPage()});};
 await capture("01_Unified_Mapping_Initial_390x844.png");
 await page.evaluate(()=>{const flow=ensureMatchSharingFlowControllerV1();flow.selectMapping(1,{kind:"existing",playerId:"receiver-side-1"});flow.selectMapping(2,{kind:"existing",playerId:"receiver-side-2"})});
 await capture("02_Unified_Mapping_Complete_390x844.png");
@@ -66,6 +67,9 @@ await capture("03_Final_Import_Confirmation_390x844.png");
 await page.locator("[data-flow-import]").click();
 await page.waitForFunction(()=>!document.getElementById("recordDetailOverlay")?.classList.contains("hidden"));
 await capture("05_Import_Success_Normal_Detail_390x844.png");
+page.once("dialog",dialog=>dialog.accept());
+await page.getByRole("button",{name:"この試合を削除"}).click();
+await capture("06_Delete_Success_Toast_390x844.png");
 await page.evaluate(()=>{document.querySelector(".toast")?.remove();document.getElementById("recordDetailOverlay")?.classList.add("hidden");const overlay=document.getElementById("matchSharingReceiverV1");overlay?.classList.remove("hidden");overlay?.setAttribute("aria-hidden","false");document.body.classList.add("match-sharing-receiver-visible-v1");renderMatchSharingReceiverStateV1({screen:"error",code:"DUPLICATE",message:"この試合はすでに取り込まれています。",retryable:true})});
 await capture("04_Duplicate_Dedicated_UX_390x844.png");
 await page.setViewportSize({width:360,height:780});

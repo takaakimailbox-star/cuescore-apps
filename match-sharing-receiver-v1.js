@@ -43,7 +43,7 @@
     return Object.freeze({code:code||"INVALID",message:"この試合データを読み込めませんでした。",retryable:true});
   }
 
-  async function decodeScannedPayload({payload,records=[],demoMode=false,codec=sender.runtimeCodec}={}){
+  async function decodeScannedPayload({payload,records=[],findDuplicate=null,demoMode=false,codec=sender.runtimeCodec}={}){
     if(demoMode)fail("DEMO_RECEIVER_REJECTED","Demo cannot start the Match Sharing receiver");
     if(typeof payload!=="string"||payload.length>validation.LIMITS.maxEncodedChars){
       fail("OVERSIZE","Encoded payload limit exceeded");
@@ -56,13 +56,16 @@
       if(error?.code)throw error;
       fail("INVALID","Unable to decode Match Sharing payload",error);
     }
-    if(persistence.findDuplicateSharedMatchId(records,logical.sharedMatchId)){
+    const duplicate=typeof findDuplicate==="function"
+      ?findDuplicate(logical.sharedMatchId)
+      :persistence.findDuplicateSharedMatchId(records,logical.sharedMatchId);
+    if(duplicate){
       fail("DUPLICATE","The shared Match already exists");
     }
     return Object.freeze({status:"VALID_MATCH_SHARING_QR",sharedMatchId:logical.sharedMatchId,logicalMatch:clone(logical)});
   }
 
-  function createScannerController({bridge,memory=createMemoryState(),readRecords=()=>[],isDemo=()=>false,onState=()=>{}}={}){
+  function createScannerController({bridge,memory=createMemoryState(),readRecords=()=>[],findDuplicate=null,isDemo=()=>false,onState=()=>{}}={}){
     let listeners=[],active=false,lastRect=null;
     let diagnostic={phase:"idle",permission:"unknown",nativeStart:null,errorCode:null};
     const setDiagnostic=patch=>{diagnostic={...diagnostic,...patch};return diagnostic;};
@@ -74,7 +77,7 @@
       active=false;
       await stopNative();
       try{
-        const result=await decodeScannedPayload({payload:event.value,records:readRecords(),demoMode:isDemo()});
+        const result=await decodeScannedPayload({payload:event.value,records:readRecords(),findDuplicate,demoMode:isDemo()});
         memory.setValid(result.logicalMatch);
         emit({screen:"success",status:result.status});
       }catch(error){

@@ -242,6 +242,52 @@ test("first import succeeds and a second import of the same sharedMatchId create
   assert.deepEqual(harness.state,snapshot);assert.equal(harness.writes(),writes);
 });
 
+test("deleted active Match can be re-imported with existing local Players and becomes duplicate again",()=>{
+  const logical=logicalFor(),harness=makeHarness({logical,players:[]});
+  const first=importWith(harness,logical,mappingFor(logical,"new","new"),["first-a","first-b"],"first-match");
+  const deletionBackup=clone(harness.state.matches);
+  harness.state.matches=[];
+  assert.equal(persistence.findDuplicateSharedMatchId(harness.state.matches,logical.sharedMatchId),null);
+  assert.equal(persistence.findDuplicateSharedMatchId(deletionBackup,logical.sharedMatchId)?.id,"first-match");
+  const reimport=importWith(harness,logical,{bySide:{1:{kind:"existing",playerId:"first-a"},2:{kind:"existing",playerId:"first-b"}}},[],"reimported-match");
+  assert.equal(first.sharedMatchId,reimport.sharedMatchId);
+  assert.notEqual(first.importedLocalMatchId,reimport.importedLocalMatchId);
+  assert.equal(harness.state.matches.length,1);
+  assert.equal(harness.state.players.length,2);
+  assert.throws(()=>importWith(harness,logical,{bySide:{1:{kind:"existing",playerId:"first-a"},2:{kind:"existing",playerId:"first-b"}}},[],"third-match"),error=>error.code==="DUPLICATE_SHARED_MATCH_ID");
+});
+
+test("restoring a deleted active Match makes its sharedMatchId duplicate again",()=>{
+  const logical=logicalFor(),harness=makeHarness({logical,players:[]});
+  importWith(harness,logical,mappingFor(logical,"new","new"),["restore-a","restore-b"],"restored-match");
+  const deletionBackup=clone(harness.state.matches);
+  harness.state.matches=[];
+  assert.equal(persistence.findDuplicateSharedMatchId(harness.state.matches,logical.sharedMatchId),null);
+  harness.state.matches=persistence.mergeMatchRecords(harness.state.matches,deletionBackup).value;
+  assert.equal(persistence.findDuplicateSharedMatchId(harness.state.matches,logical.sharedMatchId)?.id,"restored-match");
+  const snapshot=harness.before(),writes=harness.writes();
+  assert.throws(()=>importWith(harness,logical,{bySide:{1:{kind:"existing",playerId:"restore-a"},2:{kind:"existing",playerId:"restore-b"}}},[],"blocked-match"),error=>error.code==="DUPLICATE_SHARED_MATCH_ID");
+  assert.deepEqual(harness.state,snapshot);assert.equal(harness.writes(),writes);
+});
+
+test("all 6 disciplines support active delete then existing-Player re-import with a new local Match ID",()=>{
+  const fixturesByDiscipline=new Map();
+  for(const fixture of stage1Fixtures()){
+    const gameType=logicalFor(fixture).gameType;
+    if(!fixturesByDiscipline.has(gameType))fixturesByDiscipline.set(gameType,fixture);
+  }
+  for(const fixture of fixturesByDiscipline.values()){
+    const logical=logicalFor(fixture),harness=makeHarness({logical,players:[]});
+    importWith(harness,logical,mappingFor(logical,"new","new"),[`${fixture.fixtureId}-a`,`${fixture.fixtureId}-b`],`${fixture.fixtureId}-first`);
+    harness.state.matches=[];
+    const result=importWith(harness,logical,{bySide:{1:{kind:"existing",playerId:`${fixture.fixtureId}-a`},2:{kind:"existing",playerId:`${fixture.fixtureId}-b`}}},[],`${fixture.fixtureId}-reimport`);
+    assert.equal(result.importedLocalMatchId,`${fixture.fixtureId}-reimport`,fixture.gameType);
+    assert.equal(harness.state.matches.length,1,fixture.gameType);
+    assert.equal(harness.state.players.length,2,fixture.gameType);
+  }
+  assert.equal(fixturesByDiscipline.size,6);
+});
+
 test("receiver local Match ID must be new and separate from sharedMatchId",()=>{
   const logical=logicalFor(),existingHarness=makeHarness({logical});
   existingHarness.state.matches.push({id:"taken",endedAt:logical.endedAt,result:"win",winner:1,players:{1:{name:"A"},2:{name:"B"}}});

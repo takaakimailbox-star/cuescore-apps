@@ -21,7 +21,8 @@ const players=[{id:"player-1",name:"A"},{id:"player-2",name:"B"}];
 const records=[];
 const context=vm.createContext({
   readPlayerLibrary:()=>players,
-  readMatchRecords:()=>records
+  readMatchRecords:()=>records,
+  window:{}
 });
 vm.runInContext(`${extractFunction("recordsForRegisteredPlayer")}\n${extractFunction("playerSideInRecord")}`,context);
 
@@ -30,14 +31,15 @@ const mixedIdRecord={players:{1:{registeredPlayerId:123,name:"A"},2:{registeredP
 assert.equal(context.playerSideInRecord(mixedIdRecord,{id:"123",name:"A"}),1);
 assert.equal(context.playerSideInRecord(mixedIdRecord,{id:123,name:"A"}),1);
 
-// Legacy name-only and deleted-player histories remain readable. Malformed data is skipped.
+// Legacy name-only histories remain readable. ID-bearing histories never fall back by name.
 const legacy={players:{1:{name:"A"},2:{name:"Legacy Opponent"}}};
 const malformed={players:null};
 const deletedPlayerHistory={players:{1:{registeredPlayerId:"deleted-player",name:"A"},2:{name:"Opponent"}}};
 records.push(mixedIdRecord,legacy,malformed,deletedPlayerHistory);
 assert.equal(context.playerSideInRecord(legacy,players[0]),1);
 assert.equal(context.playerSideInRecord(malformed,players[0]),null);
-assert.equal(context.playerSideInRecord(deletedPlayerHistory,players[0]),1);
+assert.equal(context.playerSideInRecord(deletedPlayerHistory,players[0]),null);
+assert.equal(context.recordsForRegisteredPlayer(players[0]).length,1);
 
 class MemoryStorage {
   #values=new Map();
@@ -77,7 +79,7 @@ for(const section of ["最近の成績","対戦相手別の成績","このプレ
 }
 
 const version=serviceWorker.match(/const APP_VERSION = "([^"]+)"/)?.[1];
-assert.equal(version,"2.0-build79-jpa-dead-ball-internal-v1");
+assert.equal(version,"2.0-build80-match-sharing-player-identity-v1");
 assert.match(html,new RegExp(`const PWA_VERSION = "${version}"`));
 assert.match(html,new RegExp(`demo-data\\.js\\?v=${version}`));
 assert.match(serviceWorker,new RegExp(`demo-data\\.js\\?v=${version}`));

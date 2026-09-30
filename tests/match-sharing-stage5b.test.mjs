@@ -89,6 +89,36 @@ test("same shared name never creates or selects a local mapping automatically",(
   const state=flow.setLogicalMatch(match);assert.equal(state.bySide[1],null);assert.equal(state.bySide[2],null);
 });
 
+test("pending new Player matching an existing local name stops before Final Confirmation",()=>{
+  const match=logical(stage1Fixtures()[0]),players=[player("local-a",match.players[1].name),player("local-b",match.players[2].name)];
+  const flow=ui.createReceiverFlow({readPlayers:()=>players});
+  flow.setLogicalMatch(match);
+  flow.selectMapping(1,{kind:"existing",playerId:"local-a"});
+  flow.selectMapping(2,{kind:"new",pendingKey:"side-2",draft:{name:match.players[2].name}});
+  assert.throws(()=>flow.next(),error=>error.code==="DUPLICATE_PLAYER_NAME");
+  assert.equal(flow.get().step,"mapping");
+});
+
+test("two pending new Players with the same normalized name stop before Final Confirmation",()=>{
+  const match=logical(stage1Fixtures()[0]),flow=ui.createReceiverFlow({readPlayers:()=>[]});
+  flow.setLogicalMatch(match);
+  flow.selectMapping(1,{kind:"new",pendingKey:"side-1",draft:{name:"Same Name"}});
+  flow.selectMapping(2,{kind:"new",pendingKey:"side-2",draft:{name:" same name "}});
+  assert.throws(()=>flow.next(),error=>error.code==="DUPLICATE_PLAYER_NAME");
+  assert.equal(flow.get().step,"mapping");
+});
+
+test("final duplicate race gate does not publish the generic confirmation error state",()=>{
+  const match=logical(stage1Fixtures()[0]),published=[];
+  const duplicate=Object.assign(new Error("duplicate"),{code:"DUPLICATE_SHARED_MATCH_ID"});
+  const flow=ui.createReceiverFlow({readPlayers:()=>[player("a","A"),player("b","B")],importMatch:()=>{throw duplicate},onChange:value=>published.push(value)});
+  flow.setLogicalMatch(match);flow.selectMapping(1,{kind:"existing",playerId:"a"});flow.selectMapping(2,{kind:"existing",playerId:"b"});flow.next();
+  assert.throws(()=>flow.commit(),error=>error.code==="DUPLICATE_SHARED_MATCH_ID");
+  assert.equal(flow.get().error.code,"DUPLICATE_SHARED_MATCH_ID");
+  assert.equal(published.at(-1).step,"importing");
+  assert.equal(published.some(state=>state.step==="confirm"&&state.error?.code==="DUPLICATE_SHARED_MATCH_ID"),false);
+});
+
 test("Free hidden count is global, stable across filters, and absent for Pro",()=>{
   const all=Array.from({length:27},(_,id)=>({id})),eligible=all.slice(0,20);
   assert.equal(ui.hiddenPastCount(all,eligible),7);assert.equal(ui.hiddenPastCount(all,eligible,true),0);
@@ -103,6 +133,18 @@ test("adopted Receiver UI, transaction, exact-ID detail and success toast are pr
   assert.match(html,/role","status/);assert.match(html,/aria-live","polite/);
 });
 
+test("formal avatar semantics and one-line delete success feedback are production wired",()=>{
+  assert.match(html,/matchSharingFlowSummaryPlayerV1/);
+  assert.match(html,/match-sharing-flow-summary-avatar-v1/);
+  assert.match(html,/avatar:\{type:"default",id:"default_silhouette"\}/);
+  assert.match(html,/selected\?\.kind==="existing"&&local\?playerAvatarHtmlV2\(local/);
+  assert.match(html,/playerAvatarHtmlV2\(first,"match-sharing-flow-avatar-v1"\)/);
+  assert.match(html,/playerAvatarHtmlV2\(second,"match-sharing-flow-avatar-v1"\)/);
+  assert.match(html,/showToast\("✓ 試合を削除しました"\)/);
+  assert.doesNotMatch(html,/showToast\("履歴を削除しました", "削除前バックアップを保存し、集計画面へ反映しました"\)/);
+  assert.match(html,/message \? `<span>\$\{message\}<\/span>` : ""/);
+});
+
 test("Free History notice uses global hidden count and existing Pro CTA",()=>{
   assert.match(html,/過去の試合 \$\{hiddenPastCountV1\}件/);assert.match(html,/Freeでは最新20試合を表示しています/);assert.match(html,/Proでは過去の試合もすべて確認できます/);assert.match(html,/data-pro-history-limit/);
 });
@@ -111,6 +153,8 @@ test("privacy, Demo, duplicate and error boundaries remain in the production rou
   assert.match(html,/CueScoreDemoData\?\.isDemo/);assert.match(html,/renderMatchSharingFlowV1\(flow\.get\(\)\)/);assert.doesNotMatch(html,/Imported badge|受信badge|QRから追加/);
   assert.match(html,/matchSharingReceiverMemoryV1\?\.clear/);
   assert.match(html,/この試合はすでに取り込み済みです/);assert.match(html,/同じ試合が試合履歴に保存されています。/);assert.match(html,/他の試合を読み取る/);
+  assert.match(html,/findDuplicate:findDuplicateSharedMatchIdV1/);
+  assert.match(html,/error\?\.code==="DUPLICATE_SHARED_MATCH_ID"\)showMatchSharingDuplicateStateV1\(\)/);
   assert.match(html,/await closeMatchSharingReceiverV1\(\);\s*await startMatchSharingReceiverV1\(\);/);
 });
 

@@ -28,6 +28,16 @@
   function mappingReady(value){
     return value?.kind==="existing"&&Boolean(String(value.playerId||""))||value?.kind==="new"&&Boolean(String(value.draft?.name||"").trim());
   }
+  function validatePendingPlayerDrafts(bySide,existingPlayers=[]){
+    const known=clone(Array.isArray(existingPlayers)?existingPlayers:[]);
+    [1,2].forEach(sideNumber=>{
+      const mapping=bySide?.[sideNumber]??bySide?.[String(sideNumber)];
+      if(mapping?.kind!=="new")return;
+      const validated=drafts.validatePlayerDraft(mapping.draft,known);
+      known.push({id:`pending:${sideNumber}:${String(mapping.pendingKey||sideNumber)}`,name:validated.name});
+    });
+    return true;
+  }
   function createReceiverFlow({readPlayers=()=>[],importMatch=()=>{throw new Error("Import adapter is required")},onChange=()=>{}}={}){
     let state={step:"idle",logicalMatch:null,sharedMatchId:null,bySide:{1:null,2:null},error:null,result:null};
     const publish=()=>{const value=clone(state);onChange(value);return value};
@@ -41,14 +51,14 @@
       if(next.kind==="new"&&state.bySide[other]?.kind==="new"&&String(next.pendingKey||"")&&String(next.pendingKey)===String(state.bySide[other].pendingKey||""))throw new Error("Player 1 and Player 2 must use different pending Players");
       state.bySide[number]=next;state.error=null;return publish();
     };
-    const next=()=>{if(state.step==="mapping"){if(!mappingReady(state.bySide[1])||!mappingReady(state.bySide[2])||sameLocalPlayer(state.bySide[1],state.bySide[2]))throw new Error("Player 1 and Player 2 mappings are required");state.step="confirm"}
+    const next=()=>{if(state.step==="mapping"){if(!mappingReady(state.bySide[1])||!mappingReady(state.bySide[2])||sameLocalPlayer(state.bySide[1],state.bySide[2]))throw new Error("Player 1 and Player 2 mappings are required");validatePendingPlayerDrafts(state.bySide,readPlayers());state.step="confirm"}
       return publish()};
     const back=()=>{if(state.step==="confirm")state.step="mapping";else if(state.step==="mapping")state.step="scanner";state.error=null;return publish()};
     const mappingPlan=()=>({bySide:{1:clone(state.bySide[1]),2:clone(state.bySide[2])}});
-    const commit=()=>{requireLogical();if(state.step!=="confirm")throw new Error("Import confirmation is required");state.step="importing";publish();try{const result=importMatch(clone(state.logicalMatch),mappingPlan());state.result=clone(result);state.step="complete";state.error=null;return publish()}catch(error){state.step="confirm";state.error={code:String(error?.code||"IMPORT_FAILED"),message:String(error?.message||"Import failed")};publish();throw error}};
+    const commit=()=>{requireLogical();if(state.step!=="confirm")throw new Error("Import confirmation is required");state.step="importing";publish();try{const result=importMatch(clone(state.logicalMatch),mappingPlan());state.result=clone(result);state.step="complete";state.error=null;return publish()}catch(error){state.step="confirm";state.error={code:String(error?.code||"IMPORT_FAILED"),message:String(error?.message||"Import failed")};if(state.error.code!=="DUPLICATE_SHARED_MATCH_ID")publish();throw error}};
     const reset=()=>{state={step:"idle",logicalMatch:null,sharedMatchId:null,bySide:{1:null,2:null},error:null,result:null};return publish()};
     const players=()=>clone(readPlayers());
     return Object.freeze({setLogicalMatch,selectMapping,next,back,commit,reset,get:()=>clone(state),players,mappingPlan});
   }
-  return Object.freeze({hiddenPastCount,sameLocalPlayer,mappingReady,createReceiverFlow});
+  return Object.freeze({hiddenPastCount,sameLocalPlayer,mappingReady,validatePendingPlayerDrafts,createReceiverFlow});
 });

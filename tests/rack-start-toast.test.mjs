@@ -6,7 +6,7 @@ import vm from "node:vm";
 const html=readFileSync(new URL("../index.html",import.meta.url),"utf8");
 
 test("Rack start toast keeps start and breaker information in separate elements",()=>{
-  assert.match(html,/toast\.innerHTML = `<strong>\$\{title\}<\/strong><span>\$\{message\}<\/span>`/);
+  assert.match(html,/toast\.innerHTML = `<strong>\$\{title\}<\/strong>\$\{message \? `<span>\$\{message\}<\/span>` : ""\}`/);
   assert.match(html,/\.toast\.rack-transition-toast-v1 \{[\s\S]*?flex-direction: column;[\s\S]*?gap: 2px;/);
   assert.match(html,/\.toast\.rack-transition-toast-v1 strong \{ white-space: nowrap; \}/);
   assert.match(html,/\.toast\.rack-transition-toast-v1 span \{[\s\S]*?white-space: normal;[\s\S]*?overflow-wrap: anywhere;/);

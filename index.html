@@ -3608,14 +3608,13 @@
 }
 
 
-/* Rebuild v1.53: move player delete action to editor header */
+/* Rebuild v1.53: player editor header compatibility */
 .player-library-add.delete-mode {
   font-size: 17px !important;
   color: #ff8da0 !important;
   font-weight: 900 !important;
   padding-right: 2px;
 }
-.player-editor-delete { display: none !important; }
 
 
 /* Rebuild v1.58: Data management / backup */
@@ -7881,7 +7880,7 @@ body {
 
   <main class="app" aria-label="CueScore">
     <h1 class="screen-title">CUESCORE</h1>
-    <div class="sub-title">version 1.0</div>
+    <div class="sub-title">version 1.2</div>
 
     <section class="cue-home-v1 cue-home-integrated-v2" id="cueHomeV1" aria-label="CueScore Home">
       <div class="cue-home-head-v2">
@@ -8392,10 +8391,6 @@ body {
             <span><strong>メインプレーヤーに設定</strong><small>新しい対戦ではPlayer 1に初期表示されます</small></span>
             <input id="playerEditorPrimaryV1" type="checkbox" />
           </label>
-          <div class="player-editor-id-v1" id="playerEditorIdV1" hidden>
-            <span>Player ID</span><code></code>
-          </div>
-
           <input class="player-editor-race" id="playerEditorRace" type="hidden" value="120" />
           <input class="player-editor-range" id="playerEditorRange" type="hidden" value="2" />
 
@@ -8541,7 +8536,7 @@ body {
       <header class="settings-header">
         <button class="settings-back" id="settingsBackBtn" type="button">‹ 戻る</button>
         <div class="settings-title">設定</div>
-        <div class="settings-version">Version 1.0</div>
+        <div class="settings-version">Version 1.2</div>
       </header>
       <div class="settings-content">
         <section class="settings-card" data-release-feature="cloud-sync" hidden>
@@ -8660,7 +8655,7 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build79-jpa-dead-ball-internal-v1"></script>
+  <script src="./demo-data.js?v=2.0-build80-match-sharing-player-identity-v1"></script>
   <script src="./vendor/fflate-0.8.3.js"></script>
   <script src="./vendor/qrcodegen-1.8.0.js"></script>
   <script src="./match-sharing-validation-v1.js"></script>
@@ -8785,7 +8780,7 @@ body {
     toast.setAttribute("role","status");
     toast.setAttribute("aria-live","polite");
     toast.setAttribute("aria-atomic","true");
-    toast.innerHTML = `<strong>${title}</strong><span>${message}</span>`;
+    toast.innerHTML = `<strong>${title}</strong>${message ? `<span>${message}</span>` : ""}`;
     document.body.appendChild(toast);
     requestAnimationFrame(() => toast.classList.add("show"));
     setTimeout(() => {
@@ -9094,7 +9089,7 @@ body {
   const MATCH_RECORDS_KEY = "rotationScoreboard.matchRecords.v1";
 
   // Rotation Scoreboard Ver.6.8.0: future multi-game data foundation
-  const CUESCORE_APP_VERSION = "1.0";
+  const CUESCORE_APP_VERSION = "1.2";
   const ROTATION_GAME_TYPE = "rotation";
   const NINE_BALL_GAME_TYPE = "nineBall";
   const TEN_BALL_GAME_TYPE = "tenBall";
@@ -9691,6 +9686,7 @@ let matchRecordsRawCacheV152 = null;
       bridge:matchSharingNativeBridgeV1(),
       memory:matchSharingReceiverMemoryV1,
       readRecords:readMatchRecords,
+      findDuplicate:findDuplicateSharedMatchIdV1,
       isDemo:()=>Boolean(window.CueScoreDemoData?.isDemo?.()),
       onState:renderMatchSharingReceiverStateV1,
     });
@@ -9737,6 +9733,10 @@ let matchRecordsRawCacheV152 = null;
     const condition=logical?.match?.targetPoints?`目標 ${logical.match.targetPoints}点`:(p1.goal||p2.goal?`Race to ${Number(p1.goal)||"—"}-${Number(p2.goal)||"—"}`:"");
     return {p1,p2,date,condition,game:labels[logical?.gameType]||"CueScore"};
   }
+  function matchSharingFlowSummaryPlayerV1(player,sideNumber){
+    const neutral={name:player?.name||"",avatar:{type:"default",id:"default_silhouette"}};
+    return `<span class="match-sharing-flow-summary-player-v1 ${sideNumber===2?"is-right":""}">${playerAvatarHtmlV2(neutral,"match-sharing-flow-summary-avatar-v1")}<strong>${escapeRecordText(player?.name||"")}</strong></span>`;
+  }
   function matchSharingFlowMappingRowV1(state,sideNumber){
     const summary=matchSharingFlowSummaryV1(state.logicalMatch),shared=sideNumber===1?summary.p1:summary.p2,selected=state.bySide?.[sideNumber];
     const players=matchSharingFlowControllerV1.players(),local=selected?.kind==="existing"?players.find(player=>String(player.id)===String(selected.playerId)):selected?.draft;
@@ -9753,11 +9753,11 @@ let matchRecordsRawCacheV152 = null;
     title.textContent=state.step==="mapping"?"試合を確認":"取り込み内容を確認";
     if(state.step==="mapping"){
       const ready=window.CueScoreMatchSharingUiV1.mappingReady(state.bySide?.[1])&&window.CueScoreMatchSharingUiV1.mappingReady(state.bySide?.[2])&&!window.CueScoreMatchSharingUiV1.sameLocalPlayer(state.bySide?.[1],state.bySide?.[2]);
-      content.innerHTML=`<section class="match-sharing-flow-match-v1"><span>${escapeRecordText(s.game)}</span><time>${escapeRecordText(s.date)}</time><div><strong>${escapeRecordText(s.p1.name||"")}</strong><b>${Number(s.p1.score)||0} − ${Number(s.p2.score)||0}</b><strong>${escapeRecordText(s.p2.name||"")}</strong></div>${s.condition?`<small>${escapeRecordText(s.condition)}</small>`:""}</section><section class="match-sharing-flow-section-v1"><h2>この端末のプレーヤー</h2>${matchSharingFlowMappingRowV1(state,1)}${matchSharingFlowMappingRowV1(state,2)}</section><button type="button" class="match-sharing-flow-primary-v1" data-flow-next ${ready?"":"disabled"}>次へ</button>`;
+      content.innerHTML=`<section class="match-sharing-flow-match-v1"><span>${escapeRecordText(s.game)}</span><time>${escapeRecordText(s.date)}</time><div>${matchSharingFlowSummaryPlayerV1(s.p1,1)}<b>${Number(s.p1.score)||0} − ${Number(s.p2.score)||0}</b>${matchSharingFlowSummaryPlayerV1(s.p2,2)}</div>${s.condition?`<small>${escapeRecordText(s.condition)}</small>`:""}</section><section class="match-sharing-flow-section-v1"><h2>この端末のプレーヤー</h2>${matchSharingFlowMappingRowV1(state,1)}${matchSharingFlowMappingRowV1(state,2)}</section><button type="button" class="match-sharing-flow-primary-v1" data-flow-next ${ready?"":"disabled"}>次へ</button>`;
     }else if(state.step==="confirm"){
       const players=matchSharingFlowControllerV1.players(),display=mapping=>mapping?.kind==="existing"?players.find(p=>String(p.id)===String(mapping.playerId))||{}:mapping?.draft||{};
       const first=display(state.bySide[1]),second=display(state.bySide[2]);
-      content.innerHTML=`<section class="match-sharing-flow-match-v1"><span>${escapeRecordText(s.game)}</span><time>${escapeRecordText(s.date)}</time><div><strong>${escapeRecordText(s.p1.name||"")}</strong><b>${Number(s.p1.score)||0} − ${Number(s.p2.score)||0}</b><strong>${escapeRecordText(s.p2.name||"")}</strong></div>${s.condition?`<small>${escapeRecordText(s.condition)}</small>`:""}</section><section class="match-sharing-flow-section-v1"><h2>この端末での登録</h2><div class="match-sharing-flow-confirm-player-v1"><span>Player 1</span>${playerAvatarHtmlV2(first,"match-sharing-flow-avatar-v1")}<strong>${escapeRecordText(s.p1.name||"")} → ${escapeRecordText(first.name||"")}</strong>${state.bySide[1].kind==="new"?"<small>＋ 新しいプレーヤーとして追加</small>":""}</div><div class="match-sharing-flow-confirm-player-v1"><span>Player 2</span>${playerAvatarHtmlV2(second,"match-sharing-flow-avatar-v1")}<strong>${escapeRecordText(s.p2.name||"")} → ${escapeRecordText(second.name||"")}</strong>${state.bySide[2].kind==="new"?"<small>＋ 新しいプレーヤーとして追加</small>":""}</div></section><p class="match-sharing-flow-unsaved-v1">取り込むまでは試合とプレーヤーは保存されません</p>${state.error?`<p class="match-sharing-flow-error-v1" role="alert">試合を取り込めませんでした。保存内容は変更されていません。</p>`:""}<button type="button" class="match-sharing-flow-primary-v1" data-flow-import>試合を取り込む</button>`;
+      content.innerHTML=`<section class="match-sharing-flow-match-v1"><span>${escapeRecordText(s.game)}</span><time>${escapeRecordText(s.date)}</time><div>${matchSharingFlowSummaryPlayerV1(s.p1,1)}<b>${Number(s.p1.score)||0} − ${Number(s.p2.score)||0}</b>${matchSharingFlowSummaryPlayerV1(s.p2,2)}</div>${s.condition?`<small>${escapeRecordText(s.condition)}</small>`:""}</section><section class="match-sharing-flow-section-v1"><h2>この端末での登録</h2><div class="match-sharing-flow-confirm-player-v1"><span>Player 1</span>${playerAvatarHtmlV2(first,"match-sharing-flow-avatar-v1")}<strong>${escapeRecordText(s.p1.name||"")} → ${escapeRecordText(first.name||"")}</strong>${state.bySide[1].kind==="new"?"<small>＋ 新しいプレーヤーとして追加</small>":""}</div><div class="match-sharing-flow-confirm-player-v1"><span>Player 2</span>${playerAvatarHtmlV2(second,"match-sharing-flow-avatar-v1")}<strong>${escapeRecordText(s.p2.name||"")} → ${escapeRecordText(second.name||"")}</strong>${state.bySide[2].kind==="new"?"<small>＋ 新しいプレーヤーとして追加</small>":""}</div></section><p class="match-sharing-flow-unsaved-v1">取り込むまでは試合とプレーヤーは保存されません</p>${state.error?`<p class="match-sharing-flow-error-v1" role="alert">試合を取り込めませんでした。保存内容は変更されていません。</p>`:""}<button type="button" class="match-sharing-flow-primary-v1" data-flow-import>試合を取り込む</button>`;
     }
     requestAnimationFrame(()=>title.focus());
   }
@@ -9778,13 +9778,20 @@ let matchRecordsRawCacheV152 = null;
     const overlay=document.getElementById("matchSharingFlowV1");overlay?.classList.add("hidden");overlay?.setAttribute("aria-hidden","true");document.body.classList.remove("match-sharing-flow-visible-v1");
     if(toScanner)await startMatchSharingReceiverV1();else await closeMatchSharingReceiverV1();
   }
+  function showMatchSharingDuplicateStateV1(){
+    matchSharingFlowControllerV1?.reset();matchSharingReceiverMemoryV1?.clear?.();
+    const flowOverlay=document.getElementById("matchSharingFlowV1");flowOverlay?.classList.add("hidden");flowOverlay?.setAttribute("aria-hidden","true");
+    const receiverOverlay=document.getElementById("matchSharingReceiverV1");receiverOverlay?.classList.remove("hidden");receiverOverlay?.setAttribute("aria-hidden","false");
+    document.body.classList.remove("match-sharing-flow-visible-v1");document.body.classList.add("match-sharing-receiver-visible-v1");document.body.style.overflow="hidden";
+    renderMatchSharingReceiverStateV1({screen:"error",code:"DUPLICATE",message:"同じ試合が試合履歴に保存されています。",retryable:true});
+  }
   document.getElementById("matchSharingFlowBackV1")?.addEventListener("click",async()=>{const flow=ensureMatchSharingFlowControllerV1(),state=flow.get();if(state.step==="mapping")return closeMatchSharingFlowV1({toScanner:true});flow.back()});
   document.getElementById("matchSharingFlowContentV1")?.addEventListener("click",async event=>{
     const flow=ensureMatchSharingFlowControllerV1(),state=flow.get();
     const pickerButton=event.target.closest("[data-open-player-picker]");if(pickerButton){openMatchSharingPlayerPickerV1(pickerButton.dataset.openPlayerPicker);return}
     const newButton=event.target.closest("[data-new-player]");if(newButton){const sideNumber=Number(newButton.dataset.newPlayer),s=matchSharingFlowSummaryV1(state.logicalMatch),shared=sideNumber===1?s.p1:s.p2,value={kind:"new",pendingKey:`side-${sideNumber}-${state.sharedMatchId}`,draft:{name:shared.name||"",memo:"",avatar:{type:"default",id:"default_silhouette"}}};flow.selectMapping(sideNumber,value);return}
-    if(event.target.closest("[data-flow-next]")){try{flow.next()}catch(error){showToast("選択を確認してください",error.message)}return}
-    if(event.target.closest("[data-flow-import]")){const button=event.target.closest("[data-flow-import]");button.disabled=true;button.setAttribute("aria-busy","true");try{const completed=flow.commit(),id=completed.result.importedLocalMatchId;document.getElementById("matchSharingFlowV1")?.classList.add("hidden");document.body.classList.remove("match-sharing-flow-visible-v1","match-sharing-receiver-visible-v1");document.body.style.overflow="";matchSharingReceiverMemoryV1?.clear?.();renderMatchRecords();if(!window.cueScoreOpenImportedMatchDetailOnceV1?.(id))throw new Error("Imported Match detail could not be opened");showToast("✓ 試合を取り込みました","通常の試合として保存しました") }catch(error){console.warn("CueScore Match Sharing import failed",error);renderMatchSharingFlowV1(flow.get())}return}
+    if(event.target.closest("[data-flow-next]")){try{flow.next()}catch(error){if(error?.code==="DUPLICATE_PLAYER_NAME")showToast("同じ名前のプレーヤーが登録されています","既存のプレーヤーを選んでください");else showToast("選択を確認してください",error.message)}return}
+    if(event.target.closest("[data-flow-import]")){const button=event.target.closest("[data-flow-import]");button.disabled=true;button.setAttribute("aria-busy","true");try{const completed=flow.commit(),id=completed.result.importedLocalMatchId;document.getElementById("matchSharingFlowV1")?.classList.add("hidden");document.body.classList.remove("match-sharing-flow-visible-v1","match-sharing-receiver-visible-v1");document.body.style.overflow="";matchSharingReceiverMemoryV1?.clear?.();renderMatchRecords();if(!window.cueScoreOpenImportedMatchDetailOnceV1?.(id))throw new Error("Imported Match detail could not be opened");showToast("✓ 試合を取り込みました","通常の試合として保存しました") }catch(error){console.warn("CueScore Match Sharing import failed",error);if(error?.code==="DUPLICATE_SHARED_MATCH_ID")showMatchSharingDuplicateStateV1();else renderMatchSharingFlowV1(flow.get())}return}
   });
   document.getElementById("matchSharingFlowContentV1")?.addEventListener("change",event=>{const sideNumber=Number(event.target.dataset.newPlayerName);if(![1,2].includes(sideNumber))return;const state=ensureMatchSharingFlowControllerV1().get(),value={kind:"new",pendingKey:`side-${sideNumber}-${state.sharedMatchId}`,draft:{name:event.target.value,memo:"",avatar:{type:"default",id:"default_silhouette"}}};ensureMatchSharingFlowControllerV1().selectMapping(sideNumber,value)});
 
@@ -9989,6 +9996,16 @@ let matchRecordsRawCacheV152 = null;
     return `<img class="${className}" src="${playerAvatarSourceV2(avatar)}" alt="${escapeRecordText(label)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${DEFAULT_PLAYER_AVATAR_SOURCE_V4}'">`;
   }
 
+  function historicalPlayerProfileV1(data, registeredPlayers = readPlayerLibrary()) {
+    const source = data && typeof data === "object" ? data : {};
+    const registeredId = String(source.registeredPlayerId || "").trim();
+    const normalizedName = String(source.name || "").trim().toLocaleLowerCase("ja");
+    const registered = registeredId
+      ? registeredPlayers.find(player => String(player?.id || "").trim() === registeredId)
+      : registeredPlayers.find(player => String(player?.name || "").trim().toLocaleLowerCase("ja") === normalizedName);
+    return registered || {...source, avatar:{...DEFAULT_PLAYER_AVATAR_V4}};
+  }
+
   function normalizePlayerRecordAvatarV4(player) {
     const {race,avatarId,avatarPath,avatarType,avatarImage,photoUrl,...compatiblePlayer}=player || {};
     const normalized={...compatiblePlayer,memo:String(player?.memo||"").slice(0,100),avatar:normalizePlayerAvatarV2(player?.avatar)};
@@ -10178,13 +10195,10 @@ let matchRecordsRawCacheV152 = null;
   function recordsForRegisteredPlayer(player) {
     if (!player) return [];
     const normalizedName = String(player.name || "").trim().toLocaleLowerCase("ja");
-    const knownPlayerIds = new Set(readPlayerLibrary().map(item => String(item.id || "")));
     const matchesPlayer = side => {
-      const registeredId = String(side?.registeredPlayerId || "");
-      if (registeredId === String(player.id)) return true;
-      const orphanedOrLegacyId = !registeredId || !knownPlayerIds.has(registeredId);
-      return orphanedOrLegacyId
-        && String(side?.name || "").trim().toLocaleLowerCase("ja") === normalizedName;
+      const registeredId = String(side?.registeredPlayerId || "").trim();
+      if (registeredId) return registeredId === String(player.id || "").trim();
+      return String(side?.name || "").trim().toLocaleLowerCase("ja") === normalizedName;
     };
     const allSavedRecordsV1 = readMatchRecords();
     const eligibleRecordsV1 = window.CueScoreRecordAccess?.getEligibleRecords(allSavedRecordsV1) || allSavedRecordsV1;
@@ -10202,11 +10216,9 @@ let matchRecordsRawCacheV152 = null;
     if (playerId && String(p1.registeredPlayerId || "") === playerId) return 1;
     if (playerId && String(p2.registeredPlayerId || "") === playerId) return 2;
     const name = String(player.name || "").trim().toLocaleLowerCase("ja");
-    const knownPlayerIds = new Set(readPlayerLibrary().map(item => String(item.id || "")));
     const isLegacyNameMatch = side => {
-      const registeredId = String(side?.registeredPlayerId || "");
-      return (!registeredId || !knownPlayerIds.has(registeredId))
-        && String(side?.name || "").trim().toLocaleLowerCase("ja") === name;
+      const registeredId = String(side?.registeredPlayerId || "").trim();
+      return !registeredId && String(side?.name || "").trim().toLocaleLowerCase("ja") === name;
     };
     if (isLegacyNameMatch(p1)) return 1;
     if (isLegacyNameMatch(p2)) return 2;
@@ -11335,12 +11347,6 @@ let matchRecordsRawCacheV152 = null;
     el("playerEditorMemoV2").value = String(player?.memo || "").slice(0, 100);
     const primaryToggle=el("playerEditorPrimaryV1");
     if (primaryToggle) primaryToggle.checked=player ? player.isPrimary===true : players.length===0;
-    const idRow=el("playerEditorIdV1");
-    if (idRow) {
-      idRow.hidden=!player?.id;
-      const code=idRow.querySelector("code");
-      if (code) code.textContent=player?.id || "";
-    }
     playerEditorAvatarV2 = normalizePlayerAvatarV2(player?.avatar);
     updatePlayerEditorAvatarPreviewV2();
     updatePlayerEditorMemoCountV2();
@@ -11413,7 +11419,22 @@ let matchRecordsRawCacheV152 = null;
 
   function deletePlayerByIdV1(playerId) {
     const player = readPlayerLibrary().find(p => String(p.id) === String(playerId));
-    if (!player || !confirm(`「${player.name}」を削除しますか？\n\nこのプレーヤーを削除しても、過去の試合履歴は残ります。`)) return false;
+    if (!player) return false;
+    const activeState = currentGameSessionIdV104 && !gameEnded && !currentGameRecordSaved
+      ? {selectedRegisteredPlayer}
+      : null;
+    const persistedState = readInProgressMatchV1()?.state || null;
+    const isInProgressParticipant = [activeState, persistedState].some(state =>
+      [1, 2].some(side => String(state?.selectedRegisteredPlayer?.[side] || "") === String(player.id))
+    );
+    if (isInProgressParticipant) {
+      showToast(
+        "プレーヤーを削除できません",
+        "このプレーヤーは中断中の試合で使用されています。試合を終了または破棄してから削除してください。"
+      );
+      return false;
+    }
+    if (!confirm(`「${player.name}」を削除しますか？\n\nこのプレーヤーを削除しても、過去の試合履歴は残ります。`)) return false;
     createDestructiveBackupV132(
       "delete-player",
       { deletedPlayerId: String(player.id), deletedPlayerName: player.name, backupScope: "deleted-player-only" },
@@ -16081,7 +16102,7 @@ let matchRecordsRawCacheV152 = null;
 
     renderMatchRecords();
     refreshAfterDestructiveChangeV132("match-record-deleted");
-    showToast("履歴を削除しました", "削除前バックアップを保存し、集計画面へ反映しました");
+    showToast("✓ 試合を削除しました");
     return true;
   }
 
@@ -16542,7 +16563,7 @@ let matchRecordsRawCacheV152 = null;
     }
     const visibleRecordsV154 = records.slice(0, recordsRenderLimitV154);
     const recordPlayersV3 = readPlayerLibrary();
-    const recordPlayerV3 = data => recordPlayersV3.find(item => String(item.id) === String(data?.registeredPlayerId || "")) || data || {};
+    const recordPlayerV3 = data => historicalPlayerProfileV1(data, recordPlayersV3);
     const remainingV154 = Math.max(0, records.length - visibleRecordsV154.length);
     const cardsHtmlV154 = visibleRecordsV154.map(record=>{
       const p1=record.players?.[1]||{}, p2=record.players?.[2]||{};
@@ -19123,24 +19144,19 @@ let matchRecordsRawCacheV152 = null;
     const playerSide = (record, playerId, playerName) => {
       for (const side of [1, 2]) {
         const item = record.players?.[side] || {};
-        if (playerId && item.registeredPlayerId === playerId) return side;
-        if (!playerId && playerName && String(item.name || "") === playerName) return side;
+        const registeredId = String(item.registeredPlayerId || "").trim();
+        if (registeredId) {
+          if (playerId && registeredId === String(playerId)) return side;
+          continue;
+        }
+        if (playerName && String(item.name || "").trim() === String(playerName).trim()) return side;
       }
       return null;
     };
 
     function buildChoices(records) {
       const registered = safePlayers().sort((a,b) => Number(b.lastUsed || b.updatedAt || 0) - Number(a.lastUsed || a.updatedAt || 0));
-      const choices = registered.map(player => ({ id: player.id, name: player.name }));
-      const known = new Set(choices.map(choice => choice.name));
-      const counts = new Map();
-      records.forEach(record => [1,2].forEach(side => {
-        const item = record.players?.[side] || {};
-        const name = String(item.name || "").trim();
-        if (name && !known.has(name)) counts.set(name, (counts.get(name) || 0) + 1);
-      }));
-      [...counts.entries()].sort((a,b) => b[1]-a[1] || a[0].localeCompare(b[0],"ja")).forEach(([name]) => choices.push({ id:"", name }));
-      return choices;
+      return registered.map(player => ({ id: String(player.id), name: String(player.name) }));
     }
 
     function renderDashboard() {
@@ -19216,17 +19232,20 @@ let matchRecordsRawCacheV152 = null;
     const esc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
 
     function aggregate() {
-      const registeredNames = new Map(safePlayers().filter(p => p?.id).map(p => [String(p.id), String(p.name || "名前なし")]));
+      const registeredPlayers = safePlayers().filter(p => p?.id && p?.name);
+      const registeredById = new Map(registeredPlayers.map(p => [String(p.id), p]));
+      const registeredByName = new Map(registeredPlayers.map(p => [String(p.name).trim().toLocaleLowerCase("ja"), p]));
       const map = new Map();
       safeRecords().forEach(record => {
         [1,2].forEach(side => {
           const player = record.players?.[side] || {};
           const metricsV114 = savedPlayerMetricsV113(record, side);
-          const id = player.registeredPlayerId ? String(player.registeredPlayerId) : "";
+          const id = String(player.registeredPlayerId || "").trim();
           const name = String(player.name || "").trim();
-          if (!id && !name) return;
-          const key = id ? `id:${id}` : `name:${name}`;
-          if (!map.has(key)) map.set(key, { key, name: registeredNames.get(id) || name, games:0, wins:0, highRun:0, pockets:0, misses:0, shotRateSum:0, shotRateCount:0 });
+          const registered = id ? registeredById.get(id) : registeredByName.get(name.toLocaleLowerCase("ja"));
+          if (!registered) return;
+          const key = `id:${registered.id}`;
+          if (!map.has(key)) map.set(key, { key, name: String(registered.name), games:0, wins:0, highRun:0, pockets:0, misses:0, shotRateSum:0, shotRateCount:0 });
           const item = map.get(key);
           item.games += 1;
           if (Number(record.winner) === side) item.wins += 1;
@@ -19333,7 +19352,12 @@ let matchRecordsRawCacheV152 = null;
       return [...map.values()].sort((a,b)=>a.name.localeCompare(b.name,"ja"));
     }
     function sideFor(record, choice){
-      for(const side of [1,2]){const p=record.players?.[side]||{};if(choice.id&&String(p.registeredPlayerId||"")===choice.id)return side;if(!choice.id&&String(p.name||"").trim()===choice.name)return side;}return null;
+      for(const side of [1,2]){
+        const p=record.players?.[side]||{}, registeredId=String(p.registeredPlayerId||"").trim();
+        if(registeredId){if(choice.id&&registeredId===choice.id)return side;continue;}
+        if(String(p.name||"").trim()===choice.name)return side;
+      }
+      return null;
     }
     function applySelectionOptions(items,i1,i2){
       const optionHtml=(blockedIndex)=>items.map((item,i)=>{
@@ -19574,7 +19598,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build79-jpa-dead-ball-internal-v1";
+    const PWA_VERSION = "2.0-build80-match-sharing-player-identity-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -22784,8 +22808,8 @@ window.cueScoreModalDiagnosticsV159 = () => ({
 <script>
 /* CueScore RC72: single-source version synchronization. */
 (() => {
-  const RELEASE_LABEL = 'Version 1.0';
-  const DISPLAY_VERSION = 'version 1.0';
+  const RELEASE_LABEL = 'Version 1.2';
+  const DISPLAY_VERSION = 'version 1.2';
 
   function syncCueScoreVersionV162(){
     document.querySelectorAll('.sub-title').forEach((el) => {
@@ -22794,7 +22818,7 @@ window.cueScoreModalDiagnosticsV159 = () => ({
     document.querySelectorAll('.settings-version').forEach((el) => {
       el.textContent = RELEASE_LABEL;
     });
-    document.documentElement.dataset.cuescoreVersion = "1.0";
+    document.documentElement.dataset.cuescoreVersion = "1.2";
   }
 
   if (document.readyState === 'loading') {
@@ -23303,10 +23327,7 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
       : "";
     const jpaMatchPointHtmlV1="";
     const registeredPlayersV3=readPlayerLibrary();
-    const detailAvatarV3=player=>{
-      const registered=registeredPlayersV3.find(item=>item.id===player?.registeredPlayerId);
-      return playerAvatarSourceV2(registered?.avatar);
-    };
+    const detailAvatarV3=player=>playerAvatarSourceV2(historicalPlayerProfileV1(player,registeredPlayersV3).avatar);
     const shotRowV4=["シュート率",shotRateV1(p1),shotRateV1(p2)];
     const highRunRowV4=["ハイラン",Number.isFinite(Number(p1.maxRun))?String(Number(p1.maxRun)):"—",Number.isFinite(Number(p2.maxRun))?String(Number(p2.maxRun)):"—"];
     const averageRowV4=["アベレージ",averagePerInningV1(record,1),averagePerInningV1(record,2)];
@@ -24349,6 +24370,7 @@ body.match-sharing-flow-visible-v1 .cue-phase1-tab-bar{display:none!important}
 .match-sharing-flow-other-v1{width:100%;min-height:48px;margin-top:10px;padding:0 12px;display:flex;align-items:center;justify-content:space-between;border:1px solid #d8d8d5;border-radius:12px;background:#fff;color:#171717;font:inherit;font-size:15px;font-weight:700;text-align:left}
 .match-sharing-flow-header-v1 h1:focus,.match-sharing-receiver-message-v1 h2:focus{outline:none}
 .match-sharing-flow-mapping-row-v1{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:12px 0;border-top:1px solid #e5e5e2}.match-sharing-flow-shared-player-v1,.match-sharing-flow-mapped-player-v1{min-width:0;display:flex;align-items:center;gap:8px}.match-sharing-flow-shared-player-v1{display:grid;gap:2px}.match-sharing-flow-shared-player-v1 span,.match-sharing-flow-mapped-player-v1 small{color:#737370;font-size:11px}.match-sharing-flow-shared-player-v1 strong,.match-sharing-flow-mapped-player-v1 strong{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}.match-sharing-flow-mapped-player-v1>span:not(.match-sharing-flow-unmapped-v1){min-width:0}.match-sharing-flow-unmapped-v1{color:#777;font-size:13px}.match-sharing-flow-mapping-row-v1 .match-sharing-flow-other-v1,.match-sharing-flow-mapping-row-v1 .match-sharing-flow-new-v1{grid-column:1/-1;margin-top:0}.match-sharing-flow-mapping-row-v1 .match-sharing-flow-name-input-v1{grid-column:1/-1;margin-top:0}
+.match-sharing-flow-summary-player-v1{min-width:0;display:flex;align-items:center;gap:6px;text-align:left}.match-sharing-flow-summary-player-v1.is-right{flex-direction:row-reverse;text-align:right}.match-sharing-flow-summary-avatar-v1{flex:0 0 auto;width:30px;height:30px;border:1px solid #dededb;border-radius:50%;object-fit:cover;background:#eee}
 @media(max-width:360px){.match-sharing-flow-content-v1{padding-left:12px;padding-right:12px}.match-sharing-flow-match-v1>div{gap:6px}.match-sharing-flow-match-v1 strong{font-size:13px}}
 @media(prefers-reduced-motion:reduce){.match-sharing-flow-v1 *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 @media(max-height:700px){
@@ -25642,9 +25664,6 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
         <span><span class="player-detail-vs-title-v1">対戦成績（VS）を見る</span><span class="player-detail-vs-sub-v1">対戦相手ごとの勝敗・勝率を確認できます</span></span>
         <span class="player-detail-chevron-v1" aria-hidden="true"></span>
       </button>` : `<section class="player-detail-card-v1 player-detail-empty-v1">この種目の対戦データはまだありません。</section>`}
-      <button type="button" class="player-detail-delete-v1" data-player-detail-delete="${esc(player.id)}">プレーヤーを削除</button>
-      <p class="player-detail-delete-note-v1">削除しても、過去の試合履歴は残ります。</p>
-
     </div>`;
   };
 
@@ -25690,20 +25709,6 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
         library.setAttribute("aria-hidden","false");
       }
       openPlayerEditor(edit.dataset.playerDetailEdit);
-      return;
-    }
-    const deleteButton = event.target.closest("[data-player-detail-delete]");
-    if (deleteButton) {
-      const playerId = String(deleteButton.dataset.playerDetailDelete || "");
-      if (!playerId || !window.deleteCueScorePlayerV1?.(playerId)) return;
-      closePlayerStats();
-      playerLibraryModeV145 = "management";
-      const library = document.getElementById("playerLibraryOverlay");
-      if (library) {
-        library.classList.remove("hidden");
-        library.setAttribute("aria-hidden","false");
-      }
-      showPlayerLibraryMain();
       return;
     }
     const nav = event.target.closest("[data-player-detail-nav]");
@@ -26214,7 +26219,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
         </section>` : ""}
         <div class="settings-formal-spacer-v1" aria-hidden="true"></div>
         <footer class="settings-app-footer-v1">
-          <div class="settings-app-brand-v1"><span data-cuescore-logo="horizontal-black"></span><span class="settings-version">Version 1.0</span></div>
+          <div class="settings-app-brand-v1"><span data-cuescore-logo="horizontal-black"></span><span class="settings-version">Version 1.2</span></div>
           <button class="settings-info-link-v1" type="button" data-cuescore-about><span>About CueScore</span><span>›</span></button>
           <button class="settings-info-link-v1" type="button" data-settings-legal="terms.html"><span>利用規約</span><span>›</span></button>
           <button class="settings-info-link-v1" type="button" data-settings-legal="privacy.html"><span>プライバシーポリシー</span><span>›</span></button>
@@ -26437,12 +26442,11 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   const dateOf = record => { const d=new Date(record?.endedAt||record?.playedAt||record?.startedAt||0); return Number.isNaN(d.getTime())?null:d; };
   const playerKey = player => player?.id ? `id:${player.id}` : `name:${String(player?.name||"").trim()}`;
   function choices(records){
-    const map=new Map();
-    try{ readPlayerLibrary().forEach(p=>{if(p?.name)map.set(playerKey(p),{id:String(p.id||""),name:String(p.name),key:playerKey(p)});}); }catch(_){}
-    records.forEach(r=>[1,2].forEach(side=>{const p=r.players?.[side]||{},id=String(p.registeredPlayerId||""),name=String(p.name||"").trim();if(name){const key=id?`id:${id}`:`name:${name}`;if(!map.has(key))map.set(key,{id,name,key});}}));
-    return [...map.values()].sort((a,b)=>a.name.localeCompare(b.name,"ja"));
+    const active=[];
+    try{ readPlayerLibrary().forEach(p=>{if(p?.id&&p?.name)active.push({id:String(p.id),name:String(p.name),key:playerKey(p)});}); }catch(_){}
+    return active.sort((a,b)=>a.name.localeCompare(b.name,"ja"));
   }
-  function sideFor(record,choice){for(const side of [1,2]){const p=record.players?.[side]||{};if(choice.id&&String(p.registeredPlayerId||"")===choice.id)return side;if(!choice.id&&String(p.name||"").trim()===choice.name)return side;}return 0;}
+  function sideFor(record,choice){for(const side of [1,2]){const p=record.players?.[side]||{},registeredId=String(p.registeredPlayerId||"").trim();if(registeredId){if(choice.id&&registeredId===choice.id)return side;continue;}if(String(p.name||"").trim()===choice.name)return side;}return 0;}
   function allRaw(){try{return typeof readMatchRecords==="function"?readMatchRecords():JSON.parse(localStorage.getItem("rotationScoreboard.matchRecords.v1")||"[]");}catch(_){return[]}}
   function filterState(){try{return window.getStatisticsFilterV53?.()||{};}catch(_){return{}}}
   function fmtDate(d,short=false){if(!d)return"";const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),day=String(d.getDate()).padStart(2,"0");return short?`${m}/${day}`:`${y}/${m}/${day}`;}
@@ -26862,7 +26866,7 @@ body.cue-modal-lock-v1{overflow:hidden!important}
 .player-editor-modal-v1 .player-editor-race-row{display:grid;grid-template-columns:72px minmax(0,1fr);gap:14px;align-items:center}
 .player-editor-modal-v1 .player-editor-race{width:72px;height:44px;border:1px solid #d8d8d4;border-radius:10px;background:#f7f7f5;color:#171717;text-align:center;font-size:18px;font-weight:750}
 .player-editor-modal-v1 .player-editor-range{width:100%;accent-color:var(--modal-accent)}
-.player-editor-modal-v1 .player-editor-delete{width:100%;min-height:42px;margin-top:18px;border:1px solid #c92a2a;border-radius:10px;background:#fff;color:#c92a2a;font:inherit;font-weight:700}
+.player-editor-modal-v1 .player-editor-delete{width:100%;min-height:44px;margin-top:18px;border:1px solid #c92a2a;border-radius:10px;background:#fff;color:#c92a2a;font:inherit;font-weight:700}
 .player-editor-actions-v1{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;width:min(100%,620px);margin:0 auto;padding:10px 18px max(14px,env(safe-area-inset-bottom));border-top:1px solid #ecece9;background:#fff;box-sizing:border-box}
 .player-editor-cancel-v1,.player-editor-modal-v1 .player-editor-save{min-height:46px;border-radius:10px;font:inherit;font-size:16px;font-weight:760}
 .player-editor-cancel-v1{display:block;border:1px solid var(--modal-accent);background:#fff;color:var(--modal-accent)}.player-editor-modal-v1 .player-editor-save{width:100%;border:1px solid var(--modal-accent);background:var(--modal-accent);color:#fff}
@@ -28554,7 +28558,7 @@ body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!impo
   const summaryStatsBar = summary => `<section class="page-summary-stats-v1" aria-label="試合集計"><div role="group" aria-label="試合 ${summary.games}"><span>試合</span><strong>${summary.games}</strong></div><div role="group" aria-label="勝敗 ${summary.resolved?`${summary.wins}勝 ${summary.losses}敗`:"未集計"}"><span>勝敗</span><strong>${summary.resolved?`${summary.wins}勝 ${summary.losses}敗`:"—"}</strong></div><div role="group" aria-label="勝率 ${rateText(summary.rate)}"><span>勝率</span><strong>${rateText(summary.rate)}</strong></div></section>`;
   const avatar = (p,cls="player-avatar-v2") => typeof playerAvatarHtmlV2==="function"?playerAvatarHtmlV2(p,cls):"";
   const opponent = (record,s) => s ? record?.players?.[s===1?2:1]||{} : {};
-  const opponentLibrary = data => {const id=String(data?.registeredPlayerId||"");return readPlayerLibrary().find(p=>String(p.id)===id)||data||{};};
+  const opponentLibrary = data => historicalPlayerProfileV1(data,readPlayerLibrary());
   const timeOf = record => new Date(record.endedAt||record.playedAt||record.startedAt||0);
   const scoreOf = (record,s) => Number(record.players?.[s]?.score??record.finalScore?.[s]??0)||0;
   const raceOf = record => {const g1=Number(record.players?.[1]?.goal)||0,g2=Number(record.players?.[2]?.goal)||0;if(!g1&&!g2)return "";return g1&&g2&&g1!==g2?`Race to ${g1} / ${g2}`:`Race to ${g1||g2}`;};
@@ -28590,7 +28594,7 @@ body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!impo
   historyRoot.addEventListener("keydown",event=>{if(!["Enter"," "].includes(event.key))return;const row=event.target.closest("[data-player-record-id]");if(!row)return;event.preventDefault();openPlayerJourneyMatchV4(row.dataset.playerRecordId);});
   const previousRender=window.renderFormalPlayerDetailV1;
   let journeyPlayerId="",journeyDiscipline="9ball";
-  window.renderFormalPlayerDetailV1=function(id){const p=player(id);if(!p)return previousRender?.(id);const idText=String(id);if(journeyPlayerId!==idText){journeyPlayerId=idText;journeyDiscipline="9ball";}const active=journeyDiscipline;const filtered=records(p).filter(r=>disc(r)===active),recent=filtered.slice(0,10),allStats=stats(filtered,p),recentStats=stats(recent,p);let high=0,shots=0,shotN=0,safeties=0,safetyN=0;filtered.forEach(r=>{const s=side(r,p),m=savedPlayerMetricsV113(r,s);high=Math.max(high,Number(m.maxRun)||0);if(Number.isFinite(Number(m.shotRate))){shots+=Number(m.shotRate);shotN++;}const sr=Number(r.analysisSummary?.players?.[s]?.safety?.successRate??r.analysis?.players?.[s]?.safety?.successRate);if(Number.isFinite(sr)){safeties+=sr;safetyN++;}});document.getElementById("playerStatsRace").textContent="編集";document.getElementById("playerStatsBody").innerHTML=`<div class="player-detail-shell-v1"><section class="player-detail-profile-card-v2"><span class="player-detail-avatar-v2">${avatar(p)}${p.favorite===true?'<span class="player-detail-favorite-v1">★</span>':""}</span><span><span class="player-detail-name-v1">${esc(p.name)}</span>${p.isPrimary===true?'<span class="player-detail-main-badge-v2">メインプレーヤー</span>':""}${p.memo?`<span class="player-detail-note-v2">${esc(p.memo)}</span>`:""}</span></section><div class="player-detail-disciplines-v1" role="tablist">${defs.map(d=>`<button type="button" class="player-detail-discipline-v1 ${d.id===active?"is-selected":""}" data-player-detail-discipline="${d.id}" aria-selected="${d.id===active}"><img class="disc-ball" src="${d.asset}" alt=""><span>${d.label}</span></button>`).join("")}</div>${filtered.length?`<section class="player-detail-card-v1 player-detail-recent-v2"><div class="player-detail-recent-head-v2"><strong>最近の成績</strong><span>${def(active).label}・直近${recent.length}試合</span></div><div class="player-detail-record-v2"><b>${recentStats.wins}</b><span>勝</span><b>${recentStats.losses}</b><span>敗</span><span class="player-detail-winrate-v2">${rateText(recentStats.rate)}</span></div><div class="player-detail-form-v2">${recent.filter(r=>winnerSide(r)).slice(0,5).map(r=>`<i class="${won(r,side(r,p))?"win":"loss"}">${won(r,side(r,p))?"W":"L"}</i>`).join("")}</div></section><div class="player-detail-metrics-grid-v2"><div class="player-detail-metric-card-v2"><span>試合数</span><strong>${allStats.games}</strong></div><div class="player-detail-metric-card-v2"><span>ハイラン</span><strong>${high}</strong></div><div class="player-detail-metric-card-v2"><span>シュート成功率</span><strong>${shotN?Math.round(shots/shotN)+"%":"—"}</strong></div><div class="player-detail-metric-card-v2"><span>セーフティ成功率</span><strong>${safetyN?Math.round(safeties/safetyN)+"%":"—"}</strong></div></div>`:`<section class="player-detail-card-v1 player-detail-empty-v1">この種目の対戦データはまだありません。</section>`}<div class="player-detail-links-v2"><button class="player-detail-link-v2" data-open-opponents-v2="${esc(id)}"><span class="player-detail-link-icon-v2">VS</span><span><strong>対戦相手別の成績</strong><small>相手ごとの勝敗・勝率</small></span><span class="player-detail-chevron-v1"></span></button><button class="player-detail-link-v2" data-open-player-history-v2="${esc(id)}"><span class="player-detail-link-icon-v2">↻</span><span><strong>このプレーヤーの試合履歴</strong><small>日付・種目・対戦相手・スコア</small></span><span class="player-detail-chevron-v1"></span></button></div><button type="button" class="player-detail-delete-v1" data-player-detail-delete="${esc(id)}">プレーヤーを削除</button><p class="player-detail-delete-note-v1">削除しても、過去の試合履歴は残ります。</p></div>`;};
+  window.renderFormalPlayerDetailV1=function(id){const p=player(id);if(!p)return previousRender?.(id);const idText=String(id);if(journeyPlayerId!==idText){journeyPlayerId=idText;journeyDiscipline="9ball";}const active=journeyDiscipline;const filtered=records(p).filter(r=>disc(r)===active),recent=filtered.slice(0,10),allStats=stats(filtered,p),recentStats=stats(recent,p);let high=0,shots=0,shotN=0,safeties=0,safetyN=0;filtered.forEach(r=>{const s=side(r,p),m=savedPlayerMetricsV113(r,s);high=Math.max(high,Number(m.maxRun)||0);if(Number.isFinite(Number(m.shotRate))){shots+=Number(m.shotRate);shotN++;}const sr=Number(r.analysisSummary?.players?.[s]?.safety?.successRate??r.analysis?.players?.[s]?.safety?.successRate);if(Number.isFinite(sr)){safeties+=sr;safetyN++;}});document.getElementById("playerStatsRace").textContent="編集";document.getElementById("playerStatsBody").innerHTML=`<div class="player-detail-shell-v1"><section class="player-detail-profile-card-v2"><span class="player-detail-avatar-v2">${avatar(p)}${p.favorite===true?'<span class="player-detail-favorite-v1">★</span>':""}</span><span><span class="player-detail-name-v1">${esc(p.name)}</span>${p.isPrimary===true?'<span class="player-detail-main-badge-v2">メインプレーヤー</span>':""}${p.memo?`<span class="player-detail-note-v2">${esc(p.memo)}</span>`:""}</span></section><div class="player-detail-disciplines-v1" role="tablist">${defs.map(d=>`<button type="button" class="player-detail-discipline-v1 ${d.id===active?"is-selected":""}" data-player-detail-discipline="${d.id}" aria-selected="${d.id===active}"><img class="disc-ball" src="${d.asset}" alt=""><span>${d.label}</span></button>`).join("")}</div>${filtered.length?`<section class="player-detail-card-v1 player-detail-recent-v2"><div class="player-detail-recent-head-v2"><strong>最近の成績</strong><span>${def(active).label}・直近${recent.length}試合</span></div><div class="player-detail-record-v2"><b>${recentStats.wins}</b><span>勝</span><b>${recentStats.losses}</b><span>敗</span><span class="player-detail-winrate-v2">${rateText(recentStats.rate)}</span></div><div class="player-detail-form-v2">${recent.filter(r=>winnerSide(r)).slice(0,5).map(r=>`<i class="${won(r,side(r,p))?"win":"loss"}">${won(r,side(r,p))?"W":"L"}</i>`).join("")}</div></section><div class="player-detail-metrics-grid-v2"><div class="player-detail-metric-card-v2"><span>試合数</span><strong>${allStats.games}</strong></div><div class="player-detail-metric-card-v2"><span>ハイラン</span><strong>${high}</strong></div><div class="player-detail-metric-card-v2"><span>シュート成功率</span><strong>${shotN?Math.round(shots/shotN)+"%":"—"}</strong></div><div class="player-detail-metric-card-v2"><span>セーフティ成功率</span><strong>${safetyN?Math.round(safeties/safetyN)+"%":"—"}</strong></div></div>`:`<section class="player-detail-card-v1 player-detail-empty-v1">この種目の対戦データはまだありません。</section>`}<div class="player-detail-links-v2"><button class="player-detail-link-v2" data-open-opponents-v2="${esc(id)}"><span class="player-detail-link-icon-v2">VS</span><span><strong>対戦相手別の成績</strong><small>相手ごとの勝敗・勝率</small></span><span class="player-detail-chevron-v1"></span></button><button class="player-detail-link-v2" data-open-player-history-v2="${esc(id)}"><span class="player-detail-link-icon-v2">↻</span><span><strong>このプレーヤーの試合履歴</strong><small>日付・種目・対戦相手・スコア</small></span><span class="player-detail-chevron-v1"></span></button></div></div>`;};
   document.getElementById("playerStatsBody")?.addEventListener("click",event=>{const discipline=event.target.closest("[data-player-detail-discipline]");if(discipline)journeyDiscipline=discipline.dataset.playerDetailDiscipline||"9ball";},true);
   document.getElementById("playerStatsBody")?.addEventListener("click",event=>{const opponents=event.target.closest("[data-open-opponents-v2]");if(opponents){const selected=event.currentTarget.querySelector("[data-player-detail-discipline].is-selected")?.dataset.playerDetailDiscipline||"9ball";openRivals(opponents.dataset.openOpponentsV2,selected);return;}const history=event.target.closest("[data-open-player-history-v2]");if(history)openHistory(history.dataset.openPlayerHistoryV2);});
 
@@ -28887,7 +28891,7 @@ body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!impo
   const won=(record,s)=>Number(record.winner||record.winnerSide||record.result?.winnerSide||0)===Number(s);
   const avatar=player=>typeof playerAvatarHtmlV2==="function"?playerAvatarHtmlV2(player,"player-avatar-v2"):"";
   const recordPlayer=(record,s)=>record?.players?.[s]||{};
-  const libraryPlayer=data=>players().find(p=>String(p.id)===String(data?.registeredPlayerId||""))||data||{};
+  const libraryPlayer=data=>historicalPlayerProfileV1(data,players());
   const recordsFor=player=>allRecords().filter(r=>side(r,player));
   const metric=(record,s)=>savedPlayerMetricsV113(record,s)||{};
   const analyticsMasuwariCount= (record,s)=>{
@@ -29027,7 +29031,7 @@ body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!impo
     window.CueScoreEditableSelectionV1=Object.freeze({isEditableTarget:editable});
   })();
   </script>
-  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build79-jpa-dead-ball-internal-v1" />
+  <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build80-match-sharing-player-identity-v1" />
   <script src="./navigation-phase2-6.js?v=2.0-build60-free-pro-foundation"></script>
   <script src="./record-access-v1.js?v=1.0-build60-free-pro-v2"></script>
   <script src="./monetization-v1.js?v=1.0-build72-current-plan-settings-v1"></script>

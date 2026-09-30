@@ -34,7 +34,7 @@ assert.match(html,/<button class=\"journey-match-v2 journey-match-v3\" type=\"bu
 assert.match(html,/journey-match-score-v3\"><strong class=\"\$\{isWin\?\"winner\":\"loser\"\}\"/);
 assert.match(html,/\.journey-match-score-v3 \.loser\{color:#777775;font-weight:450\}/);
 assert.match(html,/record-match-avatar-v3/);
-assert.match(html,/recordPlayerV3 = data => recordPlayersV3\.find/);
+assert.match(html,/recordPlayerV3 = data => historicalPlayerProfileV1\(data, recordPlayersV3\)/);
 assert.match(html,/hide\(historyRoot\);opener\(String\(recordId\|\|\"\"\)\)/);
 assert.match(html,/if\(returnToPlayerHistoryV4\)\{returnToPlayerHistoryV4=false;show\(historyRoot\);\}/);
 assert.match(html,/window\.openMatchDetailV1\|\|window\.openHistoricalRecordV2/);

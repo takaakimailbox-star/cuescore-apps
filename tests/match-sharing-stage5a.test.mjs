@@ -11,6 +11,7 @@ const adapters=require("../match-sharing-adapters-v1.js");
 const format=require("../match-sharing-format-v1.js");
 const sender=require("../match-sharing-sender-v1.js");
 const receiver=require("../match-sharing-receiver-v1.js");
+const persistence=require("../match-sharing-persistence-v1.js");
 const receiverSource=fs.readFileSync(new URL("../match-sharing-receiver-v1.js",import.meta.url),"utf8");
 const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const swift=fs.readFileSync(new URL("../ios/App/App/CueScoreQRScannerPlugin.swift",import.meta.url),"utf8");
@@ -167,6 +168,44 @@ test("duplicate is detected against the full completed collection with zero writ
   await assert.rejects(()=>receiver.decodeScannedPayload({payload,records}),error=>error.code==="DUPLICATE");
 });
 
+test("early duplicate gate uses the injected full-collection lookup before Receiver mapping",async()=>{
+  const {logical,payload}=await fixturePayload(fixtures[0]);
+  const duplicate={id:"restored-hidden",sharedMatchId:logical.sharedMatchId,players:{1:{name:"A"},2:{name:"B"}},endedAt:logical.endedAt,result:"win",winner:1};
+  let lookups=0;
+  await assert.rejects(()=>receiver.decodeScannedPayload({
+    payload,
+    records:[],
+    findDuplicate:sharedMatchId=>{lookups+=1;assert.equal(sharedMatchId,logical.sharedMatchId);return duplicate},
+  }),error=>error.code==="DUPLICATE");
+  assert.equal(lookups,1);
+});
+
+test("early duplicate gate catches Free-hidden and Restore-preserved records with zero downstream writes",async()=>{
+  const {logical,payload}=await fixturePayload(fixtures[0]);
+  const ordinary=Array.from({length:26},(_,index)=>({id:`recent-${index}`,players:{1:{name:"A"},2:{name:"B"}},endedAt:new Date(Date.UTC(2026,8,30,0,index)).toISOString(),result:"win",winner:1}));
+  const duplicate={id:"free-hidden-restored",sharedMatchId:logical.sharedMatchId,players:{1:{name:"A"},2:{name:"B"}},endedAt:logical.endedAt,result:"win",winner:1};
+  const fullCollection=[duplicate,...ordinary],restored=persistence.mergeMatchRecords([],fullCollection).value;
+  let playerWrites=0,matchWrites=0;
+  for(const records of [fullCollection,restored]){
+    await assert.rejects(()=>receiver.decodeScannedPayload({payload,records}),error=>error.code==="DUPLICATE");
+  }
+  assert.deepEqual({playerWrites,matchWrites},{playerWrites:0,matchWrites:0});
+});
+
+test("duplicate scanner state retries with a fresh Camera session and accepts a different QR",async()=>{
+  const first=await fixturePayload(fixtures[0]),second=await fixturePayload(fixtures[1]);
+  const bridge=fakeBridge(),states=[],memory=receiver.createMemoryState();
+  let duplicateId=first.logical.sharedMatchId;
+  const controller=receiver.createScannerController({
+    bridge,memory,readRecords:()=>[],findDuplicate:id=>id===duplicateId?{id:"existing"}:null,onState:value=>states.push(value),
+  });
+  const rect={x:10,y:120,width:280,height:280};
+  await controller.enter(rect);await bridge.emit("scanResult",{value:first.payload});
+  assert.equal(states.at(-1).screen,"error");assert.equal(states.at(-1).code,"DUPLICATE");assert.equal(memory.get(),null);
+  duplicateId=null;await controller.retry(rect);await bridge.emit("scanResult",{value:second.payload});
+  assert.equal(bridge.startCalls,2);assert.equal(states.at(-1).screen,"success");assert.equal(memory.get().sharedMatchId,second.logical.sharedMatchId);
+});
+
 test("controller accepts one callback, fully re-enters after error, and Back clears camera and memory",async()=>{
   const bridge=fakeBridge(),states=[],memory=receiver.createMemoryState();
   const controller=receiver.createScannerController({bridge,memory,onState:value=>states.push(value)});
@@ -218,9 +257,9 @@ test("History receiver entry, scanner copy, accessibility and error recovery mat
   assert.match(html,/scannerDiagnostic/);
 });
 
-test("Info.plist states both real camera uses without changing Version or Build",()=>{
+test("Info.plist states both real camera uses and current Version / Build",()=>{
   assert.match(plist,/プレーヤーのプロフィール写真の撮影と、試合共有QRコードの読み取りにカメラを使用します。/);
-  assert.match(project,/MARKETING_VERSION = 1\.1;/);assert.match(project,/CURRENT_PROJECT_VERSION = 79;/);
+  assert.match(project,/MARKETING_VERSION = 1\.2;/);assert.match(project,/CURRENT_PROJECT_VERSION = 80;/);
 });
 
 test("receiver runtime is bundled for PWA and native without adding a dependency",()=>{
