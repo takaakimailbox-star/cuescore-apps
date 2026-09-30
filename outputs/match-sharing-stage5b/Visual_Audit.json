@@ -5,7 +5,8 @@
     "02_Unified_Mapping_Complete_390x844.png",
     "03_Final_Import_Confirmation_390x844.png",
     "04_Duplicate_Dedicated_UX_390x844.png",
-    "05_Import_Success_Normal_Detail_390x844.png"
+    "05_Import_Success_Normal_Detail_390x844.png",
+    "06_Delete_Success_Toast_390x844.png"
   ],
   "audit": {
     "screens390": [
@@ -20,7 +21,8 @@
         "clipping": false,
         "undersizedVisibleControls": [],
         "importedBadges": 0,
-        "successStatus": null
+        "successStatus": null,
+        "deleteStatus": null
       },
       {
         "name": "02_Unified_Mapping_Complete_390x844.png",
@@ -33,7 +35,8 @@
         "clipping": false,
         "undersizedVisibleControls": [],
         "importedBadges": 0,
-        "successStatus": null
+        "successStatus": null,
+        "deleteStatus": null
       },
       {
         "name": "03_Final_Import_Confirmation_390x844.png",
@@ -46,7 +49,8 @@
         "clipping": false,
         "undersizedVisibleControls": [],
         "importedBadges": 0,
-        "successStatus": null
+        "successStatus": null,
+        "deleteStatus": null
       },
       {
         "name": "05_Import_Success_Normal_Detail_390x844.png",
@@ -59,7 +63,22 @@
         "clipping": false,
         "undersizedVisibleControls": [],
         "importedBadges": 0,
-        "successStatus": "✓ 試合を取り込みました通常の試合として保存しました"
+        "successStatus": "✓ 試合を取り込みました通常の試合として保存しました",
+        "deleteStatus": null
+      },
+      {
+        "name": "06_Delete_Success_Toast_390x844.png",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "visibleScreen": null,
+        "horizontalOverflow": false,
+        "clipping": false,
+        "undersizedVisibleControls": [],
+        "importedBadges": 0,
+        "successStatus": null,
+        "deleteStatus": "✓ 試合を削除しました"
       },
       {
         "name": "04_Duplicate_Dedicated_UX_390x844.png",
@@ -72,7 +91,8 @@
         "clipping": false,
         "undersizedVisibleControls": [],
         "importedBadges": 0,
-        "successStatus": null
+        "successStatus": null,
+        "deleteStatus": null
       }
     ],
     "360x780-unified-complete": {
@@ -85,7 +105,8 @@
       "clipping": false,
       "undersizedVisibleControls": [],
       "importedBadges": 0,
-      "successStatus": null
+      "successStatus": null,
+      "deleteStatus": null
     }
   }
 }

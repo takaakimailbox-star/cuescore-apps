@@ -1,6 +1,6 @@
 # CueScore Apps — Match Sharing v1 Design Decision
 
-**Status:** Adopted / Symmetric Player Mapping Formal Amendment Product Owner / ChatGPT APPROVED / Revised Implementation NOT STARTED
+**Status:** Adopted / Symmetric Player Mapping Formal Amendment Product Owner / ChatGPT APPROVED / Implementation COMPLETE / Product Owner Physical Acceptance PASS / Version 1.2 RC Integrated / Distribution NOT STARTED
 
 **Decision date:** 2026-09-27 / Amendment date: 2026-09-29
 
@@ -170,10 +170,22 @@ Importは原子的に扱う。Player新規作成とMatch保存を含む全処理
 
 EvidenceはOfficial Demo Data v3.1 fixturesと隔離prototypeを使用した。UI Prototype採用記録は`docs/implementation/CueScore_Match_Sharing_v1_UI_Prototype_PO_Acceptance_2026-09-27.md`を参照する。Build 79のlive user record、production localStorage transaction、Backup / Restore統合、production scanner／camera decode、Dynamic Type、VoiceOver／focus、permission denied production UI、new Player creation production flow、最終実装のphysical testは未確認であり、PASSへ拡張しない。
 
-## Amendment relationship and gate
+## Amendment relationship and historical design gate
 
 2026年9月27日に採用したSide Selection、Self Mapping、Opponent Mappingは当時の正式Decision履歴として保持する。2026年9月29日のSymmetric Player Mapping Amendmentが、Decision 028 / 029および本書のReceiver該当部分だけを後続置換する。Single QR、Sender／Receiver入口、Scanner、Format、sharedMatchId、duplicate protection、all-or-nothing transaction、privacy、Demo、Free / Pro、Backup / Restore、通常Match Detail＋success toastは維持する。
 
 **FORMAL DESIGN AMENDMENT PRODUCT OWNER / CHATGPT APPROVED / REVISED IMPLEMENTATION NOT STARTED / REVISED PHYSICAL E2E NOT VERIFIED.**
 
 本Amendmentは製品実装承認ではない。Stage 3 contractとStage 5B Receiver UIを変更せず、Build、Version、配布へ進まない。
+
+上記は2026年9月29日のDesign承認時点のGateを示す履歴であり、当時から実装承認済みだったことを意味しない。
+
+## Implementation Status Update（2026年10月1日）
+
+- Symmetric Player A / B mapping、Unified Receiver UI、dedicated duplicate UXを含むMatch Sharing v1 implementationは完了した。
+- automated verification、Product Owner physical acceptance、Final Integration / Release ReadinessはPASSした。
+- Version 1.2 / Build 80 RC source candidateへ統合済みである。
+- Single QR、sender local Player ID contamination 0、`sharedMatchId`、duplicate rejection、all-or-nothing transaction、Backup / Restore、Free / Pro共通、privacyの採用contractは変更していない。
+- Archive、TestFlight、App Store distribution、Releaseは未実施である。
+
+**IMPLEMENTATION COMPLETE / PRODUCT OWNER PHYSICAL ACCEPTANCE PASS / VERSION 1.2 RC INTEGRATED / DISTRIBUTION NOT STARTED.**

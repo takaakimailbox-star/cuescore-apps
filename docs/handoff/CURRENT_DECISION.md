@@ -1,31 +1,24 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-MATCH-SHARING-V1-FINAL-INTEGRATION-READINESS-20260929`
-- Date: 2026-09-30
-- Product Owner / ChatGPT decision: `RELEASE READINESS READY — DOCUMENTATION-ONLY FINALIZATION AUTHORIZED`
-- Gate: `READY`
+- Decision ID: `CUESCORE-1.2-RC-FREEZE-BLOCKER-RESOLUTION-20261001`
+- Date: 2026-10-01
+- Gate: `VERSION 1.2 / BUILD 80 RC SOURCE FROZEN / AUTOMATED VERIFICATION PASS / DISTRIBUTION NOT STARTED`
 
 ## Result
 
-- Official 101 / 102, Decision 030 and production source are behaviorally aligned.
-- Match Sharing focused `99/99`, full Node `557/557`, capacity `18/18`, visual audit, parity and Release Simulator Build passed.
-- Product Owner physical Evidence covers Sender QR V19/V25/V30, Scanner A/B/C, Receiver Flow, Import, duplicate and retry camera restart.
-- No release blocker remains. Physical VoiceOver/Dynamic Type and denied/restricted camera recovery are recommended pre-release checks but are not blockers.
-- The supported native scope is iPhone-only; iPad physical verification is a later compatibility check.
-- Version `1.2`, Build `80` is the recommended next candidate identity; no setting was changed.
-
-## Maintained product contract
-
-- ECC-M Single QR, Sender / Receiver entry, Scanner and camera permission flow.
-- Format v1, `sharedMatchId`, duplicate protection, all-or-nothing transaction, privacy, Demo, Free / Pro and Backup / Restore.
-- Normal Match Detail＋success toast after successful Import.
-- Decision 028 / 029 remain historical records; Decision 030 supersedes only their affected Receiver scope.
+- Version 1.2 RC Product Source Commit is `810a9e134c5de1e033eb644027c37f51834fd6d4`.
+- Source freeze began from GitHub `main` baseline `88f0eda30eb3b1437e6c24401e9bbd922d19d969`.
+- PWA cache identity and the two current app-shell queries are synchronized to `2.0-build80-match-sharing-player-identity-v1`; independent historical asset queries remain unchanged.
+- Official 101 / 102 and Decision Log v2.6 Decision 030 now record the confirmed implementation and Product Owner acceptance outcome while retaining the historical design-gate decisions.
+- Fresh verification passed cache/version `42/42`, Player Delete `11/11`, Match Sharing `109/109`, integration `102/102`, native foundation `6/6`, Full Node `578/578`, native/built parity, `git diff --check`, and Release Simulator Build.
+- Frozen product changes are Version `1.2 (80)`, Match Sharing v1, Player Delete / Player ID, historical identity, and in-progress participant delete protection. Unknown / unrelated changes are 0.
 
 ## Boundary
 
-- Release Readiness documentation／state syncのfinal audit、明示stage、commit、push、fresh read-backのみ。
-- No product change, Version/Build change, Archive, Upload, TestFlight, App Store Connect or Release.
+- The next independent Gate is Version 1.2 / Build 80 Archive → Internal TestFlight.
+- No Archive, Upload, TestFlight, App Store Connect, App Review, or Release operation is authorized by this Gate.
+- Product Source commit and the accompanying Documentation commit form the approved source freeze series.
 
 ## STOP
 
-Stop after documentation-only commit、push、GitHub fresh read-back. The next Gate is Product Owner approval to create Version `1.2` / Build `80` release candidate.
+Stop before Archive / Internal TestFlight. Product Owner device action is not required for this source-freeze Gate.

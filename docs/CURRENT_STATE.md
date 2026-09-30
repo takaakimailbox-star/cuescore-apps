@@ -1,5 +1,59 @@
 # CueScore Apps Current State
 
+## Version 1.2 RC Freeze Blocker Resolution（2026年10月1日）
+
+- Version 1.2 RC Product Source Commit: `810a9e134c5de1e033eb644027c37f51834fd6d4`（`feat: prepare CueScore 1.2 RC with Match Sharing and player identity fixes`）。
+- GitHub `main`／local `HEAD`／`origin/main` baselineは`88f0eda30eb3b1437e6c24401e9bbd922d19d969`。既存working treeをreset／checkout／cleanせず、source freeze blockerだけを解消した。
+- repositoryの既存命名規則に従い、PWA app-shell cache identityを`2.0-build79-jpa-dead-ball-internal-v1`から`2.0-build80-match-sharing-player-identity-v1`へ同期した。`demo-data.js`と`navigation-phase2-6.css`のapp-shell queryも同じidentityへ更新し、build60／66／72等のhistorical／independent asset queryは維持した。
+- Official 101／102へ2026年10月1日のImplementation Status／Outcomeを追記し、当時の`Design承認 ≠ Implementation承認`と`Revised Implementation NOT STARTED`を歴史的記録として保持した。Decision Log v2.5は上書きせず、Decision 030のhistorical decisionを保持したv2.6を追加した。
+- 正式workflowでnative web／iOS publicを再同期。source／native-web／iOS public／Release Simulator App内`index.html`はSHA-256 `9cbeaaf799502ba68859cde484bab333c3da3c91b5c49543c7ab2c3111169e9c`で一致した。
+- Fresh verificationはcache／version `42/42`、Player Delete `11/11`、Match Sharing `109/109`、integration `102/102`、native foundation `6/6`、Full Node `578/578`、`git diff --check` PASS。Player DeleteとMatch Sharingのbehavior contractは変更していない。
+- Release Simulator BuildはPASS。artifactはBundle ID `com.takaakimailboxstar.cuescoreapps`、Version `1.2`、Build `80`、`.storekit` 0件、cache identity `2.0-build80-match-sharing-player-identity-v1`。配布用Build作成、Archive、Upload、TestFlight、App Store Connectは未実施。
+- Freeze audit再実行結果はUnknown／unrelated／credential／temporary generated commit候補0件。Gate: `VERSION 1.2 / BUILD 80 RC SOURCE FROZEN / AUTOMATED VERIFICATION PASS / DISTRIBUTION NOT STARTED`。Product Source commitを固定し、本statusは後続Documentation commitに収載する。
+
+## Version 1.2 RC Commit Scope Audit / Source Freeze（2026年9月30日）
+
+- GitHub `main`／local `HEAD`／`origin/main`は`88f0eda30eb3b1437e6c24401e9bbd922d19d969`で一致。既存working treeをreset／checkoutせず、tracked、untracked、ignored generated copyを監査した。
+- 候補製品差分はVersion `1.2 (80)` identity、Match Sharing v1、Player Delete / Player ID、historical identity／in-progress delete protectionへ説明可能で、unknown／unrelated差分は0件。dependency差分、credential、Archive／IPA／DerivedDataのcommit混入も0件。
+- Xcode product identityはBundle ID `com.takaakimailboxstar.cuescoreapps`、Marketing Version `1.2`、Build `80`。一方、`sw.js`のcache identityと対応testは`2.0-build79-jpa-dead-ball-internal-v1`のままで、Version 1.2 RC source identityとして未同期。このGateはsource変更禁止のため修正していない。
+- Official 101／102およびDecision Log v2.5 Decision 030のbehavior contractはcurrent sourceと一致するが、status／evidence limitationは`Revised Implementation NOT STARTED`／`NOT VERIFIED`のままで、実装・検証後の事実へ未同期。正式文書本文は本監査で変更していない。
+- 直前の同一source EvidenceでFull Node `578/578`、Match Sharing `109/109`、Player Delete dedicated `11/11`、Integrated `88/88`、native foundation `6/6`、native parity、Release Simulator Build、390×844 VisualをPASS。本監査は製品sourceを変更せず、これらを再実行したとは記録しない。fresh `git diff --check`のみ実行する。
+- Gate: `SOURCE FREEZE BLOCKED — CACHE IDENTITY / FORMAL STATUS SYNC REQUIRED`。commit／push、Version／Build変更、Archive、Upload、TestFlight、App Store Connect、Releaseは未実施。
+
+## Player Delete / Player Identity Implementation（2026年9月30日）
+
+- Product Owner Decisionに従い、Player registry hard delete、完了済みMatch保持、Player EditだけのDelete復元、visible UUID除去をcurrent sourceへ実装した。内部`player.id`／`registeredPlayerId`、navigation、Backup / Restore、Match Sharing local mappingは維持する。
+- ID付きrecordはPlayer ID完全一致だけ、IDなしLegacy recordだけname fallbackとするidentity ruleをHistory / Analytics / VS / Rankingへ適用した。同名新Playerへ旧ID付きMatchを混入させず、削除Playerをactive Player / registry起点Analytics / active rankingへ再表示しない。残存Player側の過去Match／VSは維持する。
+- in-progress participant削除はwrite前にblockし、完了Match participantとMain Playerは削除可能。Main削除後は自動昇格せずMain 0を許容する。existing `beforeDelete` backup、historical name／score／events、neutral avatar fallback、Imported Matchの`sharedMatchId`／duplicate protectionを維持する。
+- 正式workflowでnative web／iOS publicを同期し、source／native-web／iOS public／Release Simulator App内`index.html`のSHA-256一致を確認。Player Delete / Identity dedicated `11/11`、関連focused `23/23`、統合再確認`88/88`、Match Sharing `109/109`、native foundation `6/6`、全Node `578/578`、390×844 Visual Audit、`git diff --check`をPASSした。
+- Release Simulator Buildは共有scheme`CueScoreLocalStoreKit`と固定依存条件でPASS。artifactはproduct Bundle ID `com.takaakimailboxstar.cuescoreapps`、Version `1.2`、Build `80`、`.storekit` 0件。本GateでVersion / Buildを変更していない。
+- Gate: `NATIVE SYNC / FULL REGRESSION / RELEASE SIMULATOR BUILD / VISUAL PASS`。commit／push、Archive、TestFlight Upload、App Store Connectは未実施。Evidence: `docs/implementation/CueScore_Player_Delete_Identity_Implementation_2026-09-30.md`。
+
+## Version 1.2 (80) RC Physical Smoke Findings #2（2026年9月30日）
+
+- Gate: `READY FOR PRODUCT OWNER 1.2 (80) RC PHYSICAL RETEST #2`。Release CandidateはHOLDを維持する。
+- 削除済みMatch再取り込みのgeneric errorは、削除Matchがactive collectionへ残ったduplicateではなく、初回Importで残ったlocal Player名を再び「新しいプレーヤー」として作成し、Stage 3が`DUPLICATE_PLAYER_NAME`で拒否した経路と確定。mappingの`次へ`で事前検証し、自動mappingせず既存Playerの明示選択を案内する。
+- active Match削除後は同じ`sharedMatchId`を新local Match IDで再取り込み可能。再取り込み後／Restoreでactiveへ戻した後／Free hidden activeはduplicate。削除backup単独はduplicate sourceではない。transaction duplicate gateは維持する。
+- Match Previewへneutral avatar、Final Confirmationへreceiver-local／pending default avatarを正式契約どおり表示。sender avatarは不使用。削除toastは一行の`✓ 試合を削除しました`へ簡素化し、backup／refresh／accessibilityは維持した。
+- Stage 3＋5B `48/48`、Stage 5A＋5B `38/38`、Match Sharing `109/109`、全Node `567/567`、390×844／360×780 Visual Audit、native parity、Release Simulator Build、device Build／sign／installをPASS。`CueScore RC 1.2`をiPhone 16eへ`1.2 (80)`として上書きinstallし、公開版`1.1 (79)`を維持した。
+- commit／push、Archive、Upload、TestFlight、App Store Connectは未実施。Evidence: `docs/implementation/CueScore_1.2_Build80_RC_Physical_Smoke_Findings2_2026-09-30.md`。
+
+## Version 1.2 (80) RC Early Duplicate UX Fix（2026年9月30日）
+
+- Product Owner RC smokeで、duplicate protection自体は正常に二重保存を防止した一方、判定がPlayer mapping／Final Confirmation後まで遅く、generic red transaction errorとして表示されるUX findingを確認した。添付原本は`outputs/match-sharing-rc-1.2-80/early-duplicate-finding-2026-09-30/IMG_3792.PNG`へ無改変保存した。
+- Production ScannerへStage 2のfull saved collection helperを明示注入し、decode／validation直後に`sharedMatchId`で早期判定する。Free hidden／Restore済みも対象とし、duplicate時はmappingへ進まず専用状態を表示する。
+- Stage 3 transaction直前のinitial／final duplicate gateはrace／stale-state protectionとして維持。final gate duplicateも専用状態へrouteし、generic red errorを表示しない。Retryは既存のfull Scanner close／re-entry routeでCameraをfresh restartする。
+- Stage 5A＋5B `35/35`、Stage 1〜5B `103/103`、全Node `561/561`、native asset parity、Release Simulator Build、physical RC artifact Build／signをPASS。Version `1.2`／Build `80`は維持した。
+- Gate: `READY FOR PRODUCT OWNER 1.2 (80) RC EARLY DUPLICATE RETEST`。接続復旧後、修正版`CueScore RC 1.2`をphysical iPhone 16eへ上書きinstallし、`com.takaakimailboxstar.cuescoreapps.rc12`／`1.2 (80)`をread-backした。公開`CueScore Apps`は別Bundleの`1.1 (79)`を維持。実機結果は推測しない。commit／push、Archive、Upload、TestFlight、App Store Connectは未実施。Evidence: `docs/implementation/CueScore_1.2_Build80_RC_Early_Duplicate_UX_Fix_2026-09-30.md`。
+
+## Version 1.2 (80) Release Candidate（2026年9月30日）
+
+- Gate: `READY FOR PRODUCT OWNER 1.2 (80) RELEASE CANDIDATE SMOKE TEST`。GitHub `main` baseline `88f0eda30eb3b1437e6c24401e9bbd922d19d969`から、Marketing Versionを`1.2`、Buildを`80`へ更新した。
+- Match Sharing focused `99/99`、全Node `557/557`、capacity `18/18`（ECC-M Version 19〜30）、source／native-web／iOS public parity、`git diff --check`、Release Simulator BuildをPASS。Release Simulator Appはproduct Bundle ID `com.takaakimailboxstar.cuescoreapps`、`1.2 (80)`、`.storekit` 0件、executable SHA-256 `ab2dd6e677665fe87534fee0f96c206d2ebfd3b0fb64b15ba6dead215f738865`。
+- Physical iPhone用には公開版と分離した`CueScore RC 1.2`（temporary Bundle ID `com.takaakimailboxstar.cuescoreapps.rc12`）をBuild／install済み。read-backは`1.2 (80)`、executable SHA-256 `a3651797b06f28c76b8b4146692114491e67dedbbf71f7852307a0cf0153a336`。公開版`CueScore Apps` `1.1 (79)`と別containerで共存し、公開版／保存データは変更していない。
+- Product Owner physical RC smokeは`NOT VERIFIED — PRODUCT OWNER PHYSICAL IPHONE TEST REQUIRED`。Archive、Upload、TestFlight、App Store Connect、Releaseは`NOT STARTED`。commit／pushは本Gateでは未実施。
+- Evidence: `docs/implementation/CueScore_1.2_Build80_Release_Candidate_2026-09-30.md`。
+
 ## Match Sharing v1 Final Integration / Release Readiness（2026年9月30日）
 
 - Gate: `READY`。baseline `ac34e37b361ea658994c342cce07dcc9ff3a2282`でOfficial 101／102、Decision 030、全Stage実装、Evidence、current sourceをfresh auditし、2026年9月30日の再検証でもformal behavior conflict、製品FAIL、supported-device blockerは0件。
@@ -1307,7 +1361,7 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - App Store v1.0 release profileはCSV・クラウド同期を無効化し、関連UIを表示しない。
 - Official Demo Dataはv1.0提出予定範囲に含める。実提出ビルドでの収録と通常ユーザーデータからの分離確認は未実施。
 - Official Demo Dataの本番向け表示は「サンプルデータ」を採用し、状態を「通常データ／サンプルデータ」、操作を「準備する／サンプルを見る／通常データへ戻る／初期状態に戻す／削除」とする。
-- 試合共有（Match Sharing）はv1.0ではLaterとしていた履歴をDecision 12に維持する。Official 101／102、Decision 028／029に続き、Decision Log v2.5 Decision 030がReceiverのown-side／Self／Opponent部分を対称Player A / B mappingへ後続置換した。Revised Stage 3＋Stage 5Bは最終Acceptance PASS。正式記録：`docs/official/12_CueScore_Later_Match_Sharing_Decision.md`、`docs/official/101_CueScore_Match_Sharing_v1_Decision.md`、`docs/official/102_CueScore_Match_Sharing_v1_Spec.md`。
+- 試合共有（Match Sharing）はv1.0ではLaterとしていた履歴をDecision 12に維持する。Official 101／102、Decision 028／029に続き、Decision Log v2.6 Decision 030がReceiverのown-side／Self／Opponent部分を対称Player A / B mappingへ後続置換した。Revised Stage 3＋Stage 5Bは最終Acceptance PASS。正式記録：`docs/official/12_CueScore_Later_Match_Sharing_Decision.md`、`docs/official/101_CueScore_Match_Sharing_v1_Decision.md`、`docs/official/102_CueScore_Match_Sharing_v1_Spec.md`。
 - Native iOS foundation、実機基本機能、TestFlight Build 1、TestFlight内部運用はGO。Build 2開発はGOだが、本状態同期ではBuild 2を作成しない。
 - App Store本審査提出と一般公開は未承認。Product Ownerの明示承認なしに実施しない。
 

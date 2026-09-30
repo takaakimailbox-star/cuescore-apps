@@ -1,6 +1,6 @@
 # CueScore Apps — Match Sharing Format v1 Specification
 
-**Status:** Adopted / Symmetric Player Mapping Formal Amendment Product Owner / ChatGPT APPROVED / Revised Implementation NOT STARTED
+**Status:** Adopted / Symmetric Player Mapping Formal Amendment Product Owner / ChatGPT APPROVED / Implementation COMPLETE / Product Owner Physical Acceptance PASS / Version 1.2 RC Integrated / Distribution NOT STARTED
 
 **Specification date:** 2026-09-27 / Amendment date: 2026-09-29
 
@@ -311,10 +311,23 @@ Physical Evidenceは、試験済みのV19／V25／V30だけを支持する。未
 - forward compatibility adapter
 - sender authenticity
 
-## 16. Amendment relationship and implementation boundary
+## 16. Amendment relationship and historical implementation boundary
 
 2026年9月27日に採用したSide Selection、Self Mapping、Opponent Mappingは当時の正式履歴として保持する。2026年9月29日のSymmetric Player Mapping Amendmentが、そのReceiver部分とgeneric duplicate presentationだけを後続置換する。Single QR、Sender／Receiver入口、Scanner、Format、sharedMatchId、duplicate protection、transaction、privacy、Demo、Free / Pro、Backup / Restore、Import Successは維持する。
 
 **FORMAL DESIGN AMENDMENT PRODUCT OWNER / CHATGPT APPROVED / REVISED IMPLEMENTATION NOT STARTED / REVISED PHYSICAL E2E NOT VERIFIED.**
 
 本Amendmentは製品source、保存schema、製品UI、Version、Build、配布、App Store状態を変更しない。
+
+上記は2026年9月29日のDesign承認時点の境界を示す履歴である。後日の実装結果を遡及して当時の承認範囲へ含めない。
+
+## 17. Implementation Outcome（2026年10月1日）
+
+- 本Specificationに基づくMatch Sharing v1 implementationは完了した。
+- Revised symmetric Player A / B mapping、Unified Receiver UI、new / existing local Player mapping、dedicated duplicate state、Import transaction、Backup / Restore integrationを実装した。
+- automated verification、Product Owner physical acceptance、Final Integration / Release ReadinessはPASSした。
+- Version 1.2 / Build 80 RC source candidateへ統合済みである。
+- 本更新はDesign contract、Match schema、Backup schema、Free / Pro contract、privacy boundaryを変更しない。
+- Archive、TestFlight、App Store distribution、Releaseは未実施である。
+
+**IMPLEMENTATION COMPLETE / PRODUCT OWNER PHYSICAL ACCEPTANCE PASS / VERSION 1.2 RC INTEGRATED / DISTRIBUTION NOT STARTED.**

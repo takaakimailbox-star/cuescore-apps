@@ -1,0 +1,28 @@
+{
+  "image": "Player_Edit_Delete_No_UUID_390x844.png",
+  "audit": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "horizontalOverflow": false,
+    "editorClipping": false,
+    "scrollOverflow": false,
+    "deleteVisible": true,
+    "deleteTapTarget": {
+      "width": 354,
+      "height": 44,
+      "pass": true
+    },
+    "deleteFooterOverlap": false,
+    "footerVisible": true,
+    "footerBottom": 844,
+    "uuidVisible": false,
+    "bottomNavigationVisible": false,
+    "title": "プレーヤー編集",
+    "footerActions": [
+      "キャンセル",
+      "変更"
+    ]
+  }
+}
