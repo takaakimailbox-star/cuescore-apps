@@ -124,6 +124,17 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/102_CueScore_Match_Sharing_v1_Spec.md`
 - `official/103_CueScore_Player_Delete_Identity_Decision.md`
 - `official/104_CueScore_Player_Delete_Identity_Spec.md`
+- `official/105_CueScore_Player_UX_Finalization_Decision.md`
+- `official/106_CueScore_Player_UX_Finalization_Spec.md`
+
+Player UX finalization status:
+
+- Player sort、custom Delete dialog、success／blocked NotificationはProduct Owner Physical PASS。
+- Resume Match modalのtouch yellow focus修正後、最下段CancelがBottom Navigation背面へ隠れるPhysical layout findingを確認。全3action表示、Navigation inset、modal内部scroll、backdrop ownershipを実装し、automated／390×844 Visual／native parity／Release Simulator Build／Physical RC overwrite refresh PASS。Product Owner physical re-testも5/5 PASS。
+- Accepted Product Source commit: `a0971212b13fa09ace7bbb2b0ab2571a0cd7497b`。
+- Physical Acceptance Evidence: `implementation/CueScore_1.2_Build81_Player_UX_Physical_Acceptance_2026-10-01.md`
+- Evidence: `implementation/CueScore_1.2_Build81_Interrupted_Match_Modal_Bottom_Navigation_Fix_2026-10-01.md`
+- Evidence: `implementation/CueScore_1.2_Build81_Resume_Match_Modal_Focus_Fix_2026-10-01.md`
 
 Match Sharing v1 formal design status:
 

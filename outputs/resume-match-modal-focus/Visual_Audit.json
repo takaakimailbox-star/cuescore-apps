@@ -1,0 +1,161 @@
+{
+  "generatedAt": "2026-10-01T07:57:03.666Z",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "labels": [
+    "中断中の試合を再開",
+    "新しい試合を始める",
+    "キャンセル"
+  ],
+  "layout": {
+    "viewportHeight": 844,
+    "modal": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 844,
+      "bottom": 844
+    },
+    "dialog": {
+      "x": 14,
+      "y": 455.625,
+      "width": 362,
+      "height": 302.375,
+      "bottom": 758
+    },
+    "navigation": {
+      "x": 0,
+      "y": 776,
+      "width": 390,
+      "height": 68,
+      "bottom": 844
+    },
+    "finalAction": {
+      "x": 34,
+      "y": 690,
+      "width": 322,
+      "height": 48,
+      "bottom": 738
+    },
+    "finalActionToNavigationGap": 38,
+    "dialogToNavigationGap": 18,
+    "scrollHeight": 302,
+    "clientHeight": 302,
+    "modalZIndex": 18020,
+    "navigationZIndex": 18000,
+    "navigationPointerEvents": "none",
+    "navigationButtonPointerEvents": "none",
+    "navigationPointElement": {
+      "tag": "DIV",
+      "id": "cueInProgressChoiceV1",
+      "className": "cue-in-progress-choice-v1"
+    },
+    "backdropOwnsNavigationPoint": true,
+    "allActions": [
+      {
+        "label": "中断中の試合を再開",
+        "rect": {
+          "x": 34,
+          "y": 574,
+          "width": 322,
+          "height": 48,
+          "bottom": 622
+        }
+      },
+      {
+        "label": "新しい試合を始める",
+        "rect": {
+          "x": 34,
+          "y": 632,
+          "width": 322,
+          "height": 48,
+          "bottom": 680
+        }
+      },
+      {
+        "label": "キャンセル",
+        "rect": {
+          "x": 34,
+          "y": 690,
+          "width": 322,
+          "height": 48,
+          "bottom": 738
+        }
+      }
+    ]
+  },
+  "resume": {
+    "activeElementId": "cueInProgressResumeV1",
+    "outlineStyle": "none",
+    "outlineWidth": "3px",
+    "outlineColor": "rgb(255, 255, 255)",
+    "outlineOffset": "0px",
+    "boxShadow": "none",
+    "touchContract": true,
+    "button": {
+      "x": 34,
+      "y": 574,
+      "width": 322,
+      "height": 48,
+      "bottom": 622
+    },
+    "dialog": {
+      "x": 14,
+      "y": 455.625,
+      "width": 362,
+      "height": 302.375,
+      "bottom": 758
+    },
+    "horizontalOverflow": false
+  },
+  "newMatch": {
+    "activeElementId": "cueInProgressNewV1",
+    "outlineStyle": "none",
+    "outlineWidth": "3px",
+    "outlineColor": "rgb(23, 23, 23)",
+    "outlineOffset": "0px",
+    "boxShadow": "none",
+    "touchContract": true,
+    "button": {
+      "x": 34,
+      "y": 632,
+      "width": 322,
+      "height": 48,
+      "bottom": 680
+    },
+    "dialog": {
+      "x": 14,
+      "y": 455.625,
+      "width": 362,
+      "height": 302.375,
+      "bottom": 758
+    },
+    "horizontalOverflow": false
+  },
+  "keyboardFocus": {
+    "activeElementId": "cueInProgressResumeV1",
+    "disabled": false,
+    "hasOffsetParent": true,
+    "inertAncestor": false,
+    "coarsePointer": false,
+    "outlineStyle": "solid",
+    "outlineWidth": "3px",
+    "outlineColor": "rgb(23, 23, 23)",
+    "outlineOffset": "3px"
+  },
+  "resumeTransitionClosed": true,
+  "newMatchTransitionClosed": true,
+  "cancelTransitionClosed": true,
+  "homeUsableAfterClose": true,
+  "result": {
+    "touchContractPass": true,
+    "resumeYellowOutlineZero": true,
+    "newMatchYellowOutlineZero": true,
+    "keyboardNeutralFocusPass": true,
+    "transitionsPass": true,
+    "layoutPass": true,
+    "labelsPass": true
+  }
+}

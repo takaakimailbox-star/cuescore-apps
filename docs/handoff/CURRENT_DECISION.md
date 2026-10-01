@@ -1,23 +1,25 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-1.2-BUILD81-INTERNAL-TESTFLIGHT-20261001`
+- Decision ID: `CUESCORE-1.2-PLAYER-UX-FORMALIZE-20261001`
 - Date: 2026-10-01
-- Gate: `BUILD 81 INTERNAL TESTFLIGHT AVAILABLE / PRODUCT OWNER PLAYER LIST RE-TEST REQUIRED`
+- Gate: `PLAYER UX / INTERRUPTED MATCH MODAL PHYSICAL ACCEPTANCE / COMMIT AND PUSH`
 
 ## Result
 
-- Player List Fix Product Source Commit is `7e2beb0ade0685ff331fa808273e00e6f832bd2c`; Build 81 Source Commit is `79a031a0a656b3ea486dcf28a0def5a1243576ba`.
-- Version `1.2 (81)` passed fresh focused/full verification, native parity, Archive, package analysis, Upload, and App Store Connect processing.
-- ASC Build `0df0161d-11df-42a3-af3a-81a79fda7719` is `VALID`, `INTERNAL_ONLY`, `IN_BETA_TESTING`, and included in `CueScore Internal Testers`.
-- Product Owner physical PASS is not recorded. First re-test final Player visibility, stable released scroll, and the final edit action.
+- Player sort、custom Delete dialog、success／blocked Notification CardのProduct Owner Physical PASSを記録する。
+- modalの全actionはResume／New Match／Cancelの3個。最下段CancelをBottom Navigationより上へ表示し、短いviewportではmodal内部scrollで到達可能にする。
+- modal／backdropはNavigationより前面で操作を所有し、open中のNavigation interactionをblockする。Navigation geometry、Resume／New Match touch yellow outline 0、keyboard neutral focusを維持する。
+- Full Node `596/596`、390×844 Visual、native parity、Release Simulator BuildをPASSした。Physical RCへuninstallなしで上書きし、LocalStorage前後byte identityを確認した。
+- GitHub baseline `1b0d38d26b84b6e4457ec3a1141d4ce1598ffd4e`を採用し、公式サイト先行commitを保持したまま未commit差分を競合なしで統合する。
+- Product source＋contract tests／verification scriptsを先にcommitし、Official／Documentation／Evidence／Visualを別commitとして`main`へpushする。
 
 ## Boundary
 
-- The next independent Gate is Product Owner physical iPhone re-test of TestFlight Version `1.2 (81)`.
+- Product Owner physical iPhone re-testはPASS。Accepted Product Source commitは`a0971212b13fa09ace7bbb2b0ab2571a0cd7497b`。
 - App Store eligibility requires an independently approved later build after physical PASS because Build 81 is immutable `INTERNAL_ONLY`.
 - Public Version 1.1 remains unchanged. App Store Version 1.2 does not exist.
 - External TestFlight, App Store Version creation, App Review, Release, metadata, screenshots, Privacy, CueScore Pro, price, and availability remain outside scope.
 
 ## STOP
 
-Stop after Build 81 becomes available through Internal TestFlight. Do not create App Store Version 1.2, use External TestFlight, submit for App Review, or release.
+Stop after two commits, GitHub push/read-back, and clean working-tree confirmation. Do not create Build 82, Archive, use TestFlight/App Store Connect, submit, or release.

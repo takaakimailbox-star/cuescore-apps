@@ -1,5 +1,51 @@
 # CueScore Apps Current State
 
+## Version 1.2 Build 81 Player UX Physical Acceptance / Source Formalization（2026年10月1日）
+
+- Product OwnerはPlayer List／Navigation、row／edit 1:1、Player Delete／Identity、正式sort、custom confirmation、success／blocked Notification、Interrupted Match modalの全3action／Cancel／Navigation clearance／focus／close後Home操作をPhysical RCでPASSした。
+- Version 1.2 Player UX Accepted Product Sourceはcommit `a0971212b13fa09ace7bbb2b0ab2571a0cd7497b`。新baseline `1b0d38d26b84b6e4457ec3a1141d4ce1598ffd4e`上へ競合なしで統合し、先行する公式サイト公開commitと3ファイルを保持した。
+- 統合はbaselineのみを更新し、product contentは変更していない。このため同一sourceのfocused `146/146`、Full Node `596/596`、native parity、Release Simulator Build、Physical RC Acceptanceを再利用し、再実行したとは扱わない。
+- Version `1.2`／Build `81`、cache identity `2.0-build81-resume-modal-nav-inset-v1`を維持。Build 82、Archive、Upload、TestFlight、App Store Connect、公開Version 1.1への操作は行っていない。
+- Evidence: `docs/implementation/CueScore_1.2_Build81_Player_UX_Physical_Acceptance_2026-10-01.md`。
+
+## Version 1.2 Build 81 Interrupted Match Modal Bottom Navigation Fix（2026年10月1日）
+
+- Physical RCで`中断中の試合があります`modalの最下段actionが固定Bottom Navigation背面へ入り、freezeのように感じる新規layout FAILを確認した。
+- source上のactionは`中断中の試合を再開`、`新しい試合を始める`、`キャンセル`の3個。隠れていたactionは`キャンセル`。処理freezeではなく、modal z-index `9200`がNavigation z-index `18000`より低く、bottom reserveが`18px + safe area`だけだったことが原因。
+- modalへ`Navigation 68px + 18px + safe area`のbottom inset、dynamic viewport基準のmax-height、内部縦scrollを追加。modal／backdropをz-index `18020`へ上げ、open中のNavigation pointer interactionをblockし、close時に解除する。Navigation geometryとResume／New Match yellow outline 0を維持した。
+- 390×844ではCancel bottom 738pt、Navigation top 776pt、gap 38pt、sheet→Navigation 18pt、horizontal overflow 0。全3action／dismiss／close後Home操作／touch yellow outline 0／keyboard neutral focusをPASS。
+- focused `146/146`、Full Node `596/596`、native parity、Release Simulator Build、`git diff --check`をPASS。source／native／built `index.html` SHA-256は`c1756eb31ca521437a085a7f4146d2c1f86ebc833d22623413eb259ae8027cd3`。
+- `CueScore RC 1.2`／RC Bundle ID／`1.2 (81)`をアンインストールなしで上書きinstallし、実機identityをread-back。RC LocalStorage database／WAL／SHMはinstall前後byte-identical、公開版変更0。
+- Product OwnerがPhysical RCで、全3action表示、Cancel dismiss、Bottom Navigation overlap 0、Resume／New Match yellow outline 0、modal close後Home操作をPASSした。
+- Gate: `INTERRUPTED MATCH MODAL BOTTOM NAVIGATION FIX / PRODUCT OWNER PHYSICAL PASS`。commit／push、Build 82、Archive、TestFlight、App Store Connect操作なし。Evidence: `docs/implementation/CueScore_1.2_Build81_Interrupted_Match_Modal_Bottom_Navigation_Fix_2026-10-01.md`。
+
+## Version 1.2 Build 81 Resume Match Modal Focus Fix（2026年10月1日）
+
+- Product OwnerはPlayer sort、custom Delete dialog、delete success notification、delete blocked notificationをPhysical RCでPASSした。
+- `中断中の試合があります`modalのResume tapにglobal yellow `:focus-visible`が残る新規UX findingを確認。modal表示時のResume initial focusとglobal focus ruleの組合せが原因だった。
+- Resume／New Matchの2 actionだけを対象に、touch／coarse pointerではoutline／shadow 0、keyboardではneutral `#171717` focusを維持した。Cancel、Player Search、global focus、button layout、transitionは変更していない。
+- focused `26/26`、Full Node `595/595`、390×844 Visual、native parity、device Build／sign／overwrite install、`git diff --check`をPASS。source／native／Physical RC `index.html` SHA-256は`249874810ded8272fc08bae3dfff560351595f9eb5fe80d92772570e6dd0165e`。
+- `CueScore RC 1.2`／`com.takaakimailboxstar.cuescoreapps.rc12`／`1.2 (81)`へuninstallなしで上書きinstall。RC LocalStorage database SHA-256は前後`948852ef207e003746f00f4fee0286d13a742dcc5b7a646d7dcae8967a139b0e`で一致。公開版変更0。
+- Gate: `RESUME MATCH MODAL FOCUS FIX INSTALLED TO PHYSICAL RC / PRODUCT OWNER RE-TEST REQUIRED`。commit／push、Build 82、Archive、TestFlight、App Store Connect操作なし。Evidence: `docs/implementation/CueScore_1.2_Build81_Resume_Match_Modal_Focus_Fix_2026-10-01.md`。
+
+## Version 1.2 Build 81 Player UX Finalization（2026年10月1日）
+
+- Official 105 / 106により、Player管理一覧を`Main → latest completed Match descending → registry registration order`へ統一。UUID tie-breakerなし、schema／migration変更なし。
+- Player Delete確認をcustom `alertdialog`の`キャンセル / 削除`へ置換し、success／blockedをneutral Player Notification Cardへ統一。既存全体toastとPlayer Delete / Identity / Match Sharing contractは変更していない。
+- row wrapper integrity、Player List Navigation gap 19pt、History Navigation gap 23ptを維持。390×844の8状態Visualでclipping／overlap／horizontal overflow 0。
+- Player focused `135/135`、Match Sharing `109/109`、Full Node `593/593`、native parity、Release Simulator BuildをPASS。
+- `CueScore RC 1.2`／RC Bundle ID／`1.2 (81)`をアンインストールなしで上書きinstall。RC LocalStorage SHA-256が前後一致し、公開版container変更0。
+- Gate: `PLAYER UX FINALIZATION INSTALLED TO PHYSICAL RC / PRODUCT OWNER PHYSICAL VERIFICATION REQUIRED`。commit／push、Build 82、Archive、TestFlight、App Store Connect操作なし。Evidence: `docs/implementation/CueScore_1.2_Build81_Player_UX_Finalization_2026-10-01.md`。
+
+## Version 1.2 Build 81 Player List Row Integrity Fix（2026年10月1日）
+
+- Product OwnerがPhysical RCでPlayer List Bottom Navigation overlap re-testをPASSした。一方、Player名rowsと鉛筆actionが分離する新規FAILを確認し、Player Delete physical verificationをSTOPした。
+- 原因は旧`revisePlayerList()`がnested情報buttonだけをwrapper外へ並べ替えていた製品共通regression。RC storageはPlayer 7、空名0、ID欠落0で、RC固有data破損ではない。Bottom Navigation fixとの因果はない。
+- 並べ替え単位をPlayer row wrapperへ修正。0／1／7／12 Playersでrow／info／edit 1:1、blank row 0、検索後対応、最終Player edit、Navigation gap 19ptをPASS。History gap 23ptも維持。
+- Player List／Navigation `20/20`、Player Delete `11/11`、Match Sharing `109/109`、combined focused `140/140`、native foundation `6/6`、Full Node `584/584`、native parity、Release Simulator Build、`git diff --check`をPASS。
+- `CueScore RC 1.2`／`com.takaakimailboxstar.cuescoreapps.rc12`／`1.2 (81)`をアンインストールなしで上書きinstall。RC LocalStorage database hash一致、Player 7／Match 2と`削除テストA/B`を保持。公開版変更0。
+- Gate: `IMPLEMENTATION FIX COMPLETE / PHYSICAL RC REFRESH COMPLETE / PRODUCT OWNER RE-TEST REQUIRED`。commit／push、Build 82、Archive、TestFlight、App Store Connectは未実施。Evidence: `docs/implementation/CueScore_1.2_Build81_Player_List_Row_Integrity_Fix_2026-10-01.md`。
+
 ## Version 1.2 Build 81 Player List Fix Internal TestFlight（2026年10月1日）
 
 - Build 80 physical FAILの修正をProduct Source Commit `7e2beb0ade0685ff331fa808273e00e6f832bd2c`、Documentation Commit `b1d40c3d429a0fd899e98367ce46036f8d7ad3f4`へ分離して正本化した。Build 81 Source Commitは`79a031a0a656b3ea486dcf28a0def5a1243576ba`。

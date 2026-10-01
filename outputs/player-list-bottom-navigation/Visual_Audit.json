@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T02:47:23.859Z",
+  "generatedAt": "2026-10-01T03:43:47.131Z",
   "viewport": {
     "width": 390,
     "height": 844
@@ -20,6 +20,10 @@
         "info": 0,
         "edit": 0
       },
+      "rowIntegrity": [],
+      "rowIntegrityPass": true,
+      "blankRows": 0,
+      "orphanControls": 0,
       "scrollOwner": {
         "id": "playerLibraryList",
         "overflowY": "auto",
@@ -54,6 +58,7 @@
       "finalEditTapTarget": null,
       "finalEditAboveNavigation": null,
       "horizontalOverflow": false,
+      "searchIntegrity": null,
       "scrollStable": true,
       "scrollTopAfterWait": 0,
       "finalEditOpened": null
@@ -68,6 +73,18 @@
         "info": 1,
         "edit": 1
       },
+      "rowIntegrity": [
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-01",
+          "editId": "player-bottom-inset-01",
+          "pass": true
+        }
+      ],
+      "rowIntegrityPass": true,
+      "blankRows": 0,
+      "orphanControls": 0,
       "scrollOwner": {
         "id": "playerLibraryList",
         "overflowY": "auto",
@@ -123,9 +140,17 @@
       "finalEditTapTarget": true,
       "finalEditAboveNavigation": true,
       "horizontalOverflow": false,
+      "searchIntegrity": null,
       "scrollStable": true,
       "scrollTopAfterWait": 0,
-      "finalEditOpened": true
+      "finalEditOpened": true,
+      "finalEditTarget": {
+        "expectedId": "player-bottom-inset-01",
+        "expectedName": "あおい",
+        "editorName": "あおい",
+        "title": "プレーヤー編集",
+        "pass": true
+      }
     },
     "7": {
       "viewport": {
@@ -137,13 +162,67 @@
         "info": 7,
         "edit": 7
       },
+      "rowIntegrity": [
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-01",
+          "editId": "player-bottom-inset-01",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-02",
+          "editId": "player-bottom-inset-02",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-03",
+          "editId": "player-bottom-inset-03",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-04",
+          "editId": "player-bottom-inset-04",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-05",
+          "editId": "player-bottom-inset-05",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-06",
+          "editId": "player-bottom-inset-06",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-07",
+          "editId": "player-bottom-inset-07",
+          "pass": true
+        }
+      ],
+      "rowIntegrityPass": true,
+      "blankRows": 0,
+      "orphanControls": 0,
       "scrollOwner": {
         "id": "playerLibraryList",
         "overflowY": "auto",
-        "scrollTop": 174,
-        "scrollHeight": 877,
-        "clientHeight": 703,
-        "maxScroll": 174,
+        "scrollTop": 0,
+        "scrollHeight": 484,
+        "clientHeight": 484,
+        "maxScroll": 0,
         "paddingBottom": "86px",
         "scrollPaddingBottom": "86px"
       },
@@ -159,42 +238,59 @@
         "x": 10,
         "y": 139,
         "width": 370,
-        "height": 705,
+        "height": 486,
         "right": 380,
-        "bottom": 844
+        "bottom": 625
       },
       "finalPlayerRow": {
         "x": 15,
-        "y": 308,
+        "y": 482,
         "width": 360,
-        "height": 57,
+        "height": 56,
         "right": 375,
-        "bottom": 365
+        "bottom": 538
       },
       "finalPlayer": {
         "x": 15,
-        "y": 701,
-        "width": 116.234375,
+        "y": 482,
+        "width": 316,
         "height": 56,
-        "right": 131.234375,
-        "bottom": 757
+        "right": 331,
+        "bottom": 538
       },
-      "finalPlayerVisualBottom": 757,
-      "finalPlayerGap": 19,
+      "finalPlayerVisualBottom": 538,
+      "finalPlayerGap": 238,
       "finalEdit": {
-        "x": 15,
-        "y": 308,
+        "x": 331,
+        "y": 482,
         "width": 44,
         "height": 56,
-        "right": 59,
-        "bottom": 364
+        "right": 375,
+        "bottom": 538
       },
       "finalEditTapTarget": true,
       "finalEditAboveNavigation": true,
       "horizontalOverflow": false,
+      "searchIntegrity": {
+        "rowCount": 1,
+        "infoCount": 1,
+        "editCount": 1,
+        "blankRows": 0,
+        "orphanControls": 0,
+        "infoId": "player-bottom-inset-01",
+        "editId": "player-bottom-inset-01",
+        "pass": true
+      },
       "scrollStable": true,
-      "scrollTopAfterWait": 174,
-      "finalEditOpened": true
+      "scrollTopAfterWait": 0,
+      "finalEditOpened": true,
+      "finalEditTarget": {
+        "expectedId": "player-bottom-inset-07",
+        "expectedName": "佐藤 美咲",
+        "editorName": "佐藤 美咲",
+        "title": "プレーヤー編集",
+        "pass": true
+      }
     },
     "12": {
       "viewport": {
@@ -206,13 +302,102 @@
         "info": 12,
         "edit": 12
       },
+      "rowIntegrity": [
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-01",
+          "editId": "player-bottom-inset-01",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-02",
+          "editId": "player-bottom-inset-02",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-03",
+          "editId": "player-bottom-inset-03",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-04",
+          "editId": "player-bottom-inset-04",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-05",
+          "editId": "player-bottom-inset-05",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-06",
+          "editId": "player-bottom-inset-06",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-07",
+          "editId": "player-bottom-inset-07",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-08",
+          "editId": "player-bottom-inset-08",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-09",
+          "editId": "player-bottom-inset-09",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-10",
+          "editId": "player-bottom-inset-10",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-11",
+          "editId": "player-bottom-inset-11",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-12",
+          "editId": "player-bottom-inset-12",
+          "pass": true
+        }
+      ],
+      "rowIntegrityPass": true,
+      "blankRows": 0,
+      "orphanControls": 0,
       "scrollOwner": {
         "id": "playerLibraryList",
         "overflowY": "auto",
-        "scrollTop": 739,
-        "scrollHeight": 1442,
+        "scrollTop": 66,
+        "scrollHeight": 769,
         "clientHeight": 703,
-        "maxScroll": 739,
+        "maxScroll": 66,
         "paddingBottom": "86px",
         "scrollPaddingBottom": "86px"
       },
@@ -234,35 +419,45 @@
       },
       "finalPlayerRow": {
         "x": 15,
-        "y": 28,
+        "y": 701,
         "width": 360,
-        "height": 57,
+        "height": 56,
         "right": 375,
-        "bottom": 85
+        "bottom": 757
       },
       "finalPlayer": {
         "x": 15,
         "y": 701,
-        "width": 116.234375,
+        "width": 316,
         "height": 56,
-        "right": 131.234375,
+        "right": 331,
         "bottom": 757
       },
       "finalPlayerVisualBottom": 757,
       "finalPlayerGap": 19,
       "finalEdit": {
-        "x": 15,
-        "y": 28,
+        "x": 331,
+        "y": 701,
         "width": 44,
         "height": 56,
-        "right": 59,
-        "bottom": 84
+        "right": 375,
+        "bottom": 757
       },
       "finalEditTapTarget": true,
       "finalEditAboveNavigation": true,
       "horizontalOverflow": false,
+      "searchIntegrity": {
+        "rowCount": 1,
+        "infoCount": 1,
+        "editCount": 1,
+        "blankRows": 0,
+        "orphanControls": 0,
+        "infoId": "player-bottom-inset-01",
+        "editId": "player-bottom-inset-01",
+        "pass": true
+      },
       "scrollStable": true,
-      "scrollTopAfterWait": 739,
+      "scrollTopAfterWait": 66,
       "keyboardEquivalent": {
         "viewportHeight": 560,
         "finalPlayerBottom": 473,
@@ -270,7 +465,14 @@
         "gap": 19,
         "pass": true
       },
-      "finalEditOpened": true
+      "finalEditOpened": true,
+      "finalEditTarget": {
+        "expectedId": "player-bottom-inset-12",
+        "expectedName": "渡辺 結菜",
+        "editorName": "渡辺 結菜",
+        "title": "プレーヤー編集",
+        "pass": true
+      }
     }
   },
   "history": {

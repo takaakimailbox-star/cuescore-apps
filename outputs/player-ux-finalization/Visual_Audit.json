@@ -1,0 +1,140 @@
+{
+  "generatedAt": "2026-10-01T06:08:10.927Z",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "screens": {
+    "formalSort": {
+      "names": [
+        "ゆな",
+        "しょう",
+        "かいと",
+        "あおい",
+        "テストc",
+        "テストd",
+        "テストe",
+        "テストf",
+        "たくみ",
+        "削除テストB",
+        "削除テストA"
+      ]
+    },
+    "latestUpdated": {
+      "names": [
+        "ゆな",
+        "テストf",
+        "しょう",
+        "かいと",
+        "あおい",
+        "テストc",
+        "テストd",
+        "テストe",
+        "たくみ",
+        "削除テストB",
+        "削除テストA"
+      ]
+    },
+    "bottom": {
+      "finalPlayerBottom": 757,
+      "navigationTop": 776,
+      "gap": 19,
+      "editTapTarget": {
+        "width": 44,
+        "height": 56
+      },
+      "pass": true
+    },
+    "deleteConfirmation": {
+      "buttons": [
+        "キャンセル",
+        "削除"
+      ],
+      "notice": null,
+      "noticeTitle": null,
+      "noticeBody": null,
+      "dialog": {
+        "x": 35,
+        "y": 326.25,
+        "width": 320,
+        "height": 191.5,
+        "right": 355,
+        "bottom": 517.75
+      },
+      "horizontalOverflow": false
+    },
+    "successNotice": {
+      "notice": {
+        "x": 16,
+        "y": 14,
+        "width": 358,
+        "height": 72.4375,
+        "right": 374,
+        "bottom": 86.4375
+      },
+      "noticeTitle": {
+        "x": 65,
+        "y": 28,
+        "width": 246,
+        "height": 21.59375,
+        "right": 311,
+        "bottom": 49.59375
+      },
+      "noticeBody": {
+        "x": 65,
+        "y": 53.59375,
+        "width": 246,
+        "height": 18.84375,
+        "right": 311,
+        "bottom": 72.4375
+      },
+      "dialog": null,
+      "horizontalOverflow": false
+    },
+    "blockedNotice": {
+      "notice": {
+        "x": 16,
+        "y": 14,
+        "width": 358,
+        "height": 110.125,
+        "right": 374,
+        "bottom": 124.125
+      },
+      "noticeTitle": {
+        "x": 65,
+        "y": 28,
+        "width": 246,
+        "height": 21.59375,
+        "right": 311,
+        "bottom": 49.59375
+      },
+      "noticeBody": {
+        "x": 65,
+        "y": 53.59375,
+        "width": 246,
+        "height": 56.53125,
+        "right": 311,
+        "bottom": 110.125
+      },
+      "dialog": null,
+      "horizontalOverflow": false
+    },
+    "registrationOrder": {
+      "names": [
+        "テストc",
+        "テストd",
+        "テストe",
+        "テストf"
+      ]
+    }
+  },
+  "result": {
+    "formalSortPass": true,
+    "registrationOrderPass": true,
+    "latestUpdatePass": true,
+    "bottomNavigationPass": true,
+    "japaneseConfirmationPass": true,
+    "successNoticePass": true,
+    "blockedNoticePass": true
+  }
+}
