@@ -1,10 +1,10 @@
-const APP_VERSION = "2.0-build81-resume-modal-nav-inset-v1";
+const APP_VERSION = "2.0-build82-app-store-eligible-rc-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-build81-resume-modal-nav-inset-v1",
-  "./player-library-order-v1.js?v=2.0-build81-resume-modal-nav-inset-v1",
+  "./demo-data.js?v=2.0-build82-app-store-eligible-rc-v1",
+  "./player-library-order-v1.js?v=2.0-build82-app-store-eligible-rc-v1",
   "./vendor/fflate-0.8.3.js",
   "./vendor/qrcodegen-1.8.0.js",
   "./manifest.webmanifest",
@@ -20,7 +20,7 @@ const APP_SHELL = [
   "./analysis-build4.css",
   "./player-detail-build6.js",
   "./player-detail-build6.css",
-  "./ui-revision-v12.js?v=2.0-build81-resume-modal-nav-inset-v1",
+  "./ui-revision-v12.js?v=2.0-build82-app-store-eligible-rc-v1",
   "./final-ui-build18.js",
   "./ui-revision-v12.css?v=2.0-build60-free-pro-foundation",
   "./navigation-shell-phase1.css?v=2.0-build81-player-list-bottom-inset-v1",
