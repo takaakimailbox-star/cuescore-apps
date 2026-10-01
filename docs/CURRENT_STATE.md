@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Version 1.2 Build 82 App Store Eligible / Internal TestFlight（2026年10月2日）
+
+- Accepted product content commit `a0971212b13fa09ace7bbb2b0ab2571a0cd7497b`を維持し、Build number／Build-linked cache identity／対応test expectationだけをBuild 82 Source Commit `7c7ba922c2ba0603757aa1a4f832324b5833dafe`として正本化した。Version `1.2`／Build `82`／Bundle ID `com.takaakimailboxstar.cuescoreapps`、cache identity `2.0-build82-app-store-eligible-rc-v1`。
+- focused `180/180`、Full Node `596/596`、native parity、`git diff --check`、Release Simulator Build、Release device ArchiveをPASS。App／dSYM UUID `632DAB3A-DFD1-3A32-B10F-B27CE6B0EB5D`、executable SHA-256 `bf535e72dc6da33c6602bd80782017e17b3a3166aaca1199f09f82a6ef3519f4`、IPA SHA-256 `a97220a36d4ced3f423bbfe9304e1eb728c6e89f8b32cbf38748dd943ed6b207`、Archive／IPA `.storekit` 0。
+- `TestFlight & App Store`通常distributionを使用し、`testFlightInternalTestingOnly`を含まないExportOptionsをUpload前にread-back。Apple validation error 0、Upload PASS。ASC Build ID `b06e47f5-74eb-4e01-b4b3-7a3a2ca3c1e1`は`VALID`／`APP_STORE_ELIGIBLE`／`usesNonExemptEncryption=false`。
+- `CueScore Internal Testers`はinternal／全Build accessでBuild 82を含む。Internal stateは`IN_BETA_TESTING`、Product OwnerはTestFlightから`1.2 (82)`を取得可能。Product Owner final smokeはPENDINGで、自動的に実機PASSとは記録しない。
+- 公開Version `1.1`は`READY_FOR_SALE`のまま変更0。App Store Version `1.2`は未作成。External TestFlight、App Review、Release、metadata、screenshots、Privacy、CueScore Pro、price／availabilityは未操作。
+- Gate: `BUILD 82 VALID / APP_STORE_ELIGIBLE / INTERNAL TESTFLIGHT AVAILABLE / PRODUCT OWNER FINAL SMOKE PENDING`。Evidence: `docs/implementation/CueScore_1.2_Build82_App_Store_Eligible_Internal_TestFlight_2026-10-02.md`。
+
 ## Version 1.2 Build 81 Player UX Physical Acceptance / Source Formalization（2026年10月1日）
 
 - Product OwnerはPlayer List／Navigation、row／edit 1:1、Player Delete／Identity、正式sort、custom confirmation、success／blocked Notification、Interrupted Match modalの全3action／Cancel／Navigation clearance／focus／close後Home操作をPhysical RCでPASSした。

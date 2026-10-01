@@ -1,42 +1,37 @@
 # CueScore Current Report
 
 - App: CueScore Apps
-- Decision ID: `CUESCORE-1.2-PLAYER-UX-FORMALIZE-20261001`
-- Date: 2026-10-01
-- Baseline: `1b0d38d26b84b6e4457ec3a1141d4ce1598ffd4e`
+- Decision ID: `CUESCORE-1.2-BUILD82-APP-STORE-ELIGIBLE-20261002`
+- Date: 2026-10-02
+- Baseline: `b78bdb5e00ad8cb95361af0751fb219a3b0c7493`
 - Player UX Accepted Product Source Commit: `a0971212b13fa09ace7bbb2b0ab2571a0cd7497b`
 - Player List Fix Product Source Commit: `7e2beb0ade0685ff331fa808273e00e6f832bd2c`
 - Player List Fix Documentation Commit: `b1d40c3d429a0fd899e98367ce46036f8d7ad3f4`
 - Build 81 Source Commit: `79a031a0a656b3ea486dcf28a0def5a1243576ba`
-- Gate result: `PLAYER UX / INTERRUPTED MATCH MODAL PHYSICAL ACCEPTED / SOURCE FORMALIZATION`
+- Build 82 Source Commit: `7c7ba922c2ba0603757aa1a4f832324b5833dafe`
+- Gate result: `BUILD 82 VALID / APP_STORE_ELIGIBLE / INTERNAL TESTFLIGHT AVAILABLE / PRODUCT OWNER FINAL SMOKE PENDING`
 
 ## Result
 
-Player sort、日本語Delete confirmation、success／blocked Notification CardはProduct Owner Physical PASS。後続Physical RCでInterrupted Match modalの最下段Cancelが固定Bottom Navigation背面へ隠れるfindingを確認した。app freezeではなく、低いmodal z-indexとNavigation reserve不足によりdismiss導線が見えず、backdrop blockがfreezeのように感じられた。modalへNavigation 68px＋18px＋safe area reserve、内部scroll、前面interaction ownershipを追加し、focus fixとglobal contractsを保護した。
-
-GitHub `main`が公式サイト公開commitで1 commit先行したため、新baseline `1b0d38d...`へfast-forward統合した。Player UX patch hashは統合前後で一致し、競合0。公式サイト3ファイルを保持し、Product Sourceを`a0971212...`として固定した。
+Accepted Product Content `a0971212...`を変更せず、Build number、Build-linked cache identity、対応test expectationだけをBuild 82へ同期した。通常`TestFlight & App Store`経路を使用し、Internal Testing OnlyをOFFにした。Build 82はApple processing後に`VALID`／`APP_STORE_ELIGIBLE`となり、Internal TestFlightへ配布された。
 
 ## Evidence
 
-- Modal / Player Search / Player UX / Player Delete / Match Sharing focused: `146 PASS / 0 FAIL / 0 SKIPPED`
+- Version / cache / Player UX / Player Delete / Interrupted Match Modal / Match Sharing / native foundation focused: `180 PASS / 0 FAIL / 0 SKIPPED`
 - Player Delete dedicated: `11 PASS / 0 FAIL / 0 SKIPPED`
 - Match Sharing focused: `109 PASS / 0 FAIL / 0 SKIPPED`
 - Combined Player / Match Sharing / Navigation focused: `135 PASS / 0 FAIL / 0 SKIPPED`
 - Native foundation: `6 PASS / 0 FAIL / 0 SKIPPED`
 - Full Node: `596 PASS / 0 FAIL / 0 SKIPPED`
-- 上記automated evidenceは同一product contentの直前fresh結果を再利用した。baseline統合とcommit操作でproduct contentを変更していないため、本Gateでは再実行していない。
-- Native parity: PASS; source／native-web／iOS public／Release Simulator `index.html` SHA-256 `c1756eb31ca521437a085a7f4146d2c1f86ebc833d22623413eb259ae8027cd3`
-- Visual: 390×844全3action、Cancel bottom 738pt、Navigation top 776pt、gap 38pt、modal internal scroll contract、touch yellow outline 0、keyboard neutral focus、全transition、close後Home操作、horizontal overflow 0 PASS
-- Release Simulator Build: PASS; Bundle ID `com.takaakimailboxstar.cuescoreapps`; Version `1.2 (81)`; `.storekit` 0
-- Physical RC Build／sign／overwrite install: PASS; `CueScore RC 1.2`; RC Bundle ID; Version `1.2 (81)`; LocalStorage DB／WAL／SHM byte-identical
-- Product Owner Physical: 全3action表示、Cancel dismiss、Bottom Navigation overlap 0、Resume／New Match yellow outline 0、modal close後Home操作 `5/5 PASS`
+- Native parity: PASS; source／native-web／iOS public／Archive／IPA `index.html` SHA-256 `8f3cc2784e5cc835c6431d10ca866b1023751355ff97e3bb3bf65d968a19372d`
+- Release Simulator Build／Release device Archive: PASS; Bundle ID `com.takaakimailboxstar.cuescoreapps`; Version `1.2 (82)`; `.storekit` 0
 - `git diff --check`: PASS
-- Release device Archive: PASS; App / dSYM UUID `632DAB3A-DFD1-3A32-B10F-B27CE6B0EB5D`; executable SHA-256 `b5c588e33b6c6a3d00d217e4a513764b58aa028eff987541667bbc8ac37e4e82`
-- IPA SHA-256: `d83ed200537c384adbf88ca8464d8a74ea8ef216a35f9433c42d32798e999522`; `.storekit` 0
-- Apple Upload / processing: PASS; Build 81 `VALID`; `usesNonExemptEncryption=false`; Internal `IN_BETA_TESTING`; audience `INTERNAL_ONLY`
-- Internal TestFlight: `CueScore Internal Testers` includes Build 81; tester count 1
+- Release device Archive: PASS; App / dSYM UUID `632DAB3A-DFD1-3A32-B10F-B27CE6B0EB5D`; executable SHA-256 `bf535e72dc6da33c6602bd80782017e17b3a3166aaca1199f09f82a6ef3519f4`
+- IPA SHA-256: `a97220a36d4ced3f423bbfe9304e1eb728c6e89f8b32cbf38748dd943ed6b207`; `.storekit` 0
+- Apple validation／Upload／processing: PASS; Build 82 ID `b06e47f5-74eb-4e01-b4b3-7a3a2ca3c1e1`; `VALID`; `usesNonExemptEncryption=false`; Internal `IN_BETA_TESTING`; audience `APP_STORE_ELIGIBLE`
+- Internal TestFlight: `CueScore Internal Testers` includes Build 82; tester count 1
 - Boundary: public Version 1.1 unchanged; App Store Version 1.2 does not exist; External TestFlight / App Review / Release not started
 
 ## Boundary / STOP
 
-Product Owner Physical AcceptanceとAccepted Product Sourceを正式記録する。Documentation／Evidenceは本ファイルを含む第2 commitへ収載し、push後のremote SHA／clean確認はGate完了報告でread-backする。Build 82、Archive、TestFlight、App Store Connect、Releaseへ進まない。
+Build 82 App Store Eligible／Internal TestFlight Evidenceを正式記録する。Product Owner final smokeはPENDING。App Store Version 1.2作成、External TestFlight、App Review、Releaseへ進まない。
