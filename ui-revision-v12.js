@@ -65,11 +65,12 @@
   function revisePlayerList(){
     const root=document.getElementById("playerLibraryOverlay"),list=document.getElementById("playerLibraryList");if(!root?.classList.contains("player-management-formal-v1")||!list)return;
     const players=typeof window.readPlayerLibrary==="function"?window.readPlayerLibrary():[];
-    const latest=new Map(players.map(player=>[String(player.id),Math.max(0,...(window.recordsForRegisteredPlayer?.(player)||[]).map(time))]));
-    const order=[...players].sort((a,b)=>Number(b.isPrimary===true)-Number(a.isPrimary===true)||(latest.get(String(b.id))||0)-(latest.get(String(a.id))||0)||stable(a.id,b.id));
-    const current=[...list.querySelectorAll("[data-stats-player]")],wanted=order.map(player=>String(player.id)).filter(id=>current.some(row=>String(row.dataset.statsPlayer)===id));
-    if(current.map(row=>String(row.dataset.statsPlayer)).join("|")===wanted.join("|"))return;
-    const rows=new Map(current.map(row=>[String(row.dataset.statsPlayer),row]));wanted.forEach(id=>list.appendChild(rows.get(id)));
+    const order=window.CueScorePlayerLibraryOrderV1?.orderPlayers(players,player=>window.recordsForRegisteredPlayer?.(player)||[])||players;
+    const current=[...list.querySelectorAll(":scope > .player-management-row-v1")];
+    const playerId=row=>String(row.querySelector("[data-stats-player]")?.dataset.statsPlayer||"");
+    const wanted=order.map(player=>String(player.id)).filter(id=>current.some(row=>playerId(row)===id));
+    if(current.map(playerId).join("|")===wanted.join("|"))return;
+    const rows=new Map(current.map(row=>[playerId(row),row]));wanted.forEach(id=>list.appendChild(rows.get(id)));
   }
   new MutationObserver(revisePlayerList).observe(document.getElementById("playerLibraryList"),{childList:true});
 

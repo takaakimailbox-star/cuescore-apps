@@ -5,6 +5,7 @@ import test from "node:test";
 const html=readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const css=readFileSync(new URL("../navigation-shell-phase1.css",import.meta.url),"utf8");
 const js=readFileSync(new URL("../navigation-shell-phase1.js",import.meta.url),"utf8");
+const revision=readFileSync(new URL("../ui-revision-v12.js",import.meta.url),"utf8");
 
 test("Player root reserves Bottom Navigation and Safe Area on its real scroll owner",()=>{
   assert.match(html,/class="player-library-main" id="playerLibraryMain"[\s\S]*?class="player-library-list" id="playerLibraryList"/);
@@ -29,4 +30,11 @@ test("History keeps the same fixed-navigation clearance on its real scroll owner
 test("the fixed Bottom Navigation geometry is unchanged",()=>{
   assert.match(css,/:root\{--cue-phase1-nav-height:68px\}/);
   assert.match(css,/\.cue-phase1-tab-bar\{[\s\S]*?position:fixed;z-index:18000[\s\S]*?min-height:calc\(var\(--cue-phase1-nav-height\) \+ env\(safe-area-inset-bottom\)\)/);
+});
+
+test("Player ordering keeps each information and edit action inside one registered Player row",()=>{
+  assert.match(revision,/querySelectorAll\(":scope > \.player-management-row-v1"\)/);
+  assert.match(revision,/const playerId=row=>String\(row\.querySelector\("\[data-stats-player\]"\)/);
+  assert.match(revision,/wanted\.forEach\(id=>list\.appendChild\(rows\.get\(id\)\)\)/);
+  assert.doesNotMatch(revision,/const current=\[\.\.\.list\.querySelectorAll\("\[data-stats-player\]"\)\]/);
 });

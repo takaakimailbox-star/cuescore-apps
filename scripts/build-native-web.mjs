@@ -18,6 +18,7 @@ const files = [
   "player-detail-build8.css",
   "monetization-v1.css",
   "player-detail-build6.js",
+  "player-library-order-v1.js",
   "ui-revision-v12.js",
   "final-ui-build18.js",
   "navigation-shell-phase1.js",

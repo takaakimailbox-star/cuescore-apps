@@ -92,6 +92,30 @@ test("new-match choice provides resume, replace and cancel branches",()=>{
   assert.match(html,/cueDisciplineSwitcherV1"\)\?\.addEventListener\("click"[\s\S]*?openInProgressChoiceV1\(button\)[\s\S]*?,true\)/);
 });
 
+test("resume choice removes yellow touch focus only from its two action buttons",()=>{
+  assert.match(html,/:where\(button, a, input, select, textarea, \[tabindex\]\):focus-visible\s*\{\s*outline: 3px solid #ffd54a !important/);
+  assert.match(html,/\.cue-in-progress-choice-v1 :is\(#cueInProgressResumeV1,#cueInProgressNewV1\):focus-visible\s*\{\s*outline:3px solid #171717!important/);
+  assert.match(html,/@media \(hover:none\) and \(pointer:coarse\)\{\s*\.cue-in-progress-choice-v1 :is\(#cueInProgressResumeV1,#cueInProgressNewV1\):is\(:focus,:focus-visible\)\{\s*outline:none!important;\s*outline-offset:0!important;\s*box-shadow:none!important/);
+  assert.doesNotMatch(html,/\.cue-in-progress-choice-v1 :is\([^)]*cueInProgressCancelV1[^)]*\):is\(:focus,:focus-visible\)/);
+});
+
+test("resume choice keeps accessible initial focus and both action transitions",()=>{
+  assert.match(html,/requestAnimationFrame\(\(\)=>el\("cueInProgressResumeV1"\)\?\.focus\(\)\)/);
+  assert.match(html,/cueInProgressResumeV1"\)\?\.addEventListener\("click",resumeInProgressFromHomeV1\)/);
+  assert.match(html,/cueInProgressNewV1"\)\?\.addEventListener\("click",\(\)=>\{[\s\S]*?closeInProgressChoiceV1\(\)[\s\S]*?clearInProgressMatchV1\(\)[\s\S]*?button\.click\(\)/);
+  assert.match(html,/\.cue-in-progress-choice-v1 button\{min-height:48px;border:1px solid #171717;border-radius:10px/);
+});
+
+test("resume choice clears the fixed Bottom Navigation and scrolls internally when needed",()=>{
+  assert.match(html,/\.cue-in-progress-choice-v1\{position:fixed;z-index:18020;[^}]*padding:18px 14px calc\(var\(--cue-phase1-nav-height,68px\) \+ 18px \+ env\(safe-area-inset-bottom\)\)/);
+  assert.match(html,/\.cue-in-progress-choice-v1>section\{[^}]*max-height:calc\(100dvh - var\(--cue-phase1-nav-height,68px\) - env\(safe-area-inset-top\) - env\(safe-area-inset-bottom\) - 36px\)[^}]*overflow-y:auto[^}]*overscroll-behavior:contain/);
+  assert.match(html,/<button id="cueInProgressResumeV1"[^>]*>中断中の試合を再開<\/button>[\s\S]*?<button id="cueInProgressNewV1"[^>]*>新しい試合を始める<\/button>[\s\S]*?<button id="cueInProgressCancelV1"[^>]*>キャンセル<\/button>/);
+  assert.match(html,/cueInProgressCancelV1"\)\?\.addEventListener\("click",closeInProgressChoiceV1\)/);
+  assert.match(html,/function openInProgressChoiceV1\(button\)[\s\S]*?document\.body\.classList\.add\("cue-in-progress-choice-visible-v1"\)/);
+  assert.match(html,/function closeInProgressChoiceV1\(\)[\s\S]*?document\.body\.classList\.remove\("cue-in-progress-choice-visible-v1"\)/);
+  assert.match(html,/body\.cue-in-progress-choice-visible-v1 \.cue-phase1-tab-bar,\s*body\.cue-in-progress-choice-visible-v1 \.cue-phase1-tab-bar \*\{pointer-events:none!important\}/);
+});
+
 test("all six disciplines have existing terminology for the Home card",()=>{
   for(const label of ["Rotation","9-Ball","10-Ball","14-1","JPA 9-Ball","3 Cushion","目標点","Race to","SL / Race","持ち点"]){
     assert.match(html,new RegExp(label.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")));

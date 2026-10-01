@@ -21,8 +21,11 @@ for(const required of [
   "現在選択中",
   "最終使用",
   "recordsForRegisteredPlayer(player)",
-  "playerLibrarySortV1 === \"name\""
+  "CueScorePlayerLibraryOrderV1?.orderPlayers",
+  "formalOrderIndex"
 ]) assert.ok(formal.includes(required),`formal Player Library behavior missing: ${required}`);
+assert.doesNotMatch(formal,/localeCompare\(String\(b\.player\.id\)|localeCompare\(String\(a\.player\.id\)/,
+  "formal management order must not use Player ID as a tie-breaker");
 assert.ok(!formal.includes("player-primary-pin-v2"),"main Player must not overlay a pin on the avatar");
 
 assert.match(html,/openPlayerLibrary = function\(target\)/);

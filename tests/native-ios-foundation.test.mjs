@@ -27,8 +27,8 @@ test("iOS target is iPhone-only, portrait-only, version 1.2 build 81", () => {
   assert.match(html, /const CUESCORE_APP_VERSION = "1\.2";/);
   assert.match(html, /const RELEASE_LABEL = 'Version 1\.2';/);
   assert.match(html, /const DISPLAY_VERSION = 'version 1\.2';/);
-  assert.match(serviceWorker, /const APP_VERSION = "2\.0-build81-player-list-bottom-inset-v1";/);
-  assert.match(html, /const PWA_VERSION = "2\.0-build81-player-list-bottom-inset-v1";/);
+  assert.match(serviceWorker, /const APP_VERSION = "2\.0-build81-resume-modal-nav-inset-v1";/);
+  assert.match(html, /const PWA_VERSION = "2\.0-build81-resume-modal-nav-inset-v1";/);
 });
 
 test("Capacitor foundation uses bundled assets without a remote server URL", () => {

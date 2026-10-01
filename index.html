@@ -197,6 +197,138 @@
       opacity: .88;
     }
 
+    .player-delete-notice-v1 {
+      position: fixed;
+      z-index: 20040;
+      top: calc(14px + env(safe-area-inset-top));
+      left: 50%;
+      display: grid;
+      grid-template-columns: 24px minmax(0,1fr) 44px;
+      width: min(calc(100vw - 32px), 358px);
+      min-height: 72px;
+      padding: 13px 8px 13px 14px;
+      transform: translateX(-50%);
+      border: 1px solid #D1D1D6;
+      border-radius: 16px;
+      background: #FFFFFF;
+      color: #1C1C1E;
+      box-shadow: 0 10px 28px rgba(0,0,0,.14);
+      box-sizing: border-box;
+      align-items: start;
+      column-gap: 10px;
+    }
+
+    .player-delete-notice-v1[hidden] { display: none; }
+    .player-delete-notice-icon-v1 {
+      display: grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      margin-top: 1px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      color: #248A3D;
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1;
+      box-sizing: border-box;
+    }
+    .player-delete-notice-v1.is-blocked .player-delete-notice-icon-v1 { color: #B25000; }
+    .player-delete-notice-copy-v1 { min-width: 0; }
+    .player-delete-notice-copy-v1 strong,
+    .player-delete-notice-copy-v1 span {
+      display: block;
+      width: 100%;
+      overflow-wrap: anywhere;
+      text-align: left;
+    }
+    .player-delete-notice-copy-v1 strong {
+      color: #1C1C1E;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+    .player-delete-notice-copy-v1 span {
+      margin-top: 4px;
+      color: #636366;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .player-delete-notice-close-v1 {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      margin-top: -9px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #636366;
+      font: inherit;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .player-delete-confirm-v1 {
+      position: fixed;
+      z-index: 20050;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: max(20px,env(safe-area-inset-top)) 20px max(20px,env(safe-area-inset-bottom));
+      background: rgba(0,0,0,.34);
+      box-sizing: border-box;
+    }
+    .player-delete-confirm-v1[hidden] { display: none; }
+    .player-delete-confirm-card-v1 {
+      width: min(100%,320px);
+      padding: 22px 20px 18px;
+      border: 1px solid #D1D1D6;
+      border-radius: 20px;
+      background: #FFFFFF;
+      color: #1C1C1E;
+      box-shadow: 0 22px 54px rgba(0,0,0,.22);
+      box-sizing: border-box;
+    }
+    .player-delete-confirm-card-v1 h2 {
+      margin: 0;
+      color: #1C1C1E;
+      font-size: 20px;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+    .player-delete-confirm-card-v1 p {
+      margin: 12px 0 20px;
+      color: #636366;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .player-delete-confirm-actions-v1 {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 10px;
+    }
+    .player-delete-confirm-actions-v1 button {
+      min-height: 48px;
+      border: 1px solid #D1D1D6;
+      border-radius: 12px;
+      background: #FFFFFF;
+      color: #1C1C1E;
+      font: inherit;
+      font-size: 16px;
+      font-weight: 750;
+    }
+    .player-delete-confirm-actions-v1 .is-destructive {
+      border-color: #D70015;
+      background: #FFFFFF;
+      color: #D70015;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .player-delete-notice-v1 { animation: none; }
+    }
+
     .toast.rack-transition-toast-v1 {
       z-index: 20020;
       flex-direction: column;
@@ -8655,7 +8787,8 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build81-player-list-bottom-inset-v1"></script>
+  <script src="./demo-data.js?v=2.0-build81-resume-modal-nav-inset-v1"></script>
+  <script src="./player-library-order-v1.js?v=2.0-build81-resume-modal-nav-inset-v1"></script>
   <script src="./vendor/fflate-0.8.3.js"></script>
   <script src="./vendor/qrcodegen-1.8.0.js"></script>
   <script src="./match-sharing-validation-v1.js"></script>
@@ -8787,6 +8920,44 @@ body {
       toast.classList.remove("show");
       setTimeout(() => toast.remove(), 220);
     }, 1900);
+  }
+
+  let playerDeleteNoticeTimerV1 = null;
+  function showPlayerDeleteNoticeV1(kind, title, message) {
+    document.querySelector(".player-delete-notice-v1")?.remove();
+    if (playerDeleteNoticeTimerV1) clearTimeout(playerDeleteNoticeTimerV1);
+    const blocked = kind === "blocked";
+    const notice = document.createElement("section");
+    notice.className = `player-delete-notice-v1 ${blocked ? "is-blocked" : "is-success"}`;
+    notice.setAttribute("role", blocked ? "alert" : "status");
+    notice.setAttribute("aria-live", blocked ? "assertive" : "polite");
+    notice.setAttribute("aria-atomic", "true");
+    const icon = document.createElement("span");
+    icon.className = "player-delete-notice-icon-v1";
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = blocked ? "!" : "✓";
+    const copy = document.createElement("span");
+    copy.className = "player-delete-notice-copy-v1";
+    const heading = document.createElement("strong");
+    heading.textContent = String(title || "");
+    const body = document.createElement("span");
+    body.textContent = String(message || "");
+    copy.append(heading, body);
+    const close = document.createElement("button");
+    close.className = "player-delete-notice-close-v1";
+    close.type = "button";
+    close.setAttribute("aria-label", "通知を閉じる");
+    close.textContent = "×";
+    const dismiss = () => {
+      if (playerDeleteNoticeTimerV1) clearTimeout(playerDeleteNoticeTimerV1);
+      playerDeleteNoticeTimerV1 = null;
+      notice.remove();
+    };
+    close.addEventListener("click", dismiss);
+    notice.append(icon, copy, close);
+    document.body.appendChild(notice);
+    if (!blocked) playerDeleteNoticeTimerV1 = setTimeout(dismiss, 1200);
+    return notice;
   }
 
   function showRackStartToastV1(rackNumber, breaker) {
@@ -11417,7 +11588,53 @@ let matchRecordsRawCacheV152 = null;
     });
   }
 
-  function deletePlayerByIdV1(playerId) {
+  function showPlayerDeleteConfirmationV1(player, onConfirm) {
+    document.getElementById("playerDeleteConfirmV1")?.remove();
+    const origin = document.activeElement;
+    const editorOverlay = el("playerLibraryOverlay");
+    const overlay = document.createElement("div");
+    overlay.id = "playerDeleteConfirmV1";
+    overlay.className = "player-delete-confirm-v1";
+    overlay.setAttribute("role", "alertdialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-labelledby", "playerDeleteConfirmTitleV1");
+    overlay.setAttribute("aria-describedby", "playerDeleteConfirmBodyV1");
+    overlay.innerHTML = `<div class="player-delete-confirm-card-v1"><h2 id="playerDeleteConfirmTitleV1"></h2><p id="playerDeleteConfirmBodyV1">このプレーヤーを削除しても、過去の試合履歴は残ります。</p><div class="player-delete-confirm-actions-v1"><button type="button" data-player-delete-cancel>キャンセル</button><button class="is-destructive" type="button" data-player-delete-confirm>削除</button></div></div>`;
+    overlay.querySelector("h2").textContent = `「${player.name}」を削除しますか？`;
+    let settled = false;
+    const close = () => {
+      if (settled) return;
+      settled = true;
+      document.removeEventListener("keydown", onKeydown, true);
+      editorOverlay?.removeAttribute("inert");
+      overlay.remove();
+      origin?.focus?.({preventScroll:true});
+    };
+    const confirmDelete = () => {
+      if (settled) return;
+      settled = true;
+      document.removeEventListener("keydown", onKeydown, true);
+      editorOverlay?.removeAttribute("inert");
+      overlay.remove();
+      onConfirm?.();
+    };
+    const onKeydown = event => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        close();
+      }
+    };
+    overlay.querySelector("[data-player-delete-cancel]").addEventListener("click", close);
+    overlay.querySelector("[data-player-delete-confirm]").addEventListener("click", confirmDelete, {once:true});
+    editorOverlay?.setAttribute("inert", "");
+    document.body.appendChild(overlay);
+    document.addEventListener("keydown", onKeydown, true);
+    requestAnimationFrame(() => overlay.querySelector("[data-player-delete-cancel]")?.focus());
+    return overlay;
+  }
+
+  function deletePlayerByIdV1(playerId, options) {
+    options = options || {};
     const player = readPlayerLibrary().find(p => String(p.id) === String(playerId));
     if (!player) return false;
     const activeState = currentGameSessionIdV104 && !gameEnded && !currentGameRecordSaved
@@ -11428,13 +11645,20 @@ let matchRecordsRawCacheV152 = null;
       [1, 2].some(side => String(state?.selectedRegisteredPlayer?.[side] || "") === String(player.id))
     );
     if (isInProgressParticipant) {
-      showToast(
+      showPlayerDeleteNoticeV1(
+        "blocked",
         "プレーヤーを削除できません",
         "このプレーヤーは中断中の試合で使用されています。試合を終了または破棄してから削除してください。"
       );
       return false;
     }
-    if (!confirm(`「${player.name}」を削除しますか？\n\nこのプレーヤーを削除しても、過去の試合履歴は残ります。`)) return false;
+    if (options.confirmed !== true) {
+      showPlayerDeleteConfirmationV1(player, () => {
+        if (!deletePlayerByIdV1(player.id, {confirmed:true})) return;
+        showPlayerLibraryMain();
+      });
+      return false;
+    }
     createDestructiveBackupV132(
       "delete-player",
       { deletedPlayerId: String(player.id), deletedPlayerName: player.name, backupScope: "deleted-player-only" },
@@ -11452,13 +11676,13 @@ let matchRecordsRawCacheV152 = null;
       if (rangeInput) rangeInput.value = String(raceValueToStep(120));
     });
     refreshAfterDestructiveChangeV132("player-deleted");
-    showToast("プレーヤーを削除しました", "過去の試合履歴は保持されています");
+    showPlayerDeleteNoticeV1("success", "プレーヤーを削除しました", "過去の試合履歴は保持されています");
     return true;
   }
 
   function deletePlayerEditor() {
-    if (!editingPlayerId || !deletePlayerByIdV1(editingPlayerId)) return;
-    showPlayerLibraryMain();
+    if (!editingPlayerId) return;
+    deletePlayerByIdV1(editingPlayerId);
   }
   window.deleteCueScorePlayerV1 = deletePlayerByIdV1;
 
@@ -13227,6 +13451,7 @@ let matchRecordsRawCacheV152 = null;
     const dialog=el("cueInProgressChoiceV1");
     dialog?.classList.add("hidden");
     dialog?.setAttribute("aria-hidden","true");
+    document.body.classList.remove("cue-in-progress-choice-visible-v1");
     pendingNewMatchDisciplineButtonV1=null;
   }
   function openInProgressChoiceV1(button){
@@ -13234,6 +13459,7 @@ let matchRecordsRawCacheV152 = null;
     const dialog=el("cueInProgressChoiceV1");
     dialog?.classList.remove("hidden");
     dialog?.setAttribute("aria-hidden","false");
+    document.body.classList.add("cue-in-progress-choice-visible-v1");
     requestAnimationFrame(()=>el("cueInProgressResumeV1")?.focus());
   }
   function resumeInProgressFromHomeV1(){
@@ -16754,6 +16980,11 @@ let matchRecordsRawCacheV152 = null;
     if (!list) return;
     const query = (el("playerLibrarySearch")?.value || "").trim().toLocaleLowerCase("ja");
     const allPlayers = readPlayerLibrary();
+    const formalOrder = window.CueScorePlayerLibraryOrderV1?.orderPlayers(
+      allPlayers,
+      player => recordsForRegisteredPlayer(player)
+    ) || allPlayers.slice();
+    const formalOrderIndex = new Map(formalOrder.map((player,index)=>[String(player.id),index]));
     const playerRows = allPlayers.map(player => {
       const records = recordsForRegisteredPlayer(player);
       return {player, records, latest: records[0] || null};
@@ -16767,11 +16998,8 @@ let matchRecordsRawCacheV152 = null;
           return (b.player.lastUsed || b.player.updatedAt || b.player.createdAt || 0) -
             (a.player.lastUsed || a.player.updatedAt || a.player.createdAt || 0);
         }
-        if (playerLibrarySortV1 === "name") {
-          return a.player.name.localeCompare(b.player.name, "ja");
-        }
-        return playerRecordTimeV1(b.latest) - playerRecordTimeV1(a.latest) ||
-          (b.player.updatedAt || b.player.createdAt || 0) - (a.player.updatedAt || a.player.createdAt || 0);
+        return (formalOrderIndex.get(String(a.player.id)) ?? Number.MAX_SAFE_INTEGER) -
+          (formalOrderIndex.get(String(b.player.id)) ?? Number.MAX_SAFE_INTEGER);
       });
 
     const count = el("playerLibraryCountV1");
@@ -19598,7 +19826,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build81-player-list-bottom-inset-v1";
+    const PWA_VERSION = "2.0-build81-resume-modal-nav-inset-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -27992,7 +28220,20 @@ body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!impo
 .cue-home-head-v2{display:flex!important;justify-content:center!important;padding:20px 0 28px!important;border-bottom:1px solid #dededb!important}
 .cue-resume-card-v1{display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;gap:7px;width:100%;max-width:620px;min-height:64px!important;margin:8px auto 2px;padding:7px 12px;border:1px solid #dededb;border-radius:15px;background:#fff;color:#171717;box-shadow:0 4px 18px rgba(0,0,0,.045);font:inherit;text-align:left;-webkit-tap-highlight-color:transparent;touch-action:pan-y}
 .cue-resume-card-v1[hidden]{display:none!important}.cue-resume-card-v1:focus-visible{outline:3px solid #171717;outline-offset:3px}.cue-resume-card-v1:active{background:#f2f2f0}.cue-resume-game-v4{display:grid;place-items:center;width:44px;height:38px}.cue-resume-game-v4 img{width:34px;height:34px}.cue-resume-matchup-v4{display:flex;align-items:center;justify-content:flex-start;gap:5px;min-width:0;overflow:hidden}.cue-resume-player-v4{display:flex;flex:0 1 auto;align-items:center;gap:5px;min-width:29px;max-width:calc((100% - 20px)/2)}.cue-resume-player-v4 img{width:24px;height:24px;flex:0 0 24px;border-radius:50%;object-fit:cover}.cue-resume-player-v4 span{min-width:0;overflow:hidden;color:#4f4f4c;font-size:11.5px;text-overflow:ellipsis;white-space:nowrap}.cue-resume-vs-v4{flex:0 0 auto;color:#8a8a87;font-size:10px}.cue-resume-action-v1{color:#171717;font-size:12px;font-weight:760;white-space:nowrap}
-.cue-in-progress-choice-v1{position:fixed;z-index:9200;inset:0;display:grid;place-items:end center;padding:18px 14px calc(18px + env(safe-area-inset-bottom));background:rgba(0,0,0,.42)}.cue-in-progress-choice-v1.hidden{display:none}.cue-in-progress-choice-v1>section{display:grid;gap:10px;width:min(100%,520px);padding:20px;border-radius:18px;background:#fff;box-shadow:0 18px 50px rgba(0,0,0,.2)}.cue-in-progress-choice-v1 h2{margin:0;color:#171717;font-size:21px}.cue-in-progress-choice-v1 p{margin:0 0 6px;color:#5f5f5c;font-size:14px;line-height:1.55}.cue-in-progress-choice-v1 button{min-height:48px;border:1px solid #171717;border-radius:10px;background:#fff;color:#171717;font-size:15px;font-weight:720}.cue-in-progress-choice-v1 button:first-of-type{background:#171717;color:#fff}.cue-in-progress-choice-v1 button:last-child{border-color:#dededb}
+.cue-in-progress-choice-v1{position:fixed;z-index:18020;inset:0;display:grid;place-items:end center;padding:18px 14px calc(var(--cue-phase1-nav-height,68px) + 18px + env(safe-area-inset-bottom));background:rgba(0,0,0,.42)}.cue-in-progress-choice-v1.hidden{display:none}.cue-in-progress-choice-v1>section{display:grid;gap:10px;width:min(100%,520px);max-height:calc(100dvh - var(--cue-phase1-nav-height,68px) - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 36px);padding:20px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;border-radius:18px;background:#fff;box-shadow:0 18px 50px rgba(0,0,0,.2)}.cue-in-progress-choice-v1 h2{margin:0;color:#171717;font-size:21px}.cue-in-progress-choice-v1 p{margin:0 0 6px;color:#5f5f5c;font-size:14px;line-height:1.55}.cue-in-progress-choice-v1 button{min-height:48px;border:1px solid #171717;border-radius:10px;background:#fff;color:#171717;font-size:15px;font-weight:720}.cue-in-progress-choice-v1 button:first-of-type{background:#171717;color:#fff}.cue-in-progress-choice-v1 button:last-child{border-color:#dededb}
+body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar,
+body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none!important}
+.cue-in-progress-choice-v1 :is(#cueInProgressResumeV1,#cueInProgressNewV1):focus-visible{
+  outline:3px solid #171717!important;
+  outline-offset:3px!important;
+}
+@media (hover:none) and (pointer:coarse){
+  .cue-in-progress-choice-v1 :is(#cueInProgressResumeV1,#cueInProgressNewV1):is(:focus,:focus-visible){
+    outline:none!important;
+    outline-offset:0!important;
+    box-shadow:none!important;
+  }
+}
 .cue-home-brand-v1{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;margin:0!important;color:#111!important}
 .cue-home-brand-v1 img{display:block!important;width:min(100%,386px)!important;height:auto!important;object-fit:contain!important}
 .cue-discipline-switcher-v1{display:grid!important;grid-template-columns:1fr!important;gap:6px!important;width:100%!important;margin:18px 0 22px!important;overflow:visible!important}
@@ -29019,7 +29260,7 @@ body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!impo
   <script src="./analytics-build4-metrics.js"></script>
   <script src="./analysis-build4.js"></script>
   <script src="./player-detail-build6.js"></script>
-  <script src="./ui-revision-v12.js?v=2.0-build60-free-pro-foundation"></script>
+  <script src="./ui-revision-v12.js?v=2.0-build81-resume-modal-nav-inset-v1"></script>
   <script src="./final-ui-build18.js"></script>
   <link rel="stylesheet" href="./navigation-shell-phase1.css?v=2.0-build81-player-list-bottom-inset-v1" />
   <script src="./navigation-shell-phase1.js?v=2.0-build81-player-list-bottom-inset-v1"></script>

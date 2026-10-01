@@ -68,18 +68,35 @@ async function playerAudit(count,{captureTop=false,captureBottom=false,keyboardE
   else await page.locator("#playerLibraryList .player-library-empty").waitFor();
   await page.waitForTimeout(80);
   if(captureTop)await page.screenshot({path:path.join(output,`Player_${count}_Normal_390x844.png`),animations:"disabled"});
+  let searchIntegrity=null;
+  if(count>1){
+    const expectedId="player-bottom-inset-01";
+    await page.locator("#playerLibrarySearch").fill(names[0]);
+    await page.waitForTimeout(80);
+    searchIntegrity=await page.evaluate(expected=>{
+      const list=document.getElementById("playerLibraryList"),rows=[...list.querySelectorAll(":scope > .player-management-row-v1")],row=rows[0],info=row?.querySelector(":scope > .player-hub-info-v3"),edit=row?.querySelector(":scope > .player-hub-edit-v3");
+      return {rowCount:rows.length,infoCount:list.querySelectorAll(".player-hub-info-v3").length,editCount:list.querySelectorAll(".player-hub-edit-v3").length,blankRows:rows.filter(item=>!item.querySelector(":scope > .player-hub-info-v3")?.dataset.statsPlayer).length,orphanControls:list.querySelectorAll(":scope > .player-hub-info-v3,:scope > .player-hub-edit-v3").length,infoId:info?.dataset.statsPlayer||"",editId:edit?.dataset.editPlayer||"",pass:rows.length===1&&info?.dataset.statsPlayer===expected&&edit?.dataset.editPlayer===expected};
+    },expectedId);
+    await page.locator("#playerLibrarySearch").fill("");
+    await page.waitForTimeout(80);
+  }
   await page.evaluate(()=>{const list=document.getElementById("playerLibraryList");list.scrollTop=list.scrollHeight;});
   await page.waitForTimeout(120);
   if(captureBottom)await page.screenshot({path:path.join(output,`Player_${count}_Final_390x844.png`),animations:"disabled"});
   const metrics=await page.evaluate(()=>{
     const rect=node=>{if(!node)return null;const value=node.getBoundingClientRect();return {x:value.x,y:value.y,width:value.width,height:value.height,right:value.right,bottom:value.bottom};};
-    const list=document.getElementById("playerLibraryList"),nav=document.querySelector(".cue-phase1-tab-bar"),rows=[...list.querySelectorAll(".player-management-row-v1")],infos=[...list.querySelectorAll(".player-hub-info-v3")],edits=[...list.querySelectorAll(".player-hub-edit-v3")],last=rows.at(-1),info=infos.at(-1),edit=edits.at(-1);
+    const list=document.getElementById("playerLibraryList"),nav=document.querySelector(".cue-phase1-tab-bar"),rows=[...list.querySelectorAll(":scope > .player-management-row-v1")],infos=[...list.querySelectorAll(".player-hub-info-v3")],edits=[...list.querySelectorAll(".player-hub-edit-v3")],last=rows.at(-1),info=last?.querySelector(".player-hub-info-v3"),edit=last?.querySelector(".player-hub-edit-v3");
+    const rowIntegrity=rows.map(row=>{const info=row.querySelectorAll(":scope > .player-hub-info-v3"),edit=row.querySelectorAll(":scope > .player-hub-edit-v3"),infoId=info[0]?.dataset.statsPlayer||"",editId=edit[0]?.dataset.editPlayer||"";return {infoCount:info.length,editCount:edit.length,infoId,editId,pass:info.length===1&&edit.length===1&&Boolean(infoId)&&infoId===editId};});
     const listRect=rect(list),navRect=rect(nav),lastRowRect=rect(last),infoRect=rect(info),editRect=rect(edit);
     const visualBottom=Math.max(lastRowRect?.bottom??0,infoRect?.bottom??0,editRect?.bottom??0);
     return {
       viewport:{width:innerWidth,height:innerHeight},
       count:rows.length,
       controlCount:{info:infos.length,edit:edits.length},
+      rowIntegrity,
+      rowIntegrityPass:rowIntegrity.length===rows.length&&rowIntegrity.every(row=>row.pass),
+      blankRows:rowIntegrity.filter(row=>!row.infoId).length,
+      orphanControls:list.querySelectorAll(":scope > .player-hub-info-v3,:scope > .player-hub-edit-v3").length,
       scrollOwner:{id:list.id,overflowY:getComputedStyle(list).overflowY,scrollTop:list.scrollTop,scrollHeight:list.scrollHeight,clientHeight:list.clientHeight,maxScroll:list.scrollHeight-list.clientHeight,paddingBottom:getComputedStyle(list).paddingBottom,scrollPaddingBottom:getComputedStyle(list).scrollPaddingBottom},
       navigation:navRect,
       list:listRect,
@@ -93,6 +110,7 @@ async function playerAudit(count,{captureTop=false,captureBottom=false,keyboardE
       horizontalOverflow:document.documentElement.scrollWidth>innerWidth
     };
   });
+  metrics.searchIntegrity=searchIntegrity;
   const before=metrics.scrollOwner.scrollTop;
   await page.waitForTimeout(180);
   const after=await page.locator("#playerLibraryList").evaluate(node=>node.scrollTop);
@@ -114,8 +132,12 @@ async function playerAudit(count,{captureTop=false,captureBottom=false,keyboardE
     await page.evaluate(()=>{const list=document.getElementById("playerLibraryList");list.scrollTop=list.scrollHeight;});
   }
   if(count){
-    await page.locator("#playerLibraryList .player-hub-edit-v3").last().click();
+    const finalTarget=await page.locator("#playerLibraryList .player-management-row-v1").last().evaluate(row=>({id:row.querySelector(":scope > .player-hub-edit-v3")?.dataset.editPlayer||"",name:row.querySelector(".player-management-name-v1")?.childNodes[0]?.textContent?.trim()||""}));
+    await page.locator("#playerLibraryList .player-management-row-v1").last().locator(":scope > .player-hub-edit-v3").click();
     metrics.finalEditOpened=await page.locator("#playerEditor:not(.hidden)").isVisible();
+    metrics.finalEditTarget={expectedId:finalTarget.id,expectedName:finalTarget.name,editorName:await page.locator("#playerEditorName").inputValue(),title:await page.locator("#playerEditorModalTitleV1").textContent()};
+    metrics.finalEditTarget.pass=metrics.finalEditOpened&&metrics.finalEditTarget.editorName===finalTarget.name&&metrics.finalEditTarget.title?.trim()==="プレーヤー編集";
+    if(captureBottom)await page.screenshot({path:path.join(output,`Player_${count}_Final_Edit_390x844.png`),animations:"disabled"});
   }else metrics.finalEditOpened=null;
   await page.close();
   return metrics;
@@ -187,7 +209,7 @@ const audit={
   roots:await rootRegression()
 };
 
-const playerPass=[audit.player[1],audit.player[7],audit.player[12]].every(item=>item.finalPlayerGap>=17&&item.finalEditTapTarget&&item.finalEditAboveNavigation&&item.finalEditOpened&&item.scrollStable&&!item.horizontalOverflow);
+const playerPass=[audit.player[1],audit.player[7],audit.player[12]].every(item=>item.rowIntegrityPass&&item.blankRows===0&&item.orphanControls===0&&item.controlCount.info===item.count&&item.controlCount.edit===item.count&&item.finalPlayerGap>=17&&item.finalEditTapTarget&&item.finalEditAboveNavigation&&item.finalEditOpened&&item.finalEditTarget?.pass&&item.scrollStable&&!item.horizontalOverflow)&&(audit.player[7].searchIntegrity?.pass===true)&&(audit.player[12].searchIntegrity?.pass===true);
 const historyPass=[audit.history[1],audit.history[12]].every(item=>item.finalMatchAboveNavigation&&item.scrollStable&&!item.horizontalOverflow);
 audit.result={playerPass,historyPass,rootPass:Object.values(audit.roots).every(item=>item.navVisible&&item.selected&&!item.horizontalOverflow),keyboardEquivalentPass:audit.player[12].keyboardEquivalent?.pass===true};
 await writeFile(path.join(output,"Visual_Audit.json"),`${JSON.stringify(audit,null,2)}\n`);

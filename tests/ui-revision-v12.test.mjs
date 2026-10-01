@@ -59,9 +59,9 @@ test("Match Detail Back keeps the remembered history origin",()=>{
 });
 
 test("player management has automatic deterministic order and compact memo",()=>{
-  assert.match(revision,/Number\(b\.isPrimary===true\)-Number\(a\.isPrimary===true\)/);
-  assert.match(revision,/latest\.get\(String\(b\.id\)\).*latest\.get\(String\(a\.id\)\)/);
-  assert.match(revision,/stable\(a\.id,b\.id\)/);
+  assert.match(revision,/CueScorePlayerLibraryOrderV1\?\.orderPlayers/);
+  assert.match(revision,/const current=\[\.\.\.list\.querySelectorAll\(":scope > \.player-management-row-v1"\)\]/);
+  assert.doesNotMatch(revision,/stable\(a\.id,b\.id\)/);
   assert.match(css,/#playerLibrarySortBtnV1 \{ display:none !important; \}/);
   assert.match(css,/player-management-memo-v2[\s\S]*white-space:nowrap/);
 });

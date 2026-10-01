@@ -29,15 +29,16 @@ function identityHarness(players,records){
   return context;
 }
 
-function deleteHarness({players,inProgress=null,confirmResult=true}){
-  const state={players:structuredClone(players),backups:[],refreshes:[],toasts:[],confirmCalls:0};
+function deleteHarness({players,inProgress=null}){
+  const state={players:structuredClone(players),backups:[],refreshes:[],notices:[]};
   const context=vm.createContext({
     readPlayerLibrary:()=>structuredClone(state.players),
     writePlayerLibrary:value=>{state.players=structuredClone(value);},
-    confirm:()=>{state.confirmCalls+=1;return confirmResult;},
     createDestructiveBackupV132:(...args)=>state.backups.push(structuredClone(args)),
     refreshAfterDestructiveChangeV132:value=>state.refreshes.push(value),
-    showToast:(...args)=>state.toasts.push(args),
+    showPlayerDeleteNoticeV1:(...args)=>state.notices.push(args),
+    showPlayerDeleteConfirmationV1:()=>{},
+    showPlayerLibraryMain:()=>{},
     readInProgressMatchV1:()=>inProgress,
     currentGameSessionIdV104:null,
     gameEnded:false,
@@ -47,7 +48,7 @@ function deleteHarness({players,inProgress=null,confirmResult=true}){
     el:()=>null
   });
   vm.runInContext(extractFunction("deletePlayerByIdV1"),context);
-  return {state,deletePlayer:id=>context.deletePlayerByIdV1(id)};
+  return {state,deletePlayer:id=>context.deletePlayerByIdV1(id,{confirmed:true})};
 }
 
 test("Registration has no Delete; Edit has Delete; Player Detail has no Delete",()=>{
@@ -117,9 +118,8 @@ test("an in-progress participant is blocked before confirmation, backup or regis
   });
   assert.equal(harness.deletePlayer("active"),false);
   assert.equal(harness.state.players.length,1);
-  assert.equal(harness.state.confirmCalls,0);
   assert.equal(harness.state.backups.length,0);
-  assert.deepEqual(harness.state.toasts[0],["プレーヤーを削除できません","このプレーヤーは中断中の試合で使用されています。試合を終了または破棄してから削除してください。"]);
+  assert.deepEqual(harness.state.notices[0],["blocked","プレーヤーを削除できません","このプレーヤーは中断中の試合で使用されています。試合を終了または破棄してから削除してください。"]);
 });
 
 test("completed-match participant deletion is allowed and keeps beforeDelete safety backup",()=>{
