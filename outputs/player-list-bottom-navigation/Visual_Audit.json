@@ -1,0 +1,414 @@
+{
+  "generatedAt": "2026-10-01T02:47:23.859Z",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "contract": {
+    "navigationHeightToken": 68,
+    "normalGap": 18,
+    "safeAreaExpression": "env(safe-area-inset-bottom)"
+  },
+  "player": {
+    "0": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "count": 0,
+      "controlCount": {
+        "info": 0,
+        "edit": 0
+      },
+      "scrollOwner": {
+        "id": "playerLibraryList",
+        "overflowY": "auto",
+        "scrollTop": 0,
+        "scrollHeight": 230,
+        "clientHeight": 230,
+        "maxScroll": 0,
+        "paddingBottom": "86px",
+        "scrollPaddingBottom": "86px"
+      },
+      "navigation": {
+        "x": 0,
+        "y": 776,
+        "width": 390,
+        "height": 68,
+        "right": 390,
+        "bottom": 844
+      },
+      "list": {
+        "x": 10,
+        "y": 139,
+        "width": 370,
+        "height": 231.59375,
+        "right": 380,
+        "bottom": 370.59375
+      },
+      "finalPlayerRow": null,
+      "finalPlayer": null,
+      "finalPlayerVisualBottom": null,
+      "finalPlayerGap": null,
+      "finalEdit": null,
+      "finalEditTapTarget": null,
+      "finalEditAboveNavigation": null,
+      "horizontalOverflow": false,
+      "scrollStable": true,
+      "scrollTopAfterWait": 0,
+      "finalEditOpened": null
+    },
+    "1": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "count": 1,
+      "controlCount": {
+        "info": 1,
+        "edit": 1
+      },
+      "scrollOwner": {
+        "id": "playerLibraryList",
+        "overflowY": "auto",
+        "scrollTop": 0,
+        "scrollHeight": 142,
+        "clientHeight": 142,
+        "maxScroll": 0,
+        "paddingBottom": "86px",
+        "scrollPaddingBottom": "86px"
+      },
+      "navigation": {
+        "x": 0,
+        "y": 776,
+        "width": 390,
+        "height": 68,
+        "right": 390,
+        "bottom": 844
+      },
+      "list": {
+        "x": 10,
+        "y": 139,
+        "width": 370,
+        "height": 144,
+        "right": 380,
+        "bottom": 283
+      },
+      "finalPlayerRow": {
+        "x": 15,
+        "y": 140,
+        "width": 360,
+        "height": 56,
+        "right": 375,
+        "bottom": 196
+      },
+      "finalPlayer": {
+        "x": 15,
+        "y": 140,
+        "width": 316,
+        "height": 56,
+        "right": 331,
+        "bottom": 196
+      },
+      "finalPlayerVisualBottom": 196,
+      "finalPlayerGap": 580,
+      "finalEdit": {
+        "x": 331,
+        "y": 140,
+        "width": 44,
+        "height": 56,
+        "right": 375,
+        "bottom": 196
+      },
+      "finalEditTapTarget": true,
+      "finalEditAboveNavigation": true,
+      "horizontalOverflow": false,
+      "scrollStable": true,
+      "scrollTopAfterWait": 0,
+      "finalEditOpened": true
+    },
+    "7": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "count": 7,
+      "controlCount": {
+        "info": 7,
+        "edit": 7
+      },
+      "scrollOwner": {
+        "id": "playerLibraryList",
+        "overflowY": "auto",
+        "scrollTop": 174,
+        "scrollHeight": 877,
+        "clientHeight": 703,
+        "maxScroll": 174,
+        "paddingBottom": "86px",
+        "scrollPaddingBottom": "86px"
+      },
+      "navigation": {
+        "x": 0,
+        "y": 776,
+        "width": 390,
+        "height": 68,
+        "right": 390,
+        "bottom": 844
+      },
+      "list": {
+        "x": 10,
+        "y": 139,
+        "width": 370,
+        "height": 705,
+        "right": 380,
+        "bottom": 844
+      },
+      "finalPlayerRow": {
+        "x": 15,
+        "y": 308,
+        "width": 360,
+        "height": 57,
+        "right": 375,
+        "bottom": 365
+      },
+      "finalPlayer": {
+        "x": 15,
+        "y": 701,
+        "width": 116.234375,
+        "height": 56,
+        "right": 131.234375,
+        "bottom": 757
+      },
+      "finalPlayerVisualBottom": 757,
+      "finalPlayerGap": 19,
+      "finalEdit": {
+        "x": 15,
+        "y": 308,
+        "width": 44,
+        "height": 56,
+        "right": 59,
+        "bottom": 364
+      },
+      "finalEditTapTarget": true,
+      "finalEditAboveNavigation": true,
+      "horizontalOverflow": false,
+      "scrollStable": true,
+      "scrollTopAfterWait": 174,
+      "finalEditOpened": true
+    },
+    "12": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "count": 12,
+      "controlCount": {
+        "info": 12,
+        "edit": 12
+      },
+      "scrollOwner": {
+        "id": "playerLibraryList",
+        "overflowY": "auto",
+        "scrollTop": 739,
+        "scrollHeight": 1442,
+        "clientHeight": 703,
+        "maxScroll": 739,
+        "paddingBottom": "86px",
+        "scrollPaddingBottom": "86px"
+      },
+      "navigation": {
+        "x": 0,
+        "y": 776,
+        "width": 390,
+        "height": 68,
+        "right": 390,
+        "bottom": 844
+      },
+      "list": {
+        "x": 10,
+        "y": 139,
+        "width": 370,
+        "height": 705,
+        "right": 380,
+        "bottom": 844
+      },
+      "finalPlayerRow": {
+        "x": 15,
+        "y": 28,
+        "width": 360,
+        "height": 57,
+        "right": 375,
+        "bottom": 85
+      },
+      "finalPlayer": {
+        "x": 15,
+        "y": 701,
+        "width": 116.234375,
+        "height": 56,
+        "right": 131.234375,
+        "bottom": 757
+      },
+      "finalPlayerVisualBottom": 757,
+      "finalPlayerGap": 19,
+      "finalEdit": {
+        "x": 15,
+        "y": 28,
+        "width": 44,
+        "height": 56,
+        "right": 59,
+        "bottom": 84
+      },
+      "finalEditTapTarget": true,
+      "finalEditAboveNavigation": true,
+      "horizontalOverflow": false,
+      "scrollStable": true,
+      "scrollTopAfterWait": 739,
+      "keyboardEquivalent": {
+        "viewportHeight": 560,
+        "finalPlayerBottom": 473,
+        "navigationTop": 492,
+        "gap": 19,
+        "pass": true
+      },
+      "finalEditOpened": true
+    }
+  },
+  "history": {
+    "0": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "count": 0,
+      "scrollOwner": {
+        "id": "recordsList",
+        "overflowY": "auto",
+        "scrollTop": 0,
+        "scrollHeight": 666,
+        "clientHeight": 666,
+        "maxScroll": 0,
+        "paddingBottom": "86px"
+      },
+      "navigation": {
+        "x": 0,
+        "y": 776,
+        "width": 390,
+        "height": 68,
+        "right": 390,
+        "bottom": 844
+      },
+      "finalMatch": null,
+      "finalMatchGap": null,
+      "finalMatchAboveNavigation": null,
+      "horizontalOverflow": false,
+      "scrollStable": true,
+      "scrollTopAfterWait": 0
+    },
+    "1": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "count": 1,
+      "scrollOwner": {
+        "id": "recordsList",
+        "overflowY": "auto",
+        "scrollTop": 0,
+        "scrollHeight": 666,
+        "clientHeight": 666,
+        "maxScroll": 0,
+        "paddingBottom": "86px"
+      },
+      "navigation": {
+        "x": 0,
+        "y": 776,
+        "width": 390,
+        "height": 68,
+        "right": 390,
+        "bottom": 844
+      },
+      "finalMatch": {
+        "x": 16,
+        "y": 180,
+        "width": 358,
+        "height": 56,
+        "right": 374,
+        "bottom": 236
+      },
+      "finalMatchGap": 540,
+      "finalMatchAboveNavigation": true,
+      "horizontalOverflow": false,
+      "scrollStable": true,
+      "scrollTopAfterWait": 0
+    },
+    "12": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "count": 12,
+      "scrollOwner": {
+        "id": "recordsList",
+        "overflowY": "auto",
+        "scrollTop": 154,
+        "scrollHeight": 820,
+        "clientHeight": 666,
+        "maxScroll": 154,
+        "paddingBottom": "86px"
+      },
+      "navigation": {
+        "x": 0,
+        "y": 776,
+        "width": 390,
+        "height": 68,
+        "right": 390,
+        "bottom": 844
+      },
+      "finalMatch": {
+        "x": 16,
+        "y": 697,
+        "width": 358,
+        "height": 56,
+        "right": 374,
+        "bottom": 753
+      },
+      "finalMatchGap": 23,
+      "finalMatchAboveNavigation": true,
+      "horizontalOverflow": false,
+      "scrollStable": true,
+      "scrollTopAfterWait": 154
+    }
+  },
+  "roots": {
+    "home": {
+      "navVisible": true,
+      "selected": true,
+      "horizontalOverflow": false,
+      "navHeight": 68
+    },
+    "player": {
+      "navVisible": true,
+      "selected": true,
+      "horizontalOverflow": false,
+      "navHeight": 68
+    },
+    "history": {
+      "navVisible": true,
+      "selected": true,
+      "horizontalOverflow": false,
+      "navHeight": 68
+    },
+    "settings": {
+      "navVisible": true,
+      "selected": true,
+      "horizontalOverflow": false,
+      "navHeight": 68
+    }
+  },
+  "result": {
+    "playerPass": true,
+    "historyPass": true,
+    "rootPass": true,
+    "keyboardEquivalentPass": true
+  }
+}

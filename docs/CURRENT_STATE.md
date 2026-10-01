@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Version 1.2 Build 80 Player List Bottom Navigation Overlap Fix（2026年10月1日）
+
+- Player List Fix Product Source Commit: `7e2beb0ade0685ff331fa808273e00e6f832bd2c`。
+- Product OwnerのInternal TestFlight実機確認で、Player一覧末尾が固定Bottom Navigationの背面へ入り、elastic overscroll後に本来の最大位置へ戻るFAILを確認した。添付原本をbyte-identicalにEvidence保存した。
+- 原因は、Bottom Navigation reserveが`.player-library-main`へ設定されていた一方、実scroll ownerが`.player-library-list`だったこと。実scroll ownerへNavigation 68px＋通常余白18px＋Safe Areaのreserveを移し、scroll stateの保存／root reset対象も同じ要素へ統一した。Navigation自体の位置／高さは変更していない。
+- 390×844でPlayer 0／1／7／12件をPASS。7／12件の末尾はNavigation上19pt、編集targetは44×56、max scroll後の位置は安定。依頼されたHistory一覧も0／1／12件で確認し、12件の最終試合はNavigation上23ptで同症状なし。
+- Player list／Navigation `15/15`、Player Delete `11/11`、Match Sharing `109/109`、Full Node `583/583`、native parity、Release Simulator Build、`git diff --check`をPASS。Built AppはBundle ID `com.takaakimailboxstar.cuescoreapps`、Version `1.2`、Build `80`、`.storekit` 0。
+- Gate: `IMPLEMENTATION FIX COMPLETE / SIMULATOR VERIFICATION PASS / PRODUCT OWNER RE-TEST REQUIRED`。既存Internal TestFlight Build 80は修正前sourceでimmutable。Build 81、commit／push、Archive、Upload、TestFlight、App Store Connectは未実施。Evidence: `docs/implementation/CueScore_1.2_Build80_Player_List_Bottom_Navigation_Overlap_Fix_2026-10-01.md`。
+
 ## Version 1.2 Build 80 Internal TestFlight（2026年10月1日）
 
 - Product Source commit `810a9e134c5de1e033eb644027c37f51834fd6d4`、source-freeze Documentation commit／Archive baseline `d1ba8b7fa8821e7f93a10b3b54dde0984b5e703e`から正式native sync、fresh必須test、Release device Archiveを実施した。製品source、Version `1.2`、Build `80`、Bundle ID `com.takaakimailboxstar.cuescoreapps`は変更していない。
