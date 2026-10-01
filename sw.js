@@ -1,9 +1,9 @@
-const APP_VERSION = "2.0-build80-match-sharing-player-identity-v1";
+const APP_VERSION = "2.0-build81-player-list-bottom-inset-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./demo-data.js?v=2.0-build80-match-sharing-player-identity-v1",
+  "./demo-data.js?v=2.0-build81-player-list-bottom-inset-v1",
   "./vendor/fflate-0.8.3.js",
   "./vendor/qrcodegen-1.8.0.js",
   "./manifest.webmanifest",
@@ -22,9 +22,9 @@ const APP_SHELL = [
   "./ui-revision-v12.js?v=2.0-build60-free-pro-foundation",
   "./final-ui-build18.js",
   "./ui-revision-v12.css?v=2.0-build60-free-pro-foundation",
-  "./navigation-shell-phase1.css?v=2.0-build80-player-list-bottom-inset-v1",
-  "./navigation-shell-phase1.js?v=2.0-build80-player-list-bottom-inset-v1",
-  "./navigation-phase2-6.css?v=2.0-build80-match-sharing-player-identity-v1",
+  "./navigation-shell-phase1.css?v=2.0-build81-player-list-bottom-inset-v1",
+  "./navigation-shell-phase1.js?v=2.0-build81-player-list-bottom-inset-v1",
+  "./navigation-phase2-6.css?v=2.0-build81-player-list-bottom-inset-v1",
   "./navigation-phase2-6.js?v=2.0-build60-free-pro-foundation",
   "./player-detail-build8.css",
   "./record-access-v1.js?v=1.0-build60-free-pro-v2",
