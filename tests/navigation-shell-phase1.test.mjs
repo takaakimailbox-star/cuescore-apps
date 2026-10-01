@@ -69,9 +69,17 @@ test("active-match resume entry remains and the shell does not add saved-data ke
 test("Safe Area and content bottom inset are applied to normal browsing roots",()=>{
   assert.match(css,/env\(safe-area-inset-bottom\)/);
   assert.match(css,/\.records-list\{padding-bottom:calc\(var\(--cue-phase1-nav-height\)/);
+  assert.match(css,/\.player-management-formal-v1 \.player-library-list\{[\s\S]*?scroll-padding-bottom:calc\(var\(--cue-phase1-nav-height\)[\s\S]*?padding-bottom:calc\(var\(--cue-phase1-nav-height\)/);
+  assert.doesNotMatch(css,/body\.cue-phase1-normal-mode \.player-library-main,/);
   assert.match(css,/\.player-journey-scroll-v2/);
   assert.match(css,/\.settings-formal-scroll-v1/);
   assert.match(css,/\.match-detail-scroll-v1/);
+});
+
+test("Player root stores and resets the actual Player list scroll owner",()=>{
+  assert.match(js,/const scrollHost=node=>node\?\.querySelector\("\.player-library-list,/);
+  assert.match(js,/if\(key==="player"\)[\s\S]*?querySelector\("#playerLibraryList"\)\?\.scrollTo/);
+  assert.doesNotMatch(js,/querySelector\("#playerLibraryMain"\)\?\.scrollTo/);
 });
 
 test("Phase 1 assets load last, ship in native web, and remain offline",()=>{
@@ -79,6 +87,8 @@ test("Phase 1 assets load last, ship in native web, and remain offline",()=>{
   assert.ok(index.indexOf("ui-revision-v12.css")<index.lastIndexOf("navigation-shell-phase1.css"));
   for(const file of ["navigation-shell-phase1.css","navigation-shell-phase1.js"]){
     assert.ok(build.includes(`"${file}"`));
-    assert.ok(sw.includes(`"./${file}"`));
+    assert.ok(sw.includes(`"./${file}?v=2.0-build80-player-list-bottom-inset-v1"`));
   }
+  assert.match(index,/navigation-shell-phase1\.css\?v=2\.0-build80-player-list-bottom-inset-v1/);
+  assert.match(index,/navigation-shell-phase1\.js\?v=2\.0-build80-player-list-bottom-inset-v1/);
 });

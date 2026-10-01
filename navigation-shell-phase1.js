@@ -18,7 +18,7 @@
     history:"#recordsScreen",
     settings:"#settingsScreen,#settingsSuiteScreenV2,.settings-suite-screen-v2,#dataManagementScreen"
   };
-  const scrollHost=node=>node?.querySelector(".player-library-main,.player-stats-body,.player-journey-scroll-v2,.pd12-trends-scroll,.records-list,.settings-formal-scroll-v1,.settings-suite-scroll-v2,.data-management-content")||node;
+  const scrollHost=node=>node?.querySelector(".player-library-list,.player-stats-body,.player-journey-scroll-v2,.pd12-trends-scroll,.records-list,.settings-formal-scroll-v1,.settings-suite-scroll-v2,.data-management-content")||node;
   const snapshot=key=>{
     if(key==="home")return {selector:"home",scroll:window.scrollY};
     const nodes=[...document.querySelectorAll(rootSelector[key]||"")];
@@ -74,7 +74,7 @@
   const openRoot=key=>{
     leaveTopLevel(key);
     if(key==="home"){window.scrollTo(0,0)}
-    if(key==="player"){document.body.dataset.cuePlayerContext="browse";hideTransientPlayerViews();document.getElementById("playerManagementBtn")?.click();const title=document.getElementById("playerLibraryTitle");if(title)title.textContent="プレーヤー";document.querySelector("#playerLibraryMain")?.scrollTo?.(0,0)}
+    if(key==="player"){document.body.dataset.cuePlayerContext="browse";hideTransientPlayerViews();document.getElementById("playerManagementBtn")?.click();const title=document.getElementById("playerLibraryTitle");if(title)title.textContent="プレーヤー";document.querySelector("#playerLibraryList")?.scrollTo?.(0,0)}
     if(key==="history"){document.getElementById("recordsBtn")?.click();document.querySelector("#recordsList")?.scrollTo?.(0,0)}
     if(key==="settings"){document.getElementById("settingsBtn")?.click();document.querySelector(".settings-formal-scroll-v1")?.scrollTo?.(0,0)}
     enforceRootVisibility(key);
