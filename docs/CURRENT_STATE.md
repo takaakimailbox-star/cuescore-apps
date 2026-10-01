@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Version 1.2 Build 81 Player List Fix Internal TestFlight（2026年10月1日）
+
+- Build 80 physical FAILの修正をProduct Source Commit `7e2beb0ade0685ff331fa808273e00e6f832bd2c`、Documentation Commit `b1d40c3d429a0fd899e98367ce46036f8d7ad3f4`へ分離して正本化した。Build 81 Source Commitは`79a031a0a656b3ea486dcf28a0def5a1243576ba`。
+- Version `1.2`／Build `81`／Bundle ID `com.takaakimailboxstar.cuescoreapps`、cache identity `2.0-build81-player-list-bottom-inset-v1`。Player List／Navigation `15/15`、Player Delete `11/11`、Match Sharing `109/109`、combined integration `135/135`、cache/version/native identity `68/68`、native foundation `6/6`、Full Node `583/583`、native parity、`git diff --check`をPASSした。
+- Release device Archive、package analysis、UploadをPASS。App／dSYM UUID `632DAB3A-DFD1-3A32-B10F-B27CE6B0EB5D`、executable SHA-256 `b5c588e33b6c6a3d00d217e4a513764b58aa028eff987541667bbc8ac37e4e82`、IPA SHA-256 `d83ed200537c384adbf88ca8464d8a74ea8ef216a35f9433c42d32798e999522`、Archive／IPA `.storekit` 0。
+- ASC Build ID `0df0161d-11df-42a3-af3a-81a79fda7719`は`VALID`、`INTERNAL_ONLY`、`usesNonExemptEncryption=false`、`IN_BETA_TESTING`。`CueScore Internal Testers`（tester 1名）にBuild 81が含まれ、Product Ownerが取得可能。
+- 公開Version `1.1`は変更0。App Store Version `1.2`は未作成。External TestFlight、App Review、Release、metadata等は未操作。Build 80は削除・上書きしていない。
+- Gate: `BUILD 81 INTERNAL TESTFLIGHT AVAILABLE / PRODUCT OWNER PLAYER LIST RE-TEST REQUIRED`。Evidence: `docs/implementation/CueScore_1.2_Build81_Internal_TestFlight_Player_List_Fix_2026-10-01.md`。
+
 ## Version 1.2 Build 80 Player List Bottom Navigation Overlap Fix（2026年10月1日）
 
 - Player List Fix Product Source Commit: `7e2beb0ade0685ff331fa808273e00e6f832bd2c`。

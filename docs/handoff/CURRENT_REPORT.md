@@ -1,36 +1,35 @@
 # CueScore Current Report
 
 - App: CueScore Apps
-- Decision ID: `CUESCORE-1.2-BUILD80-PLAYER-LIST-BOTTOM-NAV-FIX-20261001`
+- Decision ID: `CUESCORE-1.2-BUILD81-INTERNAL-TESTFLIGHT-20261001`
 - Date: 2026-10-01
-- Baseline: `d1ba8b7fa8821e7f93a10b3b54dde0984b5e703e`
-- Product Source commit: `810a9e134c5de1e033eb644027c37f51834fd6d4`
+- Baseline: `4872bc39793ba61374e7810b3e00333dd2710069`
 - Player List Fix Product Source Commit: `7e2beb0ade0685ff331fa808273e00e6f832bd2c`
-- Gate result: `IMPLEMENTATION FIX COMPLETE / SIMULATOR VERIFICATION PASS / PRODUCT OWNER RE-TEST REQUIRED`
+- Player List Fix Documentation Commit: `b1d40c3d429a0fd899e98367ce46036f8d7ad3f4`
+- Build 81 Source Commit: `79a031a0a656b3ea486dcf28a0def5a1243576ba`
+- Gate result: `BUILD 81 INTERNAL TESTFLIGHT AVAILABLE / PRODUCT OWNER PLAYER LIST RE-TEST REQUIRED`
 
 ## Result
 
-Internal TestFlight Build 80のPlayer一覧physical FAILを受け、実scroll owner不一致を修正した。Bottom Navigation reserve、scroll保存、root resetを`.player-library-list`へ揃え、Player末尾がNavigation上まで安定してscrollできることを390×844で確認した。試合履歴一覧も同時監査し、既存clearanceで最終試合がNavigation上に収まるため同症状なし。既存Build 80は修正前sourceであり、physical PASSとは記録しない。
+Player List修正とEvidenceを分離commitし、Build 81 identityをGitHubへ固定後、正式native sync、fresh regression、Release device Archive、Apple package analysis／Uploadを完了した。ASC Build 81は`VALID`／`INTERNAL_ONLY`／`IN_BETA_TESTING`で、`CueScore Internal Testers`からProduct Ownerが取得可能。Player List physical PASSはまだ記録しない。
 
 ## Evidence
 
 - Player list / Navigation focused: `15 PASS / 0 FAIL / 0 SKIPPED`
 - Player Delete dedicated: `11 PASS / 0 FAIL / 0 SKIPPED`
 - Match Sharing focused: `109 PASS / 0 FAIL / 0 SKIPPED`
+- Combined integration focused: `135 PASS / 0 FAIL / 0 SKIPPED`
+- Cache / version / native identity: `68 PASS / 0 FAIL / 0 SKIPPED`
+- Native foundation: `6 PASS / 0 FAIL / 0 SKIPPED`
 - Full Node: `583 PASS / 0 FAIL / 0 SKIPPED`
-- 390×844: Player 7／12 final gap 19pt; History 12 final gap 23pt; final edit target 44×56; scroll stable
-- Release Simulator: PASS; product Bundle ID `com.takaakimailboxstar.cuescoreapps`; `1.2 (80)`; `.storekit` 0
-- Native parity: PASS; source／native-web／iOS public／built App `index.html` SHA-256 `b3c28ddc51ec9c45ed0b9dd6c397621654e5667512675258dc9236bb2ce1ec25`
+- Native / Archive parity: PASS; source／native-web／iOS public／Archive `index.html` SHA-256 `197d0b0e46985756cfab3aa2773981d4cd75f9455a23401326cdc917e0ced530`
 - `git diff --check`: PASS
-
-### Existing Build 80 Distribution State（unchanged in this Gate）
-
-- Release device Archive: PASS; App / dSYM UUID `632DAB3A-DFD1-3A32-B10F-B27CE6B0EB5D`; executable SHA-256 `f7d30575f30469f58c5f8023c9b6848c4fff082b58918172529d537f7e33571a`
-- Apple Upload / processing: PASS; Build 80 `VALID`; `usesNonExemptEncryption=false`; Internal `IN_BETA_TESTING`
-- Internal TestFlight: `CueScore Internal Testers` includes Build 80; tester count 1
+- Release device Archive: PASS; App / dSYM UUID `632DAB3A-DFD1-3A32-B10F-B27CE6B0EB5D`; executable SHA-256 `b5c588e33b6c6a3d00d217e4a513764b58aa028eff987541667bbc8ac37e4e82`
+- IPA SHA-256: `d83ed200537c384adbf88ca8464d8a74ea8ef216a35f9433c42d32798e999522`; `.storekit` 0
+- Apple Upload / processing: PASS; Build 81 `VALID`; `usesNonExemptEncryption=false`; Internal `IN_BETA_TESTING`; audience `INTERNAL_ONLY`
+- Internal TestFlight: `CueScore Internal Testers` includes Build 81; tester count 1
 - Boundary: public Version 1.1 unchanged; App Store Version 1.2 does not exist; External TestFlight / App Review / Release not started
-- FAIL: Build audience `INTERNAL_ONLY`; requested `APP_STORE_ELIGIBLE` not satisfied and not mutable after upload
 
 ## Boundary / STOP
 
-修正、Tests、Visual、native parity、Release Simulator BuildまででSTOP。commit／push、Build 81、Archive、Upload、TestFlight、App Store Connectへ進まない。次Gateはcommit/pushと配布Build番号の独立承認後、Product Owner physical re-test。
+Build 81がInternal TestFlightで取得可能になったためSTOP。次GateはProduct OwnerがPlayer一覧の最終Player、scroll release、最終編集actionを実機確認する。App Store Version 1.2、External TestFlight、App Review、Releaseへ進まない。
