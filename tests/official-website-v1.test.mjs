@@ -7,11 +7,12 @@ const root=resolve(new URL("..",import.meta.url).pathname);
 const read=path=>readFileSync(resolve(root,path),"utf8");
 const site=read("docs/cuescore/index.html");
 
-test("official website has the adopted structure and truthful pre-release CTA",()=>{
+test("official website has the adopted structure and published App Store CTA",()=>{
   assert.match(site,/<title>CueScore \| Billiards Score &amp; Match Tracker<\/title>/);
   for(const id of ["features","games"])assert.match(site,new RegExp(`id="${id}"`));
-  for(const label of ["記録","振り返り","成績","対応ゲーム","App Store 公開予定"])assert.ok(site.includes(label));
-  assert.doesNotMatch(site,/apps\.apple\.com|App Storeで見る|JPA 8-Ball|CueSketch/);
+  for(const label of ["記録","振り返り","成績","対応ゲーム","App Storeで見る"])assert.ok(site.includes(label));
+  assert.equal((site.match(/https:\/\/apps\.apple\.com\/jp\/app\/cuescore-apps\/id6802027038/g)||[]).length,2);
+  assert.doesNotMatch(site,/App Store 公開予定|Coming soon|JPA 8-Ball|CueSketch/);
 });
 
 test("website links, images and official document sources resolve inside Pages root",()=>{
