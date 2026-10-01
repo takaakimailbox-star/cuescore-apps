@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## Version 1.2 Build 80 Internal TestFlight（2026年10月1日）
+
+- Product Source commit `810a9e134c5de1e033eb644027c37f51834fd6d4`、source-freeze Documentation commit／Archive baseline `d1ba8b7fa8821e7f93a10b3b54dde0984b5e703e`から正式native sync、fresh必須test、Release device Archiveを実施した。製品source、Version `1.2`、Build `80`、Bundle ID `com.takaakimailboxstar.cuescoreapps`は変更していない。
+- Cache/version `42/42`、Player Delete `11/11`、Match Sharing `109/109`、integration `102/102`、native foundation `6/6`、Full Node `578/578`、native／Archive parity、`git diff --check`をPASS。Archive／IPAの`.storekit`は0件。
+- Release device ArchiveはPASS。App／dSYM UUID `632DAB3A-DFD1-3A32-B10F-B27CE6B0EB5D`、executable SHA-256 `f7d30575f30469f58c5f8023c9b6848c4fff082b58918172529d537f7e33571a`、IPA SHA-256 `c5a44ecb1b7b72c7fd00cdc1d04fc736cdedc7410ccd965888cc592ffc250031`。source／native／Archive `index.html`はSHA-256 `9cbeaaf799502ba68859cde484bab333c3da3c91b5c49543c7ab2c3111169e9c`で一致。
+- Apple package analysis／Uploadはerror 0でPASSし、Build ID `0851e2bb-b9dc-47b3-bab6-04d3f687e200`は`VALID`、`usesNonExemptEncryption=false`、Internal state `IN_BETA_TESTING`。Internal group `CueScore Internal Testers`（tester 1名、`hasAccessToAllBuilds=true`）にBuild 80が含まれ、Product OwnerがTestFlightから取得可能。
+- Build audienceは要求された`APP_STORE_ELIGIBLE`ではなく`INTERNAL_ONLY`。`testFlightInternalTestingOnly=true`でUploadされたためで、Apple APIは後変更を`ENTITY_ERROR.ATTRIBUTE.NOT_ALLOWED`として拒否した。Internal TestFlight到達はPASSだが、Build 80のApp Store eligibilityはFAIL／変更不可。Build 81、replacement upload、App Store Version 1.2、App Review、Releaseへは進んでいない。
+- 公開Version `1.1`は`READY_FOR_SALE`のまま変更0。App Store Version `1.2`は存在せず未作成。Product Owner physical iPhone verificationは`PENDING`であり、Player Delete変更やBuild 80の実機PASSを記録しない。
+- Gate: `VERSION 1.2 BUILD 80 INTERNAL TESTFLIGHT AVAILABLE / PRODUCT OWNER VERIFICATION PENDING / APP_STORE_ELIGIBLE NOT SATISFIED`。Evidence: `docs/implementation/CueScore_1.2_Build80_Internal_TestFlight_2026-10-01.md`。
+
 ## Version 1.2 RC Freeze Blocker Resolution（2026年10月1日）
 
 - Version 1.2 RC Product Source Commit: `810a9e134c5de1e033eb644027c37f51834fd6d4`（`feat: prepare CueScore 1.2 RC with Match Sharing and player identity fixes`）。

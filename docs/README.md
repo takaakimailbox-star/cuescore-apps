@@ -131,9 +131,10 @@ Match Sharing v1 formal design status:
 - Formal Specification: complete
 - Old Receiver Flow implementation / Product Owner physical E2E: PASS; historical Evidence preserved
 - Symmetric Player Mapping / Receiver UX Amendment: Product Owner ADOPTED / Formal Amendment complete
-- Revised source implementation: complete; automated verification PASS; current working-tree candidate not committed
+- Revised source implementation: complete; automated verification PASS; Version 1.2 RC Product Source commit `810a9e134c5de1e033eb644027c37f51834fd6d4`
 - Revised physical E2E: Product Owner PASS for the accepted symmetric Receiver flow; later RC refinements and Player Delete change retain their separately recorded verification boundaries
-- Formal status sync: Official 101 / 102 and Decision Log v2.6 preserve the pre-implementation Design Gate as history and record the later implementation complete, Product Owner physical acceptance, Version 1.2 RC integration, and distribution-not-started state
+- Formal status sync: Official 101 / 102 and Decision Log v2.6 preserve the pre-implementation Design Gate as history and record the later implementation complete, Product Owner physical acceptance, and Version 1.2 RC integration
+- Version 1.2 Build 80 Internal TestFlight evidence: `implementation/CueScore_1.2_Build80_Internal_TestFlight_2026-10-01.md` (`VALID` / `IN_BETA_TESTING`; Product Owner physical verification pending; audience `INTERNAL_ONLY`, not `APP_STORE_ELIGIBLE`)
 - Decision 12 remains the historical Later / Deferred registration; Official 101 / 102 are the adopted successor Decision and Specification.
 - UI Prototype acceptance evidence: `implementation/CueScore_Match_Sharing_v1_UI_Prototype_PO_Acceptance_2026-09-27.md`
 - Symmetric amendment evidence: `implementation/CueScore_Match_Sharing_v1_Symmetric_Player_Mapping_Amendment_2026-09-29.md`
