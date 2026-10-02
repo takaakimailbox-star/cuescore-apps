@@ -129,7 +129,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 
 Player UX finalization status:
 
-- Version 1.2 Build 82 App Store Eligible / Internal TestFlight evidence: `implementation/CueScore_1.2_Build82_App_Store_Eligible_Internal_TestFlight_2026-10-02.md` (`VALID` / `APP_STORE_ELIGIBLE` / `IN_BETA_TESTING`; Product Owner final smoke pending; App Store Version 1.2 not created)
+- Version 1.2 Build 83 Final App Store Eligible Candidate / Internal TestFlight evidence: `implementation/CueScore_1.2_Build83_Final_App_Store_Eligible_Internal_TestFlight_2026-10-02.md` (`VALID` / `APP_STORE_ELIGIBLE` / `IN_BETA_TESTING`; Product Owner final smoke pending; Build 82 superseded; App Store Version 1.2 not created)
+- Version 1.2 Build 82 App Store Eligible / Internal TestFlight evidence: `implementation/CueScore_1.2_Build82_App_Store_Eligible_Internal_TestFlight_2026-10-02.md` (`VALID` / `APP_STORE_ELIGIBLE` / `IN_BETA_TESTING`; superseded pre-content-fit artifact; App Store Version 1.2 not created)
 - Player sort、custom Delete dialog、success／blocked NotificationはProduct Owner Physical PASS。
 - Resume Match modalのtouch yellow focus修正後、最下段CancelがBottom Navigation背面へ隠れるPhysical layout findingを確認。全3action表示、Navigation inset、modal内部scroll、backdrop ownershipを実装し、automated／390×844 Visual／native parity／Release Simulator Build／Physical RC overwrite refresh PASS。Product Owner physical re-testも5/5 PASS。
 - Accepted Product Source commit: `a0971212b13fa09ace7bbb2b0ab2571a0cd7497b`。

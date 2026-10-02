@@ -1,22 +1,20 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-1.2-PLAYER-LIST-CONTENT-FIT-20261002`
+- Decision ID: `CUESCORE-1.2-BUILD83-FINAL-ELIGIBLE-20261002`
 - Date: 2026-10-02
-- Gate: `PLAYER LIST FEW-PLAYERS CONTENT FIT / PRODUCT OWNER PHYSICAL ACCEPTED / UNDISTRIBUTED`
+- Gate: `BUILD 83 VALID / APP_STORE_ELIGIBLE / INTERNAL TESTFLIGHT AVAILABLE / PRODUCT OWNER FINAL SMOKE PENDING`
 
 ## Result
 
-- 少人数Player List cardを内容量に合わせ、最終Player row直後でcardを終了する。
-- 多人数時の実scroll owner、Bottom Navigation clearance、Safe Area、sort、row／鉛筆1:1を維持する。
-- 0／1／2／7／11／12 Players、検索結果1／2 Players、keyboard相当viewportを検証する。
-- 既存Physical RCのBundle IDとdata containerを維持し、Version `1.2 (82)`をアンインストールなしで上書きinstallする。
-- Product Source commit `f2cd1c769c96c1104caf33944eb35d65372f4a0e`を正本とし、Physical RCでProduct Owner Acceptance済みと記録する。
+- Physical Accepted Product Source commit `f2cd1c769c96c1104caf33944eb35d65372f4a0e`を製品内容の正本とする。
+- Build identityだけをBuild 83 Source Commit `1fc69c80370620b4db0448ecbcea1f5d28f003ca`へ更新し、通常の`TestFlight & App Store`経路で配布する。
+- Build 83は`VALID`／`APP_STORE_ELIGIBLE`／`IN_BETA_TESTING`。Product Owner final smokeは非破壊の最小項目に限定する。
+- Build 82はFew-Players Content-Fit修正前artifactとしてimmutableのまま履歴保持し、最終候補には使用しない。
 
 ## Boundary
 
-- Build 82の既存App Store eligible／Internal TestFlight artifactは修正前artifactとして変更せず、Version 1.2最終提出候補には使用しない。
-- 次候補はBuild 83。本GateではBuild 83、Archive、Upload、TestFlight、App Store Connect、App Store Version 1.2は行わない。
+- App Store Version 1.2作成、External TestFlight、App Review、Release、metadata／screenshots／Privacy／CueScore Pro／price／availability変更、Build 84作成、公開Version 1.1変更は禁止。
 
 ## STOP
 
-Stop after Product Source／DocumentationをGitHubへ固定する。Build 83作成、Archive、Upload、TestFlight、App Store Connectへ進まない。
+Stop after Build 83 Internal TestFlight availability and Evidence／External GitHub synchronization. Product Owner Physical PASSを自動記録せず、App Store Version 1.2作成へ進まない。
