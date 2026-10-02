@@ -1,21 +1,20 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-1.2-APP-REVIEW-SUBMISSION-20261002`
-- Date: 2026-10-02
-- Gate: `APP REVIEW SUBMITTED — WAITING FOR REVIEW`
+- Decision ID: `CUESCORE-1.2-BUILD84-MATCH-SHARING-PHYSICAL-ACCEPTANCE-20261003`
+- Date: 2026-10-03
+- Gate: `BUILD 84 MATCH SHARING FIX / PHYSICAL ACCEPTED / SOURCE FORMALIZATION`
 
 ## Result
 
-- Product OwnerはVersion `1.2`／Build `83`のApp Review Submissionを承認した。
-- 提出前identityは全件一致し、blocking error 0。
-- Review Submission `ae69d05f-3f0c-4f10-bcb0-b72893db66f1`を提出した。
-- SubmissionとApp Versionは`WAITING_FOR_REVIEW`、itemはVersion 1.2のみ1件、release typeは`MANUAL`。
+- Product OwnerはVersion `1.2`／Build `84` Physical RCでMatch Sharing Sender／Receiver、Single QR、re-share、Native Scanner、Camera permission recovery、Settings-only permission UIをALL PASSと判定した。
+- Build 83のprivacy failure、共有IDの早期保存、Receiver recovery flashをBuild 84 Product Source `8783c5e2ef4a73405ea6334c268422f6964fc920`で修正し、Official 101／102のcontractは変更していない。
+- Version 1.2 Build 83のReview Submissionは取り下げ済みで、App Versionは`DEVELOPER_REJECTED`。Build 83のInternal TestFlight、`VALID`／`APP_STORE_ELIGIBLE`、release type `MANUAL`は維持する。
 
 ## Boundary
 
-- Apple審査結果を待つ。
-- Release、Automatic Release、Build 84、product source変更、Archive／Upload、metadata／screenshots／Privacy／CueScore Pro／price／availability変更は行わない。
+- Build 84はsource formalizationまで。Archive、Upload、TestFlight、App Store Connect、Review再提出、Release、Build 85へ進まない。
+- dirty local mirrorと旧worktreeへ触れず、External GitHubを正本とする。
 
 ## STOP
 
-App Review提出、`WAITING_FOR_REVIEW`確認、Evidence／External GitHub同期後STOP。一般Releaseへ進まない。
+2 commitとExternal GitHub同期後STOP。次工程は別Decisionを必要とする。

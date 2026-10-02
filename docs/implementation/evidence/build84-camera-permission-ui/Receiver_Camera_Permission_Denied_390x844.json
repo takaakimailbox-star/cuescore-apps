@@ -1,0 +1,55 @@
+{
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "title": "カメラの許可が必要です",
+  "body": "QRコードを読み取るには、設定でカメラを許可してください。",
+  "overlay": {
+    "x": 0,
+    "y": 0,
+    "width": 390,
+    "height": 844,
+    "right": 390,
+    "bottom": 844
+  },
+  "message": {
+    "x": 18,
+    "y": 73,
+    "width": 354,
+    "height": 753,
+    "right": 372,
+    "bottom": 826
+  },
+  "settings": {
+    "x": 35,
+    "y": 503.59375,
+    "width": 320,
+    "height": 50,
+    "right": 355,
+    "bottom": 553.59375
+  },
+  "back": {
+    "x": 12,
+    "y": 1,
+    "width": 44,
+    "height": 44,
+    "right": 56,
+    "bottom": 45
+  },
+  "visibleActionLabels": [
+    "設定を開く"
+  ],
+  "cameraCheckVisible": false,
+  "settingsVisible": true,
+  "backVisible": true,
+  "settingsTapTargetAtLeast44": true,
+  "backTapTargetAtLeast44": true,
+  "clipping": false,
+  "horizontalOverflow": false,
+  "bottomNavigationVisible": false,
+  "messageScroll": {
+    "scrollHeight": 753,
+    "clientHeight": 753
+  }
+}

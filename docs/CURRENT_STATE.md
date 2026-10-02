@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## Version 1.2 Build 84 Match Sharing Physical Acceptance / Source Formalization（2026年10月3日）
+
+- Build 83実機で確認されたSender privacy failureの原因は、保存済み`analysis.events`をcloneし、Category／Season／memo／unknown local-only fieldまで共有payloadへ渡していたこと。Build 84では既存Format v1 event allow-listから共有eventを再構築し、strict privacy validatorを維持した。
+- 新規`sharedMatchId`はQR artifact生成成功後にだけ永続化する。Receiverはnative `startScan`成功後にだけScanner UIを表示し、retry時は旧session／listenerを破棄してauthorizationを再読取する。
+- Camera denied／restricted UIは`設定を開く`の1 actionと既存Backだけに限定し、`カメラを確認する`と再permission request loopを削除。authorized／notDetermined contractは維持した。
+- Product Owner Physical RC結果はSender、Single QR、re-share、Receiver Native Scanner、Camera ON、permission recovery、Settings-only UI、Back、Settings遷移、許可後の次回Scanner起動をALL PASS。
+- Product Source commit: `8783c5e2ef4a73405ea6334c268422f6964fc920`。Automatedはcamera dedicated `5/5`、Build 84 focused `13/13`、Match Sharing `122/122`、Full Node `609/609`、FAIL／SKIPPED `0/0`。native parity、Release Simulator Build、Physical RC data preservationをPASS。
+- Version `1.2`／Build `84`、cache identity `2.0-build84-match-sharing-fix-v1`。Build 84 Archive／Upload／TestFlight／App Store Connect／Review再提出／Releaseは未実施。Build 83 reviewは取り下げ済みでVersion 1.2は`DEVELOPER_REJECTED`、Build 83は`VALID`／`APP_STORE_ELIGIBLE`／Internal TestFlight `IN_BETA_TESTING`、release type `MANUAL`を維持。
+- Gate: `BUILD 84 MATCH SHARING FIX / PHYSICAL ACCEPTED / SOURCE FORMALIZATION`。Evidence: `docs/implementation/CueScore_v1.2_Build84_Match_Sharing_Physical_Acceptance_Source_Formalization_2026-10-03.md`。
+
 ## Version 1.2 Build 83 App Review Submission（2026年10月2日）
 
 - Product Ownerの明示承認後、提出直前read-backでVersion `1.2`、Build `83`、Build ID `f45b388a-9268-4d94-aa7a-56c4299799c1`、`VALID`／`APP_STORE_ELIGIBLE`、Review Submission `ae69d05f-3f0c-4f10-bcb0-b72893db66f1`、Version 1.2のみ1 item、`MANUAL`、JPN only、CueScore Pro `APPROVED`／`NON_CONSUMABLE`／`JPY 980`、blocking error 0を確認した。
