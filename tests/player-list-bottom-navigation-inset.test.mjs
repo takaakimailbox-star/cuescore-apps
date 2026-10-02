@@ -6,12 +6,16 @@ const html=readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const css=readFileSync(new URL("../navigation-shell-phase1.css",import.meta.url),"utf8");
 const js=readFileSync(new URL("../navigation-shell-phase1.js",import.meta.url),"utf8");
 const revision=readFileSync(new URL("../ui-revision-v12.js",import.meta.url),"utf8");
+const playerListRule=css.match(/body\.cue-phase1-normal-mode \.player-management-formal-v1 \.player-library-list\{([^}]*)\}/)?.[1]||"";
 
-test("Player root reserves Bottom Navigation and Safe Area on its real scroll owner",()=>{
+test("Player root keeps a content-fit card and reserves Bottom Navigation outside its real scroll owner",()=>{
   assert.match(html,/class="player-library-main" id="playerLibraryMain"[\s\S]*?class="player-library-list" id="playerLibraryList"/);
   assert.match(html,/\.player-management-formal-v1 \.player-library-main\{[\s\S]*?overflow:hidden/);
   assert.match(html,/\.player-management-formal-v1 \.player-library-list\{[\s\S]*?overflow-y:auto/);
-  assert.match(css,/body\.cue-phase1-normal-mode \.player-management-formal-v1 \.player-library-list\{[\s\S]*?padding-bottom:calc\(var\(--cue-phase1-nav-height\) \+ 18px \+ env\(safe-area-inset-bottom\)\)!important/);
+  assert.match(playerListRule,/margin-bottom:calc\(var\(--cue-phase1-nav-height\) \+ 18px \+ env\(safe-area-inset-bottom\)\)/);
+  assert.match(playerListRule,/padding-bottom:0!important/);
+  assert.match(playerListRule,/scroll-padding-bottom:18px/);
+  assert.doesNotMatch(playerListRule,/padding-bottom:calc\(var\(--cue-phase1-nav-height\)/);
   assert.doesNotMatch(css,/body\.cue-phase1-normal-mode \.player-library-main,/);
 });
 

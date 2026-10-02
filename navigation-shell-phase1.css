@@ -21,8 +21,9 @@
 body.cue-phase1-normal-mode .records-list{padding-bottom:calc(var(--cue-phase1-nav-height) + 18px + env(safe-area-inset-bottom))!important}
 body.cue-phase1-normal-mode .player-management-formal-v1 .player-library-list{
   overscroll-behavior-y:contain;
-  scroll-padding-bottom:calc(var(--cue-phase1-nav-height) + 18px + env(safe-area-inset-bottom));
-  padding-bottom:calc(var(--cue-phase1-nav-height) + 18px + env(safe-area-inset-bottom))!important
+  scroll-padding-bottom:18px;
+  margin-bottom:calc(var(--cue-phase1-nav-height) + 18px + env(safe-area-inset-bottom));
+  padding-bottom:0!important
 }
 body.cue-phase1-normal-mode .player-stats-body,
 body.cue-phase1-normal-mode .player-journey-scroll-v2,

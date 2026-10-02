@@ -18,7 +18,7 @@ const server=createServer(async(request,response)=>{
   }catch(_){response.writeHead(404);response.end("Not found");}
 });
 
-const names=["あおい","しょう","かいと","小瀬古 隆太郎","有栖川 結衣花","山田 太郎","佐藤 美咲","長いプレーヤー名の表示確認用","鈴木 一郎","高橋 さくら","伊藤 海","渡辺 結菜"];
+const names=["検索確認 あおい","検索確認 しょう","かいと","小瀬古 隆太郎","有栖川 結衣花","山田 太郎","佐藤 美咲","長いプレーヤー名の表示確認用","鈴木 一郎","高橋 さくら","伊藤 海","渡辺 結菜"];
 const players=count=>Array.from({length:count},(_,index)=>({
   id:`player-bottom-inset-${String(index+1).padStart(2,"0")}`,
   name:names[index]||`プレーヤー ${index+1}`,
@@ -67,22 +67,33 @@ async function playerAudit(count,{captureTop=false,captureBottom=false,keyboardE
   if(count)await page.locator("#playerLibraryList .player-management-row-v1").nth(count-1).waitFor();
   else await page.locator("#playerLibraryList .player-library-empty").waitFor();
   await page.waitForTimeout(80);
-  if(captureTop)await page.screenshot({path:path.join(output,`Player_${count}_Normal_390x844.png`),animations:"disabled"});
+  if(captureTop){
+    await page.evaluate(()=>{window.scrollTo(0,0);document.getElementById("playerLibraryList").scrollTop=0;});
+    await page.screenshot({path:path.join(output,`Player_${count}_Normal_390x844.png`),animations:"disabled"});
+  }
   let searchIntegrity=null;
   if(count>1){
     const expectedId="player-bottom-inset-01";
-    await page.locator("#playerLibrarySearch").fill(names[0]);
-    await page.waitForTimeout(80);
-    searchIntegrity=await page.evaluate(expected=>{
-      const list=document.getElementById("playerLibraryList"),rows=[...list.querySelectorAll(":scope > .player-management-row-v1")],row=rows[0],info=row?.querySelector(":scope > .player-hub-info-v3"),edit=row?.querySelector(":scope > .player-hub-edit-v3");
-      return {rowCount:rows.length,infoCount:list.querySelectorAll(".player-hub-info-v3").length,editCount:list.querySelectorAll(".player-hub-edit-v3").length,blankRows:rows.filter(item=>!item.querySelector(":scope > .player-hub-info-v3")?.dataset.statsPlayer).length,orphanControls:list.querySelectorAll(":scope > .player-hub-info-v3,:scope > .player-hub-edit-v3").length,infoId:info?.dataset.statsPlayer||"",editId:edit?.dataset.editPlayer||"",pass:rows.length===1&&info?.dataset.statsPlayer===expected&&edit?.dataset.editPlayer===expected};
-    },expectedId);
+    const measureSearch=async query=>{
+      await page.locator("#playerLibrarySearch").fill(query);
+      await page.waitForTimeout(80);
+      return page.evaluate(()=>{
+        const list=document.getElementById("playerLibraryList"),rows=[...list.querySelectorAll(":scope > .player-management-row-v1")],last=rows.at(-1),listRect=list.getBoundingClientRect(),lastRect=last?.getBoundingClientRect(),info=row=>row?.querySelector(":scope > .player-hub-info-v3"),edit=row=>row?.querySelector(":scope > .player-hub-edit-v3");
+        return {query:document.getElementById("playerLibrarySearch")?.value||"",rowCount:rows.length,infoCount:list.querySelectorAll(".player-hub-info-v3").length,editCount:list.querySelectorAll(".player-hub-edit-v3").length,blankRows:rows.filter(item=>!info(item)?.dataset.statsPlayer).length,orphanControls:list.querySelectorAll(":scope > .player-hub-info-v3,:scope > .player-hub-edit-v3").length,trailingCardSpace:lastRect?listRect.bottom-lastRect.bottom:null,paddingBottom:getComputedStyle(list).paddingBottom,maxScroll:list.scrollHeight-list.clientHeight,ids:rows.map(row=>({info:info(row)?.dataset.statsPlayer||"",edit:edit(row)?.dataset.editPlayer||""}))};
+      });
+    };
+    const one=await measureSearch(names[0]);
+    const two=await measureSearch("検索確認");
+    searchIntegrity={one,two,pass:one.rowCount===1&&one.ids[0]?.info===expectedId&&one.ids[0]?.edit===expectedId&&one.trailingCardSpace<=2&&two.rowCount===2&&two.ids.every(item=>item.info&&item.info===item.edit)&&two.trailingCardSpace<=2&&one.paddingBottom==="0px"&&two.paddingBottom==="0px"};
     await page.locator("#playerLibrarySearch").fill("");
     await page.waitForTimeout(80);
   }
   await page.evaluate(()=>{const list=document.getElementById("playerLibraryList");list.scrollTop=list.scrollHeight;});
   await page.waitForTimeout(120);
-  if(captureBottom)await page.screenshot({path:path.join(output,`Player_${count}_Final_390x844.png`),animations:"disabled"});
+  if(captureBottom){
+    await page.evaluate(()=>window.scrollTo(0,0));
+    await page.screenshot({path:path.join(output,`Player_${count}_Final_390x844.png`),animations:"disabled"});
+  }
   const metrics=await page.evaluate(()=>{
     const rect=node=>{if(!node)return null;const value=node.getBoundingClientRect();return {x:value.x,y:value.y,width:value.width,height:value.height,right:value.right,bottom:value.bottom};};
     const list=document.getElementById("playerLibraryList"),nav=document.querySelector(".cue-phase1-tab-bar"),rows=[...list.querySelectorAll(":scope > .player-management-row-v1")],infos=[...list.querySelectorAll(".player-hub-info-v3")],edits=[...list.querySelectorAll(".player-hub-edit-v3")],last=rows.at(-1),info=last?.querySelector(".player-hub-info-v3"),edit=last?.querySelector(".player-hub-edit-v3");
@@ -97,12 +108,13 @@ async function playerAudit(count,{captureTop=false,captureBottom=false,keyboardE
       rowIntegrityPass:rowIntegrity.length===rows.length&&rowIntegrity.every(row=>row.pass),
       blankRows:rowIntegrity.filter(row=>!row.infoId).length,
       orphanControls:list.querySelectorAll(":scope > .player-hub-info-v3,:scope > .player-hub-edit-v3").length,
-      scrollOwner:{id:list.id,overflowY:getComputedStyle(list).overflowY,scrollTop:list.scrollTop,scrollHeight:list.scrollHeight,clientHeight:list.clientHeight,maxScroll:list.scrollHeight-list.clientHeight,paddingBottom:getComputedStyle(list).paddingBottom,scrollPaddingBottom:getComputedStyle(list).scrollPaddingBottom},
+      scrollOwner:{id:list.id,overflowY:getComputedStyle(list).overflowY,scrollTop:list.scrollTop,scrollHeight:list.scrollHeight,clientHeight:list.clientHeight,maxScroll:list.scrollHeight-list.clientHeight,paddingBottom:getComputedStyle(list).paddingBottom,marginBottom:getComputedStyle(list).marginBottom,scrollPaddingBottom:getComputedStyle(list).scrollPaddingBottom},
       navigation:navRect,
       list:listRect,
       finalPlayerRow:lastRowRect,
       finalPlayer:infoRect,
       finalPlayerVisualBottom:visualBottom||null,
+      trailingCardSpace:lastRowRect?listRect.bottom-lastRowRect.bottom:null,
       finalPlayerGap:visualBottom?navRect.y-visualBottom:null,
       finalEdit:editRect,
       finalEditTapTarget:editRect?editRect.width>=44&&editRect.height>=44:null,
@@ -198,7 +210,9 @@ const audit={
   player:{
     0:await playerAudit(0),
     1:await playerAudit(1),
+    2:await playerAudit(2,{captureTop:true}),
     7:await playerAudit(7,{captureTop:true,captureBottom:true}),
+    11:await playerAudit(11,{captureTop:true,captureBottom:true}),
     12:await playerAudit(12,{captureBottom:true,keyboardEquivalent:true})
   },
   history:{
@@ -209,7 +223,7 @@ const audit={
   roots:await rootRegression()
 };
 
-const playerPass=[audit.player[1],audit.player[7],audit.player[12]].every(item=>item.rowIntegrityPass&&item.blankRows===0&&item.orphanControls===0&&item.controlCount.info===item.count&&item.controlCount.edit===item.count&&item.finalPlayerGap>=17&&item.finalEditTapTarget&&item.finalEditAboveNavigation&&item.finalEditOpened&&item.finalEditTarget?.pass&&item.scrollStable&&!item.horizontalOverflow)&&(audit.player[7].searchIntegrity?.pass===true)&&(audit.player[12].searchIntegrity?.pass===true);
+const playerPass=[audit.player[1],audit.player[2],audit.player[7],audit.player[11],audit.player[12]].every(item=>item.rowIntegrityPass&&item.blankRows===0&&item.orphanControls===0&&item.controlCount.info===item.count&&item.controlCount.edit===item.count&&item.finalPlayerGap>=17&&item.finalEditTapTarget&&item.finalEditAboveNavigation&&item.finalEditOpened&&item.finalEditTarget?.pass&&item.scrollStable&&!item.horizontalOverflow&&item.scrollOwner.paddingBottom==="0px"&&item.scrollOwner.marginBottom==="86px"&&item.trailingCardSpace<=2)&&[audit.player[1],audit.player[2],audit.player[7]].every(item=>item.scrollOwner.maxScroll===0)&&[audit.player[11],audit.player[12]].every(item=>item.scrollOwner.maxScroll>0)&&(audit.player[2].searchIntegrity?.pass===true)&&(audit.player[7].searchIntegrity?.pass===true)&&(audit.player[11].searchIntegrity?.pass===true)&&(audit.player[12].searchIntegrity?.pass===true);
 const historyPass=[audit.history[1],audit.history[12]].every(item=>item.finalMatchAboveNavigation&&item.scrollStable&&!item.horizontalOverflow);
 audit.result={playerPass,historyPass,rootPass:Object.values(audit.roots).every(item=>item.navVisible&&item.selected&&!item.horizontalOverflow),keyboardEquivalentPass:audit.player[12].keyboardEquivalent?.pass===true};
 await writeFile(path.join(output,"Visual_Audit.json"),`${JSON.stringify(audit,null,2)}\n`);
