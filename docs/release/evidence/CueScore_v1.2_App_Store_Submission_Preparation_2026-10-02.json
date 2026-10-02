@@ -1,0 +1,123 @@
+{
+  "app": "CueScore Apps",
+  "date": "2026-10-02",
+  "gate": "READY FOR PRODUCT OWNER APP REVIEW SUBMISSION",
+  "auditCheckedAt": "2026-10-02T05:08:20.205Z",
+  "appStoreVersion": {
+    "id": "b794d928-74af-45e4-8342-65a570f294f2",
+    "version": "1.2",
+    "state": "READY_FOR_REVIEW",
+    "releaseType": "MANUAL"
+  },
+  "build": {
+    "number": "83",
+    "id": "f45b388a-9268-4d94-aa7a-56c4299799c1",
+    "bundleId": "com.takaakimailboxstar.cuescoreapps",
+    "sourceCommit": "1fc69c80370620b4db0448ecbcea1f5d28f003ca",
+    "processingState": "VALID",
+    "audience": "APP_STORE_ELIGIBLE",
+    "usesNonExemptEncryption": false
+  },
+  "whatsNewJa": "試合記録の共有とプレーヤー管理を改善しました。\n・完了した試合をQRコードで別のCueScore Appsへ共有できるようになりました。\n・プレーヤーの削除や並び順、一覧表示を改善しました。\n・中断中の試合の再開画面など、表示と操作性を改善しました。",
+  "metadata": {
+    "locale": "ja",
+    "descriptionLength": 575,
+    "keywords": "ビリヤード,スコア,試合,対戦,ローテーション,9ボール,10ボール,JPA,14-1,3C",
+    "supportUrl": "https://takaakimailbox-star.github.io/cuescore-apps/support.html",
+    "promotionalTextPresent": true,
+    "screenshots": {
+      "displayType": "APP_IPHONE_65",
+      "count": 6,
+      "complete": 6,
+      "changed": false,
+      "visualAudit": "PASS_WITH_NON_BLOCKING_HISTORICAL_VERSION_LABEL"
+    }
+  },
+  "reviewNotes": {
+    "id": "8f5e3dbe-817d-4d02-936e-323b68eac909",
+    "length": 2928,
+    "matchSharingPresent": true,
+    "contactPresent": true,
+    "signInRequired": false
+  },
+  "publicUrls": {
+    "appStore": "https://apps.apple.com/jp/app/cuescore-apps/id6802027038",
+    "support": "https://takaakimailbox-star.github.io/cuescore-apps/support.html",
+    "privacy": "https://takaakimailbox-star.github.io/cuescore-apps/privacy.html",
+    "terms": "https://takaakimailbox-star.github.io/cuescore-apps/terms.html",
+    "httpStatus": { "appStore": 200, "support": 200, "privacy": 200, "terms": 200 },
+    "publicJapanStorePrivacy": "DATA_NOT_COLLECTED",
+    "directAuthenticatedAppPrivacyUi": "NOT_VERIFIED"
+  },
+  "availability": {
+    "appTerritories": ["JPN"],
+    "appAvailableInNewTerritories": false,
+    "iapTerritories": ["JPN"],
+    "iapAvailableInNewTerritories": false
+  },
+  "iap": {
+    "id": "6808464490",
+    "name": "CueScore Pro",
+    "productId": "com.takaakimailboxstar.cuescoreapps.pro",
+    "type": "NON_CONSUMABLE",
+    "state": "APPROVED",
+    "currency": "JPY",
+    "price": 980,
+    "addedToSubmission": false,
+    "changed": false
+  },
+  "reviewSubmission": {
+    "id": "ae69d05f-3f0c-4f10-bcb0-b72893db66f1",
+    "state": "READY_FOR_REVIEW",
+    "submittedDate": null,
+    "itemCount": 1,
+    "items": [
+      {
+        "id": "YWU2OWQwNWYtM2YwYy00ZjEwLWJjYjAtYjcyODkzZGI2NmYxfDZ8ODkyMzgzMjEy",
+        "type": "APP_STORE_VERSION",
+        "appStoreVersionId": "b794d928-74af-45e4-8342-65a570f294f2",
+        "state": "READY_FOR_REVIEW"
+      }
+    ],
+    "submitted": false
+  },
+  "productOwnerFinalSmoke": {
+    "result": "ALL_PASS",
+    "pass": 9,
+    "fail": 0,
+    "items": [
+      "TestFlight 1.2 (83)",
+      "cold launch to Home",
+      "Player row / pencil",
+      "Player sort",
+      "Few-Players Content-Fit",
+      "multi-player Bottom Navigation clearance",
+      "Interrupted Match Modal three actions",
+      "no yellow focus outline",
+      "Match Sharing entry"
+    ]
+  },
+  "existingVerification": {
+    "focused": { "pass": 230, "fail": 0, "skipped": 0 },
+    "fullNode": { "pass": 596, "fail": 0, "skipped": 0 },
+    "nativeParity": "PASS",
+    "releaseSimulatorBuild": "PASS",
+    "releaseDeviceArchive": "PASS",
+    "appleValidation": "PASS"
+  },
+  "boundary": {
+    "blockingErrorsDetected": 0,
+    "appReviewSubmitted": false,
+    "releasePerformed": false,
+    "automaticReleaseEnabled": false,
+    "externalTestFlight": false,
+    "build84Created": false,
+    "archiveCreated": false,
+    "uploadPerformed": false,
+    "productSourceChanged": false,
+    "iapChanged": false,
+    "priceChanged": false,
+    "availabilityChanged": false,
+    "privacyChanged": false
+  }
+}

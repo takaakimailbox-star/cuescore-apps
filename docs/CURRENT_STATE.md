@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Version 1.2 Build 83 App Store Submission Preparation（2026年10月2日）
+
+- Product OwnerはTestFlight `1.2 (83)`のFinal Smokeを実施し、TestFlight identity、cold launch、Player row／pencil、sort、Few-Players Content-Fit、多人数Bottom Navigation clearance、Interrupted Match Modal 3 actions、yellow focus 0、Match Sharing入口を`9/9 PASS`と判定した。再smokeは不要。
+- App Store Version `1.2`を作成し、Version ID `b794d928-74af-45e4-8342-65a570f294f2`へBuild 83（ASC Build ID `f45b388a-9268-4d94-aa7a-56c4299799c1`）を紐付けた。Version／itemは`READY_FOR_REVIEW`、Buildは`VALID`／`APP_STORE_ELIGIBLE`、release typeは`MANUAL`、`usesNonExemptEncryption=false`。
+- Product Owner指定の日本語What's Newを設定。既存metadataを継承し、`APP_IPHONE_65` screenshot 6枚は全件`COMPLETE`。Match Sharingの送受信、Player 1／2 mapping、duplicate、ローカルSingle QR、camera用途をReview Notesへ追記した。
+- App／CueScore ProともJPNのみ、`availableInNewTerritories=false`。CueScore Proは`NON_CONSUMABLE`／`APPROVED`、日本価格`JPY 980`。Free／Pro contract変更0。App Store／Support／Privacy／TermsはHTTP 200、公開App Store Privacyは`データの収集なし`。
+- Review Submission `ae69d05f-3f0c-4f10-bcb0-b72893db66f1`を作成。Version 1.2だけの1 item、`READY_FOR_REVIEW`、submitted dateなし。blocking required-field error 0。
+- Gate: `READY FOR PRODUCT OWNER APP REVIEW SUBMISSION`。`Submit for Review`直前でSTOP。App Review提出、Release、Build 84、Archive、Upload、product source、Privacy、price／availability変更なし。Evidence: `docs/release/CueScore_v1.2_App_Store_Submission_Preparation_2026-10-02.md`。
+
 ## Version 1.2 Build 83 Final App Store Eligible Candidate / Internal TestFlight（2026年10月2日）
 
 - Physical Accepted product source `f2cd1c769c96c1104caf33944eb35d65372f4a0e`を維持し、Build number、Build-linked cache identity、対応test expectationだけをBuild 83 Source Commit `1fc69c80370620b4db0448ecbcea1f5d28f003ca`として正本化した。Version `1.2`／Build `83`／Bundle ID `com.takaakimailboxstar.cuescoreapps`、cache identity `2.0-build83-app-store-eligible-rc-v1`。
