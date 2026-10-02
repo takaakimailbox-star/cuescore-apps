@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T03:43:47.131Z",
+  "generatedAt": "2026-10-02T00:18:21.765Z",
   "viewport": {
     "width": 390,
     "height": 844
@@ -28,11 +28,12 @@
         "id": "playerLibraryList",
         "overflowY": "auto",
         "scrollTop": 0,
-        "scrollHeight": 230,
-        "clientHeight": 230,
+        "scrollHeight": 144,
+        "clientHeight": 144,
         "maxScroll": 0,
-        "paddingBottom": "86px",
-        "scrollPaddingBottom": "86px"
+        "paddingBottom": "0px",
+        "marginBottom": "86px",
+        "scrollPaddingBottom": "18px"
       },
       "navigation": {
         "x": 0,
@@ -46,13 +47,14 @@
         "x": 10,
         "y": 139,
         "width": 370,
-        "height": 231.59375,
+        "height": 145.59375,
         "right": 380,
-        "bottom": 370.59375
+        "bottom": 284.59375
       },
       "finalPlayerRow": null,
       "finalPlayer": null,
       "finalPlayerVisualBottom": null,
+      "trailingCardSpace": null,
       "finalPlayerGap": null,
       "finalEdit": null,
       "finalEditTapTarget": null,
@@ -89,11 +91,12 @@
         "id": "playerLibraryList",
         "overflowY": "auto",
         "scrollTop": 0,
-        "scrollHeight": 142,
-        "clientHeight": 142,
+        "scrollHeight": 56,
+        "clientHeight": 56,
         "maxScroll": 0,
-        "paddingBottom": "86px",
-        "scrollPaddingBottom": "86px"
+        "paddingBottom": "0px",
+        "marginBottom": "86px",
+        "scrollPaddingBottom": "18px"
       },
       "navigation": {
         "x": 0,
@@ -107,9 +110,9 @@
         "x": 10,
         "y": 139,
         "width": 370,
-        "height": 144,
+        "height": 58,
         "right": 380,
-        "bottom": 283
+        "bottom": 197
       },
       "finalPlayerRow": {
         "x": 15,
@@ -128,6 +131,7 @@
         "bottom": 196
       },
       "finalPlayerVisualBottom": 196,
+      "trailingCardSpace": 1,
       "finalPlayerGap": 580,
       "finalEdit": {
         "x": 331,
@@ -146,8 +150,146 @@
       "finalEditOpened": true,
       "finalEditTarget": {
         "expectedId": "player-bottom-inset-01",
-        "expectedName": "あおい",
-        "editorName": "あおい",
+        "expectedName": "検索確認 あおい",
+        "editorName": "検索確認 あおい",
+        "title": "プレーヤー編集",
+        "pass": true
+      }
+    },
+    "2": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "count": 2,
+      "controlCount": {
+        "info": 2,
+        "edit": 2
+      },
+      "rowIntegrity": [
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-01",
+          "editId": "player-bottom-inset-01",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-02",
+          "editId": "player-bottom-inset-02",
+          "pass": true
+        }
+      ],
+      "rowIntegrityPass": true,
+      "blankRows": 0,
+      "orphanControls": 0,
+      "scrollOwner": {
+        "id": "playerLibraryList",
+        "overflowY": "auto",
+        "scrollTop": 0,
+        "scrollHeight": 113,
+        "clientHeight": 113,
+        "maxScroll": 0,
+        "paddingBottom": "0px",
+        "marginBottom": "86px",
+        "scrollPaddingBottom": "18px"
+      },
+      "navigation": {
+        "x": 0,
+        "y": 776,
+        "width": 390,
+        "height": 68,
+        "right": 390,
+        "bottom": 844
+      },
+      "list": {
+        "x": 10,
+        "y": 139,
+        "width": 370,
+        "height": 115,
+        "right": 380,
+        "bottom": 254
+      },
+      "finalPlayerRow": {
+        "x": 15,
+        "y": 197,
+        "width": 360,
+        "height": 56,
+        "right": 375,
+        "bottom": 253
+      },
+      "finalPlayer": {
+        "x": 15,
+        "y": 197,
+        "width": 316,
+        "height": 56,
+        "right": 331,
+        "bottom": 253
+      },
+      "finalPlayerVisualBottom": 253,
+      "trailingCardSpace": 1,
+      "finalPlayerGap": 523,
+      "finalEdit": {
+        "x": 331,
+        "y": 197,
+        "width": 44,
+        "height": 56,
+        "right": 375,
+        "bottom": 253
+      },
+      "finalEditTapTarget": true,
+      "finalEditAboveNavigation": true,
+      "horizontalOverflow": false,
+      "searchIntegrity": {
+        "one": {
+          "query": "検索確認 あおい",
+          "rowCount": 1,
+          "infoCount": 1,
+          "editCount": 1,
+          "blankRows": 0,
+          "orphanControls": 0,
+          "trailingCardSpace": 1,
+          "paddingBottom": "0px",
+          "maxScroll": 0,
+          "ids": [
+            {
+              "info": "player-bottom-inset-01",
+              "edit": "player-bottom-inset-01"
+            }
+          ]
+        },
+        "two": {
+          "query": "検索確認",
+          "rowCount": 2,
+          "infoCount": 2,
+          "editCount": 2,
+          "blankRows": 0,
+          "orphanControls": 0,
+          "trailingCardSpace": 1,
+          "paddingBottom": "0px",
+          "maxScroll": 0,
+          "ids": [
+            {
+              "info": "player-bottom-inset-01",
+              "edit": "player-bottom-inset-01"
+            },
+            {
+              "info": "player-bottom-inset-02",
+              "edit": "player-bottom-inset-02"
+            }
+          ]
+        },
+        "pass": true
+      },
+      "scrollStable": true,
+      "scrollTopAfterWait": 0,
+      "finalEditOpened": true,
+      "finalEditTarget": {
+        "expectedId": "player-bottom-inset-02",
+        "expectedName": "検索確認 しょう",
+        "editorName": "検索確認 しょう",
         "title": "プレーヤー編集",
         "pass": true
       }
@@ -220,11 +362,12 @@
         "id": "playerLibraryList",
         "overflowY": "auto",
         "scrollTop": 0,
-        "scrollHeight": 484,
-        "clientHeight": 484,
+        "scrollHeight": 398,
+        "clientHeight": 398,
         "maxScroll": 0,
-        "paddingBottom": "86px",
-        "scrollPaddingBottom": "86px"
+        "paddingBottom": "0px",
+        "marginBottom": "86px",
+        "scrollPaddingBottom": "18px"
       },
       "navigation": {
         "x": 0,
@@ -238,9 +381,9 @@
         "x": 10,
         "y": 139,
         "width": 370,
-        "height": 486,
+        "height": 400,
         "right": 380,
-        "bottom": 625
+        "bottom": 539
       },
       "finalPlayerRow": {
         "x": 15,
@@ -259,6 +402,7 @@
         "bottom": 538
       },
       "finalPlayerVisualBottom": 538,
+      "trailingCardSpace": 1,
       "finalPlayerGap": 238,
       "finalEdit": {
         "x": 331,
@@ -272,13 +416,44 @@
       "finalEditAboveNavigation": true,
       "horizontalOverflow": false,
       "searchIntegrity": {
-        "rowCount": 1,
-        "infoCount": 1,
-        "editCount": 1,
-        "blankRows": 0,
-        "orphanControls": 0,
-        "infoId": "player-bottom-inset-01",
-        "editId": "player-bottom-inset-01",
+        "one": {
+          "query": "検索確認 あおい",
+          "rowCount": 1,
+          "infoCount": 1,
+          "editCount": 1,
+          "blankRows": 0,
+          "orphanControls": 0,
+          "trailingCardSpace": 1,
+          "paddingBottom": "0px",
+          "maxScroll": 0,
+          "ids": [
+            {
+              "info": "player-bottom-inset-01",
+              "edit": "player-bottom-inset-01"
+            }
+          ]
+        },
+        "two": {
+          "query": "検索確認",
+          "rowCount": 2,
+          "infoCount": 2,
+          "editCount": 2,
+          "blankRows": 0,
+          "orphanControls": 0,
+          "trailingCardSpace": 1,
+          "paddingBottom": "0px",
+          "maxScroll": 0,
+          "ids": [
+            {
+              "info": "player-bottom-inset-01",
+              "edit": "player-bottom-inset-01"
+            },
+            {
+              "info": "player-bottom-inset-02",
+              "edit": "player-bottom-inset-02"
+            }
+          ]
+        },
         "pass": true
       },
       "scrollStable": true,
@@ -288,6 +463,207 @@
         "expectedId": "player-bottom-inset-07",
         "expectedName": "佐藤 美咲",
         "editorName": "佐藤 美咲",
+        "title": "プレーヤー編集",
+        "pass": true
+      }
+    },
+    "11": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "count": 11,
+      "controlCount": {
+        "info": 11,
+        "edit": 11
+      },
+      "rowIntegrity": [
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-01",
+          "editId": "player-bottom-inset-01",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-02",
+          "editId": "player-bottom-inset-02",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-03",
+          "editId": "player-bottom-inset-03",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-04",
+          "editId": "player-bottom-inset-04",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-05",
+          "editId": "player-bottom-inset-05",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-06",
+          "editId": "player-bottom-inset-06",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-07",
+          "editId": "player-bottom-inset-07",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-08",
+          "editId": "player-bottom-inset-08",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-09",
+          "editId": "player-bottom-inset-09",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-10",
+          "editId": "player-bottom-inset-10",
+          "pass": true
+        },
+        {
+          "infoCount": 1,
+          "editCount": 1,
+          "infoId": "player-bottom-inset-11",
+          "editId": "player-bottom-inset-11",
+          "pass": true
+        }
+      ],
+      "rowIntegrityPass": true,
+      "blankRows": 0,
+      "orphanControls": 0,
+      "scrollOwner": {
+        "id": "playerLibraryList",
+        "overflowY": "auto",
+        "scrollTop": 9,
+        "scrollHeight": 626,
+        "clientHeight": 617,
+        "maxScroll": 9,
+        "paddingBottom": "0px",
+        "marginBottom": "86px",
+        "scrollPaddingBottom": "18px"
+      },
+      "navigation": {
+        "x": 0,
+        "y": 776,
+        "width": 390,
+        "height": 68,
+        "right": 390,
+        "bottom": 844
+      },
+      "list": {
+        "x": 10,
+        "y": 139,
+        "width": 370,
+        "height": 619,
+        "right": 380,
+        "bottom": 758
+      },
+      "finalPlayerRow": {
+        "x": 15,
+        "y": 701,
+        "width": 360,
+        "height": 56,
+        "right": 375,
+        "bottom": 757
+      },
+      "finalPlayer": {
+        "x": 15,
+        "y": 701,
+        "width": 316,
+        "height": 56,
+        "right": 331,
+        "bottom": 757
+      },
+      "finalPlayerVisualBottom": 757,
+      "trailingCardSpace": 1,
+      "finalPlayerGap": 19,
+      "finalEdit": {
+        "x": 331,
+        "y": 701,
+        "width": 44,
+        "height": 56,
+        "right": 375,
+        "bottom": 757
+      },
+      "finalEditTapTarget": true,
+      "finalEditAboveNavigation": true,
+      "horizontalOverflow": false,
+      "searchIntegrity": {
+        "one": {
+          "query": "検索確認 あおい",
+          "rowCount": 1,
+          "infoCount": 1,
+          "editCount": 1,
+          "blankRows": 0,
+          "orphanControls": 0,
+          "trailingCardSpace": 1,
+          "paddingBottom": "0px",
+          "maxScroll": 0,
+          "ids": [
+            {
+              "info": "player-bottom-inset-01",
+              "edit": "player-bottom-inset-01"
+            }
+          ]
+        },
+        "two": {
+          "query": "検索確認",
+          "rowCount": 2,
+          "infoCount": 2,
+          "editCount": 2,
+          "blankRows": 0,
+          "orphanControls": 0,
+          "trailingCardSpace": 1,
+          "paddingBottom": "0px",
+          "maxScroll": 0,
+          "ids": [
+            {
+              "info": "player-bottom-inset-01",
+              "edit": "player-bottom-inset-01"
+            },
+            {
+              "info": "player-bottom-inset-02",
+              "edit": "player-bottom-inset-02"
+            }
+          ]
+        },
+        "pass": true
+      },
+      "scrollStable": true,
+      "scrollTopAfterWait": 9,
+      "finalEditOpened": true,
+      "finalEditTarget": {
+        "expectedId": "player-bottom-inset-11",
+        "expectedName": "伊藤 海",
+        "editorName": "伊藤 海",
         "title": "プレーヤー編集",
         "pass": true
       }
@@ -395,11 +771,12 @@
         "id": "playerLibraryList",
         "overflowY": "auto",
         "scrollTop": 66,
-        "scrollHeight": 769,
-        "clientHeight": 703,
+        "scrollHeight": 683,
+        "clientHeight": 617,
         "maxScroll": 66,
-        "paddingBottom": "86px",
-        "scrollPaddingBottom": "86px"
+        "paddingBottom": "0px",
+        "marginBottom": "86px",
+        "scrollPaddingBottom": "18px"
       },
       "navigation": {
         "x": 0,
@@ -413,9 +790,9 @@
         "x": 10,
         "y": 139,
         "width": 370,
-        "height": 705,
+        "height": 619,
         "right": 380,
-        "bottom": 844
+        "bottom": 758
       },
       "finalPlayerRow": {
         "x": 15,
@@ -434,6 +811,7 @@
         "bottom": 757
       },
       "finalPlayerVisualBottom": 757,
+      "trailingCardSpace": 1,
       "finalPlayerGap": 19,
       "finalEdit": {
         "x": 331,
@@ -447,13 +825,44 @@
       "finalEditAboveNavigation": true,
       "horizontalOverflow": false,
       "searchIntegrity": {
-        "rowCount": 1,
-        "infoCount": 1,
-        "editCount": 1,
-        "blankRows": 0,
-        "orphanControls": 0,
-        "infoId": "player-bottom-inset-01",
-        "editId": "player-bottom-inset-01",
+        "one": {
+          "query": "検索確認 あおい",
+          "rowCount": 1,
+          "infoCount": 1,
+          "editCount": 1,
+          "blankRows": 0,
+          "orphanControls": 0,
+          "trailingCardSpace": 1,
+          "paddingBottom": "0px",
+          "maxScroll": 0,
+          "ids": [
+            {
+              "info": "player-bottom-inset-01",
+              "edit": "player-bottom-inset-01"
+            }
+          ]
+        },
+        "two": {
+          "query": "検索確認",
+          "rowCount": 2,
+          "infoCount": 2,
+          "editCount": 2,
+          "blankRows": 0,
+          "orphanControls": 0,
+          "trailingCardSpace": 1,
+          "paddingBottom": "0px",
+          "maxScroll": 0,
+          "ids": [
+            {
+              "info": "player-bottom-inset-01",
+              "edit": "player-bottom-inset-01"
+            },
+            {
+              "info": "player-bottom-inset-02",
+              "edit": "player-bottom-inset-02"
+            }
+          ]
+        },
         "pass": true
       },
       "scrollStable": true,

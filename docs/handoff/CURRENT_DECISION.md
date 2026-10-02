@@ -1,22 +1,22 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-1.2-BUILD82-APP-STORE-ELIGIBLE-20261002`
+- Decision ID: `CUESCORE-1.2-PLAYER-LIST-CONTENT-FIT-20261002`
 - Date: 2026-10-02
-- Gate: `BUILD 82 APP STORE ELIGIBLE / INTERNAL TESTFLIGHT`
+- Gate: `PLAYER LIST FEW-PLAYERS CONTENT FIT / PRODUCT OWNER PHYSICAL ACCEPTED / UNDISTRIBUTED`
 
 ## Result
 
-- Accepted product content `a0971212b13fa09ace7bbb2b0ab2571a0cd7497b`を維持し、Build 82 identityだけをSource Commit `7c7ba922c2ba0603757aa1a4f832324b5833dafe`として固定する。
-- Version `1.2`／Build `82`をInternal Testing Only OFFの通常`TestFlight & App Store`経路でUploadする。
-- Build 82は`VALID`／`APP_STORE_ELIGIBLE`／`usesNonExemptEncryption=false`。`CueScore Internal Testers`に含まれ、Internal stateは`IN_BETA_TESTING`。
-- Product Owner final smokeはartifact identity確認に限定し、destructive Player Delete／same-name identity testを再要求しない。
+- 少人数Player List cardを内容量に合わせ、最終Player row直後でcardを終了する。
+- 多人数時の実scroll owner、Bottom Navigation clearance、Safe Area、sort、row／鉛筆1:1を維持する。
+- 0／1／2／7／11／12 Players、検索結果1／2 Players、keyboard相当viewportを検証する。
+- 既存Physical RCのBundle IDとdata containerを維持し、Version `1.2 (82)`をアンインストールなしで上書きinstallする。
+- Product Source commit `f2cd1c769c96c1104caf33944eb35d65372f4a0e`を正本とし、Physical RCでProduct Owner Acceptance済みと記録する。
 
 ## Boundary
 
-- Public Version 1.1 remains unchanged. App Store Version 1.2 does not exist.
-- External TestFlight, App Store Version creation, App Review, Release, metadata, screenshots, Privacy, CueScore Pro, price, and availability remain outside scope.
-- Build 83は作成しない。
+- Build 82の既存App Store eligible／Internal TestFlight artifactは修正前artifactとして変更せず、Version 1.2最終提出候補には使用しない。
+- 次候補はBuild 83。本GateではBuild 83、Archive、Upload、TestFlight、App Store Connect、App Store Version 1.2は行わない。
 
 ## STOP
 
-Stop after Build 82 is `VALID`／`APP_STORE_ELIGIBLE`, available to the internal group, and Documentation is pushed/read back. Do not create App Store Version 1.2, submit for review, or release.
+Stop after Product Source／DocumentationをGitHubへ固定する。Build 83作成、Archive、Upload、TestFlight、App Store Connectへ進まない。

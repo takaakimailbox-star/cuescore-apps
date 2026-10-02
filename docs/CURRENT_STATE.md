@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## Version 1.2 Build 82 Player List Few-Players Content Fit（2026年10月2日）
+
+- Product Owner final smokeの主要項目はALL PASS。追加UI polishとして、少人数時のPlayer card内にBottom Navigation用reserveが描画され、最終row後へ大きな空白が残る問題を確認した。
+- 原因は実scroll owner `.player-library-list` の`padding-bottom`へNavigation 68px＋通常余白18px＋Safe Areaを置いていたこと。scroll owner／row geometryは維持し、同reserveをcard外側の`margin-bottom`へ移動した。Player rowの高さ、spacing、sort、編集actionは変更していない。
+- 390×844で0／1／2／7／11／12 Playersを検証。1／2／7件はscroll不要、11／12件は必要時のみscroll。2件時のcard末尾余白1px、11／12件最下端のNavigation gap 19px、row／鉛筆1:1、blank row 0、horizontal overflow 0。検索結果1／2件も末尾余白1px、keyboard相当560px高でもgap 19px。
+- focused `147/147`、Full Node `596/596`、native foundation＋Player List `11/11`、native parity、`git diff --check`、Release Simulator BuildをPASS。Version `1.2`／Build `82`／Bundle ID `com.takaakimailboxstar.cuescoreapps`を維持。
+- 正式native sync後、既存Physical RCへ`CueScore RC 1.2`／`com.takaakimailboxstar.cuescoreapps.rc12`／`1.2 (82)`としてアンインストールなしで上書きinstallした。LocalStorage database／SHM／WALのsizeと更新日時はinstall前後一致し、既存RC containerを保持。公開版Bundleはread-only確認のみで操作0。
+- Product Source commit: `f2cd1c769c96c1104caf33944eb35d65372f4a0e`。Physical RC `CueScore RC 1.2 / 1.2 (82)`でProduct Ownerが、card content-fit、row／鉛筆、Bottom Navigation overlap 0、通常page余白を実機PASS。
+- Gate: `IMPLEMENTATION COMPLETE / AUTOMATED PASS / VISUAL PASS / PRODUCT OWNER PHYSICAL ACCEPTED / UNDISTRIBUTED`。既存Build 82配布artifactは修正前artifactとしてimmutableのまま変更0で、Version 1.2最終提出候補には使用しない。次候補はBuild 83だが、本GateではBuild 83、Archive、Upload、TestFlight、App Store Connect、App Store Version 1.2を未実施。Evidence: `docs/implementation/CueScore_1.2_Build82_Player_List_Few_Players_Content_Fit_2026-10-02.md`。
+
 ## Version 1.2 Build 82 App Store Eligible / Internal TestFlight（2026年10月2日）
 
 - Accepted product content commit `a0971212b13fa09ace7bbb2b0ab2571a0cd7497b`を維持し、Build number／Build-linked cache identity／対応test expectationだけをBuild 82 Source Commit `7c7ba922c2ba0603757aa1a4f832324b5833dafe`として正本化した。Version `1.2`／Build `82`／Bundle ID `com.takaakimailboxstar.cuescoreapps`、cache identity `2.0-build82-app-store-eligible-rc-v1`。
