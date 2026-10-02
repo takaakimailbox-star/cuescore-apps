@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## Version 1.2 Build 83 App Review Submission（2026年10月2日）
+
+- Product Ownerの明示承認後、提出直前read-backでVersion `1.2`、Build `83`、Build ID `f45b388a-9268-4d94-aa7a-56c4299799c1`、`VALID`／`APP_STORE_ELIGIBLE`、Review Submission `ae69d05f-3f0c-4f10-bcb0-b72893db66f1`、Version 1.2のみ1 item、`MANUAL`、JPN only、CueScore Pro `APPROVED`／`NON_CONSUMABLE`／`JPY 980`、blocking error 0を確認した。
+- Apple公式APIでReview Submissionを`submitted=true`へ更新し、HTTP 200。Apple authoritative submitted timestampは`2026-10-02T05:50:15.919Z`（`2026-10-02 14:50:15.919 JST`）。
+- 提出後read-backでSubmissionとApp Versionは`WAITING_FOR_REVIEW`、submitted item 1件、Version 1.2／Build 83 relationship、release type `MANUAL`を確認した。review-item resource自体は直後も`READY_FOR_REVIEW`だが、parent submission／Versionのauthoritative stateは`WAITING_FOR_REVIEW`。
+- Gate: `APP REVIEW SUBMITTED — WAITING FOR REVIEW`。Release、Automatic Release、Build 84、Archive／Upload、product source、metadata／screenshots／Privacy、CueScore Pro、price／availability、External TestFlight、公開Version 1.1変更なし。Evidence: `docs/release/CueScore_v1.2_App_Review_Submission_2026-10-02.md`。
+
 ## Version 1.2 Build 83 App Store Submission Preparation（2026年10月2日）
 
 - Product OwnerはTestFlight `1.2 (83)`のFinal Smokeを実施し、TestFlight identity、cold launch、Player row／pencil、sort、Few-Players Content-Fit、多人数Bottom Navigation clearance、Interrupted Match Modal 3 actions、yellow focus 0、Match Sharing入口を`9/9 PASS`と判定した。再smokeは不要。

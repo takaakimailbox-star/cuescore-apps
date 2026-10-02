@@ -129,6 +129,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 
 Player UX finalization status:
 
+- Version 1.2 App Review submission evidence: `release/CueScore_v1.2_App_Review_Submission_2026-10-02.md` (`APP REVIEW SUBMITTED — WAITING FOR REVIEW`; Version 1.2 / Build 83; one submitted item; MANUAL release)
+- Machine-readable submission evidence: `release/evidence/CueScore_v1.2_App_Review_Submission_2026-10-02.json`
 - Version 1.2 App Store submission preparation evidence: `release/CueScore_v1.2_App_Store_Submission_Preparation_2026-10-02.md` (`READY FOR PRODUCT OWNER APP REVIEW SUBMISSION`; Build 83 Final Smoke `9/9 PASS`; Version 1.2 and sole review item `READY_FOR_REVIEW`; not submitted; MANUAL release)
 - Machine-readable evidence: `release/evidence/CueScore_v1.2_App_Store_Submission_Preparation_2026-10-02.json`
 - Version 1.2 Build 83 Final App Store Eligible Candidate / Internal TestFlight evidence: `implementation/CueScore_1.2_Build83_Final_App_Store_Eligible_Internal_TestFlight_2026-10-02.md` (`VALID` / `APP_STORE_ELIGIBLE` / `IN_BETA_TESTING`; Product Owner final smoke pending; Build 82 superseded; App Store Version 1.2 not created)

@@ -1,0 +1,80 @@
+{
+  "app": "CueScore Apps",
+  "date": "2026-10-02",
+  "result": "APP REVIEW SUBMITTED — WAITING FOR REVIEW",
+  "preflight": {
+    "checkedAt": "2026-10-02T05:49:07.765Z",
+    "result": "PASS",
+    "blockingErrors": 0,
+    "submissionState": "READY_FOR_REVIEW",
+    "versionState": "READY_FOR_REVIEW",
+    "itemCount": 1
+  },
+  "submission": {
+    "id": "ae69d05f-3f0c-4f10-bcb0-b72893db66f1",
+    "submittedAtUtc": "2026-10-02T05:50:15.919Z",
+    "submittedAtJst": "2026-10-02T14:50:15.919+09:00",
+    "state": "WAITING_FOR_REVIEW",
+    "itemCount": 1,
+    "items": [
+      {
+        "id": "YWU2OWQwNWYtM2YwYy00ZjEwLWJjYjAtYjcyODkzZGI2NmYxfDZ8ODkyMzgzMjEy",
+        "type": "APP_STORE_VERSION",
+        "resourceStateAtReadBack": "READY_FOR_REVIEW",
+        "appStoreVersionId": "b794d928-74af-45e4-8342-65a570f294f2",
+        "inAppPurchaseVersionId": null
+      }
+    ]
+  },
+  "postSubmissionReadBack": {
+    "checkedAt": "2026-10-02T05:50:35.154Z",
+    "result": "PASS"
+  },
+  "appStoreVersion": {
+    "id": "b794d928-74af-45e4-8342-65a570f294f2",
+    "version": "1.2",
+    "state": "WAITING_FOR_REVIEW",
+    "releaseType": "MANUAL"
+  },
+  "build": {
+    "number": "83",
+    "id": "f45b388a-9268-4d94-aa7a-56c4299799c1",
+    "bundleId": "com.takaakimailboxstar.cuescoreapps",
+    "sourceCommit": "1fc69c80370620b4db0448ecbcea1f5d28f003ca",
+    "processingState": "VALID",
+    "audience": "APP_STORE_ELIGIBLE",
+    "usesNonExemptEncryption": false
+  },
+  "whatsNewJa": "試合記録の共有とプレーヤー管理を改善しました。\n・完了した試合をQRコードで別のCueScore Appsへ共有できるようになりました。\n・プレーヤーの削除や並び順、一覧表示を改善しました。\n・中断中の試合の再開画面など、表示と操作性を改善しました。",
+  "availability": {
+    "appTerritories": ["JPN"],
+    "appAvailableInNewTerritories": false,
+    "iapTerritories": ["JPN"],
+    "iapAvailableInNewTerritories": false
+  },
+  "iap": {
+    "name": "CueScore Pro",
+    "productId": "com.takaakimailboxstar.cuescoreapps.pro",
+    "type": "NON_CONSUMABLE",
+    "state": "APPROVED",
+    "currency": "JPY",
+    "price": 980,
+    "addedToSubmission": false,
+    "changed": false
+  },
+  "boundary": {
+    "releasePerformed": false,
+    "automaticReleaseEnabled": false,
+    "build84Created": false,
+    "archiveCreated": false,
+    "uploadPerformed": false,
+    "externalTestFlight": false,
+    "metadataChangedAfterPreparation": false,
+    "screenshotsChanged": false,
+    "appPrivacyChanged": false,
+    "iapChanged": false,
+    "priceChanged": false,
+    "availabilityChanged": false,
+    "publicVersion11Changed": false
+  }
+}
