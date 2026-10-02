@@ -89,26 +89,45 @@
     return `<svg class="${className}" role="img" aria-label="${safeLabel}" viewBox="0 0 ${total} ${total}" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect width="${total}" height="${total}" fill="#fff"/><path d="${qrPathData(qrValue)}" fill="#000"/></svg>`;
   }
 
-  async function prepareShare({matchId,demoMode=false,readRecord,ensureSharedMatchId,codec=runtimeCodec}={}){
+  async function prepareShare({matchId,demoMode=false,readRecord,prepareSharedMatchId,persistSharedMatchId,codec=runtimeCodec}={}){
     if(demoMode)fail("DEMO_EXPORT_REJECTED","Demo matches cannot be shared");
-    if(typeof readRecord!=="function"||typeof ensureSharedMatchId!=="function")fail("INVALID_SENDER_ADAPTER","Sender adapter is incomplete");
+    if(typeof readRecord!=="function"||typeof prepareSharedMatchId!=="function"||typeof persistSharedMatchId!=="function")fail("INVALID_SENDER_ADAPTER","Sender adapter is incomplete");
     const wanted=String(matchId||"");
     const before=clone(readRecord(wanted));
     if(!before||localId(before)!==wanted)fail("MATCH_NOT_FOUND","Match was not found");
     assertSenderEligible(before);
-    const sharedMatchId=ensureSharedMatchId(wanted);
-    const stored=clone(readRecord(wanted));
-    if(!stored||localId(stored)!==wanted||stored.sharedMatchId!==sharedMatchId||!persistence.isUuidV4(sharedMatchId))fail("PERSISTENCE_READBACK_FAILED","Shared Match identity could not be verified");
-    assertSenderEligible(stored);
-    const logical=adapters.buildSharedMatchV1(stored,{sharedMatchId,demoMode:false});
+    const sharedMatchId=prepareSharedMatchId(wanted);
+    if(!persistence.isUuidV4(sharedMatchId))fail("INVALID_UUID","Shared Match identity is invalid");
+    const logical=adapters.buildSharedMatchV1(before,{sharedMatchId,demoMode:false});
     let payload;
     try{payload=await format.encodeSharedMatchV1(logical,codec);}catch(error){if(error?.code)throw error;fail("EXPORT_FAILED","Match Sharing payload could not be created",error);}
     const qrValue=createQr(payload);
+    persistSharedMatchId(wanted,sharedMatchId);
+    const stored=clone(readRecord(wanted));
+    if(!stored||localId(stored)!==wanted||stored.sharedMatchId!==sharedMatchId)fail("PERSISTENCE_READBACK_FAILED","Shared Match identity could not be verified");
+    assertSenderEligible(stored);
     return Object.freeze({record:stored,logical,payload,qr:qrValue,svg:renderQrSvg(qrValue),displaySizePt:DISPLAY_SIZE_PT});
+  }
+
+  function bindShareAction(button,options,{signal}={}){
+    if(!button?.addEventListener)fail("INVALID_SENDER_ADAPTER","Share action is unavailable");
+    const listener=async()=>{
+      if(button.disabled)return;
+      button.disabled=true;button.setAttribute?.("aria-busy","true");
+      try{
+        const prepared=await prepareShare(options);
+        await options?.onSuccess?.(prepared);
+      }catch(error){
+        await options?.onError?.(error);
+        button.disabled=false;button.removeAttribute?.("aria-busy");
+      }
+    };
+    button.addEventListener("click",listener,signal?{signal}:undefined);
+    return listener;
   }
 
   return Object.freeze({
     ECC,QUIET_ZONE_MODULES,DISPLAY_SIZE_PT,MAX_QR_VERSION,ALPHANUMERIC,MatchSharingSenderError,
-    assertSenderEligible,runtimeCodec,createQr,qrPathData,renderQrSvg,prepareShare,
+    assertSenderEligible,runtimeCodec,createQr,qrPathData,renderQrSvg,prepareShare,bindShareAction,
   });
 });

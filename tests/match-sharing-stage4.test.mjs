@@ -25,8 +25,9 @@ function shareHarness(record=completed()){
   let records=[clone(record)],writes=0;
   return {
     readRecord:id=>clone(records.find(item=>String(item.id)===String(id))||null),
-    ensureSharedMatchId:id=>persistence.ensureSharedMatchId({
-      matchId:id,readRecords:()=>clone(records),replaceRecords:next=>{writes+=1;records=clone(next)},uuidFactory:()=>UUID,
+    prepareSharedMatchId:id=>persistence.prepareSharedMatchId({matchId:id,readRecords:()=>clone(records),uuidFactory:()=>UUID}),
+    persistSharedMatchId:(id,sharedMatchId)=>persistence.persistSharedMatchId({
+      matchId:id,sharedMatchId,readRecords:()=>clone(records),replaceRecords:next=>{writes+=1;records=clone(next)},
     }),
     get records(){return clone(records)},get writes(){return writes},
   };
@@ -43,8 +44,8 @@ test("sender eligibility allows completed normal Match and rejects Demo, unfinis
 test("first share persists one UUID and repeat share reuses deterministic payload",async()=>{
   const initial=completed();delete initial.sharedMatchId;
   const harness=shareHarness(initial);
-  const first=await sender.prepareShare({matchId:initial.id,readRecord:harness.readRecord,ensureSharedMatchId:harness.ensureSharedMatchId});
-  const second=await sender.prepareShare({matchId:initial.id,readRecord:harness.readRecord,ensureSharedMatchId:harness.ensureSharedMatchId});
+  const first=await sender.prepareShare({matchId:initial.id,readRecord:harness.readRecord,prepareSharedMatchId:harness.prepareSharedMatchId,persistSharedMatchId:harness.persistSharedMatchId});
+  const second=await sender.prepareShare({matchId:initial.id,readRecord:harness.readRecord,prepareSharedMatchId:harness.prepareSharedMatchId,persistSharedMatchId:harness.persistSharedMatchId});
   assert.equal(harness.writes,1);
   assert.equal(first.logical.sharedMatchId,UUID);
   assert.equal(second.logical.sharedMatchId,UUID);
@@ -54,14 +55,14 @@ test("first share persists one UUID and repeat share reuses deterministic payloa
 });
 
 test("Demo rejects before UUID persistence, compression and QR generation",async()=>{
-  const harness=shareHarness(completed({sharedMatchId:undefined}));let ensureCalls=0;
-  await assert.rejects(()=>sender.prepareShare({matchId:"sender-match",demoMode:true,readRecord:harness.readRecord,ensureSharedMatchId:()=>{ensureCalls+=1;return UUID}}),error=>error.code==="DEMO_EXPORT_REJECTED");
-  assert.equal(ensureCalls,0);assert.equal(harness.writes,0);
+  const harness=shareHarness(completed({sharedMatchId:undefined}));let prepareCalls=0;
+  await assert.rejects(()=>sender.prepareShare({matchId:"sender-match",demoMode:true,readRecord:harness.readRecord,prepareSharedMatchId:()=>{prepareCalls+=1;return UUID},persistSharedMatchId:()=>{}}),error=>error.code==="DEMO_EXPORT_REJECTED");
+  assert.equal(prepareCalls,0);assert.equal(harness.writes,0);
 });
 
 test("persistence/read-back failure never returns a QR",async()=>{
   const record=completed({sharedMatchId:undefined});
-  await assert.rejects(()=>sender.prepareShare({matchId:record.id,readRecord:()=>clone(record),ensureSharedMatchId:()=>UUID}),error=>error.code==="PERSISTENCE_READBACK_FAILED");
+  await assert.rejects(()=>sender.prepareShare({matchId:record.id,readRecord:()=>clone(record),prepareSharedMatchId:()=>UUID,persistSharedMatchId:()=>{}}),error=>error.code==="PERSISTENCE_READBACK_FAILED");
 });
 
 test("production fflate runtime remains Stage 1 decode-compatible",async()=>{
@@ -113,7 +114,7 @@ test("Match Detail exposes adopted sender action while Demo and result mode rema
   assert.match(html,/match-detail-share-v1[^`]+<span>共有<\/span>/);
   assert.match(html,/if\(resultMode\|\|window\.CueScoreDemoData\?\.isDemo\?\.\(\)\)return false/);
   assert.match(html,/CueScoreMatchSharingSenderV1\?\.assertSenderEligible/);
-  assert.match(html,/matchId:record\.id[\s\S]+ensureSharedMatchId:ensureSharedMatchIdV1/);
+  assert.match(html,/matchId:record\.id[\s\S]+prepareSharedMatchId:prepareSharedMatchIdV1[\s\S]+persistSharedMatchId:persistSharedMatchIdV1/);
 });
 
 test("Sender QR screen preserves adopted copy, Back and accessibility contract",()=>{
@@ -127,7 +128,8 @@ test("Sender QR screen preserves adopted copy, Back and accessibility contract",
 
 test("Sender errors stay on Match Detail and use the existing toast pattern",()=>{
   assert.match(html,/showToast\("試合を共有できません",matchSharingSenderErrorV1\(error\)\)/);
-  assert.match(html,/shareAction\.disabled=false/);
+  assert.match(senderSource,/button\.disabled=false/);
+  assert.match(senderSource,/button\.removeAttribute\?\.\("aria-busy"\)/);
   assert.doesNotMatch(html,/Match Sharing sender failed[^\n]+alert\(/);
 });
 

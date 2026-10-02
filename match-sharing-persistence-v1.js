@@ -55,9 +55,9 @@
     })||null;
   }
 
-  function ensureSharedMatchId({matchId,readRecords,replaceRecords,uuidFactory,demoMode=false}={}){
+  function prepareSharedMatchId({matchId,readRecords,uuidFactory,demoMode=false}={}){
     if(demoMode)fail("DEMO_EXPORT_REJECTED","Demo matches cannot be shared");
-    if(typeof readRecords!=="function"||typeof replaceRecords!=="function")fail("INVALID_STORAGE_ADAPTER","Storage adapter is incomplete");
+    if(typeof readRecords!=="function")fail("INVALID_STORAGE_ADAPTER","Storage adapter is incomplete");
     const original=readRecords();
     if(!Array.isArray(original))fail("INVALID_STORAGE_DATA","Match storage must be an array");
     const wanted=String(matchId||"");
@@ -69,13 +69,32 @@
     if(existing)return existing;
     const generated=String((typeof uuidFactory==="function"?uuidFactory():globalThis.crypto?.randomUUID?.())||"");
     if(!isUuidV4(generated))fail("INVALID_UUID_GENERATOR","UUID factory must return UUID v4");
-    const next=original.map((record,recordIndex)=>recordIndex===index?{...record,sharedMatchId:generated}:record);
+    return generated;
+  }
+
+  function persistSharedMatchId({matchId,sharedMatchId,readRecords,replaceRecords,demoMode=false}={}){
+    if(demoMode)fail("DEMO_EXPORT_REJECTED","Demo matches cannot be shared");
+    if(typeof readRecords!=="function"||typeof replaceRecords!=="function")fail("INVALID_STORAGE_ADAPTER","Storage adapter is incomplete");
+    if(!isUuidV4(sharedMatchId))fail("INVALID_UUID","Invalid sharedMatchId");
+    const original=readRecords();
+    if(!Array.isArray(original))fail("INVALID_STORAGE_DATA","Match storage must be an array");
+    const wanted=String(matchId||"");
+    const index=original.findIndex(record=>localId(record)===wanted);
+    if(index<0)fail("MATCH_NOT_FOUND","Match was not found");
+    const target=original[index];
+    if(!isCompletedMatch(target))fail("INELIGIBLE_MATCH","Only completed matches can be shared");
+    const existing=assertOptionalSharedMatchId(target);
+    if(existing){
+      if(existing.toLowerCase()!==sharedMatchId.toLowerCase())fail("SHARED_MATCH_ID_CONFLICT","Match already has a different sharedMatchId");
+      return existing;
+    }
+    const next=original.map((record,recordIndex)=>recordIndex===index?{...record,sharedMatchId}:record);
     try{
       replaceRecords(next);
       const stored=readRecords();
       const readBack=Array.isArray(stored)?stored.find(record=>localId(record)===wanted):null;
-      if(readBack?.sharedMatchId!==generated)fail("PERSISTENCE_READBACK_FAILED","sharedMatchId read-back did not match");
-      return generated;
+      if(readBack?.sharedMatchId!==sharedMatchId)fail("PERSISTENCE_READBACK_FAILED","sharedMatchId read-back did not match");
+      return sharedMatchId;
     }catch(error){
       let rollbackVerified=Boolean(error?.restoreRollbackVerified||error?.sharedMatchRollbackVerified);
       if(!rollbackVerified){
@@ -87,6 +106,11 @@
       error.sharedMatchRollbackVerified=rollbackVerified;
       throw error;
     }
+  }
+
+  function ensureSharedMatchId(options={}){
+    const sharedMatchId=prepareSharedMatchId(options);
+    return persistSharedMatchId({...options,sharedMatchId});
   }
 
   const normalizeText=value=>String(value??"").normalize("NFKC").trim().replace(/\s+/g," ").toLocaleLowerCase("ja");
@@ -129,6 +153,6 @@
   return Object.freeze({
     UUID_V4,MatchSharingPersistenceError,isUuidV4,assertOptionalSharedMatchId,
     validateSharedMatchIds,isCompletedMatch,findDuplicateSharedMatchId,
-    ensureSharedMatchId,legacyRecordKey,mergeMatchRecords
+    prepareSharedMatchId,persistSharedMatchId,ensureSharedMatchId,legacyRecordKey,mergeMatchRecords
   });
 });

@@ -8787,8 +8787,8 @@ body {
   </main>
 
   
-  <script src="./demo-data.js?v=2.0-build83-app-store-eligible-rc-v1"></script>
-  <script src="./player-library-order-v1.js?v=2.0-build83-app-store-eligible-rc-v1"></script>
+  <script src="./demo-data.js?v=2.0-build84-match-sharing-fix-v1"></script>
+  <script src="./player-library-order-v1.js?v=2.0-build84-match-sharing-fix-v1"></script>
   <script src="./vendor/fflate-0.8.3.js"></script>
   <script src="./vendor/qrcodegen-1.8.0.js"></script>
   <script src="./match-sharing-validation-v1.js"></script>
@@ -9735,15 +9735,26 @@ let matchRecordsRawCacheV152 = null;
 
   // Match Sharing v1 Stage 2: lazily persist one stable transport identity
   // for the completed normal Match being shared. No bulk migration is done.
-  function ensureSharedMatchIdV1(matchId) {
+  function prepareSharedMatchIdV1(matchId) {
     const persistence = window.CueScoreMatchSharingPersistenceV1;
     if (!persistence) throw new Error("Match Sharing persistence service is unavailable.");
-    return persistence.ensureSharedMatchId({
+    return persistence.prepareSharedMatchId({
       matchId,
       demoMode: Boolean(window.CueScoreDemoData?.isDemo?.()),
       readRecords: readMatchRecords,
-      replaceRecords: persistMatchRecordsOnlyV161,
       uuidFactory: () => crypto.randomUUID()
+    });
+  }
+
+  function persistSharedMatchIdV1(matchId, sharedMatchId) {
+    const persistence = window.CueScoreMatchSharingPersistenceV1;
+    if (!persistence) throw new Error("Match Sharing persistence service is unavailable.");
+    return persistence.persistSharedMatchId({
+      matchId,
+      sharedMatchId,
+      demoMode: Boolean(window.CueScoreDemoData?.isDemo?.()),
+      readRecords: readMatchRecords,
+      replaceRecords: persistMatchRecordsOnlyV161
     });
   }
 
@@ -9754,7 +9765,8 @@ let matchRecordsRawCacheV152 = null;
     ) || null;
   }
 
-  window.cueScoreEnsureSharedMatchIdV1 = ensureSharedMatchIdV1;
+  window.cueScorePrepareSharedMatchIdV1 = prepareSharedMatchIdV1;
+  window.cueScorePersistSharedMatchIdV1 = persistSharedMatchIdV1;
   window.cueScoreFindDuplicateSharedMatchIdV1 = findDuplicateSharedMatchIdV1;
 
   function escapeRecordText(value) {
@@ -9830,12 +9842,12 @@ let matchRecordsRawCacheV152 = null;
     const settings=document.getElementById("matchSharingReceiverSettingsV1");
     if(!scanner||!message||!title||!text||!retry||!settings)return;
     const isScanner=state?.screen==="scanner";
+    const actions=window.CueScoreMatchSharingReceiverV1.receiverActionState(state);
     scanner.hidden=!isScanner;message.hidden=isScanner;
     message.classList.toggle("is-success",state?.screen==="success");
-    settings.hidden=state?.permission!=="denied";
-    retry.hidden=state?.screen==="success"||state?.screen==="unavailable"||(state?.permission==="restricted");
-    retry.dataset.receiverRetryMode=state?.permission==="denied"?"permission":"scan";
-    retry.textContent=state?.code==="DUPLICATE"?"他の試合を読み取る":state?.permission==="denied"?"カメラを確認する":"もう一度読み取る";
+    settings.hidden=!actions.showSettings;
+    retry.hidden=!actions.showRetry;
+    retry.textContent=actions.retryLabel;
     if(state?.screen==="success"){
       title.textContent="試合共有QRを読み取りました";
       text.textContent="この試合データを確認できました。";
@@ -9966,15 +9978,12 @@ let matchRecordsRawCacheV152 = null;
   });
   document.getElementById("matchSharingFlowContentV1")?.addEventListener("change",event=>{const sideNumber=Number(event.target.dataset.newPlayerName);if(![1,2].includes(sideNumber))return;const state=ensureMatchSharingFlowControllerV1().get(),value={kind:"new",pendingKey:`side-${sideNumber}-${state.sharedMatchId}`,draft:{name:event.target.value,memo:"",avatar:{type:"default",id:"default_silhouette"}}};ensureMatchSharingFlowControllerV1().selectMapping(sideNumber,value)});
 
-  document.getElementById("matchSharingReceiveV1")?.addEventListener("click",()=>startMatchSharingReceiverV1());
+  window.CueScoreMatchSharingReceiverV1.bindReceiverEntry(
+    document.getElementById("matchSharingReceiveV1"),
+    ()=>startMatchSharingReceiverV1()
+  );
   document.getElementById("matchSharingReceiverBackV1")?.addEventListener("click",closeMatchSharingReceiverV1);
-  document.getElementById("matchSharingReceiverRetryV1")?.addEventListener("click",async event=>{
-    if(event.currentTarget.dataset.receiverRetryMode==="permission"){
-      renderMatchSharingReceiverStateV1({screen:"scanner",permission:"authorized"});
-      await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
-      await ensureMatchSharingScannerControllerV1().enter(matchSharingPreviewRectV1());
-      return;
-    }
+  document.getElementById("matchSharingReceiverRetryV1")?.addEventListener("click",async()=>{
     await closeMatchSharingReceiverV1();
     await startMatchSharingReceiverV1();
   });
@@ -19826,7 +19835,7 @@ let matchRecordsRawCacheV152 = null;
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build83-app-store-eligible-rc-v1";
+    const PWA_VERSION = "2.0-build84-match-sharing-fix-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -23621,28 +23630,19 @@ html body .jpa9-game-v1 .jpa-dead-action-v1:disabled{
     if(detailScroll&&Number.isFinite(Number(options?.restoreScrollTop)))detailScroll.scrollTop=Math.max(0,Number(options.restoreScrollTop));
     if(options?.focusShareAction)requestAnimationFrame(()=>document.getElementById("matchDetailShareV1")?.focus());
     const shareAction=document.getElementById("matchDetailShareV1");
-    shareAction?.addEventListener("click",async()=>{
-      if(shareAction.disabled)return;
-      const returnScrollTop=detailScroll?.scrollTop||0;
-      shareAction.disabled=true;
-      shareAction.setAttribute("aria-busy","true");
-      try{
-        const sender=window.CueScoreMatchSharingSenderV1;
-        if(!sender)throw new Error("Match Sharing sender is unavailable");
-        const prepared=await sender.prepareShare({
+    if(shareAction){
+      const sender=window.CueScoreMatchSharingSenderV1;
+      if(!sender)throw new Error("Match Sharing sender is unavailable");
+      sender.bindShareAction(shareAction,{
           matchId:record.id,
           demoMode:Boolean(window.CueScoreDemoData?.isDemo?.()),
           readRecord:id=>readMatchRecords().find(item=>String(item?.id)===String(id))||null,
-          ensureSharedMatchId:ensureSharedMatchIdV1,
-        });
-        showMatchSharingSenderQrV1(prepared.record,prepared,{returnScrollTop});
-      }catch(error){
-        console.warn("CueScore Match Sharing sender failed",error);
-        showToast("試合を共有できません",matchSharingSenderErrorV1(error));
-        shareAction.disabled=false;
-        shareAction.removeAttribute("aria-busy");
-      }
-    },{signal});
+          prepareSharedMatchId:prepareSharedMatchIdV1,
+          persistSharedMatchId:persistSharedMatchIdV1,
+          onSuccess:prepared=>showMatchSharingSenderQrV1(prepared.record,prepared,{returnScrollTop:detailScroll?.scrollTop||0}),
+          onError:error=>{console.warn("CueScore Match Sharing sender failed",error);showToast("試合を共有できません",matchSharingSenderErrorV1(error));},
+      },{signal});
+    }
     const detailBack=document.getElementById("recordDetailBackBtn");
     if(detailBack){
       let pointerDownAt=0,pointerDownX=0,pointerDownY=0,lastCloseRequestAt=0;
@@ -29260,7 +29260,7 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
   <script src="./analytics-build4-metrics.js"></script>
   <script src="./analysis-build4.js"></script>
   <script src="./player-detail-build6.js"></script>
-  <script src="./ui-revision-v12.js?v=2.0-build83-app-store-eligible-rc-v1"></script>
+  <script src="./ui-revision-v12.js?v=2.0-build84-match-sharing-fix-v1"></script>
   <script src="./final-ui-build18.js"></script>
   <link rel="stylesheet" href="./navigation-shell-phase1.css?v=2.0-build81-player-list-bottom-inset-v1" />
   <script src="./navigation-shell-phase1.js?v=2.0-build81-player-list-bottom-inset-v1"></script>

@@ -152,7 +152,7 @@ test("Free History notice uses global hidden count and existing Pro CTA",()=>{
 test("privacy, Demo, duplicate and error boundaries remain in the production route",()=>{
   assert.match(html,/CueScoreDemoData\?\.isDemo/);assert.match(html,/renderMatchSharingFlowV1\(flow\.get\(\)\)/);assert.doesNotMatch(html,/Imported badge|受信badge|QRから追加/);
   assert.match(html,/matchSharingReceiverMemoryV1\?\.clear/);
-  assert.match(html,/この試合はすでに取り込み済みです/);assert.match(html,/同じ試合が試合履歴に保存されています。/);assert.match(html,/他の試合を読み取る/);
+  assert.match(html,/この試合はすでに取り込み済みです/);assert.match(html,/同じ試合が試合履歴に保存されています。/);assert.equal(receiver.receiverActionState({screen:"error",code:"DUPLICATE"}).retryLabel,"他の試合を読み取る");
   assert.match(html,/findDuplicate:findDuplicateSharedMatchIdV1/);
   assert.match(html,/error\?\.code==="DUPLICATE_SHARED_MATCH_ID"\)showMatchSharingDuplicateStateV1\(\)/);
   assert.match(html,/await closeMatchSharingReceiverV1\(\);\s*await startMatchSharingReceiverV1\(\);/);

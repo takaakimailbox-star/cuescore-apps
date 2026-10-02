@@ -43,6 +43,16 @@
     return Object.freeze({code:code||"INVALID",message:"この試合データを読み込めませんでした。",retryable:true});
   }
 
+  function receiverActionState(state={}){
+    const permission=String(state?.permission||"");
+    const needsSettings=permission==="denied"||permission==="restricted";
+    return Object.freeze({
+      showSettings:needsSettings,
+      showRetry:!needsSettings&&state?.screen!=="success"&&state?.screen!=="unavailable",
+      retryLabel:state?.code==="DUPLICATE"?"他の試合を読み取る":"もう一度読み取る",
+    });
+  }
+
   async function decodeScannedPayload({payload,records=[],findDuplicate=null,demoMode=false,codec=sender.runtimeCodec}={}){
     if(demoMode)fail("DEMO_RECEIVER_REJECTED","Demo cannot start the Match Sharing receiver");
     if(typeof payload!=="string"||payload.length>validation.LIMITS.maxEncodedChars){
@@ -97,12 +107,12 @@
       lastRect=rect||lastRect;
       try{
         await installListeners();
-        active=true;
         setDiagnostic({phase:"start-requested",permission:"authorized",nativeStart:null,errorCode:null});
-        emit({screen:"scanner",permission:"authorized"});
         const nativeStart=await bridge.startScan({previewRect:lastRect});
         if(nativeStart?.active!==true)throw new MatchSharingReceiverError("SESSION_NOT_RUNNING","Camera capture did not start");
+        active=true;
         setDiagnostic({phase:"running",nativeStart:clone(nativeStart),errorCode:null});
+        emit({screen:"scanner",permission:"authorized"});
         return nativeStart;
       }catch(error){
         active=false;
@@ -147,5 +157,12 @@
     return Object.freeze({enter,retry,back,openSettings,memory,isActive:()=>active,diagnostic:()=>clone(diagnostic)});
   }
 
-  return Object.freeze({MatchSharingReceiverError,createMemoryState,decodeScannedPayload,productError,createScannerController});
+  function bindReceiverEntry(button,start,{signal}={}){
+    if(!button?.addEventListener||typeof start!=="function")fail("INVALID_RECEIVER_ENTRY","Receiver entry binding is invalid");
+    const listener=()=>Promise.resolve().then(start);
+    button.addEventListener("click",listener,signal?{signal}:undefined);
+    return listener;
+  }
+
+  return Object.freeze({MatchSharingReceiverError,createMemoryState,decodeScannedPayload,productError,receiverActionState,createScannerController,bindReceiverEntry});
 });

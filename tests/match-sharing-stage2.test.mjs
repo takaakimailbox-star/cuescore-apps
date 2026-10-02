@@ -92,8 +92,8 @@ test("persistence failure restores the original collection and reports rollback"
 
 test("semantic read-back mismatch also restores the original collection",()=>{
   const original=[completed("m1")];let stored=structuredClone(original),reads=0;
-  assert.throws(()=>persistence.ensureSharedMatchId({
-    matchId:"m1",uuidFactory:()=>UUID_A,
+  assert.throws(()=>persistence.persistSharedMatchId({
+    matchId:"m1",sharedMatchId:UUID_A,
     readRecords:()=>{reads+=1;return reads===2?[completed("m1")]:structuredClone(stored)},
     replaceRecords:next=>{stored=structuredClone(next)}
   }),error=>error.code==="PERSISTENCE_READBACK_FAILED"&&error.sharedMatchRollbackVerified===true);
@@ -155,7 +155,8 @@ test("production adapters use full normal storage and do not add UI or schema mi
   assert.match(html,/match-sharing-persistence-v1\.js/);
   assert.match(nativeBuild,/match-sharing-persistence-v1\.js/);
   assert.match(serviceWorker,/match-sharing-persistence-v1\.js/);
-  assert.match(html,/window\.cueScoreEnsureSharedMatchIdV1 = ensureSharedMatchIdV1/);
+  assert.match(html,/window\.cueScorePrepareSharedMatchIdV1 = prepareSharedMatchIdV1/);
+  assert.match(html,/window\.cueScorePersistSharedMatchIdV1 = persistSharedMatchIdV1/);
   assert.match(html,/readRecords: readMatchRecords/);
   assert.match(html,/replaceRecords: persistMatchRecordsOnlyV161/);
   assert.match(html,/uuidFactory: \(\) => crypto\.randomUUID\(\)/);

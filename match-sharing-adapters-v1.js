@@ -14,6 +14,55 @@
   const clone=value=>value==null?value:JSON.parse(JSON.stringify(value));
   const numberOr=(value,fallback=0)=>Number.isFinite(Number(value))?Number(value):fallback;
   const side=(value,index)=>value?.[index]??value?.[String(index)];
+  const EVENT_SPECS=Object.freeze({
+    break_result:Object.freeze([1,Object.freeze(["breakPlayer","resultLabel","pocketCount","pocketedBalls","legalBreak","scratch","breakFoul","illegalBreak","preBreakFoul","breakFailed"])]),
+    player_switch:Object.freeze([2,Object.freeze(["fromPlayer","toPlayer","reason"])]),
+    safety:Object.freeze([3,Object.freeze(["phase"])]),
+    ball_pocketed:Object.freeze([4,Object.freeze(["ball","points","pocketCount"])]),
+    foul:Object.freeze([5,Object.freeze(["foulType","phase","source"])]),
+    foul_result:Object.freeze([6,Object.freeze(["outcome"])]),
+    safety_result:Object.freeze([7,Object.freeze(["opponent","outcome","causedBy"])]),
+    rack_end:Object.freeze([8,Object.freeze(["winner","loser","rackEndReason"])]),
+    carom_point:Object.freeze([9,Object.freeze(["ball","points","pocketCount"])]),
+  });
+  const EVENT_CODES=Object.freeze(Object.fromEntries(Object.entries(EVENT_SPECS).map(([type,[code]])=>[code,type])));
+
+  // Match Sharing is an independent transport contract. Build each event from
+  // its explicit v1 fields instead of cloning the local journal object, which
+  // may also contain Category, Season, undo metadata, or future local fields.
+  function sharedEvent(event){
+    const type=String(event?.type||"");
+    const spec=EVENT_SPECS[type];
+    if(!spec)return null;
+    const value={
+      sequence:numberOr(event.sequence),type,
+      rack:numberOr(event.rack),inning:numberOr(event.inning),
+      player:event?.player==null?null:numberOr(event.player),
+    };
+    for(const key of spec[1])if(event?.[key]!==undefined)value[key]=clone(event[key]);
+    return value;
+  }
+  const sharedEvents=events=>(Array.isArray(events)?events:[]).map(sharedEvent).filter(Boolean);
+
+  function sharedAnalysisSummary(summary){
+    if(!summary||typeof summary!=="object"||Array.isArray(summary))return null;
+    const metrics=(source,keys)=>Object.fromEntries(keys.filter(key=>Object.hasOwn(source||{},key)).map(key=>[
+      key,source[key]==null?null:numberOr(source[key])
+    ]));
+    const player=value=>({
+      safety:metrics(value?.safety,["total","success","failed","successRate"]),
+      foul:metrics(value?.foul,["total","opening","middle","late","punished","noScore","punishedRate"]),
+    });
+    return {
+      schemaVersion:numberOr(summary.schemaVersion,2),eventCount:numberOr(summary.eventCount),
+      players:{1:player(side(summary.players,1)),2:player(side(summary.players,2))},
+    };
+  }
+
+  const sharedProgress=progress=>({
+    p1:(Array.isArray(progress?.p1)?progress.p1:[]).map(value=>numberOr(value)),
+    p2:(Array.isArray(progress?.p2)?progress.p2:[]).map(value=>numberOr(value)),
+  });
 
   function sharedPlayer(player={}){
     return {
@@ -119,11 +168,11 @@
       players:{1:sharedPlayer(side(record.players,1)),2:sharedPlayer(side(record.players,2))},
       discipline:disciplineData(record,gameType),
       eventMode,
-      events:clone(eventMode==="common"?commonEvents:analysisEvents),
-      analysisEvents:eventMode==="common"?clone(analysisEvents):null,
-      analysisSummary:clone(record.analysis?.summary||null),
+      events:sharedEvents(eventMode==="common"?commonEvents:analysisEvents),
+      analysisEvents:eventMode==="common"?sharedEvents(analysisEvents):null,
+      analysisSummary:sharedAnalysisSummary(record.analysis?.summary),
       recordingMode:String(record.analysis?.report?.recordingMode||(analysisEvents.length?"detail":"simple")),
-      progress:clone(record.progress||{p1:[0,numberOr(side(record.players,1)?.score)],p2:[0,numberOr(side(record.players,2)?.score)]}),
+      progress:sharedProgress(record.progress||{p1:[0,numberOr(side(record.players,1)?.score)],p2:[0,numberOr(side(record.players,2)?.score)]}),
     };
     return validation.validateSharedMatchV1(value);
   }
@@ -133,19 +182,6 @@
     if(!Array.isArray(value)||value.length!==PLAYER_FIELDS.length)throw new validation.MatchSharingError("INVALID_SCHEMA","Invalid compact player");
     return Object.fromEntries(PLAYER_FIELDS.map((key,index)=>[key,value[index]]));
   }
-
-  const EVENT_SPECS=Object.freeze({
-    break_result:Object.freeze([1,Object.freeze(["breakPlayer","resultLabel","pocketCount","pocketedBalls","legalBreak","scratch","breakFoul","illegalBreak","preBreakFoul","breakFailed"])]),
-    player_switch:Object.freeze([2,Object.freeze(["fromPlayer","toPlayer","reason"])]),
-    safety:Object.freeze([3,Object.freeze(["phase"])]),
-    ball_pocketed:Object.freeze([4,Object.freeze(["ball","points","pocketCount"])]),
-    foul:Object.freeze([5,Object.freeze(["foulType","phase","source"])]),
-    foul_result:Object.freeze([6,Object.freeze(["outcome"])]),
-    safety_result:Object.freeze([7,Object.freeze(["opponent","outcome","causedBy"])]),
-    rack_end:Object.freeze([8,Object.freeze(["winner","loser","rackEndReason"])]),
-    carom_point:Object.freeze([9,Object.freeze(["ball","points","pocketCount"])]),
-  });
-  const EVENT_CODES=Object.freeze(Object.fromEntries(Object.entries(EVENT_SPECS).map(([type,[code]])=>[code,type])));
 
   function compactEvent(event){
     const {sequence,type,rack,inning,player,...details}=event||{};

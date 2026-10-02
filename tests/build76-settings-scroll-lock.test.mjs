@@ -19,5 +19,5 @@ test("Build 76 keeps the Build 75 geometry and refreshes native web caches", () 
   assert.match(navigation, /settings-formal-spacer-v1\{display:block!important;flex:0 0 40px!important;min-height:40px!important\}/);
   assert.match(navigation, /settings-plan-card-v72\+\.settings-formal-section-title-v1\{margin-top:26px\}/);
   assert.match(html, /navigation-phase2-6\.css\?v=2\.0-build81-player-list-bottom-inset-v1/);
-  assert.match(html, /const PWA_VERSION = "2\.0-build83-app-store-eligible-rc-v1"/);
+  assert.match(html, /const PWA_VERSION = "2\.0-build84-match-sharing-fix-v1"/);
 });
