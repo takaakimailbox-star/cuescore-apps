@@ -16,19 +16,19 @@ test("native runtime skips Service Worker while the PWA registration remains int
   assert.match(html, /navigator\.serviceWorker\.register\("\.\/sw\.js"/);
 });
 
-test("iOS target is iPhone-only, portrait-only, version 1.2 build 82", () => {
+test("iOS target is iPhone-only, portrait-only, version 1.2 build 83", () => {
   assert.doesNotMatch(project, /TARGETED_DEVICE_FAMILY = "1,2"/);
   assert.match(project, /TARGETED_DEVICE_FAMILY = 1;/);
   assert.match(project, /MARKETING_VERSION = 1\.2;/);
-  assert.match(project, /CURRENT_PROJECT_VERSION = 82;/);
+  assert.match(project, /CURRENT_PROJECT_VERSION = 83;/);
   assert.match(infoPlist, /UIInterfaceOrientationPortrait/);
   assert.doesNotMatch(infoPlist, /UIInterfaceOrientationLandscape/);
   assert.doesNotMatch(infoPlist, /UISupportedInterfaceOrientations~ipad/);
   assert.match(html, /const CUESCORE_APP_VERSION = "1\.2";/);
   assert.match(html, /const RELEASE_LABEL = 'Version 1\.2';/);
   assert.match(html, /const DISPLAY_VERSION = 'version 1\.2';/);
-  assert.match(serviceWorker, /const APP_VERSION = "2\.0-build82-app-store-eligible-rc-v1";/);
-  assert.match(html, /const PWA_VERSION = "2\.0-build82-app-store-eligible-rc-v1";/);
+  assert.match(serviceWorker, /const APP_VERSION = "2\.0-build83-app-store-eligible-rc-v1";/);
+  assert.match(html, /const PWA_VERSION = "2\.0-build83-app-store-eligible-rc-v1";/);
 });
 
 test("Capacitor foundation uses bundled assets without a remote server URL", () => {

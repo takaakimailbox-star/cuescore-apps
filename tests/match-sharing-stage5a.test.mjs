@@ -259,7 +259,7 @@ test("History receiver entry, scanner copy, accessibility and error recovery mat
 
 test("Info.plist states both real camera uses and current Version / Build",()=>{
   assert.match(plist,/プレーヤーのプロフィール写真の撮影と、試合共有QRコードの読み取りにカメラを使用します。/);
-  assert.match(project,/MARKETING_VERSION = 1\.2;/);assert.match(project,/CURRENT_PROJECT_VERSION = 82;/);
+  assert.match(project,/MARKETING_VERSION = 1\.2;/);assert.match(project,/CURRENT_PROJECT_VERSION = 83;/);
 });
 
 test("receiver runtime is bundled for PWA and native without adding a dependency",()=>{
