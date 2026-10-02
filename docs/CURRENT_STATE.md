@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Version 1.2 Build 84 Final App Store Eligible Candidate / Internal TestFlight（2026年10月3日）
+
+- Product Source commit `8783c5e2ef4a73405ea6334c268422f6964fc920`を変更せず、fresh Build 84 dedicated `13/13`、Match Sharing `122/122`、Player／Navigation／Native focused `67/67`、Full Node `609/609`、native foundation `6/6`、runtime Sender／Receiver E2E、native parity、Release Simulator BuildをPASSした。
+- Release device Archiveを作成。App／dSYM UUID `0BC0F6D0-C254-3036-AC7C-F1D09BA098D9`、Archive executable SHA-256 `e1ea2fcdbf056ec5ed10008df26e35da35caa05e518246d2b9caa07ed4121d97`、IPA SHA-256 `a176c8986cb7a01af95a15a0f3a0594620eeb84fe3e94ce47b34c94596962d37`、Archive／IPA `.storekit` 0。
+- 通常の`TestFlight & App Store`経路を使用し、`testFlightInternalTestingOnly=false`をUpload前にread-back。正式Xcode distribution validation error 0、Upload PASS。ASC Build ID `51ee69a0-e238-4382-9cbb-8529f4d0a682`は`VALID`／`APP_STORE_ELIGIBLE`／`usesNonExemptEncryption=false`。
+- `CueScore Internal Testers`はinternal／全Build accessでBuild 84を含む。Internal stateは`IN_BETA_TESTING`で、Product OwnerはTestFlightから`1.2 (84)`を取得可能。
+- Build 83は`VALID`／`APP_STORE_ELIGIBLE`／`IN_BETA_TESTING`の履歴を維持。App Store Version 1.2は`DEVELOPER_REJECTED`／`MANUAL`でBuild 83 relationshipを維持し、Build 84未紐付け。App Review再提出、Release、公開Version 1.1、metadata等の変更なし。
+- Gate: `BUILD 84 VALID / APP_STORE_ELIGIBLE / INTERNAL TESTFLIGHT AVAILABLE / PRODUCT OWNER FINAL SMOKE PENDING`。Evidence: `docs/implementation/CueScore_1.2_Build84_Final_App_Store_Eligible_Internal_TestFlight_2026-10-03.md`。
+
 ## Version 1.2 Build 84 Match Sharing Physical Acceptance / Source Formalization（2026年10月3日）
 
 - Build 83実機で確認されたSender privacy failureの原因は、保存済み`analysis.events`をcloneし、Category／Season／memo／unknown local-only fieldまで共有payloadへ渡していたこと。Build 84では既存Format v1 event allow-listから共有eventを再構築し、strict privacy validatorを維持した。
