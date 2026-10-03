@@ -1,0 +1,5 @@
+// Physical RC identity only. Invoke with xcodebuild -xcconfig ScoreRC.xcconfig.
+// The production target defaults in App.xcodeproj remain unchanged.
+PRODUCT_BUNDLE_IDENTIFIER = com.takaakimailboxstar.cuescoreapps.rc12
+INFOPLIST_FILE = App/Info-ScoreRC.plist
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIconRC
