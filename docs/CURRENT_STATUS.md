@@ -3,7 +3,7 @@
 - Updated: 2026-10-03
 - Public Version / Build: `1.1 (79)`
 - Current project Version / Build: `1.2 (84)`
-- Gate: `APP REVIEW RESUBMITTED — WAITING FOR REVIEW`
+- Gate: `SCORE RC IDENTITY / PHYSICAL ACCEPTED / SOURCE FORMALIZED`
 - Build 84 distribution baseline: `b076e5e8b25be7a91c1e3e373923be70119a0d80`
 - Version 1.2 RC Product Source Commit: `810a9e134c5de1e033eb644027c37f51834fd6d4`
 - Player List Fix Product Source Commit: `7e2beb0ade0685ff331fa808273e00e6f832bd2c`
@@ -24,8 +24,9 @@
 - App Store Connect: Build 84 ID `51ee69a0-e238-4382-9cbb-8529f4d0a682`; `VALID`; `IN_BETA_TESTING`; `usesNonExemptEncryption=false`; audience `APP_STORE_ELIGIBLE`
 - Internal group: `CueScore Internal Testers`; Build 84 included through `hasAccessToAllBuilds=true`
 - Candidate state: Build 84 Match Sharing runtime fix is Product Owner Final Accepted and submitted for App Review. Review Submission `935f4971-9fb9-43a9-ae28-7292bd693c7d` contains Version 1.2 only and is `WAITING_FOR_REVIEW`; release remains `MANUAL`
+- Physical iPhone identity cleanup: legacy `CueScore Stage5B` LocalStorageをMac内専用Evidenceへ退避してread-back後に`.stage5b`だけをuninstall。Physical RCは同一`.rc12`へuninstallなしで上書きし、`Score RC`＋PO採用RC iconへ更新。RC LocalStorage metadataは前後一致。最終inventoryは`CueScore Apps`と`Score RC`の2 apps、Score DEVなし。Product OwnerはDisplay Name、採用icon、既存RC data保持をPhysical iPhoneでALL PASS。RC environment/config commitは`c6d5763e17bd60aee02892c3a43c5632c37e4df5`。
 - Audience: `APP_STORE_ELIGIBLE`; Internal Testing Only was OFF
 - Canonical instruction: `docs/handoff/CURRENT_DECISION.md`
 - Canonical report: `docs/handoff/CURRENT_REPORT.md`
 
-Detailed evidence: `docs/release/CueScore_v1.2_Build84_App_Review_Resubmission_2026-10-03.md` and `docs/CURRENT_STATE.md`.
+Detailed evidence: `docs/implementation/CueScore_Physical_iPhone_App_Identity_Cleanup_2026-10-03.md`, `docs/release/CueScore_v1.2_Build84_App_Review_Resubmission_2026-10-03.md`, and `docs/CURRENT_STATE.md`.

@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Physical iPhone App Identity Cleanup（2026年10月3日）
+
+- Product Owner承認に基づき、`CueScore Stage5B`／`com.takaakimailboxstar.cuescoreapps.stage5b`／`1.1 (79)`のLocalStorage database／WAL／SHMだけをMac内CueScore専用Evidence領域へ退避した。3ファイルのsize／SHA-256を記録し、SQLite `PRAGMA quick_check = ok`、raw value表示0、read-back前後hash一致を確認後、`.stage5b`だけをuninstallした。
+- Physical RCを`Score RC`／`com.takaakimailboxstar.cuescoreapps.rc12`／`1.2 (84)`としてRelease device Build／signし、PO採用の右下overlap RC badge iconを使用。同一Bundle IDへuninstallなしで上書きinstallした。
+- RC LocalStorage database／SHM／WALのmetadata SHA-256は前後`36b1dade4495618d5b59634ee798aadd23533786b4c0b955bc94097658b272d0`で一致。最終device inventoryは`CueScore Apps`と`Score RC`の2 apps。Stage5B／Score DEVは存在しない。
+- RC identity＋native foundation `10/10`、Full Node `613/613`、native parity、Release Simulator Build、Release device Build／sign／overwrite installをPASS。production `CueScore Apps`、Build 84、TestFlight、App Store Connect、App Review変更0。
+- Product OwnerはPhysical iPhoneで、Display Name `Score RC`、CueScore logo右下へRC badgeが重なる採用icon、既存RC data保持を`3/3 PASS`と判定した。RC environment/config commitは`c6d5763e17bd60aee02892c3a43c5632c37e4df5`。
+- Gate: `SCORE RC IDENTITY / PHYSICAL ACCEPTED / SOURCE FORMALIZED`。Build 85、Archive／Upload、TestFlight／App Store Connect／App Review操作は未実施。Evidence: `docs/implementation/CueScore_Physical_iPhone_App_Identity_Cleanup_2026-10-03.md`。
+
 ## Version 1.2 Build 84 App Review Resubmission（2026年10月3日）
 
 - Product Ownerの明示承認後、Submit直前read-backでVersion `1.2`、Build `84`、Build ID `51ee69a0-e238-4382-9cbb-8529f4d0a682`、`VALID`／`APP_STORE_ELIGIBLE`、Review Submission `935f4971-9fb9-43a9-ae28-7292bd693c7d`、Version 1.2のみ1 item、CueScore Pro item 0、`MANUAL`、JPN only、CueScore Pro `APPROVED`／`NON_CONSUMABLE`／`JPY 980`、blocking error 0を確認した。
