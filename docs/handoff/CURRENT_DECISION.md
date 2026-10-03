@@ -1,21 +1,21 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-1.2-BUILD84-APP-STORE-ELIGIBLE-INTERNAL-TESTFLIGHT-20261003`
+- Decision ID: `CUESCORE-1.2-BUILD84-APP-REVIEW-RESUBMISSION-PREPARATION-20261003`
 - Date: 2026-10-03
-- Gate: `BUILD 84 VALID / APP_STORE_ELIGIBLE / INTERNAL TESTFLIGHT AVAILABLE / PRODUCT OWNER FINAL SMOKE PENDING`
+- Gate: `READY FOR PRODUCT OWNER APP REVIEW RESUBMISSION — VERSION 1.2 BUILD 84`
 
 ## Result
 
-- Product OwnerはVersion `1.2`／Build `84` Physical RCでMatch Sharing Sender／Receiver、Single QR、re-share、Native Scanner、Camera permission recovery、Settings-only permission UIをALL PASSと判定した。
+- Product OwnerはInternal TestFlight Version `1.2 (84)` Final Smokeでcold launch、Single QR共有、再共有、Receiver ScannerをALL PASSと判定した。先行Physical RCのCamera permission UI acceptanceも維持する。
 - Build 83のprivacy failure、共有IDの早期保存、Receiver recovery flashをBuild 84 Product Source `8783c5e2ef4a73405ea6334c268422f6964fc920`で修正し、Official 101／102のcontractは変更していない。
-- Version 1.2 Build 83のReview Submissionは取り下げ済みで、App Versionは`DEVELOPER_REJECTED`。Build 83のInternal TestFlight、`VALID`／`APP_STORE_ELIGIBLE`、release type `MANUAL`は維持する。
-- Build 84は通常の`TestFlight & App Store`経路で`VALID`／`APP_STORE_ELIGIBLE`／Internal `IN_BETA_TESTING`へ到達し、Product Ownerが`1.2 (84)`を取得可能。
+- Version 1.2へBuild 84を選択し、新Review Submission `935f4971-9fb9-43a9-ae28-7292bd693c7d`を作成した。Version 1.2のみ1 item、submitted dateなし、Version／item／submissionは`READY_FOR_REVIEW`。
+- Build 84は`VALID`／`APP_STORE_ELIGIBLE`／Internal `IN_BETA_TESTING`。metadata、Privacy、screenshots、CueScore Pro、price、availabilityは変更していない。release typeは`MANUAL`。
 
 ## Boundary
 
-- Build 84はInternal TestFlightまで。Version 1.2 Review Build差替え、Review再提出、Release、External TestFlight、Build 85へ進まない。
+- Submit for Review、Release、Automatic Release、External TestFlight、Build 85へ進まない。
 - dirty local mirrorと旧worktreeへ触れず、External GitHubを正本とする。
 
 ## STOP
 
-Documentation-only commitとExternal GitHub同期後STOP。次工程はProduct Owner Build 84 Match Sharing Final Smoke。
+Documentation-only commitとExternal GitHub同期後STOP。次工程はProduct Owner App Review再提出承認。

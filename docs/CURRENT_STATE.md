@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## Version 1.2 Build 84 Product Owner Final Acceptance / App Review Resubmission Preparation（2026年10月3日）
+
+- Product OwnerはInternal TestFlight `1.2 (84)`でcold launch → Home、完了試合のSingle QR共有、Back後の再共有、Camera ONでのHistory → Receive → Scanner映像を`4/4 PASS`と判定した。Camera denied UIのSettings-only action、Back、Settings recovery、Camera ON後Scannerは先行Physical RCでPASS済み。
+- Product Source commit `8783c5e2ef4a73405ea6334c268422f6964fc920`は変更0。既存Build 84 automated evidenceはdedicated `13/13`、Match Sharing `122/122`、Player／Navigation／Native `67/67`、Full Node `609/609`、runtime Sender／Receiver E2E、native parity、Simulator／Archive／Apple validation PASS、`.storekit` 0。
+- Version 1.2（ID `b794d928-74af-45e4-8342-65a570f294f2`）のReview Buildを83から84へ変更。Build 84 ID `51ee69a0-e238-4382-9cbb-8529f4d0a682`、`VALID`／`APP_STORE_ELIGIBLE`／`usesNonExemptEncryption=false`／Internal `IN_BETA_TESTING`をfresh read-backした。Build 83自体は変更0。
+- What's New、Review Notes、既存metadata、screenshots `6/6 COMPLETE`、App Privacy `データの収集なし`との整合、JPN only、`availableInNewTerritories=false`、CueScore Pro `APPROVED`／`NON_CONSUMABLE`／`JPY 980`、Free／Pro contract、公開URL HTTP 200、release type `MANUAL`を監査し変更0。
+- 新Review Submission `935f4971-9fb9-43a9-ae28-7292bd693c7d`を作成。Version 1.2だけの1 item、Version／item／submissionは`READY_FOR_REVIEW`、submitted dateなし、IAP item 0、blocking error 0。
+- Gate: `READY FOR PRODUCT OWNER APP REVIEW RESUBMISSION — VERSION 1.2 BUILD 84`。Submit for Review、Release、Build 85、Archive／Upload、TestFlight変更、metadata／screenshots／Privacy／IAP／price／availability変更、公開Version 1.1変更は未実施。Evidence: `docs/release/CueScore_v1.2_Build84_App_Review_Resubmission_Preparation_2026-10-03.md`。
+
 ## Version 1.2 Build 84 Final App Store Eligible Candidate / Internal TestFlight（2026年10月3日）
 
 - Product Source commit `8783c5e2ef4a73405ea6334c268422f6964fc920`を変更せず、fresh Build 84 dedicated `13/13`、Match Sharing `122/122`、Player／Navigation／Native focused `67/67`、Full Node `609/609`、native foundation `6/6`、runtime Sender／Receiver E2E、native parity、Release Simulator BuildをPASSした。

@@ -1,0 +1,71 @@
+{
+  "capturedAt": "2026-10-03T00:50:20.956Z",
+  "gate": "READY FOR PRODUCT OWNER APP REVIEW RESUBMISSION — VERSION 1.2 BUILD 84",
+  "externalGitHubBaseline": "1f0a568422312cd1c784617a6ac83da47fa1245d",
+  "productSourceCommit": "8783c5e2ef4a73405ea6334c268422f6964fc920",
+  "productOwnerFinalSmoke": {
+    "status": "ALL PASS",
+    "passed": 4,
+    "failed": 0,
+    "cameraPermissionPhysicalRcPreviouslyAccepted": true
+  },
+  "version": {
+    "id": "b794d928-74af-45e4-8342-65a570f294f2",
+    "versionString": "1.2",
+    "state": "READY_FOR_REVIEW",
+    "releaseType": "MANUAL",
+    "selectedBuildId": "51ee69a0-e238-4382-9cbb-8529f4d0a682"
+  },
+  "build": {
+    "id": "51ee69a0-e238-4382-9cbb-8529f4d0a682",
+    "version": "84",
+    "processingState": "VALID",
+    "audience": "APP_STORE_ELIGIBLE",
+    "usesNonExemptEncryption": false,
+    "internalState": "IN_BETA_TESTING"
+  },
+  "screenshots": {
+    "displayType": "APP_IPHONE_65",
+    "count": 6,
+    "complete": 6
+  },
+  "availability": {
+    "territories": ["JPN"],
+    "availableInNewTerritories": false
+  },
+  "cueScorePro": {
+    "id": "6808464490",
+    "productId": "com.takaakimailboxstar.cuescoreapps.pro",
+    "type": "NON_CONSUMABLE",
+    "state": "APPROVED",
+    "territories": ["JPN"],
+    "availableInNewTerritories": false,
+    "currency": "JPY",
+    "customerPrice": "980",
+    "includedAsReviewItem": false
+  },
+  "reviewSubmission": {
+    "id": "935f4971-9fb9-43a9-ae28-7292bd693c7d",
+    "state": "READY_FOR_REVIEW",
+    "submittedDate": null,
+    "itemCount": 1,
+    "appStoreVersionId": "b794d928-74af-45e4-8342-65a570f294f2",
+    "iapItemCount": 0,
+    "blockingErrors": 0
+  },
+  "publicUrlHttpStatus": {
+    "appStore": 200,
+    "website": 200,
+    "support": 200,
+    "privacy": 200,
+    "terms": 200
+  },
+  "boundaries": {
+    "submitForReview": false,
+    "release": false,
+    "automaticRelease": false,
+    "build85Created": false,
+    "productSourceChanged": false,
+    "publicVersion11Changed": false
+  }
+}
