@@ -1,0 +1,53 @@
+{
+  "submittedAt": "2026-10-03T02:18:14.384Z",
+  "submittedAtJst": "2026-10-03 11:18:14.384 JST",
+  "gate": "APP REVIEW RESUBMITTED — WAITING FOR REVIEW",
+  "externalGitHubBaseline": "1ca1e50a06bfed6fccc55373b65a1998378ef4ae",
+  "productSourceCommit": "8783c5e2ef4a73405ea6334c268422f6964fc920",
+  "submission": {
+    "id": "935f4971-9fb9-43a9-ae28-7292bd693c7d",
+    "submitHttpStatus": 200,
+    "state": "WAITING_FOR_REVIEW",
+    "itemCount": 1,
+    "cueScoreProItemCount": 0,
+    "childItemState": "READY_FOR_REVIEW"
+  },
+  "version": {
+    "id": "b794d928-74af-45e4-8342-65a570f294f2",
+    "versionString": "1.2",
+    "state": "WAITING_FOR_REVIEW",
+    "releaseType": "MANUAL",
+    "selectedBuildId": "51ee69a0-e238-4382-9cbb-8529f4d0a682"
+  },
+  "build": {
+    "id": "51ee69a0-e238-4382-9cbb-8529f4d0a682",
+    "version": "84",
+    "processingState": "VALID",
+    "audience": "APP_STORE_ELIGIBLE",
+    "usesNonExemptEncryption": false
+  },
+  "appAvailability": {
+    "territories": ["JPN"],
+    "availableInNewTerritories": false
+  },
+  "cueScorePro": {
+    "productId": "com.takaakimailboxstar.cuescoreapps.pro",
+    "state": "APPROVED",
+    "type": "NON_CONSUMABLE",
+    "territories": ["JPN"],
+    "currency": "JPY",
+    "customerPrice": "980"
+  },
+  "blockingErrors": 0,
+  "boundaries": {
+    "productSourceChanged": false,
+    "build85Created": false,
+    "archiveOrUploadPerformed": false,
+    "testFlightChanged": false,
+    "metadataChanged": false,
+    "automaticReleaseEnabled": false,
+    "releasePerformed": false,
+    "publicVersion11Changed": false,
+    "build83Changed": false
+  }
+}

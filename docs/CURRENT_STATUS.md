@@ -3,7 +3,7 @@
 - Updated: 2026-10-03
 - Public Version / Build: `1.1 (79)`
 - Current project Version / Build: `1.2 (84)`
-- Gate: `READY FOR PRODUCT OWNER APP REVIEW RESUBMISSION — VERSION 1.2 BUILD 84`
+- Gate: `APP REVIEW RESUBMITTED — WAITING FOR REVIEW`
 - Build 84 distribution baseline: `b076e5e8b25be7a91c1e3e373923be70119a0d80`
 - Version 1.2 RC Product Source Commit: `810a9e134c5de1e033eb644027c37f51834fd6d4`
 - Player List Fix Product Source Commit: `7e2beb0ade0685ff331fa808273e00e6f832bd2c`
@@ -20,12 +20,12 @@
 - Fresh Build 84 evidence: dedicated `13/13`; Match Sharing `122/122`; related focused `67/67`; Full Node `609/609`; native foundation `6/6`; runtime Sender／Receiver E2E、native parity、Release Simulator Build、Release device Archive `PASS`
 - Physical result: Product Owner TestFlight Build 84 Final Smoke `4/4 PASS`。cold launch → Home、Single QR共有、Back後の再共有、Camera ONでのReceiver Scannerを確認済み。Camera denied UIとSettings recoveryは先行Physical RCでPASS済み
 - Build 84 Physical RC: Sender、Single QR、re-share、Receiver Native Scanner、Camera permission recovery、およびSettings-only permission UIをProduct OwnerがALL PASS
-- Distribution: Build 84 is available through Internal TestFlight; Build 83 remains immutable in its historical TestFlight state; Version 1.2 and its sole review item are `READY_FOR_REVIEW`; Release `NOT STARTED`
+- Distribution: Build 84 is available through Internal TestFlight; Build 83 remains immutable in its historical TestFlight state; Version 1.2 and Review Submission are `WAITING_FOR_REVIEW`; Release `NOT STARTED`
 - App Store Connect: Build 84 ID `51ee69a0-e238-4382-9cbb-8529f4d0a682`; `VALID`; `IN_BETA_TESTING`; `usesNonExemptEncryption=false`; audience `APP_STORE_ELIGIBLE`
 - Internal group: `CueScore Internal Testers`; Build 84 included through `hasAccessToAllBuilds=true`
-- Candidate state: Build 84 Match Sharing runtime fix is Product Owner Final Accepted and selected for Version 1.2 Review. Review Submission `935f4971-9fb9-43a9-ae28-7292bd693c7d` contains Version 1.2 only, has no submitted date, and is `READY_FOR_REVIEW`; release remains `MANUAL`
+- Candidate state: Build 84 Match Sharing runtime fix is Product Owner Final Accepted and submitted for App Review. Review Submission `935f4971-9fb9-43a9-ae28-7292bd693c7d` contains Version 1.2 only and is `WAITING_FOR_REVIEW`; release remains `MANUAL`
 - Audience: `APP_STORE_ELIGIBLE`; Internal Testing Only was OFF
 - Canonical instruction: `docs/handoff/CURRENT_DECISION.md`
 - Canonical report: `docs/handoff/CURRENT_REPORT.md`
 
-Detailed evidence: `docs/release/CueScore_v1.2_Build84_App_Review_Resubmission_Preparation_2026-10-03.md` and `docs/CURRENT_STATE.md`.
+Detailed evidence: `docs/release/CueScore_v1.2_Build84_App_Review_Resubmission_2026-10-03.md` and `docs/CURRENT_STATE.md`.

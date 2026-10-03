@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## Version 1.2 Build 84 App Review Resubmission（2026年10月3日）
+
+- Product Ownerの明示承認後、Submit直前read-backでVersion `1.2`、Build `84`、Build ID `51ee69a0-e238-4382-9cbb-8529f4d0a682`、`VALID`／`APP_STORE_ELIGIBLE`、Review Submission `935f4971-9fb9-43a9-ae28-7292bd693c7d`、Version 1.2のみ1 item、CueScore Pro item 0、`MANUAL`、JPN only、CueScore Pro `APPROVED`／`NON_CONSUMABLE`／`JPY 980`、blocking error 0を確認した。
+- Review Submissionを`submitted=true`へ更新しHTTP 200。Apple authoritative submitted timestampは`2026-10-03T02:18:14.384Z`（`2026-10-03 11:18:14.384 JST`）。
+- 提出後read-backでSubmissionとApp Versionは`WAITING_FOR_REVIEW`、Version 1.2 → Build 84 relationship、submitted item 1件、release type `MANUAL`を確認した。child review-item resourceは`READY_FOR_REVIEW`を返すため、authoritativeなparent Submission／App Version stateと区別して記録する。
+- Gate: `APP REVIEW RESUBMITTED — WAITING FOR REVIEW`。Product source、Build 85、Archive／Upload、TestFlight、metadata／screenshots／Privacy、CueScore Pro、price／availability、Automatic Release、Release、公開Version 1.1、Build 83変更なし。Evidence: `docs/release/CueScore_v1.2_Build84_App_Review_Resubmission_2026-10-03.md`。
+
 ## Version 1.2 Build 84 Product Owner Final Acceptance / App Review Resubmission Preparation（2026年10月3日）
 
 - Product OwnerはInternal TestFlight `1.2 (84)`でcold launch → Home、完了試合のSingle QR共有、Back後の再共有、Camera ONでのHistory → Receive → Scanner映像を`4/4 PASS`と判定した。Camera denied UIのSettings-only action、Back、Settings recovery、Camera ON後Scannerは先行Physical RCでPASS済み。
