@@ -1,24 +1,23 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-1.2-BUILD84-FINAL-PRERELEASE-AUDIT-20261004`
+- Decision ID: `CUESCORE-1.2-BUILD84-MANUAL-RELEASE-20261004`
 - Date: 2026-10-04
-- Gate: `APPLE REVIEW APPROVED / PENDING DEVELOPER RELEASE / FINAL PRE-RELEASE AUDIT PASS`
+- Gate: `RELEASE EXECUTED / ASC READY_FOR_SALE / PUBLIC PROPAGATION PENDING`
 
-## Product Owner Decision / Audit Scope
+## Product Owner Decision
 
-- AppleのVersion 1.2審査承認通知を受け、Version `1.2`／Build `84`の配布前状態をread-onlyで監査する。
-- `MANUAL` releaseを維持し、このGateではReleaseを実行しない。
-- Product source、Build、metadata、screenshots、Privacy、CueScore Pro、price／availability、公開Version 1.1を変更しない。
+- Version `1.2`／Build `84`だけをManual Releaseする。
+- Release後にASC authoritative stateと日本App Store公開ページをread-only確認する。
+- Product source、Build 85、Archive／Upload、TestFlight、metadata、screenshots、Privacy、CueScore Pro、price／availability、Score RC、Version 1.1を変更しない。
 
-## Audit Result
+## Result
 
-- Review Submission `935f4971-9fb9-43a9-ae28-7292bd693c7d`: `COMPLETE`、Version 1.2だけの1 item、item `APPROVED`。
-- Version 1.2: `PENDING_DEVELOPER_RELEASE`、release type `MANUAL`。
-- Build 84: ID `51ee69a0-e238-4382-9cbb-8529f4d0a682`、`VALID`／`APP_STORE_ELIGIBLE`。
-- App／IAPはJPN only、CueScore Proは`APPROVED`／`NON_CONSUMABLE`／`JPY 980`。公開URLは`5/5 HTTP 200`。
+- Release直前identityは全件一致。Apple公式APIはManual Release requestをHTTP `201 Created`で受理した。
+- Version 1.2はrelease後`READY_FOR_SALE`。Version 1.2 → Build 84、JPN only、CueScore Pro `JPY 980`を維持。
+- 日本App Store公開カタログは直後もVersion 1.1を返したため、Version 1.2 public propagationは`NOT YET VERIFIED`。
 
 ## Boundary / STOP
 
-- Version 1.2のRelease actionは実行しない。別GateのProduct Owner Manual Release決定を待つ。
-- Build 85、Archive／Upload、TestFlight、App Store Connect mutation、公開Version 1.1変更へ進まない。
-- Documentation／EvidenceだけをExternal GitHub mainへnon-force pushし、その後STOPする。
+- 公開Version 1.2表示を推測でPASSにせず、`RELEASE EXECUTED / PUBLIC PROPAGATION PENDING`としてSTOPする。
+- Product source、Build 85、Archive／Upload、TestFlight、metadata等、Score RC、Version 1.1を変更しない。
+- Documentation／EvidenceだけをExternal GitHub mainへnon-force pushする。

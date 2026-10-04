@@ -1,26 +1,26 @@
 # CueScore Current Report
 
 - App: CueScore Apps
-- Decision ID: `CUESCORE-1.2-BUILD84-FINAL-PRERELEASE-AUDIT-20261004`
+- Decision ID: `CUESCORE-1.2-BUILD84-MANUAL-RELEASE-20261004`
 - Date: 2026-10-04
-- Baseline / External GitHub main: `b44e5702952236667d6ae8ad4f426624e3935686`
+- Baseline / External GitHub main: `01151b9a20f00102bad19c8f60b3f972c932e809`
 - Product source: `8783c5e2ef4a73405ea6334c268422f6964fc920`
-- Gate result: `APPLE REVIEW APPROVED / PENDING DEVELOPER RELEASE / FINAL PRE-RELEASE AUDIT PASS`
+- Gate result: `RELEASE EXECUTED / ASC READY_FOR_SALE / PUBLIC PROPAGATION PENDING`
 
 ## Result
 
-Apple通知とfresh App Store Connect read-backにより、Version `1.2`／Build `84`の審査完了を確認した。Submissionは`COMPLETE`、唯一のVersion 1.2 itemは`APPROVED`、App Versionは`PENDING_DEVELOPER_RELEASE`、release typeは`MANUAL`。Releaseは実行していない。
+Product Owner承認に基づき、Version `1.2`／Build `84`だけをManual Releaseした。Apple公式APIはHTTP `201 Created`を返し、release後のApp Store ConnectはVersion 1.2を`READY_FOR_SALE`と報告している。日本App Store公開カタログは直後もVersion 1.1のため、public propagationは未確認として保全した。
 
 ## Evidence
 
 - Submission: `935f4971-9fb9-43a9-ae28-7292bd693c7d` / `COMPLETE` / 1 item / Version 1.2 item `APPROVED`。
-- Version／Build: Version 1.2 `PENDING_DEVELOPER_RELEASE`／Build 84 ID `51ee69a0-e238-4382-9cbb-8529f4d0a682`／`VALID`／`APP_STORE_ELIGIBLE`。
-- Distribution: `MANUAL`、Release action未実行。
+- Release: requested `2026-10-04 14:10:59.784 JST`、HTTP `201 Created`。
+- Version／Build: Version 1.2 `READY_FOR_SALE`／Build 84 ID `51ee69a0-e238-4382-9cbb-8529f4d0a682`／`VALID`／`APP_STORE_ELIGIBLE`。
 - Availability: App／CueScore ProともJPN only、`availableInNewTerritories=false`。CueScore Pro `APPROVED`／`NON_CONSUMABLE`／`JPY 980`。
 - Metadata: What's New一致、Review Notesあり、iPhone 6.5-inch screenshots `6/6 COMPLETE`。public App Store privacyは`データの収集なし`。
-- Public URLs: App Store／公式サイト／Support／Privacy／Terms `5/5 HTTP 200`。
-- Apple notification Evidence: `docs/release/evidence/CueScore_v1.2_Build84_Apple_Approval_2026-10-04.png`（2880×1800、SHA-256 `f7d363ef7ecd5e8f470abb5376e0d5c35b4a2644b121d3113c48454f9e3b1cb0`）。
+- Public catalog: 最終確認`2026-10-04 14:16:38 JST`時点でVersion 1.1。Version 1.2 public display／What's Newは`NOT YET VERIFIED`。Privacy `データの収集なし`、CueScore Pro `¥980`、screenshots 6件は表示維持。
+- Release Evidence: `docs/release/CueScore_v1.2_Build84_Manual_Release_2026-10-04.md`。
 
 ## Boundary / STOP
 
-Documentation／EvidenceだけをExternal GitHub mainへnon-force pushする。Product source変更0。Build 85、Archive／Upload、TestFlight、App Store Connect mutation、Release、公開Version 1.1変更は未実施。`READY FOR PRODUCT OWNER VERSION 1.2 BUILD 84 MANUAL RELEASE`としてSTOPする。
+Documentation／EvidenceだけをExternal GitHub mainへnon-force pushする。Product source、Score RC変更0。Build 85、Archive／Upload、TestFlight、metadata／screenshots／Privacy／IAP／price／availability、Version 1.1直接操作は未実施。`RELEASE EXECUTED / PUBLIC PROPAGATION PENDING — STOP`とする。

@@ -1,9 +1,9 @@
 # CueScore Current Status
 
 - Updated: 2026-10-04
-- Public Version / Build: `1.1 (79)`
+- Public Version / Build: Japan public catalog still reports `1.1 (79)`; Version `1.2 (84)` release executed and ASC is `READY_FOR_SALE`, public propagation pending
 - Current project Version / Build: `1.2 (84)`
-- Gate: `APPLE REVIEW APPROVED / PENDING DEVELOPER RELEASE / FINAL PRE-RELEASE AUDIT PASS`
+- Gate: `RELEASE EXECUTED / ASC READY_FOR_SALE / PUBLIC PROPAGATION PENDING`
 - Build 84 distribution baseline: `b076e5e8b25be7a91c1e3e373923be70119a0d80`
 - Version 1.2 RC Product Source Commit: `810a9e134c5de1e033eb644027c37f51834fd6d4`
 - Player List Fix Product Source Commit: `7e2beb0ade0685ff331fa808273e00e6f832bd2c`
@@ -20,13 +20,13 @@
 - Fresh Build 84 evidence: dedicated `13/13`; Match Sharing `122/122`; related focused `67/67`; Full Node `609/609`; native foundation `6/6`; runtime Sender／Receiver E2E、native parity、Release Simulator Build、Release device Archive `PASS`
 - Physical result: Product Owner TestFlight Build 84 Final Smoke `4/4 PASS`。cold launch → Home、Single QR共有、Back後の再共有、Camera ONでのReceiver Scannerを確認済み。Camera denied UIとSettings recoveryは先行Physical RCでPASS済み
 - Build 84 Physical RC: Sender、Single QR、re-share、Receiver Native Scanner、Camera permission recovery、およびSettings-only permission UIをProduct OwnerがALL PASS
-- Distribution: Build 84 is available through Internal TestFlight; Build 83 remains immutable in its historical TestFlight state; Version 1.2 is `PENDING_DEVELOPER_RELEASE`, Review Submission is `COMPLETE`, and release remains `MANUAL` / not invoked
+- Distribution: Version 1.2 / Build 84 Manual Release request returned HTTP 201; ASC Version 1.2 is `READY_FOR_SALE`; Japan public catalog still reports Version 1.1, so Version 1.2 public propagation is pending
 - App Store Connect: Build 84 ID `51ee69a0-e238-4382-9cbb-8529f4d0a682`; `VALID`; `IN_BETA_TESTING`; `usesNonExemptEncryption=false`; audience `APP_STORE_ELIGIBLE`
 - Internal group: `CueScore Internal Testers`; Build 84 included through `hasAccessToAllBuilds=true`
-- Candidate state: Build 84 Match Sharing runtime fix is Product Owner Final Accepted and Apple-approved. Review Submission `935f4971-9fb9-43a9-ae28-7292bd693c7d` is `COMPLETE`, contains approved Version 1.2 only, and Version 1.2 is `PENDING_DEVELOPER_RELEASE`; release remains `MANUAL` and unperformed
+- Candidate state: Build 84 Match Sharing runtime fix is Product Owner Final Accepted and Apple-approved. Review Submission `935f4971-9fb9-43a9-ae28-7292bd693c7d` is `COMPLETE`; Version 1.2 / Build 84 release was executed at `2026-10-04 14:10:59.784 JST`; ASC is `READY_FOR_SALE`; public Version 1.2 display remains NOT YET VERIFIED
 - Physical iPhone identity cleanup: legacy `CueScore Stage5B` LocalStorageをMac内専用Evidenceへ退避してread-back後に`.stage5b`だけをuninstall。Physical RCは同一`.rc12`へuninstallなしで上書きし、`Score RC`＋PO採用RC iconへ更新。RC LocalStorage metadataは前後一致。最終inventoryは`CueScore Apps`と`Score RC`の2 apps、Score DEVなし。Product OwnerはDisplay Name、採用icon、既存RC data保持をPhysical iPhoneでALL PASS。RC environment/config commitは`c6d5763e17bd60aee02892c3a43c5632c37e4df5`。
 - Audience: `APP_STORE_ELIGIBLE`; Internal Testing Only was OFF
 - Canonical instruction: `docs/handoff/CURRENT_DECISION.md`
 - Canonical report: `docs/handoff/CURRENT_REPORT.md`
 
-Detailed evidence: `docs/release/CueScore_v1.2_Build84_Apple_Approval_Final_PreRelease_Audit_2026-10-04.md`, `docs/implementation/CueScore_Physical_iPhone_App_Identity_Cleanup_2026-10-03.md`, and `docs/CURRENT_STATE.md`.
+Detailed evidence: `docs/release/CueScore_v1.2_Build84_Manual_Release_2026-10-04.md`, `docs/release/CueScore_v1.2_Build84_Apple_Approval_Final_PreRelease_Audit_2026-10-04.md`, and `docs/CURRENT_STATE.md`.

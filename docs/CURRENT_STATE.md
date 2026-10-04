@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## Version 1.2 Build 84 Manual Release（2026年10月4日）
+
+- Product OwnerのManual Release承認後、release直前にSubmission `935f4971-9fb9-43a9-ae28-7292bd693c7d` `COMPLETE`、Version 1.2 item `APPROVED`、Version `1.2` `PENDING_DEVELOPER_RELEASE`／`MANUAL`、Build `84` `VALID`／`APP_STORE_ELIGIBLE`、JPN only、CueScore Pro `APPROVED`／`NON_CONSUMABLE`／`JPY 980`をfresh確認した。
+- Apple公式`appStoreVersionReleaseRequests` APIでVersion 1.2だけをManual Release。`2026-10-04 14:10:59.784 JST`にrequestし、HTTP `201 Created`。
+- release後read-backでVersion 1.2は`READY_FOR_SALE`、Version 1.2 → Build 84 relationship、JPN only、`availableInNewTerritories=false`、CueScore Proおよびmetadata／screenshotsを維持。
+- 日本App Store公開カタログは最終確認`2026-10-04 14:16:38 JST`時点でVersion `1.1`を返しており、Version 1.2のpublic propagationは未完了。公開Privacy `データの収集なし`、CueScore Pro `¥980`、screenshots 6件は確認済みだが、Version 1.2公開表示とWhat's Newは`NOT YET VERIFIED`。
+- Gate: `RELEASE EXECUTED / ASC READY_FOR_SALE / PUBLIC PROPAGATION PENDING`。Product source、Score RC、Build 85、Archive／Upload／TestFlight、metadata／screenshots／Privacy／IAP／price／availability変更0。Evidence: `docs/release/CueScore_v1.2_Build84_Manual_Release_2026-10-04.md`。
+
 ## Version 1.2 Build 84 Apple Approval / Final Pre-Release Audit（2026年10月4日）
 
 - Product Owner提供のApple通知をEvidence化。Submission `935f4971-9fb9-43a9-ae28-7292bd693c7d`はreview complete／distribution eligible、accepted itemはVersion 1.2のみ1件。
