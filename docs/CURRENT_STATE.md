@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## Version 1.2 Build 84 Apple Approval / Final Pre-Release Audit（2026年10月4日）
+
+- Product Owner提供のApple通知をEvidence化。Submission `935f4971-9fb9-43a9-ae28-7292bd693c7d`はreview complete／distribution eligible、accepted itemはVersion 1.2のみ1件。
+- fresh App Store Connect read-backでVersion `1.2`は`PENDING_DEVELOPER_RELEASE`、release type `MANUAL`、Build `84`（ID `51ee69a0-e238-4382-9cbb-8529f4d0a682`）は`VALID`／`APP_STORE_ELIGIBLE`、review itemは`APPROVED`、Submissionは`COMPLETE`。
+- What's New、metadata、Review Notes、iPhone 6.5-inch screenshots `6/6 COMPLETE`、JPN only、`availableInNewTerritories=false`、CueScore Pro `APPROVED`／`NON_CONSUMABLE`／`JPY 980`、Free／Pro contractを監査し変更0。
+- App Store／公式サイト／Support／Privacy／Termsは`5/5 HTTP 200`。公開App Storeは引き続きVersion `1.1`、`データの収集なし`を表示。Version 1.1は`READY_FOR_SALE`で変更0。
+- Gate: `APPLE REVIEW APPROVED / PENDING DEVELOPER RELEASE / FINAL PRE-RELEASE AUDIT PASS`。Release、Build 85、product source、Archive／Upload／TestFlight、metadata／screenshots／Privacy／IAP／price／availability変更は未実施。Evidence: `docs/release/CueScore_v1.2_Build84_Apple_Approval_Final_PreRelease_Audit_2026-10-04.md`。
+
 ## Physical iPhone App Identity Cleanup（2026年10月3日）
 
 - Product Owner承認に基づき、`CueScore Stage5B`／`com.takaakimailboxstar.cuescoreapps.stage5b`／`1.1 (79)`のLocalStorage database／WAL／SHMだけをMac内CueScore専用Evidence領域へ退避した。3ファイルのsize／SHA-256を記録し、SQLite `PRAGMA quick_check = ok`、raw value表示0、read-back前後hash一致を確認後、`.stage5b`だけをuninstallした。
