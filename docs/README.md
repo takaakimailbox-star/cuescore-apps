@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.6_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.7_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -29,8 +29,9 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.6 is the current official release and successor
-to v2.5. Earlier versions remain in the official directory as preceding releases.
+Official Design Decision Log v2.7 is the current official release and successor
+to v2.6. Earlier versions remain in the official directory as preceding releases.
+v2.7 adds Decision 031 (CueScore Localization) and leaves Decisions 001〜030 unchanged.
 
 Adopted RC decision addenda that supplement the latest Decision Log:
 
@@ -126,6 +127,16 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/104_CueScore_Player_Delete_Identity_Spec.md`
 - `official/105_CueScore_Player_UX_Finalization_Decision.md`
 - `official/106_CueScore_Player_UX_Finalization_Spec.md`
+- `official/107_CueScore_Localization_Decision.md`
+- `official/108_CueScore_Localization_Spec.md`
+
+CueScore Localization（3言語対応: ja / en / zh-Hans）status:
+
+- Phase 0 Official Specification Published（2026-10-09）: Decision 031 / Official 107 / Official 108 / Official Design Decision Log v2.7. Evidence: `implementation/CueScore_Localization_Phase0_Official_Release_2026-10-09.md`.
+- P1 Implementation: NOT STARTED. Localization Implementation: NOT STARTED. Product source: UNCHANGED. Version 1.2 Build 84 release state: unchanged.
+- Conditional specification (Official 108): saved-interrupted-match language switching (S-B) takes effect only after the P1 runtime proof (C1〜C6, T-SW-1〜10); NOT VERIFIED until then.
+- Glossary: DRAFT / PENDING. Official 109 is not created. The draft is kept outside `official/` at `proposals/CueScore_Localization_Glossary_DRAFT_2026-10-08.md` and is not an official specification.
+- Open Decision Pending items: U3, U4, U6, U8, U9, U11 (see Official 108 §17).
 
 Player UX finalization status:
 

@@ -1,5 +1,15 @@
 # CueScore Apps Current State
 
+## CueScore 3言語対応 Phase 0 Official Specification Published（2026年10月9日）
+
+- Product Owner承認（2026-10-08: D1〜D10・U10、2026-10-09: Official正式発行）に基づき、**Decision 031（CueScore Localization）／Official 107（Localization Design Decision）／Official 108（Localization Specification v1.0）／Official Design Decision Log v2.7**を発行した。対応言語は ja／en／zh-Hans（zh-Hantは対象外、将来独立追加可能な構造）。Decision Log v2.6は保全し、Decision 001〜030の678要素（本文・番号・状態）は変更していない（v2.6とのXML要素比較、およびPagesでの全37ページのレンダリング比較で再検証）。
+- 言語変更は表示層だけに作用する。Match schema、Player ID、`registeredPlayerId`、`sharedMatchId`、Match events、`break_result.resultLabel`の日本語canonical値、scoring logic、analytics calculations、Backup JSON format、QR payload format、CSV contract（ヘッダー29列は日本語固定）、IAP Product ID、Free／Pro entitlementは**変更しない**。QR共有はV1〜V7（3×3言語組合せ、旧Build 84との双方向互換）を検証対象とする。日本限定配信は維持する。
+- U10: 繁体字中国語が端末の第一優先言語の場合は日本語（後続の英語・簡体字を自動選択しない）。手動選択は端末自動判定に優先する。
+- **条件付き仕様（NOT VERIFIED）:** 保存済み中断試合がある状態での言語切替（S-B）は、C1〜C6およびT-SW-1〜T-SW-10のP1 runtime検証PASSが効力発生条件。runtime検証は未実施で、失敗時はS-Bも切替不可とする。iOS WKWebView／PWAの実際の`navigator.languages`形式、進行中試合snapshotの表示言語依存の不在も未検証。
+- **Decision Pending（未解決のまま維持）:** U3（法務ページ未翻訳期間の注記）、U4（Paywall法的／Apple要件文言の確認）、U6（`alert/confirm/prompt`のOSボタン言語）、U8（Backup Share Sheet文言）、U9（言語行UI、P1 Prototype確認）、U11（`CFBundleDevelopmentRegion`、P6前のNative確認）。
+- Glossary: **DRAFT / PENDING**。Official 109は未作成。`docs/proposals/CueScore_Localization_Glossary_DRAFT_2026-10-08.md`にDraftとして保管し、中国語競技用語、マス割、JPA正式名称、Dead Ball、Rack、Inning、Run、Rotation、Push Outの未確認訳語は確定していない。P3は暫定翻訳、P4は正式レビュー・承認。
+- 状態: P1 Implementation **NOT STARTED**／Localization Implementation **NOT STARTED**／Product source **UNCHANGED**（`117feddc802b9c0d7eccbdced0d96de84f728bf7`時点のsourceと同一）。Version 1.2 Build 84のRelease状態（ASC `READY_FOR_SALE`、public propagation pending）は変更しない。Build 85、Archive／Upload／TestFlight／App Store Connect／Release、Score RC変更は0。Evidence: `docs/implementation/CueScore_Localization_Phase0_Official_Release_2026-10-09.md`。
+
 ## Version 1.2 Build 84 Manual Release（2026年10月4日）
 
 - Product OwnerのManual Release承認後、release直前にSubmission `935f4971-9fb9-43a9-ae28-7292bd693c7d` `COMPLETE`、Version 1.2 item `APPROVED`、Version `1.2` `PENDING_DEVELOPER_RELEASE`／`MANUAL`、Build `84` `VALID`／`APP_STORE_ELIGIBLE`、JPN only、CueScore Pro `APPROVED`／`NON_CONSUMABLE`／`JPY 980`をfresh確認した。
