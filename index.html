@@ -12671,6 +12671,9 @@ let matchRecordsRawCacheV152 = null;
     overlay.setAttribute("aria-hidden", "false");
     overlay.classList.remove("hidden");
     markBreakResultHistoryV3();
+    // The prompt is open: keep pendingBreak* on disk now. Persist is otherwise only triggered by updateGame() / pagehide / visibilitychange, so an abnormal
+    // termination before one of those used to leave a snapshot with pendingBreak=null. The next-rack prompt is opened inside updateGame(), which persists right after.
+    if (!options.nextRack) persistInProgressMatchV1();
   }
 
   function restoreBreakPromptFromUndoV697(payload) {
@@ -12711,6 +12714,7 @@ let matchRecordsRawCacheV152 = null;
     overlay.setAttribute("aria-hidden", "false");
     overlay.classList.remove("hidden");
     markBreakResultHistoryV3();
+    persistInProgressMatchV1(); // Undo / Resume re-open: same reason as in showBreakResultPromptV61 (live-context guard stays inside persistInProgressMatchV1)
   }
 
   function toggleBreakBallV696(number, button = null) {
