@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## CueScore Restore Persistence Source Formalized（2026年10月11日）
+
+- Break prompt を開いた直後に異常終了すると、再起動後に prompt と入力が復元されない不具合（`updateGame()` が `pendingBreak=null` の snapshot を保存し、prompt 再表示後の保存経路がなかった）を最小修正した。`showBreakResultPromptV61`（次ラック prompt を除く）と `restoreBreakPromptFromUndoV697` の末尾で `persistInProgressMatchV1()` を呼ぶ（`index.html` +4 行、新規 test 1 件）。live-context guard、snapshot／Match schema、Restore 読取側、Back UX B案、persist トリガーは変更なし。
+- 検証: 異常終了 65 ケース（変更前 25 件失敗 → 0 件）、Restore 41 シナリオ、Back UX B 21、未確定入力 14、Undo 4、旧 snapshot 19、P1 統合版（隔離コピー）の C3 60 run／C4／C6／T-SW-4、Full Node 638/638（P1 統合版 660/660）PASS。範囲外: prompt 開後の選択変更の保存。
+- **C5 追加 runtime は未完了（次 Gate に維持）。** P1: `IMPLEMENTATION IN PROGRESS`／S-B flag=false／P1未統合。Product Source commit: `356d730852642c274e7f3fd6216e68a726e5e869`。Build、Archive／Upload／TestFlight／App Store Connect／Release 0。Physical PASS 未記録。Evidence: `docs/implementation/CueScore_Restore_Persistence_Minimal_Fix_B_2026-10-11.md`。
+
 ## CueScore Restore Fix Source Formalized（2026年10月10日）
 
 - 中断→再開時に初回Break promptと未確定入力（breaker／rack／選択球／スクラッチ）が復元されず、初回`break_result`が欠落する不具合を修正した（対象: Rotation／9-ball／10-ball／JPA9。14-1／3 Cushionは影響なし）。復元は既存のUndo再表示routine（`restoreBreakPromptFromUndoV697`）を再利用し、promptを開くだけで確定・保存しない。
