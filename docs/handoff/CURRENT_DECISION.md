@@ -1,24 +1,22 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-I18N-PHASE0-OFFICIAL-RELEASE-20261009`
-- Date: 2026-10-09
-- Gate: `CUESCORE I18N PHASE 0 — OFFICIAL RELEASE PUBLISHED`
+- Decision ID: `CUESCORE-RESTORE-FIX-SOURCE-FORMALIZED-20261010`
+- Date: 2026-10-10
+- Previous Decision（継続・変更なし）: `CUESCORE-I18N-PHASE0-OFFICIAL-RELEASE-20261009`（Phase 0 Official Release。Official 107／108、Decision Log v2.7、S-B NOT VERIFIED、Decision Pending U3／U4／U6／U8／U9／U11は維持）
+- Gate: `CUESCORE RESTORE FIX — SOURCE FORMALIZED / PHYSICAL REVIEW PENDING`
 
 ## Product Owner Decision
 
-- 2026-10-09、Product OwnerはCueScore 3言語対応（ja／en／zh-Hans）Phase 0のOfficial正式発行を承認した。対象はLocalization Decision 031、Official 107、Official 108、Official Design Decision Log v2.7。
-- 2026-10-08に承認済みのD1〜D10・U10、保存データ不変、QR共有互換性（V1〜V7、3×3言語組合せ、旧Build 84との双方向互換）、日本限定配信維持、Free／Pro contract維持を正式仕様として登録する。
-- Documentation／Evidenceだけをcommitし、External GitHub mainへnon-force pushする。
+- 2026-10-09: 初回Break prompt復元（A）、未確定入力復元（B）、Back UX B案（確認ダイアログ）を承認。Back UX A案は不採用。
+- 2026-10-10: Back確認ダイアログをVisual Accepted（「入力に戻る」黒背景・白文字、「閉じる」白背景・黒文字。順序・文言・処理は維持）。最終監査、Product Source commit、Documentation commit、External GitHub mainへのnon-force push、read-backまでを承認。
 
 ## Result
 
-- Decision 031／Official 107／Official 108／Decision Log v2.7を発行。Decision Log v2.6は保全し、Decision 001〜030は変更していない。
-- P1 Implementation、Localization Implementation、Build、TestFlight、App Store Connect、Releaseは実施していない。
-- Glossaryは`docs/proposals/`にDraftとして保管（Official 109は未作成）。
+- Restore修正をProduct Source commit `74928978c80a505f59ba9e0c4f56fb9ff256984d`として固定し、Documentation／Evidenceを別commitで記録した。
+- 既知の制約: Back確認で「閉じる」を選ぶとBreak結果が未記録になりうる（完全防止ではない）。次ラックpromptのBackは変更していない。
 
 ## Boundary / STOP
 
-- 保存済み中断試合での言語切替（S-B）は、P1のruntime証明（C1〜C6、T-SW-1〜10）PASSまでNOT VERIFIED。FAILなら保守的制限を適用してSTOP。
-- Decision Pending: U3／U4／U6／U8／U9／U11。独自判断で解決しない。
-- Product source、Match schema、QR／Backup format、IAP、Free／Pro、Version 1.2 Build 84のRelease状態、Score RCを変更しない。
-- P1 Implementationは別のProduct Owner承認まで開始しない。
+- P1統合、S-B flag=true、Build番号変更、Archive／Upload／TestFlight／App Store Connect／Release、Score RC変更は承認されていない。P1は`IMPLEMENTATION IN PROGRESS`／S-B flag=false／未統合を維持。
+- Product Owner Physical PASSは未記録。Official仕様、Match／Snapshot schema、QR／Backup、IAP、Free／Proは変更しない。
+- Restore修正のP1統合は、別Gateでfresh baselineから判断する。

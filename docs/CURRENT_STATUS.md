@@ -1,10 +1,11 @@
 # CueScore Current Status
 
-- Updated: 2026-10-09
+- Updated: 2026-10-10
 - Public Version / Build: Japan public catalog still reports `1.1 (79)`; Version `1.2 (84)` release executed and ASC is `READY_FOR_SALE`, public propagation pending
 - Current project Version / Build: `1.2 (84)`
 - Gate: `RELEASE EXECUTED / ASC READY_FOR_SALE / PUBLIC PROPAGATION PENDING`（Version 1.2 Build 84 release gate。変更なし）
 - Localization Gate: `CUESCORE I18N PHASE 0 — OFFICIAL RELEASE PUBLISHED`（Decision 031 / Official 107・108 / Decision Log v2.7、2026-10-09）。P1: `NOT STARTED`／Localization Implementation: `NOT STARTED`／Glossary: `DRAFT / PENDING`（Official 109未作成）／Product source: `UNCHANGED`。S-B（保存済み中断試合での言語切替）は`NOT VERIFIED`（P1 runtime証明が条件）。Decision Pending: U3／U4／U6／U8／U9／U11
+- Restore Fix Gate: `CUESCORE RESTORE FIX — SOURCE FORMALIZED / PHYSICAL REVIEW PENDING`（2026-10-10）。初回Break prompt／未確定入力のRestore復元＋Back確認ダイアログ（B案、Visual Accepted）。Product Source Commit: `74928978c80a505f59ba9e0c4f56fb9ff256984d`。Full Node 633/633。Physical PASS未記録、P1未統合（P1: `IMPLEMENTATION IN PROGRESS`、S-B flag=false）、Build／Release変更0。
 - Build 84 distribution baseline: `b076e5e8b25be7a91c1e3e373923be70119a0d80`
 - Version 1.2 RC Product Source Commit: `810a9e134c5de1e033eb644027c37f51834fd6d4`
 - Player List Fix Product Source Commit: `7e2beb0ade0685ff331fa808273e00e6f832bd2c`

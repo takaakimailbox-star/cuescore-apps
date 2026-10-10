@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## CueScore Restore Fix Source Formalized（2026年10月10日）
+
+- 中断→再開時に初回Break promptと未確定入力（breaker／rack／選択球／スクラッチ）が復元されず、初回`break_result`が欠落する不具合を修正した（対象: Rotation／9-ball／10-ball／JPA9。14-1／3 Cushionは影響なし）。復元は既存のUndo再表示routine（`restoreBreakPromptFromUndoV697`）を再利用し、promptを開くだけで確定・保存しない。
+- Product Owner承認のBack UX B案: 再開／Undo再表示したBreak promptのBackで確認ダイアログ（「入力に戻る」黒背景・白文字／「閉じる」白背景・黒文字）を表示。2026-10-10にVisual Accepted。**既知の制約:** 「閉じる」を選ぶとBreak結果が未記録になりうる（完全防止ではない）。次ラックpromptのBackは変更なし。
+- snapshot schema、Match schema、Player ID、QR、Backup、Analytics、Free／Pro、IAP、Version／Build、Score RCは変更なし。既存の保存済みMatchの自動修復・migrationなし。
+- 検証: 最終sourceでFull Node 633/633、runtime smoke（4競技のRestore→Back確認）PASS。旧snapshot互換19件、41シナリオRegression、Break統計、Official 108 C3（隔離コピー）は先行Evidenceを再利用（差分は配色CSS 2行のみ）。NOT VERIFIED: 到達不能なBreakオプション、実機（WKWebView）、英語／中国語表示、公開版での再現。**Product Owner Physical PASSは未記録。**
+- P1: `IMPLEMENTATION IN PROGRESS`／S-B flag=false／P1未統合のまま。Product Source commit: `74928978c80a505f59ba9e0c4f56fb9ff256984d`。Build、Archive／Upload／TestFlight／App Store Connect／Release 0。Evidence: `docs/implementation/CueScore_Restore_Fix_Initial_Break_Prompt_Acceptance_2026-10-10.md`。
+
 ## CueScore 3言語対応 Phase 0 Official Specification Published（2026年10月9日）
 
 - Product Owner承認（2026-10-08: D1〜D10・U10、2026-10-09: Official正式発行）に基づき、**Decision 031（CueScore Localization）／Official 107（Localization Design Decision）／Official 108（Localization Specification v1.0）／Official Design Decision Log v2.7**を発行した。対応言語は ja／en／zh-Hans（zh-Hantは対象外、将来独立追加可能な構造）。Decision Log v2.6は保全し、Decision 001〜030の678要素（本文・番号・状態）は変更していない（v2.6とのXML要素比較、およびPagesでの全37ページのレンダリング比較で再検証）。

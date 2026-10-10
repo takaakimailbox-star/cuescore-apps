@@ -1,23 +1,21 @@
 # CueScore Current Report
 
 - App: CueScore Apps
-- Decision ID: `CUESCORE-I18N-PHASE0-OFFICIAL-RELEASE-20261009`
-- Date: 2026-10-09
-- Baseline / External GitHub main: `117feddc802b9c0d7eccbdced0d96de84f728bf7`
-- Product source: UNCHANGED（Product Source commit `8783c5e2ef4a73405ea6334c268422f6964fc920`）
-- Gate result: `CUESCORE I18N PHASE 0 — OFFICIAL RELEASE PUBLISHED`
+- Decision ID: `CUESCORE-RESTORE-FIX-SOURCE-FORMALIZED-20261010`
+- Date: 2026-10-10
+- Previous Decision（継続・変更なし）: `CUESCORE-I18N-PHASE0-OFFICIAL-RELEASE-20261009`（Phase 0 Official Release。Official 107／108、Decision Log v2.7は変更なし）
+- Baseline / External GitHub main（作業開始時）: `a4dde57dcb001c302c2e1979ee90949b984a9c31`
+- Product Source commit: `74928978c80a505f59ba9e0c4f56fb9ff256984d`（`fix: restore pending initial break input`）。Documentation commitのSHAはGit履歴を正本とする（本ファイルは当該commitに含まれる）。
+- Gate result: `CUESCORE RESTORE FIX — SOURCE FORMALIZED / PHYSICAL REVIEW PENDING`
 
 ## Result
 
-Product Ownerの正式発行承認に基づき、Decision 031、Official 107（`docs/official/107_CueScore_Localization_Decision.md`）、Official 108（`docs/official/108_CueScore_Localization_Spec.md`）、Official Design Decision Log v2.7（`docs/official/07_CueScore_Official_Design_Decision_Log_v2.7_Official_Release.docx`）を発行した。Decision Log v2.6のDecision 001〜030（678要素）は変更なし。Documentation commitのSHAはGit履歴を正本とする（本ファイルは当該commitに含まれる）。
+中断→再開時に初回Break promptと未確定入力を復元し、再開／Undo再表示したBreak promptのBackで確認ダイアログを出す修正を固定した。最終sourceでFull Node 633/633 PASS（fail 0／skip 0）、4競技のruntime smoke PASS、`git diff --check` PASS。旧snapshot互換・41シナリオRegression・Break統計・Official 108 C3は、配色CSS 2行のみが異なる先行Evidenceを再利用（理由は実装Evidenceに記録）。
 
 ## Evidence
 
-- Evidence: `docs/implementation/CueScore_Localization_Phase0_Official_Release_2026-10-09.md`（採番監査、docx全ページレンダリング、Documentation tests、commit scope audit）。
-- Numbering: Decision 031／Official 107／108／v2.7はfresh mainで未使用であることを確認（衝突0）。
-- DOCX: Pagesで全37ページをレンダリングし、v2.6（35ページ）との本文差分が意図した変更のみであることを確認。Word実機の表示は`NOT VERIFIED`。
-- Glossary: `docs/proposals/CueScore_Localization_Glossary_DRAFT_2026-10-08.md`（`DRAFT / PENDING`）。
+`docs/implementation/CueScore_Restore_Fix_Initial_Break_Prompt_Acceptance_2026-10-10.md`、`docs/implementation/evidence/restore-initial-break-prompt-fix-2026-10-10/`（合成データのscreenshot 4枚）。
 
 ## Boundary / STOP
 
-P1 Implementation、3言語UI実装、Build、Archive／Upload、TestFlight、App Store Connect、Release、Score RC変更は0。S-B許可、`navigator.languages`の実形式、snapshot監査は`NOT VERIFIED`。U3／U4／U6／U8／U9／U11は未解決。
+NOT VERIFIED: 到達不能なBreakオプション（illegal break／pre-break foul／Push Out／14-1 Rebreak）、実機（WKWebView／PWA）、英語／中国語表示、公開版での再現、キーボード／VoiceOver。Product Owner Physical PASSは未記録。P1は`IMPLEMENTATION IN PROGRESS`／S-B flag=false／未統合。Build、Archive／Upload、TestFlight、App Store Connect、Release、Score RC変更は0。
