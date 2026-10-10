@@ -8392,6 +8392,17 @@ body {
         </div>
       </section>
 
+      <section id="breakResultBackConfirmV1" class="break-interrupt-overlay-v3 hidden" aria-modal="true" role="dialog" aria-labelledby="breakResultBackConfirmTitleV1" aria-hidden="true">
+        <div class="break-interrupt-card-v3">
+          <h2 id="breakResultBackConfirmTitleV1">ブレイク結果が未入力です</h2>
+          <p>入力をやめると、今回のブレイク結果は記録されません。</p>
+          <div class="break-interrupt-actions-v3">
+            <button id="breakResultBackConfirmReturnV1" type="button" data-dialog-close>入力に戻る</button>
+            <button id="breakResultBackConfirmCloseV1" type="button">閉じる</button>
+          </div>
+        </div>
+      </section>
+
     </section>
 
 
@@ -12484,6 +12495,8 @@ let matchRecordsRawCacheV152 = null;
     const overlay = el("breakResultOverlayV61");
     el("breakInterruptConfirmV3")?.classList.add("hidden");
     el("breakInterruptConfirmV3")?.setAttribute("aria-hidden", "true");
+    el("breakResultBackConfirmV1")?.classList.add("hidden");
+    el("breakResultBackConfirmV1")?.setAttribute("aria-hidden", "true");
     if (overlay) {
       if (breakResultCloseTimerV2) window.clearTimeout(breakResultCloseTimerV2);
       overlay.classList.add("is-closing-v2");
@@ -12527,6 +12540,34 @@ let matchRecordsRawCacheV152 = null;
     requestAnimationFrame(() => el("breakResultBackV3")?.focus({preventScroll:true}));
   }
 
+  // Back on a Break prompt that is NOT the new-match one and is not the next-rack one (a prompt restored after a restart, or re-opened by Undo):
+  // ask before the unconfirmed input is dropped. "入力に戻る" keeps the prompt and every pick; "閉じる" closes it like Back did before.
+  function isBreakResultBackConfirmOpenV1() {
+    const dialog = el("breakResultBackConfirmV1");
+    return Boolean(dialog && !dialog.classList.contains("hidden"));
+  }
+  function showBreakResultBackConfirmV1() {
+    const dialog = el("breakResultBackConfirmV1");
+    if (!dialog) return;
+    dialog.classList.remove("hidden");
+    dialog.setAttribute("aria-hidden", "false");
+    requestAnimationFrame(() => el("breakResultBackConfirmReturnV1")?.focus({preventScroll:true}));
+  }
+  function hideBreakResultBackConfirmV1({restoreHistory=false} = {}) {
+    const dialog = el("breakResultBackConfirmV1");
+    dialog?.classList.add("hidden");
+    dialog?.setAttribute("aria-hidden", "true");
+    if (restoreHistory) markBreakResultHistoryV3();
+    requestAnimationFrame(() => el("breakResultBackV3")?.focus({preventScroll:true}));
+  }
+  function closeBreakResultFromBackConfirmV1() {
+    if (breakResultBackHandlingV3) return;
+    hideBreakResultBackConfirmV1();
+    breakResultBackHandlingV3 = true;
+    closeBreakResultPromptV61();
+    window.setTimeout(() => { breakResultBackHandlingV3 = false; }, 220);
+  }
+
   function interruptNewMatchFromBreakV3() {
     if (breakResultBackHandlingV3) return;
     breakResultBackHandlingV3 = true;
@@ -12557,6 +12598,11 @@ let matchRecordsRawCacheV152 = null;
     if (breakResultSavingV1 || breakResultBackHandlingV3) return;
     if (breakResultSourceV3 === "new-match") {
       showBreakInterruptConfirmV3();
+      if (fromHistory) markBreakResultHistoryV3();
+      return;
+    }
+    if (breakResultSourceV3 === "game" && !pendingBreakStartsNextRackV1) {
+      showBreakResultBackConfirmV1();
       if (fromHistory) markBreakResultHistoryV3();
       return;
     }
@@ -13387,6 +13433,18 @@ let matchRecordsRawCacheV152 = null;
     proGameScreen.classList.remove("hidden");
     el("proSummary")?.classList.add("hidden");
     updateGame();
+    // restore() ends with closeBreakResultPromptV61() and updateGame() only re-arms the NEXT-rack prompt, so a Break prompt that was open
+    // when the snapshot was taken (first rack of a new match, or a prompt re-opened by Undo) used to disappear and its break_result was never recorded.
+    // Re-open it through the routine Undo already uses to re-open a prompt, with the saved breaker, rack and unconfirmed picks. Nothing is confirmed here.
+    if (payload.state.pendingBreakPlayerV61 != null && !payload.state.pendingBreakStartsNextRackV1 && !payload.state.rackEnded) {
+      restoreBreakPromptFromUndoV697({
+        player: payload.state.pendingBreakPlayerV61, rackNumber: payload.state.pendingBreakRackV61,
+        pocketedBalls: payload.state.pendingBreakBallsV696 || [], noIn: payload.state.pendingBreakNoInV702,
+        preBreakFoul: payload.state.pendingBreakPreFoulV1, scratch: payload.state.pendingBreakScratchV696,
+        illegalBreak: payload.state.pendingBreakIllegalV696, pushOut: payload.state.pendingBreakPushOutV695
+      });
+      pendingBreakNoInV702 = Boolean(payload.state.pendingBreakNoInV702); // the routine derives this flag; keep the saved value
+    }
     return true;
   }
 
@@ -16247,9 +16305,15 @@ let matchRecordsRawCacheV152 = null;
   el("breakResultBackV3")?.addEventListener("click", () => handleBreakResultBackV3());
   el("breakInterruptCancelV3")?.addEventListener("click", () => hideBreakInterruptConfirmV3());
   el("breakInterruptProceedV3")?.addEventListener("click", interruptNewMatchFromBreakV3);
+  el("breakResultBackConfirmReturnV1")?.addEventListener("click", () => hideBreakResultBackConfirmV1());
+  el("breakResultBackConfirmCloseV1")?.addEventListener("click", closeBreakResultFromBackConfirmV1);
   document.addEventListener("visibilitychange", () => { if (document.hidden) persistInProgressMatchV1(); });
   window.addEventListener("pagehide", persistInProgressMatchV1);
   window.addEventListener("popstate", () => {
+    if (isBreakResultBackConfirmOpenV1()) {            // system Back on the confirmation = "入力に戻る"
+      hideBreakResultBackConfirmV1({restoreHistory:true});
+      return;
+    }
     const confirmDialog = el("breakInterruptConfirmV3");
     if (confirmDialog && !confirmDialog.classList.contains("hidden")) {
       hideBreakInterruptConfirmV3({restoreHistory:true});
@@ -27982,6 +28046,8 @@ body.player-avatar-chooser-visible-v55 #playerLibraryOverlay{position:fixed!impo
 .break-interrupt-actions-v3 button{min-height:50px;border-radius:12px;font:inherit;font-size:16px;font-weight:800}
 #breakInterruptCancelV3{border:1px solid #cfcfcb;color:#171717;background:#fff}
 #breakInterruptProceedV3{border:1px solid #171717;color:#fff;background:#171717}
+#breakResultBackConfirmReturnV1{border:1px solid #171717;color:#fff;background:#171717}
+#breakResultBackConfirmCloseV1{border:1px solid #cfcfcb;color:#171717;background:#fff}
 @keyframes break-modal-backdrop-in-v2{from{opacity:0}to{opacity:1}}
 @keyframes break-modal-backdrop-out-v2{from{opacity:1}to{opacity:0}}
 @keyframes break-modal-card-in-v2{from{opacity:0;transform:scale(.965)}to{opacity:1;transform:scale(1)}}
