@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.8_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.9_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -29,9 +29,9 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.8 is the current official release and successor
-to v2.7. Earlier versions remain in the official directory as preceding releases.
-v2.8 adds Decision 032 (Settings Unified Design) and leaves Decisions 001〜031 unchanged.
+Official Design Decision Log v2.9 is the current official release and successor
+to v2.8. Earlier versions remain in the official directory as preceding releases.
+v2.9 adds Decision 033 (Dynamic Type deferral) and leaves Decisions 001〜032 unchanged.
 
 Adopted RC decision addenda that supplement the latest Decision Log:
 
@@ -131,6 +131,7 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/108_CueScore_Localization_Spec.md`
 - `official/110_CueScore_Settings_Unified_Design_Decision.md`
 - `official/111_CueScore_Settings_Unified_Design_Spec.md`
+- `official/112_CueScore_Dynamic_Type_Deferral_Decision.md`
 
 CueScore Localization（3言語対応: ja / en / zh-Hans）status:
 
@@ -144,6 +145,10 @@ Settings Unified Design status:
 
 - Decision 032 / Official 110 / Official 111 / Official Design Decision Log v2.8 (published 2026-10-12). Settings is unified into three cards (plan / data management / app info). Limited scope: Settings, 言語 / Language, About CueScore, 利用規約, プライバシーポリシー. Decision 014 is not modified; Decision 032 supersedes it only within that scope. Official 84 is not modified; its 62px data-row rule is superseded only for Settings at viewport height 830px or less (data rows 56px or more at 830px or less, 62px or more at 831px or more). Official 109 stays reserved for the Glossary. Evidence: `implementation/CueScore_Settings_Unified_Design_Official_Release_2026-10-12.md`.
 - Implementation: NOT STARTED. Product source: UNCHANGED. P1 is unfinished and uncommitted.
+
+Dynamic Type deferral status:
+
+- Decision 033 / Official 112 / Official Design Decision Log v2.9 (published 2026-10-12). Automatic linking of the app text size to iOS Dynamic Type (Larger Text) is not implemented in the current v1.2 line and i18n P1; it is Later / Deferred, and any future work is decided by a separate Decision. Official 111 (including AC-SU-10) is preserved unchanged; Decision 033 only distinguishes AC-SU-10a (automatic linking: DEFERRED, not PASS) from AC-SU-10b (safe display when text is enlarged: PASS for the CSS pseudo-enlargement, 36 conditions; NOT VERIFIED under real iOS Dynamic Type). The Design System v2.1 accessibility requirements (Dynamic Type 200%, DS-REQ-033/034) are not removed or weakened. Larger Text support must not be declared as supported in the App Store until it is implemented and verified. Evidence: `implementation/CueScore_Dynamic_Type_Deferral_Official_Release_2026-10-12.md`.
 
 Player UX finalization status:
 

@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## CueScore Dynamic Type Deferral Official Decision Published（2026年10月12日）
+
+- Product Owner の方針に基づき、**Decision 033／Official 112／Official Design Decision Log v2.9**を発行した。iOS Dynamic Type への文字サイズ**自動連動は、現行 v1.2 系および多言語化 P1 では実装せず、Later／Deferred**とする（DT-1。将来の対応は別 Decision で判断）。理由: Settings のレイアウト安定性の維持、3言語対応の優先、不要な UI 変更を増やさない。**アクセシビリティ対応を不要としたのではなく、将来の改善対象として維持する。**
+- 調査: 文字サイズ非連動は**既存挙動**（P1 より前の main でも最大のアクセシビリティ文字サイズで Settings は通常サイズとピクセル差 0。文字は px 指定で連動指定なし）で、P1 の退行ではない。実機（Score P1）では PO が拡大しても表示変化なしを観察した（観察結果であり、Dynamic Type 対応の PASS ではない）。
+- DT-2: **Official 111 は改変せず保全**。後続 Decision として AC-SU-10 を区別（AC-SU-10a 自動連動＝**DEFERRED（PASS ではない）**／AC-SU-10b 拡大時の表示安全性＝CSS 疑似拡大 36 条件（3言語×3 viewport×100／130／160／200%）で PASS、**実際の iOS Dynamic Type 下は NOT VERIFIED**）。AC-SU-10 の行は削除・skip・弱体化しない。**実際の iOS Dynamic Type 対応は PASS と記録しない。**
+- Design System v2.1 のアクセシビリティ要件（§14 Dynamic Type 200%、DS-REQ-033／034）は削除・弱体化しない。DT-3: Larger Text 対応を未実装の状態で App Store の対応済み機能として申告しない（ASC の確認は別 Gate）。
+- 状態: 自動連動は**実装しない**／Product source **UNCHANGED**／P1 は未完成・未commit／S-B flag=false／Settings R の実装は変更なし。Evidence: `docs/implementation/CueScore_Dynamic_Type_Deferral_Official_Release_2026-10-12.md`。
+
 ## CueScore Settings Unified Design Official Decision Published（2026年10月12日）
 
 - Product Owner が Settings Unified Design R案を正式承認し、同日、CF-1（データ管理行の高さ）をB案で確定。**Decision 032／Official 110（Decision）／Official 111（Spec）／Official Design Decision Log v2.8**を発行した。Official 109はGlossary用に予約したまま未使用。
