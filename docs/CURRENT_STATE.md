@@ -1,5 +1,14 @@
 # CueScore Apps Current State
 
+## CueScore Settings Unified Design Official Decision Published（2026年10月12日）
+
+- Product Owner が Settings Unified Design R案を正式承認し、同日、CF-1（データ管理行の高さ）をB案で確定。**Decision 032／Official 110（Decision）／Official 111（Spec）／Official Design Decision Log v2.8**を発行した。Official 109はGlossary用に予約したまま未使用。
+- 採用事項（A〜L）: R案採用／Settingsの3カード統一／原則1画面完結／カード角丸20pt／情報行44〜46ptの限定例外／データ管理行の高さ（830px以下は56px以上、831px以上は62px以上）／独立ロゴ・Version表示の削除／VersionはAbout集約／アプリ情報カード新設／プラン重複ラベル削除／©維持／小画面スクロールfallback維持。
+- Decision 014は削除・改変せず、Settings／言語／About CueScore／利用規約／プライバシーポリシーの範囲に限り後続Decisionとして限定的に上書き。Official 84は改変せず、データ行62px規則をSettingsの830px以下に限り後続置換（831px以上は62px維持、他画面は変更なし）。Design Systemの52pt規則はSettings以外で変更なし。
+- Versionは単一定義から取得（`1.2`を新たにhardcodeしない）、Native `MARKETING_VERSION`との一致を実装Gateで検査。新見出し: ja「アプリ情報」／en「App info」／zh-Hans「应用信息」（Key `settings.section.appInfo`、aria-labelも同じKey）。
+- Prototype実測（正式仕様の行高さ）: 375×812／390×844×ja／en／zh-Hansの6条件すべて1画面（重なり0・clipping 0・横overflow 0）。390×844のBottom Navigation余白+14px、境界は390×830で+36px、390×831で+1px。実機（WKWebView）・文字拡大はNOT VERIFIED（実装Gateの必須受入条件）。
+- 状態: Implementation **NOT STARTED**／Product source **UNCHANGED**。**P1は未完成・未commit**。S-B flag=false、Score RC、Version／Build、Apple配布状態は変更なし。Evidence: `docs/implementation/CueScore_Settings_Unified_Design_Official_Release_2026-10-12.md`。
+
 ## CueScore Restore Persistence Source Formalized（2026年10月11日）
 
 - Break prompt を開いた直後に異常終了すると、再起動後に prompt と入力が復元されない不具合（`updateGame()` が `pendingBreak=null` の snapshot を保存し、prompt 再表示後の保存経路がなかった）を最小修正した。`showBreakResultPromptV61`（次ラック prompt を除く）と `restoreBreakPromptFromUndoV697` の末尾で `persistInProgressMatchV1()` を呼ぶ（`index.html` +4 行、新規 test 1 件）。live-context guard、snapshot／Match schema、Restore 読取側、Back UX B案、persist トリガーは変更なし。

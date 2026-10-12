@@ -1,17 +1,17 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-RESTORE-PERSISTENCE-SOURCE-FORMALIZED-20261011`
-- Date: 2026-10-11
-- Previous Decision（継続・変更なし）: `CUESCORE-RESTORE-FIX-SOURCE-FORMALIZED-20261010`（初回Break prompt／未確定入力のRestore復元、Back UX B案）。さらに前: `CUESCORE-I18N-PHASE0-OFFICIAL-RELEASE-20261009`（Phase 0 Official Release。Official 107／108、Decision Log v2.7、S-B NOT VERIFIED、Decision Pending U3／U4／U6／U8／U9／U11は維持）
-- Gate: `CUESCORE RESTORE PERSISTENCE — SOURCE FORMALIZED`
+- Decision ID: `CUESCORE-SETTINGS-UNIFIED-DESIGN-OFFICIAL-DECISION-20261012`
+- Date: 2026-10-12
+- Previous Decision（継続・変更なし）: `CUESCORE-RESTORE-PERSISTENCE-SOURCE-FORMALIZED-20261011`（Break prompt表示時のsnapshot保存）。さらに前: `CUESCORE-RESTORE-FIX-SOURCE-FORMALIZED-20261010`（初回Break prompt／未確定入力のRestore復元、Back UX B案）。さらに前: `CUESCORE-I18N-PHASE0-OFFICIAL-RELEASE-20261009`（Phase 0 Official Release。Official 107／108、Decision Log v2.7、S-B NOT VERIFIED、Decision Pending U3／U4／U6／U8／U9／U11は維持）
+- Gate: `CUESCORE SETTINGS UNIFIED DESIGN — OFFICIAL DECISION PUBLISHED`
 
 ## Product Owner Decision
-- Restore Persistence Root Cause調査を受け、B案の最小修正・回帰検証、およびレビュー後のGitHub正式固定（Product Source commit → Documentation commit → non-force push → read-back）を承認。
+- 2026-10-12、Settings Unified Design R案を正式承認し、CF-1（データ管理行の高さ）をB案で確定（830px以下は56px以上、831px以上は62px以上）。Decision 032／Official 110・111／Decision Log v2.8のOfficial発行、Documentation-only commit、non-force push、read-backを承認。
 
 ## Result
-- Product Source commit `356d730852642c274e7f3fd6216e68a726e5e869`（`fix: persist pending break prompt state`）。Documentationは別commit。
-- 範囲外: prompt を開いた後の球・Scratch・breaker 変更の保存（異常終了でその変更は失われうる）。
+- Decision 032（A〜L）、Official 110（Decision）、Official 111（Spec、AC-SU-1〜13）、Decision Log v2.8を発行。Decision 014・Official 84は改変せず、Settings範囲に限る後続置換として記録。Evidence: `docs/implementation/CueScore_Settings_Unified_Design_Official_Release_2026-10-12.md`。
+- 製品実装は別Gate（Implementation NOT STARTED）。Product sourceは変更なし。
 
 ## Boundary / STOP
-- P1統合、C5追加runtime、S-B有効化（flag=false維持）、P2、Build番号変更、Archive／Upload／TestFlight／App Store Connect／Release、Score RC変更は承認されていない。P1は`IMPLEMENTATION IN PROGRESS`／未統合。
+- Settings製品実装、P1 source変更・統合、S-B有効化（flag=false維持）、P2、Build番号変更、Archive／Upload／TestFlight／App Store Connect／Release、Score RC変更は承認されていない。P1は未完成・未commit。
 - C5は未完了のまま次Gateに維持。Product Owner Physical PASSは未記録。Official仕様、Match／Snapshot schema、QR／Backup、IAP、Free／Proは変更しない。

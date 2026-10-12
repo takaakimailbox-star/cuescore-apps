@@ -55,7 +55,7 @@ test("Official document numbers 107 and 108 are published, unique and 109 is not
     assert.equal(numbers.filter(value => value === number).length, 1, `Official ${number} must be unique`);
   }
   assert.ok(!numbers.includes(109), "Official 109 (Glossary) must not exist until the P4 review");
-  assert.ok(Math.max(...numbers) === 108, "highest Official md number must be 108");
+  assert.ok(Math.max(...numbers) === 111, "highest Official md number must be 111 (110 / 111 = Settings Unified Design; 109 stays reserved)");
 });
 
 test("Decision Log v2.6 is preserved and v2.7 keeps Decision 001-030 byte-identical", () => {
@@ -130,8 +130,8 @@ test("Official 108 requirement identifiers resolve", () => {
 
 test("README index lists Official 107 / 108 and Decision Log v2.7 and keeps the Glossary a Draft", () => {
   const readme = read("docs/README.md");
-  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.7_Official_Release\.docx`/);
-  assert.match(readme, /Official Design Decision Log v2\.7 is the current official release and successor\s+to v2\.6/);
+  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.8_Official_Release\.docx`/);
+  assert.match(readme, /Official Design Decision Log v2\.8 is the current official release and successor\s+to v2\.7/);
   assert.match(readme, /- `official\/107_CueScore_Localization_Decision\.md`/);
   assert.match(readme, /- `official\/108_CueScore_Localization_Spec\.md`/);
   assert.doesNotMatch(readme, /official\/109_/);

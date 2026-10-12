@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.7_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.8_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -29,9 +29,9 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.7 is the current official release and successor
-to v2.6. Earlier versions remain in the official directory as preceding releases.
-v2.7 adds Decision 031 (CueScore Localization) and leaves Decisions 001〜030 unchanged.
+Official Design Decision Log v2.8 is the current official release and successor
+to v2.7. Earlier versions remain in the official directory as preceding releases.
+v2.8 adds Decision 032 (Settings Unified Design) and leaves Decisions 001〜031 unchanged.
 
 Adopted RC decision addenda that supplement the latest Decision Log:
 
@@ -129,6 +129,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/106_CueScore_Player_UX_Finalization_Spec.md`
 - `official/107_CueScore_Localization_Decision.md`
 - `official/108_CueScore_Localization_Spec.md`
+- `official/110_CueScore_Settings_Unified_Design_Decision.md`
+- `official/111_CueScore_Settings_Unified_Design_Spec.md`
 
 CueScore Localization（3言語対応: ja / en / zh-Hans）status:
 
@@ -137,6 +139,11 @@ CueScore Localization（3言語対応: ja / en / zh-Hans）status:
 - Conditional specification (Official 108): saved-interrupted-match language switching (S-B) takes effect only after the P1 runtime proof (C1〜C6, T-SW-1〜10); NOT VERIFIED until then.
 - Glossary: DRAFT / PENDING. Official 109 is not created. The draft is kept outside `official/` at `proposals/CueScore_Localization_Glossary_DRAFT_2026-10-08.md` and is not an official specification.
 - Open Decision Pending items: U3, U4, U6, U8, U9, U11 (see Official 108 §17).
+
+Settings Unified Design status:
+
+- Decision 032 / Official 110 / Official 111 / Official Design Decision Log v2.8 (published 2026-10-12). Settings is unified into three cards (plan / data management / app info). Limited scope: Settings, 言語 / Language, About CueScore, 利用規約, プライバシーポリシー. Decision 014 is not modified; Decision 032 supersedes it only within that scope. Official 84 is not modified; its 62px data-row rule is superseded only for Settings at viewport height 830px or less (data rows 56px or more at 830px or less, 62px or more at 831px or more). Official 109 stays reserved for the Glossary. Evidence: `implementation/CueScore_Settings_Unified_Design_Official_Release_2026-10-12.md`.
+- Implementation: NOT STARTED. Product source: UNCHANGED. P1 is unfinished and uncommitted.
 
 Player UX finalization status:
 
