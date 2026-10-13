@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## CueScore Localization P1 Formalization Decision Published（2026年10月13日）
+
+- Product Owner の 3 項目承認に基づき、**Decision 034／Official 113（Decision）／Official 114（Spec）／Official Design Decision Log v2.10**を発行した。Official 107／108／110／111／112 は改変しない。Official 109 は Glossary 用に予約のまま。
+- **U9**: PO が明示した実機 Visual Acceptance 記録を採用し、P1 の言語 UI 形式（言語行「言語 / Language」、言語選択画面）を採用して RESOLVED。照合は A（PO 明示確認）／B（画像・ログ・自動検証で独立確認）／C（未確認）に分離。C: 言語選択 UI は「確認報告あり」（PO 明示 OK の文言原本は ChatGPT りおん側）、実機 PWA・他 iOS・AC-SU-10（Deferred）は NOT VERIFIED。
+- **S-B**: P1 は `LANGUAGE_SWITCH_ALLOWS_SAVED_INTERRUPTED_V1 = false` の保守的規則。記録中・保存済み中断試合がある間は言語変更不可。有効化は Later／別 Gate。T-SW の未検証項目（WKWebView・実機 iOS ライフサイクル・PWA reload）は PASS にも FAIL にも変更しない。Official 108 L-SW-8／9 は不変。
+- **L-RES-10**: 確認済み範囲（Simulator、Simulator PWA、Simulator 診断アプリ、実機 Safari、実機 WKWebView 診断アプリ。いずれも C=D 一致）を条件付きで受け入れ。実機 PWA・複数言語構成・他 iOS・Score P1 本体での直接測定は NOT VERIFIED として後工程へ引継ぎ。Official 108 の要件・アルゴリズムは不変。C5 は現行機能範囲の条件付き PASS を維持。
+- 状態: Documentation-only の発行。**P1 の source は main に未反映**（P1＋Settings R は隔離 worktree の未 commit 差分として永続保全済み）。source の正式固定（commit／push）、S-B 有効化、P2 実装は別 Gate。Product source **UNCHANGED**。Evidence: `docs/implementation/CueScore_Localization_Decision_034_Official_Release_2026-10-13.md`。
+
 ## CueScore Dynamic Type Deferral Official Decision Published（2026年10月12日）
 
 - Product Owner の方針に基づき、**Decision 033／Official 112／Official Design Decision Log v2.9**を発行した。iOS Dynamic Type への文字サイズ**自動連動は、現行 v1.2 系および多言語化 P1 では実装せず、Later／Deferred**とする（DT-1。将来の対応は別 Decision で判断）。理由: Settings のレイアウト安定性の維持、3言語対応の優先、不要な UI 変更を増やさない。**アクセシビリティ対応を不要としたのではなく、将来の改善対象として維持する。**

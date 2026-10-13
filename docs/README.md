@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.9_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.10_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -29,8 +29,9 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.9 is the current official release and successor
-to v2.8. Earlier versions remain in the official directory as preceding releases.
+Official Design Decision Log v2.10 is the current official release and successor
+to v2.9. Earlier versions remain in the official directory as preceding releases.
+v2.10 adds Decision 034 (Localization P1 formalization) and leaves Decisions 001〜033 unchanged.
 v2.9 adds Decision 033 (Dynamic Type deferral) and leaves Decisions 001〜032 unchanged.
 
 Adopted RC decision addenda that supplement the latest Decision Log:
@@ -132,6 +133,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/110_CueScore_Settings_Unified_Design_Decision.md`
 - `official/111_CueScore_Settings_Unified_Design_Spec.md`
 - `official/112_CueScore_Dynamic_Type_Deferral_Decision.md`
+- `official/113_CueScore_Localization_P1_Formalization_Decision.md`
+- `official/114_CueScore_Localization_P1_Acceptance_Spec.md`
 
 CueScore Localization（3言語対応: ja / en / zh-Hans）status:
 
@@ -149,6 +152,11 @@ Settings Unified Design status:
 Dynamic Type deferral status:
 
 - Decision 033 / Official 112 / Official Design Decision Log v2.9 (published 2026-10-12). Automatic linking of the app text size to iOS Dynamic Type (Larger Text) is not implemented in the current v1.2 line and i18n P1; it is Later / Deferred, and any future work is decided by a separate Decision. Official 111 (including AC-SU-10) is preserved unchanged; Decision 033 only distinguishes AC-SU-10a (automatic linking: DEFERRED, not PASS) from AC-SU-10b (safe display when text is enlarged: PASS for the CSS pseudo-enlargement, 36 conditions; NOT VERIFIED under real iOS Dynamic Type). The Design System v2.1 accessibility requirements (Dynamic Type 200%, DS-REQ-033/034) are not removed or weakened. Larger Text support must not be declared as supported in the App Store until it is implemented and verified. Evidence: `implementation/CueScore_Dynamic_Type_Deferral_Official_Release_2026-10-12.md`.
+
+Localization P1 formalization status:
+
+- Decision 034 / Official 113 / Official 114 / Official Design Decision Log v2.10 (published 2026-10-13). Product Owner decisions: (1) U9 is closed by adopting the real-device Visual Acceptance records (A: PO-confirmed, B: independently confirmed, C: unconfirmed are kept separate); (2) S-B stays off for P1 (`LANGUAGE_SWITCH_ALLOWS_SAVED_INTERRUPTED_V1 = false`, no language change while a saved interrupted match exists, enabling is Later / a separate Gate); (3) L-RES-10 is accepted conditionally for the confirmed range, remaining items stay NOT VERIFIED and are carried to later phases. Official 107 / 108 / 110 / 111 / 112 are unchanged; Official 109 stays reserved.
+- This is a Documentation-only publication. The P1 source (i18n core, catalogs, Settings language row, Settings R) is not on main yet; its formal fixation (commit / push) is a separate Gate. Evidence: `implementation/CueScore_Localization_Decision_034_Official_Release_2026-10-13.md`.
 
 Player UX finalization status:
 
