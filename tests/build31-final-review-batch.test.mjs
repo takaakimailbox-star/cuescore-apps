@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import test from "node:test";
+import { jaText } from "./helpers/i18n-ja-catalog.mjs";
 
 const html=readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const hub=readFileSync(new URL("../navigation-phase2-6.js",import.meta.url),"utf8");
@@ -19,7 +20,8 @@ test("Player root uses a small name badge and no avatar pin",()=>{
   const start=html.indexOf("renderPlayerLibrary = function() {");
   const end=html.indexOf("function openPlayerManagementV145",start);
   const renderer=html.slice(start,end);
-  assert.match(renderer,/player-primary-badge-v1">メインプレーヤー/);
+  assert.match(renderer,/player-primary-badge-v1">\$\{window\.cueT\("player\.badge\.primary"\)\}/);
+  assert.equal(jaText("player.badge.primary"),"メインプレーヤー");
   assert.doesNotMatch(renderer,/player-primary-pin-v2/);
 });
 
@@ -35,7 +37,10 @@ test("Settings root has no Back control and keeps compact legal/data content",()
   const settingsEnd=html.indexOf("screen.appendChild(root)",settingsStart);
   const settings=html.slice(settingsStart,settingsEnd);
   assert.doesNotMatch(settings,/data-settings-home-back/);
-  for(const label of ["バックアップ","データ復元","データ削除","About CueScore","利用規約","プライバシーポリシー"])assert.match(settings,new RegExp(label));
+  for(const [label,key] of [["バックアップ","settings.row.backup.title"],["データ復元","settings.row.restore.title"],["データ削除","settings.row.delete.title"],["About CueScore",null],["利用規約","settings.legal.terms"],["プライバシーポリシー","settings.legal.privacy"]]){
+    if(key){assert.match(settings,new RegExp(key.replace(/\./g,"\\.")));assert.equal(jaText(key),label);}
+    else assert.match(settings,new RegExp(label));
+  }
   assert.match(css,/Build 31 final-review batch: compact Settings root/);
   assert.match(css,/min-height:62px/);
 });

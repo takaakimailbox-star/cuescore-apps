@@ -1,4 +1,5 @@
 import test from "node:test";
+import { jaText } from "./helpers/i18n-ja-catalog.mjs";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 
@@ -14,8 +15,10 @@ const privacyMarkdown=fs.readFileSync(new URL("../docs/official/app-store-v1.0/p
 const termsMarkdown=fs.readFileSync(new URL("../docs/official/app-store-v1.0/public/CueScore_Terms_of_Use_v1.0_Official.md",import.meta.url),"utf8");
 
 test("Settings connects Terms and Privacy without changing the footer layout",()=>{
-  assert.match(html,/class="settings-info-link-v1" type="button" data-settings-legal="terms\.html"><span>利用規約/);
-  assert.match(html,/class="settings-info-link-v1" type="button" data-settings-legal="privacy\.html"><span>プライバシーポリシー/);
+  assert.match(html,/class="settings-info-link-v1" type="button" data-settings-legal="terms\.html"><span>\$\{window\.cueT\("settings\.legal\.terms"\)\}/);
+  assert.equal(jaText("settings.legal.terms"),"利用規約");
+  assert.match(html,/class="settings-info-link-v1" type="button" data-settings-legal="privacy\.html"><span>\$\{window\.cueT\("settings\.legal\.privacy"\)\}/);
+  assert.equal(jaText("settings.legal.privacy"),"プライバシーポリシー");
   assert.match(html,/const openLegalViewV165 = legalPage => \{[\s\S]*?cue-legal-overlay-v65[\s\S]*?cue-legal-frame-v65[\s\S]*?legalFrameV165\.src = new URL\(legalPage, window\.location\.href\)\.href[\s\S]*?legalOverlayV165\.hidden = false/);
   assert.match(html,/const legalPage = event\.target\.closest\("\[data-settings-legal\]"\)[\s\S]*?openLegalViewV165\(legalPage\)/);
   assert.doesNotMatch(html,/cuescore\.returnToSettings\.v1/);
@@ -83,7 +86,9 @@ test("Published support contact exists and pre-release TODO text is absent",()=>
 });
 
 test("Settings child Back controls show only the arrow and retain destination labels",()=>{
-  assert.match(html,/data-suite-back="\$\{back\}" aria-label="\$\{back === "settings" \? "設定へ戻る" : "クラウド同期へ戻る"\}">\$\{icon\.back\}<\/button>/);
+  assert.match(html,/data-suite-back="\$\{back\}" aria-label="\$\{back === "settings" \? window\.cueT\("settings\.suite\.backToSettings"\) : window\.cueT\("settings\.suite\.backToCloud"\)\}">\$\{icon\.back\}<\/button>/);
+  assert.equal(jaText("settings.suite.backToSettings"),"設定へ戻る");
+  assert.equal(jaText("settings.suite.backToCloud"),"クラウド同期へ戻る");
   assert.doesNotMatch(html,/\$\{icon\.back\}<span>\$\{back === "settings"/);
 });
 

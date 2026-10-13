@@ -126,7 +126,7 @@
     const browse=document.body.dataset.cuePlayerContext==="browse",overlay=document.getElementById("playerLibraryOverlay");
     if(!browse||!overlay||overlay.classList.contains("hidden"))return;
     const add=document.getElementById("playerLibraryAddBtn"),register=document.getElementById("playerLibraryRegisterBtnV2"),rootTitle=document.getElementById("playerLibraryTitle");
-    add?.style.setProperty("display","grid","important");if(register)register.hidden=true;if(rootTitle)rootTitle.textContent="プレーヤー";
+    add?.style.setProperty("display","grid","important");if(register)register.hidden=true;if(rootTitle)rootTitle.textContent=window.cueT("player.title");
   };
   let playerReconcileQueued=false;
   const schedulePlayerReconcile=()=>{
@@ -137,7 +137,7 @@
   new MutationObserver(schedulePlayerReconcile).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["class","style","data-cue-player-context"]});
   const home=document.getElementById("cueHomeV1"),resume=document.getElementById("cueResumeCardV1");
   if(home&&resume&&!home.querySelector("[data-home-new-match-v2]")){
-    const newMatch=document.createElement("button");newMatch.type="button";newMatch.className="home-new-match-v2";newMatch.dataset.homeNewMatchV2="true";newMatch.innerHTML='<span aria-hidden="true">＋</span><strong>新しい試合</strong><b aria-hidden="true">›</b>';
+    const newMatch=document.createElement("button");newMatch.type="button";newMatch.className="home-new-match-v2";newMatch.dataset.homeNewMatchV2="true";newMatch.innerHTML=`<span aria-hidden="true">＋</span><strong>${window.cueT("home.newMatch")}</strong><b aria-hidden="true">›</b>`;
     resume.insertAdjacentElement("afterend",newMatch);
     const switcher=document.getElementById("cueDisciplineSwitcherV1"),setup=document.querySelector(".cue-new-match-integrated-v2"),back=document.getElementById("cueMatchSetupBackV3");
     if(switcher&&setup&&back)back.insertAdjacentElement("afterend",switcher);

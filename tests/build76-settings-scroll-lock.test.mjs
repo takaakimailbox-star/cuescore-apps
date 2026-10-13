@@ -5,9 +5,9 @@ import test from "node:test";
 const html = fs.readFileSync(new URL("../index.html", import.meta.url), "utf8");
 const navigation = fs.readFileSync(new URL("../navigation-phase2-6.css", import.meta.url), "utf8");
 
-test("Build 76 locks only the compact Settings scroll owner", () => {
+test("Build 76 keeps the compact Settings scroll owner scrollable (no overflow lock) and bounce-free", () => {
   assert.match(navigation, /Build 76: disable the Settings scroll owner when the compact layout already fits/);
-  assert.match(navigation, /@media \(max-width:430px\) and \(min-height:780px\) and \(max-height:900px\)\{\s*\.settings-formal-scroll-v1\{overflow-y:hidden!important;overscroll-behavior:none!important;-webkit-overflow-scrolling:auto!important\}/);
+  assert.match(navigation, /@media \(max-width:430px\) and \(min-height:780px\) and \(max-height:900px\)\{\s*\.settings-formal-scroll-v1\{overflow-y:auto!important;overscroll-behavior:none!important;-webkit-overflow-scrolling:touch\}/);
 });
 
 test("Build 76 preserves overflow fallback outside the compact fit range", () => {

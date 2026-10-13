@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
+import { jaText } from "./helpers/i18n-ja-catalog.mjs";
 
 const html = fs.readFileSync(new URL("../index.html", import.meta.url), "utf8");
 const navigation = fs.readFileSync(new URL("../navigation-phase2-6.css", import.meta.url), "utf8");
@@ -18,7 +19,8 @@ test("Build 73 row sizes remain unchanged", () => {
 });
 
 test("privacy and the fixed bottom navigation remain present", () => {
-  assert.match(html, /data-settings-legal="privacy\.html"><span>プライバシーポリシー<\/span>/);
+  assert.match(html, /data-settings-legal="privacy\.html"><span>\$\{window\.cueT\("settings\.legal\.privacy"\)\}<\/span>/);
+  assert.equal(jaText("settings.legal.privacy"), "プライバシーポリシー");
   assert.match(html, /navigation-shell-phase1\.css/);
   assert.match(html, /navigation-phase2-6\.css/);
   assert.match(navigation, /settings-formal-spacer-v1/);

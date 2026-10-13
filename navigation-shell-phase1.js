@@ -4,11 +4,11 @@
   if(!app||document.querySelector(".cue-phase1-tab-bar"))return;
 
   const roots=["home","player","history","settings"];
-  const labels={home:"ホーム",player:"プレーヤー",history:"履歴",settings:"設定"};
+  const labels={home:window.cueT("nav.home"),player:window.cueT("nav.player"),history:window.cueT("nav.history"),settings:window.cueT("nav.settings")};
   const state={active:"home",previous:{},historyDiscipline:"all"};
   const nav=document.createElement("nav");
   nav.className="cue-phase1-tab-bar";
-  nav.setAttribute("aria-label","メインナビゲーション");
+  nav.setAttribute("aria-label",window.cueT("nav.main.aria"));
   nav.innerHTML=roots.map(key=>`<button type="button" role="tab" data-phase1-tab="${key}" aria-selected="${key==="home"}"><span class="cue-phase1-tab-icon ${key}" aria-hidden="true"></span><span>${labels[key]}</span></button>`).join("");
   document.body.appendChild(nav);
 
@@ -74,7 +74,7 @@
   const openRoot=key=>{
     leaveTopLevel(key);
     if(key==="home"){window.scrollTo(0,0)}
-    if(key==="player"){document.body.dataset.cuePlayerContext="browse";hideTransientPlayerViews();document.getElementById("playerManagementBtn")?.click();const title=document.getElementById("playerLibraryTitle");if(title)title.textContent="プレーヤー";document.querySelector("#playerLibraryList")?.scrollTo?.(0,0)}
+    if(key==="player"){document.body.dataset.cuePlayerContext="browse";hideTransientPlayerViews();document.getElementById("playerManagementBtn")?.click();const title=document.getElementById("playerLibraryTitle");if(title)title.textContent=window.cueT("player.title");document.querySelector("#playerLibraryList")?.scrollTo?.(0,0)}
     if(key==="history"){document.getElementById("recordsBtn")?.click();document.querySelector("#recordsList")?.scrollTo?.(0,0)}
     if(key==="settings"){document.getElementById("settingsBtn")?.click();document.querySelector(".settings-formal-scroll-v1")?.scrollTo?.(0,0)}
     enforceRootVisibility(key);
@@ -112,7 +112,7 @@
       else if(visible(document.getElementById("playerLibraryOverlay"))||visible(document.getElementById("playerStatsOverlay"))||[...document.querySelectorAll(".player-journey-overlay-v2,.pd12-trends")].some(visible))setActive("player");
     }
     const title=document.getElementById("playerLibraryTitle");
-    if(state.active==="player"&&title?.textContent==="プレーヤー一覧")title.textContent="プレーヤー";
+    if(state.active==="player"&&title?.textContent==="プレーヤー一覧")title.textContent=window.cueT("player.title"); // P2: replace this display-text comparison with a state/id check
   };
   let reconcileQueued=false;
   const scheduleReconcile=()=>{

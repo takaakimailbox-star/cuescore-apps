@@ -1,4 +1,5 @@
 import test from "node:test";
+import { jaText } from "./helpers/i18n-ja-catalog.mjs";
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 
@@ -39,8 +40,10 @@ test("Phase 5 consolidates browsing, information, registration, and editing in P
   assert.doesNotMatch(js,/data-settings-player-management-v2/);
   assert.match(html,/class="player-hub-info-v3"[^>]*data-stats-player/);
   assert.match(html,/class="player-hub-edit-v3"[^>]*data-edit-player/);
-  assert.match(html,/の情報を表示/);
-  assert.match(html,/を編集/);
+  assert.match(html,/window\.cueT\("player\.row\.infoAria"/);
+  assert.equal(jaText("player.row.infoAria",{name:"X"}),"Xの情報を表示");
+  assert.match(html,/window\.cueT\("player\.row\.editAria"/);
+  assert.equal(jaText("player.row.editAria",{name:"X"}),"Xを編集");
   assert.match(js,/add\?\.style\.setProperty\("display","grid","important"\)/);
   assert.match(css,/data-cue-player-context="browse"/);
   assert.match(css,/grid-template-columns:minmax\(0,1fr\) 44px/);

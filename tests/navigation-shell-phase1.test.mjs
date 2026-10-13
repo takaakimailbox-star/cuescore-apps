@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import test from "node:test";
+import { jaText } from "./helpers/i18n-ja-catalog.mjs";
 
 const index=readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const js=readFileSync(new URL("../navigation-shell-phase1.js",import.meta.url),"utf8");
@@ -10,13 +11,15 @@ const sw=readFileSync(new URL("../sw.js",import.meta.url),"utf8");
 
 test("Normal Mode navigation has exactly the four adopted top-level tabs",()=>{
   assert.match(js,/const roots=\["home","player","history","settings"\]/);
-  assert.match(js,/home:"ホーム",player:"プレーヤー",history:"履歴",settings:"設定"/);
+  assert.match(js,/home:window\.cueT\("nav\.home"\),player:window\.cueT\("nav\.player"\),history:window\.cueT\("nav\.history"\),settings:window\.cueT\("nav\.settings"\)/);
+  assert.deepEqual(["nav.home","nav.player","nav.history","nav.settings"].map(key=>jaText(key)),["ホーム","プレーヤー","履歴","設定"]);
   assert.doesNotMatch(js,/練習/);
   assert.match(js,/tabCount:\(\)=>nav\.querySelectorAll\("\[data-phase1-tab\]"\)\.length/);
 });
 
 test("Player root uses the adopted title and all four directions share one state container",()=>{
-  assert.match(js,/title\.textContent="プレーヤー"/);
+  assert.match(js,/title\.textContent=window\.cueT\("player\.title"\)/);
+  assert.equal(jaText("player.title"),"プレーヤー");
   assert.doesNotMatch(js,/title\.textContent="プレーヤー一覧"/);
   assert.match(js,/const state=\{active:"home",previous:\{\},historyDiscipline:"all"\}/);
   for(const key of ["home","player","history","settings"])assert.match(js,new RegExp(`key==="${key}"`));

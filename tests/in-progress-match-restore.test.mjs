@@ -1,4 +1,5 @@
 import test from "node:test";
+import { jaText } from "./helpers/i18n-ja-catalog.mjs";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 
@@ -54,7 +55,8 @@ test("Home card uses the single-row v4 avatar layout and exposes the required ma
   assert.match(html,/\.cue-resume-player-v4 img\{width:24px;height:24px/);
   assert.match(html,/\.cue-resume-player-v4 span\{[^}]*text-overflow:ellipsis/);
   assert.match(html,/playerAvatarSourceV2\(registered\?\.avatar\)/);
-  assert.match(html,/card\.setAttribute\("aria-label",`中断中の\$\{visual\.name\}、\$\{player1\}対\$\{player2\}、\$\{condition\}、試合を再開`\)/);
+  assert.match(html,/card\.setAttribute\("aria-label",window\.cueT\("home\.resume\.cardAria",\{game:visual\.name,player1,player2,condition\}\)\)/);
+  assert.equal(jaText("home.resume.cardAria",{game:"Rotation",player1:"Aさん",player2:"Bさん",condition:"目標点 120-120"}),"中断中のRotation、Aさん対Bさん、目標点 120-120、試合を再開");
   assert.match(html,/card\.addEventListener\("click",resumeInProgressFromHomeV1\)/);
   assert.match(html,/function resumeInProgressFromHomeV1\(\)[\s\S]*?restoreInProgressMatchV1\(\)/);
 });
