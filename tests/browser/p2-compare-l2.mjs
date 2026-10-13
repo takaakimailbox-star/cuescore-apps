@@ -22,9 +22,16 @@ for (const k of Object.keys(a.storage)) {
   if (k === "allKeys") { const s = JSON.stringify(a.storage[k]) === JSON.stringify(b.storage[k]); if (!s) bad++; rows.push(["DATA", "localStorage key set", s ? "identical" : "DIFFERENT"]); continue; }
   const s = JSON.stringify(a.storage[k]) === JSON.stringify(b.storage[k]); if (!s) bad++; rows.push(["DATA", k, s ? "identical" : "DIFFERENT"]);
 }
-const key = o => o.site.replace(/\?[^:]*/, "");
+// Observers are matched by file + ordinal (sorted by registration line), so a gate that only shifts line numbers is not reported as a change.
+const fileOf = o => o.site.replace(/\?[^:]*/, "").split(":")[0], lineOf = o => Number(o.site.split(":").pop());
 const sum = o => ({ fired: Object.values(o.fires).reduce((x, y) => x + y, 0) > 0, wrote: Object.values(o.writes).reduce((x, y) => x + y, 0) > 0, changed: Object.values(o.changed).reduce((x, y) => x + y, 0) > 0 });
-const map = r => { const m = new Map(); for (const o of r.observers) { const k = key(o); const s = sum(o); const p = m.get(k) || { n: 0, fired: false, wrote: false, changed: false }; m.set(k, { n: p.n + 1, fired: p.fired || s.fired, wrote: p.wrote || s.wrote, changed: p.changed || s.changed }); } return m; };
+const map = r => {
+  const lines = {}; for (const o of r.observers) (lines[fileOf(o)] ||= new Set()).add(lineOf(o));
+  const rank = {}; for (const [f, set] of Object.entries(lines)) rank[f] = [...set].sort((x, y) => x - y);
+  const m = new Map();
+  for (const o of r.observers) { const k = fileOf(o) + "#" + rank[fileOf(o)].indexOf(lineOf(o)); const s = sum(o); const p = m.get(k) || { n: 0, fired: false, wrote: false, changed: false }; m.set(k, { n: p.n + 1, fired: p.fired || s.fired, wrote: p.wrote || s.wrote, changed: p.changed || s.changed }); }
+  return m;
+};
 const ma = map(a), mb = map(b);
 for (const k of new Set([...ma.keys(), ...mb.keys()])) {
   const x = JSON.stringify(ma.get(k) || null), y = JSON.stringify(mb.get(k) || null);

@@ -3,7 +3,7 @@ process.env.TZ = "Asia/Tokyo";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
-import { read, indexHtml, extractFunction, run, golden, sha256, codePoints } from "./helpers/p2-source.mjs";
+import { read, indexHtml, extractFunction, run, golden, sha256, codePoints, domain } from "./helpers/p2-source.mjs";
 import { stage1Fixtures, nodeCodec } from "./helpers/match-sharing-stage1-fixtures.mjs";
 
 const require = createRequire(import.meta.url);
@@ -35,9 +35,11 @@ test("[P2L-023,024,025] category initialization: Free first and locked, legacy d
   assert.equal(legacy.cats[0].name, "Free");
 });
 test("[P2L-026] reserved category names (add/edit) and Free-specific alert are pinned at source level", () => {
-  const n = [...html.matchAll(/\["Free",\s*"JPA",\s*"KTCリーグ",\s*"練習試合"\]\.includes\(/g)].length;
+  const n = [...html.matchAll(/CueScoreDomainV1\.RESERVED_CATEGORY_NAMES\.includes\(name\)/g)].length;
   assert.equal(n, 2, "add and edit both check the same reserved list");
-  assert.ok(html.includes('name === "Free"'));
+  assert.ok(html.includes("name === CueScoreDomainV1.FREE_CATEGORY.name"));
+  assert.deepEqual([...domain.RESERVED_CATEGORY_NAMES], ["Free", "JPA", "KTCリーグ", "練習試合"]);
+  assert.deepEqual([...domain.LEGACY_REMOVED_CATEGORY_NAMES], ["JPA", "KTCリーグ", "練習試合"]);
 });
 
 /* ---------- Backup (P2L-102..104) ---------- */

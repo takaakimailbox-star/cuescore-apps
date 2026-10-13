@@ -347,9 +347,10 @@
    "skips": 0
   },
   "match-history-list-simplification.test.mjs": {
-   "sha256": "f21c6400e5d776bfbc2d8f34f78c2314f210b67d291d1f2dff70a56a43016d60",
+   "sha256": "7dfb576fd3b60ecdff72829f298816920bcd0d18c8be98b26e755e63fbbe8c13",
    "tests": 6,
-   "skips": 0
+   "skips": 0,
+   "previousSha256": "f21c6400e5d776bfbc2d8f34f78c2314f210b67d291d1f2dff70a56a43016d60"
   },
   "match-sharing-build84-fix.test.mjs": {
    "sha256": "640e020f7107be1601d400b850592265a9d8be01b667a68723b87135e3311bef",
@@ -447,9 +448,10 @@
    "skips": 0
   },
   "player-delete-identity.test.mjs": {
-   "sha256": "fa67ff7a063d4279d61afdf187157453272960cbc4c473147f22c97647049e84",
+   "sha256": "262f8867992c9be522df1d51aac74927ac214117a3fe646fc5e8ceeb4a04f62a",
    "tests": 11,
-   "skips": 0
+   "skips": 0,
+   "previousSha256": "fa67ff7a063d4279d61afdf187157453272960cbc4c473147f22c97647049e84"
   },
   "player-detail-build6.test.mjs": {
    "sha256": "140a50ba1ab449ebccf29008220733875f6e80f46c2471cb442fb59d23c1b423",
@@ -457,9 +459,10 @@
    "skips": 0
   },
   "player-detail-final-rc-regression.test.mjs": {
-   "sha256": "a78b19334f721da5c5def4832d4efc146d36ff60c67255b60c0dd55a48f98df3",
+   "sha256": "ebb5b0be01a586c9cbba3cd9c0118a0edcae8af0e23800106843876b4825a3c5",
    "tests": 0,
-   "skips": 0
+   "skips": 0,
+   "previousSha256": "a78b19334f721da5c5def4832d4efc146d36ff60c67255b60c0dd55a48f98df3"
   },
   "player-discipline-metrics.test.mjs": {
    "sha256": "c6655b1c09f67530d3ea82b9d24909371680eedf7b90b4bd04eeeb9d34483216",
@@ -482,9 +485,10 @@
    "skips": 0
   },
   "player-search-focus-ring.test.mjs": {
-   "sha256": "acd2c01e62c281a7235a414c9e3937d47a12d422fc4411456c0102b6c59601a6",
+   "sha256": "ab7a454d5108867339f7fe373002163434a45625b1def4c3b5f3cc04845d2b3d",
    "tests": 3,
-   "skips": 0
+   "skips": 0,
+   "previousSha256": "acd2c01e62c281a7235a414c9e3937d47a12d422fc4411456c0102b6c59601a6"
   },
   "player-ux-finalization.test.mjs": {
    "sha256": "2eba09313a54b8e93296c29d53fd282f17d6a7e1ec15384360acf264c2758689",
@@ -591,5 +595,6 @@
    "tests": 0,
    "skips": 0
   }
- }
+ },
+ "updated_by": "P2-1 (a841cbc baseline files changed only to read Domain constants / supply the global; assertions not weakened)"
 }

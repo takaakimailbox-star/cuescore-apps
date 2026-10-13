@@ -1,12 +1,14 @@
 (function(root,factory){
-  const api=factory();
+  const domain=typeof module==="object"&&module.exports?require("./domain-constants-v1.js"):root.CueScoreDomainV1;
+  if(!domain)throw new Error("CueScore Domain constants are required");
+  const api=factory(domain);
   if(typeof module==="object"&&module.exports)module.exports=api;
   if(root)root.CueScoreRecordPolicyFactory=api;
-})(typeof globalThis!=="undefined"?globalThis:this,function(){
+})(typeof globalThis!=="undefined"?globalThis:this,function(domain){
   "use strict";
   const FREE_LIMIT=20;
   const time=record=>{const value=new Date(record?.endedAt||record?.playedAt||record?.startedAt||record?.createdAt||0).getTime();return Number.isFinite(value)?value:0};
-  const stableNewest=(a,b)=>time(b)-time(a)||String(b?.id||b?.matchId||"").localeCompare(String(a?.id||a?.matchId||""),"ja",{numeric:true});
+  const stableNewest=(a,b)=>time(b)-time(a)||String(b?.id||b?.matchId||"").localeCompare(String(a?.id||a?.matchId||""),domain.SORT_LOCALE,{numeric:true});
   function createRecordPolicy(isPro){
     const pro=typeof isPro==="function"?isPro:()=>false;
     return Object.freeze({FREE_LIMIT,stableNewest,

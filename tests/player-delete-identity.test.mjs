@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import vm from "node:vm";
+import domainConstants from "../domain-constants-v1.js";
 
 const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
 
@@ -23,6 +24,7 @@ function identityHarness(players,records){
   const context=vm.createContext({
     readPlayerLibrary:()=>structuredClone(players),
     readMatchRecords:()=>structuredClone(records),
+    CueScoreDomainV1:domainConstants,
     window:{CueScoreRecordAccess:{getEligibleRecords:value=>value}}
   });
   vm.runInContext(identitySource,context);
@@ -134,7 +136,7 @@ test("completed-match participant deletion is allowed and keeps beforeDelete saf
 
 test("deleted historical avatar resolves through neutral fallback without schema rewrite",()=>{
   assert.match(html,/function historicalPlayerProfileV1\(data, registeredPlayers = readPlayerLibrary\(\)\)/);
-  assert.match(html,/registeredId\s*\? registeredPlayers\.find\(player => String\(player\?\.id \|\| ""\)\.trim\(\) === registeredId\)\s*:\s*registeredPlayers\.find\(player => String\(player\?\.name \|\| ""\)\.trim\(\)\.toLocaleLowerCase\("ja"\) === normalizedName\)/);
+  assert.match(html,/registeredId\s*\? registeredPlayers\.find\(player => String\(player\?\.id \|\| ""\)\.trim\(\) === registeredId\)\s*:\s*registeredPlayers\.find\(player => String\(player\?\.name \|\| ""\)\.trim\(\)\.toLocaleLowerCase\(CueScoreDomainV1\.IDENTITY_LOCALE\) === normalizedName\)/);
   assert.match(html,/return registered \|\| \{\.\.\.source, avatar:\{\.\.\.DEFAULT_PLAYER_AVATAR_V4\}\}/);
   assert.match(html,/const recordPlayerV3 = data => historicalPlayerProfileV1\(data, recordPlayersV3\)/);
   assert.match(html,/const opponentLibrary = data => historicalPlayerProfileV1\(data,readPlayerLibrary\(\)\)/);

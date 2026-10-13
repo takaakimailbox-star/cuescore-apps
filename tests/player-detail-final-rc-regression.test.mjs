@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import vm from "node:vm";
+import domainConstants from "../domain-constants-v1.js";
 
 const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
 const serviceWorker=fs.readFileSync(new URL("../sw.js",import.meta.url),"utf8");
@@ -22,6 +23,7 @@ const records=[];
 const context=vm.createContext({
   readPlayerLibrary:()=>players,
   readMatchRecords:()=>records,
+  CueScoreDomainV1:domainConstants,
   window:{}
 });
 vm.runInContext(`${extractFunction("recordsForRegisteredPlayer")}\n${extractFunction("playerSideInRecord")}`,context);

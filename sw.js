@@ -7,6 +7,7 @@ const APP_SHELL = [
   "./i18n-catalog-ja-v1.js",
   "./i18n-catalog-en-v1.js",
   "./i18n-catalog-zh-hans-v1.js",
+  "./domain-constants-v1.js",
   "./demo-data.js?v=2.0-build84-match-sharing-fix-v1",
   "./player-library-order-v1.js?v=2.0-build84-match-sharing-fix-v1",
   "./vendor/fflate-0.8.3.js",

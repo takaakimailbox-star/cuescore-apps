@@ -61,7 +61,7 @@
   new MutationObserver(reviseDetail).observe(document.getElementById("playerStatsBody"),{subtree:true,childList:true});
 
   const time=record=>new Date(record?.endedAt||record?.playedAt||record?.startedAt||0).getTime()||0;
-  const stable=(a,b)=>String(a??"").localeCompare(String(b??""),"ja",{numeric:true});
+  const stable=(a,b)=>String(a??"").localeCompare(String(b??""),CueScoreDomainV1.SORT_LOCALE,{numeric:true});
   function revisePlayerList(){
     const root=document.getElementById("playerLibraryOverlay"),list=document.getElementById("playerLibraryList");if(!root?.classList.contains("player-management-formal-v1")||!list)return;
     const players=typeof window.readPlayerLibrary==="function"?window.readPlayerLibrary():[];

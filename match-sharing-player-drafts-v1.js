@@ -1,8 +1,10 @@
 (function(root,factory){
-  const api=factory();
+  const domain=typeof module==="object"&&module.exports?require("./domain-constants-v1.js"):root.CueScoreDomainV1;
+  if(!domain)throw new Error("CueScore Domain constants are required");
+  const api=factory(domain);
   if(typeof module==="object"&&module.exports)module.exports=api;
   if(root)root.CueScoreMatchSharingPlayerDraftsV1=api;
-})(typeof globalThis!=="undefined"?globalThis:this,function(){
+})(typeof globalThis!=="undefined"?globalThis:this,function(domain){
   "use strict";
 
   const PLAYER_NAME_MAX_LENGTH=20;
@@ -14,7 +16,7 @@
 
   const fail=(code,message)=>{throw new MatchSharingPlayerError(code,message)};
   const clone=value=>value==null?value:JSON.parse(JSON.stringify(value));
-  const nameKey=value=>String(value??"").trim().toLocaleLowerCase("ja");
+  const nameKey=value=>String(value??"").trim().toLocaleLowerCase(domain.IDENTITY_LOCALE);
 
   function isValidLocalPlayer(player){
     const name=String(player?.name??"").trim();

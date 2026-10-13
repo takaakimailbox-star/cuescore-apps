@@ -26,7 +26,7 @@ test("count is immediately followed by the history list without an advanced pane
 
 test("history ordering is fixed newest-first with match id as deterministic tie-break",()=>{
   assert.match(html,/const timeOrder = \(Number\.isFinite\(bTime\) \? bTime : 0\) - \(Number\.isFinite\(aTime\) \? aTime : 0\)/);
-  assert.match(html,/return timeOrder \|\| String\(a\.id \|\| ""\)\.localeCompare\(String\(b\.id \|\| ""\), "ja"\)/);
+  assert.match(html,/return timeOrder \|\| String\(a\.id \|\| ""\)\.localeCompare\(String\(b\.id \|\| ""\), CueScoreDomainV1\.SORT_LOCALE\)/);
   assert.doesNotMatch(html,/recordsSortOrderV1/);
 });
 

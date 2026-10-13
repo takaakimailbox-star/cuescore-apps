@@ -8802,6 +8802,7 @@ body {
   <script src="./i18n-catalog-ja-v1.js"></script>
   <script src="./i18n-catalog-en-v1.js"></script>
   <script src="./i18n-catalog-zh-hans-v1.js"></script>
+  <script src="./domain-constants-v1.js"></script>
   <script>
   /* CueScore i18n P1 boot: resolve the language once, set html lang and translate explicit data-i18n keys.
      Japanese resolves to a no-op, so the existing Japanese markup is never rewritten. */
@@ -10208,10 +10209,10 @@ let matchRecordsRawCacheV152 = null;
   function historicalPlayerProfileV1(data, registeredPlayers = readPlayerLibrary()) {
     const source = data && typeof data === "object" ? data : {};
     const registeredId = String(source.registeredPlayerId || "").trim();
-    const normalizedName = String(source.name || "").trim().toLocaleLowerCase("ja");
+    const normalizedName = String(source.name || "").trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE);
     const registered = registeredId
       ? registeredPlayers.find(player => String(player?.id || "").trim() === registeredId)
-      : registeredPlayers.find(player => String(player?.name || "").trim().toLocaleLowerCase("ja") === normalizedName);
+      : registeredPlayers.find(player => String(player?.name || "").trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE) === normalizedName);
     return registered || {...source, avatar:{...DEFAULT_PLAYER_AVATAR_V4}};
   }
 
@@ -10358,9 +10359,9 @@ let matchRecordsRawCacheV152 = null;
   function renderPlayerLibrary() {
     const list = el("playerLibraryList");
     if (!list) return;
-    const query = (el("playerLibrarySearch")?.value || "").trim().toLocaleLowerCase("ja");
+    const query = (el("playerLibrarySearch")?.value || "").trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE);
     const players = readPlayerLibrary()
-      .filter(p => !query || p.name.toLocaleLowerCase("ja").includes(query))
+      .filter(p => !query || p.name.toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE).includes(query))
       .sort((a,b) => (b.lastUsed || b.updatedAt || b.createdAt || 0) - (a.lastUsed || a.updatedAt || a.createdAt || 0));
 
     if (!players.length) {
@@ -10403,11 +10404,11 @@ let matchRecordsRawCacheV152 = null;
 
   function recordsForRegisteredPlayer(player) {
     if (!player) return [];
-    const normalizedName = String(player.name || "").trim().toLocaleLowerCase("ja");
+    const normalizedName = String(player.name || "").trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE);
     const matchesPlayer = side => {
       const registeredId = String(side?.registeredPlayerId || "").trim();
       if (registeredId) return registeredId === String(player.id || "").trim();
-      return String(side?.name || "").trim().toLocaleLowerCase("ja") === normalizedName;
+      return String(side?.name || "").trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE) === normalizedName;
     };
     const allSavedRecordsV1 = readMatchRecords();
     const eligibleRecordsV1 = window.CueScoreRecordAccess?.getEligibleRecords(allSavedRecordsV1) || allSavedRecordsV1;
@@ -10424,10 +10425,10 @@ let matchRecordsRawCacheV152 = null;
     const playerId = String(player?.id || "");
     if (playerId && String(p1.registeredPlayerId || "") === playerId) return 1;
     if (playerId && String(p2.registeredPlayerId || "") === playerId) return 2;
-    const name = String(player.name || "").trim().toLocaleLowerCase("ja");
+    const name = String(player.name || "").trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE);
     const isLegacyNameMatch = side => {
       const registeredId = String(side?.registeredPlayerId || "").trim();
-      return !registeredId && String(side?.name || "").trim().toLocaleLowerCase("ja") === name;
+      return !registeredId && String(side?.name || "").trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE) === name;
     };
     if (isLegacyNameMatch(p1)) return 1;
     if (isLegacyNameMatch(p2)) return 2;
@@ -11276,16 +11277,16 @@ let matchRecordsRawCacheV152 = null;
 
     const strongOpponentsV36 = opponentRankingSourceV36
       .filter(item => item.games >= 2)
-      .sort((a,b)=>(b.winRate-a.winRate)||(b.games-a.games)||(b.wins-a.wins)||a.name.localeCompare(b.name,"ja"))
+      .sort((a,b)=>(b.winRate-a.winRate)||(b.games-a.games)||(b.wins-a.wins)||a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE))
       .slice(0,5);
 
     const difficultOpponentsV36 = opponentRankingSourceV36
       .filter(item => item.games >= 2)
-      .sort((a,b)=>(a.winRate-b.winRate)||(b.games-a.games)||(b.losses-a.losses)||a.name.localeCompare(b.name,"ja"))
+      .sort((a,b)=>(a.winRate-b.winRate)||(b.games-a.games)||(b.losses-a.losses)||a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE))
       .slice(0,5);
 
     const frequentOpponentsV36 = opponentRankingSourceV36
-      .sort((a,b)=>(b.games-a.games)||(b.wins-a.wins)||a.name.localeCompare(b.name,"ja"))
+      .sort((a,b)=>(b.games-a.games)||(b.wins-a.wins)||a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE))
       .slice(0,5);
 
     function buildOpponentRankingRowsV36(items, type) {
@@ -11310,7 +11311,7 @@ let matchRecordsRawCacheV152 = null;
     }
 
     const opponentRows = [...opponentSummary.values()]
-      .sort((a, b) => (b.games - a.games) || (b.wins - a.wins) || a.name.localeCompare(b.name, "ja"))
+      .sort((a, b) => (b.games - a.games) || (b.wins - a.wins) || a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE))
       .map(item => {
         const rate = item.games ? Math.round((item.wins / item.games) * 100) : 0;
         return `<div class="player-opponent-row">
@@ -11579,7 +11580,7 @@ let matchRecordsRawCacheV152 = null;
       return;
     }
     let players = readPlayerLibrary();
-    const duplicate = players.find(p => p.name.toLocaleLowerCase("ja") === name.toLocaleLowerCase("ja") && p.id !== editingPlayerId);
+    const duplicate = players.find(p => p.name.toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE) === name.toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE) && p.id !== editingPlayerId);
     if (duplicate) {
       showToast("登録できません", "同じ名前のプレーヤーが登録されています");
       return;
@@ -12885,7 +12886,7 @@ let matchRecordsRawCacheV152 = null;
         breakPlayer: player,
         rack: rackNumber,
         result: decision.result,
-        resultLabel: decision.preBreakFoul ? "ファール（ブレイク交代）" : decision.scratch ? "スクラッチ" : decision.illegalBreak ? "イリーガル" : decision.pocketedBalls.length ? `${decision.pocketedBalls.length}球イン` : "無得点",
+        resultLabel: decision.preBreakFoul ? CueScoreDomainV1.RESULT_LABELS.PRE_BREAK_FOUL : decision.scratch ? CueScoreDomainV1.RESULT_LABELS.SCRATCH : decision.illegalBreak ? CueScoreDomainV1.RESULT_LABELS.ILLEGAL : decision.pocketedBalls.length ? CueScoreDomainV1.pocketedLabel(decision.pocketedBalls.length) : CueScoreDomainV1.RESULT_LABELS.NO_SCORE,
         pocketCount: decision.pocketedBalls.length,
         pocketedBalls: [...decision.pocketedBalls],
         pocketPoints: decision.scoreAdded,
@@ -13088,9 +13089,9 @@ let matchRecordsRawCacheV152 = null;
     const foulData = summaryPlayer?.foul || {};
     const playerEvents = Array.isArray(events) ? events.filter(e => Number(e?.player) === Number(playerNumber)) : [];
     const breakEvents = playerEvents.filter(e => e?.type === 'break_result');
-    const breakScored = breakEvents.filter(e => ['1個','2個','2個以上','3個以上'].includes(String(e?.resultLabel || e?.result || ''))).length;
-    const breakNoScore = breakEvents.filter(e => String(e?.resultLabel || e?.result || '') === '無得点').length;
-    const breakTrouble = breakEvents.filter(e => e?.scratch || e?.breakFailed || e?.breakFoul || e?.illegalBreak || ['スクラッチ','ブレイク失敗','ブレイクファール','イリーガル'].includes(String(e?.resultLabel || e?.result || ''))).length;
+    const breakScored = breakEvents.filter(e => [CueScoreDomainV1.RESULT_LABELS.ONE,CueScoreDomainV1.RESULT_LABELS.TWO,CueScoreDomainV1.RESULT_LABELS.TWO_OR_MORE,CueScoreDomainV1.RESULT_LABELS.THREE_OR_MORE].includes(String(e?.resultLabel || e?.result || ''))).length;
+    const breakNoScore = breakEvents.filter(e => String(e?.resultLabel || e?.result || '') === CueScoreDomainV1.RESULT_LABELS.NO_SCORE).length;
+    const breakTrouble = breakEvents.filter(e => e?.scratch || e?.breakFailed || e?.breakFoul || e?.illegalBreak || [CueScoreDomainV1.RESULT_LABELS.SCRATCH,CueScoreDomainV1.RESULT_LABELS.BREAK_FAILED,CueScoreDomainV1.RESULT_LABELS.BREAK_FOUL,CueScoreDomainV1.RESULT_LABELS.ILLEGAL].includes(String(e?.resultLabel || e?.result || ''))).length;
     const breakRunOuts = breakEvents.filter(e => e?.breakRunOut).length;
     const strengths = [];
     const challenges = [];
@@ -14706,7 +14707,7 @@ let matchRecordsRawCacheV152 = null;
 
   const MATCH_CATEGORIES_KEY_V381 = "rotationScoreboard.matchCategories.v1";
   const MATCH_SEASONS_KEY_V381 = "rotationScoreboard.matchSeasons.v1";
-  const FREE_CATEGORY_ID_V381 = "category_free";
+  const FREE_CATEGORY_ID_V381 = CueScoreDomainV1.FREE_CATEGORY.id;
 
   function createLocalIdV381(prefix) {
     return (window.crypto && crypto.randomUUID)
@@ -14733,13 +14734,13 @@ let matchRecordsRawCacheV152 = null;
     // Freeは必ず先頭に存在し、固定名称・削除不可。
     const free = {
       id: FREE_CATEGORY_ID_V381,
-      name: "Free",
+      name: CueScoreDomainV1.FREE_CATEGORY.name,
       locked: true
     };
 
     categories = categories
       .filter(item => item && item.id !== FREE_CATEGORY_ID_V381)
-      .filter(item => !["JPA", "KTCリーグ", "練習試合"].includes(String(item.name || "").trim()))
+      .filter(item => !CueScoreDomainV1.LEGACY_REMOVED_CATEGORY_NAMES.includes(String(item.name || "").trim()))
       .map(item => ({
         id: item.id || createLocalIdV381("category"),
         name: String(item.name || "").trim().slice(0, 30),
@@ -14747,11 +14748,11 @@ let matchRecordsRawCacheV152 = null;
       }))
       .filter(item => item.name);
 
-    if (!categories.some(item => item.name === "大会")) {
-      categories.push({ id: "category_tournament", name: "大会", locked: false });
+    if (!categories.some(item => item.name === CueScoreDomainV1.DEFAULT_CATEGORIES.TOURNAMENT.name)) {
+      categories.push({ id: CueScoreDomainV1.DEFAULT_CATEGORIES.TOURNAMENT.id, name: CueScoreDomainV1.DEFAULT_CATEGORIES.TOURNAMENT.name, locked: false });
     }
-    if (!categories.some(item => item.name === "その他")) {
-      categories.push({ id: "category_other", name: "その他", locked: false });
+    if (!categories.some(item => item.name === CueScoreDomainV1.DEFAULT_CATEGORIES.OTHER.name)) {
+      categories.push({ id: CueScoreDomainV1.DEFAULT_CATEGORIES.OTHER.id, name: CueScoreDomainV1.DEFAULT_CATEGORIES.OTHER.name, locked: false });
     }
 
     writeClassificationArrayV381(
@@ -14784,7 +14785,7 @@ let matchRecordsRawCacheV152 = null;
     const seasonSelect = el("matchSeasonV38");
 
     if (categorySelect) {
-      const previous = categorySelect.value || currentMatchCategoryV38 || "Free";
+      const previous = categorySelect.value || currentMatchCategoryV38 || CueScoreDomainV1.FREE_CATEGORY.name;
       const categories = categoryItemsV381();
       categorySelect.innerHTML = categories
         .map(item => `<option value="${escapeRecordText(item.name)}">${escapeRecordText(item.name)}</option>`)
@@ -14792,7 +14793,7 @@ let matchRecordsRawCacheV152 = null;
 
       categorySelect.value = categories.some(item => item.name === previous)
         ? previous
-        : "Free";
+        : CueScoreDomainV1.FREE_CATEGORY.name;
     }
 
     if (seasonSelect) {
@@ -14880,8 +14881,8 @@ let matchRecordsRawCacheV152 = null;
     );
     if (!name) return;
 
-    if (["Free", "JPA", "KTCリーグ", "練習試合"].includes(name)) {
-      alert(name === "Free"
+    if (CueScoreDomainV1.RESERVED_CATEGORY_NAMES.includes(name)) {
+      alert(name === CueScoreDomainV1.FREE_CATEGORY.name
         ? "Freeはすでに固定登録されています。"
         : "この名称は使用できません。");
       return;
@@ -14913,7 +14914,7 @@ let matchRecordsRawCacheV152 = null;
     );
     if (!name || name === item.name) return;
 
-    if (["Free", "JPA", "KTCリーグ", "練習試合"].includes(name)) {
+    if (CueScoreDomainV1.RESERVED_CATEGORY_NAMES.includes(name)) {
       alert("この名称は使用できません。");
       return;
     }
@@ -14944,7 +14945,7 @@ let matchRecordsRawCacheV152 = null;
     );
 
     if (el("matchCategoryV38")?.value === item.name) {
-      el("matchCategoryV38").value = "Free";
+      el("matchCategoryV38").value = CueScoreDomainV1.FREE_CATEGORY.name;
     }
 
     renderClassificationManagerV381();
@@ -16577,9 +16578,9 @@ let matchRecordsRawCacheV152 = null;
       const safety = data.safety || {};
       const foul = data.foul || {};
       const breaks = events.filter(e => e.type === "break_result" && Number(e.player) === p);
-      const breakScored = breaks.filter(e => ["1個","2個以上"].includes(String(e.resultLabel || e.result || ""))).length;
-      const breakNoScore = breaks.filter(e => String(e.resultLabel || e.result || "") === "無得点").length;
-      const breakTrouble = breaks.filter(e => e.scratch || e.breakFailed || ["スクラッチ","ブレイク失敗"].includes(String(e.resultLabel || e.result || ""))).length;
+      const breakScored = breaks.filter(e => [CueScoreDomainV1.RESULT_LABELS.ONE,CueScoreDomainV1.RESULT_LABELS.TWO_OR_MORE].includes(String(e.resultLabel || e.result || ""))).length;
+      const breakNoScore = breaks.filter(e => String(e.resultLabel || e.result || "") === CueScoreDomainV1.RESULT_LABELS.NO_SCORE).length;
+      const breakTrouble = breaks.filter(e => e.scratch || e.breakFailed || [CueScoreDomainV1.RESULT_LABELS.SCRATCH,CueScoreDomainV1.RESULT_LABELS.BREAK_FAILED].includes(String(e.resultLabel || e.result || ""))).length;
       const safetyJudged = Number(safety.success||0) + Number(safety.failed||0);
       const foulJudged = Number(foul.punished||0) + Number(foul.noScore||0);
       const safetyText = safetyJudged ? `${Number(safety.successRate)||0}%` : "—";
@@ -16745,7 +16746,7 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function normalizeRecordSearchTextV31(value) {
-    return String(value || "").toLocaleLowerCase("ja").replace(/\s+/g, " ").trim();
+    return String(value || "").toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE).replace(/\s+/g, " ").trim();
   }
 
   function filteredMatchRecordsV31(sourceRecords=readMatchRecords()) {
@@ -16755,7 +16756,7 @@ let matchRecordsRawCacheV152 = null;
       const aTime = new Date(a.endedAt || a.playedAt).getTime();
       const bTime = new Date(b.endedAt || b.playedAt).getTime();
       const timeOrder = (Number.isFinite(bTime) ? bTime : 0) - (Number.isFinite(aTime) ? aTime : 0);
-      return timeOrder || String(a.id || "").localeCompare(String(b.id || ""), "ja");
+      return timeOrder || String(a.id || "").localeCompare(String(b.id || ""), CueScoreDomainV1.SORT_LOCALE);
     });
     let filtered = all.slice();
 
@@ -16882,7 +16883,7 @@ let matchRecordsRawCacheV152 = null;
       sourceRecords
         .map(record => String(record.season || "").trim())
         .filter(Boolean)
-    )].sort((a, b) => a.localeCompare(b, "ja"));
+    )].sort((a, b) => a.localeCompare(b, CueScoreDomainV1.SORT_LOCALE));
 
     const seasonSelectV38 = el("recordsSeasonSelectV38");
     if (seasonSelectV38) {
@@ -17099,7 +17100,7 @@ let matchRecordsRawCacheV152 = null;
   renderPlayerLibrary = function() {
     const list = el("playerLibraryList");
     if (!list) return;
-    const query = (el("playerLibrarySearch")?.value || "").trim().toLocaleLowerCase("ja");
+    const query = (el("playerLibrarySearch")?.value || "").trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE);
     const allPlayers = readPlayerLibrary();
     const formalOrder = window.CueScorePlayerLibraryOrderV1?.orderPlayers(
       allPlayers,
@@ -17111,7 +17112,7 @@ let matchRecordsRawCacheV152 = null;
       return {player, records, latest: records[0] || null};
     });
     const players = playerRows
-      .filter(row => !query || row.player.name.toLocaleLowerCase("ja").includes(query))
+      .filter(row => !query || row.player.name.toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE).includes(query))
       .sort((a, b) => {
         const primaryOrder=Number(b.player.isPrimary===true)-Number(a.player.isPrimary===true);
         if (primaryOrder) return primaryOrder;
@@ -19452,10 +19453,10 @@ let matchRecordsRawCacheV152 = null;
     }
     window.getFilteredRecordsV53=apply;window.getStatisticsFilterV53=read;
     function options(){
-      const records=rawRecords(),cats=[...new Set(records.map(r=>String(r.category||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ja")),seasons=[...new Set(records.map(r=>String(r.season||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ja"));
+      const records=rawRecords(),cats=[...new Set(records.map(r=>String(r.category||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b, CueScoreDomainV1.SORT_LOCALE)),seasons=[...new Set(records.map(r=>String(r.season||"").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b, CueScoreDomainV1.SORT_LOCALE));
       const pm=new Map();records.forEach(r=>[1,2].forEach(side=>{const p=r.players?.[side]||{},name=String(p.name||"").trim(),id=String(p.registeredPlayerId||"");if(name)pm.set(id?`id:${id}`:`name:${name}`,name)}));
       const fill=(id,vals)=>{const node=el(id);if(!node)return;const cur=node.value;node.innerHTML='<option value="">すべて</option>'+vals.map(v=>{const pair=Array.isArray(v),value=pair?v[0]:v,label=pair?v[1]:v;return `<option value="${String(value??'').replace(/"/g,'&quot;')}">${String(label??'')}</option>`}).join('');node.value=cur};
-      fill(ids.season,seasons);const players=[...pm.entries()].sort((a,b)=>a[1].localeCompare(b[1],"ja"));fill(ids.player,players);fill(ids.opponent,players)
+      fill(ids.season,seasons);const players=[...pm.entries()].sort((a,b)=>a[1].localeCompare(b[1], CueScoreDomainV1.SORT_LOCALE));fill(ids.player,players);fill(ids.opponent,players)
     }
     function load(){options();const f=read();Object.entries(ids).forEach(([k,id])=>{if(el(id))el(id).value=f[k]||""});document.querySelectorAll('[data-period]').forEach(b=>b.classList.toggle('active',b.dataset.period===f.period));updateSummary()}
     function current(){const active=document.querySelector('[data-period].active');return {period:active?.dataset.period||"all",from:el(ids.from).value,to:el(ids.to).value,category:"",season:el(ids.season).value,player:el(ids.player).value,opponent:el(ids.opponent).value,recordingMode:el(ids.recordingMode).value,outcome:el(ids.outcome).value}}
@@ -19583,7 +19584,7 @@ let matchRecordsRawCacheV152 = null;
     function aggregate() {
       const registeredPlayers = safePlayers().filter(p => p?.id && p?.name);
       const registeredById = new Map(registeredPlayers.map(p => [String(p.id), p]));
-      const registeredByName = new Map(registeredPlayers.map(p => [String(p.name).trim().toLocaleLowerCase("ja"), p]));
+      const registeredByName = new Map(registeredPlayers.map(p => [String(p.name).trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE), p]));
       const map = new Map();
       safeRecords().forEach(record => {
         [1,2].forEach(side => {
@@ -19591,7 +19592,7 @@ let matchRecordsRawCacheV152 = null;
           const metricsV114 = savedPlayerMetricsV113(record, side);
           const id = String(player.registeredPlayerId || "").trim();
           const name = String(player.name || "").trim();
-          const registered = id ? registeredById.get(id) : registeredByName.get(name.toLocaleLowerCase("ja"));
+          const registered = id ? registeredById.get(id) : registeredByName.get(name.toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE));
           if (!registered) return;
           const key = `id:${registered.id}`;
           if (!map.has(key)) map.set(key, { key, name: String(registered.name), games:0, wins:0, highRun:0, pockets:0, misses:0, shotRateSum:0, shotRateCount:0 });
@@ -19631,7 +19632,7 @@ let matchRecordsRawCacheV152 = null;
         if (primary) return primary;
         if (activeType === "wins") { const rate = b.winRate-a.winRate; if (rate) return rate; }
         else { const games = b.games-a.games; if (games) return games; }
-        return a.name.localeCompare(b.name, "ja");
+        return a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE);
       });
       count.textContent = `${items.length}人`;
       note.textContent = config.note;
@@ -19698,7 +19699,7 @@ let matchRecordsRawCacheV152 = null;
       const map=new Map();
       safePlayers().forEach(p=>{if(p?.id&&p?.name)map.set(`id:${p.id}`,{key:`id:${p.id}`,id:String(p.id),name:String(p.name)});});
       safeRecords().forEach(r=>[1,2].forEach(side=>{const p=r.players?.[side]||{};const id=p.registeredPlayerId?String(p.registeredPlayerId):"";const name=String(p.name||"").trim();if(!id&&!name)return;const key=id?`id:${id}`:`name:${name}`;if(!map.has(key))map.set(key,{key,id,name});}));
-      return [...map.values()].sort((a,b)=>a.name.localeCompare(b.name,"ja"));
+      return [...map.values()].sort((a,b)=>a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE));
     }
     function sideFor(record, choice){
       for(const side of [1,2]){
@@ -19746,7 +19747,7 @@ let matchRecordsRawCacheV152 = null;
         counts.set(key,(counts.get(key)||0)+1);
       });
       let opponents=allItems.filter((item,i)=>i!==i1 && counts.has(item.key));
-      opponents.sort((a,b)=>(counts.get(b.key)-counts.get(a.key))||a.name.localeCompare(b.name,'ja'));
+      opponents.sort((a,b)=>(counts.get(b.key)-counts.get(a.key))||a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE));
       if(!opponents.length) opponents=allItems.filter((item,i)=>i!==i1);
       p2Select.innerHTML=opponents.map(item=>`<option value="${esc(item.key)}">${esc(item.name)}${counts.has(item.key)?`（${counts.get(item.key)}試合）`:''}</option>`).join('');
       const selectedOpponent=opponents.some(item=>item.key===previousOpponentKey)?previousOpponentKey:(opponents[0]?.key||'');
@@ -26821,7 +26822,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   function choices(records){
     const active=[];
     try{ readPlayerLibrary().forEach(p=>{if(p?.id&&p?.name)active.push({id:String(p.id),name:String(p.name),key:playerKey(p)});}); }catch(_){}
-    return active.sort((a,b)=>a.name.localeCompare(b.name,"ja"));
+    return active.sort((a,b)=>a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE));
   }
   function sideFor(record,choice){for(const side of [1,2]){const p=record.players?.[side]||{},registeredId=String(p.registeredPlayerId||"").trim();if(registeredId){if(choice.id&&registeredId===choice.id)return side;continue;}if(String(p.name||"").trim()===choice.name)return side;}return 0;}
   function allRaw(){try{return typeof readMatchRecords==="function"?readMatchRecords():JSON.parse(localStorage.getItem("rotationScoreboard.matchRecords.v1")||"[]");}catch(_){return[]}}
@@ -27157,7 +27158,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   mirrorStatus("deviceIdStatus","#suiteDeviceStatus");
   mirrorStatus("cloudSyncStatus","#suiteSyncStatus");
 
-  function normalizeText(value){return String(value??"").normalize("NFKC").trim().replace(/\s+/g," ").toLocaleLowerCase("ja")}
+  function normalizeText(value){return String(value??"").normalize(CueScoreDomainV1.IDENTITY_NORMALIZATION_FORM).trim().replace(/\s+/g," ").toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE)}
   function playerKey(player){const id=player?.id??player?.playerId??player?.uuid;return id?`id:${String(id)}`:`name:${normalizeText(player?.name)}`}
   function listItemKey(item){if(typeof item==="string")return `text:${normalizeText(item)}`;return `id:${item?.id??item?.key??normalizeText(item?.name??item?.label??JSON.stringify(item))}`}
   function validateBackup(value){return Boolean(window.cueScoreValidateBackup?.(value))}

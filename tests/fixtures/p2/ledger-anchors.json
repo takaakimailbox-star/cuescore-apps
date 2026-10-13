@@ -28,7 +28,7 @@
   "area": "C",
   "file": "index.html",
   "line": 12888,
-  "snippet": "resultLabel: decision.preBreakFoul ? \"ファール（ブレイク交代）\" : decision.scratch ? \"スクラッチ\" : decision.illegalBreak ? \"イリーガル\" : decision.pocketedBalls.",
+  "snippet": "resultLabel: decision.preBreakFoul ? CueScoreDomainV1.RESULT_LABELS.PRE_BREAK_FOUL : decision.scratch ? CueScoreDomainV1.RESULT_LABELS.SCRAT",
   "function": "break_result event builder (inside the break-result save path)"
  },
  {
@@ -36,7 +36,7 @@
   "area": "C",
   "file": "index.html",
   "line": 13091,
-  "snippet": "const breakScored = breakEvents.filter(e => ['1個','2個','2個以上','3個以上'].includes(String(e?.resultLabel || e?.result || ''))).length;",
+  "snippet": "const breakScored = breakEvents.filter(e => [CueScoreDomainV1.RESULT_LABELS.ONE,CueScoreDomainV1.RESULT_LABELS.TWO,CueScoreDomainV1.RESULT_L",
   "function": "buildPlayerMatchAnalysisV64"
  },
  {
@@ -44,7 +44,7 @@
   "area": "C",
   "file": "index.html",
   "line": 13092,
-  "snippet": "const breakNoScore = breakEvents.filter(e => String(e?.resultLabel || e?.result || '') === '無得点').length;",
+  "snippet": "const breakNoScore = breakEvents.filter(e => String(e?.resultLabel || e?.result || '') === CueScoreDomainV1.RESULT_LABELS.NO_SCORE).length;",
   "function": "buildPlayerMatchAnalysisV64"
  },
  {
@@ -52,7 +52,7 @@
   "area": "C",
   "file": "index.html",
   "line": 13093,
-  "snippet": "const breakTrouble = breakEvents.filter(e => e?.scratch || e?.breakFailed || e?.breakFoul || e?.illegalBreak || ['スクラッチ','ブレイク失敗','ブレイクファール'",
+  "snippet": "const breakTrouble = breakEvents.filter(e => e?.scratch || e?.breakFailed || e?.breakFoul || e?.illegalBreak || [CueScoreDomainV1.RESULT_LAB",
   "function": "buildPlayerMatchAnalysisV64"
  },
  {
@@ -68,7 +68,7 @@
   "area": "C",
   "file": "index.html",
   "line": 16580,
-  "snippet": "const breakScored = breaks.filter(e => [\"1個\",\"2個以上\"].includes(String(e.resultLabel || e.result || \"\"))).length;",
+  "snippet": "const breakScored = breaks.filter(e => [CueScoreDomainV1.RESULT_LABELS.ONE,CueScoreDomainV1.RESULT_LABELS.TWO_OR_MORE].includes(String(e.res",
   "function": "playerCard (analysis dashboard)"
  },
  {
@@ -76,7 +76,7 @@
   "area": "C",
   "file": "index.html",
   "line": 16581,
-  "snippet": "const breakNoScore = breaks.filter(e => String(e.resultLabel || e.result || \"\") === \"無得点\").length;",
+  "snippet": "const breakNoScore = breaks.filter(e => String(e.resultLabel || e.result || \"\") === CueScoreDomainV1.RESULT_LABELS.NO_SCORE).length;",
   "function": "playerCard"
  },
  {
@@ -84,7 +84,7 @@
   "area": "C",
   "file": "index.html",
   "line": 16582,
-  "snippet": "const breakTrouble = breaks.filter(e => e.scratch || e.breakFailed || [\"スクラッチ\",\"ブレイク失敗\"].includes(String(e.resultLabel || e.result || \"\"))).",
+  "snippet": "const breakTrouble = breaks.filter(e => e.scratch || e.breakFailed || [CueScoreDomainV1.RESULT_LABELS.SCRATCH,CueScoreDomainV1.RESULT_LABELS",
   "function": "playerCard"
  },
  {
@@ -180,7 +180,7 @@
   "area": "A",
   "file": "index.html",
   "line": 14736,
-  "snippet": "name: \"Free\",",
+  "snippet": "name: CueScoreDomainV1.FREE_CATEGORY.name,",
   "function": "initializeClassificationsV38"
  },
  {
@@ -188,7 +188,7 @@
   "area": "A",
   "file": "index.html",
   "line": 14742,
-  "snippet": ".filter(item => ![\"JPA\", \"KTCリーグ\", \"練習試合\"].includes(String(item.name || \"\").trim()))",
+  "snippet": ".filter(item => !CueScoreDomainV1.LEGACY_REMOVED_CATEGORY_NAMES.includes(String(item.name || \"\").trim()))",
   "function": "initializeClassificationsV38"
  },
  {
@@ -196,7 +196,7 @@
   "area": "A",
   "file": "index.html",
   "line": 14750,
-  "snippet": "if (!categories.some(item => item.name === \"大会\")) {",
+  "snippet": "if (!categories.some(item => item.name === CueScoreDomainV1.DEFAULT_CATEGORIES.TOURNAMENT.name)) {",
   "function": "initializeClassificationsV38"
  },
  {
@@ -204,7 +204,7 @@
   "area": "A",
   "file": "index.html",
   "line": 14883,
-  "snippet": "if ([\"Free\", \"JPA\", \"KTCリーグ\", \"練習試合\"].includes(name)) {",
+  "snippet": "if (CueScoreDomainV1.RESERVED_CATEGORY_NAMES.includes(name)) {",
   "function": "addCategoryV381"
  },
  {
@@ -276,7 +276,7 @@
   "area": "F",
   "file": "index.html",
   "line": 10211,
-  "snippet": "const normalizedName = String(source.name || \"\").trim().toLocaleLowerCase(\"ja\");",
+  "snippet": "const normalizedName = String(source.name || \"\").trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE);",
   "function": "historicalPlayerProfile"
  },
  {
@@ -284,7 +284,7 @@
   "area": "F",
   "file": "index.html",
   "line": 10214,
-  "snippet": ": registeredPlayers.find(player => String(player?.name || \"\").trim().toLocaleLowerCase(\"ja\") === normalizedName);",
+  "snippet": ": registeredPlayers.find(player => String(player?.name || \"\").trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE) === normalizedName)",
   "function": "historicalPlayerProfile"
  },
  {
@@ -292,7 +292,7 @@
   "area": "F",
   "file": "index.html",
   "line": 10361,
-  "snippet": "const query = (el(\"playerLibrarySearch\")?.value || \"\").trim().toLocaleLowerCase(\"ja\");",
+  "snippet": "const query = (el(\"playerLibrarySearch\")?.value || \"\").trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE);",
   "function": "renderPlayerLibrary (search)"
  },
  {
@@ -300,7 +300,7 @@
   "area": "F",
   "file": "index.html",
   "line": 10363,
-  "snippet": ".filter(p => !query || p.name.toLocaleLowerCase(\"ja\").includes(query))",
+  "snippet": ".filter(p => !query || p.name.toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE).includes(query))",
   "function": "renderPlayerLibrary (search)"
  },
  {
@@ -308,7 +308,7 @@
   "area": "F",
   "file": "index.html",
   "line": 10406,
-  "snippet": "const normalizedName = String(player.name || \"\").trim().toLocaleLowerCase(\"ja\");",
+  "snippet": "const normalizedName = String(player.name || \"\").trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE);",
   "function": "recordsForRegisteredPlayer"
  },
  {
@@ -316,7 +316,7 @@
   "area": "F",
   "file": "index.html",
   "line": 10410,
-  "snippet": "return String(side?.name || \"\").trim().toLocaleLowerCase(\"ja\") === normalizedName;",
+  "snippet": "return String(side?.name || \"\").trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE) === normalizedName;",
   "function": "matchesPlayer"
  },
  {
@@ -324,7 +324,7 @@
   "area": "F",
   "file": "index.html",
   "line": 10427,
-  "snippet": "const name = String(player.name || \"\").trim().toLocaleLowerCase(\"ja\");",
+  "snippet": "const name = String(player.name || \"\").trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE);",
   "function": "playerSideInRecord"
  },
  {
@@ -332,7 +332,7 @@
   "area": "F",
   "file": "index.html",
   "line": 10430,
-  "snippet": "return !registeredId && String(side?.name || \"\").trim().toLocaleLowerCase(\"ja\") === name;",
+  "snippet": "return !registeredId && String(side?.name || \"\").trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE) === name;",
   "function": "isLegacyNameMatch"
  },
  {
@@ -340,7 +340,7 @@
   "area": "F",
   "file": "index.html",
   "line": 11582,
-  "snippet": "const duplicate = players.find(p => p.name.toLocaleLowerCase(\"ja\") === name.toLocaleLowerCase(\"ja\") && p.id !== editingPlayerId);",
+  "snippet": "const duplicate = players.find(p => p.name.toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE) === name.toLocaleLowerCase(CueScoreDomainV1.I",
   "function": "savePlayerFromEditor (duplicate-name check)"
  },
  {
@@ -348,7 +348,7 @@
   "area": "F",
   "file": "index.html",
   "line": 16748,
-  "snippet": "return String(value || \"\").toLocaleLowerCase(\"ja\").replace(/\\s+/g, \" \").trim();",
+  "snippet": "return String(value || \"\").toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE).replace(/\\s+/g, \" \").trim();",
   "function": "normalizeRecordSearchText"
  },
  {
@@ -356,7 +356,7 @@
   "area": "F",
   "file": "index.html",
   "line": 17102,
-  "snippet": "const query = (el(\"playerLibrarySearch\")?.value || \"\").trim().toLocaleLowerCase(\"ja\");",
+  "snippet": "const query = (el(\"playerLibrarySearch\")?.value || \"\").trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE);",
   "function": "playerRecordTimeV1 (search)"
  },
  {
@@ -364,7 +364,7 @@
   "area": "F",
   "file": "index.html",
   "line": 17114,
-  "snippet": ".filter(row => !query || row.player.name.toLocaleLowerCase(\"ja\").includes(query))",
+  "snippet": ".filter(row => !query || row.player.name.toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE).includes(query))",
   "function": "playerRecordTimeV1 (search)"
  },
  {
@@ -372,7 +372,7 @@
   "area": "F",
   "file": "index.html",
   "line": 19586,
-  "snippet": "const registeredByName = new Map(registeredPlayers.map(p => [String(p.name).trim().toLocaleLowerCase(\"ja\"), p]));",
+  "snippet": "const registeredByName = new Map(registeredPlayers.map(p => [String(p.name).trim().toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE), p]))",
   "function": "aggregate (registeredByName map)"
  },
  {
@@ -380,7 +380,7 @@
   "area": "F",
   "file": "index.html",
   "line": 19594,
-  "snippet": "const registered = id ? registeredById.get(id) : registeredByName.get(name.toLocaleLowerCase(\"ja\"));",
+  "snippet": "const registered = id ? registeredById.get(id) : registeredByName.get(name.toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE));",
   "function": "aggregate"
  },
  {
@@ -388,7 +388,7 @@
   "area": "F",
   "file": "index.html",
   "line": 27160,
-  "snippet": "function normalizeText(value){return String(value??\"\").normalize(\"NFKC\").trim().replace(/\\s+/g,\" \").toLocaleLowerCase(\"ja\")}",
+  "snippet": "function normalizeText(value){return String(value??\"\").normalize(CueScoreDomainV1.IDENTITY_NORMALIZATION_FORM).trim().replace(/\\s+/g,\" \").to",
   "function": "normalizeText"
  },
  {
@@ -396,7 +396,7 @@
   "area": "F",
   "file": "match-sharing-persistence-v1.js",
   "line": 116,
-  "snippet": "const normalizeText=value=>String(value??\"\").normalize(\"NFKC\").trim().replace(/\\s+/g,\" \").toLocaleLowerCase(\"ja\");",
+  "snippet": "const normalizeText=value=>String(value??\"\").normalize(domain.IDENTITY_NORMALIZATION_FORM).trim().replace(/\\s+/g,\" \").toLocaleLowerCase(doma",
   "function": "normalizeText"
  },
  {
@@ -404,7 +404,7 @@
   "area": "F",
   "file": "match-sharing-player-drafts-v1.js",
   "line": 17,
-  "snippet": "const nameKey=value=>String(value??\"\").trim().toLocaleLowerCase(\"ja\");",
+  "snippet": "const nameKey=value=>String(value??\"\").trim().toLocaleLowerCase(domain.IDENTITY_LOCALE);",
   "function": "nameKey"
  },
  {
@@ -444,7 +444,7 @@
   "area": "S",
   "file": "index.html",
   "line": 11279,
-  "snippet": ".sort((a,b)=>(b.winRate-a.winRate)||(b.games-a.games)||(b.wins-a.wins)||a.name.localeCompare(b.name,\"ja\"))",
+  "snippet": ".sort((a,b)=>(b.winRate-a.winRate)||(b.games-a.games)||(b.wins-a.wins)||a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE))",
   "function": "buildMvpCardV39  [ranking sort (win rate desc)]"
  },
  {
@@ -452,7 +452,7 @@
   "area": "S",
   "file": "index.html",
   "line": 11284,
-  "snippet": ".sort((a,b)=>(a.winRate-b.winRate)||(b.games-a.games)||(b.losses-a.losses)||a.name.localeCompare(b.name,\"ja\"))",
+  "snippet": ".sort((a,b)=>(a.winRate-b.winRate)||(b.games-a.games)||(b.losses-a.losses)||a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE))",
   "function": "buildMvpCardV39  [ranking sort (win rate asc)]"
  },
  {
@@ -460,7 +460,7 @@
   "area": "S",
   "file": "index.html",
   "line": 11288,
-  "snippet": ".sort((a,b)=>(b.games-a.games)||(b.wins-a.wins)||a.name.localeCompare(b.name,\"ja\"))",
+  "snippet": ".sort((a,b)=>(b.games-a.games)||(b.wins-a.wins)||a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE))",
   "function": "buildMvpCardV39  [ranking sort (games)]"
  },
  {
@@ -468,7 +468,7 @@
   "area": "S",
   "file": "index.html",
   "line": 11313,
-  "snippet": ".sort((a, b) => (b.games - a.games) || (b.wins - a.wins) || a.name.localeCompare(b.name, \"ja\"))",
+  "snippet": ".sort((a, b) => (b.games - a.games) || (b.wins - a.wins) || a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE))",
   "function": "buildOpponentRankingRowsV36  [ranking sort]"
  },
  {
@@ -476,7 +476,7 @@
   "area": "S",
   "file": "index.html",
   "line": 16758,
-  "snippet": "return timeOrder || String(a.id || \"\").localeCompare(String(b.id || \"\"), \"ja\");",
+  "snippet": "return timeOrder || String(a.id || \"\").localeCompare(String(b.id || \"\"), CueScoreDomainV1.SORT_LOCALE);",
   "function": "filteredMatchRecordsV31  [filteredMatchRecordsV3]"
  },
  {
@@ -484,7 +484,7 @@
   "area": "S",
   "file": "index.html",
   "line": 16885,
-  "snippet": ")].sort((a, b) => a.localeCompare(b, \"ja\"));",
+  "snippet": ")].sort((a, b) => a.localeCompare(b, CueScoreDomainV1.SORT_LOCALE));",
   "function": "renderMatchRecords  [category/season options]"
  },
  {
@@ -532,7 +532,7 @@
   "area": "S",
   "file": "index.html",
   "line": 19455,
-  "snippet": "const records=rawRecords(),cats=[...new Set(records.map(r=>String(r.category||\"\").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,\"j",
+  "snippet": "const records=rawRecords(),cats=[...new Set(records.map(r=>String(r.category||\"\").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b, C",
   "function": "options  [options (category/season sort)]"
  },
  {
@@ -540,7 +540,7 @@
   "area": "S",
   "file": "index.html",
   "line": 19458,
-  "snippet": "fill(ids.season,seasons);const players=[...pm.entries()].sort((a,b)=>a[1].localeCompare(b[1],\"ja\"));fill(ids.player,players);fill(ids.oppone",
+  "snippet": "fill(ids.season,seasons);const players=[...pm.entries()].sort((a,b)=>a[1].localeCompare(b[1], CueScoreDomainV1.SORT_LOCALE));fill(ids.player",
   "function": "fill  [fill (player options)]"
  },
  {
@@ -548,7 +548,7 @@
   "area": "S",
   "file": "index.html",
   "line": 19634,
-  "snippet": "return a.name.localeCompare(b.name, \"ja\");",
+  "snippet": "return a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE);",
   "function": "render  [render (opponent list)]"
  },
  {
@@ -556,7 +556,7 @@
   "area": "S",
   "file": "index.html",
   "line": 19701,
-  "snippet": "return [...map.values()].sort((a,b)=>a.name.localeCompare(b.name,\"ja\"));",
+  "snippet": "return [...map.values()].sort((a,b)=>a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE));",
   "function": "choices"
  },
  {
@@ -564,7 +564,7 @@
   "area": "S",
   "file": "index.html",
   "line": 19749,
-  "snippet": "opponents.sort((a,b)=>(counts.get(b.key)-counts.get(a.key))||a.name.localeCompare(b.name,'ja'));",
+  "snippet": "opponents.sort((a,b)=>(counts.get(b.key)-counts.get(a.key))||a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE));",
   "function": "populate  [opponents sort]"
  },
  {
@@ -588,7 +588,7 @@
   "area": "S",
   "file": "index.html",
   "line": 26824,
-  "snippet": "return active.sort((a,b)=>a.name.localeCompare(b.name,\"ja\"));",
+  "snippet": "return active.sort((a,b)=>a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE));",
   "function": "choices"
  },
  {
@@ -604,7 +604,7 @@
   "area": "S",
   "file": "record-access-v1.js",
   "line": 9,
-  "snippet": "const stableNewest=(a,b)=>time(b)-time(a)||String(b?.id||b?.matchId||\"\").localeCompare(String(a?.id||a?.matchId||\"\"),\"ja\",{numeric:true});",
+  "snippet": "const stableNewest=(a,b)=>time(b)-time(a)||String(b?.id||b?.matchId||\"\").localeCompare(String(a?.id||a?.matchId||\"\"),domain.SORT_LOCALE,{num",
   "function": "stableNewest"
  },
  {
@@ -612,7 +612,7 @@
   "area": "S",
   "file": "ui-revision-v12.js",
   "line": 64,
-  "snippet": "const stable=(a,b)=>String(a??\"\").localeCompare(String(b??\"\"),\"ja\",{numeric:true});",
+  "snippet": "const stable=(a,b)=>String(a??\"\").localeCompare(String(b??\"\"),CueScoreDomainV1.SORT_LOCALE,{numeric:true});",
   "function": "stable"
  },
  {
@@ -1044,7 +1044,7 @@
   "area": "I",
   "file": "tests/match-history-list-simplification.test.mjs",
   "line": 29,
-  "snippet": "assert.match(html,/return timeOrder \\|\\| String\\(a\\.id \\|\\| \"\"\\)\\.localeCompare\\(String\\(b\\.id \\|\\| \"\"\\), \"ja\"\\)/);",
+  "snippet": "assert.match(html,/return timeOrder \\|\\| String\\(a\\.id \\|\\| \"\"\\)\\.localeCompare\\(String\\(b\\.id \\|\\| \"\"\\), CueScoreDomainV1\\.SORT_LOCALE\\)/);",
   "function": "assert.match(html,…localeCompare(String(b.id),\"ja\")…)"
  },
  {
@@ -1068,7 +1068,7 @@
   "area": "I",
   "file": "tests/player-search-focus-ring.test.mjs",
   "line": 23,
-  "snippet": "assert.match(html,/const query = \\(el\\(\"playerLibrarySearch\"\\)\\?\\.value \\|\\| \"\"\\)\\.trim\\(\\)\\.toLocaleLowerCase\\(\"ja\"\\)/);",
+  "snippet": "assert.match(html,/const query = \\(el\\(\"playerLibrarySearch\"\\)\\?\\.value \\|\\| \"\"\\)\\.trim\\(\\)\\.toLocaleLowerCase\\(CueScoreDomainV1\\.IDENTITY_LOCALE\\)/);",
   "function": "assert.match(html,…toLocaleLowerCase(\"ja\")…)"
  }
 ]

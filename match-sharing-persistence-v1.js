@@ -1,8 +1,10 @@
 (function(root,factory){
-  const api=factory();
+  const domain=typeof module==="object"&&module.exports?require("./domain-constants-v1.js"):root.CueScoreDomainV1;
+  if(!domain)throw new Error("CueScore Domain constants are required");
+  const api=factory(domain);
   if(typeof module==="object"&&module.exports)module.exports=api;
   if(root)root.CueScoreMatchSharingPersistenceV1=api;
-})(typeof globalThis!=="undefined"?globalThis:this,function(){
+})(typeof globalThis!=="undefined"?globalThis:this,function(domain){
   "use strict";
 
   const UUID_V4=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -113,7 +115,7 @@
     return persistSharedMatchId({...options,sharedMatchId});
   }
 
-  const normalizeText=value=>String(value??"").normalize("NFKC").trim().replace(/\s+/g," ").toLocaleLowerCase("ja");
+  const normalizeText=value=>String(value??"").normalize(domain.IDENTITY_NORMALIZATION_FORM).trim().replace(/\s+/g," ").toLocaleLowerCase(domain.IDENTITY_LOCALE);
   function legacyRecordKey(record){
     const p1=record?.players?.[1]||record?.players?.["1"]||{},p2=record?.players?.[2]||record?.players?.["2"]||{};
     return ["legacy",record?.startedAt||record?.playedAt||record?.endedAt||"",normalizeText(p1.name),normalizeText(p2.name),Number(p1.score||0),Number(p2.score||0)].join("|");

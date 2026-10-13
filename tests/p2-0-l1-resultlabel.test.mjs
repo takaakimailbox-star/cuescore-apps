@@ -3,7 +3,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 import vm from "node:vm";
-import { read, indexHtml, codePoints, matchClose, extractFunction, count, sha256 } from "./helpers/p2-source.mjs";
+import { read, indexHtml, codePoints, matchClose, extractFunction, count, sha256, domain } from "./helpers/p2-source.mjs";
 
 const require = createRequire(import.meta.url);
 const html = indexHtml();
@@ -31,11 +31,11 @@ test("[P2L-004,008,012] canonical resultLabel values keep their exact code point
 const producerExpr = (() => {
   const at = html.indexOf('recordAnalysisEventV60("break_result"');
   assert.ok(at > 0);
-  const m = /resultLabel:\s*(decision\.preBreakFoul[^\n]*?"無得点"),\n/.exec(html.slice(at, at + 1500));
+  const m = /resultLabel:\s*(decision\.preBreakFoul[^\n]*?RESULT_LABELS\.NO_SCORE),\n/.exec(html.slice(at, at + 1500));
   assert.ok(m, "producer expression shape changed");
   return m[1];
 })();
-const produce = decision => vm.runInNewContext(`(function(decision){return ${producerExpr};})`)(decision);
+const produce = decision => vm.runInNewContext(`(function(decision){return ${producerExpr};})`, { CueScoreDomainV1: domain })(decision);
 
 test("[P2L-004] producer: five branches with the current priority order", () => {
   const base = { preBreakFoul: false, scratch: false, illegalBreak: false, pocketedBalls: [] };
@@ -48,7 +48,7 @@ test("[P2L-004] producer: five branches with the current priority order", () => 
   for (let n = 1; n <= 9; n++) assert.equal(produce({ ...base, pocketedBalls: Array.from({ length: n }, (_, i) => i + 1) }), `${n}球イン`);
 });
 
-test("[P2L-004] producer: recordAnalysisEventV60 23 call sites (24 occurrences incl. the definition); only break_result carries a Japanese literal in its payload", () => {
+test("[P2L-004] producer: recordAnalysisEventV60 23 call sites (24 occurrences incl. the definition); no call site carries a Japanese literal in its payload since P2-1 (break_result used to be the only one)", () => {
   const re = /recordAnalysisEventV60\(\s*["']([a-z_]+)["']\s*,/g; let m; const calls = [];
   while ((m = re.exec(html))) {
     const open = html.indexOf("(", m.index);
@@ -58,7 +58,8 @@ test("[P2L-004] producer: recordAnalysisEventV60 23 call sites (24 occurrences i
   const types = calls.map(c => c.type);
   assert.equal(count(html, "recordAnalysisEventV60"), 24, "24 occurrences: 1 definition + 23 call sites");
   assert.equal(calls.length, 23, "23 call sites with a literal event type");
-  assert.deepEqual([...new Set(calls.filter(c => c.jp).map(c => c.type))], ["break_result"]);
+  // P2-1: the one Japanese literal (break_result.resultLabel) now comes from the Domain constants, so no call site holds a literal.
+  assert.deepEqual([...new Set(calls.filter(c => c.jp).map(c => c.type))], []);
   assert.ok(types.includes("break_result"));
 });
 
@@ -69,14 +70,14 @@ const v64 = (() => {
   return [grab("breakScored"), grab("breakNoScore"), grab("breakTrouble")].join("\n");
 })();
 const card = (() => {
-  const at = html.indexOf('const breakScored = breaks.filter(e => ["1個","2個以上"]');
+  const at = html.indexOf('const breakScored = breaks.filter(e => [CueScoreDomainV1.RESULT_LABELS.ONE,CueScoreDomainV1.RESULT_LABELS.TWO_OR_MORE]');
   assert.ok(at > 0);
   const part = html.slice(at, at + 700);
   const grab = name => new RegExp("const " + name + " = [^\\n]*;").exec(part)[0];
   return [grab("breakScored"), grab("breakNoScore"), grab("breakTrouble")].join("\n");
 })();
 const evalConsumers = (code, name, events) => {
-  const ctx = vm.createContext({ [name]: events, out: null });
+  const ctx = vm.createContext({ [name]: events, out: null, CueScoreDomainV1: domain });
   vm.runInContext(code + ";out=[breakScored,breakNoScore,breakTrouble];", ctx);
   return [...ctx.out];
 };

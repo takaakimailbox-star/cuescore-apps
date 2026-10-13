@@ -28,6 +28,7 @@ const files = [
   "i18n-catalog-ja-v1.js",
   "i18n-catalog-en-v1.js",
   "i18n-catalog-zh-hans-v1.js",
+  "domain-constants-v1.js",
   "demo-data.js",
   "vendor/fflate-0.8.3.js",
   "vendor/fflate-0.8.3.LICENSE",

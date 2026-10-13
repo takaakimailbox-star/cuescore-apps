@@ -2,6 +2,7 @@
 import fs from "node:fs";
 import vm from "node:vm";
 import crypto from "node:crypto";
+import { createRequire } from "node:module";
 
 export const ROOT = new URL("../../", import.meta.url);
 export const read = rel => fs.readFileSync(new URL(rel, ROOT), "utf8");
@@ -58,8 +59,10 @@ export function extractFunction(src, name, nth) {
 }
 
 /* Evaluate source snippets in a fresh vm context and return the context. */
+const domainConstants = createRequire(import.meta.url)("../../domain-constants-v1.js");
+export const domain = domainConstants;
 export function run(code, globals = {}) {
-  const context = vm.createContext({ console, ...globals });
+  const context = vm.createContext({ console, CueScoreDomainV1: domainConstants, ...globals });
   vm.runInContext(code, context);
   return context;
 }

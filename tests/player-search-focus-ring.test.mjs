@@ -20,6 +20,6 @@ test("Player1, Player2, and management reuse the same searchable input",()=>{
 
 test("Search input behavior and filtering remain unchanged",()=>{
   assert.match(html,/el\("playerLibrarySearch"\)\?\.addEventListener\("input", \(\) => renderPlayerLibrary\(\)\)/);
-  assert.match(html,/const query = \(el\("playerLibrarySearch"\)\?\.value \|\| ""\)\.trim\(\)\.toLocaleLowerCase\("ja"\)/);
-  assert.match(html,/\.filter\(row => !query \|\| row\.player\.name\.toLocaleLowerCase\("ja"\)\.includes\(query\)\)/);
+  assert.match(html,/const query = \(el\("playerLibrarySearch"\)\?\.value \|\| ""\)\.trim\(\)\.toLocaleLowerCase\(CueScoreDomainV1\.IDENTITY_LOCALE\)/);
+  assert.match(html,/\.filter\(row => !query \|\| row\.player\.name\.toLocaleLowerCase\(CueScoreDomainV1\.IDENTITY_LOCALE\)\.includes\(query\)\)/);
 });

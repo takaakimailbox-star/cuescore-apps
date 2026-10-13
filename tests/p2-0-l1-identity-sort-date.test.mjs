@@ -4,7 +4,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import { createRequire } from "node:module";
-import { read, indexHtml, extractFunction, run, golden, codePoints } from "./helpers/p2-source.mjs";
+import { read, indexHtml, extractFunction, run, golden, codePoints, count, domain } from "./helpers/p2-source.mjs";
 
 const require = createRequire(import.meta.url);
 const html = indexHtml();
@@ -24,13 +24,14 @@ test("[P2L-035..052] identity: source expressions equal the two characterized no
   const idx = grab("index.html", /function normalizeText\(value\)\{[^\n]*\}/);
   const per = grab("match-sharing-persistence-v1.js", /const normalizeText=value=>[^\n]*;/);
   const draft = grab("match-sharing-player-drafts-v1.js", /const nameKey=value=>[^\n]*;/);
-  const fx = run(`${idx};${per.replace("normalizeText", "persistenceNormalize")};${draft};this.a=normalizeText;this.b=persistenceNormalize;this.c=nameKey;`);
+  const fx = run(`${idx};${per.replace("normalizeText", "persistenceNormalize")};${draft};this.a=normalizeText;this.b=persistenceNormalize;this.c=nameKey;`, { domain });
   for (const n of NAMES) {
     assert.equal(fx.a(n), normalizers.nfkcJa(n), "index.html normalizeText: " + JSON.stringify(n));
     assert.equal(fx.b(n), normalizers.nfkcJa(n), "persistence normalizeText: " + JSON.stringify(n));
     assert.equal(fx.c(n), normalizers.trimJa(n), "drafts nameKey: " + JSON.stringify(n));
   }
-  assert.equal(grab("index.html", /name\.toLocaleLowerCase\("ja"\) === name\.toLocaleLowerCase\("ja"\)|p\.name\.toLocaleLowerCase\("ja"\) === name\.toLocaleLowerCase\("ja"\)/).length > 0, true);
+  assert.equal(domain.IDENTITY_LOCALE, "ja"); assert.equal(domain.IDENTITY_NORMALIZATION_FORM, "NFKC");
+  assert.ok(grab("index.html", /p\.name\.toLocaleLowerCase\(CueScoreDomainV1\.IDENTITY_LOCALE\) === name\.toLocaleLowerCase\(CueScoreDomainV1\.IDENTITY_LOCALE\)/).length > 0);
 });
 
 test("[P2L-035..051] identity: the two normalizations DIFFER on width/compat/whitespace — both are preserved as-is (no unification in P2)", () => {
@@ -59,7 +60,7 @@ test("[P2L-040,041,042] playerSideInRecord: registered-ID first, legacy name fal
 
 test("[P2L-043] duplicate-name check in the editor is trim-free ja-lowercase on the stored name vs trimmed input", () => {
   const src = read("index.html");
-  assert.ok(src.includes('p.name.toLocaleLowerCase("ja") === name.toLocaleLowerCase("ja") && p.id !== editingPlayerId'));
+  assert.ok(src.includes('p.name.toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE) === name.toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE) && p.id !== editingPlayerId'));
 });
 
 /* ================= Sort (L-ID-2) ================= */
@@ -81,9 +82,11 @@ test("[P2L-076,077] stableNewest: newer first, then id compared with ja numeric 
 
 test("[P2L-056..059,069..071,074] name tie-breaks in ranking sorts use the fixed ja collator at every site (source tokens pinned)", () => {
   const src = read("index.html");
-  const hits = [...src.matchAll(/localeCompare\(([^)]*)\)/g)].map(m => m[1]);
-  assert.equal(hits.filter(h => /["']ja["']/.test(h)).length, 12);
-  assert.equal(hits.length, 23);
+  // P2-1: the 13 fixed-collation call sites (12 ledger rows; one row holds two sorts) now read the Domain constant; no 'ja' literal remains at any localeCompare call.
+  assert.equal(count(src, "CueScoreDomainV1.SORT_LOCALE"), 13);
+  assert.equal(count(src, /localeCompare\([^\n]*?,\s*["']ja["']/), 0);
+  assert.equal(count(src, /localeCompare\(/), 23, "total localeCompare calls unchanged (ASCII-key sorts keep no locale argument)");
+  assert.equal(domain.SORT_LOCALE, "ja");
 });
 
 test("[P2L-053,054,055,062,063,064,065,072,073,075] ASCII-key sorts without a locale argument give the same order under default, ja, en and zh collation", () => {

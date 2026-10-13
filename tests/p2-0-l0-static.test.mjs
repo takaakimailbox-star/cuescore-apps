@@ -64,10 +64,10 @@ for (const c of classification) {
 
 /* ---------- AC-S ratchet baselines (counts may only decrease) ---------- */
 const BASE = {
-  localeLowerJa: { "index.html": 16, "match-sharing-persistence-v1.js": 1, "match-sharing-player-drafts-v1.js": 1 },
+  localeLowerJa: {}, // P2-1: 0 (was index.html 16, persistence 1, drafts 1); the locale now comes from CueScoreDomainV1.IDENTITY_LOCALE
   localeLowerEnUs: { "match-sharing-validation-v1.js": 1 },
-  compareJa: { "index.html": 12 },
-  nfkc: { "analytics-build4-metrics.js": 1, "index.html": 5, "match-sharing-persistence-v1.js": 1 },
+  compareJa: {}, // P2-1: 0 (was index.html 12); the locale now comes from CueScoreDomainV1.SORT_LOCALE
+  nfkc: { "analytics-build4-metrics.js": 1, "index.html": 4 }, // P2-1: the two identity paths use IDENTITY_NORMALIZATION_FORM; the 5 remaining are ASCII game-type / search keys
   intlCtor: { "i18n-v1.js": 2, "index.html": 1 },
   jpWeekdayArray: { "index.html": 3 }
 };
@@ -105,7 +105,7 @@ test("[P2L-012,102,103] L0 AC-S5: storage/backup/export/restore/qr/csv/snapshot 
 import crypto from "node:crypto";
 const baseline = JSON.parse(read("tests/fixtures/p2/existing-tests-baseline.json"));
 test("[P2L-128..134] existing tests are present and byte-identical to the a841cbc baseline (a later gate must update this fixture together with an old→new assertion map)", () => {
-  const now = fs.readdirSync(new URL("./", import.meta.url)).filter(f => /\.test\.mjs$/.test(f) && !f.startsWith("p2-0-")).sort();
+  const now = fs.readdirSync(new URL("./", import.meta.url)).filter(f => /\.test\.mjs$/.test(f) && !/^p2-\d-/.test(f)).sort();
   assert.deepEqual(now, Object.keys(baseline.files).sort(), "no existing test file may be removed or renamed");
   for (const f of now) {
     const buf = fs.readFileSync(new URL("./" + f, import.meta.url));
