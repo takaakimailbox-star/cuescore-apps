@@ -1,0 +1,110 @@
+{
+ "nineBall|Short": {
+  "logicalSha": "477f844a9e3575e71461ec2c5b3206ba70fc72450de92385524cd91c29ac4b35",
+  "compactSha": "6615562372813a6303a2d4f81a7a7b798654f3bc4862d39fb34c8b49241dd1ae",
+  "payloadSha": "5e81d47c738a2b54d848cff5d18f86138f1781a71839b55f536e95e04304537f",
+  "chars": 1120
+ },
+ "nineBall|Medium": {
+  "logicalSha": "e15459b192432487f0e1589a1431e5274ff5834ed0a638f5a88544ea7042a902",
+  "compactSha": "2bcd3e5a554931d5952535ef14453973434326cfa338a238bd9d9af63336a6d2",
+  "payloadSha": "b2459b3b6ef93a28c4f6662778818fb0eaf06398df89356bafdcbbd5486fa71b",
+  "chars": 1375
+ },
+ "nineBall|Long": {
+  "logicalSha": "28ae4651549e604fc86d867c000b5c0c5534977dee5bbd4f07db875c78006cef",
+  "compactSha": "9f6fd45613e030426db6cf6f2b58cc831c4e67d70ab81719db569e215182a97b",
+  "payloadSha": "fc4bcc9bce569f8bd634aeb2e7907fde41a4f8c6bcc329260fddf1a63656c263",
+  "chars": 1813
+ },
+ "tenBall|Short": {
+  "logicalSha": "ae0206a46d7dcdedf585898c88be3b9346146359868e67ec4bce20fbff8dc9f2",
+  "compactSha": "e65aa8eb295c016e2ac329a5b691b6eb1436508589c5c587de2231fbebaeeb07",
+  "payloadSha": "f4559b418d9dfd0db4fc88fa262346fd3b0547a1d90b9a3fa5667bec3fe21857",
+  "chars": 1070
+ },
+ "tenBall|Medium": {
+  "logicalSha": "a9e0cae9d2237db67baf12844010b912f3b331d743feb0f4fc8771bcaa551372",
+  "compactSha": "c5f2854b6351311162517d8b4b6c771cfcaa773254511d9cf6691f87a92c0ce4",
+  "payloadSha": "6b766ac9e5f89c5053e8703ec7147ea7cab862e6114001a18855159f867087a2",
+  "chars": 1384
+ },
+ "tenBall|Long": {
+  "logicalSha": "57a4164bfb429b1ccf5ba755b28c670fec454a4f3aac689876a3d693f435abe5",
+  "compactSha": "b0426a039d8ad4ef2f9855572a27e01c95478afaafbc0717be8dbb10f95cf81e",
+  "payloadSha": "b0da0f6c5f7f333c99195b74a3cc2bbb6bf308edd3e352e48cbb0a87c0c56aab",
+  "chars": 1852
+ },
+ "rotation|Short": {
+  "logicalSha": "d84d87090cdd7e9cc8f75249a6ff25a78f0d4aab9f3f043d6086215cf2b84bf2",
+  "compactSha": "ad26ee47c29621efb889eff030310cbc1cfcf48c4cb931f04597b868c620488f",
+  "payloadSha": "381c2d292f47f4400561d50f3f6a70be27d836590678d2b82fac6fd760a5e522",
+  "chars": 884
+ },
+ "rotation|Medium": {
+  "logicalSha": "c24753519516a7786852014a168a343116e460cc698cfcccc536bc1ca31e8c8c",
+  "compactSha": "18d9fe3c447b827a825a55742334a6b4939d293c0480f33cb39cc5833ddb3ffa",
+  "payloadSha": "72ce16d1635b42f24ad2a1c2e61f04d9489ec56021b9a64cad73f642ab80adb3",
+  "chars": 1108
+ },
+ "rotation|Long": {
+  "logicalSha": "14c08cc824fe222d6932f46996bb71055f6d2ac843a478e8695e182ec13fb7ef",
+  "compactSha": "5713554f7a00573244b199f97808de033b80a32df0beb1d000c55df29703da0e",
+  "payloadSha": "85bf1c2c1c87ccf21586af017894c7e052a70316708dae2ba627fb093a535753",
+  "chars": 1319
+ },
+ "jpa9|Short": {
+  "logicalSha": "630d999c4ded053609e4098c4f7581a4d4d8e07806d3d1b5ceeb9f5d0b535d2d",
+  "compactSha": "aa02494252a10a779451c263f5b1d546607ed6ab3c8ccdc26597eded10f98c1f",
+  "payloadSha": "896d86d18573bb19756cd4ef7630b13bd491e8806a316c35d72a034d158afaa3",
+  "chars": 967
+ },
+ "jpa9|Medium": {
+  "logicalSha": "f81a24266688171fbf7ace379e541777dcf761b5ea0f08459c1d5bbf7f4cc9ea",
+  "compactSha": "312de2a07cae31080d135bfbc392cebcd4a281e7231cd47a5c48e5890655569c",
+  "payloadSha": "1ec892af277130d488b9806bd36922d7fa3795e905f2ad0d7a3dffc1c593360a",
+  "chars": 1223
+ },
+ "jpa9|Long": {
+  "logicalSha": "a7b77eca7ed1f08ec8a9ad259ca7f89f9627d139b654ab00115234fe2525fdd6",
+  "compactSha": "470e9b78410d8c6d5b7f0f43405da7b35f6adc2fb212ff598ee9c57718359f5d",
+  "payloadSha": "d89f048498d8a792e02dcfd3b103f9fb0198ea9f3a089eddbcf1be7bb89e0d0e",
+  "chars": 1492
+ },
+ "straightPool|Short": {
+  "logicalSha": "8e9616c2e19d190f84eebc19049a0534e7bf347a1b5834e18d604006a36170a9",
+  "compactSha": "c219b2eeb5e208bb5e9553699b49ac07a4e28d65df960335a060b68c9d4daa8e",
+  "payloadSha": "797f8c02942aaeb3fc12a30edd34755c32213db60ec0fe992a2d8f61248a19a6",
+  "chars": 998
+ },
+ "straightPool|Medium": {
+  "logicalSha": "f0cf6039104d289eabfdc70a6a486de08c35c376cfe0f377addf15e28da803ed",
+  "compactSha": "64ee9b9fe6cc995f196faecb3f1cf0880442c8fd353445cd68fb9ac413fe36a2",
+  "payloadSha": "12625dbd30eb388ec3a284890809a9595603bdd196c4bb7327973e296adbc083",
+  "chars": 1105
+ },
+ "straightPool|Long": {
+  "logicalSha": "ca25619d524496564daa4878a431ed6403529e2e0037c581070409f026e57c1c",
+  "compactSha": "2240f8068df663b4e9a5b6595727fc558d5ebb1e1f04b87aa8be7b9f16e91fc6",
+  "payloadSha": "17a9f52c1c201ee9d13b68081ee65d463d036a9517a8b04cb6fc743c3d2564f5",
+  "chars": 1364
+ },
+ "threeCushion|Short": {
+  "logicalSha": "2295515cffb6b790c37c8eadb048055b6a5a7f5b3811ca31fa926ece9663cbd3",
+  "compactSha": "ec229d9971ac355876691f83b66ff645dfbc3641796886cb93fd40a6044055e1",
+  "payloadSha": "e06d0307f065f51468bc9902900d0fc35b7d0a5995157948357716153992ad27",
+  "chars": 887
+ },
+ "threeCushion|Medium": {
+  "logicalSha": "5b5da7b0ac748857faa54a373c53cc0f6bf6729ef6ed8ec644ae12c97eb902d8",
+  "compactSha": "1541aa9f09c06371ad4bf780fb32a3552b7bf92a8f720f947b7cf022a2582d3e",
+  "payloadSha": "3bc1a998dcf91b11cb30fbb89d3d7a4ef16705c2c255954323550755c9a9f328",
+  "chars": 1106
+ },
+ "threeCushion|Long": {
+  "logicalSha": "41ce4596a752a58d375ff845b14fcb848dddf6e77ca4b78c5dd8ceeb29f6622d",
+  "compactSha": "f0f437f87ec1c62c70646b6d8e863da2799772f4c4d54df48f12bcf70d4653f8",
+  "payloadSha": "d807eea922fd41c357b6e0914980ae3d3630020ac76f744314fa9abdfa0d54ae",
+  "chars": 1207
+ }
+}

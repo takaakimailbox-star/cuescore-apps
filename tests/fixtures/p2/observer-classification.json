@@ -1,0 +1,163 @@
+[
+ {
+  "id": "P2L-105",
+  "file": "analysis-build4.js",
+  "k": 0,
+  "class": "c",
+  "role": "rewrite"
+ },
+ {
+  "id": "P2L-106",
+  "file": "analysis-final-rc.js",
+  "k": 0,
+  "class": "c",
+  "role": "rewrite"
+ },
+ {
+  "id": "P2L-107",
+  "file": "final-ui-build18.js",
+  "k": 0,
+  "class": "c",
+  "role": "rewrite"
+ },
+ {
+  "id": "P2L-108",
+  "file": "index.html",
+  "k": 0,
+  "class": "allowed",
+  "role": "allowed"
+ },
+ {
+  "id": "P2L-109",
+  "file": "index.html",
+  "k": 1,
+  "class": "allowed",
+  "role": "allowed"
+ },
+ {
+  "id": "P2L-110",
+  "file": "index.html",
+  "k": 2,
+  "class": "allowed",
+  "role": "allowed"
+ },
+ {
+  "id": "P2L-111",
+  "file": "index.html",
+  "k": 3,
+  "class": "allowed",
+  "role": "allowed"
+ },
+ {
+  "id": "P2L-112",
+  "file": "index.html",
+  "k": 4,
+  "class": "allowed",
+  "role": "allowed"
+ },
+ {
+  "id": "P2L-113",
+  "file": "index.html",
+  "k": 5,
+  "class": "allowed",
+  "role": "allowed"
+ },
+ {
+  "id": "P2L-114",
+  "file": "index.html",
+  "k": 6,
+  "class": "c",
+  "role": "rewrite"
+ },
+ {
+  "id": "P2L-115",
+  "file": "index.html",
+  "k": 7,
+  "class": "allowed",
+  "role": "allowed"
+ },
+ {
+  "id": "P2L-116",
+  "file": "index.html",
+  "k": 8,
+  "class": "allowed",
+  "role": "allowed"
+ },
+ {
+  "id": "P2L-117",
+  "file": "index.html",
+  "k": 9,
+  "class": "allowed",
+  "role": "allowed"
+ },
+ {
+  "id": "P2L-118",
+  "file": "index.html",
+  "k": 10,
+  "class": "c",
+  "role": "rewrite"
+ },
+ {
+  "id": "P2L-119",
+  "file": "index.html",
+  "k": 11,
+  "class": "c",
+  "role": "rewrite"
+ },
+ {
+  "id": "P2L-120",
+  "file": "monetization-v1.js",
+  "k": 0,
+  "class": "c",
+  "role": "rewrite"
+ },
+ {
+  "id": "P2L-121",
+  "file": "navigation-phase2-6.js",
+  "k": 0,
+  "class": "c",
+  "role": "rewrite"
+ },
+ {
+  "id": "P2L-122",
+  "file": "navigation-shell-phase1.js",
+  "k": 0,
+  "class": "c",
+  "role": "rewrite"
+ },
+ {
+  "id": "P2L-123",
+  "file": "player-detail-build6.js",
+  "k": 0,
+  "class": "c",
+  "role": "rewrite"
+ },
+ {
+  "id": "P2L-124",
+  "file": "ui-revision-v12.js",
+  "k": 0,
+  "class": "b",
+  "role": "read"
+ },
+ {
+  "id": "P2L-125",
+  "file": "ui-revision-v12.js",
+  "k": 1,
+  "class": "allowed",
+  "role": "allowed"
+ },
+ {
+  "id": "P2L-126",
+  "file": "ui-revision-v12.js",
+  "k": 2,
+  "class": "c",
+  "role": "rewrite"
+ },
+ {
+  "id": "P2L-127",
+  "file": "ui-revision-v12.js",
+  "k": 3,
+  "class": "c",
+  "role": "rewrite"
+ }
+]

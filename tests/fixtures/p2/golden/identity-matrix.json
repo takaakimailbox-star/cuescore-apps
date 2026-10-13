@@ -1,0 +1,106 @@
+{
+ "山田": {
+  "trimJa": "U+5C71 U+7530",
+  "nfkcJa": "U+5C71 U+7530"
+ },
+ " 山田 ": {
+  "trimJa": "U+5C71 U+7530",
+  "nfkcJa": "U+5C71 U+7530"
+ },
+ "Yamada": {
+  "trimJa": "U+0079 U+0061 U+006D U+0061 U+0064 U+0061",
+  "nfkcJa": "U+0079 U+0061 U+006D U+0061 U+0064 U+0061"
+ },
+ "yamada": {
+  "trimJa": "U+0079 U+0061 U+006D U+0061 U+0064 U+0061",
+  "nfkcJa": "U+0079 U+0061 U+006D U+0061 U+0064 U+0061"
+ },
+ "YAMADA": {
+  "trimJa": "U+0079 U+0061 U+006D U+0061 U+0064 U+0061",
+  "nfkcJa": "U+0079 U+0061 U+006D U+0061 U+0064 U+0061"
+ },
+ "ＹＡＭＡＤＡ": {
+  "trimJa": "U+FF59 U+FF41 U+FF4D U+FF41 U+FF44 U+FF41",
+  "nfkcJa": "U+0079 U+0061 U+006D U+0061 U+0064 U+0061"
+ },
+ "ｙａｍａｄａ": {
+  "trimJa": "U+FF59 U+FF41 U+FF4D U+FF41 U+FF44 U+FF41",
+  "nfkcJa": "U+0079 U+0061 U+006D U+0061 U+0064 U+0061"
+ },
+ "ﾔﾏﾀﾞ": {
+  "trimJa": "U+FF94 U+FF8F U+FF80 U+FF9E",
+  "nfkcJa": "U+30E4 U+30DE U+30C0"
+ },
+ "ヤマダ": {
+  "trimJa": "U+30E4 U+30DE U+30C0",
+  "nfkcJa": "U+30E4 U+30DE U+30C0"
+ },
+ "やまだ": {
+  "trimJa": "U+3084 U+307E U+3060",
+  "nfkcJa": "U+3084 U+307E U+3060"
+ },
+ "ヤマタ゛": {
+  "trimJa": "U+30E4 U+30DE U+30BF U+309B",
+  "nfkcJa": "U+30E4 U+30DE U+30BF U+0020 U+3099"
+ },
+ "ガ": {
+  "trimJa": "U+30AC",
+  "nfkcJa": "U+30AC"
+ },
+ "ｶﾞ": {
+  "trimJa": "U+FF76 U+FF9E",
+  "nfkcJa": "U+30AC"
+ },
+ "ガ": {
+  "trimJa": "U+30AB U+3099",
+  "nfkcJa": "U+30AC"
+ },
+ "Ａ　Ｂ": {
+  "trimJa": "U+FF41 U+3000 U+FF42",
+  "nfkcJa": "U+0061 U+0020 U+0062"
+ },
+ "A  B": {
+  "trimJa": "U+0061 U+0020 U+0020 U+0062",
+  "nfkcJa": "U+0061 U+0020 U+0062"
+ },
+ "a b": {
+  "trimJa": "U+0061 U+0020 U+0062",
+  "nfkcJa": "U+0061 U+0020 U+0062"
+ },
+ "İ": {
+  "trimJa": "U+0069 U+0307",
+  "nfkcJa": "U+0069 U+0307"
+ },
+ "ß": {
+  "trimJa": "U+00DF",
+  "nfkcJa": "U+00DF"
+ },
+ "ǅ": {
+  "trimJa": "U+01C6",
+  "nfkcJa": "U+0064 U+017E"
+ },
+ "한글": {
+  "trimJa": "U+D55C U+AE00",
+  "nfkcJa": "U+D55C U+AE00"
+ },
+ "张三": {
+  "trimJa": "U+5F20 U+4E09",
+  "nfkcJa": "U+5F20 U+4E09"
+ },
+ "張三": {
+  "trimJa": "U+5F35 U+4E09",
+  "nfkcJa": "U+5F35 U+4E09"
+ },
+ "ABC１２３": {
+  "trimJa": "U+0061 U+0062 U+0063 U+FF11 U+FF12 U+FF13",
+  "nfkcJa": "U+0061 U+0062 U+0063 U+0031 U+0032 U+0033"
+ },
+ "abc123": {
+  "trimJa": "U+0061 U+0062 U+0063 U+0031 U+0032 U+0033",
+  "nfkcJa": "U+0061 U+0062 U+0063 U+0031 U+0032 U+0033"
+ },
+ "": {
+  "trimJa": "",
+  "nfkcJa": ""
+ }
+}

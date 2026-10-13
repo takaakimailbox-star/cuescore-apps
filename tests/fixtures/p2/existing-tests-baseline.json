@@ -1,0 +1,595 @@
+{
+ "baseline": "a841cbc24087ece5baa91a3b04da01d018843c64",
+ "files": {
+  "analysis-v2.test.mjs": {
+   "sha256": "72b8753c05e5ff7f036f39de33bfca9c23d9f3d2bfc1f9e4bff3d50b91277f6a",
+   "tests": 0,
+   "skips": 0
+  },
+  "analytics-build4-metrics.test.mjs": {
+   "sha256": "186aec11f2d39a3f52853c8fa10373696bdbb6372b922251cc37401bd80a976f",
+   "tests": 27,
+   "skips": 0
+  },
+  "analytics-build4-ui.test.mjs": {
+   "sha256": "60fd347a86e0d7b5022e6e58318c6b9b193024e3d98c037b570aacf8f09607c1",
+   "tests": 6,
+   "skips": 0
+  },
+  "analytics-final-rc.test.mjs": {
+   "sha256": "6c06aac8512d862259512052dd1135c19f317b8c120a3bb346eef25f476ccba2",
+   "tests": 6,
+   "skips": 0
+  },
+  "analytics-v1-scope-trend-axis.test.mjs": {
+   "sha256": "0be53540784531318a78ef8ae609295d3ef71b7ae590a02bcdd5a84e1fcd2d19",
+   "tests": 3,
+   "skips": 0
+  },
+  "break-input-immediate.test.mjs": {
+   "sha256": "68cf95ebb030cf56b283dd36bd7ffd76b2b7cceaf040b1b135134dba7c1f3c96",
+   "tests": 5,
+   "skips": 0
+  },
+  "break-prompt-back-confirm.test.mjs": {
+   "sha256": "34208b190eb2969cdf669792814238f98878a8d63d45e44ec9653af8a1a4bf8f",
+   "tests": 6,
+   "skips": 0
+  },
+  "break-prompt-persistence.test.mjs": {
+   "sha256": "5b274ba65c480de138ba5ebdcb33c9d03b99c2ac2012f691547a112613d67513",
+   "tests": 5,
+   "skips": 0
+  },
+  "break-result-rc-visuals.test.mjs": {
+   "sha256": "5cbc93379c954e8403b87409f3ced212a8ff5aebdf981a486ef37c2f2079de7b",
+   "tests": 0,
+   "skips": 0
+  },
+  "break-return-scroll.test.mjs": {
+   "sha256": "4b6995a4e9c2f94333fb43b81ca57f736eb250edcbbbdb644a6bcfa372f4e7e4",
+   "tests": 4,
+   "skips": 0
+  },
+  "break-winning-ball-next-rack.test.mjs": {
+   "sha256": "c0d9c64ad0ad435f9c6590de655cdea1cbbb5f45b78143f72d5a02a04e514cc3",
+   "tests": 0,
+   "skips": 0
+  },
+  "build11-back-opponent-records.test.mjs": {
+   "sha256": "cf9c7e18568095ac298d9b573eeb3b614958c419442562c789695e50dee0a715",
+   "tests": 6,
+   "skips": 0
+  },
+  "build15-trends-backup-migration.test.mjs": {
+   "sha256": "f2f23ca67cf79bcb61a3b0704b531dcae3df1dc10fd2e0a1ace4a1c96b3e8d79",
+   "tests": 5,
+   "skips": 0
+  },
+  "build18-final-ui-data-consistency.test.mjs": {
+   "sha256": "56b4ba6adfebfeed0e5f5538ffeca9d5892c5b617b4ff0bced83c100a793cb3f",
+   "tests": 6,
+   "skips": 0
+  },
+  "build29-ios-webview-selector-text-selection.test.mjs": {
+   "sha256": "256f065c82439246a768827d46dff9d45d6c6f6df67af4367ae31eca6a16e433",
+   "tests": 3,
+   "skips": 0
+  },
+  "build31-final-review-batch.test.mjs": {
+   "sha256": "751aedfdc9887185f7a03bb09af717f920068cc7a6c71ce1c7c7ff1c32abc2eb",
+   "tests": 5,
+   "skips": 0
+  },
+  "build32-final-review-followup.test.mjs": {
+   "sha256": "80199fa47add80325e29a85348cbde50c9270990cc65b0a595c9f02c246738b8",
+   "tests": 5,
+   "skips": 0
+  },
+  "build33-home-reference.test.mjs": {
+   "sha256": "cddf9dd9dca177355eb24cde6c97aa498b6b6c3a8bdc4c0fec16c1fbf8ae51c1",
+   "tests": 4,
+   "skips": 0
+  },
+  "build34-match-card-c-back-navigation.test.mjs": {
+   "sha256": "8de2e48cfb30a19eb80019267ede809d3baccc0de042022e02380831cf2a94b6",
+   "tests": 4,
+   "skips": 0
+  },
+  "build35-match-detail-back-input.test.mjs": {
+   "sha256": "a445e00ceee7e6fb4a6f54b31bdc892f23a31182cffe88fafcc58535b42cd491",
+   "tests": 5,
+   "skips": 0
+  },
+  "build36-match-card-c-fidelity.test.mjs": {
+   "sha256": "3ccee4800ccb55d596fc94688a5794a725355cba35040adf9cf3bd4e7d4112c4",
+   "tests": 6,
+   "skips": 0
+  },
+  "build37-match-card-c-visual-reference.test.mjs": {
+   "sha256": "3ccec53bf6d13e413f0f5087eb277f7d42bc6e51fb26631a3afe73d399856c79",
+   "tests": 6,
+   "skips": 0
+  },
+  "build39-player-detail-exact-back.test.mjs": {
+   "sha256": "cb161b742291bcbc37ea26e2b7bedf25b51856ea13822682b8b046adfca463f2",
+   "tests": 4,
+   "skips": 0
+  },
+  "build46-remove-all-swipe.test.mjs": {
+   "sha256": "9dffa861621bef76513384426f9d4cf592c87a05f43d739eeee5ec231d9eebb8",
+   "tests": 3,
+   "skips": 0
+  },
+  "build47-analysis-cleanup.test.mjs": {
+   "sha256": "dc8f4d20e4f810d3d186fd16709da5059bb495c04a40045d1c89fcbe1292d598",
+   "tests": 5,
+   "skips": 0
+  },
+  "build49-player-hub-layout-and-scroll.test.mjs": {
+   "sha256": "979a23c8b2a11d421a91246951568503daa33e704d4cdad65f0b79a0ea641f94",
+   "tests": 5,
+   "skips": 0
+  },
+  "build55-player-editor-actions.test.mjs": {
+   "sha256": "081bf8ba832e265f4f75abdfd160aefd04488c49ac60ded3867f6f5b9c723f0d",
+   "tests": 3,
+   "skips": 0
+  },
+  "build56-history-name-width.test.mjs": {
+   "sha256": "0b3fe1bc16c0f092f9a94479c8438f313b75ea0efba2791858222ea6f3c3a0de",
+   "tests": 1,
+   "skips": 0
+  },
+  "build58-history-asymmetric-race-label.test.mjs": {
+   "sha256": "3738c1a4e5b843f7690efa7862f99405e3b0e954e1444cd541d2da862cd4fa35",
+   "tests": 1,
+   "skips": 0
+  },
+  "build59-personal-best-contract.test.mjs": {
+   "sha256": "4e6067c2f656d5e10ff5a4499ec2ba21760dd410a9a3223282af726a84dd8e36",
+   "tests": 1,
+   "skips": 0
+  },
+  "build66-iap-readiness.test.mjs": {
+   "sha256": "3abfac7f3a609020eef1f43bc7fa8fbc13083e91197ea7026644b2a9adce46b6",
+   "tests": 8,
+   "skips": 0
+  },
+  "build67-iap-diagnostic.test.mjs": {
+   "sha256": "8938cfd77885d1d73cc90e038dc48ce35bda886ed3cee0004cb8677053233731",
+   "tests": 8,
+   "skips": 0
+  },
+  "build69-purchase-lifecycle-diagnostic.test.mjs": {
+   "sha256": "909f52d21aaecdb28706023b6dfbfc3964dd42466129b209b99887259fcfb9db",
+   "tests": 8,
+   "skips": 0
+  },
+  "build70-pro-ux-startup-safety.test.mjs": {
+   "sha256": "d23d238442aa45d4e00483b2758f92907b8610f233d0e8ae14e57bf633d95218",
+   "tests": 9,
+   "skips": 0
+  },
+  "build72-current-plan-settings.test.mjs": {
+   "sha256": "7af699ef9ee51117cf630477ebefa1a219b1c7a3a26c52d97f4443ff101b97fd",
+   "tests": 8,
+   "skips": 0
+  },
+  "build74-settings-real-device-fit.test.mjs": {
+   "sha256": "a83e568652f35a88eea9c6db8632d5ce26e22928d5f1e4ed45bcdadd39e80f3a",
+   "tests": 3,
+   "skips": 0
+  },
+  "build75-settings-spacing-polish.test.mjs": {
+   "sha256": "a61db2512a563feed3cfd681e438cb87330fadc689a55d482e774195ffd7152d",
+   "tests": 3,
+   "skips": 0
+  },
+  "build76-settings-scroll-lock.test.mjs": {
+   "sha256": "d14d29948714a91ce1a8e10484efb01afb172385a41a18b679fc21ef08896b95",
+   "tests": 3,
+   "skips": 0
+  },
+  "build77-fresh-storekit-price.test.mjs": {
+   "sha256": "be56c4e862610a2fac9c5ec470890e9e78c52cbe7402222fd04a488761eeaac1",
+   "tests": 4,
+   "skips": 0
+  },
+  "build8-iphone-review.test.mjs": {
+   "sha256": "e3166939a1cb027cbf348b9985cb77bf0deaa0d84b00faf37dbfc1e65171195f",
+   "tests": 9,
+   "skips": 0
+  },
+  "circular-modal-close.test.mjs": {
+   "sha256": "90c0ef261837d278917f44c598a381c53422fb4602159004afb2439cd2b7ee72",
+   "tests": 0,
+   "skips": 0
+  },
+  "compact-discipline-history-card.test.mjs": {
+   "sha256": "2d946a24f817b8ff6b3bebe1701509685586085f1651e95ce89e2f5e9527a194",
+   "tests": 3,
+   "skips": 0
+  },
+  "cue-series-web.test.mjs": {
+   "sha256": "24651328f82967c2c613a8a832c5ed79f62685cfcc428df846f63f7e638f784b",
+   "tests": 4,
+   "skips": 0
+  },
+  "delete-workflows.test.mjs": {
+   "sha256": "4e2e7ab1329c7288c317fc4ab6e5bc82ec056f18085b81bc072263251fa30836",
+   "tests": 0,
+   "skips": 0
+  },
+  "demo-data.test.mjs": {
+   "sha256": "e19517e6c948fbbab3b7b19a384765bdc4aeccca0f4987912da82a9d80e168a2",
+   "tests": 0,
+   "skips": 0
+  },
+  "discipline-summary-rows.test.mjs": {
+   "sha256": "a1ed6ce70b5747e479c02c67aae69c09511d3468481f6efbe410402a992ac06b",
+   "tests": 0,
+   "skips": 0
+  },
+  "dynamic-type-deferral-decision.test.mjs": {
+   "sha256": "257889c86d2e726acfce6f2e238a7e35bb573fba546bcbe1a3791952bec13485",
+   "tests": 10,
+   "skips": 0
+  },
+  "fa-iphone-003-phase3-initial-paint.test.mjs": {
+   "sha256": "7f6f4e3bb89efd5ffef2bc000cd0de8d1d4cab310e7910a3a0170122a1d980fa",
+   "tests": 7,
+   "skips": 0
+  },
+  "fa-iphone-003-player-initial-render.test.mjs": {
+   "sha256": "926df7dc72e0210f5d4810187c66cb1531ead44ed21d53d8b5a9d443cfbeaa3f",
+   "tests": 4,
+   "skips": 0
+  },
+  "free-pro-record-policy.test.mjs": {
+   "sha256": "3fd9225a42e1f818f9cafece4938e09247f88c2c416439ed7807b333dad9741b",
+   "tests": 7,
+   "skips": 0
+  },
+  "game-result-match-detail-common-layout.test.mjs": {
+   "sha256": "bb2eb9bea61056b7881e5f9c6f8126e26810c8d42673189aa6bede9aaa5b32dc",
+   "tests": 8,
+   "skips": 0
+  },
+  "game-result-match-detail-six-disciplines.test.mjs": {
+   "sha256": "9ab7a89af887cb0af810c6a165990f21c43729e15bd36c898d1506f8d5739be4",
+   "tests": 7,
+   "skips": 0
+  },
+  "game-result-progress-final-rc.test.mjs": {
+   "sha256": "a804bd49ff6758a9c74cd31b526e483c9ba544819614af06df4b0eec67e4f3b7",
+   "tests": 7,
+   "skips": 0
+  },
+  "game-result-statistics.test.mjs": {
+   "sha256": "65eed32a8fb5363d63f8604e478e4d6dd42c5d79875ef82e77603c421559f51e",
+   "tests": 3,
+   "skips": 0
+  },
+  "global-back-app-icon-audit.test.mjs": {
+   "sha256": "3f8ca9d438e48c86e994cdea0a0e5da05bef46c6d52b5d3963f81a3d7f396f30",
+   "tests": 3,
+   "skips": 0
+  },
+  "history-card-readability.test.mjs": {
+   "sha256": "912a0f75abf7a88098a95a0647b05bc3ef7525ec8f7a0830be37d89d7ae96da6",
+   "tests": 5,
+   "skips": 0
+  },
+  "home-neutral-three-cushion-cards.test.mjs": {
+   "sha256": "de2042f641164d24688cb8dd41cf5ab1138ecc3b9a8157d93c47169a2f7a7021",
+   "tests": 0,
+   "skips": 0
+  },
+  "i18n-foundation-v1.test.mjs": {
+   "sha256": "ac8e92329319d09d1982a80d8447f7e15f483c828dd563ad86b3e1a2796678d0",
+   "tests": 22,
+   "skips": 0
+  },
+  "in-progress-match-restore.test.mjs": {
+   "sha256": "01354fd580334b884f0fad6f770786c81c08f569b6f5a4b6e7e11210b70bc6d2",
+   "tests": 15,
+   "skips": 0
+  },
+  "ios27-scene-lifecycle.test.mjs": {
+   "sha256": "2fb255eb3ec31205e4dc1835991673ff9910f97e0c555d3d1f07c201a797c64f",
+   "tests": 4,
+   "skips": 0
+  },
+  "jpa9-dead-ball-ui-implementation.test.mjs": {
+   "sha256": "0b00a8a3f55a926b5acecd2a931fee579309db76d70f5906d0b1ca4551af3c79",
+   "tests": 16,
+   "skips": 0
+  },
+  "jpa9-dead-ball.test.mjs": {
+   "sha256": "ce8b489250374a0ea4eaae9f6812f8eb6c06a956e335af1f4b4facebbc56737f",
+   "tests": 0,
+   "skips": 0
+  },
+  "jpa9-match-points.test.mjs": {
+   "sha256": "b0ab2584abe1fd47271fe18352a942ed356cfe41972e9e63eea3a0724a975e61",
+   "tests": 5,
+   "skips": 0
+  },
+  "language-view-layout-u9.test.mjs": {
+   "sha256": "6a0bafaf4a95cb745151ece5c586a38f5da56dd9671ed16486abff027d77cf37",
+   "tests": 2,
+   "skips": 0
+  },
+  "localization-official-docs.test.mjs": {
+   "sha256": "5f4694b8809c7f8198b3630ae5cc930e1395481c24eb72c14d5a8fc1a33516bf",
+   "tests": 8,
+   "skips": 0
+  },
+  "localization-p1-formalization-decision.test.mjs": {
+   "sha256": "aa97e319adf178f30453780765ac8b893225880b4cfb1dfec10577b07571425f",
+   "tests": 7,
+   "skips": 0
+  },
+  "manual-turn-change-unification.test.mjs": {
+   "sha256": "ca1bfe0b36b4d727a4ced33812dee676df769769960ee43d0442b579d488f065",
+   "tests": 0,
+   "skips": 0
+  },
+  "masuwari-judgement.test.mjs": {
+   "sha256": "c96ad9a1f3f05fb2e6018bc655c6de2622863e6fc4f4b2b283784bdb1271b9ca",
+   "tests": 12,
+   "skips": 0
+  },
+  "match-detail-scroll-final-rc.test.mjs": {
+   "sha256": "7213391ad9663650898c0bd2c781d23dab9807e89821eccb446c4fc4b28c3988",
+   "tests": 4,
+   "skips": 0
+  },
+  "match-history-list-simplification.test.mjs": {
+   "sha256": "f21c6400e5d776bfbc2d8f34f78c2314f210b67d291d1f2dff70a56a43016d60",
+   "tests": 6,
+   "skips": 0
+  },
+  "match-sharing-build84-fix.test.mjs": {
+   "sha256": "640e020f7107be1601d400b850592265a9d8be01b667a68723b87135e3311bef",
+   "tests": 8,
+   "skips": 0
+  },
+  "match-sharing-camera-permission-ui.test.mjs": {
+   "sha256": "ae63fc075cd51a66e24a79baf14af2aa9f2e1a3f411721218a4db57ef480a785",
+   "tests": 5,
+   "skips": 0
+  },
+  "match-sharing-later-decision.test.mjs": {
+   "sha256": "0db9f7e02a7782449c06bad7bc5a47914e170806118205dd0f64fa53ec4b2b96",
+   "tests": 1,
+   "skips": 0
+  },
+  "match-sharing-stage1.test.mjs": {
+   "sha256": "cd952c6b9f460481461efa5164693a8a214a3efc5ab54224173c9a7c84efc5e4",
+   "tests": 14,
+   "skips": 0
+  },
+  "match-sharing-stage2.test.mjs": {
+   "sha256": "cf30db5a32b0e37716b9d2f8e1f6e0891942fc296d2c73b5c051f1242b3414ac",
+   "tests": 15,
+   "skips": 0
+  },
+  "match-sharing-stage3.test.mjs": {
+   "sha256": "362951ccf6195121cd762e9c40da3c8fda691a269d3c1ae84cb1a658b56605f6",
+   "tests": 23,
+   "skips": 0
+  },
+  "match-sharing-stage4.test.mjs": {
+   "sha256": "e179e35c81ac3ea2649cbce7aa361a0d6dbafcac2795ca51064858dc9af88127",
+   "tests": 12,
+   "skips": 0
+  },
+  "match-sharing-stage5a.test.mjs": {
+   "sha256": "9b6f94b7d1a38bc83a63c98c66b31f9fb5c10a5b509deadc5dd8efd49f93c461",
+   "tests": 19,
+   "skips": 0
+  },
+  "match-sharing-stage5b.test.mjs": {
+   "sha256": "9aa9f72eebabaccce03bff1215f5821fb6e1fa38ddaf94479626cfcf5838f1c8",
+   "tests": 16,
+   "skips": 0
+  },
+  "memo-tag-phase1-removal.test.mjs": {
+   "sha256": "2baa53136ab46ac75e4975840abd541fb86e667bea709d438ab272a5d435d2d7",
+   "tests": 0,
+   "skips": 0
+  },
+  "native-ios-foundation.test.mjs": {
+   "sha256": "fbbc3b4d29d0cbca544a0dea1aa635da404dbfa1c08fc9beef06532b5878c2c4",
+   "tests": 6,
+   "skips": 0
+  },
+  "navigation-phase2-6.test.mjs": {
+   "sha256": "4d62d00183f10ff654cdef748baef5a4b9cbe231fefd6530480c95a32298221f",
+   "tests": 11,
+   "skips": 0
+  },
+  "navigation-shell-phase1.test.mjs": {
+   "sha256": "a62b17d2348fcfa37a849933e5922faa8ecdaddeec2b16b0c1e6fa89d9f822ba",
+   "tests": 11,
+   "skips": 0
+  },
+  "numeric-input-upper-limits.test.mjs": {
+   "sha256": "a84a797a142e953e0d4c64086dc93156932c650acccc79c475da8dadb6a0c15c",
+   "tests": 0,
+   "skips": 0
+  },
+  "official-website-v1.test.mjs": {
+   "sha256": "c89793e8aea5c6e1ce201e5a0df82f14378d2fe9b61113666a73cd8e7b2326d7",
+   "tests": 4,
+   "skips": 0
+  },
+  "phase-b1-safe-cleanup.test.mjs": {
+   "sha256": "487addb2af8ccff6f2ba34d78dde011712e780e16d2edad20976e298339789c7",
+   "tests": 5,
+   "skips": 0
+  },
+  "physical-rc-identity.test.mjs": {
+   "sha256": "2c5496862387e424f64211b0b121c7f1b604373fe07dba6b8e107f766b9207d8",
+   "tests": 4,
+   "skips": 0
+  },
+  "physical-ui-fix-settings-legal.test.mjs": {
+   "sha256": "4c0dfb675ca3f6dffbe655a1329a6f95ef62c9b42707ce5c9b306321066facfd",
+   "tests": 2,
+   "skips": 0
+  },
+  "player-analytics-discipline-statistics.test.mjs": {
+   "sha256": "d6c9ba553423b6665ba5160f90db9afa4b07e6083d00ca8994f21422871062dd",
+   "tests": 3,
+   "skips": 0
+  },
+  "player-delete-identity.test.mjs": {
+   "sha256": "fa67ff7a063d4279d61afdf187157453272960cbc4c473147f22c97647049e84",
+   "tests": 11,
+   "skips": 0
+  },
+  "player-detail-build6.test.mjs": {
+   "sha256": "140a50ba1ab449ebccf29008220733875f6e80f46c2471cb442fb59d23c1b423",
+   "tests": 11,
+   "skips": 0
+  },
+  "player-detail-final-rc-regression.test.mjs": {
+   "sha256": "a78b19334f721da5c5def4832d4efc146d36ff60c67255b60c0dd55a48f98df3",
+   "tests": 0,
+   "skips": 0
+  },
+  "player-discipline-metrics.test.mjs": {
+   "sha256": "c6655b1c09f67530d3ea82b9d24909371680eedf7b90b4bd04eeeb9d34483216",
+   "tests": 0,
+   "skips": 0
+  },
+  "player-journey-three-screen.test.mjs": {
+   "sha256": "fe584438196bdb35a7721ba7785b3e746b264dc982e3784c2080fcc036ff04e4",
+   "tests": 0,
+   "skips": 0
+  },
+  "player-library-regression-restore.test.mjs": {
+   "sha256": "55b9424a48cdfe237d2daf5e43a289202b9e7e8a2ca5c95371499098dd205dd8",
+   "tests": 0,
+   "skips": 0
+  },
+  "player-list-bottom-navigation-inset.test.mjs": {
+   "sha256": "78925031f57edaf15fd0aedd41a78f410b9a874f42522343d2e606b0c761f519",
+   "tests": 5,
+   "skips": 0
+  },
+  "player-search-focus-ring.test.mjs": {
+   "sha256": "acd2c01e62c281a7235a414c9e3937d47a12d422fc4411456c0102b6c59601a6",
+   "tests": 3,
+   "skips": 0
+  },
+  "player-ux-finalization.test.mjs": {
+   "sha256": "2eba09313a54b8e93296c29d53fd282f17d6a7e1ec15384360acf264c2758689",
+   "tests": 9,
+   "skips": 0
+  },
+  "post-build37-page-layout-refinement.test.mjs": {
+   "sha256": "fc455562eebbf085f95dd05f3f3290c9c406a39c19de86ad89b41fb80fa62883",
+   "tests": 4,
+   "skips": 0
+  },
+  "race-picker-bottom-navigation-inset.test.mjs": {
+   "sha256": "cd4761dd15d732083ff006bc894142c442e8187960d48c5e7076f6b10f8772ed",
+   "tests": 4,
+   "skips": 0
+  },
+  "rack-start-toast.test.mjs": {
+   "sha256": "2c3ff4b9f5190da6de44cf93f48dd07e41b82429a376ddf47416827ce049f991",
+   "tests": 5,
+   "skips": 0
+  },
+  "restore-initial-break-prompt.test.mjs": {
+   "sha256": "d530636edbf75ee0e2e1bb30cacfcaf7fcd13f560835a7fc77c96ba27a669ae9",
+   "tests": 6,
+   "skips": 0
+  },
+  "restore-quota-safety.test.mjs": {
+   "sha256": "6e96f10e13eb3e98de8cffaaf2e825fac9f29fdf7da346d9a5568f5446032abd",
+   "tests": 9,
+   "skips": 0
+  },
+  "rival-analysis-v2.test.mjs": {
+   "sha256": "1900891bfc5616e09a0a9abc246615c9b7d3a57be85cddf4e16ffbb6fa448483",
+   "tests": 0,
+   "skips": 0
+  },
+  "rotation-dry-break-turn-switch.test.mjs": {
+   "sha256": "c222a1bb2a8c375b3bf2f060f423d3e650b17ab9d242051fc48204f8c49f2571",
+   "tests": 1,
+   "skips": 0
+  },
+  "score-progress-line-styles.test.mjs": {
+   "sha256": "b420f22ae788a4295ab8d126a029b9216bcde76f1f41eb2972a91e010944f1f7",
+   "tests": 0,
+   "skips": 0
+  },
+  "selective-pinch-control.test.mjs": {
+   "sha256": "2e04697013d9549820b926270c2c4e03a287edb1a73ee4af997d053b158a076e",
+   "tests": 0,
+   "skips": 0
+  },
+  "service-worker-activation.test.mjs": {
+   "sha256": "d1c9d4484940a907146e48c4a6148ff7f7dec957f5ae2f691346256358a10cbf",
+   "tests": 0,
+   "skips": 0
+  },
+  "settings-legal-links.test.mjs": {
+   "sha256": "d7fa691df8a30c73a9f61d838c18060d0d751d1e4f3c61e0b6dabb5e7f94d215",
+   "tests": 9,
+   "skips": 0
+  },
+  "settings-unified-design-decision.test.mjs": {
+   "sha256": "ad7ffced6857b6cb029f706054d99010d6dfcec5589ed0c006b0f5e442ae5e45",
+   "tests": 11,
+   "skips": 0
+  },
+  "settings-unified-design-implementation.test.mjs": {
+   "sha256": "1bec75dec7f0f354222f4db8dfe4916286057a71c0b79be14e6be81af8849e88",
+   "tests": 10,
+   "skips": 0
+  },
+  "six-discipline-race-display.test.mjs": {
+   "sha256": "214c87a52886eec9355da97acf426d88c6ab3589858ec634f1fdf10708caa410",
+   "tests": 4,
+   "skips": 0
+  },
+  "tenball-result-parity.test.mjs": {
+   "sha256": "0cd3b5c10a0e198016391a3b6c4cb8cb3f09574a92f1dc6389bdfadb9d8ecedb",
+   "tests": 0,
+   "skips": 0
+  },
+  "testflight-build1-stability.test.mjs": {
+   "sha256": "0b0c807fd7db365c02502766915d47cb59b5532a241888c4340cc6773aa6c691",
+   "tests": 4,
+   "skips": 0
+  },
+  "three-cushion-clarity.test.mjs": {
+   "sha256": "c1d4e4479aa44c43dac1b0d70f06764eb177d8e626b79cb082717d112159c07a",
+   "tests": 0,
+   "skips": 0
+  },
+  "three-cushion-undo.test.mjs": {
+   "sha256": "2716f2cce747089c7c974821f35546f3249d596424dbe055e252d46425e39879",
+   "tests": 0,
+   "skips": 0
+  },
+  "ui-revision-v12.test.mjs": {
+   "sha256": "271ca9008d8c0b014b90eb3d755dfba8976eb5cf37773359eb8f026177cb78e1",
+   "tests": 9,
+   "skips": 0
+  },
+  "ui-unification-player-detail-bugfix.test.mjs": {
+   "sha256": "767321a69c0f12fd2e8d5c3c6d4c69b0858c98393c4502e7d51be614d7442b03",
+   "tests": 0,
+   "skips": 0
+  }
+ }
+}

@@ -1,0 +1,1586 @@
+{
+ "9ball": {
+  "improved": {
+   "metrics": [
+    {
+     "key": "shotRate",
+     "label": "シュート率",
+     "suffix": "%",
+     "digits": 0,
+     "higher": true,
+     "improve": "シュート精度は改善傾向",
+     "worsen": "シュート精度は低下傾向",
+     "goal": "シュート成功率を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "masuwari",
+     "label": "マス割",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "マス割は増加傾向",
+     "worsen": "マス割は減少傾向",
+     "goal": "取り切りまでの配置を振り返りましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "improved"
+    }
+   ],
+   "winDirection": "improved",
+   "improved": 4,
+   "worsened": 0,
+   "mixed": false,
+   "status": "改善傾向",
+   "conclusions": [
+    "シュート精度は改善傾向",
+    "マス割は増加傾向",
+    "ファールは減少傾向"
+   ]
+  },
+  "worsened": {
+   "metrics": [
+    {
+     "key": "shotRate",
+     "label": "シュート率",
+     "suffix": "%",
+     "digits": 0,
+     "higher": true,
+     "improve": "シュート精度は改善傾向",
+     "worsen": "シュート精度は低下傾向",
+     "goal": "シュート成功率を前期間以上へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "masuwari",
+     "label": "マス割",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "マス割は増加傾向",
+     "worsen": "マス割は減少傾向",
+     "goal": "取り切りまでの配置を振り返りましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "worsened"
+    }
+   ],
+   "winDirection": "worsened",
+   "improved": 0,
+   "worsened": 4,
+   "mixed": false,
+   "status": "要調整",
+   "conclusions": [
+    "シュート精度は低下傾向",
+    "マス割は減少傾向",
+    "ファールは増加傾向"
+   ]
+  },
+  "same": {
+   "metrics": [
+    {
+     "key": "shotRate",
+     "label": "シュート率",
+     "suffix": "%",
+     "digits": 0,
+     "higher": true,
+     "improve": "シュート精度は改善傾向",
+     "worsen": "シュート精度は低下傾向",
+     "goal": "シュート成功率を前期間以上へ戻しましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    },
+    {
+     "key": "masuwari",
+     "label": "マス割",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "マス割は増加傾向",
+     "worsen": "マス割は減少傾向",
+     "goal": "取り切りまでの配置を振り返りましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    }
+   ],
+   "winDirection": "flat",
+   "improved": 0,
+   "worsened": 0,
+   "mixed": false,
+   "status": "安定",
+   "conclusions": [
+    "競技別指標は前期間と同水準"
+   ]
+  },
+  "insufficient": {
+   "metrics": [
+    {
+     "key": "shotRate",
+     "label": "シュート率",
+     "suffix": "%",
+     "digits": 0,
+     "higher": true,
+     "improve": "シュート精度は改善傾向",
+     "worsen": "シュート精度は低下傾向",
+     "goal": "シュート成功率を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "na"
+    },
+    {
+     "key": "masuwari",
+     "label": "マス割",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "マス割は増加傾向",
+     "worsen": "マス割は減少傾向",
+     "goal": "取り切りまでの配置を振り返りましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "na"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "na"
+    }
+   ],
+   "winDirection": "na",
+   "improved": 0,
+   "worsened": 0,
+   "mixed": false,
+   "status": "蓄積中",
+   "conclusions": [
+    "比較に必要な試合データを蓄積中"
+   ]
+  },
+  "mixed": {
+   "metrics": [
+    {
+     "key": "shotRate",
+     "label": "シュート率",
+     "suffix": "%",
+     "digits": 0,
+     "higher": true,
+     "improve": "シュート精度は改善傾向",
+     "worsen": "シュート精度は低下傾向",
+     "goal": "シュート成功率を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "masuwari",
+     "label": "マス割",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "マス割は増加傾向",
+     "worsen": "マス割は減少傾向",
+     "goal": "取り切りまでの配置を振り返りましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "worsened"
+    }
+   ],
+   "winDirection": "flat",
+   "improved": 1,
+   "worsened": 2,
+   "mixed": true,
+   "status": "安定",
+   "conclusions": [
+    "シュート精度は改善傾向",
+    "マス割は減少傾向",
+    "ファールは増加傾向",
+    "改善と悪化が混在しているため、全体として断定しません"
+   ]
+  }
+ },
+ "10ball": {
+  "improved": {
+   "metrics": [
+    {
+     "key": "shotRate",
+     "label": "シュート率",
+     "suffix": "%",
+     "digits": 0,
+     "higher": true,
+     "improve": "シュート精度は改善傾向",
+     "worsen": "シュート精度は低下傾向",
+     "goal": "シュート成功率を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "masuwari",
+     "label": "マス割",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "マス割は増加傾向",
+     "worsen": "マス割は減少傾向",
+     "goal": "取り切りまでの配置を振り返りましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "improved"
+    }
+   ],
+   "winDirection": "improved",
+   "improved": 4,
+   "worsened": 0,
+   "mixed": false,
+   "status": "改善傾向",
+   "conclusions": [
+    "シュート精度は改善傾向",
+    "マス割は増加傾向",
+    "ファールは減少傾向"
+   ]
+  },
+  "worsened": {
+   "metrics": [
+    {
+     "key": "shotRate",
+     "label": "シュート率",
+     "suffix": "%",
+     "digits": 0,
+     "higher": true,
+     "improve": "シュート精度は改善傾向",
+     "worsen": "シュート精度は低下傾向",
+     "goal": "シュート成功率を前期間以上へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "masuwari",
+     "label": "マス割",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "マス割は増加傾向",
+     "worsen": "マス割は減少傾向",
+     "goal": "取り切りまでの配置を振り返りましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "worsened"
+    }
+   ],
+   "winDirection": "worsened",
+   "improved": 0,
+   "worsened": 4,
+   "mixed": false,
+   "status": "要調整",
+   "conclusions": [
+    "シュート精度は低下傾向",
+    "マス割は減少傾向",
+    "ファールは増加傾向"
+   ]
+  },
+  "same": {
+   "metrics": [
+    {
+     "key": "shotRate",
+     "label": "シュート率",
+     "suffix": "%",
+     "digits": 0,
+     "higher": true,
+     "improve": "シュート精度は改善傾向",
+     "worsen": "シュート精度は低下傾向",
+     "goal": "シュート成功率を前期間以上へ戻しましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    },
+    {
+     "key": "masuwari",
+     "label": "マス割",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "マス割は増加傾向",
+     "worsen": "マス割は減少傾向",
+     "goal": "取り切りまでの配置を振り返りましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    }
+   ],
+   "winDirection": "flat",
+   "improved": 0,
+   "worsened": 0,
+   "mixed": false,
+   "status": "安定",
+   "conclusions": [
+    "競技別指標は前期間と同水準"
+   ]
+  },
+  "insufficient": {
+   "metrics": [
+    {
+     "key": "shotRate",
+     "label": "シュート率",
+     "suffix": "%",
+     "digits": 0,
+     "higher": true,
+     "improve": "シュート精度は改善傾向",
+     "worsen": "シュート精度は低下傾向",
+     "goal": "シュート成功率を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "na"
+    },
+    {
+     "key": "masuwari",
+     "label": "マス割",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "マス割は増加傾向",
+     "worsen": "マス割は減少傾向",
+     "goal": "取り切りまでの配置を振り返りましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "na"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "na"
+    }
+   ],
+   "winDirection": "na",
+   "improved": 0,
+   "worsened": 0,
+   "mixed": false,
+   "status": "蓄積中",
+   "conclusions": [
+    "比較に必要な試合データを蓄積中"
+   ]
+  },
+  "mixed": {
+   "metrics": [
+    {
+     "key": "shotRate",
+     "label": "シュート率",
+     "suffix": "%",
+     "digits": 0,
+     "higher": true,
+     "improve": "シュート精度は改善傾向",
+     "worsen": "シュート精度は低下傾向",
+     "goal": "シュート成功率を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "masuwari",
+     "label": "マス割",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "マス割は増加傾向",
+     "worsen": "マス割は減少傾向",
+     "goal": "取り切りまでの配置を振り返りましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "worsened"
+    }
+   ],
+   "winDirection": "flat",
+   "improved": 1,
+   "worsened": 2,
+   "mixed": true,
+   "status": "安定",
+   "conclusions": [
+    "シュート精度は改善傾向",
+    "マス割は減少傾向",
+    "ファールは増加傾向",
+    "改善と悪化が混在しているため、全体として断定しません"
+   ]
+  }
+ },
+ "rotation": {
+  "improved": {
+   "metrics": [
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "shotRate",
+     "label": "シュート率",
+     "suffix": "%",
+     "digits": 0,
+     "higher": true,
+     "improve": "シュート精度は改善傾向",
+     "worsen": "シュート精度は低下傾向",
+     "goal": "シュート成功率を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "improved"
+    }
+   ],
+   "winDirection": "improved",
+   "improved": 4,
+   "worsened": 0,
+   "mixed": false,
+   "status": "改善傾向",
+   "conclusions": [
+    "ハイランは改善傾向",
+    "シュート精度は改善傾向",
+    "ファールは減少傾向"
+   ]
+  },
+  "worsened": {
+   "metrics": [
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "shotRate",
+     "label": "シュート率",
+     "suffix": "%",
+     "digits": 0,
+     "higher": true,
+     "improve": "シュート精度は改善傾向",
+     "worsen": "シュート精度は低下傾向",
+     "goal": "シュート成功率を前期間以上へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "worsened"
+    }
+   ],
+   "winDirection": "worsened",
+   "improved": 0,
+   "worsened": 4,
+   "mixed": false,
+   "status": "要調整",
+   "conclusions": [
+    "ハイランは低下傾向",
+    "シュート精度は低下傾向",
+    "ファールは増加傾向"
+   ]
+  },
+  "same": {
+   "metrics": [
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    },
+    {
+     "key": "shotRate",
+     "label": "シュート率",
+     "suffix": "%",
+     "digits": 0,
+     "higher": true,
+     "improve": "シュート精度は改善傾向",
+     "worsen": "シュート精度は低下傾向",
+     "goal": "シュート成功率を前期間以上へ戻しましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    }
+   ],
+   "winDirection": "flat",
+   "improved": 0,
+   "worsened": 0,
+   "mixed": false,
+   "status": "安定",
+   "conclusions": [
+    "競技別指標は前期間と同水準"
+   ]
+  },
+  "insufficient": {
+   "metrics": [
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "na"
+    },
+    {
+     "key": "shotRate",
+     "label": "シュート率",
+     "suffix": "%",
+     "digits": 0,
+     "higher": true,
+     "improve": "シュート精度は改善傾向",
+     "worsen": "シュート精度は低下傾向",
+     "goal": "シュート成功率を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "na"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "na"
+    }
+   ],
+   "winDirection": "na",
+   "improved": 0,
+   "worsened": 0,
+   "mixed": false,
+   "status": "蓄積中",
+   "conclusions": [
+    "比較に必要な試合データを蓄積中"
+   ]
+  },
+  "mixed": {
+   "metrics": [
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "shotRate",
+     "label": "シュート率",
+     "suffix": "%",
+     "digits": 0,
+     "higher": true,
+     "improve": "シュート精度は改善傾向",
+     "worsen": "シュート精度は低下傾向",
+     "goal": "シュート成功率を前期間以上へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "worsened"
+    }
+   ],
+   "winDirection": "flat",
+   "improved": 1,
+   "worsened": 2,
+   "mixed": true,
+   "status": "安定",
+   "conclusions": [
+    "ハイランは改善傾向",
+    "シュート精度は低下傾向",
+    "ファールは増加傾向",
+    "改善と悪化が混在しているため、全体として断定しません"
+   ]
+  }
+ },
+ "jpa9": {
+  "improved": {
+   "metrics": [
+    {
+     "key": "average",
+     "label": "アベレージ",
+     "suffix": "",
+     "digits": 2,
+     "higher": true,
+     "improve": "アベレージは改善傾向",
+     "worsen": "アベレージは低下傾向",
+     "goal": "1イニングあたりの得点を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "improved"
+    }
+   ],
+   "winDirection": "improved",
+   "improved": 4,
+   "worsened": 0,
+   "mixed": false,
+   "status": "改善傾向",
+   "conclusions": [
+    "アベレージは改善傾向",
+    "ハイランは改善傾向",
+    "ファールは減少傾向"
+   ]
+  },
+  "worsened": {
+   "metrics": [
+    {
+     "key": "average",
+     "label": "アベレージ",
+     "suffix": "",
+     "digits": 2,
+     "higher": true,
+     "improve": "アベレージは改善傾向",
+     "worsen": "アベレージは低下傾向",
+     "goal": "1イニングあたりの得点を前期間以上へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "worsened"
+    }
+   ],
+   "winDirection": "worsened",
+   "improved": 0,
+   "worsened": 4,
+   "mixed": false,
+   "status": "要調整",
+   "conclusions": [
+    "アベレージは低下傾向",
+    "ハイランは低下傾向",
+    "ファールは増加傾向"
+   ]
+  },
+  "same": {
+   "metrics": [
+    {
+     "key": "average",
+     "label": "アベレージ",
+     "suffix": "",
+     "digits": 2,
+     "higher": true,
+     "improve": "アベレージは改善傾向",
+     "worsen": "アベレージは低下傾向",
+     "goal": "1イニングあたりの得点を前期間以上へ戻しましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    },
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    }
+   ],
+   "winDirection": "flat",
+   "improved": 0,
+   "worsened": 0,
+   "mixed": false,
+   "status": "安定",
+   "conclusions": [
+    "競技別指標は前期間と同水準"
+   ]
+  },
+  "insufficient": {
+   "metrics": [
+    {
+     "key": "average",
+     "label": "アベレージ",
+     "suffix": "",
+     "digits": 2,
+     "higher": true,
+     "improve": "アベレージは改善傾向",
+     "worsen": "アベレージは低下傾向",
+     "goal": "1イニングあたりの得点を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "na"
+    },
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "na"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "na"
+    }
+   ],
+   "winDirection": "na",
+   "improved": 0,
+   "worsened": 0,
+   "mixed": false,
+   "status": "蓄積中",
+   "conclusions": [
+    "比較に必要な試合データを蓄積中"
+   ]
+  },
+  "mixed": {
+   "metrics": [
+    {
+     "key": "average",
+     "label": "アベレージ",
+     "suffix": "",
+     "digits": 2,
+     "higher": true,
+     "improve": "アベレージは改善傾向",
+     "worsen": "アベレージは低下傾向",
+     "goal": "1イニングあたりの得点を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "worsened"
+    }
+   ],
+   "winDirection": "flat",
+   "improved": 1,
+   "worsened": 2,
+   "mixed": true,
+   "status": "安定",
+   "conclusions": [
+    "アベレージは改善傾向",
+    "ハイランは低下傾向",
+    "ファールは増加傾向",
+    "改善と悪化が混在しているため、全体として断定しません"
+   ]
+  }
+ },
+ "straightPool": {
+  "improved": {
+   "metrics": [
+    {
+     "key": "average",
+     "label": "アベレージ",
+     "suffix": "",
+     "digits": 2,
+     "higher": true,
+     "improve": "アベレージは改善傾向",
+     "worsen": "アベレージは低下傾向",
+     "goal": "1イニングあたりの得点を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "improved"
+    }
+   ],
+   "winDirection": "improved",
+   "improved": 4,
+   "worsened": 0,
+   "mixed": false,
+   "status": "改善傾向",
+   "conclusions": [
+    "アベレージは改善傾向",
+    "ハイランは改善傾向",
+    "ファールは減少傾向"
+   ]
+  },
+  "worsened": {
+   "metrics": [
+    {
+     "key": "average",
+     "label": "アベレージ",
+     "suffix": "",
+     "digits": 2,
+     "higher": true,
+     "improve": "アベレージは改善傾向",
+     "worsen": "アベレージは低下傾向",
+     "goal": "1イニングあたりの得点を前期間以上へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "worsened"
+    }
+   ],
+   "winDirection": "worsened",
+   "improved": 0,
+   "worsened": 4,
+   "mixed": false,
+   "status": "要調整",
+   "conclusions": [
+    "アベレージは低下傾向",
+    "ハイランは低下傾向",
+    "ファールは増加傾向"
+   ]
+  },
+  "same": {
+   "metrics": [
+    {
+     "key": "average",
+     "label": "アベレージ",
+     "suffix": "",
+     "digits": 2,
+     "higher": true,
+     "improve": "アベレージは改善傾向",
+     "worsen": "アベレージは低下傾向",
+     "goal": "1イニングあたりの得点を前期間以上へ戻しましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    },
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    }
+   ],
+   "winDirection": "flat",
+   "improved": 0,
+   "worsened": 0,
+   "mixed": false,
+   "status": "安定",
+   "conclusions": [
+    "競技別指標は前期間と同水準"
+   ]
+  },
+  "insufficient": {
+   "metrics": [
+    {
+     "key": "average",
+     "label": "アベレージ",
+     "suffix": "",
+     "digits": 2,
+     "higher": true,
+     "improve": "アベレージは改善傾向",
+     "worsen": "アベレージは低下傾向",
+     "goal": "1イニングあたりの得点を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "na"
+    },
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "na"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "na"
+    }
+   ],
+   "winDirection": "na",
+   "improved": 0,
+   "worsened": 0,
+   "mixed": false,
+   "status": "蓄積中",
+   "conclusions": [
+    "比較に必要な試合データを蓄積中"
+   ]
+  },
+  "mixed": {
+   "metrics": [
+    {
+     "key": "average",
+     "label": "アベレージ",
+     "suffix": "",
+     "digits": 2,
+     "higher": true,
+     "improve": "アベレージは改善傾向",
+     "worsen": "アベレージは低下傾向",
+     "goal": "1イニングあたりの得点を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "worsened"
+    }
+   ],
+   "winDirection": "flat",
+   "improved": 1,
+   "worsened": 2,
+   "mixed": true,
+   "status": "安定",
+   "conclusions": [
+    "アベレージは改善傾向",
+    "ハイランは低下傾向",
+    "ファールは増加傾向",
+    "改善と悪化が混在しているため、全体として断定しません"
+   ]
+  }
+ },
+ "threeCushion": {
+  "improved": {
+   "metrics": [
+    {
+     "key": "average",
+     "label": "アベレージ",
+     "suffix": "",
+     "digits": 3,
+     "higher": true,
+     "improve": "アベレージは改善傾向",
+     "worsen": "アベレージは低下傾向",
+     "goal": "1イニングあたりの得点を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "improved"
+    }
+   ],
+   "winDirection": "improved",
+   "improved": 4,
+   "worsened": 0,
+   "mixed": false,
+   "status": "改善傾向",
+   "conclusions": [
+    "アベレージは改善傾向",
+    "ハイランは改善傾向",
+    "ファールは減少傾向"
+   ]
+  },
+  "worsened": {
+   "metrics": [
+    {
+     "key": "average",
+     "label": "アベレージ",
+     "suffix": "",
+     "digits": 3,
+     "higher": true,
+     "improve": "アベレージは改善傾向",
+     "worsen": "アベレージは低下傾向",
+     "goal": "1イニングあたりの得点を前期間以上へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "worsened"
+    }
+   ],
+   "winDirection": "worsened",
+   "improved": 0,
+   "worsened": 4,
+   "mixed": false,
+   "status": "要調整",
+   "conclusions": [
+    "アベレージは低下傾向",
+    "ハイランは低下傾向",
+    "ファールは増加傾向"
+   ]
+  },
+  "same": {
+   "metrics": [
+    {
+     "key": "average",
+     "label": "アベレージ",
+     "suffix": "",
+     "digits": 3,
+     "higher": true,
+     "improve": "アベレージは改善傾向",
+     "worsen": "アベレージは低下傾向",
+     "goal": "1イニングあたりの得点を前期間以上へ戻しましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    },
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 10,
+     "previous": 10,
+     "direction": "flat"
+    }
+   ],
+   "winDirection": "flat",
+   "improved": 0,
+   "worsened": 0,
+   "mixed": false,
+   "status": "安定",
+   "conclusions": [
+    "競技別指標は前期間と同水準"
+   ]
+  },
+  "insufficient": {
+   "metrics": [
+    {
+     "key": "average",
+     "label": "アベレージ",
+     "suffix": "",
+     "digits": 3,
+     "higher": true,
+     "improve": "アベレージは改善傾向",
+     "worsen": "アベレージは低下傾向",
+     "goal": "1イニングあたりの得点を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "na"
+    },
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "na"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "na"
+    }
+   ],
+   "winDirection": "na",
+   "improved": 0,
+   "worsened": 0,
+   "mixed": false,
+   "status": "蓄積中",
+   "conclusions": [
+    "比較に必要な試合データを蓄積中"
+   ]
+  },
+  "mixed": {
+   "metrics": [
+    {
+     "key": "average",
+     "label": "アベレージ",
+     "suffix": "",
+     "digits": 3,
+     "higher": true,
+     "improve": "アベレージは改善傾向",
+     "worsen": "アベレージは低下傾向",
+     "goal": "1イニングあたりの得点を前期間以上へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "improved"
+    },
+    {
+     "key": "highRun",
+     "label": "ハイラン",
+     "suffix": "",
+     "digits": 0,
+     "higher": true,
+     "improve": "ハイランは改善傾向",
+     "worsen": "ハイランは低下傾向",
+     "goal": "連続得点につながった配置を振り返りましょう",
+     "current": 8,
+     "previous": 10,
+     "direction": "worsened"
+    },
+    {
+     "key": "avgFouls",
+     "label": "平均ファール",
+     "suffix": "",
+     "digits": 1,
+     "higher": false,
+     "improve": "ファールは減少傾向",
+     "worsen": "ファールは増加傾向",
+     "goal": "平均ファールを前期間以下へ戻しましょう",
+     "current": 12,
+     "previous": 10,
+     "direction": "worsened"
+    }
+   ],
+   "winDirection": "flat",
+   "improved": 1,
+   "worsened": 2,
+   "mixed": true,
+   "status": "安定",
+   "conclusions": [
+    "アベレージは改善傾向",
+    "ハイランは低下傾向",
+    "ファールは増加傾向",
+    "改善と悪化が混在しているため、全体として断定しません"
+   ]
+  }
+ }
+}

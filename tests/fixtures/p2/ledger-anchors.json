@@ -1,0 +1,1074 @@
+[
+ {
+  "id": "P2L-001",
+  "area": "C",
+  "file": "demo-data.js",
+  "line": 112,
+  "snippet": "events.push(\"break_result\",breaker,inning,rack,{breakPlayer:breaker,resultLabel:scratch?\"スクラッチ\":breakFoul?\"ブレイクファール\":dry?\"無得点\":`${breakCount",
+  "function": "demo records"
+ },
+ {
+  "id": "P2L-002",
+  "area": "C",
+  "file": "i18n-v1.js",
+  "line": 233,
+  "snippet": "\"無得点\":\"mapper.resultLabel.noScore\",\"1個\":\"mapper.resultLabel.one\",\"2個以上\":\"mapper.resultLabel.twoOrMore\",",
+  "function": "mapResultLabel / RESULT_LABEL_KEYS"
+ },
+ {
+  "id": "P2L-003",
+  "area": "C",
+  "file": "index.html",
+  "line": 12378,
+  "snippet": "const BREAK_RESULT_LABELS_V61 = {",
+  "function": "BREAK_RESULT_LABELS_V61"
+ },
+ {
+  "id": "P2L-004",
+  "area": "C",
+  "file": "index.html",
+  "line": 12888,
+  "snippet": "resultLabel: decision.preBreakFoul ? \"ファール（ブレイク交代）\" : decision.scratch ? \"スクラッチ\" : decision.illegalBreak ? \"イリーガル\" : decision.pocketedBalls.",
+  "function": "break_result event builder (inside the break-result save path)"
+ },
+ {
+  "id": "P2L-005",
+  "area": "C",
+  "file": "index.html",
+  "line": 13091,
+  "snippet": "const breakScored = breakEvents.filter(e => ['1個','2個','2個以上','3個以上'].includes(String(e?.resultLabel || e?.result || ''))).length;",
+  "function": "buildPlayerMatchAnalysisV64"
+ },
+ {
+  "id": "P2L-006",
+  "area": "C",
+  "file": "index.html",
+  "line": 13092,
+  "snippet": "const breakNoScore = breakEvents.filter(e => String(e?.resultLabel || e?.result || '') === '無得点').length;",
+  "function": "buildPlayerMatchAnalysisV64"
+ },
+ {
+  "id": "P2L-007",
+  "area": "C",
+  "file": "index.html",
+  "line": 13093,
+  "snippet": "const breakTrouble = breakEvents.filter(e => e?.scratch || e?.breakFailed || e?.breakFoul || e?.illegalBreak || ['スクラッチ','ブレイク失敗','ブレイクファール'",
+  "function": "buildPlayerMatchAnalysisV64"
+ },
+ {
+  "id": "P2L-008",
+  "area": "C",
+  "file": "index.html",
+  "line": 16526,
+  "snippet": "title:`ブレイク → ${e.resultLabel || e.result || \"記録\"}`,",
+  "function": "match-detail rows builder"
+ },
+ {
+  "id": "P2L-009",
+  "area": "C",
+  "file": "index.html",
+  "line": 16580,
+  "snippet": "const breakScored = breaks.filter(e => [\"1個\",\"2個以上\"].includes(String(e.resultLabel || e.result || \"\"))).length;",
+  "function": "playerCard (analysis dashboard)"
+ },
+ {
+  "id": "P2L-010",
+  "area": "C",
+  "file": "index.html",
+  "line": 16581,
+  "snippet": "const breakNoScore = breaks.filter(e => String(e.resultLabel || e.result || \"\") === \"無得点\").length;",
+  "function": "playerCard"
+ },
+ {
+  "id": "P2L-011",
+  "area": "C",
+  "file": "index.html",
+  "line": 16582,
+  "snippet": "const breakTrouble = breaks.filter(e => e.scratch || e.breakFailed || [\"スクラッチ\",\"ブレイク失敗\"].includes(String(e.resultLabel || e.result || \"\"))).",
+  "function": "playerCard"
+ },
+ {
+  "id": "P2L-012",
+  "area": "C",
+  "file": "match-sharing-adapters-v1.js",
+  "line": 18,
+  "snippet": "break_result:Object.freeze([1,Object.freeze([\"breakPlayer\",\"resultLabel\",\"pocketCount\",\"pocketedBalls\",\"legalBreak\",\"scratch\",\"breakFoul\",\"i",
+  "function": "break_result field list"
+ },
+ {
+  "id": "P2L-013",
+  "area": "A",
+  "file": "analysis-build4.js",
+  "line": 63,
+  "snippet": "const status=current.games<3?\"データ蓄積中\":previous.games<3?\"安定\":current.winRate>previous.winRate?\"改善傾向\":current.winRate<previous.winRate?\"要調整\":\"",
+  "function": "render"
+ },
+ {
+  "id": "P2L-014",
+  "area": "A",
+  "file": "analysis-final-rc.js",
+  "line": 54,
+  "snippet": "let status = \"安定\";",
+  "function": "evaluate"
+ },
+ {
+  "id": "P2L-015",
+  "area": "A",
+  "file": "analysis-final-rc.js",
+  "line": 102,
+  "snippet": "status.classList.toggle(\"attention\", result.status === \"要調整\");",
+  "function": "render (status badge)"
+ },
+ {
+  "id": "P2L-016",
+  "area": "A",
+  "file": "analysis-final-rc.js",
+  "line": 106,
+  "snippet": "if (change) change.innerHTML = result.conclusions.map(text => `<span class=\"${text.includes(\"増加傾向\") || text.includes(\"低下傾向\") ? \"attention\" :",
+  "function": "render (change summary)"
+ },
+ {
+  "id": "P2L-017",
+  "area": "A",
+  "file": "index.html",
+  "line": 9557,
+  "snippet": "/quota|storage quota|保存容量が不足/i.test(String(currentError.message || \"\"))",
+  "function": "isQuotaExceededErrorV160"
+ },
+ {
+  "id": "P2L-018",
+  "area": "A",
+  "file": "index.html",
+  "line": 10592,
+  "snippet": "const status=score>=2?'成長傾向':score<=-2?'要調整':'ほぼ横ばい';",
+  "function": "summarize (growth analysis)"
+ },
+ {
+  "id": "P2L-019",
+  "area": "A",
+  "file": "index.html",
+  "line": 10697,
+  "snippet": "if(growth?.ready && ups>=3 && ups>downs){status='好調';tone='good';}",
+  "function": "buildRionCoachV760"
+ },
+ {
+  "id": "P2L-020",
+  "area": "A",
+  "file": "index.html",
+  "line": 10713,
+  "snippet": "return {ready:true,status,tone,comment,task:insight.focus||'同じ条件で記録を続けましょう。',ratings:[",
+  "function": "buildRionCoachV760 ratings"
+ },
+ {
+  "id": "P2L-021",
+  "area": "A",
+  "file": "index.html",
+  "line": 10818,
+  "snippet": "const threshold = Math.max(label.includes(\"率\") ? 2 : 0.3, scale * 0.04);",
+  "function": "trend text builder (growth/trend sentence)"
+ },
+ {
+  "id": "P2L-022",
+  "area": "A",
+  "file": "index.html",
+  "line": 14210,
+  "snippet": "overlay.classList.toggle(\"straight-pool-rerack-modal-v18\",notice.title===\"14ボールラック\");",
+  "function": "showNextStraightPoolNoticeV1"
+ },
+ {
+  "id": "P2L-023",
+  "area": "A",
+  "file": "index.html",
+  "line": 14736,
+  "snippet": "name: \"Free\",",
+  "function": "initializeClassificationsV38"
+ },
+ {
+  "id": "P2L-024",
+  "area": "A",
+  "file": "index.html",
+  "line": 14742,
+  "snippet": ".filter(item => ![\"JPA\", \"KTCリーグ\", \"練習試合\"].includes(String(item.name || \"\").trim()))",
+  "function": "initializeClassificationsV38"
+ },
+ {
+  "id": "P2L-025",
+  "area": "A",
+  "file": "index.html",
+  "line": 14750,
+  "snippet": "if (!categories.some(item => item.name === \"大会\")) {",
+  "function": "initializeClassificationsV38"
+ },
+ {
+  "id": "P2L-026",
+  "area": "A",
+  "file": "index.html",
+  "line": 14883,
+  "snippet": "if ([\"Free\", \"JPA\", \"KTCリーグ\", \"練習試合\"].includes(name)) {",
+  "function": "addCategoryV381"
+ },
+ {
+  "id": "P2L-027",
+  "area": "A",
+  "file": "index.html",
+  "line": 23075,
+  "snippet": "if (/保存中|更新中|確認中/.test(label)) {",
+  "function": "recoverStaleControlsV160"
+ },
+ {
+  "id": "P2L-028",
+  "area": "A",
+  "file": "index.html",
+  "line": 25968,
+  "snippet": "const rating = Array.isArray(coach?.ratings) ? coach.ratings.find(item => item?.[0] === \"勝ち切る力\")?.[1] : null;",
+  "function": "analytics view (rating pick)"
+ },
+ {
+  "id": "P2L-029",
+  "area": "A",
+  "file": "index.html",
+  "line": 27412,
+  "snippet": "const editing=document.getElementById(\"playerLibraryTitle\")?.textContent.includes(\"編集\");",
+  "function": "syncPlayerModal"
+ },
+ {
+  "id": "P2L-030",
+  "area": "A",
+  "file": "index.html",
+  "line": 29429,
+  "snippet": "const match=target.match(/前の(\\d+)試合/);",
+  "function": "enforce (analysis v2 guard)"
+ },
+ {
+  "id": "P2L-031",
+  "area": "A",
+  "file": "index.html",
+  "line": 29431,
+  "snippet": "if(playerView.querySelector(\".analysis-v2-status\")?.textContent===\"蓄積中\"&&playerView.querySelector(\".analysis-v2-change\")?.textContent?.start",
+  "function": "enforce"
+ },
+ {
+  "id": "P2L-032",
+  "area": "A",
+  "file": "navigation-phase2-6.js",
+  "line": 71,
+  "snippet": "const status=current.games<3?\"データ蓄積中\":previous.games<3?\"安定\":current.winRate>previous.winRate?\"改善傾向\":current.winRate<previous.winRate?\"要調整\":\"",
+  "function": "analysisView"
+ },
+ {
+  "id": "P2L-033",
+  "area": "A",
+  "file": "navigation-shell-phase1.js",
+  "line": 115,
+  "snippet": "if(state.active===\"player\"&&title?.textContent===\"プレーヤー一覧\")title.textContent=window.cueT(\"player.title\"); // P2: replace this display-text c",
+  "function": "reconcile (title fix)"
+ },
+ {
+  "id": "P2L-034",
+  "area": "A",
+  "file": "ui-revision-v12.js",
+  "line": 59,
+  "snippet": "if([\"rotation\",\"straightPool\",\"jpa9\"].includes(active))body.querySelectorAll(\".pd7-best\").forEach(card=>{if(card.textContent.includes(\"1試合最高",
+  "function": "reviseDetail"
+ },
+ {
+  "id": "P2L-035",
+  "area": "F",
+  "file": "index.html",
+  "line": 10211,
+  "snippet": "const normalizedName = String(source.name || \"\").trim().toLocaleLowerCase(\"ja\");",
+  "function": "historicalPlayerProfile"
+ },
+ {
+  "id": "P2L-036",
+  "area": "F",
+  "file": "index.html",
+  "line": 10214,
+  "snippet": ": registeredPlayers.find(player => String(player?.name || \"\").trim().toLocaleLowerCase(\"ja\") === normalizedName);",
+  "function": "historicalPlayerProfile"
+ },
+ {
+  "id": "P2L-037",
+  "area": "F",
+  "file": "index.html",
+  "line": 10361,
+  "snippet": "const query = (el(\"playerLibrarySearch\")?.value || \"\").trim().toLocaleLowerCase(\"ja\");",
+  "function": "renderPlayerLibrary (search)"
+ },
+ {
+  "id": "P2L-038",
+  "area": "F",
+  "file": "index.html",
+  "line": 10363,
+  "snippet": ".filter(p => !query || p.name.toLocaleLowerCase(\"ja\").includes(query))",
+  "function": "renderPlayerLibrary (search)"
+ },
+ {
+  "id": "P2L-039",
+  "area": "F",
+  "file": "index.html",
+  "line": 10406,
+  "snippet": "const normalizedName = String(player.name || \"\").trim().toLocaleLowerCase(\"ja\");",
+  "function": "recordsForRegisteredPlayer"
+ },
+ {
+  "id": "P2L-040",
+  "area": "F",
+  "file": "index.html",
+  "line": 10410,
+  "snippet": "return String(side?.name || \"\").trim().toLocaleLowerCase(\"ja\") === normalizedName;",
+  "function": "matchesPlayer"
+ },
+ {
+  "id": "P2L-041",
+  "area": "F",
+  "file": "index.html",
+  "line": 10427,
+  "snippet": "const name = String(player.name || \"\").trim().toLocaleLowerCase(\"ja\");",
+  "function": "playerSideInRecord"
+ },
+ {
+  "id": "P2L-042",
+  "area": "F",
+  "file": "index.html",
+  "line": 10430,
+  "snippet": "return !registeredId && String(side?.name || \"\").trim().toLocaleLowerCase(\"ja\") === name;",
+  "function": "isLegacyNameMatch"
+ },
+ {
+  "id": "P2L-043",
+  "area": "F",
+  "file": "index.html",
+  "line": 11582,
+  "snippet": "const duplicate = players.find(p => p.name.toLocaleLowerCase(\"ja\") === name.toLocaleLowerCase(\"ja\") && p.id !== editingPlayerId);",
+  "function": "savePlayerFromEditor (duplicate-name check)"
+ },
+ {
+  "id": "P2L-044",
+  "area": "F",
+  "file": "index.html",
+  "line": 16748,
+  "snippet": "return String(value || \"\").toLocaleLowerCase(\"ja\").replace(/\\s+/g, \" \").trim();",
+  "function": "normalizeRecordSearchText"
+ },
+ {
+  "id": "P2L-045",
+  "area": "F",
+  "file": "index.html",
+  "line": 17102,
+  "snippet": "const query = (el(\"playerLibrarySearch\")?.value || \"\").trim().toLocaleLowerCase(\"ja\");",
+  "function": "playerRecordTimeV1 (search)"
+ },
+ {
+  "id": "P2L-046",
+  "area": "F",
+  "file": "index.html",
+  "line": 17114,
+  "snippet": ".filter(row => !query || row.player.name.toLocaleLowerCase(\"ja\").includes(query))",
+  "function": "playerRecordTimeV1 (search)"
+ },
+ {
+  "id": "P2L-047",
+  "area": "F",
+  "file": "index.html",
+  "line": 19586,
+  "snippet": "const registeredByName = new Map(registeredPlayers.map(p => [String(p.name).trim().toLocaleLowerCase(\"ja\"), p]));",
+  "function": "aggregate (registeredByName map)"
+ },
+ {
+  "id": "P2L-048",
+  "area": "F",
+  "file": "index.html",
+  "line": 19594,
+  "snippet": "const registered = id ? registeredById.get(id) : registeredByName.get(name.toLocaleLowerCase(\"ja\"));",
+  "function": "aggregate"
+ },
+ {
+  "id": "P2L-049",
+  "area": "F",
+  "file": "index.html",
+  "line": 27160,
+  "snippet": "function normalizeText(value){return String(value??\"\").normalize(\"NFKC\").trim().replace(/\\s+/g,\" \").toLocaleLowerCase(\"ja\")}",
+  "function": "normalizeText"
+ },
+ {
+  "id": "P2L-050",
+  "area": "F",
+  "file": "match-sharing-persistence-v1.js",
+  "line": 116,
+  "snippet": "const normalizeText=value=>String(value??\"\").normalize(\"NFKC\").trim().replace(/\\s+/g,\" \").toLocaleLowerCase(\"ja\");",
+  "function": "normalizeText"
+ },
+ {
+  "id": "P2L-051",
+  "area": "F",
+  "file": "match-sharing-player-drafts-v1.js",
+  "line": 17,
+  "snippet": "const nameKey=value=>String(value??\"\").trim().toLocaleLowerCase(\"ja\");",
+  "function": "nameKey"
+ },
+ {
+  "id": "P2L-052",
+  "area": "F",
+  "file": "match-sharing-validation-v1.js",
+  "line": 64,
+  "snippet": "if(FORBIDDEN_KEYS.has(String(key).toLocaleLowerCase(\"en-US\")))fail(\"PRIVACY_FIELD\",`Forbidden field: ${key}`);",
+  "function": "visit"
+ },
+ {
+  "id": "P2L-053",
+  "area": "S",
+  "file": "analytics-build4-metrics.js",
+  "line": 234,
+  "snippet": "return String(a.record.id).localeCompare(String(b.record.id));",
+  "function": "chooseBest"
+ },
+ {
+  "id": "P2L-054",
+  "area": "S",
+  "file": "index.html",
+  "line": 11245,
+  "snippet": ".sort((a, b) => a.key.localeCompare(b.key))",
+  "function": "buildMvpCardV39  [month/key sort]"
+ },
+ {
+  "id": "P2L-055",
+  "area": "S",
+  "file": "index.html",
+  "line": 11253,
+  "snippet": ".sort((a, b) => b.key.localeCompare(a.key))",
+  "function": "buildMvpCardV39  [month/key sort]"
+ },
+ {
+  "id": "P2L-056",
+  "area": "S",
+  "file": "index.html",
+  "line": 11279,
+  "snippet": ".sort((a,b)=>(b.winRate-a.winRate)||(b.games-a.games)||(b.wins-a.wins)||a.name.localeCompare(b.name,\"ja\"))",
+  "function": "buildMvpCardV39  [ranking sort (win rate desc)]"
+ },
+ {
+  "id": "P2L-057",
+  "area": "S",
+  "file": "index.html",
+  "line": 11284,
+  "snippet": ".sort((a,b)=>(a.winRate-b.winRate)||(b.games-a.games)||(b.losses-a.losses)||a.name.localeCompare(b.name,\"ja\"))",
+  "function": "buildMvpCardV39  [ranking sort (win rate asc)]"
+ },
+ {
+  "id": "P2L-058",
+  "area": "S",
+  "file": "index.html",
+  "line": 11288,
+  "snippet": ".sort((a,b)=>(b.games-a.games)||(b.wins-a.wins)||a.name.localeCompare(b.name,\"ja\"))",
+  "function": "buildMvpCardV39  [ranking sort (games)]"
+ },
+ {
+  "id": "P2L-059",
+  "area": "S",
+  "file": "index.html",
+  "line": 11313,
+  "snippet": ".sort((a, b) => (b.games - a.games) || (b.wins - a.wins) || a.name.localeCompare(b.name, \"ja\"))",
+  "function": "buildOpponentRankingRowsV36  [ranking sort]"
+ },
+ {
+  "id": "P2L-060",
+  "area": "S",
+  "file": "index.html",
+  "line": 16758,
+  "snippet": "return timeOrder || String(a.id || \"\").localeCompare(String(b.id || \"\"), \"ja\");",
+  "function": "filteredMatchRecordsV31  [filteredMatchRecordsV3]"
+ },
+ {
+  "id": "P2L-061",
+  "area": "S",
+  "file": "index.html",
+  "line": 16885,
+  "snippet": ")].sort((a, b) => a.localeCompare(b, \"ja\"));",
+  "function": "renderMatchRecords  [category/season options]"
+ },
+ {
+  "id": "P2L-062",
+  "area": "S",
+  "file": "index.html",
+  "line": 18006,
+  "snippet": ".sort((a,b) => String(b.resolvedAt).localeCompare(String(a.resolvedAt)))",
+  "function": "normalizeCloudResolutionHistoryListV144  [cloud history (ISO strings)]"
+ },
+ {
+  "id": "P2L-063",
+  "area": "S",
+  "file": "index.html",
+  "line": 18031,
+  "snippet": ".sort((a,b) => String(b.savedAt).localeCompare(String(a.savedAt)) || String(b.id).localeCompare(String(a.id)))",
+  "function": "normalizeCloudResolutionHistoryRecoveryV145  [cloud history]"
+ },
+ {
+  "id": "P2L-064",
+  "area": "S",
+  "file": "index.html",
+  "line": 18196,
+  "snippet": ".sort((a,b) => String(b.resolvedAt).localeCompare(String(a.resolvedAt)))",
+  "function": "readCloudResolutionHistoryV141  [cloud history]"
+ },
+ {
+  "id": "P2L-065",
+  "area": "S",
+  "file": "index.html",
+  "line": 18293,
+  "snippet": "const merged = [...mergedMap.values()].sort((a,b) => String(b.resolvedAt).localeCompare(String(a.resolvedAt))).slice(0,20);",
+  "function": "importCloudResolutionHistoryFileV142  [cloud history]"
+ },
+ {
+  "id": "P2L-066",
+  "area": "S",
+  "file": "index.html",
+  "line": 18461,
+  "snippet": "const date = new Date(value); return Number.isNaN(date.getTime()) ? \"不明\" : date.toLocaleString(\"ja-JP\");",
+  "function": "formatDate  [cloud date]"
+ },
+ {
+  "id": "P2L-067",
+  "area": "S",
+  "file": "index.html",
+  "line": 19455,
+  "snippet": "const records=rawRecords(),cats=[...new Set(records.map(r=>String(r.category||\"\").trim()).filter(Boolean))].sort((a,b)=>a.localeCompare(b,\"j",
+  "function": "options  [options (category/season sort)]"
+ },
+ {
+  "id": "P2L-068",
+  "area": "S",
+  "file": "index.html",
+  "line": 19458,
+  "snippet": "fill(ids.season,seasons);const players=[...pm.entries()].sort((a,b)=>a[1].localeCompare(b[1],\"ja\"));fill(ids.player,players);fill(ids.oppone",
+  "function": "fill  [fill (player options)]"
+ },
+ {
+  "id": "P2L-069",
+  "area": "S",
+  "file": "index.html",
+  "line": 19634,
+  "snippet": "return a.name.localeCompare(b.name, \"ja\");",
+  "function": "render  [render (opponent list)]"
+ },
+ {
+  "id": "P2L-070",
+  "area": "S",
+  "file": "index.html",
+  "line": 19701,
+  "snippet": "return [...map.values()].sort((a,b)=>a.name.localeCompare(b.name,\"ja\"));",
+  "function": "choices"
+ },
+ {
+  "id": "P2L-071",
+  "area": "S",
+  "file": "index.html",
+  "line": 19749,
+  "snippet": "opponents.sort((a,b)=>(counts.get(b.key)-counts.get(a.key))||a.name.localeCompare(b.name,'ja'));",
+  "function": "populate  [opponents sort]"
+ },
+ {
+  "id": "P2L-072",
+  "area": "S",
+  "file": "index.html",
+  "line": 20709,
+  "snippet": "entries.sort((a, b) => b.bytes - a.bytes || a.key.localeCompare(b.key));",
+  "function": "snapshot  [storage key size sort]"
+ },
+ {
+  "id": "P2L-073",
+  "area": "S",
+  "file": "index.html",
+  "line": 20729,
+  "snippet": "keys.sort((a, b) => keyTimestamp(b) - keyTimestamp(a) || b.localeCompare(a));",
+  "function": "pruneGroup  [storage key sort]"
+ },
+ {
+  "id": "P2L-074",
+  "area": "S",
+  "file": "index.html",
+  "line": 26824,
+  "snippet": "return active.sort((a,b)=>a.name.localeCompare(b.name,\"ja\"));",
+  "function": "choices"
+ },
+ {
+  "id": "P2L-075",
+  "area": "S",
+  "file": "index.html",
+  "line": 26860,
+  "snippet": "return [...groups.entries()].sort((a,b)=>a[0].localeCompare(b[0])).map(([keyLabel,items])=>({label:`${Number(keyLabel.slice(5))}月`,value:sum",
+  "function": "monthly  [monthly (YYYY-MM keys)]"
+ },
+ {
+  "id": "P2L-076",
+  "area": "S",
+  "file": "record-access-v1.js",
+  "line": 9,
+  "snippet": "const stableNewest=(a,b)=>time(b)-time(a)||String(b?.id||b?.matchId||\"\").localeCompare(String(a?.id||a?.matchId||\"\"),\"ja\",{numeric:true});",
+  "function": "stableNewest"
+ },
+ {
+  "id": "P2L-077",
+  "area": "S",
+  "file": "ui-revision-v12.js",
+  "line": 64,
+  "snippet": "const stable=(a,b)=>String(a??\"\").localeCompare(String(b??\"\"),\"ja\",{numeric:true});",
+  "function": "stable"
+ },
+ {
+  "id": "P2L-078",
+  "area": "H",
+  "file": "analysis-build4.js",
+  "line": 33,
+  "snippet": "const recordDate=record=>{const d=new Date(record?.endedAt||record?.playedAt||record?.startedAt||0);return Number.isNaN(d.getTime())?\"日付なし\":",
+  "function": "recordDate"
+ },
+ {
+  "id": "P2L-079",
+  "area": "H",
+  "file": "index.html",
+  "line": 9808,
+  "snippet": "return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,\"0\")}/${String(d.getDate()).padStart(2,\"0\")} ${String(d.getHours()).padStart(",
+  "function": "formatRecordDate  [formatDate-like (record datetime)]"
+ },
+ {
+  "id": "P2L-080",
+  "area": "H",
+  "file": "index.html",
+  "line": 9944,
+  "snippet": "const date=Number.isNaN(ended.getTime())?\"日付なし\":`${ended.getFullYear()}/${String(ended.getMonth()+1).padStart(2,\"0\")}/${String(ended.getDate",
+  "function": "matchSharingFlowSummaryV1  [matchSharingFlowSummary]"
+ },
+ {
+  "id": "P2L-081",
+  "area": "H",
+  "file": "index.html",
+  "line": 10355,
+  "snippet": "return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,\"0\")}/${String(d.getDate()).padStart(2,\"0\")} ${String(d.getHours()).padStart(",
+  "function": "formatLastUsed  [formatPlayerMatchDate]"
+ },
+ {
+  "id": "P2L-082",
+  "area": "H",
+  "file": "index.html",
+  "line": 10523,
+  "snippet": "const year = now.getFullYear();",
+  "function": "filterPlayerStatsRecordsV28  [this-month filter]"
+ },
+ {
+  "id": "P2L-083",
+  "area": "H",
+  "file": "index.html",
+  "line": 11035,
+  "snippet": "const monthKeyV34 = `${recordDateV34.getFullYear()}-${String(recordDateV34.getMonth() + 1).padStart(2, \"0\")}`;",
+  "function": "openPlayerStats  [monthly grouping key]"
+ },
+ {
+  "id": "P2L-084",
+  "area": "H",
+  "file": "index.html",
+  "line": 13520,
+  "snippet": "return `${date.getFullYear()}/${String(date.getMonth()+1).padStart(2,\"0\")}/${String(date.getDate()).padStart(2,\"0\")} ${String(date.getHours(",
+  "function": "inProgressTimeTextV1  [formatResumeDate]"
+ },
+ {
+  "id": "P2L-085",
+  "area": "H",
+  "file": "index.html",
+  "line": 15781,
+  "snippet": "const dateText=validEnd?`${endDate.getFullYear()}/${endDate.getMonth()+1}/${endDate.getDate()}`:\"—\";",
+  "function": "renderOfficialMatchResultV1  [result screen date]"
+ },
+ {
+  "id": "P2L-086",
+  "area": "H",
+  "file": "index.html",
+  "line": 16384,
+  "snippet": "return `${date.getFullYear()}/${month}/${day}（${weekdays[date.getDay()]}）${hour}:${minute}`;",
+  "function": "formatRecordListDate"
+ },
+ {
+  "id": "P2L-087",
+  "area": "H",
+  "file": "index.html",
+  "line": 16630,
+  "snippet": "const dateText = Number.isNaN(ended.getTime()) ? \"----/--/--\" : `${ended.getFullYear()}/${String(ended.getMonth()+1).padStart(2,\"0\")}/${Stri",
+  "function": "openHistoricalRecord  [history card date]"
+ },
+ {
+  "id": "P2L-088",
+  "area": "H",
+  "file": "index.html",
+  "line": 16764,
+  "snippet": "const targetYear = window.recordsSpecificMonthV34?.year ?? now.getFullYear();",
+  "function": "filteredMatchRecordsV31  [specific-month filter]"
+ },
+ {
+  "id": "P2L-089",
+  "area": "H",
+  "file": "index.html",
+  "line": 17489,
+  "snippet": "const dateText = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;",
+  "function": "pad  [formatCsvDateParts (CSV)]"
+ },
+ {
+  "id": "P2L-090",
+  "area": "H",
+  "file": "index.html",
+  "line": 17528,
+  "snippet": "const headers = [",
+  "function": "exportCsv"
+ },
+ {
+  "id": "P2L-091",
+  "area": "H",
+  "file": "index.html",
+  "line": 19813,
+  "snippet": "const dateLabel=dateObj&&!Number.isNaN(dateObj.getTime())?`${dateObj.getMonth()+1}/${dateObj.getDate()}`:'日付なし';",
+  "function": "sideA  [sideA (rival list)]"
+ },
+ {
+  "id": "P2L-092",
+  "area": "H",
+  "file": "index.html",
+  "line": 23320,
+  "snippet": "date:`${date.getFullYear()}/${String(date.getMonth()+1).padStart(2,\"0\")}/${String(date.getDate()).padStart(2,\"0\")}（${weekdays[date.getDay()]",
+  "function": "datePartsV1"
+ },
+ {
+  "id": "P2L-093",
+  "area": "H",
+  "file": "index.html",
+  "line": 26829,
+  "snippet": "function fmtDate(d,short=false){if(!d)return\"\";const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,\"0\"),day=String(d.getDate()).padS",
+  "function": "fmtDate  [fmtDate (analytics)]"
+ },
+ {
+  "id": "P2L-094",
+  "area": "H",
+  "file": "index.html",
+  "line": 26859,
+  "snippet": "const groups=new Map();records.forEach(r=>{const d=dateOf(r),side=sideFor(r,choice);if(!d||!side)return;const k=`${d.getFullYear()}-${String",
+  "function": "monthly  [monthly grouping key]"
+ },
+ {
+  "id": "P2L-095",
+  "area": "H",
+  "file": "index.html",
+  "line": 27068,
+  "snippet": "return date && !Number.isNaN(date.getTime()) ? new Intl.DateTimeFormat(\"ja-JP\",{year:\"numeric\",month:\"2-digit\",day:\"2-digit\",hour:\"2-digit\",",
+  "function": "formatDate  [formatDate (settings/suite)]"
+ },
+ {
+  "id": "P2L-096",
+  "area": "H",
+  "file": "index.html",
+  "line": 29019,
+  "snippet": "function renderHistory(){const p=player(historyState.playerId);if(!p)return;const all=records(p),opponentGroups=rivalGroups(all,p);const sel",
+  "function": "renderHistory  [history this-month filter]"
+ },
+ {
+  "id": "P2L-097",
+  "area": "H",
+  "file": "index.html",
+  "line": 29023,
+  "snippet": "${items.length?[...grouped.entries()].map(([month,rows])=>`<div class=\"journey-month-v2\">${month}</div><div class=\"journey-list-v2\">${rows.m",
+  "function": "renderHistory  [renderHistory (journey)]"
+ },
+ {
+  "id": "P2L-098",
+  "area": "H",
+  "file": "index.html",
+  "line": 29378,
+  "snippet": "function renderHome(){const p=primary(),pRecords=p?recordsFor(p):[],summary=p?recordSummary(pRecords,p):null,latest=pRecords[0]||allRecords(",
+  "function": "renderHome"
+ },
+ {
+  "id": "P2L-099",
+  "area": "H",
+  "file": "index.html",
+  "line": 29382,
+  "snippet": "function renderMatch(){const record=allRecords().find(r=>String(r.id)===String(selectedRecordId))||allRecords()[0];if(!record){viewNode(\"mat",
+  "function": "renderMatch"
+ },
+ {
+  "id": "P2L-100",
+  "area": "H",
+  "file": "navigation-phase2-6.js",
+  "line": 32,
+  "snippet": "const dateText=record=>{const d=new Date(dateValue(record));return dateValue(record)?`${d.getMonth()+1}/${d.getDate()}`:\"日付なし\";};",
+  "function": "dateText"
+ },
+ {
+  "id": "P2L-101",
+  "area": "H",
+  "file": "player-detail-build6.js",
+  "line": 25,
+  "snippet": "const dateText=record=>{const d=new Date(dateValue(record));return dateValue(record)?`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2",
+  "function": "dateText"
+ },
+ {
+  "id": "P2L-102",
+  "area": "G",
+  "file": "index.html",
+  "line": 17343,
+  "snippet": "const BACKUP_FORMAT = \"cuescore-apps-backup\";",
+  "function": "BACKUP_FORMAT / BACKUP_SCHEMA_VERSION"
+ },
+ {
+  "id": "P2L-103",
+  "area": "G",
+  "file": "index.html",
+  "line": 17423,
+  "snippet": "const filename = `CueScore_Apps_v1.0_Backup_${dateStamp()}.json`;",
+  "function": "export backup"
+ },
+ {
+  "id": "P2L-104",
+  "area": "G",
+  "file": "index.html",
+  "line": 17446,
+  "snippet": "dialogTitle: \"バックアップを保存\"",
+  "function": "export backup (Share sheet)"
+ },
+ {
+  "id": "P2L-105",
+  "area": "D",
+  "file": "analysis-build4.js",
+  "line": 83,
+  "snippet": "new MutationObserver(()=>queueMicrotask(render)).observe(view,{childList:true});",
+  "function": "render (overlay renderer)"
+ },
+ {
+  "id": "P2L-106",
+  "area": "D",
+  "file": "analysis-final-rc.js",
+  "line": 221,
+  "snippet": "new MutationObserver(schedule).observe(root, { childList: true, subtree: true });",
+  "function": "schedule → render (overlay renderer)"
+ },
+ {
+  "id": "P2L-107",
+  "area": "D",
+  "file": "final-ui-build18.js",
+  "line": 26,
+  "snippet": "document.getElementById(\"playerLibraryOverlay\")&&new MutationObserver(()=>requestAnimationFrame(refresh)).observe(document.getElementById(\"p",
+  "function": "refresh (match-setup guide)"
+ },
+ {
+  "id": "P2L-108",
+  "area": "D",
+  "file": "index.html",
+  "line": 11902,
+  "snippet": "new MutationObserver(syncAvatarChooserViewportV55).observe(chooser,{attributes:true,attributeFilter:[\"class\"]});",
+  "function": "syncAvatarChooserViewportV55"
+ },
+ {
+  "id": "P2L-109",
+  "area": "D",
+  "file": "index.html",
+  "line": 20296,
+  "snippet": "const observer = new MutationObserver(scheduleModalSyncV148);",
+  "function": "scheduleModalSyncV148"
+ },
+ {
+  "id": "P2L-110",
+  "area": "D",
+  "file": "index.html",
+  "line": 20438,
+  "snippet": "const observer = new MutationObserver(scheduleReconcileV148);",
+  "function": "scheduleReconcileV148"
+ },
+ {
+  "id": "P2L-111",
+  "area": "D",
+  "file": "index.html",
+  "line": 20997,
+  "snippet": "const observer = new MutationObserver(() => {",
+  "function": "currentVisibleScreen transition recorder"
+ },
+ {
+  "id": "P2L-112",
+  "area": "D",
+  "file": "index.html",
+  "line": 22963,
+  "snippet": "state.observer = new MutationObserver(() => {",
+  "function": "recordTransition (state.observer)"
+ },
+ {
+  "id": "P2L-113",
+  "area": "D",
+  "file": "index.html",
+  "line": 27154,
+  "snippet": "new MutationObserver(update).observe(old,{childList:true,subtree:true,characterData:true,attributes:true});update();",
+  "function": "mirrorStatus (suite)"
+ },
+ {
+  "id": "P2L-114",
+  "area": "D",
+  "file": "index.html",
+  "line": 27419,
+  "snippet": "new MutationObserver(syncPlayerModal).observe(editor,{attributes:true,attributeFilter:[\"class\"]});",
+  "function": "syncPlayerModal"
+ },
+ {
+  "id": "P2L-115",
+  "area": "D",
+  "file": "index.html",
+  "line": 27459,
+  "snippet": "const modalObserver=new MutationObserver(()=>{",
+  "function": "modalObserver (inline)"
+ },
+ {
+  "id": "P2L-116",
+  "area": "D",
+  "file": "index.html",
+  "line": 28837,
+  "snippet": "const observer = new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => {",
+  "function": "logo hydrate"
+ },
+ {
+  "id": "P2L-117",
+  "area": "D",
+  "file": "index.html",
+  "line": 29053,
+  "snippet": "new MutationObserver(addHistoryAnalysisEntriesV5).observe(historyRoot,{subtree:true,childList:true});",
+  "function": "addHistoryAnalysisEntriesV5"
+ },
+ {
+  "id": "P2L-118",
+  "area": "D",
+  "file": "index.html",
+  "line": 29440,
+  "snippet": "new MutationObserver(enforce).observe(root,{childList:true,subtree:true});",
+  "function": "enforce (Analysis v2 data-sufficiency guard)"
+ },
+ {
+  "id": "P2L-119",
+  "area": "D",
+  "file": "index.html",
+  "line": 29454,
+  "snippet": "new MutationObserver(correct).observe(root,{childList:true,subtree:true});",
+  "function": "correct (wording guard)"
+ },
+ {
+  "id": "P2L-120",
+  "area": "D",
+  "file": "monetization-v1.js",
+  "line": 121,
+  "snippet": "new MutationObserver(()=>requestAnimationFrame(decorate)).observe(document.body,{subtree:true,childList:true});syncSettingsPlan();decorate()",
+  "function": "decorate (Free/Pro decoration)"
+ },
+ {
+  "id": "P2L-121",
+  "area": "D",
+  "file": "navigation-phase2-6.js",
+  "line": 137,
+  "snippet": "new MutationObserver(schedulePlayerReconcile).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:[\"class\",\"s",
+  "function": "schedulePlayerReconcile → reconcilePlayerRoot"
+ },
+ {
+  "id": "P2L-122",
+  "area": "D",
+  "file": "navigation-shell-phase1.js",
+  "line": 123,
+  "snippet": "new MutationObserver(scheduleReconcile).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:[\"class\",\"aria-hi",
+  "function": "scheduleReconcile → reconcile"
+ },
+ {
+  "id": "P2L-123",
+  "area": "D",
+  "file": "player-detail-build6.js",
+  "line": 104,
+  "snippet": "if(historyRoot)new MutationObserver(compactHistory).observe(historyRoot,{subtree:true,childList:true});",
+  "function": "compactHistory"
+ },
+ {
+  "id": "P2L-124",
+  "area": "D",
+  "file": "ui-revision-v12.js",
+  "line": 61,
+  "snippet": "new MutationObserver(reviseDetail).observe(document.getElementById(\"playerStatsBody\"),{subtree:true,childList:true});",
+  "function": "reviseDetail"
+ },
+ {
+  "id": "P2L-125",
+  "area": "D",
+  "file": "ui-revision-v12.js",
+  "line": 75,
+  "snippet": "new MutationObserver(revisePlayerList).observe(document.getElementById(\"playerLibraryList\"),{childList:true});",
+  "function": "revisePlayerList"
+ },
+ {
+  "id": "P2L-126",
+  "area": "D",
+  "file": "ui-revision-v12.js",
+  "line": 86,
+  "snippet": "const rivals=document.getElementById(\"playerOpponentRecordsV2\");if(rivals)new MutationObserver(()=>requestAnimationFrame(reviseRivals)).obse",
+  "function": "reviseRivals"
+ },
+ {
+  "id": "P2L-127",
+  "area": "D",
+  "file": "ui-revision-v12.js",
+  "line": 108,
+  "snippet": "const history=document.getElementById(\"playerMatchHistoryV2\");if(history)new MutationObserver(()=>requestAnimationFrame(reviseHistory)).obse",
+  "function": "reviseHistory"
+ },
+ {
+  "id": "P2L-128",
+  "area": "I",
+  "file": "tests/analysis-v2.test.mjs",
+  "line": 14,
+  "snippet": "assert.match(html,/プレーヤー分析/);",
+  "function": "assert.match(html,/プレーヤー分析/) … (11 JP source assertions)"
+ },
+ {
+  "id": "P2L-129",
+  "area": "I",
+  "file": "tests/analytics-final-rc.test.mjs",
+  "line": 26,
+  "snippet": "assert.equal(engine.evaluate(better,worse,discipline).status,\"改善傾向\",discipline);",
+  "function": "engine.evaluate(...).status === Japanese strings"
+ },
+ {
+  "id": "P2L-130",
+  "area": "I",
+  "file": "tests/i18n-foundation-v1.test.mjs",
+  "line": 288,
+  "snippet": "test(\"the i18n files use no MutationObserver or innerHTML replacement and the guard is read only\", () => {",
+  "function": "the i18n files use no MutationObserver or innerHTML replacement"
+ },
+ {
+  "id": "P2L-131",
+  "area": "I",
+  "file": "tests/match-history-list-simplification.test.mjs",
+  "line": 29,
+  "snippet": "assert.match(html,/return timeOrder \\|\\| String\\(a\\.id \\|\\| \"\"\\)\\.localeCompare\\(String\\(b\\.id \\|\\| \"\"\\), \"ja\"\\)/);",
+  "function": "assert.match(html,…localeCompare(String(b.id),\"ja\")…)"
+ },
+ {
+  "id": "P2L-132",
+  "area": "I",
+  "file": "tests/navigation-phase2-6.test.mjs",
+  "line": 57,
+  "snippet": "assert.match(js,/new MutationObserver\\(schedulePlayerReconcile\\)/);",
+  "function": "assert.match(js,/new MutationObserver\\(schedulePlayerReconcile\\)/) etc."
+ },
+ {
+  "id": "P2L-133",
+  "area": "I",
+  "file": "tests/navigation-shell-phase1.test.mjs",
+  "line": 23,
+  "snippet": "assert.doesNotMatch(js,/title\\.textContent=\"プレーヤー一覧\"/);",
+  "function": "assert.doesNotMatch(js,/title\\.textContent=\"プレーヤー一覧\"/); 49: MutationObserver(scheduleReconcile)"
+ },
+ {
+  "id": "P2L-134",
+  "area": "I",
+  "file": "tests/player-search-focus-ring.test.mjs",
+  "line": 23,
+  "snippet": "assert.match(html,/const query = \\(el\\(\"playerLibrarySearch\"\\)\\?\\.value \\|\\| \"\"\\)\\.trim\\(\\)\\.toLocaleLowerCase\\(\"ja\"\\)/);",
+  "function": "assert.match(html,…toLocaleLowerCase(\"ja\")…)"
+ }
+]

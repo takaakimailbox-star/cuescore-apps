@@ -1,0 +1,19 @@
+{
+ "keys": [
+  "format",
+  "appName",
+  "schemaVersion",
+  "appVersion",
+  "gameType",
+  "exportedAt",
+  "players",
+  "matchRecords",
+  "matchCategories",
+  "matchSeasons"
+ ],
+ "sha256": "2858b1628ab0b64a0334945c9459546de9fd2f189241cd354f90fc2104f1e590",
+ "bytes": 55106,
+ "format": "cuescore-apps-backup",
+ "schemaVersion": 2,
+ "appName": "CueScore Apps"
+}

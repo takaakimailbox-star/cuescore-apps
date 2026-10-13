@@ -1,0 +1,69 @@
+{
+ "empty": [
+  {
+   "id": "category_free",
+   "name": "Free",
+   "locked": true
+  },
+  {
+   "id": "category_tournament",
+   "name": "大会",
+   "locked": false
+  },
+  {
+   "id": "category_other",
+   "name": "その他",
+   "locked": false
+  }
+ ],
+ "legacy": [
+  {
+   "id": "category_free",
+   "name": "Free",
+   "locked": true
+  },
+  {
+   "id": "d",
+   "name": "Custom",
+   "locked": false
+  },
+  {
+   "id": "f",
+   "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "locked": false
+  },
+  {
+   "id": "category_tournament",
+   "name": "大会",
+   "locked": false
+  },
+  {
+   "id": "category_other",
+   "name": "その他",
+   "locked": false
+  }
+ ],
+ "tournamentKept": [
+  {
+   "id": "category_free",
+   "name": "Free",
+   "locked": true
+  },
+  {
+   "id": "z",
+   "name": "大会",
+   "locked": false
+  },
+  {
+   "id": "category_other",
+   "name": "その他",
+   "locked": false
+  }
+ ],
+ "seasons": [
+  {
+   "id": "s",
+   "name": "2026"
+  }
+ ]
+}

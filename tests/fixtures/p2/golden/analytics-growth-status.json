@@ -1,0 +1,35 @@
+{
+ "up": {
+  "status": "成長傾向",
+  "score": 5,
+  "dirs": [
+   "up",
+   "up",
+   "up",
+   "up",
+   "up"
+  ]
+ },
+ "down": {
+  "status": "要調整",
+  "score": -5,
+  "dirs": [
+   "down",
+   "down",
+   "down",
+   "down",
+   "down"
+  ]
+ },
+ "flat": {
+  "status": "ほぼ横ばい",
+  "score": 0,
+  "dirs": [
+   "flat",
+   "flat",
+   "flat",
+   "flat",
+   "flat"
+  ]
+ }
+}
