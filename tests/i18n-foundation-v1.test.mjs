@@ -343,11 +343,12 @@ test("the Settings language row and view reuse the existing Settings suite compo
   assert.match(html, /languageMessageKey/);
 });
 
-test("R-FIT: the language row keeps the 44px footer row height; only non-interactive footer gaps are tightened on short screens; the Settings scroll owner stays scrollable", () => {
-  const block = html.match(/\/\* P1 R-FIT:[\s\S]*?\*\/\s*@media \(max-width: 430px\) and \(max-height: 830px\) \{\s*\.settings-app-footer-v1 \.settings-app-brand-v1 \{ padding: 8px 0 6px; \}\s*\.settings-app-footer-v1 \.settings-copyright-v1 \{ padding-top: 6px; \}\s*\}/);
-  assert.ok(block, "the scoped non-interactive gap rule must exist");
-  assert.doesNotMatch(html, /settings-info-link-v1\[data-settings-open-language\]/);          // no row-specific height override any more
-  assert.match(html, /\.settings-info-link-v1 \{ min-height: 42px; \}/);                       // the existing footer rows keep their rule
-  assert.match(read("navigation-phase2-6.css"), /\.settings-formal-scroll-v1\{overflow-y:auto!important/); // physical-review fix: the Build 76 overflow lock is replaced by overflow:auto (the language row made the content taller than the viewport)
-  for (const row of ['data-cuescore-about', 'data-settings-legal="terms.html"', 'data-settings-legal="privacy.html"']) assert.match(html, new RegExp(`class="settings-info-link-v1" type="button" ${row.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`));
+test("R-FIT (Decision 032): the language row is the first row of the app info card; the footer composition is gone; the Settings scroll owner stays scrollable", () => {
+  assert.doesNotMatch(html, /settings-info-link-v1\[data-settings-open-language\]/);          // no row-specific height override
+  assert.doesNotMatch(html, /P1 R-FIT/);                                                       // the footer-gap rule belonged to the removed footer
+  assert.doesNotMatch(html, /<footer class="settings-app-footer-v1">|settings-app-brand-v1"><span data-cuescore-logo/);
+  assert.match(read("navigation-phase2-6.css"), /\.settings-formal-scroll-v1\{overflow-y:auto!important/); // Physical UI Fix: the Build 76 overflow lock is replaced by overflow:auto
+  const card = html.match(/<section class="settings-data-card-v1 settings-app-info-card-v1"[\s\S]*?<\/section>/)[0];
+  const order = [...card.matchAll(/data-settings-open-language|data-cuescore-about|data-settings-legal="(terms|privacy)\.html"/g)].map(match => match[0]);
+  assert.deepEqual(order, ['data-settings-open-language', 'data-cuescore-about', 'data-settings-legal="terms.html"', 'data-settings-legal="privacy.html"']);
 });

@@ -56,6 +56,7 @@
     "settings.title": "设置",
     "settings.section.display": "显示",
     "settings.section.data": "数据管理",
+    "settings.section.appInfo": "应用信息",
     "settings.row.backup.title": "备份",
     "settings.row.backup.sub": "导出数据并妥善保管",
     "settings.row.restore.title": "恢复数据",

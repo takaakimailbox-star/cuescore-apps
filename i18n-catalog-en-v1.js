@@ -56,6 +56,7 @@
     "settings.title": "Settings",
     "settings.section.display": "Display",
     "settings.section.data": "Data management",
+    "settings.section.appInfo": "App info",
     "settings.row.backup.title": "Backup",
     "settings.row.backup.sub": "Export your data and keep it safe",
     "settings.row.restore.title": "Restore data",

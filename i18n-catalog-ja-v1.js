@@ -56,6 +56,7 @@
     "settings.title": "設定",
     "settings.section.display": "表示",
     "settings.section.data": "データ管理",
+    "settings.section.appInfo": "アプリ情報",
     "settings.row.backup.title": "バックアップ",
     "settings.row.backup.sub": "データを書き出して保管します",
     "settings.row.restore.title": "データ復元",
