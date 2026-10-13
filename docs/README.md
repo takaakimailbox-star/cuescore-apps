@@ -156,7 +156,8 @@ Dynamic Type deferral status:
 Localization P1 formalization status:
 
 - Decision 034 / Official 113 / Official 114 / Official Design Decision Log v2.10 (published 2026-10-13). Product Owner decisions: (1) U9 is closed by adopting the real-device Visual Acceptance records (A: PO-confirmed, B: independently confirmed, C: unconfirmed are kept separate); (2) S-B stays off for P1 (`LANGUAGE_SWITCH_ALLOWS_SAVED_INTERRUPTED_V1 = false`, no language change while a saved interrupted match exists, enabling is Later / a separate Gate); (3) L-RES-10 is accepted conditionally for the confirmed range, remaining items stay NOT VERIFIED and are carried to later phases. Official 107 / 108 / 110 / 111 / 112 are unchanged; Official 109 stays reserved.
-- This is a Documentation-only publication. The P1 source (i18n core, catalogs, Settings language row, Settings R) is not on main yet; its formal fixation (commit / push) is a separate Gate. Evidence: `implementation/CueScore_Localization_Decision_034_Official_Release_2026-10-13.md`.
+- This was a Documentation-only publication (at publication time the P1 source was not on main yet). Evidence: `implementation/CueScore_Localization_Decision_034_Official_Release_2026-10-13.md`.
+- P1 source formalization (2026-10-13, a later Gate): the P1 source (i18n core, catalogs, Settings language row) and Settings Unified Design R are now on main (`implementation/CueScore_i18n_P1_Source_Formalization_2026-10-13.md`). S-B stays off (`flag=false`); this is not a declaration of the Product Owner Physical Acceptance of the whole P1. P2 implementation, S-B enabling and any Build / TestFlight / Release are separate Gates.
 
 Player UX finalization status:
 
