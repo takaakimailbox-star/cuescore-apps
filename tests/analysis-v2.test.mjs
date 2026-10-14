@@ -21,7 +21,8 @@ assert.match(html,/サマリー比較/);
 assert.match(html,/analysis-final-rc\.js/);
 assert.match(html,/data sufficiency guard/);
 assert.match(html,/前期間の試合数が少ないため、変化はまだ評価しません/);
-assert.match(html,/textContent===.蓄積中./);
+assert.match(html,/status\.textContent="蓄積中"/); // P2-4: the guard now compares data-analysis-state instead of the text
+assert.match(html,/dataset\.analysisState==="accumulating"/);
 assert.match(html,/ファール数は相手と同じ/);
 assert.match(html,/ハイランは相手と同じ/);
 assert.match(html,/\.analysis-v2\{min-width:0;overflow:hidden\}/);

@@ -130,15 +130,15 @@ test("[P2L-120] Free/Pro plan decoration is the only Observer-driven Free/Pro te
 });
 
 /* ---------- display-text decisions (P2L-022,027,029..031,033,034): current coupling pinned ---------- */
-test("[P2L-022,027,029,030,031,033,034] display-text comparisons: exact current source forms are pinned (each is replaced by state/ID in P2-4)", () => {
+test("[P2L-022,027,029,030,031,033,034] display-text comparisons are replaced by internal state (P2-4): new source forms pinned", () => {
   const pins = [
-    ["index.html", 'notice.title==="14ボールラック"'],
-    ["index.html", "/保存中|更新中|確認中/.test(label)"],
-    ["index.html", "playerLibraryTitle"],
-    ["index.html", "/前の(\\d+)試合/"],
-    ["index.html", '.analysis-v2-status")?.textContent==="蓄積中"'],
-    ["navigation-shell-phase1.js", 'title?.textContent==="プレーヤー一覧"'],
-    ["ui-revision-v12.js", 'card.textContent.includes("1試合最高得点")']
+    ["index.html", 'notice.kind==="rerack"'],
+    ["index.html", "button.dataset.saving === '1'"],
+    ["index.html", "const editing=playerEditorIsEditingV1;"],
+    ["index.html", ".analysis-v2-target\")?.dataset.priorGames"],
+    ["index.html", 'dataset.analysisState==="accumulating"'],
+    ["ui-revision-v12.js", 'card.dataset.pd7BestKey==="score"']
   ];
-  for (const [file, token] of pins) assert.ok(read(file).includes(token) || read(file).includes(token.replace(/'/g, '"')), `${file}: ${token}`);
+  for (const [file, token] of pins) assert.ok(read(file).includes(token) || read(file).includes(token.replace(/\\"/g, '"')), `${file}: ${token}`);
+  assert.ok(!read("navigation-shell-phase1.js").includes('title?.textContent==="プレーヤー一覧"'));
 });

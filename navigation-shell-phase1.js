@@ -111,8 +111,7 @@
       else if(app.classList.contains("settings-mode"))setActive("settings");
       else if(visible(document.getElementById("playerLibraryOverlay"))||visible(document.getElementById("playerStatsOverlay"))||[...document.querySelectorAll(".player-journey-overlay-v2,.pd12-trends")].some(visible))setActive("player");
     }
-    const title=document.getElementById("playerLibraryTitle");
-    if(state.active==="player"&&title?.textContent==="プレーヤー一覧")title.textContent=window.cueT("player.title"); // P2: replace this display-text comparison with a state/id check
+    // P2-4: the former title text comparison was removed. No code writes the old literal title any more (titles come from cueT / the editor), so the branch could never run.
   };
   let reconcileQueued=false;
   const scheduleReconcile=()=>{

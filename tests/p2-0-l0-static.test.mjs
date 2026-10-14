@@ -37,9 +37,9 @@ test("[P2L-105..127] L0 MutationObserver registrations: exactly 23 in 9 files, e
   }
 });
 
-test("[P2L-105..127] L0 MutationObserver roles are pinned: 12 rewrite / 1 display-text read / 10 allowed (AC-S3 ratchet)", () => {
+test("[P2L-105..127] L0 MutationObserver roles are pinned: 12 rewrite / 11 allowed; 0 display-text readers after P2-4 (AC-S3 ratchet)", () => {
   const roles = {}; for (const c of classification) roles[c.role] = (roles[c.role] || 0) + 1;
-  assert.deepEqual(roles, { rewrite: 12, allowed: 10, read: 1 });
+  assert.deepEqual(roles, { rewrite: 12, allowed: 11 }); // P2-4: the display-text reader (reviseDetail, P2L-124) now reads a data attribute -> structural
 });
 
 for (const c of classification) {

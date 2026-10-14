@@ -139,11 +139,11 @@ for (const d of ["9ball", "10ball", "rotation", "jpa9", "straightPool", "threeCu
 await phase("player-back");
 await step("tab:player-again", tab("player"));
 await phase("player-editor");
-await step("open-editor", `const row=document.querySelector(".player-management-row-v1");const btn=[...row.querySelectorAll("button")].find(b=>!b.classList.contains("player-hub-info-v3"));if(!btn)throw new Error("no edit button");btn.click();await new Promise(r=>setTimeout(r,900));return document.getElementById("playerLibraryTitle")?.textContent`);
+await step("open-editor", `const row=document.querySelector(".player-management-row-v1");const btn=[...row.querySelectorAll("button")].find(b=>!b.classList.contains("player-hub-info-v3"));if(!btn)throw new Error("no edit button");btn.click();await new Promise(r=>setTimeout(r,900));const g=id=>document.getElementById(id);return {title:g("playerLibraryTitle")?.textContent,modalTitle:g("playerEditorModalTitleV1")?.textContent,modalCopy:g("playerEditorModalCopyV1")?.innerHTML,saveText:g("playerEditorSaveBtn")?.textContent,deleteHidden:g("playerEditorDeleteBtn")?.classList.contains("hidden")}`);
 await capture("player-editor");
 await step("close-editor", `const b=document.querySelector("#playerLibraryBackBtn,[data-player-editor-cancel],#playerEditorCancel");if(b)b.click();await new Promise(r=>setTimeout(r,700));return !!b`);
 await phase("player-add");
-await step("open-add-player", `const b=document.querySelector("#playerLibraryAddBtn,[data-player-add],.player-add-v1,#addPlayerBtn");if(!b)throw new Error("no add button");b.click();await new Promise(r=>setTimeout(r,900));return document.getElementById("playerLibraryTitle")?.textContent`);
+await step("open-add-player", `const b=document.querySelector("#playerLibraryAddBtn,[data-player-add],.player-add-v1,#addPlayerBtn");if(!b)throw new Error("no add button");b.click();await new Promise(r=>setTimeout(r,900));const g=id=>document.getElementById(id);return {title:g("playerLibraryTitle")?.textContent,modalTitle:g("playerEditorModalTitleV1")?.textContent,modalCopy:g("playerEditorModalCopyV1")?.innerHTML,saveText:g("playerEditorSaveBtn")?.textContent,deleteHidden:g("playerEditorDeleteBtn")?.classList.contains("hidden")}`);
 await capture("player-add");
 await step("close-add", `const b=document.querySelector("#playerLibraryBackBtn,[data-player-editor-cancel],#playerEditorCancel");if(b)b.click();await new Promise(r=>setTimeout(r,700));return !!b`);
 await phase("history");

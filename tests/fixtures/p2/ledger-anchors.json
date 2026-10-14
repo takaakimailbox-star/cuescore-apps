@@ -132,7 +132,7 @@
   "area": "A",
   "file": "index.html",
   "line": 9557,
-  "snippet": "/quota|storage quota|保存容量が不足/i.test(String(currentError.message || \"\"))",
+  "snippet": "/quota|storage quota|保存容量が不足/i.test(String(currentError.message || \"\")) // legacy-compat: Error.message sniffing of storage errors (not DOM ",
   "function": "isQuotaExceededErrorV160"
  },
  {
@@ -172,7 +172,7 @@
   "area": "A",
   "file": "index.html",
   "line": 14210,
-  "snippet": "overlay.classList.toggle(\"straight-pool-rerack-modal-v18\",notice.title===\"14ボールラック\");",
+  "snippet": "overlay.classList.toggle(\"straight-pool-rerack-modal-v18\",notice.kind===\"rerack\");",
   "function": "showNextStraightPoolNoticeV1"
  },
  {
@@ -212,7 +212,7 @@
   "area": "A",
   "file": "index.html",
   "line": 23075,
-  "snippet": "if (/保存中|更新中|確認中/.test(label)) {",
+  "snippet": "if (button.dataset.saving === '1') {",
   "function": "recoverStaleControlsV160"
  },
  {
@@ -228,7 +228,7 @@
   "area": "A",
   "file": "index.html",
   "line": 27412,
-  "snippet": "const editing=document.getElementById(\"playerLibraryTitle\")?.textContent.includes(\"編集\");",
+  "snippet": "const editing=playerEditorIsEditingV1;",
   "function": "syncPlayerModal"
  },
  {
@@ -236,7 +236,7 @@
   "area": "A",
   "file": "index.html",
   "line": 29429,
-  "snippet": "const match=target.match(/前の(\\d+)試合/);",
+  "snippet": "const priorGames=playerView.querySelector(\".analysis-v2-target\")?.dataset.priorGames;",
   "function": "enforce (analysis v2 guard)"
  },
  {
@@ -244,7 +244,7 @@
   "area": "A",
   "file": "index.html",
   "line": 29431,
-  "snippet": "if(playerView.querySelector(\".analysis-v2-status\")?.textContent===\"蓄積中\"&&playerView.querySelector(\".analysis-v2-change\")?.textContent?.start",
+  "snippet": "if(playerView.querySelector(\".analysis-v2-status\")?.dataset.analysisState===\"accumulating\"&&playerView.querySelector(\".analysis-v2-change\")?",
   "function": "enforce"
  },
  {
@@ -260,7 +260,7 @@
   "area": "A",
   "file": "navigation-shell-phase1.js",
   "line": 115,
-  "snippet": "if(state.active===\"player\"&&title?.textContent===\"プレーヤー一覧\")title.textContent=window.cueT(\"player.title\"); // P2: replace this display-text c",
+  "snippet": "// P2-4: the former title text comparison was removed. No code writes the old literal title any more (titles come from cueT / the editor), s",
   "function": "reconcile (title fix)"
  },
  {
@@ -268,7 +268,7 @@
   "area": "A",
   "file": "ui-revision-v12.js",
   "line": 59,
-  "snippet": "if([\"rotation\",\"straightPool\",\"jpa9\"].includes(active))body.querySelectorAll(\".pd7-best\").forEach(card=>{if(card.textContent.includes(\"1試合最高",
+  "snippet": "if([\"rotation\",\"straightPool\",\"jpa9\"].includes(active))body.querySelectorAll(\".pd7-best\").forEach(card=>{if(card.dataset.pd7BestKey===\"score",
   "function": "reviseDetail"
  },
  {

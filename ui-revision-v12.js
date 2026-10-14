@@ -56,7 +56,7 @@
     body.querySelector("[data-pd7-trend-modal]")?.remove();
     body.querySelector(".pd12-graph-entry")?.remove();
     const active=detail()?.state?.discipline;
-    if(["rotation","straightPool","jpa9"].includes(active))body.querySelectorAll(".pd7-best").forEach(card=>{if(card.textContent.includes("1試合最高得点")||card.textContent.includes("1試合最多得点"))card.remove();});
+    if(["rotation","straightPool","jpa9"].includes(active))body.querySelectorAll(".pd7-best").forEach(card=>{if(card.dataset.pd7BestKey==="score")card.remove();});
   }
   new MutationObserver(reviseDetail).observe(document.getElementById("playerStatsBody"),{subtree:true,childList:true});
 

@@ -2,9 +2,10 @@
  "baseline": "a841cbc24087ece5baa91a3b04da01d018843c64",
  "files": {
   "analysis-v2.test.mjs": {
-   "sha256": "72b8753c05e5ff7f036f39de33bfca9c23d9f3d2bfc1f9e4bff3d50b91277f6a",
+   "sha256": "ba3a9128847683541015c82482102d7779b22f18b3a18cc3e98eb9039aea2d0e",
    "tests": 0,
-   "skips": 0
+   "skips": 0,
+   "previousSha256": "72b8753c05e5ff7f036f39de33bfca9c23d9f3d2bfc1f9e4bff3d50b91277f6a"
   },
   "analytics-build4-metrics.test.mjs": {
    "sha256": "186aec11f2d39a3f52853c8fa10373696bdbb6372b922251cc37401bd80a976f",
@@ -67,9 +68,10 @@
    "skips": 0
   },
   "build18-final-ui-data-consistency.test.mjs": {
-   "sha256": "56b4ba6adfebfeed0e5f5538ffeca9d5892c5b617b4ff0bced83c100a793cb3f",
+   "sha256": "bbc7c890858f1ab7e632bd06c73f659d33d99993c7383dfe72f991c66fca4624",
    "tests": 6,
-   "skips": 0
+   "skips": 0,
+   "previousSha256": "56b4ba6adfebfeed0e5f5538ffeca9d5892c5b617b4ff0bced83c100a793cb3f"
   },
   "build29-ios-webview-selector-text-selection.test.mjs": {
    "sha256": "256f065c82439246a768827d46dff9d45d6c6f6df67af4367ae31eca6a16e433",
@@ -597,5 +599,5 @@
    "skips": 0
   }
  },
- "updated_by": "P2-1 (a841cbc baseline files changed only to read Domain constants / supply the global; assertions not weakened) | P2-2: i18n-foundation-v1 mapper label count 9->11"
+ "updated_by": "P2-1 (a841cbc baseline files changed only to read Domain constants / supply the global; assertions not weakened) | P2-2: i18n-foundation-v1 mapper label count 9->11 | P2-4: analysis-v2 and build18 source pins moved to the new internal-state forms"
 }

@@ -136,8 +136,8 @@
   "id": "P2L-124",
   "file": "ui-revision-v12.js",
   "k": 0,
-  "class": "b",
-  "role": "read"
+  "class": "allowed",
+  "role": "allowed"
  },
  {
   "id": "P2L-125",

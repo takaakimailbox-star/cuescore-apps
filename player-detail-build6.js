@@ -48,7 +48,7 @@
     state.level="detail";state.discipline=active;header(`${def(active).label} 詳細`,"",def(active).asset);
     const records=recordsFor(player).filter(record=>discipline(record)===active);
     const all=api.aggregate(records,player,helpers),keys=metricKeys[active]||[],displayedBests=api.bests(records,player,active,helpers).slice(0,3);
-    const bestCards=displayedBests.map(best=>`<button type="button" class="pd7-best" data-pd7-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,active)}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("");
+    const bestCards=displayedBests.map(best=>`<button type="button" class="pd7-best" data-pd7-best-key="${esc(best.key)}" data-pd7-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,active)}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("");
     const summary=records.length?`${all.games}試合　${all.wins}勝${all.losses}敗`:"0試合　勝敗 —";
     body.innerHTML=`<div class="player-detail-shell-v1 pd7-shell"><section class="pd7-detail-summary">${profile(player,true)}<span><small>${def(active).label} 通算</small><strong>${summary}</strong></span></section>
       <article class="pd7-win-rate"><span><small>勝率</small><strong>${fmt("winRate",all.winRate)}</strong></span></article>

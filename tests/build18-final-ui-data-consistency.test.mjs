@@ -42,7 +42,8 @@ test("fixed 9-Ball history keeps its explicit title and adopted row contract",()
 });
 
 test("14-ball rerack notice is a central modal without a pull handle",()=>{
-  assert.match(index,/notice\.title==="14ボールラック"/);
+  assert.match(index,/notice\.kind==="rerack"/); // P2-4: the modal class follows the notice kind, not the title text
+  assert.match(index,/queueStraightPoolNoticeV1\("14ボールラック"[^\n]*, null, "rerack"\)/);
   assert.match(index,/\.straight-pool-rerack-modal-v18\{align-items:center/);
   assert.match(index,/\.straight-pool-rerack-modal-v18 \.cue-sheet-handle-v1\{display:none\}/);
 });

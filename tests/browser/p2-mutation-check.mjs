@@ -39,6 +39,21 @@ const M = [
   ["display site bypasses the Mapper", "index.html", 'window.cueResultLabel(e.resultLabel || e.result || "記録")', '(e.resultLabel || e.result || "記録")'],
   ["Display Mapper leaks into the stored producer", "index.html", "CueScoreDomainV1.pocketedLabel(decision.pocketedBalls.length)", "window.cueResultLabel(CueScoreDomainV1.pocketedLabel(decision.pocketedBalls.length))"],
   ["Domain SKIPPED value changed", "domain-constants-v1.js", 'SKIPPED:"記録なし"', 'SKIPPED:"記録無し"'],
+  ["quota: legacy Japanese-message alternative dropped", "index.html", "/quota|storage quota|保存容量が不足/i.test(", "/quota|storage quota/i.test("],
+  ["quota: English branch dropped", "index.html", "/quota|storage quota|保存容量が不足/i.test(", "/storage quota|保存容量が不足/i.test("],
+  ["quota: Japanese phrase altered", "index.html", "保存容量が不足/i.test(", "保存容量不足/i.test("],
+  ["quota: cause chain dropped", "index.html", "currentError = currentError.cause;", "currentError = null;"],
+  ["quota: code 22 dropped", "index.html", "currentError.code === 22 ||", ""],
+  ["re-rack notice kind ignored", "index.html", 'notice.kind==="rerack"', 'notice.kind==="x"'],
+  ["re-rack call loses its kind", "index.html", 'null, "rerack");', 'null);'],
+  ["stale recovery flag value changed", "index.html", "button.dataset.saving === '1'", "button.dataset.saving === '0'"],
+  ["editor flag always true", "index.html", "playerEditorIsEditingV1 = Boolean(player);", "playerEditorIsEditingV1 = true;"],
+  ["analysis-v2 guard threshold changed", "index.html", "Number(priorGames)>=3", "Number(priorGames)>=2"],
+  ["analysis-v2 renderer loses prior-games attribute", "index.html", ' data-prior-games="${before.games}"', ""],
+  ["analysis-v2 guard state marker dropped", "index.html", 'status.dataset.analysisState="accumulating";', ""],
+  ["best-card kind changed", "ui-revision-v12.js", 'card.dataset.pd7BestKey==="score"', 'card.dataset.pd7BestKey==="highRun"'],
+  ["best-card attribute dropped", "player-detail-build6.js", ' data-pd7-best-key="${esc(best.key)}"', ""],
+  ["title comparison re-introduced", "navigation-shell-phase1.js", "// P2-4: the former title text comparison was removed.", 'const title=document.getElementById("playerLibraryTitle");if(title?.textContent==="プレーヤー一覧")title.textContent="x"; //'],
   ["Backup schemaVersion 2 -> 3", "index.html", "const BACKUP_SCHEMA_VERSION = 2;", "const BACKUP_SCHEMA_VERSION = 3;"],
   ["Backup format renamed", "index.html", 'const BACKUP_FORMAT = "cuescore-apps-backup";', 'const BACKUP_FORMAT = "cuescore-apps-backup2";'],
   ["Backup file name changed", "index.html", "CueScore_Apps_v1.0_Backup_", "CueScore_Apps_v1.1_Backup_"],
@@ -66,7 +81,7 @@ for (const [name, file, from, to] of M) {
   const count = original.split(from).length - 1;
   if (count < 1) { results.push({ name, file, applied: false, note: `pattern not found (${count})` }); continue; }
   fs.writeFileSync(target, original.replace(from, to));
-  const r = spawnSync(process.execPath, ["--test", ...(process.env.SKIP_ANCHORS === "1" ? ["--test-skip-pattern=L0 anchor"] : []), ...fs.readdirSync(path.join(TMP, "tests")).filter(f => /^p2-[0123]-.*\.test\.mjs$/.test(f)).map(f => "tests/" + f)], { cwd: TMP, encoding: "utf8", env: { ...process.env, NODE_TEST_CONTEXT: undefined } });
+  const r = spawnSync(process.execPath, ["--test", ...(process.env.SKIP_ANCHORS === "1" ? ["--test-skip-pattern=L0 anchor"] : []), ...fs.readdirSync(path.join(TMP, "tests")).filter(f => /^p2-[01234]-.*\.test\.mjs$/.test(f)).map(f => "tests/" + f)], { cwd: TMP, encoding: "utf8", env: { ...process.env, NODE_TEST_CONTEXT: undefined } });
   const failed = [...r.stdout.matchAll(/^✖ (\[[^\n]*?)(?: \(\d)/gm)].map(m => m[1].slice(0, 90)).filter((v, i, a) => a.indexOf(v) === i);
   results.push({ name, file, applied: true, killed: r.status !== 0, failingTests: failed.slice(0, 4), failingCount: failed.length });
   fs.writeFileSync(target, original);
