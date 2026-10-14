@@ -100,7 +100,7 @@
   "area": "A",
   "file": "analysis-build4.js",
   "line": 63,
-  "snippet": "const status=current.games<3?\"データ蓄積中\":previous.games<3?\"安定\":current.winRate>previous.winRate?\"改善傾向\":current.winRate<previous.winRate?\"要調整\":\"",
+  "snippet": "const statusCode=current.games<3?\"accumulating\":previous.games<3?\"stable\":current.winRate>previous.winRate?\"improving\":current.winRate<previ",
   "function": "render"
  },
  {
@@ -108,7 +108,7 @@
   "area": "A",
   "file": "analysis-final-rc.js",
   "line": 54,
-  "snippet": "let status = \"安定\";",
+  "snippet": "let statusCode = \"stable\";",
   "function": "evaluate"
  },
  {
@@ -116,7 +116,7 @@
   "area": "A",
   "file": "analysis-final-rc.js",
   "line": 102,
-  "snippet": "status.classList.toggle(\"attention\", result.status === \"要調整\");",
+  "snippet": "status.classList.toggle(\"attention\", result.statusCode === \"attention\");",
   "function": "render (status badge)"
  },
  {
@@ -124,7 +124,7 @@
   "area": "A",
   "file": "analysis-final-rc.js",
   "line": 106,
-  "snippet": "if (change) change.innerHTML = result.conclusions.map(text => `<span class=\"${text.includes(\"増加傾向\") || text.includes(\"低下傾向\") ? \"attention\" :",
+  "snippet": "if (change) change.innerHTML = result.conclusions.map((text, index) => `<span class=\"${result.conclusionAttention[index] ? \"attention\" : \"\"}",
   "function": "render (change summary)"
  },
  {
@@ -140,7 +140,7 @@
   "area": "A",
   "file": "index.html",
   "line": 10592,
-  "snippet": "const status=score>=2?'成長傾向':score<=-2?'要調整':'ほぼ横ばい';",
+  "snippet": "const statusCode=score>=2?'improving':score<=-2?'attention':'flat';",
   "function": "summarize (growth analysis)"
  },
  {
@@ -148,7 +148,7 @@
   "area": "A",
   "file": "index.html",
   "line": 10697,
-  "snippet": "if(growth?.ready && ups>=3 && ups>downs){status='好調';tone='good';}",
+  "snippet": "if(growth?.ready && ups>=3 && ups>downs){tone='good';}",
   "function": "buildRionCoachV760"
  },
  {
@@ -156,7 +156,7 @@
   "area": "A",
   "file": "index.html",
   "line": 10713,
-  "snippet": "return {ready:true,status,tone,comment,task:insight.focus||'同じ条件で記録を続けましょう。',ratings:[",
+  "snippet": "// Ratings keep their [display label, value] pairs; the order is fixed by COACH_RATING_ORDER_V1 and read by id, never by label.",
   "function": "buildRionCoachV760 ratings"
  },
  {
@@ -164,7 +164,7 @@
   "area": "A",
   "file": "index.html",
   "line": 10818,
-  "snippet": "const threshold = Math.max(label.includes(\"率\") ? 2 : 0.3, scale * 0.04);",
+  "snippet": "const threshold = Math.max(isRate ? 2 : 0.3, scale * 0.04);",
   "function": "trend text builder (growth/trend sentence)"
  },
  {
@@ -220,7 +220,7 @@
   "area": "A",
   "file": "index.html",
   "line": 25968,
-  "snippet": "const rating = Array.isArray(coach?.ratings) ? coach.ratings.find(item => item?.[0] === \"勝ち切る力\")?.[1] : null;",
+  "snippet": "const rating = coachRatingValueV1(coach, \"finish\");",
   "function": "analytics view (rating pick)"
  },
  {
@@ -252,7 +252,7 @@
   "area": "A",
   "file": "navigation-phase2-6.js",
   "line": 71,
-  "snippet": "const status=current.games<3?\"データ蓄積中\":previous.games<3?\"安定\":current.winRate>previous.winRate?\"改善傾向\":current.winRate<previous.winRate?\"要調整\":\"",
+  "snippet": "const statusCode=current.games<3?\"accumulating\":previous.games<3?\"stable\":current.winRate>previous.winRate?\"improving\":current.winRate<previ",
   "function": "analysisView"
  },
  {

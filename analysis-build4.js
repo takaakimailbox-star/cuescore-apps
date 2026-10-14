@@ -60,7 +60,7 @@
     const context=ctx();if(!context||view.hidden||(view.dataset.build4Rendered==="true"&&view.querySelector(".analysis-b4-context")))return;
     const player=context.selectedPlayer(),discipline=context.selectedDiscipline();if(!player)return;
     const h=helpers(),records=context.recordsFor(player).filter(record=>context.discipline(record)===discipline),currentRecords=records.slice(0,10),previousRecords=records.slice(10,20),current=api.aggregate(currentRecords,player,h),previous=api.aggregate(previousRecords,player,h),defs=metricDefs(discipline),bests=api.bests(records,player,discipline,h),points=pointText(current,previous,defs);
-    const status=current.games<3?"データ蓄積中":previous.games<3?"安定":current.winRate>previous.winRate?"改善傾向":current.winRate<previous.winRate?"要調整":"安定";
+    const statusCode=current.games<3?"accumulating":previous.games<3?"stable":current.winRate>previous.winRate?"improving":current.winRate<previous.winRate?"attention":"stable",status={accumulating:"データ蓄積中",stable:"安定",improving:"改善傾向",attention:"要調整"}[statusCode];
     const summary=current.games?`直近${current.games}試合　${current.wins}勝${current.losses}敗　勝率${Math.round(current.winRate)}%`:"データなし";
     const playerName=esc(player.name||"Player"),playerId=esc(player.id||"");
     const disciplineOptions=[...document.querySelectorAll('[data-analysis-discipline] option')].map(option=>`<option value="${esc(option.value)}" ${option.value===discipline?"selected":""}>${esc(option.textContent)}</option>`).join("");

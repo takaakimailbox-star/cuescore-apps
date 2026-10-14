@@ -72,6 +72,8 @@ window.__p2.snapshot=()=>JSON.parse(JSON.stringify(P2.observers));
 
 /* ---------- CDP ---------- */
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), "p2probe-"));
+// Watchdog: a stalled browser must fail the run (exit 2) instead of hanging the whole test session.
+const WATCHDOG = setTimeout(() => { console.error("WATCHDOG: probe exceeded 270 s"); try { chrome.kill("SIGKILL"); } catch (_) { /* already gone */ } process.exit(2); }, 270000);
 const chrome = spawn(CHROME, ["--headless=new", "--remote-debugging-port=0", `--user-data-dir=${profile}`, "--no-first-run", "--no-default-browser-check", "--disable-extensions", "--window-size=430,932", "--disable-features=Translate", "about:blank"], { stdio: ["ignore", "ignore", "pipe"] });
 const wsUrl = await new Promise((resolve, reject) => {
   let buf = ""; const t = setTimeout(() => reject(new Error("chrome start timeout")), 20000);
@@ -165,6 +167,25 @@ if (LABEL_RECORD) {
   const rec = log.find(s => s.step === "open-label-record"), map = log.find(s => s.step === "mapper-runtime");
   fs.writeFileSync(path.join(OUT, `break_label_rows_${LANG}.json`), JSON.stringify({ lang: LANG, openRecord: rec, mapperRuntime: map }, null, 1));
 }
+if (process.env.P2_TREND_PROBE === "1") {
+  // P2-3: the legacy / formal player-detail renderers are replaced by the hub in the current UI, so the analytics builders
+  // are exercised directly in the REAL page (real boot, real language instance) with fixed inputs, and the outputs are recorded.
+  // The same step runs on the pre-change main; extra arguments are ignored by the old signature.
+  await phase("analytics-direct");
+  await step("analytics-direct", `
+    const clean=v=>JSON.parse(JSON.stringify(v===undefined?null:v));
+    const players=readPlayerLibrary();const out={lang:document.documentElement.lang,players:[]};
+    for(const player of players){const recs=recordsForRegisteredPlayer(player);const growth=buildPlayerGrowthAnalysisV740(recs,player);const insight=buildPlayerInsightsV750(recs,player,growth);const coach=buildRionCoachV760(insight,growth);
+      out.players.push({id:player.id,records:recs.length,growth:clean({ready:growth.ready,status:growth.status,score:growth.score,dirs:growth.metrics&&growth.metrics.map(m=>m.direction)}),coach:clean(coach)});}
+    const series={up:[10,11,13,16],down:[16,13,11,10],flat:[10,10,10,10],rate:[50,51,52,52.5],rateSmall:[50,50.5,51,51.9],tiny:[5,5.2,5.4,5.45]};
+    const charts=[["勝率",false,"%",true],["シュート率",false,"%",true],["ハイラン",false,"",false],["ファール数",true,"回",false],["得点／Inning",false,"",false]];
+    out.trend={};for(const [sn,v] of Object.entries(series))for(const [label,lower,suffix,isRate] of charts)out.trend[sn+"|"+label]=clean(buildGrowthTrendCommentV810(v.map(value=>({value})),label,lower,suffix,isRate));
+    const f=window.CueScoreAnalyticsFinalRC;out.finalRc={};
+    for(const d of ["9ball","10ball","rotation","jpa9","straightPool","threeCushion"]){const defs=f.definitionsFor(d);const mk=fn=>Object.fromEntries([["winRate",50],...defs.map((x,i)=>[x.key,fn(x,i)])]);const val=(x,dl)=>10+(x.higher?dl:-dl);const prev=mk(()=>10);
+      out.finalRc[d]={improved:f.evaluate(mk(x=>val(x,2)),prev,d),worsened:f.evaluate(mk(x=>val(x,-2)),prev,d),same:f.evaluate(mk(()=>10),prev,d),insufficient:f.evaluate(mk(x=>val(x,2)),prev,d,{sufficient:false}),mixed:f.evaluate(mk((x,i)=>val(x,i===0?2:-2)),prev,d)};}
+    return clean(out)`, 300);
+  fs.writeFileSync(path.join(OUT, `analytics_direct_${LANG}_${MODE}.json`), JSON.stringify({ lang: LANG, mode: MODE, run: log.find(s => s.step === "analytics-direct") }, null, 1));
+}
 await phase("settings");
 await step("tab:settings", tab("settings"), 1000); await capture("settings");
 await step("open-suite-generation", `const b=document.querySelector('[data-suite-open="generation"]');if(!b)throw new Error("no suite generation button");b.click();await new Promise(r=>setTimeout(r,800));return "ok"`); await capture("settings-suite-generation");
@@ -193,6 +214,6 @@ const pro = await evalJs(`(()=>{try{return {isPro:window.CueScoreEntitlement&&wi
 fs.writeFileSync(path.join(OUT, `observer_runtime_${LANG}_${MODE}.json`), JSON.stringify({ chrome: version.Browser, mode: MODE, lang: LANG, tz: "Asia/Tokyo", viewport: "430x932", created, observers: snap, errors, pro, storage, seed: { recordsSha256: sha(JSON.stringify(records)), playersSha256: sha(JSON.stringify(players)), recordCount: records.length, playerCount: players.length }, steps: log, dom }, null, 1));
 const pass = log.filter(s => s.ok).length;
 console.log(JSON.stringify({ mode: MODE, lang: LANG, chrome: version.Browser, observersCreated: created, steps: `${pass}/${log.length}`, errors: errors.length }));
-ws.close(); chrome.kill("SIGKILL"); server.close();
+clearTimeout(WATCHDOG); ws.close(); chrome.kill("SIGKILL"); server.close();
 try { fs.rmSync(profile, { recursive: true, force: true }); } catch (_) { /* best effort */ }
 process.exit(0);

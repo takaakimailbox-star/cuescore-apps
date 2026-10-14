@@ -10591,8 +10591,10 @@ let matchRecordsRawCacheV152 = null;
     });
     const scored=metrics.filter(m=>m.direction!=='na');
     const score=scored.reduce((sum,m)=>sum+(m.direction==='up'?1:m.direction==='down'?-1:0),0);
-    const status=score>=2?'成長傾向':score<=-2?'要調整':'ほぼ横ばい';
-    return {ready:true,windowSize,current,prior,metrics,score,status};
+    // statusCode is the internal state; status is its display text (Japanese table, unchanged wording).
+    const statusCode=score>=2?'improving':score<=-2?'attention':'flat';
+    const status={improving:'成長傾向',attention:'要調整',flat:'ほぼ横ばい'}[statusCode];
+    return {ready:true,windowSize,current,prior,metrics,score,status,statusCode};
   }
 
   function renderPlayerGrowthAnalysisV740(analysis) {
@@ -10689,21 +10691,26 @@ let matchRecordsRawCacheV152 = null;
 
 
   // Ver.7.6.0: compact coaching dashboard calculated from recorded match data.
+  const COACH_RATING_ORDER_V1 = Object.freeze(['shot','scoring','run','stability','finish']);
+  const COACH_RATING_LABELS_V1 = Object.freeze({shot:'シュート力',scoring:'得点力',run:'連続得点',stability:'安定感',finish:'勝ち切る力'});
+  const coachRatingValueV1 = (coach, id) => Array.isArray(coach?.ratings) ? coach.ratings[COACH_RATING_ORDER_V1.indexOf(id)]?.[1] : null;
+
   function buildRionCoachV760(insight, growth) {
     if(!insight?.ready) return {ready:false,status:'データ待ち',tone:'wait',comment:'試合を記録すると、最近の調子と次の練習課題をここに表示します。',task:'まずは4試合以上を同じ条件で記録しましょう。',ratings:[]};
     const s=insight.stats||{};
     const metrics=growth?.metrics||[];
     const ups=metrics.filter(m=>m.direction==='up').length;
     const downs=metrics.filter(m=>m.direction==='down').length;
-    let status='普通', tone='normal';
-    if(growth?.ready && ups>=3 && ups>downs){status='好調';tone='good';}
-    else if(growth?.ready && downs>=3 && downs>ups){status='要調整';tone='alert';}
-    else if((s.winRate||0)>=60 && (s.foulsPerGame||0)<=1){status='好調';tone='good';}
-    else if((s.winRate||0)<30 || (s.foulsPerGame||0)>=2){status='要調整';tone='alert';}
+    let tone='normal';
+    if(growth?.ready && ups>=3 && ups>downs){tone='good';}
+    else if(growth?.ready && downs>=3 && downs>ups){tone='alert';}
+    else if((s.winRate||0)>=60 && (s.foulsPerGame||0)<=1){tone='good';}
+    else if((s.winRate||0)<30 || (s.foulsPerGame||0)>=2){tone='alert';}
+    const status={good:'好調',alert:'要調整',normal:'普通'}[tone]; // display text of the internal tone code
 
     let comment=insight.strength||'直近データを分析しています。';
-    if(status==='好調') comment=`${comment} 今の良い流れを維持しながら、取り切りの精度を一段上げましょう。`;
-    else if(status==='要調整') comment=`結果だけを追わず、まず1つの課題に絞る時期です。 ${insight.focus||''}`;
+    if(tone==='good') comment=`${comment} 今の良い流れを維持しながら、取り切りの精度を一段上げましょう。`;
+    else if(tone==='alert') comment=`結果だけを追わず、まず1つの課題に絞る時期です。 ${insight.focus||''}`;
     else comment=`${comment} 大きく変えず、次の重点課題を意識して試合を続けましょう。`;
 
     const clampStar=v=>Math.max(1,Math.min(5,Math.round(v)));
@@ -10712,9 +10719,9 @@ let matchRecordsRawCacheV152 = null;
     const run=Number.isFinite(s.avgHighRun)?clampStar(s.avgHighRun/12):null;
     const stability=Number.isFinite(s.foulsPerGame)?clampStar(5-s.foulsPerGame*1.5):null;
     const finish=Number.isFinite(s.winRate)?clampStar(s.winRate/20):null;
-    return {ready:true,status,tone,comment,task:insight.focus||'同じ条件で記録を続けましょう。',ratings:[
-      ['シュート力',shot],['得点力',scoring],['連続得点',run],['安定感',stability],['勝ち切る力',finish]
-    ]};
+    // Ratings keep their [display label, value] pairs; the order is fixed by COACH_RATING_ORDER_V1 and read by id, never by label.
+    const ratingValues={shot,scoring,run,stability,finish};
+    return {ready:true,status,tone,comment,task:insight.focus||'同じ条件で記録を続けましょう。',ratings:COACH_RATING_ORDER_V1.map(id=>[COACH_RATING_LABELS_V1[id],ratingValues[id]])};
   }
 
   function renderRionCoachV760(coach) {
@@ -10807,7 +10814,8 @@ let matchRecordsRawCacheV152 = null;
   }
 
   // Ver.8.1.0: explain the recent direction of the selected graph without overclaiming.
-  function buildGrowthTrendCommentV810(points, label, lowerIsBetter = false, suffix = "") {
+  // isRate: language-independent metric kind (true for rate metrics such as win rate / shot rate). The label is display text only.
+  function buildGrowthTrendCommentV810(points, label, lowerIsBetter = false, suffix = "", isRate = false) {
     const source = (Array.isArray(points) ? points : []).filter(item => Number.isFinite(Number(item?.value)));
     if (source.length < 3) {
       return { tone:"wait", text:`${label}は3試合以上たまると、直近の傾向を表示します。` };
@@ -10817,7 +10825,7 @@ let matchRecordsRawCacheV152 = null;
     const last = Number(recent[recent.length - 1].value);
     const diff = last - first;
     const scale = Math.max(1, ...recent.map(item => Math.abs(Number(item.value) || 0)));
-    const threshold = Math.max(label.includes("率") ? 2 : 0.3, scale * 0.04);
+    const threshold = Math.max(isRate ? 2 : 0.3, scale * 0.04);
     const adjusted = lowerIsBetter ? -diff : diff;
     const formatted = Math.abs(diff) < 10 ? Math.abs(diff).toFixed(1).replace(/\.0$/,"") : Math.round(Math.abs(diff));
     if (adjusted > threshold) {
@@ -11121,7 +11129,7 @@ let matchRecordsRawCacheV152 = null;
           points: winRateTrendPointsV47,
           note: "各試合終了時点までの累計勝率",
           options: { maxY: 100, suffix: "%", ariaLabel: "累計勝率推移" },
-          label: "勝率", lowerIsBetter: false, suffix: "%"
+          label: "勝率", lowerIsBetter: false, suffix: "%", isRate: true
         }
       : playerStatsActiveChartV33 === "shotRate"
         ? {
@@ -11129,7 +11137,7 @@ let matchRecordsRawCacheV152 = null;
             points: shotRateTrendPoints.slice().reverse(),
             note: "成功ショット ÷（成功ショット＋交代ボタンによるミス）",
             options: { maxY: 100, suffix: "%", ariaLabel: "シュート率推移" },
-            label: "シュート率", lowerIsBetter: false, suffix: "%"
+            label: "シュート率", lowerIsBetter: false, suffix: "%", isRate: true
           }
         : playerStatsActiveChartV33 === "highRun"
           ? {
@@ -11159,7 +11167,8 @@ let matchRecordsRawCacheV152 = null;
       chartConfigV33.points,
       chartConfigV33.label || chartConfigV33.title,
       Boolean(chartConfigV33.lowerIsBetter),
-      chartConfigV33.suffix || ""
+      chartConfigV33.suffix || "",
+      Boolean(chartConfigV33.isRate)
     );
 
     const highestShotRateGameV39 = mvpCandidatesV39
@@ -25967,7 +25976,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     const coachGrowth = typeof buildPlayerGrowthAnalysisV740 === "function" ? buildPlayerGrowthAnalysisV740(records, player) : null;
     const coachInsight = typeof buildPlayerInsightsV750 === "function" ? buildPlayerInsightsV750(records, player, coachGrowth) : null;
     const coach = typeof buildRionCoachV760 === "function" ? buildRionCoachV760(coachInsight, coachGrowth) : null;
-    const rating = Array.isArray(coach?.ratings) ? coach.ratings.find(item => item?.[0] === "勝ち切る力")?.[1] : null;
+    const rating = coachRatingValueV1(coach, "finish");
     const metrics = [];
     if (records.length) metrics.push(metricCard("ハイラン",all.highRun,Math.min(100,all.highRun),"点"));
     if (all.shotRate != null) metrics.push(metricCard("シュート成功率",`${all.shotRate}` ,all.shotRate,"%"));

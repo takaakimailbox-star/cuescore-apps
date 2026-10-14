@@ -16,8 +16,10 @@ const M = [
   ["consumer list: drop 2個 (13091)", "index.html", "[CueScoreDomainV1.RESULT_LABELS.ONE,CueScoreDomainV1.RESULT_LABELS.TWO,CueScoreDomainV1.RESULT_LABELS.TWO_OR_MORE,CueScoreDomainV1.RESULT_LABELS.THREE_OR_MORE].includes(", "[CueScoreDomainV1.RESULT_LABELS.ONE,CueScoreDomainV1.RESULT_LABELS.TWO_OR_MORE,CueScoreDomainV1.RESULT_LABELS.THREE_OR_MORE].includes("],
   ["consumer lists unified (16580 gains 2個)", "index.html", "[CueScoreDomainV1.RESULT_LABELS.ONE,CueScoreDomainV1.RESULT_LABELS.TWO_OR_MORE].includes(", "[CueScoreDomainV1.RESULT_LABELS.ONE,CueScoreDomainV1.RESULT_LABELS.TWO,CueScoreDomainV1.RESULT_LABELS.TWO_OR_MORE].includes("],
   ["Mapper maps 2個 to the wrong key", "i18n-v1.js", '"2個":"mapper.resultLabel.two"', '"2個":"mapper.resultLabel.twoOrMore"'],
-  ["analysis status word changed", "analysis-final-rc.js", 'let status = "安定";', 'let status = "安定 ";'],
-  ["label-text threshold changed (10818)", "index.html", 'label.includes("率") ? 2 : 0.3', 'label.includes("Rate") ? 2 : 0.3'],
+  ["final-RC state code mapping changed", "analysis-final-rc.js", 'else if (worsened >= 2 && improved === 0) statusCode = "attention";', 'else if (worsened >= 2 && improved === 1) statusCode = "attention";'],
+  ["trend threshold 2 -> 3 (rate kind)", "index.html", "Math.max(isRate ? 2 : 0.3, scale * 0.04)", "Math.max(isRate ? 3 : 0.3, scale * 0.04)"],
+  ["trend threshold reverts to label text", "index.html", "Math.max(isRate ? 2 : 0.3, scale * 0.04)", 'Math.max(label.includes("率") ? 2 : 0.3, scale * 0.04)'],
+  ["win-rate chart loses isRate", "index.html", 'label: "勝率", lowerIsBetter: false, suffix: "%", isRate: true', 'label: "勝率", lowerIsBetter: false, suffix: "%"'],
   ["coach threshold 60 -> 61", "index.html", "(s.winRate||0)>=60", "(s.winRate||0)>=61"],
   ["new MutationObserver added", "player-detail-build6.js", "const dateValue=", "new MutationObserver(()=>{});const dateValue="],
   ["ja collation replaced at one site", "index.html", 'a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE));', 'a.name.localeCompare(b.name, "en"));'],
@@ -48,7 +50,14 @@ const M = [
   ["Free record limit 20 -> 21", "record-access-v1.js", "const FREE_LIMIT=20;", "const FREE_LIMIT=21;"],
   ["quota detection regex changed", "index.html", "保存容量が不足", "保存容量不足"],
   ["existing test weakened (comment added)", "tests/analysis-v2.test.mjs", "import", "// weakened\nimport"],
-  ["status expression changed in phase2-6", "navigation-phase2-6.js", 'current.winRate>previous.winRate?"改善傾向"', 'current.winRate>=previous.winRate?"改善傾向"'],
+  ["hub status code mapping changed (phase2-6)", "navigation-phase2-6.js", 'current.winRate>previous.winRate?"improving"', 'current.winRate>=previous.winRate?"improving"'],
+  ["overlay status code mapping changed (build4)", "analysis-build4.js", 'previous.games<3?"stable"', 'previous.games<2?"stable"'],
+  ["highlight flag dropped for masuwari", "analysis-final-rc.js", 'new Set(["masuwari"])', "new Set([])"],
+  ["highlight flag dropped for fouls", "analysis-final-rc.js", 'new Set(["shotRate", "highRun", "average", "avgFouls"])', 'new Set(["shotRate", "highRun", "average"])'],
+  ["rating order swapped", "index.html", "Object.freeze(['shot','scoring','run','stability','finish'])", "Object.freeze(['shot','scoring','run','finish','stability'])"],
+  ["coach tone rule changed", "index.html", "else if(growth?.ready && downs>=3 && downs>ups){tone='alert';}", "else if(growth?.ready && downs>=2 && downs>ups){tone='alert';}"],
+  ["growth status code threshold changed", "index.html", "score>=2?'improving'", "score>=3?'improving'"],
+  ["final-RC badge class reads text again", "analysis-final-rc.js", 'result.statusCode === "attention")', 'result.status === "要調整")'],
   ["Observer role: allowed observer gains Japanese text", "index.html", 'const syncAvatarChooserViewportV55=()=>document.body.classList.toggle("player-avatar-chooser-visible-v55",!chooser.classList.contains("hidden"));', 'const syncAvatarChooserViewportV55=()=>{document.body.classList.toggle("player-avatar-chooser-visible-v55",!chooser.classList.contains("hidden"));document.title="あ";};']
 ];
 const results = [];
@@ -57,7 +66,7 @@ for (const [name, file, from, to] of M) {
   const count = original.split(from).length - 1;
   if (count < 1) { results.push({ name, file, applied: false, note: `pattern not found (${count})` }); continue; }
   fs.writeFileSync(target, original.replace(from, to));
-  const r = spawnSync(process.execPath, ["--test", ...(process.env.SKIP_ANCHORS === "1" ? ["--test-skip-pattern=L0 anchor"] : []), ...fs.readdirSync(path.join(TMP, "tests")).filter(f => /^p2-[012]-.*\.test\.mjs$/.test(f)).map(f => "tests/" + f)], { cwd: TMP, encoding: "utf8", env: { ...process.env, NODE_TEST_CONTEXT: undefined } });
+  const r = spawnSync(process.execPath, ["--test", ...(process.env.SKIP_ANCHORS === "1" ? ["--test-skip-pattern=L0 anchor"] : []), ...fs.readdirSync(path.join(TMP, "tests")).filter(f => /^p2-[0123]-.*\.test\.mjs$/.test(f)).map(f => "tests/" + f)], { cwd: TMP, encoding: "utf8", env: { ...process.env, NODE_TEST_CONTEXT: undefined } });
   const failed = [...r.stdout.matchAll(/^✖ (\[[^\n]*?)(?: \(\d)/gm)].map(m => m[1].slice(0, 90)).filter((v, i, a) => a.indexOf(v) === i);
   results.push({ name, file, applied: true, killed: r.status !== 0, failingTests: failed.slice(0, 4), failingCount: failed.length });
   fs.writeFileSync(target, original);

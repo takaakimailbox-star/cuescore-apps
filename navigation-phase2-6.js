@@ -68,7 +68,7 @@
   function analysisView(records,player,state){
     if(!window.CueScoreEntitlement?.isPro?.())return `<button type="button" class="cue-pro-locked-card-v1" data-hub-tab="analysis"><span><strong>分析</strong><small>詳細分析と推移グラフはProで利用できます</small></span><span class="cue-pro-badge-v1">🔒 Pro</span></button>`;
     const currentRecords=records.slice(0,10),previousRecords=records.slice(10,20),current=api.aggregate(currentRecords,player,helpers),previous=api.aggregate(previousRecords,player,helpers),keys=metricKeys[state.discipline]||[],advice=points(current,previous,state),bests=displayedBestsFor(records,player,state.discipline);
-    const status=current.games<3?"データ蓄積中":previous.games<3?"安定":current.winRate>previous.winRate?"改善傾向":current.winRate<previous.winRate?"要調整":"安定";
+    const statusCode=current.games<3?"accumulating":previous.games<3?"stable":current.winRate>previous.winRate?"improving":current.winRate<previous.winRate?"attention":"stable",status={accumulating:"データ蓄積中",stable:"安定",improving:"改善傾向",attention:"要調整"}[statusCode];
     return `<section class="hub-card-v2 hub-now-v2"><div><h2>今の状態</h2><b>${status}</b></div><strong>${current.games?`直近${current.games}試合　${current.wins}勝${current.losses}敗　勝率${Math.round(current.winRate)}%`:"データなし"}</strong><small>条件を満たす保存済み試合だけを使用しています</small></section>
       <h2 class="hub-heading-v2">主要指標</h2><section class="hub-metrics-v2">${keys.map(key=>`<article><strong>${fmt(key,current[key])}</strong><span>${labels[key]}</span></article>`).join("")||"<span>データなし</span>"}</section>
       <section class="hub-links-v2"><button type="button" data-hub-trends><span><strong>推移</strong><small>主要指標をグラフで見る</small></span><b>›</b></button></section>

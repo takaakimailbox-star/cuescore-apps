@@ -25,6 +25,11 @@
   metricDefinitions.straightPool = averageMetrics("straightPool");
   metricDefinitions.threeCushion = averageMetrics("threeCushion");
 
+  // Which conclusion sentences carry the "attention" highlight (current behavior, now keyed by metric id instead of sentence text).
+  const IMPROVE_HIGHLIGHT_KEYS = new Set(["masuwari"]);
+  const WORSEN_HIGHLIGHT_KEYS = new Set(["shotRate", "highRun", "average", "avgFouls"]);
+  const STATUS_TEXT = { improving: "改善傾向", attention: "要調整", stable: "安定", accumulating: "蓄積中" };
+
   const definitionsFor = discipline => metricDefinitions[discipline] || metricDefinitions.rotation;
   const finite = value => value !== null && value !== undefined && value !== "" && typeof value !== "boolean" && Number.isFinite(Number(value));
   const formatValue = (value, definition) => finite(value)
@@ -51,17 +56,22 @@
     const directions = [...metrics.map(metric => metric.direction), winDirection];
     const improved = directions.filter(direction => direction === "improved").length;
     const worsened = directions.filter(direction => direction === "worsened").length;
-    let status = "安定";
-    if (!sufficient) status = "蓄積中";
-    else if (improved >= 2 && worsened === 0) status = "改善傾向";
-    else if (worsened >= 2 && improved === 0) status = "要調整";
+    let statusCode = "stable";
+    if (!sufficient) statusCode = "accumulating";
+    else if (improved >= 2 && worsened === 0) statusCode = "improving";
+    else if (worsened >= 2 && improved === 0) statusCode = "attention";
+    const status = STATUS_TEXT[statusCode];
     const mixed = improved > 0 && worsened > 0;
+    const changed = sufficient ? metrics.filter(metric => metric.direction === "improved" || metric.direction === "worsened") : [];
     const conclusions = sufficient
-      ? metrics.filter(metric => metric.direction === "improved" || metric.direction === "worsened").map(metric => metric.direction === "improved" ? metric.improve : metric.worsen)
+      ? changed.map(metric => metric.direction === "improved" ? metric.improve : metric.worsen)
       : ["比較に必要な試合データを蓄積中"];
-    if (sufficient && !conclusions.length) conclusions.push("競技別指標は前期間と同水準");
-    if (mixed) conclusions.push("改善と悪化が混在しているため、全体として断定しません");
-    return { metrics, winDirection, improved, worsened, mixed, status, conclusions };
+    const conclusionAttention = sufficient
+      ? changed.map(metric => metric.direction === "improved" ? IMPROVE_HIGHLIGHT_KEYS.has(metric.key) : WORSEN_HIGHLIGHT_KEYS.has(metric.key))
+      : [false];
+    if (sufficient && !conclusions.length) { conclusions.push("競技別指標は前期間と同水準"); conclusionAttention.push(false); }
+    if (mixed) { conclusions.push("改善と悪化が混在しているため、全体として断定しません"); conclusionAttention.push(false); }
+    return { metrics, winDirection, improved, worsened, mixed, status, statusCode, conclusions, conclusionAttention };
   };
 
   const api = { definitionsFor, formatValue, metricDirection, evaluate };
@@ -99,11 +109,11 @@
     const status = view.querySelector(".analysis-v2-status");
     if (status) {
       status.textContent = result.status;
-      status.classList.toggle("attention", result.status === "要調整");
-      status.classList.toggle("neutral", result.status === "安定" || result.mixed);
+      status.classList.toggle("attention", result.statusCode === "attention");
+      status.classList.toggle("neutral", result.statusCode === "stable" || result.mixed);
     }
     const change = view.querySelector(".analysis-v2-change");
-    if (change) change.innerHTML = result.conclusions.map(text => `<span class="${text.includes("増加傾向") || text.includes("低下傾向") ? "attention" : ""}">${escapeHtml(text)}</span>`).join("<br>");
+    if (change) change.innerHTML = result.conclusions.map((text, index) => `<span class="${result.conclusionAttention[index] ? "attention" : ""}">${escapeHtml(text)}</span>`).join("<br>");
     const deltas = view.querySelector(".analysis-v2-deltas");
     if (deltas) deltas.hidden = true;
 
