@@ -82,6 +82,8 @@
     "settings.language.unchanged": "言語は変更されていません。",
     "mapper.resultLabel.noScore": "無得点",
     "mapper.resultLabel.one": "1個",
+    // P2-2 provisional: legacy values, wording pending P3 terminology approval
+    "mapper.resultLabel.two": "2個",
     "mapper.resultLabel.twoOrMore": "2個以上",
     "mapper.resultLabel.threeOrMore": "3個以上",
     "mapper.resultLabel.scratch": "スクラッチ",
@@ -89,6 +91,7 @@
     "mapper.resultLabel.breakFailed": "ブレイク失敗",
     "mapper.resultLabel.breakFoul": "ブレイクファール",
     "mapper.resultLabel.foulBreakChange": "ファール（ブレイク交代）",
+    "mapper.resultLabel.skipped": "記録なし", // P2-2 provisional (legacy value), pending P3 terminology approval
     "mapper.resultLabel.pocketed": "{count}球イン",
     "mapper.category.tournament": "大会",
     "mapper.category.other": "その他"

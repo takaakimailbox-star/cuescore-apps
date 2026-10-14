@@ -258,7 +258,7 @@ test("TOCTOU: if recording starts between the check and the reload the key is ro
 /* ---------- Display Mapper (read only, canonical values untouched) ---------- */
 test("Display Mapper translates canonical resultLabel values for display only and leaves unknown values alone", () => {
   const labels = Object.keys(core.RESULT_LABEL_KEYS);
-  assert.equal(labels.length, 9);
+  assert.equal(labels.length, 11); // P2-2: + legacy 2個 and 記録なし (Display Mapper only; stored values unchanged)
   for (const label of labels) {
     assert.equal(core.mapResultLabel(make("ja"), label), label, `ja must show ${label} unchanged`);
     assert.notEqual(core.mapResultLabel(make("en"), label), label);

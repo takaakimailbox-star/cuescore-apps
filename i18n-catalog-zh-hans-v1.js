@@ -82,6 +82,8 @@
     "settings.language.unchanged": "语言未更改。",
     "mapper.resultLabel.noScore": "无得分",
     "mapper.resultLabel.one": "1球",
+    // P2-2 provisional: legacy values, wording pending P3 terminology approval
+    "mapper.resultLabel.two": "2球",
     "mapper.resultLabel.twoOrMore": "2球以上",
     "mapper.resultLabel.threeOrMore": "3球以上",
     "mapper.resultLabel.scratch": "母球落袋",
@@ -89,6 +91,7 @@
     "mapper.resultLabel.breakFailed": "开球失败",
     "mapper.resultLabel.breakFoul": "开球犯规",
     "mapper.resultLabel.foulBreakChange": "犯规（交换开球）",
+    "mapper.resultLabel.skipped": "未记录", // P2-2 provisional (legacy value), pending P3 terminology approval
     "mapper.resultLabel.pocketed": "进{count}球",
     "mapper.category.tournament": "比赛",
     "mapper.category.other": "其他"

@@ -287,9 +287,10 @@
    "skips": 0
   },
   "i18n-foundation-v1.test.mjs": {
-   "sha256": "ac8e92329319d09d1982a80d8447f7e15f483c828dd563ad86b3e1a2796678d0",
+   "sha256": "8bca38f65605eb9949378aa526a012f4da59834f9ac9f0a2eb09264327243de8",
    "tests": 22,
-   "skips": 0
+   "skips": 0,
+   "previousSha256": "ac8e92329319d09d1982a80d8447f7e15f483c828dd563ad86b3e1a2796678d0"
   },
   "in-progress-match-restore.test.mjs": {
    "sha256": "01354fd580334b884f0fad6f770786c81c08f569b6f5a4b6e7e11210b70bc6d2",
@@ -596,5 +597,5 @@
    "skips": 0
   }
  },
- "updated_by": "P2-1 (a841cbc baseline files changed only to read Domain constants / supply the global; assertions not weakened)"
+ "updated_by": "P2-1 (a841cbc baseline files changed only to read Domain constants / supply the global; assertions not weakened) | P2-2: i18n-foundation-v1 mapper label count 9->11"
 }

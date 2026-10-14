@@ -15,7 +15,7 @@ const M = [
   ["resultLabel producer priority changed", "index.html", 'decision.preBreakFoul ? CueScoreDomainV1.RESULT_LABELS.PRE_BREAK_FOUL : decision.scratch', 'decision.scratch ? CueScoreDomainV1.RESULT_LABELS.SCRATCH : decision.preBreakFoul'],
   ["consumer list: drop 2個 (13091)", "index.html", "[CueScoreDomainV1.RESULT_LABELS.ONE,CueScoreDomainV1.RESULT_LABELS.TWO,CueScoreDomainV1.RESULT_LABELS.TWO_OR_MORE,CueScoreDomainV1.RESULT_LABELS.THREE_OR_MORE].includes(", "[CueScoreDomainV1.RESULT_LABELS.ONE,CueScoreDomainV1.RESULT_LABELS.TWO_OR_MORE,CueScoreDomainV1.RESULT_LABELS.THREE_OR_MORE].includes("],
   ["consumer lists unified (16580 gains 2個)", "index.html", "[CueScoreDomainV1.RESULT_LABELS.ONE,CueScoreDomainV1.RESULT_LABELS.TWO_OR_MORE].includes(", "[CueScoreDomainV1.RESULT_LABELS.ONE,CueScoreDomainV1.RESULT_LABELS.TWO,CueScoreDomainV1.RESULT_LABELS.TWO_OR_MORE].includes("],
-  ["Mapper gains 2個 (gap closed outside P2-2)", "i18n-v1.js", '"1個":"mapper.resultLabel.one",', '"1個":"mapper.resultLabel.one","2個":"mapper.resultLabel.twoOrMore",'],
+  ["Mapper maps 2個 to the wrong key", "i18n-v1.js", '"2個":"mapper.resultLabel.two"', '"2個":"mapper.resultLabel.twoOrMore"'],
   ["analysis status word changed", "analysis-final-rc.js", 'let status = "安定";', 'let status = "安定 ";'],
   ["label-text threshold changed (10818)", "index.html", 'label.includes("率") ? 2 : 0.3', 'label.includes("Rate") ? 2 : 0.3'],
   ["coach threshold 60 -> 61", "index.html", "(s.winRate||0)>=60", "(s.winRate||0)>=61"],
@@ -30,6 +30,13 @@ const M = [
   ["Domain asset dropped from native bundle", "scripts/build-native-web.mjs", '  "domain-constants-v1.js",\n', ""],
   ["consumer reads Domain with wrong locale (record-access)", "record-access-v1.js", "domain.SORT_LOCALE,{numeric:true}", '"en",{numeric:true}'],
   ["literal comparison re-introduced in index.html", "index.html", "=== CueScoreDomainV1.RESULT_LABELS.NO_SCORE).length", '=== "無得点").length'],
+  ["Mapper loses the 2個 entry", "i18n-v1.js", '"2個":"mapper.resultLabel.two",', ""],
+  ["Mapper loses the 記録なし entry", "i18n-v1.js", ',"記録なし":"mapper.resultLabel.skipped"', ""],
+  ["en catalog shows the canonical value for 2個", "i18n-catalog-en-v1.js", '"mapper.resultLabel.two": "2 balls",', '"mapper.resultLabel.two": "2個",'],
+  ["ja catalog changes a canonical display value", "i18n-catalog-ja-v1.js", '"mapper.resultLabel.skipped": "記録なし",', '"mapper.resultLabel.skipped": "記録無し",'],
+  ["display site bypasses the Mapper", "index.html", 'window.cueResultLabel(e.resultLabel || e.result || "記録")', '(e.resultLabel || e.result || "記録")'],
+  ["Display Mapper leaks into the stored producer", "index.html", "CueScoreDomainV1.pocketedLabel(decision.pocketedBalls.length)", "window.cueResultLabel(CueScoreDomainV1.pocketedLabel(decision.pocketedBalls.length))"],
+  ["Domain SKIPPED value changed", "domain-constants-v1.js", 'SKIPPED:"記録なし"', 'SKIPPED:"記録無し"'],
   ["Backup schemaVersion 2 -> 3", "index.html", "const BACKUP_SCHEMA_VERSION = 2;", "const BACKUP_SCHEMA_VERSION = 3;"],
   ["Backup format renamed", "index.html", 'const BACKUP_FORMAT = "cuescore-apps-backup";', 'const BACKUP_FORMAT = "cuescore-apps-backup2";'],
   ["Backup file name changed", "index.html", "CueScore_Apps_v1.0_Backup_", "CueScore_Apps_v1.1_Backup_"],
@@ -50,7 +57,7 @@ for (const [name, file, from, to] of M) {
   const count = original.split(from).length - 1;
   if (count < 1) { results.push({ name, file, applied: false, note: `pattern not found (${count})` }); continue; }
   fs.writeFileSync(target, original.replace(from, to));
-  const r = spawnSync(process.execPath, ["--test", ...(process.env.SKIP_ANCHORS === "1" ? ["--test-skip-pattern=L0 anchor"] : []), ...fs.readdirSync(path.join(TMP, "tests")).filter(f => /^p2-[01]-.*\.test\.mjs$/.test(f)).map(f => "tests/" + f)], { cwd: TMP, encoding: "utf8", env: { ...process.env, NODE_TEST_CONTEXT: undefined } });
+  const r = spawnSync(process.execPath, ["--test", ...(process.env.SKIP_ANCHORS === "1" ? ["--test-skip-pattern=L0 anchor"] : []), ...fs.readdirSync(path.join(TMP, "tests")).filter(f => /^p2-[012]-.*\.test\.mjs$/.test(f)).map(f => "tests/" + f)], { cwd: TMP, encoding: "utf8", env: { ...process.env, NODE_TEST_CONTEXT: undefined } });
   const failed = [...r.stdout.matchAll(/^✖ (\[[^\n]*?)(?: \(\d)/gm)].map(m => m[1].slice(0, 90)).filter((v, i, a) => a.indexOf(v) === i);
   results.push({ name, file, applied: true, killed: r.status !== 0, failingTests: failed.slice(0, 4), failingCount: failed.length });
   fs.writeFileSync(target, original);

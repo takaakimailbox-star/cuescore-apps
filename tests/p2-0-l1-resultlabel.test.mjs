@@ -134,29 +134,41 @@ test("[P2L-003] BREAK_RESULT_LABELS_V61 is defined once and never referenced els
 
 /* ---------- display (16526) ---------- */
 test("[P2L-008] display rows (buildAnalysisLogV65): every stored label is shown verbatim after the arrow; empty falls back to 記録; no language input", () => {
-  const log = vm.runInNewContext(`const escapeRecordText=s=>String(s);${extractFunction(html, "buildAnalysisLogV65")};buildAnalysisLogV65`, {});
+  const logFor = lang => { const i = stub(lang); return vm.runInNewContext(`const escapeRecordText=s=>String(s);${extractFunction(html, "buildAnalysisLogV65")};buildAnalysisLogV65`, { window: { cueResultLabel: v => core.mapResultLabel(i, v) } }); };
+  const log = logFor("ja");
   const labels = ["無得点", "1個", "2個", "2個以上", "3個以上", "スクラッチ", "イリーガル", "ブレイク失敗", "ブレイクファール", "ファール（ブレイク交代）", "4球イン", "記録なし", "未知"];
   const events = labels.map((resultLabel, i) => ({ type: "break_result", player: 1, rack: i + 1, resultLabel }));
   events.push({ type: "break_result", player: 1, rack: 99, result: "2個以上" }, { type: "break_result", player: 1, rack: 100 }, { type: "break_result", player: 2, rack: 1, resultLabel: "無得点" });
   const rows = JSON.parse(JSON.stringify(log({ analysis: { events }, players: { 1: { name: "A" }, 2: { name: "B" } } }, 1).rows));
   assert.deepEqual(rows.map(r => r.title), [...labels.map(l => "ブレイク → " + l), "ブレイク → 2個以上", "ブレイク → 記録"]);
   assert.deepEqual(rows.filter(r => r.kind === "failed").length, 0, "kind is failed only for scratch/breakFailed flags, not for labels");
+  // P2-2: other languages go through the Display Mapper; stored events are not touched and unknown values stay verbatim
+  const rec = { analysis: { events: [...events, { type: "break_result", player: 1, rack: 101, resultLabel: "未知の値" }] }, players: { 1: { name: "A" }, 2: { name: "B" } } };
+  const before = JSON.stringify(rec);
+  const en = logFor("en")(rec, 1).rows.map(r => r.title), zh = logFor("zh-Hans")(rec, 1).rows.map(r => r.title);
+  assert.equal(JSON.stringify(rec), before, "display must not rewrite the stored record");
+  assert.equal(en[2], "ブレイク → 2 balls"); assert.equal(zh[2], "ブレイク → 2球");
+  assert.equal(en[3], "ブレイク → 2 or more"); assert.equal(en.at(-1), "ブレイク → 未知の値");
+  assert.equal(logFor("en")({ analysis: { events: [{ type: "break_result", player: 1, rack: 1, resultLabel: "記録なし" }] } }, 1).rows[0].title, "ブレイク → Not recorded");
+  assert.equal(logFor("zh-Hans")({ analysis: { events: [{ type: "break_result", player: 1, rack: 1, resultLabel: "記録なし" }] } }, 1).rows[0].title, "ブレイク → 未记录");
 });
 
-test("[P2L-008] display: stored label is shown verbatim after `ブレイク → ` with fallback 記録 (no Mapper call today)", () => {
-  assert.ok(html.includes('title:`ブレイク → ${e.resultLabel || e.result || "記録"}`'));
-  assert.equal(count(html, /mapResultLabel/g), 0, "index.html does not call the Mapper yet (P2-2 adds the display site)");
+test("[P2L-008] display site (16526) reads the stored label and shows it through the Display Mapper with fallback 記録", () => {
+  assert.ok(html.includes('title:`ブレイク → ${window.cueResultLabel(e.resultLabel || e.result || "記録")}`'));
+  assert.equal(count(html, /mapResultLabel/g), 1, "exactly one Mapper binding (window.cueResultLabel)");
+  assert.ok(html.includes("window.cueResultLabel = value => core.mapResultLabel(instance, value);"));
+  assert.ok(html.includes("window.cueResultLabel = value => value;"), "no-i18n fallback shows the stored value");
 });
 
 /* ---------- Mapper (i18n-v1.js) ---------- */
 const stub = language => core.createI18n({ language, storage: null });
-test("[P2L-002] Mapper: current table, pass-through of unknown values and the two known gaps (2個, 記録なし)", () => {
-  assert.deepEqual(Object.keys(core.RESULT_LABEL_KEYS), ["無得点", "1個", "2個以上", "3個以上", "スクラッチ", "イリーガル", "ブレイク失敗", "ブレイクファール", "ファール（ブレイク交代）"]);
+test("[P2L-002] Mapper: table = Domain canonical values, ja unchanged, en / zh-Hans mapped, unknown values verbatim", () => {
+  assert.deepEqual(Object.keys(core.RESULT_LABEL_KEYS), ["無得点", "1個", "2個", "2個以上", "3個以上", "スクラッチ", "イリーガル", "ブレイク失敗", "ブレイクファール", "ファール（ブレイク交代）", "記録なし"]);
+  assert.deepEqual(Object.keys(core.RESULT_LABEL_KEYS).sort(), Object.values(domain.RESULT_LABELS).sort(), "Mapper table covers exactly the Domain canonical values");
   const ja = stub("ja"), en = stub("en"), zh = stub("zh-Hans");
   for (const label of Object.keys(core.RESULT_LABEL_KEYS)) assert.equal(core.mapResultLabel(ja, label), label, "ja shows the canonical value unchanged: " + label);
-  for (const gap of ["2個", "記録なし"]) {
-    for (const i of [ja, en, zh]) assert.equal(core.mapResultLabel(i, gap), gap, "gap value passes through verbatim until P2-2: " + gap);
-  }
+  assert.deepEqual(["2個", "記録なし"].map(v => core.mapResultLabel(en, v)), ["2 balls", "Not recorded"]);
+  assert.deepEqual(["2個", "記録なし"].map(v => core.mapResultLabel(zh, v)), ["2球", "未记录"]);
   for (const value of ["", "未知", "球イン", "1球インX", "x3球イン"]) for (const i of [ja, en, zh]) assert.equal(core.mapResultLabel(i, value), value);
   for (const value of [null, undefined, 7, {}]) assert.equal(core.mapResultLabel(en, value), value);
   assert.equal(core.mapResultLabel(ja, "5球イン"), "5球イン");

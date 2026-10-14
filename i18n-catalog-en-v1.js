@@ -82,6 +82,8 @@
     "settings.language.unchanged": "The language was not changed.",
     "mapper.resultLabel.noScore": "No score",
     "mapper.resultLabel.one": "1 ball",
+    // P2-2 provisional: legacy values, wording pending P3 terminology approval
+    "mapper.resultLabel.two": "2 balls",
     "mapper.resultLabel.twoOrMore": "2 or more",
     "mapper.resultLabel.threeOrMore": "3 or more",
     "mapper.resultLabel.scratch": "Scratch",
@@ -89,6 +91,7 @@
     "mapper.resultLabel.breakFailed": "Break failed",
     "mapper.resultLabel.breakFoul": "Break foul",
     "mapper.resultLabel.foulBreakChange": "Foul (break changes)",
+    "mapper.resultLabel.skipped": "Not recorded", // P2-2 provisional (legacy value), pending P3 terminology approval
     "mapper.resultLabel.pocketed": "{count} pocketed",
     "mapper.category.tournament": "Tournament",
     "mapper.category.other": "Other"

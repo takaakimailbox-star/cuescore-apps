@@ -230,10 +230,10 @@
   /* ---------- Display Mapper (read only; stored values are never rewritten) ---------- */
   // Canonical Japanese break_result.resultLabel values map to catalog keys. Unknown values are returned unchanged.
   const RESULT_LABEL_KEYS=Object.freeze({
-    "無得点":"mapper.resultLabel.noScore","1個":"mapper.resultLabel.one","2個以上":"mapper.resultLabel.twoOrMore",
+    "無得点":"mapper.resultLabel.noScore","1個":"mapper.resultLabel.one","2個":"mapper.resultLabel.two","2個以上":"mapper.resultLabel.twoOrMore",
     "3個以上":"mapper.resultLabel.threeOrMore","スクラッチ":"mapper.resultLabel.scratch","イリーガル":"mapper.resultLabel.illegal",
     "ブレイク失敗":"mapper.resultLabel.breakFailed","ブレイクファール":"mapper.resultLabel.breakFoul",
-    "ファール（ブレイク交代）":"mapper.resultLabel.foulBreakChange"
+    "ファール（ブレイク交代）":"mapper.resultLabel.foulBreakChange","記録なし":"mapper.resultLabel.skipped"
   });
   function mapResultLabel(i18n,value){
     if(typeof value!=="string")return value;

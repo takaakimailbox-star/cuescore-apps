@@ -12,7 +12,7 @@
   "area": "C",
   "file": "i18n-v1.js",
   "line": 233,
-  "snippet": "\"無得点\":\"mapper.resultLabel.noScore\",\"1個\":\"mapper.resultLabel.one\",\"2個以上\":\"mapper.resultLabel.twoOrMore\",",
+  "snippet": "\"無得点\":\"mapper.resultLabel.noScore\",\"1個\":\"mapper.resultLabel.one\",\"2個\":\"mapper.resultLabel.two\",\"2個以上\":\"mapper.resultLabel.twoOrMore\",",
   "function": "mapResultLabel / RESULT_LABEL_KEYS"
  },
  {
@@ -60,7 +60,7 @@
   "area": "C",
   "file": "index.html",
   "line": 16526,
-  "snippet": "title:`ブレイク → ${e.resultLabel || e.result || \"記録\"}`,",
+  "snippet": "title:`ブレイク → ${window.cueResultLabel(e.resultLabel || e.result || \"記録\")}`,",
   "function": "match-detail rows builder"
  },
  {

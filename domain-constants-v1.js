@@ -25,7 +25,8 @@
     ILLEGAL:"イリーガル",
     BREAK_FAILED:"ブレイク失敗",
     BREAK_FOUL:"ブレイクファール",
-    PRE_BREAK_FOUL:"ファール（ブレイク交代）"
+    PRE_BREAK_FOUL:"ファール（ブレイク交代）",
+    SKIPPED:"記録なし"            // legacy value; displayed through the Display Mapper only
   });
   const pocketedLabel=count=>`${count}球イン`;
 

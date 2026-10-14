@@ -8808,10 +8808,11 @@ body {
      Japanese resolves to a no-op, so the existing Japanese markup is never rewritten. */
   (() => {
     const core = window.CueScoreI18nV1;
-    if (!core) { window.cueT = key => String(key); return; }
+    if (!core) { window.cueT = key => String(key); window.cueResultLabel = value => value; return; }
     const instance = core.createI18n();
     window.CueScoreI18n = instance;
     window.cueT = (key, params) => instance.t(key, params);
+    window.cueResultLabel = value => core.mapResultLabel(instance, value); // Display Mapper: stored resultLabel -> display text (read only)
     instance.applyHtmlLang(document);
     instance.applyStatic(document);
   })();
@@ -16524,7 +16525,7 @@ let matchRecordsRawCacheV152 = null;
       rows.push({
         kind: (e.scratch || e.breakFailed) ? "failed" : "success",
         countAsTarget: true,
-        title:`ブレイク → ${e.resultLabel || e.result || "記録"}`,
+        title:`ブレイク → ${window.cueResultLabel(e.resultLabel || e.result || "記録")}`,
         meta:`ラック${e.rack}`
       });
     });

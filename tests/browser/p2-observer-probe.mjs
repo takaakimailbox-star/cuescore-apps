@@ -35,6 +35,15 @@ const PORT = server.address().port;
 /* ---------- seed data (production-shaped records from the stage-1 fixtures) ---------- */
 const fixtures = stage1Fixtures();
 const records = fixtures.map((f, i) => ({ ...f.source, endedAt: new Date(Date.UTC(2026, 0, 2 + i, 3, 4, 5)).toISOString(), playedAt: new Date(Date.UTC(2026, 0, 2 + i, 2, 0, 0)).toISOString(), startedAt: new Date(Date.UTC(2026, 0, 2 + i, 2, 0, 0)).toISOString() }));
+// P2_LABEL_RECORD=1 (P2-2): add one record that carries every canonical break label, to verify the Display Mapper in the real UI.
+const LABEL_RECORD = process.env.P2_LABEL_RECORD === "1";
+const LABELS = ["無得点", "1個", "2個", "2個以上", "3個以上", "スクラッチ", "イリーガル", "ブレイク失敗", "ブレイクファール", "ファール（ブレイク交代）", "記録なし", "4球イン", "未知の値"];
+if (LABEL_RECORD) {
+  const base = JSON.parse(JSON.stringify(records[0]));
+  base.id = "p22-label-record"; base.endedAt = new Date(Date.UTC(2026, 5, 1, 3, 0, 0)).toISOString(); base.playedAt = base.endedAt; base.startedAt = base.endedAt;
+  base.analysis = { ...(base.analysis || {}), report: { ...((base.analysis || {}).report || {}), recordingMode: "detail" }, events: LABELS.map((resultLabel, i) => ({ type: "break_result", sequence: i + 1, player: 1, breakPlayer: 1, rack: i + 1, inning: 1, resultLabel })) };
+  records.unshift(base);
+}
 const names = [...new Set(records.flatMap(r => [r.players?.[1]?.name, r.players?.[2]?.name]).filter(Boolean))].slice(0, 4);
 const players = names.map((name, i) => ({ id: "p_probe_" + (i + 1), name, avatar: { type: "default", id: "default_silhouette" }, race: 120, skillLevel: 2, memo: "", isPrimary: i === 0, createdAt: 1767225600000 - i, updatedAt: 1767225600000 - i, lastUsed: 1767225600000 - i }));
 const seedScript = `try{if(!localStorage.getItem("__p2_seeded")){localStorage.setItem("rotationScoreboard.players.v1",${JSON.stringify(JSON.stringify(players))});localStorage.setItem("rotationScoreboard.matchRecords.v1",${JSON.stringify(JSON.stringify(records))});${LANG !== "ja" ? `localStorage.setItem("cueScore.language.v1",${JSON.stringify(LANG)});` : ""}localStorage.setItem("__p2_seeded","1");}}catch(e){}`;
@@ -149,6 +158,13 @@ await phase("analysis-v2-match");
 await step("analysis-v2-match", `const rec=JSON.parse(localStorage.getItem("rotationScoreboard.matchRecords.v1"))[0];window.openMatchAnalysisForPlayerV5(rec.id,"p_probe_1","");await new Promise(r=>setTimeout(r,1200));return !!document.querySelector(".analysis-v2")`, 1200);
 await capture("analysis-v2-match");
 await step("analysis-v2-match-back", `const b=document.querySelector("[data-analysis-back]");if(b)b.click();await new Promise(r=>setTimeout(r,700));return !!b`);
+if (LABEL_RECORD) {
+  await phase("history-break-labels");
+  await step("open-label-record", `document.querySelector('[data-phase1-tab="history"]').click();await new Promise(r=>setTimeout(r,800));const c=document.querySelector('#recordsList [data-record-id="p22-label-record"]');if(!c)throw new Error("label record card missing");c.click();await new Promise(r=>setTimeout(r,1200));const rows=[...document.querySelectorAll(".analysis-log-result-v65")].map(n=>n.textContent);return {legacyAnalysisLogPages:document.querySelectorAll("[data-history-page-v67]").length,rows,matchDetailVisible:!!document.querySelector("#recordDetailOverlay .match-detail-v1")}`, 800);
+  await step("mapper-runtime", `return Object.fromEntries(${JSON.stringify(LABELS)}.map(l=>[l,window.cueResultLabel(l)]))`, 200);
+  const rec = log.find(s => s.step === "open-label-record"), map = log.find(s => s.step === "mapper-runtime");
+  fs.writeFileSync(path.join(OUT, `break_label_rows_${LANG}.json`), JSON.stringify({ lang: LANG, openRecord: rec, mapperRuntime: map }, null, 1));
+}
 await phase("settings");
 await step("tab:settings", tab("settings"), 1000); await capture("settings");
 await step("open-suite-generation", `const b=document.querySelector('[data-suite-open="generation"]');if(!b)throw new Error("no suite generation button");b.click();await new Promise(r=>setTimeout(r,800));return "ok"`); await capture("settings-suite-generation");
