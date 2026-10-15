@@ -41,7 +41,7 @@ async function scenario(name, reach, code, { wait = 500, shot } = {}) {
 const tab = key => `document.querySelector('[data-phase1-tab="${key}"]').click();${W(800)}`;
 
 async function boot() {
-  app = await startApp({ lang: LANG, mode: MODE, seedData: seed({ lang: LANG }) });
+  app = await startApp({ lang: LANG, mode: MODE, seedData: seed({ lang: LANG }), freezeTime: process.env.P2_FREEZE === "1" });
   chromeVersion = app.version;
   /* write trap: every innerHTML write inside .analysis-v2 is logged synchronously (before any observer can react), with the observer context that performed it */
   await app.evalJs(`(()=>{const log=window.__p250=[];const d=Object.getOwnPropertyDescriptor(Element.prototype,"innerHTML");Object.defineProperty(Element.prototype,"innerHTML",{configurable:true,enumerable:d.enumerable,get:d.get,set(v){try{if(this.closest&&this.closest(".analysis-v2"))log.push({tag:this.tagName.toLowerCase(),cls:String(this.className||"").slice(0,40),view:this.dataset&&this.dataset.analysisView||null,obs:window.__p2.ctx,html:String(v).slice(0,160)});}catch(_){}return d.set.call(this,v);}});return true})()`);

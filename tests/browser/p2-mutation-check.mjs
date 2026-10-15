@@ -58,7 +58,7 @@ const M = [
   ["Backup format renamed", "index.html", 'const BACKUP_FORMAT = "cuescore-apps-backup";', 'const BACKUP_FORMAT = "cuescore-apps-backup2";'],
   ["Backup file name changed", "index.html", "CueScore_Apps_v1.0_Backup_", "CueScore_Apps_v1.1_Backup_"],
   ["CSV header renamed", "index.html", '"試合ID", "試合日"', '"試合Id", "試合日"'],
-  ["date format: month padding removed", "index.html", 'return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,"0")}/${String(d.getDate()).padStart(2,"0")} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;\n  }\n\n  function openRecords', 'return `${d.getFullYear()}/${d.getMonth()+1}/${String(d.getDate()).padStart(2,"0")} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;\n  }\n\n  function openRecords'],
+  ["date format: month padding removed (P2-6: the pattern table in i18n-v1.js; was the hand-built formatter in index.html)", "i18n-v1.js", '"ymd-hm":"YYYY/MM/DD HH:mm"', '"ymd-hm":"YYYY/M/DD HH:mm"'],
   ["QR allow-list loses resultLabel", "match-sharing-adapters-v1.js", '["breakPlayer","resultLabel",', '["breakPlayer",'],
   ["default category renamed", "domain-constants-v1.js", 'TOURNAMENT:Object.freeze({id:"category_tournament",name:"大会"})', 'TOURNAMENT:Object.freeze({id:"category_tournament",name:"大会 "})'],
   ["IAP product id changed", "monetization-v1.js", "com.takaakimailboxstar.cuescoreapps.pro", "com.takaakimailboxstar.cuescoreapps.pro2"],

@@ -124,9 +124,10 @@
    "skips": 0
   },
   "build47-analysis-cleanup.test.mjs": {
-   "sha256": "dc8f4d20e4f810d3d186fd16709da5059bb495c04a40045d1c89fcbe1292d598",
+   "sha256": "839fd3409415595fbe492b6180ca7f18a00dd296ef621e264d86ef724815892d",
    "tests": 5,
-   "skips": 0
+   "skips": 0,
+   "updated_in": "P2-6 (old->new assertion map in Evidence)"
   },
   "build49-player-hub-layout-and-scroll.test.mjs": {
    "sha256": "979a23c8b2a11d421a91246951568503daa33e704d4cdad65f0b79a0ea641f94",

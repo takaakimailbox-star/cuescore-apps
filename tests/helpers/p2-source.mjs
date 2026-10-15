@@ -61,8 +61,12 @@ export function extractFunction(src, name, nth) {
 /* Evaluate source snippets in a fresh vm context and return the context. */
 const domainConstants = createRequire(import.meta.url)("../../domain-constants-v1.js");
 export const domain = domainConstants;
+/* P2-6: production date display goes through window.cueDate (i18n-v1 core, ja table). Tests that evaluate production snippets get it by default. */
+const i18nCore = createRequire(import.meta.url)("../../i18n-v1.js");
+export const cueDate = (value, id) => i18nCore.formatDatePattern("ja", value, id);
 export function run(code, globals = {}) {
-  const context = vm.createContext({ console, CueScoreDomainV1: domainConstants, ...globals });
+  const win = { cueDate, ...(globals.window || {}) };
+  const context = vm.createContext({ console, CueScoreDomainV1: domainConstants, ...globals, window: win });
   vm.runInContext(code, context);
   return context;
 }

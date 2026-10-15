@@ -69,7 +69,7 @@ const BASE = {
   compareJa: {}, // P2-1: 0 (was index.html 12); the locale now comes from CueScoreDomainV1.SORT_LOCALE
   nfkc: { "analytics-build4-metrics.js": 1, "index.html": 4 }, // P2-1: the two identity paths use IDENTITY_NORMALIZATION_FORM; the 5 remaining are ASCII game-type / search keys
   intlCtor: { "i18n-v1.js": 2, "index.html": 1 },
-  jpWeekdayArray: { "index.html": 3 }
+  jpWeekdayArray: { "i18n-v1.js": 1 } // P2-6: the three inline weekday arrays in index.html were replaced by the single Display table in i18n-v1.js (DATE_WEEKDAYS)
 };
 const PATTERNS = {
   localeLowerJa: /toLocaleLowerCase\(\s*["']ja["']\s*\)/g,

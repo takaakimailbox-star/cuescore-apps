@@ -620,32 +620,32 @@
   "area": "H",
   "file": "analysis-build4.js",
   "line": 33,
-  "snippet": "const recordDate=record=>{const d=new Date(record?.endedAt||record?.playedAt||record?.startedAt||0);return Number.isNaN(d.getTime())?\"日付なし\":",
-  "function": "recordDate"
+  "snippet": "\"日付なし\":window.cueDate(d,\"md\");",
+  "function": "recordDate [P2-6: window.cueDate]"
  },
  {
   "id": "P2L-079",
   "area": "H",
   "file": "index.html",
   "line": 9808,
-  "snippet": "return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,\"0\")}/${String(d.getDate()).padStart(2,\"0\")} ${String(d.getHours()).padStart(",
-  "function": "formatRecordDate  [formatDate-like (record datetime)]"
+  "snippet": "return window.cueDate(d, \"ymd-hm\");",
+  "function": "formatRecordDate  [formatDate-like (record datetime)] [P2-6: window.cueDate]"
  },
  {
   "id": "P2L-080",
   "area": "H",
   "file": "index.html",
   "line": 9944,
-  "snippet": "const date=Number.isNaN(ended.getTime())?\"日付なし\":`${ended.getFullYear()}/${String(ended.getMonth()+1).padStart(2,\"0\")}/${String(ended.getDate",
-  "function": "matchSharingFlowSummaryV1  [matchSharingFlowSummary]"
+  "snippet": "\"日付なし\":window.cueDate(ended,\"ymd-hm\");",
+  "function": "matchSharingFlowSummaryV1  [matchSharingFlowSummary] [P2-6: window.cueDate]"
  },
  {
   "id": "P2L-081",
   "area": "H",
   "file": "index.html",
   "line": 10355,
-  "snippet": "return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,\"0\")}/${String(d.getDate()).padStart(2,\"0\")} ${String(d.getHours()).padStart(",
-  "function": "formatLastUsed  [formatPlayerMatchDate]"
+  "snippet": "return window.cueDate(d, \"ymd-hm\");",
+  "function": "formatLastUsed  [formatPlayerMatchDate] [P2-6: window.cueDate]"
  },
  {
   "id": "P2L-082",
@@ -668,32 +668,32 @@
   "area": "H",
   "file": "index.html",
   "line": 13520,
-  "snippet": "return `${date.getFullYear()}/${String(date.getMonth()+1).padStart(2,\"0\")}/${String(date.getDate()).padStart(2,\"0\")} ${String(date.getHours(",
-  "function": "inProgressTimeTextV1  [formatResumeDate]"
+  "snippet": "return window.cueDate(date,\"ymd-hm\");",
+  "function": "inProgressTimeTextV1  [formatResumeDate] [P2-6: window.cueDate]"
  },
  {
   "id": "P2L-085",
   "area": "H",
   "file": "index.html",
   "line": 15781,
-  "snippet": "const dateText=validEnd?`${endDate.getFullYear()}/${endDate.getMonth()+1}/${endDate.getDate()}`:\"—\";",
-  "function": "renderOfficialMatchResultV1  [result screen date]"
+  "snippet": "const dateText=validEnd?window.cueDate(endDate,\"ymd-short\"):\"—\";",
+  "function": "renderOfficialMatchResultV1  [result screen date] [P2-6: window.cueDate]"
  },
  {
   "id": "P2L-086",
   "area": "H",
   "file": "index.html",
   "line": 16384,
-  "snippet": "return `${date.getFullYear()}/${month}/${day}（${weekdays[date.getDay()]}）${hour}:${minute}`;",
-  "function": "formatRecordListDate"
+  "snippet": "return window.cueDate(date, \"ymd-w-hm\");",
+  "function": "formatRecordListDate [P2-6: window.cueDate]"
  },
  {
   "id": "P2L-087",
   "area": "H",
   "file": "index.html",
   "line": 16630,
-  "snippet": "const dateText = Number.isNaN(ended.getTime()) ? \"----/--/--\" : `${ended.getFullYear()}/${String(ended.getMonth()+1).padStart(2,\"0\")}/${Stri",
-  "function": "openHistoricalRecord  [history card date]"
+  "snippet": "\"----/--/--\" : window.cueDate(ended, \"ymd\");",
+  "function": "openHistoricalRecord  [history card date] [P2-6: window.cueDate]"
  },
  {
   "id": "P2L-088",
@@ -724,24 +724,24 @@
   "area": "H",
   "file": "index.html",
   "line": 19813,
-  "snippet": "const dateLabel=dateObj&&!Number.isNaN(dateObj.getTime())?`${dateObj.getMonth()+1}/${dateObj.getDate()}`:'日付なし';",
-  "function": "sideA  [sideA (rival list)]"
+  "snippet": "window.cueDate(dateObj, \"md\"):'日付なし';",
+  "function": "sideA  [sideA (rival list)] [P2-6: window.cueDate]"
  },
  {
   "id": "P2L-092",
   "area": "H",
   "file": "index.html",
   "line": 23320,
-  "snippet": "date:`${date.getFullYear()}/${String(date.getMonth()+1).padStart(2,\"0\")}/${String(date.getDate()).padStart(2,\"0\")}（${weekdays[date.getDay()]",
-  "function": "datePartsV1"
+  "snippet": "date:window.cueDate(date, \"ymd-w\"),",
+  "function": "datePartsV1 [P2-6: window.cueDate]"
  },
  {
   "id": "P2L-093",
   "area": "H",
   "file": "index.html",
   "line": 26829,
-  "snippet": "function fmtDate(d,short=false){if(!d)return\"\";const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,\"0\"),day=String(d.getDate()).padS",
-  "function": "fmtDate  [fmtDate (analytics)]"
+  "snippet": "return window.cueDate(d,short?\"mmdd\":\"ymd\");}",
+  "function": "fmtDate  [fmtDate (analytics)] [P2-6: window.cueDate]"
  },
  {
   "id": "P2L-094",
@@ -772,40 +772,40 @@
   "area": "H",
   "file": "index.html",
   "line": 29023,
-  "snippet": "${items.length?[...grouped.entries()].map(([month,rows])=>`<div class=\"journey-month-v2\">${month}</div><div class=\"journey-list-v2\">${rows.m",
-  "function": "renderHistory  [renderHistory (journey)]"
+  "snippet": "window.cueDate(dt,\"ymd-w-sp-hm\")",
+  "function": "renderHistory  [renderHistory (journey)] [P2-6: window.cueDate]"
  },
  {
   "id": "P2L-098",
   "area": "H",
   "file": "index.html",
   "line": 29378,
-  "snippet": "function renderHome(){const p=primary(),pRecords=p?recordsFor(p):[],summary=p?recordSummary(pRecords,p):null,latest=pRecords[0]||allRecords(",
-  "function": "renderHome"
+  "snippet": "\"日付なし\":window.cueDate(date,\"ymd\");match=",
+  "function": "renderHome [P2-6: window.cueDate]"
  },
  {
   "id": "P2L-099",
   "area": "H",
   "file": "index.html",
   "line": 29382,
-  "snippet": "function renderMatch(){const record=allRecords().find(r=>String(r.id)===String(selectedRecordId))||allRecords()[0];if(!record){viewNode(\"mat",
-  "function": "renderMatch"
+  "snippet": "\"日付なし\":window.cueDate(date,\"ymd-hm\");const points=",
+  "function": "renderMatch [P2-6: window.cueDate]"
  },
  {
   "id": "P2L-100",
   "area": "H",
   "file": "navigation-phase2-6.js",
   "line": 32,
-  "snippet": "const dateText=record=>{const d=new Date(dateValue(record));return dateValue(record)?`${d.getMonth()+1}/${d.getDate()}`:\"日付なし\";};",
-  "function": "dateText"
+  "snippet": "return dateValue(record)?window.cueDate(d,\"md\"):\"日付なし\";",
+  "function": "dateText [P2-6: window.cueDate]"
  },
  {
   "id": "P2L-101",
   "area": "H",
   "file": "player-detail-build6.js",
   "line": 25,
-  "snippet": "const dateText=record=>{const d=new Date(dateValue(record));return dateValue(record)?`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2",
-  "function": "dateText"
+  "snippet": "return dateValue(record)?window.cueDate(d,\"ymd\"):\"日付なし\";",
+  "function": "dateText [P2-6: window.cueDate]"
  },
  {
   "id": "P2L-102",

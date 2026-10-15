@@ -165,8 +165,9 @@ test("[P2L-095,066] fixed ja-JP Intl sites: output captured with the current ICU
   if (!g.written && process.versions.icu === JSON.parse(g.expected).icu) assert.equal(g.text, g.expected);
 });
 
-test("[P2L-079..101] weekday arrays: three inline Japanese weekday arrays exist (formatRecordListDate, datePartsV1, renderHistory) and give the same names", () => {
-  assert.equal([...html.matchAll(/\["日","月","火","水","木","金","土"\]/g)].length, 3);
+test("[P2L-079..101] weekday names: no inline Japanese weekday array remains in index.html (P2-6: one Display table in i18n-v1.js) and every site still gives the same names", () => {
+  assert.equal([...html.matchAll(/\["日","月","火","水","木","金","土"\]/g)].length, 0);
+  assert.equal([...read("i18n-v1.js").matchAll(/\["日","月","火","水","木","金","土"\]/g)].length, 1);
   // 2026-01-04 is a Sunday ... 2026-01-10 a Saturday
   const names = ["日", "月", "火", "水", "木", "金", "土"];
   for (let i = 0; i < 7; i++) {

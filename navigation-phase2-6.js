@@ -29,7 +29,7 @@
   const playerProfile=data=>players().find(item=>String(item.id)===String(data?.registeredPlayerId||""))||data||{};
   const opponent=(record,s)=>playerProfile(recordPlayer(record,s===1?2:1));
   const score=(record,s)=>Number(metric(record,s)?.score??recordPlayer(record,s)?.score)||0;
-  const dateText=record=>{const d=new Date(dateValue(record));return dateValue(record)?`${d.getMonth()+1}/${d.getDate()}`:"日付なし";};
+  const dateText=record=>{const d=new Date(dateValue(record));return dateValue(record)?window.cueDate(d,"md"):"日付なし";};
   const stateFor=id=>{const key=String(id);if(!playerState.has(key))playerState.set(key,{discipline:"9ball",tab:"results",scroll:{results:0,matches:0,analysis:0}});return playerState.get(key);};
   const active={playerId:"",player:null,state:null,records:[]};
 

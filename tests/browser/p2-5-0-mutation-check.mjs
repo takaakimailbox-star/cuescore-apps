@@ -47,6 +47,17 @@ const M = [
   ["OBS-03 overlay events narrowed", "final-ui-build18.js", '["click","input","change"]', '["click"]'],
   ["OBS-03 navigation hook dropped", "navigation-shell-phase1.js", "window.CueScoreBuild18PlayerSelection?.refreshSoon?.();};", "};"],
   ["OBS-03 new selection writer added", "index.html", "    selectedRegisteredPlayer[playerLibraryTarget] = id;", "    selectedRegisteredPlayer[playerLibraryTarget] = id; selectedRegisteredPlayer[3-playerLibraryTarget] = selectedRegisteredPlayer[3-playerLibraryTarget];"],
+  /* P2-6 date formatter */
+  ["date pattern ymd-hm loses zero padding", "i18n-v1.js", '"ymd-hm":"YYYY/MM/DD HH:mm"', '"ymd-hm":"YYYY/M/D HH:mm"'],
+  ["date pattern md gains padding", "i18n-v1.js", '"md":"M/D"', '"md":"MM/DD"'],
+  ["weekday table reordered", "i18n-v1.js", '["日","月","火","水","木","金","土"]', '["月","火","水","木","金","土","日"]'],
+  ["date token H padded", "i18n-v1.js", 'case "H":return String(date.getHours());', 'case "H":return two(date.getHours());'],
+  ["invalid date special-cased again", "i18n-v1.js", '// No special case for an invalid Date', 'if(Number.isNaN(date.getTime()))return "";// No special case for an invalid Date'],
+  ["date coerced from strings again", "i18n-v1.js", 'const date=value; //', 'const date=value instanceof Date?value:new Date(value); //'],
+  ["history card uses the wrong pattern", "index.html", 'window.cueDate(dt,"ymd-w-sp-hm")', 'window.cueDate(dt,"ymd-w-hm")'],
+  ["home preview uses the wrong pattern", "index.html", 'dateText=Number.isNaN(date.getTime())?"日付なし":window.cueDate(date,"ymd");', 'dateText=Number.isNaN(date.getTime())?"日付なし":window.cueDate(date,"ymd-hm");'],
+  ["CSV date format changed", "index.html", "const dateText = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;", "const dateText = `${date.getFullYear()}/${pad(date.getMonth() + 1)}/${pad(date.getDate())}`;"],
+  ["an inline weekday array returns", "index.html", "function fmtDate(d,short=false){", 'const WD250=["日","月","火","水","木","金","土"];function fmtDate(d,short=false){'],
   /* OBS-19 / OBS-13 */
   ["OBS-13 analysis-button removal dropped", "index.html", 'forEach(button=>button.remove());\n  new MutationObserver(addHistoryAnalysisEntriesV5)', 'forEach(button=>button);\n  new MutationObserver(addHistoryAnalysisEntriesV5)'],
   ["OBS-19 detail label changed", "player-detail-build6.js", 'detail.textContent="詳細"', 'detail.textContent="詳しく"'],
@@ -71,7 +82,7 @@ for (const [name, file, from, to] of M) {
   const n = original.split(from).length - 1;
   if (n < 1) { results.push({ name, file, applied: false, note: `pattern not found (${n})` }); continue; }
   fs.writeFileSync(target, original.replace(from, to));
-  const files = fs.readdirSync(path.join(TMP, "tests")).filter(f => /^p2-(0-l0-static|5-[0-9]-.*)\.test\.mjs$/.test(f)).map(f => "tests/" + f);
+  const files = fs.readdirSync(path.join(TMP, "tests")).filter(f => /^p2-(0-l0-static|5-[0-9]-.*|6-.*)\.test\.mjs$/.test(f)).map(f => "tests/" + f);
   const r = spawnSync(process.execPath, ["--test", "--test-skip-pattern=L0 anchor", ...files], { cwd: TMP, encoding: "utf8", env: { ...process.env, NODE_TEST_CONTEXT: undefined } });
   const failed = [...r.stdout.matchAll(/^✖ (\[[^\n]*?)(?: \(\d)/gm)].map(m => m[1].slice(0, 90)).filter((v, i, a) => a.indexOf(v) === i);
   results.push({ name, file, applied: true, killed: r.status !== 0, failingTests: failed.slice(0, 3), failingCount: failed.length });

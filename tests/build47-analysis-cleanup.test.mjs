@@ -35,7 +35,8 @@ test("Build 54 makes the dedicated trends compact, readable, and full screen",()
   const analysis=read("analysis-build4.js"),revision=read("ui-revision-v12.js"),css=read("ui-revision-v12.css");
   assert.match(analysis,/data-b4-point/);
   assert.match(analysis,/data-b4-point-callout/);
-  assert.match(analysis,/getMonth\(\)\+1.*getDate\(\)/);
+  assert.match(analysis,/window\.cueDate\(d,"md"\)/); // P2-6: was getMonth()+1 ... getDate() (the "md" pattern is M/D; its output is pinned in tests/p2-6-date-formatter.test.mjs)
+  assert.doesNotMatch(analysis,/getMonth\(\)/);
   assert.match(analysis,/right=48/);
   assert.match(revision,/pd12-trend-heading/);
   assert.match(revision,/formatTrendValue/);

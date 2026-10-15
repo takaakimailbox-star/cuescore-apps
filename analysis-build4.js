@@ -30,7 +30,7 @@
   });
   const fmt=(key,value)=>value==null?"—":percentKeys.has(key)?`${Number(value).toFixed(1)}%`:key==="average"?Number(value).toFixed(3).replace(/0+$/,"").replace(/\.$/,""):String(Math.round(value*100)/100);
   const metricDefs=discipline=>(metricsByDiscipline[discipline]||[]).map(key=>({key,label:labels[key],higher:true}));
-  const recordDate=record=>{const d=new Date(record?.endedAt||record?.playedAt||record?.startedAt||0);return Number.isNaN(d.getTime())?"日付なし":`${d.getMonth()+1}/${d.getDate()}`;};
+  const recordDate=record=>{const d=new Date(record?.endedAt||record?.playedAt||record?.startedAt||0);return Number.isNaN(d.getTime())?"日付なし":window.cueDate(d,"md");};
   function recordMetric(record,player,key,discipline,h){
     const side=h.side(record,player);if(!side)return null;
     if(key==="winRate")return h.won(record,side)?100:0;
