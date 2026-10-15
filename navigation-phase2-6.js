@@ -103,7 +103,7 @@
     state.tab=saved.tab||state.tab;
     state.scroll[state.tab]=Number(saved.scrollTop)||0;
     const library=document.getElementById("playerLibraryOverlay"),overlay=document.getElementById("playerStatsOverlay");
-    library?.classList.add("hidden");library?.setAttribute("aria-hidden","true");
+    library?.classList.add("hidden");library?.setAttribute("aria-hidden","true");window.CueScoreBuild18PlayerSelection?.refreshSoon?.();
     overlay?.classList.remove("hidden");overlay?.setAttribute("aria-hidden","false");
     render(saved.playerId,{discipline:state.discipline,tab:state.tab});
     return true;

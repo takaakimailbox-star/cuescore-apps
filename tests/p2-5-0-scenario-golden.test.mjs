@@ -15,7 +15,7 @@ const S = (g, n) => g.scenarios[n];
 
 test("[golden] both goldens were produced in ja / Asia/Tokyo / 430x932 and contain every scenario with no error", () => {
   for (const g of [free, pro]) { assert.equal(g.lang, "ja"); assert.equal(g.tz, "Asia/Tokyo"); assert.equal(g.viewport, "430x932"); for (const [n, s] of Object.entries(g.scenarios)) assert.equal(s.error, null, n); }
-  assert.equal(Object.keys(free.scenarios).length, 20); assert.equal(Object.keys(pro.scenarios).length, 27);
+  assert.equal(Object.keys(free.scenarios).length, 21); assert.equal(Object.keys(pro.scenarios).length, 28);
 });
 test("[golden / AC-S3 L2] observer targets: every key is a known registration; OBS-04 (avatar chooser) is not created at boot; every target that has an id is the LIVE element", () => {
   for (const g of [free, pro]) {
@@ -38,11 +38,11 @@ test("[golden / C] player editor (OBS-10): edit x3 is stable; create differs; te
   assert.deepEqual(S(free, "C2-player-editor-create").result, { title: "プレーヤー登録", copy: "新しいプレーヤーを登録します。<br>あとからいつでも編集できます。", save: "登録", libTitle: "プレーヤー", open: true });
   assert.deepEqual(S(free, "C1-player-editor-edit-x3").changedObservers, [], "P2-5a-1: the editor texts are written by the opener, no observer changes text any more");
 });
-test("[golden / D] match setup (OBS-03): initial / none / one / two player states are pinned, and the observer path (overlay mutation -> refresh) is what changes them", () => {
+test("[golden / D] match setup (OBS-03): initial / none / one / two player states are pinned, and the production open/close of the library overlay (explicit triggers) is what refreshes them", () => {
   const d1 = S(free, "D1-match-setup-states").result;
   assert.equal(d1.none.p1, "プレーヤーを追加"); assert.equal(d1.none.p2, "対戦相手を追加"); assert.equal(d1.one.p2, "対戦相手を追加");
   assert.equal(d1.none.startDisabled, true); assert.equal(d1.two.guideHidden, true);
-  const d2 = S(free, "D2-setup-observer-path"); assert.deepEqual(d2.changedObservers, ["final-ui-build18.js#0"]);
+  const d2 = S(free, "D2-setup-observer-path"); assert.deepEqual(d2.changedObservers, [], "Phase B: refresh() runs from explicit triggers, not from an observer");
   assert.equal(d2.result.noPlayers.p1, "プレーヤーを追加"); assert.equal(d2.result.onePlayer.p2, "対戦相手を追加"); assert.deepEqual(d2.result.restored, d2.result.before);
 });
 test("[golden / L, OBS-09] Cloud Sync: not reachable in Free or Pro, even by force-clicking the hidden entry; mirror targets stay empty and invisible; the mirror is functional only if a source were written", () => {
@@ -102,9 +102,17 @@ test("[golden / J, OBS-01/02] analysis-v2 player view for all 6 disciplines is b
 test("[golden / M] the legacy player detail (.pd7-shell) is NOT present in the current UI and appears only when the production function is called directly", () => {
   const m = S(pro, "M1-legacy-player-detail-fn").result; assert.equal(m.shellBefore, false); assert.equal(m.shellAfter, true);
 });
-test("[golden / AC-S3 L2] the set of observers that changed text in real runs is pinned: Free 2, Pro 5 (was 6 / 9 before P2-5a-1; OBS-19 never changes text; OBS-09 is not created)", () => {
+test("[golden / AC-S3 L2] the set of observers that changed text in real runs is pinned: Free 1, Pro 4 (was 6 / 9 before P2-5a-1; OBS-03 and OBS-09 are no longer observers; OBS-19 never changes text)", () => {
   const chg = g => [...new Set(Object.values(g.scenarios).flatMap(s => s.changedObservers))].sort();
-  assert.deepEqual(chg(free), ["final-ui-build18.js#0", "monetization-v1.js#0"]);
-  assert.deepEqual(chg(pro), ["analysis-build4.js#0", "analysis-final-rc.js#0", "final-ui-build18.js#0", "ui-revision-v12.js#2", "ui-revision-v12.js#3"]);
+  assert.deepEqual(chg(free), ["monetization-v1.js#0"]);
+  assert.deepEqual(chg(pro), ["analysis-build4.js#0", "analysis-final-rc.js#0", "ui-revision-v12.js#2", "ui-revision-v12.js#3"]);
   for (const c of [...chg(free), ...chg(pro)]) { const k = known.find(x => x.key === c); assert.ok(k && ["TEXT_REWRITE"].includes(k.class), c + " is outside the known list"); }
+});
+
+test("[golden / D3, OBS-03] picking a player through the real library (open, click, close) refreshes the setup screen: p2 is shown and Start becomes enabled", () => {
+  for (const g of [free, pro]) {
+    const r = S(g, "D3-setup-pick-via-library").result;
+    assert.equal(r.before.p2, "対戦相手を選択"); assert.equal(r.before.startDisabled, true); assert.equal(r.libraryOpen, true);
+    assert.equal(r.afterPick.startDisabled, false); assert.equal(r.afterPick.aria, "false"); assert.notEqual(r.afterPick.p2, r.before.p2);
+  }
 });

@@ -14,13 +14,6 @@
   "role": "rewrite"
  },
  {
-  "id": "P2L-107",
-  "file": "final-ui-build18.js",
-  "k": 0,
-  "class": "c",
-  "role": "rewrite"
- },
- {
   "id": "P2L-108",
   "file": "index.html",
   "k": 0,

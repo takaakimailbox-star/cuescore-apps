@@ -16,15 +16,15 @@ const ALLOWED_CLASSES = ["STRUCTURE", "STATE", "DIAGNOSTIC"];
 
 /* ---------- ratchet constants (a P2-5 gate lowers exactly its own and records it in Evidence) ---------- */
 const RATCHET = Object.freeze({
-  registrations: 21,      // P2-5a-1: 23 -> 21 (OBS-14 enforce, OBS-15 correct removed)
-  textRewrite: 7,         // KNOWN rewriters: OBS-01,02,03,16,19,22,23   (P2-5a-1: 11 -> 7; OBS-10/17 no longer write text)
+  registrations: 20,      // P2-5a-1: 23 -> 21 (OBS-14, OBS-15); Phase B: -> 20 (OBS-03)
+  textRewrite: 6,         // KNOWN rewriters: OBS-01,02,16,19,22,23   (P2-5a-1: 11 -> 7; Phase B: 6)
   textMirrorPending: 0,   // OBS-09 resolved by a generation guard (Phase A)
   gatedOff: 1,            // OBS-09: registration exists in source but is NOT created while canUse("cloudSync") is false (never allow-listed)
   allowListed: 13,        // structure/state/diagnostic observers with NO text-writing callee (11 + OBS-10 + OBS-17)
-  removed: 2
+  removed: 3
 });
 
-test("[AC-S3 L0] fixture covers exactly the 21 live registrations (+2 removed rows kept for history), one row each, unique ids", () => {
+test("[AC-S3 L0] fixture covers exactly the 20 live registrations (+2 removed rows kept for history), one row each, unique ids", () => {
   assert.equal(scan.length, RATCHET.registrations);
   assert.equal(live.length, RATCHET.registrations);
   assert.equal(known.length, RATCHET.registrations + RATCHET.removed);
@@ -34,26 +34,31 @@ test("[AC-S3 L0] fixture covers exactly the 21 live registrations (+2 removed ro
   assert.equal(observerInventory().length, RATCHET.registrations);
 });
 
-test("[AC-S3 L0] class counts are pinned: 7 text-rewrite + 1 gated-off (runtime-unresolved 7; was 12) + 13 allow-list candidates + 2 removed", () => {
+test("[AC-S3 L0] class counts are pinned: 6 text-rewrite + 1 gated-off (runtime-unresolved 6; was 12) + 13 allow-list candidates + 3 removed", () => {
   const c = {}; for (const k of known) c[k.class] = (c[k.class] || 0) + 1;
   assert.equal(c.TEXT_REWRITE, RATCHET.textRewrite);
   assert.equal(c.TEXT_MIRROR_PENDING || 0, RATCHET.textMirrorPending);
   assert.equal(c.TEXT_MIRROR_GATED, RATCHET.gatedOff);
   assert.equal(ALLOWED_CLASSES.reduce((a, k) => a + (c[k] || 0), 0), RATCHET.allowListed);
   assert.equal(c.REMOVED, RATCHET.removed);
-  assert.equal(known.filter(k => k.class === "TEXT_REWRITE" || k.class === "TEXT_MIRROR_PENDING").length, 7, "unresolved AC-S3 observers (must reach 0, or be allow-listed with Commander approval, before AC-S3 PASS)");
+  assert.equal(known.filter(k => k.class === "TEXT_REWRITE" || k.class === "TEXT_MIRROR_PENDING").length, 6, "unresolved AC-S3 observers (must reach 0, or be allow-listed with Commander approval, before AC-S3 PASS)");
 });
 
-test("[AC-S3 L0] the known TEXT-REWRITE list is exactly OBS-01,02,03,16,19,22,23 (P2-5a-1 removed 14,15 and made 10,17 text-free)", () => {
-  assert.deepEqual(known.filter(k => k.class === "TEXT_REWRITE").map(k => k.obs_id), ["OBS-01", "OBS-02", "OBS-03", "OBS-16", "OBS-19", "OBS-22", "OBS-23"]);
-  assert.deepEqual(known.filter(k => k.class === "REMOVED").map(k => k.obs_id), ["OBS-14", "OBS-15"]);
+test("[AC-S3 L0] the known TEXT-REWRITE list is exactly OBS-01,02,16,19,22,23 (P2-5a-1 removed 14,15; Phase B removed 03)", () => {
+  assert.deepEqual(known.filter(k => k.class === "TEXT_REWRITE").map(k => k.obs_id), ["OBS-01", "OBS-02", "OBS-16", "OBS-19", "OBS-22", "OBS-23"]);
+  assert.deepEqual(known.filter(k => k.class === "REMOVED").map(k => k.obs_id), ["OBS-03", "OBS-14", "OBS-15"]);
   assert.deepEqual(known.filter(k => k.class === "TEXT_MIRROR_GATED").map(k => k.obs_id), ["OBS-09"]);
 });
 
 for (const k of known.filter(k => k.class === "REMOVED")) {
   test(`[${k.obs_id}] AC-S3 L0 ${k.key}: removed in ${k.removed_in}; no registration remains and the replacement is present`, () => {
-    assert.ok(!byKey.has(k.key) || k.key === "index.html#10" || k.key === "index.html#11", "registration count check is below");
     const html = read("index.html");
+    if (k.obs_id === "OBS-03") {
+      assert.ok(!byKey.has(k.key)); const b18 = read("final-ui-build18.js");
+      assert.ok(!b18.includes("MutationObserver"));
+      assert.ok(b18.includes("const refreshSoon=()=>requestAnimationFrame(refresh);"));
+      return;
+    }
     if (k.obs_id === "OBS-14") { assert.ok(!html.includes("new MutationObserver(enforce)")); assert.ok(html.includes("function applyPriorGamesGuardV1(){")); }
     else { assert.ok(!html.includes("new MutationObserver(correct)")); assert.ok(html.includes('String(f2-f1).endsWith("0")?"ファール数は相手と同じ"')); assert.ok(html.includes('String(high1-high2).endsWith("0")?"ハイランは相手と同じ"')); assert.ok(html.includes('String(high2-high1).endsWith("0")?"ハイランは相手と同じ"')); }
     assert.equal(scan.filter(s => s.file === "index.html").length, 10, "index.html keeps exactly 10 registrations");

@@ -852,8 +852,8 @@
   "area": "D",
   "file": "final-ui-build18.js",
   "line": 26,
-  "snippet": "document.getElementById(\"playerLibraryOverlay\")&&new MutationObserver(()=>requestAnimationFrame(refresh)).observe(document.getElementById(\"p",
-  "function": "refresh (match-setup guide)"
+  "snippet": "const refreshSoon=()=>requestAnimationFrame(refresh);",
+  "function": "refresh triggers (explicit; was the overlay MutationObserver, Phase B)"
  },
  {
   "id": "P2L-108",

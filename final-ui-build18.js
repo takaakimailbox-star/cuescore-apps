@@ -23,8 +23,18 @@
   }
   guide.addEventListener("click",event=>{const button=event.target.closest("[data-add-match-player-v18]");if(button)openPlayerLibrary(Number(button.dataset.addMatchPlayerV18)||1);});
   start.addEventListener("click",event=>{refresh();if(start.disabled){event.preventDefault();event.stopImmediatePropagation();const target=validPlayers().length?2:1;openPlayerLibrary(target);}},true);
-  document.getElementById("playerLibraryOverlay")&&new MutationObserver(()=>requestAnimationFrame(refresh)).observe(document.getElementById("playerLibraryOverlay"),{subtree:true,childList:true,attributes:true,attributeFilter:["class"]});
+  // P2 OBS-03: the player library changes the inputs of refresh() (library + selection) only through user interaction inside the overlay or through
+  // navigation hiding it. Those are explicit triggers now (formerly a DOM observer on the overlay subtree).
+  const refreshSoon=()=>requestAnimationFrame(refresh);
+  const libraryOverlay=document.getElementById("playerLibraryOverlay");
+  if(libraryOverlay)["click","input","change"].forEach(type=>libraryOverlay.addEventListener(type,refreshSoon));
+  // The overlay subtree is rewritten (class / children) only by these production functions; each one now asks for a refresh when it returns.
+  ["openPlayerLibrary","closePlayerLibrary","showPlayerLibraryMain","openPlayerEditor","renderPlayerLibrary","savePlayerEditor","deletePlayerByIdV1"].forEach(name=>{
+    const original=window[name];
+    if(typeof original!=="function")return;
+    window[name]=function(...args){const result=original.apply(this,args);refreshSoon();return result;};
+  });
   setup.addEventListener("click",()=>setTimeout(refresh,0));
-  window.CueScoreBuild18PlayerSelection={refresh,validPlayers,selected};
+  window.CueScoreBuild18PlayerSelection={refresh,refreshSoon,validPlayers,selected};
   refresh();
 })();

@@ -42,6 +42,11 @@ const M = [
   ["cloud source status node gets static text", "index.html", 'id="cloudSyncStatus" role="status" aria-live="polite"></div>', 'id="cloudSyncStatus" role="status" aria-live="polite">x</div>'],
   ["OBS-09 generation guard removed", "index.html", 'if (window.CueScoreFeatureAccess.canUse("cloudSync")) {\n    mirrorStatus(', 'if (true) {\n    mirrorStatus('],
   ["OBS-09 fourth mirror outside the guard", "index.html", '  // P2 OBS-09: the status sources', '  mirrorStatus("cloudSyncStatus","#suiteSyncStatus");\n  // P2 OBS-09: the status sources'],
+  ["OBS-03 observer re-introduced", "final-ui-build18.js", "const refreshSoon=()=>requestAnimationFrame(refresh);", "new MutationObserver(()=>requestAnimationFrame(refresh)).observe(document.body,{childList:true});const refreshSoon=()=>requestAnimationFrame(refresh);"],
+  ["OBS-03 trigger wrapper dropped (closePlayerLibrary)", "final-ui-build18.js", '"closePlayerLibrary",', ""],
+  ["OBS-03 overlay events narrowed", "final-ui-build18.js", '["click","input","change"]', '["click"]'],
+  ["OBS-03 navigation hook dropped", "navigation-shell-phase1.js", "window.CueScoreBuild18PlayerSelection?.refreshSoon?.();};", "};"],
+  ["OBS-03 new selection writer added", "index.html", "    selectedRegisteredPlayer[playerLibraryTarget] = id;", "    selectedRegisteredPlayer[playerLibraryTarget] = id; selectedRegisteredPlayer[3-playerLibraryTarget] = selectedRegisteredPlayer[3-playerLibraryTarget];"],
   /* OBS-19 / OBS-13 */
   ["OBS-13 analysis-button removal dropped", "index.html", 'forEach(button=>button.remove());\n  new MutationObserver(addHistoryAnalysisEntriesV5)', 'forEach(button=>button);\n  new MutationObserver(addHistoryAnalysisEntriesV5)'],
   ["OBS-19 detail label changed", "player-detail-build6.js", 'detail.textContent="詳細"', 'detail.textContent="詳しく"'],
@@ -66,7 +71,7 @@ for (const [name, file, from, to] of M) {
   const n = original.split(from).length - 1;
   if (n < 1) { results.push({ name, file, applied: false, note: `pattern not found (${n})` }); continue; }
   fs.writeFileSync(target, original.replace(from, to));
-  const files = fs.readdirSync(path.join(TMP, "tests")).filter(f => /^p2-(0-l0-static|5-0-.*|5-1-.*)\.test\.mjs$/.test(f)).map(f => "tests/" + f);
+  const files = fs.readdirSync(path.join(TMP, "tests")).filter(f => /^p2-(0-l0-static|5-[0-9]-.*)\.test\.mjs$/.test(f)).map(f => "tests/" + f);
   const r = spawnSync(process.execPath, ["--test", "--test-skip-pattern=L0 anchor", ...files], { cwd: TMP, encoding: "utf8", env: { ...process.env, NODE_TEST_CONTEXT: undefined } });
   const failed = [...r.stdout.matchAll(/^✖ (\[[^\n]*?)(?: \(\d)/gm)].map(m => m[1].slice(0, 90)).filter((v, i, a) => a.indexOf(v) === i);
   results.push({ name, file, applied: true, killed: r.status !== 0, failingTests: failed.slice(0, 3), failingCount: failed.length });

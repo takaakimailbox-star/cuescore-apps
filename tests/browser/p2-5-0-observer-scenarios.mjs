@@ -72,12 +72,17 @@ await scenario("D1-match-setup-states", "ui+fn", `${tab("home")}document.querySe
  const out={initial:state()};
  for(const [label,list] of [["none",[]],["one",all.slice(0,1)],["two",all.slice(0,2)]]){localStorage.setItem(key,JSON.stringify(list));window.CueScoreBuild18PlayerSelection.refresh();${W(300)}out[label]=state();}
  localStorage.setItem(key,saved);window.CueScoreBuild18PlayerSelection.refresh();${W(400)}out.restored=state();return out`, { shot: "match-setup" });
-await scenario("D2-setup-observer-path", "ui+fn", `const key="rotationScoreboard.players.v1";const saved=localStorage.getItem(key);const all=JSON.parse(saved);const ov=document.getElementById("playerLibraryOverlay");
+await scenario("D2-setup-observer-path", "ui+fn", `const key="rotationScoreboard.players.v1";const saved=localStorage.getItem(key);const all=JSON.parse(saved);
  const state=()=>({p1:document.getElementById("p1NameDisplayV1")?.textContent,p2:document.getElementById("p2NameDisplayV1")?.textContent,guideHidden:document.querySelector(".match-player-guide-v18")?.hidden,guide:document.querySelector(".match-player-guide-v18")?.textContent||""});
+ const cycle=async()=>{openPlayerLibrary(1);${W(300)}closePlayerLibrary();${W(500)}};  // the production open / close of the library overlay (what really happens when a user opens and leaves it)
  const out={before:state()};
- localStorage.setItem(key,JSON.stringify([]));ov.classList.add("p250-toggle");${W(500)}ov.classList.remove("p250-toggle");${W(500)}out.noPlayers=state();
- localStorage.setItem(key,JSON.stringify(all.slice(0,1)));ov.classList.add("p250-toggle");${W(500)}ov.classList.remove("p250-toggle");${W(500)}out.onePlayer=state();
- localStorage.setItem(key,saved);ov.classList.add("p250-toggle");${W(500)}ov.classList.remove("p250-toggle");${W(500)}out.restored=state();return out`, { wait: 300 });
+ localStorage.setItem(key,JSON.stringify([]));await cycle();out.noPlayers=state();
+ localStorage.setItem(key,JSON.stringify(all.slice(0,1)));await cycle();out.onePlayer=state();
+ localStorage.setItem(key,saved);await cycle();out.restored=state();return out`, { wait: 300 });
+await scenario("D3-setup-pick-via-library", "ui", `document.querySelector('[data-phase1-tab="home"]').click();${W(500)}document.querySelector(".home-new-match-v2").click();${W(600)}
+ const st=()=>({p1:document.getElementById("p1NameDisplayV1")?.textContent,p2:document.getElementById("p2NameDisplayV1")?.textContent,startDisabled:document.getElementById("startGameBtn")?.disabled,aria:document.getElementById("startGameBtn")?.getAttribute("aria-disabled"),guideHidden:document.querySelector(".match-player-guide-v18")?.hidden});
+ const out={before:st()};document.getElementById("p2PlayerSearchBtn").click();${W(500)}out.libraryOpen=!document.getElementById("playerLibraryOverlay").classList.contains("hidden");
+ const list=[...document.querySelectorAll("[data-select-player]")];out.candidates=list.length;(list[1]||list[0]).click();${W(700)}out.afterPick=st();return out`, { wait: 300 });
 /* ---------- E/F/G generic: burst (multi-fire), re-entrancy, double rewrite ---------- */
 await scenario("E1-burst-mutations", "inject", `const roots=[document.body,document.getElementById("playerLibraryOverlay"),document.querySelector(".analysis-v2"),document.getElementById("playerMatchHistoryV2"),document.getElementById("playerOpponentRecordsV2"),document.getElementById("playerStatsBody")].filter(Boolean);
  for(let i=0;i<60;i++)for(const r of roots){const n=document.createElement("i");n.dataset.p250="burst";r.appendChild(n);n.remove();}

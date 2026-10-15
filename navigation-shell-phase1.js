@@ -42,7 +42,7 @@
     detail.classList.add("hidden");detail.setAttribute("aria-hidden","true");
     document.body.classList.remove("match-detail-visible-v1");
   };
-  const hideTransientPlayerViews=()=>document.querySelectorAll("#playerLibraryOverlay,#playerStatsOverlay,.player-journey-overlay-v2,.pd12-trends").forEach(node=>{node.classList.add("hidden");node.setAttribute("aria-hidden","true")});
+  const hideTransientPlayerViews=()=>{document.querySelectorAll("#playerLibraryOverlay,#playerStatsOverlay,.player-journey-overlay-v2,.pd12-trends").forEach(node=>{node.classList.add("hidden");node.setAttribute("aria-hidden","true")});window.CueScoreBuild18PlayerSelection?.refreshSoon?.();};
   const closeSettingsRoot=()=>{
     if(!app.classList.contains("settings-mode"))return;
     document.getElementById("settingsBackBtn")?.click();
@@ -87,7 +87,7 @@
     else if(key==="history"){openRoot("history");const filter=state.historyDiscipline||"all";if(filter!=="all")document.querySelector(`[data-records-discipline-v2="${filter}"]`)?.click()}
     else if(key==="settings")openRoot("settings");
     const node=document.querySelector(saved.selector);
-    if(node){if(key==="player")document.getElementById("playerLibraryOverlay")?.classList.add("hidden");node.classList.remove("hidden");node.setAttribute("aria-hidden","false");requestAnimationFrame(()=>{const host=scrollHost(node);if(host)host.scrollTop=saved.scroll||0})}
+    if(node){if(key==="player"){document.getElementById("playerLibraryOverlay")?.classList.add("hidden");window.CueScoreBuild18PlayerSelection?.refreshSoon?.();}node.classList.remove("hidden");node.setAttribute("aria-hidden","false");requestAnimationFrame(()=>{const host=scrollHost(node);if(host)host.scrollTop=saved.scroll||0})}
     setActive(key);
   };
   const go=key=>{

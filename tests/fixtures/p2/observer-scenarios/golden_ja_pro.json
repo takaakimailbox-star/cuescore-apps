@@ -11,8 +11,8 @@
   "home-again": "35b5f598d3828675ca4ee27a4bbcb34cfcd4fc96c1d1e3ac0f5f6dfe77ee8558",
   "player-editor-closed": "fec50d80d631f34d951073d01e56f489721109b8a47a156962ea1f92b1c1ca8c",
   "match-setup": "916d00a5406e23de06b6736d0fa3bc2912f1411e1c3860583b518f2c2929ccd7",
-  "settings-cloud": "916d00a5406e23de06b6736d0fa3bc2912f1411e1c3860583b518f2c2929ccd7",
-  "badges-hub": "4d5f3df26f96b20299050a7a53a1e9f3d0ed1a58f0989dd294ec7a6b211bdf9d",
+  "settings-cloud": "81a4e62aad6cde9007929886c0b4a12ae05db35051c5857755711765b0be9b58",
+  "badges-hub": "d69f1368619082deddc02b49c05280d2d65401710d930ff73caba01d5768d5b3",
   "analysis-v2-match": "f0243243274d41d043168fa9ca3da8d70b800892b952f7b307a256a90c63a138",
   "analysis-v2-player": "33f076196d69064ad3017d2123a32b744e153e1797a47422ec4b8848323ec79a",
   "journey-history": "d340445bc53f36f075c13813e1c1c2f086423dd7de36e17162e4c3d0e2cad677",
@@ -332,23 +332,6 @@
    ]
   },
   {
-   "key": "final-ui-build18.js#0",
-   "targets": [
-    {
-     "desc": "section#playerLibraryOverlay",
-     "live": true,
-     "opts": {
-      "subtree": true,
-      "childList": true,
-      "attributes": true,
-      "attributeFilter": [
-       "class"
-      ]
-     }
-    }
-   ]
-  },
-  {
    "key": "navigation-shell-phase1.js#0",
    "targets": [
     {
@@ -622,9 +605,30 @@
      "guide": ""
     }
    },
-   "changedObservers": [
-    "final-ui-build18.js#0"
-   ]
+   "changedObservers": []
+  },
+  "D3-setup-pick-via-library": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "before": {
+     "p1": "なおき",
+     "p2": "対戦相手を選択",
+     "startDisabled": true,
+     "aria": "true",
+     "guideHidden": true
+    },
+    "libraryOpen": true,
+    "candidates": 3,
+    "afterPick": {
+     "p1": "なおき",
+     "p2": "しょう",
+     "startDisabled": false,
+     "aria": "false",
+     "guideHidden": true
+    }
+   },
+   "changedObservers": []
   },
   "E1-burst-mutations": {
    "reach": "inject",

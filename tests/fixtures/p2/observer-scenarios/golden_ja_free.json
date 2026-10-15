@@ -11,8 +11,8 @@
   "home-again": "91e30e7d6165e2f6b264b175b6f1899e2b7711a2af20db8e5b157cc822add156",
   "player-editor-closed": "3a79bcca70a22a2c85259d54d1982e607809437efd316ee5ca2d9eb013277881",
   "match-setup": "0ab4bfbd1af836ea37137a8d35be81c06fda7a9523201d898c449865942fb6be",
-  "settings-cloud": "0ab4bfbd1af836ea37137a8d35be81c06fda7a9523201d898c449865942fb6be",
-  "badges-hub": "ead3cc693ddea46ca1e9865049cb1eff8d3c8a9caf02202737073786a55f235f"
+  "settings-cloud": "0fbe34fddc240c07f9e150cf3472578317e47e099ebf2a0be236ab459bb75499",
+  "badges-hub": "ae9c6a0fee1e5e2a083b4ed7e29efc44fe02b220d89f1079ff0e2d183eaa5ef8"
  },
  "observerTargets": [
   {
@@ -327,23 +327,6 @@
    ]
   },
   {
-   "key": "final-ui-build18.js#0",
-   "targets": [
-    {
-     "desc": "section#playerLibraryOverlay",
-     "live": true,
-     "opts": {
-      "subtree": true,
-      "childList": true,
-      "attributes": true,
-      "attributeFilter": [
-       "class"
-      ]
-     }
-    }
-   ]
-  },
-  {
    "key": "navigation-shell-phase1.js#0",
    "targets": [
     {
@@ -617,9 +600,30 @@
      "guide": ""
     }
    },
-   "changedObservers": [
-    "final-ui-build18.js#0"
-   ]
+   "changedObservers": []
+  },
+  "D3-setup-pick-via-library": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "before": {
+     "p1": "なおき",
+     "p2": "対戦相手を選択",
+     "startDisabled": true,
+     "aria": "true",
+     "guideHidden": true
+    },
+    "libraryOpen": true,
+    "candidates": 3,
+    "afterPick": {
+     "p1": "なおき",
+     "p2": "しょう",
+     "startDisabled": false,
+     "aria": "false",
+     "guideHidden": true
+    }
+   },
+   "changedObservers": []
   },
   "E1-burst-mutations": {
    "reach": "inject",
