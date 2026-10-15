@@ -239,7 +239,7 @@
    "skips": 0
   },
   "dynamic-type-deferral-decision.test.mjs": {
-   "sha256": "257889c86d2e726acfce6f2e238a7e35bb573fba546bcbe1a3791952bec13485",
+   "sha256": "dc40b1de03889e1877f8410ced6683406b975477e27c57953e3139e8205ea612",
    "tests": 10,
    "skips": 0
   },
@@ -330,13 +330,18 @@
    "skips": 0
   },
   "localization-official-docs.test.mjs": {
-   "sha256": "5f4694b8809c7f8198b3630ae5cc930e1395481c24eb72c14d5a8fc1a33516bf",
+   "sha256": "8305f57e5ab717b22302f07a4807eadd0b8556d7fc4b00ad4384f9dc6056432d",
    "tests": 8,
    "skips": 0
   },
   "localization-p1-formalization-decision.test.mjs": {
-   "sha256": "aa97e319adf178f30453780765ac8b893225880b4cfb1dfec10577b07571425f",
+   "sha256": "482d84b265eaf9ecb2421d6f129dbd7ffed69a5d489cedc2997c1368cfe42362",
    "tests": 7,
+   "skips": 0
+  },
+  "localization-u6-decision.test.mjs": {
+   "sha256": "f890d262444b049c53b25e9b98941ca98c7268256c950b1f89a37b894e9ed9f8",
+   "tests": 5,
    "skips": 0
   },
   "manual-turn-change-unification.test.mjs": {
@@ -560,7 +565,7 @@
    "skips": 0
   },
   "settings-unified-design-decision.test.mjs": {
-   "sha256": "ad7ffced6857b6cb029f706054d99010d6dfcec5589ed0c006b0f5e442ae5e45",
+   "sha256": "9d6b5c5aea0e43d958d4d868fafa48db8ef9b93c177a590c29528992922d8e32",
    "tests": 11,
    "skips": 0
   },

@@ -1,9 +1,10 @@
 # CueScore Current Status
 
-- Updated: 2026-10-13
+- Updated: 2026-10-16
 - Public Version / Build: Japan public catalog still reports `1.1 (79)`; Version `1.2 (84)` release executed and ASC is `READY_FOR_SALE`, public propagation pending
 - Current project Version / Build: `1.2 (84)`
 - Gate: `RELEASE EXECUTED / ASC READY_FOR_SALE / PUBLIC PROPAGATION PENDING`（Version 1.2 Build 84 release gate。変更なし）
+- Localization U6 Gate: `CUESCORE I18N P3 — U6 OFFICIAL DECISION PUBLISHED`（Decision 035 / Official 115・116 / Decision Log v2.11、2026-10-16）。U6: RESOLVED（標準ダイアログ維持・本文のみ翻訳・ボタンはOS・独自モーダルなし・OSボタン言語一致はNOT VERIFIED）／U3・U4・U8・U11: DECISION PENDING 維持／Documentation-only。
 - Localization Gate: `CUESCORE I18N PHASE 0 — OFFICIAL RELEASE PUBLISHED`（Decision 031 / Official 107・108 / Decision Log v2.7、2026-10-09）。P1: `NOT STARTED`／Localization Implementation: `NOT STARTED`／Glossary: `DRAFT / PENDING`（Official 109未作成）／Product source: `UNCHANGED`。S-B（保存済み中断試合での言語切替）は`NOT VERIFIED`（P1 runtime証明が条件）。Decision Pending: U3／U4／U6／U8／U9／U11
 - Settings Design Gate: `CUESCORE SETTINGS UNIFIED DESIGN — OFFICIAL DECISION PUBLISHED`（Decision 032 / Official 110・111 / Decision Log v2.8、2026-10-12。CF-1 B案）。Implementation: `NOT STARTED`／Product source: `UNCHANGED`／P1: 未完成・未commit／Official 109: 未作成（Glossary予約）。
 - Dynamic Type Gate: `CUESCORE DYNAMIC TYPE — DEFERRED DECISION FORMALIZED`（Decision 033 / Official 112 / Decision Log v2.9、2026-10-12）。自動連動: `DEFERRED（Later）`／Official 111（AC-SU-10 を含む）: 保全・改変なし／実際の iOS Dynamic Type 対応: PASS ではない／Design System アクセシビリティ要件: 不変／Product source: `UNCHANGED`／P1: 未完成・未commit。

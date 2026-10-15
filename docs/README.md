@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.10_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.11_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -29,8 +29,9 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.10 is the current official release and successor
-to v2.9. Earlier versions remain in the official directory as preceding releases.
+Official Design Decision Log v2.11 is the current official release and successor
+to v2.10. Earlier versions remain in the official directory as preceding releases.
+v2.11 adds Decision 035 (Localization U6 dialog decision) and leaves Decisions 001〜034 unchanged.
 v2.10 adds Decision 034 (Localization P1 formalization) and leaves Decisions 001〜033 unchanged.
 v2.9 adds Decision 033 (Dynamic Type deferral) and leaves Decisions 001〜032 unchanged.
 
@@ -135,6 +136,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/112_CueScore_Dynamic_Type_Deferral_Decision.md`
 - `official/113_CueScore_Localization_P1_Formalization_Decision.md`
 - `official/114_CueScore_Localization_P1_Acceptance_Spec.md`
+- `official/115_CueScore_Localization_U6_Dialog_Decision.md`
+- `official/116_CueScore_Localization_U6_Dialog_Spec.md`
 
 CueScore Localization（3言語対応: ja / en / zh-Hans）status:
 
@@ -152,6 +155,10 @@ Settings Unified Design status:
 Dynamic Type deferral status:
 
 - Decision 033 / Official 112 / Official Design Decision Log v2.9 (published 2026-10-12). Automatic linking of the app text size to iOS Dynamic Type (Larger Text) is not implemented in the current v1.2 line and i18n P1; it is Later / Deferred, and any future work is decided by a separate Decision. Official 111 (including AC-SU-10) is preserved unchanged; Decision 033 only distinguishes AC-SU-10a (automatic linking: DEFERRED, not PASS) from AC-SU-10b (safe display when text is enlarged: PASS for the CSS pseudo-enlargement, 36 conditions; NOT VERIFIED under real iOS Dynamic Type). The Design System v2.1 accessibility requirements (Dynamic Type 200%, DS-REQ-033/034) are not removed or weakened. Larger Text support must not be declared as supported in the App Store until it is implemented and verified. Evidence: `implementation/CueScore_Dynamic_Type_Deferral_Official_Release_2026-10-12.md`.
+
+Localization U6 status:
+
+- Decision 035 / Official 115 / Official 116 / Official Design Decision Log v2.11 (published 2026-10-16). Product Owner decision: `alert`/`confirm`/`prompt` keep the standard dialogs and only the message body is translated (ja/en/zh-Hans); buttons stay with the OS; no wholesale custom-modal replacement; OS button language match is NOT VERIFIED (device check is a later step). U3/U4/U8/U11 remain DECISION PENDING. Documentation-only.
 
 Localization P1 formalization status:
 

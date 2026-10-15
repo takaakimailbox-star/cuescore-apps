@@ -1,5 +1,10 @@
 # CueScore Apps Current State
 
+## CueScore Localization U6 Dialog Decision Published（2026年10月16日）
+
+- Product Owner承認に基づき、**Decision 035／Official 115（Decision）／Official 116（Spec）／Official Design Decision Log v2.11**を発行した（Documentation-only）。U6（`alert/confirm/prompt`のOSボタン言語依存）は**RESOLVED**: 標準ダイアログ方式を維持し、**メッセージ本文のみ**ja／en／zh-Hansへ翻訳、OK・キャンセル等のボタンはOSに任せ、独自モーダルへの全面置換はしない。OSボタン表示の言語一致は**NOT VERIFIED**（実機確認は後工程）。
+- U3／U4／U8／U11は**DECISION PENDING のまま**。Official 107／108／110〜114、Decision 001〜034、S-B（flag=false）、保存データ・QR・Backup・CSV・Analytics・Free／Pro・IAPは変更なし。Official 109（Glossary）は予約のまま未作成。
+
 ## CueScore i18n P1 Source Formalized（2026年10月13日）
 
 - Decision 034／Official 113・114／Decision Log v2.10 に基づき、**P1 の source と Settings Unified Design R の source を GitHub main に正式固定**した（commit A `51e470118046c5c48173d09266677a7745c74622`＝P1、commit B `39a61a1d13a3ff4917722c51662b4a2f029183ea`＝Settings R、commit C＝本 documentation 同期）。基底 main は `221aaf62c90e20178e2bb94a601b191ec96d3184`。
