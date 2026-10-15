@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { createRequire } from "node:module";
@@ -23,9 +24,19 @@ test("ja / en / zh-Hans catalogs define exactly the same keys with the same plac
   assert.deepEqual(Object.keys(zh).sort(), keys);
   for (const key of keys) {
     for (const [name, catalog] of Object.entries(catalogs)) {
-      assert.equal(typeof catalog[key], "string", `${name}:${key} must be a string`);
-      assert.ok(catalog[key].length > 0, `${name}:${key} must not be empty`);
-      assert.equal(placeholders(catalog[key]), placeholders(ja[key]), `${name}:${key} placeholders differ from ja`);
+      // P3: a value is a string, or (en only) a plural object {one?, other} whose forms are strings (Official 108 AC-1: plural key format).
+      const value = catalog[key];
+      if (typeof value === "object" && value !== null) {
+        assert.equal(name, "en", `${name}:${key} plural objects are only used by en`);
+        assert.equal(typeof value.other, "string", `${name}:${key} plural object needs an 'other' form`);
+        assert.deepEqual(Object.keys(value).filter(form => !["one", "other"].includes(form)), [], `${name}:${key} unknown plural form`);
+      }
+      const forms = typeof value === "object" && value !== null ? Object.values(value) : [value];
+      for (const form of forms) {
+        assert.equal(typeof form, "string", `${name}:${key} must be a string`);
+        assert.ok(form.length > 0, `${name}:${key} must not be empty`);
+        assert.equal(placeholders(form), placeholders(ja[key]), `${name}:${key} placeholders differ from ja`);
+      }
     }
   }
 });

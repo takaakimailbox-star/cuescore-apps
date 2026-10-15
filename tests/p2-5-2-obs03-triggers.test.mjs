@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 /* P2 Phase B / OBS-03: refresh() of the match-setup player selection is triggered explicitly (no MutationObserver).
  * refresh() reads exactly two inputs: the player library and selectedRegisteredPlayer. This file (a) pins the complete set of production places that
  * can change those inputs or rewrite the library overlay, so a new one cannot appear without review, and (b) checks the trigger wiring over fakes.

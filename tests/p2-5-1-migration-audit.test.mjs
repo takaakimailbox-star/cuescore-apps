@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 /* P2-5a-1 Formalization audit tests (added by the formalization gate; no production change). They restore, for the NEW design, the
  * properties that the retired observer-shaped tests used to cover: idempotence / purity of the wording, "only the intended lines change",
  * no DOM-text reads in the wording generator, and the explicit guard's behaviour for a hidden view. */

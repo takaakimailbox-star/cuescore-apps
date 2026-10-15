@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 /* P2-8 closure audit (Official 108 Part III §2 AC-S2 / S3 / S4 / S5 / S6 and the P2 ledger). Everything here is a STATIC check of the current tree; the runtime halves
  * (dynamic AC-S3 --expect-zero, baseline-vs-current parity, differential flows) are recorded in the Evidence of the P2 phases. */
 import test from "node:test";

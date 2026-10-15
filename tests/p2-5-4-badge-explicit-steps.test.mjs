@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 /* P2 Phase E / OBS-16 (Pro badges): decorate() is an explicit step. The design check is this file: the set of surfaces that carry Pro decoration and the
  * code that EMITS them is closed and pinned, so every producer has a call; the end-to-end equivalence with the former body-wide observer is proven by
  * tests/browser/p2-5b-badge-flows.mjs (baseline vs changed tree, Free -> Pro -> Free, every hub tab, settings, history, legacy detail). */

@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 /* P2-5-0 / L1 observer characterization (fake DOM, real production source text). Pins what the CURRENT observers do so that P2-5 can
  * prove "same Japanese output, no Observer". Reachability in the real UI is a separate question answered by the L2 scenarios. */
 import test from "node:test";

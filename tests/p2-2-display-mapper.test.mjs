@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 /* P2-2 Display Mapper: stored Japanese canonical resultLabel values are mapped for DISPLAY only. */
 import test from "node:test";
 import assert from "node:assert/strict";

@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 /* P2-3 Analytics state codes: internal decisions use language-independent codes; Japanese wording is display only.
  * Proof of independence: every Japanese string literal in the analytics logic is replaced by a placeholder and the internal
  * decisions (state codes, tones, directions, highlight flags, ratings, thresholds) must stay identical. */

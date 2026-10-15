@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 /* P2-0 / L1 resultLabel characterization: producer, consumers, display, Mapper, protected canonical values. No production change. */
 import test from "node:test";
 import assert from "node:assert/strict";

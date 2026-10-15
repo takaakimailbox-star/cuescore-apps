@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 /* P2-4: internal decisions no longer read display text. Each test runs the CURRENT code against fakes and compares with the
  * previous decision rule (kept here only as a reference function) over the same inputs. */
 import test from "node:test";

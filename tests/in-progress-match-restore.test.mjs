@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 import test from "node:test";
 import { jaText } from "./helpers/i18n-ja-catalog.mjs";
 import assert from "node:assert/strict";

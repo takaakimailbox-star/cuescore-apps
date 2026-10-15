@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { performance } from "node:perf_hooks";

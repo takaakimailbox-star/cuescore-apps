@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 /* P2-5-0 / L0 AC-S3 static foundation (CueScore i18n P2). Pins the CURRENT observer picture; production source is not changed.
  * AC-S3 (Official 108): at P2 end, MutationObserver TEXT rewriting is 0; structure-only observers are listed on an allow-list.
  * This file is NOT a statement that AC-S3 is met - it is the ratchet that P2-5 gates lower. Numbers may only go DOWN. */

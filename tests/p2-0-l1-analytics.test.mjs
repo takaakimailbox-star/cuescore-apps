@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 /* P2-0 / L1 Analytics characterization: state words, label-text threshold, ratings. Same input must give the same output after P2-3. */
 import test from "node:test";
 import assert from "node:assert/strict";

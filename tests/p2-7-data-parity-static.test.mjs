@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 /* P2-7: Data / QR / Backup / Identity parity guard (static part). The runtime part is tests/browser/p2-7-parity.mjs (baseline a841cbc vs current, ja / en / zh-Hans:
  * storage, Backup bytes, CSV, Analytics, Identity, orders, Free/Pro + IAP id, snapshot, Backup->Restore round trip, all identical). These pins make the same promise at
  * `node --test` level: the code that carries stored data, the QR/Match-Sharing pipeline and the Backup/CSV producers is byte-identical to the pre-P2 baseline (a841cbc),

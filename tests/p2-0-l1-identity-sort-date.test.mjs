@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 /* P2-0 / L1 Player Identity, sort order and date formatting characterization. Fixed locale ja / fixed time zone; no production change. */
 process.env.TZ = process.env.P2_TZ || "Asia/Tokyo";
 import test from "node:test";

@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 /* P2 Phase D: the journey post-render logic (rivals / history revisions) runs as explicit steps; the dead compactHistory wrap is gone.
  * Equivalence with the former observers is proven end to end by tests/browser/p2-5b-journey-flows.mjs (baseline vs changed tree, outerHTML hashes);
  * these tests pin the wiring and the pieces that can be checked at L0/L1. */
