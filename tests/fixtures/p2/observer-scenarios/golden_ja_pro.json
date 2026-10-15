@@ -1,0 +1,1369 @@
+{
+ "lang": "ja",
+ "mode": "pro",
+ "tz": "Asia/Tokyo",
+ "viewport": "430x932",
+ "dom": {
+  "home": "a46638efe3991f487b6bbb925bbae3bb9093c3f5c505b2960d6bba2d498fb873",
+  "player-list": "5ac16fb845e396aebb6b86bb6dd9ed5639bad708f52c554523674e7e21334a21",
+  "history": "5ac16fb845e396aebb6b86bb6dd9ed5639bad708f52c554523674e7e21334a21",
+  "settings": "5ac16fb845e396aebb6b86bb6dd9ed5639bad708f52c554523674e7e21334a21",
+  "home-again": "35b5f598d3828675ca4ee27a4bbcb34cfcd4fc96c1d1e3ac0f5f6dfe77ee8558",
+  "player-editor-closed": "fec50d80d631f34d951073d01e56f489721109b8a47a156962ea1f92b1c1ca8c",
+  "match-setup": "916d00a5406e23de06b6736d0fa3bc2912f1411e1c3860583b518f2c2929ccd7",
+  "settings-cloud": "916d00a5406e23de06b6736d0fa3bc2912f1411e1c3860583b518f2c2929ccd7",
+  "badges-hub": "4d5f3df26f96b20299050a7a53a1e9f3d0ed1a58f0989dd294ec7a6b211bdf9d",
+  "analysis-v2-match": "f0243243274d41d043168fa9ca3da8d70b800892b952f7b307a256a90c63a138",
+  "analysis-v2-player": "33f076196d69064ad3017d2123a32b744e153e1797a47422ec4b8848323ec79a",
+  "journey-history": "d340445bc53f36f075c13813e1c1c2f086423dd7de36e17162e4c3d0e2cad677",
+  "journey-rivals": "53e73c3642dc1d76f6eb255598f8c1ed096e4f557d29d2c6980e251553e2f666",
+  "journey-rival-history": "26abf6c4db12b8733f07f39df558a8e406fb9779623d4f4fce0e4e206b37b799"
+ },
+ "observerTargets": [
+  {
+   "key": "index.html#1",
+   "targets": [
+    {
+     "desc": "body",
+     "live": false,
+     "opts": {
+      "subtree": true,
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden",
+       "style"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#2",
+   "targets": [
+    {
+     "desc": "body",
+     "live": false,
+     "opts": {
+      "subtree": true,
+      "childList": true,
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden",
+       "style"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#3",
+   "targets": [
+    {
+     "desc": "main",
+     "live": false,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class"
+      ],
+      "subtree": true
+     }
+    },
+    {
+     "desc": "section#playerInfoScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    },
+    {
+     "desc": "section#proGameScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    },
+    {
+     "desc": "section#recordsScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    },
+    {
+     "desc": "section#dataManagementScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    },
+    {
+     "desc": "section#settingsScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    },
+    {
+     "desc": "section#statisticsFilterScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    },
+    {
+     "desc": "section#rankingsScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    },
+    {
+     "desc": "section#vsAnalysisScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#4",
+   "targets": [
+    {
+     "desc": "main",
+     "live": false,
+     "opts": {
+      "subtree": true,
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#5",
+   "targets": [
+    {
+     "desc": "div#supabaseConnectionStatus",
+     "live": true,
+     "opts": {
+      "childList": true,
+      "subtree": true,
+      "characterData": true,
+      "attributes": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#5",
+   "targets": [
+    {
+     "desc": "div#deviceIdStatus",
+     "live": true,
+     "opts": {
+      "childList": true,
+      "subtree": true,
+      "characterData": true,
+      "attributes": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#5",
+   "targets": [
+    {
+     "desc": "div#cloudSyncStatus",
+     "live": true,
+     "opts": {
+      "childList": true,
+      "subtree": true,
+      "characterData": true,
+      "attributes": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#6",
+   "targets": [
+    {
+     "desc": "div#playerEditor",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#7",
+   "targets": [
+    {
+     "desc": "section#statisticsFilterScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#8",
+   "targets": [
+    {
+     "desc": "body",
+     "live": false,
+     "opts": {
+      "childList": true,
+      "subtree": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#9",
+   "targets": [
+    {
+     "desc": "section#playerMatchHistoryV2",
+     "live": true,
+     "opts": {
+      "subtree": true,
+      "childList": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#10",
+   "targets": [
+    {
+     "desc": "div",
+     "live": false,
+     "opts": {
+      "childList": true,
+      "subtree": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#11",
+   "targets": [
+    {
+     "desc": "div",
+     "live": false,
+     "opts": {
+      "childList": true,
+      "subtree": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "analysis-final-rc.js#0",
+   "targets": [
+    {
+     "desc": "div",
+     "live": false,
+     "opts": {
+      "childList": true,
+      "subtree": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "analysis-build4.js#0",
+   "targets": [
+    {
+     "desc": "section",
+     "live": false,
+     "opts": {
+      "childList": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "player-detail-build6.js#0",
+   "targets": [
+    {
+     "desc": "section#playerMatchHistoryV2",
+     "live": true,
+     "opts": {
+      "subtree": true,
+      "childList": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "ui-revision-v12.js#0",
+   "targets": [
+    {
+     "desc": "div#playerStatsBody",
+     "live": true,
+     "opts": {
+      "subtree": true,
+      "childList": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "ui-revision-v12.js#1",
+   "targets": [
+    {
+     "desc": "div#playerLibraryList",
+     "live": true,
+     "opts": {
+      "childList": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "ui-revision-v12.js#2",
+   "targets": [
+    {
+     "desc": "section#playerOpponentRecordsV2",
+     "live": true,
+     "opts": {
+      "subtree": true,
+      "childList": true,
+      "attributes": true,
+      "attributeFilter": [
+       "class"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "ui-revision-v12.js#3",
+   "targets": [
+    {
+     "desc": "section#playerMatchHistoryV2",
+     "live": true,
+     "opts": {
+      "subtree": true,
+      "childList": true,
+      "attributes": true,
+      "attributeFilter": [
+       "class"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "final-ui-build18.js#0",
+   "targets": [
+    {
+     "desc": "section#playerLibraryOverlay",
+     "live": true,
+     "opts": {
+      "subtree": true,
+      "childList": true,
+      "attributes": true,
+      "attributeFilter": [
+       "class"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "navigation-shell-phase1.js#0",
+   "targets": [
+    {
+     "desc": "body",
+     "live": false,
+     "opts": {
+      "subtree": true,
+      "childList": true,
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "navigation-phase2-6.js#0",
+   "targets": [
+    {
+     "desc": "body",
+     "live": false,
+     "opts": {
+      "subtree": true,
+      "childList": true,
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "style",
+       "data-cue-player-context"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "monetization-v1.js#0",
+   "targets": [
+    {
+     "desc": "body",
+     "live": false,
+     "opts": {
+      "subtree": true,
+      "childList": true
+     }
+    }
+   ]
+  }
+ ],
+ "scenarios": {
+  "A1-boot-idle": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "booted": true,
+    "lang": "ja"
+   },
+   "changedObservers": []
+  },
+  "A2-idle-mutation-source": {
+   "reach": "ui+inject",
+   "error": null,
+   "result": [
+    [
+     "attributes:aria-hidden@section#proSummary.pro-summary",
+     72
+    ],
+    [
+     "attributes:aria-hidden@section#recordDetailOverlay.record-detail-overlay",
+     72
+    ],
+    [
+     "attributes:aria-hidden@section#playerLibraryOverlay.player-library-overlay",
+     72
+    ],
+    [
+     "attributes:aria-hidden@section#playerStatsOverlay.player-stats-overlay",
+     72
+    ],
+    [
+     "attributes:aria-hidden@section#classificationManagerV381.classification-manager-v381",
+     72
+    ],
+    [
+     "attributes:aria-hidden@section#breakResultOverlayV61.break-result-overlay-v61",
+     72
+    ],
+    [
+     "attributes:aria-hidden@section#pushOutInputOverlayV730.pushout-overlay-v730",
+     72
+    ],
+    [
+     "attributes:aria-hidden@section#pushOutDecisionOverlayV730.pushout-overlay-v730",
+     72
+    ]
+   ],
+   "changedObservers": []
+  },
+  "B1-tab-player": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "title": "プレーヤー",
+    "rows": 4
+   },
+   "changedObservers": []
+  },
+  "B2-tab-history": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "cards": 26
+   },
+   "changedObservers": []
+  },
+  "B3-tab-settings": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "rows": 4
+   },
+   "changedObservers": []
+  },
+  "B4-tab-home": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "newMatch": true
+   },
+   "changedObservers": []
+  },
+  "C1-player-editor-edit-x3": {
+   "reach": "ui",
+   "error": null,
+   "result": [
+    {
+     "title": "プレーヤー編集",
+     "copy": "",
+     "save": "変更",
+     "cancel": "キャンセル",
+     "nameLabel": "名前（必須）",
+     "placeholder": "プレーヤー名を入力",
+     "deleteHidden": false,
+     "open": true
+    },
+    {
+     "title": "プレーヤー編集",
+     "copy": "",
+     "save": "変更",
+     "cancel": "キャンセル",
+     "nameLabel": "名前（必須）",
+     "placeholder": "プレーヤー名を入力",
+     "deleteHidden": false,
+     "open": true
+    },
+    {
+     "title": "プレーヤー編集",
+     "copy": "",
+     "save": "変更",
+     "cancel": "キャンセル",
+     "nameLabel": "名前（必須）",
+     "placeholder": "プレーヤー名を入力",
+     "deleteHidden": false,
+     "open": true
+    }
+   ],
+   "changedObservers": [
+    "index.html#6",
+    "navigation-phase2-6.js#0"
+   ]
+  },
+  "C2-player-editor-create": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "title": "プレーヤー登録",
+    "copy": "新しいプレーヤーを登録します。<br>あとからいつでも編集できます。",
+    "save": "登録",
+    "libTitle": "プレーヤー",
+    "open": true
+   },
+   "changedObservers": [
+    "index.html#6",
+    "navigation-phase2-6.js#0"
+   ]
+  },
+  "C3-player-root-title-reconcile": {
+   "reach": "ui+inject",
+   "error": null,
+   "result": {
+    "first": "プレーヤー",
+    "after": "プレーヤー",
+    "ctx": "browse"
+   },
+   "changedObservers": []
+  },
+  "C4-tab-home-again": {
+   "reach": "ui",
+   "error": null,
+   "result": null,
+   "changedObservers": []
+  },
+  "D1-match-setup-states": {
+   "reach": "ui+fn",
+   "error": null,
+   "result": {
+    "initial": {
+     "p1": "なおき",
+     "p2": "対戦相手を選択",
+     "guide": "",
+     "guideHidden": true,
+     "startDisabled": true,
+     "aria": "true"
+    },
+    "none": {
+     "p1": "プレーヤーを追加",
+     "p2": "対戦相手を追加",
+     "guide": "プレーヤーが登録されていません試合を始めるには2人のプレーヤーを登録してください。プレーヤーを追加",
+     "guideHidden": false,
+     "startDisabled": true,
+     "aria": "true"
+    },
+    "one": {
+     "p1": "なおき",
+     "p2": "対戦相手を追加",
+     "guide": "対戦相手を追加試合を始めるにはもう1人のプレーヤーを登録してください。プレーヤーを追加",
+     "guideHidden": false,
+     "startDisabled": true,
+     "aria": "true"
+    },
+    "two": {
+     "p1": "なおき",
+     "p2": "対戦相手を選択",
+     "guide": "",
+     "guideHidden": true,
+     "startDisabled": true,
+     "aria": "true"
+    },
+    "restored": {
+     "p1": "なおき",
+     "p2": "対戦相手を選択",
+     "guide": "",
+     "guideHidden": true,
+     "startDisabled": true,
+     "aria": "true"
+    }
+   },
+   "changedObservers": []
+  },
+  "D2-setup-observer-path": {
+   "reach": "ui+fn",
+   "error": null,
+   "result": {
+    "before": {
+     "p1": "なおき",
+     "p2": "対戦相手を選択",
+     "guideHidden": true,
+     "guide": ""
+    },
+    "noPlayers": {
+     "p1": "プレーヤーを追加",
+     "p2": "対戦相手を追加",
+     "guideHidden": false,
+     "guide": "プレーヤーが登録されていません試合を始めるには2人のプレーヤーを登録してください。プレーヤーを追加"
+    },
+    "onePlayer": {
+     "p1": "なおき",
+     "p2": "対戦相手を追加",
+     "guideHidden": false,
+     "guide": "対戦相手を追加試合を始めるにはもう1人のプレーヤーを登録してください。プレーヤーを追加"
+    },
+    "restored": {
+     "p1": "なおき",
+     "p2": "対戦相手を選択",
+     "guideHidden": true,
+     "guide": ""
+    }
+   },
+   "changedObservers": [
+    "final-ui-build18.js#0"
+   ]
+  },
+  "E1-burst-mutations": {
+   "reach": "inject",
+   "error": null,
+   "result": {
+    "roots": 6,
+    "leftovers": 0
+   },
+   "changedObservers": []
+  },
+  "E2-idle-after-burst": {
+   "reach": "ui",
+   "error": null,
+   "result": true,
+   "changedObservers": []
+  },
+  "L1-cloud-reachability": {
+   "reach": "ui+fn",
+   "error": null,
+   "result": {
+    "canUse": false,
+    "cloudRows": [
+     {
+      "hidden": true,
+      "display": "none"
+     }
+    ],
+    "feature": [
+     {
+      "tag": "SECTION",
+      "id": null,
+      "cls": "cloud-settings-card",
+      "hidden": true,
+      "display": "none",
+      "head": "Supabaseクラウド同期",
+      "visible": false
+     },
+     {
+      "tag": "SECTION",
+      "id": null,
+      "cls": "settings-suite-view-v2",
+      "hidden": false,
+      "display": "block",
+      "head": "クラウド同期の状態",
+      "visible": false
+     },
+     {
+      "tag": "SECTION",
+      "id": null,
+      "cls": "settings-card",
+      "hidden": true,
+      "display": "none",
+      "head": "クラウド同期",
+      "visible": false
+     },
+     {
+      "tag": "SECTION",
+      "id": null,
+      "cls": "settings-card",
+      "hidden": true,
+      "display": "none",
+      "head": "世代バックアップ",
+      "visible": false
+     },
+     {
+      "tag": "BUTTON",
+      "id": null,
+      "cls": "settings-data-row-v1",
+      "hidden": true,
+      "display": "none",
+      "head": "クラウド同期",
+      "visible": false
+     }
+    ],
+    "suiteOpeners": [
+     "sync-history",
+     "generation"
+    ],
+    "targets": {
+     "suiteConnectionStatus": {
+      "text": "",
+      "cls": "settings-suite-status-v2",
+      "visible": false
+     },
+     "suiteDeviceStatus": {
+      "text": "",
+      "cls": "settings-suite-status-v2",
+      "visible": false
+     },
+     "suiteSyncStatus": {
+      "text": "",
+      "cls": "settings-suite-status-v2",
+      "visible": false
+     }
+    },
+    "sources": {
+     "supabaseConnectionStatus": {
+      "text": "",
+      "visible": false
+     },
+     "deviceIdStatus": {
+      "text": "",
+      "visible": false
+     },
+     "cloudSyncStatus": {
+      "text": "",
+      "visible": false
+     }
+    }
+   },
+   "changedObservers": []
+  },
+  "L3-suite-views-reachability": {
+   "reach": "ui+fn",
+   "error": null,
+   "result": {
+    "top": [
+     {
+      "view": "cloud",
+      "hidden": false,
+      "shown": false,
+      "feature": "cloud-sync",
+      "mirrorTargetsShown": 0
+     },
+     {
+      "view": "export",
+      "hidden": true,
+      "shown": false,
+      "feature": null,
+      "mirrorTargetsShown": 0
+     },
+     {
+      "view": "restore",
+      "hidden": true,
+      "shown": false,
+      "feature": null,
+      "mirrorTargetsShown": 0
+     },
+     {
+      "view": "delete",
+      "hidden": true,
+      "shown": false,
+      "feature": null,
+      "mirrorTargetsShown": 0
+     },
+     {
+      "view": "language",
+      "hidden": true,
+      "shown": false,
+      "feature": null,
+      "mirrorTargetsShown": 0
+     },
+     {
+      "view": "sync-history",
+      "hidden": true,
+      "shown": false,
+      "feature": null,
+      "mirrorTargetsShown": 0
+     },
+     {
+      "view": "generation",
+      "hidden": true,
+      "shown": false,
+      "feature": null,
+      "mirrorTargetsShown": 0
+     }
+    ],
+    "dataScreen": "data-management-screen hidden settings-suite-v2",
+    "afterForcedCloudClick": {
+     "views": [
+      {
+       "view": "cloud",
+       "hidden": false,
+       "shown": false,
+       "feature": "cloud-sync",
+       "mirrorTargetsShown": 0
+      }
+     ],
+     "dataScreen": "data-management-screen hidden settings-suite-v2"
+    },
+    "afterExport": [
+     {
+      "view": "export",
+      "hidden": false,
+      "shown": true,
+      "feature": null,
+      "mirrorTargetsShown": 0
+     }
+    ]
+   },
+   "changedObservers": []
+  },
+  "L2-cloud-mirror-live-copy": {
+   "reach": "inject",
+   "error": null,
+   "result": {
+    "before": "",
+    "mid": {
+     "text": "P250-PROBE",
+     "cls": "settings-suite-status-v2"
+    },
+    "after": "",
+    "visible": false
+   },
+   "changedObservers": [
+    "index.html#5"
+   ]
+  },
+  "I1-badges-per-screen": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "settings": {
+     "badges": 0,
+     "entries": 0,
+     "perHostMax": 0,
+     "text": [],
+     "aria": []
+    },
+    "hubResults": {
+     "badges": 0,
+     "entries": 0,
+     "perHostMax": 0,
+     "text": [],
+     "aria": []
+    },
+    "hub-matches": {
+     "badges": 0,
+     "entries": 0,
+     "perHostMax": 0,
+     "text": [],
+     "aria": []
+    },
+    "hub-analysis": {
+     "badges": 0,
+     "entries": 0,
+     "perHostMax": 0,
+     "text": [],
+     "aria": []
+    },
+    "edgeNote": true
+   },
+   "changedObservers": []
+  },
+  "I2-badge-state-toggle": {
+   "reach": "fn",
+   "error": null,
+   "result": [
+    [
+     "start",
+     true,
+     0
+    ],
+    [
+     "pro",
+     true,
+     0
+    ],
+    [
+     "free-again",
+     false,
+     4
+    ],
+    [
+     "free-after-mutations",
+     false,
+     4,
+     1
+    ]
+   ],
+   "changedObservers": []
+  },
+  "G1-wording-guard-inject-matrix": {
+   "reach": "inject",
+   "error": null,
+   "result": {
+    "inputs": [
+     "ファールを相手より0回少なく抑えた",
+     "ファールを相手より1回少なく抑えた",
+     "ファールを相手より10回少なく抑えた",
+     "ファールを相手より20回少なく抑えた",
+     "ファールが相手より10回多かった",
+     "ハイランで相手を0上回った",
+     "ハイランで相手を5上回った",
+     "ハイランで相手を10上回った",
+     "ハイランでは相手が10上回った",
+     "ハイランでは相手が3上回った",
+     "シュート成功率で相手を0ポイント上回った"
+    ],
+    "first": [
+     "ファール数は相手と同じ",
+     "ファールを相手より1回少なく抑えた",
+     "ファール数は相手と同じ",
+     "ファール数は相手と同じ",
+     "ファールが相手より10回多かった",
+     "ハイランは相手と同じ",
+     "ハイランで相手を5上回った",
+     "ハイランは相手と同じ",
+     "ハイランは相手と同じ",
+     "ハイランでは相手が3上回った",
+     "シュート成功率で相手を0ポイント上回った"
+    ],
+    "stable": true
+   },
+   "changedObservers": [
+    "index.html#11"
+   ]
+  },
+  "J1-analysis-match-e2e-wording": {
+   "reach": "ui+fn",
+   "error": null,
+   "result": {
+    "p250-eq": {
+     "textHash": "44654be4",
+     "meta": "2030/01/01 09:00・9-Ball・なおき目線",
+     "finalPoints": [
+      "シュート率は75%対50%で、上回りました",
+      "マス割は0対0で、同じでした",
+      "ファールは2対2で、同じでした"
+     ],
+     "legacyWordingInFinalDom": false,
+     "transientWrites": [
+      {
+       "obs": null,
+       "html": "<section class=\"analysis-v2-card analysis-v2-match-head\"><di"
+      }
+     ]
+    },
+    "p250-d10": {
+     "textHash": "a190b19c",
+     "meta": "2030/01/01 09:00・9-Ball・なおき目線",
+     "finalPoints": [
+      "シュート率は75%対50%で、上回りました",
+      "マス割は0対0で、同じでした",
+      "ファールは2対12で、少なく抑えました"
+     ],
+     "legacyWordingInFinalDom": false,
+     "transientWrites": [
+      {
+       "obs": null,
+       "html": "<section class=\"analysis-v2-card analysis-v2-match-head\"><di"
+      }
+     ]
+    },
+    "p250-opp10": {
+     "textHash": "a190b19c",
+     "meta": "2030/01/01 09:00・9-Ball・なおき目線",
+     "finalPoints": [
+      "シュート率は75%対50%で、上回りました",
+      "マス割は0対0で、同じでした",
+      "ファールは2対12で、少なく抑えました"
+     ],
+     "legacyWordingInFinalDom": false,
+     "transientWrites": [
+      {
+       "obs": null,
+       "html": "<section class=\"analysis-v2-card analysis-v2-match-head\"><di"
+      }
+     ]
+    },
+    "p250-d20": {
+     "textHash": "d403701e",
+     "meta": "2030/01/01 09:00・9-Ball・なおき目線",
+     "finalPoints": [
+      "シュート率は75%対50%で、上回りました",
+      "マス割は0対0で、同じでした",
+      "ファールは2対22で、少なく抑えました"
+     ],
+     "legacyWordingInFinalDom": false,
+     "transientWrites": [
+      {
+       "obs": null,
+       "html": "<section class=\"analysis-v2-card analysis-v2-match-head\"><di"
+      }
+     ]
+    },
+    "p250-ord": {
+     "textHash": "a36e01c0",
+     "meta": "2030/01/01 09:00・9-Ball・なおき目線",
+     "finalPoints": [
+      "シュート率は75%対50%で、上回りました",
+      "マス割は0対0で、同じでした",
+      "ファールは3対4で、少なく抑えました"
+     ],
+     "legacyWordingInFinalDom": false,
+     "transientWrites": [
+      {
+       "obs": null,
+       "html": "<section class=\"analysis-v2-card analysis-v2-match-head\"><di"
+      }
+     ]
+    },
+    "p250-d1": {
+     "textHash": "a36e01c0",
+     "meta": "2030/01/01 09:00・9-Ball・なおき目線",
+     "finalPoints": [
+      "シュート率は75%対50%で、上回りました",
+      "マス割は0対0で、同じでした",
+      "ファールは3対4で、少なく抑えました"
+     ],
+     "legacyWordingInFinalDom": false,
+     "transientWrites": [
+      {
+       "obs": null,
+       "html": "<section class=\"analysis-v2-card analysis-v2-match-head\"><di"
+      }
+     ]
+    },
+    "p250-opp3": {
+     "textHash": "8aa8abac",
+     "meta": "2030/01/01 09:00・9-Ball・なおき目線",
+     "finalPoints": [
+      "シュート率は75%対50%で、上回りました",
+      "マス割は0対0で、同じでした",
+      "ファールは4対4で、同じでした"
+     ],
+     "legacyWordingInFinalDom": false,
+     "transientWrites": [
+      {
+       "obs": null,
+       "html": "<section class=\"analysis-v2-card analysis-v2-match-head\"><di"
+      }
+     ]
+    },
+    "p250-foulmore": {
+     "textHash": "22a91820",
+     "meta": "2030/01/01 09:00・9-Ball・なおき目線",
+     "finalPoints": [
+      "シュート率は75%対50%で、上回りました",
+      "マス割は0対0で、同じでした",
+      "ファールは9対3で、多くなりました"
+     ],
+     "legacyWordingInFinalDom": false,
+     "transientWrites": [
+      {
+       "obs": null,
+       "html": "<section class=\"analysis-v2-card analysis-v2-match-head\"><di"
+      }
+     ]
+    }
+   },
+   "changedObservers": [
+    "analysis-final-rc.js#0",
+    "index.html#11"
+   ]
+  },
+  "J2-analysis-player-6-disciplines": {
+   "reach": "fn",
+   "error": null,
+   "result": {
+    "9ball": {
+     "hidden": false,
+     "status": null,
+     "change": null,
+     "prior": null,
+     "len": 351,
+     "textHash": "cc800913",
+     "headings": [
+      "今の状態",
+      "主要指標",
+      "推移グラフ",
+      "今回のポイント",
+      "自己ベスト",
+      "詳細分析"
+     ]
+    },
+    "10ball": {
+     "hidden": false,
+     "status": null,
+     "change": null,
+     "prior": null,
+     "len": 267,
+     "textHash": "a0a4c8b6",
+     "headings": [
+      "今の状態",
+      "主要指標",
+      "推移グラフ",
+      "今回のポイント",
+      "自己ベスト",
+      "詳細分析"
+     ]
+    },
+    "rotation": {
+     "hidden": false,
+     "status": null,
+     "change": null,
+     "prior": null,
+     "len": 372,
+     "textHash": "1ca3c75d",
+     "headings": [
+      "今の状態",
+      "主要指標",
+      "推移グラフ",
+      "今回のポイント",
+      "自己ベスト",
+      "詳細分析"
+     ]
+    },
+    "jpa9": {
+     "hidden": false,
+     "status": null,
+     "change": null,
+     "prior": null,
+     "len": 265,
+     "textHash": "eff5e684",
+     "headings": [
+      "今の状態",
+      "主要指標",
+      "推移グラフ",
+      "今回のポイント",
+      "自己ベスト",
+      "詳細分析"
+     ]
+    },
+    "straightPool": {
+     "hidden": false,
+     "status": null,
+     "change": null,
+     "prior": null,
+     "len": 250,
+     "textHash": "c5e4384a",
+     "headings": [
+      "今の状態",
+      "主要指標",
+      "推移グラフ",
+      "今回のポイント",
+      "自己ベスト",
+      "詳細分析"
+     ]
+    },
+    "threeCushion": {
+     "hidden": false,
+     "status": null,
+     "change": null,
+     "prior": null,
+     "len": 250,
+     "textHash": "c5e4384a",
+     "headings": [
+      "今の状態",
+      "主要指標",
+      "推移グラフ",
+      "今回のポイント",
+      "自己ベスト",
+      "詳細分析"
+     ]
+    }
+   },
+   "changedObservers": [
+    "analysis-build4.js#0",
+    "analysis-final-rc.js#0"
+   ]
+  },
+  "K1-journey-all-matches": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "visible": true,
+    "title": "9-Ballの全試合",
+    "titleAria": "9-Ballの全試合",
+    "rows": 9,
+    "wrappers": 0,
+    "dates": [
+     "3/8（日） 12:04",
+     "3/7（土） 12:04",
+     "3/6（金） 12:04",
+     "3/5（木） 12:04"
+    ],
+    "aria": [
+     "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+     "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+     "9-Ball さくらとの試合詳細を開く、試合詳細を開く"
+    ],
+    "open": [
+     "›"
+    ],
+    "analysisBtns": 0,
+    "hiddenAnalysis": 0,
+    "fixedDiscipline": "9ball",
+    "classes": [
+     "journey-match-v2 journey-match-v3 match-card-c-v37 pd13-fixed-discipline-match match-card-c-all-matches-v37"
+    ]
+   },
+   "changedObservers": [
+    "ui-revision-v12.js#3"
+   ]
+  },
+  "K2-journey-history-inject-compactHistory": {
+   "reach": "inject",
+   "error": null,
+   "result": {
+    "first": {
+     "wrappers": 0,
+     "open": [
+      "試合詳細",
+      "試合詳細"
+     ],
+     "analysis": []
+    },
+    "second": {
+     "wrappers": 0,
+     "open": [
+      "試合詳細",
+      "試合詳細"
+     ]
+    }
+   },
+   "changedObservers": []
+  },
+  "K3-journey-rivals": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "visible": true,
+    "fixed": "9-Ball",
+    "ctxAria": "なおき、9-Ballの対戦相手別成績",
+    "rivalRows": [
+     "p_probe_2"
+    ],
+    "selectLeft": 0,
+    "summaries": 0
+   },
+   "changedObservers": [
+    "ui-revision-v12.js#2"
+   ]
+  },
+  "K4-journey-rival-history": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "visible": true,
+    "opponentFixed": "p_probe_2",
+    "rows": 9,
+    "dates": [
+     "3/8（日） 12:04",
+     "3/7（土） 12:04",
+     "3/6（金） 12:04",
+     "3/5（木） 12:04"
+    ],
+    "aria": [
+     "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+     "9-Ball さくらとの試合詳細を開く、試合詳細を開く"
+    ],
+    "oppRemoved": 0,
+    "vsLeft": 0
+   },
+   "changedObservers": []
+  },
+  "M1-legacy-player-detail-fn": {
+   "reach": "fn",
+   "error": null,
+   "result": {
+    "api": true,
+    "shellBefore": false,
+    "shellAfter": true,
+    "bestKeys": [
+     "shotRate",
+     "highRun",
+     "breakScore"
+    ],
+    "len": 242
+   },
+   "changedObservers": []
+  }
+ }
+}

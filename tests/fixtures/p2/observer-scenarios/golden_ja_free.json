@@ -1,0 +1,1019 @@
+{
+ "lang": "ja",
+ "mode": "free",
+ "tz": "Asia/Tokyo",
+ "viewport": "430x932",
+ "dom": {
+  "home": "fe9dca5da0c1636ec91aaca6a6e24614caed4bc484be6ca26f68723cabb71509",
+  "player-list": "89e10ff108b88b1f8eddeb876b8fb18d93e549fef2f69cdf7737396121ce237a",
+  "history": "5e3dca2bfcc0323e9fe93e50914a66b55dc1f49607369f8e7149645f2d0941ca",
+  "settings": "5e3dca2bfcc0323e9fe93e50914a66b55dc1f49607369f8e7149645f2d0941ca",
+  "home-again": "91e30e7d6165e2f6b264b175b6f1899e2b7711a2af20db8e5b157cc822add156",
+  "player-editor-closed": "3a79bcca70a22a2c85259d54d1982e607809437efd316ee5ca2d9eb013277881",
+  "match-setup": "0ab4bfbd1af836ea37137a8d35be81c06fda7a9523201d898c449865942fb6be",
+  "settings-cloud": "0ab4bfbd1af836ea37137a8d35be81c06fda7a9523201d898c449865942fb6be",
+  "badges-hub": "ead3cc693ddea46ca1e9865049cb1eff8d3c8a9caf02202737073786a55f235f"
+ },
+ "observerTargets": [
+  {
+   "key": "index.html#1",
+   "targets": [
+    {
+     "desc": "body",
+     "live": false,
+     "opts": {
+      "subtree": true,
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden",
+       "style"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#2",
+   "targets": [
+    {
+     "desc": "body",
+     "live": false,
+     "opts": {
+      "subtree": true,
+      "childList": true,
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden",
+       "style"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#3",
+   "targets": [
+    {
+     "desc": "main",
+     "live": false,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class"
+      ],
+      "subtree": true
+     }
+    },
+    {
+     "desc": "section#playerInfoScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    },
+    {
+     "desc": "section#proGameScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    },
+    {
+     "desc": "section#recordsScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    },
+    {
+     "desc": "section#dataManagementScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    },
+    {
+     "desc": "section#settingsScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    },
+    {
+     "desc": "section#statisticsFilterScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    },
+    {
+     "desc": "section#rankingsScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    },
+    {
+     "desc": "section#vsAnalysisScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#4",
+   "targets": [
+    {
+     "desc": "main",
+     "live": false,
+     "opts": {
+      "subtree": true,
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#5",
+   "targets": [
+    {
+     "desc": "div#supabaseConnectionStatus",
+     "live": true,
+     "opts": {
+      "childList": true,
+      "subtree": true,
+      "characterData": true,
+      "attributes": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#5",
+   "targets": [
+    {
+     "desc": "div#deviceIdStatus",
+     "live": true,
+     "opts": {
+      "childList": true,
+      "subtree": true,
+      "characterData": true,
+      "attributes": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#5",
+   "targets": [
+    {
+     "desc": "div#cloudSyncStatus",
+     "live": true,
+     "opts": {
+      "childList": true,
+      "subtree": true,
+      "characterData": true,
+      "attributes": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#6",
+   "targets": [
+    {
+     "desc": "div#playerEditor",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#7",
+   "targets": [
+    {
+     "desc": "section#statisticsFilterScreen",
+     "live": true,
+     "opts": {
+      "attributes": true,
+      "attributeFilter": [
+       "class"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#8",
+   "targets": [
+    {
+     "desc": "body",
+     "live": false,
+     "opts": {
+      "childList": true,
+      "subtree": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#9",
+   "targets": [
+    {
+     "desc": "section#playerMatchHistoryV2",
+     "live": true,
+     "opts": {
+      "subtree": true,
+      "childList": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#10",
+   "targets": [
+    {
+     "desc": "div",
+     "live": false,
+     "opts": {
+      "childList": true,
+      "subtree": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "index.html#11",
+   "targets": [
+    {
+     "desc": "div",
+     "live": false,
+     "opts": {
+      "childList": true,
+      "subtree": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "analysis-final-rc.js#0",
+   "targets": [
+    {
+     "desc": "div",
+     "live": false,
+     "opts": {
+      "childList": true,
+      "subtree": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "analysis-build4.js#0",
+   "targets": [
+    {
+     "desc": "section",
+     "live": false,
+     "opts": {
+      "childList": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "player-detail-build6.js#0",
+   "targets": [
+    {
+     "desc": "section#playerMatchHistoryV2",
+     "live": true,
+     "opts": {
+      "subtree": true,
+      "childList": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "ui-revision-v12.js#0",
+   "targets": [
+    {
+     "desc": "div#playerStatsBody",
+     "live": true,
+     "opts": {
+      "subtree": true,
+      "childList": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "ui-revision-v12.js#1",
+   "targets": [
+    {
+     "desc": "div#playerLibraryList",
+     "live": true,
+     "opts": {
+      "childList": true
+     }
+    }
+   ]
+  },
+  {
+   "key": "ui-revision-v12.js#2",
+   "targets": [
+    {
+     "desc": "section#playerOpponentRecordsV2",
+     "live": true,
+     "opts": {
+      "subtree": true,
+      "childList": true,
+      "attributes": true,
+      "attributeFilter": [
+       "class"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "ui-revision-v12.js#3",
+   "targets": [
+    {
+     "desc": "section#playerMatchHistoryV2",
+     "live": true,
+     "opts": {
+      "subtree": true,
+      "childList": true,
+      "attributes": true,
+      "attributeFilter": [
+       "class"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "final-ui-build18.js#0",
+   "targets": [
+    {
+     "desc": "section#playerLibraryOverlay",
+     "live": true,
+     "opts": {
+      "subtree": true,
+      "childList": true,
+      "attributes": true,
+      "attributeFilter": [
+       "class"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "navigation-shell-phase1.js#0",
+   "targets": [
+    {
+     "desc": "body",
+     "live": false,
+     "opts": {
+      "subtree": true,
+      "childList": true,
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "aria-hidden"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "navigation-phase2-6.js#0",
+   "targets": [
+    {
+     "desc": "body",
+     "live": false,
+     "opts": {
+      "subtree": true,
+      "childList": true,
+      "attributes": true,
+      "attributeFilter": [
+       "class",
+       "style",
+       "data-cue-player-context"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "monetization-v1.js#0",
+   "targets": [
+    {
+     "desc": "body",
+     "live": false,
+     "opts": {
+      "subtree": true,
+      "childList": true
+     }
+    }
+   ]
+  }
+ ],
+ "scenarios": {
+  "A1-boot-idle": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "booted": true,
+    "lang": "ja"
+   },
+   "changedObservers": []
+  },
+  "A2-idle-mutation-source": {
+   "reach": "ui+inject",
+   "error": null,
+   "result": [
+    [
+     "attributes:aria-hidden@section#proSummary.pro-summary",
+     72
+    ],
+    [
+     "attributes:aria-hidden@section#recordDetailOverlay.record-detail-overlay",
+     72
+    ],
+    [
+     "attributes:aria-hidden@section#playerLibraryOverlay.player-library-overlay",
+     72
+    ],
+    [
+     "attributes:aria-hidden@section#playerStatsOverlay.player-stats-overlay",
+     72
+    ],
+    [
+     "attributes:aria-hidden@section#classificationManagerV381.classification-manager-v381",
+     72
+    ],
+    [
+     "attributes:aria-hidden@section#breakResultOverlayV61.break-result-overlay-v61",
+     72
+    ],
+    [
+     "attributes:aria-hidden@section#pushOutInputOverlayV730.pushout-overlay-v730",
+     72
+    ],
+    [
+     "attributes:aria-hidden@section#pushOutDecisionOverlayV730.pushout-overlay-v730",
+     72
+    ]
+   ],
+   "changedObservers": []
+  },
+  "B1-tab-player": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "title": "プレーヤー",
+    "rows": 4
+   },
+   "changedObservers": []
+  },
+  "B2-tab-history": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "cards": 20
+   },
+   "changedObservers": []
+  },
+  "B3-tab-settings": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "rows": 4
+   },
+   "changedObservers": []
+  },
+  "B4-tab-home": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "newMatch": true
+   },
+   "changedObservers": []
+  },
+  "C1-player-editor-edit-x3": {
+   "reach": "ui",
+   "error": null,
+   "result": [
+    {
+     "title": "プレーヤー編集",
+     "copy": "",
+     "save": "変更",
+     "cancel": "キャンセル",
+     "nameLabel": "名前（必須）",
+     "placeholder": "プレーヤー名を入力",
+     "deleteHidden": false,
+     "open": true
+    },
+    {
+     "title": "プレーヤー編集",
+     "copy": "",
+     "save": "変更",
+     "cancel": "キャンセル",
+     "nameLabel": "名前（必須）",
+     "placeholder": "プレーヤー名を入力",
+     "deleteHidden": false,
+     "open": true
+    },
+    {
+     "title": "プレーヤー編集",
+     "copy": "",
+     "save": "変更",
+     "cancel": "キャンセル",
+     "nameLabel": "名前（必須）",
+     "placeholder": "プレーヤー名を入力",
+     "deleteHidden": false,
+     "open": true
+    }
+   ],
+   "changedObservers": [
+    "index.html#6",
+    "navigation-phase2-6.js#0"
+   ]
+  },
+  "C2-player-editor-create": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "title": "プレーヤー登録",
+    "copy": "新しいプレーヤーを登録します。<br>あとからいつでも編集できます。",
+    "save": "登録",
+    "libTitle": "プレーヤー",
+    "open": true
+   },
+   "changedObservers": [
+    "index.html#6",
+    "navigation-phase2-6.js#0"
+   ]
+  },
+  "C3-player-root-title-reconcile": {
+   "reach": "ui+inject",
+   "error": null,
+   "result": {
+    "first": "プレーヤー",
+    "after": "プレーヤー",
+    "ctx": "browse"
+   },
+   "changedObservers": []
+  },
+  "C4-tab-home-again": {
+   "reach": "ui",
+   "error": null,
+   "result": null,
+   "changedObservers": []
+  },
+  "D1-match-setup-states": {
+   "reach": "ui+fn",
+   "error": null,
+   "result": {
+    "initial": {
+     "p1": "なおき",
+     "p2": "対戦相手を選択",
+     "guide": "",
+     "guideHidden": true,
+     "startDisabled": true,
+     "aria": "true"
+    },
+    "none": {
+     "p1": "プレーヤーを追加",
+     "p2": "対戦相手を追加",
+     "guide": "プレーヤーが登録されていません試合を始めるには2人のプレーヤーを登録してください。プレーヤーを追加",
+     "guideHidden": false,
+     "startDisabled": true,
+     "aria": "true"
+    },
+    "one": {
+     "p1": "なおき",
+     "p2": "対戦相手を追加",
+     "guide": "対戦相手を追加試合を始めるにはもう1人のプレーヤーを登録してください。プレーヤーを追加",
+     "guideHidden": false,
+     "startDisabled": true,
+     "aria": "true"
+    },
+    "two": {
+     "p1": "なおき",
+     "p2": "対戦相手を選択",
+     "guide": "",
+     "guideHidden": true,
+     "startDisabled": true,
+     "aria": "true"
+    },
+    "restored": {
+     "p1": "なおき",
+     "p2": "対戦相手を選択",
+     "guide": "",
+     "guideHidden": true,
+     "startDisabled": true,
+     "aria": "true"
+    }
+   },
+   "changedObservers": []
+  },
+  "D2-setup-observer-path": {
+   "reach": "ui+fn",
+   "error": null,
+   "result": {
+    "before": {
+     "p1": "なおき",
+     "p2": "対戦相手を選択",
+     "guideHidden": true,
+     "guide": ""
+    },
+    "noPlayers": {
+     "p1": "プレーヤーを追加",
+     "p2": "対戦相手を追加",
+     "guideHidden": false,
+     "guide": "プレーヤーが登録されていません試合を始めるには2人のプレーヤーを登録してください。プレーヤーを追加"
+    },
+    "onePlayer": {
+     "p1": "なおき",
+     "p2": "対戦相手を追加",
+     "guideHidden": false,
+     "guide": "対戦相手を追加試合を始めるにはもう1人のプレーヤーを登録してください。プレーヤーを追加"
+    },
+    "restored": {
+     "p1": "なおき",
+     "p2": "対戦相手を選択",
+     "guideHidden": true,
+     "guide": ""
+    }
+   },
+   "changedObservers": [
+    "final-ui-build18.js#0"
+   ]
+  },
+  "E1-burst-mutations": {
+   "reach": "inject",
+   "error": null,
+   "result": {
+    "roots": 6,
+    "leftovers": 0
+   },
+   "changedObservers": []
+  },
+  "E2-idle-after-burst": {
+   "reach": "ui",
+   "error": null,
+   "result": true,
+   "changedObservers": []
+  },
+  "L1-cloud-reachability": {
+   "reach": "ui+fn",
+   "error": null,
+   "result": {
+    "canUse": false,
+    "cloudRows": [
+     {
+      "hidden": true,
+      "display": "none"
+     }
+    ],
+    "feature": [
+     {
+      "tag": "SECTION",
+      "id": null,
+      "cls": "cloud-settings-card",
+      "hidden": true,
+      "display": "none",
+      "head": "Supabaseクラウド同期",
+      "visible": false
+     },
+     {
+      "tag": "SECTION",
+      "id": null,
+      "cls": "settings-suite-view-v2",
+      "hidden": false,
+      "display": "block",
+      "head": "クラウド同期の状態",
+      "visible": false
+     },
+     {
+      "tag": "SECTION",
+      "id": null,
+      "cls": "settings-card",
+      "hidden": true,
+      "display": "none",
+      "head": "クラウド同期",
+      "visible": false
+     },
+     {
+      "tag": "SECTION",
+      "id": null,
+      "cls": "settings-card",
+      "hidden": true,
+      "display": "none",
+      "head": "世代バックアップ",
+      "visible": false
+     },
+     {
+      "tag": "BUTTON",
+      "id": null,
+      "cls": "settings-data-row-v1",
+      "hidden": true,
+      "display": "none",
+      "head": "クラウド同期",
+      "visible": false
+     }
+    ],
+    "suiteOpeners": [
+     "sync-history",
+     "generation"
+    ],
+    "targets": {
+     "suiteConnectionStatus": {
+      "text": "",
+      "cls": "settings-suite-status-v2",
+      "visible": false
+     },
+     "suiteDeviceStatus": {
+      "text": "",
+      "cls": "settings-suite-status-v2",
+      "visible": false
+     },
+     "suiteSyncStatus": {
+      "text": "",
+      "cls": "settings-suite-status-v2",
+      "visible": false
+     }
+    },
+    "sources": {
+     "supabaseConnectionStatus": {
+      "text": "",
+      "visible": false
+     },
+     "deviceIdStatus": {
+      "text": "",
+      "visible": false
+     },
+     "cloudSyncStatus": {
+      "text": "",
+      "visible": false
+     }
+    }
+   },
+   "changedObservers": []
+  },
+  "L3-suite-views-reachability": {
+   "reach": "ui+fn",
+   "error": null,
+   "result": {
+    "top": [
+     {
+      "view": "cloud",
+      "hidden": false,
+      "shown": false,
+      "feature": "cloud-sync",
+      "mirrorTargetsShown": 0
+     },
+     {
+      "view": "export",
+      "hidden": true,
+      "shown": false,
+      "feature": null,
+      "mirrorTargetsShown": 0
+     },
+     {
+      "view": "restore",
+      "hidden": true,
+      "shown": false,
+      "feature": null,
+      "mirrorTargetsShown": 0
+     },
+     {
+      "view": "delete",
+      "hidden": true,
+      "shown": false,
+      "feature": null,
+      "mirrorTargetsShown": 0
+     },
+     {
+      "view": "language",
+      "hidden": true,
+      "shown": false,
+      "feature": null,
+      "mirrorTargetsShown": 0
+     },
+     {
+      "view": "sync-history",
+      "hidden": true,
+      "shown": false,
+      "feature": null,
+      "mirrorTargetsShown": 0
+     },
+     {
+      "view": "generation",
+      "hidden": true,
+      "shown": false,
+      "feature": null,
+      "mirrorTargetsShown": 0
+     }
+    ],
+    "dataScreen": "data-management-screen hidden settings-suite-v2",
+    "afterForcedCloudClick": {
+     "views": [
+      {
+       "view": "cloud",
+       "hidden": false,
+       "shown": false,
+       "feature": "cloud-sync",
+       "mirrorTargetsShown": 0
+      }
+     ],
+     "dataScreen": "data-management-screen hidden settings-suite-v2"
+    }
+   },
+   "changedObservers": []
+  },
+  "L2-cloud-mirror-live-copy": {
+   "reach": "inject",
+   "error": null,
+   "result": {
+    "before": "",
+    "mid": {
+     "text": "P250-PROBE",
+     "cls": "settings-suite-status-v2"
+    },
+    "after": "",
+    "visible": false
+   },
+   "changedObservers": [
+    "index.html#5"
+   ]
+  },
+  "I1-badges-per-screen": {
+   "reach": "ui",
+   "error": null,
+   "result": {
+    "settings": {
+     "badges": 2,
+     "entries": 2,
+     "perHostMax": 1,
+     "text": [
+      "🔒 Pro"
+     ],
+     "aria": [
+      "Pro限定"
+     ]
+    },
+    "hubResults": {
+     "badges": 4,
+     "entries": 2,
+     "perHostMax": 1,
+     "text": [
+      "🔒 Pro"
+     ],
+     "aria": [
+      "Pro限定",
+      null
+     ]
+    },
+    "hub-matches": {
+     "badges": 4,
+     "entries": 3,
+     "perHostMax": 1,
+     "text": [
+      "🔒 Pro"
+     ],
+     "aria": [
+      "Pro限定"
+     ]
+    },
+    "hub-analysis": {
+     "badges": 4,
+     "entries": 3,
+     "perHostMax": 1,
+     "text": [
+      "🔒 Pro"
+     ],
+     "aria": [
+      "Pro限定"
+     ]
+    },
+    "edgeNote": false
+   },
+   "changedObservers": [
+    "monetization-v1.js#0"
+   ]
+  },
+  "I2-badge-state-toggle": {
+   "reach": "fn",
+   "error": null,
+   "result": [
+    [
+     "start",
+     false,
+     4
+    ],
+    [
+     "pro",
+     true,
+     0
+    ],
+    [
+     "free-again",
+     false,
+     4
+    ],
+    [
+     "free-after-mutations",
+     false,
+     4,
+     1
+    ]
+   ],
+   "changedObservers": []
+  },
+  "G1-wording-guard-inject-matrix": {
+   "reach": "inject",
+   "error": null,
+   "result": {
+    "inputs": [
+     "ファールを相手より0回少なく抑えた",
+     "ファールを相手より1回少なく抑えた",
+     "ファールを相手より10回少なく抑えた",
+     "ファールを相手より20回少なく抑えた",
+     "ファールが相手より10回多かった",
+     "ハイランで相手を0上回った",
+     "ハイランで相手を5上回った",
+     "ハイランで相手を10上回った",
+     "ハイランでは相手が10上回った",
+     "ハイランでは相手が3上回った",
+     "シュート成功率で相手を0ポイント上回った"
+    ],
+    "first": [
+     "ファール数は相手と同じ",
+     "ファールを相手より1回少なく抑えた",
+     "ファール数は相手と同じ",
+     "ファール数は相手と同じ",
+     "ファールが相手より10回多かった",
+     "ハイランは相手と同じ",
+     "ハイランで相手を5上回った",
+     "ハイランは相手と同じ",
+     "ハイランは相手と同じ",
+     "ハイランでは相手が3上回った",
+     "シュート成功率で相手を0ポイント上回った"
+    ],
+    "stable": true
+   },
+   "changedObservers": [
+    "index.html#11"
+   ]
+  }
+ }
+}
