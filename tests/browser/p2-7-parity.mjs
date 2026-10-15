@@ -1,4 +1,6 @@
-/* P2-7 Data / QR / Backup / Identity parity probe (NOT part of `node --test`).
+/* Normalisations (each is a documented, intentional P2 difference or a random value, never a data difference): the in-memory growth-analysis object gained an additive
+ * `statusCode` field in P2-3 (its text/number fields are compared); the in-progress snapshot carries a random session UUID (crypto.randomUUID).
+ * P2-7 Data / QR / Backup / Identity parity probe (NOT part of `node --test`).
  * Usage: [P2_APP_ROOT=<checkout>] node tests/browser/p2-7-parity.mjs <out.json> [lang=ja]
  * Drives the REAL app (Pro through the public adapter, frozen clock, seeded Math.random) and records, as digests + readable samples: the Backup export (file name and
  * bytes), the CSV export, every localStorage key, Analytics aggregates / growth analysis per player and discipline, Player Identity matching (incl. width / kana variants),
@@ -30,7 +32,7 @@ await ev(`${PRE}window.__dl.length=0;document.getElementById("exportCsvBtn").cli
 R.csv = await ev(`${PRE}const d=window.__dl.filter(x=>x.kind==="blob"),a=window.__dl.filter(x=>x.kind==="anchor");const t=d[0]?.text||"";const lines=t.split("\\n");return {files:a.map(x=>x.download),size:t.length,hash:h(t),rows:lines.length,header:lines[0]?.slice(0,200)}`);
 // D. Analytics / growth
 R.analytics = await ev(`${PRE}const ctx=window.CueScoreAnalysisV2Context;const out={};const players=readPlayerLibrary();for(const p of players){const recs=recordsForRegisteredPlayer(p);const per={};for(const d of ["9ball","10ball","rotation","jpa9","straightPool","threeCushion"]){const f=recs.filter(r=>ctx.discipline(r)===d);per[d]=h(JSON.stringify([ctx.aggregate(f.slice(0,10),p),ctx.aggregate(f.slice(10,20),p),f.length]))}
- let growth=null;try{const g=buildPlayerGrowthAnalysisV740(recs,p);const ins=buildPlayerInsightsV750(recs,p,g);growth=h(JSON.stringify([g,buildRionCoachV760(ins,g)]))}catch(e){growth="err:"+e.message}
+ let growth=null;try{const g=buildPlayerGrowthAnalysisV740(recs,p);const ins=buildPlayerInsightsV750(recs,p,g);growth=h(JSON.stringify([g,buildRionCoachV760(ins,g)],(k,v)=>k==="statusCode"?undefined:v))}catch(e){growth="err:"+e.message}
  out[p.id+":"+p.name]={records:recs.length,per,growth}}return out`);
 // E. Identity
 R.identity = await ev(`${PRE}const names=["ＴＡＫＡ","taka","TaKa","ひな","ヒナ","ﾋﾅ","なおき","さくら","さくら ","ＮＡＯＫＩ","Ｎａｏｋｉ"];const out={};for(const n of names)out[n]=recordsForRegisteredPlayer({id:"x-"+n,name:n}).map(r=>r.id).sort().join(",");const reg=readPlayerLibrary().map(p=>[p.id,recordsForRegisteredPlayer(p).map(r=>r.id).sort().join(",")]);return {byName:out,registered:reg}`);
@@ -44,7 +46,7 @@ R.entitlement = await ev(`${PRE}const t=await (await fetch("./monetization-v1.js
 await ev(`${PRE}document.querySelector('[data-phase1-tab="home"]').click();await W(500);document.querySelector(".home-new-match-v2").click();await W(700);document.querySelector('.cue-discipline-v1[data-discipline="9ball"]').click();await W(500);
  if(!document.getElementById("p2Name").value){document.getElementById("p2PlayerSearchBtn").click();await W(500);document.querySelector("[data-select-player]")?.click();await W(500)}
  for(let i=0;i<60&&document.getElementById("startGameBtn").disabled;i++)await W(100);document.getElementById("startGameBtn").click();for(let i=0;i<60&&!document.querySelector(".app").classList.contains("pro-game-mode");i++)await W(100);await W(1200);return true`);
-R.snapshot = await ev(`${PRE}const after=${dump};const before=${JSON.stringify(R.storageInitial)};const added={};for(const k of Object.keys(after))if(before[k]!==after[k])added[k]=after[k];const snap={};for(const k of Object.keys(localStorage)){if(/inProgress|snapshot|inprogress/i.test(k)){const raw=localStorage.getItem(k);let p=null;try{p=JSON.parse(raw)}catch(e){}snap[k]={hash:h(raw),keys:p&&typeof p==="object"?Object.keys(p).sort():null,game:p?.state?.activeGameTypeV1??null,schema:p?.schemaVersion??p?.version??null}}}return {changedKeys:Object.keys(added).sort(),snap}`);
+R.snapshot = await ev(`${PRE}const after=${dump};const before=${JSON.stringify(R.storageInitial)};const added={};for(const k of Object.keys(after))if(before[k]!==after[k])added[k]=k.indexOf("inProgress")>=0?"<random-uuid-bearing>":after[k];const snap={};for(const k of Object.keys(localStorage)){if(/inProgress|snapshot|inprogress/i.test(k)){const raw=localStorage.getItem(k);let p=null;try{p=JSON.parse(raw)}catch(e){}snap[k]={hash:h(raw.replace(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/g,"<uuid>")),keys:p&&typeof p==="object"?Object.keys(p).sort():null,game:p?.state?.activeGameTypeV1??null,schema:p?.schemaVersion??p?.version??null}}}return {changedKeys:Object.keys(added).sort(),snap}`);
 // I. Backup -> wipe -> restore round trip (the restore flow reloads the page, so the steps are split)
 const DATA_KEYS = ["rotationScoreboard.players.v1", "rotationScoreboard.matchRecords.v1", "rotationScoreboard.matchCategories.v1", "rotationScoreboard.matchSeasons.v1"];
 const keep = await ev(`${PRE}return Object.fromEntries(${JSON.stringify(DATA_KEYS)}.map(k=>[k,h(localStorage.getItem(k)||"")]))`);
