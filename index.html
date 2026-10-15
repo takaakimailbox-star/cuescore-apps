@@ -27179,9 +27179,13 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     const update=()=>{target.textContent=old.textContent;target.className="settings-suite-status-v2"+(old.classList.contains("error")?" error":old.classList.contains("ok")?" ok":"")};
     new MutationObserver(update).observe(old,{childList:true,subtree:true,characterData:true,attributes:true});update();
   }
-  mirrorStatus("supabaseConnectionStatus","#suiteConnectionStatus");
-  mirrorStatus("deviceIdStatus","#suiteDeviceStatus");
-  mirrorStatus("cloudSyncStatus","#suiteSyncStatus");
+  // P2 OBS-09: the status sources are written only by the Cloud Sync suite, which is disabled in this release (canUse("cloudSync") === false:
+  // the suite entry is hidden, setView("cloud") refuses and the sync IIFE returns early). No mirror observers are created while it is disabled.
+  if (window.CueScoreFeatureAccess.canUse("cloudSync")) {
+    mirrorStatus("supabaseConnectionStatus","#suiteConnectionStatus");
+    mirrorStatus("deviceIdStatus","#suiteDeviceStatus");
+    mirrorStatus("cloudSyncStatus","#suiteSyncStatus");
+  }
 
   function normalizeText(value){return String(value??"").normalize(CueScoreDomainV1.IDENTITY_NORMALIZATION_FORM).trim().replace(/\s+/g," ").toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE)}
   function playerKey(player){const id=player?.id??player?.playerId??player?.uuid;return id?`id:${String(id)}`:`name:${normalizeText(player?.name)}`}

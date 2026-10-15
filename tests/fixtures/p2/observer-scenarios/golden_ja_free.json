@@ -174,51 +174,6 @@
    ]
   },
   {
-   "key": "index.html#5",
-   "targets": [
-    {
-     "desc": "div#supabaseConnectionStatus",
-     "live": true,
-     "opts": {
-      "childList": true,
-      "subtree": true,
-      "characterData": true,
-      "attributes": true
-     }
-    }
-   ]
-  },
-  {
-   "key": "index.html#5",
-   "targets": [
-    {
-     "desc": "div#deviceIdStatus",
-     "live": true,
-     "opts": {
-      "childList": true,
-      "subtree": true,
-      "characterData": true,
-      "attributes": true
-     }
-    }
-   ]
-  },
-  {
-   "key": "index.html#5",
-   "targets": [
-    {
-     "desc": "div#cloudSyncStatus",
-     "live": true,
-     "opts": {
-      "childList": true,
-      "subtree": true,
-      "characterData": true,
-      "attributes": true
-     }
-    }
-   ]
-  },
-  {
    "key": "index.html#6",
    "targets": [
     {
@@ -854,15 +809,13 @@
    "result": {
     "before": "",
     "mid": {
-     "text": "P250-PROBE",
+     "text": "",
      "cls": "settings-suite-status-v2"
     },
     "after": "",
     "visible": false
    },
-   "changedObservers": [
-    "index.html#5"
-   ]
+   "changedObservers": []
   },
   "I1-badges-per-screen": {
    "reach": "ui",

@@ -18,7 +18,8 @@ const ALLOWED_CLASSES = ["STRUCTURE", "STATE", "DIAGNOSTIC"];
 const RATCHET = Object.freeze({
   registrations: 21,      // P2-5a-1: 23 -> 21 (OBS-14 enforce, OBS-15 correct removed)
   textRewrite: 7,         // KNOWN rewriters: OBS-01,02,03,16,19,22,23   (P2-5a-1: 11 -> 7; OBS-10/17 no longer write text)
-  textMirrorPending: 1,   // OBS-09 (D-R2): NOT allow-listed until reachability + rewrite behaviour are decided by the Commander
+  textMirrorPending: 0,   // OBS-09 resolved by a generation guard (Phase A)
+  gatedOff: 1,            // OBS-09: registration exists in source but is NOT created while canUse("cloudSync") is false (never allow-listed)
   allowListed: 13,        // structure/state/diagnostic observers with NO text-writing callee (11 + OBS-10 + OBS-17)
   removed: 2
 });
@@ -33,19 +34,20 @@ test("[AC-S3 L0] fixture covers exactly the 21 live registrations (+2 removed ro
   assert.equal(observerInventory().length, RATCHET.registrations);
 });
 
-test("[AC-S3 L0] class counts are pinned: 7 text-rewrite + 1 mirror-pending (unresolved 8; was 12) + 13 allow-list candidates + 2 removed", () => {
+test("[AC-S3 L0] class counts are pinned: 7 text-rewrite + 1 gated-off (runtime-unresolved 7; was 12) + 13 allow-list candidates + 2 removed", () => {
   const c = {}; for (const k of known) c[k.class] = (c[k.class] || 0) + 1;
   assert.equal(c.TEXT_REWRITE, RATCHET.textRewrite);
-  assert.equal(c.TEXT_MIRROR_PENDING, RATCHET.textMirrorPending);
+  assert.equal(c.TEXT_MIRROR_PENDING || 0, RATCHET.textMirrorPending);
+  assert.equal(c.TEXT_MIRROR_GATED, RATCHET.gatedOff);
   assert.equal(ALLOWED_CLASSES.reduce((a, k) => a + (c[k] || 0), 0), RATCHET.allowListed);
   assert.equal(c.REMOVED, RATCHET.removed);
-  assert.equal(known.filter(k => k.class === "TEXT_REWRITE" || k.class === "TEXT_MIRROR_PENDING").length, 8, "unresolved AC-S3 observers (must reach 0, or be allow-listed with Commander approval, before AC-S3 PASS)");
+  assert.equal(known.filter(k => k.class === "TEXT_REWRITE" || k.class === "TEXT_MIRROR_PENDING").length, 7, "unresolved AC-S3 observers (must reach 0, or be allow-listed with Commander approval, before AC-S3 PASS)");
 });
 
 test("[AC-S3 L0] the known TEXT-REWRITE list is exactly OBS-01,02,03,16,19,22,23 (P2-5a-1 removed 14,15 and made 10,17 text-free)", () => {
   assert.deepEqual(known.filter(k => k.class === "TEXT_REWRITE").map(k => k.obs_id), ["OBS-01", "OBS-02", "OBS-03", "OBS-16", "OBS-19", "OBS-22", "OBS-23"]);
   assert.deepEqual(known.filter(k => k.class === "REMOVED").map(k => k.obs_id), ["OBS-14", "OBS-15"]);
-  assert.deepEqual(known.filter(k => k.class === "TEXT_MIRROR_PENDING").map(k => k.obs_id), ["OBS-09"]);
+  assert.deepEqual(known.filter(k => k.class === "TEXT_MIRROR_GATED").map(k => k.obs_id), ["OBS-09"]);
 });
 
 for (const k of known.filter(k => k.class === "REMOVED")) {
@@ -65,7 +67,7 @@ for (const k of live) {
     assert.deepEqual(s.textWriters, k.text_writers, `${k.obs_id}: reachable text writers changed`);
     assert.equal(s.usesCueT, k.uses_cueT, `${k.obs_id}: cueT reachability changed`);
     if (ALLOWED_CLASSES.includes(k.class)) assert.deepEqual(s.textWriters, [], `${k.obs_id} is allow-list class ${k.class} but reaches a text writer`);
-    if (k.class === "TEXT_REWRITE" || k.class === "TEXT_MIRROR_PENDING") assert.ok(s.textWriters.length > 0, `${k.obs_id} is classified as text-writing but no writer is reachable: reclassification needs Evidence`);
+    if (k.class === "TEXT_REWRITE" || k.class === "TEXT_MIRROR_PENDING" || k.class === "TEXT_MIRROR_GATED") assert.ok(s.textWriters.length > 0, `${k.obs_id} is classified as text-writing but no writer is reachable: reclassification needs Evidence`);
   });
 }
 
@@ -113,7 +115,17 @@ test("[AC-S3 L0] reconciliation with the P2-0 classification fixture (observer-c
     return was !== now;
   }).map(k => `${k.p2_ledger}:${oldRole[k.p2_ledger]}->${k.class}`);
   assert.deepEqual(diffs, [
-    "P2L-113:allowed->TEXT_MIRROR_PENDING", // OBS-09: the P2-0 fixture allowed it; R-P2-1 / P2-5-0 found it copies status text (reachability: none in this release) -> NOT allow-listed until D-R2
+    "P2L-113:allowed->TEXT_MIRROR_GATED", // OBS-09: the P2-0 fixture allowed it; R-P2-1 / P2-5-0 found it copies status text (reachability: none in this release) -> NOT allow-listed until D-R2
     "P2L-122:rewrite->STATE"                // OBS-18: P2-4 removed the title text comparison/write from navigation-shell-phase1.js; no text writer is reachable now
   ]);
+});
+
+test("[OBS-09 / Phase A] the three mirrorStatus registrations exist only inside the cloudSync guard, and Cloud Sync is disabled for Free and Pro", () => {
+  const html = read("index.html");
+  const at = html.indexOf('if (window.CueScoreFeatureAccess.canUse("cloudSync")) {\n    mirrorStatus(');
+  assert.ok(at > 0);
+  const block = html.slice(at, html.indexOf("\n  }\n", at));
+  assert.equal(count(block, "mirrorStatus("), 3);
+  assert.equal(count(html, /(?<!function )mirrorStatus\(/), 3, "no mirrorStatus call outside the guard");
+  assert.equal(count(html, "cloudSync:false"), 2);
 });

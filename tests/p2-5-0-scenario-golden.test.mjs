@@ -21,7 +21,7 @@ test("[golden / AC-S3 L2] observer targets: every key is a known registration; O
   for (const g of [free, pro]) {
     for (const o of g.observerTargets) { assert.ok(keys.has(o.key), o.key); for (const t of o.targets) if (/#/.test(t.desc)) assert.equal(t.live, true, `${o.key} observes a stale ${t.desc}`); }
     assert.ok(!g.observerTargets.some(o => o.key === "index.html#0"), "OBS-04 is created only by a conditional path (not exercised)");
-    assert.equal(g.observerTargets.filter(o => o.key === "index.html#5").length, 3, "OBS-09 mirrorStatus: 3 runtime instances");
+    assert.equal(g.observerTargets.filter(o => o.key === "index.html#5").length, 0, "OBS-09 mirrorStatus: no runtime instance while cloudSync is disabled (Phase A)");
   }
 });
 test("[golden / F] quiescence: no scenario that performs no DOM text work lets any observer change text (idle, burst, idle after burst, repeated reconcile)", () => {
@@ -57,8 +57,8 @@ test("[golden / L, OBS-09] Cloud Sync: not reachable in Free or Pro, even by for
     assert.equal(l3.afterForcedCloudClick.dataScreen, l3.dataScreen);
     assert.equal(l3.top.find(v => v.view === "cloud").feature, "cloud-sync");
     const l2 = S(g, "L2-cloud-mirror-live-copy").result;
-    assert.equal(l2.before, ""); assert.equal(l2.mid.text, "P250-PROBE"); assert.equal(l2.after, ""); assert.equal(l2.visible, false);
-    assert.deepEqual(S(g, "L2-cloud-mirror-live-copy").changedObservers, ["index.html#5"]);
+    assert.equal(l2.before, ""); assert.equal(l2.mid.text, "", "Phase A: no mirror observer exists, writing a hidden source status is not copied"); assert.equal(l2.after, ""); assert.equal(l2.visible, false);
+    assert.deepEqual(S(g, "L2-cloud-mirror-live-copy").changedObservers, []);
   }
   assert.equal(S(pro, "L3-suite-views-reachability").result.afterExport.length, 1, "a reachable suite view (export, Pro) shows only itself");
 });
@@ -102,9 +102,9 @@ test("[golden / J, OBS-01/02] analysis-v2 player view for all 6 disciplines is b
 test("[golden / M] the legacy player detail (.pd7-shell) is NOT present in the current UI and appears only when the production function is called directly", () => {
   const m = S(pro, "M1-legacy-player-detail-fn").result; assert.equal(m.shellBefore, false); assert.equal(m.shellAfter, true);
 });
-test("[golden / AC-S3 L2] the set of observers that changed text in real runs is pinned: Free 3, Pro 6 (was 6 / 9 before P2-5a-1; OBS-19 never changes text; OBS-09 only via injected source text)", () => {
+test("[golden / AC-S3 L2] the set of observers that changed text in real runs is pinned: Free 2, Pro 5 (was 6 / 9 before P2-5a-1; OBS-19 never changes text; OBS-09 is not created)", () => {
   const chg = g => [...new Set(Object.values(g.scenarios).flatMap(s => s.changedObservers))].sort();
-  assert.deepEqual(chg(free), ["final-ui-build18.js#0", "index.html#5", "monetization-v1.js#0"]);
-  assert.deepEqual(chg(pro), ["analysis-build4.js#0", "analysis-final-rc.js#0", "final-ui-build18.js#0", "index.html#5", "ui-revision-v12.js#2", "ui-revision-v12.js#3"]);
-  for (const c of [...chg(free), ...chg(pro)]) { const k = known.find(x => x.key === c); assert.ok(k && ["TEXT_REWRITE", "TEXT_MIRROR_PENDING"].includes(k.class), c + " is outside the known list"); }
+  assert.deepEqual(chg(free), ["final-ui-build18.js#0", "monetization-v1.js#0"]);
+  assert.deepEqual(chg(pro), ["analysis-build4.js#0", "analysis-final-rc.js#0", "final-ui-build18.js#0", "ui-revision-v12.js#2", "ui-revision-v12.js#3"]);
+  for (const c of [...chg(free), ...chg(pro)]) { const k = known.find(x => x.key === c); assert.ok(k && ["TEXT_REWRITE"].includes(k.class), c + " is outside the known list"); }
 });

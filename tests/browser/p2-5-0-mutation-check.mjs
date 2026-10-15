@@ -40,6 +40,8 @@ const M = [
   ["setView cloud guard removed", "index.html", 'if (view === "cloud" && !window.CueScoreFeatureAccess.canUse("cloudSync")) return;', ""],
   ["cloud IIFE guard removed", "index.html", 'if (!window.CueScoreFeatureAccess.canUse("cloudSync")) return;\n    const SUPABASE_CONFIG_KEY', 'const SUPABASE_CONFIG_KEY'],
   ["cloud source status node gets static text", "index.html", 'id="cloudSyncStatus" role="status" aria-live="polite"></div>', 'id="cloudSyncStatus" role="status" aria-live="polite">x</div>'],
+  ["OBS-09 generation guard removed", "index.html", 'if (window.CueScoreFeatureAccess.canUse("cloudSync")) {\n    mirrorStatus(', 'if (true) {\n    mirrorStatus('],
+  ["OBS-09 fourth mirror outside the guard", "index.html", '  // P2 OBS-09: the status sources', '  mirrorStatus("cloudSyncStatus","#suiteSyncStatus");\n  // P2 OBS-09: the status sources'],
   /* OBS-19 / OBS-13 */
   ["OBS-13 analysis-button removal dropped", "index.html", 'forEach(button=>button.remove());\n  new MutationObserver(addHistoryAnalysisEntriesV5)', 'forEach(button=>button);\n  new MutationObserver(addHistoryAnalysisEntriesV5)'],
   ["OBS-19 detail label changed", "player-detail-build6.js", 'detail.textContent="詳細"', 'detail.textContent="詳しく"'],

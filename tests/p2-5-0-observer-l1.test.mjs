@@ -174,3 +174,15 @@ test("[P2L-123 / OBS-19 reachability] OBS-13 (addHistoryAnalysisEntriesV5) delet
   assert.ok(a > 0 && b > a, "OBS-13 registers (inline script) before build6 loads -> its callback is delivered first for mutations of the same root");
   assert.ok(read("player-detail-build6.js").includes("new MutationObserver(compactHistory).observe(historyRoot,{subtree:true,childList:true})"));
 });
+
+/* ---------- OBS-09 / Phase A: generation guard ---------- */
+test("[OBS-09 / Phase A] guard behaviour over fakes: cloudSync disabled -> no observer is created; enabled -> exactly the three mirrors are created as before", () => {
+  const fn = extractFunction(html, "mirrorStatus");
+  const at = html.indexOf('if (window.CueScoreFeatureAccess.canUse("cloudSync")) {\n    mirrorStatus('); const block = html.slice(at, html.indexOf("\n  }\n", at) + 4);
+  const run = enabled => {
+    const created = []; const node = () => ({ textContent: "", className: "", classList: { contains: () => false } });
+    const ctx = vm.createContext({ window: { CueScoreFeatureAccess: { canUse: k => (k === "cloudSync" ? enabled : false) } }, document: { getElementById: () => node() }, $: () => node(), root: {}, MutationObserver: class { constructor() { created.push(1); } observe() {} } });
+    vm.runInContext(fn + ";" + block, ctx); return created.length;
+  };
+  assert.equal(run(false), 0); assert.equal(run(true), 3);
+});

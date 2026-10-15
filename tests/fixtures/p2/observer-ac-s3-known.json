@@ -83,8 +83,8 @@
   "obs_id": "OBS-09",
   "p2_ledger": "P2L-113",
   "key": "index.html#5",
-  "class": "TEXT_MIRROR_PENDING",
-  "planned_gate": "D-R2 (Commander)",
+  "class": "TEXT_MIRROR_GATED",
+  "planned_gate": "P2 Phase A (done): registration is gated by canUse(\"cloudSync\") === false; no instance is created in this release",
   "text_writers": [
    "<cb>"
   ],

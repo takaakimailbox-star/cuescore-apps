@@ -14,7 +14,7 @@ const M = [
   ["OBS-03 setup text changed", "final-ui-build18.js", 'display(2,"対戦相手を追加")', 'display(2,"相手を追加")', "free", "golden"],
   ["OBS-16 badge text changed", "monetization-v1.js", '">🔒 Pro</span>', '">Pro</span>', "free", "golden"],
   ["OBS-16 badge aria changed", "monetization-v1.js", 'aria-label="Pro限定"', 'aria-label="Pro"', "free", "golden"],
-  ["OBS-09 mirror stops copying text", "index.html", "const update=()=>{target.textContent=old.textContent;", "const update=()=>{", "free", "golden"],
+  ["OBS-09 generation guard removed (mirrors created again)", "index.html", 'if (window.CueScoreFeatureAccess.canUse("cloudSync")) {\n    mirrorStatus(', 'if (true) {\n    mirrorStatus(', "free", "golden"],
   ["allow-listed OBS-05 starts rewriting text (dynamic AC-S3 must catch it)", "index.html", "      syncModalAccessibility();\n    });", '      syncModalAccessibility();const t250=document.getElementById("playerLibraryTitle");if(t250&&t250.textContent!=="X250")t250.textContent="X250";\n    });', "free", "acs3"],
   ["OBS-13 stops deleting analysis buttons", "index.html", 'forEach(button=>button.remove());\n  new MutationObserver(addHistoryAnalysisEntriesV5)', 'forEach(button=>button);\n  new MutationObserver(addHistoryAnalysisEntriesV5)', "pro", "golden"],
   ["OBS-23 date rewrite reordered", "ui-revision-v12.js", "date.textContent=`${Number(match[1])}/${Number(match[2])}${match[3]} ${match[4]}`", "date.textContent=`${Number(match[2])}/${Number(match[1])}${match[3]} ${match[4]}`", "pro", "golden"],

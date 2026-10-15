@@ -33,11 +33,13 @@ const actual = load(args[0]);
 const failures = [];
 if (args[1] === "--ac-s3") {
   const textKeys = new Set(known.filter(k => k.class === "TEXT_REWRITE" || k.class === "TEXT_MIRROR_PENDING").map(k => k.key));
+  const gatedKeys = new Set(known.filter(k => k.class === "TEXT_MIRROR_GATED").map(k => k.key));
   const allowedKeys = new Set(known.filter(k => ["STRUCTURE", "STATE", "DIAGNOSTIC"].includes(k.class)).map(k => k.key));
   const changed = {};
   for (const [name, s] of Object.entries(actual.scenarios)) for (const [k, v] of Object.entries(s.observers)) if (v.changed > 0) (changed[k] ||= []).push(name);
   for (const [k, scs] of Object.entries(changed)) {
     if (k.startsWith("?")) failures.push(`unknown observer site changed text: ${k} in ${scs.join(",")}`);
+    else if (gatedKeys.has(k)) failures.push(`GATED observer ${k} was created and rewrote text in ${scs.join(",")}`);
     else if (allowedKeys.has(k)) failures.push(`ALLOW-LIST VIOLATION: ${k} changed text in ${scs.join(",")}`);
     else if (!textKeys.has(k)) failures.push(`unclassified observer changed text: ${k}`);
   }
