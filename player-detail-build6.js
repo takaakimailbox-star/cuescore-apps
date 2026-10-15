@@ -57,7 +57,7 @@
       <section class="pd7-links"><button type="button" data-pd7-rivals><span><strong>対戦相手別の成績</strong><small>${def(active).label}の相手別勝敗・勝率</small></span><b>›</b></button><button type="button" data-pd7-history><span><strong>${def(active).label}の全試合</strong><small>試合詳細を見る</small></span><b>›</b></button></section>
       </div>`;
   }
-  function render(playerId,level="info",active=state.discipline){const player=players().find(item=>String(item.id)===String(playerId));if(!player)return;state.playerId=String(playerId);state.player=player;level==="detail"?renderDetail(player,active):renderInfo(player);}
+  function render(playerId,level="info",active=state.discipline){const player=players().find(item=>String(item.id)===String(playerId));if(!player)return;state.playerId=String(playerId);state.player=player;level==="detail"?renderDetail(player,active):renderInfo(player);window.CueScorePro?.decorate?.();}
   const previous=window.renderFormalPlayerDetailV1;
   window.renderFormalPlayerDetailV1=function(playerId){previous?.(playerId);render(playerId,"info");};
   body.addEventListener("click",event=>{

@@ -88,6 +88,7 @@
     const content=active.state.tab==="matches"?matchesView(active.records,player,active.state):active.state.tab==="analysis"?analysisView(active.records,player,active.state):resultsView(active.records,player,active.state);
     body.innerHTML=`<div class="player-hub-v2">${profile(player)}${selector(active.state)}${tabs(active.state)}<div class="hub-content-v2" data-hub-content>${content}</div></div>`;
     requestAnimationFrame(()=>{const panel=body.querySelector(".hub-content-v2");if(panel)panel.scrollTop=active.state.scroll[active.state.tab]||0;});
+    window.CueScorePro?.decorate?.();
   }
 
   const snapshot=()=>{

@@ -151,12 +151,12 @@
   "obs_id": "OBS-16",
   "p2_ledger": "P2L-120",
   "key": "monetization-v1.js#0",
-  "class": "TEXT_REWRITE",
-  "planned_gate": "P2-5b (design check first; STOP if no safe path)",
-  "text_writers": [
-   "decorate"
-  ],
-  "uses_cueT": false
+  "class": "REMOVED",
+  "planned_gate": "P2 Phase E (done)",
+  "text_writers": [],
+  "uses_cueT": false,
+  "removed_in": "P2 Phase E",
+  "replaced_by": "decorate() is exposed on window.CueScorePro and called after the player-hub render, after the legacy player-detail render, once at load for the static Settings rows, and on every entitlement change"
  },
  {
   "obs_id": "OBS-17",

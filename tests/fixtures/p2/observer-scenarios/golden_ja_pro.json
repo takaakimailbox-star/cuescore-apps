@@ -320,19 +320,6 @@
      }
     }
    ]
-  },
-  {
-   "key": "monetization-v1.js#0",
-   "targets": [
-    {
-     "desc": "body",
-     "live": false,
-     "opts": {
-      "subtree": true,
-      "childList": true
-     }
-    }
-   ]
   }
  ],
  "scenarios": {
@@ -351,35 +338,35 @@
    "result": [
     [
      "attributes:aria-hidden@section#proSummary.pro-summary",
-     72
+     73
     ],
     [
      "attributes:aria-hidden@section#recordDetailOverlay.record-detail-overlay",
-     72
+     73
     ],
     [
      "attributes:aria-hidden@section#playerLibraryOverlay.player-library-overlay",
-     72
+     73
     ],
     [
      "attributes:aria-hidden@section#playerStatsOverlay.player-stats-overlay",
-     72
+     73
     ],
     [
      "attributes:aria-hidden@section#classificationManagerV381.classification-manager-v381",
-     72
+     73
     ],
     [
      "attributes:aria-hidden@section#breakResultOverlayV61.break-result-overlay-v61",
-     72
+     73
     ],
     [
      "attributes:aria-hidden@section#pushOutInputOverlayV730.pushout-overlay-v730",
-     72
+     73
     ],
     [
      "attributes:aria-hidden@section#pushOutDecisionOverlayV730.pushout-overlay-v730",
-     72
+     73
     ]
    ],
    "changedObservers": []

@@ -123,9 +123,9 @@ test("[P2L-102] IAP Product ID, Free limit and release profile are frozen", () =
   assert.equal(policy.getEligibleRecords(many)[0].id, "m24");
   assert.equal(require("../record-access-v1.js").createRecordPolicy(() => true).getEligibleRecords(many).length, 25);
 });
-test("[P2L-120] Free/Pro plan decoration is the only Observer-driven Free/Pro text (monetization-v1.js); entitlement logic is not text-based", () => {
+test("[P2L-120] Free/Pro plan decoration (monetization-v1.js) is an explicit step, no Observer (Phase E); entitlement logic is not text-based", () => {
   const src = read("monetization-v1.js");
-  assert.ok(src.includes("new MutationObserver(()=>requestAnimationFrame(decorate))"));
+  assert.ok(!src.includes("MutationObserver"));
   assert.ok(src.includes("textContent"), "decoration writes text (rewrite role, P2L-120)");
 });
 

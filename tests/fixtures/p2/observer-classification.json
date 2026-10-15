@@ -84,13 +84,6 @@
   "role": "allowed"
  },
  {
-  "id": "P2L-120",
-  "file": "monetization-v1.js",
-  "k": 0,
-  "class": "c",
-  "role": "rewrite"
- },
- {
   "id": "P2L-121",
   "file": "navigation-phase2-6.js",
   "k": 0,

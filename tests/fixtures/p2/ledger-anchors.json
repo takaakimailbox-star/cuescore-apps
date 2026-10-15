@@ -956,8 +956,8 @@
   "area": "D",
   "file": "monetization-v1.js",
   "line": 121,
-  "snippet": "new MutationObserver(()=>requestAnimationFrame(decorate)).observe(document.body,{subtree:true,childList:true});syncSettingsPlan();decorate()",
-  "function": "decorate (Free/Pro decoration)"
+  "snippet": "// P2 Phase E / OBS-16: decorate() is an explicit step now",
+  "function": "decorate (explicit step, Phase E)"
  },
  {
   "id": "P2L-121",

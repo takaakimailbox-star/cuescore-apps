@@ -315,19 +315,6 @@
      }
     }
    ]
-  },
-  {
-   "key": "monetization-v1.js#0",
-   "targets": [
-    {
-     "desc": "body",
-     "live": false,
-     "opts": {
-      "subtree": true,
-      "childList": true
-     }
-    }
-   ]
   }
  ],
  "scenarios": {
@@ -825,9 +812,7 @@
     },
     "edgeNote": false
    },
-   "changedObservers": [
-    "monetization-v1.js#0"
-   ]
+   "changedObservers": []
   },
   "I2-badge-state-toggle": {
    "reach": "fn",

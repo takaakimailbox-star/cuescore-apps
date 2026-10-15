@@ -68,7 +68,7 @@ test("[golden / I, OBS-16] Pro badges (Free): per-screen counts, one badge per h
   for (const v of Object.values(i1).filter(v => typeof v === "object")) { assert.deepEqual(v.text, ["🔒 Pro"]); assert.ok(v.aria.includes("Pro限定")); }
   assert.deepEqual(S(free, "I2-badge-state-toggle").result, [["start", false, 4], ["pro", true, 0], ["free-again", false, 4], ["free-after-mutations", false, 4, 1]]);
   assert.deepEqual(S(pro, "I2-badge-state-toggle").result, [["start", true, 0], ["pro", true, 0], ["free-again", false, 4], ["free-after-mutations", false, 4, 1]]);
-  assert.ok(S(free, "I1-badges-per-screen").changedObservers.includes("monetization-v1.js#0"));
+  assert.deepEqual(S(free, "I1-badges-per-screen").changedObservers, [], "Phase E: decoration is an explicit step");
 });
 test("[golden / G, P2L-119] wording guard removed: legacy-looking strings injected into the REAL analysis root are no longer touched by any observer (P2-5a-1)", () => {
   const g = S(free, "G1-wording-guard-inject-matrix").result;
@@ -102,9 +102,9 @@ test("[golden / J, OBS-01/02] analysis-v2 player view for all 6 disciplines is b
 test("[golden / M] the legacy player detail (.pd7-shell) is NOT present in the current UI and appears only when the production function is called directly", () => {
   const m = S(pro, "M1-legacy-player-detail-fn").result; assert.equal(m.shellBefore, false); assert.equal(m.shellAfter, true);
 });
-test("[golden / AC-S3 L2] the set of observers that changed text in real runs is pinned: Free 1, Pro 2 (was 6 / 9 before P2-5a-1; OBS-03, 09, 19, 22, 23 are no longer observers)", () => {
+test("[golden / AC-S3 L2] the set of observers that changed text in real runs is pinned: Free 0, Pro 2 (was 6 / 9 before P2-5a-1; only OBS-01 and OBS-02 still rewrite text)", () => {
   const chg = g => [...new Set(Object.values(g.scenarios).flatMap(s => s.changedObservers))].sort();
-  assert.deepEqual(chg(free), ["monetization-v1.js#0"]);
+  assert.deepEqual(chg(free), []);
   assert.deepEqual(chg(pro), ["analysis-build4.js#0", "analysis-final-rc.js#0"]);
   for (const c of [...chg(free), ...chg(pro)]) { const k = known.find(x => x.key === c); assert.ok(k && ["TEXT_REWRITE"].includes(k.class), c + " is outside the known list"); }
 });

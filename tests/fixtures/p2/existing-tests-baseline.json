@@ -172,9 +172,10 @@
    "skips": 0
   },
   "build70-pro-ux-startup-safety.test.mjs": {
-   "sha256": "d23d238442aa45d4e00483b2758f92907b8610f233d0e8ae14e57bf633d95218",
+   "sha256": "775afad6c4225f21ee0688e307081983ab19636476ddf19bb4ed19ccea1f649e",
    "tests": 9,
-   "skips": 0
+   "skips": 0,
+   "updated_in": "P2 Phase E (old->new assertion map in Evidence)"
   },
   "build72-current-plan-settings.test.mjs": {
    "sha256": "7af699ef9ee51117cf630477ebefa1a219b1c7a3a26c52d97f4443ff101b97fd",

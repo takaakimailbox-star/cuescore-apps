@@ -61,7 +61,9 @@ test("verified Pro removes lock badges and prevents MutationObserver re-decorati
   assert.match(web, /if\(entitlement\.isPro\(\)\)\{[\s\S]*?\.cue-pro-badge-v1[\s\S]*?node=>node\.remove\(\)/);
   assert.match(web, /\.cue-pro-entry-v1[\s\S]*?classList\.remove\("cue-pro-entry-v1"\)/);
   assert.match(web, /\.cue-history-limit-v1[\s\S]*?node=>node\.remove\(\)/);
-  assert.match(web, /MutationObserver\(\(\)=>requestAnimationFrame\(decorate\)\)/);
+  // P2 Phase E: the body-wide observer is gone; decorate() is exposed on CueScorePro and called by the hub renderers (see tests/p2-5-4-badge-explicit-steps.test.mjs and the badge differential flows).
+  assert.doesNotMatch(web, /MutationObserver/);
+  assert.match(web, /window\.CueScorePro=Object\.freeze\(\{open,close,source:\(\)=>currentSource,decorate\}\)/);
   assert.match(web, /entitlement\.subscribe\(snapshot=>\{syncPaywall\(\);syncSettingsPlan\(snapshot\);decorate\(\)/);
 });
 

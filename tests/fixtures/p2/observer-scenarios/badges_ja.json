@@ -1,0 +1,1214 @@
+{
+ "lang": "ja",
+ "steps": [
+  {
+   "name": "start-free",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 2,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 2,
+    "limitNotices": 0,
+    "hub": "d8098f61",
+    "settings": "5365a11b",
+    "records": "42355ddc",
+    "text": "a4858e3b",
+    "e": null
+   }
+  },
+  {
+   "name": "settings",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 2,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 2,
+    "limitNotices": 0,
+    "hub": "d8098f61",
+    "settings": "5365a11b",
+    "records": "42355ddc",
+    "text": "a4858e3b",
+    "e": null
+   }
+  },
+  {
+   "name": "settings-export-paywall",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 2,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 2,
+    "limitNotices": 0,
+    "hub": "d8098f61",
+    "settings": "5365a11b",
+    "records": "42355ddc",
+    "text": "4f06849e",
+    "e": null
+   }
+  },
+  {
+   "name": "paywall-close",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 2,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 2,
+    "limitNotices": 0,
+    "hub": "d8098f61",
+    "settings": "5365a11b",
+    "records": "42355ddc",
+    "text": "4f06849e",
+    "e": null
+   }
+  },
+  {
+   "name": "history",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 2,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 2,
+    "limitNotices": 1,
+    "hub": "d8098f61",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "321148bd",
+    "e": null
+   }
+  },
+  {
+   "name": "player-list",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 2,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 2,
+    "limitNotices": 1,
+    "hub": "d8098f61",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "d088c527",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:hub-open",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定",
+     null
+    ],
+    "entries": 2,
+    "limitNotices": 1,
+    "hub": "9735bc4f",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "15c90b67",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:9ball/results",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定",
+     null
+    ],
+    "entries": 2,
+    "limitNotices": 1,
+    "hub": "9735bc4f",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "15c90b67",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:9ball/matches",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "e46b5061",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "643a847e",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:9ball/analysis",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "e46b5061",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "17737ed6",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:10ball/results",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定",
+     null
+    ],
+    "entries": 2,
+    "limitNotices": 1,
+    "hub": "586b538b",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "ef5857b",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:10ball/matches",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "e0893528",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "c69444e0",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:10ball/analysis",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "e0893528",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "c69444e0",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:rotation/results",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定",
+     null
+    ],
+    "entries": 2,
+    "limitNotices": 1,
+    "hub": "642ada4b",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "ef5857b",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:rotation/matches",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "896cbfcf",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "1e8c0ba7",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:rotation/analysis",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "896cbfcf",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "1e8c0ba7",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:jpa9/results",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定",
+     null
+    ],
+    "entries": 2,
+    "limitNotices": 1,
+    "hub": "e4127f0b",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "ef5857b",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:jpa9/matches",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "96fe227b",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "ff6d9893",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:jpa9/analysis",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "96fe227b",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "ff6d9893",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:straightPool/results",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定",
+     null
+    ],
+    "entries": 2,
+    "limitNotices": 1,
+    "hub": "c55f9c0b",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "ef5857b",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:straightPool/matches",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "d4025942",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "84a4707a",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:straightPool/analysis",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "d4025942",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "84a4707a",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:threeCushion/results",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定",
+     null
+    ],
+    "entries": 2,
+    "limitNotices": 1,
+    "hub": "9f54270b",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "ef5857b",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:threeCushion/matches",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "65c33b2b",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "9cb03203",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:threeCushion/analysis",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "65c33b2b",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "9cb03203",
+    "e": null
+   }
+  },
+  {
+   "name": "p1:hub-back",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "65c33b2b",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "9cb03203",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:hub-open",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定",
+     null
+    ],
+    "entries": 2,
+    "limitNotices": 1,
+    "hub": "b5d3e688",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "7fec0e73",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:9ball/results",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定",
+     null
+    ],
+    "entries": 2,
+    "limitNotices": 1,
+    "hub": "b5d3e688",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "7fec0e73",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:9ball/matches",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "97aba8a9",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "f9685440",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:9ball/analysis",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "97aba8a9",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "f9685440",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:10ball/results",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定",
+     null
+    ],
+    "entries": 2,
+    "limitNotices": 1,
+    "hub": "e27f5105",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "e66a01d0",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:10ball/matches",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "3125b1e2",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "26505035",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:10ball/analysis",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "3125b1e2",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "26505035",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:rotation/results",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定",
+     null
+    ],
+    "entries": 2,
+    "limitNotices": 1,
+    "hub": "ee3ed7c5",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "e66a01d0",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:rotation/matches",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "ed98d3c9",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "75c9819c",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:rotation/analysis",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "ed98d3c9",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "75c9819c",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:jpa9/results",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定",
+     null
+    ],
+    "entries": 2,
+    "limitNotices": 1,
+    "hub": "9b7be426",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "981bf651",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:jpa9/matches",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "357c119c",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "9aa73237",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:jpa9/analysis",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "357c119c",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "9aa73237",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:straightPool/results",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定",
+     null
+    ],
+    "entries": 2,
+    "limitNotices": 1,
+    "hub": "258fe126",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "981bf651",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:straightPool/matches",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "6f1f5ac",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "55aacb39",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:straightPool/analysis",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "6f1f5ac",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "55aacb39",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:threeCushion/results",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定",
+     null
+    ],
+    "entries": 2,
+    "limitNotices": 1,
+    "hub": "6628cf3d",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "3cd89868",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:threeCushion/matches",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "7f77aa7e",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "3a05c64a",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:threeCushion/analysis",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "7f77aa7e",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "3a05c64a",
+    "e": null
+   }
+  },
+  {
+   "name": "p2:hub-back",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "7f77aa7e",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "3a05c64a",
+    "e": null
+   }
+  },
+  {
+   "name": "flip-pro",
+   "err": null,
+   "state": {
+    "pro": true,
+    "badges": 0,
+    "perHostMax": 0,
+    "texts": [],
+    "aria": [],
+    "entries": 0,
+    "limitNotices": 0,
+    "hub": "fab2b784",
+    "settings": "5babb3f3",
+    "records": "e9083c91",
+    "text": "f54a796c",
+    "e": null
+   }
+  },
+  {
+   "name": "pro:hub",
+   "err": null,
+   "state": {
+    "pro": true,
+    "badges": 0,
+    "perHostMax": 0,
+    "texts": [],
+    "aria": [],
+    "entries": 0,
+    "limitNotices": 0,
+    "hub": "9e12c15a",
+    "settings": "5babb3f3",
+    "records": "e9083c91",
+    "text": "a426f5c5",
+    "e": null
+   }
+  },
+  {
+   "name": "pro:settings",
+   "err": null,
+   "state": {
+    "pro": true,
+    "badges": 0,
+    "perHostMax": 0,
+    "texts": [],
+    "aria": [],
+    "entries": 0,
+    "limitNotices": 0,
+    "hub": "9e12c15a",
+    "settings": "5babb3f3",
+    "records": "e9083c91",
+    "text": "a426f5c5",
+    "e": null
+   }
+  },
+  {
+   "name": "pro:history",
+   "err": null,
+   "state": {
+    "pro": true,
+    "badges": 0,
+    "perHostMax": 0,
+    "texts": [],
+    "aria": [],
+    "entries": 0,
+    "limitNotices": 0,
+    "hub": "9e12c15a",
+    "settings": "5babb3f3",
+    "records": "e9083c91",
+    "text": "a426f5c5",
+    "e": null
+   }
+  },
+  {
+   "name": "flip-free",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 0,
+    "hub": "65c33b2b",
+    "settings": "5365a11b",
+    "records": "e9083c91",
+    "text": "56ab4b0c",
+    "e": null
+   }
+  },
+  {
+   "name": "free-again:history",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "65c33b2b",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "9fd77cf",
+    "e": null
+   }
+  },
+  {
+   "name": "free-again:settings",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "65c33b2b",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "9fd77cf",
+    "e": null
+   }
+  },
+  {
+   "name": "free-again:hub",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 4,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "e46b5061",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "91806502",
+    "e": null
+   }
+  },
+  {
+   "name": "free-again:legacy-detail-fn",
+   "err": null,
+   "state": {
+    "pro": false,
+    "badges": 3,
+    "perHostMax": 1,
+    "texts": [
+     "🔒 Pro"
+    ],
+    "aria": [
+     "Pro限定"
+    ],
+    "entries": 3,
+    "limitNotices": 1,
+    "hub": "4e9e64b8",
+    "settings": "5365a11b",
+    "records": "e82cb0ab",
+    "text": "10f9c34e",
+    "e": null
+   }
+  }
+ ],
+ "errors": []
+}

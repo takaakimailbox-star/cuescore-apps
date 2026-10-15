@@ -21,6 +21,10 @@ const M = [
   ["journey: reviseRivals never runs (stands for every trigger removed at once)", "ui-revision-v12.js", "  function reviseRivals(){", "  function reviseRivals(){return;", "pro", "journey:ja:journey_ja.json"],
   ["journey: row date pattern wrong", "ui-revision-v12.js", 'date.textContent=window.cueDate(dt,"md-w-sp-hm")', 'date.textContent=window.cueDate(dt,"md-w-hm")', "pro", "journey:ja:journey_ja.json"],
   ["journey: aria suffix applied twice-style change", "ui-revision-v12.js", 'const detailSuffix="、試合詳細を開く"', 'const detailSuffix="、詳細を開く"', "pro", "journey:ja:journey_ja.json"],
+  ["badges: hub render no longer decorates", "navigation-phase2-6.js", "\n    window.CueScorePro?.decorate?.();\n  }", "\n  }", "free", "badges:ja:badges_ja.json"],
+  ["badges: legacy detail render no longer decorates", "player-detail-build6.js", "renderInfo(player);window.CueScorePro?.decorate?.();}", "renderInfo(player);}", "free", "badges:ja:badges_ja.json"],
+  ["badges: entitlement change no longer decorates", "monetization-v1.js", "syncSettingsPlan(snapshot);decorate();if(snapshot.isPro", "syncSettingsPlan(snapshot);if(snapshot.isPro", "free", "badges:ja:badges_ja.json"],
+  ["badges: badge text changed", "monetization-v1.js", '">🔒 Pro</span>', '">🔒Pro</span>', "free", "badges:ja:badges_ja.json"],
   ["OBS-13 stops deleting analysis buttons", "index.html", 'forEach(button=>button.remove());\n  new MutationObserver(addHistoryAnalysisEntriesV5)', 'forEach(button=>button);\n  new MutationObserver(addHistoryAnalysisEntriesV5)', "pro", "golden"],
   ["journey row date uses the wrong pattern (golden)", "ui-revision-v12.js", 'date.textContent=window.cueDate(dt,"md-w-sp-hm")', 'date.textContent=window.cueDate(dt,"ymd-w-sp-hm")', "pro", "golden"],
   ["final-rc match wording changed", "analysis-final-rc.js", '"同じでした"', '"同一でした"', "pro", "golden"],
@@ -46,11 +50,11 @@ async function one(i) {
   fs.writeFileSync(target, original.replace(from, to));
   const out = path.join(tmp, "out");
   let cmp;
-  if (check.startsWith("fault:") || check.startsWith("flow:") || check.startsWith("journey:")) {
+  if (check.startsWith("fault:") || check.startsWith("flow:") || check.startsWith("journey:") || check.startsWith("badges:")) {
     const parts = check.split(":"); const file = path.join(out, "x.json");
     fs.mkdirSync(out, { recursive: true });
-    const script = check.startsWith("fault:") ? ["tests/browser/p2-5a-1-fault-scenarios.mjs", file, parts[1], parts[2]] : check.startsWith("journey:") ? ["tests/browser/p2-5b-journey-flows.mjs", file, parts[1]] : ["tests/browser/p2-5a-1-flow-scenarios.mjs", file, parts[1], parts[2]];
-    const fixture = check.startsWith("journey:") ? parts[2] : parts[3];
+    const script = check.startsWith("fault:") ? ["tests/browser/p2-5a-1-fault-scenarios.mjs", file, parts[1], parts[2]] : check.startsWith("journey:") ? ["tests/browser/p2-5b-journey-flows.mjs", file, parts[1]] : check.startsWith("badges:") ? ["tests/browser/p2-5b-badge-flows.mjs", file, parts[1]] : ["tests/browser/p2-5a-1-flow-scenarios.mjs", file, parts[1], parts[2]];
+    const fixture = (check.startsWith("journey:") || check.startsWith("badges:")) ? parts[2] : parts[3];
     const r = await run(NODE, [path.join(tmp, script[0]), ...script.slice(1)], tmp);
     if (!fs.existsSync(file)) { results[i] = { name, applied: true, killed: false, note: "run failed: " + r.out.slice(-200) }; fs.rmSync(tmp, { recursive: true, force: true }); return; }
     const expected = JSON.parse(fs.readFileSync(path.join(ROOT, "tests/fixtures/p2/observer-scenarios", fixture), "utf8")), got = JSON.parse(fs.readFileSync(file, "utf8"));

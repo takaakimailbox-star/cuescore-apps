@@ -16,15 +16,15 @@ const ALLOWED_CLASSES = ["STRUCTURE", "STATE", "DIAGNOSTIC"];
 
 /* ---------- ratchet constants (a P2-5 gate lowers exactly its own and records it in Evidence) ---------- */
 const RATCHET = Object.freeze({
-  registrations: 17,      // P2-5a-1: 23 -> 21 (OBS-14, OBS-15); Phase B: -> 20 (OBS-03); Phase D: -> 17 (OBS-19, 22, 23)
-  textRewrite: 3,         // KNOWN rewriters: OBS-01,02,16   (P2-5a-1: 11 -> 7; Phase B: 6; Phase D: 3)
+  registrations: 16,      // Phase E: -> 16 (OBS-16); P2-5a-1: 23 -> 21 (OBS-14, OBS-15); Phase B: -> 20 (OBS-03); Phase D: -> 17 (OBS-19, 22, 23)
+  textRewrite: 2,         // Phase E: 2 (OBS-01, 02); KNOWN rewriters: OBS-01,02,16   (P2-5a-1: 11 -> 7; Phase B: 6; Phase D: 3)
   textMirrorPending: 0,   // OBS-09 resolved by a generation guard (Phase A)
   gatedOff: 1,            // OBS-09: registration exists in source but is NOT created while canUse("cloudSync") is false (never allow-listed)
   allowListed: 13,        // structure/state/diagnostic observers with NO text-writing callee (11 + OBS-10 + OBS-17)
-  removed: 6
+  removed: 7
 });
 
-test("[AC-S3 L0] fixture covers exactly the 17 live registrations (+2 removed rows kept for history), one row each, unique ids", () => {
+test("[AC-S3 L0] fixture covers exactly the 16 live registrations (+2 removed rows kept for history), one row each, unique ids", () => {
   assert.equal(scan.length, RATCHET.registrations);
   assert.equal(live.length, RATCHET.registrations);
   assert.equal(known.length, RATCHET.registrations + RATCHET.removed);
@@ -34,25 +34,30 @@ test("[AC-S3 L0] fixture covers exactly the 17 live registrations (+2 removed ro
   assert.equal(observerInventory().length, RATCHET.registrations);
 });
 
-test("[AC-S3 L0] class counts are pinned: 3 text-rewrite + 1 gated-off (runtime-unresolved 3; was 12) + 13 allow-list candidates + 6 removed", () => {
+test("[AC-S3 L0] class counts are pinned: 2 text-rewrite + 1 gated-off (runtime-unresolved 2; was 12) + 13 allow-list candidates + 7 removed", () => {
   const c = {}; for (const k of known) c[k.class] = (c[k.class] || 0) + 1;
   assert.equal(c.TEXT_REWRITE, RATCHET.textRewrite);
   assert.equal(c.TEXT_MIRROR_PENDING || 0, RATCHET.textMirrorPending);
   assert.equal(c.TEXT_MIRROR_GATED, RATCHET.gatedOff);
   assert.equal(ALLOWED_CLASSES.reduce((a, k) => a + (c[k] || 0), 0), RATCHET.allowListed);
   assert.equal(c.REMOVED, RATCHET.removed);
-  assert.equal(known.filter(k => k.class === "TEXT_REWRITE" || k.class === "TEXT_MIRROR_PENDING").length, 3, "unresolved AC-S3 observers (must reach 0, or be allow-listed with Commander approval, before AC-S3 PASS)");
+  assert.equal(known.filter(k => k.class === "TEXT_REWRITE" || k.class === "TEXT_MIRROR_PENDING").length, 2, "unresolved AC-S3 observers (must reach 0, or be allow-listed with Commander approval, before AC-S3 PASS)");
 });
 
-test("[AC-S3 L0] the known TEXT-REWRITE list is exactly OBS-01,02,16 (removed so far: 03, 14, 15, 19, 22, 23)", () => {
-  assert.deepEqual(known.filter(k => k.class === "TEXT_REWRITE").map(k => k.obs_id), ["OBS-01", "OBS-02", "OBS-16"]);
-  assert.deepEqual(known.filter(k => k.class === "REMOVED").map(k => k.obs_id), ["OBS-03", "OBS-14", "OBS-15", "OBS-19", "OBS-22", "OBS-23"]);
+test("[AC-S3 L0] the known TEXT-REWRITE list is exactly OBS-01,02 (removed so far: 03, 14, 15, 16, 19, 22, 23)", () => {
+  assert.deepEqual(known.filter(k => k.class === "TEXT_REWRITE").map(k => k.obs_id), ["OBS-01", "OBS-02"]);
+  assert.deepEqual(known.filter(k => k.class === "REMOVED").map(k => k.obs_id), ["OBS-03", "OBS-14", "OBS-15", "OBS-16", "OBS-19", "OBS-22", "OBS-23"]);
   assert.deepEqual(known.filter(k => k.class === "TEXT_MIRROR_GATED").map(k => k.obs_id), ["OBS-09"]);
 });
 
 for (const k of known.filter(k => k.class === "REMOVED")) {
   test(`[${k.obs_id}] AC-S3 L0 ${k.key}: removed in ${k.removed_in}; no registration remains and the replacement is present`, () => {
     const html = read("index.html");
+    if (k.obs_id === "OBS-16") {
+      assert.ok(!byKey.has(k.key)); assert.ok(!read("monetization-v1.js").includes("MutationObserver"));
+      assert.ok(read("monetization-v1.js").includes("window.CueScorePro=Object.freeze({open,close,source:()=>currentSource,decorate})"));
+      return;
+    }
     if (["OBS-19", "OBS-22", "OBS-23"].includes(k.obs_id)) {
       assert.ok(!byKey.has(k.key));
       const ui = read("ui-revision-v12.js");

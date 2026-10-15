@@ -58,6 +58,12 @@ const M = [
   ["home preview uses the wrong pattern", "index.html", 'dateText=Number.isNaN(date.getTime())?"日付なし":window.cueDate(date,"ymd");', 'dateText=Number.isNaN(date.getTime())?"日付なし":window.cueDate(date,"ymd-hm");'],
   ["CSV date format changed", "index.html", "const dateText = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;", "const dateText = `${date.getFullYear()}/${pad(date.getMonth() + 1)}/${pad(date.getDate())}`;"],
   ["an inline weekday array returns", "index.html", "function fmtDate(d,short=false){", 'const WD250=["日","月","火","水","木","金","土"];function fmtDate(d,short=false){'],
+  /* Phase E OBS-16 */
+  ["badge observer re-added", "monetization-v1.js", "  syncSettingsPlan();decorate();", "  new MutationObserver(()=>requestAnimationFrame(decorate)).observe(document.body,{subtree:true,childList:true});syncSettingsPlan();decorate();"],
+  ["hub render decorate call dropped", "navigation-phase2-6.js", "\n    window.CueScorePro?.decorate?.();\n  }", "\n  }"],
+  ["legacy detail decorate call dropped", "player-detail-build6.js", "renderInfo(player);window.CueScorePro?.decorate?.();}", "renderInfo(player);}"],
+  ["decorate not published", "monetization-v1.js", "source:()=>currentSource,decorate});", "source:()=>currentSource});"],
+  ["a new emitter of decorated hosts appears", "ui-revision-v12.js", "  const time=record=>", '  const emit250=`<div class="hub-bests-v2"></div>`;innerHTML250=emit250;\n  const time=record=>'],
   /* Phase D journey */
   ["journey observer re-added in ui-revision", "ui-revision-v12.js", "  const history=document.getElementById(\"playerMatchHistoryV2\");", "  const history=document.getElementById(\"playerMatchHistoryV2\");if(history)new MutationObserver(()=>requestAnimationFrame(reviseHistory)).observe(history,{childList:true});"],
   ["history-row compaction observer re-added", "player-detail-build6.js", "  let returnFromEditor=false;", "  if(historyRoot)new MutationObserver(()=>{}).observe(historyRoot,{childList:true});\n  let returnFromEditor=false;"],
