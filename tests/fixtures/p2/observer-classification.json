@@ -105,13 +105,6 @@
   "role": "rewrite"
  },
  {
-  "id": "P2L-123",
-  "file": "player-detail-build6.js",
-  "k": 0,
-  "class": "c",
-  "role": "rewrite"
- },
- {
   "id": "P2L-124",
   "file": "ui-revision-v12.js",
   "k": 0,
@@ -124,19 +117,5 @@
   "k": 1,
   "class": "allowed",
   "role": "allowed"
- },
- {
-  "id": "P2L-126",
-  "file": "ui-revision-v12.js",
-  "k": 2,
-  "class": "c",
-  "role": "rewrite"
- },
- {
-  "id": "P2L-127",
-  "file": "ui-revision-v12.js",
-  "k": 3,
-  "class": "c",
-  "role": "rewrite"
  }
 ]

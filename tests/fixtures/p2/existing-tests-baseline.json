@@ -23,9 +23,10 @@
    "skips": 0
   },
   "analytics-v1-scope-trend-axis.test.mjs": {
-   "sha256": "0be53540784531318a78ef8ae609295d3ef71b7ae590a02bcdd5a84e1fcd2d19",
+   "sha256": "94426db62d15160f4bcf532be739d1c0220f67100e6ffd20ed3163463332c641",
    "tests": 3,
-   "skips": 0
+   "skips": 0,
+   "updated_in": "P2 Phase D (old->new assertion map in Evidence)"
   },
   "break-input-immediate.test.mjs": {
    "sha256": "68cf95ebb030cf56b283dd36bd7ffd76b2b7cceaf040b1b135134dba7c1f3c96",
@@ -201,9 +202,10 @@
    "skips": 0
   },
   "build8-iphone-review.test.mjs": {
-   "sha256": "e3166939a1cb027cbf348b9985cb77bf0deaa0d84b00faf37dbfc1e65171195f",
+   "sha256": "79fbecc4289a0943091d207b7cae36ea6a80ce9e8a0b7479337a18f0f72caf0e",
    "tests": 9,
-   "skips": 0
+   "skips": 0,
+   "updated_in": "P2 Phase D (old->new assertion map in Evidence)"
   },
   "circular-modal-close.test.mjs": {
    "sha256": "90c0ef261837d278917f44c598a381c53422fb4602159004afb2439cd2b7ee72",

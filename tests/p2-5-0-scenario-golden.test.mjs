@@ -88,10 +88,10 @@ test("[golden / K, OBS-19/22/23] journey lists (Pro): rows exist (9), dates are 
   const k1 = S(pro, "K1-journey-all-matches"); assert.equal(k1.result.rows, 9); assert.equal(k1.result.wrappers, 0); assert.equal(k1.result.analysisBtns, 0);
   assert.equal(k1.result.title, "9-Ballの全試合"); assert.deepEqual(k1.result.open, ["›"]); assert.match(k1.result.dates[0], /^\d{1,2}\/\d{1,2}（.）\s\d{2}:\d{2}$/);
   for (const a of k1.result.aria) assert.equal((a.match(/試合詳細を開く/g) || []).length, 2, "the current label already carries the suffix text once; pd13 appends the second");
-  assert.deepEqual(k1.changedObservers, ["ui-revision-v12.js#3"]);
+  assert.deepEqual(k1.changedObservers, [], "Phase D: reviseHistory is an explicit render step");
   assert.deepEqual(S(pro, "K2-journey-history-inject-compactHistory").result, { first: { wrappers: 0, open: ["試合詳細", "試合詳細"], analysis: [] }, second: { wrappers: 0, open: ["試合詳細", "試合詳細"] } });
   assert.deepEqual(S(pro, "K2-journey-history-inject-compactHistory").changedObservers, [], "OBS-19 never changes text in the shipped page");
-  const k3 = S(pro, "K3-journey-rivals"); assert.equal(k3.result.fixed, "9-Ball"); assert.match(k3.result.ctxAria, /9-Ballの対戦相手別成績$/); assert.deepEqual(k3.changedObservers, ["ui-revision-v12.js#2"]);
+  const k3 = S(pro, "K3-journey-rivals"); assert.equal(k3.result.fixed, "9-Ball"); assert.match(k3.result.ctxAria, /9-Ballの対戦相手別成績$/); assert.deepEqual(k3.changedObservers, [], "Phase D: reviseRivals is an explicit render step");
   assert.equal(S(pro, "K4-journey-rival-history").result.rows, 9); assert.equal(S(pro, "K4-journey-rival-history").result.vsLeft, 0);
 });
 test("[golden / J, OBS-01/02] analysis-v2 player view for all 6 disciplines is built by analysis-build4 (OBS-01) and patched by final-rc (OBS-02): headings and per-discipline text hashes are pinned", () => {
@@ -102,10 +102,10 @@ test("[golden / J, OBS-01/02] analysis-v2 player view for all 6 disciplines is b
 test("[golden / M] the legacy player detail (.pd7-shell) is NOT present in the current UI and appears only when the production function is called directly", () => {
   const m = S(pro, "M1-legacy-player-detail-fn").result; assert.equal(m.shellBefore, false); assert.equal(m.shellAfter, true);
 });
-test("[golden / AC-S3 L2] the set of observers that changed text in real runs is pinned: Free 1, Pro 4 (was 6 / 9 before P2-5a-1; OBS-03 and OBS-09 are no longer observers; OBS-19 never changes text)", () => {
+test("[golden / AC-S3 L2] the set of observers that changed text in real runs is pinned: Free 1, Pro 2 (was 6 / 9 before P2-5a-1; OBS-03, 09, 19, 22, 23 are no longer observers)", () => {
   const chg = g => [...new Set(Object.values(g.scenarios).flatMap(s => s.changedObservers))].sort();
   assert.deepEqual(chg(free), ["monetization-v1.js#0"]);
-  assert.deepEqual(chg(pro), ["analysis-build4.js#0", "analysis-final-rc.js#0", "ui-revision-v12.js#2", "ui-revision-v12.js#3"]);
+  assert.deepEqual(chg(pro), ["analysis-build4.js#0", "analysis-final-rc.js#0"]);
   for (const c of [...chg(free), ...chg(pro)]) { const k = known.find(x => x.key === c); assert.ok(k && ["TEXT_REWRITE"].includes(k.class), c + " is outside the known list"); }
 });
 

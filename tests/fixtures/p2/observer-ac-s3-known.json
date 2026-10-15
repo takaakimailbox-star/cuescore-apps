@@ -180,12 +180,12 @@
   "obs_id": "OBS-19",
   "p2_ledger": "P2L-123",
   "key": "player-detail-build6.js#0",
-  "class": "TEXT_REWRITE",
-  "planned_gate": "P2-5a-2",
-  "text_writers": [
-   "<cb>"
-  ],
-  "uses_cueT": false
+  "class": "REMOVED",
+  "planned_gate": "P2 Phase D (done)",
+  "text_writers": [],
+  "uses_cueT": false,
+  "removed_in": "P2 Phase D",
+  "replaced_by": "deleted: no production code creates [data-player-analysis-record-id] elements (selectors/removers/CSS only), so the wrap branch could not run"
  },
  {
   "obs_id": "OBS-20",
@@ -209,22 +209,22 @@
   "obs_id": "OBS-22",
   "p2_ledger": "P2L-126",
   "key": "ui-revision-v12.js#2",
-  "class": "TEXT_REWRITE",
-  "planned_gate": "P2-5a-2",
-  "text_writers": [
-   "reviseRivals"
-  ],
-  "uses_cueT": false
+  "class": "REMOVED",
+  "planned_gate": "P2 Phase D (done)",
+  "text_writers": [],
+  "uses_cueT": false,
+  "removed_in": "P2 Phase D",
+  "replaced_by": "reviseRivals is an explicit post-render step: end of renderRivals, show(rivalRoot), and the opener wrapper"
  },
  {
   "obs_id": "OBS-23",
   "p2_ledger": "P2L-127",
   "key": "ui-revision-v12.js#3",
-  "class": "TEXT_REWRITE",
-  "planned_gate": "P2-5a-2",
-  "text_writers": [
-   "reviseHistory"
-  ],
-  "uses_cueT": false
+  "class": "REMOVED",
+  "planned_gate": "P2 Phase D (done)",
+  "text_writers": [],
+  "uses_cueT": false,
+  "removed_in": "P2 Phase D",
+  "replaced_by": "reviseHistory is an explicit post-render step: end of renderHistory, show(historyRoot), the detail-return unhide sites and the opener wrapper; the row date comes from the stored record (no displayed-date parsing)"
  }
 ]

@@ -255,19 +255,6 @@
    ]
   },
   {
-   "key": "player-detail-build6.js#0",
-   "targets": [
-    {
-     "desc": "section#playerMatchHistoryV2",
-     "live": true,
-     "opts": {
-      "subtree": true,
-      "childList": true
-     }
-    }
-   ]
-  },
-  {
    "key": "ui-revision-v12.js#0",
    "targets": [
     {
@@ -288,40 +275,6 @@
      "live": true,
      "opts": {
       "childList": true
-     }
-    }
-   ]
-  },
-  {
-   "key": "ui-revision-v12.js#2",
-   "targets": [
-    {
-     "desc": "section#playerOpponentRecordsV2",
-     "live": true,
-     "opts": {
-      "subtree": true,
-      "childList": true,
-      "attributes": true,
-      "attributeFilter": [
-       "class"
-      ]
-     }
-    }
-   ]
-  },
-  {
-   "key": "ui-revision-v12.js#3",
-   "targets": [
-    {
-     "desc": "section#playerMatchHistoryV2",
-     "live": true,
-     "opts": {
-      "subtree": true,
-      "childList": true,
-      "attributes": true,
-      "attributeFilter": [
-       "class"
-      ]
      }
     }
    ]

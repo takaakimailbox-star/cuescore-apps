@@ -260,19 +260,6 @@
    ]
   },
   {
-   "key": "player-detail-build6.js#0",
-   "targets": [
-    {
-     "desc": "section#playerMatchHistoryV2",
-     "live": true,
-     "opts": {
-      "subtree": true,
-      "childList": true
-     }
-    }
-   ]
-  },
-  {
    "key": "ui-revision-v12.js#0",
    "targets": [
     {
@@ -293,40 +280,6 @@
      "live": true,
      "opts": {
       "childList": true
-     }
-    }
-   ]
-  },
-  {
-   "key": "ui-revision-v12.js#2",
-   "targets": [
-    {
-     "desc": "section#playerOpponentRecordsV2",
-     "live": true,
-     "opts": {
-      "subtree": true,
-      "childList": true,
-      "attributes": true,
-      "attributeFilter": [
-       "class"
-      ]
-     }
-    }
-   ]
-  },
-  {
-   "key": "ui-revision-v12.js#3",
-   "targets": [
-    {
-     "desc": "section#playerMatchHistoryV2",
-     "live": true,
-     "opts": {
-      "subtree": true,
-      "childList": true,
-      "attributes": true,
-      "attributeFilter": [
-       "class"
-      ]
      }
     }
    ]
@@ -1204,12 +1157,10 @@
     "hiddenAnalysis": 0,
     "fixedDiscipline": "9ball",
     "classes": [
-     "journey-match-v2 journey-match-v3 match-card-c-v37 pd13-fixed-discipline-match match-card-c-all-matches-v37"
+     "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match"
     ]
    },
-   "changedObservers": [
-    "ui-revision-v12.js#3"
-   ]
+   "changedObservers": []
   },
   "K2-journey-history-inject-compactHistory": {
    "reach": "inject",
@@ -1246,9 +1197,7 @@
     "selectLeft": 0,
     "summaries": 0
    },
-   "changedObservers": [
-    "ui-revision-v12.js#2"
-   ]
+   "changedObservers": []
   },
   "K4-journey-rival-history": {
    "reach": "ui",

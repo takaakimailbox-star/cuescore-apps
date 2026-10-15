@@ -27,7 +27,9 @@ test("formal analysis restores percentage trend chart without foul metrics",()=>
 
 test("v1 normal journeys keep simple opponent results and Match Detail only",()=>{
   assert.match(detail,/試合詳細を見る/);
-  assert.match(detail,/analysis\.hidden=true/);
+  // P2 Phase D: was analysis.hidden=true inside the dead compactHistory wrap. Now: no production code creates analysis buttons; they are removed and hidden by CSS.
+  assert.doesNotMatch(detail,/compactHistory/);
+  assert.match(readFileSync(new URL("../ui-revision-v12.css",import.meta.url),"utf8"),/#playerMatchHistoryV2 \[data-player-analysis-record-id\]\s*\{\s*display:none !important;/);
   assert.match(html,/<button class="journey-opponent-v2" type="button" data-rival-opponent=/);
   assert.match(html,/openOpponentHistory\(row\.dataset\.rivalOpponent\)/);
   assert.match(html,/window\.openRivalAnalysisForPlayerV832/);

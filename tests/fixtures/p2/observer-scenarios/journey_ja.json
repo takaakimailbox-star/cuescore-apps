@@ -1,0 +1,5280 @@
+{
+ "lang": "ja",
+ "steps": [
+  {
+   "name": "tab-player",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "このプレーヤーの試合履歴",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "f8618ac7",
+     "text": "a2af7d53"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "b75f7ba0",
+     "text": "1c2490c6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "9ball:all-matches",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "9ball"
+     ],
+     "title": "9-Ballの全試合",
+     "titleAria": "9-Ballの全試合",
+     "rows": [
+      {
+       "date": "3/14（土） 09:05",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/8（日） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/8（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/7（土） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/6（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/5（木） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/4（水） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/3（火） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/2（月） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/1（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/1（日） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "1/2（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "1/1（木） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/31（水） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/6（土） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/5（金） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/4（木） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/3（水） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/2（火） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/1（月） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "2/29（木） 21:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "日付なし",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "1/1（木） 09:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "2a32703c",
+     "text": "3c58e9da"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "b75f7ba0",
+     "text": "1c2490c6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "9ball:history-filter-chip",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "9ball"
+     ],
+     "title": "9-Ballの全試合",
+     "titleAria": "9-Ballの全試合",
+     "rows": [
+      {
+       "date": "3/14（土） 09:05",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/8（日） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/8（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/7（土） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/6（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/5（木） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/4（水） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/3（火） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/2（月） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/1（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/1（日） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "1/2（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "1/1（木） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/31（水） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/6（土） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/5（金） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/4（木） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/3（水） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/2（火） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/1（月） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "2/29（木） 21:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "日付なし",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "1/1（木） 09:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "2a32703c",
+     "text": "3c58e9da"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "b75f7ba0",
+     "text": "1c2490c6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "9ball:history-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "9ball"
+     ],
+     "title": "9-Ballの全試合",
+     "titleAria": "9-Ballの全試合",
+     "rows": [
+      {
+       "date": "3/14（土） 09:05",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/8（日） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/8（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/7（土） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/6（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/5（木） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/4（水） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/3（火） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/2（月） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/1（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/1（日） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "1/2（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "1/1（木） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/31（水） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/6（土） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/5（金） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/4（木） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/3（水） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/2（火） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/1（月） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "2/29（木） 21:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "日付なし",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "1/1（木） 09:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "37b9b448",
+     "text": "3c58e9da"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "b75f7ba0",
+     "text": "1c2490c6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "9ball:rivals",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "9ball"
+     ],
+     "title": "9-Ballの全試合",
+     "titleAria": "9-Ballの全試合",
+     "rows": [
+      {
+       "date": "3/14（土） 09:05",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/8（日） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/8（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/7（土） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/6（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/5（木） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/4（水） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/3（火） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/2（月） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/1（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "3/1（日） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "1/2（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "1/1（木） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/31（水） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/6（土） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/5（金） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/4（木） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/3（水） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/2（火） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "12/1（月） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "2/29（木） 21:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "日付なし",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      },
+      {
+       "date": "1/1（木） 09:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "37b9b448",
+     "text": "3c58e9da"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_2"
+     ],
+     "fixedSpan": "9-Ball",
+     "ctxAria": "なおき、9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "48f7ccb3",
+     "text": "1cec44c6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "9ball:rival-history",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "p_probe_2",
+      "9ball"
+     ],
+     "title": "さくらとの9-Ball試合",
+     "titleAria": "さくらとの9-Ball試合",
+     "rows": [
+      {
+       "date": "3/14（土） 09:05",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/8（日） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/8（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/7（土） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/6（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/5（木） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/4（水） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/3（火） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/2（月） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/1（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/1（日） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/2（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/1（木） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/31（水） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/6（土） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/5（金） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/4（木） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/3（水） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/2（火） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/1（月） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "2/29（木） 21:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "日付なし",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/1（木） 09:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "e0c18e70",
+     "text": "3c48345c"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_2"
+     ],
+     "fixedSpan": "9-Ball",
+     "ctxAria": "なおき、9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "cbfd09d4",
+     "text": "1cec44c6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "9ball:match-detail",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "p_probe_2",
+      "9ball"
+     ],
+     "title": "さくらとの9-Ball試合",
+     "titleAria": "さくらとの9-Ball試合",
+     "rows": [
+      {
+       "date": "3/14（土） 09:05",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/8（日） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/8（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/7（土） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/6（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/5（木） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/4（水） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/3（火） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/2（月） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/1（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/1（日） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/2（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/1（木） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/31（水） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/6（土） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/5（金） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/4（木） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/3（水） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/2（火） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/1（月） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "2/29（木） 21:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "日付なし",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/1（木） 09:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "b2daee11",
+     "text": "3c48345c"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_2"
+     ],
+     "fixedSpan": "9-Ball",
+     "ctxAria": "なおき、9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "cbfd09d4",
+     "text": "1cec44c6"
+    },
+    "detailOpen": true,
+    "e": null
+   }
+  },
+  {
+   "name": "9ball:detail-close",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "p_probe_2",
+      "9ball"
+     ],
+     "title": "さくらとの9-Ball試合",
+     "titleAria": "さくらとの9-Ball試合",
+     "rows": [
+      {
+       "date": "3/14（土） 09:05",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/8（日） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/8（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/7（土） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/6（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/5（木） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/4（水） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/3（火） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/2（月） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/1（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/1（日） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/2（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/1（木） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/31（水） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/6（土） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/5（金） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/4（木） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/3（水） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/2（火） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/1（月） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "2/29（木） 21:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "日付なし",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/1（木） 09:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "e0c18e70",
+     "text": "3c48345c"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_2"
+     ],
+     "fixedSpan": "9-Ball",
+     "ctxAria": "なおき、9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "cbfd09d4",
+     "text": "1cec44c6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "9ball:rival-history-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "p_probe_2",
+      "9ball"
+     ],
+     "title": "さくらとの9-Ball試合",
+     "titleAria": "さくらとの9-Ball試合",
+     "rows": [
+      {
+       "date": "3/14（土） 09:05",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/8（日） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/8（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/7（土） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/6（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/5（木） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/4（水） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/3（火） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/2（月） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/1（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/1（日） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/2（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/1（木） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/31（水） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/6（土） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/5（金） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/4（木） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/3（水） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/2（火） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/1（月） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "2/29（木） 21:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "日付なし",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/1（木） 09:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "b2daee11",
+     "text": "3c48345c"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_2"
+     ],
+     "fixedSpan": "9-Ball",
+     "ctxAria": "なおき、9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "48f7ccb3",
+     "text": "1cec44c6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "9ball:rivals-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "p_probe_2",
+      "9ball"
+     ],
+     "title": "さくらとの9-Ball試合",
+     "titleAria": "さくらとの9-Ball試合",
+     "rows": [
+      {
+       "date": "3/14（土） 09:05",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/8（日） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/8（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/7（土） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/6（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/5（木） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/4（水） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/3（火） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/2（月） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/1（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/1（日） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/2（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/1（木） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/31（水） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/6（土） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/5（金） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/4（木） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/3（水） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/2（火） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/1（月） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "2/29（木） 21:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "日付なし",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/1（木） 09:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "b2daee11",
+     "text": "3c48345c"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_2"
+     ],
+     "fixedSpan": "9-Ball",
+     "ctxAria": "なおき、9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "cbfd09d4",
+     "text": "1cec44c6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "9ball:hub-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "p_probe_2",
+      "9ball"
+     ],
+     "title": "さくらとの9-Ball試合",
+     "titleAria": "さくらとの9-Ball試合",
+     "rows": [
+      {
+       "date": "3/14（土） 09:05",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/8（日） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/8（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/7（土） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/6（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/5（木） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/4（水） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/3（火） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/2（月） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/1（日） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "3/1（日） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/2（金） 12:04",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/1（木） 00:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/31（水） 23:59",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/6（土） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/5（金） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/4（木） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/3（水） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/2（火） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "12/1（月） 12:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "2/29（木） 21:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "日付なし",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      },
+      {
+       "date": "1/1（木） 09:00",
+       "aria": "9-Ball さくらとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "b2daee11",
+     "text": "3c48345c"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_2"
+     ],
+     "fixedSpan": "9-Ball",
+     "ctxAria": "なおき、9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "cbfd09d4",
+     "text": "1cec44c6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "10ball:all-matches",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "10ball"
+     ],
+     "title": "10-Ballの全試合",
+     "titleAria": "10-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "739ad212",
+     "text": "cfd4dbdb"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_2"
+     ],
+     "fixedSpan": "9-Ball",
+     "ctxAria": "なおき、9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "cbfd09d4",
+     "text": "1cec44c6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "10ball:history-filter-chip",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "10ball"
+     ],
+     "title": "10-Ballの全試合",
+     "titleAria": "10-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "739ad212",
+     "text": "cfd4dbdb"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_2"
+     ],
+     "fixedSpan": "9-Ball",
+     "ctxAria": "なおき、9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "cbfd09d4",
+     "text": "1cec44c6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "10ball:history-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "10ball"
+     ],
+     "title": "10-Ballの全試合",
+     "titleAria": "10-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "c3f3d61e",
+     "text": "cfd4dbdb"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_2"
+     ],
+     "fixedSpan": "9-Ball",
+     "ctxAria": "なおき、9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "cbfd09d4",
+     "text": "1cec44c6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "10ball:rivals",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "10ball"
+     ],
+     "title": "10-Ballの全試合",
+     "titleAria": "10-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "c3f3d61e",
+     "text": "cfd4dbdb"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "10-Ball",
+     "ctxAria": "なおき、10-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "6af66bbf",
+     "text": "56f33dd5"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "10ball:rival-history",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "10ball"
+     ],
+     "title": "10-Ballの全試合",
+     "titleAria": "10-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "c3f3d61e",
+     "text": "cfd4dbdb"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "10-Ball",
+     "ctxAria": "なおき、10-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "6af66bbf",
+     "text": "56f33dd5"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "10ball:match-detail",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "10ball"
+     ],
+     "title": "10-Ballの全試合",
+     "titleAria": "10-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "c3f3d61e",
+     "text": "cfd4dbdb"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "10-Ball",
+     "ctxAria": "なおき、10-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "6af66bbf",
+     "text": "56f33dd5"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "10ball:detail-close",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "10ball"
+     ],
+     "title": "10-Ballの全試合",
+     "titleAria": "10-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "c3f3d61e",
+     "text": "cfd4dbdb"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "10-Ball",
+     "ctxAria": "なおき、10-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "6af66bbf",
+     "text": "56f33dd5"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "10ball:rival-history-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      "10ball"
+     ],
+     "title": "10-Ballの全試合",
+     "titleAria": "10-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "9570c753",
+     "text": "cfd4dbdb"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "10-Ball",
+     "ctxAria": "なおき、10-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "feaaca40",
+     "text": "56f33dd5"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "10ball:rivals-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      "10ball"
+     ],
+     "title": "10-Ballの全試合",
+     "titleAria": "10-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "9570c753",
+     "text": "cfd4dbdb"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "10-Ball",
+     "ctxAria": "なおき、10-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "feaaca40",
+     "text": "56f33dd5"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "10ball:hub-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      "10ball"
+     ],
+     "title": "10-Ballの全試合",
+     "titleAria": "10-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "9570c753",
+     "text": "cfd4dbdb"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "10-Ball",
+     "ctxAria": "なおき、10-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "feaaca40",
+     "text": "56f33dd5"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "rotation:all-matches",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "rotation"
+     ],
+     "title": "Rotationの全試合",
+     "titleAria": "Rotationの全試合",
+     "rows": [
+      {
+       "date": "1/9（金） 12:04",
+       "aria": "Rotation しょうとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "da59ae46",
+     "text": "f7e177b9"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "10-Ball",
+     "ctxAria": "なおき、10-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "feaaca40",
+     "text": "56f33dd5"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "rotation:history-filter-chip",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "rotation"
+     ],
+     "title": "Rotationの全試合",
+     "titleAria": "Rotationの全試合",
+     "rows": [
+      {
+       "date": "1/9（金） 12:04",
+       "aria": "Rotation しょうとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "da59ae46",
+     "text": "f7e177b9"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "10-Ball",
+     "ctxAria": "なおき、10-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "feaaca40",
+     "text": "56f33dd5"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "rotation:history-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "rotation"
+     ],
+     "title": "Rotationの全試合",
+     "titleAria": "Rotationの全試合",
+     "rows": [
+      {
+       "date": "1/9（金） 12:04",
+       "aria": "Rotation しょうとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "26e0dd52",
+     "text": "f7e177b9"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "10-Ball",
+     "ctxAria": "なおき、10-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "feaaca40",
+     "text": "56f33dd5"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "rotation:rivals",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "rotation"
+     ],
+     "title": "Rotationの全試合",
+     "titleAria": "Rotationの全試合",
+     "rows": [
+      {
+       "date": "1/9（金） 12:04",
+       "aria": "Rotation しょうとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-all-matches-v37 match-card-c-v37 pd13-fixed-discipline-match",
+       "vs": false,
+       "opp": true
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "26e0dd52",
+     "text": "f7e177b9"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_3"
+     ],
+     "fixedSpan": "Rotation",
+     "ctxAria": "なおき、Rotationの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "7358805",
+     "text": "6190be6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "rotation:rival-history",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "p_probe_3",
+      "rotation"
+     ],
+     "title": "しょうとのRotation試合",
+     "titleAria": "しょうとのRotation試合",
+     "rows": [
+      {
+       "date": "1/9（金） 12:04",
+       "aria": "Rotation しょうとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "7ef9d236",
+     "text": "9949dbb9"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_3"
+     ],
+     "fixedSpan": "Rotation",
+     "ctxAria": "なおき、Rotationの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "6a325626",
+     "text": "6190be6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "rotation:match-detail",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "p_probe_3",
+      "rotation"
+     ],
+     "title": "しょうとのRotation試合",
+     "titleAria": "しょうとのRotation試合",
+     "rows": [
+      {
+       "date": "1/9（金） 12:04",
+       "aria": "Rotation しょうとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "e0304757",
+     "text": "9949dbb9"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_3"
+     ],
+     "fixedSpan": "Rotation",
+     "ctxAria": "なおき、Rotationの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "6a325626",
+     "text": "6190be6"
+    },
+    "detailOpen": true,
+    "e": null
+   }
+  },
+  {
+   "name": "rotation:detail-close",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "p_probe_3",
+      "rotation"
+     ],
+     "title": "しょうとのRotation試合",
+     "titleAria": "しょうとのRotation試合",
+     "rows": [
+      {
+       "date": "1/9（金） 12:04",
+       "aria": "Rotation しょうとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "7ef9d236",
+     "text": "9949dbb9"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_3"
+     ],
+     "fixedSpan": "Rotation",
+     "ctxAria": "なおき、Rotationの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "6a325626",
+     "text": "6190be6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "rotation:rival-history-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "p_probe_3",
+      "rotation"
+     ],
+     "title": "しょうとのRotation試合",
+     "titleAria": "しょうとのRotation試合",
+     "rows": [
+      {
+       "date": "1/9（金） 12:04",
+       "aria": "Rotation しょうとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "e0304757",
+     "text": "9949dbb9"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_3"
+     ],
+     "fixedSpan": "Rotation",
+     "ctxAria": "なおき、Rotationの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "7358805",
+     "text": "6190be6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "rotation:rivals-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "p_probe_3",
+      "rotation"
+     ],
+     "title": "しょうとのRotation試合",
+     "titleAria": "しょうとのRotation試合",
+     "rows": [
+      {
+       "date": "1/9（金） 12:04",
+       "aria": "Rotation しょうとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "e0304757",
+     "text": "9949dbb9"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_3"
+     ],
+     "fixedSpan": "Rotation",
+     "ctxAria": "なおき、Rotationの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "6a325626",
+     "text": "6190be6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "rotation:hub-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "p_probe_3",
+      "rotation"
+     ],
+     "title": "しょうとのRotation試合",
+     "titleAria": "しょうとのRotation試合",
+     "rows": [
+      {
+       "date": "1/9（金） 12:04",
+       "aria": "Rotation しょうとの試合詳細を開く、試合詳細を開く",
+       "open": "›",
+       "cls": "journey-match-v2 journey-match-v3 match-card-c-opponent-v37 match-card-c-v37 pd13-opponent-match",
+       "vs": false,
+       "opp": false
+      }
+     ],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "e0304757",
+     "text": "9949dbb9"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_3"
+     ],
+     "fixedSpan": "Rotation",
+     "ctxAria": "なおき、Rotationの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "6a325626",
+     "text": "6190be6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "jpa9:all-matches",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "jpa9"
+     ],
+     "title": "JPA 9-Ballの全試合",
+     "titleAria": "JPA 9-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "bad00050",
+     "text": "e715e20e"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_3"
+     ],
+     "fixedSpan": "Rotation",
+     "ctxAria": "なおき、Rotationの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "6a325626",
+     "text": "6190be6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "jpa9:history-filter-chip",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "jpa9"
+     ],
+     "title": "JPA 9-Ballの全試合",
+     "titleAria": "JPA 9-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "bad00050",
+     "text": "e715e20e"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_3"
+     ],
+     "fixedSpan": "Rotation",
+     "ctxAria": "なおき、Rotationの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "6a325626",
+     "text": "6190be6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "jpa9:history-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "jpa9"
+     ],
+     "title": "JPA 9-Ballの全試合",
+     "titleAria": "JPA 9-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "d8e42a5c",
+     "text": "e715e20e"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [
+      "p_probe_3"
+     ],
+     "fixedSpan": "Rotation",
+     "ctxAria": "なおき、Rotationの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "6a325626",
+     "text": "6190be6"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "jpa9:rivals",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "jpa9"
+     ],
+     "title": "JPA 9-Ballの全試合",
+     "titleAria": "JPA 9-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "d8e42a5c",
+     "text": "e715e20e"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "JPA 9-Ball",
+     "ctxAria": "なおき、JPA 9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "3db8cde5",
+     "text": "29e48f88"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "jpa9:rival-history",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "jpa9"
+     ],
+     "title": "JPA 9-Ballの全試合",
+     "titleAria": "JPA 9-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "d8e42a5c",
+     "text": "e715e20e"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "JPA 9-Ball",
+     "ctxAria": "なおき、JPA 9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "3db8cde5",
+     "text": "29e48f88"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "jpa9:match-detail",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "jpa9"
+     ],
+     "title": "JPA 9-Ballの全試合",
+     "titleAria": "JPA 9-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "d8e42a5c",
+     "text": "e715e20e"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "JPA 9-Ball",
+     "ctxAria": "なおき、JPA 9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "3db8cde5",
+     "text": "29e48f88"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "jpa9:detail-close",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "jpa9"
+     ],
+     "title": "JPA 9-Ballの全試合",
+     "titleAria": "JPA 9-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "d8e42a5c",
+     "text": "e715e20e"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "JPA 9-Ball",
+     "ctxAria": "なおき、JPA 9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "3db8cde5",
+     "text": "29e48f88"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "jpa9:rival-history-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      "jpa9"
+     ],
+     "title": "JPA 9-Ballの全試合",
+     "titleAria": "JPA 9-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "1530ae11",
+     "text": "e715e20e"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "JPA 9-Ball",
+     "ctxAria": "なおき、JPA 9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "268a0d86",
+     "text": "29e48f88"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "jpa9:rivals-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      "jpa9"
+     ],
+     "title": "JPA 9-Ballの全試合",
+     "titleAria": "JPA 9-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "1530ae11",
+     "text": "e715e20e"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "JPA 9-Ball",
+     "ctxAria": "なおき、JPA 9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "268a0d86",
+     "text": "29e48f88"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "jpa9:hub-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      "jpa9"
+     ],
+     "title": "JPA 9-Ballの全試合",
+     "titleAria": "JPA 9-Ballの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "1530ae11",
+     "text": "e715e20e"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "JPA 9-Ball",
+     "ctxAria": "なおき、JPA 9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "268a0d86",
+     "text": "29e48f88"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "straightPool:all-matches",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "straightPool"
+     ],
+     "title": "14-1の全試合",
+     "titleAria": "14-1の全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "9592692a",
+     "text": "bc139255"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "JPA 9-Ball",
+     "ctxAria": "なおき、JPA 9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "268a0d86",
+     "text": "29e48f88"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "straightPool:history-filter-chip",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "straightPool"
+     ],
+     "title": "14-1の全試合",
+     "titleAria": "14-1の全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "9592692a",
+     "text": "bc139255"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "JPA 9-Ball",
+     "ctxAria": "なおき、JPA 9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "268a0d86",
+     "text": "29e48f88"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "straightPool:history-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "straightPool"
+     ],
+     "title": "14-1の全試合",
+     "titleAria": "14-1の全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "e5eb6d36",
+     "text": "bc139255"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "JPA 9-Ball",
+     "ctxAria": "なおき、JPA 9-Ballの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "268a0d86",
+     "text": "29e48f88"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "straightPool:rivals",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "straightPool"
+     ],
+     "title": "14-1の全試合",
+     "titleAria": "14-1の全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "e5eb6d36",
+     "text": "bc139255"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "14-1",
+     "ctxAria": "なおき、14-1の対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "59a0e4fa",
+     "text": "a9f1706f"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "straightPool:rival-history",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "straightPool"
+     ],
+     "title": "14-1の全試合",
+     "titleAria": "14-1の全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "e5eb6d36",
+     "text": "bc139255"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "14-1",
+     "ctxAria": "なおき、14-1の対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "59a0e4fa",
+     "text": "a9f1706f"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "straightPool:match-detail",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "straightPool"
+     ],
+     "title": "14-1の全試合",
+     "titleAria": "14-1の全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "e5eb6d36",
+     "text": "bc139255"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "14-1",
+     "ctxAria": "なおき、14-1の対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "59a0e4fa",
+     "text": "a9f1706f"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "straightPool:detail-close",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "straightPool"
+     ],
+     "title": "14-1の全試合",
+     "titleAria": "14-1の全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "e5eb6d36",
+     "text": "bc139255"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "14-1",
+     "ctxAria": "なおき、14-1の対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "59a0e4fa",
+     "text": "a9f1706f"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "straightPool:rival-history-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      "straightPool"
+     ],
+     "title": "14-1の全試合",
+     "titleAria": "14-1の全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "b7685e6b",
+     "text": "bc139255"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "14-1",
+     "ctxAria": "なおき、14-1の対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "7c83527b",
+     "text": "a9f1706f"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "straightPool:rivals-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      "straightPool"
+     ],
+     "title": "14-1の全試合",
+     "titleAria": "14-1の全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "b7685e6b",
+     "text": "bc139255"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "14-1",
+     "ctxAria": "なおき、14-1の対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "7c83527b",
+     "text": "a9f1706f"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "straightPool:hub-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      "straightPool"
+     ],
+     "title": "14-1の全試合",
+     "titleAria": "14-1の全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "b7685e6b",
+     "text": "bc139255"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "14-1",
+     "ctxAria": "なおき、14-1の対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "7c83527b",
+     "text": "a9f1706f"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "threeCushion:all-matches",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "threeCushion"
+     ],
+     "title": "3 Cushionの全試合",
+     "titleAria": "3 Cushionの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "b5f7e3cd",
+     "text": "15eeeade"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "14-1",
+     "ctxAria": "なおき、14-1の対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "7c83527b",
+     "text": "a9f1706f"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "threeCushion:history-filter-chip",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "threeCushion"
+     ],
+     "title": "3 Cushionの全試合",
+     "titleAria": "3 Cushionの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "b5f7e3cd",
+     "text": "15eeeade"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "14-1",
+     "ctxAria": "なおき、14-1の対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "7c83527b",
+     "text": "a9f1706f"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "threeCushion:history-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "threeCushion"
+     ],
+     "title": "3 Cushionの全試合",
+     "titleAria": "3 Cushionの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "bcbe66d9",
+     "text": "15eeeade"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "14-1",
+     "ctxAria": "なおき、14-1の対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "7c83527b",
+     "text": "a9f1706f"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "threeCushion:rivals",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "threeCushion"
+     ],
+     "title": "3 Cushionの全試合",
+     "titleAria": "3 Cushionの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "bcbe66d9",
+     "text": "15eeeade"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "3 Cushion",
+     "ctxAria": "なおき、3 Cushionの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "a1e4075",
+     "text": "a25057f8"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "threeCushion:rival-history",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "threeCushion"
+     ],
+     "title": "3 Cushionの全試合",
+     "titleAria": "3 Cushionの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "bcbe66d9",
+     "text": "15eeeade"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "3 Cushion",
+     "ctxAria": "なおき、3 Cushionの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "a1e4075",
+     "text": "a25057f8"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "threeCushion:match-detail",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "threeCushion"
+     ],
+     "title": "3 Cushionの全試合",
+     "titleAria": "3 Cushionの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "bcbe66d9",
+     "text": "15eeeade"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "3 Cushion",
+     "ctxAria": "なおき、3 Cushionの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "a1e4075",
+     "text": "a25057f8"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "threeCushion:detail-close",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      "threeCushion"
+     ],
+     "title": "3 Cushionの全試合",
+     "titleAria": "3 Cushionの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "bcbe66d9",
+     "text": "15eeeade"
+    },
+    "rivals": {
+     "hidden": false,
+     "ariaHidden": "false",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "3 Cushion",
+     "ctxAria": "なおき、3 Cushionの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "a1e4075",
+     "text": "a25057f8"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "threeCushion:rival-history-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      "threeCushion"
+     ],
+     "title": "3 Cushionの全試合",
+     "titleAria": "3 Cushionの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "7c0e1e4e",
+     "text": "15eeeade"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "3 Cushion",
+     "ctxAria": "なおき、3 Cushionの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "4139bbb6",
+     "text": "a25057f8"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "threeCushion:rivals-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      "threeCushion"
+     ],
+     "title": "3 Cushionの全試合",
+     "titleAria": "3 Cushionの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "7c0e1e4e",
+     "text": "15eeeade"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "3 Cushion",
+     "ctxAria": "なおき、3 Cushionの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "4139bbb6",
+     "text": "a25057f8"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  },
+  {
+   "name": "threeCushion:hub-back",
+   "err": null,
+   "state": {
+    "history": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      "threeCushion"
+     ],
+     "title": "3 Cushionの全試合",
+     "titleAria": "3 Cushionの全試合",
+     "rows": [],
+     "riv": [],
+     "fixedSpan": null,
+     "ctxAria": null,
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "7c0e1e4e",
+     "text": "15eeeade"
+    },
+    "rivals": {
+     "hidden": true,
+     "ariaHidden": "true",
+     "fixed": [
+      "",
+      ""
+     ],
+     "title": "対戦相手別の成績",
+     "titleAria": null,
+     "rows": [],
+     "riv": [],
+     "fixedSpan": "3 Cushion",
+     "ctxAria": "なおき、3 Cushionの対戦相手別成績",
+     "summaries": 0,
+     "selects": 0,
+     "oppHeader": false,
+     "period": false,
+     "disciplineBar": false,
+     "analysis": 0,
+     "wrappers": 0,
+     "html": "4139bbb6",
+     "text": "a25057f8"
+    },
+    "detailOpen": false,
+    "e": null
+   }
+  }
+ ],
+ "errors": []
+}

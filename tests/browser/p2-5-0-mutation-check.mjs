@@ -58,16 +58,17 @@ const M = [
   ["home preview uses the wrong pattern", "index.html", 'dateText=Number.isNaN(date.getTime())?"日付なし":window.cueDate(date,"ymd");', 'dateText=Number.isNaN(date.getTime())?"日付なし":window.cueDate(date,"ymd-hm");'],
   ["CSV date format changed", "index.html", "const dateText = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;", "const dateText = `${date.getFullYear()}/${pad(date.getMonth() + 1)}/${pad(date.getDate())}`;"],
   ["an inline weekday array returns", "index.html", "function fmtDate(d,short=false){", 'const WD250=["日","月","火","水","木","金","土"];function fmtDate(d,short=false){'],
+  /* Phase D journey */
+  ["journey observer re-added in ui-revision", "ui-revision-v12.js", "  const history=document.getElementById(\"playerMatchHistoryV2\");", "  const history=document.getElementById(\"playerMatchHistoryV2\");if(history)new MutationObserver(()=>requestAnimationFrame(reviseHistory)).observe(history,{childList:true});"],
+  ["history-row compaction observer re-added", "player-detail-build6.js", "  let returnFromEditor=false;", "  if(historyRoot)new MutationObserver(()=>{}).observe(historyRoot,{childList:true});\n  let returnFromEditor=false;"],
+  ["renderHistory no longer revises", "index.html", "条件に一致する試合履歴はありません。</div>`}`;window.CueScoreUiRevisionV12?.reviseHistory?.();}", "条件に一致する試合履歴はありません。</div>`}`;}"],
+  ["show() no longer revises", "index.html", "if(root===historyRoot)window.CueScoreUiRevisionV12?.reviseHistory?.();else if(root===rivalRoot)window.CueScoreUiRevisionV12?.reviseRivals?.();}", "}"],
+  ["displayed date parsed again", "ui-revision-v12.js", 'const dt=recordTime(row.dataset.playerRecordId);', 'const dt=recordTime(row.dataset.playerRecordId);date.textContent.match(/\\d{4}\\/(\\d{2})\\/(\\d{2})(（.）)\\s+(\\d{2}:\\d{2})/);'],
+  ["record date fallback chain shortened", "ui-revision-v12.js", "new Date(record.endedAt||record.playedAt||record.startedAt||0):null;};", "new Date(record.endedAt||0):null;};"],
+  ["an analysis-button emitter appears", "index.html", "const addHistoryAnalysisEntriesV5=()=>", 'const emit250=`<button data-player-analysis-record-id="x"></button>`;const addHistoryAnalysisEntriesV5=()=>'],
   /* OBS-19 / OBS-13 */
   ["OBS-13 analysis-button removal dropped", "index.html", 'forEach(button=>button.remove());\n  new MutationObserver(addHistoryAnalysisEntriesV5)', 'forEach(button=>button);\n  new MutationObserver(addHistoryAnalysisEntriesV5)'],
-  ["OBS-19 detail label changed", "player-detail-build6.js", 'detail.textContent="詳細"', 'detail.textContent="詳しく"'],
-  ["OBS-19 analysis label changed", "player-detail-build6.js", 'analysis.textContent="分析"', 'analysis.textContent="分析す"'],
-  ["OBS-19 stops hiding the analysis button", "player-detail-build6.js", "analysis.hidden=true;", ""],
-  ["OBS-19 idempotence guard removed", "player-detail-build6.js", 'if(row.closest(".pd8-history-match"))return;', ""],
   /* OBS-23 date regex */
-  ["OBS-23 date regex widened (3 digits)", "ui-revision-v12.js", "\\d{4}\\/(\\d{2})\\/(\\d{2})", "\\d{4}\\/(\\d{3})\\/(\\d{2})"],
-  ["OBS-23 date output reordered", "ui-revision-v12.js", "date.textContent=`${Number(match[1])}/${Number(match[2])}${match[3]} ${match[4]}`", "date.textContent=`${Number(match[2])}/${Number(match[1])}${match[3]} ${match[4]}`"],
-  ["OBS-23 date weekday group removed", "ui-revision-v12.js", "(（.）)", "(（..）)"],
   /* P2-5a-1 formalization audit */
   ["guard gets a second call site", "index.html", 'function openHome(){renderHome();', 'function openHome(){applyPriorGamesGuardV1();renderHome();'],
   ["player view becomes visible without a render", "index.html", 'function openMatch(){renderMatchForViewerV5();setView("match")}', 'function openMatch(){renderMatchForViewerV5();setView("match");setView("player")}'],

@@ -83,15 +83,18 @@
     const latest=new Map();(window.recordsForRegisteredPlayer?.(player)||[]).filter(record=>discipline(record)===active).forEach(record=>{const s=side(record,player),raw=recordPlayer(record,s===1?2:1),key=String(raw.registeredPlayerId||raw.name||"");latest.set(key,Math.max(latest.get(key)||0,time(record)));});
     const list=root.querySelector(".journey-list-v2");if(list){const current=[...list.querySelectorAll("[data-rival-opponent]")],ordered=[...current].sort((a,b)=>(latest.get(b.dataset.rivalOpponent)||0)-(latest.get(a.dataset.rivalOpponent)||0)||stable(a.dataset.rivalOpponent,b.dataset.rivalOpponent));if(current.some((row,index)=>row!==ordered[index]))ordered.forEach(row=>list.appendChild(row));}
   }
-  const rivals=document.getElementById("playerOpponentRecordsV2");if(rivals)new MutationObserver(()=>requestAnimationFrame(reviseRivals)).observe(rivals,{subtree:true,childList:true,attributes:true,attributeFilter:["class"]});
+  // P2 Phase D: reviseRivals / reviseHistory are explicit post-render steps now (called at the end of renderRivals / renderHistory, when the journey
+  // roots are shown, and after the opener wrappers below). They used to be DOM observers on the two journey roots.
   const openRivalsBase=window.openPlayerOpponentRecordsV2;
   window.openPlayerOpponentRecordsV2=(...args)=>{openRivalsBase?.(...args);reviseRivals();};
 
+  // The journey list is built from the same stored records (id -> endedAt || playedAt || startedAt || 0, exactly like renderHistory's timeOf).
+  const recordTime=id=>{const record=(typeof readMatchRecords==="function"?readMatchRecords():[]).find(item=>String(item.id)===String(id));return record?new Date(record.endedAt||record.playedAt||record.startedAt||0):null;};
   function reviseHistory(){
     const root=document.getElementById("playerMatchHistoryV2");if(!root||root.classList.contains("hidden"))return;
     const opponentFixed=Boolean(root.dataset.pd8Opponent),disciplineFixed=Boolean(root.dataset.pd8Discipline)&&!opponentFixed,opponent=root.querySelector(".journey-history-opponent-v11");
     if(opponentFixed)opponent?.remove();
-    if(disciplineFixed){const active=root.dataset.pd8Discipline,title=root.querySelector(".player-journey-header-v2 h1"),label=`${def(active).label}の全試合`;root.querySelector(".player-history-disciplines-v4")?.remove();if(title){if(title.textContent!==label)title.textContent=label;if(title.getAttribute("aria-label")!==label)title.setAttribute("aria-label",label);}}
+    if(disciplineFixed){const active=root.dataset.pd8Discipline,title=root.querySelector(".player-journey-header-v2 h1"),label=`${def(active).label}の全試合`;root.querySelector(".player-history-disciplines-v4")?.remove();if(title){title.textContent=label;title.setAttribute("aria-label",label);}}
     root.querySelector("[data-history-period]")?.remove();
     root.querySelectorAll("[data-player-analysis-record-id]").forEach(node=>node.remove());
     root.querySelectorAll("[data-player-record-id]").forEach(row=>{
@@ -99,13 +102,13 @@
       row.classList.add(...matchCardCClassV37(opponentFixed?"opponent":disciplineFixed?"all-matches":"player-history").split(" "));
       row.classList.toggle("pd13-opponent-match",opponentFixed);row.classList.toggle("pd13-fixed-discipline-match",disciplineFixed);row.classList.toggle("pd13-player-match",!opponentFixed&&!disciplineFixed);
       const date=row.querySelector(".journey-match-date-v3");
-      if((opponentFixed||disciplineFixed)&&date){const match=date.textContent.match(/\d{4}\/(\d{2})\/(\d{2})(（.）)\s+(\d{2}:\d{2})/);if(match)date.textContent=`${Number(match[1])}/${Number(match[2])}${match[3]} ${match[4]}`;}
+      if((opponentFixed||disciplineFixed)&&date){const dt=recordTime(row.dataset.playerRecordId);if(dt&&!Number.isNaN(dt.getTime()))date.textContent=window.cueDate(dt,"md-w-sp-hm");} // from the stored record, never by parsing the displayed date
       if(opponentFixed){row.querySelector(".journey-match-vs-v3")?.remove();row.querySelector(".journey-match-opponent-avatar-v3")?.remove();row.querySelector(".journey-match-opponent-v3>strong")?.remove();}
       if(disciplineFixed)row.querySelector(".journey-match-vs-v3")?.remove();
-      if(!row.dataset.pd13DetailLabel){const detailSuffix="、試合詳細を開く",currentLabel=row.getAttribute("aria-label")||"試合";row.setAttribute("aria-label",`${currentLabel}${detailSuffix}`);row.dataset.pd13DetailLabel="true";}const open=row.querySelector(".journey-match-open-v3");if(open){if(open.textContent!=="›")open.textContent="›";open.setAttribute("aria-hidden","true");}
+      if(!row.dataset.pd13DetailLabel){const detailSuffix="、試合詳細を開く",currentLabel=row.getAttribute("aria-label")||"試合";row.setAttribute("aria-label",`${currentLabel}${detailSuffix}`);row.dataset.pd13DetailLabel="true";}const open=row.querySelector(".journey-match-open-v3");if(open){open.textContent="›";open.setAttribute("aria-hidden","true");}
     });
   }
-  const history=document.getElementById("playerMatchHistoryV2");if(history)new MutationObserver(()=>requestAnimationFrame(reviseHistory)).observe(history,{subtree:true,childList:true,attributes:true,attributeFilter:["class"]});
+  const history=document.getElementById("playerMatchHistoryV2");
   const openHistoryBase=window.openPlayerMatchHistoryV2;
   window.openPlayerMatchHistoryV2=(...args)=>{openHistoryBase?.(...args);reviseHistory();};
   document.addEventListener("click",event=>{if(event.target.closest("#playerOpponentRecordsV2 [data-rival-opponent]"))reviseHistory();});
@@ -115,7 +118,7 @@
   document.addEventListener("click",rememberMatchDetailOrigin,true);
   document.addEventListener("keydown",event=>{if(["Enter"," "].includes(event.key))rememberMatchDetailOrigin(event);},true);
   const closeMatchDetailBase=window.closeFormalMatchDetailV2;
-  window.closeFormalMatchDetailV2=()=>{const origin=matchDetailReturn;closeMatchDetailBase?.();if(origin){history?.classList.remove("hidden");history?.setAttribute("aria-hidden","false");matchDetailReturn=null;}};
+  window.closeFormalMatchDetailV2=()=>{const origin=matchDetailReturn;closeMatchDetailBase?.();if(origin){history?.classList.remove("hidden");history?.setAttribute("aria-hidden","false");matchDetailReturn=null;reviseHistory();}};
 
   // Build 34: one exact opening-context snapshot for every Match Detail entry.
   // Earlier layers remembered only Player History rows, leaving direct Player Hub
@@ -145,7 +148,7 @@
   window.closeFormalMatchDetailV2=()=>{
     const origin=exactMatchDetailOrigin;closeMatchDetailExactBase?.();exactMatchDetailOrigin=null;if(!origin)return;
     const playerStats=document.getElementById("playerStatsOverlay"),historyRoot=document.getElementById("playerMatchHistoryV2");
-    if(["player-history","opponent-history"].includes(origin.kind)){historyRoot?.classList.remove("hidden");historyRoot?.setAttribute("aria-hidden","false");playerStats?.classList.add("hidden");const scroll=historyRoot?.querySelector(".player-journey-scroll-v2");if(scroll)requestAnimationFrame(()=>scroll.scrollTop=origin.scrollTop);}
+    if(["player-history","opponent-history"].includes(origin.kind)){historyRoot?.classList.remove("hidden");historyRoot?.setAttribute("aria-hidden","false");reviseHistory();playerStats?.classList.add("hidden");const scroll=historyRoot?.querySelector(".player-journey-scroll-v2");if(scroll)requestAnimationFrame(()=>scroll.scrollTop=origin.scrollTop);}
     else if(origin.kind!=="global-history"){if(!window.CueScorePlayerHubV2?.restore?.(origin.playerHub)){playerStats?.classList.remove("hidden");playerStats?.setAttribute("aria-hidden","false");const scroll=document.getElementById("playerStatsBody");if(scroll)requestAnimationFrame(()=>scroll.scrollTop=origin.scrollTop);}}
     else {const scroll=document.querySelector(".records-screen:not(.hidden) .records-list,#recordsScreen:not(.hidden) .records-list");if(scroll)requestAnimationFrame(()=>scroll.scrollTop=origin.scrollTop);}
   };

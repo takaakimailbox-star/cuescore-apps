@@ -980,8 +980,8 @@
   "area": "D",
   "file": "player-detail-build6.js",
   "line": 104,
-  "snippet": "if(historyRoot)new MutationObserver(compactHistory).observe(historyRoot,{subtree:true,childList:true});",
-  "function": "compactHistory"
+  "snippet": "// P2 Phase D: the former history-row compaction observer wrapped a history row and its analysis button.",
+  "function": "compactHistory (deleted: dead code, Phase D)"
  },
  {
   "id": "P2L-124",
@@ -1004,16 +1004,16 @@
   "area": "D",
   "file": "ui-revision-v12.js",
   "line": 86,
-  "snippet": "const rivals=document.getElementById(\"playerOpponentRecordsV2\");if(rivals)new MutationObserver(()=>requestAnimationFrame(reviseRivals)).obse",
-  "function": "reviseRivals"
+  "snippet": "// P2 Phase D: reviseRivals / reviseHistory are explicit post-render steps now",
+  "function": "reviseRivals (explicit post-render step, Phase D)"
  },
  {
   "id": "P2L-127",
   "area": "D",
   "file": "ui-revision-v12.js",
   "line": 108,
-  "snippet": "const history=document.getElementById(\"playerMatchHistoryV2\");if(history)new MutationObserver(()=>requestAnimationFrame(reviseHistory)).obse",
-  "function": "reviseHistory"
+  "snippet": "const recordTime=id=>{const record=(typeof readMatchRecords",
+  "function": "reviseHistory (explicit post-render step; date from the stored record, Phase D)"
  },
  {
   "id": "P2L-128",

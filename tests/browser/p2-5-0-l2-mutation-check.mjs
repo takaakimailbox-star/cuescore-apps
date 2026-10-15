@@ -17,8 +17,12 @@ const M = [
   ["OBS-09 generation guard removed (mirrors created again)", "index.html", 'if (window.CueScoreFeatureAccess.canUse("cloudSync")) {\n    mirrorStatus(', 'if (true) {\n    mirrorStatus(', "free", "golden"],
   ["allow-listed OBS-05 starts rewriting text (dynamic AC-S3 must catch it)", "index.html", "      syncModalAccessibility();\n    });", '      syncModalAccessibility();const t250=document.getElementById("playerLibraryTitle");if(t250&&t250.textContent!=="X250")t250.textContent="X250";\n    });', "free", "acs3"],
   ["OBS-03 trigger dropped (closePlayerLibrary), setup texts stale", "final-ui-build18.js", '"closePlayerLibrary",', "", "free", "golden"],
+  ["journey: reviseHistory never runs (stands for every trigger removed at once)", "ui-revision-v12.js", "  function reviseHistory(){", "  function reviseHistory(){return;", "pro", "journey:ja:journey_ja.json"],
+  ["journey: reviseRivals never runs (stands for every trigger removed at once)", "ui-revision-v12.js", "  function reviseRivals(){", "  function reviseRivals(){return;", "pro", "journey:ja:journey_ja.json"],
+  ["journey: row date pattern wrong", "ui-revision-v12.js", 'date.textContent=window.cueDate(dt,"md-w-sp-hm")', 'date.textContent=window.cueDate(dt,"md-w-hm")', "pro", "journey:ja:journey_ja.json"],
+  ["journey: aria suffix applied twice-style change", "ui-revision-v12.js", 'const detailSuffix="、試合詳細を開く"', 'const detailSuffix="、詳細を開く"', "pro", "journey:ja:journey_ja.json"],
   ["OBS-13 stops deleting analysis buttons", "index.html", 'forEach(button=>button.remove());\n  new MutationObserver(addHistoryAnalysisEntriesV5)', 'forEach(button=>button);\n  new MutationObserver(addHistoryAnalysisEntriesV5)', "pro", "golden"],
-  ["OBS-23 date rewrite reordered", "ui-revision-v12.js", "date.textContent=`${Number(match[1])}/${Number(match[2])}${match[3]} ${match[4]}`", "date.textContent=`${Number(match[2])}/${Number(match[1])}${match[3]} ${match[4]}`", "pro", "golden"],
+  ["journey row date uses the wrong pattern (golden)", "ui-revision-v12.js", 'date.textContent=window.cueDate(dt,"md-w-sp-hm")', 'date.textContent=window.cueDate(dt,"ymd-w-sp-hm")', "pro", "golden"],
   ["final-rc match wording changed", "analysis-final-rc.js", '"同じでした"', '"同一でした"', "pro", "golden"],
   ["OBS-15 generated predicate shifted, final-rc unavailable (fault)", "index.html", 'String(f2-f1).endsWith("0")', 'String(f2-f1).endsWith("1")', "pro", "fault:block-final-rc:0:fault_block-final-rc_0.json"],
   ["OBS-15 high-run quirk lost, final-rc and build4 unavailable (fault)", "index.html", 'String(high2-high1).endsWith("0")', 'high2===high1', "pro", "fault:block-both:0:fault_block-both_0.json"],
@@ -42,11 +46,11 @@ async function one(i) {
   fs.writeFileSync(target, original.replace(from, to));
   const out = path.join(tmp, "out");
   let cmp;
-  if (check.startsWith("fault:") || check.startsWith("flow:")) {
+  if (check.startsWith("fault:") || check.startsWith("flow:") || check.startsWith("journey:")) {
     const parts = check.split(":"); const file = path.join(out, "x.json");
     fs.mkdirSync(out, { recursive: true });
-    const script = check.startsWith("fault:") ? ["tests/browser/p2-5a-1-fault-scenarios.mjs", file, parts[1], parts[2]] : ["tests/browser/p2-5a-1-flow-scenarios.mjs", file, parts[1], parts[2]];
-    const fixture = parts[3];
+    const script = check.startsWith("fault:") ? ["tests/browser/p2-5a-1-fault-scenarios.mjs", file, parts[1], parts[2]] : check.startsWith("journey:") ? ["tests/browser/p2-5b-journey-flows.mjs", file, parts[1]] : ["tests/browser/p2-5a-1-flow-scenarios.mjs", file, parts[1], parts[2]];
+    const fixture = check.startsWith("journey:") ? parts[2] : parts[3];
     const r = await run(NODE, [path.join(tmp, script[0]), ...script.slice(1)], tmp);
     if (!fs.existsSync(file)) { results[i] = { name, applied: true, killed: false, note: "run failed: " + r.out.slice(-200) }; fs.rmSync(tmp, { recursive: true, force: true }); return; }
     const expected = JSON.parse(fs.readFileSync(path.join(ROOT, "tests/fixtures/p2/observer-scenarios", fixture), "utf8")), got = JSON.parse(fs.readFileSync(file, "utf8"));

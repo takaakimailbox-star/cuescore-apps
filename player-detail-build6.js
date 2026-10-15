@@ -89,19 +89,8 @@
     document.getElementById("playerStatsOverlay")?.setAttribute("aria-hidden","false");
     backPerf.stage(item,"domComplete");backPerf.usable(item);
   },true);
-  const compactHistory=()=>{
-    historyRoot?.querySelectorAll(".journey-match-v3").forEach(row=>{
-      if(row.closest(".pd8-history-match"))return;
-      const analysis=row.nextElementSibling?.matches("[data-player-analysis-record-id]")?row.nextElementSibling:null;
-      if(!analysis)return;
-      const wrapper=document.createElement("div");wrapper.className="pd8-history-match";
-      row.replaceWith(wrapper);wrapper.append(row,analysis);
-      const detail=row.querySelector(".journey-match-open-v3");if(detail)detail.textContent="詳細";
-      analysis.textContent="分析";
-      analysis.hidden=true;analysis.setAttribute("aria-hidden","true");analysis.tabIndex=-1;
-    });
-  };
-  if(historyRoot)new MutationObserver(compactHistory).observe(historyRoot,{subtree:true,childList:true});
+  // P2 Phase D: the former history-row compaction observer wrapped a history row and its analysis button. No production code creates analysis-button
+  // elements any more (only selectors / removers exist), so the wrap could never run and the observer was removed.
   let returnFromEditor=false;
   document.getElementById("playerStatsRace")?.addEventListener("click",event=>{if(!state.playerId||document.getElementById("playerStatsOverlay")?.classList.contains("hidden"))return;event.preventDefault();event.stopImmediatePropagation();returnFromEditor=true;document.getElementById("playerStatsOverlay")?.classList.add("hidden");const library=document.getElementById("playerLibraryOverlay");library?.classList.remove("hidden");library?.setAttribute("aria-hidden","false");openPlayerEditor(state.playerId);},true);
   document.getElementById("playerLibraryBackBtn")?.addEventListener("click",event=>{if(!returnFromEditor||document.getElementById("playerEditor")?.classList.contains("hidden"))return;const item=backPerf.begin("player-editor-to-player-info",event.currentTarget.dataset.cueBackSource||"tap");backPerf.stage(item,"handlerStart");event.preventDefault();event.stopImmediatePropagation();returnFromEditor=false;const library=document.getElementById("playerLibraryOverlay"),stats=document.getElementById("playerStatsOverlay");library?.classList.add("hidden");library?.setAttribute("aria-hidden","true");stats?.classList.remove("hidden");stats?.setAttribute("aria-hidden","false");backPerf.stage(item,"domComplete");backPerf.usable(item);requestAnimationFrame(()=>showPlayerLibraryMain());},true);
