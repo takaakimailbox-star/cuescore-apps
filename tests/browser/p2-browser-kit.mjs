@@ -11,7 +11,8 @@ import { stage1Fixtures } from "../helpers/match-sharing-stage1-fixtures.mjs";
 
 export const sha = t => crypto.createHash("sha256").update(t).digest("hex");
 export const sleep = ms => new Promise(r => setTimeout(r, ms));
-const ROOT = path.resolve(new URL("../../", import.meta.url).pathname);
+/* P2_APP_ROOT lets a migration gate run the SAME scripts against a pristine baseline checkout and against the changed tree. */
+const ROOT = path.resolve(process.env.P2_APP_ROOT || new URL("../../", import.meta.url).pathname);
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const types = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css", ".json": "application/json", ".webmanifest": "application/json", ".png": "image/png", ".svg": "image/svg+xml" };
 
@@ -52,10 +53,11 @@ function syntheticRecords(base) {
     return r;
   });
 }
-export function seed({ extraRecords = [], lang = "ja", link = true, synthetic = true } = {}) {
+export function seed({ extraRecords = [], lang = "ja", link = true, synthetic = true, rich = false } = {}) {
   const fixtures = stage1Fixtures();
   const fixtureRecords = fixtures.map((f, i) => ({ ...f.source, endedAt: new Date(Date.UTC(2026, 0, 2 + i, 3, 4, 5)).toISOString(), playedAt: new Date(Date.UTC(2026, 0, 2 + i, 2, 0, 0)).toISOString(), startedAt: new Date(Date.UTC(2026, 0, 2 + i, 2, 0, 0)).toISOString() }));
-  const records = [...extraRecords, ...(synthetic ? syntheticRecords(fixtureRecords[0]) : []), ...fixtureRecords];
+  const older = rich ? Array.from({ length: 6 }, (_, i) => { const r = JSON.parse(JSON.stringify(fixtureRecords[0])); r.id = "p251-old-" + i; r.winner = i % 2 ? 2 : 1; r.disciplineId = "9ball"; r.gameType = "9ball"; r.players = { ...r.players, 1: { ...r.players[1], name: "なおき" }, 2: { ...r.players[2], name: "さくら" } }; const t = new Date(Date.UTC(2025, 11, 1 + i, 3, 0, 0)).toISOString(); r.endedAt = t; r.playedAt = t; r.startedAt = t; return r; }) : [];
+  const records = [...extraRecords, ...(synthetic ? syntheticRecords(fixtureRecords[0]) : []), ...older, ...fixtureRecords];
   const names = [...new Set(records.flatMap(r => [r.players?.[1]?.name, r.players?.[2]?.name]).filter(Boolean))].slice(0, 4);
   const players = names.map((name, i) => ({ id: "p_probe_" + (i + 1), name, avatar: { type: "default", id: "default_silhouette" }, race: 120, skillLevel: 2, memo: "", isPrimary: i === 0, createdAt: 1767225600000 - i, updatedAt: 1767225600000 - i, lastUsed: 1767225600000 - i }));
   if (link) {
@@ -66,7 +68,8 @@ export function seed({ extraRecords = [], lang = "ja", link = true, synthetic = 
   return { records, players, script };
 }
 
-export async function startApp({ lang = "ja", mode = "free", seedData, watchdogMs = 270000 } = {}) {
+/* fault injection: blockUrls = URL globs failing to load (script load error); delayUrls = [{glob, ms}] responses held back before continuing */
+export async function startApp({ lang = "ja", mode = "free", seedData, watchdogMs = Number(process.env.P2_WATCHDOG || 270000), blockUrls = [], delayUrls = [], freezeTime = false } = {}) {
   const server = http.createServer((req, res) => {
     const url = new URL(req.url, "http://x"); let p = decodeURIComponent(url.pathname); if (p === "/") p = "/index.html";
     const file = path.join(ROOT, p);
@@ -89,7 +92,7 @@ export async function startApp({ lang = "ja", mode = "free", seedData, watchdogM
   const ws = new WebSocket(targets.find(t => t.type === "page").webSocketDebuggerUrl);
   await new Promise(r => ws.addEventListener("open", r));
   let nextId = 1; const pending = new Map();
-  ws.addEventListener("message", ev => { const m = JSON.parse(ev.data); if (m.id && pending.has(m.id)) { const { resolve, reject } = pending.get(m.id); pending.delete(m.id); m.error ? reject(new Error(JSON.stringify(m.error))) : resolve(m.result); } });
+  ws.addEventListener("message", ev => { const m = JSON.parse(ev.data); if (m.method === "Fetch.requestPaused") { const u = m.params.request.url; const d = delayUrls.find(x => new RegExp("^" + x.glob.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, ".*") + "$").test(u)); setTimeout(() => cdp("Fetch.continueRequest", { requestId: m.params.requestId }).catch(() => {}), d ? d.ms : 0); return; } if (m.id && pending.has(m.id)) { const { resolve, reject } = pending.get(m.id); pending.delete(m.id); m.error ? reject(new Error(JSON.stringify(m.error))) : resolve(m.result); } });
   const cdp = (method, params = {}) => new Promise((resolve, reject) => { const id = nextId++; pending.set(id, { resolve, reject }); ws.send(JSON.stringify({ id, method, params })); });
   const evalJs = async expr => {
     const r = await cdp("Runtime.evaluate", { expression: expr, awaitPromise: true, returnByValue: true, timeout: 60000 });
@@ -97,11 +100,13 @@ export async function startApp({ lang = "ja", mode = "free", seedData, watchdogM
     return r.result.value;
   };
   await cdp("Page.enable"); await cdp("Runtime.enable");
+  if (blockUrls.length) { await cdp("Network.enable"); await cdp("Network.setBlockedURLs", { urls: blockUrls }); }
+  if (delayUrls.length) await cdp("Fetch.enable", { patterns: delayUrls.map(x => ({ urlPattern: x.glob })) });
   await cdp("Emulation.setDeviceMetricsOverride", { width: 430, height: 932, deviceScaleFactor: 1, mobile: true });
   await cdp("Emulation.setTimezoneOverride", { timezoneId: "Asia/Tokyo" });
   await cdp("Emulation.setLocaleOverride", { locale: lang === "ja" ? "ja-JP" : lang === "en" ? "en-US" : "zh-CN" }).catch(() => {});
   const sd = seedData || seed({ lang });
-  await cdp("Page.addScriptToEvaluateOnNewDocument", { source: "/*__p2_instr*/" + sd.script + ";" + INSTRUMENT });
+  await cdp("Page.addScriptToEvaluateOnNewDocument", { source: "/*__p2_instr*/" + (freezeTime ? "(()=>{const R=Date,T=1800000000000;class D extends R{constructor(...a){a.length?super(...a):super(T)}static now(){return T}}window.Date=D;})();" : "") + sd.script + ";" + INSTRUMENT });
   await cdp("Page.navigate", { url: `http://127.0.0.1:${port}/index.html` });
   await sleep(4000);
   await evalJs(`(async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));for(let i=0;i<100&&document.documentElement.classList.contains("cue-app-booting-v2");i++)await w(100);await w(800);return true;})()`);

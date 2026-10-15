@@ -1,5 +1,6 @@
 /* P2-5-0 scenario comparison + dynamic AC-S3 check (NOT part of `node --test`).
  * Usage:
+ *   node tests/browser/p2-5-0-scenarios-compare.mjs <actual.json> <golden.json> --behavior-only   user-visible comparison only (observer attribution ignored)
  *   node tests/browser/p2-5-0-scenarios-compare.mjs <actual.json> <golden.json>   compare behaviour (DOM facts, changed-writer set, observer targets)
  *   node tests/browser/p2-5-0-scenarios-compare.mjs <actual.json> --ac-s3 [--expect-zero]
  *        dynamic AC-S3: observers that CHANGED text during any scenario must be inside the known list (observer-ac-s3-known.json);
@@ -45,6 +46,8 @@ if (args[1] === "--ac-s3") {
   console.log(JSON.stringify(summary, null, 1)); process.exit(failures.length ? 1 : 0);
 }
 const golden = load(args[1]); const got = reduce(actual);
+/* --behavior-only (migration gates): compare what the USER can see (returned DOM facts and DOM hashes) and ignore which observer produced it. */
+if (args.includes("--behavior-only")) for (const g of [golden, got]) { delete g.observerTargets; for (const s of Object.values(g.scenarios)) delete s.changedObservers; }
 for (const name of Object.keys(golden.scenarios)) { if (!got.scenarios[name]) failures.push({ path: "/scenarios/" + name, golden: "present", actual: "missing" }); }
 const g = JSON.parse(JSON.stringify(golden)), a = JSON.parse(JSON.stringify(got));
 for (const re of VOLATILE) for (const n of Object.keys(g.scenarios)) if (re.test(n)) { delete g.scenarios[n].result; delete a.scenarios[n].result; }

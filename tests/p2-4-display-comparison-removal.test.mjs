@@ -116,7 +116,7 @@ test("[P2L-027] stale OK-button recovery follows the saving flag; same recoverie
 /* ---------- P2L-029 player editor mode ---------- */
 test("[P2L-029] the player editor modal mode comes from an internal flag set by the opener, not from the title text", () => {
   assert.ok(html.includes("let playerEditorIsEditingV1 = false;"));
-  assert.ok(html.includes('el("playerLibraryTitle").textContent = player ? "プレーヤー編集" : "新規プレーヤー登録";\n    playerEditorIsEditingV1 = Boolean(player);'));
+  assert.ok(html.includes('el("playerLibraryTitle").textContent = playerLibraryTitleV1(player ? "プレーヤー編集" : "新規プレーヤー登録");\n    playerEditorIsEditingV1 = Boolean(player);'));
   assert.ok(html.includes("const editing=playerEditorIsEditingV1;"));
   assert.ok(!/playerLibraryTitle"\)\?\.textContent\.includes/.test(html));
   // the editor is only ever shown right after the opener set the title and the flag
@@ -125,15 +125,14 @@ test("[P2L-029] the player editor modal mode comes from an internal flag set by 
 
 /* ---------- P2L-030/031 analysis-v2 data-sufficiency guard ---------- */
 test("[P2L-030,031] analysis-v2 guard decides from data attributes written by the renderer / the guard (behavior over fakes)", () => {
-  const at = html.indexOf("// Analysis v2.0 data sufficiency guard");
-  const script = html.slice(at, html.indexOf("</script>", at));
+  const script = extractFunction(html, "applyPriorGamesGuardV1"); // P2-5a-1: the guard is an explicit step of the player render (was an inline MutationObserver script)
   const build = priorGames => {
     const writes = []; const mkNode = (name, extra = {}) => ({ name, dataset: {}, set textContent(v) { writes.push([name, "text", v]); this._t = v; }, get textContent() { return this._t ?? ""; }, set innerHTML(v) { writes.push([name, "html", v]); }, ...extra });
     const target = mkNode("target", { dataset: priorGames === undefined ? {} : { priorGames } });
     const status = mkNode("status"), change = mkNode("change"), em = mkNode("em"), goal = mkNode("goal");
     const view = { hidden: false, querySelector: sel => ({ ".analysis-v2-target": target, ".analysis-v2-status": status, ".analysis-v2-change": change, ".analysis-v2-advice-row:last-child span": goal })[sel] || null, querySelectorAll: () => [em] };
     const root = { querySelector: sel => (sel === '[data-analysis-view="player"]' ? view : null), addEventListener() {} };
-    let cb; const ctx = run(`${script}`, { document: { querySelector: () => root }, MutationObserver: class { constructor(f) { cb = f; } observe() {} }, setTimeout: f => f(), window: {} });
+    const ctx = run(`${script};this.f=applyPriorGamesGuardV1;`, { viewNode: name => (name === "player" ? view : null), window: {} }); const cb = ctx.f;
     return { cb, writes, status, change };
   };
   for (const prior of ["0", "1", "2"]) {
@@ -180,12 +179,12 @@ test("[P2L-034,124] ui-revision removes the 'highest score' card by its kind; sa
 });
 
 /* ---------- AC-S2 ratchet ---------- */
-test("[P2L-017..034] AC-S2: display-text comparisons in production code — only the wording guard (P2-5) remains", () => {
+test("[P2L-017..034] AC-S2: display-text comparisons in production code are 0 (P2-5a-1 removed the last two with the wording-guard observer)", () => {
   const files = fs.readdirSync(new URL("../", import.meta.url)).filter(f => /\.(js|html)$/.test(f) && !/^(sw\.js|official-document\.js|support\.html|privacy\.html|terms\.html)$/.test(f));
   const eq = /textContent\s*(?:\)|\?\.)?\s*(===|!==|==)\s*["'`][^"'`\n]*[぀-鿿]/g;
   const incl = /(?:textContent|innerText|innerHTML|getAttribute\([^)]*\))\)?(?:\?\.|\.)(?:includes|startsWith|endsWith|match|test)\(\s*["'/`][^\n]{0,40}?[぀-鿿]/g;
   let total = 0; const where = [];
   for (const f of files) { const s = read(f); const n = count(s, eq) + count(s, incl); if (n) where.push(f + ":" + n); total += n; }
-  assert.deepEqual(where, ["index.html:2"], "baseline: the two checks in the analysis-v2 wording guard 'correct' (rewrite observer, P2L-119; removed together with its observer in P2-5)");
-  assert.equal(total, 2);
+  assert.deepEqual(where, [], "was index.html:2 (P2L-119 'correct'); ratchet lowered in P2-5a-1, old->new map in the Evidence");
+  assert.equal(total, 0);
 });

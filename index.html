@@ -11524,6 +11524,11 @@ let matchRecordsRawCacheV152 = null;
     return Array.from(String(value || "")).slice(0, PLAYER_NAME_MAX_LENGTH).join("");
   }
 
+  // P2-5a-1: in the Player tab (browse context) the root title is always the localized "Player" title. Formerly enforced after the fact by a
+  // DOM observer in the Phase 2-6 navigation layer; now chosen where the title is written.
+  function playerLibraryTitleV1(text) {
+    return document.body.dataset.cuePlayerContext === "browse" ? window.cueT("player.title") : text;
+  }
   function openPlayerEditor(id=null) {
     el("playerLibraryOverlay")?.classList.remove("player-management-formal-v1");
     const libraryBack = el("playerLibraryBackBtn");
@@ -11538,8 +11543,15 @@ let matchRecordsRawCacheV152 = null;
     el("playerEditorConfirmV2")?.classList.add("hidden");
     const players = readPlayerLibrary();
     const player = id ? players.find(p => p.id === id) : null;
-    el("playerLibraryTitle").textContent = player ? "プレーヤー編集" : "新規プレーヤー登録";
+    el("playerLibraryTitle").textContent = playerLibraryTitleV1(player ? "プレーヤー編集" : "新規プレーヤー登録");
     playerEditorIsEditingV1 = Boolean(player);
+    // P2-5a-1: editor texts are written here (generation point) instead of by a DOM observer reacting to the editor's class change
+    {
+      const modalTitle = document.getElementById("playerEditorModalTitleV1"), modalCopy = document.getElementById("playerEditorModalCopyV1"), saveButton = el("playerEditorSaveBtn");
+      if (modalTitle) modalTitle.textContent = player ? "プレーヤー編集" : "プレーヤー登録";
+      if (modalCopy) modalCopy.innerHTML = player ? "" : '新しいプレーヤーを登録します。<br>あとからいつでも編集できます。';
+      if (saveButton) saveButton.textContent = player ? "変更" : "登録";
+    }
     el("playerLibraryMain").classList.add("hidden");
     el("playerEditor").classList.remove("hidden");
 
@@ -17197,7 +17209,7 @@ let matchRecordsRawCacheV152 = null;
     const overlay = el("playerLibraryOverlay");
     overlay?.classList.add("player-management-formal-v1");
     overlay?.classList.toggle("player-selection-formal-v1", !management);
-    el("playerLibraryTitle").textContent = management ? window.cueT("player.manage.title") : matchSharingPicker ? `Player ${matchSharingPlayerPickerKindV1} を選択` : `Player${playerLibraryTarget} 選択`;
+    el("playerLibraryTitle").textContent = playerLibraryTitleV1(management ? window.cueT("player.manage.title") : matchSharingPicker ? `Player ${matchSharingPlayerPickerKindV1} を選択` : `Player${playerLibraryTarget} 選択`);
     el("playerLibrarySearch").placeholder = management ? window.cueT("player.search.management") : window.cueT("player.search.selection");
     el("playerLibraryMain").classList.remove("hidden");
     el("playerEditor").classList.add("hidden");
@@ -27424,9 +27436,6 @@ body.cue-modal-lock-v1{overflow:hidden!important}
     playerOverlay.classList.add("player-management-formal-v1");
     playerMain?.classList.add("hidden");
     const editing=playerEditorIsEditingV1;
-    document.getElementById("playerEditorModalTitleV1").textContent=editing?"プレーヤー編集":"プレーヤー登録";
-    document.getElementById("playerEditorModalCopyV1").innerHTML=editing?"":'新しいプレーヤーを登録します。<br>あとからいつでも編集できます。';
-    existingSave.textContent=editing?"変更":"登録";
     existingDelete?.classList.toggle("hidden",!editing);
     setViewportHeight();document.activeElement?.blur?.();editor.tabIndex=-1;requestAnimationFrame(()=>editor.focus({preventScroll:true}));
   }
@@ -29393,7 +29402,24 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
   function trendSvg(values){const vals=values.length?values:[0],max=100,w=330,h=125,p=22,step=vals.length>1?(w-p*2)/(vals.length-1):0,pts=vals.map((v,i)=>`${p+i*step},${h-p-(Math.max(0,Math.min(max,v))/max)*(h-p*2)}`).join(" ");return`<svg class="analysis-v2-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="勝率の推移"><path d="M${p} ${h-p}H${w-p}M${p} ${h/2}H${w-p}M${p} ${p}H${w-p}" stroke="#e4e4e0" stroke-width="1"/><polyline points="${pts}" fill="none" stroke="#218238" stroke-width="2.5"/>${vals.map((v,i)=>`<circle cx="${p+i*step}" cy="${h-p-(v/max)*(h-p*2)}" r="4" fill="#218238"/>`).join("")}</svg>`}
   function renderPlayer(){const p=players().find(x=>String(x.id)===String(selectedPlayerId))||primary();if(!p){viewNode("player").innerHTML='<div class="analysis-v2-card analysis-v2-empty">分析できるプレーヤーがいません。</div>';return}selectedPlayerId=p.id;const filtered=recordsFor(p).filter(r=>discipline(r)===selectedDiscipline),current=filtered.slice(0,10),previous=filtered.slice(10,20),now=aggregate(current,p),before=aggregate(previous,p),winDelta=now.winRate-before.winRate,shotDelta=(now.shotRate??0)-(before.shotRate??0),highDelta=now.highRun-before.highRun,foulDelta=Number((now.avgFouls-before.avgFouls).toFixed(1)),status=now.games<3?"蓄積中":winDelta>=5?"好調":winDelta<=-5?"要調整":"安定";const windows=[];for(let i=Math.min(filtered.length,30);i>0;i-=5){const slice=filtered.slice(Math.max(0,i-5),i);windows.push(aggregate(slice,p).winRate)}const advice=now.games<3?"分析に必要な試合データを蓄積しましょう":foulDelta>0?"平均ファールを前期間以下に戻しましょう":shotDelta<0?"難球を無理に狙わず成功率を整えましょう":"現在の安定した試合運びを継続しましょう";viewNode("player").innerHTML=`<section class="analysis-v2-card analysis-v2-context"><span class="analysis-v2-avatar">${avatar(p)}</span><span><span class="analysis-v2-context-main"><strong>${esc(p.name)}</strong><select class="analysis-v2-select" data-analysis-player>${players().map(x=>`<option value="${esc(x.id)}" ${x.id===p.id?"selected":""}>${esc(x.name)}</option>`).join("")}</select><select class="analysis-v2-select" data-analysis-discipline>${defs.map(d=>`<option value="${d.id}" ${d.id===selectedDiscipline?"selected":""}>${d.label}</option>`).join("")}</select></span><span class="analysis-v2-target" data-prior-games="${before.games}">対象 ${now.games}試合・前の${before.games}試合と比較</span></span></section><section class="analysis-v2-card analysis-v2-condition"><div class="analysis-v2-condition-head"><h2>現在の変化</h2><span class="analysis-v2-status">${status}</span></div><p class="analysis-v2-change">勝率が前の期間より <strong>${signed(winDelta,"ポイント")}</strong></p><div class="analysis-v2-deltas"><div class="analysis-v2-delta"><span>シュート成功率</span><strong>${now.shotRate==null?"—":now.shotRate+"%"}</strong><em class="${shotDelta<0?"attention":""}">${signed(shotDelta,"pt")}</em></div><div class="analysis-v2-delta"><span>ハイラン</span><strong>${now.highRun}</strong><em class="${highDelta<0?"attention":""}">${signed(highDelta)}</em></div><div class="analysis-v2-delta"><span>平均ファール</span><strong>${now.avgFouls.toFixed(1)}</strong><em class="${foulDelta>0?"attention":""}">${signed(foulDelta)}</em></div></div></section><h2 class="analysis-v2-section-title">変化の根拠</h2><div class="analysis-v2-metrics"><div class="analysis-v2-metric"><span>直近の勝率</span><strong>${now.winRate}%</strong><em>${now.wins}勝${now.losses}敗</em></div><div class="analysis-v2-metric"><span>セーフティ成功率</span><strong>${now.safetyRate==null?"—":now.safetyRate+"%"}</strong></div><div class="analysis-v2-metric"><span>シュート成功率</span><strong>${now.shotRate==null?"—":now.shotRate+"%"}</strong><em class="${shotDelta<0?"attention":""}">${signed(shotDelta,"pt")}</em></div><div class="analysis-v2-metric"><span>平均ファール</span><strong>${now.avgFouls.toFixed(1)}</strong><em class="${foulDelta>0?"attention":""}">${signed(foulDelta)}</em></div></div><section class="analysis-v2-card analysis-v2-trend"><h2>成長の推移</h2><div class="analysis-v2-tabs"><button class="is-active">勝率</button><button>シュート</button><button>ハイラン</button><button>ファール</button></div>${trendSvg(windows.length?windows:[now.winRate])}</section><section class="analysis-v2-card analysis-v2-advice"><h2>次のアドバイス</h2><div class="analysis-v2-advice-row"><strong>強み</strong><span>${shotDelta>=0?"シュート成功率が前期間以上で安定しています":"勝敗データから得意な流れを分析中です"}</span><b>›</b></div><div class="analysis-v2-advice-row"><strong>次の目標</strong><span>${advice}</span><b>›</b></div></section>`;}
   function progressSvg(record){let p1=[0],p2=[0];const raw=record?.scoreProgress||record?.progress||record?.scoreHistory;if(Array.isArray(raw)){raw.forEach(item=>{p1.push(Number(item?.p1??item?.[1]??p1.at(-1))||0);p2.push(Number(item?.p2??item?.[2]??p2.at(-1))||0)})}if(p1.length===1){p1.push(Number(recordPlayer(record,1).score)||0);p2.push(Number(recordPlayer(record,2).score)||0)}const max=Math.max(1,...p1,...p2),w=330,h=145,p=24,step=(w-p*2)/Math.max(1,p1.length-1),points=a=>a.map((v,i)=>`${p+i*step},${h-p-(v/max)*(h-p*2)}`).join(" ");return`<svg class="analysis-v2-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="スコア推移"><path d="M${p} ${h-p}H${w-p}M${p} ${h/2}H${w-p}M${p} ${p}H${w-p}" stroke="#e4e4e0"/><polyline points="${points(p1)}" fill="none" stroke="#171717" stroke-width="2.5"/><polyline points="${points(p2)}" fill="none" stroke="#999" stroke-width="2.5"/>${p1.map((v,i)=>`<circle cx="${p+i*step}" cy="${h-p-(v/max)*(h-p*2)}" r="3.5" fill="#171717"/>`).join("")}</svg>`}
-  function renderMatch(){const record=allRecords().find(r=>String(r.id)===String(selectedRecordId))||allRecords()[0];if(!record){viewNode("match").innerHTML='<div class="analysis-v2-card analysis-v2-empty">分析できる試合履歴がありません。</div>';return}selectedRecordId=record.id;const s=Number(record.winner)===2?2:1,o=s===1?2:1,p=libraryPlayer(recordPlayer(record,s)),opp=libraryPlayer(recordPlayer(record,o)),m1=metric(record,s),m2=metric(record,o),shot1=Math.round(Number(m1.shotRate)||0),shot2=Math.round(Number(m2.shotRate)||0),f1=Number(m1.fouls)||0,f2=Number(m2.fouls)||0,high1=Number(m1.maxRun)||0,high2=Number(m2.maxRun)||0,safe1=Number(record.analysisSummary?.players?.[s]?.safety?.successRate??record.analysis?.players?.[s]?.safety?.successRate),safe2=Number(record.analysisSummary?.players?.[o]?.safety?.successRate??record.analysis?.players?.[o]?.safety?.successRate),d=def(discipline(record)),date=new Date(record.endedAt||record.playedAt||record.startedAt||0),dateText=Number.isNaN(date.getTime())?"日付なし":`${date.getFullYear()}/${String(date.getMonth()+1).padStart(2,"0")}/${String(date.getDate()).padStart(2,"0")} ${String(date.getHours()).padStart(2,"0")}:${String(date.getMinutes()).padStart(2,"0")}`;const points=[shot1||shot2?`シュート成功率で相手を${Math.abs(shot1-shot2)}ポイント${shot1>=shot2?"上回った":"下回った"}`:"シュート成功率の記録を蓄積中",f1<=f2?`ファールを相手より${f2-f1}回少なく抑えた`:`ファールが相手より${f1-f2}回多かった`,high1>=high2?`ハイランで相手を${high1-high2}上回った`:`ハイランでは相手が${high2-high1}上回った`];viewNode("match").innerHTML=`<section class="analysis-v2-card analysis-v2-match-head"><div class="analysis-v2-match-meta">${dateText}・${d.label}</div><div class="analysis-v2-score"><div class="analysis-v2-score-player"><span class="analysis-v2-avatar">${avatar(p)}</span><strong>${esc(recordPlayer(record,s).name||p.name)}</strong></div><div class="analysis-v2-score-center"><img src="${d.asset}" alt=""><b>${Number(recordPlayer(record,s).score)||0} - ${Number(recordPlayer(record,o).score)||0}</b><span class="analysis-v2-win">勝ち</span></div><div class="analysis-v2-score-player"><span class="analysis-v2-avatar">${avatar(opp)}</span><strong>${esc(recordPlayer(record,o).name||opp.name)}</strong></div></div></section><section class="analysis-v2-card analysis-v2-points"><h2>勝敗を分けたポイント</h2>${points.map((text,i)=>`<div class="analysis-v2-point"><i>${i+1}</i><span>${esc(text)}</span></div>`).join("")}</section><section class="analysis-v2-card analysis-v2-trend"><h2>スコア推移</h2>${progressSvg(record)}</section><section class="analysis-v2-card analysis-v2-comparison"><h2>サマリー比較</h2><div class="analysis-v2-compare-head"><span></span><span>${esc(p.name||"Player 1")}</span><span>${esc(opp.name||"Player 2")}</span></div>${[["シュート成功率",shot1+"%",shot2+"%",shot1>=shot2],["ハイラン",high1,high2,high1>=high2],["ファール数",f1,f2,f1<=f2],["セーフティ成功率",Number.isFinite(safe1)?Math.round(safe1)+"%":"—",Number.isFinite(safe2)?Math.round(safe2)+"%":"—",safe1>=safe2]].map(row=>`<div class="analysis-v2-compare-row"><span>${row[0]}</span><b class="${row[3]?"better":""}">${row[1]}</b><b class="${row[3]?"":"better"}">${row[2]}</b></div>`).join("")}</section><section class="analysis-v2-card analysis-v2-flow"><h2>試合の流れ</h2><div class="analysis-v2-flow-grid"><div><span>序盤</span><strong>互角</strong><b>—</b></div><div><span>中盤</span><strong class="positive">変化</strong><b>—</b></div><div><span>終盤</span><strong class="positive">安定</strong><b>—</b></div></div></section><section class="analysis-v2-card analysis-v2-advice"><h2>振り返り</h2><div class="analysis-v2-advice-row"><strong>良かった点</strong><span>${f1<=f2?"ファールを抑えた試合運び":"得点機会を勝利につなげた"}</span><b>›</b></div><div class="analysis-v2-advice-row"><strong>次回試すこと</strong><span>${shot1<70?"序盤のシュート選択を丁寧に":"現在の成功率を維持する"}</span><b>›</b></div></section>`;}
+  function renderMatch(){const record=allRecords().find(r=>String(r.id)===String(selectedRecordId))||allRecords()[0];if(!record){viewNode("match").innerHTML='<div class="analysis-v2-card analysis-v2-empty">分析できる試合履歴がありません。</div>';return}selectedRecordId=record.id;const s=Number(record.winner)===2?2:1,o=s===1?2:1,p=libraryPlayer(recordPlayer(record,s)),opp=libraryPlayer(recordPlayer(record,o)),m1=metric(record,s),m2=metric(record,o),shot1=Math.round(Number(m1.shotRate)||0),shot2=Math.round(Number(m2.shotRate)||0),f1=Number(m1.fouls)||0,f2=Number(m2.fouls)||0,high1=Number(m1.maxRun)||0,high2=Number(m2.maxRun)||0,safe1=Number(record.analysisSummary?.players?.[s]?.safety?.successRate??record.analysis?.players?.[s]?.safety?.successRate),safe2=Number(record.analysisSummary?.players?.[o]?.safety?.successRate??record.analysis?.players?.[o]?.safety?.successRate),d=def(discipline(record)),date=new Date(record.endedAt||record.playedAt||record.startedAt||0),dateText=Number.isNaN(date.getTime())?"日付なし":`${date.getFullYear()}/${String(date.getMonth()+1).padStart(2,"0")}/${String(date.getDate()).padStart(2,"0")} ${String(date.getHours()).padStart(2,"0")}:${String(date.getMinutes()).padStart(2,"0")}`;const points=[shot1||shot2?`シュート成功率で相手を${Math.abs(shot1-shot2)}ポイント${shot1>=shot2?"上回った":"下回った"}`:"シュート成功率の記録を蓄積中",f1<=f2?(String(f2-f1).endsWith("0")?"ファール数は相手と同じ":`ファールを相手より${f2-f1}回少なく抑えた`):`ファールが相手より${f1-f2}回多かった`,high1>=high2?(String(high1-high2).endsWith("0")?"ハイランは相手と同じ":`ハイランで相手を${high1-high2}上回った`):(String(high2-high1).endsWith("0")?"ハイランは相手と同じ":`ハイランでは相手が${high2-high1}上回った`)];viewNode("match").innerHTML=`<section class="analysis-v2-card analysis-v2-match-head"><div class="analysis-v2-match-meta">${dateText}・${d.label}</div><div class="analysis-v2-score"><div class="analysis-v2-score-player"><span class="analysis-v2-avatar">${avatar(p)}</span><strong>${esc(recordPlayer(record,s).name||p.name)}</strong></div><div class="analysis-v2-score-center"><img src="${d.asset}" alt=""><b>${Number(recordPlayer(record,s).score)||0} - ${Number(recordPlayer(record,o).score)||0}</b><span class="analysis-v2-win">勝ち</span></div><div class="analysis-v2-score-player"><span class="analysis-v2-avatar">${avatar(opp)}</span><strong>${esc(recordPlayer(record,o).name||opp.name)}</strong></div></div></section><section class="analysis-v2-card analysis-v2-points"><h2>勝敗を分けたポイント</h2>${points.map((text,i)=>`<div class="analysis-v2-point"><i>${i+1}</i><span>${esc(text)}</span></div>`).join("")}</section><section class="analysis-v2-card analysis-v2-trend"><h2>スコア推移</h2>${progressSvg(record)}</section><section class="analysis-v2-card analysis-v2-comparison"><h2>サマリー比較</h2><div class="analysis-v2-compare-head"><span></span><span>${esc(p.name||"Player 1")}</span><span>${esc(opp.name||"Player 2")}</span></div>${[["シュート成功率",shot1+"%",shot2+"%",shot1>=shot2],["ハイラン",high1,high2,high1>=high2],["ファール数",f1,f2,f1<=f2],["セーフティ成功率",Number.isFinite(safe1)?Math.round(safe1)+"%":"—",Number.isFinite(safe2)?Math.round(safe2)+"%":"—",safe1>=safe2]].map(row=>`<div class="analysis-v2-compare-row"><span>${row[0]}</span><b class="${row[3]?"better":""}">${row[1]}</b><b class="${row[3]?"":"better"}">${row[2]}</b></div>`).join("")}</section><section class="analysis-v2-card analysis-v2-flow"><h2>試合の流れ</h2><div class="analysis-v2-flow-grid"><div><span>序盤</span><strong>互角</strong><b>—</b></div><div><span>中盤</span><strong class="positive">変化</strong><b>—</b></div><div><span>終盤</span><strong class="positive">安定</strong><b>—</b></div></div></section><section class="analysis-v2-card analysis-v2-advice"><h2>振り返り</h2><div class="analysis-v2-advice-row"><strong>良かった点</strong><span>${f1<=f2?"ファールを抑えた試合運び":"得点機会を勝利につなげた"}</span><b>›</b></div><div class="analysis-v2-advice-row"><strong>次回試すこと</strong><span>${shot1<70?"序盤のシュート選択を丁寧に":"現在の成功率を維持する"}</span><b>›</b></div></section>`;}
+  // P2-5a-1: the former DOM-observer "enforce" (data sufficiency guard) is now an explicit step of the player render. Same behaviour, same condition
+  // (inert while analysis-final-rc.js has published window.CueScoreAnalyticsFinalRC).
+  function applyPriorGamesGuardV1(){
+    if(window.CueScoreAnalyticsFinalRC)return;
+    const playerView=viewNode("player");
+    if(!playerView)return;
+    const priorGames=playerView.querySelector(".analysis-v2-target")?.dataset.priorGames;
+    if(priorGames===undefined||!/^\d+$/.test(priorGames)||Number(priorGames)>=3)return;
+    if(playerView.querySelector(".analysis-v2-status")?.dataset.analysisState==="accumulating"&&playerView.querySelector(".analysis-v2-change")?.dataset.analysisState==="insufficient-prior")return;
+    const status=playerView.querySelector(".analysis-v2-status");
+    if(status){status.textContent="蓄積中";status.dataset.analysisState="accumulating";}
+    const change=playerView.querySelector(".analysis-v2-change");
+    if(change){change.innerHTML="前期間の試合数が少ないため、変化はまだ評価しません";change.dataset.analysisState="insufficient-prior";}
+    playerView.querySelectorAll(".analysis-v2-delta em,.analysis-v2-metric em").forEach(node=>node.textContent="—");
+    const goal=playerView.querySelector(".analysis-v2-advice-row:last-child span");
+    if(goal)goal.textContent="比較に必要な試合データを蓄積しましょう";
+  }
   function renderPlayerWithDisciplineMetrics(){
     renderPlayer();
     const p=players().find(x=>String(x.id)===String(selectedPlayerId))||primary();
@@ -29407,6 +29433,7 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
       const winRateCard=evidenceGrid.firstElementChild?.outerHTML||"";
       evidenceGrid.innerHTML=winRateCard+analysisMetricCards(metrics,"analysis-v2-metric");
     }
+    applyPriorGamesGuardV1();
   }
   function renderMatchForViewerV5(){
     const record=allRecords().find(r=>String(r.id)===String(selectedRecordId))||allRecords()[0];
@@ -29428,43 +29455,6 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
   window.openMatchAnalysisForPlayerV5=(recordId,playerId,disciplineId="")=>{selectedRecordId=String(recordId||"");selectedViewerPlayerId=String(playerId||"");selectedPlayerId=selectedViewerPlayerId;selectedOriginDiscipline=String(disciplineId||discipline(allRecords().find(record=>String(record.id)===selectedRecordId))||"");analysisOrigin="player-history";document.querySelector(".player-history-overlay-v2")?.classList.add("hidden");document.getElementById("openRankingsBtn")?.click();setTimeout(openMatch,0)};
   window.renderAnalysisHomeV2=openHome;window.renderPlayerAnalysisV2=openPlayer;window.renderMatchAnalysisV2=openMatch;
   openHome();
-})();
-</script>
-<script>
-// Analysis v2.0 data sufficiency guard: never infer a trend from fewer than three prior matches.
-(() => {
-  const root=document.querySelector(".analysis-v2");
-  if(!root)return;
-  const enforce=()=>{
-    if(window.CueScoreAnalyticsFinalRC)return;
-    const playerView=root.querySelector('[data-analysis-view="player"]');
-    if(!playerView||playerView.hidden)return;
-    const priorGames=playerView.querySelector(".analysis-v2-target")?.dataset.priorGames;
-    if(priorGames===undefined||!/^\d+$/.test(priorGames)||Number(priorGames)>=3)return;
-    if(playerView.querySelector(".analysis-v2-status")?.dataset.analysisState==="accumulating"&&playerView.querySelector(".analysis-v2-change")?.dataset.analysisState==="insufficient-prior")return;
-    const status=playerView.querySelector(".analysis-v2-status");
-    if(status){status.textContent="蓄積中";status.dataset.analysisState="accumulating";}
-    const change=playerView.querySelector(".analysis-v2-change");
-    if(change){change.innerHTML="前期間の試合数が少ないため、変化はまだ評価しません";change.dataset.analysisState="insufficient-prior";}
-    playerView.querySelectorAll(".analysis-v2-delta em,.analysis-v2-metric em").forEach(node=>node.textContent="—");
-    const goal=playerView.querySelector(".analysis-v2-advice-row:last-child span");
-    if(goal)goal.textContent="比較に必要な試合データを蓄積しましょう";
-  };
-  new MutationObserver(enforce).observe(root,{childList:true,subtree:true});
-  root.addEventListener("click",()=>setTimeout(enforce,0));
-  root.addEventListener("change",()=>setTimeout(enforce,0));
-})();
-</script>
-<script>
-// Analysis v2.0 wording guard for equal single-match metrics.
-(() => {
-  const root=document.querySelector(".analysis-v2");
-  if(!root)return;
-  const correct=()=>root.querySelectorAll('.analysis-v2-point span').forEach(node=>{
-    if(node.textContent.includes("0回少なく抑えた"))node.textContent="ファール数は相手と同じ";
-    if(node.textContent.includes("0上回った"))node.textContent="ハイランは相手と同じ";
-  });
-  new MutationObserver(correct).observe(root,{childList:true,subtree:true});
 })();
 </script>
   <script src="./analysis-final-rc.js"></script>

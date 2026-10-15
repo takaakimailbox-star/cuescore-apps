@@ -16,14 +16,18 @@ const M = [
   ["allow-listed observer (shell reconcile) gains a text write", "navigation-shell-phase1.js", "reconcileQueued=true;", 'reconcileQueued=true;document.title="x";document.getElementById("playerLibraryTitle").textContent="x";'],
   ["allow-listed observer (modal sync) gains innerHTML write", "index.html", "const scheduleModalSyncV148 = () => {", 'const scheduleModalSyncV148 = () => { document.body.innerHTML += "";'],
   ["new observer reaches cueT", "navigation-shell-phase1.js", "reconcileQueued=true;", 'reconcileQueued=true;window.cueT("x");'],
-  ["a text-writing observer is made structural (OBS-17 write removed)", "navigation-phase2-6.js", "rootTitle.textContent=window.cueT(\"player.title\");", ""],
-  ["a display-text comparison is added (AC-S2 ratchet)", "index.html", 'if(node.textContent.includes("0回少なく抑えた"))', 'if(node.textContent.includes("1回少なく抑えた"))node.textContent="x";if(node.textContent.includes("0回少なく抑えた"))'],
-  /* OBS-15 correct */
-  ["OBS-15 predicate shifted (fouls)", "index.html", 'node.textContent.includes("0回少なく抑えた")', 'node.textContent.includes("1回少なく抑えた")'],
-  ["OBS-15 quirk 'fixed' (endsWith instead of includes)", "index.html", 'node.textContent.includes("0上回った")', 'node.textContent.endsWith("を0上回った")'],
-  ["OBS-15 output wording changed (fouls)", "index.html", 'node.textContent="ファール数は相手と同じ"', 'node.textContent="ファール数は同じ"'],
-  ["OBS-15 output wording changed (high run)", "index.html", 'node.textContent="ハイランは相手と同じ"', 'node.textContent="ハイランは同じ"'],
-  ["OBS-15 observer options widened", "index.html", "new MutationObserver(correct).observe(root,{childList:true,subtree:true});", "new MutationObserver(correct).observe(root,{childList:true,subtree:true,characterData:true});"],
+  ["OBS-17 observer reintroduces a title text write (cueT)", "navigation-phase2-6.js", "if(register)register.hidden=true;", 'if(register)register.hidden=true;document.getElementById("playerLibraryTitle").textContent=window.cueT("player.title");'],
+  ["OBS-10 observer reintroduces an editor text write", "index.html", "    playerOverlay.classList.add(\"player-management-formal-v1\");", "    playerOverlay.classList.add(\"player-management-formal-v1\");document.getElementById(\"playerEditorModalTitleV1\").textContent=\"x\";"],
+  ["a display-text comparison is added (AC-S2 ratchet)", "index.html", "if(!playerView)return;\n    const priorGames", "if(!playerView||playerView.textContent.includes(\"蓄積\"))return;\n    const priorGames"],
+  /* OBS-15 generated wording (P2-5a-1) */
+  ["OBS-15 generated predicate shifted (fouls)", "index.html", 'String(f2-f1).endsWith("0")', 'String(f2-f1).endsWith("1")'],
+  ["OBS-15 quirk 'fixed' (numeric zero test instead of last digit)", "index.html", 'String(f2-f1).endsWith("0")', '(f2-f1)===0'],
+  ["OBS-15 high-run opponent branch loses the quirk", "index.html", 'String(high2-high1).endsWith("0")', 'high2===high1'],
+  ["OBS-15 high-run player branch loses the quirk", "index.html", 'String(high1-high2).endsWith("0")', 'high1===high2'],
+  ["OBS-15 output wording changed (fouls)", "index.html", '"ファール数は相手と同じ":`ファールを相手より', '"ファール数は同じ":`ファールを相手より'],
+  ["OBS-15 output wording changed (high run)", "index.html", '"ハイランは相手と同じ":`ハイランで相手を', '"ハイランは同じ":`ハイランで相手を'],
+  ["wording guard observer re-introduced", "index.html", "function applyPriorGamesGuardV1(){", "new MutationObserver(correct250).observe(document.body,{childList:true});function applyPriorGamesGuardV1(){"],
+  ["OBS-14 explicit step no longer called", "index.html", "    applyPriorGamesGuardV1();\n  }\n", "  }\n"],
   /* OBS-14 enforce */
   ["OBS-14 FinalRC guard removed", "index.html", "    if(window.CueScoreAnalyticsFinalRC)return;\n    const playerView", "    const playerView"],
   ["OBS-14 threshold changed", "index.html", "Number(priorGames)>=3)return;\n    if(playerView.querySelector", "Number(priorGames)>=2)return;\n    if(playerView.querySelector"],
@@ -46,6 +50,11 @@ const M = [
   ["OBS-23 date regex widened (3 digits)", "ui-revision-v12.js", "\\d{4}\\/(\\d{2})\\/(\\d{2})", "\\d{4}\\/(\\d{3})\\/(\\d{2})"],
   ["OBS-23 date output reordered", "ui-revision-v12.js", "date.textContent=`${Number(match[1])}/${Number(match[2])}${match[3]} ${match[4]}`", "date.textContent=`${Number(match[2])}/${Number(match[1])}${match[3]} ${match[4]}`"],
   ["OBS-23 date weekday group removed", "ui-revision-v12.js", "(（.）)", "(（..）)"],
+  /* P2-5a-1 formalization audit */
+  ["guard gets a second call site", "index.html", 'function openHome(){renderHome();', 'function openHome(){applyPriorGamesGuardV1();renderHome();'],
+  ["player view becomes visible without a render", "index.html", 'function openMatch(){renderMatchForViewerV5();setView("match")}', 'function openMatch(){renderMatchForViewerV5();setView("match");setView("player")}'],
+  ["wording generator reads rendered text", "index.html", 'const points=[shot1||shot2?', 'const points=[(viewNode("match").textContent,0)||shot1||shot2?'],
+  ["wording generator becomes stateful", "index.html", 'const points=[shot1||shot2?', 'const points=[(window.__pts=(window.__pts||0)+1)&&shot1||shot2?'],
   /* existing source-pin protection stays */
   ["existing test weakened (comment added)", "tests/analysis-v2.test.mjs", "import", "// weakened\nimport"]
 ];
@@ -55,7 +64,7 @@ for (const [name, file, from, to] of M) {
   const n = original.split(from).length - 1;
   if (n < 1) { results.push({ name, file, applied: false, note: `pattern not found (${n})` }); continue; }
   fs.writeFileSync(target, original.replace(from, to));
-  const files = fs.readdirSync(path.join(TMP, "tests")).filter(f => /^p2-(0-l0-static|5-0-.*)\.test\.mjs$/.test(f)).map(f => "tests/" + f);
+  const files = fs.readdirSync(path.join(TMP, "tests")).filter(f => /^p2-(0-l0-static|5-0-.*|5-1-.*)\.test\.mjs$/.test(f)).map(f => "tests/" + f);
   const r = spawnSync(process.execPath, ["--test", "--test-skip-pattern=L0 anchor", ...files], { cwd: TMP, encoding: "utf8", env: { ...process.env, NODE_TEST_CONTEXT: undefined } });
   const failed = [...r.stdout.matchAll(/^✖ (\[[^\n]*?)(?: \(\d)/gm)].map(m => m[1].slice(0, 90)).filter((v, i, a) => a.indexOf(v) === i);
   results.push({ name, file, applied: true, killed: r.status !== 0, failingTests: failed.slice(0, 3), failingCount: failed.length });

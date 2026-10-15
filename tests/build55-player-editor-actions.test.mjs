@@ -8,7 +8,8 @@ test("player registration and editing keep two persistent footer actions",()=>{
   assert.match(html,/\.player-editor-actions-v1\{display:grid;grid-template-columns:minmax\(0,1fr\) minmax\(0,1fr\)/);
   assert.match(html,/\.player-editor-cancel-v1\{display:block;/);
   assert.doesNotMatch(html,/\.player-editor-cancel-v1\{display:none!important\}/);
-  assert.match(html,/existingSave\.textContent=editing\?"変更":"登録"/);
+  assert.match(html,/saveButton\.textContent = player \? "変更" : "登録"/); // P2-5a-1: was existingSave.textContent=editing?... inside the MutationObserver callback
+  assert.doesNotMatch(html,/existingSave\.textContent=/);
 });
 
 test("player editor owns the full iOS visual viewport and hides the app tab bar",()=>{

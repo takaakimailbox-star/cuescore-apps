@@ -125,8 +125,8 @@
   const reconcilePlayerRoot=()=>{
     const browse=document.body.dataset.cuePlayerContext==="browse",overlay=document.getElementById("playerLibraryOverlay");
     if(!browse||!overlay||overlay.classList.contains("hidden"))return;
-    const add=document.getElementById("playerLibraryAddBtn"),register=document.getElementById("playerLibraryRegisterBtnV2"),rootTitle=document.getElementById("playerLibraryTitle");
-    add?.style.setProperty("display","grid","important");if(register)register.hidden=true;if(rootTitle)rootTitle.textContent=window.cueT("player.title");
+    const add=document.getElementById("playerLibraryAddBtn"),register=document.getElementById("playerLibraryRegisterBtnV2");
+    add?.style.setProperty("display","grid","important");if(register)register.hidden=true;
   };
   let playerReconcileQueued=false;
   const schedulePlayerReconcile=()=>{

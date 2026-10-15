@@ -124,7 +124,7 @@ await scenario("G1-wording-guard-inject-matrix", "inject", `const root=document.
  const host=document.createElement("div");host.dataset.p250="matrix";host.innerHTML=texts.map(t=>'<div class="analysis-v2-point"><i>1</i><span>'+t+'</span></div>').join("");view.appendChild(host);${W(700)}
  const first=[...host.querySelectorAll("span")].map(s=>s.textContent);
  const s=document.createElement("i");host.appendChild(s);s.remove();${W(500)}const second=[...host.querySelectorAll("span")].map(s=>s.textContent);host.remove();
- return {inputs:texts,first,stable:JSON.stringify(first)===JSON.stringify(second)}`);
+ return {inputs:texts,first,stable:JSON.stringify(first)===JSON.stringify(second),unchanged:JSON.stringify(first)===JSON.stringify(texts)}`);
 await endGroup();
 if (MODE === "pro") {
   await boot();

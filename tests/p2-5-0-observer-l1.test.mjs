@@ -14,79 +14,38 @@ function inlineScript(marker) {
 }
 class FakeNode { constructor(text = "") { this._t = text; this.writes = 0; this.dataset = {}; } get textContent() { return this._t; } set textContent(v) { this.writes++; this._t = String(v); } }
 
-/* ---------- OBS-15 / P2L-119 'correct' wording guard ---------- */
-function loadCorrect(texts) {
-  const nodes = texts.map(t => new FakeNode(t));
-  const root = { querySelectorAll: sel => { assert.equal(sel, ".analysis-v2-point span"); return nodes; }, addEventListener() {} };
-  let callback = null, observed = null;
-  const ctx = vm.createContext({
-    document: { querySelector: s => (s === ".analysis-v2" ? root : null) },
-    MutationObserver: class { constructor(f) { callback = f; } observe(target, opts) { observed = { target, opts: JSON.parse(JSON.stringify(opts)) }; } },
-    window: {}
-  });
-  vm.runInContext(inlineScript("Analysis v2.0 wording guard for equal single-match metrics"), ctx);
-  return { nodes, fire: () => callback(), observed: () => observed, root };
-}
+/* ---------- OBS-15 / P2L-119 (P2-5a-1): the wording is generated at the source with the former predicate ---------- */
+/* Reference = the former 'correct' observer, kept in this test only: text.includes("0回少なく抑えた") / includes("0上回った") applied to the
+ * strings renderMatch used to emit. The CURRENT renderMatch expression must give exactly the same final text for every input. */
+const oldFoul = n => `ファールを相手より${n}回少なく抑えた`, oldHighA = n => `ハイランで相手を${n}上回った`, oldHighB = n => `ハイランでは相手が${n}上回った`;
+const refCorrect = text => { if (text.includes("0回少なく抑えた")) text = "ファール数は相手と同じ"; if (text.includes("0上回った")) text = "ハイランは相手と同じ"; return text; };
+const pointsSrc = (() => { const at = html.indexOf("const points=["); return html.slice(at + "const points=".length, html.indexOf(";viewNode(\"match\")", at)); })();
+const points = vm.runInNewContext(`(function(shot1,shot2,f1,f2,high1,high2){return ${pointsSrc}})`);
 const SAME_FOUL = "ファール数は相手と同じ", SAME_HIGH = "ハイランは相手と同じ";
-/* The current predicate is a SUBSTRING test, so any difference whose digits end in 0 is rewritten (10, 20, 100 ...). Quirk is preserved in P2 (D-R3). */
-const MATRIX = [
-  ["ファールを相手より0回少なく抑えた", SAME_FOUL, "intended: equal fouls"],
-  ["ファールを相手より1回少なく抑えた", "ファールを相手より1回少なく抑えた", "kept"],
-  ["ファールを相手より5回少なく抑えた", "ファールを相手より5回少なく抑えた", "kept"],
-  ["ファールを相手より9回少なく抑えた", "ファールを相手より9回少なく抑えた", "kept"],
-  ["ファールを相手より10回少なく抑えた", SAME_FOUL, "QUIRK: 10 fewer fouls shown as 'same'"],
-  ["ファールを相手より11回少なく抑えた", "ファールを相手より11回少なく抑えた", "kept"],
-  ["ファールを相手より20回少なく抑えた", SAME_FOUL, "QUIRK"],
-  ["ファールを相手より100回少なく抑えた", SAME_FOUL, "QUIRK"],
-  ["ファールが相手より10回多かった", "ファールが相手より10回多かった", "other branch: not matched"],
-  ["ハイランで相手を0上回った", SAME_HIGH, "intended: equal high run"],
-  ["ハイランで相手を1上回った", "ハイランで相手を1上回った", "kept"],
-  ["ハイランで相手を9上回った", "ハイランで相手を9上回った", "kept"],
-  ["ハイランで相手を10上回った", SAME_HIGH, "QUIRK: player 10 ahead shown as 'same'"],
-  ["ハイランで相手を20上回った", SAME_HIGH, "QUIRK"],
-  ["ハイランで相手を100上回った", SAME_HIGH, "QUIRK"],
-  ["ハイランでは相手が0上回った", SAME_HIGH, "unreachable in practice (0 goes to the first branch) but the predicate matches"],
-  ["ハイランでは相手が3上回った", "ハイランでは相手が3上回った", "kept"],
-  ["ハイランでは相手が10上回った", SAME_HIGH, "QUIRK (worst): opponent 10 ahead shown as 'same'"],
-  ["ハイランでは相手が20上回った", SAME_HIGH, "QUIRK (worst)"],
-  ["シュート成功率で相手を0ポイント上回った", "シュート成功率で相手を0ポイント上回った", "not matched: 'ポイント' sits between 0 and 上回った"],
-  ["シュート成功率で相手を10ポイント上回った", "シュート成功率で相手を10ポイント上回った", "not matched"],
-  ["", "", "empty"]
-];
-test("[P2L-119 / OBS-15 / D-R3] 'correct' difference matrix: current substring behaviour (incl. the 10/20/100 quirk) is pinned", () => {
-  const { nodes, fire } = loadCorrect(MATRIX.map(r => r[0]));
-  fire();
-  MATRIX.forEach(([input, expected, note], i) => assert.equal(nodes[i].textContent, expected, `${input}  (${note})`));
+test("[P2L-119 / OBS-15] generated wording == former observer output for fouls (f2-f1 = 0..300, incl. the 10/20/100 quirk)", () => {
+  for (let n = 0; n <= 300; n++) assert.equal(points(50, 50, 0, n, 0, 0)[1], refCorrect(oldFoul(n)), "fouls diff " + n);
+  assert.equal(points(50, 50, 0, 10, 0, 0)[1], SAME_FOUL); assert.equal(points(50, 50, 0, 20, 0, 0)[1], SAME_FOUL); assert.equal(points(50, 50, 0, 100, 0, 0)[1], SAME_FOUL);
+  assert.equal(points(50, 50, 0, 1, 0, 0)[1], oldFoul(1)); assert.equal(points(50, 50, 0, 11, 0, 0)[1], oldFoul(11));
 });
-test("[P2L-119 / OBS-15] 'correct' is idempotent: a second callback run (the observer re-fires on its own text write) changes nothing", () => {
-  const { nodes, fire } = loadCorrect(MATRIX.map(r => r[0]));
-  fire(); const after1 = nodes.map(n => n.textContent), writes1 = nodes.map(n => n.writes);
-  fire(); fire();
-  assert.deepEqual(nodes.map(n => n.textContent), after1);
-  assert.deepEqual(nodes.map(n => n.writes), writes1, "no text node may be written twice");
+test("[P2L-119 / OBS-15] generated wording == former observer output for the high run, both branches (0..300; player ahead / opponent ahead)", () => {
+  for (let n = 0; n <= 300; n++) {
+    assert.equal(points(50, 50, 0, 0, n, 0)[2], refCorrect(oldHighA(n)), "high player ahead " + n);
+    assert.equal(points(50, 50, 0, 0, 0, n)[2], n === 0 ? refCorrect(oldHighA(0)) : refCorrect(oldHighB(n)), "high opponent ahead " + n);
+  }
+  assert.equal(points(50, 50, 0, 0, 0, 10)[2], SAME_HIGH, "QUIRK preserved: opponent 10 ahead is shown as 'same'");
+  assert.equal(points(50, 50, 0, 0, 0, 3)[2], oldHighB(3));
 });
-test("[P2L-119 / OBS-15] 'correct' writes only to nodes that match (at most once each) and never touches others", () => {
-  const { nodes, fire } = loadCorrect(MATRIX.map(r => r[0]));
-  fire();
-  MATRIX.forEach(([input, expected], i) => assert.equal(nodes[i].writes, input === expected ? 0 : 1, input));
+test("[P2L-119 / OBS-15] the other lines are untouched: shot-rate line (incl. 0 ポイント), 'more fouls' branch, empty shot data", () => {
+  assert.equal(points(75, 50, 0, 0, 0, 0)[0], "シュート成功率で相手を25ポイント上回った"); assert.equal(points(50, 50, 0, 0, 0, 0)[0], "シュート成功率で相手を0ポイント上回った");
+  assert.equal(points(40, 60, 0, 0, 0, 0)[0], "シュート成功率で相手を20ポイント下回った"); assert.equal(points(0, 0, 0, 0, 0, 0)[0], "シュート成功率の記録を蓄積中");
+  assert.equal(points(50, 50, 10, 0, 0, 0)[1], "ファールが相手より10回多かった");
 });
-test("[P2L-119 / OBS-15] 'correct' observes the analysis-v2 root with childList+subtree only (no attributes, no characterData)", () => {
-  const { observed, root } = loadCorrect(["x"]);
-  assert.equal(observed().target, root);
-  assert.deepEqual(observed().opts, { childList: true, subtree: true });
-});
-test("[P2L-119 / OBS-15] the generator contract for P2-5a-1: renderMatch builds these exact strings, and the guard predicate maps them as pinned", () => {
-  const render = extractFunction(html, "renderMatch");
-  for (const piece of ["ファールを相手より${f2-f1}回少なく抑えた", "ハイランで相手を${high1-high2}上回った", "ハイランでは相手が${high2-high1}上回った", "f1<=f2?", "high1>=high2?"]) assert.ok(render.includes(piece), piece);
-  assert.equal(count(render, "回少なく抑えた"), 1);
-  assert.equal(count(render, "上回った"), 3, "shot-rate (ポイント上回った) + two high-run branches");
-});
-test("[P2L-119 / OBS-15] when absent from the DOM the guard is inert (script returns before registering)", () => {
-  const ctx = vm.createContext({ document: { querySelector: () => null }, MutationObserver: class { constructor() { throw new Error("must not register"); } } });
-  vm.runInContext(inlineScript("Analysis v2.0 wording guard for equal single-match metrics"), ctx);
+test("[P2L-119 / OBS-15] no observer-based wording guard remains and no display-text comparison replaced it", () => {
+  assert.equal(count(html, "new MutationObserver(correct)"), 0); assert.ok(!html.includes("Analysis v2.0 wording guard for equal single-match metrics"));
+  assert.equal(count(html, /textContent\.includes\(/), 0);
 });
 
-/* ---------- OBS-14 / P2L-118 'enforce' sufficiency guard ---------- */
+/* ---------- OBS-14 / P2L-118 (P2-5a-1): the sufficiency guard is an explicit render step ---------- */
 function el(extra = {}) { const n = new FakeNode(extra.text || ""); n.dataset = extra.dataset || {}; n.innerWrites = 0; Object.defineProperty(n, "innerHTML", { get() { return n._h || ""; }, set(v) { n.innerWrites++; n._h = String(v); } }); n.hidden = !!extra.hidden; return n; }
 function loadEnforce({ finalRc, prior = "1", status = "好調", change = "x" }) {
   const view = el();
@@ -98,38 +57,37 @@ function loadEnforce({ finalRc, prior = "1", status = "好調", change = "x" }) 
   const map = { ".analysis-v2-target": target, ".analysis-v2-status": st, ".analysis-v2-change": ch, ".analysis-v2-advice-row:last-child span": goal };
   view.querySelector = sel => map[sel] || null;
   view.querySelectorAll = sel => (sel === ".analysis-v2-delta em,.analysis-v2-metric em" ? [em1, em2] : []);
-  const root = { querySelector: sel => (sel === '[data-analysis-view="player"]' ? view : null), addEventListener() {} };
-  let callback = null, timers = [];
   const window_ = {}; if (finalRc) window_.CueScoreAnalyticsFinalRC = {};
-  const ctx = vm.createContext({ document: { querySelector: s => (s === ".analysis-v2" ? root : null) }, MutationObserver: class { constructor(f) { callback = f; } observe() {} }, window: window_, setTimeout: f => timers.push(f) });
-  vm.runInContext(inlineScript("Analysis v2.0 data sufficiency guard"), ctx);
-  return { view, target, st, ch, em1, em2, goal, fire: () => callback(), window_, root };
+  const ctx = vm.createContext({ viewNode: name => (name === "player" ? view : null), window: window_ });
+  vm.runInContext(extractFunction(html, "applyPriorGamesGuardV1") + ";this.f=applyPriorGamesGuardV1;", ctx);
+  return { view, target, st, ch, em1, em2, goal, fire: () => ctx.f(), window_ };
 }
 const writesOf = o => ({ status: o.st.writes, change: o.ch.innerWrites, em: o.em1.writes + o.em2.writes, goal: o.goal.writes });
-test("[P2L-118 / OBS-14] with window.CueScoreAnalyticsFinalRC present (always true in the shipped page order) enforce writes nothing", () => {
+test("[P2L-118 / OBS-14] with window.CueScoreAnalyticsFinalRC present (always true in the shipped page order) the guard writes nothing", () => {
   const o = loadEnforce({ finalRc: true, prior: "1" }); o.fire();
   assert.deepEqual(writesOf(o), { status: 0, change: 0, em: 0, goal: 0 });
 });
-test("[P2L-118 / OBS-14] LATENT branch (FinalRC missing, e.g. analysis-final-rc.js failed to load): prior<3 -> Japanese 'accumulating' texts are written", () => {
+test("[P2L-118 / OBS-14] LATENT branch (FinalRC missing, e.g. analysis-final-rc.js failed to load): prior<3 -> Japanese 'accumulating' texts are written (same as the former observer)", () => {
   const o = loadEnforce({ finalRc: false, prior: "1" }); o.fire();
   assert.equal(o.st.textContent, "蓄積中"); assert.equal(o.st.dataset.analysisState, "accumulating");
   assert.equal(o.ch.innerHTML, "前期間の試合数が少ないため、変化はまだ評価しません"); assert.equal(o.ch.dataset.analysisState, "insufficient-prior");
   assert.equal(o.em1.textContent, "—"); assert.equal(o.em2.textContent, "—");
   assert.equal(o.goal.textContent, "比較に必要な試合データを蓄積しましょう");
 });
-test("[P2L-118 / OBS-14] LATENT branch: converges (second run writes nothing), and is skipped for prior>=3, non-numeric prior, hidden view", () => {
+test("[P2L-118 / OBS-14] LATENT branch: converges (second run writes nothing), and is skipped for prior>=3, non-numeric prior, missing prior", () => {
   const o = loadEnforce({ finalRc: false, prior: "2" }); o.fire(); const w = writesOf(o); o.fire(); assert.deepEqual(writesOf(o), w, "second run must not write again");
   for (const prior of ["3", "10", "x", "", null]) { const p = loadEnforce({ finalRc: false, prior }); p.fire(); assert.deepEqual(writesOf(p), { status: 0, change: 0, em: 0, goal: 0 }, String(prior)); }
-  const h = loadEnforce({ finalRc: false, prior: "1" }); h.view.hidden = true; h.fire(); assert.deepEqual(writesOf(h), { status: 0, change: 0, em: 0, goal: 0 });
 });
 test("[P2L-118 / OBS-14] LATENT branch boundary: prior=2 writes, prior=3 does not (threshold is exactly 3)", () => {
   const two = loadEnforce({ finalRc: false, prior: "2" }); two.fire(); assert.equal(two.st.textContent, "蓄積中");
   const three = loadEnforce({ finalRc: false, prior: "3" }); three.fire(); assert.deepEqual(writesOf(three), { status: 0, change: 0, em: 0, goal: 0 });
 });
-test("[P2L-118 / OBS-14] dead-code evidence is structural: analysis-final-rc.js sets window.CueScoreAnalyticsFinalRC and its <script> tag follows the guard script in the same page", () => {
+test("[P2L-118 / OBS-14] wiring: no enforce observer; the guard runs once, at the end of every player render (select changes and opens both go through it)", () => {
+  assert.equal(count(html, "new MutationObserver(enforce)"), 0); assert.ok(!html.includes("Analysis v2.0 data sufficiency guard"));
+  const render = extractFunction(html, "renderPlayerWithDisciplineMetrics");
+  assert.ok(render.trimEnd().endsWith("applyPriorGamesGuardV1();\n  }") || /applyPriorGamesGuardV1\(\);\s*\}$/.test(render));
+  assert.equal(count(html, "applyPriorGamesGuardV1();"), 1);
   assert.ok(/window\.CueScoreAnalyticsFinalRC\s*=/.test(read("analysis-final-rc.js")));
-  const guardAt = html.indexOf("Analysis v2.0 data sufficiency guard"), tagAt = html.indexOf('<script src="./analysis-final-rc.js">');
-  assert.ok(guardAt > 0 && tagAt > guardAt, "the final-rc script is loaded after the guard registers (mutations only occur later, when FinalRC exists)");
   assert.ok(html.includes("if(window.CueScoreAnalyticsFinalRC)return;"));
 });
 

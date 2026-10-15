@@ -10,40 +10,54 @@ import { observerScan, TEXT_WRITE_EXT } from "./helpers/p2-ac-s3.mjs";
 
 const known = JSON.parse(read("tests/fixtures/p2/observer-ac-s3-known.json"));
 const scan = observerScan();
+const live = known.filter(k => k.class !== "REMOVED"); // P2-5a-1: rows of removed observers are kept for history
 const byKey = new Map(scan.map(o => [o.key, o]));
 const ALLOWED_CLASSES = ["STRUCTURE", "STATE", "DIAGNOSTIC"];
 
 /* ---------- ratchet constants (a P2-5 gate lowers exactly its own and records it in Evidence) ---------- */
 const RATCHET = Object.freeze({
-  registrations: 23,
-  textRewrite: 11,        // KNOWN rewriters: OBS-01,02,03,10,14,15,16,17,19,22,23
+  registrations: 21,      // P2-5a-1: 23 -> 21 (OBS-14 enforce, OBS-15 correct removed)
+  textRewrite: 7,         // KNOWN rewriters: OBS-01,02,03,16,19,22,23   (P2-5a-1: 11 -> 7; OBS-10/17 no longer write text)
   textMirrorPending: 1,   // OBS-09 (D-R2): NOT allow-listed until reachability + rewrite behaviour are decided by the Commander
-  allowListed: 11         // structure/state/diagnostic observers with NO text-writing callee
+  allowListed: 13,        // structure/state/diagnostic observers with NO text-writing callee (11 + OBS-10 + OBS-17)
+  removed: 2
 });
 
-test("[AC-S3 L0] fixture covers exactly the 23 live registrations, one row each, unique ids", () => {
+test("[AC-S3 L0] fixture covers exactly the 21 live registrations (+2 removed rows kept for history), one row each, unique ids", () => {
   assert.equal(scan.length, RATCHET.registrations);
-  assert.equal(known.length, RATCHET.registrations);
-  assert.deepEqual(known.map(k => k.key).sort(), scan.map(s => s.key).sort());
+  assert.equal(live.length, RATCHET.registrations);
+  assert.equal(known.length, RATCHET.registrations + RATCHET.removed);
+  assert.deepEqual(live.map(k => k.key).sort(), scan.map(s => s.key).sort());
   assert.equal(new Set(known.map(k => k.obs_id)).size, known.length);
   assert.equal(new Set(known.map(k => k.p2_ledger)).size, known.length);
   assert.equal(observerInventory().length, RATCHET.registrations);
 });
 
-test("[AC-S3 L0] class counts are pinned: 11 text-rewrite + 1 mirror-pending (unresolved 12) + 11 allow-list candidates", () => {
+test("[AC-S3 L0] class counts are pinned: 7 text-rewrite + 1 mirror-pending (unresolved 8; was 12) + 13 allow-list candidates + 2 removed", () => {
   const c = {}; for (const k of known) c[k.class] = (c[k.class] || 0) + 1;
   assert.equal(c.TEXT_REWRITE, RATCHET.textRewrite);
   assert.equal(c.TEXT_MIRROR_PENDING, RATCHET.textMirrorPending);
   assert.equal(ALLOWED_CLASSES.reduce((a, k) => a + (c[k] || 0), 0), RATCHET.allowListed);
-  assert.equal(known.filter(k => k.class === "TEXT_REWRITE" || k.class === "TEXT_MIRROR_PENDING").length, 12, "unresolved AC-S3 observers (must reach 0, or be allow-listed with Commander approval, before AC-S3 PASS)");
+  assert.equal(c.REMOVED, RATCHET.removed);
+  assert.equal(known.filter(k => k.class === "TEXT_REWRITE" || k.class === "TEXT_MIRROR_PENDING").length, 8, "unresolved AC-S3 observers (must reach 0, or be allow-listed with Commander approval, before AC-S3 PASS)");
 });
 
-test("[AC-S3 L0] the known TEXT-REWRITE list is exactly OBS-01,02,03,10,14,15,16,17,19,22,23", () => {
-  assert.deepEqual(known.filter(k => k.class === "TEXT_REWRITE").map(k => k.obs_id), ["OBS-01", "OBS-02", "OBS-03", "OBS-10", "OBS-14", "OBS-15", "OBS-16", "OBS-17", "OBS-19", "OBS-22", "OBS-23"]);
+test("[AC-S3 L0] the known TEXT-REWRITE list is exactly OBS-01,02,03,16,19,22,23 (P2-5a-1 removed 14,15 and made 10,17 text-free)", () => {
+  assert.deepEqual(known.filter(k => k.class === "TEXT_REWRITE").map(k => k.obs_id), ["OBS-01", "OBS-02", "OBS-03", "OBS-16", "OBS-19", "OBS-22", "OBS-23"]);
+  assert.deepEqual(known.filter(k => k.class === "REMOVED").map(k => k.obs_id), ["OBS-14", "OBS-15"]);
   assert.deepEqual(known.filter(k => k.class === "TEXT_MIRROR_PENDING").map(k => k.obs_id), ["OBS-09"]);
 });
 
-for (const k of known) {
+for (const k of known.filter(k => k.class === "REMOVED")) {
+  test(`[${k.obs_id}] AC-S3 L0 ${k.key}: removed in ${k.removed_in}; no registration remains and the replacement is present`, () => {
+    assert.ok(!byKey.has(k.key) || k.key === "index.html#10" || k.key === "index.html#11", "registration count check is below");
+    const html = read("index.html");
+    if (k.obs_id === "OBS-14") { assert.ok(!html.includes("new MutationObserver(enforce)")); assert.ok(html.includes("function applyPriorGamesGuardV1(){")); }
+    else { assert.ok(!html.includes("new MutationObserver(correct)")); assert.ok(html.includes('String(f2-f1).endsWith("0")?"ファール数は相手と同じ"')); assert.ok(html.includes('String(high1-high2).endsWith("0")?"ハイランは相手と同じ"')); assert.ok(html.includes('String(high2-high1).endsWith("0")?"ハイランは相手と同じ"')); }
+    assert.equal(scan.filter(s => s.file === "index.html").length, 10, "index.html keeps exactly 10 registrations");
+  });
+}
+for (const k of live) {
   test(`[${k.obs_id}] AC-S3 L0 ${k.key}: text-writing callees match the pinned class (${k.class})`, () => {
     const s = byKey.get(k.key);
     assert.ok(s, "registration disappeared or moved to another file");
@@ -67,8 +81,8 @@ test("[AC-S3 L0] MutationObserver is referenced only by the 23 audited `new Muta
   assert.equal(regs, RATCHET.registrations);
 });
 
-test("[AC-S3 L0] no new post-hoc translation observer: only OBS-17 reaches cueT from an observer callback", () => {
-  assert.deepEqual(scan.filter(s => s.usesCueT).map(s => s.key), ["navigation-phase2-6.js#0"]);
+test("[AC-S3 L0] no post-hoc translation observer: NO observer callback reaches cueT any more (P2-5a-1: OBS-17 was the last)", () => {
+  assert.deepEqual(scan.filter(s => s.usesCueT).map(s => s.key), []);
 });
 
 test("[AC-S3 L0] the text-write detector itself recognises every write style it must (guards against weakening the scanner)", () => {
@@ -76,23 +90,24 @@ test("[AC-S3 L0] the text-write detector itself recognises every write style it 
   for (const s of ["a.className=x", "a.classList.add('x')", "a.setAttribute('data-x','1')", "a.hidden=true", "a.textContent==='x'", "a.dataset.k=v", "a.setAttribute('role','dialog')", "a.innerHTML==='x'", "if(a.textContent!==b)c()"]) assert.ok(!TEXT_WRITE_EXT.test(s), s);
 });
 
-test("[AC-S3 L0 / P2L-119 AC-S2 residual] exactly 2 display-text comparisons remain in the wording guard (OBS-15) and nowhere else in the index.html guard family", () => {
+test("[AC-S3 L0 / P2L-119 AC-S2] no display-text comparison remains (P2-5a-1: 2 -> 0); the wording is generated with a numeric-string predicate", () => {
   const html = read("index.html");
-  assert.equal(count(html, 'node.textContent.includes("0回少なく抑えた")'), 1);
-  assert.equal(count(html, 'node.textContent.includes("0上回った")'), 1);
-  assert.equal(count(html, /textContent\.includes\(\s*["'`]/), 2, "no further display-text includes() comparisons may appear (AC-S2 ratchet)");
+  assert.equal(count(html, /textContent\.includes\(\s*["'`]/), 0);
+  assert.equal(count(html, '0回少なく抑えた")'), 0);
+  assert.equal(count(html, "String(f2-f1).endsWith(\"0\")"), 1);
+  assert.equal(count(html, "String(high1-high2).endsWith(\"0\")") + count(html, "String(high2-high1).endsWith(\"0\")"), 2);
 });
 
 test("[AC-S3 L0] allow-list integrity: allow-listed observers are exactly the structure/state/diagnostic set and contain no Japanese literal in the callback itself", () => {
   const allowed = known.filter(k => ALLOWED_CLASSES.includes(k.class)).map(k => k.obs_id);
-  assert.deepEqual(allowed, ["OBS-04", "OBS-05", "OBS-06", "OBS-07", "OBS-08", "OBS-11", "OBS-12", "OBS-13", "OBS-18", "OBS-20", "OBS-21"]);
+  assert.deepEqual(allowed, ["OBS-04", "OBS-05", "OBS-06", "OBS-07", "OBS-08", "OBS-10", "OBS-11", "OBS-12", "OBS-13", "OBS-17", "OBS-18", "OBS-20", "OBS-21"]);
   for (const k of known.filter(k => ALLOWED_CLASSES.includes(k.class))) assert.deepEqual(byKey.get(k.key).jpFunctions, [], `${k.obs_id} reaches a function with a Japanese literal`);
 });
 
 test("[AC-S3 L0] reconciliation with the P2-0 classification fixture (observer-classification.json, left untouched): exactly two reclassifications, both evidenced", () => {
   const old = JSON.parse(read("tests/fixtures/p2/observer-classification.json"));
   const oldRole = Object.fromEntries(old.map(o => [o.id, o.role]));
-  const diffs = known.filter(k => {
+  const diffs = live.filter(k => {
     const was = oldRole[k.p2_ledger];
     const now = ALLOWED_CLASSES.includes(k.class) ? "allowed" : "rewrite";
     return was !== now;

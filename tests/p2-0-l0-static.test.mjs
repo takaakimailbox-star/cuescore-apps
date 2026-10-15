@@ -23,11 +23,11 @@ const classification = JSON.parse(read("tests/fixtures/p2/observer-classificatio
 const inventory = observerInventory();
 const byKey = new Map(inventory.map(o => [o.file + "#" + o.k, o]));
 
-test("[P2L-105..127] L0 MutationObserver registrations: exactly 23 in 9 files, each mapped to one ledger row (ratchet; P2-5 lowers rewrites)", () => {
-  assert.equal(inventory.length, 23);
-  assert.equal(classification.length, 23);
+test("[P2L-105..127] L0 MutationObserver registrations: exactly 21 in 9 files (P2-5a-1: 23 -> 21), each mapped to one ledger row (ratchet; P2-5 lowers rewrites)", () => {
+  assert.equal(inventory.length, 21);
+  assert.equal(classification.length, 21);
   assert.deepEqual(Object.fromEntries(OBSERVER_FILES.map(f => [f, inventory.filter(o => o.file === f).length])), {
-    "analysis-build4.js": 1, "analysis-final-rc.js": 1, "final-ui-build18.js": 1, "index.html": 12, "monetization-v1.js": 1,
+    "analysis-build4.js": 1, "analysis-final-rc.js": 1, "final-ui-build18.js": 1, "index.html": 10, "monetization-v1.js": 1,
     "navigation-phase2-6.js": 1, "navigation-shell-phase1.js": 1, "player-detail-build6.js": 1, "ui-revision-v12.js": 4
   });
   for (const c of classification) assert.ok(byKey.has(c.file + "#" + c.k), c.id);
@@ -39,7 +39,7 @@ test("[P2L-105..127] L0 MutationObserver registrations: exactly 23 in 9 files, e
 
 test("[P2L-105..127] L0 MutationObserver roles are pinned: 12 rewrite / 11 allowed; 0 display-text readers after P2-4 (AC-S3 ratchet)", () => {
   const roles = {}; for (const c of classification) roles[c.role] = (roles[c.role] || 0) + 1;
-  assert.deepEqual(roles, { rewrite: 12, allowed: 11 }); // P2-4: the display-text reader (reviseDetail, P2L-124) now reads a data attribute -> structural
+  assert.deepEqual(roles, { rewrite: 8, allowed: 13 }); // P2-5a-1: OBS-14/15 removed, OBS-10/17 no longer write text // P2-4: the display-text reader (reviseDetail, P2L-124) now reads a data attribute -> structural
 });
 
 for (const c of classification) {
@@ -55,7 +55,7 @@ for (const c of classification) {
       // only observable at runtime — their activity is measured by the L2 probe (Observer_Runtime_Evidence), not asserted here.
       const direct = o.directTextWrite || o.jpLiteral || o.cueT;
       assert.equal(typeof direct, "boolean");
-      if (["P2L-114", "P2L-118", "P2L-119", "P2L-123"].includes(c.id)) assert.equal(direct, true, c.id + " writes text directly");
+      if (["P2L-123"].includes(c.id)) assert.equal(direct, true, c.id + " writes text directly");
     } else {
       assert.equal(c.id, "P2L-124"); assert.equal(o.jpLiteral, true);
     }

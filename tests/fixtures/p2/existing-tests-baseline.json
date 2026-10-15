@@ -134,9 +134,10 @@
    "skips": 0
   },
   "build55-player-editor-actions.test.mjs": {
-   "sha256": "081bf8ba832e265f4f75abdfd160aefd04488c49ac60ded3867f6f5b9c723f0d",
+   "sha256": "6f6876075f4f62eef1fc7fe0ef4874ecda694cdf6e10affc622edfac98aec73c",
    "tests": 3,
-   "skips": 0
+   "skips": 0,
+   "updated_in": "P2-5a-1 (old->new assertion map in Evidence)"
   },
   "build56-history-name-width.test.mjs": {
    "sha256": "0b3fe1bc16c0f092f9a94479c8438f313b75ea0efba2791858222ea6f3c3a0de",
@@ -411,9 +412,10 @@
    "skips": 0
   },
   "navigation-phase2-6.test.mjs": {
-   "sha256": "4d62d00183f10ff654cdef748baef5a4b9cbe231fefd6530480c95a32298221f",
+   "sha256": "f2da032face774400c5f5317586807254968d5682c5f5a49032aa6a8dcc4084d",
    "tests": 11,
-   "skips": 0
+   "skips": 0,
+   "updated_in": "P2-5a-1 (old->new assertion map in Evidence)"
   },
   "navigation-shell-phase1.test.mjs": {
    "sha256": "a62b17d2348fcfa37a849933e5922faa8ecdaddeec2b16b0c1e6fa89d9f822ba",

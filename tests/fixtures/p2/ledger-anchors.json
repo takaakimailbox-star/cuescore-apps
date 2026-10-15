@@ -940,16 +940,16 @@
   "area": "D",
   "file": "index.html",
   "line": 29440,
-  "snippet": "new MutationObserver(enforce).observe(root,{childList:true,subtree:true});",
-  "function": "enforce (Analysis v2 data-sufficiency guard)"
+  "snippet": "function applyPriorGamesGuardV1(){",
+  "function": "applyPriorGamesGuardV1 (explicit step; was the enforce observer, P2-5a-1)"
  },
  {
   "id": "P2L-119",
   "area": "D",
   "file": "index.html",
   "line": 29454,
-  "snippet": "new MutationObserver(correct).observe(root,{childList:true,subtree:true});",
-  "function": "correct (wording guard)"
+  "snippet": "String(f2-f1).endsWith(\"0\")?\"ファール数は相手と同じ\"",
+  "function": "renderMatch wording (generated at source; was the correct observer, P2-5a-1)"
  },
  {
   "id": "P2L-120",

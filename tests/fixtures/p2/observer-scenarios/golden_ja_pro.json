@@ -280,32 +280,6 @@
    ]
   },
   {
-   "key": "index.html#10",
-   "targets": [
-    {
-     "desc": "div",
-     "live": false,
-     "opts": {
-      "childList": true,
-      "subtree": true
-     }
-    }
-   ]
-  },
-  {
-   "key": "index.html#11",
-   "targets": [
-    {
-     "desc": "div",
-     "live": false,
-     "opts": {
-      "childList": true,
-      "subtree": true
-     }
-    }
-   ]
-  },
-  {
    "key": "analysis-final-rc.js#0",
    "targets": [
     {
@@ -587,10 +561,7 @@
      "open": true
     }
    ],
-   "changedObservers": [
-    "index.html#6",
-    "navigation-phase2-6.js#0"
-   ]
+   "changedObservers": []
   },
   "C2-player-editor-create": {
    "reach": "ui",
@@ -602,10 +573,7 @@
     "libTitle": "プレーヤー",
     "open": true
    },
-   "changedObservers": [
-    "index.html#6",
-    "navigation-phase2-6.js#0"
-   ]
+   "changedObservers": []
   },
   "C3-player-root-title-reconcile": {
    "reach": "ui+inject",
@@ -992,23 +960,22 @@
      "シュート成功率で相手を0ポイント上回った"
     ],
     "first": [
-     "ファール数は相手と同じ",
+     "ファールを相手より0回少なく抑えた",
      "ファールを相手より1回少なく抑えた",
-     "ファール数は相手と同じ",
-     "ファール数は相手と同じ",
+     "ファールを相手より10回少なく抑えた",
+     "ファールを相手より20回少なく抑えた",
      "ファールが相手より10回多かった",
-     "ハイランは相手と同じ",
+     "ハイランで相手を0上回った",
      "ハイランで相手を5上回った",
-     "ハイランは相手と同じ",
-     "ハイランは相手と同じ",
+     "ハイランで相手を10上回った",
+     "ハイランでは相手が10上回った",
      "ハイランでは相手が3上回った",
      "シュート成功率で相手を0ポイント上回った"
     ],
-    "stable": true
+    "stable": true,
+    "unchanged": true
    },
-   "changedObservers": [
-    "index.html#11"
-   ]
+   "changedObservers": []
   },
   "J1-analysis-match-e2e-wording": {
    "reach": "ui+fn",
@@ -1144,8 +1111,7 @@
     }
    },
    "changedObservers": [
-    "analysis-final-rc.js#0",
-    "index.html#11"
+    "analysis-final-rc.js#0"
    ]
   },
   "J2-analysis-player-6-disciplines": {

@@ -1,0 +1,419 @@
+{
+ "variant": "block-final-rc",
+ "rich": false,
+ "loaded": {
+  "finalRc": false,
+  "build4": true
+ },
+ "player": {
+  "9ball": {
+   "first": {
+    "hidden": false,
+    "status": null,
+    "statusState": null,
+    "change": null,
+    "changeState": null,
+    "prior": null,
+    "ems": [],
+    "goal": null,
+    "headings": [
+     "今の状態",
+     "主要指標",
+     "推移グラフ",
+     "今回のポイント",
+     "自己ベスト",
+     "詳細分析"
+    ],
+    "len": 351,
+    "hash": "cf40504e"
+   },
+   "settled": {
+    "hidden": false,
+    "status": null,
+    "statusState": null,
+    "change": null,
+    "changeState": null,
+    "prior": null,
+    "ems": [],
+    "goal": null,
+    "headings": [
+     "今の状態",
+     "主要指標",
+     "推移グラフ",
+     "今回のポイント",
+     "自己ベスト",
+     "詳細分析"
+    ],
+    "len": 351,
+    "hash": "cf40504e"
+   }
+  },
+  "10ball": {
+   "first": {
+    "hidden": false,
+    "status": null,
+    "statusState": null,
+    "change": null,
+    "changeState": null,
+    "prior": null,
+    "ems": [],
+    "goal": null,
+    "headings": [
+     "今の状態",
+     "主要指標",
+     "推移グラフ",
+     "今回のポイント",
+     "自己ベスト",
+     "詳細分析"
+    ],
+    "len": 267,
+    "hash": "a1b1b8f2"
+   },
+   "settled": {
+    "hidden": false,
+    "status": null,
+    "statusState": null,
+    "change": null,
+    "changeState": null,
+    "prior": null,
+    "ems": [],
+    "goal": null,
+    "headings": [
+     "今の状態",
+     "主要指標",
+     "推移グラフ",
+     "今回のポイント",
+     "自己ベスト",
+     "詳細分析"
+    ],
+    "len": 267,
+    "hash": "a1b1b8f2"
+   }
+  },
+  "rotation": {
+   "first": {
+    "hidden": false,
+    "status": null,
+    "statusState": null,
+    "change": null,
+    "changeState": null,
+    "prior": null,
+    "ems": [],
+    "goal": null,
+    "headings": [
+     "今の状態",
+     "主要指標",
+     "推移グラフ",
+     "今回のポイント",
+     "自己ベスト",
+     "詳細分析"
+    ],
+    "len": 372,
+    "hash": "3f9a71f7"
+   },
+   "settled": {
+    "hidden": false,
+    "status": null,
+    "statusState": null,
+    "change": null,
+    "changeState": null,
+    "prior": null,
+    "ems": [],
+    "goal": null,
+    "headings": [
+     "今の状態",
+     "主要指標",
+     "推移グラフ",
+     "今回のポイント",
+     "自己ベスト",
+     "詳細分析"
+    ],
+    "len": 372,
+    "hash": "3f9a71f7"
+   }
+  },
+  "jpa9": {
+   "first": {
+    "hidden": false,
+    "status": null,
+    "statusState": null,
+    "change": null,
+    "changeState": null,
+    "prior": null,
+    "ems": [],
+    "goal": null,
+    "headings": [
+     "今の状態",
+     "主要指標",
+     "推移グラフ",
+     "今回のポイント",
+     "自己ベスト",
+     "詳細分析"
+    ],
+    "len": 265,
+    "hash": "38e8e531"
+   },
+   "settled": {
+    "hidden": false,
+    "status": null,
+    "statusState": null,
+    "change": null,
+    "changeState": null,
+    "prior": null,
+    "ems": [],
+    "goal": null,
+    "headings": [
+     "今の状態",
+     "主要指標",
+     "推移グラフ",
+     "今回のポイント",
+     "自己ベスト",
+     "詳細分析"
+    ],
+    "len": 265,
+    "hash": "38e8e531"
+   }
+  },
+  "straightPool": {
+   "first": {
+    "hidden": false,
+    "status": null,
+    "statusState": null,
+    "change": null,
+    "changeState": null,
+    "prior": null,
+    "ems": [],
+    "goal": null,
+    "headings": [
+     "今の状態",
+     "主要指標",
+     "推移グラフ",
+     "今回のポイント",
+     "自己ベスト",
+     "詳細分析"
+    ],
+    "len": 250,
+    "hash": "afdb884d"
+   },
+   "settled": {
+    "hidden": false,
+    "status": null,
+    "statusState": null,
+    "change": null,
+    "changeState": null,
+    "prior": null,
+    "ems": [],
+    "goal": null,
+    "headings": [
+     "今の状態",
+     "主要指標",
+     "推移グラフ",
+     "今回のポイント",
+     "自己ベスト",
+     "詳細分析"
+    ],
+    "len": 250,
+    "hash": "afdb884d"
+   }
+  },
+  "threeCushion": {
+   "first": {
+    "hidden": false,
+    "status": null,
+    "statusState": null,
+    "change": null,
+    "changeState": null,
+    "prior": null,
+    "ems": [],
+    "goal": null,
+    "headings": [
+     "今の状態",
+     "主要指標",
+     "推移グラフ",
+     "今回のポイント",
+     "自己ベスト",
+     "詳細分析"
+    ],
+    "len": 250,
+    "hash": "af220cd"
+   },
+   "settled": {
+    "hidden": false,
+    "status": null,
+    "statusState": null,
+    "change": null,
+    "changeState": null,
+    "prior": null,
+    "ems": [],
+    "goal": null,
+    "headings": [
+     "今の状態",
+     "主要指標",
+     "推移グラフ",
+     "今回のポイント",
+     "自己ベスト",
+     "詳細分析"
+    ],
+    "len": 250,
+    "hash": "af220cd"
+   }
+  }
+ },
+ "rerender": {
+  "discipline": {
+   "hidden": false,
+   "status": null,
+   "statusState": null,
+   "change": null,
+   "changeState": null,
+   "prior": null,
+   "ems": [],
+   "goal": null,
+   "headings": [
+    "今の状態",
+    "主要指標",
+    "推移グラフ",
+    "今回のポイント",
+    "自己ベスト",
+    "詳細分析"
+   ],
+   "len": 372,
+   "hash": "3f9a71f7"
+  }
+ },
+ "uiPath": {
+  "hidden": false,
+  "status": null,
+  "statusState": null,
+  "change": null,
+  "changeState": null,
+  "prior": null,
+  "ems": [],
+  "goal": null,
+  "headings": [
+   "今の状態",
+   "主要指標",
+   "推移グラフ",
+   "今回のポイント",
+   "自己ベスト",
+   "詳細分析"
+  ],
+  "len": 372,
+  "hash": "3f9a71f7"
+ },
+ "match": {
+  "p250-eq": {
+   "points": [
+    "シュート成功率で相手を25ポイント上回った",
+    "ファール数は相手と同じ",
+    "ハイランは相手と同じ"
+   ],
+   "settled": [
+    "シュート成功率で相手を25ポイント上回った",
+    "ファール数は相手と同じ",
+    "ハイランは相手と同じ"
+   ],
+   "hash": "e157d560",
+   "meta": "2030/01/01 09:00・9-Ball・なおき目線"
+  },
+  "p250-d10": {
+   "points": [
+    "シュート成功率で相手を25ポイント上回った",
+    "ファール数は相手と同じ",
+    "ハイランは相手と同じ"
+   ],
+   "settled": [
+    "シュート成功率で相手を25ポイント上回った",
+    "ファール数は相手と同じ",
+    "ハイランは相手と同じ"
+   ],
+   "hash": "817f7aa2",
+   "meta": "2030/01/01 09:00・9-Ball・なおき目線"
+  },
+  "p250-opp10": {
+   "points": [
+    "シュート成功率で相手を25ポイント上回った",
+    "ファール数は相手と同じ",
+    "ハイランは相手と同じ"
+   ],
+   "settled": [
+    "シュート成功率で相手を25ポイント上回った",
+    "ファール数は相手と同じ",
+    "ハイランは相手と同じ"
+   ],
+   "hash": "10548e62",
+   "meta": "2030/01/01 09:00・9-Ball・なおき目線"
+  },
+  "p250-d20": {
+   "points": [
+    "シュート成功率で相手を25ポイント上回った",
+    "ファール数は相手と同じ",
+    "ハイランは相手と同じ"
+   ],
+   "settled": [
+    "シュート成功率で相手を25ポイント上回った",
+    "ファール数は相手と同じ",
+    "ハイランは相手と同じ"
+   ],
+   "hash": "d14d6d84",
+   "meta": "2030/01/01 09:00・9-Ball・なおき目線"
+  },
+  "p250-ord": {
+   "points": [
+    "シュート成功率で相手を25ポイント上回った",
+    "ファールを相手より1回少なく抑えた",
+    "ハイランで相手を1上回った"
+   ],
+   "settled": [
+    "シュート成功率で相手を25ポイント上回った",
+    "ファールを相手より1回少なく抑えた",
+    "ハイランで相手を1上回った"
+   ],
+   "hash": "a7d21609",
+   "meta": "2030/01/01 09:00・9-Ball・なおき目線"
+  },
+  "p250-d1": {
+   "points": [
+    "シュート成功率で相手を25ポイント上回った",
+    "ファールを相手より1回少なく抑えた",
+    "ハイランで相手を1上回った"
+   ],
+   "settled": [
+    "シュート成功率で相手を25ポイント上回った",
+    "ファールを相手より1回少なく抑えた",
+    "ハイランで相手を1上回った"
+   ],
+   "hash": "a07eeae7",
+   "meta": "2030/01/01 09:00・9-Ball・なおき目線"
+  },
+  "p250-opp3": {
+   "points": [
+    "シュート成功率で相手を25ポイント上回った",
+    "ファール数は相手と同じ",
+    "ハイランでは相手が3上回った"
+   ],
+   "settled": [
+    "シュート成功率で相手を25ポイント上回った",
+    "ファール数は相手と同じ",
+    "ハイランでは相手が3上回った"
+   ],
+   "hash": "4017dbab",
+   "meta": "2030/01/01 09:00・9-Ball・なおき目線"
+  },
+  "p250-foulmore": {
+   "points": [
+    "シュート成功率で相手を25ポイント上回った",
+    "ファールが相手より6回多かった",
+    "ハイランは相手と同じ"
+   ],
+   "settled": [
+    "シュート成功率で相手を25ポイント上回った",
+    "ファールが相手より6回多かった",
+    "ハイランは相手と同じ"
+   ],
+   "hash": "a4ced050",
+   "meta": "2030/01/01 09:00・9-Ball・なおき目線"
+  }
+ },
+ "errors": []
+}
