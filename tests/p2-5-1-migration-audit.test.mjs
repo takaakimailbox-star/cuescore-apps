@@ -45,7 +45,7 @@ test("[audit] the guard has exactly one call site and every player render goes t
 
 test("[audit B / hidden DOM] the player view can only become visible through openPlayer, which renders (and so applies the guard) first; the only other reader of the guarded nodes is analysis-final-rc.js, where the guard is inert", () => {
   assert.equal(count(html, 'setView("player")'), 1);
-  assert.ok(html.includes('function openPlayer(){renderPlayerWithDisciplineMetrics();setView("player")}'));
+  assert.ok(html.includes('function openPlayer(){renderPlayerWithDisciplineMetrics();setView("player");runAnalysisPostRenderV1()}'));
   const readers = ["analysis-build4.js", "analysis-final-rc.js", "navigation-phase2-6.js", "navigation-shell-phase1.js", "player-detail-build6.js", "ui-revision-v12.js", "final-ui-build18.js", "monetization-v1.js"].filter(f => /analysis-v2-(status|change|delta|metric|advice-row)/.test(read(f)));
   assert.deepEqual(readers, ["analysis-final-rc.js"]);
   assert.ok(!/analysis-v2-status|analysis-v2-change/.test(read("analysis-build4.js")), "build4 replaces the whole view and never reads the guarded status/change nodes");

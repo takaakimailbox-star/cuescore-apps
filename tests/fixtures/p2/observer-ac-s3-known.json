@@ -3,24 +3,23 @@
   "obs_id": "OBS-01",
   "p2_ledger": "P2L-105",
   "key": "analysis-build4.js#0",
-  "class": "TEXT_REWRITE",
-  "planned_gate": "P2-5b",
-  "text_writers": [
-   "render"
-  ],
-  "uses_cueT": false
+  "class": "REMOVED",
+  "planned_gate": "P2 Phase E (done)",
+  "text_writers": [],
+  "uses_cueT": false,
+  "removed_in": "P2 Phase E",
+  "replaced_by": "CueScoreBuild4Analytics.render() is called by runAnalysisPostRenderV1() after each analysis-v2 player render (open and select changes), once the view is visible"
  },
  {
   "obs_id": "OBS-02",
   "p2_ledger": "P2L-106",
   "key": "analysis-final-rc.js#0",
-  "class": "TEXT_REWRITE",
-  "planned_gate": "P2-5b",
-  "text_writers": [
-   "applyMatch",
-   "applyPlayer"
-  ],
-  "uses_cueT": false
+  "class": "REMOVED",
+  "planned_gate": "P2 Phase E (done)",
+  "text_writers": [],
+  "uses_cueT": false,
+  "removed_in": "P2 Phase E",
+  "replaced_by": "CueScoreAnalyticsFinalRC.apply() is published and called by runAnalysisPostRenderV1() around build4.render() after each player / match render; its click/change listeners remain"
  },
  {
   "obs_id": "OBS-03",

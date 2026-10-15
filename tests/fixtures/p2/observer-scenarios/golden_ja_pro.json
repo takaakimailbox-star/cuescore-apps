@@ -235,31 +235,6 @@
    ]
   },
   {
-   "key": "analysis-final-rc.js#0",
-   "targets": [
-    {
-     "desc": "div",
-     "live": false,
-     "opts": {
-      "childList": true,
-      "subtree": true
-     }
-    }
-   ]
-  },
-  {
-   "key": "analysis-build4.js#0",
-   "targets": [
-    {
-     "desc": "section",
-     "live": false,
-     "opts": {
-      "childList": true
-     }
-    }
-   ]
-  },
-  {
    "key": "ui-revision-v12.js#0",
    "targets": [
     {
@@ -338,35 +313,35 @@
    "result": [
     [
      "attributes:aria-hidden@section#proSummary.pro-summary",
-     73
+     72
     ],
     [
      "attributes:aria-hidden@section#recordDetailOverlay.record-detail-overlay",
-     73
+     72
     ],
     [
      "attributes:aria-hidden@section#playerLibraryOverlay.player-library-overlay",
-     73
+     72
     ],
     [
      "attributes:aria-hidden@section#playerStatsOverlay.player-stats-overlay",
-     73
+     72
     ],
     [
      "attributes:aria-hidden@section#classificationManagerV381.classification-manager-v381",
-     73
+     72
     ],
     [
      "attributes:aria-hidden@section#breakResultOverlayV61.break-result-overlay-v61",
-     73
+     72
     ],
     [
      "attributes:aria-hidden@section#pushOutInputOverlayV730.pushout-overlay-v730",
-     73
+     72
     ],
     [
      "attributes:aria-hidden@section#pushOutDecisionOverlayV730.pushout-overlay-v730",
-     73
+     72
     ]
    ],
    "changedObservers": []
@@ -1007,9 +982,7 @@
      ]
     }
    },
-   "changedObservers": [
-    "analysis-final-rc.js#0"
-   ]
+   "changedObservers": []
   },
   "J2-analysis-player-6-disciplines": {
    "reach": "fn",
@@ -1112,10 +1085,7 @@
      ]
     }
    },
-   "changedObservers": [
-    "analysis-build4.js#0",
-    "analysis-final-rc.js#0"
-   ]
+   "changedObservers": []
   },
   "K1-journey-all-matches": {
    "reach": "ui",

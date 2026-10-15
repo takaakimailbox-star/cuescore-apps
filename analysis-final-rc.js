@@ -82,7 +82,6 @@
   const context = window.CueScoreAnalysisV2Context;
   if (!root || !context) return;
   let applying = false;
-  let queued = false;
 
   const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character]));
   const conclusionClass = direction => direction === "worsened" ? "attention" : direction === "improved" ? "improved" : "flat";
@@ -220,15 +219,9 @@
       applying = false;
     }
   }
-  function schedule() {
-    if (queued || applying) return;
-    queued = true;
-    queueMicrotask(() => {
-      queued = false;
-      apply();
-    });
-  }
-  new MutationObserver(schedule).observe(root, { childList: true, subtree: true });
+  // P2 Phase E / OBS-02: apply() is an explicit post-render step now (published as CueScoreAnalyticsFinalRC.apply and called by the analysis-v2
+  // screen after each player / match render). It used to run from a DOM observer on the whole analysis root.
+  api.apply = apply;
   root.addEventListener("click", () => setTimeout(apply, 0));
   root.addEventListener("change", () => setTimeout(apply, 0));
   apply();

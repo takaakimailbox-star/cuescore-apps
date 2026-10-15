@@ -58,6 +58,15 @@ const M = [
   ["home preview uses the wrong pattern", "index.html", 'dateText=Number.isNaN(date.getTime())?"日付なし":window.cueDate(date,"ymd");', 'dateText=Number.isNaN(date.getTime())?"日付なし":window.cueDate(date,"ymd-hm");'],
   ["CSV date format changed", "index.html", "const dateText = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;", "const dateText = `${date.getFullYear()}/${pad(date.getMonth() + 1)}/${pad(date.getDate())}`;"],
   ["an inline weekday array returns", "index.html", "function fmtDate(d,short=false){", 'const WD250=["日","月","火","水","木","金","土"];function fmtDate(d,short=false){'],
+  /* Phase E-2 OBS-01 / OBS-02 */
+  ["build4 observer re-added", "analysis-build4.js", "queueMicrotask(render);", "new MutationObserver(()=>queueMicrotask(render)).observe(view,{childList:true});queueMicrotask(render);"],
+  ["final-rc observer re-added", "analysis-final-rc.js", "  api.apply = apply;", "  new MutationObserver(()=>apply()).observe(root,{childList:true,subtree:true});\n  api.apply = apply;"],
+  ["final-rc apply not published", "analysis-final-rc.js", "  api.apply = apply;", ""],
+  ["openPlayer does not run the step", "index.html", 'setView("player");runAnalysisPostRenderV1()}', 'setView("player")}'],
+  ["openMatch does not run the step", "index.html", 'setView("match");runAnalysisPostRenderV1()}', 'setView("match")}'],
+  ["select change does not run the step (player)", "index.html", 'selectedPlayerId=event.target.value;renderPlayerWithDisciplineMetrics();runAnalysisPostRenderV1()}', 'selectedPlayerId=event.target.value;renderPlayerWithDisciplineMetrics()}'],
+  ["step order changed (render first)", "index.html", "finalRc?.apply?.();build4?.render?.();finalRc?.apply?.();}", "build4?.render?.();finalRc?.apply?.();finalRc?.apply?.();}"],
+  ["step runs before the view is visible", "index.html", 'function openPlayer(){renderPlayerWithDisciplineMetrics();setView("player");runAnalysisPostRenderV1()}', 'function openPlayer(){renderPlayerWithDisciplineMetrics();runAnalysisPostRenderV1();setView("player")}'],
   /* Phase E OBS-16 */
   ["badge observer re-added", "monetization-v1.js", "  syncSettingsPlan();decorate();", "  new MutationObserver(()=>requestAnimationFrame(decorate)).observe(document.body,{subtree:true,childList:true});syncSettingsPlan();decorate();"],
   ["hub render decorate call dropped", "navigation-phase2-6.js", "\n    window.CueScorePro?.decorate?.();\n  }", "\n  }"],
@@ -77,7 +86,7 @@ const M = [
   /* OBS-23 date regex */
   /* P2-5a-1 formalization audit */
   ["guard gets a second call site", "index.html", 'function openHome(){renderHome();', 'function openHome(){applyPriorGamesGuardV1();renderHome();'],
-  ["player view becomes visible without a render", "index.html", 'function openMatch(){renderMatchForViewerV5();setView("match")}', 'function openMatch(){renderMatchForViewerV5();setView("match");setView("player")}'],
+  ["player view becomes visible without a render", "index.html", 'function openMatch(){renderMatchForViewerV5();setView("match");runAnalysisPostRenderV1()}', 'function openMatch(){renderMatchForViewerV5();setView("match");setView("player");runAnalysisPostRenderV1()}'],
   ["wording generator reads rendered text", "index.html", 'const points=[shot1||shot2?', 'const points=[(viewNode("match").textContent,0)||shot1||shot2?'],
   ["wording generator becomes stateful", "index.html", 'const points=[shot1||shot2?', 'const points=[(window.__pts=(window.__pts||0)+1)&&shot1||shot2?'],
   /* existing source-pin protection stays */

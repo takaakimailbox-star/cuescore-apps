@@ -836,16 +836,16 @@
   "area": "D",
   "file": "analysis-build4.js",
   "line": 83,
-  "snippet": "new MutationObserver(()=>queueMicrotask(render)).observe(view,{childList:true});",
-  "function": "render (overlay renderer)"
+  "snippet": "// P2 Phase E / OBS-01: render() is an explicit post-render step now",
+  "function": "render (explicit post-render step, Phase E)"
  },
  {
   "id": "P2L-106",
   "area": "D",
   "file": "analysis-final-rc.js",
   "line": 221,
-  "snippet": "new MutationObserver(schedule).observe(root, { childList: true, subtree: true });",
-  "function": "schedule → render (overlay renderer)"
+  "snippet": "// P2 Phase E / OBS-02: apply() is an explicit post-render step now",
+  "function": "apply (explicit post-render step, Phase E)"
  },
  {
   "id": "P2L-107",

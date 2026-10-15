@@ -80,7 +80,7 @@
     const rival=event.target.closest("[data-b4-rival]");if(rival){window.openRivalAnalysisForPlayerV832?.(rival.dataset.b4Rival);return;}
   });
   root.addEventListener("change",event=>{const picker=event.target.closest("[data-b4-trend-select]");if(!picker)return;const state=view._build4;if(!state)return;const key=picker.value,values=state.records.map(record=>recordMetric(record,state.player,key,state.discipline,state.helpers));view.querySelector("[data-b4-chart]").innerHTML=chart(values,key,state.records);});
-  new MutationObserver(()=>queueMicrotask(render)).observe(view,{childList:true});
+  // P2 Phase E / OBS-01: render() is an explicit post-render step now (called by the analysis-v2 screen after each player render); it used to run from a DOM observer on the player view.
   queueMicrotask(render);
   window.CueScoreBuild4Analytics={render,chart,recordMetric};
 })();

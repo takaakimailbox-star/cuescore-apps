@@ -230,31 +230,6 @@
    ]
   },
   {
-   "key": "analysis-final-rc.js#0",
-   "targets": [
-    {
-     "desc": "div",
-     "live": false,
-     "opts": {
-      "childList": true,
-      "subtree": true
-     }
-    }
-   ]
-  },
-  {
-   "key": "analysis-build4.js#0",
-   "targets": [
-    {
-     "desc": "section",
-     "live": false,
-     "opts": {
-      "childList": true
-     }
-    }
-   ]
-  },
-  {
    "key": "ui-revision-v12.js#0",
    "targets": [
     {

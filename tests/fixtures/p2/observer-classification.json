@@ -1,19 +1,5 @@
 [
  {
-  "id": "P2L-105",
-  "file": "analysis-build4.js",
-  "k": 0,
-  "class": "c",
-  "role": "rewrite"
- },
- {
-  "id": "P2L-106",
-  "file": "analysis-final-rc.js",
-  "k": 0,
-  "class": "c",
-  "role": "rewrite"
- },
- {
   "id": "P2L-108",
   "file": "index.html",
   "k": 0,

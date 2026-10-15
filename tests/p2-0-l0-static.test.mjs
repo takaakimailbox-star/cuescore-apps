@@ -23,11 +23,11 @@ const classification = JSON.parse(read("tests/fixtures/p2/observer-classificatio
 const inventory = observerInventory();
 const byKey = new Map(inventory.map(o => [o.file + "#" + o.k, o]));
 
-test("[P2L-105..127] L0 MutationObserver registrations: exactly 16 in 9 files (P2-5a-1: 23 -> 21, Phase B: -> 20, Phase D: -> 17, Phase E: -> 16), each mapped to one ledger row (ratchet; P2-5 lowers rewrites)", () => {
-  assert.equal(inventory.length, 16);
-  assert.equal(classification.length, 16);
+test("[P2L-105..127] L0 MutationObserver registrations: exactly 14 in 9 files (P2-5a-1: 23 -> 21, Phase B: -> 20, Phase D: -> 17, Phase E: -> 14), each mapped to one ledger row (ratchet; P2-5 lowers rewrites)", () => {
+  assert.equal(inventory.length, 14);
+  assert.equal(classification.length, 14);
   assert.deepEqual(Object.fromEntries(OBSERVER_FILES.map(f => [f, inventory.filter(o => o.file === f).length])), {
-    "analysis-build4.js": 1, "analysis-final-rc.js": 1, "final-ui-build18.js": 0, "index.html": 10, "monetization-v1.js": 0,
+    "analysis-build4.js": 0, "analysis-final-rc.js": 0, "final-ui-build18.js": 0, "index.html": 10, "monetization-v1.js": 0,
     "navigation-phase2-6.js": 1, "navigation-shell-phase1.js": 1, "player-detail-build6.js": 0, "ui-revision-v12.js": 2
   });
   for (const c of classification) assert.ok(byKey.has(c.file + "#" + c.k), c.id);
@@ -39,7 +39,7 @@ test("[P2L-105..127] L0 MutationObserver registrations: exactly 16 in 9 files (P
 
 test("[P2L-105..127] L0 MutationObserver roles are pinned: 12 rewrite / 11 allowed; 0 display-text readers after P2-4 (AC-S3 ratchet)", () => {
   const roles = {}; for (const c of classification) roles[c.role] = (roles[c.role] || 0) + 1;
-  assert.deepEqual(roles, { rewrite: 3, allowed: 13 }); // Phase E: OBS-16 removed // P2-5a-1: OBS-14/15 removed, OBS-10/17 no longer write text // P2-4: the display-text reader (reviseDetail, P2L-124) now reads a data attribute -> structural
+  assert.deepEqual(roles, { rewrite: 1, allowed: 13 }); // Phase E: OBS-01/02/16 removed (the one left is the P2-0 label of the shell reconcile, which has no text writer since P2-4) // P2-5a-1: OBS-14/15 removed, OBS-10/17 no longer write text // P2-4: the display-text reader (reviseDetail, P2L-124) now reads a data attribute -> structural
 });
 
 for (const c of classification) {
