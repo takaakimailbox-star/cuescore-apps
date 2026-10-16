@@ -1,6 +1,7 @@
 {
  "status": "P3-PROVISIONAL",
  "note": "en / zh-Hans are provisional (Official 108 L-GLOS-2/3); P4 review is required before any release candidate.",
+ "earlierKeysNote": "P1/P2 catalog keys (non-p3.*). Registered in the P4 Manifest Completion Gate so that every catalog key has a review state. Their en/zh-Hans wording was never independently reviewed and several are legacy/provisional values (P2-2), so they are tracked as P3-PROVISIONAL, like the P3 keys. No key is P4-REVIEWED or P4-APPROVED.",
  "keys": {
   "p3.001d8618": {
    "area": 5,
@@ -4964,6 +4965,458 @@
   },
   "p3.fffdbbad": {
    "area": 4,
+   "status": "P3-PROVISIONAL"
+  }
+ },
+ "earlierKeys": {
+  "boot.splash.aria": {
+   "origin": "P1/P2",
+   "group": "boot.splash",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.condition.startingPoints": {
+   "origin": "P1/P2",
+   "group": "home.condition",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.condition.target": {
+   "origin": "P1/P2",
+   "group": "home.condition",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.discipline.aria": {
+   "origin": "P1/P2",
+   "group": "home.discipline",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.discipline.jpa9.aria": {
+   "origin": "P1/P2",
+   "group": "home.discipline",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.discipline.nineBall.aria": {
+   "origin": "P1/P2",
+   "group": "home.discipline",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.discipline.rotation.aria": {
+   "origin": "P1/P2",
+   "group": "home.discipline",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.discipline.straightPool.aria": {
+   "origin": "P1/P2",
+   "group": "home.discipline",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.discipline.tenBall.aria": {
+   "origin": "P1/P2",
+   "group": "home.discipline",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.discipline.threeCushion.aria": {
+   "origin": "P1/P2",
+   "group": "home.discipline",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.inProgress.body": {
+   "origin": "P1/P2",
+   "group": "home.inProgress",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.inProgress.cancel": {
+   "origin": "P1/P2",
+   "group": "home.inProgress",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.inProgress.new": {
+   "origin": "P1/P2",
+   "group": "home.inProgress",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.inProgress.resume": {
+   "origin": "P1/P2",
+   "group": "home.inProgress",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.inProgress.title": {
+   "origin": "P1/P2",
+   "group": "home.inProgress",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.menu.aria": {
+   "origin": "P1/P2",
+   "group": "home.menu",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.menu.history": {
+   "origin": "P1/P2",
+   "group": "home.menu",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.menu.players": {
+   "origin": "P1/P2",
+   "group": "home.menu",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.menu.settings": {
+   "origin": "P1/P2",
+   "group": "home.menu",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.newMatch": {
+   "origin": "P1/P2",
+   "group": "home.newMatch",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.resume.action": {
+   "origin": "P1/P2",
+   "group": "home.resume",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.resume.aria": {
+   "origin": "P1/P2",
+   "group": "home.resume",
+   "status": "P3-PROVISIONAL"
+  },
+  "home.resume.cardAria": {
+   "origin": "P1/P2",
+   "group": "home.resume",
+   "status": "P3-PROVISIONAL"
+  },
+  "mapper.category.other": {
+   "origin": "P1/P2",
+   "group": "mapper.category",
+   "status": "P3-PROVISIONAL"
+  },
+  "mapper.category.tournament": {
+   "origin": "P1/P2",
+   "group": "mapper.category",
+   "status": "P3-PROVISIONAL"
+  },
+  "mapper.resultLabel.breakFailed": {
+   "origin": "P1/P2",
+   "group": "mapper.resultLabel",
+   "status": "P3-PROVISIONAL"
+  },
+  "mapper.resultLabel.breakFoul": {
+   "origin": "P1/P2",
+   "group": "mapper.resultLabel",
+   "status": "P3-PROVISIONAL"
+  },
+  "mapper.resultLabel.foulBreakChange": {
+   "origin": "P1/P2",
+   "group": "mapper.resultLabel",
+   "status": "P3-PROVISIONAL"
+  },
+  "mapper.resultLabel.illegal": {
+   "origin": "P1/P2",
+   "group": "mapper.resultLabel",
+   "status": "P3-PROVISIONAL"
+  },
+  "mapper.resultLabel.noScore": {
+   "origin": "P1/P2",
+   "group": "mapper.resultLabel",
+   "status": "P3-PROVISIONAL"
+  },
+  "mapper.resultLabel.one": {
+   "origin": "P1/P2",
+   "group": "mapper.resultLabel",
+   "status": "P3-PROVISIONAL"
+  },
+  "mapper.resultLabel.pocketed": {
+   "origin": "P1/P2",
+   "group": "mapper.resultLabel",
+   "status": "P3-PROVISIONAL"
+  },
+  "mapper.resultLabel.scratch": {
+   "origin": "P1/P2",
+   "group": "mapper.resultLabel",
+   "status": "P3-PROVISIONAL"
+  },
+  "mapper.resultLabel.skipped": {
+   "origin": "P1/P2",
+   "group": "mapper.resultLabel",
+   "status": "P3-PROVISIONAL"
+  },
+  "mapper.resultLabel.threeOrMore": {
+   "origin": "P1/P2",
+   "group": "mapper.resultLabel",
+   "status": "P3-PROVISIONAL"
+  },
+  "mapper.resultLabel.two": {
+   "origin": "P1/P2",
+   "group": "mapper.resultLabel",
+   "status": "P3-PROVISIONAL"
+  },
+  "mapper.resultLabel.twoOrMore": {
+   "origin": "P1/P2",
+   "group": "mapper.resultLabel",
+   "status": "P3-PROVISIONAL"
+  },
+  "nav.history": {
+   "origin": "P1/P2",
+   "group": "nav.history",
+   "status": "P3-PROVISIONAL"
+  },
+  "nav.home": {
+   "origin": "P1/P2",
+   "group": "nav.home",
+   "status": "P3-PROVISIONAL"
+  },
+  "nav.main.aria": {
+   "origin": "P1/P2",
+   "group": "nav.main",
+   "status": "P3-PROVISIONAL"
+  },
+  "nav.player": {
+   "origin": "P1/P2",
+   "group": "nav.player",
+   "status": "P3-PROVISIONAL"
+  },
+  "nav.settings": {
+   "origin": "P1/P2",
+   "group": "nav.settings",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.add.aria": {
+   "origin": "P1/P2",
+   "group": "player.add",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.add.initialAria": {
+   "origin": "P1/P2",
+   "group": "player.add",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.back.management": {
+   "origin": "P1/P2",
+   "group": "player.back",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.badge.primary": {
+   "origin": "P1/P2",
+   "group": "player.badge",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.count": {
+   "origin": "P1/P2",
+   "group": "player.count",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.empty.line1": {
+   "origin": "P1/P2",
+   "group": "player.empty",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.empty.line2": {
+   "origin": "P1/P2",
+   "group": "player.empty",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.empty.noMatch": {
+   "origin": "P1/P2",
+   "group": "player.empty",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.intro.body": {
+   "origin": "P1/P2",
+   "group": "player.intro",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.manage.title": {
+   "origin": "P1/P2",
+   "group": "player.manage",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.overlay.aria": {
+   "origin": "P1/P2",
+   "group": "player.overlay",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.register": {
+   "origin": "P1/P2",
+   "group": "player.register",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.row.editAria": {
+   "origin": "P1/P2",
+   "group": "player.row",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.row.infoAria": {
+   "origin": "P1/P2",
+   "group": "player.row",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.search.management": {
+   "origin": "P1/P2",
+   "group": "player.search",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.search.selection": {
+   "origin": "P1/P2",
+   "group": "player.search",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.sort": {
+   "origin": "P1/P2",
+   "group": "player.sort",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.sort.byName": {
+   "origin": "P1/P2",
+   "group": "player.sort",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.sort.byRecent": {
+   "origin": "P1/P2",
+   "group": "player.sort",
+   "status": "P3-PROVISIONAL"
+  },
+  "player.title": {
+   "origin": "P1/P2",
+   "group": "player.title",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.language.apply": {
+   "origin": "P1/P2",
+   "group": "settings.language",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.language.blocked.interrupted": {
+   "origin": "P1/P2",
+   "group": "settings.language",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.language.blocked.recording": {
+   "origin": "P1/P2",
+   "group": "settings.language",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.language.blocked.unavailable": {
+   "origin": "P1/P2",
+   "group": "settings.language",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.language.error.write": {
+   "origin": "P1/P2",
+   "group": "settings.language",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.language.intro": {
+   "origin": "P1/P2",
+   "group": "settings.language",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.language.option.auto": {
+   "origin": "P1/P2",
+   "group": "settings.language",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.language.option.auto.sub": {
+   "origin": "P1/P2",
+   "group": "settings.language",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.language.row.sub": {
+   "origin": "P1/P2",
+   "group": "settings.language",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.language.row.title": {
+   "origin": "P1/P2",
+   "group": "settings.language",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.language.title": {
+   "origin": "P1/P2",
+   "group": "settings.language",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.language.unchanged": {
+   "origin": "P1/P2",
+   "group": "settings.language",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.legal.frameTitle": {
+   "origin": "P1/P2",
+   "group": "settings.legal",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.legal.privacy": {
+   "origin": "P1/P2",
+   "group": "settings.legal",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.legal.terms": {
+   "origin": "P1/P2",
+   "group": "settings.legal",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.row.backup.sub": {
+   "origin": "P1/P2",
+   "group": "settings.row",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.row.backup.title": {
+   "origin": "P1/P2",
+   "group": "settings.row",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.row.delete.sub": {
+   "origin": "P1/P2",
+   "group": "settings.row",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.row.delete.title": {
+   "origin": "P1/P2",
+   "group": "settings.row",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.row.restore.sub": {
+   "origin": "P1/P2",
+   "group": "settings.row",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.row.restore.title": {
+   "origin": "P1/P2",
+   "group": "settings.row",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.screen.aria": {
+   "origin": "P1/P2",
+   "group": "settings.screen",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.section.appInfo": {
+   "origin": "P1/P2",
+   "group": "settings.section",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.section.data": {
+   "origin": "P1/P2",
+   "group": "settings.section",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.section.display": {
+   "origin": "P1/P2",
+   "group": "settings.section",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.suite.backToCloud": {
+   "origin": "P1/P2",
+   "group": "settings.suite",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.suite.backToSettings": {
+   "origin": "P1/P2",
+   "group": "settings.suite",
+   "status": "P3-PROVISIONAL"
+  },
+  "settings.title": {
+   "origin": "P1/P2",
+   "group": "settings.title",
    "status": "P3-PROVISIONAL"
   }
  }

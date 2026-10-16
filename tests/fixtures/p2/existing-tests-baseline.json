@@ -456,6 +456,11 @@
    "tests": 6,
    "skips": 0
   },
+  "p4-manifest-completeness.test.mjs": {
+   "sha256": "0d5178b1ede2504d7fb6893453119a0baafba7c11ae6bee87879cb5fbb36541f",
+   "tests": 3,
+   "skips": 0
+  },
   "phase-b1-safe-cleanup.test.mjs": {
    "sha256": "d89b8ef84e899af34fadd8dcb94b12d23f940a50dda1c54fbb05d53040202f0d",
    "tests": 5,
