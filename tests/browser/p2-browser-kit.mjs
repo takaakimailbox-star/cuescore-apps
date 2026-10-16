@@ -112,6 +112,11 @@ export async function startApp({ lang = "ja", mode = "free", seedData, watchdogM
   await cdp("Page.navigate", { url: `http://127.0.0.1:${port}/index.html` });
   await sleep(4000);
   await evalJs(`(async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));for(let i=0;i<100&&document.documentElement.classList.contains("cue-app-booting-v2");i++)await w(100);await w(800);return true;})()`);
+  /* P4-repair (all modes): the app finishes parts of its first render lazily (idle callbacks / render coalescing) and the record-derived lists it builds depend on
+   * WHEN those callbacks run relative to the scenario start. Under CPU load (e.g. right after the Full Node suite, with Free and Pro runs in parallel) they ran later and the
+   * recorded DOM digests of 5 screens changed (player stats 9 vs 10 matches, ranking order). Wait until the page is quiescent (an idle callback has run and the body size is
+   * unchanged for 3 consecutive 400 ms cycles) before any scenario or Pro simulation starts. No production code is involved; no wall-clock value is recorded. */
+  await evalJs(`(async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));const idle=()=>new Promise(r=>{if(window.requestIdleCallback)requestIdleCallback(()=>r(),{timeout:1500});else setTimeout(r,300)});let last=-1,stable=0;for(let i=0;i<150&&stable<3;i++){await idle();await w(400);const n=document.body.innerHTML.length;if(n===last)stable++;else{stable=0;last=n}}return stable>=3})()`);
   if (mode === "pro") {
     const ok = await evalJs(`(async()=>{let cb;await window.CueScoreEntitlement.connect({subscribe(f){cb=f;return()=>{}}});cb({verified:true,isPro:true});await new Promise(r=>setTimeout(r,500));return window.CueScoreEntitlement.isPro()})()`);
     if (ok !== true) throw new Error("Pro simulation failed");

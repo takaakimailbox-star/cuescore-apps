@@ -1,3 +1,4 @@
+/* P4-repair: the page-text digest used to hash document.body.textContent, which includes the inline <script> source, so ANY source edit changed it (hence the stale fixture). It now hashes the text nodes outside script/style (visible-content digest). */
 /* P2 Phase E / OBS-16: Pro badge differential flows (NOT part of `node --test`).
  * Usage: [P2_APP_ROOT=<checkout>] node tests/browser/p2-5b-badge-flows.mjs <out.json> [lang=ja]
  * Starts as FREE (rich seed: > 20 records so the history-limit notice exists), walks every surface that carries Pro decoration (player hub: 6 disciplines x 3 tabs,
@@ -11,9 +12,10 @@ process.env.P2_DATE_EDGES = "1";
 const app = await startApp({ lang: LANG, mode: "free", seedData: seed({ lang: LANG, rich: true }), freezeTime: true, watchdogMs: Number(process.env.P2_WATCHDOG || 400000) });
 const ev = c => app.evalJs(`(async()=>{const W=ms=>new Promise(r=>setTimeout(r,ms));${c}})()`);
 const CAP = `const h=s=>{let x=5381;for(const c of String(s))x=((x<<5)+x+c.codePointAt(0))>>>0;return x.toString(16)};
+const visibleText=()=>{const out=[];const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);while(w.nextNode()){const n=w.currentNode;if(n.parentElement&&/^(SCRIPT|STYLE|NOSCRIPT)$/.test(n.parentElement.tagName))continue;out.push(n.nodeValue)}return out.join('')};
 const norm=(r)=>{if(!r)return "";const c=r.cloneNode(true);c.querySelectorAll('[class]').forEach(n=>n.setAttribute('class',[...new Set(n.className.split(/\\\\s+/).filter(Boolean))].sort().join(' ')));return c.outerHTML;};
 const cap=()=>{const b=[...document.querySelectorAll('.cue-pro-badge-v1')];return {pro:window.CueScoreEntitlement.isPro(),badges:b.length,perHostMax:Math.max(0,...b.map(x=>x.parentElement?x.parentElement.querySelectorAll(':scope > .cue-pro-badge-v1').length:0)),texts:[...new Set(b.map(x=>x.textContent))],aria:[...new Set(b.map(x=>x.getAttribute('aria-label')))],entries:document.querySelectorAll('.cue-pro-entry-v1').length,limitNotices:document.querySelectorAll('.cue-history-limit-v1').length,
- hub:h(norm(document.getElementById('playerStatsBody'))),settings:h([...document.querySelectorAll('[data-settings-action]')].map(n=>norm(n)).join('')),records:h(norm(document.getElementById('recordsList'))),text:h(document.body.textContent)};};`;
+ hub:h(norm(document.getElementById('playerStatsBody'))),settings:h([...document.querySelectorAll('[data-settings-action]')].map(n=>norm(n)).join('')),records:h(norm(document.getElementById('recordsList'))),text:h(visibleText())};};`;
 const out = { lang: LANG, steps: [] };
 const step = async (name, code, wait = 700) => {
   let state = null, err = null;
