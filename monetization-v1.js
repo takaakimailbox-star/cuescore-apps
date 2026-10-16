@@ -105,7 +105,7 @@
     if(target.closest?.('[data-settings-action="restore"]'))return gate(event,"restore");
     if(target.closest?.("[data-pro-history-limit]"))return gate(event,"historyLimit");
   },true);
-  const badge=()=>'<span class="cue-pro-badge-v1" aria-label="Pro限定">🔒 Pro</span>';
+  const badge=()=>'<span class="cue-pro-badge-v1" aria-label="' + window.cueT("p3.e0149628") + '">🔒 Pro</span>';
   function decorate(){
     if(entitlement.isPro()){
       document.querySelectorAll(".cue-pro-badge-v1").forEach(node=>node.remove());

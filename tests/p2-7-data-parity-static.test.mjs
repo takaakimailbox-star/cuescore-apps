@@ -20,7 +20,7 @@ const BASELINE_MODULES = {
 };
 const BASELINE_FUNCTIONS = {
  "exportCsv": "ee3f1ee2a9af20342694f8d9d9537ee1c72c15f160be7b27d93dfa3b57caa66a",
- "exportBackup": "e7bef2cba4deb5fb7477c66d3b28faaa912875de27b8ab0118e97a0eaab5c8bb",
+ "exportBackup": "55225b6c614ec1b25ffe033c7e21f0c91c9569dc5963a2965c5eb84325402328",
  "makeBackupPayload": "f30e004102cc621aea86ba86c6a6d54b126173c913157410cb02f75a62fccc48",
  "dateStamp": "19dc9ecd379b6739dde18bbd6b2617ec14ec94e13fc274c2b12f1a48ef123c22",
  "formatCsvDateParts": "3284e0b716270eba03cfe9e3ec7aef14cbb5c52a64260ca1d786ca1e64d8ee3c",
@@ -49,6 +49,8 @@ const GOLDENS = {
 test("[P2-7] Match-Sharing / QR pipeline, build4 metrics and demo data are byte-identical to the pre-P2 baseline a841cbc", () => {
   for (const [file, hash] of Object.entries(BASELINE_MODULES)) assert.equal(sha256(read(file)), hash, file);
 });
+// P3: exportBackup is pinned to its ja-resolved text. The only difference from a841cbc is that the success message (two concatenated template literals, now one catalog message)
+// is rebuilt as one concatenation by the resolver; a841cbc hash was e7bef2cba4deb5fb7477c66d3b28faaa912875de27b8ab0118e97a0eaab5c8bb. Source equivalence is proven by the AST comparison in the P3-4 Evidence.
 test("[P2-7] Backup / CSV / date-stamp producers and the player library reader / writer are source-identical to a841cbc", () => {
   const html = read("index.html");
   for (const [name, hash] of Object.entries(BASELINE_FUNCTIONS)) assert.equal(sha256(extractFunction(html, name)), hash, name);

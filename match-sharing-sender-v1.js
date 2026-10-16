@@ -83,7 +83,7 @@
     return parts.join("");
   }
 
-  function renderQrSvg(qrValue,{className="match-sharing-qr-svg-v1",label="この試合を共有するQRコード"}={}){
+  function renderQrSvg(qrValue,{className="match-sharing-qr-svg-v1",label=window.cueT("p3.ec685731")}={}){
     const total=qrValue.size+qrValue.quietZone*2;
     const safeLabel=String(label).replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
     return `<svg class="${className}" role="img" aria-label="${safeLabel}" viewBox="0 0 ${total} ${total}" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect width="${total}" height="${total}" fill="#fff"/><path d="${qrPathData(qrValue)}" fill="#000"/></svg>`;

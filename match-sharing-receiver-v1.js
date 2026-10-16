@@ -36,11 +36,11 @@
 
   function productError(error){
     const code=String(error?.code||"");
-    if(code==="NON_CUESCORE")return Object.freeze({code,message:"CueScoreの試合共有コードではありません。",retryable:true});
-    if(code==="UNSUPPORTED_VERSION")return Object.freeze({code,message:"この試合データを読み込むにはCueScoreの更新が必要です。",retryable:true});
-    if(code==="DUPLICATE")return Object.freeze({code,message:"この試合はすでに取り込まれています。",retryable:true});
-    if(code==="DEMO_RECEIVER_REJECTED")return Object.freeze({code,message:"デモでは試合を受け取れません。",retryable:false});
-    return Object.freeze({code:code||"INVALID",message:"この試合データを読み込めませんでした。",retryable:true});
+    if(code==="NON_CUESCORE")return Object.freeze({code,message:window.cueT("p3.401db4a9"),retryable:true});
+    if(code==="UNSUPPORTED_VERSION")return Object.freeze({code,message:window.cueT("p3.652df53d"),retryable:true});
+    if(code==="DUPLICATE")return Object.freeze({code,message:window.cueT("p3.96c06549"),retryable:true});
+    if(code==="DEMO_RECEIVER_REJECTED")return Object.freeze({code,message:window.cueT("p3.3d851243"),retryable:false});
+    return Object.freeze({code:code||"INVALID",message:window.cueT("p3.2568a684"),retryable:true});
   }
 
   function receiverActionState(state={}){
@@ -49,7 +49,7 @@
     return Object.freeze({
       showSettings:needsSettings,
       showRetry:!needsSettings&&state?.screen!=="success"&&state?.screen!=="unavailable",
-      retryLabel:state?.code==="DUPLICATE"?"他の試合を読み取る":"もう一度読み取る",
+      retryLabel:state?.code==="DUPLICATE"?window.cueT("p3.def87fde"):window.cueT("p3.51a23508"),
     });
   }
 
@@ -100,7 +100,7 @@
       setDiagnostic({phase:"installing-listeners"});
       listeners.push(await bridge.addListener("scanResult",handleResult));
       listeners.push(await bridge.addListener("scannerError",event=>{
-        active=false;memory.clear();setDiagnostic({phase:"native-error",errorCode:event?.code||"SCANNER_ERROR"});emit({screen:"error",code:event?.code||"SCANNER_ERROR",message:"カメラでQRコードを読み取れませんでした。",retryable:true});
+        active=false;memory.clear();setDiagnostic({phase:"native-error",errorCode:event?.code||"SCANNER_ERROR"});emit({screen:"error",code:event?.code||"SCANNER_ERROR",message:window.cueT("p3.b4d71d9b"),retryable:true});
       }));
     };
     const startAuthorized=async rect=>{
@@ -117,13 +117,13 @@
       }catch(error){
         active=false;
         setDiagnostic({phase:"start-failed",errorCode:error?.code||"UNAVAILABLE"});
-        return emit({screen:"unavailable",permission:"unavailable",message:"この端末ではカメラを使用できません。",code:error?.code||"UNAVAILABLE"});
+        return emit({screen:"unavailable",permission:"unavailable",message:window.cueT("p3.d4832b25"),code:error?.code||"UNAVAILABLE"});
       }
     };
     const enter=async rect=>{
       if(isDemo())fail("DEMO_RECEIVER_REJECTED","Demo cannot start the Match Sharing receiver");
       memory.clear();lastRect=rect;
-      if(!bridge) return emit({screen:"unavailable",permission:"unavailable",message:"この端末ではカメラを使用できません。"});
+      if(!bridge) return emit({screen:"unavailable",permission:"unavailable",message:window.cueT("p3.d4832b25")});
       let result,status;
       try{
         setDiagnostic({phase:"authorization-check",permission:"unknown",errorCode:null});
@@ -137,12 +137,12 @@
         }
       }catch(error){
         setDiagnostic({phase:"bridge-failed",permission:"unknown",errorCode:error?.code||"BRIDGE_UNAVAILABLE"});
-        return emit({screen:"unavailable",permission:"unavailable",message:"この端末ではカメラを使用できません。",code:error?.code||"BRIDGE_UNAVAILABLE"});
+        return emit({screen:"unavailable",permission:"unavailable",message:window.cueT("p3.d4832b25"),code:error?.code||"BRIDGE_UNAVAILABLE"});
       }
       if(status==="authorized")return startAuthorized(rect);
-      if(status==="denied")return emit({screen:"permission",permission:"denied",message:"QRコードを読み取るには、設定でカメラを許可してください。"});
-      if(status==="restricted")return emit({screen:"permission",permission:"restricted",message:"この端末ではカメラの使用が制限されています。"});
-      return emit({screen:"unavailable",permission:"unavailable",message:"この端末ではカメラを使用できません。"});
+      if(status==="denied")return emit({screen:"permission",permission:"denied",message:window.cueT("p3.760c77ca")});
+      if(status==="restricted")return emit({screen:"permission",permission:"restricted",message:window.cueT("p3.8a44f05c")});
+      return emit({screen:"unavailable",permission:"unavailable",message:window.cueT("p3.d4832b25")});
     };
     const retry=async rect=>{
       const nextRect=rect||lastRect;

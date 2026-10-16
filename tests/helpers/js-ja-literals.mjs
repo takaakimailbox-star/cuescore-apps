@@ -1,6 +1,6 @@
 /* P3 / AC-S1 scanner. Finds every string / template literal text (and static HTML text / attribute) that still contains Japanese kana or kanji,
  * ignoring comments and regular expressions. Pure text scan, no parser dependency. */
-const JA = /[぀-ヿ一-鿿]/;
+const JA = /[\u3040-\u30fa\u30fc-\u30ff\u4e00-\u9fff]/; // the katakana middle dot (U+30FB) is a neutral separator, not Japanese text
 
 /* literals of one JS source: [{ line, text }] (template literals contribute each static chunk separately) */
 export function jaLiteralsInJs(src, lineOffset = 0) {
