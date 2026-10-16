@@ -44,6 +44,6 @@ test("discipline-fixed history preserves six-character opponent space and detail
   assert.match(css, /match-card-c-all-matches-v37 \.journey-match-score-v3\{grid-area:score!important/);
   assert.match(css, /match-card-c-all-matches-v37 \.journey-match-open-v3\{grid-area:chevron!important/);
   assert.match(index, /data-player-record-id/);
-  assert.match(index, /window\.openHistoricalRecordV2\s*=\s*openHistoricalRecord/);
+  assert.match(index, /window\.openHistoricalRecordV2\s*=\s*openMatchDetailV1/);
   assert.match(index, /match-detail-race-v2/);
 });

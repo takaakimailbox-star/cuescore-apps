@@ -284,7 +284,7 @@
    "skips": 0
   },
   "history-card-readability.test.mjs": {
-   "sha256": "0f52e20a8d9a7d47bc52f369a7a60077d9ad9254da68989d0c15e8ef9aeec9ad",
+   "sha256": "f399d50e65a3252d5f3c65a987cc3914a1c5cfd6fd6620110cf3734b2f7dd555",
    "tests": 5,
    "skips": 0
   },
@@ -444,6 +444,11 @@
   "official-website-v1.test.mjs": {
    "sha256": "85aeb54dbbb13d1e4706352ad0f4665ebd41e88f6ee693f894e9fc05f256d8a3",
    "tests": 4,
+   "skips": 0
+  },
+  "p3-6-a10-openhistoricalrecord.test.mjs": {
+   "sha256": "79a626157551fbfdf5e0407f996f99c5417deedc2e066f512679c2671630857a",
+   "tests": 3,
    "skips": 0
   },
   "p3-ac-s1-literals.test.mjs": {
