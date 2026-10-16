@@ -441,13 +441,18 @@
    "tests": 4,
    "skips": 0
   },
+  "p3-ac-s1-literals.test.mjs": {
+   "sha256": "e787afa0bd69580156b03cca81fcc46eb4f6fe63fb8099922ead24c420d60026",
+   "tests": 4,
+   "skips": 0
+  },
   "p3-ja-source.test.mjs": {
    "sha256": "478fd69ba7ed9c823391125cd6214d8a2303859b22ac3305d139bf2e1588bdbb",
    "tests": 6,
    "skips": 0
   },
   "p3-translation-catalog.test.mjs": {
-   "sha256": "5876ff8ddf50e11ae196bd726dada98bd37505e577c84a23422699c54e17d80c",
+   "sha256": "2d337aadd15c59bec7c016ec0a6d6555479a9c0aa8bcb7b15aa0585ba64850e9",
    "tests": 6,
    "skips": 0
   },

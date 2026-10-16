@@ -7992,9 +7992,9 @@ body {
     <img src="src/assets/logo/CueScore_Logo_Horizontal_White.svg" alt="CueScore">
   </div>
   <div class="toast" id="toast">
-    <div>
+    <div data-i18n-text-first="p3.9cc36582">
       背面タップ<br>
-      <span>ダブルタップが検出されました</span>
+      <span data-i18n="p3.47093b25">ダブルタップが検出されました</span>
     </div>
   </div>
 
@@ -8005,8 +8005,8 @@ body {
         <path d="M31 15h10M34 49h4"></path>
         <path d="M13 31a23 23 0 0 0 38 20M13 31l-1 9 9-2"></path>
       </svg>
-      <h1 id="iphonePortraitTitleV1">縦向きでご利用ください</h1>
-      <p id="iphonePortraitBodyV1">CueScoreは縦画面専用です。<br>iPhoneを縦向きに戻してください。</p>
+      <h1 id="iphonePortraitTitleV1" data-i18n="p3.04af07d7">縦向きでご利用ください</h1>
+      <p id="iphonePortraitBodyV1" data-i18n-text-first="p3.f2710d9c" data-i18n-text-last="p3.75f55c82">CueScoreは縦画面専用です。<br>iPhoneを縦向きに戻してください。</p>
     </div>
   </section>
 
@@ -19951,7 +19951,7 @@ ${window.cueT("p3.ead08064")}`
 
     window.addEventListener("error", event => {
       console.error("[CueScore v1.0] runtime error", event.error || event.message);
-      if (typeof showToast === "function") showToast("処理を完了できませんでした", window.cueT("p3.330245d4"));
+      if (typeof showToast === "function") showToast(window.cueT("p3.a52d312f"), window.cueT("p3.330245d4"));
     });
 
     window.addEventListener("unhandledrejection", event => {
@@ -19998,11 +19998,11 @@ ${window.cueT("p3.ead08064")}`
     updateNetworkState();
     window.addEventListener("offline", () => {
       updateNetworkState();
-      announce("オフラインになりました", "端末内の試合記録は引き続き利用できます。クラウド同期は接続回復後に行ってください。");
+      announce(window.cueT("p3.9313ea05"), window.cueT("p3.096d3436"));
     });
     window.addEventListener("online", () => {
       updateNetworkState();
-      announce("オンラインへ復帰しました", "クラウド状態を確認しています。");
+      announce(window.cueT("p3.95f87610"), window.cueT("p3.d9a939c0"));
       setManagedTimeoutV150(() => window.cueScoreCloudReconcileV118?.({ retryPending: true }), 250);
     });
 
@@ -20069,19 +20069,19 @@ ${window.cueT("p3.ead08064")}`
         "grid-template-columns:1fr auto","align-items:center","gap:10px",
         "font-size:14px","font-weight:800"
       ].join(";");
-      banner.innerHTML = `<span>新しいバージョンを利用できます。</span><button type="button" style="min-height:40px;border:0;border-radius:10px;padding:8px 13px;background:#176a40;color:#fff;font-weight:900">更新</button>`;
+      banner.innerHTML = `<span>${window.cueT("p3.6a7c9560")}</span><button type="button" style="min-height:40px;border:0;border-radius:10px;padding:8px 13px;background:#176a40;color:#fff;font-weight:900">${window.cueT("p3.d9db02d0")}</button>`;
       banner.querySelector("button")?.addEventListener("click", event => {
         const button = event.currentTarget;
         if (button instanceof HTMLButtonElement) {
           button.disabled = true;
-          button.textContent = "更新中…";
+          button.textContent = window.cueT("p3.711389be");
         }
         const waiting = registration.waiting;
         if (!waiting) {
           registration.update().catch(error => console.warn("[CueScore RC29] update check failed", error));
-          announce("更新を確認しています", "新しいバージョンの準備後に、もう一度更新してください。");
+          announce(window.cueT("p3.222ff012"), window.cueT("p3.042a7b3c"));
           button && (button.disabled = false);
-          button && (button.textContent = "更新");
+          button && (button.textContent = window.cueT("p3.d9db02d0"));
           return;
         }
         updateReloadRequestedV150 = true;
@@ -26592,7 +26592,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     const demoMode = Boolean(demoApi?.isDemo());
     const demoState = root.querySelector("#settingsDemoStateV1");
     if (demoState) {
-      demoState.textContent = demoMode ? "サンプルデータ" : "通常データ";
+      demoState.textContent = demoMode ? window.cueT("p3.4501817f") : window.cueT("p3.efc86c1e");
       demoState.classList.toggle("is-demo", demoMode);
     }
     root.querySelectorAll("[data-settings-action]").forEach(button => {

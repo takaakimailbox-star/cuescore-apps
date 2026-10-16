@@ -74,3 +74,26 @@ test("en text contains no Japanese and neither translation contains HTML-signifi
 test("Japanese catalog text of every P3 key is the original display text (non-empty, no placeholder-only message)", () => {
   for (const key of used) { const ja = catalogs.ja[key]; assert.ok(ja.replace(/\{[A-Za-z0-9_]+\}/g, "").trim().length > 0, key); }
 });
+
+test("applyStatic rewrites only the first / last text node of mixed-content elements and leaves ja untouched", async () => {
+  const core = require("../i18n-v1.js");
+  const make = language => {
+    const node = {
+      attrs: { "data-i18n-text-first": "k.first", "data-i18n-text-last": "k.last" },
+      childNodes: [{ nodeType: 3, nodeValue: "\n  A text" }, { nodeType: 1 }, { nodeType: 3, nodeValue: "B text  " }],
+      getAttribute(name) { return this.attrs[name] ?? null; }, setAttribute() {}, matches() { return false; }, querySelectorAll() { return []; }
+    };
+    const root = { ...node, matches(sel) { return /data-i18n-text-first/.test(sel); }, querySelectorAll() { return []; } };
+    core.registerCatalog("test-ja", { "k.first": "A", "k.last": "B" });
+    core.registerCatalog("en", { "k.first": "First", "k.last": "Last" });
+    core.registerCatalog("ja", { "k.first": "A", "k.last": "B" });
+    const i18n = core.createI18n({ language, storage: null, languages: [language] });
+    return { node: root, run: () => i18n.applyStatic(root) };
+  };
+  const en = make("en"); en.run();
+  assert.equal(en.node.childNodes[0].nodeValue, "\n  First");
+  assert.equal(en.node.childNodes[2].nodeValue, "Last  ");
+  assert.equal(en.node.childNodes[1].nodeType, 1);
+  const ja = make("ja"); assert.deepEqual(ja.run(), { changed: 0 });
+  assert.equal(ja.node.childNodes[0].nodeValue, "\n  A text");
+});

@@ -1,0 +1,2555 @@
+{
+ "rule": "AC-S1: Japanese literals that may remain in product sources, each with its reason. CLOUD = Cloud Sync (hidden, out of scope AC-18); CSV = CSV contract (fixed Japanese); DOMAIN = canonical stored values; U4 = Paywall/purchase wording (Decision pending); U8 = Backup Share Sheet wording (Decision pending); LANGNAME = language names are never translated; META = meta description.",
+ "entries": [
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "。端末内データは失われていません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\">削除</button>",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "/ 世代Revision：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "/ 復元世代ID：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "/ 復元時クラウドRevision：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "/ 復旧世代",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "/ 解決履歴",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "/ 試合ID：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\\n\\n⚠️ クラウドの方が新しい可能性があります。保存するとクラウド側を端末データで上書きします。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\\n\\n⚠️ 端末とクラウドの両方が変更されています。選ばなかった側の変更は失われる可能性があります。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\\n\\n⚠️ 端末の方が新しい可能性があります。読込すると端末側をクラウドデータで上書きします。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\\n\\nクラウド：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\\n\\nこの操作は元に戻せません。削除しますか？",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\\n\\nプレーヤー・対戦履歴・クラウド本体は変更されません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\\n\\n必要なら内容確認後に「クラウドへ保存」を押してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\\n\\n現在の端末データは上書きされます。続けますか？",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\\n\\n現在の端末データは自動退避されます。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\\n\\n現在の端末データは自動退避されます。クラウド本体は上書きしません。\\n\\nこの操作を続けますか？",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\\n\\n番号を入力（0ですべて削除／キャンセルで中止）",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\\n\\n番号を入力（キャンセルで中止）",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\\n\\n続けますか？",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\\nクラウド最終更新：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\\n理由：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "\\n端末内の最終データ日時：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "※ Device IDを知っている端末だけがデータを読込できます。紛失するとクラウドデータを復元できないため、パスワード管理アプリ等にも保存してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "※ Secret key（sb_secret_...）は入力しないでください。Publishable keyはこの端末内だけに保存されます。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "※ クラウド保存のたびに1世代を自動保存し、古いものから削除して最新10件を保持します。過去世代の復元は端末だけに反映され、クラウド本体は自動上書きしません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "※ 保存時はクラウドのRevisionを再確認し、他端末の更新があれば自動上書きを停止します。競合時は「クラウドから読込・強制上書き・キャンセル」を選べます。クラウド読込前には現在の端末データを自動退避します。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "※ 読み込み対象は同期解決履歴だけです。プレーヤー・対戦履歴・クラウド本体は変更しません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "</span>\n            <span class=\"settings-data-copy-v1\"><strong>クラウド同期</strong><span>データをクラウドと同期します</span></span>\n            <span class=\"settings-cloud-state-v1 is-muted\" id=\"settingsFormalCloudStateV1\">",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "</span><div><h2>バックアップ概要</h2><p id=\"suiteGenerationSummary\">クラウド接続後に実データを取得します。</p></div></div></section><h2 class=\"settings-suite-section-title-v2\">世代一覧</h2><section class=\"settings-suite-card-v2 settings-suite-list-v2 settings-suite-generation-host-v2\" id=\"suiteGenerationHost\"></section><p class=\"settings-suite-note-v2\">",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "</strong><p>接続設定とDevice IDを確認してください。</p><p class=\"settings-suite-note-v2\" id=\"suiteLastSync\">最終同期：未同期</p></div></div></section>\n        <section class=\"settings-suite-card-v2\"><h2>接続設定</h2><div class=\"settings-suite-field-v2\"><label for=\"suiteProjectUrl\">Project URL</label><input id=\"suiteProjectUrl\" type=\"url\" autocomplete=\"off\"></div><div class=\"settings-suite-field-v2\"><label for=\"suitePublishableKey\">Publishable key</label><input id=\"suitePublishableKey\" type=\"password\" autocomplete=\"off\"></div><button class=\"settings-suite-primary-v2\" id=\"suiteConnectBtn\" type=\"button\">接続設定を保存・確認</button><p class=\"settings-suite-note-v2\">※ Secret key（sb_secret_...）は入力しないでください。Publishable keyはこの端末内だけに保存されます。</p><div class=\"settings-suite-status-v2\" id=\"suiteConnectionStatus\" role=\"status\"></div></section>\n        <section class=\"settings-suite-card-v2\"><h2>Device ID</h2><p>同じデータを共有するすべての端末で、同じDevice IDを設定してください。</p><div class=\"settings-suite-field-v2\"><input id=\"suiteDeviceId\" type=\"text\" autocomplete=\"off\"></div><div class=\"settings-suite-actions-v2 three\"><button class=\"settings-suite-secondary-v2\" id=\"suiteGenerateId\" type=\"button\">IDを自動生成</button><button class=\"settings-suite-secondary-v2\" id=\"suiteSaveId\" type=\"button\">Device IDを保存</button><button class=\"settings-suite-primary-v2\" id=\"suiteCopyId\" type=\"button\">Device IDをコピー</button></div><div class=\"settings-suite-status-v2\" id=\"suiteDeviceStatus\" role=\"status\"></div></section>\n        <section class=\"settings-suite-card-v2\"><h2>データ同期</h2><div class=\"settings-suite-pair-v2\"><button class=\"settings-suite-action-tile-v2\" id=\"suiteCloudSave\" type=\"button\">",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "<div class=\"cloud-history-empty\">世代バックアップを取得できません：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "<div class=\"cloud-history-summary\" data-order-verified=\"true\">保持設定：最大",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "<div class=\"cloud-history-summary\" data-order-verified=\"true\">表示",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "<div class=\"cloud-resolution-history-empty\" style=\"padding:18px\">同期履歴はまだありません。</div>",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "<div class=\"cloud-resolution-history-empty\">同期解決履歴はまだありません。</div>",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "<p class=\"settings-suite-intro-v2\">クラウドとの同期履歴を、新しい順に表示します。</p><section class=\"settings-suite-card-v2 settings-suite-list-v2 settings-suite-history-host-v2\" id=\"suiteSyncHistoryHost\"></section><p class=\"settings-suite-note-v2\">※ 既存の同期解決履歴を最大20件表示します。</p><button class=\"settings-suite-danger-v2\" id=\"suiteClearSyncHistory\" type=\"button\">同期履歴をすべて削除</button>\n      </section>\n      <section class=\"settings-suite-view-v2\" data-suite-view=\"generation\" hidden>",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "<p class=\"settings-suite-intro-v2\">クラウドに保存された過去のデータの世代を確認・復元できます。</p><section class=\"settings-suite-card-v2\"><div class=\"settings-suite-icon-title-v2\"><span class=\"settings-suite-round-icon-v2\">",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "<section class=\"settings-suite-card-v2\"><h2>クラウド同期の状態</h2><div class=\"settings-suite-sync-state-v2\" id=\"suiteCloudState\"><span class=\"settings-suite-round-icon-v2\">",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "<span class=\"cloud-history-badge invalid\">復元不可</span>",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "<span><strong>クラウドから読み込む</strong><span>クラウドのデータを端末に復元します</span></span></button></div><div class=\"settings-suite-status-v2\" id=\"suiteSyncStatus\" role=\"status\"></div></section>\n        <section class=\"settings-suite-card-v2\"><h2>自動保存設定</h2><div class=\"settings-suite-toggle-row-v2\"><div><strong>試合終了時に自動保存</strong><p>試合終了後、安全確認をしてクラウドへ保存します</p></div><label class=\"settings-suite-toggle-v2\"><input id=\"suiteAutoSave\" type=\"checkbox\"><span></span></label></div></section>\n        <section class=\"settings-suite-card-v2 settings-suite-list-v2\"><h2 style=\"padding:16px 15px 0\">同期履歴・バックアップ</h2><button class=\"settings-suite-row-v2\" type=\"button\" data-suite-open=\"sync-history\">",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "<span><strong>クラウドへ保存</strong><span>データをクラウドに保存します</span></span></button><button class=\"settings-suite-action-tile-v2\" id=\"suiteCloudLoad\" type=\"button\">",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "<span><strong>世代バックアップ</strong><small>過去のクラウドデータの世代を管理できます</small></span><span class=\"settings-suite-chevron-v2\">›</span></button></section>\n      </section>\n      <section class=\"settings-suite-view-v2\" data-suite-view=\"export\" hidden>",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "<span><strong>同期履歴</strong><small>クラウドとの同期履歴を確認できます</small></span><span class=\"settings-suite-chevron-v2\">›</span></button><button class=\"settings-suite-row-v2\" type=\"button\" data-suite-open=\"generation\">",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "<strong>最終更新：</strong>",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "☁️ クラウドの方が新しい可能性があります。『クラウドから読込』を確認してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ クラウド側の更新があります。『保存方法を選ぶ』で読込または保存を選択してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ クラウド本体は保存済みですが、世代バックアップの作成に失敗しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ クラウド自動保存に失敗しました。端末データは保存されています。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ 他の端末でクラウドが更新されています。\\n\\n",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ 他端末の更新を検出したため保存を中止しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ 保存直前に他の端末が更新しました。自動保存を停止しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ 保留中の自動保存がありますが、クラウド更新を検出したため再試行していません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ 削除・復元後の変更があります。自動上書きせず、保存方法の確認を待っています。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ 削除対象の世代が見つかりません。履歴を更新してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ 復元できない形式",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ 端末データが変更されました。クラウドは自動上書きせず、保存方法の確認待ちです。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ 端末とクラウドの両方が前回同期後に変わっています。保存・読込を慎重に選んでください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ 競合を検出：『クラウドから読込』または手動の『クラウドへ保存』で確認してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ 競合を検出したため、端末データは残したままクラウド保存を中止しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ 自動保存できませんでした。端末には保存済みです：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ 自動保存を保留しました。他の端末でクラウドが更新されています。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "⚠️ 自動保存を保留しました。保存直前に他端末の更新を検出しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ Device IDをこの端末に保存しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ Device IDをこの端末に保存済みです。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ Device IDをコピーしました。",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ Supabaseへの接続を確認しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ クラウドへ安全に保存し、世代バックアップも作成しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ 保留していたクラウド保存は完了しています。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ 保留していた内容はクラウドへ保存済みです。端末側に新しい変更があります。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ 同期解決履歴だけを消去しました。直前の状態へ復旧できます。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ 同期解決履歴を書き出しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ 同期解決履歴を読み込みました（追加",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ 復旧世代をすべて削除しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ 端末データをクラウドへ保存し、再照合まで完了しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ 端末とクラウドは同じ内容です。",
+   "count": 4
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ 競合を確認し、この端末のデータでクラウドを上書きしました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ 自動保存・世代バックアップ完了：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ 自動保存を安全に再試行できます。『保存方法を選ぶ』から確認してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "✅ 試合終了後に競合確認を行い、クラウドへ自動保存しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "❌ 世代バックアップを削除できません：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "❌ 世代バックアップを復元できません：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "❌ 保存できません：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "❌ 同期方法を確定できません：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "❌ 同期解決履歴を読み込めません：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "❌ 接続できませんでした。キーを確認してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "❌ 読み込めません：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "📱 クラウド保存後に端末データが更新されています。必要なときに『クラウドへ保存』してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "📱 この端末の方が新しい可能性があります。『クラウドへ保存』を確認してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "1・2・3のどれかを入力してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "1：クラウドから読込\\n",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "1：この端末のデータをクラウドへ保存\\n",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "12文字以上のDevice IDを保存してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "12文字以上の同期用ID",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "2：クラウドのデータをこの端末へ読込\\n",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "2：この端末のデータで強制上書き\\n",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "3：キャンセル\\n\\n",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "CueScoreの同期解決履歴ファイルではありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "Device IDが未設定です。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "Device IDは12文字以上にしてください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "Device IDはまだ保存されていません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "Device IDをコピー",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "Device IDをコピーしました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "Device IDを保存",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "Device IDを保存するとクラウド情報を確認できます。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "IDを自動生成",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "JSONファイルを読み込めませんでした。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "Project URLが正しくありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "Publishable key（sb_publishable_...）を入力してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "Revisionなし",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "sb_publishable_... を貼り付け",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "Supabaseクラウド同期",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "Supabaseへ接続確認中…",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "オフライン",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "オフライン：端末に保存",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド：",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド→端末",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウドから復元しました。\\n",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウドから読込",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウドデータをこの端末へ読込",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウドデータを確認中…",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウドデータを端末へ読込",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウドデータ形式が正しくありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウドへ保存",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウドへ保存する前にRevisionを確認中…",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド保存・読込",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド保存が保留されています",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド保存データがありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド保存データはまだありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド保存時に保持する世代数です。1〜30件で設定できます。保存時にクラウド履歴へ即時反映されます。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド同期",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド同期：オフライン",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド同期：最新",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド同期：未設定",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド同期：要確認",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド同期の接続設定が保存されています。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド情報を取得できません：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド接続後に世代バックアップを確認できます。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド詳細",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド読込へ切り替えます。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド読込前の端末データへ戻します。\\n\\n退避日時：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "クラウド読込後の端末データ照合に失敗しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "この復旧世代を削除しますか？\\n\\n",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "この端末：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "この端末のデータでクラウドを上書きします。他端末の未読込変更が失われる可能性があります。本当に続けますか？",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "この端末のデータでクラウドを強制上書きします。\\n\\n他端末の未読込データは失われる可能性があります。本当に続けますか？",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "コピーできませんでした。Device IDを手動で選択してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "コピーできませんでした。クラウド詳細からコピーしてください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "します。\\n\\n端末：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "なし",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "バックアップ復元後の同期確認",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "は現在の端末データと同じ内容です。復元は不要です。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "プレーヤー",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "プレーヤー削除後の同期確認",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "へ復旧しました（",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "をクラウドから削除します。\\n\\n保存日時：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "を保留中です。保留日時：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "を削除しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "を削除しました。残り",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "を端末へ復元します。\\n\\n保存日時：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "不明",
+   "count": 3
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "世代バックアップ",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "世代バックアップ（最新10件）",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "世代バックアップの並び順を確認できませんでした。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "世代バックアップの作成後照合に失敗しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "世代バックアップの作成結果を確認できませんでした。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "世代バックアップの形式が正しくありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "世代バックアップは0件です。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "世代バックアップを端末へ復元しました。\\n",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "世代バックアップ復元後の同期確認",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "世代前",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "人　対戦履歴",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "人／対戦履歴",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "他の端末が先にクラウドデータを作成しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "他端末との競合確認",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "他端末の更新を検出したため、クラウド読込へ切り替えます。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件",
+   "count": 4
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件 /",
+   "count": 4
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件）。",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件／シーズン",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件／保持設定 最大",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件／合計",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件\\n\\nプレーヤー・対戦履歴・クラウド本体は変更されません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件\\nファイル：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件\\n保存日時：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件\\n復旧先：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件\\n統合後：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件</div>",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件</div><div class=\"cloud-history-empty\">世代バックアップはまだありません。次回のクラウド保存から自動で作成されます。</div>",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件に保存しましたが、クラウド履歴の整理に失敗しました：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件に設定し、古い世代を",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件に設定しました。Device ID設定後の次回クラウド保存から反映されます。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件に設定しました。クラウド履歴へ反映しています…",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件をすべて削除しますか？\\n\\n同期解決履歴・プレーヤー・対戦履歴・クラウド本体は変更されません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件を消去しますか？\\nクラウド本体と端末データは削除されません。\\n消去後は「直前の変更を戻す」で復旧できます。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件整理しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "件残っています。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保存データなし",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保存をキャンセルしました。",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保存方法を選ぶ",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保存済みの接続設定があります。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保存直前にクラウドが更新されました。この端末のデータで強制上書きしますか？",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保存直前に他の端末がクラウドを更新しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保持件数",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保持件数で削除した世代がクラウドに残っています。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保持件数の反映後も",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保持件数は",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保持件数は1〜30の整数で入力してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保持件数を",
+   "count": 3
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保持件数を保存",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保留マーカーを解除しました。端末データは保持されています。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保留中のクラウド保存状態を確認しています…",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保留中の変更をどの方法で解決しますか？\\n\\n",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保留理由：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保留表示だけを解除します。端末内データは削除されません。クラウドへ未保存の変更が残る可能性があります。続けますか？",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保留表示だけ解除",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保留表示のみ解除",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "保留表示を解除しました。必要に応じて手動でクラウド保存してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "先に接続設定を保存・確認してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "全データ削除後の同期確認",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "全プレーヤー削除後の同期確認",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "全履歴削除後の同期確認",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "内容不明",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "最後に確認したRevision：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "最新",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "最新を復元",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "最新世代：Revision",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "最新世代は安全のため削除できません。次回のクラウド保存後に古い世代として削除できます。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "最終同期：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "最終更新：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "処理中…",
+   "count": 4
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "削除",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "削除する復旧世代を選んでください。\\n\\n",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "削除する復旧世代番号が正しくありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "削除中…",
+   "count": 3
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "削除後の復旧世代件数が一致しません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "削除後の照合に失敗しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "前回の同期解決：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "反映中…",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "取得できません",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同じデータを共有する端末すべてに、同じDevice IDを設定します。推測されにくい長い文字列を使ってください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期履歴",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期方法の選択をキャンセルしました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期方法を確定",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期状態を再確認",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期状態を確認できませんでした。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期状態を確認中です。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期解決履歴",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期解決履歴の復旧用データを保存できませんでした。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期解決履歴の自動修復を保存できませんでした。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期解決履歴を消去できませんでした。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期解決履歴を端末へ保存できませんでした。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期解決履歴を読み込みます。\\n\\n現在：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期解決履歴を選択した状態へ戻しますか？\\n\\n現在：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期解決後のRevisionが期待値に達していません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期解決後のクラウドデータを確認できません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期解決後のクラウド内容が一致しません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "同期解決後も端末とクラウドの内容が一致しません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "壊れた履歴項目が含まれています。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "履歴ファイルが大きすぎます（上限1MB）。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "履歴ファイルの形式が正しくありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "履歴を書き出す",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "履歴を消去",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "履歴を読み込む",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "履歴件数が多すぎます（上限100件）。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "履歴削除後の同期確認",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "履歴配列がありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "復元",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "復元後のデータ照合に失敗したため、元のデータへ戻しました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "復旧する世代を選んでください。\\n\\n",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "復旧する世代番号が正しくありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "復旧できる同期解決履歴はありません",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "復旧できる同期解決履歴はありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "復旧世代",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "復旧世代をすべて削除できませんでした。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "復旧世代を管理",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "復旧世代を管理 (",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "復旧世代を管理できませんでした：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "復旧中…",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "復旧後の同期解決履歴が選択した世代と一致しません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "戻せる読込前データがありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "接続設定とDevice IDを保存すると同期状態を確認できます。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "接続設定とDevice IDを確認してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "接続設定を保存・確認",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "接続設定を確認し、iPhone・Macで同じDevice IDを入力して同期します。メール登録やログインは不要です。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "日時不明",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "更新",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "更新中…",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "書き出す同期解決履歴がありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "未同期",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "未確認",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "未解決の同期処理があります。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "未設定",
+   "count": 4
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "正常",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "消去する同期解決履歴がありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "状態：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "現在のRevision",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "現在のRevision：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "登録プレーヤー",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "直前の変更を戻す",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "直前の変更を戻す (",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "確認中…",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "端末：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "端末→クラウド",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "端末データをクラウドへ保存",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "端末に保存",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "端末のデータだけがあります。最初に『クラウドへ保存』してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "端末への復元書込みに失敗したため、元のデータへ戻しました：",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "端末側に未同期の変更があります。保存方法を確認してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "端末内データをクラウドへ保存",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "端末変更後のクラウド確認",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "管理できる復旧世代はありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "自動クラウド保存",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "自動クラウド保存をOFFにしました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "自動クラウド保存をONにしました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "自動保存：OFF（手動保存のみ）",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "自動保存：ON（接続設定とDevice IDがある端末で動作します）",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "自動保存：ON（試合終了後、安全確認をしてクラウドへ保存します）",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "自動保存中…（他端末のRevisionを確認しています）",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "自動保存保留：接続設定またはDevice IDが未設定です。端末には保存済みです。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "自動生成しました。『Device IDを保存』を押してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "英数字・ハイフン・アンダーバー・ピリオドだけを使用してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "要確認",
+   "count": 2
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "解決が必要な保留データはありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "設定済み",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "試合",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "試合／試合区分",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "試合終了後の自動保存",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "試合終了時に自動でクラウド保存",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "読み込める同期解決履歴がありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "読込をキャンセルしました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "読込前データへ戻す",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "読込前データ復元後の同期確認",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "読込前の端末データへ戻しました。クラウドは自動上書きせず、保存方法の確認待ちにしました。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "退避データの形式が正しくありません。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "通信エラー後の再保存",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "通信接続を確認してください。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "選択した復旧世代は現在の履歴と同じ内容です。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "選択した復旧世代を削除できませんでした。",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CLOUD",
+   "text": "選択世代",
+   "count": 4
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "Rack数",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "シーズン",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "シーズン=",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "シュート率",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "セーフティー",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "タグ",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "タグ=",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "ハイラン",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "ファール",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "プレーヤー",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "プレーヤー=",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "ミス",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "メモ",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "今年",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "今月",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "全期間",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "最終Inning",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "出力時の絞り込み条件",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "勝",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "勝敗",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "勝者",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "区分=",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "対戦相手",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "年",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "年月",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "引分",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "得点/Inning",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "得点差",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "成功球数",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "指定期間",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "敗",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "月",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "直近30日",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "相手Race to",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "相手得点",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "終了なし",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "自分Race to",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "自分得点",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "試合ID",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "試合区分",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "試合日",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "開始・終了時刻",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "CSV",
+   "text": "開始なし",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "DOMAIN",
+   "text": "1個",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "DOMAIN",
+   "text": "2個",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "DOMAIN",
+   "text": "2個以上",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "DOMAIN",
+   "text": "3個以上",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "DOMAIN",
+   "text": "イリーガル",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "DOMAIN",
+   "text": "スクラッチ",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "DOMAIN",
+   "text": "ファール（ブレイク交代）",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "DOMAIN",
+   "text": "ブレイクファール",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "DOMAIN",
+   "text": "ブレイク失敗",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "DOMAIN",
+   "text": "無得点",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "DOMAIN",
+   "text": "記録なし",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "LANGNAME",
+   "text": "</span></span></label>\n          <label class=\"settings-suite-radio-v2\"><input type=\"radio\" name=\"suiteLanguage\" value=\"ja\"><span><strong>日本語</strong></span></label>\n          <label class=\"settings-suite-radio-v2\"><input type=\"radio\" name=\"suiteLanguage\" value=\"en\"><span><strong>English</strong></span></label>\n          <label class=\"settings-suite-radio-v2\"><input type=\"radio\" name=\"suiteLanguage\" value=\"zh-Hans\"><span><strong>简体中文</strong></span></label>\n          <button class=\"settings-suite-primary-v2\" id=\"suiteLanguageApply\" type=\"button\">",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "META",
+   "text": "CueScore Apps — 複数のキュースポーツを記録・分析できる統合スコアリングアプリ",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "U4",
+   "text": "</div>\n      <span aria-hidden=\"true\"></span>\n    </header>\n    <div class=\"settings-formal-scroll-v1\">\n      <main class=\"settings-formal-main-v1\">\n        <h1 class=\"settings-formal-section-title-v1\">プラン</h1>\n        <section class=\"settings-plan-card-v72\" aria-label=\"現在のプラン\">\n          <div class=\"settings-plan-status-v72\">\n            <span class=\"settings-plan-value-v72 is-unknown\" data-settings-plan-state aria-live=\"polite\">確認中</span>\n          </div>\n          <button class=\"settings-plan-action-v72\" type=\"button\" data-settings-plan-action disabled>\n            <span data-settings-plan-action-label>購入情報を確認中</span>\n            <span class=\"settings-data-chevron-v1\" aria-hidden=\"true\">›</span>\n          </button>\n        </section>\n        <h1 class=\"settings-formal-section-title-v1\">",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "U4",
+   "text": "<span>クラウド同期：確認中</span></div></header>\n      <div class=\"analytics-controls-v1\"><div class=\"analytics-selector-v1\">\n        <div class=\"analytics-field-v1\"><label>",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "U8",
+   "text": "CueScore Apps v1.0 バックアップ",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "U8",
+   "text": "CueScore Apps バックアップ",
+   "count": 1
+  },
+  {
+   "file": "index.html",
+   "reason": "U8",
+   "text": "バックアップを保存",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "<header class=\"cue-pro-header-v1\"><button class=\"cue-pro-back-v1\" type=\"button\" aria-label=\"戻る\">‹</button><h1>CueScore Pro</h1><span></span></header><main class=\"cue-pro-scroll-v1\"><section class=\"cue-pro-hero-v1\"><div class=\"cue-pro-mark-v1\"><img src=\"src/assets/logo/CueScore_LogoMark_Black.svg\" alt=\"\" aria-hidden=\"true\"></div><h2>CueScore Pro</h2><p class=\"cue-pro-lead-v1\">記録をもっと残す。<br>プレーをもっと振り返る。</p></section><section class=\"cue-pro-values-v1\"><div><i>✓</i><span>履歴無制限</span></div><div><i>✓</i><span>自己ベスト</span></div><div><i>✓</i><span>詳細分析・推移</span></div><div><i>✓</i><span>対戦相手別の振り返り</span></div><div><i>✓</i><span>Backup / Restore</span></div></section><p class=\"cue-pro-price-v1\" data-pro-price>価格を確認中…</p><p class=\"cue-pro-active-v1\" data-pro-active hidden>✓ CueScore Pro 有効</p><p class=\"cue-pro-once-v1\">一度の購入でずっと利用できます</p><button class=\"cue-pro-buy-v1\" type=\"button\" data-pro-buy disabled>Proを購入</button><button class=\"cue-pro-restore-v1\" type=\"button\" data-pro-restore>購入を復元</button><p class=\"cue-pro-status-v1\" data-pro-status aria-live=\"polite\"></p></main>",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "✓ CueScore Pro 有効",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "✓ CueScore Proが有効になりました",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "Proを購入・購入を復元",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "データ復元",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "はProで利用できます。",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "バックアップ",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "プラン",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "価格を取得できません",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "価格を確認中…",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "全履歴",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "分析",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "対戦相手別",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "復元できる購入は見つかりませんでした。",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "確認中",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "自己ベスト",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "購入・復元について",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "購入は保留中です。承認後に自動で反映されます。",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "購入を完了できませんでした。時間をおいてもう一度お試しください。",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "購入処理中です…",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "購入情報を確認できませんでした。時間をおいてもう一度お試しください。",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "購入情報を確認中",
+   "count": 1
+  },
+  {
+   "file": "monetization-v1.js",
+   "reason": "U4",
+   "text": "購入状況を確認しています…",
+   "count": 1
+  }
+ ]
+}

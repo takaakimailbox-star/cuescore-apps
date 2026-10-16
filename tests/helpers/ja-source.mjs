@@ -17,7 +17,7 @@ const ja = () => {
   return (JA = captured);
 };
 
-function matchClose(src, open) {
+export function matchClose(src, open) {
   const pairs = { "{": "}", "(": ")", "[": "]" };
   const stack = [pairs[src[open]]];
   let i = open + 1;
@@ -49,7 +49,7 @@ function matchClose(src, open) {
   }
   return stack.length ? -1 : i - 1;
 }
-function splitTop(text, keep) {
+export function splitTop(text, keep) {
   const out = []; let depth = 0, start = 0, i = 0;
   while (i < text.length) {
     const c = text[i];

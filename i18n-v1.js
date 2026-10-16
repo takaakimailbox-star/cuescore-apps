@@ -156,12 +156,20 @@
       const rootNode=scope||(env.document&&env.document.documentElement);
       if(!rootNode||language==="ja")return {changed:0};
       let changed=0;
-      const selector=["[data-i18n]",...STATIC_ATTRIBUTES.map(([attribute])=>`[${attribute}]`)].join(",");
+      const selector=["[data-i18n]","[data-i18n-text-first]","[data-i18n-text-last]",...STATIC_ATTRIBUTES.map(([attribute])=>`[${attribute}]`)].join(",");
       const nodes=[...(rootNode.querySelectorAll?rootNode.querySelectorAll(selector):[])];
       if(rootNode.matches&&rootNode.matches(selector))nodes.unshift(rootNode);
       for(const node of nodes){
         const textKey=node.getAttribute("data-i18n");
         if(textKey){node.textContent=t(textKey);changed+=1;}
+        // Mixed content (text, <br>, text): rewrite only the first / last non-blank direct text node and keep the child elements (P3).
+        for(const [attribute,position] of [["data-i18n-text-first","first"],["data-i18n-text-last","last"]]){
+          const mixedKey=node.getAttribute(attribute);
+          if(!mixedKey)continue;
+          const texts=[...node.childNodes].filter(child=>child.nodeType===3&&child.nodeValue.trim());
+          const target=position==="first"?texts[0]:texts[texts.length-1];
+          if(target){const [,lead,,tail]=/^(\s*)([\s\S]*?)(\s*)$/.exec(target.nodeValue);target.nodeValue=lead+t(mixedKey)+tail;changed+=1;}
+        }
         for(const [source,target] of STATIC_ATTRIBUTES){
           const key=node.getAttribute(source);
           if(key){node.setAttribute(target,t(key));changed+=1;}

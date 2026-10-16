@@ -10,17 +10,17 @@ const ROOT = path.resolve(new URL("../../", import.meta.url).pathname);
 const NODE = process.execPath;
 const M = [
   // [name, file, from, to, mode, check]   check: golden | acs3 | fault:<variant>:<rich>:<fixture> | flow:<lang>:<mode>:<fixture>
-  ["OBS-10 editor title text changed (opener)", "index.html", 'modalTitle.textContent = player ? "プレーヤー編集" : "プレーヤー登録"', 'modalTitle.textContent = player ? "編集" : "プレーヤー登録"', "free", "golden"],
-  ["OBS-03 setup text changed", "final-ui-build18.js", 'display(2,"対戦相手を追加")', 'display(2,"相手を追加")', "free", "golden"],
+  ["OBS-10 editor title text changed (opener)", "index.html", 'modalTitle.textContent = player ? window.cueT("p3.eb76e466") : window.cueT("p3.35fbdeb5")', 'modalTitle.textContent = player ? window.cueT("p3.d107b864") : window.cueT("p3.35fbdeb5")', "free", "golden"],
+  ["OBS-03 setup text changed", "final-ui-build18.js", 'display(2,window.cueT("p3.89901bee"))', 'display(2,window.cueT("p3.3552b640"))', "free", "golden"],
   ["OBS-16 badge text changed", "monetization-v1.js", '">🔒 Pro</span>', '">Pro</span>', "free", "golden"],
-  ["OBS-16 badge aria changed", "monetization-v1.js", 'aria-label="Pro限定"', 'aria-label="Pro"', "free", "golden"],
+  ["OBS-16 badge aria changed", "monetization-v1.js", 'aria-label="\' + window.cueT("p3.e0149628") + \'">🔒 Pro</span>', 'aria-label="Pro">🔒 Pro</span>', "free", "golden"],
   ["OBS-09 generation guard removed (mirrors created again)", "index.html", 'if (window.CueScoreFeatureAccess.canUse("cloudSync")) {\n    mirrorStatus(', 'if (true) {\n    mirrorStatus(', "free", "golden"],
   ["allow-listed OBS-05 starts rewriting text (dynamic AC-S3 must catch it)", "index.html", "      syncModalAccessibility();\n    });", '      syncModalAccessibility();const t250=document.getElementById("playerLibraryTitle");if(t250&&t250.textContent!=="X250")t250.textContent="X250";\n    });', "free", "acs3"],
   ["OBS-03 trigger dropped (closePlayerLibrary), setup texts stale", "final-ui-build18.js", '"closePlayerLibrary",', "", "free", "golden"],
   ["journey: reviseHistory never runs (stands for every trigger removed at once)", "ui-revision-v12.js", "  function reviseHistory(){", "  function reviseHistory(){return;", "pro", "journey:ja:journey_ja.json"],
   ["journey: reviseRivals never runs (stands for every trigger removed at once)", "ui-revision-v12.js", "  function reviseRivals(){", "  function reviseRivals(){return;", "pro", "journey:ja:journey_ja.json"],
   ["journey: row date pattern wrong", "ui-revision-v12.js", 'date.textContent=window.cueDate(dt,"md-w-sp-hm")', 'date.textContent=window.cueDate(dt,"md-w-hm")', "pro", "journey:ja:journey_ja.json"],
-  ["journey: aria suffix applied twice-style change", "ui-revision-v12.js", 'const detailSuffix="、試合詳細を開く"', 'const detailSuffix="、詳細を開く"', "pro", "journey:ja:journey_ja.json"],
+  ["journey: aria suffix applied twice-style change", "ui-revision-v12.js", 'const detailSuffix=window.cueT("p3.989a1a74")', 'const detailSuffix=window.cueT("p3.d107b864")', "pro", "journey:ja:journey_ja.json"],
   ["badges: hub render no longer decorates", "navigation-phase2-6.js", "\n    window.CueScorePro?.decorate?.();\n  }", "\n  }", "free", "badges:ja:badges_ja.json"],
   ["badges: legacy detail render no longer decorates", "player-detail-build6.js", "renderInfo(player);window.CueScorePro?.decorate?.();}", "renderInfo(player);}", "free", "badges:ja:badges_ja.json"],
   ["badges: entitlement change no longer decorates", "monetization-v1.js", "syncSettingsPlan(snapshot);decorate();if(snapshot.isPro", "syncSettingsPlan(snapshot);if(snapshot.isPro", "free", "badges:ja:badges_ja.json"],
@@ -30,13 +30,13 @@ const M = [
   ["analysis step not run for the match view", "index.html", 'setView("match");runAnalysisPostRenderV1()}', 'setView("match")}', "pro", "golden"],
   ["OBS-13 stops deleting analysis buttons", "index.html", 'forEach(button=>button.remove());\n  new MutationObserver(addHistoryAnalysisEntriesV5)', 'forEach(button=>button);\n  new MutationObserver(addHistoryAnalysisEntriesV5)', "pro", "golden"],
   ["journey row date uses the wrong pattern (golden)", "ui-revision-v12.js", 'date.textContent=window.cueDate(dt,"md-w-sp-hm")', 'date.textContent=window.cueDate(dt,"ymd-w-sp-hm")', "pro", "golden"],
-  ["final-rc match wording changed", "analysis-final-rc.js", '"同じでした"', '"同一でした"', "pro", "golden"],
+  ["final-rc match wording changed", "analysis-final-rc.js", 'window.cueT("p3.f5203d0b")', 'window.cueT("p3.1f3e0388")', "pro", "golden"],
   ["OBS-15 generated predicate shifted, final-rc unavailable (fault)", "index.html", 'String(f2-f1).endsWith("0")', 'String(f2-f1).endsWith("1")', "pro", "fault:block-final-rc:0:fault_block-final-rc_0.json"],
   ["OBS-15 high-run quirk lost, final-rc and build4 unavailable (fault)", "index.html", 'String(high2-high1).endsWith("0")', 'high2===high1', "pro", "fault:block-both:0:fault_block-both_0.json"],
   ["OBS-14 explicit step not called, final-rc and build4 unavailable (fault)", "index.html", "    applyPriorGamesGuardV1();\n  }\n", "  }\n", "pro", "fault:block-both:0:fault_block-both_0.json"],
   ["OBS-14 guard acts although final-rc is present (build4 unavailable)", "index.html", "    if(window.CueScoreAnalyticsFinalRC)return;\n    const playerView", "    const playerView", "pro", "fault:block-build4:0:fault_block-build4_0.json"],
   ["OBS-17 title helper stops forcing the Player-tab title", "index.html", 'return document.body.dataset.cuePlayerContext === "browse" ? window.cueT("player.title") : text;', "return text;", "free", "flow:ja:free:flow_ja_free.json"],
-  ["OBS-10 save label changed (opener)", "index.html", 'saveButton.textContent = player ? "変更" : "登録"', 'saveButton.textContent = player ? "保存" : "登録"', "pro", "flow:en:pro:flow_en_pro.json"]
+  ["OBS-10 save label changed (opener)", "index.html", 'saveButton.textContent = player ? window.cueT("p3.125337ad") : window.cueT("p3.d60a44f6")', 'saveButton.textContent = player ? window.cueT("p3.fadf24db") : window.cueT("p3.d60a44f6")', "pro", "flow:en:pro:flow_en_pro.json"]
 ];
 const CONC = Number(process.argv[3] || 3);
 const ONLY = process.env.P2_MUT_ONLY ? new RegExp(process.env.P2_MUT_ONLY) : null; // re-run selected mutants only (e.g. after a load-induced watchdog)

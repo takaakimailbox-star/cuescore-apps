@@ -56,10 +56,11 @@ export function jaMarkupInHtml(html) {
   const re = /<(\/?)([A-Za-z][A-Za-z0-9-]*)((?:[^>"']|"[^"]*"|'[^']*')*)>|([^<]+)/g; let m, keyed = false;
   while ((m = re.exec(masked))) {
     if (m[2]) {
+      if (/^br$/i.test(m[2])) continue; // a line break keeps the key state of the surrounding element
       keyed = false;
       if (m[1]) continue;
       for (const a of m[3].matchAll(/\s(aria-label|title|placeholder|alt|content|value)="([^"]*)"/g)) if (JA.test(a[2])) out.push({ line: lineAt(m.index), text: a[2], kind: a[1], keyed: new RegExp("data-i18n-" + a[1] + "=").test(m[3]) });
-      keyed = /\bdata-i18n="/.test(m[3]);
+      keyed = /\bdata-i18n(?:-text-first|-text-last)?="/.test(m[3]);
     } else if (m[4] && JA.test(m[4]) && m[4].trim()) out.push({ line: lineAt(m.index), text: m[4].trim(), kind: "text", keyed });
     else if (m[4]) { /* whitespace between tags keeps the element's key state */ }
   }
