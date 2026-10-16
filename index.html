@@ -29331,6 +29331,17 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
 .analysis-v2{min-width:0;overflow:hidden}.analysis-v2-scroll,.analysis-v2-shell,.analysis-v2-view,.analysis-v2-card{min-width:0;max-width:100%}.analysis-v2-card{overflow:hidden}.analysis-v2-score{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}.analysis-v2-score-player{min-width:0}.analysis-v2-score-player strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.analysis-v2-chart{max-width:100%;overflow:hidden}
 @media(max-width:390px){.analysis-v2-scroll{padding-left:10px;padding-right:10px}.analysis-v2-context-main{grid-template-columns:minmax(0,1fr) auto}.analysis-v2-context-main .analysis-v2-select:last-of-type{grid-column:2}.analysis-v2-select{max-width:120px}.analysis-v2-entry{padding:14px}.analysis-v2-entry h2{font-size:20px}}
 </style>
+<style>
+/* P5 visual fit (Official 108 P5): English-only fit for 320px-class screens. At <=340px the player-name placeholder and the player-library title
+ * were ellipsized ("Select opponent", "Select for Player 1"). ja / zh-Hans and screens wider than 340px keep the existing rules unchanged. */
+@media(max-width:340px){
+  html[lang="en"] .cue-player-stack-v2 .new-match-player-name-v1{font-size:14px!important}
+  html[lang="en"] .player-library-title{font-size:15px!important}
+}
+/* P5-1a: the Match Detail result-header name already declares overflow:hidden + ellipsis + nowrap, but as a flex item in a centered column it was sized to its
+ * max-content width, so long names ran out of the card and overlapped. max-width:100% lets the declared ellipsis work; names that fit are unchanged. */
+.match-detail-result-name-v2{max-width:100%}
+</style>
 <script>
 // CueScore Analysis v2.0: conclusion-first player and single-match analysis.
 (() => {
