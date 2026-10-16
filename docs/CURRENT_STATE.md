@@ -1,5 +1,17 @@
 # CueScore Apps Current State
 
+## CueScore i18n P3 Implemented（2026年10月16日）
+
+- Decision 035（U6）に基づき、**3言語（ja／en／zh-Hans）の画面別対応 P3-①〜⑥を GitHub main に正式固定**した。表示文言は `cueT("p3.<hash>", {params})` 経由（catalog 1,241 キー。en／zh-Hans は **P3-PROVISIONAL**＝P4 レビュー前の暫定訳。`P4-APPROVED` ではない）、静的 markup は `data-i18n*`（混在内容は `data-i18n-text-first／last`）、日付は en／zh-Hans の暫定パターン（P2-6 の `cueDate`）。`alert`／`confirm`／`prompt` は標準方式のまま本文のみ翻訳（80 呼出のうち 53 は直接 catalog、4 は catalog 由来の動的本文、23 は非表示の Cloud Sync コードで未変更。OS ボタンの言語一致は **NOT VERIFIED**・実機確認は後工程）。
+- 不変: 日本語 UI（ja source は `window.cueT` を ja catalog 文へ戻した AST が移行前と意味同一、L2 実ブラウザ golden Free 21／Pro 28 差異 0）、Match／Snapshot schema・Player ID・`sharedMatchId`・QR・Backup・CSV・`resultLabel` 日本語 canonical・Analytics 数値・IAP・Free／Pro・Player Identity・日付保存値（baseline a841cbc に対し ja／en／zh-Hans の Backup bytes・CSV・全 storage・分析数値・記録 E2E が一致）。S-B flag=`false`、MutationObserver による文言書換え 0（AC-S3）。Native（`ios/`）差分 0、Apple 操作 0。
+- **未決のまま分離**: U3（法務ページ未翻訳期間の注記。注記は追加せず、法務ページ本体は未翻訳）、U4（Paywall と購入面の文言＝`monetization-v1.js` の購入関連全文と Settings のプランカードは日本語のまま）、U8（Backup Share Sheet の `title`／`text`／`dialogTitle` は日本語のまま）。Cloud Sync は対象外（非表示）。
+- **未完了**: P3-⑥の「重複描画層の整理・統合」は削除・統合の安全性を証明できないため**実装していない**（重複層の棚卸しのみ Evidence に記録）。P3 は PROVISIONAL のため「3言語対応が完成」とは判定しない（P4 の用語レビュー、P5 の Visual／Accessibility、P6 の Native が残る）。
+- Commit: Phase 0（U6 Official）`c5ef629`、テスト基盤 `0bb86bd`、P3-① `c02f742`、② `e4483cc`、③ `9c1475b`、④ `0262cc6`、⑤ `34fbfee`、⑥ `589fdea`。Evidence: `~/Documents/Codex/CueScore_i18n_P1_Permanent_Evidence_2026-10-12/38_…〜46_…`（P3 完了報告を含む）。Product Version／Build は変更なし（Service Worker の `APP_VERSION` はリリース時に更新）。
+
+## CueScore i18n P2 Completed（2026年10月15日）
+
+- P2 全 Phase（A: OBS-09、B: OBS-03、C: P2-6 日付 Formatter、D: P2-5a-2 journey、E1／E2: Pro badge と分析、F: P2-7 Data／QR／Backup／Identity パリティ、G: P2-8 クロージャ）を GitHub main に正式固定（`840ad03`／`0b10022`／`d7b082a`／`dd015a1`／`919d751`／`6c4b49e`／`494eb32`／`b2af342`）。AC-S2／S3（動的）／S4／S5／S6 を静的・動的に検証、134 行台帳は再監査済み、残る MutationObserver 登録は 14（文言書換え 0）。
+
 ## CueScore Localization U6 Dialog Decision Published（2026年10月16日）
 
 - Product Owner承認に基づき、**Decision 035／Official 115（Decision）／Official 116（Spec）／Official Design Decision Log v2.11**を発行した（Documentation-only）。U6（`alert/confirm/prompt`のOSボタン言語依存）は**RESOLVED**: 標準ダイアログ方式を維持し、**メッセージ本文のみ**ja／en／zh-Hansへ翻訳、OK・キャンセル等のボタンはOSに任せ、独自モーダルへの全面置換はしない。OSボタン表示の言語一致は**NOT VERIFIED**（実機確認は後工程）。
