@@ -8469,11 +8469,11 @@ body {
       <main id="matchSharingFlowContentV1" class="match-sharing-flow-content-v1"></main>
     </section>
 
-    <section id="playerStatsOverlay" class="player-stats-overlay hidden" aria-label="プレーヤー個人成績" aria-hidden="true">
+    <section id="playerStatsOverlay" class="player-stats-overlay hidden" aria-label="プレーヤー個人成績" aria-hidden="true" data-i18n-aria-label="p3.f85efbfe">
       <div class="player-stats-panel">
         <header class="player-stats-header">
           <button id="playerStatsBackBtn" class="player-stats-back" type="button" data-i18n="p3.60a1005b">戻る</button>
-          <div id="playerStatsTitle" class="player-stats-title">個人成績</div>
+          <div id="playerStatsTitle" class="player-stats-title" data-i18n="p3.00e9cd21">個人成績</div>
           <div id="playerStatsRace" class="player-stats-race"></div>
         </header>
         <div id="playerStatsBody" class="player-stats-body"></div>
@@ -8483,8 +8483,8 @@ body {
     <section class="player-library-overlay hidden" id="playerLibraryOverlay" aria-label="登録プレーヤー" data-i18n-aria-label="player.overlay.aria" aria-hidden="true">
       <div class="player-library-panel">
         <header class="player-library-header">
-          <button class="player-library-back" id="playerLibraryBackBtn" type="button">‹ 戻る</button>
-          <div class="player-library-title" id="playerLibraryTitle">プレーヤー選択</div>
+          <button class="player-library-back" id="playerLibraryBackBtn" type="button" data-i18n="p3.a081a194">‹ 戻る</button>
+          <div class="player-library-title" id="playerLibraryTitle" data-i18n="p3.71b0ec4b">プレーヤー選択</div>
           <button class="player-library-add" id="playerLibraryAddBtn" type="button" aria-label="新規登録" data-i18n-aria-label="player.add.initialAria">＋</button>
         </header>
 
@@ -8513,25 +8513,25 @@ body {
 
         <div class="player-editor hidden" id="playerEditor">
           <div class="player-editor-avatar-v2">
-            <button id="playerEditorAvatarBtnV2" class="player-editor-avatar-button-v2" type="button" aria-label="プロフィール画像を選択">
+            <button id="playerEditorAvatarBtnV2" class="player-editor-avatar-button-v2" type="button" aria-label="プロフィール画像を選択" data-i18n-aria-label="p3.544bf584">
               <span id="playerEditorAvatarPreviewV2" class="player-avatar-v2 player-avatar-default-v2" aria-hidden="true"></span>
             </button>
-            <strong>プロフィール画像</strong>
-            <span>タップしてアバターまたは写真を選択</span>
+            <strong data-i18n="p3.5b359027">プロフィール画像</strong>
+            <span data-i18n="p3.5b5d5f0d">タップしてアバターまたは写真を選択</span>
             <input id="playerEditorPhotoInputV2" type="file" accept="image/*" hidden />
           </div>
 
           <label class="player-editor-label" for="playerEditorName">Name:</label>
           <input class="player-editor-input" id="playerEditorName" type="text" maxlength="20" />
 
-          <label class="player-editor-label" for="playerEditorMemoV2">メモ（任意）</label>
+          <label class="player-editor-label" for="playerEditorMemoV2" data-i18n="p3.0e19f752">メモ（任意）</label>
           <div class="player-editor-memo-wrap-v2">
-            <textarea class="player-editor-input player-editor-memo-v2" id="playerEditorMemoV2" maxlength="100" rows="4" placeholder="自由に入力できます&#10;例）ブレイクが得意です&#10;キック練習中"></textarea>
+            <textarea class="player-editor-input player-editor-memo-v2" id="playerEditorMemoV2" maxlength="100" rows="4" placeholder="自由に入力できます&#10;例）ブレイクが得意です&#10;キック練習中" data-i18n-placeholder="p3.d67e3e96"></textarea>
             <span id="playerEditorMemoCountV2">0/100</span>
           </div>
 
           <label class="player-editor-primary-v1" for="playerEditorPrimaryV1">
-            <span><strong>メインプレーヤーに設定</strong><small>新しい対戦ではPlayer 1に初期表示されます</small></span>
+            <span><strong data-i18n="p3.5570a36d">メインプレーヤーに設定</strong><small data-i18n="p3.3ba995e7">新しい対戦ではPlayer 1に初期表示されます</small></span>
             <input id="playerEditorPrimaryV1" type="checkbox" />
           </label>
           <input class="player-editor-race" id="playerEditorRace" type="hidden" value="120" />
@@ -8539,7 +8539,7 @@ body {
 
           <div class="player-editor-actions">
             <button class="player-editor-save" id="playerEditorSaveBtn" type="button" data-i18n="p3.fadf24db">保存</button>
-            <button class="player-editor-delete hidden" id="playerEditorDeleteBtn" type="button">このプレーヤーを削除</button>
+            <button class="player-editor-delete hidden" id="playerEditorDeleteBtn" type="button" data-i18n="p3.a7a9b095">このプレーヤーを削除</button>
           </div>
         </div>
       </div>
@@ -8548,7 +8548,7 @@ body {
 
     <section class="data-management-screen hidden" id="dataManagementScreen" aria-label="データ管理" aria-hidden="true" data-i18n-aria-label="p3.347299a8">
       <header class="data-management-header">
-        <button class="data-management-back" id="dataManagementBackBtn" type="button">‹ 戻る</button>
+        <button class="data-management-back" id="dataManagementBackBtn" type="button" data-i18n="p3.a081a194">‹ 戻る</button>
         <div class="data-management-title" data-i18n="p3.347299a8">データ管理</div>
         <div class="data-management-header-spacer"></div>
       </header>
@@ -8677,7 +8677,7 @@ body {
 
     <section class="settings-screen hidden" id="settingsScreen" aria-label="設定" data-i18n-aria-label="settings.screen.aria" aria-hidden="true">
       <header class="settings-header">
-        <button class="settings-back" id="settingsBackBtn" type="button">‹ 戻る</button>
+        <button class="settings-back" id="settingsBackBtn" type="button" data-i18n="p3.a081a194">‹ 戻る</button>
         <div class="settings-title">設定</div>
         <div class="settings-version">Version 1.2</div>
       </header>
@@ -8709,15 +8709,15 @@ body {
 
     <section class="statistics-filter-screen hidden" id="statisticsFilterScreen" aria-label="統計フィルター">
       <header class="statistics-filter-header">
-        <button class="statistics-filter-back" id="statisticsFilterBackBtn" type="button">‹ 戻る</button>
+        <button class="statistics-filter-back" id="statisticsFilterBackBtn" type="button" data-i18n="p3.a081a194">‹ 戻る</button>
         <div class="statistics-filter-title">統計フィルター</div>
         <div class="statistics-filter-count" id="statisticsFilterCount"></div>
       </header>
       <div class="statistics-filter-content">
         <section class="statistics-filter-card">
-          <h2>期間</h2>
+          <h2 data-i18n="p3.c4fde16f">期間</h2>
           <div class="statistics-filter-periods" id="statisticsPeriodButtons">
-            <button type="button" data-period="all" class="active">全期間</button><button type="button" data-period="year">今年</button><button type="button" data-period="month">今月</button><button type="button" data-period="30days">直近30日</button><button type="button" data-period="recent10">直近10試合</button>
+            <button type="button" data-period="all" class="active" data-i18n="p3.5f5f8a4b">全期間</button><button type="button" data-period="year">今年</button><button type="button" data-period="month" data-i18n="p3.a5c45c77">今月</button><button type="button" data-period="30days">直近30日</button><button type="button" data-period="recent10" data-i18n="p3.bb21e966">直近10試合</button>
           </div>
           <div class="statistics-filter-grid">
             <div class="statistics-filter-field"><label for="statisticsFromDate">開始日</label><input id="statisticsFromDate" type="date"></div>
@@ -8727,9 +8727,9 @@ body {
         <section class="statistics-filter-card"><h2>分類・対象</h2><div class="statistics-filter-grid">
           <div class="statistics-filter-field"><label for="statisticsSeason">シーズン</label><select id="statisticsSeason"><option value="" data-i18n="p3.c15ccc4d">すべて</option></select></div>
           <div class="statistics-filter-field full"><label for="statisticsPlayer">プレーヤー</label><select id="statisticsPlayer"><option value="" data-i18n="p3.c15ccc4d">すべて</option></select></div>
-          <div class="statistics-filter-field full"><label for="statisticsOpponent">対戦相手</label><select id="statisticsOpponent"><option value="" data-i18n="p3.c15ccc4d">すべて</option></select></div>
+          <div class="statistics-filter-field full"><label for="statisticsOpponent" data-i18n="p3.b448aa33">対戦相手</label><select id="statisticsOpponent"><option value="" data-i18n="p3.c15ccc4d">すべて</option></select></div>
           <div class="statistics-filter-field"><label for="statisticsRecordingMode">記録モード</label><select id="statisticsRecordingMode"><option value="" data-i18n="p3.c15ccc4d">すべて</option><option value="detail">分析モードのみ</option><option value="simple">シンプル版・旧データ</option></select></div>
-          <div class="statistics-filter-field"><label for="statisticsOutcome">勝敗</label><select id="statisticsOutcome"><option value="" data-i18n="p3.c15ccc4d">すべて</option><option value="win">勝ち試合のみ</option><option value="loss">負け試合のみ</option></select></div>
+          <div class="statistics-filter-field"><label for="statisticsOutcome" data-i18n="p3.0c8bd857">勝敗</label><select id="statisticsOutcome"><option value="" data-i18n="p3.c15ccc4d">すべて</option><option value="win">勝ち試合のみ</option><option value="loss">負け試合のみ</option></select></div>
         </div></section>
         <div class="statistics-filter-summary" id="statisticsFilterSummary">全期間・すべての試合を集計します。</div>
         <div class="statistics-filter-actions"><button class="statistics-filter-reset" id="statisticsFilterResetBtn" type="button">全解除</button><button class="statistics-filter-apply" id="statisticsFilterApplyBtn" type="button">この条件を適用</button></div>
@@ -8738,13 +8738,13 @@ body {
 
     <section class="rankings-screen hidden" id="rankingsScreen" aria-label="プレーヤーランキング">
       <header class="rankings-header">
-        <button class="rankings-back" id="rankingsBackBtn" type="button" aria-label="戻る" data-i18n-aria-label="p3.60a1005b">‹ 戻る</button>
+        <button class="rankings-back" id="rankingsBackBtn" type="button" aria-label="戻る" data-i18n-aria-label="p3.60a1005b" data-i18n="p3.a081a194">‹ 戻る</button>
         <div class="rankings-title">ランキング</div>
         <div class="rankings-count" id="rankingsCount"></div>
       </header>
       <div class="rankings-content">
         <div class="rankings-tabs" role="tablist" aria-label="ランキング項目">
-          <button type="button" data-ranking-type="winRate" class="active">勝率</button>
+          <button type="button" data-ranking-type="winRate" class="active" data-i18n="p3.bab1876f">勝率</button>
           <button type="button" data-ranking-type="wins">勝利数</button>
           <button type="button" data-ranking-type="highRun" data-i18n="p3.761345d1">ハイラン</button>
           <button type="button" data-ranking-type="shotRate" data-i18n="p3.274e5e0c">シュート率</button>
@@ -8757,7 +8757,7 @@ body {
     <section class="vs-analysis-screen hidden" id="vsAnalysisScreen" aria-label="対戦相性分析">
       <header class="vs-analysis-header">
         <button class="vs-analysis-back" id="vsAnalysisBackBtn" type="button" aria-label="戻る" data-i18n-aria-label="p3.60a1005b"></button>
-        <div class="vs-analysis-title">ライバル分析</div>
+        <div class="vs-analysis-title" data-i18n="p3.44a3c99c">ライバル分析</div>
         <div class="vs-analysis-count" id="vsAnalysisCount"></div>
       </header>
       <div class="vs-analysis-content">
@@ -8765,7 +8765,7 @@ body {
         <div class="vs-select-panel player-fixed-v832">
           <div class="vs-fixed-player-v832" id="vsFixedPlayerV832">選択中</div>
           <div class="vs-mark">VS</div>
-          <select class="vs-player-select" id="vsPlayer2Select" aria-label="対戦相手"></select>
+          <select class="vs-player-select" id="vsPlayer2Select" aria-label="対戦相手" data-i18n-aria-label="p3.b448aa33"></select>
           <select class="vs-player-select hidden" id="vsPlayer1Select" aria-label="基準プレーヤー" tabindex="-1"></select>
         </div>
         <button class="vs-swap-button" id="vsSwapPlayersBtn" type="button">左右を入れ替える</button>
@@ -8776,7 +8776,7 @@ body {
     <section class="classification-manager-v381 hidden" id="classificationManagerV381"
       aria-label="試合分類管理">
       <header class="classification-manager-header-v381">
-        <button id="classificationManagerBackV381" type="button" aria-label="戻る" data-i18n-aria-label="p3.60a1005b">‹ 戻る</button>
+        <button id="classificationManagerBackV381" type="button" aria-label="戻る" data-i18n-aria-label="p3.60a1005b" data-i18n="p3.a081a194">‹ 戻る</button>
         <div>シーズン管理</div>
         <span></span>
       </header>
@@ -8977,7 +8977,7 @@ body {
     const close = document.createElement("button");
     close.className = "player-delete-notice-close-v1";
     close.type = "button";
-    close.setAttribute("aria-label", "通知を閉じる");
+    close.setAttribute("aria-label", window.cueT("p3.43e98a67"));
     close.textContent = "×";
     const dismiss = () => {
       if (playerDeleteNoticeTimerV1) clearTimeout(playerDeleteNoticeTimerV1);
@@ -9944,7 +9944,7 @@ let matchRecordsRawCacheV152 = null;
     const p2=logical?.players?.[2]||logical?.players?.["2"]||{};
     const labels={rotation:"Rotation",nineBall:"9-Ball",tenBall:"10-Ball",straightPool:"14-1",jpa9Ball:"JPA 9-Ball",threeCushion:"3 Cushion"};
     const ended=new Date(logical?.endedAt||logical?.startedAt||0);
-    const date=Number.isNaN(ended.getTime())?"日付なし":window.cueDate(ended,"ymd-hm");
+    const date=Number.isNaN(ended.getTime())?window.cueT("p3.6b344146"):window.cueDate(ended,"ymd-hm");
     const condition=logical?.match?.targetPoints?`目標 ${logical.match.targetPoints}点`:(p1.goal||p2.goal?`Race to ${Number(p1.goal)||"—"}-${Number(p2.goal)||"—"}`:"");
     return {p1,p2,date,condition,game:labels[logical?.gameType]||"CueScore"};
   }
@@ -10005,7 +10005,7 @@ let matchRecordsRawCacheV152 = null;
     const flow=ensureMatchSharingFlowControllerV1(),state=flow.get();
     const pickerButton=event.target.closest("[data-open-player-picker]");if(pickerButton){openMatchSharingPlayerPickerV1(pickerButton.dataset.openPlayerPicker);return}
     const newButton=event.target.closest("[data-new-player]");if(newButton){const sideNumber=Number(newButton.dataset.newPlayer),s=matchSharingFlowSummaryV1(state.logicalMatch),shared=sideNumber===1?s.p1:s.p2,value={kind:"new",pendingKey:`side-${sideNumber}-${state.sharedMatchId}`,draft:{name:shared.name||"",memo:"",avatar:{type:"default",id:"default_silhouette"}}};flow.selectMapping(sideNumber,value);return}
-    if(event.target.closest("[data-flow-next]")){try{flow.next()}catch(error){if(error?.code==="DUPLICATE_PLAYER_NAME")showToast("同じ名前のプレーヤーが登録されています","既存のプレーヤーを選んでください");else showToast("選択を確認してください",error.message)}return}
+    if(event.target.closest("[data-flow-next]")){try{flow.next()}catch(error){if(error?.code==="DUPLICATE_PLAYER_NAME")showToast(window.cueT("p3.b0707a0e"),"既存のプレーヤーを選んでください");else showToast("選択を確認してください",error.message)}return}
     if(event.target.closest("[data-flow-import]")){const button=event.target.closest("[data-flow-import]");button.disabled=true;button.setAttribute("aria-busy","true");try{const completed=flow.commit(),id=completed.result.importedLocalMatchId;document.getElementById("matchSharingFlowV1")?.classList.add("hidden");document.body.classList.remove("match-sharing-flow-visible-v1","match-sharing-receiver-visible-v1");document.body.style.overflow="";matchSharingReceiverMemoryV1?.clear?.();renderMatchRecords();if(!window.cueScoreOpenImportedMatchDetailOnceV1?.(id))throw new Error("Imported Match detail could not be opened");showToast("✓ 試合を取り込みました","通常の試合として保存しました") }catch(error){console.warn("CueScore Match Sharing import failed",error);if(error?.code==="DUPLICATE_SHARED_MATCH_ID")showMatchSharingDuplicateStateV1();else renderMatchSharingFlowV1(flow.get())}return}
   });
   document.getElementById("matchSharingFlowContentV1")?.addEventListener("change",event=>{const sideNumber=Number(event.target.dataset.newPlayerName);if(![1,2].includes(sideNumber))return;const state=ensureMatchSharingFlowControllerV1().get(),value={kind:"new",pendingKey:`side-${sideNumber}-${state.sharedMatchId}`,draft:{name:event.target.value,memo:"",avatar:{type:"default",id:"default_silhouette"}}};ensureMatchSharingFlowControllerV1().selectMapping(sideNumber,value)});
@@ -10162,11 +10162,11 @@ let matchRecordsRawCacheV152 = null;
   const DEFAULT_PLAYER_AVATAR_SOURCE_V4 = "assets/icons/avatar/default/avatar_default_silhouette.png";
   const DEFAULT_PLAYER_AVATAR_V4 = Object.freeze({type:"default",id:DEFAULT_PLAYER_AVATAR_ID_V4});
   const PLAYER_AVATAR_CATEGORY_V5 = Object.freeze({
-    male:["ショート","センターパート","マッシュ","ベリーショート","サイドパート","ミディアム","眼鏡","グレーヘア","ウェーブ","ひげ"],
-    female:["ショート","ボブ","ロングウェーブ","ベリーショート","セミロング","ポニーテール","眼鏡","ショートレイヤー","三つ編み","まとめ髪"],
-    animal:["猫","柴犬","うさぎ","キツネ","パンダ","クマ","フクロウ","ペンギン","ライオン","コアラ"],
-    flower:["バラ","桜","ひまわり","チューリップ","ユリ","アジサイ","ハス","デイジー","ツバキ","ラベンダー"],
-    ball:["手球",...Array.from({length:15},(_,index)=>`${index+1}番ボール`)]
+    male:[window.cueT("p3.58dd9da2"),window.cueT("p3.aca8d7af"),window.cueT("p3.2aac1182"),window.cueT("p3.9ec6316a"),window.cueT("p3.d9ef310a"),window.cueT("p3.038b3c68"),window.cueT("p3.d5720765"),window.cueT("p3.a1d6c71e"),window.cueT("p3.ba0b8e1e"),window.cueT("p3.4fa24684")],
+    female:[window.cueT("p3.58dd9da2"),window.cueT("p3.48211786"),window.cueT("p3.dd687592"),window.cueT("p3.9ec6316a"),window.cueT("p3.29b9fd4c"),window.cueT("p3.a868fec0"),window.cueT("p3.d5720765"),window.cueT("p3.ae464cbd"),window.cueT("p3.5c24235f"),window.cueT("p3.f415bfd9")],
+    animal:[window.cueT("p3.e10bd9f0"),window.cueT("p3.cbc14c98"),window.cueT("p3.400fafd1"),window.cueT("p3.6fb774f6"),window.cueT("p3.672d8437"),window.cueT("p3.3e1ce95e"),window.cueT("p3.5f913719"),window.cueT("p3.d53f6c6b"),window.cueT("p3.d848a29c"),window.cueT("p3.c44109bd")],
+    flower:[window.cueT("p3.49a64713"),window.cueT("p3.74a86de5"),window.cueT("p3.e6576a6c"),window.cueT("p3.2d28a6e2"),window.cueT("p3.07d0850a"),window.cueT("p3.a2e7e97e"),window.cueT("p3.6a8f9615"),window.cueT("p3.57fd4835"),window.cueT("p3.d49062f9"),window.cueT("p3.be9072f7")],
+    ball:[window.cueT("p3.b69e5436"),...Array.from({length:15},(_,index)=>window.cueT(`p3.658e9eaa`,{p:index+1}))]
   });
   const PLAYER_AVATAR_PRESETS_V5 = Object.freeze(Object.entries(PLAYER_AVATAR_CATEGORY_V5).flatMap(([category,labels]) => labels.map((label,index) => {
     const number=category === "ball" ? (index === 0 ? "cue" : String(index).padStart(2,"0")) : String(index+1).padStart(2,"0");
@@ -10198,13 +10198,13 @@ let matchRecordsRawCacheV152 = null;
       const avatar = el(`proP${player}AvatarV2`);
       if (!avatar) return;
       avatar.src = playerAvatarSourceV2(registered?.avatar);
-      avatar.alt = registered ? `${registered.name}のプロフィール画像` : `プレーヤー${player}のプロフィール画像`;
+      avatar.alt = registered ? window.cueT(`p3.b87d3fc2`,{name:registered.name}) : window.cueT(`p3.7ad3af89`,{player:player});
     });
   }
 
   function playerAvatarHtmlV2(player, className="player-avatar-v2") {
     const avatar=normalizePlayerAvatarV2(player?.avatar);
-    const label=PLAYER_AVATAR_BY_ID_V5.get(avatar.id)?.label || (avatar.type === "photo" ? "プロフィール写真" : "シンプルプロフィール画像");
+    const label=PLAYER_AVATAR_BY_ID_V5.get(avatar.id)?.label || (avatar.type === "photo" ? window.cueT("p3.663327e2") : window.cueT("p3.19246c63"));
     return `<img class="${className}" src="${playerAvatarSourceV2(avatar)}" alt="${escapeRecordText(label)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${DEFAULT_PLAYER_AVATAR_SOURCE_V4}'">`;
   }
 
@@ -10353,9 +10353,9 @@ let matchRecordsRawCacheV152 = null;
   }
 
   function formatLastUsed(value) {
-    if (!value) return "未使用";
+    if (!value) return window.cueT("p3.13cec835");
     const d = new Date(value);
-    if (Number.isNaN(d.getTime())) return "未使用";
+    if (Number.isNaN(d.getTime())) return window.cueT("p3.13cec835");
     return window.cueDate(d, "ymd-hm");
   }
 
@@ -10368,7 +10368,7 @@ let matchRecordsRawCacheV152 = null;
       .sort((a,b) => (b.lastUsed || b.updatedAt || b.createdAt || 0) - (a.lastUsed || a.updatedAt || a.createdAt || 0));
 
     if (!players.length) {
-      list.innerHTML = `<div class="player-library-empty">${query ? "該当するプレーヤーがいません" : "登録プレーヤーはまだいません。<br>右上の＋から登録できます。"}</div>`;
+      list.innerHTML = `<div class="player-library-empty">${query ? window.cueT("p3.814b2f93") : window.cueT("p3.d490da10") + "<br>" + window.cueT("p3.2c7d0d5c")}</div>`;
       return;
     }
 
@@ -10380,9 +10380,9 @@ let matchRecordsRawCacheV152 = null;
       const usedByOther = p.id === otherSelectedId;
       const selectedHere = p.id === currentSelectedId;
       const status = usedByOther
-        ? `<span class="player-library-status">Player${otherPlayer}で選択中</span>`
+        ? `<span class="player-library-status">${window.cueT("p3.2fe1b07e",{otherPlayer:otherPlayer})}</span>`
         : selectedHere
-          ? `<span class="player-library-status current">現在選択中</span>`
+          ? `<span class="player-library-status current">${window.cueT("p3.9370be60")}</span>`
           : "";
       return `
       <div class="player-library-item${usedByOther ? " unavailable" : ""}">
@@ -10391,11 +10391,11 @@ let matchRecordsRawCacheV152 = null;
             <div class="player-library-name"></div>
             ${status}
           </div>
-          <div class="player-library-meta">最終使用 ${formatLastUsed(p.lastUsed)}</div>
+          <div class="player-library-meta">${window.cueT("p3.0cd1f195",{p:formatLastUsed(p.lastUsed)})}</div>
         </button>
         <div class="player-library-actions">
-          <button class="player-library-stats" type="button" data-stats-player="${p.id}">成績</button>
-          <button class="player-library-edit" type="button" data-edit-player="${p.id}">編集</button>
+          <button class="player-library-stats" type="button" data-stats-player="${p.id}">${window.cueT("p3.b65af422")}</button>
+          <button class="player-library-edit" type="button" data-edit-player="${p.id}">${window.cueT("p3.d107b864")}</button>
         </div>
       </div>`;
     }).join("");
@@ -10441,8 +10441,8 @@ let matchRecordsRawCacheV152 = null;
   let playerStatsReturnToManagementV147 = false;
 
   function buildPlayerTrendChart(points, options = {}) {
-    const ariaLabel = options.ariaLabel || "統計推移グラフ";
-    const emptyText = options.emptyText || "対戦履歴が増えると推移を表示します。";
+    const ariaLabel = options.ariaLabel || window.cueT("p3.063fe6de");
+    const emptyText = options.emptyText || window.cueT("p3.122a4afd");
     if (!points.length) {
       return `<div class="player-trend-empty">${emptyText}</div>`;
     }
@@ -10577,7 +10577,7 @@ let matchRecordsRawCacheV152 = null;
     }
     const current=summarize(recent), prior=summarize(previous);
     const metrics=[
-      {key:'winRate',label:'勝率',suffix:'%',digits:0,higher:true},
+      {key:'winRate',label:window.cueT('p3.bab1876f'),suffix:'%',digits:0,higher:true},
       {key:'shotRate',label:'平均シュート率',suffix:'%',digits:0,higher:true},
       {key:'pointsPerInning',label:'平均得点 / Inn',suffix:'',digits:1,higher:true},
       {key:'avgHighRun',label:'平均ハイラン',suffix:'',digits:1,higher:true},
@@ -10897,7 +10897,7 @@ let matchRecordsRawCacheV152 = null;
     const esc=escapeRecordText;
     if(!analysis||analysis.reflectionGames<2)return `<section class="player-reflection-analysis-v850"><div class="player-reflection-analysis-head-v850"><div class="player-reflection-analysis-title-v850">振り返り傾向</div><div class="player-reflection-analysis-count-v850">${analysis?.reflectionGames||0}試合</div></div><div class="player-reflection-wait-v850">プレーヤー別の振り返りが2試合以上たまると、調子・メンタルと成績の関係を表示します。旧形式の共通メモは、誰の内容か判定できないため個人分析には使用しません。</div></section>`;
     const moodCards=analysis.moodRows.map(row=>`<div class="player-reflection-card-v850"><div class="player-reflection-card-label-v850">調子：${esc(row.label)}</div><div class="player-reflection-card-value-v850">${row.games?`${row.winRate}%`:'–'}</div><div class="player-reflection-card-sub-v850">${row.games?`${row.games}試合・${row.wins}勝`:'記録なし'}</div></div>`).join('');
-    const mentalRows=analysis.mentalRows.length?analysis.mentalRows.map(row=>`<div class="player-reflection-mental-row-v850"><div class="player-reflection-mental-name-v850">${esc(row.label)}</div><div class="player-reflection-mental-number-v850">${row.games}試合</div><div class="player-reflection-mental-number-v850">勝率${row.winRate}%</div><div class="player-reflection-mental-number-v850">${row.shotRate==null?'率–':`${row.shotRate}%`}</div></div>`).join(''):`<div class="player-reflection-wait-v850">メンタルの選択記録はまだありません。</div>`;
+    const mentalRows=analysis.mentalRows.length?analysis.mentalRows.map(row=>`<div class="player-reflection-mental-row-v850"><div class="player-reflection-mental-name-v850">${esc(row.label)}</div><div class="player-reflection-mental-number-v850">${window.cueT("p3.2a6cdf39",{games:row.games,count:row.games})}</div><div class="player-reflection-mental-number-v850">${window.cueT("p3.8c77ecdd",{winRate:row.winRate})}</div><div class="player-reflection-mental-number-v850">${row.shotRate==null?'率–':`${row.shotRate}%`}</div></div>`).join(''):`<div class="player-reflection-wait-v850">メンタルの選択記録はまだありません。</div>`;
     const focuses=analysis.focuses.length?`<div class="player-reflection-subtitle-v850">最近の「次回意識すること」</div><div class="player-reflection-focus-list-v850">${analysis.focuses.map(item=>`<div class="player-reflection-focus-v850"><span class="player-reflection-focus-date-v850">${esc(item.date)}</span>${esc(item.text)}</div>`).join('')}</div>`:'';
     return `<section class="player-reflection-analysis-v850"><div class="player-reflection-analysis-head-v850"><div><div class="player-reflection-analysis-title-v850">振り返り傾向</div></div><div class="player-reflection-analysis-count-v850">振り返り ${analysis.reflectionGames}/${analysis.totalGames}試合</div></div><div class="player-reflection-analysis-lead-v850">選択した期間内のプレーヤー別振り返りと試合成績を比較します。</div><div class="player-reflection-summary-v850">${esc(analysis.insight)}</div><div class="player-reflection-subtitle-v850">調子別の勝率</div><div class="player-reflection-grid-v850">${moodCards}</div><div class="player-reflection-subtitle-v850">メンタル別の傾向 <span style="font-weight:400;color:rgba(255,255,255,.58)">（試合数／勝率／シュート率）</span></div><div class="player-reflection-mental-list-v850">${mentalRows}</div>${focuses}<div class="rion-coach-note-v760">少ない記録では偶然の影響が大きいため、傾向は参考として表示しています。</div></section>`;
   }
@@ -11127,42 +11127,42 @@ let matchRecordsRawCacheV152 = null;
 
     const chartConfigV33 = playerStatsActiveChartV33 === "winRate"
       ? {
-          title: "累計勝率推移",
+          title: window.cueT("p3.6871ba93"),
           points: winRateTrendPointsV47,
-          note: "各試合終了時点までの累計勝率",
-          options: { maxY: 100, suffix: "%", ariaLabel: "累計勝率推移" },
-          label: "勝率", lowerIsBetter: false, suffix: "%", isRate: true
+          note: window.cueT("p3.e9868c2f"),
+          options: { maxY: 100, suffix: "%", ariaLabel: window.cueT("p3.6871ba93") },
+          label: window.cueT("p3.bab1876f"), lowerIsBetter: false, suffix: "%", isRate: true
         }
       : playerStatsActiveChartV33 === "shotRate"
         ? {
-            title: "シュート率推移",
+            title: window.cueT("p3.64b3d461"),
             points: shotRateTrendPoints.slice().reverse(),
-            note: "成功ショット ÷（成功ショット＋交代ボタンによるミス）",
-            options: { maxY: 100, suffix: "%", ariaLabel: "シュート率推移" },
+            note: window.cueT("p3.2efdb83d"),
+            options: { maxY: 100, suffix: "%", ariaLabel: window.cueT("p3.64b3d461") },
             label: window.cueT("p3.274e5e0c"), lowerIsBetter: false, suffix: "%", isRate: true
           }
         : playerStatsActiveChartV33 === "highRun"
           ? {
-              title: "ハイラン推移",
+              title: window.cueT("p3.55e76e59"),
               points: highRunTrendPoints.slice().reverse(),
-              note: "各試合の最高連続得点",
-              options: { ariaLabel: "ハイラン推移" },
+              note: window.cueT("p3.e3333ce9"),
+              options: { ariaLabel: window.cueT("p3.55e76e59") },
               label: window.cueT("p3.761345d1"), lowerIsBetter: false, suffix: ""
             }
           : playerStatsActiveChartV33 === "fouls"
             ? {
-                title: "ファール数推移",
+                title: window.cueT("p3.e5cd048b"),
                 points: foulTrendPointsV810.slice().reverse(),
-                note: "各試合のファール数。少ないほど安定しています。",
-                options: { ariaLabel: "ファール数推移" },
-                label: "ファール数", lowerIsBetter: true, suffix: "回"
+                note: window.cueT("p3.c88629a8"),
+                options: { ariaLabel: window.cueT("p3.e5cd048b") },
+                label: window.cueT("p3.d98382f0"), lowerIsBetter: true, suffix: window.cueT("p3.5b722ab4")
               }
             : {
-                title: "イニングあたり得点推移",
+                title: window.cueT("p3.df84d9c7"),
                 points: trendPoints.slice().reverse(),
-                note: "得点 ÷ イニング",
-                options: { ariaLabel: "イニングあたり得点推移" },
-                label: "得点／Inning", lowerIsBetter: false, suffix: ""
+                note: window.cueT("p3.8b3de84d"),
+                options: { ariaLabel: window.cueT("p3.df84d9c7") },
+                label: window.cueT("p3.2b62d99d"), lowerIsBetter: false, suffix: ""
               };
 
     const growthTrendV810 = buildGrowthTrendCommentV810(
@@ -11203,7 +11203,7 @@ let matchRecordsRawCacheV152 = null;
           <div class="player-mvp-icon-v39">${icon}</div>
           <div class="player-mvp-content-v39">
             <div class="player-mvp-title-v39">${title}</div>
-            <div class="player-mvp-empty-v39">対象データがありません</div>
+            <div class="player-mvp-empty-v39">${window.cueT("p3.aefe9b06")}</div>
           </div>
         </div>`;
       }
@@ -11225,31 +11225,31 @@ let matchRecordsRawCacheV152 = null;
 
     const mvpCardsV39 = [
       buildMvpCardV39(
-        "最高シュート率",
+        window.cueT("p3.0cb79ad2"),
         "🎯",
         highestShotRateGameV39,
         item => `${Math.round(item.shotRate)}%`,
         "shot-rate"
       ),
       buildMvpCardV39(
-        "最高ハイラン",
+        window.cueT("p3.5f9ca262"),
         "🔥",
         highestHighRunGameV39,
         item => `${item.highRun}`,
         "high-run"
       ),
       buildMvpCardV39(
-        "ベストゲーム",
+        window.cueT("p3.93b5a0d5"),
         "🏆",
         bestGameV39,
-        item => `${item.won ? "勝利" : "敗戦"}・シュート率 ${Number.isFinite(item.shotRate) ? Math.round(item.shotRate) + "%" : "–"}`,
+        item => window.cueT(`p3.0b8e7dd8`,{p:item.won ? window.cueT("p3.2949d100") : window.cueT("p3.b3a9e40d"),p2:Number.isFinite(item.shotRate) ? Math.round(item.shotRate) + "%" : "–"}),
         "best-game"
       ),
       buildMvpCardV39(
-        "ワーストゲーム",
+        window.cueT("p3.89a00a78"),
         "📉",
         worstGameV39,
-        item => `${item.won ? "勝利" : "敗戦"}・ファール ${item.fouls}`,
+        item => window.cueT(`p3.5cbdecb2`,{p:item.won ? window.cueT("p3.2949d100") : window.cueT("p3.b3a9e40d"),fouls:item.fouls}),
         "worst-game"
       )
     ].join("");
@@ -11258,8 +11258,8 @@ let matchRecordsRawCacheV152 = null;
       .sort((a, b) => a.key.localeCompare(b.key))
       .map(item => ({
         value: item.games ? Math.round((item.wins / item.games) * 1000) / 10 : 0,
-        label: `${item.year}年${item.month}月`,
-        axisLabel: `${item.month}月`
+        label: window.cueT(`p3.d2f3d682`,{year:item.year,month:item.month}),
+        axisLabel: window.cueT(`p3.81313c2f`,{month:item.month})
       }));
 
     const monthlyRowsV34 = [...monthlySummaryV34.values()]
@@ -11274,10 +11274,10 @@ let matchRecordsRawCacheV152 = null;
           : 0;
 
         return `<button type="button" class="player-month-row" data-player-month="${item.key}">
-          <div class="player-month-title">${item.year}年${item.month}月</div>
-          <div class="player-month-main">${item.games}試合　${item.wins}勝${item.losses}敗　勝率${winRate}%</div>
-          <div class="player-month-detail">平均シュート率 ${averageShotRate}%　平均Inning ${averageInning}</div>
-          <div class="player-month-detail">最高ハイラン ${item.highRun}　ファール ${item.fouls}</div>
+          <div class="player-month-title">${window.cueT("p3.d2f3d682",{year:item.year,month:item.month})}</div>
+          <div class="player-month-main">${window.cueT("p3.09ad9c58",{games:item.games,wins:item.wins,losses:item.losses,winRate:winRate,count:item.games})}</div>
+          <div class="player-month-detail">${window.cueT("p3.7860b9bf",{averageShotRate:averageShotRate,averageInning:averageInning})}</div>
+          <div class="player-month-detail">${window.cueT("p3.20374801",{highRun:item.highRun,fouls:item.fouls})}</div>
         </button>`;
       }).join("");
 
@@ -11305,8 +11305,8 @@ let matchRecordsRawCacheV152 = null;
       if (!items.length) {
         return `<div class="player-ranking-empty">${
           type === "frequent"
-            ? "対戦データはまだありません。"
-            : "2試合以上対戦した相手がまだいません。"
+            ? window.cueT("p3.114e7b36")
+            : window.cueT("p3.425626ef")
         }</div>`;
       }
 
@@ -11314,9 +11314,9 @@ let matchRecordsRawCacheV152 = null;
         <div class="player-ranking-row">
           <div class="player-ranking-rank">${index+1}</div>
           <div class="player-ranking-name">${escapeRecordText(item.name)}</div>
-          <div class="player-ranking-record">${item.wins}勝${item.losses}敗</div>
+          <div class="player-ranking-record">${window.cueT("p3.f3a01e79",{wins:item.wins,losses:item.losses})}</div>
           <div class="player-ranking-value">${
-            type === "frequent" ? `${item.games}試合` : `勝率${item.winRate}%`
+            type === "frequent" ? window.cueT(`p3.2a6cdf39`,{games:item.games,count:item.games}) : window.cueT(`p3.8c77ecdd`,{winRate:item.winRate})
           }</div>
         </div>
       `).join("");
@@ -11328,8 +11328,8 @@ let matchRecordsRawCacheV152 = null;
         const rate = item.games ? Math.round((item.wins / item.games) * 100) : 0;
         return `<div class="player-opponent-row">
           <div class="player-opponent-name">${escapeRecordText(item.name)}</div>
-          <div class="player-opponent-record">${item.wins}勝${item.losses}敗</div>
-          <div class="player-opponent-rate">勝率 ${rate}%</div>
+          <div class="player-opponent-record">${window.cueT("p3.f3a01e79",{wins:item.wins,losses:item.losses})}</div>
+          <div class="player-opponent-rate">${window.cueT("p3.f1e99e3f",{rate:rate})}</div>
         </div>`;
       }).join("");
 
@@ -11339,24 +11339,24 @@ let matchRecordsRawCacheV152 = null;
         <div class="player-stats-name">${escapeRecordText(player.name)}</div>
       </div>
 
-      <div class="player-stats-filter" role="group" aria-label="集計期間">
+      <div class="player-stats-filter" role="group" aria-label="${window.cueT("p3.ea383247")}">
         <button type="button" data-player-stats-filter="all"
-          class="${playerStatsActiveFilterV28 === "all" ? "active" : ""}">全期間</button>
+          class="${playerStatsActiveFilterV28 === "all" ? "active" : ""}">${window.cueT("p3.5f5f8a4b")}</button>
         <button type="button" data-player-stats-filter="month"
-          class="${playerStatsActiveFilterV28 === "month" ? "active" : ""}">今月</button>
+          class="${playerStatsActiveFilterV28 === "month" ? "active" : ""}">${window.cueT("p3.a5c45c77")}</button>
         <button type="button" data-player-stats-filter="recent10"
-          class="${playerStatsActiveFilterV28 === "recent10" ? "active" : ""}">直近10試合</button>
+          class="${playerStatsActiveFilterV28 === "recent10" ? "active" : ""}">${window.cueT("p3.bb21e966")}</button>
       </div>
 
       <div class="player-stats-filter-note">
-        ${playerStatsActiveFilterV28 === "all" ? `全${allRecords.length}試合`
-          : playerStatsActiveFilterV28 === "month" ? `今月 ${records.length}試合`
-          : `直近 ${records.length}試合`}
+        ${playerStatsActiveFilterV28 === "all" ? window.cueT(`p3.1acd7f3c`,{length:allRecords.length,count:allRecords.length})
+          : playerStatsActiveFilterV28 === "month" ? window.cueT(`p3.6b9686a7`,{length:records.length,count:records.length})
+          : window.cueT(`p3.a148c532`,{length:records.length,count:records.length})}
       </div>
 
       <div class="player-rival-entry-v832">
-        <button type="button" data-open-player-rival-v832="${escapeRecordText(playerId)}">ライバル分析</button>
-        <p>${escapeRecordText(player.name)}を基準に、対戦相手との相性や次回のワンポイントを確認します。</p>
+        <button type="button" data-open-player-rival-v832="${escapeRecordText(playerId)}">${window.cueT("p3.44a3c99c")}</button>
+        <p>${window.cueT("p3.c8de076c",{p:escapeRecordText(player.name)})}</p>
       </div>
 
       ${renderRionCoachV760(rionCoachV760)}
@@ -11364,7 +11364,7 @@ let matchRecordsRawCacheV152 = null;
       ${renderReflectionAnalysisV850(reflectionAnalysisV850)}
 
       <details class="player-analysis-details-v760">
-        <summary>詳しいプレーヤー分析</summary>
+        <summary>${window.cueT("p3.773d6219")}</summary>
         <div class="player-analysis-details-body-v760">
           ${renderPlayerInsightsV750(playerInsightsV750)}
           ${renderPlayerGrowthAnalysisV740(growthAnalysisV740)}
@@ -11372,13 +11372,13 @@ let matchRecordsRawCacheV152 = null;
       </details>
 
       <section class="player-growth-graph-v810">
-        <div class="player-growth-graph-title-v810">成長グラフ</div>
-        <div class="player-growth-graph-sub-v810">選択した期間内の試合を、古い順に表示します。</div>
-        <div class="player-chart-switch" role="group" aria-label="表示する成長グラフ">
+        <div class="player-growth-graph-title-v810">${window.cueT("p3.5b656405")}</div>
+        <div class="player-growth-graph-sub-v810">${window.cueT("p3.bfa3d282")}</div>
+        <div class="player-chart-switch" role="group" aria-label="${window.cueT("p3.bc4103ee")}">
           <button type="button" data-player-chart="winRate"
-            class="${playerStatsActiveChartV33 === "winRate" ? "active" : ""}">勝率</button>
+            class="${playerStatsActiveChartV33 === "winRate" ? "active" : ""}">${window.cueT("p3.bab1876f")}</button>
           <button type="button" data-player-chart="points"
-            class="${playerStatsActiveChartV33 === "points" ? "active" : ""}">得点/Inn</button>
+            class="${playerStatsActiveChartV33 === "points" ? "active" : ""}">${window.cueT("p3.e61ca6c0")}</button>
           <button type="button" data-player-chart="shotRate"
             class="${playerStatsActiveChartV33 === "shotRate" ? "active" : ""}">${window.cueT("p3.274e5e0c")}</button>
           <button type="button" data-player-chart="highRun"
@@ -11393,62 +11393,62 @@ let matchRecordsRawCacheV152 = null;
         <div class="player-growth-trend-v810 ${growthTrendV810.tone}">${growthTrendV810.text}</div>
       </section>
       <div class="player-stats-compact">
-        <div>試合数： <strong>${games}</strong></div>
-        <div>最高ハイラン： <strong>${highestRun}</strong></div>
-        <div>勝率： <strong>${winRate}%</strong></div>
-        <div>ファール： <strong>${foulTotal}</strong></div>
-        <div>平均取得球率： <strong>${averageShare}%</strong></div>
-        <div>平均Inning： <strong>${averageInning}</strong></div>
+        <div>${window.cueT("p3.396b96f8")} <strong>${games}</strong></div>
+        <div>${window.cueT("p3.0c7f5512")} <strong>${highestRun}</strong></div>
+        <div>${window.cueT("p3.f631b313")} <strong>${winRate}%</strong></div>
+        <div>${window.cueT("p3.71193243")} <strong>${foulTotal}</strong></div>
+        <div>${window.cueT("p3.f293660c")} <strong>${averageShare}%</strong></div>
+        <div>${window.cueT("p3.39f7552f")} <strong>${averageInning}</strong></div>
       </div>
-      <div class="player-stats-subtitle">MVP・ベスト記録</div>
+      <div class="player-stats-subtitle">${window.cueT("p3.86ca270f")}</div>
       <div class="player-mvp-grid-v39">
         ${mvpCardsV39}
       </div>
       <div class="player-mvp-note-v39">
-        ベスト／ワーストは、勝敗・得点差・シュート率・ハイラン・ファールから自動評価
+        ${window.cueT("p3.beebd828")}
       </div>
 
-      <div class="player-stats-subtitle">月別勝率グラフ</div>
+      <div class="player-stats-subtitle">${window.cueT("p3.d8f5aac8")}</div>
       ${buildPlayerTrendChart(monthlyWinRatePointsV47, {
         maxY: 100,
         suffix: "%",
-        ariaLabel: "月別勝率グラフ",
-        emptyText: "月別データが増えると勝率推移を表示します。"
+        ariaLabel: window.cueT("p3.d8f5aac8"),
+        emptyText: window.cueT("p3.c687887b")
       })}
-      <div class="player-trend-note">月ごとの勝率（その月の勝数 ÷ 試合数）</div>
+      <div class="player-trend-note">${window.cueT("p3.45def00a")}</div>
 
-      <div class="player-stats-subtitle">月別成績</div>
+      <div class="player-stats-subtitle">${window.cueT("p3.b02a38f7")}</div>
       <div class="player-stats-monthly">
-        ${monthlyRowsV34 || `<div class="player-stats-empty">月別データはまだありません。</div>`}
+        ${monthlyRowsV34 || `<div class="player-stats-empty">${window.cueT("p3.f4bb5ff4")}</div>`}
       </div>
 
-      <div class="player-stats-subtitle">対戦相手ランキング</div>
+      <div class="player-stats-subtitle">${window.cueT("p3.d48c2b6e")}</div>
       <div class="player-opponent-rankings-v36">
         <section class="player-ranking-card-v36">
-          <h4>得意な相手</h4>
-          <div class="player-ranking-note-v36">2試合以上・勝率順</div>
+          <h4>${window.cueT("p3.f0a73b5e")}</h4>
+          <div class="player-ranking-note-v36">${window.cueT("p3.d109eedb")}</div>
           <div class="player-ranking-list-v36">${buildOpponentRankingRowsV36(strongOpponentsV36, "strong")}</div>
         </section>
 
         <section class="player-ranking-card-v36">
-          <h4>苦手な相手</h4>
-          <div class="player-ranking-note-v36">2試合以上・勝率が低い順</div>
+          <h4>${window.cueT("p3.a906eb78")}</h4>
+          <div class="player-ranking-note-v36">${window.cueT("p3.b887de1f")}</div>
           <div class="player-ranking-list-v36">${buildOpponentRankingRowsV36(difficultOpponentsV36, "difficult")}</div>
         </section>
 
         <section class="player-ranking-card-v36">
-          <h4>対戦数ランキング</h4>
-          <div class="player-ranking-note-v36">対戦試合数が多い順</div>
+          <h4>${window.cueT("p3.6437882e")}</h4>
+          <div class="player-ranking-note-v36">${window.cueT("p3.d713509e")}</div>
           <div class="player-ranking-list-v36">${buildOpponentRankingRowsV36(frequentOpponentsV36, "frequent")}</div>
         </section>
       </div>
 
-      <div class="player-stats-subtitle">対戦相手別成績</div>
+      <div class="player-stats-subtitle">${window.cueT("p3.b32e17c6")}</div>
       <div class="player-stats-opponents">
-        ${opponentRows || `<div class="player-stats-empty">対戦データはまだありません。</div>`}
+        ${opponentRows || `<div class="player-stats-empty">${window.cueT("p3.114e7b36")}</div>`}
       </div>
       <div class="player-stats-subtitle">${window.cueT("p3.aa1fa7ae")}</div>
-      <div class="player-stats-records">${rows.length ? rows.join("") : `<div class="player-stats-empty">このプレーヤーの対戦履歴は<br>まだありません。</div>`}</div>`;
+      <div class="player-stats-records">${rows.length ? rows.join("") : `<div class="player-stats-empty">${window.cueT("p3.80b0f190")}<br>${window.cueT("p3.52519cc9")}</div>`}</div>`;
 
     const libraryOverlay = el("playerLibraryOverlay");
     playerStatsReturnToManagementV147 = Boolean(
@@ -11489,7 +11489,7 @@ let matchRecordsRawCacheV152 = null;
 
   function showPlayerLibraryMain() {
     editingPlayerId = null;
-    el("playerLibraryTitle").textContent = `Player${playerLibraryTarget} 選択`;
+    el("playerLibraryTitle").textContent = window.cueT(`p3.bb6cfec1`,{playerLibraryTarget:playerLibraryTarget});
     el("playerLibraryMain").classList.remove("hidden");
     el("playerEditor").classList.add("hidden");
     const addButton = el("playerLibraryAddBtn");
@@ -11534,9 +11534,9 @@ let matchRecordsRawCacheV152 = null;
     el("playerLibraryOverlay")?.classList.remove("player-management-formal-v1");
     const libraryBack = el("playerLibraryBackBtn");
     if (libraryBack) {
-      libraryBack.textContent = "‹ 戻る";
+      libraryBack.textContent = window.cueT("p3.a081a194");
       libraryBack.removeAttribute("aria-hidden");
-      libraryBack.setAttribute("aria-label", "プレーヤー一覧へ戻る");
+      libraryBack.setAttribute("aria-label", window.cueT("p3.ef274992"));
       libraryBack.tabIndex = 0;
     }
     editingPlayerId = id;
@@ -11544,14 +11544,14 @@ let matchRecordsRawCacheV152 = null;
     el("playerEditorConfirmV2")?.classList.add("hidden");
     const players = readPlayerLibrary();
     const player = id ? players.find(p => p.id === id) : null;
-    el("playerLibraryTitle").textContent = playerLibraryTitleV1(player ? "プレーヤー編集" : "新規プレーヤー登録");
+    el("playerLibraryTitle").textContent = playerLibraryTitleV1(player ? window.cueT("p3.eb76e466") : window.cueT("p3.37186162"));
     playerEditorIsEditingV1 = Boolean(player);
     // P2-5a-1: editor texts are written here (generation point) instead of by a DOM observer reacting to the editor's class change
     {
       const modalTitle = document.getElementById("playerEditorModalTitleV1"), modalCopy = document.getElementById("playerEditorModalCopyV1"), saveButton = el("playerEditorSaveBtn");
-      if (modalTitle) modalTitle.textContent = player ? "プレーヤー編集" : "プレーヤー登録";
-      if (modalCopy) modalCopy.innerHTML = player ? "" : '新しいプレーヤーを登録します。<br>あとからいつでも編集できます。';
-      if (saveButton) saveButton.textContent = player ? "変更" : "登録";
+      if (modalTitle) modalTitle.textContent = player ? window.cueT("p3.eb76e466") : window.cueT("p3.35fbdeb5");
+      if (modalCopy) modalCopy.innerHTML = player ? "" : window.cueT("p3.fe3aade4") + '<br>' + window.cueT("p3.04af062a");
+      if (saveButton) saveButton.textContent = player ? window.cueT("p3.125337ad") : window.cueT("p3.d60a44f6");
     }
     el("playerLibraryMain").classList.add("hidden");
     el("playerEditor").classList.remove("hidden");
@@ -11559,7 +11559,7 @@ let matchRecordsRawCacheV152 = null;
     const headerAction = el("playerLibraryAddBtn");
     if (player) {
       headerAction.textContent = "＋";
-      headerAction.setAttribute("aria-label", "新規プレーヤー登録");
+      headerAction.setAttribute("aria-label", window.cueT("p3.37186162"));
       headerAction.dataset.editorAction = "";
       headerAction.classList.remove("delete-mode");
       headerAction.classList.add("editor-hidden-action");
@@ -11568,7 +11568,7 @@ let matchRecordsRawCacheV152 = null;
       headerAction.style.pointerEvents = "none";
     } else {
       headerAction.textContent = "＋";
-      headerAction.setAttribute("aria-label", "新規登録");
+      headerAction.setAttribute("aria-label", window.cueT("p3.97012002"));
       headerAction.dataset.editorAction = "";
       headerAction.classList.remove("delete-mode");
       headerAction.classList.add("editor-hidden-action");
@@ -11596,18 +11596,18 @@ let matchRecordsRawCacheV152 = null;
     const avatar = normalizePlayerAvatarV2(playerEditorAvatarV2);
     const isPrimary=Boolean(el("playerEditorPrimaryV1")?.checked);
     if (Array.from(rawName).length > PLAYER_NAME_MAX_LENGTH) {
-      showToast("入力確認", "プレーヤー名は20文字以内で入力してください");
+      showToast(window.cueT("p3.90bcbaef"), window.cueT("p3.a5210d6d"));
       el("playerEditorName").value = name;
       return;
     }
     if (!name) {
-      showToast("入力確認", "プレーヤー名を入力してください");
+      showToast(window.cueT("p3.90bcbaef"), window.cueT("p3.858b56ec"));
       return;
     }
     let players = readPlayerLibrary();
     const duplicate = players.find(p => p.name.toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE) === name.toLocaleLowerCase(CueScoreDomainV1.IDENTITY_LOCALE) && p.id !== editingPlayerId);
     if (duplicate) {
-      showToast("登録できません", "同じ名前のプレーヤーが登録されています");
+      showToast(window.cueT("p3.9dd0237a"), window.cueT("p3.b0707a0e"));
       return;
     }
     if (!editingPlayerId && !playerEditorConfirmingV2) {
@@ -11663,8 +11663,8 @@ let matchRecordsRawCacheV152 = null;
     overlay.setAttribute("aria-modal", "true");
     overlay.setAttribute("aria-labelledby", "playerDeleteConfirmTitleV1");
     overlay.setAttribute("aria-describedby", "playerDeleteConfirmBodyV1");
-    overlay.innerHTML = `<div class="player-delete-confirm-card-v1"><h2 id="playerDeleteConfirmTitleV1"></h2><p id="playerDeleteConfirmBodyV1">このプレーヤーを削除しても、過去の試合履歴は残ります。</p><div class="player-delete-confirm-actions-v1"><button type="button" data-player-delete-cancel>${window.cueT("p3.269b0f92")}</button><button class="is-destructive" type="button" data-player-delete-confirm>${window.cueT("p3.5cbdf1fd")}</button></div></div>`;
-    overlay.querySelector("h2").textContent = `「${player.name}」を削除しますか？`;
+    overlay.innerHTML = `<div class="player-delete-confirm-card-v1"><h2 id="playerDeleteConfirmTitleV1"></h2><p id="playerDeleteConfirmBodyV1">${window.cueT("p3.1467c102")}</p><div class="player-delete-confirm-actions-v1"><button type="button" data-player-delete-cancel>${window.cueT("p3.269b0f92")}</button><button class="is-destructive" type="button" data-player-delete-confirm>${window.cueT("p3.5cbdf1fd")}</button></div></div>`;
+    overlay.querySelector("h2").textContent = window.cueT(`p3.248748e1`,{name:player.name});
     let settled = false;
     const close = () => {
       if (settled) return;
@@ -11711,8 +11711,8 @@ let matchRecordsRawCacheV152 = null;
     if (isInProgressParticipant) {
       showPlayerDeleteNoticeV1(
         "blocked",
-        "プレーヤーを削除できません",
-        "このプレーヤーは中断中の試合で使用されています。試合を終了または破棄してから削除してください。"
+        window.cueT("p3.f9cddea0"),
+        window.cueT("p3.c45de2f4")
       );
       return false;
     }
@@ -11740,7 +11740,7 @@ let matchRecordsRawCacheV152 = null;
       if (rangeInput) rangeInput.value = String(raceValueToStep(120));
     });
     refreshAfterDestructiveChangeV132("player-deleted");
-    showPlayerDeleteNoticeV1("success", "プレーヤーを削除しました", "過去の試合履歴は保持されています");
+    showPlayerDeleteNoticeV1("success", window.cueT("p3.54c30950"), window.cueT("p3.2d2f1589"));
     return true;
   }
 
@@ -11828,7 +11828,7 @@ let matchRecordsRawCacheV152 = null;
       confirmation = document.createElement("section");
       confirmation.id = "playerEditorConfirmV2";
       confirmation.className = "player-editor-confirm-v2 hidden";
-      confirmation.setAttribute("role","dialog"); confirmation.setAttribute("aria-modal","true"); confirmation.setAttribute("aria-label","登録内容を確認");
+      confirmation.setAttribute("role","dialog"); confirmation.setAttribute("aria-modal","true"); confirmation.setAttribute("aria-label",window.cueT("p3.56462710"));
       el("playerEditor")?.appendChild(confirmation);
       confirmation.addEventListener("click", event => {
         if (event.target.closest("[data-player-confirm-back-v2]")) { playerEditorConfirmingV2=false; confirmation.classList.add("hidden"); }
@@ -11836,7 +11836,7 @@ let matchRecordsRawCacheV152 = null;
         if (event.target.closest("[data-player-confirm-cancel-v2]")) { playerEditorConfirmingV2=false; confirmation.classList.add("hidden"); showPlayerLibraryMain(); }
       });
     }
-    confirmation.innerHTML = `<header><button type="button" data-player-confirm-back-v2 aria-label="${window.cueT("p3.60a1005b")}">‹</button><strong>内容を確認</strong><span></span></header><div class="player-editor-confirm-body-v2"><img src="${playerAvatarSourceV2(player.avatar)}" alt="プロフィール画像"><h2>プロフィール画像</h2><section><small>名前</small><strong>${escapeRecordText(player.name)}</strong></section><section><small>メモ（任意）</small><p>${player.memo ? escapeRecordText(player.memo).replace(/\n/g,"<br>") : "未入力"}</p></section><section><small>メインプレーヤー</small><strong>${player.isPrimary ? "設定する" : "設定しない"}</strong></section></div><footer><button type="button" data-player-confirm-save-v2>登録する</button><button type="button" data-player-confirm-cancel-v2>${window.cueT("p3.269b0f92")}</button></footer>`;
+    confirmation.innerHTML = `<header><button type="button" data-player-confirm-back-v2 aria-label="${window.cueT("p3.60a1005b")}">‹</button><strong>${window.cueT("p3.c649806a")}</strong><span></span></header><div class="player-editor-confirm-body-v2"><img src="${playerAvatarSourceV2(player.avatar)}" alt="${window.cueT("p3.5b359027")}"><h2>${window.cueT("p3.5b359027")}</h2><section><small>${window.cueT("p3.d54d12f9")}</small><strong>${escapeRecordText(player.name)}</strong></section><section><small>${window.cueT("p3.0e19f752")}</small><p>${player.memo ? escapeRecordText(player.memo).replace(/\n/g,"<br>") : window.cueT("p3.b4d6ff45")}</p></section><section><small>${window.cueT("p3.af7f8f12")}</small><strong>${player.isPrimary ? window.cueT("p3.ecae0550") : window.cueT("p3.fdfc2c70")}</strong></section></div><footer><button type="button" data-player-confirm-save-v2>${window.cueT("p3.14216ea0")}</button><button type="button" data-player-confirm-cancel-v2>${window.cueT("p3.269b0f92")}</button></footer>`;
     confirmation.classList.remove("hidden");
   }
 
@@ -11873,8 +11873,8 @@ let matchRecordsRawCacheV152 = null;
     return true;
   }
   async function compressPlayerPhotoV5(file) {
-    if (!file?.type?.startsWith("image/")) throw new Error("画像ファイルを選択してください");
-    if (file.size > 15 * 1024 * 1024) throw new Error("15MB以下の画像を選択してください");
+    if (!file?.type?.startsWith("image/")) throw new Error(window.cueT("p3.8fee032d"));
+    if (file.size > 15 * 1024 * 1024) throw new Error(window.cueT("p3.1d1c11b6"));
     let source;
     if (typeof createImageBitmap === "function") {
       source=await createImageBitmap(file, {imageOrientation:"from-image"});
@@ -11882,7 +11882,7 @@ let matchRecordsRawCacheV152 = null;
       source=await new Promise((resolve,reject)=>{
         const image=new Image(); const url=URL.createObjectURL(file);
         image.onload=()=>{URL.revokeObjectURL(url);resolve(image);};
-        image.onerror=()=>{URL.revokeObjectURL(url);reject(new Error("画像を読み込めませんでした"));};
+        image.onerror=()=>{URL.revokeObjectURL(url);reject(new Error(window.cueT("p3.b00fc19a")));};
         image.src=url;
       });
     }
@@ -11901,9 +11901,9 @@ let matchRecordsRawCacheV152 = null;
     if (chooser) return chooser;
     chooser=document.createElement("section");
     chooser.id="playerAvatarChooserV2"; chooser.className="player-avatar-chooser-v2 hidden";
-    chooser.setAttribute("role","dialog"); chooser.setAttribute("aria-modal","true"); chooser.setAttribute("aria-label","プロフィール画像を選択");
-    const groups=[["男性","male"],["女性","female"],["動物","animal"],["花","flower"],["ビリヤード","ball"]];
-    chooser.innerHTML=`<header><button type="button" data-avatar-close-v5 aria-label="${window.cueT("p3.60a1005b")}">‹</button><strong>プロフィール画像を選択</strong><span></span></header><div class="player-avatar-tabs-v2">${groups.map(([label],index)=>`<button class="${index ? "" : "is-selected"}" type="button" data-avatar-tab-v5="${index}">${label}</button>`).join("")}</div><div class="player-avatar-groups-v2">${groups.map(([label,category],index)=>{const presets=PLAYER_AVATAR_PRESETS_V5.filter(item=>item.category===category);return `<section data-avatar-group-v5="${index}" data-avatar-category-v5="${category}" ${index ? "hidden" : ""}><h3>${label}（${presets.length}種類）</h3><div>${presets.map(item=>`<button type="button" data-avatar-id-v5="${item.id}" aria-label="${item.label}"><img src="${item.src}" alt="" loading="lazy"><span>${item.label}</span></button>`).join("")}</div></section>`;}).join("")}</div><footer><button type="button" data-avatar-default-v5>未設定に戻す</button><button type="button" data-avatar-photo-v5>写真から選ぶ</button><button type="button" data-avatar-apply-v5>この画像に決定</button></footer>`;
+    chooser.setAttribute("role","dialog"); chooser.setAttribute("aria-modal","true"); chooser.setAttribute("aria-label",window.cueT("p3.544bf584"));
+    const groups=[[window.cueT("p3.c66e98ce"),"male"],[window.cueT("p3.98ef0953"),"female"],[window.cueT("p3.09e7384c"),"animal"],[window.cueT("p3.9be4611e"),"flower"],[window.cueT("p3.ebd7df22"),"ball"]];
+    chooser.innerHTML=`<header><button type="button" data-avatar-close-v5 aria-label="${window.cueT("p3.60a1005b")}">‹</button><strong>${window.cueT("p3.544bf584")}</strong><span></span></header><div class="player-avatar-tabs-v2">${groups.map(([label],index)=>`<button class="${index ? "" : "is-selected"}" type="button" data-avatar-tab-v5="${index}">${label}</button>`).join("")}</div><div class="player-avatar-groups-v2">${groups.map(([label,category],index)=>{const presets=PLAYER_AVATAR_PRESETS_V5.filter(item=>item.category===category);return `<section data-avatar-group-v5="${index}" data-avatar-category-v5="${category}" ${index ? "hidden" : ""}><h3>${window.cueT("p3.607b706c",{label:label,length:presets.length})}</h3><div>${presets.map(item=>`<button type="button" data-avatar-id-v5="${item.id}" aria-label="${item.label}"><img src="${item.src}" alt="" loading="lazy"><span>${item.label}</span></button>`).join("")}</div></section>`;}).join("")}</div><footer><button type="button" data-avatar-default-v5>${window.cueT("p3.32075ce6")}</button><button type="button" data-avatar-photo-v5>${window.cueT("p3.d7a495e3")}</button><button type="button" data-avatar-apply-v5>${window.cueT("p3.39028ad0")}</button></footer>`;
     el("playerEditor")?.appendChild(chooser);
     let pending=normalizePlayerAvatarV2(playerEditorAvatarV2);
     const renderPending=()=>{
@@ -11940,7 +11940,7 @@ let matchRecordsRawCacheV152 = null;
       chooser.setPhotoV5(avatar);
       chooser.classList.add("hidden");
       updatePlayerEditorAvatarPreviewV2();
-    } catch (error) {showToast("写真を使用できません",error.message || "別の画像を選択してください");}
+    } catch (error) {showToast(window.cueT("p3.c36afc86"),error.message || window.cueT("p3.3ec781d5"));}
     event.target.value="";
   });
 
@@ -14847,7 +14847,7 @@ let matchRecordsRawCacheV152 = null;
           ${item.locked
             ? `<div class="classification-locked-v381">固定</div>`
             : `<div class="classification-row-actions-v381">
-                <button type="button" data-edit-category-v381="${escapeRecordText(item.id)}">編集</button>
+                <button type="button" data-edit-category-v381="${escapeRecordText(item.id)}">${window.cueT("p3.d107b864")}</button>
                 <button type="button" data-delete-category-v381="${escapeRecordText(item.id)}">${window.cueT("p3.5cbdf1fd")}</button>
               </div>`
           }
@@ -14862,7 +14862,7 @@ let matchRecordsRawCacheV152 = null;
             <div class="classification-row-v381">
               <div class="classification-name-v381">${escapeRecordText(item.name)}</div>
               <div class="classification-row-actions-v381">
-                <button type="button" data-edit-season-v381="${escapeRecordText(item.id)}">編集</button>
+                <button type="button" data-edit-season-v381="${escapeRecordText(item.id)}">${window.cueT("p3.d107b864")}</button>
                 <button type="button" data-delete-season-v381="${escapeRecordText(item.id)}">${window.cueT("p3.5cbdf1fd")}</button>
               </div>
             </div>
@@ -16827,11 +16827,11 @@ let matchRecordsRawCacheV152 = null;
     const summary = el("recordsFilterSummary");
     if (!summary) return;
     const selectedMonthLabelV34 = window.recordsSpecificMonthV34
-      ? `${window.recordsSpecificMonthV34.year}年${window.recordsSpecificMonthV34.month}月`
-      : "今月";
+      ? window.cueT(`p3.d2f3d682`,{year:window.recordsSpecificMonthV34.year,month:window.recordsSpecificMonthV34.month})
+      : window.cueT("p3.a5c45c77");
 
     const label = recordsActiveFilterV31 === "month" ? selectedMonthLabelV34
-      : recordsActiveFilterV31 === "recent10" ? "直近10試合"
+      : recordsActiveFilterV31 === "recent10" ? window.cueT("p3.bb21e966")
       : window.cueT("p3.258a9c52");
     summary.textContent = recordsSearchQueryV31
       ? window.cueT(`p3.ca621c35`,{label:label,shown:shown,total:total})
@@ -17153,8 +17153,8 @@ let matchRecordsRawCacheV152 = null;
       list.innerHTML = players.length ? players.map(({player:p}) => {
         const usedByOther=other?.kind==="existing"&&String(other.playerId)===String(p.id);
         const selectedHere=selected?.kind==="existing"&&String(selected.playerId)===String(p.id);
-        return `<div class="${"player-selection-row-v1"}${usedByOther?" is-unavailable":""}"><button class="player-selection-button-v1" type="button" ${usedByOther?"disabled aria-disabled=\"true\"":`data-select-player="${escapeRecordText(p.id)}"`} aria-label="${escapeRecordText(p.name)}${usedByOther?"、もう一方で選択済み":selectedHere?"、現在選択中":"を選択"}"><span class="player-selection-avatar-v1">${playerAvatarHtmlV2(p,"player-avatar-v2")}</span><span class="player-selection-copy-v1"><span class="player-library-name-row"><span class="player-library-name">${escapeRecordText(p.name)}</span>${usedByOther?'<span class="player-library-status">もう一方で選択済み</span>':selectedHere?'<span class="player-library-status current">現在選択中</span>':""}</span></span></button></div>`;
-      }).join("") : `<div class="player-library-empty">登録プレーヤーはまだいません。</div>`;
+        return `<div class="${"player-selection-row-v1"}${usedByOther?" is-unavailable":""}"><button class="player-selection-button-v1" type="button" ${usedByOther?"disabled aria-disabled=\"true\"":`data-select-player="${escapeRecordText(p.id)}"`} aria-label="${escapeRecordText(p.name)}${usedByOther?window.cueT("p3.2f575daa"):selectedHere?window.cueT("p3.e0af4259"):window.cueT("p3.21a0bf69")}"><span class="player-selection-avatar-v1">${playerAvatarHtmlV2(p,"player-avatar-v2")}</span><span class="player-selection-copy-v1"><span class="player-library-name-row"><span class="player-library-name">${escapeRecordText(p.name)}</span>${usedByOther?'<span class="player-library-status">' + window.cueT("p3.99c3f26a") + '</span>':selectedHere?'<span class="player-library-status current">' + window.cueT("p3.9370be60") + '</span>':""}</span></span></button></div>`;
+      }).join("") : `<div class="player-library-empty">${window.cueT("p3.d490da10")}</div>`;
       return;
     }
 
@@ -17183,13 +17183,13 @@ let matchRecordsRawCacheV152 = null;
       const usedByOther = p.id === otherSelectedId;
       const selectedHere = p.id === currentSelectedId;
       const status = usedByOther
-        ? `<span class="player-library-status">Player${otherPlayer}で選択中</span>`
-        : selectedHere ? `<span class="player-library-status current">現在選択中</span>` : "";
+        ? `<span class="player-library-status">${window.cueT("p3.2fe1b07e",{otherPlayer:otherPlayer})}</span>`
+        : selectedHere ? `<span class="player-library-status current">${window.cueT("p3.9370be60")}</span>` : "";
       return `<div class="player-selection-row-v1${usedByOther ? " is-unavailable" : ""}">
-        <button class="player-selection-button-v1" type="button" ${usedByOther ? "disabled" : `data-select-player="${p.id}"`} aria-label="${escapeRecordText(p.name)}${usedByOther ? `、Player${otherPlayer}で選択中` : selectedHere ? "、現在選択中" : "を選択"}">
+        <button class="player-selection-button-v1" type="button" ${usedByOther ? "disabled" : `data-select-player="${p.id}"`} aria-label="${escapeRecordText(p.name)}${usedByOther ? window.cueT(`p3.721b96e3`,{otherPlayer:otherPlayer}) : selectedHere ? window.cueT("p3.e0af4259") : window.cueT("p3.21a0bf69")}">
           <span class="player-selection-avatar-v1">${playerAvatarHtmlV2(p,"player-avatar-v2")}</span>
-          <span class="player-selection-copy-v1"><span class="player-library-name-row"><span class="player-library-name">${escapeRecordText(p.name)}${p.isPrimary ? `<span class="player-primary-badge-v1">メイン</span>` : ""}</span>${status}</span>
-          ${p.memo ? `<span class="player-selection-memo-v1">${escapeRecordText(p.memo)}</span>` : ""}<span class="player-library-meta">最終使用 ${formatLastUsed(p.lastUsed)}</span></span>
+          <span class="player-selection-copy-v1"><span class="player-library-name-row"><span class="player-library-name">${escapeRecordText(p.name)}${p.isPrimary ? `<span class="player-primary-badge-v1">${window.cueT("p3.2a865a63")}</span>` : ""}</span>${status}</span>
+          ${p.memo ? `<span class="player-selection-memo-v1">${escapeRecordText(p.memo)}</span>` : ""}<span class="player-library-meta">${window.cueT("p3.0cd1f195",{p:formatLastUsed(p.lastUsed)})}</span></span>
         </button>
       </div>`;
     }).join("");
@@ -17202,14 +17202,14 @@ let matchRecordsRawCacheV152 = null;
     const overlay = el("playerLibraryOverlay");
     overlay?.classList.add("player-management-formal-v1");
     overlay?.classList.toggle("player-selection-formal-v1", !management);
-    el("playerLibraryTitle").textContent = playerLibraryTitleV1(management ? window.cueT("player.manage.title") : matchSharingPicker ? `Player ${matchSharingPlayerPickerKindV1} を選択` : `Player${playerLibraryTarget} 選択`);
+    el("playerLibraryTitle").textContent = playerLibraryTitleV1(management ? window.cueT("player.manage.title") : matchSharingPicker ? window.cueT(`p3.3dad6128`,{matchSharingPlayerPicker:matchSharingPlayerPickerKindV1}) : window.cueT(`p3.bb6cfec1`,{playerLibraryTarget:playerLibraryTarget}));
     el("playerLibrarySearch").placeholder = management ? window.cueT("player.search.management") : window.cueT("player.search.selection");
     el("playerLibraryMain").classList.remove("hidden");
     el("playerEditor").classList.add("hidden");
     const back = el("playerLibraryBackBtn");
     if (back) {
       back.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 4-8 8 8 8"/></svg>`;
-      back.setAttribute("aria-label", management ? window.cueT("player.back.management") : matchSharingPicker ? "プレーヤー対応へ戻る" : "試合設定に戻る");
+      back.setAttribute("aria-label", management ? window.cueT("player.back.management") : matchSharingPicker ? window.cueT("p3.fa563285") : window.cueT("p3.9b062e64"));
       back.removeAttribute("aria-hidden");
       back.tabIndex = 0;
     }
@@ -19480,7 +19480,7 @@ let matchRecordsRawCacheV152 = null;
     function current(){const active=document.querySelector('[data-period].active');return {period:active?.dataset.period||"all",from:el(ids.from).value,to:el(ids.to).value,category:"",season:el(ids.season).value,player:el(ids.player).value,opponent:el(ids.opponent).value,recordingMode:el(ids.recordingMode).value,outcome:el(ids.outcome).value}}
     function labelFor(id){const n=el(id);return n?.selectedOptions?.[0]?.textContent||window.cueT("p3.c15ccc4d")}
     function summaryText(f=current()){
-      const parts=[];parts.push({all:"全期間",year:"今年",month:"今月","30days":"直近30日",recent10:"直近10試合"}[f.period]||(f.from||f.to?`${f.from||"開始なし"}〜${f.to||"終了なし"}`:"全期間"));
+      const parts=[];parts.push({all:window.cueT("p3.5f5f8a4b"),year:"今年",month:window.cueT("p3.a5c45c77"),"30days":"直近30日",recent10:window.cueT("p3.bb21e966")}[f.period]||(f.from||f.to?`${f.from||"開始なし"}〜${f.to||"終了なし"}`:window.cueT("p3.5f5f8a4b")));
       if(f.category)parts.push(`区分：${labelFor(ids.category)}`);if(f.season)parts.push(`シーズン：${labelFor(ids.season)}`);if(f.player)parts.push(`プレーヤー：${labelFor(ids.player)}`);if(f.opponent)parts.push(`相手：${labelFor(ids.opponent)}`);if(f.recordingMode)parts.push(labelFor(ids.recordingMode));if(f.outcome)parts.push(labelFor(ids.outcome));return parts.join("／")
     }
     function updateSummary(){const f=current();el("statisticsFilterSummary").textContent=summaryText(f)+(f.outcome&&!f.player?"（勝敗の絞り込みにはプレーヤー選択が必要です）":"");el("statisticsFilterCount").textContent=window.cueT(`p3.d8d0de1a`,{length:applyWith(f).length,count:applyWith(f).length})}
@@ -19561,7 +19561,7 @@ let matchRecordsRawCacheV152 = null;
       }
       grid.innerHTML = `
         <div class="home-dashboard-card"><div class="home-dashboard-label">総試合数</div><div class="home-dashboard-value">${games}</div></div>
-        <div class="home-dashboard-card"><div class="home-dashboard-label">勝率</div><div class="home-dashboard-value">${winRate}%</div></div>
+        <div class="home-dashboard-card"><div class="home-dashboard-label">${window.cueT("p3.bab1876f")}</div><div class="home-dashboard-value">${winRate}%</div></div>
         <div class="home-dashboard-card"><div class="home-dashboard-label">平均得点</div><div class="home-dashboard-value">${averageScore.toFixed(1)}</div></div>
         <div class="home-dashboard-card"><div class="home-dashboard-label">${window.cueT("p3.761345d1")}</div><div class="home-dashboard-value">${highRun}</div></div>
         <div class="home-dashboard-card"><div class="home-dashboard-label">現在連勝</div><div class="home-dashboard-value">${streak}</div></div>`;
@@ -19637,7 +19637,7 @@ let matchRecordsRawCacheV152 = null;
     }
 
     const configs = {
-      winRate:{ label:"勝率", value:item=>item.winRate, display:item=>`${Math.round(item.winRate)}%`, note:"勝率が同じ場合は、試合数が多い順です。" },
+      winRate:{ label:window.cueT("p3.bab1876f"), value:item=>item.winRate, display:item=>`${Math.round(item.winRate)}%`, note:"勝率が同じ場合は、試合数が多い順です。" },
       wins:{ label:"勝利数", value:item=>item.wins, display:item=>`${item.wins}勝`, note:"勝利数が同じ場合は、勝率が高い順です。" },
       highRun:{ label:window.cueT("p3.761345d1"), value:item=>item.highRun, display:item=>String(item.highRun), note:"ハイランが同じ場合は、勝率が高い順です。" },
       shotRate:{ label:window.cueT("p3.274e5e0c"), value:item=>item.shotRate, display:item=>`${Math.round(item.shotRate)}%`, note:"全試合のポケット数とミス数から集計します。" }
@@ -19817,26 +19817,26 @@ let matchRecordsRawCacheV152 = null;
       const b=opponents.find(item=>item.key===selectedOpponentKey)||opponents[0];
       if(!b){count.textContent="";result.innerHTML='<div class="vs-empty">対戦相手を選択してください。</div>';return;}
       const rivalDisciplineV2Def=rivalDisciplineDefsV2.find(item=>item.id===rivalDisciplineV2)||rivalDisciplineDefsV2[0];
-      const rivalTopV2=`<section class="rival-matchup-v2"><div class="rival-player-v2"><span class="rival-avatar-v2">${rivalAvatarV2(a)}</span><strong>${esc(a.name)}</strong><small>基準プレーヤー</small></div><div class="rival-versus-v2"><span>VS</span><img src="${rivalDisciplineV2Def.asset}" alt="${esc(rivalDisciplineV2Def.label)}"></div><div class="rival-player-v2"><span class="rival-avatar-v2">${rivalAvatarV2(b)}</span><strong>${esc(b.name)}</strong><label><span>対戦相手</span><select class="rival-opponent-select-v2" aria-label="対戦相手">${p2Select.innerHTML}</select></label></div></section><nav class="rival-disciplines-v2" aria-label="${window.cueT("p3.58008e3c")}">${rivalDisciplineDefsV2.map(item=>`<button type="button" class="${item.id===rivalDisciplineV2?'is-selected':''}" data-rival-discipline-v2="${item.id}" aria-pressed="${item.id===rivalDisciplineV2}"><img src="${item.asset}" alt=""><span>${item.label}</span></button>`).join('')}</nav>`;
+      const rivalTopV2=`<section class="rival-matchup-v2"><div class="rival-player-v2"><span class="rival-avatar-v2">${rivalAvatarV2(a)}</span><strong>${esc(a.name)}</strong><small>基準プレーヤー</small></div><div class="rival-versus-v2"><span>VS</span><img src="${rivalDisciplineV2Def.asset}" alt="${esc(rivalDisciplineV2Def.label)}"></div><div class="rival-player-v2"><span class="rival-avatar-v2">${rivalAvatarV2(b)}</span><strong>${esc(b.name)}</strong><label><span>${window.cueT("p3.b448aa33")}</span><select class="rival-opponent-select-v2" aria-label="${window.cueT("p3.b448aa33")}">${p2Select.innerHTML}</select></label></div></section><nav class="rival-disciplines-v2" aria-label="${window.cueT("p3.58008e3c")}">${rivalDisciplineDefsV2.map(item=>`<button type="button" class="${item.id===rivalDisciplineV2?'is-selected':''}" data-rival-discipline-v2="${item.id}" aria-pressed="${item.id===rivalDisciplineV2}"><img src="${item.asset}" alt=""><span>${item.label}</span></button>`).join('')}</nav>`;
       localStorage.setItem(VS_SELECTION_KEY,JSON.stringify({p1:a.key,p2:b.key}));
       const matches=safeRecords().filter(r=>rivalDisciplineV2Of(r)===rivalDisciplineV2&&sideFor(r,a)&&sideFor(r,b)&&sideFor(r,a)!==sideFor(r,b)).sort((x,y)=>recordTime(x)-recordTime(y));
       if(count) count.textContent="";
       if(!matches.length){result.innerHTML=`${rivalTopV2}<div class="vs-empty">${esc(rivalDisciplineV2Def.label)}の直接対戦履歴はまだありません。<br>対戦を保存すると自動集計されます。</div>`;const emptySelect=result.querySelector(".rival-opponent-select-v2");if(emptySelect){emptySelect.dataset.selectedKey=b.key;emptySelect.value=b.key;}return;}
       const sideA=r=>sideFor(r,a), sideB=r=>sideFor(r,b);const ma=metrics(matches,sideA),mb=metrics(matches,sideB);
       const recent=[...matches].sort((x,y)=>recordTime(y)-recordTime(x)).slice(0,5);
-      const rows=[['シュート成功率',`${Math.round(ma.shotRate)}%`,`${Math.round(mb.shotRate)}%`],[window.cueT('p3.761345d1'),String(ma.highRun),String(mb.highRun)],['ファール／試合',ma.avgFouls.toFixed(1),mb.avgFouls.toFixed(1)],['セーフティ成功率',ma.safetySuccessRate===null?'—':`${Math.round(ma.safetySuccessRate)}%`,mb.safetySuccessRate===null?'—':`${Math.round(mb.safetySuccessRate)}%`]];
+      const rows=[[window.cueT('p3.a7003f2d'),`${Math.round(ma.shotRate)}%`,`${Math.round(mb.shotRate)}%`],[window.cueT('p3.761345d1'),String(ma.highRun),String(mb.highRun)],['ファール／試合',ma.avgFouls.toFixed(1),mb.avgFouls.toFixed(1)],[window.cueT('p3.6f5ab47b'),ma.safetySuccessRate===null?'—':`${Math.round(ma.safetySuccessRate)}%`,mb.safetySuccessRate===null?'—':`${Math.round(mb.safetySuccessRate)}%`]];
       const recentRows=recent.map(r=>{
         const sa=sideA(r), sb=sideB(r), win=Number(r.winner)===sa;
         const dateValue=r.endedAt||r.playedAt||r.startedAt;
         const dateObj=dateValue?new Date(dateValue):null;
-        const dateLabel=dateObj&&!Number.isNaN(dateObj.getTime())?window.cueDate(dateObj, "md"):'日付なし';
+        const dateLabel=dateObj&&!Number.isNaN(dateObj.getTime())?window.cueDate(dateObj, "md"):window.cueT('p3.6b344146');
         const scoreA=Number(r.players?.[sa]?.score)||0,scoreB=Number(r.players?.[sb]?.score)||0;
-        return `<button class="rival-history-row-v2" type="button" data-rival-record-id="${esc(r.id)}"><span><small>${dateLabel}　${esc(rivalDisciplineV2Def.label)}</small><strong>${esc(a.name)} vs ${esc(b.name)}</strong></span><span><em class="${win?'':'is-loss'}">${win?'勝ち':'負け'}</em><strong>${scoreA} − ${scoreB}</strong><b>›</b></span></button>`;
+        return `<button class="rival-history-row-v2" type="button" data-rival-record-id="${esc(r.id)}"><span><small>${dateLabel}　${esc(rivalDisciplineV2Def.label)}</small><strong>${esc(a.name)} vs ${esc(b.name)}</strong></span><span><em class="${win?'':'is-loss'}">${win?window.cueT('p3.2c8bd192'):window.cueT('p3.0e371a7b')}</em><strong>${scoreA} − ${scoreB}</strong><b>›</b></span></button>`;
       }).join('');
       const insight=rivalInsight(matches,recent,a,b,sideA,sideB,ma,mb);
       const losses=Math.max(0,matches.length-ma.wins);
       const form=recent.map(r=>{const win=Number(r.winner)===sideA(r);return `<i class="${win?'':'is-loss'}">${win?'W':'L'}</i>`;}).join('');
-      result.innerHTML=`${rivalTopV2}<section class="rival-overview-v2"><div class="rival-overview-top-v2"><div><small>直接対戦</small><strong>${window.cueT("p3.d8d0de1a",{length:matches.length,count:matches.length})}</strong></div><div class="rival-record-v2"><strong>${ma.wins}</strong><span>勝</span><strong>${losses}</strong><span>敗</span></div><div><small>勝率</small><strong>${Math.round(ma.winRate)}%</strong></div></div><div class="rival-form-v2">${form}</div><p><b>${esc(insight.status)}</b><span>${esc(insight.trend)}</span></p></section><h2 class="rival-section-title-v2">次の対戦ポイント</h2><section class="rival-next-v2"><article><i class="is-good">✓</i><div><small>活かしたい強み</small><strong>${esc(insight.strength)}</strong></div></article><article><i class="is-warn">!</i><div><small>注意したい場面</small><strong>${esc(insight.risk)}</strong></div></article><article class="rival-action-v2"><i>→</i><div><small>りおんのワンポイント</small><strong>${esc(insight.action)}</strong></div></article></section><h2 class="rival-section-title-v2">成績比較</h2><section class="rival-comparison-v2"><div class="rival-comparison-head-v2"><strong>${esc(a.name)}</strong><span>${matches.length}試合平均</span><strong>${esc(b.name)}</strong></div>${rows.map(row=>`<div><strong>${row[1]}</strong><span>${row[0]}</span><strong>${row[2]}</strong></div>`).join('')}</section><h2 class="rival-section-title-v2">最近の直接対戦</h2><section class="rival-history-v2">${recentRows}</section>`;
+      result.innerHTML=`${rivalTopV2}<section class="rival-overview-v2"><div class="rival-overview-top-v2"><div><small>直接対戦</small><strong>${window.cueT("p3.d8d0de1a",{length:matches.length,count:matches.length})}</strong></div><div class="rival-record-v2"><strong>${ma.wins}</strong><span>${window.cueT("p3.5408a70d")}</span><strong>${losses}</strong><span>${window.cueT("p3.dfc2567e")}</span></div><div><small>${window.cueT("p3.bab1876f")}</small><strong>${Math.round(ma.winRate)}%</strong></div></div><div class="rival-form-v2">${form}</div><p><b>${esc(insight.status)}</b><span>${esc(insight.trend)}</span></p></section><h2 class="rival-section-title-v2">次の対戦ポイント</h2><section class="rival-next-v2"><article><i class="is-good">✓</i><div><small>活かしたい強み</small><strong>${esc(insight.strength)}</strong></div></article><article><i class="is-warn">!</i><div><small>注意したい場面</small><strong>${esc(insight.risk)}</strong></div></article><article class="rival-action-v2"><i>→</i><div><small>りおんのワンポイント</small><strong>${esc(insight.action)}</strong></div></article></section><h2 class="rival-section-title-v2">成績比較</h2><section class="rival-comparison-v2"><div class="rival-comparison-head-v2"><strong>${esc(a.name)}</strong><span>${matches.length}試合平均</span><strong>${esc(b.name)}</strong></div>${rows.map(row=>`<div><strong>${row[1]}</strong><span>${row[0]}</span><strong>${row[2]}</strong></div>`).join('')}</section><h2 class="rival-section-title-v2">最近の直接対戦</h2><section class="rival-history-v2">${recentRows}</section>`;
       const renderedSelect=result.querySelector(".rival-opponent-select-v2");
       if(renderedSelect){renderedSelect.dataset.selectedKey=b.key;renderedSelect.value=b.key;}
     }
@@ -25985,13 +25985,13 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     const coach = typeof buildRionCoachV760 === "function" ? buildRionCoachV760(coachInsight, coachGrowth) : null;
     const rating = coachRatingValueV1(coach, "finish");
     const metrics = [];
-    if (records.length) metrics.push(metricCard(window.cueT("p3.761345d1"),all.highRun,Math.min(100,all.highRun),"点"));
-    if (all.shotRate != null) metrics.push(metricCard("シュート成功率",`${all.shotRate}` ,all.shotRate,"%"));
-    if (all.safetyRate != null) metrics.push(metricCard("セーフティ成功率",`${all.safetyRate}`,all.safetyRate,"%"));
+    if (records.length) metrics.push(metricCard(window.cueT("p3.761345d1"),all.highRun,Math.min(100,all.highRun),window.cueT("p3.1d59ea7c")));
+    if (all.shotRate != null) metrics.push(metricCard(window.cueT("p3.a7003f2d"),`${all.shotRate}` ,all.shotRate,"%"));
+    if (all.safetyRate != null) metrics.push(metricCard(window.cueT("p3.6f5ab47b"),`${all.safetyRate}`,all.safetyRate,"%"));
 
     document.getElementById("playerStatsRace").textContent = "›";
     document.getElementById("playerStatsRace").setAttribute("role","button");
-    document.getElementById("playerStatsRace").setAttribute("aria-label","プレーヤーを編集");
+    document.getElementById("playerStatsRace").setAttribute("aria-label",window.cueT("p3.08b9f9f0"));
     body.innerHTML = `<div class="player-detail-shell-v1">
       <div class="player-detail-profile-v1">
         <span class="player-detail-avatar-v1">${playerAvatarHtmlV2(player,"player-avatar-v2")}${player.favorite === true ? '<span class="player-detail-favorite-v1">★</span>' : ""}</span>
@@ -26001,27 +26001,27 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
         </span>
       </div>
 
-      <div class="player-detail-disciplines-v1" role="tablist" aria-label="種目">
+      <div class="player-detail-disciplines-v1" role="tablist" aria-label="${window.cueT("p3.27212e5a")}">
         ${disciplineDefs.map(item => `<button type="button" role="tab" class="player-detail-discipline-v1 ${item.id === activeDiscipline ? "is-selected" : ""}" data-player-detail-discipline="${item.id}" aria-selected="${item.id === activeDiscipline}" ${item.enabled ? "" : "disabled"}><img class="disc-ball" src="${item.asset}" alt=""><span>${item.label}</span></button>`).join("")}
       </div>
 
       ${records.length ? `<section class="player-detail-card-v1 player-detail-win-v1">
         <div class="player-detail-gauge-v1" style="--rate:${all.winRate}">
-          <div class="player-detail-gauge-copy-v1"><div class="player-detail-gauge-value-v1">${all.winRate}<small>%</small></div><div class="player-detail-gauge-label-v1">勝率</div></div>
+          <div class="player-detail-gauge-copy-v1"><div class="player-detail-gauge-value-v1">${all.winRate}<small>%</small></div><div class="player-detail-gauge-label-v1">${window.cueT("p3.bab1876f")}</div></div>
         </div>
         <div>
-          <div class="player-detail-recent-label-v1">${disciplineDefs.find(item => item.id === activeDiscipline)?.label || ""} の最近${recent.length}試合の勝率</div>
+          <div class="player-detail-recent-label-v1">${window.cueT("p3.e53c16cd",{p:disciplineDefs.find(item => item.id === activeDiscipline)?.label || "",length:recent.length,count:recent.length})}</div>
           <div class="player-detail-recent-rate-v1">${recentStats.winRate}%</div>
           ${rating ? `<div class="player-detail-stars-v1">${"★".repeat(rating)}<span class="off">${"★".repeat(5-rating)}</span></div>` : ""}
           ${coach?.ready ? `<div class="player-detail-status-v1">${esc(coach.status)}</div>` : ""}
         </div>
       </section>
-      ${metrics.length ? `<section class="player-detail-card-v1 player-detail-section-v1"><div class="player-detail-section-title-v1">成績サマリー</div><div class="player-detail-metrics-v1" style="--metric-count:${metrics.length}">${metrics.join("")}</div></section>` : ""}
+      ${metrics.length ? `<section class="player-detail-card-v1 player-detail-section-v1"><div class="player-detail-section-title-v1">${window.cueT("p3.adebcfa4")}</div><div class="player-detail-metrics-v1" style="--metric-count:${metrics.length}">${metrics.join("")}</div></section>` : ""}
       <button type="button" class="player-detail-vs-v1" data-open-player-rival-v832="${esc(player.id)}">
         ${svgPerson}
-        <span><span class="player-detail-vs-title-v1">対戦成績（VS）を見る</span><span class="player-detail-vs-sub-v1">対戦相手ごとの勝敗・勝率を確認できます</span></span>
+        <span><span class="player-detail-vs-title-v1">${window.cueT("p3.e3fa7468")}</span><span class="player-detail-vs-sub-v1">${window.cueT("p3.3d9fd71b")}</span></span>
         <span class="player-detail-chevron-v1" aria-hidden="true"></span>
-      </button>` : `<section class="player-detail-card-v1 player-detail-empty-v1">この種目の対戦データはまだありません。</section>`}
+      </button>` : `<section class="player-detail-card-v1 player-detail-empty-v1">${window.cueT("p3.a9b2b17c")}</section>`}
     </div>`;
   };
 
@@ -26034,7 +26034,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     overlay.classList.add("player-detail-formal-v1");
     overlay.classList.remove("hidden");
     overlay.setAttribute("aria-hidden","false");
-    document.querySelector(".player-stats-title").textContent = "プレーヤー情報";
+    document.querySelector(".player-stats-title").textContent = window.cueT("p3.3a30a11d");
     window.renderFormalPlayerDetailV1(playerId);
     body.scrollTop = 0;
     const library = document.getElementById("playerLibraryOverlay");
@@ -26816,7 +26816,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       <header class="analytics-head-v1"><div><h1>${window.cueT("p3.9c00c951")}</h1><p>あなたの成長や傾向をグラフと数値で確認できます</p></div><div class="analytics-cloud-v1" id="analyticsCloudV1">${icon.cloud}<span>クラウド同期：確認中</span></div></header>
       <div class="analytics-controls-v1"><div class="analytics-selector-v1">
         <div class="analytics-field-v1"><label>プレーヤー</label><select id="analyticsPlayerV1" aria-label="プレーヤー"></select></div>
-        <div class="analytics-field-v1"><label>期間</label><button type="button" id="analyticsPeriodV1">全期間</button></div>
+        <div class="analytics-field-v1"><label>${window.cueT("p3.c4fde16f")}</label><button type="button" id="analyticsPeriodV1">${window.cueT("p3.5f5f8a4b")}</button></div>
       </div><button class="analytics-filter-v1" id="analyticsFilterV1" type="button">${icon.filter}<span>フィルター</span></button></div>
       <label class="analytics-compare-v1"><span>比較方法</span><select id="analyticsCompareV1"><option value="all">すべて（全試合のデータ）</option></select></label>
       <div class="analytics-target-v1" id="analyticsTargetV1">${icon.info}<span></span></div>
@@ -26824,7 +26824,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       <section class="analytics-metrics-v1" id="analyticsMetricsV1"></section>
       <p class="analytics-period-note-v1" id="analyticsPreviousNoteV1"></p>
       <div class="analytics-trend-head-v1"><h2>推移グラフ</h2></div>
-      <div class="analytics-tabs-v1" id="analyticsTabsV1"><button type="button" data-metric="winRate" class="is-active">勝率</button><button type="button" data-metric="shotRate">シュート成功率</button><button type="button" data-metric="safetyRate">セーフティ成功率</button></div>
+      <div class="analytics-tabs-v1" id="analyticsTabsV1"><button type="button" data-metric="winRate" class="is-active">${window.cueT("p3.bab1876f")}</button><button type="button" data-metric="shotRate">${window.cueT("p3.a7003f2d")}</button><button type="button" data-metric="safetyRate">${window.cueT("p3.6f5ab47b")}</button></div>
       <section class="analytics-card-v1 analytics-chart-card-v1" id="analyticsChartV1"></section>
       <p class="analytics-chart-note-v1" id="analyticsChartNoteV1"></p>
       <section class="analytics-card-v1 analytics-ai-v1"><h2>AI分析サマリー</h2><div class="analytics-ai-grid-v1" id="analyticsAiV1"></div></section>
@@ -26860,7 +26860,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
   function rangeFor(records){
     const dates=records.map(dateOf).filter(Boolean).sort((a,b)=>a-b),f=filterState();
     let start=f.from?new Date(`${f.from}T00:00:00`):dates[0]||null,end=f.to?new Date(`${f.to}T23:59:59`):dates.at(-1)||null;
-    return {start,end,label:start&&end?`${fmtDate(start)}〜${fmtDate(end,true)}`:"全期間"};
+    return {start,end,label:start&&end?`${fmtDate(start)}〜${fmtDate(end,true)}`:window.cueT("p3.5f5f8a4b")};
   }
   function previousRecords(choice,current,range){
     if(!range.start||!range.end)return[];
@@ -26905,17 +26905,17 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     $("#analyticsTargetV1").hidden=false;
     select.value=choice.key;localStorage.setItem("rotationScoreboard.dashboardPlayer.v1",choice.key);
     const records=base.filter(r=>sideFor(r,choice)),range=rangeFor(records),current=summarize(records,choice),prevRecords=previousRecords(choice,records,range),previous=summarize(prevRecords,choice);
-    $("#analyticsPeriodV1").textContent=range.label;$("#analyticsTargetV1 span").textContent=`この画面は「${choice.name}」の全試合データ（すべて）を分析しています`;$("#analyticsSummaryMetaV1").textContent=`期間：${range.label}｜すべての試合`;$("#analyticsCountV1").textContent=`${current.games}試合`;
+    $("#analyticsPeriodV1").textContent=range.label;$("#analyticsTargetV1 span").textContent=`この画面は「${choice.name}」の全試合データ（すべて）を分析しています`;$("#analyticsSummaryMetaV1").textContent=`期間：${range.label}｜すべての試合`;$("#analyticsCountV1").textContent=window.cueT(`p3.2a6cdf39`,{games:current.games,count:current.games});
     $("#analyticsMetricsV1").innerHTML=[
-      metricCard("勝率",val(current.winRate,"%",1),current.winRate,previous.winRate,"winRate"),
+      metricCard(window.cueT("p3.bab1876f"),val(current.winRate,"%",1),current.winRate,previous.winRate,"winRate"),
       metricCard(window.cueT("p3.761345d1"),val(current.highRun,"",0),current.highRun,previous.highRun,"highRun"),
-      metricCard("シュート成功率",val(current.shotRate,"%",1),current.shotRate,previous.shotRate,"shotRate"),
-      metricCard("セーフティ成功率",val(current.safetyRate,"%",1),current.safetyRate,previous.safetyRate,"safetyRate"),
+      metricCard(window.cueT("p3.a7003f2d"),val(current.shotRate,"%",1),current.shotRate,previous.shotRate,"shotRate"),
+      metricCard(window.cueT("p3.6f5ab47b"),val(current.safetyRate,"%",1),current.safetyRate,previous.safetyRate,"safetyRate"),
       metricCard("ブレイクIN率",val(current.breakInRate,"%",1),current.breakInRate,previous.breakInRate,"breakInRate"),
       metricCard("総ブレイク数",val(current.totalBreaks,"",0),current.totalBreaks,previous.totalBreaks,"totalBreaks")
     ].join("");
     if(range.start&&range.end){const span=Math.max(1,range.end-range.start),pe=new Date(range.start.getTime()-1),ps=new Date(pe.getTime()-span);$("#analyticsPreviousNoteV1").textContent=`※ 前期は、前期間（${fmtDate(ps)}〜${fmtDate(pe,true)}）との比較です`}else $("#analyticsPreviousNoteV1").textContent="";
-    const points=monthly(records,choice,chartMetric);$("#analyticsChartV1").innerHTML=chart(points);const metricName={winRate:"勝率",shotRate:"シュート成功率",safetyRate:"セーフティ成功率"}[chartMetric];$("#analyticsChartNoteV1").textContent=`※ 実データがある月の${metricName}の推移`;
+    const points=monthly(records,choice,chartMetric);$("#analyticsChartV1").innerHTML=chart(points);const metricName={winRate:window.cueT("p3.bab1876f"),shotRate:window.cueT("p3.a7003f2d"),safetyRate:window.cueT("p3.6f5ab47b")}[chartMetric];$("#analyticsChartNoteV1").textContent=`※ 実データがある月の${metricName}の推移`;
     let growth=null,insight=null;try{growth=buildPlayerGrowthAnalysisV740(records,choice);insight=buildPlayerInsightsV750(records,choice,growth)}catch(_){}
     const good=[],focus=[];(growth?.metrics||[]).filter(m=>m.direction==="up").slice(0,2).forEach(m=>good.push(`${m.label}が改善しています（${m.raw>0?"+":""}${Number(m.raw).toFixed(1)}）`));(growth?.metrics||[]).filter(m=>m.direction==="down").slice(0,2).forEach(m=>focus.push(`${m.label}を確認しましょう（${m.raw>0?"+":""}${Number(m.raw).toFixed(1)}）`));
     if(!good.length&&insight?.strength)good.push(insight.strength);if(!focus.length&&insight?.focus)focus.push(insight.focus);
@@ -27156,8 +27156,8 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
     let filter={}; try{filter=window.getStatisticsFilterV53?.()||{}}catch(_){}
     const player=filter.player?String(filter.player).replace(/^id:|^name:/,""):"全プレーヤー";
     const period=filter.startDate||filter.endDate?`${filter.startDate||window.cueT("p3.3b69e578")} ～ ${filter.endDate||window.cueT("p3.3b69e578")}`:"すべての期間";
-    const other=[filter.category,filter.season].filter(Boolean).join("／")||"すべての試合";
-    $("#suiteCsvConditions",root).innerHTML=`<div><strong>対象</strong><span>${esc(player)}</span></div><div><strong>期間</strong><span>${esc(period)}</span></div><div><strong>その他の条件</strong><span>${esc(other)}</span></div>`;
+    const other=[filter.category,filter.season].filter(Boolean).join("／")||window.cueT("p3.7e415f2b");
+    $("#suiteCsvConditions",root).innerHTML=`<div><strong>対象</strong><span>${esc(player)}</span></div><div><strong>${window.cueT("p3.c4fde16f")}</strong><span>${esc(period)}</span></div><div><strong>その他の条件</strong><span>${esc(other)}</span></div>`;
   }
   function proxyClick(id) { document.getElementById(id)?.click(); }
   function syncOldCloudInputs() {
@@ -27398,7 +27398,7 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   dialog.className="player-editor-dialog-v1";dialog.setAttribute("role","dialog");dialog.setAttribute("aria-modal","true");
   dialog.setAttribute("aria-labelledby","playerEditorModalTitleV1");dialog.setAttribute("aria-describedby","playerEditorModalCopyV1");
   const head=document.createElement("header");head.className="player-editor-head-v1";
-  head.innerHTML='<button class="player-editor-close-v1" type="button" aria-label="' + window.cueT("p3.60a1005b") + '">‹ 戻る</button><h2 id="playerEditorModalTitleV1">プレーヤー登録</h2><span aria-hidden="true"></span>';
+  head.innerHTML='<button class="player-editor-close-v1" type="button" aria-label="' + window.cueT("p3.60a1005b") + '">' + window.cueT("p3.a081a194") + '</button><h2 id="playerEditorModalTitleV1">' + window.cueT("p3.35fbdeb5") + '</h2><span aria-hidden="true"></span>';
   const scroll=document.createElement("div");scroll.className="player-editor-scroll-v1";
   scroll.innerHTML='<p class="player-editor-copy-v1" id="playerEditorModalCopyV1"></p>';
   [...editor.children].forEach(node=>{if(node!==existingSave&&node!==existingDelete)scroll.appendChild(node)});
@@ -27408,9 +27408,9 @@ body.cue-modal-lock-v1{overflow:hidden!important}
   actions.append(cancel,existingSave);dialog.append(head,scroll,actions);editor.appendChild(dialog);
   const nameLabel=dialog.querySelector('label[for="playerEditorName"]');
   const raceLabel=dialog.querySelector('label[for="playerEditorRace"]');
-  if(nameLabel)nameLabel.textContent="名前（必須）";
+  if(nameLabel)nameLabel.textContent=window.cueT("p3.7fd2a878");
   if(raceLabel)raceLabel.textContent="Race to";
-  document.getElementById("playerEditorName")?.setAttribute("placeholder","プレーヤー名を入力");
+  document.getElementById("playerEditorName")?.setAttribute("placeholder",window.cueT("p3.d29ade81"));
   function cancelPlayer(){
     document.getElementById("playerLibraryBackBtn")?.click();
     returnFocus?.focus?.();returnFocus=null;
@@ -29013,7 +29013,7 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
   const won = (record,s) => winnerSide(record)===Number(s);
   const stats = (items,p) => {const resolved=items.filter(r=>[1,2].includes(winnerSide(r))),wins=resolved.filter(r=>won(r,side(r,p))).length,losses=Math.max(0,resolved.length-wins);return {games:items.length,resolved:resolved.length,wins,losses,rate:resolved.length?wins/resolved.length*100:null};};
   const rateText = value => Number.isFinite(value)?`${Number(value).toFixed(1)}%`:"—";
-  const summaryStatsBar = summary => `<section class="page-summary-stats-v1" aria-label="試合集計"><div role="group" aria-label="試合 ${summary.games}"><span>試合</span><strong>${summary.games}</strong></div><div role="group" aria-label="勝敗 ${summary.resolved?`${summary.wins}勝 ${summary.losses}敗`:"未集計"}"><span>勝敗</span><strong>${summary.resolved?`${summary.wins}勝 ${summary.losses}敗`:"—"}</strong></div><div role="group" aria-label="勝率 ${rateText(summary.rate)}"><span>勝率</span><strong>${rateText(summary.rate)}</strong></div></section>`;
+  const summaryStatsBar = summary => `<section class="page-summary-stats-v1" aria-label="${window.cueT("p3.98d1e3d9")}"><div role="group" aria-label="${window.cueT("p3.4eedd0dd",{games:summary.games})}"><span>${window.cueT("p3.3573405f")}</span><strong>${summary.games}</strong></div><div role="group" aria-label="${window.cueT("p3.436820ed",{p:summary.resolved?window.cueT(`p3.67723116`,{wins:summary.wins,losses:summary.losses}):window.cueT("p3.e26ff755")})}"><span>${window.cueT("p3.0c8bd857")}</span><strong>${summary.resolved?window.cueT(`p3.67723116`,{wins:summary.wins,losses:summary.losses}):"—"}</strong></div><div role="group" aria-label="${window.cueT("p3.b7330965",{p:rateText(summary.rate)})}"><span>${window.cueT("p3.bab1876f")}</span><strong>${rateText(summary.rate)}</strong></div></section>`;
   const avatar = (p,cls="player-avatar-v2") => typeof playerAvatarHtmlV2==="function"?playerAvatarHtmlV2(p,cls):"";
   const opponent = (record,s) => s ? record?.players?.[s===1?2:1]||{} : {};
   const opponentLibrary = data => historicalPlayerProfileV1(data,readPlayerLibrary());
@@ -29022,7 +29022,7 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
   const raceOf = record => {const g1=Number(record.players?.[1]?.goal)||0,g2=Number(record.players?.[2]?.goal)||0;if(!g1&&!g2)return "";return g1&&g2&&g1!==g2?`Race to ${g1} / ${g2}`:`Race to ${g1||g2}`;};
   const back = `<button class="player-journey-back-v2" type="button" data-journey-back aria-label="${window.cueT("p3.60a1005b")}">‹</button>`;
   function ensure(id,title){let root=document.getElementById(id);if(!root){root=document.createElement("section");root.id=id;root.className="player-journey-overlay-v2 hidden";root.innerHTML=`<header class="player-journey-header-v2">${back}<h1>${title}</h1><span></span></header><main class="player-journey-scroll-v2"><div class="player-journey-shell-v2"></div></main>`;document.body.appendChild(root);}return root;}
-  const rivalRoot=ensure("playerOpponentRecordsV2","対戦相手別の成績"),historyRoot=ensure("playerMatchHistoryV2","このプレーヤーの試合履歴");
+  const rivalRoot=ensure("playerOpponentRecordsV2",window.cueT("p3.683549f7")),historyRoot=ensure("playerMatchHistoryV2",window.cueT("p3.40606133"));
   let rivalState={playerId:"",discipline:"9ball",sort:"games"},historyState={playerId:"",filter:"all",period:"all",opponentKey:"",origin:"player"};
   function show(root){root.classList.remove("hidden");root.setAttribute("aria-hidden","false");root.querySelector(".player-journey-scroll-v2")?.scrollTo(0,0);if(root===historyRoot)window.CueScoreUiRevisionV12?.reviseHistory?.();else if(root===rivalRoot)window.CueScoreUiRevisionV12?.reviseRivals?.();}
   function hide(root){root.classList.add("hidden");root.setAttribute("aria-hidden","true");}
@@ -29031,15 +29031,15 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
   function reopenPlayer(id){if(String(window.__cueScoreActivePlayerStatsIdV159||"")===String(id)&&document.getElementById("playerStatsBody")?.childElementCount){restorePlayerDetail();return;}hide(rivalRoot);hide(historyRoot);openPlayerStats?.(id);}
   function rivalGroups(items,p){const map=new Map();items.forEach(record=>{const s=side(record,p);if(!s)return;const raw=opponent(record,s);const key=String(raw.registeredPlayerId||raw.name||"");if(!key)return;if(!map.has(key))map.set(key,{key,opponent:opponentLibrary(raw),items:[]});map.get(key).items.push(record);});return [...map.values()].map(group=>({...group,summary:stats(group.items,p)}));}
   function renderRivals(){const p=player(rivalState.playerId);if(!p)return;const filtered=records(p).filter(r=>disc(r)===rivalState.discipline);let groups=rivalGroups(filtered,p);groups.sort((a,b)=>rivalState.sort==="rate"?((b.summary.rate??-1)-(a.summary.rate??-1))||(b.summary.games-a.summary.games):(b.summary.games-a.summary.games)||((b.summary.rate??-1)-(a.summary.rate??-1)));const d=def(rivalState.discipline);rivalRoot.querySelector(".player-journey-shell-v2").innerHTML=`
-    <section class="player-journey-card-v2 journey-player-v2"><span class="journey-avatar-v2">${avatar(p)}</span><strong>${esc(p.name)}</strong><label class="journey-discipline-v2"><img src="${d.asset}" alt=""><select aria-label="種目">${defs.map(x=>`<option value="${x.id}" ${x.id===d.id?"selected":""}>${x.label}</option>`).join("")}</select></label></section>
-    <h2 class="page-journey-heading-v1">対戦相手</h2>
-    <div class="journey-list-v2">${groups.length?groups.map(group=>{const s=group.summary;return `<button class="journey-opponent-v2" type="button" data-rival-opponent="${esc(group.key)}" aria-label="${esc(group.opponent.name||"対戦相手")}との${esc(d.label)}試合を見る"><span class="journey-opponent-avatar-v2">${avatar(group.opponent)}</span><span><strong>${esc(group.opponent.name||"対戦相手")}</strong><span class="journey-opponent-meta-v2"><span>${s.games}試合</span><span>${s.resolved?`${s.wins}勝${s.losses}敗`:"勝敗 —"}</span></span></span><span class="journey-opponent-rate-v2"><span>勝率</span><strong>${rateText(s.rate)}</strong></span><span class="journey-chevron-v2">›</span></button>`;}).join(""):`<div class="player-journey-card-v2 journey-empty-v2">この種目の対戦相手別データはまだありません。</div>`}</div>`;window.CueScoreUiRevisionV12?.reviseRivals?.();}
+    <section class="player-journey-card-v2 journey-player-v2"><span class="journey-avatar-v2">${avatar(p)}</span><strong>${esc(p.name)}</strong><label class="journey-discipline-v2"><img src="${d.asset}" alt=""><select aria-label="${window.cueT("p3.27212e5a")}">${defs.map(x=>`<option value="${x.id}" ${x.id===d.id?"selected":""}>${x.label}</option>`).join("")}</select></label></section>
+    <h2 class="page-journey-heading-v1">${window.cueT("p3.b448aa33")}</h2>
+    <div class="journey-list-v2">${groups.length?groups.map(group=>{const s=group.summary;return `<button class="journey-opponent-v2" type="button" data-rival-opponent="${esc(group.key)}" aria-label="${window.cueT("p3.a8545ecb",{p:esc(group.opponent.name||window.cueT("p3.b448aa33")),p2:esc(d.label),count:esc(d.label)})}"><span class="journey-opponent-avatar-v2">${avatar(group.opponent)}</span><span><strong>${esc(group.opponent.name||window.cueT("p3.b448aa33"))}</strong><span class="journey-opponent-meta-v2"><span>${window.cueT("p3.2a6cdf39",{games:s.games,count:s.games})}</span><span>${s.resolved?window.cueT(`p3.f3a01e79`,{wins:s.wins,losses:s.losses}):window.cueT("p3.b597d966")}</span></span></span><span class="journey-opponent-rate-v2"><span>${window.cueT("p3.bab1876f")}</span><strong>${rateText(s.rate)}</strong></span><span class="journey-chevron-v2">›</span></button>`;}).join(""):`<div class="player-journey-card-v2 journey-empty-v2">${window.cueT("p3.21cf867d")}</div>`}</div>`;window.CueScoreUiRevisionV12?.reviseRivals?.();}
   function openRivals(id,discipline="9ball"){rivalState={playerId:String(id),discipline,sort:"games"};document.getElementById("playerStatsOverlay")?.classList.add("hidden");renderRivals();show(rivalRoot);}
-  function renderHistory(){const p=player(historyState.playerId);if(!p)return;const all=records(p),opponentGroups=rivalGroups(all,p);const selectedOpponent=historyState.opponentKey?opponentGroups.find(group=>group.key===historyState.opponentKey):null;let items=historyState.filter==="all"?all:all.filter(r=>disc(r)===historyState.filter);if(historyState.opponentKey)items=items.filter(r=>String(opponent(r,side(r,p))?.registeredPlayerId||opponent(r,side(r,p))?.name||"")===historyState.opponentKey);if(historyState.period==="month"){const now=new Date();items=items.filter(r=>{const d=timeOf(r);return d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth();});}const summary=stats(items,p),grouped=new Map();items.forEach(r=>{const d=timeOf(r),key=Number.isNaN(d.getTime())?"日付なし":`${d.getFullYear()}年${d.getMonth()+1}月`;if(!grouped.has(key))grouped.set(key,[]);grouped.get(key).push(r);});const title=historyRoot.querySelector(".player-journey-header-v2 h1");if(title){const titleText=selectedOpponent?`${selectedOpponent.opponent.name||"対戦相手"}との${def(historyState.filter).label}試合`:`${p.name}の試合履歴`;title.className="player-history-title-v4";title.setAttribute("aria-label",titleText);title.innerHTML=selectedOpponent?`<span class="player-history-title-name-v4">${esc(titleText)}</span>`:`<span class="player-history-title-avatar-v4">${avatar(p)}</span><span class="player-history-title-name-v4">${esc(titleText)}</span>`;}historyRoot.querySelector(".player-journey-shell-v2").innerHTML=`
+  function renderHistory(){const p=player(historyState.playerId);if(!p)return;const all=records(p),opponentGroups=rivalGroups(all,p);const selectedOpponent=historyState.opponentKey?opponentGroups.find(group=>group.key===historyState.opponentKey):null;let items=historyState.filter==="all"?all:all.filter(r=>disc(r)===historyState.filter);if(historyState.opponentKey)items=items.filter(r=>String(opponent(r,side(r,p))?.registeredPlayerId||opponent(r,side(r,p))?.name||"")===historyState.opponentKey);if(historyState.period==="month"){const now=new Date();items=items.filter(r=>{const d=timeOf(r);return d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth();});}const summary=stats(items,p),grouped=new Map();items.forEach(r=>{const d=timeOf(r),key=Number.isNaN(d.getTime())?window.cueT("p3.6b344146"):window.cueT(`p3.4ff977be`,{getFullYear:d.getFullYear(),p:d.getMonth()+1});if(!grouped.has(key))grouped.set(key,[]);grouped.get(key).push(r);});const title=historyRoot.querySelector(".player-journey-header-v2 h1");if(title){const titleText=selectedOpponent?window.cueT(`p3.d25c64b5`,{p:selectedOpponent.opponent.name||window.cueT("p3.b448aa33"),label:def(historyState.filter).label,count:def(historyState.filter).label}):window.cueT(`p3.9c30ceac`,{name:p.name});title.className="player-history-title-v4";title.setAttribute("aria-label",titleText);title.innerHTML=selectedOpponent?`<span class="player-history-title-name-v4">${esc(titleText)}</span>`:`<span class="player-history-title-avatar-v4">${avatar(p)}</span><span class="player-history-title-name-v4">${esc(titleText)}</span>`;}historyRoot.querySelector(".player-journey-shell-v2").innerHTML=`
     ${summaryStatsBar(summary)}
-    ${historyState.opponentKey?`<section class="player-journey-card-v2 journey-history-opponent-v11"><span>${avatar(p)}</span><strong>${esc(p.name)}</strong><b>vs</b><span>${avatar(selectedOpponent?.opponent||{})}</span><strong>${esc(selectedOpponent?.opponent?.name||"対戦相手")}</strong><img src="${def(historyState.filter).asset}" alt=""><small>${def(historyState.filter).label}</small></section>`:`<div class="records-disciplines-v2 player-history-disciplines-v4" role="tablist" aria-label="${window.cueT("p3.58008e3c")}"><button type="button" role="tab" aria-selected="${historyState.filter==="all"}" class="${historyState.filter==="all"?"is-selected":""}" data-history-filter="all"><span class="records-all-icon-v2">ALL</span><span>${window.cueT("p3.c15ccc4d")}</span></button>${defs.map(d=>`<button type="button" role="tab" aria-selected="${historyState.filter===d.id}" class="${historyState.filter===d.id?"is-selected":""}" data-history-filter="${d.id}"><img src="${d.asset}" alt=""><span>${d.label}</span></button>`).join("")}</div>`}
-    ${historyState.opponentKey?"":`<div class="journey-history-period-v4"><button type="button" data-history-period class="${historyState.period==="month"?"is-selected":""}">${historyState.period==="month"?"今月":"期間"}</button></div>`}
-    ${items.length?[...grouped.entries()].map(([month,rows])=>`<div class="journey-month-v2">${month}</div><div class="journey-list-v2">${rows.map(r=>{const s=side(r,p),o=opponentLibrary(opponent(r,s)),d=def(disc(r)),dt=timeOf(r),isWin=won(r,s);const date=Number.isNaN(dt.getTime())?"日付なし":window.cueDate(dt,"ymd-w-sp-hm");return `<button class="journey-match-v2 journey-match-v3" type="button" data-player-record-id="${esc(r.id)}" aria-label="${esc(d.label)} ${esc(o.name||"対戦相手")}との試合詳細を開く"><span class="journey-game-v2"><img src="${d.asset}" alt=""><small>${d.label}</small></span><span class="journey-match-date-v3">${date}</span><span class="journey-match-race-v3">${esc(raceOf(r))}</span><span class="journey-match-opponent-v3"><span class="journey-match-result-v3 ${isWin?"":"loss"}">${isWin?"勝ち":"負け"}</span><span class="journey-match-vs-v3">vs</span><span class="journey-match-opponent-avatar-v3">${avatar(o)}</span><strong>${esc(o.name||"対戦相手")}</strong></span><span class="journey-match-score-v3"><strong class="${isWin?"winner":"loser"}">${scoreOf(r,s)}</strong><span>−</span><strong class="${isWin?"loser":"winner"}">${scoreOf(r,s===1?2:1)}</strong></span><span class="journey-match-open-v3" aria-hidden="true">›</span></button>`;}).join("")}</div>`).join(""):`<div class="player-journey-card-v2 journey-empty-v2">条件に一致する試合履歴はありません。</div>`}`;window.CueScoreUiRevisionV12?.reviseHistory?.();}
+    ${historyState.opponentKey?`<section class="player-journey-card-v2 journey-history-opponent-v11"><span>${avatar(p)}</span><strong>${esc(p.name)}</strong><b>vs</b><span>${avatar(selectedOpponent?.opponent||{})}</span><strong>${esc(selectedOpponent?.opponent?.name||window.cueT("p3.b448aa33"))}</strong><img src="${def(historyState.filter).asset}" alt=""><small>${def(historyState.filter).label}</small></section>`:`<div class="records-disciplines-v2 player-history-disciplines-v4" role="tablist" aria-label="${window.cueT("p3.58008e3c")}"><button type="button" role="tab" aria-selected="${historyState.filter==="all"}" class="${historyState.filter==="all"?"is-selected":""}" data-history-filter="all"><span class="records-all-icon-v2">ALL</span><span>${window.cueT("p3.c15ccc4d")}</span></button>${defs.map(d=>`<button type="button" role="tab" aria-selected="${historyState.filter===d.id}" class="${historyState.filter===d.id?"is-selected":""}" data-history-filter="${d.id}"><img src="${d.asset}" alt=""><span>${d.label}</span></button>`).join("")}</div>`}
+    ${historyState.opponentKey?"":`<div class="journey-history-period-v4"><button type="button" data-history-period class="${historyState.period==="month"?"is-selected":""}">${historyState.period==="month"?window.cueT("p3.a5c45c77"):window.cueT("p3.c4fde16f")}</button></div>`}
+    ${items.length?[...grouped.entries()].map(([month,rows])=>`<div class="journey-month-v2">${month}</div><div class="journey-list-v2">${rows.map(r=>{const s=side(r,p),o=opponentLibrary(opponent(r,s)),d=def(disc(r)),dt=timeOf(r),isWin=won(r,s);const date=Number.isNaN(dt.getTime())?window.cueT("p3.6b344146"):window.cueDate(dt,"ymd-w-sp-hm");return `<button class="journey-match-v2 journey-match-v3" type="button" data-player-record-id="${esc(r.id)}" aria-label="${window.cueT("p3.e97202a3",{p:esc(d.label),p2:esc(o.name||window.cueT("p3.b448aa33"))})}"><span class="journey-game-v2"><img src="${d.asset}" alt=""><small>${d.label}</small></span><span class="journey-match-date-v3">${date}</span><span class="journey-match-race-v3">${esc(raceOf(r))}</span><span class="journey-match-opponent-v3"><span class="journey-match-result-v3 ${isWin?"":"loss"}">${isWin?window.cueT("p3.2c8bd192"):window.cueT("p3.0e371a7b")}</span><span class="journey-match-vs-v3">vs</span><span class="journey-match-opponent-avatar-v3">${avatar(o)}</span><strong>${esc(o.name||window.cueT("p3.b448aa33"))}</strong></span><span class="journey-match-score-v3"><strong class="${isWin?"winner":"loser"}">${scoreOf(r,s)}</strong><span>−</span><strong class="${isWin?"loser":"winner"}">${scoreOf(r,s===1?2:1)}</strong></span><span class="journey-match-open-v3" aria-hidden="true">›</span></button>`;}).join("")}</div>`).join(""):`<div class="player-journey-card-v2 journey-empty-v2">${window.cueT("p3.9fa9885d")}</div>`}`;window.CueScoreUiRevisionV12?.reviseHistory?.();}
   function openHistory(id,discipline="all"){const filter=defs.some(item=>item.id===discipline)?discipline:"all";historyState={playerId:String(id),filter,period:"all",opponentKey:"",origin:"player"};historyRoot.dataset.pd8Opponent="";historyRoot.dataset.pd8Discipline=filter==="all"?"":filter;document.getElementById("playerStatsOverlay")?.classList.add("hidden");renderHistory();show(historyRoot);}
   function openOpponentHistory(key){historyState={playerId:rivalState.playerId,filter:rivalState.discipline,period:"all",opponentKey:String(key||""),origin:"rivals"};historyRoot.dataset.pd8Opponent=historyState.opponentKey;hide(rivalRoot);renderHistory();show(historyRoot);}
   window.openPlayerOpponentRecordsV2=openRivals;window.openPlayerMatchHistoryV2=openHistory;window.CueScorePlayerJourneyV2=Object.freeze({openRivals,openHistory});
@@ -29052,7 +29052,7 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
   historyRoot.addEventListener("keydown",event=>{if(!["Enter"," "].includes(event.key))return;const row=event.target.closest("[data-player-record-id]");if(!row)return;event.preventDefault();openPlayerJourneyMatchV4(row.dataset.playerRecordId);});
   const previousRender=window.renderFormalPlayerDetailV1;
   let journeyPlayerId="",journeyDiscipline="9ball";
-  window.renderFormalPlayerDetailV1=function(id){const p=player(id);if(!p)return previousRender?.(id);const idText=String(id);if(journeyPlayerId!==idText){journeyPlayerId=idText;journeyDiscipline="9ball";}const active=journeyDiscipline;const filtered=records(p).filter(r=>disc(r)===active),recent=filtered.slice(0,10),allStats=stats(filtered,p),recentStats=stats(recent,p);let high=0,shots=0,shotN=0,safeties=0,safetyN=0;filtered.forEach(r=>{const s=side(r,p),m=savedPlayerMetricsV113(r,s);high=Math.max(high,Number(m.maxRun)||0);if(Number.isFinite(Number(m.shotRate))){shots+=Number(m.shotRate);shotN++;}const sr=Number(r.analysisSummary?.players?.[s]?.safety?.successRate??r.analysis?.players?.[s]?.safety?.successRate);if(Number.isFinite(sr)){safeties+=sr;safetyN++;}});document.getElementById("playerStatsRace").textContent="編集";document.getElementById("playerStatsBody").innerHTML=`<div class="player-detail-shell-v1"><section class="player-detail-profile-card-v2"><span class="player-detail-avatar-v2">${avatar(p)}${p.favorite===true?'<span class="player-detail-favorite-v1">★</span>':""}</span><span><span class="player-detail-name-v1">${esc(p.name)}</span>${p.isPrimary===true?'<span class="player-detail-main-badge-v2">メインプレーヤー</span>':""}${p.memo?`<span class="player-detail-note-v2">${esc(p.memo)}</span>`:""}</span></section><div class="player-detail-disciplines-v1" role="tablist">${defs.map(d=>`<button type="button" class="player-detail-discipline-v1 ${d.id===active?"is-selected":""}" data-player-detail-discipline="${d.id}" aria-selected="${d.id===active}"><img class="disc-ball" src="${d.asset}" alt=""><span>${d.label}</span></button>`).join("")}</div>${filtered.length?`<section class="player-detail-card-v1 player-detail-recent-v2"><div class="player-detail-recent-head-v2"><strong>最近の成績</strong><span>${def(active).label}・直近${recent.length}試合</span></div><div class="player-detail-record-v2"><b>${recentStats.wins}</b><span>勝</span><b>${recentStats.losses}</b><span>敗</span><span class="player-detail-winrate-v2">${rateText(recentStats.rate)}</span></div><div class="player-detail-form-v2">${recent.filter(r=>winnerSide(r)).slice(0,5).map(r=>`<i class="${won(r,side(r,p))?"win":"loss"}">${won(r,side(r,p))?"W":"L"}</i>`).join("")}</div></section><div class="player-detail-metrics-grid-v2"><div class="player-detail-metric-card-v2"><span>試合数</span><strong>${allStats.games}</strong></div><div class="player-detail-metric-card-v2"><span>${window.cueT("p3.761345d1")}</span><strong>${high}</strong></div><div class="player-detail-metric-card-v2"><span>シュート成功率</span><strong>${shotN?Math.round(shots/shotN)+"%":"—"}</strong></div><div class="player-detail-metric-card-v2"><span>セーフティ成功率</span><strong>${safetyN?Math.round(safeties/safetyN)+"%":"—"}</strong></div></div>`:`<section class="player-detail-card-v1 player-detail-empty-v1">この種目の対戦データはまだありません。</section>`}<div class="player-detail-links-v2"><button class="player-detail-link-v2" data-open-opponents-v2="${esc(id)}"><span class="player-detail-link-icon-v2">VS</span><span><strong>対戦相手別の成績</strong><small>相手ごとの勝敗・勝率</small></span><span class="player-detail-chevron-v1"></span></button><button class="player-detail-link-v2" data-open-player-history-v2="${esc(id)}"><span class="player-detail-link-icon-v2">↻</span><span><strong>このプレーヤーの試合履歴</strong><small>日付・種目・対戦相手・スコア</small></span><span class="player-detail-chevron-v1"></span></button></div></div>`;};
+  window.renderFormalPlayerDetailV1=function(id){const p=player(id);if(!p)return previousRender?.(id);const idText=String(id);if(journeyPlayerId!==idText){journeyPlayerId=idText;journeyDiscipline="9ball";}const active=journeyDiscipline;const filtered=records(p).filter(r=>disc(r)===active),recent=filtered.slice(0,10),allStats=stats(filtered,p),recentStats=stats(recent,p);let high=0,shots=0,shotN=0,safeties=0,safetyN=0;filtered.forEach(r=>{const s=side(r,p),m=savedPlayerMetricsV113(r,s);high=Math.max(high,Number(m.maxRun)||0);if(Number.isFinite(Number(m.shotRate))){shots+=Number(m.shotRate);shotN++;}const sr=Number(r.analysisSummary?.players?.[s]?.safety?.successRate??r.analysis?.players?.[s]?.safety?.successRate);if(Number.isFinite(sr)){safeties+=sr;safetyN++;}});document.getElementById("playerStatsRace").textContent=window.cueT("p3.d107b864");document.getElementById("playerStatsBody").innerHTML=`<div class="player-detail-shell-v1"><section class="player-detail-profile-card-v2"><span class="player-detail-avatar-v2">${avatar(p)}${p.favorite===true?'<span class="player-detail-favorite-v1">★</span>':""}</span><span><span class="player-detail-name-v1">${esc(p.name)}</span>${p.isPrimary===true?'<span class="player-detail-main-badge-v2">' + window.cueT("p3.af7f8f12") + '</span>':""}${p.memo?`<span class="player-detail-note-v2">${esc(p.memo)}</span>`:""}</span></section><div class="player-detail-disciplines-v1" role="tablist">${defs.map(d=>`<button type="button" class="player-detail-discipline-v1 ${d.id===active?"is-selected":""}" data-player-detail-discipline="${d.id}" aria-selected="${d.id===active}"><img class="disc-ball" src="${d.asset}" alt=""><span>${d.label}</span></button>`).join("")}</div>${filtered.length?`<section class="player-detail-card-v1 player-detail-recent-v2"><div class="player-detail-recent-head-v2"><strong>${window.cueT("p3.af9d7c8a")}</strong><span>${window.cueT("p3.ac5fafbb",{label:def(active).label,length:recent.length})}</span></div><div class="player-detail-record-v2"><b>${recentStats.wins}</b><span>${window.cueT("p3.5408a70d")}</span><b>${recentStats.losses}</b><span>${window.cueT("p3.dfc2567e")}</span><span class="player-detail-winrate-v2">${rateText(recentStats.rate)}</span></div><div class="player-detail-form-v2">${recent.filter(r=>winnerSide(r)).slice(0,5).map(r=>`<i class="${won(r,side(r,p))?"win":"loss"}">${won(r,side(r,p))?"W":"L"}</i>`).join("")}</div></section><div class="player-detail-metrics-grid-v2"><div class="player-detail-metric-card-v2"><span>${window.cueT("p3.7437a3a0")}</span><strong>${allStats.games}</strong></div><div class="player-detail-metric-card-v2"><span>${window.cueT("p3.761345d1")}</span><strong>${high}</strong></div><div class="player-detail-metric-card-v2"><span>${window.cueT("p3.a7003f2d")}</span><strong>${shotN?Math.round(shots/shotN)+"%":"—"}</strong></div><div class="player-detail-metric-card-v2"><span>${window.cueT("p3.6f5ab47b")}</span><strong>${safetyN?Math.round(safeties/safetyN)+"%":"—"}</strong></div></div>`:`<section class="player-detail-card-v1 player-detail-empty-v1">${window.cueT("p3.a9b2b17c")}</section>`}<div class="player-detail-links-v2"><button class="player-detail-link-v2" data-open-opponents-v2="${esc(id)}"><span class="player-detail-link-icon-v2">VS</span><span><strong>${window.cueT("p3.683549f7")}</strong><small>${window.cueT("p3.dbdbe431")}</small></span><span class="player-detail-chevron-v1"></span></button><button class="player-detail-link-v2" data-open-player-history-v2="${esc(id)}"><span class="player-detail-link-icon-v2">↻</span><span><strong>${window.cueT("p3.40606133")}</strong><small>${window.cueT("p3.f6d2338a")}</small></span><span class="player-detail-chevron-v1"></span></button></div></div>`;};
   document.getElementById("playerStatsBody")?.addEventListener("click",event=>{const discipline=event.target.closest("[data-player-detail-discipline]");if(discipline)journeyDiscipline=discipline.dataset.playerDetailDiscipline||"9ball";},true);
   document.getElementById("playerStatsBody")?.addEventListener("click",event=>{const opponents=event.target.closest("[data-open-opponents-v2]");if(opponents){const selected=event.currentTarget.querySelector("[data-player-detail-discipline].is-selected")?.dataset.playerDetailDiscipline||"9ball";openRivals(opponents.dataset.openOpponentsV2,selected);return;}const history=event.target.closest("[data-open-player-history-v2]");if(history)openHistory(history.dataset.openPlayerHistoryV2);});
 
@@ -29062,8 +29062,8 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
     const links=document.querySelector("#playerStatsBody .player-detail-links-v2");
     if(!links||links.querySelector("[data-open-player-analysis-v5]"))return;
     const historyLabel=links.querySelector("[data-open-player-history-v2] strong");
-    if(historyLabel)historyLabel.textContent="試合一覧";
-    const button=document.createElement("button");button.className="player-detail-link-v2 player-analysis-entry-v5";button.type="button";button.dataset.openPlayerAnalysisV5=String(id);button.innerHTML='<span class="player-detail-link-icon-v2">↗</span><span><strong>プレーヤー分析を見る</strong><small>今の状態・推移・自己ベスト</small></span><span class="player-detail-chevron-v1"></span>';links.prepend(button);
+    if(historyLabel)historyLabel.textContent=window.cueT("p3.a8b95f84");
+    const button=document.createElement("button");button.className="player-detail-link-v2 player-analysis-entry-v5";button.type="button";button.dataset.openPlayerAnalysisV5=String(id);button.innerHTML='<span class="player-detail-link-icon-v2">↗</span><span><strong>' + window.cueT("p3.9404d0be") + '</strong><small>' + window.cueT("p3.85fe6408") + '</small></span><span class="player-detail-chevron-v1"></span>';links.prepend(button);
   };
   const renderPlayerDetailBeforeBuild5=window.renderFormalPlayerDetailV1;
   window.renderFormalPlayerDetailV1=function(id){renderPlayerDetailBeforeBuild5?.(id);addPlayerAnalysisEntryV5(id);};
@@ -29123,11 +29123,11 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
     const pointsPerInning=totalInnings?String(Math.round(totalScore/totalInnings*100)/100):"—";
     const games=String(filtered.length);
     const averageInnings=filtered.length&&totalInnings?String(Math.round(totalInnings/filtered.length*100)/100):"—";
-    if(active==="rotation")return [["試合数",games],[window.cueT("p3.761345d1"),String(highRun)],["シュート成功率",shotRate],["ブレイクイン率",breakIn]];
-    if(active==="9ball"||active==="10ball")return [["試合数",games],["マス割率",masuwariRate],["シュート成功率",shotRate],["ブレイクイン率",breakIn]];
-    if(active==="jpa9")return [["試合数",games],["シュート成功率",shotRate],["ブレイクイン率",breakIn],["平均イニング",averageInnings]];
-    if(active==="straightPool")return [["試合数",games],[window.cueT("p3.761345d1"),String(highRun)],["シュート成功率",shotRate],["平均得点/イニング",pointsPerInning]];
-    return [["試合数",games],[window.cueT("p3.761345d1"),String(highRun)],["平均得点/イニング",pointsPerInning],["おすすめ持ち点","—"]];
+    if(active==="rotation")return [[window.cueT("p3.7437a3a0"),games],[window.cueT("p3.761345d1"),String(highRun)],[window.cueT("p3.a7003f2d"),shotRate],[window.cueT("p3.535112ba"),breakIn]];
+    if(active==="9ball"||active==="10ball")return [[window.cueT("p3.7437a3a0"),games],["マス割率",masuwariRate],[window.cueT("p3.a7003f2d"),shotRate],[window.cueT("p3.535112ba"),breakIn]];
+    if(active==="jpa9")return [[window.cueT("p3.7437a3a0"),games],[window.cueT("p3.a7003f2d"),shotRate],[window.cueT("p3.535112ba"),breakIn],["平均イニング",averageInnings]];
+    if(active==="straightPool")return [[window.cueT("p3.7437a3a0"),games],[window.cueT("p3.761345d1"),String(highRun)],[window.cueT("p3.a7003f2d"),shotRate],["平均得点/イニング",pointsPerInning]];
+    return [[window.cueT("p3.7437a3a0"),games],[window.cueT("p3.761345d1"),String(highRun)],["平均得点/イニング",pointsPerInning],["おすすめ持ち点","—"]];
   };
   const baseRenderFormalPlayerDetailV1=window.renderFormalPlayerDetailV1;
   window.renderFormalPlayerDetailV1=function(id){
@@ -29394,11 +29394,11 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
   const setView=name=>{view=name;root.querySelectorAll("[data-analysis-view]").forEach(node=>node.hidden=node.dataset.analysisView!==name);root.querySelector("#analysisV2Title").textContent=name==="home"?window.cueT("p3.9c00c951"):name==="player"?"プレーヤー分析":window.cueT("p3.b712e2ca");root.querySelector(".analysis-v2-scroll")?.scrollTo(0,0)};
   const primary=()=>players().find(p=>p.isPrimary===true)||players()[0]||null;
   const recordSummary=(records,player)=>{const recent=records.slice(0,10),a=aggregate(recent,player);return{recent,a,form:recent.slice(0,5).map(r=>`<i class="${won(r,side(r,player))?"":"loss"}">${won(r,side(r,player))?"W":"L"}</i>`).join("")}};
-  function renderHome(){const p=primary(),pRecords=p?recordsFor(p):[],summary=p?recordSummary(pRecords,p):null,latest=pRecords[0]||allRecords()[0]||null;selectedPlayerId=p?.id||"";selectedRecordId=latest?.id||"";let match="";if(latest){const ps=p?side(latest,p):1,s=ps||1,other=libraryPlayer(recordPlayer(latest,s===1?2:1)),d=def(discipline(latest)),date=new Date(latest.endedAt||latest.playedAt||latest.startedAt||0),dateText=Number.isNaN(date.getTime())?"日付なし":window.cueDate(date,"ymd");match=`<div class="analysis-v2-preview analysis-v2-match-preview"><img src="${d.asset}" alt=""><span><strong>${esc(recordPlayer(latest,s).name||p?.name||"Player 1")} vs ${esc(other.name||"Player 2")}</strong><small>${d.label}・${dateText}</small></span><span class="analysis-v2-preview-result"><b>${Number(recordPlayer(latest,s).score)||0} - ${Number(recordPlayer(latest,s===1?2:1).score)||0}</b><span class="analysis-v2-win">${won(latest,s)?"勝ち":"結果"}</span></span></div>`}viewNode("home").innerHTML=`<div class="analysis-v2-intro"><span class="analysis-v2-logo" data-cuescore-logo="horizontal-black"></span><p>成長と試合の流れを、分かりやすく振り返ります</p></div><button class="analysis-v2-entry" type="button" data-open-player-analysis><span class="analysis-v2-entry-icon">↗</span><span><h2>プレーヤー分析</h2><p>変化・原因・次の課題を確認</p>${p?`<div class="analysis-v2-preview"><span class="analysis-v2-avatar">${avatar(p)}</span><span><strong>${esc(p.name)}</strong><small>直近${summary.a.games}試合</small><span class="analysis-v2-form">${summary.form}</span></span><span class="analysis-v2-preview-result"><b>${summary.a.wins}勝 ${summary.a.losses}敗</b><span>勝率 ${summary.a.winRate}%</span></span></div>`:`<div class="analysis-v2-preview">プレーヤーデータがありません</div>`}</span><span class="analysis-v2-chevron">›</span></button><button class="analysis-v2-entry" type="button" data-open-match-analysis ${latest?"":"disabled"}><span class="analysis-v2-entry-icon">VS</span><span><h2>${window.cueT("p3.b712e2ca")}</h2><p>1試合の勝敗を分けたポイントを確認</p>${match||'<div class="analysis-v2-preview">試合履歴がありません</div>'}</span><span class="analysis-v2-chevron">›</span></button><section class="analysis-v2-card analysis-v2-about"><span>i</span><span><strong>分析について</strong><small>保存された試合データから自動で集計します</small></span></section>`;window.CueScoreLogo?.hydrate?.(viewNode("home"));}
+  function renderHome(){const p=primary(),pRecords=p?recordsFor(p):[],summary=p?recordSummary(pRecords,p):null,latest=pRecords[0]||allRecords()[0]||null;selectedPlayerId=p?.id||"";selectedRecordId=latest?.id||"";let match="";if(latest){const ps=p?side(latest,p):1,s=ps||1,other=libraryPlayer(recordPlayer(latest,s===1?2:1)),d=def(discipline(latest)),date=new Date(latest.endedAt||latest.playedAt||latest.startedAt||0),dateText=Number.isNaN(date.getTime())?window.cueT("p3.6b344146"):window.cueDate(date,"ymd");match=`<div class="analysis-v2-preview analysis-v2-match-preview"><img src="${d.asset}" alt=""><span><strong>${esc(recordPlayer(latest,s).name||p?.name||"Player 1")} vs ${esc(other.name||"Player 2")}</strong><small>${d.label}・${dateText}</small></span><span class="analysis-v2-preview-result"><b>${Number(recordPlayer(latest,s).score)||0} - ${Number(recordPlayer(latest,s===1?2:1).score)||0}</b><span class="analysis-v2-win">${won(latest,s)?window.cueT("p3.2c8bd192"):"結果"}</span></span></div>`}viewNode("home").innerHTML=`<div class="analysis-v2-intro"><span class="analysis-v2-logo" data-cuescore-logo="horizontal-black"></span><p>成長と試合の流れを、分かりやすく振り返ります</p></div><button class="analysis-v2-entry" type="button" data-open-player-analysis><span class="analysis-v2-entry-icon">↗</span><span><h2>プレーヤー分析</h2><p>変化・原因・次の課題を確認</p>${p?`<div class="analysis-v2-preview"><span class="analysis-v2-avatar">${avatar(p)}</span><span><strong>${esc(p.name)}</strong><small>直近${summary.a.games}試合</small><span class="analysis-v2-form">${summary.form}</span></span><span class="analysis-v2-preview-result"><b>${window.cueT("p3.67723116",{wins:summary.a.wins,losses:summary.a.losses})}</b><span>勝率 ${summary.a.winRate}%</span></span></div>`:`<div class="analysis-v2-preview">プレーヤーデータがありません</div>`}</span><span class="analysis-v2-chevron">›</span></button><button class="analysis-v2-entry" type="button" data-open-match-analysis ${latest?"":"disabled"}><span class="analysis-v2-entry-icon">VS</span><span><h2>${window.cueT("p3.b712e2ca")}</h2><p>1試合の勝敗を分けたポイントを確認</p>${match||'<div class="analysis-v2-preview">試合履歴がありません</div>'}</span><span class="analysis-v2-chevron">›</span></button><section class="analysis-v2-card analysis-v2-about"><span>i</span><span><strong>分析について</strong><small>保存された試合データから自動で集計します</small></span></section>`;window.CueScoreLogo?.hydrate?.(viewNode("home"));}
   function trendSvg(values){const vals=values.length?values:[0],max=100,w=330,h=125,p=22,step=vals.length>1?(w-p*2)/(vals.length-1):0,pts=vals.map((v,i)=>`${p+i*step},${h-p-(Math.max(0,Math.min(max,v))/max)*(h-p*2)}`).join(" ");return`<svg class="analysis-v2-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="勝率の推移"><path d="M${p} ${h-p}H${w-p}M${p} ${h/2}H${w-p}M${p} ${p}H${w-p}" stroke="#e4e4e0" stroke-width="1"/><polyline points="${pts}" fill="none" stroke="#218238" stroke-width="2.5"/>${vals.map((v,i)=>`<circle cx="${p+i*step}" cy="${h-p-(v/max)*(h-p*2)}" r="4" fill="#218238"/>`).join("")}</svg>`}
-  function renderPlayer(){const p=players().find(x=>String(x.id)===String(selectedPlayerId))||primary();if(!p){viewNode("player").innerHTML='<div class="analysis-v2-card analysis-v2-empty">分析できるプレーヤーがいません。</div>';return}selectedPlayerId=p.id;const filtered=recordsFor(p).filter(r=>discipline(r)===selectedDiscipline),current=filtered.slice(0,10),previous=filtered.slice(10,20),now=aggregate(current,p),before=aggregate(previous,p),winDelta=now.winRate-before.winRate,shotDelta=(now.shotRate??0)-(before.shotRate??0),highDelta=now.highRun-before.highRun,foulDelta=Number((now.avgFouls-before.avgFouls).toFixed(1)),status=now.games<3?"蓄積中":winDelta>=5?"好調":winDelta<=-5?"要調整":"安定";const windows=[];for(let i=Math.min(filtered.length,30);i>0;i-=5){const slice=filtered.slice(Math.max(0,i-5),i);windows.push(aggregate(slice,p).winRate)}const advice=now.games<3?"分析に必要な試合データを蓄積しましょう":foulDelta>0?"平均ファールを前期間以下に戻しましょう":shotDelta<0?"難球を無理に狙わず成功率を整えましょう":"現在の安定した試合運びを継続しましょう";viewNode("player").innerHTML=`<section class="analysis-v2-card analysis-v2-context"><span class="analysis-v2-avatar">${avatar(p)}</span><span><span class="analysis-v2-context-main"><strong>${esc(p.name)}</strong><select class="analysis-v2-select" data-analysis-player>${players().map(x=>`<option value="${esc(x.id)}" ${x.id===p.id?"selected":""}>${esc(x.name)}</option>`).join("")}</select><select class="analysis-v2-select" data-analysis-discipline>${defs.map(d=>`<option value="${d.id}" ${d.id===selectedDiscipline?"selected":""}>${d.label}</option>`).join("")}</select></span><span class="analysis-v2-target" data-prior-games="${before.games}">対象 ${now.games}試合・前の${before.games}試合と比較</span></span></section><section class="analysis-v2-card analysis-v2-condition"><div class="analysis-v2-condition-head"><h2>現在の変化</h2><span class="analysis-v2-status">${status}</span></div><p class="analysis-v2-change">勝率が前の期間より <strong>${signed(winDelta,"ポイント")}</strong></p><div class="analysis-v2-deltas"><div class="analysis-v2-delta"><span>シュート成功率</span><strong>${now.shotRate==null?"—":now.shotRate+"%"}</strong><em class="${shotDelta<0?"attention":""}">${signed(shotDelta,"pt")}</em></div><div class="analysis-v2-delta"><span>${window.cueT("p3.761345d1")}</span><strong>${now.highRun}</strong><em class="${highDelta<0?"attention":""}">${signed(highDelta)}</em></div><div class="analysis-v2-delta"><span>平均ファール</span><strong>${now.avgFouls.toFixed(1)}</strong><em class="${foulDelta>0?"attention":""}">${signed(foulDelta)}</em></div></div></section><h2 class="analysis-v2-section-title">変化の根拠</h2><div class="analysis-v2-metrics"><div class="analysis-v2-metric"><span>直近の勝率</span><strong>${now.winRate}%</strong><em>${now.wins}勝${now.losses}敗</em></div><div class="analysis-v2-metric"><span>セーフティ成功率</span><strong>${now.safetyRate==null?"—":now.safetyRate+"%"}</strong></div><div class="analysis-v2-metric"><span>シュート成功率</span><strong>${now.shotRate==null?"—":now.shotRate+"%"}</strong><em class="${shotDelta<0?"attention":""}">${signed(shotDelta,"pt")}</em></div><div class="analysis-v2-metric"><span>平均ファール</span><strong>${now.avgFouls.toFixed(1)}</strong><em class="${foulDelta>0?"attention":""}">${signed(foulDelta)}</em></div></div><section class="analysis-v2-card analysis-v2-trend"><h2>成長の推移</h2><div class="analysis-v2-tabs"><button class="is-active">勝率</button><button>シュート</button><button>${window.cueT("p3.761345d1")}</button><button>${window.cueT("p3.4923e874")}</button></div>${trendSvg(windows.length?windows:[now.winRate])}</section><section class="analysis-v2-card analysis-v2-advice"><h2>次のアドバイス</h2><div class="analysis-v2-advice-row"><strong>強み</strong><span>${shotDelta>=0?"シュート成功率が前期間以上で安定しています":"勝敗データから得意な流れを分析中です"}</span><b>›</b></div><div class="analysis-v2-advice-row"><strong>次の目標</strong><span>${advice}</span><b>›</b></div></section>`;}
+  function renderPlayer(){const p=players().find(x=>String(x.id)===String(selectedPlayerId))||primary();if(!p){viewNode("player").innerHTML='<div class="analysis-v2-card analysis-v2-empty">分析できるプレーヤーがいません。</div>';return}selectedPlayerId=p.id;const filtered=recordsFor(p).filter(r=>discipline(r)===selectedDiscipline),current=filtered.slice(0,10),previous=filtered.slice(10,20),now=aggregate(current,p),before=aggregate(previous,p),winDelta=now.winRate-before.winRate,shotDelta=(now.shotRate??0)-(before.shotRate??0),highDelta=now.highRun-before.highRun,foulDelta=Number((now.avgFouls-before.avgFouls).toFixed(1)),status=now.games<3?"蓄積中":winDelta>=5?"好調":winDelta<=-5?"要調整":"安定";const windows=[];for(let i=Math.min(filtered.length,30);i>0;i-=5){const slice=filtered.slice(Math.max(0,i-5),i);windows.push(aggregate(slice,p).winRate)}const advice=now.games<3?"分析に必要な試合データを蓄積しましょう":foulDelta>0?"平均ファールを前期間以下に戻しましょう":shotDelta<0?"難球を無理に狙わず成功率を整えましょう":"現在の安定した試合運びを継続しましょう";viewNode("player").innerHTML=`<section class="analysis-v2-card analysis-v2-context"><span class="analysis-v2-avatar">${avatar(p)}</span><span><span class="analysis-v2-context-main"><strong>${esc(p.name)}</strong><select class="analysis-v2-select" data-analysis-player>${players().map(x=>`<option value="${esc(x.id)}" ${x.id===p.id?"selected":""}>${esc(x.name)}</option>`).join("")}</select><select class="analysis-v2-select" data-analysis-discipline>${defs.map(d=>`<option value="${d.id}" ${d.id===selectedDiscipline?"selected":""}>${d.label}</option>`).join("")}</select></span><span class="analysis-v2-target" data-prior-games="${before.games}">対象 ${now.games}試合・前の${before.games}試合と比較</span></span></section><section class="analysis-v2-card analysis-v2-condition"><div class="analysis-v2-condition-head"><h2>現在の変化</h2><span class="analysis-v2-status">${status}</span></div><p class="analysis-v2-change">勝率が前の期間より <strong>${signed(winDelta,"ポイント")}</strong></p><div class="analysis-v2-deltas"><div class="analysis-v2-delta"><span>${window.cueT("p3.a7003f2d")}</span><strong>${now.shotRate==null?"—":now.shotRate+"%"}</strong><em class="${shotDelta<0?"attention":""}">${signed(shotDelta,"pt")}</em></div><div class="analysis-v2-delta"><span>${window.cueT("p3.761345d1")}</span><strong>${now.highRun}</strong><em class="${highDelta<0?"attention":""}">${signed(highDelta)}</em></div><div class="analysis-v2-delta"><span>平均ファール</span><strong>${now.avgFouls.toFixed(1)}</strong><em class="${foulDelta>0?"attention":""}">${signed(foulDelta)}</em></div></div></section><h2 class="analysis-v2-section-title">変化の根拠</h2><div class="analysis-v2-metrics"><div class="analysis-v2-metric"><span>直近の勝率</span><strong>${now.winRate}%</strong><em>${window.cueT("p3.f3a01e79",{wins:now.wins,losses:now.losses})}</em></div><div class="analysis-v2-metric"><span>${window.cueT("p3.6f5ab47b")}</span><strong>${now.safetyRate==null?"—":now.safetyRate+"%"}</strong></div><div class="analysis-v2-metric"><span>${window.cueT("p3.a7003f2d")}</span><strong>${now.shotRate==null?"—":now.shotRate+"%"}</strong><em class="${shotDelta<0?"attention":""}">${signed(shotDelta,"pt")}</em></div><div class="analysis-v2-metric"><span>平均ファール</span><strong>${now.avgFouls.toFixed(1)}</strong><em class="${foulDelta>0?"attention":""}">${signed(foulDelta)}</em></div></div><section class="analysis-v2-card analysis-v2-trend"><h2>成長の推移</h2><div class="analysis-v2-tabs"><button class="is-active">${window.cueT("p3.bab1876f")}</button><button>シュート</button><button>${window.cueT("p3.761345d1")}</button><button>${window.cueT("p3.4923e874")}</button></div>${trendSvg(windows.length?windows:[now.winRate])}</section><section class="analysis-v2-card analysis-v2-advice"><h2>次のアドバイス</h2><div class="analysis-v2-advice-row"><strong>強み</strong><span>${shotDelta>=0?"シュート成功率が前期間以上で安定しています":"勝敗データから得意な流れを分析中です"}</span><b>›</b></div><div class="analysis-v2-advice-row"><strong>次の目標</strong><span>${advice}</span><b>›</b></div></section>`;}
   function progressSvg(record){let p1=[0],p2=[0];const raw=record?.scoreProgress||record?.progress||record?.scoreHistory;if(Array.isArray(raw)){raw.forEach(item=>{p1.push(Number(item?.p1??item?.[1]??p1.at(-1))||0);p2.push(Number(item?.p2??item?.[2]??p2.at(-1))||0)})}if(p1.length===1){p1.push(Number(recordPlayer(record,1).score)||0);p2.push(Number(recordPlayer(record,2).score)||0)}const max=Math.max(1,...p1,...p2),w=330,h=145,p=24,step=(w-p*2)/Math.max(1,p1.length-1),points=a=>a.map((v,i)=>`${p+i*step},${h-p-(v/max)*(h-p*2)}`).join(" ");return`<svg class="analysis-v2-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${window.cueT("p3.ad5b81d4")}"><path d="M${p} ${h-p}H${w-p}M${p} ${h/2}H${w-p}M${p} ${p}H${w-p}" stroke="#e4e4e0"/><polyline points="${points(p1)}" fill="none" stroke="#171717" stroke-width="2.5"/><polyline points="${points(p2)}" fill="none" stroke="#999" stroke-width="2.5"/>${p1.map((v,i)=>`<circle cx="${p+i*step}" cy="${h-p-(v/max)*(h-p*2)}" r="3.5" fill="#171717"/>`).join("")}</svg>`}
-  function renderMatch(){const record=allRecords().find(r=>String(r.id)===String(selectedRecordId))||allRecords()[0];if(!record){viewNode("match").innerHTML='<div class="analysis-v2-card analysis-v2-empty">分析できる試合履歴がありません。</div>';return}selectedRecordId=record.id;const s=Number(record.winner)===2?2:1,o=s===1?2:1,p=libraryPlayer(recordPlayer(record,s)),opp=libraryPlayer(recordPlayer(record,o)),m1=metric(record,s),m2=metric(record,o),shot1=Math.round(Number(m1.shotRate)||0),shot2=Math.round(Number(m2.shotRate)||0),f1=Number(m1.fouls)||0,f2=Number(m2.fouls)||0,high1=Number(m1.maxRun)||0,high2=Number(m2.maxRun)||0,safe1=Number(record.analysisSummary?.players?.[s]?.safety?.successRate??record.analysis?.players?.[s]?.safety?.successRate),safe2=Number(record.analysisSummary?.players?.[o]?.safety?.successRate??record.analysis?.players?.[o]?.safety?.successRate),d=def(discipline(record)),date=new Date(record.endedAt||record.playedAt||record.startedAt||0),dateText=Number.isNaN(date.getTime())?"日付なし":window.cueDate(date,"ymd-hm");const points=[shot1||shot2?`シュート成功率で相手を${Math.abs(shot1-shot2)}ポイント${shot1>=shot2?"上回った":"下回った"}`:"シュート成功率の記録を蓄積中",f1<=f2?(String(f2-f1).endsWith("0")?"ファール数は相手と同じ":`ファールを相手より${f2-f1}回少なく抑えた`):`ファールが相手より${f1-f2}回多かった`,high1>=high2?(String(high1-high2).endsWith("0")?"ハイランは相手と同じ":`ハイランで相手を${high1-high2}上回った`):(String(high2-high1).endsWith("0")?"ハイランは相手と同じ":`ハイランでは相手が${high2-high1}上回った`)];viewNode("match").innerHTML=`<section class="analysis-v2-card analysis-v2-match-head"><div class="analysis-v2-match-meta">${dateText}・${d.label}</div><div class="analysis-v2-score"><div class="analysis-v2-score-player"><span class="analysis-v2-avatar">${avatar(p)}</span><strong>${esc(recordPlayer(record,s).name||p.name)}</strong></div><div class="analysis-v2-score-center"><img src="${d.asset}" alt=""><b>${Number(recordPlayer(record,s).score)||0} - ${Number(recordPlayer(record,o).score)||0}</b><span class="analysis-v2-win">勝ち</span></div><div class="analysis-v2-score-player"><span class="analysis-v2-avatar">${avatar(opp)}</span><strong>${esc(recordPlayer(record,o).name||opp.name)}</strong></div></div></section><section class="analysis-v2-card analysis-v2-points"><h2>勝敗を分けたポイント</h2>${points.map((text,i)=>`<div class="analysis-v2-point"><i>${i+1}</i><span>${esc(text)}</span></div>`).join("")}</section><section class="analysis-v2-card analysis-v2-trend"><h2>${window.cueT("p3.ad5b81d4")}</h2>${progressSvg(record)}</section><section class="analysis-v2-card analysis-v2-comparison"><h2>サマリー比較</h2><div class="analysis-v2-compare-head"><span></span><span>${esc(p.name||"Player 1")}</span><span>${esc(opp.name||"Player 2")}</span></div>${[["シュート成功率",shot1+"%",shot2+"%",shot1>=shot2],[window.cueT("p3.761345d1"),high1,high2,high1>=high2],["ファール数",f1,f2,f1<=f2],["セーフティ成功率",Number.isFinite(safe1)?Math.round(safe1)+"%":"—",Number.isFinite(safe2)?Math.round(safe2)+"%":"—",safe1>=safe2]].map(row=>`<div class="analysis-v2-compare-row"><span>${row[0]}</span><b class="${row[3]?"better":""}">${row[1]}</b><b class="${row[3]?"":"better"}">${row[2]}</b></div>`).join("")}</section><section class="analysis-v2-card analysis-v2-flow"><h2>試合の流れ</h2><div class="analysis-v2-flow-grid"><div><span>${window.cueT("p3.2b4edc06")}</span><strong>互角</strong><b>—</b></div><div><span>${window.cueT("p3.cce12ef7")}</span><strong class="positive">変化</strong><b>—</b></div><div><span>${window.cueT("p3.b450c14f")}</span><strong class="positive">安定</strong><b>—</b></div></div></section><section class="analysis-v2-card analysis-v2-advice"><h2>${window.cueT("p3.ab370aba")}</h2><div class="analysis-v2-advice-row"><strong>良かった点</strong><span>${f1<=f2?"ファールを抑えた試合運び":"得点機会を勝利につなげた"}</span><b>›</b></div><div class="analysis-v2-advice-row"><strong>次回試すこと</strong><span>${shot1<70?"序盤のシュート選択を丁寧に":"現在の成功率を維持する"}</span><b>›</b></div></section>`;}
+  function renderMatch(){const record=allRecords().find(r=>String(r.id)===String(selectedRecordId))||allRecords()[0];if(!record){viewNode("match").innerHTML='<div class="analysis-v2-card analysis-v2-empty">分析できる試合履歴がありません。</div>';return}selectedRecordId=record.id;const s=Number(record.winner)===2?2:1,o=s===1?2:1,p=libraryPlayer(recordPlayer(record,s)),opp=libraryPlayer(recordPlayer(record,o)),m1=metric(record,s),m2=metric(record,o),shot1=Math.round(Number(m1.shotRate)||0),shot2=Math.round(Number(m2.shotRate)||0),f1=Number(m1.fouls)||0,f2=Number(m2.fouls)||0,high1=Number(m1.maxRun)||0,high2=Number(m2.maxRun)||0,safe1=Number(record.analysisSummary?.players?.[s]?.safety?.successRate??record.analysis?.players?.[s]?.safety?.successRate),safe2=Number(record.analysisSummary?.players?.[o]?.safety?.successRate??record.analysis?.players?.[o]?.safety?.successRate),d=def(discipline(record)),date=new Date(record.endedAt||record.playedAt||record.startedAt||0),dateText=Number.isNaN(date.getTime())?window.cueT("p3.6b344146"):window.cueDate(date,"ymd-hm");const points=[shot1||shot2?`シュート成功率で相手を${Math.abs(shot1-shot2)}ポイント${shot1>=shot2?"上回った":"下回った"}`:"シュート成功率の記録を蓄積中",f1<=f2?(String(f2-f1).endsWith("0")?"ファール数は相手と同じ":`ファールを相手より${f2-f1}回少なく抑えた`):`ファールが相手より${f1-f2}回多かった`,high1>=high2?(String(high1-high2).endsWith("0")?"ハイランは相手と同じ":`ハイランで相手を${high1-high2}上回った`):(String(high2-high1).endsWith("0")?"ハイランは相手と同じ":`ハイランでは相手が${high2-high1}上回った`)];viewNode("match").innerHTML=`<section class="analysis-v2-card analysis-v2-match-head"><div class="analysis-v2-match-meta">${dateText}・${d.label}</div><div class="analysis-v2-score"><div class="analysis-v2-score-player"><span class="analysis-v2-avatar">${avatar(p)}</span><strong>${esc(recordPlayer(record,s).name||p.name)}</strong></div><div class="analysis-v2-score-center"><img src="${d.asset}" alt=""><b>${Number(recordPlayer(record,s).score)||0} - ${Number(recordPlayer(record,o).score)||0}</b><span class="analysis-v2-win">${window.cueT("p3.2c8bd192")}</span></div><div class="analysis-v2-score-player"><span class="analysis-v2-avatar">${avatar(opp)}</span><strong>${esc(recordPlayer(record,o).name||opp.name)}</strong></div></div></section><section class="analysis-v2-card analysis-v2-points"><h2>勝敗を分けたポイント</h2>${points.map((text,i)=>`<div class="analysis-v2-point"><i>${i+1}</i><span>${esc(text)}</span></div>`).join("")}</section><section class="analysis-v2-card analysis-v2-trend"><h2>${window.cueT("p3.ad5b81d4")}</h2>${progressSvg(record)}</section><section class="analysis-v2-card analysis-v2-comparison"><h2>サマリー比較</h2><div class="analysis-v2-compare-head"><span></span><span>${esc(p.name||"Player 1")}</span><span>${esc(opp.name||"Player 2")}</span></div>${[[window.cueT("p3.a7003f2d"),shot1+"%",shot2+"%",shot1>=shot2],[window.cueT("p3.761345d1"),high1,high2,high1>=high2],[window.cueT("p3.d98382f0"),f1,f2,f1<=f2],[window.cueT("p3.6f5ab47b"),Number.isFinite(safe1)?Math.round(safe1)+"%":"—",Number.isFinite(safe2)?Math.round(safe2)+"%":"—",safe1>=safe2]].map(row=>`<div class="analysis-v2-compare-row"><span>${row[0]}</span><b class="${row[3]?"better":""}">${row[1]}</b><b class="${row[3]?"":"better"}">${row[2]}</b></div>`).join("")}</section><section class="analysis-v2-card analysis-v2-flow"><h2>試合の流れ</h2><div class="analysis-v2-flow-grid"><div><span>${window.cueT("p3.2b4edc06")}</span><strong>互角</strong><b>—</b></div><div><span>${window.cueT("p3.cce12ef7")}</span><strong class="positive">変化</strong><b>—</b></div><div><span>${window.cueT("p3.b450c14f")}</span><strong class="positive">安定</strong><b>—</b></div></div></section><section class="analysis-v2-card analysis-v2-advice"><h2>${window.cueT("p3.ab370aba")}</h2><div class="analysis-v2-advice-row"><strong>良かった点</strong><span>${f1<=f2?"ファールを抑えた試合運び":"得点機会を勝利につなげた"}</span><b>›</b></div><div class="analysis-v2-advice-row"><strong>次回試すこと</strong><span>${shot1<70?"序盤のシュート選択を丁寧に":"現在の成功率を維持する"}</span><b>›</b></div></section>`;}
   // P2-5a-1: the former DOM-observer "enforce" (data sufficiency guard) is now an explicit step of the player render. Same behaviour, same condition
   // (inert while analysis-final-rc.js has published window.CueScoreAnalyticsFinalRC).
   function applyPriorGamesGuardV1(){
@@ -29438,7 +29438,7 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
     const actualWinner=record?Number(record.winner||record.winnerSide||record.result?.winnerSide||0):0;
     if(record&&viewerSide)record.winner=viewerSide;
     renderMatch();
-    if(record&&viewerSide){record.winner=actualWinner;const badge=viewNode("match").querySelector(".analysis-v2-win");if(badge)badge.textContent=actualWinner===viewerSide?"勝ち":"負け";const meta=viewNode("match").querySelector(".analysis-v2-match-meta");if(meta)meta.textContent+=`・${recordPlayer(record,viewerSide).name||viewer.name}目線`;}
+    if(record&&viewerSide){record.winner=actualWinner;const badge=viewNode("match").querySelector(".analysis-v2-win");if(badge)badge.textContent=actualWinner===viewerSide?window.cueT("p3.2c8bd192"):window.cueT("p3.0e371a7b");const meta=viewNode("match").querySelector(".analysis-v2-match-meta");if(meta)meta.textContent+=`・${recordPlayer(record,viewerSide).name||viewer.name}目線`;}
   }
   // P2 Phase E / OBS-01, OBS-02: the later analysis layers (analysis-final-rc.js patches, analysis-build4.js rebuilds the player view) used to react to DOM
   // mutation observers. They are explicit post-render steps now, run once the view is visible (both layers skip hidden views).

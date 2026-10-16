@@ -8,10 +8,10 @@
     {id:"rotation",label:"Rotation",asset:"assets/icons/games/game-rotation.svg"},{id:"straightPool",label:"14-1",asset:"assets/icons/games/game-14-1.svg"},
     {id:"jpa9",label:"JPA 9-Ball",asset:"assets/icons/games/game-jpa-9ball.svg"},{id:"threeCushion",label:"3 Cushion",asset:"assets/icons/games/game-3cushion.svg"}
   ];
-  const labels={winRate:"勝率",shotRate:window.cueT("p3.274e5e0c"),breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",highRun:window.cueT("p3.761345d1"),average:window.cueT("p3.d247b2e7")};
+  const labels={winRate:window.cueT("p3.bab1876f"),shotRate:window.cueT("p3.274e5e0c"),breakInRate:window.cueT("p3.535112ba"),masuwariRate:window.cueT("p3.991f3795"),highRun:window.cueT("p3.761345d1"),average:window.cueT("p3.d247b2e7")};
   const metricKeys={"9ball":["shotRate","breakInRate","masuwariRate"],"10ball":["shotRate","breakInRate","masuwariRate"],rotation:["shotRate","breakInRate","highRun"],jpa9:["average","breakInRate","highRun"],straightPool:["average","highRun"],threeCushion:["average","highRun"]};
-  const bestLabels={shotRate:"最高シュート率",breakInRate:"最高ブレイクイン率",masuwariRate:"最高マス割り率",masuwariCount:"1試合最多マス割り",breakPocketCount:"最高ブレイクポケット数",breakScore:"最高ブレイク得点",highRun:"最大ハイラン",score:"1試合最高得点",average:"最高アベレージ",leastWinningInnings:"最少イニング勝利"};
-  const bestLabel=(key,disciplineId)=>key==="leastWinningInnings"&&disciplineId==="jpa9"?"最短イニング":bestLabels[key]||key;
+  const bestLabels={shotRate:window.cueT("p3.0cb79ad2"),breakInRate:window.cueT("p3.efe3b953"),masuwariRate:window.cueT("p3.f2a866da"),masuwariCount:window.cueT("p3.c4fa5775"),breakPocketCount:window.cueT("p3.e3861823"),breakScore:window.cueT("p3.fd906f8d"),highRun:window.cueT("p3.1badb93c"),score:window.cueT("p3.176c82bc"),average:window.cueT("p3.f92ff052"),leastWinningInnings:window.cueT("p3.97184347")};
+  const bestLabel=(key,disciplineId)=>key==="leastWinningInnings"&&disciplineId==="jpa9"?window.cueT("p3.2c53b0db"):bestLabels[key]||key;
   const percent=new Set(["winRate","shotRate","breakInRate","masuwariRate"]);
   const discipline=record=>window.CueScoreAnalysisV2Context?.discipline?.(record)||"rotation";
   const players=()=>typeof readPlayerLibrary==="function"?readPlayerLibrary():[];
@@ -22,7 +22,7 @@
   const completedTurns=(record,s)=>window.CueScoreAnalysisV2Context?.completedTurns?.(record,s)??window.inningsCountNumberV1?.(record,s);
   const won=(record,s)=>Number(record?.winner||record?.winnerSide||record?.result?.winnerSide||0)===Number(s);
   const dateValue=record=>new Date(record?.endedAt||record?.playedAt||record?.startedAt||0).getTime()||0;
-  const dateText=record=>{const d=new Date(dateValue(record));return dateValue(record)?window.cueDate(d,"ymd"):"日付なし";};
+  const dateText=record=>{const d=new Date(dateValue(record));return dateValue(record)?window.cueDate(d,"ymd"):window.cueT("p3.6b344146");};
   const helpers={side,won,metric,recordPlayer,completedTurns,discipline,masuwariCounts:record=>window.rackGameMasuwariCountsV1?.(record)||{1:0,2:0}};
   const fmt=(key,value)=>value==null?"—":percent.has(key)?`${Number(value).toFixed(1)}%`:key==="average"?Number(value).toFixed(3).replace(/0+$/," ").trim().replace(/\.$/,""):String(Math.round(value*100)/100);
   const avatar=player=>typeof playerAvatarHtmlV2==="function"?playerAvatarHtmlV2(player,"player-avatar-v2"):"";
@@ -32,29 +32,29 @@
   const backPerf=window.CueScoreBackPerfV11=window.CueScoreBackPerfV11||{records:[],begin(route,source="tap"){const item={route,source,received:performance.now()};this.records.push(item);if(this.records.length>40)this.records.shift();return item;},stage(item,key){if(item)item[key]=performance.now();},usable(item){requestAnimationFrame(()=>requestAnimationFrame(()=>{if(item)item.visuallyUsable=performance.now();}));}};
   const def=id=>defs.find(item=>item.id===id)||defs[0];
 
-  function header(title,action="編集",icon=""){
+  function header(title,action=window.cueT("p3.d107b864"),icon=""){
     const node=document.getElementById("playerStatsTitle");if(node){node.classList.toggle("pd8-title-with-icon",Boolean(icon));node.innerHTML=icon?`<img src="${icon}" alt=""><span>${esc(title)}</span>`:esc(title);}
     const race=document.getElementById("playerStatsRace");if(race)race.textContent=action;
   }
-  function profile(player,compact=false){return `<section class="pd7-profile ${compact?"is-compact":""}"><span class="pd7-avatar">${avatar(player)}${player.favorite===true?'<i>★</i>':""}</span><span><strong title="${esc(player.name)}">${esc(player.name)}</strong>${player.isPrimary===true?'<b>メインプレーヤー</b>':""}${!compact&&player.memo?`<small>${esc(player.memo)}</small>`:""}</span></section>`;}
+  function profile(player,compact=false){return `<section class="pd7-profile ${compact?"is-compact":""}"><span class="pd7-avatar">${avatar(player)}${player.favorite===true?'<i>★</i>':""}</span><span><strong title="${esc(player.name)}">${esc(player.name)}</strong>${player.isPrimary===true?'<b>' + window.cueT("p3.af7f8f12") + '</b>':""}${!compact&&player.memo?`<small>${esc(player.memo)}</small>`:""}</span></section>`;}
   function renderInfo(player){
-    state.level="info";header("プレーヤー情報");
+    state.level="info";header(window.cueT("p3.3a30a11d"));
     const allRecords=recordsFor(player);
-    const rows=defs.map(item=>{const records=allRecords.filter(record=>discipline(record)===item.id),wins=records.filter(record=>won(record,side(record,player))).length,losses=records.length-wins;return `<button type="button" class="pd7-discipline-row" data-pd7-discipline="${item.id}"><img src="${item.asset}" alt=""><span><strong>${item.label}</strong><small>${records.length}試合　${records.length?`${wins}勝${losses}敗`:"勝敗 —"}</small></span><span><small>勝率</small><strong>${records.length?`${(wins/records.length*100).toFixed(1)}%`:"—"}</strong></span><b>›</b></button>`;}).join("");
-    body.innerHTML=`<div class="player-detail-shell-v1 pd7-shell">${profile(player)}<h2 class="pd7-title">競技別通算</h2><section class="pd7-discipline-list">${rows}</section></div>`;state.infoSnapshot={html:body.innerHTML,scrollTop:0};
+    const rows=defs.map(item=>{const records=allRecords.filter(record=>discipline(record)===item.id),wins=records.filter(record=>won(record,side(record,player))).length,losses=records.length-wins;return `<button type="button" class="pd7-discipline-row" data-pd7-discipline="${item.id}"><img src="${item.asset}" alt=""><span><strong>${item.label}</strong><small>${window.cueT("p3.96f48bd5",{length:records.length,p:records.length?window.cueT(`p3.f3a01e79`,{wins:wins,losses:losses}):window.cueT("p3.b597d966"),count:records.length})}</small></span><span><small>${window.cueT("p3.bab1876f")}</small><strong>${records.length?`${(wins/records.length*100).toFixed(1)}%`:"—"}</strong></span><b>›</b></button>`;}).join("");
+    body.innerHTML=`<div class="player-detail-shell-v1 pd7-shell">${profile(player)}<h2 class="pd7-title">${window.cueT("p3.29020eb6")}</h2><section class="pd7-discipline-list">${rows}</section></div>`;state.infoSnapshot={html:body.innerHTML,scrollTop:0};
   }
-  function restoreInfo(){const item=backPerf.begin("discipline-detail-to-player-info",document.getElementById("playerStatsBackBtn")?.dataset.cueBackSource||"tap");backPerf.stage(item,"handlerStart");state.level="info";header("プレーヤー情報");if(state.infoSnapshot){body.innerHTML=state.infoSnapshot.html;body.scrollTop=state.infoSnapshot.scrollTop||0;}else renderInfo(state.player);backPerf.stage(item,"domComplete");backPerf.usable(item);}
+  function restoreInfo(){const item=backPerf.begin("discipline-detail-to-player-info",document.getElementById("playerStatsBackBtn")?.dataset.cueBackSource||"tap");backPerf.stage(item,"handlerStart");state.level="info";header(window.cueT("p3.3a30a11d"));if(state.infoSnapshot){body.innerHTML=state.infoSnapshot.html;body.scrollTop=state.infoSnapshot.scrollTop||0;}else renderInfo(state.player);backPerf.stage(item,"domComplete");backPerf.usable(item);}
   function renderDetail(player,active){
-    state.level="detail";state.discipline=active;header(`${def(active).label} 詳細`,"",def(active).asset);
+    state.level="detail";state.discipline=active;header(window.cueT(`p3.371c0084`,{label:def(active).label}),"",def(active).asset);
     const records=recordsFor(player).filter(record=>discipline(record)===active);
     const all=api.aggregate(records,player,helpers),keys=metricKeys[active]||[],displayedBests=api.bests(records,player,active,helpers).slice(0,3);
-    const bestCards=displayedBests.map(best=>`<button type="button" class="pd7-best" data-pd7-best-key="${esc(best.key)}" data-pd7-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,active)}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("");
-    const summary=records.length?`${all.games}試合　${all.wins}勝${all.losses}敗`:"0試合　勝敗 —";
-    body.innerHTML=`<div class="player-detail-shell-v1 pd7-shell"><section class="pd7-detail-summary">${profile(player,true)}<span><small>${def(active).label} 通算</small><strong>${summary}</strong></span></section>
-      <article class="pd7-win-rate"><span><small>勝率</small><strong>${fmt("winRate",all.winRate)}</strong></span></article>
-      <h2 class="pd7-title">主要指標</h2><section class="pd7-metrics count-${keys.length}">${keys.map(key=>`<article class="pd7-metric"><strong>${fmt(key,all[key])}</strong><span>${labels[key]}</span></article>`).join("")||'<div class="pd7-empty">データなし</div>'}</section>
-      <h2 class="pd7-title">自己ベスト</h2>${bestCards?`<section class="pd7-bests count-${Math.min(displayedBests.length,3)}">${bestCards}</section>`:'<section class="pd7-empty-card">データなし</section>'}
-      <section class="pd7-links"><button type="button" data-pd7-rivals><span><strong>対戦相手別の成績</strong><small>${def(active).label}の相手別勝敗・勝率</small></span><b>›</b></button><button type="button" data-pd7-history><span><strong>${def(active).label}の全試合</strong><small>試合詳細を見る</small></span><b>›</b></button></section>
+    const bestCards=displayedBests.map(best=>`<button type="button" class="pd7-best" data-pd7-best-key="${esc(best.key)}" data-pd7-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,active)}</span><small>${window.cueT("p3.f3717e0d",{p:dateText(best.record)})}</small></button>`).join("");
+    const summary=records.length?window.cueT(`p3.7e3945dc`,{games:all.games,wins:all.wins,losses:all.losses,count:all.games}):window.cueT("p3.661b9eb3");
+    body.innerHTML=`<div class="player-detail-shell-v1 pd7-shell"><section class="pd7-detail-summary">${profile(player,true)}<span><small>${window.cueT("p3.19aaa4aa",{label:def(active).label})}</small><strong>${summary}</strong></span></section>
+      <article class="pd7-win-rate"><span><small>${window.cueT("p3.bab1876f")}</small><strong>${fmt("winRate",all.winRate)}</strong></span></article>
+      <h2 class="pd7-title">${window.cueT("p3.c81f42f6")}</h2><section class="pd7-metrics count-${keys.length}">${keys.map(key=>`<article class="pd7-metric"><strong>${fmt(key,all[key])}</strong><span>${labels[key]}</span></article>`).join("")||'<div class="pd7-empty">' + window.cueT("p3.e63fcd05") + '</div>'}</section>
+      <h2 class="pd7-title">${window.cueT("p3.d134cd45")}</h2>${bestCards?`<section class="pd7-bests count-${Math.min(displayedBests.length,3)}">${bestCards}</section>`:'<section class="pd7-empty-card">' + window.cueT("p3.e63fcd05") + '</section>'}
+      <section class="pd7-links"><button type="button" data-pd7-rivals><span><strong>${window.cueT("p3.683549f7")}</strong><small>${window.cueT("p3.773df3a0",{label:def(active).label})}</small></span><b>›</b></button><button type="button" data-pd7-history><span><strong>${window.cueT("p3.ecef9277",{label:def(active).label})}</strong><small>${window.cueT("p3.dcc7940f")}</small></span><b>›</b></button></section>
       </div>`;
   }
   function render(playerId,level="info",active=state.discipline){const player=players().find(item=>String(item.id)===String(playerId));if(!player)return;state.playerId=String(playerId);state.player=player;level==="detail"?renderDetail(player,active):renderInfo(player);window.CueScorePro?.decorate?.();}

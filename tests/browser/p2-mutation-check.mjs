@@ -19,7 +19,7 @@ const M = [
   ["final-RC state code mapping changed", "analysis-final-rc.js", 'else if (worsened >= 2 && improved === 0) statusCode = "attention";', 'else if (worsened >= 2 && improved === 1) statusCode = "attention";'],
   ["trend threshold 2 -> 3 (rate kind)", "index.html", "Math.max(isRate ? 2 : 0.3, scale * 0.04)", "Math.max(isRate ? 3 : 0.3, scale * 0.04)"],
   ["trend threshold reverts to label text", "index.html", "Math.max(isRate ? 2 : 0.3, scale * 0.04)", 'Math.max(label.includes("率") ? 2 : 0.3, scale * 0.04)'],
-  ["win-rate chart loses isRate", "index.html", 'label: "勝率", lowerIsBetter: false, suffix: "%", isRate: true', 'label: "勝率", lowerIsBetter: false, suffix: "%"'],
+  ["win-rate chart loses isRate", "index.html", 'label: window.cueT("p3.bab1876f"), lowerIsBetter: false, suffix: "%", isRate: true', 'label: window.cueT("p3.bab1876f"), lowerIsBetter: false, suffix: "%"'],
   ["coach threshold 60 -> 61", "index.html", "(s.winRate||0)>=60", "(s.winRate||0)>=61"],
   ["new MutationObserver added", "player-detail-build6.js", "const dateValue=", "new MutationObserver(()=>{});const dateValue="],
   ["ja collation replaced at one site", "index.html", 'a.name.localeCompare(b.name, CueScoreDomainV1.SORT_LOCALE));', 'a.name.localeCompare(b.name, "en"));'],

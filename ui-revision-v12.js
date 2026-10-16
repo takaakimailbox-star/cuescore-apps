@@ -7,7 +7,7 @@
     {id:"9ball",label:"9-Ball"},{id:"10ball",label:"10-Ball"},{id:"rotation",label:"Rotation"},
     {id:"straightPool",label:"14-1"},{id:"jpa9",label:"JPA 9-Ball"},{id:"threeCushion",label:"3 Cushion"}
   ];
-  const labels={winRate:"勝率",shotRate:window.cueT("p3.274e5e0c"),breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",average:window.cueT("p3.d247b2e7"),highRun:window.cueT("p3.761345d1")};
+  const labels={winRate:window.cueT("p3.bab1876f"),shotRate:window.cueT("p3.274e5e0c"),breakInRate:window.cueT("p3.535112ba"),masuwariRate:window.cueT("p3.991f3795"),average:window.cueT("p3.d247b2e7"),highRun:window.cueT("p3.761345d1")};
   const metricOrder={
     "9ball":["winRate","shotRate","breakInRate","masuwariRate"],
     "10ball":["winRate","shotRate","breakInRate","masuwariRate"],
@@ -33,18 +33,18 @@
   // scrollable page with one cumulative chart per metric. Foul rate stays out.
   const trends=document.createElement("section");
   trends.className="pd12-trends hidden";trends.id="pd12Trends";trends.setAttribute("aria-hidden","true");
-  trends.innerHTML='<header class="pd12-trends-header"><button class="pd12-trends-back" type="button" aria-label="分析に戻る">‹</button><h1></h1><span></span></header><main class="pd12-trends-scroll"></main>';
+  trends.innerHTML='<header class="pd12-trends-header"><button class="pd12-trends-back" type="button" aria-label="' + window.cueT("p3.923d9e58") + '">‹</button><h1></h1><span></span></header><main class="pd12-trends-scroll"></main>';
   document.body.appendChild(trends);
   function closeTrends(){trends.classList.add("hidden");trends.setAttribute("aria-hidden","true");document.body.classList.remove("pd12-trends-open");document.getElementById("playerStatsOverlay")?.setAttribute("aria-hidden","false");}
   function openTrends(){
     const state=detail()?.state;if(!state?.player||!state.discipline)return;
     const active=state.discipline,records=(typeof window.recordsForRegisteredPlayer==="function"?window.recordsForRegisteredPlayer(state.player):[]).filter(record=>discipline(record)===active).sort((a,b)=>new Date(a?.endedAt||a?.playedAt||a?.startedAt||0)-new Date(b?.endedAt||b?.playedAt||b?.startedAt||0));
-    trends.querySelector("h1").textContent=`${def(active).label} 推移`;
+    trends.querySelector("h1").textContent=window.cueT(`p3.61a33b00`,{label:def(active).label});
     trends.querySelector("main").innerHTML=(metricOrder[active]||["winRate"]).map(key=>{
       const values=records.map((_,index)=>aggregateApi()?.aggregate?.(records.slice(0,index+1),state.player,helpers)?.[key]??null);
-      const graph=chartApi()?.chart?.(values,key,records)||'<div class="pd7-empty">データなし</div>';
+      const graph=chartApi()?.chart?.(values,key,records)||'<div class="pd7-empty">' + window.cueT("p3.e63fcd05") + '</div>';
       const latest=[...values].reverse().find(Number.isFinite);
-      return `<section class="pd12-trend-card"><div class="pd12-trend-heading"><span><h2>${labels[key]}</h2><small>${records.length?window.cueT(`p3.d8d0de1a`,{length:records.length,count:records.length}):'データなし'}</small></span><strong>${formatTrendValue(key,latest)}</strong></div><div class="pd12-chart-scroll">${graph}</div></section>`;
+      return `<section class="pd12-trend-card"><div class="pd12-trend-heading"><span><h2>${labels[key]}</h2><small>${records.length?window.cueT(`p3.d8d0de1a`,{length:records.length,count:records.length}):window.cueT('p3.e63fcd05')}</small></span><strong>${formatTrendValue(key,latest)}</strong></div><div class="pd12-chart-scroll">${graph}</div></section>`;
     }).join("");
     document.getElementById("playerStatsOverlay")?.setAttribute("aria-hidden","true");document.body.classList.add("pd12-trends-open");trends.classList.remove("hidden");trends.setAttribute("aria-hidden","false");trends.querySelector("main").scrollTop=0;trends.querySelector("button")?.focus();
   }
@@ -78,7 +78,7 @@
     const root=document.getElementById("playerOpponentRecordsV2");if(!root||root.classList.contains("hidden"))return;
     root.querySelectorAll(".journey-summary-v2,.journey-segment-v2").forEach(node=>node.remove());
     const select=root.querySelector(".journey-discipline-v2 select");if(select){const fixed=document.createElement("span");fixed.className="pd12-fixed-discipline";fixed.textContent=select.selectedOptions[0]?.textContent||def(detail()?.state?.discipline).label;select.replaceWith(fixed);}
-    const context=root.querySelector(".journey-player-v2");if(context){context.classList.add("pd13-rival-context","page-rival-context-v1");context.classList.remove("player-journey-card-v2");context.setAttribute("aria-label",`${context.querySelector("strong")?.textContent||"Player"}、${context.querySelector(".pd12-fixed-discipline")?.textContent||"競技"}の対戦相手別成績`);}
+    const context=root.querySelector(".journey-player-v2");if(context){context.classList.add("pd13-rival-context","page-rival-context-v1");context.classList.remove("player-journey-card-v2");context.setAttribute("aria-label",window.cueT(`p3.b53a7134`,{p:context.querySelector("strong")?.textContent||"Player",p2:context.querySelector(".pd12-fixed-discipline")?.textContent||window.cueT("p3.839449dc")}));}
     const player=detail()?.state?.player,active=detail()?.state?.discipline;if(!player||!active)return;
     const latest=new Map();(window.recordsForRegisteredPlayer?.(player)||[]).filter(record=>discipline(record)===active).forEach(record=>{const s=side(record,player),raw=recordPlayer(record,s===1?2:1),key=String(raw.registeredPlayerId||raw.name||"");latest.set(key,Math.max(latest.get(key)||0,time(record)));});
     const list=root.querySelector(".journey-list-v2");if(list){const current=[...list.querySelectorAll("[data-rival-opponent]")],ordered=[...current].sort((a,b)=>(latest.get(b.dataset.rivalOpponent)||0)-(latest.get(a.dataset.rivalOpponent)||0)||stable(a.dataset.rivalOpponent,b.dataset.rivalOpponent));if(current.some((row,index)=>row!==ordered[index]))ordered.forEach(row=>list.appendChild(row));}
@@ -94,7 +94,7 @@
     const root=document.getElementById("playerMatchHistoryV2");if(!root||root.classList.contains("hidden"))return;
     const opponentFixed=Boolean(root.dataset.pd8Opponent),disciplineFixed=Boolean(root.dataset.pd8Discipline)&&!opponentFixed,opponent=root.querySelector(".journey-history-opponent-v11");
     if(opponentFixed)opponent?.remove();
-    if(disciplineFixed){const active=root.dataset.pd8Discipline,title=root.querySelector(".player-journey-header-v2 h1"),label=`${def(active).label}の全試合`;root.querySelector(".player-history-disciplines-v4")?.remove();if(title){title.textContent=label;title.setAttribute("aria-label",label);}}
+    if(disciplineFixed){const active=root.dataset.pd8Discipline,title=root.querySelector(".player-journey-header-v2 h1"),label=window.cueT(`p3.ecef9277`,{label:def(active).label});root.querySelector(".player-history-disciplines-v4")?.remove();if(title){title.textContent=label;title.setAttribute("aria-label",label);}}
     root.querySelector("[data-history-period]")?.remove();
     root.querySelectorAll("[data-player-analysis-record-id]").forEach(node=>node.remove());
     root.querySelectorAll("[data-player-record-id]").forEach(row=>{
@@ -105,7 +105,7 @@
       if((opponentFixed||disciplineFixed)&&date){const dt=recordTime(row.dataset.playerRecordId);if(dt&&!Number.isNaN(dt.getTime()))date.textContent=window.cueDate(dt,"md-w-sp-hm");} // from the stored record, never by parsing the displayed date
       if(opponentFixed){row.querySelector(".journey-match-vs-v3")?.remove();row.querySelector(".journey-match-opponent-avatar-v3")?.remove();row.querySelector(".journey-match-opponent-v3>strong")?.remove();}
       if(disciplineFixed)row.querySelector(".journey-match-vs-v3")?.remove();
-      if(!row.dataset.pd13DetailLabel){const detailSuffix="、試合詳細を開く",currentLabel=row.getAttribute("aria-label")||"試合";row.setAttribute("aria-label",`${currentLabel}${detailSuffix}`);row.dataset.pd13DetailLabel="true";}const open=row.querySelector(".journey-match-open-v3");if(open){open.textContent="›";open.setAttribute("aria-hidden","true");}
+      if(!row.dataset.pd13DetailLabel){const detailSuffix=window.cueT("p3.989a1a74"),currentLabel=row.getAttribute("aria-label")||window.cueT("p3.3573405f");row.setAttribute("aria-label",`${currentLabel}${detailSuffix}`);row.dataset.pd13DetailLabel="true";}const open=row.querySelector(".journey-match-open-v3");if(open){open.textContent="›";open.setAttribute("aria-hidden","true");}
     });
   }
   const history=document.getElementById("playerMatchHistoryV2");

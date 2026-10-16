@@ -55,7 +55,7 @@ const M = [
   ["invalid date special-cased again", "i18n-v1.js", '// No special case for an invalid Date', 'if(Number.isNaN(date.getTime()))return "";// No special case for an invalid Date'],
   ["date coerced from strings again", "i18n-v1.js", 'const date=value; //', 'const date=value instanceof Date?value:new Date(value); //'],
   ["history card uses the wrong pattern", "index.html", 'window.cueDate(dt,"ymd-w-sp-hm")', 'window.cueDate(dt,"ymd-w-hm")'],
-  ["home preview uses the wrong pattern", "index.html", 'dateText=Number.isNaN(date.getTime())?"日付なし":window.cueDate(date,"ymd");', 'dateText=Number.isNaN(date.getTime())?"日付なし":window.cueDate(date,"ymd-hm");'],
+  ["home preview uses the wrong pattern", "index.html", 'dateText=Number.isNaN(date.getTime())?window.cueT("p3.6b344146"):window.cueDate(date,"ymd");', 'dateText=Number.isNaN(date.getTime())?window.cueT("p3.6b344146"):window.cueDate(date,"ymd-hm");'],
   ["CSV date format changed", "index.html", "const dateText = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;", "const dateText = `${date.getFullYear()}/${pad(date.getMonth() + 1)}/${pad(date.getDate())}`;"],
   ["an inline weekday array returns", "index.html", "function fmtDate(d,short=false){", 'const WD250=["日","月","火","水","木","金","土"];function fmtDate(d,short=false){'],
   /* Phase F P2-7 parity */
@@ -81,7 +81,7 @@ const M = [
   /* Phase D journey */
   ["journey observer re-added in ui-revision", "ui-revision-v12.js", "  const history=document.getElementById(\"playerMatchHistoryV2\");", "  const history=document.getElementById(\"playerMatchHistoryV2\");if(history)new MutationObserver(()=>requestAnimationFrame(reviseHistory)).observe(history,{childList:true});"],
   ["history-row compaction observer re-added", "player-detail-build6.js", "  let returnFromEditor=false;", "  if(historyRoot)new MutationObserver(()=>{}).observe(historyRoot,{childList:true});\n  let returnFromEditor=false;"],
-  ["renderHistory no longer revises", "index.html", "条件に一致する試合履歴はありません。</div>`}`;window.CueScoreUiRevisionV12?.reviseHistory?.();}", "条件に一致する試合履歴はありません。</div>`}`;}"],
+  ["renderHistory no longer revises", "index.html", "${window.cueT(\"p3.9fa9885d\")}</div>`}`;window.CueScoreUiRevisionV12?.reviseHistory?.();}", "${window.cueT(\"p3.9fa9885d\")}</div>`}`;}"],
   ["show() no longer revises", "index.html", "if(root===historyRoot)window.CueScoreUiRevisionV12?.reviseHistory?.();else if(root===rivalRoot)window.CueScoreUiRevisionV12?.reviseRivals?.();}", "}"],
   ["displayed date parsed again", "ui-revision-v12.js", 'const dt=recordTime(row.dataset.playerRecordId);', 'const dt=recordTime(row.dataset.playerRecordId);date.textContent.match(/\\d{4}\\/(\\d{2})\\/(\\d{2})(（.）)\\s+(\\d{2}:\\d{2})/);'],
   ["record date fallback chain shortened", "ui-revision-v12.js", "new Date(record.endedAt||record.playedAt||record.startedAt||0):null;};", "new Date(record.endedAt||0):null;};"],

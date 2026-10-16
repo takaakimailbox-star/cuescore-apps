@@ -7,8 +7,8 @@
   const esc=value=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
   const labels={
     "9ball":"9-Ball","10ball":"10-Ball",rotation:"Rotation",jpa9:"JPA 9-Ball",straightPool:"14-1",threeCushion:"3 Cushion",
-    winRate:"勝率",shotRate:window.cueT("p3.274e5e0c"),breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",highRun:window.cueT("p3.761345d1"),average:window.cueT("p3.d247b2e7"),
-    score:"1試合最高得点",masuwariCount:"1試合最多マス割り",leastWinningInnings:"最少イニング勝利"
+    winRate:window.cueT("p3.bab1876f"),shotRate:window.cueT("p3.274e5e0c"),breakInRate:window.cueT("p3.535112ba"),masuwariRate:window.cueT("p3.991f3795"),highRun:window.cueT("p3.761345d1"),average:window.cueT("p3.d247b2e7"),
+    score:window.cueT("p3.176c82bc"),masuwariCount:window.cueT("p3.c4fa5775"),leastWinningInnings:window.cueT("p3.97184347")
   };
   const percentKeys=new Set(["winRate","shotRate","breakInRate","masuwariRate"]);
   const metricsByDiscipline={
@@ -18,8 +18,8 @@
     jpa9:["average","breakInRate","highRun"],
     straightPool:["average","highRun"],threeCushion:["average","highRun"]
   };
-  const bestLabels={shotRate:"最高シュート率",breakInRate:"最高ブレイクイン率",masuwariRate:"最高マス割り率",masuwariCount:"1試合最多マス割り",breakPocketCount:"最高ブレイクポケット数",breakScore:"最高ブレイク得点",highRun:"最大ハイラン",score:"1試合最高得点",average:"最高アベレージ",leastWinningInnings:"最少イニング勝利"};
-  const bestLabel=(key,discipline)=>key==="leastWinningInnings"&&discipline==="jpa9"?"最短イニング":bestLabels[key]||key;
+  const bestLabels={shotRate:window.cueT("p3.0cb79ad2"),breakInRate:window.cueT("p3.efe3b953"),masuwariRate:window.cueT("p3.f2a866da"),masuwariCount:window.cueT("p3.c4fa5775"),breakPocketCount:window.cueT("p3.e3861823"),breakScore:window.cueT("p3.fd906f8d"),highRun:window.cueT("p3.1badb93c"),score:window.cueT("p3.176c82bc"),average:window.cueT("p3.f92ff052"),leastWinningInnings:window.cueT("p3.97184347")};
+  const bestLabel=(key,discipline)=>key==="leastWinningInnings"&&discipline==="jpa9"?window.cueT("p3.2c53b0db"):bestLabels[key]||key;
   const ctx=()=>window.CueScoreAnalysisV2Context;
   const helpers=()=>({
     side:(record,player)=>{const data1=record?.players?.[1]||{},data2=record?.players?.[2]||{},id=String(player?.id||"");if(id&&String(data1.registeredPlayerId||"")===id)return 1;if(id&&String(data2.registeredPlayerId||"")===id)return 2;return String(data1.name||"")===String(player?.name||"")?1:String(data2.name||"")===String(player?.name||"")?2:0;},
@@ -30,7 +30,7 @@
   });
   const fmt=(key,value)=>value==null?"—":percentKeys.has(key)?`${Number(value).toFixed(1)}%`:key==="average"?Number(value).toFixed(3).replace(/0+$/,"").replace(/\.$/,""):String(Math.round(value*100)/100);
   const metricDefs=discipline=>(metricsByDiscipline[discipline]||[]).map(key=>({key,label:labels[key],higher:true}));
-  const recordDate=record=>{const d=new Date(record?.endedAt||record?.playedAt||record?.startedAt||0);return Number.isNaN(d.getTime())?"日付なし":window.cueDate(d,"md");};
+  const recordDate=record=>{const d=new Date(record?.endedAt||record?.playedAt||record?.startedAt||0);return Number.isNaN(d.getTime())?window.cueT("p3.6b344146"):window.cueDate(d,"md");};
   function recordMetric(record,player,key,discipline,h){
     const side=h.side(record,player);if(!side)return null;
     if(key==="winRate")return h.won(record,side)?100:0;
@@ -61,17 +61,17 @@
     const player=context.selectedPlayer(),discipline=context.selectedDiscipline();if(!player)return;
     const h=helpers(),records=context.recordsFor(player).filter(record=>context.discipline(record)===discipline),currentRecords=records.slice(0,10),previousRecords=records.slice(10,20),current=api.aggregate(currentRecords,player,h),previous=api.aggregate(previousRecords,player,h),defs=metricDefs(discipline),bests=api.bests(records,player,discipline,h),points=pointText(current,previous,defs);
     const statusCode=current.games<3?"accumulating":previous.games<3?"stable":current.winRate>previous.winRate?"improving":current.winRate<previous.winRate?"attention":"stable",status={accumulating:"データ蓄積中",stable:"安定",improving:"改善傾向",attention:"要調整"}[statusCode];
-    const summary=current.games?`直近${current.games}試合　${current.wins}勝${current.losses}敗　勝率${Math.round(current.winRate)}%`:"データなし";
+    const summary=current.games?`直近${current.games}試合　${current.wins}勝${current.losses}敗　勝率${Math.round(current.winRate)}%`:window.cueT("p3.e63fcd05");
     const playerName=esc(player.name||"Player"),playerId=esc(player.id||"");
     const disciplineOptions=[...document.querySelectorAll('[data-analysis-discipline] option')].map(option=>`<option value="${esc(option.value)}" ${option.value===discipline?"selected":""}>${esc(option.textContent)}</option>`).join("");
     const trendKeys=["winRate",...defs.map(def=>def.key)],trendRecords=records.slice(0,10).reverse();
     view.innerHTML=`
-      <section class="analysis-v2-card analysis-b4-context"><div><strong title="${playerName}">${playerName}</strong><span>プレーヤー分析</span></div><div><select class="analysis-v2-select" data-analysis-discipline aria-label="競技">${disciplineOptions}</select></div></section>
+      <section class="analysis-v2-card analysis-b4-context"><div><strong title="${playerName}">${playerName}</strong><span>プレーヤー分析</span></div><div><select class="analysis-v2-select" data-analysis-discipline aria-label="${window.cueT("p3.839449dc")}">${disciplineOptions}</select></div></section>
       <section class="analysis-v2-card analysis-b4-now"><div class="analysis-b4-heading"><h2>今の状態</h2><span>${status}</span></div><strong>${summary}</strong><small>条件を満たす保存済み試合だけを指標へ使用しています</small></section>
-      <h2 class="analysis-v2-section-title">主要指標</h2><section class="analysis-b4-metrics">${defs.map(def=>`<article><strong>${fmt(def.key,current[def.key])}</strong><span>${def.label}</span></article>`).join("")}</section>
+      <h2 class="analysis-v2-section-title">${window.cueT("p3.c81f42f6")}</h2><section class="analysis-b4-metrics">${defs.map(def=>`<article><strong>${fmt(def.key,current[def.key])}</strong><span>${def.label}</span></article>`).join("")}</section>
       <section class="analysis-v2-card analysis-b4-trend"><div class="analysis-b4-heading"><h2>推移グラフ</h2><span>直近${trendRecords.length}試合</span></div><label class="analysis-b4-trend-picker"><span>表示指標</span><select data-b4-trend-select aria-label="推移グラフの表示指標">${trendKeys.map(key=>`<option value="${key}">${labels[key]}</option>`).join("")}</select></label><div data-b4-chart>${chart(trendRecords.map(record=>recordMetric(record,player,"winRate",discipline,h)),"winRate",trendRecords)}</div></section>
       <section class="analysis-v2-card analysis-b4-points"><h2>今回のポイント</h2><div><strong>強み</strong><span>${points.strength}</span></div><div><strong>次の課題</strong><span>${points.challenge}</span></div></section>
-      <h2 class="analysis-v2-section-title">自己ベスト</h2>${bests.length?`<section class="analysis-b4-bests">${bests.map(best=>`<button type="button" data-b4-match-id="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,discipline)}</span><small>${esc(labels[discipline])}・${recordDate(best.record)}</small><i>試合を見る ›</i></button>`).join("")}</section>`:'<section class="analysis-v2-card analysis-b4-empty">データなし</section>'}
+      <h2 class="analysis-v2-section-title">${window.cueT("p3.d134cd45")}</h2>${bests.length?`<section class="analysis-b4-bests">${bests.map(best=>`<button type="button" data-b4-match-id="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,discipline)}</span><small>${esc(labels[discipline])}・${recordDate(best.record)}</small><i>試合を見る ›</i></button>`).join("")}</section>`:'<section class="analysis-v2-card analysis-b4-empty">' + window.cueT("p3.e63fcd05") + '</section>'}
       <h2 class="analysis-v2-section-title">詳細分析</h2><section class="analysis-b4-links"><button type="button" data-b4-rival="${playerId}"><span>対戦相手分析を見る</span><b>›</b></button></section>`;
     view.dataset.build4Rendered="true";view._build4={player,discipline,records:trendRecords,helpers:h};
   }

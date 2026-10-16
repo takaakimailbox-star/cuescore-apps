@@ -10,9 +10,9 @@
     {id:"rotation",label:"Rotation",asset:"assets/icons/games/game-rotation.svg"},{id:"straightPool",label:"14-1",asset:"assets/icons/games/game-14-1.svg"},
     {id:"jpa9",label:"JPA 9-Ball",asset:"assets/icons/games/game-jpa-9ball.svg"},{id:"threeCushion",label:"3 Cushion",asset:"assets/icons/games/game-3cushion.svg"}
   ];
-  const labels={winRate:"勝率",shotRate:window.cueT("p3.274e5e0c"),breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",average:window.cueT("p3.d247b2e7"),highRun:window.cueT("p3.761345d1")};
+  const labels={winRate:window.cueT("p3.bab1876f"),shotRate:window.cueT("p3.274e5e0c"),breakInRate:window.cueT("p3.535112ba"),masuwariRate:window.cueT("p3.991f3795"),average:window.cueT("p3.d247b2e7"),highRun:window.cueT("p3.761345d1")};
   const metricKeys={"9ball":["shotRate","breakInRate","masuwariRate"],"10ball":["shotRate","breakInRate","masuwariRate"],rotation:["shotRate","breakInRate","highRun"],jpa9:["average","breakInRate","highRun"],straightPool:["average","highRun"],threeCushion:["average","highRun"]};
-  const bestLabels={shotRate:"最高シュート率",breakInRate:"最高ブレイクイン率",masuwariRate:"最高マス割り率",masuwariCount:"1試合最多マス割り",breakPocketCount:"最高ブレイクポケット数",breakScore:"最高ブレイク得点",highRun:"最大ハイラン",score:"1試合最高得点",average:"最高アベレージ",leastWinningInnings:"最少イニング勝利"};
+  const bestLabels={shotRate:window.cueT("p3.0cb79ad2"),breakInRate:window.cueT("p3.efe3b953"),masuwariRate:window.cueT("p3.f2a866da"),masuwariCount:window.cueT("p3.c4fa5775"),breakPocketCount:window.cueT("p3.e3861823"),breakScore:window.cueT("p3.fd906f8d"),highRun:window.cueT("p3.1badb93c"),score:window.cueT("p3.176c82bc"),average:window.cueT("p3.f92ff052"),leastWinningInnings:window.cueT("p3.97184347")};
   const percent=new Set(["winRate","shotRate","breakInRate","masuwariRate"]),playerState=new Map();
   const def=id=>defs.find(item=>item.id===id)||defs[0];
   const players=()=>typeof readPlayerLibrary==="function"?readPlayerLibrary():[];
@@ -29,32 +29,32 @@
   const playerProfile=data=>players().find(item=>String(item.id)===String(data?.registeredPlayerId||""))||data||{};
   const opponent=(record,s)=>playerProfile(recordPlayer(record,s===1?2:1));
   const score=(record,s)=>Number(metric(record,s)?.score??recordPlayer(record,s)?.score)||0;
-  const dateText=record=>{const d=new Date(dateValue(record));return dateValue(record)?window.cueDate(d,"md"):"日付なし";};
+  const dateText=record=>{const d=new Date(dateValue(record));return dateValue(record)?window.cueDate(d,"md"):window.cueT("p3.6b344146");};
   const stateFor=id=>{const key=String(id);if(!playerState.has(key))playerState.set(key,{discipline:"9ball",tab:"results",scroll:{results:0,matches:0,analysis:0}});return playerState.get(key);};
   const active={playerId:"",player:null,state:null,records:[]};
 
   const syncLegacyState=()=>{const legacy=window.CueScoreBuild6PlayerDetail?.state;if(!legacy)return;legacy.playerId=active.playerId;legacy.player=active.player;legacy.discipline=active.state.discipline;legacy.level="hub";};
-  const profile=player=>`<section class="hub-profile-v2"><span class="hub-avatar-v2">${avatar(player)}</span><span><strong title="${esc(player.name)}">${esc(player.name)}</strong>${player.isPrimary===true?'<b>メインプレーヤー</b>':""}</span></section>`;
-  const selector=state=>`<div class="hub-discipline-v2" role="tablist" aria-label="競技">${defs.map(item=>`<button type="button" role="tab" data-hub-discipline="${item.id}" aria-label="${item.label}" aria-selected="${item.id===state.discipline}" class="${item.id===state.discipline?"is-selected":""}"><img src="${item.asset}" alt="" aria-hidden="true"></button>`).join("")}</div>`;
-  const tabs=state=>`<div class="hub-tabs-v2" role="tablist" aria-label="プレーヤーハブ">${[["results","成績"],["matches","試合"],["analysis",window.cueT("p3.9c00c951")]].map(([key,label])=>`<button type="button" role="tab" data-hub-tab="${key}" aria-selected="${state.tab===key}" class="${state.tab===key?"is-selected":""}">${label}</button>`).join("")}</div>`;
+  const profile=player=>`<section class="hub-profile-v2"><span class="hub-avatar-v2">${avatar(player)}</span><span><strong title="${esc(player.name)}">${esc(player.name)}</strong>${player.isPrimary===true?'<b>' + window.cueT("p3.af7f8f12") + '</b>':""}</span></section>`;
+  const selector=state=>`<div class="hub-discipline-v2" role="tablist" aria-label="${window.cueT("p3.839449dc")}">${defs.map(item=>`<button type="button" role="tab" data-hub-discipline="${item.id}" aria-label="${item.label}" aria-selected="${item.id===state.discipline}" class="${item.id===state.discipline?"is-selected":""}"><img src="${item.asset}" alt="" aria-hidden="true"></button>`).join("")}</div>`;
+  const tabs=state=>`<div class="hub-tabs-v2" role="tablist" aria-label="${window.cueT("p3.6144e404")}">${[["results",window.cueT("p3.b65af422")],["matches",window.cueT("p3.3573405f")],["analysis",window.cueT("p3.9c00c951")]].map(([key,label])=>`<button type="button" role="tab" data-hub-tab="${key}" aria-selected="${state.tab===key}" class="${state.tab===key?"is-selected":""}">${label}</button>`).join("")}</div>`;
   const empty=text=>`<section class="hub-card-v2 hub-empty-v2">${text}</section>`;
-  const bestLabel=(key,disciplineId)=>key==="leastWinningInnings"&&disciplineId==="jpa9"?"最短イニング":bestLabels[key]||key;
+  const bestLabel=(key,disciplineId)=>key==="leastWinningInnings"&&disciplineId==="jpa9"?window.cueT("p3.2c53b0db"):bestLabels[key]||key;
   const displayedBestsFor=(records,player,disciplineId)=>api.bests(records,player,disciplineId,helpers).slice(0,3);
-  const matchRow=(record,player)=>{const s=side(record,player),o=opponent(record,s),isWin=won(record,s),cardClass=window.CueScoreMatchCardC?.classes?.("recent")||"match-card-c-v37 match-card-c-recent-v37";return `<button type="button" class="hub-match-row-v2 ${cardClass}" data-hub-match="${esc(record.id)}"><small class="match-card-c-date-v37">${dateText(record)}</small><span class="match-card-c-avatar-v37">${avatar(o)}</span><strong class="match-card-c-opponent-v37">${esc(o.name||"対戦相手")}</strong><span class="match-card-c-result-v37 ${isWin?"is-win":"is-loss"}">${isWin?"勝ち":"負け"}</span><span class="match-card-c-score-v37">${score(record,s)}<i>−</i>${score(record,s===1?2:1)}</span><b aria-hidden="true">›</b></button>`;};
+  const matchRow=(record,player)=>{const s=side(record,player),o=opponent(record,s),isWin=won(record,s),cardClass=window.CueScoreMatchCardC?.classes?.("recent")||"match-card-c-v37 match-card-c-recent-v37";return `<button type="button" class="hub-match-row-v2 ${cardClass}" data-hub-match="${esc(record.id)}"><small class="match-card-c-date-v37">${dateText(record)}</small><span class="match-card-c-avatar-v37">${avatar(o)}</span><strong class="match-card-c-opponent-v37">${esc(o.name||window.cueT("p3.b448aa33"))}</strong><span class="match-card-c-result-v37 ${isWin?"is-win":"is-loss"}">${isWin?window.cueT("p3.2c8bd192"):window.cueT("p3.0e371a7b")}</span><span class="match-card-c-score-v37">${score(record,s)}<i>−</i>${score(record,s===1?2:1)}</span><b aria-hidden="true">›</b></button>`;};
 
   function resultsView(records,player,state){
     const all=api.aggregate(records,player,helpers),bests=displayedBestsFor(records,player,state.discipline);
     const bestContent=window.CueScoreEntitlement?.isPro?.()
-      ? (bests.length?`<section class="hub-bests-v2">${bests.map(best=>`<button type="button" data-hub-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,state.discipline)}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("")}</section>`:empty("この競技の自己ベストはまだありません。"))
-      : `<button type="button" class="cue-pro-locked-card-v1" data-pro-personal-best><span><strong>自己ベスト</strong><small>Proで競技ごとの自己ベストを確認できます</small></span><span class="cue-pro-badge-v1">🔒 Pro</span></button>`;
-    return `<section class="hub-summary-v2"><article><span>試合数</span><strong>${all.games}</strong></article><article><span>勝</span><strong>${all.wins}</strong></article><article><span>敗</span><strong>${all.losses}</strong></article><article><span>勝率</span><strong>${fmt("winRate",all.winRate)}</strong></article></section>
+      ? (bests.length?`<section class="hub-bests-v2">${bests.map(best=>`<button type="button" data-hub-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,state.discipline)}</span><small>${window.cueT("p3.f3717e0d",{p:dateText(best.record)})}</small></button>`).join("")}</section>`:empty(window.cueT("p3.70add6e1")))
+      : `<button type="button" class="cue-pro-locked-card-v1" data-pro-personal-best><span><strong>${window.cueT("p3.d134cd45")}</strong><small>${window.cueT("p3.a06f3aa0")}</small></span><span class="cue-pro-badge-v1">🔒 Pro</span></button>`;
+    return `<section class="hub-summary-v2"><article><span>${window.cueT("p3.7437a3a0")}</span><strong>${all.games}</strong></article><article><span>${window.cueT("p3.5408a70d")}</span><strong>${all.wins}</strong></article><article><span>${window.cueT("p3.dfc2567e")}</span><strong>${all.losses}</strong></article><article><span>${window.cueT("p3.bab1876f")}</span><strong>${fmt("winRate",all.winRate)}</strong></article></section>
       ${bestContent}`;
   }
 
   function matchesView(records,player,state){
     const recent=records.slice(0,3);
-    return `<h2 class="hub-heading-v2">最近の試合</h2>${recent.length?`<section class="hub-match-list-v2">${recent.map(record=>matchRow(record,player)).join("")}</section>`:empty("この競技の試合はまだありません。")}
-      <h2 class="hub-heading-v2">試合を探す</h2><section class="hub-links-v2"><button type="button" data-hub-all-matches><span><strong>すべての試合</strong><small>${def(state.discipline).label}の試合履歴</small></span><b>›</b></button><button type="button" data-hub-opponents><span><strong>対戦相手別</strong><small>相手ごとの成績と試合</small></span><b>›</b></button></section>`;
+    return `<h2 class="hub-heading-v2">${window.cueT("p3.499d9c85")}</h2>${recent.length?`<section class="hub-match-list-v2">${recent.map(record=>matchRow(record,player)).join("")}</section>`:empty(window.cueT("p3.98769795"))}
+      <h2 class="hub-heading-v2">${window.cueT("p3.3a25b687")}</h2><section class="hub-links-v2"><button type="button" data-hub-all-matches><span><strong>${window.cueT("p3.7e415f2b")}</strong><small>${window.cueT("p3.172c9590",{label:def(state.discipline).label})}</small></span><b>›</b></button><button type="button" data-hub-opponents><span><strong>${window.cueT("p3.0214e271")}</strong><small>${window.cueT("p3.73f3ded2")}</small></span><b>›</b></button></section>`;
   }
 
   function points(current,previous,state){
@@ -69,11 +69,11 @@
     if(!window.CueScoreEntitlement?.isPro?.())return `<button type="button" class="cue-pro-locked-card-v1" data-hub-tab="analysis"><span><strong>${window.cueT("p3.9c00c951")}</strong><small>詳細分析と推移グラフはProで利用できます</small></span><span class="cue-pro-badge-v1">🔒 Pro</span></button>`;
     const currentRecords=records.slice(0,10),previousRecords=records.slice(10,20),current=api.aggregate(currentRecords,player,helpers),previous=api.aggregate(previousRecords,player,helpers),keys=metricKeys[state.discipline]||[],advice=points(current,previous,state),bests=displayedBestsFor(records,player,state.discipline);
     const statusCode=current.games<3?"accumulating":previous.games<3?"stable":current.winRate>previous.winRate?"improving":current.winRate<previous.winRate?"attention":"stable",status={accumulating:"データ蓄積中",stable:"安定",improving:"改善傾向",attention:"要調整"}[statusCode];
-    return `<section class="hub-card-v2 hub-now-v2"><div><h2>今の状態</h2><b>${status}</b></div><strong>${current.games?`直近${current.games}試合　${current.wins}勝${current.losses}敗　勝率${Math.round(current.winRate)}%`:"データなし"}</strong><small>条件を満たす保存済み試合だけを使用しています</small></section>
-      <h2 class="hub-heading-v2">主要指標</h2><section class="hub-metrics-v2">${keys.map(key=>`<article><strong>${fmt(key,current[key])}</strong><span>${labels[key]}</span></article>`).join("")||"<span>データなし</span>"}</section>
+    return `<section class="hub-card-v2 hub-now-v2"><div><h2>今の状態</h2><b>${status}</b></div><strong>${current.games?`直近${current.games}試合　${current.wins}勝${current.losses}敗　勝率${Math.round(current.winRate)}%`:window.cueT("p3.e63fcd05")}</strong><small>条件を満たす保存済み試合だけを使用しています</small></section>
+      <h2 class="hub-heading-v2">${window.cueT("p3.c81f42f6")}</h2><section class="hub-metrics-v2">${keys.map(key=>`<article><strong>${fmt(key,current[key])}</strong><span>${labels[key]}</span></article>`).join("")||"<span>" + window.cueT("p3.e63fcd05") + "</span>"}</section>
       <section class="hub-links-v2"><button type="button" data-hub-trends><span><strong>推移</strong><small>主要指標をグラフで見る</small></span><b>›</b></button></section>
       <section class="hub-card-v2 hub-points-v2"><h2>今回のポイント</h2><div><strong>強み</strong><span>${advice.strength}</span></div><div><strong>次の課題</strong><span>${advice.challenge}</span></div></section>
-      <h2 class="hub-heading-v2">自己ベスト</h2>${bests.length?`<section class="hub-bests-v2">${bests.map(best=>`<button type="button" data-hub-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,state.discipline)}</span><small>${dateText(best.record)}　試合を見る ›</small></button>`).join("")}</section>`:empty("この競技の自己ベストはまだありません。")}`;
+      <h2 class="hub-heading-v2">${window.cueT("p3.d134cd45")}</h2>${bests.length?`<section class="hub-bests-v2">${bests.map(best=>`<button type="button" data-hub-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,state.discipline)}</span><small>${window.cueT("p3.f3717e0d",{p:dateText(best.record)})}</small></button>`).join("")}</section>`:empty(window.cueT("p3.70add6e1"))}`;
   }
 
   function render(playerId,options={}){
@@ -82,9 +82,9 @@
     active.playerId=String(playerId);active.player=player;active.state=stateFor(playerId);
     if(options.discipline)active.state.discipline=options.discipline;if(options.tab)active.state.tab=options.tab;
     active.records=recordsFor(player).filter(record=>discipline(record)===active.state.discipline);syncLegacyState();
-    if(title)title.textContent="プレーヤー情報";
+    if(title)title.textContent=window.cueT("p3.3a30a11d");
     const management=document.body.dataset.cuePlayerContext==="management"&&typeof playerStatsReturnToManagementV147!=="undefined"&&playerStatsReturnToManagementV147===true;
-    if(action)action.textContent=management?"編集":"";
+    if(action)action.textContent=management?window.cueT("p3.d107b864"):"";
     const content=active.state.tab==="matches"?matchesView(active.records,player,active.state):active.state.tab==="analysis"?analysisView(active.records,player,active.state):resultsView(active.records,player,active.state);
     body.innerHTML=`<div class="player-hub-v2">${profile(player)}${selector(active.state)}${tabs(active.state)}<div class="hub-content-v2" data-hub-content>${content}</div></div>`;
     requestAnimationFrame(()=>{const panel=body.querySelector(".hub-content-v2");if(panel)panel.scrollTop=active.state.scroll[active.state.tab]||0;});

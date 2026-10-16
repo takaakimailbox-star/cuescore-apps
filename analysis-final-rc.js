@@ -123,7 +123,7 @@
       const winCurrent = finite(current.winRate) ? `${Math.round(current.winRate)}%` : "—";
       const winPrevious = finite(previous.winRate) && sufficient ? `${Math.round(previous.winRate)}%` : "—";
       const winClass = sufficient ? conclusionClass(result.winDirection) : "flat";
-      const winCard = `<div class="analysis-v2-metric"><span>勝率</span><strong>${winPrevious} → ${winCurrent}</strong><em class="${winClass}">${current.wins}勝${current.losses}敗</em></div>`;
+      const winCard = `<div class="analysis-v2-metric"><span>${window.cueT("p3.bab1876f")}</span><strong>${winPrevious} → ${winCurrent}</strong><em class="${winClass}">${window.cueT("p3.f3a01e79",{wins:current.wins,losses:current.losses})}</em></div>`;
       const metricCards = result.metrics.map(metric => {
         const before = sufficient ? formatValue(metric.previous, metric) : "—";
         const now = formatValue(metric.current, metric);
