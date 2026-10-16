@@ -58,21 +58,21 @@
   }
 
   function points(current,previous,state){
-    if(previous.games<1)return{strength:"比較できる過去データを蓄積中です",challenge:"試合記録を続けましょう"};
+    if(previous.games<1)return{strength:window.cueT("p3.6e4e6503"),challenge:window.cueT("p3.c75087a3")};
     const changes=(metricKeys[state.discipline]||[]).map(key=>{const now=current[key],before=previous[key];if(!Number.isFinite(now)||!Number.isFinite(before))return null;return{key,score:now-before};}).filter(Boolean);
-    if(!changes.length)return{strength:"比較できる指標を蓄積中です",challenge:"試合記録を続けましょう"};
+    if(!changes.length)return{strength:window.cueT("p3.0416920e"),challenge:window.cueT("p3.c75087a3")};
     const best=[...changes].sort((a,b)=>b.score-a.score)[0],worst=[...changes].sort((a,b)=>a.score-b.score)[0];
-    return{strength:best.score>0?`${labels[best.key]}が前期間より改善しています`:`${labels[best.key]}は前期間と同水準です`,challenge:worst.score<0?`${labels[worst.key]}を前期間の水準へ戻しましょう`:"現在の安定した内容を継続しましょう"};
+    return{strength:best.score>0?window.cueT(`p3.9d4a24be`,{p:labels[best.key]}):window.cueT(`p3.c101bd31`,{p:labels[best.key]}),challenge:worst.score<0?window.cueT(`p3.e1495236`,{p:labels[worst.key]}):window.cueT("p3.8697157f")};
   }
 
   function analysisView(records,player,state){
-    if(!window.CueScoreEntitlement?.isPro?.())return `<button type="button" class="cue-pro-locked-card-v1" data-hub-tab="analysis"><span><strong>${window.cueT("p3.9c00c951")}</strong><small>詳細分析と推移グラフはProで利用できます</small></span><span class="cue-pro-badge-v1">🔒 Pro</span></button>`;
+    if(!window.CueScoreEntitlement?.isPro?.())return `<button type="button" class="cue-pro-locked-card-v1" data-hub-tab="analysis"><span><strong>${window.cueT("p3.9c00c951")}</strong><small>${window.cueT("p3.bc5bde5a")}</small></span><span class="cue-pro-badge-v1">🔒 Pro</span></button>`;
     const currentRecords=records.slice(0,10),previousRecords=records.slice(10,20),current=api.aggregate(currentRecords,player,helpers),previous=api.aggregate(previousRecords,player,helpers),keys=metricKeys[state.discipline]||[],advice=points(current,previous,state),bests=displayedBestsFor(records,player,state.discipline);
-    const statusCode=current.games<3?"accumulating":previous.games<3?"stable":current.winRate>previous.winRate?"improving":current.winRate<previous.winRate?"attention":"stable",status={accumulating:"データ蓄積中",stable:"安定",improving:"改善傾向",attention:"要調整"}[statusCode];
-    return `<section class="hub-card-v2 hub-now-v2"><div><h2>今の状態</h2><b>${status}</b></div><strong>${current.games?`直近${current.games}試合　${current.wins}勝${current.losses}敗　勝率${Math.round(current.winRate)}%`:window.cueT("p3.e63fcd05")}</strong><small>条件を満たす保存済み試合だけを使用しています</small></section>
+    const statusCode=current.games<3?"accumulating":previous.games<3?"stable":current.winRate>previous.winRate?"improving":current.winRate<previous.winRate?"attention":"stable",status={accumulating:window.cueT("p3.4888b9a0"),stable:window.cueT("p3.a5c2a649"),improving:window.cueT("p3.6f24b9c6"),attention:window.cueT("p3.df94c8f6")}[statusCode];
+    return `<section class="hub-card-v2 hub-now-v2"><div><h2>${window.cueT("p3.e91a2ca3")}</h2><b>${status}</b></div><strong>${current.games?window.cueT(`p3.921f213e`,{games:current.games,wins:current.wins,losses:current.losses,round:Math.round(current.winRate),count:current.games}):window.cueT("p3.e63fcd05")}</strong><small>${window.cueT("p3.9db4f96e")}</small></section>
       <h2 class="hub-heading-v2">${window.cueT("p3.c81f42f6")}</h2><section class="hub-metrics-v2">${keys.map(key=>`<article><strong>${fmt(key,current[key])}</strong><span>${labels[key]}</span></article>`).join("")||"<span>" + window.cueT("p3.e63fcd05") + "</span>"}</section>
-      <section class="hub-links-v2"><button type="button" data-hub-trends><span><strong>推移</strong><small>主要指標をグラフで見る</small></span><b>›</b></button></section>
-      <section class="hub-card-v2 hub-points-v2"><h2>今回のポイント</h2><div><strong>強み</strong><span>${advice.strength}</span></div><div><strong>次の課題</strong><span>${advice.challenge}</span></div></section>
+      <section class="hub-links-v2"><button type="button" data-hub-trends><span><strong>${window.cueT("p3.ad2c6057")}</strong><small>${window.cueT("p3.29fc9aba")}</small></span><b>›</b></button></section>
+      <section class="hub-card-v2 hub-points-v2"><h2>${window.cueT("p3.c159d19f")}</h2><div><strong>${window.cueT("p3.1cd6f4c3")}</strong><span>${advice.strength}</span></div><div><strong>${window.cueT("p3.fd2bbedb")}</strong><span>${advice.challenge}</span></div></section>
       <h2 class="hub-heading-v2">${window.cueT("p3.d134cd45")}</h2>${bests.length?`<section class="hub-bests-v2">${bests.map(best=>`<button type="button" data-hub-match="${esc(best.record.id)}"><strong>${fmt(best.key,best.value)}</strong><span>${bestLabel(best.key,state.discipline)}</span><small>${window.cueT("p3.f3717e0d",{p:dateText(best.record)})}</small></button>`).join("")}</section>`:empty(window.cueT("p3.70add6e1"))}`;
   }
 

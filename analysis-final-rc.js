@@ -1,15 +1,15 @@
 (() => {
   const metricDefinitions = {
     "9ball": [
-      { key: "shotRate", label: window.cueT("p3.274e5e0c"), suffix: "%", digits: 0, higher: true, improve: "シュート精度は改善傾向", worsen: "シュート精度は低下傾向", goal: "シュート成功率を前期間以上へ戻しましょう" },
-      { key: "masuwari", label: window.cueT("p3.d3bde92d"), suffix: "", digits: 0, higher: true, improve: "マス割は増加傾向", worsen: "マス割は減少傾向", goal: "取り切りまでの配置を振り返りましょう" },
-      { key: "avgFouls", label: "平均ファール", suffix: "", digits: 1, higher: false, improve: "ファールは減少傾向", worsen: "ファールは増加傾向", goal: "平均ファールを前期間以下へ戻しましょう" }
+      { key: "shotRate", label: window.cueT("p3.274e5e0c"), suffix: "%", digits: 0, higher: true, improve: window.cueT("p3.a0a50cc7"), worsen: window.cueT("p3.ff7ff718"), goal: window.cueT("p3.b8ab11e3") },
+      { key: "masuwari", label: window.cueT("p3.d3bde92d"), suffix: "", digits: 0, higher: true, improve: window.cueT("p3.8202d5d0"), worsen: window.cueT("p3.0dcca128"), goal: window.cueT("p3.543500c9") },
+      { key: "avgFouls", label: window.cueT("p3.d97f2fbf"), suffix: "", digits: 1, higher: false, improve: window.cueT("p3.163e29c1"), worsen: window.cueT("p3.7f5ccec1"), goal: window.cueT("p3.88cb8abf") }
     ],
     "10ball": null,
     rotation: [
-      { key: "highRun", label: window.cueT("p3.761345d1"), suffix: "", digits: 0, higher: true, improve: "ハイランは改善傾向", worsen: "ハイランは低下傾向", goal: "連続得点につながった配置を振り返りましょう" },
-      { key: "shotRate", label: window.cueT("p3.274e5e0c"), suffix: "%", digits: 0, higher: true, improve: "シュート精度は改善傾向", worsen: "シュート精度は低下傾向", goal: "シュート成功率を前期間以上へ戻しましょう" },
-      { key: "avgFouls", label: "平均ファール", suffix: "", digits: 1, higher: false, improve: "ファールは減少傾向", worsen: "ファールは増加傾向", goal: "平均ファールを前期間以下へ戻しましょう" }
+      { key: "highRun", label: window.cueT("p3.761345d1"), suffix: "", digits: 0, higher: true, improve: window.cueT("p3.cef76294"), worsen: window.cueT("p3.c1b141ac"), goal: window.cueT("p3.588d7092") },
+      { key: "shotRate", label: window.cueT("p3.274e5e0c"), suffix: "%", digits: 0, higher: true, improve: window.cueT("p3.a0a50cc7"), worsen: window.cueT("p3.ff7ff718"), goal: window.cueT("p3.b8ab11e3") },
+      { key: "avgFouls", label: window.cueT("p3.d97f2fbf"), suffix: "", digits: 1, higher: false, improve: window.cueT("p3.163e29c1"), worsen: window.cueT("p3.7f5ccec1"), goal: window.cueT("p3.88cb8abf") }
     ],
     jpa9: null,
     straightPool: null,
@@ -17,9 +17,9 @@
   };
   metricDefinitions["10ball"] = metricDefinitions["9ball"];
   const averageMetrics = discipline => [
-    { key: "average", label: window.cueT("p3.d247b2e7"), suffix: "", digits: discipline === "threeCushion" ? 3 : 2, higher: true, improve: "アベレージは改善傾向", worsen: "アベレージは低下傾向", goal: "1イニングあたりの得点を前期間以上へ戻しましょう" },
-    { key: "highRun", label: window.cueT("p3.761345d1"), suffix: "", digits: 0, higher: true, improve: "ハイランは改善傾向", worsen: "ハイランは低下傾向", goal: "連続得点につながった配置を振り返りましょう" },
-    { key: "avgFouls", label: "平均ファール", suffix: "", digits: 1, higher: false, improve: "ファールは減少傾向", worsen: "ファールは増加傾向", goal: "平均ファールを前期間以下へ戻しましょう" }
+    { key: "average", label: window.cueT("p3.d247b2e7"), suffix: "", digits: discipline === "threeCushion" ? 3 : 2, higher: true, improve: window.cueT("p3.35fa8472"), worsen: window.cueT("p3.dd6dc48f"), goal: window.cueT("p3.b467f3cb") },
+    { key: "highRun", label: window.cueT("p3.761345d1"), suffix: "", digits: 0, higher: true, improve: window.cueT("p3.cef76294"), worsen: window.cueT("p3.c1b141ac"), goal: window.cueT("p3.588d7092") },
+    { key: "avgFouls", label: window.cueT("p3.d97f2fbf"), suffix: "", digits: 1, higher: false, improve: window.cueT("p3.163e29c1"), worsen: window.cueT("p3.7f5ccec1"), goal: window.cueT("p3.88cb8abf") }
   ];
   metricDefinitions.jpa9 = averageMetrics("jpa9");
   metricDefinitions.straightPool = averageMetrics("straightPool");
@@ -28,7 +28,7 @@
   // Which conclusion sentences carry the "attention" highlight (current behavior, now keyed by metric id instead of sentence text).
   const IMPROVE_HIGHLIGHT_KEYS = new Set(["masuwari"]);
   const WORSEN_HIGHLIGHT_KEYS = new Set(["shotRate", "highRun", "average", "avgFouls"]);
-  const STATUS_TEXT = { improving: "改善傾向", attention: "要調整", stable: "安定", accumulating: "蓄積中" };
+  const STATUS_TEXT = { improving: window.cueT("p3.6f24b9c6"), attention: window.cueT("p3.df94c8f6"), stable: window.cueT("p3.a5c2a649"), accumulating: window.cueT("p3.9c356c5d") };
 
   const definitionsFor = discipline => metricDefinitions[discipline] || metricDefinitions.rotation;
   const finite = value => value !== null && value !== undefined && value !== "" && typeof value !== "boolean" && Number.isFinite(Number(value));
@@ -65,12 +65,12 @@
     const changed = sufficient ? metrics.filter(metric => metric.direction === "improved" || metric.direction === "worsened") : [];
     const conclusions = sufficient
       ? changed.map(metric => metric.direction === "improved" ? metric.improve : metric.worsen)
-      : ["比較に必要な試合データを蓄積中"];
+      : [window.cueT("p3.64b0b94a")];
     const conclusionAttention = sufficient
       ? changed.map(metric => metric.direction === "improved" ? IMPROVE_HIGHLIGHT_KEYS.has(metric.key) : WORSEN_HIGHLIGHT_KEYS.has(metric.key))
       : [false];
-    if (sufficient && !conclusions.length) { conclusions.push("競技別指標は前期間と同水準"); conclusionAttention.push(false); }
-    if (mixed) { conclusions.push("改善と悪化が混在しているため、全体として断定しません"); conclusionAttention.push(false); }
+    if (sufficient && !conclusions.length) { conclusions.push(window.cueT("p3.42cddce6")); conclusionAttention.push(false); }
+    if (mixed) { conclusions.push(window.cueT("p3.796bd592")); conclusionAttention.push(false); }
     return { metrics, winDirection, improved, worsened, mixed, status, statusCode, conclusions, conclusionAttention };
   };
 
@@ -86,7 +86,7 @@
   const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character]));
   const conclusionClass = direction => direction === "worsened" ? "attention" : direction === "improved" ? "improved" : "flat";
   const matchLabel = definition => definition.key === "avgFouls" ? window.cueT("p3.4923e874") : definition.label;
-  const matchGoal = definition => definition.key === "avgFouls" ? "ファール数を抑えましょう" : definition.goal;
+  const matchGoal = definition => definition.key === "avgFouls" ? window.cueT("p3.551c1fea") : definition.goal;
 
   function applyPlayer() {
     const view = root.querySelector('[data-analysis-view="player"]');
@@ -127,7 +127,7 @@
       const metricCards = result.metrics.map(metric => {
         const before = sufficient ? formatValue(metric.previous, metric) : "—";
         const now = formatValue(metric.current, metric);
-        return `<div class="analysis-v2-metric"><span>${metric.label}</span><strong>${before} → ${now}</strong><em class="${conclusionClass(metric.direction)}">${metric.direction === "improved" ? "改善" : metric.direction === "worsened" ? "悪化" : metric.direction === "flat" ? "変化なし" : "比較待ち"}</em></div>`;
+        return `<div class="analysis-v2-metric"><span>${metric.label}</span><strong>${before} → ${now}</strong><em class="${conclusionClass(metric.direction)}">${metric.direction === "improved" ? window.cueT("p3.f59bd9e4") : metric.direction === "worsened" ? window.cueT("p3.3b680aaa") : metric.direction === "flat" ? window.cueT("p3.cfefd88f") : window.cueT("p3.5ecd5a46")}</em></div>`;
       }).join("");
       evidence.innerHTML = winCard + metricCards;
     }
@@ -137,8 +137,8 @@
     const worsenedMetric = result.metrics.find(metric => metric.direction === "worsened");
     const strength = adviceRows[0]?.querySelector("span");
     const goal = adviceRows[1]?.querySelector("span");
-    if (strength) strength.textContent = !sufficient ? "比較に必要な試合データを蓄積中です" : improvedMetric ? improvedMetric.improve : "競技別指標に明確な改善はありません";
-    if (goal) goal.textContent = !sufficient ? "比較に必要な試合データを蓄積しましょう" : worsenedMetric ? worsenedMetric.goal : "現在の競技別指標を維持しましょう";
+    if (strength) strength.textContent = !sufficient ? window.cueT("p3.f9ee2b42") : improvedMetric ? improvedMetric.improve : window.cueT("p3.ed9836a7");
+    if (goal) goal.textContent = !sufficient ? window.cueT("p3.ef0bf3e3") : worsenedMetric ? worsenedMetric.goal : window.cueT("p3.f2b58325");
   }
 
   const singleMatchValues = (record, side, discipline) => {
@@ -182,11 +182,11 @@
     if (points) {
       points.dataset.analyticsFinalPoints = "1";
       const available = comparisons.filter(item => item.direction !== "na");
-      points.innerHTML = `<h2>競技別指標の比較</h2>${available.length ? available.map((item, index) => {
-        const relation = item.direction === "improved" ? "上回りました" : item.direction === "worsened" ? "下回りました" : "同じでした";
-        const saferRelation = item.definition.higher ? relation : item.direction === "improved" ? "少なく抑えました" : item.direction === "worsened" ? "多くなりました" : "同じでした";
-        return `<div class="analysis-v2-point"><i>${index + 1}</i><span>${matchLabel(item.definition)}は${formatValue(item.winner, item.definition)}対${formatValue(item.opponent, item.definition)}で、${saferRelation}</span></div>`;
-      }).join("") : '<div class="analysis-v2-empty-inline">比較できる保存値がありません</div>'}`;
+      points.innerHTML = `<h2>${window.cueT("p3.42293ad5")}</h2>${available.length ? available.map((item, index) => {
+        const relation = item.direction === "improved" ? window.cueT("p3.4148e0cf") : item.direction === "worsened" ? window.cueT("p3.1f3e0388") : window.cueT("p3.f5203d0b");
+        const saferRelation = item.definition.higher ? relation : item.direction === "improved" ? window.cueT("p3.1d23a940") : item.direction === "worsened" ? window.cueT("p3.58870d66") : window.cueT("p3.f5203d0b");
+        return `<div class="analysis-v2-point"><i>${index + 1}</i><span>${window.cueT("p3.50d5833b",{p:matchLabel(item.definition),p2:formatValue(item.winner, item.definition),p3:formatValue(item.opponent, item.definition),saferRelation:saferRelation})}</span></div>`;
+      }).join("") : '<div class="analysis-v2-empty-inline">' + window.cueT("p3.0c07de3f") + '</div>'}`;
     }
 
     const comparison = view.querySelector(".analysis-v2-comparison");
@@ -194,7 +194,7 @@
       const names = comparison.querySelectorAll(".analysis-v2-compare-head span");
       const winnerName = names[1]?.textContent || "Winner";
       const opponentName = names[2]?.textContent || "Opponent";
-      comparison.innerHTML = `<h2>サマリー比較</h2><div class="analysis-v2-compare-head"><span></span><span>${escapeHtml(winnerName)}</span><span>${escapeHtml(opponentName)}</span></div>${comparisons.map(item => `<div class="analysis-v2-compare-row"><span>${matchLabel(item.definition)}</span><b class="${item.direction === "improved" ? "better" : ""}">${formatValue(item.winner, item.definition)}</b><b class="${item.direction === "worsened" ? "better" : ""}">${formatValue(item.opponent, item.definition)}</b></div>`).join("")}`;
+      comparison.innerHTML = `<h2>${window.cueT("p3.88e29fe9")}</h2><div class="analysis-v2-compare-head"><span></span><span>${escapeHtml(winnerName)}</span><span>${escapeHtml(opponentName)}</span></div>${comparisons.map(item => `<div class="analysis-v2-compare-row"><span>${matchLabel(item.definition)}</span><b class="${item.direction === "improved" ? "better" : ""}">${formatValue(item.winner, item.definition)}</b><b class="${item.direction === "worsened" ? "better" : ""}">${formatValue(item.opponent, item.definition)}</b></div>`).join("")}`;
     }
 
     view.querySelector(".analysis-v2-flow")?.remove();
@@ -203,8 +203,8 @@
     const worse = comparisons.find(item => item.direction === "worsened");
     const good = adviceRows[0]?.querySelector("span");
     const next = adviceRows[1]?.querySelector("span");
-    if (good) good.textContent = better ? (better.definition.higher ? `${matchLabel(better.definition)}で相手を上回りました` : `${matchLabel(better.definition)}を相手より少なく抑えました`) : "保存値から明確な優位は確認できません";
-    if (next) next.textContent = worse ? matchGoal(worse.definition) : "記録された競技別指標を維持しましょう";
+    if (good) good.textContent = better ? (better.definition.higher ? window.cueT(`p3.615a4586`,{p:matchLabel(better.definition)}) : window.cueT(`p3.c879245d`,{p:matchLabel(better.definition)})) : window.cueT("p3.b3e02253");
+    if (next) next.textContent = worse ? matchGoal(worse.definition) : window.cueT("p3.ea89c74a");
   }
 
   function apply() {

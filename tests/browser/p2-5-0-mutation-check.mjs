@@ -24,14 +24,14 @@ const M = [
   ["OBS-15 quirk 'fixed' (numeric zero test instead of last digit)", "index.html", 'String(f2-f1).endsWith("0")', '(f2-f1)===0'],
   ["OBS-15 high-run opponent branch loses the quirk", "index.html", 'String(high2-high1).endsWith("0")', 'high2===high1'],
   ["OBS-15 high-run player branch loses the quirk", "index.html", 'String(high1-high2).endsWith("0")', 'high1===high2'],
-  ["OBS-15 output wording changed (fouls)", "index.html", '"ファール数は相手と同じ":`ファールを相手より', '"ファール数は同じ":`ファールを相手より'],
-  ["OBS-15 output wording changed (high run)", "index.html", '"ハイランは相手と同じ":`ハイランで相手を', '"ハイランは同じ":`ハイランで相手を'],
+  ["OBS-15 output wording changed (fouls)", "index.html", 'String(f2-f1).endsWith("0")?window.cueT("p3.260db395")', 'String(f2-f1).endsWith("0")?window.cueT("p3.8293e95d",{p:0})'],
+  ["OBS-15 output wording changed (high run)", "index.html", 'String(high1-high2).endsWith("0")?window.cueT("p3.56063362")', 'String(high1-high2).endsWith("0")?window.cueT("p3.ca1b93ef",{p:0})'],
   ["wording guard observer re-introduced", "index.html", "function applyPriorGamesGuardV1(){", "new MutationObserver(correct250).observe(document.body,{childList:true});function applyPriorGamesGuardV1(){"],
   ["OBS-14 explicit step no longer called", "index.html", "    applyPriorGamesGuardV1();\n  }\n", "  }\n"],
   /* OBS-14 enforce */
   ["OBS-14 FinalRC guard removed", "index.html", "    if(window.CueScoreAnalyticsFinalRC)return;\n    const playerView", "    const playerView"],
   ["OBS-14 threshold changed", "index.html", "Number(priorGames)>=3)return;\n    if(playerView.querySelector", "Number(priorGames)>=2)return;\n    if(playerView.querySelector"],
-  ["OBS-14 accumulating text changed", "index.html", 'status.textContent="蓄積中"', 'status.textContent="蓄積"'],
+  ["OBS-14 accumulating text changed", "index.html", 'status.textContent=window.cueT("p3.9c356c5d")', 'status.textContent=window.cueT("p3.a5c2a649")'],
   ["analysis-final-rc stops publishing its global", "analysis-final-rc.js", "window.CueScoreAnalyticsFinalRC =", "window.CueScoreAnalyticsFinalRC_x ="],
   /* OBS-09 mirror / cloud gate */
   ["OBS-09 mirror copies the wrong class", "index.html", 'old.classList.contains("error")?" error"', 'old.classList.contains("error")?" err"'],

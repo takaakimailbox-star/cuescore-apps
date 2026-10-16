@@ -26,7 +26,8 @@ const state = async (name, code, wait = 500) => {
   let err = null;
   try { await ev(`window.__dlg=window.__dlg||[];${code}\nawait W(${wait});return 1`); } catch (e) { err = String(e.message).slice(0, 160); }
   let found = []; try { found = await app.evalJs(SCAN); } catch (e) { err = (err || "") + " scan:" + String(e.message).slice(0, 80); }
-  report.states[name] = { err, leftovers: found };
+  let sample = ""; try { sample = await app.evalJs(`(()=>{const v=[...document.querySelectorAll("section,div,main")].filter(e=>e.getClientRects().length&&getComputedStyle(e).position!=="static"&&e.scrollHeight>100&&(e.id||e.className));return document.body.innerText.replace(/\\s+/g," ").slice(0,260)})()`); } catch (_) { /* optional */ }
+  report.states[name] = { err, sample, leftovers: found };
   console.log(name.padEnd(34), err ? "ERR " + err : "", found.length ? found.length + " JA" : "ok");
 };
 await app.evalJs(`window.__dlg=[];window.alert=m=>{window.__dlg.push(["alert",String(m)])};window.confirm=m=>{window.__dlg.push(["confirm",String(m)]);return true};window.prompt=(m,d)=>{window.__dlg.push(["prompt",String(m)]);return d||"テスト"};true`);
