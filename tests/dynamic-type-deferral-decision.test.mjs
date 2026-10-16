@@ -40,11 +40,11 @@ function readZipEntry(path, name) {
 const docxText = path => readZipEntry(path, "word/document.xml").replace(/<[^>]+>/g, "");
 const decisionBlock = xml => { const s = xml.indexOf("Decision 001｜"), e = xml.indexOf("時系列変更記録"); return xml.slice(xml.lastIndexOf("<w:p>", s), xml.lastIndexOf("<w:p>", e)); };
 
-test("numbering: Decision 033 and Official 112 are published once; Official 109 stays reserved; highest Official number is 116 (115 / 116 = Decision 035; 113 / 114 = Decision 034)", () => {
+test("numbering: Decision 033 and Official 112 are published once; Official 109 stays reserved; highest Official number is 118 (117 / 118 = Decision 036; 115 / 116 = Decision 035; 113 / 114 = Decision 034)", () => {
   const numbers = fs.readdirSync(new URL("docs/official/", root)).filter(name => /^\d+_.*\.md$/.test(name)).map(name => Number(name.split("_")[0]));
   for (const number of [110, 111, 112]) assert.equal(numbers.filter(value => value === number).length, 1, `Official ${number}`);
   assert.ok(!numbers.includes(109), "Official 109 (Glossary) must not exist");
-  assert.equal(Math.max(...numbers), 116);
+  assert.equal(Math.max(...numbers), 118);
   assert.equal((docxText(LOG("2.9")).match(/Decision 033｜/g) || []).length, 1);
   assert.ok(!docxText(LOG("2.8")).includes("Decision 033"), "the preserved v2.8 must not contain Decision 033");
   assert.match(read(DECISION), /\*\*Decision number:\*\* \*\*Decision 033\*\*/);
@@ -116,7 +116,7 @@ test("DT-3: Larger Text is not declared as supported in the App Store until impl
 
 test("SSOT, README and handoff record the publication without claiming Dynamic Type support", () => {
   const readme = read("docs/README.md");
-  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.11_Official_Release\.docx`/);
+  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.12_Official_Release\.docx`/);
   assert.match(readme, /- `official\/112_CueScore_Dynamic_Type_Deferral_Decision\.md`/);
   assert.match(readme, /v2\.9 adds Decision 033/);
   assert.doesNotMatch(readme, /official\/109_/);

@@ -239,7 +239,7 @@
    "skips": 0
   },
   "dynamic-type-deferral-decision.test.mjs": {
-   "sha256": "c246b2e43f4f44cfa312aecd2bb3c0ceb79d50a09e1e9abf6bc1bd243b6cd989",
+   "sha256": "d48d6fc1a700184e309b4b5adac68ffb4fd4fddb84925c21b3caaecb1d1071fb",
    "tests": 10,
    "skips": 0
   },
@@ -330,17 +330,22 @@
    "skips": 0
   },
   "localization-official-docs.test.mjs": {
-   "sha256": "5f8ae72e4f87ff9dccf48781fce2ed644b0d3374b7f67616325097fe9e210d64",
+   "sha256": "19d22c9fec5713d44a430ec6cd505a93c97b791da31e8953889504a1199b7121",
    "tests": 8,
    "skips": 0
   },
   "localization-p1-formalization-decision.test.mjs": {
-   "sha256": "b711207e2e8b6e45acd368262cd18116e319352219065841d69907e230a82e43",
+   "sha256": "6374010f9f6b24bc841a1625d1ea707615343c12752c6f4af3cba07d91d3fd2a",
    "tests": 7,
    "skips": 0
   },
+  "localization-review-policy-decision.test.mjs": {
+   "sha256": "eadf3f6e021cf35e0ac154e1b945750fb919f931a2df5696f4aa0d3205f7ba0d",
+   "tests": 5,
+   "skips": 0
+  },
   "localization-u6-decision.test.mjs": {
-   "sha256": "8b0994f93ecf2e792b162209e938d16447d37b0f406faad81c2e75e92e5abce7",
+   "sha256": "0a5688168ef3920b0b8f6beeeb500335d300da5d7e0028ff993ba1dc926f4ea3",
    "tests": 5,
    "skips": 0
   },
@@ -585,7 +590,7 @@
    "skips": 0
   },
   "settings-unified-design-decision.test.mjs": {
-   "sha256": "adf65d7ca91c2f2ebadfe9a28e6e0aaa93bd99a9f113dfb843b33df101316139",
+   "sha256": "dcfe8c09f5049bd5423deade1a8d6ed43301e6db060fbdfa25e932d8efb63988",
    "tests": 11,
    "skips": 0
   },

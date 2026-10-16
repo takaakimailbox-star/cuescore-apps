@@ -1,9 +1,10 @@
 # CueScore Current Status
 
-- Updated: 2026-10-16
+- Updated: 2026-10-17
 - Public Version / Build: Japan public catalog still reports `1.1 (79)`; Version `1.2 (84)` release executed and ASC is `READY_FOR_SALE`, public propagation pending
 - Current project Version / Build: `1.2 (84)`
 - Gate: `RELEASE EXECUTED / ASC READY_FOR_SALE / PUBLIC PROPAGATION PENDING`（Version 1.2 Build 84 release gate。変更なし）
+- Localization P4 Review Policy Gate: `CUESCORE I18N P4 — REVIEW POLICY OFFICIAL DECISION PUBLISHED`（Decision 036 / Official 117・118 / Decision Log v2.12、2026-10-17）。外部の人間レビュアー不要・AI検証＋PO最終承認・新状態P4-AI-VERIFIED（P4-REVIEWEDの意味は不変）・人間の独立レビュー未実施を明記・U3/U4/U8/U11は DECISION PENDING 維持／Documentation-only。
 - Localization U6 Gate: `CUESCORE I18N P3 — U6 OFFICIAL DECISION PUBLISHED`（Decision 035 / Official 115・116 / Decision Log v2.11、2026-10-16）。U6: RESOLVED（標準ダイアログ維持・本文のみ翻訳・ボタンはOS・独自モーダルなし・OSボタン言語一致はNOT VERIFIED）／U3・U4・U8・U11: DECISION PENDING 維持／Documentation-only。
 - Localization P3 Gate: `CUESCORE I18N P3 — APPROVED SCOPE IMPLEMENTED EXCEPT P3-6 LAYER CONSOLIDATION / GITHUB MAIN SYNCHRONIZED`（2026-10-16）。Decision 035（U6）に基づき P3-①〜⑥を実装（catalog 1,241 キー、en／zh-Hans は `P3-PROVISIONAL`）。U3／U4／U8 は未決のまま分離（変更なし）、Cloud Sync は対象外。日本語 UI・保存データ・QR／Backup／CSV・Analytics 数値・Free／Pro は不変（パリティ一致）。重複描画層の整理は安全性未証明のため**未実装**。OS ボタン言語の実機確認は NOT VERIFIED。Commit: `c5ef629`／`0bb86bd`／`c02f742`／`e4483cc`／`9c1475b`／`0262cc6`／`34fbfee`／`589fdea`。
 - Localization P2 Completion Gate: `CUESCORE I18N P2 — ALL REMAINING PHASES COMPLETE / GITHUB MAIN SYNCHRONIZED`（2026-10-15）。Phase A〜G を完了（最終 `b2af342`）。AC-S2／S3／S4／S5／S6 PASS、残 MutationObserver 14（文言書換え 0）。

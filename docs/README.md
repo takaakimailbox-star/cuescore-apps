@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.11_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.12_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -29,8 +29,9 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.11 is the current official release and successor
-to v2.10. Earlier versions remain in the official directory as preceding releases.
+Official Design Decision Log v2.12 is the current official release and successor
+to v2.11. Earlier versions remain in the official directory as preceding releases.
+v2.12 adds Decision 036 (Localization P4 review policy) and leaves Decisions 001〜035 unchanged.
 v2.11 adds Decision 035 (Localization U6 dialog decision) and leaves Decisions 001〜034 unchanged.
 v2.10 adds Decision 034 (Localization P1 formalization) and leaves Decisions 001〜033 unchanged.
 v2.9 adds Decision 033 (Dynamic Type deferral) and leaves Decisions 001〜032 unchanged.
@@ -138,6 +139,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/114_CueScore_Localization_P1_Acceptance_Spec.md`
 - `official/115_CueScore_Localization_U6_Dialog_Decision.md`
 - `official/116_CueScore_Localization_U6_Dialog_Spec.md`
+- `official/117_CueScore_Localization_P4_Review_Policy_Decision.md`
+- `official/118_CueScore_Localization_P4_Review_Policy_Spec.md`
 
 CueScore Localization（3言語対応: ja / en / zh-Hans）status:
 
@@ -159,6 +162,10 @@ Dynamic Type deferral status:
 Localization U6 status:
 
 - Decision 035 / Official 115 / Official 116 / Official Design Decision Log v2.11 (published 2026-10-16). Product Owner decision: `alert`/`confirm`/`prompt` keep the standard dialogs and only the message body is translated (ja/en/zh-Hans); buttons stay with the OS; no wholesale custom-modal replacement; OS button language match is NOT VERIFIED (device check is a later step). U3/U4/U8/U11 remain DECISION PENDING. Documentation-only.
+
+Localization P4 review policy status:
+
+- Decision 036 / Official 117 / Official 118 / Official Design Decision Log v2.12 (published 2026-10-17). Product Owner decision: the P4 translation review may proceed without a mandatory external human reviewer, by AI verification (primary-source research, in-app Official definitions, real-screen checks, key-level evidence with residual risk) and final approval by the Product Owner. A new state `P4-AI-VERIFIED` is introduced; `P4-REVIEWED` keeps its meaning (a named human reviewer) and AI results are never recorded as `P4-REVIEWED`; `P4-APPROVED` still requires the Product Owner. Human independent review is not performed and this must be stated. U3/U4/U8/U11 remain DECISION PENDING. Documentation-only; translation QA, P5 and P3-6 are separate gates.
 
 Localization P1 formalization status:
 

@@ -1,5 +1,10 @@
 # CueScore Apps Current State
 
+## CueScore Localization P4 Review Policy Decision Published（2026年10月17日）
+
+- Product Owner承認に基づき、**Decision 036／Official 117（Decision）／Official 118（Spec）／Official Design Decision Log v2.12**を発行した（Documentation-only）。P4の翻訳レビューは、**外部の人間レビュアーを必須とせず**、AI検証（一次資料・アプリ内Official定義・実画面・キー単位Evidenceと残余リスク）＋**PO最終承認**で進められる。新状態`P4-AI-VERIFIED`を新設し、`P4-REVIEWED`（指名された人間レビュアーの確認）の意味は不変。AIの結果を`P4-REVIEWED`と記録せず、PO承認前に`P4-APPROVED`を付与しない。人間の独立レビューは実施されていないことを明記する。
+- U3／U4／U8／U11は**DECISION PENDING のまま**。Official 107／108／110〜116、Decision 001〜035、S-B（flag=false）、保存データ・QR・Backup・CSV・Analytics・Free／Pro・IAP、翻訳catalogは変更なし。翻訳QA・P5・P3-⑥は別Gate。
+
 ## CueScore i18n P3 Implemented（2026年10月16日）
 
 - Decision 035（U6）に基づき、**3言語（ja／en／zh-Hans）の画面別対応 P3-①〜⑥を GitHub main に正式固定**した。表示文言は `cueT("p3.<hash>", {params})` 経由（catalog 1,241 キー。en／zh-Hans は **P3-PROVISIONAL**＝P4 レビュー前の暫定訳。`P4-APPROVED` ではない）、静的 markup は `data-i18n*`（混在内容は `data-i18n-text-first／last`）、日付は en／zh-Hans の暫定パターン（P2-6 の `cueDate`）。`alert`／`confirm`／`prompt` は標準方式のまま本文のみ翻訳（80 呼出のうち 53 は直接 catalog、4 は catalog 由来の動的本文、23 は非表示の Cloud Sync コードで未変更。OS ボタンの言語一致は **NOT VERIFIED**・実機確認は後工程）。

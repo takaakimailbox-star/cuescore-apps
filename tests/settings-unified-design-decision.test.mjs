@@ -37,12 +37,12 @@ function readZipEntry(path, name) {
 }
 const docxText = path => readZipEntry(path, "word/document.xml").replace(/<[^>]+>/g, "");
 
-test("numbering: Decision 032 and Official 110 / 111 are published once, Official 109 stays reserved, highest number is 116", () => {
+test("numbering: Decision 032 and Official 110 / 111 are published once, Official 109 stays reserved, highest number is 118", () => {
   const official = fs.readdirSync(new URL("docs/official/", root)).filter(name => /^\d+_.*\.md$/.test(name)).map(name => Number(name.split("_")[0]));
   const count = number => official.filter(value => value === number).length;
   assert.equal(count(110), 1); assert.equal(count(111), 1);
   assert.equal(count(109), 0, "Official 109 is reserved for the Localization Glossary and must not be used");
-  assert.equal(Math.max(...official), 116);
+  assert.equal(Math.max(...official), 118);
   assert.ok(!docxText(LOG27).includes("Decision 032"), "Decision 032 must not exist in the preserved v2.7");
   assert.equal((docxText(LOG28).match(/Decision 032｜/g) || []).length, 1);
   const decision = read(DECISION), spec = read(SPEC);
@@ -167,7 +167,7 @@ test("cross references resolve, all three documents are Official, SSOT and READM
   assert.match(decision, /Implementation NOT STARTED/);
   assert.match(spec, /Implementation NOT STARTED/);
   const readme = read("docs/README.md");
-  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.11_Official_Release\.docx`/);
+  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.12_Official_Release\.docx`/);
   assert.match(readme, /- `official\/110_CueScore_Settings_Unified_Design_Decision\.md`/);
   assert.match(readme, /- `official\/111_CueScore_Settings_Unified_Design_Spec\.md`/);
   assert.doesNotMatch(readme, /official\/109_/);
