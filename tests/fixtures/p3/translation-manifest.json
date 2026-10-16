@@ -1,0 +1,534 @@
+{
+ "status": "P3-PROVISIONAL",
+ "note": "en / zh-Hans are provisional (Official 108 L-GLOS-2/3); P4 review is required before any release candidate.",
+ "keys": {
+  "p3.0098292d": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.01839d07": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.021ed989": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.05456e5f": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.078a5e46": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.07e7f5aa": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.08034806": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.0ba7768e": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.0d2af111": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.0defe6ec": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.0f33a75b": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.0f8e5b4d": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.10aac2a8": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.15d0fe40": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.1785d182": {
+   "area": 4,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.1fa50854": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.1ff1a80d": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.24b5aead": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.269b0f92": {
+   "area": 3,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.27075834": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.297a1028": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.2cceae2c": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.2e56fdaa": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.31e862b0": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.347299a8": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.3552b640": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.36e33545": {
+   "area": 2,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.37634bac": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.393999a9": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.39bd0fa6": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.3b69e578": {
+   "area": 4,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.3da5c185": {
+   "area": 6,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.3e40a616": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.40622791": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.42a55623": {
+   "area": 2,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.461f3c8c": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.46c98663": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.46f2b91c": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.4746cc5f": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.4923e874": {
+   "area": 5,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.4bb2d4b6": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.4bb3a1d6": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.4d7e6931": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.5398641b": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.5a651c3b": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.5afbe4ce": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.5b4ea28c": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.60a1005b": {
+   "area": 3,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.62b6556c": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.6334cb66": {
+   "area": 4,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.670540cd": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.6808639c": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.6ce64714": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.6e098d5a": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.722f4286": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.7310d74f": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.736d8486": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.73e1730f": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.748ec99e": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.768d7954": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.77e64649": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.77fc5a21": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.79aacc63": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.7b724d17": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.7c2281ce": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.7db5ddc9": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.7f9f74ad": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.81a5c29a": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.82e9c7f7": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.84d5e4af": {
+   "area": 2,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.873e0204": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.880e8b55": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.890ca109": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.89901bee": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.8a322512": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.8f99b5f7": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.906b4de1": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.9164e12c": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.99bc069b": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.9b2d65e6": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.9b32b9b0": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.9bf029ff": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.a21d9543": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.a4ec61f8": {
+   "area": 2,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.a66aa56a": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.a784690d": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.a9b376d6": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.ac7d0859": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.ad3aa4bf": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.b057ac3f": {
+   "area": 2,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.b082c858": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.b3005c8a": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.b36868e0": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.b651e210": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.b65cad8d": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.b728c0ea": {
+   "area": 4,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.c06cae86": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.c15cc9e2": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.c3336e35": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.c34469e9": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.c3551739": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.c421f554": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.c47b2f35": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.c9de2406": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.cb2f675b": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.cd65f839": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.ce15fc22": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.cedaf537": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.cfbdabf5": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.cfe010cb": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.d00282b6": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.d0777725": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.d4631f77": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.d8004276": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.db7b5766": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.e03b7761": {
+   "area": 2,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.e1e291a8": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.e21c2b39": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.e2e7544e": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.eab7e00d": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.eb93c951": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.ee68f5d3": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.ef088e10": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.ef1d0568": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.f04dfe76": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.f2fbeb3d": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.f3779a80": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.f4d27722": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.f775865e": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.fe1bda2d": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.fedad0c6": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  },
+  "p3.fff4ccb8": {
+   "area": 1,
+   "status": "P3-PROVISIONAL"
+  }
+ }
+}

@@ -14,9 +14,9 @@
     const players=validPlayers(),ids=new Set(players.map(player=>String(player.id)));
     [1,2].forEach(slot=>{if(!ids.has(String(selectedRegisteredPlayer?.[slot]||"")))selectedRegisteredPlayer[slot]=null;});
     if(players.length&& !selected(1))initializePrimaryMatchSetupV1({force:true});
-    if(players.length===0){display(1,"プレーヤーを追加");display(2,"対戦相手を追加");guide.innerHTML='<strong>プレーヤーが登録されていません</strong><span>試合を始めるには2人のプレーヤーを登録してください。</span><button type="button" data-add-match-player-v18="1">プレーヤーを追加</button>';}
-    else if(players.length===1){display(1,selected(1)?.name||players[0].name);display(2,"対戦相手を追加");guide.innerHTML='<strong>対戦相手を追加</strong><span>試合を始めるにはもう1人のプレーヤーを登録してください。</span><button type="button" data-add-match-player-v18="2">プレーヤーを追加</button>';}
-    else{display(1,selected(1)?.name||"プレーヤーを選択");display(2,selected(2)?.name||"対戦相手を選択");guide.innerHTML="";}
+    if(players.length===0){display(1,window.cueT("p3.3552b640"));display(2,window.cueT("p3.89901bee"));guide.innerHTML='<strong>' + window.cueT("p3.4bb2d4b6") + '</strong><span>' + window.cueT("p3.9b32b9b0") + '</span><button type="button" data-add-match-player-v18="1">' + window.cueT("p3.3552b640") + '</button>';}
+    else if(players.length===1){display(1,selected(1)?.name||players[0].name);display(2,window.cueT("p3.89901bee"));guide.innerHTML='<strong>' + window.cueT("p3.89901bee") + '</strong><span>' + window.cueT("p3.c15cc9e2") + '</span><button type="button" data-add-match-player-v18="2">' + window.cueT("p3.3552b640") + '</button>';}
+    else{display(1,selected(1)?.name||window.cueT("p3.b3005c8a"));display(2,selected(2)?.name||window.cueT("p3.39bd0fa6"));guide.innerHTML="";}
     guide.hidden=players.length>=2;
     start.disabled=players.length<2||!selected(1)||!selected(2)||String(selectedRegisteredPlayer[1])===String(selectedRegisteredPlayer[2]);
     start.setAttribute("aria-disabled",start.disabled?"true":"false");

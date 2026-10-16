@@ -117,3 +117,22 @@ export function jaSource(src, catalogOverride) {
   }
   return out;
 }
+
+/* Static description of every window.cueT("p3.…") call in `src`: { key, params: Set(names) }. Used by the catalog consistency tests. */
+export function cueCalls(src) {
+  const MARK = /window\.cueT\((["'`])p3\./g;
+  const calls = []; let mm;
+  while ((mm = MARK.exec(src))) {
+    const open = mm.index + "window.cueT".length;
+    const close = matchClose(src, open);
+    if (close < 0) throw new Error("unbalanced cueT call at " + mm.index);
+    const parts = splitTop(src.slice(open + 1, close));
+    const params = new Set();
+    if (parts[1]) {
+      const body = parts[1].trim().replace(/^\{/, "").replace(/\}$/, "");
+      for (const entry of splitTop(body, true)) params.add(entry.slice(0, entry.indexOf(":")).trim());
+    }
+    calls.push({ key: parts[0].slice(1, -1), params });
+  }
+  return calls;
+}

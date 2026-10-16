@@ -446,6 +446,11 @@
    "tests": 6,
    "skips": 0
   },
+  "p3-translation-catalog.test.mjs": {
+   "sha256": "5876ff8ddf50e11ae196bd726dada98bd37505e577c84a23422699c54e17d80c",
+   "tests": 6,
+   "skips": 0
+  },
   "phase-b1-safe-cleanup.test.mjs": {
    "sha256": "487addb2af8ccff6f2ba34d78dde011712e780e16d2edad20976e298339789c7",
    "tests": 5,
