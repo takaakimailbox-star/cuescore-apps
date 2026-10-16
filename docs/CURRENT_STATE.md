@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## CueScore i18n P4 Translation QA / P5 Visual Fix / P3-6 A10（2026年10月17日）
+
+- Decision 036／Official 117・118／Decision Log v2.12 に基づき、**全1,331キーをAIがキー単位で検証**した（検証者: AI。**人間の独立レビューは実施されていない**）。`P4-AI-VERIFIED` 1,322キー（残余リスク R0 714／R1 557／R2 51）、PO判断待ち 9キー（R3、`P3-PROVISIONAL`のまま）。`P4-REVIEWED`＝0、`P4-APPROVED`＝0。用語は一次資料（WPA）でenの一部を確認したのみで **CONFIRMED は 0**（中国語・JPA・High Run・Break and run・Dead Ball は NOT VERIFIED）。翻訳 catalog の修正は 14 キー（en 9・zh-Hans 5。意味2件・体裁12件）。ja catalog と日本語表示は不変。
+- P5: 320px 幅の en 文言2件の省略と、Match Detail の長いプレーヤー名の重なりを CSS のみで最小修正（`html[lang="en"]`≤340px、`.match-detail-result-name-v2{max-width:100%}`）。`Main` バッジの配置は Decision 候補（未実装）。VoiceOver・実機・Dynamic Type は未検証。
+- P3-⑥: A10（最初の `window.openHistoricalRecordV2` 代入）のみ、実行時トレース・障害注入・既存テストで安全性を確認して削除。他の候補は未変更で **P3-⑥ は未完了**。
+- 製品の Match／Snapshot schema、Player ID、QR／Backup／CSV、resultLabel、Analytics、IAP、Free／Pro、S-B（false）は変更なし。U3／U4／U8／U11 は DECISION PENDING のまま。
+
 ## CueScore Localization P4 Review Policy Decision Published（2026年10月17日）
 
 - Product Owner承認に基づき、**Decision 036／Official 117（Decision）／Official 118（Spec）／Official Design Decision Log v2.12**を発行した（Documentation-only）。P4の翻訳レビューは、**外部の人間レビュアーを必須とせず**、AI検証（一次資料・アプリ内Official定義・実画面・キー単位Evidenceと残余リスク）＋**PO最終承認**で進められる。新状態`P4-AI-VERIFIED`を新設し、`P4-REVIEWED`（指名された人間レビュアーの確認）の意味は不変。AIの結果を`P4-REVIEWED`と記録せず、PO承認前に`P4-APPROVED`を付与しない。人間の独立レビューは実施されていないことを明記する。
