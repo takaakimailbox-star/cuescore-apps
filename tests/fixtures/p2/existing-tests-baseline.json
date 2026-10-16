@@ -461,6 +461,11 @@
    "tests": 6,
    "skips": 0
   },
+  "p4-ai-verification.test.mjs": {
+   "sha256": "b44c48fc0ec61d68c979a075abce985f46b1108e895431baa8e81d50a73788a9",
+   "tests": 3,
+   "skips": 0
+  },
   "p4-manifest-completeness.test.mjs": {
    "sha256": "0d5178b1ede2504d7fb6893453119a0baafba7c11ae6bee87879cb5fbb36541f",
    "tests": 3,
