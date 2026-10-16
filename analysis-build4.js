@@ -7,7 +7,7 @@
   const esc=value=>String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
   const labels={
     "9ball":"9-Ball","10ball":"10-Ball",rotation:"Rotation",jpa9:"JPA 9-Ball",straightPool:"14-1",threeCushion:"3 Cushion",
-    winRate:"勝率",shotRate:"シュート率",breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",highRun:"ハイラン",average:"アベレージ",
+    winRate:"勝率",shotRate:window.cueT("p3.274e5e0c"),breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",highRun:window.cueT("p3.761345d1"),average:window.cueT("p3.d247b2e7"),
     score:"1試合最高得点",masuwariCount:"1試合最多マス割り",leastWinningInnings:"最少イニング勝利"
   };
   const percentKeys=new Set(["winRate","shotRate","breakInRate","masuwariRate"]);

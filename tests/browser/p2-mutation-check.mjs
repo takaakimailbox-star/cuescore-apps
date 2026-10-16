@@ -36,7 +36,7 @@ const M = [
   ["Mapper loses the 記録なし entry", "i18n-v1.js", ',"記録なし":"mapper.resultLabel.skipped"', ""],
   ["en catalog shows the canonical value for 2個", "i18n-catalog-en-v1.js", '"mapper.resultLabel.two": "2 balls",', '"mapper.resultLabel.two": "2個",'],
   ["ja catalog changes a canonical display value", "i18n-catalog-ja-v1.js", '"mapper.resultLabel.skipped": "記録なし",', '"mapper.resultLabel.skipped": "記録無し",'],
-  ["display site bypasses the Mapper", "index.html", 'window.cueResultLabel(e.resultLabel || e.result || "記録")', '(e.resultLabel || e.result || "記録")'],
+  ["display site bypasses the Mapper", "index.html", 'window.cueResultLabel(e.resultLabel || e.result || window.cueT("p3.fe7cf641"))', '(e.resultLabel || e.result || window.cueT("p3.fe7cf641"))'],
   ["Display Mapper leaks into the stored producer", "index.html", "CueScoreDomainV1.pocketedLabel(decision.pocketedBalls.length)", "window.cueResultLabel(CueScoreDomainV1.pocketedLabel(decision.pocketedBalls.length))"],
   ["Domain SKIPPED value changed", "domain-constants-v1.js", 'SKIPPED:"記録なし"', 'SKIPPED:"記録無し"'],
   ["quota: legacy Japanese-message alternative dropped", "index.html", "/quota|storage quota|保存容量が不足/i.test(", "/quota|storage quota/i.test("],

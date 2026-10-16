@@ -7,7 +7,7 @@
     {id:"9ball",label:"9-Ball"},{id:"10ball",label:"10-Ball"},{id:"rotation",label:"Rotation"},
     {id:"straightPool",label:"14-1"},{id:"jpa9",label:"JPA 9-Ball"},{id:"threeCushion",label:"3 Cushion"}
   ];
-  const labels={winRate:"勝率",shotRate:"シュート率",breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",average:"アベレージ",highRun:"ハイラン"};
+  const labels={winRate:"勝率",shotRate:window.cueT("p3.274e5e0c"),breakInRate:"ブレイクイン率",masuwariRate:"マス割り率",average:window.cueT("p3.d247b2e7"),highRun:window.cueT("p3.761345d1")};
   const metricOrder={
     "9ball":["winRate","shotRate","breakInRate","masuwariRate"],
     "10ball":["winRate","shotRate","breakInRate","masuwariRate"],
@@ -44,7 +44,7 @@
       const values=records.map((_,index)=>aggregateApi()?.aggregate?.(records.slice(0,index+1),state.player,helpers)?.[key]??null);
       const graph=chartApi()?.chart?.(values,key,records)||'<div class="pd7-empty">データなし</div>';
       const latest=[...values].reverse().find(Number.isFinite);
-      return `<section class="pd12-trend-card"><div class="pd12-trend-heading"><span><h2>${labels[key]}</h2><small>${records.length?`${records.length}試合`:'データなし'}</small></span><strong>${formatTrendValue(key,latest)}</strong></div><div class="pd12-chart-scroll">${graph}</div></section>`;
+      return `<section class="pd12-trend-card"><div class="pd12-trend-heading"><span><h2>${labels[key]}</h2><small>${records.length?window.cueT(`p3.d8d0de1a`,{length:records.length,count:records.length}):'データなし'}</small></span><strong>${formatTrendValue(key,latest)}</strong></div><div class="pd12-chart-scroll">${graph}</div></section>`;
     }).join("");
     document.getElementById("playerStatsOverlay")?.setAttribute("aria-hidden","true");document.body.classList.add("pd12-trends-open");trends.classList.remove("hidden");trends.setAttribute("aria-hidden","false");trends.querySelector("main").scrollTop=0;trends.querySelector("button")?.focus();
   }

@@ -41,12 +41,23 @@ test("[P2-6] invalid dates keep the legacy output byte for byte ('NaN' parts, 'u
   assert.equal(core.formatDatePattern("ja", bad, "ymd-hm"), "NaN/NaN/NaN NaN:NaN");
   for (const v of ["2026-01-05T12:00:00Z", 0, null, undefined]) assert.throws(() => core.formatDatePattern("ja", v, "ymd"), TypeError);
 });
-test("[P2-6] language does not change the output in P2 (en / zh-Hans use the Japanese table until P3); unknown pattern ids fail loudly; the input Date is not modified", () => {
+test("[P2-6/P3] ja output is the legacy table; an unknown language falls back to it; en / zh-Hans have their own provisional tables with the same pattern ids; unknown pattern ids fail loudly; the input Date is not modified", () => {
   const d = new Date("2026-07-04T03:04:05Z"), t = d.getTime();
-  for (const lang of ["en", "zh-Hans", "xx"]) for (const id of Object.keys(REF)) assert.equal(core.formatDatePattern(lang, d, id), core.formatDatePattern("ja", d, id));
+  for (const id of Object.keys(REF)) assert.equal(core.formatDatePattern("xx", d, id), core.formatDatePattern("ja", d, id));
+  for (const lang of ["en", "zh-Hans"]) assert.deepEqual(Object.keys(core.DATE_PATTERNS[lang]).sort(), Object.keys(core.DATE_PATTERNS.ja).sort(), lang);
+  // P3 (was: "en / zh-Hans use the Japanese table until P3"): fixed local date, exact provisional output
+  const local = new Date(2026, 9, 8, 9, 5);
+  assert.equal(core.formatDatePattern("en", local, "ymd-w-hm"), "Thu, Oct 8, 2026 09:05");
+  assert.equal(core.formatDatePattern("en", local, "ymd"), "Oct 8, 2026");
+  assert.equal(core.formatDatePattern("en", local, "md-w-sp-hm"), "Thu, Oct 8 09:05");
+  assert.equal(core.formatDatePattern("zh-Hans", local, "ymd-w"), "2026年10月8日 周四");
+  assert.equal(core.formatDatePattern("zh-Hans", local, "md"), "10月8日");
+  assert.equal(core.formatDatePattern("ja", local, "ymd-w-hm"), "2026/10/08（木）09:05");
   assert.throws(() => core.formatDatePattern("ja", d, "nope"), RangeError);
   assert.equal(d.getTime(), t);
-  assert.ok(Object.isFrozen(core.DATE_PATTERNS) && Object.isFrozen(core.DATE_PATTERNS.ja) && Object.isFrozen(core.DATE_WEEKDAYS.ja));
+  assert.ok(Object.isFrozen(core.DATE_PATTERNS) && Object.isFrozen(core.DATE_PATTERNS.ja) && Object.isFrozen(core.DATE_PATTERNS.en) && Object.isFrozen(core.DATE_WEEKDAYS.ja));
+  for (const lang of ["ja", "en", "zh-Hans"]) assert.equal(core.DATE_WEEKDAYS[lang].length, 7);
+  assert.equal(core.DATE_MONTHS.en.length, 12);
 });
 test("[P2-6] the date formatter returns strings only: it never produces or accepts a stored value (stored dates stay ISO strings; no displayed date is parsed)", () => {
   const src = read("i18n-v1.js");

@@ -253,18 +253,31 @@
     return name;
   }
 
-  /* ---------- Display date patterns (P2-6; Official 108 Part I §7 / C-R6) ----------
-   * Presentation only. Stored dates stay ISO strings; callers build the Date; nothing here parses a displayed date. Every pattern reproduces, character for character,
-   * the Japanese output of the hand-built formatters it replaced, and uses LOCAL-time components exactly like them. Other languages use the
-   * Japanese table until P3 supplies their patterns. Tokens: YYYY MM DD (zero padded) M D (not padded) HH mm (zero padded) H (not padded) W (weekday). */
+  /* ---------- Display date patterns (P2-6; Official 108 Part I §7 / C-R6; en and zh-Hans tables added in P3) ----------
+   * Presentation only. Stored dates stay ISO strings; callers build the Date; nothing here parses a displayed date. Every ja pattern reproduces, character for
+   * character, the Japanese output of the hand-built formatters it replaced, and uses LOCAL-time components exactly like them. The en / zh-Hans tables are
+   * provisional (P3-PROVISIONAL, reviewed in P4). Tokens: YYYY MM DD (zero padded) M D (not padded) MMM (short month name) HH mm (zero padded) H (not padded) W (weekday). */
   const DATE_PATTERNS=Object.freeze({
     ja:Object.freeze({
       "md":"M/D","mmdd":"MM/DD","ymd":"YYYY/MM/DD","ymd-short":"YYYY/M/D","ymd-hm":"YYYY/MM/DD HH:mm","ymd-w":"YYYY/MM/DD（W）",
       "ymd-w-hm":"YYYY/MM/DD（W）HH:mm","ymd-w-sp-hm":"YYYY/MM/DD（W） HH:mm","md-w-sp-hm":"M/D（W） HH:mm","hm":"HH:mm","h-mm":"H:mm"
+    }),
+    en:Object.freeze({
+      "md":"M/D","mmdd":"MM/DD","ymd":"MMM D, YYYY","ymd-short":"MMM D, YYYY","ymd-hm":"MMM D, YYYY HH:mm","ymd-w":"W, MMM D, YYYY",
+      "ymd-w-hm":"W, MMM D, YYYY HH:mm","ymd-w-sp-hm":"W, MMM D, YYYY HH:mm","md-w-sp-hm":"W, MMM D HH:mm","hm":"HH:mm","h-mm":"H:mm"
+    }),
+    "zh-Hans":Object.freeze({
+      "md":"M月D日","mmdd":"MM/DD","ymd":"YYYY年M月D日","ymd-short":"YYYY年M月D日","ymd-hm":"YYYY年M月D日 HH:mm","ymd-w":"YYYY年M月D日 周W",
+      "ymd-w-hm":"YYYY年M月D日 周W HH:mm","ymd-w-sp-hm":"YYYY年M月D日 周W HH:mm","md-w-sp-hm":"M月D日 周W HH:mm","hm":"HH:mm","h-mm":"H:mm"
     })
   });
-  const DATE_WEEKDAYS=Object.freeze({ja:Object.freeze(["日","月","火","水","木","金","土"])});
-  const DATE_TOKEN=/YYYY|MM|DD|HH|mm|M|D|H|W/g;
+  const DATE_WEEKDAYS=Object.freeze({
+    ja:Object.freeze(["日","月","火","水","木","金","土"]),
+    en:Object.freeze(["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]),
+    "zh-Hans":Object.freeze(["日","一","二","三","四","五","六"])
+  });
+  const DATE_MONTHS=Object.freeze({en:Object.freeze(["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"])});
+  const DATE_TOKEN=/YYYY|MMM|MM|DD|HH|mm|M|D|H|W/g;
   function formatDatePattern(language,value,id){
     const date=value; // a Date (duck-typed): like the replaced code, anything else throws a TypeError at the first getter
     // No special case for an invalid Date: the replaced hand-built formatters printed "NaN" parts (and "undefined" for the weekday) and this keeps
@@ -277,6 +290,7 @@
     return pattern.replace(DATE_TOKEN,token=>{
       switch(token){
         case "YYYY":return String(date.getFullYear());
+        case "MMM":return (DATE_MONTHS[language]||DATE_MONTHS.en)[date.getMonth()];
         case "MM":return two(date.getMonth()+1);
         case "DD":return two(date.getDate());
         case "M":return String(date.getMonth()+1);
@@ -294,6 +308,6 @@
     normalizeTag,classifyTag,resolveDeviceLanguage,deviceLanguages,readPreference,resolve,
     registerCatalog,getCatalog,createI18n,requestLanguageChange,evaluateGuard,
     mapResultLabel,mapCategoryName,RESULT_LABEL_KEYS,DEFAULT_CATEGORIES,interpolate,
-    DATE_PATTERNS,DATE_WEEKDAYS,formatDatePattern
+    DATE_PATTERNS,DATE_WEEKDAYS,DATE_MONTHS,formatDatePattern
   });
 });

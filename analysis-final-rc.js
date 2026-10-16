@@ -1,14 +1,14 @@
 (() => {
   const metricDefinitions = {
     "9ball": [
-      { key: "shotRate", label: "シュート率", suffix: "%", digits: 0, higher: true, improve: "シュート精度は改善傾向", worsen: "シュート精度は低下傾向", goal: "シュート成功率を前期間以上へ戻しましょう" },
-      { key: "masuwari", label: "マス割", suffix: "", digits: 0, higher: true, improve: "マス割は増加傾向", worsen: "マス割は減少傾向", goal: "取り切りまでの配置を振り返りましょう" },
+      { key: "shotRate", label: window.cueT("p3.274e5e0c"), suffix: "%", digits: 0, higher: true, improve: "シュート精度は改善傾向", worsen: "シュート精度は低下傾向", goal: "シュート成功率を前期間以上へ戻しましょう" },
+      { key: "masuwari", label: window.cueT("p3.d3bde92d"), suffix: "", digits: 0, higher: true, improve: "マス割は増加傾向", worsen: "マス割は減少傾向", goal: "取り切りまでの配置を振り返りましょう" },
       { key: "avgFouls", label: "平均ファール", suffix: "", digits: 1, higher: false, improve: "ファールは減少傾向", worsen: "ファールは増加傾向", goal: "平均ファールを前期間以下へ戻しましょう" }
     ],
     "10ball": null,
     rotation: [
-      { key: "highRun", label: "ハイラン", suffix: "", digits: 0, higher: true, improve: "ハイランは改善傾向", worsen: "ハイランは低下傾向", goal: "連続得点につながった配置を振り返りましょう" },
-      { key: "shotRate", label: "シュート率", suffix: "%", digits: 0, higher: true, improve: "シュート精度は改善傾向", worsen: "シュート精度は低下傾向", goal: "シュート成功率を前期間以上へ戻しましょう" },
+      { key: "highRun", label: window.cueT("p3.761345d1"), suffix: "", digits: 0, higher: true, improve: "ハイランは改善傾向", worsen: "ハイランは低下傾向", goal: "連続得点につながった配置を振り返りましょう" },
+      { key: "shotRate", label: window.cueT("p3.274e5e0c"), suffix: "%", digits: 0, higher: true, improve: "シュート精度は改善傾向", worsen: "シュート精度は低下傾向", goal: "シュート成功率を前期間以上へ戻しましょう" },
       { key: "avgFouls", label: "平均ファール", suffix: "", digits: 1, higher: false, improve: "ファールは減少傾向", worsen: "ファールは増加傾向", goal: "平均ファールを前期間以下へ戻しましょう" }
     ],
     jpa9: null,
@@ -17,8 +17,8 @@
   };
   metricDefinitions["10ball"] = metricDefinitions["9ball"];
   const averageMetrics = discipline => [
-    { key: "average", label: "アベレージ", suffix: "", digits: discipline === "threeCushion" ? 3 : 2, higher: true, improve: "アベレージは改善傾向", worsen: "アベレージは低下傾向", goal: "1イニングあたりの得点を前期間以上へ戻しましょう" },
-    { key: "highRun", label: "ハイラン", suffix: "", digits: 0, higher: true, improve: "ハイランは改善傾向", worsen: "ハイランは低下傾向", goal: "連続得点につながった配置を振り返りましょう" },
+    { key: "average", label: window.cueT("p3.d247b2e7"), suffix: "", digits: discipline === "threeCushion" ? 3 : 2, higher: true, improve: "アベレージは改善傾向", worsen: "アベレージは低下傾向", goal: "1イニングあたりの得点を前期間以上へ戻しましょう" },
+    { key: "highRun", label: window.cueT("p3.761345d1"), suffix: "", digits: 0, higher: true, improve: "ハイランは改善傾向", worsen: "ハイランは低下傾向", goal: "連続得点につながった配置を振り返りましょう" },
     { key: "avgFouls", label: "平均ファール", suffix: "", digits: 1, higher: false, improve: "ファールは減少傾向", worsen: "ファールは増加傾向", goal: "平均ファールを前期間以下へ戻しましょう" }
   ];
   metricDefinitions.jpa9 = averageMetrics("jpa9");
@@ -85,7 +85,7 @@
 
   const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character]));
   const conclusionClass = direction => direction === "worsened" ? "attention" : direction === "improved" ? "improved" : "flat";
-  const matchLabel = definition => definition.key === "avgFouls" ? "ファール" : definition.label;
+  const matchLabel = definition => definition.key === "avgFouls" ? window.cueT("p3.4923e874") : definition.label;
   const matchGoal = definition => definition.key === "avgFouls" ? "ファール数を抑えましょう" : definition.goal;
 
   function applyPlayer() {

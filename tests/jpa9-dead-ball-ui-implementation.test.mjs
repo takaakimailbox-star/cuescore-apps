@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 import assert from "node:assert/strict";
 import test from "node:test";
 import vm from "node:vm";

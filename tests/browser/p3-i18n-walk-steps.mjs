@@ -50,16 +50,17 @@ const steps = [
   { name: "settings-restore", code: click('[data-settings-action="restore"]', 900) },
   { name: "settings-restore-back", code: `document.querySelector(".settings-suite-back-v2")?.click();await W(600)` },
   { name: "settings-delete", code: click('[data-settings-action="delete"]', 900) },
-  { name: "settings-delete-all-matches", code: `document.querySelector("#deleteAllMatchRecordsBtn,[data-delete-all-matches],button")&&0;const b=[...document.querySelectorAll("button")].find(x=>/試合履歴をすべて削除|Delete all match history|删除全部比赛记录/.test(x.textContent));b?.click();await W(700)` },
   { name: "settings-delete-back", code: `document.querySelector(".settings-suite-back-v2")?.click();await W(600)` },
-  { name: "settings-language", code: click('[data-settings-action="language"]', 900) },
+  { name: "settings-language", code: click('[data-settings-open-language]', 900) },
   { name: "settings-language-back", code: `document.querySelector(".settings-suite-back-v2,.settings-language-back")?.click();await W(600)` },
-  { name: "settings-demo", code: click('[data-settings-action="demo"]', 900) },
   { name: "analysis-hub", code: `document.querySelector('[data-settings-action="analysis"],[data-phase1-tab="analysis"]')?.click();await W(1000)` },
   { name: "stats-filter", code: `window.openStatisticsFilterV53?.();await W(800)` },
   { name: "ranking", code: `window.openPlayerRankingV53?.();await W(800)` },
   { name: "categories", code: `window.openMatchClassificationManagerV38?.();await W(800)` },
   { name: "analysis-match-view", code: `const id=JSON.parse(localStorage.getItem("rotationScoreboard.matchRecords.v1"))[0].id;window.openMatchAnalysisForPlayerV5?.(id,"p_probe_1","");await W(1100)` },
-  { name: "analysis-player-view", code: `window.openPlayerAnalysisForPlayerV5?.("p_probe_1","9ball");await W(1100)` }
+  { name: "analysis-player-view", code: `window.openPlayerAnalysisForPlayerV5?.("p_probe_1","9ball");await W(1100)` },
+  { name: "settings-delete-page", code: `document.querySelectorAll("[data-dialog-close]").forEach(n=>n.click());await W(300);${tab("settings")}` + click('[data-settings-action="delete"]', 900) },
+  { name: "settings-delete-all-matches", code: `document.querySelector("#deleteAllMatchRecordsBtn,[data-delete-all-matches],button")&&0;const b=[...document.querySelectorAll("button")].find(x=>/試合履歴をすべて削除|Delete all match history|删除全部比赛记录/.test(x.textContent));b?.click();await W(700)` },
+  { name: "settings-delete-all-matches-done", code: `await W(300)` }
 ];
 export default steps;

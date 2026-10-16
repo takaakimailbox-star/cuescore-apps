@@ -1,3 +1,4 @@
+import "./helpers/ja-fs.mjs";
 /* P2-0 / L0 static characterization (CueScore i18n P2). Pins the CURRENT main behavior; production source is not changed.
  * Ratchet numbers may only go DOWN in later P2 gates (each gate lowers exactly its own baseline and records it in Evidence). */
 import test from "node:test";
