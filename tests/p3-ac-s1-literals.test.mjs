@@ -40,7 +40,7 @@ test("the allow-list only uses the approved reasons and keeps the Decision-pendi
   const reasons = new Set(["CLOUD", "CSV", "DOMAIN", "U4", "U8", "LANGNAME", "META"]);
   for (const e of allow.entries) assert.ok(reasons.has(e.reason), `${e.file}: ${e.reason}`);
   // U4 (Paywall) lives in monetization-v1.js and the Settings plan card; U8 is the Backup share sheet only; neither reason leaks elsewhere
-  for (const e of allow.entries.filter(e => e.reason === "U4")) assert.ok(e.file === "monetization-v1.js" || e.file === "index.html", e.file);
+  assert.equal(allow.entries.filter(e => e.reason === "U4").reduce((n, e) => n + e.count, 0), 0, "U4 was resolved by Decision 038: the Paywall and the Settings plan card now go through the catalog");
   assert.equal(allow.entries.filter(e => e.reason === "U8").reduce((n, e) => n + e.count, 0), 0, "U8 was resolved by Decision 037: title / text / dialogTitle now go through the catalog");
   assert.equal(allow.entries.filter(e => e.reason === "DOMAIN").reduce((n, e) => n + e.count, 0), 11, "BREAK_RESULT_LABELS_V61 canonical values");
   assert.ok(allow.entries.filter(e => e.reason === "CSV").length >= 40, "CSV header row and value words");

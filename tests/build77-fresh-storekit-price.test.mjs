@@ -3,6 +3,10 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 
+// U4 (Decision 038): the view-state strings now resolve through window.cueT; the ja catalog keeps every assertion below unchanged.
+import { jaText } from "./helpers/i18n-ja-catalog.mjs";
+globalThis.window = globalThis;
+globalThis.cueT = jaText;
 await import("../monetization-v1.js");
 const diagnostic = globalThis.CueScoreIapDiagnostic;
 const web = fs.readFileSync(new URL("../monetization-v1.js", import.meta.url), "utf8");

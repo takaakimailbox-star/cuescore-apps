@@ -178,7 +178,7 @@
    "updated_in": "P2 Phase E (old->new assertion map in Evidence)"
   },
   "build72-current-plan-settings.test.mjs": {
-   "sha256": "faf1fe8d5c7372c8d98cf263f8c779380153e60fac91a2bcf4df5cac7b36f4cf",
+   "sha256": "eda2af668000ecf888cdbf15f91993a23601ecc67913b0655ea69a50a3ba585a",
    "tests": 8,
    "skips": 0
   },
@@ -198,7 +198,7 @@
    "skips": 0
   },
   "build77-fresh-storekit-price.test.mjs": {
-   "sha256": "17827957e038afd78d8d9611e5760cfed32c3105a3758bbe2ee133a442c09fe0",
+   "sha256": "4ed3cb22d74f6f3c077063ea86fb9c8cc8c38941e4420c78177c4677d47797f5",
    "tests": 4,
    "skips": 0
   },
@@ -462,7 +462,7 @@
    "skips": 0
   },
   "p3-ac-s1-literals.test.mjs": {
-   "sha256": "8c69c2fddfec1c55217374739ff9dfcf0623e97369db96b800b830791bb2132f",
+   "sha256": "97fc85265396d379f6d3484c0d74df18089f9c22df8898a7cc150f7c6b4574c5",
    "tests": 4,
    "skips": 0
   },
@@ -492,7 +492,7 @@
    "skips": 0
   },
   "p4-po-approval.test.mjs": {
-   "sha256": "f19bced6968d8c06532cea4bf8cd00d8f8a16bd6cb0c48fa7810f7182a3aa666",
+   "sha256": "416b7c04bd29c07b83e59b161431e39e83a66c8c95bf46884d484dec440cf0ab",
    "tests": 3,
    "skips": 0
   },
@@ -504,6 +504,11 @@
   "p4-u3-legal-note.test.mjs": {
    "sha256": "2731136a32fc6e82f33499b677b47eb165bd4e4a48f52c79547cdffc5a27955d",
    "tests": 3,
+   "skips": 0
+  },
+  "p4-u4-paywall.test.mjs": {
+   "sha256": "d4730da9230b2f49b0579866dc6786477d15945d511e150af53af3377ae6cf2c",
+   "tests": 6,
    "skips": 0
   },
   "p4-u8-share-sheet.test.mjs": {

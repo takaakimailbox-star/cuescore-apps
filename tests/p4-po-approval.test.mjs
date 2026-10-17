@@ -11,12 +11,15 @@ const root = new URL("../", import.meta.url);
 const read = p => fs.readFileSync(new URL(p, root), "utf8");
 const cat = { ja: require("../i18n-catalog-ja-v1.js"), en: require("../i18n-catalog-en-v1.js"), zh: require("../i18n-catalog-zh-hans-v1.js") };
 const approval = JSON.parse(read("tests/fixtures/p4/po-approval.json"));
+const approvalU4 = JSON.parse(read("tests/fixtures/p4/po-approval-u4.json")); // keys added by Decision 038 (U4)
 const ai = JSON.parse(read("tests/fixtures/p4/ai-verification.json"));
 const hash = k => crypto.createHash("sha256").update(JSON.stringify([cat.ja[k], cat.en[k], cat.zh[k]])).digest("hex").slice(0, 16);
 
 test("every catalog key has an approval record bound to its current ja/en/zh-Hans text", () => {
-  assert.deepEqual(Object.keys(approval.keys).sort(), Object.keys(cat.ja).sort());
-  for (const [key, e] of Object.entries(approval.keys)) assert.equal(e.h, hash(key), `${key}: text changed after approval (re-approval required)`);
+  const all = { ...approval.keys, ...approvalU4.keys };
+  assert.equal(Object.keys(all).length, Object.keys(approval.keys).length + Object.keys(approvalU4.keys).length, "the two records do not overlap");
+  assert.deepEqual(Object.keys(all).sort(), Object.keys(cat.ja).sort());
+  for (const [key, e] of Object.entries(all)) assert.equal(e.h, hash(key), `${key}: text changed after approval (re-approval required)`);
 });
 test("residual risks are kept and the 9 corrected R3 keys stay R3", () => {
   for (const [key, e] of Object.entries(approval.keys)) {

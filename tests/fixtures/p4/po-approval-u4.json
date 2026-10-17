@@ -1,0 +1,152 @@
+{
+ "decision": "Decision 038 / Official 121-122",
+ "date": "2026-10-17",
+ "approver": "Product Owner",
+ "status": "P4-APPROVED",
+ "scope": "Approval of the U4 Paywall / Settings plan card wording (Evidence 64 proposal, plan B for the purchase-terms note). Each approval binds to the hash of [ja, en, zh-Hans]; a later change invalidates it.",
+ "humanIndependentReview": "NOT PERFORMED",
+ "reviewedState": "P4-REVIEWED is not used (no named human reviewer)",
+ "residualRisk": "R2: AI-verified wording from primary sources (Apple Guidelines 3.1.1 / 2.3.1(a), StoreKit displayPrice); zh-Hans purchase terms NOT VERIFIED by a native reviewer.",
+ "keys": {
+  "p3.176e56bb": {
+   "r": "R2",
+   "h": "43bf7547183f5196",
+   "origin": "U4"
+  },
+  "p3.1e5c15cd": {
+   "r": "R2",
+   "h": "229f323d038b4948",
+   "origin": "U4"
+  },
+  "p3.251e8dad": {
+   "r": "R2",
+   "h": "8ae2d26c202f27c4",
+   "origin": "U4"
+  },
+  "p3.28ada19f": {
+   "r": "R2",
+   "h": "722fdbf883df9617",
+   "origin": "U4"
+  },
+  "p3.2ff4da87": {
+   "r": "R2",
+   "h": "db227b98da0c63a4",
+   "origin": "U4"
+  },
+  "p3.3980bb67": {
+   "r": "R2",
+   "h": "de12bfe3f49e78ff",
+   "origin": "U4"
+  },
+  "p3.410ed456": {
+   "r": "R2",
+   "h": "720f4a850e3c6939",
+   "origin": "U4"
+  },
+  "p3.41e979ca": {
+   "r": "R2",
+   "h": "e7806574d7fc67e7",
+   "origin": "U4"
+  },
+  "p3.432cc265": {
+   "r": "R2",
+   "h": "0b6e107cd57b6903",
+   "origin": "U4"
+  },
+  "p3.4de0ba27": {
+   "r": "R2",
+   "h": "b78fb960fdfa9561",
+   "origin": "U4"
+  },
+  "p3.597497d5": {
+   "r": "R2",
+   "h": "75dd725881ce00ab",
+   "origin": "U4"
+  },
+  "p3.665739dc": {
+   "r": "R2",
+   "h": "957e3047ecc56b4c",
+   "origin": "U4"
+  },
+  "p3.68efdaf7": {
+   "r": "R2",
+   "h": "00e9beb77a496963",
+   "origin": "U4"
+  },
+  "p3.6c5da7f9": {
+   "r": "R2",
+   "h": "7c12fc18c2cb7e9f",
+   "origin": "U4"
+  },
+  "p3.704b63dc": {
+   "r": "R2",
+   "h": "147b5ab5fed0009d",
+   "origin": "U4"
+  },
+  "p3.80ed095f": {
+   "r": "R2",
+   "h": "cd26ec9edf296f61",
+   "origin": "U4"
+  },
+  "p3.868474af": {
+   "r": "R2",
+   "h": "abd83689c3fa27d8",
+   "origin": "U4"
+  },
+  "p3.8eec3c60": {
+   "r": "R2",
+   "h": "e58c5102a38cd593",
+   "origin": "U4"
+  },
+  "p3.8f239252": {
+   "r": "R2",
+   "h": "5621eb3b34404902",
+   "origin": "U4"
+  },
+  "p3.8f38c882": {
+   "r": "R2",
+   "h": "13bb47325e8e38fa",
+   "origin": "U4"
+  },
+  "p3.996af94c": {
+   "r": "R2",
+   "h": "e2461ea554d3631d",
+   "origin": "U4"
+  },
+  "p3.9f62acda": {
+   "r": "R2",
+   "h": "6a76526c2bb7efa4",
+   "origin": "U4"
+  },
+  "p3.a6e5bbef": {
+   "r": "R2",
+   "h": "025a128b3d323fff",
+   "origin": "U4"
+  },
+  "p3.b4f9d08d": {
+   "r": "R2",
+   "h": "7fbde3c3e8667cde",
+   "origin": "U4"
+  },
+  "p3.bae748a1": {
+   "r": "R2",
+   "h": "7021d8a2d4809bb3",
+   "origin": "U4"
+  },
+  "p3.df5559ee": {
+   "r": "R2",
+   "h": "12ccf3e1530f54d1",
+   "origin": "U4"
+  },
+  "p3.e29ccd47": {
+   "r": "R2",
+   "h": "c4ecd47d780c3073",
+   "origin": "U4"
+  },
+  "p3.e5acda29": {
+   "r": "R2",
+   "h": "ec8d3cb7e3b8566d",
+   "origin": "U4"
+  }
+ }
+}
