@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.13_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.14_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -29,8 +29,9 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.13 is the current official release and successor
-to v2.12. Earlier versions remain in the official directory as preceding releases.
+Official Design Decision Log v2.14 is the current official release and successor
+to v2.13. Earlier versions remain in the official directory as preceding releases.
+v2.14 adds Decision 038 (Localization U4/U11 approval) and leaves Decisions 001〜037 unchanged.
 v2.13 adds Decision 037 (Localization P4 PO approval) and leaves Decisions 001〜036 unchanged.
 v2.12 adds Decision 036 (Localization P4 review policy) and leaves Decisions 001〜035 unchanged.
 v2.11 adds Decision 035 (Localization U6 dialog decision) and leaves Decisions 001〜034 unchanged.
@@ -144,6 +145,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/118_CueScore_Localization_P4_Review_Policy_Spec.md`
 - `official/119_CueScore_Localization_P4_PO_Approval_Decision.md`
 - `official/120_CueScore_Localization_P4_PO_Approval_Spec.md`
+- `official/121_CueScore_Localization_U4_U11_Approval_Decision.md`
+- `official/122_CueScore_Localization_U4_U11_Approval_Spec.md`
 
 CueScore Localization（3言語対応: ja / en / zh-Hans）status:
 
@@ -165,6 +168,10 @@ Dynamic Type deferral status:
 Localization U6 status:
 
 - Decision 035 / Official 115 / Official 116 / Official Design Decision Log v2.11 (published 2026-10-16). Product Owner decision: `alert`/`confirm`/`prompt` keep the standard dialogs and only the message body is translated (ja/en/zh-Hans); buttons stay with the OS; no wholesale custom-modal replacement; OS button language match is NOT VERIFIED (device check is a later step). U3/U4/U8/U11 remain DECISION PENDING. Documentation-only.
+
+Localization U4/U11 approval status:
+
+- Decision 038 / Official 121 / Official 122 / Official Design Decision Log v2.14 (published 2026-10-17). Product Owner decisions: U4 (Paywall and Settings plan card) is translated into ja/en/zh-Hans with fact-based wording and the StoreKit displayPrice; the Native development-language fallback policy (en to ja) is approved for P6; P5/P6 are verified first in Simulator/isolated environments; the remaining Glossary terms are prepared as a PO decision package. Product code, ASC, IAP product information and Official 109 are not changed by this Decision.
 
 Localization P4 PO approval status:
 

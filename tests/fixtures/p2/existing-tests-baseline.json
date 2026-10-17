@@ -239,7 +239,7 @@
    "skips": 0
   },
   "dynamic-type-deferral-decision.test.mjs": {
-   "sha256": "59cd8861465f692e69bfa8aaadffda964ce22195debcf39481c1ade418379076",
+   "sha256": "f2f6d8171a3f09605664cd526258ca89119e0b42caae81c6bc9892eedf225d89",
    "tests": 10,
    "skips": 0
   },
@@ -330,27 +330,32 @@
    "skips": 0
   },
   "localization-official-docs.test.mjs": {
-   "sha256": "40e94a18dfde2634ecfb7d6f7b53ad27fdafcf8983c6ba1c7fd7190ce771eb9b",
+   "sha256": "da59955eaa394acf519098d99330cdf1016b77094fb9d333993bd0dd7a5ec11e",
    "tests": 8,
    "skips": 0
   },
   "localization-p1-formalization-decision.test.mjs": {
-   "sha256": "700ea937d04521904c3171163a5692c211a958642627d7dca61e91ed4da9fc67",
+   "sha256": "fb7f2a57a36c6242d01afc9976d72819011f4d703475550ebf7a429aceebb574",
    "tests": 7,
    "skips": 0
   },
   "localization-po-approval-decision.test.mjs": {
-   "sha256": "8e9508cb32bc3b142e1ff37ad81c85a770472bdba278a38e045d26d174f3486e",
+   "sha256": "7fd1181e1451faa98461f7e5453fa4f3469784912cbbc65cd76a4942f748c14b",
    "tests": 5,
    "skips": 0
   },
   "localization-review-policy-decision.test.mjs": {
-   "sha256": "f5a62c61635ba1cda19eed56e70ad9ac4e5b6a0f6de4ff480f1c49cdbd507bc2",
+   "sha256": "1f009e37465baea8b7fe54d2f4878437259eb0c4a64c8cfa306d16fea518ffe5",
+   "tests": 5,
+   "skips": 0
+  },
+  "localization-u4-u11-decision.test.mjs": {
+   "sha256": "ea47eb0284da0bc59461b51f8094faf61472894f240f5942eb7cda14c053aeb7",
    "tests": 5,
    "skips": 0
   },
   "localization-u6-decision.test.mjs": {
-   "sha256": "b2409178b55fff68eb201a3e1441ca27eb736313721561dda48823080dfe63bc",
+   "sha256": "eb37679f376f2993fc173440040ff425d423c341d57bc39134bed12892b4da6a",
    "tests": 5,
    "skips": 0
   },
@@ -635,7 +640,7 @@
    "skips": 0
   },
   "settings-unified-design-decision.test.mjs": {
-   "sha256": "18a4d349211c35cd6a40585be45f4addae7d79bd54ab675afc8f3a51a3823d02",
+   "sha256": "45c8b82eb63401cc122e2ccf4658415c192a21429ae6d037406de9fb6bc595bb",
    "tests": 11,
    "skips": 0
   },

@@ -1,5 +1,10 @@
 # CueScore Apps Current State
 
+## CueScore Localization U4/U11 Approval Decision Published（2026年10月17日）
+
+- Product Owner承認（U4／U11／P5・P6検証／Glossary資料）に基づき、**Decision 038／Official 121（Decision）／Official 122（Spec）／Official Design Decision Log v2.14**を発行した（文書のみ。製品コード・ASC・Native設定は本Decisionでは未変更）。
+- U4: Paywall と Settings のプランカードを ja／en／zh-Hans に対応する方針（買い切り＝事実のみの表現、価格は StoreKit displayPrice）。U11: Native の開発言語 fallback を en→ja に揃える方針を P6 向けに承認。P5／P6 は Simulator・隔離環境を優先し、既存 iPhone アプリを上書きしない。Official 109（Glossary）は未発行のまま。
+
 ## CueScore i18n P4 PO Approval Implemented（2026年10月17日）
 
 - Decision 037／Official 119・120／Decision Log v2.13 に基づき、PO承認を実装した。**P4-APPROVED は 1,335 キー**（AI検証済み1,322＋R3の9キー〔承認された訳へ修正済み、R3として保持〕＋U3注記1・U8共有シート3）。承認はキー単位で `[ja, en, zh-Hans]` のハッシュに結び付き（`tests/fixtures/p4/po-approval.json`）、残余リスク（R2 55・R3 9）を保持。**人間の独立レビューは実施されていない。P4-REVIEWED は 0**。用語11件はPO承認記録でCONFIRMED（残余リスク付き。中国語・JPAの一次資料はNOT VERIFIED）、他の用語はPENDING、**Official 109（Glossary）は未発行**。Official 108 AC-1（リリース候補）は**未達**。
