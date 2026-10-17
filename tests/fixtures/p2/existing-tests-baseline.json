@@ -239,7 +239,7 @@
    "skips": 0
   },
   "dynamic-type-deferral-decision.test.mjs": {
-   "sha256": "f2f6d8171a3f09605664cd526258ca89119e0b42caae81c6bc9892eedf225d89",
+   "sha256": "433588b9026f17349092f48cbdc60d68385552c91d670f2313c1425027b186e2",
    "tests": 10,
    "skips": 0
   },
@@ -335,32 +335,37 @@
    "skips": 0
   },
   "localization-official-docs.test.mjs": {
-   "sha256": "da59955eaa394acf519098d99330cdf1016b77094fb9d333993bd0dd7a5ec11e",
+   "sha256": "4ffaf8e4996591dc288058ae7c003bec8842e597240df3753b9b4dfb17292b17",
    "tests": 8,
    "skips": 0
   },
   "localization-p1-formalization-decision.test.mjs": {
-   "sha256": "fb7f2a57a36c6242d01afc9976d72819011f4d703475550ebf7a429aceebb574",
+   "sha256": "c9cd62aa3c48d401ead2421c9ce4108233c0dd87db6ce799a3a84b5b59b14497",
    "tests": 7,
    "skips": 0
   },
   "localization-po-approval-decision.test.mjs": {
-   "sha256": "7fd1181e1451faa98461f7e5453fa4f3469784912cbbc65cd76a4942f748c14b",
+   "sha256": "8489043b5c63a1241cb07acd5b215d8e3c6a15892595dfcc472c0dc24d60c6f7",
    "tests": 5,
    "skips": 0
   },
   "localization-review-policy-decision.test.mjs": {
-   "sha256": "1f009e37465baea8b7fe54d2f4878437259eb0c4a64c8cfa306d16fea518ffe5",
+   "sha256": "e949c4ee0bf37523c35fd4f886b67d3a98adad58930be55dfd550e00b3714b00",
    "tests": 5,
    "skips": 0
   },
+  "localization-u11-correction-decision.test.mjs": {
+   "sha256": "e4ada81f65516515ac6ca93472cc54d6ba9d9399991772954a33d4896b7ef238",
+   "tests": 6,
+   "skips": 0
+  },
   "localization-u4-u11-decision.test.mjs": {
-   "sha256": "ea47eb0284da0bc59461b51f8094faf61472894f240f5942eb7cda14c053aeb7",
+   "sha256": "fe5e575f13808975eb3a002945db67f0c24f751b9102e0c70629ba6f7a6e8e6e",
    "tests": 5,
    "skips": 0
   },
   "localization-u6-decision.test.mjs": {
-   "sha256": "eb37679f376f2993fc173440040ff425d423c341d57bc39134bed12892b4da6a",
+   "sha256": "a024cae9cd8fb314e8661cd28ababf6e3d835914c03a6f89fb140a5856ef3896",
    "tests": 5,
    "skips": 0
   },
@@ -650,7 +655,7 @@
    "skips": 0
   },
   "settings-unified-design-decision.test.mjs": {
-   "sha256": "45c8b82eb63401cc122e2ccf4658415c192a21429ae6d037406de9fb6bc595bb",
+   "sha256": "3090ccaab9dd0d0fbbbf34da02c36b3467bff97cf896c5152871b01b6b1b6d63",
    "tests": 11,
    "skips": 0
   },

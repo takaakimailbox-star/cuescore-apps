@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## CueScore Localization U11 Correction Decision Published（2026年10月17日）
+
+- PO承認（案P）に基づき、**Decision 039／Official 123（Decision）・124（Spec）／Decision Log v2.15**を発行した（文書のみ。Native・source・catalog は変更なし）。`CFBundleLocalizations`（ja, en, zh-Hans）をU11の許可範囲に含める（Official 121／122は履歴として保持）。
+- 経緯: 実装（d3874f5）が U11-R1／R2 の許可リストを超えたため P6 Preflight（Evidence 73）で **Official 整合性 FAIL（逸脱）**と記録。この記録は削除せず、本 Decision で許可範囲を訂正した。`-showBuildSettings` の前後比較で識別子の不変を確認済み。実機は NOT VERIFIED。
+- Freeデータ保全は Mac の暗号化フルバックアップを基本方針（単一アプリの復元保証ではない）。実機テストは別 Bundle ID の隔離アプリを優先。Build 84 上書き更新は引き続き別 Gate・BLOCKED。Glossary 27語は PO 最終承認待ち（Official 109 未発行）。
+
 ## CueScore i18n U4／U11 Implemented — Simulator Evidence Recorded（2026年10月17日）
 
 - **U4（Paywall・Settingsプランカード）を ja／en／zh-Hans に実装**（28キー追加、買い切り注記は事実のみの案B、価格は StoreKit の localizedPrice のまま、購入／復元／権限の挙動は不変、jaは変更前と一致）。AC-S1 の U4 リテラルは 0 件。
