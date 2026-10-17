@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## CueScore i18n P4 PO Approval Implemented（2026年10月17日）
+
+- Decision 037／Official 119・120／Decision Log v2.13 に基づき、PO承認を実装した。**P4-APPROVED は 1,335 キー**（AI検証済み1,322＋R3の9キー〔承認された訳へ修正済み、R3として保持〕＋U3注記1・U8共有シート3）。承認はキー単位で `[ja, en, zh-Hans]` のハッシュに結び付き（`tests/fixtures/p4/po-approval.json`）、残余リスク（R2 55・R3 9）を保持。**人間の独立レビューは実施されていない。P4-REVIEWED は 0**。用語11件はPO承認記録でCONFIRMED（残余リスク付き。中国語・JPAの一次資料はNOT VERIFIED）、他の用語はPENDING、**Official 109（Glossary）は未発行**。Official 108 AC-1（リリース候補）は**未達**。
+- 翻訳修正: 持ち点5キー（Target points／目标分）、JPAデッド3キー（zh 无效球）、14-1初回ブレイクファール（zh 首次开球犯规）、3 consecutive fouls、Foul (break passes to opponent)、Break and run表記統一。ja catalog・保存値・計算ロジックは不変。
+- U3: en／zh-Hans の Settings と法務表示に「法務ページは日本語のみ」の注記（ja UIは不変、法務ページ本体は未改変）。U8: 共有シートの title／text／dialogTitle のみ3言語化（Backup payload・ファイル名は不変）。Mainバッジ: 維持し長いPlayer名のみ省略（通常名の画面はバイト一致）。
+- **U4（Paywall）と U11（CFBundleDevelopmentRegion）は DECISION PENDING のまま**（購入条件の翻訳・Native設定変更は未承認）。P5実機最終受入・P6／P7・P3-⑥の残りは未完了。S-B（flag=false）、保存データ・QR・Backup・CSV・Analytics・Free／Pro・IAP・日本語UIは変更なし。
+
 ## CueScore Localization P4 PO Approval Decision Published（2026年10月17日）
 
 - Product Owner承認（P4 PO Final Decision Packageの推奨案を一括承認）に基づき、**Decision 037／Official 119（Decision）／Official 120（Spec）／Official Design Decision Log v2.13**を発行した（発行時点はDocumentation-only）。AI検証済み1,322キーを残余リスク付きで採用、R3の9キーは推奨訳へ修正して承認範囲との一致を検証後に承認、競技用語はPO承認記録で確定（残余リスク付き。**Official 109 Glossaryは未発行**）。U3は英語・中国語のUIのみ法務ページ日本語の注記、U8は共有シートの表示文言のみ翻訳、Mainバッジは維持し長いPlayer名のみ省略。**U4とU11は DECISION PENDING のまま**。人間の独立レビューは実施されていない。

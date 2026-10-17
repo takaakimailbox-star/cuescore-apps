@@ -4,6 +4,7 @@
 - Public Version / Build: Japan public catalog still reports `1.1 (79)`; Version `1.2 (84)` release executed and ASC is `READY_FOR_SALE`, public propagation pending
 - Current project Version / Build: `1.2 (84)`
 - Gate: `RELEASE EXECUTED / ASC READY_FOR_SALE / PUBLIC PROPAGATION PENDING`（Version 1.2 Build 84 release gate。変更なし）
+- Localization P4 Approval Gate: `CUESCORE I18N P4 PO APPROVAL IMPLEMENTED`（2026-10-17）。P4-APPROVED 1,335キー（人間の独立レビュー未実施・P4-REVIEWED 0・R2 55／R3 9保持）／用語11件 CONFIRMED（PO承認記録）・Official 109 未発行／U3 注記・U8 表示文言・Main バッジ実装済み／U4・U11 DECISION PENDING／Official 108 AC-1 未達（リリース候補ではない）。
 - Localization P4 PO Approval Gate: `CUESCORE I18N P4 — PO APPROVAL OFFICIAL DECISION PUBLISHED`（Decision 037 / Official 119・120 / Decision Log v2.13、2026-10-17）。翻訳承認範囲・用語（PO承認記録）・U3 注記・U8 表示文言・Main バッジの方針を記録／U4・U11 は DECISION PENDING／Official 109 未発行／人間の独立レビュー未実施／発行時点は Documentation-only。
 - Localization P4 QA Gate: `CUESCORE I18N — REVIEW POLICY / TRANSLATION QA / VISUAL SAFETY COMPLETE`（2026-10-17）。AI検証 `P4-AI-VERIFIED` 1,322／PO判断待ち 9／`P4-REVIEWED` 0／`P4-APPROVED` 0／人間の独立レビュー未実施／P5 CSS 最小修正／P3-⑥ A10 のみ整理（P3-⑥ は未完了）。
 - Localization P4 Review Policy Gate: `CUESCORE I18N P4 — REVIEW POLICY OFFICIAL DECISION PUBLISHED`（Decision 036 / Official 117・118 / Decision Log v2.12、2026-10-17）。外部の人間レビュアー不要・AI検証＋PO最終承認・新状態P4-AI-VERIFIED（P4-REVIEWEDの意味は不変）・人間の独立レビュー未実施を明記・U3/U4/U8/U11は DECISION PENDING 維持／Documentation-only。
