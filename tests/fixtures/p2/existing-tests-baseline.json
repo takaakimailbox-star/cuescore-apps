@@ -304,6 +304,11 @@
    "tests": 15,
    "skips": 0
   },
+  "ios-native-development-language.test.mjs": {
+   "sha256": "95d78fea763e1ed1bbc47cfda2fd1051669e0788b08c3270107135d767411b30",
+   "tests": 5,
+   "skips": 0
+  },
   "ios27-scene-lifecycle.test.mjs": {
    "sha256": "8d95e56706ff71c5fff648af09e825d8eeb72109333bb3921d7e825430746d79",
    "tests": 4,
