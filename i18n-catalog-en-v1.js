@@ -580,6 +580,7 @@
     "p3.619c8bbf": "Points/Inn {toFixed}",
     "p3.61a33b00": "{label} trend",
     "p3.61ad0584": {"one":"{safetyRate}% ({safetyTotal} time)","other":"{safetyRate}% ({safetyTotal} times)"},
+    "p3.61b05c7d": "Legal pages are currently available in Japanese only.",
     "p3.62505545": "Stats and device settings",
     "p3.627cb4ec": "Recent data",
     "p3.62843461": "Choose the data to delete. Regular data and sample data are handled separately.",

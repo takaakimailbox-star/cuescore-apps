@@ -472,17 +472,22 @@
    "skips": 0
   },
   "p4-ai-verification.test.mjs": {
-   "sha256": "b44c48fc0ec61d68c979a075abce985f46b1108e895431baa8e81d50a73788a9",
+   "sha256": "73e87e7239fbef569e9773895d14795803efebda7e27958c80f35a0230dd110b",
    "tests": 3,
    "skips": 0
   },
   "p4-manifest-completeness.test.mjs": {
-   "sha256": "0d5178b1ede2504d7fb6893453119a0baafba7c11ae6bee87879cb5fbb36541f",
+   "sha256": "7bb063eabb636454fb9d42fed82b0ca215d862579f011def517561c7a7d3d43e",
    "tests": 3,
    "skips": 0
   },
   "p4-po-translation-fixes.test.mjs": {
    "sha256": "f6dd34af68450d27bccf09b296385a421056fd0ba7fa2a7ebd44d6d90fbd1c7d",
+   "tests": 3,
+   "skips": 0
+  },
+  "p4-u3-legal-note.test.mjs": {
+   "sha256": "2731136a32fc6e82f33499b677b47eb165bd4e4a48f52c79547cdffc5a27955d",
    "tests": 3,
    "skips": 0
   },

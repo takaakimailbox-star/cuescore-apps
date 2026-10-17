@@ -26575,6 +26575,7 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
           <button class="settings-info-link-v1" type="button" data-cuescore-about><span>About CueScore</span><span class="settings-data-chevron-v1" aria-hidden="true">›</span></button>
           <button class="settings-info-link-v1" type="button" data-settings-legal="terms.html"><span>${window.cueT("settings.legal.terms")}</span><span class="settings-data-chevron-v1" aria-hidden="true">›</span></button>
           <button class="settings-info-link-v1" type="button" data-settings-legal="privacy.html"><span>${window.cueT("settings.legal.privacy")}</span><span class="settings-data-chevron-v1" aria-hidden="true">›</span></button>
+          ${window.CueScoreI18n && window.CueScoreI18n.language !== "ja" ? `<p class="settings-legal-note-v1">${window.cueT("p3.61b05c7d")}</p>` : ""}
         </section>
         <div class="settings-copyright-v1">© ${new Date().getFullYear()} CueScore Apps</div>
       </main>
@@ -26642,7 +26643,9 @@ html.cue-iphone-landscape-v1 body{overflow:hidden!important;overscroll-behavior:
       legalOverlayV165 = document.createElement("div");
       legalOverlayV165.className = "cue-legal-overlay-v65";
       legalOverlayV165.hidden = true;
-      legalOverlayV165.innerHTML = '<iframe class="cue-legal-frame-v65" title=""></iframe>';
+      const legalNoteV1 = window.CueScoreI18n && window.CueScoreI18n.language !== "ja";
+      legalOverlayV165.classList.toggle("has-note-v1", Boolean(legalNoteV1));
+      legalOverlayV165.innerHTML = (legalNoteV1 ? '<div class="cue-legal-note-v1" role="note">' + window.cueT("p3.61b05c7d") + '</div>' : "") + '<iframe class="cue-legal-frame-v65" title=""></iframe>';
       legalOverlayV165.querySelector("iframe").title = window.cueT("settings.legal.frameTitle");
       document.body.appendChild(legalOverlayV165);
       legalFrameV165 = legalOverlayV165.querySelector("iframe");
@@ -29340,6 +29343,12 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
 /* P5-1a: the Match Detail result-header name already declares overflow:hidden + ellipsis + nowrap, but as a flex item in a centered column it was sized to its
  * max-content width, so long names ran out of the card and overlapped. max-width:100% lets the declared ellipsis work; names that fit are unchanged. */
 .match-detail-result-name-v2{max-width:100%}
+/* U3 (legal pages are Japanese): caption in Settings and a thin note bar above the legal page. Rendered for en / zh-Hans only. */
+.settings-legal-note-v1{margin:0;padding:8px 17px 9px;border-top:1px solid var(--settings-line);color:#8d8d89;font-size:11px;line-height:1.4}
+.cue-legal-overlay-v65.has-note-v1{display:flex;flex-direction:column}
+.cue-legal-overlay-v65.has-note-v1[hidden]{display:none!important}
+.cue-legal-note-v1{flex:0 0 auto;padding:calc(env(safe-area-inset-top,0px) + 6px) 14px 6px;background:#f4f4f2;color:#555553;font-size:12px;line-height:1.35;text-align:center;border-bottom:1px solid #dededb}
+.cue-legal-overlay-v65.has-note-v1 .cue-legal-frame-v65{flex:1 1 auto;min-height:0;height:auto}
 </style>
 <script>
 // CueScore Analysis v2.0: conclusion-first player and single-match analysis.

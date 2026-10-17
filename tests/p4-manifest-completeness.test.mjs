@@ -19,7 +19,8 @@ test("manifest covers every catalog key exactly once (P3 keys + P1/P2 keys = all
   assert.equal(earlier.filter(k => k.startsWith("p3.")).length, 0, "earlierKeys holds no p3.* key");
   assert.equal(new Set([...p3, ...earlier]).size, p3.length + earlier.length, "no key is listed twice");
   assert.deepEqual([...p3, ...earlier].sort(), sorted(catalogs.ja));
-  assert.equal(p3.length + earlier.length, 1331);
+  const added = Object.values(manifest.keys).filter(e => e.addedBy).length; // keys added after the P4 manifest completion by PO-approved decisions (Decision 037: U3 note, U8 Share Sheet)
+  assert.equal(p3.length + earlier.length, 1331 + added);
   assert.equal(earlier.length, 90);
 });
 
