@@ -1,0 +1,62 @@
+import "./helpers/ja-fs.mjs";
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import test from "node:test";
+import zlib from "node:zlib";
+import crypto from "node:crypto";
+
+// Documentation consistency test for Decision 037 / Official 119 / Official 120 / Decision Log v2.13 (Localization P4 PO approval).
+const root = new URL("../", import.meta.url);
+const read = p => fs.readFileSync(new URL(p, root), "utf8");
+const sha16 = p => crypto.createHash("sha256").update(fs.readFileSync(new URL(p, root))).digest("hex").slice(0, 16);
+const D = "docs/official/119_CueScore_Localization_P4_PO_Approval_Decision.md", S = "docs/official/120_CueScore_Localization_P4_PO_Approval_Spec.md";
+const LOG = v => `docs/official/07_CueScore_Official_Design_Decision_Log_v${v}_Official_Release.docx`;
+function zipEntry(p, name) {
+  const b = fs.readFileSync(new URL(p, root)); let e = -1;
+  for (let i = b.length - 22; i >= 0; i--) if (b.readUInt32LE(i) === 0x06054b50) { e = i; break; }
+  const n = b.readUInt16LE(e + 10); let o = b.readUInt32LE(e + 16);
+  for (let k = 0; k < n; k++) {
+    const m = b.readUInt16LE(o + 10), c = b.readUInt32LE(o + 20), nl = b.readUInt16LE(o + 28), xl = b.readUInt16LE(o + 30), cl = b.readUInt16LE(o + 32), l = b.readUInt32LE(o + 42);
+    if (b.toString("utf8", o + 46, o + 46 + nl) === name) { const s = l + 30 + b.readUInt16LE(l + 26) + b.readUInt16LE(l + 28); const d = b.subarray(s, s + c); return (m === 0 ? d : zlib.inflateRawSync(d)).toString("utf8"); }
+    o += 46 + nl + xl + cl;
+  }
+  throw new Error(name);
+}
+const block = x => { const s = x.indexOf("Decision 001｜"), e = x.indexOf("時系列変更記録"); return x.slice(x.lastIndexOf("<w:p>", s), x.lastIndexOf("<w:p>", e)); };
+
+test("numbering: Decision 037 / Official 119 / 120 published once, 109 reserved and unpublished, highest Official number 120", () => {
+  const nums = fs.readdirSync(new URL("docs/official/", root)).filter(n => /^\d+_.*\.md$/.test(n)).map(n => Number(n.split("_")[0]));
+  for (const n of [107, 108, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120]) assert.equal(nums.filter(v => v === n).length, 1, String(n));
+  assert.ok(!nums.includes(109), "Official 109 (Glossary) stays reserved and unpublished");
+  assert.equal(Math.max(...nums), 120);
+  const t = zipEntry(LOG("2.13"), "word/document.xml").replace(/<[^>]+>/g, "");
+  assert.deepEqual([...t.matchAll(/Decision (\d{3})｜/g)].map(m => Number(m[1])), Array.from({ length: 37 }, (_, i) => i + 1));
+  assert.match(t, /Decision 037｜多言語化 P4 PO 承認の記録/);
+  assert.doesNotMatch(zipEntry(LOG("2.12"), "word/document.xml"), /Decision 037/);
+});
+test("v2.13 keeps Decision 001-036 byte-identical to v2.12", () => {
+  assert.ok(zipEntry(LOG("2.13"), "word/document.xml").includes(block(zipEntry(LOG("2.12"), "word/document.xml"))));
+});
+test("Official 107/108/110-118 are unchanged (content hash)", () => {
+  assert.equal(sha16("docs/official/107_CueScore_Localization_Decision.md"), "e274cec70e3f9789");
+  assert.equal(sha16("docs/official/108_CueScore_Localization_Spec.md"), "c86a48331d4780e0");
+  assert.equal(sha16("docs/official/112_CueScore_Dynamic_Type_Deferral_Decision.md"), "79bfe235c71a95ff");
+  assert.equal(sha16("docs/official/115_CueScore_Localization_U6_Dialog_Decision.md"), "3fab4d760dd0b9ff");
+  assert.equal(sha16("docs/official/116_CueScore_Localization_U6_Dialog_Spec.md"), "dde6d65ed2b54a78");
+  assert.equal(sha16("docs/official/117_CueScore_Localization_P4_Review_Policy_Decision.md"), "08626cf3efc934c2");
+  assert.equal(sha16("docs/official/118_CueScore_Localization_P4_Review_Policy_Spec.md"), "841efb2a883546b4");
+});
+test("Decision 037 records the approved scope, keeps U4/U11 pending and does not publish the Glossary", () => {
+  const d = read(D), sp = read(S);
+  for (const re of [/PD-P4A-A.*1,322 キー/, /R3 の 9 キー/, /U3.*注記/, /U8.*表示文言のみ/, /Main バッジ.*バッジを維持/, /U4・U11 は解決しない/, /U4（Paywall の法的／Apple 要件）と U11（`CFBundleDevelopmentRegion`）は DECISION PENDING のまま/, /人間の独立レビューは実施されていない/, /Official 109（Glossary）は発行しない/, /`P4-REVIEWED`（指名された人間レビュアーの確認）は付与しない/, /承認後に訳文が変わったキーは承認が無効/]) assert.match(d, re);
+  for (const re of [/Legal pages are currently available in Japanese only\./, /法律页面目前仅提供日语版本。/, /CueScore Apps Backup/, /保存备份/, /AC-P4A-8/, /ja UI の DOM・表示は不変/]) assert.match(sp, re);
+});
+test("SSOT and README record Decision 037; documentation-only (no product source mentions it)", () => {
+  assert.match(read("docs/README.md"), /official\/119_CueScore_Localization_P4_PO_Approval_Decision\.md/);
+  assert.match(read("docs/README.md"), /v2\.13 adds Decision 037/);
+  assert.doesNotMatch(read("docs/README.md"), /official\/109_/);
+  assert.match(read("docs/CURRENT_STATE.md"), /Localization P4 PO Approval Decision Published（2026年10月17日）/);
+  assert.match(read("docs/CURRENT_STATUS.md"), /PO APPROVAL OFFICIAL DECISION PUBLISHED/);
+  for (const n of ["index.html", "sw.js", "i18n-v1.js"]) assert.doesNotMatch(read(n), /Decision 03[67]/);
+  assert.doesNotMatch([D, S].map(read).join("\n"), /ghp_[A-Za-z0-9]{20}|PRIVATE KEY|takaaki\.mailbox/i);
+});

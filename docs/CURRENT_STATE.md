@@ -1,5 +1,10 @@
 # CueScore Apps Current State
 
+## CueScore Localization P4 PO Approval Decision Published（2026年10月17日）
+
+- Product Owner承認（P4 PO Final Decision Packageの推奨案を一括承認）に基づき、**Decision 037／Official 119（Decision）／Official 120（Spec）／Official Design Decision Log v2.13**を発行した（発行時点はDocumentation-only）。AI検証済み1,322キーを残余リスク付きで採用、R3の9キーは推奨訳へ修正して承認範囲との一致を検証後に承認、競技用語はPO承認記録で確定（残余リスク付き。**Official 109 Glossaryは未発行**）。U3は英語・中国語のUIのみ法務ページ日本語の注記、U8は共有シートの表示文言のみ翻訳、Mainバッジは維持し長いPlayer名のみ省略。**U4とU11は DECISION PENDING のまま**。人間の独立レビューは実施されていない。
+- Official 107／108／113〜118、Decision 001〜036、S-B（flag=false）、保存データ・QR・Backup・CSV・Analytics・Free／Pro・IAP、日本語UIは変更なし。
+
 ## CueScore i18n P4 Translation QA / P5 Visual Fix / P3-6 A10（2026年10月17日）
 
 - Decision 036／Official 117・118／Decision Log v2.12 に基づき、**全1,331キーをAIがキー単位で検証**した（検証者: AI。**人間の独立レビューは実施されていない**）。`P4-AI-VERIFIED` 1,322キー（残余リスク R0 714／R1 557／R2 51）、PO判断待ち 9キー（R3、`P3-PROVISIONAL`のまま）。`P4-REVIEWED`＝0、`P4-APPROVED`＝0。用語は一次資料（WPA）でenの一部を確認したのみで **CONFIRMED は 0**（中国語・JPA・High Run・Break and run・Dead Ball は NOT VERIFIED）。翻訳 catalog の修正は 14 キー（en 9・zh-Hans 5。意味2件・体裁12件）。ja catalog と日本語表示は不変。
