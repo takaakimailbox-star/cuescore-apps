@@ -481,6 +481,11 @@
    "tests": 3,
    "skips": 0
   },
+  "p4-po-translation-fixes.test.mjs": {
+   "sha256": "f6dd34af68450d27bccf09b296385a421056fd0ba7fa2a7ebd44d6d90fbd1c7d",
+   "tests": 3,
+   "skips": 0
+  },
   "p5-visual-fit.test.mjs": {
    "sha256": "36536a7316bd3854732c3ab7a90e63933b5fde94325dbf7c96c3e4a3cc9ec57b",
    "tests": 3,
