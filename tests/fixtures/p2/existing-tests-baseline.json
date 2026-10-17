@@ -457,7 +457,7 @@
    "skips": 0
   },
   "p3-ac-s1-literals.test.mjs": {
-   "sha256": "e787afa0bd69580156b03cca81fcc46eb4f6fe63fb8099922ead24c420d60026",
+   "sha256": "8c69c2fddfec1c55217374739ff9dfcf0623e97369db96b800b830791bb2132f",
    "tests": 4,
    "skips": 0
   },
@@ -488,6 +488,11 @@
   },
   "p4-u3-legal-note.test.mjs": {
    "sha256": "2731136a32fc6e82f33499b677b47eb165bd4e4a48f52c79547cdffc5a27955d",
+   "tests": 3,
+   "skips": 0
+  },
+  "p4-u8-share-sheet.test.mjs": {
+   "sha256": "2bb9fa765b47398c28a0c81481653e13b4442c91fc7f14db1944d1878582cab5",
    "tests": 3,
    "skips": 0
   },

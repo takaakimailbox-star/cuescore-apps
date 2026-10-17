@@ -1,5 +1,5 @@
 {
- "rule": "AC-S1: Japanese literals that may remain in product sources, each with its reason. CLOUD = Cloud Sync (hidden, out of scope AC-18); CSV = CSV contract (fixed Japanese); DOMAIN = canonical stored values; U4 = Paywall/purchase wording (Decision pending); U8 = Backup Share Sheet wording (Decision pending); LANGNAME = language names are never translated; META = meta description.",
+ "rule": "AC-S1: Japanese literals that may remain in product sources, each with its reason. CLOUD = Cloud Sync (hidden, out of scope AC-18); CSV = CSV contract (fixed Japanese); DOMAIN = canonical stored values; U4 = Paywall/purchase wording (Decision pending); U8 = Backup Share Sheet wording (resolved by Decision 037: no entries remain); LANGNAME = language names are never translated; META = meta description.",
  "entries": [
   {
    "file": "index.html",
@@ -2393,24 +2393,6 @@
    "file": "index.html",
    "reason": "U4",
    "text": "<span>クラウド同期：確認中</span></div></header>\n      <div class=\"analytics-controls-v1\"><div class=\"analytics-selector-v1\">\n        <div class=\"analytics-field-v1\"><label>",
-   "count": 1
-  },
-  {
-   "file": "index.html",
-   "reason": "U8",
-   "text": "CueScore Apps v1.0 バックアップ",
-   "count": 1
-  },
-  {
-   "file": "index.html",
-   "reason": "U8",
-   "text": "CueScore Apps バックアップ",
-   "count": 1
-  },
-  {
-   "file": "index.html",
-   "reason": "U8",
-   "text": "バックアップを保存",
    "count": 1
   },
   {
