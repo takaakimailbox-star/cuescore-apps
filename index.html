@@ -17168,7 +17168,7 @@ let matchRecordsRawCacheV152 = null;
         <div class="player-management-row-v1">
           <button class="player-hub-info-v3" type="button" data-stats-player="${player.id}" aria-label="${escapeRecordText(window.cueT("player.row.infoAria", {name: player.name}))}">
             <span class="player-management-avatar-v1">${playerAvatarHtmlV2(player,"player-avatar-v2")}</span>
-            <span class="player-management-copy-v2"><strong class="player-management-name-v1">${escapeRecordText(player.name)}${player.isPrimary ? `<span class="player-primary-badge-v1">${window.cueT("player.badge.primary")}</span>` : ""}</strong>${player.memo ? `<span class="player-management-memo-v2">${escapeRecordText(player.memo)}</span>` : ""}</span>
+            <span class="player-management-copy-v2"><strong class="player-management-name-v1"><span class="player-name-text-v1">${escapeRecordText(player.name)}</span>${player.isPrimary ? `<span class="player-primary-badge-v1">${window.cueT("player.badge.primary")}</span>` : ""}</strong>${player.memo ? `<span class="player-management-memo-v2">${escapeRecordText(player.memo)}</span>` : ""}</span>
           </button>
           <button class="player-hub-edit-v3" type="button" data-edit-player="${player.id}" aria-label="${escapeRecordText(window.cueT("player.row.editAria", {name: player.name}))}"><svg class="player-management-edit-v1" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h3.6L19 8.6 15.4 5 5 15.4Z"/><path d="m13.8 6.6 3.6 3.6"/></svg></button>
         </div>`).join("");
@@ -17187,7 +17187,7 @@ let matchRecordsRawCacheV152 = null;
       return `<div class="player-selection-row-v1${usedByOther ? " is-unavailable" : ""}">
         <button class="player-selection-button-v1" type="button" ${usedByOther ? "disabled" : `data-select-player="${p.id}"`} aria-label="${escapeRecordText(p.name)}${usedByOther ? window.cueT(`p3.721b96e3`,{otherPlayer:otherPlayer}) : selectedHere ? window.cueT("p3.e0af4259") : window.cueT("p3.21a0bf69")}">
           <span class="player-selection-avatar-v1">${playerAvatarHtmlV2(p,"player-avatar-v2")}</span>
-          <span class="player-selection-copy-v1"><span class="player-library-name-row"><span class="player-library-name">${escapeRecordText(p.name)}${p.isPrimary ? `<span class="player-primary-badge-v1">${window.cueT("p3.2a865a63")}</span>` : ""}</span>${status}</span>
+          <span class="player-selection-copy-v1"><span class="player-library-name-row"><span class="player-library-name"><span class="player-name-text-v1">${escapeRecordText(p.name)}</span>${p.isPrimary ? `<span class="player-primary-badge-v1">${window.cueT("p3.2a865a63")}</span>` : ""}</span>${status}</span>
           ${p.memo ? `<span class="player-selection-memo-v1">${escapeRecordText(p.memo)}</span>` : ""}<span class="player-library-meta">${window.cueT("p3.0cd1f195",{p:formatLastUsed(p.lastUsed)})}</span></span>
         </button>
       </div>`;
@@ -29349,6 +29349,14 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
 .cue-legal-overlay-v65.has-note-v1[hidden]{display:none!important}
 .cue-legal-note-v1{flex:0 0 auto;padding:calc(env(safe-area-inset-top,0px) + 6px) 14px 6px;background:#f4f4f2;color:#555553;font-size:12px;line-height:1.35;text-align:center;border-bottom:1px solid #dededb}
 .cue-legal-overlay-v65.has-note-v1 .cue-legal-frame-v65{flex:1 1 auto;min-height:0;height:auto}
+/* Main badge (P4 approval item F): keep the badge visible and ellipsize only a long player name. */
+.player-management-formal-v1 .player-management-copy-v2 .player-management-name-v1{display:flex!important;align-items:flex-start}
+.player-management-formal-v1 .player-management-copy-v2 .player-management-name-v1:has(.player-primary-badge-v1){min-height:19.3px}
+.player-selection-formal-v1 .player-library-name{display:flex;align-items:center}
+.player-name-text-v1{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.player-management-name-v1 .player-primary-badge-v1,.player-library-name .player-primary-badge-v1{flex:0 0 auto}
+.player-selection-formal-v1 .player-library-name .player-primary-badge-v1{position:relative;top:1.7px}
+.player-management-formal-v1 .player-management-copy-v2 .player-management-name-v1 .player-primary-badge-v1{top:0;margin-top:.2px}
 </style>
 <script>
 // CueScore Analysis v2.0: conclusion-first player and single-match analysis.

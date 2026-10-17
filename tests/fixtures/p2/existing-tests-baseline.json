@@ -476,6 +476,11 @@
    "tests": 3,
    "skips": 0
   },
+  "p4-main-badge.test.mjs": {
+   "sha256": "157525b10dfc174e6aac9e5a32b13fb559e552a0097ba30e81cdbe80a117cd23",
+   "tests": 4,
+   "skips": 0
+  },
   "p4-manifest-completeness.test.mjs": {
    "sha256": "7bb063eabb636454fb9d42fed82b0ca215d862579f011def517561c7a7d3d43e",
    "tests": 3,
