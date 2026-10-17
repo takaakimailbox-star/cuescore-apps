@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## CueScore i18n U4／U11 Implemented — Simulator Evidence Recorded（2026年10月17日）
+
+- **U4（Paywall・Settingsプランカード）を ja／en／zh-Hans に実装**（28キー追加、買い切り注記は事実のみの案B、価格は StoreKit の localizedPrice のまま、購入／復元／権限の挙動は不変、jaは変更前と一致）。AC-S1 の U4 リテラルは 0 件。
+- **U11（Native 開発言語 fallback）**: `CFBundleDevelopmentRegion=ja`＋`CFBundleLocalizations=[ja,en,zh-Hans]`（Info.plist／Info-ScoreRC.plist／project.pbxproj）。開発言語だけを ja にすると en／zh 端末の OS 表示まで ja になるため、3言語の宣言を併せた（隔離 Simulator の probe で、OS 解決言語が ja→ja／en→en／zh-Hans→zh-Hans／未対応→ja を確認）。Bundle ID・Product ID は不変。App Store の対応言語表示への影響は P7 で確認。
+- P5／P6 は隔離 Simulator と Web 層で記録（**実機は未検証、P5 全体 PASS は主張しない**）。Build 84 からの上書き更新は隔離 Simulator のリハーサルでデータ同一を確認（実機の更新は別 Gate）。Glossary は PENDING／CANDIDATE 27語を PO 判断資料に整理（新たな CONFIRMED なし、Official 109 未発行）。
+- 次: PO の確認（Glossary 27語、U11 の副作用、Free ユーザーの Backup 手段）→ P6 実機 Gate → P7。
+
 ## CueScore Localization U4/U11 Approval Decision Published（2026年10月17日）
 
 - Product Owner承認（U4／U11／P5・P6検証／Glossary資料）に基づき、**Decision 038／Official 121（Decision）／Official 122（Spec）／Official Design Decision Log v2.14**を発行した（文書のみ。製品コード・ASC・Native設定は本Decisionでは未変更）。

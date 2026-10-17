@@ -4,6 +4,7 @@
 - Public Version / Build: Japan public catalog still reports `1.1 (79)`; Version `1.2 (84)` release executed and ASC is `READY_FOR_SALE`, public propagation pending
 - Current project Version / Build: `1.2 (84)`
 - Gate: `RELEASE EXECUTED / ASC READY_FOR_SALE / PUBLIC PROPAGATION PENDING`（Version 1.2 Build 84 release gate。変更なし）
+- Localization U4/U11 Implementation: `CUESCORE I18N U4/U11 APPROVED SCOPE COMPLETE — SIMULATOR EVIDENCE RECORDED`（U4 Paywall 3言語、U11 開発言語 ja＋CFBundleLocalizations、2026-10-17）。実機・P5全体・P6・P7は未了。Glossary PO資料あり（Official 109未発行）。
 - Localization U4/U11 Approval Gate: `CUESCORE I18N U4/U11 — OFFICIAL DECISION PUBLISHED`（Decision 038 / Official 121・122 / Decision Log v2.14、2026-10-17）。文書のみ。U4翻訳・U11 Native fallback・P5/P6 Simulator検証は後続フェーズ。Official 109 未発行。
 - Localization P4 Approval Gate: `CUESCORE I18N P4 PO APPROVAL IMPLEMENTED`（2026-10-17）。P4-APPROVED 1,335キー（人間の独立レビュー未実施・P4-REVIEWED 0・R2 55／R3 9保持）／用語11件 CONFIRMED（PO承認記録）・Official 109 未発行／U3 注記・U8 表示文言・Main バッジ実装済み／U4・U11 DECISION PENDING／Official 108 AC-1 未達（リリース候補ではない）。
 - Localization P4 PO Approval Gate: `CUESCORE I18N P4 — PO APPROVAL OFFICIAL DECISION PUBLISHED`（Decision 037 / Official 119・120 / Decision Log v2.13、2026-10-17）。翻訳承認範囲・用語（PO承認記録）・U3 注記・U8 表示文言・Main バッジの方針を記録／U4・U11 は DECISION PENDING／Official 109 未発行／人間の独立レビュー未実施／発行時点は Documentation-only。
