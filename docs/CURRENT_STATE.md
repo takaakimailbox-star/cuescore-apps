@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## CueScore Native Camera Localization Implemented — Simulator Verified（2026年10月18日）
+
+- Decision 040／Official 125・126に基づき、`NSCameraUsageDescription`だけをja／en／zh-Hansの`InfoPlist.strings`へ実装し、App targetへlocalized resourceとして登録した。本番・Score RCのRelease Simulator Buildへ3言語resourceが含まれることを確認した。
+- 隔離iPhone 16e Simulator（iOS 26.5）で、OS言語ja／en／zh-Hansの許可説明と、未対応OS言語fr→日本語fallbackを実ダイアログでPASS。OSをjaのままアプリ起動言語だけenにした場合もpermission dialogはjaで、Web手動言語とOS permission言語の分離を確認した。
+- Full Node **1,145／1,145 PASS**、Production／Score RC Release Simulator Build PASS。U11の4値、Bundle ID、Team／署名設定、Version／Build、Camera／QR、保存schema、Data／QR、Free／Pro、IAP、S-B=falseは不変。実機Build/install・Apple操作なし。実機3言語ダイアログ、Build 84実機上書き、P7は未実施。
+
 ## CueScore Native Camera Localization Decision Published（2026年10月18日）
 
 - PO正式承認に基づき、**Decision 040／Official 125（Decision）・126（Spec）／Decision Log v2.16**を発行した。対象は `NSCameraUsageDescription` の ja／en／zh-Hans とXcode resource登録だけで、未対応OS言語は開発言語jaへfallbackする。OS言語とアプリ内手動言語は分離する。
