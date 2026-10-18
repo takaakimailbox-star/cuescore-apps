@@ -1,19 +1,24 @@
 # CueScore Current Report
 
 - App: CueScore Apps
-- Decision ID: `CUESCORE-I18N-GLOSSARY-25-TERMS-DECISION-041-20261018`
+- Decision ID: `CUESCORE-I18N-GLOSSARY-FINALIZATION-DECISION-042-20261018`
 - Date: 2026-10-18
-- Previous Decision（継続・変更なし）: `CUESCORE-I18N-NATIVE-CAMERA-DECISION-040-20261018`。既存系列: `CUESCORE-I18N-U11-CORRECTION-DECISION-039-20261017`、`CUESCORE-I18N-P1-SOURCE-FORMALIZED-20261013`、`CUESCORE-I18N-P1-FORMALIZATION-DECISION-034-20261013`、`CUESCORE-DYNAMIC-TYPE-DEFERRED-DECISION-20261012`、`CUESCORE-SETTINGS-UNIFIED-DESIGN-OFFICIAL-DECISION-20261012`、`CUESCORE-I18N-PHASE0-OFFICIAL-RELEASE-20261009`。
-- Baseline / External GitHub main（作業開始時）: `0ac0bd9d53576fd326c32be183c69a7658bb9786`
+- Previous Decision: `CUESCORE-I18N-GLOSSARY-25-TERMS-DECISION-041-20261018`
+- Preserved decision lineage: `CUESCORE-I18N-NATIVE-CAMERA-DECISION-040-20261018`、`CUESCORE-I18N-U11-CORRECTION-DECISION-039-20261017`、`CUESCORE-I18N-P1-FORMALIZATION-DECISION-034-20261013`、`CUESCORE-DYNAMIC-TYPE-DEFERRED-DECISION-20261012`、`CUESCORE-SETTINGS-UNIFIED-DESIGN-OFFICIAL-DECISION-20261012`、`CUESCORE-I18N-PHASE0-OFFICIAL-RELEASE-20261009`。
+- Baseline / External GitHub main（作業開始時）: `417d7f23f429f821517bf18cb74aa7d2a9aac886`
 - Product Source commit: 変更なし
-- Documentation Decision commit: 本文書を含むcommit SHAはEvidence 85に記録
-- Gate result: `CUESCORE I18N — GLOSSARY 25 TERMS FORMALIZED / G14-G25 DECISION PACKAGE`
+- Gate result: `CUESCORE I18N — GLOSSARY FORMALIZATION COMPLETE / P6 CLOSEOUT READINESS AUDITED`
 
 ## Result
-Decision 041／Official 127・128／Decision Log v2.17で、Evidence 84のG14／G25を除く25語をPO承認記録・残余リスク付きでCONFIRMEDとして正式化した。G14／G25はPENDING、Official 109は未発行。catalog／production sourceは変更していない。
+
+Decision 042／Official 109・129／Decision Log v2.18でGlossary 38語を正式固定した。CONFIRMED 38、PENDING 0、CANDIDATE 0。catalog／production source／Data・QRは不変。
+
+P6 AC全31項目はPASS 27／BLOCKED 1／NOT VERIFIED 3。VoiceOver実音声、Native/PWA言語解決全組合せ、実Pro/StoreKitは未完了であり、P6全体をPASSにしていない。Build 84配布binary同一性もNOT VERIFIED、上書き更新はBLOCKED。P7は未開始。
 
 ## Evidence
-`docs/implementation/CueScore_Localization_Glossary_25_Terms_Approval_Decision_041_Official_Release_2026-10-18.md`。G14／G25 Source AuditとPO判断資料は永続Evidenceへ保存する。
+
+`docs/implementation/CueScore_Localization_Glossary_Finalization_Decision_042_Official_Release_2026-10-18.md`および永続Evidence 86。
 
 ## Boundary / STOP
-NOT VERIFIED: 中国語公式競技用語集、JPA外部一次資料、人間の独立レビュー、G14／G25の最終訳。G14／G25の確定、Official 109、catalog／source変更、Device／Apple操作、P6 Closeout、P7は実施していない。
+
+Device Build/install、既存アプリ、Apple Developer、TestFlight／ASC／Release、Build 84上書き、P7には進まない。

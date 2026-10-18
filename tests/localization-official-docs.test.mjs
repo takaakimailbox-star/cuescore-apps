@@ -47,7 +47,7 @@ function readZipEntry(path, name) {
 
 const docxText = path => readZipEntry(path, "word/document.xml").replace(/<[^>]+>/g, "");
 
-test("Official document numbers 107 and 108 are published, unique and 109 is not created", () => {
+test("Official document numbers 107, 108 and final Glossary 109 are published uniquely", () => {
   assert.ok(exists(DECISION));
   assert.ok(exists(SPEC));
   const names = fs.readdirSync(new URL("docs/official/", root)).filter(name => /^\d+_.*\.md$/.test(name));
@@ -55,8 +55,8 @@ test("Official document numbers 107 and 108 are published, unique and 109 is not
   for (const number of [107, 108]) {
     assert.equal(numbers.filter(value => value === number).length, 1, `Official ${number} must be unique`);
   }
-  assert.ok(!numbers.includes(109), "Official 109 (Glossary) must not exist until the P4 review");
-  assert.ok(Math.max(...numbers) === 128, "highest Official md number must be 128 (127 / 128 = Glossary 25-term approval; 109 stays reserved)");
+  assert.equal(numbers.filter(value => value === 109).length, 1);
+  assert.equal(Math.max(...numbers), 129, "highest Official md number must be 129");
 });
 
 test("Decision Log v2.6 is preserved and v2.7 keeps Decision 001-030 byte-identical", () => {
@@ -129,31 +129,34 @@ test("Official 108 requirement identifiers resolve", () => {
   assert.doesNotMatch(spec, /Spec A|Contract E/);
 });
 
-test("README index lists Official 107 / 108 and Decision Log v2.7 and keeps the Glossary a Draft", () => {
+test("README index lists Official 107 / 108, Decision Log v2.18 and final Official 109", () => {
   const readme = read("docs/README.md");
-  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.17_Official_Release\.docx`/);
-  assert.match(readme, /Official Design Decision Log v2\.17 is the current official release and successor\s+to v2\.16/);
+  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.18_Official_Release\.docx`/);
+  assert.match(readme, /Official Design Decision Log v2\.18 is the current official release and successor\s+to v2\.16/);
   assert.match(readme, /- `official\/107_CueScore_Localization_Decision\.md`/);
   assert.match(readme, /- `official\/108_CueScore_Localization_Spec\.md`/);
-  assert.doesNotMatch(readme, /official\/109_/);
-  assert.match(readme, /proposals\/CueScore_Localization_Glossary_DRAFT_2026-10-08\.md/);
+  assert.match(readme, /official\/109_/);
+  assert.match(readme, /official\/109_CueScore_Localization_Glossary\.md/);
   for (const match of readme.matchAll(/`official\/(10[78]_[^`]+\.md)`/g)) {
     assert.ok(exists(`docs/official/${match[1]}`), `README references a missing file: ${match[1]}`);
   }
 });
 
-test("the full Glossary stays Draft while only the 25-term partial approval record is Official", () => {
+test("the historical Draft is preserved while the final Glossary is Official", () => {
   assert.ok(exists(GLOSSARY));
   const officialGlossaryFiles = fs.readdirSync(new URL("docs/official/", root)).filter(name => /Glossary/i.test(name));
   assert.deepEqual(officialGlossaryFiles.sort(), [
+    "109_CueScore_Localization_Glossary.md",
     "127_CueScore_Localization_Glossary_25_Terms_Approval_Decision.md",
     "128_CueScore_Localization_Glossary_25_Terms_Approval_Spec.md",
+    "129_CueScore_Localization_Glossary_Finalization_Decision.md",
   ]);
-  assert.ok(!fs.readdirSync(new URL("docs/official/", root)).some(name => /^109_/i.test(name)));
+  assert.equal(fs.readdirSync(new URL("docs/official/", root)).filter(name => /^109_/i.test(name)).length, 1);
   const glossary = read(GLOSSARY);
   assert.match(glossary, /\*\*Status:\*\* DRAFT/);
   assert.match(glossary, /Glossary Review Pending/);
   assert.match(glossary, /PENDING/);
+  assert.match(read("docs/official/109_CueScore_Localization_Glossary.md"), /`PENDING`: 0/);
   assert.match(read("docs/official/128_CueScore_Localization_Glossary_25_Terms_Approval_Spec.md"), /G14.*PENDING/s);
   assert.match(read("docs/official/128_CueScore_Localization_Glossary_25_Terms_Approval_Spec.md"), /G25.*PENDING/s);
 });

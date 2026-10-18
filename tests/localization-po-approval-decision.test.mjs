@@ -27,8 +27,8 @@ const block = x => { const s = x.indexOf("Decision 001｜"), e = x.indexOf("時�
 test("numbering: Decision 037 / Official 119 / 120 published once, 109 reserved and unpublished, highest Official number 120", () => {
   const nums = fs.readdirSync(new URL("docs/official/", root)).filter(n => /^\d+_.*\.md$/.test(n)).map(n => Number(n.split("_")[0]));
   for (const n of [107, 108, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120]) assert.equal(nums.filter(v => v === n).length, 1, String(n));
-  assert.ok(!nums.includes(109), "Official 109 (Glossary) stays reserved and unpublished");
-  assert.equal(Math.max(...nums), 128);
+  assert.equal(nums.filter(value => value === 109).length, 1);
+  assert.equal(Math.max(...nums), 129);
   const t = zipEntry(LOG("2.13"), "word/document.xml").replace(/<[^>]+>/g, "");
   assert.deepEqual([...t.matchAll(/Decision (\d{3})｜/g)].map(m => Number(m[1])), Array.from({ length: 37 }, (_, i) => i + 1));
   assert.match(t, /Decision 037｜多言語化 P4 PO 承認の記録/);
@@ -54,7 +54,7 @@ test("Decision 037 records the approved scope, keeps U4/U11 pending and does not
 test("SSOT and README record Decision 037; documentation-only (no product source mentions it)", () => {
   assert.match(read("docs/README.md"), /official\/119_CueScore_Localization_P4_PO_Approval_Decision\.md/);
   assert.match(read("docs/README.md"), /v2\.13 adds Decision 037/);
-  assert.doesNotMatch(read("docs/README.md"), /official\/109_/);
+  assert.match(read("docs/README.md"), /official\/109_/);
   assert.match(read("docs/CURRENT_STATE.md"), /Localization P4 PO Approval Decision Published（2026年10月17日）/);
   assert.match(read("docs/CURRENT_STATUS.md"), /PO APPROVAL OFFICIAL DECISION PUBLISHED/);
   for (const n of ["index.html", "sw.js", "i18n-v1.js"]) assert.doesNotMatch(read(n), /Decision 03[67]/);

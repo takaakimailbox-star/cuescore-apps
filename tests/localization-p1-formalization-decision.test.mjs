@@ -42,8 +42,8 @@ const decisionBlock = xml => { const s = xml.indexOf("Decision 001｜"), e = xml
 test("numbering: Decision 034 and Official 113 / 114 are published once; Official 109 stays reserved; highest Official number is 120", () => {
   const numbers = fs.readdirSync(new URL("docs/official/", root)).filter(name => /^\d+_.*\.md$/.test(name)).map(name => Number(name.split("_")[0]));
   for (const number of [107, 108, 110, 111, 112, 113, 114]) assert.equal(numbers.filter(value => value === number).length, 1, `Official ${number}`);
-  assert.ok(!numbers.includes(109), "Official 109 (Glossary) must not exist");
-  assert.equal(Math.max(...numbers), 128);
+  assert.equal(numbers.filter(value => value === 109).length, 1);
+  assert.equal(Math.max(...numbers), 129);
   assert.equal((docxText(LOG("2.10")).match(/Decision 034｜/g) || []).length, 1);
   assert.ok(!docxText(LOG("2.9")).includes("Decision 034"), "the preserved v2.9 must not contain Decision 034");
   assert.match(read(DECISION), /本書 = \*\*Decision 034\*\*/);
@@ -107,7 +107,7 @@ test("SSOT and README record Decision 034 consistently", () => {
   assert.match(readme, /official\/114_CueScore_Localization_P1_Acceptance_Spec\.md/);
   assert.match(readme, /v2\.10 adds Decision 034/);
   assert.match(readme, /v2\.9 adds Decision 033/);
-  assert.doesNotMatch(readme, /official\/109_/);
+  assert.match(readme, /official\/109_/);
   assert.match(state, /CueScore Localization P1 Formalization Decision Published（2026年10月13日）/);
   assert.match(status, /DECISION 034 OFFICIAL PUBLISHED \/ SOURCE FORMALIZATION PENDING/);
   assert.match(read("docs/handoff/CURRENT_DECISION.md"), /CUESCORE-I18N-P1-FORMALIZATION-DECISION-034-20261013/);

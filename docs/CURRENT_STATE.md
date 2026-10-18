@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## CueScore Localization Glossary Finalized / P6 Closeout Readiness Audited（2026年10月18日）
+
+- Product Owner承認に基づき、**Decision 042／Official 109・129／Decision Log v2.18**を発行。G14=`アベレージ / Average / 平均得分`（得点÷完了イニング数）、G25=`スポット / Spot / 置球点`（規定位置、操作はre-spot）をCONFIRMEDとした。
+- 既存11語＋G01〜G27の計38語を照合し、Glossaryは**CONFIRMED 38／PENDING 0／CANDIDATE 0**。中国語／JPA一次資料不足と人間の独立レビュー未実施はNOT VERIFIEDのまま。
+- P6 Closeout Readinessは**PASS 27／BLOCKED 1／NOT VERIFIED 3／FAIL 0／DEFERRED 0**（AC-1〜21＋AC-S1〜S10）。VoiceOver実音声、Native/PWA言語解決の全組合せ、実Pro/StoreKitが未完了。Pro限定Backup Share Sheet実機到達はBLOCKED。P6全体をPASSにしない。
+- Build 84 source再構成のQR双方向互換はPASSだが、配布済みbinary同一性はNOT VERIFIED、実機上書き更新はBLOCKED。catalog／production source／Data／QR／日本語表示／Analytics／Free・Pro契約は不変。
+
 ## CueScore Localization Glossary 25 Terms PO Approval Published（2026年10月18日）
 
 - Product Ownerの明示承認に基づき、**Decision 041／Official 127・128／Decision Log v2.17**を発行した。Evidence 84の27語からG14／G25を除く25語を、PO承認記録・残余リスク付きでCONFIRMEDとした。

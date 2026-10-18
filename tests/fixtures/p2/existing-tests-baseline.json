@@ -9,7 +9,7 @@
   },
   "analytics-build4-metrics.test.mjs": {
    "sha256": "186aec11f2d39a3f52853c8fa10373696bdbb6372b922251cc37401bd80a976f",
-   "tests": 27,
+   "tests": 29,
    "skips": 0
   },
   "analytics-build4-ui.test.mjs": {
@@ -19,7 +19,7 @@
   },
   "analytics-final-rc.test.mjs": {
    "sha256": "8fbd4e73412472f6fc726677c480fdb6c5c00c5cad5548634a0fa3f3f9360cb5",
-   "tests": 6,
+   "tests": 7,
    "skips": 0
   },
   "analytics-v1-scope-trend-axis.test.mjs": {
@@ -220,7 +220,7 @@
   },
   "cue-series-web.test.mjs": {
    "sha256": "ad3b95c01b4c1ad042ff52fc6aab6b5fa5556529ad78fd47de7e961a582eb548",
-   "tests": 4,
+   "tests": 5,
    "skips": 0
   },
   "delete-workflows.test.mjs": {
@@ -239,10 +239,11 @@
    "skips": 0
   },
   "dynamic-type-deferral-decision.test.mjs": {
-   "sha256": "b7800645e8c4604990a36ce36e4bcfe2345f9d22d3364259ff743837611fb16f",
-   "tests": 10,
+   "sha256": "5a9d7c9526c90f6df7922221748a91b1c63f48eb3a96fe587328d6284560ce77",
+   "tests": 14,
    "skips": 0,
-   "previousSha256": "9dcde7d05be9036d52259d1fd55cda59b0e209fc68ca83d38315b2ee1228e359"
+   "previousSha256": "b7800645e8c4604990a36ce36e4bcfe2345f9d22d3364259ff743837611fb16f",
+   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
   },
   "fa-iphone-003-phase3-initial-paint.test.mjs": {
    "sha256": "660816eed4011b0bcdd0a54325921f96ed6b6c1614361f7bd84b93174eb2622d",
@@ -296,7 +297,7 @@
   },
   "i18n-foundation-v1.test.mjs": {
    "sha256": "8689255c66a11e533d7c345ad1280e3ac7835570a225435167f0ba0a1d73c461",
-   "tests": 22,
+   "tests": 23,
    "skips": 0,
    "previousSha256": "ac8e92329319d09d1982a80d8447f7e15f483c828dd563ad86b3e1a2796678d0"
   },
@@ -312,7 +313,7 @@
   },
   "ios-native-development-language.test.mjs": {
    "sha256": "16a68519a1489d48541f2157956c2f5b5ca4653df4e39907a152a35a2e97c11a",
-   "tests": 5,
+   "tests": 7,
    "skips": 0,
    "previousSha256": "95d78fea763e1ed1bbc47cfda2fd1051669e0788b08c3270107135d767411b30"
   },
@@ -342,57 +343,73 @@
    "skips": 0
   },
   "localization-glossary-25-approval-decision.test.mjs": {
-   "sha256": "fa5bcb2aa84538b35cf690bc56f93f9554b2c6b2132dcb733fda801bdfcc135e",
-   "tests": 5,
-   "skips": 0
-  },
-  "localization-native-camera-decision.test.mjs": {
-   "sha256": "fe17cc4dd3a1594ff1c851851fb82da4e69d8e7ee43c56cc77750fa11159a9e6",
-   "tests": 4,
-   "skips": 0,
-   "previousSha256": "b2ac3e90a3e4f5914e8517e8d8c2a1cbca45b468db6236c88e5f4b3c318dc5ed"
-  },
-  "localization-official-docs.test.mjs": {
-   "sha256": "975f966f813e8f30d5cabb3a9c72dd6d207ed158256131314c9eed4603c6499d",
-   "tests": 8,
-   "skips": 0,
-   "previousSha256": "529a5043d3e9cd8e6132a1cd3e3939bef56c425c2b61f6edb0fa3f85bd65a491"
-  },
-  "localization-p1-formalization-decision.test.mjs": {
-   "sha256": "31114070562fac2ebb1e590f555031657544441cea590220447c80b236d3207c",
-   "tests": 7,
-   "skips": 0,
-   "previousSha256": "0928203433ec592f1ae6f0391ec3d54af0a4750b48ea05e31fffa413eb93aedd"
-  },
-  "localization-po-approval-decision.test.mjs": {
-   "sha256": "ee00c0abf55f3ba413ded82cc0b106e15beac9da1bbc8f4167b90d6a7e253b33",
-   "tests": 5,
-   "skips": 0,
-   "previousSha256": "9c3e8b500cb4d1aa22472d70cd560c17df41c67c4902dd383db3a76ef41f3801"
-  },
-  "localization-review-policy-decision.test.mjs": {
-   "sha256": "05f74bc24605a9495dd5d05dd62876ddc91387fa68b03ceab31c59f01a098f60",
-   "tests": 5,
-   "skips": 0,
-   "previousSha256": "9c31770423afef7c61928b6ef466e4603ebc74e22ec8cd3a6739279ec5de21d9"
-  },
-  "localization-u11-correction-decision.test.mjs": {
-   "sha256": "330ce7d092683e4b37d137e945cbad74413af4263b10f8857e9bc3d521dcf60b",
+   "sha256": "1ee5f41bc9e97115ebe57566e04db383b2cd9f02b1d301a1034eb3e4b00e2f5d",
    "tests": 6,
    "skips": 0,
-   "previousSha256": "4042a9b65916290f024b0f410487ab510fa1d8ce4c8ca0adae0bce121b1ce0f1"
+   "previousSha256": "fa5bcb2aa84538b35cf690bc56f93f9554b2c6b2132dcb733fda801bdfcc135e",
+   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+  },
+  "localization-glossary-finalization-decision.test.mjs": {
+   "sha256": "81210d7a300a6d2ae8a27559778202d7673576c990a27ae1278044bc4ae5e264",
+   "tests": 7,
+   "skips": 0,
+   "updated_in": "Decision 042 / new glossary finalization regression"
+  },
+  "localization-native-camera-decision.test.mjs": {
+   "sha256": "4cea0c4ef7066106b0b81268783c57f4b507f8dda1f282bad4a1add0ac4867e3",
+   "tests": 5,
+   "skips": 0,
+   "previousSha256": "fe17cc4dd3a1594ff1c851851fb82da4e69d8e7ee43c56cc77750fa11159a9e6",
+   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+  },
+  "localization-official-docs.test.mjs": {
+   "sha256": "1ee7f511ff469318fff3dcef662a7a113b409200dc77b603bb022fc4ecb7551f",
+   "tests": 11,
+   "skips": 0,
+   "previousSha256": "f55328d782f4b03afbdf9dcc9d13378ee0504c170d7a57efce9c682ca966f0ed",
+   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+  },
+  "localization-p1-formalization-decision.test.mjs": {
+   "sha256": "eea4ef540ef32bc726d9a492cd5a9ae2dc911ef2db862552ec64fae10ae6223d",
+   "tests": 8,
+   "skips": 0,
+   "previousSha256": "31114070562fac2ebb1e590f555031657544441cea590220447c80b236d3207c",
+   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+  },
+  "localization-po-approval-decision.test.mjs": {
+   "sha256": "427cac2151382f25d16f07dc08fc81a2e018f2bdb6ffb636292c4203a63a6052",
+   "tests": 6,
+   "skips": 0,
+   "previousSha256": "ee00c0abf55f3ba413ded82cc0b106e15beac9da1bbc8f4167b90d6a7e253b33",
+   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+  },
+  "localization-review-policy-decision.test.mjs": {
+   "sha256": "7a2aa6eb449e0453176fd5114a971e82287cedde4bf8f19922ed82b2acf2b6d6",
+   "tests": 6,
+   "skips": 0,
+   "previousSha256": "05f74bc24605a9495dd5d05dd62876ddc91387fa68b03ceab31c59f01a098f60",
+   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+  },
+  "localization-u11-correction-decision.test.mjs": {
+   "sha256": "f8e42967a809847645b940e244f63cbb7a76943a988860ef24f37e27e40db4cb",
+   "tests": 7,
+   "skips": 0,
+   "previousSha256": "330ce7d092683e4b37d137e945cbad74413af4263b10f8857e9bc3d521dcf60b",
+   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
   },
   "localization-u4-u11-decision.test.mjs": {
-   "sha256": "58f708918d3603dd4d0820357cf39199dafc6267f6ab8e68a2b06180f1cabd50",
-   "tests": 5,
+   "sha256": "029807e4954461db0d1f7a851a1de796c24385bdbeffcb99d0e4099413d2898e",
+   "tests": 6,
    "skips": 0,
-   "previousSha256": "4d01c1d51bedada3e0504967d7e0131885ed23589987a6d898b60dfc626dfc01"
+   "previousSha256": "58f708918d3603dd4d0820357cf39199dafc6267f6ab8e68a2b06180f1cabd50",
+   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
   },
   "localization-u6-decision.test.mjs": {
-   "sha256": "df823b71429322c450ea3992e6e04c6850d720a3c0349602a16a047649025968",
-   "tests": 5,
+   "sha256": "ed025bb62bba908400f7d5c8ac55c9a9d4c87dd6d06a5037e46bebe1f9302bf6",
+   "tests": 6,
    "skips": 0,
-   "previousSha256": "819e552d75e62704413a2f91fd3971285decf14275cb4e03522c5274b78dcecb"
+   "previousSha256": "df823b71429322c450ea3992e6e04c6850d720a3c0349602a16a047649025968",
+   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
   },
   "manual-turn-change-unification.test.mjs": {
    "sha256": "812ce70b927c7d996a1c019691a7d4c833d51de32d20e3e17710edf57ab548ff",
@@ -493,12 +510,12 @@
   },
   "p3-6-a10-openhistoricalrecord.test.mjs": {
    "sha256": "79a626157551fbfdf5e0407f996f99c5417deedc2e066f512679c2671630857a",
-   "tests": 3,
+   "tests": 6,
    "skips": 0
   },
   "p3-ac-s1-literals.test.mjs": {
    "sha256": "97fc85265396d379f6d3484c0d74df18089f9c22df8898a7cc150f7c6b4574c5",
-   "tests": 4,
+   "tests": 9,
    "skips": 0
   },
   "p3-ja-source.test.mjs": {
@@ -508,12 +525,12 @@
   },
   "p3-translation-catalog.test.mjs": {
    "sha256": "2d337aadd15c59bec7c016ec0a6d6555479a9c0aa8bcb7b15aa0585ba64850e9",
-   "tests": 6,
+   "tests": 10,
    "skips": 0
   },
   "p4-ai-verification.test.mjs": {
    "sha256": "73e87e7239fbef569e9773895d14795803efebda7e27958c80f35a0230dd110b",
-   "tests": 3,
+   "tests": 4,
    "skips": 0
   },
   "p4-main-badge.test.mjs": {
@@ -523,7 +540,7 @@
   },
   "p4-manifest-completeness.test.mjs": {
    "sha256": "7bb063eabb636454fb9d42fed82b0ca215d862579f011def517561c7a7d3d43e",
-   "tests": 3,
+   "tests": 4,
    "skips": 0
   },
   "p4-po-approval.test.mjs": {
@@ -543,17 +560,17 @@
   },
   "p4-u4-paywall.test.mjs": {
    "sha256": "d4730da9230b2f49b0579866dc6786477d15945d511e150af53af3377ae6cf2c",
-   "tests": 6,
+   "tests": 7,
    "skips": 0
   },
   "p4-u8-share-sheet.test.mjs": {
    "sha256": "2bb9fa765b47398c28a0c81481653e13b4442c91fc7f14db1944d1878582cab5",
-   "tests": 3,
+   "tests": 5,
    "skips": 0
   },
   "p5-visual-fit.test.mjs": {
    "sha256": "36536a7316bd3854732c3ab7a90e63933b5fde94325dbf7c96c3e4a3cc9ec57b",
-   "tests": 3,
+   "tests": 4,
    "skips": 0
   },
   "phase-b1-safe-cleanup.test.mjs": {
@@ -680,10 +697,11 @@
    "skips": 0
   },
   "settings-unified-design-decision.test.mjs": {
-   "sha256": "e130ab43fa34544db05641710e54417b2961ebe92f47eff330ce71f09e093b23",
-   "tests": 11,
+   "sha256": "ff0ec2fb453987c587f780dd14b74bb6b94b54a1c9dfe2f25fa34d74ef23575a",
+   "tests": 13,
    "skips": 0,
-   "previousSha256": "0e12af8fa0c5a3cd64b7da48248c1c6dde25e4f563143c533eaebf0038161baf"
+   "previousSha256": "e130ab43fa34544db05641710e54417b2961ebe92f47eff330ce71f09e093b23",
+   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
   },
   "settings-unified-design-implementation.test.mjs": {
    "sha256": "e5cbe571687a5b841ad799746324249a459fc27853d5e7c492963189636bfbf8",
@@ -725,6 +743,5 @@
    "tests": 0,
    "skips": 0
   }
- },
- "updated_by": "P2-1 (a841cbc baseline files changed only to read Domain constants / supply the global; assertions not weakened) | P2-2: i18n-foundation-v1 mapper label count 9->11 | P2-4: analysis-v2 and build18 source pins moved to the new internal-state forms"
+ }
 }

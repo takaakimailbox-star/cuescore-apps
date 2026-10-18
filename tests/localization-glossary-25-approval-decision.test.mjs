@@ -42,8 +42,8 @@ test("Decision 041 / Official 127-128 are uniquely published while Official 109 
     .filter(name => /^\d+_.*\.md$/.test(name))
     .map(name => Number(name.split("_")[0]));
   for (const number of [127, 128]) assert.equal(numbers.filter(value => value === number).length, 1, String(number));
-  assert.ok(!numbers.includes(109));
-  assert.equal(Math.max(...numbers), 128);
+  assert.equal(numbers.filter(value => value === 109).length, 1);
+  assert.equal(Math.max(...numbers), 129);
   const latest = docxText(LOG("2.17"));
   assert.deepEqual([...latest.matchAll(/Decision (\d{3})｜/g)].map(match => Number(match[1])), Array.from({ length: 41 }, (_, index) => index + 1));
   assert.match(latest, /Decision 041｜多言語化 Glossary 25語のPO承認記録/);
@@ -86,10 +86,10 @@ test("catalog, product source, P4 approval record and Data/QR source are byte-pr
   for (const [path, digest] of Object.entries(expected)) assert.equal(sha256(path), digest, path);
 });
 
-test("SSOT records v2.17 and the documentation contains no credential material", () => {
+test("SSOT preserves the Decision 041 record after v2.18 publication and contains no credential material", () => {
   const readme = read("docs/README.md");
-  assert.match(readme, /Decision_Log_v2\.17_Official_Release/);
-  assert.match(readme, /v2\.17 adds Decision 041/);
+  assert.match(readme, /Decision_Log_v2\.18_Official_Release/);
+  assert.match(readme, /Decision 041/);
   assert.match(read("docs/CURRENT_STATE.md"), /Glossary 25 Terms PO Approval Published/);
   assert.match(read("docs/CURRENT_STATUS.md"), /GLOSSARY 25 TERMS FORMALIZED/);
   assert.doesNotMatch(`${read(D)}\n${read(S)}`, /ghp_[A-Za-z0-9]{20}|PRIVATE KEY|takaaki\.mailbox/i);

@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.17_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.18_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -29,9 +29,9 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.17 is the current official release and successor
+Official Design Decision Log v2.18 is the current official release and successor
 to v2.16. Earlier versions remain in the official directory as preceding releases.
-v2.17 adds Decision 041 (Glossary 25-term PO approval record) and leaves Decisions 001〜040 unchanged.
+v2.18 adds Decision 042 (Glossary finalization and Official 109 publication) and leaves Decisions 001〜041 unchanged.
 v2.16 adds Decision 040 (Native camera permission localization) and leaves Decisions 001〜039 unchanged.
 v2.15 adds Decision 039 (Localization U11 correction) and leaves Decisions 001〜038 unchanged.
 v2.14 adds Decision 038 (Localization U4/U11 approval) and leaves Decisions 001〜037 unchanged.
@@ -162,7 +162,7 @@ CueScore Localization（3言語対応: ja / en / zh-Hans）status:
 - Phase 0 Official Specification Published（2026-10-09）: Decision 031 / Official 107 / Official 108 / Official Design Decision Log v2.7. Evidence: `implementation/CueScore_Localization_Phase0_Official_Release_2026-10-09.md`.
 - P1 Implementation: NOT STARTED. Localization Implementation: NOT STARTED. Product source: UNCHANGED. Version 1.2 Build 84 release state: unchanged.
 - Conditional specification (Official 108): saved-interrupted-match language switching (S-B) takes effect only after the P1 runtime proof (C1〜C6, T-SW-1〜10); NOT VERIFIED until then.
-- Glossary: DRAFT / PENDING. Official 109 is not created. The draft is kept outside `official/` at `proposals/CueScore_Localization_Glossary_DRAFT_2026-10-08.md` and is not an official specification.
+- Glossary: Official 109 published. 38 terms are CONFIRMED by PO approval record; PENDING/CANDIDATE are 0. Chinese/JPA primary-source gaps and human independent review remain NOT VERIFIED. The earlier proposal remains historical outside `official/`.
 - Open Decision Pending items: U3, U4, U6, U8, U9, U11 (see Official 108 §17).
 
 Settings Unified Design status:
@@ -304,3 +304,5 @@ An official-document update must:
 4. update this index in the same change;
 5. record affected decisions and implementation impact;
 6. avoid placing Draft or Release Candidate files in `official/`.
+- `official/109_CueScore_Localization_Glossary.md`
+- `official/129_CueScore_Localization_Glossary_Finalization_Decision.md`
