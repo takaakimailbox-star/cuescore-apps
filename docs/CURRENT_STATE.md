@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## CueScore Native Camera Localization Decision Published（2026年10月18日）
+
+- PO正式承認に基づき、**Decision 040／Official 125（Decision）・126（Spec）／Decision Log v2.16**を発行した。対象は `NSCameraUsageDescription` の ja／en／zh-Hans とXcode resource登録だけで、未対応OS言語は開発言語jaへfallbackする。OS言語とアプリ内手動言語は分離する。
+- Decision 039／Official 124との関係は限定的な後続例外として明記した。U11の4設定値、過去のOfficial整合性FAIL、実機NOT VERIFIEDは保持し、既存Officialは改変しない。
+- 本Decisionの発行commitはDocumentation-only。Native実装／Simulator検証は独立commit、実機Build/install・Build 84上書き・P7は別Gate。Glossary 27語は未承認、Official 109は未発行。
+
 ## CueScore Localization U11 Correction Decision Published（2026年10月17日）
 
 - PO承認（案P）に基づき、**Decision 039／Official 123（Decision）・124（Spec）／Decision Log v2.15**を発行した（文書のみ。Native・source・catalog は変更なし）。`CFBundleLocalizations`（ja, en, zh-Hans）をU11の許可範囲に含める（Official 121／122は履歴として保持）。

@@ -1,9 +1,10 @@
 # CueScore Current Status
 
-- Updated: 2026-10-17
+- Updated: 2026-10-18
 - Public Version / Build: Japan public catalog still reports `1.1 (79)`; Version `1.2 (84)` release executed and ASC is `READY_FOR_SALE`, public propagation pending
 - Current project Version / Build: `1.2 (84)`
 - Gate: `RELEASE EXECUTED / ASC READY_FOR_SALE / PUBLIC PROPAGATION PENDING`（Version 1.2 Build 84 release gate。変更なし）
+- Localization Native Camera Decision Gate: `CUESCORE I18N P6 NATIVE CAMERA LOCALIZATION FORMALIZED`（Decision 040 / Official 125・126 / Decision Log v2.16、2026-10-18）。本commitは文書のみ。`NSCameraUsageDescription` のja/en/zh-Hansと未対応OS言語→jaを承認。U11の4設定値と過去FAILは保持。Native実装／Simulator検証は独立commit、実機・Build 84上書き・P7は未了。
 - Localization U11 Correction Gate: `CUESCORE I18N U11 CORRECTION FORMALIZED`（Decision 039 / Official 123・124 / Decision Log v2.15、2026-10-17）。文書のみ。実機・P6・P7 は未了、Build 84 上書きは BLOCKED。
 - Localization U4/U11 Implementation: `CUESCORE I18N U4/U11 APPROVED SCOPE COMPLETE — SIMULATOR EVIDENCE RECORDED`（U4 Paywall 3言語、U11 開発言語 ja＋CFBundleLocalizations、2026-10-17）。実機・P5全体・P6・P7は未了。Glossary PO資料あり（Official 109未発行）。
 - Localization U4/U11 Approval Gate: `CUESCORE I18N U4/U11 — OFFICIAL DECISION PUBLISHED`（Decision 038 / Official 121・122 / Decision Log v2.14、2026-10-17）。文書のみ。U4翻訳・U11 Native fallback・P5/P6 Simulator検証は後続フェーズ。Official 109 未発行。
