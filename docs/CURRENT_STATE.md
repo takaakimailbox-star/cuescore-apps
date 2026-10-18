@@ -1,5 +1,11 @@
 # CueScore Apps Current State
 
+## CueScore Localization Glossary 25 Terms PO Approval Published（2026年10月18日）
+
+- Product Ownerの明示承認に基づき、**Decision 041／Official 127・128／Decision Log v2.17**を発行した。Evidence 84の27語からG14／G25を除く25語を、PO承認記録・残余リスク付きでCONFIRMEDとした。
+- G14（アベレージ／平均）とG25（スポット）はPENDINGを維持。人間の独立レビュー未実施、中国語公式用語集・JPA外部一次資料不足はNOT VERIFIEDのまま。Official 109は条件未達で未発行、Official 108 AC-1も未達。
+- Documentation-only。catalog、production source、ja表示、Data／QR／Backup、Analytics、Free／Pro、IAP、Native設定、Version／Buildは変更していない。G14／G25 Source AuditはEvidenceへ分離し、最終承認は別Gate。
+
 ## CueScore Native Camera Localization Implemented — Simulator Verified（2026年10月18日）
 
 - Decision 040／Official 125・126に基づき、`NSCameraUsageDescription`だけをja／en／zh-Hansの`InfoPlist.strings`へ実装し、App targetへlocalized resourceとして登録した。本番・Score RCのRelease Simulator Buildへ3言語resourceが含まれることを確認した。

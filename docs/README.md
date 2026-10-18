@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.16_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.17_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -29,8 +29,9 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.16 is the current official release and successor
-to v2.15. Earlier versions remain in the official directory as preceding releases.
+Official Design Decision Log v2.17 is the current official release and successor
+to v2.16. Earlier versions remain in the official directory as preceding releases.
+v2.17 adds Decision 041 (Glossary 25-term PO approval record) and leaves Decisions 001〜040 unchanged.
 v2.16 adds Decision 040 (Native camera permission localization) and leaves Decisions 001〜039 unchanged.
 v2.15 adds Decision 039 (Localization U11 correction) and leaves Decisions 001〜038 unchanged.
 v2.14 adds Decision 038 (Localization U4/U11 approval) and leaves Decisions 001〜037 unchanged.
@@ -153,6 +154,8 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 - `official/124_CueScore_Localization_U11_Correction_Spec.md`
 - `official/125_CueScore_Localization_Native_Camera_Decision.md`
 - `official/126_CueScore_Localization_Native_Camera_Spec.md`
+- `official/127_CueScore_Localization_Glossary_25_Terms_Approval_Decision.md`
+- `official/128_CueScore_Localization_Glossary_25_Terms_Approval_Spec.md`
 
 CueScore Localization（3言語対応: ja / en / zh-Hans）status:
 
@@ -182,6 +185,10 @@ Localization U11 correction status:
 Localization Native camera permission status:
 
 - Decision 040 / Official 125 / Official 126 / Official Design Decision Log v2.16 (published 2026-10-18). Product Owner approved `NSCameraUsageDescription` localization for ja/en/zh-Hans with unsupported OS languages falling back to ja, independently from the in-app manual language. Decision 039's four U11 settings and prior FAIL record remain unchanged; its lproj prohibition is superseded only for the three camera-purpose `InfoPlist.strings` resources. This publication commit is documentation-only; implementation and Simulator evidence are a separate commit.
+
+Localization Glossary 25-term approval status:
+
+- Decision 041 / Official 127 / Official 128 / Official Design Decision Log v2.17 (published 2026-10-18). Product Owner approved the 25 Evidence 84 terms other than G14 and G25. Those 25 are CONFIRMED by PO approval record with residual risks preserved; human independent review and missing Chinese/JPA primary sources remain NOT VERIFIED. G14 and G25 remain PENDING, Official 109 remains unpublished, and catalog/product source are unchanged.
 
 Localization U4/U11 approval status:
 

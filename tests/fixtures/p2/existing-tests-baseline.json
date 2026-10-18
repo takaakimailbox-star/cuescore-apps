@@ -239,10 +239,10 @@
    "skips": 0
   },
   "dynamic-type-deferral-decision.test.mjs": {
-   "sha256": "9dcde7d05be9036d52259d1fd55cda59b0e209fc68ca83d38315b2ee1228e359",
+   "sha256": "b7800645e8c4604990a36ce36e4bcfe2345f9d22d3364259ff743837611fb16f",
    "tests": 10,
    "skips": 0,
-   "previousSha256": "433588b9026f17349092f48cbdc60d68385552c91d670f2313c1425027b186e2"
+   "previousSha256": "9dcde7d05be9036d52259d1fd55cda59b0e209fc68ca83d38315b2ee1228e359"
   },
   "fa-iphone-003-phase3-initial-paint.test.mjs": {
    "sha256": "660816eed4011b0bcdd0a54325921f96ed6b6c1614361f7bd84b93174eb2622d",
@@ -341,52 +341,58 @@
    "tests": 2,
    "skips": 0
   },
-  "localization-native-camera-decision.test.mjs": {
-   "sha256": "b2ac3e90a3e4f5914e8517e8d8c2a1cbca45b468db6236c88e5f4b3c318dc5ed",
-   "tests": 4,
+  "localization-glossary-25-approval-decision.test.mjs": {
+   "sha256": "fa5bcb2aa84538b35cf690bc56f93f9554b2c6b2132dcb733fda801bdfcc135e",
+   "tests": 5,
    "skips": 0
   },
+  "localization-native-camera-decision.test.mjs": {
+   "sha256": "fe17cc4dd3a1594ff1c851851fb82da4e69d8e7ee43c56cc77750fa11159a9e6",
+   "tests": 4,
+   "skips": 0,
+   "previousSha256": "b2ac3e90a3e4f5914e8517e8d8c2a1cbca45b468db6236c88e5f4b3c318dc5ed"
+  },
   "localization-official-docs.test.mjs": {
-   "sha256": "529a5043d3e9cd8e6132a1cd3e3939bef56c425c2b61f6edb0fa3f85bd65a491",
+   "sha256": "975f966f813e8f30d5cabb3a9c72dd6d207ed158256131314c9eed4603c6499d",
    "tests": 8,
    "skips": 0,
-   "previousSha256": "4ffaf8e4996591dc288058ae7c003bec8842e597240df3753b9b4dfb17292b17"
+   "previousSha256": "529a5043d3e9cd8e6132a1cd3e3939bef56c425c2b61f6edb0fa3f85bd65a491"
   },
   "localization-p1-formalization-decision.test.mjs": {
-   "sha256": "0928203433ec592f1ae6f0391ec3d54af0a4750b48ea05e31fffa413eb93aedd",
+   "sha256": "31114070562fac2ebb1e590f555031657544441cea590220447c80b236d3207c",
    "tests": 7,
    "skips": 0,
-   "previousSha256": "c9cd62aa3c48d401ead2421c9ce4108233c0dd87db6ce799a3a84b5b59b14497"
+   "previousSha256": "0928203433ec592f1ae6f0391ec3d54af0a4750b48ea05e31fffa413eb93aedd"
   },
   "localization-po-approval-decision.test.mjs": {
-   "sha256": "9c3e8b500cb4d1aa22472d70cd560c17df41c67c4902dd383db3a76ef41f3801",
+   "sha256": "ee00c0abf55f3ba413ded82cc0b106e15beac9da1bbc8f4167b90d6a7e253b33",
    "tests": 5,
    "skips": 0,
-   "previousSha256": "8489043b5c63a1241cb07acd5b215d8e3c6a15892595dfcc472c0dc24d60c6f7"
+   "previousSha256": "9c3e8b500cb4d1aa22472d70cd560c17df41c67c4902dd383db3a76ef41f3801"
   },
   "localization-review-policy-decision.test.mjs": {
-   "sha256": "9c31770423afef7c61928b6ef466e4603ebc74e22ec8cd3a6739279ec5de21d9",
+   "sha256": "05f74bc24605a9495dd5d05dd62876ddc91387fa68b03ceab31c59f01a098f60",
    "tests": 5,
    "skips": 0,
-   "previousSha256": "e949c4ee0bf37523c35fd4f886b67d3a98adad58930be55dfd550e00b3714b00"
+   "previousSha256": "9c31770423afef7c61928b6ef466e4603ebc74e22ec8cd3a6739279ec5de21d9"
   },
   "localization-u11-correction-decision.test.mjs": {
-   "sha256": "4042a9b65916290f024b0f410487ab510fa1d8ce4c8ca0adae0bce121b1ce0f1",
+   "sha256": "330ce7d092683e4b37d137e945cbad74413af4263b10f8857e9bc3d521dcf60b",
    "tests": 6,
    "skips": 0,
-   "previousSha256": "e4ada81f65516515ac6ca93472cc54d6ba9d9399991772954a33d4896b7ef238"
+   "previousSha256": "4042a9b65916290f024b0f410487ab510fa1d8ce4c8ca0adae0bce121b1ce0f1"
   },
   "localization-u4-u11-decision.test.mjs": {
-   "sha256": "4d01c1d51bedada3e0504967d7e0131885ed23589987a6d898b60dfc626dfc01",
+   "sha256": "58f708918d3603dd4d0820357cf39199dafc6267f6ab8e68a2b06180f1cabd50",
    "tests": 5,
    "skips": 0,
-   "previousSha256": "fe5e575f13808975eb3a002945db67f0c24f751b9102e0c70629ba6f7a6e8e6e"
+   "previousSha256": "4d01c1d51bedada3e0504967d7e0131885ed23589987a6d898b60dfc626dfc01"
   },
   "localization-u6-decision.test.mjs": {
-   "sha256": "819e552d75e62704413a2f91fd3971285decf14275cb4e03522c5274b78dcecb",
+   "sha256": "df823b71429322c450ea3992e6e04c6850d720a3c0349602a16a047649025968",
    "tests": 5,
    "skips": 0,
-   "previousSha256": "a024cae9cd8fb314e8661cd28ababf6e3d835914c03a6f89fb140a5856ef3896"
+   "previousSha256": "819e552d75e62704413a2f91fd3971285decf14275cb4e03522c5274b78dcecb"
   },
   "manual-turn-change-unification.test.mjs": {
    "sha256": "812ce70b927c7d996a1c019691a7d4c833d51de32d20e3e17710edf57ab548ff",
@@ -674,10 +680,10 @@
    "skips": 0
   },
   "settings-unified-design-decision.test.mjs": {
-   "sha256": "0e12af8fa0c5a3cd64b7da48248c1c6dde25e4f563143c533eaebf0038161baf",
+   "sha256": "e130ab43fa34544db05641710e54417b2961ebe92f47eff330ce71f09e093b23",
    "tests": 11,
    "skips": 0,
-   "previousSha256": "3090ccaab9dd0d0fbbbf34da02c36b3467bff97cf896c5152871b01b6b1b6d63"
+   "previousSha256": "0e12af8fa0c5a3cd64b7da48248c1c6dde25e4f563143c533eaebf0038161baf"
   },
   "settings-unified-design-implementation.test.mjs": {
    "sha256": "e5cbe571687a5b841ad799746324249a459fc27853d5e7c492963189636bfbf8",

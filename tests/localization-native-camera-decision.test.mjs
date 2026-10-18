@@ -30,7 +30,7 @@ test("Decision 040 / Official 125 / 126 are uniquely published while Official 10
   const nums = fs.readdirSync(new URL("docs/official/", root)).filter(n => /^\d+_.*\.md$/.test(n)).map(n => Number(n.split("_")[0]));
   for (const n of [125, 126]) assert.equal(nums.filter(v => v === n).length, 1, String(n));
   assert.ok(!nums.includes(109));
-  assert.equal(Math.max(...nums), 126);
+  assert.equal(Math.max(...nums), 128);
   const text = docxText(LOG("2.16"));
   assert.deepEqual([...text.matchAll(/Decision (\d{3})｜/g)].map(m => Number(m[1])), Array.from({ length: 40 }, (_, i) => i + 1));
   assert.match(text, /Decision 040｜多言語化 Native カメラ許可文言/);
@@ -66,7 +66,7 @@ test("camera decision is narrow, keeps the U11 values and records the U11-R4 lim
 });
 
 test("SSOT points to Decision Log v2.16 and the Decision publication remains product-source-free", () => {
-  assert.match(read("docs/README.md"), /Decision_Log_v2\.16_Official_Release/);
+  assert.match(read("docs/README.md"), /Decision_Log_v2\.17_Official_Release/);
   assert.match(read("docs/README.md"), /v2\.16 adds Decision 040/);
   assert.match(read("docs/CURRENT_STATE.md"), /Native Camera Localization Decision Published/);
   assert.match(read("docs/CURRENT_STATUS.md"), /NATIVE CAMERA LOCALIZATION FORMALIZED/);

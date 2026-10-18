@@ -4,6 +4,7 @@
 - Public Version / Build: Japan public catalog still reports `1.1 (79)`; Version `1.2 (84)` release executed and ASC is `READY_FOR_SALE`, public propagation pending
 - Current project Version / Build: `1.2 (84)`
 - Gate: `RELEASE EXECUTED / ASC READY_FOR_SALE / PUBLIC PROPAGATION PENDING`（Version 1.2 Build 84 release gate。変更なし）
+- Localization Glossary 25 Terms Gate: `CUESCORE I18N GLOSSARY 25 TERMS FORMALIZED / G14-G25 PENDING`（Decision 041 / Official 127・128 / Decision Log v2.17、2026-10-18）。Evidence 84のG14・G25を除く25語をPO承認記録でCONFIRMED。人間の独立レビューと中国語／JPA一次資料不足はNOT VERIFIED。G14／G25はPENDING、Official 109未発行、catalog／source変更なし。
 - Localization Native Camera Gate: `CUESCORE I18N P6 NATIVE CAMERA LOCALIZATION FORMALIZED / SIMULATOR VERIFIED`（Decision 040 / Official 125・126 / Decision Log v2.16、2026-10-18）。`NSCameraUsageDescription`のja/en/zh-Hansを本番・Score RCへ実装。隔離iPhone 16e Simulatorの実ダイアログで3言語と未対応OS言語→jaをPASS。Full Node 1,145/1,145、両Release Simulator Build PASS。U11の4設定値と過去FAILは保持。実機・Build 84上書き・P7は未了。
 - Localization U11 Correction Gate: `CUESCORE I18N U11 CORRECTION FORMALIZED`（Decision 039 / Official 123・124 / Decision Log v2.15、2026-10-17）。文書のみ。実機・P6・P7 は未了、Build 84 上書きは BLOCKED。
 - Localization U4/U11 Implementation: `CUESCORE I18N U4/U11 APPROVED SCOPE COMPLETE — SIMULATOR EVIDENCE RECORDED`（U4 Paywall 3言語、U11 開発言語 ja＋CFBundleLocalizations、2026-10-17）。実機・P5全体・P6・P7は未了。Glossary PO資料あり（Official 109未発行）。

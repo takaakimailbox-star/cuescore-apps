@@ -1,17 +1,17 @@
 # CueScore Current Decision
 
-- Decision ID: `CUESCORE-I18N-NATIVE-CAMERA-DECISION-040-20261018`
+- Decision ID: `CUESCORE-I18N-GLOSSARY-25-TERMS-DECISION-041-20261018`
 - Date: 2026-10-18
-- Previous Decision（継続・変更なし）: `CUESCORE-I18N-U11-CORRECTION-DECISION-039-20261017`（Decision 039／Official 123・124）。既存系列: `CUESCORE-I18N-P1-SOURCE-FORMALIZED-20261013`、`CUESCORE-I18N-P1-FORMALIZATION-DECISION-034-20261013`、`CUESCORE-DYNAMIC-TYPE-DEFERRED-DECISION-20261012`、`CUESCORE-SETTINGS-UNIFIED-DESIGN-OFFICIAL-DECISION-20261012`、`CUESCORE-I18N-PHASE0-OFFICIAL-RELEASE-20261009`。
-- Gate: `CUESCORE I18N P6 — NATIVE CAMERA LOCALIZATION FORMALIZED / SIMULATOR VERIFIED`
+- Previous Decision（継続・変更なし）: `CUESCORE-I18N-NATIVE-CAMERA-DECISION-040-20261018`（Decision 040／Official 125・126）。既存系列: `CUESCORE-I18N-U11-CORRECTION-DECISION-039-20261017`、`CUESCORE-I18N-P1-SOURCE-FORMALIZED-20261013`、`CUESCORE-I18N-P1-FORMALIZATION-DECISION-034-20261013`、`CUESCORE-DYNAMIC-TYPE-DEFERRED-DECISION-20261012`、`CUESCORE-SETTINGS-UNIFIED-DESIGN-OFFICIAL-DECISION-20261012`、`CUESCORE-I18N-PHASE0-OFFICIAL-RELEASE-20261009`。
+- Gate: `CUESCORE I18N — GLOSSARY 25 TERMS FORMALIZED / G14-G25 DECISION PACKAGE`
 
 ## Product Owner Decision
-- 2026-10-18、`NSCameraUsageDescription` のja／en／zh-Hans対応、未対応OS言語のja fallback、OS言語とアプリ手動言語の分離を承認。Decision 040／Official 125・126の発行後、許可範囲内のNative実装とSimulator検証、独立commit、non-force pushを承認。実機Build/install、Build 84上書き、Apple操作、P7は未承認。
+- 2026-10-18、Evidence 84のGlossary 27語からG14／G25を除く25語を承認。G14／G25は未承認のままSource Auditを行い、Official 109は発行しない。Decision／承認記録のDocumentation-only commitとpushを承認。
 
 ## Result
-- Decision 040／Official 125・126／Decision Log v2.16をDocumentation-onlyで発行後、許可範囲内のNative resourceを独立commit `53bbcc361b01e23284d0a4086fd498323ccf35e9`で実装した。隔離Simulatorの実ダイアログはja／en／zh-Hansおよび未対応OS言語→ja fallbackをPASS。Decision 039の4設定値、過去FAIL記録、実機NOT VERIFIEDを保持した。
+- Decision 041／Official 127・128／Decision Log v2.17で25語のPO承認を正式記録。G14／G25はPENDING、Official 109は未発行。catalog／production sourceは変更しない。
 
 ## Boundary / STOP
-- 実機Build/install、既存アプリ上書き・削除、Build 84上書き、Apple Developer／ASC／TestFlight／Release、P7、Glossary確定は承認されていない。
-- NOT VERIFIED: 実機の3言語permissionダイアログ、Build 84更新互換、App Store対応言語表示。
-- U11の4値、Bundle ID、署名、Version／Build、Match／Snapshot schema、QR／Backup、IAP、Free／Pro、S-B=falseは変更しない。
+- G14／G25の最終承認、Official 109、catalog／source変更、P6 Closeout、P7は承認されていない。
+- NOT VERIFIED: 中国語公式競技用語集、JPA外部一次資料、人間の独立レビュー、G14／G25の最終訳。
+- Match／Snapshot schema、QR／Backup、Analytics、IAP、Free／Pro、S-B=falseは変更しない。

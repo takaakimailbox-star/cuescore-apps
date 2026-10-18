@@ -56,7 +56,7 @@ test("Official document numbers 107 and 108 are published, unique and 109 is not
     assert.equal(numbers.filter(value => value === number).length, 1, `Official ${number} must be unique`);
   }
   assert.ok(!numbers.includes(109), "Official 109 (Glossary) must not exist until the P4 review");
-  assert.ok(Math.max(...numbers) === 126, "highest Official md number must be 126 (125 / 126 = Native camera localization; 109 stays reserved)");
+  assert.ok(Math.max(...numbers) === 128, "highest Official md number must be 128 (127 / 128 = Glossary 25-term approval; 109 stays reserved)");
 });
 
 test("Decision Log v2.6 is preserved and v2.7 keeps Decision 001-030 byte-identical", () => {
@@ -131,8 +131,8 @@ test("Official 108 requirement identifiers resolve", () => {
 
 test("README index lists Official 107 / 108 and Decision Log v2.7 and keeps the Glossary a Draft", () => {
   const readme = read("docs/README.md");
-  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.16_Official_Release\.docx`/);
-  assert.match(readme, /Official Design Decision Log v2\.16 is the current official release and successor\s+to v2\.15/);
+  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.17_Official_Release\.docx`/);
+  assert.match(readme, /Official Design Decision Log v2\.17 is the current official release and successor\s+to v2\.16/);
   assert.match(readme, /- `official\/107_CueScore_Localization_Decision\.md`/);
   assert.match(readme, /- `official\/108_CueScore_Localization_Spec\.md`/);
   assert.doesNotMatch(readme, /official\/109_/);
@@ -142,13 +142,20 @@ test("README index lists Official 107 / 108 and Decision Log v2.7 and keeps the 
   }
 });
 
-test("Glossary stays a Draft outside docs/official", () => {
+test("the full Glossary stays Draft while only the 25-term partial approval record is Official", () => {
   assert.ok(exists(GLOSSARY));
-  assert.ok(!fs.readdirSync(new URL("docs/official/", root)).some(name => /Glossary/i.test(name)));
+  const officialGlossaryFiles = fs.readdirSync(new URL("docs/official/", root)).filter(name => /Glossary/i.test(name));
+  assert.deepEqual(officialGlossaryFiles.sort(), [
+    "127_CueScore_Localization_Glossary_25_Terms_Approval_Decision.md",
+    "128_CueScore_Localization_Glossary_25_Terms_Approval_Spec.md",
+  ]);
+  assert.ok(!fs.readdirSync(new URL("docs/official/", root)).some(name => /^109_/i.test(name)));
   const glossary = read(GLOSSARY);
   assert.match(glossary, /\*\*Status:\*\* DRAFT/);
   assert.match(glossary, /Glossary Review Pending/);
   assert.match(glossary, /PENDING/);
+  assert.match(read("docs/official/128_CueScore_Localization_Glossary_25_Terms_Approval_Spec.md"), /G14.*PENDING/s);
+  assert.match(read("docs/official/128_CueScore_Localization_Glossary_25_Terms_Approval_Spec.md"), /G25.*PENDING/s);
 });
 
 test("SSOT records the Localization Phase 0 state without removing the Build 84 release record", () => {
