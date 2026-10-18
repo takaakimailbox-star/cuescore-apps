@@ -5,7 +5,7 @@ import test from "node:test";
 
 // Decision 038 / Official 121 (U11): the Native development-language fallback is ja. CFBundleLocalizations keeps a device in en / zh-Hans on its own
 // language for OS-provided strings (verified in an isolated Simulator probe: Evidence 67); an unsupported language falls back to ja.
-// Bundle IDs and product identifiers are untouched; no lproj / InfoPlist.strings is added.
+// Bundle IDs and product identifiers are untouched. Decision 040 later adds only the three camera-purpose InfoPlist.strings resources.
 const root = new URL("../", import.meta.url);
 const read = p => fs.readFileSync(new URL(p, root), "utf8");
 const plists = ["ios/App/App/Info.plist", "ios/App/App/Info-ScoreRC.plist"];
@@ -24,7 +24,7 @@ test("project.pbxproj development region is ja and the known regions cover ja / 
   assert.match(s, /knownRegions = \(\s*ja,\s*en,\s*"zh-Hans",\s*Base,\s*\);/);
   assert.doesNotMatch(s, /developmentRegion = en;/);
 });
-test("Bundle IDs and the StoreKit product identifier are unchanged; no new lproj / strings", () => {
+test("Bundle IDs and the StoreKit product identifier are unchanged; only Decision 040 camera lproj resources exist", () => {
   const pb = read("ios/App/App.xcodeproj/project.pbxproj");
   const ids = [...pb.matchAll(/PRODUCT_BUNDLE_IDENTIFIER = ([^;]+);/g)].map(m => m[1]).sort();
   assert.deepEqual(ids, ["com.takaakimailboxstar.cuescoreapps", "com.takaakimailboxstar.cuescoreapps", "com.takaakimailboxstar.cuescoreapps.storekittests", "com.takaakimailboxstar.cuescoreapps.storekittests", "com.takaakimailboxstar.cuescoreapps.storekituitests", "com.takaakimailboxstar.cuescoreapps.storekituitests"]);
@@ -32,7 +32,7 @@ test("Bundle IDs and the StoreKit product identifier are unchanged; no new lproj
   for (const p of plists) assert.match(read(p), /<key>CFBundleIdentifier<\/key>\s*<string>\$\(PRODUCT_BUNDLE_IDENTIFIER\)<\/string>/);
   assert.match(read("monetization-v1.js"), /com\.takaakimailboxstar\.cuescoreapps\.pro/);
   const found = []; (function walk(d) { for (const e of fs.readdirSync(new URL(d, root), { withFileTypes: true })) { if (e.name === "node_modules" || e.name === "public") continue; const p = d + e.name; if (e.isDirectory()) { if (/\.lproj$/.test(e.name)) found.push(p); walk(p + "/"); } else if (/\.strings$/.test(e.name)) found.push(p); } })("ios/App/");
-  assert.deepEqual(found, ["ios/App/App/Base.lproj"]);
+  assert.deepEqual(found, ["ios/App/App/Base.lproj", "ios/App/App/en.lproj", "ios/App/App/en.lproj/InfoPlist.strings", "ios/App/App/ja.lproj", "ios/App/App/ja.lproj/InfoPlist.strings", "ios/App/App/zh-Hans.lproj", "ios/App/App/zh-Hans.lproj/InfoPlist.strings"]);
 });
 test("Info.plist and Info-ScoreRC.plist differ only in the display name (and whitespace)", () => {
   const norm = s => s.replace(/\s+/g, " ").replace(/<key>CFBundleDisplayName<\/key> <string>[^<]*<\/string>/, "");

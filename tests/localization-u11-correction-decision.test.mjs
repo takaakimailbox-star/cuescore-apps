@@ -41,7 +41,7 @@ test("AC-U11C-4: Official 121 / 122 are kept as history (content hash unchanged)
   assert.equal(sha16("docs/official/121_CueScore_Localization_U4_U11_Approval_Decision.md"), "e536db9481d9493b");
   assert.equal(sha16("docs/official/122_CueScore_Localization_U4_U11_Approval_Spec.md"), "06ef7b0d94fe7254");
 });
-test("AC-U11C-1/6: the implemented native settings equal the permitted values; no lproj / strings added", () => {
+test("AC-U11C-1: the implemented U11 native settings remain equal to Decision 039; later camera resources are governed by Decision 040", () => {
   for (const p of ["ios/App/App/Info.plist", "ios/App/App/Info-ScoreRC.plist"]) {
     const s = read(p);
     assert.match(s, /<key>CFBundleDevelopmentRegion<\/key>\s*<string>ja<\/string>/);
@@ -53,6 +53,7 @@ test("AC-U11C-1/6: the implemented native settings equal the permitted values; n
   const d = read(D), sp = read(S);
   for (const re of [/CFBundleLocalizations/, /訂正の経緯/, /FAIL/, /案 P/, /暗号化フルバックアップ/, /上書き許可ではない/]) assert.match(d, re);
   for (const re of [/U11-R1′/, /AC-U11C-1/, /knownRegions/, /lproj/]) assert.match(sp, re);
+  assert.match(read("docs/official/125_CueScore_Localization_Native_Camera_Decision.md"), /U11-R4.*限定例外/s);
 });
 test("AC-U11C-5: the earlier Official-consistency FAIL record is kept in the Decision and the SSOT", () => {
   assert.match(read(D), /この FAIL 記録は削除せず/);

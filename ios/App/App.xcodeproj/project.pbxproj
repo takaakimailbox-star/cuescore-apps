@@ -23,6 +23,7 @@
 		C5C100042E6A000100000001 /* CueScore.storekit in Resources */ = {isa = PBXBuildFile; fileRef = C5C001052E6A000100000001 /* CueScore.storekit */; };
 		C5C200032E6A000100000001 /* CueScoreStoreKitLocalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C200012E6A000100000001 /* CueScoreStoreKitLocalUITests.swift */; };
 		C5C200042E6A000100000001 /* CueScore.storekit in Resources */ = {isa = PBXBuildFile; fileRef = C5C001052E6A000100000001 /* CueScore.storekit */; };
+		C5C600052E6A000100000001 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C5C600042E6A000100000001 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,9 @@
 		C5C100022E6A000100000001 /* CueScoreStoreKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CueScoreStoreKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5C200012E6A000100000001 /* CueScoreStoreKitLocalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CueScoreStoreKitLocalUITests.swift; sourceTree = "<group>"; };
 		C5C200022E6A000100000001 /* CueScoreStoreKitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CueScoreStoreKitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5C600012E6A000100000001 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C5C600022E6A000100000001 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C5C600032E6A000100000001 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +128,7 @@
 				504EC30B1FED79650016851F /* Main.storyboard */,
 				504EC30E1FED79650016851F /* Assets.xcassets */,
 				504EC3101FED79650016851F /* LaunchScreen.storyboard */,
+				C5C600042E6A000100000001 /* InfoPlist.strings */,
 				504EC3131FED79650016851F /* Info.plist */,
 				2FAD9762203C412B000D30F8 /* config.xml */,
 				50B271D01FEDC1A000F3C39B /* public */,
@@ -267,6 +272,7 @@
 				50379B232058CBB4000EE86E /* capacitor.config.json in Resources */,
 				504EC30D1FED79650016851F /* Main.storyboard in Resources */,
 				2FAD9763203C412B000D30F8 /* config.xml in Resources */,
+				C5C600052E6A000100000001 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +293,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C5C600042E6A000100000001 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C5C600012E6A000100000001 /* ja */,
+				C5C600022E6A000100000001 /* en */,
+				C5C600032E6A000100000001 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin PBXSourcesBuildPhase section */
 		504EC3001FED79650016851F /* Sources */ = {
