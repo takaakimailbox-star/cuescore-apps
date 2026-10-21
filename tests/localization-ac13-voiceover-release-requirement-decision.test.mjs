@@ -46,7 +46,7 @@ test("Decision 043 and Official 130 are unique and Decision Log v2.19 is current
   const names = fs.readdirSync(new URL("docs/official/", root)).filter(name => /^\d+_.*\.md$/.test(name));
   const numbers = names.map(name => Number(name.split("_")[0]));
   assert.equal(numbers.filter(value => value === 130).length, 1);
-  assert.equal(Math.max(...numbers), 130);
+  assert.equal(Math.max(...numbers), 131);
   assert.match(decision, /Decision 043/);
   assert.match(decision, /Official 130/);
   assert.match(decision, /Decision Log.*v2\.19/);

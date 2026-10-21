@@ -4,6 +4,7 @@
 - Public Version / Build: Japan public catalog still reports `1.1 (79)`; Version `1.2 (84)` release executed and ASC is `READY_FOR_SALE`, public propagation pending
 - Current project Version / Build: `1.2 (84)`
 - Gate: `RELEASE EXECUTED / ASC READY_FOR_SALE / PUBLIC PROPAGATION PENDING`（Version 1.2 Build 84 release gate。変更なし）
+- Localization iOS First-Entry Language List Gate: `CUESCORE I18N iOS FIRST-ENTRY LANGUAGE LIST NOTED / DOCUMENTATION ONLY`（Decision 044 / Official 131 / Decision Log v2.20）。観測環境でnavigator.languagesが先頭1要素のみである旨の注記。resolver期待値・実装・Native・catalogは不変。P6全体PASS・P7は宣言しない。
 - Localization AC-13 VoiceOver Gate: `CUESCORE I18N AC-13 VOICEOVER RELEASE REQUIREMENT REVISED / DOCUMENTATION ONLY`（Decision 043 / Official 108 v1.1・130 / Decision Log v2.19、2026-10-21）。VoiceOver実音声聴取のみP5／P6／リリース必須条件から除外。AC-13番号と31項目、静的／DOM・翻訳・`lang`・動的文言・フォーカス要件、既存アクセシビリティ実装は維持。直前台帳への限定適用はPASS 28／BLOCKED 1／NOT VERIFIED 2／FAIL 0／DEFERRED 0。P6全体PASS・P7未開始。
 - Localization Glossary Finalization Gate: `CUESCORE I18N GLOSSARY FORMALIZATION COMPLETE / P6 CLOSEOUT READINESS AUDITED`（Decision 042 / Official 109・129 / Decision Log v2.18、2026-10-18）。Glossary 38語はCONFIRMED、PENDING/CANDIDATE 0。中国語/JPA一次資料と人間独立レビューはNOT VERIFIED。P6 AC全31項目はPASS 27／BLOCKED 1／NOT VERIFIED 3／FAIL 0／DEFERRED 0で、P6全体はPASSにしていない。P7未開始。
 - Previous Localization Glossary 25 Terms Gate: `CUESCORE I18N GLOSSARY 25 TERMS FORMALIZED / G14-G25 DECISION PACKAGE`（Decision 041 / Official 127・128 / Decision Log v2.17、2026-10-18）。25語承認時点の履歴であり、G14／G25のPENDING状態はDecision 042で後続更新済み。

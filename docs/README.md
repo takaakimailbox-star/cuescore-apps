@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.19_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.20_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -29,8 +29,9 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.19 is the current official release and successor
-to v2.18. Earlier versions remain in the official directory as preceding releases.
+Official Design Decision Log v2.20 is the current official release and successor
+to v2.19. Earlier versions remain in the official directory as preceding releases.
+v2.20 adds Decision 044 (iOS first-entry navigator.languages note) and leaves Decisions 001〜043 unchanged.
 v2.19 adds Decision 043 (Official 108 AC-13 VoiceOver release requirement revision) and leaves Decisions 001〜042 unchanged.
 v2.18 adds Decision 042 (Glossary finalization and Official 109 publication) and leaves Decisions 001〜041 unchanged.
 v2.16 adds Decision 040 (Native camera permission localization) and leaves Decisions 001〜039 unchanged.
@@ -308,3 +309,4 @@ An official-document update must:
 - `official/109_CueScore_Localization_Glossary.md`
 - `official/129_CueScore_Localization_Glossary_Finalization_Decision.md`
 - `official/130_CueScore_Localization_AC13_VoiceOver_Release_Requirement_Decision.md`
+- `official/131_CueScore_Localization_iOS_First_Entry_Language_List_Decision.md`

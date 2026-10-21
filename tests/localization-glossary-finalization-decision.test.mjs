@@ -14,7 +14,7 @@ test("Decision 042 publishes Official 109 and 129 exactly once", () => {
   const numbers = fs.readdirSync(new URL("docs/official/", root)).filter(name => /^\d+_.*\.md$/.test(name)).map(name => Number(name.split("_")[0]));
   assert.equal(numbers.filter(value => value === 109).length, 1);
   assert.equal(numbers.filter(value => value === 129).length, 1);
-  assert.equal(Math.max(...numbers), 130);
+  assert.equal(Math.max(...numbers), 131);
   assert.match(decision, /Decision 042/);
   assert.match(decision, /v2\.18/);
 });

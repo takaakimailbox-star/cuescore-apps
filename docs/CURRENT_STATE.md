@@ -1,5 +1,10 @@
 # CueScore Apps Current State
 
+## CueScore Localization iOS First-Entry Language List Noted（2026-10-21）
+
+- Product Ownerの明示承認に基づき、**Decision 044／Official 131／Decision Log v2.20**を発行（Documentation-onlyと追加の単体テストのみ）。観測した環境（実機iPhone 16e iOS 26.6.2のMobile Safari、iOS 26.5 SimulatorのWKWebView）で`navigator.languages`が先頭1要素のみ返ることを、Official 108のresolver期待値に**注記**した。全iOSバージョンでの保証ではない。
+- resolverの複数言語入力の期待値、resolver、保存言語、手動選択の優先、S-B=false、翻訳catalog、production source、Nativeは変更しない。Nativeブリッジは追加しない。P6全体PASS・P7は宣言しない。
+
 ## CueScore Localization AC 13 VoiceOver Release Requirement Revised（2026年10月21日）
 
 - Product Ownerの明示承認に基づき、**Decision 043／Official 108 v1.1・130／Decision Log v2.19**を発行。AC-13のVoiceOver実音声聴取だけをP5／P6／リリース必須条件から外し、推奨の非ブロッキング確認とした。

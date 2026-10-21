@@ -1,0 +1,96 @@
+{
+  "decision": "Decision 044 / Official 131",
+  "scope": "Documentation assertions and additive tests only; no production, Native, StoreKit, catalog, resolver, or runtime behavior change",
+  "changes": [
+    {
+      "file": "dynamic-type-deferral-decision.test.mjs",
+      "beforeSha256": "b702fd38d68a9592196e59db8d7f7f5554833fec91c05e698549acb482d4b5c4",
+      "afterSha256": "e1c2828bd56af3d7a23fa03c5e8ffd74153fbc96006d306e5e252fe45602ea35",
+      "reason": "Advance latest Official and Decision Log assertions to Official 131 / v2.20 while retaining the existing checks"
+    },
+    {
+      "file": "localization-glossary-finalization-decision.test.mjs",
+      "beforeSha256": "139b50ebf12bdb298d7711efa60df73c0693cce6eb9752cfa2a1d556c521012c",
+      "afterSha256": "f081df2cca075a6af175bf13834eae539f1149f5015e0b2848b776b7ef8b8335",
+      "reason": "Advance latest Official and Decision Log assertions to Official 131 / v2.20 while retaining the existing checks"
+    },
+    {
+      "file": "localization-glossary-25-approval-decision.test.mjs",
+      "beforeSha256": "359a13c1d84d7e17b1b72ae811f2f7be1d459c2f2e5f67e88ace8ba3ae4abcda",
+      "afterSha256": "70c2ef1f0cb917ef079b4d56b9e06f1143d2fdcc68700c720e32d7e1d480b3fe",
+      "reason": "Advance latest Official and Decision Log assertions to Official 131 / v2.20 while retaining the existing checks"
+    },
+    {
+      "file": "localization-p1-formalization-decision.test.mjs",
+      "beforeSha256": "a40e47cd0902ba345cd367e5c1df731dff82a7647b585b0b9f9d81cca9f7731f",
+      "afterSha256": "82e7901e1e1252825ba234d8569f7d4a8acac4827b391ed6e145190c985b81ec",
+      "reason": "Advance latest Official and Decision Log assertions to Official 131 / v2.20 while retaining the existing checks"
+    },
+    {
+      "file": "settings-unified-design-decision.test.mjs",
+      "beforeSha256": "96500058339e7c941a801439090ec579aff310ac72624c1136d94ee2f66264c6",
+      "afterSha256": "56b6ec04e2ce66707182f192d47a7ac559ddfa2cb7f254a00891baf5f6dd4ba5",
+      "reason": "Advance latest Official and Decision Log assertions to Official 131 / v2.20 while retaining the existing checks"
+    },
+    {
+      "file": "localization-official-docs.test.mjs",
+      "beforeSha256": "bc3137a5e35d0cfcc5a5327fb47480761b71a4b56e7c6d4051a4e16dfa116bea",
+      "afterSha256": "713744a1e917a1ca8df452171ebb9a6004702bd4f1c2dc49d16ae0a81fa39440",
+      "reason": "Advance latest Official and Decision Log assertions to Official 131 / v2.20 while retaining the existing checks"
+    },
+    {
+      "file": "localization-ac13-voiceover-release-requirement-decision.test.mjs",
+      "beforeSha256": "b557c9fda03401a6fcc91f4bee45be8a6db2826b0a6f07c8023ad5970ff6f052",
+      "afterSha256": "45b165089f29caacdbcc388fd405adbe8b9796f28a8c29bf686bc2403b1e799f",
+      "reason": "Advance latest Official and Decision Log assertions to Official 131 / v2.20 while retaining the existing checks"
+    },
+    {
+      "file": "localization-native-camera-decision.test.mjs",
+      "beforeSha256": "41da290da2463711f1399afe6b4007019d474920aa8e43b1640b979d83b5844b",
+      "afterSha256": "626f231e8928fec883ba64a0aeef203c80b29be165b1adeec7faddbf46ad62ac",
+      "reason": "Advance latest Official and Decision Log assertions to Official 131 / v2.20 while retaining the existing checks"
+    },
+    {
+      "file": "localization-u4-u11-decision.test.mjs",
+      "beforeSha256": "53d3f0cb53d2edd56fc98f2b17c3293c9b18468b52e6003b43d0d3493c2b47fd",
+      "afterSha256": "68e2442e949d380723960717a6f9b1b03f8e89391195225b1ad1b9d0b81a84df",
+      "reason": "Advance latest Official and Decision Log assertions to Official 131 / v2.20 while retaining the existing checks"
+    },
+    {
+      "file": "localization-u11-correction-decision.test.mjs",
+      "beforeSha256": "43697a58015d2520ed7d958bccb677b18bf2a90f48b52b27cc557bc66965f522",
+      "afterSha256": "0505675ce5b3d057425a0f12b4e0869e75720b53baf78a1b8446ebf4cd8f9754",
+      "reason": "Advance latest Official and Decision Log assertions to Official 131 / v2.20 while retaining the existing checks"
+    },
+    {
+      "file": "localization-u6-decision.test.mjs",
+      "beforeSha256": "a634cae63aec8ef1b7c69583fd726a74520f11f3d703f33ec5c3a01ba35b064d",
+      "afterSha256": "ff4feec6f74a7e79bc18af8a123e42c41afd8bfd0f5cfbcc3e98d4ee99579c29",
+      "reason": "Advance latest Official and Decision Log assertions to Official 131 / v2.20 while retaining the existing checks"
+    },
+    {
+      "file": "localization-review-policy-decision.test.mjs",
+      "beforeSha256": "712686c2ea61a051dbda854cdd667e3e09d1e7e396d728e28c6beff8b8cd1b16",
+      "afterSha256": "41dc04d0ec9dd6e0ca88c458a950ad638bbe2f02cfb5bb3c964fbd7f239481e4",
+      "reason": "Advance latest Official and Decision Log assertions to Official 131 / v2.20 while retaining the existing checks"
+    },
+    {
+      "file": "localization-po-approval-decision.test.mjs",
+      "beforeSha256": "5f2adb1c344eb7b2f46b4514f8eafac367faeb576c7f913099053973686f9e99",
+      "afterSha256": "8b9005b600705fb0d6237bd50679c4b5409e5c86ba0ea35cf3f3f9222a7fb26c",
+      "reason": "Advance latest Official and Decision Log assertions to Official 131 / v2.20 while retaining the existing checks"
+    },
+    {
+      "file": "i18n-ios-first-entry-languages.test.mjs",
+      "beforeSha256": null,
+      "afterSha256": "5db2788151ce34cf126e62d0272403658a98590be5eb076970d946ef327b19b0",
+      "reason": "Add Decision 044 regression and observed iOS first-entry input coverage; additive only"
+    },
+    {
+      "file": "localization-ios-first-entry-language-decision.test.mjs",
+      "beforeSha256": null,
+      "afterSha256": "fa76f15f46c6c97610a012d3aa5dda4c1158aef4e3aac345637116da5d0dbce3",
+      "reason": "Add Decision 044 regression and observed iOS first-entry input coverage; additive only"
+    }
+  ]
+}
