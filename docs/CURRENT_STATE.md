@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## CueScore P6 Formally Accepted — Commander Judgement PASS 31／31（2026年10月21日）
+
+- ○ Score｜司令塔は2026-10-21、Official 108 v1.1のP6最終受入を**正式PASS**と判定した。**PASS 31／31、FAIL 0、BLOCKED 0、NOT VERIFIED 0、DEFERRED 0**。根拠: Evidence 100（31条件Matrix）、Product OwnerのAC-12目視承認（「PDF確認したよ。OK!」、Evidence 97掲載画面のみ）、Official 131（Decision 044）、Official 108 v1.1（Official 108 AC-0.1のP6完了条件を満たす）、Full Node 1,167／1,167。直前のPASS Candidate記録（同日）は履歴として保持し、本記録で正式判定に更新する。
+- 受入条件は変更していない（Official 108 v1.1の内容・hash不変）。追加のDecision／Official発行は不要（正式判定は司令塔の判定記録）。
+- **P7は開始していない。** 次は別管理: 出荷Build 84 binary同一性（NOT VERIFIED）、公開版ユーザーデータの更新安全性、公開版への上書き更新（BLOCKED）、新Version／Build番号、TestFlight／ASC／Release、PO判断（Evidence 101）。
+- Documentation-only。production source、Native、翻訳catalog、保存schema、QR／Backup、Free／Pro、S-B=falseは変更なし。
+
 ## CueScore P6 Final Acceptance Closeout Recorded — PASS Candidate（2026年10月21日）
 
 - Product OwnerはEvidence 97の`AC12_PO_Review_Book.pdf`を確認し、2026-10-21に「PDF確認したよ。OK!」と返答した（司令塔受理済み）。承認対象はEvidence 97掲載画面のみで、未撮影の実機画面、StoreKit実価格、Build 84更新安全性は承認範囲外。

@@ -4,6 +4,7 @@
 - Public Version / Build: Japan public catalog still reports `1.1 (79)`; Version `1.2 (84)` release executed and ASC is `READY_FOR_SALE`, public propagation pending
 - Current project Version / Build: `1.2 (84)`
 - Gate: `RELEASE EXECUTED / ASC READY_FOR_SALE / PUBLIC PROPAGATION PENDING`（Version 1.2 Build 84 release gate。変更なし）
+- Localization P6 Formal Acceptance: `CUESCORE I18N P6 FORMALLY ACCEPTED / PASS 31 OF 31`（司令塔の正式判定、2026-10-21、main 635f6b0）。Official 108 v1.1の受入条件は不変。P7は未開始。Build 84 binary同一性・公開版更新安全性・公開版更新・TestFlight／ASC／Releaseは別管理（Evidence 101）。
 - Localization P6 Final Acceptance Closeout: `CUESCORE I18N P6 FINAL ACCEPTANCE CLOSEOUT RECORDED / PASS CANDIDATE`（2026-10-21、main ddee352）。AC-12はPO目視承認（「PDF確認したよ。OK!」、Evidence 97掲載画面のみ）、AC-2はOfficial 131適用、AC-13はv1.1の静的・DOM必須条件。31条件PASS候補。正式判定は司令塔。P7・Build 84 binary同一性・公開版更新・TestFlight／ASC／Releaseは別管理で未開始。
 - Localization iOS First-Entry Language List Gate: `CUESCORE I18N iOS FIRST-ENTRY LANGUAGE LIST NOTED / DOCUMENTATION ONLY`（Decision 044 / Official 131 / Decision Log v2.20）。観測環境でnavigator.languagesが先頭1要素のみである旨の注記。resolver期待値・実装・Native・catalogは不変。P6全体PASS・P7は宣言しない。
 - Localization AC-13 VoiceOver Gate: `CUESCORE I18N AC-13 VOICEOVER RELEASE REQUIREMENT REVISED / DOCUMENTATION ONLY`（Decision 043 / Official 108 v1.1・130 / Decision Log v2.19、2026-10-21）。VoiceOver実音声聴取のみP5／P6／リリース必須条件から除外。AC-13番号と31項目、静的／DOM・翻訳・`lang`・動的文言・フォーカス要件、既存アクセシビリティ実装は維持。直前台帳への限定適用はPASS 28／BLOCKED 1／NOT VERIFIED 2／FAIL 0／DEFERRED 0。P6全体PASS・P7未開始。
