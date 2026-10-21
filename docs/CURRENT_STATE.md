@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## CueScore P6 Final Acceptance Closeout Recorded — PASS Candidate（2026年10月21日）
+
+- Product OwnerはEvidence 97の`AC12_PO_Review_Book.pdf`を確認し、2026-10-21に「PDF確認したよ。OK!」と返答した（司令塔受理済み）。承認対象はEvidence 97掲載画面のみで、未撮影の実機画面、StoreKit実価格、Build 84更新安全性は承認範囲外。
+- Official 108 v1.1の31条件（AC-1〜21／AC-S1〜S10）を正しいIDで全件照合し、fresh Full Node 1,167／1,167（main `ddee352`）と既存Evidenceの再利用（source／hash一致を確認）により、**PASS 31／FAIL 0／BLOCKED 0／NOT VERIFIED 0／DEFERRED 0のP6最終受入PASS候補**を文書化した。AC-2はOfficial 131（Decision 044）の適用条件を確認、AC-12はPO目視承認と自動Visual Evidence、AC-13はOfficial 108 v1.1の静的・DOM必須条件で判定（VoiceOver実音声は必須外）。
+- 正式なP6判定は司令塔が行う。**P7、出荷Build 84のbinary同一性（NOT VERIFIED）、公開版ユーザーデータの更新安全性、公開版への上書き更新、TestFlight／ASC／Releaseは別管理で、本記録では開始しない。**
+- Documentation-only。production source、Native、翻訳catalog、保存schema、QR／Backup、Free／Pro、Official 108は変更なし。
+
 ## CueScore Localization iOS First-Entry Language List Noted（2026-10-21）
 
 - Product Ownerの明示承認に基づき、**Decision 044／Official 131／Decision Log v2.20**を発行（Documentation-onlyと追加の単体テストのみ）。観測した環境（実機iPhone 16e iOS 26.6.2のMobile Safari、iOS 26.5 SimulatorのWKWebView）で`navigator.languages`が先頭1要素のみ返ることを、Official 108のresolver期待値に**注記**した。全iOSバージョンでの保証ではない。
