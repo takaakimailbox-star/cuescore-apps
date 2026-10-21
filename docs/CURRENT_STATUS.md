@@ -1,9 +1,10 @@
 # CueScore Current Status
 
-- Updated: 2026-10-18
+- Updated: 2026-10-21
 - Public Version / Build: Japan public catalog still reports `1.1 (79)`; Version `1.2 (84)` release executed and ASC is `READY_FOR_SALE`, public propagation pending
 - Current project Version / Build: `1.2 (84)`
 - Gate: `RELEASE EXECUTED / ASC READY_FOR_SALE / PUBLIC PROPAGATION PENDING`（Version 1.2 Build 84 release gate。変更なし）
+- Localization AC-13 VoiceOver Gate: `CUESCORE I18N AC-13 VOICEOVER RELEASE REQUIREMENT REVISED / DOCUMENTATION ONLY`（Decision 043 / Official 108 v1.1・130 / Decision Log v2.19、2026-10-21）。VoiceOver実音声聴取のみP5／P6／リリース必須条件から除外。AC-13番号と31項目、静的／DOM・翻訳・`lang`・動的文言・フォーカス要件、既存アクセシビリティ実装は維持。直前台帳への限定適用はPASS 28／BLOCKED 1／NOT VERIFIED 2／FAIL 0／DEFERRED 0。P6全体PASS・P7未開始。
 - Localization Glossary Finalization Gate: `CUESCORE I18N GLOSSARY FORMALIZATION COMPLETE / P6 CLOSEOUT READINESS AUDITED`（Decision 042 / Official 109・129 / Decision Log v2.18、2026-10-18）。Glossary 38語はCONFIRMED、PENDING/CANDIDATE 0。中国語/JPA一次資料と人間独立レビューはNOT VERIFIED。P6 AC全31項目はPASS 27／BLOCKED 1／NOT VERIFIED 3／FAIL 0／DEFERRED 0で、P6全体はPASSにしていない。P7未開始。
 - Previous Localization Glossary 25 Terms Gate: `CUESCORE I18N GLOSSARY 25 TERMS FORMALIZED / G14-G25 DECISION PACKAGE`（Decision 041 / Official 127・128 / Decision Log v2.17、2026-10-18）。25語承認時点の履歴であり、G14／G25のPENDING状態はDecision 042で後続更新済み。
 - Localization Native Camera Gate: `CUESCORE I18N P6 NATIVE CAMERA LOCALIZATION FORMALIZED / SIMULATOR VERIFIED`（Decision 040 / Official 125・126 / Decision Log v2.16、2026-10-18）。`NSCameraUsageDescription`のja/en/zh-Hansを本番・Score RCへ実装。隔離iPhone 16e Simulatorの実ダイアログで3言語と未対応OS言語→jaをPASS。Full Node 1,145/1,145、両Release Simulator Build PASS。U11の4設定値と過去FAILは保持。実機・Build 84上書き・P7は未了。

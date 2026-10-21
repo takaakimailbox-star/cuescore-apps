@@ -43,7 +43,7 @@ test("numbering: Decision 034 and Official 113 / 114 are published once; Officia
   const numbers = fs.readdirSync(new URL("docs/official/", root)).filter(name => /^\d+_.*\.md$/.test(name)).map(name => Number(name.split("_")[0]));
   for (const number of [107, 108, 110, 111, 112, 113, 114]) assert.equal(numbers.filter(value => value === number).length, 1, `Official ${number}`);
   assert.equal(numbers.filter(value => value === 109).length, 1);
-  assert.equal(Math.max(...numbers), 129);
+  assert.equal(Math.max(...numbers), 130);
   assert.equal((docxText(LOG("2.10")).match(/Decision 034｜/g) || []).length, 1);
   assert.ok(!docxText(LOG("2.9")).includes("Decision 034"), "the preserved v2.9 must not contain Decision 034");
   assert.match(read(DECISION), /本書 = \*\*Decision 034\*\*/);
@@ -64,9 +64,9 @@ test("existing Decisions are preserved: v2.9 untouched, v2.10 keeps Decision 001
   assert.match(readZipEntry(LOG("2.10"), "word/footer1.xml"), /Official Release \| 2026-10-12|Official Release \| 2026-10-13/);
 });
 
-test("Official 107 / 108 / 110 / 111 / 112 are preserved unchanged (content hash)", () => {
+test("Official 107 / 110 / 111 / 112 are unchanged and Official 108 matches its authorized v1.1 hash", () => {
   assert.equal(sha16("docs/official/107_CueScore_Localization_Decision.md"), "e274cec70e3f9789");
-  assert.equal(sha16("docs/official/108_CueScore_Localization_Spec.md"), "c86a48331d4780e0");
+  assert.equal(sha16("docs/official/108_CueScore_Localization_Spec.md"), "a53eebc7009c3dca");
   assert.equal(sha16("docs/official/110_CueScore_Settings_Unified_Design_Decision.md"), "5c1b4f0d92d923e7");
   assert.equal(sha16("docs/official/111_CueScore_Settings_Unified_Design_Spec.md"), "6425859f862091ec");
   assert.equal(sha16("docs/official/112_CueScore_Dynamic_Type_Deferral_Decision.md"), "79bfe235c71a95ff");

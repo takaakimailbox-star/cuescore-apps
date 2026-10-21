@@ -66,4 +66,4 @@
 
 ## 5. P6との関係
 
-Glossaryの`PENDING`／`CANDIDATE` 0と全catalog keyのP4承認を満たすため、Official 108 AC-1のGlossary条件はPASSとなる。ただしP6全体は、VoiceOver実音声、Pro／StoreKit、Backup Share Sheet実機到達等の未完了を含むため自動PASSとしない。
+Glossaryの`PENDING`／`CANDIDATE` 0と全catalog keyのP4承認を満たすため、Official 108 AC-1のGlossary条件はPASSとなる。本書発行時点ではVoiceOver実音声、Pro／StoreKit、Backup Share Sheet実機到達等をP6残項目としていた。VoiceOver実音声の必須性だけは、2026-10-21のDecision 043／Official 130／Official 108 v1.1が後続更新する。他の残項目とP6全体PASSの判定は変更しない。

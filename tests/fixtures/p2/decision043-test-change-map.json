@@ -1,0 +1,84 @@
+{
+  "decision": "Decision 043 / Official 130",
+  "scope": "Documentation assertions only; no production, Native, StoreKit, catalog, or runtime behavior change",
+  "changes": [
+    {
+      "file": "dynamic-type-deferral-decision.test.mjs",
+      "beforeSha256": "5a9d7c9526c90f6df7922221748a91b1c63f48eb3a96fe587328d6284560ce77",
+      "afterSha256": "b702fd38d68a9592196e59db8d7f7f5554833fec91c05e698549acb482d4b5c4",
+      "reason": "Advance latest Official and Decision Log assertions to Official 130 / v2.19 while retaining the existing acceptance checks"
+    },
+    {
+      "file": "localization-ac13-voiceover-release-requirement-decision.test.mjs",
+      "beforeSha256": null,
+      "afterSha256": "b557c9fda03401a6fcc91f4bee45be8a6db2826b0a6f07c8023ad5970ff6f052",
+      "reason": "Add Decision 043 regression coverage for all 31 acceptance identifiers, preserved AC-13 DOM requirements, protected product hashes, and non-completion of P6"
+    },
+    {
+      "file": "localization-glossary-25-approval-decision.test.mjs",
+      "beforeSha256": "1ee5f41bc9e97115ebe57566e04db383b2cd9f02b1d301a1034eb3e4b00e2f5d",
+      "afterSha256": "359a13c1d84d7e17b1b72ae811f2f7be1d459c2f2e5f67e88ace8ba3ae4abcda",
+      "reason": "Advance latest Official and Decision Log assertions without weakening glossary approval coverage"
+    },
+    {
+      "file": "localization-glossary-finalization-decision.test.mjs",
+      "beforeSha256": "81210d7a300a6d2ae8a27559778202d7673576c990a27ae1278044bc4ae5e264",
+      "afterSha256": "139b50ebf12bdb298d7711efa60df73c0693cce6eb9752cfa2a1d556c521012c",
+      "reason": "Preserve Decision 042 coverage while recognizing Decision 043 as the current successor"
+    },
+    {
+      "file": "localization-native-camera-decision.test.mjs",
+      "beforeSha256": "4cea0c4ef7066106b0b81268783c57f4b507f8dda1f282bad4a1add0ac4867e3",
+      "afterSha256": "41da290da2463711f1399afe6b4007019d474920aa8e43b1640b979d83b5844b",
+      "reason": "Advance latest Official and Decision Log assertions without weakening Native camera protections"
+    },
+    {
+      "file": "localization-official-docs.test.mjs",
+      "beforeSha256": "1ee7f511ff469318fff3dcef662a7a113b409200dc77b603bb022fc4ecb7551f",
+      "afterSha256": "bc3137a5e35d0cfcc5a5327fb47480761b71a4b56e7c6d4051a4e16dfa116bea",
+      "reason": "Advance the current Official document inventory to Official 130 / Decision Log v2.19"
+    },
+    {
+      "file": "localization-p1-formalization-decision.test.mjs",
+      "beforeSha256": "eea4ef540ef32bc726d9a492cd5a9ae2dc911ef2db862552ec64fae10ae6223d",
+      "afterSha256": "a40e47cd0902ba345cd367e5c1df731dff82a7647b585b0b9f9d81cca9f7731f",
+      "reason": "Advance latest Official and Decision Log assertions while retaining P1 formalization coverage"
+    },
+    {
+      "file": "localization-po-approval-decision.test.mjs",
+      "beforeSha256": "427cac2151382f25d16f07dc08fc81a2e018f2bdb6ffb636292c4203a63a6052",
+      "afterSha256": "5f2adb1c344eb7b2f46b4514f8eafac367faeb576c7f913099053973686f9e99",
+      "reason": "Advance latest Official and Decision Log assertions while retaining PO approval coverage"
+    },
+    {
+      "file": "localization-review-policy-decision.test.mjs",
+      "beforeSha256": "7a2aa6eb449e0453176fd5114a971e82287cedde4bf8f19922ed82b2acf2b6d6",
+      "afterSha256": "712686c2ea61a051dbda854cdd667e3e09d1e7e396d728e28c6beff8b8cd1b16",
+      "reason": "Advance latest Official and Decision Log assertions while retaining review-policy coverage"
+    },
+    {
+      "file": "localization-u11-correction-decision.test.mjs",
+      "beforeSha256": "f8e42967a809847645b940e244f63cbb7a76943a988860ef24f37e27e40db4cb",
+      "afterSha256": "43697a58015d2520ed7d958bccb677b18bf2a90f48b52b27cc557bc66965f522",
+      "reason": "Advance latest Official and Decision Log assertions while retaining U11 correction coverage"
+    },
+    {
+      "file": "localization-u4-u11-decision.test.mjs",
+      "beforeSha256": "029807e4954461db0d1f7a851a1de796c24385bdbeffcb99d0e4099413d2898e",
+      "afterSha256": "53d3f0cb53d2edd56fc98f2b17c3293c9b18468b52e6003b43d0d3493c2b47fd",
+      "reason": "Advance latest Official and Decision Log assertions while retaining U4/U11 coverage"
+    },
+    {
+      "file": "localization-u6-decision.test.mjs",
+      "beforeSha256": "ed025bb62bba908400f7d5c8ac55c9a9d4c87dd6d06a5037e46bebe1f9302bf6",
+      "afterSha256": "a634cae63aec8ef1b7c69583fd726a74520f11f3d703f33ec5c3a01ba35b064d",
+      "reason": "Advance latest Official and Decision Log assertions while retaining U6 coverage"
+    },
+    {
+      "file": "settings-unified-design-decision.test.mjs",
+      "beforeSha256": "ff0ec2fb453987c587f780dd14b74bb6b94b54a1c9dfe2f25fa34d74ef23575a",
+      "afterSha256": "96500058339e7c941a801439090ec579aff310ac72624c1136d94ee2f66264c6",
+      "reason": "Advance latest Official and Decision Log assertions without weakening settings protections"
+    }
+  ]
+}

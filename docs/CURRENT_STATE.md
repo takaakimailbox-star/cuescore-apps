@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## CueScore Localization AC 13 VoiceOver Release Requirement Revised（2026年10月21日）
+
+- Product Ownerの明示承認に基づき、**Decision 043／Official 108 v1.1・130／Decision Log v2.19**を発行。AC-13のVoiceOver実音声聴取だけをP5／P6／リリース必須条件から外し、推奨の非ブロッキング確認とした。
+- AC-13番号とAC-1〜21／AC-S1〜S10の計31項目を維持。`aria-label`等の翻訳、`lang`、動的文言、フォーカス順、Modal focus、静的／DOM検査は必須のまま。既存VoiceOver対応・アクセシビリティ実装は変更していない。
+- 直前のP6 Closeout Readiness台帳に本Decisionだけを適用すると、AC-13は静的／DOM要件PASSによりPASSへ移行し、**PASS 28／BLOCKED 1／NOT VERIFIED 2／FAIL 0／DEFERRED 0**。VoiceOver実音声以外の残項目は変更せず、P6全体PASS・P7開始は宣言しない。
+- Documentation-only。production source、翻訳catalog、Data／QR／Backup、Analytics、Free／Pro、StoreKit、Native、実機アプリ、TestFlight／ASC／Releaseは変更なし。
+
 ## CueScore Localization Glossary Finalized / P6 Closeout Readiness Audited（2026年10月18日）
 
 - Product Owner承認に基づき、**Decision 042／Official 109・129／Decision Log v2.18**を発行。G14=`アベレージ / Average / 平均得分`（得点÷完了イニング数）、G25=`スポット / Spot / 置球点`（規定位置、操作はre-spot）をCONFIRMEDとした。

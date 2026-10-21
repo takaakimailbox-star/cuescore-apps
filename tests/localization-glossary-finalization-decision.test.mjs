@@ -14,7 +14,7 @@ test("Decision 042 publishes Official 109 and 129 exactly once", () => {
   const numbers = fs.readdirSync(new URL("docs/official/", root)).filter(name => /^\d+_.*\.md$/.test(name)).map(name => Number(name.split("_")[0]));
   assert.equal(numbers.filter(value => value === 109).length, 1);
   assert.equal(numbers.filter(value => value === 129).length, 1);
-  assert.equal(Math.max(...numbers), 129);
+  assert.equal(Math.max(...numbers), 130);
   assert.match(decision, /Decision 042/);
   assert.match(decision, /v2\.18/);
 });
@@ -49,10 +49,10 @@ test("catalog, Japanese UI and Data/QR implementation are byte-preserved", () =>
   for (const [path, digest] of Object.entries(expected)) assert.equal(sha256(path), digest, path);
 });
 
-test("P6 remains a readiness audit rather than a final PASS", () => {
+test("P6 remains a readiness audit rather than a final PASS after Decision 043", () => {
   const state = `${read("docs/CURRENT_STATE.md")}\n${read("docs/CURRENT_STATUS.md")}`;
   assert.match(state, /P6 Closeout Readiness/);
-  assert.match(state, /VoiceOver.*NOT VERIFIED/s);
+  assert.match(state, /VoiceOver実音声.*必須条件から外/s);
   assert.match(state, /Pro.*BLOCKED/s);
   assert.match(state, /P6全体.*PASS.*しない/s);
 });

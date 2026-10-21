@@ -239,11 +239,11 @@
    "skips": 0
   },
   "dynamic-type-deferral-decision.test.mjs": {
-   "sha256": "5a9d7c9526c90f6df7922221748a91b1c63f48eb3a96fe587328d6284560ce77",
+   "sha256": "b702fd38d68a9592196e59db8d7f7f5554833fec91c05e698549acb482d4b5c4",
    "tests": 14,
    "skips": 0,
-   "previousSha256": "b7800645e8c4604990a36ce36e4bcfe2345f9d22d3364259ff743837611fb16f",
-   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+   "previousSha256": "5a9d7c9526c90f6df7922221748a91b1c63f48eb3a96fe587328d6284560ce77",
+   "updated_in": "Decision 043 / AC-13 VoiceOver release-requirement assertion migration (no skip or weakening)"
   },
   "fa-iphone-003-phase3-initial-paint.test.mjs": {
    "sha256": "660816eed4011b0bcdd0a54325921f96ed6b6c1614361f7bd84b93174eb2622d",
@@ -342,74 +342,81 @@
    "tests": 2,
    "skips": 0
   },
+  "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
+   "sha256": "b557c9fda03401a6fcc91f4bee45be8a6db2826b0a6f07c8023ad5970ff6f052",
+   "tests": 4,
+   "skips": 0,
+   "updated_in": "Decision 043 / AC-13 VoiceOver release-requirement regression"
+  },
   "localization-glossary-25-approval-decision.test.mjs": {
-   "sha256": "1ee5f41bc9e97115ebe57566e04db383b2cd9f02b1d301a1034eb3e4b00e2f5d",
+   "sha256": "359a13c1d84d7e17b1b72ae811f2f7be1d459c2f2e5f67e88ace8ba3ae4abcda",
    "tests": 6,
    "skips": 0,
-   "previousSha256": "fa5bcb2aa84538b35cf690bc56f93f9554b2c6b2132dcb733fda801bdfcc135e",
-   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+   "previousSha256": "1ee5f41bc9e97115ebe57566e04db383b2cd9f02b1d301a1034eb3e4b00e2f5d",
+   "updated_in": "Decision 043 / AC-13 VoiceOver release-requirement assertion migration (no skip or weakening)"
   },
   "localization-glossary-finalization-decision.test.mjs": {
-   "sha256": "81210d7a300a6d2ae8a27559778202d7673576c990a27ae1278044bc4ae5e264",
+   "sha256": "139b50ebf12bdb298d7711efa60df73c0693cce6eb9752cfa2a1d556c521012c",
    "tests": 7,
    "skips": 0,
-   "updated_in": "Decision 042 / new glossary finalization regression"
+   "previousSha256": "81210d7a300a6d2ae8a27559778202d7673576c990a27ae1278044bc4ae5e264",
+   "updated_in": "Decision 043 / AC-13 VoiceOver release-requirement assertion migration (no skip or weakening)"
   },
   "localization-native-camera-decision.test.mjs": {
-   "sha256": "4cea0c4ef7066106b0b81268783c57f4b507f8dda1f282bad4a1add0ac4867e3",
+   "sha256": "41da290da2463711f1399afe6b4007019d474920aa8e43b1640b979d83b5844b",
    "tests": 5,
    "skips": 0,
-   "previousSha256": "fe17cc4dd3a1594ff1c851851fb82da4e69d8e7ee43c56cc77750fa11159a9e6",
-   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+   "previousSha256": "4cea0c4ef7066106b0b81268783c57f4b507f8dda1f282bad4a1add0ac4867e3",
+   "updated_in": "Decision 043 / AC-13 VoiceOver release-requirement assertion migration (no skip or weakening)"
   },
   "localization-official-docs.test.mjs": {
-   "sha256": "1ee7f511ff469318fff3dcef662a7a113b409200dc77b603bb022fc4ecb7551f",
+   "sha256": "bc3137a5e35d0cfcc5a5327fb47480761b71a4b56e7c6d4051a4e16dfa116bea",
    "tests": 11,
    "skips": 0,
-   "previousSha256": "f55328d782f4b03afbdf9dcc9d13378ee0504c170d7a57efce9c682ca966f0ed",
-   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+   "previousSha256": "1ee7f511ff469318fff3dcef662a7a113b409200dc77b603bb022fc4ecb7551f",
+   "updated_in": "Decision 043 / AC-13 VoiceOver release-requirement assertion migration (no skip or weakening)"
   },
   "localization-p1-formalization-decision.test.mjs": {
-   "sha256": "eea4ef540ef32bc726d9a492cd5a9ae2dc911ef2db862552ec64fae10ae6223d",
+   "sha256": "a40e47cd0902ba345cd367e5c1df731dff82a7647b585b0b9f9d81cca9f7731f",
    "tests": 8,
    "skips": 0,
-   "previousSha256": "31114070562fac2ebb1e590f555031657544441cea590220447c80b236d3207c",
-   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+   "previousSha256": "eea4ef540ef32bc726d9a492cd5a9ae2dc911ef2db862552ec64fae10ae6223d",
+   "updated_in": "Decision 043 / AC-13 VoiceOver release-requirement assertion migration (no skip or weakening)"
   },
   "localization-po-approval-decision.test.mjs": {
-   "sha256": "427cac2151382f25d16f07dc08fc81a2e018f2bdb6ffb636292c4203a63a6052",
+   "sha256": "5f2adb1c344eb7b2f46b4514f8eafac367faeb576c7f913099053973686f9e99",
    "tests": 6,
    "skips": 0,
-   "previousSha256": "ee00c0abf55f3ba413ded82cc0b106e15beac9da1bbc8f4167b90d6a7e253b33",
-   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+   "previousSha256": "427cac2151382f25d16f07dc08fc81a2e018f2bdb6ffb636292c4203a63a6052",
+   "updated_in": "Decision 043 / AC-13 VoiceOver release-requirement assertion migration (no skip or weakening)"
   },
   "localization-review-policy-decision.test.mjs": {
-   "sha256": "7a2aa6eb449e0453176fd5114a971e82287cedde4bf8f19922ed82b2acf2b6d6",
+   "sha256": "712686c2ea61a051dbda854cdd667e3e09d1e7e396d728e28c6beff8b8cd1b16",
    "tests": 6,
    "skips": 0,
-   "previousSha256": "05f74bc24605a9495dd5d05dd62876ddc91387fa68b03ceab31c59f01a098f60",
-   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+   "previousSha256": "7a2aa6eb449e0453176fd5114a971e82287cedde4bf8f19922ed82b2acf2b6d6",
+   "updated_in": "Decision 043 / AC-13 VoiceOver release-requirement assertion migration (no skip or weakening)"
   },
   "localization-u11-correction-decision.test.mjs": {
-   "sha256": "f8e42967a809847645b940e244f63cbb7a76943a988860ef24f37e27e40db4cb",
+   "sha256": "43697a58015d2520ed7d958bccb677b18bf2a90f48b52b27cc557bc66965f522",
    "tests": 7,
    "skips": 0,
-   "previousSha256": "330ce7d092683e4b37d137e945cbad74413af4263b10f8857e9bc3d521dcf60b",
-   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+   "previousSha256": "f8e42967a809847645b940e244f63cbb7a76943a988860ef24f37e27e40db4cb",
+   "updated_in": "Decision 043 / AC-13 VoiceOver release-requirement assertion migration (no skip or weakening)"
   },
   "localization-u4-u11-decision.test.mjs": {
-   "sha256": "029807e4954461db0d1f7a851a1de796c24385bdbeffcb99d0e4099413d2898e",
+   "sha256": "53d3f0cb53d2edd56fc98f2b17c3293c9b18468b52e6003b43d0d3493c2b47fd",
    "tests": 6,
    "skips": 0,
-   "previousSha256": "58f708918d3603dd4d0820357cf39199dafc6267f6ab8e68a2b06180f1cabd50",
-   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+   "previousSha256": "029807e4954461db0d1f7a851a1de796c24385bdbeffcb99d0e4099413d2898e",
+   "updated_in": "Decision 043 / AC-13 VoiceOver release-requirement assertion migration (no skip or weakening)"
   },
   "localization-u6-decision.test.mjs": {
-   "sha256": "ed025bb62bba908400f7d5c8ac55c9a9d4c87dd6d06a5037e46bebe1f9302bf6",
+   "sha256": "a634cae63aec8ef1b7c69583fd726a74520f11f3d703f33ec5c3a01ba35b064d",
    "tests": 6,
    "skips": 0,
-   "previousSha256": "df823b71429322c450ea3992e6e04c6850d720a3c0349602a16a047649025968",
-   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+   "previousSha256": "ed025bb62bba908400f7d5c8ac55c9a9d4c87dd6d06a5037e46bebe1f9302bf6",
+   "updated_in": "Decision 043 / AC-13 VoiceOver release-requirement assertion migration (no skip or weakening)"
   },
   "manual-turn-change-unification.test.mjs": {
    "sha256": "812ce70b927c7d996a1c019691a7d4c833d51de32d20e3e17710edf57ab548ff",
@@ -697,11 +704,11 @@
    "skips": 0
   },
   "settings-unified-design-decision.test.mjs": {
-   "sha256": "ff0ec2fb453987c587f780dd14b74bb6b94b54a1c9dfe2f25fa34d74ef23575a",
+   "sha256": "96500058339e7c941a801439090ec579aff310ac72624c1136d94ee2f66264c6",
    "tests": 13,
    "skips": 0,
-   "previousSha256": "e130ab43fa34544db05641710e54417b2961ebe92f47eff330ce71f09e093b23",
-   "updated_in": "Decision 042 / Glossary finalization assertion migration (no skip or weakening)"
+   "previousSha256": "ff0ec2fb453987c587f780dd14b74bb6b94b54a1c9dfe2f25fa34d74ef23575a",
+   "updated_in": "Decision 043 / AC-13 VoiceOver release-requirement assertion migration (no skip or weakening)"
   },
   "settings-unified-design-implementation.test.mjs": {
    "sha256": "e5cbe571687a5b841ad799746324249a459fc27853d5e7c492963189636bfbf8",

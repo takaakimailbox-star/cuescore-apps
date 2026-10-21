@@ -30,16 +30,16 @@ test("Decision 040 / Official 125 / 126 are uniquely published while Official 10
   const nums = fs.readdirSync(new URL("docs/official/", root)).filter(n => /^\d+_.*\.md$/.test(n)).map(n => Number(n.split("_")[0]));
   for (const n of [125, 126]) assert.equal(nums.filter(v => v === n).length, 1, String(n));
   assert.equal(nums.filter(value => value === 109).length, 1);
-  assert.equal(Math.max(...nums), 129);
+  assert.equal(Math.max(...nums), 130);
   const text = docxText(LOG("2.16"));
   assert.deepEqual([...text.matchAll(/Decision (\d{3})｜/g)].map(m => Number(m[1])), Array.from({ length: 40 }, (_, i) => i + 1));
   assert.match(text, /Decision 040｜多言語化 Native カメラ許可文言/);
   assert.doesNotMatch(docxText(LOG("2.15")), /Decision 040/);
 });
 
-test("existing localization Officials 107 / 108 / 121-124 are byte-preserved", () => {
+test("localization Officials retain their expected hashes after the authorized Official 108 v1.1 revision", () => {
   assert.equal(sha16("docs/official/107_CueScore_Localization_Decision.md"), "e274cec70e3f9789");
-  assert.equal(sha16("docs/official/108_CueScore_Localization_Spec.md"), "c86a48331d4780e0");
+  assert.equal(sha16("docs/official/108_CueScore_Localization_Spec.md"), "a53eebc7009c3dca");
   assert.equal(sha16("docs/official/121_CueScore_Localization_U4_U11_Approval_Decision.md"), "e536db9481d9493b");
   assert.equal(sha16("docs/official/122_CueScore_Localization_U4_U11_Approval_Spec.md"), "06ef7b0d94fe7254");
   assert.equal(sha16("docs/official/123_CueScore_Localization_U11_Correction_Decision.md"), "6de4a1b8e13e663a");
@@ -66,7 +66,7 @@ test("camera decision is narrow, keeps the U11 values and records the U11-R4 lim
 });
 
 test("SSOT points to Decision Log v2.16 and the Decision publication remains product-source-free", () => {
-  assert.match(read("docs/README.md"), /Decision_Log_v2\.18_Official_Release/);
+  assert.match(read("docs/README.md"), /Decision_Log_v2\.19_Official_Release/);
   assert.match(read("docs/README.md"), /v2\.16 adds Decision 040/);
   assert.match(read("docs/CURRENT_STATE.md"), /Native Camera Localization Decision Published/);
   assert.match(read("docs/CURRENT_STATUS.md"), /NATIVE CAMERA LOCALIZATION FORMALIZED/);

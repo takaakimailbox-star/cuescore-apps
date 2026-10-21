@@ -1,16 +1,17 @@
-# CueScore Apps — Localization Specification v1.0
+# CueScore Apps — Localization Specification v1.1
 
-**Status:** Adopted / Product Owner adopted specification（Decision 031）/ Implementation NOT STARTED。本書は Implementation 前の仕様であり、runtime 検証・実機検証は未実施（NOT VERIFIED の項目は本文に明記）。**Product Owner が承認した D1〜D10・U10 の仕様化であり、条件付き Implementation 事項（S-B 等）は P1 の検証が効力条件である。**
+**Status:** Adopted / Product Owner adopted specification（Decision 031、Decision 043でAC-13を限定改訂）。初版発行時点は **Implementation NOT STARTED** で、runtime 検証・実機検証は未実施だった（NOT VERIFIED の項目は本文に明記）。**Product Owner が承認した D1〜D10・U10 の仕様化であり、条件付き Implementation 事項（S-B 等）は P1 の検証が効力条件である。**
 
-**Specification date:** 2026-10-09（Official 発行）／ Product Owner 承認: 2026-10-08
-**Authority:** Product Owner adopted decision（Decision 031、承認 2026-10-08）
-**Governing decision:** `107_CueScore_Localization_Decision.md`（Decision 031）
+**Specification date:** 2026-10-09（Official 発行）／ 2026-10-21（v1.1限定改訂）／ Product Owner 承認: 2026-10-08、2026-10-21
+**Authority:** Product Owner adopted decision（Decision 031、承認 2026-10-08）／ AC-13限定改訂（Decision 043、承認 2026-10-21）
+**Governing decision:** `107_CueScore_Localization_Decision.md`（Decision 031）／ `130_CueScore_Localization_AC13_VoiceOver_Release_Requirement_Decision.md`（Decision 043）
 **Official document number:** 108
 **Baseline:** `takaakimailbox-star/cuescore-apps` main `117feddc802b9c0d7eccbdced0d96de84f728bf7`（作成時に fresh fetch で確認、変更なし）
 **関連（Official 非登録）:** Glossary Draft（Official 109 は未作成。中国語競技用語・マス割・JPA 正式名称・Dead Ball・Rack・Inning・Run・Rotation・Push Out の未確認訳語は **PENDING**）／ Implementation Phase Plan（Part IV に収録）
 
 > 本書の「MUST / MUST NOT / SHOULD」は RFC 2119 の意味で用いる。要件 ID は `L-<領域>-<番号>`（Part I）、`D-/C-/Q-/V/B-`（Part II）、`AC-`（Part III）、`G-SEP-`（Part IV）。
 > **未検証の事項は PASS と記録しない。** 本書は runtime 検証・実機検証・Implementation を実施したことを意味しない。
+> **v1.1限定改訂:** AC-13の番号と静的検査・DOM検査・翻訳・`lang`・動的文言・フォーカス要件を維持し、VoiceOverの実音声聴取だけをP5／P6／リリースの必須合格条件から外す。実音声確認は推奨の非ブロッキング確認として扱う。既存のVoiceOver対応、アクセシビリティ属性、翻訳、フォーカス挙動を削除・変更する許可ではない。
 
 ## 構成
 
@@ -297,7 +298,7 @@ Implementation Gate で許可する方針（今回は実装しない）:
 - L-I18N-5: 補間は名前付きプレースホルダ `{name}`。文を分割して連結する書き方を禁止し、**文単位のテンプレート**とする。複数形は `Intl.PluralRules`（ja/zh-Hans は `other` のみ）。
 - L-I18N-6: キー命名 `screen.component.purpose`。共通語は `common.*`、競技用語は `glossary.*`（Glossary Draft に従う。Official 109 は未作成で Draft を維持）。
 - L-I18N-7: fallback 連鎖は `選択言語 → ja → キー名`。開発/テストでは欠落キーを失敗として検出し、リリース成果物では欠落 0 を CI 相当のテストで保証する。
-- L-I18N-8: `html lang` は `ja` / `en` / `zh-Hans`。zh-Hans で CJK 字形・改行・VoiceOver 言語が正しく選択されること。
+- L-I18N-8: `html lang` は `ja` / `en` / `zh-Hans`。zh-Hans で CJK 字形・改行が正しく選択され、支援技術が文書言語を解釈できること。
 - L-I18N-9: 日付の**保存値は ISO のまま**。表示のみ locale 書式（例: ja `2026/10/08（木）`、en `Thu, Oct 8, 2026`、zh-Hans `2026年10月8日 周四` ※書式は P3 で確定）。表示テキストを parse して処理する実装を禁止。
 - L-I18N-10: 数字は ASCII 数字を使用し、桁区切り・小数点は locale 書式。値の計算は表示文字列を介さない。
 
@@ -309,7 +310,7 @@ Implementation Gate で許可する方針（今回は実装しない）:
 - L-VIS-2: horizontal overflow 0 を目標。重要なボタンおよび数値の clipping 禁止。nowrap + ellipsis の固定幅要素は、既知許容リスト（Player名・ユーザー入力値など翻訳対象でないもの）以外で clipping 0。
 - L-VIS-3: 既存 Bottom Navigation、Player UI、各 Modal（Interrupted Match modal 等）の **Physical Accepted 仕様を維持**（寸法・clearance・フォーカス・3 action 等）。
 - L-A11Y-1: `aria-label` / `alt` / `title` / `placeholder` 等（調査: 188箇所）を翻訳対象とする。
-- L-A11Y-2: `lang` 更新により VoiceOver が各言語で読み上げること。言語混在テキスト（ユーザー入力の Player 名など）は元言語のまま。
+- L-A11Y-2: `lang` を表示言語に合わせて更新し、支援技術へ正しい文書言語を公開すること。言語混在テキスト（ユーザー入力の Player 名など）は元言語のまま。VoiceOverの実音声聴取は推奨するが、P5／P6／リリースの必須合格条件にはしない。
 - L-A11Y-3: 数値・状態の読み上げ文は文単位テンプレートとする。
 
 ### 15. 競技用語
@@ -568,7 +569,7 @@ QR 検証では、**何をどの水準（byte / semantic）で比べるか**を�
 | AC-10 | **Navigation** | 4タブ・Back・Settings suite 遷移・Interrupted Match modal（3 action、focus ring 規則）が3言語で同一挙動。**表示文言への依存（例: `プレーヤー一覧` 比較）が残っていない**（静的検査）。Bottom Navigation clearance（Physical Accepted）不変 | 既存 navigation 系の3言語実行＋静的検査 | P2/P5 |
 | AC-11 | **Free / Pro** | Entitlement 判定・Product ID・購入/復元フロー不変。Free制限（`record-access` 等）が言語で変化しない。Paywall 文言が3言語で表示（価格は StoreKit `displayPrice` 由来。文言へ固定価格なし）。法的/Apple要件文言は PO 確認済み（U4） | 既存 free-pro 系＋StoreKit Local の3言語実行 | P3/P6 |
 | AC-12 | **UI Visual** | 390×844 で 3言語×全画面（Home/Player/Match Setup/Match Recording/Match Result/History/Analytics/Settings/Match Sharing/Backup・Restore/Free・Pro/Dialog・Toast）: **horizontal overflow 0**、重要ボタン・数値の clipping 0（許可リストを除く）。Design System の寸法・トークン不変（差分0）。ja のスクリーンショットが現行と一致（許容差の定義は事前合意） | 自動計測＋スクリーンショット比較（既存 `scripts/capture-*` 流用）＋PO目視 | P5 |
-| AC-13 | **Accessibility** | aria-label/alt/title/placeholder が全て翻訳され、日本語の取り残し0（許可リスト除く）。`lang` 更新で VoiceOver が各言語を読む（Simulator/実機確認）。動的文言（`aria-live` 等）が文単位テンプレート。フォーカス順・Modal の focus 挙動が ja と同一 | 静的検査＋DOM検査＋VoiceOver確認 | P5 |
+| AC-13 | **Accessibility** | aria-label/alt/title/placeholder が全て翻訳され、日本語の取り残し0（許可リスト除く）。`lang` が表示言語に一致。動的文言（`aria-live` 等）が文単位テンプレート。フォーカス順・Modal の focus 挙動が ja と同一。VoiceOverの実音声聴取は推奨の非ブロッキング確認であり、未実施でも本項目をFAIL／NOT VERIFIEDにしない | 静的検査＋DOM検査。VoiceOver実音声は任意の補足確認 | P5 |
 | AC-14 | **Native permission** | `NSCameraUsageDescription` が `InfoPlist.strings`（ja/en/zh-Hans）で提供され、OS言語に応じて許可ダイアログに表示される（Simulatorの言語切替）。`knownRegions`/`project.pbxproj` が整合。`Info.plist`・`Info-ScoreRC.plist` 両方。Bundle ID/Signing/Version 不変。**OS言語とアプリ内言語が異なる場合の挙動が仕様どおり（OS言語優先）** | Simulator 言語切替＋plist 検査 | P6 |
 | AC-15 | **PWA / Offline** | 新規 i18n ファイルが `sw.js` 事前キャッシュ一覧と `build-native-web.mjs` の同期対象に登録（登録漏れ検知テスト）。オフライン起動で3言語とも表示。Service Worker 更新動作（`CUESCORE_VERSION_READY`）不変。manifest・アイコン不変 | 既存 PWA テスト＋登録検知＋オフライン起動確認 | P1/P6 |
 | AC-16 | **Saved data identity（クラス A/B/C）** | 本書 Part II §1.6: **クラス A は byte-identical**、クラス B は構造化比較で等価、クラス C は `cueScore.language.v1` のみ。Control 比較法（Settle → Control reload → Switch reload）で「言語切替が原因の差分」だけを判定。Write-trap で切替ハンドラの書込みが language Key 1 回のみ、reload 後の起動時書込みが Control と同一。B-1〜B-6 | SHA-256 / 構造化比較 / Storage 計測 | P1〜P6 |
@@ -684,10 +685,10 @@ QR 検証では、**何をどの水準（byte / semantic）で比べるか**を�
 
 | 項目 | 内容 |
 |---|---|
-| 目的 | 390×844 で 3言語×全画面の horizontal overflow 0・重要要素の clipping 0、VoiceOver 適合 |
+| 目的 | 390×844 で 3言語×全画面の horizontal overflow 0・重要要素の clipping 0、アクセシビリティ属性・言語・フォーカス適合 |
 | 変更可能範囲 | 折返し許可・最小幅・省略規則など**文言長対応に限る** CSS 調整（寸法トークン・構造は不変）。公式仕様と衝突する場合は Decision 追記を先に |
 | 保護対象 | Physical Accepted の Bottom Navigation / Player UI / Modal、Design System |
-| Test | 3言語×全画面（Demoデータ＋実文言）の overflow/clipping 自動計測、スクリーンショット比較、aria-label の言語、`lang` 切替による VoiceOver 言語（Simulator） |
+| Test | 3言語×全画面（Demoデータ＋実文言）の overflow/clipping 自動計測、スクリーンショット比較、aria-label等の属性言語、`lang`、動的文言、フォーカス順・Modal focusの静的／DOM検査。VoiceOver実音声は任意の補足確認 |
 | Evidence | 画面×言語マトリクス、計測結果、許可リスト（ユーザー入力の ellipsis 等） |
 | STOP条件 | Physical Accepted レイアウトの変更が必要になる（→ Decision 先行） |
 | 移行条件 | overflow 0、clipping 0、PO 目視確認 |
@@ -756,4 +757,11 @@ QR 検証では、**何をどの水準（byte / semantic）で比べるか**を�
 
 ## 本書の状態
 
-**ADOPTED / OFFICIAL（2026-10-09 発行）。Implementation NOT STARTED。** Official 108 は Decision 031、Official 107、Official Design Decision Log v2.7 と併せて発行された。S-B（保存された中断試合での言語切替）の許可、言語解決の実機形式、snapshot の表示言語依存の不在は **NOT VERIFIED**（P1 で検証）。Glossary は Draft（PENDING を含む。Official 109 未作成）。
+**ADOPTED / OFFICIAL（2026-10-09 発行、2026-10-21 v1.1限定改訂）。** Official 108 は Decision 031、Official 107、Official Design Decision Log v2.7 と併せて発行された。Decision 043／Official 130／Decision Log v2.19により、AC-13のVoiceOver実音声聴取だけをP5／P6／リリースの必須条件から外した。AC-13の番号、31項目の総数、静的／DOM要件、既存アクセシビリティ実装は維持する。
+
+## Revision History
+
+| Version | Date | Change | Approval |
+|---|---|---|---|
+| 1.0 | 2026-10-09 | Decision 031に基づく初版。 | Product Owner（貴章） |
+| 1.1 | 2026-10-21 | Decision 043に基づき、AC-13のVoiceOver実音声聴取をP5／P6／リリースの必須条件から除外。AC-13番号、受入31項目、静的／DOM要件、既存アクセシビリティ実装は不変。 | Product Owner（貴章） |

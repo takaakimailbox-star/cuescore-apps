@@ -28,7 +28,7 @@ test("numbering: Decision 036 / Official 117 / 118 published once, 109 reserved,
   const nums = fs.readdirSync(new URL("docs/official/", root)).filter(n => /^\d+_.*\.md$/.test(n)).map(n => Number(n.split("_")[0]));
   for (const n of [107, 108, 110, 111, 112, 113, 114, 115, 116, 117, 118]) assert.equal(nums.filter(v => v === n).length, 1, String(n));
   assert.equal(nums.filter(value => value === 109).length, 1);
-  assert.equal(Math.max(...nums), 129);
+  assert.equal(Math.max(...nums), 130);
   const t = zipEntry(LOG("2.12"), "word/document.xml").replace(/<[^>]+>/g, "");
   assert.deepEqual([...t.matchAll(/Decision (\d{3})｜/g)].map(m => Number(m[1])), Array.from({ length: 36 }, (_, i) => i + 1));
   assert.match(t, /Decision 036｜多言語化 P4 レビュー方式の改定/);
@@ -37,9 +37,9 @@ test("numbering: Decision 036 / Official 117 / 118 published once, 109 reserved,
 test("v2.12 keeps Decision 001-035 byte-identical to v2.11", () => {
   assert.ok(zipEntry(LOG("2.12"), "word/document.xml").includes(block(zipEntry(LOG("2.11"), "word/document.xml"))));
 });
-test("Official 107/108/110-116 are unchanged (content hash)", () => {
+test("Official 107/110-116 are unchanged and Official 108 matches its authorized v1.1 hash", () => {
   assert.equal(sha16("docs/official/107_CueScore_Localization_Decision.md"), "e274cec70e3f9789");
-  assert.equal(sha16("docs/official/108_CueScore_Localization_Spec.md"), "c86a48331d4780e0");
+  assert.equal(sha16("docs/official/108_CueScore_Localization_Spec.md"), "a53eebc7009c3dca");
   assert.equal(sha16("docs/official/112_CueScore_Dynamic_Type_Deferral_Decision.md"), "79bfe235c71a95ff");
   assert.equal(sha16("docs/official/115_CueScore_Localization_U6_Dialog_Decision.md"), "3fab4d760dd0b9ff");
   assert.equal(sha16("docs/official/116_CueScore_Localization_U6_Dialog_Spec.md"), "dde6d65ed2b54a78");

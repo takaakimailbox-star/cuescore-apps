@@ -28,7 +28,7 @@ test("numbering: Decision 035 / Official 115 / 116 published once, 109 reserved,
   const nums = fs.readdirSync(new URL("docs/official/", root)).filter(n => /^\d+_.*\.md$/.test(n)).map(n => Number(n.split("_")[0]));
   for (const n of [107, 108, 110, 111, 112, 113, 114, 115, 116]) assert.equal(nums.filter(v => v === n).length, 1, String(n));
   assert.equal(nums.filter(value => value === 109).length, 1);
-  assert.equal(Math.max(...nums), 129);
+  assert.equal(Math.max(...nums), 130);
   const t = zipEntry(LOG("2.11"), "word/document.xml").replace(/<[^>]+>/g, "");
   assert.deepEqual([...t.matchAll(/Decision (\d{3})｜/g)].map(m => Number(m[1])), Array.from({ length: 35 }, (_, i) => i + 1));
   assert.match(t, /Decision 035｜多言語化 U6 の決定/);
@@ -37,9 +37,9 @@ test("numbering: Decision 035 / Official 115 / 116 published once, 109 reserved,
 test("v2.11 keeps Decision 001-034 byte-identical to v2.10", () => {
   assert.ok(zipEntry(LOG("2.11"), "word/document.xml").includes(block(zipEntry(LOG("2.10"), "word/document.xml"))));
 });
-test("Official 107/108/110-114 are unchanged (content hash)", () => {
+test("Official 107/110-114 are unchanged and Official 108 matches its authorized v1.1 hash", () => {
   assert.equal(sha16("docs/official/107_CueScore_Localization_Decision.md"), "e274cec70e3f9789");
-  assert.equal(sha16("docs/official/108_CueScore_Localization_Spec.md"), "c86a48331d4780e0");
+  assert.equal(sha16("docs/official/108_CueScore_Localization_Spec.md"), "a53eebc7009c3dca");
   assert.equal(sha16("docs/official/112_CueScore_Dynamic_Type_Deferral_Decision.md"), "79bfe235c71a95ff");
 });
 test("Decision 035 records only the approved U6 scope and keeps U3/U4/U8 pending", () => {
