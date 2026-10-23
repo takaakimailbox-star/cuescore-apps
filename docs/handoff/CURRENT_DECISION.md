@@ -29,3 +29,4 @@
 - VoiceOver実音声以外のNOT VERIFIED／BLOCKED項目は変更しない。実音声未確認は今後のP6 blockerとして扱わない。
 - BLOCKED: Pro限定Backup Share Sheet実機到達、Build 84実機上書き更新。
 - production source／Native／StoreKit／実機アプリ／Device／Apple操作、P6最終PASS、P7は実施しない。
+- 2026-10-23 Gate 012・013（documentation only）: 隔離Simulator更新リハーサルの事実を`docs/CURRENT_STATE.md`へ記録。新Decisionなし。Local StoreKit検証・Native Backup Share SheetはBLOCKED、公開版実機更新はNOT VERIFIED。

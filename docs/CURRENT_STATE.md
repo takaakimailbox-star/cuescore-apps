@@ -17,6 +17,28 @@
 - **公開版ユーザーデータの更新安全性はDeferredではない。** 未承認・BLOCKED（実機での公開版上書き更新が未実施）として次回アップデートの必須検証に位置づける。Build 84 binary同一性はNOT VERIFIED。
 - P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、S-B=false、Dynamic Type Deferredは不変。Documentation-only。
 
+## CueScore Isolated Update Rehearsal and Residual Verification Recorded（2026年10月23日）
+
+隔離環境（別Bundle ID `…iso012`／`…iso013`、専用Simulator iPhone 17 Pro iOS 26.5、Xcode 27.1）での結果を**事実のみ**記録する。公開アプリ・実機・既存ユーザーデータ・Apple サービスには操作していない。Documentation-only。
+
+| 項目 | 判定 | 範囲・根拠 |
+|---|---|---|
+| 隔離Simulator上書き更新（出荷source `8783c5e` → main `867ddec`） | PASS | Player 4名・試合32件・設定が更新前後で同一（Data container内容の保持。更新でcontainer UUIDは変わる）。実機ではない |
+| 中断試合の再開 | PASS | 更新前に保存した進行中snapshot（`cueScore.inProgressMatch.v1`、schemaVersion 1）を新版が再開 |
+| 休憩結果プロンプトの保存・復元 | PASS | 新版は表示中の状態を保存し、再開でプロンプト（「ブレイクの結果を入力してください」）を復元。旧版は復元せず休憩情報を失う（既知の旧挙動、修正済みの差） |
+| QRコア互換（旧⇄新） | PASS（Node 18/18） | Sender／Receiverのpayload往復。実カメラ走査はNOT VERIFIED（Simulatorにカメラなし） |
+| Backup旧⇄新のcross-restore（データ層） | PASS | Share Sheet経由の保存・選択はBLOCKED |
+| Player Hub タブ hit area（Native） | PASS（Simulatorのタッチ注入） | 旧は上端外側4ptまで、新は5ptまで反応（CSS +1pt拡張がNativeでも有効）。実指はNOT VERIFIED |
+| Free／Pro Web層（アプリ自身のadapter模擬） | PASS（旧＝新） | Free：履歴20件・Proバッジ・分析でpaywall／Pro：履歴32件・分析選択可。StoreKitは使用していない |
+| Local StoreKitによるPro購入・復元・更新後権限 | **BLOCKED** | CLIの`xcodebuild`は`.storekit`を適用せず、Apple照会を遮断できることを証明できなかったため未実施。Xcode IDEでの検証が必要 |
+| Native Backup Share Sheet到達 | **BLOCKED** | BackupはPro限定で、Pro付与にStoreKitが必要 |
+| 公開版（Build 84）の実機上書き更新 | NOT VERIFIED／未承認 | 別Gate・Product Owner実機操作 |
+| 旧版UIテスト停止 | 環境起因と分類（再現せず） | 旧ビルドで3回再現を試みて全PASS。厳密な原因は未特定 |
+
+- 注意: アプリは起動時にStoreKitの権限を読む設計（`Transaction.currentEntitlements`）。隔離Simulatorの起動にはこの読み取りが含まれる。Gate 012ではpaywallを1回開いたため、読み取り専用の商品照会が発生した可能性がある。購入・サインイン・IAP変更は行っていない。
+- 出荷sourceとmainの差は、Pro購入フローのJS文言（`monetization-v1.js`のi18n化）、Native `Info.plist`の`CFBundleLocalizations`、中断試合復元の修正などを含む。StoreKitプラグイン（`CueScoreStoreKitPlugin.swift`）・`CueScore.storekit`・Product ID・価格・Free上限（20）は出荷sourceと同一。
+- Official／Decisionは変更しない。P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、Build 84 binary同一性NOT VERIFIED、S-B=false、Dynamic Type Deferredは不変。
+
 ## CueScore Docs Sync and Player Hub Tab Hit Area Reflected on main（2026年10月23日）
 
 - GitHub main `d0f2628ca8b8b1f41302e65ae40d29553b44a673` に2 commitを通常pushで反映した（Gate 007、司令塔承認）。Commit 1 `7bab1ae`＝docs-onlyの現行状態同期（親SSOT・CURRENT_DECISION・CURRENT_REPORT・docs/README。新Decisionなし、Historical記述は保持）。Commit 2 `d0f2628`＝Player Hubセグメントタブのhit areaを44ptへ拡張（Design System v2.1 DS-REQ-018）。

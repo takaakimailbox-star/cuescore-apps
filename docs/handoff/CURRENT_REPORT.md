@@ -29,3 +29,4 @@ Decision 043／Official 108 v1.1・130／Decision Log v2.19で、AC-13のVoiceOv
 ## Boundary / STOP
 
 production source、翻訳catalog、Native、StoreKit、Device Build/install、既存アプリ、Apple Developer、TestFlight／ASC／Release、Build 84上書き、P7には進まない。
+- 2026-10-23 Gate 012・013: 隔離Simulator更新リハーサル結果の記録（documentation only）。BLOCKEDはLocal StoreKit（Pro購入・復元・更新後権限）とNative Backup Share Sheet。公開版実機更新はNOT VERIFIED。
