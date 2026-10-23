@@ -161,16 +161,18 @@ Adopted RC decision addenda that supplement the latest Decision Log:
 
 CueScore Localization（3言語対応: ja / en / zh-Hans）status:
 
+> Current status of record is `CURRENT_STATUS.md`. Entries marked **[Historical …]** below are point-in-time snapshots kept unchanged for history (freshness sync, Docs-only Gate 001, 2026-10-22).
+
 - Phase 0 Official Specification Published（2026-10-09）: Decision 031 / Official 107 / Official 108 / Official Design Decision Log v2.7. Evidence: `implementation/CueScore_Localization_Phase0_Official_Release_2026-10-09.md`.
-- P1 Implementation: NOT STARTED. Localization Implementation: NOT STARTED. Product source: UNCHANGED. Version 1.2 Build 84 release state: unchanged.
-- Conditional specification (Official 108): saved-interrupted-match language switching (S-B) takes effect only after the P1 runtime proof (C1〜C6, T-SW-1〜10); NOT VERIFIED until then.
+- P1 Implementation: NOT STARTED. Localization Implementation: NOT STARTED. Product source: UNCHANGED. Version 1.2 Build 84 release state: unchanged. **[Historical snapshot as of Phase 0 publication (2026-10-09). Current: localization P1–P4 source implemented (P3-6 layer consolidation unfinished); P6 formally accepted PASS 31/31 (2026-10-21); P7 NOT started; Version 1.2 Build 84 release state per `CURRENT_STATUS.md`.]**
+- Conditional specification (Official 108): saved-interrupted-match language switching (S-B) takes effect only after the P1 runtime proof (C1〜C6, T-SW-1〜10); NOT VERIFIED until then. **[Current: S-B `flag=false` (Later) per Decision 034; not enabled; remains NOT VERIFIED.]**
 - Glossary: Official 109 published. 38 terms are CONFIRMED by PO approval record; PENDING/CANDIDATE are 0. Chinese/JPA primary-source gaps and human independent review remain NOT VERIFIED. The earlier proposal remains historical outside `official/`.
-- Open Decision Pending items: U3, U4, U6, U8, U9, U11 (see Official 108 §17).
+- Open Decision Pending items: U3, U4, U6, U8, U9, U11 (see Official 108 §17). **[Historical as of 2026-10-09. Since then: U9 (Decision 034), U6 (Decision 035), U3 / U8 (Decision 037), U4 / U11 (Decision 038; U11 corrected by Decision 039). See `CURRENT_STATUS.md`.]**
 
 Settings Unified Design status:
 
 - Decision 032 / Official 110 / Official 111 / Official Design Decision Log v2.8 (published 2026-10-12). Settings is unified into three cards (plan / data management / app info). Limited scope: Settings, 言語 / Language, About CueScore, 利用規約, プライバシーポリシー. Decision 014 is not modified; Decision 032 supersedes it only within that scope. Official 84 is not modified; its 62px data-row rule is superseded only for Settings at viewport height 830px or less (data rows 56px or more at 830px or less, 62px or more at 831px or more). Official 109 stays reserved for the Glossary. Evidence: `implementation/CueScore_Settings_Unified_Design_Official_Release_2026-10-12.md`.
-- Implementation: NOT STARTED. Product source: UNCHANGED. P1 is unfinished and uncommitted.
+- Implementation: NOT STARTED. Product source: UNCHANGED. P1 is unfinished and uncommitted. **[Historical as of 2026-10-12. Settings Unified Design R was implemented in commit `39a61a1` (2026-10-13); see `CURRENT_STATUS.md`.]**
 
 Dynamic Type deferral status:
 

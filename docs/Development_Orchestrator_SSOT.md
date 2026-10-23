@@ -64,6 +64,17 @@ Use this reading order:
 
 ## Protected current boundary
 
+### Current boundary (freshness sync, Docs-only Gate 001, 2026-10-22; facts are taken from `docs/CURRENT_STATUS.md` and `docs/CURRENT_STATE.md`, no rule or approval boundary is changed)
+
+- Current project version/build: `1.2 (84)`. Version 1.2 Build 84 release was executed and App Store Connect state is `READY_FOR_SALE`; public propagation was pending at the last recorded status and is NOT re-verified here (see `docs/CURRENT_STATUS.md`).
+- Formal Product ID: `com.takaakimailboxstar.cuescoreapps.pro` (unchanged).
+- Localization P6: formally accepted, PASS 31/31 (commander judgement, 2026-10-21). P7 is NOT started.
+- Still separate and not approved: Build 84 shipped-binary identity (NOT VERIFIED), public-release user-data update safety, overwrite update of the public app, TestFlight / App Store Connect / Release operations, Build 83 Match Sharing root-cause work.
+- S-B (language switching of a saved interrupted match) stays `flag=false`; automatic Dynamic Type linking stays Deferred (Later).
+- Approval boundaries in this document (Standard Gate flow, Git and handoff) are unchanged.
+
+### Historical boundary (as recorded 2026-09-25; kept unchanged for history)
+
 - Formal version/build: `1.0 (78)`
 - Formal Product ID: `com.takaakimailboxstar.cuescoreapps.pro`
 - App Review: Version 1.0 and CueScore Pro approved; submission `COMPLETE`

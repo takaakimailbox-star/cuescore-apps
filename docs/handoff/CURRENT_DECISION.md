@@ -1,5 +1,12 @@
 # CueScore Current Decision
 
+> **Current-state sync note (Docs-only Gate 001, 2026-10-22; this is NOT a new Decision).** The Decision recorded below is the Decision 043 snapshot and is kept unchanged as history. Later formal state of record (see `docs/CURRENT_STATUS.md`, `docs/CURRENT_STATE.md`):
+> - Latest formal Decision: Decision 044 / Official 131 / Official Design Decision Log v2.20 (iOS first-entry `navigator.languages` note; documentation only).
+> - Localization P6: formally accepted, PASS 31/31 (commander judgement, 2026-10-21; recorded in main `bfdd4e1`). The sentence below that says P6 as a whole is not PASS is **superseded** by this record.
+> - P7: NOT started. Build 83 Match Sharing root-cause: STOP. Build 84 shipped-binary identity: NOT VERIFIED. Public-release update safety / overwrite update / TestFlight / ASC / Release: separate, not approved.
+> - S-B: `flag=false`. Dynamic Type automatic linking: Deferred (Later).
+> - In the Decision 043 snapshot below, the BLOCKED/NOT VERIFIED counts (PASS 28 / BLOCKED 1 / NOT VERIFIED 2) are the point-in-time ledger of 2026-10-21 and are not the current P6 result.
+
 - Decision ID: `CUESCORE-I18N-AC13-VOICEOVER-RELEASE-REQUIREMENT-DECISION-043-20261021`
 - Date: 2026-10-21
 - Previous Decision（継続・AC-13の実音声境界だけ後続更新）: `CUESCORE-I18N-GLOSSARY-FINALIZATION-DECISION-042-20261018`（Decision 042／Official 109・129）。

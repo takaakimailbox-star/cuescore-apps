@@ -1,5 +1,11 @@
 # CueScore Current Report
 
+> **Current-state sync note (Docs-only Gate 001, 2026-10-22; not a Decision).** The report below is the Decision 043 Gate snapshot (baseline `9979b3d`) and is kept unchanged as history. Current state of record, as of main `bfdd4e1ea9f139a6864544c4c1a145897de1793e`:
+> - Latest formal Decision: Decision 044 / Official 131 / Decision Log v2.20 (documentation only). Subsequent records: P6 final acceptance closeout (`635f6b0`) and P6 formal acceptance, PASS 31/31 (`bfdd4e1`).
+> - The snapshot sentence "P6 as a whole is not PASS and P7 is not started" is superseded for P6: P6 is formally accepted PASS 31/31. P7 remains NOT started.
+> - Unchanged boundaries: Build 83 RCA STOP; Build 84 binary identity NOT VERIFIED; public update safety / overwrite update / TestFlight / ASC / Release not approved; S-B `flag=false`; Dynamic Type Deferred.
+> - This sync changed documentation only (4 files: `docs/Development_Orchestrator_SSOT.md`, `docs/handoff/CURRENT_DECISION.md`, `docs/handoff/CURRENT_REPORT.md`, `docs/README.md`). Product source, Native, catalog, tests and Official specifications are unchanged.
+
 - App: CueScore Apps
 - Decision ID: `CUESCORE-I18N-AC13-VOICEOVER-RELEASE-REQUIREMENT-DECISION-043-20261021`
 - Date: 2026-10-21
