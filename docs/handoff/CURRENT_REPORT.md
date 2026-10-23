@@ -5,6 +5,7 @@
 > - The snapshot sentence "P6 as a whole is not PASS and P7 is not started" is superseded for P6: P6 is formally accepted PASS 31/31. P7 remains NOT started.
 > - Unchanged boundaries: Build 83 RCA STOP; Build 84 binary identity NOT VERIFIED; public update safety / overwrite update / TestFlight / ASC / Release not approved; S-B `flag=false`; Dynamic Type Deferred.
 > - This sync changed documentation only (4 files: `docs/Development_Orchestrator_SSOT.md`, `docs/handoff/CURRENT_DECISION.md`, `docs/handoff/CURRENT_REPORT.md`, `docs/README.md`). Product source, Native, catalog, tests and Official specifications are unchanged.
+> - Gate 007 (2026-10-23, main `d0f2628`; not a Decision): the Gate 001 sync above is reflected as commit `7bab1ae`; the Player Hub tab hit-area fix (DS-REQ-018, CSS-only `::before{inset:-1px 0}`) is reflected as `d0f2628`. Web/PWA cache bump is a separate gate. All boundaries above are unchanged.
 
 - App: CueScore Apps
 - Decision ID: `CUESCORE-I18N-AC13-VOICEOVER-RELEASE-REQUIREMENT-DECISION-043-20261021`

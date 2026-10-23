@@ -1,5 +1,29 @@
 # CueScore Apps Current State
 
+## CueScore Version 1.2 Public Status Synchronized（2026年10月23日）
+
+次の項目を**分離**して記録する。公開版（Apple）・出荷binary・GitHub source・現行開発候補を推測で同一扱いしない。
+
+| 項目 | 状態 | 根拠 |
+|---|---|---|
+| 公開Version | **1.2（日本App Store）** | 2026-10-23の公開iTunes lookup（read-only、`bundleId=com.takaakimailboxstar.cuescoreapps`、jp）。公開Version 1.1 (79)の記述は2026-10-04時点で古い |
+| 公開日 | Version 1.2: `currentVersionReleaseDate = 2026-10-04T05:11:01Z`（JST 14:11）／初回公開 `releaseDate = 2026-09-24T07:00:00Z` | 同lookup。ASC release request完了 `2026-10-04T05:11:02.349Z`（docs/release/CueScore_v1.2_Build84_Manual_Release_2026-10-04.md）と1秒差で整合 |
+| 公開Build番号 | **NOT VERIFIED** | lookupはBuild番号を返さない。リリース時点のASC記録は「Version 1.2 → Build 84、Build ID `51ee69a0-e238-4382-9cbb-8529f4d0a682`、VALID／APP_STORE_ELIGIBLE」（docs記載、本日ASC再確認なし） |
+| 出荷binary | Build 84（docs記載）。**binary同一性はNOT VERIFIED** | 配布binaryのhash／署名照合は未実施（Apple操作を要する別Gate） |
+| GitHub source（出荷時） | `8783c5e2ef4a73405ea6334c268422f6964fc920`（Build 84 product source、2026-10-03） | Manual Release記録 |
+| 現行開発候補（main） | `d0f2628`（出荷source `8783c5e`から81 commit、製品31ファイル +6212/-1354：多言語ja/en/zh-Hans、Native `CFBundleLocalizations`、U3/U4/U8/U11、P3〜P6、Player Hub hit area、**中断試合スナップショットの保存・復元の挙動修正（`7492897` 2026-10-10／`356d730` 2026-10-11：休憩結果プロンプト表示中の状態を保存し、再開時に復元。保存key `cueScore.inProgressMatch.v1`・schemaVersion 1・`pendingBreak*`フィールドは出荷時と同一でデータ形式は不変）**、Main badge表示修正 `9c7e2ea`、dead code除去 `4e5fea3`、隔離RC target `c6d5763`）。Version `1.2`／Build `84`のまま未bump | git diff、ios/App/App.xcodeproj/project.pbxproj |
+
+- **mainは出荷Build 84と同一ではない。** 次回の出荷binaryは新しいBuild番号が必要（Build 84は使用済み）。Version／Build変更とTestFlight／ASC／Releaseは別Gate。
+- **公開版ユーザーデータの更新安全性はDeferredではない。** 未承認・BLOCKED（実機での公開版上書き更新が未実施）として次回アップデートの必須検証に位置づける。Build 84 binary同一性はNOT VERIFIED。
+- P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、S-B=false、Dynamic Type Deferredは不変。Documentation-only。
+
+## CueScore Docs Sync and Player Hub Tab Hit Area Reflected on main（2026年10月23日）
+
+- GitHub main `d0f2628ca8b8b1f41302e65ae40d29553b44a673` に2 commitを通常pushで反映した（Gate 007、司令塔承認）。Commit 1 `7bab1ae`＝docs-onlyの現行状態同期（親SSOT・CURRENT_DECISION・CURRENT_REPORT・docs/README。新Decisionなし、Historical記述は保持）。Commit 2 `d0f2628`＝Player Hubセグメントタブのhit areaを44ptへ拡張（Design System v2.1 DS-REQ-018）。
+- Commit 2の内容: `navigation-phase2-6.css`の`.hub-tabs-v2 button::before{inset:-1px 0}`のみ（見た目42ptは不変）。静的テスト2・ブラウザ実測テスト1と、baseline fixtureへの新規テスト登録（既存エントリ不変）を追加。検証: Full Node 1169/1169、36タブ（ja/en×Free/Pro×390×844／430×932／320×568）のhit ≥44pt、クリック受理とFree/Proゲート（Freeの分析はpaywall）、視覚12/12一致（初回1ケースの全画面で220px・0.013%のアンチエイリアス差があり、再実行で一致）。
+- **Web/PWAキャッシュ更新は未実施（別Gate）。** CSSはcache-firstのため、`?v`／sw.jsのbumpなしでは既存PWAに届かない。Nativeは次のNativeビルドで同梱される。sw.js・index.htmlは変更していない。
+- P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、Build 84 binary同一性NOT VERIFIED・公開版更新安全性は別Gate、S-B=false、Dynamic Type Deferredは不変。Official・Native・保存schema・Free/Pro/IAPは変更なし。実機の指タップ確認はNOT VERIFIED。
+
 ## CueScore P6 Formally Accepted — Commander Judgement PASS 31／31（2026年10月21日）
 
 - ○ Score｜司令塔は2026-10-21、Official 108 v1.1のP6最終受入を**正式PASS**と判定した。**PASS 31／31、FAIL 0、BLOCKED 0、NOT VERIFIED 0、DEFERRED 0**。根拠: Evidence 100（31条件Matrix）、Product OwnerのAC-12目視承認（「PDF確認したよ。OK!」、Evidence 97掲載画面のみ）、Official 131（Decision 044）、Official 108 v1.1（Official 108 AC-0.1のP6完了条件を満たす）、Full Node 1,167／1,167。直前のPASS Candidate記録（同日）は履歴として保持し、本記録で正式判定に更新する。

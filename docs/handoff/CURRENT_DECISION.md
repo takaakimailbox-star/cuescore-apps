@@ -6,6 +6,7 @@
 > - P7: NOT started. Build 83 Match Sharing root-cause: STOP. Build 84 shipped-binary identity: NOT VERIFIED. Public-release update safety / overwrite update / TestFlight / ASC / Release: separate, not approved.
 > - S-B: `flag=false`. Dynamic Type automatic linking: Deferred (Later).
 > - In the Decision 043 snapshot below, the BLOCKED/NOT VERIFIED counts (PASS 28 / BLOCKED 1 / NOT VERIFIED 2) are the point-in-time ledger of 2026-10-21 and are not the current P6 result.
+> - Gate 007 (2026-10-23, main `d0f2628`; not a Decision): the Gate 001 sync above is reflected as commit `7bab1ae`; the Player Hub tab hit-area fix (DS-REQ-018, CSS-only `::before{inset:-1px 0}`) is reflected as `d0f2628`. Web/PWA cache bump is a separate gate. All boundaries above are unchanged.
 
 - Decision ID: `CUESCORE-I18N-AC13-VOICEOVER-RELEASE-REQUIREMENT-DECISION-043-20261021`
 - Date: 2026-10-21
