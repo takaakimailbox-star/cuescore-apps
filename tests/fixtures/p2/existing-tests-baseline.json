@@ -635,6 +635,12 @@
    "tests": 0,
    "skips": 0
   },
+  "player-hub-tab-hit-area.test.mjs": {
+   "sha256": "ca9478f6fc430e671041443016f2c658f444b0b86f37c118de0fd6e7a002c07e",
+   "tests": 2,
+   "skips": 0,
+   "updated_in": "Gate 003 / Player Hub tab hit area (DS-REQ-018)"
+  },
   "player-journey-three-screen.test.mjs": {
    "sha256": "3f3f7d89c694d5bb0959d9a1413191659d3bcbd0b3d9ce246c1b6059c1b78500",
    "tests": 0,
