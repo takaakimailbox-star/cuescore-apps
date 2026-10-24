@@ -1910,3 +1910,14 @@ Home種目名の表示修正（`ae6bafd`）を含む Version `1.3`／Build `88`�
 
 - **実機での種目名表示の解消は未確認**（Product Owner操作。Simulatorでは元々再現せず、原因はNOT VERIFIED）。結果が出るまでApp Store審査提出・一般公開は開始しない。Build 87／85は残存。
 - Apple処理メール（ITMS警告）の有無は未確認。Official／Decisionは変更なし。Documentation-only。
+
+## CueScore Version 1.3 (Build 88) PO Device Acceptance and Release Readiness（2026年10月24日）
+
+**Build 88（TestFlight内部）のPO実機受入6/6 PASS**（Product Owner報告）：1.3（88）へ更新／完全終了後の起動／初回表示で6種目名が全表示／ホームから再表示しても表示／文字が途中で切れない／種目→試合設定→下部ホームの復帰。この6条件は正式受入PASSで、同じ確認は繰り返さない。Build 87の表示不具合は解消。
+
+- 提出候補：Version `1.3`／Build `88`（Build ID `b8665137-5dd2-43cd-a47f-a3a5a018a530`、ASC `VALID`／`APP_STORE_ELIGIBLE`、`usesNonExemptEncryption=false`、有効期限2027-01-22、main `ecdb21a`）。
+- ASC read-only確認（書込み0）：App Store Version 1.3は**未作成**（公開版は1.2）。価格Free・配布地域JPNのみ・IAP ¥980（APPROVED）・Age Rating 4+は不変。
+- What's New案（新Home6種目・3言語・設定整理等、実装済み事実のみ）と審査メモ追記案を作成。
+- **提出前の要判断**：スクリーンショット6.5インチセットの `01_Home_Build77.png` は旧Homeで新Homeと不一致。
+- 未確認（公開阻害性を評価済み、PASS扱いしない）：Restore完了、Native Backup Share Sheet（BLOCKED）、Paywall価格「$」表示の由来、Apple処理メールのITMS警告、App Privacy（API確認不能）。
+- **App Store審査提出・一般公開は未承認・未実施**。Documentation-only。

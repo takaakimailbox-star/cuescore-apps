@@ -36,3 +36,4 @@
 - 2026-10-24 Gate 024（documentation only）: Version 1.3／Build 87（新Home）をASC `VALID`・TestFlight内部配布まで記録。新Decisionなし。PO実機確認前にApp Store提出・Releaseは開始しない。
 - 2026-10-24 Gate 025: 新Home種目名の表示不具合に対する修正をBuild 88として準備（Official 132／133の範囲内、新Decisionなし）。Upload・配布・審査提出は未承認。
 - 2026-10-24 Gate 026（documentation only）: Version 1.3／Build 88をASC `VALID`・TestFlight内部配布まで記録。新Decisionなし。PO実機確認前にApp Store提出・Releaseは開始しない。
+- 2026-10-24 Gate 027（documentation only）: Build 88のPO実機受入6/6 PASSを記録し、Version 1.3／Build 88をApp Store提出候補として固定。新Decisionなし。審査提出・一般公開は未承認。
