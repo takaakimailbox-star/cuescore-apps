@@ -46,7 +46,7 @@ test("U11 language values, production and RC identities, signing team, version a
   assert.match(pb, /knownRegions = \(\s*ja,\s*en,\s*"zh-Hans",\s*Base,\s*\);/);
   assert.equal((pb.match(/PRODUCT_BUNDLE_IDENTIFIER = com\.takaakimailboxstar\.cuescoreapps;/g) || []).length, 2);
   assert.equal((pb.match(/DEVELOPMENT_TEAM = U26DF88PRW;/g) || []).length, 6);
-  assert.equal((pb.match(/CURRENT_PROJECT_VERSION = 87;/g) || []).length, 2);
+  assert.equal((pb.match(/CURRENT_PROJECT_VERSION = 88;/g) || []).length, 2);
   assert.equal((pb.match(/MARKETING_VERSION = 1\.3;/g) || []).length, 2);
   assert.match(read("ios/App/ScoreRC.xcconfig"), /PRODUCT_BUNDLE_IDENTIFIER = com\.takaakimailboxstar\.cuescoreapps\.rc12/);
   assert.match(read("ios/App/ScoreRC.xcconfig"), /INFOPLIST_FILE = App\/Info-ScoreRC\.plist/);

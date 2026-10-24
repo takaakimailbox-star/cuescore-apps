@@ -318,7 +318,7 @@
    "skips": 0
   },
   "ios-native-camera-localization.test.mjs": {
-   "sha256": "41f3b3f4bf53ed2b8751c4138b30f499ff6e27d14e4b02eb0e74ac7e45ace282",
+   "sha256": "e8ba8ba4eb76a7ad4403c14556f7152f2634a4fa981cf1f52c09e9640306b124",
    "tests": 5,
    "skips": 0
   },
@@ -329,7 +329,7 @@
    "previousSha256": "95d78fea763e1ed1bbc47cfda2fd1051669e0788b08c3270107135d767411b30"
   },
   "ios27-scene-lifecycle.test.mjs": {
-   "sha256": "d30d41c535413195aa4b707f37010047052d5cdb0124cc91096728c613fa2baf",
+   "sha256": "6ce7c0aae5941c954a0a39b58b571af480ff7fd4d08f7890cd7f772ac5abe2a0",
    "tests": 4,
    "skips": 0
   },
@@ -354,7 +354,7 @@
    "skips": 0
   },
   "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
-   "sha256": "2cf1f8ac4155b7d7e7e9277491ea5abe943f9feb5357577bb4f690e89547b784",
+   "sha256": "8b1037b8bd28fc5154a26f7686f978dc3b87399901bde79cb9313c572de2b1bb",
    "tests": 4,
    "skips": 0,
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)",
@@ -375,7 +375,7 @@
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
   },
   "localization-ios-first-entry-language-decision.test.mjs": {
-   "sha256": "c76a2ab4333c8925e9f314c84815ef568b192e7577b45bea2c7ccc56e4451946",
+   "sha256": "d39d1bddb18109cf27e94006bc9fb77ba8182d8452096c85c6edee33f0745a22",
    "tests": 4,
    "skips": 0,
    "updated_in": "Decision 044 / iOS first-entry language note regression"
@@ -493,7 +493,7 @@
    "skips": 0
   },
   "match-sharing-stage5a.test.mjs": {
-   "sha256": "16d4399f3dbe3f2508cbaf23878bcc638d81e0056cce8be90e0c7e2401f1f37c",
+   "sha256": "dd5e731849575f58ee58e03a6ff4c477615d2e137a9dcb599e0556486fd34f15",
    "tests": 19,
    "skips": 0
   },
@@ -508,7 +508,7 @@
    "skips": 0
   },
   "native-ios-foundation.test.mjs": {
-   "sha256": "bb9c58593bf4a28366e5390ebe8f02cd26a9e9badabd76eb1850a077a484e12e",
+   "sha256": "965d19512afdecad17a183a75b1739c34023e7ba2cc87b825fbf9335ebbd0388",
    "tests": 6,
    "skips": 0
   },
@@ -544,7 +544,7 @@
    "skips": 0
   },
   "official-website-v1.test.mjs": {
-   "sha256": "9a4a46967330b5b788f3807c4bcb9f54820393b93eb83b08b8e6fb4dfd19a784",
+   "sha256": "8cbb6eefe450eb0cbf8dfb342ae49a8cc648bf44297f4c9075bde369403df87a",
    "tests": 4,
    "skips": 0
   },
