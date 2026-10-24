@@ -1896,3 +1896,17 @@ Build 87 の実機（TestFlight）で、新Homeの6種目名が「初回起動�
 
 - **Build 88のUpload・TestFlight配布・審査提出は未承認・未実施**。Build 87はTestFlight内部配布のまま変更なし。
 - 実機での表示不具合解消はNOT VERIFIED（Simulatorで再現不能のため）。PO実機で要確認。Documentation-only（本節）。
+
+## CueScore Version 1.3 (Build 88, Home Tile-Name Fix) Distributed to TestFlight Internal Testers（2026年10月24日）
+
+Home種目名の表示修正（`ae6bafd`）を含む Version `1.3`／Build `88`（main `48261b6`）を App Store Connect へ Upload し、既存の内部 TestFlight グループへ配布可能にした。**App Store の公開版は Version 1.2（Build 84）のまま**で、審査提出・一般公開は未実施。
+
+| 項目 | 状態 | 根拠 |
+|---|---|---|
+| Distribution export | Apple Distribution署名、既存の管理対象profile（2026-08-31作成）、`get-task-allow=false`。Gate 025のArchive（ツリーSHA-256 `0d42f372…`）と内容同一 | Gate 026 |
+| ASC Upload／処理 | 2026-10-24 22:27 JST にUpload（1回）、**`VALID`**（Build ID `b8665137-5dd2-43cd-a47f-a3a5a018a530`、pre-release 1.3）。buildUploadsの`errors`／`warnings`／`infos`は空 | Gate 026 |
+| Export Compliance | `usesNonExemptEncryption=false`（Build 87→88の暗号関連差分0、依存・Info.plist差分0） | Gate 026 |
+| TestFlight 内部配布 | Internal Build State `IN_BETA_TESTING`。既存グループ `CueScore Internal Testers`（`hasAccessToAllBuilds=true`）のbuild一覧にBuild 88を確認。新グループ・テスター変更・外部配布なし | Gate 026 |
+
+- **実機での種目名表示の解消は未確認**（Product Owner操作。Simulatorでは元々再現せず、原因はNOT VERIFIED）。結果が出るまでApp Store審査提出・一般公開は開始しない。Build 87／85は残存。
+- Apple処理メール（ITMS警告）の有無は未確認。Official／Decisionは変更なし。Documentation-only。
