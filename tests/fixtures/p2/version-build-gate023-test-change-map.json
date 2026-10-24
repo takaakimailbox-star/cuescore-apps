@@ -1,0 +1,78 @@
+{
+ "gate": "Build 87 (New Home implementation build)",
+ "scope": "CURRENT_PROJECT_VERSION 86 -> 87 in project.pbxproj (2 lines) only; MARKETING_VERSION 1.3 and the Web Version literals are unchanged. Build 86 was adopted in main but never uploaded to App Store Connect (unregistered); Build 87 carries the New Home.",
+ "productChanges": {
+  "ios/App/App.xcodeproj/project.pbxproj": {
+   "before": "724b7430d8153a8bf5dd7629681c655b7db8645cd5c656f6d807466eaae747b0",
+   "after": "6ed416b1b35b2aa839a106ce4d5489e105176b5d20e9a3d49050627bd8aea207"
+  }
+ },
+ "note": "Assertions keep their meaning: only the expected Build literal and the pinned pbxproj digest move.",
+ "changes": [
+  {
+   "file": "ios-native-camera-localization.test.mjs",
+   "beforeSha256": "a680d21b2af5d979060a71adb0610bf3d1a48b5330afb5640c0e9b83dbe7511d",
+   "afterSha256": "41f3b3f4bf53ed2b8751c4138b30f499ff6e27d14e4b02eb0e74ac7e45ace282",
+   "assertionDiff": [
+    "assert.equal((pb.match(/CURRENT_PROJECT_VERSION = 86;/g) || []).length, 2);",
+    "assert.equal((pb.match(/CURRENT_PROJECT_VERSION = 87;/g) || []).length, 2);"
+   ]
+  },
+  {
+   "file": "ios27-scene-lifecycle.test.mjs",
+   "beforeSha256": "9edfbb810b4ef2afb766194fd2c2007f3d866af5992e98aaeef8421ff1cd9e05",
+   "afterSha256": "d30d41c535413195aa4b707f37010047052d5cdb0124cc91096728c613fa2baf",
+   "assertionDiff": [
+    "assert.match(project, /CURRENT_PROJECT_VERSION = 86;/);",
+    "assert.match(project, /CURRENT_PROJECT_VERSION = 87;/);"
+   ]
+  },
+  {
+   "file": "localization-ac13-voiceover-release-requirement-decision.test.mjs",
+   "beforeSha256": "44bec393765d197092e95bbd30149a9db9adaf963a38c61597d6c21b0e4af9b2",
+   "afterSha256": "2cf1f8ac4155b7d7e7e9277491ea5abe943f9feb5357577bb4f690e89547b784",
+   "assertionDiff": [
+    "\"ios/App/App.xcodeproj/project.pbxproj\": \"724b7430d8153a8bf5dd7629681c655b7db8645cd5c656f6d807466eaae747b0\",",
+    "\"ios/App/App.xcodeproj/project.pbxproj\": \"6ed416b1b35b2aa839a106ce4d5489e105176b5d20e9a3d49050627bd8aea207\","
+   ]
+  },
+  {
+   "file": "localization-ios-first-entry-language-decision.test.mjs",
+   "beforeSha256": "fccb546133ae21ab4a395da8da6c45de6488427584e5ffbe5e33a74c60f8aea4",
+   "afterSha256": "c76a2ab4333c8925e9f314c84815ef568b192e7577b45bea2c7ccc56e4451946",
+   "assertionDiff": [
+    "\"ios/App/App.xcodeproj/project.pbxproj\": \"724b7430d8153a8bf5dd7629681c655b7db8645cd5c656f6d807466eaae747b0\",",
+    "\"ios/App/App.xcodeproj/project.pbxproj\": \"6ed416b1b35b2aa839a106ce4d5489e105176b5d20e9a3d49050627bd8aea207\","
+   ]
+  },
+  {
+   "file": "match-sharing-stage5a.test.mjs",
+   "beforeSha256": "5ee4cd52e1af7699bfc3b0af18dbbcbd29086c578f25d3978e5bbdbc93c6ba12",
+   "afterSha256": "16d4399f3dbe3f2508cbaf23878bcc638d81e0056cce8be90e0c7e2401f1f37c",
+   "assertionDiff": [
+    "assert.match(project,/MARKETING_VERSION = 1\\.3;/);assert.match(project,/CURRENT_PROJECT_VERSION = 86;/);",
+    "assert.match(project,/MARKETING_VERSION = 1\\.3;/);assert.match(project,/CURRENT_PROJECT_VERSION = 87;/);"
+   ]
+  },
+  {
+   "file": "native-ios-foundation.test.mjs",
+   "beforeSha256": "b00d2ce9795d4a33c48e17a393473d38d963cdecb3ee4792e1c2baca31b1b3b0",
+   "afterSha256": "bb9c58593bf4a28366e5390ebe8f02cd26a9e9badabd76eb1850a077a484e12e",
+   "assertionDiff": [
+    "test(\"iOS target is iPhone-only, portrait-only, version 1.3 build 86\", () => {",
+    "test(\"iOS target is iPhone-only, portrait-only, version 1.3 build 87\", () => {",
+    "assert.match(project, /CURRENT_PROJECT_VERSION = 86;/);",
+    "assert.match(project, /CURRENT_PROJECT_VERSION = 87;/);"
+   ]
+  },
+  {
+   "file": "official-website-v1.test.mjs",
+   "beforeSha256": "7cfa25030ce5bce1a0f7bbb3096189c911e9e540b78ed4f76154fb2ff9f797f9",
+   "afterSha256": "9a4a46967330b5b788f3807c4bcb9f54820393b93eb83b08b8e6fb4dfd19a784",
+   "assertionDiff": [
+    "assert.match(project,/CURRENT_PROJECT_VERSION = 86;/);",
+    "assert.match(project,/CURRENT_PROJECT_VERSION = 87;/);"
+   ]
+  }
+ ]
+}
