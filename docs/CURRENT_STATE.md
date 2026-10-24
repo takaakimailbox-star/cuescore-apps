@@ -17,6 +17,14 @@
 - **公開版ユーザーデータの更新安全性はDeferredではない。** 未承認・BLOCKED（実機での公開版上書き更新が未実施）として次回アップデートの必須検証に位置づける。Build 84 binary同一性はNOT VERIFIED。
 - P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、S-B=false、Dynamic Type Deferredは不変。Documentation-only。
 
+## CueScore New Home Implemented — Build 87 prepared（2026年10月24日）
+
+- Decision 045／Official 132・133の**新Homeを実装**し、main `8130b8b`（実装）・`8ea5b72`（Build 87採番）へ反映した。Home＝ロゴ＋中断試合の再開カード（該当時）＋6種目タイル（2列×3段：9-Ball／10-Ball、JPA 9-Ball／Rotation、14-1／3 Cushion、採用済みアイコン）。「新しい試合」ボタンを廃止し、タイルのタップでその種目の試合設定へ進む（中断試合の確認は既存どおり）。試合設定画面の上部6種目メニューを削除（選択済み種目の大きなアイコンと種目名、プレーヤー、先攻／後攻、Race to／Skill Level、試合開始は不変、左上の別の戻るボタンなし）。下部ホームタブで新しいHomeへ戻る。
+- 変更した製品ファイル: `index.html`（種目ボタンのDOM順のみ）、`navigation-phase2-6.js`、`navigation-phase2-6.css`。保存schema、Player Identity、QR、Backup、Free／Pro、IAP、試合の計算・記録、翻訳catalog（新しい文言なし）は不変。
+- 検証: Full Node 1179／1179。実Chrome（ja／en／zh-Hans × 390×844／320×568、Pro 1件）で6種目の順序・タイルのhit area（72px以上）・各タイル→正しい試合設定・上部メニュー非表示・ホームタブ復帰・試合開始・再開が全PASS（旧版では同テストがFAIL）。3言語走査（68状態）で意図した表記以外の日本語残存なし。iOS Simulator（iOS 26.5、Release、隔離Bundle ID）でNativeのHome表示を確認。
+- Version `1.3`／Build `87`（Build 86はmainへ採番済みだがASC未登録・未Uploadのため、新Homeを含む最初のBuildとしてBuild 87を採番）。Release Device Archive作成済み（Apple Development署名）。**Distribution export・Apple Upload・TestFlight配布は未実施**。TestFlight内部配布中のBuild 85は変更なし。
+- 未確認: Native実機でのタップ操作（Simulatorのタップは許可が得られず未実施）、App Store配布署名のexport、Apple処理（Privacy警告・Export Compliance）。P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、S-B=false、Dynamic Type Deferredは不変。
+
 ## CueScore New Home Formalized — Decision 045 / Official 132・133 / Decision Log v2.21（2026年10月24日）
 
 - Product Ownerは新Homeの案Bを正式採用し、6種目の配置順と試合設定画面の変更を承認した。**Decision 045／Official 132（Decision）・133（Spec）／Decision Log v2.21**を発行（Documentation-only、実装は別commit）。

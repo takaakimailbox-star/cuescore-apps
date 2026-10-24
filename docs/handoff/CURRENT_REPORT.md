@@ -32,3 +32,4 @@ production source、翻訳catalog、Native、StoreKit、Device Build/install、�
 - 2026-10-23 Gate 012・013: 隔離Simulator更新リハーサル結果の記録（documentation only）。BLOCKEDはLocal StoreKit（Pro購入・復元・更新後権限）とNative Backup Share Sheet。公開版実機更新はNOT VERIFIED。
 - 2026-10-24 Gate 018〜021: Version 1.3／Build 85（main `82b76d2`）を ASC `VALID`・TestFlight 内部配布まで記録（documentation only）。PO実機確認は未実施。
 - 2026-10-24 Decision 045／Official 132・133／Decision Log v2.21: 新Homeを正式仕様化（Documentation-only）。実装・検証は別commit。
+- 2026-10-24 新Home実装・Build 87 Archive作成（Upload未実施）。Full Node 1179／1179。Native実機タップは未確認。
