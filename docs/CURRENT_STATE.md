@@ -1931,3 +1931,12 @@ App Store Connect に **Version 1.3 のドラフト**（`PREPARE_FOR_SUBMISSION`
 - 無変更を確認（read-back）：価格 Free、配布地域 JPN のみ、IAP ¥980（APPROVED）、Age Rating、App Privacy、リリース方式。
 - 未確認（公開BLOCKERへ自動昇格しない）：Restore完了、Native Backup Share Sheet、Paywall価格「$」の由来、Apple処理メールのITMS警告、Pro状態のBuild 88描画、App Privacy（API確認不能）。
 - PO判断が必要：設定画面のスクリーンショット（PO実機で撮影するか5枚で提出か）、ステータスバー有無の統一、審査メモ追記案の可否。Documentation-only。
+
+## CueScore Version 1.3 (Build 88) Submitted to App Review（2026年10月25日）
+
+Version `1.3`／Build `88` を App Review へ提出した（2026-10-25 08:31:58 JST、通常提出1回、Submission ID `1aa354e5-b127-440d-99e5-e504b8261108`、状態 `WAITING_FOR_REVIEW`）。リリース方式は MANUAL のため、審査承認後も自動公開されない。**審査結果・一般公開は未確定**。公開版は Version 1.2（Build 84）のまま。
+
+- 提出前Gate：ASC read-only 16項目 PASS／0 FAIL（Version 1.3 `PREPARE_FOR_SUBMISSION`、Build 88 `VALID`／`APP_STORE_ELIGIBLE`、価格Free・配布地域JPNのみ・IAP ¥980不変、審査情報完備）。
+- スクリーンショット5枚（新Home・プレーヤー一覧・プレーヤー情報（Build 88 Free実画面）・履歴・試合詳細。設定画面は掲載しない）。What's New（日本語）と審査メモ（1.3追記2項目）を反映。1.2の公開データは無変更。
+- **App Privacy はASC UIで確認できず NOT VERIFIED**（既存申告は変更していない）。出荷1.2からの差分は依存・Swift・privacy manifest 変更なし、ネットワーク／広告ID／トラッキング追加なしで、既存申告と矛盾する変更は見当たらない。
+- 未確認（自動BLOCKERにしない）：Restore完了、Native Backup Share Sheet（BLOCKED）、Paywall価格「$」の由来、Apple処理メールのITMS警告。Documentation-only。

@@ -38,3 +38,4 @@ production source、翻訳catalog、Native、StoreKit、Device Build/install、�
 - 2026-10-24 Gate 026: Build 88（Home種目名表示修正）をUpload、ASC `VALID`、TestFlight内部配布（documentation only）。実機での解消は未確認。
 - 2026-10-24 Gate 027: Build 88 PO実機受入6/6 PASS、ASC read-only確認、What's New案、公開阻害性評価（documentation only）。提出は未実施。
 - 2026-10-24 Gate 028: App Store提出候補（Version 1.3ドラフト、Build 88、What's New、新Homeスクリーンショット）をASCへ反映（documentation only）。審査提出は未実施。
+- 2026-10-25 Gate 029: Version 1.3／Build 88 を App Review へ提出（WAITING_FOR_REVIEW、documentation only）。審査結果・公開は未確定。
