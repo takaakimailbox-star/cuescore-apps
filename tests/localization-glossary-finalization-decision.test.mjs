@@ -37,7 +37,7 @@ test("G14 and G25 match the PO-approved wording and meaning", () => {
 
 test("catalog, Japanese UI and Data/QR implementation are byte-preserved", () => {
   const expected = {
-    "index.html": "4ad5e120905c7d3f78db463717fb606d61067ee90a8d4a1e6d25d5c7a85e056e",
+    "index.html": "3535f222e7e6b9ccc12f59b45b37a5fd9d29da961eafc8e6844bf59d703b9759",
     "i18n-catalog-ja-v1.js": "47ea5f63a6f35eb3c06b4cd7641d48690248f0d8921507dd05882336b99844c9",
     "i18n-catalog-en-v1.js": "ebf832444b67365ff4a5d246f6a89befa47341b767da024720fd96bad5bb8282",
     "i18n-catalog-zh-hans-v1.js": "7027ee64557b064a31a7cba88a3ab3bce641607c543f5f4ab8c8bc42970737a1",

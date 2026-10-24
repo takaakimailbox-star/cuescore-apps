@@ -1,0 +1,125 @@
+{
+ "gate": "Gate 017 (candidate, not applied to the product repo)",
+ "scope": "Version 1.2->1.3 and Build 84->85 only: project.pbxproj (4 lines: MARKETING_VERSION x2, CURRENT_PROJECT_VERSION x2) and index.html (4 literals: CUESCORE_APP_VERSION, RELEASE_LABEL, DISPLAY_VERSION, dataset.cuescoreVersion). No other product change.",
+ "productChanges": {
+  "index.html": {
+   "before": "4ad5e120905c7d3f78db463717fb606d61067ee90a8d4a1e6d25d5c7a85e056e",
+   "after": "3535f222e7e6b9ccc12f59b45b37a5fd9d29da961eafc8e6844bf59d703b9759"
+  },
+  "ios/App/App.xcodeproj/project.pbxproj": {
+   "before": "de44d8ebe1038d15b411338f53960d5c23cecf3343d84eb513ddc7ce3843385a",
+   "after": "46c926c9bf7be8c167267971be1a9f7081867d61194b84376eb36e58d383a7e1"
+  }
+ },
+ "note": "Assertions keep their meaning: only the expected Version/Build literals and the pinned digests of index.html / project.pbxproj move. If the PWA bump candidate (Gate 008) is also applied, the index.html digest must be recomputed for the combined result.",
+ "changes": [
+  {
+   "file": "ios-native-camera-localization.test.mjs",
+   "beforeSha256": "0aed3c57bab31baf163b15b5f7b6298bb15fa1be749d494318c9566d3fb84a37",
+   "afterSha256": "bc253ae8c70e681408ef2e8af60754ce17bf7b3bd5354cca20395b7855f19ad5",
+   "kind": "version/build literal",
+   "assertionDiff": [
+    "assert.equal((pb.match(/CURRENT_PROJECT_VERSION = 84;/g) || []).length, 2);",
+    "assert.equal((pb.match(/MARKETING_VERSION = 1\\.2;/g) || []).length, 2);",
+    "assert.equal((pb.match(/CURRENT_PROJECT_VERSION = 85;/g) || []).length, 2);",
+    "assert.equal((pb.match(/MARKETING_VERSION = 1\\.3;/g) || []).length, 2);"
+   ]
+  },
+  {
+   "file": "ios27-scene-lifecycle.test.mjs",
+   "beforeSha256": "8d95e56706ff71c5fff648af09e825d8eeb72109333bb3921d7e825430746d79",
+   "afterSha256": "905dbbcaa071a7992e62c52d6ee0555b87d5195af827cdc190e794904c578fa5",
+   "kind": "version/build literal",
+   "assertionDiff": [
+    "assert.match(project, /CURRENT_PROJECT_VERSION = 84;/);",
+    "assert.match(project, /MARKETING_VERSION = 1\\.2;/);",
+    "assert.match(project, /CURRENT_PROJECT_VERSION = 85;/);",
+    "assert.match(project, /MARKETING_VERSION = 1\\.3;/);"
+   ]
+  },
+  {
+   "file": "localization-ac13-voiceover-release-requirement-decision.test.mjs",
+   "beforeSha256": "45b165089f29caacdbcc388fd405adbe8b9796f28a8c29bf686bc2403b1e799f",
+   "afterSha256": "fd3d24535eee7f5d821e1d2ed339c063422459e1ac8cb10b449da185b2571c8a",
+   "kind": "byte-preservation digest",
+   "assertionDiff": [
+    "\"index.html\": \"4ad5e120905c7d3f78db463717fb606d61067ee90a8d4a1e6d25d5c7a85e056e\",",
+    "\"index.html\": \"3535f222e7e6b9ccc12f59b45b37a5fd9d29da961eafc8e6844bf59d703b9759\",",
+    "\"ios/App/App.xcodeproj/project.pbxproj\": \"de44d8ebe1038d15b411338f53960d5c23cecf3343d84eb513ddc7ce3843385a\",",
+    "\"ios/App/App.xcodeproj/project.pbxproj\": \"46c926c9bf7be8c167267971be1a9f7081867d61194b84376eb36e58d383a7e1\","
+   ]
+  },
+  {
+   "file": "localization-glossary-25-approval-decision.test.mjs",
+   "beforeSha256": "70c2ef1f0cb917ef079b4d56b9e06f1143d2fdcc68700c720e32d7e1d480b3fe",
+   "afterSha256": "064cc51b1939c0721bab65efbcd71cfe1b656df59c106405ccead64e66eeb4d8",
+   "kind": "byte-preservation digest",
+   "assertionDiff": [
+    "\"index.html\": \"4ad5e120905c7d3f78db463717fb606d61067ee90a8d4a1e6d25d5c7a85e056e\",",
+    "\"index.html\": \"3535f222e7e6b9ccc12f59b45b37a5fd9d29da961eafc8e6844bf59d703b9759\","
+   ]
+  },
+  {
+   "file": "localization-glossary-finalization-decision.test.mjs",
+   "beforeSha256": "f081df2cca075a6af175bf13834eae539f1149f5015e0b2848b776b7ef8b8335",
+   "afterSha256": "f55a11ea80643b674698ef2512a3603cfdd3907956ddcf92a46bd6372058f760",
+   "kind": "byte-preservation digest",
+   "assertionDiff": [
+    "\"index.html\": \"4ad5e120905c7d3f78db463717fb606d61067ee90a8d4a1e6d25d5c7a85e056e\",",
+    "\"index.html\": \"3535f222e7e6b9ccc12f59b45b37a5fd9d29da961eafc8e6844bf59d703b9759\","
+   ]
+  },
+  {
+   "file": "localization-ios-first-entry-language-decision.test.mjs",
+   "beforeSha256": "fa76f15f46c6c97610a012d3aa5dda4c1158aef4e3aac345637116da5d0dbce3",
+   "afterSha256": "78690168bd89e8d8067a64e38bb429e0ab8fcaad30d07beddcaeac64291b7da8",
+   "kind": "byte-preservation digest",
+   "assertionDiff": [
+    "\"index.html\": \"4ad5e120905c7d3f78db463717fb606d61067ee90a8d4a1e6d25d5c7a85e056e\",",
+    "\"index.html\": \"3535f222e7e6b9ccc12f59b45b37a5fd9d29da961eafc8e6844bf59d703b9759\",",
+    "\"ios/App/App.xcodeproj/project.pbxproj\": \"de44d8ebe1038d15b411338f53960d5c23cecf3343d84eb513ddc7ce3843385a\",",
+    "\"ios/App/App.xcodeproj/project.pbxproj\": \"46c926c9bf7be8c167267971be1a9f7081867d61194b84376eb36e58d383a7e1\","
+   ]
+  },
+  {
+   "file": "match-sharing-stage5a.test.mjs",
+   "beforeSha256": "3b1fe4589f27b50996680c67ae6b0dad0dcb703c43a70244f27b349fc10c5a3d",
+   "afterSha256": "60a027a7d60fad21e882e5fc9457bb59fdced36de476d5eb1d332eedba5862c9",
+   "kind": "version/build literal",
+   "assertionDiff": [
+    "assert.match(project,/MARKETING_VERSION = 1\\.2;/);assert.match(project,/CURRENT_PROJECT_VERSION = 84;/);",
+    "assert.match(project,/MARKETING_VERSION = 1\\.3;/);assert.match(project,/CURRENT_PROJECT_VERSION = 85;/);"
+   ]
+  },
+  {
+   "file": "native-ios-foundation.test.mjs",
+   "beforeSha256": "ea289796c5e11c4cd267aa029a47d9a5d61986b968c1786588945a95519b9839",
+   "afterSha256": "0a2d31dea490f19728250a92f2373eaa9a090eab07710d8187fcfe7916a79839",
+   "kind": "version/build literal",
+   "assertionDiff": [
+    "test(\"iOS target is iPhone-only, portrait-only, version 1.2 build 84\", () => {",
+    "test(\"iOS target is iPhone-only, portrait-only, version 1.3 build 85\", () => {",
+    "assert.match(project, /MARKETING_VERSION = 1\\.2;/);",
+    "assert.match(project, /CURRENT_PROJECT_VERSION = 84;/);",
+    "assert.match(project, /MARKETING_VERSION = 1\\.3;/);",
+    "assert.match(project, /CURRENT_PROJECT_VERSION = 85;/);",
+    "assert.match(html, /const CUESCORE_APP_VERSION = \"1\\.2\";/);",
+    "assert.match(html, /const RELEASE_LABEL = 'Version 1\\.2';/);",
+    "assert.match(html, /const DISPLAY_VERSION = 'version 1\\.2';/);",
+    "assert.match(html, /const CUESCORE_APP_VERSION = \"1\\.3\";/);",
+    "assert.match(html, /const RELEASE_LABEL = 'Version 1\\.3';/);",
+    "assert.match(html, /const DISPLAY_VERSION = 'version 1\\.3';/);"
+   ]
+  },
+  {
+   "file": "official-website-v1.test.mjs",
+   "beforeSha256": "85aeb54dbbb13d1e4706352ad0f4665ebd41e88f6ee693f894e9fc05f256d8a3",
+   "afterSha256": "cc78b29f548558a48a7b5b2f43af6e4358a0f8745c322cecac56c01803c3ea72",
+   "kind": "version/build literal",
+   "assertionDiff": [
+    "assert.match(project,/CURRENT_PROJECT_VERSION = 84;/);",
+    "assert.match(project,/CURRENT_PROJECT_VERSION = 85;/);"
+   ]
+  }
+ ]
+}
