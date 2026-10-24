@@ -103,7 +103,7 @@
   };
   h.startMatch = async (discipline, p2id = "p_fix_2", opts = {}) => {
     await h.tab("home");
-    if (!document.getElementById("cueHomeV1").classList.contains("match-setup-active-v3")) { document.querySelector(".home-new-match-v2").click(); await h.wait(500); }
+    if (!document.getElementById("cueHomeV1").classList.contains("match-setup-active-v3")) { document.querySelector("#cueDisciplineSwitcherV1 [data-discipline]").click(); await h.wait(500); }
     document.querySelector(`.cue-discipline-v1[data-discipline="${discipline}"]`).click(); await h.wait(600);
     if (!document.getElementById("p2Name").value) {
       document.getElementById("p2PlayerSearchBtn").click(); await h.wait(500);

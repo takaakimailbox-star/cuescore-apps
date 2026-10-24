@@ -1,0 +1,75 @@
+{
+ "gate": "New Home implementation (Decision 045 / Official 132-133)",
+ "scope": "Home six-discipline tiles (index.html DOM order, navigation-phase2-6.js/.css). Product files changed: index.html (button order only), navigation-phase2-6.js, navigation-phase2-6.css.",
+ "productChanges": {
+  "index.html": {
+   "before": "3535f222e7e6b9ccc12f59b45b37a5fd9d29da961eafc8e6844bf59d703b9759",
+   "after": "85af9b11d6f17b95e995032c7a9289dcab9710b67ad7302e20256cfef24609ef"
+  }
+ },
+ "replacedAssertions": "navigation-phase2-6.test.mjs: the two tests that encoded the Build 25/32 composition (Home = resume + new-match button; setup with the integrated icon-only selector) are replaced by two tests that encode Decision 045 (Home = resume + six tiles, 2 columns; setup without a discipline menu). The count of tests is unchanged; the rest of the file is untouched.",
+ "changes": [
+  {
+   "file": "localization-ac13-voiceover-release-requirement-decision.test.mjs",
+   "beforeSha256": "bc1773d0807c9b61525ac625c779b9c08519f16dec5aabb3d0670dddd31fcb91",
+   "afterSha256": "44bec393765d197092e95bbd30149a9db9adaf963a38c61597d6c21b0e4af9b2",
+   "assertionDiff": [
+    "\"index.html\": \"3535f222e7e6b9ccc12f59b45b37a5fd9d29da961eafc8e6844bf59d703b9759\",",
+    "\"index.html\": \"85af9b11d6f17b95e995032c7a9289dcab9710b67ad7302e20256cfef24609ef\","
+   ]
+  },
+  {
+   "file": "localization-glossary-25-approval-decision.test.mjs",
+   "beforeSha256": "21147634d73a81c2709e875e89545dcbfec37b86e7b67b21e14b50a5ebf1d5b4",
+   "afterSha256": "aa06135c87674647d66d8825c0ea945ee53aa4670a935ee1f314fa3d5e6a8c0f",
+   "assertionDiff": [
+    "\"index.html\": \"3535f222e7e6b9ccc12f59b45b37a5fd9d29da961eafc8e6844bf59d703b9759\",",
+    "\"index.html\": \"85af9b11d6f17b95e995032c7a9289dcab9710b67ad7302e20256cfef24609ef\","
+   ]
+  },
+  {
+   "file": "localization-glossary-finalization-decision.test.mjs",
+   "beforeSha256": "fb5e43c3e21dff2ae4d68bf55eaaccb59201c0ee26f28856dd92e502f181cc2e",
+   "afterSha256": "698ea6dcb74183805420d2a2bd84cd85c338030b882550727e466bb88b70d85f",
+   "assertionDiff": [
+    "\"index.html\": \"3535f222e7e6b9ccc12f59b45b37a5fd9d29da961eafc8e6844bf59d703b9759\",",
+    "\"index.html\": \"85af9b11d6f17b95e995032c7a9289dcab9710b67ad7302e20256cfef24609ef\","
+   ]
+  },
+  {
+   "file": "localization-ios-first-entry-language-decision.test.mjs",
+   "beforeSha256": "68573808f75de7ffffe8fb66f020833fab4ded41325e59bcb79dfe29f0fb2eb7",
+   "afterSha256": "fccb546133ae21ab4a395da8da6c45de6488427584e5ffbe5e33a74c60f8aea4",
+   "assertionDiff": [
+    "\"index.html\": \"3535f222e7e6b9ccc12f59b45b37a5fd9d29da961eafc8e6844bf59d703b9759\",",
+    "\"index.html\": \"85af9b11d6f17b95e995032c7a9289dcab9710b67ad7302e20256cfef24609ef\","
+   ]
+  },
+  {
+   "file": "navigation-phase2-6.test.mjs",
+   "beforeSha256": "e5ce543548b1850eed37bc2851a5979e39b2a485c3cd8a0652f7a9d53a976bcd",
+   "afterSha256": "65bd15dadeb9ff48ab353d6389d4e75946b661d8d1ba143b1a4fee2d9bd4b071",
+   "assertionDiff": [
+    "test(\"Phase 6 Home is reduced to resume and new match\",()=>{",
+    "assert.match(js,/data-home-new-match-v2/);",
+    "test(\"Home is reduced to the resume card and the six discipline tiles (Decision 045 / Official 133; replaces the Phase 6 resume + new-match button composition)\",()=>{",
+    "assert.doesNotMatch(js,/home-new-match-v2|data-home-new-match-v2/);",
+    "assert.match(css,/\\.cue-home-v1:not\\(\\.match-setup-active-v3\\) \\.cue-discipline-switcher-v1/);",
+    "assert.match(css,/#cueHomeV1:not\\(\\.match-setup-active-v3\\) #cueDisciplineSwitcherV1\\{display:grid!important;grid-template-columns:repeat\\(2,minmax\\(0,1fr\\)\\)!important/);",
+    "test(\"new match opens setup with the compact icon-only six-discipline selector integrated\",()=>{",
+    "test(\"a discipline tile opens the setup, and the setup no longer shows a discipline menu (Decision 045; replaces the integrated icon-only selector of Build 25 / 32)\",()=>{",
+    "assert.match(js,/cueDisciplineSwitcherV1/);",
+    "assert.match(js,/if\\(selected\\)selected\\.click\\(\\)/);",
+    "assert.doesNotMatch(js,/insertAdjacentElement\\(\"afterend\",switcher\\)/);",
+    "assert.match(js,/cueMatchSetupBackV3\"\\)\\?\\.remove\\(\\)/);",
+    "assert.match(css,/match-setup-active-v3 \\.cue-new-match-integrated-v2>\\.cue-discipline-switcher-v1\\{order:1;display:flex!important/);",
+    "assert.match(css,/flex:1 0 48px!important/);",
+    "assert.match(css,/\\.cue-discipline-label-v1\\{display:none!important\\}/);",
+    "assert.match(css,/\\.cue-new-match-integrated-v2\\{--cue-new-match-main-shift-v32:30px;padding:var\\(--cue-new-match-main-shift-v32\\) 2px 16px!important;border:0!important;border-radius:0!important;backg",
+    "assert.match(css,/overflow-x:auto!important/);",
+    "assert.match(html,/cueDisciplineSwitcherV1\"\\)\\?\\.addEventListener\\(\"click\",event=>\\{if\\(event\\.target\\.closest\\(\"\\[data-discipline\\]\"\\)\\)openSetup\\(\\)\\}\\)/);",
+    "assert.match(css,/#cueHomeV1\\.match-setup-active-v3 #cueDisciplineSwitcherV1\\{display:none!important\\}/);"
+   ]
+  }
+ ]
+}

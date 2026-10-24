@@ -14,7 +14,7 @@ const probe = `const g=id=>document.getElementById(id);const vis=n=>!!(n&&n.offs
  search:g("playerLibrarySearch")?.placeholder,p1:g("p1NameDisplayV1")?.textContent,p2:g("p2NameDisplayV1")?.textContent,guide:document.querySelector(".match-player-guide-v18")?.textContent||"",bodyClasses:[...document.body.classList].filter(c=>/player|modal|editor/.test(c)).sort().join(" ")});`;
 const steps = [
   // selection / pre-Player-tab flows FIRST: the Player-tab context ("browse") is sticky once visited, so these cover the non-browse titles
-  ["pre-new-match", `document.querySelector(".home-new-match-v2")?.click();`],
+  ["pre-new-match", `document.querySelector("#cueDisciplineSwitcherV1 [data-discipline]")?.click();`],
   ["pre-p1-search", `document.getElementById("p1PlayerSearchBtn")?.click();`],
   ["pre-open-add", `document.getElementById("playerLibraryAddBtn")?.click();`],
   ["pre-cancel-add", `document.querySelector(".player-editor-cancel-v1")?.click();`],
@@ -34,7 +34,7 @@ const steps = [
   ["hub-open", `document.querySelector(".player-management-row-v1 .player-hub-info-v3")?.click();`],
   ["hub-back", `document.getElementById("playerStatsBackBtn")?.click();`],
   ["tab-home", `document.querySelector('[data-phase1-tab="home"]').click();`],
-  ["new-match", `document.querySelector(".home-new-match-v2").click();`],
+  ["new-match", `document.querySelector("#cueDisciplineSwitcherV1 [data-discipline]").click();`],
   ["p2-search", `document.getElementById("p2PlayerSearchBtn")?.click();`],
   ["selection-open-add", `document.getElementById("playerLibraryAddBtn")?.click();`],
   ["selection-cancel-add", `document.querySelector(".player-editor-cancel-v1")?.click();`],

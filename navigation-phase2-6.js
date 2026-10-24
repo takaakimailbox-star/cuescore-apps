@@ -136,17 +136,12 @@
     requestAnimationFrame(()=>{playerReconcileQueued=false;reconcilePlayerRoot()});
   };
   new MutationObserver(schedulePlayerReconcile).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["class","style","data-cue-player-context"]});
+  // Decision 045 / Official 132-133: Home shows the six discipline tiles (2 columns x 3 rows); the "new match" button is gone and the discipline menu no longer moves into the match setup.
   const home=document.getElementById("cueHomeV1"),resume=document.getElementById("cueResumeCardV1");
-  if(home&&resume&&!home.querySelector("[data-home-new-match-v2]")){
-    const newMatch=document.createElement("button");newMatch.type="button";newMatch.className="home-new-match-v2";newMatch.dataset.homeNewMatchV2="true";newMatch.innerHTML=`<span aria-hidden="true">＋</span><strong>${window.cueT("home.newMatch")}</strong><b aria-hidden="true">›</b>`;
-    resume.insertAdjacentElement("afterend",newMatch);
-    const switcher=document.getElementById("cueDisciplineSwitcherV1"),setup=document.querySelector(".cue-new-match-integrated-v2"),back=document.getElementById("cueMatchSetupBackV3");
-    if(switcher&&setup&&back)back.insertAdjacentElement("afterend",switcher);
-    back?.remove();
-    newMatch.addEventListener("click",()=>{
-      const selected=switcher?.querySelector("[data-discipline].is-selected")||switcher?.querySelector("[data-discipline]");
-      if(selected)selected.click();else window.openCueMatchSetupV3?.();
-    });
+  if(home&&resume&&!home.dataset.homeGridV3){
+    home.dataset.homeGridV3="true";
+    const switcher=document.getElementById("cueDisciplineSwitcherV1");
+    document.getElementById("cueMatchSetupBackV3")?.remove();
     const markSelectorEvent=event=>{const button=event.target.closest?.("[data-discipline]");if(button)window.CueScoreSelectorTraceV1?.mark(`event:${event.type}`,{disciplineId:button.dataset.discipline,isTrusted:event.isTrusted,pointerType:event.pointerType||"",cancelable:event.cancelable,defaultPrevented:event.defaultPrevented});};
     ["touchstart","touchend","pointerdown","pointerup","click"].forEach(type=>switcher?.addEventListener(type,markSelectorEvent,{capture:true,passive:type!=="click"}));
     switcher?.addEventListener("click",event=>{

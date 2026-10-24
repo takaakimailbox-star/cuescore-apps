@@ -6,7 +6,7 @@ const pickPlayers = `for(const id of ["p1PlayerSearchBtn","p2PlayerSearchBtn"]){
 const race1 = `for(const t of ["p1Race","p2Race"]){const r=document.querySelector('[data-race-target="'+t+'"]');if(r){r.click();await W(500);document.querySelector('[data-race-value="1"]')?.click();await W(500);}}`;
 const steps = [
   { name: "home", code: tab("home") },
-  { name: "setup", code: click(".home-new-match-v2", 900) },
+  { name: "setup", code: click("#cueDisciplineSwitcherV1 [data-discipline]", 900) },
   { name: "setup-help", code: `document.getElementById("newMatchHelpBtnV1")?.click();await W(300)` },
   { name: "setup-race-picker", code: click('[data-race-target="p1Race"]', 600) },
   { name: "setup-race-other", code: click('[data-race-value="other"]', 500) },

@@ -55,7 +55,7 @@ await scenario("A2-idle-mutation-source", "ui+inject", `const seen={};const mo=n
 await scenario("B1-tab-player", "ui", `${tab("player")}return {title:document.getElementById("playerLibraryTitle")?.textContent,rows:document.querySelectorAll(".player-management-row-v1").length}`, { shot: "player-list" });
 await scenario("B2-tab-history", "ui", `${tab("history")}return {cards:document.querySelectorAll("#recordsList [data-record-id]").length}`, { shot: "history" });
 await scenario("B3-tab-settings", "ui", `${tab("settings")}return {rows:document.querySelectorAll("[data-settings-action]").length}`, { shot: "settings" });
-await scenario("B4-tab-home", "ui", `${tab("home")}return {newMatch:!!document.querySelector(".home-new-match-v2")}`, { shot: "home-again" });
+await scenario("B4-tab-home", "ui", `${tab("home")}return {newMatch:!!document.querySelector("#cueDisciplineSwitcherV1 [data-discipline]")}`, { shot: "home-again" });
 /* ---------- C. modal: player editor (OBS-10) ---------- */
 await scenario("C1-player-editor-edit-x3", "ui", `${tab("player")}
  const read=()=>({title:document.getElementById("playerEditorModalTitleV1")?.textContent,copy:document.getElementById("playerEditorModalCopyV1")?.innerHTML,save:document.getElementById("playerEditorSaveBtn")?.textContent,cancel:document.querySelector(".player-editor-cancel-v1")?.textContent,nameLabel:document.querySelector('label[for="playerEditorName"]')?.textContent,raceLabel:document.querySelector('label[for="playerEditorRace"]')?.textContent,placeholder:document.getElementById("playerEditorName")?.getAttribute("placeholder"),deleteHidden:document.getElementById("playerEditorDeleteBtn")?.classList.contains("hidden")??null,open:!document.getElementById("playerEditor").classList.contains("hidden")});
@@ -66,7 +66,7 @@ await scenario("C2-player-editor-create", "ui", `const b=document.getElementById
 await scenario("C3-player-root-title-reconcile", "ui+inject", `const t=()=>document.getElementById("playerLibraryTitle")?.textContent;const first=t();for(let i=0;i<8;i++){document.body.dataset.p250=String(i);const s=document.createElement("span");document.body.appendChild(s);s.remove();${W(60)}}delete document.body.dataset.p250;return {first,after:t(),ctx:document.body.dataset.cuePlayerContext||null}`);
 await scenario("C4-tab-home-again", "ui", tab("home"));
 /* ---------- OBS-03 setup states (K reach: ui + function-level player library variations) ---------- */
-await scenario("D1-match-setup-states", "ui+fn", `${tab("home")}document.querySelector(".home-new-match-v2").click();${W(800)}
+await scenario("D1-match-setup-states", "ui+fn", `${tab("home")}document.querySelector("#cueDisciplineSwitcherV1 [data-discipline]").click();${W(800)}
  const key="rotationScoreboard.players.v1";const saved=localStorage.getItem(key);const all=JSON.parse(saved);
  const state=()=>({p1:document.getElementById("p1NameDisplayV1")?.textContent,p2:document.getElementById("p2NameDisplayV1")?.textContent,guide:(document.querySelector(".match-player-guide-v18")?.textContent||""),guideHidden:document.querySelector(".match-player-guide-v18")?.hidden,startDisabled:document.getElementById("startGameBtn")?.disabled,aria:document.getElementById("startGameBtn")?.getAttribute("aria-disabled")});
  const out={initial:state()};
@@ -79,7 +79,7 @@ await scenario("D2-setup-observer-path", "ui+fn", `const key="rotationScoreboard
  localStorage.setItem(key,JSON.stringify([]));await cycle();out.noPlayers=state();
  localStorage.setItem(key,JSON.stringify(all.slice(0,1)));await cycle();out.onePlayer=state();
  localStorage.setItem(key,saved);await cycle();out.restored=state();return out`, { wait: 300 });
-await scenario("D3-setup-pick-via-library", "ui", `document.querySelector('[data-phase1-tab="home"]').click();${W(500)}document.querySelector(".home-new-match-v2").click();${W(600)}
+await scenario("D3-setup-pick-via-library", "ui", `document.querySelector('[data-phase1-tab="home"]').click();${W(500)}document.querySelector("#cueDisciplineSwitcherV1 [data-discipline]").click();${W(600)}
  const st=()=>({p1:document.getElementById("p1NameDisplayV1")?.textContent,p2:document.getElementById("p2NameDisplayV1")?.textContent,startDisabled:document.getElementById("startGameBtn")?.disabled,aria:document.getElementById("startGameBtn")?.getAttribute("aria-disabled"),guideHidden:document.querySelector(".match-player-guide-v18")?.hidden});
  const out={before:st()};document.getElementById("p2PlayerSearchBtn").click();${W(500)}out.libraryOpen=!document.getElementById("playerLibraryOverlay").classList.contains("hidden");
  const list=[...document.querySelectorAll("[data-select-player]")];out.candidates=list.length;(list[1]||list[0]).click();${W(700)}out.afterPick=st();return out`, { wait: 300 });

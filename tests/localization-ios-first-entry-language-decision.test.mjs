@@ -74,7 +74,7 @@ test("Official 108 v1.1, Official 130, Official 109, the resolver, catalogs, pro
     "docs/official/130_CueScore_Localization_AC13_VoiceOver_Release_Requirement_Decision.md": "d9850a3a54603bf848c2e7149ae716ec4c6ab3f8d04777b8dc7fead114ab6328",
     "docs/official/109_CueScore_Localization_Glossary.md": "5f1eb130eb07025c5b587558093117f17ac382de137932a58e0e64e1a6540a9e",
     "i18n-v1.js": "e3a5909a0007c7d28c13ae1b96e0cb9671065302a459ebf1ec343ac77ceb10c7",
-    "index.html": "3535f222e7e6b9ccc12f59b45b37a5fd9d29da961eafc8e6844bf59d703b9759",
+    "index.html": "85af9b11d6f17b95e995032c7a9289dcab9710b67ad7302e20256cfef24609ef",
     "monetization-v1.js": "9da40f6be8c3dd5c2bb2535325a6bc83a890ad16e38d649e44315222115f6c60",
     "i18n-catalog-ja-v1.js": "47ea5f63a6f35eb3c06b4cd7641d48690248f0d8921507dd05882336b99844c9",
     "i18n-catalog-en-v1.js": "ebf832444b67365ff4a5d246f6a89befa47341b767da024720fd96bad5bb8282",

@@ -7,7 +7,7 @@ import fs from "node:fs";
 import { startApp, seed } from "./p2-browser-kit.mjs";
 const OUT = process.argv[2], SEED = Number(process.argv[3] || 1), STEPS = Number(process.argv[4] || 30);
 let x = SEED * 2654435761 % 4294967296 || 1; const rnd = () => (x = (x * 1664525 + 1013904223) % 4294967296) / 4294967296;
-const BASE = `document.getElementById("playerEditor")?.classList.contains("hidden")===false&&document.getElementById("playerLibraryBackBtn")?.click();await W(200);document.getElementById("playerLibraryBackBtn")?.click();await W(200);document.querySelector('[data-phase1-tab="home"]')?.click();await W(300);document.querySelector(".home-new-match-v2")?.click();await W(300);`;
+const BASE = `document.getElementById("playerEditor")?.classList.contains("hidden")===false&&document.getElementById("playerLibraryBackBtn")?.click();await W(200);document.getElementById("playerLibraryBackBtn")?.click();await W(200);document.querySelector('[data-phase1-tab="home"]')?.click();await W(300);document.querySelector("#cueDisciplineSwitcherV1 [data-discipline]")?.click();await W(300);`;
 const pick = (slot, which) => `${BASE}document.getElementById("p${slot}PlayerSearchBtn")?.click();await W(300);const l=[...document.querySelectorAll("[data-select-player]")];(${which}===0?l[0]:${which}===1?l[l.length-1]:l[Math.min(1,l.length-1)])?.click();`;
 const A = {
   pick1First: pick(1, 0), pick1Last: pick(1, 1), pick2First: pick(2, 0), pick2Last: pick(2, 1), pick2Mid: pick(2, 2),

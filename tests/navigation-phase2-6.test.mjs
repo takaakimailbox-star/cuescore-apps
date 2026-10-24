@@ -63,27 +63,24 @@ test("discipline changes avoid repeating setup initialization and active-match s
   assert.match(html,/classList\.contains\("match-setup-active-v3"\)\)\{trace\?\.mark\("active-match-guard:skipped"/);
 });
 
-test("Phase 6 Home is reduced to resume and new match",()=>{
-  assert.match(js,/data-home-new-match-v2/);
+test("Home is reduced to the resume card and the six discipline tiles (Decision 045 / Official 133; replaces the Phase 6 resume + new-match button composition)",()=>{
+  assert.doesNotMatch(js,/home-new-match-v2|data-home-new-match-v2/);
   assert.doesNotMatch(js,/data-home-recent-match/);
   assert.doesNotMatch(css,/home-recent-v2/);
-  assert.match(css,/\.cue-home-v1:not\(\.match-setup-active-v3\) \.cue-discipline-switcher-v1/);
+  assert.match(css,/#cueHomeV1:not\(\.match-setup-active-v3\) #cueDisciplineSwitcherV1\{display:grid!important;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)!important/);
   assert.match(css,/\.cue-home-menu-v3\{display:none!important\}/);
 });
 
-test("new match opens setup with the compact icon-only six-discipline selector integrated",()=>{
+test("a discipline tile opens the setup, and the setup no longer shows a discipline menu (Decision 045; replaces the integrated icon-only selector of Build 25 / 32)",()=>{
   assert.doesNotMatch(js,/match-discipline-active-v3/);
   assert.doesNotMatch(js,/種目を選択/);
-  assert.match(js,/cueDisciplineSwitcherV1/);
-  assert.match(js,/if\(selected\)selected\.click\(\)/);
   assert.doesNotMatch(js,/beginSwipe|endSwipe|swipeStart|lastSwipeAt|suppressSwipeClick/);
+  assert.doesNotMatch(js,/insertAdjacentElement\("afterend",switcher\)/);
+  assert.match(js,/cueMatchSetupBackV3"\)\?\.remove\(\)/);
   assert.match(html,/button\.classList\.toggle\("is-selected", selected\)/);
   assert.match(html,/button\.setAttribute\("aria-selected", String\(selected\)\)/);
-  assert.match(css,/match-setup-active-v3 \.cue-new-match-integrated-v2>\.cue-discipline-switcher-v1\{order:1;display:flex!important/);
-  assert.match(css,/flex:1 0 48px!important/);
-  assert.match(css,/\.cue-discipline-label-v1\{display:none!important\}/);
-  assert.match(css,/\.cue-new-match-integrated-v2\{--cue-new-match-main-shift-v32:30px;padding:var\(--cue-new-match-main-shift-v32\) 2px 16px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important\}/);
-  assert.match(css,/overflow-x:auto!important/);
+  assert.match(html,/cueDisciplineSwitcherV1"\)\?\.addEventListener\("click",event=>\{if\(event\.target\.closest\("\[data-discipline\]"\)\)openSetup\(\)\}\)/);
+  assert.match(css,/#cueHomeV1\.match-setup-active-v3 #cueDisciplineSwitcherV1\{display:none!important\}/);
 });
 
 test("player registration and editing use a full-screen screen without autofocus",()=>{

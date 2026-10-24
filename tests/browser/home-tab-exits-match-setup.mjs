@@ -19,14 +19,14 @@ for (const lang of ["ja", "en", "zh-Hans"]) for (const [w, h] of [[390, 844], [3
     for (const ty of ["mousePressed", "mouseReleased"]) await app.cdp("Input.dispatchMouseEvent", { type: ty, x: r.x, y: r.y, button: "left", clickCount: 1 });
     await ev(`await W(700)`);
   };
-  const st = () => app.evalJs(`(()=>{const home=document.getElementById("cueHomeV1"),nm=document.querySelector(".home-new-match-v2"),vis=n=>!!(n&&n.getClientRects().length&&getComputedStyle(n).visibility!=="hidden");
+  const st = () => app.evalJs(`(()=>{const home=document.getElementById("cueHomeV1"),nm=document.querySelector("#cueDisciplineSwitcherV1 [data-discipline]"),vis=n=>!!(n&&n.getClientRects().length&&getComputedStyle(n).visibility!=="hidden");
     return {setup:home.classList.contains("match-setup-active-v3"),newMatchVisible:vis(nm),tabBarHidden:document.querySelector(".cue-phase1-tab-bar").hidden,matchMode:document.querySelector(".app").classList.contains("pro-game-mode"),
       snapshot:localStorage.getItem("cueScore.inProgressMatch.v1"),records:Object.keys(localStorage).filter(k=>/match|record|histor/i.test(k)).sort().map(k=>k+":"+localStorage.getItem(k).length).join("|"),active:document.body.dataset.cuePhase1Tab,histState:!!(history.state&&history.state.cueMatchSetupV3)}})()`);
   await ev(`await W(1200)`);
   const base = await st();
   check(base.newMatchVisible && !base.setup, `${tag}: first Home shows the new-match button (${JSON.stringify({ n: base.newMatchVisible, s: base.setup })})`);
   // 1. open setup, press Home
-  await press(".home-new-match-v2");
+  await press("#cueDisciplineSwitcherV1 [data-discipline]");
   let s = await st();
   check(s.setup, `${tag}: setup screen is active after "new match"`);
   await press('[data-phase1-tab="home"]');
@@ -35,7 +35,7 @@ for (const lang of ["ja", "en", "zh-Hans"]) for (const [w, h] of [[390, 844], [3
   check(!s.matchMode, `${tag}: no game was started by pressing Home`);
   check(s.snapshot === base.snapshot && s.records === base.records, `${tag}: snapshot/records unchanged (snapshot ${base.snapshot === s.snapshot}, records ${base.records === s.records})`);
   // 2. setup can be opened again; detour via Player tab, then Home
-  await press(".home-new-match-v2");
+  await press("#cueDisciplineSwitcherV1 [data-discipline]");
   check((await st()).setup, `${tag}: setup can be opened again`);
   await press('[data-phase1-tab="player"]');
   await press('[data-phase1-tab="home"]');
@@ -43,7 +43,7 @@ for (const lang of ["ja", "en", "zh-Hans"]) for (const [w, h] of [[390, 844], [3
   check(!s.setup && s.newMatchVisible && s.active === "home", `${tag}: Home after a Player detour is the first Home (setup=${s.setup}, active=${s.active})`);
   check(s.snapshot === base.snapshot && s.records === base.records && !s.matchMode, `${tag}: still no snapshot/record/game change after the detour`);
   // 3. a running match is kept: start one, the tab bar is hidden, a programmatic Home request does nothing
-  await press(".home-new-match-v2");
+  await press("#cueDisciplineSwitcherV1 [data-discipline]");
   await ev(`if(!document.getElementById("p2Name").value){document.getElementById("p2PlayerSearchBtn").click();await W(500);const c=[...document.querySelectorAll("[data-select-player]")].find(b=>!b.closest("[data-primary]"))||document.querySelector("[data-select-player]");c?.click();await W(500)}
     for(let i=0;i<60&&document.getElementById("startGameBtn").disabled;i++)await W(100);document.getElementById("startGameBtn").click();await W(1500)`);
   s = await st();

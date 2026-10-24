@@ -192,7 +192,7 @@ await step("open-suite-generation", `const b=document.querySelector('[data-suite
 await step("open-language", `document.querySelector("[data-settings-open-language]").click();await new Promise(r=>setTimeout(r,800));return "ok"`); await capture("language");
 await phase("home-match-setup");
 await step("tab:home", tab("home"));
-await step("new-match", `document.querySelector(".home-new-match-v2").click();await new Promise(r=>setTimeout(r,700));return "ok"`);
+await step("new-match", `document.querySelector("#cueDisciplineSwitcherV1 [data-discipline]").click();await new Promise(r=>setTimeout(r,700));return "ok"`);
 for (const d of ["9ball", "rotation", "threeCushion"]) {
   await step("setup-discipline:" + d, `const b=document.querySelector('.cue-discipline-v1[data-discipline="${d}"]');if(!b)throw new Error("no discipline");b.click();await new Promise(r=>setTimeout(r,800));return "ok"`);
 }
