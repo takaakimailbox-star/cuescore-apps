@@ -28,7 +28,7 @@ test("numbering: Decision 038 / Official 121 / 122 published once, 109 reserved 
   const nums = fs.readdirSync(new URL("docs/official/", root)).filter(n => /^\d+_.*\.md$/.test(n)).map(n => Number(n.split("_")[0]));
   for (const n of [107, 108, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122]) assert.equal(nums.filter(v => v === n).length, 1, String(n));
   assert.equal(nums.filter(value => value === 109).length, 1);
-  assert.equal(Math.max(...nums), 131);
+  assert.equal(Math.max(...nums), 133);
   const t = zipEntry(LOG("2.14"), "word/document.xml").replace(/<[^>]+>/g, "");
   assert.deepEqual([...t.matchAll(/Decision (\d{3})｜/g)].map(m => Number(m[1])), Array.from({ length: 38 }, (_, i) => i + 1));
   assert.match(t, /Decision 038｜多言語化 U4／U11 の承認/);
@@ -48,7 +48,7 @@ test("Decision 038 records U4 plan B, the U11 policy and keeps the Glossary unpu
 test("SSOT and README record Decision 038; documentation-only (no product source mentions it)", () => {
   assert.match(read("docs/README.md"), /official\/121_CueScore_Localization_U4_U11_Approval_Decision\.md/);
   assert.match(read("docs/README.md"), /v2\.14 adds Decision 038/);
-  assert.match(read("docs/README.md"), /Decision_Log_v2\.20_Official_Release/);
+  assert.match(read("docs/README.md"), /Decision_Log_v2\.21_Official_Release/);
   assert.match(read("docs/README.md"), /official\/109_/);
   assert.match(read("docs/CURRENT_STATE.md"), /U4\/U11 Approval Decision Published（2026年10月17日）/);
   assert.match(read("docs/CURRENT_STATUS.md"), /U4\/U11 — OFFICIAL DECISION PUBLISHED/);

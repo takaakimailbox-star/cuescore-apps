@@ -31,3 +31,4 @@
 - production source／Native／StoreKit／実機アプリ／Device／Apple操作、P6最終PASS、P7は実施しない。
 - 2026-10-23 Gate 012・013（documentation only）: 隔離Simulator更新リハーサルの事実を`docs/CURRENT_STATE.md`へ記録。新Decisionなし。Local StoreKit検証・Native Backup Share SheetはBLOCKED、公開版実機更新はNOT VERIFIED。
 - 2026-10-24 Gate 018〜021（documentation only）: Version 1.3／Build 85 を TestFlight 内部配布まで進めた事実を `docs/CURRENT_STATE.md` へ記録。新Decisionなし。PO実機確認前に App Store 提出・Release は開始しない。
+- 2026-10-24 Decision 045／Official 132・133／Decision Log v2.21: Product Ownerが新Home（6種目タイル2列×3段、試合設定画面の上部6種目メニュー削除）を正式採用。Documentation-only、実装は別commit。Decision 001〜044は不変。

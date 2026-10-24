@@ -17,6 +17,14 @@
 - **公開版ユーザーデータの更新安全性はDeferredではない。** 未承認・BLOCKED（実機での公開版上書き更新が未実施）として次回アップデートの必須検証に位置づける。Build 84 binary同一性はNOT VERIFIED。
 - P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、S-B=false、Dynamic Type Deferredは不変。Documentation-only。
 
+## CueScore New Home Formalized — Decision 045 / Official 132・133 / Decision Log v2.21（2026年10月24日）
+
+- Product Ownerは新Homeの案Bを正式採用し、6種目の配置順と試合設定画面の変更を承認した。**Decision 045／Official 132（Decision）・133（Spec）／Decision Log v2.21**を発行（Documentation-only、実装は別commit）。
+- 内容: Homeは**6種目タイル（2列×3段）**＝上段 9-Ball／10-Ball、中段 JPA 9-Ball／Rotation、下段 14-1／3 Cushion。採用済みの種目アイコンを使い、独自アイコンへ置換しない。「新しい試合」ボタンはHomeから除く。中断試合の再開カードと下部4タブは維持。タイルのタップでその種目の試合設定へ進み（中断試合がある場合は既存の確認）、試合設定画面の上部の横並び6種目メニューを削除する（選択済み種目の大きなアイコンと種目名、プレーヤー、先攻／後攻、Race to／Skill Level、試合開始は不変、左上の別の戻るボタンは追加しない）。下部ホームタブで新しいHomeへ戻る（未開始の設定表示を閉じるだけ）。
+- 置換した先行記述（範囲限定）: Official 77・78（試合設定上部への種目セレクタ統合）、Official 86（上部6種目タブ一行）、Official 66・67・68・74・75・76・84のHome「新しい試合」ボタン。Decision 001〜044・Design System v2.1は変更しない。
+- 未確定として設けないもの: Homeの見出し・補足文（案B比較資料の「新しい試合／種目を選んで開始」）。追加は別Decision。新しい翻訳文言は追加しない。
+- 保存schema、Player Identity、QR、Backup、Free／Pro、IAP、試合の計算・記録は不変。P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、S-B=false、Dynamic Type Deferredは不変。
+
 ## CueScore Version 1.3 (Build 85) Uploaded and Distributed to TestFlight Internal Testers（2026年10月24日）
 
 Version `1.3`／Build `85` を App Store Connect へ Upload し、既存の内部 TestFlight グループへ配布可能にした。**App Store の公開版は Version 1.2（Build 84）のまま**で、Version 1.3 の App Store 提出・Release は未実施。

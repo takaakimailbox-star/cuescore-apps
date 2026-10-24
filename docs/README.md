@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.20_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.21_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -29,8 +29,9 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.1 is the current official release and successor to v2.0.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.20 is the current official release and successor
-to v2.19. Earlier versions remain in the official directory as preceding releases.
+Official Design Decision Log v2.21 is the current official release and successor
+to v2.20. Earlier versions remain in the official directory as preceding releases.
+v2.21 adds Decision 045 (New Home six-discipline grid and simplified match setup screen; Product Owner adopted) and leaves Decisions 001〜044 unchanged.
 v2.20 adds Decision 044 (iOS first-entry navigator.languages note) and leaves Decisions 001〜043 unchanged.
 v2.19 adds Decision 043 (Official 108 AC-13 VoiceOver release requirement revision) and leaves Decisions 001〜042 unchanged.
 v2.18 adds Decision 042 (Glossary finalization and Official 109 publication) and leaves Decisions 001〜041 unchanged.
@@ -194,6 +195,10 @@ Localization Glossary 25-term approval status:
 
 - Decision 041 / Official 127 / Official 128 / Official Design Decision Log v2.17 (published 2026-10-18). Product Owner approved the 25 Evidence 84 terms other than G14 and G25. Those 25 are CONFIRMED by PO approval record with residual risks preserved; human independent review and missing Chinese/JPA primary sources remain NOT VERIFIED. G14 and G25 remain PENDING, Official 109 remains unpublished, and catalog/product source are unchanged.
 
+New Home (Version 1.3) status:
+
+- Decision 045 / Official 132 / Official 133 / Official Design Decision Log v2.21 (published 2026-10-24). Product Owner decision: the Home screen shows six discipline tiles in two columns by three rows (9-Ball / 10-Ball, JPA 9-Ball / Rotation, 14-1 / 3 Cushion) with the adopted discipline icons; the "新しい試合" button is removed; tapping a tile opens that discipline's match setup; the horizontal six-discipline menu at the top of the match setup screen is removed; the bottom Home tab returns to Home. Storage schema, Player Identity, QR, Backup, Free/Pro, IAP and translations are unchanged. This publication is documentation-only; the implementation follows in a separate commit.
+
 Localization U4/U11 approval status:
 
 - Decision 038 / Official 121 / Official 122 / Official Design Decision Log v2.14 (published 2026-10-17). Product Owner decisions: U4 (Paywall and Settings plan card) is translated into ja/en/zh-Hans with fact-based wording and the StoreKit displayPrice; the Native development-language fallback policy (en to ja) is approved for P6; P5/P6 are verified first in Simulator/isolated environments; the remaining Glossary terms are prepared as a PO decision package. Product code, ASC, IAP product information and Official 109 are not changed by this Decision.
@@ -312,3 +317,5 @@ An official-document update must:
 - `official/129_CueScore_Localization_Glossary_Finalization_Decision.md`
 - `official/130_CueScore_Localization_AC13_VoiceOver_Release_Requirement_Decision.md`
 - `official/131_CueScore_Localization_iOS_First_Entry_Language_List_Decision.md`
+- `official/132_CueScore_v1.3_New_Home_Six_Discipline_Grid_Decision.md`
+- `official/133_CueScore_v1.3_New_Home_Six_Discipline_Grid_Spec.md`

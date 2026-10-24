@@ -1,0 +1,148 @@
+{
+ "gate": "Decision 045 / Official 132-133 / Decision Log v2.21 (documentation publication)",
+ "scope": "Existing tests that pin the highest Official number (131 -> 133) and the current Decision Log version (v2.20 -> v2.21). No assertion is removed, weakened or skipped; only the pinned latest values move.",
+ "changes": [
+  {
+   "file": "dynamic-type-deferral-decision.test.mjs",
+   "beforeSha256": "e1c2828bd56af3d7a23fa03c5e8ffd74153fbc96006d306e5e252fe45602ea35",
+   "afterSha256": "1e1c760a7e7ee27eaad3da0c40061b1b3833829260c7f7f2754aa86498651212",
+   "assertionDiff": [
+    "assert.equal(Math.max(...numbers), 131);",
+    "assert.equal(Math.max(...numbers), 133);",
+    "assert.match(readme, /7\\. `official\\/07_CueScore_Official_Design_Decision_Log_v2\\.20_Official_Release\\.docx`/);",
+    "assert.match(readme, /7\\. `official\\/07_CueScore_Official_Design_Decision_Log_v2\\.21_Official_Release\\.docx`/);"
+   ]
+  },
+  {
+   "file": "localization-ac13-voiceover-release-requirement-decision.test.mjs",
+   "beforeSha256": "70d219640e7f8f9e0fdd2500dfff43c02716f4ef98119b3c0d69f86e8a394db4",
+   "afterSha256": "bc1773d0807c9b61525ac625c779b9c08519f16dec5aabb3d0670dddd31fcb91",
+   "assertionDiff": [
+    "assert.equal(Math.max(...numbers), 131);",
+    "assert.equal(Math.max(...numbers), 133);"
+   ]
+  },
+  {
+   "file": "localization-glossary-25-approval-decision.test.mjs",
+   "beforeSha256": "064cc51b1939c0721bab65efbcd71cfe1b656df59c106405ccead64e66eeb4d8",
+   "afterSha256": "21147634d73a81c2709e875e89545dcbfec37b86e7b67b21e14b50a5ebf1d5b4",
+   "assertionDiff": [
+    "assert.equal(Math.max(...numbers), 131);",
+    "assert.equal(Math.max(...numbers), 133);",
+    "assert.match(readme, /Decision_Log_v2\\.20_Official_Release/);",
+    "assert.match(readme, /Decision_Log_v2\\.21_Official_Release/);"
+   ]
+  },
+  {
+   "file": "localization-glossary-finalization-decision.test.mjs",
+   "beforeSha256": "f55a11ea80643b674698ef2512a3603cfdd3907956ddcf92a46bd6372058f760",
+   "afterSha256": "fb5e43c3e21dff2ae4d68bf55eaaccb59201c0ee26f28856dd92e502f181cc2e",
+   "assertionDiff": [
+    "assert.equal(Math.max(...numbers), 131);",
+    "assert.equal(Math.max(...numbers), 133);"
+   ]
+  },
+  {
+   "file": "localization-ios-first-entry-language-decision.test.mjs",
+   "beforeSha256": "2a1146f73ca9e0a1e1b8c60878d9c337fa69bbf757ae26124594caf78c92b856",
+   "afterSha256": "68573808f75de7ffffe8fb66f020833fab4ded41325e59bcb79dfe29f0fb2eb7",
+   "assertionDiff": [
+    "assert.equal(Math.max(...numbers), 131);",
+    "assert.equal(Math.max(...numbers), 133);"
+   ]
+  },
+  {
+   "file": "localization-native-camera-decision.test.mjs",
+   "beforeSha256": "626f231e8928fec883ba64a0aeef203c80b29be165b1adeec7faddbf46ad62ac",
+   "afterSha256": "56dbdc8737e185b05b7db3d04682f2d3627e7461f104900dcdd07b030d691498",
+   "assertionDiff": [
+    "assert.equal(Math.max(...nums), 131);",
+    "assert.equal(Math.max(...nums), 133);",
+    "assert.match(read(\"docs/README.md\"), /Decision_Log_v2\\.20_Official_Release/);",
+    "assert.match(read(\"docs/README.md\"), /Decision_Log_v2\\.21_Official_Release/);"
+   ]
+  },
+  {
+   "file": "localization-official-docs.test.mjs",
+   "beforeSha256": "713744a1e917a1ca8df452171ebb9a6004702bd4f1c2dc49d16ae0a81fa39440",
+   "afterSha256": "1d2460d79694261e6e5b76b8e740c97d7d820164cecc098f9b3b8dc0a9e6ccc5",
+   "assertionDiff": [
+    "assert.equal(Math.max(...numbers), 131, \"highest Official md number must be 131\");",
+    "assert.equal(Math.max(...numbers), 133, \"highest Official md number must be 133\");",
+    "assert.match(readme, /7\\. `official\\/07_CueScore_Official_Design_Decision_Log_v2\\.20_Official_Release\\.docx`/);",
+    "assert.match(readme, /Official Design Decision Log v2\\.20 is the current official release and successor\\s+to v2\\.19/);",
+    "assert.match(readme, /7\\. `official\\/07_CueScore_Official_Design_Decision_Log_v2\\.21_Official_Release\\.docx`/);",
+    "assert.match(readme, /Official Design Decision Log v2\\.21 is the current official release and successor\\s+to v2\\.20/);"
+   ]
+  },
+  {
+   "file": "localization-p1-formalization-decision.test.mjs",
+   "beforeSha256": "82e7901e1e1252825ba234d8569f7d4a8acac4827b391ed6e145190c985b81ec",
+   "afterSha256": "b0cee30cf57d6546fb18413f315a4ade54f6c596e4b56a7fd0ffe848902f78aa",
+   "assertionDiff": [
+    "assert.equal(Math.max(...numbers), 131);",
+    "assert.equal(Math.max(...numbers), 133);"
+   ]
+  },
+  {
+   "file": "localization-po-approval-decision.test.mjs",
+   "beforeSha256": "8b9005b600705fb0d6237bd50679c4b5409e5c86ba0ea35cf3f3f9222a7fb26c",
+   "afterSha256": "e645d6e2c82a3a3ccf549a0480a23b73b468ed55f521063cfe3dfd1221e2bcd0",
+   "assertionDiff": [
+    "assert.equal(Math.max(...nums), 131);",
+    "assert.equal(Math.max(...nums), 133);"
+   ]
+  },
+  {
+   "file": "localization-review-policy-decision.test.mjs",
+   "beforeSha256": "41dc04d0ec9dd6e0ca88c458a950ad638bbe2f02cfb5bb3c964fbd7f239481e4",
+   "afterSha256": "e2067fd283e2f9377a5e7ce6142ed3953c6d92ecdf6d8669bff02b9305b7aabe",
+   "assertionDiff": [
+    "assert.equal(Math.max(...nums), 131);",
+    "assert.equal(Math.max(...nums), 133);"
+   ]
+  },
+  {
+   "file": "localization-u11-correction-decision.test.mjs",
+   "beforeSha256": "0505675ce5b3d057425a0f12b4e0869e75720b53baf78a1b8446ebf4cd8f9754",
+   "afterSha256": "c8064317b65bec2d43fee1672d22f692f1dd00f64284343f5e1c29bb5145095d",
+   "assertionDiff": [
+    "assert.equal(Math.max(...nums), 131);",
+    "assert.equal(Math.max(...nums), 133);",
+    "assert.match(read(\"docs/README.md\"), /Decision_Log_v2\\.20_Official_Release/);",
+    "assert.match(read(\"docs/README.md\"), /Decision_Log_v2\\.21_Official_Release/);"
+   ]
+  },
+  {
+   "file": "localization-u4-u11-decision.test.mjs",
+   "beforeSha256": "68e2442e949d380723960717a6f9b1b03f8e89391195225b1ad1b9d0b81a84df",
+   "afterSha256": "c54f95b3a50ba15c0e79e90d6ad43693b1728ef45cfede94129468c8a7575d16",
+   "assertionDiff": [
+    "assert.equal(Math.max(...nums), 131);",
+    "assert.equal(Math.max(...nums), 133);",
+    "assert.match(read(\"docs/README.md\"), /Decision_Log_v2\\.20_Official_Release/);",
+    "assert.match(read(\"docs/README.md\"), /Decision_Log_v2\\.21_Official_Release/);"
+   ]
+  },
+  {
+   "file": "localization-u6-decision.test.mjs",
+   "beforeSha256": "ff4feec6f74a7e79bc18af8a123e42c41afd8bfd0f5cfbcc3e98d4ee99579c29",
+   "afterSha256": "839feedfb304907f13afffb9c7ce0d06db914b9a59e1b53c65526cd87b1bb17f",
+   "assertionDiff": [
+    "assert.equal(Math.max(...nums), 131);",
+    "assert.equal(Math.max(...nums), 133);"
+   ]
+  },
+  {
+   "file": "settings-unified-design-decision.test.mjs",
+   "beforeSha256": "56b6ec04e2ce66707182f192d47a7ac559ddfa2cb7f254a00891baf5f6dd4ba5",
+   "afterSha256": "e3b8dd6c0520e1ad2a19b1d43ed21b26637f738b1dcf81c7464a9d8142700a89",
+   "assertionDiff": [
+    "assert.equal(Math.max(...official), 131);",
+    "assert.equal(Math.max(...official), 133);",
+    "assert.match(readme, /7\\. `official\\/07_CueScore_Official_Design_Decision_Log_v2\\.20_Official_Release\\.docx`/);",
+    "assert.match(readme, /7\\. `official\\/07_CueScore_Official_Design_Decision_Log_v2\\.21_Official_Release\\.docx`/);"
+   ]
+  }
+ ]
+}
