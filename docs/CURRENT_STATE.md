@@ -1921,3 +1921,13 @@ Home種目名の表示修正（`ae6bafd`）を含む Version `1.3`／Build `88`�
 - **提出前の要判断**：スクリーンショット6.5インチセットの `01_Home_Build77.png` は旧Homeで新Homeと不一致。
 - 未確認（公開阻害性を評価済み、PASS扱いしない）：Restore完了、Native Backup Share Sheet（BLOCKED）、Paywall価格「$」表示の由来、Apple処理メールのITMS警告、App Privacy（API確認不能）。
 - **App Store審査提出・一般公開は未承認・未実施**。Documentation-only。
+
+## CueScore Version 1.3 App Store Submission Candidate (Draft Prepared)（2026年10月24日）
+
+App Store Connect に **Version 1.3 のドラフト**（`PREPARE_FOR_SUBMISSION`、リリース方式 MANUAL、Build 88 紐づけ済み）を作成した。**審査提出・一般公開は未実施**。公開版は Version 1.2（Build 84）のまま。
+
+- 反映済み：What's New（日本語、新Home6種目・試合設定整理・3言語・設定画面・ブレイク結果復元・プレーヤータブ。実装済み事実のみ）。説明・キーワード・プロモーションテキスト・サポートURL・審査情報は1.2の内容を継承（一致を確認）。
+- スクリーンショット（iPhone 6.5インチ）：旧Home画像を Build 88 の実画面（6種目の新Home）へ差し替え、旧設定画像（Version 1.0 表示）を1.3ドラフトから除去。他4枚（プレーヤー一覧・プレーヤー情報・履歴・試合詳細）は構成一致を確認して再利用。**1.2の公開セットは無変更**。
+- 無変更を確認（read-back）：価格 Free、配布地域 JPN のみ、IAP ¥980（APPROVED）、Age Rating、App Privacy、リリース方式。
+- 未確認（公開BLOCKERへ自動昇格しない）：Restore完了、Native Backup Share Sheet、Paywall価格「$」の由来、Apple処理メールのITMS警告、Pro状態のBuild 88描画、App Privacy（API確認不能）。
+- PO判断が必要：設定画面のスクリーンショット（PO実機で撮影するか5枚で提出か）、ステータスバー有無の統一、審査メモ追記案の可否。Documentation-only。
