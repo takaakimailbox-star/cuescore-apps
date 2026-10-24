@@ -17,6 +17,24 @@
 - **公開版ユーザーデータの更新安全性はDeferredではない。** 未承認・BLOCKED（実機での公開版上書き更新が未実施）として次回アップデートの必須検証に位置づける。Build 84 binary同一性はNOT VERIFIED。
 - P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、S-B=false、Dynamic Type Deferredは不変。Documentation-only。
 
+## CueScore Version 1.3 (Build 85) Uploaded and Distributed to TestFlight Internal Testers（2026年10月24日）
+
+Version `1.3`／Build `85` を App Store Connect へ Upload し、既存の内部 TestFlight グループへ配布可能にした。**App Store の公開版は Version 1.2（Build 84）のまま**で、Version 1.3 の App Store 提出・Release は未実施。
+
+| 項目 | 状態 | 根拠 |
+|---|---|---|
+| GitHub source | main `82b76d2`（Version 1.3／Build 85 採番。`index.html` の Version 4 リテラルと `project.pbxproj` 4 行、固定テスト更新。他の製品変更なし） | Gate 018 |
+| Release Device Archive | 作成済み。Bundle ID `com.takaakimailboxstar.cuescoreapps`、Team `U26DF88PRW`、Version 1.3／Build 85 | Gate 019 |
+| 配布署名・export | Apple Distribution 署名、既存の管理対象 profile（`iOS Team Store Provisioning Profile`、2026-08-31 作成）、`get-task-allow=false`。Archive と内容同一（署名除去後のバイナリ一致） | Gate 020 |
+| ASC Upload／処理 | Build 85 を 2026-10-24 11:05 JST に Upload、**`VALID`**（Build ID `bdb54a69-12ae-4f6b-bd54-89b94205ec3c`、pre-release version 1.3）。buildUploads の `errors`／`warnings`／`infos` は空（`COMPLETE`） | Gate 020／021 |
+| Export Compliance | Build 84 と同じ `usesNonExemptEncryption=false` を Build 85 に回答（暗号化関連の構成は出荷 Build 84 と同一：SHA-256 ダイジェストと乱数 ID 生成のみ、独自暗号なし、Cloud Sync は本リリースで無効） | Gate 021 |
+| TestFlight 内部配布 | Internal Build State `IN_BETA_TESTING`。既存内部グループ `CueScore Internal Testers`（`hasAccessToAllBuilds=true`）に Build 85 を含む。外部配布・新グループ・テスター変更なし | Gate 021 |
+
+- **実機確認は未実施**（Product Owner 操作）: 公開版→新 Build の更新、Player／履歴／中断試合の保持、Pro 権限継続、Restore 完了、Native Backup Share Sheet、QR 1 往復、Paywall 価格、Home 起動・About Version 1.3。
+- Apple の処理メール（Privacy 関連の ITMS 警告）の有無は未確認（API の警告欄は空）。App Store 一般公開は実機確認の結果が出るまで開始しない。
+- Local StoreKit による Pro 購入・復元検証と Native Backup Share Sheet 到達は BLOCKED のまま。PWA bump は別工程。
+- Official／Decision は変更なし。P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、S-B=false、Dynamic Type Deferred は不変。Documentation-only。
+
 ## CueScore Isolated Update Rehearsal and Residual Verification Recorded（2026年10月23日）
 
 隔離環境（別Bundle ID `…iso012`／`…iso013`、専用Simulator iPhone 17 Pro iOS 26.5、Xcode 27.1）での結果を**事実のみ**記録する。公開アプリ・実機・既存ユーザーデータ・Apple サービスには操作していない。Documentation-only。
