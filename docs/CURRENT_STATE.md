@@ -1882,3 +1882,17 @@ ChatGPTとCodexで共有する現在状態の参照ファイル。Official Relea
 - 現行詳細記録の `safety`、相手の次手番イベント、`safety_result` で追跡可能。新しい保存項目は追加しない。根拠がない過去データは推測しない。
 - サンプルデータは成功・失敗の双方と判定根拠をイベント順に保持。
 - 正式決定記録：`docs/official/07_CueScore_Official_Design_Decision_Log_v1.2_Official_Release.docx` Decision 018。
+
+## CueScore Version 1.3 Build 88 Prepared (Home Tile-Name Display Fix)（2026年10月24日）
+
+Build 87 の実機（TestFlight）で、新Homeの6種目名が「初回起動で未表示」「再表示後に右列の名前が途中で切れる」不具合が報告された（PO提供の実機画像2枚）。**iOS 26.5／27.0 Simulator では修正前も正常表示で再現せず、原因はNOT VERIFIED**。
+
+| 項目 | 状態 | 根拠 |
+|---|---|---|
+| 修正 | 種目名を囲む切り取り領域（`overflow:hidden`＋省略記号）を廃止（長い名前は折り返す）。初回フレーム／load／pageshow／resize／前面復帰／fonts.ready で1回だけ再描画。順序・アイコン・名称・遷移・データ不変 | `ae6bafd`（Official 132／133の範囲内） |
+| Build | Version 1.3維持、Build 88（ASC read-only GETで未使用を確認：86 builds、最大87） | `48261b6` |
+| テスト | Full Node 1181/1181、ブラウザ実測（ja／en／zh-Hans × 320／390／430、種目名6件の可読性・切れ0・再描画マーカー収束）、新Homeの遷移・Home復帰・中断試合再開PASS。修正前は新テストがFAIL（構造条件） | Gate 025 |
+| Archive | Build 88 Device Archive（Apple Development署名、Upload未実施）。Build 87との差は`navigation-phase2-6.css`／`.js`とBuild番号のみ | Gate 025 |
+
+- **Build 88のUpload・TestFlight配布・審査提出は未承認・未実施**。Build 87はTestFlight内部配布のまま変更なし。
+- 実機での表示不具合解消はNOT VERIFIED（Simulatorで再現不能のため）。PO実機で要確認。Documentation-only（本節）。

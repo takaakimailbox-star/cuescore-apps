@@ -34,3 +34,4 @@ production source、翻訳catalog、Native、StoreKit、Device Build/install、�
 - 2026-10-24 Decision 045／Official 132・133／Decision Log v2.21: 新Homeを正式仕様化（Documentation-only）。実装・検証は別commit。
 - 2026-10-24 新Home実装・Build 87 Archive作成（Upload未実施）。Full Node 1179／1179。Native実機タップは未確認。
 - 2026-10-24 Gate 024: Build 87（新Home）をUpload、ASC `VALID`、TestFlight内部配布（documentation only）。PO実機確認は未実施。
+- 2026-10-24 Gate 025: 新Home種目名の表示修正（`ae6bafd`）とBuild 88採番（`48261b6`）、Device Archive作成（Upload未実施）。実機での解消はNOT VERIFIED。

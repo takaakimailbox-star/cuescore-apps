@@ -68,3 +68,4 @@
 - Canonical report: `docs/handoff/CURRENT_REPORT.md`
 
 Detailed evidence: `docs/release/CueScore_v1.2_Build84_Manual_Release_2026-10-04.md`, `docs/release/CueScore_v1.2_Build84_Apple_Approval_Final_PreRelease_Audit_2026-10-04.md`, and `docs/CURRENT_STATE.md`.
+- Build 88 prepared（Gate 025、2026-10-24）: Build 87実機の新Home種目名の表示不具合（初回未表示／文字切れ）に対し防御的修正 `ae6bafd`＋Build 88採番 `48261b6`。Simulatorで再現不能・原因NOT VERIFIED。Device Archive作成済み、Upload・配布・審査提出は未承認。

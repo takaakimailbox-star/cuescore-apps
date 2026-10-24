@@ -34,3 +34,4 @@
 - 2026-10-24 Decision 045／Official 132・133／Decision Log v2.21: Product Ownerが新Home（6種目タイル2列×3段、試合設定画面の上部6種目メニュー削除）を正式採用。Documentation-only、実装は別commit。Decision 001〜044は不変。
 - 2026-10-24 新Home実装（Decision 045）: main `8130b8b`（実装）・`8ea5b72`（Build 87）。Documentation追記のみ（本行）。Upload・配布・提出は未承認。
 - 2026-10-24 Gate 024（documentation only）: Version 1.3／Build 87（新Home）をASC `VALID`・TestFlight内部配布まで記録。新Decisionなし。PO実機確認前にApp Store提出・Releaseは開始しない。
+- 2026-10-24 Gate 025: 新Home種目名の表示不具合に対する修正をBuild 88として準備（Official 132／133の範囲内、新Decisionなし）。Upload・配布・審査提出は未承認。
