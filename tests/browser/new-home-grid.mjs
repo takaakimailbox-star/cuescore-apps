@@ -10,7 +10,7 @@ let fail = 0;
 const check = (ok, msg) => { if (!ok) { fail++; console.log("FAIL", msg); } };
 const EXPECT = [["9ball", "game-9ball.svg", "9-Ball"], ["10ball", "game-10ball.svg", "10-Ball"], ["jpa9", "game-jpa-9ball.svg", "JPA 9-Ball"], ["rotation", "game-rotation.svg", "Rotation"], ["straightPool", "game-14-1.svg", "14-1"], ["threeCushion", "game-3cushion.svg", "3 Cushion"]];
 const cases = [];
-for (const lang of ["ja", "en", "zh-Hans"]) for (const [w, h] of [[390, 844], [320, 568]]) cases.push([lang, "free", w, h]);
+for (const lang of ["ja", "en", "zh-Hans"]) for (const [w, h] of [[390, 844], [320, 568], [430, 932]]) cases.push([lang, "free", w, h]);
 cases.push(["ja", "pro", 390, 844]);
 for (const [lang, mode, w, h] of cases) {
   const tag = `${lang}/${mode} ${w}x${h}`;
@@ -39,6 +39,11 @@ for (const [lang, mode, w, h] of cases) {
   const visual = [...g].sort((a, b) => Math.round(a.y) - Math.round(b.y) || a.x - b.x).map(t => t.id);
   check(JSON.stringify(visual) === JSON.stringify(EXPECT.map(e => e[0])), `${tag}: visual row-major order ${visual}`);
   for (const t of g) check(t.h >= 72 && t.w >= 44 && t.h >= 44, `${tag}: ${t.id} hit area ${Math.round(t.w)}x${Math.round(t.h)} < 72/44`);
+  // Gate 025: every tile name is fully readable (own measurement, not ellipsis-hidden): text box inside the tile, no clipping box, not transparent, repaint marker settled
+  const lab = await app.evalJs(`(()=>[...document.querySelectorAll("#cueDisciplineSwitcherV1 [data-discipline]")].map(b=>{const st=b.querySelector("strong"),r=document.createRange();r.selectNodeContents(st);const t=r.getBoundingClientRect(),br=b.getBoundingClientRect(),cs=getComputedStyle(st),lc=getComputedStyle(b.querySelector(".cue-discipline-label-v1"));return {id:b.dataset.discipline,text:st.textContent.trim(),inside:t.left>=br.left-0.5&&t.right<=br.right+0.5&&t.top>=br.top-0.5&&t.bottom<=br.bottom+0.5,w:t.width,clipped:st.scrollWidth>st.clientWidth+1,overflow:cs.overflowX+"/"+lc.overflowX,ellipsis:cs.textOverflow,color:cs.color,vis:cs.visibility,op:cs.opacity,lines:Math.round(t.height/parseFloat(cs.lineHeight))}}))()`);
+  const settled = await app.evalJs(`!document.getElementById("cueDisciplineSwitcherV1").classList.contains("home-label-repaint-v3")`);
+  check(settled, `${tag}: label repaint marker settled`);
+  for (const l of lab) check(l.inside && !l.clipped && l.w > 20 && l.overflow === "visible/visible" && l.ellipsis !== "ellipsis" && l.vis === "visible" && l.op === "1" && !/rgba\(.*, 0\)/.test(l.color), `${tag}: ${l.id} name "${l.text}" readable ${JSON.stringify(l)}`);
   let s = await state();
   check(!s.newMatchBtn && s.tabs === 4 && !s.setup && !s.overflowX, `${tag}: Home composition (newMatchBtn=${s.newMatchBtn}, tabs=${s.tabs}, overflowX=${s.overflowX})`);
   // ---- each tile opens ITS setup; no menu / no extra back; Home tab returns

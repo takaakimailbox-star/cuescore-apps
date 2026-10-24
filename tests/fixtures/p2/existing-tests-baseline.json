@@ -533,6 +533,11 @@
    "tests": 4,
    "skips": 0
   },
+  "new-home-label-visibility.test.mjs": {
+   "sha256": "6d0d0d5502337fa464b78f238b6a6774e9b9264e7ddd2346882d86121ccdbf71",
+   "tests": 2,
+   "skips": 0
+  },
   "numeric-input-upper-limits.test.mjs": {
    "sha256": "055a2c4e884871b9fee34bd2d9796ea36409b079336141e2a0d163991d302d59",
    "tests": 0,

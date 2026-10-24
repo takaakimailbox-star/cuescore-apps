@@ -153,6 +153,18 @@
         window.CueScoreSelectorTraceV1?.mark("scroll-adjust:complete",{disciplineId:button.dataset.discipline,duration:performance.now()-started});
       });
     },true);
+    // Gate 025: Build 87 showed the six tile names missing on the first launch and cut off after a redisplay on a real device (not reproducible in the Simulator).
+    // Force the tile labels to re-layout and re-paint once the first frames, the fonts and every foreground return are settled; no data is touched.
+    const repaintLabels=()=>{if(!switcher)return;void switcher.offsetWidth;switcher.classList.add("home-label-repaint-v3");requestAnimationFrame(()=>requestAnimationFrame(()=>switcher.classList.remove("home-label-repaint-v3")))};
+    window.CueHomeLabelRepaintV3=repaintLabels;
+    requestAnimationFrame(repaintLabels);
+    window.addEventListener("load",repaintLabels);
+    window.addEventListener("pageshow",repaintLabels);
+    window.addEventListener("resize",repaintLabels);
+    window.addEventListener("orientationchange",repaintLabels);
+    document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")repaintLabels()});
+    document.addEventListener("resume",repaintLabels);
+    document.fonts?.ready?.then(repaintLabels);
   }
 
   window.CueScoreNavigationPhase2To6=Object.freeze({render,stateFor,active,tabCount:()=>body.querySelectorAll("[data-hub-tab]").length,disciplineCount:()=>body.querySelectorAll("[data-hub-discipline]").length});
