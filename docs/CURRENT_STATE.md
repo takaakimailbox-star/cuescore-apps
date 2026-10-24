@@ -17,6 +17,22 @@
 - **公開版ユーザーデータの更新安全性はDeferredではない。** 未承認・BLOCKED（実機での公開版上書き更新が未実施）として次回アップデートの必須検証に位置づける。Build 84 binary同一性はNOT VERIFIED。
 - P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、S-B=false、Dynamic Type Deferredは不変。Documentation-only。
 
+## CueScore Version 1.3 (Build 87, New Home) Distributed to TestFlight Internal Testers（2026年10月24日）
+
+新Home（Decision 045）を含む Version `1.3`／Build `87` を App Store Connect へ Upload し、既存の内部 TestFlight グループへ配布可能にした。**App Store の公開版は Version 1.2（Build 84）のまま**で、審査提出・一般公開は未実施。
+
+| 項目 | 状態 | 根拠 |
+|---|---|---|
+| GitHub source | main `8ea5b72`（Build 87採番）／docs `28d32a7`。新Home実装 `8130b8b` | Gate 023 |
+| Distribution export | Apple Distribution署名、既存の管理対象profile（`iOS Team Store Provisioning Profile`、2026-08-31作成）、`get-task-allow=false`。Gate 023のArchive（ツリーSHA-256 `e48dd516…`）と内容同一（署名除去後のバイナリ・`public/`・Info.plist一致） | Gate 024 |
+| ASC Upload／処理 | 2026-10-24 15:55 JST にUpload（1回）、**`VALID`**（Build ID `cae9cefc-aa25-4e5c-8532-cf57ad41f50d`、pre-release 1.3、`APP_STORE_ELIGIBLE`）。buildUploadsの`errors`／`warnings`／`infos`は空 | Gate 024 |
+| Export Compliance | Build 85と同じ `usesNonExemptEncryption=false` を回答（Build 85の根拠を再照合：暗号関連のコード・依存の差分0、Info.plist同一構成。Build 85→87の変更はHome表示・Build番号のみ） | Gate 024 |
+| TestFlight 内部配布 | Internal Build State `IN_BETA_TESTING`。既存グループ `CueScore Internal Testers`（`hasAccessToAllBuilds=true`）のbuild一覧にBuild 87を確認。新グループ・テスター変更・外部配布なし | Gate 024 |
+
+- **実機確認は未実施**（Product Owner操作）。結果が出るまでApp Store審査提出・一般公開は開始しない。Build 85（TestFlight）は残存。
+- Apple処理メール（ITMS警告）の有無は未確認。Native実機のタップ操作、Pro継続、Restore完了、Share Sheet、QRは未確認。Local StoreKit検証とNative Backup Share Sheet到達はBLOCKED。
+- Official／Decisionは変更なし。P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、S-B=false、Dynamic Type Deferredは不変。Documentation-only。
+
 ## CueScore New Home Implemented — Build 87 prepared（2026年10月24日）
 
 - Decision 045／Official 132・133の**新Homeを実装**し、main `8130b8b`（実装）・`8ea5b72`（Build 87採番）へ反映した。Home＝ロゴ＋中断試合の再開カード（該当時）＋6種目タイル（2列×3段：9-Ball／10-Ball、JPA 9-Ball／Rotation、14-1／3 Cushion、採用済みアイコン）。「新しい試合」ボタンを廃止し、タイルのタップでその種目の試合設定へ進む（中断試合の確認は既存どおり）。試合設定画面の上部6種目メニューを削除（選択済み種目の大きなアイコンと種目名、プレーヤー、先攻／後攻、Race to／Skill Level、試合開始は不変、左上の別の戻るボタンなし）。下部ホームタブで新しいHomeへ戻る。

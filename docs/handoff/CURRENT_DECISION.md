@@ -33,3 +33,4 @@
 - 2026-10-24 Gate 018〜021（documentation only）: Version 1.3／Build 85 を TestFlight 内部配布まで進めた事実を `docs/CURRENT_STATE.md` へ記録。新Decisionなし。PO実機確認前に App Store 提出・Release は開始しない。
 - 2026-10-24 Decision 045／Official 132・133／Decision Log v2.21: Product Ownerが新Home（6種目タイル2列×3段、試合設定画面の上部6種目メニュー削除）を正式採用。Documentation-only、実装は別commit。Decision 001〜044は不変。
 - 2026-10-24 新Home実装（Decision 045）: main `8130b8b`（実装）・`8ea5b72`（Build 87）。Documentation追記のみ（本行）。Upload・配布・提出は未承認。
+- 2026-10-24 Gate 024（documentation only）: Version 1.3／Build 87（新Home）をASC `VALID`・TestFlight内部配布まで記録。新Decisionなし。PO実機確認前にApp Store提出・Releaseは開始しない。
