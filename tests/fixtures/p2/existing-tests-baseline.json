@@ -295,6 +295,11 @@
    "tests": 0,
    "skips": 0
   },
+  "home-tab-exits-match-setup.test.mjs": {
+   "sha256": "6442d65c43513df301ce52b714171645fc9bad69e29ebbdd9210299beeadfba7",
+   "tests": 3,
+   "skips": 0
+  },
   "i18n-foundation-v1.test.mjs": {
    "sha256": "8689255c66a11e533d7c345ad1280e3ac7835570a225435167f0ba0a1d73c461",
    "tests": 23,

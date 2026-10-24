@@ -73,7 +73,11 @@
   };
   const openRoot=key=>{
     leaveTopLevel(key);
-    if(key==="home"){window.scrollTo(0,0)}
+    if(key==="home"){
+      // The Home tab returns to the first Home screen: leave an open (unstarted) match setup exactly like the setup back action did. No match data is created or discarded.
+      if(document.getElementById("cueHomeV1")?.classList.contains("match-setup-active-v3")){if(history.state?.cueMatchSetupV3)history.back();else window.closeCueMatchSetupV3?.()}
+      window.scrollTo(0,0)
+    }
     if(key==="player"){document.body.dataset.cuePlayerContext="browse";hideTransientPlayerViews();document.getElementById("playerManagementBtn")?.click();const title=document.getElementById("playerLibraryTitle");if(title)title.textContent=window.cueT("player.title");document.querySelector("#playerLibraryList")?.scrollTo?.(0,0)}
     if(key==="history"){document.getElementById("recordsBtn")?.click();document.querySelector("#recordsList")?.scrollTo?.(0,0)}
     if(key==="settings"){document.getElementById("settingsBtn")?.click();document.querySelector(".settings-formal-scroll-v1")?.scrollTo?.(0,0)}
