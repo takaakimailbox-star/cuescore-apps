@@ -79,7 +79,7 @@ test("product, catalog, Native and StoreKit files are byte-preserved", () => {
     "i18n-catalog-en-v1.js": "ebf832444b67365ff4a5d246f6a89befa47341b767da024720fd96bad5bb8282",
     "i18n-catalog-zh-hans-v1.js": "7027ee64557b064a31a7cba88a3ab3bce641607c543f5f4ab8c8bc42970737a1",
     "monetization-v1.js": "9da40f6be8c3dd5c2bb2535325a6bc83a890ad16e38d649e44315222115f6c60",
-    "ios/App/App.xcodeproj/project.pbxproj": "46c926c9bf7be8c167267971be1a9f7081867d61194b84376eb36e58d383a7e1",
+    "ios/App/App.xcodeproj/project.pbxproj": "724b7430d8153a8bf5dd7629681c655b7db8645cd5c656f6d807466eaae747b0",
   };
   for (const [path, digest] of Object.entries(expected)) assert.equal(sha256(path), digest, path);
 });
