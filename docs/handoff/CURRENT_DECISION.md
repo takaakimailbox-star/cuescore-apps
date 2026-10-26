@@ -39,3 +39,4 @@
 - 2026-10-24 Gate 027（documentation only）: Build 88のPO実機受入6/6 PASSを記録し、Version 1.3／Build 88をApp Store提出候補として固定。新Decisionなし。審査提出・一般公開は未承認。
 - 2026-10-24 Gate 028（documentation only）: Version 1.3ドラフト（Build 88）をASCに作成、What's New・新Homeスクリーンショットを反映。新Decisionなし。審査提出・公開は未承認。
 - 2026-10-25 Gate 029（documentation only）: 司令塔の委任（提出・条件付き公開）に基づき Version 1.3／Build 88 を App Review へ提出。新Decisionなし。一般公開は審査承認後、Phase G条件を満たす場合のみ。
+- 2026-10-26 Gate 030（documentation only）: 司令塔の委任に基づき Version 1.3／Build 88 をManual Releaseし、公開ストア反映を確認。新Decisionなし。

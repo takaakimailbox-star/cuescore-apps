@@ -1940,3 +1940,16 @@ Version `1.3`／Build `88` を App Review へ提出した（2026-10-25 08:31:58 
 - スクリーンショット5枚（新Home・プレーヤー一覧・プレーヤー情報（Build 88 Free実画面）・履歴・試合詳細。設定画面は掲載しない）。What's New（日本語）と審査メモ（1.3追記2項目）を反映。1.2の公開データは無変更。
 - **App Privacy はASC UIで確認できず NOT VERIFIED**（既存申告は変更していない）。出荷1.2からの差分は依存・Swift・privacy manifest 変更なし、ネットワーク／広告ID／トラッキング追加なしで、既存申告と矛盾する変更は見当たらない。
 - 未確認（自動BLOCKERにしない）：Restore完了、Native Backup Share Sheet（BLOCKED）、Paywall価格「$」の由来、Apple処理メールのITMS警告。Documentation-only。
+
+## CueScore Version 1.3 (Build 88) Publicly Released on the Japan App Store（2026年10月26日）
+
+Apple 審査を通過した Version `1.3`／Build `88` を **Manual Release で一般公開**した。以後の App Store 公開版は Version 1.3（Build 88）。
+
+| 事実 | 内容 | 確認 |
+|---|---|---|
+| App Review | Submission `1aa354e5-b127-440d-99e5-e504b8261108` が `COMPLETE`（item `APPROVED`）、Version 1.3 は `PENDING_DEVELOPER_RELEASE` | ASC read-back（2026-10-26 09:58 JST） |
+| Manual Release（公開操作） | `appStoreVersionReleaseRequests` を1回実行（2026-10-26 09:59:18 JST、HTTP 201、Release Request ID `e4865a66-5ae9-4cec-a8ce-292d4d200e7d`）。ASC 上は `READY_FOR_SALE`（09:59:27 JST） | ASC read-back |
+| 公開ストア反映（別事実） | 日本の公開ストア（iTunes lookup、country=jp）で Version 1.3 を 10:03:37 JST に確認（約4分の伝播待ち）。無料、画像5枚（新Home含む）、What\'s New 一致、Pro ¥980 表示 | 公開ストア |
+- 不変：App本体 Free、CueScore Pro ¥980（`com.takaakimailboxstar.cuescoreapps.pro`）、配布地域 JPN のみ、Age Rating、公開方式 MANUAL。Version 1.2 の既存情報は保護。
+- 未確認（NOT VERIFIED）：App Privacy の ASC 画面での確認（既存申告は未変更）、Restore 完了（実機）、Native Backup Share Sheet（BLOCKED）、Paywall 価格「$」の由来、Apple処理メールの ITMS 警告、実機での App Store 更新受信。
+- 新機能開発へは自動移行しない。Documentation-only。
