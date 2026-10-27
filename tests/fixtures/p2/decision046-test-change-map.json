@@ -8,19 +8,19 @@
   },
   "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
    "before": "8b1037b8bd28fc5154a26f7686f978dc3b87399901bde79cb9313c572de2b1bb",
-   "after": "81857e130567f402f6f37caf6ed84beca7f4237c10b599dbb7343078f3abc534"
+   "after": "9d2ca1838554392b9d4517ee82c6fa0d4028904ebb940f03f8c87b5237c141e9"
   },
   "localization-glossary-25-approval-decision.test.mjs": {
    "before": "aa06135c87674647d66d8825c0ea945ee53aa4670a935ee1f314fa3d5e6a8c0f",
-   "after": "05372b06d8aa0a9f9954dac863e1a0470acc717137159a924919737b25d6defc"
+   "after": "7bc73bee31283db9f8efe73f5d3d367ee60461e19e1b3d4e608238fddd1474b4"
   },
   "localization-glossary-finalization-decision.test.mjs": {
    "before": "698ea6dcb74183805420d2a2bd84cd85c338030b882550727e466bb88b70d85f",
-   "after": "b48e3e6b7b7f38169330a22e26be1c419cf1318fbc713846a85fc047c692862e"
+   "after": "309443f9c7ec6bc1d8f73aea75c48facc6e48a8d157ed8534c808274096dd4ed"
   },
   "localization-ios-first-entry-language-decision.test.mjs": {
    "before": "d39d1bddb18109cf27e94006bc9fb77ba8182d8452096c85c6edee33f0745a22",
-   "after": "13a3c18720fed5a8de6dcbf19855e4544c40cbbeac6426a75ac05d1fb5f427af"
+   "after": "e9d86bb6755740dd7d512879f23e3d6d8756f89747e6f38683196665dabafdcf"
   },
   "localization-native-camera-decision.test.mjs": {
    "before": "56dbdc8737e185b05b7db3d04682f2d3627e7461f104900dcdd07b030d691498",
@@ -65,5 +65,38 @@
  },
  "newTest": {
   "shot-clock-decision.test.mjs": "042aadcaf904130397b800611020cb4ef8444055b628f61b5ee3cf98fdad7cf4"
+ },
+ "productPins": {
+  "note": "index.html / sw.js digests re-pinned for the Shot Clock files (link/script tags, precache entries)",
+  "index.html": {
+   "before": "85af9b11d6f17b95e995032c7a9289dcab9710b67ad7302e20256cfef24609ef",
+   "after": "bf2b63511beaa83e1164b48126edae59b7b2582485989450da94f156ff5c2e74"
+  },
+  "sw.js": {
+   "before": "a6ab5299800b178296aa08cb6274cf8e3b465085a3483db7478722c8a19ab1e2",
+   "after": "97faca9fc1e612ece2166cf3f3e2b5b1e336ab1c9982ebddbe94a1a543dbbaec"
+  },
+  "pinTests": [
+   "tests/localization-ac13-voiceover-release-requirement-decision.test.mjs",
+   "tests/localization-glossary-25-approval-decision.test.mjs",
+   "tests/localization-glossary-finalization-decision.test.mjs",
+   "tests/localization-ios-first-entry-language-decision.test.mjs"
+  ]
+ },
+ "newTests": {
+  "shot-clock-decision.test.mjs": 4,
+  "shotclock-state-machine.test.mjs": 10
+ },
+ "productChanges": {
+  "new": [
+   "shotclock-v1.js",
+   "shotclock-v1.css",
+   "i18n-catalog-shotclock-v1.js"
+  ],
+  "modified": [
+   "index.html (link + 2 script tags only)",
+   "sw.js (3 precache entries)",
+   "scripts/build-native-web.mjs (3 file names)"
+  ]
  }
 }

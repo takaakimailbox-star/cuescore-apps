@@ -49,6 +49,12 @@
 - 翻訳20語は**CANDIDATE**（Official 135付録A）。Official 109は無改変。PO優先候補: zh「出杆计时器」「已暂停」、en延長取消「Undo −60」。
 - セット方式は完全保留。公開済みVersion 1.3／Build 88、P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、S-B=false、Dynamic Type Deferredは不変。
 
+## CueScore Shot Clock B4 Implemented（2026年10月27日、実装・Browser／Simulator検証済み、未配布）
+
+- Official 135に従いショットクロックB4を実装した（`shotclock-v1.js`／`shotclock-v1.css`／`i18n-catalog-shotclock-v1.js`、index.htmlは読み込みタグ3行のみ）。既定OFF、Free／Pro共通。試合設定に「ショットクロック」行（ON/OFF＋基本時間30/35/40/45/60）、試合画面のログ枠下端に3ボタンドック。deadline方式、別キー `cueScore.shotClock.v1`。ボール入力・ファール・セーフティ・交代・Undo・ラック終了・試合終了とは連動しない。
+- 検証: 全Node 1195／1195、状態機械単体、Browser（実Chrome）機能・連動なし・OFF完全一致（72条件でDOM／全rect一致）・レイアウト2880条件NG 0・試合設定からの開始到達、iOS Simulator（iPhone 17 iOS 27.0／iPhone SE 3rd iOS 26.5）で動作を確認。**実機は未確認（NOT VERIFIED）**。
+- 翻訳20語は**CANDIDATE**のまま（`i18n-catalog-shotclock-v1.js`、主catalogは無改変）。TestFlight／リリースにはP4でのPO承認が必要。Version／Build未変更（公開版 1.3／Build 88）。TestFlight Upload・ASC提出・公開は未実施。
+
 ## CueScore New Home Formalized — Decision 045 / Official 132・133 / Decision Log v2.21（2026年10月24日）
 
 - Product Ownerは新Homeの案Bを正式採用し、6種目の配置順と試合設定画面の変更を承認した。**Decision 045／Official 132（Decision）・133（Spec）／Decision Log v2.21**を発行（Documentation-only、実装は別commit）。

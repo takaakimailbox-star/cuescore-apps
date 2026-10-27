@@ -354,28 +354,28 @@
    "skips": 0
   },
   "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
-   "sha256": "81857e130567f402f6f37caf6ed84beca7f4237c10b599dbb7343078f3abc534",
+   "sha256": "9d2ca1838554392b9d4517ee82c6fa0d4028904ebb940f03f8c87b5237c141e9",
    "tests": 4,
    "skips": 0,
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)",
    "previousSha256": "b557c9fda03401a6fcc91f4bee45be8a6db2826b0a6f07c8023ad5970ff6f052"
   },
   "localization-glossary-25-approval-decision.test.mjs": {
-   "sha256": "05372b06d8aa0a9f9954dac863e1a0470acc717137159a924919737b25d6defc",
+   "sha256": "7bc73bee31283db9f8efe73f5d3d367ee60461e19e1b3d4e608238fddd1474b4",
    "tests": 6,
    "skips": 0,
    "previousSha256": "359a13c1d84d7e17b1b72ae811f2f7be1d459c2f2e5f67e88ace8ba3ae4abcda",
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
   },
   "localization-glossary-finalization-decision.test.mjs": {
-   "sha256": "b48e3e6b7b7f38169330a22e26be1c419cf1318fbc713846a85fc047c692862e",
+   "sha256": "309443f9c7ec6bc1d8f73aea75c48facc6e48a8d157ed8534c808274096dd4ed",
    "tests": 7,
    "skips": 0,
    "previousSha256": "139b50ebf12bdb298d7711efa60df73c0693cce6eb9752cfa2a1d556c521012c",
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
   },
   "localization-ios-first-entry-language-decision.test.mjs": {
-   "sha256": "13a3c18720fed5a8de6dcbf19855e4544c40cbbeac6426a75ac05d1fb5f427af",
+   "sha256": "e9d86bb6755740dd7d512879f23e3d6d8756f89747e6f38683196665dabafdcf",
    "tests": 4,
    "skips": 0,
    "updated_in": "Decision 044 / iOS first-entry language note regression"
@@ -531,6 +531,11 @@
   "shot-clock-decision.test.mjs": {
    "sha256": "042aadcaf904130397b800611020cb4ef8444055b628f61b5ee3cf98fdad7cf4",
    "tests": 4,
+   "skips": 0
+  },
+  "shotclock-state-machine.test.mjs": {
+   "sha256": "92bde2df9f552ee579b8622ae5a6ea4a8eac75ef04c022a3b3a69e075f23f592",
+   "tests": 10,
    "skips": 0
   },
   "new-home-grid.test.mjs": {

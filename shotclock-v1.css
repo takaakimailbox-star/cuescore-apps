@@ -1,0 +1,74 @@
+/* CueScore Shot Clock v1 styles (Decision 046 / Official 135, Design System v2.2 Appendix E T1-T4, UI Components v1.2 UIC-REQ-050-052).
+ * Scoped to .cue-sc-* ; nothing here applies unless shotclock-v1.js mounts the dock or the setup row. */
+:root{--cue-scd-text:#1C1C1E;--cue-scd-text2:#636366;--cue-scd-warn:#B25000;--cue-scd-err:#D70015;--cue-scd-bg2:#F2F2F7;--cue-scd-border:#D1D1D6;--cue-scd-dis:#E5E5EA}
+.cue-sc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.cue-sc-dock[data-lv="warn"]{--cue-scv-c:var(--cue-scd-warn)}.cue-sc-dock[data-lv="danger"],.cue-sc-dock[data-lv="over"]{--cue-scv-c:var(--cue-scd-err)}.cue-sc-dock[data-lv="ok"]{--cue-scv-c:var(--cue-scd-text)}
+.cue-sc-num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+.cue-sc-on .pro-log-wrap{display:flex!important;flex-direction:column!important}
+.cue-sc-on .pro-turn-log{flex:1 1 auto!important;min-height:0!important}
+.cue-sc-dock{--cue-scv-ts:1;position:relative;flex:0 0 auto;display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;grid-template-rows:3px 52px;align-items:center;column-gap:8px;margin:0;padding:0 8px 4px;min-height:60px;background:#fff;color:var(--cue-scd-text);border-top:1px solid var(--cue-scd-border);border-radius:0 0 14px 14px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif}
+.cue-sc-bar{position:absolute;left:0;right:0;top:-1px;height:3px;background:var(--cue-scd-dis)}.cue-sc-bar i{display:block;height:100%;width:100%;background:var(--cue-scv-c,var(--cue-scd-text));border-radius:0 2px 2px 0;transition:width .12s linear}
+.cue-sc-dock[data-st="paused"] .cue-sc-bar i,.cue-sc-dock[data-st="paused"] .cue-sc-num{opacity:.45}
+.cue-sc-time{grid-row:2;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:0;white-space:nowrap}
+.cue-sc-num{font-size:calc(32px * var(--cue-scv-tsd,1));line-height:34px;font-weight:700;letter-spacing:-.02em;color:var(--cue-scv-c,var(--cue-scd-text))}
+.cue-sc-unit{display:block;font-size:calc(12px * var(--cue-scv-ts));line-height:1.15;font-weight:600;color:var(--cue-scd-text2);white-space:nowrap}
+.cue-sc-dock[data-lv="over"] .cue-sc-unit,.cue-sc-dock[data-lv="warn"] .cue-sc-unit,.cue-sc-dock[data-lv="danger"] .cue-sc-unit{color:var(--cue-scv-c)}
+.cue-sc-btn{grid-row:2;margin-top:2px;min-height:48px!important;height:48px!important;border:0;border-radius:14px;color:var(--cue-scd-text)!important;font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;touch-action:manipulation;padding:0 8px;white-space:nowrap}
+.cue-sc-btn span,.cue-sc-btn small{color:inherit!important;font:inherit}
+.cue-sc-lb{font-size:calc(17px * var(--cue-scv-ts))!important;line-height:1.15!important;font-weight:600!important}
+.cue-sc-btn small{font-size:calc(13px * var(--cue-scv-ts))!important;line-height:1.1;font-weight:600;color:var(--cue-scd-text2)!important}
+.cue-sc-btn:disabled{opacity:1}.cue-sc-btn:disabled .cue-sc-lb,.cue-sc-btn:disabled small{color:#8E8E93!important}.cue-sc-btn:disabled{background:var(--cue-scd-dis)!important}
+.cue-sc-main{background:var(--cue-scd-text);color:#fff!important;margin-left:0;flex-direction:row;gap:5px}.cue-sc-main span{color:#fff!important}.cue-sc-main svg{width:calc(18px * var(--cue-scv-ts));height:calc(18px * var(--cue-scv-ts))}
+.cue-sc-resetb{background:var(--cue-scd-bg2)}
+.cue-sc-extb{background:#fff;border:1px solid var(--cue-scd-border);margin-right:4px;position:relative}
+.cue-sc-extb[data-hot="1"]{background:var(--cue-scd-warn);border-color:var(--cue-scd-warn);color:#fff!important}.cue-sc-extb[data-hot="1"] span,.cue-sc-extb[data-hot="1"] small{color:#fff!important}
+.cue-sc-dock[data-lv="danger"] .cue-sc-extb[data-hot="1"],.cue-sc-dock[data-lv="over"] .cue-sc-extb[data-hot="1"]{background:var(--cue-scd-err);border-color:var(--cue-scd-err)}
+.cue-sc-extb[data-undo="1"]{background:var(--cue-scd-text);border-color:var(--cue-scd-text);color:#fff!important}.cue-sc-extb[data-undo="1"] span,.cue-sc-extb[data-undo="1"] small{color:#fff!important}
+.cue-sc-extb[data-count]:not([data-count=""])::after{content:attr(data-count);position:absolute;top:-10px;right:-7px;min-width:20px;height:18px;padding:0 4px;border-radius:9px;background:var(--cue-scd-text);color:#fff;font:600 12px/18px -apple-system,system-ui,sans-serif;text-align:center}
+.cue-sc-ico{display:inline-block;width:calc(12px * var(--cue-scv-ts));height:calc(12px * var(--cue-scv-ts));margin-right:3px;vertical-align:-1px;background:currentColor;-webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2.5 1.8 20.5h20.4L12 2.5zm-1.2 7h2.4v6h-2.4v-6zm0 7.6h2.4v2.4h-2.4v-2.4z' fill-rule='evenodd'/></svg>") center/contain no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2.5 1.8 20.5h20.4L12 2.5zm-1.2 7h2.4v6h-2.4v-6zm0 7.6h2.4v2.4h-2.4v-2.4z' fill-rule='evenodd'/></svg>") center/contain no-repeat}
+/* gaps use DS spacing tokens: Extend<->Reset 12 (space.12), Reset<->Start/Pause 8 (space.8) */
+.cue-sc-extb{margin-right:4px}.cue-sc-main{margin-left:0}.cue-sc-dock{column-gap:8px}
+/* compact typography (container <= 340 CSS px): type.button.compact 13/600/16, caption 12/600 */
+@media (max-width:340px){.cue-sc-lb{font-size:calc(13px * var(--cue-scv-ts))!important}.cue-sc-btn small{font-size:calc(12px * var(--cue-scv-ts))!important}.cue-sc-dock{padding:0 6px 4px;column-gap:8px}.cue-sc-btn{padding:0 6px}.cue-sc-extb{margin-right:4px}}
+/* large text (pseudo 130/160/200%): two rows, never icon-only, buttons grow in height (fixed heights released per DS) */
+.cue-sc-dock.cue-sc-lg{--cue-scv-tsd:min(var(--cue-scv-ts),1.5);grid-template-columns:minmax(0,1fr) auto;grid-template-rows:3px auto auto;row-gap:4px;padding-bottom:6px}
+.cue-sc-dock.cue-sc-lg .cue-sc-time{grid-column:1;grid-row:2}.cue-sc-dock.cue-sc-lg .cue-sc-extb{grid-column:2;grid-row:2;margin:0;min-height:48px!important;height:auto!important;padding:2px 8px}
+.cue-sc-dock.cue-sc-lg .cue-sc-resetb{grid-column:1;grid-row:3;margin:0;min-height:48px!important;height:auto!important;padding:2px 8px;width:100%}
+.cue-sc-dock.cue-sc-lg .cue-sc-main{grid-column:2;grid-row:3;margin:0;min-height:48px!important;height:auto!important;padding:2px 8px}
+.cue-sc-dock.cue-sc-lg .cue-sc-num{line-height:1.05}
+@media (prefers-reduced-motion:reduce){.cue-sc-bar i{transition:none}}
+/* v4 refinements: narrow buttons so a 3-digit value (105/120) always fits at 320 */
+.cue-sc-btn{min-width:44px}
+@media (max-width:340px){
+  .cue-sc-btn{padding:0 4px}.cue-sc-main{flex-direction:column;gap:0;min-width:56px}.cue-sc-resetb{min-width:56px}.cue-sc-extb{min-width:46px;padding:0 4px}
+  .cue-sc-main svg{width:calc(16px * var(--cue-scv-ts));height:calc(16px * var(--cue-scv-ts))}
+}
+.cue-sc-dock.cue-sc-lg .cue-sc-time{flex-direction:row;align-items:center;flex-wrap:wrap;column-gap:8px;row-gap:0}
+.cue-sc-dock.cue-sc-lg .cue-sc-num{line-height:1}.cue-sc-dock.cue-sc-lg .cue-sc-btn{gap:0}
+.cue-sc-dock.cue-sc-lg .cue-sc-main{flex-direction:row;gap:6px}
+
+/* large text: the log yields to the clock (the log is history, not input); at >=160% the caption words are dropped but the warning symbol stays (state is also carried by digit colour, button labels and aria) */
+.cue-sc-nolog .pro-turn-log{display:none!important}
+.cue-sc-dock.cue-sc-lg .cue-sc-extb{flex-direction:row;gap:6px;padding:2px 10px}
+.cue-sc-dock.cue-sc-lg2 .cue-sc-cap-t{display:none}
+.cue-sc-dock.cue-sc-lg{row-gap:4px;padding-bottom:4px}
+.cue-sc-dock.cue-sc-lg2 .cue-sc-main .cue-sc-ic{display:none}.cue-sc-dock.cue-sc-lg2 .cue-sc-btn{padding:2px 8px}
+
+/* ---------- match setup row (above the start button) ---------- */
+.cue-sc-setup{order:6;margin:10px 0 0;padding:8px 12px;background:#fff;border:1px solid var(--cue-scd-border);border-radius:14px;color:var(--cue-scd-text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif}
+.cue-sc-setup-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px}
+.cue-sc-setup-text{display:flex;flex-direction:column;min-width:0}
+.cue-sc-setup-title{font-size:17px;line-height:22px;font-weight:600;color:var(--cue-scd-text)}
+.cue-sc-setup-sub{font-size:12px;line-height:16px;font-weight:400;color:var(--cue-scd-text2)}
+.cue-sc-switch{flex:0 0 auto;width:60px;height:44px;border:0;background:transparent;padding:0;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
+.cue-sc-track{position:relative;display:block;width:51px;height:31px;border-radius:16px;background:#8E8E93;transition:background .15s}
+.cue-sc-knob{position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .15s}
+.cue-sc-switch[aria-checked="true"] .cue-sc-track{background:var(--cue-scd-text)}
+.cue-sc-switch[aria-checked="true"] .cue-sc-knob{transform:translateX(20px)}
+.cue-sc-base{display:flex;flex-direction:column;align-items:stretch;gap:2px;padding-top:2px}
+.cue-sc-base[hidden]{display:none}
+.cue-sc-base-label{font-size:13px;line-height:16px;font-weight:600;color:var(--cue-scd-text2);flex:0 0 auto}
+.cue-sc-base-btns{display:flex;gap:6px;width:100%}
+.cue-sc-base-btn{min-width:44px;height:44px;flex:1 1 0;border:1px solid var(--cue-scd-border);border-radius:14px;background:#fff;color:var(--cue-scd-text);font:600 17px/22px -apple-system,system-ui,sans-serif;padding:0;touch-action:manipulation}
+.cue-sc-base-btn[aria-checked="true"]{background:var(--cue-scd-text);border-color:var(--cue-scd-text);color:#fff}
+@media (max-width:340px){.cue-sc-setup{padding:6px 10px}.cue-sc-base-btns{gap:4px}.cue-sc-base-btn{font-size:16px}}
