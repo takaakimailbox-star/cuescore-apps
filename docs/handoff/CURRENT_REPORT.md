@@ -43,3 +43,4 @@ production source、翻訳catalog、Native、StoreKit、Device Build/install、�
 - 2026-10-27 Decision 046／Official 134・135／Decision Log v2.22: ショットクロックB4を正式仕様化。実装・検証は別commit。
 - 2026-10-27 Shot Clock B4 実装（Official 135）: Node 1195/1195、Browser／Simulator検証済み、実機NOT VERIFIED、未配布。
 - 2026-10-27 Shot Clock B4 TestFlight: Version 1.4／Build 89 を内部TestFlightへ配布（IN_BETA_TESTING）。PO実機確認待ち。
+- 2026-10-27 Race to表示修正（9/10-Ball、main b5b7f14）。UI/UX Pilot P1は隔離成果物のみ。

@@ -49,6 +49,11 @@
 - 翻訳20語は**CANDIDATE**（Official 135付録A）。Official 109は無改変。PO優先候補: zh「出杆计时器」「已暂停」、en延長取消「Undo −60」。
 - セット方式は完全保留。公開済みVersion 1.3／Build 88、P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、S-B=false、Dynamic Type Deferredは不変。
 
+## CueScore Race to Display Fix（2026年10月27日、main `b5b7f14`、未配布）
+
+- 9-Ball／10-Ball のスコアカードの「Race to」行を「Race to ＜勝利目標＞」だけにした（従来は「Race to · 手球フリー · 2 Fouls」）。`2 Fouls`／`3 Fouls!` はカードから外し（ファール実データと試合ログは不変、ログに「2 Fouls」行が残る）、手球フリーは既存catalogキーの小バッジ（9-Ball／10-Ball のみ）として残した。レイアウト不変・保存schema不変・Version／Build不変。Rotation／14-1 の「目標 · 2 Fouls」は未変更（PO判断事項）。
+- UI/UX Pilot P1 は隔離Prototypeのみ（本番未反映）。成果物: `/Users/Ludique/Documents/Codex/2026-10-27/cuescore-racetoui-pilot/`。実機比較・採用判断は別Gate。
+
 ## CueScore Version 1.4 (Build 89) Uploaded and Distributed to TestFlight Internal Testers（2026年10月27日）
 
 Version `1.4`／Build `89`（main `0926662`、ショットクロックB4を含む）を App Store Connect へ Upload し、既存の内部 TestFlight グループ（CueScore Internal Testers）へ配布した。**App Store の公開版は Version 1.3（Build 88）のまま**。審査提出・外部配布・一般公開・価格／IAP／配布地域／App Privacy の変更は未実施。
