@@ -239,7 +239,7 @@
    "skips": 0
   },
   "dynamic-type-deferral-decision.test.mjs": {
-   "sha256": "1e1c760a7e7ee27eaad3da0c40061b1b3833829260c7f7f2754aa86498651212",
+   "sha256": "cae5054497dd8d0d7b5c7f3bc585fd41f51d96e24fa33c6c2beae468ae64ea31",
    "tests": 14,
    "skips": 0,
    "previousSha256": "b702fd38d68a9592196e59db8d7f7f5554833fec91c05e698549acb482d4b5c4",
@@ -354,83 +354,83 @@
    "skips": 0
   },
   "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
-   "sha256": "8b1037b8bd28fc5154a26f7686f978dc3b87399901bde79cb9313c572de2b1bb",
+   "sha256": "81857e130567f402f6f37caf6ed84beca7f4237c10b599dbb7343078f3abc534",
    "tests": 4,
    "skips": 0,
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)",
    "previousSha256": "b557c9fda03401a6fcc91f4bee45be8a6db2826b0a6f07c8023ad5970ff6f052"
   },
   "localization-glossary-25-approval-decision.test.mjs": {
-   "sha256": "aa06135c87674647d66d8825c0ea945ee53aa4670a935ee1f314fa3d5e6a8c0f",
+   "sha256": "05372b06d8aa0a9f9954dac863e1a0470acc717137159a924919737b25d6defc",
    "tests": 6,
    "skips": 0,
    "previousSha256": "359a13c1d84d7e17b1b72ae811f2f7be1d459c2f2e5f67e88ace8ba3ae4abcda",
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
   },
   "localization-glossary-finalization-decision.test.mjs": {
-   "sha256": "698ea6dcb74183805420d2a2bd84cd85c338030b882550727e466bb88b70d85f",
+   "sha256": "b48e3e6b7b7f38169330a22e26be1c419cf1318fbc713846a85fc047c692862e",
    "tests": 7,
    "skips": 0,
    "previousSha256": "139b50ebf12bdb298d7711efa60df73c0693cce6eb9752cfa2a1d556c521012c",
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
   },
   "localization-ios-first-entry-language-decision.test.mjs": {
-   "sha256": "d39d1bddb18109cf27e94006bc9fb77ba8182d8452096c85c6edee33f0745a22",
+   "sha256": "13a3c18720fed5a8de6dcbf19855e4544c40cbbeac6426a75ac05d1fb5f427af",
    "tests": 4,
    "skips": 0,
    "updated_in": "Decision 044 / iOS first-entry language note regression"
   },
   "localization-native-camera-decision.test.mjs": {
-   "sha256": "56dbdc8737e185b05b7db3d04682f2d3627e7461f104900dcdd07b030d691498",
+   "sha256": "4b8103c506ed78d4a4fb0af529183d874c8c3425490efe36c7c1c8408e47d97f",
    "tests": 5,
    "skips": 0,
    "previousSha256": "41da290da2463711f1399afe6b4007019d474920aa8e43b1640b979d83b5844b",
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
   },
   "localization-official-docs.test.mjs": {
-   "sha256": "1d2460d79694261e6e5b76b8e740c97d7d820164cecc098f9b3b8dc0a9e6ccc5",
+   "sha256": "6e75f44152944a2334b42541fe40e98e8d4340b3da5531405383a11f711ea02d",
    "tests": 11,
    "skips": 0,
    "previousSha256": "bc3137a5e35d0cfcc5a5327fb47480761b71a4b56e7c6d4051a4e16dfa116bea",
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
   },
   "localization-p1-formalization-decision.test.mjs": {
-   "sha256": "b0cee30cf57d6546fb18413f315a4ade54f6c596e4b56a7fd0ffe848902f78aa",
+   "sha256": "c9f3d1383a194d50408f8592a109f56b5651deb943b4843d8247bfbc8f3c4a0f",
    "tests": 8,
    "skips": 0,
    "previousSha256": "a40e47cd0902ba345cd367e5c1df731dff82a7647b585b0b9f9d81cca9f7731f",
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
   },
   "localization-po-approval-decision.test.mjs": {
-   "sha256": "e645d6e2c82a3a3ccf549a0480a23b73b468ed55f521063cfe3dfd1221e2bcd0",
+   "sha256": "ffd7551f5ae29ed0271859da1dc3303e8a9ee989b3ed8acaa53fdb306ccb9b69",
    "tests": 6,
    "skips": 0,
    "previousSha256": "5f2adb1c344eb7b2f46b4514f8eafac367faeb576c7f913099053973686f9e99",
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
   },
   "localization-review-policy-decision.test.mjs": {
-   "sha256": "e2067fd283e2f9377a5e7ce6142ed3953c6d92ecdf6d8669bff02b9305b7aabe",
+   "sha256": "1b1e61545ff79803e16eec312eeb656f3a6d3d92c0f00e265a92b5526a36941b",
    "tests": 6,
    "skips": 0,
    "previousSha256": "712686c2ea61a051dbda854cdd667e3e09d1e7e396d728e28c6beff8b8cd1b16",
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
   },
   "localization-u11-correction-decision.test.mjs": {
-   "sha256": "c8064317b65bec2d43fee1672d22f692f1dd00f64284343f5e1c29bb5145095d",
+   "sha256": "399c17116ff59bd93053555720249e207546a1d53ead17e3d3b5221c41b10adb",
    "tests": 7,
    "skips": 0,
    "previousSha256": "43697a58015d2520ed7d958bccb677b18bf2a90f48b52b27cc557bc66965f522",
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
   },
   "localization-u4-u11-decision.test.mjs": {
-   "sha256": "c54f95b3a50ba15c0e79e90d6ad43693b1728ef45cfede94129468c8a7575d16",
+   "sha256": "5de618cd5f1f63c225ff8f1e68c1ea7d6f703a7f183850b0f6b8011a4bcdb75a",
    "tests": 6,
    "skips": 0,
    "previousSha256": "53d3f0cb53d2edd56fc98f2b17c3293c9b18468b52e6003b43d0d3493c2b47fd",
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
   },
   "localization-u6-decision.test.mjs": {
-   "sha256": "839feedfb304907f13afffb9c7ce0d06db914b9a59e1b53c65526cd87b1bb17f",
+   "sha256": "22bf061c44653f283099caf2abd35c4dc3c964683e4f08d9a6d5c3ca66591f31",
    "tests": 6,
    "skips": 0,
    "previousSha256": "a634cae63aec8ef1b7c69583fd726a74520f11f3d703f33ec5c3a01ba35b064d",
@@ -524,8 +524,13 @@
    "skips": 0
   },
   "new-home-decision.test.mjs": {
-   "sha256": "032de902eaec49f372b1ed7a2b4911dc55244f34cffafcdd00339b8822d9366f",
+   "sha256": "c8fee4000ebe3621a216dc4030d34c5e430bbdbb5bd298f5c2032140d29db4d2",
    "tests": 3,
+   "skips": 0
+  },
+  "shot-clock-decision.test.mjs": {
+   "sha256": "042aadcaf904130397b800611020cb4ef8444055b628f61b5ee3cf98fdad7cf4",
+   "tests": 4,
    "skips": 0
   },
   "new-home-grid.test.mjs": {
@@ -743,7 +748,7 @@
    "skips": 0
   },
   "settings-unified-design-decision.test.mjs": {
-   "sha256": "e3b8dd6c0520e1ad2a19b1d43ed21b26637f738b1dcf81c7464a9d8142700a89",
+   "sha256": "863f33a372bb788fce5d1bd041124d8f7af458fe65e7a70a7c14477a14690efc",
    "tests": 13,
    "skips": 0,
    "previousSha256": "96500058339e7c941a801439090ec579aff310ac72624c1136d94ee2f66264c6",

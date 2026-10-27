@@ -43,7 +43,7 @@ const spec = read("docs/official/133_CueScore_v1.3_New_Home_Six_Discipline_Grid_
 test("Official 132 and 133 are published exactly once and are the highest Official numbers", () => {
   const nums = fs.readdirSync(new URL("docs/official/", root)).filter(n => /^\d+_.*\.md$/.test(n)).map(n => Number(n.split("_")[0]));
   for (const n of [132, 133]) assert.equal(nums.filter(v => v === n).length, 1, String(n));
-  assert.equal(Math.max(...nums), 133);
+  assert.equal(Math.max(...nums), 135);
   assert.match(decision, /Decision 045/);
   assert.match(spec, /Official 132（Decision 045）/);
 });
@@ -57,7 +57,7 @@ test("Decision Log v2.21 records Decision 045 once and keeps v2.20 as the preced
   const prev = readZipEntry("docs/official/07_CueScore_Official_Design_Decision_Log_v2.20_Official_Release.docx", "word/document.xml").replace(/<[^>]+>/g, "");
   assert.ok(!prev.includes("Decision 045"), "the preserved v2.20 must not contain Decision 045");
   const readme = read("docs/README.md");
-  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.21_Official_Release\.docx`/);
+  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.22_Official_Release\.docx`/);
   assert.match(readme, /official\/132_CueScore_v1\.3_New_Home_Six_Discipline_Grid_Decision\.md/);
   assert.match(readme, /official\/133_CueScore_v1\.3_New_Home_Six_Discipline_Grid_Spec\.md/);
 });

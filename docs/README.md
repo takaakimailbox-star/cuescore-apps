@@ -9,12 +9,12 @@ the initial reference implementation and historical product context.
 The following seven documents are the current official specification set:
 
 1. `official/01_CueScore_Product_Architecture_v1.0.docx`
-2. `official/02_CueScore_Design_System_v2.1_Official_Release.docx`
+2. `official/02_CueScore_Design_System_v2.2_Official_Release.docx`
 3. `official/03_CueScore_UI_Kit_v1.0.docx`
-4. `official/04_CueScore_UI_Components_v1.1_Official_Release.docx`
+4. `official/04_CueScore_UI_Components_v1.2_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.21_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.22_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -26,11 +26,12 @@ The App Store v1.0 official release package is managed separately under
 - Final submission fix record: `implementation/CueScore_v1.0_Final_Submission_Fix_Japan_Only_2026-09-20.md`
 - Final re-audit: `release/CueScore_v1.0_Final_Release_Readiness_Audit_2026-09-20.md`
 
-Design System v2.1 is the current official release and successor to v2.0.
+Design System v2.2 is the current official release and successor to v2.1 (v2.2 adds the shot-clock-only Token addendum T1-T4, Appendix E). UI Components v1.2 is the current official release and successor to v1.1 (adds UIC-REQ-050-052, Shot Clock Dock). v2.1 and v1.1 remain in the official directory as preceding releases.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.21 is the current official release and successor
-to v2.20. Earlier versions remain in the official directory as preceding releases.
+Official Design Decision Log v2.22 is the current official release and successor
+to v2.21. Earlier versions remain in the official directory as preceding releases.
+v2.22 adds Decision 046 (Shot Clock B4 manual three-button dock; Product Owner approved) and leaves Decisions 001〜045 unchanged.
 v2.21 adds Decision 045 (New Home six-discipline grid and simplified match setup screen; Product Owner adopted) and leaves Decisions 001〜044 unchanged.
 v2.20 adds Decision 044 (iOS first-entry navigator.languages note) and leaves Decisions 001〜043 unchanged.
 v2.19 adds Decision 043 (Official 108 AC-13 VoiceOver release requirement revision) and leaves Decisions 001〜042 unchanged.
@@ -199,6 +200,10 @@ New Home (Version 1.3) status:
 
 - Decision 045 / Official 132 / Official 133 / Official Design Decision Log v2.21 (published 2026-10-24). Product Owner decision: the Home screen shows six discipline tiles in two columns by three rows (9-Ball / 10-Ball, JPA 9-Ball / Rotation, 14-1 / 3 Cushion) with the adopted discipline icons; the "新しい試合" button is removed; tapping a tile opens that discipline's match setup; the horizontal six-discipline menu at the top of the match setup screen is removed; the bottom Home tab returns to Home. Storage schema, Player Identity, QR, Backup, Free/Pro, IAP and translations are unchanged. This publication is documentation-only; the implementation follows in a separate commit.
 
+Shot Clock (Version 1.4 candidate) status:
+
+- Decision 046 / Official 134 / Official 135 / Official Design Decision Log v2.22 / Design System v2.2 / UI Components v1.2 (published 2026-10-27). Product Owner decision: B4 manual three-button dock (start/pause/resume, reset, extend +60) at the bottom of the match log frame; zero linkage to ball input, foul, safety, player switch, Undo, rack end and match end; base time 45s (30/35/40/45/60); default OFF; Free/Pro common; match data schema/QR/Backup/stats unchanged; set-method work remains on hold. The 20 new terms stay CANDIDATE in Official 135 Appendix A; Official 109 is unchanged. Implementation is a separate commit; published Version 1.3 / Build 88 is unchanged.
+
 Localization U4/U11 approval status:
 
 - Decision 038 / Official 121 / Official 122 / Official Design Decision Log v2.14 (published 2026-10-17). Product Owner decisions: U4 (Paywall and Settings plan card) is translated into ja/en/zh-Hans with fact-based wording and the StoreKit displayPrice; the Native development-language fallback policy (en to ja) is approved for P6; P5/P6 are verified first in Simulator/isolated environments; the remaining Glossary terms are prepared as a PO decision package. Product code, ASC, IAP product information and Official 109 are not changed by this Decision.
@@ -276,7 +281,7 @@ Both documents are authoritative and are used together:
   templates, and the shared UI library.
 - **UI Components v1.1** defines component contracts, states, interactions,
   accessibility, prohibited behavior, and acceptance criteria.
-- **Design System v2.1** is authoritative for shared tokens, dimensions,
+- **Design System v2.2** is authoritative for shared tokens, dimensions,
   colors, typography, motion, and cross-screen visual rules.
 
 ## Adopted UI References
@@ -319,3 +324,5 @@ An official-document update must:
 - `official/131_CueScore_Localization_iOS_First_Entry_Language_List_Decision.md`
 - `official/132_CueScore_v1.3_New_Home_Six_Discipline_Grid_Decision.md`
 - `official/133_CueScore_v1.3_New_Home_Six_Discipline_Grid_Spec.md`
+- `official/134_CueScore_Shot_Clock_B4_Manual_Dock_Decision.md`
+- `official/135_CueScore_Shot_Clock_B4_Manual_Dock_Spec.md`

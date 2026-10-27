@@ -1,0 +1,69 @@
+{
+ "gate": "Shot Clock B4 Formalization (Decision 046 / Official 134-135)",
+ "replacedAssertions": "Math.max(Official number) 133->135; README Decision Log pin v2.21->v2.22 (and successor text v2.20->v2.21); new-home-decision keeps its own LOG pin on the preserved v2.21 file",
+ "changedTests": {
+  "dynamic-type-deferral-decision.test.mjs": {
+   "before": "1e1c760a7e7ee27eaad3da0c40061b1b3833829260c7f7f2754aa86498651212",
+   "after": "cae5054497dd8d0d7b5c7f3bc585fd41f51d96e24fa33c6c2beae468ae64ea31"
+  },
+  "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
+   "before": "8b1037b8bd28fc5154a26f7686f978dc3b87399901bde79cb9313c572de2b1bb",
+   "after": "81857e130567f402f6f37caf6ed84beca7f4237c10b599dbb7343078f3abc534"
+  },
+  "localization-glossary-25-approval-decision.test.mjs": {
+   "before": "aa06135c87674647d66d8825c0ea945ee53aa4670a935ee1f314fa3d5e6a8c0f",
+   "after": "05372b06d8aa0a9f9954dac863e1a0470acc717137159a924919737b25d6defc"
+  },
+  "localization-glossary-finalization-decision.test.mjs": {
+   "before": "698ea6dcb74183805420d2a2bd84cd85c338030b882550727e466bb88b70d85f",
+   "after": "b48e3e6b7b7f38169330a22e26be1c419cf1318fbc713846a85fc047c692862e"
+  },
+  "localization-ios-first-entry-language-decision.test.mjs": {
+   "before": "d39d1bddb18109cf27e94006bc9fb77ba8182d8452096c85c6edee33f0745a22",
+   "after": "13a3c18720fed5a8de6dcbf19855e4544c40cbbeac6426a75ac05d1fb5f427af"
+  },
+  "localization-native-camera-decision.test.mjs": {
+   "before": "56dbdc8737e185b05b7db3d04682f2d3627e7461f104900dcdd07b030d691498",
+   "after": "4b8103c506ed78d4a4fb0af529183d874c8c3425490efe36c7c1c8408e47d97f"
+  },
+  "localization-official-docs.test.mjs": {
+   "before": "1d2460d79694261e6e5b76b8e740c97d7d820164cecc098f9b3b8dc0a9e6ccc5",
+   "after": "6e75f44152944a2334b42541fe40e98e8d4340b3da5531405383a11f711ea02d"
+  },
+  "localization-p1-formalization-decision.test.mjs": {
+   "before": "b0cee30cf57d6546fb18413f315a4ade54f6c596e4b56a7fd0ffe848902f78aa",
+   "after": "c9f3d1383a194d50408f8592a109f56b5651deb943b4843d8247bfbc8f3c4a0f"
+  },
+  "localization-po-approval-decision.test.mjs": {
+   "before": "e645d6e2c82a3a3ccf549a0480a23b73b468ed55f521063cfe3dfd1221e2bcd0",
+   "after": "ffd7551f5ae29ed0271859da1dc3303e8a9ee989b3ed8acaa53fdb306ccb9b69"
+  },
+  "localization-review-policy-decision.test.mjs": {
+   "before": "e2067fd283e2f9377a5e7ce6142ed3953c6d92ecdf6d8669bff02b9305b7aabe",
+   "after": "1b1e61545ff79803e16eec312eeb656f3a6d3d92c0f00e265a92b5526a36941b"
+  },
+  "localization-u11-correction-decision.test.mjs": {
+   "before": "c8064317b65bec2d43fee1672d22f692f1dd00f64284343f5e1c29bb5145095d",
+   "after": "399c17116ff59bd93053555720249e207546a1d53ead17e3d3b5221c41b10adb"
+  },
+  "localization-u4-u11-decision.test.mjs": {
+   "before": "c54f95b3a50ba15c0e79e90d6ad43693b1728ef45cfede94129468c8a7575d16",
+   "after": "5de618cd5f1f63c225ff8f1e68c1ea7d6f703a7f183850b0f6b8011a4bcdb75a"
+  },
+  "localization-u6-decision.test.mjs": {
+   "before": "839feedfb304907f13afffb9c7ce0d06db914b9a59e1b53c65526cd87b1bb17f",
+   "after": "22bf061c44653f283099caf2abd35c4dc3c964683e4f08d9a6d5c3ca66591f31"
+  },
+  "new-home-decision.test.mjs": {
+   "before": "032de902eaec49f372b1ed7a2b4911dc55244f34cffafcdd00339b8822d9366f",
+   "after": "c8fee4000ebe3621a216dc4030d34c5e430bbdbb5bd298f5c2032140d29db4d2"
+  },
+  "settings-unified-design-decision.test.mjs": {
+   "before": "e3b8dd6c0520e1ad2a19b1d43ed21b26637f738b1dcf81c7464a9d8142700a89",
+   "after": "863f33a372bb788fce5d1bd041124d8f7af458fe65e7a70a7c14477a14690efc"
+  }
+ },
+ "newTest": {
+  "shot-clock-decision.test.mjs": "042aadcaf904130397b800611020cb4ef8444055b628f61b5ee3cf98fdad7cf4"
+ }
+}

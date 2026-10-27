@@ -43,7 +43,7 @@ test("Decision 041 / Official 127-128 are uniquely published while Official 109 
     .map(name => Number(name.split("_")[0]));
   for (const number of [127, 128]) assert.equal(numbers.filter(value => value === number).length, 1, String(number));
   assert.equal(numbers.filter(value => value === 109).length, 1);
-  assert.equal(Math.max(...numbers), 133);
+  assert.equal(Math.max(...numbers), 135);
   const latest = docxText(LOG("2.17"));
   assert.deepEqual([...latest.matchAll(/Decision (\d{3})｜/g)].map(match => Number(match[1])), Array.from({ length: 41 }, (_, index) => index + 1));
   assert.match(latest, /Decision 041｜多言語化 Glossary 25語のPO承認記録/);
@@ -88,7 +88,7 @@ test("catalog, product source, P4 approval record and Data/QR source are byte-pr
 
 test("SSOT preserves the Decision 041 record after v2.18 publication and contains no credential material", () => {
   const readme = read("docs/README.md");
-  assert.match(readme, /Decision_Log_v2\.21_Official_Release/);
+  assert.match(readme, /Decision_Log_v2\.22_Official_Release/);
   assert.match(readme, /Decision 041/);
   assert.match(read("docs/CURRENT_STATE.md"), /Glossary 25 Terms PO Approval Published/);
   assert.match(read("docs/CURRENT_STATUS.md"), /GLOSSARY 25 TERMS FORMALIZED/);

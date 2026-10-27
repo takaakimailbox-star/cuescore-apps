@@ -41,6 +41,14 @@
 - Version `1.3`／Build `87`（Build 86はmainへ採番済みだがASC未登録・未Uploadのため、新Homeを含む最初のBuildとしてBuild 87を採番）。Release Device Archive作成済み（Apple Development署名）。**Distribution export・Apple Upload・TestFlight配布は未実施**。TestFlight内部配布中のBuild 85は変更なし。
 - 未確認: Native実機でのタップ操作（Simulatorのタップは許可が得られず未実施）、App Store配布署名のexport、Apple処理（Privacy警告・Export Compliance）。P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、S-B=false、Dynamic Type Deferredは不変。
 
+## CueScore Shot Clock B4 Formalized — Decision 046 / Official 134・135 / Decision Log v2.22 / Design System v2.2 / UI Components v1.2（2026年10月27日）
+
+- Product Ownerはショットクロックの**B4「手動3ボタン・ログ枠ドック」**を正式承認した。**Decision 046／Official 134（Decision）・135（Spec）／Decision Log v2.22／Design System v2.2／UI Components v1.2**を発行（正式仕様の発行は Documentation-only、実装は別commit）。
+- 内容: 開始／一時停止／再開・リセット・延長+60。ボール入力・ファール・セーフティ・交代・Undo・ラック終了・試合終了と**連動しない**。基本時間 既定45秒（30/35/40/45/60）、既定OFF、音・触覚OFF、Free／Pro共通。リセットは状態維持・取消なし。延長は回数制限なし・回数バッジ・3秒以内に取消。時間切れは画面表示のみ。試合データschema・QR・Backup・統計は不変（クロックは別キーに保存）。
+- Design System v2.2のT1〜T4はショットクロックのみ。**320幅の擬似文字拡大（130%以上）でログ表示0行、320×568の通常表示でRotation／3 Cushionはログ約1行**を、既存ログのデータを削除しない条件で許容。実機200% PASS／Dynamic Type対応ではない（Decision 033 Deferredは不変）。
+- 翻訳20語は**CANDIDATE**（Official 135付録A）。Official 109は無改変。PO優先候補: zh「出杆计时器」「已暂停」、en延長取消「Undo −60」。
+- セット方式は完全保留。公開済みVersion 1.3／Build 88、P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、S-B=false、Dynamic Type Deferredは不変。
+
 ## CueScore New Home Formalized — Decision 045 / Official 132・133 / Decision Log v2.21（2026年10月24日）
 
 - Product Ownerは新Homeの案Bを正式採用し、6種目の配置順と試合設定画面の変更を承認した。**Decision 045／Official 132（Decision）・133（Spec）／Decision Log v2.21**を発行（Documentation-only、実装は別commit）。
