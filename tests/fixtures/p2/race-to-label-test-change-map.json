@@ -1,0 +1,38 @@
+{
+ "gate": "Race to label fix (9-Ball/10-Ball scorecard)",
+ "productChange": "index.html: nineBallGoalLabelV1 returns \"Race to\"; ball-in-hand badge (2 spans + CSS); no catalog/schema change",
+ "replacedAssertions": "none (no existing assertion referenced the removed label text)",
+ "changedTests": {
+  "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
+   "before": "29c2cc141f130588565a77c07773f3864c08aae9e437a33cb4023e39a3fdb6ba",
+   "after": "f59f44e6096b12797346d12ebf741430ddbf27275ff457ffd8e7e6305e564ab1"
+  },
+  "localization-glossary-25-approval-decision.test.mjs": {
+   "before": "3daedc59d2539ea8df8d6a0bad88e5d46358952c58e66fa9ca60f9fa6a47eef3",
+   "after": "de07ee7c1b34c7764ec68f68f9a73140d74ddd56b52e07c7511adc56f2872082"
+  },
+  "localization-glossary-finalization-decision.test.mjs": {
+   "before": "9ebc43ebbc195e69d954d43333aab2c161e33f05c4bcedc5ec46577c8003d9bf",
+   "after": "4a567e7c05810375da3ca746ae1441ae0ba09ba18c2573ba70a0f79bcdbf82df"
+  },
+  "localization-ios-first-entry-language-decision.test.mjs": {
+   "before": "5d208d103e39b596b476aeb6a0060ae0fc39fef35ef794934e5290c3f31b0c0a",
+   "after": "92e857f416445faa7c7fdd6b6bf3bbc7298beec135d7ff41bfe4a51cbd0d3c0e"
+  }
+ },
+ "indexHtml": {
+  "index.html": {
+   "before": "353fe8c7aab7926536ff539d1dc90eaf2f3b7d53a7838a79fd73da42f31b7dd5",
+   "after": "8a9ddca89818835eef67756278724bf4ec0151f5677cba74b4aaa7532b5387cf"
+  },
+  "pinTests": [
+   "tests/localization-ac13-voiceover-release-requirement-decision.test.mjs",
+   "tests/localization-glossary-25-approval-decision.test.mjs",
+   "tests/localization-glossary-finalization-decision.test.mjs",
+   "tests/localization-ios-first-entry-language-decision.test.mjs"
+  ]
+ },
+ "newTests": {
+  "race-to-label.test.mjs": 3
+ }
+}
