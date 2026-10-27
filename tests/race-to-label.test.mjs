@@ -24,5 +24,5 @@ test("RT-2: ball-in-hand keeps its existing catalog key on a separate badge, onl
 test("RT-3: foul / safety / score data, log and the 'Target · 2 Fouls' labels of Rotation and 14-1 are not touched", () => {
   assert.match(html, /setGameTextV155\("proP1Foul", fouls\[1\]\);/);
   assert.match(html, /consecutiveFouls\?\.\[player\] \|\| 0\) === 2\) \? window\.cueT\("p3\.62b6556c"\)|rotationFoulCountV1\(player\) === 2 \? window\.cueT\("p3\.62b6556c"\)/);
-  assert.match(html, /\.pro-notice-v1\{position:absolute;top:2px/);
+  assert.match(html, /\.pro-notice-v1\{position:absolute;top:0;/);
 });

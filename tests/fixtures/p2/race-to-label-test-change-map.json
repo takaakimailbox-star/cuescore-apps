@@ -5,19 +5,23 @@
  "changedTests": {
   "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
    "before": "29c2cc141f130588565a77c07773f3864c08aae9e437a33cb4023e39a3fdb6ba",
-   "after": "f59f44e6096b12797346d12ebf741430ddbf27275ff457ffd8e7e6305e564ab1"
+   "after": "1ad485be7a7691385616424277278b7d473317f59db6e2c304066af33a3a54f5"
   },
   "localization-glossary-25-approval-decision.test.mjs": {
    "before": "3daedc59d2539ea8df8d6a0bad88e5d46358952c58e66fa9ca60f9fa6a47eef3",
-   "after": "de07ee7c1b34c7764ec68f68f9a73140d74ddd56b52e07c7511adc56f2872082"
+   "after": "0b035c7cb5d47827ebad1e943ac8ff3c7e41a9b2cfae7e4c09936139ab1aec6e"
   },
   "localization-glossary-finalization-decision.test.mjs": {
    "before": "9ebc43ebbc195e69d954d43333aab2c161e33f05c4bcedc5ec46577c8003d9bf",
-   "after": "4a567e7c05810375da3ca746ae1441ae0ba09ba18c2573ba70a0f79bcdbf82df"
+   "after": "24920b48b4ee8510877e149419b1c9a1cc1d33b391561eea39bab73c5d41cca9"
   },
   "localization-ios-first-entry-language-decision.test.mjs": {
    "before": "5d208d103e39b596b476aeb6a0060ae0fc39fef35ef794934e5290c3f31b0c0a",
-   "after": "92e857f416445faa7c7fdd6b6bf3bbc7298beec135d7ff41bfe4a51cbd0d3c0e"
+   "after": "378e719d14db3e00c07562f7d1bd068fc5845dc970b2a92ac76569ce0608c328"
+  },
+  "race-to-label.test.mjs": {
+   "before": "5c4c4078cf8e08df419ec2ced81f37507a4ed957b60e2833a9c85cadff7dd509",
+   "after": "52dd9cbf94826cedcb9ef39c5bc1518e97bf9ad4e22d235b0d223e124b5bc016"
   }
  },
  "indexHtml": {
@@ -30,7 +34,8 @@
    "tests/localization-glossary-25-approval-decision.test.mjs",
    "tests/localization-glossary-finalization-decision.test.mjs",
    "tests/localization-ios-first-entry-language-decision.test.mjs"
-  ]
+  ],
+  "after": "c382546b6a6003cc85cc0ba263e869e741d67be529682f6e06a26c41efc7dc75"
  },
  "newTests": {
   "race-to-label.test.mjs": 3

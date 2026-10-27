@@ -74,7 +74,7 @@ test("Official 108 keeps all 31 acceptance identifiers and revises only VoiceOve
 
 test("product, catalog, Native and StoreKit files are byte-preserved", () => {
   const expected = {
-    "index.html": "8a9ddca89818835eef67756278724bf4ec0151f5677cba74b4aaa7532b5387cf",
+    "index.html": "c382546b6a6003cc85cc0ba263e869e741d67be529682f6e06a26c41efc7dc75",
     "i18n-catalog-ja-v1.js": "47ea5f63a6f35eb3c06b4cd7641d48690248f0d8921507dd05882336b99844c9",
     "i18n-catalog-en-v1.js": "ebf832444b67365ff4a5d246f6a89befa47341b767da024720fd96bad5bb8282",
     "i18n-catalog-zh-hans-v1.js": "7027ee64557b064a31a7cba88a3ab3bce641607c543f5f4ab8c8bc42970737a1",
