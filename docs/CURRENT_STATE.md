@@ -49,6 +49,14 @@
 - 翻訳20語は**CANDIDATE**（Official 135付録A）。Official 109は無改変。PO優先候補: zh「出杆计时器」「已暂停」、en延長取消「Undo −60」。
 - セット方式は完全保留。公開済みVersion 1.3／Build 88、P6正式PASS 31／31、P7未開始、Build 83 RCA STOP、S-B=false、Dynamic Type Deferredは不変。
 
+## CueScore Version 1.4 (Build 89) Uploaded and Distributed to TestFlight Internal Testers（2026年10月27日）
+
+Version `1.4`／Build `89`（main `0926662`、ショットクロックB4を含む）を App Store Connect へ Upload し、既存の内部 TestFlight グループ（CueScore Internal Testers）へ配布した。**App Store の公開版は Version 1.3（Build 88）のまま**。審査提出・外部配布・一般公開・価格／IAP／配布地域／App Privacy の変更は未実施。
+
+- Archive/署名: Release、Apple Distribution（U26DF88PRW）、get-task-allow=false、MinOS 15.0。ASC Build ID `e3e92a91-7ae0-4307-b98e-6f6d9f97c040`、VALID、Upload 1回。Export Compliance は Build 88 と同じ `usesNonExemptEncryption=false`（暗号・通信関連の差分なし）。内部TestFlightは `IN_BETA_TESTING`。
+- 追加専用回帰: 既存操作（ボール入力・得点・ファール・セーフティ・交代・Undo・試合終了・保存再開）の時計ON／OFF比較（Free／Pro、3言語）PASS、既存データ変化なし。「端末内設定をリセット」は時計キーを変えない（種目・ルール設定と同じ扱い）。Node 1195／1195。
+- 翻訳20語は **CANDIDATE**（PO確認用の暫定翻訳）。P4承認は一般公開前の別手続き（`docs/implementation/CueScore_ShotClock_20_Terms_Approval_Packet_2026-10-27.md`）。実機（タッチ・ロック復帰・VoiceOver）は **NOT VERIFIED**（PO確認手順: `…PO_Device_Checklist_2026-10-27.md`）。
+
 ## CueScore Shot Clock B4 Implemented（2026年10月27日、実装・Browser／Simulator検証済み、未配布）
 
 - Official 135に従いショットクロックB4を実装した（`shotclock-v1.js`／`shotclock-v1.css`／`i18n-catalog-shotclock-v1.js`、index.htmlは読み込みタグ3行のみ）。既定OFF、Free／Pro共通。試合設定に「ショットクロック」行（ON/OFF＋基本時間30/35/40/45/60）、試合画面のログ枠下端に3ボタンドック。deadline方式、別キー `cueScore.shotClock.v1`。ボール入力・ファール・セーフティ・交代・Undo・ラック終了・試合終了とは連動しない。

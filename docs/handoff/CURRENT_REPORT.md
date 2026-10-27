@@ -42,3 +42,4 @@ production source、翻訳catalog、Native、StoreKit、Device Build/install、�
 - 2026-10-26 Gate 030: Version 1.3／Build 88 一般公開完了（ASC READY_FOR_SALE、公開ストア反映確認、documentation only）。
 - 2026-10-27 Decision 046／Official 134・135／Decision Log v2.22: ショットクロックB4を正式仕様化。実装・検証は別commit。
 - 2026-10-27 Shot Clock B4 実装（Official 135）: Node 1195/1195、Browser／Simulator検証済み、実機NOT VERIFIED、未配布。
+- 2026-10-27 Shot Clock B4 TestFlight: Version 1.4／Build 89 を内部TestFlightへ配布（IN_BETA_TESTING）。PO実機確認待ち。
