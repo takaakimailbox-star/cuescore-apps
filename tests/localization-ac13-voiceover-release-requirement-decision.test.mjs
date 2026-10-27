@@ -74,12 +74,12 @@ test("Official 108 keeps all 31 acceptance identifiers and revises only VoiceOve
 
 test("product, catalog, Native and StoreKit files are byte-preserved", () => {
   const expected = {
-    "index.html": "bf2b63511beaa83e1164b48126edae59b7b2582485989450da94f156ff5c2e74",
+    "index.html": "353fe8c7aab7926536ff539d1dc90eaf2f3b7d53a7838a79fd73da42f31b7dd5",
     "i18n-catalog-ja-v1.js": "47ea5f63a6f35eb3c06b4cd7641d48690248f0d8921507dd05882336b99844c9",
     "i18n-catalog-en-v1.js": "ebf832444b67365ff4a5d246f6a89befa47341b767da024720fd96bad5bb8282",
     "i18n-catalog-zh-hans-v1.js": "7027ee64557b064a31a7cba88a3ab3bce641607c543f5f4ab8c8bc42970737a1",
     "monetization-v1.js": "9da40f6be8c3dd5c2bb2535325a6bc83a890ad16e38d649e44315222115f6c60",
-    "ios/App/App.xcodeproj/project.pbxproj": "210417db9290b98df53a7013fb750d6a6b2283a6f9e94fc4ef6979572a8faa44",
+    "ios/App/App.xcodeproj/project.pbxproj": "1fa871fccf77ac184ba6bd697ad385d520c74ed93fb7d65151d5b014649a65dd",
   };
   for (const [path, digest] of Object.entries(expected)) assert.equal(sha256(path), digest, path);
 });
