@@ -54,6 +54,12 @@
 - 9-Ball／10-Ball のスコアカードの「Race to」行を「Race to ＜勝利目標＞」だけにした（従来は「Race to · 手球フリー · 2 Fouls」）。`2 Fouls`／`3 Fouls!` はカードから外し（ファール実データと試合ログは不変、ログに「2 Fouls」行が残る）、手球フリーは既存catalogキーの小バッジ（9-Ball／10-Ball のみ）として残した。レイアウト不変・保存schema不変・Version／Build不変。Rotation／14-1 の「目標 · 2 Fouls」は未変更（PO判断事項）。
 - UI/UX Pilot P1 は隔離Prototypeのみ（本番未反映）。成果物: `/Users/Ludique/Documents/Codex/2026-10-27/cuescore-racetoui-pilot/`。実機比較・採用判断は別Gate。
 
+## CueScore UI/UX Pilot P1 最終比較・表示改善候補の記録（2026年10月28日、documentation only）
+
+- Race to修正（9-Ball／10-Ball）は採用済み。「手球フリー」の小バッジは重要な競技状態の表示として暫定維持。
+- **表示改善候補（未実装）**: Rotation／14-1 の「目標 · 2 Fouls」「目標 · 3 Fouls!」（`updateGame()` の rotationLabel／straightLabel、catalogキー p3.62b6556c／p3.31e862b0）。9-Ball／10-Ball の Race to 修正と同型だが「Race to」ではないため製品コード未変更。扱いはPO判断。
+- UI/UX Pilot P1 は隔離Prototypeのまま。PO向け比較資料と実機比較の準備案（同一Bundle IDの次Buildに既定OFFの試験スイッチ）は `/Users/Ludique/Documents/Codex/2026-10-27/cuescore-racetoui-pilot/final/`。製品コードの採用・Version／Build変更・TestFlight Upload・ASC操作は未実施。
+
 ## CueScore Version 1.4 (Build 89) Uploaded and Distributed to TestFlight Internal Testers（2026年10月27日）
 
 Version `1.4`／Build `89`（main `0926662`、ショットクロックB4を含む）を App Store Connect へ Upload し、既存の内部 TestFlight グループ（CueScore Internal Testers）へ配布した。**App Store の公開版は Version 1.3（Build 88）のまま**。審査提出・外部配布・一般公開・価格／IAP／配布地域／App Privacy の変更は未実施。
