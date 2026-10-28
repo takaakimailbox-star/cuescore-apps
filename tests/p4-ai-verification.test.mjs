@@ -18,7 +18,7 @@ test("overlay: every manifest key is either AI-verified or awaiting a PO decisio
   const verified = Object.keys(ai.keys), po = Object.keys(ai.poDecision);
   assert.equal(new Set([...verified, ...po]).size, verified.length + po.length, "no key twice");
   assert.deepEqual([...verified, ...po].sort(), all);
-  assert.equal(verified.length + po.length, 1331);
+  assert.equal(verified.length + po.length, 1331 - 2); // 2 ball-in-hand keys retired 2026-10-28
   for (const [key, e] of Object.entries(ai.keys)) { assert.ok(["V", "VR"].includes(e.v), key); assert.ok(["R0", "R1", "R2"].includes(e.r), `${key}: R3 can never be AI-verified`); }
   for (const [key, e] of Object.entries(ai.poDecision)) assert.equal(e.r, "R3", key);
 });

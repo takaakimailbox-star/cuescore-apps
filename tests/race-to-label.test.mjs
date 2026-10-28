@@ -7,22 +7,22 @@ import test from "node:test";
 const html = globalThis.__p3RawReadFileSync.call(fs, new URL("../index.html", import.meta.url), "utf8");
 
 test("RT-1: the rack-game Race to label no longer carries 'Ball in hand' or '2 Fouls' / '3 Fouls!'", () => {
-  const fn = html.slice(html.indexOf("function nineBallGoalLabelV1"), html.indexOf("function nineBallNoticeV1"));
+  const fn = html.slice(html.indexOf("function nineBallGoalLabelV1"), html.indexOf("function updateGame()"));
   assert.match(fn, /return "Race to";/);
-  assert.ok(!/notices|Fouls|e2e7544e/.test(fn), "no notice text in the label function");
+  assert.ok(!/notices|Fouls|e2e7544e/.test(fn.replace(/\/\*[\s\S]*?\*\//g, "")), "no notice text in the label function");
   assert.ok(!html.includes("`Race to · "), "no 'Race to · ...' template remains");
   assert.ok(!html.includes('classList.toggle("nine-ball-status-v1"'), "the status-colour toggle on the label is gone");
 });
 
-test("RT-2: ball-in-hand keeps its existing catalog key on a separate badge, only for 9-Ball / 10-Ball; the goal value is still read from the match goals", () => {
-  assert.match(html, /function nineBallNoticeV1\(player\) \{\s*if \(!isRackGameV1\(\)\) return "";\s*return Number\(activeRackStateV1\(\)\.ballInHandFor\) === Number\(player\) \? window\.cueT\("p3\.e2e7544e"\) : "";/);
-  assert.match(html, /id="proP1NoticeV1" hidden/); assert.match(html, /id="proP2NoticeV1" hidden/);
+test("RT-2: no 'Ball in hand' badge or notice is drawn anywhere (PO 2026-10-28); the internal state and the goal value are untouched", () => {
+  assert.ok(!html.includes("pro-notice-v1") && !html.includes("proP1NoticeV1") && !html.includes("nineBallNoticeV1") && !html.includes("renderRackNoticeV1"), "badge markup / functions removed");
+  assert.ok(!html.includes('cueT("p3.e2e7544e")') && !html.includes("cueT(`p3.ef088e10`"), "the 'Ball in hand' strings are no longer rendered");
+  assert.match(html, /rackState\.ballInHandFor = decision\.preBreakFoul \? null : opponent;/, "ballInHandFor state is still set by the foul rules");
   assert.match(html, /setGameTextV155\("proP1Goal", goals\[1\]\);\s*setGameTextV155\("proP2Goal", goals\[2\]\);/);
-  assert.match(html, /if \(!isRackGameV1\(\)\) \{ renderRackNoticeV1\(1, ""\); renderRackNoticeV1\(2, ""\); \}/);
+  assert.match(html, /showToast\(window\.cueT\("p3\.5afbe4ce"\)\);/, "push-out foul toast keeps its title, without the ball-in-hand sentence");
 });
 
 test("RT-3: foul / safety / score data, log and the 'Target · 2 Fouls' labels of Rotation and 14-1 are not touched", () => {
   assert.match(html, /setGameTextV155\("proP1Foul", fouls\[1\]\);/);
-  assert.match(html, /consecutiveFouls\?\.\[player\] \|\| 0\) === 2\) \? window\.cueT\("p3\.62b6556c"\)|rotationFoulCountV1\(player\) === 2 \? window\.cueT\("p3\.62b6556c"\)/);
-  assert.match(html, /\.pro-notice-v1\{position:absolute;top:0;/);
+  assert.match(html, /rotationFoulCountV1\(player\) === 2 \? window\.cueT\("p3\.62b6556c"\)/);
 });

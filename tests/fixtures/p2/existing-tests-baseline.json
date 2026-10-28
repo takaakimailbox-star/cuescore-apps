@@ -354,28 +354,28 @@
    "skips": 0
   },
   "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
-   "sha256": "d8b054c15fbc9fd69c71770fb610e101f898019f4bb8d667d860901f622d067d",
+   "sha256": "900026dcdaa1eaff9cb480e5144ba2ed7c9607f96dfeb3c916de71e838f6446c",
    "tests": 4,
    "skips": 0,
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)",
    "previousSha256": "b557c9fda03401a6fcc91f4bee45be8a6db2826b0a6f07c8023ad5970ff6f052"
   },
   "localization-glossary-25-approval-decision.test.mjs": {
-   "sha256": "24fccb50124b7e1e4b0beda9a74a2a6df0facf1b270ff74a3892ceb4ed459d4e",
+   "sha256": "e2a1b35a915d5e5c1d98a8e8eaee35cf1944a68fc1773b7b6668919a48b32f9f",
    "tests": 6,
    "skips": 0,
    "previousSha256": "359a13c1d84d7e17b1b72ae811f2f7be1d459c2f2e5f67e88ace8ba3ae4abcda",
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
   },
   "localization-glossary-finalization-decision.test.mjs": {
-   "sha256": "4204464b0e3981f1dd58bd236f57a4805e86a37f80b808b0397023f02e792f3b",
+   "sha256": "cd39f6c1ae10cca5e8532a5f65efaaae36e85cd3bc2a0793c27434f321a7f482",
    "tests": 7,
    "skips": 0,
    "previousSha256": "139b50ebf12bdb298d7711efa60df73c0693cce6eb9752cfa2a1d556c521012c",
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
   },
   "localization-ios-first-entry-language-decision.test.mjs": {
-   "sha256": "ceef59c057050f14d8a884fc06fdff886699ca7ab46aeb90445ebff1deda04d5",
+   "sha256": "0b76f1833a15fa0ce2cebc5399246daafa3b9d35776b80b14a5caf550f751655",
    "tests": 4,
    "skips": 0,
    "updated_in": "Decision 044 / iOS first-entry language note regression"
@@ -529,7 +529,7 @@
    "skips": 0
   },
   "race-to-label.test.mjs": {
-   "sha256": "52dd9cbf94826cedcb9ef39c5bc1518e97bf9ad4e22d235b0d223e124b5bc016",
+   "sha256": "87a0c33c94dc65f86612eb88393f36fd79f4aa467e692ba928649427b630feac",
    "tests": 3,
    "skips": 0
   },
@@ -589,7 +589,7 @@
    "skips": 0
   },
   "p4-ai-verification.test.mjs": {
-   "sha256": "73e87e7239fbef569e9773895d14795803efebda7e27958c80f35a0230dd110b",
+   "sha256": "8b71c565a3ee2ea1a6d97ab5a266874d02156667700279a7e0e30e46f0c8b644",
    "tests": 4,
    "skips": 0
   },
@@ -599,7 +599,7 @@
    "skips": 0
   },
   "p4-manifest-completeness.test.mjs": {
-   "sha256": "7bb063eabb636454fb9d42fed82b0ca215d862579f011def517561c7a7d3d43e",
+   "sha256": "11dd101aa57aa4171f5ac7c06cca606704f3e1f7a775fb73a40fce9c233c9976",
    "tests": 4,
    "skips": 0
   },

@@ -15,7 +15,7 @@ for (const lang of (process.env.RT_LANGS || "ja,en,zh-Hans").split(",")) for (co
     for(let i=0;i<60&&document.getElementById("startGameBtn").disabled;i++)await W(100);document.getElementById("startGameBtn").click();await W(1800);
     const ok=document.getElementById("breakResultSaveV695");if(ok&&ok.getClientRects().length){ok.click();await W(700)}`);
   const state = () => app.evalJs(`JSON.stringify({stats:[...document.querySelectorAll(".pro-stats")].map(s=>s.innerText.split("\\n").join(" ").trim()),goalLabel:[proP1GoalLabelV1.textContent,proP2GoalLabelV1.textContent],goal:[proP1Goal.textContent,proP2Goal.textContent],
-    badge:["proP1NoticeV1","proP2NoticeV1"].map(i=>{const n=document.getElementById(i);return n?{text:n.textContent,hidden:n.hidden,shown:n.getClientRects().length>0}:null}),score:[proP1Score.textContent,proP2Score.textContent],log:proTurnLog.innerText.split("\\n").join("|"),
+    badge:["proP1NoticeV1","proP2NoticeV1"].map(i=>{const n=document.getElementById(i);return n?{text:n.textContent,hidden:n.hidden,shown:n.getClientRects().length>0}:null}),text:document.getElementById("proGameScreen").innerText.includes("手球フリー")||document.getElementById("proGameScreen").innerText.includes("Ball in hand")||document.getElementById("proGameScreen").innerText.includes("自由球"),score:[proP1Score.textContent,proP2Score.textContent],log:proTurnLog.innerText.split("\\n").join("|"),
     fouls:[proP1Foul.textContent,proP2Foul.textContent]})`);
   const steps = [["start", null]];
   for (const [n, a] of [["foul1", "#proFoulBtn"], ["switch1", "#proSwitchBtn"], ["foul2", "#proFoulBtn"], ["switch2", "#proSwitchBtn"], ["foul3", "#proFoulBtn"]]) steps.push([n, a]);

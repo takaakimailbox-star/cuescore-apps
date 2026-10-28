@@ -37,13 +37,13 @@ test("G14 and G25 match the PO-approved wording and meaning", () => {
 
 test("catalog, Japanese UI and Data/QR implementation are byte-preserved", () => {
   const expected = {
-    "index.html": "05a05b92997942204e97e9999ad6abd56f84aa407b06dd450d69e5e90cd6a456",
-    "i18n-catalog-ja-v1.js": "47ea5f63a6f35eb3c06b4cd7641d48690248f0d8921507dd05882336b99844c9",
-    "i18n-catalog-en-v1.js": "ebf832444b67365ff4a5d246f6a89befa47341b767da024720fd96bad5bb8282",
-    "i18n-catalog-zh-hans-v1.js": "7027ee64557b064a31a7cba88a3ab3bce641607c543f5f4ab8c8bc42970737a1",
+    "index.html": "27ed1c4fd0a074b2a5b0c35f09e61ab92add52f87f1f05827722c6f11fbf2f76",
+    "i18n-catalog-ja-v1.js": "bfe2b3b0cd0a1734ebc259128dc5dade248d95f26f89a80a5465cd106e143a39",
+    "i18n-catalog-en-v1.js": "27f3bed6c3e6988482e6c91367e782eb83d5caa73076e90ecdc99f36da992e2c",
+    "i18n-catalog-zh-hans-v1.js": "224c1f96c57d22c77fb164558ffd1eecfb570f8c6c27d5cd372c3f03c5c381e6",
     "match-sharing-adapters-v1.js": "f10ac88ee5ba7317b75b4ba5f11d654bb2547503c6b15df783e7be0cb8170ea5",
     "match-sharing-validation-v1.js": "4399a8a63818ce2a687a78dc5fb2c157e2f239f71f2f44f36463cc75cace1aee",
-    "tests/fixtures/p4/po-approval.json": "17576fcd7db0c9ed5433b151bf3314ed46b3dc0ea75b8911078015b341fa180d",
+    "tests/fixtures/p4/po-approval.json": "a06df95336c6961647504755600ccfeb60efd2b53e5e71696cace6fe468f599b",
     "tests/fixtures/p4/po-approval-u4.json": "efc3bdfac4c2f1fc0629fb2738506131a4d6e03cd739419886765201f6df0b1d",
   };
   for (const [path, digest] of Object.entries(expected)) assert.equal(sha256(path), digest, path);

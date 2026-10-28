@@ -1,0 +1,85 @@
+{
+ "gate": "Remove the ball-in-hand badge and notices (PO 2026-10-28)",
+ "productChange": "index.html: badge spans, nineBallNoticeV1/renderRackNoticeV1, .pro-notice-v1 CSS removed; push-out foul toast keeps its title only (no ball-in-hand sentence); internal state unchanged",
+ "indexHtml": {
+  "before": "05a05b92997942204e97e9999ad6abd56f84aa407b06dd450d69e5e90cd6a456",
+  "after": "27ed1c4fd0a074b2a5b0c35f09e61ab92add52f87f1f05827722c6f11fbf2f76",
+  "pinTests": [
+   "tests/localization-ac13-voiceover-release-requirement-decision.test.mjs",
+   "tests/localization-glossary-25-approval-decision.test.mjs",
+   "tests/localization-glossary-finalization-decision.test.mjs",
+   "tests/localization-ios-first-entry-language-decision.test.mjs"
+  ]
+ },
+ "changedTests": {
+  "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
+   "before": "d8b054c15fbc9fd69c71770fb610e101f898019f4bb8d667d860901f622d067d",
+   "after": "900026dcdaa1eaff9cb480e5144ba2ed7c9607f96dfeb3c916de71e838f6446c"
+  },
+  "localization-glossary-25-approval-decision.test.mjs": {
+   "before": "24fccb50124b7e1e4b0beda9a74a2a6df0facf1b270ff74a3892ceb4ed459d4e",
+   "after": "e2a1b35a915d5e5c1d98a8e8eaee35cf1944a68fc1773b7b6668919a48b32f9f"
+  },
+  "localization-glossary-finalization-decision.test.mjs": {
+   "before": "4204464b0e3981f1dd58bd236f57a4805e86a37f80b808b0397023f02e792f3b",
+   "after": "cd39f6c1ae10cca5e8532a5f65efaaae36e85cd3bc2a0793c27434f321a7f482"
+  },
+  "localization-ios-first-entry-language-decision.test.mjs": {
+   "before": "ceef59c057050f14d8a884fc06fdff886699ca7ab46aeb90445ebff1deda04d5",
+   "after": "0b76f1833a15fa0ce2cebc5399246daafa3b9d35776b80b14a5caf550f751655"
+  },
+  "race-to-label.test.mjs": {
+   "before": "52dd9cbf94826cedcb9ef39c5bc1518e97bf9ad4e22d235b0d223e124b5bc016",
+   "after": "87a0c33c94dc65f86612eb88393f36fd79f4aa467e692ba928649427b630feac"
+  },
+  "p4-ai-verification.test.mjs": {
+   "before": "73e87e7239fbef569e9773895d14795803efebda7e27958c80f35a0230dd110b",
+   "after": "8b71c565a3ee2ea1a6d97ab5a266874d02156667700279a7e0e30e46f0c8b644"
+  },
+  "p4-manifest-completeness.test.mjs": {
+   "before": "7bb063eabb636454fb9d42fed82b0ca215d862579f011def517561c7a7d3d43e",
+   "after": "11dd101aa57aa4171f5ac7c06cca606704f3e1f7a775fb73a40fce9c233c9976"
+  }
+ },
+ "retiredCatalogKeys": {
+  "keys": [
+   "p3.e2e7544e (手球フリー / Ball in hand / 自由球)",
+   "p3.ef088e10 ({p}が手球フリーです)"
+  ],
+  "removedFrom": [
+   "i18n-catalog-ja/en/zh-hans-v1.js",
+   "tests/fixtures/p3/translation-manifest.json",
+   "tests/fixtures/p4/ai-verification.json",
+   "tests/fixtures/p4/po-approval.json"
+  ],
+  "reason": "the product no longer renders them (P3 gate forbids unused keys); counts 1331 -> 1329 in p4-manifest-completeness / p4-ai-verification",
+  "digests": {
+   "index.html": {
+    "before": "05a05b92997942204e97e9999ad6abd56f84aa407b06dd450d69e5e90cd6a456",
+    "after": "27ed1c4fd0a074b2a5b0c35f09e61ab92add52f87f1f05827722c6f11fbf2f76"
+   },
+   "i18n-catalog-ja-v1.js": {
+    "before": "47ea5f63a6f35eb3c06b4cd7641d48690248f0d8921507dd05882336b99844c9",
+    "after": "bfe2b3b0cd0a1734ebc259128dc5dade248d95f26f89a80a5465cd106e143a39"
+   },
+   "i18n-catalog-en-v1.js": {
+    "before": "ebf832444b67365ff4a5d246f6a89befa47341b767da024720fd96bad5bb8282",
+    "after": "27f3bed6c3e6988482e6c91367e782eb83d5caa73076e90ecdc99f36da992e2c"
+   },
+   "i18n-catalog-zh-hans-v1.js": {
+    "before": "7027ee64557b064a31a7cba88a3ab3bce641607c543f5f4ab8c8bc42970737a1",
+    "after": "224c1f96c57d22c77fb164558ffd1eecfb570f8c6c27d5cd372c3f03c5c381e6"
+   },
+   "tests/fixtures/p4/po-approval.json": {
+    "before": "17576fcd7db0c9ed5433b151bf3314ed46b3dc0ea75b8911078015b341fa180d",
+    "after": "a06df95336c6961647504755600ccfeb60efd2b53e5e71696cace6fe468f599b"
+   }
+  }
+ },
+ "pinTestsAll": [
+  "tests/localization-ac13-voiceover-release-requirement-decision.test.mjs",
+  "tests/localization-glossary-25-approval-decision.test.mjs",
+  "tests/localization-glossary-finalization-decision.test.mjs",
+  "tests/localization-ios-first-entry-language-decision.test.mjs"
+ ]
+}

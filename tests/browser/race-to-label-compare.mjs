@@ -16,7 +16,8 @@ for (const k of Object.keys(a)) {
   });
   if (A.store !== B.store) bad(`${k}: stored data differs`);
 }
-// ball-in-hand is still shown somewhere in 9/10-Ball after a foul
-for (const k of Object.keys(b)) if (RACK(k)) { const t = b[k].trace.find(t => t[0] === "foul1")[1]; if (!t.badge.some(x => x && x.shown && x.text)) bad(`${k}: ball-in-hand state not shown after a foul`); }
+for (const k of Object.keys(b)) for (const [step, s] of b[k].trace) if (s.text) bad(`${k} ${step}: ball-in-hand wording is visible on the match screen`);
+// the "Ball in hand" badge is gone (PO 2026-10-28): nothing is shown on the cards after a foul in any discipline
+for (const k of Object.keys(b)) for (const [step, s] of b[k].trace) if ((s.badge || []).some(x => x && x.shown && x.text)) bad(`${k} ${step}: a ball-in-hand badge is still shown`);
 console.log(fail ? "FAIL " + fail : `PASS (${n} steps compared)`);
 process.exit(fail ? 1 : 0);
