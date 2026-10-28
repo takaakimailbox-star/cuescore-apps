@@ -47,3 +47,4 @@ production source、翻訳catalog、Native、StoreKit、Device Build/install、�
 - 2026-10-28 UI/UX Pilot P1 最終比較資料を作成（製品コード変更なし）。Rotation／14-1「目標 · 2 Fouls」を表示改善候補として記録。
 - 2026-10-28 UI Pilot P1 A/B比較Build（Version 1.4／Build 90）を内部TestFlightへ配布。Pilotは未採用・既定OFF。PO実機確認待ち。
 - 2026-10-28 手球フリー表示削除（af30cb2）。試合画面UI/UX総合改善は隔離Prototype比較のみ（案A推奨、製品未反映）。
+- 2026-10-28 案A（現行B4の高品質化）試験実装 Version 1.4／Build 91 を内部TestFlightへ配布。内部評価用の候補で未確定。PO実機確認待ち。

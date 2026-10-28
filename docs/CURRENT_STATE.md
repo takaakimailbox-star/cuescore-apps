@@ -54,6 +54,14 @@
 - 9-Ball／10-Ball のスコアカードの「Race to」行を「Race to ＜勝利目標＞」だけにした（従来は「Race to · 手球フリー · 2 Fouls」）。`2 Fouls`／`3 Fouls!` はカードから外し（ファール実データと試合ログは不変、ログに「2 Fouls」行が残る）、手球フリーは既存catalogキーの小バッジ（9-Ball／10-Ball のみ）として残した。レイアウト不変・保存schema不変・Version／Build不変。Rotation／14-1 の「目標 · 2 Fouls」は未変更（PO判断事項）。
 - UI/UX Pilot P1 は隔離Prototypeのみ（本番未反映）。成果物: `/Users/Ludique/Documents/Codex/2026-10-27/cuescore-racetoui-pilot/`。実機比較・採用判断は別Gate。
 
+## CueScore Version 1.4 (Build 91) — 案A（現行B4の高品質化）試験実装を TestFlight 内部配布（2026年10月28日）
+
+Version `1.4`／Build `91`（main `51f5dc3`）を App Store Connect へ Upload し、既存の内部 TestFlight グループへ配布した（Build ID `c1fad407-bf36-4364-aac6-e259ce399d8a`、VALID、`IN_BETA_TESTING`、Upload 1回、Export Compliance は Build 88〜90 と同じ `usesNonExemptEncryption=false`）。**App Store の公開版は Version 1.3（Build 88）のまま**。審査提出・外部配布・一般公開・価格／IAP／地域／Privacy 変更は未実施。
+
+- 内容: Build 90 + **ショットクロックの案A表示**（CSSのみ、`shotclock-v1.js` と時計の機能契約は不変）。残り時間を最大の対象（48／44／38px）にし、視覚順位を 残り時間 → リセット（太い枠）→ 延長（薄い塗り、最後の10秒と0で警告色）→ 開始／一時停止／再開（白地・細い枠、74×48pt@390）にした。黒塗りを廃止。**案Aの見た目は内部評価用の候補で、公開用デザインとして確定したものではない。**
+- 手球フリー表示の削除（af30cb2）、Race to N、Pilot P1 比較スイッチ（9-Ball／10-Ball のみ、既定OFF）は維持。P1 の新／旧どちらでも時計の見た目・動作は同じで、切替で時計は変化しない。
+- 検証: Node 1206／1206、レイアウト 3840条件（6種目×3言語×5画面幅×4倍率×8状態、P1 OFF／ON）NG 0、実測プローブ 162条件（3桁含む）NG 0、時計機能（3言語）・P1（3言語）・既存操作回帰 52／52 PASS、時計OFF時の試合画面は HEAD と完全一致（48条件）、Reduce Motion 実測、iOS Simulator（iPhone 17 iOS 27.0／iPhone SE 3rd iOS 26.5）。大きい文字での検証で、ラベルが倍率に追従せず Rotation／14-1 の 320×568・160%以上でドックがログ枠からはみ出す欠陥を見つけ、修正済み。**実機（見やすさ・押しやすさ・誤タップ）は NOT VERIFIED**。PO確認手順: `docs/implementation/CueScore_1.4_Build91_PO_Device_PlanA_Checklist_2026-10-29.md`。
+
 ## CueScore 手球フリー表示の削除・試合画面UI/UX総合改善の比較（2026年10月28日）
 
 - **手球フリー表示を削除**（main `af30cb2`）: スコアカードの小バッジと、プッシュアウトのファール通知の「◯◯が手球フリーです」の一文を削除。内部状態（ballInHandFor）・ファール判定・得点・手番・ログ・保存データは不変。Race to は「Race to N」を維持。翻訳キー p3.e2e7544e／p3.ef088e10 は未使用になったため廃止（3 catalog・manifest・AI／PO承認fixtureから除去、件数 1331→1329）。Rotation／14-1 の「目標 · 2 Fouls」は未変更。
