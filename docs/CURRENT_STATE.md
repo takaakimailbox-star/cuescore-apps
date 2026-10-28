@@ -54,6 +54,11 @@
 - 9-Ball／10-Ball のスコアカードの「Race to」行を「Race to ＜勝利目標＞」だけにした（従来は「Race to · 手球フリー · 2 Fouls」）。`2 Fouls`／`3 Fouls!` はカードから外し（ファール実データと試合ログは不変、ログに「2 Fouls」行が残る）、手球フリーは既存catalogキーの小バッジ（9-Ball／10-Ball のみ）として残した。レイアウト不変・保存schema不変・Version／Build不変。Rotation／14-1 の「目標 · 2 Fouls」は未変更（PO判断事項）。
 - UI/UX Pilot P1 は隔離Prototypeのみ（本番未反映）。成果物: `/Users/Ludique/Documents/Codex/2026-10-27/cuescore-racetoui-pilot/`。実機比較・採用判断は別Gate。
 
+## CueScore 手球フリー表示の削除・試合画面UI/UX総合改善の比較（2026年10月28日）
+
+- **手球フリー表示を削除**（main `af30cb2`）: スコアカードの小バッジと、プッシュアウトのファール通知の「◯◯が手球フリーです」の一文を削除。内部状態（ballInHandFor）・ファール判定・得点・手番・ログ・保存データは不変。Race to は「Race to N」を維持。翻訳キー p3.e2e7544e／p3.ef088e10 は未使用になったため廃止（3 catalog・manifest・AI／PO承認fixtureから除去、件数 1331→1329）。Rotation／14-1 の「目標 · 2 Fouls」は未変更。
+- **試合画面UI/UX 総合改善**: 現行（Build 90）／案A（現行B4の高品質化）／案B（PO提案: 残り時間を上部、タイマー3ボタンを最下部）を隔離Prototypeで比較。推奨は**案A**（視覚順位 残り時間→リセット→延長→開始／一時停止を実測で満たし、全6種目・320幅・3言語で崩れなし）。案Bはログが約27〜55%減り、320×568 の Rotation／3 Cushion と 375×667 の 3 Cushion で残り時間が隠れるため、そのままの採用は非推奨。製品実装・配布は最終デザイン承認後（別Gate）。比較資料: `/Users/Ludique/Documents/Codex/2026-10-28/cuescore-matchui-redesign/final/`。
+
 ## CueScore Version 1.4 (Build 90) — UI Pilot P1 A/B比較Build を TestFlight 内部配布（2026年10月28日）
 
 Version `1.4`／Build `90`（main `6093eb3`）を App Store Connect へ Upload し、既存の内部 TestFlight グループへ配布した（Build ID `8c39394e-9f00-445e-add8-e5332fdc9e20`、VALID、`IN_BETA_TESTING`、Upload 1回、Export Compliance は Build 88／89 と同じ `usesNonExemptEncryption=false`）。**App Store の公開版は Version 1.3（Build 88）のまま**。審査提出・外部配布・一般公開・価格／IAP／地域／Privacy 変更は未実施。
