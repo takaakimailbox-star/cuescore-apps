@@ -54,6 +54,14 @@
 - 9-Ball／10-Ball のスコアカードの「Race to」行を「Race to ＜勝利目標＞」だけにした（従来は「Race to · 手球フリー · 2 Fouls」）。`2 Fouls`／`3 Fouls!` はカードから外し（ファール実データと試合ログは不変、ログに「2 Fouls」行が残る）、手球フリーは既存catalogキーの小バッジ（9-Ball／10-Ball のみ）として残した。レイアウト不変・保存schema不変・Version／Build不変。Rotation／14-1 の「目標 · 2 Fouls」は未変更（PO判断事項）。
 - UI/UX Pilot P1 は隔離Prototypeのみ（本番未反映）。成果物: `/Users/Ludique/Documents/Codex/2026-10-27/cuescore-racetoui-pilot/`。実機比較・採用判断は別Gate。
 
+## CueScore Version 1.4 (Build 90) — UI Pilot P1 A/B比較Build を TestFlight 内部配布（2026年10月28日）
+
+Version `1.4`／Build `90`（main `6093eb3`）を App Store Connect へ Upload し、既存の内部 TestFlight グループへ配布した（Build ID `8c39394e-9f00-445e-add8-e5332fdc9e20`、VALID、`IN_BETA_TESTING`、Upload 1回、Export Compliance は Build 88／89 と同じ `usesNonExemptEncryption=false`）。**App Store の公開版は Version 1.3（Build 88）のまま**。審査提出・外部配布・一般公開・価格／IAP／地域／Privacy 変更は未実施。
+
+- 内容: Build 89 + **UI Pilot P1 比較スイッチ（既定OFF、9-Ball／10-Ball のみ）**。試合設定の「操作画面の比較（試験）」で有効化し、試合画面右上の「開始時刻 hh:mm・新／旧」をタップして同じ試合で新旧を切り替える。Pilot は**未採用**の比較機能で、表示のみ（試合データ・得点・手番・ログ・ショットクロック・権限に触れない、別キー `cueScore.uiPilot.v1`）。Race to 修正・手球フリーバッジは維持。Rotation／14-1 の表示は未変更。
+- **App Store 提出用 Build には Pilot が未承認なら試験UIを含めない**（除去手順: `docs/implementation/CueScore_UIPilot_P1_Removal_Procedure_2026-10-28.md`）。
+- 検証: Node 1202／1202、Pilot OFF の match 画面は HEAD と完全一致（48条件の DOM／全rect）、Pilot ブラウザ検証（3言語×390／320）、ショットクロック併用レイアウト 960条件 NG 0、設定行追加後の開始到達 18／18、iOS Simulator（iPhone 17 iOS 27.0／iPhone SE 3rd iOS 26.5）。**実機（タッチ・誤タップ・見やすさ・ロック復帰）は NOT VERIFIED**。PO実機確認は Build 89 分も含め Build 90 で1回にまとめる（`docs/implementation/CueScore_1.4_Build90_PO_Device_AB_Checklist_2026-10-28.md`）。
+
 ## CueScore UI/UX Pilot P1 最終比較・表示改善候補の記録（2026年10月28日、documentation only）
 
 - Race to修正（9-Ball／10-Ball）は採用済み。「手球フリー」の小バッジは重要な競技状態の表示として暫定維持。
