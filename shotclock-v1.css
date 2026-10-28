@@ -72,3 +72,48 @@
 .cue-sc-base-btn{min-width:44px;height:44px;flex:1 1 0;border:1px solid var(--cue-scd-border);border-radius:14px;background:#fff;color:var(--cue-scd-text);font:600 17px/22px -apple-system,system-ui,sans-serif;padding:0;touch-action:manipulation}
 .cue-sc-base-btn[aria-checked="true"]{background:var(--cue-scd-text);border-color:var(--cue-scd-text);color:#fff}
 @media (max-width:340px){.cue-sc-setup{padding:6px 10px}.cue-sc-base-btns{gap:4px}.cue-sc-base-btn{font-size:16px}}
+
+/* ---- Plan A (Build 91, internal evaluation candidate; NOT a final public design) ----
+ * Visual hierarchy: 1 remaining time, 2 Reset, 3 Extend, 4 Start / Pause / Resume. Layout, DOM order, behaviour and the clock contract are unchanged: only presentation of the dock. */
+.cue-sc-dock .cue-sc-num{font-size:calc(var(--cue-scv-num,52px) * var(--cue-scv-tsd,1))!important;line-height:1!important;font-weight:700!important;letter-spacing:-.03em!important}
+.cue-sc-dock .cue-sc-unit{font-size:calc(13px * var(--cue-scv-ts,1))!important;line-height:1.2!important;font-weight:600!important;color:var(--cue-scd-text2)!important}
+.cue-sc-dock .cue-sc-resetb{background:#fff!important;border:2px solid #1C1C1E!important;color:#1C1C1E!important;border-radius:14px!important}
+.cue-sc-dock .cue-sc-resetb .cue-sc-lb{color:#1C1C1E!important;font-weight:700!important}
+.cue-sc-dock .cue-sc-resetb:disabled{background:#fff!important;border:2px solid #C7C7CC!important}.cue-sc-dock .cue-sc-resetb:disabled .cue-sc-lb{color:#8E8E93!important}
+.cue-sc-dock .cue-sc-extb .cue-sc-lb,.cue-sc-dock .cue-sc-extb small{font-weight:700!important}
+.cue-sc-dock .cue-sc-extb{background:#F2F2F7!important;border:1px solid #D1D1D6!important;color:#1C1C1E!important;margin-right:0!important}
+.cue-sc-dock .cue-sc-extb[data-hot="1"]{background:var(--cue-scd-warn)!important;border-color:var(--cue-scd-warn)!important;color:#fff!important}
+.cue-sc-dock[data-lv="danger"] .cue-sc-extb[data-hot="1"],.cue-sc-dock[data-lv="over"] .cue-sc-extb[data-hot="1"]{background:var(--cue-scd-err)!important;border-color:var(--cue-scd-err)!important}
+.cue-sc-dock .cue-sc-extb[data-hot="1"] span,.cue-sc-dock .cue-sc-extb[data-hot="1"] small{color:#fff!important}
+.cue-sc-dock .cue-sc-extb[data-undo="1"]{background:#1C1C1E!important;border-color:#1C1C1E!important}.cue-sc-dock .cue-sc-extb[data-undo="1"] span,.cue-sc-dock .cue-sc-extb[data-undo="1"] small{color:#fff!important}
+.cue-sc-dock .cue-sc-extb:disabled{background:#F2F2F7!important;border:1px solid #E5E5EA!important}.cue-sc-dock .cue-sc-extb:disabled span,.cue-sc-dock .cue-sc-extb:disabled small{color:#8E8E93!important}
+.cue-sc-dock .cue-sc-main{background:#fff!important;border:1px solid #D1D1D6!important;color:#1C1C1E!important}
+.cue-sc-dock .cue-sc-main span,.cue-sc-dock .cue-sc-main svg{color:#1C1C1E!important}
+.cue-sc-dock .cue-sc-main .cue-sc-lb{font-weight:500!important}
+.cue-sc-dock[data-st="expired"] .cue-sc-num{color:var(--cue-scd-err)!important}
+.cue-sc-dock .cue-sc-num{transition:color .16s ease-out}
+@media (prefers-reduced-motion:reduce){.cue-sc-dock .cue-sc-num{transition:none}}
+
+.cue-sc-dock{--cue-scv-num:48px}
+@media (max-width:380px){.cue-sc-dock{--cue-scv-num:44px}}
+@media (max-width:340px){.cue-sc-dock{--cue-scv-num:38px}}
+.cue-sc-dock .cue-sc-btn .cue-sc-lb{font-size:calc(15px * var(--cue-scv-ts,1))!important}.cue-sc-dock .cue-sc-btn{padding:0 8px!important}
+@media (max-width:340px){.cue-sc-dock .cue-sc-btn .cue-sc-lb{font-size:calc(13px * var(--cue-scv-ts,1))!important}.cue-sc-dock .cue-sc-btn{padding:0 4px!important}}
+.cue-sc-dock:not(.cue-sc-lg){grid-template-columns:minmax(0,1fr) auto auto auto!important;grid-template-rows:4px 56px!important;min-height:66px!important;column-gap:8px!important;padding:0 10px 6px!important}
+.cue-sc-dock:not(.cue-sc-lg) .cue-sc-bar{height:4px}
+.cue-sc-dock:not(.cue-sc-lg) .cue-sc-time{grid-column:1;grid-row:2;flex-direction:column;justify-content:center}
+.cue-sc-dock:not(.cue-sc-lg) .cue-sc-resetb{grid-column:2;grid-row:2;min-width:60px!important;margin:2px 0 0!important}
+.cue-sc-dock:not(.cue-sc-lg) .cue-sc-extb{grid-column:3;grid-row:2;min-width:56px!important;margin:2px 0 0!important}
+.cue-sc-dock:not(.cue-sc-lg) .cue-sc-main{grid-column:4;grid-row:2;min-width:84px!important;margin:2px 0 0!important}
+@media (max-width:340px){
+ .cue-sc-dock:not(.cue-sc-lg){column-gap:6px!important;padding:0 6px 6px!important}
+ .cue-sc-dock:not(.cue-sc-lg) .cue-sc-resetb{min-width:54px!important}.cue-sc-dock:not(.cue-sc-lg) .cue-sc-extb{min-width:48px!important}.cue-sc-dock:not(.cue-sc-lg) .cue-sc-main{min-width:56px!important}
+}
+
+.cue-sc-dock:not(.cue-sc-lg) .cue-sc-main{flex-direction:column!important;gap:1px!important;min-width:68px!important}
+.cue-sc-dock .cue-sc-main svg{width:18px;height:18px}
+.cue-sc-dock .cue-sc-btn .cue-sc-lb{font-size:calc(14px * var(--cue-scv-ts,1))!important}
+.cue-sc-dock:not(.cue-sc-lg) .cue-sc-resetb{min-width:60px!important}.cue-sc-dock:not(.cue-sc-lg) .cue-sc-extb{min-width:52px!important}
+@media (max-width:340px){.cue-sc-dock .cue-sc-btn .cue-sc-lb{font-size:calc(13px * var(--cue-scv-ts,1))!important}.cue-sc-dock:not(.cue-sc-lg) .cue-sc-main{min-width:60px!important}.cue-sc-dock:not(.cue-sc-lg) .cue-sc-resetb{min-width:56px!important}.cue-sc-dock:not(.cue-sc-lg) .cue-sc-extb{min-width:46px!important}}
+/* large text (pseudo 130 % and up): keep the pre-Plan-A time size (32 px x scale, capped 1.5) so the two-row dock still fits small log cards */
+.cue-sc-dock.cue-sc-lg{--cue-scv-num:32px}
