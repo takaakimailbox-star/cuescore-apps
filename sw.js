@@ -1,4 +1,4 @@
-const APP_VERSION = "2.0-build89-shotclock-b4-v1";
+const APP_VERSION = "2.0-build90-uipilot-p1-v1";
 const CACHE_NAME = `cuescore-apps-v${APP_VERSION}`;
 const APP_SHELL = [
   "./",
@@ -8,8 +8,8 @@ const APP_SHELL = [
   "./i18n-catalog-en-v1.js",
   "./i18n-catalog-zh-hans-v1.js",
   "./domain-constants-v1.js",
-  "./demo-data.js?v=2.0-build89-shotclock-b4-v1",
-  "./player-library-order-v1.js?v=2.0-build89-shotclock-b4-v1",
+  "./demo-data.js?v=2.0-build90-uipilot-p1-v1",
+  "./player-library-order-v1.js?v=2.0-build90-uipilot-p1-v1",
   "./vendor/fflate-0.8.3.js",
   "./vendor/qrcodegen-1.8.0.js",
   "./manifest.webmanifest",
@@ -25,7 +25,7 @@ const APP_SHELL = [
   "./analysis-build4.css",
   "./player-detail-build6.js",
   "./player-detail-build6.css",
-  "./ui-revision-v12.js?v=2.0-build89-shotclock-b4-v1",
+  "./ui-revision-v12.js?v=2.0-build90-uipilot-p1-v1",
   "./final-ui-build18.js",
   "./ui-revision-v12.css?v=2.0-build60-free-pro-foundation",
   "./navigation-shell-phase1.css?v=2.0-build81-player-list-bottom-inset-v1",
@@ -35,6 +35,9 @@ const APP_SHELL = [
   "./shotclock-v1.css?v=1.0-shotclock-b4-v1",
   "./i18n-catalog-shotclock-v1.js?v=1.0-shotclock-b4-v1",
   "./shotclock-v1.js?v=1.0-shotclock-b4-v1",
+  "./ui-pilot-v1.css?v=1.0-uipilot-p1-v1",
+  "./i18n-catalog-uipilot-v1.js?v=1.0-uipilot-p1-v1",
+  "./ui-pilot-v1.js?v=1.0-uipilot-p1-v1",
   "./player-detail-build8.css",
   "./record-access-v1.js?v=1.0-build60-free-pro-v2",
   "./match-sharing-validation-v1.js",

@@ -1,0 +1,101 @@
+{
+ "gate": "UI Pilot P1 A/B comparison build: Version 1.4 / Build 90, cache version build89-shotclock-b4-v1 -> build90-uipilot-p1-v1",
+ "productChanges": {
+  "new": [
+   "ui-pilot-v1.js",
+   "ui-pilot-v1.css",
+   "i18n-catalog-uipilot-v1.js"
+  ],
+  "index.html": "3 load tags + 4 cache-version query strings",
+  "sw.js": "3 precache entries + APP_VERSION/query strings",
+  "scripts/build-native-web.mjs": "3 file names",
+  "project.pbxproj": "CURRENT_PROJECT_VERSION 89->90 (x2)"
+ },
+ "changedTests": {
+  "build32-final-review-followup.test.mjs": {
+   "before": "bf0dbf13c261bbda6fe5b9f656a9d46da70d2a8508f6a90bb848bf3513607bf6",
+   "after": "41d376fafbfe6c716517823e92ddaa32d6661f66674937931b5b1f01b7a1506e"
+  },
+  "build33-home-reference.test.mjs": {
+   "before": "dcff203f88eb5fe41c4a4155a01cbc0380307adb2b13f19d640c743fbe24e088",
+   "after": "7cbc5ea909a7a467b0e45fb5655c8e7560e239ff0e1fb1439281f8cea1cc995c"
+  },
+  "build76-settings-scroll-lock.test.mjs": {
+   "before": "7d6448cfd7ea2451bbb18b1ca53731838defe6ee96b1b5a43bb61d2cc4259226",
+   "after": "e128c8f9ccfaf09642688516f1ab6716bb40896fb85353db70676f435d33ea2f"
+  },
+  "game-result-match-detail-common-layout.test.mjs": {
+   "before": "466d0a0f815d4b41f5885254416b3972c73d7e84d9f52cbdf3ec6b319e164f26",
+   "after": "08dd020ee65b23f6c5a6182e7a29434efbfb5fbabfc709257e3104a9e5602da9"
+  },
+  "i18n-foundation-v1.test.mjs": {
+   "before": "fe19e9a8fb1061cef18838ecc2b61c753ff40f0268b9ea711f11e500b4c4cb21",
+   "after": "68effff5cc549a9b346339b841a95f0121f031ac09546df1c65054d98d0c8a7b"
+  },
+  "ios-native-camera-localization.test.mjs": {
+   "before": "3b1f7f48b29c4953c8e755cea2a466159f28abf4c7e127395959c722a738cecb",
+   "after": "9addf60af73a50f0a9f4bed95898083d09bb568873868d03976eb414b09bf914"
+  },
+  "ios27-scene-lifecycle.test.mjs": {
+   "before": "5101e6497ec756fa23faf7d06751fe0a3f33e5baa1e62ea0090f7b727bd6f2a8",
+   "after": "c52dc7d30a286213b1ac0845106beff7f39a680e627b3d2db2a9f221ff0cab7c"
+  },
+  "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
+   "before": "1ad485be7a7691385616424277278b7d473317f59db6e2c304066af33a3a54f5",
+   "after": "d8b054c15fbc9fd69c71770fb610e101f898019f4bb8d667d860901f622d067d"
+  },
+  "localization-glossary-25-approval-decision.test.mjs": {
+   "before": "0b035c7cb5d47827ebad1e943ac8ff3c7e41a9b2cfae7e4c09936139ab1aec6e",
+   "after": "24fccb50124b7e1e4b0beda9a74a2a6df0facf1b270ff74a3892ceb4ed459d4e"
+  },
+  "localization-glossary-finalization-decision.test.mjs": {
+   "before": "24920b48b4ee8510877e149419b1c9a1cc1d33b391561eea39bab73c5d41cca9",
+   "after": "4204464b0e3981f1dd58bd236f57a4805e86a37f80b808b0397023f02e792f3b"
+  },
+  "localization-ios-first-entry-language-decision.test.mjs": {
+   "before": "378e719d14db3e00c07562f7d1bd068fc5845dc970b2a92ac76569ce0608c328",
+   "after": "ceef59c057050f14d8a884fc06fdff886699ca7ab46aeb90445ebff1deda04d5"
+  },
+  "match-sharing-stage5a.test.mjs": {
+   "before": "14e9d555892eece6cf11747ab4344ab6d6bc9c157ba457cc471a28217e29b7f5",
+   "after": "a1a5d72c48fcc93e29a9c8f061160d896efad89e403af1bb8b2bf07b9ebd1be5"
+  },
+  "native-ios-foundation.test.mjs": {
+   "before": "78485a6034a230dcd7aa87c952e29e9952dd322d5539397ad0a8392edcc2d41a",
+   "after": "03f67084a69a7c6ad7830e25152fd3891066eaf3b83f34fdcbb8a79918011cf7"
+  },
+  "official-website-v1.test.mjs": {
+   "before": "d12424f83f87ad9012e1dee7e0ac8f883449d185efcc22413d94c858f448084b",
+   "after": "63c9c90ae6bd82caaf7041832c481edd3073c5b58b52082ada36bb3199038c3b"
+  },
+  "player-detail-final-rc-regression.test.mjs": {
+   "before": "4c84977924195c24004bb378e55ee6835bba422b2bf2b50e5516460099be2ad5",
+   "after": "4bdbdf6faf806e05a47a31d97b36b58a4349b83e75c4a0eabffa20454ca91d8a"
+  }
+ },
+ "digests": {
+  "pairs": {
+   "index.html": {
+    "before": "c382546b6a6003cc85cc0ba263e869e741d67be529682f6e06a26c41efc7dc75",
+    "after": "05a05b92997942204e97e9999ad6abd56f84aa407b06dd450d69e5e90cd6a456"
+   },
+   "sw.js": {
+    "before": "5222275786baeb9166153daf5b14066c03209e03a5b4546ec2ca1f0743745857",
+    "after": "a8fa9dcd30535191fa5f9c7c7867c46d3640e1d30db3cb8d69dce96e102770ae"
+   },
+   "ios/App/App.xcodeproj/project.pbxproj": {
+    "before": "1fa871fccf77ac184ba6bd697ad385d520c74ed93fb7d65151d5b014649a65dd",
+    "after": "cc2385141b89401e2bc6f149b7bfa75e1a6902886d0f18dcba0586a1258c51f3"
+   }
+  },
+  "pinTests": [
+   "tests/localization-ac13-voiceover-release-requirement-decision.test.mjs",
+   "tests/localization-glossary-25-approval-decision.test.mjs",
+   "tests/localization-glossary-finalization-decision.test.mjs",
+   "tests/localization-ios-first-entry-language-decision.test.mjs"
+  ]
+ },
+ "newTests": {
+  "ui-pilot-p1.test.mjs": 4
+ }
+}

@@ -1,0 +1,40 @@
+/* CueScore UI Pilot P1 styles (internal comparison build; not adopted). Everything is scoped to `.ui-pilot-p1` (9-Ball / 10-Ball match screen while the comparison is ON) or to the `.uip-*` setup row / header switch. Token values reuse Design System v2.2. */
+:root{--uip-text:#1C1C1E;--uip-text2:#636366;--uip-bg2:#F2F2F7;--uip-border:#D1D1D6}
+/* 1. Ball input: larger targets, same 5-column grid / order / single tap */
+.ui-pilot-p1 .pro-balls{row-gap:12px!important}
+.ui-pilot-p1 .pro-ball{width:52px!important;height:52px!important;min-width:52px!important;min-height:52px!important;font-size:23px!important;touch-action:manipulation;transition:opacity .15s ease-out,transform .09s ease-out,box-shadow .12s ease-out}
+@media (max-width:340px){.ui-pilot-p1 .pro-balls{row-gap:8px!important;column-gap:8px!important}.ui-pilot-p1 .pro-ball{width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important;font-size:21px!important}}
+/* 2. Actions: 12px labels, content-based widths, undo set apart and secondary */
+.ui-pilot-p1 .pro-actions{display:flex!important;gap:8px!important}
+.ui-pilot-p1 .pro-action{flex:1 1 auto!important;font-size:12px!important;line-height:1.15!important;padding:4px 3px!important;white-space:nowrap!important;touch-action:manipulation;min-width:0!important}
+.ui-pilot-p1 .pro-action.pro-safety{min-width:64px!important}.ui-pilot-p1 .pro-action.pro-foul{min-width:56px!important}.ui-pilot-p1 .pro-action.pro-undo{min-width:52px!important}
+.ui-pilot-p1 .pro-action.pro-undo{background:var(--uip-bg2)!important;border:1px solid var(--uip-border)!important;box-shadow:none!important}
+.ui-pilot-p1 .pro-actions .pro-undo{margin-left:6px}
+@media (max-width:340px){.ui-pilot-p1 .pro-actions{gap:5px!important}.ui-pilot-p1 .pro-actions .pro-undo{margin-left:3px}}
+/* 3. Whose turn: the inactive card steps back (opacity .62 keeps name >= 4.5:1), the active card lifts */
+.ui-pilot-p1 .pro-player-panel{transition:border-color .18s ease-out,background-color .18s ease-out,box-shadow .18s ease-out}
+.ui-pilot-p1 .pro-player-panel.active{box-shadow:0 4px 14px rgba(0,0,0,.09)}
+.ui-pilot-p1 .pro-player-panel:not(.active) .pro-score,.ui-pilot-p1 .pro-player-panel:not(.active) .pro-player-name{opacity:.62}
+.ui-pilot-p1 .pro-player-panel .pro-score,.ui-pilot-p1 .pro-player-panel .pro-player-name{transition:opacity .18s ease-out}
+/* 4. Race to line is secondary information */
+.ui-pilot-p1 .pro-stats{color:var(--uip-text2)!important;font-weight:600!important;font-size:13px!important}
+/* 5. Motion: score tick and newest log row, 160 ms, no bounce, no blinking */
+@keyframes uipTick{from{transform:translateY(5px);opacity:.55}to{transform:none;opacity:1}}
+@keyframes uipRow{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.ui-pilot-p1 .uip-tick{animation:uipTick .16s ease-out}
+.ui-pilot-p1 .uip-row{animation:uipRow .16s ease-out}
+@media (prefers-reduced-motion:reduce){.ui-pilot-p1 .uip-tick,.ui-pilot-p1 .uip-row{animation:none!important}.ui-pilot-p1 .pro-ball,.ui-pilot-p1 .pro-player-panel,.ui-pilot-p1 .pro-player-panel .pro-score,.ui-pilot-p1 .pro-player-panel .pro-player-name{transition:none!important}}
+/* header switch: the existing start-time label becomes the New/Old toggle while the comparison is enabled (suffix drawn with CSS so the app's own text writes are untouched); 44pt hit area without moving anything */
+#proStartTime[data-uip]{position:relative;cursor:pointer}
+#proStartTime[data-uip]::after{content:attr(data-uip);font-weight:800;color:#8f7411}
+#proStartTime[data-uip]::before{content:"";position:absolute;inset:-14px -10px}
+/* setup row (shown only for 9-Ball / 10-Ball setup) */
+.uip-setup{order:6;margin:10px 0 0;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:48px;background:#fff;border:1px solid var(--uip-border);border-radius:14px;color:var(--uip-text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif}
+.uip-setup[hidden]{display:none}
+.uip-setup-text{display:flex;flex-direction:column;min-width:0}.uip-setup-title{font-size:17px;line-height:22px;font-weight:600}.uip-setup-sub{font-size:12px;line-height:16px;color:var(--uip-text2)}
+.uip-switch{flex:0 0 auto;width:60px;height:44px;border:0;background:transparent;padding:0;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
+.uip-track{position:relative;display:block;width:51px;height:31px;border-radius:16px;background:#8E8E93;transition:background .15s}
+.uip-knob{position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .15s}
+.uip-switch[aria-checked="true"] .uip-track{background:var(--uip-text)}.uip-switch[aria-checked="true"] .uip-knob{transform:translateX(20px)}
+@media (prefers-reduced-motion:reduce){.uip-track,.uip-knob{transition:none}}
+@media (max-width:340px){.uip-setup{padding:6px 10px}}

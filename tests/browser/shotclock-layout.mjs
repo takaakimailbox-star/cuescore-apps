@@ -49,7 +49,7 @@ for (const lang of LANGS) for (const disc of DISCS) {
   const press = async sel => { await ev(`document.querySelector(${JSON.stringify(sel)}).click();await W(150)`); };
   await app.cdp("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await W(1200);
-  await ev(`localStorage.setItem(${JSON.stringify(KEY)},JSON.stringify({v:1,enabled:true,base:45,clock:null}));CueScoreShotClockV1.reloadStore();
+  await ev(`localStorage.setItem(${JSON.stringify(KEY)},JSON.stringify({v:1,enabled:true,base:45,clock:null}));CueScoreShotClockV1.reloadStore();${process.env.SC_PILOT ? 'localStorage.setItem("cueScore.uiPilot.v1",JSON.stringify({v:1,enabled:true,on:true}));CueScoreUiPilotV1.reloadStore();' : ""}
     const R=Date.now.bind(Date);window.__scOff=0;Date.now=()=>R()+window.__scOff;
     document.querySelector('#cueDisciplineSwitcherV1 [data-discipline="${disc}"]').click();await W(1000);
     if(!document.getElementById("p2Name").value){document.getElementById("p2PlayerSearchBtn").click();await W(500);document.querySelector("[data-select-player]")?.click();await W(500)}

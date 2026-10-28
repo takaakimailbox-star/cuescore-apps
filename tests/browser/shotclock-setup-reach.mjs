@@ -7,10 +7,11 @@ for (const [w, h] of [[320, 568], [375, 667], [390, 844]]) for (const on of [fal
   await app.cdp("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 2, mobile: true });
   const ev = c => app.evalJs(`(async()=>{const W=ms=>new Promise(r=>setTimeout(r,ms));${c}})()`);
   await ev(`await W(1200);
-    document.querySelector('#cueDisciplineSwitcherV1 [data-discipline="rotation"]').click();await W(1000);
+    document.querySelector('#cueDisciplineSwitcherV1 [data-discipline="${process.env.SC_DISC || "rotation"}"]').click();await W(1000);
     if(!document.getElementById("p2Name").value){document.getElementById("p2PlayerSearchBtn").click();await W(500);document.querySelector("[data-select-player]")?.click();await W(500)}
     for(let i=0;i<60&&document.getElementById("startGameBtn").disabled;i++)await W(100);`);
   if (on) await ev(`document.querySelector(".cue-sc-switch").click();await W(300)`);
+  if (process.env.SC_PILOT) await ev(`document.querySelector(".uip-switch").click();await W(300)`);
   const before = JSON.parse(await app.evalJs(`(()=>{const r=document.getElementById("startGameBtn").getBoundingClientRect(),n=document.querySelector(".cue-phase1-tab-bar").getBoundingClientRect();return JSON.stringify({top:Math.round(r.top),bottom:Math.round(r.bottom),nav:Math.round(n.top)})})()`));
   // scroll the Home container the way a finger would, then press the button with real mouse events
   await ev(`document.getElementById("startGameBtn").scrollIntoView({block:"center"});await W(400)`);

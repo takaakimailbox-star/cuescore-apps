@@ -75,7 +75,7 @@ test("G14 and G25 remain PENDING and Official 109 remains unpublished", () => {
 
 test("catalog, product source, P4 approval record and Data/QR source are byte-preserved", () => {
   const expected = {
-    "index.html": "c382546b6a6003cc85cc0ba263e869e741d67be529682f6e06a26c41efc7dc75",
+    "index.html": "05a05b92997942204e97e9999ad6abd56f84aa407b06dd450d69e5e90cd6a456",
     "i18n-catalog-ja-v1.js": "47ea5f63a6f35eb3c06b4cd7641d48690248f0d8921507dd05882336b99844c9",
     "i18n-catalog-en-v1.js": "ebf832444b67365ff4a5d246f6a89befa47341b767da024720fd96bad5bb8282",
     "i18n-catalog-zh-hans-v1.js": "7027ee64557b064a31a7cba88a3ab3bce641607c543f5f4ab8c8bc42970737a1",
