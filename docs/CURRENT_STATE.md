@@ -2021,3 +2021,11 @@ Version `1.4`／Build `92`（main `9b9e7d8`、実装 `aad29cd`、文書 `330d193
 - 既知の懸念（PO確認待ち）: 淡い黄と背景トラックのコントラスト約1.1:1。延長ボタンの橙／赤の塗りが最後の約10秒に数字より目立つ（塗り面積は数字の約2.3〜2.7倍）。Before／After案は Evidence にあり、採否はPO判断。
 - 未検証: 実機Dynamic Type、VoiceOver、実指の誤タップ率、翻訳のP4承認。P1比較機能は正式採用前。
 
+## CueScore Version 1.4 (Build 93) — 試合開始不能の修正、PO実機受入、公開準備の整理（2026年10月29日）
+
+Build 92 で PO 実機が**試合開始不能**（9-Ball の試合設定で「試合開始」がタブバーの後ろに隠れ押せない）を確認した。原因は、時計の延長行などで設定画面が約945pxになり、開始ボタンが折り返しの下でスクロールの手がかりもなかったこと（従来の到達テストは `scrollIntoView` のため見逃し）。`navigation-shell-phase1.css` の3ルールで開始ボタンをタブバー直上に sticky 固定して修正（main `39874aa`）。Version `1.4`／Build `93`（Build ID `b043b2c9-a5ac-4ddb-ab93-86ff6ca0e16e`）を Upload 1回、Export Compliance `usesNonExemptEncryption=false`（PO限定承認、当該Buildのみ1回）、`VALID`／`IN_BETA_TESTING`（19:52 JST）。公開版は Version 1.3（Build 88）のまま。
+
+- 検証: Node 1221／1221、専用回帰 216件 PASS（3言語×4種目×時計×比較×幅320／375／390／430）、既存操作回帰 PASS、Native（実WKWebView・実タッチ）iPhone SE 375pt／iPhone 17 402pt で試合開始。
+- **PO実機受入（2026-10-29）: 試合開始ボタンOK、ショットクロック全部OK。Build 93 の試合開始不能は CLOSED。** 個別に報告されていない項目（Dynamic Type、VoiceOver、誤タップ率など）は PASS と推定しない。延長ボタンの強調案は採用せず現行維持。
+- 公開準備: P1（比較UI）は正式採用未決定で、App Store 提出用Buildには含めない方針（除去が推奨A）。ショットクロック翻訳21キーは CANDIDATE のままで、PO一括承認用資料を作成。言語切替で時計が待機に戻る現象を再現し、原因（`matchKey()` の開始時刻ラベル）と未適用の修正案を記録。公開前の必須／任意の切り分けと Version 1.4 公開候補は `docs/implementation/CueScore_1.4_Build93_Acceptance_and_Release_Prep_2026-10-29.md`、翻訳資料は `docs/implementation/CueScore_ShotClock_Translation_P4_Approval_Package_2026-10-29.md`。
+- Official／Decision は変更なし（Decision 047／Decision Log v2.23 が最新）。製品コード変更なし（本記録は Documentation-only）。App Store 提出・一般公開、価格、IAP、地域は未変更。セット方式は保留、Build 83 RCA は STOP。
