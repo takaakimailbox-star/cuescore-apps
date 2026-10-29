@@ -60,7 +60,7 @@ test("Decision Log v2.22 records Decision 046 once, keeps v2.21 as the preceding
   const prev = text("docs/official/07_CueScore_Official_Design_Decision_Log_v2.21_Official_Release.docx");
   assert.ok(!prev.includes("Decision 046"), "the preserved v2.21 must not contain Decision 046");
   const readme = read("docs/README.md");
-  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.22_Official_Release\.docx`/);
+  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.23_Official_Release\.docx`/);   // Decision 047 publishes v2.23 as the current Log; v2.22 is preserved
   assert.match(readme, /2\. `official\/02_CueScore_Design_System_v2\.2_Official_Release\.docx`/);
   assert.match(readme, /4\. `official\/04_CueScore_UI_Components_v1\.2_Official_Release\.docx`/);
   assert.match(readme, /official\/134_CueScore_Shot_Clock_B4_Manual_Dock_Decision\.md/);

@@ -167,7 +167,7 @@ test("cross references resolve, all three documents are Official, SSOT and READM
   assert.match(decision, /Implementation NOT STARTED/);
   assert.match(spec, /Implementation NOT STARTED/);
   const readme = read("docs/README.md");
-  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.22_Official_Release\.docx`/);
+  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.23_Official_Release\.docx`/);
   assert.match(readme, /- `official\/110_CueScore_Settings_Unified_Design_Decision\.md`/);
   assert.match(readme, /- `official\/111_CueScore_Settings_Unified_Design_Spec\.md`/);
   assert.match(readme, /official\/109_/);

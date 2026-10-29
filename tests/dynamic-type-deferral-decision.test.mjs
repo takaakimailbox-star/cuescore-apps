@@ -116,7 +116,7 @@ test("DT-3: Larger Text is not declared as supported in the App Store until impl
 
 test("SSOT, README and handoff record the publication without claiming Dynamic Type support", () => {
   const readme = read("docs/README.md");
-  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.22_Official_Release\.docx`/);
+  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.23_Official_Release\.docx`/);
   assert.match(readme, /- `official\/112_CueScore_Dynamic_Type_Deferral_Decision\.md`/);
   assert.match(readme, /v2\.9 adds Decision 033/);
   assert.match(readme, /official\/109_/);

@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
 import { createRequire } from "node:module";
+import zlib from "node:zlib";
 
 // Decision 047 / Official 136-137: selectable extension seconds, re-based progress bar, four soft bar colours, time-up presentation, digits + unit side by side.
 const require = createRequire(import.meta.url);
@@ -99,4 +100,29 @@ test("SC47-9: catalog: extension time term + parameterised aria in 3 languages, 
 test("SC47-10: still zero linkage (no match data, score, log, Backup/QR keys, audio/vibration) and the timing source is Date.now deadlines", () => {
   for (const banned of ["proP1Score", "proP2Score", "proTurnLog", "proFoulBtn", "proSafetyBtn", "proSwitchBtn", "proUndoBtn", "proBalls", "CueScoreDomain", "DATA_RECORD_KEY", "inProgressMatch", "navigator.vibrate", "AudioContext", "new Audio"]) assert.ok(!js.includes(banned), banned);
   assert.ok(/deadline/.test(js) && /Date\.now/.test(js));
+});
+
+function zipText(path) {
+  const buffer = fs.readFileSync(new URL("../" + path, import.meta.url)); let eocd = -1;
+  for (let i = buffer.length - 22; i >= 0; i--) if (buffer.readUInt32LE(i) === 0x06054b50) { eocd = i; break; }
+  const count = buffer.readUInt16LE(eocd + 10); let off = buffer.readUInt32LE(eocd + 16);
+  for (let i = 0; i < count; i++) {
+    const method = buffer.readUInt16LE(off + 10), cs = buffer.readUInt32LE(off + 20), nl = buffer.readUInt16LE(off + 28), el = buffer.readUInt16LE(off + 30), cl = buffer.readUInt16LE(off + 32), lo = buffer.readUInt32LE(off + 42);
+    if (buffer.toString("utf8", off + 46, off + 46 + nl) === "word/document.xml") {
+      const start = lo + 30 + buffer.readUInt16LE(lo + 26) + buffer.readUInt16LE(lo + 28), d = buffer.subarray(start, start + cs);
+      return (method === 0 ? d : zlib.inflateRawSync(d)).toString("utf8").replace(/<[^>]+>/g, "");
+    }
+    off += 46 + nl + el + cl;
+  }
+  assert.fail("document.xml not found");
+}
+test("SC47-11: Decision Log v2.23 records Decision 047 once, Decisions 001-047 contiguous, v2.22 is preserved without 047, README points to v2.23, Official 136 / 137 exist", () => {
+  const t = zipText("docs/official/07_CueScore_Official_Design_Decision_Log_v2.23_Official_Release.docx");
+  assert.equal((t.match(/Decision 047｜/g) || []).length, 1);
+  assert.deepEqual([...t.matchAll(/Decision (\d{3})｜/g)].map(m => Number(m[1])), Array.from({ length: 47 }, (_, i) => i + 1));
+  assert.match(t, /Version 2\.23/); assert.match(t, /D047-3：延長秒を＋25／＋30／＋45／＋60から選択/);
+  assert.ok(!zipText("docs/official/07_CueScore_Official_Design_Decision_Log_v2.22_Official_Release.docx").includes("Decision 047"));
+  const readme = raw("docs/README.md");
+  assert.match(readme, /Decision_Log_v2\.23_Official_Release\.docx/); assert.match(readme, /Official Design Decision Log v2\.23 is the current official release and successor\s+to v2\.22/);
+  assert.ok(fs.existsSync(new URL("../docs/official/136_CueScore_Shot_Clock_Integrated_Improvement_Decision.md", import.meta.url)) && fs.existsSync(new URL("../docs/official/137_CueScore_Shot_Clock_Integrated_Improvement_Spec.md", import.meta.url)));
 });

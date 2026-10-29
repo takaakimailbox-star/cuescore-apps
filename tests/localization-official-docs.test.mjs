@@ -131,8 +131,8 @@ test("Official 108 requirement identifiers resolve", () => {
 
 test("README index lists Official 107 / 108, Decision Log v2.20 and final Official 109", () => {
   const readme = read("docs/README.md");
-  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.22_Official_Release\.docx`/);
-  assert.match(readme, /Official Design Decision Log v2\.22 is the current official release and successor\s+to v2\.21/);
+  assert.match(readme, /7\. `official\/07_CueScore_Official_Design_Decision_Log_v2\.23_Official_Release\.docx`/);
+  assert.match(readme, /Official Design Decision Log v2\.23 is the current official release and successor\s+to v2\.22/);
   assert.match(readme, /- `official\/107_CueScore_Localization_Decision\.md`/);
   assert.match(readme, /- `official\/108_CueScore_Localization_Spec\.md`/);
   assert.match(readme, /official\/109_/);

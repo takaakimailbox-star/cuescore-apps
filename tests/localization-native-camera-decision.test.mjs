@@ -66,7 +66,7 @@ test("camera decision is narrow, keeps the U11 values and records the U11-R4 lim
 });
 
 test("SSOT points to Decision Log v2.16 and the Decision publication remains product-source-free", () => {
-  assert.match(read("docs/README.md"), /Decision_Log_v2\.22_Official_Release/);
+  assert.match(read("docs/README.md"), /Decision_Log_v2\.23_Official_Release/);
   assert.match(read("docs/README.md"), /v2\.16 adds Decision 040/);
   assert.match(read("docs/CURRENT_STATE.md"), /Native Camera Localization Decision Published/);
   assert.match(read("docs/CURRENT_STATUS.md"), /NATIVE CAMERA LOCALIZATION FORMALIZED/);

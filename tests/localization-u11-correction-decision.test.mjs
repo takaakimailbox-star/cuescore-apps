@@ -62,7 +62,7 @@ test("AC-U11C-5: the earlier Official-consistency FAIL record is kept in the Dec
 test("SSOT and README record Decision 039; documentation-only (no product source mentions it)", () => {
   assert.match(read("docs/README.md"), /official\/123_CueScore_Localization_U11_Correction_Decision\.md/);
   assert.match(read("docs/README.md"), /v2\.15 adds Decision 039/);
-  assert.match(read("docs/README.md"), /Decision_Log_v2\.22_Official_Release/);
+  assert.match(read("docs/README.md"), /Decision_Log_v2\.23_Official_Release/);
   assert.match(read("docs/README.md"), /official\/109_/);
   assert.match(read("docs/CURRENT_STATE.md"), /U11 Correction Decision Published（2026年10月17日）/);
   assert.match(read("docs/CURRENT_STATUS.md"), /U11 CORRECTION FORMALIZED/);

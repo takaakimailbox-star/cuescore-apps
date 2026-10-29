@@ -88,7 +88,7 @@ test("catalog, product source, P4 approval record and Data/QR source are byte-pr
 
 test("SSOT preserves the Decision 041 record after v2.18 publication and contains no credential material", () => {
   const readme = read("docs/README.md");
-  assert.match(readme, /Decision_Log_v2\.22_Official_Release/);
+  assert.match(readme, /Decision_Log_v2\.23_Official_Release/);
   assert.match(readme, /Decision 041/);
   assert.match(read("docs/CURRENT_STATE.md"), /Glossary 25 Terms PO Approval Published/);
   assert.match(read("docs/CURRENT_STATUS.md"), /GLOSSARY 25 TERMS FORMALIZED/);

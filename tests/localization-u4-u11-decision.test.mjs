@@ -48,7 +48,7 @@ test("Decision 038 records U4 plan B, the U11 policy and keeps the Glossary unpu
 test("SSOT and README record Decision 038; documentation-only (no product source mentions it)", () => {
   assert.match(read("docs/README.md"), /official\/121_CueScore_Localization_U4_U11_Approval_Decision\.md/);
   assert.match(read("docs/README.md"), /v2\.14 adds Decision 038/);
-  assert.match(read("docs/README.md"), /Decision_Log_v2\.22_Official_Release/);
+  assert.match(read("docs/README.md"), /Decision_Log_v2\.23_Official_Release/);
   assert.match(read("docs/README.md"), /official\/109_/);
   assert.match(read("docs/CURRENT_STATE.md"), /U4\/U11 Approval Decision Published（2026年10月17日）/);
   assert.match(read("docs/CURRENT_STATUS.md"), /U4\/U11 — OFFICIAL DECISION PUBLISHED/);

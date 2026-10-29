@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.2_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.22_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.23_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -29,8 +29,9 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.2 is the current official release and successor to v2.1 (v2.2 adds the shot-clock-only Token addendum T1-T4, Appendix E). UI Components v1.2 is the current official release and successor to v1.1 (adds UIC-REQ-050-052, Shot Clock Dock). v2.1 and v1.1 remain in the official directory as preceding releases.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.22 is the current official release and successor
-to v2.21. Earlier versions remain in the official directory as preceding releases.
+Official Design Decision Log v2.23 is the current official release and successor
+to v2.22. Earlier versions remain in the official directory as preceding releases.
+v2.23 adds Decision 047 (Shot Clock integrated improvement: selectable extension, four soft bar colours, unit beside the digits; Product Owner policy) and leaves Decisions 001〜046 unchanged.
 v2.22 adds Decision 046 (Shot Clock B4 manual three-button dock; Product Owner approved) and leaves Decisions 001〜045 unchanged.
 v2.21 adds Decision 045 (New Home six-discipline grid and simplified match setup screen; Product Owner adopted) and leaves Decisions 001〜044 unchanged.
 v2.20 adds Decision 044 (iOS first-entry navigator.languages note) and leaves Decisions 001〜043 unchanged.
@@ -203,7 +204,7 @@ New Home (Version 1.3) status:
 Shot Clock (Version 1.4 candidate) status:
 
 - Decision 046 / Official 134 / Official 135 / Official Design Decision Log v2.22 / Design System v2.2 / UI Components v1.2 (published 2026-10-27). Product Owner decision: B4 manual three-button dock (start/pause/resume, reset, extend +60) at the bottom of the match log frame; zero linkage to ball input, foul, safety, player switch, Undo, rack end and match end; base time 45s (30/35/40/45/60); default OFF; Free/Pro common; match data schema/QR/Backup/stats unchanged; set-method work remains on hold. The 20 new terms stay CANDIDATE in Official 135 Appendix A; Official 109 is unchanged. Implementation is a separate commit; published Version 1.3 / Build 88 is unchanged.
-- Decision 047 / Official 136 / Official 137 (published 2026-10-29, Decision Log docx v2.23 issuance pending as a docs-only follow-up). Shot Clock integrated improvement: seconds unit right of the digits; four soft bar colours derived from the ball-icon colours (normal yellow / extension green / caution yellow-orange / last seconds orange; time up = empty bar, red digits and unit); selectable extension +25/+30/+45/+60 (default +60; remaining + chosen seconds; undo takes back the seconds actually added); bar re-based at each extension. Decision 046 / Official 134・135 history is unchanged (D046-5 fixed +60 is updated by D047-3). Circular gauge and a dedicated timer screen are not adopted. New term shotclock.extTime stays CANDIDATE.
+- Decision 047 / Official 136 / Official 137 / Official Design Decision Log v2.23 (published 2026-10-29). Shot Clock integrated improvement: seconds unit right of the digits; four soft bar colours derived from the ball-icon colours (normal yellow / extension green / caution yellow-orange / last seconds orange; time up = empty bar, red digits and unit); selectable extension +25/+30/+45/+60 (default +60; remaining + chosen seconds; undo takes back the seconds actually added); bar re-based at each extension. Decision 046 / Official 134・135 history is unchanged (D046-5 fixed +60 is updated by D047-3). Circular gauge and a dedicated timer screen are not adopted. New term shotclock.extTime stays CANDIDATE.
 
 Localization U4/U11 approval status:
 
