@@ -46,7 +46,7 @@ test("Decision 043 and Official 130 are unique and Decision Log v2.19 is current
   const names = fs.readdirSync(new URL("docs/official/", root)).filter(name => /^\d+_.*\.md$/.test(name));
   const numbers = names.map(name => Number(name.split("_")[0]));
   assert.equal(numbers.filter(value => value === 130).length, 1);
-  assert.equal(Math.max(...numbers), 137);
+  assert.equal(Math.max(...numbers), 139);
   assert.match(decision, /Decision 043/);
   assert.match(decision, /Official 130/);
   assert.match(decision, /Decision Log.*v2\.19/);
@@ -74,10 +74,10 @@ test("Official 108 keeps all 31 acceptance identifiers and revises only VoiceOve
 
 test("product, catalog, Native and StoreKit files are byte-preserved", () => {
   const expected = {
-    "index.html": "d0da46ebff574f6b94a8c76707ff76b008f341be527c7c85dc9a31e6e7793cbf",
-    "i18n-catalog-ja-v1.js": "bfe2b3b0cd0a1734ebc259128dc5dade248d95f26f89a80a5465cd106e143a39",
-    "i18n-catalog-en-v1.js": "27f3bed6c3e6988482e6c91367e782eb83d5caa73076e90ecdc99f36da992e2c",
-    "i18n-catalog-zh-hans-v1.js": "224c1f96c57d22c77fb164558ffd1eecfb570f8c6c27d5cd372c3f03c5c381e6",
+    "index.html": "b046e4b577d4fd53742161b2d6701b23edee74bfd539ad1bdf50312a61944982",
+    "i18n-catalog-ja-v1.js": "351ad0530e4ff8a1c66ce81b37938c10a60d7684ffae2dc3ceeb36fc48ea66ad",
+    "i18n-catalog-en-v1.js": "011a957ed527adf6298f78e6a288a8718506c766db3356364b2fc3aab436a00f",
+    "i18n-catalog-zh-hans-v1.js": "0be5d83df480714bcf2d4522810a76e4d655675d9fe15c1600249c3bb14362d6",
     "monetization-v1.js": "9da40f6be8c3dd5c2bb2535325a6bc83a890ad16e38d649e44315222115f6c60",
     "ios/App/App.xcodeproj/project.pbxproj": "6f2965f3e58f2b92df3b3760ffba47d4a696f8725127340bd5f2a76b0d444675",
   };

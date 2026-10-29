@@ -115,16 +115,8 @@
 
   /* ---------- UI ---------- */
   const doc = document;
-  const CAT = root.CueScoreShotClockCatalogV1 || {};
-  const LANG = () => (root.CueScoreI18n && root.CueScoreI18n.language) || "ja";
-  /* own provisional catalog (see i18n-catalog-shotclock-v1.js); missing language or key falls back to ja, then to the key (same policy as the main catalogs) */
-  const T = (key, params) => {
-    const lang = LANG(), dict = CAT[lang] || CAT.ja || {};
-    let v = Object.prototype.hasOwnProperty.call(dict, key) ? dict[key] : (CAT.ja || {})[key];
-    if (v === undefined) return key;
-    if (v && typeof v === "object") { let form = "other"; try { form = new Intl.PluralRules(lang === "zh-Hans" ? "zh-CN" : lang).select(Number(params && params.count)); } catch (_) { /* other */ } v = v[form] !== undefined ? v[form] : v.other; }
-    return String(v).replace(/\{([A-Za-z0-9_]+)\}/g, (m, n) => (params && Object.prototype.hasOwnProperty.call(params, n) ? String(params[n]) : m));
-  };
+  /* strings come from the P4-approved main catalogs (Decision 048: keys `shotclock.*`); plural forms and {name} substitution are handled by the main i18n core */
+  const T = (key, params) => (typeof root.cueT === "function" ? root.cueT(key, params) : key);
   const $ = (sel, scope) => (scope || doc).querySelector(sel);
   const storage = (() => { try { return root.localStorage; } catch (_) { return null; } })();
   let store = readStore(storage);
@@ -139,7 +131,8 @@
   const shown = () => { const s = screen(); return Boolean(s && !s.classList.contains("hidden") && s.offsetParent !== null); };
   /* identity of the match on screen (start time + player names + discipline), stored only as a short hash so the clock key holds no names */
   const matchKey = () => {
-    const text = ["#proStartTime", "#proP1Name", "#proP2Name", "#proGameTitleV1"].map(sel => ($(sel) && $(sel).textContent || "").trim()).join("|");
+    const part = sel => ($(sel) && $(sel).textContent || "").trim(), t = part("#proStartTime"), clockTime = (t.match(/\d{1,2}[:：]\d{2}/) || [t])[0];   // only the time: the label word changes with the language
+    const text = [clockTime, part("#proP1Name"), part("#proP2Name"), part("#proGameTitleV1")].join("|");
     let h = 0x811c9dc5; for (let i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
     return "m" + h.toString(16);
   };

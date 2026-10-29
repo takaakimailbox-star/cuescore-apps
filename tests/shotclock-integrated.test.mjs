@@ -8,7 +8,8 @@ import zlib from "node:zlib";
 // Decision 047 / Official 136-137: selectable extension seconds, re-based progress bar, four soft bar colours, time-up presentation, digits + unit side by side.
 const require = createRequire(import.meta.url);
 const SC = require("../shotclock-v1.js");
-const cat = require("../i18n-catalog-shotclock-v1.js");
+const main = { ja: require("../i18n-catalog-ja-v1.js"), en: require("../i18n-catalog-en-v1.js"), "zh-Hans": require("../i18n-catalog-zh-hans-v1.js") };   // Decision 048: the 21 shot-clock keys are P4-approved and live in the main catalogs
+const cat = Object.fromEntries(Object.entries(main).map(([l, c]) => [l, Object.fromEntries(Object.entries(c).filter(([k]) => k.startsWith("shotclock.")))]));
 const raw = name => globalThis.__p3RawReadFileSync.call(fs, new URL("../" + name, import.meta.url), "utf8");
 const css = raw("shotclock-v1.css"), js = raw("shotclock-v1.js"), idx = raw("index.html");
 const S = 1000;
@@ -91,10 +92,11 @@ test("SC47-8: digits and unit are side by side (one baseline row); the unit is i
   assert.match(js, /EXTS\.forEach\(x =>/, "setup row offers the extension choices");
 });
 
-test("SC47-9: catalog: extension time term + parameterised aria in 3 languages, CANDIDATE (not in the main catalogs)", () => {
+test("SC47-9: catalog: extension time term + parameterised aria in 3 languages, P4-APPROVED main-catalog keys (Decision 048)", () => {
   for (const l of ["ja", "en", "zh-Hans"]) { assert.ok(cat[l]["shotclock.extTime"]); assert.match(cat[l]["shotclock.aria.extend"], /\{sec\}/); }
-  assert.equal(cat.ja["shotclock.extTime"], "延長時間"); assert.equal(cat.en["shotclock.extTime"], "Extension"); assert.equal(cat["zh-Hans"]["shotclock.extTime"], "延长时间");
-  for (const f of ["i18n-catalog-ja-v1.js", "i18n-catalog-en-v1.js", "i18n-catalog-zh-hans-v1.js"]) assert.ok(!raw(f).includes("shotclock.extTime"), f);
+  assert.equal(cat.ja["shotclock.extTime"], "延長時間"); assert.equal(cat.en["shotclock.extTime"], "Extension"); assert.equal(cat["zh-Hans"]["shotclock.extTime"], "延时时间");
+  for (const f of ["i18n-catalog-ja-v1.js", "i18n-catalog-en-v1.js", "i18n-catalog-zh-hans-v1.js"]) assert.ok(raw(f).includes("shotclock.extTime"), f);
+  assert.equal(cat["zh-Hans"]["shotclock.extend"], "延时"); assert.equal(cat["zh-Hans"]["shotclock.aria.undo"], "撤销延时"); assert.equal(cat.en["shotclock.supplement"], "Time each shot manually");
 });
 
 test("SC47-10: still zero linkage (no match data, score, log, Backup/QR keys, audio/vibration) and the timing source is Date.now deadlines", () => {
@@ -116,13 +118,13 @@ function zipText(path) {
   }
   assert.fail("document.xml not found");
 }
-test("SC47-11: Decision Log v2.23 records Decision 047 once, Decisions 001-047 contiguous, v2.22 is preserved without 047, README points to v2.23, Official 136 / 137 exist", () => {
+test("SC47-11: Decision Log v2.23 records Decision 047 once, Decisions 001-047 contiguous, v2.22 is preserved without 047, README keeps v2.23 as the preceding release (v2.24 is current since Decision 048), Official 136 / 137 exist", () => {
   const t = zipText("docs/official/07_CueScore_Official_Design_Decision_Log_v2.23_Official_Release.docx");
   assert.equal((t.match(/Decision 047｜/g) || []).length, 1);
   assert.deepEqual([...t.matchAll(/Decision (\d{3})｜/g)].map(m => Number(m[1])), Array.from({ length: 47 }, (_, i) => i + 1));
   assert.match(t, /Version 2\.23/); assert.match(t, /D047-3：延長秒を＋25／＋30／＋45／＋60から選択/);
   assert.ok(!zipText("docs/official/07_CueScore_Official_Design_Decision_Log_v2.22_Official_Release.docx").includes("Decision 047"));
   const readme = raw("docs/README.md");
-  assert.match(readme, /Decision_Log_v2\.23_Official_Release\.docx/); assert.match(readme, /Official Design Decision Log v2\.23 is the current official release and successor\s+to v2\.22/);
+  assert.match(readme, /v2\.23 adds Decision 047/); assert.match(readme, /Official Design Decision Log v2\.24 is the current official release and successor\s+to v2\.23/);   // Decision 048 later publishes v2.24; v2.23 is preserved
   assert.ok(fs.existsSync(new URL("../docs/official/136_CueScore_Shot_Clock_Integrated_Improvement_Decision.md", import.meta.url)) && fs.existsSync(new URL("../docs/official/137_CueScore_Shot_Clock_Integrated_Improvement_Spec.md", import.meta.url)));
 });

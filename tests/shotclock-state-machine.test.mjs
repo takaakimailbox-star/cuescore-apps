@@ -80,10 +80,10 @@ test("AC-SC10: base times 30/35/40/45/60 only, default 45; storage defaults to O
 
 test("AC-SC2 / AC-SC6: zero linkage and data protection (static): no other product file references the clock, the clock touches only its own key and no match data", () => {
   const src = raw("shotclock-v1.js");
-  const others = fs.readdirSync(root).filter(f => /\.(js|html|css)$/.test(f) && !/^(shotclock-v1\.(js|css)|i18n-catalog-shotclock-v1\.js|sw\.js)$/.test(f));
+  const others = fs.readdirSync(root).filter(f => /\.(js|html|css)$/.test(f) && !/^(shotclock-v1\.(js|css)|sw\.js)$/.test(f));
   for (const f of others) {
     const text = raw(f);
-    if (f === "index.html") { assert.equal((text.match(/shotclock-v1|i18n-catalog-shotclock-v1/g) || []).length, 3, "index.html only loads the three files"); assert.ok(!/CueScoreShotClockV1|cueScore\.shotClock/.test(text)); continue; }
+    if (f === "index.html") { assert.equal((text.match(/shotclock-v1/g) || []).length, 2, "index.html only loads the two files (the catalog moved into the main catalogs, Decision 048)"); assert.ok(!/CueScoreShotClockV1|cueScore\.shotClock/.test(text)); continue; }
     assert.ok(!/CueScoreShotClockV1|shotClock|cueScore\.shotClock/.test(text), `${f} must not reference the shot clock`);
   }
   const keys = [...src.matchAll(/["'`](cueScore\.[A-Za-z0-9_.]+|rotationScoreboard\.[A-Za-z0-9_.]+)["'`]/g)].map(m => m[1]);
@@ -93,18 +93,18 @@ test("AC-SC2 / AC-SC6: zero linkage and data protection (static): no other produ
   assert.ok(!/sound|haptic/i.test(src.replace(/\/\*[\s\S]*?\*\//g, "")), "no sound / haptics are implemented (default OFF, not offered)");
 });
 
-test("AC-SC1 / AC-SC11: OFF mounts nothing (static), the dock is created only when enabled, 3-language provisional catalog is complete and CANDIDATE", () => {
+test("AC-SC1 / AC-SC11: OFF mounts nothing (static), the dock is created only when enabled, 3-language catalog is complete and P4-approved in the main catalogs (Decision 048)", () => {
   const src = raw("shotclock-v1.js");
   assert.match(src, /if \(!store\.enabled\) return;\s*\/\/ OFF: nothing is created/);
-  const cat = require("../i18n-catalog-shotclock-v1.js");
-  assert.deepEqual(Object.keys(cat).sort(), ["en", "ja", "zh-Hans"]);
-  const keys = Object.keys(cat.ja); assert.equal(keys.length, 21);   // 20 (Decision 046) + shotclock.extTime (Decision 047)
+  const main = { ja: require("../i18n-catalog-ja-v1.js"), en: require("../i18n-catalog-en-v1.js"), "zh-Hans": require("../i18n-catalog-zh-hans-v1.js") };
+  const cat = Object.fromEntries(Object.entries(main).map(([l, c]) => [l, Object.fromEntries(Object.entries(c).filter(([k]) => k.startsWith("shotclock.")))]));
+  const keys = Object.keys(cat.ja); assert.equal(keys.length, 21);   // 20 (Decision 046) + shotclock.extTime (Decision 047), now P4-APPROVED main-catalog keys (Decision 048)
   for (const lang of ["en", "zh-Hans"]) assert.deepEqual(Object.keys(cat[lang]), keys);
   assert.equal(cat["zh-Hans"]["shotclock.title"], "出杆计时器");
   assert.equal(cat["zh-Hans"]["shotclock.paused"], "已暂停");
   assert.equal(cat.en["shotclock.undo"], "Undo"); assert.match(cat.en["shotclock.aria.undo"], /extension/i);
-  assert.match(raw("i18n-catalog-shotclock-v1.js"), /CANDIDATE/);
-  for (const main of ["i18n-catalog-ja-v1.js", "i18n-catalog-en-v1.js", "i18n-catalog-zh-hans-v1.js"]) assert.ok(!raw(main).includes("shotclock"), `${main} stays unchanged (P4-approved keys only)`);
+  assert.ok(!fs.existsSync(new URL("../i18n-catalog-shotclock-v1.js", import.meta.url)), "the provisional catalog file is retired");
+  assert.ok(!/CueScoreShotClockCatalogV1/.test(src), "the clock reads the main catalogs through cueT");
 });
 
 test("AC-SC7: the dock has no text below 12px, 48pt controls and no blinking animation", () => {

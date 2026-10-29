@@ -14,7 +14,7 @@ test("Decision 042 publishes Official 109 and 129 exactly once", () => {
   const numbers = fs.readdirSync(new URL("docs/official/", root)).filter(name => /^\d+_.*\.md$/.test(name)).map(name => Number(name.split("_")[0]));
   assert.equal(numbers.filter(value => value === 109).length, 1);
   assert.equal(numbers.filter(value => value === 129).length, 1);
-  assert.equal(Math.max(...numbers), 137);
+  assert.equal(Math.max(...numbers), 139);
   assert.match(decision, /Decision 042/);
   assert.match(decision, /v2\.18/);
 });
@@ -37,10 +37,10 @@ test("G14 and G25 match the PO-approved wording and meaning", () => {
 
 test("catalog, Japanese UI and Data/QR implementation are byte-preserved", () => {
   const expected = {
-    "index.html": "d0da46ebff574f6b94a8c76707ff76b008f341be527c7c85dc9a31e6e7793cbf",
-    "i18n-catalog-ja-v1.js": "bfe2b3b0cd0a1734ebc259128dc5dade248d95f26f89a80a5465cd106e143a39",
-    "i18n-catalog-en-v1.js": "27f3bed6c3e6988482e6c91367e782eb83d5caa73076e90ecdc99f36da992e2c",
-    "i18n-catalog-zh-hans-v1.js": "224c1f96c57d22c77fb164558ffd1eecfb570f8c6c27d5cd372c3f03c5c381e6",
+    "index.html": "b046e4b577d4fd53742161b2d6701b23edee74bfd539ad1bdf50312a61944982",
+    "i18n-catalog-ja-v1.js": "351ad0530e4ff8a1c66ce81b37938c10a60d7684ffae2dc3ceeb36fc48ea66ad",
+    "i18n-catalog-en-v1.js": "011a957ed527adf6298f78e6a288a8718506c766db3356364b2fc3aab436a00f",
+    "i18n-catalog-zh-hans-v1.js": "0be5d83df480714bcf2d4522810a76e4d655675d9fe15c1600249c3bb14362d6",
     "match-sharing-adapters-v1.js": "f10ac88ee5ba7317b75b4ba5f11d654bb2547503c6b15df783e7be0cb8170ea5",
     "match-sharing-validation-v1.js": "4399a8a63818ce2a687a78dc5fb2c157e2f239f71f2f44f36463cc75cace1aee",
     "tests/fixtures/p4/po-approval.json": "a06df95336c6961647504755600ccfeb60efd2b53e5e71696cace6fe468f599b",

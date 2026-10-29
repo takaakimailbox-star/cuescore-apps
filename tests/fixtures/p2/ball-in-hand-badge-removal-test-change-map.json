@@ -60,15 +60,15 @@
    },
    "i18n-catalog-ja-v1.js": {
     "before": "47ea5f63a6f35eb3c06b4cd7641d48690248f0d8921507dd05882336b99844c9",
-    "after": "bfe2b3b0cd0a1734ebc259128dc5dade248d95f26f89a80a5465cd106e143a39"
+    "after": "351ad0530e4ff8a1c66ce81b37938c10a60d7684ffae2dc3ceeb36fc48ea66ad"
    },
    "i18n-catalog-en-v1.js": {
     "before": "ebf832444b67365ff4a5d246f6a89befa47341b767da024720fd96bad5bb8282",
-    "after": "27f3bed6c3e6988482e6c91367e782eb83d5caa73076e90ecdc99f36da992e2c"
+    "after": "011a957ed527adf6298f78e6a288a8718506c766db3356364b2fc3aab436a00f"
    },
    "i18n-catalog-zh-hans-v1.js": {
     "before": "7027ee64557b064a31a7cba88a3ab3bce641607c543f5f4ab8c8bc42970737a1",
-    "after": "224c1f96c57d22c77fb164558ffd1eecfb570f8c6c27d5cd372c3f03c5c381e6"
+    "after": "0be5d83df480714bcf2d4522810a76e4d655675d9fe15c1600249c3bb14362d6"
    },
    "tests/fixtures/p4/po-approval.json": {
     "before": "17576fcd7db0c9ed5433b151bf3314ed46b3dc0ea75b8911078015b341fa180d",

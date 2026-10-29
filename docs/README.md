@@ -14,7 +14,7 @@ The following seven documents are the current official specification set:
 4. `official/04_CueScore_UI_Components_v1.2_Official_Release.docx`
 5. `official/05_CueScore_Development_Workflow_v1.0.docx`
 6. `official/06_CueScore_Documentation_Standard_v1.0_Official_Release.docx`
-7. `official/07_CueScore_Official_Design_Decision_Log_v2.23_Official_Release.docx`
+7. `official/07_CueScore_Official_Design_Decision_Log_v2.24_Official_Release.docx`
 
 The App Store v1.0 official release package is managed separately under
 `official/app-store-v1.0/`:
@@ -29,9 +29,10 @@ The App Store v1.0 official release package is managed separately under
 Design System v2.2 is the current official release and successor to v2.1 (v2.2 adds the shot-clock-only Token addendum T1-T4, Appendix E). UI Components v1.2 is the current official release and successor to v1.1 (adds UIC-REQ-050-052, Shot Clock Dock). v2.1 and v1.1 remain in the official directory as preceding releases.
 Earlier releases remain in Git history and the official archive.
 
-Official Design Decision Log v2.23 is the current official release and successor
-to v2.22. Earlier versions remain in the official directory as preceding releases.
+Official Design Decision Log v2.24 is the current official release and successor
+to v2.23. Earlier versions remain in the official directory as preceding releases.
 v2.23 adds Decision 047 (Shot Clock integrated improvement: selectable extension, four soft bar colours, unit beside the digits; Product Owner policy) and leaves Decisions 001〜046 unchanged.
+v2.24 adds Decision 048 (Shot Clock 21 terms P4 approval: conditional PO delegation, final translation QA, main-catalog move; Official 138 / 139, Glossary successor addendum to Official 109) and leaves Decisions 001〜047 unchanged.
 v2.22 adds Decision 046 (Shot Clock B4 manual three-button dock; Product Owner approved) and leaves Decisions 001〜045 unchanged.
 v2.21 adds Decision 045 (New Home six-discipline grid and simplified match setup screen; Product Owner adopted) and leaves Decisions 001〜044 unchanged.
 v2.20 adds Decision 044 (iOS first-entry navigator.languages note) and leaves Decisions 001〜043 unchanged.
@@ -328,3 +329,4 @@ An official-document update must:
 - `official/133_CueScore_v1.3_New_Home_Six_Discipline_Grid_Spec.md`
 - `official/134_CueScore_Shot_Clock_B4_Manual_Dock_Decision.md`
 - `official/135_CueScore_Shot_Clock_B4_Manual_Dock_Spec.md`
+- Decision 048 / Official 138 / Official 139 / Official Design Decision Log v2.24 (published 2026-10-29). Shot Clock 21 terms: final translation QA under the PO's conditional delegation, 6 keys improved (en supplement, zh-Hans extension terms), `P4-APPROVED` with residual risk R0/R1/R2 and [ja, en, zh-Hans] hashes (`tests/fixtures/p4/po-approval-shotclock.json`), keys moved into the main catalogs, provisional catalog retired. Human independent review NOT PERFORMED; zh-Hans competition primary sources NOT VERIFIED. Official 109 protected; Official 139 adds terms S01–S12 as the successor addendum.

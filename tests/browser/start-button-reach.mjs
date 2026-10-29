@@ -11,9 +11,9 @@ const TITLES = { "9ball": /9-Ball/i, "10ball": /10-Ball/i, rotation: /Rotation/i
 const out = { cases: 0, failures: [], rows: [] };
 const fail = (tag, msg) => { out.failures.push(tag + ": " + msg); console.log("FAIL", tag, msg); };
 for (const lang of LANGS) for (const disc of DISCS) {
-  const clocks = [false, true], pilots = (disc === "9ball" || disc === "10ball") ? [false, true] : [false];
+  const clocks = [false, true], pilots = [false];   // the P1 comparison UI was removed from Version 1.4 (Decision pending; docs removal procedure)
   for (const [w, h] of VIEWS) for (const clock of clocks) for (const pilot of pilots) for (const zoom of (w === 320 || w === 390 ? [1, 1.3] : [1])) {
-    const tag = `${lang}/${disc} ${w}x${h} clock=${clock ? "ON" : "OFF"} pilot=${pilot ? "ON" : "OFF"} zoom=${zoom}`;
+    const tag = `${lang}/${disc} ${w}x${h} clock=${clock ? "ON" : "OFF"} zoom=${zoom}`;
     const app = await startApp({ lang, mode: "free", seedData: seed({ lang, rich: true }), watchdogMs: 600000 });
     const ev = c => app.evalJs(`(async()=>{const W=ms=>new Promise(r=>setTimeout(r,ms));${c}})()`);
     await app.cdp("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 2, mobile: true });

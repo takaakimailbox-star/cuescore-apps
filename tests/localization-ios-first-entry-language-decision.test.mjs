@@ -49,7 +49,7 @@ test("Decision 044 and Official 131 are unique; Decision 043 / Official 130 are 
   const numbers = names.map(name => Number(name.split("_")[0]));
   assert.equal(numbers.filter(value => value === 131).length, 1);
   assert.equal(numbers.filter(value => value === 130).length, 1);
-  assert.equal(Math.max(...numbers), 137);
+  assert.equal(Math.max(...numbers), 139);
   assert.match(decision, /Decision 044/);
   assert.match(decision, /Official 131/);
   assert.match(decision, /Decision 043／Official 130は再利用しない/);
@@ -74,15 +74,15 @@ test("Official 108 v1.1, Official 130, Official 109, the resolver, catalogs, pro
     "docs/official/130_CueScore_Localization_AC13_VoiceOver_Release_Requirement_Decision.md": "d9850a3a54603bf848c2e7149ae716ec4c6ab3f8d04777b8dc7fead114ab6328",
     "docs/official/109_CueScore_Localization_Glossary.md": "5f1eb130eb07025c5b587558093117f17ac382de137932a58e0e64e1a6540a9e",
     "i18n-v1.js": "e3a5909a0007c7d28c13ae1b96e0cb9671065302a459ebf1ec343ac77ceb10c7",
-    "index.html": "d0da46ebff574f6b94a8c76707ff76b008f341be527c7c85dc9a31e6e7793cbf",
+    "index.html": "b046e4b577d4fd53742161b2d6701b23edee74bfd539ad1bdf50312a61944982",
     "monetization-v1.js": "9da40f6be8c3dd5c2bb2535325a6bc83a890ad16e38d649e44315222115f6c60",
-    "i18n-catalog-ja-v1.js": "bfe2b3b0cd0a1734ebc259128dc5dade248d95f26f89a80a5465cd106e143a39",
-    "i18n-catalog-en-v1.js": "27f3bed6c3e6988482e6c91367e782eb83d5caa73076e90ecdc99f36da992e2c",
-    "i18n-catalog-zh-hans-v1.js": "224c1f96c57d22c77fb164558ffd1eecfb570f8c6c27d5cd372c3f03c5c381e6",
-    "sw.js": "38f769f6021947f2df241d00e9fac704d7572e24fe83705286df7642ad39d1fc",
+    "i18n-catalog-ja-v1.js": "351ad0530e4ff8a1c66ce81b37938c10a60d7684ffae2dc3ceeb36fc48ea66ad",
+    "i18n-catalog-en-v1.js": "011a957ed527adf6298f78e6a288a8718506c766db3356364b2fc3aab436a00f",
+    "i18n-catalog-zh-hans-v1.js": "0be5d83df480714bcf2d4522810a76e4d655675d9fe15c1600249c3bb14362d6",
+    "sw.js": "2077e1701ec4f0420637a509a9997802eab670ae8a309ede129019809dda6ca5",
     "ios/App/App.xcodeproj/project.pbxproj": "6f2965f3e58f2b92df3b3760ffba47d4a696f8725127340bd5f2a76b0d444675",
-    "ios/App/App/Info.plist": "bfdc079bd92ba93f98473ec39c36843b143736de7754687a64c32940d21933f8",
-    "ios/App/App/Info-ScoreRC.plist": "2b0b11c99b67d6566ccbe46c0f684d201925c736a7ae03761fd64416af56b8f3"
+    "ios/App/App/Info.plist": "12f1121ef0443d75062ca544af1b0ed5c5cbecc96b3b557bb4edf3b9057220c1",
+    "ios/App/App/Info-ScoreRC.plist": "3d210557612b031f713c0a6cb10b7a3f79118677da9c545093cb6990a7b8c56a"
 };
   for (const [path, digest] of Object.entries(expected)) assert.equal(sha256(path), digest, path);
 });

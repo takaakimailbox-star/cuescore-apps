@@ -54,8 +54,8 @@ test("U11 language values, production and RC identities, signing team, version a
 
 test("camera / QR implementation, plist bases, RC configuration and data-contract sources are byte-preserved", () => {
   assert.equal(sha("ios/App/App/CueScoreQRScannerPlugin.swift"), "9fd23624230f0365e6b073e3c576fd69b7eb9a6a73edee9d8f5557f0966d4534");
-  assert.equal(sha("ios/App/App/Info.plist"), "bfdc079bd92ba93f98473ec39c36843b143736de7754687a64c32940d21933f8");
-  assert.equal(sha("ios/App/App/Info-ScoreRC.plist"), "2b0b11c99b67d6566ccbe46c0f684d201925c736a7ae03761fd64416af56b8f3");
+  assert.equal(sha("ios/App/App/Info.plist"), "12f1121ef0443d75062ca544af1b0ed5c5cbecc96b3b557bb4edf3b9057220c1");
+  assert.equal(sha("ios/App/App/Info-ScoreRC.plist"), "3d210557612b031f713c0a6cb10b7a3f79118677da9c545093cb6990a7b8c56a");
   assert.equal(sha("ios/App/ScoreRC.xcconfig"), "f60ea263b19f84cd3c8bc13f1a18a56b53b5728e363adc5c1a022e09704aa2c2");
   assert.equal(sha("monetization-v1.js"), "9da40f6be8c3dd5c2bb2535325a6bc83a890ad16e38d649e44315222115f6c60");
   assert.equal(sha("domain-constants-v1.js"), "234d235b30c3aa144e4af9e6a647f746d94a0c9f9c0e3761356d1da9235f9c76");

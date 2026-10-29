@@ -1,0 +1,104 @@
+{
+ "decision": "Decision 048 / Official 138-139",
+ "date": "2026-10-29",
+ "approver": "Product Owner (conditional delegation to the rion/Claude quality judgment, recorded 2026-10-29)",
+ "status": "P4-APPROVED",
+ "scope": "Approval of the 21 shot-clock terms (Decision 046's 20 + Decision 047's shotclock.extTime) after the final translation QA of 2026-10-29. Each approval binds to the hash of [ja, en, zh-Hans]; a later change invalidates it. 6 keys were improved by the QA (qaChanged); 15 are unchanged candidates.",
+ "poDelegation": "PO statement 2026-10-29 (relayed by the Score command post): \"If rion and Claude judge it OK, then 貴章 (PO approval) is OK too.\" Recorded as a CONDITIONAL delegation of the P4 approval for these 21 keys on the quality judgment, NOT as an unconditional approval of the earlier candidates.",
+ "humanIndependentReview": "NOT PERFORMED",
+ "reviewedState": "P4-REVIEWED is not used (no named human reviewer)",
+ "residualRisk": "R0 = same term as the approved main catalog / Glossary 109 usage; R1 = standard wording, AI-verified only; R2 = competition terms whose primary sources are NOT VERIFIED (zh-Hans: 出杆计时器, 延时, 延时时间, 时间到). The zh-Hans competition primary sources (CBSA 2017 general rules text) were not obtained; secondary sources only.",
+ "evidence": "docs/implementation/CueScore_ShotClock_21_Terms_Final_QA_and_Approval_2026-10-29.md",
+ "keys": {
+  "shotclock.title": {
+   "r": "R2",
+   "h": "24f3c26141281c53"
+  },
+  "shotclock.supplement": {
+   "r": "R1",
+   "h": "e6d6ee5018e804d9",
+   "qaChanged": true
+  },
+  "shotclock.baseTime": {
+   "r": "R1",
+   "h": "217ff3180f3b21cd"
+  },
+  "shotclock.extTime": {
+   "r": "R2",
+   "h": "dc53a490e54230fb",
+   "qaChanged": true
+  },
+  "shotclock.sec": {
+   "r": "R0",
+   "h": "aee9f6e94c06b231"
+  },
+  "shotclock.ready": {
+   "r": "R1",
+   "h": "3eb1e6c72199ab98"
+  },
+  "shotclock.paused": {
+   "r": "R1",
+   "h": "93d9ff28e1c7fbf9"
+  },
+  "shotclock.expired": {
+   "r": "R2",
+   "h": "70da63cfedfe0d4c"
+  },
+  "shotclock.start": {
+   "r": "R0",
+   "h": "0b5b092b26756a91"
+  },
+  "shotclock.pause": {
+   "r": "R1",
+   "h": "32a36b4822ddeacf"
+  },
+  "shotclock.resume": {
+   "r": "R0",
+   "h": "d515f8f0cd5d5472"
+  },
+  "shotclock.reset": {
+   "r": "R0",
+   "h": "51278cc44a66d2dd"
+  },
+  "shotclock.extend": {
+   "r": "R2",
+   "h": "6ecf13881daac554",
+   "qaChanged": true
+  },
+  "shotclock.undo": {
+   "r": "R1",
+   "h": "65b95d977303d1d8"
+  },
+  "shotclock.aria.role": {
+   "r": "R1",
+   "h": "6ff2bbc9c322c836"
+  },
+  "shotclock.aria.left": {
+   "r": "R1",
+   "h": "5282e21c0b426a69"
+  },
+  "shotclock.aria.expired": {
+   "r": "R1",
+   "h": "70da63cfedfe0d4c"
+  },
+  "shotclock.aria.extend": {
+   "r": "R1",
+   "h": "707edfd5555b3f2c",
+   "qaChanged": true
+  },
+  "shotclock.aria.undo": {
+   "r": "R1",
+   "h": "b9403cf92c376d9a",
+   "qaChanged": true
+  },
+  "shotclock.aria.reset": {
+   "r": "R1",
+   "h": "d72b3f829c149bfb"
+  },
+  "shotclock.aria.extCount": {
+   "r": "R1",
+   "h": "fe29ee20a9867ba0",
+   "qaChanged": true
+  }
+ }
+}

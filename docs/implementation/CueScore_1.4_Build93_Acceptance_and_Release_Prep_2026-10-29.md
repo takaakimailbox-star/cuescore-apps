@@ -57,3 +57,8 @@ Node 1221／1221（39874aa）、専用回帰 `tests/browser/start-button-reach.m
 - 含む: ショットクロック（Decision 047、延長 +25／30／45／60、4色の横棒、数字と単位）、Race to 表示修正（9-Ball／10-Ball）、手球フリー表示の削除、試合開始ボタンの到達性修正（Build 93）。
 - 含めない（推奨）: P1 比較UI。
 - 次Gate案: ①PO決定（P1、翻訳、時計の言語切替の修正の要否、Info.plist）→ ②Build 94（コード変更を伴う分のみ）→ ③Node全回帰・Native確認・PO実機確認 → ④提出準備 → ⑤審査提出（別承認）。
+
+## 8. 更新（2026-10-29、PO委任に基づく翻訳承認後）
+- ショットクロック21語は Decision 048／Official 138・139 で `P4-APPROVED`（PO委任に基づく条件付き）。5章の翻訳の必須項目は解消。
+- P1 は 1.4 から**除去**（推奨A、PO委任の方針に従う）、時計の言語切替の鍵は**修正**、Export Compliance は Info.plist に宣言を追加。いずれも main に反映済みで、Version／Build は未採番。詳細と 1.3→1.4 データ保持の検証: `CueScore_1.4_Build94_Preparation_and_Data_Retention_2026-10-29.md`。
+- 残る必須項目: 採番Gate（Build 94）、Node全回帰・Native確認・PO実機確認、App Store 提出準備、実機での 1.3→1.4 更新（NOT VERIFIED）。

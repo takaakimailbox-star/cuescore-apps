@@ -2029,3 +2029,14 @@ Build 92 で PO 実機が**試合開始不能**（9-Ball の試合設定で「�
 - **PO実機受入（2026-10-29）: 試合開始ボタンOK、ショットクロック全部OK。Build 93 の試合開始不能は CLOSED。** 個別に報告されていない項目（Dynamic Type、VoiceOver、誤タップ率など）は PASS と推定しない。延長ボタンの強調案は採用せず現行維持。
 - 公開準備: P1（比較UI）は正式採用未決定で、App Store 提出用Buildには含めない方針（除去が推奨A）。ショットクロック翻訳21キーは CANDIDATE のままで、PO一括承認用資料を作成。言語切替で時計が待機に戻る現象を再現し、原因（`matchKey()` の開始時刻ラベル）と未適用の修正案を記録。公開前の必須／任意の切り分けと Version 1.4 公開候補は `docs/implementation/CueScore_1.4_Build93_Acceptance_and_Release_Prep_2026-10-29.md`、翻訳資料は `docs/implementation/CueScore_ShotClock_Translation_P4_Approval_Package_2026-10-29.md`。
 - Official／Decision は変更なし（Decision 047／Decision Log v2.23 が最新）。製品コード変更なし（本記録は Documentation-only）。App Store 提出・一般公開、価格、IAP、地域は未変更。セット方式は保留、Build 83 RCA は STOP。
+
+## CueScore ショットクロック21語のP4承認（Decision 048）と Build 94 準備（2026年10月29日）
+
+PO の承認委任（「りおんとのあが判断してOKなら、貴章もOK」、品質判断を条件とする委任で、候補の無条件承認ではない）に基づき、ショットクロック21キーを最終翻訳QAし、**`P4-APPROVED`** とした。Decision 048／Official 138（Decision）・139（Spec／Glossary後継追補 S01〜S12）／Official Design Decision Log v2.24（Decision 001〜047は不変、Official 109は保護）。
+
+- QA結果: 21キーに重大な誤訳・意味不一致なし。6キーを修正: en説明文「Time each shot manually」、zh-Hansの延長系を競技規程の語「延时」へ（延时／延时时间／延时，增加{sec}秒／撤销延时／已延时{count}次）。「出杆计时器」「已暂停」「Undo」「Time up」は維持。R0／R1／R2を記録（R2: zh 出杆计时器・延时・延时时间・时间到）。
+- 記録: `tests/fixtures/p4/po-approval-shotclock.json`（日付、PO委任の根拠、キー別R、[ja, en, zh-Hans]ハッシュ）。主カタログ（ja／en／zh-Hans）へ21キーを移し、暫定カタログ `i18n-catalog-shotclock-v1.js` を退役。`shotclock-v1.js` は `cueT` で読む。時計の計算・保存schema・QR・Backupは不変。
+- **偽らない事項**: 人間の独立レビューは未実施（`P4-REVIEWED` は付与しない）。zh-Hansの競技一次資料（中国台球協会の競技総則の原文）は NOT VERIFIED（二次資料のみ）。実機 VoiceOver は未検証。
+- Build 94 準備（main に反映、**Version／Build は未採番**）: P1比較UIを除去（Race to修正・手球フリー削除・開始ボタン修正は維持）、時計の言語切替の鍵修正（`matchKey()` から言語依存の文言を除外、実Chrome 5/5）、`ITSAppUsesNonExemptEncryption=false` を両 Info plist に追加（暗号コードなし・OS標準HTTPSのみ。ASC側の自動回答は次のUploadまで NOT VERIFIED）。
+- 1.3（Build 88）→1.4: Simulator で Build 88 を実タッチで中断状態にし、同一 Bundle ID に修正版を上書き。12キーのストレージが全一致、再開した試合も同一（実機の App Store 更新は NOT VERIFIED）。
+- 検証: Node 全回帰（本記録時点 1225／1225）、en／zh-Hans の統合検証・レイアウト検証 NG 0。資料: docs/implementation/CueScore_ShotClock_21_Terms_Final_QA_and_Approval_2026-10-29.md、docs/implementation/CueScore_1.4_Build94_Preparation_and_Data_Retention_2026-10-29.md。App Store 提出・一般公開、価格、IAP、地域、セット方式、Build 83 RCA は変更なし。
