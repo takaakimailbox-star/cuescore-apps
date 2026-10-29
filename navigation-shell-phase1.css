@@ -49,3 +49,7 @@ body.cue-phase1-normal-mode .player-library-back[data-phase1-root-back]{visibili
 #playerMatchHistoryV2 .pd13-fixed-discipline-match{
   min-height:98px!important;max-height:105px!important;row-gap:6px!important;padding:9px 12px!important
 }
+
+/* Build 93: the "start match" button stays reachable above the tab bar even when the setup (clock rows, comparison switch) is taller than the screen. The scroller's bottom padding (nav height + 24px + safe area) is already subtracted from the sticky area, so bottom:0 leaves 24px above the tab bar. */
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 #startGameBtn{position:sticky!important;bottom:0!important;z-index:6!important;box-shadow:0 0 0 10px rgb(248,248,247),0 -18px 14px 8px rgba(248,248,247,.94)!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 #startGameBtn:disabled{opacity:1!important;background:#9e9e9d!important;color:#fbfbfa!important;border-color:#9e9e9d!important}

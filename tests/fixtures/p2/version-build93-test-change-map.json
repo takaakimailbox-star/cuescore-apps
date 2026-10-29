@@ -1,0 +1,29 @@
+{
+ "gate": "Build 93 start-match reachability emergency fix: Version 1.4 / Build 93, cache version build92-sc047-v1 -> build93-startreach-v1, navigation-shell-phase1.css ?v=2.0-build93-startreach-v1 (sticky start button, 3 CSS lines)",
+ "productChanges": {
+  "navigation-shell-phase1.css": "+3 lines: the start-match button is sticky above the tab bar on the match setup screen (Build 93)",
+  "index.html": "cache-version strings + navigation-shell-phase1.css query",
+  "sw.js": "cache-version + navigation-shell-phase1.css query",
+  "project.pbxproj": "CURRENT_PROJECT_VERSION 92->93 (x2)"
+ },
+ "digests": {
+  "index.html": {
+   "before": "33dfd559a108308782ec20ce448d9e0aacb1663309be507a87a43fef55d1b323",
+   "after": "d0da46ebff574f6b94a8c76707ff76b008f341be527c7c85dc9a31e6e7793cbf"
+  },
+  "sw.js": {
+   "before": "3980fc21e50c4bdb582ce823f10769359756f1f7e2b2c7c519b0061624f86c8e",
+   "after": "38f769f6021947f2df241d00e9fac704d7572e24fe83705286df7642ad39d1fc"
+  },
+  "ios/App/App.xcodeproj/project.pbxproj": {
+   "before": "b74762617d4343b9b01da33d2f71b6c92a033c7386eec6fa766635cc675abe7f",
+   "after": "6f2965f3e58f2b92df3b3760ffba47d4a696f8725127340bd5f2a76b0d444675"
+  }
+ },
+ "pinnedTests": [
+  "localization-ac13-voiceover-release-requirement-decision",
+  "localization-glossary-25-approval-decision",
+  "localization-glossary-finalization-decision",
+  "localization-ios-first-entry-language-decision"
+ ]
+}

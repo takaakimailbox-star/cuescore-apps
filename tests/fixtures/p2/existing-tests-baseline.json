@@ -85,12 +85,12 @@
    "skips": 0
   },
   "build32-final-review-followup.test.mjs": {
-   "sha256": "0e655aaa57319e3b5428e5ecca4870dd5c77cc681e7670b91d14acd10ac67ddd",
+   "sha256": "b9973eb7515df4c5133ad0a1c6459826b47ca1d40eccfaa4471bd0acec9ce2eb",
    "tests": 5,
    "skips": 0
   },
   "build33-home-reference.test.mjs": {
-   "sha256": "51215f1dd3f227287c249b3669af9eb1e71dd49150c855db370c53d9b8fb3a6b",
+   "sha256": "dba864491df63fe03c5011cb9eadac5c125f025106443366e65d0583390d7432",
    "tests": 4,
    "skips": 0
   },
@@ -193,7 +193,7 @@
    "skips": 0
   },
   "build76-settings-scroll-lock.test.mjs": {
-   "sha256": "ae6821c5cb70378a951bf9d807c52d9103842274aa5e7bde6a9317524881ed28",
+   "sha256": "5bfbfcf794c53f2bc1565508a35945f2565d24b757beb97407c5484ae76a3ae6",
    "tests": 3,
    "skips": 0
   },
@@ -261,7 +261,7 @@
    "skips": 0
   },
   "game-result-match-detail-common-layout.test.mjs": {
-   "sha256": "7c9d7119a60c5fc13a6a14f06022b5dbb8e88a66456dbe28e3655a97e030b158",
+   "sha256": "f77912e65e300f59a98abc5092fead83683e30ab24d0008fcf074461db8df4cf",
    "tests": 8,
    "skips": 0
   },
@@ -301,7 +301,7 @@
    "skips": 0
   },
   "i18n-foundation-v1.test.mjs": {
-   "sha256": "98a68d46663c06189fe757325b97a4967c5aa37b856ff17d80d6fe0748e021ec",
+   "sha256": "348c8da54425ba000c018193ad816be5f645a2aa9416a99a7c34c5dd287e3594",
    "tests": 23,
    "skips": 0,
    "previousSha256": "ac8e92329319d09d1982a80d8447f7e15f483c828dd563ad86b3e1a2796678d0"
@@ -318,7 +318,7 @@
    "skips": 0
   },
   "ios-native-camera-localization.test.mjs": {
-   "sha256": "c436acac3979ade6bb21325598b3f8b1113fdc9476e750f0f3ae8163e6232378",
+   "sha256": "e75da33e1805c8f47ef06c3e2276b8e197e689b6d3c33a10a4aa8df22d8e93bf",
    "tests": 5,
    "skips": 0
   },
@@ -329,7 +329,7 @@
    "previousSha256": "95d78fea763e1ed1bbc47cfda2fd1051669e0788b08c3270107135d767411b30"
   },
   "ios27-scene-lifecycle.test.mjs": {
-   "sha256": "68f475e5956336aa61922b267f02ce481cb77533ad679914eeb2afdd2747249c",
+   "sha256": "ec46dafee3b23781c58d43731921301e44a016f2d5bfb8215e53f2b8a3e20960",
    "tests": 4,
    "skips": 0
   },
@@ -354,28 +354,28 @@
    "skips": 0
   },
   "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
-   "sha256": "8d5f72cbf211f28068394ffdd6925ad3bf45f65e121146d180abf4b65418f64c",
+   "sha256": "89ab72f082ec10ea42ec2e40bb9e53b701bdbd092980c73672303d9626305c0a",
    "tests": 4,
    "skips": 0,
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)",
    "previousSha256": "b557c9fda03401a6fcc91f4bee45be8a6db2826b0a6f07c8023ad5970ff6f052"
   },
   "localization-glossary-25-approval-decision.test.mjs": {
-   "sha256": "3161e1270310d2d8040bfa60571bf3aeb046ed25fe516bd36c8d092b54e2d37b",
+   "sha256": "dbd298bb96700947b5a08f9edbe5d13b9f3881593092450c2602f05d908db816",
    "tests": 6,
    "skips": 0,
    "previousSha256": "359a13c1d84d7e17b1b72ae811f2f7be1d459c2f2e5f67e88ace8ba3ae4abcda",
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
   },
   "localization-glossary-finalization-decision.test.mjs": {
-   "sha256": "334b89a4e280c6ddb8190e6fb360c8e13905d9033d1baf48d125a11e9e717023",
+   "sha256": "6d54872f74361fcff026368bbf932d6be45b42569857698b0c01540728f3d2ae",
    "tests": 7,
    "skips": 0,
    "previousSha256": "139b50ebf12bdb298d7711efa60df73c0693cce6eb9752cfa2a1d556c521012c",
    "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
   },
   "localization-ios-first-entry-language-decision.test.mjs": {
-   "sha256": "5f0cade43d979e127d0a97614b5cec09d0989246b1de593290fad6bf99eb2a25",
+   "sha256": "5eb85358c87b7436567b1c3e028778d9bc0fbacb66263caabfc40abe34120983",
    "tests": 4,
    "skips": 0,
    "updated_in": "Decision 044 / iOS first-entry language note regression"
@@ -493,7 +493,7 @@
    "skips": 0
   },
   "match-sharing-stage5a.test.mjs": {
-   "sha256": "5a181ddc4bb25ffded79fcec6a15ca172ce65414ff90aaf1c634821bdd5c3931",
+   "sha256": "68aa6433fd4690b8f3d1f105f1e890b09d597e2bd338c6446cc6fcda0c9161c1",
    "tests": 19,
    "skips": 0
   },
@@ -508,7 +508,7 @@
    "skips": 0
   },
   "native-ios-foundation.test.mjs": {
-   "sha256": "e1691fef6599ae95241b93bc4611af9205cf4b852d915701df437c678b29e545",
+   "sha256": "7ab70189b1350da1591424a65bc9a0a24a12c7e982219f4dc182b0824851259b",
    "tests": 6,
    "skips": 0
   },
@@ -519,38 +519,13 @@
    "updated_in": "P2-5a-1 (old->new assertion map in Evidence)"
   },
   "navigation-shell-phase1.test.mjs": {
-   "sha256": "f095e8a2c6263b51e820f7308c61ffba8e999b9557f7956d566cd19310bb6c10",
+   "sha256": "86ae077f94d283f2a515c848a923629e8e6df65763098e660395a287abfa82d7",
    "tests": 11,
    "skips": 0
   },
   "new-home-decision.test.mjs": {
    "sha256": "2924e0c6054d00faa77d02dd98d58d6ec53f1e08298d8dc25851127145b47bc8",
    "tests": 3,
-   "skips": 0
-  },
-  "race-to-label.test.mjs": {
-   "sha256": "87a0c33c94dc65f86612eb88393f36fd79f4aa467e692ba928649427b630feac",
-   "tests": 3,
-   "skips": 0
-  },
-  "ui-pilot-p1.test.mjs": {
-   "sha256": "9b69004531bd159499da181bbce1d470a4596c7d34f2cc20fd1974415f9a2fd7",
-   "tests": 4,
-   "skips": 0
-  },
-  "shotclock-plan-a.test.mjs": {
-   "sha256": "ad1cba56bb71175ac32e4f947b9e6728357cc18362311bc8b565f98b87ea6cf8",
-   "tests": 4,
-   "skips": 0
-  },
-  "shot-clock-decision.test.mjs": {
-   "sha256": "a4900b56aafb2c4fa3d403c4bd3f0e464a67be3ac2ec394067e629e3c1d63cb5",
-   "tests": 4,
-   "skips": 0
-  },
-  "shotclock-state-machine.test.mjs": {
-   "sha256": "4578c792349752fd5e32ba0fd93bda21fafc95969fd7bb35b27d0d0ab05d8c66",
-   "tests": 10,
    "skips": 0
   },
   "new-home-grid.test.mjs": {
@@ -569,7 +544,7 @@
    "skips": 0
   },
   "official-website-v1.test.mjs": {
-   "sha256": "b3b83a59241fa1592b7250fe49cba0913c90b48b55a3ac3666224585f3d38496",
+   "sha256": "1b9e7b31a36e5be1e266c186b2a05e2a5cecb9d1071c7277f87857a994b1a197",
    "tests": 4,
    "skips": 0
   },
@@ -670,7 +645,7 @@
    "skips": 0
   },
   "player-detail-final-rc-regression.test.mjs": {
-   "sha256": "550c67666df5a4696d892a6ec989624d977347ede1e9111de66be92739338ed1",
+   "sha256": "fa88c37ead3be79f6acf0d13c6a6c555714fd024ef462af5b58d698a829da1b9",
    "tests": 0,
    "skips": 0,
    "previousSha256": "a78b19334f721da5c5def4832d4efc146d36ff60c67255b60c0dd55a48f98df3"
@@ -720,6 +695,11 @@
   "race-picker-bottom-navigation-inset.test.mjs": {
    "sha256": "716d86b383fdbab2a9271530cdb00bcf4282916423ffceb3657865d7da6804fb",
    "tests": 4,
+   "skips": 0
+  },
+  "race-to-label.test.mjs": {
+   "sha256": "87a0c33c94dc65f86612eb88393f36fd79f4aa467e692ba928649427b630feac",
+   "tests": 3,
    "skips": 0
   },
   "rack-start-toast.test.mjs": {
@@ -779,8 +759,33 @@
    "tests": 10,
    "skips": 0
   },
+  "shot-clock-decision.test.mjs": {
+   "sha256": "a4900b56aafb2c4fa3d403c4bd3f0e464a67be3ac2ec394067e629e3c1d63cb5",
+   "tests": 4,
+   "skips": 0
+  },
+  "shotclock-integrated.test.mjs": {
+   "sha256": "1cf9270d077d3a54c242e59253d21bac72091c4fcdedfa05489a1587cf0b6be4",
+   "tests": 11,
+   "skips": 0
+  },
+  "shotclock-plan-a.test.mjs": {
+   "sha256": "ad1cba56bb71175ac32e4f947b9e6728357cc18362311bc8b565f98b87ea6cf8",
+   "tests": 4,
+   "skips": 0
+  },
+  "shotclock-state-machine.test.mjs": {
+   "sha256": "4578c792349752fd5e32ba0fd93bda21fafc95969fd7bb35b27d0d0ab05d8c66",
+   "tests": 10,
+   "skips": 0
+  },
   "six-discipline-race-display.test.mjs": {
    "sha256": "f03530df52a9090b8d9111c9d2a10c34ce9ac45d99e1f35dbbf69f46de7eaed3",
+   "tests": 4,
+   "skips": 0
+  },
+  "start-button-reach.test.mjs": {
+   "sha256": "1c76fe00160e99d5adfbb9886e11be0e1671ca0f0f560fcf62f684e6ecc0546d",
    "tests": 4,
    "skips": 0
   },
@@ -804,6 +809,11 @@
    "tests": 0,
    "skips": 0
   },
+  "ui-pilot-p1.test.mjs": {
+   "sha256": "9b69004531bd159499da181bbce1d470a4596c7d34f2cc20fd1974415f9a2fd7",
+   "tests": 4,
+   "skips": 0
+  },
   "ui-revision-v12.test.mjs": {
    "sha256": "392f2d0b693b0ea3f802f26311206d93accbcdb8c6e107e46672490fb90070b0",
    "tests": 9,
@@ -812,11 +822,6 @@
   "ui-unification-player-detail-bugfix.test.mjs": {
    "sha256": "04bf54aeafbd2fce0ec065dc4f0de4658a4478a19928810601233df9a702782d",
    "tests": 0,
-   "skips": 0
-  },
-  "shotclock-integrated.test.mjs": {
-   "sha256": "1cf9270d077d3a54c242e59253d21bac72091c4fcdedfa05489a1587cf0b6be4",
-   "tests": 11,
    "skips": 0
   }
  }
