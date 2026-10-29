@@ -2011,3 +2011,13 @@ Apple 審査を通過した Version `1.3`／Build `88` を **Manual Release で�
 ## Shot Clock Integrated Improvement — Decision 047 / Official 136・137（2026年10月29日）
 
 案A（Build 91）を土台に、数字の右横に秒数単位、横棒をボールアイコン由来の淡い4色（通常=黄／延長中=緑／10〜6秒=黄橙／5〜1秒=橙、0秒=残量0・数字と単位が赤）、延長秒の選択式（＋25／＋30／＋45／＋60、既定＋60、計算は残り＋選択秒、取消は追加した秒数のみ）を実装。完全手動3ボタン契約・保存schema・QR・Backup・統計・IAPは不変。円形ゲージ・タイマー専用画面は不採用。Version 1.4／Build 91は変更せず、TestFlight Uploadは未実施。Decision Log v2.23（docx）を発行済み（Decision 001〜046は不変）。新語`shotclock.extTime`はCANDIDATE。
+
+## CueScore Version 1.4 (Build 92) — ショットクロック統合改善（Decision 047）を TestFlight 内部配布（2026年10月29日）
+
+Version `1.4`／Build `92`（main `9b9e7d8`、実装 `aad29cd`、文書 `330d193`）を App Store Connect へ Upload し、既存の内部 TestFlight グループへ配布した（Build ID `7f4ef23d-d9ed-4db1-ab86-8a0261fede71`、VALID、`IN_BETA_TESTING`、Upload 1回、Export Compliance は Build 91 と同じ宣言 `usesNonExemptEncryption=false` を当該 Build にのみ設定）。**App Store の公開版は Version 1.3（Build 88）のまま**、審査提出・一般公開・価格・IAP・地域は未変更。
+
+- 内容: Decision 047／Official 136・137（延長＋25/30/45/60の選択、横棒の4色、数字と単位の横並び、時間切れ表示）と Official Design Decision Log v2.23。Decision 001〜046 は不変。
+- 検証: Node 1217／1217、実Chrome 統合検証 423チェック、320幅レイアウト 576条件（最終CSS）NG 0、全幅レイアウト 2880条件（修正前CSS、NG 2は修正済み）、既存操作回帰 52／52。Simulator（実WKWebView・実タッチ）: iPhone SE 3rd（375pt）9-Ball、iPhone 17（402pt）3 Cushion、ja／en／zh-Hans。320ptの端末はSimulatorに無く、320幅はChromeのみ。
+- 既知の懸念（PO確認待ち）: 淡い黄と背景トラックのコントラスト約1.1:1。延長ボタンの橙／赤の塗りが最後の約10秒に数字より目立つ（塗り面積は数字の約2.3〜2.7倍）。Before／After案は Evidence にあり、採否はPO判断。
+- 未検証: 実機Dynamic Type、VoiceOver、実指の誤タップ率、翻訳のP4承認。P1比較機能は正式採用前。
+
