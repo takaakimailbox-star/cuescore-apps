@@ -42,7 +42,7 @@ test("numbering: Decision 032 and Official 110 / 111 are published once, Officia
   const count = number => official.filter(value => value === number).length;
   assert.equal(count(110), 1); assert.equal(count(111), 1);
   assert.equal(count(109), 1);
-  assert.equal(Math.max(...official), 135);
+  assert.equal(Math.max(...official), 137);
   assert.ok(!docxText(LOG27).includes("Decision 032"), "Decision 032 must not exist in the preserved v2.7");
   assert.equal((docxText(LOG28).match(/Decision 032｜/g) || []).length, 1);
   const decision = read(DECISION), spec = read(SPEC);

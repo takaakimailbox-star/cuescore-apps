@@ -43,7 +43,7 @@ const spec = read("docs/official/133_CueScore_v1.3_New_Home_Six_Discipline_Grid_
 test("Official 132 and 133 are published exactly once and are the highest Official numbers", () => {
   const nums = fs.readdirSync(new URL("docs/official/", root)).filter(n => /^\d+_.*\.md$/.test(n)).map(n => Number(n.split("_")[0]));
   for (const n of [132, 133]) assert.equal(nums.filter(v => v === n).length, 1, String(n));
-  assert.equal(Math.max(...nums), 135);
+  assert.equal(Math.max(...nums), 137);
   assert.match(decision, /Decision 045/);
   assert.match(spec, /Official 132（Decision 045）/);
 });

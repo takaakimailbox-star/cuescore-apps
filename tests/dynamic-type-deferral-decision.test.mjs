@@ -44,7 +44,7 @@ test("numbering: Decision 033 and Official 112 are published once; Official 109 
   const numbers = fs.readdirSync(new URL("docs/official/", root)).filter(name => /^\d+_.*\.md$/.test(name)).map(name => Number(name.split("_")[0]));
   for (const number of [110, 111, 112]) assert.equal(numbers.filter(value => value === number).length, 1, `Official ${number}`);
   assert.equal(numbers.filter(value => value === 109).length, 1);
-  assert.equal(Math.max(...numbers), 135);
+  assert.equal(Math.max(...numbers), 137);
   assert.equal((docxText(LOG("2.9")).match(/Decision 033｜/g) || []).length, 1);
   assert.ok(!docxText(LOG("2.8")).includes("Decision 033"), "the preserved v2.8 must not contain Decision 033");
   assert.match(read(DECISION), /\*\*Decision number:\*\* \*\*Decision 033\*\*/);

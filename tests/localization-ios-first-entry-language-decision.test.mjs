@@ -49,7 +49,7 @@ test("Decision 044 and Official 131 are unique; Decision 043 / Official 130 are 
   const numbers = names.map(name => Number(name.split("_")[0]));
   assert.equal(numbers.filter(value => value === 131).length, 1);
   assert.equal(numbers.filter(value => value === 130).length, 1);
-  assert.equal(Math.max(...numbers), 135);
+  assert.equal(Math.max(...numbers), 137);
   assert.match(decision, /Decision 044/);
   assert.match(decision, /Official 131/);
   assert.match(decision, /Decision 043／Official 130は再利用しない/);

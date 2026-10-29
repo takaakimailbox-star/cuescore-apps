@@ -117,3 +117,34 @@
 @media (max-width:340px){.cue-sc-dock .cue-sc-btn .cue-sc-lb{font-size:calc(13px * var(--cue-scv-ts,1))!important}.cue-sc-dock:not(.cue-sc-lg) .cue-sc-main{min-width:60px!important}.cue-sc-dock:not(.cue-sc-lg) .cue-sc-resetb{min-width:56px!important}.cue-sc-dock:not(.cue-sc-lg) .cue-sc-extb{min-width:46px!important}}
 /* large text (pseudo 130 % and up): keep the pre-Plan-A time size (32 px x scale, capped 1.5) so the two-row dock still fits small log cards */
 .cue-sc-dock.cue-sc-lg{--cue-scv-num:32px}
+
+/* ---- Decision 047 / Official 136-137: integrated shot-clock improvement ----
+ * Bar colours are soft tints (60 % of the colour over white) of the colours of the CueScore ball icons in index.html (.ball-1 #E9C619 yellow, .ball-5 #E87500 orange, .ball-6 #008C2C green);
+ * warn is the 50/50 mix of ball 1 and ball 5 (#E99E0D). The digits stay the hero and keep the neutral text colour; only 0 s turns digits + unit red. No blinking, bar never red.
+ * Colour is not the only cue: digit value, bar length, extension badge (x N) and the Extend button label carry the same information. */
+:root{--cue-scg-normal:#F2DD75;--cue-scg-ext:#66BA80;--cue-scg-warn:#F2C56E;--cue-scg-danger:#F1AC66}
+.cue-sc-dock{--cue-scv-bar:var(--cue-scg-normal)}
+.cue-sc-dock[data-lv="ext"]{--cue-scv-bar:var(--cue-scg-ext)}
+.cue-sc-dock[data-lv="warn"]{--cue-scv-bar:var(--cue-scg-warn)}
+.cue-sc-dock[data-lv="danger"]{--cue-scv-bar:var(--cue-scg-danger)}
+.cue-sc-dock .cue-sc-bar{box-shadow:inset 0 0 0 .5px rgba(60,60,67,.22)}
+.cue-sc-dock .cue-sc-bar i{background:var(--cue-scv-bar)!important;transition:width .12s linear,background-color .3s ease-out}
+.cue-sc-dock[data-st="expired"] .cue-sc-bar i{width:0!important}
+.cue-sc-dock .cue-sc-num{color:var(--cue-scd-text)!important}
+.cue-sc-dock[data-st="expired"] .cue-sc-num,.cue-sc-dock[data-st="expired"] .cue-sc-sec,.cue-sc-dock[data-st="expired"] .cue-sc-unit{color:var(--cue-scd-err)!important}
+.cue-sc-dock[data-lv="warn"] .cue-sc-unit,.cue-sc-dock[data-lv="danger"] .cue-sc-unit{color:var(--cue-scd-text2)!important}
+.cue-sc-dock[data-st="expired"] .cue-sc-unit{color:var(--cue-scd-err)!important}
+.cue-sc-row{display:flex;align-items:baseline;gap:4px;min-width:0;white-space:nowrap}
+.cue-sc-sec{font-size:calc(13px * var(--cue-scv-ts,1));line-height:1.2;font-weight:600;color:var(--cue-scd-text2);white-space:nowrap}
+.cue-sc-dock[data-st="paused"] .cue-sc-sec{opacity:.45}
+.cue-sc-unit:empty{display:none}
+@media (prefers-reduced-motion:reduce){.cue-sc-dock .cue-sc-bar i{transition:none}}
+.cue-sc-dock.cue-sc-lg .cue-sc-row{display:inline-flex}
+/* the extension setting row reuses the base-time radio styling; 4 buttons */
+.cue-sc-ext{padding-top:4px}
+/* 3-digit values (extension chains, e.g. 105 / 157) step the digits down so digits + unit still fit beside the three buttons at 320 */
+.cue-sc-dock[data-dg="3"]:not(.cue-sc-lg){--cue-scv-num:40px}
+@media (max-width:380px){.cue-sc-dock[data-dg="3"]:not(.cue-sc-lg){--cue-scv-num:36px}}
+@media (max-width:340px){.cue-sc-dock[data-dg="3"]:not(.cue-sc-lg){--cue-scv-num:30px}}
+/* large text at 320: digits + unit + a state word do not fit in the one-row time cell; the word is dropped (state stays in the dimmed digits, the red digits and the button label), as already done at >=160 % */
+@media (max-width:340px){.cue-sc-dock.cue-sc-lg .cue-sc-cap-t{display:none}}

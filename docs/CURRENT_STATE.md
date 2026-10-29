@@ -2007,3 +2007,7 @@ Apple 審査を通過した Version `1.3`／Build `88` を **Manual Release で�
 - 不変：App本体 Free、CueScore Pro ¥980（`com.takaakimailboxstar.cuescoreapps.pro`）、配布地域 JPN のみ、Age Rating、公開方式 MANUAL。Version 1.2 の既存情報は保護。
 - 未確認（NOT VERIFIED）：App Privacy の ASC 画面での確認（既存申告は未変更）、Restore 完了（実機）、Native Backup Share Sheet（BLOCKED）、Paywall 価格「$」の由来、Apple処理メールの ITMS 警告、実機での App Store 更新受信。
 - 新機能開発へは自動移行しない。Documentation-only。
+
+## Shot Clock Integrated Improvement — Decision 047 / Official 136・137（2026年10月29日）
+
+案A（Build 91）を土台に、数字の右横に秒数単位、横棒をボールアイコン由来の淡い4色（通常=黄／延長中=緑／10〜6秒=黄橙／5〜1秒=橙、0秒=残量0・数字と単位が赤）、延長秒の選択式（＋25／＋30／＋45／＋60、既定＋60、計算は残り＋選択秒、取消は追加した秒数のみ）を実装。完全手動3ボタン契約・保存schema・QR・Backup・統計・IAPは不変。円形ゲージ・タイマー専用画面は不採用。Version 1.4／Build 91は変更せず、TestFlight Uploadは未実施。Decision Log docx v2.23の発行は後続の文書のみのコミット。新語`shotclock.extTime`はCANDIDATE。

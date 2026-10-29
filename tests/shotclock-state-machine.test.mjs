@@ -57,7 +57,7 @@ test("AC-SC3: extension undo works only within 3 s, removes exactly 60 s and giv
 
 test("AC-SC5: a running clock is stored as paused with its remaining time; invalid or out-of-range data falls back safely", () => {
   const c = SC.createClock(45); let t = 0; c.toggle(t); t += 12 * S; c.extend(t);
-  const snap = c.snapshot(t); assert.deepEqual(Object.keys(snap).sort(), ["extCount", "remainMs", "state"]);
+  const snap = c.snapshot(t); assert.deepEqual(Object.keys(snap).sort(), ["extCount", "extSec", "refMs", "remainMs", "state"]);
   const d = SC.createClock(45); assert.equal(d.restore(snap, t + 9999 * S), true);
   assert.equal(d.state, "paused"); assert.equal(d.seconds(t + 9999 * S), 93); assert.equal(d.extCount, 1);
   for (const bad of [null, "x", { state: "bogus", remainMs: 1, extCount: 0 }, { state: "paused", remainMs: NaN, extCount: 0 }, { state: "paused", remainMs: 1, extCount: -1 }, { state: "paused", remainMs: 1, extCount: 1.5 }]) assert.equal(SC.createClock(45).restore(bad, 0), false);
@@ -69,9 +69,9 @@ test("AC-SC10: base times 30/35/40/45/60 only, default 45; storage defaults to O
   assert.deepEqual([...SC.BASES], [30, 35, 40, 45, 60]); assert.equal(SC.DEFAULT_BASE, 45);
   const c = SC.createClock(33); assert.equal(c.base, 45); assert.equal(c.setBase(50), false); assert.equal(c.setBase(60), true); assert.equal(c.seconds(0), 60);
   const mem = v => ({ getItem: () => v, setItem(k, x) { this.last = [k, x]; } });
-  assert.deepEqual(SC.readStore(mem(null)), { enabled: false, base: 45, clock: null });
-  assert.deepEqual(SC.readStore(mem("{bad")), { enabled: false, base: 45, clock: null });
-  assert.deepEqual(SC.readStore(mem(JSON.stringify({ v: 2, enabled: true }))), { enabled: false, base: 45, clock: null });
+  assert.deepEqual(SC.readStore(mem(null)), { enabled: false, base: 45, ext: 60, clock: null });
+  assert.deepEqual(SC.readStore(mem("{bad")), { enabled: false, base: 45, ext: 60, clock: null });
+  assert.deepEqual(SC.readStore(mem(JSON.stringify({ v: 2, enabled: true }))), { enabled: false, base: 45, ext: 60, clock: null });
   assert.equal(SC.readStore(mem(JSON.stringify({ v: 1, enabled: "yes", base: 33 }))).enabled, false);
   const ok = SC.readStore(mem(JSON.stringify({ v: 1, enabled: true, base: 35 }))); assert.equal(ok.enabled, true); assert.equal(ok.base, 35);
   const w = mem(null); SC.writeStore(w, { enabled: true, base: 40, clock: null }); assert.equal(w.last[0], "cueScore.shotClock.v1");
@@ -98,7 +98,7 @@ test("AC-SC1 / AC-SC11: OFF mounts nothing (static), the dock is created only wh
   assert.match(src, /if \(!store\.enabled\) return;\s*\/\/ OFF: nothing is created/);
   const cat = require("../i18n-catalog-shotclock-v1.js");
   assert.deepEqual(Object.keys(cat).sort(), ["en", "ja", "zh-Hans"]);
-  const keys = Object.keys(cat.ja); assert.equal(keys.length, 20);
+  const keys = Object.keys(cat.ja); assert.equal(keys.length, 21);   // 20 (Decision 046) + shotclock.extTime (Decision 047)
   for (const lang of ["en", "zh-Hans"]) assert.deepEqual(Object.keys(cat[lang]), keys);
   assert.equal(cat["zh-Hans"]["shotclock.title"], "出杆计时器");
   assert.equal(cat["zh-Hans"]["shotclock.paused"], "已暂停");

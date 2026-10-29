@@ -7,75 +7,84 @@
   const KEY = "cueScore.shotClock.v1";
   const BASES = Object.freeze([30, 35, 40, 45, 60]);
   const DEFAULT_BASE = 45;
-  const EXT_MS = 60000;
+  const EXTS = Object.freeze([25, 30, 45, 60]);
+  const DEFAULT_EXT = 60;
+  const EXT_MS = DEFAULT_EXT * 1000;                  // default extension; the chosen one is per clock (Decision 047)
   const UNDO_MS = 3000;
   const MAX_MS = 24 * 3600 * 1000;
 
   /* ---------- pure state machine (testable in Node; every method takes `now` in ms) ---------- */
-  function createClock(base) {
-    const c = { state: "idle", base: BASES.includes(base) ? base : DEFAULT_BASE, remainMs: 0, deadline: 0, extCount: 0, undo: null };
-    c.remainMs = c.base * 1000;
+  function createClock(base, extSec) {
+    const c = { state: "idle", base: BASES.includes(base) ? base : DEFAULT_BASE, ext: (EXTS.includes(extSec) ? extSec : DEFAULT_EXT) * 1000, remainMs: 0, deadline: 0, extCount: 0, undo: null, refMs: 0 };
+    c.remainMs = c.base * 1000; c.refMs = c.remainMs;   // refMs = the time the progress bar counts down from (base, or the remaining time right after an extension)
     const remaining = now => (c.state === "running" ? Math.max(0, c.deadline - now) : c.remainMs);
     const sync = now => {
       if (c.state === "running" && c.deadline <= now) { c.state = "expired"; c.remainMs = 0; c.deadline = 0; c.undo = null; return true; }
       return false;
     };
     const api = {
-      get state() { return c.state; }, get base() { return c.base; }, get extCount() { return c.extCount; }, get undo() { return c.undo; },
+      get state() { return c.state; }, get base() { return c.base; }, get extCount() { return c.extCount; }, get undo() { return c.undo; }, get ext() { return c.ext / 1000; }, get refMs() { return c.refMs; },
       remaining, sync,
+      /* progress bar fill 0..1: idle is full, expired is empty, otherwise remaining / reference */
+      fraction(now) { return c.state === "idle" ? 1 : c.state === "expired" ? 0 : Math.max(0, Math.min(1, remaining(now) / Math.max(c.refMs, 1))); },
       seconds(now) { return c.state === "expired" ? 0 : c.state === "idle" ? c.base : Math.ceil(remaining(now) / 1000 - 1e-9); },
-      setBase(sec) { if (!BASES.includes(sec)) return false; c.base = sec; if (c.state === "idle") c.remainMs = sec * 1000; return true; },
+      setBase(sec) { if (!BASES.includes(sec)) return false; c.base = sec; if (c.state === "idle") { c.remainMs = sec * 1000; c.refMs = c.remainMs; } return true; },
       /* the single main button: start (idle / expired), pause (running), resume (paused) */
       toggle(now) {
         sync(now);
-        if (c.state === "idle") { c.remainMs = c.base * 1000; c.state = "running"; c.deadline = now + c.remainMs; }
+        if (c.state === "idle") { c.remainMs = c.base * 1000; c.refMs = c.remainMs; c.state = "running"; c.deadline = now + c.remainMs; }
         else if (c.state === "running") { c.remainMs = remaining(now); c.deadline = 0; c.state = "paused"; }
         else if (c.state === "paused") { c.state = "running"; c.deadline = now + c.remainMs; }
-        else { c.remainMs = c.base * 1000; c.extCount = 0; c.state = "running"; c.deadline = now + c.remainMs; }
+        else { c.remainMs = c.base * 1000; c.refMs = c.remainMs; c.extCount = 0; c.state = "running"; c.deadline = now + c.remainMs; }
         c.undo = null; return c.state;
       },
       /* reset: back to the base time, running / paused state is kept, expired goes back to idle, no undo */
       reset(now) {
         sync(now);
-        c.extCount = 0; c.remainMs = c.base * 1000; c.undo = null;
+        c.extCount = 0; c.remainMs = c.base * 1000; c.refMs = c.remainMs; c.undo = null;
         if (c.state === "expired") c.state = "idle";
         if (c.state === "running") c.deadline = now + c.remainMs;
         return c.state;
       },
-      /* extend +60 s: no count limit; disabled while idle; from expired it restarts counting at 60 s */
+      /* extend by the chosen seconds (25 / 30 / 45 / 60): remaining + chosen, no count limit; disabled while idle; from expired it restarts counting at the chosen seconds.
+       * The bar is re-based: it counts down from the remaining time right after the extension. */
       extend(now) {
         sync(now);
         if (c.state === "idle") return false;
-        const wasExpired = c.state === "expired";
-        if (wasExpired) { c.remainMs = EXT_MS; c.state = "running"; c.deadline = now + EXT_MS; }
-        else if (c.state === "running") c.deadline += EXT_MS;
-        else c.remainMs += EXT_MS;
-        c.extCount += 1; c.undo = { wasExpired, at: now };
+        const wasExpired = c.state === "expired", prevRef = c.refMs;
+        if (wasExpired) { c.remainMs = c.ext; c.state = "running"; c.deadline = now + c.ext; }
+        else if (c.state === "running") c.deadline += c.ext;
+        else c.remainMs += c.ext;
+        c.refMs = Math.max(remaining(now), 1);
+        c.extCount += 1; c.undo = { wasExpired, at: now, added: c.ext, prevRef };
         return true;
       },
-      /* undo of the last extension, only within 3 s; elapsed time is not given back */
+      /* undo of the last extension, only within 3 s; takes back the seconds actually added; elapsed time is not given back */
       undoExtend(now) {
         const u = c.undo;
         if (!u || now - u.at > UNDO_MS) { c.undo = null; return false; }
         sync(now);
         if (u.wasExpired) { c.state = "expired"; c.remainMs = 0; c.deadline = 0; }
-        else if (c.state === "running") { c.deadline -= EXT_MS; if (c.deadline <= now) { c.state = "expired"; c.remainMs = 0; c.deadline = 0; } }
-        else if (c.state === "paused") c.remainMs = Math.max(0, c.remainMs - EXT_MS);
+        else if (c.state === "running") { c.deadline -= u.added; if (c.deadline <= now) { c.state = "expired"; c.remainMs = 0; c.deadline = 0; } }
+        else if (c.state === "paused") c.remainMs = Math.max(0, c.remainMs - u.added);
+        c.refMs = u.prevRef;
         c.extCount = Math.max(0, c.extCount - 1); c.undo = null; return true;
       },
       expireUndo(now) { if (c.undo && now - c.undo.at > UNDO_MS) { c.undo = null; return true; } return false; },
       /* persistence: a running clock is stored with its remaining time and comes back paused */
-      snapshot(now) { sync(now); return { state: c.state, remainMs: Math.round(remaining(now)), extCount: c.extCount }; },
+      snapshot(now) { sync(now); return { state: c.state, remainMs: Math.round(remaining(now)), extCount: c.extCount, refMs: Math.round(c.refMs), extSec: c.ext / 1000 }; },
       restore(snap, now) {
         if (!snap || typeof snap !== "object") return false;
         const states = ["idle", "running", "paused", "expired"];
         if (!states.includes(snap.state) || !Number.isFinite(snap.remainMs) || !Number.isInteger(snap.extCount) || snap.extCount < 0 || snap.extCount > 9999) return false;
-        const max = c.base * 1000 + snap.extCount * EXT_MS;
+        const maxExt = EXTS.includes(snap.extSec) ? snap.extSec * 1000 : EXTS[EXTS.length - 1] * 1000;
+        const max = c.base * 1000 + snap.extCount * maxExt;
         const remain = Math.min(Math.max(0, snap.remainMs), Math.min(max, MAX_MS));
         c.extCount = snap.extCount; c.undo = null; c.deadline = 0;
-        if (snap.state === "idle") { c.state = "idle"; c.remainMs = c.base * 1000; c.extCount = 0; }
-        else if (snap.state === "expired" || remain <= 0) { c.state = "expired"; c.remainMs = 0; }
-        else { c.state = "paused"; c.remainMs = remain; }
+        if (EXTS.includes(snap.extSec)) c.ext = snap.extSec * 1000;      // a resumed match keeps the extension it was played with
+        if (snap.state === "idle") { c.state = "idle"; c.remainMs = c.base * 1000; c.refMs = c.remainMs; c.extCount = 0; }
+        else if (snap.state === "expired" || remain <= 0) { c.state = "expired"; c.remainMs = 0; c.refMs = c.base * 1000; }
+        else { c.state = "paused"; c.remainMs = remain; c.refMs = Number.isFinite(snap.refMs) && snap.refMs >= remain && snap.refMs <= Math.min(max, MAX_MS) ? snap.refMs : Math.max(c.base * 1000, remain); }
         return true;
       }
     };
@@ -84,21 +93,22 @@
 
   /* ---------- storage (own key only; every access is guarded) ---------- */
   function readStore(storage) {
-    const out = { enabled: false, base: DEFAULT_BASE, clock: null };
+    const out = { enabled: false, base: DEFAULT_BASE, ext: DEFAULT_EXT, clock: null };
     try {
       const raw = storage && storage.getItem(KEY); if (!raw) return out;
       const v = JSON.parse(raw); if (!v || typeof v !== "object" || v.v !== 1) return out;
       if (v.enabled === true) out.enabled = true;
       if (BASES.includes(v.base)) out.base = v.base;
+      if (EXTS.includes(v.ext)) out.ext = v.ext;
       if (v.clock && typeof v.clock === "object" && typeof v.clock.key === "string") out.clock = v.clock;
-    } catch (_) { /* invalid value -> defaults (OFF, 45 s) */ }
+    } catch (_) { /* invalid value -> defaults (OFF, 45 s, +60 s) */ }
     return out;
   }
   function writeStore(storage, data) {
-    try { storage && storage.setItem(KEY, JSON.stringify({ v: 1, enabled: data.enabled === true, base: data.base, clock: data.clock || null })); return true; } catch (_) { return false; }
+    try { storage && storage.setItem(KEY, JSON.stringify({ v: 1, enabled: data.enabled === true, base: data.base, ext: EXTS.includes(data.ext) ? data.ext : DEFAULT_EXT, clock: data.clock || null })); return true; } catch (_) { return false; }
   }
 
-  const api = { KEY, BASES, DEFAULT_BASE, EXT_MS, UNDO_MS, createClock, readStore, writeStore };
+  const api = { KEY, BASES, DEFAULT_BASE, EXTS, DEFAULT_EXT, EXT_MS, UNDO_MS, createClock, readStore, writeStore };
   if (typeof module === "object" && module.exports) module.exports = api;
   if (typeof document === "undefined" || !root.document) return;
   root.CueScoreShotClockV1 = api;
@@ -133,7 +143,8 @@
     let h = 0x811c9dc5; for (let i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
     return "m" + h.toString(16);
   };
-  const level = (c, n) => (c.state === "expired" ? "over" : c.state === "idle" ? "ok" : n <= 5 ? "danger" : n <= 10 ? "warn" : "ok");
+  /* bar colour level: remaining seconds decide warn / danger (they win over everything); otherwise "ext" while an extension is in use, else "ok" (normal). Expired = "over" (bar empty, digits red). */
+  const level = (c, n) => (c.state === "expired" ? "over" : c.state === "idle" ? "ok" : n <= 5 ? "danger" : n <= 10 ? "warn" : c.extCount > 0 ? "ext" : "ok");
 
   function persistClock() {
     if (!clock) return;
@@ -145,11 +156,11 @@
   function mount() {
     const s = screen(), wrap = s && $(".pro-log-wrap", s);
     if (!s || !wrap || dock) return false;
-    dock = mk('<section class="cue-sc-dock" role="timer"><div class="cue-sc-bar" role="presentation"><i></i></div><div class="cue-sc-time"><b class="cue-sc-num"></b><span class="cue-sc-unit"></span></div>' +
+    dock = mk('<section class="cue-sc-dock" role="timer"><div class="cue-sc-bar" role="presentation"><i></i></div><div class="cue-sc-time"><span class="cue-sc-row"><b class="cue-sc-num"></b><span class="cue-sc-sec"></span></span><span class="cue-sc-unit"></span></div>' +
       '<button type="button" class="cue-sc-btn cue-sc-extb"></button><button type="button" class="cue-sc-btn cue-sc-resetb"><span class="cue-sc-lb"></span></button><button type="button" class="cue-sc-btn cue-sc-main"></button>' +
       '<span class="cue-sc-sr" aria-live="polite"></span></section>');
     wrap.appendChild(dock); s.classList.add("cue-sc-on");
-    els = { num: $(".cue-sc-num", dock), unit: $(".cue-sc-unit", dock), fill: $(".cue-sc-bar i", dock), main: $(".cue-sc-main", dock), ext: $(".cue-sc-extb", dock), rst: $(".cue-sc-resetb", dock), live: $(".cue-sc-sr", dock), wrap };
+    els = { num: $(".cue-sc-num", dock), sec: $(".cue-sc-sec", dock), unit: $(".cue-sc-unit", dock), fill: $(".cue-sc-bar i", dock), main: $(".cue-sc-main", dock), ext: $(".cue-sc-extb", dock), rst: $(".cue-sc-resetb", dock), live: $(".cue-sc-sr", dock), wrap };
     els.main.addEventListener("click", () => { clock.toggle(Date.now()); after(); });
     els.rst.addEventListener("click", () => { clock.reset(Date.now()); after(); });
     els.ext.addEventListener("click", () => { const now = Date.now(); if (clock.undo) clock.undoExtend(now); else clock.extend(now); after(); scheduleUndoExpiry(); });
@@ -185,32 +196,30 @@
     if (!clock || !dock) return;
     const now = Date.now(); clock.sync(now);
     const n = clock.seconds(now), st = clock.state, lv = level(clock, n), un = clock.undo && now - clock.undo.at <= UNDO_MS;
-    const total = Math.max(clock.base * 1000 + clock.extCount * EXT_MS, 1);
-    const frac = st === "idle" ? 1 : Math.max(0, Math.min(1, clock.remaining(now) / total));
-    els.fill.style.width = frac * 100 + "%";
-    const sig = [n, st, lv, un ? 1 : 0, clock.extCount, textScale].join("|");
+    els.fill.style.width = clock.fraction(now) * 100 + "%";
+    const sig = [n, st, lv, un ? 1 : 0, clock.extCount, clock.ext, textScale].join("|");
     if (sig === lastSig) return;                      // only the progress bar moves between whole seconds: no DOM churn under the user's finger
     lastSig = sig;
-    dock.dataset.lv = lv; dock.dataset.st = st; dock.style.setProperty("--cue-scv-ts", String(textScale));
+    dock.dataset.lv = lv; dock.dataset.st = st; dock.dataset.dg = String(String(n).length); dock.style.setProperty("--cue-scv-ts", String(textScale));
     dock.classList.toggle("cue-sc-lg", textScale >= 1.3); dock.classList.toggle("cue-sc-lg2", textScale >= 1.6);
     els.wrap.classList.remove("cue-sc-nolog");
     if (textScale >= 1.3 && els.wrap.getBoundingClientRect().height < 200) els.wrap.classList.add("cue-sc-nolog");
     els.num.textContent = String(n);
     const ct = x => '<span class="cue-sc-cap-t">' + x + "</span>";
-    const sec = T("shotclock.sec");
-    els.unit.innerHTML = st === "idle" ? ct(T("shotclock.ready")) : st === "paused" ? ct(T("shotclock.paused")) : st === "expired" ? ICO + ct(T("shotclock.expired")) : lv === "ok" ? ct(sec) : ICO + ct(sec);
+    els.sec.textContent = T("shotclock.sec");        // the seconds unit sits to the right of the digits in every state
+    els.unit.innerHTML = st === "idle" ? ct(T("shotclock.ready")) : st === "paused" ? ct(T("shotclock.paused")) : st === "expired" ? ct(T("shotclock.expired")) : "";
     const label = st === "running" ? T("shotclock.pause") : st === "paused" ? T("shotclock.resume") : T("shotclock.start");
     els.main.innerHTML = '<span class="cue-sc-ic">' + (st === "running" ? ICON_PAUSE : ICON_PLAY) + '</span><span class="cue-sc-lb"></span>';
     $(".cue-sc-lb", els.main).textContent = label; els.main.setAttribute("aria-label", T("shotclock.aria.role") + ", " + label);
     $(".cue-sc-lb", els.rst).textContent = T("shotclock.reset");
     els.rst.disabled = st === "idle";
-    const hot = lv !== "ok" && !un;
+    const hot = (lv === "warn" || lv === "danger" || lv === "over") && !un;
     els.ext.dataset.hot = hot ? "1" : "0"; els.ext.dataset.undo = un ? "1" : "0";
     els.ext.dataset.count = !un && clock.extCount > 0 ? "×" + clock.extCount : "";
     els.ext.disabled = st === "idle";
     els.ext.innerHTML = '<span class="cue-sc-lb"></span><small></small>';
-    $(".cue-sc-lb", els.ext).textContent = un ? T("shotclock.undo") : T("shotclock.extend"); $("small", els.ext).textContent = un ? "−60" : "+60";
-    els.ext.setAttribute("aria-label", un ? T("shotclock.aria.undo") : (clock.extCount > 0 ? T("shotclock.aria.extend") + ", " + T("shotclock.aria.extCount", { count: clock.extCount }) : T("shotclock.aria.extend")));
+    $(".cue-sc-lb", els.ext).textContent = un ? T("shotclock.undo") : T("shotclock.extend"); $("small", els.ext).textContent = (un ? "−" : "+") + clock.ext;
+    els.ext.setAttribute("aria-label", un ? T("shotclock.aria.undo") : (clock.extCount > 0 ? T("shotclock.aria.extend", { sec: clock.ext }) + ", " + T("shotclock.aria.extCount", { count: clock.extCount }) : T("shotclock.aria.extend", { sec: clock.ext })));
     const msg = st === "expired" ? T("shotclock.aria.expired") : (st === "running" && [30, 10, 5].includes(n)) ? T("shotclock.aria.left", { count: n }) : "";
     if (msg && msg !== lastAnnounce) { els.live.textContent = msg; lastAnnounce = msg; } else if (!msg) lastAnnounce = "";
   }
@@ -218,7 +227,7 @@
   function show() {
     if (!store.enabled) return;                       // OFF: nothing is created on the match screen
     if (!mount()) return;
-    clock = createClock(store.base);
+    clock = createClock(store.base, store.ext);
     const key = matchKey(), saved = store.clock;
     if (!pendingNew && saved && saved.key === key) clock.restore(saved, Date.now());
     pendingNew = false;
@@ -246,21 +255,28 @@
     if (!start || !card || $(".cue-sc-setup", card)) return;
     const sec = mk('<section class="cue-sc-setup"><div class="cue-sc-setup-row"><div class="cue-sc-setup-text"><span class="cue-sc-setup-title"></span><span class="cue-sc-setup-sub"></span></div>' +
       '<button type="button" role="switch" class="cue-sc-switch"><span class="cue-sc-track"><span class="cue-sc-knob"></span></span></button></div>' +
-      '<div class="cue-sc-base" role="radiogroup"><span class="cue-sc-base-label"></span><span class="cue-sc-base-btns"></span></div></section>');
+      '<div class="cue-sc-base" role="radiogroup"><span class="cue-sc-base-label"></span><span class="cue-sc-base-btns"></span></div>' +
+      '<div class="cue-sc-base cue-sc-ext" role="radiogroup"><span class="cue-sc-base-label"></span><span class="cue-sc-base-btns"></span></div></section>');
     start.parentNode.insertBefore(sec, start);
-    const sw = $(".cue-sc-switch", sec), baseWrap = $(".cue-sc-base", sec), btns = $(".cue-sc-base-btns", sec);
+    const sw = $(".cue-sc-switch", sec), baseWrap = $(".cue-sc-base:not(.cue-sc-ext)", sec), btns = $(".cue-sc-base-btns", baseWrap);
+    const extWrap = $(".cue-sc-ext", sec), extBtns = $(".cue-sc-base-btns", extWrap);
     $(".cue-sc-setup-title", sec).textContent = T("shotclock.title");
     $(".cue-sc-setup-sub", sec).textContent = T("shotclock.supplement");
     $(".cue-sc-base-label", sec).textContent = T("shotclock.baseTime");
+    $(".cue-sc-base-label", extWrap).textContent = T("shotclock.extTime");
+    extWrap.setAttribute("aria-label", T("shotclock.extTime") + " (" + T("shotclock.sec") + ")");
     sw.setAttribute("aria-label", T("shotclock.title"));
     baseWrap.setAttribute("aria-label", T("shotclock.baseTime") + " (" + T("shotclock.sec") + ")");
     BASES.forEach(b => { const o = doc.createElement("button"); o.type = "button"; o.setAttribute("role", "radio"); o.dataset.base = String(b); o.className = "cue-sc-base-btn"; o.textContent = String(b); o.setAttribute("aria-label", b + " " + T("shotclock.sec")); btns.appendChild(o); });
+    EXTS.forEach(x => { const o = doc.createElement("button"); o.type = "button"; o.setAttribute("role", "radio"); o.dataset.ext = String(x); o.className = "cue-sc-base-btn"; o.textContent = "+" + x; o.setAttribute("aria-label", "+" + x + " " + T("shotclock.sec")); extBtns.appendChild(o); });
     const paint = () => {
-      sw.setAttribute("aria-checked", String(store.enabled)); sec.dataset.on = store.enabled ? "1" : "0"; baseWrap.hidden = !store.enabled;
+      sw.setAttribute("aria-checked", String(store.enabled)); sec.dataset.on = store.enabled ? "1" : "0"; baseWrap.hidden = !store.enabled; extWrap.hidden = !store.enabled;
+      extBtns.querySelectorAll("button").forEach(o => o.setAttribute("aria-checked", String(Number(o.dataset.ext) === store.ext)));
       btns.querySelectorAll("button").forEach(o => o.setAttribute("aria-checked", String(Number(o.dataset.base) === store.base)));
     };
     sw.addEventListener("click", () => { store.enabled = !store.enabled; save(); paint(); });
     btns.addEventListener("click", e => { const b = e.target.closest("button[data-base]"); if (!b) return; store.base = Number(b.dataset.base); save(); paint(); });
+    extBtns.addEventListener("click", e => { const b = e.target.closest("button[data-ext]"); if (!b) return; store.ext = Number(b.dataset.ext); save(); paint(); });
     paint();
   }
 
@@ -280,7 +296,7 @@
   }
   /* verification hooks (inert unless called): pseudo text enlargement for the 100/130/160/200% layout checks, and read-only state */
   api.setTextScale = v => { textScale = Number(v) > 0 ? Number(v) : 1; render(); };
-  api.debug = () => ({ enabled: store.enabled, base: store.base, mounted: Boolean(dock), state: clock ? clock.state : null, extCount: clock ? clock.extCount : null });
+  api.debug = () => ({ enabled: store.enabled, base: store.base, ext: store.ext, mounted: Boolean(dock), state: clock ? clock.state : null, extCount: clock ? clock.extCount : null });
   api.reloadStore = () => { store = readStore(storage); };
   if (doc.readyState === "loading") doc.addEventListener("DOMContentLoaded", init); else init();
 })(typeof globalThis !== "undefined" ? globalThis : this);

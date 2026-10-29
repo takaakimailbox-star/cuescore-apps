@@ -28,7 +28,7 @@ test("numbering: Decision 039 / Official 123 / 124 remain published once, 109 re
   const nums = fs.readdirSync(new URL("docs/official/", root)).filter(n => /^\d+_.*\.md$/.test(n)).map(n => Number(n.split("_")[0]));
   for (const n of [121, 122, 123, 124]) assert.equal(nums.filter(v => v === n).length, 1, String(n));
   assert.equal(nums.filter(value => value === 109).length, 1);
-  assert.equal(Math.max(...nums), 135);
+  assert.equal(Math.max(...nums), 137);
   const t = zipEntry(LOG("2.15"), "word/document.xml").replace(/<[^>]+>/g, "");
   assert.deepEqual([...t.matchAll(/Decision (\d{3})｜/g)].map(m => Number(m[1])), Array.from({ length: 39 }, (_, i) => i + 1));
   assert.match(t, /Decision 039｜多言語化 U11 の訂正/);

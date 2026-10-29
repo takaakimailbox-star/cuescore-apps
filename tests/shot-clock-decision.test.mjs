@@ -41,10 +41,11 @@ const text = path => readZipEntry(path, "word/document.xml").replace(/<[^>]+>/g,
 const decision = read("docs/official/134_CueScore_Shot_Clock_B4_Manual_Dock_Decision.md");
 const spec = read("docs/official/135_CueScore_Shot_Clock_B4_Manual_Dock_Spec.md");
 
-test("Official 134 and 135 are published exactly once and are the highest Official numbers", () => {
+test("Official 134 and 135 are published exactly once (Decision 047 later adds 136 / 137 as the highest)", () => {
   const nums = fs.readdirSync(new URL("docs/official/", root)).filter(n => /^\d+_.*\.md$/.test(n)).map(n => Number(n.split("_")[0]));
   for (const n of [134, 135]) assert.equal(nums.filter(v => v === n).length, 1, String(n));
-  assert.equal(Math.max(...nums), 135);
+  assert.equal(Math.max(...nums), 137);
+  for (const n of [136, 137]) assert.equal(nums.filter(v => v === n).length, 1, String(n));
   assert.equal(nums.filter(v => v === 109).length, 1);
   assert.match(decision, /Decision 046/);
   assert.match(spec, /Official 134（Decision 046）/);

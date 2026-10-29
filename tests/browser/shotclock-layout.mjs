@@ -9,7 +9,7 @@ import fs from "node:fs";
 const KEY = "cueScore.shotClock.v1";
 const LANGS = (process.env.SC_LANGS || "ja,en,zh-Hans").split(",");
 const DISCS = (process.env.SC_DISCIPLINES || "9ball,10ball,jpa9,rotation,straightPool,threeCushion").split(",");
-const VIEWS = [[320, 568], [375, 667], [375, 812], [390, 844], [430, 932]];
+const VIEWS = [[320, 568], [375, 667], [375, 812], [390, 844], [430, 932]].filter(v => !process.env.SC_VIEWS || process.env.SC_VIEWS.split(",").includes(v[0] + "x" + v[1]));
 const SCALES = [1, 1.3, 1.6, 2];
 const out = { cases: 0, failures: [], logRows: [], ts: "" };
 const fail = (tag, msg) => { out.failures.push(tag + ": " + msg); console.log("FAIL", tag, msg); };
@@ -24,10 +24,11 @@ const CHECK = `(() => {
   const rects = Object.fromEntries(Object.entries(parts).map(([k, n]) => [k, R(n)])), keys = Object.keys(rects);
   for (let i = 0; i < keys.length; i++) for (let j = i + 1; j < keys.length; j++) { const a = rects[keys[i]], b = rects[keys[j]]; if (a.left < b.right - 0.5 && b.left < a.right - 0.5 && a.top < b.bottom - 0.5 && b.top < a.bottom - 0.5) issues.push("overlap " + keys[i] + "/" + keys[j]); }
   for (const k of ["ext", "rst", "main"]) { const r = rects[k]; if (r.width < 44 || r.height < 44) issues.push("hit area " + k + " " + Math.round(r.width) + "x" + Math.round(r.height)); }
-  dock.querySelectorAll(".cue-sc-num,.cue-sc-unit,.cue-sc-lb,.cue-sc-btn small").forEach(el => {
+  dock.querySelectorAll(".cue-sc-num,.cue-sc-sec,.cue-sc-unit,.cue-sc-lb,.cue-sc-btn small").forEach(el => {
+    if (!el.getClientRects().length) return;      // an empty state caption is display:none (Decision 047)
     const cs = getComputedStyle(el), fs = parseFloat(cs.fontSize), r = R(el), par = el.closest(".cue-sc-btn") || dock;
     if (!inside(r, R(par), 1.5)) issues.push("text '" + el.textContent.trim().slice(0, 14) + "' outside " + (par.className.split(" ")[1] || "dock"));
-    if (el.matches(".cue-sc-lb,.cue-sc-btn small,.cue-sc-num") && r.height > fs * 1.7) issues.push("text '" + el.textContent.trim().slice(0, 14) + "' wraps");
+    if (el.matches(".cue-sc-lb,.cue-sc-btn small,.cue-sc-num,.cue-sc-sec") && r.height > fs * 1.7) issues.push("text '" + el.textContent.trim().slice(0, 14) + "' wraps");
     if (el.matches(".cue-sc-unit") && r.height > fs * 2.9) issues.push("caption wraps to 3+ lines");
     if (fs < 12) issues.push("font below 12px: " + el.className + " " + fs);
   });

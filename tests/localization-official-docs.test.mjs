@@ -56,7 +56,7 @@ test("Official document numbers 107, 108 and final Glossary 109 are published un
     assert.equal(numbers.filter(value => value === number).length, 1, `Official ${number} must be unique`);
   }
   assert.equal(numbers.filter(value => value === 109).length, 1);
-  assert.equal(Math.max(...numbers), 135, "highest Official md number must be 135");
+  assert.equal(Math.max(...numbers), 137, "highest Official md number must be 137");
 });
 
 test("Decision Log v2.6 is preserved and v2.7 keeps Decision 001-030 byte-identical", () => {
