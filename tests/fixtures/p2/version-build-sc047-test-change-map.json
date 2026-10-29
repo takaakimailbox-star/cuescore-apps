@@ -1,0 +1,29 @@
+{
+ "gate": "Shot Clock integrated improvement evaluation build: Version 1.4 / Build 92, cache version build91-plana-v1 -> build92-sc047-v1, shotclock-v1.css ?v=1.2-sc047-v1, shotclock-v1.js / i18n-catalog-shotclock-v1.js ?v=1.1-sc047-v1",
+ "productChanges": {
+  "index.html": "cache-version strings + shotclock asset queries",
+  "sw.js": "cache-version + shotclock asset queries",
+  "project.pbxproj": "CURRENT_PROJECT_VERSION 91->92 (x2)",
+  "shotclock-v1.js / .css / catalog": "already on main (aad29cd, Decision 047); only their cache queries change here"
+ },
+ "digests": {
+  "index.html": {
+   "before": "cb6cbee3a360c64bde5fc52dd8a3f9fe27e9756da17375542826ef9e901189f7",
+   "after": "33dfd559a108308782ec20ce448d9e0aacb1663309be507a87a43fef55d1b323"
+  },
+  "sw.js": {
+   "before": "ecb0d3a574d80308cec2dc4ba336cabb63f2ec596a757a70b30e6fe1adfbbba4",
+   "after": "3980fc21e50c4bdb582ce823f10769359756f1f7e2b2c7c519b0061624f86c8e"
+  },
+  "ios/App/App.xcodeproj/project.pbxproj": {
+   "before": "7e967be89cce3d6e088a656fafd7695cc188a227927f4115022f6918a0ca6cfa",
+   "after": "b74762617d4343b9b01da33d2f71b6c92a033c7386eec6fa766635cc675abe7f"
+  }
+ },
+ "pinnedTests": [
+  "localization-ac13-voiceover-release-requirement-decision",
+  "localization-glossary-25-approval-decision",
+  "localization-glossary-finalization-decision",
+  "localization-ios-first-entry-language-decision"
+ ]
+}

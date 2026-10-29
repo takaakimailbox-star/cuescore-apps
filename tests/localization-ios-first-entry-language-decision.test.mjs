@@ -74,13 +74,13 @@ test("Official 108 v1.1, Official 130, Official 109, the resolver, catalogs, pro
     "docs/official/130_CueScore_Localization_AC13_VoiceOver_Release_Requirement_Decision.md": "d9850a3a54603bf848c2e7149ae716ec4c6ab3f8d04777b8dc7fead114ab6328",
     "docs/official/109_CueScore_Localization_Glossary.md": "5f1eb130eb07025c5b587558093117f17ac382de137932a58e0e64e1a6540a9e",
     "i18n-v1.js": "e3a5909a0007c7d28c13ae1b96e0cb9671065302a459ebf1ec343ac77ceb10c7",
-    "index.html": "cb6cbee3a360c64bde5fc52dd8a3f9fe27e9756da17375542826ef9e901189f7",
+    "index.html": "33dfd559a108308782ec20ce448d9e0aacb1663309be507a87a43fef55d1b323",
     "monetization-v1.js": "9da40f6be8c3dd5c2bb2535325a6bc83a890ad16e38d649e44315222115f6c60",
     "i18n-catalog-ja-v1.js": "bfe2b3b0cd0a1734ebc259128dc5dade248d95f26f89a80a5465cd106e143a39",
     "i18n-catalog-en-v1.js": "27f3bed6c3e6988482e6c91367e782eb83d5caa73076e90ecdc99f36da992e2c",
     "i18n-catalog-zh-hans-v1.js": "224c1f96c57d22c77fb164558ffd1eecfb570f8c6c27d5cd372c3f03c5c381e6",
-    "sw.js": "ecb0d3a574d80308cec2dc4ba336cabb63f2ec596a757a70b30e6fe1adfbbba4",
-    "ios/App/App.xcodeproj/project.pbxproj": "7e967be89cce3d6e088a656fafd7695cc188a227927f4115022f6918a0ca6cfa",
+    "sw.js": "3980fc21e50c4bdb582ce823f10769359756f1f7e2b2c7c519b0061624f86c8e",
+    "ios/App/App.xcodeproj/project.pbxproj": "b74762617d4343b9b01da33d2f71b6c92a033c7386eec6fa766635cc675abe7f",
     "ios/App/App/Info.plist": "bfdc079bd92ba93f98473ec39c36843b143736de7754687a64c32940d21933f8",
     "ios/App/App/Info-ScoreRC.plist": "2b0b11c99b67d6566ccbe46c0f684d201925c736a7ae03761fd64416af56b8f3"
 };
