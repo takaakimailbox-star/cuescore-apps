@@ -1,0 +1,23 @@
+{
+ "gate": "Build 94 numbering: Version 1.4 / Build 94, cache version build93-startreach-v1 -> build94-sc21-v1; pinned assertions updated (build number, cache version, sha256 of index.html / sw.js / project.pbxproj)",
+ "changedTests": [
+  "build32-final-review-followup.test.mjs",
+  "build33-home-reference.test.mjs",
+  "build76-settings-scroll-lock.test.mjs",
+  "game-result-match-detail-common-layout.test.mjs",
+  "i18n-foundation-v1.test.mjs",
+  "ios-native-camera-localization.test.mjs",
+  "ios27-scene-lifecycle.test.mjs",
+  "localization-ac13-voiceover-release-requirement-decision.test.mjs",
+  "localization-glossary-25-approval-decision.test.mjs",
+  "localization-glossary-finalization-decision.test.mjs",
+  "localization-ios-first-entry-language-decision.test.mjs",
+  "match-sharing-stage5a.test.mjs",
+  "native-ios-foundation.test.mjs",
+  "navigation-shell-phase1.test.mjs",
+  "official-website-v1.test.mjs",
+  "player-detail-final-rc-regression.test.mjs",
+  "start-button-reach.test.mjs"
+ ],
+ "note": "assertions changed only in their pinned build number / cache string / digest values"
+}

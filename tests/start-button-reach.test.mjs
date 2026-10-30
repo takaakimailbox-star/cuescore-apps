@@ -28,6 +28,6 @@ test("SB93-2 the setup scroller keeps its bottom padding (nav height + 24px + sa
 test("SB93-3 the start button markup, handlers and the shot-clock / match logic files are untouched by the fix", () => {
   const html = read("index.html");
   assert.match(html, /<button class="start-game-button new-match-start-v1 cue-home-start-v2" id="startGameBtn" type="button">/);
-  assert.match(read("sw.js"), /navigation-shell-phase1\.css\?v=2\.0-build93-startreach-v1/);
-  assert.match(html, /navigation-shell-phase1\.css\?v=2\.0-build93-startreach-v1/);
+  assert.match(read("sw.js"), /navigation-shell-phase1\.css\?v=2\.0-build94-sc21-v1/);
+  assert.match(html, /navigation-shell-phase1\.css\?v=2\.0-build94-sc21-v1/);
 });

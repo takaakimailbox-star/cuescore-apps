@@ -91,8 +91,8 @@ test("Phase 1 assets load last, ship in native web, and remain offline",()=>{
   assert.ok(index.indexOf("ui-revision-v12.css")<index.lastIndexOf("navigation-shell-phase1.css"));
   for(const file of ["navigation-shell-phase1.css","navigation-shell-phase1.js"]){
     assert.ok(build.includes(`"${file}"`));
-    assert.ok(sw.includes(`"./${file}?v=${file.endsWith(".css")?"2.0-build93-startreach-v1":"2.0-build81-player-list-bottom-inset-v1"}"`));
+    assert.ok(sw.includes(`"./${file}?v=${file.endsWith(".css")?"2.0-build94-sc21-v1":"2.0-build81-player-list-bottom-inset-v1"}"`));
   }
-  assert.match(index,/navigation-shell-phase1\.css\?v=2\.0-build93-startreach-v1/);
+  assert.match(index,/navigation-shell-phase1\.css\?v=2\.0-build94-sc21-v1/);
   assert.match(index,/navigation-shell-phase1\.js\?v=2\.0-build81-player-list-bottom-inset-v1/);
 });
