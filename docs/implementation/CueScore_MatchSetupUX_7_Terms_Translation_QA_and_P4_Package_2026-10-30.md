@@ -1,6 +1,6 @@
 # 試合設定画面 UI 試験実装の新規翻訳 7 キー QA・P4承認資料（2026年10月30日）
 
-状態: **資料のみ（承認前）。** 訳文は `CANDIDATE`／**P3-PROVISIONAL** のまま。`P4-APPROVED` と記録しない。人間の独立レビューは**未実施**（`P4-REVIEWED` は付与しない）。製品コード・採番・ASC は変更していない（Build 95 は Xcode 27.2 の受付待ちで配布 STOP 継続）。
+状態: **資料のみ。2026-10-30 に PO が案A（3 キー）を承認済み（§10）。** 訳文は `CANDIDATE`／**P3-PROVISIONAL** のまま。`P4-APPROVED` と記録しない。人間の独立レビューは**未実施**（`P4-REVIEWED` は付与しない）。製品コード・採番・ASC は変更していない（Build 95 は Xcode 27.2 の受付待ちで配布 STOP 継続）。
 対象: `i18n-catalog-setupux-v1.js` の **7 キー**（Build 95 候補で使用。主カタログには入っていない）。
 
 ## 1. 位置づけと手順（既存P4手順と同形式）
@@ -86,3 +86,20 @@
 - P3-PROVISIONAL を維持（`i18n-catalog-setupux-v1.js`、主カタログに未収録。静的テスト SU-2 で固定）。
 - PO が正式承認するまで P4-APPROVED へ変更しない。承認記録・主カタログ移動・Official／Glossary 後継の発行は、Build 95 の PO 実機評価と正式採用判断の後。
 - Decision 049／Official 140・141 は候補のまま。
+
+## 10. PO 決定の記録（2026年10月30日・Documentation-only）
+- PO は「案A：7 キー → 3 キー」を正式承認した（PO 回答「そういうことか。うん、OK😊」）。対象は整理方針と、本書に記載した 3 キーの候補文言。追加の同一内容の承認は不要。対応言語は ja／en／zh-Hans の 3 言語のまま（「7」は翻訳キー数）。
+- **承認済み 3 キー（ハッシュ固定対象）**:
+  | キー | ja | en | zh-Hans | ハッシュ |
+  |---|---|---|---|---|
+  | `setupux.reason.p2` | 対戦相手を選ぶと試合を開始できます | Select an opponent to start the match | 选择对手后即可开始比赛 | `8e7119f85b3f68a7` |
+  | `setupux.reason.p1` | 先攻プレーヤーを選ぶと試合を開始できます | Select the first player to start the match | 选择先手球员后即可开始比赛 | `dfb84fc2cb977df3` |
+  | `setupux.reason.both` | プレーヤーを選ぶと試合を開始できます | Select players to start the match | 选择球员后即可开始比赛 | `d9d1ec071afa783b` |
+- **整理する 4 キー（製品への反映は別の製品変更 Gate）**:
+  1. `setupux.reason.other`：独立キーを削減。ただし異常な保存状態でも誤った理由を表示しない安全フォールバックは維持する。
+  2. `setupux.reason.aria`：独立キーを削減。VoiceOver は実際の理由文を読み、操作可能な案内には既存の承認済み文言（「対戦相手を選択」等）で選択操作を伝える。意味のない重複読み上げは避ける。
+  3. `setupux.menu.other`：主カタログ既存の「その他／Other／其他」を再利用し、省略記号を付けて表示する。
+  4. `setupux.menu.close`：未使用キーを削減。メニューを閉じる機能（外タップ・Escape）は維持。削除対象は不要な新規翻訳キーであり、既存の製品機能ではない。
+- 残余リスク R1、および**人間の独立レビュー未実施**を維持する。今回の PO 承認を `P4-REVIEWED` と記録しない。
+- **実装状態**: 現行の製品コード（Build 95 候補）は **P3-PROVISIONAL のまま**（`i18n-catalog-setupux-v1.js` は 7 キー、変更なし）。Build 95 の Archive は保護し、「製品修正後の内容」として扱わない。
+- **反映時期**: Build 95 の PO 実機確認と新レイアウトの正式採用判断の後、別の製品変更 Gate で次をまとめて実施する: 不要 4 キーの整理／3 キーの P4 承認 fixture 作成／3 言語の承認ハッシュ固定／主カタログへの統合／VoiceOver 案内の改善／関連テスト更新／必要な Official・Decision の正式化／新 Build 作成。
