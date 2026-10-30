@@ -89,7 +89,7 @@ test("SC47-8: digits and unit are side by side (one baseline row); the unit is i
   assert.match(js, /els\.sec\.textContent = T\("shotclock\.sec"\)/);
   assert.match(css, /\.cue-sc-row\{display:flex;align-items:baseline/);
   assert.match(js, /textContent = \(un \? "−" : "\+"\) \+ clock\.ext/);
-  assert.match(js, /EXTS\.forEach\(x =>/, "setup row offers the extension choices");
+  assert.match(js, /menu\(extBtn, EXTS,/, "setup row offers the extension choices through the tap menu");
 });
 
 test("SC47-9: catalog: extension time term + parameterised aria in 3 languages, P4-APPROVED main-catalog keys (Decision 048)", () => {

@@ -1,0 +1,67 @@
+/* CueScore match-setup UX trial (Build 95 candidate). Presentation only; design basis = the isolated Prototype (2026-10-30).
+ * Layout: header (icon + name in ONE row) / scrolling setup (player cards, Race to, shot-clock row) / independent footer (reason + start match) / tab bar.
+ * The footer is a normal flex child above the tab bar: nothing overlaps the setup rows (no sticky position, no wide shadow). Scoped to the setup screen. */
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3{--cue-sux-tab:calc(68px + env(safe-area-inset-bottom));--cue-sux-bg:#f8f8f7;--cue-sux-line:#e9e9e6;--cue-sux-ink:#1a1a1a;--cue-sux-mute:#6b6b68;
+  display:flex!important;flex-direction:column!important;overflow:hidden!important;padding:calc(4px + env(safe-area-inset-top)) 12px var(--cue-sux-tab)!important}
+/* the setup card becomes a plain scroll region (no white box); its rows are cards of their own */
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-integrated-v2{flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;overscroll-behavior:contain;width:100%!important;max-width:620px!important;margin:0 auto!important;
+  padding:0 0 12px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;gap:0!important;position:relative}
+/* header: icon + name in one row; the back button overlays the row's left edge and stays reachable while scrolling */
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-summary-v2{flex:0 0 auto;margin:0!important;padding:0!important;min-height:52px}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-selected-game-v1{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:10px!important;min-height:52px;margin:0!important;padding:0!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-selected-game-icon-v1{width:38px!important;height:38px!important;margin:0!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-selected-game-name-v1{font-size:24px!important;line-height:1.1!important;margin:0!important;font-weight:850}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-match-setup-back-v3{position:sticky!important;top:0!important;left:0!important;z-index:4;flex:0 0 auto;align-self:flex-start;width:44px!important;height:44px!important;margin:0 0 -52px 0!important}
+/* player cards */
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-grid-v1{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:10px!important;margin:0!important;padding:0!important;position:relative}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-card-v1{display:flex!important;flex-direction:column!important;align-items:stretch!important;min-width:0;margin:0!important;padding:8px!important;gap:0!important;border:1px solid var(--cue-sux-line)!important;border-radius:18px!important;background:#fff!important;box-shadow:none!important;min-height:0!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .new-match-player-select-v1{height:auto!important;min-height:44px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;gap:4px!important;width:100%;margin:-6px 0 0!important;padding:0 2px 6px!important;border:0!important;background:transparent!important;box-shadow:none!important;border-radius:12px}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .new-match-player-select-v1 .new-match-avatar-v1.has-player-avatar-v2{display:grid!important;width:48px!important;height:48px!important;min-width:48px;min-height:48px;margin:0!important;position:relative;flex:0 0 48px!important;aspect-ratio:1/1}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-select-v1 .new-match-avatar-v1.has-player-avatar-v2 img{width:100%!important;height:100%!important;object-fit:cover}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .new-match-player-select-v1 .new-match-player-name-v1{font-size:16px!important;line-height:1.25!important;font-weight:800!important;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center;min-height:20px}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-select-v1 .new-match-chevron-v1{display:none!important}
+/* empty player: dashed frame + add mark + underlined action text (not colour alone) */
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-card-v1.is-empty-v1{border:2px dashed #c9a227!important;background:#fffdf7!important;padding:7px!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .is-empty-v1 .cue-player-stack-v2 .new-match-avatar-v1.has-player-avatar-v2,body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .is-empty-v1 .new-match-avatar-v1.has-player-avatar-v2{border:2px dashed #c9a227!important;overflow:visible!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .is-empty-v1 .new-match-avatar-v1::before{content:"+";position:absolute;right:-5px;bottom:-5px;width:20px;height:20px;border-radius:50%;background:var(--cue-sux-ink);color:#fff;font-size:15px;font-weight:800;line-height:20px;text-align:center;z-index:2}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .is-empty-v1 .new-match-player-select-v1 .new-match-player-name-v1{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere;font-size:15px!important;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;text-decoration-color:#c9a227}
+/* Race to / Skill Level row: label above, value + chevron; value rows align at the bottom of equal-height cards */
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-row-v2{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-rows:auto auto auto!important;grid-template-areas:"lb cv" "v cv" "t cv"!important;align-items:center;align-content:center;column-gap:4px;row-gap:0;width:100%;min-height:52px!important;margin:auto 0 0!important;padding:6px 8px 6px 10px!important;border:1px solid var(--cue-sux-line)!important;border-radius:14px!important;background:#fafaf9!important;text-align:left!important;box-shadow:none!important;overflow:hidden}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-row-v2 .goal-label-v1{grid-area:lb!important;grid-column:1!important;grid-row:1!important;width:auto!important;justify-self:start!important;font-size:12px!important;font-weight:700!important;color:var(--cue-sux-mute)!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-row-v2 strong{grid-area:v!important;grid-column:1!important;grid-row:2!important;justify-self:start!important;margin:0!important;white-space:nowrap;font-size:22px!important;line-height:1.1!important;font-weight:850!important;text-align:left!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-row-v2 .jpa-target-v1{grid-area:t!important;grid-column:1!important;grid-row:3!important;justify-self:start!important;font-size:11px!important;font-weight:700;color:var(--cue-sux-mute);text-align:left!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-row-v2>span[aria-hidden="true"]{grid-area:cv!important;grid-column:2!important;grid-row:1/4!important;justify-self:end!important;align-self:center;font-size:14px!important;color:var(--cue-sux-mute)}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-input-v2,body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .skill-range{display:none!important}
+/* swap button between the two cards, at the avatar height */
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-swap-v1{position:absolute!important;left:-27px!important;top:58px!important;right:auto!important;bottom:auto!important;transform:none!important;width:44px!important;height:44px!important;margin:0!important;z-index:2}
+/* shot clock card */
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-sc-setup{margin:10px 0 0!important;padding:8px 12px!important;border-radius:18px;border-color:var(--cue-sux-line)}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .season-setting-v38,body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .player-name-limit-note{display:none!important}
+/* existing guide card (fewer than two registered players): below the cards, compact; it replaces the footer reason in that state */
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .match-player-guide-v18{order:4!important;margin:10px 0 0!important;padding:10px 12px!important;gap:2px!important;border-radius:18px!important;border-color:var(--cue-sux-line)!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .match-player-guide-v18 strong{font-size:15px!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .match-player-guide-v18 span{font-size:12px!important;line-height:1.4!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .match-player-guide-v18 button{min-height:46px!important;margin-top:6px!important;border-radius:12px!important}
+/* independent footer */
+#cueSetupFooterV1{display:none}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 #cueSetupFooterV1{display:block;flex:0 0 auto;margin:0 -12px;padding:8px 12px 10px;border-top:1px solid var(--cue-sux-line);background:var(--cue-sux-bg)}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-reason-wrap-v1{max-width:620px;margin:0 auto;min-height:26px;display:flex;align-items:center}
+.cue-setup-reason-v1{position:relative;display:flex;align-items:center;gap:6px;margin:0 2px;padding:0;border:0;background:transparent;color:#1a1a1a;font:inherit;font-size:13px;font-weight:700;line-height:18px;text-align:left}
+.cue-setup-reason-v1[hidden]{display:none}
+.cue-setup-reason-v1::before{content:"i";flex:0 0 auto;width:16px;height:16px;border:1.8px solid currentColor;border-radius:50%;font-size:11px;font-weight:900;line-height:13px;text-align:center}
+.cue-setup-reason-v1::after{content:"";position:absolute;inset:-12px -8px}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 #startGameBtn{position:static!important;display:flex!important;align-items:center;justify-content:center;gap:10px;width:100%!important;max-width:620px;margin:0 auto!important;min-height:54px!important;border-radius:16px!important;box-shadow:none!important;font-size:19px!important;font-weight:850!important;opacity:1!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 #startGameBtn:disabled{background:#e4e4e1!important;color:#585855!important;border:1.5px dashed #b9b9b5!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 #startGameBtn:disabled .new-match-play-v1{display:none}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 #startGameBtn:not(:disabled){background:#1a1a1a!important;color:#fff!important;border:0!important}
+/* tap menu (CueScoreMenuV1): anchored list; the Race-to sheet stays in the DOM (invisible) while its short list is shown as this menu */
+.cue-menu-layer-v1{position:fixed;inset:0;z-index:100000}
+.cue-menu-scrim-v1{position:absolute;inset:0;background:rgba(0,0,0,.12)}
+.cue-menu-v1{position:absolute;box-sizing:border-box;overflow-y:auto;padding:6px;border:1px solid #e9e9e6;border-radius:16px;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.18);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif}
+.cue-menu-row-v1{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:46px;padding:6px 12px;border:0;border-radius:10px;background:transparent;color:#1a1a1a;font-family:inherit;font-weight:700;font-size:18px;line-height:1.25;text-align:left;touch-action:manipulation}
+.cue-menu-row-v1 small{margin-left:8px;font-size:12px;font-weight:700;color:#6b6b68}
+.cue-menu-row-v1[aria-selected="true"]{background:#1a1a1a;color:#fff}
+.cue-menu-row-v1[aria-selected="true"] small{color:#ddd}
+.cue-menu-check-v1{flex:0 0 auto;font-weight:900}
+.cue-menu-row-v1:focus-visible{outline:2px solid #1a1a1a;outline-offset:-2px}
+.new-match-race-picker-v1.cue-menu-mode-v1{opacity:0!important;pointer-events:none!important}

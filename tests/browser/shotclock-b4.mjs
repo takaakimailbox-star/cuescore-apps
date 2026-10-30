@@ -33,7 +33,7 @@ for (const lang of LANGS) {
   await W(1500);
   // ---- default OFF: setup row exists, nothing is mounted on the match screen, no stored value
   await goSetup("9ball");
-  let row = await ev(`const r=document.querySelector(".cue-sc-setup");return JSON.stringify({has:!!r,checked:r?.querySelector(".cue-sc-switch").getAttribute("aria-checked"),baseHidden:r?.querySelector(".cue-sc-base").hidden,title:r?.querySelector(".cue-sc-setup-title").textContent,key:localStorage.getItem(${JSON.stringify(KEY)})})`);
+  let row = await ev(`const r=document.querySelector(".cue-sc-setup");return JSON.stringify({has:!!r,checked:r?.querySelector(".cue-sc-switch").getAttribute("aria-checked"),baseHidden:r?.querySelector(".cue-sc-vals").hidden,title:r?.querySelector(".cue-sc-setup-title").textContent,key:localStorage.getItem(${JSON.stringify(KEY)})})`);
   row = JSON.parse(row);
   check(row.has && row.checked === "false" && row.baseHidden && row.key === null, `${tag}: default OFF, base-time hidden, nothing stored (${JSON.stringify(row)})`);
   const titles = { ja: "ショットクロック", en: "Shot Clock", "zh-Hans": "出杆计时器" };
@@ -44,11 +44,12 @@ for (const lang of LANGS) {
   // ---- ON via the real switch, choose 30 s; start a fresh match
   await app.cdp("Page.reload", {}); await W(3500);
   await goSetup("9ball");
-  await press(".cue-sc-switch"); await press('.cue-sc-base-btn[data-base="30"]');
+  await press(".cue-sc-switch"); await press(".cue-sc-val-base");
+  await ev(`[...document.querySelectorAll(".cue-menu-v1 .cue-menu-row-v1")].find(b=>parseInt(b.textContent)===30).click();await W(200)`);
   const store = JSON.parse(await ev(`return localStorage.getItem(${JSON.stringify(KEY)})`));
   check(store.enabled === true && store.base === 30 && store.v === 1, `${tag}: switch and base time are stored under the own key (${JSON.stringify(store)})`);
-  const radios = JSON.parse(await ev(`return JSON.stringify([...document.querySelectorAll(".cue-sc-base-btn")].map(b=>[b.dataset.base,b.getAttribute("aria-checked"),Math.round(b.getBoundingClientRect().width),Math.round(b.getBoundingClientRect().height)]))`));
-  check(JSON.stringify(radios.map(r => r[0])) === '["30","35","40","45","60"]' && radios.filter(r => r[1] === "true").length === 1 && radios[0][1] === "true" && radios.every(r => r[2] >= 44 && r[3] >= 44), `${tag}: five base times, 30 selected, all >=44pt (${JSON.stringify(radios)})`);
+  const radios = JSON.parse(await ev(`await document.querySelector(".cue-sc-val-base").click();await W(250);const o=[...document.querySelectorAll(".cue-menu-v1 .cue-menu-row-v1")].map(b=>[String(parseInt(b.textContent)),b.getAttribute("aria-selected"),Math.round(b.getBoundingClientRect().width),Math.round(b.getBoundingClientRect().height)]);document.querySelector(".cue-menu-scrim-v1").click();await W(150);return JSON.stringify(o)`));
+  check(JSON.stringify(radios.map(r => r[0])) === '["30","35","40","45","60"]' && radios.filter(r => r[1] === "true").length === 1 && radios[0][1] === "true" && radios.every(r => r[2] >= 44 && r[3] >= 44), `${tag}: five base times in the tap menu, 30 selected, all >=44pt (${JSON.stringify(radios)})`);
   await ev(`const R=Date.now.bind(Date);window.__scOff=0;Date.now=()=>R()+window.__scOff;`);
   await startMatch();
   let s = await st();

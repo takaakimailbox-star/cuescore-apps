@@ -26,15 +26,14 @@ for (const lang of LANGS) {
     document.querySelector('#cueDisciplineSwitcherV1 [data-discipline="9ball"]').click();await W(1000);`);
   // setup row: buttons present, default +60 selected, start button reachable (not covered)
   await ev(`document.querySelector(".cue-sc-switch").click();await W(150);document.querySelector(".cue-sc-switch").click();await W(300)`);
-  const setup = JSON.parse(await app.evalJs(`JSON.stringify((()=>{const ex=[...document.querySelectorAll(".cue-sc-ext .cue-sc-base-btn")];const sb=document.getElementById("startGameBtn").getBoundingClientRect();const row=document.querySelector(".cue-sc-setup").getBoundingClientRect();
-    return {labels:ex.map(b=>b.textContent),checked:ex.filter(b=>b.getAttribute("aria-checked")==="true").map(b=>b.textContent),hit:ex.map(b=>Math.round(b.getBoundingClientRect().height)),w:ex.map(b=>Math.round(b.getBoundingClientRect().width)),startTop:Math.round(sb.top),rowBottom:Math.round(row.bottom),vh:innerHeight,label:document.querySelector(".cue-sc-ext .cue-sc-base-label").textContent}})())`));
+  const setup = JSON.parse(await ev(`document.querySelector(".cue-sc-val-ext").click();await W(250);const ex=[...document.querySelectorAll(".cue-menu-v1 .cue-menu-row-v1")];const out={labels:ex.map(b=>"+"+parseInt(b.textContent.replace("+",""))),checked:ex.filter(b=>b.getAttribute("aria-selected")==="true").map(b=>"+"+parseInt(b.textContent.replace("+",""))),hit:ex.map(b=>Math.round(b.getBoundingClientRect().height)),w:ex.map(b=>Math.round(b.getBoundingClientRect().width))};document.querySelector(".cue-menu-scrim-v1").click();await W(150);const sb=document.getElementById("startGameBtn").getBoundingClientRect(),row=document.querySelector(".cue-sc-setup").getBoundingClientRect(),sc=document.querySelector(".cue-new-match-integrated-v2"),foot=document.getElementById("cueSetupFooterV1").getBoundingClientRect();Object.assign(out,{startTop:Math.round(sb.top),rowBottom:Math.round(row.bottom),footTop:Math.round(foot.top),scrollable:sc.scrollHeight>sc.clientHeight,vh:innerHeight,label:document.querySelector(".cue-sc-val-ext .cue-sc-val-label").textContent});return JSON.stringify(out)`));
   check(JSON.stringify(setup.labels) === '["+25","+30","+45","+60"]', `${lang}: setup offers +25/+30/+45/+60 (${setup.labels})`);
   check(setup.checked.join() === "+60", `${lang}: default +60`); check(Math.min(...setup.hit, ...setup.w) >= 44, `${lang}: setup extension buttons >= 44pt (${setup.hit}/${setup.w})`);
-  check(setup.rowBottom <= setup.startTop + 1, `${lang}: extension row does not cover the start button`);
+  check(setup.rowBottom <= setup.footTop + 1 || setup.scrollable, `${lang}: extension row is above the independent footer (or reachable by scrolling) and never covered`);
   OUT.rows.push({ lang, setup });
   for (const ext of (process.env.SC_EXTS || "25,30,45,60").split(",").map(Number)) {
     console.log("ext", lang, ext, "cases", OUT.cases, "failures", OUT.failures.length);
-    await ev(`document.querySelector('.cue-sc-ext .cue-sc-base-btn[data-ext="${ext}"]').click();await W(150)`);
+    await ev(`document.querySelector(".cue-sc-val-ext").click();await W(250);[...document.querySelectorAll(".cue-menu-v1 .cue-menu-row-v1")].find(b=>parseInt(b.textContent.replace("+",""))===${ext}).click();await W(200)`);
     const stored = JSON.parse(await app.evalJs(`localStorage.getItem(${JSON.stringify(KEY)})`));
     check(stored.ext === ext, `${lang}: +${ext} stored under the clock key only`);
     await ev(`if(!document.getElementById("p2Name").value){document.getElementById("p2PlayerSearchBtn").click();await W(500);document.querySelector("[data-select-player]")?.click();await W(500)}

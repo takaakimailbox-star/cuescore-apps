@@ -1,0 +1,59 @@
+{
+ "gate": "Match-setup UX trial, Version 1.4 / Build 95 candidate: footer start button, compact cards, tap menus, empty-player state, first-use guide placement. Pinned assertions updated: build number 94->95, cache version build94-sc21-v1 -> build95-setupux-v1, product-file sha256 values, the Build 93 sticky-start tests replaced by footer tests, the shot-clock setup test (menu instead of chips); new tests added.",
+ "changedProductFiles": {
+  "index.html": {
+   "before": "123113b6d52f0031f5dd0acfcdd5b5dd716590fab6b5417ee73792bf475fc3ac",
+   "after": "ad8b8f363eeff956e3f226b39315a9aab80d72cf92689efa703ee6ae086c7780"
+  },
+  "sw.js": {
+   "before": "fead88e25fb760e467c363331f41b3e4462a986fbcf4a389b9b39ca69fefd5aa",
+   "after": "6cf62d7ef2d7e3c12eda100ff5beb9817993f10af4ede9dccca6cda3f0fb719e"
+  },
+  "scripts/build-native-web.mjs": {
+   "before": "79c032f42c3686a86f1b7b5fd47f29e211e9ca9135793d42eddf7e34a1e95bad",
+   "after": "a89469c7ceb97884f9e8c9ad3a4b1134682525d45cf3184198bc9b215b3d8827"
+  },
+  "shotclock-v1.js": {
+   "before": "b8d7ac0530be5fdc3831052cc218e3f4a144b6c975a891073f415e3d909848f0",
+   "after": "70d8802390e618c9235c20e70d47b5565e55127c4ac7ae0547d6936780b1f5f0"
+  },
+  "shotclock-v1.css": {
+   "before": "2c221ed3f2f62de972272de7fb27ccd2def8f57c35d964f6cc291b3ad8721e96",
+   "after": "c178d1b3b0ce5856f9d5285c2558b6712be0acefa91f41820e8cf3cc28923d13"
+  },
+  "navigation-shell-phase1.css": {
+   "before": "f4aba1825ccf0e6238b3f3907eac3c37ec08ffd98ce625542a9d91ec70259e4e",
+   "after": "59dd6ff428885b9259dc18ce090a065a7e48bed974044c82d47e3fbe800b2bc0"
+  },
+  "ios/App/App.xcodeproj/project.pbxproj": {
+   "before": "7ffd06df32e8ec718753b4a4677e1b5f2118b8859d0187956819ab20ab3eb387",
+   "after": "17121c255c2646d766cb8b190287f079b8fe82f93b7550529763ad1a65e78dd3"
+  }
+ },
+ "newProductFiles": [
+  "match-setup-ux-v1.js",
+  "match-setup-ux-v1.css",
+  "i18n-catalog-setupux-v1.js"
+ ],
+ "changedTests": [
+  "build32-final-review-followup.test.mjs",
+  "build33-home-reference.test.mjs",
+  "build76-settings-scroll-lock.test.mjs",
+  "game-result-match-detail-common-layout.test.mjs",
+  "i18n-foundation-v1.test.mjs",
+  "ios-native-camera-localization.test.mjs",
+  "ios27-scene-lifecycle.test.mjs",
+  "localization-ac13-voiceover-release-requirement-decision.test.mjs",
+  "localization-glossary-25-approval-decision.test.mjs",
+  "localization-glossary-finalization-decision.test.mjs",
+  "localization-ios-first-entry-language-decision.test.mjs",
+  "match-sharing-stage5a.test.mjs",
+  "native-ios-foundation.test.mjs",
+  "navigation-shell-phase1.test.mjs",
+  "official-website-v1.test.mjs",
+  "player-detail-final-rc-regression.test.mjs",
+  "start-button-reach.test.mjs"
+ ],
+ "newTests": [],
+ "note": "only pinned digests / build number / cache version / the start-button and clock-setup assertions changed; no assertion on scoring, saving, QR, Backup, entitlement or clock calculation was edited"
+}

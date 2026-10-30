@@ -65,13 +65,16 @@
 .cue-sc-knob{position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .15s}
 .cue-sc-switch[aria-checked="true"] .cue-sc-track{background:var(--cue-scd-text)}
 .cue-sc-switch[aria-checked="true"] .cue-sc-knob{transform:translateX(20px)}
-.cue-sc-base{display:flex;flex-direction:column;align-items:stretch;gap:2px;padding-top:2px}
-.cue-sc-base[hidden]{display:none}
-.cue-sc-base-label{font-size:13px;line-height:16px;font-weight:600;color:var(--cue-scd-text2);flex:0 0 auto}
-.cue-sc-base-btns{display:flex;gap:6px;width:100%}
-.cue-sc-base-btn{min-width:44px;height:44px;flex:1 1 0;border:1px solid var(--cue-scd-border);border-radius:14px;background:#fff;color:var(--cue-scd-text);font:600 17px/22px -apple-system,system-ui,sans-serif;padding:0;touch-action:manipulation}
-.cue-sc-base-btn[aria-checked="true"]{background:var(--cue-scd-text);border-color:var(--cue-scd-text);color:#fff}
-@media (max-width:340px){.cue-sc-setup{padding:6px 10px}.cue-sc-base-btns{gap:4px}.cue-sc-base-btn{font-size:16px}}
+.cue-sc-vals{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:6px 0 4px}
+.cue-sc-vals[hidden]{display:none}
+.cue-sc-val{display:flex;align-items:center;justify-content:space-between;gap:4px;min-width:0;min-height:52px;padding:6px 8px 6px 12px;border:1px solid var(--cue-scd-border);border-radius:14px;background:#fff;color:var(--cue-scd-text);font:inherit;text-align:left;touch-action:manipulation}
+.cue-sc-val[aria-expanded="true"]{border-color:var(--cue-scd-text)}
+.cue-sc-val-col{display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.cue-sc-val-label{font-size:12px;line-height:16px;font-weight:600;color:var(--cue-scd-text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cue-sc-val-v{font-size:22px;line-height:26px;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cue-sc-val-u{margin-left:3px;font-size:13px;font-weight:700;color:var(--cue-scd-text2)}
+.cue-sc-val-cv{flex:0 0 auto;font-size:14px;color:var(--cue-scd-text2)}
+@media (max-width:340px){.cue-sc-setup{padding:6px 10px}.cue-sc-val{padding-left:10px}}
 
 /* ---- Plan A (Build 91, internal evaluation candidate; NOT a final public design) ----
  * Visual hierarchy: 1 remaining time, 2 Reset, 3 Extend, 4 Start / Pause / Resume. Layout, DOM order, behaviour and the clock contract are unchanged: only presentation of the dock. */
@@ -140,8 +143,6 @@
 .cue-sc-unit:empty{display:none}
 @media (prefers-reduced-motion:reduce){.cue-sc-dock .cue-sc-bar i{transition:none}}
 .cue-sc-dock.cue-sc-lg .cue-sc-row{display:inline-flex}
-/* the extension setting row reuses the base-time radio styling; 4 buttons */
-.cue-sc-ext{padding-top:4px}
 /* 3-digit values (extension chains, e.g. 105 / 157) step the digits down so digits + unit still fit beside the three buttons at 320 */
 .cue-sc-dock[data-dg="3"]:not(.cue-sc-lg){--cue-scv-num:40px}
 @media (max-width:380px){.cue-sc-dock[data-dg="3"]:not(.cue-sc-lg){--cue-scv-num:36px}}

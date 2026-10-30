@@ -8108,10 +8108,14 @@ body {
         </div>
         <div class="player-name-limit-note" id="playerNameLimitNote" data-i18n="p3.77fc5a21">プレーヤー名は20文字まで</div>
 
+      </section>
+
+      <div class="cue-setup-footer-v1" id="cueSetupFooterV1">
+        <div class="cue-setup-reason-wrap-v1" role="status"><button class="cue-setup-reason-v1" id="cueSetupReasonV1" type="button" hidden></button></div>
         <button class="start-game-button new-match-start-v1 cue-home-start-v2" id="startGameBtn" type="button">
           <span class="new-match-play-v1" aria-hidden="true">▶</span><span data-i18n="p3.c3336e35">試合開始</span>
         </button>
-      </section>
+      </div>
 
       <div class="cue-global-actions-v2" hidden aria-hidden="true">
         <button id="cueHomeNavV3" type="button" tabindex="-1"></button>
@@ -8818,8 +8822,8 @@ body {
     instance.applyStatic(document);
   })();
   </script>
-  <script src="./demo-data.js?v=2.0-build94-sc21-v1"></script>
-  <script src="./player-library-order-v1.js?v=2.0-build94-sc21-v1"></script>
+  <script src="./demo-data.js?v=2.0-build95-setupux-v1"></script>
+  <script src="./player-library-order-v1.js?v=2.0-build95-setupux-v1"></script>
   <script src="./vendor/fflate-0.8.3.js"></script>
   <script src="./vendor/qrcodegen-1.8.0.js"></script>
   <script src="./match-sharing-validation-v1.js"></script>
@@ -19956,7 +19960,7 @@ ${window.cueT("p3.ead08064")}`
   (() => {
     if (window.__cueScorePwaLifecycleV150) return;
     window.__cueScorePwaLifecycleV150 = true;
-    const PWA_VERSION = "2.0-build94-sc21-v1";
+    const PWA_VERSION = "2.0-build95-setupux-v1";
     const managedTimersV150 = new Set();
     const setManagedTimeoutV150 = (callback, delay) => {
       const id = window.setTimeout(() => {
@@ -29477,9 +29481,9 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
   <script src="./analytics-build4-metrics.js"></script>
   <script src="./analysis-build4.js"></script>
   <script src="./player-detail-build6.js"></script>
-  <script src="./ui-revision-v12.js?v=2.0-build94-sc21-v1"></script>
+  <script src="./ui-revision-v12.js?v=2.0-build95-setupux-v1"></script>
   <script src="./final-ui-build18.js"></script>
-  <link rel="stylesheet" href="./navigation-shell-phase1.css?v=2.0-build94-sc21-v1" />
+  <link rel="stylesheet" href="./navigation-shell-phase1.css?v=2.0-build95-setupux-v1" />
   <script src="./navigation-shell-phase1.js?v=2.0-build81-player-list-bottom-inset-v1"></script>
   <script>
   (()=>{
@@ -29491,8 +29495,11 @@ body.cue-in-progress-choice-visible-v1 .cue-phase1-tab-bar *{pointer-events:none
   </script>
   <link rel="stylesheet" href="./navigation-phase2-6.css?v=2.0-build81-player-list-bottom-inset-v1" />
   <script src="./navigation-phase2-6.js?v=2.0-build60-free-pro-foundation"></script>
-  <link rel="stylesheet" href="./shotclock-v1.css?v=1.2-sc047-v1" />
-  <script src="./shotclock-v1.js?v=1.1-sc047-v1"></script>
+  <link rel="stylesheet" href="./shotclock-v1.css?v=1.3-setupux-v1" />
+  <script src="./i18n-catalog-setupux-v1.js?v=1.0-setupux-v1"></script>
+  <script src="./match-setup-ux-v1.js?v=1.0-setupux-v1"></script>
+  <script src="./shotclock-v1.js?v=1.2-setupux-v1"></script>
+  <link rel="stylesheet" href="./match-setup-ux-v1.css?v=1.0-setupux-v1" />
   <script src="./record-access-v1.js?v=1.0-build60-free-pro-v2"></script>
   <script src="./monetization-v1.js?v=1.0-build72-current-plan-settings-v1"></script>
 </body>

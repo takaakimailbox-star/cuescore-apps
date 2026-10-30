@@ -23,7 +23,7 @@ for (const lang of LANGS) for (const disc of DISCS) {
       for(let i=0;i<60&&document.getElementById("startGameBtn").disabled;i++)await W(100);
       const sw=document.querySelector(".cue-sc-switch");if(sw&&(sw.getAttribute("aria-checked")==="true")!==${clock}){sw.click();await W(300)}
       ${pilot ? 'const pv=document.querySelector(".uip-switch");if(pv&&pv.getAttribute("aria-checked")!=="true"){pv.click();await W(400)}' : ""}
-      ${zoom !== 1 ? `document.querySelector(".cue-new-match-integrated-v2").style.zoom=${zoom};await W(300)` : ""}`);
+      ${zoom !== 1 ? `document.querySelector(".new-match-player-grid-v1").style.zoom=${zoom};const sc=document.querySelector(".cue-sc-setup");if(sc)sc.style.zoom=${zoom};await W(300)` : ""}`);
     const g = JSON.parse(await app.evalJs(`(()=>{const s=document.getElementById("startGameBtn"),tb=document.querySelector(".cue-phase1-tab-bar"),R=n=>n.getBoundingClientRect(),z=${zoom};
       const q=R(s),n=R(tb);const hs=document.documentElement.scrollWidth>innerWidth+1||document.getElementById("cueHomeV1").scrollWidth>document.getElementById("cueHomeV1").clientWidth+1;
       return JSON.stringify({top:q.top,bottom:q.bottom,left:q.left,right:q.right,w:q.width,h:q.height,nav:n.top,hs,vw:innerWidth,clock:!!document.querySelector(".cue-sc-switch")&&document.querySelector(".cue-sc-switch").getAttribute("aria-checked"),dis:s.disabled})})()`));
@@ -32,13 +32,14 @@ for (const lang of LANGS) for (const disc of DISCS) {
     if (g.dis) fail(tag, "start button disabled");
     if (!(g.top >= 0 && g.bottom <= g.nav - 4)) fail(tag, `start not above tab bar on arrival (top ${Math.round(g.top)} bottom ${Math.round(g.bottom)} nav ${Math.round(g.nav)})`);
     if (g.w < 44 || eff < 44) fail(tag, `hit area ${Math.round(g.w)}x${Math.round(eff)}`);
-    if (g.hs) { if (zoom === 1) fail(tag, "horizontal scroll"); else { out.notes = (out.notes || []).concat(tag + ": horizontal scroll under the 130 % layout zoom stand-in (pre-existing clock-row width; identical without the Build 93 CSS)"); console.log("NOTE", tag, "horizontal scroll under zoom stand-in"); } }
-    // no setup control may stay under the button at maximum scroll
-    const ov = JSON.parse(await app.evalJs(`(()=>{const hm=document.getElementById("cueHomeV1");hm.scrollTop=1e5;const s=document.getElementById("startGameBtn").getBoundingClientRect(),bad=[];
-      hm.querySelectorAll(".cue-new-match-integrated-v2 button,.cue-new-match-integrated-v2 input,.cue-new-match-integrated-v2 select,.cue-sc-setup button,.uip-setup button").forEach(c=>{if(c.id==="startGameBtn"||!c.getClientRects().length)return;const r=c.getBoundingClientRect();if(r.width&&r.left<s.right&&s.left<r.right&&r.top<s.bottom-1&&s.top<r.bottom-1)bad.push(c.id||c.className.toString().slice(0,24))});
-      return JSON.stringify({bad:bad.slice(0,4),bottom:s.bottom})})()`));
-    if (ov.bad.length) fail(tag, "controls under the start button at max scroll: " + ov.bad.join(","));
-    await ev(`document.getElementById("cueHomeV1").scrollTop=0;await W(300)`);
+    if (g.hs) { if (zoom === 1) fail(tag, "horizontal scroll"); else { out.notes = (out.notes || []).concat(tag + ": horizontal scroll under the 130 % layout zoom stand-in (stand-in only)"); console.log("NOTE", tag, "horizontal scroll under zoom stand-in"); } }
+    // Build 95 candidate: the start button is in an independent footer; no setup control may sit under the footer at maximum scroll, and the last control must be reachable
+    const ov = JSON.parse(await app.evalJs(`(()=>{const sc=document.querySelector("#cueHomeV1 .cue-new-match-integrated-v2");sc.scrollTop=1e5;const f=document.getElementById("cueSetupFooterV1").getBoundingClientRect(),bad=[];let lastB=0;
+      sc.querySelectorAll("button,input,select").forEach(c=>{if(!c.getClientRects().length||c.classList.contains("cue-match-setup-back-v3"))return;const r=c.getBoundingClientRect();if(!r.width)return;lastB=Math.max(lastB,r.bottom);if(r.top<f.bottom-1&&f.top<r.bottom-1)bad.push(c.id||c.className.toString().slice(0,24))});
+      return JSON.stringify({bad:bad.slice(0,4),reach:lastB<=f.top+1})})()`));
+    if (ov.bad.length) fail(tag, "controls under the footer at max scroll: " + ov.bad.join(","));
+    if (!ov.reach) fail(tag, "the last setup control cannot be scrolled clear of the footer");
+    await ev(`document.querySelector("#cueHomeV1 .cue-new-match-integrated-v2").scrollTop=0;await W(300)`);
     const p = JSON.parse(await app.evalJs(`(()=>{const q=document.getElementById("startGameBtn").getBoundingClientRect();return JSON.stringify({x:q.left+q.width/2,y:q.top+q.height/2})})()`));
     for (const ty of ["mousePressed", "mouseReleased"]) await app.cdp("Input.dispatchMouseEvent", { type: ty, x: p.x, y: p.y, button: "left", clickCount: 1 });
     await ev(`await W(2500);const ok=document.getElementById("breakResultSaveV695");if(ok&&ok.getClientRects().length){ok.click();await W(500)}`);

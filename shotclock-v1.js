@@ -242,34 +242,38 @@
     else { clock.sync(Date.now()); render(); persistClock(); startTicker(); }
   }
 
-  /* ---------- match setup row (ON/OFF + base time), inserted above the start button ---------- */
+  /* ---------- match setup row (ON/OFF + base time + extension time), the last block of the setup card (the start button lives in the footer below it) ---------- */
   function buildSetup() {
-    const start = $("#startGameBtn"), card = start && start.closest(".cue-new-match-v1");
-    if (!start || !card || $(".cue-sc-setup", card)) return;
+    const card = $(".cue-new-match-integrated-v2");
+    if (!card || $(".cue-sc-setup", card)) return;
     const sec = mk('<section class="cue-sc-setup"><div class="cue-sc-setup-row"><div class="cue-sc-setup-text"><span class="cue-sc-setup-title"></span><span class="cue-sc-setup-sub"></span></div>' +
       '<button type="button" role="switch" class="cue-sc-switch"><span class="cue-sc-track"><span class="cue-sc-knob"></span></span></button></div>' +
-      '<div class="cue-sc-base" role="radiogroup"><span class="cue-sc-base-label"></span><span class="cue-sc-base-btns"></span></div>' +
-      '<div class="cue-sc-base cue-sc-ext" role="radiogroup"><span class="cue-sc-base-label"></span><span class="cue-sc-base-btns"></span></div></section>');
-    start.parentNode.insertBefore(sec, start);
-    const sw = $(".cue-sc-switch", sec), baseWrap = $(".cue-sc-base:not(.cue-sc-ext)", sec), btns = $(".cue-sc-base-btns", baseWrap);
-    const extWrap = $(".cue-sc-ext", sec), extBtns = $(".cue-sc-base-btns", extWrap);
+      '<div class="cue-sc-vals"><button type="button" class="cue-sc-val cue-sc-val-base" aria-haspopup="listbox" aria-expanded="false"><span class="cue-sc-val-col"><span class="cue-sc-val-label"></span><span class="cue-sc-val-v"></span></span><span class="cue-sc-val-cv" aria-hidden="true">⌄</span></button>' +
+      '<button type="button" class="cue-sc-val cue-sc-val-ext" aria-haspopup="listbox" aria-expanded="false"><span class="cue-sc-val-col"><span class="cue-sc-val-label"></span><span class="cue-sc-val-v"></span></span><span class="cue-sc-val-cv" aria-hidden="true">⌄</span></button></div></section>');
+    card.appendChild(sec);
+    const sw = $(".cue-sc-switch", sec), vals = $(".cue-sc-vals", sec), baseBtn = $(".cue-sc-val-base", sec), extBtn = $(".cue-sc-val-ext", sec);
     $(".cue-sc-setup-title", sec).textContent = T("shotclock.title");
     $(".cue-sc-setup-sub", sec).textContent = T("shotclock.supplement");
-    $(".cue-sc-base-label", sec).textContent = T("shotclock.baseTime");
-    $(".cue-sc-base-label", extWrap).textContent = T("shotclock.extTime");
-    extWrap.setAttribute("aria-label", T("shotclock.extTime") + " (" + T("shotclock.sec") + ")");
+    $(".cue-sc-val-label", baseBtn).textContent = T("shotclock.baseTime");
+    $(".cue-sc-val-label", extBtn).textContent = T("shotclock.extTime");
     sw.setAttribute("aria-label", T("shotclock.title"));
-    baseWrap.setAttribute("aria-label", T("shotclock.baseTime") + " (" + T("shotclock.sec") + ")");
-    BASES.forEach(b => { const o = doc.createElement("button"); o.type = "button"; o.setAttribute("role", "radio"); o.dataset.base = String(b); o.className = "cue-sc-base-btn"; o.textContent = String(b); o.setAttribute("aria-label", b + " " + T("shotclock.sec")); btns.appendChild(o); });
-    EXTS.forEach(x => { const o = doc.createElement("button"); o.type = "button"; o.setAttribute("role", "radio"); o.dataset.ext = String(x); o.className = "cue-sc-base-btn"; o.textContent = "+" + x; o.setAttribute("aria-label", "+" + x + " " + T("shotclock.sec")); extBtns.appendChild(o); });
+    const unit = T("shotclock.sec");
+    const show = (btn, text, spoken) => {
+      const v = $(".cue-sc-val-v", btn); v.textContent = text; const u = doc.createElement("small"); u.className = "cue-sc-val-u"; u.textContent = unit; v.appendChild(u);
+      btn.setAttribute("aria-label", $(".cue-sc-val-label", btn).textContent + ": " + spoken + " " + unit);
+    };
     const paint = () => {
-      sw.setAttribute("aria-checked", String(store.enabled)); sec.dataset.on = store.enabled ? "1" : "0"; baseWrap.hidden = !store.enabled; extWrap.hidden = !store.enabled;
-      extBtns.querySelectorAll("button").forEach(o => o.setAttribute("aria-checked", String(Number(o.dataset.ext) === store.ext)));
-      btns.querySelectorAll("button").forEach(o => o.setAttribute("aria-checked", String(Number(o.dataset.base) === store.base)));
+      sw.setAttribute("aria-checked", String(store.enabled)); sec.dataset.on = store.enabled ? "1" : "0"; vals.hidden = !store.enabled;
+      show(baseBtn, String(store.base), String(store.base));
+      show(extBtn, "+" + store.ext, "+" + store.ext);
+    };
+    const menu = (btn, list, current, label, apply, plus) => {
+      const M = root.CueScoreMenuV1; if (!M) return;
+      M.open({ anchor: btn, title: label, options: list.map(x => ({ value: x, label: (plus ? "+" : "") + x + " " + unit, selected: x === current })), onPick: v => { apply(Number(v)); save(); paint(); } });
     };
     sw.addEventListener("click", () => { store.enabled = !store.enabled; save(); paint(); });
-    btns.addEventListener("click", e => { const b = e.target.closest("button[data-base]"); if (!b) return; store.base = Number(b.dataset.base); save(); paint(); });
-    extBtns.addEventListener("click", e => { const b = e.target.closest("button[data-ext]"); if (!b) return; store.ext = Number(b.dataset.ext); save(); paint(); });
+    baseBtn.addEventListener("click", () => menu(baseBtn, BASES, store.base, T("shotclock.baseTime"), v => { store.base = v; }, false));
+    extBtn.addEventListener("click", () => menu(extBtn, EXTS, store.ext, T("shotclock.extTime"), v => { store.ext = v; }, true));
     paint();
   }
 
