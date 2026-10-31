@@ -6,7 +6,7 @@
 - 黄色表示: 撤去したのは「その他」数値入力のフォーカス枠のみ（`9e37a0b`）。全画面共通フォーカス、未選択カード、試合中状態、競技アイコン、ショットクロック色は不変。旧Prototypeの全画面黄色撤去案は不採用。
 - Decision 049／Official 140〜142は候補のまま（未発行。docs/official最大139、Decision Log v2.24）。整理: `docs/implementation/CueScore_Build96_Candidate_Translation_Integration_SSOT_Sync_2026-10-31.md`。
 - 下の「Build 95 数字入力フォーカス限定改善」記録は履歴。その中の「縦バランス・数値選択・外側タップ・翻訳7→3は未承認・未実装」は**当時の記述**で、現在は上記のとおり承認・実装済み。
-- Build採番はローカル（Xcodeプロジェクト）のみ。Upload、TestFlight、App Store Connect、App Review、一般公開は未実施。
+- 2026-10-31: Build 96 を内部TestFlightへ配布（Upload 1回、ASC VALID、IN_BETA_TESTING、Build ID d1af66ed-4bdd-4c8d-900e-67449c685a7d）。外部TestFlight、App Review、一般公開は未実施。記録 `docs/implementation/CueScore_Build96_Internal_TestFlight_Distribution_2026-10-31.md`。
 
 ## Build 95 数字入力フォーカス限定改善（2026年10月31日、実装commit `9e37a0b0bd952d65e72e5712d752be323e41fbfa`）
 
