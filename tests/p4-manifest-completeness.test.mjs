@@ -13,13 +13,14 @@ const catalogs = { ja: require("../i18n-catalog-ja-v1.js"), en: require("../i18n
 const placeholders = text => [...String(text).matchAll(/\{([A-Za-z0-9_]+)\}/g)].map(m => m[1]).sort().join(",");
 const sorted = o => Object.keys(o).sort();
 const scKeys = Object.keys(JSON.parse(fs.readFileSync(new URL("tests/fixtures/p4/po-approval-shotclock.json", root), "utf8")).keys); // 21 shot-clock keys approved by Decision 048 (not part of the P3 manifest)
+const suKeys = Object.keys(JSON.parse(fs.readFileSync(new URL("tests/fixtures/p4/po-approval-setupux.json", root), "utf8")).keys); // 3 match-setup reason keys approved by the PO (plan A, 2026-10-30; not part of the P3 manifest)
 
 test("manifest covers every catalog key exactly once (P3 keys + P1/P2 keys = all catalog keys)", () => {
   const p3 = Object.keys(manifest.keys), earlier = Object.keys(manifest.earlierKeys);
   assert.equal(p3.filter(k => !k.startsWith("p3.")).length, 0, "keys holds only p3.* keys");
   assert.equal(earlier.filter(k => k.startsWith("p3.")).length, 0, "earlierKeys holds no p3.* key");
   assert.equal(new Set([...p3, ...earlier]).size, p3.length + earlier.length, "no key is listed twice");
-  assert.deepEqual([...p3, ...earlier, ...scKeys].sort(), sorted(catalogs.ja));
+  assert.deepEqual([...p3, ...earlier, ...scKeys, ...suKeys].sort(), sorted(catalogs.ja));
   const added = Object.values(manifest.keys).filter(e => e.addedBy).length; // keys added after the P4 manifest completion by PO-approved decisions (Decision 037: U3 note, U8 Share Sheet)
   assert.equal(p3.length + earlier.length, 1331 - 2 + added); // 2 = p3.e2e7544e / p3.ef088e10 (ball-in-hand wording) retired by the PO decision of 2026-10-28
   assert.equal(earlier.length, 90);

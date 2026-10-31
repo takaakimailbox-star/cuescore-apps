@@ -21,15 +21,15 @@ test("iOS target is iPhone-only, portrait-only, version 1.4 build 91", () => {
   assert.doesNotMatch(project, /TARGETED_DEVICE_FAMILY = "1,2"/);
   assert.match(project, /TARGETED_DEVICE_FAMILY = 1;/);
   assert.match(project, /MARKETING_VERSION = 1\.4;/);
-  assert.match(project, /CURRENT_PROJECT_VERSION = 95;/);
+  assert.match(project, /CURRENT_PROJECT_VERSION = 96;/);
   assert.match(infoPlist, /UIInterfaceOrientationPortrait/);
   assert.doesNotMatch(infoPlist, /UIInterfaceOrientationLandscape/);
   assert.doesNotMatch(infoPlist, /UISupportedInterfaceOrientations~ipad/);
   assert.match(html, /const CUESCORE_APP_VERSION = "1\.4";/);
   assert.match(html, /const RELEASE_LABEL = 'Version 1\.4';/);
   assert.match(html, /const DISPLAY_VERSION = 'version 1\.4';/);
-  assert.match(serviceWorker, /const APP_VERSION = "2\.0-build95-setupux-v1";/);
-  assert.match(html, /const PWA_VERSION = "2\.0-build95-setupux-v1";/);
+  assert.match(serviceWorker, /const APP_VERSION = "2\.0-build96-setupux-v1";/);
+  assert.match(html, /const PWA_VERSION = "2\.0-build96-setupux-v1";/);
 });
 
 test("Capacitor foundation uses bundled assets without a remote server URL", () => {

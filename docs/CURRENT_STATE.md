@@ -1,5 +1,13 @@
 # CueScore Apps Current State
 
+## Version 1.4 Build 96 候補（2026年10月31日・ローカル作成、未Upload）
+
+- 状態を分離して記録: **設計承認**（PO、2026-10-31: 縦バランス／9・10-Ball 1〜10＋その他／3 Cushion 7〜40＋その他／外側タップ）→ **製品実装PASS**（commit `efe66eadc0333e0d46867316d85a9e128a68fd0c`、Full Node 1241/1241、実Chrome実座標 3言語×4幅×5種目 1050/1050）→ **翻訳案A反映**（PO承認2026-10-30の3キーを主カタログへ統合、P4承認記録 `tests/fixtures/p4/po-approval-setupux.json`、独立した人間レビュー未実施・P4-REVIEWEDではない）→ **Build 96候補**（Version 1.4／Build 96、ローカルArchiveのみ）。**実機（iPhone・VoiceOver実音声・キーボード・Dynamic Type）はNOT VERIFIED。**
+- 黄色表示: 撤去したのは「その他」数値入力のフォーカス枠のみ（`9e37a0b`）。全画面共通フォーカス、未選択カード、試合中状態、競技アイコン、ショットクロック色は不変。旧Prototypeの全画面黄色撤去案は不採用。
+- Decision 049／Official 140〜142は候補のまま（未発行。docs/official最大139、Decision Log v2.24）。整理: `docs/implementation/CueScore_Build96_Candidate_Translation_Integration_SSOT_Sync_2026-10-31.md`。
+- 下の「Build 95 数字入力フォーカス限定改善」記録は履歴。その中の「縦バランス・数値選択・外側タップ・翻訳7→3は未承認・未実装」は**当時の記述**で、現在は上記のとおり承認・実装済み。
+- Build採番はローカル（Xcodeプロジェクト）のみ。Upload、TestFlight、App Store Connect、App Review、一般公開は未実施。
+
 ## Build 95 数字入力フォーカス限定改善（2026年10月31日、実装commit `9e37a0b0bd952d65e72e5712d752be323e41fbfa`）
 
 - PO訂正: 「黄色い枠を消したい」は、「その他」等で開く**数字入力画面の黄色い枠だけ**を指す。先行の試合中状態表示中立化Prototypeは不採用・製品未反映。試合中の手番・選択中・勝者、27セレクタ、全画面共通の黄色フォーカス、9-Ball正式色、ショットクロック色は変更しない。

@@ -85,16 +85,18 @@
       "skips": 0
     },
     "build32-final-review-followup.test.mjs": {
-      "sha256": "1b22330c18ed1b962d2d696157618e6672373f5f0a47955d6c06bd00a0ccf324",
+      "sha256": "e58bb77077cd121fc01bc3592f49846928579156424a2f2e6c6ee5d6ddabf9e0",
       "tests": 5,
       "skips": 0,
-      "previousSha256": "b9973eb7515df4c5133ad0a1c6459826b47ca1d40eccfaa4471bd0acec9ce2eb"
+      "previousSha256": "b9973eb7515df4c5133ad0a1c6459826b47ca1d40eccfaa4471bd0acec9ce2eb",
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "build33-home-reference.test.mjs": {
-      "sha256": "b595d8468be25265463c6fcb7d2c3b258295667d3e3ea023d4c41a92af9bddbd",
+      "sha256": "726eda0429352a7dab4f0d29ea00570d301e7a33f1100ff6e965f7ccd1bf5ba9",
       "tests": 4,
       "skips": 0,
-      "previousSha256": "dba864491df63fe03c5011cb9eadac5c125f025106443366e65d0583390d7432"
+      "previousSha256": "dba864491df63fe03c5011cb9eadac5c125f025106443366e65d0583390d7432",
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "build34-match-card-c-back-navigation.test.mjs": {
       "sha256": "56ebda6dab50fbf2185414e58d9158642ee0b32b2f2086f245df7665291b0571",
@@ -195,10 +197,11 @@
       "skips": 0
     },
     "build76-settings-scroll-lock.test.mjs": {
-      "sha256": "384c2cb51bc59f10eb3ecc799ff3763aac8b0cd132928d1fb9030fa27e7a74d5",
+      "sha256": "6e7b084ff44f2b1cd179d8291624b8da8a5ee746f8c2da984dec594f0df12b28",
       "tests": 3,
       "skips": 0,
-      "previousSha256": "5bfbfcf794c53f2bc1565508a35945f2565d24b757beb97407c5484ae76a3ae6"
+      "previousSha256": "5bfbfcf794c53f2bc1565508a35945f2565d24b757beb97407c5484ae76a3ae6",
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "build77-fresh-storekit-price.test.mjs": {
       "sha256": "4ed3cb22d74f6f3c077063ea86fb9c8cc8c38941e4420c78177c4677d47797f5",
@@ -264,10 +267,11 @@
       "skips": 0
     },
     "game-result-match-detail-common-layout.test.mjs": {
-      "sha256": "5fa2378a9b0e4cd7ecda1e745910d6b4bbb358dd275891c5784e9c6cbf26f48f",
+      "sha256": "c571131952520bcb026bd632060956db303465c2544b6a52d43902dd257f1d82",
       "tests": 8,
       "skips": 0,
-      "previousSha256": "f77912e65e300f59a98abc5092fead83683e30ab24d0008fcf074461db8df4cf"
+      "previousSha256": "f77912e65e300f59a98abc5092fead83683e30ab24d0008fcf074461db8df4cf",
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "game-result-match-detail-six-disciplines.test.mjs": {
       "sha256": "45964b8a726596d2ac0ddc6355d12114aa2259a5d4b1a92bd20871af14bfd1db",
@@ -305,10 +309,11 @@
       "skips": 0
     },
     "i18n-foundation-v1.test.mjs": {
-      "sha256": "42d1bb17fcdc88684301f9f20a2e72d916972a55f1ebda5d5810ec6e697447c7",
+      "sha256": "36be63bd9f3c1998d50a51c14234848ab92e01161744e63efbad72861372955f",
       "tests": 23,
       "skips": 0,
-      "previousSha256": "348c8da54425ba000c018193ad816be5f645a2aa9416a99a7c34c5dd287e3594"
+      "previousSha256": "348c8da54425ba000c018193ad816be5f645a2aa9416a99a7c34c5dd287e3594",
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "i18n-ios-first-entry-languages.test.mjs": {
       "sha256": "5db2788151ce34cf126e62d0272403658a98590be5eb076970d946ef327b19b0",
@@ -322,10 +327,11 @@
       "skips": 0
     },
     "ios-native-camera-localization.test.mjs": {
-      "sha256": "333774e71cea6f8177cc165d3573954f1d955630d28160a690191894ea755df0",
+      "sha256": "aa7e997e5fe2b06a8763b28dc6c1ddccdf4cf2aa9133385d84561fc05b84e5c0",
       "tests": 5,
       "skips": 0,
-      "previousSha256": "52422a4d860ef807985ed5dc2bb5b91ec123357d9c8ab785631dc9744e6a96ff"
+      "previousSha256": "52422a4d860ef807985ed5dc2bb5b91ec123357d9c8ab785631dc9744e6a96ff",
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "ios-native-development-language.test.mjs": {
       "sha256": "16a68519a1489d48541f2157956c2f5b5ca4653df4e39907a152a35a2e97c11a",
@@ -334,10 +340,11 @@
       "previousSha256": "95d78fea763e1ed1bbc47cfda2fd1051669e0788b08c3270107135d767411b30"
     },
     "ios27-scene-lifecycle.test.mjs": {
-      "sha256": "eec6f65a8e4b7b8576e232698b36e5c5f6659abe01eb76cffcc799ac3e931562",
+      "sha256": "efcbfa1377efa30f469ce1c148ca5874dfa9744c327ebc58e38fae77800a55d8",
       "tests": 4,
       "skips": 0,
-      "previousSha256": "ec46dafee3b23781c58d43731921301e44a016f2d5bfb8215e53f2b8a3e20960"
+      "previousSha256": "ec46dafee3b23781c58d43731921301e44a016f2d5bfb8215e53f2b8a3e20960",
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "jpa9-dead-ball-ui-implementation.test.mjs": {
       "sha256": "b7d824298e1640b1291d4e715bf163ead429236eac64be491cf18aa730316085",
@@ -360,31 +367,31 @@
       "skips": 0
     },
     "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
-      "sha256": "6394fea23feadc02bee9e0201892c998471aff7e2a3ab363c644ae006f83eb72",
+      "sha256": "6d589577fe034af4e001ff0b2649bdfd03bf4cdfaf7e54e794172b9e370e03e1",
       "tests": 4,
       "skips": 0,
-      "updated_in": "Build 95 numeric-menu / outside-tap / vertical-balance implementation (see version-build95-numeric-menu-test-change-map.json)",
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)",
       "previousSha256": "dfd387d37cd545c34527d39305e738db6da8e3c5ef546e8d1a7ed598a45c386c"
     },
     "localization-glossary-25-approval-decision.test.mjs": {
-      "sha256": "5952667270ec372ffe782481d5722397a5f512534a08a7db88549324d322ffeb",
+      "sha256": "b44cf3c4cfe97debfdcaf5f433be58a2631f3f2d30fa8a8aa4b27f6f5bc392db",
       "tests": 6,
       "skips": 0,
       "previousSha256": "efb33d83bbabcdbf768abe9298e9669249187211fa07997f81fe30d6fc34df5c",
-      "updated_in": "Build 95 numeric-menu / outside-tap / vertical-balance implementation (see version-build95-numeric-menu-test-change-map.json)"
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "localization-glossary-finalization-decision.test.mjs": {
-      "sha256": "08168b3ab1939c7d1c6d865744603efda89f4640ddc969e2aff094b41fc8c3e6",
+      "sha256": "fdfb9237bb8a3da3a9a1443a675395d7615a1ff35a4483b11ffdaa49b477eb0c",
       "tests": 7,
       "skips": 0,
       "previousSha256": "18323fdabd704194b4f8ba96e299d267cdd410f8c244989ad44ffa277f81bd6f",
-      "updated_in": "Build 95 numeric-menu / outside-tap / vertical-balance implementation (see version-build95-numeric-menu-test-change-map.json)"
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "localization-ios-first-entry-language-decision.test.mjs": {
-      "sha256": "25bd4df6be859fa496fe71477976f2e4ba38d5bcdba77d0c8a7d10f32229b9cf",
+      "sha256": "f62e39958ff8759d5eabcb1981388ea08c2ef417b52f3973b3a8e16aeffda3ed",
       "tests": 4,
       "skips": 0,
-      "updated_in": "Build 95 numeric-menu / outside-tap / vertical-balance implementation (see version-build95-numeric-menu-test-change-map.json)",
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)",
       "previousSha256": "66b595ba5a289be32d940e17e3c66e8944e088fbdafb15df25ef938f32798fd0"
     },
     "localization-native-camera-decision.test.mjs": {
@@ -465,10 +472,10 @@
       "previousSha256": "f21c6400e5d776bfbc2d8f34f78c2314f210b67d291d1f2dff70a56a43016d60"
     },
     "match-setup-ux.test.mjs": {
-      "sha256": "6cf5b27cd45f0971f8548d7d01a44dbd158b78b696f4fd1e020220ed1a39edcf",
+      "sha256": "9cbad5f95c7902213dba0b02c8fc83e8c00c89bbcb804a1f698d902645da2a7b",
       "tests": 7,
       "skips": 0,
-      "updated_in": "Build 95 numeric-menu / outside-tap / vertical-balance implementation (see version-build95-numeric-menu-test-change-map.json)"
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "match-sharing-build84-fix.test.mjs": {
       "sha256": "7ecfd2e8ea341b174acbb22f5a4293e565622ddafd00555e533142e7caddbebd",
@@ -506,10 +513,11 @@
       "skips": 0
     },
     "match-sharing-stage5a.test.mjs": {
-      "sha256": "64ebf376b6a58e1503b226b3fc7b934c8e4a4a40501856757df06631e4253e7b",
+      "sha256": "315879e0acd8a9c2c30f173655283b017f50ee675bcff9a877ae4d2dcf763e2e",
       "tests": 19,
       "skips": 0,
-      "previousSha256": "68aa6433fd4690b8f3d1f105f1e890b09d597e2bd338c6446cc6fcda0c9161c1"
+      "previousSha256": "68aa6433fd4690b8f3d1f105f1e890b09d597e2bd338c6446cc6fcda0c9161c1",
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "match-sharing-stage5b.test.mjs": {
       "sha256": "84c239cdaaecfdc44f82c91419215fe9f99e905dc8961a7b13d2a308bf794bf9",
@@ -522,10 +530,11 @@
       "skips": 0
     },
     "native-ios-foundation.test.mjs": {
-      "sha256": "5b246e9178c7ce52801bcb81e5554afd12843957e28c91e4e071ba21e5f07c62",
+      "sha256": "0fe4e670223f8b7c99e5d58220a8eb1cdda44e64f193f8702e6bae78c6e48aeb",
       "tests": 6,
       "skips": 0,
-      "previousSha256": "7ab70189b1350da1591424a65bc9a0a24a12c7e982219f4dc182b0824851259b"
+      "previousSha256": "7ab70189b1350da1591424a65bc9a0a24a12c7e982219f4dc182b0824851259b",
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "navigation-phase2-6.test.mjs": {
       "sha256": "65bd15dadeb9ff48ab353d6389d4e75946b661d8d1ba143b1a4fee2d9bd4b071",
@@ -534,10 +543,11 @@
       "updated_in": "P2-5a-1 (old->new assertion map in Evidence)"
     },
     "navigation-shell-phase1.test.mjs": {
-      "sha256": "f988f79e5a6e452fbb5101514b52a5ad2bf06509d050664c2077b922dfd87df6",
+      "sha256": "c3bc51bd463b592085fb57a4d023e182b884f7ace633ba8432c35425eb6b0da5",
       "tests": 11,
       "skips": 0,
-      "previousSha256": "86ae077f94d283f2a515c848a923629e8e6df65763098e660395a287abfa82d7"
+      "previousSha256": "86ae077f94d283f2a515c848a923629e8e6df65763098e660395a287abfa82d7",
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "new-home-decision.test.mjs": {
       "sha256": "d600e8f9995836420c2f8888f02a762667bb12230a60d0fc8a7aef5a3d5325eb",
@@ -567,10 +577,11 @@
       "updated_in": "Build 95 numeric-menu / outside-tap / vertical-balance implementation (see version-build95-numeric-menu-test-change-map.json)"
     },
     "official-website-v1.test.mjs": {
-      "sha256": "f5c42613bc958226bd28a9413ef441447fdcebf4752d2f52b101a170e11369cd",
+      "sha256": "a0c3bf82ba6c9dbf4a44352b437d2ee3717987a70bff7f13ab2d0b8eabcabcd2",
       "tests": 4,
       "skips": 0,
-      "previousSha256": "1b9e7b31a36e5be1e266c186b2a05e2a5cecb9d1071c7277f87857a994b1a197"
+      "previousSha256": "1b9e7b31a36e5be1e266c186b2a05e2a5cecb9d1071c7277f87857a994b1a197",
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "p3-6-a10-openhistoricalrecord.test.mjs": {
       "sha256": "79a626157551fbfdf5e0407f996f99c5417deedc2e066f512679c2671630857a",
@@ -603,14 +614,16 @@
       "skips": 0
     },
     "p4-manifest-completeness.test.mjs": {
-      "sha256": "11e90c8f7f3b9f8327fd6dce098ed11b0095eb21436e1eecd7eb84a43cc70f88",
+      "sha256": "a041d25b3746a77c3d87a9e6ea73bc68d8aa9aca006e23ab8c7b2832b427a5b3",
       "tests": 4,
-      "skips": 0
+      "skips": 0,
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "p4-po-approval.test.mjs": {
-      "sha256": "4c56d41b7db055459f5b646a39636859de1258850e9e5dab2d36b5afdac436cf",
+      "sha256": "8f939ca0fb2ac961b2f23000211e6154a6c306f5af39aa5f7d01e8f10aa9d4c7",
       "tests": 3,
-      "skips": 0
+      "skips": 0,
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "p4-po-translation-fixes.test.mjs": {
       "sha256": "f6dd34af68450d27bccf09b296385a421056fd0ba7fa2a7ebd44d6d90fbd1c7d",
@@ -669,10 +682,11 @@
       "skips": 0
     },
     "player-detail-final-rc-regression.test.mjs": {
-      "sha256": "7f5b929c97883f2438548a933af8a5d4d64fb5da1015b810ca66f651a801162a",
+      "sha256": "df13da2c59813cb08b61d6f565be4df0b0601c0b5fbbc6c400f8117e873f02a0",
       "tests": 0,
       "skips": 0,
-      "previousSha256": "fa88c37ead3be79f6acf0d13c6a6c555714fd024ef462af5b58d698a829da1b9"
+      "previousSha256": "fa88c37ead3be79f6acf0d13c6a6c555714fd024ef462af5b58d698a829da1b9",
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "player-discipline-metrics.test.mjs": {
       "sha256": "fc5c8942ed9e1e416a37e1daaca4d741acf0e04a44f5c0e827553da8184c144e",
@@ -827,10 +841,11 @@
       "skips": 0
     },
     "start-button-reach.test.mjs": {
-      "sha256": "7efc884cd18bf1d42974997bd779ca9fec5621b941cf84db6de416710e6e75fa",
+      "sha256": "7861de16a72c117c91bdfd12ddfb72fc3f60c5188f3c67859ed5db004757af72",
       "tests": 4,
       "skips": 0,
-      "previousSha256": "91b4f6a58dc349d321f229a753f20d3cf5db43e86720711dc1a5884b5b697931"
+      "previousSha256": "91b4f6a58dc349d321f229a753f20d3cf5db43e86720711dc1a5884b5b697931",
+      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
     },
     "tenball-result-parity.test.mjs": {
       "sha256": "3fa3a3adcd34cedc7114da9b7d600fea6562d801601d4f045d0e284f1c32b827",

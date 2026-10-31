@@ -1,21 +1,24 @@
 /* Match-setup UX trial (Build 95 candidate; design basis: the isolated Prototype of 2026-10-30).
  * Static contract tests. Presentation only: no start condition, no stored data, no score / clock calculation is touched. The new wording is P3-PROVISIONAL (not in the main catalogs). */
 import test from "node:test";
+import crypto from "node:crypto";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const read = f => readFileSync(new URL("../" + f, import.meta.url), "utf8");
 const html = read("index.html"), js = read("match-setup-ux-v1.js"), css = read("match-setup-ux-v1.css"), sc = read("shotclock-v1.js"), scCss = read("shotclock-v1.css");
-const cat = require("../i18n-catalog-setupux-v1.js");
+const cats = { ja: require("../i18n-catalog-ja-v1.js"), en: require("../i18n-catalog-en-v1.js"), "zh-Hans": require("../i18n-catalog-zh-hans-v1.js") };
+const rec = JSON.parse(read("tests/fixtures/p4/po-approval-setupux.json"));
 
-test("SU-1 wiring: catalog, script and stylesheet are loaded (page, service worker, native build list) and the start button sits in the independent footer", () => {
-  for (const f of ["i18n-catalog-setupux-v1.js", "match-setup-ux-v1.js", "match-setup-ux-v1.css"]) {
+test("SU-1 wiring: script and stylesheet are loaded (page, service worker, native build list) and the start button sits in the independent footer", () => {
+  for (const f of ["match-setup-ux-v1.js", "match-setup-ux-v1.css"]) {
     assert.ok(html.includes("./" + f + "?v="), "index.html loads " + f);
     assert.ok(read("sw.js").includes("./" + f + "?v="), "sw.js precaches " + f);
     assert.ok(read("scripts/build-native-web.mjs").includes('"' + f + '"'), "native build copies " + f);
   }
-  assert.ok(html.indexOf("i18n-catalog-setupux-v1.js") < html.indexOf("match-setup-ux-v1.js") && html.indexOf("match-setup-ux-v1.js") < html.indexOf("./shotclock-v1.js?v="));
+  assert.ok(!html.includes("i18n-catalog-setupux-v1.js") && !read("sw.js").includes("i18n-catalog-setupux-v1.js") && !read("scripts/build-native-web.mjs").includes("i18n-catalog-setupux-v1.js"), "the provisional catalog is retired (plan A)");
+  assert.ok(html.indexOf("match-setup-ux-v1.js") < html.indexOf("./shotclock-v1.js?v="));
   assert.ok(html.indexOf("match-setup-ux-v1.css") > html.indexOf("shotclock-v1.css"), "the layout sheet loads last so it wins the cascade");
   const footer = html.match(/<div class="cue-setup-footer-v1" id="cueSetupFooterV1">[\s\S]*?<\/div>\s*\n\s*\n/);
   assert.ok(footer && /id="cueSetupReasonV1"/.test(footer[0]) && /id="startGameBtn"/.test(footer[0]));
@@ -24,16 +27,25 @@ test("SU-1 wiring: catalog, script and stylesheet are loaded (page, service work
   assert.ok(/<div class="cue-setup-reason-wrap-v1" role="status">/.test(html));
 });
 
-test("SU-2 wording: provisional catalog has identical key sets in ja / en / zh-Hans, is NOT in the main catalogs and carries the P3-PROVISIONAL / not-reviewed notice", () => {
-  const keys = l => Object.keys(cat[l]).sort();
-  assert.deepEqual(keys("en"), keys("ja")); assert.deepEqual(keys("zh-Hans"), keys("ja"));
-  assert.equal(keys("ja").length, 7);
-  for (const l of ["ja", "en", "zh-Hans"]) for (const k of keys(l)) assert.ok(String(cat[l][k]).trim().length > 0, l + " " + k);
-  for (const f of ["i18n-catalog-ja-v1.js", "i18n-catalog-en-v1.js", "i18n-catalog-zh-hans-v1.js"]) assert.ok(!read(f).includes("setupux."), f + " must not hold the provisional keys");
-  const head = read("i18n-catalog-setupux-v1.js").slice(0, 900);
-  assert.match(head, /P3-PROVISIONAL/); assert.match(head, /Human independent review: NOT PERFORMED/);
-  assert.ok(!/p4-po-approval|setupux/.test(read("tests/p4-po-approval.test.mjs")), "no P4 approval record exists for these terms");
-  assert.equal(cat.ja["setupux.reason.p2"], "対戦相手を選ぶと試合を開始できます");
+test("SU-2 wording (plan A, PO-approved 2026-10-30): 3 reason keys live in the main catalogs with a P4 approval record bound to [ja, en, zh-Hans]; the 4 retired keys are gone; no human review is claimed", () => {
+  const keys = ["setupux.reason.p2", "setupux.reason.p1", "setupux.reason.both"];
+  assert.deepEqual(Object.keys(rec.keys).sort(), [...keys].sort());
+  const hash = k => crypto.createHash("sha256").update(JSON.stringify([cats.ja[k], cats.en[k], cats["zh-Hans"][k]])).digest("hex").slice(0, 16);
+  const approved = { "setupux.reason.p2": "8e7119f85b3f68a7", "setupux.reason.p1": "dfb84fc2cb977df3", "setupux.reason.both": "d9d1ec071afa783b" };
+  for (const k of keys) { assert.equal(rec.keys[k].h, approved[k]); assert.equal(hash(k), approved[k], k + ": text differs from the PO-approved wording"); assert.equal(rec.keys[k].r, "R1"); }
+  for (const l of Object.keys(cats)) for (const gone of ["setupux.reason.other", "setupux.reason.aria", "setupux.menu.other", "setupux.menu.close"]) assert.ok(!(gone in cats[l]), l + " must not hold retired key " + gone);
+  assert.equal(rec.status, "P4-APPROVED"); assert.equal(rec.humanIndependentReview, "NOT PERFORMED"); assert.match(rec.reviewedState, /P4-REVIEWED is not used/);
+  assert.doesNotMatch(JSON.stringify(rec), /"status":\s*"P4-REVIEWED"/);
+  assert.equal(cats.ja["setupux.reason.p2"], "対戦相手を選ぶと試合を開始できます");
+});
+
+test("SU-2b VoiceOver / fallback: the reason text itself is the accessible name, the action is the hint (existing approved wording), the 'Other…' label reuses the main 'その他', no reason is shown without a missing player", () => {
+  assert.match(js, /reason\.setAttribute\("aria-label", T\(key\)\)/);
+  assert.match(js, /reason\.setAttribute\("aria-description", T\(miss\[0\] === 2 && miss\.length === 1 \? "p3\.39bd0fa6" : "p3\.b3005c8a"\)\)/);
+  assert.equal(cats.ja["p3.39bd0fa6"], "対戦相手を選択"); assert.equal(cats.ja["p3.b3005c8a"], "プレーヤーを選択"); assert.equal(cats.ja["p3.7c2281ce"], "その他");
+  assert.match(js, /label: other \? T\("p3\.7c2281ce"\) \+ "…"/);
+  assert.match(js, /if \(!miss\.length\) \{ reason\.hidden = true;/);
+  assert.ok(!/CueScoreSetupUxCatalogV1|setupux\.reason\.other|setupux\.reason\.aria|setupux\.menu\./.test(js));
 });
 
 test("SU-3 policy: no DOM-watching observer (AC-S3 ratchet), no write to the start button's disabled state, explicit triggers only", () => {

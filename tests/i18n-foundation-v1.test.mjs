@@ -342,7 +342,7 @@ test("i18n assets are registered for offline use and load before the application
   assert.deepEqual([...positions].sort((a, b) => a - b), positions, "core first, then ja, en, zh-Hans");
   assert.ok(positions[3] < html.indexOf('<script src="./demo-data.js'));
   assert.ok(positions[3] < html.indexOf("CueScore App Store v1.0 RC: Later features remain implemented"));
-  assert.match(read("sw.js"), /const APP_VERSION = "2\.0-build95-setupux-v1";/);
+  assert.match(read("sw.js"), /const APP_VERSION = "2\.0-build96-setupux-v1";/);
 });
 
 test("the Settings language row and view reuse the existing Settings suite components and bypass the demo/cloud action handlers", () => {

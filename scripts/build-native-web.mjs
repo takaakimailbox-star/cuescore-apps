@@ -27,7 +27,6 @@ const files = [
   "navigation-phase2-6.js",
   "shotclock-v1.js",
   "match-setup-ux-v1.js",
-  "i18n-catalog-setupux-v1.js",
   "analytics-build4-metrics.js",
   "i18n-v1.js",
   "i18n-catalog-ja-v1.js",

@@ -118,6 +118,10 @@
     "shotclock.aria.undo": "延長を取り消す",
     "shotclock.aria.reset": "リセット、残り時間を基本時間に戻す",
     "shotclock.aria.extCount": "延長{count}回",
+    /* Build 96 candidate: match-setup start-condition reasons, PO-approved plan A 2026-10-30 (record: tests/fixtures/p4/po-approval-setupux.json) */
+    "setupux.reason.p2": "対戦相手を選ぶと試合を開始できます",
+    "setupux.reason.p1": "先攻プレーヤーを選ぶと試合を開始できます",
+    "setupux.reason.both": "プレーヤーを選ぶと試合を開始できます",
     "p3.001d8618": "プレーヤー分析",
     "p3.005e9b87": "復元しました。\n登録プレーヤー {playerCount}人\n対戦履歴 {recordCount}試合\n試合区分 {categoryCount}件\nシーズン {seasonCount}件\n\nクラウドは自動上書きせず、保存方法の確認待ちにしました。",
     "p3.008e12ce": "最近は相性が上向いています",

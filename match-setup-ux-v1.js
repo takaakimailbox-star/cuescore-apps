@@ -8,9 +8,7 @@
   const doc = root.document;
   if (!doc) return;
   const $ = (s, r) => (r || doc).querySelector(s);
-  const CAT = root.CueScoreSetupUxCatalogV1 || {};
-  const LANG = () => (root.CueScoreI18n && root.CueScoreI18n.language) || "ja";
-  const T = key => { const d = CAT[LANG()] || CAT.ja || {}; return Object.prototype.hasOwnProperty.call(d, key) ? d[key] : ((CAT.ja || {})[key] || key); };
+  const T = key => (typeof root.cueT === "function" ? root.cueT(key) : key);      // main catalogs (P4-APPROVED record: tests/fixtures/p4/po-approval-setupux.json)
   const ROW_PX = 46, MENU_MAX_HEIGHT = Math.round(ROW_PX * 7.5 + 14);      // bounded list: about 6.5 scrolling rows + the pinned "Other" row; longer lists scroll
 
   /* ---------- tap menu ---------- */
@@ -84,7 +82,7 @@
       const rows = real.map(b => {
         const small = b.querySelector("small"), clone = b.cloneNode(true); if (clone.querySelector("small")) clone.querySelector("small").remove();
         const other = b.dataset.raceValue === "other";
-        return { value: b.dataset.raceValue, label: other ? T("setupux.menu.other") : clone.textContent.trim(), sub: small ? small.textContent.trim() : "", selected: b.classList.contains("is-selected"), real: b, pinned: other };
+        return { value: b.dataset.raceValue, label: other ? T("p3.7c2281ce") + "…" : clone.textContent.trim(), sub: small ? small.textContent.trim() : "", selected: b.classList.contains("is-selected"), real: b, pinned: other };
       });
       picker.classList.add("cue-menu-mode-v1");
       const title = (($("#newMatchRacePickerTitleV1") || {}).textContent || "").trim();
@@ -117,9 +115,13 @@
       /* fewer than two registered players: the existing guide card (final-ui-build18.js) already explains it and offers "add player"; saying "select" would mislead, so the reason line stays quiet */
       const guide = $(".match-player-guide-v18");
       if (!start.disabled || (guide && !guide.hidden)) { reason.hidden = true; reason.textContent = ""; reason.removeAttribute("data-slot"); return; }
-      const key = miss.length === 2 ? "setupux.reason.both" : miss[0] === 1 ? "setupux.reason.p1" : miss[0] === 2 ? "setupux.reason.p2" : "setupux.reason.other";
-      reason.hidden = false; reason.textContent = T(key); reason.dataset.slot = String(miss[0] || 2);
-      reason.setAttribute("aria-label", T("setupux.reason.aria") + ": " + T(key));
+      /* an unexpected state without a missing player (e.g. the same player twice from stored data) shows no reason rather than a wrong one */
+      if (!miss.length) { reason.hidden = true; reason.textContent = ""; reason.removeAttribute("data-slot"); reason.removeAttribute("aria-label"); reason.removeAttribute("aria-description"); return; }
+      const key = miss.length === 2 ? "setupux.reason.both" : miss[0] === 1 ? "setupux.reason.p1" : "setupux.reason.p2";
+      reason.hidden = false; reason.textContent = T(key); reason.dataset.slot = String(miss[0]);
+      /* VoiceOver reads the reason itself; the action is the hint (existing approved wording "Select opponent" / "Select player") */
+      reason.setAttribute("aria-label", T(key));
+      reason.setAttribute("aria-description", T(miss[0] === 2 && miss.length === 1 ? "p3.39bd0fa6" : "p3.b3005c8a"));
     };
     /* the reason line leads to the missing selection through the EXISTING player-select button (no new dialog, no start-condition change) */
     reason.addEventListener("click", () => { const b = $("#p" + (reason.dataset.slot || "2") + "PlayerSearchBtn"); if (b) b.click(); });

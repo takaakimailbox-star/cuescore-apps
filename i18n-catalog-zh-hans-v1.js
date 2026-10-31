@@ -118,6 +118,10 @@
     "shotclock.aria.undo": "撤销延时",
     "shotclock.aria.reset": "重置，恢复为基本时间",
     "shotclock.aria.extCount": "已延时{count}次",
+    /* Build 96 candidate: match-setup start-condition reasons, PO-approved plan A 2026-10-30 (record: tests/fixtures/p4/po-approval-setupux.json) */
+    "setupux.reason.p2": "选择对手后即可开始比赛",
+    "setupux.reason.p1": "选择先手球员后即可开始比赛",
+    "setupux.reason.both": "选择球员后即可开始比赛",
     "p3.001d8618": "球员分析",
     "p3.005e9b87": "已恢复。\n已登记球员 {playerCount}人\n对战记录 {recordCount}场\n比赛类别 {categoryCount}项\n赛季 {seasonCount}项\n\n云端不会被自动覆盖，正在等待确认保存方式。",
     "p3.008e12ce": "最近相性在变好",

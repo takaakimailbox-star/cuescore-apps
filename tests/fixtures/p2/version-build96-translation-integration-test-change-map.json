@@ -1,0 +1,119 @@
+{
+ "gate": "Build 96 candidate: PO-approved translation plan A (7->3 keys) integrated into the main catalogs with a P4 approval record (po-approval-setupux.json); provisional catalog i18n-catalog-setupux-v1.js retired; VoiceOver reason/hint; Version 1.4 build 95->96 (CURRENT_PROJECT_VERSION, cache build96-setupux-v1, match-setup-ux asset query 1.1). No assertion weakened: SU-1/SU-2 rewritten for the integrated catalog (stricter: approved hashes pinned), SU-2b added; P4 tests count the new record.",
+ "changedProductFiles": {
+  "i18n-catalog-en-v1.js": {
+   "before": "011a957ed527adf6298f78e6a288a8718506c766db3356364b2fc3aab436a00f",
+   "after": "cb6e0d797835e13e7978ec9d5944bd9554a63c19cc13ca780a0ac190979a28ce"
+  },
+  "i18n-catalog-ja-v1.js": {
+   "before": "351ad0530e4ff8a1c66ce81b37938c10a60d7684ffae2dc3ceeb36fc48ea66ad",
+   "after": "8e143e25570f13da4f0cae16f9812cc0b87eae00f2e4ff1f01f9a4e41c2bb1c4"
+  },
+  "i18n-catalog-zh-hans-v1.js": {
+   "before": "0be5d83df480714bcf2d4522810a76e4d655675d9fe15c1600249c3bb14362d6",
+   "after": "1322bf99ba7288352e7db1dfaacc515dfd7028af92fd8adef92f4387b4c4f456"
+  },
+  "index.html": {
+   "before": "68fddc85f59f5fb1a62f3bbf0bb99330631c1cdfec3a4ff39dc8f7a5abcea020",
+   "after": "a933a668c6612b9972cc05b617b98a38fb9dbdf512012e8b9b58a832e1e07a8d"
+  },
+  "ios/App/App.xcodeproj/project.pbxproj": {
+   "before": "17121c255c2646d766cb8b190287f079b8fe82f93b7550529763ad1a65e78dd3",
+   "after": "966b22d82dd4ce466011a3228cceac6bcc85e608a9d1de5a851dfa57be502416"
+  },
+  "match-setup-ux-v1.js": {
+   "before": "3c7c0e1c20037029088ef0b66d3b753d74633931be9699de3d38ce7d5c8d45ce",
+   "after": "9b8c10f461824c7f922ac39a4db8a0f77b92fb971d3bcc1f93d28ec719bf7f6e"
+  },
+  "scripts/build-native-web.mjs": {
+   "before": "a89469c7ceb97884f9e8c9ad3a4b1134682525d45cf3184198bc9b215b3d8827",
+   "after": "750ca3188afe5cd554b2196e01d0b5e40a3127f487db584eb71f921f27e7ed53"
+  },
+  "sw.js": {
+   "before": "6cf62d7ef2d7e3c12eda100ff5beb9817993f10af4ede9dccca6cda3f0fb719e",
+   "after": "5f3fbe3ac48a653c4978e5ed36d585181dff9278b307c8cb5a4492a94edbf776"
+  }
+ },
+ "changedTestFiles": {
+  "build32-final-review-followup.test.mjs": {
+   "before": "1b22330c18ed1b962d2d696157618e6672373f5f0a47955d6c06bd00a0ccf324",
+   "after": "e58bb77077cd121fc01bc3592f49846928579156424a2f2e6c6ee5d6ddabf9e0"
+  },
+  "build33-home-reference.test.mjs": {
+   "before": "b595d8468be25265463c6fcb7d2c3b258295667d3e3ea023d4c41a92af9bddbd",
+   "after": "726eda0429352a7dab4f0d29ea00570d301e7a33f1100ff6e965f7ccd1bf5ba9"
+  },
+  "build76-settings-scroll-lock.test.mjs": {
+   "before": "384c2cb51bc59f10eb3ecc799ff3763aac8b0cd132928d1fb9030fa27e7a74d5",
+   "after": "6e7b084ff44f2b1cd179d8291624b8da8a5ee746f8c2da984dec594f0df12b28"
+  },
+  "game-result-match-detail-common-layout.test.mjs": {
+   "before": "5fa2378a9b0e4cd7ecda1e745910d6b4bbb358dd275891c5784e9c6cbf26f48f",
+   "after": "c571131952520bcb026bd632060956db303465c2544b6a52d43902dd257f1d82"
+  },
+  "i18n-foundation-v1.test.mjs": {
+   "before": "42d1bb17fcdc88684301f9f20a2e72d916972a55f1ebda5d5810ec6e697447c7",
+   "after": "36be63bd9f3c1998d50a51c14234848ab92e01161744e63efbad72861372955f"
+  },
+  "ios-native-camera-localization.test.mjs": {
+   "before": "333774e71cea6f8177cc165d3573954f1d955630d28160a690191894ea755df0",
+   "after": "aa7e997e5fe2b06a8763b28dc6c1ddccdf4cf2aa9133385d84561fc05b84e5c0"
+  },
+  "ios27-scene-lifecycle.test.mjs": {
+   "before": "eec6f65a8e4b7b8576e232698b36e5c5f6659abe01eb76cffcc799ac3e931562",
+   "after": "efcbfa1377efa30f469ce1c148ca5874dfa9744c327ebc58e38fae77800a55d8"
+  },
+  "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
+   "before": "6394fea23feadc02bee9e0201892c998471aff7e2a3ab363c644ae006f83eb72",
+   "after": "6d589577fe034af4e001ff0b2649bdfd03bf4cdfaf7e54e794172b9e370e03e1"
+  },
+  "localization-glossary-25-approval-decision.test.mjs": {
+   "before": "5952667270ec372ffe782481d5722397a5f512534a08a7db88549324d322ffeb",
+   "after": "b44cf3c4cfe97debfdcaf5f433be58a2631f3f2d30fa8a8aa4b27f6f5bc392db"
+  },
+  "localization-glossary-finalization-decision.test.mjs": {
+   "before": "08168b3ab1939c7d1c6d865744603efda89f4640ddc969e2aff094b41fc8c3e6",
+   "after": "fdfb9237bb8a3da3a9a1443a675395d7615a1ff35a4483b11ffdaa49b477eb0c"
+  },
+  "localization-ios-first-entry-language-decision.test.mjs": {
+   "before": "25bd4df6be859fa496fe71477976f2e4ba38d5bcdba77d0c8a7d10f32229b9cf",
+   "after": "f62e39958ff8759d5eabcb1981388ea08c2ef417b52f3973b3a8e16aeffda3ed"
+  },
+  "match-setup-ux.test.mjs": {
+   "before": "6cf5b27cd45f0971f8548d7d01a44dbd158b78b696f4fd1e020220ed1a39edcf",
+   "after": "9cbad5f95c7902213dba0b02c8fc83e8c00c89bbcb804a1f698d902645da2a7b"
+  },
+  "match-sharing-stage5a.test.mjs": {
+   "before": "64ebf376b6a58e1503b226b3fc7b934c8e4a4a40501856757df06631e4253e7b",
+   "after": "315879e0acd8a9c2c30f173655283b017f50ee675bcff9a877ae4d2dcf763e2e"
+  },
+  "native-ios-foundation.test.mjs": {
+   "before": "5b246e9178c7ce52801bcb81e5554afd12843957e28c91e4e071ba21e5f07c62",
+   "after": "0fe4e670223f8b7c99e5d58220a8eb1cdda44e64f193f8702e6bae78c6e48aeb"
+  },
+  "navigation-shell-phase1.test.mjs": {
+   "before": "f988f79e5a6e452fbb5101514b52a5ad2bf06509d050664c2077b922dfd87df6",
+   "after": "c3bc51bd463b592085fb57a4d023e182b884f7ace633ba8432c35425eb6b0da5"
+  },
+  "official-website-v1.test.mjs": {
+   "before": "f5c42613bc958226bd28a9413ef441447fdcebf4752d2f52b101a170e11369cd",
+   "after": "a0c3bf82ba6c9dbf4a44352b437d2ee3717987a70bff7f13ab2d0b8eabcabcd2"
+  },
+  "p4-manifest-completeness.test.mjs": {
+   "before": "11e90c8f7f3b9f8327fd6dce098ed11b0095eb21436e1eecd7eb84a43cc70f88",
+   "after": "a041d25b3746a77c3d87a9e6ea73bc68d8aa9aca006e23ab8c7b2832b427a5b3"
+  },
+  "p4-po-approval.test.mjs": {
+   "before": "4c56d41b7db055459f5b646a39636859de1258850e9e5dab2d36b5afdac436cf",
+   "after": "8f939ca0fb2ac961b2f23000211e6154a6c306f5af39aa5f7d01e8f10aa9d4c7"
+  },
+  "player-detail-final-rc-regression.test.mjs": {
+   "before": "7f5b929c97883f2438548a933af8a5d4d64fb5da1015b810ca66f651a801162a",
+   "after": "df13da2c59813cb08b61d6f565be4df0b0601c0b5fbbc6c400f8117e873f02a0"
+  },
+  "start-button-reach.test.mjs": {
+   "before": "7efc884cd18bf1d42974997bd779ca9fec5621b941cf84db6de416710e6e75fa",
+   "after": "7861de16a72c117c91bdfd12ddfb72fc3f60c5188f3c67859ed5db004757af72"
+  }
+ }
+}

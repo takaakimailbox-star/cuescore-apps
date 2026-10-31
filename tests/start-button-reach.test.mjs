@@ -34,6 +34,6 @@ test("SB93-3 the start button markup, handlers and the shot-clock / match logic 
   const html = read("index.html");
   assert.match(html, /<div class="cue-setup-footer-v1" id="cueSetupFooterV1">[\s\S]*?<button class="start-game-button new-match-start-v1 cue-home-start-v2" id="startGameBtn" type="button">/);
   assert.ok(!/disabled[^>]*id="startGameBtn"|id="startGameBtn"[^>]*disabled/.test(html), "no static disabled attribute is added to the markup (final-ui-build18.js owns it)");
-  assert.match(read("sw.js"), /navigation-shell-phase1\.css\?v=2\.0-build95-setupux-v1/);
-  assert.match(html, /navigation-shell-phase1\.css\?v=2\.0-build95-setupux-v1/);
+  assert.match(read("sw.js"), /navigation-shell-phase1\.css\?v=2\.0-build96-setupux-v1/);
+  assert.match(html, /navigation-shell-phase1\.css\?v=2\.0-build96-setupux-v1/);
 });

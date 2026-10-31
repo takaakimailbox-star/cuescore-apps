@@ -118,6 +118,10 @@
     "shotclock.aria.undo": "Undo extension",
     "shotclock.aria.reset": "Reset, return to base time",
     "shotclock.aria.extCount": {"one": "Extended {count} time", "other": "Extended {count} times"},
+    /* Build 96 candidate: match-setup start-condition reasons, PO-approved plan A 2026-10-30 (record: tests/fixtures/p4/po-approval-setupux.json) */
+    "setupux.reason.p2": "Select an opponent to start the match",
+    "setupux.reason.p1": "Select the first player to start the match",
+    "setupux.reason.both": "Select players to start the match",
     "p3.001d8618": "Player analysis",
     "p3.005e9b87": "Restored.\nRegistered players: {playerCount}\nMatch history: {recordCount}\nMatch categories: {categoryCount}\nSeasons: {seasonCount}\n\nThe cloud was not overwritten automatically and is waiting for you to choose how to save.",
     "p3.008e12ce": "The matchup has been improving recently",

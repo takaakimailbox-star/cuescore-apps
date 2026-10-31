@@ -1,0 +1,25 @@
+{
+ "decision": "PO approval of translation plan A (7 -> 3 keys), recorded 2026-10-30; keys moved into the main catalogs in the Build 96 candidate (2026-10-31)",
+ "date": "2026-10-30",
+ "approver": "Product Owner (reply 「そういうことか。うん、OK😊」, relayed by the Score command post)",
+ "status": "P4-APPROVED",
+ "scope": "3 match-setup start-condition reason keys. Each approval binds to the hash of [ja, en, zh-Hans]; a later change invalidates it. The 4 other candidate keys (reason.other, reason.aria, menu.other, menu.close) are retired: menu.other reuses the approved main-catalog 'その他' plus an ellipsis, VoiceOver reads the reason text itself with the existing approved 'select' wording as the hint.",
+ "humanIndependentReview": "NOT PERFORMED",
+ "reviewedState": "P4-REVIEWED is not used (no named human reviewer)",
+ "residualRisk": "R1 = standard wording, AI-verified only (no human independent review).",
+ "evidence": "docs/implementation/CueScore_MatchSetupUX_7_Terms_Translation_QA_and_P4_Package_2026-10-30.md (sections 3, 10)",
+ "keys": {
+  "setupux.reason.p2": {
+   "r": "R1",
+   "h": "8e7119f85b3f68a7"
+  },
+  "setupux.reason.p1": {
+   "r": "R1",
+   "h": "dfb84fc2cb977df3"
+  },
+  "setupux.reason.both": {
+   "r": "R1",
+   "h": "d9d1ec071afa783b"
+  }
+ }
+}
