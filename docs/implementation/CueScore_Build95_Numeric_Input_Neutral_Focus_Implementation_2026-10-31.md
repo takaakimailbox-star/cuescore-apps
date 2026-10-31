@@ -58,4 +58,4 @@ Machine-readable evidence: `docs/implementation/evidence/CueScore_Build95_Numeri
 - 実iPhoneでの表示、物理キーボード、VoiceOver実音声は **NOT VERIFIED**。既存アクセシビリティ実装は変更していない。
 - 製品側の自動・実Chrome検証はPASS。最初の`node` PATH不足とブラウザのloopback bind制限はテスト環境側で、同梱Nodeと許可済み実Chrome実行により解消した。
 - Build番号、Archive、Upload、iPhone反映、TestFlight、App Store Connect、App Review、一般公開は**未実施**。
-- 実装commit済み。文書commitとpushは最終diff・Git状態確認後に本Gate内でのみ実施する。
+- 実装と文書は履歴を追跡できるよう別commitに分離した。
