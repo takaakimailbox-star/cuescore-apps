@@ -26,3 +26,10 @@
 
 ## 4. 保護（不変）
 得点・勝敗・ファール、保存schema、中断試合、QR／Backup、Free／Pro・IAP・価格・地域、ショットクロックの計算・操作契約、全画面共通の黄色フォーカス、未選択カード、試合中の黄色状態表示、競技アイコン、ショットクロック色。Build 83 RCA は STOP、セット方式は `S-B=false`、途中終了・勝敗なし履歴保存は対象外。
+
+## 5. Build 96 ローカル Archive（Upload なし）
+- 製品 commit `d0993552989348bb5940e14051dbfa0d6fed7725`（以降は本記録のみの docs commit）。ASC 読取で最新は Build 95（VALID）、96 は未使用を確認して確定。
+- Archive: `/Users/Ludique/Documents/Codex/2026-10-31/cuescore-build96/archive/CueScore_1.4_96_xcode271.xcarchive`（`DEVELOPER_DIR` に別名展開の Xcode 27.1 を指定、独立 DerivedData、`xcodebuild archive` 成功）。Version 1.4／Build 96、Bundle ID `com.takaakimailboxstar.cuescoreapps`、Team U26DF88PRW、署名検証 OK、DTXcodeBuild 27A9275／iphoneos27.1。Archive 内 `public` は `native-web` とバイト一致。
+- 最初の Archive は iOS public コピーに廃止済みの `i18n-catalog-setupux-v1.js`（未参照）が残っていたため `SUPERSEDED_stale_public_…` として記録に残し、削除後に再 Archive（上記）。製品コードは不変。
+- Build 95 の Archive（27B52 版・27.1 版）は不変。Upload・TestFlight・ASC 変更・App Review・一般公開は未実施。90534 は製品不具合と断定していない（Apple 側受付の可能性が最有力、確度は中）。
+- Evidence: `/Users/Ludique/Documents/Codex/2026-10-31/cuescore-build96/`（xcodebuild ログ、各ブラウザテスト結果、archive_tree_sha256.txt）。
