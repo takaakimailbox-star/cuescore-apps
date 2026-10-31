@@ -1,9 +1,10 @@
 # CueScore Current Status
 
-- Updated: 2026-10-23
+- Updated: 2026-10-31
 - Public Version / Build: Japan public catalog still reports `1.1 (79)`; Version `1.2 (84)` release executed and ASC is `READY_FOR_SALE`, public propagation pending **[Historical as of 2026-10-04. Superseded 2026-10-23: the Japan public catalog returns Version `1.2` (currentVersionReleaseDate 2026-10-04T05:11:01Z); the public Build number is NOT VERIFIED (lookup does not expose it).]**
 - Current project Version / Build: `1.2 (84)`
 - Gate: `RELEASE EXECUTED / ASC READY_FOR_SALE / PUBLIC PROPAGATION PENDING`（Version 1.2 Build 84 release gate。変更なし） **[Historical gate label. As of 2026-10-23 the public catalog shows Version 1.2; see CURRENT_STATE.md「Version 1.2 Public Status Synchronized」.]**
+- Build 95 数字入力フォーカス限定改善（2026-10-31、実装commit `9e37a0b0bd952d65e72e5712d752be323e41fbfa`）: PO訂正に従い、「その他」の実編集可能な数値入力だけを中立の黒2px＋白4px haloへ局所置換。全画面共通の黄色3px `:focus-visible`、試合中の手番・選択・勝者、27セレクタ、9-Ball正式色、ショットクロック色は維持。Full Node 1235/1235、実Chrome座標・Tab検証8/8、既存試合設定機能3言語PASS、Native Web生成・コピー整合PASS。実機・VoiceOver実音声はNOT VERIFIED。Decision 049／Official 140・141は候補のまま。Build採番・Archive・Upload・TestFlight・ASC・App Review・公開なし。
 - TestFlight Build 87 Gate: `CUESCORE VERSION 1.3 BUILD 87 VALID ON ASC / TESTFLIGHT INTERNAL AVAILABLE / PO DEVICE VERIFICATION PENDING`（Gate 024、2026-10-24、documentation only）。新Homeを含むBuild 87（main `8ea5b72`）をUpload、ASC `VALID`（Build ID `cae9cefc-aa25-4e5c-8532-cf57ad41f50d`）、Export Complianceは`usesNonExemptEncryption=false`、Internal Build State `IN_BETA_TESTING`。公開版は1.2（Build 84）のまま。実機確認・Privacyメール警告の確認・App Store提出／Releaseは未実施。
 - New Home Implementation Gate: `CUESCORE NEW HOME IMPLEMENTED / BUILD 87 ARCHIVE CREATED / NOT UPLOADED`（2026-10-24）。Decision 045／Official 132・133を実装（main `8130b8b`）、Version 1.3／Build 87（`8ea5b72`）、Full Node 1179／1179、実Chrome 3言語×2幅PASS。Release Device Archive作成済み、Upload・TestFlight配布・App Store提出は未実施。Native実機のタップ確認は未了。
 - Shot Clock integrated improvement（2026-10-29）：Decision 047／Official 136・137（延長＋25/30/45/60選択、横棒4色、数字と単位の横並び、時間切れ表示）を実装（Version 1.4／Build 91のまま、TestFlight Uploadなし）。Decision Log v2.23を発行済み。

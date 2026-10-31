@@ -1,5 +1,12 @@
 # CueScore Apps Current State
 
+## Build 95 数字入力フォーカス限定改善（2026年10月31日、実装commit `9e37a0b0bd952d65e72e5712d752be323e41fbfa`）
+
+- PO訂正: 「黄色い枠を消したい」は、「その他」等で開く**数字入力画面の黄色い枠だけ**を指す。先行の試合中状態表示中立化Prototypeは不採用・製品未反映。試合中の手番・選択中・勝者、27セレクタ、全画面共通の黄色フォーカス、9-Ball正式色、ショットクロック色は変更しない。
+- 実装: `match-setup-ux-v1.css`で `.new-match-race-custom-v1 input[type="number"]:focus-visible` だけを黒2px outline＋白4px haloへ局所上書き。`index.html`の共通黄色3px規則はbyte-identicalで維持。数値・保存・候補・確定・キャンセル・タッチ処理、VoiceOver属性、得点・勝敗・ファール、Free/Pro、QR/Backupは変更なし。
+- 検証: Full Node **1235/1235 PASS**。新規静的3/3、実Chrome 390×844（実座標タップ、Tab／Shift+Tab）**8/8 PASS**。既存試合設定機能はja／en／zh-HansでPASS。Native Web生成・iOS publicコピー・Native foundation 6/6 PASS。黄色の隣接「決定」ボタンは3px共通ringを維持し、手番・選択・勝者・9-Ball・時計色は静的保護テストPASS。
+- Gate境界: Decision 049／Official 140・141は候補のまま。縦バランス、9/10-Ball 1〜10＋その他、3 Cushion 7〜40＋その他、外側タップ、翻訳7→3は未承認・未実装。実機・VoiceOver実音声はNOT VERIFIED。Build採番、Archive、Upload、TestFlight、App Store Connect、App Review、一般公開は未実施。
+
 ## CueScore Version 1.2 Public Status Synchronized（2026年10月23日）
 
 次の項目を**分離**して記録する。公開版（Apple）・出荷binary・GitHub source・現行開発候補を推測で同一扱いしない。
