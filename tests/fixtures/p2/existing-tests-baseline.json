@@ -298,6 +298,12 @@
       "tests": 5,
       "skips": 0
     },
+    "history-tab-from-setup.test.mjs": {
+      "sha256": "ab237e8da0859507493741c34d017d0e2868e6c7ae4c59204ba88f5d00fface4",
+      "tests": 2,
+      "skips": 0,
+      "updated_in": "Build 96 PO device feedback: history tab from the match-setup screen (new test; no existing assertion changed)"
+    },
     "home-neutral-three-cushion-cards.test.mjs": {
       "sha256": "5c83504ce457a30038d9aeab137d989e8f4940bf2f148c64aaf0ae4915e772c8",
       "tests": 0,
