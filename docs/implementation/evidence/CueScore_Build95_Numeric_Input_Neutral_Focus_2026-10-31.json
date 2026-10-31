@@ -1,0 +1,92 @@
+{
+  "timestamp": "2026-10-31T01:23:28.735Z",
+  "viewport": {
+    "width": 390,
+    "height": 844,
+    "safeArea": {
+      "top": 47,
+      "bottom": 34
+    }
+  },
+  "inputPoint": {
+    "x": 155,
+    "y": 322,
+    "w": 244,
+    "h": 46
+  },
+  "focused": {
+    "id": "newMatchRaceCustomInputV1",
+    "outlineColor": "rgb(23, 23, 23)",
+    "outlineStyle": "solid",
+    "outlineWidth": "2px",
+    "outlineOffset": "2px",
+    "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 4px",
+    "height": 46,
+    "inside": true
+  },
+  "applyFocus": {
+    "outlineColor": "rgb(255, 213, 74)",
+    "outlineWidth": "3px"
+  },
+  "checks": [
+    {
+      "ok": true,
+      "label": "real-coordinate Other selection focuses the numeric input",
+      "detail": "newMatchRaceCustomInputV1"
+    },
+    {
+      "ok": true,
+      "label": "numeric input has a clear 2px neutral keyboard ring",
+      "detail": {
+        "id": "newMatchRaceCustomInputV1",
+        "outlineColor": "rgb(23, 23, 23)",
+        "outlineStyle": "solid",
+        "outlineWidth": "2px",
+        "outlineOffset": "2px",
+        "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 4px",
+        "height": 46,
+        "inside": true
+      }
+    },
+    {
+      "ok": true,
+      "label": "numeric input focus has no yellow outline or shadow",
+      "detail": {
+        "outlineColor": "rgb(23, 23, 23)",
+        "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 4px"
+      }
+    },
+    {
+      "ok": true,
+      "label": "white contrast halo preserves visibility on dark and light surroundings",
+      "detail": "rgb(255, 255, 255) 0px 0px 0px 4px"
+    },
+    {
+      "ok": true,
+      "label": "focused numeric input remains a 44px+ visible target",
+      "detail": {
+        "x": 155,
+        "y": 322,
+        "w": 244,
+        "h": 46
+      }
+    },
+    {
+      "ok": true,
+      "label": "Tab moves from the numeric input to Apply"
+    },
+    {
+      "ok": true,
+      "label": "the adjacent Apply button keeps the shared yellow focus ring",
+      "detail": {
+        "outlineColor": "rgb(255, 213, 74)",
+        "outlineWidth": "3px"
+      }
+    },
+    {
+      "ok": true,
+      "label": "Shift+Tab returns to the numeric input"
+    }
+  ],
+  "pass": true
+}

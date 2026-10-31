@@ -469,6 +469,12 @@
       "tests": 7,
       "skips": 0
     },
+    "numeric-input-focus-ring.test.mjs": {
+      "sha256": "bcb6b0edc5696639215c052609617e3cb8adb6d16ffdaf1b880764d0dd894b3d",
+      "tests": 3,
+      "skips": 0,
+      "updated_in": "Build 95 numeric-input neutral focus PO correction (new protection test; no existing assertion changed)"
+    },
     "match-sharing-build84-fix.test.mjs": {
       "sha256": "7ecfd2e8ea341b174acbb22f5a4293e565622ddafd00555e533142e7caddbebd",
       "tests": 8,

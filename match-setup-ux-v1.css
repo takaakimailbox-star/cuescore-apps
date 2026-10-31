@@ -64,4 +64,12 @@ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 #startGameBtn:not(:
 .cue-menu-row-v1[aria-selected="true"] small{color:#ddd}
 .cue-menu-check-v1{flex:0 0 auto;font-weight:900}
 .cue-menu-row-v1:focus-visible{outline:2px solid #1a1a1a;outline-offset:-2px}
+/* PO correction 2026-10-31: only the editable "Other" numeric-entry field
+   uses a neutral two-tone keyboard focus ring. The shared yellow focus
+   contract and all product/state colours remain unchanged. */
+.new-match-race-custom-v1 input[type="number"]:focus-visible{
+  outline:2px solid #171717!important;
+  outline-offset:2px!important;
+  box-shadow:0 0 0 4px #fff!important;
+}
 .new-match-race-picker-v1.cue-menu-mode-v1{opacity:0!important;pointer-events:none!important}
