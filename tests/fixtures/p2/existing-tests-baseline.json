@@ -360,31 +360,31 @@
       "skips": 0
     },
     "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
-      "sha256": "cbf6372d8f535a7941eea9d868c7f0a31d5afe517b1ab4e3214a91e3078e39cd",
+      "sha256": "6394fea23feadc02bee9e0201892c998471aff7e2a3ab363c644ae006f83eb72",
       "tests": 4,
       "skips": 0,
-      "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)",
+      "updated_in": "Build 95 numeric-menu / outside-tap / vertical-balance implementation (see version-build95-numeric-menu-test-change-map.json)",
       "previousSha256": "dfd387d37cd545c34527d39305e738db6da8e3c5ef546e8d1a7ed598a45c386c"
     },
     "localization-glossary-25-approval-decision.test.mjs": {
-      "sha256": "ed2247f0f0a22d5ba25af04aab89d8bdcee6dbadf1c3e7047b5b9c1d274bbbf3",
+      "sha256": "5952667270ec372ffe782481d5722397a5f512534a08a7db88549324d322ffeb",
       "tests": 6,
       "skips": 0,
       "previousSha256": "efb33d83bbabcdbf768abe9298e9669249187211fa07997f81fe30d6fc34df5c",
-      "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
+      "updated_in": "Build 95 numeric-menu / outside-tap / vertical-balance implementation (see version-build95-numeric-menu-test-change-map.json)"
     },
     "localization-glossary-finalization-decision.test.mjs": {
-      "sha256": "aace13ca3102d6b29062509974eb2c866a94069fa79a097941752531823796ba",
+      "sha256": "08168b3ab1939c7d1c6d865744603efda89f4640ddc969e2aff094b41fc8c3e6",
       "tests": 7,
       "skips": 0,
       "previousSha256": "18323fdabd704194b4f8ba96e299d267cdd410f8c244989ad44ffa277f81bd6f",
-      "updated_in": "Decision 044 / iOS first-entry language note: latest Official / Decision Log assertion migration (no skip or weakening)"
+      "updated_in": "Build 95 numeric-menu / outside-tap / vertical-balance implementation (see version-build95-numeric-menu-test-change-map.json)"
     },
     "localization-ios-first-entry-language-decision.test.mjs": {
-      "sha256": "515c50d5fb640f56682a731975a74a8c9616c1332467961b4ac888b695ec1210",
+      "sha256": "25bd4df6be859fa496fe71477976f2e4ba38d5bcdba77d0c8a7d10f32229b9cf",
       "tests": 4,
       "skips": 0,
-      "updated_in": "Decision 044 / iOS first-entry language note regression",
+      "updated_in": "Build 95 numeric-menu / outside-tap / vertical-balance implementation (see version-build95-numeric-menu-test-change-map.json)",
       "previousSha256": "66b595ba5a289be32d940e17e3c66e8944e088fbdafb15df25ef938f32798fd0"
     },
     "localization-native-camera-decision.test.mjs": {
@@ -465,15 +465,10 @@
       "previousSha256": "f21c6400e5d776bfbc2d8f34f78c2314f210b67d291d1f2dff70a56a43016d60"
     },
     "match-setup-ux.test.mjs": {
-      "sha256": "d3415beca519650df562d4f2b55a25e76384702021126c20288b894a47615e29",
+      "sha256": "6cf5b27cd45f0971f8548d7d01a44dbd158b78b696f4fd1e020220ed1a39edcf",
       "tests": 7,
-      "skips": 0
-    },
-    "numeric-input-focus-ring.test.mjs": {
-      "sha256": "bcb6b0edc5696639215c052609617e3cb8adb6d16ffdaf1b880764d0dd894b3d",
-      "tests": 3,
       "skips": 0,
-      "updated_in": "Build 95 numeric-input neutral focus PO correction (new protection test; no existing assertion changed)"
+      "updated_in": "Build 95 numeric-menu / outside-tap / vertical-balance implementation (see version-build95-numeric-menu-test-change-map.json)"
     },
     "match-sharing-build84-fix.test.mjs": {
       "sha256": "7ecfd2e8ea341b174acbb22f5a4293e565622ddafd00555e533142e7caddbebd",
@@ -559,10 +554,17 @@
       "tests": 2,
       "skips": 0
     },
+    "numeric-input-focus-ring.test.mjs": {
+      "sha256": "bcb6b0edc5696639215c052609617e3cb8adb6d16ffdaf1b880764d0dd894b3d",
+      "tests": 3,
+      "skips": 0,
+      "updated_in": "Build 95 numeric-input neutral focus PO correction (new protection test; no existing assertion changed)"
+    },
     "numeric-input-upper-limits.test.mjs": {
-      "sha256": "055a2c4e884871b9fee34bd2d9796ea36409b079336141e2a0d163991d302d59",
+      "sha256": "20e2da3a0ece28d643dbf4d78a56ce61b01abf187fd51b466c558d6e115f10b0",
       "tests": 0,
-      "skips": 0
+      "skips": 0,
+      "updated_in": "Build 95 numeric-menu / outside-tap / vertical-balance implementation (see version-build95-numeric-menu-test-change-map.json)"
     },
     "official-website-v1.test.mjs": {
       "sha256": "f5c42613bc958226bd28a9413ef441447fdcebf4752d2f52b101a170e11369cd",
@@ -715,9 +717,10 @@
       "skips": 0
     },
     "race-picker-bottom-navigation-inset.test.mjs": {
-      "sha256": "716d86b383fdbab2a9271530cdb00bcf4282916423ffceb3657865d7da6804fb",
+      "sha256": "0c328f644d23572173c4f8961431c516d3870bb58f71b5fc03f6b14becd430bc",
       "tests": 4,
-      "skips": 0
+      "skips": 0,
+      "updated_in": "Build 95 numeric-menu / outside-tap / vertical-balance implementation (see version-build95-numeric-menu-test-change-map.json)"
     },
     "race-to-label.test.mjs": {
       "sha256": "87a0c33c94dc65f86612eb88393f36fd79f4aa467e692ba928649427b630feac",
@@ -780,6 +783,12 @@
       "sha256": "e5cbe571687a5b841ad799746324249a459fc27853d5e7c492963189636bfbf8",
       "tests": 10,
       "skips": 0
+    },
+    "setup-numeric-menu.test.mjs": {
+      "sha256": "ade8e45806761b9315c4b335819a32eca504fa24e5ff15b0230a9ab063529d51",
+      "tests": 6,
+      "skips": 0,
+      "updated_in": "Build 95 numeric-menu / outside-tap / vertical-balance implementation (new test; no existing assertion weakened)"
     },
     "shot-clock-decision.test.mjs": {
       "sha256": "8315b9ca95999225a8fd7cf006474c2605ab0c841f25761b0cf34b56705eeeca",

@@ -30,8 +30,8 @@ assert.match(html,/newMatchRaceCustomErrorV1[^>]*role="status"[^>]*aria-live="po
 assert.match(html,/const p1ValidationV1 = jpaModeV1 \? null : validateNewMatchGoalV1/);
 assert.match(html,/const p2ValidationV1 = jpaModeV1 \? null : validateNewMatchGoalV1/);
 assert.match(html,/\[25,50,75,100,125,150\]/,"14-1 presets remain unchanged");
-assert.match(html,/\[15,20,25,30,35,40,50\]/,"3C presets remain unchanged");
-assert.match(html,/Array\.from\(\{length:15\}/,"9/10-Ball presets remain unchanged");
+assert.match(html,/Array\.from\(\{length:34\},\(_,index\)=>index\+7\)/,"3C presets are the contiguous 7-40 list (Build 95 PO feedback)");
+assert.match(html,/Array\.from\(\{length:10\}/,"9/10-Ball presets are 1-10 + Other (Build 95 PO feedback); 11+ via Other, limit 1-100 unchanged");
 assert.match(html,/Object\.entries\(JPA9_SL_TARGETS\)/,"JPA9 SL picker remains unchanged");
 
 console.log("Numeric input upper-limit regression checks passed");

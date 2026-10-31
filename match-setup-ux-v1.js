@@ -11,7 +11,7 @@
   const CAT = root.CueScoreSetupUxCatalogV1 || {};
   const LANG = () => (root.CueScoreI18n && root.CueScoreI18n.language) || "ja";
   const T = key => { const d = CAT[LANG()] || CAT.ja || {}; return Object.prototype.hasOwnProperty.call(d, key) ? d[key] : ((CAT.ja || {})[key] || key); };
-  const MENU_MAX_ROWS = 9;      // longer lists (9-Ball / 10-Ball Race to 1-15 + Other) keep the existing sheet
+  const ROW_PX = 46, MENU_MAX_HEIGHT = Math.round(ROW_PX * 7.5 + 14);      // bounded list: about 6.5 scrolling rows + the pinned "Other" row; longer lists scroll
 
   /* ---------- tap menu ---------- */
   let openMenu = null;
@@ -28,11 +28,11 @@
     closeMenu(false);
     const anchor = opts.anchor, rows = opts.options || [];
     const layer = doc.createElement("div"); layer.className = "cue-menu-layer-v1";
-    const scrim = doc.createElement("div"); scrim.className = "cue-menu-scrim-v1"; scrim.setAttribute("aria-hidden", "true");
+    const scrim = doc.createElement("div"); scrim.className = "cue-menu-scrim-v1"; scrim.setAttribute("role", "presentation");      // NOT aria-hidden: the global [aria-hidden=true]{pointer-events:none} rule would make the outside tap fall through to the layer below
     const menu = doc.createElement("div"); menu.className = "cue-menu-v1"; menu.setAttribute("role", "listbox"); if (opts.title) menu.setAttribute("aria-label", opts.title);
     rows.forEach((o, i) => {
       const b = doc.createElement("button"); b.type = "button"; b.className = "cue-menu-row-v1"; b.setAttribute("role", "option"); b.dataset.i = String(i);
-      b.setAttribute("aria-selected", String(Boolean(o.selected)));
+      b.setAttribute("aria-selected", String(Boolean(o.selected))); if (o.pinned) b.classList.add("is-pinned-v1");
       const t = doc.createElement("span"); t.className = "cue-menu-text-v1"; t.textContent = o.label;
       if (o.sub) { const s = doc.createElement("small"); s.textContent = o.sub; t.appendChild(s); }
       const ck = doc.createElement("span"); ck.className = "cue-menu-check-v1"; ck.setAttribute("aria-hidden", "true"); ck.textContent = o.selected ? "✓" : "";
@@ -45,7 +45,7 @@
       const vw = root.innerWidth, vh = root.innerHeight, gap = 6, pad = 8;
       menu.style.width = Math.min(Math.max(r.width, 190), vw - 2 * pad) + "px";
       menu.style.maxHeight = ""; menu.style.top = "0px"; menu.style.left = "0px";
-      const want = Math.min(menu.scrollHeight, vh * 0.62), below = vh - r.bottom - gap - pad, above = r.top - gap - pad;
+      const want = Math.min(menu.scrollHeight, vh * 0.62, MENU_MAX_HEIGHT), below = vh - r.bottom - gap - pad, above = r.top - gap - pad;
       const up = below < want && above > below, h = Math.max(120, Math.min(want, up ? above : below));
       menu.style.maxHeight = h + "px";
       menu.style.left = Math.max(pad, Math.min(r.left, vw - pad - menu.offsetWidth)) + "px";
@@ -67,10 +67,10 @@
     const onResize = () => place(); root.addEventListener("resize", onResize);
     openMenu = { layer, anchor, onKey, onResize, onClose: opts.onClose };
     const sel = menu.querySelector('[aria-selected="true"]') || menu.querySelector(".cue-menu-row-v1");
-    if (sel) { sel.scrollIntoView({ block: "center" }); root.setTimeout(() => { try { sel.focus({ preventScroll: true }); } catch (_) { /* best effort */ } }, 0); }
+    if (sel) { menu.scrollTop = Math.max(0, sel.offsetTop - (menu.clientHeight - sel.offsetHeight) / 2); root.setTimeout(() => { try { sel.focus({ preventScroll: true }); } catch (_) { /* best effort */ } }, 0); }
     return { close: () => closeMenu(false) };
   }
-  root.CueScoreMenuV1 = Object.freeze({ open: menuOpen, close: () => closeMenu(false), maxRows: MENU_MAX_ROWS });
+  root.CueScoreMenuV1 = Object.freeze({ open: menuOpen, close: () => closeMenu(false), maxHeight: MENU_MAX_HEIGHT });
 
   /* ---------- Race to / Skill Level: the existing sheet is shown as a tap menu when the list is short ---------- */
   let lastRaceTrigger = null;
@@ -80,11 +80,11 @@
     const adapt = () => {
       if (picker.classList.contains("hidden") || picker.classList.contains("is-custom-v6") || picker.classList.contains("cue-menu-mode-v1") || !lastRaceTrigger) return;
       const real = Array.from(picker.querySelectorAll(".new-match-race-options-v1 [data-race-value]"));
-      if (!real.length || real.length > MENU_MAX_ROWS) return;      // long list: keep the existing sheet
+      if (!real.length) return;
       const rows = real.map(b => {
         const small = b.querySelector("small"), clone = b.cloneNode(true); if (clone.querySelector("small")) clone.querySelector("small").remove();
         const other = b.dataset.raceValue === "other";
-        return { value: b.dataset.raceValue, label: other ? T("setupux.menu.other") : clone.textContent.trim(), sub: small ? small.textContent.trim() : "", selected: b.classList.contains("is-selected"), real: b };
+        return { value: b.dataset.raceValue, label: other ? T("setupux.menu.other") : clone.textContent.trim(), sub: small ? small.textContent.trim() : "", selected: b.classList.contains("is-selected"), real: b, pinned: other };
       });
       picker.classList.add("cue-menu-mode-v1");
       const title = (($("#newMatchRacePickerTitleV1") || {}).textContent || "").trim();

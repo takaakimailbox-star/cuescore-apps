@@ -16202,17 +16202,28 @@ let matchRecordsRawCacheV152 = null;
       options.innerHTML = Object.entries(JPA9_SL_TARGETS).map(([sl,target]) => `<button type="button" data-race-value="${sl}">SL ${sl}<small>${window.cueT("p3.08034806",{target:target})}</small></button>`).join("");
       el("newMatchRacePickerTitleV1").textContent = window.cueT("p3.f2fbeb3d");
     } else if ((nineBall || tenBall) && options) {
-      options.innerHTML = Array.from({length:15},(_,index)=>index+1).map(value=>`<button type="button" data-race-value="${value}">${value}</button>`).join("") + '<button type="button" data-race-value="other">' + window.cueT("p3.7c2281ce") + '</button>';
+      options.innerHTML = Array.from({length:10},(_,index)=>index+1).map(value=>`<button type="button" data-race-value="${value}">${value}</button>`).join("") + '<button type="button" data-race-value="other">' + window.cueT("p3.7c2281ce") + '</button>';
       el("newMatchRacePickerTitleV1").textContent = window.cueT("p3.fff4ccb8");
     } else if (straightPool && options) {
       options.innerHTML = [25,50,75,100,125,150].map(value=>`<button type="button" data-race-value="${value}">${value}</button>`).join("") + '<button type="button" data-race-value="other">' + window.cueT("p3.7c2281ce") + '</button>';
       el("newMatchRacePickerTitleV1").textContent = window.cueT("p3.46f2b91c");
     } else if (threeCushion && options) {
-      options.innerHTML = [15,20,25,30,35,40,50].map(value=>`<button type="button" data-race-value="${value}">${value}</button>`).join("") + '<button type="button" data-race-value="other">' + window.cueT("p3.7c2281ce") + '</button>';
+      options.innerHTML = Array.from({length:34},(_,index)=>index+7).map(value=>`<button type="button" data-race-value="${value}">${value}</button>`).join("") + '<button type="button" data-race-value="other">' + window.cueT("p3.7c2281ce") + '</button>';
       el("newMatchRacePickerTitleV1").textContent = window.cueT("p3.a9b376d6");
     } else if (options && !options.querySelector('[data-race-value="61"]')) {
       options.innerHTML = [61,90,120,150,180,240,300].map(value=>`<button type="button" data-race-value="${value}">${value}</button>`).join("") + '<button type="button" data-race-value="other">' + window.cueT("p3.7c2281ce") + '</button>';
       el("newMatchRacePickerTitleV1").textContent = window.cueT("p3.fff4ccb8");
+    }
+    /* a current value outside the preset list (e.g. typed through "Other") stays visible and re-selectable as its own row */
+    options?.querySelectorAll("[data-race-injected]").forEach(row => row.remove());
+    if (!jpa && options) {
+      const current = Number(input.value), otherButton = options.querySelector('[data-race-value="other"]');
+      if (Number.isInteger(current) && current > 0 && otherButton && !options.querySelector(`[data-race-value="${current}"]`)) {
+        const row = document.createElement("button");
+        row.type = "button"; row.dataset.raceValue = String(current); row.dataset.raceInjected = "1"; row.textContent = String(current);
+        const after = Array.from(options.querySelectorAll("[data-race-value]")).filter(b => b !== otherButton && Number(b.dataset.raceValue) < current).pop();
+        if (after) after.after(row); else options.prepend(row);
+      }
     }
     picker.querySelectorAll("[data-race-value]").forEach(button => {
       button.classList.toggle("is-selected", Number(button.dataset.raceValue) === Number(jpa ? input.dataset.jpaSl : input.value));

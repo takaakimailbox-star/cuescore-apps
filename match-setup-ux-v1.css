@@ -64,6 +64,10 @@ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 #startGameBtn:not(:
 .cue-menu-row-v1[aria-selected="true"] small{color:#ddd}
 .cue-menu-check-v1{flex:0 0 auto;font-weight:900}
 .cue-menu-row-v1:focus-visible{outline:2px solid #1a1a1a;outline-offset:-2px}
+/* the "Other" row stays at the bottom edge of a scrolling list; selected row is auto-centred by the script */
+.cue-menu-v1{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.cue-menu-row-v1.is-pinned-v1{position:sticky;bottom:-6px;z-index:1;margin-top:2px;background:#fff;border-top:1px solid #e9e9e6;border-radius:0 0 10px 10px;box-shadow:0 -6px 6px -4px #fff}
+.cue-menu-row-v1.is-pinned-v1[aria-selected="true"]{background:#1a1a1a}
 /* PO correction 2026-10-31: only the editable "Other" numeric-entry field
    uses a neutral two-tone keyboard focus ring. The shared yellow focus
    contract and all product/state colours remain unchanged. */
@@ -73,3 +77,9 @@ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 #startGameBtn:not(:
   box-shadow:0 0 0 4px #fff!important;
 }
 .new-match-race-picker-v1.cue-menu-mode-v1{opacity:0!important;pointer-events:none!important}
+/* vertical balance (PO feedback, Build 95): spare height is shared above and below the setup content (top 1 : bottom 1.25, top capped) instead of leaving it all at the bottom.
+   The spacers collapse to 0 when the content is taller than the region, so small iPhones keep the full scroll range and the independent start footer stays reachable. */
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-integrated-v2::before{content:"";order:-1;flex:1 1 0;min-height:0;max-height:clamp(0px,9vh,84px)}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-integrated-v2::after{content:"";order:99;flex:1.25 1 0;min-height:0}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-card-v1{min-height:clamp(0px,19vh,170px)!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-sc-setup{margin-top:clamp(10px,2.1vh,22px)!important}

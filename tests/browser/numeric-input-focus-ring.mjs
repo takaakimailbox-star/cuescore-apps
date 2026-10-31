@@ -30,7 +30,7 @@ await app.cdp("Emulation.setSafeAreaInsetsOverride", { insets: { top: 47, bottom
 await wait(1000);
 await tap('#cueDisciplineSwitcherV1 [data-discipline="9ball"]');
 await tap('[data-race-target="p1Race"]');
-await tap('#newMatchRacePickerV1 [data-race-value="other"]');
+await tap('.cue-menu-row-v1.is-pinned-v1');   // 9-Ball is a tap menu now (Build 95 PO feedback): Other is the pinned row
 
 const inputPoint = await point("#newMatchRaceCustomInputV1");
 const focused = await evalJson(`(()=>{const n=document.getElementById("newMatchRaceCustomInputV1"),s=getComputedStyle(n),r=n.getBoundingClientRect();return {id:document.activeElement?.id,outlineColor:s.outlineColor,outlineStyle:s.outlineStyle,outlineWidth:s.outlineWidth,outlineOffset:s.outlineOffset,boxShadow:s.boxShadow,height:r.height,inside:r.left>=0&&r.right<=innerWidth&&r.top>=0&&r.bottom<=innerHeight}})()`);

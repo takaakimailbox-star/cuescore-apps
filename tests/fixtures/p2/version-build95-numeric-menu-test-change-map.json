@@ -1,0 +1,57 @@
+{
+ "gate": "Build 95 match-setup UI improvement (PO-approved 2026-10-31): vertical balance, 9/10-Ball 1-10+Other, 3 Cushion 7-40+Other bounded scroll with pinned Other, outside-tap fix (scrim no longer aria-hidden), non-preset current value row. Yellow focus/state colours untouched. Updated assertions: preset lists (SU-4/SU-5, upper-limits, race-picker inset), MENU_MAX_ROWS removal; index.html product-hash pins old->new. New: setup-numeric-menu.test.mjs.",
+ "assertionMap": {
+  "numeric-input-upper-limits.test.mjs": "3C presets [15..50] -> Array.from({length:34}) 7-40; 9/10-Ball Array.from({length:15}) -> length:10",
+  "match-setup-ux.test.mjs": "SU-4 MENU_MAX_ROWS=9 / >MENU_MAX_ROWS fallback -> MENU_MAX_HEIGHT bounded scroll, scrim role=presentation not aria-hidden; SU-5 preset lists as above",
+  "race-picker-bottom-navigation-inset.test.mjs": "9/10-Ball length:15 -> length:10 (custom route through 100 unchanged)",
+  "localization-*.test.mjs (4 files)": "index.html sha256 pin ad8b8f36... -> 68fddc85..."
+ },
+ "testFiles": {
+  "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
+   "before": "cbf6372d8f535a7941eea9d868c7f0a31d5afe517b1ab4e3214a91e3078e39cd",
+   "after": "6394fea23feadc02bee9e0201892c998471aff7e2a3ab363c644ae006f83eb72"
+  },
+  "localization-glossary-25-approval-decision.test.mjs": {
+   "before": "ed2247f0f0a22d5ba25af04aab89d8bdcee6dbadf1c3e7047b5b9c1d274bbbf3",
+   "after": "5952667270ec372ffe782481d5722397a5f512534a08a7db88549324d322ffeb"
+  },
+  "localization-glossary-finalization-decision.test.mjs": {
+   "before": "aace13ca3102d6b29062509974eb2c866a94069fa79a097941752531823796ba",
+   "after": "08168b3ab1939c7d1c6d865744603efda89f4640ddc969e2aff094b41fc8c3e6"
+  },
+  "localization-ios-first-entry-language-decision.test.mjs": {
+   "before": "515c50d5fb640f56682a731975a74a8c9616c1332467961b4ac888b695ec1210",
+   "after": "25bd4df6be859fa496fe71477976f2e4ba38d5bcdba77d0c8a7d10f32229b9cf"
+  },
+  "match-setup-ux.test.mjs": {
+   "before": "d3415beca519650df562d4f2b55a25e76384702021126c20288b894a47615e29",
+   "after": "6cf5b27cd45f0971f8548d7d01a44dbd158b78b696f4fd1e020220ed1a39edcf"
+  },
+  "numeric-input-upper-limits.test.mjs": {
+   "before": "055a2c4e884871b9fee34bd2d9796ea36409b079336141e2a0d163991d302d59",
+   "after": "20e2da3a0ece28d643dbf4d78a56ce61b01abf187fd51b466c558d6e115f10b0"
+  },
+  "race-picker-bottom-navigation-inset.test.mjs": {
+   "before": "716d86b383fdbab2a9271530cdb00bcf4282916423ffceb3657865d7da6804fb",
+   "after": "0c328f644d23572173c4f8961431c516d3870bb58f71b5fc03f6b14becd430bc"
+  },
+  "setup-numeric-menu.test.mjs": {
+   "before": null,
+   "after": "ade8e45806761b9315c4b335819a32eca504fa24e5ff15b0230a9ab063529d51"
+  }
+ },
+ "changedProductFiles": {
+  "index.html": {
+   "before": "ad8b8f363eeff956e3f226b39315a9aab80d72cf92689efa703ee6ae086c7780",
+   "after": "68fddc85f59f5fb1a62f3bbf0bb99330631c1cdfec3a4ff39dc8f7a5abcea020"
+  },
+  "match-setup-ux-v1.js": {
+   "before": "290b98ddffd0b8a188a2cf371627f9c4e573599f0e35bbfa350a49c879fa33bb",
+   "after": "3c7c0e1c20037029088ef0b66d3b753d74633931be9699de3d38ce7d5c8d45ce"
+  },
+  "match-setup-ux-v1.css": {
+   "before": "c2dc397b3368c83afbccb11a158f8076ae317e2851478e1dd7fbd55c93238463",
+   "after": "edea928dba906c85b0a836f5761a2223fb7d0209ec001e42ba2d095c02c56ef0"
+  }
+ }
+}

@@ -43,18 +43,21 @@ test("SU-3 policy: no DOM-watching observer (AC-S3 ratchet), no write to the sta
   assert.match(read("final-ui-build18.js"), /start\.disabled=players\.length<2\|\|!selected\(1\)\|\|!selected\(2\)/, "the start condition is still owned (unchanged) by final-ui-build18.js");
 });
 
-test("SU-4 menu contract: short lists only (<= 9 rows), choices come from the existing sheet / the unchanged clock constants, the existing sheet code applies and validates", () => {
-  assert.match(js, /const MENU_MAX_ROWS = 9;/);
+test("SU-4 menu contract: every list is a bounded-height scrolling menu with the pinned Other row, choices come from the existing sheet / the unchanged clock constants, the existing sheet code applies and validates", () => {
+  assert.match(js, /MENU_MAX_HEIGHT = Math\.round\(ROW_PX \* 7\.5 \+ 14\)/);
+  assert.ok(!/MENU_MAX_ROWS/.test(js), "no row-count cut-off: long lists scroll instead of falling back to the sheet");
+  assert.match(js, /scrim\.setAttribute\("role", "presentation"\)/);
+  assert.ok(!/scrim\.setAttribute\("aria-hidden"/.test(js), "the scrim must not be aria-hidden (global pointer-events:none rule would swallow the outside tap)");
   assert.match(js, /querySelectorAll\("\.new-match-race-options-v1 \[data-race-value\]"\)/);
   assert.match(js, /onPick: \(v, o\) => o\.real\.click\(\)/);
-  assert.match(js, /if \(!real\.length \|\| real\.length > MENU_MAX_ROWS\) return;/);
+  assert.match(js, /if \(!real\.length\) return;/);
   assert.ok(!/61\s*,\s*90|25\s*,\s*50|15\s*,\s*20/.test(js), "no race value lists are hard-coded in the script");
   assert.match(js, /role", "listbox"/); assert.match(js, /role", "option"/); assert.match(js, /aria-selected/); assert.match(js, /key === "Escape"/); assert.match(js, /ArrowDown/);
 });
 
 test("SU-5 the existing Race to / Skill Level choice sources are unchanged (values, order, custom limits)", () => {
-  assert.match(html, /Array\.from\(\{length:15\},\(_,index\)=>index\+1\)/);
-  assert.match(html, /\[25,50,75,100,125,150\]/); assert.match(html, /\[15,20,25,30,35,40,50\]/); assert.match(html, /\[61,90,120,150,180,240,300\]/);
+  assert.match(html, /Array\.from\(\{length:10\},\(_,index\)=>index\+1\)/);
+  assert.match(html, /\[25,50,75,100,125,150\]/); assert.match(html, /Array\.from\(\{length:34\},\(_,index\)=>index\+7\)/); assert.match(html, /\[61,90,120,150,180,240,300\]/);
   assert.match(html, /const jpaTargets = \{1:14,2:19,3:25,4:31,5:38,6:46,7:55,8:65,9:75\}/);
   assert.match(html, /"9ball": Object\.freeze\(\{min:1,max:100/); assert.match(html, /rotation: Object\.freeze\(\{min:1,max:1000/); assert.match(html, /straightPool: Object\.freeze\(\{min:1,max:1000/); assert.match(html, /threeCushion: Object\.freeze\(\{min:1,max:100/);
 });

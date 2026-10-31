@@ -18,9 +18,9 @@ test("Race picker and sheet retain touch scrolling when their content exceeds th
   assert.match(css,/body\.cue-phase1-normal-mode \.new-match-race-sheet-v1\{[\s\S]*?max-height:calc\(100dvh - 32px - var\(--cue-phase1-nav-height\) - env\(safe-area-inset-bottom\)\)[\s\S]*?overflow-y:auto/);
 });
 
-test("9-Ball and 10-Ball keep the shared Race 1-15 presets and custom route through 100",()=>{
+test("9-Ball and 10-Ball use the Race 1-10 presets and the custom route through 100",()=>{
   assert.match(html,/else if \(\(nineBall \|\| tenBall\) && options\)/);
-  assert.match(html,/Array\.from\(\{length:15\},\(_,index\)=>index\+1\)/);
+  assert.match(html,/Array\.from\(\{length:10\},\(_,index\)=>index\+1\)/);
   assert.match(html,/data-race-value="other"/);
   assert.match(html,/const validation = validateNewMatchGoalV1\(disciplineId, value\)/);
   assert.match(html,/if \(nineBall\)[\s\S]*?dataset\.nineBallRace/);

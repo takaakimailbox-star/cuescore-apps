@@ -14,6 +14,7 @@ const shot=async f=>{const p=await app.cdp("Page.captureScreenshot",{format:"png
 await ev(`await W(1200)`);
 const disc=async d=>ev(`const bk=document.getElementById("cueMatchSetupBackV3");if(bk&&bk.getClientRects().length){bk.click();await W(500)}document.querySelector('#cueDisciplineSwitcherV1 [data-discipline="${d}"]').click();await W(900);const c=document.getElementById("cueInProgressChoiceV1");if(c&&!c.classList.contains("hidden")){document.getElementById("cueInProgressNewV1").click();await W(800)}`);
 const q=(s)=>app.evalJs(s);
+const tapAt=async(x,y)=>{await app.cdp("Input.dispatchMouseEvent",{type:"mousePressed",x,y,button:"left",clickCount:1});await app.cdp("Input.dispatchMouseEvent",{type:"mouseReleased",x,y,button:"left",clickCount:1})};   // real pointer events: an el.click() would not have caught the aria-hidden scrim defect
 const menuRows=()=>q(`JSON.stringify([...document.querySelectorAll(".cue-menu-v1 .cue-menu-row-v1")].map(b=>b.textContent.trim().replace(/\\s+/g," ")))`).then(JSON.parse);
 const hidden=()=>q(`document.getElementById("newMatchRacePickerV1").classList.contains("hidden")`);
 // --- initial: opponent unselected -> disabled start + reason + empty class
@@ -34,13 +35,13 @@ await q(`document.querySelectorAll(".cue-menu-v1 .cue-menu-row-v1")[6].click();1
 ck(await q(`document.getElementById("p1RaceDisplayV2").textContent==="SL 7"&&document.getElementById("p1Race").value==="55"`),"choosing SL 7 applies through the existing sheet code (display SL 7, target 55)");
 ck(await q(`!document.querySelector(".cue-menu-layer-v1")&&document.getElementById("newMatchRacePickerV1").classList.contains("hidden")`),"menu and sheet both closed after the choice");
 // cancel keeps value
-await q(`document.querySelector("[data-race-target=p2Race]").click();1`);await W(900);await q(`document.querySelector(".cue-menu-scrim-v1").click();1`);await W(300);
+await q(`document.querySelector("[data-race-target=p2Race]").click();1`);await W(900);await tapAt(6,6);await W(300);
 ck(await q(`!document.querySelector(".cue-menu-layer-v1")&&document.getElementById("newMatchRacePickerV1").classList.contains("hidden")&&document.getElementById("p2RaceDisplayV2").textContent==="SL 5"`),"cancel (tap outside) closes everything and keeps SL 5");
 // Escape
 await q(`document.querySelector("[data-race-target=p2Race]").click();1`);await W(900);await q(`document.dispatchEvent(new KeyboardEvent("keydown",{key:"Escape",bubbles:true}));1`);await W(300);
 ck(await q(`!document.querySelector(".cue-menu-layer-v1")&&document.getElementById("newMatchRacePickerV1").classList.contains("hidden")`),"Escape closes the menu and the sheet");
 // --- 14-1 / 3C / Rotation: menu + other(custom)
-for(const [d,vals,lim] of [["straightPool",[25,50,75,100,125,150],"1〜1000"],["threeCushion",[15,20,25,30,35,40,50],"1〜100"],["rotation",[61,90,120,150,180,240,300],"1〜1000"]]){
+for(const [d,vals,lim] of [["straightPool",[25,50,75,100,125,150],"1〜1000"],["threeCushion",Array.from({length:34},(_,i)=>i+7),"1〜100"],["rotation",[61,90,120,150,180,240,300],"1〜1000"]]){
   await disc(d);await q(`document.querySelector("[data-race-target=p1Race]").click();1`);await W(900);
   rows=await menuRows();ck(rows.length===vals.length+1&&vals.every((v,i)=>rows[i].startsWith(String(v))),d+" menu rows = existing options + Other: "+rows.join(","));
   await q(`document.querySelectorAll(".cue-menu-v1 .cue-menu-row-v1")[1].click();1`);await W(900);
@@ -51,11 +52,11 @@ for(const [d,vals,lim] of [["straightPool",[25,50,75,100,125,150],"1〜1000"],["
   ck(cu.custom&&cu.sheetVisible!=="0"&&!cu.menu,d+" 'Other' opens the existing custom input (range "+cu.ph+")");
   await q(`document.getElementById("newMatchRacePickerCloseV1").click();1`);await W(300);
 }
-// --- 9-Ball: long list keeps the sheet
+// --- 9-Ball: 1-10 + Other is a tap menu too (Build 95 PO feedback)
 await disc("9ball");await q(`document.querySelector("[data-race-target=p1Race]").click();1`);await W(900);
-ck(await q(`!document.querySelector(".cue-menu-layer-v1")&&!document.getElementById("newMatchRacePickerV1").classList.contains("hidden")&&getComputedStyle(document.getElementById("newMatchRacePickerV1")).opacity!=="0"`),"9-Ball (1-15 + Other) keeps the existing sheet");
-await q(`document.querySelector('#newMatchRacePickerV1 [data-race-value="7"]').click();1`);await W(300);
-ck(await q(`document.getElementById("p1RaceDisplayV2").textContent==="7"`),"9-Ball sheet choice applied (7)");
+rows=await menuRows();ck(rows.length===11,"9-Ball menu rows = 1-10 + Other: "+rows.join(","));
+await q(`document.querySelectorAll(".cue-menu-v1 .cue-menu-row-v1")[6].click();1`);await W(300);
+ck(await q(`document.getElementById("p1RaceDisplayV2").textContent==="7"`),"9-Ball menu choice applied (7)");
 // --- clock menus
 await q(`const sw=document.querySelector(".cue-sc-switch");if(sw.getAttribute("aria-checked")!=="true")sw.click();1`);await W(300);
 await q(`document.querySelector(".cue-sc-val-base").click();1`);await W(300);rows=await menuRows();
