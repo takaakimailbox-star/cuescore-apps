@@ -1,0 +1,1265 @@
+{
+ "timestamp": "2026-11-01T03:53:26.916Z",
+ "rows": [
+  {
+   "lang": "ja",
+   "w": 320,
+   "state": "B",
+   "before": {
+    "notes": [],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 16,
+    "scrollNeeded": 0,
+    "reason": "先攻プレーヤーを選ぶと試合を開始できます"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "先攻プレーヤーを選ぶと試合を開始できます",
+      "left": 12,
+      "right": 155,
+      "w": 143,
+      "h": 46,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": false
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 16,
+    "scrollNeeded": 0,
+    "reason": "先攻プレーヤーを選ぶと試合を開始できます"
+   },
+   "expect": "先攻プレーヤーを選ぶと試合を開始できます"
+  },
+  {
+   "lang": "ja",
+   "w": 320,
+   "state": "C",
+   "before": {
+    "notes": [
+     {
+      "text": "対戦相手を選ぶと試合を開始できます",
+      "left": 165,
+      "right": 308,
+      "w": 143,
+      "h": 46,
+      "gapBelowCards": 10,
+      "underC1": false,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 16,
+    "scrollNeeded": 0,
+    "reason": "プレーヤーを選ぶと試合を開始できます"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "プレーヤーを選ぶと試合を開始できます",
+      "left": 12,
+      "right": 308,
+      "w": 296,
+      "h": 30,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 16,
+    "scrollNeeded": 0,
+    "reason": "プレーヤーを選ぶと試合を開始できます"
+   },
+   "expect": "プレーヤーを選ぶと試合を開始できます"
+  },
+  {
+   "lang": "ja",
+   "w": 375,
+   "state": "B",
+   "before": {
+    "notes": [],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "reason": "先攻プレーヤーを選ぶと試合を開始できます"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "先攻プレーヤーを選ぶと試合を開始できます",
+      "left": 12,
+      "right": 183,
+      "w": 171,
+      "h": 54,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": false
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "reason": "先攻プレーヤーを選ぶと試合を開始できます"
+   },
+   "expect": "先攻プレーヤーを選ぶと試合を開始できます"
+  },
+  {
+   "lang": "ja",
+   "w": 375,
+   "state": "C",
+   "before": {
+    "notes": [
+     {
+      "text": "対戦相手を選ぶと試合を開始できます",
+      "left": 193,
+      "right": 363,
+      "w": 171,
+      "h": 54,
+      "gapBelowCards": 10,
+      "underC1": false,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "reason": "プレーヤーを選ぶと試合を開始できます"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "プレーヤーを選ぶと試合を開始できます",
+      "left": 12,
+      "right": 363,
+      "w": 351,
+      "h": 36,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "reason": "プレーヤーを選ぶと試合を開始できます"
+   },
+   "expect": "プレーヤーを選ぶと試合を開始できます"
+  },
+  {
+   "lang": "ja",
+   "w": 390,
+   "state": "B",
+   "before": {
+    "notes": [],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "reason": "先攻プレーヤーを選ぶと試合を開始できます"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "先攻プレーヤーを選ぶと試合を開始できます",
+      "left": 12,
+      "right": 190,
+      "w": 178,
+      "h": 54,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": false
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "reason": "先攻プレーヤーを選ぶと試合を開始できます"
+   },
+   "expect": "先攻プレーヤーを選ぶと試合を開始できます"
+  },
+  {
+   "lang": "ja",
+   "w": 390,
+   "state": "C",
+   "before": {
+    "notes": [
+     {
+      "text": "対戦相手を選ぶと試合を開始できます",
+      "left": 200,
+      "right": 378,
+      "w": 178,
+      "h": 54,
+      "gapBelowCards": 10,
+      "underC1": false,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "reason": "プレーヤーを選ぶと試合を開始できます"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "プレーヤーを選ぶと試合を開始できます",
+      "left": 12,
+      "right": 378,
+      "w": 366,
+      "h": 36,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "reason": "プレーヤーを選ぶと試合を開始できます"
+   },
+   "expect": "プレーヤーを選ぶと試合を開始できます"
+  },
+  {
+   "lang": "ja",
+   "w": 430,
+   "state": "B",
+   "before": {
+    "notes": [],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "reason": "先攻プレーヤーを選ぶと試合を開始できます"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "先攻プレーヤーを選ぶと試合を開始できます",
+      "left": 12,
+      "right": 210,
+      "w": 198,
+      "h": 54,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": false
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "reason": "先攻プレーヤーを選ぶと試合を開始できます"
+   },
+   "expect": "先攻プレーヤーを選ぶと試合を開始できます"
+  },
+  {
+   "lang": "ja",
+   "w": 430,
+   "state": "C",
+   "before": {
+    "notes": [
+     {
+      "text": "対戦相手を選ぶと試合を開始できます",
+      "left": 220,
+      "right": 418,
+      "w": 198,
+      "h": 54,
+      "gapBelowCards": 10,
+      "underC1": false,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "reason": "プレーヤーを選ぶと試合を開始できます"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "プレーヤーを選ぶと試合を開始できます",
+      "left": 12,
+      "right": 418,
+      "w": 406,
+      "h": 36,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "reason": "プレーヤーを選ぶと試合を開始できます"
+   },
+   "expect": "プレーヤーを選ぶと試合を開始できます"
+  },
+  {
+   "lang": "en",
+   "w": 320,
+   "state": "B",
+   "before": {
+    "notes": [],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 16,
+    "scrollNeeded": 0,
+    "reason": "Select the first player to start the match"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "Select the first player to start the match",
+      "left": 12,
+      "right": 155,
+      "w": 143,
+      "h": 46,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": false
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 16,
+    "scrollNeeded": 0,
+    "reason": "Select the first player to start the match"
+   },
+   "expect": "Select the first player to start the match"
+  },
+  {
+   "lang": "en",
+   "w": 320,
+   "state": "C",
+   "before": {
+    "notes": [
+     {
+      "text": "Select an opponent to start the match",
+      "left": 165,
+      "right": 308,
+      "w": 143,
+      "h": 46,
+      "gapBelowCards": 10,
+      "underC1": false,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 16,
+    "scrollNeeded": 0,
+    "reason": "Select players to start the match"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "Select players to start the match",
+      "left": 12,
+      "right": 308,
+      "w": 296,
+      "h": 30,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 16,
+    "scrollNeeded": 0,
+    "reason": "Select players to start the match"
+   },
+   "expect": "Select players to start the match"
+  },
+  {
+   "lang": "en",
+   "w": 375,
+   "state": "B",
+   "before": {
+    "notes": [],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "reason": "Select the first player to start the match"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "Select the first player to start the match",
+      "left": 12,
+      "right": 183,
+      "w": 171,
+      "h": 73,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": false
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "reason": "Select the first player to start the match"
+   },
+   "expect": "Select the first player to start the match"
+  },
+  {
+   "lang": "en",
+   "w": 375,
+   "state": "C",
+   "before": {
+    "notes": [
+     {
+      "text": "Select an opponent to start the match",
+      "left": 193,
+      "right": 363,
+      "w": 171,
+      "h": 54,
+      "gapBelowCards": 10,
+      "underC1": false,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "reason": "Select players to start the match"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "Select players to start the match",
+      "left": 12,
+      "right": 363,
+      "w": 351,
+      "h": 36,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "reason": "Select players to start the match"
+   },
+   "expect": "Select players to start the match"
+  },
+  {
+   "lang": "en",
+   "w": 390,
+   "state": "B",
+   "before": {
+    "notes": [],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "reason": "Select the first player to start the match"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "Select the first player to start the match",
+      "left": 12,
+      "right": 190,
+      "w": 178,
+      "h": 73,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": false
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "reason": "Select the first player to start the match"
+   },
+   "expect": "Select the first player to start the match"
+  },
+  {
+   "lang": "en",
+   "w": 390,
+   "state": "C",
+   "before": {
+    "notes": [
+     {
+      "text": "Select an opponent to start the match",
+      "left": 200,
+      "right": 378,
+      "w": 178,
+      "h": 54,
+      "gapBelowCards": 10,
+      "underC1": false,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "reason": "Select players to start the match"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "Select players to start the match",
+      "left": 12,
+      "right": 378,
+      "w": 366,
+      "h": 36,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "reason": "Select players to start the match"
+   },
+   "expect": "Select players to start the match"
+  },
+  {
+   "lang": "en",
+   "w": 430,
+   "state": "B",
+   "before": {
+    "notes": [],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "reason": "Select the first player to start the match"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "Select the first player to start the match",
+      "left": 12,
+      "right": 210,
+      "w": 198,
+      "h": 54,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": false
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "reason": "Select the first player to start the match"
+   },
+   "expect": "Select the first player to start the match"
+  },
+  {
+   "lang": "en",
+   "w": 430,
+   "state": "C",
+   "before": {
+    "notes": [
+     {
+      "text": "Select an opponent to start the match",
+      "left": 220,
+      "right": 418,
+      "w": 198,
+      "h": 54,
+      "gapBelowCards": 10,
+      "underC1": false,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "reason": "Select players to start the match"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "Select players to start the match",
+      "left": 12,
+      "right": 418,
+      "w": 406,
+      "h": 36,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "reason": "Select players to start the match"
+   },
+   "expect": "Select players to start the match"
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 320,
+   "state": "B",
+   "before": {
+    "notes": [],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 16,
+    "scrollNeeded": 0,
+    "reason": "选择先手球员后即可开始比赛"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "选择先手球员后即可开始比赛",
+      "left": 12,
+      "right": 155,
+      "w": 143,
+      "h": 46,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": false
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 16,
+    "scrollNeeded": 0,
+    "reason": "选择先手球员后即可开始比赛"
+   },
+   "expect": "选择先手球员后即可开始比赛"
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 320,
+   "state": "C",
+   "before": {
+    "notes": [
+     {
+      "text": "选择对手后即可开始比赛",
+      "left": 165,
+      "right": 308,
+      "w": 143,
+      "h": 30,
+      "gapBelowCards": 10,
+      "underC1": false,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 16,
+    "scrollNeeded": 0,
+    "reason": "选择球员后即可开始比赛"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "选择球员后即可开始比赛",
+      "left": 12,
+      "right": 308,
+      "w": 296,
+      "h": 30,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 16,
+    "scrollNeeded": 0,
+    "reason": "选择球员后即可开始比赛"
+   },
+   "expect": "选择球员后即可开始比赛"
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 375,
+   "state": "B",
+   "before": {
+    "notes": [],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "reason": "选择先手球员后即可开始比赛"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "选择先手球员后即可开始比赛",
+      "left": 12,
+      "right": 183,
+      "w": 171,
+      "h": 54,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": false
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "reason": "选择先手球员后即可开始比赛"
+   },
+   "expect": "选择先手球员后即可开始比赛"
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 375,
+   "state": "C",
+   "before": {
+    "notes": [
+     {
+      "text": "选择对手后即可开始比赛",
+      "left": 193,
+      "right": 363,
+      "w": 171,
+      "h": 54,
+      "gapBelowCards": 10,
+      "underC1": false,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "reason": "选择球员后即可开始比赛"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "选择球员后即可开始比赛",
+      "left": 12,
+      "right": 363,
+      "w": 351,
+      "h": 36,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "reason": "选择球员后即可开始比赛"
+   },
+   "expect": "选择球员后即可开始比赛"
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 390,
+   "state": "B",
+   "before": {
+    "notes": [],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "reason": "选择先手球员后即可开始比赛"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "选择先手球员后即可开始比赛",
+      "left": 12,
+      "right": 190,
+      "w": 178,
+      "h": 54,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": false
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "reason": "选择先手球员后即可开始比赛"
+   },
+   "expect": "选择先手球员后即可开始比赛"
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 390,
+   "state": "C",
+   "before": {
+    "notes": [
+     {
+      "text": "选择对手后即可开始比赛",
+      "left": 200,
+      "right": 378,
+      "w": 178,
+      "h": 54,
+      "gapBelowCards": 10,
+      "underC1": false,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "reason": "选择球员后即可开始比赛"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "选择球员后即可开始比赛",
+      "left": 12,
+      "right": 378,
+      "w": 366,
+      "h": 36,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "reason": "选择球员后即可开始比赛"
+   },
+   "expect": "选择球员后即可开始比赛"
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 430,
+   "state": "B",
+   "before": {
+    "notes": [],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "reason": "选择先手球员后即可开始比赛"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "选择先手球员后即可开始比赛",
+      "left": 12,
+      "right": 210,
+      "w": 198,
+      "h": 54,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": false
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "reason": "选择先手球员后即可开始比赛"
+   },
+   "expect": "选择先手球员后即可开始比赛"
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 430,
+   "state": "C",
+   "before": {
+    "notes": [
+     {
+      "text": "选择对手后即可开始比赛",
+      "left": 220,
+      "right": 418,
+      "w": 198,
+      "h": 36,
+      "gapBelowCards": 10,
+      "underC1": false,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "reason": "选择球员后即可开始比赛"
+   },
+   "after": {
+    "notes": [
+     {
+      "text": "选择球员后即可开始比赛",
+      "left": 12,
+      "right": 418,
+      "w": 406,
+      "h": 36,
+      "gapBelowCards": 10,
+      "underC1": true,
+      "underC2": true
+     }
+    ],
+    "nameRace": [
+     10,
+     10
+    ],
+    "cardH": [
+     147,
+     147
+    ],
+    "hscroll": false,
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "reason": "选择球员后即可开始比赛"
+   },
+   "expect": "选择球员后即可开始比赛"
+  }
+ ]
+}

@@ -1,0 +1,4733 @@
+{
+ "timestamp": "2026-11-01T03:38:51.425Z",
+ "rows": [
+  {
+   "tag": "ja/320/players0",
+   "disc": "9ball",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players0",
+   "disc": "10ball",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players0",
+   "disc": "jpa9",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players0",
+   "disc": "rotation",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players0",
+   "disc": "straightPool",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players0",
+   "disc": "threeCushion",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players1",
+   "disc": "9ball",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players1",
+   "disc": "10ball",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players1",
+   "disc": "jpa9",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players1",
+   "disc": "rotation",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players1",
+   "disc": "straightPool",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players1",
+   "disc": "threeCushion",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "9ball",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 46,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "9ball",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "9ball",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "9ball",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 46,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "10ball",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 46,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "10ball",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "10ball",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "10ball",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 46,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "jpa9",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 46,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "jpa9",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "jpa9",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "jpa9",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 46,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "rotation",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 46,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "rotation",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "rotation",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "rotation",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 46,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "straightPool",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 46,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "straightPool",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "straightPool",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "straightPool",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 46,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "threeCushion",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 46,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "threeCushion",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "threeCushion",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/320/players2",
+   "disc": "threeCushion",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 46,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 16,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players0",
+   "disc": "9ball",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players0",
+   "disc": "10ball",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players0",
+   "disc": "jpa9",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players0",
+   "disc": "rotation",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players0",
+   "disc": "straightPool",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players0",
+   "disc": "threeCushion",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players1",
+   "disc": "9ball",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players1",
+   "disc": "10ball",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players1",
+   "disc": "jpa9",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players1",
+   "disc": "rotation",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players1",
+   "disc": "straightPool",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players1",
+   "disc": "threeCushion",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "9ball",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "9ball",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "9ball",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "9ball",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "10ball",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "10ball",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "10ball",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "10ball",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "jpa9",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "jpa9",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "jpa9",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "jpa9",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "rotation",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "rotation",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "rotation",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "rotation",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "straightPool",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "straightPool",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "straightPool",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "straightPool",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "threeCushion",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "threeCushion",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "threeCushion",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/375/players2",
+   "disc": "threeCushion",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 19,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players0",
+   "disc": "9ball",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players0",
+   "disc": "10ball",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players0",
+   "disc": "jpa9",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players0",
+   "disc": "rotation",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players0",
+   "disc": "straightPool",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players0",
+   "disc": "threeCushion",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players1",
+   "disc": "9ball",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players1",
+   "disc": "10ball",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players1",
+   "disc": "jpa9",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players1",
+   "disc": "rotation",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players1",
+   "disc": "straightPool",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players1",
+   "disc": "threeCushion",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "9ball",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "9ball",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "9ball",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "9ball",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "10ball",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "10ball",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "10ball",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "10ball",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "jpa9",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "jpa9",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "jpa9",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "jpa9",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "rotation",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "rotation",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "rotation",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "rotation",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "straightPool",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "straightPool",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "straightPool",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "straightPool",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "threeCushion",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "threeCushion",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "threeCushion",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/390/players2",
+   "disc": "threeCushion",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 24,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players0",
+   "disc": "9ball",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players0",
+   "disc": "10ball",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players0",
+   "disc": "jpa9",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players0",
+   "disc": "rotation",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players0",
+   "disc": "straightPool",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players0",
+   "disc": "threeCushion",
+   "state": "natural-0players",
+   "kind": "natural",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players1",
+   "disc": "9ball",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players1",
+   "disc": "10ball",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players1",
+   "disc": "jpa9",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players1",
+   "disc": "rotation",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players1",
+   "disc": "straightPool",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players1",
+   "disc": "threeCushion",
+   "state": "natural-1player",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": null,
+   "reason": null,
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": true,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "9ball",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "9ball",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "9ball",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "9ball",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "10ball",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "10ball",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "10ball",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "10ball",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "jpa9",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "jpa9",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "jpa9",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "jpa9",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "rotation",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "rotation",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "rotation",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "rotation",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "straightPool",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "straightPool",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "straightPool",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "straightPool",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "threeCushion",
+   "state": "A-P1sel-P2empty(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "",
+   "empty1": false,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "対戦相手を選ぶと試合を開始できます",
+    "slot": "2",
+    "aria": "対戦相手を選ぶと試合を開始できます",
+    "desc": "対戦相手を選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "threeCushion",
+   "state": "both-selected(natural)",
+   "kind": "natural",
+   "p1": "なおき",
+   "p2": "さくら",
+   "empty1": false,
+   "empty2": false,
+   "note": null,
+   "reason": null,
+   "startDisabled": false,
+   "startAria": "false",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "threeCushion",
+   "state": "B-P1empty-P2sel(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "さくら",
+   "empty1": true,
+   "empty2": false,
+   "note": null,
+   "reason": {
+    "text": "先攻プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "先攻プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  },
+  {
+   "tag": "ja/430/players2",
+   "disc": "threeCushion",
+   "state": "C-both-empty(FORCED)",
+   "kind": "forced",
+   "p1": "",
+   "p2": "",
+   "empty1": true,
+   "empty2": true,
+   "note": {
+    "text": "i対戦相手を選ぶと試合を開始できます",
+    "ariaHidden": "true",
+    "col2": true,
+    "gapBelowCard2": 10,
+    "h": 54,
+    "lines": 3
+   },
+   "reason": {
+    "text": "プレーヤーを選ぶと試合を開始できます",
+    "slot": "1",
+    "aria": "プレーヤーを選ぶと試合を開始できます",
+    "desc": "プレーヤーを選択"
+   },
+   "startDisabled": true,
+   "startAria": "true",
+   "guide": false,
+   "g1": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "g2": {
+    "avName": 4,
+    "nameRace": 10
+   },
+   "hscroll": false,
+   "small": [],
+   "startToTab": 26,
+   "storage": 12,
+   "errs": []
+  }
+ ]
+}
