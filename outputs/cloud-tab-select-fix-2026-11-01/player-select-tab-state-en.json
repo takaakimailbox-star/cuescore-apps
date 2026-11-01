@@ -1,0 +1,3386 @@
+{
+ "timestamp": "2026-11-01T02:13:01.669Z",
+ "checks": [
+  {
+   "ok": true,
+   "label": "en/320/9ball setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": null,
+    "opp": "",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": null,
+    "opp": "",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": null,
+    "opp": "",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": null,
+    "opp": "",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion no JS exceptions",
+   "detail": []
+  }
+ ],
+ "pass": true
+}

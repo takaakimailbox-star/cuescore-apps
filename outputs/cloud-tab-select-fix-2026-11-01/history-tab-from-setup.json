@@ -1,0 +1,3942 @@
+{
+ "timestamp": "2026-11-01T02:20:42.712Z",
+ "checks": [
+  {
+   "ok": true,
+   "label": "ja/320 home: real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 home: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 9ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/320 setup(9ball): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 setup(9ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 9ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/320 10ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/320 setup(10ball): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 setup(10ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 10ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/320 jpa9: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/320 setup(jpa9): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 setup(jpa9): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 jpa9: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/320 rotation: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/320 setup(rotation): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 setup(rotation): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 rotation: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/320 straightPool: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/320 setup(straightPool): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 setup(straightPool): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 straightPool: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/320 threeCushion: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/320 setup(threeCushion): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 setup(threeCushion): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 threeCushion: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/320 player: real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 player: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 settings: real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 settings: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:settingsBackBtn",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 home: real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 home: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 9ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/375 setup(9ball): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 setup(9ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 9ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/375 10ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/375 setup(10ball): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 setup(10ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 10ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/375 jpa9: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/375 setup(jpa9): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 setup(jpa9): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 jpa9: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/375 rotation: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/375 setup(rotation): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 setup(rotation): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 rotation: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/375 straightPool: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/375 setup(straightPool): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 setup(straightPool): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 straightPool: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/375 threeCushion: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/375 setup(threeCushion): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 setup(threeCushion): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 threeCushion: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/375 player: real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 player: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 settings: real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 settings: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:settingsBackBtn",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 home: real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 home: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 9ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/390 setup(9ball): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 setup(9ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 9ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/390 10ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/390 setup(10ball): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 setup(10ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 10ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/390 jpa9: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/390 setup(jpa9): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 setup(jpa9): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 jpa9: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/390 rotation: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/390 setup(rotation): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 setup(rotation): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 rotation: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/390 straightPool: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/390 setup(straightPool): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 setup(straightPool): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 straightPool: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/390 threeCushion: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/390 setup(threeCushion): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 setup(threeCushion): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 threeCushion: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/390 player: real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 player: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 settings: real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390 settings: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:settingsBackBtn",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 home: real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 home: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 9ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/430 setup(9ball): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 setup(9ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 9ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/430 10ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/430 setup(10ball): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 setup(10ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 10ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/430 jpa9: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/430 setup(jpa9): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 setup(jpa9): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 jpa9: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/430 rotation: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/430 setup(rotation): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 setup(rotation): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 rotation: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/430 straightPool: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/430 setup(straightPool): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 setup(straightPool): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 straightPool: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/430 threeCushion: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/430 setup(threeCushion): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 setup(threeCushion): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 threeCushion: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "ja/430 player: real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 player: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 settings: real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/430 settings: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:settingsBackBtn",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 home: real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 home: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 9ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/320 setup(9ball): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 setup(9ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 9ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/320 10ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/320 setup(10ball): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 setup(10ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 10ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/320 jpa9: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/320 setup(jpa9): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 setup(jpa9): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 jpa9: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/320 rotation: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/320 setup(rotation): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 setup(rotation): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 rotation: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/320 straightPool: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/320 setup(straightPool): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 setup(straightPool): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 straightPool: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/320 threeCushion: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/320 setup(threeCushion): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 setup(threeCushion): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 threeCushion: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/320 player: real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 player: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 settings: real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 settings: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:settingsBackBtn",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 home: real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 home: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 9ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/375 setup(9ball): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 setup(9ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 9ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/375 10ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/375 setup(10ball): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 setup(10ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 10ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/375 jpa9: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/375 setup(jpa9): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 setup(jpa9): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 jpa9: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/375 rotation: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/375 setup(rotation): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 setup(rotation): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 rotation: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/375 straightPool: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/375 setup(straightPool): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 setup(straightPool): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 straightPool: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/375 threeCushion: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/375 setup(threeCushion): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 setup(threeCushion): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 threeCushion: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/375 player: real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 player: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 settings: real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 settings: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:settingsBackBtn",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 home: real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 home: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 9ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/390 setup(9ball): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 setup(9ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 9ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/390 10ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/390 setup(10ball): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 setup(10ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 10ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/390 jpa9: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/390 setup(jpa9): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 setup(jpa9): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 jpa9: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/390 rotation: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/390 setup(rotation): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 setup(rotation): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 rotation: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/390 straightPool: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/390 setup(straightPool): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 setup(straightPool): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 straightPool: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/390 threeCushion: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/390 setup(threeCushion): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 setup(threeCushion): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 threeCushion: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/390 player: real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 player: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 settings: real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390 settings: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:settingsBackBtn",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 home: real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 home: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 9ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/430 setup(9ball): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 setup(9ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 9ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/430 10ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/430 setup(10ball): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 setup(10ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 10ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/430 jpa9: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/430 setup(jpa9): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 setup(jpa9): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 jpa9: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/430 rotation: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/430 setup(rotation): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 setup(rotation): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 rotation: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/430 straightPool: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/430 setup(straightPool): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 setup(straightPool): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 straightPool: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/430 threeCushion: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "en/430 setup(threeCushion): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 setup(threeCushion): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 threeCushion: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "en/430 player: real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 player: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 settings: real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430 settings: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:settingsBackBtn",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 home: real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 home: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 9ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 setup(9ball): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 setup(9ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 9ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 10ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 setup(10ball): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 setup(10ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 10ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 jpa9: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 setup(jpa9): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 setup(jpa9): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 jpa9: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 rotation: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 setup(rotation): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 setup(rotation): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 rotation: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 straightPool: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 setup(straightPool): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 setup(straightPool): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 straightPool: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 threeCushion: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 setup(threeCushion): real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 setup(threeCushion): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 threeCushion: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 player: real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 player: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 settings: real tap hits the history tab button",
+   "detail": {
+    "x": 198.5,
+    "y": 537,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 settings: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:settingsBackBtn",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 home: real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 home: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 9ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 setup(9ball): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 setup(9ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 9ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 10ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 setup(10ball): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 setup(10ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 10ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 jpa9: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 setup(jpa9): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 setup(jpa9): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 jpa9: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 rotation: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 setup(rotation): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 setup(rotation): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 rotation: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 straightPool: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 setup(straightPool): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 setup(straightPool): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 straightPool: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 threeCushion: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 setup(threeCushion): real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 setup(threeCushion): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 threeCushion: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 player: real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 player: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 settings: real tap hits the history tab button",
+   "detail": {
+    "x": 232.875,
+    "y": 636,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 settings: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:settingsBackBtn",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 home: real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 home: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 9ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 setup(9ball): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 setup(9ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 9ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 10ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 setup(10ball): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 setup(10ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 10ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 jpa9: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 setup(jpa9): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 setup(jpa9): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 jpa9: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 rotation: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 setup(rotation): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 setup(rotation): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 rotation: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 straightPool: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 setup(straightPool): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 setup(straightPool): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 straightPool: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 threeCushion: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 setup(threeCushion): real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 setup(threeCushion): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 threeCushion: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 player: real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 player: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 settings: real tap hits the history tab button",
+   "detail": {
+    "x": 242.25,
+    "y": 779,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390 settings: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:settingsBackBtn",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 home: real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 home: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 9ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 setup(9ball): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 setup(9ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 9ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 10ball: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 setup(10ball): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 setup(10ball): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 10ball: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 jpa9: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 setup(jpa9): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 setup(jpa9): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 jpa9: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 rotation: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 setup(rotation): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 setup(rotation): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 rotation: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 straightPool: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 setup(straightPool): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 setup(straightPool): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 straightPool: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 threeCushion: setup screen open before the tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 setup(threeCushion): real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 setup(threeCushion): history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": true,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 threeCushion: no data created by the tab tap"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 player: real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 player: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 settings: real tap hits the history tab button",
+   "detail": {
+    "x": 267.25,
+    "y": 867,
+    "hit": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 settings: history screen opens",
+   "detail": {
+    "hits": [
+     "BUTTON:history",
+     "BUTTON:settingsBackBtn",
+     "BUTTON:recordsBtn"
+    ],
+    "recBtn": 0,
+    "errs": [],
+    "histHidden": false,
+    "ariaHidden": "false",
+    "display": "flex",
+    "visible": true,
+    "appRecords": true,
+    "setup": false,
+    "sel": "history",
+    "rows": 21,
+    "topIn": true,
+    "storage": 12
+   }
+  }
+ ],
+ "pass": true
+}
