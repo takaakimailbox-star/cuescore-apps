@@ -1,0 +1,21 @@
+{
+ "gate": "D plan (PO 2026-11-01): initial players Score 1/2 for a completely new install, D-style unselected/selected cards. Updated pins only (no assertion weakened): index.html digest a933a668...->6c652bf5... in 4 byte-preserved tests; selectedRegisteredPlayer writer count 4->5 in p2-5-2-obs03-triggers.test.mjs (first-launch Score 2, startup only; that file is not in the baseline fixture). Browser assertion updated: unselected card solid grey -> dashed grey (setup-card-layout.mjs). New tests: d-plan-initial-players.test.mjs; browser initial-players.mjs, d-plan-setup.mjs.",
+ "changedTestFiles": {
+  "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
+   "before": "6d589577fe034af4e001ff0b2649bdfd03bf4cdfaf7e54e794172b9e370e03e1",
+   "after": "aea19a6ff59ac97986cc02e21ec3945f26a63c1e618f95e39c2d2114e8ca7093"
+  },
+  "localization-glossary-25-approval-decision.test.mjs": {
+   "before": "b44cf3c4cfe97debfdcaf5f433be58a2631f3f2d30fa8a8aa4b27f6f5bc392db",
+   "after": "58dbd6a3f4ed27d1254dad76b54d30fdaadb44bb1a1dff7ed83500a9b7b832b1"
+  },
+  "localization-glossary-finalization-decision.test.mjs": {
+   "before": "fdfb9237bb8a3da3a9a1443a675395d7615a1ff35a4483b11ffdaa49b477eb0c",
+   "after": "96976400159700dc23d11ac78c30140defd7b6a8293105eca326c86c845c2559"
+  },
+  "localization-ios-first-entry-language-decision.test.mjs": {
+   "before": "f62e39958ff8759d5eabcb1981388ea08c2ef417b52f3973b3a8e16aeffda3ed",
+   "after": "513d3c59f2e070fefafbd4fae09960164173c22a6b7fe982e10cf31dd05cce83"
+  }
+ }
+}
