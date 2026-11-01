@@ -114,6 +114,8 @@
       if(app.classList.contains("records-mode"))setActive("history");
       else if(app.classList.contains("settings-mode"))setActive("settings");
       else if(visible(document.getElementById("playerLibraryOverlay"))||visible(document.getElementById("playerStatsOverlay"))||[...document.querySelectorAll(".player-journey-overlay-v2,.pd12-trends")].some(visible))setActive("player");
+      // Opponent/player selection from the match-setup screen opens the library without the Player tab entry, so nothing reset the tab once it closed: with no player view, History or Settings left, the Home screen is what is shown.
+      else if(state.active==="player")setActive("home");
     }
     // P2-4: the former title text comparison was removed. No code writes the old literal title any more (titles come from cueT / the editor), so the branch could never run.
   };
