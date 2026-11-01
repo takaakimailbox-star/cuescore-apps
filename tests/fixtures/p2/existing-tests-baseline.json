@@ -726,6 +726,12 @@
       "skips": 0,
       "previousSha256": "acd2c01e62c281a7235a414c9e3937d47a12d422fc4411456c0102b6c59601a6"
     },
+    "player-select-tab-state.test.mjs": {
+      "sha256": "43a5be9779313264333fc47b78438bccd3399568d7dae7aa690cad8d4b67740e",
+      "tests": 2,
+      "skips": 0,
+      "updated_in": "Cloud fix: stale Player tab after choosing an opponent from match setup (new test; no existing assertion changed)"
+    },
     "player-ux-finalization.test.mjs": {
       "sha256": "d2f4b4860057b015e5ddfacd09c8b95483f3e94e90220be85f202bcf83f8a827",
       "tests": 9,
