@@ -26,7 +26,7 @@ test("[OBS-03] every wrapped function exists in production and keeps its global 
   for (const f of fs.readdirSync(new URL("../", import.meta.url)).filter(f => /\.(js|html)$/.test(f) && f !== "sw.js")) if (f !== "index.html") for (const n of WRAPPED) assert.ok(!new RegExp(`\\b${n}\\s*=[^=]`).test(read(f)), `${f} re-assigns ${n} after the wrappers are installed`);
 });
 test("[OBS-03] inventory of the inputs of refresh(): selection writers and library writers are pinned (a new writer needs a trigger review)", () => {
-  assert.equal(count(html, /selectedRegisteredPlayer\[[^\]]*\]\s*=[^=]/g), 4);  // clear on delete, select, clear on edit, primary init
+  assert.equal(count(html, /selectedRegisteredPlayer\[[^\]]*\]\s*=[^=]/g), 5);  // clear on delete, select, clear on edit, primary init, first-launch Score 2 (startup only; D plan 2026-11-01, no new refresh trigger needed)
   assert.equal(count(html, /selectedRegisteredPlayer\s*=[^=]/g), 3);            // declaration, state restore, clearSelectedPlayersV1
   assert.equal(count(html, /\[selectedRegisteredPlayer\[1\], selectedRegisteredPlayer\[2\]\] =/g), 1); // swap (inside the setup screen: setup click listener)
   assert.equal(count(html, /(?<!function )writePlayerLibrary\(/g), 5);          // save, delete, set-primary, delete-all x2

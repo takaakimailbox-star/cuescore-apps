@@ -1,0 +1,6404 @@
+{
+ "timestamp": "2026-11-01T08:49:57.472Z",
+ "checks": [
+  {
+   "ok": true,
+   "label": "en/320/9ball first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     106.5625,
+     106.5625
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball discipline->cards gap widened vs C plan (11pt)",
+   "detail": 19
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     75.171875,
+     75.171875
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     106.5625,
+     106.5625
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball discipline->cards gap widened vs C plan (11pt)",
+   "detail": 19
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     75.171875,
+     75.171875
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/10ball no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     100.203125,
+     100.203125
+    ],
+    "h": [
+     164.578125,
+     164.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 discipline->cards gap widened vs C plan (11pt)",
+   "detail": 19
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     75.171875,
+     75.171875
+    ],
+    "h": [
+     164.578125,
+     164.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/jpa9 no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     106.5625,
+     106.5625
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation discipline->cards gap widened vs C plan (11pt)",
+   "detail": 19
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     75.171875,
+     75.171875
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/rotation no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     106.5625,
+     106.5625
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool discipline->cards gap widened vs C plan (11pt)",
+   "detail": 19
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     75.171875,
+     75.171875
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/straightPool no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     106.5625,
+     106.5625
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion discipline->cards gap widened vs C plan (11pt)",
+   "detail": 19
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     75.171875,
+     75.171875
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     125.03125,
+     125.03125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball discipline->cards gap widened vs C plan (13pt)",
+   "detail": 22
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     113.046875,
+     113.046875
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/9ball no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     125.03125,
+     125.03125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball discipline->cards gap widened vs C plan (13pt)",
+   "detail": 22
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     113.046875,
+     113.046875
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/10ball no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     125.03125,
+     125.03125
+    ],
+    "h": [
+     164.578125,
+     164.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 discipline->cards gap widened vs C plan (13pt)",
+   "detail": 22
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     106.6875,
+     106.6875
+    ],
+    "h": [
+     164.578125,
+     164.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/jpa9 no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     125.03125,
+     125.03125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation discipline->cards gap widened vs C plan (13pt)",
+   "detail": 22
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     113.046875,
+     113.046875
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/rotation no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     125.03125,
+     125.03125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool discipline->cards gap widened vs C plan (13pt)",
+   "detail": 22
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     113.046875,
+     113.046875
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/straightPool no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     125.03125,
+     125.03125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion discipline->cards gap widened vs C plan (13pt)",
+   "detail": 22
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     113.046875,
+     113.046875
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/threeCushion no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     190.078125,
+     190.078125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball discipline->cards gap widened vs C plan (16pt)",
+   "detail": 28
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     190.078125,
+     190.078125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball start->tab-bar gap kept",
+   "detail": 24
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     190.078125,
+     190.078125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball discipline->cards gap widened vs C plan (16pt)",
+   "detail": 28
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     190.078125,
+     190.078125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/10ball start->tab-bar gap kept",
+   "detail": 24
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     190.078125,
+     190.078125
+    ],
+    "h": [
+     164.578125,
+     164.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 discipline->cards gap widened vs C plan (16pt)",
+   "detail": 28
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     190.078125,
+     190.078125
+    ],
+    "h": [
+     164.578125,
+     164.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/jpa9 start->tab-bar gap kept",
+   "detail": 24
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     190.078125,
+     190.078125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation discipline->cards gap widened vs C plan (16pt)",
+   "detail": 28
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     190.078125,
+     190.078125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/rotation start->tab-bar gap kept",
+   "detail": 24
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     190.078125,
+     190.078125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool discipline->cards gap widened vs C plan (16pt)",
+   "detail": 28
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     190.078125,
+     190.078125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/straightPool start->tab-bar gap kept",
+   "detail": 24
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     190.078125,
+     190.078125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion discipline->cards gap widened vs C plan (16pt)",
+   "detail": 28
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     190.078125,
+     190.078125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion start->tab-bar gap kept",
+   "detail": 24
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     197.8125,
+     197.8125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball discipline->cards gap widened vs C plan (18pt)",
+   "detail": 31
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     197.8125,
+     197.8125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/9ball start->tab-bar gap kept",
+   "detail": 26
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     197.8125,
+     197.8125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball discipline->cards gap widened vs C plan (18pt)",
+   "detail": 31
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     197.8125,
+     197.8125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/10ball start->tab-bar gap kept",
+   "detail": 26
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     197.8125,
+     197.8125
+    ],
+    "h": [
+     164.578125,
+     164.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 discipline->cards gap widened vs C plan (18pt)",
+   "detail": 31
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     197.8125,
+     197.8125
+    ],
+    "h": [
+     164.578125,
+     164.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/jpa9 start->tab-bar gap kept",
+   "detail": 26
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     197.8125,
+     197.8125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation discipline->cards gap widened vs C plan (18pt)",
+   "detail": 31
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     197.8125,
+     197.8125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/rotation start->tab-bar gap kept",
+   "detail": 26
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     197.8125,
+     197.8125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool discipline->cards gap widened vs C plan (18pt)",
+   "detail": 31
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     197.8125,
+     197.8125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/straightPool start->tab-bar gap kept",
+   "detail": 26
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion first launch: Score 1 / Score 2 selected, start enabled",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "dis": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion p1 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion p1 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion p1 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion p1 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion p1 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion p2 selected card: solid frame",
+   "detail": {
+    "bs": "solid"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion p2 selected name ~20pt",
+   "detail": 20
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion p2 avatar->name 4pt",
+   "detail": 4
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion p2 name->Race to 10pt",
+   "detail": 10
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion p2 no red"
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion both cards aligned (top/height)",
+   "detail": {
+    "t": [
+     197.8125,
+     197.8125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion discipline->cards gap widened vs C plan (18pt)",
+   "detail": 31
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion both selected: no guidance shown",
+   "detail": {
+    "n": null,
+    "r": null
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion unselected card AND avatar ring are dashed",
+   "detail": {
+    "card": "dashed",
+    "av": "dashed"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion unselected frame colours are light grey",
+   "detail": {
+    "c": "rgb(200, 200, 196)",
+    "a": "rgb(188, 188, 184)"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion selected P1 stays solid"
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion add mark (+) kept",
+   "detail": "\"+\""
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion no red warning mark / text"
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion mixed cards aligned (top/height)",
+   "detail": {
+    "t": [
+     197.8125,
+     197.8125
+    ],
+    "h": [
+     150.578125,
+     150.578125
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion unselected card spacing 4 / 10pt",
+   "detail": {
+    "a": 4,
+    "n": 10
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion unselected: start disabled, existing approved note == footer, note aria-hidden",
+   "detail": {
+    "n": "Select an opponent to start the match",
+    "r": "Select an opponent to start the match"
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/threeCushion start->tab-bar gap kept",
+   "detail": 26
+  }
+ ],
+ "rows": [
+  {
+   "t": "en/320/9ball",
+   "state": "both-selected",
+   "gap": 19,
+   "p1": {
+    "empty": false,
+    "top": 106.5625,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 106.5625,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 16,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/320/9ball",
+   "state": "p2-unselected",
+   "gap": 19,
+   "p1": {
+    "empty": false,
+    "top": 75.171875,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 75.171875,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 5,
+   "small": [],
+   "startToTab": 16,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/320/10ball",
+   "state": "both-selected",
+   "gap": 19,
+   "p1": {
+    "empty": false,
+    "top": 106.5625,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 106.5625,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 16,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/320/10ball",
+   "state": "p2-unselected",
+   "gap": 19,
+   "p1": {
+    "empty": false,
+    "top": 75.171875,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 75.171875,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 5,
+   "small": [],
+   "startToTab": 16,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/320/jpa9",
+   "state": "both-selected",
+   "gap": 19,
+   "p1": {
+    "empty": false,
+    "top": 100.203125,
+    "h": 164.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 100.203125,
+    "h": 164.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 16,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/320/jpa9",
+   "state": "p2-unselected",
+   "gap": 19,
+   "p1": {
+    "empty": false,
+    "top": 75.171875,
+    "h": 164.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 75.171875,
+    "h": 164.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 19,
+   "small": [],
+   "startToTab": 16,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/320/rotation",
+   "state": "both-selected",
+   "gap": 19,
+   "p1": {
+    "empty": false,
+    "top": 106.5625,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 106.5625,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 16,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/320/rotation",
+   "state": "p2-unselected",
+   "gap": 19,
+   "p1": {
+    "empty": false,
+    "top": 75.171875,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 75.171875,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 5,
+   "small": [],
+   "startToTab": 16,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/320/straightPool",
+   "state": "both-selected",
+   "gap": 19,
+   "p1": {
+    "empty": false,
+    "top": 106.5625,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 106.5625,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 16,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/320/straightPool",
+   "state": "p2-unselected",
+   "gap": 19,
+   "p1": {
+    "empty": false,
+    "top": 75.171875,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 75.171875,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 5,
+   "small": [],
+   "startToTab": 16,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/320/threeCushion",
+   "state": "both-selected",
+   "gap": 19,
+   "p1": {
+    "empty": false,
+    "top": 106.5625,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 106.5625,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 16,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/320/threeCushion",
+   "state": "p2-unselected",
+   "gap": 19,
+   "p1": {
+    "empty": false,
+    "top": 75.171875,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 75.171875,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 5,
+   "small": [],
+   "startToTab": 16,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/375/9ball",
+   "state": "both-selected",
+   "gap": 22,
+   "p1": {
+    "empty": false,
+    "top": 125.03125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 125.03125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 19,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/375/9ball",
+   "state": "p2-unselected",
+   "gap": 22,
+   "p1": {
+    "empty": false,
+    "top": 113.046875,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 113.046875,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 19,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/375/10ball",
+   "state": "both-selected",
+   "gap": 22,
+   "p1": {
+    "empty": false,
+    "top": 125.03125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 125.03125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 19,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/375/10ball",
+   "state": "p2-unselected",
+   "gap": 22,
+   "p1": {
+    "empty": false,
+    "top": 113.046875,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 113.046875,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 19,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/375/jpa9",
+   "state": "both-selected",
+   "gap": 22,
+   "p1": {
+    "empty": false,
+    "top": 125.03125,
+    "h": 164.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 125.03125,
+    "h": 164.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 19,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/375/jpa9",
+   "state": "p2-unselected",
+   "gap": 22,
+   "p1": {
+    "empty": false,
+    "top": 106.6875,
+    "h": 164.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 106.6875,
+    "h": 164.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 19,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/375/rotation",
+   "state": "both-selected",
+   "gap": 22,
+   "p1": {
+    "empty": false,
+    "top": 125.03125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 125.03125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 19,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/375/rotation",
+   "state": "p2-unselected",
+   "gap": 22,
+   "p1": {
+    "empty": false,
+    "top": 113.046875,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 113.046875,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 19,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/375/straightPool",
+   "state": "both-selected",
+   "gap": 22,
+   "p1": {
+    "empty": false,
+    "top": 125.03125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 125.03125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 19,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/375/straightPool",
+   "state": "p2-unselected",
+   "gap": 22,
+   "p1": {
+    "empty": false,
+    "top": 113.046875,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 113.046875,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 19,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/375/threeCushion",
+   "state": "both-selected",
+   "gap": 22,
+   "p1": {
+    "empty": false,
+    "top": 125.03125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 125.03125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 19,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/375/threeCushion",
+   "state": "p2-unselected",
+   "gap": 22,
+   "p1": {
+    "empty": false,
+    "top": 113.046875,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 113.046875,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 19,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/390/9ball",
+   "state": "both-selected",
+   "gap": 28,
+   "p1": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 24,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/390/9ball",
+   "state": "p2-unselected",
+   "gap": 28,
+   "p1": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 24,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/390/10ball",
+   "state": "both-selected",
+   "gap": 28,
+   "p1": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 24,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/390/10ball",
+   "state": "p2-unselected",
+   "gap": 28,
+   "p1": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 24,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/390/jpa9",
+   "state": "both-selected",
+   "gap": 28,
+   "p1": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 164.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 164.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 24,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/390/jpa9",
+   "state": "p2-unselected",
+   "gap": 28,
+   "p1": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 164.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 190.078125,
+    "h": 164.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 24,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/390/rotation",
+   "state": "both-selected",
+   "gap": 28,
+   "p1": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 24,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/390/rotation",
+   "state": "p2-unselected",
+   "gap": 28,
+   "p1": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 24,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/390/straightPool",
+   "state": "both-selected",
+   "gap": 28,
+   "p1": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 24,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/390/straightPool",
+   "state": "p2-unselected",
+   "gap": 28,
+   "p1": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 24,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/390/threeCushion",
+   "state": "both-selected",
+   "gap": 28,
+   "p1": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 24,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/390/threeCushion",
+   "state": "p2-unselected",
+   "gap": 28,
+   "p1": {
+    "empty": false,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 190.078125,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 24,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/430/9ball",
+   "state": "both-selected",
+   "gap": 31,
+   "p1": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 26,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/430/9ball",
+   "state": "p2-unselected",
+   "gap": 31,
+   "p1": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 26,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/430/10ball",
+   "state": "both-selected",
+   "gap": 31,
+   "p1": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 26,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/430/10ball",
+   "state": "p2-unselected",
+   "gap": 31,
+   "p1": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 26,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/430/jpa9",
+   "state": "both-selected",
+   "gap": 31,
+   "p1": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 164.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 164.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 26,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/430/jpa9",
+   "state": "p2-unselected",
+   "gap": 31,
+   "p1": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 164.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 197.8125,
+    "h": 164.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 26,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/430/rotation",
+   "state": "both-selected",
+   "gap": 31,
+   "p1": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 26,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/430/rotation",
+   "state": "p2-unselected",
+   "gap": 31,
+   "p1": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 26,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/430/straightPool",
+   "state": "both-selected",
+   "gap": 31,
+   "p1": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 26,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/430/straightPool",
+   "state": "p2-unselected",
+   "gap": 31,
+   "p1": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 26,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  },
+  {
+   "t": "en/430/threeCushion",
+   "state": "both-selected",
+   "gap": 31,
+   "p1": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "Score 2",
+   "startDisabled": false,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 26,
+   "noteText": null,
+   "noteAria": null,
+   "reasonText": null,
+   "errs": []
+  },
+  {
+   "t": "en/430/threeCushion",
+   "state": "p2-unselected",
+   "gap": 31,
+   "p1": {
+    "empty": false,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "solid",
+    "bw": "1px",
+    "bc": "rgb(233, 233, 230)",
+    "abs": "none",
+    "abc": "rgb(23, 23, 23)",
+    "nf": 20,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "none",
+    "red": false
+   },
+   "p2": {
+    "empty": true,
+    "top": 197.8125,
+    "h": 150.578125,
+    "bs": "dashed",
+    "bw": "1px",
+    "bc": "rgb(200, 200, 196)",
+    "abs": "dashed",
+    "abc": "rgb(188, 188, 184)",
+    "nf": 15,
+    "nOver": false,
+    "avName": 4,
+    "nameRace": 10,
+    "plus": "\"+\"",
+    "red": false
+   },
+   "p1Name": "Score 1",
+   "p2Name": "",
+   "startDisabled": true,
+   "hscroll": false,
+   "scrollNeeded": 0,
+   "small": [],
+   "startToTab": 26,
+   "noteText": "Select an opponent to start the match",
+   "noteAria": "true",
+   "reasonText": "Select an opponent to start the match",
+   "errs": []
+  }
+ ],
+ "pass": true
+}

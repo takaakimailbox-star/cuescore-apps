@@ -1,0 +1,283 @@
+{
+ "timestamp": "2026-11-01T09:37:36.760Z",
+ "checks": [
+  {
+   "ok": true,
+   "label": "en/fresh two players Score 1 / Score 2 created",
+   "detail": [
+    "Score 1",
+    "Score 2"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "en/fresh independent unique Player IDs",
+   "detail": [
+    "931ad832-8a48-4e3b-b343-1445b917c2d4",
+    "76665dde-2c28-492f-9d14-91eeb21bf8de"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "en/fresh Score 1 is the main player"
+  },
+  {
+   "ok": true,
+   "label": "en/fresh first launch: both selected, start enabled, add-guide hidden",
+   "detail": {
+    "p1": "Score 1",
+    "p2": "Score 2",
+    "start": false,
+    "guide": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/fresh ordinary player records (default avatar, unused)"
+  },
+  {
+   "ok": true,
+   "label": "en/fresh no match records created",
+   "detail": null
+  },
+  {
+   "ok": true,
+   "label": "en/fresh 2nd launch: no duplicate registration, IDs unchanged",
+   "detail": [
+    "931ad832-8a48-4e3b-b343-1445b917c2d4",
+    "76665dde-2c28-492f-9d14-91eeb21bf8de"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "en/fresh 2nd launch: main player auto-selected (existing rule)",
+   "detail": "Score 1"
+  },
+  {
+   "ok": true,
+   "label": "en/fresh renamed initial player keeps its ID and name after restart",
+   "detail": [
+    "Yuki",
+    "Score 2"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "en/fresh after deleting all players a restart does NOT recreate Score 1/2",
+   "detail": "[]"
+  },
+  {
+   "ok": true,
+   "label": "en/fresh done"
+  },
+  {
+   "ok": true,
+   "label": "en/existing-1-player stored players unchanged (no Score 1/2 added)",
+   "detail": [
+    "Aki"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "en/existing-1-player no initial players added"
+  },
+  {
+   "ok": true,
+   "label": "en/existing-1-player done"
+  },
+  {
+   "ok": true,
+   "label": "en/existing-3-players stored players unchanged (no Score 1/2 added)",
+   "detail": [
+    "Aki",
+    "Bo",
+    "Cy"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "en/existing-3-players no initial players added"
+  },
+  {
+   "ok": true,
+   "label": "en/existing-3-players done"
+  },
+  {
+   "ok": true,
+   "label": "en/existing-0-players(key []) stored players unchanged (no Score 1/2 added)",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/existing-0-players(key []) no initial players added"
+  },
+  {
+   "ok": true,
+   "label": "en/existing-0-players(key []) done"
+  },
+  {
+   "ok": true,
+   "label": "en/history-only(players absent) players key still absent (existing use detected, nothing added)",
+   "detail": null
+  },
+  {
+   "ok": true,
+   "label": "en/history-only(players absent) history unchanged"
+  },
+  {
+   "ok": true,
+   "label": "en/history-only(players absent) done"
+  },
+  {
+   "ok": true,
+   "label": "en/other-usage-key(selectedDiscipline) players key still absent (existing use detected, nothing added)",
+   "detail": null
+  },
+  {
+   "ok": true,
+   "label": "en/other-usage-key(selectedDiscipline) done"
+  },
+  {
+   "ok": true,
+   "label": "en/corrupted-players-json corrupted data left as is, nothing added",
+   "detail": "{not json"
+  },
+  {
+   "ok": true,
+   "label": "en/corrupted-players-json done"
+  },
+  {
+   "ok": true,
+   "label": "en/initial-deleted(key [] after seed) stored players unchanged (no Score 1/2 added)",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/initial-deleted(key [] after seed) no initial players added"
+  },
+  {
+   "ok": true,
+   "label": "en/initial-deleted(key [] after seed) done"
+  },
+  {
+   "ok": true,
+   "label": "en/initial-renamed(Score 1 -> Yuki) stored players unchanged (no Score 1/2 added)",
+   "detail": [
+    "Yuki",
+    "Score 2"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "en/initial-renamed(Score 1 -> Yuki) no initial players added"
+  },
+  {
+   "ok": true,
+   "label": "en/initial-renamed(Score 1 -> Yuki) done"
+  },
+  {
+   "ok": true,
+   "label": "en/restored-backup(replaced library) stored players unchanged (no Score 1/2 added)",
+   "detail": [
+    "Restored A",
+    "Restored B"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "en/restored-backup(replaced library) no initial players added"
+  },
+  {
+   "ok": true,
+   "label": "en/restored-backup(replaced library) history unchanged"
+  },
+  {
+   "ok": true,
+   "label": "en/restored-backup(replaced library) done"
+  },
+  {
+   "ok": true,
+   "label": "en/demo-mode-active real player key untouched while demo mode is active",
+   "detail": null
+  },
+  {
+   "ok": true,
+   "label": "en/demo-mode-active done"
+  },
+  {
+   "ok": true,
+   "label": "language en: stored Player names and IDs unchanged",
+   "detail": [
+    [
+     "b327eabf-a490-432b-b141-36dc56cd4004",
+     "Score 1"
+    ],
+    [
+     "29149aa3-1648-4a97-b937-b312987ab8ca",
+     "Score 2"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "language zh-Hans: stored Player names and IDs unchanged",
+   "detail": [
+    [
+     "b327eabf-a490-432b-b141-36dc56cd4004",
+     "Score 1"
+    ],
+    [
+     "29149aa3-1648-4a97-b937-b312987ab8ca",
+     "Score 2"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "language ja: stored Player names and IDs unchanged",
+   "detail": [
+    [
+     "b327eabf-a490-432b-b141-36dc56cd4004",
+     "Score 1"
+    ],
+    [
+     "29149aa3-1648-4a97-b937-b312987ab8ca",
+     "Score 2"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "rename keeps the Player ID"
+  },
+  {
+   "ok": true,
+   "label": "initial player can be deleted like any other",
+   "detail": [
+    "Score 2"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "completed match history is unchanged after deleting the player"
+  },
+  {
+   "ok": true,
+   "label": "a new player with the same name gets a different ID",
+   "detail": {
+    "fresh": "6f2f53a0-c029-4ba8-a08d-611b80c5d8b0",
+    "old": "6b751cb9-c2cc-4313-b802-003dc320bbf4"
+   }
+  },
+  {
+   "ok": true,
+   "label": "history keeps the OLD ID; no duplicate initial registration",
+   "detail": {
+    "name": "Score 1",
+    "registeredPlayerId": "6b751cb9-c2cc-4313-b802-003dc320bbf4",
+    "score": 9
+   }
+  }
+ ],
+ "pass": true
+}

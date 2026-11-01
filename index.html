@@ -10292,6 +10292,36 @@ let matchRecordsRawCacheV152 = null;
     });
   }
 
+  /* New D plan (PO 2026-11-01): a completely NEW install starts with two ordinary Players, "Score 1" (main) and "Score 2", so a match can start at once.
+     Safety (no marker key, no new schema): the real player key is absent only when no Player was ever saved - every save, delete-one, delete-all, delete-all-data and backup
+     restore leaves the key present ("[]" at least), and a second launch finds the key written by the first. In addition any other CueScore key that is not one of the defaults
+     the app itself writes at boot means the app was used before, so nothing is added. Demo mode (its own key namespace) is skipped. Names are fixed ASCII (same in every language). */
+  const INITIAL_PLAYERS_BOOT_KEYS_V1 = new Set(["cueScore.language.v1","cueScore.breakRuleDefault.v3","cueScore.nineBall.settings.v1","cueScore.tenBall.settings.v1","cueScore.straightPool.settings.v1","cueScore.threeCushion.settings.v1","rotationScoreboard.matchCategories.v1","rotationScoreboard.matchSeasons.v1"]);
+  let initialSecondPlayerIdV1 = null;
+  function seedInitialPlayersV1() {
+    try {
+      if (window.CueScoreDemoData?.isDemo?.()) return false;
+      if (localStorage.getItem(PLAYER_LIBRARY_KEY) !== null) return false;
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (!/^(rotationScoreboard|cueScore)\./.test(key)) continue;
+        if (!INITIAL_PLAYERS_BOOT_KEYS_V1.has(key)) return false;
+        if (/^rotationScoreboard\.match(Categories|Seasons)\.v1$/.test(key) && localStorage.getItem(key) !== "[]") return false;
+      }
+      const now = Date.now();
+      const players = window.cueScoreNormalizePlayersToDefaultAvatarV4(["Score 1", "Score 2"].map((name, index) => ({
+        id: makePlayerId(), name, memo: "", avatar: { type: "default", id: "default_silhouette" }, createdAt: now, updatedAt: now, lastUsed: null, ...(index === 0 ? { isPrimary: true } : {})
+      })));
+      verifiedLocalStorageWriteV131(PLAYER_LIBRARY_KEY, players);
+      initialSecondPlayerIdV1 = players[1].id;
+      return true;
+    } catch (error) {
+      console.error("CueScore initial players skipped", error);
+      return false;
+    }
+  }
+  seedInitialPlayersV1();
+
   // Official avatar reset v4: migrate all existing players before any screen or backup reads them.
   readPlayerLibrary();
 
@@ -11777,6 +11807,25 @@ let matchRecordsRawCacheV152 = null;
       playerLibraryTarget === 1 ? "p1NameDisplayV1" : "p2NameDisplayV1"
     );
     closePlayerLibrary();
+  }
+
+  /* first launch after the initial registration only: Score 2 is the second player (same field updates as picking it in the library). Later launches use the existing rules. */
+  function applyInitialSecondPlayerV1() {
+    const id = initialSecondPlayerIdV1;
+    if (!id) return false;
+    initialSecondPlayerIdV1 = null;
+    const player = readPlayerLibrary().find(p => p.id === id);
+    if (!player || selectedRegisteredPlayer[2] || selectedRegisteredPlayer[1] === id) return false;
+    const nameInput = el("p2Name"), raceInput = el("p2Race"), rangeInput = el("p2Skill");
+    if (!nameInput || !raceInput || !rangeInput) return false;
+    nameInput.value = limitPlayerName(player.name);
+    if (!raceInput.value) raceInput.value = "120";
+    if (!rangeInput.value) rangeInput.value = String(raceValueToStep(Number(raceInput.value) || 120));
+    selectedRegisteredPlayer[2] = id;
+    syncSelectedPlayerAvatarV2(2, player);
+    syncHomeRaceDisplaysV2();
+    syncNewMatchNameV1("p2Name", "p2NameDisplayV1");
+    return true;
   }
 
   function markSelectedPlayersUsed() {
@@ -17331,6 +17380,7 @@ let matchRecordsRawCacheV152 = null;
     renderPlayerLibrary();
     renderInProgressHomeCardV1();
     initializePrimaryMatchSetupV1();
+    applyInitialSecondPlayerV1();
     return true;
   }
   initializePlayerUiV1();

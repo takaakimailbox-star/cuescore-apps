@@ -38,7 +38,7 @@ for(const lang of LANGS) for(const w of WIDTHS){
       ck(m.btn.h>=54,`${t} start button >=54pt`,m.btn.h);
       for(const k of ["p1","p2"]){ck(m[k].avBottom_nameTop>=4&&m[k].avBottom_nameTop<=8.5,`${t} ${k} avatar->name 4-8pt`,m[k].avBottom_nameTop);ck(m[k].nameBottom_raceTop>=8&&m[k].nameBottom_raceTop<=12.5,`${t} ${k} name->Race to 8-12pt`,m[k].nameBottom_raceTop)}
       if(!m.guideShown){ck(m.note&&m.note.text.length>0&&m.note.ariaHidden==="true"&&m.note.insideCol2&&m.note.gapBelowCard2>=0&&m.note.gapBelowCard2<=14,`${t} opponent note directly below the opponent card`,m.note);}
-      ck(!m.yellowOnEmpty&&m.underline==="none"&&/solid/.test(m.card2Border),`${t} unselected card: solid grey frame, no yellow, no underline`,{b:m.card2Border,u:m.underline,y:m.yellowOnEmpty});
+      ck(!m.yellowOnEmpty&&m.underline==="none"&&/dashed/.test(m.card2Border),`${t} unselected card: light-grey dashed frame (D plan), no yellow, no underline`,{b:m.card2Border,u:m.underline,y:m.yellowOnEmpty});
       if(h>=800)ck(m.btnBottom_tabTop>=20&&m.btnBottom_tabTop<=28,`${t} start button -> tab bar 20-28pt`,m.btnBottom_tabTop);else ck(m.btnBottom_tabTop>=8,`${t} start button clears the tab bar (short screen)`,m.btnBottom_tabTop);
     }
   }

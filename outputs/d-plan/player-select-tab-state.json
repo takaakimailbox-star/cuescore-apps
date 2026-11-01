@@ -1,0 +1,1692 @@
+{
+ "timestamp": "2026-11-01T09:11:24.188Z",
+ "checks": [
+  {
+   "ok": true,
+   "label": "ja/320/9ball setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/9ball opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": null,
+    "opp": "",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/9ball back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/9ball AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/9ball selection created no stored data",
+   "detail": {
+    "before": 11,
+    "after": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/9ball real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/9ball History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/9ball Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/9ball Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/9ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "ja/320/threeCushion setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/threeCushion opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/threeCushion back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/threeCushion AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/threeCushion selection created no stored data",
+   "detail": {
+    "before": 11,
+    "after": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/threeCushion real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/threeCushion History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/threeCushion Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/threeCushion Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320/threeCushion no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "ja/390/9ball setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/9ball opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": null,
+    "opp": "",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/9ball back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/9ball AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/9ball selection created no stored data",
+   "detail": {
+    "before": 11,
+    "after": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/9ball real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/9ball History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/9ball Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/9ball Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/9ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "ja/390/threeCushion setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/threeCushion opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/threeCushion back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/threeCushion AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/threeCushion selection created no stored data",
+   "detail": {
+    "before": 11,
+    "after": 11
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/threeCushion real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/threeCushion History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/threeCushion Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/threeCushion Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 11,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/390/threeCushion no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": null,
+    "opp": "",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/9ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/threeCushion no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": null,
+    "opp": "",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/9ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/threeCushion no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/9ball setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/9ball opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": null,
+    "opp": "",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/9ball back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/9ball AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/9ball selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/9ball real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/9ball History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/9ball Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/9ball Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/9ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/threeCushion setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/threeCushion opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/threeCushion back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/threeCushion AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/threeCushion selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/threeCushion real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/threeCushion History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/threeCushion Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/threeCushion Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/threeCushion no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/9ball setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/9ball opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": null,
+    "opp": "",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/9ball back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/9ball AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": null,
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/9ball selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/9ball real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/9ball History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/9ball Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/9ball Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/9ball no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/threeCushion setup open: only Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/threeCushion opponent picker (library) opens",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/threeCushion back on setup with opponent selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/threeCushion AFTER SELECT: exactly Home selected (no stale Player)",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/threeCushion selection created no stored data",
+   "detail": {
+    "before": 12,
+    "after": 12
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/threeCushion real Player tab: Player selected, library shown",
+   "detail": {
+    "sel": [
+     "player"
+    ],
+    "body": "player",
+    "setup": true,
+    "libVis": true,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/threeCushion History tab: History selected",
+   "detail": {
+    "sel": [
+     "history"
+    ],
+    "body": "history",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/threeCushion Settings tab: Settings selected",
+   "detail": {
+    "sel": [
+     "settings"
+    ],
+    "body": "settings",
+    "setup": true,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/threeCushion Home tab: Home selected",
+   "detail": {
+    "sel": [
+     "home"
+    ],
+    "body": "home",
+    "setup": false,
+    "libVis": false,
+    "ctx": "browse",
+    "opp": "さくら",
+    "storage": 12,
+    "errs": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/threeCushion no JS exceptions",
+   "detail": []
+  }
+ ],
+ "pass": true
+}

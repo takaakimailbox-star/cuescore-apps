@@ -229,6 +229,12 @@
       "tests": 5,
       "skips": 0
     },
+    "d-plan-initial-players.test.mjs": {
+      "sha256": "5c61fc151b641d0155f9d7b21d6948eab4d94fe8a04cd0298e0347bda960afef",
+      "tests": 4,
+      "skips": 0,
+      "updated_in": "D plan (PO 2026-11-01): new test (initial players safety, first-launch Score 2, D card style)"
+    },
     "delete-workflows.test.mjs": {
       "sha256": "bb0c346240a2fafc93193300709a7d66ac18aaaa08739e398a3017508636eac0",
       "tests": 0,
@@ -373,31 +379,31 @@
       "skips": 0
     },
     "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
-      "sha256": "6d589577fe034af4e001ff0b2649bdfd03bf4cdfaf7e54e794172b9e370e03e1",
+      "sha256": "aea19a6ff59ac97986cc02e21ec3945f26a63c1e618f95e39c2d2114e8ca7093",
       "tests": 4,
       "skips": 0,
-      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)",
+      "updated_in": "D plan (PO 2026-11-01): index.html digest pin refreshed (initial players + first-launch Score 2); no assertion weakened",
       "previousSha256": "dfd387d37cd545c34527d39305e738db6da8e3c5ef546e8d1a7ed598a45c386c"
     },
     "localization-glossary-25-approval-decision.test.mjs": {
-      "sha256": "b44cf3c4cfe97debfdcaf5f433be58a2631f3f2d30fa8a8aa4b27f6f5bc392db",
+      "sha256": "58dbd6a3f4ed27d1254dad76b54d30fdaadb44bb1a1dff7ed83500a9b7b832b1",
       "tests": 6,
       "skips": 0,
       "previousSha256": "efb33d83bbabcdbf768abe9298e9669249187211fa07997f81fe30d6fc34df5c",
-      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
+      "updated_in": "D plan (PO 2026-11-01): index.html digest pin refreshed (initial players + first-launch Score 2); no assertion weakened"
     },
     "localization-glossary-finalization-decision.test.mjs": {
-      "sha256": "fdfb9237bb8a3da3a9a1443a675395d7615a1ff35a4483b11ffdaa49b477eb0c",
+      "sha256": "96976400159700dc23d11ac78c30140defd7b6a8293105eca326c86c845c2559",
       "tests": 7,
       "skips": 0,
       "previousSha256": "18323fdabd704194b4f8ba96e299d267cdd410f8c244989ad44ffa277f81bd6f",
-      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
+      "updated_in": "D plan (PO 2026-11-01): index.html digest pin refreshed (initial players + first-launch Score 2); no assertion weakened"
     },
     "localization-ios-first-entry-language-decision.test.mjs": {
-      "sha256": "f62e39958ff8759d5eabcb1981388ea08c2ef417b52f3973b3a8e16aeffda3ed",
+      "sha256": "513d3c59f2e070fefafbd4fae09960164173c22a6b7fe982e10cf31dd05cce83",
       "tests": 4,
       "skips": 0,
-      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)",
+      "updated_in": "D plan (PO 2026-11-01): index.html digest pin refreshed (initial players + first-launch Score 2); no assertion weakened",
       "previousSha256": "66b595ba5a289be32d940e17e3c66e8944e088fbdafb15df25ef938f32798fd0"
     },
     "localization-native-camera-decision.test.mjs": {

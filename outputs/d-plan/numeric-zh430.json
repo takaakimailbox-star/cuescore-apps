@@ -1,0 +1,610 @@
+{
+ "timestamp": "2026-11-01T09:40:39.054Z",
+ "checks": [
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball menu opens",
+   "detail": {
+    "open": true,
+    "n": 11,
+    "labels": [
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6",
+     "7",
+     "8",
+     "9",
+     "10",
+     "其他…"
+    ],
+    "sel": [
+     "5"
+    ],
+    "inView": true,
+    "h": 359,
+    "scrollable": true,
+    "minRow": 44,
+    "pinnedVisible": true,
+    "role": "listbox",
+    "scrimAria": null,
+    "scrollTop": 26
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball scrim is not aria-hidden",
+   "detail": null
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball menu inside viewport, rows >=44px",
+   "detail": {
+    "inView": true,
+    "minRow": 44
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball \"Other\" is visible without scrolling"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball contiguous 1-10 presets",
+   "detail": "1,2,3,4,5,6,7,8,9,10"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball presets + Other only",
+   "detail": 11
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball outside tap closes the menu"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball outside tap keeps the unconfirmed value",
+   "detail": "5"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball no tap-through to the control below (names unchanged)"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball picker sheet closed"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball focus returns to the trigger"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball Escape cancels"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball choosing 7 applies and auto-closes",
+   "detail": "7"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball \"Other\" opens the numeric input"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball outside tap during Other input cancels without applying",
+   "detail": "7"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball custom 45 applied",
+   "detail": "45"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball current value outside the presets is shown selected",
+   "detail": {
+    "sel": [
+     "45"
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/9ball no horizontal overflow"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball menu opens",
+   "detail": {
+    "open": true,
+    "n": 11,
+    "labels": [
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6",
+     "7",
+     "8",
+     "9",
+     "10",
+     "其他…"
+    ],
+    "sel": [
+     "5"
+    ],
+    "inView": true,
+    "h": 359,
+    "scrollable": true,
+    "minRow": 44,
+    "pinnedVisible": true,
+    "role": "listbox",
+    "scrimAria": null,
+    "scrollTop": 26
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball scrim is not aria-hidden",
+   "detail": null
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball menu inside viewport, rows >=44px",
+   "detail": {
+    "inView": true,
+    "minRow": 44
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball \"Other\" is visible without scrolling"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball contiguous 1-10 presets",
+   "detail": "1,2,3,4,5,6,7,8,9,10"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball presets + Other only",
+   "detail": 11
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball outside tap closes the menu"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball outside tap keeps the unconfirmed value",
+   "detail": "5"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball no tap-through to the control below (names unchanged)"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball picker sheet closed"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball focus returns to the trigger"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball Escape cancels"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball choosing 7 applies and auto-closes",
+   "detail": "7"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball \"Other\" opens the numeric input"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball outside tap during Other input cancels without applying",
+   "detail": "7"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball custom 45 applied",
+   "detail": "45"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball current value outside the presets is shown selected",
+   "detail": {
+    "sel": [
+     "45"
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/10ball no horizontal overflow"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion menu opens",
+   "detail": {
+    "open": true,
+    "n": 35,
+    "labels": [
+     "7",
+     "8",
+     "9",
+     "10",
+     "11",
+     "12",
+     "13",
+     "14",
+     "15",
+     "16",
+     "17",
+     "18",
+     "19",
+     "20",
+     "21",
+     "22",
+     "23",
+     "24",
+     "25",
+     "26",
+     "27",
+     "28",
+     "29",
+     "30",
+     "31",
+     "32",
+     "33",
+     "34",
+     "35",
+     "36",
+     "37",
+     "38",
+     "39",
+     "40",
+     "其他…"
+    ],
+    "sel": [
+     "25"
+    ],
+    "inView": true,
+    "h": 359,
+    "scrollable": true,
+    "minRow": 44,
+    "pinnedVisible": true,
+    "role": "listbox",
+    "scrimAria": null,
+    "scrollTop": 642
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion scrim is not aria-hidden",
+   "detail": null
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion menu inside viewport, rows >=44px",
+   "detail": {
+    "inView": true,
+    "minRow": 44
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion \"Other\" is visible without scrolling"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion contiguous 7-40 presets",
+   "detail": "7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion presets + Other only",
+   "detail": 35
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion bounded-height scrolling list",
+   "detail": {
+    "h": 359,
+    "scrollable": true
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion selected value visible/marked",
+   "detail": [
+    "25"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion outside tap closes the menu"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion outside tap keeps the unconfirmed value",
+   "detail": "25"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion no tap-through to the control below (names unchanged)"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion picker sheet closed"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion focus returns to the trigger"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion Escape cancels"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion choosing 20 applies and auto-closes",
+   "detail": "20"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion \"Other\" opens the numeric input"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion outside tap during Other input cancels without applying",
+   "detail": "20"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion custom 45 applied",
+   "detail": "45"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion current value outside the presets is shown selected",
+   "detail": {
+    "sel": [
+     "45"
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/threeCushion no horizontal overflow"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/straightPool menu opens",
+   "detail": {
+    "open": true,
+    "n": 7,
+    "labels": [
+     "25",
+     "50",
+     "75",
+     "100",
+     "125",
+     "150",
+     "其他…"
+    ],
+    "sel": [
+     "50"
+    ],
+    "inView": true,
+    "h": 322,
+    "scrollable": true,
+    "minRow": 44,
+    "pinnedVisible": true,
+    "role": "listbox",
+    "scrimAria": null,
+    "scrollTop": 0
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/straightPool scrim is not aria-hidden",
+   "detail": null
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/straightPool menu inside viewport, rows >=44px",
+   "detail": {
+    "inView": true,
+    "minRow": 44
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/straightPool \"Other\" is visible without scrolling"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/straightPool outside tap closes the menu"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/straightPool outside tap keeps the unconfirmed value",
+   "detail": "50"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/straightPool no tap-through to the control below (names unchanged)"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/straightPool picker sheet closed"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/straightPool focus returns to the trigger"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/straightPool Escape cancels"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/straightPool \"Other\" opens the numeric input"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/straightPool outside tap during Other input cancels without applying",
+   "detail": "50"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/straightPool custom 45 applied",
+   "detail": "45"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/straightPool current value outside the presets is shown selected",
+   "detail": {
+    "sel": [
+     "45"
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/straightPool no horizontal overflow"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/rotation menu opens",
+   "detail": {
+    "open": true,
+    "n": 8,
+    "labels": [
+     "61",
+     "90",
+     "120",
+     "150",
+     "180",
+     "240",
+     "300",
+     "其他…"
+    ],
+    "sel": [
+     "120"
+    ],
+    "inView": true,
+    "h": 359,
+    "scrollable": true,
+    "minRow": 44,
+    "pinnedVisible": true,
+    "role": "listbox",
+    "scrimAria": null,
+    "scrollTop": 0
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/rotation scrim is not aria-hidden",
+   "detail": null
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/rotation menu inside viewport, rows >=44px",
+   "detail": {
+    "inView": true,
+    "minRow": 44
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/rotation \"Other\" is visible without scrolling"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/rotation outside tap closes the menu"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/rotation outside tap keeps the unconfirmed value",
+   "detail": "120"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/rotation no tap-through to the control below (names unchanged)"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/rotation picker sheet closed"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/rotation focus returns to the trigger"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/rotation Escape cancels"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/rotation \"Other\" opens the numeric input"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/rotation outside tap during Other input cancels without applying",
+   "detail": "120"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/rotation custom 45 applied",
+   "detail": "45"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/rotation current value outside the presets is shown selected",
+   "detail": {
+    "sel": [
+     "45"
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/rotation no horizontal overflow"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 start button above tab bar, >=44px",
+   "detail": {
+    "top": 64,
+    "bottom": 197,
+    "startBottom": 804,
+    "tabTop": 830,
+    "startH": 54
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430 vertical balance (top 64 / bottom 197)",
+   "detail": {
+    "top": 64,
+    "bottom": 197,
+    "startBottom": 804,
+    "tabTop": 830,
+    "startH": 54
+   }
+  }
+ ],
+ "pass": true
+}
