@@ -92,7 +92,7 @@ test("SU-7 layout contract: header in one row, compact cards, independent footer
   assert.match(css, /\.cue-menu-row-v1\{[^}]*min-height:46px/);
   assert.match(css, /\.new-match-race-row-v2\{[^}]*min-height:52px!important/);
   assert.match(css, /\.cue-setup-reason-v1::after\{content:"";position:absolute;inset:-12px -8px\}/, "the reason line has a 44pt tap area");
-  assert.match(css, /is-empty-v1\{border:2px dashed/); assert.match(css, /::before\{content:"\+"/); assert.match(css, /text-decoration:underline/);
+  assert.match(css, /is-empty-v1\{border:1px solid #d9d9d6!important/); assert.match(css, /::before\{content:"\+"/); assert.ok(!/is-empty-v1[^}]*c9a227|text-decoration:underline/.test(css), "C plan: no yellow dashed frame / underline on the unselected card");
   assert.ok(!/@keyframes|animation\s*:|transition\s*:/.test(css), "no animation / transition (Reduce Motion safe)");
   assert.ok(!/position:sticky!important;bottom/.test(css) && !/#startGameBtn\{[^}]*box-shadow:(?!none)/.test(css));
 });

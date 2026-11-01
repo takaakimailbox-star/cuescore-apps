@@ -20,11 +20,11 @@ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-select-v1 .new-match-avatar-v1.has-player-avatar-v2 img{width:100%!important;height:100%!important;object-fit:cover}
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .new-match-player-select-v1 .new-match-player-name-v1{font-size:16px!important;line-height:1.25!important;font-weight:800!important;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center;min-height:20px}
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-select-v1 .new-match-chevron-v1{display:none!important}
-/* empty player: dashed frame + add mark + underlined action text (not colour alone) */
-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-card-v1.is-empty-v1{border:2px dashed #c9a227!important;background:#fffdf7!important;padding:7px!important}
-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .is-empty-v1 .cue-player-stack-v2 .new-match-avatar-v1.has-player-avatar-v2,body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .is-empty-v1 .new-match-avatar-v1.has-player-avatar-v2{border:2px dashed #c9a227!important;overflow:visible!important}
+/* empty player (C plan, PO 2026-11-01): plain light-grey solid frame + existing avatar + black add mark + selection wording; no yellow, no dashes, no underline */
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-card-v1.is-empty-v1{border:1px solid #d9d9d6!important;background:#fff!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .is-empty-v1 .cue-player-stack-v2 .new-match-avatar-v1.has-player-avatar-v2,body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .is-empty-v1 .new-match-avatar-v1.has-player-avatar-v2{overflow:visible!important}
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .is-empty-v1 .new-match-avatar-v1::before{content:"+";position:absolute;right:-5px;bottom:-5px;width:20px;height:20px;border-radius:50%;background:var(--cue-sux-ink);color:#fff;font-size:15px;font-weight:800;line-height:20px;text-align:center;z-index:2}
-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .is-empty-v1 .new-match-player-select-v1 .new-match-player-name-v1{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere;font-size:15px!important;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;text-decoration-color:#c9a227}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .is-empty-v1 .new-match-player-select-v1 .new-match-player-name-v1{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere;font-size:15px!important;text-decoration:none}
 /* Race to / Skill Level row: label above, value + chevron; value rows align at the bottom of equal-height cards */
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-row-v2{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-rows:auto auto auto!important;grid-template-areas:"lb cv" "v cv" "t cv"!important;align-items:center;align-content:center;column-gap:4px;row-gap:0;width:100%;min-height:52px!important;margin:auto 0 0!important;padding:6px 8px 6px 10px!important;border:1px solid var(--cue-sux-line)!important;border-radius:14px!important;background:#fafaf9!important;text-align:left!important;box-shadow:none!important;overflow:hidden}
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-row-v2 .goal-label-v1{grid-area:lb!important;grid-column:1!important;grid-row:1!important;width:auto!important;justify-self:start!important;font-size:12px!important;font-weight:700!important;color:var(--cue-sux-mute)!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left!important}
@@ -33,7 +33,7 @@ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-row
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-row-v2>span[aria-hidden="true"]{grid-area:cv!important;grid-column:2!important;grid-row:1/4!important;justify-self:end!important;align-self:center;font-size:14px!important;color:var(--cue-sux-mute)}
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-input-v2,body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .skill-range{display:none!important}
 /* swap button between the two cards, at the avatar height */
-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-swap-v1{position:absolute!important;left:-27px!important;top:58px!important;right:auto!important;bottom:auto!important;transform:none!important;width:44px!important;height:44px!important;margin:0!important;z-index:2}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-swap-v1{position:absolute!important;left:-27px!important;top:22px!important;right:auto!important;bottom:auto!important;transform:none!important;width:44px!important;height:44px!important;margin:0!important;z-index:2}
 /* shot clock card */
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-sc-setup{margin:10px 0 0!important;padding:8px 12px!important;border-radius:18px;border-color:var(--cue-sux-line)}
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .season-setting-v38,body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .player-name-limit-note{display:none!important}
@@ -79,10 +79,23 @@ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 #startGameBtn:not(:
 .new-match-race-picker-v1.cue-menu-mode-v1{opacity:0!important;pointer-events:none!important}
 /* vertical balance (PO feedback, Build 95): spare height is shared above and below the setup content (top 1 : bottom 1.25, top capped) instead of leaving it all at the bottom.
    The spacers collapse to 0 when the content is taller than the region, so small iPhones keep the full scroll range and the independent start footer stays reachable. */
-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-integrated-v2::before{content:"";order:-1;flex:1 1 0;min-height:0;max-height:clamp(0px,9vh,84px)}
-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-integrated-v2::after{content:"";order:99;flex:1.25 1 0;min-height:0}
-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-card-v1{min-height:clamp(0px,19vh,170px)!important}
-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-sc-setup{margin-top:clamp(10px,2.1vh,22px)!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-integrated-v2::before{content:"";order:-1;flex:1 1 0;min-height:0;max-height:clamp(0px,7vh,64px)}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-integrated-v2::after{content:"";order:99;flex:1.2 1 0;min-height:0}
 /* History tab from an open match-setup screen (Build 96 PO device report): the setup rule above is #id-qualified (display:flex!important) and out-ranked the shared
    ".app.records-mode>.cue-home-v1{display:none!important}", so the History screen opened with 0 height below the visible setup screen. Restore the hide for records mode only. */
 body.cue-phase1-normal-mode .app.records-mode>#cueHomeV1.match-setup-active-v3{display:none!important}
+/* C plan (PO 2026-11-01, "compact player cards + room across the whole screen"):
+   - avatar, name and Race to form ONE tight group in both cards (avatar->name 4pt, name->Race to 10pt, no bottom-pinned Race to, no forced card height);
+   - the spare height is spread between the sections (screen top -> heading -> cards -> shot clock -> footer) instead of inside the cards;
+   - the independent footer leaves about 24pt between the start button and the tab bar on normal screens (measured DOM rect distance; the footer is a normal flex child above the tab bar, so no safe-area double counting). */
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .new-match-player-select-v1{padding-bottom:0!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-row-v2{margin:10px 0 0!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-summary-v2{margin:0 0 clamp(6px,1.8vh,18px)!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-sc-setup{margin-top:clamp(14px,3.4vh,36px)!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 #cueSetupFooterV1{padding-bottom:clamp(10px,2.8vh,26px)}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1{grid-column:2;grid-row:2;display:flex;align-items:flex-start;gap:6px;margin:0;padding:8px 10px;border:1px solid #d3dde8;border-radius:12px;background:#e9eff5;color:#1c2a3a;font-size:13px;font-weight:650;line-height:1.4;text-wrap:balance}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1[hidden]{display:none}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1 i{flex:0 0 auto;width:16px;height:16px;margin-top:1px;border:1.6px solid #34506b;border-radius:50%;color:#34506b;font-size:11px;font-style:normal;font-weight:900;line-height:13px;text-align:center}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1 span{min-width:0;overflow-wrap:anywhere}
+html[lang="ja"] body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1 span,html[lang="zh-Hans"] body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1 span{word-break:keep-all}
+@media(max-width:350px){body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1{padding:6px 7px}body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1 i{display:none}body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1 span{font-size:11.5px;word-break:normal!important}}

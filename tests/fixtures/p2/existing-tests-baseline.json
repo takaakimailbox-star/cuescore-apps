@@ -478,10 +478,10 @@
       "previousSha256": "f21c6400e5d776bfbc2d8f34f78c2314f210b67d291d1f2dff70a56a43016d60"
     },
     "match-setup-ux.test.mjs": {
-      "sha256": "9cbad5f95c7902213dba0b02c8fc83e8c00c89bbcb804a1f698d902645da2a7b",
+      "sha256": "8e96b8642c4962c47be8497543eeb24a043b6a544589069aea415e40a469269c",
       "tests": 7,
       "skips": 0,
-      "updated_in": "Build 96 candidate: translation plan A integration, build number 95->96 pins, product-hash pins (see version-build96-translation-integration-test-change-map.json)"
+      "updated_in": "Build 96 C-plan match-setup implementation (see version-build96-c-plan-test-change-map.json)"
     },
     "match-sharing-build84-fix.test.mjs": {
       "sha256": "7ecfd2e8ea341b174acbb22f5a4293e565622ddafd00555e533142e7caddbebd",
@@ -804,11 +804,17 @@
       "tests": 10,
       "skips": 0
     },
+    "setup-card-layout.test.mjs": {
+      "sha256": "aecf2c48c03a3cc2d7f2e841027151ac578721028cd0f1a05bf191af789e5843",
+      "tests": 4,
+      "skips": 0,
+      "updated_in": "Build 96 C-plan match-setup implementation (new test)"
+    },
     "setup-numeric-menu.test.mjs": {
-      "sha256": "ade8e45806761b9315c4b335819a32eca504fa24e5ff15b0230a9ab063529d51",
+      "sha256": "fd09d490d84ccb4feba17f86349bde939360145bbfdcf8f4965ad30903bc66f0",
       "tests": 6,
       "skips": 0,
-      "updated_in": "Build 95 numeric-menu / outside-tap / vertical-balance implementation (new test; no existing assertion weakened)"
+      "updated_in": "Build 96 C-plan match-setup implementation (see version-build96-c-plan-test-change-map.json)"
     },
     "shot-clock-decision.test.mjs": {
       "sha256": "8315b9ca95999225a8fd7cf006474c2605ab0c841f25761b0cf34b56705eeeca",

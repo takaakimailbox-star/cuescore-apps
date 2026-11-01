@@ -1,0 +1,13 @@
+{
+ "gate": "C plan (PO 2026-11-01): grouped player cards (avatar->name 4pt, name->Race to 10pt), opponent guidance below the opponent card, grey solid unselected frame (no yellow dashes / underline), section spacing, ~24pt start-button -> tab-bar gap. Updated assertions: SU-? unselected-card style (dashed/underline -> solid grey, no yellow), vertical-balance spacer values; new tests: setup-card-layout.test.mjs.",
+ "changedTestFiles": {
+  "match-setup-ux.test.mjs": {
+   "before": "9cbad5f95c7902213dba0b02c8fc83e8c00c89bbcb804a1f698d902645da2a7b",
+   "after": "8e96b8642c4962c47be8497543eeb24a043b6a544589069aea415e40a469269c"
+  },
+  "setup-numeric-menu.test.mjs": {
+   "before": "ade8e45806761b9315c4b335819a32eca504fa24e5ff15b0230a9ab063529d51",
+   "after": "fd09d490d84ccb4feba17f86349bde939360145bbfdcf8f4965ad30903bc66f0"
+  }
+ }
+}

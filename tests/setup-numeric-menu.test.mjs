@@ -32,13 +32,13 @@ test("cancel (outside tap, Escape) never applies a value and restores focus; Oth
 });
 
 test("vertical balance: spacers share the spare height above and below the setup content; the footer stays independent", () => {
-  assert.match(css, /\.cue-new-match-integrated-v2::before\{content:"";order:-1;flex:1 1 0;min-height:0;max-height:clamp\(0px,9vh,84px\)\}/);
-  assert.match(css, /\.cue-new-match-integrated-v2::after\{content:"";order:99;flex:1\.25 1 0;min-height:0\}/);
+  assert.match(css, /\.cue-new-match-integrated-v2::before\{content:"";order:-1;flex:1 1 0;min-height:0;max-height:clamp\(0px,7vh,64px\)\}/);
+  assert.match(css, /\.cue-new-match-integrated-v2::after\{content:"";order:99;flex:1\.2 1 0;min-height:0\}/);
   assert.match(css, /#cueSetupFooterV1\{display:block;flex:0 0 auto/);
 });
 
 test("yellow state colours stay as they were (only the Other numeric input was neutralised earlier)", () => {
   assert.match(html, /:where\(button, a, input, select, textarea, \[tabindex\]\):focus-visible\s*\{\s*outline: 3px solid #ffd54a !important;/);
-  assert.match(css, /\.new-match-player-card-v1\.is-empty-v1\{border:2px dashed #c9a227!important/);
+  assert.match(css, /\.new-match-player-card-v1\.is-empty-v1\{border:1px solid #d9d9d6!important/, "C plan (PO 2026-11-01): the unselected card is a plain grey solid frame");
   assert.match(html, /\.pro-player-panel\.active\s*\{\s*border-color: #ffd54a;/);
 });

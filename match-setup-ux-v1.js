@@ -101,6 +101,28 @@
   }
 
   /* ---------- empty player state + footer reason ---------- */
+  /* guidance directly below the opponent card while the opponent is not selected (visual twin of the footer reason: aria-hidden so VoiceOver reads the reason once, from the footer status).
+     Wording = the approved setupux.reason.p2 (no new key). Quiet while the existing first-use guide card explains the empty library (same rule as the footer reason). */
+  function oppNote(show) {
+    const grid = $(".new-match-player-grid-v1");
+    if (!grid) return;
+    let note = $("#cueSetupOppNoteV1");
+    if (!note) {
+      note = doc.createElement("div"); note.id = "cueSetupOppNoteV1"; note.className = "cue-setup-note-v1"; note.setAttribute("aria-hidden", "true"); note.hidden = true;
+      const ic = doc.createElement("i"); ic.textContent = "i"; const tx = doc.createElement("span"); note.appendChild(ic); note.appendChild(tx); grid.appendChild(note);
+    }
+    const guide = $(".match-player-guide-v18");
+    const want = show && !(guide && !guide.hidden);
+    if (note.hidden === want) note.hidden = !want;
+    if (!want) return;
+    const text = T("setupux.reason.p2"), tx = note.lastChild;
+    if (tx.dataset.t === text) return;
+    tx.dataset.t = text; tx.textContent = "";
+    const cut = LANG_JA(text) ? text.indexOf("\u3068\u8a66\u5408") + 1 : -1;      // ja: offer a line break after "と" (presentation only; the text itself is unchanged; escapes keep AC-S1 clean)
+    if (cut > 0) { tx.appendChild(doc.createTextNode(text.slice(0, cut))); tx.appendChild(doc.createElement("wbr")); tx.appendChild(doc.createTextNode(text.slice(cut))); }
+    else tx.textContent = text;
+  }
+  const LANG_JA = text => /[\u3040-\u30ff]/.test(text);
   function setupReason() {
     const start = $("#startGameBtn"), reason = $("#cueSetupReasonV1");
     if (!start || !reason) return;
@@ -109,6 +131,7 @@
       const home = $("#cueHomeV1");
       if (!home || !home.classList.contains("match-setup-active-v3")) return;      // only while the setup screen is open (no work during a match)
       [1, 2].forEach(n => { const card = $("#newMatchPlayerCard" + n + "V1"); if (card) card.classList.toggle("is-empty-v1", !name(n)); });
+      oppNote(!name(2));
       const miss = [];
       if (!name(1)) miss.push(1);
       if (!name(2)) miss.push(2);
