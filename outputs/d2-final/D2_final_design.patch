@@ -1,0 +1,427 @@
+From 60b0ecb02285e57172a563e55db62faaf92f7272 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Mon, 2 Nov 2026 16:31:22 +0000
+Subject: [PATCH] =?UTF-8?q?feat:=20D2=20final=20design=20=E2=80=94=20bigge?=
+ =?UTF-8?q?r=20cards/avatar/names,=20guidance=20inside=20the=20unselected?=
+ =?UTF-8?q?=20card,=20blue-grey=20note=20removed,=20footer=20reason=20fold?=
+ =?UTF-8?q?ed=20visually=20(kept=20for=20VoiceOver),=20calmer=20shot=20clo?=
+ =?UTF-8?q?ck,=20spare=20height=20spread=20over=20the=20gaps=20(no=20build?=
+ =?UTF-8?q?=20numbering,=20not=20pushed)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+PO-approved D2 prototype implemented in match-setup-ux-v1.css/.js only. Approved wording and translation hashes unchanged; start condition, Score 1/2 initial registration, Player IDs, storage untouched. Superseded design-pinning assertions updated old->new (change map + baseline fixture); new real-Chrome tests d2-final (1422 checks) and small-screen reach.
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_013frrJtxPEJGZnoKAGWhZ2E
+---
+ ..._Final_Design_Implementation_2026-11-02.md | 24 +++++++
+ match-setup-ux-v1.css                         | 36 +++++++---
+ match-setup-ux-v1.js                          | 25 +------
+ tests/browser/d-plan-setup.mjs                |  6 +-
+ tests/browser/d2-final.mjs                    | 71 +++++++++++++++++++
+ tests/browser/d2-small-screen-reach.mjs       | 23 ++++++
+ tests/browser/setup-card-layout.mjs           |  2 +-
+ tests/d-plan-initial-players.test.mjs         | 16 +++--
+ .../fixtures/p2/existing-tests-baseline.json  |  8 +--
+ .../p2/version-d2-test-change-map.json        | 23 ++++++
+ tests/setup-card-layout.test.mjs              | 21 +++---
+ 11 files changed, 199 insertions(+), 56 deletions(-)
+ create mode 100644 docs/implementation/CueScore_D2_Final_Design_Implementation_2026-11-02.md
+ create mode 100644 tests/browser/d2-final.mjs
+ create mode 100644 tests/browser/d2-small-screen-reach.mjs
+ create mode 100644 tests/fixtures/p2/version-d2-test-change-map.json
+
+diff --git a/docs/implementation/CueScore_D2_Final_Design_Implementation_2026-11-02.md b/docs/implementation/CueScore_D2_Final_Design_Implementation_2026-11-02.md
+new file mode 100644
+index 0000000..3548b9e
+--- /dev/null
++++ b/docs/implementation/CueScore_D2_Final_Design_Implementation_2026-11-02.md
+@@ -0,0 +1,24 @@
++# D2 final design — match-setup implementation record (2026-11-02)
++Base: main 387d232752b2a980ad5f37b1accebbd18a13c19d. Branch cloud/d2-final-design (local; not pushed). Prototype reused: cloud/d-plan2-ui-prototype 7b0e3367eda0ad251c384520001e814b7c483afb.
++No build numbering, no Archive / Export / Upload / ASC, no push, no change to Build 98.
++
++## 1. Product changes (match-setup-ux-v1.css, match-setup-ux-v1.js only; index.html, final-ui-build18.js, shotclock-v1.* untouched)
++- Avatar 48 -> 68px; selected Player name 20 -> 23px; unselected guidance 15 -> 18px (bold); Race to number 22 -> 17px, label 12 -> 11px; card padding 10px 8px 8px; swap button top 34px.
++- Unselected card and avatar ring: light-grey dashed (kept); selected card: solid. No red / yellow.
++- Guidance INSIDE the unselected card: a round decorative (i) (`::before`, `content:"i" / ""`, empty alternative text) + the existing approved card label ("プレーヤーを選択" / "対戦相手を選択", keys p3.b3005c8a / p3.39bd0fa6). No new wording, no translation value or hash change.
++- The blue-grey note below the opponent card is removed (JS `oppNote()` + CSS rules deleted).
++- Footer reason (above the start button): same approved wording, same aria-label / aria-description (hint = the card label), same tap target logic; it is folded away VISUALLY (1px clipped box, not display:none) because it duplicated the card guidance, so VoiceOver still announces why the match cannot start. Players < 2: the existing add-player guide still shows and the reason stays quiet (unchanged).
++- Shot clock card: border #ececea, title 17 -> 15px, supplement 12 -> 11px, padding 3px 12px (OFF 62 -> 52pt, ON 131 -> 121pt). Toggle / time selectors unchanged (>=44pt). Calculation, settings, storage unchanged.
++- Spare height spread (vh based) instead of piling up at the bottom: top spacer cap clamp(0,10vh,96px); heading->cards clamp(18px,10vh,96px); cards->shot clock clamp(16px,9vh,88px). Start button -> tab bar unchanged (24pt at 390).
++- Narrow widths (<=379px, English <=399px): name boxes are 2 lines high in both cards so the two cards stay aligned; long Player names end with an ellipsis.
++
++## 2. Not implemented (per PO): blue start button, colour / photo avatars, selection-clear x button, new warnings, new game features. Start condition, Score 1/2 initial registration, Player ID, edit / delete, history, schema, Free/Pro, QR/Backup, IAP, score / win / foul are untouched.
++
++## 3. Tests changed (old -> new in tests/fixtures/p2/version-d2-test-change-map.json; no skip, no weakened assertion)
++- setup-card-layout.test.mjs: "note below the opponent card" test -> "note is gone, guidance inside the card, footer reason keeps wording + VoiceOver attributes, folded visually (not display:none)".
++- d-plan-initial-players.test.mjs: D card style test -> D2 values (still asserts dashed / solid / neutral colours / no red).
++- Browser: setup-card-layout.mjs (note assertion), d-plan-setup.mjs (23pt, gap, footer reason kept). New: tests/browser/d2-final.mjs (1422 checks), tests/browser/d2-small-screen-reach.mjs (18 checks).
++
++## 4. Known limits
++- 320pt wide: the setup area scrolls (C 7pt; shot clock ON 76pt). After scrolling to the end every control is fully visible above the footer (verified).
++- Not verified: iPhone device, VoiceOver reading, large text sizes.
+diff --git a/match-setup-ux-v1.css b/match-setup-ux-v1.css
+index e02045c..0a7cc73 100644
+--- a/match-setup-ux-v1.css
++++ b/match-setup-ux-v1.css
+@@ -93,17 +93,31 @@ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-row
+ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-summary-v2{margin:0 0 clamp(6px,1.8vh,18px)!important}
+ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-sc-setup{margin-top:clamp(14px,3.4vh,36px)!important}
+ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 #cueSetupFooterV1{padding-bottom:clamp(10px,2.8vh,26px)}
+-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1{grid-column:2;grid-row:2;display:flex;align-items:flex-start;gap:6px;margin:0;padding:8px 10px;border:1px solid #d3dde8;border-radius:12px;background:#e9eff5;color:#1c2a3a;font-size:13px;font-weight:650;line-height:1.4;text-wrap:balance}
+-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1[hidden]{display:none}
+-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1 i{flex:0 0 auto;width:16px;height:16px;margin-top:1px;border:1.6px solid #34506b;border-radius:50%;color:#34506b;font-size:11px;font-style:normal;font-weight:900;line-height:13px;text-align:center}
+-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1 span{min-width:0;overflow-wrap:anywhere}
+-html[lang="ja"] body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1 span,html[lang="zh-Hans"] body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1 span{word-break:keep-all}
+-@media(max-width:350px){body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1{padding:6px 7px}body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1 i{display:none}body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-note-v1 span{font-size:11.5px;word-break:normal!important}}
+-/* D plan (PO 2026-11-01): unselected = light-grey dashed frame for the whole card AND for the avatar ring (no red, no yellow); selected = ordinary solid card with a larger Player name;
+-   more space between the discipline name and the cards. Presentation only: no selection / start / storage logic. */
+-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-summary-v2{margin:0 0 clamp(12px,3.2vh,30px)!important}
++/* D2 final design (PO 2026-11-02). Presentation only: no selection / start / storage / shot-clock logic.
++   - unselected card and its avatar ring = light-grey dashed (no red, no yellow); selected card = solid; bigger avatar (68px) and names (23px selected, 18px guidance), Race to quieter (17px);
++   - the guidance is INSIDE the unselected card: a round decorative (i) (CSS content with empty alt text, so VoiceOver does not read it) + the existing card label;
++   - the footer reason keeps its text / aria-label / aria-description (VoiceOver) but is folded away visually (it duplicated the card guidance);
++   - calmer shot-clock card (same controls, same 44px targets);
++   - spare height is spread over the top, heading->cards, cards->shot clock and footer gaps (vh based) instead of piling up in one place. */
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-integrated-v2::before{max-height:clamp(0px,10vh,96px)}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-summary-v2{margin:0 0 clamp(18px,10vh,96px)!important}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-card-v1{padding:10px 8px 8px!important}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-swap-v1{top:34px!important}
+ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-card-v1.is-empty-v1{border:1.5px dashed #c8c8c4!important;background:#fff!important}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .new-match-player-select-v1 .new-match-avatar-v1.has-player-avatar-v2{width:68px!important;height:68px!important;min-width:68px;min-height:68px;flex:0 0 68px!important}
+ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .is-empty-v1 .new-match-player-select-v1 .new-match-avatar-v1.has-player-avatar-v2{box-sizing:border-box;border:1.5px dashed #bcbcb8!important;border-radius:50%;background:#fff!important}
+ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .is-empty-v1 .new-match-avatar-v1.has-player-avatar-v2 img{width:68%!important;height:68%!important;margin:auto;opacity:.5}
+-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .new-match-player-card-v1:not(.is-empty-v1) .new-match-player-select-v1 .new-match-player-name-v1{font-size:20px!important;line-height:1.2!important;min-height:24px;font-weight:850!important}
+-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .is-empty-v1 .new-match-player-select-v1 .new-match-player-name-v1{min-height:24px;display:flex;align-items:center;justify-content:center}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .is-empty-v1 .new-match-avatar-v1::before{right:-3px;bottom:-3px}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .new-match-player-card-v1:not(.is-empty-v1) .new-match-player-select-v1 .new-match-player-name-v1{font-size:23px!important;line-height:1.2!important;min-height:28px;font-weight:850!important}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .is-empty-v1 .new-match-player-select-v1 .new-match-player-name-v1{font-size:18px!important;line-height:1.2!important;min-height:28px;font-weight:800!important;display:flex!important;align-items:center;justify-content:center;gap:6px;text-align:center}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .is-empty-v1 .new-match-player-select-v1 .new-match-player-name-v1::before{content:"i" / "";display:inline-flex;align-items:center;justify-content:center;flex:0 0 18px;width:18px;height:18px;border:1.7px solid #5a6b7d;border-radius:50%;color:#5a6b7d;font-size:12px;font-weight:900;line-height:1;text-align:center;box-sizing:border-box}
++@media(max-width:399px){html[lang="en"] body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .is-empty-v1 .new-match-player-select-v1 .new-match-player-name-v1{min-height:44px!important}html[lang="en"] body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .new-match-player-card-v1:not(.is-empty-v1) .new-match-player-select-v1 .new-match-player-name-v1{min-height:44px!important;line-height:44px!important}}
++@media(max-width:379px){body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .is-empty-v1 .new-match-player-select-v1 .new-match-player-name-v1{min-height:44px!important}body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .new-match-player-card-v1:not(.is-empty-v1) .new-match-player-select-v1 .new-match-player-name-v1{min-height:44px!important;line-height:44px!important}}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-row-v2 strong{font-size:17px!important}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-row-v2 .goal-label-v1{font-size:11px!important}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-sc-setup{margin-top:clamp(16px,9vh,88px)!important;padding:3px 12px!important;border-color:#ececea!important}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-sc-setup-title{font-size:15px!important;line-height:20px!important;font-weight:500!important}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-sc-setup-sub{font-size:11px!important;line-height:14px!important}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-reason-wrap-v1{min-height:0!important}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-reason-v1{position:absolute!important;width:1px!important;height:1px!important;min-height:0!important;min-width:0!important;margin:-1px!important;padding:0!important;border:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-reason-v1::before,body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-reason-v1::after{display:none!important}
+diff --git a/match-setup-ux-v1.js b/match-setup-ux-v1.js
+index fef19bd..9b0dc78 100644
+--- a/match-setup-ux-v1.js
++++ b/match-setup-ux-v1.js
+@@ -101,28 +101,8 @@
+   }
+ 
+   /* ---------- empty player state + footer reason ---------- */
+-  /* guidance directly below the opponent card while the opponent is not selected (visual twin of the footer reason: aria-hidden so VoiceOver reads the reason once, from the footer status).
+-     Wording = the approved setupux.reason.p2 (no new key). Quiet while the existing first-use guide card explains the empty library (same rule as the footer reason). */
+-  function oppNote(show) {
+-    const grid = $(".new-match-player-grid-v1");
+-    if (!grid) return;
+-    let note = $("#cueSetupOppNoteV1");
+-    if (!note) {
+-      note = doc.createElement("div"); note.id = "cueSetupOppNoteV1"; note.className = "cue-setup-note-v1"; note.setAttribute("aria-hidden", "true"); note.hidden = true;
+-      const ic = doc.createElement("i"); ic.textContent = "i"; const tx = doc.createElement("span"); note.appendChild(ic); note.appendChild(tx); grid.appendChild(note);
+-    }
+-    const guide = $(".match-player-guide-v18");
+-    const want = show && !(guide && !guide.hidden);
+-    if (note.hidden === want) note.hidden = !want;
+-    if (!want) return;
+-    const text = T("setupux.reason.p2"), tx = note.lastChild;
+-    if (tx.dataset.t === text) return;
+-    tx.dataset.t = text; tx.textContent = "";
+-    const cut = LANG_JA(text) ? text.indexOf("\u3068\u8a66\u5408") + 1 : -1;      // ja: offer a line break after "と" (presentation only; the text itself is unchanged; escapes keep AC-S1 clean)
+-    if (cut > 0) { tx.appendChild(doc.createTextNode(text.slice(0, cut))); tx.appendChild(doc.createElement("wbr")); tx.appendChild(doc.createTextNode(text.slice(cut))); }
+-    else tx.textContent = text;
+-  }
+-  const LANG_JA = text => /[\u3040-\u30ff]/.test(text);
++  /* D2 (PO 2026-11-02): the guidance now lives INSIDE the unselected card (CSS icon + the existing card label); the blue-grey box below the opponent card was removed.
++     The footer reason below keeps its approved wording and aria-label / aria-description for VoiceOver (visually folded away in CSS, not removed). */
+   function setupReason() {
+     const start = $("#startGameBtn"), reason = $("#cueSetupReasonV1");
+     if (!start || !reason) return;
+@@ -131,7 +111,6 @@
+       const home = $("#cueHomeV1");
+       if (!home || !home.classList.contains("match-setup-active-v3")) return;      // only while the setup screen is open (no work during a match)
+       [1, 2].forEach(n => { const card = $("#newMatchPlayerCard" + n + "V1"); if (card) card.classList.toggle("is-empty-v1", !name(n)); });
+-      oppNote(!name(2));
+       const miss = [];
+       if (!name(1)) miss.push(1);
+       if (!name(2)) miss.push(2);
+diff --git a/tests/browser/d-plan-setup.mjs b/tests/browser/d-plan-setup.mjs
+index 4a1ae68..334e05f 100644
+--- a/tests/browser/d-plan-setup.mjs
++++ b/tests/browser/d-plan-setup.mjs
+@@ -30,12 +30,12 @@ for(const lang of LANGS) for(const w of WIDTHS){
+     ck(a.p1Name==="Score 1"&&a.p2Name==="Score 2"&&!a.startDisabled,`${t} first launch: Score 1 / Score 2 selected, start enabled`,{p1:a.p1Name,p2:a.p2Name,dis:a.startDisabled});
+     for(const k of ["p1","p2"]){const c=a[k];
+       ck(!c.empty&&c.bs==="solid",`${t} ${k} selected card: solid frame`,{bs:c.bs});
+-      ck(Math.abs(c.nf-20)<=0.6,`${t} ${k} selected name ~20pt`,c.nf);
++      ck(Math.abs(c.nf-23)<=0.6,`${t} ${k} selected name 23pt (D2)`,c.nf);
+       ck(c.avName>=3.5&&c.avName<=5,`${t} ${k} avatar->name 4pt`,c.avName);
+       ck(Math.abs(c.nameRace-10)<=0.7,`${t} ${k} name->Race to 10pt`,c.nameRace);
+       ck(!c.red,`${t} ${k} no red`);}
+     ck(Math.abs(a.p1.top-a.p2.top)<=1&&Math.abs(a.p1.h-a.p2.h)<=1,`${t} both cards aligned (top/height)`,{t:[a.p1.top,a.p2.top],h:[a.p1.h,a.p2.h]});
+-    ck(a.gap>=C_GAP[w]+4&&a.gap<=C_GAP[w]+14,`${t} discipline->cards gap widened vs C plan (${C_GAP[w]}pt)`,a.gap);
++    ck(a.gap>=C_GAP[w]+30,`${t} discipline->cards gap widened vs C plan (${C_GAP[w]}pt; D2 spreads the spare height)`,a.gap);
+     ck(!a.hscroll&&a.small.length===0&&!a.p1.nOver&&!a.p2.nOver,`${t} no overflow, targets >=44pt`,{h:a.hscroll,s:a.small});
+     ck(a.noteText===null&&a.reasonText===null,`${t} both selected: no guidance shown`,{n:a.noteText,r:a.reasonText});
+     ck(!(a.errs||[]).length,`${t} no JS exceptions`,a.errs);
+@@ -50,7 +50,7 @@ for(const lang of LANGS) for(const w of WIDTHS){
+     ck(!b.p2.red&&!b.p1.red,`${t} no red warning mark / text`);
+     ck(Math.abs(b.p1.top-b.p2.top)<=1&&Math.abs(b.p1.h-b.p2.h)<=1,`${t} mixed cards aligned (top/height)`,{t:[b.p1.top,b.p2.top],h:[b.p1.h,b.p2.h]});
+     ck(Math.abs(b.p2.nameRace-10)<=0.7&&b.p2.avName>=3.5&&b.p2.avName<=5,`${t} unselected card spacing 4 / 10pt`,{a:b.p2.avName,n:b.p2.nameRace});
+-    ck(b.startDisabled&&b.noteText&&b.reasonText&&b.noteText===b.reasonText&&b.noteAria==="true",`${t} unselected: start disabled, existing approved note == footer, note aria-hidden`,{n:b.noteText,r:b.reasonText});
++    ck(b.startDisabled&&b.noteText===null&&!!b.reasonText,`${t} unselected: start disabled, no blue-grey note, approved footer reason kept in the accessibility tree (D2)`,{n:b.noteText,r:b.reasonText});
+     ck(!b.hscroll&&b.small.length===0&&!b.p2.nOver,`${t} no overflow, targets >=44pt`,{h:b.hscroll,s:b.small});
+     if(w>=390)ck(Math.abs(b.startToTab-(w===390?24:26))<=1,`${t} start->tab-bar gap kept`,b.startToTab);
+     // restore selection for the next discipline (library path is exercised by the existing tests)
+diff --git a/tests/browser/d2-final.mjs b/tests/browser/d2-final.mjs
+new file mode 100644
+index 0000000..7fb5ee7
+--- /dev/null
++++ b/tests/browser/d2-final.mjs
+@@ -0,0 +1,71 @@
++/* Real-app Chrome (NO injection): D2 final match-setup design (PO 2026-11-02) measured on the product itself.
++ * States: A both unselected (forced), B P1 selected / P2 unselected (natural), C both selected, D JPA 9-Ball (Skill Level), E shot clock ON. Optional D2F_LONG=1: long player names.
++ * Usage: [L=ja,en,zh-Hans] [W=320,375,390,430] D2F_OUT=<json> [D2F_SHOT=<dir>] node tests/browser/d2-final.mjs */
++import { startApp } from "./p2-browser-kit.mjs";
++import fs from "node:fs";
++const LANGS=(process.env.L||"ja").split(","),VIEWS={320:568,375:667,390:844,430:932},WIDTHS=(process.env.W||"390").split(",").map(Number);
++const checks=[];let fail=0;const W=ms=>new Promise(r=>setTimeout(r,ms));
++const ck=(ok,label,d)=>{checks.push({ok:!!ok,label,...(d===undefined?{}:{detail:d})});if(!ok){fail++;console.log("FAIL",label,JSON.stringify(d))}};
++const MEAS=`const R=n=>n.getBoundingClientRect(),$=s=>document.querySelector(s),cs=n=>getComputedStyle(n),vis=n=>!!n&&!n.hidden&&n.getClientRects().length>0;
++const hd=$(".cue-selected-game-v1"),sum=$(".cue-new-match-summary-v2"),grid=$(".new-match-player-grid-v1"),sc=$("#cueHomeV1 .cue-new-match-integrated-v2"),start=$("#startGameBtn"),tab=$(".cue-phase1-tab-bar"),foot=$("#cueSetupFooterV1"),clock=$(".cue-sc-setup"),rs=$("#cueSetupReasonV1");
++const card=n=>{const c=$("#newMatchPlayerCard"+n+"V1"),nm=c.querySelector(".new-match-player-name-v1"),av=c.querySelector(".new-match-avatar-v1"),race=c.querySelector(".new-match-race-row-v2"),rv=race.querySelector("strong"),lh=parseFloat(cs(nm).lineHeight)||parseFloat(cs(nm).fontSize)*1.2,cc=cs(c),ac=cs(av);
++ return {empty:c.classList.contains("is-empty-v1"),top:+R(c).top.toFixed(1),w:Math.round(R(c).width),h:Math.round(R(c).height),bs:cc.borderTopStyle,abs:ac.borderTopStyle,av:Math.round(R(av).width),nameFont:parseFloat(cs(nm).fontSize),nameLines:Math.max(1,Math.round(nm.scrollHeight/lh)),nameText:nm.textContent.trim(),ellipsis:nm.scrollWidth>nm.clientWidth+1&&cs(nm).textOverflow==="ellipsis",icon:getComputedStyle(nm,"::before").content,iconW:parseFloat(getComputedStyle(nm,"::before").width)||0,avName:+(R(nm).top-R(av).bottom).toFixed(1),nameRace:+(R(race).top-R(nm).bottom).toFixed(1),raceFont:parseFloat(cs(rv).fontSize)}};
++const items=[...sc.querySelectorAll("button,[role=switch],select")].filter(n=>n.getClientRects().length&&R(n).height>8&&!n.classList.contains("cue-match-setup-back-v3")&&!n.closest("#newMatchRacePickerV1")&&!n.classList.contains("cue-setup-reason-v1"));
++const last=Math.max(...[...sc.children].filter(k=>k.getClientRects().length&&!k.matches(".cue-match-setup-back-v3")).map(k=>R(k).bottom));
++const rr=rs?R(rs):null;
++return {vh:innerHeight,topBlank:Math.round(R(sum).top-R(sc).top),headGap:Math.round(R(grid).top-R(hd).bottom),midGap:Math.round(R(clock).top-R(grid).bottom),bottomBlank:Math.round(R(foot).top-last),
++ p1:card(1),p2:card(2),aligned:Math.abs(R($("#newMatchPlayerCard1V1")).top-R($("#newMatchPlayerCard2V1")).top)<=1&&Math.abs(R($("#newMatchPlayerCard1V1")).height-R($("#newMatchPlayerCard2V1")).height)<=1,
++ clockH:Math.round(R(clock).height),clockTitle:parseFloat(cs(clock.querySelector(".cue-sc-setup-title")).fontSize),clockSub:parseFloat(cs(clock.querySelector(".cue-sc-setup-sub")).fontSize),clockBorder:cs(clock).borderTopColor,
++ startToTab:Math.round(R(tab).top-R(start).bottom),startDisabled:start.disabled,startAria:start.getAttribute("aria-disabled"),scrollNeeded:sc.scrollHeight-sc.clientHeight,hscroll:document.documentElement.scrollWidth>innerWidth+1||sc.scrollWidth>sc.clientWidth+1,
++ small:items.filter(n=>R(n).width<44||R(n).height<44).map(n=>(n.id||n.className).toString().slice(0,22)+":"+Math.round(R(n).width)+"x"+Math.round(R(n).height)),
++ noteInDom:!!$("#cueSetupOppNoteV1"),blueNote:!!document.querySelector(".cue-setup-note-v1"),
++ reason:rs?{hidden:rs.hidden,text:rs.textContent.trim(),label:rs.getAttribute("aria-label"),desc:rs.getAttribute("aria-description"),w:Math.round(rr.width),h:Math.round(rr.height),display:cs(rs).display,visibility:cs(rs).visibility,slot:rs.dataset.slot||null}:null,
++ clockOn:clock.querySelector("[role=switch]").getAttribute("aria-checked"),errs:window.__errs||[]}`;
++const rows=[];
++for(const lang of LANGS) for(const w of WIDTHS){
++  const h=VIEWS[w],tag=`${lang}/${w}${process.env.D2F_LONG?"/long":""}`;
++  const app=await startApp({lang,mode:"free",seedData:{script:`try{if(!localStorage.getItem("__d2f")){localStorage.setItem("cueScore.language.v1","${lang}");localStorage.setItem("__d2f","1")}}catch(e){}`,players:[],records:[]},watchdogMs:900000});
++  const ev=async c=>JSON.parse(await app.evalJs(`(async()=>JSON.stringify(await (async()=>{${c}})()))()`));
++  await app.cdp("Emulation.setDeviceMetricsOverride",{width:w,height:h,deviceScaleFactor:2,mobile:true});
++  await app.cdp("Emulation.setSafeAreaInsetsOverride",{insets:{top:h>700?47:0,bottom:h>700?34:0,left:0,right:0}});await W(1000);
++  await ev(`window.__errs=[];addEventListener("error",e=>__errs.push(String(e.message)));window.__orig=window.initializePrimaryMatchSetupV1;return 1`);
++  if(process.env.D2F_LONG){await ev(`const a=JSON.parse(localStorage.getItem("rotationScoreboard.players.v1"));a[0].name=${JSON.stringify(lang==="en"?"Christopher Alexander":"あいうえおかきくけこさしすせそ")};a[1].name=${JSON.stringify(lang==="en"?"Bartholomew Montgomery":"ABCDEFGHIJKLMNOPQRSTUVWXYZ")};localStorage.setItem("rotationScoreboard.players.v1",JSON.stringify(a));return 1`);await app.cdp("Page.reload");await W(4500);await ev(`window.__errs=[];addEventListener("error",e=>__errs.push(String(e.message)));window.__orig=window.initializePrimaryMatchSetupV1;return 1`)}
++  const shot=async n=>{if(!process.env.D2F_SHOT)return;fs.mkdirSync(process.env.D2F_SHOT,{recursive:true});const r=await app.cdp("Page.captureScreenshot",{format:"png"});fs.writeFileSync(`${process.env.D2F_SHOT}/${lang}_${w}_${n}.png`,Buffer.from(r.data,"base64"))};
++  const open=d=>ev(`const bk=document.getElementById("cueMatchSetupBackV3");if(bk&&bk.getClientRects().length){bk.click();await new Promise(r=>setTimeout(r,500))};document.querySelector('#cueDisciplineSwitcherV1 [data-discipline="${d}"]').click();await new Promise(r=>setTimeout(r,900));return 1`);
++  const settle=()=>ev(`CueScoreBuild18PlayerSelection.refresh();document.dispatchEvent(new Event("input"));await new Promise(r=>setTimeout(r,1200));return 1`);
++  const reset=()=>ev(`window.initializePrimaryMatchSetupV1=window.__orig;const p=CueScoreBuild18PlayerSelection.validPlayers();selectedRegisteredPlayer={1:p[0].id,2:p[1].id};for(const[s,pl]of [[1,p[0]],[2,p[1]]]){document.getElementById("p"+s+"Name").value=pl.name;syncSelectedPlayerAvatarV2(s,pl);syncNewMatchNameV1("p"+s+"Name","p"+s+"NameDisplayV1")}const sw=document.querySelector(".cue-sc-setup [role=switch]");if(sw.getAttribute("aria-checked")==="true"){sw.click();await new Promise(r=>setTimeout(r,300))}return 1`);
++  const STATES=[["A_both_unselected","9ball",`window.initializePrimaryMatchSetupV1=()=>false;selectedRegisteredPlayer={1:null,2:null};document.getElementById("p1Name").value="";document.getElementById("p2Name").value="";return 1`],
++    ["B_P1_selected_P2_unselected","9ball",`selectedRegisteredPlayer[2]=null;document.getElementById("p2Name").value="";return 1`],
++    ["C_both_selected","9ball",`return 1`],["D_jpa9_both_selected","jpa9",`return 1`],["E_clockON","9ball",`const sw=document.querySelector(".cue-sc-setup [role=switch]");sw.click();await new Promise(r=>setTimeout(r,500));return 1`]];
++  for(const [name,disc,setup] of STATES){
++    await open(disc);await reset();await ev(setup);await settle();
++    const m=await ev(MEAS);await shot(name);rows.push({tag,state:name,...m});
++    const t=`${tag}/${name[0]}`,short=w<=375;
++    const sel=[m.p1,m.p2].filter(c=>!c.empty),emp=[m.p1,m.p2].filter(c=>c.empty);
++    ck(m.p1.av===68&&m.p2.av===68,`${t} avatar 68pt`,[m.p1.av,m.p2.av]);
++    ck(sel.every(c=>c.nameFont===23&&c.bs==="solid"),`${t} selected: name 23pt, solid card`,sel.map(c=>[c.nameFont,c.bs]));
++    ck(emp.every(c=>c.nameFont===18&&c.bs==="dashed"&&c.abs==="dashed"),`${t} unselected: guidance 18pt, dashed card + dashed avatar ring`,emp.map(c=>[c.nameFont,c.bs,c.abs]));
++    ck(emp.every(c=>/\/ ""/.test(c.icon)&&c.iconW===18),`${t} round (i) is decorative (CSS content, empty alt) and 18px`,emp.map(c=>c.icon));
++    ck(m.p1.raceFont===17&&m.p2.raceFont===17,`${t} Race to number 17pt`,[m.p1.raceFont,m.p2.raceFont]);
++    ck(sel.every(c=>c.nameFont>c.raceFont)&&emp.every(c=>c.nameFont>c.raceFont),`${t} name larger than Race to`);
++    ck(m.p1.avName>=3.5&&m.p1.avName<=5&&m.p2.avName>=3.5&&m.p2.avName<=5&&Math.abs(m.p1.nameRace-10)<=0.7&&Math.abs(m.p2.nameRace-10)<=0.7,`${t} avatar->name 4pt, name->Race to 10pt`,[m.p1.avName,m.p2.avName,m.p1.nameRace,m.p2.nameRace]);
++    ck(m.aligned,`${t} both cards aligned`);
++    ck(!m.noteInDom&&!m.blueNote,`${t} blue-grey note below the card is gone`);
++    if(name[0]==="E")ck(m.clockOn==="true"&&m.clockH===121,`${t} shot clock ON height 121pt`,m.clockH);else ck(m.clockH===52,`${t} shot clock OFF height 52pt`,m.clockH);
++    ck(m.clockTitle===15&&m.clockSub===11&&/236, 236, 234|rgb\(236/.test(m.clockBorder),`${t} shot clock: 15/11pt, light border`,[m.clockTitle,m.clockSub,m.clockBorder]);
++    ck(!m.hscroll&&m.small.length===0,`${t} no overflow, targets >=44pt`,{h:m.hscroll,s:m.small});
++    ck(!(m.errs||[]).length,`${t} no JS exceptions`,m.errs);
++    if(w===390)ck(m.startToTab===24,`${t} start->tab bar 24pt`,m.startToTab);
++    if(w>=375&&!process.env.D2F_LONG&&name[0]!=="E")ck(m.scrollNeeded===0,`${t} no scroll needed`,m.scrollNeeded);
++    const anyEmpty=emp.length>0;
++    ck(m.startDisabled===anyEmpty&&m.startAria===(anyEmpty?"true":"false"),`${t} start button ${anyEmpty?"disabled":"enabled"} (aria-disabled kept)`,[m.startDisabled,m.startAria]);
++    if(anyEmpty){const r=m.reason;
++      ck(r&&!r.hidden&&r.display!=="none"&&r.visibility!=="hidden"&&r.w<=2&&r.h<=2&&r.text.length>0&&r.label===r.text&&!!r.desc,`${t} footer reason: visually folded, still in the accessibility tree (aria-label + aria-description)`,r);
++      const first=m.p1.empty?m.p1:m.p2;ck(r&&r.desc&&emp.some(c=>c.nameText===r.desc),`${t} reason hint equals the approved card label`,{desc:r&&r.desc,labels:emp.map(c=>c.nameText)});
++    }
++    if(w>=390&&!process.env.D2F_LONG&&name[0]!=="E")ck(Math.max(m.topBlank,m.headGap,m.midGap,m.bottomBlank)<=(w===390?125:175),`${t} no single spot holds the spare height (${[m.topBlank,m.headGap,m.midGap,m.bottomBlank]})`);
++  }
++  await app.close();
++}
++if(process.env.D2F_OUT)fs.writeFileSync(process.env.D2F_OUT,JSON.stringify({timestamp:new Date().toISOString(),checks,rows,pass:fail===0},null,1)+"\n");
++console.log(fail?`FAIL ${fail}/${checks.length}`:`PASS ${checks.length}/${checks.length}`);process.exit(fail?1:0);
+diff --git a/tests/browser/d2-small-screen-reach.mjs b/tests/browser/d2-small-screen-reach.mjs
+new file mode 100644
+index 0000000..6dd44ce
+--- /dev/null
++++ b/tests/browser/d2-small-screen-reach.mjs
+@@ -0,0 +1,23 @@
++/* Real-app Chrome: on small screens (320x568, 375x667) with the shot clock ON the setup area scrolls; after scrolling to the end every control must be fully visible
++ * above the independent footer (nothing hidden or cut). Usage: [L=ja,en,zh-Hans] D2R_OUT=<json> node tests/browser/d2-small-screen-reach.mjs */
++import { startApp } from "./p2-browser-kit.mjs";
++import fs from "node:fs";
++const LANGS=(process.env.L||"ja,en,zh-Hans").split(","),VIEWS={320:568,375:667};const checks=[];let fail=0;const W=ms=>new Promise(r=>setTimeout(r,ms));
++const ck=(ok,label,d)=>{checks.push({ok:!!ok,label,...(d===undefined?{}:{detail:d})});if(!ok){fail++;console.log("FAIL",label,JSON.stringify(d))}};
++for(const lang of LANGS) for(const w of [320,375]){
++  const h=VIEWS[w],app=await startApp({lang,mode:"free",seedData:{script:`try{if(!localStorage.getItem("__r")){localStorage.setItem("cueScore.language.v1","${lang}");localStorage.setItem("__r","1")}}catch(e){}`,players:[],records:[]},watchdogMs:300000});
++  const ev=async c=>JSON.parse(await app.evalJs(`(async()=>JSON.stringify(await (async()=>{${c}})()))()`));
++  await app.cdp("Emulation.setDeviceMetricsOverride",{width:w,height:h,deviceScaleFactor:2,mobile:true});await app.cdp("Emulation.setSafeAreaInsetsOverride",{insets:{top:0,bottom:0,left:0,right:0}});await W(1000);
++  await ev(`document.querySelector('#cueDisciplineSwitcherV1 [data-discipline="9ball"]').click();await new Promise(r=>setTimeout(r,900));const sw=document.querySelector(".cue-sc-setup [role=switch]");if(sw.getAttribute("aria-checked")!=="true"){sw.click();await new Promise(r=>setTimeout(r,500))}return 1`);
++  const r=await ev(`const sc=document.querySelector("#cueHomeV1 .cue-new-match-integrated-v2"),R=n=>n.getBoundingClientRect();const need=sc.scrollHeight-sc.clientHeight;sc.scrollTop=0;await new Promise(x=>setTimeout(x,200));const topOk=[...sc.querySelectorAll("#newMatchPlayerCard1V1,#newMatchPlayerCard2V1")].every(n=>R(n).top>=R(sc).top-1);
++    sc.scrollTop=sc.scrollHeight;await new Promise(x=>setTimeout(x,300));const box=R(sc),foot=R(document.getElementById("cueSetupFooterV1")),ctl=[...sc.querySelectorAll("button,[role=switch],select")].filter(n=>n.getClientRects().length&&!n.classList.contains("cue-match-setup-back-v3")&&!n.closest("#newMatchRacePickerV1")&&!n.classList.contains("cue-setup-reason-v1"));
++    const cut=ctl.filter(n=>R(n).bottom>box.bottom+1||R(n).top<box.top-1).map(n=>(n.id||n.className).toString().slice(0,24));const underFooter=ctl.filter(n=>R(n).bottom>foot.top+1).length;
++    const start=R(document.getElementById("startGameBtn")),tab=R(document.querySelector(".cue-phase1-tab-bar"));
++    return {need,topOk,cut,underFooter,startVisible:start.bottom<=tab.top&&start.top>=foot.top-1,startH:Math.round(start.height),hscroll:document.documentElement.scrollWidth>innerWidth+1}`);
++  ck(r.topOk,`${lang}/${w} ON: both player cards fully reachable at the top`,r);
++  ck(r.cut.length===0&&r.underFooter===0,`${lang}/${w} ON: after scrolling to the end every control is fully visible above the footer (scroll ${r.need}pt)`,r);
++  ck(r.startVisible&&r.startH>=44&&!r.hscroll,`${lang}/${w} ON: start button visible above the tab bar, >=44pt, no horizontal overflow`,r);
++  await app.close();
++}
++if(process.env.D2R_OUT)fs.writeFileSync(process.env.D2R_OUT,JSON.stringify({timestamp:new Date().toISOString(),checks,pass:fail===0},null,1)+"\n");
++console.log(fail?`FAIL ${fail}/${checks.length}`:`PASS ${checks.length}/${checks.length}`);process.exit(fail?1:0);
+diff --git a/tests/browser/setup-card-layout.mjs b/tests/browser/setup-card-layout.mjs
+index 9f2cdc7..e5846ae 100644
+--- a/tests/browser/setup-card-layout.mjs
++++ b/tests/browser/setup-card-layout.mjs
+@@ -37,7 +37,7 @@ for(const lang of LANGS) for(const w of WIDTHS){
+       ck(!m.hscroll&&m.small.length===0,`${t} no overflow, targets >=44pt`,{h:m.hscroll,s:m.small});
+       ck(m.btn.h>=54,`${t} start button >=54pt`,m.btn.h);
+       for(const k of ["p1","p2"]){ck(m[k].avBottom_nameTop>=4&&m[k].avBottom_nameTop<=8.5,`${t} ${k} avatar->name 4-8pt`,m[k].avBottom_nameTop);ck(m[k].nameBottom_raceTop>=8&&m[k].nameBottom_raceTop<=12.5,`${t} ${k} name->Race to 8-12pt`,m[k].nameBottom_raceTop)}
+-      if(!m.guideShown){ck(m.note&&m.note.text.length>0&&m.note.ariaHidden==="true"&&m.note.insideCol2&&m.note.gapBelowCard2>=0&&m.note.gapBelowCard2<=14,`${t} opponent note directly below the opponent card`,m.note);}
++      if(!m.guideShown){ck(m.note===null,`${t} D2: the blue-grey note below the opponent card is gone (guidance is inside the card)`,m.note);}
+       ck(!m.yellowOnEmpty&&m.underline==="none"&&/dashed/.test(m.card2Border),`${t} unselected card: light-grey dashed frame (D plan), no yellow, no underline`,{b:m.card2Border,u:m.underline,y:m.yellowOnEmpty});
+       if(h>=800)ck(m.btnBottom_tabTop>=20&&m.btnBottom_tabTop<=28,`${t} start button -> tab bar 20-28pt`,m.btnBottom_tabTop);else ck(m.btnBottom_tabTop>=8,`${t} start button clears the tab bar (short screen)`,m.btnBottom_tabTop);
+     }
+diff --git a/tests/d-plan-initial-players.test.mjs b/tests/d-plan-initial-players.test.mjs
+index 966e5c6..1ae52fb 100644
+--- a/tests/d-plan-initial-players.test.mjs
++++ b/tests/d-plan-initial-players.test.mjs
+@@ -35,15 +35,19 @@ test("D plan: Score 2 is selected as the second player on the first launch only;
+   assert.match(b18, /start\.disabled=players\.length<2\|\|!selected\(1\)\|\|!selected\(2\)\|\|String\(selectedRegisteredPlayer\[1\]\)===String\(selectedRegisteredPlayer\[2\]\);/, "start condition unchanged");
+ });
+ 
+-test("D plan: unselected = light-grey dashed card and avatar ring, selected = solid card with a ~20px name, wider discipline-to-card gap; no red", () => {
+-  const d = css.slice(css.indexOf("/* D plan (PO 2026-11-01)"));
++test("D / D2 plan: unselected = light-grey dashed card and avatar ring, selected = solid card; D2 sizes (68px avatar, 23px name, 18px guidance, 17px Race to); no red", () => {
++  const d = css.slice(css.indexOf("/* D2 final design (PO 2026-11-02)"));
+   assert.match(d, /\.new-match-player-card-v1\.is-empty-v1\{border:1\.5px dashed #c8c8c4!important;background:#fff!important\}/);
+   assert.match(d, /\.new-match-avatar-v1\.has-player-avatar-v2\{box-sizing:border-box;border:1\.5px dashed #bcbcb8!important;border-radius:50%/);
+-  assert.match(d, /:not\(\.is-empty-v1\) \.new-match-player-select-v1 \.new-match-player-name-v1\{font-size:20px!important/);
+-  assert.match(d, /\.cue-new-match-summary-v2\{margin:0 0 clamp\(12px,3\.2vh,30px\)!important\}/);
++  assert.match(d, /\.cue-player-stack-v2 \.new-match-player-select-v1 \.new-match-avatar-v1\.has-player-avatar-v2\{width:68px!important;height:68px!important/);
++  assert.match(d, /:not\(\.is-empty-v1\) \.new-match-player-select-v1 \.new-match-player-name-v1\{font-size:23px!important/);
++  assert.match(d, /\.is-empty-v1 \.new-match-player-select-v1 \.new-match-player-name-v1\{font-size:18px!important/);
++  assert.match(d, /\.new-match-race-row-v2 strong\{font-size:17px!important\}/);
++  assert.match(d, /\.cue-new-match-summary-v2\{margin:0 0 clamp\(18px,10vh,96px\)!important\}/);
+   const colors = [...d.matchAll(/#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b/g)].map(m => m[1].length === 3 ? m[1].replace(/./g, "$&$&") : m[1]);
+-  assert.ok(colors.length >= 4);
+-  for (const c of colors) { const [r, g, b] = [0, 2, 4].map(k => parseInt(c.slice(k, k + 2), 16)); assert.ok(Math.abs(r - g) <= 6 && Math.abs(g - b) <= 6, `#${c} is neutral grey / white (no red, no yellow)`); }
++  assert.ok(colors.length >= 6);
++  // neutral greys / white, plus the calm slate of the decorative (i) (#5a6b7d): never red / yellow
++  for (const c of colors) { const [r, g, b] = [0, 2, 4].map(k => parseInt(c.slice(k, k + 2), 16)); assert.ok(r <= b + 6 && Math.abs(r - g) <= 22, `#${c} is neutral / cool (no red, no yellow)`); }
+   assert.ok(!/red/i.test(d.replace(/\/\*[\s\S]*?\*\//g, "")), "no red in the rules (comments excluded)");
+   assert.ok(!/dotted|underline/.test(d.replace(/no underline/g, "")), "no dotted / underline");
+ });
+diff --git a/tests/fixtures/p2/existing-tests-baseline.json b/tests/fixtures/p2/existing-tests-baseline.json
+index 6ce7df1..5f02b47 100644
+--- a/tests/fixtures/p2/existing-tests-baseline.json
++++ b/tests/fixtures/p2/existing-tests-baseline.json
+@@ -230,10 +230,10 @@
+       "skips": 0
+     },
+     "d-plan-initial-players.test.mjs": {
+-      "sha256": "5c61fc151b641d0155f9d7b21d6948eab4d94fe8a04cd0298e0347bda960afef",
++      "sha256": "77c4df6bfa7129741d973501574732ff230abc6696a85dc3c74f2087368b490f",
+       "tests": 4,
+       "skips": 0,
+-      "updated_in": "D plan (PO 2026-11-01): new test (initial players safety, first-launch Score 2, D card style)"
++      "updated_in": "D2 final design (PO 2026-11-02): assertions updated old->new (see version-d2-test-change-map.json); no skip added, no assertion weakened"
+     },
+     "delete-workflows.test.mjs": {
+       "sha256": "bb0c346240a2fafc93193300709a7d66ac18aaaa08739e398a3017508636eac0",
+@@ -817,10 +817,10 @@
+       "skips": 0
+     },
+     "setup-card-layout.test.mjs": {
+-      "sha256": "aecf2c48c03a3cc2d7f2e841027151ac578721028cd0f1a05bf191af789e5843",
++      "sha256": "cd877241399cc73bfb8a44dc23dc4cbe59fa835b71bf858f8c01f3ac20ab9c96",
+       "tests": 4,
+       "skips": 0,
+-      "updated_in": "Build 96 C-plan match-setup implementation (new test)"
++      "updated_in": "D2 final design (PO 2026-11-02): assertions updated old->new (see version-d2-test-change-map.json); no skip added, no assertion weakened"
+     },
+     "setup-numeric-menu.test.mjs": {
+       "sha256": "fd09d490d84ccb4feba17f86349bde939360145bbfdcf8f4965ad30903bc66f0",
+diff --git a/tests/fixtures/p2/version-d2-test-change-map.json b/tests/fixtures/p2/version-d2-test-change-map.json
+new file mode 100644
+index 0000000..23004ed
+--- /dev/null
++++ b/tests/fixtures/p2/version-d2-test-change-map.json
+@@ -0,0 +1,23 @@
++{
++ "gate": "D2 final design (PO 2026-11-02): bigger cards/avatar/names, guidance inside the unselected card (decorative (i)), blue-grey note below the card removed, footer reason folded visually but kept for VoiceOver, calmer shot clock, spare height spread over the gaps.",
++ "changedTestFiles": {
++  "setup-card-layout.test.mjs": {
++   "before": "aecf2c48c03a3cc2d7f2e841027151ac578721028cd0f1a05bf191af789e5843",
++   "after": "cd877241399cc73bfb8a44dc23dc4cbe59fa835b71bf858f8c01f3ac20ab9c96",
++   "oldToNew": "test 'C plan: the opponent guidance sits below the opponent card ...' (asserted oppNote, #cueSetupOppNoteV1, .cue-setup-note-v1 rules) -> 'D2: the blue-grey note is gone; guidance inside the card; footer reason keeps wording + aria-label/aria-description, folded visually (not display:none)'. Same coverage of approved keys / no new wording; adds the VoiceOver-preservation assertions."
++  },
++  "d-plan-initial-players.test.mjs": {
++   "before": "5c61fc151b641d0155f9d7b21d6948eab4d94fe8a04cd0298e0347bda960afef",
++   "after": "77c4df6bfa7129741d973501574732ff230abc6696a85dc3c74f2087368b490f",
++   "oldToNew": "D card style test (20px name, 12/3.2vh/30 gap) -> D2 values (68px avatar, 23px name, 18px guidance, 17px Race to, 18/10vh/96 gap); still asserts dashed unselected card + ring, solid selected, neutral colours, no red/yellow, no dotted/underline."
++  }
++ },
++ "changedBrowserTests": {
++  "setup-card-layout.mjs": "opponent-note position assertion -> note is gone (m.note===null)",
++  "d-plan-setup.mjs": "selected name 20->23pt; heading gap C+4..+14 -> >=C+30; 'note==footer' -> no note + approved reason kept in the accessibility tree"
++ },
++ "newTests": [
++  "tests/browser/d2-final.mjs (product-level D2 measurements, 1422 checks)"
++ ],
++ "pins": "index.html unchanged by this gate (no digest pin changes)"
++}
+\ No newline at end of file
+diff --git a/tests/setup-card-layout.test.mjs b/tests/setup-card-layout.test.mjs
+index c08e796..7f5e337 100644
+--- a/tests/setup-card-layout.test.mjs
++++ b/tests/setup-card-layout.test.mjs
+@@ -20,14 +20,19 @@ test("C plan: spare height goes between the sections; the start button keeps abo
+   assert.match(css, /#cueSetupFooterV1\{display:block;flex:0 0 auto/, "the footer stays an independent flex child above the tab bar");
+ });
+ 
+-test("C plan: the opponent guidance sits below the opponent card, reuses the approved key, is aria-hidden and has no new wording", () => {
+-  assert.match(js, /note\.id = "cueSetupOppNoteV1"/);
+-  assert.match(js, /note\.setAttribute\("aria-hidden", "true"\)/);
+-  assert.match(js, /T\("setupux\.reason\.p2"\)/);
+-  assert.match(js, /oppNote\(!name\(2\)\)/);
+-  assert.match(css, /\.cue-setup-note-v1\{grid-column:2;grid-row:2;/);
+-  assert.match(css, /background:#e9eff5;color:#1c2a3a/);
+-  assert.ok(!/setupux\.reason\.aria|setupux\.reason\.other/.test(js));
++test("D2 (PO 2026-11-02): the blue-grey note below the card is gone; the guidance is inside the unselected card; the footer reason keeps wording + VoiceOver attributes", () => {
++  assert.ok(!/oppNote|cueSetupOppNoteV1/.test(js), "no note element / function in the product JS");
++  assert.ok(!/cue-setup-note-v1/.test(css), "no note rules in the CSS");
++  assert.ok(!/setupux\.reason\.aria|setupux\.reason\.other/.test(js), "no new wording");
++  // footer reason: approved keys, aria-label = text, aria-description = existing approved card label, visually folded (not display:none)
++  assert.match(js, /const key = miss\.length === 2 \? "setupux\.reason\.both" : miss\[0\] === 1 \? "setupux\.reason\.p1" : "setupux\.reason\.p2";/);
++  assert.match(js, /reason\.setAttribute\("aria-label", T\(key\)\);/);
++  assert.match(js, /reason\.setAttribute\("aria-description", T\(miss\[0\] === 2 && miss\.length === 1 \? "p3\.39bd0fa6" : "p3\.b3005c8a"\)\);/);
++  const d2 = css.slice(css.indexOf("/* D2 final design (PO 2026-11-02)"));
++  assert.match(d2, /\.cue-setup-reason-v1\{position:absolute!important;width:1px!important;height:1px!important;min-height:0!important;/);
++  assert.ok(!/\.cue-setup-reason-v1\{[^}]*display:none/.test(d2), "folded visually, not removed from the accessibility tree");
++  // the round (i) is decorative: CSS content with an empty alternative text
++  assert.match(d2, /new-match-player-name-v1::before\{content:"i" \/ "";/);
+ });
+ 
+ test("yellow state colours stay (shared focus, turn / selection / winner); the swap button moved up with the grouped cards", () => {
+-- 
+2.43.0
+

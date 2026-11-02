@@ -1,0 +1,29 @@
+ok   start button keeps the HTML disabled attribute while the opponent is unselected (and sits in the footer)
+ok   reason line shown: Select an opponent to start the match
+ok   only the opponent card is in the empty state
+ok   clicking the disabled start button starts nothing
+ok   JPA Skill Level opens a tap menu with 9 rows: SL 114 pts | SL 219 pts | SL 325 pts
+ok   the existing sheet is invisible while the menu is shown
+ok   choosing SL 7 applies through the existing sheet code (display SL 7, target 55)
+ok   menu and sheet both closed after the choice
+ok   cancel (tap outside) closes everything and keeps SL 5
+ok   Escape closes the menu and the sheet
+ok   straightPool menu rows = existing options + Other: 25,50✓,75,100,125,150,Other…
+ok   straightPool value change applied (50)
+ok   straightPool 'Other' opens the existing custom input (range 1〜1000)
+ok   threeCushion menu rows = existing options + Other: 7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25✓,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,Other…
+ok   threeCushion value change applied (8)
+ok   threeCushion 'Other' opens the existing custom input (range 1〜100)
+ok   rotation menu rows = existing options + Other: 61,90,120✓,150,180,240,300,Other…
+ok   rotation value change applied (90)
+ok   rotation 'Other' opens the existing custom input (range 1〜1000)
+ok   9-Ball menu rows = 1-10 + Other: 1,2,3,4,5✓,6,7,8,9,10,Other…
+ok   9-Ball menu choice applied (7)
+ok   base-time menu = 30/35/40/45/60 (30 sec,35 sec,40 sec,45 sec✓,60 sec)
+ok   extension menu = +25/+30/+45/+60 (+25 sec,+30 sec,+45 sec,+60 sec✓)
+ok   clock settings saved in the unchanged store {enabled,base:35,ext:45}: {"e":true,"b":35,"x":45}
+ok   values shown after the choice (35 / +45)
+ok   after choosing an opponent: start enabled, reason hidden, empty state gone (さくら)
+ok   an enabled start button really starts the match
+ok   the match screen shows the clock dock with the chosen base time (35)
+PASS

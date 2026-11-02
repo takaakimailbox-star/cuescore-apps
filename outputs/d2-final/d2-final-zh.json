@@ -1,0 +1,3725 @@
+{
+ "timestamp": "2026-11-02T16:03:21.995Z",
+ "checks": [
+  {
+   "ok": true,
+   "label": "zh-Hans/320/A avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/A selected: name 23pt, solid card",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/A unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": [
+    [
+     18,
+     "dashed",
+     "dashed"
+    ],
+    [
+     18,
+     "dashed",
+     "dashed"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/A round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": [
+    "\"i\" / \"\"",
+    "\"i\" / \"\""
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/A Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/A name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/A avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/A both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/A blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/A shot clock OFF height 52pt",
+   "detail": 52
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/A shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/A no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/A no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/A start button disabled (aria-disabled kept)",
+   "detail": [
+    true,
+    "true"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/A footer reason: visually folded, still in the accessibility tree (aria-label + aria-description)",
+   "detail": {
+    "hidden": false,
+    "text": "选择球员后即可开始比赛",
+    "label": "选择球员后即可开始比赛",
+    "desc": "选择球员",
+    "w": 1,
+    "h": 1,
+    "display": "flex",
+    "visibility": "visible",
+    "slot": "1"
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/A reason hint equals the approved card label",
+   "detail": {
+    "desc": "选择球员",
+    "labels": [
+     "选择球员",
+     "选择对手"
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/B avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/B selected: name 23pt, solid card",
+   "detail": [
+    [
+     23,
+     "solid"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/B unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": [
+    [
+     18,
+     "dashed",
+     "dashed"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/B round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": [
+    "\"i\" / \"\""
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/B Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/B name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/B avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/B both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/B blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/B shot clock OFF height 52pt",
+   "detail": 52
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/B shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/B no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/B no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/B start button disabled (aria-disabled kept)",
+   "detail": [
+    true,
+    "true"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/B footer reason: visually folded, still in the accessibility tree (aria-label + aria-description)",
+   "detail": {
+    "hidden": false,
+    "text": "选择对手后即可开始比赛",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 1,
+    "h": 1,
+    "display": "flex",
+    "visibility": "visible",
+    "slot": "2"
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/B reason hint equals the approved card label",
+   "detail": {
+    "desc": "选择对手",
+    "labels": [
+     "选择对手"
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/C avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/C selected: name 23pt, solid card",
+   "detail": [
+    [
+     23,
+     "solid"
+    ],
+    [
+     23,
+     "solid"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/C unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/C round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/C Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/C name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/C avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/C both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/C blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/C shot clock OFF height 52pt",
+   "detail": 52
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/C shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/C no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/C no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/C start button enabled (aria-disabled kept)",
+   "detail": [
+    false,
+    "false"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/D avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/D selected: name 23pt, solid card",
+   "detail": [
+    [
+     23,
+     "solid"
+    ],
+    [
+     23,
+     "solid"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/D unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/D round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/D Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/D name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/D avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/D both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/D blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/D shot clock OFF height 52pt",
+   "detail": 52
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/D shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/D no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/D no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/D start button enabled (aria-disabled kept)",
+   "detail": [
+    false,
+    "false"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/E avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/E selected: name 23pt, solid card",
+   "detail": [
+    [
+     23,
+     "solid"
+    ],
+    [
+     23,
+     "solid"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/E unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/E round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/E Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/E name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/E avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/E both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/E blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/E shot clock ON height 121pt",
+   "detail": 121
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/E shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/E no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/E no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/E start button enabled (aria-disabled kept)",
+   "detail": [
+    false,
+    "false"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A selected: name 23pt, solid card",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": [
+    [
+     18,
+     "dashed",
+     "dashed"
+    ],
+    [
+     18,
+     "dashed",
+     "dashed"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": [
+    "\"i\" / \"\"",
+    "\"i\" / \"\""
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A shot clock OFF height 52pt",
+   "detail": 52
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A no scroll needed",
+   "detail": 0
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A start button disabled (aria-disabled kept)",
+   "detail": [
+    true,
+    "true"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A footer reason: visually folded, still in the accessibility tree (aria-label + aria-description)",
+   "detail": {
+    "hidden": false,
+    "text": "选择球员后即可开始比赛",
+    "label": "选择球员后即可开始比赛",
+    "desc": "选择球员",
+    "w": 1,
+    "h": 1,
+    "display": "flex",
+    "visibility": "visible",
+    "slot": "1"
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/A reason hint equals the approved card label",
+   "detail": {
+    "desc": "选择球员",
+    "labels": [
+     "选择球员",
+     "选择对手"
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B selected: name 23pt, solid card",
+   "detail": [
+    [
+     23,
+     "solid"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": [
+    [
+     18,
+     "dashed",
+     "dashed"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": [
+    "\"i\" / \"\""
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B shot clock OFF height 52pt",
+   "detail": 52
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B no scroll needed",
+   "detail": 0
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B start button disabled (aria-disabled kept)",
+   "detail": [
+    true,
+    "true"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B footer reason: visually folded, still in the accessibility tree (aria-label + aria-description)",
+   "detail": {
+    "hidden": false,
+    "text": "选择对手后即可开始比赛",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 1,
+    "h": 1,
+    "display": "flex",
+    "visibility": "visible",
+    "slot": "2"
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/B reason hint equals the approved card label",
+   "detail": {
+    "desc": "选择对手",
+    "labels": [
+     "选择对手"
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/C avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/C selected: name 23pt, solid card",
+   "detail": [
+    [
+     23,
+     "solid"
+    ],
+    [
+     23,
+     "solid"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/C unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/C round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/C Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/C name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/C avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/C both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/C blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/C shot clock OFF height 52pt",
+   "detail": 52
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/C shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/C no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/C no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/C no scroll needed",
+   "detail": 0
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/C start button enabled (aria-disabled kept)",
+   "detail": [
+    false,
+    "false"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/D avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/D selected: name 23pt, solid card",
+   "detail": [
+    [
+     23,
+     "solid"
+    ],
+    [
+     23,
+     "solid"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/D unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/D round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/D Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/D name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/D avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/D both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/D blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/D shot clock OFF height 52pt",
+   "detail": 52
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/D shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/D no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/D no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/D no scroll needed",
+   "detail": 0
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/D start button enabled (aria-disabled kept)",
+   "detail": [
+    false,
+    "false"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/E avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/E selected: name 23pt, solid card",
+   "detail": [
+    [
+     23,
+     "solid"
+    ],
+    [
+     23,
+     "solid"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/E unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/E round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/E Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/E name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/E avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/E both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/E blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/E shot clock ON height 121pt",
+   "detail": 121
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/E shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/E no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/E no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/E start button enabled (aria-disabled kept)",
+   "detail": [
+    false,
+    "false"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A selected: name 23pt, solid card",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": [
+    [
+     18,
+     "dashed",
+     "dashed"
+    ],
+    [
+     18,
+     "dashed",
+     "dashed"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": [
+    "\"i\" / \"\"",
+    "\"i\" / \"\""
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A shot clock OFF height 52pt",
+   "detail": 52
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A start->tab bar 24pt",
+   "detail": 24
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A no scroll needed",
+   "detail": 0
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A start button disabled (aria-disabled kept)",
+   "detail": [
+    true,
+    "true"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A footer reason: visually folded, still in the accessibility tree (aria-label + aria-description)",
+   "detail": {
+    "hidden": false,
+    "text": "选择球员后即可开始比赛",
+    "label": "选择球员后即可开始比赛",
+    "desc": "选择球员",
+    "w": 1,
+    "h": 1,
+    "display": "flex",
+    "visibility": "visible",
+    "slot": "1"
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A reason hint equals the approved card label",
+   "detail": {
+    "desc": "选择球员",
+    "labels": [
+     "选择球员",
+     "选择对手"
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/A no single spot holds the spare height (65,85,76,98)"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B selected: name 23pt, solid card",
+   "detail": [
+    [
+     23,
+     "solid"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": [
+    [
+     18,
+     "dashed",
+     "dashed"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": [
+    "\"i\" / \"\""
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B shot clock OFF height 52pt",
+   "detail": 52
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B start->tab bar 24pt",
+   "detail": 24
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B no scroll needed",
+   "detail": 0
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B start button disabled (aria-disabled kept)",
+   "detail": [
+    true,
+    "true"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B footer reason: visually folded, still in the accessibility tree (aria-label + aria-description)",
+   "detail": {
+    "hidden": false,
+    "text": "选择对手后即可开始比赛",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 1,
+    "h": 1,
+    "display": "flex",
+    "visibility": "visible",
+    "slot": "2"
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B reason hint equals the approved card label",
+   "detail": {
+    "desc": "选择对手",
+    "labels": [
+     "选择对手"
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/B no single spot holds the spare height (65,85,76,98)"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C selected: name 23pt, solid card",
+   "detail": [
+    [
+     23,
+     "solid"
+    ],
+    [
+     23,
+     "solid"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C shot clock OFF height 52pt",
+   "detail": 52
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C start->tab bar 24pt",
+   "detail": 24
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C no scroll needed",
+   "detail": 0
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C start button enabled (aria-disabled kept)",
+   "detail": [
+    false,
+    "false"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/C no single spot holds the spare height (65,85,76,98)"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D selected: name 23pt, solid card",
+   "detail": [
+    [
+     23,
+     "solid"
+    ],
+    [
+     23,
+     "solid"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D shot clock OFF height 52pt",
+   "detail": 52
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D start->tab bar 24pt",
+   "detail": 24
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D no scroll needed",
+   "detail": 0
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D start button enabled (aria-disabled kept)",
+   "detail": [
+    false,
+    "false"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/D no single spot holds the spare height (61,85,76,93)"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/E avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/E selected: name 23pt, solid card",
+   "detail": [
+    [
+     23,
+     "solid"
+    ],
+    [
+     23,
+     "solid"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/E unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/E round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/E Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/E name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/E avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/E both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/E blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/E shot clock ON height 121pt",
+   "detail": 121
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/E shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/E no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/E no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/E start->tab bar 24pt",
+   "detail": 24
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/E start button enabled (aria-disabled kept)",
+   "detail": [
+    false,
+    "false"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A selected: name 23pt, solid card",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": [
+    [
+     18,
+     "dashed",
+     "dashed"
+    ],
+    [
+     18,
+     "dashed",
+     "dashed"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": [
+    "\"i\" / \"\"",
+    "\"i\" / \"\""
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A shot clock OFF height 52pt",
+   "detail": 52
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A no scroll needed",
+   "detail": 0
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A start button disabled (aria-disabled kept)",
+   "detail": [
+    true,
+    "true"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A footer reason: visually folded, still in the accessibility tree (aria-label + aria-description)",
+   "detail": {
+    "hidden": false,
+    "text": "选择球员后即可开始比赛",
+    "label": "选择球员后即可开始比赛",
+    "desc": "选择球员",
+    "w": 1,
+    "h": 1,
+    "display": "flex",
+    "visibility": "visible",
+    "slot": "1"
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A reason hint equals the approved card label",
+   "detail": {
+    "desc": "选择球员",
+    "labels": [
+     "选择球员",
+     "选择对手"
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/A no single spot holds the spare height (93,94,84,139)"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B selected: name 23pt, solid card",
+   "detail": [
+    [
+     23,
+     "solid"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": [
+    [
+     18,
+     "dashed",
+     "dashed"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": [
+    "\"i\" / \"\""
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B shot clock OFF height 52pt",
+   "detail": 52
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B no scroll needed",
+   "detail": 0
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B start button disabled (aria-disabled kept)",
+   "detail": [
+    true,
+    "true"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B footer reason: visually folded, still in the accessibility tree (aria-label + aria-description)",
+   "detail": {
+    "hidden": false,
+    "text": "选择对手后即可开始比赛",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 1,
+    "h": 1,
+    "display": "flex",
+    "visibility": "visible",
+    "slot": "2"
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B reason hint equals the approved card label",
+   "detail": {
+    "desc": "选择对手",
+    "labels": [
+     "选择对手"
+    ]
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/B no single spot holds the spare height (93,94,84,139)"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/C avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/C selected: name 23pt, solid card",
+   "detail": [
+    [
+     23,
+     "solid"
+    ],
+    [
+     23,
+     "solid"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/C unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/C round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/C Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/C name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/C avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/C both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/C blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/C shot clock OFF height 52pt",
+   "detail": 52
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/C shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/C no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/C no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/C no scroll needed",
+   "detail": 0
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/C start button enabled (aria-disabled kept)",
+   "detail": [
+    false,
+    "false"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/C no single spot holds the spare height (93,94,84,139)"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/D avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/D selected: name 23pt, solid card",
+   "detail": [
+    [
+     23,
+     "solid"
+    ],
+    [
+     23,
+     "solid"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/D unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/D round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/D Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/D name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/D avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/D both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/D blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/D shot clock OFF height 52pt",
+   "detail": 52
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/D shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/D no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/D no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/D no scroll needed",
+   "detail": 0
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/D start button enabled (aria-disabled kept)",
+   "detail": [
+    false,
+    "false"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/D no single spot holds the spare height (90,94,84,133)"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/E avatar 68pt",
+   "detail": [
+    68,
+    68
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/E selected: name 23pt, solid card",
+   "detail": [
+    [
+     23,
+     "solid"
+    ],
+    [
+     23,
+     "solid"
+    ]
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/E unselected: guidance 18pt, dashed card + dashed avatar ring",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/E round (i) is decorative (CSS content, empty alt) and 18px",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/E Race to number 17pt",
+   "detail": [
+    17,
+    17
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/E name larger than Race to"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/E avatar->name 4pt, name->Race to 10pt",
+   "detail": [
+    4,
+    4,
+    10,
+    10
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/E both cards aligned"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/E blue-grey note below the card is gone"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/E shot clock ON height 121pt",
+   "detail": 121
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/E shot clock: 15/11pt, light border",
+   "detail": [
+    15,
+    11,
+    "rgb(236, 236, 234)"
+   ]
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/E no overflow, targets >=44pt",
+   "detail": {
+    "h": false,
+    "s": []
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/E no JS exceptions",
+   "detail": []
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/E start button enabled (aria-disabled kept)",
+   "detail": [
+    false,
+    "false"
+   ]
+  }
+ ],
+ "rows": [
+  {
+   "tag": "zh-Hans/320",
+   "state": "A_both_unselected",
+   "vh": 568,
+   "topBlank": 0,
+   "headGap": 58,
+   "midGap": 51,
+   "bottomBlank": 12,
+   "p1": {
+    "empty": true,
+    "top": 113.8,
+    "w": 143,
+    "h": 192,
+    "bs": "dashed",
+    "abs": "dashed",
+    "av": 68,
+    "nameFont": 18,
+    "nameLines": 2,
+    "nameText": "选择球员",
+    "ellipsis": false,
+    "icon": "\"i\" / \"\"",
+    "iconW": 18,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": true,
+    "top": 113.8,
+    "w": 143,
+    "h": 192,
+    "bs": "dashed",
+    "abs": "dashed",
+    "av": 68,
+    "nameFont": 18,
+    "nameLines": 2,
+    "nameText": "选择对手",
+    "ellipsis": false,
+    "icon": "\"i\" / \"\"",
+    "iconW": 18,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 52,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 16,
+   "startDisabled": true,
+   "startAria": "true",
+   "scrollNeeded": 7,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": false,
+    "text": "选择球员后即可开始比赛",
+    "label": "选择球员后即可开始比赛",
+    "desc": "选择球员",
+    "w": 1,
+    "h": 1,
+    "display": "flex",
+    "visibility": "visible",
+    "slot": "1"
+   },
+   "clockOn": "false",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/320",
+   "state": "B_P1_selected_P2_unselected",
+   "vh": 568,
+   "topBlank": 0,
+   "headGap": 58,
+   "midGap": 51,
+   "bottomBlank": 12,
+   "p1": {
+    "empty": false,
+    "top": 113.8,
+    "w": 143,
+    "h": 192,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 1",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": true,
+    "top": 113.8,
+    "w": 143,
+    "h": 192,
+    "bs": "dashed",
+    "abs": "dashed",
+    "av": 68,
+    "nameFont": 18,
+    "nameLines": 2,
+    "nameText": "选择对手",
+    "ellipsis": false,
+    "icon": "\"i\" / \"\"",
+    "iconW": 18,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 52,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 16,
+   "startDisabled": true,
+   "startAria": "true",
+   "scrollNeeded": 7,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": false,
+    "text": "选择对手后即可开始比赛",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 1,
+    "h": 1,
+    "display": "flex",
+    "visibility": "visible",
+    "slot": "2"
+   },
+   "clockOn": "false",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/320",
+   "state": "C_both_selected",
+   "vh": 568,
+   "topBlank": 0,
+   "headGap": 58,
+   "midGap": 51,
+   "bottomBlank": 12,
+   "p1": {
+    "empty": false,
+    "top": 113.8,
+    "w": 143,
+    "h": 192,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 1",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": false,
+    "top": 113.8,
+    "w": 143,
+    "h": 192,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 2",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 52,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 16,
+   "startDisabled": false,
+   "startAria": "false",
+   "scrollNeeded": 7,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": true,
+    "text": "",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 0,
+    "h": 0,
+    "display": "none",
+    "visibility": "visible",
+    "slot": null
+   },
+   "clockOn": "false",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/320",
+   "state": "D_jpa9_both_selected",
+   "vh": 568,
+   "topBlank": 0,
+   "headGap": 58,
+   "midGap": 51,
+   "bottomBlank": 3,
+   "p1": {
+    "empty": false,
+    "top": 113.8,
+    "w": 143,
+    "h": 201,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 1",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": false,
+    "top": 113.8,
+    "w": 143,
+    "h": 201,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 2",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 52,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 16,
+   "startDisabled": false,
+   "startAria": "false",
+   "scrollNeeded": 16,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": true,
+    "text": "",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 0,
+    "h": 0,
+    "display": "none",
+    "visibility": "visible",
+    "slot": null
+   },
+   "clockOn": "false",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/320",
+   "state": "E_clockON",
+   "vh": 568,
+   "topBlank": 0,
+   "headGap": 58,
+   "midGap": 51,
+   "bottomBlank": -57,
+   "p1": {
+    "empty": false,
+    "top": 113.8,
+    "w": 143,
+    "h": 192,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 1",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": false,
+    "top": 113.8,
+    "w": 143,
+    "h": 192,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 2",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 121,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 16,
+   "startDisabled": false,
+   "startAria": "false",
+   "scrollNeeded": 76,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": true,
+    "text": "",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 0,
+    "h": 0,
+    "display": "none",
+    "visibility": "visible",
+    "slot": null
+   },
+   "clockOn": "true",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/375",
+   "state": "A_both_unselected",
+   "vh": 667,
+   "topBlank": 32,
+   "headGap": 68,
+   "midGap": 60,
+   "bottomBlank": 58,
+   "p1": {
+    "empty": true,
+    "top": 155.8,
+    "w": 171,
+    "h": 192,
+    "bs": "dashed",
+    "abs": "dashed",
+    "av": 68,
+    "nameFont": 18,
+    "nameLines": 2,
+    "nameText": "选择球员",
+    "ellipsis": false,
+    "icon": "\"i\" / \"\"",
+    "iconW": 18,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": true,
+    "top": 155.8,
+    "w": 171,
+    "h": 192,
+    "bs": "dashed",
+    "abs": "dashed",
+    "av": 68,
+    "nameFont": 18,
+    "nameLines": 2,
+    "nameText": "选择对手",
+    "ellipsis": false,
+    "icon": "\"i\" / \"\"",
+    "iconW": 18,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 52,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 19,
+   "startDisabled": true,
+   "startAria": "true",
+   "scrollNeeded": 0,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": false,
+    "text": "选择球员后即可开始比赛",
+    "label": "选择球员后即可开始比赛",
+    "desc": "选择球员",
+    "w": 1,
+    "h": 1,
+    "display": "flex",
+    "visibility": "visible",
+    "slot": "1"
+   },
+   "clockOn": "false",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/375",
+   "state": "B_P1_selected_P2_unselected",
+   "vh": 667,
+   "topBlank": 32,
+   "headGap": 68,
+   "midGap": 60,
+   "bottomBlank": 58,
+   "p1": {
+    "empty": false,
+    "top": 155.8,
+    "w": 171,
+    "h": 192,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 1",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": true,
+    "top": 155.8,
+    "w": 171,
+    "h": 192,
+    "bs": "dashed",
+    "abs": "dashed",
+    "av": 68,
+    "nameFont": 18,
+    "nameLines": 2,
+    "nameText": "选择对手",
+    "ellipsis": false,
+    "icon": "\"i\" / \"\"",
+    "iconW": 18,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 52,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 19,
+   "startDisabled": true,
+   "startAria": "true",
+   "scrollNeeded": 0,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": false,
+    "text": "选择对手后即可开始比赛",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 1,
+    "h": 1,
+    "display": "flex",
+    "visibility": "visible",
+    "slot": "2"
+   },
+   "clockOn": "false",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/375",
+   "state": "C_both_selected",
+   "vh": 667,
+   "topBlank": 32,
+   "headGap": 68,
+   "midGap": 60,
+   "bottomBlank": 58,
+   "p1": {
+    "empty": false,
+    "top": 155.8,
+    "w": 171,
+    "h": 192,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 1",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": false,
+    "top": 155.8,
+    "w": 171,
+    "h": 192,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 2",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 52,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 19,
+   "startDisabled": false,
+   "startAria": "false",
+   "scrollNeeded": 0,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": true,
+    "text": "",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 0,
+    "h": 0,
+    "display": "none",
+    "visibility": "visible",
+    "slot": null
+   },
+   "clockOn": "false",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/375",
+   "state": "D_jpa9_both_selected",
+   "vh": 667,
+   "topBlank": 28,
+   "headGap": 68,
+   "midGap": 60,
+   "bottomBlank": 53,
+   "p1": {
+    "empty": false,
+    "top": 151.8,
+    "w": 171,
+    "h": 201,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 1",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": false,
+    "top": 151.8,
+    "w": 171,
+    "h": 201,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 2",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 52,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 19,
+   "startDisabled": false,
+   "startAria": "false",
+   "scrollNeeded": 0,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": true,
+    "text": "",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 0,
+    "h": 0,
+    "display": "none",
+    "visibility": "visible",
+    "slot": null
+   },
+   "clockOn": "false",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/375",
+   "state": "E_clockON",
+   "vh": 667,
+   "topBlank": 1,
+   "headGap": 68,
+   "midGap": 60,
+   "bottomBlank": 20,
+   "p1": {
+    "empty": false,
+    "top": 124.4,
+    "w": 171,
+    "h": 192,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 1",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": false,
+    "top": 124.4,
+    "w": 171,
+    "h": 192,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 2",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 121,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 19,
+   "startDisabled": false,
+   "startAria": "false",
+   "scrollNeeded": 0,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": true,
+    "text": "",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 0,
+    "h": 0,
+    "display": "none",
+    "visibility": "visible",
+    "slot": null
+   },
+   "clockOn": "true",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/390",
+   "state": "A_both_unselected",
+   "vh": 844,
+   "topBlank": 65,
+   "headGap": 85,
+   "midGap": 76,
+   "bottomBlank": 98,
+   "p1": {
+    "empty": true,
+    "top": 253.9,
+    "w": 178,
+    "h": 176,
+    "bs": "dashed",
+    "abs": "dashed",
+    "av": 68,
+    "nameFont": 18,
+    "nameLines": 1,
+    "nameText": "选择球员",
+    "ellipsis": false,
+    "icon": "\"i\" / \"\"",
+    "iconW": 18,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": true,
+    "top": 253.9,
+    "w": 178,
+    "h": 176,
+    "bs": "dashed",
+    "abs": "dashed",
+    "av": 68,
+    "nameFont": 18,
+    "nameLines": 1,
+    "nameText": "选择对手",
+    "ellipsis": false,
+    "icon": "\"i\" / \"\"",
+    "iconW": 18,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 52,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 24,
+   "startDisabled": true,
+   "startAria": "true",
+   "scrollNeeded": 0,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": false,
+    "text": "选择球员后即可开始比赛",
+    "label": "选择球员后即可开始比赛",
+    "desc": "选择球员",
+    "w": 1,
+    "h": 1,
+    "display": "flex",
+    "visibility": "visible",
+    "slot": "1"
+   },
+   "clockOn": "false",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/390",
+   "state": "B_P1_selected_P2_unselected",
+   "vh": 844,
+   "topBlank": 65,
+   "headGap": 85,
+   "midGap": 76,
+   "bottomBlank": 98,
+   "p1": {
+    "empty": false,
+    "top": 253.9,
+    "w": 178,
+    "h": 176,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 1",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": true,
+    "top": 253.9,
+    "w": 178,
+    "h": 176,
+    "bs": "dashed",
+    "abs": "dashed",
+    "av": 68,
+    "nameFont": 18,
+    "nameLines": 1,
+    "nameText": "选择对手",
+    "ellipsis": false,
+    "icon": "\"i\" / \"\"",
+    "iconW": 18,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 52,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 24,
+   "startDisabled": true,
+   "startAria": "true",
+   "scrollNeeded": 0,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": false,
+    "text": "选择对手后即可开始比赛",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 1,
+    "h": 1,
+    "display": "flex",
+    "visibility": "visible",
+    "slot": "2"
+   },
+   "clockOn": "false",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/390",
+   "state": "C_both_selected",
+   "vh": 844,
+   "topBlank": 65,
+   "headGap": 85,
+   "midGap": 76,
+   "bottomBlank": 98,
+   "p1": {
+    "empty": false,
+    "top": 253.9,
+    "w": 178,
+    "h": 176,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 1",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": false,
+    "top": 253.9,
+    "w": 178,
+    "h": 176,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 2",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 52,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 24,
+   "startDisabled": false,
+   "startAria": "false",
+   "scrollNeeded": 0,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": true,
+    "text": "",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 0,
+    "h": 0,
+    "display": "none",
+    "visibility": "visible",
+    "slot": null
+   },
+   "clockOn": "false",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/390",
+   "state": "D_jpa9_both_selected",
+   "vh": 844,
+   "topBlank": 61,
+   "headGap": 85,
+   "midGap": 76,
+   "bottomBlank": 93,
+   "p1": {
+    "empty": false,
+    "top": 249.8,
+    "w": 178,
+    "h": 185,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 1",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": false,
+    "top": 249.8,
+    "w": 178,
+    "h": 185,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 2",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 52,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 24,
+   "startDisabled": false,
+   "startAria": "false",
+   "scrollNeeded": 0,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": true,
+    "text": "",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 0,
+    "h": 0,
+    "display": "none",
+    "visibility": "visible",
+    "slot": null
+   },
+   "clockOn": "false",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/390",
+   "state": "E_clockON",
+   "vh": 844,
+   "topBlank": 34,
+   "headGap": 85,
+   "midGap": 76,
+   "bottomBlank": 60,
+   "p1": {
+    "empty": false,
+    "top": 222.5,
+    "w": 178,
+    "h": 176,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 1",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": false,
+    "top": 222.5,
+    "w": 178,
+    "h": 176,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 2",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 121,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 24,
+   "startDisabled": false,
+   "startAria": "false",
+   "scrollNeeded": 0,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": true,
+    "text": "",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 0,
+    "h": 0,
+    "display": "none",
+    "visibility": "visible",
+    "slot": null
+   },
+   "clockOn": "true",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/430",
+   "state": "A_both_unselected",
+   "vh": 932,
+   "topBlank": 93,
+   "headGap": 94,
+   "midGap": 84,
+   "bottomBlank": 139,
+   "p1": {
+    "empty": true,
+    "top": 290.4,
+    "w": 198,
+    "h": 176,
+    "bs": "dashed",
+    "abs": "dashed",
+    "av": 68,
+    "nameFont": 18,
+    "nameLines": 1,
+    "nameText": "选择球员",
+    "ellipsis": false,
+    "icon": "\"i\" / \"\"",
+    "iconW": 18,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": true,
+    "top": 290.4,
+    "w": 198,
+    "h": 176,
+    "bs": "dashed",
+    "abs": "dashed",
+    "av": 68,
+    "nameFont": 18,
+    "nameLines": 1,
+    "nameText": "选择对手",
+    "ellipsis": false,
+    "icon": "\"i\" / \"\"",
+    "iconW": 18,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 52,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 26,
+   "startDisabled": true,
+   "startAria": "true",
+   "scrollNeeded": 0,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": false,
+    "text": "选择球员后即可开始比赛",
+    "label": "选择球员后即可开始比赛",
+    "desc": "选择球员",
+    "w": 1,
+    "h": 1,
+    "display": "flex",
+    "visibility": "visible",
+    "slot": "1"
+   },
+   "clockOn": "false",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/430",
+   "state": "B_P1_selected_P2_unselected",
+   "vh": 932,
+   "topBlank": 93,
+   "headGap": 94,
+   "midGap": 84,
+   "bottomBlank": 139,
+   "p1": {
+    "empty": false,
+    "top": 290.4,
+    "w": 198,
+    "h": 176,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 1",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": true,
+    "top": 290.4,
+    "w": 198,
+    "h": 176,
+    "bs": "dashed",
+    "abs": "dashed",
+    "av": 68,
+    "nameFont": 18,
+    "nameLines": 1,
+    "nameText": "选择对手",
+    "ellipsis": false,
+    "icon": "\"i\" / \"\"",
+    "iconW": 18,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 52,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 26,
+   "startDisabled": true,
+   "startAria": "true",
+   "scrollNeeded": 0,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": false,
+    "text": "选择对手后即可开始比赛",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 1,
+    "h": 1,
+    "display": "flex",
+    "visibility": "visible",
+    "slot": "2"
+   },
+   "clockOn": "false",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/430",
+   "state": "C_both_selected",
+   "vh": 932,
+   "topBlank": 93,
+   "headGap": 94,
+   "midGap": 84,
+   "bottomBlank": 139,
+   "p1": {
+    "empty": false,
+    "top": 290.4,
+    "w": 198,
+    "h": 176,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 1",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": false,
+    "top": 290.4,
+    "w": 198,
+    "h": 176,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 2",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 52,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 26,
+   "startDisabled": false,
+   "startAria": "false",
+   "scrollNeeded": 0,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": true,
+    "text": "",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 0,
+    "h": 0,
+    "display": "none",
+    "visibility": "visible",
+    "slot": null
+   },
+   "clockOn": "false",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/430",
+   "state": "D_jpa9_both_selected",
+   "vh": 932,
+   "topBlank": 90,
+   "headGap": 94,
+   "midGap": 84,
+   "bottomBlank": 133,
+   "p1": {
+    "empty": false,
+    "top": 287.7,
+    "w": 198,
+    "h": 185,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 1",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": false,
+    "top": 287.7,
+    "w": 198,
+    "h": 185,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 2",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 52,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 26,
+   "startDisabled": false,
+   "startAria": "false",
+   "scrollNeeded": 0,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": true,
+    "text": "",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 0,
+    "h": 0,
+    "display": "none",
+    "visibility": "visible",
+    "slot": null
+   },
+   "clockOn": "false",
+   "errs": []
+  },
+  {
+   "tag": "zh-Hans/430",
+   "state": "E_clockON",
+   "vh": 932,
+   "topBlank": 63,
+   "headGap": 94,
+   "midGap": 84,
+   "bottomBlank": 100,
+   "p1": {
+    "empty": false,
+    "top": 260.3,
+    "w": 198,
+    "h": 176,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 1",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "p2": {
+    "empty": false,
+    "top": 260.3,
+    "w": 198,
+    "h": 176,
+    "bs": "solid",
+    "abs": "none",
+    "av": 68,
+    "nameFont": 23,
+    "nameLines": 1,
+    "nameText": "Score 2",
+    "ellipsis": false,
+    "icon": "none",
+    "iconW": 0,
+    "avName": 4,
+    "nameRace": 10,
+    "raceFont": 17
+   },
+   "aligned": true,
+   "clockH": 121,
+   "clockTitle": 15,
+   "clockSub": 11,
+   "clockBorder": "rgb(236, 236, 234)",
+   "startToTab": 26,
+   "startDisabled": false,
+   "startAria": "false",
+   "scrollNeeded": 0,
+   "hscroll": false,
+   "small": [],
+   "noteInDom": false,
+   "blueNote": false,
+   "reason": {
+    "hidden": true,
+    "text": "",
+    "label": "选择对手后即可开始比赛",
+    "desc": "选择对手",
+    "w": 0,
+    "h": 0,
+    "display": "none",
+    "visibility": "visible",
+    "slot": null
+   },
+   "clockOn": "true",
+   "errs": []
+  }
+ ],
+ "pass": true
+}
