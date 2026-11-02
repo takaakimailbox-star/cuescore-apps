@@ -1,0 +1,449 @@
+{
+ "timestamp": "2026-11-02T04:03:47.658Z",
+ "rows": [
+  {
+   "tag": "ja/320",
+   "before": {
+    "on": "true",
+    "clockH": 131,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     131,
+     131
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 16,
+    "scrollNeeded": 0,
+    "hscroll": false
+   },
+   "after": {
+    "on": "true",
+    "clockH": 121,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     131,
+     131
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 16,
+    "scrollNeeded": 45,
+    "hscroll": false
+   }
+  },
+  {
+   "tag": "ja/375",
+   "before": {
+    "on": "true",
+    "clockH": 131,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     159,
+     159
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "hscroll": false
+   },
+   "after": {
+    "on": "true",
+    "clockH": 121,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     159,
+     159
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "hscroll": false
+   }
+  },
+  {
+   "tag": "ja/390",
+   "before": {
+    "on": "true",
+    "clockH": 131,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     166,
+     166
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "hscroll": false
+   },
+   "after": {
+    "on": "true",
+    "clockH": 121,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     166,
+     166
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "hscroll": false
+   }
+  },
+  {
+   "tag": "ja/430",
+   "before": {
+    "on": "true",
+    "clockH": 131,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     186,
+     186
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "hscroll": false
+   },
+   "after": {
+    "on": "true",
+    "clockH": 121,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     186,
+     186
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "hscroll": false
+   }
+  },
+  {
+   "tag": "en/320",
+   "before": {
+    "on": "true",
+    "clockH": 131,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     131,
+     131
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 16,
+    "scrollNeeded": 0,
+    "hscroll": false
+   },
+   "after": {
+    "on": "true",
+    "clockH": 121,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     131,
+     131
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 16,
+    "scrollNeeded": 45,
+    "hscroll": false
+   }
+  },
+  {
+   "tag": "en/375",
+   "before": {
+    "on": "true",
+    "clockH": 131,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     159,
+     159
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "hscroll": false
+   },
+   "after": {
+    "on": "true",
+    "clockH": 121,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     159,
+     159
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "hscroll": false
+   }
+  },
+  {
+   "tag": "en/390",
+   "before": {
+    "on": "true",
+    "clockH": 131,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     166,
+     166
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "hscroll": false
+   },
+   "after": {
+    "on": "true",
+    "clockH": 121,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     166,
+     166
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "hscroll": false
+   }
+  },
+  {
+   "tag": "en/430",
+   "before": {
+    "on": "true",
+    "clockH": 131,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     186,
+     186
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "hscroll": false
+   },
+   "after": {
+    "on": "true",
+    "clockH": 121,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     186,
+     186
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "hscroll": false
+   }
+  },
+  {
+   "tag": "zh-Hans/320",
+   "before": {
+    "on": "true",
+    "clockH": 131,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     131,
+     131
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 16,
+    "scrollNeeded": 0,
+    "hscroll": false
+   },
+   "after": {
+    "on": "true",
+    "clockH": 121,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     131,
+     131
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 16,
+    "scrollNeeded": 45,
+    "hscroll": false
+   }
+  },
+  {
+   "tag": "zh-Hans/375",
+   "before": {
+    "on": "true",
+    "clockH": 131,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     159,
+     159
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "hscroll": false
+   },
+   "after": {
+    "on": "true",
+    "clockH": 121,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     159,
+     159
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 19,
+    "scrollNeeded": 0,
+    "hscroll": false
+   }
+  },
+  {
+   "tag": "zh-Hans/390",
+   "before": {
+    "on": "true",
+    "clockH": 131,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     166,
+     166
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "hscroll": false
+   },
+   "after": {
+    "on": "true",
+    "clockH": 121,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     166,
+     166
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 24,
+    "scrollNeeded": 0,
+    "hscroll": false
+   }
+  },
+  {
+   "tag": "zh-Hans/430",
+   "before": {
+    "on": "true",
+    "clockH": 131,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     186,
+     186
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "hscroll": false
+   },
+   "after": {
+    "on": "true",
+    "clockH": 121,
+    "valsH": [
+     59,
+     59
+    ],
+    "valsW": [
+     186,
+     186
+    ],
+    "switchH": 44,
+    "small": [],
+    "startToTab": 26,
+    "scrollNeeded": 0,
+    "hscroll": false
+   }
+  }
+ ]
+}

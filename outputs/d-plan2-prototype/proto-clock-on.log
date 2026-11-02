@@ -1,0 +1,10 @@
+file:///home/user/cuescore-apps/tests/browser/p2-browser-kit.mjs:94
+  const ws = new WebSocket(targets.find(t => t.type === "page").webSocketDebuggerUrl);
+                                                               ^
+
+TypeError: Cannot read properties of undefined (reading 'webSocketDebuggerUrl')
+    at startApp (file:///home/user/cuescore-apps/tests/browser/p2-browser-kit.mjs:94:64)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async file:///home/user/cuescore-apps/tests/browser/d2-clock-on.mjs:31:30
+
+Node.js v22.23.4
