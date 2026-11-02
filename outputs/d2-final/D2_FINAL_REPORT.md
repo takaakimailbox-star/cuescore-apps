@@ -5,11 +5,11 @@ Base main 387d232752b2a980ad5f37b1accebbd18a13c19d. Branch cloud/d2-final-design
 ## Measurements (Japanese, state C = both selected; Before -> After)
 | width (height) | heading->cards | card (w x h) | avatar | name | Race to | shot clock OFF/ON | top / head / mid / bottom blank | start->tab | scroll (C / clock ON) |
 |---|---|---|---|---|---|---|---|---|---|
-| 320 (568) | 19 -> 58 | 143x151 -> 143x192 | 48 -> 68 | 20 -> 23 | 22 -> 17 | 62/131 -> 52/121 | - / 19 / 24 / 57 -> 0 / 58 / 51 / 12 | 16 -> 16 | 0 / 0 -> 7 / 76 |
-| 375 (667) | 22 -> 68 | 171x151 -> 171x192 | 48 -> 68 | 20 -> 23 | 22 -> 17 | 62/131 -> 52/121 | - / 22 / - / 131 -> 32 / 68 / 60 / 58 | 19 -> 19 | 0 / 0 -> 0 / 0 |
-| 390 (844) | 28 -> 85 | 178x151 -> 178x176 | 48 -> 68 | 20 -> 23 | 22 -> 17 | 62/131 -> 52/121 | 59 / 28 / 29 / 198 -> 65 / 85 / 76 / 98 | 24 -> 24 | 0 / 0 -> 0 / 0 |
-| 430 (932) | 31 -> 94 | 198x151 -> 198x176 | 48 -> 68 | 20 -> 23 | 22 -> 17 | 62/131 -> 52/121 | 64 / 31 / 32 / 273 -> 93 / 94 / 84 / 139 | 26 -> 26 | 0 / 0 -> 0 / 0 |
-Unselected guidance: 15 -> 18pt (1 line at 390/430, 2 lines at 320/375 and English <=399). Before-values of the blank pieces come from the prototype evidence (outputs/d-plan2-prototype on cloud/d-plan2-ui-prototype); "-" = not recorded then.
+| 320 (568) | 19 -> 58 | 143x151 -> 143x192 | 48 -> 68 | 20 -> 23 | 22 -> 17 | 62/131 -> 52/121 | n/m / 19 / 19 / 57 -> 0 / 58 / 51 / 12 | 16 -> 16 | 0 / 0 -> 7 / 76 |
+| 375 (667) | 22 -> 68 | 171x151 -> 171x192 | 48 -> 68 | 20 -> 23 | 22 -> 17 | 62/131 -> 52/121 | n/m / 22 / 23 / 131 -> 32 / 68 / 60 / 58 | 19 -> 19 | 0 / 0 -> 0 / 0 |
+| 390 (844) | 28 -> 85 | 178x151 -> 178x176 | 48 -> 68 | 20 -> 23 | 22 -> 17 | 62/131 -> 52/121 | n/m / 28 / 29 / 198 -> 65 / 85 / 76 / 98 | 24 -> 24 | 0 / 0 -> 0 / 0 |
+| 430 (932) | 31 -> 94 | 198x151 -> 198x176 | 48 -> 68 | 20 -> 23 | 22 -> 17 | 62/131 -> 52/121 | n/m / 31 / 32 / 273 -> 93 / 94 / 84 / 139 | 26 -> 26 | 0 / 0 -> 0 / 0 |
+Unselected guidance: 15 -> 18pt (1 line at 390/430, 2 lines at 320/375 and English <=399). Before-values of the blank pieces come from the prototype evidence (outputs/d-plan2-prototype on cloud/d-plan2-ui-prototype); "n/m" = the top blank was not measured in the prototype run (no Before value is given). The other Before cells are measured values (heading gap, cards->shot clock gap, bottom blank).
 
 ## Tests
 - Node full: 1253/1254. Remaining: 850 (TZ=UTC child test; reporter-format environment difference, same test as the previous 846; child run alone passes 13/13). Not "all PASS".
