@@ -20,14 +20,19 @@ test("C plan: spare height goes between the sections; the start button keeps abo
   assert.match(css, /#cueSetupFooterV1\{display:block;flex:0 0 auto/, "the footer stays an independent flex child above the tab bar");
 });
 
-test("C plan: the opponent guidance sits below the opponent card, reuses the approved key, is aria-hidden and has no new wording", () => {
-  assert.match(js, /note\.id = "cueSetupOppNoteV1"/);
-  assert.match(js, /note\.setAttribute\("aria-hidden", "true"\)/);
-  assert.match(js, /T\("setupux\.reason\.p2"\)/);
-  assert.match(js, /oppNote\(!name\(2\)\)/);
-  assert.match(css, /\.cue-setup-note-v1\{grid-column:2;grid-row:2;/);
-  assert.match(css, /background:#e9eff5;color:#1c2a3a/);
-  assert.ok(!/setupux\.reason\.aria|setupux\.reason\.other/.test(js));
+test("D2 (PO 2026-11-02): the blue-grey note below the card is gone; the guidance is inside the unselected card; the footer reason keeps wording + VoiceOver attributes", () => {
+  assert.ok(!/oppNote|cueSetupOppNoteV1/.test(js), "no note element / function in the product JS");
+  assert.ok(!/cue-setup-note-v1/.test(css), "no note rules in the CSS");
+  assert.ok(!/setupux\.reason\.aria|setupux\.reason\.other/.test(js), "no new wording");
+  // footer reason: approved keys, aria-label = text, aria-description = existing approved card label, visually folded (not display:none)
+  assert.match(js, /const key = miss\.length === 2 \? "setupux\.reason\.both" : miss\[0\] === 1 \? "setupux\.reason\.p1" : "setupux\.reason\.p2";/);
+  assert.match(js, /reason\.setAttribute\("aria-label", T\(key\)\);/);
+  assert.match(js, /reason\.setAttribute\("aria-description", T\(miss\[0\] === 2 && miss\.length === 1 \? "p3\.39bd0fa6" : "p3\.b3005c8a"\)\);/);
+  const d2 = css.slice(css.indexOf("/* D2 final design (PO 2026-11-02)"));
+  assert.match(d2, /\.cue-setup-reason-v1\{position:absolute!important;width:1px!important;height:1px!important;min-height:0!important;/);
+  assert.ok(!/\.cue-setup-reason-v1\{[^}]*display:none/.test(d2), "folded visually, not removed from the accessibility tree");
+  // the round (i) is decorative: CSS content with an empty alternative text
+  assert.match(d2, /new-match-player-name-v1::before\{content:"i" \/ "";/);
 });
 
 test("yellow state colours stay (shared focus, turn / selection / winner); the swap button moved up with the grouped cards", () => {

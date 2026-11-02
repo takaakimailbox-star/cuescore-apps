@@ -30,12 +30,12 @@ for(const lang of LANGS) for(const w of WIDTHS){
     ck(a.p1Name==="Score 1"&&a.p2Name==="Score 2"&&!a.startDisabled,`${t} first launch: Score 1 / Score 2 selected, start enabled`,{p1:a.p1Name,p2:a.p2Name,dis:a.startDisabled});
     for(const k of ["p1","p2"]){const c=a[k];
       ck(!c.empty&&c.bs==="solid",`${t} ${k} selected card: solid frame`,{bs:c.bs});
-      ck(Math.abs(c.nf-20)<=0.6,`${t} ${k} selected name ~20pt`,c.nf);
+      ck(Math.abs(c.nf-23)<=0.6,`${t} ${k} selected name 23pt (D2)`,c.nf);
       ck(c.avName>=3.5&&c.avName<=5,`${t} ${k} avatar->name 4pt`,c.avName);
       ck(Math.abs(c.nameRace-10)<=0.7,`${t} ${k} name->Race to 10pt`,c.nameRace);
       ck(!c.red,`${t} ${k} no red`);}
     ck(Math.abs(a.p1.top-a.p2.top)<=1&&Math.abs(a.p1.h-a.p2.h)<=1,`${t} both cards aligned (top/height)`,{t:[a.p1.top,a.p2.top],h:[a.p1.h,a.p2.h]});
-    ck(a.gap>=C_GAP[w]+4&&a.gap<=C_GAP[w]+14,`${t} discipline->cards gap widened vs C plan (${C_GAP[w]}pt)`,a.gap);
+    ck(a.gap>=C_GAP[w]+30,`${t} discipline->cards gap widened vs C plan (${C_GAP[w]}pt; D2 spreads the spare height)`,a.gap);
     ck(!a.hscroll&&a.small.length===0&&!a.p1.nOver&&!a.p2.nOver,`${t} no overflow, targets >=44pt`,{h:a.hscroll,s:a.small});
     ck(a.noteText===null&&a.reasonText===null,`${t} both selected: no guidance shown`,{n:a.noteText,r:a.reasonText});
     ck(!(a.errs||[]).length,`${t} no JS exceptions`,a.errs);
@@ -50,7 +50,7 @@ for(const lang of LANGS) for(const w of WIDTHS){
     ck(!b.p2.red&&!b.p1.red,`${t} no red warning mark / text`);
     ck(Math.abs(b.p1.top-b.p2.top)<=1&&Math.abs(b.p1.h-b.p2.h)<=1,`${t} mixed cards aligned (top/height)`,{t:[b.p1.top,b.p2.top],h:[b.p1.h,b.p2.h]});
     ck(Math.abs(b.p2.nameRace-10)<=0.7&&b.p2.avName>=3.5&&b.p2.avName<=5,`${t} unselected card spacing 4 / 10pt`,{a:b.p2.avName,n:b.p2.nameRace});
-    ck(b.startDisabled&&b.noteText&&b.reasonText&&b.noteText===b.reasonText&&b.noteAria==="true",`${t} unselected: start disabled, existing approved note == footer, note aria-hidden`,{n:b.noteText,r:b.reasonText});
+    ck(b.startDisabled&&b.noteText===null&&!!b.reasonText,`${t} unselected: start disabled, no blue-grey note, approved footer reason kept in the accessibility tree (D2)`,{n:b.noteText,r:b.reasonText});
     ck(!b.hscroll&&b.small.length===0&&!b.p2.nOver,`${t} no overflow, targets >=44pt`,{h:b.hscroll,s:b.small});
     if(w>=390)ck(Math.abs(b.startToTab-(w===390?24:26))<=1,`${t} start->tab-bar gap kept`,b.startToTab);
     // restore selection for the next discipline (library path is exercised by the existing tests)
