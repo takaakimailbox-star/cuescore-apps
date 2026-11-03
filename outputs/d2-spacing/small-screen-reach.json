@@ -1,0 +1,240 @@
+{
+ "timestamp": "2026-11-02T23:53:56.186Z",
+ "checks": [
+  {
+   "ok": true,
+   "label": "ja/320 ON: both player cards fully reachable at the top",
+   "detail": {
+    "need": 32,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 ON: after scrolling to the end every control is fully visible above the footer (scroll 32pt)",
+   "detail": {
+    "need": 32,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/320 ON: start button visible above the tab bar, >=44pt, no horizontal overflow",
+   "detail": {
+    "need": 32,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 ON: both player cards fully reachable at the top",
+   "detail": {
+    "need": 0,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 ON: after scrolling to the end every control is fully visible above the footer (scroll 0pt)",
+   "detail": {
+    "need": 0,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "ja/375 ON: start button visible above the tab bar, >=44pt, no horizontal overflow",
+   "detail": {
+    "need": 0,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 ON: both player cards fully reachable at the top",
+   "detail": {
+    "need": 32,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 ON: after scrolling to the end every control is fully visible above the footer (scroll 32pt)",
+   "detail": {
+    "need": 32,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320 ON: start button visible above the tab bar, >=44pt, no horizontal overflow",
+   "detail": {
+    "need": 32,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 ON: both player cards fully reachable at the top",
+   "detail": {
+    "need": 0,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 ON: after scrolling to the end every control is fully visible above the footer (scroll 0pt)",
+   "detail": {
+    "need": 0,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375 ON: start button visible above the tab bar, >=44pt, no horizontal overflow",
+   "detail": {
+    "need": 0,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 ON: both player cards fully reachable at the top",
+   "detail": {
+    "need": 32,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 ON: after scrolling to the end every control is fully visible above the footer (scroll 32pt)",
+   "detail": {
+    "need": 32,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320 ON: start button visible above the tab bar, >=44pt, no horizontal overflow",
+   "detail": {
+    "need": 32,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 ON: both player cards fully reachable at the top",
+   "detail": {
+    "need": 0,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 ON: after scrolling to the end every control is fully visible above the footer (scroll 0pt)",
+   "detail": {
+    "need": 0,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375 ON: start button visible above the tab bar, >=44pt, no horizontal overflow",
+   "detail": {
+    "need": 0,
+    "topOk": true,
+    "cut": [],
+    "underFooter": 0,
+    "startVisible": true,
+    "startH": 54,
+    "hscroll": false
+   }
+  }
+ ],
+ "pass": true
+}
