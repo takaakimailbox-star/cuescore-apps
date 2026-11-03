@@ -107,10 +107,25 @@
     const start = $("#startGameBtn"), reason = $("#cueSetupReasonV1");
     if (!start || !reason) return;
     const name = n => (($("#p" + n + "Name") || {}).value || "").trim();
+    /* Card alignment (Build 99 STOP repair): the two player cards must keep the same top / height / Race-to row. The unselected guidance ("プレーヤーを選択" is one character longer than
+       "対戦相手を選択") can wrap in ONE card only, at a width that depends on the font. Measure the real line count of both labels (Range over the text node, independent of the
+       box height) and, only when one of them wraps, give both name boxes the same two-line height (CSS class). Nothing changes when both fit on one line; no selection / main-player logic. */
+    const labelLines = n => {
+      const nm = $("#newMatchPlayerCard" + n + "V1 .new-match-player-name-v1");
+      if (!nm || !nm.getClientRects().length) return 1;
+      const r = doc.createRange(); r.selectNodeContents(nm);
+      const tops = new Set([...r.getClientRects()].filter(q => q.width > 0 && q.height > 0).map(q => Math.round(q.top)));
+      return Math.max(1, tops.size);
+    };
+    const alignNames = () => {
+      const grid = $(".new-match-player-grid-v1");
+      if (grid) grid.classList.toggle("cue-name-wrap-v1", labelLines(1) > 1 || labelLines(2) > 1);
+    };
     const update = () => {
       const home = $("#cueHomeV1");
       if (!home || !home.classList.contains("match-setup-active-v3")) return;      // only while the setup screen is open (no work during a match)
       [1, 2].forEach(n => { const card = $("#newMatchPlayerCard" + n + "V1"); if (card) card.classList.toggle("is-empty-v1", !name(n)); });
+      alignNames();
       const miss = [];
       if (!name(1)) miss.push(1);
       if (!name(2)) miss.push(2);
@@ -133,6 +148,7 @@
     ["click", "input", "change"].forEach(t => doc.addEventListener(t, later, true));
     root.addEventListener("pageshow", update);
     root.addEventListener("popstate", later);
+    root.addEventListener("resize", later);       // rotation / window size: the label wrap can change
     update();
     [300, 1200].forEach(ms => root.setTimeout(update, ms));     // the first selection (main player) is applied during boot
   }

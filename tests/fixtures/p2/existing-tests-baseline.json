@@ -235,6 +235,12 @@
       "skips": 0,
       "updated_in": "D2 spacing tune (PO 2026-11-03): heading gap pin clamp(18px,10vh,96px) -> clamp(24px,6vh,60px); no assertion weakened (see version-d2-spacing-test-change-map.json)"
     },
+    "d2-card-alignment.test.mjs": {
+      "sha256": "3be0f2de66fade4902e055a28542dd91c8cbb64d90165fff5793e11472c539f3",
+      "tests": 2,
+      "skips": 0,
+      "updated_in": "Build 99 STOP repair (2026-11-03): new test, no existing assertion changed"
+    },
     "delete-workflows.test.mjs": {
       "sha256": "bb0c346240a2fafc93193300709a7d66ac18aaaa08739e398a3017508636eac0",
       "tests": 0,
