@@ -1,0 +1,13 @@
+{
+ "gate": "D2 spacing tune (PO 2026-11-03): heading->cards 85 -> ~50pt and cards->shot clock 76 -> ~45pt at 390pt, spare height shared top:bottom 1:1. CSS only (match-setup-ux-v1.css, 4 lines).",
+ "changedTestFiles": {
+  "d-plan-initial-players.test.mjs": {
+   "before": "77c4df6bfa7129741d973501574732ff230abc6696a85dc3c74f2087368b490f",
+   "after": "8b7ef58d9f01d67f70a68c106a4c41337db48b0551166c6b493ebb8989ae73a1",
+   "oldToNew": "summary margin pin clamp(18px,10vh,96px) -> clamp(24px,6vh,60px); other D2 assertions unchanged"
+  }
+ },
+ "changedBrowserTests": {
+  "d2-final.mjs": "concentration check (single spot <=125/175pt) -> gaps equal clamp(24,6vh,60) / clamp(20,5.3vh,56) (+-1.5pt), 390pt targets 45-55 / 40-50pt, top:bottom blank ratio <=1.5 at >=390pt"
+ }
+}

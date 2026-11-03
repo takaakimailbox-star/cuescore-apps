@@ -99,8 +99,9 @@ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 #cueSetupFooterV1{p
    - the footer reason keeps its text / aria-label / aria-description (VoiceOver) but is folded away visually (it duplicated the card guidance);
    - calmer shot-clock card (same controls, same 44px targets);
    - spare height is spread over the top, heading->cards, cards->shot clock and footer gaps (vh based) instead of piling up in one place. */
-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-integrated-v2::before{max-height:clamp(0px,10vh,96px)}
-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-summary-v2{margin:0 0 clamp(18px,10vh,96px)!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-integrated-v2::after{flex:1 1 0}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-integrated-v2::before{max-height:clamp(0px,16vh,150px)}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-new-match-summary-v2{margin:0 0 clamp(24px,6vh,60px)!important}
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-card-v1{padding:10px 8px 8px!important}
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-swap-v1{top:34px!important}
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-card-v1.is-empty-v1{border:1.5px dashed #c8c8c4!important;background:#fff!important}
@@ -115,7 +116,7 @@ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v
 @media(max-width:379px){body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .is-empty-v1 .new-match-player-select-v1 .new-match-player-name-v1{min-height:44px!important}body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-player-stack-v2 .new-match-player-card-v1:not(.is-empty-v1) .new-match-player-select-v1 .new-match-player-name-v1{min-height:44px!important;line-height:44px!important}}
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-row-v2 strong{font-size:17px!important}
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-race-row-v2 .goal-label-v1{font-size:11px!important}
-body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-sc-setup{margin-top:clamp(16px,9vh,88px)!important;padding:3px 12px!important;border-color:#ececea!important}
+body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-sc-setup{margin-top:clamp(20px,5.3vh,56px)!important;padding:3px 12px!important;border-color:#ececea!important}
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-sc-setup-title{font-size:15px!important;line-height:20px!important;font-weight:500!important}
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-sc-setup-sub{font-size:11px!important;line-height:14px!important}
 body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-reason-wrap-v1{min-height:0!important}

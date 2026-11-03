@@ -63,7 +63,13 @@ for(const lang of LANGS) for(const w of WIDTHS){
       ck(r&&!r.hidden&&r.display!=="none"&&r.visibility!=="hidden"&&r.w<=2&&r.h<=2&&r.text.length>0&&r.label===r.text&&!!r.desc,`${t} footer reason: visually folded, still in the accessibility tree (aria-label + aria-description)`,r);
       const first=m.p1.empty?m.p1:m.p2;ck(r&&r.desc&&emp.some(c=>c.nameText===r.desc),`${t} reason hint equals the approved card label`,{desc:r&&r.desc,labels:emp.map(c=>c.nameText)});
     }
-    if(w>=390&&!process.env.D2F_LONG&&name[0]!=="E")ck(Math.max(m.topBlank,m.headGap,m.midGap,m.bottomBlank)<=(w===390?125:175),`${t} no single spot holds the spare height (${[m.topBlank,m.headGap,m.midGap,m.bottomBlank]})`);
+    if(!process.env.D2F_LONG&&name[0]!=="E"){
+      const vh=m.vh,clampv=(lo,v,hi)=>Math.min(hi,Math.max(lo,v));
+      ck(Math.abs(m.headGap-clampv(24,vh*0.06,60))<=1.5,`${t} heading->cards gap = clamp(24,6vh,60) (${m.headGap}pt)`,m.headGap);
+      ck(Math.abs(m.midGap-clampv(20,vh*0.053,56))<=1.5,`${t} cards->shot clock gap = clamp(20,5.3vh,56) (${m.midGap}pt)`,m.midGap);
+      if(w===390)ck(m.headGap>=45&&m.headGap<=55&&m.midGap>=40&&m.midGap<=50,`${t} 390pt targets: heading->cards 45-55pt, cards->clock 40-50pt`,[m.headGap,m.midGap]);
+      if(w>=390)ck(Math.max(m.topBlank,m.bottomBlank)/Math.max(1,Math.min(m.topBlank,m.bottomBlank))<=1.5,`${t} the tightened space is shared top / bottom (${m.topBlank} / ${m.bottomBlank})`);
+    }
   }
   await app.close();
 }

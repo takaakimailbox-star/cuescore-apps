@@ -43,7 +43,7 @@ test("D / D2 plan: unselected = light-grey dashed card and avatar ring, selected
   assert.match(d, /:not\(\.is-empty-v1\) \.new-match-player-select-v1 \.new-match-player-name-v1\{font-size:23px!important/);
   assert.match(d, /\.is-empty-v1 \.new-match-player-select-v1 \.new-match-player-name-v1\{font-size:18px!important/);
   assert.match(d, /\.new-match-race-row-v2 strong\{font-size:17px!important\}/);
-  assert.match(d, /\.cue-new-match-summary-v2\{margin:0 0 clamp\(18px,10vh,96px\)!important\}/);
+  assert.match(d, /\.cue-new-match-summary-v2\{margin:0 0 clamp\(24px,6vh,60px\)!important\}/);
   const colors = [...d.matchAll(/#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b/g)].map(m => m[1].length === 3 ? m[1].replace(/./g, "$&$&") : m[1]);
   assert.ok(colors.length >= 6);
   // neutral greys / white, plus the calm slate of the decorative (i) (#5a6b7d): never red / yellow

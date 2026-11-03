@@ -35,7 +35,7 @@ for(const lang of LANGS) for(const w of WIDTHS){
       ck(Math.abs(c.nameRace-10)<=0.7,`${t} ${k} name->Race to 10pt`,c.nameRace);
       ck(!c.red,`${t} ${k} no red`);}
     ck(Math.abs(a.p1.top-a.p2.top)<=1&&Math.abs(a.p1.h-a.p2.h)<=1,`${t} both cards aligned (top/height)`,{t:[a.p1.top,a.p2.top],h:[a.p1.h,a.p2.h]});
-    ck(a.gap>=C_GAP[w]+30,`${t} discipline->cards gap widened vs C plan (${C_GAP[w]}pt; D2 spreads the spare height)`,a.gap);
+    ck(a.gap>=C_GAP[w]+20,`${t} discipline->cards gap still wider than the C plan (${C_GAP[w]}pt; D2 spacing tune: clamp(24,6vh,60))`,a.gap);
     ck(!a.hscroll&&a.small.length===0&&!a.p1.nOver&&!a.p2.nOver,`${t} no overflow, targets >=44pt`,{h:a.hscroll,s:a.small});
     ck(a.noteText===null&&a.reasonText===null,`${t} both selected: no guidance shown`,{n:a.noteText,r:a.reasonText});
     ck(!(a.errs||[]).length,`${t} no JS exceptions`,a.errs);
