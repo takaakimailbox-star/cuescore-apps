@@ -1,0 +1,9 @@
+{
+ "gate": "Build 99 STOP repair: left/right player cards misaligned when only one guidance label wraps (natural main-player-0 start).",
+ "changedTestFiles": {},
+ "newTests": [
+  "tests/d2-card-alignment.test.mjs (2 tests)",
+  "tests/browser/d2-card-align.mjs (width sweep x glyph-width variants x 3 languages, natural main-0 state)"
+ ],
+ "note": "No existing test or assertion was changed, weakened or skipped; the repair is verified by new tests (negative control: the new browser test fails on unfixed main with 191/176pt)."
+}
