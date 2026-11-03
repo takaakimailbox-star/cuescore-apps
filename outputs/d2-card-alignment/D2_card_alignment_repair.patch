@@ -1,0 +1,232 @@
+From 806d0693ef3ae91ad99c442349f1f0222397b0fa Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 3 Nov 2026 03:36:38 +0000
+Subject: [PATCH] =?UTF-8?q?fix:=20D2=20player-card=20alignment=20=E2=80=94?=
+ =?UTF-8?q?=20measure=20the=20guidance=20label=20wrap=20and=20give=20both?=
+ =?UTF-8?q?=20name=20boxes=20the=20same=20two-line=20height=20only=20when?=
+ =?UTF-8?q?=20one=20label=20wraps=20(natural=20main-player-0=20start;=20no?=
+ =?UTF-8?q?=20auto-promotion=20change,=20no=20P1=20forcing;=20no=20build?=
+ =?UTF-8?q?=20numbering,=20not=20pushed)?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Build 99 STOP repair. P1 "プレーヤーを選択" can wrap while P2 "対戦相手を選択" does not (font dependent: cloud ja 380-385pt, Mac 390pt), which broke the approved left/right card alignment (191 vs 176pt). match-setup-ux-v1.js measures the real line count and sets a class; match-setup-ux-v1.css equalises the name boxes. Approved D2 sizes and 390pt layout untouched. New Node + real-Chrome tests (negative control fails on unfixed main); change map records that no existing test changed.
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_013frrJtxPEJGZnoKAGWhZ2E
+---
+ ...ore_D2_Card_Alignment_Repair_2026-11-03.md | 13 +++++++
+ match-setup-ux-v1.css                         |  3 ++
+ match-setup-ux-v1.js                          | 16 +++++++++
+ tests/browser/d2-card-align-shots.mjs         | 17 ++++++++++
+ tests/browser/d2-card-align.mjs               | 34 +++++++++++++++++++
+ tests/d2-card-alignment.test.mjs              | 26 ++++++++++++++
+ .../fixtures/p2/existing-tests-baseline.json  |  6 ++++
+ ...ion-d2-card-alignment-test-change-map.json |  9 +++++
+ 8 files changed, 124 insertions(+)
+ create mode 100644 docs/implementation/CueScore_D2_Card_Alignment_Repair_2026-11-03.md
+ create mode 100644 tests/browser/d2-card-align-shots.mjs
+ create mode 100644 tests/browser/d2-card-align.mjs
+ create mode 100644 tests/d2-card-alignment.test.mjs
+ create mode 100644 tests/fixtures/p2/version-d2-card-alignment-test-change-map.json
+
+diff --git a/docs/implementation/CueScore_D2_Card_Alignment_Repair_2026-11-03.md b/docs/implementation/CueScore_D2_Card_Alignment_Repair_2026-11-03.md
+new file mode 100644
+index 0000000..25968e2
+--- /dev/null
++++ b/docs/implementation/CueScore_D2_Card_Alignment_Repair_2026-11-03.md
+@@ -0,0 +1,13 @@
++# D2 card alignment repair (Build 99 STOP) — 2026-11-03
++Base: main 6c3eaec7df2040ef47662d8cb06c26a77eccc4e4. Branch cloud/d2-card-alignment-repair. No build numbering, no Archive; Mac-local Build 99 commit c26cbbd… untouched.
++## Defect
++Left / right player cards lose the same top / height / Race-to row when ONE guidance label wraps: "プレーヤーを選択" (P1, 8 characters) is longer than "対戦相手を選択" (P2). The two-line equalisation existed only for fixed widths (<=379px, English <=399px), but the wrap width depends on the font (cloud Chrome: ja 380-385pt; Mac: 390pt). Reported: left 191pt / right 176pt, height diff 15pt, top diff 7.6pt (ja / 390pt, both unselected).
++## Reachability (not a forced-test-only case)
++Official 103/104: the main player may be 0 and no other Player is promoted automatically; primaryPlayerV1() is null then and initializePrimaryMatchSetupV1() returns false. With the main player deleted and >=2 players left, the start screen has P1 AND P2 unselected through normal use (verified with isolated data: 3 registered players, none is main) and "P1 unselected / P2 selected" follows after one pick. The auto-selection / main-player rules are NOT changed and P1 is not forced.
++## Repair (match-setup-ux-v1.js +19 lines, match-setup-ux-v1.css +3 lines)
++- `labelLines(n)`: real line count of each guidance label (Range over the text node, independent of the box height).
++- `alignNames()` (run on every setup refresh and on resize): toggles `cue-name-wrap-v1` on the card grid when either label wraps.
++- CSS: with that class both name boxes get the same two-line height (min-height 44px; selected names stay centred, line-height 44px). Nothing changes when both labels fit on one line (approved 176pt cards at 390pt are untouched).
++Unchanged: avatar 68, selected name 23, guidance 18, Race to 17, dashed unselected card, solid selected card, no blue-grey note, D2 gaps, shot clock, start button, footer reason (VoiceOver text), Score 1/2 registration, Player IDs, start condition.
++## Tests
++New: tests/d2-card-alignment.test.mjs (structure + pins of the main-player rules), tests/browser/d2-card-align.mjs (natural main-0 state; width sweep x letter-spacing 0 / 1.2px (other fonts' glyph widths) x ja / en / zh-Hans; negative control: fails on unfixed main with 191 / 176pt). No existing test or assertion changed. Change map: tests/fixtures/p2/version-d2-card-alignment-test-change-map.json.
+diff --git a/match-setup-ux-v1.css b/match-setup-ux-v1.css
+index f8c20c7..3d4b030 100644
+--- a/match-setup-ux-v1.css
++++ b/match-setup-ux-v1.css
+@@ -122,3 +122,6 @@ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-sc-setup-sub{f
+ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-reason-wrap-v1{min-height:0!important}
+ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-reason-v1{position:absolute!important;width:1px!important;height:1px!important;min-height:0!important;min-width:0!important;margin:-1px!important;padding:0!important;border:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+ body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-reason-v1::before,body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .cue-setup-reason-v1::after{display:none!important}
++/* Card alignment repair (Build 99 STOP): when a guidance label wraps in one card only (the class is set by match-setup-ux-v1.js), both name boxes get the same two-line height so both cards keep the same top / height / Race-to row. */
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-grid-v1.cue-name-wrap-v1 .is-empty-v1 .new-match-player-select-v1 .new-match-player-name-v1{min-height:44px!important}
++body.cue-phase1-normal-mode #cueHomeV1.match-setup-active-v3 .new-match-player-grid-v1.cue-name-wrap-v1 .new-match-player-card-v1:not(.is-empty-v1) .new-match-player-select-v1 .new-match-player-name-v1{min-height:44px!important;line-height:44px!important}
+diff --git a/match-setup-ux-v1.js b/match-setup-ux-v1.js
+index 9b0dc78..712c125 100644
+--- a/match-setup-ux-v1.js
++++ b/match-setup-ux-v1.js
+@@ -107,10 +107,25 @@
+     const start = $("#startGameBtn"), reason = $("#cueSetupReasonV1");
+     if (!start || !reason) return;
+     const name = n => (($("#p" + n + "Name") || {}).value || "").trim();
++    /* Card alignment (Build 99 STOP repair): the two player cards must keep the same top / height / Race-to row. The unselected guidance ("プレーヤーを選択" is one character longer than
++       "対戦相手を選択") can wrap in ONE card only, at a width that depends on the font. Measure the real line count of both labels (Range over the text node, independent of the
++       box height) and, only when one of them wraps, give both name boxes the same two-line height (CSS class). Nothing changes when both fit on one line; no selection / main-player logic. */
++    const labelLines = n => {
++      const nm = $("#newMatchPlayerCard" + n + "V1 .new-match-player-name-v1");
++      if (!nm || !nm.getClientRects().length) return 1;
++      const r = doc.createRange(); r.selectNodeContents(nm);
++      const tops = new Set([...r.getClientRects()].filter(q => q.width > 0 && q.height > 0).map(q => Math.round(q.top)));
++      return Math.max(1, tops.size);
++    };
++    const alignNames = () => {
++      const grid = $(".new-match-player-grid-v1");
++      if (grid) grid.classList.toggle("cue-name-wrap-v1", labelLines(1) > 1 || labelLines(2) > 1);
++    };
+     const update = () => {
+       const home = $("#cueHomeV1");
+       if (!home || !home.classList.contains("match-setup-active-v3")) return;      // only while the setup screen is open (no work during a match)
+       [1, 2].forEach(n => { const card = $("#newMatchPlayerCard" + n + "V1"); if (card) card.classList.toggle("is-empty-v1", !name(n)); });
++      alignNames();
+       const miss = [];
+       if (!name(1)) miss.push(1);
+       if (!name(2)) miss.push(2);
+@@ -133,6 +148,7 @@
+     ["click", "input", "change"].forEach(t => doc.addEventListener(t, later, true));
+     root.addEventListener("pageshow", update);
+     root.addEventListener("popstate", later);
++    root.addEventListener("resize", later);       // rotation / window size: the label wrap can change
+     update();
+     [300, 1200].forEach(ms => root.setTimeout(update, ms));     // the first selection (main player) is applied during boot
+   }
+diff --git a/tests/browser/d2-card-align-shots.mjs b/tests/browser/d2-card-align-shots.mjs
+new file mode 100644
+index 0000000..2243ebe
+--- /dev/null
++++ b/tests/browser/d2-card-align-shots.mjs
+@@ -0,0 +1,17 @@
++/* Evidence screenshots (isolated data): natural main-player-0 start screen. Usage: [P2_APP_ROOT=<unfixed tree>] AS_TAG=before|after AS_DIR=<dir> node tests/browser/d2-card-align-shots.mjs */
++import { startApp, seed } from "./p2-browser-kit.mjs";
++import fs from "node:fs";
++const W=ms=>new Promise(r=>setTimeout(r,ms));const tag=process.env.AS_TAG,dir=process.env.AS_DIR;fs.mkdirSync(dir,{recursive:true});
++for(const [lang,w] of [["ja",380],["ja",390],["en",390]]){
++  const s=seed({lang,rich:false,synthetic:false,link:false});const players=s.players.slice(0,3).map(p=>{const q={...p};delete q.isPrimary;return q});
++  const script=`try{if(!localStorage.getItem("__as")){localStorage.setItem("rotationScoreboard.players.v1",${JSON.stringify(JSON.stringify(players))});localStorage.setItem("rotationScoreboard.matchRecords.v1","[]");localStorage.setItem("cueScore.language.v1","${lang}");localStorage.setItem("__as","1")}}catch(e){}`;
++  const app=await startApp({lang,mode:"free",seedData:{script,players:[],records:[]},watchdogMs:200000});
++  const ev=c=>app.evalJs(`(async()=>{${c}})()`);
++  await app.cdp("Emulation.setDeviceMetricsOverride",{width:w,height:844,deviceScaleFactor:2,mobile:true});await app.cdp("Emulation.setSafeAreaInsetsOverride",{insets:{top:47,bottom:34,left:0,right:0}});await W(1000);
++  await ev(`document.querySelector('#cueDisciplineSwitcherV1 [data-discipline="9ball"]').click();await new Promise(r=>setTimeout(r,1000));return 1`);await W(1200);
++  const shot=async n=>{const r=await app.cdp("Page.captureScreenshot",{format:"png"});fs.writeFileSync(`${dir}/${lang}_${w}_${n}_${tag}.png`,Buffer.from(r.data,"base64"))};
++  await shot("A_natural_both_unselected");
++  await ev(`const p=CueScoreBuild18PlayerSelection.validPlayers();selectedRegisteredPlayer[2]=p[1].id;document.getElementById("p2Name").value=p[1].name;syncSelectedPlayerAvatarV2(2,p[1]);syncNewMatchNameV1("p2Name","p2NameDisplayV1");CueScoreBuild18PlayerSelection.refresh();await new Promise(r=>setTimeout(r,1200));return 1`);
++  await shot("B_natural_P1_unselected_P2_selected");
++  await app.close();
++}
+diff --git a/tests/browser/d2-card-align.mjs b/tests/browser/d2-card-align.mjs
+new file mode 100644
+index 0000000..b4e0ff3
+--- /dev/null
++++ b/tests/browser/d2-card-align.mjs
+@@ -0,0 +1,34 @@
++/* Real-app Chrome, ISOLATED data only (no user data): card alignment test (Build 99 STOP repair): the NATURAL "main player 0, >=2 registered" start screen (Official 103/104: no auto-promotion), plus P1-empty/P2-selected and P1-selected/P2-empty.
++ * The two player cards must keep the same top / height / Race-to row whether or not one guidance label wraps. Width sweep x letter-spacing (emulates other fonts' glyph widths) x 3 languages.
++ * Usage: [L=ja,en,zh-Hans] [WS=...] [SPACINGS=0,1.2] AP_OUT=<json> node tests/browser/d2-card-align.mjs */
++import { startApp, seed } from "./p2-browser-kit.mjs";
++import fs from "node:fs";
++const LANGS=(process.env.L||"ja").split(","),WS=(process.env.WS||"360,370,375,380,385,390,395,400,410,430").split(",").map(Number);
++const rows=[];const checks=[];let fail=0;const SP=(process.env.SPACINGS||"0,1.2").split(",");const W=ms=>new Promise(r=>setTimeout(r,ms));
++const ck=(ok,label,d)=>{checks.push({ok:!!ok,label,...(d===undefined?{}:{detail:d})});if(!ok){fail++;console.log("FAIL",label,JSON.stringify(d))}};
++const MEAS=`const R=n=>n.getBoundingClientRect(),cs=n=>getComputedStyle(n);const f=n=>{const c=document.querySelector("#newMatchPlayerCard"+n+"V1"),nm=c.querySelector(".new-match-player-name-v1"),lh=parseFloat(cs(nm).lineHeight)||parseFloat(cs(nm).fontSize)*1.2,race=c.querySelector(".new-match-race-row-v2");return {empty:c.classList.contains("is-empty-v1"),top:+R(c).top.toFixed(1),h:Math.round(R(c).height),lines:Math.max(1,Math.round(nm.scrollHeight/lh)),nameBox:Math.round(R(nm).height),raceTop:+(R(race).top-R(c).top).toFixed(1),text:nm.textContent.trim()}};
++const a=f(1),b=f(2);return {p1:a,p2:b,topDiff:+Math.abs(a.top-b.top).toFixed(1),hDiff:Math.abs(a.h-b.h),raceDiff:+Math.abs(a.raceTop-b.raceTop).toFixed(1),start:document.getElementById("startGameBtn").disabled}`;
++for(const lang of LANGS) for(const w of WS) for(const sp of SP){
++  const h=w>=410?932:844;
++  const s=seed({lang,rich:false,synthetic:false,link:false});
++  // 3 registered players, NONE is the main player (what remains after deleting the main player; Official 104: no auto-promotion)
++  const players=s.players.slice(0,3).map(p=>{const q={...p};delete q.isPrimary;return q});
++  const script=`try{if(!localStorage.getItem("__ap")){localStorage.setItem("rotationScoreboard.players.v1",${JSON.stringify(JSON.stringify(players))});localStorage.setItem("rotationScoreboard.matchRecords.v1","[]");localStorage.setItem("cueScore.language.v1","${lang}");localStorage.setItem("__ap","1")}}catch(e){}`;
++  const app=await startApp({lang,mode:"free",seedData:{script,players:[],records:[]},watchdogMs:300000});
++  const ev=async c=>JSON.parse(await app.evalJs(`(async()=>JSON.stringify(await (async()=>{${c}})()))()`));
++  await app.cdp("Emulation.setDeviceMetricsOverride",{width:w,height:h,deviceScaleFactor:2,mobile:true});await app.cdp("Emulation.setSafeAreaInsetsOverride",{insets:{top:47,bottom:34,left:0,right:0}});await W(1000);
++  if(+sp)await ev(`const st=document.createElement("style");st.textContent="body{letter-spacing:${sp}px!important}";document.body.appendChild(st);return 1`);
++  await ev(`document.querySelector('#cueDisciplineSwitcherV1 [data-discipline="9ball"]').click();await new Promise(r=>setTimeout(r,1000));return 1`);await W(800);
++  const nat=await ev(MEAS);rows.push({lang,w,sp,state:"NATURAL both unselected (main 0, 3 registered)",...nat});
++  await ev(`const p=CueScoreBuild18PlayerSelection.validPlayers();selectedRegisteredPlayer[2]=p[1].id;document.getElementById("p2Name").value=p[1].name;syncSelectedPlayerAvatarV2(2,p[1]);syncNewMatchNameV1("p2Name","p2NameDisplayV1");CueScoreBuild18PlayerSelection.refresh();await new Promise(r=>setTimeout(r,1200));return 1`);
++  rows.push({lang,w,sp,state:"NATURAL P1 empty / P2 selected",...await ev(MEAS)});
++  await ev(`const p=CueScoreBuild18PlayerSelection.validPlayers();selectedRegisteredPlayer[1]=p[0].id;document.getElementById("p1Name").value=p[0].name;syncSelectedPlayerAvatarV2(1,p[0]);syncNewMatchNameV1("p1Name","p1NameDisplayV1");selectedRegisteredPlayer[2]=null;document.getElementById("p2Name").value="";CueScoreBuild18PlayerSelection.refresh();document.dispatchEvent(new Event("input"));await new Promise(r=>setTimeout(r,1200));return 1`);
++  rows.push({lang,w,sp,state:"NATURAL P1 selected / P2 empty",...await ev(MEAS)});
++  await app.close();
++}
++for(const r of rows){const t=`${r.lang}/${r.w}/ls${r.sp} ${r.state.slice(8,34)}`;
++  ck(r.hDiff<=1&&r.topDiff<=1&&r.raceDiff<=1,`${t}: both cards share top / height / Race-to row`,{top:r.topDiff,h:r.hDiff,race:r.raceDiff,p1:r.p1.h,p2:r.p2.h});
++  ck([176,192].includes(r.p1.h)||r.p1.h>176,`${t}: card height is a design value (176 one line / 192 two lines or taller for Skill Level)`,r.p1.h);
++  ck(r.start===true,`${t}: start button stays disabled while a player is unselected`);}
++if(process.env.AP_OUT)fs.writeFileSync(process.env.AP_OUT,JSON.stringify({timestamp:new Date().toISOString(),checks,rows,pass:fail===0},null,1)+"\n");
++console.log(fail?`FAIL ${fail}/${checks.length}`:`PASS ${checks.length}/${checks.length}`);process.exit(fail?1:0);
+diff --git a/tests/d2-card-alignment.test.mjs b/tests/d2-card-alignment.test.mjs
+new file mode 100644
+index 0000000..62a1b72
+--- /dev/null
++++ b/tests/d2-card-alignment.test.mjs
+@@ -0,0 +1,26 @@
++import test from "node:test";
++import assert from "node:assert/strict";
++import { readFileSync } from "node:fs";
++
++const read = f => readFileSync(new URL(`../${f}`, import.meta.url), "utf8");
++const js = read("match-setup-ux-v1.js"), css = read("match-setup-ux-v1.css"), html = read("index.html"), b18 = read("final-ui-build18.js");
++
++test("Build 99 STOP repair: the label wrap is MEASURED (font independent) and both name boxes get the same two-line height only when one label wraps", () => {
++  assert.match(js, /const r = doc\.createRange\(\); r\.selectNodeContents\(nm\);/, "line count from the text node, not from the box height");
++  assert.match(js, /grid\.classList\.toggle\("cue-name-wrap-v1", labelLines\(1\) > 1 \|\| labelLines\(2\) > 1\)/);
++  assert.match(js, /alignNames\(\);\n/, "evaluated on every setup refresh");
++  assert.match(js, /root\.addEventListener\("resize", later\);/, "re-measured when the window size changes");
++  const rules = css.match(/\.new-match-player-grid-v1\.cue-name-wrap-v1 [^{]*\{[^}]*\}/g) || [];
++  assert.equal(rules.length, 2);
++  assert.ok(rules.every(r => /min-height:44px!important/.test(r)));
++  assert.ok(/:not\(\.is-empty-v1\)[^{]*\{min-height:44px!important;line-height:44px!important\}/.test(rules[1]), "selected names stay vertically centred in the same two-line box");
++});
++
++test("the approved D2 sizes and the main-player rules are untouched (no auto-promotion, no forced P1 selection)", () => {
++  assert.match(css, /\.cue-player-stack-v2 \.is-empty-v1 \.new-match-player-select-v1 \.new-match-player-name-v1\{font-size:18px!important/);
++  assert.match(css, /:not\(\.is-empty-v1\) \.new-match-player-select-v1 \.new-match-player-name-v1\{font-size:23px!important/);
++  assert.match(html, /function primaryPlayerV1\(players=readPlayerLibrary\(\)\) \{\s*return players\.find\(player=>player\.isPrimary===true\) \|\| null;/);
++  assert.match(html, /const primary=primaryPlayerV1\(\);\s*if \(!primary\) return false;/, "no main player -> nothing is selected automatically (Official 103/104)");
++  assert.match(b18, /if\(players\.length&& !selected\(1\)\)initializePrimaryMatchSetupV1\(\{force:true\}\);/);
++  assert.match(b18, /start\.disabled=players\.length<2\|\|!selected\(1\)\|\|!selected\(2\)\|\|String\(selectedRegisteredPlayer\[1\]\)===String\(selectedRegisteredPlayer\[2\]\);/, "start condition unchanged");
++});
+diff --git a/tests/fixtures/p2/existing-tests-baseline.json b/tests/fixtures/p2/existing-tests-baseline.json
+index f3b1245..c326af5 100644
+--- a/tests/fixtures/p2/existing-tests-baseline.json
++++ b/tests/fixtures/p2/existing-tests-baseline.json
+@@ -235,6 +235,12 @@
+       "skips": 0,
+       "updated_in": "D2 spacing tune (PO 2026-11-03): heading gap pin clamp(18px,10vh,96px) -> clamp(24px,6vh,60px); no assertion weakened (see version-d2-spacing-test-change-map.json)"
+     },
++    "d2-card-alignment.test.mjs": {
++      "sha256": "3be0f2de66fade4902e055a28542dd91c8cbb64d90165fff5793e11472c539f3",
++      "tests": 2,
++      "skips": 0,
++      "updated_in": "Build 99 STOP repair (2026-11-03): new test, no existing assertion changed"
++    },
+     "delete-workflows.test.mjs": {
+       "sha256": "bb0c346240a2fafc93193300709a7d66ac18aaaa08739e398a3017508636eac0",
+       "tests": 0,
+diff --git a/tests/fixtures/p2/version-d2-card-alignment-test-change-map.json b/tests/fixtures/p2/version-d2-card-alignment-test-change-map.json
+new file mode 100644
+index 0000000..3d5dcb3
+--- /dev/null
++++ b/tests/fixtures/p2/version-d2-card-alignment-test-change-map.json
+@@ -0,0 +1,9 @@
++{
++ "gate": "Build 99 STOP repair: left/right player cards misaligned when only one guidance label wraps (natural main-player-0 start).",
++ "changedTestFiles": {},
++ "newTests": [
++  "tests/d2-card-alignment.test.mjs (2 tests)",
++  "tests/browser/d2-card-align.mjs (width sweep x glyph-width variants x 3 languages, natural main-0 state)"
++ ],
++ "note": "No existing test or assertion was changed, weakened or skipped; the repair is verified by new tests (negative control: the new browser test fails on unfixed main with 191/176pt)."
++}
+\ No newline at end of file
+-- 
+2.43.0
+

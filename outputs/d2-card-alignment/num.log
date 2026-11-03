@@ -1,0 +1,21 @@
+ok   real-coordinate Other selection focuses the numeric input newMatchRaceCustomInputV1
+ok   numeric input has a clear 2px neutral keyboard ring {
+  id: 'newMatchRaceCustomInputV1',
+  outlineColor: 'rgb(23, 23, 23)',
+  outlineStyle: 'solid',
+  outlineWidth: '2px',
+  outlineOffset: '2px',
+  boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 4px',
+  height: 46,
+  inside: true
+}
+ok   numeric input focus has no yellow outline or shadow {
+  outlineColor: 'rgb(23, 23, 23)',
+  boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 4px'
+}
+ok   white contrast halo preserves visibility on dark and light surroundings rgb(255, 255, 255) 0px 0px 0px 4px
+ok   focused numeric input remains a 44px+ visible target { x: 155, y: 319, w: 244, h: 46 }
+ok   Tab moves from the numeric input to Apply 
+ok   the adjacent Apply button keeps the shared yellow focus ring { outlineColor: 'rgb(255, 213, 74)', outlineWidth: '3px' }
+ok   Shift+Tab returns to the numeric input 
+PASS 8/8

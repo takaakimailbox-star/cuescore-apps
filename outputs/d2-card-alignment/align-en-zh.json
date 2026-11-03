@@ -1,0 +1,4040 @@
+{
+ "timestamp": "2026-11-03T03:06:11.999Z",
+ "checks": [
+  {
+   "ok": true,
+   "label": "en/320/ls0 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls0 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls0 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls0 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls0 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls0 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls0 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls0 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls0 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls1.2 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls1.2 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls1.2 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls1.2 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls1.2 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls1.2 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls1.2 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls1.2 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/320/ls1.2 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls0 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls0 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls0 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls0 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls0 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls0 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls0 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls0 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls0 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls1.2 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls1.2 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls1.2 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls1.2 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls1.2 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls1.2 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls1.2 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls1.2 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/360/ls1.2 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls0 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls0 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls0 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls0 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls0 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls0 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls0 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls0 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls0 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls1.2 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls1.2 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls1.2 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls1.2 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls1.2 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls1.2 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls1.2 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls1.2 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/375/ls1.2 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls0 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls0 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls0 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls0 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls0 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls0 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls0 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls0 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls0 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls1.2 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls1.2 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls1.2 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls1.2 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls1.2 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls1.2 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls1.2 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls1.2 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/390/ls1.2 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls0 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls0 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls0 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls0 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls0 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls0 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls0 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls0 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls0 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls1.2 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls1.2 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls1.2 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls1.2 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls1.2 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls1.2 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls1.2 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls1.2 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "en/400/ls1.2 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls0 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls0 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls0 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls0 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls0 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls0 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls0 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls0 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls0 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls1.2 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls1.2 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls1.2 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls1.2 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls1.2 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls1.2 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls1.2 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls1.2 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "en/410/ls1.2 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls0 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls0 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls0 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls0 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls0 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls0 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls0 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls0 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls0 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls1.2 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls1.2 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls1.2 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls1.2 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls1.2 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls1.2 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls1.2 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls1.2 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "en/430/ls1.2 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls0 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls0 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls0 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls0 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls0 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls0 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls0 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls0 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls0 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls1.2 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls1.2 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls1.2 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls1.2 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls1.2 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls1.2 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls1.2 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls1.2 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/320/ls1.2 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls0 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls0 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls0 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls0 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls0 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls0 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls0 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls0 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls0 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls1.2 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls1.2 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls1.2 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls1.2 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls1.2 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls1.2 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls1.2 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls1.2 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/360/ls1.2 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls0 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls0 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls0 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls0 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls0 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls0 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls0 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls0 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls0 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls1.2 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls1.2 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls1.2 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls1.2 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls1.2 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls1.2 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls1.2 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 192,
+    "p2": 192
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls1.2 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 192
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/375/ls1.2 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls0 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls0 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls0 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls0 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls0 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls0 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls0 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls0 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls0 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls1.2 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls1.2 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls1.2 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls1.2 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls1.2 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls1.2 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls1.2 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls1.2 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/390/ls1.2 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls0 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls0 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls0 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls0 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls0 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls0 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls0 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls0 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls0 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls1.2 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls1.2 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls1.2 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls1.2 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls1.2 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls1.2 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls1.2 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls1.2 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/400/ls1.2 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls0 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls0 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls0 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls0 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls0 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls0 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls0 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls0 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls0 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls1.2 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls1.2 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls1.2 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls1.2 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls1.2 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls1.2 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls1.2 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls1.2 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/410/ls1.2 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls0 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls0 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls0 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls0 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls0 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls0 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls0 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls0 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls0 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls1.2 both unselected (main 0, 3: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls1.2 both unselected (main 0, 3: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls1.2 both unselected (main 0, 3: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls1.2 P1 empty / P2 selected: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls1.2 P1 empty / P2 selected: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls1.2 P1 empty / P2 selected: start button stays disabled while a player is unselected"
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls1.2 P1 selected / P2 empty: both cards share top / height / Race-to row",
+   "detail": {
+    "top": 0,
+    "h": 0,
+    "race": 0,
+    "p1": 176,
+    "p2": 176
+   }
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls1.2 P1 selected / P2 empty: card height is a design value (176 one line / 192 two lines or taller for Skill Level)",
+   "detail": 176
+  },
+  {
+   "ok": true,
+   "label": "zh-Hans/430/ls1.2 P1 selected / P2 empty: start button stays disabled while a player is unselected"
+  }
+ ],
+ "rows": [
+  {
+   "lang": "en",
+   "w": 320,
+   "sp": "0",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 320,
+   "sp": "0",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 320,
+   "sp": "0",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 320,
+   "sp": "1.2",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 320,
+   "sp": "1.2",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 320,
+   "sp": "1.2",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 360,
+   "sp": "0",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 360,
+   "sp": "0",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 360,
+   "sp": "0",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 360,
+   "sp": "1.2",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 360,
+   "sp": "1.2",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 360,
+   "sp": "1.2",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 375,
+   "sp": "0",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 375,
+   "sp": "0",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 375,
+   "sp": "0",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 375,
+   "sp": "1.2",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 375,
+   "sp": "1.2",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 375,
+   "sp": "1.2",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 390,
+   "sp": "0",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 390,
+   "sp": "0",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 390,
+   "sp": "0",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 390,
+   "sp": "1.2",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 390,
+   "sp": "1.2",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 390,
+   "sp": "1.2",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 400,
+   "sp": "0",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 400,
+   "sp": "0",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 400,
+   "sp": "0",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 400,
+   "sp": "1.2",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 400,
+   "sp": "1.2",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 400,
+   "sp": "1.2",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 410,
+   "sp": "0",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 410,
+   "sp": "0",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 410,
+   "sp": "0",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 410,
+   "sp": "1.2",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 410,
+   "sp": "1.2",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 410,
+   "sp": "1.2",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 430,
+   "sp": "0",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 430,
+   "sp": "0",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 430,
+   "sp": "0",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 430,
+   "sp": "1.2",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 430,
+   "sp": "1.2",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "Select player"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "en",
+   "w": 430,
+   "sp": "1.2",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "Select opponent"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 320,
+   "sp": "0",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 320,
+   "sp": "0",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 320,
+   "sp": "0",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 320,
+   "sp": "1.2",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 320,
+   "sp": "1.2",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 320,
+   "sp": "1.2",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 360,
+   "sp": "0",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 360,
+   "sp": "0",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 360,
+   "sp": "0",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 360,
+   "sp": "1.2",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 360,
+   "sp": "1.2",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 360,
+   "sp": "1.2",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 375,
+   "sp": "0",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 375,
+   "sp": "0",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 375,
+   "sp": "0",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 375,
+   "sp": "1.2",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 375,
+   "sp": "1.2",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 375,
+   "sp": "1.2",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 390,
+   "sp": "0",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 390,
+   "sp": "0",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 390,
+   "sp": "0",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 390,
+   "sp": "1.2",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 390,
+   "sp": "1.2",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 390,
+   "sp": "1.2",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 400,
+   "sp": "0",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 400,
+   "sp": "0",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 400,
+   "sp": "0",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 400,
+   "sp": "1.2",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 400,
+   "sp": "1.2",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 400,
+   "sp": "1.2",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 410,
+   "sp": "0",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 410,
+   "sp": "0",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 410,
+   "sp": "0",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 410,
+   "sp": "1.2",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 410,
+   "sp": "1.2",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 410,
+   "sp": "1.2",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 430,
+   "sp": "0",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 430,
+   "sp": "0",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 430,
+   "sp": "0",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 430,
+   "sp": "1.2",
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 430,
+   "sp": "1.2",
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择球员"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "zh-Hans",
+   "w": 430,
+   "sp": "1.2",
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "选择对手"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  }
+ ],
+ "pass": true
+}

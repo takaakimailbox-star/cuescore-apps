@@ -1,0 +1,815 @@
+{
+ "timestamp": "2026-11-03T02:55:24.260Z",
+ "rows": [
+  {
+   "lang": "ja",
+   "w": 360,
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 360,
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 360,
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 370,
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 370,
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 370,
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 375,
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 375,
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 375,
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 251.1,
+    "h": 192,
+    "lines": 1,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 251.1,
+    "h": 192,
+    "lines": 2,
+    "nameBox": 44,
+    "raceTop": 131,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 380,
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.5,
+    "h": 191,
+    "lines": 2,
+    "nameBox": 43,
+    "raceTop": 130.2,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 7.6,
+   "hDiff": 15,
+   "raceDiff": 15.2,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 380,
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.5,
+    "h": 191,
+    "lines": 2,
+    "nameBox": 43,
+    "raceTop": 130.2,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 7.6,
+   "hDiff": 15,
+   "raceDiff": 15.2,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 380,
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 385,
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 251.5,
+    "h": 191,
+    "lines": 2,
+    "nameBox": 43,
+    "raceTop": 130.2,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 7.6,
+   "hDiff": 15,
+   "raceDiff": 15.2,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 385,
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 251.5,
+    "h": 191,
+    "lines": 2,
+    "nameBox": 43,
+    "raceTop": 130.2,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 7.6,
+   "hDiff": 15,
+   "raceDiff": 15.2,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 385,
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 390,
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 390,
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 390,
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 395,
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 395,
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 395,
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 400,
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 400,
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 400,
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 259.1,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 410,
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 410,
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 410,
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 430,
+   "state": "NATURAL both unselected (main 0, 3 registered)",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 430,
+   "state": "NATURAL P1 empty / P2 selected",
+   "p1": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "プレーヤーを選択"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "さくら"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  },
+  {
+   "lang": "ja",
+   "w": 430,
+   "state": "NATURAL P1 selected / P2 empty",
+   "p1": {
+    "empty": false,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "なおき"
+   },
+   "p2": {
+    "empty": true,
+    "top": 299.8,
+    "h": 176,
+    "lines": 1,
+    "nameBox": 28,
+    "raceTop": 115,
+    "text": "対戦相手を選択"
+   },
+   "topDiff": 0,
+   "hDiff": 0,
+   "raceDiff": 0,
+   "start": true
+  }
+ ]
+}

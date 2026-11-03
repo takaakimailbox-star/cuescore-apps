@@ -4,7 +4,7 @@ Base: main 6c3eaec7df2040ef47662d8cb06c26a77eccc4e4. Branch cloud/d2-card-alignm
 Left / right player cards lose the same top / height / Race-to row when ONE guidance label wraps: "プレーヤーを選択" (P1, 8 characters) is longer than "対戦相手を選択" (P2). The two-line equalisation existed only for fixed widths (<=379px, English <=399px), but the wrap width depends on the font (cloud Chrome: ja 380-385pt; Mac: 390pt). Reported: left 191pt / right 176pt, height diff 15pt, top diff 7.6pt (ja / 390pt, both unselected).
 ## Reachability (not a forced-test-only case)
 Official 103/104: the main player may be 0 and no other Player is promoted automatically; primaryPlayerV1() is null then and initializePrimaryMatchSetupV1() returns false. With the main player deleted and >=2 players left, the start screen has P1 AND P2 unselected through normal use (verified with isolated data: 3 registered players, none is main) and "P1 unselected / P2 selected" follows after one pick. The auto-selection / main-player rules are NOT changed and P1 is not forced.
-## Repair (match-setup-ux-v1.js +19 lines, match-setup-ux-v1.css +3 lines)
+## Repair (match-setup-ux-v1.js +16 lines, match-setup-ux-v1.css +3 lines)
 - `labelLines(n)`: real line count of each guidance label (Range over the text node, independent of the box height).
 - `alignNames()` (run on every setup refresh and on resize): toggles `cue-name-wrap-v1` on the card grid when either label wraps.
 - CSS: with that class both name boxes get the same two-line height (min-height 44px; selected names stay centred, line-height 44px). Nothing changes when both labels fit on one line (approved 176pt cards at 390pt are untouched).
