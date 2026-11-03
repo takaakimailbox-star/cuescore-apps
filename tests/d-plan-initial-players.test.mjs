@@ -35,15 +35,19 @@ test("D plan: Score 2 is selected as the second player on the first launch only;
   assert.match(b18, /start\.disabled=players\.length<2\|\|!selected\(1\)\|\|!selected\(2\)\|\|String\(selectedRegisteredPlayer\[1\]\)===String\(selectedRegisteredPlayer\[2\]\);/, "start condition unchanged");
 });
 
-test("D plan: unselected = light-grey dashed card and avatar ring, selected = solid card with a ~20px name, wider discipline-to-card gap; no red", () => {
-  const d = css.slice(css.indexOf("/* D plan (PO 2026-11-01)"));
+test("D / D2 plan: unselected = light-grey dashed card and avatar ring, selected = solid card; D2 sizes (68px avatar, 23px name, 18px guidance, 17px Race to); no red", () => {
+  const d = css.slice(css.indexOf("/* D2 final design (PO 2026-11-02)"));
   assert.match(d, /\.new-match-player-card-v1\.is-empty-v1\{border:1\.5px dashed #c8c8c4!important;background:#fff!important\}/);
   assert.match(d, /\.new-match-avatar-v1\.has-player-avatar-v2\{box-sizing:border-box;border:1\.5px dashed #bcbcb8!important;border-radius:50%/);
-  assert.match(d, /:not\(\.is-empty-v1\) \.new-match-player-select-v1 \.new-match-player-name-v1\{font-size:20px!important/);
-  assert.match(d, /\.cue-new-match-summary-v2\{margin:0 0 clamp\(12px,3\.2vh,30px\)!important\}/);
+  assert.match(d, /\.cue-player-stack-v2 \.new-match-player-select-v1 \.new-match-avatar-v1\.has-player-avatar-v2\{width:68px!important;height:68px!important/);
+  assert.match(d, /:not\(\.is-empty-v1\) \.new-match-player-select-v1 \.new-match-player-name-v1\{font-size:23px!important/);
+  assert.match(d, /\.is-empty-v1 \.new-match-player-select-v1 \.new-match-player-name-v1\{font-size:18px!important/);
+  assert.match(d, /\.new-match-race-row-v2 strong\{font-size:17px!important\}/);
+  assert.match(d, /\.cue-new-match-summary-v2\{margin:0 0 clamp\(24px,6vh,60px\)!important\}/);
   const colors = [...d.matchAll(/#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b/g)].map(m => m[1].length === 3 ? m[1].replace(/./g, "$&$&") : m[1]);
-  assert.ok(colors.length >= 4);
-  for (const c of colors) { const [r, g, b] = [0, 2, 4].map(k => parseInt(c.slice(k, k + 2), 16)); assert.ok(Math.abs(r - g) <= 6 && Math.abs(g - b) <= 6, `#${c} is neutral grey / white (no red, no yellow)`); }
+  assert.ok(colors.length >= 6);
+  // neutral greys / white, plus the calm slate of the decorative (i) (#5a6b7d): never red / yellow
+  for (const c of colors) { const [r, g, b] = [0, 2, 4].map(k => parseInt(c.slice(k, k + 2), 16)); assert.ok(r <= b + 6 && Math.abs(r - g) <= 22, `#${c} is neutral / cool (no red, no yellow)`); }
   assert.ok(!/red/i.test(d.replace(/\/\*[\s\S]*?\*\//g, "")), "no red in the rules (comments excluded)");
   assert.ok(!/dotted|underline/.test(d.replace(/no underline/g, "")), "no dotted / underline");
 });

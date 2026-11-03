@@ -230,10 +230,10 @@
       "skips": 0
     },
     "d-plan-initial-players.test.mjs": {
-      "sha256": "5c61fc151b641d0155f9d7b21d6948eab4d94fe8a04cd0298e0347bda960afef",
+      "sha256": "8b7ef58d9f01d67f70a68c106a4c41337db48b0551166c6b493ebb8989ae73a1",
       "tests": 4,
       "skips": 0,
-      "updated_in": "D plan (PO 2026-11-01): new test (initial players safety, first-launch Score 2, D card style)"
+      "updated_in": "D2 spacing tune (PO 2026-11-03): heading gap pin clamp(18px,10vh,96px) -> clamp(24px,6vh,60px); no assertion weakened (see version-d2-spacing-test-change-map.json)"
     },
     "delete-workflows.test.mjs": {
       "sha256": "bb0c346240a2fafc93193300709a7d66ac18aaaa08739e398a3017508636eac0",
@@ -817,10 +817,10 @@
       "skips": 0
     },
     "setup-card-layout.test.mjs": {
-      "sha256": "aecf2c48c03a3cc2d7f2e841027151ac578721028cd0f1a05bf191af789e5843",
+      "sha256": "cd877241399cc73bfb8a44dc23dc4cbe59fa835b71bf858f8c01f3ac20ab9c96",
       "tests": 4,
       "skips": 0,
-      "updated_in": "Build 96 C-plan match-setup implementation (new test)"
+      "updated_in": "D2 final design (PO 2026-11-02): assertions updated old->new (see version-d2-test-change-map.json); no skip added, no assertion weakened"
     },
     "setup-numeric-menu.test.mjs": {
       "sha256": "fd09d490d84ccb4feba17f86349bde939360145bbfdcf8f4965ad30903bc66f0",

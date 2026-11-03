@@ -1,0 +1,23 @@
+{
+ "gate": "D2 final design (PO 2026-11-02): bigger cards/avatar/names, guidance inside the unselected card (decorative (i)), blue-grey note below the card removed, footer reason folded visually but kept for VoiceOver, calmer shot clock, spare height spread over the gaps.",
+ "changedTestFiles": {
+  "setup-card-layout.test.mjs": {
+   "before": "aecf2c48c03a3cc2d7f2e841027151ac578721028cd0f1a05bf191af789e5843",
+   "after": "cd877241399cc73bfb8a44dc23dc4cbe59fa835b71bf858f8c01f3ac20ab9c96",
+   "oldToNew": "test 'C plan: the opponent guidance sits below the opponent card ...' (asserted oppNote, #cueSetupOppNoteV1, .cue-setup-note-v1 rules) -> 'D2: the blue-grey note is gone; guidance inside the card; footer reason keeps wording + aria-label/aria-description, folded visually (not display:none)'. Same coverage of approved keys / no new wording; adds the VoiceOver-preservation assertions."
+  },
+  "d-plan-initial-players.test.mjs": {
+   "before": "5c61fc151b641d0155f9d7b21d6948eab4d94fe8a04cd0298e0347bda960afef",
+   "after": "77c4df6bfa7129741d973501574732ff230abc6696a85dc3c74f2087368b490f",
+   "oldToNew": "D card style test (20px name, 12/3.2vh/30 gap) -> D2 values (68px avatar, 23px name, 18px guidance, 17px Race to, 18/10vh/96 gap); still asserts dashed unselected card + ring, solid selected, neutral colours, no red/yellow, no dotted/underline."
+  }
+ },
+ "changedBrowserTests": {
+  "setup-card-layout.mjs": "opponent-note position assertion -> note is gone (m.note===null)",
+  "d-plan-setup.mjs": "selected name 20->23pt; heading gap C+4..+14 -> >=C+30; 'note==footer' -> no note + approved reason kept in the accessibility tree"
+ },
+ "newTests": [
+  "tests/browser/d2-final.mjs (product-level D2 measurements, 1422 checks)"
+ ],
+ "pins": "index.html unchanged by this gate (no digest pin changes)"
+}
