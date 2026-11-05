@@ -158,7 +158,7 @@ async function launchAndMeasure() {
 }
 
 async function insetsMode() {
-  adbTry("pm clear " + PKG);
+  adb("install", "-r", apk); adbTry("pm clear " + PKG);
   const N = 4, rows = [];
   for (let i = 1; i <= N; i++) {
     adbTry(`am force-stop ${PKG}`); await sleep(1500);
@@ -232,7 +232,7 @@ async function probeMode() {
 }
 
 async function backMode() {
-  adbTry("pm clear " + PKG);
+  adb("install", "-r", apk); adbTry("pm clear " + PKG);
   const m = await launchAndMeasure(); emit("STARTUP", { label, ...m });
   await connect(); await homeReady(); await sleep(2000);
   const ok1 = await ev(`window.CueScoreAndroidBackV1.setPolicy('proposal')`);
