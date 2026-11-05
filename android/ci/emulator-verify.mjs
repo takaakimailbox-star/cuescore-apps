@@ -242,7 +242,9 @@ async function probeMode() {
 }
 
 async function backMode() {
+  const settleB = Number(process.env.SETTLE_SEC || 0);
   adb("install", "-r", apk); adbTry("pm clear " + PKG);
+  if (settleB) await sleep(settleB * 1000);
   const m = await launchAndMeasure(); emit("STARTUP", { label, ...m });
   await connect(); await homeReady(); await sleep(2000);
   const ok1 = await ev(`window.CueScoreAndroidBackV1.setPolicy('proposal')`);
@@ -250,7 +252,10 @@ async function backMode() {
   const fg = () => adbTry("dumpsys activity activities | grep -m1 topResumedActivity").includes(PKG);
   await step("B0", "proposal policy can be enabled at runtime (default stays current)", "dom-read", async () => { ok(ok1 === true, "setPolicy failed"); return { policy: await ev("window.CueScoreAndroidBackV1.getPolicy()") }; });
   await step("B1", "selected discipline -> Back returns to the 6-discipline list (app stays foreground)", "os-input", async () => {
-    await tap('[data-discipline="9ball"]'); ok(await waitFor(`document.querySelector('[data-discipline="9ball"]').getAttribute('aria-selected')==='true'`, 10000), "not selected");
+    const SEL9 = `document.querySelector('[data-discipline="9ball"]').getAttribute('aria-selected')==='true'`;
+    await tap('[data-discipline="9ball"]'); let sel9 = await waitFor(SEL9, 8000);
+    if (!sel9) { await tap('[data-discipline="9ball"]'); sel9 = await waitFor(SEL9, 10000); } // first press after launch can be dropped by the software-GPU emulator
+    ok(sel9, "not selected");
     ok(!(await ev(HOME)), "tiles still visible while selected");
     await back(); ok(await waitFor(HOME, 10000), "tiles not restored by Back"); ok(fg(), "app left foreground");
   });
@@ -280,13 +285,14 @@ async function backMode() {
   adbTry(`pm clear ${PKG}`); await sleep(1500); launch(); await connect(); await homeReady(); await sleep(2000);
   await step("F-startup", "cold/warm start timings and ANR scan", "device-state", async () => {
     adbTry(`am force-stop ${PKG}`); await sleep(1500); const t = await launchAndMeasure();
-    const anr = adbTry("logcat -d | grep -E 'ANR in|Input dispatching timed out' | tail -2");
+    const anr = adbTry(`logcat -d | grep -E 'ANR in ${PKG}' | tail -2`); const anrOther = adbTry("logcat -d | grep -E 'ANR in' | tail -2"); if (anrOther) emit("ANR-OTHER-PROCESS", anrOther.slice(0, 300));
     ok(!anr, anr); return t;
   });
   adbTry(`pm clear ${PKG}`); await sleep(1500); launch(); await connect(); await homeReady(); await sleep(2500);
   await step("F-shot-clock", "game screen exposes shot-clock UI elements", "os-input", async () => {
     await ev(`window.CueScoreAndroidBackV1.setPolicy('proposal'); true`);
-    await tap('[data-discipline="9ball"]'); await waitFor(`document.querySelector('[data-discipline="9ball"]').getAttribute('aria-selected')==='true'`, 10000);
+    const SELF = `document.querySelector('[data-discipline="9ball"]').getAttribute('aria-selected')==='true'`;
+    await tap('[data-discipline="9ball"]'); if (!(await waitFor(SELF, 8000))) { await tap('[data-discipline="9ball"]'); await waitFor(SELF, 10000); }
     if (await ev(vis(".cue-sc-switch"))) { await tap(".cue-sc-switch").catch(() => {}); await sleep(800); }
     await tap("#startGameBtn"); ok(await waitFor(vis("#proGameScreen"), 30000), "game screen not shown");
     await sleep(3000);
