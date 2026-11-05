@@ -15,6 +15,8 @@ const consoleErrors = [];
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const adb = (...a) => execFileSync("adb", a, { encoding: "utf8", maxBuffer: 64 << 20 }).trim();
 const adbSh = cmd => adb("shell", cmd);
+const adbTry = cmd => { try { return adb("shell", cmd); } catch (e) { return ""; } };
+const launch = () => adbTry(`am start -W -n ${PKG}/.MainActivity`);
 const shot = name => {
   const f = path.join(outDir, `${label}-${name}.png`);
   try { fs.writeFileSync(f, execFileSync("adb", ["exec-out", "screencap", "-p"], { maxBuffer: 64 << 20 })); } catch (e) { return null; }
@@ -26,7 +28,7 @@ async function connect(timeoutMs = 90000) {
   const t0 = Date.now();
   while (Date.now() - t0 < timeoutMs) {
     try {
-      const pid = adbSh(`pidof ${PKG}`).split(/\s+/)[0];
+      const pid = adbTry(`pidof ${PKG}`).split(/\s+/)[0];
       if (pid) {
         try { adb("forward", "--remove", "tcp:9222"); } catch (_) {}
         adb("forward", "tcp:9222", `localabstract:webview_devtools_remote_${pid}`);
@@ -104,7 +106,7 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     return info;
   });
   await step("E03", "Launch + WebView attach + home visible", "os-input", async () => {
-    adbSh(`monkey -p ${PKG} -c android.intent.category.LAUNCHER 1`);
+    launch();
     const url = await connect();
     ok(await homeReady(), "home not visible within 60s");
     shot("01-home");
@@ -170,16 +172,16 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     await back();
     await sleep(1200);
     const top = adbSh("dumpsys activity activities | grep -E 'topResumedActivity|mResumedActivity' | head -2");
-    const alive = adbSh(`pidof ${PKG}`);
+    const alive = adbTry(`pidof ${PKG}`);
     ok(alive, "process died on root Back");
     return { top: top.slice(0, 160), alive: true };
   });
   await step("E11", "Resume after background keeps state + data", "os-input", async () => {
-    adbSh(`monkey -p ${PKG} -c android.intent.category.LAUNCHER 1`);
+    launch();
     await connect(); ok(await homeReady(), "home after resume");
     await ev(`localStorage.setItem('__emu_probe','1'); true`);
     adbSh("input keyevent KEYCODE_HOME"); await sleep(2500);
-    adbSh(`monkey -p ${PKG} -c android.intent.category.LAUNCHER 1`); await sleep(1500);
+    launch(); await sleep(1500);
     await connect(); ok(await homeReady(), "home after HOME→relaunch");
     ok((await ev(`localStorage.getItem('__emu_probe')`)) === "1", "probe lost");
     shot("06-resume");
@@ -187,7 +189,7 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
   });
   await step("E12", "Process kill → data persists", "device-state", async () => {
     adbSh(`am force-stop ${PKG}`); await sleep(1500);
-    adbSh(`monkey -p ${PKG} -c android.intent.category.LAUNCHER 1`);
+    launch();
     await connect(); ok(await homeReady(), "home after kill");
     const v = await ev(`localStorage.getItem('__emu_probe')`);
     ok(v === "1", "probe lost after kill: " + v);
@@ -224,7 +226,7 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
   await step("E16", "Rotation to landscape and back: no crash, app still usable", "os-input", async () => {
     adbSh("settings put system accelerometer_rotation 0"); adbSh("settings put system user_rotation 1"); await sleep(2500);
     shot("09-landscape");
-    ok(adbSh(`pidof ${PKG}`), "process died on rotate");
+    ok(adbTry(`pidof ${PKG}`), "process died on rotate");
     adbSh("settings put system user_rotation 0"); await sleep(2000);
     await connect(); ok(await homeReady(), "home after rotate back");
     shot("10-portrait-again");
