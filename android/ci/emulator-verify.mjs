@@ -120,7 +120,7 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
 (async () => {
   let info = {};
   await step("E01", "APK install", "device-state", async () => {
-    adbSh("logcat -c");
+    adbTry("logcat -c");
     const o = adb("install", "-r", apk);
     ok(/Success/.test(o), o);
     return o;
@@ -128,7 +128,7 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
   await step("E02", "Device / API / PAGE_SIZE", "device-state", async () => {
     info = {
       sdk: adbSh("getprop ro.build.version.sdk"), release: adbSh("getprop ro.build.version.release"),
-      abi: adbSh("getprop ro.product.cpu.abi"), pagesize: adbSh("getconf PAGE_SIZE"),
+      abi: adbSh("getprop ro.product.cpu.abi"), pagesize: (adbTry("getconf PAGE_SIZE") || (() => { const kb = adbTry("cat /proc/self/smaps | grep -m1 KernelPageSize").match(/(\d+)\s*kB/); return kb ? String(+kb[1] * 1024) : "unknown"; })()),
       kernel: adbSh("uname -r"), size: adbSh("wm size"), density: adbSh("wm density"),
       pkg16k: adbTry(`dumpsys package ${PKG} | grep -i -E "minSdk|targetSdk" | head -2`),
       avd: adbTry("getprop ro.boot.qemu.avd_name"), flavor: adbTry("getprop ro.build.flavor"), tags: adbTry("getprop ro.system.build.tags")
