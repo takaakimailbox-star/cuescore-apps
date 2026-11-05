@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Auto Backup / device transfer are disabled pending a PO decision on cloud-backup of match data
+     (manual JSON backup is the supported migration path and stays iOS-compatible). -->
+<data-extraction-rules>
+    <cloud-backup><exclude domain="root"/><exclude domain="file"/><exclude domain="database"/><exclude domain="sharedpref"/><exclude domain="external"/></cloud-backup>
+    <device-transfer><exclude domain="root"/><exclude domain="file"/><exclude domain="database"/><exclude domain="sharedpref"/><exclude domain="external"/></device-transfer>
+</data-extraction-rules>

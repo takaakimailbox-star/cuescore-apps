@@ -5,6 +5,9 @@
   "ios": {
     "contentInset": "never",
     "preferredContentMode": "mobile"
+  },
+  "android": {
+    "allowMixedContent": false,
+    "webContentsDebuggingEnabled": false
   }
 }
-
