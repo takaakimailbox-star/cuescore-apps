@@ -34,13 +34,36 @@
     }
     return node.getClientRects().length > 0;
   };
+  /* ---- PROTOTYPE (not the formal spec until Product Owner approval; default policy stays "current") ----
+     Proposal "proposal": modal -> close it; sub-screen Back controls (as today); Players/History/Settings -> Home tab;
+     a discipline selected on Home -> back to the 6-discipline list (Home tab); Home list -> minimize (unhandled). */
+  const PROPOSAL_MODAL_PAIRS = Object.freeze([
+    ["#newMatchRacePickerV1", "#newMatchRacePickerCloseV1"],
+    ["#cueInProgressChoiceV1", "#cueInProgressCancelV1"]
+  ]);
+  let policy = "current";
+  const homeTab = () => document.querySelector('[data-phase1-tab="home"]');
+  const activeTab = () => (document.body && document.body.dataset && document.body.dataset.cuePhase1Tab) || "home";
+  function handleProposal() {
+    for (const [container, close] of PROPOSAL_MODAL_PAIRS) {
+      const c = document.querySelector(container), b = document.querySelector(close);
+      if (visible(c) && visible(b)) { b.click(); return true; }
+    }
+    const tab = homeTab();
+    if (!tab) return false;
+    if (activeTab() !== "home") { tab.click(); return true; }
+    const tiles = document.querySelector("#cueDisciplineSwitcherV1"), home = document.querySelector("#cueHomeV1");
+    if (visible(home) && tiles && !visible(tiles)) { tab.click(); return true; }
+    return false;
+  }
   /** Returns true when an in-app Back control consumed the event; false means "at root: let the shell minimize". */
   function handle() {
     for (const selector of BACK_SELECTORS) {
       const node = document.querySelector(selector);
       if (visible(node)) { node.click(); return true; }
     }
-    return false;
+    return policy === "proposal" ? handleProposal() : false;
   }
-  window.CueScoreAndroidBackV1 = Object.freeze({ handle, selectors: BACK_SELECTORS });
+  const setPolicy = name => { if (name !== "current" && name !== "proposal") return false; policy = name; return true; };
+  window.CueScoreAndroidBackV1 = Object.freeze({ handle, selectors: BACK_SELECTORS, setPolicy, getPolicy: () => policy });
 })();

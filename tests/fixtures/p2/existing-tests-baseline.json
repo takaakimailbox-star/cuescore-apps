@@ -552,6 +552,11 @@
       "tests": 7,
       "skips": 0
     },
+    "native-android-safe-area-and-back.test.mjs": {
+      "sha256": "6626ed85389e9fae30b57cc09c5241d75738a541db4a9827fbcbcab96924c44b",
+      "tests": 4,
+      "skips": 0
+    },
     "native-ios-foundation.test.mjs": {
       "sha256": "2a5311022a5c8b285d156a0578bbe337c7aa7e5bf25e4a200d6dea5663832b78",
       "tests": 6,

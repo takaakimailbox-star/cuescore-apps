@@ -123,8 +123,174 @@ async function step(id, title, kind, fn) {
 const ok = (c, m) => { if (!c) throw new Error(m); };
 const homeReady = () => waitFor(vis("#cueHomeV1"), 60000);
 
+
+// ===================== extra modes: insets | coldstart | probe | back =====================
+const mode = process.argv[5] || "full";
+import zlib from "node:zlib";
+function decodePng(buf) {
+  let p = 8, w = 0, h = 0, bd = 0, ct = 0; const idat = [];
+  while (p < buf.length) { const len = buf.readUInt32BE(p), type = buf.toString("ascii", p + 4, p + 8), d = buf.subarray(p + 8, p + 8 + len);
+    if (type === "IHDR") { w = d.readUInt32BE(0); h = d.readUInt32BE(4); bd = d[8]; ct = d[9]; } else if (type === "IDAT") idat.push(d); p += 12 + len; }
+  if (bd !== 8 || (ct !== 2 && ct !== 6)) throw new Error("unsupported png " + bd + "/" + ct);
+  const bpp = ct === 6 ? 4 : 3, stride = w * bpp, raw = zlib.inflateSync(Buffer.concat(idat)), out = Buffer.alloc(h * stride);
+  for (let y = 0; y < h; y++) { const f = raw[y * (stride + 1)], r = y * (stride + 1) + 1, o = y * stride;
+    for (let x = 0; x < stride; x++) { const a = x >= bpp ? out[o + x - bpp] : 0, b = y ? out[o - stride + x] : 0, c = x >= bpp && y ? out[o - stride + x - bpp] : 0; let v = raw[r + x];
+      if (f === 1) v += a; else if (f === 2) v += b; else if (f === 3) v += (a + b) >> 1; else if (f === 4) { const pp = a + b - c, pa = Math.abs(pp - a), pb = Math.abs(pp - b), pc = Math.abs(pp - c); v += pa <= pb && pa <= pc ? a : pb <= pc ? b : c; }
+      out[o + x] = v & 255; } }
+  return { w, h, px: (x, y) => { const i = y * stride + x * bpp; return [out[i], out[i + 1], out[i + 2]]; } };
+}
+const grab = () => decodePng(execFileSync("adb", ["exec-out", "screencap", "-p"], { maxBuffer: 64 << 20 }));
+const hex = c => "#" + c.map(v => v.toString(16).padStart(2, "0")).join("");
+function ascii(img, cols = 40, rows = 56) {
+  const ramp = "@%#*+=-:. ", lines = [];
+  for (let r = 0; r < rows; r++) { let l = ""; for (let c = 0; c < cols; c++) { const x = Math.floor((c + 0.5) * img.w / cols), y = Math.floor((r + 0.5) * img.h / rows), [R, G, B] = img.px(x, y); l += ramp[Math.min(9, Math.floor((0.3 * R + 0.59 * G + 0.11 * B) / 25.6))]; } lines.push(l); }
+  return lines.join("\n");
+}
+const emit = (tag, o) => console.log(tag + " " + JSON.stringify(o));
+const sysBars = () => { const w = adbTry("dumpsys window"); return { status: (w.match(/statusBars[^\n]*?frame=\[(\d+),(\d+)\]\[(\d+),(\d+)\]/) || []).slice(1).map(Number), nav: (w.match(/navigationBars[^\n]*?frame=\[(\d+),(\d+)\]\[(\d+),(\d+)\]/) || []).slice(1).map(Number) }; };
+const wvInfo = () => adbTry("dumpsys webviewupdate | grep -m3 -i -E 'Current WebView package|versionName|Valid package'").replace(/\s+/g, " ").slice(0, 300);
+
+async function launchAndMeasure() {
+  const t0 = Date.now(); const out = launch(); const amMs = Date.now() - t0;
+  let tDev = null, pid = "", miss = 0;
+  for (let i = 0; i < 120 && tDev === null; i++) { pid = adbTry(`pidof ${PKG}`).split(/\s+/)[0]; if (!pid && ++miss >= 8) break; if (pid && adbTry(`cat /proc/net/unix | grep -c webview_devtools_remote_${pid}`).trim() !== "0") tDev = Date.now() - t0; else await sleep(2000); }
+  return { amStartWaitMs: amMs, amTotalTime: (out.match(/TotalTime: (\d+)/) || [])[1], amWaitTime: (out.match(/WaitTime: (\d+)/) || [])[1], devtoolsMs: tDev, pid };
+}
+
+async function insetsMode() {
+  adbTry("pm clear " + PKG);
+  const N = 4, rows = [];
+  for (let i = 1; i <= N; i++) {
+    adbTry(`am force-stop ${PKG}`); await sleep(1500);
+    const m = await launchAndMeasure();
+    await connect(); await homeReady(); await sleep(2500);
+    origin = null; await calibrate();
+    const d = await ev(`(()=>{const q=s=>document.querySelector(s),vis=n=>n&&n.getBoundingClientRect().width>0;const probe=document.createElement('div');probe.style.cssText='position:fixed;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0';document.body.appendChild(probe);const cs=getComputedStyle(probe);const envT=cs.paddingTop,envB=cs.paddingBottom;probe.remove();const root=getComputedStyle(document.documentElement);const tiles=q('#cueDisciplineSwitcherV1'),nav=q('.cue-phase1-tab-bar'),home=q('#cueHomeV1');const r=n=>{const b=n.getBoundingClientRect();return [b.left,b.top,b.width,b.height].map(v=>Math.round(v*10)/10)};return {envTop:envT,envBottom:envB,varTop:root.getPropertyValue('--safe-area-inset-top').trim(),varBottom:root.getPropertyValue('--safe-area-inset-bottom').trim(),inner:[innerWidth,innerHeight],dpr:devicePixelRatio,hScroll:document.documentElement.scrollWidth>innerWidth+1,tiles:tiles?r(tiles):null,nav:nav?r(nav):null,home:home?r(home):null,navPadBottom:nav?getComputedStyle(nav).paddingBottom:null,homeCardTop:(q('#newMatchPlayerCard1V1')&&vis(q('#newMatchPlayerCard1V1')))?r(q('#newMatchPlayerCard1V1')):null}})()`);
+    const bars = sysBars(), img = grab();
+    const dpr = d.dpr, o = origin;
+    const tilePhysTop = d.tiles ? Math.round(o.y + d.tiles[1] * dpr) : null;
+    const navPhysTop = d.nav ? Math.round(o.y + d.nav[1] * dpr) : null, navPhysBottom = d.nav ? Math.round(o.y + (d.nav[1] + d.nav[3]) * dpr) : null;
+    const px = { statusBand: hex(img.px(540, Math.max(2, Math.floor((bars.status[3] || 128) / 2)))), belowStatus: hex(img.px(540, Math.min(img.h - 1, (bars.status[3] || 128) + 6))), navBand: hex(img.px(540, img.h - 6)), aboveNavBar: hex(img.px(540, Math.max(0, (bars.nav[1] || img.h) - 8))), tabCenter: d.nav ? hex(img.px(540, Math.min(img.h - 1, Math.round(o.y + (d.nav[1] + d.nav[3] / 2) * dpr)))) : null };
+    const row = { launch: i, ...m, origin: { x: Math.round(o.x), y: Math.round(o.y) }, bars, screen: [img.w, img.h], dom: d, tilePhysTop, navPhysTop, navPhysBottom, px, ascii: i === 1 ? ascii(img) : undefined };
+    rows.push(row);
+    emit("INSETS", { ...row, ascii: undefined });
+    if (i === 1) console.log("ASCII-HOME (dark=@ light=space)\n" + row.ascii);
+    const sb = bars.status[3] || 128, navTop = bars.nav[1] || img.h;
+    await step("I" + i, `cold launch #${i}: content below status bar, tab bar above nav bar, no horizontal overflow`, "dom-read", async () => {
+      ok(tilePhysTop >= sb, `tiles start at ${tilePhysTop}px but status bar ends at ${sb}px`);
+      ok(navPhysBottom <= img.h && navPhysBottom <= navTop + 2 || bars.nav.length === 0, `tab bar bottom ${navPhysBottom}px overlaps navigation bar from ${navTop}px`);
+      ok(!d.hScroll && Math.abs(d.inner[0] * dpr - img.w) <= 2, "width mismatch " + JSON.stringify([d.inner, dpr, img.w]));
+      return { tilePhysTop, statusBottom: sb, navPhysBottom, navBarTop: navTop };
+    });
+  }
+  const tops = rows.map(r => r.dom.tiles && r.dom.tiles[1]), envs = rows.map(r => r.dom.envTop);
+  emit("INSETS-SUMMARY", { variant: label, tileTopCss: tops, envTop: envs, varTop: rows.map(r => r.dom.varTop), spreadCss: Math.max(...tops) - Math.min(...tops) });
+  await step("I-stable", "tile top identical across cold launches (spread <= 1 css px)", "dom-read", async () => { const sp = Math.max(...tops) - Math.min(...tops); ok(sp <= 1, `tile top varies across launches: ${tops.join(",")}`); return { tops, envs }; });
+  // tab bar / tile interaction after the change (real OS presses)
+  await step("I-tap", "OS press on 9-Ball tile and Players tab lands on the intended element", "os-input", async () => {
+    await tap('[data-discipline="9ball"]');
+    const sel = await waitFor(`document.querySelector('[data-discipline="9ball"]').getAttribute('aria-selected')==='true'`, 10000);
+    const p1 = lastTap.ptr; const hit1 = lastTap.hit;
+    await tapNav(1); await sleep(1200);
+    const screens = await ev(`[...document.querySelectorAll('section,main')].filter(n=>n.getBoundingClientRect().width>0).map(n=>n.id).filter(Boolean).join('|')`);
+    ok(sel, "tile not selected");
+    ok(p1 && Math.abs(p1[0] - lastTap.x) < 40, "pointer mismatch " + JSON.stringify(lastTap));
+    return { selected: sel, tileHit: hit1, tabEvents: lastTap.ev, screens };
+  });
+  const img2 = grab(); console.log("ASCII-PLAYERS\n" + ascii(img2));
+}
+
+async function coldstartMode() {
+  const settle = Number(process.env.SETTLE_SEC || 0);
+  const base = { label, sdk: adbTry("getprop ro.build.version.sdk"), pagesize: adbTry("getconf PAGE_SIZE"), webview: wvInfo(), uptimeAtStart: adbTry("cat /proc/uptime").split(" ")[0], settleSec: settle };
+  emit("COLD-ENV", base);
+  adb("install", "-r", apk);
+  if (settle) await sleep(settle * 1000);
+  for (let i = 1; i <= 3; i++) {
+    if (i > 1) { adbTry(`am force-stop ${PKG}`); await sleep(2000); }
+    const topBefore = adbTry("top -b -n 1 | head -12").replace(/\s+/g, " ").slice(0, 600);
+    const m = await launchAndMeasure();
+    const procs = adbTry("ps -A | grep -E 'gms|webview|chrome|systemui|cuescore' | wc -l").trim();
+    const wlog = adbTry(`logcat -d | grep -E "chromium|cr_|WebViewFactory|ContentMain|libwebviewchromium" | tail -6`).slice(0, 700);
+    emit("COLD", { launch: i, ...m, uptimeNow: adbTry("cat /proc/uptime").split(" ")[0], relatedProcs: procs, topBeforeLaunch: i === 1 ? topBefore : undefined, webviewLog: i === 1 ? wlog : undefined });
+    await step("C" + i, `cold launch #${i}: DevTools within 240s`, "device-state", async () => { ok(m.devtoolsMs !== null, "WebView devtools not up after 240s"); return m; });
+  }
+}
+
+async function probeMode() {
+  const env = { label, sdk: adbTry("getprop ro.build.version.sdk"), release: adbTry("getprop ro.build.version.release"), webview: wvInfo(), pkgs: adbTry("pm list packages -f | grep -i -E 'webview|chrome'").replace(/\s+/g, " ").slice(0, 400),
+    wvVersions: adbTry("dumpsys package com.google.android.webview | grep -m1 versionName") + " | " + adbTry("dumpsys package com.android.webview | grep -m1 versionName"), tags: adbTry("getprop ro.build.tags"), abi: adbTry("getprop ro.product.cpu.abi") };
+  emit("PROBE-ENV", env);
+  adb("install", "-r", apk); adbTry("logcat -c");
+  const m = await launchAndMeasure();
+  await sleep(3000);
+  const alive = !!adbTry(`pidof ${PKG}`);
+  const fatal = adbTry(`logcat -d -b crash | grep -A12 -m1 "Process: ${PKG}"`).slice(0, 1500);
+  const wv = adbTry(`logcat -d | grep -E "WebViewFactory|Unable to|MissingWebView|Capacitor|Minimum" | head -8`).slice(0, 900);
+  emit("PROBE", { ...m, alive, fatal, wv });
+  await step("P", "app launches and WebView attaches", "os-input", async () => { ok(m.devtoolsMs !== null && alive, "launch failed: alive=" + alive + " fatal=" + fatal.slice(0, 300)); return m; });
+}
+
+async function backMode() {
+  adbTry("pm clear " + PKG);
+  const m = await launchAndMeasure(); emit("STARTUP", { label, ...m });
+  await connect(); await homeReady(); await sleep(2000);
+  const ok1 = await ev(`window.CueScoreAndroidBackV1.setPolicy('proposal')`);
+  const HOME = vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSwitcherV1");
+  const fg = () => adbTry("dumpsys activity activities | grep -m1 topResumedActivity").includes(PKG);
+  await step("B0", "proposal policy can be enabled at runtime (default stays current)", "dom-read", async () => { ok(ok1 === true, "setPolicy failed"); return { policy: await ev("window.CueScoreAndroidBackV1.getPolicy()") }; });
+  await step("B1", "selected discipline -> Back returns to the 6-discipline list (app stays foreground)", "os-input", async () => {
+    await tap('[data-discipline="9ball"]'); ok(await waitFor(`document.querySelector('[data-discipline="9ball"]').getAttribute('aria-selected')==='true'`, 10000), "not selected");
+    ok(!(await ev(HOME)), "tiles still visible while selected");
+    await back(); ok(await waitFor(HOME, 10000), "tiles not restored by Back"); ok(fg(), "app left foreground");
+  });
+  for (const [i, name] of [[1, "Players"], [2, "History"], [3, "Settings"]]) {
+    await step("B" + (i + 1), `${name} tab -> Back returns to Home (app stays foreground)`, "os-input", async () => {
+      await tapNav(i); await sleep(1500);
+      ok(!(await ev(HOME)), name + " did not open");
+      await back(); ok(await waitFor(HOME, 10000), `Home tiles not restored by Back from ${name}`); ok(fg(), "app left foreground");
+      ok((await ev("document.body.dataset.cuePhase1Tab")) === "home", "active tab is not home");
+    });
+  }
+  await step("B5", "Pro overlay open -> Back closes only the overlay", "os-input", async () => {
+    await ev(`window.CueScorePro.open('emulator-check'); true`); await sleep(1500);
+    const opened = await ev(vis(".cue-pro-overlay-v1")); ok(opened, "Pro overlay did not open");
+    await back(); await sleep(1200);
+    ok(!(await ev(vis(".cue-pro-overlay-v1"))), "overlay not closed"); ok(fg(), "app left foreground (overlay Back must not minimize)");
+  });
+  await step("B6", "Home list -> Back minimizes (process alive)", "os-input", async () => {
+    ok(await waitFor(HOME, 5000), "not on Home list"); await back(); await sleep(1500);
+    ok(!fg(), "app did not minimize"); ok(!!adbTry(`pidof ${PKG}`), "process died");
+  });
+  // ---- non-destructive feature probes on fresh test data ----
+  launch(); await connect(); await homeReady();
+  await step("F-startup", "cold/warm start timings and ANR scan", "device-state", async () => {
+    adbTry(`am force-stop ${PKG}`); await sleep(1500); const t = await launchAndMeasure();
+    const anr = adbTry("logcat -d | grep -E 'ANR in|Input dispatching timed out' | tail -2");
+    ok(!anr, anr); return t;
+  });
+  await connect(); await homeReady();
+  await step("F-shot-clock", "game screen exposes shot-clock UI elements", "os-input", async () => {
+    await ev(`window.CueScoreAndroidBackV1.setPolicy('proposal'); true`);
+    await tap('[data-discipline="9ball"]'); await waitFor(`document.querySelector('[data-discipline="9ball"]').getAttribute('aria-selected')==='true'`, 10000);
+    await tap("#startGameBtn"); ok(await waitFor(vis("#proGameScreen"), 30000), "game screen not shown");
+    await sleep(3000);
+    const ids = await ev(`[...document.querySelectorAll('#proGameScreen *')].filter(n=>n.id&&n.getBoundingClientRect().width>0&&/clock|shot|timer|extend|ext/i.test(n.id+' '+n.className)).map(n=>n.id).slice(0,20)`).catch(() => "page busy");
+    const texts = await ev(`[...document.querySelectorAll('#proGameScreen button,#proGameScreen [role=button]')].filter(n=>n.getBoundingClientRect().width>0).map(n=>(n.id||'')+':'+(n.textContent||'').trim().slice(0,10)).slice(0,30)`).catch(() => "page busy");
+    emit("GAME", { shotClockIds: ids, buttons: texts });
+    shot("30-game");
+    ok(Array.isArray(ids) && ids.length > 0, "no shot-clock related elements found in game screen");
+    return ids;
+  });
+}
+
 (async () => {
   let info = {};
+  if (mode !== "full") {
+    try { await ({ insets: insetsMode, coldstart: coldstartMode, probe: probeMode, back: backMode }[mode])(); } catch (e) { console.log("MODE ERROR", e && e.stack || e); }
+    fs.writeFileSync(path.join(outDir, `${label}-${mode}-results.json`), JSON.stringify({ label, mode, results, consoleErrors }, null, 2));
+    const f = results.filter(r => r.status === "FAIL").length; console.log(`SUMMARY ${label}/${mode}: ${results.length - f}/${results.length} PASS`); process.exit(0);
+  }
   await step("E01", "APK install", "device-state", async () => {
     adbTry("logcat -c");
     const o = adb("install", "-r", apk);

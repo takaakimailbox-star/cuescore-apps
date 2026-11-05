@@ -1,5 +1,5 @@
 # Temporary Android quality gate (Android branch only). Runs ONLY when this file changes on the Android branch.
-# rev: 16  (bump this number to re-run after editing android/ci/emulator-verify.mjs)
+# rev: 20  (bump this number to re-run after editing android/ci/emulator-verify.mjs)
 # No secrets, no signing, no publishing, no schedule. Read-only token. Evidence is uploaded as a 7-day artifact.
 name: android-emulator-verify
 on:
@@ -14,7 +14,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
@@ -22,31 +22,48 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with: { node-version: '22' }
       - run: npm ci --no-audit --no-fund
-      - run: npm run android:sync
-      # CI-only: allow WebView remote debugging in the generated asset so the test driver can operate the UI.
-      # The committed capacitor.config.json (product config) is NOT changed.
-      - run: |
+      # A/B: "after" = current Android bundle (safe-area bridge ON); "before" = bridge OFF (pre-fix baseline).
+      # CI-only: WebView remote debugging is enabled in the generated asset so the driver can read the DOM.
+      - name: Build AFTER apk (bridge on)
+        run: |
+          npm run android:sync
           sed -i 's/"webContentsDebuggingEnabled": false/"webContentsDebuggingEnabled": true/' android/app/src/main/assets/capacitor.config.json
-          grep -n webContentsDebuggingEnabled android/app/src/main/assets/capacitor.config.json
-      - run: cd android && ./gradlew :app:assembleDebug --no-daemon
-      - run: sha256sum android/app/build/outputs/apk/debug/app-debug.apk
+          (cd android && ./gradlew :app:assembleDebug --no-daemon)
+          mkdir -p apk/after && cp android/app/build/outputs/apk/debug/app-debug.apk apk/after/app-debug.apk
+      - name: Build BEFORE apk (bridge off)
+        run: |
+          CUESCORE_ANDROID_SAFE_AREA_BRIDGE=0 npm run android:sync
+          sed -i 's/"webContentsDebuggingEnabled": false/"webContentsDebuggingEnabled": true/' android/app/src/main/assets/capacitor.config.json
+          (cd android && ./gradlew :app:assembleDebug --no-daemon)
+          mkdir -p apk/before && cp android/app/build/outputs/apk/debug/app-debug.apk apk/before/app-debug.apk
+      - run: sha256sum apk/*/app-debug.apk
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: debug-apk-ci
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: apk
           retention-days: 7
   emulator:
     needs: build
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 35
     strategy:
       fail-fast: false
       matrix:
         include:
-          - { api: 35, target: google_apis, label: api35 }
-          - { api: 36, target: google_apis, label: api36 }
-          - { api: 26, target: default, label: api26 }
-          - { api: 35, target: google_apis, label: api35-16k }
+          - { label: ins35-before, api: 35, target: google_apis, mode: insets, apk: before, ps16k: false, settle: 0 }
+          - { label: ins35-after,  api: 35, target: google_apis, mode: insets, apk: after,  ps16k: false, settle: 0 }
+          - { label: ins36-before, api: 36, target: google_apis, mode: insets, apk: before, ps16k: false, settle: 0 }
+          - { label: ins36-after,  api: 36, target: google_apis, mode: insets, apk: after,  ps16k: false, settle: 0 }
+          - { label: cold35-a,  api: 35, target: google_apis, mode: coldstart, apk: after, ps16k: false, settle: 0 }
+          - { label: cold35-b,  api: 35, target: google_apis, mode: coldstart, apk: after, ps16k: false, settle: 120 }
+          - { label: cold16k-a, api: 35, target: google_apis, mode: coldstart, apk: after, ps16k: true,  settle: 0 }
+          - { label: cold16k-b, api: 35, target: google_apis, mode: coldstart, apk: after, ps16k: true,  settle: 120 }
+          - { label: probe26-default, api: 26, target: default,     mode: probe, apk: after, ps16k: false, settle: 0 }
+          - { label: probe26-gapis,   api: 26, target: google_apis, mode: probe, apk: after, ps16k: false, settle: 0 }
+          - { label: probe28-gapis,   api: 28, target: google_apis, mode: probe, apk: after, ps16k: false, settle: 0 }
+          - { label: probe30-gapis,   api: 30, target: google_apis, mode: probe, apk: after, ps16k: false, settle: 0 }
+          - { label: back35, api: 35, target: google_apis, mode: back, apk: after, ps16k: false, settle: 0 }
+          - { label: back16k, api: 35, target: google_apis, mode: back, apk: after, ps16k: true, settle: 0 }
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
@@ -62,7 +79,7 @@ jobs:
           sudo udevadm trigger --name-match=kvm
           ls -l /dev/kvm
       - name: Prepare 16 KB page-size AVD
-        if: matrix.label == 'api35-16k'
+        if: matrix.ps16k
         run: |
           SM=$ANDROID_HOME/cmdline-tools/latest/bin
           export ANDROID_AVD_HOME=$HOME/.android/avd
@@ -70,10 +87,10 @@ jobs:
           yes | $SM/sdkmanager --licenses > /dev/null || true
           $SM/sdkmanager --install 'system-images;android-35;google_apis_ps16k;x86_64' > /dev/null
           echo no | $SM/avdmanager create avd --force -n ps16k -k 'system-images;android-35;google_apis_ps16k;x86_64' -d pixel_6
-          $SM/avdmanager list avd | head -12
-          grep -E 'image.sysdir|tag.id|abi.type' ~/.android/avd/ps16k.avd/config.ini
       - name: Run emulator verification
         uses: reactivecircus/android-emulator-runner@b530d96654c385303d652368551fb075bc2f0b6b # v2.35.0
+        env:
+          SETTLE_SEC: ${{ matrix.settle }}
         with:
           api-level: ${{ matrix.api }}
           target: ${{ matrix.target }}
@@ -81,9 +98,9 @@ jobs:
           profile: pixel_6
           disable-animations: true
           emulator-boot-timeout: 900
-          avd-name: ${{ matrix.label == 'api35-16k' && 'ps16k' || 'test' }}
-          force-avd-creation: ${{ matrix.label != 'api35-16k' }}
-          script: node android/ci/emulator-verify.mjs apk/app-debug.apk out-${{ matrix.label }} ${{ matrix.label }}
+          avd-name: ${{ matrix.ps16k && 'ps16k' || 'test' }}
+          force-avd-creation: ${{ !matrix.ps16k }}
+          script: node android/ci/emulator-verify.mjs apk/${{ matrix.apk }}/app-debug.apk out-${{ matrix.label }} ${{ matrix.label }} ${{ matrix.mode }}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: always()
         with:
