@@ -81,7 +81,7 @@ let origin = null, lastTap = null;
 async function calibrate() {
   await ev(`(()=>{window.__cal=null;const stop=e=>{if(e.cancelable)e.preventDefault();e.stopImmediatePropagation()};const evs=['pointerdown','pointerup','mousedown','mouseup','touchstart','touchend','click'];const h=e=>{if(e.type==='pointerdown'&&!window.__cal)window.__cal=[e.clientX,e.clientY];stop(e)};evs.forEach(t=>addEventListener(t,h,true));setTimeout(()=>evs.forEach(t=>removeEventListener(t,h,true)),2500);return true})()`);
   const px = 300, py = 900;
-  adbSh(`input tap ${px} ${py}`);
+  adbSh(`input swipe ${px} ${py} ${px} ${py} 120`);
   await waitFor("window.__cal!=null", 10000);
   const c = await ev("window.__cal"), dpr = await ev("devicePixelRatio");
   if (!c) throw new Error("calibration tap not seen by page");
@@ -98,8 +98,11 @@ async function tapExpr(expr, label) {
   const r = await ev(`(()=>{const n=${expr};if(!n)return null;const b=n.getBoundingClientRect();const x=b.left+b.width/2,y=b.top+b.height/2;const h=document.elementFromPoint(x,y);return {x,y,rect:[b.left,b.top,b.width,b.height].map(v=>Math.round(v)),text:(n.textContent||'').trim().slice(0,14),aria:(n.getAttribute('aria-label')||'').slice(0,24),hit:h?((h.id||h.className||h.tagName)+'').slice(0,50):null,contained:!!h&&(n.contains(h)||h.contains(n))}})()`);
   if (!r) throw new Error("no visible element for " + label);
   lastTap = { label, ...r };
-  adbSh(`input tap ${Math.round(origin.x + r.x * origin.dpr)} ${Math.round(origin.y + r.y * origin.dpr)}`);
+  const sx = Math.round(origin.x + r.x * origin.dpr), sy = Math.round(origin.y + r.y * origin.dpr);
+  await ev(`window.__lastPtr=null;if(!window.__ptrDiag){window.__ptrDiag=true;addEventListener('pointerdown',e=>{window.__lastPtr=[Math.round(e.clientX),Math.round(e.clientY),((e.target&&(e.target.id||e.target.tagName))||'')+''.slice(0,30)]},true)}true`);
+  adbSh(`input swipe ${sx} ${sy} ${sx} ${sy} 120`);
   await sleep(1800);
+  lastTap.screen = [sx, sy]; lastTap.ptr = await ev("window.__lastPtr").catch(() => null);
   return r;
 }
 const tap = (sel, idx = 0) => tapExpr(PICK(sel, idx), sel + "[" + idx + "]");
