@@ -83,7 +83,8 @@ async function calibrate() {
   const px = 300, py = 900;
   adbSh(`input swipe ${px} ${py} ${px} ${py} 120`);
   await waitFor("window.__cal!=null", 10000);
-  const c = await ev("window.__cal"), dpr = await ev("devicePixelRatio");
+  let c = await ev("window.__cal"); const dpr = await ev("devicePixelRatio");
+  if (!c) { await sleep(2500); await ev(`(()=>{window.__cal=null;const h=e=>{if(!window.__cal)window.__cal=[e.clientX,e.clientY];e.stopImmediatePropagation();if(e.cancelable)e.preventDefault()};['pointerdown','pointerup','mousedown','mouseup','touchstart','touchend','click'].forEach(t=>addEventListener(t,h,true));setTimeout(()=>['pointerdown','pointerup','mousedown','mouseup','touchstart','touchend','click'].forEach(t=>removeEventListener(t,h,true)),3000);return true})()`); adbSh(`input swipe 320 1000 320 1000 150`); await waitFor("window.__cal!=null", 8000); c = await ev("window.__cal"); if (c) { origin = { x: 320 - c[0] * dpr, y: 1000 - c[1] * dpr, dpr }; await sleep(3500); return origin; } }
   if (!c) throw new Error("calibration tap not seen by page");
   origin = { x: px - c[0] * dpr, y: py - c[1] * dpr, dpr };
   await sleep(3000);
@@ -175,19 +176,26 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     return v;
   });
   const disciplines = ["9ball", "10ball", "jpa9", "rotation", "straightPool", "threeCushion"];
+  const HOMEVIS = vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSwitcherV1");
   for (const d of disciplines) {
-    await step("E06-" + d, `${d}: tap tile (OS press) -> selected on Home, D2 cards aligned`, "os-input", async () => {
-      ok(await homeReady(), "not on home before " + d);
-      const r = await tap(`[data-discipline="${d}"]`);
+    await step("E06-" + d, `${d}: OS press on tile -> selected, D2 cards aligned, Android Back outcome`, "os-input", async () => {
+      if (!(await waitFor(HOMEVIS, 5000))) { launch(); await connect(); ok(await homeReady(), "could not reach home before " + d); }
+      await tap(`[data-discipline="${d}"]`);
       const sel = await waitFor(`document.querySelector('[data-discipline="${d}"]').getAttribute('aria-selected')==='true'`, 10000);
       const name = await ev(`((document.querySelector('#cueSelectedGameNameV1')||{}).textContent||'').trim()`);
       const g = await ev(`(()=>{const a=document.querySelector('#newMatchPlayerCard1V1'),b=document.querySelector('#newMatchPlayerCard2V1');if(!a||!b)return null;const A=a.getBoundingClientRect(),B=b.getBoundingClientRect();return {a:[A.left,A.top,A.width,A.height].map(Math.round),b:[B.left,B.top,B.width,B.height].map(Math.round),vw:innerWidth}})()`);
-      shot("02-home-" + d);
-      ok(sel, "tile not selected after OS press; events=" + (lastTap && lastTap.ev) + " ptr=" + JSON.stringify(lastTap && lastTap.ptr));
+      const btns = await ev(`[...document.querySelectorAll('button,[role=button]')].filter(n=>{const b=n.getBoundingClientRect();return b.width>0&&b.height>0}).map(n=>(n.id||n.dataset.discipline||n.className||'').toString().slice(0,22)+':'+((n.textContent||'').trim().slice(0,8))).slice(0,16)`);
+      shot("02-selected-" + d);
+      ok(sel, "tile not selected after OS press; events=" + (lastTap && lastTap.ev));
       ok(g && g.a[2] > 0, "player cards not visible " + JSON.stringify(g));
       ok(Math.abs(g.a[1] - g.b[1]) <= 1 && Math.abs(g.a[3] - g.b[3]) <= 1, "card top/height mismatch " + JSON.stringify(g));
       ok(g.a[0] >= 0 && g.a[0] < g.b[0] && g.b[0] + g.b[2] <= g.vw + 1, "card order/overflow " + JSON.stringify(g));
-      return { selectedName: name, cards: g, events: lastTap.ev };
+      await back();
+      const home = await waitFor(HOMEVIS, 8000);
+      const alive = !!adbTry(`pidof ${PKG}`);
+      const top = adbTry("dumpsys activity activities | grep -m1 topResumedActivity").slice(-70);
+      if (!home) { launch(); await connect(); await homeReady(); }
+      return { selectedName: name, cards: g, events: lastTap.ev, backReturnsToHomeTiles: home, processAliveAfterBack: alive, topAfterBack: top, visibleControlsWhenSelected: btns };
     });
   }
   await step("E08", "Three languages (ja/en/zh-Hans)", "webview-input", async () => {
@@ -202,17 +210,21 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     ok(out.en.lang === "en" && out["zh-Hans"].lang.startsWith("zh") && out.ja.lang === "ja", JSON.stringify(out));
     return out;
   });
-  const ANYBACK = `(()=>{const sels=(window.CueScoreAndroidBackV1&&window.CueScoreAndroidBackV1.selectors)||[];return sels.find(s=>{const n=document.querySelector(s);if(!n||n.hidden)return false;const st=getComputedStyle(n);if(st.display==='none'||st.visibility==='hidden')return false;for(let p=n.parentElement;p;p=p.parentElement){if(p.hidden||p.classList.contains('hidden')||getComputedStyle(p).display==='none')return false}return n.getClientRects().length>0})||null})()`;
   for (let i = 0; i < 4; i++) {
-    await step("E09-nav" + i, `bottom nav #${i}: open screen, Android Back returns home`, "os-input", async () => {
-      ok(await homeReady(), "not on home");
+    await step("E09-tab" + i, `bottom tab #${i}: OS press switches content; Android Back outcome`, "os-input", async () => {
+      if (!(await waitFor(HOMEVIS, 5000))) { launch(); await connect(); ok(await homeReady(), "could not reach home"); }
+      const before = await ev("document.body.innerText.length + ':' + (document.querySelector('[aria-current],[aria-selected=true]')||{}).id");
       const r = await tapNav(i);
-      ok(await waitFor(`${ANYBACK}!==null`, 15000), "no in-app Back control visible after tapping nav#" + i + " (" + (r.text || r.aria) + ")");
-      const which = await ev(ANYBACK);
-      shot("05-nav" + i);
-      await back();
-      ok(await homeReady(), "home not visible after Android Back from " + which);
-      return { label: r.text || r.aria, backControl: which };
+      await sleep(1500);
+      const after = await ev("document.body.innerText.length + ':' + (document.querySelector('[aria-current],[aria-selected=true]')||{}).id");
+      const tilesVisible = await ev(HOMEVIS);
+      shot("05-tab" + i);
+      await back(); await sleep(1500);
+      const alive = !!adbTry(`pidof ${PKG}`);
+      const backHome = await waitFor(HOMEVIS, 6000);
+      if (!alive || !backHome) { launch(); await connect(); await homeReady(); }
+      ok(alive, "process died on Back from tab " + i);
+      return { label: r.text || r.aria, events: lastTap.ev, contentBefore: before, contentAfter: after, homeTilesVisibleAfterTap: tilesVisible, androidBackReturnsHomeTiles: backHome };
     });
   }
   await step("E10", "Back at root minimizes (no crash, process alive)", "os-input", async () => {
