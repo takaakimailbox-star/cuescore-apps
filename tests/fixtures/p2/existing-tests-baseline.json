@@ -547,6 +547,11 @@
       "tests": 0,
       "skips": 0
     },
+    "native-android-foundation.test.mjs": {
+      "sha256": "6ab4cbc0424357b732d29ac26a77ac8d0b1f9585600595e2c3fad423d0644c80",
+      "tests": 7,
+      "skips": 0
+    },
     "native-ios-foundation.test.mjs": {
       "sha256": "2a5311022a5c8b285d156a0578bbe337c7aa7e5bf25e4a200d6dea5663832b78",
       "tests": 6,
