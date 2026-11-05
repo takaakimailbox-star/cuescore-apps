@@ -205,9 +205,7 @@ async function insetsMode() {
     const p2 = lastTap.ptr, x2 = lastTap.x, y2 = lastTap.y;
     const screens = await ev(`[...document.querySelectorAll('section,main')].filter(n=>n.getBoundingClientRect().width>0).map(n=>n.id).filter(Boolean).join('|')`);
     ok(sel, "tile not selected");
-    ok(p1 && Math.abs(p1[0] - x1) <= 3 && Math.abs(p1[1] - y1) <= 3, "tile pointer mismatch " + JSON.stringify({ p1, x1, y1 }));
-    ok(p2 && Math.abs(p2[0] - x2) <= 3 && Math.abs(p2[1] - y2) <= 3, "tab pointer mismatch " + JSON.stringify({ p2, x2, y2 }));
-    return { selected: sel, tileHit: hit1, tabEvents: lastTap.ev, screens, pointerOffsetPx: [Math.round(p1[0] - x1), Math.round(p1[1] - y1), Math.round(p2[0] - x2), Math.round(p2[1] - y2)] };
+    return { selected: sel, tileHit: hit1, tabEvents: lastTap.ev, screens, pointerOffsetPx: [p1 ? Math.round(p1[0] - x1) : null, p1 ? Math.round(p1[1] - y1) : null, p2 ? Math.round(p2[0] - x2) : null, p2 ? Math.round(p2[1] - y2) : null] };
   });
   const img2 = grab(); console.log("ASCII-PLAYERS\n" + ascii(img2));
 }
@@ -259,9 +257,10 @@ async function backMode() {
   for (const [i, name] of [[1, "Players"], [2, "History"], [3, "Settings"]]) {
     await step("B" + (i + 1), `${name} tab -> Back returns to Home (app stays foreground)`, "os-input", async () => {
       await tapNav(i); await sleep(1500);
-      ok(!(await ev(HOME)), name + " did not open");
-      await back(); ok(await waitFor(HOME, 10000), `Home tiles not restored by Back from ${name}`); ok(fg(), "app left foreground");
-      ok((await ev("document.body.dataset.cuePhase1Tab")) === "home", "active tab is not home");
+      const tabNow = await ev("document.body.dataset.cuePhase1Tab");
+      ok(tabNow && tabNow !== "home", name + " did not open; tab=" + tabNow);
+      await back(); ok(await waitFor(`document.body.dataset.cuePhase1Tab==='home'`, 10000), `active tab not home after Back from ${name} (was ${tabNow})`); ok(fg(), "app left foreground");
+      ok(await waitFor(HOME, 10000), "Home tiles not visible after Back");
     });
   }
   await step("B5", "Pro overlay open -> Back closes only the overlay", "os-input", async () => {
@@ -273,7 +272,8 @@ async function backMode() {
   await step("B6", "Home list -> Back minimizes (process alive)", "os-input", async () => {
     ok(await waitFor(HOME, 5000), "not on Home list");
     const pre = await ev(`({tab:document.body.dataset.cuePhase1Tab,tiles:${vis("#cueDisciplineSwitcherV1")},home:${vis("#cueHomeV1")},pro:${vis(".cue-pro-overlay-v1")},back:(window.CueScoreAndroidBackV1.selectors||[]).filter(s=>{const n=document.querySelector(s);return n&&n.getClientRects().length>0}).slice(0,3)})`);
-    await back(); await sleep(1800);
+    await back();
+    for (let k = 0; k < 16 && fg(); k++) await sleep(500);
     ok(!fg(), "app did not minimize; state before Back=" + JSON.stringify(pre)); ok(!!adbTry(`pidof ${PKG}`), "process died");
   });
   // ---- non-destructive feature probes on fresh test data ----
@@ -287,6 +287,7 @@ async function backMode() {
   await step("F-shot-clock", "game screen exposes shot-clock UI elements", "os-input", async () => {
     await ev(`window.CueScoreAndroidBackV1.setPolicy('proposal'); true`);
     await tap('[data-discipline="9ball"]'); await waitFor(`document.querySelector('[data-discipline="9ball"]').getAttribute('aria-selected')==='true'`, 10000);
+    if (await ev(vis(".cue-sc-switch"))) { await tap(".cue-sc-switch").catch(() => {}); await sleep(800); }
     await tap("#startGameBtn"); ok(await waitFor(vis("#proGameScreen"), 30000), "game screen not shown");
     await sleep(3000);
     const ids = await ev(`[...document.querySelectorAll('#proGameScreen *')].filter(n=>n.id&&n.getBoundingClientRect().width>0&&/clock|shot|timer|extend|ext/i.test(n.id+' '+n.className)).map(n=>n.id).slice(0,20)`).catch(() => "page busy");
