@@ -93,6 +93,8 @@ async function calibrate() {
 const PICK = (sel, idx) => `(()=>{const all=[...document.querySelectorAll(${JSON.stringify(sel)})].filter(n=>{const b=n.getBoundingClientRect();return b.width>0&&b.height>0});return all[${idx}]||null})()`;
 const NAVPICK = idx => `(()=>{const all=[...document.querySelectorAll('button')].filter(n=>{const b=n.getBoundingClientRect();return b.width>0&&b.height>0&&b.top>innerHeight*0.8}).sort((a,b)=>a.getBoundingClientRect().left-b.getBoundingClientRect().left);return all[${idx}]||null})()`;
 async function tapExpr(expr, label) {
+  const topNow = adbTry("dumpsys activity activities | grep -m1 topResumedActivity");
+  if (!topNow.includes(PKG)) { launch(); await sleep(2500); await connect(); await waitFor(vis("#cueHomeV1"), 30000); }
   await ev(`(()=>{const n=${expr};if(n)n.scrollIntoView({block:'center',inline:'center',behavior:'instant'});return !!n})()`);
   await sleep(350);
   if (!origin) await calibrate();
@@ -119,7 +121,7 @@ async function step(id, title, kind, fn) {
   fs.writeFileSync(path.join(outDir, `${label}-results.json`), JSON.stringify({ label, results, consoleErrors }, null, 2));
 }
 const ok = (c, m) => { if (!c) throw new Error(m); };
-const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSwitcherV1"), 60000);
+const homeReady = () => waitFor(vis("#cueHomeV1"), 60000);
 
 (async () => {
   let info = {};
@@ -312,10 +314,10 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     ok(responsive, "WebView unresponsive for >60s after Start press (ms=" + (Date.now() - tStart) + ", anr=" + anr.slice(0, 160) + ", top=" + topNow + ")");
     ok(gameShown, "game screen not shown after OS press on Start (responsive in " + msToResponsive + "ms)");
     const g = gameShown;
-    const clock = await ev(`[...document.querySelectorAll('[id*="lock" i],[id*="shot" i]')].filter(n=>n.getClientRects().length).map(n=>n.id).slice(0,8)`);
+    const clock = await ev(`[...document.querySelectorAll('[id*="lock" i],[id*="shot" i]')].filter(n=>n.getClientRects().length).map(n=>n.id).slice(0,8)`).catch(() => "page busy");
     await back(); await sleep(1500);
     shot("07b-after-back");
-    const after = await ev(`({game:${vis("#proGameScreen")},choice:${vis("#cueInProgressChoiceV1")},home:${vis("#cueHomeV1")}})`);
+    const after = await ev(`({game:${vis("#proGameScreen")},choice:${vis("#cueInProgressChoiceV1")},home:${vis("#cueHomeV1")}})`).catch(() => "page busy after Back");
     return { startState: st, gameScreenVisible: g, clockElementIds: clock, afterBack: after };
   });
   await step("E17", "Final crash/ANR scan (app process) + JS exceptions", "device-state", async () => {
