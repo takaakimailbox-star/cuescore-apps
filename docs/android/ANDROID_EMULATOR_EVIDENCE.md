@@ -64,3 +64,28 @@
 
 ## 7. 再実行手順
 `.github/workflows/android-emulator-verify.yml` の `# rev: N` を 1 つ上げて Android ブランチへ push（約 12–25 分）。不要になったらこのファイルと `android/ci/` を削除する（本番ビルド・配布には無関係）。
+
+## 8. 品質改善Gate（F1／F3／F6／F2）結果
+**区分の凡例**: 実操作＝実 OS 入力、DOM／幾何＝CDP 読み取り＋スクリーンショットのピクセル採取。**スクリーンショットを人が目視していない（Cloud から artifact を閲覧できない）ため、視覚 PASS とは報告しない。** 数値は幾何・ピクセル採取による。
+
+### 8.1 F1 Safe Area（修正済み・Android バンドルのみ）
+- **原因**: Capacitor 8.0.2 SystemBars は `--safe-area-inset-*` を注入するが、WebView ≤139 では `hasBrokenWebViewVersion` 経路で WindowInsets を消費するため、ネイティブ `env(safe-area-inset-*)` が起動ごとに 0 になる／下端が欠落する。実測では API35(WebView124)・API36(WebView133) の双方で、下部ナビバー分（65px）が `env(safe-area-inset-bottom)` に反映されず、下部タブがシステムナビゲーションバーと重なる。
+- **修正**: `scripts/android-safe-area-bridge.mjs`。Android 用 `native-web` 出力のみ、`env(safe-area-inset-X, fb)` を `var(--safe-area-inset-X, env(safe-area-inset-X, fb))` に機械置換（331 箇所。`index.html` ソース、iOS／PWA、保存データは無変更。`CUESCORE_ANDROID_SAFE_AREA_BRIDGE=0` で無効化可）。値の供給元は SystemBars の CSS 変数 1 本で、ネイティブ padding は追加していない＝**二重適用なし**。
+- **A/B（各 4 回コールド起動、実 OS 起動、DOM／幾何）**
+| 項目 | BEFORE（bridge 無） API35／API36 | AFTER（bridge 有） API35／API36 |
+|---|---|---|
+| 下部タブボタン下端 vs ナビバー上端 | 2402px vs 2337px（**65px 重なり**、8/8 起動） | 2339px vs 2337px（重なり無し、8/8 起動） |
+| 競技タイル上端（CSS px） | 231（env 取得失敗時は 182 に移動する事象あり） | 230、4 回で振れ幅 0 |
+| 画面幅 | 変化なし | 変化なし（横方向のはみ出し無し） |
+- 区分: 実起動＋DOM／幾何。**視覚 PASS ではない**（目視未実施）。実機（折りたたみ・ノッチ）は未確認。
+
+### 8.2 F3 16 KB 初回コールド起動遅延（原因未確定・環境要因の可能性が高い）
+- run 8・run 14 の失敗はいずれも、エミュレータ起動直後（Play services／webview_service 再起動が多発し CPU・メモリ飽和）に発生。起動後 120 秒待機してからの起動では再現せず、4 KB image の対照も正常。プロセス生存・クラッシュ・ANR なし、再起動後は正常。
+- 分類: **エミュレータ（ソフトウェア GPU＋起動直後の負荷）起因の可能性が高いが、16 KB 固有か否かは未確定**。製品側の欠陥を示す証拠はない。Pixel 8 以降の 16 KB 対応実機での確認が必要。
+
+### 8.3 F6 API 26（原因分類: 検証環境／WebView 版数）
+- AOSP default image の API 26 の WebView は版数 58 で、Capacitor 8 の既定最小 60（ハード下限 55）を下回り、有効なプロバイダーが無い（current package null）ため起動時に例外。Google APIs image の API 26 は Chrome 69 を同梱しており、同一 APK が起動する（Capacitor 要件を満たす）。
+- minSdk 26 は**変更していない**。非公式 APK 導入・追加課金は無し。**実機で必要な条件**: Android 8.0（API 26）以上、Android System WebView／Chrome が 60 以上（Play で更新済み）。実機 API26 での起動確認は未実施。
+
+### 8.4 F2 Android Back（Prototype）
+`ANDROID_BACK_UX_PROPOSAL.md` を参照。既定は `current` のまま。Back 結果は下記 §8.5。
