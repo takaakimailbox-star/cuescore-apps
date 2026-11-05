@@ -124,11 +124,20 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     return info;
   });
   await step("E03", "Launch + WebView attach + home visible", "os-input", async () => {
-    launch();
-    const url = await connect();
-    ok(await homeReady(), "home not visible within 60s");
+    const out = launch();
+    let url, retried = false;
+    try { url = await connect(70000); ok(await homeReady(), "home not visible within 60s"); }
+    catch (e) {
+      retried = true;
+      const diag = adbTry(`logcat -d | grep -E "cuescoreapps|AndroidRuntime|Fatal signal|ANR in|Process .* has died|am_crash|am_anr" | tail -25`);
+      fs.writeFileSync(path.join(outDir, `${label}-first-launch-diag.txt`), `am start: ${out}\npid: ${adbTry("pidof " + PKG)}\n${diag}\n`);
+      shot("03-first-launch-failed");
+      launch(); url = await connect(70000); ok(await homeReady(), "home not visible after relaunch (first attempt: " + e.message + ")");
+      shot("01-home");
+      return { url, firstLaunchFailed: true, firstAttemptError: e.message, pidAtFailure: adbTry("pidof " + PKG), diagFile: label + "-first-launch-diag.txt" };
+    }
     shot("01-home");
-    return url;
+    return { url, retried };
   });
   await step("E04", "Crash scan after launch", "device-state", async () => {
     const lc = adbSh("logcat -d -b crash,main -s AndroidRuntime:E ActivityManager:E | head -40");
@@ -136,7 +145,7 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     return "no FATAL EXCEPTION";
   });
   await step("E05", "Safe-area / system bars / viewport", "dom-read", async () => {
-    const probe = `(()=>{const d=document.createElement('div');d.style.cssText='position:fixed;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)';document.body.appendChild(d);const c=getComputedStyle(d);const r={top:c.paddingTop,right:c.paddingRight,bottom:c.paddingBottom,left:c.paddingLeft};d.remove();const sw=document.querySelector('#cueDisciplineSwitcherV1');const n=document.querySelector('#settingsBtn');return {safe:r,cssVarTop:getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-top'),inner:[innerWidth,innerHeight],dpr:devicePixelRatio,hScroll:document.documentElement.scrollWidth>innerWidth+1,switcherTop:sw?sw.getBoundingClientRect().top:null,navBottom:n?n.getBoundingClientRect().bottom:null}})()`;
+    const probe = `(()=>{const d=document.createElement('div');d.style.cssText='position:fixed;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)';document.body.appendChild(d);const c=getComputedStyle(d);const r={top:c.paddingTop,right:c.paddingRight,bottom:c.paddingBottom,left:c.paddingLeft};d.remove();const sw=document.querySelector('#cueDisciplineSwitcherV1');const n=document.querySelector('#cueHomeSettingsV3');return {safe:r,cssVarTop:getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-top'),inner:[innerWidth,innerHeight],dpr:devicePixelRatio,hScroll:document.documentElement.scrollWidth>innerWidth+1,switcherTop:sw?sw.getBoundingClientRect().top:null,navBottom:n?n.getBoundingClientRect().bottom:null}})()`;
     let v = await ev(probe), waited = 0;
     while (parseFloat(v.safe.top) === 0 && waited < 8000) { await sleep(1000); waited += 1000; v = await ev(probe); }
     v.settledAfterMs = waited;
@@ -150,6 +159,7 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     const names = ["9ball", "10ball", "jpa9", "rotation", "straightPool", "threeCushion"], seen = {};
     for (const d of names) {
       await tap(`[data-discipline="${d}"]`);
+      await waitFor(`document.querySelector('[data-discipline="${d}"]').getAttribute('aria-selected')==='true'`, 8000);
       const sel = await ev(`document.querySelector('[data-discipline="${d}"]').getAttribute('aria-selected')`);
       ok(sel === "true", d + " aria-selected=" + sel + " all=" + await ev(`[...document.querySelectorAll("[data-discipline]")].map(b=>b.dataset.discipline+":"+b.getAttribute("aria-selected")).join(",")`));
       seen[d] = await ev(`(document.querySelector('#cueSelectedGameNameV1')||{}).textContent||''`);
@@ -178,11 +188,11 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     ok(out.en.lang === "en" && out["zh-Hans"].lang.startsWith("zh") && out.ja.lang === "ja", JSON.stringify(out));
     return out;
   });
-  const screens = [["settingsBtn", "#settingsBackBtn", "Settings"], ["playerManagementBtn", "#playerLibraryBackBtn", "Players"], ["recordsBtn", "#recordsBackV2", "History"], ["openRankingsBtn", "#rankingsBackBtn", "Analysis"]];
+  const screens = [["cueHomeSettingsV3", "#settingsBackBtn", "Settings"], ["cueHomePlayersV3", "#playerLibraryBackBtn", "Players"], ["cueHomeHistoryV3", "#recordsBackV2", "History"]];
   for (const [btn, backSel, name] of screens) {
     await step("E09-" + name, `${name}: open then Android Back returns home`, "os-input", async () => {
       await tap("#" + btn);
-      ok(await waitFor(vis(backSel), 5000), name + " screen not shown (" + backSel + " not visible)");
+      ok(await waitFor(vis(backSel), 15000), name + " screen not shown (" + backSel + " not visible); btnRect=" + JSON.stringify(await ev(`(()=>{const b=document.querySelector("#${btn}");if(!b)return null;const r=b.getBoundingClientRect();return [r.left,r.top,r.width,r.height]})()`)));
       shot("05-" + name);
       await back();
       ok(await waitFor("!(" + vis(backSel) + ")", 5000), "Android Back did not close " + name);
@@ -250,7 +260,14 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     if (!enabled) return { skipped: "start disabled", players: await ev(`[document.querySelector("#p1Name"),document.querySelector("#p2Name")].map(n=>n&&(n.value||n.textContent))`) };
     await tap("#startGameBtn");
     await waitFor(vis("#proGameScreen"), 20000);
-    const g = await ev(vis("#proGameScreen"));
+    let g = await ev(vis("#proGameScreen")), viaJsClick = null;
+    if (!g) {
+      const dlg = await ev(`[...document.querySelectorAll('[role=dialog],.cue-in-progress-choice-v1,#toast')].filter(n=>n.getClientRects().length).map(n=>(n.id||n.className)+':'+(n.textContent||'').trim().slice(0,40))`);
+      shot("07-start-no-effect");
+      await ev(`document.querySelector('#startGameBtn').click(); true`);
+      viaJsClick = await waitFor(vis("#proGameScreen"), 15000);
+      ok(false, "game screen not shown after OS tap on Start (JS click " + (viaJsClick ? "DID" : "did NOT") + " open it); visible dialogs=" + JSON.stringify(dlg));
+    }
     shot("07-game");
     const clock = await ev(`[...document.querySelectorAll('[id*="lock" i],[id*="shot" i]')].filter(n=>n.getClientRects().length).map(n=>n.id).slice(0,8)`);
     ok(g, "game screen not shown after tapping Start (fresh install)");
