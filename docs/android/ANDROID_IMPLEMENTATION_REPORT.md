@@ -66,3 +66,13 @@ Debug APK／AAB: **なし**。署名なし成果物も無し。
   - Gradle 本体は /opt/gradle の 8.14.3 を使用（wrapper の services.gradle.org は不要）。
 - 追加で必要なドメイン: `repo.maven.apache.org`（必須）、必要に応じ `plugins.gradle.org`、`services.gradle.org`（wrapper 利用時）。許可範囲は独断で拡大していない。
 - Compile／APK／AAB／Lint／Unit Test(Android)／16KB 検査: 未実施（環境 BLOCKED）。製品 FAIL ではない。
+
+## 13. Maven Central 解除後の再開結果（開始HEAD bb1f3a6）
+- Network 実測: `repo.maven.apache.org`（kotlin-stdlib-2.2.0.pom）= **200（解除確認）**、`dl.google.com` = 200/302。
+- Gradle 設定評価: AGP 8.13.0 の classpath 解決は通過（Maven Central 403 は解消）。
+- **新たな BLOCKED（STOP）**: `registry.npmjs.org` は `getaddrinfo ENOTFOUND`（許可ドメイン外）。
+  - 失敗コマンド: `npm ci`（Exit handler never called／audit: ENOTFOUND）、続く `npm run android:sync` は `cap: not found`。
+  - 結果: `node_modules/@capacitor/{android,cli,filesystem,share}` が空のため `cap sync` が実行できず、`android/capacitor-cordova-android-plugins/cordova.variables.gradle` が生成されない。`capacitor.settings.gradle` は `../node_modules/@capacitor/*` を参照するため、`:app:assembleDebug` は評価段階で停止（`Could not read script ... cordova.variables.gradle`）。
+  - 必要性: Capacitor 8 の Android ネイティブ層（@capacitor/android, filesystem, share）の取得に必須。Maven 経由への構成変更は製品構成の変更となるため独断で実施せず、許可範囲も拡大していない。
+  - 必要ドメイン: `registry.npmjs.org`（npm ci 用）。
+- Compile／APK／AAB／Lint／Android Unit Test／16KB: 未実施（環境 BLOCKED。製品 FAIL ではない）。
