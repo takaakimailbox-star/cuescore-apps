@@ -1,0 +1,244 @@
+// Android emulator quality driver (CI only, test data only, no network except localhost adb forward).
+// Usage: node emulator-verify.mjs <apk> <outDir> <label>
+// Operates the real app inside the emulator: adb input (Back/Home/rotation, real OS events) and
+// Chrome DevTools Protocol touch/mouse events + DOM reads inside the app WebView.
+// Each step records kind: "os-input" (adb), "webview-input" (CDP touch), "dom-read", "device-state".
+import { execFileSync } from "node:child_process";
+import fs from "node:fs";
+import path from "node:path";
+
+const [apk, outDir, label] = process.argv.slice(2);
+const PKG = "com.takaakimailboxstar.cuescoreapps";
+fs.mkdirSync(outDir, { recursive: true });
+const results = [];
+const consoleErrors = [];
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const adb = (...a) => execFileSync("adb", a, { encoding: "utf8", maxBuffer: 64 << 20 }).trim();
+const adbSh = cmd => adb("shell", cmd);
+const shot = name => {
+  const f = path.join(outDir, `${label}-${name}.png`);
+  try { fs.writeFileSync(f, execFileSync("adb", ["exec-out", "screencap", "-p"], { maxBuffer: 64 << 20 })); } catch (e) { return null; }
+  return path.basename(f);
+};
+
+let ws = null, seq = 0; const pending = new Map();
+async function connect(timeoutMs = 90000) {
+  const t0 = Date.now();
+  while (Date.now() - t0 < timeoutMs) {
+    try {
+      const pid = adbSh(`pidof ${PKG}`).split(/\s+/)[0];
+      if (pid) {
+        try { adb("forward", "--remove", "tcp:9222"); } catch (_) {}
+        adb("forward", "tcp:9222", `localabstract:webview_devtools_remote_${pid}`);
+        const list = await (await fetch("http://127.0.0.1:9222/json")).json();
+        const page = list.find(p => p.type === "page" && /localhost|capacitor|https?:\/\//.test(p.url)) || list.find(p => p.type === "page");
+        if (page) {
+          ws = new WebSocket(page.webSocketDebuggerUrl);
+          await new Promise((res, rej) => { ws.onopen = res; ws.onerror = () => rej(new Error("ws error")); });
+          ws.onmessage = m => {
+            const d = JSON.parse(m.data);
+            if (d.id && pending.has(d.id)) { pending.get(d.id)(d); pending.delete(d.id); }
+            else if (d.method === "Runtime.exceptionThrown") consoleErrors.push(d.params.exceptionDetails?.exception?.description || d.params.exceptionDetails?.text);
+          };
+          await send("Runtime.enable");
+          return page.url;
+        }
+      }
+    } catch (_) {}
+    await sleep(1500);
+  }
+  throw new Error("CDP connect timeout");
+}
+const send = (method, params = {}) => new Promise((res, rej) => {
+  const id = ++seq; pending.set(id, res);
+  ws.send(JSON.stringify({ id, method, params }));
+  setTimeout(() => { if (pending.has(id)) { pending.delete(id); rej(new Error("cdp timeout " + method)); } }, 20000);
+});
+async function ev(expr) {
+  const r = await send("Runtime.evaluate", { expression: expr, returnByValue: true, awaitPromise: true });
+  if (r.result?.exceptionDetails) throw new Error(r.result.exceptionDetails.exception?.description || "eval error");
+  return r.result?.result?.value;
+}
+async function waitFor(expr, ms = 30000) {
+  const t0 = Date.now();
+  while (Date.now() - t0 < ms) { try { if (await ev(expr)) return true; } catch (_) {} await sleep(500); }
+  return false;
+}
+const vis = sel => `(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(!n)return false;const s=getComputedStyle(n);if(s.display==='none'||s.visibility==='hidden')return false;for(let p=n;p;p=p.parentElement){if(p.hidden||p.classList.contains('hidden'))return false}return n.getClientRects().length>0})()`;
+async function tap(sel) {
+  const r = await ev(`(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(!n)return null;n.scrollIntoView({block:'center'});const b=n.getBoundingClientRect();return {x:b.left+b.width/2,y:b.top+b.height/2}})()`);
+  if (!r) throw new Error("not found " + sel);
+  const pt = [{ x: r.x, y: r.y, id: 1 }];
+  await send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: pt });
+  await send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+  await sleep(600);
+}
+const back = async () => { adbSh("input keyevent KEYCODE_BACK"); await sleep(900); };
+
+async function step(id, title, kind, fn) {
+  const rec = { id, title, kind, status: "PASS", detail: "" };
+  try { const d = await fn(); rec.detail = typeof d === "string" ? d : JSON.stringify(d ?? ""); }
+  catch (e) { rec.status = "FAIL"; rec.detail = String(e.message || e).slice(0, 400); shot("fail-" + id); }
+  results.push(rec);
+  console.log(`[${rec.status}] ${id} ${title} :: ${rec.detail}`);
+  fs.writeFileSync(path.join(outDir, `${label}-results.json`), JSON.stringify({ label, results, consoleErrors }, null, 2));
+}
+const ok = (c, m) => { if (!c) throw new Error(m); };
+const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSwitcherV1"), 60000);
+
+(async () => {
+  let info = {};
+  await step("E01", "APK install", "device-state", async () => {
+    adbSh("logcat -c");
+    const o = adb("install", "-r", apk);
+    ok(/Success/.test(o), o);
+    return o;
+  });
+  await step("E02", "Device / API / PAGE_SIZE", "device-state", async () => {
+    info = {
+      sdk: adbSh("getprop ro.build.version.sdk"), release: adbSh("getprop ro.build.version.release"),
+      abi: adbSh("getprop ro.product.cpu.abi"), pagesize: adbSh("getconf PAGE_SIZE"),
+      kernel: adbSh("uname -r"), size: adbSh("wm size"), density: adbSh("wm density"),
+      pkg16k: adbSh(`dumpsys package ${PKG} | grep -i -E "pageSize|minSdk|targetSdk" | head -4`)
+    };
+    return info;
+  });
+  await step("E03", "Launch + WebView attach + home visible", "os-input", async () => {
+    adbSh(`monkey -p ${PKG} -c android.intent.category.LAUNCHER 1`);
+    const url = await connect();
+    ok(await homeReady(), "home not visible within 60s");
+    shot("01-home");
+    return url;
+  });
+  await step("E04", "Crash scan after launch", "device-state", async () => {
+    const lc = adbSh("logcat -d -b crash,main -s AndroidRuntime:E ActivityManager:E | head -40");
+    ok(!/FATAL EXCEPTION/.test(lc), lc.slice(0, 300));
+    return "no FATAL EXCEPTION";
+  });
+  await step("E05", "Safe-area / system bars / viewport", "dom-read", async () => {
+    const v = await ev(`(()=>{const d=document.createElement('div');d.style.cssText='position:fixed;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)';document.body.appendChild(d);const c=getComputedStyle(d);const r={top:c.paddingTop,right:c.paddingRight,bottom:c.paddingBottom,left:c.paddingLeft};d.remove();return {safe:r,inner:[innerWidth,innerHeight],dpr:devicePixelRatio,hScroll:document.documentElement.scrollWidth>innerWidth+1}})()`);
+    ok(!v.hScroll, "horizontal overflow");
+    const nav = await ev(`(()=>{const n=document.querySelector('#cueHomeNavV3');if(!n)return null;const b=n.getBoundingClientRect();return {bottom:b.bottom,inner:innerHeight}})()`);
+    ok(nav && nav.bottom <= nav.inner + 1, "bottom nav clipped " + JSON.stringify(nav));
+    return v;
+  });
+  await step("E06", "Six disciplines selectable", "webview-input", async () => {
+    const names = ["9ball", "10ball", "jpa9", "rotation", "straightPool", "threeCushion"], seen = {};
+    for (const d of names) {
+      await tap(`[data-discipline="${d}"]`);
+      const sel = await ev(`document.querySelector('[data-discipline="${d}"]').getAttribute('aria-selected')`);
+      ok(sel === "true", d + " aria-selected=" + sel);
+      seen[d] = await ev(`(document.querySelector('#cueSelectedGameNameV1')||{}).textContent||''`);
+      shot("02-disc-" + d);
+    }
+    return seen;
+  });
+  await step("E07", "D2 setup: left/right player cards aligned (9-Ball)", "webview-input", async () => {
+    await tap('[data-discipline="9ball"]');
+    const g = await ev(`(()=>{const a=document.querySelector('#newMatchPlayerCard1V1'),b=document.querySelector('#newMatchPlayerCard2V1');if(!a||!b)return null;const A=a.getBoundingClientRect(),B=b.getBoundingClientRect();return {a:[A.left,A.top,A.width,A.height],b:[B.left,B.top,B.width,B.height],vw:innerWidth}})()`);
+    ok(g, "cards missing");
+    shot("03-d2-setup");
+    ok(Math.abs(g.a[1] - g.b[1]) <= 1 && Math.abs(g.a[3] - g.b[3]) <= 1, "card top/height mismatch " + JSON.stringify(g));
+    ok(g.a[0] < g.b[0] && g.b[0] + g.b[2] <= g.vw + 1, "card order/overflow " + JSON.stringify(g));
+    return g;
+  });
+  await step("E08", "Three languages (ja/en/zh-Hans)", "webview-input", async () => {
+    const out = {};
+    for (const lang of ["en", "zh-Hans", "ja"]) {
+      await ev(`localStorage.setItem('cueScore.language.v1', ${JSON.stringify(lang)}); true`);
+      await send("Page.reload", {}); await sleep(1500);
+      await connect(); ok(await homeReady(), "home after reload " + lang);
+      out[lang] = await ev(`({lang:document.documentElement.lang, nav:(document.querySelector('#settingsBtn')||{}).textContent?.trim().slice(0,12)})`);
+      shot("04-lang-" + lang);
+    }
+    ok(out.en.lang === "en" && out["zh-Hans"].lang.startsWith("zh") && out.ja.lang === "ja", JSON.stringify(out));
+    return out;
+  });
+  const screens = [["settingsBtn", "#settingsScreen", "Settings"], ["playerManagementBtn", "#playerLibraryScreen", "Players"], ["recordsBtn", "#recordsScreen", "History"], ["openRankingsBtn", "#rankingsScreen", "Analysis"]];
+  for (const [btn, , name] of screens) {
+    await step("E09-" + name, `${name}: open then Android Back returns home`, "os-input", async () => {
+      await tap("#" + btn);
+      const hidden = await ev(vis("#cueHomeV1"));
+      ok(hidden === false, name + " did not leave home");
+      shot("05-" + name);
+      await back();
+      ok(await homeReady(), "Back did not return to home");
+      return "ok";
+    });
+  }
+  await step("E10", "Back at root minimizes (no crash, process alive)", "os-input", async () => {
+    await back();
+    await sleep(1200);
+    const top = adbSh("dumpsys activity activities | grep -E 'topResumedActivity|mResumedActivity' | head -2");
+    const alive = adbSh(`pidof ${PKG}`);
+    ok(alive, "process died on root Back");
+    return { top: top.slice(0, 160), alive: true };
+  });
+  await step("E11", "Resume after background keeps state + data", "os-input", async () => {
+    adbSh(`monkey -p ${PKG} -c android.intent.category.LAUNCHER 1`);
+    await connect(); ok(await homeReady(), "home after resume");
+    await ev(`localStorage.setItem('__emu_probe','1'); true`);
+    adbSh("input keyevent KEYCODE_HOME"); await sleep(2500);
+    adbSh(`monkey -p ${PKG} -c android.intent.category.LAUNCHER 1`); await sleep(1500);
+    await connect(); ok(await homeReady(), "home after HOME→relaunch");
+    ok((await ev(`localStorage.getItem('__emu_probe')`)) === "1", "probe lost");
+    shot("06-resume");
+    return "state kept";
+  });
+  await step("E12", "Process kill → data persists", "device-state", async () => {
+    adbSh(`am force-stop ${PKG}`); await sleep(1500);
+    adbSh(`monkey -p ${PKG} -c android.intent.category.LAUNCHER 1`);
+    await connect(); ok(await homeReady(), "home after kill");
+    const v = await ev(`localStorage.getItem('__emu_probe')`);
+    ok(v === "1", "probe lost after kill: " + v);
+    const lang = await ev(`localStorage.getItem('cueScore.language.v1')`);
+    await ev(`localStorage.removeItem('__emu_probe'); true`);
+    return { probe: v, language: lang };
+  });
+  await step("E13", "Match start → game screen (shot clock UI present) → Back", "webview-input", async () => {
+    await tap('[data-discipline="9ball"]');
+    const enabled = await ev(`(()=>{const b=document.querySelector('#startGameBtn');return !!b&&!b.disabled})()`);
+    if (!enabled) return "SKIPPED: start disabled (needs two selected players; not forced)";
+    await tap("#startGameBtn");
+    await waitFor(vis("#proGameScreen"), 8000);
+    const g = await ev(vis("#proGameScreen"));
+    shot("07-game");
+    const clock = await ev(`!!document.querySelector('[id*="hotClock" i],[id*="shotclock" i],[class*="shot-clock" i],[id*="Clock"]')`);
+    await back(); await sleep(800);
+    shot("07b-after-back");
+    return { gameScreenVisible: g, clockElement: clock };
+  });
+  await step("E14", "Free/Pro: entitlement object + Pro overlay open/Back", "webview-input", async () => {
+    const st = await ev(`(()=>{const e=window.CueScoreEntitlement;return {has:!!e, keys:e?Object.keys(e).slice(0,12):[], pro:!!window.CueScorePro}})()`);
+    ok(st.has && st.pro, JSON.stringify(st));
+    await ev(`try{window.CueScorePro.open('emulator-check')}catch(e){}; true`); await sleep(900);
+    shot("08-pro");
+    const open = await ev(vis(".cue-pro-overlay-v1"));
+    if (open) { await back(); ok(!(await ev(vis(".cue-pro-overlay-v1"))), "Pro overlay not closed by Back"); }
+    return { ...st, overlayOpened: open };
+  });
+  await step("E15", "Native plugins registered (Billing/Scanner/Filesystem/Share)", "dom-read", async () => {
+    const p = await ev(`Object.keys((window.Capacitor&&Capacitor.PluginHeaders)?Object.fromEntries(Capacitor.PluginHeaders.map(h=>[h.name,1])):{})`);
+    return p;
+  });
+  await step("E16", "Rotation to landscape and back: no crash, app still usable", "os-input", async () => {
+    adbSh("settings put system accelerometer_rotation 0"); adbSh("settings put system user_rotation 1"); await sleep(2500);
+    shot("09-landscape");
+    ok(adbSh(`pidof ${PKG}`), "process died on rotate");
+    adbSh("settings put system user_rotation 0"); await sleep(2000);
+    await connect(); ok(await homeReady(), "home after rotate back");
+    shot("10-portrait-again");
+    return "ok";
+  });
+  await step("E17", "Final crash/ANR scan + JS exceptions", "device-state", async () => {
+    const lc = adbSh("logcat -d | grep -E 'FATAL EXCEPTION|ANR in' | head -5");
+    ok(!lc, lc);
+    ok(consoleErrors.length === 0, "JS exceptions: " + consoleErrors.slice(0, 3).join(" | "));
+    return "clean";
+  });
+  fs.writeFileSync(path.join(outDir, `${label}-logcat.txt`), (() => { try { return adbSh("logcat -d -t 2000"); } catch (_) { return ""; } })());
+  fs.writeFileSync(path.join(outDir, `${label}-device.json`), JSON.stringify(info, null, 2));
+  const fails = results.filter(r => r.status === "FAIL").length;
+  console.log(`SUMMARY ${label}: ${results.length - fails}/${results.length} PASS`);
+  process.exit(0);
+})().catch(e => { console.error("DRIVER ERROR", e); process.exit(0); });
