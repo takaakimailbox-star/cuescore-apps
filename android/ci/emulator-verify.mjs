@@ -70,7 +70,7 @@ async function waitFor(expr, ms = 30000) {
 const vis = sel => `(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(!n)return false;const s=getComputedStyle(n);if(s.display==='none'||s.visibility==='hidden')return false;for(let p=n;p;p=p.parentElement){if(p.hidden||p.classList.contains('hidden'))return false}return n.getClientRects().length>0})()`;
 // Real OS-level tap (adb input tap). The CSS->screen mapping is calibrated by one swallowed tap whose
 // clientX/clientY the page reports back, so it is exact for every API level / orientation / inset mode.
-let origin = null;
+let origin = null, lastTap = null;
 async function calibrate() {
   await ev(`(()=>{window.__cal=null;const stop=e=>{if(e.cancelable)e.preventDefault();e.stopImmediatePropagation()};const evs=['pointerdown','pointerup','mousedown','mouseup','touchstart','touchend','click'];const h=e=>{if(e.type==='pointerdown'&&!window.__cal)window.__cal=[e.clientX,e.clientY];stop(e)};evs.forEach(t=>addEventListener(t,h,true));setTimeout(()=>evs.forEach(t=>removeEventListener(t,h,true)),2500);return true})()`);
   const px = 300, py = 900;
@@ -86,8 +86,9 @@ async function tap(sel) {
   await ev(`(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(n)n.scrollIntoView({block:'center',inline:'center',behavior:'instant'});return !!n})()`);
   await sleep(350);
   if (!origin) await calibrate();
-  const r = await ev(`(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(!n)return null;const b=n.getBoundingClientRect();return {x:b.left+b.width/2,y:b.top+b.height/2}})()`);
+  const r = await ev(`(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(!n)return null;const b=n.getBoundingClientRect();const x=b.left+b.width/2,y=b.top+b.height/2;const h=document.elementFromPoint(x,y);return {x,y,rect:[b.left,b.top,b.width,b.height].map(v=>Math.round(v)),hit:h?((h.id||h.className||h.tagName)+'').slice(0,60):null,contained:!!h&&(n.contains(h)||h.contains(n)),iw:innerWidth,ih:innerHeight}})()`);
   if (!r) throw new Error("not found " + sel);
+  lastTap = { sel, ...r };
   adbSh(`input tap ${Math.round(origin.x + r.x * origin.dpr)} ${Math.round(origin.y + r.y * origin.dpr)}`);
   await sleep(1800);
 }
@@ -96,7 +97,7 @@ const back = async () => { adbSh("input keyevent KEYCODE_BACK"); await sleep(900
 async function step(id, title, kind, fn) {
   const rec = { id, title, kind, status: "PASS", detail: "" };
   try { const d = await fn(); rec.detail = typeof d === "string" ? d : JSON.stringify(d ?? ""); }
-  catch (e) { rec.status = "FAIL"; rec.detail = String(e.message || e).slice(0, 400); shot("fail-" + id); }
+  catch (e) { rec.status = "FAIL"; rec.detail = (String(e.message || e) + (lastTap ? " | lastTap=" + JSON.stringify(lastTap) : "")).slice(0, 700); shot("fail-" + id); }
   results.push(rec);
   console.log(`[${rec.status}] ${id} ${title} :: ${rec.detail}`);
   fs.writeFileSync(path.join(outDir, `${label}-results.json`), JSON.stringify({ label, results, consoleErrors }, null, 2));
@@ -137,7 +138,8 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
       return { url, firstLaunchFailed: true, firstAttemptError: e.message, pidAtFailure: adbTry("pidof " + PKG), diagFile: label + "-first-launch-diag.txt" };
     }
     shot("01-home");
-    return { url, retried };
+    const btns = await ev(`[...document.querySelectorAll('button,[role=button],[role=tab],a')].filter(n=>n.getClientRects().length&&n.getBoundingClientRect().width>0).map(n=>{const b=n.getBoundingClientRect();return (n.id||n.dataset.discipline||n.className||'').toString().slice(0,28)+'@'+Math.round(b.left)+','+Math.round(b.top)+','+Math.round(b.width)+'x'+Math.round(b.height)}).slice(0,40)`);
+    return { url, retried, visibleButtons: btns };
   });
   await step("E04", "Crash scan after launch", "device-state", async () => {
     const lc = adbSh("logcat -d -b crash,main -s AndroidRuntime:E ActivityManager:E | head -40");
@@ -149,6 +151,7 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     let v = await ev(probe), waited = 0;
     while (parseFloat(v.safe.top) === 0 && waited < 8000) { await sleep(1000); waited += 1000; v = await ev(probe); }
     v.settledAfterMs = waited;
+    v.webview = { ua: (await ev('navigator.userAgent')).match(/Chrome\/[\d.]+/)?.[0], pkg: adbTry("dumpsys webviewupdate | grep -m2 -i -E 'Current WebView package|versionName'").replace(/\s+/g,' ').slice(0,160) };
     v.statusBarWindow = adbTry("dumpsys window | grep -m1 -o 'statusBars[^}]*frame=\\[[0-9,]*\\]\\[[0-9,]*\\]'").slice(0, 120);
     ok(!v.hScroll, "horizontal overflow");
     ok(v.navBottom != null && v.navBottom > 0 && v.navBottom <= v.inner[1] + 1, "bottom nav clipped/hidden " + JSON.stringify(v));
