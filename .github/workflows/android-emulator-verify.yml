@@ -1,5 +1,5 @@
 # Temporary Android quality gate (Android branch only). Runs ONLY when this file changes on the Android branch.
-# rev: 6  (bump this number to re-run after editing android/ci/emulator-verify.mjs)
+# rev: 7  (bump this number to re-run after editing android/ci/emulator-verify.mjs)
 # No secrets, no signing, no publishing, no schedule. Read-only token. Evidence is uploaded as a 7-day artifact.
 name: android-emulator-verify
 on:
@@ -65,6 +65,8 @@ jobs:
         if: matrix.label == 'api35-16k'
         run: |
           SM=$ANDROID_HOME/cmdline-tools/latest/bin
+          export ANDROID_AVD_HOME=$HOME/.android/avd
+          mkdir -p $ANDROID_AVD_HOME
           yes | $SM/sdkmanager --licenses > /dev/null || true
           $SM/sdkmanager --install 'system-images;android-35;google_apis_ps16k;x86_64' > /dev/null
           echo no | $SM/avdmanager create avd --force -n ps16k -k 'system-images;android-35;google_apis_ps16k;x86_64' -d pixel_6

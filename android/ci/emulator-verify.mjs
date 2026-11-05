@@ -74,11 +74,12 @@ let origin = null;
 async function calibrate() {
   await ev(`(()=>{window.__cal=null;const stop=e=>{if(e.cancelable)e.preventDefault();e.stopImmediatePropagation()};const evs=['pointerdown','pointerup','mousedown','mouseup','touchstart','touchend','click'];const h=e=>{if(e.type==='pointerdown'&&!window.__cal)window.__cal=[e.clientX,e.clientY];stop(e)};evs.forEach(t=>addEventListener(t,h,true));setTimeout(()=>evs.forEach(t=>removeEventListener(t,h,true)),2500);return true})()`);
   const px = 300, py = 900;
-  adbSh(`input tap ${px} ${py}`); await sleep(700);
+  adbSh(`input tap ${px} ${py}`);
+  await waitFor("window.__cal!=null", 10000);
   const c = await ev("window.__cal"), dpr = await ev("devicePixelRatio");
   if (!c) throw new Error("calibration tap not seen by page");
   origin = { x: px - c[0] * dpr, y: py - c[1] * dpr, dpr };
-  await sleep(2000);
+  await sleep(3000);
   return origin;
 }
 async function tap(sel) {
@@ -88,7 +89,7 @@ async function tap(sel) {
   const r = await ev(`(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(!n)return null;const b=n.getBoundingClientRect();return {x:b.left+b.width/2,y:b.top+b.height/2}})()`);
   if (!r) throw new Error("not found " + sel);
   adbSh(`input tap ${Math.round(origin.x + r.x * origin.dpr)} ${Math.round(origin.y + r.y * origin.dpr)}`);
-  await sleep(800);
+  await sleep(1800);
 }
 const back = async () => { adbSh("input keyevent KEYCODE_BACK"); await sleep(900); };
 
@@ -248,7 +249,7 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     const enabled = await ev(`(()=>{const b=document.querySelector('#startGameBtn');return !!b&&!b.disabled})()`);
     if (!enabled) return { skipped: "start disabled", players: await ev(`[document.querySelector("#p1Name"),document.querySelector("#p2Name")].map(n=>n&&(n.value||n.textContent))`) };
     await tap("#startGameBtn");
-    await waitFor(vis("#proGameScreen"), 8000);
+    await waitFor(vis("#proGameScreen"), 20000);
     const g = await ev(vis("#proGameScreen"));
     shot("07-game");
     const clock = await ev(`[...document.querySelectorAll('[id*="lock" i],[id*="shot" i]')].filter(n=>n.getClientRects().length).map(n=>n.id).slice(0,8)`);
