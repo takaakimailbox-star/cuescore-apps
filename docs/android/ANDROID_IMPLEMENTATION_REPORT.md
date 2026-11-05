@@ -1,8 +1,20 @@
 # CueScore Android 実装報告（Cloud / 2026-11-05）
 
-## 1. 結論
-**Android版は「実装済み・未ビルド・未実機検証」。製品完成ではない。**
-Cloud 環境のネットワーク方針が `dl.google.com`（Android SDK／Google Maven）を拒否するため、AGP・AndroidX・Play Billing・CameraX が取得できず、**Gradle ビルド／APK／AAB／Emulator／Instrumentation は全て BLOCKED（環境起因）**。製品 FAIL ではない。SDK なしで可能な範囲（プロジェクト基盤・ネイティブAdapter・JS側・JVM単体テスト・契約テスト・Play準備文書）は完了。
+## 1. 現行状態（Gate別 / 2026-11-05 更新）
+**Android版は「Compile／Build／Unit Test／Lint／16KB静的検査 PASS、Emulator 実行は一部実施、実機・実課金・実カメラは未検証」。製品完成ではない。**
+各Gateは独立して記録する（証跡の詳細は `ANDROID_BUILD_EVIDENCE.md`・`ANDROID_EMULATOR_EVIDENCE.md`）。
+
+| Gate | 状態 | 根拠 |
+|---|---|---|
+| G1 Compile | **PASS** | `assembleDebug` 成功（Cloud／GitHub Actions 双方） |
+| G2 Build | **PASS** | Debug APK／署名なし Release AAB 生成（sha256 は BUILD_EVIDENCE） |
+| G3 Unit Test | **PASS** | Android 11/11、新規 Node 7/7、全回帰 1260 PASS／既存3 FAIL（変更なし） |
+| G4 Lint | **PASS（0 errors）** | 29 warnings の重要度分類は BUILD_EVIDENCE |
+| G5 16KB 静的 | **PASS** | zipalign -P 16 成功、.so は LOAD align 0x4000 |
+| G6 Emulator | **一部実施** | GitHub Actions（KVM）で API 26／35／36 と 16KB image(PAGE_SIZE=16384) を実起動。範囲は EMULATOR_EVIDENCE |
+| G7 実機 | **未実施** | 実カメラ(QR)・実Play購入・端末固有挙動は Emulator で PASS 扱いにしない |
+
+> 以下の §6 以降のうち「未ビルド」「BLOCKED」と書かれた記述は **初回報告時点（2026-11-05 午前）の履歴**であり、現行状態は上表を正とする。
 
 ## 2. 基準
 - main HEAD: fd5f0cd48bf994bc2f2bc8668383eac73beb38f8（fresh clone で確認、参考SHAと一致）
@@ -31,7 +43,7 @@ Cloud 環境のネットワーク方針が `dl.google.com`（Android SDK／Googl
 - `npm run android:sync`: 成功（native-web→android assets、plugin 2件検出）。
 - `gradle :app:assembleDebug`: **BLOCKED**（`dl.google.com` 403、AGP 8.13.0 pom 取得不可）。
 
-## 6. FAIL／BLOCKED 理由
+## 6. FAIL／BLOCKED 理由（初回報告時点の履歴・現行は §1）
 | 項目 | 区分 | 理由 |
 |---|---|---|
 | Debug APK／Release AAB／16KB 検査／Lint／Instrumentation／Emulator／API 26・35・36 | 環境 BLOCKED | dl.google.com 拒否。Emulator は /dev/kvm も無し（Cloud VM）。**同一理由で2回以上確認済み**（curl・gradle）。代替: SDK を許可するネットワーク設定、または Mac/CI での検証工程を分離 |

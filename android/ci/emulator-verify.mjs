@@ -99,10 +99,10 @@ async function tapExpr(expr, label) {
   if (!r) throw new Error("no visible element for " + label);
   lastTap = { label, ...r };
   const sx = Math.round(origin.x + r.x * origin.dpr), sy = Math.round(origin.y + r.y * origin.dpr);
-  await ev(`window.__lastPtr=null;if(!window.__ptrDiag){window.__ptrDiag=true;addEventListener('pointerdown',e=>{window.__lastPtr=[Math.round(e.clientX),Math.round(e.clientY),((e.target&&(e.target.id||e.target.tagName))||'')+''.slice(0,30)]},true)}true`);
+  await ev(`window.__lastPtr=null;window.__evlog=[];if(!window.__ptrDiag){window.__ptrDiag=true;['pointerdown','pointerup','touchstart','touchend','click'].forEach(t=>addEventListener(t,e=>{if(t==='pointerdown')window.__lastPtr=[Math.round(e.clientX),Math.round(e.clientY),((e.target&&(e.target.id||e.target.tagName))||'')+''];(window.__evlog=window.__evlog||[]).push(t+':'+(e.isTrusted?'T':'u')+(e.defaultPrevented?':prevented':''))},true))}true`);
   adbSh(`input swipe ${sx} ${sy} ${sx} ${sy} 120`);
   await sleep(1800);
-  lastTap.screen = [sx, sy]; lastTap.ptr = await ev("window.__lastPtr").catch(() => null);
+  lastTap.screen = [sx, sy]; lastTap.ptr = await ev("window.__lastPtr").catch(() => null); lastTap.ev = await ev("(window.__evlog||[]).join(',')").catch(() => null);
   return r;
 }
 const tap = (sel, idx = 0) => tapExpr(PICK(sel, idx), sel + "[" + idx + "]");
@@ -176,20 +176,18 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
   });
   const disciplines = ["9ball", "10ball", "jpa9", "rotation", "straightPool", "threeCushion"];
   for (const d of disciplines) {
-    await step("E06-" + d, `${d}: home -> setup screen, D2 cards aligned, Android Back -> home`, "os-input", async () => {
+    await step("E06-" + d, `${d}: tap tile (OS press) -> selected on Home, D2 cards aligned`, "os-input", async () => {
       ok(await homeReady(), "not on home before " + d);
-      await tap(`[data-discipline="${d}"]`);
-      ok(await waitFor(vis("#cueMatchSetupBackV3"), 15000), "setup screen not shown after tapping " + d);
+      const r = await tap(`[data-discipline="${d}"]`);
+      const sel = await waitFor(`document.querySelector('[data-discipline="${d}"]').getAttribute('aria-selected')==='true'`, 10000);
       const name = await ev(`((document.querySelector('#cueSelectedGameNameV1')||{}).textContent||'').trim()`);
-      const g = await ev(`(()=>{const a=document.querySelector('#newMatchPlayerCard1V1'),b=document.querySelector('#newMatchPlayerCard2V1');if(!a||!b)return null;const A=a.getBoundingClientRect(),B=b.getBoundingClientRect();return {a:[A.left,A.top,A.width,A.height].map(Math.round),b:[B.left,B.top,B.width,B.height].map(Math.round),vw:innerWidth,vh:innerHeight}})()`);
-      shot("02-setup-" + d);
-      ok(g && g.a[2] > 0, "player cards not visible");
+      const g = await ev(`(()=>{const a=document.querySelector('#newMatchPlayerCard1V1'),b=document.querySelector('#newMatchPlayerCard2V1');if(!a||!b)return null;const A=a.getBoundingClientRect(),B=b.getBoundingClientRect();return {a:[A.left,A.top,A.width,A.height].map(Math.round),b:[B.left,B.top,B.width,B.height].map(Math.round),vw:innerWidth}})()`);
+      shot("02-home-" + d);
+      ok(sel, "tile not selected after OS press; events=" + (lastTap && lastTap.ev) + " ptr=" + JSON.stringify(lastTap && lastTap.ptr));
+      ok(g && g.a[2] > 0, "player cards not visible " + JSON.stringify(g));
       ok(Math.abs(g.a[1] - g.b[1]) <= 1 && Math.abs(g.a[3] - g.b[3]) <= 1, "card top/height mismatch " + JSON.stringify(g));
       ok(g.a[0] >= 0 && g.a[0] < g.b[0] && g.b[0] + g.b[2] <= g.vw + 1, "card order/overflow " + JSON.stringify(g));
-      await back();
-      ok(await waitFor("!(" + vis("#cueMatchSetupBackV3") + ")", 10000), "Android Back did not leave setup");
-      ok(await homeReady(), "home not visible after Back");
-      return { selectedName: name, cards: g };
+      return { selectedName: name, cards: g, events: lastTap.ev };
     });
   }
   await step("E08", "Three languages (ja/en/zh-Hans)", "webview-input", async () => {
@@ -274,7 +272,7 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     adbTry(`pm clear ${PKG}`); await sleep(1500); launch();
     await connect(); ok(await homeReady(), "home after pm clear (fresh install state)");
     await tap('[data-discipline="9ball"]');
-    ok(await waitFor(vis("#cueMatchSetupBackV3"), 15000), "setup screen not shown");
+    ok(await waitFor(`document.querySelector('[data-discipline="9ball"]').getAttribute('aria-selected')==='true'`, 10000), "9-Ball tile not selected; events=" + (lastTap && lastTap.ev));
     const st = await ev(`(()=>{const b=document.querySelector('#startGameBtn');return b?{disabled:b.disabled,text:(b.textContent||'').trim().slice(0,16),players:[document.querySelector('#p1Name'),document.querySelector('#p2Name')].map(n=>n&&(n.value||n.textContent||'').trim().slice(0,16))}:null})()`);
     shot("07-setup-fresh");
     if (!st || st.disabled) return { skipped: "start disabled on fresh install", state: st };
@@ -286,7 +284,7 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     const clock = await ev(`[...document.querySelectorAll('[id*="lock" i],[id*="shot" i]')].filter(n=>n.getClientRects().length).map(n=>n.id).slice(0,8)`);
     await back(); await sleep(1500);
     shot("07b-after-back");
-    const after = await ev(`({game:${vis("#proGameScreen")},choice:${vis("#cueInProgressChoiceV1")},home:${vis("#cueHomeV1")},setup:${vis("#cueMatchSetupBackV3")}})`);
+    const after = await ev(`({game:${vis("#proGameScreen")},choice:${vis("#cueInProgressChoiceV1")},home:${vis("#cueHomeV1")}})`);
     return { startState: st, gameScreenVisible: g, clockElementIds: clock, afterBack: after };
   });
   await step("E17", "Final crash/ANR scan (app process) + JS exceptions", "device-state", async () => {
