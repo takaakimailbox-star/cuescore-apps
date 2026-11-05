@@ -31,7 +31,7 @@
 | ネイティブ Plugin 登録（CueScoreStoreKit／CueScoreQRScanner／Filesystem／Share／SystemBars） | ※1 | PASS | PASS | PASS | DOM |
 | 16 KB ページサイズでの実起動（`PAGE_SIZE=16384`） | – | – | – | **PASS（起動・主要操作とも 4 KB と同等）** | 実機能 |
 
-※1 API26: 初回2回の実行はドライバ不具合（`logcat -c` 失敗で APK 未インストール）で無効。修正後の run は完了待ち（§6 を参照）。
+※1 API26（default=AOSP image、Launcher3）: 初回2回の実行はドライバ不具合で無効。修正後の run 16 では **アプリが起動直後に例外終了**（`MainActivity.onCreate`→`CapacitorWebView.<init>`→`WebView.getFactory`→`WebViewFactory` の例外、`Process: com.takaakimailboxstar.cuescoreapps` が AndroidRuntime に記録）。WebView を生成できないため以降の操作は全て未実施（4/24 は『ルート Back でプロセス生存』等の副次項目）。§4 F6 参照。
 ※2 16 KB image: 初回コールド起動で WebView の DevTools ソケットが 70 秒以内に現れない事象が **2 回**（run 8・run 14）発生。プロセスは生存、クラッシュなし、再起動後は正常。4 KB image（API26/35/36）では未発生。原因未特定（§4 F3）。
 ※3 API36 の Start 操作は最終 run では未取得（run 15 の読取分に含まず）。
 
@@ -45,6 +45,7 @@
 | F2 | P2 | **Android Back の到達先**：種目選択後（セットアップ状態）、および Players／History／Settings タブ画面で Back を押すとアプリが**最小化**される（ホーム／種目一覧には戻らない）。Back アダプタは「表示中の画面内 Back ボタンをクリック」する仕様で、Decision 045 後のホーム（`cueMatchSetupBackV3` 削除）とタブ画面には対象ボタンがない | 6 競技×3 構成すべてで `backReturnsToHomeTiles:false`、`appInForegroundAfterBack:false`、プロセス生存 | **未修正**（Back ポリシーは UX 仕様。「タブ→Home タブ→終了」にするか PO 判断） |
 | F3 | P2 | 16 KB image の初回コールド起動で WebView が 70 秒以内に立ち上がらない（再起動で正常） | run 8・run 14 の `first-launch-diag`。同時刻に Google Play services／webview_service 等の他プロセス再起動が多発 | 要追加調査。実機（Pixel 8 以降の 16 KB 対応端末）で再確認 |
 | F4 | 情報 | 16 KB image で Google Play services が NPE（`ReferenceQueueDaemon`）。アプリのプロセスではない | `otherProcessFatalExceptions` | 対応不要（テスト基盤側） |
+| F6 | **P1 候補（環境要因の可能性大・要実機確認）** | **API 26（AOSP default image）でアプリが起動できない**。WebView プロバイダーの生成で例外（Capacitor は WebView 60 以上が前提。AOSP の API26 image 同梱 WebView は古く、実機のように Play 経由で更新されない）。アプリ側に WebView 非対応時の案内はない（Capacitor 標準の挙動に依存） | run 16 の API26 ジョブ（`WebViewFactory` スタック、`E17`）。API35/36 では同一 APK が起動するため APK 破損ではない | **未修正・minSdk 26 の確定は保留**。実機 API26 相当（WebView 更新済み）での起動確認が必要。環境側で WebView を更新する手段（Play／外部 APK 取得）は許可範囲外のため BLOCKED。対応案: minSdk を 27–28 に上げる、または最小 WebView 版の案内を設ける（PO 判断） |
 | F5 | 情報 | 試合画面で操作後、DevTools の評価が長時間応答しない場面（`page busy`）。ソフトウェア GPU 上の描画負荷の可能性が高く、アプリ側 ANR は検出されていない | `ANR in` なし、`appCrashes:0` | 実機でフレーム／ANR を確認 |
 
 ## 5. 切り分けの記録（無駄な再試行の防止）

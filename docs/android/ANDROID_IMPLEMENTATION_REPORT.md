@@ -90,4 +90,4 @@ Debug APK／AAB: **なし**。署名なし成果物も無し。
 - Compile／APK／AAB／Lint／Android Unit Test／16KB: 未実施（環境 BLOCKED。製品 FAIL ではない）。
 
 ## 14. Emulator 実動作 Gate（2026-11-05）
-詳細は `ANDROID_EMULATOR_EVIDENCE.md`。要点: GitHub Actions（KVM）で API 35／36 と 16 KB image（PAGE_SIZE=16384）を実起動し、**6 競技のタイル選択（実OS押下）と D2 左右カード整列が全て PASS**、言語 3 種・下部タブ 4 種・新規インストールからの試合開始・ルート Back 最小化・クラッシュ 0 件を確認。発見事項: F1 `env(safe-area-inset-top)` の間欠的 0（API35＋WebView124）、F2 Back の到達先（種目選択後／タブ画面で最小化）、F3 16 KB 初回コールド起動の遅延。いずれも**製品コード未修正・PO 判断待ち**。実カメラ／実購入／実機は未検証（G7）。
+詳細は `ANDROID_EMULATOR_EVIDENCE.md`。要点: GitHub Actions（KVM）で API 35／36 と 16 KB image（PAGE_SIZE=16384）を実起動し、**6 競技のタイル選択（実OS押下）と D2 左右カード整列が全て PASS**、言語 3 種・下部タブ 4 種・新規インストールからの試合開始・ルート Back 最小化・クラッシュ 0 件を確認。発見事項: F1 `env(safe-area-inset-top)` の間欠的 0（API35＋WebView124）、F2 Back の到達先（種目選択後／タブ画面で最小化）、F3 16 KB 初回コールド起動の遅延、F6 **API 26（AOSP image）でアプリが WebView 生成時に例外終了**（環境要因の可能性大だが minSdk 26 は未確定）。いずれも**製品コード未修正・PO 判断待ち**。実カメラ／実購入／実機は未検証（G7）。
