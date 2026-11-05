@@ -146,9 +146,9 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     try { url = await connect(70000); ok(await homeReady(), "home not visible within 60s"); }
     catch (e) {
       retried = true;
-      const diag = adbTry(`logcat -d | grep -E "cuescoreapps|AndroidRuntime|Fatal signal|ANR in|Process .* has died|am_crash|am_anr" | tail -25`);
+      const diag = adbTry(`logcat -d | grep -E "cuescoreapps|chromium|cr_|WebView|Capacitor|MainActivity|ANR in|Fatal signal|webview_service" | tail -40`) + "\nunix: " + adbTry("cat /proc/net/unix | grep -c devtools_remote");
       fs.writeFileSync(path.join(outDir, `${label}-first-launch-diag.txt`), `am start: ${out}\npid: ${adbTry("pidof " + PKG)}\n${diag}\n`);
-      console.log("FIRST-LAUNCH-DIAG\n" + (`am start: ${out}\npid: ${adbTry("pidof " + PKG)}\n${diag}`).slice(0, 2500));
+      console.log("FIRST-LAUNCH-DIAG\n" + (`am start: ${out}\npid: ${adbTry("pidof " + PKG)}\n${diag}`).slice(0, 3800));
       shot("03-first-launch-failed");
       launch(); url = await connect(70000); ok(await homeReady(), "home not visible after relaunch (first attempt: " + e.message + ")");
       shot("01-home");
@@ -179,7 +179,12 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
   const HOMEVIS = vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSwitcherV1");
   for (const d of disciplines) {
     await step("E06-" + d, `${d}: OS press on tile -> selected, D2 cards aligned, Android Back outcome`, "os-input", async () => {
-      if (!(await waitFor(HOMEVIS, 5000))) { launch(); await connect(); ok(await homeReady(), "could not reach home before " + d); }
+      if (!(await waitFor(HOMEVIS, 4000))) {
+        const top = adbTry("dumpsys activity activities | grep -m1 topResumedActivity");
+        if (!top.includes(PKG)) { launch(); await connect(); }
+        await waitFor(HOMEVIS, 4000) || (await tapNav(0));
+        ok(await waitFor(HOMEVIS, 15000), "could not return to discipline tiles via Home tab before " + d);
+      }
       await tap(`[data-discipline="${d}"]`);
       const sel = await waitFor(`document.querySelector('[data-discipline="${d}"]').getAttribute('aria-selected')==='true'`, 10000);
       const name = await ev(`((document.querySelector('#cueSelectedGameNameV1')||{}).textContent||'').trim()`);
@@ -194,7 +199,6 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
       const home = await waitFor(HOMEVIS, 8000);
       const alive = !!adbTry(`pidof ${PKG}`);
       const top = adbTry("dumpsys activity activities | grep -m1 topResumedActivity").slice(-70);
-      if (!home) { launch(); await connect(); await homeReady(); }
       return { selectedName: name, cards: g, events: lastTap.ev, backReturnsToHomeTiles: home, processAliveAfterBack: alive, topAfterBack: top, visibleControlsWhenSelected: btns };
     });
   }
@@ -210,21 +214,27 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     ok(out.en.lang === "en" && out["zh-Hans"].lang.startsWith("zh") && out.ja.lang === "ja", JSON.stringify(out));
     return out;
   });
+  const SNAP = `(()=>{const vis=n=>{const b=n.getBoundingClientRect();return b.width>0&&b.height>0};return [...document.querySelectorAll('section,main,[role=tabpanel],[role=dialog]')].filter(vis).map(n=>(n.id||String(n.className).split(' ')[0]).slice(0,30)).sort().join('|')})()`;
   for (let i = 0; i < 4; i++) {
-    await step("E09-tab" + i, `bottom tab #${i}: OS press switches content; Android Back outcome`, "os-input", async () => {
-      if (!(await waitFor(HOMEVIS, 5000))) { launch(); await connect(); ok(await homeReady(), "could not reach home"); }
-      const before = await ev("document.body.innerText.length + ':' + (document.querySelector('[aria-current],[aria-selected=true]')||{}).id");
+    await step("E09-tab" + i, `bottom tab #${i}: OS press changes visible screen; Android Back outcome`, "os-input", async () => {
+      if (!(await waitFor(HOMEVIS, 4000))) {
+        const top = adbTry("dumpsys activity activities | grep -m1 topResumedActivity");
+        if (!top.includes(PKG)) { launch(); await connect(); }
+        if (!(await waitFor(HOMEVIS, 4000))) await tapNav(0);
+        ok(await waitFor(HOMEVIS, 15000), "could not reach Home tiles");
+      }
+      const before = await ev(SNAP);
       const r = await tapNav(i);
       await sleep(1500);
-      const after = await ev("document.body.innerText.length + ':' + (document.querySelector('[aria-current],[aria-selected=true]')||{}).id");
-      const tilesVisible = await ev(HOMEVIS);
+      const after = await ev(SNAP);
+      const tiles = await ev(HOMEVIS);
       shot("05-tab" + i);
       await back(); await sleep(1500);
       const alive = !!adbTry(`pidof ${PKG}`);
-      const backHome = await waitFor(HOMEVIS, 6000);
-      if (!alive || !backHome) { launch(); await connect(); await homeReady(); }
+      const topAfter = adbTry("dumpsys activity activities | grep -m1 topResumedActivity").slice(-60);
       ok(alive, "process died on Back from tab " + i);
-      return { label: r.text || r.aria, events: lastTap.ev, contentBefore: before, contentAfter: after, homeTilesVisibleAfterTap: tilesVisible, androidBackReturnsHomeTiles: backHome };
+      ok(i === 0 || before !== after || !tiles, "tab #" + i + " (" + (r.text || r.aria) + ") did not change visible screens; events=" + lastTap.ev);
+      return { label: r.text || r.aria, events: lastTap.ev, screensBefore: before.slice(0, 120), screensAfter: after.slice(0, 120), homeTilesVisibleAfterTap: tiles, appInForegroundAfterBack: topAfter.includes(PKG) };
     });
   }
   await step("E10", "Back at root minimizes (no crash, process alive)", "os-input", async () => {
@@ -288,11 +298,20 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     const st = await ev(`(()=>{const b=document.querySelector('#startGameBtn');return b?{disabled:b.disabled,text:(b.textContent||'').trim().slice(0,16),players:[document.querySelector('#p1Name'),document.querySelector('#p2Name')].map(n=>n&&(n.value||n.textContent||'').trim().slice(0,16))}:null})()`);
     shot("07-setup-fresh");
     if (!st || st.disabled) return { skipped: "start disabled on fresh install", state: st };
+    const tStart = Date.now();
     await tap("#startGameBtn");
-    await waitFor(vis("#proGameScreen"), 20000);
-    const g = await ev(vis("#proGameScreen"));
+    shot("07-after-start-press");
+    let responsive = false, gameShown = false;
+    for (let k = 0; k < 4 && !responsive; k++) { try { await ev("1"); responsive = true; } catch (_) {} }
+    const msToResponsive = responsive ? Date.now() - tStart : null;
+    if (responsive) gameShown = await waitFor(vis("#proGameScreen"), 20000);
+    const anr = adbTry("logcat -d | grep -E 'ANR in|Input dispatching timed out' | tail -3");
+    const topNow = adbTry("dumpsys activity activities | grep -m1 topResumedActivity").slice(-70);
     shot("07-game");
-    ok(g, "game screen not shown after OS tap on Start");
+    if (!responsive) { launch(); await connect(); }
+    ok(responsive, "WebView unresponsive for >60s after Start press (ms=" + (Date.now() - tStart) + ", anr=" + anr.slice(0, 160) + ", top=" + topNow + ")");
+    ok(gameShown, "game screen not shown after OS press on Start (responsive in " + msToResponsive + "ms)");
+    const g = gameShown;
     const clock = await ev(`[...document.querySelectorAll('[id*="lock" i],[id*="shot" i]')].filter(n=>n.getClientRects().length).map(n=>n.id).slice(0,8)`);
     await back(); await sleep(1500);
     shot("07b-after-back");

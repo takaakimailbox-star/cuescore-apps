@@ -1,5 +1,5 @@
 # Temporary Android quality gate (Android branch only). Runs ONLY when this file changes on the Android branch.
-# rev: 14  (bump this number to re-run after editing android/ci/emulator-verify.mjs)
+# rev: 15  (bump this number to re-run after editing android/ci/emulator-verify.mjs)
 # No secrets, no signing, no publishing, no schedule. Read-only token. Evidence is uploaded as a 7-day artifact.
 name: android-emulator-verify
 on:
