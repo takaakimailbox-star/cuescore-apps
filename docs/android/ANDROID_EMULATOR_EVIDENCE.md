@@ -89,3 +89,18 @@
 
 ### 8.4 F2 Android Back（Prototype）
 `ANDROID_BACK_UX_PROPOSAL.md` を参照。既定は `current` のまま。Back 結果は下記 §8.5。
+
+### 8.5 F2 Back Prototype ＋ 追加機能プローブ（run 23、API35／WebView124、実 OS Back／押下）
+`FINAL {"label":"back35","steps":"B0:P,B1:P,B2:P,B3:P,B4:P,B5:P,B6:P,F-startup:P,F-shot-clock:F"}`（8/9 PASS）
+| ID | 内容 | 結果 |
+|---|---|---|
+| B0 | `proposal` を実行時のみ有効化（既定 `current` のまま） | PASS |
+| B1 | 競技選択後 Back → 6 競技一覧、アプリ前面 | PASS（run 22 では初回押下の取りこぼしで FAIL→再押下で解消。テスト側の問題） |
+| B2–B4 | Players／History／Settings で Back → Home（`cuePhase1Tab=home`）、アプリ前面 | PASS |
+| B5 | Pro オーバーレイで Back → オーバーレイのみ閉じる | PASS |
+| B6 | ホーム一覧で Back → 最小化、プロセス生存 | PASS |
+| F-startup | コールド起動計測＋アプリ自身の ANR 検査 | PASS（アプリ ANR 0。run 22 の ANR はエミュレータの Launcher 側で、アプリ無関係） |
+| F-shot-clock | 試合開始（Start）は成功したが、試合画面内でショットクロックを特定する要素を ID／class／文字列から見つけられなかった | **FAIL（テスト側の特定不備か未検証、製品 FAIL とは判断しない）→ 実機で要確認** |
+- 16 KB（back16k）: run 22 は起動直後の WebView 未起動（F3 と同症状）、run 23 は待機 120 秒版。結果は §8.6。
+- 未実施（実機／別 Gate）: プレーヤー管理・履歴／分析の中身の操作、バックアップ書出し／復元の端末往復、実購入。
+- 保全: 本節の FINAL 行は run 22／23 のジョブログからの転記。artifact は 7 日で失効（Cloud から取得不可）。
