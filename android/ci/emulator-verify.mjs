@@ -25,7 +25,7 @@ const shot = name => {
 
 let ws = null, seq = 0; const pending = new Map();
 async function connect(timeoutMs = 90000) {
-  wvBounds = null; try { if (ws) ws.close(); } catch (_) {}
+  origin = null; try { if (ws) ws.close(); } catch (_) {}
   const t0 = Date.now();
   while (Date.now() - t0 < timeoutMs) {
     try {
@@ -68,27 +68,26 @@ async function waitFor(expr, ms = 30000) {
   return false;
 }
 const vis = sel => `(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(!n)return false;const s=getComputedStyle(n);if(s.display==='none'||s.visibility==='hidden')return false;for(let p=n;p;p=p.parentElement){if(p.hidden||p.classList.contains('hidden'))return false}return n.getClientRects().length>0})()`;
-// Real OS-level tap: adb input tap at the element centre, mapped through the WebView bounds from uiautomator.
-let wvBounds = null;
-function webviewBounds(force = false) {
-  if (wvBounds && !force) return wvBounds;
-  try {
-    adbTry("uiautomator dump /sdcard/ui.xml");
-    const xml = adbTry("cat /sdcard/ui.xml");
-    const m = xml.match(/class="android\.webkit\.WebView"[^>]*?bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"/);
-    if (m) wvBounds = { l: +m[1], t: +m[2], r: +m[3], b: +m[4] };
-  } catch (_) {}
-  return wvBounds;
+// Real OS-level tap (adb input tap). The CSS->screen mapping is calibrated by one swallowed tap whose
+// clientX/clientY the page reports back, so it is exact for every API level / orientation / inset mode.
+let origin = null;
+async function calibrate() {
+  await ev(`(()=>{window.__cal=null;const stop=e=>{if(e.cancelable)e.preventDefault();e.stopImmediatePropagation()};const evs=['pointerdown','pointerup','mousedown','mouseup','touchstart','touchend','click'];const h=e=>{if(e.type==='pointerdown'&&!window.__cal)window.__cal=[e.clientX,e.clientY];stop(e)};evs.forEach(t=>addEventListener(t,h,true));setTimeout(()=>evs.forEach(t=>removeEventListener(t,h,true)),2500);return true})()`);
+  const px = 300, py = 900;
+  adbSh(`input tap ${px} ${py}`); await sleep(700);
+  const c = await ev("window.__cal"), dpr = await ev("devicePixelRatio");
+  if (!c) throw new Error("calibration tap not seen by page");
+  origin = { x: px - c[0] * dpr, y: py - c[1] * dpr, dpr };
+  await sleep(2000);
+  return origin;
 }
 async function tap(sel) {
   await ev(`(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(n)n.scrollIntoView({block:'center',inline:'center',behavior:'instant'});return !!n})()`);
   await sleep(350);
-  const r = await ev(`(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(!n)return null;const b=n.getBoundingClientRect();return {x:b.left+b.width/2,y:b.top+b.height/2,iw:innerWidth,ih:innerHeight}})()`);
+  if (!origin) await calibrate();
+  const r = await ev(`(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(!n)return null;const b=n.getBoundingClientRect();return {x:b.left+b.width/2,y:b.top+b.height/2}})()`);
   if (!r) throw new Error("not found " + sel);
-  const wb = webviewBounds();
-  if (!wb) throw new Error("WebView bounds unavailable (uiautomator)");
-  const sx = (wb.r - wb.l) / r.iw, sy = (wb.b - wb.t) / r.ih;
-  adbSh(`input tap ${Math.round(wb.l + r.x * sx)} ${Math.round(wb.t + r.y * sy)}`);
+  adbSh(`input tap ${Math.round(origin.x + r.x * origin.dpr)} ${Math.round(origin.y + r.y * origin.dpr)}`);
   await sleep(800);
 }
 const back = async () => { adbSh("input keyevent KEYCODE_BACK"); await sleep(900); };
@@ -117,8 +116,10 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
       sdk: adbSh("getprop ro.build.version.sdk"), release: adbSh("getprop ro.build.version.release"),
       abi: adbSh("getprop ro.product.cpu.abi"), pagesize: adbSh("getconf PAGE_SIZE"),
       kernel: adbSh("uname -r"), size: adbSh("wm size"), density: adbSh("wm density"),
-      pkg16k: adbSh(`dumpsys package ${PKG} | grep -i -E "pageSize|minSdk|targetSdk" | head -4`)
+      pkg16k: adbTry(`dumpsys package ${PKG} | grep -i -E "minSdk|targetSdk" | head -2`),
+      avd: adbTry("getprop ro.boot.qemu.avd_name"), flavor: adbTry("getprop ro.build.flavor"), tags: adbTry("getprop ro.system.build.tags")
     };
+    if (label.includes("16k")) ok(info.pagesize === "16384", "expected 16 KB page size, got " + info.pagesize);
     return info;
   });
   await step("E03", "Launch + WebView attach + home visible", "os-input", async () => {
@@ -134,27 +135,15 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     return "no FATAL EXCEPTION";
   });
   await step("E05", "Safe-area / system bars / viewport", "dom-read", async () => {
-    const probe = `(()=>{const d=document.createElement('div');d.style.cssText='position:fixed;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)';document.body.appendChild(d);const c=getComputedStyle(d);const r={top:c.paddingTop,right:c.paddingRight,bottom:c.paddingBottom,left:c.paddingLeft};d.remove();const sw=document.querySelector('#cueDisciplineSwitcherV1');const n=document.querySelector('#cueHomeNavV3');return {safe:r,cssVarTop:getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-top'),inner:[innerWidth,innerHeight],dpr:devicePixelRatio,hScroll:document.documentElement.scrollWidth>innerWidth+1,switcherTop:sw?sw.getBoundingClientRect().top:null,navBottom:n?n.getBoundingClientRect().bottom:null}})()`;
+    const probe = `(()=>{const d=document.createElement('div');d.style.cssText='position:fixed;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)';document.body.appendChild(d);const c=getComputedStyle(d);const r={top:c.paddingTop,right:c.paddingRight,bottom:c.paddingBottom,left:c.paddingLeft};d.remove();const sw=document.querySelector('#cueDisciplineSwitcherV1');const n=document.querySelector('#settingsBtn');return {safe:r,cssVarTop:getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-top'),inner:[innerWidth,innerHeight],dpr:devicePixelRatio,hScroll:document.documentElement.scrollWidth>innerWidth+1,switcherTop:sw?sw.getBoundingClientRect().top:null,navBottom:n?n.getBoundingClientRect().bottom:null}})()`;
     let v = await ev(probe), waited = 0;
     while (parseFloat(v.safe.top) === 0 && waited < 8000) { await sleep(1000); waited += 1000; v = await ev(probe); }
     v.settledAfterMs = waited;
     v.statusBarWindow = adbTry("dumpsys window | grep -m1 -o 'statusBars[^}]*frame=\\[[0-9,]*\\]\\[[0-9,]*\\]'").slice(0, 120);
     ok(!v.hScroll, "horizontal overflow");
-    ok(v.navBottom != null && v.navBottom <= v.inner[1] + 1, "bottom nav clipped " + JSON.stringify(v));
+    ok(v.navBottom != null && v.navBottom > 0 && v.navBottom <= v.inner[1] + 1, "bottom nav clipped/hidden " + JSON.stringify(v));
     ok(v.switcherTop == null || v.switcherTop >= 24, "content under status bar: switcherTop=" + v.switcherTop + " safeTop=" + v.safe.top);
     return v;
-  });
-  await step("E05b", "Match start → game screen (shot clock UI present) → Back", "webview-input", async () => {
-    const enabled = await ev(`(()=>{const b=document.querySelector('#startGameBtn');return !!b&&!b.disabled})()`);
-    if (!enabled) return { skipped: "start disabled", players: await ev(`[document.querySelector("#p1Name"),document.querySelector("#p2Name")].map(n=>n&&(n.value||n.textContent))`) };
-    await tap("#startGameBtn");
-    await waitFor(vis("#proGameScreen"), 8000);
-    const g = await ev(vis("#proGameScreen"));
-    shot("07-game");
-    const clock = await ev(`!!document.querySelector('[id*="hotClock" i],[id*="shotclock" i],[class*="shot-clock" i],[id*="Clock"]')`);
-    await back(); await sleep(800);
-    shot("07b-after-back");
-    return { gameScreenVisible: g, clockElement: clock };
   });
   await step("E06", "Six disciplines selectable", "webview-input", async () => {
     const names = ["9ball", "10ball", "jpa9", "rotation", "straightPool", "threeCushion"], seen = {};
@@ -252,6 +241,22 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     if (!okHome) { const d = await ev(`({home:${vis("#cueHomeV1")},portraitOverlay:(()=>{const n=document.querySelector('#iphonePortraitOnlyV1');return n?getComputedStyle(n).display:null})(),inner:[innerWidth,innerHeight],rot:null})`).catch(e=>String(e)); throw new Error("home after rotate back " + JSON.stringify(d) + " rotation=" + adbTry("dumpsys window | grep -m1 mCurrentRotation")); }
     shot("10-portrait-again");
     return "ok";
+  });
+  await step("E18", "Match start → game screen (shot clock UI present) → Back", "webview-input", async () => {
+    adbTry(`pm clear ${PKG}`); await sleep(1500); launch();
+    await connect(); ok(await homeReady(), "home after pm clear (fresh install state)");
+    const enabled = await ev(`(()=>{const b=document.querySelector('#startGameBtn');return !!b&&!b.disabled})()`);
+    if (!enabled) return { skipped: "start disabled", players: await ev(`[document.querySelector("#p1Name"),document.querySelector("#p2Name")].map(n=>n&&(n.value||n.textContent))`) };
+    await tap("#startGameBtn");
+    await waitFor(vis("#proGameScreen"), 8000);
+    const g = await ev(vis("#proGameScreen"));
+    shot("07-game");
+    const clock = await ev(`[...document.querySelectorAll('[id*="lock" i],[id*="shot" i]')].filter(n=>n.getClientRects().length).map(n=>n.id).slice(0,8)`);
+    ok(g, "game screen not shown after tapping Start (fresh install)");
+    await back(); await sleep(800);
+    shot("07b-after-back");
+    const after = await ev(`({gameVisible:${vis("#proGameScreen")},choice:${vis("#cueInProgressChoiceV1")},home:${vis("#cueHomeV1")}})`);
+    return { gameScreenVisible: g, clockElementIds: clock, afterBack: after };
   });
   await step("E17", "Final crash/ANR scan + JS exceptions", "device-state", async () => {
     const lc = adbSh("logcat -d | grep -E 'FATAL EXCEPTION|ANR in' | head -5");

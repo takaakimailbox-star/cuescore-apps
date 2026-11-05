@@ -1,5 +1,5 @@
 # Temporary Android quality gate (Android branch only). Runs ONLY when this file changes on the Android branch.
-# rev: 5  (bump this number to re-run after editing android/ci/emulator-verify.mjs)
+# rev: 6  (bump this number to re-run after editing android/ci/emulator-verify.mjs)
 # No secrets, no signing, no publishing, no schedule. Read-only token. Evidence is uploaded as a 7-day artifact.
 name: android-emulator-verify
 on:
@@ -69,6 +69,7 @@ jobs:
           $SM/sdkmanager --install 'system-images;android-35;google_apis_ps16k;x86_64' > /dev/null
           echo no | $SM/avdmanager create avd --force -n ps16k -k 'system-images;android-35;google_apis_ps16k;x86_64' -d pixel_6
           $SM/avdmanager list avd | head -12
+          grep -E 'image.sysdir|tag.id|abi.type' ~/.android/avd/ps16k.avd/config.ini
       - name: Run emulator verification
         uses: reactivecircus/android-emulator-runner@b530d96654c385303d652368551fb075bc2f0b6b # v2.35.0
         with:
