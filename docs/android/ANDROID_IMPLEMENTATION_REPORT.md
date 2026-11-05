@@ -57,3 +57,12 @@ Debug APK／AAB: **なし**。署名なし成果物も無し。
 
 ## 11. クリーンアップ
 自分が作成した一時 git worktree（/tmp/claude-0/sdk/base）を削除。ブラウザ・サーバー・常駐プロセスは未起動。
+
+## 12. Cloud Build 再開結果（2026-11-05, 再開時HEAD 5ce2640）
+- Network: `dl.google.com` / `maven.google.com` は **200（解除済み）**。cmdline-tools 13114758、platform-36、build-tools 36.0.0、platform-tools を導入済み（/opt/android-sdk、リポジトリ外）。
+- **新たな BLOCKED**: `repo.maven.apache.org`（Maven Central）・`repo1.maven.org`・`services.gradle.org`・`plugins.gradle.org` は CONNECT tunnel **403**。
+  - 実エラー: `Could not GET 'https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.2.0/kotlin-stdlib-2.2.0.pom'. Received status code 403`（AGP 8.13.0 の推移依存: kotlin-stdlib, httpmime, commons-io ほか）。
+  - Capacitor Android・JUnit・多数の AGP 依存は Maven Central 配布のため、`gradle :app:assembleDebug` は classpath 解決で停止（Compile は未実施）。
+  - Gradle 本体は /opt/gradle の 8.14.3 を使用（wrapper の services.gradle.org は不要）。
+- 追加で必要なドメイン: `repo.maven.apache.org`（必須）、必要に応じ `plugins.gradle.org`、`services.gradle.org`（wrapper 利用時）。許可範囲は独断で拡大していない。
+- Compile／APK／AAB／Lint／Unit Test(Android)／16KB 検査: 未実施（環境 BLOCKED）。製品 FAIL ではない。
