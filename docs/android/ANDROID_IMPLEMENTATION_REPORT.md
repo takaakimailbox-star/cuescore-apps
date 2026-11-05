@@ -88,3 +88,6 @@ Debug APK／AAB: **なし**。署名なし成果物も無し。
   - 必要性: Capacitor 8 の Android ネイティブ層（@capacitor/android, filesystem, share）の取得に必須。Maven 経由への構成変更は製品構成の変更となるため独断で実施せず、許可範囲も拡大していない。
   - 必要ドメイン: `registry.npmjs.org`（npm ci 用）。
 - Compile／APK／AAB／Lint／Android Unit Test／16KB: 未実施（環境 BLOCKED。製品 FAIL ではない）。
+
+## 14. Emulator 実動作 Gate（2026-11-05）
+詳細は `ANDROID_EMULATOR_EVIDENCE.md`。要点: GitHub Actions（KVM）で API 35／36 と 16 KB image（PAGE_SIZE=16384）を実起動し、**6 競技のタイル選択（実OS押下）と D2 左右カード整列が全て PASS**、言語 3 種・下部タブ 4 種・新規インストールからの試合開始・ルート Back 最小化・クラッシュ 0 件を確認。発見事項: F1 `env(safe-area-inset-top)` の間欠的 0（API35＋WebView124）、F2 Back の到達先（種目選択後／タブ画面で最小化）、F3 16 KB 初回コールド起動の遅延。いずれも**製品コード未修正・PO 判断待ち**。実カメラ／実購入／実機は未検証（G7）。

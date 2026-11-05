@@ -30,3 +30,14 @@
 
 ## 未確認（環境 BLOCKED / 未実施）
 Emulator・実機（/dev/kvm なし）、Instrumentation、実カメラ/QR、実購入・pending・返金、background 復帰、画面サイズ/safe-area、署名済み Release、Play Billing 8 の実機契約検証。
+
+## Lint warning 29 件の重要度分類（コード変更なし）
+| 区分 | 件数 | ID | 判断 |
+|---|---|---|---|
+| 機能影響なし・Play 品質磨き | 12 | IconLauncherShape 5／MonochromeLauncherIcon 2／IconDuplicatesConfig 1／IconDipSize 1／IconLocation 1／（Adaptive 化済み・テーマアイコン未提供） | 提出前にアイコン仕上げ時にまとめて対応（見た目のため PO 確認） |
+| 依存更新（回帰が必要） | 6 | GradleDependency: billing 8.0.0→9.1.0（**仕様は Play Billing 8**。メジャー更新は PO 決定）、camera 1.5.0→1.6.2 ×4、appcompat 1.7.1→1.8.0 | 現行固定で Compile／Unit Test PASS。更新は別 Gate で実機回帰とセット |
+| 想定どおり・対応不要 | 5 | UnusedAttribute 2（API33 属性）、ObsoleteSdkInt 2（minSdk26 に対し v24/v26 フォルダ）、ManifestOrder 1 | 動作に影響なし |
+| 生成物の未使用資源 | 7 | UnusedResources（Capacitor 既定の資源） | 削除は Capacitor 同期で再生成されるため見送り |
+| セキュリティ／データ | 1 | DataExtractionRules（`allowBackup=false` のため端末バックアップ自体が無効。API<31 向け `fullBackupContent` は不要） | 対応不要。方針は PO 確認項目（allowBackup=false 維持） |
+
+重要度が高い warning は無し。製品コードの修正は行っていない。
