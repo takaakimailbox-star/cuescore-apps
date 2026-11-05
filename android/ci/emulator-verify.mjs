@@ -16,6 +16,13 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 const adb = (...a) => execFileSync("adb", a, { encoding: "utf8", maxBuffer: 64 << 20 }).trim();
 const adbSh = cmd => adb("shell", cmd);
 const adbTry = cmd => { try { return adb("shell", cmd); } catch (e) { return ""; } };
+const appCrashes = () => {
+  const crash = adbTry("logcat -d -b crash");
+  const main = adbTry(`logcat -d -b main -b system -s ActivityManager:E AndroidRuntime:E`);
+  const mine = [...crash.split("\n"), ...main.split("\n")].filter(l => (l.includes("Process: " + PKG)) || (/ANR in /.test(l) && l.includes(PKG)) || (/Fatal signal/.test(l) && l.includes(PKG)));
+  const other = (crash.match(/FATAL EXCEPTION/g) || []).length;
+  return { mine, otherProcessFatalCount: other };
+};
 const launch = () => adbTry(`am start -W -n ${PKG}/.MainActivity`);
 const shot = name => {
   const f = path.join(outDir, `${label}-${name}.png`);
@@ -82,16 +89,21 @@ async function calibrate() {
   await sleep(3000);
   return origin;
 }
-async function tap(sel) {
-  await ev(`(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(n)n.scrollIntoView({block:'center',inline:'center',behavior:'instant'});return !!n})()`);
+const PICK = (sel, idx) => `(()=>{const all=[...document.querySelectorAll(${JSON.stringify(sel)})].filter(n=>{const b=n.getBoundingClientRect();return b.width>0&&b.height>0});return all[${idx}]||null})()`;
+const NAVPICK = idx => `(()=>{const all=[...document.querySelectorAll('button')].filter(n=>{const b=n.getBoundingClientRect();return b.width>0&&b.height>0&&b.top>innerHeight*0.8}).sort((a,b)=>a.getBoundingClientRect().left-b.getBoundingClientRect().left);return all[${idx}]||null})()`;
+async function tapExpr(expr, label) {
+  await ev(`(()=>{const n=${expr};if(n)n.scrollIntoView({block:'center',inline:'center',behavior:'instant'});return !!n})()`);
   await sleep(350);
   if (!origin) await calibrate();
-  const r = await ev(`(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(!n)return null;const b=n.getBoundingClientRect();const x=b.left+b.width/2,y=b.top+b.height/2;const h=document.elementFromPoint(x,y);return {x,y,rect:[b.left,b.top,b.width,b.height].map(v=>Math.round(v)),hit:h?((h.id||h.className||h.tagName)+'').slice(0,60):null,contained:!!h&&(n.contains(h)||h.contains(n)),iw:innerWidth,ih:innerHeight}})()`);
-  if (!r) throw new Error("not found " + sel);
-  lastTap = { sel, ...r };
+  const r = await ev(`(()=>{const n=${expr};if(!n)return null;const b=n.getBoundingClientRect();const x=b.left+b.width/2,y=b.top+b.height/2;const h=document.elementFromPoint(x,y);return {x,y,rect:[b.left,b.top,b.width,b.height].map(v=>Math.round(v)),text:(n.textContent||'').trim().slice(0,14),aria:(n.getAttribute('aria-label')||'').slice(0,24),hit:h?((h.id||h.className||h.tagName)+'').slice(0,50):null,contained:!!h&&(n.contains(h)||h.contains(n))}})()`);
+  if (!r) throw new Error("no visible element for " + label);
+  lastTap = { label, ...r };
   adbSh(`input tap ${Math.round(origin.x + r.x * origin.dpr)} ${Math.round(origin.y + r.y * origin.dpr)}`);
   await sleep(1800);
+  return r;
 }
+const tap = (sel, idx = 0) => tapExpr(PICK(sel, idx), sel + "[" + idx + "]");
+const tapNav = idx => tapExpr(NAVPICK(idx), "nav#" + idx);
 const back = async () => { adbSh("input keyevent KEYCODE_BACK"); await sleep(900); };
 
 async function step(id, title, kind, fn) {
@@ -132,6 +144,7 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
       retried = true;
       const diag = adbTry(`logcat -d | grep -E "cuescoreapps|AndroidRuntime|Fatal signal|ANR in|Process .* has died|am_crash|am_anr" | tail -25`);
       fs.writeFileSync(path.join(outDir, `${label}-first-launch-diag.txt`), `am start: ${out}\npid: ${adbTry("pidof " + PKG)}\n${diag}\n`);
+      console.log("FIRST-LAUNCH-DIAG\n" + (`am start: ${out}\npid: ${adbTry("pidof " + PKG)}\n${diag}`).slice(0, 2500));
       shot("03-first-launch-failed");
       launch(); url = await connect(70000); ok(await homeReady(), "home not visible after relaunch (first attempt: " + e.message + ")");
       shot("01-home");
@@ -141,10 +154,10 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     const btns = await ev(`[...document.querySelectorAll('button,[role=button],[role=tab],a')].filter(n=>n.getClientRects().length&&n.getBoundingClientRect().width>0).map(n=>{const b=n.getBoundingClientRect();return (n.id||n.dataset.discipline||n.className||'').toString().slice(0,28)+'@'+Math.round(b.left)+','+Math.round(b.top)+','+Math.round(b.width)+'x'+Math.round(b.height)}).slice(0,40)`);
     return { url, retried, visibleButtons: btns };
   });
-  await step("E04", "Crash scan after launch", "device-state", async () => {
-    const lc = adbSh("logcat -d -b crash,main -s AndroidRuntime:E ActivityManager:E | head -40");
-    ok(!/FATAL EXCEPTION/.test(lc), lc.slice(0, 300));
-    return "no FATAL EXCEPTION";
+  await step("E04", "Crash scan after launch (app process only)", "device-state", async () => {
+    const c = appCrashes();
+    ok(c.mine.length === 0, c.mine.slice(0, 3).join(" | "));
+    return { appCrashes: 0, otherProcessFatalExceptions: c.otherProcessFatalCount };
   });
   await step("E05", "Safe-area / system bars / viewport", "dom-read", async () => {
     const probe = `(()=>{const d=document.createElement('div');d.style.cssText='position:fixed;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)';document.body.appendChild(d);const c=getComputedStyle(d);const r={top:c.paddingTop,right:c.paddingRight,bottom:c.paddingBottom,left:c.paddingLeft};d.remove();const sw=document.querySelector('#cueDisciplineSwitcherV1');const n=document.querySelector('#cueHomeSettingsV3');return {safe:r,cssVarTop:getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-top'),inner:[innerWidth,innerHeight],dpr:devicePixelRatio,hScroll:document.documentElement.scrollWidth>innerWidth+1,switcherTop:sw?sw.getBoundingClientRect().top:null,navBottom:n?n.getBoundingClientRect().bottom:null}})()`;
@@ -158,27 +171,24 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     ok(v.switcherTop == null || v.switcherTop >= 24, "content under status bar: switcherTop=" + v.switcherTop + " safeTop=" + v.safe.top);
     return v;
   });
-  await step("E06", "Six disciplines selectable", "webview-input", async () => {
-    const names = ["9ball", "10ball", "jpa9", "rotation", "straightPool", "threeCushion"], seen = {};
-    for (const d of names) {
+  const disciplines = ["9ball", "10ball", "jpa9", "rotation", "straightPool", "threeCushion"];
+  for (const d of disciplines) {
+    await step("E06-" + d, `${d}: home -> setup screen, D2 cards aligned, Android Back -> home`, "os-input", async () => {
+      ok(await homeReady(), "not on home before " + d);
       await tap(`[data-discipline="${d}"]`);
-      await waitFor(`document.querySelector('[data-discipline="${d}"]').getAttribute('aria-selected')==='true'`, 8000);
-      const sel = await ev(`document.querySelector('[data-discipline="${d}"]').getAttribute('aria-selected')`);
-      ok(sel === "true", d + " aria-selected=" + sel + " all=" + await ev(`[...document.querySelectorAll("[data-discipline]")].map(b=>b.dataset.discipline+":"+b.getAttribute("aria-selected")).join(",")`));
-      seen[d] = await ev(`(document.querySelector('#cueSelectedGameNameV1')||{}).textContent||''`);
-      shot("02-disc-" + d);
-    }
-    return seen;
-  });
-  await step("E07", "D2 setup: left/right player cards aligned (9-Ball)", "webview-input", async () => {
-    await tap('[data-discipline="9ball"]');
-    const g = await ev(`(()=>{const a=document.querySelector('#newMatchPlayerCard1V1'),b=document.querySelector('#newMatchPlayerCard2V1');if(!a||!b)return null;const A=a.getBoundingClientRect(),B=b.getBoundingClientRect();return {a:[A.left,A.top,A.width,A.height],b:[B.left,B.top,B.width,B.height],vw:innerWidth}})()`);
-    ok(g, "cards missing");
-    shot("03-d2-setup");
-    ok(Math.abs(g.a[1] - g.b[1]) <= 1 && Math.abs(g.a[3] - g.b[3]) <= 1, "card top/height mismatch " + JSON.stringify(g));
-    ok(g.a[0] < g.b[0] && g.b[0] + g.b[2] <= g.vw + 1, "card order/overflow " + JSON.stringify(g));
-    return g;
-  });
+      ok(await waitFor(vis("#cueMatchSetupBackV3"), 15000), "setup screen not shown after tapping " + d);
+      const name = await ev(`((document.querySelector('#cueSelectedGameNameV1')||{}).textContent||'').trim()`);
+      const g = await ev(`(()=>{const a=document.querySelector('#newMatchPlayerCard1V1'),b=document.querySelector('#newMatchPlayerCard2V1');if(!a||!b)return null;const A=a.getBoundingClientRect(),B=b.getBoundingClientRect();return {a:[A.left,A.top,A.width,A.height].map(Math.round),b:[B.left,B.top,B.width,B.height].map(Math.round),vw:innerWidth,vh:innerHeight}})()`);
+      shot("02-setup-" + d);
+      ok(g && g.a[2] > 0, "player cards not visible");
+      ok(Math.abs(g.a[1] - g.b[1]) <= 1 && Math.abs(g.a[3] - g.b[3]) <= 1, "card top/height mismatch " + JSON.stringify(g));
+      ok(g.a[0] >= 0 && g.a[0] < g.b[0] && g.b[0] + g.b[2] <= g.vw + 1, "card order/overflow " + JSON.stringify(g));
+      await back();
+      ok(await waitFor("!(" + vis("#cueMatchSetupBackV3") + ")", 10000), "Android Back did not leave setup");
+      ok(await homeReady(), "home not visible after Back");
+      return { selectedName: name, cards: g };
+    });
+  }
   await step("E08", "Three languages (ja/en/zh-Hans)", "webview-input", async () => {
     const out = {};
     for (const lang of ["en", "zh-Hans", "ja"]) {
@@ -191,16 +201,17 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     ok(out.en.lang === "en" && out["zh-Hans"].lang.startsWith("zh") && out.ja.lang === "ja", JSON.stringify(out));
     return out;
   });
-  const screens = [["cueHomeSettingsV3", "#settingsBackBtn", "Settings"], ["cueHomePlayersV3", "#playerLibraryBackBtn", "Players"], ["cueHomeHistoryV3", "#recordsBackV2", "History"]];
-  for (const [btn, backSel, name] of screens) {
-    await step("E09-" + name, `${name}: open then Android Back returns home`, "os-input", async () => {
-      await tap("#" + btn);
-      ok(await waitFor(vis(backSel), 15000), name + " screen not shown (" + backSel + " not visible); btnRect=" + JSON.stringify(await ev(`(()=>{const b=document.querySelector("#${btn}");if(!b)return null;const r=b.getBoundingClientRect();return [r.left,r.top,r.width,r.height]})()`)));
-      shot("05-" + name);
+  const ANYBACK = `(()=>{const sels=(window.CueScoreAndroidBackV1&&window.CueScoreAndroidBackV1.selectors)||[];return sels.find(s=>{const n=document.querySelector(s);if(!n||n.hidden)return false;const st=getComputedStyle(n);if(st.display==='none'||st.visibility==='hidden')return false;for(let p=n.parentElement;p;p=p.parentElement){if(p.hidden||p.classList.contains('hidden')||getComputedStyle(p).display==='none')return false}return n.getClientRects().length>0})||null})()`;
+  for (let i = 0; i < 4; i++) {
+    await step("E09-nav" + i, `bottom nav #${i}: open screen, Android Back returns home`, "os-input", async () => {
+      ok(await homeReady(), "not on home");
+      const r = await tapNav(i);
+      ok(await waitFor(`${ANYBACK}!==null`, 15000), "no in-app Back control visible after tapping nav#" + i + " (" + (r.text || r.aria) + ")");
+      const which = await ev(ANYBACK);
+      shot("05-nav" + i);
       await back();
-      ok(await waitFor("!(" + vis(backSel) + ")", 5000), "Android Back did not close " + name);
-      ok(await homeReady(), "home not visible after Back");
-      return "ok";
+      ok(await homeReady(), "home not visible after Android Back from " + which);
+      return { label: r.text || r.aria, backControl: which };
     });
   }
   await step("E10", "Back at root minimizes (no crash, process alive)", "os-input", async () => {
@@ -256,34 +267,30 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     shot("10-portrait-again");
     return "ok";
   });
-  await step("E18", "Match start → game screen (shot clock UI present) → Back", "webview-input", async () => {
+  await step("E18", "Fresh install: setup -> Start match (OS tap) -> game screen -> Android Back", "os-input", async () => {
     adbTry(`pm clear ${PKG}`); await sleep(1500); launch();
     await connect(); ok(await homeReady(), "home after pm clear (fresh install state)");
-    const enabled = await ev(`(()=>{const b=document.querySelector('#startGameBtn');return !!b&&!b.disabled})()`);
-    if (!enabled) return { skipped: "start disabled", players: await ev(`[document.querySelector("#p1Name"),document.querySelector("#p2Name")].map(n=>n&&(n.value||n.textContent))`) };
+    await tap('[data-discipline="9ball"]');
+    ok(await waitFor(vis("#cueMatchSetupBackV3"), 15000), "setup screen not shown");
+    const st = await ev(`(()=>{const b=document.querySelector('#startGameBtn');return b?{disabled:b.disabled,text:(b.textContent||'').trim().slice(0,16),players:[document.querySelector('#p1Name'),document.querySelector('#p2Name')].map(n=>n&&(n.value||n.textContent||'').trim().slice(0,16))}:null})()`);
+    shot("07-setup-fresh");
+    if (!st || st.disabled) return { skipped: "start disabled on fresh install", state: st };
     await tap("#startGameBtn");
     await waitFor(vis("#proGameScreen"), 20000);
-    let g = await ev(vis("#proGameScreen")), viaJsClick = null;
-    if (!g) {
-      const dlg = await ev(`[...document.querySelectorAll('[role=dialog],.cue-in-progress-choice-v1,#toast')].filter(n=>n.getClientRects().length).map(n=>(n.id||n.className)+':'+(n.textContent||'').trim().slice(0,40))`);
-      shot("07-start-no-effect");
-      await ev(`document.querySelector('#startGameBtn').click(); true`);
-      viaJsClick = await waitFor(vis("#proGameScreen"), 15000);
-      ok(false, "game screen not shown after OS tap on Start (JS click " + (viaJsClick ? "DID" : "did NOT") + " open it); visible dialogs=" + JSON.stringify(dlg));
-    }
+    const g = await ev(vis("#proGameScreen"));
     shot("07-game");
+    ok(g, "game screen not shown after OS tap on Start");
     const clock = await ev(`[...document.querySelectorAll('[id*="lock" i],[id*="shot" i]')].filter(n=>n.getClientRects().length).map(n=>n.id).slice(0,8)`);
-    ok(g, "game screen not shown after tapping Start (fresh install)");
-    await back(); await sleep(800);
+    await back(); await sleep(1500);
     shot("07b-after-back");
-    const after = await ev(`({gameVisible:${vis("#proGameScreen")},choice:${vis("#cueInProgressChoiceV1")},home:${vis("#cueHomeV1")}})`);
-    return { gameScreenVisible: g, clockElementIds: clock, afterBack: after };
+    const after = await ev(`({game:${vis("#proGameScreen")},choice:${vis("#cueInProgressChoiceV1")},home:${vis("#cueHomeV1")},setup:${vis("#cueMatchSetupBackV3")}})`);
+    return { startState: st, gameScreenVisible: g, clockElementIds: clock, afterBack: after };
   });
-  await step("E17", "Final crash/ANR scan + JS exceptions", "device-state", async () => {
-    const lc = adbSh("logcat -d | grep -E 'FATAL EXCEPTION|ANR in' | head -5");
-    ok(!lc, lc);
+  await step("E17", "Final crash/ANR scan (app process) + JS exceptions", "device-state", async () => {
+    const c = appCrashes();
+    ok(c.mine.length === 0, c.mine.slice(0, 3).join(" | "));
     ok(consoleErrors.length === 0, "JS exceptions: " + consoleErrors.slice(0, 3).join(" | "));
-    return "clean";
+    return { appCrashes: 0, otherProcessFatalExceptions: c.otherProcessFatalCount };
   });
   fs.writeFileSync(path.join(outDir, `${label}-logcat.txt`), (() => { try { return adbSh("logcat -d -t 2000"); } catch (_) { return ""; } })());
   fs.writeFileSync(path.join(outDir, `${label}-device.json`), JSON.stringify(info, null, 2));
