@@ -91,3 +91,9 @@ Debug APK／AAB: **なし**。署名なし成果物も無し。
 
 ## 14. Emulator 実動作 Gate（2026-11-05）
 詳細は `ANDROID_EMULATOR_EVIDENCE.md`。要点: GitHub Actions（KVM）で API 35／36 と 16 KB image（PAGE_SIZE=16384）を実起動し、**6 競技のタイル選択（実OS押下）と D2 左右カード整列が全て PASS**、言語 3 種・下部タブ 4 種・新規インストールからの試合開始・ルート Back 最小化・クラッシュ 0 件を確認。発見事項: F1 `env(safe-area-inset-top)` の間欠的 0（API35＋WebView124）、F2 Back の到達先（種目選択後／タブ画面で最小化）、F3 16 KB 初回コールド起動の遅延、F6 **API 26（AOSP image）でアプリが WebView 生成時に例外終了**（環境要因の可能性大だが minSdk 26 は未確定）。いずれも**製品コード未修正・PO 判断待ち**。実カメラ／実購入／実機は未検証（G7）。
+
+## 品質改善Gate追補（2026-11-05）
+- F1: Android バンドルのみ safe-area ブリッジ（`scripts/android-safe-area-bridge.mjs`、331 箇所置換）。下部タブとナビバーの 65px 重なりを解消（API35／36 各 4 起動、幾何計測。目視未実施）。
+- F2: Back ポリシー `proposal` を Prototype として追加（既定 `current`、Decision 045・iOS 不変）。正式化は PO 承認待ち。
+- F3: 原因未確定（エミュレータ起動直後の負荷が有力）。F6: 検証環境（AOSP API26 の WebView 58 < 要件 60）、minSdk は未変更。
+- 詳細・数値は `ANDROID_EMULATOR_EVIDENCE.md` §8。

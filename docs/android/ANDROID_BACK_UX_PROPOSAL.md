@@ -31,7 +31,7 @@
 - [ ] Android 14+ の予測型 Back アニメーションと矛盾しない（Callback は常時有効＝現行実装を維持）。
 
 ## 4. Emulator 検証結果
-`ANDROID_EMULATOR_EVIDENCE.md` §8 を参照（`mode=back`、実 OS の Back キーで B1〜B6 を確認）。
+`ANDROID_EMULATOR_EVIDENCE.md` §8.5／§8.6 を参照（run 23、API35／16KB とも B1〜B6 全 PASS、実 OS の Back キー）。Prototype は実行時のみ有効で既定は `current` のまま。
 
 ## 5. PO への選択肢
 - A) `proposal` を正式採用（推奨）。

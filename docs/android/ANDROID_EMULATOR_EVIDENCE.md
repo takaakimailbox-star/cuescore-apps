@@ -104,3 +104,9 @@
 - 16 KB（back16k）: run 22 は起動直後の WebView 未起動（F3 と同症状）、run 23 は待機 120 秒版。結果は §8.6。
 - 未実施（実機／別 Gate）: プレーヤー管理・履歴／分析の中身の操作、バックアップ書出し／復元の端末往復、実購入。
 - 保全: 本節の FINAL 行は run 22／23 のジョブログからの転記。artifact は 7 日で失効（Cloud から取得不可）。
+
+### 8.6 16 KB image（run 23、PAGE_SIZE=16384、起動後 120 秒待機）
+`FINAL {"label":"back16k","steps":"B0:P,B1:P,B2:P,B3:P,B4:P,B5:P,B6:P,F-startup:P,F-shot-clock:F"}`（8/9、4 KB と同一結果）。120 秒待機後の初回起動は成功（F3 の「起動直後負荷」仮説と整合、ただし因果は未確定）。F-shot-clock は §8.5 と同じ理由で実機確認へ。
+
+## 9. 削除候補
+`.github/workflows/android-emulator-verify.yml` と `android/ci/` は検証完了後に削除可能（PO 指示まで維持）。
