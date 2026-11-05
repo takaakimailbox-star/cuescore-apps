@@ -68,12 +68,15 @@ async function waitFor(expr, ms = 30000) {
 }
 const vis = sel => `(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(!n)return false;const s=getComputedStyle(n);if(s.display==='none'||s.visibility==='hidden')return false;for(let p=n;p;p=p.parentElement){if(p.hidden||p.classList.contains('hidden'))return false}return n.getClientRects().length>0})()`;
 async function tap(sel) {
-  const r = await ev(`(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(!n)return null;n.scrollIntoView({block:'center'});const b=n.getBoundingClientRect();return {x:b.left+b.width/2,y:b.top+b.height/2}})()`);
+  await ev(`(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(n)n.scrollIntoView({block:'center',inline:'center',behavior:'instant'});return !!n})()`);
+  await sleep(350);
+  const r = await ev(`(()=>{const n=document.querySelector(${JSON.stringify(sel)});if(!n)return null;const b=n.getBoundingClientRect();return {x:b.left+b.width/2,y:b.top+b.height/2}})()`);
   if (!r) throw new Error("not found " + sel);
   const pt = [{ x: r.x, y: r.y, id: 1 }];
   await send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: pt });
+  await sleep(60);
   await send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
-  await sleep(600);
+  await sleep(700);
 }
 const back = async () => { adbSh("input keyevent KEYCODE_BACK"); await sleep(900); };
 
@@ -124,12 +127,24 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     ok(nav && nav.bottom <= nav.inner + 1, "bottom nav clipped " + JSON.stringify(nav));
     return v;
   });
+  await step("E05b", "Match start → game screen (shot clock UI present) → Back", "webview-input", async () => {
+    const enabled = await ev(`(()=>{const b=document.querySelector('#startGameBtn');return !!b&&!b.disabled})()`);
+    if (!enabled) return { skipped: "start disabled", players: await ev(`[document.querySelector("#p1Name"),document.querySelector("#p2Name")].map(n=>n&&(n.value||n.textContent))`) };
+    await tap("#startGameBtn");
+    await waitFor(vis("#proGameScreen"), 8000);
+    const g = await ev(vis("#proGameScreen"));
+    shot("07-game");
+    const clock = await ev(`!!document.querySelector('[id*="hotClock" i],[id*="shotclock" i],[class*="shot-clock" i],[id*="Clock"]')`);
+    await back(); await sleep(800);
+    shot("07b-after-back");
+    return { gameScreenVisible: g, clockElement: clock };
+  });
   await step("E06", "Six disciplines selectable", "webview-input", async () => {
     const names = ["9ball", "10ball", "jpa9", "rotation", "straightPool", "threeCushion"], seen = {};
     for (const d of names) {
       await tap(`[data-discipline="${d}"]`);
       const sel = await ev(`document.querySelector('[data-discipline="${d}"]').getAttribute('aria-selected')`);
-      ok(sel === "true", d + " aria-selected=" + sel);
+      ok(sel === "true", d + " aria-selected=" + sel + " all=" + await ev(`[...document.querySelectorAll("[data-discipline]")].map(b=>b.dataset.discipline+":"+b.getAttribute("aria-selected")).join(",")`));
       seen[d] = await ev(`(document.querySelector('#cueSelectedGameNameV1')||{}).textContent||''`);
       shot("02-disc-" + d);
     }
@@ -150,21 +165,21 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
       await ev(`localStorage.setItem('cueScore.language.v1', ${JSON.stringify(lang)}); true`);
       await send("Page.reload", {}); await sleep(1500);
       await connect(); ok(await homeReady(), "home after reload " + lang);
-      out[lang] = await ev(`({lang:document.documentElement.lang, nav:(document.querySelector('#settingsBtn')||{}).textContent?.trim().slice(0,12)})`);
+      out[lang] = await ev(`({lang:document.documentElement.lang, start:((document.querySelector('#startGameBtn')||{}).textContent||'').trim().slice(0,16)})`);
       shot("04-lang-" + lang);
     }
     ok(out.en.lang === "en" && out["zh-Hans"].lang.startsWith("zh") && out.ja.lang === "ja", JSON.stringify(out));
     return out;
   });
-  const screens = [["settingsBtn", "#settingsScreen", "Settings"], ["playerManagementBtn", "#playerLibraryScreen", "Players"], ["recordsBtn", "#recordsScreen", "History"], ["openRankingsBtn", "#rankingsScreen", "Analysis"]];
-  for (const [btn, , name] of screens) {
+  const screens = [["settingsBtn", "#settingsBackBtn", "Settings"], ["playerManagementBtn", "#playerLibraryBackBtn", "Players"], ["recordsBtn", "#recordsBackV2", "History"], ["openRankingsBtn", "#rankingsBackBtn", "Analysis"]];
+  for (const [btn, backSel, name] of screens) {
     await step("E09-" + name, `${name}: open then Android Back returns home`, "os-input", async () => {
       await tap("#" + btn);
-      const hidden = await ev(vis("#cueHomeV1"));
-      ok(hidden === false, name + " did not leave home");
+      ok(await waitFor(vis(backSel), 5000), name + " screen not shown (" + backSel + " not visible)");
       shot("05-" + name);
       await back();
-      ok(await homeReady(), "Back did not return to home");
+      ok(await waitFor("!(" + vis(backSel) + ")", 5000), "Android Back did not close " + name);
+      ok(await homeReady(), "home not visible after Back");
       return "ok";
     });
   }
@@ -197,19 +212,6 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     await ev(`localStorage.removeItem('__emu_probe'); true`);
     return { probe: v, language: lang };
   });
-  await step("E13", "Match start → game screen (shot clock UI present) → Back", "webview-input", async () => {
-    await tap('[data-discipline="9ball"]');
-    const enabled = await ev(`(()=>{const b=document.querySelector('#startGameBtn');return !!b&&!b.disabled})()`);
-    if (!enabled) return "SKIPPED: start disabled (needs two selected players; not forced)";
-    await tap("#startGameBtn");
-    await waitFor(vis("#proGameScreen"), 8000);
-    const g = await ev(vis("#proGameScreen"));
-    shot("07-game");
-    const clock = await ev(`!!document.querySelector('[id*="hotClock" i],[id*="shotclock" i],[class*="shot-clock" i],[id*="Clock"]')`);
-    await back(); await sleep(800);
-    shot("07b-after-back");
-    return { gameScreenVisible: g, clockElement: clock };
-  });
   await step("E14", "Free/Pro: entitlement object + Pro overlay open/Back", "webview-input", async () => {
     const st = await ev(`(()=>{const e=window.CueScoreEntitlement;return {has:!!e, keys:e?Object.keys(e).slice(0,12):[], pro:!!window.CueScorePro}})()`);
     ok(st.has && st.pro, JSON.stringify(st));
@@ -228,7 +230,9 @@ const homeReady = () => waitFor(vis("#cueHomeV1") + "&&" + vis("#cueDisciplineSw
     shot("09-landscape");
     ok(adbTry(`pidof ${PKG}`), "process died on rotate");
     adbSh("settings put system user_rotation 0"); await sleep(2000);
-    await connect(); ok(await homeReady(), "home after rotate back");
+    await connect();
+    const okHome = await homeReady();
+    if (!okHome) { const d = await ev(`({home:${vis("#cueHomeV1")},portraitOverlay:(()=>{const n=document.querySelector('#iphonePortraitOnlyV1');return n?getComputedStyle(n).display:null})(),inner:[innerWidth,innerHeight],rot:null})`).catch(e=>String(e)); throw new Error("home after rotate back " + JSON.stringify(d) + " rotation=" + adbTry("dumpsys window | grep -m1 mCurrentRotation")); }
     shot("10-portrait-again");
     return "ok";
   });
