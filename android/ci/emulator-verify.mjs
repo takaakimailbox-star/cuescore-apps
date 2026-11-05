@@ -165,37 +165,41 @@ async function insetsMode() {
     const m = await launchAndMeasure();
     await connect(); await homeReady(); await sleep(2500);
     origin = null; await calibrate();
-    const d = await ev(`(()=>{const q=s=>document.querySelector(s),vis=n=>n&&n.getBoundingClientRect().width>0;const probe=document.createElement('div');probe.style.cssText='position:fixed;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0';document.body.appendChild(probe);const cs=getComputedStyle(probe);const envT=cs.paddingTop,envB=cs.paddingBottom;probe.remove();const root=getComputedStyle(document.documentElement);const tiles=q('#cueDisciplineSwitcherV1'),nav=q('.cue-phase1-tab-bar'),home=q('#cueHomeV1');const r=n=>{const b=n.getBoundingClientRect();return [b.left,b.top,b.width,b.height].map(v=>Math.round(v*10)/10)};return {envTop:envT,envBottom:envB,varTop:root.getPropertyValue('--safe-area-inset-top').trim(),varBottom:root.getPropertyValue('--safe-area-inset-bottom').trim(),inner:[innerWidth,innerHeight],dpr:devicePixelRatio,hScroll:document.documentElement.scrollWidth>innerWidth+1,tiles:tiles?r(tiles):null,nav:nav?r(nav):null,home:home?r(home):null,navPadBottom:nav?getComputedStyle(nav).paddingBottom:null,homeCardTop:(q('#newMatchPlayerCard1V1')&&vis(q('#newMatchPlayerCard1V1')))?r(q('#newMatchPlayerCard1V1')):null}})()`);
+    const d = await ev(`(()=>{const q=s=>document.querySelector(s),vis=n=>n&&n.getBoundingClientRect().width>0;const probe=document.createElement('div');probe.style.cssText='position:fixed;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0';document.body.appendChild(probe);const cs=getComputedStyle(probe);const envT=cs.paddingTop,envB=cs.paddingBottom;probe.remove();const root=getComputedStyle(document.documentElement);const tiles=q('#cueDisciplineSwitcherV1'),nav=q('.cue-phase1-tab-bar'),home=q('#cueHomeV1');const r=n=>{const b=n.getBoundingClientRect();return [b.left,b.top,b.width,b.height].map(v=>Math.round(v*10)/10)};return {envTop:envT,envBottom:envB,varTop:root.getPropertyValue('--safe-area-inset-top').trim(),varBottom:root.getPropertyValue('--safe-area-inset-bottom').trim(),inner:[innerWidth,innerHeight],dpr:devicePixelRatio,hScroll:document.documentElement.scrollWidth>innerWidth+1,tiles:tiles?r(tiles):null,nav:nav?r(nav):null,home:home?r(home):null,navPadBottom:nav?getComputedStyle(nav).paddingBottom:null,navBtn:(nav&&nav.querySelector('button'))?r(nav.querySelector('button')):null,homeCardTop:(q('#newMatchPlayerCard1V1')&&vis(q('#newMatchPlayerCard1V1')))?r(q('#newMatchPlayerCard1V1')):null}})()`);
     const bars = sysBars(), img = grab();
     const dpr = d.dpr, o = origin;
     const tilePhysTop = d.tiles ? Math.round(o.y + d.tiles[1] * dpr) : null;
+    const navBtnPhysBottom = d.navBtn ? Math.round(o.y + (d.navBtn[1] + d.navBtn[3]) * dpr) : null;
     const navPhysTop = d.nav ? Math.round(o.y + d.nav[1] * dpr) : null, navPhysBottom = d.nav ? Math.round(o.y + (d.nav[1] + d.nav[3]) * dpr) : null;
     const px = { statusBand: hex(img.px(540, Math.max(2, Math.floor((bars.status[3] || 128) / 2)))), belowStatus: hex(img.px(540, Math.min(img.h - 1, (bars.status[3] || 128) + 6))), navBand: hex(img.px(540, img.h - 6)), aboveNavBar: hex(img.px(540, Math.max(0, (bars.nav[1] || img.h) - 8))), tabCenter: d.nav ? hex(img.px(540, Math.min(img.h - 1, Math.round(o.y + (d.nav[1] + d.nav[3] / 2) * dpr)))) : null };
-    const row = { launch: i, ...m, origin: { x: Math.round(o.x), y: Math.round(o.y) }, bars, screen: [img.w, img.h], dom: d, tilePhysTop, navPhysTop, navPhysBottom, px, ascii: i === 1 ? ascii(img) : undefined };
+    const row = { launch: i, navBtnPhysBottom, ...m, origin: { x: Math.round(o.x), y: Math.round(o.y) }, bars, screen: [img.w, img.h], dom: d, tilePhysTop, navPhysTop, navPhysBottom, px, ascii: i === 1 ? ascii(img) : undefined };
     rows.push(row);
     emit("INSETS", { ...row, ascii: undefined });
     if (i === 1) console.log("ASCII-HOME (dark=@ light=space)\n" + row.ascii);
     const sb = bars.status[3] || 128, navTop = bars.nav[1] || img.h;
     await step("I" + i, `cold launch #${i}: content below status bar, tab bar above nav bar, no horizontal overflow`, "dom-read", async () => {
       ok(tilePhysTop >= sb, `tiles start at ${tilePhysTop}px but status bar ends at ${sb}px`);
-      ok(navPhysBottom <= img.h && navPhysBottom <= navTop + 2 || bars.nav.length === 0, `tab bar bottom ${navPhysBottom}px overlaps navigation bar from ${navTop}px`);
+      ok(navBtnPhysBottom != null && (navBtnPhysBottom <= navTop + 2 || bars.nav.length === 0), `tab buttons end at ${navBtnPhysBottom}px but navigation bar starts at ${navTop}px`);
       ok(!d.hScroll && Math.abs(d.inner[0] * dpr - img.w) <= 2, "width mismatch " + JSON.stringify([d.inner, dpr, img.w]));
-      return { tilePhysTop, statusBottom: sb, navPhysBottom, navBarTop: navTop };
+      return { tilePhysTop, statusBottom: sb, navBtnPhysBottom, navBarTop: navTop };
     });
   }
   const tops = rows.map(r => r.dom.tiles && r.dom.tiles[1]), envs = rows.map(r => r.dom.envTop);
-  emit("INSETS-SUMMARY", { variant: label, tileTopCss: tops, envTop: envs, varTop: rows.map(r => r.dom.varTop), spreadCss: Math.max(...tops) - Math.min(...tops) });
+  const sumObj = { variant: label, tileTopCss: tops, envTop: envs, varTop: rows.map(r => r.dom.varTop), varBottom: rows.map(r => r.dom.varBottom), navBtnPhysBottom: rows.map(r => r.navBtnPhysBottom), navBarTop: rows.map(r => r.bars.nav[1]), statusBottom: rows.map(r => r.bars.status[3]), tilePhysTop: rows.map(r => r.tilePhysTop), spreadCss: Math.max(...tops) - Math.min(...tops), widthPx: rows.map(r => Math.round(r.dom.inner[0] * r.dom.dpr)), screenW: rows[0].screen[0] };
+  emit("INSETS-SUMMARY", sumObj); globalThis.__finalSummary = sumObj;
   await step("I-stable", "tile top identical across cold launches (spread <= 1 css px)", "dom-read", async () => { const sp = Math.max(...tops) - Math.min(...tops); ok(sp <= 1, `tile top varies across launches: ${tops.join(",")}`); return { tops, envs }; });
   // tab bar / tile interaction after the change (real OS presses)
   await step("I-tap", "OS press on 9-Ball tile and Players tab lands on the intended element", "os-input", async () => {
     await tap('[data-discipline="9ball"]');
     const sel = await waitFor(`document.querySelector('[data-discipline="9ball"]').getAttribute('aria-selected')==='true'`, 10000);
-    const p1 = lastTap.ptr; const hit1 = lastTap.hit;
+    const p1 = lastTap.ptr, x1 = lastTap.x, y1 = lastTap.y, hit1 = lastTap.hit;
     await tapNav(1); await sleep(1200);
+    const p2 = lastTap.ptr, x2 = lastTap.x, y2 = lastTap.y;
     const screens = await ev(`[...document.querySelectorAll('section,main')].filter(n=>n.getBoundingClientRect().width>0).map(n=>n.id).filter(Boolean).join('|')`);
     ok(sel, "tile not selected");
-    ok(p1 && Math.abs(p1[0] - lastTap.x) < 40, "pointer mismatch " + JSON.stringify(lastTap));
-    return { selected: sel, tileHit: hit1, tabEvents: lastTap.ev, screens };
+    ok(p1 && Math.abs(p1[0] - x1) <= 3 && Math.abs(p1[1] - y1) <= 3, "tile pointer mismatch " + JSON.stringify({ p1, x1, y1 }));
+    ok(p2 && Math.abs(p2[0] - x2) <= 3 && Math.abs(p2[1] - y2) <= 3, "tab pointer mismatch " + JSON.stringify({ p2, x2, y2 }));
+    return { selected: sel, tileHit: hit1, tabEvents: lastTap.ev, screens, pointerOffsetPx: [Math.round(p1[0] - x1), Math.round(p1[1] - y1), Math.round(p2[0] - x2), Math.round(p2[1] - y2)] };
   });
   const img2 = grab(); console.log("ASCII-PLAYERS\n" + ascii(img2));
 }
@@ -289,7 +293,7 @@ async function backMode() {
   if (mode !== "full") {
     try { await ({ insets: insetsMode, coldstart: coldstartMode, probe: probeMode, back: backMode }[mode])(); } catch (e) { console.log("MODE ERROR", e && e.stack || e); }
     fs.writeFileSync(path.join(outDir, `${label}-${mode}-results.json`), JSON.stringify({ label, mode, results, consoleErrors }, null, 2));
-    const f = results.filter(r => r.status === "FAIL").length; console.log(`SUMMARY ${label}/${mode}: ${results.length - f}/${results.length} PASS`); process.exit(0);
+    const f = results.filter(r => r.status === "FAIL").length; console.log(`SUMMARY ${label}/${mode}: ${results.length - f}/${results.length} PASS`); console.log("FINAL " + JSON.stringify({ label, mode, steps: results.map(r => r.id + ":" + r.status[0]).join(","), insets: globalThis.__finalSummary || null, fails: results.filter(r => r.status === "FAIL").map(r => r.id + "=" + String(r.detail).slice(0, 140)) })); process.exit(0);
   }
   await step("E01", "APK install", "device-state", async () => {
     adbTry("logcat -c");
