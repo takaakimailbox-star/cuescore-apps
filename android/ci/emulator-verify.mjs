@@ -79,15 +79,23 @@ const vis = sel => `(()=>{const n=document.querySelector(${JSON.stringify(sel)})
 // clientX/clientY the page reports back, so it is exact for every API level / orientation / inset mode.
 let origin = null, lastTap = null;
 async function calibrate() {
-  await ev(`(()=>{window.__cal=null;const stop=e=>{if(e.cancelable)e.preventDefault();e.stopImmediatePropagation()};const evs=['pointerdown','pointerup','mousedown','mouseup','touchstart','touchend','click'];const h=e=>{if(e.type==='pointerdown'&&!window.__cal)window.__cal=[e.clientX,e.clientY];stop(e)};evs.forEach(t=>addEventListener(t,h,true));setTimeout(()=>evs.forEach(t=>removeEventListener(t,h,true)),2500);return true})()`);
-  const px = 300, py = 900;
-  adbSh(`input swipe ${px} ${py} ${px} ${py} 120`);
-  await waitFor("window.__cal!=null", 10000);
-  let c = await ev("window.__cal"); const dpr = await ev("devicePixelRatio");
-  if (!c) { await sleep(2500); await ev(`(()=>{window.__cal=null;const h=e=>{if(!window.__cal)window.__cal=[e.clientX,e.clientY];e.stopImmediatePropagation();if(e.cancelable)e.preventDefault()};['pointerdown','pointerup','mousedown','mouseup','touchstart','touchend','click'].forEach(t=>addEventListener(t,h,true));setTimeout(()=>['pointerdown','pointerup','mousedown','mouseup','touchstart','touchend','click'].forEach(t=>removeEventListener(t,h,true)),3000);return true})()`); adbSh(`input swipe 320 1000 320 1000 150`); await waitFor("window.__cal!=null", 8000); c = await ev("window.__cal"); if (c) { origin = { x: 320 - c[0] * dpr, y: 1000 - c[1] * dpr, dpr }; await sleep(3500); return origin; } }
-  if (!c) throw new Error("calibration tap not seen by page");
-  origin = { x: px - c[0] * dpr, y: py - c[1] * dpr, dpr };
-  await sleep(3000);
+  const evs = "['pointerdown','pointerup','mousedown','mouseup','touchstart','touchend','click']";
+  const pts = [[300, 900], [320, 1000], [280, 1100], [340, 950]];
+  const dpr = await ev("devicePixelRatio");
+  for (let i = 0; i < pts.length; i++) {
+    await ev(`(()=>{window.__cal=null;const h=e=>{if(e.type==='pointerdown'&&!window.__cal)window.__cal=[e.clientX,e.clientY];if(e.cancelable)e.preventDefault();e.stopImmediatePropagation()};${evs}.forEach(t=>addEventListener(t,h,true));setTimeout(()=>${evs}.forEach(t=>removeEventListener(t,h,true)),7000);return true})()`);
+    const [px, py] = pts[i];
+    adbSh(`input swipe ${px} ${py} ${px} ${py} 150`);
+    if (await waitFor("window.__cal!=null", 6000)) {
+      const c = await ev("window.__cal");
+      origin = { x: px - c[0] * dpr, y: py - c[1] * dpr, dpr, assumed: false };
+      await sleep(3000);
+      return origin;
+    }
+    await sleep(4000);
+  }
+  // last resort (documented in the evidence): edge-to-edge windows on API 35+ place the WebView at the screen origin
+  origin = { x: 0, y: 0, dpr, assumed: true };
   return origin;
 }
 const PICK = (sel, idx) => `(()=>{const all=[...document.querySelectorAll(${JSON.stringify(sel)})].filter(n=>{const b=n.getBoundingClientRect();return b.width>0&&b.height>0});return all[${idx}]||null})()`;
@@ -163,7 +171,7 @@ async function insetsMode() {
   for (let i = 1; i <= N; i++) {
     adbTry(`am force-stop ${PKG}`); await sleep(1500);
     const m = await launchAndMeasure();
-    await connect(); await homeReady(); await sleep(2500);
+    await connect(); await homeReady(); await sleep(7000);
     origin = null; await calibrate();
     const d = await ev(`(()=>{const q=s=>document.querySelector(s),vis=n=>n&&n.getBoundingClientRect().width>0;const probe=document.createElement('div');probe.style.cssText='position:fixed;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom) 0';document.body.appendChild(probe);const cs=getComputedStyle(probe);const envT=cs.paddingTop,envB=cs.paddingBottom;probe.remove();const root=getComputedStyle(document.documentElement);const tiles=q('#cueDisciplineSwitcherV1'),nav=q('.cue-phase1-tab-bar'),home=q('#cueHomeV1');const r=n=>{const b=n.getBoundingClientRect();return [b.left,b.top,b.width,b.height].map(v=>Math.round(v*10)/10)};return {envTop:envT,envBottom:envB,varTop:root.getPropertyValue('--safe-area-inset-top').trim(),varBottom:root.getPropertyValue('--safe-area-inset-bottom').trim(),inner:[innerWidth,innerHeight],dpr:devicePixelRatio,hScroll:document.documentElement.scrollWidth>innerWidth+1,tiles:tiles?r(tiles):null,nav:nav?r(nav):null,home:home?r(home):null,navPadBottom:nav?getComputedStyle(nav).paddingBottom:null,navBtn:(nav&&nav.querySelector('button'))?r(nav.querySelector('button')):null,homeCardTop:(q('#newMatchPlayerCard1V1')&&vis(q('#newMatchPlayerCard1V1')))?r(q('#newMatchPlayerCard1V1')):null}})()`);
     const bars = sysBars(), img = grab();
@@ -172,7 +180,7 @@ async function insetsMode() {
     const navBtnPhysBottom = d.navBtn ? Math.round(o.y + (d.navBtn[1] + d.navBtn[3]) * dpr) : null;
     const navPhysTop = d.nav ? Math.round(o.y + d.nav[1] * dpr) : null, navPhysBottom = d.nav ? Math.round(o.y + (d.nav[1] + d.nav[3]) * dpr) : null;
     const px = { statusBand: hex(img.px(540, Math.max(2, Math.floor((bars.status[3] || 128) / 2)))), belowStatus: hex(img.px(540, Math.min(img.h - 1, (bars.status[3] || 128) + 6))), navBand: hex(img.px(540, img.h - 6)), aboveNavBar: hex(img.px(540, Math.max(0, (bars.nav[1] || img.h) - 8))), tabCenter: d.nav ? hex(img.px(540, Math.min(img.h - 1, Math.round(o.y + (d.nav[1] + d.nav[3] / 2) * dpr)))) : null };
-    const row = { launch: i, navBtnPhysBottom, ...m, origin: { x: Math.round(o.x), y: Math.round(o.y) }, bars, screen: [img.w, img.h], dom: d, tilePhysTop, navPhysTop, navPhysBottom, px, ascii: i === 1 ? ascii(img) : undefined };
+    const row = { launch: i, navBtnPhysBottom, ...m, origin: { x: Math.round(o.x), y: Math.round(o.y), assumed: !!o.assumed }, bars, screen: [img.w, img.h], dom: d, tilePhysTop, navPhysTop, navPhysBottom, px, ascii: i === 1 ? ascii(img) : undefined };
     rows.push(row);
     emit("INSETS", { ...row, ascii: undefined });
     if (i === 1) console.log("ASCII-HOME (dark=@ light=space)\n" + row.ascii);
