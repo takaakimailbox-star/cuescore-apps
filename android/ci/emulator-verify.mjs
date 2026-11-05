@@ -263,17 +263,19 @@ async function backMode() {
     ok(!(await ev(vis(".cue-pro-overlay-v1"))), "overlay not closed"); ok(fg(), "app left foreground (overlay Back must not minimize)");
   });
   await step("B6", "Home list -> Back minimizes (process alive)", "os-input", async () => {
-    ok(await waitFor(HOME, 5000), "not on Home list"); await back(); await sleep(1500);
-    ok(!fg(), "app did not minimize"); ok(!!adbTry(`pidof ${PKG}`), "process died");
+    ok(await waitFor(HOME, 5000), "not on Home list");
+    const pre = await ev(`({tab:document.body.dataset.cuePhase1Tab,tiles:${vis("#cueDisciplineSwitcherV1")},home:${vis("#cueHomeV1")},pro:${vis(".cue-pro-overlay-v1")},back:(window.CueScoreAndroidBackV1.selectors||[]).filter(s=>{const n=document.querySelector(s);return n&&n.getClientRects().length>0}).slice(0,3)})`);
+    await back(); await sleep(1800);
+    ok(!fg(), "app did not minimize; state before Back=" + JSON.stringify(pre)); ok(!!adbTry(`pidof ${PKG}`), "process died");
   });
   // ---- non-destructive feature probes on fresh test data ----
-  launch(); await connect(); await homeReady();
+  adbTry(`pm clear ${PKG}`); await sleep(1500); launch(); await connect(); await homeReady(); await sleep(2000);
   await step("F-startup", "cold/warm start timings and ANR scan", "device-state", async () => {
     adbTry(`am force-stop ${PKG}`); await sleep(1500); const t = await launchAndMeasure();
     const anr = adbTry("logcat -d | grep -E 'ANR in|Input dispatching timed out' | tail -2");
     ok(!anr, anr); return t;
   });
-  await connect(); await homeReady();
+  adbTry(`pm clear ${PKG}`); await sleep(1500); launch(); await connect(); await homeReady(); await sleep(2500);
   await step("F-shot-clock", "game screen exposes shot-clock UI elements", "os-input", async () => {
     await ev(`window.CueScoreAndroidBackV1.setPolicy('proposal'); true`);
     await tap('[data-discipline="9ball"]'); await waitFor(`document.querySelector('[data-discipline="9ball"]').getAttribute('aria-selected')==='true'`, 10000);
