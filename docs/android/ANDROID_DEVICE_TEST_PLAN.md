@@ -49,3 +49,16 @@ Safe Area の目視（D2）／試合中 Back（D4）／中断試合の再開（D
 5. 端末の WebView／Chrome 版数を記録（`adb shell dumpsys package com.google.android.webview | grep versionName`）。
 6. 試験後は `adb uninstall com.takaakimailboxstar.cuescoreapps` で撤去できる（テスト用データは端末内のみ）。
 7. 不具合時は `adb logcat -d > logcat.txt` を保存。個人データ・秘密情報は共有しない。
+
+## 6 USB／PC が必要か：電話単体（Wi-Fi＋APK）で行える確認と、adb が要る確認の分離
+結論: **主要な確認（D1〜D11）は PC・Mac・USB ケーブルなしで可能**。APK を電話に届けて「提供元不明アプリのインストール」を許可できればよい。adb が必要なのは、ログ採取・保存データの内部確認・ページサイズ数値確認だけ。
+
+### 6.1 電話単体でできる（優先）
+- 導入: ①司令塔側が確保済みの run 30 テスト用 APK（Debug、署名・配布なし）を、電話が受け取れる経路（クラウドストレージ、メール添付、共有リンクなど）で渡す ②電話で APK を開き、「この提供元のアプリを許可」を一時的に ON → インストール → 終わったら許可を OFF に戻す ③Play プロテクトの警告が出た場合は「詳細→とにかくインストール」（デバッグ APK のため）。
+- 項目: D1 起動・初回表示／D2 Safe Area の目視（人が画面を見て確認、スクリーンショットは電話の標準機能）／D3 中断試合の再開（得点を入れてホーム→アプリ一覧から削除→再起動→再開カード→復帰）／D4 試合中 Back（確認ダイアログの キャンセル／OK）／D5 ショットクロック／D6 プレーヤー管理／D7 履歴・分析／D8 バックアップ書出し・復元（共有シート／ファイル選択）／D9 QR カメラ（権限の許可・拒否）／D10 画面回転・ホーム退避・復帰／D11 Free／Pro 表示（購入ボタンは押さない）／D12 のうち「初回起動が遅くないか」の体感と時間（ストップウォッチで測る）／D13 Back A案。
+- 16 KB: Android 15 QPR1 以降の 設定 → システム → 開発者向けオプション に 16 KB 関連の項目がある場合に限り、画面表示で確認する（切替が端末の初期化を伴う場合は実施せず司令塔へ報告）。
+
+### 6.2 adb（PC＋USB、または Android 11 以降の「ワイヤレスデバッグ」）が必要
+- `adb logcat`（ANR・クラッシュの原因調査）／`adb shell getconf PAGE_SIZE`（16384 の数値確認）／`adb shell run-as com.takaakimailboxstar.cuescoreapps …`（保存データの内部確認。デバッグ APK のみ）／WebView 版数の取得（`dumpsys package com.google.android.webview`。電話単体でも 設定 → アプリ → Android System WebView で版数は見える）。
+- ワイヤレスデバッグでも PC 側の `adb` は必要（Mac に限らず Windows／Linux 可）。**Mac は必須ではない**。電話単体で不具合が出た時だけ採取すればよい。
+- 結論の運用: まず 6.1 で全項目を一巡し、FAIL・不審な挙動があった項目だけ 6.2 で原因を採る。
