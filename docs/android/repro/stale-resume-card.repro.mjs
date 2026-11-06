@@ -1,0 +1,22 @@
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
+const { chromium } = require("playwright");
+import http from "node:http"; import fs from "node:fs"; import path from "node:path";
+const root = process.argv[2];
+const types = { ".html":"text/html", ".js":"text/javascript", ".css":"text/css", ".json":"application/json", ".png":"image/png", ".svg":"image/svg+xml", ".webmanifest":"application/manifest+json" };
+const srv = http.createServer((q, r) => { let p = path.join(root, decodeURIComponent(q.url.split("?")[0])); if (p.endsWith("/")) p += "index.html"; fs.readFile(p, (e, d) => { if (e) { r.writeHead(404); r.end(); } else { r.writeHead(200, { "content-type": types[path.extname(p)] || "application/octet-stream" }); r.end(d); } }); }).listen(0);
+await new Promise(r => srv.on("listening", r));
+const b = await chromium.launch(); const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, serviceWorkers: "block" }); const pg = await ctx.newPage();
+await pg.goto(`http://127.0.0.1:${srv.address().port}/index.html`); await pg.waitForSelector("#cueHomeV1", { state: "visible", timeout: 30000 });
+await pg.click('[data-discipline="9ball"]'); await pg.waitForTimeout(500); await pg.click("#startGameBtn"); await pg.waitForSelector("#proGameScreen", { state: "visible", timeout: 20000 }); await pg.waitForTimeout(1500);
+const KEY = "cueScore.inProgressMatch.v1";
+const snap = () => pg.evaluate(k => ({ snapshot: !!localStorage.getItem(k), cardHidden: document.getElementById("cueResumeCardV1").hidden, cardVisible: document.getElementById("cueResumeCardV1").getClientRects().length > 0, homeVisible: document.getElementById("cueHomeV1").getClientRects().length > 0 }), KEY);
+console.log("in match:", JSON.stringify(await snap()));
+await pg.reload(); await pg.waitForSelector("#cueResumeCardV1", { state: "visible", timeout: 30000 });
+console.log("after reload (restart):", JSON.stringify(await snap()));
+await pg.evaluate(() => document.getElementById("cueResumeCardV1").click()); await pg.waitForSelector("#proGameScreen", { state: "visible", timeout: 20000 }); await pg.waitForTimeout(1500);
+console.log("resumed:", JSON.stringify(await snap()));
+// force Home to render the card once (as after a restart) is not needed; now explicitly end with OK
+pg.once("dialog", d => d.accept()); await pg.evaluate(() => document.getElementById("proGameBackBtn").click()); await pg.waitForTimeout(2500);
+console.log("after explicit end (OK):", JSON.stringify(await snap()));
+await b.close(); srv.close();

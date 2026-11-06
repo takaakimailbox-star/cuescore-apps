@@ -136,3 +136,19 @@
 - 未確認: 再起動直後のホームに「進行中の試合を再開」の選択肢（`#cueInProgressChoiceV1`）は表示されなかった（観測時点で `game:false, home:true, resume:false`）。データ（`inProgressMatch`）は保存されているが、再開導線がどの条件で出るかは Emulator では確認していない。実機 D3／D4 で確認する。
 - 保全状況: results.json／スクリーンショット／logcat は GitHub Actions artifact（保持 7 日）。Cloud からは Blob ホストへの接続が拒否される（HTTP 403 CONNECT、許可リスト外）ため取得不可。許可なく制限を回避しない。FINAL 行と数値を本書に転記済み。Work 側の取得用 artifact ID: run 25（`aa87b8c`）back35=13465712905、back36=13466207987；run 24（`916aa30`）back35=13465280993、back36=13465710478、back16k=13465510945；run 26（`e3a6f94`）b7-35=13471912925、b7-36=13471438094。Actions 画面から取得し、`*-results.json` を `docs/android/` ではなく Work 側の Evidence 置場に保全する。
 - 視覚: 画像は人が目視していないため、視覚 PASS とは記録しない。
+
+## 12 中断試合の再開（run 29、`c341dd1`、API35／API36、実 OS 押下）
+対象: Official 105/106。Home の再開カードは `#cueResumeCardV1`（`#cueInProgressChoiceV1` は「新しい試合を開始する時の選択モーダル」で再開カードではない）。保存キーが残るだけでは PASS にしない。
+`FINAL res35: R1:P,R2:P,R3:P,R4:P,R5:F`、`res36: R1:P,R2:P,R3:P,R4:P,R5:F`
+| ID | 内容 | API35 | API36 |
+|---|---|---|---|
+| R1 | 9-Ball 開始、ブレイク選択・玉タップ（テスト入力） | PASS | PASS |
+| R2 | 試合中の Back → 終了確認（ネイティブ `confirm`）→ キャンセルで試合・保存データ維持（スナップショット同一） | PASS | PASS |
+| R3 | アプリ強制停止→再起動 → Home に再開カードが表示、プレーヤー名 `Score 1`／`Score 2`、aria「Suspended 9-Ball: Score 1 vs Score 2, Race to 5-5. Resume match」、保存スナップショットが中断前と一致 | PASS | PASS |
+| R4 | 再開カードを実押下 → 試合画面に復帰。競技 nineBall・プレーヤー・目標 5-5・使用球 [1]・ラック 1・手番 1・イニング 1 が中断前と一致、画面にプレーヤー名 | PASS | PASS（カード押下の取りこぼし 1 回を再押下） |
+| R5 | 明示的な終了（Back→OK、テスト用データ）→ 保存データ消去と再開カード消失 | **FAIL** | **FAIL** |
+- 試験の限界（偽らない）: 点数は 0-0 のまま（玉 1 をタップしたが得点にならない操作のため）。比較は 競技・プレーヤー・目標・使用球・ラック・手番・イニング。実機 D3 で得点を伴う中断を確認する。
+- **R5 の発見（共有コードの欠陥、Android 固有ではない）**: OK で終了すると保存スナップショットは消えるが、Home の再開カードが**消えずに残る**（`hidden=false`）。`requestBackToPlayerInfo()` は `clearInProgressMatchV1()` を呼ぶが `renderInProgressHomeCardV1()` を呼ばないため。カードは再描画（起動・pageshow・新規開始時）まで古いまま残り、押しても `restoreInProgressMatchV1()` が false を返して何も起きない。
+- 切り分け: デスクトップ Chromium（Playwright、共有の `index.html` をそのまま読み込み）でも同じ手順で再現。①開始→再読込でカード表示→カードで再開→終了(OK) の後 `snapshot:false, cardHidden:false, cardVisible:true`。再現スクリプト: `docs/android/repro/stale-resume-card.repro.mjs`。したがって iOS／PWA と共通。
+- 対応: **STOP（Android 専用では直さない）**。`index.html` は iOS／PWA 共通で、Official 105/106 に「終了後に再開カードを消す」条件が明記されていないため、仕様未定義。修正案（司令塔／PO の判断待ち）: `requestBackToPlayerInfo()`、`interruptNewMatchFromBreakV3()` など破棄経路の `clearInProgressMatchV1()` 直後に `renderInProgressHomeCardV1()` を呼ぶ 1 行追加（共通コード変更のため iOS 公開物・Official 105/106 への影響確認が必要）。
+- Evidence: artifact は run 29 の res35=13476936406、res36=13477105757（保持 7 日。画像は人が目視していないため視覚 PASS ではない）。
