@@ -122,3 +122,17 @@
 - run 24 の API35／36／16KB（3/3）と run 25 の API35／36（2/2）で、B0〜B6・F-startup・F-shot-clock はすべて PASS（run 25 の 16KB ジョブは本書作成時点で未読）。
 - **B7（未確認）**: 試合開始後の画面が重く（ソフトウェア GPU。F5 と同症状）、Back 後 36 秒待っても DevTools 評価が応答せず保存データを読み出せない。アプリは前面を維持（`fg=true`）。Back 前の保存データは 10 キー・986 文字。**Back による保存データ破棄の有無は Emulator では確認できていない**。代替の担保: ①試合中の Back は従来の `#proGameBackBtn`（変更なし）、②A案の追加ルールは `#proGameScreen` 表示中は一切動作しない（Node テスト 5/5 PASS）。実機での確認が必要。
 - 保全: FINAL 行はジョブログからの転記（artifact は 7 日で失効、Cloud から取得不可）。
+
+## 11. B7 解決（run 26、`e3a6f94`、DevTools に頼らない別経路）
+方式: デバッグ APK の `run-as` でアプリ内 Local Storage（leveldb）のファイル大きさ／チェックサムを、試合開始前・試合中・Back 後に取得。さらに強制停止→再起動後に保存キーを読み出して比較（テスト用データのみ）。
+`FINAL {"label":"b7-35","steps":"B7-runas:P,B7-start:P,B7-back:P,B7-files:P,B7-restart:P"}`、`b7-36` も同一（各 5/5 PASS）。
+| 項目 | API35 | API36 |
+|---|---|---|
+| 保存ファイル合計バイト：開始前 → 試合中 → Back 後 | 2077 → 7686 → 7686 | 2117 → 7726 → 7726 |
+| Back でファイルが縮小・消失 | なし（試合中と Back 後でチェックサムも同一） | なし |
+| アプリ前面維持／プロセス生存 | 維持／生存 | 維持／生存 |
+| 強制停止→再起動後の保存キー | 9→10 キー（開始前の全キー保持、`cueScore.inProgressMatch.v1` が追加）、len 932→5971 | 同左 |
+- 結論: **試合中の Back で保存データは破棄されない（Emulator、API35／36）**。製品 FAIL ではなく、§10 の B7 未確認は環境（試合画面で DevTools が応答しない）に起因していた。
+- 未確認: 再起動直後のホームに「進行中の試合を再開」の選択肢（`#cueInProgressChoiceV1`）は表示されなかった（観測時点で `game:false, home:true, resume:false`）。データ（`inProgressMatch`）は保存されているが、再開導線がどの条件で出るかは Emulator では確認していない。実機 D3／D4 で確認する。
+- 保全状況: results.json／スクリーンショット／logcat は GitHub Actions artifact（保持 7 日）。Cloud からは Blob ホストへの接続が拒否される（HTTP 403 CONNECT、許可リスト外）ため取得不可。許可なく制限を回避しない。FINAL 行と数値を本書に転記済み。Work 側の取得用 artifact ID: run 25（`aa87b8c`）back35=13465712905、back36=13466207987；run 24（`916aa30`）back35=13465280993、back36=13465710478、back16k=13465510945；run 26（`e3a6f94`）b7-35=13471912925、b7-36=13471438094。Actions 画面から取得し、`*-results.json` を `docs/android/` ではなく Work 側の Evidence 置場に保全する。
+- 視覚: 画像は人が目視していないため、視覚 PASS とは記録しない。
