@@ -44,3 +44,15 @@ Google 管理の App Signing を有効化し、アップロード鍵は PO が�
 - [ ] Data Safety／プライバシーポリシー／レーティング完了
 - [ ] サーバー側購入検証の要否を PO 判断（現状クライアント側のみ）
 - [ ] PO の公開承認（別Gate）
+
+## 9. 未承認事項の具体化（2026-11-06、調査・下書きのみ。Play Console への書込み・課金設定は未実施）
+| # | 項目 | 現状（コード／文書で確認できる事実） | 未承認で PO 判断が必要な事項 |
+|---|---|---|---|
+| 1 | **Android Pro 商品 ID** | コードは iOS と同じ `com.takaakimailboxstar.cuescoreapps.pro`（`monetization-v1.js` と `CueScoreStoreKitPlugin.java`。39 文字で Play の上限 40 文字内、小文字・数字・ピリオドのみで形式 OK）。**Play の商品 ID は作成後に変更できない**ため、確定前に作らない | ①この ID を Android でも使うか（コード変更なし）②別 ID にする場合は両側のコードとテストを同時変更（`pro2` のような変更は既存テストが検知する） |
+| 2 | **価格・地域** | iOS は「価格は StoreKit の `displayPrice` が正本で、公式文書に価格を固定記載しない」（`app-store-v1.0/README.md`）。Android も `ProductDetails` の表示価格を使う設計 | Android の価格・販売地域（iOS は Japan-only launch）を PO が決定。Play Console での価格入力は別承認 |
+| 3 | **購入検証方式** | 現状はクライアント側のみ。`queryPurchasesAsync` で Play を正本として再照会し、未承認購入は `acknowledgePurchase` を実行（`pending` 対応あり、Billing 8.0.0）。購入トークンは外部送信しない | サーバー側検証（Google Play Developer API）の要否。サーバーを持たない方針ならクライアント側のみで公開するリスク（改ざん端末での Pro 解放）を PO が受容するか。3 日以内の承認漏れは Google が自動返金するため承認処理は必須（実装済み、実購入では未検証） |
+| 4 | **Privacy／Data Safety** | 収集データ無し（端末内保存、ユーザー操作の JSON 書出し）。カメラは Match Sharing の QR 読取時のみで画像は保存・送信しない。購入は Google Play Billing が処理。第三者 SDK は Play Billing／CameraX／ZXing（広告・分析 SDK 無し）。**公式 Privacy Policy（`app-store-v1.0/public/`）には Android 固有（Play Billing、カメラ）の記載が見当たらない** | ①Data Safety 申告（収集なし／カメラ使用／購入情報）②Privacy Policy へ Android 固有の追記（公式文書のため PO・法務承認と SSOT 手続き）③公開 URL を Play 用にも使う |
+| 5 | **署名と内部テスト** | Play App Signing（Google 管理）＋アップロード鍵は PO が生成・保管。署名なし／デバッグ署名の AAB は提出不可。現状は署名なし Release AAB まで（ローカル／CI でビルド確認済み） | アップロード鍵の生成と保管（秘密情報は git・チャットへ出さない）、内部テストトラック作成、ライセンステスター登録（別承認）。個人開発者アカウントは本番前に Closed Test の人数・期間要件がある場合があり、提出時点の Play ポリシーを再確認 |
+| 6 | **ストア掲載資料** | 説明文は `app-store-v1.0/submission/` を正本として流用（新機能を謳わない）。アイコン 512×512 は流用可。フィーチャーグラフィック 1024×500 は未作成。スクリーンショットは採用 UI と一致するもののみ（人が目視して選定。Cloud の画像は視覚確認していない） | フィーチャーグラフィックのデザイン判断、スクリーンショットの採否（Pixel 実機で撮影するのが望ましい）、短い説明（80 字）の承認 |
+- 追加の注意: 16 KB ページ対応は静的検証・Emulator で確認済み（`zipalign -P 16`、API35 16KB image）。実機（Pixel 8a は Android 15 QPR1 以降で開発者向け 16 KB モードに対応するとの公式情報。利用可否は到着後に確認）で再確認する。
+- 本節は調査・下書きであり、いかなる Play Console 操作も含まない。
