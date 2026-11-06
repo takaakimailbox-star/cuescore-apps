@@ -456,10 +456,56 @@ async function resumeMode() {
   });
 }
 
+// paint mode: is text on the Home resume card / discipline tiles really painted, and when? (adb screencap ink counts, no human review)
+async function paintMode() {
+  const SEL9 = `document.querySelector('[data-discipline="9ball"]').getAttribute('aria-selected')==='true'`;
+  adb("install", "-r", apk); adbTry("pm clear " + PKG);
+  const m0 = await launchAndMeasure(); emit("STARTUP", { label, ...m0 });
+  await connect(); await homeReady(); await sleep(2500);
+  const web = wvInfo(); emit("PAINT-ENV", { label, sdk: adbTry("getprop ro.build.version.sdk"), webview: web });
+  await step("P0", "create an interrupted 9-Ball match, force-stop, relaunch (card shown)", "os-input", async () => {
+    let sel = false;
+    for (let i = 0; i < 4 && !sel; i++) { await tap('[data-discipline="9ball"]').catch(() => {}); sel = await waitFor(SEL9, 8000); }
+    ok(sel, "tile not selected");
+    let started = false;
+    for (let i = 0; i < 3 && !started; i++) { await tap("#startGameBtn").catch(() => {}); started = await waitFor(vis("#proGameScreen"), i < 2 ? 10000 : 30000); }
+    ok(started, "match not started"); await sleep(4000);
+    adbTry(`am force-stop ${PKG}`); await sleep(2500); launch(); await connect();
+    ok(await waitFor(vis("#cueResumeCardV1"), 60000), "resume card not visible");
+  });
+  const targets = `(()=>{const r=n=>{if(!n)return null;const b=n.getBoundingClientRect();return b.width>0?[b.left,b.top,b.width,b.height]:null};const o={card:r(document.getElementById('cueResumeCardV1')),p1:r(document.getElementById('cueResumePlayer1V1')),p2:r(document.getElementById('cueResumePlayer2V1')),resumeLabel:null};
+    document.querySelectorAll('[data-discipline]').forEach(n=>{const b=n.getBoundingClientRect();if(b.width>0)o['tile:'+n.dataset.discipline]=[b.left+b.width*0.35,b.top+b.height*0.25,b.width*0.55,b.height*0.5]});return o})()`;
+  const dpr = await ev("devicePixelRatio"); await calibrate();
+  const ink = (img, rc) => { if (!rc) return null; let n = 0; const x0 = Math.max(0, Math.round(origin.x + rc[0] * dpr)), y0 = Math.max(0, Math.round(origin.y + rc[1] * dpr)), x1 = Math.min(img.w - 1, Math.round(origin.x + (rc[0] + rc[2]) * dpr)), y1 = Math.min(img.h - 1, Math.round(origin.y + (rc[1] + rc[3]) * dpr));
+    for (let y = y0; y < y1; y += 2) for (let x = x0; x < x1; x += 2) { const [R, G, B] = img.px(x, y); if ((R + G + B) / 3 < 150) n++; } return n; };
+  const facts = await ev(`(()=>{const q=s=>{const n=document.querySelector(s);if(!n)return null;const c=getComputedStyle(n);return {color:c.color,fill:c.webkitTextFillColor,op:c.opacity,vis:c.visibility,disp:c.display,font:c.fontFamily.slice(0,50),fs:c.fontSize,cv:c.contentVisibility,txt:(n.textContent||'').trim().slice(0,16)}};return {fontsStatus:document.fonts.status,fontsLoaded:[...document.fonts].filter(f=>f.status==='loaded').length,p1:q('#cueResumePlayer1V1'),p2:q('#cueResumePlayer2V1'),tile9:q('[data-discipline="9ball"]'),tileRot:q('[data-discipline="rotation"]'),tile3c:q('[data-discipline="threeCushion"]'),inner:[innerWidth,innerHeight],dpr:devicePixelRatio}})()`);
+  emit("PAINT-FACTS", facts);
+  const rows = [];
+  await step("P1", "text ink present on card names and tile names over time (0.3-15 s after the card appeared)", "device-state", async () => {
+    const t0 = Date.now();
+    for (const wait of [300, 1000, 2000, 4000, 8000, 15000]) {
+      const left = wait - (Date.now() - t0); if (left > 0) await sleep(left);
+      const tg = await ev(targets); const img = grab();
+      const row = { t: Date.now() - t0, p1: ink(img, tg.p1), p2: ink(img, tg.p2) }; for (const k of Object.keys(tg)) if (k.startsWith("tile:")) row[k.slice(5)] = ink(img, tg[k]);
+      rows.push(row); emit("PAINT-ROW", row); if (wait === 300) shot("60-t0300"); if (wait === 15000) shot("61-t15000");
+    }
+    const last = rows[rows.length - 1]; const bad = Object.entries(last).filter(([k, v]) => k !== "t" && v !== null && v < 15).map(([k]) => k);
+    ok(bad.length === 0, "no ink after 15 s for: " + bad.join(","));
+    return { first: rows[0], last };
+  });
+  await step("P2", "repaint nudge does not change visibility of already painted text (diagnostic)", "device-state", async () => {
+    await ev("window.dispatchEvent(new Event('resize'))"); await sleep(1500);
+    const tg = await ev(targets); const img = grab(); const row = { p1: ink(img, tg.p1), p2: ink(img, tg.p2) }; emit("PAINT-NUDGE", row); return row;
+  });
+  const bars = sysBars();
+  const nav = await ev(`(()=>{const a=[...document.querySelectorAll('.cue-phase1-tab-bar button')].filter(n=>n.getClientRects().length>0);return a.length?Math.max(...a.map(n=>n.getBoundingClientRect().bottom)):null})()`);
+  emit("PAINT-SAFEAREA", { bars, tabBtnBottomPx: nav == null ? null : Math.round(origin.y + nav * dpr), navBarTop: bars.nav[1], statusBottom: bars.status[3] });
+}
+
 (async () => {
   let info = {};
   if (mode !== "full") {
-    try { await ({ insets: insetsMode, coldstart: coldstartMode, probe: probeMode, back: backMode, b7: b7Mode, resume: resumeMode }[mode])(); } catch (e) { console.log("MODE ERROR", e && e.stack || e); }
+    try { await ({ insets: insetsMode, coldstart: coldstartMode, probe: probeMode, back: backMode, b7: b7Mode, resume: resumeMode, paint: paintMode }[mode])(); } catch (e) { console.log("MODE ERROR", e && e.stack || e); }
     fs.writeFileSync(path.join(outDir, `${label}-${mode}-results.json`), JSON.stringify({ label, mode, results, consoleErrors }, null, 2));
     const f = results.filter(r => r.status === "FAIL").length; console.log(`SUMMARY ${label}/${mode}: ${results.length - f}/${results.length} PASS`); console.log("FINAL " + JSON.stringify({ label, mode, steps: results.map(r => r.id + ":" + r.status[0]).join(","), insets: globalThis.__finalSummary || null, fails: results.filter(r => r.status === "FAIL").map(r => r.id + "=" + String(r.detail).slice(0, 140)) })); process.exit(0);
   }
