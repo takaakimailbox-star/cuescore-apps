@@ -339,6 +339,11 @@
       "skips": 0,
       "updated_in": "Decision 044 / iOS first-entry language note regression"
     },
+    "in-progress-explicit-end-card.test.mjs": {
+      "sha256": "a7595d0a929c0d08e1f2e77bed744274d41b7ef55c5070c51336d8066e39e28f",
+      "tests": 4,
+      "skips": 0
+    },
     "in-progress-match-restore.test.mjs": {
       "sha256": "8d9c41c3d2510b2b583b2c708db6cac1be2d8916cb897cded1296c7baa6f7deb",
       "tests": 15,
@@ -385,28 +390,28 @@
       "skips": 0
     },
     "localization-ac13-voiceover-release-requirement-decision.test.mjs": {
-      "sha256": "db8fdc388d8bdcaebea2c223f8839e3c778cb419801eab1d0ce21f56a350ce90",
+      "sha256": "a161872556a4d5e8d700507f0edfdf1dad560e7e27b6e5bc9751e85b8dd7d770",
       "tests": 4,
       "skips": 0,
       "updated_in": "D plan (PO 2026-11-01): index.html digest pin refreshed (initial players + first-launch Score 2); no assertion weakened",
       "previousSha256": "aea19a6ff59ac97986cc02e21ec3945f26a63c1e618f95e39c2d2114e8ca7093"
     },
     "localization-glossary-25-approval-decision.test.mjs": {
-      "sha256": "e2f9c17e60d861ddc2e54439282cb2404d34a5b3009dc4f40e0ef2df5b97a3ce",
+      "sha256": "5aa6f16c16d5daa7b959e5024ac425ef4b72399728f2e6792893c4625a1961cf",
       "tests": 6,
       "skips": 0,
       "previousSha256": "58dbd6a3f4ed27d1254dad76b54d30fdaadb44bb1a1dff7ed83500a9b7b832b1",
       "updated_in": "D plan (PO 2026-11-01): index.html digest pin refreshed (initial players + first-launch Score 2); no assertion weakened"
     },
     "localization-glossary-finalization-decision.test.mjs": {
-      "sha256": "e3a67478dcefe6c3b4835cb5fa395b2027451038b7cf0dbdfecbded9335674b2",
+      "sha256": "231be7d4d40fe2aef2d16134100b649cac936b1e4b6152655fa2369645e660b6",
       "tests": 7,
       "skips": 0,
       "previousSha256": "96976400159700dc23d11ac78c30140defd7b6a8293105eca326c86c845c2559",
       "updated_in": "D plan (PO 2026-11-01): index.html digest pin refreshed (initial players + first-launch Score 2); no assertion weakened"
     },
     "localization-ios-first-entry-language-decision.test.mjs": {
-      "sha256": "d6decbe3adfa55f8ab0ab4af494948b3c4be87bd9311d7ab297157c6d73ef925",
+      "sha256": "71dfe9bf7b20b14adcf82b302b8e89077c56dd1b1a137cb67f2f6e51b24fcc09",
       "tests": 4,
       "skips": 0,
       "updated_in": "D plan (PO 2026-11-01): index.html digest pin refreshed (initial players + first-launch Score 2); no assertion weakened",

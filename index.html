@@ -12674,6 +12674,7 @@ let matchRecordsRawCacheV152 = null;
     currentGameRecordSaved = false;
     currentGameRecordIdV100 = null;
     clearInProgressMatchV1();
+    renderInProgressHomeCardV1();
     breakUndoRestoreV697 = null;
     rows = [];
     undoHistory = [];
@@ -16195,6 +16196,7 @@ let matchRecordsRawCacheV152 = null;
     // Game Setをcancelした後も、戻るボタンだけは使用できる。
     if (!confirm(window.cueT("p3.3961ce36"))) return;
     clearInProgressMatchV1();
+    renderInProgressHomeCardV1();
     // RC11: invalidate delayed callbacks and close all transient game overlays.
     currentGameSessionIdV104 = null;
     breakUndoRestoreV697 = null;

@@ -1,0 +1,32 @@
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
+const { chromium } = require("playwright");
+import http from "node:http"; import fs from "node:fs"; import path from "node:path";
+const root = process.argv[2];
+const types = { ".html":"text/html", ".js":"text/javascript", ".css":"text/css", ".json":"application/json", ".png":"image/png", ".svg":"image/svg+xml", ".webmanifest":"application/manifest+json" };
+const srv = http.createServer((q, r) => { let p = path.join(root, decodeURIComponent(q.url.split("?")[0])); if (p.endsWith("/")) p += "index.html"; fs.readFile(p, (e, d) => { if (e) { r.writeHead(404); r.end(); } else { r.writeHead(200, { "content-type": types[path.extname(p)] || "application/octet-stream" }); r.end(d); } }); }).listen(0);
+await new Promise(r => srv.on("listening", r));
+const b = await chromium.launch(); const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, serviceWorkers: "block" }); let pg = await ctx.newPage();
+const KEY = "cueScore.inProgressMatch.v1"; const out = []; const rec = (id, pass, d) => { out.push({ id, pass }); console.log(`${pass ? "PASS" : "FAIL"} ${id} ${JSON.stringify(d)}`); };
+const snap = () => pg.evaluate(k => ({ snapshot: !!localStorage.getItem(k), cardHidden: document.getElementById("cueResumeCardV1").hidden, game: document.getElementById("proGameScreen").getClientRects().length > 0, home: document.getElementById("cueHomeV1").getClientRects().length > 0 }), KEY);
+const open = async () => { await pg.goto(`http://127.0.0.1:${srv.address().port}/index.html`); await pg.waitForSelector("#cueHomeV1", { state: "visible", timeout: 30000 }); };
+const start = async () => { await pg.click('[data-discipline="9ball"]'); await pg.waitForTimeout(500); await pg.click("#startGameBtn"); await pg.waitForSelector("#proGameScreen", { state: "visible", timeout: 20000 }); await pg.waitForTimeout(1500); };
+const clickBack = answer => { pg.once("dialog", d => answer ? d.accept() : d.dismiss()); return pg.evaluate(() => document.getElementById("proGameBackBtn").click()); };
+// throwaway data only (fresh browser context)
+await open(); await start();
+await clickBack(false); await pg.waitForTimeout(1000); let s = await snap();
+rec("A Back->Cancel keeps match and data", s.snapshot && s.game, s);
+await pg.reload(); await pg.waitForSelector("#cueResumeCardV1", { state: "visible", timeout: 30000 }); s = await snap();
+rec("B restart -> Home shows resume card", s.snapshot && !s.cardHidden && s.home, s);
+await pg.evaluate(() => document.getElementById("cueResumeCardV1").click()); await pg.waitForSelector("#proGameScreen", { state: "visible", timeout: 20000 }); await pg.waitForTimeout(1000); s = await snap();
+rec("C resume card -> match screen", s.game && s.snapshot, s);
+await clickBack(true); await pg.waitForTimeout(2000); s = await snap();
+rec("D Back->OK removes snapshot and the card immediately", !s.snapshot && s.cardHidden && s.home, s);
+// E: replacement of an interrupted match keeps the existing choice contract
+const ctx2 = await b.newContext({ viewport: { width: 390, height: 844 }, serviceWorkers: "block" }); pg = await ctx2.newPage();
+await open(); await start(); await pg.reload(); await pg.waitForSelector("#cueResumeCardV1", { state: "visible", timeout: 30000 });
+await pg.click('[data-discipline="9ball"]'); await pg.waitForSelector("#cueInProgressChoiceV1", { state: "visible", timeout: 10000 });
+await pg.evaluate(() => document.getElementById("cueInProgressNewV1").click()); await pg.waitForTimeout(1500); s = await snap();
+rec("E replace via 'start new match' clears snapshot, card hidden", !s.snapshot && s.cardHidden, s);
+await b.close(); srv.close();
+process.exit(out.every(r => r.pass) ? 0 : 1);
