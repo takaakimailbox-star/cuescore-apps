@@ -374,7 +374,7 @@ async function b7Mode() {
 // the in-match Back must be answered (cancel keeps the match, OK explicitly ends it). Test data only.
 async function resumeMode() {
   const KEY = "cueScore.inProgressMatch.v1";
-  const PICK = `(()=>{const raw=localStorage.getItem(${JSON.stringify(KEY)});if(!raw)return null;try{const p=JSON.parse(raw),s=p.state||{};const pick=o=>o==null?null:JSON.parse(JSON.stringify(o));return {type:s.activeGameTypeV1,names:pick(s.playerNames),reg:pick(s.selectedRegisteredPlayer),goals:pick(s.goals),scores:pick(s.scores),rack:pick(s.rack),rackScores:pick(s.rackScores),current:pick(s.current),inning:pick(s.inning),started:s.currentGameStartedAt||null,undo:(p.undoHistory||[]).length,len:raw.length}}catch(e){return {error:String(e)}}})()`;
+  const PICK = `(()=>{const raw=localStorage.getItem(${JSON.stringify(KEY)});if(!raw)return null;try{const p=JSON.parse(raw),s=p.state||{};const pick=o=>o==null?null:JSON.parse(JSON.stringify(o));return {type:s.activeGameTypeV1,names:pick(s.playerNames),reg:pick(s.selectedRegisteredPlayer),goals:pick(s.goals),scores:pick(s.scores),rack:pick(s.rack),used:pick(s.usedBalls),rackScores:pick(s.rackScores),current:pick(s.current),inning:pick(s.inning),started:s.currentGameStartedAt||null,undo:(p.undoHistory||[]).length,len:raw.length}}catch(e){return {error:String(e)}}})()`;
   const same = (a, b) => a && b && JSON.stringify({ ...a, undo: 0, len: 0 }) === JSON.stringify({ ...b, undo: 0, len: 0 });
   const fg = () => adbTry("dumpsys activity activities | grep -m1 topResumedActivity").includes(PKG);
   const buttons = () => ev(`[...document.querySelectorAll('#proGameScreen button')].filter(n=>n.getClientRects().length>0).map(n=>(n.id||n.className.toString().split(' ')[0])+':'+(n.textContent||'').trim().slice(0,8)).slice(0,24)`).catch(() => "busy");
@@ -391,6 +391,7 @@ async function resumeMode() {
     if (await ev(vis(".break-ball-btn-v696")).catch(() => false)) { await tap(".break-ball-btn-v696"); await sleep(1500); emit("R-BUTTONS-2", await buttons()); }
     const conf = await ev(`(()=>{const n=[...document.querySelectorAll('#proGameScreen button')].find(b=>b.getClientRects().length>0&&/^(確定|決定|OK|Confirm|Done)$/i.test((b.textContent||'').trim()));return n?(n.id?'#'+n.id:null):null})()`).catch(() => null);
     if (conf) { await tap(conf); await sleep(1500); emit("R-BUTTONS-3", await buttons()); }
+    if (await ev(vis(".pro-ball")).catch(() => false)) { await tap(".pro-ball"); await sleep(2000); emit("R-BUTTONS-4", await buttons()); }
     S1 = await ev(PICK); emit("R-S1", S1);
     names1 = S1 && S1.names;
     ok(S1 && !S1.error && S1.type, "no in-progress snapshot after start/input: " + JSON.stringify(S1));
@@ -424,7 +425,9 @@ async function resumeMode() {
   });
   await step("R4", "tap the resume card (OS press): the match screen returns with the same discipline, players, score, turn", "os-input", async () => {
     await tap("#cueResumeCardV1");
-    ok(await waitFor(vis("#proGameScreen"), 30000), "match screen not shown after resume");
+    let shown = await waitFor(vis("#proGameScreen"), 8000);
+    if (!shown) { emit("R-RETRY", { lastTap: lastTap.ev }); await tap("#cueResumeCardV1"); shown = await waitFor(vis("#proGameScreen"), 30000); } // first press after launch can be dropped by the emulator
+    ok(shown, "match screen not shown after resume");
     await sleep(3000);
     const S4 = await ev(PICK); emit("R-S4", S4);
     const titles = await ev(`(document.querySelector('#proGameScreen')||{}).innerText.slice(0,200)`).catch(() => "");
