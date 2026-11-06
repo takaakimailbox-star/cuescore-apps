@@ -41,11 +41,11 @@ function backHarness({ visibleIds = [], tab = "home", tilesVisible = true, homeV
   return { result: window.CueScoreAndroidBackV1.handle(), clicked, api: window.CueScoreAndroidBackV1 };
 }
 
-test("Back policy defaults to the current behaviour (no change until Product Owner approval)", () => {
-  assert.equal(backHarness({}).api.getPolicy(), "current");
-  const cur = backHarness({ tab: "settings" });
+test("Back policy defaults to Plan A (PO approved 2026-11-06); the previous behaviour stays selectable", () => {
+  assert.equal(backHarness({}).api.getPolicy(), "proposal");
+  const cur = backHarness({ tab: "settings", policy: "current" });
   assert.equal(cur.result, false); assert.deepEqual(cur.clicked, []);
-  assert.deepEqual(backHarness({ tilesVisible: false }).clicked, []);
+  assert.deepEqual(backHarness({ tilesVisible: false, policy: "current" }).clicked, []);
   assert.equal(backHarness({}).api.setPolicy("bogus"), false);
 });
 
@@ -58,4 +58,16 @@ test("proposal policy: modal -> close; tab screens -> Home tab; selected discipl
   assert.equal(root.result, false); assert.deepEqual(root.clicked, []);
   // an existing in-app Back control always wins over the proposal rules
   assert.deepEqual(backHarness({ policy: "proposal", tab: "settings", visibleIds: ["settingsBackBtn"] }).clicked, ["settingsBackBtn"]);
+});
+
+test("Plan A is the default: no policy call needed; a running match is never navigated away from", () => {
+  for (const tab of ["player", "history", "settings"]) assert.deepEqual(backHarness({ tab }).clicked, ["homeTab"]);
+  assert.deepEqual(backHarness({ tilesVisible: false }).clicked, ["homeTab"]);
+  const root = backHarness({}); assert.equal(root.result, false); assert.deepEqual(root.clicked, []);
+  // match screen visible: only the existing match Back control acts; tab/list rules stay out of the way
+  const inGame = backHarness({ tab: "settings", tilesVisible: false, visibleIds: ["proGameScreen"] });
+  assert.equal(inGame.result, false); assert.deepEqual(inGame.clicked, []);
+  assert.deepEqual(backHarness({ visibleIds: ["proGameScreen", "proGameBackBtn"] }).clicked, ["proGameBackBtn"]);
+  // a modal closes first, even when another Back control is visible underneath
+  assert.deepEqual(backHarness({ visibleIds: ["newMatchRacePickerV1", "newMatchRacePickerCloseV1", "settingsBackBtn"] }).clicked, ["newMatchRacePickerCloseV1"]);
 });

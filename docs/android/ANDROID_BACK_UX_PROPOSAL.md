@@ -1,6 +1,6 @@
 # Android システム Back — UX 案と受入条件（PO 判断資料）
 
-状態: **プロトタイプのみ。正式仕様は変更していない**。既定の方針は従来どおり `current`（表示中の画面内 Back ボタンを押す。無ければ最小化）。`proposal` は実行時にだけ選択でき、製品の既定動作・保存データ・iOS/PWA には影響しない。Official Decision 045（ホームは 6 競技タイル＋試合設定の統合）は変更しない。
+状態: **A案を 2026-11-06 に Product Owner が正式承認。Android の既定動作として実装済み**（記録: `ANDROID_BACK_DECISION_A.md`）。`current` は `setPolicy("current")` でのみ選択可能（ロールバック用）。Official Decision 045 は変更しない。以下の §1〜§2 は承認前の分析（経緯として保存）。
 
 ## 1. 現状（Emulator 実測）
 | 画面 | 現行 Back | 問題 |

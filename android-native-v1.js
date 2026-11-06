@@ -34,21 +34,27 @@
     }
     return node.getClientRects().length > 0;
   };
-  /* ---- PROTOTYPE (not the formal spec until Product Owner approval; default policy stays "current") ----
-     Proposal "proposal": modal -> close it; sub-screen Back controls (as today); Players/History/Settings -> Home tab;
-     a discipline selected on Home -> back to the 6-discipline list (Home tab); Home list -> minimize (unhandled). */
+  /* ---- Android system Back, Plan A (Product Owner approved 2026-11-06; docs/android/ANDROID_BACK_DECISION_A.md) ----
+     Order: 1) modal -> close only that modal; 2) a visible in-app Back control (as before, incl. #proGameBackBtn);
+     3) Players/History/Settings -> Home tab; 4) a discipline selected on Home -> back to the 6-discipline list;
+     5) Home list -> unhandled (the OS minimizes). During a match (#proGameScreen) rules 3-4 never act, so a match is never discarded.
+     "current" (the previous behaviour) stays selectable through setPolicy("current") for rollback and tests. */
   const PROPOSAL_MODAL_PAIRS = Object.freeze([
     ["#newMatchRacePickerV1", "#newMatchRacePickerCloseV1"],
     ["#cueInProgressChoiceV1", "#cueInProgressCancelV1"]
   ]);
-  let policy = "current";
+  let policy = "proposal";
   const homeTab = () => document.querySelector('[data-phase1-tab="home"]');
   const activeTab = () => (document.body && document.body.dataset && document.body.dataset.cuePhase1Tab) || "home";
-  function handleProposal() {
+  function closeModal() {
     for (const [container, close] of PROPOSAL_MODAL_PAIRS) {
       const c = document.querySelector(container), b = document.querySelector(close);
       if (visible(c) && visible(b)) { b.click(); return true; }
     }
+    return false;
+  }
+  function handleProposal() {
+    if (visible(document.querySelector("#proGameScreen"))) return false;
     const tab = homeTab();
     if (!tab) return false;
     if (activeTab() !== "home") { tab.click(); return true; }
@@ -58,6 +64,7 @@
   }
   /** Returns true when an in-app Back control consumed the event; false means "at root: let the shell minimize". */
   function handle() {
+    if (policy === "proposal" && closeModal()) return true;
     for (const selector of BACK_SELECTORS) {
       const node = document.querySelector(selector);
       if (visible(node)) { node.click(); return true; }

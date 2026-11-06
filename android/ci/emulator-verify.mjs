@@ -289,19 +289,34 @@ async function backMode() {
     ok(!anr, anr); return t;
   });
   adbTry(`pm clear ${PKG}`); await sleep(1500); launch(); await connect(); await homeReady(); await sleep(2500);
-  await step("F-shot-clock", "game screen exposes shot-clock UI elements", "os-input", async () => {
-    await ev(`window.CueScoreAndroidBackV1.setPolicy('proposal'); true`);
+  await step("F-shot-clock", "shot clock: OFF by default, ON via setup switch (OS press), clock UI shown in match", "os-input", async () => {
     const SELF = `document.querySelector('[data-discipline="9ball"]').getAttribute('aria-selected')==='true'`;
     await tap('[data-discipline="9ball"]'); if (!(await waitFor(SELF, 8000))) { await tap('[data-discipline="9ball"]'); await waitFor(SELF, 10000); }
-    if (await ev(vis(".cue-sc-switch"))) { await tap(".cue-sc-switch").catch(() => {}); await sleep(800); }
+    const SW = `(()=>{const n=[...document.querySelectorAll('.cue-sc-switch')].find(x=>x.getClientRects().length>0);return n?n.getAttribute('aria-checked'):null})()`;
+    const before = await ev(SW);
+    ok(before === "false" || before === null, "shot clock should start OFF, got " + before);
+    ok(before !== null, "setup shot-clock switch not visible");
+    await tap(".cue-sc-switch"); await sleep(800);
+    let on = await ev(SW);
+    if (on !== "true") { await tap(".cue-sc-switch"); await sleep(800); on = await ev(SW); }
+    ok(on === "true", "shot clock switch did not turn ON; aria-checked=" + on);
     await tap("#startGameBtn"); ok(await waitFor(vis("#proGameScreen"), 30000), "game screen not shown");
     await sleep(3000);
-    const ids = await ev(`[...document.querySelectorAll('#proGameScreen *')].filter(n=>n.id&&n.getBoundingClientRect().width>0&&/clock|shot|timer|extend|ext/i.test(n.id+' '+n.className)).map(n=>n.id).slice(0,20)`).catch(() => "page busy");
-    const texts = await ev(`[...document.querySelectorAll('#proGameScreen button,#proGameScreen [role=button]')].filter(n=>n.getBoundingClientRect().width>0).map(n=>(n.id||'')+':'+(n.textContent||'').trim().slice(0,10)).slice(0,30)`).catch(() => "page busy");
-    emit("GAME", { shotClockIds: ids, buttons: texts });
+    const ui = await ev(`({bar:${vis(".cue-sc-bar")},ext:${vis(".cue-sc-extb")},reset:${vis(".cue-sc-resetb")},main:${vis(".cue-sc-main")},text:(document.querySelector('.cue-sc-bar')||{}).textContent||''})`).catch(() => "page busy");
+    emit("GAME", { switchBefore: before, switchAfter: on, ui });
     shot("30-game");
-    ok(Array.isArray(ids) && ids.length > 0, "no shot-clock related elements found in game screen");
-    return ids;
+    ok(ui && ui !== "page busy" && (ui.bar || ui.main || ui.ext), "no shot-clock UI visible in match with the clock ON: " + JSON.stringify(ui));
+    return { before, on, ui };
+  });
+  await step("B7", "in a running match, system Back keeps match data and the app in foreground", "os-input", async () => {
+    const snap = () => ev(`(()=>{let n=0,len=0;for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);n++;len+=(localStorage.getItem(k)||'').length}return {keys:n,len}})()`);
+    const pre = await snap();
+    await back(); await sleep(2500);
+    const post = await snap();
+    const state = await ev(`({game:${vis("#proGameScreen")},home:${vis("#cueHomeV1")}})`);
+    emit("B7-STATE", { pre, post, state });
+    ok(fg(), "app left foreground during a match");
+    ok(post.keys >= pre.keys && post.len >= pre.len * 0.9, "stored data shrank after Back: " + JSON.stringify({ pre, post }));
   });
 }
 

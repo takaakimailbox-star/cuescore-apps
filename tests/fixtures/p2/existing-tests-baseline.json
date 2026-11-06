@@ -553,8 +553,8 @@
       "skips": 0
     },
     "native-android-safe-area-and-back.test.mjs": {
-      "sha256": "6626ed85389e9fae30b57cc09c5241d75738a541db4a9827fbcbcab96924c44b",
-      "tests": 4,
+      "sha256": "3f5727c9835ee4ccd1729249287b84c6e14844e7259220e7b728ea4c45a3e792",
+      "tests": 5,
       "skips": 0
     },
     "native-ios-foundation.test.mjs": {
