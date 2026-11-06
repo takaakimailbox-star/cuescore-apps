@@ -62,3 +62,7 @@ Safe Area の目視（D2）／試合中 Back（D4）／中断試合の再開（D
 - `adb logcat`（ANR・クラッシュの原因調査）／`adb shell getconf PAGE_SIZE`（16384 の数値確認）／`adb shell run-as com.takaakimailboxstar.cuescoreapps …`（保存データの内部確認。デバッグ APK のみ）／WebView 版数の取得（`dumpsys package com.google.android.webview`。電話単体でも 設定 → アプリ → Android System WebView で版数は見える）。
 - ワイヤレスデバッグでも PC 側の `adb` は必要（Mac に限らず Windows／Linux 可）。**Mac は必須ではない**。電話単体で不具合が出た時だけ採取すればよい。
 - 結論の運用: まず 6.1 で全項目を一巡し、FAIL・不審な挙動があった項目だけ 6.2 で原因を採る。
+
+## 7 追加の目視確認（run 30 の画像で指摘された表示）
+- 指摘: Emulator の画像で、再開カード内のプレーヤー名／一部の競技名が見えない。Emulator の画素計測では文字は描画されていた（EVIDENCE §14）ため、**実機で必ず目視する**。
+- D2／D3 の確認時に、ホームで 次を確認する: ①再開カード内の 2 名のプレーヤー名 ②6 競技タイルの競技名（9-Ball、10-Ball、JPA 9-Ball、Rotation、14-1、3 Cushion）③下部タブの文字とアイコン。いずれかが読めない場合は FAIL とし、スクリーンショット、WebView 版数、画面サイズ（設定→ディスプレイ）、表示サイズ／フォントサイズ設定を記録して報告する。
