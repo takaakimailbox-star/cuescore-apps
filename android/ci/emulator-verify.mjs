@@ -324,10 +324,56 @@ async function backMode() {
   });
 }
 
+// B7 (data kept on in-match Back) without relying on DevTools while the match page is busy:
+// out-of-band file snapshots through `run-as` (debug APK), then restart and read storage once the page is responsive again.
+async function b7Mode() {
+  const LS = `app_webview/Default/"Local Storage"/leveldb`;
+  const fileSnap = () => adbTry(`run-as ${PKG} sh -c 'cd ${LS} 2>/dev/null && for f in *; do echo "$f $(wc -c < "$f") $(cksum < "$f" | cut -d" " -f1)"; done'`).split("\n").filter(Boolean);
+  const SNAP = `(()=>{const names=[];let len=0;for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);names.push(k);len+=(localStorage.getItem(k)||'').length}return {keys:names.length,len,names}})()`;
+  adb("install", "-r", apk); adbTry("pm clear " + PKG);
+  const m = await launchAndMeasure(); emit("STARTUP", { label, ...m });
+  await connect(); await homeReady(); await sleep(2500);
+  const fg = () => adbTry("dumpsys activity activities | grep -m1 topResumedActivity").includes(PKG);
+  await step("B7-runas", "debug APK allows run-as for out-of-band storage inspection", "device-state", async () => {
+    const f = fileSnap(); ok(f.length > 0, "run-as listing empty (not debuggable or path differs)"); return f.slice(0, 8);
+  });
+  const SEL9 = `document.querySelector('[data-discipline="9ball"]').getAttribute('aria-selected')==='true'`;
+  await tap('[data-discipline="9ball"]'); if (!(await waitFor(SEL9, 8000))) { await tap('[data-discipline="9ball"]'); await waitFor(SEL9, 10000); }
+  const pre = await ev(SNAP); emit("B7-PRE", { keys: pre.keys, len: pre.len });
+  const filesPre = fileSnap();
+  await step("B7-start", "start a match on test data", "os-input", async () => { await tap("#startGameBtn"); ok(await waitFor(vis("#proGameScreen"), 30000), "game screen not shown"); await sleep(6000); });
+  const filesInGame = fileSnap();
+  await step("B7-back", "in-match system Back: app stays in foreground", "os-input", async () => {
+    await back(); await sleep(8000); ok(fg(), "app left foreground");
+    ok(!!adbTry(`pidof ${PKG}`), "process died");
+  });
+  const filesAfterBack = fileSnap();
+  shot("40-after-back");
+  emit("B7-FILES", { pre: filesPre, inGame: filesInGame, afterBack: filesAfterBack });
+  const sum = a => a.reduce((t, l) => t + (Number(l.split(" ")[1]) || 0), 0);
+  await step("B7-files", "storage files did not shrink or vanish after Back (out-of-band, no DevTools)", "device-state", async () => {
+    ok(filesAfterBack.length > 0, "no storage files after Back");
+    ok(sum(filesAfterBack) >= sum(filesPre) * 0.9, `storage bytes shrank: pre=${sum(filesPre)} afterBack=${sum(filesAfterBack)}`);
+    return { preBytes: sum(filesPre), inGameBytes: sum(filesInGame), afterBackBytes: sum(filesAfterBack) };
+  });
+  await step("B7-restart", "after a forced stop and relaunch, stored keys are a superset of the pre-match keys (data survived)", "os-input", async () => {
+    adbTry(`am force-stop ${PKG}`); await sleep(2500); launch();
+    await connect();
+    let post = null;
+    for (let i = 0; i < 20 && !post; i++) { await sleep(3000); post = await ev(SNAP).catch(() => null); }
+    ok(post, "page not readable after restart");
+    const state = await ev(`({game:${vis("#proGameScreen")},home:${vis("#cueHomeV1")},resume:${vis("#cueInProgressChoiceV1")}})`).catch(() => null);
+    emit("B7-POST", { keys: post.keys, len: post.len, state, missing: pre.names.filter(n => !post.names.includes(n)), added: post.names.filter(n => !pre.names.includes(n)) });
+    ok(pre.names.every(n => post.names.includes(n)), "keys missing after Back+restart: " + pre.names.filter(n => !post.names.includes(n)).join(","));
+    ok(post.len >= pre.len * 0.9, `stored data shrank: pre=${pre.len} post=${post.len}`);
+    return { pre: { keys: pre.keys, len: pre.len }, post: { keys: post.keys, len: post.len }, state };
+  });
+}
+
 (async () => {
   let info = {};
   if (mode !== "full") {
-    try { await ({ insets: insetsMode, coldstart: coldstartMode, probe: probeMode, back: backMode }[mode])(); } catch (e) { console.log("MODE ERROR", e && e.stack || e); }
+    try { await ({ insets: insetsMode, coldstart: coldstartMode, probe: probeMode, back: backMode, b7: b7Mode }[mode])(); } catch (e) { console.log("MODE ERROR", e && e.stack || e); }
     fs.writeFileSync(path.join(outDir, `${label}-${mode}-results.json`), JSON.stringify({ label, mode, results, consoleErrors }, null, 2));
     const f = results.filter(r => r.status === "FAIL").length; console.log(`SUMMARY ${label}/${mode}: ${results.length - f}/${results.length} PASS`); console.log("FINAL " + JSON.stringify({ label, mode, steps: results.map(r => r.id + ":" + r.status[0]).join(","), insets: globalThis.__finalSummary || null, fails: results.filter(r => r.status === "FAIL").map(r => r.id + "=" + String(r.detail).slice(0, 140)) })); process.exit(0);
   }
