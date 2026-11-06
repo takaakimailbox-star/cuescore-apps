@@ -384,8 +384,12 @@ async function resumeMode() {
   const SEL9 = `document.querySelector('[data-discipline="9ball"]').getAttribute('aria-selected')==='true'`;
   let S1 = null, names1 = null;
   await step("R1", "start a 9-Ball match (test data) and enter test input", "os-input", async () => {
-    await tap('[data-discipline="9ball"]'); if (!(await waitFor(SEL9, 8000))) { await tap('[data-discipline="9ball"]'); await waitFor(SEL9, 10000); }
-    await tap("#startGameBtn"); ok(await waitFor(vis("#proGameScreen"), 30000), "game screen not shown");
+    let sel = false;
+    for (let i = 0; i < 4 && !sel; i++) { await tap('[data-discipline="9ball"]').catch(() => {}); sel = await waitFor(SEL9, 8000); } // dropped presses are an emulator artefact
+    ok(sel, "9-Ball tile not selected after 4 OS presses");
+    let started = false;
+    for (let i = 0; i < 3 && !started; i++) { await tap("#startGameBtn").catch(() => {}); started = await waitFor(vis("#proGameScreen"), i < 2 ? 10000 : 30000); }
+    ok(started, "game screen not shown");
     await sleep(4000);
     const inv1 = await buttons(); emit("R-BUTTONS-1", inv1);
     if (await ev(vis(".break-ball-btn-v696")).catch(() => false)) { await tap(".break-ball-btn-v696"); await sleep(1500); emit("R-BUTTONS-2", await buttons()); }
@@ -436,7 +440,9 @@ async function resumeMode() {
     ok(same(S1, S4), "state after resume differs from before: " + JSON.stringify({ S1, S4 }));
     ok(names1 && titles.includes(names1[1]) && titles.includes(names1[2]), "player names not on the resumed screen");
   });
+  const r4ok = results.find(r => r.id === "R4")?.status === "PASS";
   await step("R5", "explicit end (test data only): Back + OK clears the snapshot and the resume card disappears", "os-input", async () => {
+    ok(r4ok, "skipped: the match was not resumed (R4 not PASS), nothing to end");
     await back(); await sleep(2500);
     for (const k of ["KEYCODE_DPAD_RIGHT", "KEYCODE_DPAD_RIGHT", "KEYCODE_ENTER"]) { adbSh("input keyevent " + k); await sleep(400); }
     await sleep(2500);
