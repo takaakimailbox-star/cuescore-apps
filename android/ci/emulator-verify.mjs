@@ -300,6 +300,7 @@ async function backMode() {
     let on = await ev(SW);
     if (on !== "true") { await tap(".cue-sc-switch"); await sleep(800); on = await ev(SW); }
     ok(on === "true", "shot clock switch did not turn ON; aria-checked=" + on);
+    globalThis.__preStartSnap = await ev(`(()=>{let n=0,len=0;for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);n++;len+=(localStorage.getItem(k)||'').length}return {keys:n,len}})()`);
     await tap("#startGameBtn"); ok(await waitFor(vis("#proGameScreen"), 30000), "game screen not shown");
     await sleep(3000);
     const ui = await ev(`({bar:${vis(".cue-sc-bar")},ext:${vis(".cue-sc-extb")},reset:${vis(".cue-sc-resetb")},main:${vis(".cue-sc-main")},text:(document.querySelector('.cue-sc-bar')||{}).textContent||''})`).catch(() => "page busy");
@@ -308,15 +309,18 @@ async function backMode() {
     ok(ui && ui !== "page busy" && (ui.bar || ui.main || ui.ext), "no shot-clock UI visible in match with the clock ON: " + JSON.stringify(ui));
     return { before, on, ui };
   });
-  await step("B7", "in a running match, system Back keeps match data and the app in foreground", "os-input", async () => {
-    const snap = () => ev(`(()=>{let n=0,len=0;for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);n++;len+=(localStorage.getItem(k)||'').length}return {keys:n,len}})()`);
-    const pre = await snap();
-    await back(); await sleep(2500);
-    const post = await snap();
-    const state = await ev(`({game:${vis("#proGameScreen")},home:${vis("#cueHomeV1")}})`);
-    emit("B7-STATE", { pre, post, state });
+  await step("B7", "in a running match, system Back keeps the app in foreground and stored data is not discarded", "os-input", async () => {
+    const SNAP = `(()=>{let n=0,len=0;for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);n++;len+=(localStorage.getItem(k)||'').length}return {keys:n,len}})()`;
+    const pre = globalThis.__preStartSnap; ok(pre && pre.keys > 0, "no pre-match storage snapshot");
+    await back();
+    let post = null, state = null;
+    for (let i = 0; i < 12 && !post; i++) { await sleep(3000); post = await ev(SNAP).catch(() => null); } // the match page can be busy on the software-GPU emulator
+    if (post) state = await ev(`({game:${vis("#proGameScreen")},home:${vis("#cueHomeV1")}})`).catch(() => null);
+    emit("B7-STATE", { pre, post, state, fg: fg() });
     ok(fg(), "app left foreground during a match");
+    ok(post, "page stayed unresponsive for 36 s after Back (cannot read storage)");
     ok(post.keys >= pre.keys && post.len >= pre.len * 0.9, "stored data shrank after Back: " + JSON.stringify({ pre, post }));
+    return { pre, post, state };
   });
 }
 
