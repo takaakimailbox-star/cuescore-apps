@@ -370,10 +370,87 @@ async function b7Mode() {
   });
 }
 
+// R mode: interrupted-match resume (Official 105/106). The Home resume card is #cueResumeCardV1; the native confirm() shown by
+// the in-match Back must be answered (cancel keeps the match, OK explicitly ends it). Test data only.
+async function resumeMode() {
+  const KEY = "cueScore.inProgressMatch.v1";
+  const PICK = `(()=>{const raw=localStorage.getItem(${JSON.stringify(KEY)});if(!raw)return null;try{const p=JSON.parse(raw),s=p.state||{};const pick=o=>o==null?null:JSON.parse(JSON.stringify(o));return {type:s.activeGameTypeV1,names:pick(s.playerNames),reg:pick(s.selectedRegisteredPlayer),goals:pick(s.goals),scores:pick(s.scores),rack:pick(s.rack),rackScores:pick(s.rackScores),current:pick(s.current),inning:pick(s.inning),started:s.currentGameStartedAt||null,undo:(p.undoHistory||[]).length,len:raw.length}}catch(e){return {error:String(e)}}})()`;
+  const same = (a, b) => a && b && JSON.stringify({ ...a, undo: 0, len: 0 }) === JSON.stringify({ ...b, undo: 0, len: 0 });
+  const fg = () => adbTry("dumpsys activity activities | grep -m1 topResumedActivity").includes(PKG);
+  const buttons = () => ev(`[...document.querySelectorAll('#proGameScreen button')].filter(n=>n.getClientRects().length>0).map(n=>(n.id||n.className.toString().split(' ')[0])+':'+(n.textContent||'').trim().slice(0,8)).slice(0,24)`).catch(() => "busy");
+  adb("install", "-r", apk); adbTry("pm clear " + PKG);
+  const m = await launchAndMeasure(); emit("STARTUP", { label, ...m });
+  await connect(); await homeReady(); await sleep(2500);
+  const SEL9 = `document.querySelector('[data-discipline="9ball"]').getAttribute('aria-selected')==='true'`;
+  let S1 = null, names1 = null;
+  await step("R1", "start a 9-Ball match (test data) and enter test input", "os-input", async () => {
+    await tap('[data-discipline="9ball"]'); if (!(await waitFor(SEL9, 8000))) { await tap('[data-discipline="9ball"]'); await waitFor(SEL9, 10000); }
+    await tap("#startGameBtn"); ok(await waitFor(vis("#proGameScreen"), 30000), "game screen not shown");
+    await sleep(4000);
+    const inv1 = await buttons(); emit("R-BUTTONS-1", inv1);
+    if (await ev(vis(".break-ball-btn-v696")).catch(() => false)) { await tap(".break-ball-btn-v696"); await sleep(1500); emit("R-BUTTONS-2", await buttons()); }
+    const conf = await ev(`(()=>{const n=[...document.querySelectorAll('#proGameScreen button')].find(b=>b.getClientRects().length>0&&/^(確定|決定|OK|Confirm|Done)$/i.test((b.textContent||'').trim()));return n?(n.id?'#'+n.id:null):null})()`).catch(() => null);
+    if (conf) { await tap(conf); await sleep(1500); emit("R-BUTTONS-3", await buttons()); }
+    S1 = await ev(PICK); emit("R-S1", S1);
+    names1 = S1 && S1.names;
+    ok(S1 && !S1.error && S1.type, "no in-progress snapshot after start/input: " + JSON.stringify(S1));
+    shot("50-game");
+    return S1;
+  });
+  await step("R2", "system Back during the match shows the end-confirmation (native confirm); Cancel keeps the match and data", "os-input", async () => {
+    await back(); await sleep(2500);
+    const focus = adbTry("dumpsys window | grep -m2 -E 'mCurrentFocus|mFocusedApp'");
+    shot("51-confirm");
+    emit("R-CONFIRM", { fg: fg(), focus });
+    ok(fg(), "app left foreground");
+    adbSh("input keyevent KEYCODE_BACK"); await sleep(2500); // dismiss the native dialog = Cancel
+    const alive = await ev(`document.readyState`).catch(() => null);
+    ok(alive, "page still blocked after dismissing the confirm dialog");
+    ok(await ev(vis("#proGameScreen")), "match screen not shown after Cancel");
+    const S2 = await ev(PICK); emit("R-S2", S2);
+    ok(same(S1, S2), "snapshot changed after Cancel: " + JSON.stringify({ S1, S2 }));
+  });
+  let S3 = null;
+  await step("R3", "forced stop + relaunch: Home shows the resume card #cueResumeCardV1 with both player names", "os-input", async () => {
+    adbTry(`am force-stop ${PKG}`); await sleep(2500); launch(); await connect();
+    ok(await waitFor(vis("#cueResumeCardV1"), 60000), "resume card not visible after restart");
+    S3 = await ev(PICK);
+    const card = await ev(`({p1:document.getElementById('cueResumePlayer1V1').textContent,p2:document.getElementById('cueResumePlayer2V1').textContent,aria:document.getElementById('cueResumeCardV1').getAttribute('aria-label')})`);
+    emit("R-CARD", card);
+    shot("52-home-resume-card");
+    ok(same(S1, S3), "stored snapshot differs after restart");
+    ok(names1 && card.p1 === names1[1] && card.p2 === names1[2], "card names differ from the match names: " + JSON.stringify({ card, names1 }));
+    return card;
+  });
+  await step("R4", "tap the resume card (OS press): the match screen returns with the same discipline, players, score, turn", "os-input", async () => {
+    await tap("#cueResumeCardV1");
+    ok(await waitFor(vis("#proGameScreen"), 30000), "match screen not shown after resume");
+    await sleep(3000);
+    const S4 = await ev(PICK); emit("R-S4", S4);
+    const titles = await ev(`(document.querySelector('#proGameScreen')||{}).innerText.slice(0,200)`).catch(() => "");
+    emit("R-SCREEN", titles);
+    shot("53-resumed");
+    ok(same(S1, S4), "state after resume differs from before: " + JSON.stringify({ S1, S4 }));
+    ok(names1 && titles.includes(names1[1]) && titles.includes(names1[2]), "player names not on the resumed screen");
+  });
+  await step("R5", "explicit end (test data only): Back + OK clears the snapshot and the resume card disappears", "os-input", async () => {
+    await back(); await sleep(2500);
+    for (const k of ["KEYCODE_DPAD_RIGHT", "KEYCODE_DPAD_RIGHT", "KEYCODE_ENTER"]) { adbSh("input keyevent " + k); await sleep(400); }
+    await sleep(2500);
+    const alive = await ev(`document.readyState`).catch(() => null);
+    const left = alive ? await ev(`localStorage.getItem(${JSON.stringify(KEY)})`).catch(() => "?") : "blocked";
+    const cardVisible = alive ? await ev(vis("#cueResumeCardV1")).catch(() => "?") : "blocked";
+    emit("R-END", { alive: !!alive, snapshotLeft: !!left && left !== "?" , left: left === null ? null : (typeof left === "string" ? left.length : left), cardVisible });
+    ok(alive, "confirm dialog could not be answered with key events (dialog still open) - inconclusive");
+    ok(left === null, "snapshot still present after explicit end");
+    ok(cardVisible === false, "resume card still visible after explicit end");
+  });
+}
+
 (async () => {
   let info = {};
   if (mode !== "full") {
-    try { await ({ insets: insetsMode, coldstart: coldstartMode, probe: probeMode, back: backMode, b7: b7Mode }[mode])(); } catch (e) { console.log("MODE ERROR", e && e.stack || e); }
+    try { await ({ insets: insetsMode, coldstart: coldstartMode, probe: probeMode, back: backMode, b7: b7Mode, resume: resumeMode }[mode])(); } catch (e) { console.log("MODE ERROR", e && e.stack || e); }
     fs.writeFileSync(path.join(outDir, `${label}-${mode}-results.json`), JSON.stringify({ label, mode, results, consoleErrors }, null, 2));
     const f = results.filter(r => r.status === "FAIL").length; console.log(`SUMMARY ${label}/${mode}: ${results.length - f}/${results.length} PASS`); console.log("FINAL " + JSON.stringify({ label, mode, steps: results.map(r => r.id + ":" + r.status[0]).join(","), insets: globalThis.__finalSummary || null, fails: results.filter(r => r.status === "FAIL").map(r => r.id + "=" + String(r.detail).slice(0, 140)) })); process.exit(0);
   }

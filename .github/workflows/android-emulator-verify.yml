@@ -1,5 +1,5 @@
 # Temporary Android quality gate (Android branch only). Runs ONLY when this file changes on the Android branch.
-# rev: 29  (bump this number to re-run after editing android/ci/emulator-verify.mjs)
+# rev: 30  (bump this number to re-run after editing android/ci/emulator-verify.mjs)
 # No secrets, no signing, no publishing, no schedule. Read-only token. Evidence is uploaded as a 7-day artifact.
 name: android-emulator-verify
 on:
@@ -50,8 +50,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { label: b7-35, api: 35, target: google_apis, mode: b7, apk: after, ps16k: false, settle: 0 }
-          - { label: b7-36, api: 36, target: google_apis, mode: b7, apk: after, ps16k: false, settle: 0 }
+          - { label: res35, api: 35, target: google_apis, mode: resume, apk: after, ps16k: false, settle: 0 }
+          - { label: res36, api: 36, target: google_apis, mode: resume, apk: after, ps16k: false, settle: 0 }
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
