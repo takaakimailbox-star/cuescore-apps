@@ -152,3 +152,18 @@
 - 切り分け: デスクトップ Chromium（Playwright、共有の `index.html` をそのまま読み込み）でも同じ手順で再現。①開始→再読込でカード表示→カードで再開→終了(OK) の後 `snapshot:false, cardHidden:false, cardVisible:true`。再現スクリプト: `docs/android/repro/stale-resume-card.repro.mjs`。したがって iOS／PWA と共通。
 - 対応: **STOP（Android 専用では直さない）**。`index.html` は iOS／PWA 共通で、Official 105/106 に「終了後に再開カードを消す」条件が明記されていないため、仕様未定義。修正案（司令塔／PO の判断待ち）: `requestBackToPlayerInfo()`、`interruptNewMatchFromBreakV3()` など破棄経路の `clearInProgressMatchV1()` 直後に `renderInProgressHomeCardV1()` を呼ぶ 1 行追加（共通コード変更のため iOS 公開物・Official 105/106 への影響確認が必要）。
 - Evidence: artifact は run 29 の res35=13476936406、res36=13477105757（保持 7 日。画像は人が目視していないため視覚 PASS ではない）。
+
+## 13 R5 修正後の再検証（run 30、`4e0e1b0`、API35／API36、実 OS 押下）
+修正: `index.html` の明示終了 2 経路（`requestBackToPlayerInfo()`＝試合中 Back→OK、`interruptNewMatchFromBreakV3()`＝ブレイク画面からの破棄）で `clearInProgressMatchV1()` の直後に `renderInProgressHomeCardV1()` を追加（2 行）。置換経路（`cueInProgressNewV1`）は従来から同契約。保存形式・得点・履歴・分析・Free/Pro・QR・Backup は無変更、完了試合の経路も無変更。
+`FINAL res35: R1:P,R2:P,R3:P,R4:P,R5:P`（5/5）、`res36: R1:P,R2:P,R3:P,R4:P,R5:P`（5/5）。R5 は `R-END {"snapshotLeft":false,"cardVisible":false}`（保存データ消去かつ再開カード即時消失）。
+| 確認 | 方法 | 結果 |
+|---|---|---|
+| A Back→キャンセルで維持 | Emulator R2／デスクトップ Chromium | PASS／PASS |
+| B 再起動→再開カード | Emulator R3／Chromium | PASS／PASS |
+| C カード押下→試合復帰（状態一致） | Emulator R4／Chromium | PASS／PASS |
+| D Back→OK で削除＋カード即消失 | Emulator R5／Chromium（修正前 FAIL → 修正後 PASS） | PASS／PASS |
+| E 置換（新しい試合）の確認・破棄契約 | Chromium（`docs/android/repro/in-progress-lifecycle.repro.mjs`） | PASS |
+| F 完了試合 | 差分が明示終了 2 箇所のみ（完了経路は無変更）＋既存 Node テスト（完了・履歴保存）PASS | 変更なしを確認（ブラウザ実操作は未実施） |
+- Node: 全 1268 件中 1265 PASS、3 件 FAIL は修正前から存在する既存 3 件（native v1 の 2 件、UTC golden）。`index.html` ダイジェストを固定する 4 テストのピン（および baseline fixture のハッシュ）を更新。新規 `tests/in-progress-explicit-end-card.test.mjs` 4 件を baseline に登録。
+- 共有 Web コードの変更だが、`main` ・iOS 公開版には反映しない（Android 専用ブランチ内のみ）。iOS／PWA 向けの既存テスト（localization・P2・in-progress 系）は上記のとおり通過。実機 iOS は未確認。
+- 視覚: 人が画像を確認していないため視覚 PASS ではない。artifact: res35=13478992769、res36=13479067233（保持 7 日）。
