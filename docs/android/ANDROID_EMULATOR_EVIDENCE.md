@@ -110,3 +110,15 @@
 
 ## 9. 削除候補
 `.github/workflows/android-emulator-verify.yml` と `android/ci/` は検証完了後に削除可能（PO 指示まで維持）。
+
+## 10. A案 正式採用後の検証（run 24／25、2026-11-06、実 OS の Back キー／押下）
+対象 HEAD: run 24 = `916aa30`、run 25 = `aa87b8c`（Back 既定値 `proposal` = A案）。
+| 項目 | API35 | API36 | 16KB(API35) | 区分 |
+|---|---|---|---|---|
+| B0〜B6（既定値のまま：競技選択→一覧／Players・History・Settings→Home／Pro オーバーレイのみ閉じる／ホーム一覧→最小化・プロセス生存） | PASS | PASS | PASS（run 24） | 実操作 |
+| F-startup（コールド起動 約 1.3〜3.0 秒、アプリ自身の ANR 0 件） | PASS | PASS | PASS | 実機能 |
+| F-shot-clock：初期 OFF（`aria-checked=false`）→ 試合設定のスイッチを実押下で ON → 試合画面に時計バー・延長・リセットが表示 | PASS | PASS | PASS | 実操作＋DOM |
+| B7：試合中の Back でアプリ前面維持・保存データ非破棄 | **未確認** | **未確認** | **未確認** | 下記 |
+- run 24 の API35／36／16KB（3/3）と run 25 の API35／36（2/2）で、B0〜B6・F-startup・F-shot-clock はすべて PASS（run 25 の 16KB ジョブは本書作成時点で未読）。
+- **B7（未確認）**: 試合開始後の画面が重く（ソフトウェア GPU。F5 と同症状）、Back 後 36 秒待っても DevTools 評価が応答せず保存データを読み出せない。アプリは前面を維持（`fg=true`）。Back 前の保存データは 10 キー・986 文字。**Back による保存データ破棄の有無は Emulator では確認できていない**。代替の担保: ①試合中の Back は従来の `#proGameBackBtn`（変更なし）、②A案の追加ルールは `#proGameScreen` 表示中は一切動作しない（Node テスト 5/5 PASS）。実機での確認が必要。
+- 保全: FINAL 行はジョブログからの転記（artifact は 7 日で失効、Cloud から取得不可）。
